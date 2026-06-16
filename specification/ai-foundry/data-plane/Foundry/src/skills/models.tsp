@@ -79,6 +79,7 @@ model Skill {
 
   @doc("The latest version for the skill.")
   latest_version: string;
+
 }
 
 @doc("A specific version of a skill.")

@@ -1,6 +1,6 @@
-import { type RuleResult } from "../rule-result.ts";
-import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNpm } from "../utils.ts";
+import { RuleResult } from "../rule-result.js";
+import { Rule } from "../rule.js";
+import { gitDiffTopSpecFolder, runNpm } from "../utils.js";
 
 export class FormatRule implements Rule {
   readonly name = "Format";

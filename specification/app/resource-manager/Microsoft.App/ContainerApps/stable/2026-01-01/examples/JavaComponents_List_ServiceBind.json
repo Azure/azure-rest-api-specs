@@ -1,20 +1,21 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "environmentName": "myenvironment",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    "environmentName": "myenvironment",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
             "name": "blueshark",
             "type": "Microsoft.App/managedEnvironments/javaComponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/blueshark",
             "properties": {
               "componentType": "SpringBootAdmin",
+              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "spring.boot.admin.ui.enable-toasts",
@@ -25,10 +26,9 @@
                   "value": "10000ms"
                 }
               ],
-              "provisioningState": "Succeeded",
               "scale": {
-                "maxReplicas": 1,
-                "minReplicas": 1
+                "minReplicas": 1,
+                "maxReplicas": 1
               },
               "serviceBinds": [
                 {
@@ -39,21 +39,21 @@
             }
           },
           {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
             "name": "yellowcat",
             "type": "Microsoft.App/managedEnvironments/javaComponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/javaComponents/yellowcat",
             "properties": {
               "componentType": "SpringCloudEureka",
+              "provisioningState": "Succeeded",
               "configurations": [
                 {
                   "propertyName": "spring.cloud.config.server.git.uri",
                   "value": "<GIT-URL>"
                 }
               ],
-              "provisioningState": "Succeeded",
               "scale": {
-                "maxReplicas": 1,
-                "minReplicas": 1
+                "minReplicas": 1,
+                "maxReplicas": 1
               },
               "serviceBinds": [
                 {
@@ -66,7 +66,5 @@
         ]
       }
     }
-  },
-  "operationId": "JavaComponents_List",
-  "title": "List Java Components with ServiceBinds"
+  }
 }

@@ -67,7 +67,6 @@ interface StorageInsights {
 
 @@doc(StorageInsight.name, "Name of the storageInsightsConfigs resource");
 @@doc(StorageInsight.properties, "Storage insight properties.");
-@@doc(
-  StorageInsights.createOrUpdate::parameters.resource,
+@@doc(StorageInsights.createOrUpdate::parameters.resource,
   "The parameters required to create or update a storage insight."
 );

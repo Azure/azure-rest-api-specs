@@ -1,6 +1,6 @@
 import { join } from "path";
 import { expect, test } from "vitest";
-import { type Suppression, getSuppressions } from "../src/suppressions.ts";
+import { Suppression, getSuppressions } from "../src/suppressions.js";
 
 /**
  * Returns the suppressions for a tool (default "TestTool") applicable to a path under folder "e2e".

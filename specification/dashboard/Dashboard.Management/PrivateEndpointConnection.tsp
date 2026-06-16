@@ -91,8 +91,7 @@ interface PrivateEndpointConnections {
   list is ArmResourceListByParent<PrivateEndpointConnection>;
 }
 
-@@doc(
-  PrivateEndpointConnection.name,
+@@doc(PrivateEndpointConnection.name,
   "The private endpoint connection name of Azure Managed Grafana."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");

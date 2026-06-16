@@ -94,11 +94,9 @@ interface NspProfiles {
 
 @@maxLength(NspProfile.name, 80);
 @@doc(NspProfile.name, "The name of the NSP profile.");
-@@doc(
-  NspProfile.properties,
+@@doc(NspProfile.properties,
   "Properties of the network security perimeter profile"
 );
-@@doc(
-  NspProfiles.createOrUpdate::parameters.resource,
+@@doc(NspProfiles.createOrUpdate::parameters.resource,
   "Parameters that hold the NspProfile resource to be created/updated."
 );

@@ -123,11 +123,9 @@ interface ChangeDataCaptureResources {
 @@maxLength(ChangeDataCaptureResource.name, 260);
 @@minLength(ChangeDataCaptureResource.name, 1);
 @@doc(ChangeDataCaptureResource.name, "The change data capture name.");
-@@doc(
-  ChangeDataCaptureResource.properties,
+@@doc(ChangeDataCaptureResource.properties,
   "Properties of the change data capture."
 );
-@@doc(
-  ChangeDataCaptureResources.createOrUpdate::parameters.resource,
+@@doc(ChangeDataCaptureResources.createOrUpdate::parameters.resource,
   "Change data capture resource definition."
 );

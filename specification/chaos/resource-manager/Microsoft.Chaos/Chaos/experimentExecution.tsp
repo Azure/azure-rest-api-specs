@@ -40,11 +40,9 @@ interface ExperimentExecutions {
   >;
 }
 
-@@doc(
-  ExperimentExecution.name,
+@@doc(ExperimentExecution.name,
   "GUID that represents a Experiment execution detail."
 );
-@@doc(
-  ExperimentExecution.properties,
+@@doc(ExperimentExecution.properties,
   "The properties of experiment execution status."
 );

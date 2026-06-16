@@ -64,29 +64,30 @@ These settings apply only when `--tag=package-2026-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-01-01'
 input-file:
-  - stable/2026-01-01/openapi.json
-directive:
-  - suppress: PatchBodyParametersSchema
-    from: openapi.json
-    reason: |
-      Pre-existing. Java Component and Session Pool use discriminator/identity type as required property.
-      Managed Service Identity requires type for patching.
-  - suppress: AvoidAdditionalProperties
-    from: openapi.json
-    reason: |
-      Pre-existing. Scale rule metadata and service bind customized keys use additionalProperties.
-  - suppress: PutResponseCodes
-    from: openapi.json
-    reason: |
-      Pre-existing. Do not introduce breaking changes in GA services.
-  - suppress: TrackedExtensionResourcesAreNotAllowed
-    from: openapi.json
-    reason: |
-      Pre-existing. Do not introduce breaking changes in GA services.
-  - suppress: LroErrorContent
-    from: openapi.json
-    reason: |
-      Pre-existing. Using the same error response as other APIs.
+  - stable/2026-01-01/AuthConfigs.json
+  - stable/2026-01-01/AvailableWorkloadProfiles.json
+  - stable/2026-01-01/BillingMeters.json
+  - stable/2026-01-01/CommonDefinitions.json
+  - stable/2026-01-01/ConnectedEnvironments.json
+  - stable/2026-01-01/ConnectedEnvironmentsCertificates.json
+  - stable/2026-01-01/ConnectedEnvironmentsDaprComponents.json
+  - stable/2026-01-01/ConnectedEnvironmentsStorages.json
+  - stable/2026-01-01/ContainerApps.json
+  - stable/2026-01-01/ContainerAppsRevisions.json
+  - stable/2026-01-01/Diagnostics.json
+  - stable/2026-01-01/Global.json
+  - stable/2026-01-01/JavaComponents.json
+  - stable/2026-01-01/Jobs.json
+  - stable/2026-01-01/ManagedEnvironments.json
+  - stable/2026-01-01/ManagedEnvironmentsDaprComponents.json
+  - stable/2026-01-01/ManagedEnvironmentsHttpRouteConfig.json
+  - stable/2026-01-01/ManagedEnvironmentsMaintenanceConfigurations.json
+  - stable/2026-01-01/ManagedEnvironmentsStorages.json
+  - stable/2026-01-01/SessionPools.json
+  - stable/2026-01-01/SourceControls.json
+  - stable/2026-01-01/Subscriptions.json
+  - stable/2026-01-01/Usages.json
+  - stable/2026-01-01/LogicAppsExtension.json
 ```
 
 ### Tag: package-2025-07-01

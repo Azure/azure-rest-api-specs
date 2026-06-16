@@ -51,7 +51,6 @@ interface Operations
       ArmResponse<ResourceProviderOperationList>,
       ErrorResponse
     > {}
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "List all the available operations the KubernetesConfiguration resource provider supports."
 );

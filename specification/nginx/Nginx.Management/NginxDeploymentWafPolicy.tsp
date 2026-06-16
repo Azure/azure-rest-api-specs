@@ -66,7 +66,6 @@ interface NginxDeploymentWafPolicies {
 }
 
 @@doc(NginxDeploymentWafPolicy.name, "The name of Waf Policy");
-@@doc(
-  NginxDeploymentWafPolicy.properties,
+@@doc(NginxDeploymentWafPolicy.properties,
   "Nginx Deployment Waf Policy Properties"
 );

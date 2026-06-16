@@ -1,5 +1,5 @@
 import "../openai-responses/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -284,7 +284,6 @@ union AgentProtocol {
   string,
   activity_protocol: "activity_protocol",
   responses: "responses",
-  a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
 
@@ -613,7 +612,7 @@ model StructuredInputDefinition {
   @doc("The JSON schema for the structured input (optional).")
   schema?: Record<unknown>;
 
-  @doc("Whether the input property is required when the agent is invoked. The service defaults to `false` if a value is not specified by the caller.")
+  @doc("Whether the input property is required when the agent is invoked. Defaults to `false`.")
   required?: boolean = false;
 }
 
@@ -979,6 +978,9 @@ union AgentSessionStatus {
 
   /** Session initialization or lifecycle handling failed and requires delete to recover. */
   Failed: "failed",
+
+  /** Session is being stopped */
+  Stopping: "stopping",
 
   /** Session is being deleted (cleanup in progress). */
   Deleting: "deleting",

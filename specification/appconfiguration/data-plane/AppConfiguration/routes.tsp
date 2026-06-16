@@ -145,7 +145,18 @@ op getKeyValue is Foundations.ResourceOperation<
 @put
 op putKeyValue is AppConfigOperation<
   {
-    ...PutKeyValueRequestContentType;
+    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
+    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
+    @doc("Content-Type header")
+    @header("Content-Type")
+    contentType:
+      | "application/vnd.microsoft.appconfig.kv+json"
+      | "application/vnd.microsoft.appconfig.kvset+json"
+      | "application/json"
+      | "text/json"
+      | "application/*+json"
+      | "application/json-patch+json";
+
     ...KeyPathParam<"The key of the key-value to create.">;
     ...LabelQueryParam<"The label of the key-value to create.">;
     ...SyncTokenHeader;
@@ -173,16 +184,14 @@ op deleteKeyValue is AppConfigOperation<
     ...SyncTokenHeader;
     ...IfMatchHeader;
   },
+  (Body<KeyValue> &
+    AppConfigResponseHeaders &
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">) | {
+    @statusCode
+    statusCode: 204;
 
-    | (Body<KeyValue> &
-        AppConfigResponseHeaders &
-        ContentTypeHeader<"application/vnd.microsoft.appconfig.kv+json">)
-    | {
-        @statusCode
-        statusCode: 204;
-
-        ...SyncTokenHeader;
-      }
+    ...SyncTokenHeader;
+  }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -273,9 +282,7 @@ op createSnapshot is Foundations.LongRunningOperation<
     #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
     @doc("Content-Type header")
     @header("Content-Type")
-    contentType:
-      | "application/vnd.microsoft.appconfig.snapshot+json"
-      | "application/json";
+    contentType: "application/vnd.microsoft.appconfig.snapshot+json" | "application/json";
 
     ...NamePathParam<"The name of the key-value snapshot to create.">;
     ...SyncTokenHeader;

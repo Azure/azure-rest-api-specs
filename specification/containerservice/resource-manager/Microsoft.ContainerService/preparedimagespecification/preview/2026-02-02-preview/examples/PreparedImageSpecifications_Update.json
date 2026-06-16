@@ -9,6 +9,22 @@
     "properties": {
       "tags": {
         "key5558": "xufgvdnarflvwbcdkmhqhgbop"
+      },
+      "properties": {
+        "containerImages": [
+          "qmetlvqgbvhjnncyraxlhs"
+        ],
+        "customizationScripts": [
+          {
+            "name": "initialize-node",
+            "executionPoint": "NodeImageBuildTime",
+            "scriptType": "Bash",
+            "script": "echo \"test prepared image specification\" > /var/log/test-node-customization.txt"
+          }
+        ],
+        "identityProfile": {
+          "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1"
+        }
       }
     }
   },

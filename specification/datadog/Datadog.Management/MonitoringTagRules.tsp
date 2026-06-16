@@ -55,8 +55,7 @@ interface TagRules {
 }
 
 @@doc(MonitoringTagRules.name, "Rule set name");
-@@doc(
-  MonitoringTagRules.properties,
+@@doc(MonitoringTagRules.properties,
   "Definition of the properties for a TagRules resource."
 );
 @@doc(TagRules.createOrUpdate::parameters.resource, "");

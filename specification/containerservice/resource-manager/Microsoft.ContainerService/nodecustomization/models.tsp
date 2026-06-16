@@ -37,8 +37,9 @@ model NodeCustomizationProperties {
     """)
   identityProfile?: Foundations.UserAssignedIdentity;
 
-  @doc("The client-provided version of the node customization.")
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
+  @visibility(Lifecycle.Read)
+  @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
+  @pattern("^[\\w\\-\\.]+$")
   version?: string;
 
   @visibility(Lifecycle.Read)
@@ -121,17 +122,12 @@ union ProvisioningState {
   Accepted: "Accepted",
 }
 
-@doc("The type used for update operations of the NodeCustomization.")
-model NodeCustomizationUpdate {
-  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-}
-
 @parentResource(NodeCustomization)
 @doc("A version of the Node Customization resource.")
 model NodeCustomizationVersion is ProxyResource<NodeCustomizationProperties> {
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
+  @pattern("^[\\w\\-\\.]+$")
   @minLength(1)
-  @maxLength(63)
+  @maxLength(64)
   @doc("The version of the Node Customization.")
   @key("version")
   @path

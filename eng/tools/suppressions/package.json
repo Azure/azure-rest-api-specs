@@ -2,12 +2,12 @@
   "name": "@azure-tools/suppressions",
   "private": true,
   "type": "module",
-  "main": "src/index.ts",
+  "main": "dist/src/index.js",
   "bin": {
     "get-suppressions": "cmd/get-suppressions.js"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsc --build",
     "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -17,7 +17,7 @@
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "minimatch": "^10.0.1",

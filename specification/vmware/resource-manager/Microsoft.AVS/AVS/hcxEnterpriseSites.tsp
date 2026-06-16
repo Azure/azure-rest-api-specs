@@ -19,8 +19,7 @@ interface HcxEnterpriseSites {
   delete is ArmResourceDeleteSync<HcxEnterpriseSite>;
 }
 
-@@clientName(
-  HcxEnterpriseSites.createOrUpdate::parameters.resource,
+@@clientName(HcxEnterpriseSites.createOrUpdate::parameters.resource,
   "hcxEnterpriseSite"
 );
 

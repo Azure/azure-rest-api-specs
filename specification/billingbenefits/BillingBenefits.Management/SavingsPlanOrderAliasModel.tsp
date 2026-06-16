@@ -59,11 +59,9 @@ interface SavingsPlanOrderAliasModels {
 }
 
 @@doc(SavingsPlanOrderAliasModel.name, "Name of the savings plan order alias");
-@@doc(
-  SavingsPlanOrderAliasModel.properties,
+@@doc(SavingsPlanOrderAliasModel.properties,
   "Savings plan order alias properties"
 );
-@@doc(
-  SavingsPlanOrderAliasModels.create::parameters.resource,
+@@doc(SavingsPlanOrderAliasModels.create::parameters.resource,
   "Request body for creating a savings plan order alias"
 );

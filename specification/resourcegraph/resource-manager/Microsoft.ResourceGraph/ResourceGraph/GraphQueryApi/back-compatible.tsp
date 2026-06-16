@@ -8,8 +8,7 @@ using GraphQueryApi;
 
 @@clientLocation(GraphQueryResources.get, "GraphQuery");
 @@clientLocation(GraphQueryResources.createOrUpdate, "GraphQuery");
-@@clientName(
-  GraphQueryResources.createOrUpdate::parameters.resource,
+@@clientName(GraphQueryResources.createOrUpdate::parameters.resource,
   "properties"
 );
 @@clientLocation(GraphQueryResources.update, "GraphQuery");

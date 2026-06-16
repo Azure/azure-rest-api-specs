@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 
 namespace Azure.AI.Projects;
 

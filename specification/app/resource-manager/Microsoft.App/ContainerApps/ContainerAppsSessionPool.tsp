@@ -8,7 +8,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -42,15 +41,14 @@ interface ContainerAppsSessionPools {
   /**
    * Patches a session pool using JSON merge patch
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a session pool")
   update is ArmCustomPatchAsync<
     SessionPool,
     PatchModel = SessionPoolUpdatableProperties,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = SessionPool> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        @header("Location") location?: string;
-      }
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -81,7 +79,6 @@ interface ContainerAppsSessionPools {
    * Fetch the MCP server credentials of a session pool.
    */
   @summary("Fetch the MCP server credentials of a session pool.")
-  @removed(Versions.v2026_01_01)
   fetchMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
@@ -92,7 +89,6 @@ interface ContainerAppsSessionPools {
    * Rotate and fetch the rotated MCP server credentials of a session pool.
    */
   @summary("Rotate and fetch the rotated MCP server credentials of a session pool.")
-  @removed(Versions.v2026_01_01)
   rotateMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
@@ -103,15 +99,12 @@ interface ContainerAppsSessionPools {
 @@maxLength(SessionPool.name, 63);
 @@minLength(SessionPool.name, 3);
 @@doc(SessionPool.name, "Name of the session pool.");
-@@doc(
-  SessionPool.properties,
+@@doc(SessionPool.properties,
   "Container App session pool resource specific properties"
 );
-@@doc(
-  ContainerAppsSessionPools.createOrUpdate::parameters.resource,
+@@doc(ContainerAppsSessionPools.createOrUpdate::parameters.resource,
   "Properties used to create a session pool"
 );
-@@doc(
-  ContainerAppsSessionPools.update::parameters.properties,
+@@doc(ContainerAppsSessionPools.update::parameters.properties,
   "Properties used to create a session pool"
 );

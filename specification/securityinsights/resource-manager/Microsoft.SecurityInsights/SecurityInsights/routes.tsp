@@ -193,9 +193,10 @@ interface ThreatIntelligenceIndicatorOperationGroup {
     OperationalInsights,
     ThreatIntelligenceMain,
     Request = ThreatIntelligenceIndicatorModel,
-    Response =
-      | ArmResourceUpdatedResponse<ThreatIntelligenceInformation>
-      | ArmResourceCreatedResponse<ThreatIntelligenceInformation, {}>,
+    Response = ArmResourceUpdatedResponse<ThreatIntelligenceInformation> | ArmResourceCreatedResponse<
+      ThreatIntelligenceInformation,
+      {}
+    >,
     Error = CloudError
   >;
   /**

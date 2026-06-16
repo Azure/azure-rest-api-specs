@@ -1,9 +1,6 @@
-import {
-  type BreakingChangesCheckType,
-  type ReviewRequiredLabel,
-} from "../types/breaking-change.ts";
-import { type MessageLevel } from "../types/message.ts";
-import { type OadRuleCode } from "../types/oad-types.ts";
+import { BreakingChangesCheckType, ReviewRequiredLabel } from "../types/breaking-change.js";
+import { MessageLevel } from "../types/message.js";
+import { OadRuleCode } from "../types/oad-types.js";
 
 /**
  * This oadMessagesRuleMap is applied by applyRules() function, invoked by BreakingChangeDetector,

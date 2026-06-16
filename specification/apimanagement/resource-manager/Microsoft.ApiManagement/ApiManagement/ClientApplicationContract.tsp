@@ -37,7 +37,7 @@ interface ClientApplicationContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -51,7 +51,7 @@ interface ClientApplicationContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -60,21 +60,19 @@ interface ClientApplicationContracts {
    */
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ClientApplicationContract,
-    Response =
-      | (ArmResponse<ClientApplicationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<ClientApplicationContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ClientApplicationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<ClientApplicationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -123,15 +121,12 @@ interface ClientApplicationContracts {
 
 @@maxLength(ClientApplicationContract.name, 256);
 @@minLength(ClientApplicationContract.name, 1);
-@@doc(
-  ClientApplicationContract.name,
+@@doc(ClientApplicationContract.name,
   "Client Application identifier. Must be unique in the current API Management service instance."
 );
-@@doc(
-  ClientApplicationContract.properties,
+@@doc(ClientApplicationContract.properties,
   "Client application entity contract properties."
 );
-@@doc(
-  ClientApplicationContracts.createOrUpdate::parameters.resource,
+@@doc(ClientApplicationContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

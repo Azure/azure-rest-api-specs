@@ -206,7 +206,7 @@ model EvaluationScheduleTask extends ScheduleTask {
   evalId: string;
 
   @doc("The evaluation run payload.")
-  evalRun: Record<unknown>;
+  evalRun: {};
 }
 
 @doc("Insight task for the schedule.")

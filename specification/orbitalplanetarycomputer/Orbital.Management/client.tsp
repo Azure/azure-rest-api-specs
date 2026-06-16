@@ -11,15 +11,13 @@ using Microsoft.Spatio;
 
 // CSharp
 @@clientName(GeoCatalog, "PlanetaryComputerGeoCatalog", "csharp");
-@@clientName(
-  GeoCatalogProperties,
+@@clientName(GeoCatalogProperties,
   "PlanetaryComputerGeoCatalogProperties",
   "csharp"
 );
 @@clientName(CatalogTier, "PlanetaryComputerGeoCatalogTier", "csharp");
 @@clientName(ProvisioningState, "PlanetaryComputerProvisioningState", "csharp");
-@@alternateType(
-  GeoCatalogUpdate.identity,
+@@alternateType(GeoCatalogUpdate.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );

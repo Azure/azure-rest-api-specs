@@ -48,15 +48,15 @@ namespace Microsoft.DBforPostgreSQL;
  * The available API versions.
  */
 enum Versions {
-  @doc("The 2025-08-01 API version.")
+  /**
+   * The 2025-08-01 API version.
+   */
   v2025_08_01: "2025-08-01",
 
-  @doc("The 2026-01-01-preview API version.")
+  /**
+   * The 2026-01-01-preview API version.
+   */
   v2026_01_01: "2026-01-01-preview",
-
-  @doc("The 2026-04-01-preview API version.")
-  @previewVersion
-  v2026_04_01: "2026-04-01-preview",
 }
 
 /**

@@ -2968,11 +2968,12 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
+            "description": "Name of the volume",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "maxLength": 40,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -3034,11 +3035,12 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
+            "description": "Name of the volume",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "maxLength": 40,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
           },
           {
             "name": "resource",
@@ -3130,11 +3132,12 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
+            "description": "Name of the volume",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "maxLength": 40,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
           },
           {
             "name": "properties",
@@ -3223,11 +3226,12 @@
           {
             "name": "volumeName",
             "in": "path",
-            "description": "Name of the volume. Maximum length is 40 characters during creation; names up to 64 characters may appear in list and get responses for system-generated volumes.",
+            "description": "Name of the volume",
             "required": true,
             "type": "string",
             "minLength": 2,
-            "pattern": "^[A-Za-z][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "maxLength": 40,
+            "pattern": "^[A-Za-z][A-Za-z0-9-]{0,38}[A-Za-z0-9]$"
           }
         ],
         "responses": {

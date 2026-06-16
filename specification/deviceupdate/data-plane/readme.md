@@ -26,17 +26,9 @@ These are the global settings for the deviceupdate.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2026-06-01
+tag: package-preview-2023-10
 ```
 
-### Tag: package-2026-06-01
-
-These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-06-01'
-input-file:
-  - Microsoft.DeviceUpdate/stable/2026-06-01/deviceupdate.json
-```
 
 ### Tag: package-preview-2023-10
 

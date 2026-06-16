@@ -20,6 +20,7 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Chaos;
 
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+@removed(Microsoft.Chaos.Versions.v2025_01_01)
 @armResourceOperations
 interface ScenarioConfigurations {
   /**
@@ -48,6 +49,8 @@ interface ScenarioConfigurations {
   /**
    * Execute the scenario execution with the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
+  @pollingOperation(ScenarioRuns.get)
   execute is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     void,
@@ -57,7 +60,9 @@ interface ScenarioConfigurations {
   /**
    * Cancel the currently running scenario execution.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
   @removed(Microsoft.Chaos.Versions.v2026_05_01_preview)
+  @pollingOperation(ScenarioRuns.get)
   cancel is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     void,
@@ -67,6 +72,7 @@ interface ScenarioConfigurations {
   /**
    * Validate the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
   validate is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     void,
@@ -76,6 +82,7 @@ interface ScenarioConfigurations {
   /**
    * Fixes resource permissions for the given scenario configuration.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 with Location header for polling; final result obtained by polling the Location URL"
   fixResourcePermissions is ArmResourceActionNoContentAsyncWithLocationResult<
     ScenarioConfiguration,
     FixResourcePermissionsRequest,
@@ -85,7 +92,6 @@ interface ScenarioConfigurations {
 
 @@minLength(ScenarioConfiguration.name, 1);
 @@doc(ScenarioConfiguration.name, "Name of the scenario definition.");
-@@doc(
-  ScenarioConfiguration.properties,
+@@doc(ScenarioConfiguration.properties,
   "The properties of scenario definition."
 );

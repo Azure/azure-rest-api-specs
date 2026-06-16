@@ -13,9 +13,8 @@ namespace Azure.AI.Projects;
 @tag("Conversations")
 interface Conversations {
   /**
-   * Creates a new conversation resource.
+   * Create a conversation.
    */
-  @summary("Create a conversation")
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
@@ -24,9 +23,8 @@ interface Conversations {
   >;
 
   /**
-   * Modifies the specified conversation's properties.
+   * Update a conversation.
    */
-  @summary("Update a conversation")
   @route("{conversation_id}")
   @post
   @operationId("updateConversation")
@@ -42,9 +40,8 @@ interface Conversations {
   >;
 
   /**
-   * Retrieves the specified conversation and its metadata.
+   * Retrieves a conversation.
    */
-  @summary("Retrieve a conversation")
   @route("{conversation_id}")
   @get
   @operationId("getConversation")
@@ -59,9 +56,8 @@ interface Conversations {
   >;
 
   /**
-   * Removes the specified conversation resource from the current project.
+   * Deletes a conversation.
    */
-  @summary("Delete a conversation")
   @route("{conversation_id}")
   @delete
   @operationId("deleteConversation")
@@ -79,9 +75,8 @@ interface Conversations {
   // It does not exist in the upstream OpenAI API as of 2025-09-23.
 
   /**
-   * Returns the conversations available in the current project.
+   * Returns the list of all conversations.
    */
-  @summary("List conversations")
   @get
   @operationId("listConversations")
   @list
@@ -96,9 +91,8 @@ interface Conversations {
   >;
 
   /**
-   * Adds one or more items to the specified conversation.
+   * Create items in a conversation with the given ID.
    */
-  @summary("Create conversation items")
   @route("{conversation_id}/items")
   @post
   @operationId("createConversationItems")
@@ -124,9 +118,8 @@ interface Conversations {
   >;
 
   /**
-   * Retrieves a specific item from the specified conversation.
+   * Get a single item from a conversation with the given IDs.
    */
-  @summary("Get a conversation item")
   @route("{conversation_id}/items/{item_id}")
   @get
   @operationId("getConversationItem")
@@ -144,9 +137,8 @@ interface Conversations {
   >;
 
   /**
-   * Removes the specified item from a conversation.
+   * Delete an item from a conversation with the given IDs.
    */
-  @summary("Delete a conversation item")
   @route("{conversation_id}/items/{item_id}")
   @delete
   @operationId("deleteConversationItem")
@@ -164,9 +156,8 @@ interface Conversations {
   >;
 
   /**
-   * Returns the items belonging to the specified conversation.
+   * List all items for a conversation with the given ID.
    */
-  @summary("List conversation items")
   @route("{conversation_id}/items")
   @get
   @operationId("listConversationItems")

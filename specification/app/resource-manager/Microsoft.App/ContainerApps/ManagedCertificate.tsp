@@ -64,14 +64,11 @@ interface ManagedCertificates {
   @summary("Create or Update a Managed Certificate.")
   createOrUpdate is ManagedCertificateOps.CreateOrUpdateAsync<
     ManagedCertificate,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedCertificate>
-      | ArmResourceCreatedResponse<
-          ManagedCertificate,
-          ArmAsyncOperationHeader<FinalResult = ManagedCertificate> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ManagedCertificateBadRequestError,
+    Response = ArmResourceUpdatedResponse<ManagedCertificate> | ArmResourceCreatedResponse<
+      ManagedCertificate,
+      ArmAsyncOperationHeader<FinalResult = ManagedCertificate> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ManagedCertificateBadRequestError,
     OptionalRequestBody = true
   >;
 
@@ -102,15 +99,12 @@ interface ManagedCertificates {
 }
 
 @@doc(ManagedCertificate.name, "Name of the Managed Certificate.");
-@@doc(
-  ManagedCertificate.properties,
+@@doc(ManagedCertificate.properties,
   "Certificate resource specific properties"
 );
-@@doc(
-  ManagedCertificates.createOrUpdate::parameters.resource,
+@@doc(ManagedCertificates.createOrUpdate::parameters.resource,
   "Managed Certificate to be created or updated"
 );
-@@doc(
-  ManagedCertificates.update::parameters.properties,
+@@doc(ManagedCertificates.update::parameters.properties,
   "Properties of a managed certificate that need to be updated"
 );

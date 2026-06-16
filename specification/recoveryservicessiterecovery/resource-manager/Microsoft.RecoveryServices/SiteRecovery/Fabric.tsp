@@ -53,10 +53,7 @@ alias FabricOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-model FabricAcceptedLroResponse<FinalResult extends
-  | TypeSpec.Reflection.Model
-  | unknown
-  | void = Fabric>
+model FabricAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = Fabric>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -87,10 +84,8 @@ interface Fabrics {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     Fabric,
     Request = FabricCreationInput,
-    Response =
-      | ArmResourceUpdatedResponse<Fabric>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<Fabric> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Fabric> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -193,8 +188,7 @@ interface Fabrics {
 @@doc(Fabric.name, "Fabric name.");
 @@doc(Fabric.properties, "Fabric related data.");
 @@doc(Fabrics.create::parameters.resource, "Fabric creation input.");
-@@doc(
-  Fabrics.reassociateGateway::parameters.body,
+@@doc(Fabrics.reassociateGateway::parameters.body,
   "The input to the failover process server operation."
 );
 @@doc(Fabrics.renewCertificate::parameters.body, "Renew certificate input.");

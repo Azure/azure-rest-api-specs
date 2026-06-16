@@ -44,11 +44,8 @@ interface CertificateObjectGlobalRulestackResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     CertificateObjectGlobalRulestackResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**
@@ -58,7 +55,6 @@ interface CertificateObjectGlobalRulestackResources {
 }
 
 @@doc(CertificateObjectGlobalRulestackResource.name, "certificate name");
-@@doc(
-  CertificateObjectGlobalRulestackResource.properties,
+@@doc(CertificateObjectGlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

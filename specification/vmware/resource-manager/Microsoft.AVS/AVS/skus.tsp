@@ -13,9 +13,10 @@ interface Skus {
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.AVS/skus")
   @get
   @list
-  list(...ApiVersionParameter, ...SubscriptionIdParameter):
-    | ArmResponse<PagedResourceSku>
-    | ErrorResponse;
+  list(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+  ): ArmResponse<PagedResourceSku> | ErrorResponse;
 }
 
 @@identifiers(PagedResourceSku.value, #[]);

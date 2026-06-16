@@ -98,10 +98,7 @@ interface CommitmentPlans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes for 'createOrUpdate' match existing service endpoint behavior"
   delete is CommitmentPlanOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -182,10 +179,7 @@ interface CommitmentPlanOperationGroup {
   @tag("CognitiveServicesCommitmentPlans")
   deletePlan is CommitmentPlanOperationGroupOps.DeleteWithoutOkAsync<
     CommitmentPlan,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -207,24 +201,19 @@ interface CommitmentPlanOperationGroup {
   >;
 }
 
-@@doc(
-  CommitmentPlan.name,
+@@doc(CommitmentPlan.name,
   "The name of the commitmentPlan associated with the Cognitive Services Account"
 );
 @@encodedName(CommitmentPlan.etag, "application/json", "etag");
-@@doc(
-  CommitmentPlan.properties,
+@@doc(CommitmentPlan.properties,
   "Properties of Cognitive Services account commitment plan."
 );
-@@doc(
-  CommitmentPlans.createOrUpdate::parameters.resource,
+@@doc(CommitmentPlans.createOrUpdate::parameters.resource,
   "The commitmentPlan properties."
 );
-@@doc(
-  CommitmentPlanOperationGroup.createOrUpdatePlan::parameters.resource,
+@@doc(CommitmentPlanOperationGroup.createOrUpdatePlan::parameters.resource,
   "The parameters to provide for the created commitment plan."
 );
-@@doc(
-  CommitmentPlanOperationGroup.updatePlan::parameters.properties,
+@@doc(CommitmentPlanOperationGroup.updatePlan::parameters.properties,
   "The parameters to provide for the created commitment plan."
 );

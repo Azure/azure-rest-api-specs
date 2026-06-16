@@ -70,28 +70,20 @@ using Microsoft.HybridCompute;
 @@clientName(Machines.update::parameters.properties, "parameters");
 @@clientName(Machines.installPatches::parameters.body, "installPatchesInput");
 @@clientLocation(Machines.upgradeExtensions, Microsoft.HybridCompute);
-@@clientName(
-  Machines.upgradeExtensions::parameters.body,
+@@clientName(Machines.upgradeExtensions::parameters.body,
   "extensionUpgradeParameters"
 );
 @@clientName(Machines.setupExtensions::parameters.body, "extensions");
-@@clientLocation(Machines.networkProfileGet, "NetworkProfile", "!javascript");
-@@clientLocation(
-  Machines.networkProfileGet,
-  "NetworkProfileOperations",
-  "javascript"
-);
+@@clientLocation(Machines.networkProfileGet, "NetworkProfile");
 @@clientName(Machines.networkProfileGet, "Get");
 @@clientLocation(Machines.getValidationDetailsForMachine, "PrivateLinkScopes");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Machine.properties);
 
-@@clientName(
-  MachineExtensions.createOrUpdate::parameters.resource,
+@@clientName(MachineExtensions.createOrUpdate::parameters.resource,
   "extensionParameters"
 );
-@@clientName(
-  MachineExtensions.update::parameters.properties,
+@@clientName(MachineExtensions.update::parameters.properties,
   "extensionParameters"
 );
 
@@ -110,8 +102,7 @@ using Microsoft.HybridCompute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExtensionValueV2.properties);
 
-@@clientName(
-  MachineRunCommands.createOrUpdate::parameters.resource,
+@@clientName(MachineRunCommands.createOrUpdate::parameters.resource,
   "runCommandProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -131,31 +122,25 @@ using Microsoft.HybridCompute;
 @@Legacy.flattenProperty(Settings.properties);
 
 @@clientLocation(HybridComputePrivateLinkScopes.get, "PrivateLinkScopes");
-@@clientLocation(
-  HybridComputePrivateLinkScopes.createOrUpdate,
+@@clientLocation(HybridComputePrivateLinkScopes.createOrUpdate,
   "PrivateLinkScopes"
 );
-@@clientName(
-  HybridComputePrivateLinkScopes.createOrUpdate::parameters.resource,
+@@clientName(HybridComputePrivateLinkScopes.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  HybridComputePrivateLinkScopes.updateTags,
+@@clientLocation(HybridComputePrivateLinkScopes.updateTags,
   "PrivateLinkScopes"
 );
-@@clientName(
-  HybridComputePrivateLinkScopes.updateTags::parameters.properties,
+@@clientName(HybridComputePrivateLinkScopes.updateTags::parameters.properties,
   "PrivateLinkScopeTags"
 );
 @@clientLocation(HybridComputePrivateLinkScopes.delete, "PrivateLinkScopes");
-@@clientLocation(
-  HybridComputePrivateLinkScopes.listByResourceGroup,
+@@clientLocation(HybridComputePrivateLinkScopes.listByResourceGroup,
   "PrivateLinkScopes"
 );
 @@clientLocation(HybridComputePrivateLinkScopes.list, "PrivateLinkScopes");
 
-@@clientName(
-  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+@@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
 
@@ -168,11 +153,9 @@ using Microsoft.HybridCompute;
 
 @@clientLocation(ExtensionPublisherOperationGroup.list, "ExtensionPublisher");
 
-@@clientLocation(
-  PrivateLinkScopesOperationGroup.getValidationDetails,
+@@clientLocation(PrivateLinkScopesOperationGroup.getValidationDetails,
   "PrivateLinkScopes"
 );
-@@clientName(
-  LicensesOperationGroup.validateLicense::parameters.body,
+@@clientName(LicensesOperationGroup.validateLicense::parameters.body,
   "parameters"
 );

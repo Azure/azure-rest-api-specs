@@ -1,19 +1,19 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./DataCollectionApi/main.tsp";
-import "./PrivateLinkScopesApi/main.tsp";
-import "./AutoScaleApi/main.tsp";
-import "./ActivityLogsApi/main.tsp";
-import "./MetricsApi/main.tsp";
-import "./ServiceDiagnosticsSettingsApi/main.tsp";
-import "./AlertRulesIncidentsApi/main.tsp";
-import "./LogProfilesApi/main.tsp";
-import "./ActivityLogAlertsApi/main.tsp";
-import "./MetricAlertApi/main.tsp";
-import "./ScheduledQueryRuleApi/main.tsp";
-import "./MetricBaselinesApi/main.tsp";
-import "./ActionGroupsApi/main.tsp";
-import "./NetworkSecurityPerimeterApi/main.tsp";
+import "./DataCollection/main.tsp";
+import "./PrivateLinkScopes/main.tsp";
+import "./AutoScale/main.tsp";
+import "./ActivityLogs/main.tsp";
+import "./Metrics/main.tsp";
+import "./ServiceDiagnosticsSettings/main.tsp";
+import "./AlertRulesIncidents/main.tsp";
+import "./LogProfiles/main.tsp";
+import "./ActivityLogAlerts/main.tsp";
+import "./MetricAlert/main.tsp";
+import "./ScheduledQueryRule/main.tsp";
+import "./MetricBaselines/main.tsp";
+import "./ActionGroups/main.tsp";
+import "./NetworkSecurityPerimeter/main.tsp";
 import "./Common/main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -22,110 +22,100 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Microsoft.Insights;
-using ScheduledQueryRuleApi;
-using AutoScaleApi;
+using Microsoft.ScheduledQueryRule;
+using Microsoft.AutoScale;
 using Microsoft.Common;
-using PrivateLinkScopesApi;
-using MetricsApi;
-using ServiceDiagnosticsSettingsApi;
+using Microsoft.PrivateLinkScopes;
+using Microsoft.Metrics;
+using Microsoft.ServiceDiagnosticsSettings;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
   service: [
-    DataCollectionApi,
-    PrivateLinkScopesApi,
-    AutoScaleApi,
-    ActivityLogsApi,
-    MetricsApi,
-    ServiceDiagnosticsSettingsApi,
-    AlertRulesIncidentsApi,
-    LogProfilesApi,
-    ActivityLogAlertsApi,
-    MetricAlertApi,
-    ScheduledQueryRuleApi,
-    MetricBaselinesApi,
-    ActionGroupsApi,
-    NetworkSecurityPerimeterApi
+    Microsoft.DataCollection,
+    Microsoft.PrivateLinkScopes,
+    Microsoft.AutoScale,
+    Microsoft.ActivityLogs,
+    Microsoft.Metrics,
+    Microsoft.ServiceDiagnosticsSettings,
+    Microsoft.AlertRulesIncidents,
+    Microsoft.LogProfiles,
+    Microsoft.ActivityLogAlerts,
+    Microsoft.MetricAlert,
+    Microsoft.ScheduledQueryRule,
+    Microsoft.MetricBaselines,
+    Microsoft.ActionGroups,
+    Microsoft.NetworkSecurityPerimeter
   ],
   autoMergeService: true,
 })
 namespace Microsoft.InsightsCombinedClient;
 
-@@clientName(
-  Microsoft.InsightsCombinedClient,
+@@clientName(Microsoft.InsightsCombinedClient,
   "MonitorClient",
   "java,javascript"
 );
-@@clientName(
-  Microsoft.InsightsCombinedClient,
+@@clientName(Microsoft.InsightsCombinedClient,
   "MonitorManagementClient",
   "python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  PrivateLinkScopesApi.PrivateEndpointConnections.listByPrivateLinkScope,
-  "java,python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
-  "python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  MetricAlertApi.MetricAlertResources.list,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.PrivateLinkScopes.PrivateEndpointConnections.listByPrivateLinkScope,
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  MetricAlertApi.MetricAlertResources.listByName,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.MetricAlert.MetricAlertResources.list,
+  "java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Microsoft.MetricAlert.MetricAlertResources.listByName,
   "java"
 );
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
-@@clientName(
-  ActivityLogAlertsApi.AlertRuleAllOfCondition,
+@@clientName(Microsoft.ActivityLogAlerts.AlertRuleAllOfCondition,
   "ActivityLogAlertAllOfCondition",
   "java"
 );
-@@clientName(
-  ActivityLogAlertsApi.AlertRuleAnyOfOrLeafCondition,
+@@clientName(Microsoft.ActivityLogAlerts.AlertRuleAnyOfOrLeafCondition,
   "ActivityLogAlertLeafCondition",
   "java"
 );
 
 // MetricUnit - rename to Unit
-@@clientName(MetricsApi.MetricUnit, "Unit", "java");
+@@clientName(Microsoft.Metrics.MetricUnit, "Unit", "java");
 
 // PrivateEndpointConnection - PrivateLinkScopes is canonical; rename Azure common type duplicate
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "PrivateEndpointConnectionAutoGenerated",
   "java"
 );
 
 // ErrorResponse/ErrorDetail - Common/main.tsp is canonical; rename Azure common type duplicates
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorResponse,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ErrorResponseAutoGenerated",
   "java,python"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ErrorDetailAutoGenerated",
   "java,python"
 );
 
 // Response.resourceregion - rename to resourceRegion for Java camelCase
-@@clientName(MetricsApi.Response.resourceregion, "resourceRegion", "java");
+@@clientName(Microsoft.Metrics.Response.resourceregion,
+  "resourceRegion",
+  "java"
+);
 
 // Response.interval - use Duration type
-@@alternateType(MetricsApi.Response.interval, duration, "java");
+@@alternateType(Microsoft.Metrics.Response.interval, duration, "java");
 
 // Request.interval - use Duration type
-@@alternateType(MetricsApi.IntervalQueryParameter.interval, duration, "java");
+@@alternateType(Microsoft.Metrics.IntervalQueryParameter.interval,
+  duration,
+  "java"
+);
 
 /**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
@@ -152,10 +142,9 @@ model MetricSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(
-  ServiceDiagnosticsSettingsApi.MetricSettings,
+@@alternateType(Microsoft.ServiceDiagnosticsSettings.MetricSettings,
   MetricSettings,
-  "java,python"
+  "java"
 );
 
 /**
@@ -183,34 +172,32 @@ model LogSettings {
   retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
-@@alternateType(
-  ServiceDiagnosticsSettingsApi.LogSettings,
+@@alternateType(Microsoft.ServiceDiagnosticsSettings.LogSettings,
   LogSettings,
-  "java,python"
+  "java"
 );
 
-@@clientLocation(
-  NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.getNSP,
   "NspScheduledQueryRule",
   "java"
 );
-@@clientLocation(
-  NetworkSecurityPerimeterApi.ScheduledQueryRule.listNSP,
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.listNSP,
   "NspScheduledQueryRule",
   "java"
 );
-@@clientLocation(
-  NetworkSecurityPerimeterApi.ScheduledQueryRule.reconcileNSP,
+@@clientLocation(Microsoft.NetworkSecurityPerimeter.ScheduledQueryRule.reconcileNSP,
   "NspScheduledQueryRule",
   "java"
 );
 
 @@alternateType(AutoscaleNotification.operation, "Scale", "java");
 
-@@clientName(MetricsApi.MetricValue.timeStamp, "timestamp", "java");
-@@clientName(AutoScaleApi.PredictiveValue.timeStamp, "timestamp", "java");
-@@clientName(
-  MetricAlertApi.MetricAlertAction.webHookProperties,
+@@clientName(Microsoft.Metrics.MetricValue.timeStamp, "timestamp", "java");
+@@clientName(Microsoft.AutoScale.PredictiveValue.timeStamp,
+  "timestamp",
+  "java"
+);
+@@clientName(Microsoft.MetricAlert.MetricAlertAction.webHookProperties,
   "webhookProperties",
   "java"
 );
@@ -230,59 +217,48 @@ model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem,
   "go"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
   "javascript"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.ErrorResponse,
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ArmErrorResponse",
   "javascript"
 );
 
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`ISO 8601`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ISO 8601`,
   "ISO8601",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`YYYY-MM-DD HH:MM:SS`,
   "YYYY_MM_DD_HH_MM_SS",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`M/D/YYYY HH:MM:SS AM/PM`,
   "M_D_YYYY_HH_MM_SS_AM_PM",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`Mon DD, YYYY HH:MM:SS`,
   "MON_DD_YYYY_HH_MM_SS",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`yyMMdd HH:mm:ss`,
   "YY_M_MDD_HH_MM_SS",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`ddMMyy HH:mm:ss`,
   "DD_M_MYY_HH_MM_SS",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`MMM d hh:mm:ss`,
   "MMM_D_HH_MM_SS",
   "python"
 );
-@@clientName(
-  DataCollectionApi.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
+@@clientName(Microsoft.DataCollection.KnownLogFileTextSettingsRecordStartTimestampFormat.`dd/MMM/yyyy:HH:mm:ss zzz`,
   "DD_MMM_YYYY_HH_MM_SS_ZZZ",
   "python"
 );
@@ -291,6 +267,19 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AlertSeverity.`2`, "TWO", "python");
 @@clientName(AlertSeverity.`3`, "THREE", "python");
 @@clientName(AlertSeverity.`4`, "FOUR", "python");
+
+@@clientLocation(ServiceDiagnosticSettingsResources.get,
+  "DiagnosticSettings",
+  "python"
+);
+@@clientLocation(ServiceDiagnosticSettingsResources.createOrUpdate,
+  "DiagnosticSettings",
+  "python"
+);
+@@clientLocation(ServiceDiagnosticSettingsResources.update,
+  "DiagnosticSettings",
+  "python"
+);
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -304,28 +293,9 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   asyncOperationId: string,
 
   ...ResourceGroupParameter,
-):
-  | Azure.ResourceManager.ArmResponse<OperationStatus>
-  | Azure.ResourceManager.ErrorResponse;
+): Azure.ResourceManager.ArmResponse<OperationStatus> | Azure.ResourceManager.ErrorResponse;
 
-@@override(
-  PrivateLinkScopeOperationStatusOperationGroup.get,
+@@override(PrivateLinkScopeOperationStatusOperationGroup.get,
   PrivateLinkScopeOperationStatusGetCustomized,
-  "python"
-);
-
-@@clientName(
-  ActionGroupsApi.ActionGroup,
-  "ActionGroupResourceProperties",
-  "python"
-);
-@@clientName(
-  ActivityLogAlertsApi.ActivityLogAlertActionGroup,
-  "ActionGroup",
-  "python"
-);
-@@clientName(
-  Microsoft.Common.CommonErrorResponse,
-  "ErrorResponseCommon",
   "python"
 );

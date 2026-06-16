@@ -79,9 +79,7 @@ model Condition {
   @doc("Operator used in the filtering condition.")
   operator: ConditionOperator;
 
-  @doc("""
-    Value used in filtering. For most operators (eq, ne, lt, lte, gt, gte, startswith, notstartswith, contains, notcontains) this is a single value (for example "GetContosoUsers"). For the `in` and `notin` operators, multiple values must be joined by the delimiter `^^` (for example "east^^west^^north").
-    """)
+  @doc("Value used in filtering.")
   value: string;
 }
 
@@ -104,20 +102,17 @@ union ScalarFunction {
 
 @doc("Defines the available sampling types.")
 union SamplingType {
-  @doc("Average value.")
-  Average: "Average",
-
-  @doc("Summation.")
-  Sum: "Sum",
-
-  @doc("Count of occurrences.")
-  Count: "Count",
+  @doc("Maximum value.")
+  Max: "max",
 
   @doc("Minimum value.")
-  Min: "Min",
+  Min: "min",
 
-  @doc("Maximum value.")
-  Max: "Max",
+  @doc("Average value.")
+  Avg: "avg",
+
+  @doc("Summation.")
+  Sum: "sum",
 
   string,
 }
@@ -125,40 +120,40 @@ union SamplingType {
 @doc("Defines operators used in filter conditions.")
 union ConditionOperator {
   @doc("Equal to.")
-  Equal: "eq",
+  Equal: "==",
 
   @doc("Not equal to.")
-  NotEqual: "ne",
+  NotEqual: "!=",
 
   @doc("Less than.")
-  LessThan: "lt",
+  LessThan: "<",
 
   @doc("Less than or equal to.")
-  LessThanOrEqual: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than.")
-  GreaterThan: "gt",
+  GreaterThan: ">",
 
   @doc("Greater than or equal to.")
-  GreaterThanOrEqual: "gte",
+  GreaterThanOrEqual: ">=",
 
-  @doc("Matches when `value` is one of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\").")
-  In: "in",
+  @doc("In operator.")
+  In: "@in",
 
-  @doc("Matches when `value` is none of the items in the `^^`-delimited list (for example, `value` = \"east^^west^^north\").")
-  NotIn: "notin",
+  @doc("Not in.")
+  NotIn: "!in",
 
   @doc("Starts with.")
   StartsWith: "startswith",
 
   @doc("Does not start with.")
-  NotStartsWith: "notstartswith",
+  NotStartsWith: "!startswith",
 
   @doc("Contains the value.")
   Contains: "contains",
 
   @doc("Does not contain the value.")
-  NotContains: "notcontains",
+  NotContains: "!contains",
 
   string,
 }
@@ -236,16 +231,16 @@ model WindowUptimeCriteria {
 @doc("Defines comparison operators for window uptime criteria.")
 union WindowUptimeCriteriaComparator {
   @doc("Less than the target value.")
-  LessThan: "lt",
+  LessThan: "<",
 
   @doc("Greater than the target value.")
-  GreaterThan: "gt",
+  GreaterThan: ">",
 
   @doc("Less than or equal to the target value.")
-  LessThanOrEqual: "lte",
+  LessThanOrEqual: "<=",
 
   @doc("Greater than or equal to the target value.")
-  GreaterThanOrEqual: "gte",
+  GreaterThanOrEqual: ">=",
 
   string,
 }

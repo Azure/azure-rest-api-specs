@@ -76,7 +76,6 @@ interface LoadBalancingRules {
 }
 
 @@doc(LoadBalancingRule.name, "The name of the load balancing rule.");
-@@doc(
-  LoadBalancingRule.properties,
+@@doc(LoadBalancingRule.properties,
   "Properties of load balancer load balancing rule."
 );

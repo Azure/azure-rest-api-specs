@@ -49,12 +49,10 @@ interface Flows {
   update is ArmCustomPatchAsync<
     Flow,
     PatchModel = FlowsPatch,
-    Response =
-      | ArmResponse<Flow>
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          _: Flow;
-        })
+    Response = ArmResponse<Flow> | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: Flow;
+    })
   >;
 
   /**
@@ -167,12 +165,10 @@ interface Flows {
 @@doc(Flows.createOrUpdate::parameters.resource, "Flow body");
 @@doc(Flows.update::parameters.properties, "Flow body");
 @@doc(Flows.link::parameters.body, "Flow body");
-@@doc(
-  Flows.setDestinationEndpointPorts::parameters.body,
+@@doc(Flows.setDestinationEndpointPorts::parameters.body,
   "The destination endpoint ports wanted"
 );
-@@doc(
-  Flows.setDestinationEndpoints::parameters.body,
+@@doc(Flows.setDestinationEndpoints::parameters.body,
   "Destination endpoints wanted."
 );
 @@doc(Flows.setPassphrase::parameters.body, "Passphrase to set");
@@ -180,12 +176,10 @@ interface Flows {
 @@clientName(Flows.createOrUpdate::parameters.resource, "flow");
 @@clientName(Flows.update::parameters.properties, "flow");
 @@clientName(Flows.link::parameters.body, "flow");
-@@clientName(
-  Flows.setDestinationEndpointPorts::parameters.body,
+@@clientName(Flows.setDestinationEndpointPorts::parameters.body,
   "streamDestinationEndpointPorts"
 );
-@@clientName(
-  Flows.setDestinationEndpoints::parameters.body,
+@@clientName(Flows.setDestinationEndpoints::parameters.body,
   "streamDestinationEndpoints"
 );
 @@clientName(Flows.setPassphrase::parameters.body, "passphrase");

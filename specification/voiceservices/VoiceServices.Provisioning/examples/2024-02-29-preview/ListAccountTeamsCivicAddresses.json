@@ -1,0 +1,41 @@
+{
+  "title": "Get a list of Civic Addresses.",
+  "operationId": "Accounts_ListTeamsCivicAddresses",
+  "parameters": {
+    "api-version": "2024-02-29-preview",
+    "accountName": "contoso",
+    "countRecords": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "ebfee340-a791-11ed-9bfa-ed8bb5c41be4",
+            "country": "US",
+            "houseNumber": "11600",
+            "streetName": "Sunrise Valley",
+            "stateOrProvince": "VA",
+            "cityOrTown": "Reston",
+            "postalOrZipCode": "20191",
+            "companyName": "contoso",
+            "defaultLocationId": "653c9fed-f8a7-4a6c-917b-b5b1ad4d45f7",
+            "validationStatus": "validated",
+            "tenantId": "a7f4bd5c-cc01-40f4-8baa-2b6bdb272b8a",
+            "locations": [
+              {
+                "id": "653c9fed-f8a7-4a6c-917b-b5b1ad4d45f7",
+                "civicAddressId": "ebfee340-a791-11ed-9bfa-ed8bb5c41be4",
+                "isDefault": true,
+                "description": "911"
+              }
+            ]
+          }
+        ]
+      },
+      "headers": {
+        "x-ms-record-count": 1
+      }
+    }
+  }
+}

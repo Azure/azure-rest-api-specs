@@ -75,13 +75,12 @@ interface Credits {
   @Azure.Core.useFinalStateVia("original-uri")
   create is ArmResourceCreateOrReplaceAsync<
     Credit,
-    Response =
-      | (ArmResponse<Credit> & ArmAsyncOperationHeader<FinalResult = Credit>)
-      | (ArmResourceCreatedResponse<
-          Credit,
-          LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>
-        > &
-          Azure.Core.Foundations.RetryAfterHeader)
+    Response = (ArmResponse<Credit> &
+      ArmAsyncOperationHeader<FinalResult = Credit>) | (ArmResourceCreatedResponse<
+      Credit,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>
+    > &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -91,10 +90,9 @@ interface Credits {
   update is ArmCustomPatchAsync<
     Credit,
     PatchModel = CreditPatchRequest,
-    Response =
-      | (ArmResponse<Credit> & ArmAsyncOperationHeader<FinalResult = Credit>)
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>> &
-          Azure.Core.Foundations.RetryAfterHeader)
+    Response = (ArmResponse<Credit> &
+      ArmAsyncOperationHeader<FinalResult = Credit>) | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>> &
+      Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -102,10 +100,9 @@ interface Credits {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Credit,
-    Response =
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> &
-          Azure.Core.Foundations.RetryAfterHeader)
-      | (NoContentResponse & ArmAsyncOperationHeader)
+    Response = (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> &
+      Azure.Core.Foundations.RetryAfterHeader) | (NoContentResponse &
+      ArmAsyncOperationHeader)
   >;
 
   /**
@@ -132,9 +129,8 @@ interface Credits {
     Credit,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ConditionalCredit>,
-    Response =
-      | (ArmResponse<Credit> & ArmAsyncOperationHeader<FinalResult = Credit>)
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>>
+    Response = (ArmResponse<Credit> &
+      ArmAsyncOperationHeader<FinalResult = Credit>) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Credit>>
   >;
 }
 

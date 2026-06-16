@@ -43,7 +43,6 @@ interface HealthCheckStatusDetailsOperationGroup {
 }
 
 @@doc(HealthCheckStatusDetails.name, "");
-@@doc(
-  HealthCheckStatusDetails.properties,
+@@doc(HealthCheckStatusDetails.properties,
   "Health check status details properties."
 );

@@ -4,8 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DurableTask;
 
-@@clientNamespace(
-  Microsoft.DurableTask,
+@@clientNamespace(Microsoft.DurableTask,
   "com.azure.resourcemanager.durabletask",
   "java"
 );
@@ -19,8 +18,7 @@ using Microsoft.DurableTask;
 @@clientName(TaskHubProperties, "DurableTaskHubProperties", "csharp");
 @@clientName(ProvisioningState, "DurableTaskProvisioningState", "csharp");
 @@clientName(SchedulerUpdate, "DurableTaskSchedulerPatch", "csharp");
-@@clientName(
-  SchedulerPropertiesUpdate,
+@@clientName(SchedulerPropertiesUpdate,
   "DurableTaskSchedulerPatchProperties",
   "csharp"
 );
@@ -28,19 +26,16 @@ using Microsoft.DurableTask;
 @@clientName(SchedulerSkuName, "DurableTaskSchedulerSkuName", "csharp");
 @@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
-@@clientName(
-  PurgeableOrchestrationState,
+@@clientName(PurgeableOrchestrationState,
   "DurableTaskPurgeableOrchestrationState",
   "csharp"
 );
-@@clientName(
-  RetentionPolicyDetails,
+@@clientName(RetentionPolicyDetails,
   "DurableTaskRetentionPolicyDetails",
   "csharp"
 );
 @@clientName(RetentionPolicy, "DurableTaskRetentionPolicy", "csharp");
-@@clientName(
-  RetentionPolicyProperties,
+@@clientName(RetentionPolicyProperties,
   "DurableTaskRetentionPolicyProperties",
   "csharp"
 );

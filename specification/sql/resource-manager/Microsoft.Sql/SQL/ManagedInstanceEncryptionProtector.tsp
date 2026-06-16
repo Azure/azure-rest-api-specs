@@ -14,11 +14,7 @@ namespace Microsoft.Sql;
 /**
  * The managed instance encryption protector.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstanceEncryptionProtectors
-)
 model ManagedInstanceEncryptionProtector
   is Azure.ResourceManager.ProxyResource<ManagedInstanceEncryptionProtectorProperties> {
   ...ResourceNameParameter<
@@ -38,11 +34,7 @@ model ManagedInstanceEncryptionProtector
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstanceEncryptionProtectors
-)
 interface ManagedInstanceEncryptionProtectors {
   /**
    * Gets a managed instance encryption protector.
@@ -55,10 +47,8 @@ interface ManagedInstanceEncryptionProtectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceEncryptionProtector,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedInstanceEncryptionProtector>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ManagedInstanceEncryptionProtector> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceEncryptionProtector> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -77,12 +67,10 @@ interface ManagedInstanceEncryptionProtectors {
   >;
 }
 
-@@doc(
-  ManagedInstanceEncryptionProtector.name,
+@@doc(ManagedInstanceEncryptionProtector.name,
   "The name of the encryption protector to be retrieved."
 );
 @@doc(ManagedInstanceEncryptionProtector.properties, "Resource properties.");
-@@doc(
-  ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
+@@doc(ManagedInstanceEncryptionProtectors.createOrUpdate::parameters.resource,
   "The requested encryption protector resource state."
 );

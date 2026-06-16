@@ -32,12 +32,11 @@ model DedicatedHost
   sku: Sku;
 }
 
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface DedicatedHosts {
   /**
    * Retrieves information about a dedicated host.
    */
-  @tag("DedicatedHosts")
   get is ComputeResourceRead<
     DedicatedHost,
     Parameters = {
@@ -52,7 +51,6 @@ interface DedicatedHosts {
   /**
    * Create or update a dedicated host .
    */
-  @tag("DedicatedHosts")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     DedicatedHost,
     LroHeaders = ArmLroLocationHeader<FinalResult = DedicatedHost> &
@@ -62,7 +60,6 @@ interface DedicatedHosts {
   /**
    * Update a dedicated host .
    */
-  @tag("DedicatedHosts")
   @patch(#{ implicitOptionality: false })
   update is ComputeCustomPatchAsync<
     DedicatedHost,
@@ -78,13 +75,11 @@ interface DedicatedHosts {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @tag("DedicatedHosts")
   delete is ComputeResourceDeleteAsync<DedicatedHost>;
 
   /**
    * Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.
    */
-  @tag("DedicatedHost")
   listByHostGroup is ComputeResourceListByParent<
     DedicatedHost,
     Response = DedicatedHostListResult
@@ -93,7 +88,6 @@ interface DedicatedHosts {
   /**
    * Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.
    */
-  @tag("DedicatedHost")
   @get
   @action("hostSizes")
   @list
@@ -106,25 +100,21 @@ interface DedicatedHosts {
   /**
    * Redeploy the dedicated host. The operation will complete successfully once the dedicated host has migrated to a new node and is running. To determine the health of VMs deployed on the dedicated host after the redeploy check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
-  @tag("DedicatedHost")
   redeploy is ComputeResourceActionNoResponseContentAsync<
     DedicatedHost,
     void,
-    Error = CloudError,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Error = CloudError
   >;
 
   /**
    * Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes"
-  @tag("DedicatedHost")
   restart is ComputeResourceActionAsyncBase<
     DedicatedHost,
     void,
     Response = OkResponse &
-      ArmLroLocationHeader<FinalResult = void> &
+      ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DedicatedHost>
   >;
@@ -132,11 +122,9 @@ interface DedicatedHosts {
 
 @@doc(DedicatedHost.name, "The name of the dedicated host.");
 @@doc(DedicatedHost.properties, "Properties of the dedicated host.");
-@@doc(
-  DedicatedHosts.createOrUpdate::parameters.resource,
+@@doc(DedicatedHosts.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Dedicated Host."
 );
-@@doc(
-  DedicatedHosts.update::parameters.properties,
+@@doc(DedicatedHosts.update::parameters.properties,
   "Parameters supplied to the Update Dedicated Host operation."
 );

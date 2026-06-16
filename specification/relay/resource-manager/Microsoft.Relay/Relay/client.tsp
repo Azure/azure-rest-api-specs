@@ -9,14 +9,12 @@ using Microsoft.Relay;
 
 @@clientName(AuthorizationRule, "RelayAuthorizationRule", "csharp");
 @@clientName(AccessRights, "RelayAccessRight", "csharp");
-@@clientName(
-  HybridConnectionProperties.requiresClientAuthorization,
+@@clientName(HybridConnectionProperties.requiresClientAuthorization,
   "IsClientAuthorizationRequired",
   "csharp"
 );
 @@clientName(AccessKeys, "RelayAccessKeys", "csharp");
-@@clientName(
-  RegenerateAccessKeyParameters,
+@@clientName(RegenerateAccessKeyParameters,
   "RelayRegenerateAccessKeyContent",
   "csharp"
 );
@@ -24,40 +22,33 @@ using Microsoft.Relay;
 @@clientName(DefaultAction, "RelayNetworkRuleSetDefaultAction", "csharp");
 @@clientName(NetworkRuleIPAction, "RelayNetworkRuleIPAction", "csharp");
 @@clientName(PublicNetworkAccess, "RelayPublicNetworkAccess", "csharp");
-@@clientName(
-  ConnectionState,
+@@clientName(ConnectionState,
   "RelayPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(
-  PrivateLinkConnectionStatus,
+@@clientName(PrivateLinkConnectionStatus,
   "RelayPrivateLinkConnectionStatus",
   "csharp"
 );
-@@clientName(
-  EndPointProvisioningState,
+@@clientName(EndPointProvisioningState,
   "RelayPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(
-  WcfRelayProperties.requiresClientAuthorization,
+@@clientName(WcfRelayProperties.requiresClientAuthorization,
   "IsClientAuthorizationRequired",
   "csharp"
 );
-@@clientName(
-  WcfRelayProperties.requiresTransportSecurity,
+@@clientName(WcfRelayProperties.requiresTransportSecurity,
   "IsTransportSecurityRequired",
   "csharp"
 );
 @@clientName(Relaytype, "RelayType", "csharp");
 @@clientName(CheckNameAvailability, "RelayNameAvailabilityContent", "csharp");
-@@clientName(
-  CheckNameAvailabilityResult,
+@@clientName(CheckNameAvailabilityResult,
   "RelayNameAvailabilityResult",
   "csharp"
 );
-@@clientName(
-  CheckNameAvailabilityResult.nameAvailable,
+@@clientName(CheckNameAvailabilityResult.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
@@ -70,14 +61,12 @@ using Microsoft.Relay;
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
 
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(PrivateLinkResource, "RelayPrivateLinkResource", "csharp");
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "RelayPrivateEndpointConnection",
   "csharp"
 );
@@ -85,8 +74,7 @@ using Microsoft.Relay;
 // Back-compat: location properties were AzureLocation? in the old autorest SDK
 @@alternateType(AuthorizationRule.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(HybridConnection.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(
-  PrivateEndpointConnection.location,
+@@alternateType(PrivateEndpointConnection.location,
   Azure.Core.azureLocation,
   "csharp"
 );
@@ -96,8 +84,7 @@ using Microsoft.Relay;
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
 // Back-compat: property was named ConnectionState in the old SDK
-@@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -127,8 +114,7 @@ model RelayUpdateParametersReplacement
   tags?: Record<string>;
 }
 
-@@alternateType(
-  RelayUpdateParameters,
+@@alternateType(RelayUpdateParameters,
   RelayUpdateParametersReplacement,
   "csharp"
 );
@@ -136,14 +122,12 @@ model RelayUpdateParametersReplacement
 @@clientName(RelayUpdateParametersReplacement, "RelayNamespacePatch", "csharp");
 
 // Back-compat: operation was named CheckRelayNamespaceNameAvailability in the old SDK
-@@clientName(
-  NamespacesOperationGroup.checkNameAvailability,
+@@clientName(NamespacesOperationGroup.checkNameAvailability,
   "CheckRelayNamespaceNameAvailability",
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back-compat"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  PrivateLinkResources.list,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(PrivateLinkResources.list,
   "csharp"
 );

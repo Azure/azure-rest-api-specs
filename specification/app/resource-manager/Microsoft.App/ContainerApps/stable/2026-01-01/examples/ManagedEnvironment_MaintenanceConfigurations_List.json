@@ -1,24 +1,24 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "environmentName": "managedEnv",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "rg1",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    "environmentName": "managedEnv",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/managedEnvironments/managedEnv/maintenanceConfigurations/default",
             "name": "default",
             "type": "Microsoft.App/ManagedEnvironments/MaintenanceConfigurations",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/managedEnvironments/managedEnv/maintenanceConfigurations/default",
             "properties": {
               "scheduledEntries": [
                 {
-                  "durationHours": 9,
+                  "weekDay": "Sunday",
                   "startHourUtc": 12,
-                  "weekDay": "Sunday"
+                  "durationHours": 9
                 }
               ]
             }
@@ -26,7 +26,5 @@
         ]
       }
     }
-  },
-  "operationId": "MaintenanceConfigurations_List",
-  "title": "ManagedEnvironmentMaintenanceConfigurationsList"
+  }
 }

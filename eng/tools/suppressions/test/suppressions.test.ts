@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { type Suppression, getSuppressionsFromYaml } from "../src/suppressions.ts";
+import { Suppression, getSuppressionsFromYaml } from "../src/suppressions.js";
 
 test("empty suppressions.yaml", () => {
   const suppressions: Suppression[] = getSuppressionsFromYaml(

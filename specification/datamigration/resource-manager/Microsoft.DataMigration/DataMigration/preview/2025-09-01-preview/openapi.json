@@ -7226,6 +7226,21 @@
           "description": "Custom service properties",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "etag": {
           "type": "string",
           "description": "HTTP strong entity tag value. Ignored if submitted"
@@ -7237,24 +7252,11 @@
         "sku": {
           "$ref": "#/definitions/ServiceSku",
           "description": "Service SKU"
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -7747,6 +7749,7 @@
           ]
         }
       },
+      "discriminator": "kind",
       "allOf": [
         {
           "$ref": "#/definitions/DatabaseMigrationBaseProperties"
@@ -14481,27 +14484,29 @@
           "description": "Project properties",
           "x-ms-client-flatten": true
         },
-        "etag": {
-          "type": "string",
-          "description": "HTTP strong entity tag value. This is ignored if submitted."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "location": {
           "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "etag": {
+          "type": "string",
+          "description": "HTTP strong entity tag value. This is ignored if submitted."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },
@@ -16272,23 +16277,25 @@
           "description": "The SQL Migration Service properties.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },

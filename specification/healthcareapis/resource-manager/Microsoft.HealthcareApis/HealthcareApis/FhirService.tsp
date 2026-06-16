@@ -14,25 +14,16 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Fhir Service
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model FhirService
-  is Azure.ResourceManager.ProxyResource<FhirServiceProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FhirServiceProperties> {
   ...ResourceNameParameter<
     Resource = FhirService,
     KeyName = "fhirServiceName",
     SegmentName = "fhirservices",
     NamePattern = ""
   >;
-
-  /** The common properties of tracked resources in the service. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
-
-  /** The common properties for any location based resource, tracked or proxy. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.
@@ -64,17 +55,14 @@ interface FhirServices {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FhirService,
-    Response =
-      | ArmResourceUpdatedResponse<FhirService>
-      | ArmResourceCreatedResponse<
-          FhirService,
-          ArmLroLocationHeader<FinalResult = FhirService> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | (ArmAcceptedLroResponse & {
-          @bodyRoot
-          _: FhirService;
-        }),
+    Response = ArmResourceUpdatedResponse<FhirService> | ArmResourceCreatedResponse<
+      FhirService,
+      ArmLroLocationHeader<FinalResult = FhirService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse & {
+      @bodyRoot
+      _: FhirService;
+    }),
     Error = ErrorDetails
   >;
 
@@ -117,17 +105,14 @@ interface FhirServiceOperationGroup {
     /** The parameters for updating a FHIR Service. */
     @body
     fhirservicePatchResource: FhirServicePatchResource,
-  ):
-    | ArmResponse<FhirService>
-    | (ArmAcceptedLroResponse<
-        "Resource update request accepted.",
-        LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
-          Azure.Core.Foundations.RetryAfterHeader
-      > & {
-        @bodyRoot
-        _: FhirService;
-      })
-    | ErrorDetails;
+  ): ArmResponse<FhirService> | (ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    LroHeaders = ArmLroLocationHeader<FinalResult = FhirService> &
+      Azure.Core.Foundations.RetryAfterHeader
+  > & {
+    @bodyRoot
+    _: FhirService;
+  }) | ErrorDetails;
 
   /**
    * Deletes a FHIR Service.
@@ -163,7 +148,6 @@ interface FhirServiceOperationGroup {
 @@minLength(FhirService.name, 3);
 @@doc(FhirService.name, "The name of FHIR Service resource.");
 @@doc(FhirService.properties, "Fhir Service configuration.");
-@@doc(
-  FhirServices.createOrUpdate::parameters.resource,
+@@doc(FhirServices.createOrUpdate::parameters.resource,
   "The parameters for creating or updating a Fhir Service resource."
 );

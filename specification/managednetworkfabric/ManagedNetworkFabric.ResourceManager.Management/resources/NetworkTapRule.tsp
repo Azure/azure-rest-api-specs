@@ -1,13 +1,15 @@
 import "../models/common.tsp";
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkTapRule resource definition.")
-model NetworkTapRule
-  is Azure.ResourceManager.TrackedResource<NetworkTapRuleProperties, false> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkTapRule extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Tap Rule.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -16,13 +18,15 @@ model NetworkTapRule
   @visibility(Lifecycle.Read)
   name: string;
 
+  @doc("The NetworkTapRule Properties")
+  properties: NetworkTapRuleProperties;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NetworkTapRule.properties, "The NetworkTapRule Properties");
 @armResourceOperations
 interface NetworkTapRules {
   @doc("Get Network Tap Rule resource details.")
@@ -87,11 +91,9 @@ interface NetworkTapRules {
 }
 
 @@doc(NetworkTapRules.create::parameters.resource, "Request payload.");
-@@doc(
-  NetworkTapRules.update::parameters.properties,
+@@doc(NetworkTapRules.update::parameters.properties,
   "Network Tap Rule properties to update."
 );
-@@doc(
-  NetworkTapRules.updateAdministrativeState::parameters.body,
+@@doc(NetworkTapRules.updateAdministrativeState::parameters.body,
   "Request payload."
 );

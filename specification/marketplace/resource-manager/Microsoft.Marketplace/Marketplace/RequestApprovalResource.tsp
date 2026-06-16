@@ -79,12 +79,10 @@ interface RequestApprovalResources {
   >;
 }
 
-@@doc(
-  RequestApprovalResource.name,
+@@doc(RequestApprovalResource.name,
   "The request approval ID to get create or update"
 );
-@@doc(
-  RequestApprovalResource.properties,
+@@doc(RequestApprovalResource.properties,
   "The privateStore approval request data structure."
 );
 @@doc(RequestApprovalResources.createApprovalRequest::parameters.resource, "");

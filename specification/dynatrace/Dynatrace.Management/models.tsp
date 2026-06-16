@@ -1,12 +1,10 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 
 namespace Dynatrace.Observability;
 
@@ -703,11 +701,6 @@ model AccountInfo {
   companyName?: string;
 }
 
-/** Ingestion key with secret and read-only attributes for all API versions. */
-@secret
-@extension("readOnly", true)
-scalar SecretIngestionKey extends string;
-
 /**
  * Dynatrace Environment Information
  */
@@ -720,7 +713,8 @@ model EnvironmentInfo {
   /**
    * Ingestion key of the environment
    */
-  ingestionKey?: SecretIngestionKey;
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "If this is a value that should be kept private, mark as @secret"
+  ingestionKey?: string;
 
   /**
    * Ingestion endpoint used for sending logs

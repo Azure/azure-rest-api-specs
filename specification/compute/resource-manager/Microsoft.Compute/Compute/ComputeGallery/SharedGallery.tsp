@@ -18,7 +18,7 @@ namespace ComputeGallery;
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model SharedGallery is ProxyResourceShared<SharedGalleryProperties> {
-  ...ResourceNameParameter<
+  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
     Resource = SharedGallery,
     KeyName = "galleryUniqueName",
     SegmentName = "sharedGalleries",
@@ -39,7 +39,7 @@ interface SharedGalleries {
   /**
    * List shared galleries by subscription id or tenant id.
    */
-  list is ComputeResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
     SharedGallery,
     Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Parameters = {

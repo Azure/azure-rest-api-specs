@@ -1,30 +1,30 @@
 import {
-  type APIViewRequestData,
+  APIViewRequestData,
   SdkName,
   SdkNameSchema,
-  type SpecGenSdkArtifactInfo,
+  SpecGenSdkArtifactInfo,
 } from "@azure-tools/specs-shared/sdk-types";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
-import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
-import { groupSpecConfigPaths } from "./spec-helpers.ts";
+import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
+import { groupSpecConfigPaths } from "./spec-helpers.js";
 import {
-  type ExecutionReport,
-  type SpecGenSdkCmdInput,
+  ExecutionReport,
+  SpecGenSdkCmdInput,
   SpecGenSdkRequiredSettings,
-  type VsoLogs,
-} from "./types.ts";
+  VsoLogs,
+} from "./types.js";
 import {
   execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
   getArgumentValue,
   objectToMap,
-  type SpecConfigs,
-} from "./utils.ts";
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Load execution-report.json.
@@ -77,7 +77,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
   // Get the arguments passed to the script
   const args: string[] = process.argv.slice(2);
   const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--scp", path.join(__dirname, "..")),
+    getArgumentValue(args, "--scp", path.join(__dirname, "..", "..")),
   );
   const sdkRepoName: string = getArgumentValue(args, "--lang", "azure-sdk-for-net");
   const localSdkRepoPath: string = path.resolve(
@@ -398,30 +398,23 @@ export function getRequiredSettingValue(
  * Indicates which generation tool should be used for a given spec.
  * - "azsdk-cli": Use azsdk-cli for generation (Rust TypeSpec specs)
  * - "spec-gen-sdk": Use existing spec-gen-sdk tool
- * - "skipped": Generation is not applicable (e.g., Rust with OpenAPI-only spec)
  * - "unsupported": The required tool is not available (e.g., Rust without azsdk-cli)
  */
-export type GenerationTool = "azsdk-cli" | "spec-gen-sdk" | "skipped" | "unsupported";
+export type GenerationTool = "azsdk-cli" | "spec-gen-sdk" | "unsupported";
 
 /**
  * Determines whether to use azsdk-cli or spec-gen-sdk for a given spec.
  * Currently only uses azsdk-cli for Rust TypeSpec specs when the CLI is
  * available. All other languages and OpenAPI specs use spec-gen-sdk.
- * Returns "skipped" if Rust is requested with only an OpenAPI (readme.md) spec.
  * Returns "unsupported" if Rust is requested but azsdk-cli is not installed.
  */
 export function selectGenerationTool(
   tspConfigPath?: string,
-  readmePath?: string,
+  _readmePath?: string,
   sdkLanguage?: SdkName,
 ): GenerationTool {
-  if (sdkLanguage === "azure-sdk-for-rust") {
-    if (!tspConfigPath && readmePath) {
-      return "skipped";
-    }
-    if (tspConfigPath) {
-      return isAzsdkCliAvailable() ? "azsdk-cli" : "unsupported";
-    }
+  if (tspConfigPath && sdkLanguage === "azure-sdk-for-rust") {
+    return isAzsdkCliAvailable() ? "azsdk-cli" : "unsupported";
   }
   return "spec-gen-sdk";
 }

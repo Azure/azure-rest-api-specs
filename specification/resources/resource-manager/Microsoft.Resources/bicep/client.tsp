@@ -9,8 +9,7 @@ using BicepClient;
 @@clientName(FileDefinition, "DecompiledFileDefinition", "csharp");
 @@clientName(DecompileOperationGroup.bicep, "BicepDecompile", "csharp");
 @@clientName(DecompileOperationRequest, "DecompileOperationContent", "csharp");
-@@clientName(
-  DecompileOperationSuccessResponse,
+@@clientName(DecompileOperationSuccessResponse,
   "DecompileOperationSuccessResult",
   "csharp"
 );

@@ -1,18 +1,17 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "environmentName": "managedEnv",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    "environmentName": "managedEnv",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "managedEnvironments",
-            "type": "Microsoft.App/managedEnvironments/privateLinkResources",
             "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/managedEnv/privateLinkResources/managedEnvironments",
+            "name": "managedEnvironments",
             "properties": {
               "groupId": "managedEnvironments",
               "requiredMembers": [
@@ -21,12 +20,11 @@
               "requiredZoneNames": [
                 "privatelink.northcentralusstage.azurecontainerapps.io"
               ]
-            }
+            },
+            "type": "Microsoft.App/managedEnvironments/privateLinkResources"
           }
         ]
       }
     }
-  },
-  "operationId": "ManagedEnvironmentPrivateLinkResources_List",
-  "title": "List Private Link Resources by Managed Environment"
+  }
 }

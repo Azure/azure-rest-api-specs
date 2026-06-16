@@ -36,12 +36,6 @@ interface Render {
    * tile types include Azure Maps road tiles and real-time Weather Radar tiles. By
    * default, the Azure Maps [Web SDK](/azure/azure-maps/about-azure-maps#web-sdk)
    * uses vector tiles for rendering its web map control.
-   *
-   * > [!Important]
-   * >
-   * > When using the **Get Map Tile** API, you must also call the [Get Map Attribution](/rest/api/maps/render/get-map-attribution) API to retrieve the required map data attribution text.
-   * >
-   * > The returned attribution must be displayed wherever tiles retrieved from **Get Map Tile** are rendered, including in third-party map controls or custom rendering implementations.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Non-standard operation."
   @summary("Use to request map tiles in vector or raster format.")

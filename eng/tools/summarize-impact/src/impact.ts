@@ -10,18 +10,18 @@ import pkg from "lodash";
 const { isEqual } = pkg;
 
 import {
-  type ChangeHandler,
+  ChangeHandler,
   ChangeTypes,
-  type DiffResult,
+  DiffResult,
   FileTypes,
-  type PRChange,
-  type ReadmeTag,
-} from "./diff-types.ts";
+  PRChange,
+  ReadmeTag,
+} from "./diff-types.js";
 
-import { Label, type LabelContext, PRType } from "./labelling-types.ts";
+import { Label, LabelContext, PRType } from "./labelling-types.js";
 
-import { type ImpactAssessment } from "./ImpactAssessment.ts";
-import { PRContext } from "./PRContext.ts";
+import { ImpactAssessment } from "./ImpactAssessment.js";
+import { PRContext } from "./PRContext.js";
 
 import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";

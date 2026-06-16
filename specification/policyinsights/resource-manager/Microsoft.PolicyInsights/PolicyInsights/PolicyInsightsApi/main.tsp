@@ -55,7 +55,8 @@ interface Operations {
   @autoRoute
   @segment("operations")
   @get
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<OperationsListResults>
-    | QueryFailure;
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<OperationsListResults> | QueryFailure;
 }

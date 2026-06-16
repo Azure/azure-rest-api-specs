@@ -53,7 +53,6 @@ interface AuthorizedApplications {
 @@format(AuthorizedApplication.name, "uuid");
 @@doc(AuthorizedApplication.name, "The application ID.");
 @@doc(AuthorizedApplication.properties, "");
-@@doc(
-  AuthorizedApplications.createOrUpdate::parameters.resource,
+@@doc(AuthorizedApplications.createOrUpdate::parameters.resource,
   "The authorized application properties supplied to the CreateOrUpdate operation."
 );

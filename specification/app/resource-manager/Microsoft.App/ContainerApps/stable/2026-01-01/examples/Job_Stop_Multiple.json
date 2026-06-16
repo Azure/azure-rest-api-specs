@@ -1,6 +1,8 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "rg",
+    "jobName": "testcontainerappsjob0",
     "jobExecutionName": {
       "value": [
         {
@@ -14,49 +16,45 @@
         }
       ]
     },
-    "jobName": "testcontainerAppsJob0",
-    "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
             "name": "jobExecution-27944453",
             "properties": {
-              "endTime": "2023-02-13T20:47:30+00:00",
+              "status": "Running",
               "startTime": "2023-02-13T20:37:30+00:00",
-              "status": "Running"
+              "endTime": "2023-02-13T20:47:30+00:00"
             }
           },
           {
             "name": "jobExecution-27944452",
             "properties": {
-              "endTime": "2023-02-13T21:47:30+00:00",
+              "status": "Running",
               "startTime": "2023-02-13T21:37:30+00:00",
-              "status": "Running"
+              "endTime": "2023-02-13T21:47:30+00:00"
             }
           },
           {
             "name": "jobExecution-27944453",
             "properties": {
-              "endTime": "2023-02-13T22:47:30+00:00",
+              "status": "Running",
               "startTime": "2023-02-13T22:37:30+00:00",
-              "status": "Running"
+              "endTime": "2023-02-13T22:47:30+00:00"
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     },
     "202": {
       "headers": {
         "Location": "location"
       }
     }
-  },
-  "operationId": "Jobs_StopMultipleExecutions",
-  "title": "Terminate Multiple Container Apps Job"
+  }
 }

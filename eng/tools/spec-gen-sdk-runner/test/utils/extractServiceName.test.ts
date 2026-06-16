@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { extractServiceName } from "../../src/utils.ts";
+import { extractServiceName } from "../../src/utils.js";
 
 describe("extractServiceName", () => {
   test("extracts service name from valid path", () => {

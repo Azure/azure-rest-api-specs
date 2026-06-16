@@ -55,11 +55,9 @@ interface Firmwares {
   listByWorkspace is ArmResourceListByParent<Firmware>;
 }
 
-@@doc(
-  Firmwares.create::parameters.resource,
+@@doc(Firmwares.create::parameters.resource,
   "Details of the firmware being created or updated."
 );
-@@doc(
-  Firmwares.update::parameters.properties,
+@@doc(Firmwares.update::parameters.properties,
   "Details of the firmware being created or updated."
 );

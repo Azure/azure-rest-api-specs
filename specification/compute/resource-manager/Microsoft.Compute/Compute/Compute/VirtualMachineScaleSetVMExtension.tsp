@@ -16,18 +16,9 @@ namespace Compute;
  * Describes a VMSS VM Extension.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(VirtualMachineScaleSetVM)
-model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
-  /**
-   * Describes the properties of a Virtual Machine Extension.
-   */
-  properties?: VirtualMachineExtensionProperties;
-
+model VirtualMachineScaleSetVMExtension
+  is ProxySubResourceReadOnly<VirtualMachineExtensionProperties> {
   /**
    * The location of the extension.
    */
@@ -39,7 +30,8 @@ model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
    * Resource type
    */
   @visibility(Lifecycle.Read)
-  type?: string;
+  @encodedName("application/json", "type")
+  vmType?: string;
 
   /**
    * Resource name
@@ -59,12 +51,9 @@ model VirtualMachineScaleSetVMExtension extends SubResourceReadOnly {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMExtensionsOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
+        ...Azure.ResourceManager.Legacy.BasePath,
 
         @doc("The name of the VM scale set.")
         @path
@@ -83,8 +72,7 @@ interface VirtualMachineScaleSetVMExtensionsOps
           KeyName = "vmssExtensionName",
           NamePattern = ""
         >,
-      }>,
-      CloudError
+      }>
     > {}
 
 @armResourceOperations
@@ -158,15 +146,12 @@ interface VirtualMachineScaleSetVMExtensions {
   >;
 }
 
-@@doc(
-  VirtualMachineScaleSetVMExtension.properties,
+@@doc(VirtualMachineScaleSetVMExtension.properties,
   "Describes the properties of a Virtual Machine Extension."
 );
-@@doc(
-  VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
+@@doc(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Extension operation."
 );
-@@doc(
-  VirtualMachineScaleSetVMExtensions.update::parameters.properties,
+@@doc(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Extension operation."
 );

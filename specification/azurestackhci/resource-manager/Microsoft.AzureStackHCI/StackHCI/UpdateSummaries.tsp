@@ -57,11 +57,8 @@ interface UpdateSummariesOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     UpdateSummaries,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -76,7 +73,7 @@ interface UpdateSummariesOperationGroup {
    * Check for updates
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @added(Versions.v2026_04_30)
+  @added(Versions.v2026_04_01_preview)
   checkUpdates is ArmResourceActionNoContentAsync<
     UpdateSummaries,
     CheckUpdatesRequest
@@ -86,13 +83,12 @@ interface UpdateSummariesOperationGroup {
    * Check health of UpdateSummaries
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
-  @added(Versions.v2026_04_30)
+  @added(Versions.v2026_04_01_preview)
   checkHealth is ArmResourceActionNoContentAsync<UpdateSummaries, void>;
 }
 
 @@doc(UpdateSummaries.name, "");
 @@doc(UpdateSummaries.properties, "Update summaries properties");
-@@doc(
-  UpdateSummariesOperationGroup.put::parameters.resource,
+@@doc(UpdateSummariesOperationGroup.put::parameters.resource,
   "Properties of the UpdateSummaries resource"
 );

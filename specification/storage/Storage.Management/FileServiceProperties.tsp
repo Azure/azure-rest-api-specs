@@ -98,11 +98,9 @@ interface FileServices {
 }
 
 @@doc(FileServiceProperties.name, "");
-@@doc(
-  FileServiceProperties.properties,
+@@doc(FileServiceProperties.properties,
   "The properties of File services in storage account."
 );
-@@doc(
-  FileServices.setServiceProperties::parameters.resource,
+@@doc(FileServices.setServiceProperties::parameters.resource,
   "The properties of file services in storage accounts, including CORS (Cross-Origin Resource Sharing) rules."
 );

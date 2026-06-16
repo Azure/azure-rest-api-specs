@@ -2,14 +2,17 @@ import "../models/common.tsp";
 import "../models/InternetGateway.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Internet Gateway resource definition.")
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model InternetGateway
-  is Azure.ResourceManager.TrackedResource<InternetGatewayProperties, false> {
+  extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Internet Gateway.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,9 +20,11 @@ model InternetGateway
   @segment("internetGateways")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(InternetGateway.properties, "The Internet Gateway Properties");
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The Internet Gateway Properties")
+  properties: InternetGatewayProperties;
+}
 
 @armResourceOperations
 interface InternetGateways {
@@ -50,7 +55,6 @@ interface InternetGateways {
 }
 
 @@doc(InternetGateways.create::parameters.resource, "Request payload.");
-@@doc(
-  InternetGateways.update::parameters.properties,
+@@doc(InternetGateways.update::parameters.properties,
   "API to update certain properties of the InternetGateway resource.."
 );

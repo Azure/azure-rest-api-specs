@@ -34,7 +34,7 @@ namespace ComputeGallery {
    * Common LRO headers (Azure-AsyncOperation required Jan 2025). Keep Location + Retry-After for backward compatibility.
    */
   alias GalleryScriptVersionLroHeaders<FinalResult = GalleryScriptVersion> = ArmAsyncOperationHeader<FinalResult = FinalResult> &
-    ArmLroLocationHeader<FinalResult = FinalResult> &
+    ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader;
 
   @armResourceOperations
@@ -54,12 +54,10 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmResourceUpdatedResponse<GalleryScriptVersion>
-        | ArmResourceCreatedResponse<
-            GalleryScriptVersion,
-            GalleryScriptVersionLroHeaders
-          >
+      ArmResourceUpdatedResponse<GalleryScriptVersion> | ArmResourceCreatedResponse<
+        GalleryScriptVersion,
+        GalleryScriptVersionLroHeaders
+      >
     >;
 
     /**
@@ -74,12 +72,10 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmResponse<GalleryScriptVersion>
-        | ArmAcceptedLroResponse<
-            "Resource update request accepted.",
-            GalleryScriptVersionLroHeaders
-          >
+      ArmResponse<GalleryScriptVersion> | ArmAcceptedLroResponse<
+        "Resource update request accepted.",
+        GalleryScriptVersionLroHeaders
+      >
     >;
 
     /**
@@ -93,9 +89,7 @@ namespace ComputeGallery {
       Azure.ResourceManager.Foundations.DefaultBaseParameters<GalleryScriptVersion>,
       GalleryScriptVersionLroHeaders,
       {},
-
-        | ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders<void>>
-        | ArmDeletedNoContentResponse
+      ArmDeleteAcceptedLroResponse<GalleryScriptVersionLroHeaders<void>> | ArmDeletedNoContentResponse
     >;
 
     /**
@@ -109,20 +103,16 @@ namespace ComputeGallery {
     >;
   }
 
-  @@doc(
-    GalleryScriptVersion.name,
+  @@doc(GalleryScriptVersion.name,
     "The name of the gallery Script Version to be retrieved."
   );
-  @@doc(
-    GalleryScriptVersion.properties,
+  @@doc(GalleryScriptVersion.properties,
     "Describes the properties of a gallery Script Version."
   );
-  @@doc(
-    GalleryScriptVersions.createOrUpdate::parameters.resource,
+  @@doc(GalleryScriptVersions.createOrUpdate::parameters.resource,
     "Parameters supplied to the create or update gallery Script Version operation."
   );
-  @@doc(
-    GalleryScriptVersions.update::parameters.properties,
+  @@doc(GalleryScriptVersions.update::parameters.properties,
     "Parameters supplied to the update gallery Script Version operation."
   );
 }

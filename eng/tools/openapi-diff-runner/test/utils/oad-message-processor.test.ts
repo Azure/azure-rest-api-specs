@@ -1,10 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { logMessage, logMessageSafeAsync } from "../../src/log.ts";
-import { type Context } from "../../src/types/breaking-change.ts";
-import { type MessageLevel } from "../../src/types/message.ts";
-import { type OadMessage } from "../../src/types/oad-types.ts";
+import { logMessage, logMessageSafeAsync } from "../../src/log.js";
+import { ApiVersionLifecycleStage, Context } from "../../src/types/breaking-change.js";
+import { MessageLevel } from "../../src/types/message.js";
+import { OadMessage } from "../../src/types/oad-types.js";
 import {
   appendMarkdownToLog,
   appendToLogFile,
@@ -13,9 +13,9 @@ import {
   createMessageKey,
   createOadMessageProcessor,
   getMessageCacheSize,
-  type OadMessageProcessorContext,
+  OadMessageProcessorContext,
   processAndAppendOadMessages,
-} from "../../src/utils/oad-message-processor.ts";
+} from "../../src/utils/oad-message-processor.js";
 
 // Test constants
 const TEST_CONSTANTS = {
@@ -72,7 +72,7 @@ function createMockOadMessage(overrides: Partial<OadMessage> = {}): OadMessage {
     id: "test-id",
     docUrl: `https://docs.example.com/rules/${TEST_CONSTANTS.RULES.REMOVED_PROPERTY}`,
     mode: "test",
-    groupName: "stable",
+    groupName: ApiVersionLifecycleStage.STABLE,
     new: {
       location: TEST_CONSTANTS.PATHS.NEW,
       path: TEST_CONSTANTS.JSON_PATHS.TEST_MODEL,
@@ -123,8 +123,8 @@ function createProcessorContext(
 
 // Mock dependencies
 vi.mock("node:fs");
-vi.mock("../../src/log.ts");
-vi.mock("../../src/utils/common-utils.ts", () => ({
+vi.mock("../../src/log.js");
+vi.mock("../../src/utils/common-utils.js", () => ({
   sourceBranchHref: vi.fn(
     (repo: string, sha: string, file: string) => `https://github.com/${repo}/blob/${sha}/${file}`,
   ),
@@ -133,10 +133,13 @@ vi.mock("../../src/utils/common-utils.ts", () => ({
       `https://github.com/${repo}/blob/${branchName}/${file}`,
   ),
 }));
-vi.mock("../../src/types/breaking-change.ts", () => ({
-  ApiVersionLifecycleStage: { PREVIEW: "preview", STABLE: "stable" },
-  logFileName: "breaking-change.log",
-}));
+vi.mock("../../src/types/breaking-change.js", async (importOriginal) => {
+  const actual = (await importOriginal()) as any;
+  return {
+    ...actual,
+    logFileName: "breaking-change.log",
+  };
+});
 
 describe("oad-message-processor", () => {
   const mockAppendFileSync = vi.mocked(fs.appendFileSync);
@@ -183,7 +186,7 @@ describe("oad-message-processor", () => {
         id: "test-id",
         docUrl: `https://docs.example.com/rules/${TEST_CONSTANTS.RULES.REMOVED_PROPERTY}`,
         time: expect.any(Date),
-        groupName: "stable",
+        groupName: ApiVersionLifecycleStage.STABLE,
         extra: {
           mode: "test",
         },
@@ -519,7 +522,7 @@ describe("oad-message-processor", () => {
           code: TEST_CONSTANTS.RULES.ADDED_PROPERTY,
           message: "Test 2",
           id: "test-id-2",
-          groupName: "preview",
+          groupName: ApiVersionLifecycleStage.PREVIEW,
           new: { location: TEST_CONSTANTS.LOCATIONS.NEW2, path: TEST_CONSTANTS.JSON_PATHS.PATH2 },
           old: { location: TEST_CONSTANTS.LOCATIONS.OLD2, path: TEST_CONSTANTS.JSON_PATHS.PATH2 },
         }),

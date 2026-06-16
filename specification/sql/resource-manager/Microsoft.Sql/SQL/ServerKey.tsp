@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A server key.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
   ...ResourceNameParameter<
     Resource = ServerKey,
@@ -40,9 +38,7 @@ model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
 interface ServerKeys {
   /**
    * Gets a server key.
@@ -55,14 +51,11 @@ interface ServerKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerKey,
-    Response =
-      | ArmResourceUpdatedResponse<ServerKey>
-      | ArmResourceCreatedResponse<
-          ServerKey,
-          ArmLroLocationHeader<FinalResult = ServerKey> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ServerKey> | ArmResourceCreatedResponse<
+      ServerKey,
+      ArmLroLocationHeader<FinalResult = ServerKey> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -71,10 +64,7 @@ interface ServerKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerKey,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -85,7 +75,6 @@ interface ServerKeys {
 
 @@doc(ServerKey.name, "The name of the server key to be retrieved.");
 @@doc(ServerKey.properties, "Resource properties.");
-@@doc(
-  ServerKeys.createOrUpdate::parameters.resource,
+@@doc(ServerKeys.createOrUpdate::parameters.resource,
   "The requested server key resource state."
 );

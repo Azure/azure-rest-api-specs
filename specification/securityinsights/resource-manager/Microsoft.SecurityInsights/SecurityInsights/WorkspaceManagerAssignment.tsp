@@ -98,15 +98,12 @@ interface WorkspaceManagerAssignments {
   >;
 }
 
-@@doc(
-  WorkspaceManagerAssignment.name,
+@@doc(WorkspaceManagerAssignment.name,
   "The name of the workspace manager assignment"
 );
-@@doc(
-  WorkspaceManagerAssignment.properties,
+@@doc(WorkspaceManagerAssignment.properties,
   "The workspace manager assignment object"
 );
-@@doc(
-  WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
+@@doc(WorkspaceManagerAssignments.createOrUpdate::parameters.resource,
   "The workspace manager assignment"
 );

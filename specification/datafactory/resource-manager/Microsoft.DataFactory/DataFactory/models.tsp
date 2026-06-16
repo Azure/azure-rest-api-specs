@@ -5449,8 +5449,7 @@ model CreateDataFlowDebugSessionResponse {
 /**
  * A list of active debug sessions.
  */
-@@identifiers(
-  QueryDataFlowDebugSessionsResponse.value,
+@@identifiers(QueryDataFlowDebugSessionsResponse.value,
   #["dataFlowName", "sessionId"]
 );
 model QueryDataFlowDebugSessionsResponse

@@ -67,9 +67,8 @@ interface Remediations {
    */
   createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
     Remediation,
-    Response =
-      | ArmResponse<Remediation>
-      | (CreatedResponse & Body<Remediation>),
+    Response = ArmResponse<Remediation> | (CreatedResponse &
+      Body<Remediation>),
     ErrorType = ErrorResponse
   >;
 
@@ -418,19 +417,15 @@ interface RemediationResourceOperations {
 
 @@doc(Remediation.name, "The name of the remediation.");
 @@doc(Remediation.properties, "Properties for the remediation.");
-@@doc(
-  Remediations.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(Remediations.createOrUpdateAtManagementGroup::parameters.resource,
   "The remediation parameters."
 );
-@@doc(
-  RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
+@@doc(RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
   "The remediation parameters."
 );
-@@doc(
-  RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@doc(RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
   "The remediation parameters."
 );
-@@doc(
-  RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
+@@doc(RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
   "The remediation parameters."
 );

@@ -1,7 +1,7 @@
 import path from "path";
 import { simpleGit } from "simple-git";
 import { describe, expect, it } from "vitest";
-import { processFilesToSpecificationList } from "../src/runner.ts";
+import { processFilesToSpecificationList } from "../src/runner.js";
 
 const ROOT = path.resolve(__dirname, "..", "test", "fixtures");
 

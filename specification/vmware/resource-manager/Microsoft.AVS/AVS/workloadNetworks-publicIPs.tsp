@@ -39,8 +39,7 @@ interface WorkloadNetworkPublicIps {
     | ErrorResponse;
 }
 
-@@clientName(
-  WorkloadNetworkPublicIps.create::parameters.resource,
+@@clientName(WorkloadNetworkPublicIps.create::parameters.resource,
   "workloadNetworkPublicIP"
 );
 

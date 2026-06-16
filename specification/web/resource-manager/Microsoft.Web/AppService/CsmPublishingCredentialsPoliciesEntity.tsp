@@ -257,23 +257,18 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
 }
 
 @@doc(CsmPublishingCredentialsPoliciesEntity.name, "");
-@@doc(
-  CsmPublishingCredentialsPoliciesEntity.properties,
+@@doc(CsmPublishingCredentialsPoliciesEntity.properties,
   "CsmPublishingCredentialsPoliciesEntity resource specific properties"
 );
-@@doc(
-  CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
+@@doc(CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
   ""
 );
-@@doc(
-  CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
+@@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
   ""
 );
-@@doc(
-  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
+@@doc(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
   ""
 );
-@@doc(
-  CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
+@@doc(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
   ""
 );

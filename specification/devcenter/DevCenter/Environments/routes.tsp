@@ -108,24 +108,22 @@ interface Environments {
       ...EnvironmentNameParameter;
       ...ForceDeleteEnvironmentQueryParameter;
     },
+    {
+      @statusCode
+      statusCode: 202;
 
-      | {
-          @statusCode
-          statusCode: 202;
+      @bodyRoot body: OperationStatus;
 
-          @bodyRoot body: OperationStatus;
+      @header("Location")
+      location: string;
 
-          @header("Location")
-          location: string;
-
-          @pollingLocation
-          @header("Operation-Location")
-          operationLocation: string;
-        }
-      | {
-          @statusCode
-          statusCode: 204;
-        }
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
+    } | {
+      @statusCode
+      statusCode: 204;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"

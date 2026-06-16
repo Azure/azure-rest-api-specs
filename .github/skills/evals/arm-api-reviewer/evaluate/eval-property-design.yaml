@@ -1,0 +1,142 @@
+name: arm-api-reviewer-eval-property-design
+description: |
+  Property design tests (02xxxx).
+  Validates detection of secret properties, naming violations,
+  missing descriptions, and enum issues.
+
+config:
+  runs: 1
+  timeout: 300
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 020001 — Secret properties
+  - name: detect-secret-properties
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
+      attention to secret detection. This is a new service with no previous API
+      version. Report all findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/secretsvc/resource-manager/Microsoft.SecretService/stable/2025-01-01/secretsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "SEC-SECRET-DETECT"
+      - type: output-contains
+        config:
+          substring: "connectionString"
+      - type: output-contains
+        config:
+          substring: "x-ms-secret"
+      - type: prompt
+    rubric:
+      - Detected connectionString as a secret property (connection string for backend access)
+      - Detected adminPassword as a secret property (administrator password)
+      - Detected primaryKey as a secret property (primary access key)
+      - Flagged each with SEC-SECRET-DETECT or equivalent rule ID
+      - Recommended adding x-ms-secret true for each secret property
+      - Noted that secret properties should not be returned in GET responses
+
+  # 020002 — Naming violations
+  - name: detect-naming-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/naming-violations.json"
+          dest: "specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/namingsvc/resource-manager/Microsoft.NamingService/stable/2025-01-01/namingsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "DisplayName"
+      - type: output-contains
+        config:
+          substring: "camelCase"
+      - type: prompt
+    rubric:
+      - Flagged DisplayName — should be displayName (PascalCase instead of camelCase)
+      - Flagged IPAddress — should be ipAddress (uppercase acronym)
+      - Flagged HTTP_Endpoint — should be httpEndpoint (underscores not allowed)
+      - Flagged resource_group_id — should be resourceGroupId (snake_case not allowed)
+      - Recommended camelCase alternatives for each violation
+
+  # 020003 — Missing descriptions
+  - name: detect-missing-descriptions
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/missing-descriptions.json"
+          dest: "specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. Pay special
+      attention to description completeness — every operation, model, property,
+      and parameter must have a non-empty description. This is a new service
+      with no previous API version. Report all findings with rule IDs, line
+      numbers, and fix suggestions.
+
+      File: specification/descrsvc/resource-manager/Microsoft.DescrService/stable/2025-01-01/descrsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "description"
+      - type: output-contains
+        config:
+          substring: "displayName"
+      - type: prompt
+    rubric:
+      - Flagged missing descriptions on the PUT and GET operations
+      - Flagged missing descriptions on the Widget and WidgetProperties models
+      - Flagged missing descriptions on properties (displayName, category, priority, etc.)
+
+  # 020004 — Enum violations
+  - name: detect-enum-violations
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/enum-violations.json"
+          dest: "specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings with rule IDs,
+      line numbers, and fix suggestions.
+
+      File: specification/enumsvc/resource-manager/Microsoft.EnumService/stable/2025-01-01/enumsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "x-ms-enum"
+      - type: output-contains
+        config:
+          substring: "modelAsString"
+      - type: prompt
+    rubric:
+      - Flagged the status enum with no x-ms-enum decorator and an empty string value
+      - Flagged the tier enum with modelAsString false (should be true)
+      - Flagged the category enum with no x-ms-enum and non-PascalCase values (typeA, typeB, typeC)
+      - Recommended adding x-ms-enum with modelAsString true

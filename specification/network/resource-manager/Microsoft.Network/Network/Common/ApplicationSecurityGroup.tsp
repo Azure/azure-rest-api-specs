@@ -33,11 +33,9 @@ model ApplicationSecurityGroup extends Resource {
   etag?: string;
 }
 
-@@doc(
-  ApplicationSecurityGroup.name,
+@@doc(ApplicationSecurityGroup.name,
   "The name of the application security group."
 );
-@@doc(
-  ApplicationSecurityGroup.properties,
+@@doc(ApplicationSecurityGroup.properties,
   "Properties of the application security group."
 );

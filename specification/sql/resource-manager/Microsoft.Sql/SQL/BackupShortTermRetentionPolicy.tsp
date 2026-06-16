@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A short term retention policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 model BackupShortTermRetentionPolicy
   is Azure.ResourceManager.ProxyResource<BackupShortTermRetentionPolicyProperties> {
   ...ResourceNameParameter<
@@ -29,9 +27,7 @@ model BackupShortTermRetentionPolicy
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.BackupShortTermRetentionPolicies)
 interface BackupShortTermRetentionPolicies {
   /**
    * Gets a database's short term retention policy.
@@ -44,10 +40,8 @@ interface BackupShortTermRetentionPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BackupShortTermRetentionPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<BackupShortTermRetentionPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BackupShortTermRetentionPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -65,16 +59,13 @@ interface BackupShortTermRetentionPolicies {
   listByDatabase is ArmResourceListByParent<BackupShortTermRetentionPolicy>;
 }
 
-@@doc(
-  BackupShortTermRetentionPolicy.name,
+@@doc(BackupShortTermRetentionPolicy.name,
   "The policy name. Should always be default."
 );
 @@doc(BackupShortTermRetentionPolicy.properties, "Resource properties.");
-@@doc(
-  BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
+@@doc(BackupShortTermRetentionPolicies.createOrUpdate::parameters.resource,
   "The short term retention policy info."
 );
-@@doc(
-  BackupShortTermRetentionPolicies.update::parameters.properties,
+@@doc(BackupShortTermRetentionPolicies.update::parameters.properties,
   "The short term retention policy info."
 );

@@ -22,7 +22,7 @@ model PolicySetDefinition
     Resource = PolicySetDefinition,
     KeyName = "policySetDefinitionName",
     SegmentName = "policySetDefinitions",
-    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
+    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
   >;
 }
 
@@ -43,7 +43,7 @@ alias PolicySetDefinitionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     policySetDefinitionName: string;
   }
 >;
@@ -64,7 +64,7 @@ alias PolicySetDefinitionTenantOps = Azure.ResourceManager.Legacy.ExtensionOpera
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     policySetDefinitionName: string;
   }
 >;
@@ -95,7 +95,7 @@ alias PolicySetDefinitionManagementGroupOps = Azure.ResourceManager.Legacy.Exten
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
+    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
     policySetDefinitionName: string;
   }
 >;
@@ -249,16 +249,13 @@ interface PolicySetDefinitions {
   >;
 }
 
-@@doc(
-  PolicySetDefinition.name,
+@@doc(PolicySetDefinition.name,
   "The name of the policy set definition to get."
 );
 @@doc(PolicySetDefinition.properties, "The policy set definition properties.");
-@@doc(
-  PolicySetDefinitions.createOrUpdate::parameters.resource,
+@@doc(PolicySetDefinitions.createOrUpdate::parameters.resource,
   "The policy set definition properties."
 );
-@@doc(
-  PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(PolicySetDefinitions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy set definition properties."
 );

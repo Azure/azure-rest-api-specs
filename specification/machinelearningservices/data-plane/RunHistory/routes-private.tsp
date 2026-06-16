@@ -16,7 +16,6 @@ namespace Microsoft.MachineLearningServices.RunHistory;
 interface DeleteConfiguration_Operations {
   /** Patch delete configuration. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing non-standard API."
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route("/history/v1.0/private/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/deleteConfiguration")
   @patch(#{ implicitOptionality: true })
   patchConfiguration is Operation<

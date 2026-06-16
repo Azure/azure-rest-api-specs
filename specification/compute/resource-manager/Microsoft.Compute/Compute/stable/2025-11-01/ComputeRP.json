@@ -40,13 +40,13 @@
   },
   "tags": [
     {
-      "name": "ComputeOperations"
+      "name": "Operations"
     },
     {
       "name": "VirtualMachineScaleSets"
     },
     {
-      "name": "VirtualMachineScaleSetRollingUpgrades"
+      "name": "RollingUpgradeStatusInfos"
     },
     {
       "name": "VirtualMachineScaleSetExtensions"
@@ -55,7 +55,7 @@
       "name": "VirtualMachineScaleSetLifeCycleHookEvents"
     },
     {
-      "name": "VirtualMachineScaleSetVMs"
+      "name": "VirtualMachineScaleSetVMS"
     },
     {
       "name": "VirtualMachineScaleSetVMExtensions"
@@ -65,9 +65,6 @@
     },
     {
       "name": "VirtualMachineExtensions"
-    },
-    {
-      "name": "VirtualMachineExtensionImages"
     },
     {
       "name": "AvailabilitySets"
@@ -82,10 +79,7 @@
       "name": "DedicatedHosts"
     },
     {
-      "name": "DedicatedHost"
-    },
-    {
-      "name": "SshPublicKeys"
+      "name": "SshPublicKeyResources"
     },
     {
       "name": "Images"
@@ -94,31 +88,19 @@
       "name": "RestorePointCollections"
     },
     {
+      "name": "RestorePoints"
+    },
+    {
       "name": "CapacityReservationGroups"
     },
     {
       "name": "CapacityReservations"
     },
     {
-      "name": "CapacityReservation"
-    },
-    {
       "name": "VirtualMachineRunCommands"
     },
     {
       "name": "VirtualMachineScaleSetVMRunCommands"
-    },
-    {
-      "name": "Usage"
-    },
-    {
-      "name": "VirtualMachineSizes"
-    },
-    {
-      "name": "VirtualMachineImages"
-    },
-    {
-      "name": "LogAnalytics"
     }
   ],
   "paths": {
@@ -126,7 +108,7 @@
       "get": {
         "operationId": "Operations_List",
         "tags": [
-          "ComputeOperations"
+          "Operations"
         ],
         "description": "List the operations for the provider",
         "parameters": [
@@ -388,9 +370,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers": {
       "get": {
         "operationId": "VirtualMachineImagesEdgeZone_ListPublishers",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image publishers for the specified Azure location and edge zone.",
         "parameters": [
           {
@@ -440,9 +419,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
       "get": {
         "operationId": "VirtualMachineImagesEdgeZone_ListOffers",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image offers for the specified location, edge zone and publisher.",
         "parameters": [
           {
@@ -499,9 +475,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
       "get": {
         "operationId": "VirtualMachineImagesEdgeZone_ListSkus",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.",
         "parameters": [
           {
@@ -565,9 +538,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
       "get": {
         "operationId": "VirtualMachineImagesEdgeZone_List",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.",
         "parameters": [
           {
@@ -660,9 +630,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
         "operationId": "VirtualMachineImagesEdgeZone_Get",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a virtual machine image in an edge zone.",
         "parameters": [
           {
@@ -737,9 +704,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/vmimages": {
       "get": {
         "operationId": "VirtualMachineImages_ListByEdgeZone",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of all virtual machine image versions for the specified edge zone",
         "parameters": [
           {
@@ -786,9 +750,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getRequestRateByInterval": {
       "post": {
         "operationId": "LogAnalytics_ExportRequestRateByInterval",
-        "tags": [
-          "LogAnalytics"
-        ],
         "description": "Export logs that show Api requests made by this subscription in the given time window to show throttling activities.",
         "parameters": [
           {
@@ -844,8 +805,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/LogAnalyticsOperationResult"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -853,9 +813,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/logAnalytics/apiAccess/getThrottledRequests": {
       "post": {
         "operationId": "LogAnalytics_ExportThrottledRequests",
-        "tags": [
-          "LogAnalytics"
-        ],
         "description": "Export logs that show total throttled Api requests for this subscription in the given time window.",
         "parameters": [
           {
@@ -911,8 +868,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/LogAnalyticsOperationResult"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -920,9 +876,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers": {
       "get": {
         "operationId": "VirtualMachineImages_ListPublishers",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image publishers for the specified Azure location.",
         "parameters": [
           {
@@ -965,9 +918,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types": {
       "get": {
         "operationId": "VirtualMachineExtensionImages_ListTypes",
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
         "description": "Gets a list of virtual machine extension image types.",
         "parameters": [
           {
@@ -1016,9 +966,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions": {
       "get": {
         "operationId": "VirtualMachineExtensionImages_ListVersions",
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
         "description": "Gets a list of virtual machine extension image versions.",
         "parameters": [
           {
@@ -1094,9 +1041,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}": {
       "get": {
         "operationId": "VirtualMachineExtensionImages_Get",
-        "tags": [
-          "VirtualMachineExtensionImages"
-        ],
         "description": "Gets a virtual machine extension image.",
         "parameters": [
           {
@@ -1155,9 +1099,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers": {
       "get": {
         "operationId": "VirtualMachineImages_ListOffers",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image offers for the specified location and publisher.",
         "parameters": [
           {
@@ -1207,9 +1148,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus": {
       "get": {
         "operationId": "VirtualMachineImages_ListSkus",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.",
         "parameters": [
           {
@@ -1266,9 +1204,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions": {
       "get": {
         "operationId": "VirtualMachineImages_List",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.",
         "parameters": [
           {
@@ -1352,9 +1287,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}": {
       "get": {
         "operationId": "VirtualMachineImages_Get",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "description": "Gets a virtual machine image.",
         "parameters": [
           {
@@ -1422,9 +1354,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands": {
       "get": {
         "operationId": "VirtualMachineRunCommands_List",
-        "tags": [
-          "VirtualMachineRunCommands"
-        ],
         "description": "Lists all available run commands for a subscription in a location.",
         "parameters": [
           {
@@ -1464,9 +1393,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}": {
       "get": {
         "operationId": "VirtualMachineRunCommands_Get",
-        "tags": [
-          "VirtualMachineRunCommands"
-        ],
         "description": "Gets specific run command for a subscription in a location.",
         "parameters": [
           {
@@ -1510,9 +1436,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/usages": {
       "get": {
         "operationId": "Usage_List",
-        "tags": [
-          "Usage"
-        ],
         "description": "Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.",
         "parameters": [
           {
@@ -1555,9 +1478,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachineScaleSets": {
       "get": {
         "operationId": "VirtualMachineScaleSets_ListByLocation",
-        "tags": [
-          "VirtualMachineScaleSets"
-        ],
         "description": "Gets all the VM scale sets under the specified subscription for the specified location.",
         "parameters": [
           {
@@ -1597,9 +1517,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines": {
       "get": {
         "operationId": "VirtualMachines_ListByLocation",
-        "tags": [
-          "VirtualMachines"
-        ],
         "description": "Gets all the virtual machines under the specified subscription for the specified location.",
         "parameters": [
           {
@@ -1639,9 +1556,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/vmSizes": {
       "get": {
         "operationId": "VirtualMachineSizes_List",
-        "tags": [
-          "VirtualMachineSizes"
-        ],
         "description": "This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)",
         "parameters": [
           {
@@ -1763,7 +1677,7 @@
       "get": {
         "operationId": "SshPublicKeys_ListBySubscription",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Lists all of the SSH public keys in the subscription. Use the nextLink property in the response to get the next page of SSH public keys.",
         "parameters": [
@@ -2749,7 +2663,7 @@
       "get": {
         "operationId": "CapacityReservations_ListByCapacityReservationGroup",
         "tags": [
-          "CapacityReservation"
+          "CapacityReservations"
         ],
         "description": "Lists all of the capacity reservations in the specified capacity reservation group. Use the nextLink property in the response to get the next page of capacity reservations.",
         "parameters": [
@@ -2945,7 +2859,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'CapacityReservation' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/CapacityReservation"
             }
@@ -2986,8 +2900,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CapacityReservation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3068,8 +2981,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CapacityReservation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3425,7 +3337,7 @@
       "get": {
         "operationId": "DedicatedHosts_ListByHostGroup",
         "tags": [
-          "DedicatedHost"
+          "DedicatedHosts"
         ],
         "description": "Lists all of the dedicated hosts in the specified dedicated host group. Use the nextLink property in the response to get the next page of dedicated hosts.",
         "parameters": [
@@ -3618,8 +3530,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/DedicatedHost"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3700,8 +3611,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/DedicatedHost"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -3782,7 +3692,7 @@
       "get": {
         "operationId": "DedicatedHosts_ListAvailableSizes",
         "tags": [
-          "DedicatedHost"
+          "DedicatedHosts"
         ],
         "description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.",
         "parameters": [
@@ -3838,7 +3748,7 @@
       "post": {
         "operationId": "DedicatedHosts_Redeploy",
         "tags": [
-          "DedicatedHost"
+          "DedicatedHosts"
         ],
         "description": "Redeploy the dedicated host. The operation will complete successfully once the dedicated host has migrated to a new node and is running. To determine the health of VMs deployed on the dedicated host after the redeploy check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.",
         "parameters": [
@@ -3903,7 +3813,7 @@
       "post": {
         "operationId": "DedicatedHosts_Restart",
         "tags": [
-          "DedicatedHost"
+          "DedicatedHosts"
         ],
         "description": "Restart the dedicated host. The operation will complete successfully once the dedicated host has restarted and is running. To determine the health of VMs deployed on the dedicated host after the restart check the Resource Health Center in the Azure Portal. Please refer to https://docs.microsoft.com/azure/service-health/resource-health-overview for more details.",
         "parameters": [
@@ -4155,8 +4065,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Image"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -4230,8 +4139,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/Image"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -4846,6 +4754,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/restorePointCollections/{restorePointCollectionName}/restorePoints/{restorePointName}": {
       "get": {
         "operationId": "RestorePoints_Get",
+        "tags": [
+          "RestorePoints"
+        ],
         "description": "The operation to get the restore point.",
         "parameters": [
           {
@@ -4917,6 +4828,9 @@
       },
       "put": {
         "operationId": "RestorePoints_Create",
+        "tags": [
+          "RestorePoints"
+        ],
         "description": "The operation to create the restore point. Updating properties of an existing restore point is not allowed",
         "parameters": [
           {
@@ -4986,13 +4900,15 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RestorePoint"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RestorePoints_Delete",
+        "tags": [
+          "RestorePoints"
+        ],
         "description": "The operation to delete the restore point.",
         "parameters": [
           {
@@ -5065,7 +4981,7 @@
       "get": {
         "operationId": "SshPublicKeys_ListByResourceGroup",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Lists all of the SSH public keys in the specified resource group. Use the nextLink property in the response to get the next page of SSH public keys.",
         "parameters": [
@@ -5110,7 +5026,7 @@
       "get": {
         "operationId": "SshPublicKeys_Get",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Retrieves information about an SSH public key.",
         "parameters": [
@@ -5154,7 +5070,7 @@
       "put": {
         "operationId": "SshPublicKeys_Create",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Creates a new SSH public key resource.",
         "parameters": [
@@ -5213,7 +5129,7 @@
       "patch": {
         "operationId": "SshPublicKeys_Update",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Updates a new SSH public key resource.",
         "parameters": [
@@ -5269,7 +5185,7 @@
       "delete": {
         "operationId": "SshPublicKeys_Delete",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Delete an SSH public key.",
         "parameters": [
@@ -5318,7 +5234,7 @@
       "post": {
         "operationId": "SshPublicKeys_GenerateKeyPair",
         "tags": [
-          "SshPublicKeys"
+          "SshPublicKeyResources"
         ],
         "description": "Generates and returns a public/private key pair and populates the SSH public key resource with the public key. The length of the key will be 3072 bits. This operation can only be performed once per SSH public key resource.",
         "parameters": [
@@ -5751,8 +5667,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSet"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -5839,8 +5754,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSet"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6200,7 +6114,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetRollingUpgrades_StartExtensionUpgrade",
         "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
+          "VirtualMachineScaleSets"
         ],
         "description": "Starts a rolling upgrade to move all extensions for all virtual machine scale set instances to the latest available extension version. Instances which are already running the latest extension versions are not affected.",
         "parameters": [
@@ -6451,8 +6365,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSetExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6536,8 +6449,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSetExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -6973,7 +6885,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetRollingUpgrades_StartOSUpgrade",
         "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
+          "VirtualMachineScaleSets"
         ],
         "description": "Starts a rolling upgrade to move all virtual machine scale set instances to the latest available Platform Image OS version. Instances which are already running the latest available OS version are not affected.",
         "parameters": [
@@ -7598,7 +7510,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetRollingUpgrades_Cancel",
         "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
+          "VirtualMachineScaleSets"
         ],
         "description": "Cancels the current virtual machine scale set rolling upgrade.",
         "parameters": [
@@ -7662,7 +7574,7 @@
       "get": {
         "operationId": "VirtualMachineScaleSetRollingUpgrades_GetLatest",
         "tags": [
-          "VirtualMachineScaleSetRollingUpgrades"
+          "RollingUpgradeStatusInfos"
         ],
         "description": "Gets the status of the latest virtual machine scale set rolling upgrade.",
         "parameters": [
@@ -7979,7 +7891,7 @@
       "get": {
         "operationId": "VirtualMachineScaleSetVMs_List",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Gets a list of all virtual machines in a VM scale sets.",
         "parameters": [
@@ -8058,7 +7970,7 @@
       "get": {
         "operationId": "VirtualMachineScaleSetVMs_Get",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Gets a virtual machine from a VM scale set.",
         "parameters": [
@@ -8134,7 +8046,7 @@
       "put": {
         "operationId": "VirtualMachineScaleSetVMs_Update",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Updates a virtual machine of a VM scale set.",
         "parameters": [
@@ -8227,15 +8139,14 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSetVM"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "VirtualMachineScaleSetVMs_Delete",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Deletes a virtual machine from a VM scale set.",
         "parameters": [
@@ -8313,7 +8224,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_ApproveRollingUpgrade",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Approve upgrade on deferred rolling upgrade for OS disk on a VM scale set instance.",
         "parameters": [
@@ -8378,7 +8289,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_AttachDetachDataDisks",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Attach and detach data disks to/from a virtual machine in a VM scale set.",
         "parameters": [
@@ -8452,8 +8363,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/StorageProfile"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -8462,7 +8372,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_Deallocate",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Deallocates a specific virtual machine in a VM scale set. Shuts down the virtual machine and releases the compute resources it uses. You are not billed for the compute resources of this virtual machine once it is deallocated.",
         "parameters": [
@@ -8739,8 +8649,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSetVMExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -8822,8 +8731,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineScaleSetVMExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -8908,7 +8816,7 @@
       "get": {
         "operationId": "VirtualMachineScaleSetVMs_GetInstanceView",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Gets the status of a virtual machine from a VM scale set.",
         "parameters": [
@@ -8961,7 +8869,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_PerformMaintenance",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Performs maintenance on a virtual machine in a VM scale set.",
         "parameters": [
@@ -9032,7 +8940,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_PowerOff",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Power off (stop) a virtual machine in a VM scale set. Note that resources are still attached and you are getting charged for the resources. Instead, use deallocate to release resources and avoid charges.",
         "parameters": [
@@ -9110,7 +9018,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
@@ -9181,7 +9089,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_Reimage",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Reimages (upgrade the operating system) a specific virtual machine in a VM scale set.",
         "parameters": [
@@ -9261,7 +9169,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_ReimageAll",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Allows you to re-image all the disks ( including data disks ) in the a VM scale set instance. This operation is only supported for managed disks.",
         "parameters": [
@@ -9332,7 +9240,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_Restart",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Restarts a virtual machine in a VM scale set.",
         "parameters": [
@@ -9403,7 +9311,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_RetrieveBootDiagnosticsData",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "The operation to retrieve SAS URIs of boot diagnostic logs for a virtual machine in a VM scale set.",
         "parameters": [
@@ -9464,7 +9372,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_RunCommand",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Run command on a virtual machine in a VM scale set.",
         "parameters": [
@@ -9535,8 +9443,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RunCommandResult"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -9754,8 +9661,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineRunCommand"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -9837,8 +9743,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineRunCommand"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -9923,7 +9828,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_SimulateEviction",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "The operation to simulate the eviction of spot virtual machine in a VM scale set.",
         "parameters": [
@@ -9973,7 +9878,7 @@
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_Start",
         "tags": [
-          "VirtualMachineScaleSetVMs"
+          "VirtualMachineScaleSetVMS"
         ],
         "description": "Starts a virtual machine in a VM scale set.",
         "parameters": [
@@ -10424,8 +10329,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachine"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -10512,8 +10416,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachine"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -10646,8 +10549,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineAssessPatchesResult"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -10723,8 +10625,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/StorageProfile"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -10800,8 +10701,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineCaptureResult"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -11149,8 +11049,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -11225,8 +11124,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineExtension"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -11414,8 +11312,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineInstallPatchesResult"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -12055,8 +11952,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/RunCommandResult"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -12253,8 +12149,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineRunCommand"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -12329,8 +12224,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/VirtualMachineRunCommand"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -12565,9 +12459,6 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=Properties": {
       "get": {
         "operationId": "VirtualMachineImages_ListWithProperties",
-        "tags": [
-          "VirtualMachineImages"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -20840,19 +20731,19 @@
       "type": "object",
       "description": "Describes a Virtual Machine Scale Set Extension.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Resource name"
+        "properties": {
+          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
+          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
+          "x-ms-client-flatten": true
         },
         "type": {
           "type": "string",
           "description": "Resource type",
           "readOnly": true
         },
-        "properties": {
-          "$ref": "#/definitions/VirtualMachineScaleSetExtensionProperties",
-          "description": "Describes the properties of a Virtual Machine Scale Set Extension.",
-          "x-ms-client-flatten": true
+        "name": {
+          "type": "string",
+          "description": "Resource name"
         }
       },
       "allOf": [

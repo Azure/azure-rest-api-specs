@@ -9,10 +9,10 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 /**
- * Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules
+ * Azure Resource Provider API for managing HorizonDb clusters, pools, replicas, and firewall rules
  */
 @armProviderNamespace
-@service(#{ title: "Microsoft HorizonDB Management API" })
+@service(#{ title: "Microsoft HorizonDb Management API" })
 @versioned(Versions)
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.HorizonDb;

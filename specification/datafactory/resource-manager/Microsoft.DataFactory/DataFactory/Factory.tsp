@@ -13,13 +13,16 @@ namespace Microsoft.DataFactory;
 /**
  * Factory resource type.
  */
-model Factory is Azure.ResourceManager.ProxyResource<FactoryProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Factory
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<FactoryProperties> {
   ...ResourceNameParameter<
     Resource = Factory,
     KeyName = "factoryName",
     SegmentName = "factories",
     NamePattern = "^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$"
   >;
+  ...Azure.ResourceManager.EntityTagProperty;
 
   /**
    * Managed service identity of the factory.
@@ -28,18 +31,6 @@ model Factory is Azure.ResourceManager.ProxyResource<FactoryProperties> {
   identity?: FactoryIdentity;
 
   ...Record<unknown>;
-
-  /** The resource location. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  /** The resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  ...Azure.ResourceManager.EntityTagProperty;
 }
 
 alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -59,7 +50,7 @@ alias PipelineRunsOps = Azure.ResourceManager.Legacy.RoutedOperations<
     factoryName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories",
   }
 >;
 
@@ -202,7 +193,7 @@ interface Factories {
    */
   @tag("pipelineruns")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}")
   pipelineRunsGet is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -221,7 +212,7 @@ interface Factories {
    * Cancel a pipeline run by its run ID.
    */
   @tag("pipelineruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/cancel")
   cancel is PipelineRunsOps.ActionSync<
     Factory,
     void,
@@ -246,7 +237,7 @@ interface Factories {
    * Query activity runs based on input filter conditions.
    */
   @tag("activityruns")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.DataFactory/factories/{factoryName}/pipelineruns/{runId}/queryActivityruns")
   queryByPipelineRun is PipelineRunsOps.ActionSync<
     Factory,
     RunFilterParameters,
@@ -366,56 +357,43 @@ interface Factories {
 @@minLength(Factory.name, 3);
 @@doc(Factory.name, "The factory name.");
 @@doc(Factory.properties, "Properties of the factory.");
-@@doc(
-  Factories.createOrUpdate::parameters.resource,
+@@doc(Factories.createOrUpdate::parameters.resource,
   "Factory resource definition."
 );
-@@doc(
-  Factories.update::parameters.properties,
+@@doc(Factories.update::parameters.properties,
   "The parameters for updating a factory."
 );
-@@doc(
-  Factories.getGitHubAccessToken::parameters.body,
+@@doc(Factories.getGitHubAccessToken::parameters.body,
   "Get GitHub access token request definition."
 );
-@@doc(
-  Factories.getDataPlaneAccess::parameters.body,
+@@doc(Factories.getDataPlaneAccess::parameters.body,
   "Data Plane user access policy definition."
 );
-@@doc(
-  Factories.getFeatureValueByFactory::parameters.body,
+@@doc(Factories.getFeatureValueByFactory::parameters.body,
   "The exposure control request."
 );
-@@doc(
-  Factories.queryFeatureValuesByFactory::parameters.body,
+@@doc(Factories.queryFeatureValuesByFactory::parameters.body,
   "The exposure control request for list of features."
 );
-@@doc(
-  Factories.queryByFactory::parameters.body,
+@@doc(Factories.queryByFactory::parameters.body,
   "Parameters to filter the pipeline run."
 );
-@@doc(
-  Factories.queryByPipelineRun::parameters.body,
+@@doc(Factories.queryByPipelineRun::parameters.body,
   "Parameters to filter the activity runs."
 );
-@@doc(
-  Factories.triggersQueryByFactory::parameters.body,
+@@doc(Factories.triggersQueryByFactory::parameters.body,
   "Parameters to filter the triggers."
 );
-@@doc(
-  Factories.triggerRunsQueryByFactory::parameters.body,
+@@doc(Factories.triggerRunsQueryByFactory::parameters.body,
   "Parameters to filter the pipeline run."
 );
 @@doc(Factories.create::parameters.body, "Data flow debug session definition");
-@@doc(
-  Factories.addDataFlow::parameters.body,
+@@doc(Factories.addDataFlow::parameters.body,
   "Data flow debug session definition with debug content."
 );
-@@doc(
-  Factories.dataFlowDebugSessionDelete::parameters.body,
+@@doc(Factories.dataFlowDebugSessionDelete::parameters.body,
   "Data flow debug session definition for deletion"
 );
-@@doc(
-  Factories.executeCommand::parameters.body,
+@@doc(Factories.executeCommand::parameters.body,
   "Data flow debug command definition."
 );

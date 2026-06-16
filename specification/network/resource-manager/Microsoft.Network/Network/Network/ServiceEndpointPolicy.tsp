@@ -56,10 +56,7 @@ interface ServiceEndpointPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceEndpointPolicy,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -78,15 +75,12 @@ interface ServiceEndpointPolicies {
 }
 
 @@doc(ServiceEndpointPolicy.name, "The name of the service endpoint policy.");
-@@doc(
-  ServiceEndpointPolicy.properties,
+@@doc(ServiceEndpointPolicy.properties,
   "Properties of the service end point policy."
 );
-@@doc(
-  ServiceEndpointPolicies.createOrUpdate::parameters.resource,
+@@doc(ServiceEndpointPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update service endpoint policy operation."
 );
-@@doc(
-  ServiceEndpointPolicies.updateTags::parameters.properties,
+@@doc(ServiceEndpointPolicies.updateTags::parameters.properties,
   "Parameters supplied to update service endpoint policy tags."
 );

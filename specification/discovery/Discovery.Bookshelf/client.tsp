@@ -14,8 +14,7 @@ using Azure.ClientGenerator.Core;
 
 // Shared types
 @@clientName(Microsoft.Discovery.Common.Tag, "DiscoveryTag", "csharp");
-@@clientName(
-  Microsoft.Discovery.Common.ProvisioningState,
+@@clientName(Microsoft.Discovery.Common.ProvisioningState,
   "DiscoveryProvisioningState",
   "csharp"
 );

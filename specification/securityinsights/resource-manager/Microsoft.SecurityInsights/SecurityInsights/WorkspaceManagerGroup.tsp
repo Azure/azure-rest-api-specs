@@ -88,7 +88,6 @@ interface WorkspaceManagerGroups {
 
 @@doc(WorkspaceManagerGroup.name, "The name of the workspace manager group");
 @@doc(WorkspaceManagerGroup.properties, "The workspace manager group object");
-@@doc(
-  WorkspaceManagerGroups.createOrUpdate::parameters.resource,
+@@doc(WorkspaceManagerGroups.createOrUpdate::parameters.resource,
   "The workspace manager group object"
 );

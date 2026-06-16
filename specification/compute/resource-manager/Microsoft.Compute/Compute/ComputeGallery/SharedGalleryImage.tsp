@@ -18,7 +18,7 @@ namespace ComputeGallery;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(SharedGallery)
 model SharedGalleryImage is ProxyResourceShared<SharedGalleryImageProperties> {
-  ...ResourceNameParameter<
+  ...Azure.ResourceManager.Legacy.ResourceNameParameter<
     Resource = SharedGalleryImage,
     KeyName = "galleryImageName",
     SegmentName = "images",
@@ -36,7 +36,7 @@ interface SharedGalleryImages {
   /**
    * List shared gallery images by subscription id or tenant id.
    */
-  list is ComputeResourceListByParent<
+  list is Azure.ResourceManager.Legacy.ComputeArmResourceListByParent<
     SharedGalleryImage,
     Parameters = {
       /**
@@ -49,11 +49,9 @@ interface SharedGalleryImages {
   >;
 }
 
-@@doc(
-  SharedGalleryImage.name,
+@@doc(SharedGalleryImage.name,
   "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
 );
-@@doc(
-  SharedGalleryImage.properties,
+@@doc(SharedGalleryImage.properties,
   "Describes the properties of a gallery image definition."
 );

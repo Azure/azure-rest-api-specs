@@ -1,6 +1,6 @@
 {
   "operationId": "HorizonDbClusters_CreateOrUpdate",
-  "title": "Create or update a HorizonDB cluster",
+  "title": "Create or update a HorizonDb cluster",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
@@ -13,12 +13,13 @@
       },
       "properties": {
         "createMode": "Create",
+        "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
         "version": "17",
         "administratorLogin": "exampleadministratorlogin",
         "administratorLoginPassword": "examplepassword",
         "vCores": 4,
         "replicaCount": 2,
-        "zonePlacementPolicy": "BestEffort"
+        "zonePlacementPolicy": "Strict"
       }
     }
   },
@@ -36,12 +37,13 @@
           "administratorLogin": "exampleadministratorlogin",
           "version": "17",
           "createMode": "Create",
+          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
           "vCores": 4,
           "replicaCount": 2,
-          "zonePlacementPolicy": "BestEffort",
+          "zonePlacementPolicy": "Strict",
           "state": "Ready",
-          "fullyQualifiedDomainName": "examplecluster.ffffffffffff.westus2.horizondb.azure.com",
-          "readonlyEndpoint": "examplecluster.ffffffffffff-ro.horizondb.azure.com",
+          "fullyQualifiedDomainName": "examplecluster.westus2.horizondb.azure.com",
+          "readonlyEndpoint": "examplecluster-ro.horizondb.azure.com",
           "provisioningState": "Succeeded"
         }
       }
@@ -59,9 +61,10 @@
           "administratorLogin": "exampleadministratorlogin",
           "version": "17",
           "createMode": "Create",
+          "sourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/examplesourceresourcegroup/providers/Microsoft.HorizonDb/clusters/examplesourcecluster",
           "vCores": 4,
           "replicaCount": 2,
-          "zonePlacementPolicy": "BestEffort",
+          "zonePlacementPolicy": "Strict",
           "provisioningState": "Provisioning"
         }
       }

@@ -47,9 +47,7 @@ interface CostAllocationRulesOperationGroup {
      */
     @bodyRoot
     body: CostAllocationRuleCheckNameAvailabilityRequest,
-  ):
-    | ArmResponse<CostAllocationRuleCheckNameAvailabilityResponse>
-    | ErrorResponse;
+  ): ArmResponse<CostAllocationRuleCheckNameAvailabilityResponse> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -316,10 +314,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | ArmResponse<BenefitUtilizationSummariesOperationStatus>
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): ArmResponse<BenefitUtilizationSummariesOperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided billing account and billing profile.
@@ -362,10 +357,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | ArmResponse<BenefitUtilizationSummariesOperationStatus>
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): ArmResponse<BenefitUtilizationSummariesOperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation order.
@@ -401,10 +393,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | BenefitUtilizationSummariesOperationStatus
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
 
   /**
    * Triggers generation of a benefit utilization summaries report for the provided reservation.
@@ -447,10 +436,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | BenefitUtilizationSummariesOperationStatus
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan order.
    */
@@ -485,10 +471,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | BenefitUtilizationSummariesOperationStatus
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
   /**
    * Triggers generation of a benefit utilization summaries report for the provided savings plan.
    */
@@ -530,10 +513,7 @@ interface GenerateBenefitUtilizationSummariesReportOperationGroup {
      */
     @body
     body: BenefitUtilizationSummariesRequest,
-  ):
-    | BenefitUtilizationSummariesOperationStatus
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): BenefitUtilizationSummariesOperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BenefitUtilizationSummariesOperationStatus>> | CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -597,16 +577,13 @@ interface GenerateDetailedCostReportOperationGroup {
      */
     @bodyRoot
     parameters: GenerateDetailedCostReportDefinition,
-  ):
-    | ArmResponse<GenerateDetailedCostReportOperationResult>
-    | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GenerateDetailedCostReportOperationResult>> & {
-        /**
-         * The URL to check the status of the asynchronous operation.
-         */
-        @header("Azure-Consumption-AsyncOperation")
-        azureConsumptionAsyncOperation: string;
-      })
-    | GenerateDetailedCostReportErrorResponse;
+  ): ArmResponse<GenerateDetailedCostReportOperationResult> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GenerateDetailedCostReportOperationResult>> & {
+    /**
+     * The URL to check the status of the asynchronous operation.
+     */
+    @header("Azure-Consumption-AsyncOperation")
+    azureConsumptionAsyncOperation: string;
+  }) | GenerateDetailedCostReportErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -911,10 +888,7 @@ interface GenerateReservationDetailsReportOperationGroup {
      */
     @query("endDate")
     endDate: string,
-  ):
-    | ArmResponse<OperationStatus>
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
-    | ErrorResponse;
+  ): ArmResponse<OperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | ErrorResponse;
   /**
    * Generates the reservations details report for provided date range asynchronously by billing profile. The Reservation usage details can be viewed by only certain enterprise roles by default. For more details on the roles see, https://docs.microsoft.com/en-us/azure/cost-management-billing/reservations/reservation-utilization#view-utilization-in-the-azure-portal-with-azure-rbac-access
    */
@@ -961,10 +935,7 @@ interface GenerateReservationDetailsReportOperationGroup {
      */
     @query("endDate")
     endDate: string,
-  ):
-    | ArmResponse<OperationStatus>
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
-    | ErrorResponse;
+  ): ArmResponse<OperationStatus> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1012,16 +983,13 @@ interface PriceSheetOperationGroup {
     invoiceName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ):
-    | DownloadURL
-    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DownloadURL>> & {
-        /**
-         * The operation entity Id GUID.
-         */
-        @header("OData-EntityId")
-        odataEntityId: string;
-      })
-    | ErrorResponse;
+  ): DownloadURL | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DownloadURL>> & {
+    /**
+     * The operation entity Id GUID.
+     */
+    @header("OData-EntityId")
+    odataEntityId: string;
+  }) | ErrorResponse;
   /**
    * Gets a URL to download the current month's pricesheet for a billing profile. The operation is supported for billing accounts with agreement type Microsoft Partner Agreement or Microsoft Customer Agreement.
    *
@@ -1061,16 +1029,13 @@ interface PriceSheetOperationGroup {
     billingProfileName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ):
-    | PricesheetDownloadProperties
-    | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PricesheetDownloadProperties>> & {
-        /**
-         * The operation entity Id GUID.
-         */
-        @header("OData-EntityId")
-        odataEntityId: string;
-      })
-    | ErrorResponse;
+  ): PricesheetDownloadProperties | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PricesheetDownloadProperties>> & {
+    /**
+     * The operation entity Id GUID.
+     */
+    @header("OData-EntityId")
+    odataEntityId: string;
+  }) | ErrorResponse;
 
   /**
    * Generates the pricesheet for the provided billing period asynchronously based on the Enrollment ID. This is for Enterprise Agreement customers.
@@ -1120,10 +1085,7 @@ interface PriceSheetOperationGroup {
     billingPeriodName: string,
 
     ...Azure.ResourceManager.Legacy.Provider,
-  ):
-    | OperationStatus
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>>
-    | CommonTypes.ErrorResponse;
+  ): OperationStatus | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatus>> | CommonTypes.ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1160,9 +1122,7 @@ interface ScheduledActionsOperationGroup {
      */
     @bodyRoot
     checkNameAvailabilityRequest: Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse>
-    | ErrorResponseWithNestedDetails;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse> | ErrorResponseWithNestedDetails;
 }
 
 @armResourceOperations
@@ -1191,8 +1151,5 @@ interface GenerateCostDetailsReport {
     @path
     @segment("costDetailsOperationResults")
     operationId: string,
-  ):
-    | ArmResponse<CostDetailsOperationResults>
-    | ArmAcceptedResponse
-    | ErrorResponse;
+  ): ArmResponse<CostDetailsOperationResults> | ArmAcceptedResponse | ErrorResponse;
 }

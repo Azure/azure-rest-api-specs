@@ -21,8 +21,6 @@ interface ResourceSkus {
   @action("skus")
   @autoRoute
   @list
-  @tag("Skus")
-  @tag("AvailabilitySets")
   list is ArmProviderActionSync<
     Response = ResourceSkusResult,
     Scope = SubscriptionActionScope,

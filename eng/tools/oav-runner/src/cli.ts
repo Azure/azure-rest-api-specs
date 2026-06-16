@@ -4,13 +4,13 @@ import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
-  type ReportableOavError,
-} from "./formatting.ts";
-import { checkExamples, checkSpecs } from "./runner.ts";
+  ReportableOavError,
+} from "./formatting.js";
+import { checkExamples, checkSpecs } from "./runner.js";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
-import { parseArgs, type ParseArgsConfig } from "node:util";
+import { parseArgs, ParseArgsConfig } from "node:util";
 import { resolve } from "path";
 
 export async function main() {

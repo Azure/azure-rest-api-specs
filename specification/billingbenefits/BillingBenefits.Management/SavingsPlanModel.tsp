@@ -56,10 +56,7 @@ interface SavingsPlanModels {
   update is ArmCustomPatchAsync<
     SavingsPlanModel,
     PatchModel = SavingsPlanUpdateRequest,
-    Response =
-      | ArmResponse<SavingsPlanModel>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SavingsPlanModel>>
-      | ArmNotFoundResponse
+    Response = ArmResponse<SavingsPlanModel> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SavingsPlanModel>> | ArmNotFoundResponse
   >;
 
   /**
@@ -83,17 +80,14 @@ interface SavingsPlanModels {
 
 @@doc(SavingsPlanModel.name, "ID of the savings plan");
 @@doc(SavingsPlanModel.properties, "Savings plan properties");
-@@doc(
-  SavingsPlanModels.update::parameters.properties,
+@@doc(SavingsPlanModels.update::parameters.properties,
   "Request body for patching a savings plan order alias"
 );
-@@doc(
-  SavingsPlanModels.validateUpdate::parameters.body,
+@@doc(SavingsPlanModels.validateUpdate::parameters.body,
   "Request body for validating a savings plan patch request"
 );
 
-@@clientInitialization(
-  Microsoft.BillingBenefits,
+@@clientInitialization(Microsoft.BillingBenefits,
   {
     parameters: ExpandParameter,
   },

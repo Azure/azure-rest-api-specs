@@ -87,7 +87,6 @@ interface LinkedServiceResources {
 @@minLength(LinkedServiceResource.name, 1);
 @@doc(LinkedServiceResource.name, "The linked service name.");
 @@doc(LinkedServiceResource.properties, "Properties of linked service.");
-@@doc(
-  LinkedServiceResources.createOrUpdate::parameters.resource,
+@@doc(LinkedServiceResources.createOrUpdate::parameters.resource,
   "Linked service resource definition."
 );

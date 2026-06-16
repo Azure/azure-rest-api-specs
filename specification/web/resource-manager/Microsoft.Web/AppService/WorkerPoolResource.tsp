@@ -122,12 +122,10 @@ interface WorkerPoolResources {
   @summary("Create or update a multi-role pool.")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response =
-      | ArmResourceUpdatedResponse<WorkerPoolResource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-          @bodyRoot
-          _: WorkerPoolResource;
-        }),
+    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+      @bodyRoot
+      _: WorkerPoolResource;
+    }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -141,12 +139,10 @@ interface WorkerPoolResources {
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response =
-      | ArmResponse<WorkerPoolResource>
-      | (AcceptedResponse & {
-          @bodyRoot
-          _: WorkerPoolResource;
-        }),
+    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
+      @bodyRoot
+      _: WorkerPoolResource;
+    }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -267,12 +263,10 @@ interface AppServiceEnvironments {
   @summary("Create or update a worker pool.")
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
-    Response =
-      | ArmResourceUpdatedResponse<WorkerPoolResource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
-          @bodyRoot
-          _: WorkerPoolResource;
-        }),
+    Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WorkerPoolResource>> & {
+      @bodyRoot
+      _: WorkerPoolResource;
+    }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -286,12 +280,10 @@ interface AppServiceEnvironments {
   updateWorkerPool is AppServiceEnvironmentOps.CustomPatchSync<
     WorkerPoolResource,
     PatchModel = WorkerPoolResource,
-    Response =
-      | ArmResponse<WorkerPoolResource>
-      | (AcceptedResponse & {
-          @bodyRoot
-          _: WorkerPoolResource;
-        }),
+    Response = ArmResponse<WorkerPoolResource> | (AcceptedResponse & {
+      @bodyRoot
+      _: WorkerPoolResource;
+    }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -373,19 +365,15 @@ interface AppServiceEnvironments {
 
 @@doc(WorkerPoolResource.name, "");
 @@doc(WorkerPoolResource.properties, "Core resource properties");
-@@doc(
-  WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
+@@doc(WorkerPoolResources.createOrUpdateMultiRolePool::parameters.resource,
   "Properties of the multi-role pool."
 );
-@@doc(
-  WorkerPoolResources.updateMultiRolePool::parameters.properties,
+@@doc(WorkerPoolResources.updateMultiRolePool::parameters.properties,
   "Properties of the multi-role pool."
 );
-@@doc(
-  AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
+@@doc(AppServiceEnvironments.createOrUpdateWorkerPool::parameters.resource,
   "Properties of the worker pool."
 );
-@@doc(
-  AppServiceEnvironments.updateWorkerPool::parameters.properties,
+@@doc(AppServiceEnvironments.updateWorkerPool::parameters.properties,
   "Properties of the worker pool."
 );

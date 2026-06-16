@@ -165,14 +165,11 @@ interface BackupPolicies {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     BackupPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<BackupPolicy>
-      | ArmResourceCreatedResponse<
-          BackupPolicy,
-          ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<BackupPolicy> | ArmResourceCreatedResponse<
+      BackupPolicy,
+      ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -184,13 +181,11 @@ interface BackupPolicies {
   update is ArmCustomPatchAsync<
     BackupPolicy,
     PatchModel = BackupPolicyPatch,
-    Response =
-      | ArmResponse<BackupPolicy>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: BackupPolicy;
-        })
+    Response = ArmResponse<BackupPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = BackupPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: BackupPolicy;
+    })
   >;
 
   /**
@@ -199,10 +194,7 @@ interface BackupPolicies {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     BackupPolicy,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -214,16 +206,13 @@ interface BackupPolicies {
   >;
 }
 
-@@doc(
-  BackupPolicy.name,
+@@doc(BackupPolicy.name,
   "Backup policy Name which uniquely identify backup policy."
 );
 @@doc(BackupPolicy.properties, "Backup policy Properties");
-@@doc(
-  BackupPolicies.create::parameters.resource,
+@@doc(BackupPolicies.create::parameters.resource,
   "Backup policy object supplied in the body of the operation."
 );
-@@doc(
-  BackupPolicies.update::parameters.properties,
+@@doc(BackupPolicies.update::parameters.properties,
   "Backup policy object supplied in the body of the operation."
 );

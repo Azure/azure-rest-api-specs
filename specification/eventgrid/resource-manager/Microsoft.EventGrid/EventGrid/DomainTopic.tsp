@@ -55,10 +55,7 @@ interface DomainTopics {
   @summary("Delete a domain topic.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainTopic,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

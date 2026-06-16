@@ -44,11 +44,9 @@ interface ComputeDiagnosticBases {
 }
 
 @@doc(ComputeDiagnosticBase.name, "");
-@@doc(
-  ComputeDiagnosticBase.properties,
+@@doc(ComputeDiagnosticBase.properties,
   "Contains additional properties of a diagnostic"
 );
-@@doc(
-  ComputeDiagnosticBases.post::parameters.body,
+@@doc(ComputeDiagnosticBases.post::parameters.body,
   "SpotPlacementScores object supplied in the body of the Post spot placement scores operation."
 );

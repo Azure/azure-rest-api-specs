@@ -31,11 +31,8 @@ interface PrivateEndpointConnections {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is PrivateEndpointOperations.CreateOrUpdateAsync<
     Server,
-    Response =
-      | ArmResourceUpdatedResponse<PrivateEndpointConnection>
-      | ArmResourceCreatedResponse<PrivateEndpointConnection>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<PrivateEndpointConnection> | ArmResourceCreatedResponse<PrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -44,10 +41,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Fixme: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is PrivateEndpointOperations.DeleteAsync<
     Server,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

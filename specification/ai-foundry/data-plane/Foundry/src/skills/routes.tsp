@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -13,9 +13,8 @@ alias SkillsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptI
 @tag("Skills")
 interface Skills {
   /**
-   * Retrieves the specified skill and its current configuration.
+   * Retrieves a skill.
    */
-  @summary("Retrieve a skill")
   @get
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -25,9 +24,8 @@ interface Skills {
   >;
 
   /**
-   * Returns the skills available in the current project.
+   * Returns the list of all skills.
    */
-  @summary("List skills")
   @route("/skills")
   @list
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -37,10 +35,9 @@ interface Skills {
   >;
 
   /**
-   * Modifies the specified skill's configuration.
+   * Update a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Update a skill")
   @operationId("updateSkill")
   @post
   @route("/skills/{name}")
@@ -51,10 +48,9 @@ interface Skills {
   >;
 
   /**
-   * Removes the specified skill and its associated versions.
+   * Deletes a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
-  @summary("Delete a skill")
   @delete
   @route("/skills/{name}")
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
@@ -69,17 +65,11 @@ interface Skills {
    * Creates a new version of a skill. If the skill does not exist, it will be created.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Create a new version of a skill")
   @operationId("createSkillVersion")
   @post
   @route("/skills/{name}/versions")
   @sharedRoute
   @extension("x-ms-foundry-meta", SkillsRequiredPreviews)
-  @extension("x-ms-summary-override", "Create a new version of a skill")
-  @extension(
-    "x-ms-description-override",
-    "Creates a new version of a skill. If the skill does not exist, it will be created."
-  )
   createSkillVersion is FoundryDataPlaneOperation<
     CreateSkillVersionRequest & SkillsPreviewHeader,
     SkillVersion
@@ -90,7 +80,6 @@ interface Skills {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
   #suppress "@azure-tools/typespec-azure-core/byos" "Skill file upload uses multipart form data"
-  @summary("Create a skill version from uploaded files")
   @operationId("createSkillVersionFromFiles")
   @post
   @route("/skills/{name}/versions")
@@ -109,10 +98,9 @@ interface Skills {
   >;
 
   /**
-   * Returns the available versions for the specified skill.
+   * List all versions of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("List skill versions")
   @operationId("listSkillVersions")
   @get
   @list
@@ -124,10 +112,9 @@ interface Skills {
   >;
 
   /**
-   * Retrieves the specified version of a skill by name and version identifier.
+   * Retrieve a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Retrieve a specific version of a skill")
   @operationId("getSkillVersion")
   @get
   @route("/skills/{name}/versions/{version}")
@@ -138,10 +125,9 @@ interface Skills {
   >;
 
   /**
-   * Downloads the zip content for the default version of a skill.
+   * Download the zip content for the default version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Download the zip content for the default version of a skill")
   @operationId("getSkillContent")
   @get
   @route("/skills/{name}/content")
@@ -152,10 +138,9 @@ interface Skills {
   >;
 
   /**
-   * Downloads the zip content for a specific version of a skill.
+   * Download the zip content for a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Download the zip content for a specific version of a skill")
   @operationId("getSkillVersionContent")
   @get
   @route("/skills/{name}/versions/{version}/content")
@@ -166,10 +151,9 @@ interface Skills {
   >;
 
   /**
-   * Removes the specified version of a skill.
+   * Delete a specific version of a skill.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" ""
-  @summary("Delete a specific version of a skill")
   @operationId("deleteSkillVersion")
   @delete
   @route("/skills/{name}/versions/{version}")

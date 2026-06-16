@@ -7,86 +7,70 @@ using Http;
 using Azure.ResourceManager;
 
 // Java-specific compatibility customizations generated per TypeSpec migration guidance.
-@@clientName(
-  Microsoft.ApiManagement.PreferredIPVersion,
+@@clientName(Microsoft.ApiManagement.PreferredIPVersion,
   "PreferredIpVersion",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.TagTagResourceContractProperties,
+@@clientName(Microsoft.ApiManagement.TagTagResourceContractProperties,
   "TagResourceContractProperties",
-  "java,python,javascript"
+  "java,python"
 );
-@@clientName(
-  Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
+@@clientName(Microsoft.ApiManagement.ConnectivityCheckRequest.preferredIPVersion,
   "preferredIpVersion",
   "java"
 );
 
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementSkuCosts.meterID,
+@@clientName(Microsoft.ApiManagement.ApiManagementSkuCosts.meterID,
   "meterId",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.KeyVaultLastAccessStatusContractProperties.timeStampUtc,
+@@clientName(Microsoft.ApiManagement.KeyVaultLastAccessStatusContractProperties.timeStampUtc,
   "timestampUtc",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.publicIPAddresses,
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.privateIPAddresses,
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.privateIPAddresses,
   "privateIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.ApiManagementServiceBaseProperties.outboundPublicIPAddresses,
+@@clientName(Microsoft.ApiManagement.ApiManagementServiceBaseProperties.outboundPublicIPAddresses,
   "outboundPublicIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.publicIPAddresses,
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.publicIPAddresses,
   "publicIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.privateIPAddresses,
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.privateIPAddresses,
   "privateIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.AdditionalLocation.outboundPublicIPAddresses,
+@@clientName(Microsoft.ApiManagement.AdditionalLocation.outboundPublicIPAddresses,
   "outboundPublicIpAddresses",
   "java"
 );
-@@clientName(
-  Microsoft.ApiManagement.HostnameConfiguration.hostName,
+@@clientName(Microsoft.ApiManagement.HostnameConfiguration.hostName,
   "hostname",
   "java"
 );
 
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.get,
+@@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.get,
   "ApiManagementWorkspaceLinkOperations",
   "java"
 );
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
+@@clientLocation(Microsoft.ApiManagement.ApiManagementWorkspaceLinksResources.listByService,
   "ApiManagementWorkspaceLinks",
   "java"
 );
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "ResourceProviders",
   "java"
 );
 
-@@clientName(
-  CommonTypes.PrivateEndpointConnection,
+@@clientName(CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "java"
 );
@@ -108,13 +92,11 @@ using Azure.ResourceManager;
 
 @@clientName(Microsoft.ApiManagement, "ApiManagementClient", "python");
 @@clientName(HttpCorrelationProtocol.W3C, "W3_C", "python");
-@@clientLocation(
-  ApiManagementServiceResources.performConnectivityCheckAsync,
+@@clientLocation(ApiManagementServiceResources.performConnectivityCheckAsync,
   Microsoft.ApiManagement,
   "python"
 );
-@@clientName(
-  CommonTypes.PrivateEndpointConnection,
+@@clientName(CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python,go"
 );
@@ -130,14 +112,11 @@ op replaceGetByName(
   ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
   location: Azure.Core.azureLocation,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract>
-  | Azure.ResourceManager.CommonTypes.ErrorResponse;
+): Azure.ResourceManager.ArmResponse<Microsoft.ApiManagement.DeletedServiceContract> | Azure.ResourceManager.CommonTypes.ErrorResponse;
 
-@@override(
-  DeletedServiceContracts.getByName,
+@@override(DeletedServiceContracts.getByName,
   replaceGetByName,
-  "go,java,python,javascript"
+  "go,java,python"
 );
 
 /**
@@ -151,23 +130,15 @@ op replacePurge(
   ...Azure.ResourceManager.Legacy.Provider,
   serviceName: string,
   location: Azure.Core.azureLocation,
-):
-  | ArmDeletedResponse
-  | (ArmDeleteAcceptedLroResponse & {
-      @bodyRoot
-      _: DeletedServiceContract;
-    })
-  | ArmDeletedNoContentResponse;
+): ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+  @bodyRoot
+  _: DeletedServiceContract;
+}) | ArmDeletedNoContentResponse;
 
-@@override(
-  DeletedServiceContracts.purge,
-  replacePurge,
-  "go,java,python,javascript"
-);
+@@override(DeletedServiceContracts.purge, replacePurge, "go,java,python");
 
 // Mitigate model rename: ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration -> ...HttpConfiguration
-@@clientName(
-  ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
+@@clientName(ConnectivityCheckRequestProtocolConfigurationHttpConfiguration,
   "ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration",
   "python"
 );
@@ -175,19 +146,16 @@ op replacePurge(
 // Mitigate property rename: eTag -> e_tag (should stay as etag)
 @@clientName(GatewayHostnameBindingResource.eTag, "etag", "python");
 
-@@clientName(
-  TagTagResourceContractProperties,
+@@clientName(TagTagResourceContractProperties,
   "TagResourceContractProperties",
   "go"
 );
-@@clientLocation(
-  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
+@@clientLocation(Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "Client",
   "go"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
-  PolicyGetParameters.format,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(PolicyGetParameters.format,
   "xml",
   "javascript"
 );

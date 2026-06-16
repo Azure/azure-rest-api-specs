@@ -66,7 +66,6 @@ import "./NetworkManagerRoutingConfiguration.tsp";
 import "./RoutingRuleCollection.tsp";
 import "./RoutingRule.tsp";
 import "./ScopeConnection.tsp";
-import "./Commit.tsp";
 import "./SecurityAdminConfiguration.tsp";
 import "./AdminRuleCollection.tsp";
 import "./BaseAdminRule.tsp";
@@ -130,12 +129,10 @@ import "./BgpConnection.tsp";
 import "./HubIpConfiguration.tsp";
 import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
-import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
-import "./InterconnectGroup.tsp";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
@@ -164,12 +161,6 @@ enum Versions {
    */
   @useDependency(Common.Versions.v2025_05_01)
   v2025_05_01: "2025-05-01",
-
-  /**
-   * The 2025-07-01 API version.
-   */
-  @useDependency(Common.Versions.v2025_07_01)
-  v2025_07_01: "2025-07-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -181,11 +172,9 @@ interface Operations
       CloudError
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available Network Rest API operations."
 );
-@@armResourceOperations(
-  Azure.ResourceManager.Legacy.Operations,
+@@armResourceOperations(Azure.ResourceManager.Legacy.Operations,
   #{ omitTags: true }
 );

@@ -1,0 +1,62 @@
+{
+  "title": "Get list of Numbers on an Account.",
+  "operationId": "Accounts_ListNumbers",
+  "parameters": {
+    "api-version": "2024-02-29-preview",
+    "accountName": "contoso",
+    "countRecords": true
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "telephoneNumber": "+15105850321",
+            "accountName": "contoso",
+            "serviceDetails": {
+              "teamsOperatorConnect": {
+                "enabled": true,
+                "assignmentStatus": "assigned",
+                "configuration": {
+                  "usage": "CallingUserAssignment",
+                  "choosableCapabilities": [
+                    "InboundCalling"
+                  ]
+                }
+              }
+            },
+            "configuration": {
+              "customSipHeader": "contoso-commsgw"
+            },
+            "serviceProvisioningStatus": "synced",
+            "serviceProvisioningErrors": []
+          },
+          {
+            "telephoneNumber": "+15105850322",
+            "accountName": "contoso",
+            "serviceDetails": {
+              "teamsOperatorConnect": {
+                "enabled": true,
+                "assignmentStatus": "assigned",
+                "configuration": {
+                  "usage": "CallingUserAssignment",
+                  "choosableCapabilities": [
+                    "InboundCalling"
+                  ]
+                }
+              }
+            },
+            "configuration": {
+              "customSipHeader": "contoso-commsgw"
+            },
+            "serviceProvisioningStatus": "synced",
+            "serviceProvisioningErrors": []
+          }
+        ]
+      },
+      "headers": {
+        "x-ms-record-count": 2
+      }
+    }
+  }
+}

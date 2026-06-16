@@ -9,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -119,7 +118,6 @@ alias FunctionExtensionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   ErrorType = DefaultErrorResponse
 >;
 
-@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface FunctionsExtension {
   /**

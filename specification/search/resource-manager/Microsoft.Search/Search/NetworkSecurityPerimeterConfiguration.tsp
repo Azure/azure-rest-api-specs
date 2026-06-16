@@ -82,7 +82,6 @@ interface NetworkSecurityPerimeterConfigurations {
   >;
 }
 
-@@doc(
-  NetworkSecurityPerimeterConfiguration.properties,
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Network security configuration properties."
 );

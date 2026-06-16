@@ -121,7 +121,6 @@ interface ConnectorResources {
 
 @@doc(ConnectorResource.name, "Confluent connector name");
 @@doc(ConnectorResource.properties, "The properties of the Connector");
-@@doc(
-  ConnectorResources.createOrUpdate::parameters.resource,
+@@doc(ConnectorResources.createOrUpdate::parameters.resource,
   "Confluent Connector resource model"
 );

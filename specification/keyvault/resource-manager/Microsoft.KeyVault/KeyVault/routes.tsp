@@ -104,7 +104,6 @@ interface ManagedHsmsOperationGroup {
   >;
 }
 
-@@doc(
-  VaultsOperationGroup.checkNameAvailability::parameters.body,
+@@doc(VaultsOperationGroup.checkNameAvailability::parameters.body,
   "The name of the vault."
 );

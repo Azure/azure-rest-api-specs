@@ -37,7 +37,7 @@ interface AuthorizationAccessPolicyContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -54,21 +54,19 @@ interface AuthorizationAccessPolicyContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<AuthorizationAccessPolicyContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<AuthorizationAccessPolicyContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<AuthorizationAccessPolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<AuthorizationAccessPolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -118,15 +116,12 @@ interface AuthorizationAccessPolicyContracts {
 
 @@maxLength(AuthorizationAccessPolicyContract.name, 256);
 @@minLength(AuthorizationAccessPolicyContract.name, 1);
-@@doc(
-  AuthorizationAccessPolicyContract.name,
+@@doc(AuthorizationAccessPolicyContract.name,
   "Identifier of the authorization access policy."
 );
-@@doc(
-  AuthorizationAccessPolicyContract.properties,
+@@doc(AuthorizationAccessPolicyContract.properties,
   "Properties of the Authorization Contract."
 );
-@@doc(
-  AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
+@@doc(AuthorizationAccessPolicyContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

@@ -3,19 +3,20 @@ import "../models/common.tsp";
 import "../models/NetworkToNetworkInterconnect.tsp";
 
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
 
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network To Network Interconnect resource definition.")
+@Azure.ResourceManager.Private.armResourceInternal(L2IsolationDomainProperties)
 @parentResource(NetworkFabric)
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkToNetworkInterconnect
-  is Azure.ResourceManager.ProxyResource<
-    NetworkToNetworkInterconnectProperties,
-    false
-  > {
+  extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the Network to Network Interconnect.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -23,12 +24,12 @@ model NetworkToNetworkInterconnect
   @segment("networkToNetworkInterconnects")
   @visibility(Lifecycle.Read)
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkToNetworkInterconnect Properties")
+  properties: NetworkToNetworkInterconnectProperties;
 }
 
-@@doc(
-  NetworkToNetworkInterconnect.properties,
-  "The NetworkToNetworkInterconnect Properties"
-);
 @armResourceOperations
 interface NetworkToNetworkInterconnects {
   @doc("Implements NetworkToNetworkInterconnects GET method.")
@@ -121,35 +122,27 @@ interface NetworkToNetworkInterconnects {
   >;
 }
 
-@@doc(
-  NetworkToNetworkInterconnects.create::parameters.resource,
+@@doc(NetworkToNetworkInterconnects.create::parameters.resource,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.update::parameters.properties,
+@@doc(NetworkToNetworkInterconnects.update::parameters.properties,
   "Network to Network Interconnect properties to update."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateBfdAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );

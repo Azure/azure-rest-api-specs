@@ -2,20 +2,17 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB Throughputpool.
  */
-@added(Versions.v2026_04_01_preview)
 model ThroughputPoolResource
   is Azure.ResourceManager.TrackedResource<ThroughputPoolProperties> {
   ...ResourceNameParameter<
@@ -26,7 +23,6 @@ model ThroughputPoolResource
   >;
 }
 
-@added(Versions.v2026_04_01_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ThroughputPoolResources {
   /**
@@ -57,9 +53,7 @@ interface ThroughputPoolResources {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolResource,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -83,15 +77,12 @@ interface ThroughputPoolResources {
 @@maxLength(ThroughputPoolResource.name, 50);
 @@minLength(ThroughputPoolResource.name, 3);
 @@doc(ThroughputPoolResource.name, "Cosmos DB Throughput Pool name.");
-@@doc(
-  ThroughputPoolResource.properties,
+@@doc(ThroughputPoolResource.properties,
   "Properties to update Azure Cosmos DB throughput pool."
 );
-@@doc(
-  ThroughputPoolResources.createOrUpdate::parameters.resource,
+@@doc(ThroughputPoolResources.createOrUpdate::parameters.resource,
   "The parameters to provide for the current ThroughputPool."
 );
-@@doc(
-  ThroughputPoolResources.update::parameters.properties,
+@@doc(ThroughputPoolResources.update::parameters.properties,
   "The parameters to provide for the current Throughput Pool."
 );

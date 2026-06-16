@@ -1,12 +1,12 @@
 import { describe, expect, test } from "vitest";
 import {
-  type AzsdkBuildResponse,
-  type AzsdkGenerateResponse,
-  type AzsdkPackResponse,
+  AzsdkBuildResponse,
+  AzsdkGenerateResponse,
+  AzsdkPackResponse,
   buildExecutionReport,
   parseAzsdkResponse,
-} from "../src/azsdk-adapter.ts";
-import { type EmitterCheckResult } from "../src/emitter-check.ts";
+} from "../src/azsdk-adapter.js";
+import { EmitterCheckResult } from "../src/emitter-check.js";
 
 describe("parseAzsdkResponse", () => {
   test("parses JSON from clean output", () => {

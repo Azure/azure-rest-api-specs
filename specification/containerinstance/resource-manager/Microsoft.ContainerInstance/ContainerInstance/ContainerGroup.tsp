@@ -76,11 +76,8 @@ interface ContainerGroups {
   @summary("Delete the specified container group.")
   delete is ArmResourceDeleteAsyncBase<
     ContainerGroup,
-
-      | ArmResponse<ContainerGroup>
-      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = ContainerGroup> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
+    ArmResponse<ContainerGroup> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = ContainerGroup> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -212,15 +209,12 @@ interface ContainerGroups {
 }
 
 @@doc(ContainerGroup.name, "The name of the container group.");
-@@doc(
-  ContainerGroups.createOrUpdate::parameters.resource,
+@@doc(ContainerGroups.createOrUpdate::parameters.resource,
   "The properties of the container group to be created or updated."
 );
-@@doc(
-  ContainerGroups.update::parameters.properties,
+@@doc(ContainerGroups.update::parameters.properties,
   "The container group resource with just the tags to be updated."
 );
-@@doc(
-  ContainerGroups.executeCommand::parameters.body,
+@@doc(ContainerGroups.executeCommand::parameters.body,
   "The request for the exec command."
 );

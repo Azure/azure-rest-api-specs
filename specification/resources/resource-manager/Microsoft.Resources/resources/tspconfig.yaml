@@ -14,7 +14,6 @@ options:
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource"
     namespace: "azure.mgmt.resource.resources"
-    package-name: "azure-mgmt-resource"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -28,7 +27,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-resources"
     flavor: azure
     compatibility-lro: true
-    treat-unknown-as-record: true
+    head-as-boolean: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-resources"

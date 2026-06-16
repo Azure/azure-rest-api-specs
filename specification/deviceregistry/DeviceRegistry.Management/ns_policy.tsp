@@ -169,7 +169,6 @@ interface Policies {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @sharedRoute
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
@@ -206,7 +205,6 @@ interface PoliciesV1 {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @sharedRoute
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<

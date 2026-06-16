@@ -2,15 +2,18 @@ import "../models/common.tsp";
 import "./L3IsolationDomain.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the External Network resource.")
 @parentResource(L3IsolationDomain)
-model ExternalNetwork
-  is Azure.ResourceManager.ProxyResource<ExternalNetworkProperties, false> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Private.armResourceInternal(ExternalNetworkProperties)
+model ExternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @doc("Name of the External Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -18,9 +21,11 @@ model ExternalNetwork
   @segment("externalNetworks")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(ExternalNetwork.properties, "External Network Properties");
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("External Network Properties")
+  properties: ExternalNetworkProperties;
+}
 
 @armResourceOperations
 interface ExternalNetworks {
@@ -109,31 +114,24 @@ interface ExternalNetworks {
 }
 
 @@doc(ExternalNetworks.create::parameters.resource, "Request payload.");
-@@doc(
-  ExternalNetworks.update::parameters.properties,
+@@doc(ExternalNetworks.update::parameters.properties,
   "ExternalNetwork properties to update. Only annotations are supported."
 );
-@@doc(
-  ExternalNetworks.updateAdministrativeState::parameters.body,
+@@doc(ExternalNetworks.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  ExternalNetworks.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(ExternalNetworks.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  ExternalNetworks.updateStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(ExternalNetworks.updateStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  ExternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
+@@doc(ExternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  ExternalNetworks.updateBfdAdministrativeState::parameters.body,
+@@doc(ExternalNetworks.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  ExternalNetworks.updateBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(ExternalNetworks.updateBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );

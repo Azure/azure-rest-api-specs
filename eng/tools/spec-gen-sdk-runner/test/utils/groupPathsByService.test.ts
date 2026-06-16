@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { groupPathsByService } from "../../src/utils.ts";
+import { groupPathsByService } from "../../src/utils.js";
 
 describe("groupPathsByService", () => {
   test("groups paths by service name correctly", () => {

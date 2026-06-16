@@ -126,13 +126,11 @@ interface NetworkWatchers {
   verifyIPFlow is ArmResourceActionAsyncBase<
     NetworkWatcher,
     VerificationIPFlowParameters,
-
-      | ArmResponse<VerificationIPFlowResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VerificationIPFlowResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: VerificationIPFlowResult;
-        }),
+    ArmResponse<VerificationIPFlowResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VerificationIPFlowResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: VerificationIPFlowResult;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -147,13 +145,11 @@ interface NetworkWatchers {
   getNextHop is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NextHopParameters,
-
-      | ArmResponse<NextHopResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NextHopResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: NextHopResult;
-        }),
+    ArmResponse<NextHopResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NextHopResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: NextHopResult;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -169,13 +165,11 @@ interface NetworkWatchers {
   getVMSecurityRules is ArmResourceActionAsyncBase<
     NetworkWatcher,
     SecurityGroupViewParameters,
-
-      | ArmResponse<SecurityGroupViewResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SecurityGroupViewResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: SecurityGroupViewResult;
-        }),
+    ArmResponse<SecurityGroupViewResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SecurityGroupViewResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: SecurityGroupViewResult;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -190,13 +184,11 @@ interface NetworkWatchers {
   getTroubleshooting is ArmResourceActionAsyncBase<
     NetworkWatcher,
     TroubleshootingParameters,
-
-      | ArmResponse<TroubleshootingResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: TroubleshootingResult;
-        }),
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: TroubleshootingResult;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -211,13 +203,11 @@ interface NetworkWatchers {
   getTroubleshootingResult is ArmResourceActionAsyncBase<
     NetworkWatcher,
     QueryTroubleshootingParameters,
-
-      | ArmResponse<TroubleshootingResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: TroubleshootingResult;
-        }),
+    ArmResponse<TroubleshootingResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TroubleshootingResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: TroubleshootingResult;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -233,13 +223,11 @@ interface NetworkWatchers {
   setFlowLogConfiguration is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogInformation,
-
-      | ArmResponse<FlowLogInformation>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: FlowLogInformation;
-        }),
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: FlowLogInformation;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -255,13 +243,11 @@ interface NetworkWatchers {
   getFlowLogStatus is ArmResourceActionAsyncBase<
     NetworkWatcher,
     FlowLogStatusParameters,
-
-      | ArmResponse<FlowLogInformation>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: FlowLogInformation;
-        }),
+    ArmResponse<FlowLogInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FlowLogInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: FlowLogInformation;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -276,13 +262,11 @@ interface NetworkWatchers {
   checkConnectivity is ArmResourceActionAsyncBase<
     NetworkWatcher,
     ConnectivityParameters,
-
-      | ArmResponse<ConnectivityInformation>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ConnectivityInformation> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: ConnectivityInformation;
-        }),
+    ArmResponse<ConnectivityInformation> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ConnectivityInformation> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: ConnectivityInformation;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -297,13 +281,11 @@ interface NetworkWatchers {
   getAzureReachabilityReport is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AzureReachabilityReportParameters,
-
-      | ArmResponse<AzureReachabilityReport>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AzureReachabilityReport> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: AzureReachabilityReport;
-        }),
+    ArmResponse<AzureReachabilityReport> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AzureReachabilityReport> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: AzureReachabilityReport;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -318,13 +300,11 @@ interface NetworkWatchers {
   listAvailableProviders is ArmResourceActionAsyncBase<
     NetworkWatcher,
     AvailableProvidersListParameters,
-
-      | ArmResponse<AvailableProvidersList>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AvailableProvidersList> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: AvailableProvidersList;
-        }),
+    ArmResponse<AvailableProvidersList> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AvailableProvidersList> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: AvailableProvidersList;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -339,13 +319,11 @@ interface NetworkWatchers {
   getNetworkConfigurationDiagnostic is ArmResourceActionAsyncBase<
     NetworkWatcher,
     NetworkConfigurationDiagnosticParameters,
-
-      | ArmResponse<NetworkConfigurationDiagnosticResponse>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkConfigurationDiagnosticResponse> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: NetworkConfigurationDiagnosticResponse;
-        }),
+    ArmResponse<NetworkConfigurationDiagnosticResponse> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkConfigurationDiagnosticResponse> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: NetworkConfigurationDiagnosticResponse;
+    }),
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetworkWatcher>,
     Error = ErrorResponse
   >;
@@ -407,12 +385,10 @@ interface NetworkWatchers {
     NetworkWatcher,
     void,
     Result = void,
-    Response =
-      | {
-          @body body: void;
-        }
-      | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-          ArmLroLocationHeader<FinalResult = void>>,
+    Response = {
+      @body body: void;
+    } | ArmAcceptedLroResponse<LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>>,
     OverrideErrorType = ErrorResponse
   >;
 
@@ -427,13 +403,11 @@ interface NetworkWatchers {
     NetworkWatcher,
     void,
     Result = void,
-    Response =
-      | ArmResponse<PacketCaptureQueryStatusResult>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PacketCaptureQueryStatusResult> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @body
-          _: PacketCaptureQueryStatusResult;
-        }),
+    Response = ArmResponse<PacketCaptureQueryStatusResult> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PacketCaptureQueryStatusResult> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @body
+      _: PacketCaptureQueryStatusResult;
+    }),
     OverrideErrorType = ErrorResponse
   >;
 
@@ -454,63 +428,48 @@ interface NetworkWatchers {
 
 @@doc(NetworkWatcher.name, "The name of the network watcher.");
 @@doc(NetworkWatcher.properties, "Properties of the network watcher.");
-@@doc(
-  NetworkWatchers.createOrUpdate::parameters.resource,
+@@doc(NetworkWatchers.createOrUpdate::parameters.resource,
   "Parameters that define the network watcher resource."
 );
-@@doc(
-  NetworkWatchers.updateTags::parameters.properties,
+@@doc(NetworkWatchers.updateTags::parameters.properties,
   "Parameters supplied to update network watcher tags."
 );
-@@doc(
-  NetworkWatchers.getTopology::parameters.body,
+@@doc(NetworkWatchers.getTopology::parameters.body,
   "Parameters that define the representation of topology."
 );
-@@doc(
-  NetworkWatchers.verifyIPFlow::parameters.body,
+@@doc(NetworkWatchers.verifyIPFlow::parameters.body,
   "Parameters that define the IP flow to be verified."
 );
-@@doc(
-  NetworkWatchers.getNextHop::parameters.body,
+@@doc(NetworkWatchers.getNextHop::parameters.body,
   "Parameters that define the source and destination endpoint."
 );
-@@doc(
-  NetworkWatchers.getVMSecurityRules::parameters.body,
+@@doc(NetworkWatchers.getVMSecurityRules::parameters.body,
   "Parameters that define the VM to check security groups for."
 );
-@@doc(
-  NetworkWatchers.getTroubleshooting::parameters.body,
+@@doc(NetworkWatchers.getTroubleshooting::parameters.body,
   "Parameters that define the resource to troubleshoot."
 );
-@@doc(
-  NetworkWatchers.getTroubleshootingResult::parameters.body,
+@@doc(NetworkWatchers.getTroubleshootingResult::parameters.body,
   "Parameters that define the resource to query the troubleshooting result."
 );
-@@doc(
-  NetworkWatchers.setFlowLogConfiguration::parameters.body,
+@@doc(NetworkWatchers.setFlowLogConfiguration::parameters.body,
   "Parameters that define the configuration of flow log."
 );
-@@doc(
-  NetworkWatchers.getFlowLogStatus::parameters.body,
+@@doc(NetworkWatchers.getFlowLogStatus::parameters.body,
   "Parameters that define a resource to query flow log and traffic analytics (optional) status."
 );
-@@doc(
-  NetworkWatchers.checkConnectivity::parameters.body,
+@@doc(NetworkWatchers.checkConnectivity::parameters.body,
   "Parameters that determine how the connectivity check will be performed."
 );
-@@doc(
-  NetworkWatchers.getAzureReachabilityReport::parameters.body,
+@@doc(NetworkWatchers.getAzureReachabilityReport::parameters.body,
   "Parameters that determine Azure reachability report configuration."
 );
-@@doc(
-  NetworkWatchers.listAvailableProviders::parameters.body,
+@@doc(NetworkWatchers.listAvailableProviders::parameters.body,
   "Parameters that scope the list of available providers."
 );
-@@doc(
-  NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
+@@doc(NetworkWatchers.getNetworkConfigurationDiagnostic::parameters.body,
   "Parameters to get network configuration diagnostic."
 );
-@@doc(
-  NetworkWatchers.create::parameters.body,
+@@doc(NetworkWatchers.create::parameters.body,
   "Parameters that define the create packet capture operation."
 );

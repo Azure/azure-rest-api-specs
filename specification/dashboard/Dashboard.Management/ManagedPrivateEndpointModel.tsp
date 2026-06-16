@@ -42,13 +42,11 @@ interface ManagedPrivateEndpointModels {
   @operationId("ManagedPrivateEndpoints_Create")
   create is ArmResourceCreateOrReplaceAsync<
     ManagedPrivateEndpointModel,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedPrivateEndpointModel>
-      | ArmResourceCreatedResponse<
-          Resource = ManagedPrivateEndpointModel,
-          LroHeaders = ArmAsyncOperationHeader &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmResourceUpdatedResponse<ManagedPrivateEndpointModel> | ArmResourceCreatedResponse<
+      Resource = ManagedPrivateEndpointModel,
+      LroHeaders = ArmAsyncOperationHeader &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -62,13 +60,11 @@ interface ManagedPrivateEndpointModels {
   update is ArmCustomPatchAsync<
     ManagedPrivateEndpointModel,
     PatchModel = ManagedPrivateEndpointUpdateParameters,
-    Response =
-      | ArmResponse<ManagedPrivateEndpointModel>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpointModel> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: ManagedPrivateEndpointModel;
-        })
+    Response = ArmResponse<ManagedPrivateEndpointModel> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpointModel> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: ManagedPrivateEndpointModel;
+    })
   >;
 
   /**
@@ -80,11 +76,8 @@ interface ManagedPrivateEndpointModels {
   @operationId("ManagedPrivateEndpoints_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedPrivateEndpointModel,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -98,16 +91,13 @@ interface ManagedPrivateEndpointModels {
   >;
 }
 
-@@doc(
-  ManagedPrivateEndpointModel.name,
+@@doc(ManagedPrivateEndpointModel.name,
   "The managed private endpoint name of Azure Managed Grafana."
 );
 @@doc(ManagedPrivateEndpointModel.properties, "Resource properties.");
-@@doc(
-  ManagedPrivateEndpointModels.create::parameters.resource,
+@@doc(ManagedPrivateEndpointModels.create::parameters.resource,
   "The managed private endpoint to be created or updated."
 );
-@@doc(
-  ManagedPrivateEndpointModels.update::parameters.properties,
+@@doc(ManagedPrivateEndpointModels.update::parameters.properties,
   "Properties that can be updated to an existing managed private endpoint."
 );

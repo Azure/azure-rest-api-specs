@@ -47,12 +47,9 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -64,8 +61,7 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(
-  PrivateEndpointConnection.name,
+@@doc(PrivateEndpointConnection.name,
   "The name of the private endpoint connection."
 );
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");

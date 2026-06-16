@@ -154,12 +154,10 @@ interface ExportJobsOperationResults {
   @get
   get is ExportJobsOperationResultsOps.Read<
     JobResource,
-    Response =
-      | ArmResponse<OperationResultInfoBaseResource>
-      | {
-          ...AcceptedResponse;
-          @body body: OperationResultInfoBaseResource;
-        }
+    Response = ArmResponse<OperationResultInfoBaseResource> | {
+      ...AcceptedResponse;
+      @body body: OperationResultInfoBaseResource;
+    }
   >;
 }
 

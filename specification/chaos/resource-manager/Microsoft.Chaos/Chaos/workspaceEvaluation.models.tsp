@@ -60,7 +60,7 @@ model WorkspaceEvaluationProperties {
    * The workspace ID this evaluation belongs to.
    */
   @visibility(Lifecycle.Read)
-  workspaceId: Azure.Core.armResourceIdentifier;
+  workspaceId: string;
 
   /**
    * The number of scenarios to evaluate.

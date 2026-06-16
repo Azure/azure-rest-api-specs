@@ -83,10 +83,8 @@ interface Maccs {
   update is ArmCustomPatchAsync<
     Macc,
     PatchModel = MaccPatchRequest,
-    Response =
-      | ArmResponse<Macc>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<Macc> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -96,10 +94,8 @@ interface Maccs {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     Macc,
-    Response =
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | NoContentResponse
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse
   >;
 
   /**
@@ -126,10 +122,8 @@ interface Maccs {
     Macc,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Macc>,
-    Response =
-      | ArmResponse<Macc>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<Macc> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -140,10 +134,8 @@ interface Maccs {
     Macc,
     Request = void,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Macc>,
-    Response =
-      | ArmResponse<Macc>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<Macc> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -154,10 +146,8 @@ interface Maccs {
     Macc,
     Request = ChargeShortfallRequest,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Macc>,
-    Response =
-      | ArmResponse<Macc>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResponse<Macc> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Macc> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 
@@ -165,7 +155,6 @@ interface Maccs {
 @@doc(Macc.properties, "MACC properties");
 @@doc(Maccs.create::parameters.resource, "Request body for creating MACC.");
 @@doc(Maccs.update::parameters.properties, "Request body for updating MACC.");
-@@doc(
-  Maccs.chargeShortfall::parameters.body,
+@@doc(Maccs.chargeShortfall::parameters.body,
   "Request body for charging shortfall."
 );

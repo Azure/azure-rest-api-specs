@@ -18,18 +18,27 @@ alias AgentSessionIdResponseHeader = {
 @tag("Responses")
 interface Responses {
   /**
-   * Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
+   * Creates a model response.
    */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
-  @summary("Create a model response")
   @operationId("createResponse")
   @post
+  @sharedRoute
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse & UserIsolationKeyHeader,
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
+  >;
 
-      | (AgentSessionIdResponseHeader & OpenAI.Response)
-      | (AgentSessionIdResponseHeader &
-          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+  /**
+   * Creates a model response (streaming response).
+   */
+  @operationId("createResponseStream")
+  @post
+  @sharedRoute
+  createResponseStream is OpenAIOperation<
+    OpenAI.CreateResponse & UserIsolationKeyHeader,
+    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
@@ -40,11 +49,10 @@ interface Responses {
    * @param stream If set to true, model response data will be streamed to the client as it is generated using server-sent events.
    * @param starting_after The sequence number of the event after which to start streaming.
    */
-  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Intentionally combining response schemas for documentation support."
-  @summary("Retrieve a model response")
   @operationId("getResponse")
   @get
   @route("{response_id}")
+  @sharedRoute
   getResponse is OpenAIOperation<
     {
       @path
@@ -56,20 +64,45 @@ interface Responses {
 
       @query stream?: boolean = false;
       @query starting_after?: int32;
+
       ...UserIsolationKeyHeader;
     },
+    AgentSessionIdResponseHeader & {
+      @body body: OpenAI.Response;
+    }
+  >;
 
-      | (AgentSessionIdResponseHeader & {
-          @body body: OpenAI.Response;
-        })
-      | (AgentSessionIdResponseHeader &
-          SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
+  /**
+   * Retrieves a model response with the given ID (streaming response).
+   *
+   * @param response_id The ID of the response to retrieve.
+   * @param include Specifies additional output data to include in the model response.
+   * @param starting_after The sequence number of the event after which to start streaming.
+   */
+  @operationId("getResponseStream")
+  @get
+  @route("{response_id}")
+  @sharedRoute
+  getResponseStream is OpenAIOperation<
+    {
+      @path
+      @example("resp_677efb5139a88190b512bc3fef8e535d")
+      response_id: string;
+
+      @query(#{ name: "include[]", explode: true })
+      includables?: OpenAI.IncludeEnum[] = #[];
+
+      @header accept: "text/event-stream";
+      @query starting_after?: int32;
+
+      ...UserIsolationKeyHeader;
+    },
+    AgentSessionIdResponseHeader & SseResponseOf<OpenAI.CreateResponseStreamingResponse>
   >;
 
   /**
    * Deletes a model response.
    */
-  @summary("Delete a model response")
   @delete
   @route("{response_id}")
   @operationId("deleteResponse")
@@ -90,9 +123,8 @@ interface Responses {
   >;
 
   /**
-   * Cancels a model response with the given ID. Only responses created with the background parameter set to true can be cancelled.
+   * Cancels a model response.
    */
-  @summary("Cancel a model response")
   @post
   @route("{response_id}/cancel")
   @operationId("cancelResponse")
@@ -113,9 +145,8 @@ interface Responses {
   >;
 
   /**
-   * Retrieves the input items associated with the specified response.
+   * Returns a list of input items for a given response.
    */
-  @summary("List input items for a response")
   @operationId("listInputItems")
   @get
   @route("{response_id}/input_items")
@@ -135,9 +166,8 @@ interface Responses {
   >;
 
   /**
-   * Returns a collection of all stored responses matching specified filter criteria.
+   * Returns the list of all responses.
    */
-  @summary("List responses")
   @get
   @operationId("listResponses")
   @list
@@ -153,9 +183,8 @@ interface Responses {
   >;
 
   /**
-   * Compacts a conversation into a response object suitable for long-running and zero-data-retention scenarios.
+   * Produces a compaction of a responses conversation.
    */
-  @summary("Compact a conversation")
   @post
   @operationId("compactResponseConversation")
   @route("compact")

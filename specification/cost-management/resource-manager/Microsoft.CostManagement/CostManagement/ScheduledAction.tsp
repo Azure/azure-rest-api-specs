@@ -226,11 +226,9 @@ interface ScheduledActionOperationGroup {
 
 @@doc(ScheduledAction.name, "Scheduled action name.");
 @@doc(ScheduledAction.properties, "The properties of the scheduled action.");
-@@doc(
-  ScheduledActions.createOrUpdate::parameters.resource,
+@@doc(ScheduledActions.createOrUpdate::parameters.resource,
   "Scheduled action to be created or updated."
 );
-@@doc(
-  ScheduledActionOperationGroup.createOrUpdateByScope::parameters.resource,
+@@doc(ScheduledActionOperationGroup.createOrUpdateByScope::parameters.resource,
   "Scheduled action to be created or updated."
 );

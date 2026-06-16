@@ -48,10 +48,8 @@ interface StorageClassificationMappings {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     StorageClassificationMapping,
     Request = StorageClassificationMappingInput,
-    Response =
-      | ArmResourceUpdatedResponse<StorageClassificationMapping>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageClassificationMapping> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<StorageClassificationMapping> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageClassificationMapping> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -76,15 +74,12 @@ interface StorageClassificationMappings {
   >;
 }
 
-@@doc(
-  StorageClassificationMapping.name,
+@@doc(StorageClassificationMapping.name,
   "Storage classification mapping name."
 );
-@@doc(
-  StorageClassificationMapping.properties,
+@@doc(StorageClassificationMapping.properties,
   "Properties of the storage mapping object."
 );
-@@doc(
-  StorageClassificationMappings.create::parameters.resource,
+@@doc(StorageClassificationMappings.create::parameters.resource,
   "Pairing input."
 );

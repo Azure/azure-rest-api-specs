@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed instance key.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 model ManagedInstanceKey
   is Azure.ResourceManager.ProxyResource<ManagedInstanceKeyProperties> {
   ...ResourceNameParameter<
@@ -34,9 +32,7 @@ model ManagedInstanceKey
   kind?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
 interface ManagedInstanceKeys {
   /**
    * Gets a managed instance key.
@@ -49,14 +45,11 @@ interface ManagedInstanceKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstanceKey,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedInstanceKey>
-      | ArmResourceCreatedResponse<
-          ManagedInstanceKey,
-          ArmLroLocationHeader<FinalResult = ManagedInstanceKey> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ManagedInstanceKey> | ArmResourceCreatedResponse<
+      ManagedInstanceKey,
+      ArmLroLocationHeader<FinalResult = ManagedInstanceKey> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -65,10 +58,7 @@ interface ManagedInstanceKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstanceKey,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -86,12 +76,10 @@ interface ManagedInstanceKeys {
   >;
 }
 
-@@doc(
-  ManagedInstanceKey.name,
+@@doc(ManagedInstanceKey.name,
   "The name of the managed instance key to be retrieved."
 );
 @@doc(ManagedInstanceKey.properties, "Resource properties.");
-@@doc(
-  ManagedInstanceKeys.createOrUpdate::parameters.resource,
+@@doc(ManagedInstanceKeys.createOrUpdate::parameters.resource,
   "The requested managed instance key resource state."
 );

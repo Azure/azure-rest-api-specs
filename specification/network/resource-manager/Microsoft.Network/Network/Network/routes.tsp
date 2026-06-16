@@ -595,11 +595,9 @@ interface UsagesOperationGroup {
   >;
 }
 
-@@Azure.ClientGenerator.Core.clientName(
-  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.body,
   "parameters"
 );
-@@Azure.ClientGenerator.Core.clientName(
-  PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.body,
   "parameters"
 );

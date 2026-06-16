@@ -1,21 +1,29 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "componentName": "reddog",
-    "connectedEnvironmentName": "myenvironment",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    "connectedEnvironmentName": "myenvironment",
+    "componentName": "reddog",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/jlaw-demo1/daprcomponents/reddog",
         "name": "reddog",
         "type": "Microsoft.App/connectedEnvironments/daprcomponents",
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/jlaw-demo1/daprcomponents/reddog",
         "properties": {
+          "provisioningState": "Succeeded",
+          "deploymentErrors": null,
           "componentType": "state.azure.cosmosdb",
+          "version": "v1",
           "ignoreErrors": false,
           "initTimeout": "50s",
+          "secrets": [
+            {
+              "name": "masterkey"
+            }
+          ],
           "metadata": [
             {
               "name": "url",
@@ -34,21 +42,12 @@
               "secretRef": "masterkey"
             }
           ],
-          "provisioningState": "Succeeded",
           "scopes": [
             "container-app-1",
             "container-app-2"
-          ],
-          "secrets": [
-            {
-              "name": "masterkey"
-            }
-          ],
-          "version": "v1"
+          ]
         }
       }
     }
-  },
-  "operationId": "ConnectedEnvironmentsDaprComponents_Get",
-  "title": "Get Dapr Component"
+  }
 }

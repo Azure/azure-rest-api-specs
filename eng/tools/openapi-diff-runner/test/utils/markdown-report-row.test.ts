@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { type BrChMsgRecord, type ResultMessageRecord } from "../../src/types/message.ts";
+import { BrChMsgRecord, ResultMessageRecord } from "../../src/types/message.js";
 import {
-  type BreakingChangeMdRow,
+  BreakingChangeMdRow,
   createBreakingChangeMdRows,
   getDeficitRow,
   getMdTableHeader,
   rowToString,
-} from "../../src/utils/markdown-report-row.ts";
+} from "../../src/utils/markdown-report-row.js";
 
 describe("markdown-report-row", () => {
   // Test constants

@@ -1,69 +1,18 @@
 import { stat } from "node:fs/promises";
-import { type ParseArgsConfig, parseArgs } from "node:util";
-import { type Suppression } from "suppressions";
-import { type Rule } from "./rule.ts";
-import { CompileRule } from "./rules/compile.ts";
-import { EmitAutorestRule } from "./rules/emit-autorest.ts";
-import { FlavorAzureRule } from "./rules/flavor-azure.ts";
-import { FolderStructureRule } from "./rules/folder-structure.ts";
-import { FormatRule } from "./rules/format.ts";
-import { LinterRulesetRule } from "./rules/linter-ruleset.ts";
-import { NpmPrefixRule } from "./rules/npm-prefix.ts";
-import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
-import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
+import { ParseArgsConfig, parseArgs } from "node:util";
+import { Suppression } from "suppressions";
+import { CompileRule } from "./rules/compile.js";
+import { EmitAutorestRule } from "./rules/emit-autorest.js";
+import { FlavorAzureRule } from "./rules/flavor-azure.js";
+import { FolderStructureRule } from "./rules/folder-structure.js";
+import { FormatRule } from "./rules/format.js";
+import { LinterRulesetRule } from "./rules/linter-ruleset.js";
+import { NpmPrefixRule } from "./rules/npm-prefix.js";
+import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.js";
+import { fileExists, getSuppressions, normalizePath } from "./utils.js";
 
 // Context argument may add new properties or override checkingAllSpecs
 export let context: Record<string, unknown> = { checkingAllSpecs: false };
-
-export interface RunRulesResult {
-  success: boolean;
-  suppressed: string[];
-  executed: string[];
-  failed: string[];
-}
-
-/**
- * Runs the given rules against a folder, handling per-rule suppressions
- * for rules that opt in via `suppressable: true`.
- */
-export async function runRules(
-  rules: Rule[],
-  folder: string,
-  suppressions: Suppression[],
-): Promise<RunRulesResult> {
-  const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
-
-  for (const rule of rules) {
-    console.log("\nExecuting rule: " + rule.name);
-
-    if (rule.suppressable) {
-      const ruleSuppressions = suppressions.filter(
-        (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
-      );
-      if (ruleSuppressions.length > 0) {
-        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
-        result.suppressed.push(rule.name);
-        continue;
-      }
-    }
-
-    const ruleResult = await rule.execute(folder);
-    result.executed.push(rule.name);
-    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
-    if (!ruleResult.success) {
-      result.success = false;
-      result.failed.push(rule.name);
-      console.log("Rule " + rule.name + " failed");
-      if (ruleResult.errorOutput) console.log(ruleResult.errorOutput);
-
-      // Stop executing more rules, since the results are more likely to be confusing than helpful
-      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
-      break;
-    }
-  }
-
-  return result;
-}
 
 export async function main() {
   const args = process.argv.slice(2);
@@ -107,7 +56,7 @@ export async function main() {
     return;
   }
 
-  const rules: Rule[] = [
+  const rules = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
@@ -117,10 +66,24 @@ export async function main() {
     new FormatRule(),
     new SdkTspConfigValidationRule(),
   ];
+  let success = true;
+  for (let i = 0; i < rules.length; i++) {
+    const rule = rules[i];
+    console.log("\nExecuting rule: " + rule.name);
+    const result = await rule.execute(absolutePath);
+    if (result.stdOutput) console.log(result.stdOutput);
+    if (!result.success) {
+      success = false;
+      console.log("Rule " + rule.name + " failed");
+      if (result.errorOutput) console.log(result.errorOutput);
 
-  const result = await runRules(rules, absolutePath, suppressions);
+      // Stop executing more rules, since the results are more likely to be confusing than helpful
+      // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
+      break;
+    }
+  }
 
-  if (!result.success) {
+  if (!success) {
     process.exitCode = 1;
   }
 }

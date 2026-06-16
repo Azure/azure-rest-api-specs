@@ -11,7 +11,7 @@ namespace Microsoft.ContainerService;
 interface PreparedImageSpecifications {
   @doc("Get a prepared image specification at the latest version.")
   get is ArmResourceRead<PreparedImageSpecification>;
-  @doc("Create or update a prepared image specification resource with a client-provided version. Created versions are immutable; provide a different properties.version value to create a new version.")
+  @doc("Create or update a prepared image specification resource. A new version is created only when the resource content changes.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     PreparedImageSpecification,
     Azure.ResourceManager.Foundations.BaseParameters<PreparedImageSpecification> &
@@ -19,7 +19,7 @@ interface PreparedImageSpecifications {
       IfNoneMatchParameters<PreparedImageSpecification>
   >;
 
-  @doc("Update the tags of a prepared image specification.")
+  @doc("Update a prepared image specification. A new version is created only when the resource content changes.")
   update is ArmCustomPatchSync<
     PreparedImageSpecification,
     PatchModel = PreparedImageSpecificationPatch,

@@ -5,40 +5,11 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./scenario.models.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
 
 namespace Microsoft.Chaos;
-
-/**
- * Indicates the scenario run is still in progress. Clients polling via the
- * Location header should continue polling until a 200 response is returned.
- * The body reflects the current run state at the time of the poll.
- */
-model ScenarioRunInProgressResponse {
-  ...AcceptedResponse;
-
-  /**
-   * The URL where the status of the long-running operation can be polled.
-   */
-  @header("Location")
-  location: url;
-
-  /**
-   * The number of seconds the client should wait before polling again.
-   */
-  @minValue(0)
-  @maxValue(2147483647)
-  @header("Retry-After")
-  retryAfter?: int32;
-
-  /**
-   * The current scenario run state at the time of the poll.
-   */
-  @bodyRoot body: ScenarioRun;
-}
 
 /**
  * Model that represents the scenario run.

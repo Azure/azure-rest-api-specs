@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * User activities of a data warehouse
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 model DataWarehouseUserActivities
   is Azure.ResourceManager.ProxyResource<DataWarehouseUserActivitiesProperties> {
   ...ResourceNameParameter<
@@ -28,9 +26,7 @@ model DataWarehouseUserActivities
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.DataWarehouseUserActivities)
 interface DataWarehouseUserActivitiesOperationGroup {
   /**
    * Gets the user activities of a data warehouse which includes running and suspended queries
@@ -45,8 +41,7 @@ interface DataWarehouseUserActivitiesOperationGroup {
   listByDatabase is ArmResourceListByParent<DataWarehouseUserActivities>;
 }
 
-@@doc(
-  DataWarehouseUserActivities.name,
+@@doc(DataWarehouseUserActivities.name,
   "The activity name of the data warehouse. "
 );
 @@doc(DataWarehouseUserActivities.properties, "Resource properties.");

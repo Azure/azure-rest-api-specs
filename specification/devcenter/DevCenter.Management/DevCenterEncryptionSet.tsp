@@ -42,12 +42,10 @@ interface DevCenterEncryptionSets {
     DevCenterEncryptionSet,
     PatchModel = EncryptionSetUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response =
-      | DevCenterEncryptionSet
-      | ArmAcceptedLroResponse<
-          "Resource update request accepted.",
-          ArmLroLocationHeader<FinalResult = DevCenterEncryptionSet>
-        >
+    Response = DevCenterEncryptionSet | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmLroLocationHeader<FinalResult = DevCenterEncryptionSet>
+    >
   >;
 
   @doc("Deletes a devcenter encryption set.")
@@ -71,15 +69,12 @@ interface DevCenterEncryptionSets {
 @@maxLength(DevCenterEncryptionSet.name, 63);
 @@minLength(DevCenterEncryptionSet.name, 3);
 @@doc(DevCenterEncryptionSet.name, "The name of the devcenter encryption set.");
-@@doc(
-  DevCenterEncryptionSet.properties,
+@@doc(DevCenterEncryptionSet.properties,
   "Properties of a devcenter encryption set."
 );
-@@doc(
-  DevCenterEncryptionSets.createOrUpdate::parameters.resource,
+@@doc(DevCenterEncryptionSets.createOrUpdate::parameters.resource,
   "Represents a devcenter encryption set."
 );
-@@doc(
-  DevCenterEncryptionSets.update::parameters.properties,
+@@doc(DevCenterEncryptionSets.update::parameters.properties,
   "Updatable devcenter encryption set properties."
 );

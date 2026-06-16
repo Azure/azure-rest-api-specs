@@ -15,9 +15,7 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync member.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SyncGroup)
-@Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
   ...ResourceNameParameter<
     Resource = SyncMember,
@@ -34,9 +32,7 @@ model SyncMember is Azure.ResourceManager.ProxyResource<SyncMemberProperties> {
   identity?: DataSyncParticipantIdentity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.SyncMembers)
 interface SyncMembers {
   /**
    * Gets a sync member.
@@ -49,14 +45,11 @@ interface SyncMembers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     SyncMember,
-    Response =
-      | ArmResourceUpdatedResponse<SyncMember>
-      | ArmResourceCreatedResponse<
-          SyncMember,
-          ArmLroLocationHeader<FinalResult = SyncMember> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SyncMember> | ArmResourceCreatedResponse<
+      SyncMember,
+      ArmLroLocationHeader<FinalResult = SyncMember> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -71,10 +64,7 @@ interface SyncMembers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     SyncMember,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -108,11 +98,9 @@ interface SyncMembers {
 
 @@doc(SyncMember.name, "The name of the sync member.");
 @@doc(SyncMember.properties, "Resource properties.");
-@@doc(
-  SyncMembers.createOrUpdate::parameters.resource,
+@@doc(SyncMembers.createOrUpdate::parameters.resource,
   "The requested sync member resource state."
 );
-@@doc(
-  SyncMembers.update::parameters.properties,
+@@doc(SyncMembers.update::parameters.properties,
   "The requested sync member resource state."
 );

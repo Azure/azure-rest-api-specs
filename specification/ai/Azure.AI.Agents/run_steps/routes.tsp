@@ -86,10 +86,8 @@ namespace Azure.AI.Agents {
 
       ...ApiVersionParameter,
       ...AgentsListOptions,
-    ):
-      | {
-          ...AgentsPagedResult<RunStep>;
-        }
-      | AgentV1Error;
+    ): {
+      ...AgentsPagedResult<RunStep>;
+    } | AgentV1Error;
   }
 }

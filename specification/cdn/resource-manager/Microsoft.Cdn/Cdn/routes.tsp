@@ -81,11 +81,8 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     canMigrateParameters: CanMigrateParameters,
-  ):
-    | ArmResponse<CanMigrateResult>
-    | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> &
-        Azure.Core.Foundations.RetryAfterHeader)
-    | ErrorResponse;
+  ): ArmResponse<CanMigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = CanMigrateResult>> &
+    Azure.Core.Foundations.RetryAfterHeader) | ErrorResponse;
 
   /**
    * Migrate the CDN profile to Azure Frontdoor(Standard/Premium) profile. The change need to be committed after this.
@@ -103,12 +100,9 @@ interface ProfilesOperationGroup {
      */
     @bodyRoot
     migrationParameters: MigrationParameters,
-  ):
-    | ArmResponse<MigrateResult>
-    | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = MigrateResult>> & {
-        @bodyRoot _: MigrateResult;
-      })
-    | ErrorResponse;
+  ): ArmResponse<MigrateResult> | (ArmAcceptedResponse<ExtraHeaders = ArmLroLocationHeader<FinalResult = MigrateResult>> & {
+    @bodyRoot _: MigrateResult;
+  }) | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

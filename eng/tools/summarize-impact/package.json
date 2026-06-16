@@ -2,12 +2,12 @@
   "name": "@azure-tools/summarize-impact",
   "private": true,
   "type": "module",
-  "main": "src/main.ts",
+  "main": "dist/src/main.js",
   "bin": {
     "summarize-impact": "cmd/summarize-impact.js"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsc --build",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
@@ -37,6 +37,6 @@
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=20.0.0"
   }
 }

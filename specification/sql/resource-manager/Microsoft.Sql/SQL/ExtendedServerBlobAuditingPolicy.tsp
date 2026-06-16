@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * An extended server blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ExtendedServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ExtendedServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
@@ -43,9 +41,7 @@ alias ExtendedServerBlobAuditingPolicyOps = Azure.ResourceManager.Legacy.LegacyO
   ExtendedServerBlobAuditingPolicyNameAlias
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 interface ExtendedServerBlobAuditingPolicies {
   /**
    * Gets an extended server's blob auditing policy.
@@ -60,10 +56,8 @@ interface ExtendedServerBlobAuditingPolicies {
   @tag("BlobAuditing")
   createOrUpdate is ExtendedServerBlobAuditingPolicyOps.CreateOrUpdateAsync<
     ExtendedServerBlobAuditingPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExtendedServerBlobAuditingPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ExtendedServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ExtendedServerBlobAuditingPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -75,8 +69,7 @@ interface ExtendedServerBlobAuditingPolicies {
 
 @@doc(ExtendedServerBlobAuditingPolicy.name, "");
 @@doc(ExtendedServerBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(
-  ExtendedServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(ExtendedServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "Properties of extended blob auditing policy"
 );
 

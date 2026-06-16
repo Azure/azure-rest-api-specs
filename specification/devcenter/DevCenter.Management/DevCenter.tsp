@@ -38,12 +38,10 @@ interface DevCenters {
     DevCenter,
     PatchModel = DevCenterUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response =
-      | DevCenter
-      | ArmAcceptedLroResponse<
-          "Resource update request accepted.",
-          ArmLroLocationHeader<FinalResult = DevCenter>
-        >
+    Response = DevCenter | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmLroLocationHeader<FinalResult = DevCenter>
+    >
   >;
 
   @doc("Deletes a devcenter.")
@@ -94,11 +92,9 @@ interface DevCenters {
 @@minLength(DevCenter.name, 3);
 @@doc(DevCenter.name, "The name of the devcenter.");
 @@doc(DevCenter.properties, "DevCenter properties");
-@@doc(
-  DevCenters.createOrUpdate::parameters.resource,
+@@doc(DevCenters.createOrUpdate::parameters.resource,
   "Represents a devcenter."
 );
-@@doc(
-  DevCenters.update::parameters.properties,
+@@doc(DevCenters.update::parameters.properties,
   "Updatable devcenter properties."
 );

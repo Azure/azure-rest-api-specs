@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -10,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
@@ -40,10 +38,8 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateCassandraRoleAssignment is ArmResourceCreateOrReplaceAsync<
     CassandraRoleAssignmentResource,
-    Response =
-      | ArmResourceUpdatedResponse<CassandraRoleAssignmentResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraRoleAssignmentResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -52,10 +48,7 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteCassandraRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     CassandraRoleAssignmentResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -67,15 +60,12 @@ interface CassandraRoleAssignmentResources {
   >;
 }
 
-@@doc(
-  CassandraRoleAssignmentResource.name,
+@@doc(CassandraRoleAssignmentResource.name,
   "The GUID for the Role Assignment."
 );
-@@doc(
-  CassandraRoleAssignmentResource.properties,
+@@doc(CassandraRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB Cassandra Role Assignment."
 );
-@@doc(
-  CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
+@@doc(CassandraRoleAssignmentResources.createUpdateCassandraRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

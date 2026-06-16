@@ -13,23 +13,15 @@ namespace Microsoft.StorageCache;
 /**
  * A cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md
  */
-model Cache is Azure.ResourceManager.ProxyResource<CacheProperties> {
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model Cache
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CacheProperties> {
   ...ResourceNameParameter<
     Resource = Cache,
     KeyName = "cacheName",
     SegmentName = "caches",
     NamePattern = "^[-0-9a-zA-Z_]{1,80}$"
   >;
-
-  /** Resource tags. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-
-  /** Region name string. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
 
   /**
    * The identity of the cache, if configured.
@@ -58,14 +50,11 @@ interface Caches {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cache,
-    Response =
-      | ArmResourceUpdatedResponse<Cache>
-      | ArmResourceCreatedResponse<
-          Cache,
-          ArmLroLocationHeader<FinalResult = Cache> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<Cache> | ArmResourceCreatedResponse<
+      Cache,
+      ArmLroLocationHeader<FinalResult = Cache> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse,
     Error = CloudError
   >;
 
@@ -89,11 +78,8 @@ interface Caches {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cache,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -261,36 +247,28 @@ interface Caches {
   >;
 }
 
-@@doc(
-  Cache.name,
+@@doc(Cache.name,
   "Name of cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class."
 );
 @@doc(Cache.properties, "Properties of the cache.");
-@@doc(
-  Caches.createOrUpdate::parameters.resource,
+@@doc(Caches.createOrUpdate::parameters.resource,
   "Object containing the user-selectable properties of the new cache. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(
-  Caches.update::parameters.properties,
+@@doc(Caches.update::parameters.properties,
   "Object containing the user-selectable properties of the cache. If read-only properties are included, they must match the existing values of those properties."
 );
-@@doc(
-  Caches.startPrimingJob::parameters.body,
+@@doc(Caches.startPrimingJob::parameters.body,
   "Object containing the definition of a priming job."
 );
-@@doc(
-  Caches.stopPrimingJob::parameters.body,
+@@doc(Caches.stopPrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(
-  Caches.pausePrimingJob::parameters.body,
+@@doc(Caches.pausePrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(
-  Caches.resumePrimingJob::parameters.body,
+@@doc(Caches.resumePrimingJob::parameters.body,
   "Object containing the priming job ID."
 );
-@@doc(
-  Caches.spaceAllocation::parameters.body,
+@@doc(Caches.spaceAllocation::parameters.body,
   "List containing storage target cache space percentage allocations."
 );

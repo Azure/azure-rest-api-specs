@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A server configuration option
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 model ServerConfigurationOption
   is Azure.ResourceManager.ProxyResource<ServerConfigurationOptionProperties> {
   ...ResourceNameParameter<
@@ -29,9 +27,7 @@ model ServerConfigurationOption
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ServerConfigurationOptions)
 interface ServerConfigurationOptions {
   /**
    * Gets managed instance server configuration option.
@@ -54,12 +50,10 @@ interface ServerConfigurationOptions {
   listByManagedInstance is ArmResourceListByParent<ServerConfigurationOption>;
 }
 
-@@doc(
-  ServerConfigurationOption.name,
+@@doc(ServerConfigurationOption.name,
   "The name of the server configuration option."
 );
 @@doc(ServerConfigurationOption.properties, "Resource properties.");
-@@doc(
-  ServerConfigurationOptions.createOrUpdate::parameters.resource,
+@@doc(ServerConfigurationOptions.createOrUpdate::parameters.resource,
   "Server configuration option parameters."
 );

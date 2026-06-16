@@ -62,13 +62,11 @@ interface ManagedHsms {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedHsm,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedHsm>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: ManagedHsm;
-        }),
+    Response = ArmResourceUpdatedResponse<ManagedHsm> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: ManagedHsm;
+    }),
     Error = ManagedHsmError
   >;
 
@@ -80,13 +78,11 @@ interface ManagedHsms {
   update is ArmCustomPatchAsync<
     ManagedHsm,
     PatchModel = ManagedHsm,
-    Response =
-      | ArmResponse<ManagedHsm>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: ManagedHsm;
-        }),
+    Response = ArmResponse<ManagedHsm> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedHsm> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: ManagedHsm;
+    }),
     Error = ManagedHsmError
   >;
 
@@ -96,10 +92,7 @@ interface ManagedHsms {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedHsm,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ManagedHsmError
   >;
 
@@ -162,11 +155,9 @@ interface ManagedHsms {
 
 @@doc(ManagedHsm.name, "The name of the managed HSM Pool.");
 @@doc(ManagedHsm.properties, "Properties of the managed HSM");
-@@doc(
-  ManagedHsms.createOrUpdate::parameters.resource,
+@@doc(ManagedHsms.createOrUpdate::parameters.resource,
   "Parameters to create or update the managed HSM Pool"
 );
-@@doc(
-  ManagedHsms.update::parameters.properties,
+@@doc(ManagedHsms.update::parameters.properties,
   "Parameters to patch the managed HSM Pool"
 );

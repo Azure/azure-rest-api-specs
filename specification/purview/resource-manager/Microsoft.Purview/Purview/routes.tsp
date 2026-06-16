@@ -73,11 +73,9 @@ interface DefaultAccountsOperationGroup {
   @autoRoute
   @action("removeDefaultAccount")
   remove is ArmProviderActionSync<
-    Response =
-      | {
-          @body body: void;
-        }
-      | NoContentResponse,
+    Response = {
+      @body body: void;
+    } | NoContentResponse,
     Parameters = {
       ...ScopeTenantIdParameters;
 

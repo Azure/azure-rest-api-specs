@@ -46,13 +46,11 @@ interface WorkloadNetworkPortMirroringProfiles {
     | ErrorResponse;
 }
 
-@@clientName(
-  WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
+@@clientName(WorkloadNetworkPortMirroringProfiles.create::parameters.resource,
   "workloadNetworkPortMirroring"
 );
 
-@@clientName(
-  WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
+@@clientName(WorkloadNetworkPortMirroringProfiles.update::parameters.properties,
   "workloadNetworkPortMirroring"
 );
 

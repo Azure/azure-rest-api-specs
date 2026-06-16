@@ -55,15 +55,16 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | (ArmResponse<OperationEntityListResult> & {
-        @header("x-ms-correlation-request-id")
-        @doc("correlation request id.")
-        xMsCorrelationRequestId?: string;
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): (ArmResponse<OperationEntityListResult> & {
+    @header("x-ms-correlation-request-id")
+    @doc("correlation request id.")
+    correlationRequestId?: string;
 
-        @header("x-ms-request-id")
-        @doc("request id.")
-        xMsRequestId?: string;
-      })
-    | StorageSyncError;
+    @header("x-ms-request-id")
+    @doc("request id.")
+    requestId?: string;
+  }) | StorageSyncError;
 }

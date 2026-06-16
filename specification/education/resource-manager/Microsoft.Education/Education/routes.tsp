@@ -28,7 +28,6 @@ op redeemInvitationCode is ArmProviderActionSync<
   Error = DefaultErrorResponse
 >;
 
-@@Azure.ClientGenerator.Core.clientName(
-  redeemInvitationCode::parameters.body,
+@@Azure.ClientGenerator.Core.clientName(redeemInvitationCode::parameters.body,
   "parameters"
 );

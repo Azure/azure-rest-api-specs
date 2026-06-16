@@ -290,12 +290,10 @@ interface ValidateOperation {
      */
     @bodyRoot
     parameters: ValidateOperationRequestResource,
-  ):
-    | ArmAcceptedResponse<
-        "Accepted",
-        ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
+  ): ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -324,10 +322,7 @@ interface ValidateOperationResults {
      */
     @path
     operationId: string,
-  ):
-    | ArmResponse<ValidateOperationsResponse>
-    | ArmAcceptedResponse<ExtraHeaders = {}>
-    | ErrorResponse;
+  ): ArmResponse<ValidateOperationsResponse> | ArmAcceptedResponse<ExtraHeaders = {}> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -392,10 +387,7 @@ interface ProtectionContainerRefreshOperationResults {
      */
     @path
     operationId: string,
-  ):
-    | ArmAcceptedResponse<ExtraHeaders = {}>
-    | ArmNoContentResponse
-    | ErrorResponse;
+  ): ArmAcceptedResponse<ExtraHeaders = {}> | ArmNoContentResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -689,18 +681,15 @@ interface FetchTieringCost {
      */
     @bodyRoot
     parameters: FetchTieringCostInfoRequest,
-  ):
-    | ArmResponse<TieringCostInfo>
-    | ArmAcceptedResponse<
-        "Accepted",
-        ArmLroLocationHeader<
-          Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-          TieringCostInfo,
-          string
-        > &
-          Azure.Core.Foundations.RetryAfterHeader
-      >
-    | ErrorResponse;
+  ): ArmResponse<TieringCostInfo> | ArmAcceptedResponse<
+    "Accepted",
+    ArmLroLocationHeader<
+      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+      TieringCostInfo,
+      string
+    > &
+      Azure.Core.Foundations.RetryAfterHeader
+  > | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

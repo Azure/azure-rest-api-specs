@@ -37,10 +37,7 @@ interface ServiceEndpointPolicyDefinitions {
   @tag("ServiceEndpointPolicyDefinitions")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceEndpointPolicyDefinition,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -54,15 +51,12 @@ interface ServiceEndpointPolicyDefinitions {
   >;
 }
 
-@@doc(
-  ServiceEndpointPolicyDefinition.name,
+@@doc(ServiceEndpointPolicyDefinition.name,
   "The name of the resource that is unique within a resource group. This name can be used to access the resource."
 );
-@@doc(
-  ServiceEndpointPolicyDefinition.properties,
+@@doc(ServiceEndpointPolicyDefinition.properties,
   "Properties of the service endpoint policy definition."
 );
-@@doc(
-  ServiceEndpointPolicyDefinitions.createOrUpdate::parameters.resource,
+@@doc(ServiceEndpointPolicyDefinitions.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update service endpoint policy operation."
 );

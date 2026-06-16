@@ -2535,8 +2535,8 @@ model RouteMatrixItemResult {
 
   /**
    * The time that it takes, in seconds, to travel a corresponding `TravelDistance`
-   * with current traffic conditions. This value is provided if `traffic=live`
-   * is passed to account for current traffic conditions.
+   * with current traffic conditions. This value is provided if `optimizeRoute`
+   * includes traffic considerations.
    */
   durationTrafficInSeconds?: int64;
 

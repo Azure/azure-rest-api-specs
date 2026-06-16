@@ -49,7 +49,7 @@ interface NetworkSecurityPerimeterConfigurationOps
       },
       {},
       ResourceRoute = #{
-        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}",
+        route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}",
       }
     > {}
 
@@ -60,7 +60,7 @@ interface NetworkSecurityPerimeterConfigurations {
    */
   @summary("Get a specific network security perimeter configuration.")
   @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}")
   get is NetworkSecurityPerimeterConfigurationOps.ActionSync<
     NetworkSecurityPerimeterConfiguration,
     Request = void,
@@ -86,7 +86,7 @@ interface NetworkSecurityPerimeterConfigurations {
   @summary("Get all network security perimeter configurations for resource.")
   @get
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations")
   list is NetworkSecurityPerimeterConfigurationOps.ActionSync<
     NetworkSecurityPerimeterConfiguration,
     Request = void,
@@ -97,7 +97,7 @@ interface NetworkSecurityPerimeterConfigurations {
    * Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.
    */
   @summary("Reconcile a specific network security perimeter configuration for a given network security perimeter association.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile")
   reconcile is NetworkSecurityPerimeterConfigurationOps.ActionAsync<
     NetworkSecurityPerimeterConfiguration,
     Request = void,
@@ -119,7 +119,6 @@ interface NetworkSecurityPerimeterConfigurations {
 }
 
 @@doc(NetworkSecurityPerimeterConfiguration.name, "");
-@@doc(
-  NetworkSecurityPerimeterConfiguration.properties,
+@@doc(NetworkSecurityPerimeterConfiguration.properties,
   "Properties of the network security perimeter configuration."
 );

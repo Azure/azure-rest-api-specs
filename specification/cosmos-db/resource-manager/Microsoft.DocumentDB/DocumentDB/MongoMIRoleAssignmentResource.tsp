@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "./DatabaseAccountGetResults.tsp";
 
@@ -10,7 +9,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Microsoft.DocumentDB;
 /**
@@ -44,10 +42,8 @@ interface MongoMIRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateMongoMIRoleAssignment is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleAssignmentResource,
-    Response =
-      | ArmResourceUpdatedResponse<MongoMIRoleAssignmentResource>
-      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoMIRoleAssignmentResource> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<MongoMIRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoMIRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -57,10 +53,7 @@ interface MongoMIRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoMIRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     MongoMIRoleAssignmentResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -74,11 +67,9 @@ interface MongoMIRoleAssignmentResources {
 }
 
 @@doc(MongoMIRoleAssignmentResource.name, "The GUID for the Role Assignment.");
-@@doc(
-  MongoMIRoleAssignmentResource.properties,
+@@doc(MongoMIRoleAssignmentResource.properties,
   "Properties to create and update an Azure Cosmos DB MongoMI Role Assignment."
 );
-@@doc(
-  MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
+@@doc(MongoMIRoleAssignmentResources.createUpdateMongoMIRoleAssignment::parameters.resource,
   "The properties required to create or update a Role Assignment."
 );

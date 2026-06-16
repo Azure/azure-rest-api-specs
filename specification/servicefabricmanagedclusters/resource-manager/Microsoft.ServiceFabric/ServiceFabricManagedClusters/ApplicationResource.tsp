@@ -53,12 +53,10 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ApplicationResource,
-    Response =
-      | ArmResourceUpdatedResponse<ApplicationResource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
-          @bodyRoot
-          _: ApplicationResource;
-        })
+    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
+      @bodyRoot
+      _: ApplicationResource;
+    })
   >;
 
   /**
@@ -69,12 +67,10 @@ interface Applications {
   update is ArmCustomPatchAsync<
     ApplicationResource,
     PatchModel = ApplicationUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<ApplicationResource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
-          @bodyRoot
-          _: ApplicationResource;
-        })
+    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
+      @bodyRoot
+      _: ApplicationResource;
+    })
   >;
 
   /**
@@ -82,9 +78,7 @@ interface Applications {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ApplicationResource,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -161,28 +155,22 @@ interface Applications {
 
 @@doc(ApplicationResource.name, "The name of the application resource.");
 @@doc(ApplicationResource.properties, "The application resource properties.");
-@@doc(
-  Applications.createOrUpdate::parameters.resource,
+@@doc(Applications.createOrUpdate::parameters.resource,
   "The application resource."
 );
-@@doc(
-  Applications.update::parameters.properties,
+@@doc(Applications.update::parameters.properties,
   "The application resource updated tags."
 );
-@@doc(
-  Applications.resumeUpgrade::parameters.body,
+@@doc(Applications.resumeUpgrade::parameters.body,
   "The parameters for resuming an application upgrade."
 );
-@@doc(
-  Applications.updateUpgrade::parameters.body,
+@@doc(Applications.updateUpgrade::parameters.body,
   "The parameters for updating an application upgrade."
 );
-@@doc(
-  Applications.fetchHealth::parameters.body,
+@@doc(Applications.fetchHealth::parameters.body,
   "The parameters for fetching the health of a deployed application."
 );
-@@doc(
-  Applications.restartDeployedCodePackage::parameters.body,
+@@doc(Applications.restartDeployedCodePackage::parameters.body,
   "The parameters for restarting a deployed code package."
 );
 

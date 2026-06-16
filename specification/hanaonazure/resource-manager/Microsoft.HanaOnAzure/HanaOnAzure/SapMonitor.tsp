@@ -68,10 +68,7 @@ interface SapMonitors {
   @summary("Deletes a SAP monitor.")
   delete is ArmResourceDeleteWithoutOkAsync<
     SapMonitor,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -86,11 +83,9 @@ interface SapMonitors {
 
 @@doc(SapMonitor.name, "Name of the SAP monitor resource.");
 @@doc(SapMonitor.properties, "SAP monitor properties");
-@@doc(
-  SapMonitors.create::parameters.resource,
+@@doc(SapMonitors.create::parameters.resource,
   "Request body representing a SAP Monitor"
 );
-@@doc(
-  SapMonitors.update::parameters.properties,
+@@doc(SapMonitors.update::parameters.properties,
   "Request body that only contains the new Tags field"
 );

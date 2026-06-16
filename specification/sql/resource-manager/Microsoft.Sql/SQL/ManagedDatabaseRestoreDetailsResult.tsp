@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed database restore details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 model ManagedDatabaseRestoreDetailsResult
   is Azure.ResourceManager.ProxyResource<ManagedDatabaseRestoreDetailsProperties> {
   ...ResourceNameParameter<
@@ -28,9 +26,7 @@ model ManagedDatabaseRestoreDetailsResult
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseRestoreDetails)
 interface ManagedDatabaseRestoreDetailsResults {
   /**
    * Gets managed database restore details.
@@ -39,8 +35,7 @@ interface ManagedDatabaseRestoreDetailsResults {
   get is ArmResourceRead<ManagedDatabaseRestoreDetailsResult>;
 }
 
-@@doc(
-  ManagedDatabaseRestoreDetailsResult.name,
+@@doc(ManagedDatabaseRestoreDetailsResult.name,
   "The name of the restore details to retrieve."
 );
 @@doc(ManagedDatabaseRestoreDetailsResult.properties, "Resource properties.");

@@ -13,8 +13,6 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL virtual cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 model VirtualCluster
   is Azure.ResourceManager.TrackedResource<VirtualClusterProperties> {
   ...ResourceNameParameter<
@@ -25,9 +23,7 @@ model VirtualCluster
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.VirtualClusters)
 interface VirtualClusters {
   /**
    * Gets a virtual cluster.
@@ -40,14 +36,11 @@ interface VirtualClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     VirtualCluster,
-    Response =
-      | ArmResourceUpdatedResponse<VirtualCluster>
-      | ArmResourceCreatedResponse<
-          VirtualCluster,
-          ArmLroLocationHeader<FinalResult = VirtualCluster> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<VirtualCluster> | ArmResourceCreatedResponse<
+      VirtualCluster,
+      ArmLroLocationHeader<FinalResult = VirtualCluster> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -65,10 +58,7 @@ interface VirtualClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     VirtualCluster,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -94,11 +84,9 @@ interface VirtualClusters {
 
 @@doc(VirtualCluster.name, "The name of the virtual cluster.");
 @@doc(VirtualCluster.properties, "Resource properties.");
-@@doc(
-  VirtualClusters.createOrUpdate::parameters.resource,
+@@doc(VirtualClusters.createOrUpdate::parameters.resource,
   "The requested virtual cluster resource state."
 );
-@@doc(
-  VirtualClusters.update::parameters.properties,
+@@doc(VirtualClusters.update::parameters.properties,
   "The requested virtual cluster resource state."
 );

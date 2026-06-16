@@ -55,8 +55,7 @@ interface IntegrationFabrics {
   >;
 }
 
-@@doc(
-  IntegrationFabric.name,
+@@doc(IntegrationFabric.name,
   "The integration fabric name of Azure Managed Grafana."
 );
 @@doc(IntegrationFabric.properties, "");

@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.ts";
+import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
 import {
   deduplicateSwaggers,
   getBaseNameForSwagger,
   getExistedVersionOperations,
   getPrecedingSwaggers,
   type Swagger,
-} from "../../src/utils/spec.ts";
+} from "../../src/utils/spec.js";
 
 // Type definitions for tests (extending the base interfaces if needed)
 interface MockSwagger extends Swagger {

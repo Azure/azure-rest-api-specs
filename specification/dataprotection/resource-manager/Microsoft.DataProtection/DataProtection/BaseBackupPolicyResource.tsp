@@ -64,11 +64,9 @@ interface BaseBackupPolicyResources {
 }
 
 @@doc(BaseBackupPolicyResource.name, "");
-@@doc(
-  BaseBackupPolicyResource.properties,
+@@doc(BaseBackupPolicyResource.properties,
   "BaseBackupPolicyResource properties"
 );
-@@doc(
-  BaseBackupPolicyResources.createOrUpdate::parameters.resource,
+@@doc(BaseBackupPolicyResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );

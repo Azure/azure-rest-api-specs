@@ -16,28 +16,20 @@ namespace Compute;
  * Describes a Virtual Machine Scale Set Extension.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @parentResource(VirtualMachineScaleSet)
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualMachineScaleSetExtension extends SubResourceReadOnly {
-  /**
-   * Resource name
-   */
-  name?: string;
-
+model VirtualMachineScaleSetExtension
+  is ProxySubResourceReadOnly<VirtualMachineScaleSetExtensionProperties> {
   /**
    * Resource type
    */
   @visibility(Lifecycle.Read)
-  type?: string;
+  @encodedName("application/json", "type")
+  vmType?: string;
 
   /**
-   * Describes the properties of a Virtual Machine Scale Set Extension.
+   * Resource name
    */
-  properties?: VirtualMachineScaleSetExtensionProperties;
+  name?: string;
 
   /**
    * The name of the VM scale set extension.
@@ -81,13 +73,11 @@ interface VirtualMachineScaleSetExtensions {
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetExtension,
     VirtualMachineScaleSetExtensionUpdate,
-    Response =
-      | ArmResponse<VirtualMachineScaleSetExtension>
-      | ArmResourceCreatedResponse<
-          VirtualMachineScaleSetExtension,
-          LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = ArmResponse<VirtualMachineScaleSetExtension> | ArmResourceCreatedResponse<
+      VirtualMachineScaleSetExtension,
+      LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetExtension> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -107,15 +97,12 @@ interface VirtualMachineScaleSetExtensions {
   >;
 }
 
-@@doc(
-  VirtualMachineScaleSetExtension.properties,
+@@doc(VirtualMachineScaleSetExtension.properties,
   "Describes the properties of a Virtual Machine Scale Set Extension."
 );
-@@doc(
-  VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
+@@doc(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create VM scale set Extension operation."
 );
-@@doc(
-  VirtualMachineScaleSetExtensions.update::parameters.properties,
+@@doc(VirtualMachineScaleSetExtensions.update::parameters.properties,
   "Parameters supplied to the Update VM scale set Extension operation."
 );

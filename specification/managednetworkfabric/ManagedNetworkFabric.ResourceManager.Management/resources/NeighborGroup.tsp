@@ -1,14 +1,17 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
+using TypeSpec.Http;
+
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Neighbor Group.")
-model NeighborGroup
-  is Azure.ResourceManager.TrackedResource<NeighborGroupProperties, false> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NeighborGroup extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Neighbor Group.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,13 +20,15 @@ model NeighborGroup
   @visibility(Lifecycle.Read)
   name: string;
 
+  @doc("The NeighborGroup Properties")
+  properties: NeighborGroupProperties;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NeighborGroup.properties, "The NeighborGroup Properties");
 @armResourceOperations
 interface NeighborGroups {
   @doc("Gets the Neighbor Group.")
@@ -61,7 +66,6 @@ interface NeighborGroups {
 }
 
 @@doc(NeighborGroups.create::parameters.resource, "Request payload.");
-@@doc(
-  NeighborGroups.update::parameters.properties,
+@@doc(NeighborGroups.update::parameters.properties,
   "Neighbor Group properties to update. Only annotations are supported."
 );

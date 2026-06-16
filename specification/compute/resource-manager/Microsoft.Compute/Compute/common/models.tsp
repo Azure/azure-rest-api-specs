@@ -143,6 +143,25 @@ model SubResourceReadOnly {
   id?: Azure.Core.armResourceIdentifier;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
+@Http.Private.includeInapplicableMetadataInPayload(false)
+@Azure.ResourceManager.Legacy.customAzureResource
+model ProxySubResourceReadOnly<Properties extends {}>
+  extends SubResourceReadOnly {
+  @doc("The resource-specific properties for this resource.")
+  properties?: Properties;
+
+  /**
+   * The name of the parent resource.
+   */
+  @path
+  @visibility(Lifecycle.Read)
+  @segment("parents")
+  parentName: string;
+}
+
 /**
  * The complex type of the extended location.
  */

@@ -14,8 +14,7 @@ export function defineBaseConfig(options) {
       ...options,
       projectService: {
         // include hand-written JS files (excluded from TS project)
-        // include *.config.ts (vitest.config.ts, vite.config.ts) not covered by tsconfig include patterns
-        allowDefaultProject: ["*.js", "cmd/*.js", "*.config.ts"],
+        allowDefaultProject: ["*.js", "cmd/*.js"],
       },
     }),
     {

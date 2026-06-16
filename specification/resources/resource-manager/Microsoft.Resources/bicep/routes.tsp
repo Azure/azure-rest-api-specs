@@ -30,7 +30,6 @@ interface DecompileOperationGroup {
   >;
 }
 
-@@clientName(
-  DecompileOperationGroup.bicep::parameters.body,
+@@clientName(DecompileOperationGroup.bicep::parameters.body,
   "decompileOperationRequest"
 );

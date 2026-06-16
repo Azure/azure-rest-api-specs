@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A replication link.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 model ReplicationLink
   is Azure.ResourceManager.ProxyResource<ReplicationLinkProperties> {
   ...ResourceNameParameter<
@@ -27,9 +25,7 @@ model ReplicationLink
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
 interface ReplicationLinks {
   /**
    * Gets a replication link.
@@ -44,10 +40,8 @@ interface ReplicationLinks {
   @tag("ReplicationLinks")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ReplicationLink,
-    Response =
-      | ArmResourceUpdatedResponse<ReplicationLink>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ReplicationLink> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ReplicationLink> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

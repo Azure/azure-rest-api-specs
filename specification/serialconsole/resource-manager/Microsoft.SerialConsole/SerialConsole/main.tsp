@@ -48,7 +48,8 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
-  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
-    | ArmResponse<SerialConsoleOperations>
-    | CloudError;
+  list(
+    ...ApiVersionParameter,
+    ...Azure.ResourceManager.Legacy.Provider,
+  ): ArmResponse<SerialConsoleOperations> | CloudError;
 }

@@ -26,7 +26,7 @@ model RestorePoint
   >;
 }
 
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface RestorePoints {
   /**
    * The operation to get the restore point.
@@ -66,7 +66,6 @@ interface RestorePoints {
 
 @@doc(RestorePoint.name, "The name of the restore point.");
 @@doc(RestorePoint.properties, "The restore point properties.");
-@@doc(
-  RestorePoints.create::parameters.resource,
+@@doc(RestorePoints.create::parameters.resource,
   "Parameters supplied to the Create restore point operation."
 );

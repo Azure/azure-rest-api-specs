@@ -1,9 +1,16 @@
-- tool: TypeSpecRequirement
-  paths:
-    - resource-manager/Microsoft.HybridContainerService/HybridContainerService/stable/2024-01-01/**/*.json
-  reason: Pre-existing hand-written swagger predating TypeSpec requirement. Moved from v1 to v2 folder structure.
-
-- tool: TypeSpecRequirement
-  paths:
-    - resource-manager/Microsoft.HybridContainerService/HybridContainerService/preview/2023-11-15-preview/**/*.json
-  reason: Pre-existing hand-written swagger predating TypeSpec requirement. Moved from v1 to v2 folder structure.
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs currently v1. Not ready to migrate to v2 as of latest PR. Due to timeline we want to first catchup to private repo and rollout, then migrate to v2.
+  paths: 
+  - HybridContainerService.Management
+  
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to generate SDKs from TypeSpec.
+    Responsibility: Service team with SDK team collaboration.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.*
+  paths: [HybridContainerService.Management/tspconfig.yaml]

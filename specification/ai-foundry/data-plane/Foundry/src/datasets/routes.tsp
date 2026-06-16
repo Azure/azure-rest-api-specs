@@ -1,9 +1,8 @@
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
@@ -19,10 +18,9 @@ interface Datasets
       ListDatasetVersionsParameters,
       ListDatasetVersionsParameters
     > {
-  /** Initiates a new pending upload or retrieves an existing one for the specified dataset version. */
-  @summary("Start a pending upload")
+  @doc("Start a new or get an existing pending upload of a dataset for a specific version.")
   @Rest.action("startPendingUpload")
-  startPendingUploadVersion is FoundryResourceOperation<
+  startPendingUploadVersion is Azure.Core.Foundations.ResourceOperation<
     DatasetVersion,
     {
       @doc("The pending upload request parameters")
@@ -40,12 +38,11 @@ interface Datasets
 
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Get dataset credentials")
-  @doc("Gets the SAS credential to access the storage account associated with a Dataset version.")
+  @doc("Get the SAS credential to access the storage account associated with a Dataset version.")
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")
-  getCredentials is FoundryResourceOperation<
+  getCredentials is Azure.Core.Foundations.ResourceOperation<
     DatasetVersion,
     {
       @doc("The specific version id of the DatasetVersion to operate on.")

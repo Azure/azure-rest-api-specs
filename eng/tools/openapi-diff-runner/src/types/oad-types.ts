@@ -15,21 +15,13 @@ import {
   getVersionFromInputFile,
   sourceBranchHref,
   specificBranchHref,
-} from "../utils/common-utils.ts";
-import { ApiVersionLifecycleStage, type Context } from "./breaking-change.ts";
-import { type MessageLevel } from "./message.ts";
+} from "../utils/common-utils.js";
+import { ApiVersionLifecycleStage, Context } from "./breaking-change.js";
+import { MessageLevel } from "./message.js";
 
-let _packageJson: Record<string, unknown> | undefined;
-function getPackageJson(): Record<string, unknown> {
-  if (!_packageJson) {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = dirname(__filename);
-    _packageJson = JSON.parse(
-      readFileSync(join(__dirname, "../../package.json"), "utf-8"),
-    ) as Record<string, unknown>;
-  }
-  return _packageJson!;
-}
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const packageJson = JSON.parse(readFileSync(join(__dirname, "../../../package.json"), "utf-8"));
 /**
  * A type that represents AutoRest.Swagger.ComparisonMessage from OAD
  * after being transformed by ComparisonMessage.GetValidationMessagesAsJson().
@@ -103,8 +95,7 @@ export const setOadBaseBranch = (traceData: OadTraceData, branchName: string): O
  * Generates markdown content from OAD trace data
  */
 export const generateOadMarkdown = async (traceData: OadTraceData): Promise<string> => {
-  const oadVersion =
-    (getPackageJson() as any).dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
+  const oadVersion = packageJson.dependencies?.["@azure/oad"]?.replace(/[\^~]/, "") || "unknown";
   if (traceData.traces.length === 0) {
     return "";
   }

@@ -2683,11 +2683,11 @@ model CustomOkResponse {
 
   @header("x-ms-correlation-request-id")
   @doc("correlation request id.")
-  xMsCorrelationRequestId?: string;
+  correlationRequestId?: string;
 
   @header("x-ms-request-id")
   @doc("request id.")
-  xMsRequestId?: string;
+  requestId?: string;
 }
 
 /**

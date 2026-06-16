@@ -22,14 +22,15 @@ op ComputeResourceRead<
 
 /** Custom ArmResourceCreateOrReplaceAsync operation template with CloudError as Error */
 op ComputeResourceCreateOrReplaceAsync<
-  Resource extends Azure.ResourceManager.Foundations.SimpleResource,
+  Resource extends Azure.ResourceManager.Foundations.Resource,
   BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmAsyncOperationHeader<FinalResult = Resource> &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResourceUpdatedResponse<Resource>
-    | ArmResourceCreatedResponse<Resource, LroHeaders>,
+  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedResponse<
+    Resource,
+    LroHeaders
+  >,
   Error extends {} = Common.CloudError
 > is ArmResourceCreateOrReplaceAsync<
   Resource,
@@ -73,12 +74,10 @@ op ComputeProviderActionSync<
 
 /** Custom ArmResourceCreateOrReplaceSync operation template with CloudError as Error */
 op ComputeResourceCreateOrReplaceSync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResourceUpdatedResponse<Resource>
-    | ArmResourceCreatedSyncResponse<Resource>,
+  Response extends {} = ArmResourceUpdatedResponse<Resource> | ArmResourceCreatedSyncResponse<Resource>,
   Error extends {} = CloudError
 > is ArmResourceCreateOrReplaceSync<
   Resource,
@@ -90,7 +89,7 @@ op ComputeResourceCreateOrReplaceSync<
 
 /** Custom ArmListBySubscription operation template with CloudError as Error */
 op ComputeListBySubscription<
-  Resource extends Azure.ResourceManager.Foundations.SimpleResource,
+  Resource extends Azure.ResourceManager.Foundations.Resource,
   Parameters extends {} = {},
   Response extends {} = ArmResponse<ResourceListResult<Resource>>,
   Error extends {} = CloudError
@@ -98,7 +97,7 @@ op ComputeListBySubscription<
 
 /** Custom ArmResourceListByParent operation template with CloudError as Error */
 op ComputeResourceListByParent<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   ParentName extends valueof string = "",
   ParentFriendlyName extends valueof string = "",
@@ -117,7 +116,7 @@ op ComputeResourceListByParent<
 
 /** Custom ArmCustomPatchAsync operation template with CloudError as Error */
 op ComputeCustomPatchAsync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Foundations.TagsUpdateModel<Resource>,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<
@@ -127,9 +126,10 @@ op ComputeCustomPatchAsync<
   > &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmResponse<Resource>
-    | ArmAcceptedLroResponse<"Resource update request accepted.", LroHeaders>,
+  Response extends {} = ArmResponse<Resource> | ArmAcceptedLroResponse<
+    "Resource update request accepted.",
+    LroHeaders
+  >,
   Error extends {} = CloudError
 > is ArmCustomPatchAsync<
   Resource,
@@ -143,7 +143,7 @@ op ComputeCustomPatchAsync<
 
 /** Custom ArmCustomPatchSync operation template with CloudError as Error */
 op ComputeCustomPatchSync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   PatchModel extends TypeSpec.Reflection.Model = Foundations.TagsUpdateModel<Resource>,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
@@ -160,7 +160,7 @@ op ComputeCustomPatchSync<
 
 /** Custom ArmResourceDeleteSync operation template with CloudError as Error */
 op ComputeResourceDeleteSync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   Parameters extends {} = {},
   Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse,
@@ -178,15 +178,12 @@ op ComputeResourceDeleteSync<
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
 op ComputeResourceDeleteAsync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader &
     Azure.Core.Foundations.RetryAfterHeader,
   Parameters extends {} = {},
-  Response extends {} =
-    | ArmDeletedResponse
-    | ArmDeleteAcceptedLroResponse<LroHeaders>
-    | ArmDeletedNoContentResponse,
+  Response extends {} = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders> | ArmDeletedNoContentResponse,
   Error extends {} = CloudError
 > is ArmResourceDeleteAsync<
   Resource,
@@ -199,7 +196,7 @@ op ComputeResourceDeleteAsync<
 
 /** Custom ArmResourceActionSync operation template with CloudError as Error */
 op ComputeResourceActionSync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
   BaseParameters = Foundations.DefaultBaseParameters<Resource>,
@@ -218,7 +215,7 @@ op ComputeResourceActionSync<
 
 /** Custom ArmResourceActionAsync operation template with CloudError as Error */
 op ComputeResourceActionAsync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
   BaseParameters extends TypeSpec.Reflection.Model = Foundations.DefaultBaseParameters<Resource>,
@@ -243,7 +240,7 @@ op ComputeResourceActionAsync<
 >;
 /** Custom ArmResourceActionAsync operation template with CloudError as Error */
 op ComputeResourceActionAsyncBase<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   Response extends TypeSpec.Reflection.Model | void,
   BaseParameters extends TypeSpec.Reflection.Model = Foundations.DefaultBaseParameters<Resource>,
@@ -265,7 +262,7 @@ op ComputeResourceActionAsyncBase<
 >;
 /** Custom ArmResourceActionNoResponseContentAsync operation template with CloudError as Error */
 op ComputeResourceActionNoResponseContentAsync<
-  Resource extends Foundations.SimpleResource,
+  Resource extends Foundations.Resource,
   Request extends TypeSpec.Reflection.Model | void,
   BaseParameters extends TypeSpec.Reflection.Model = Foundations.DefaultBaseParameters<Resource>,
   LroHeaders extends TypeSpec.Reflection.Model = ArmLroLocationHeader<

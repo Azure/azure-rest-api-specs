@@ -64,7 +64,6 @@ interface NetworkVirtualApplianceSkus {
 }
 
 @@doc(NetworkVirtualApplianceSku.name, "Name of the Sku.");
-@@doc(
-  NetworkVirtualApplianceSku.properties,
+@@doc(NetworkVirtualApplianceSku.properties,
   "NetworkVirtualApplianceSku properties."
 );

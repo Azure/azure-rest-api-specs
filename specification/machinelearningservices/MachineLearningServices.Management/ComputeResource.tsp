@@ -97,10 +97,7 @@ interface ComputeResources {
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -124,7 +121,6 @@ interface ComputeResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   @action("customServices")
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
@@ -159,7 +155,6 @@ interface ComputeResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
@@ -205,7 +200,6 @@ interface ComputeResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
@@ -221,7 +215,6 @@ interface ComputeResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   @operationId("Compute_getAllowedResizeSizes")
   @action("getAllowedVmSizesForResize")
   getAllowedResizeSizes is ArmResourceActionSync<
@@ -236,7 +229,6 @@ interface ComputeResources {
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
-  @added(Versions.v2026_03_15_preview)
   resize is ArmResourceActionAsyncBase<
     ComputeResource,
     ResizeSchema,
@@ -246,28 +238,22 @@ interface ComputeResources {
 }
 
 @@doc(ComputeResource.name, "Name of the Azure Machine Learning compute.");
-@@doc(
-  ComputeResources.createOrUpdate::parameters.resource,
+@@doc(ComputeResources.createOrUpdate::parameters.resource,
   "Payload with Machine Learning compute definition."
 );
-@@doc(
-  ComputeResources.update::parameters.properties,
+@@doc(ComputeResources.update::parameters.properties,
   "Additional parameters for cluster update."
 );
-@@doc(
-  ComputeResources.updateCustomServices::parameters.body,
+@@doc(ComputeResources.updateCustomServices::parameters.body,
   "New list of Custom Services."
 );
-@@doc(
-  ComputeResources.updateDataMounts::parameters.body,
+@@doc(ComputeResources.updateDataMounts::parameters.body,
   "The parameters for creating or updating a machine learning workspace."
 );
-@@doc(
-  ComputeResources.updateIdleShutdownSetting::parameters.body,
+@@doc(ComputeResources.updateIdleShutdownSetting::parameters.body,
   "The object for updating idle shutdown setting of specified ComputeInstance."
 );
-@@doc(
-  ComputeResources.resize::parameters.body,
+@@doc(ComputeResources.resize::parameters.body,
   "The object for updating VM size setting of specified Compute Instance."
 );
 @@doc(ComputeResource.identity, "The identity of the resource.");

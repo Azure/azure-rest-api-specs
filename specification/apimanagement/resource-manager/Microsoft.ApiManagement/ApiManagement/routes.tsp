@@ -207,14 +207,11 @@ interface OperationsResultsOperationGroup {
     @minLength(1)
     @maxLength(80)
     operationId: string,
-  ):
-    | OkResponse
-    | (ArmAcceptedResponse & {
-        /**
-         * URL for determining when an operation has completed.
-         **/
-        @header("Location")
-        location: string;
-      })
-    | ErrorResponse;
+  ): OkResponse | (ArmAcceptedResponse & {
+    /**
+     * URL for determining when an operation has completed.
+     **/
+    @header("Location")
+    location: string;
+  }) | ErrorResponse;
 }

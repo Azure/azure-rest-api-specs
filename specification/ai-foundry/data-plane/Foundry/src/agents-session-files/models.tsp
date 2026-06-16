@@ -1,3 +1,6 @@
+using TypeSpec.Http;
+using TypeSpec.Versioning;
+
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
@@ -30,21 +33,11 @@ model SessionDirectoryEntry {
   modified_time: utcDateTime;
 }
 
+@doc("Response from listing a directory in a session sandbox.")
 model SessionDirectoryListResponse {
-  /** The first ID represented in this list. */
-  first_id?: string;
-
-  /** The last ID represented in this list. */
-  @continuationToken
-  last_id?: string;
-
-  /** A value indicating whether there are additional values available not captured in this list. */
-  has_more: boolean;
-
-  /** The path that was listed, relative to the session home directory. */
+  @doc("The path that was listed, relative to the session home directory.")
   path: string;
 
-  /** The directory entries. */
-  @pageItems
+  @doc("The directory entries.")
   entries: SessionDirectoryEntry[];
 }

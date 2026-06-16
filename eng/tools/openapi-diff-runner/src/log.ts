@@ -6,16 +6,15 @@ import { log as logAsync } from "@azure-tools/specs-shared/console";
  */
 export const LOG_PREFIX = "Runner-";
 
-export const LogLevel = {
-  Error: "error",
-  Warn: "warn",
-  Info: "info",
-  Debug: "debug",
-  Notice: "notice",
-  Group: "group",
-  EndGroup: "endgroup",
-} as const;
-export type LogLevel = (typeof LogLevel)[keyof typeof LogLevel];
+export enum LogLevel {
+  Error = "error",
+  Warn = "warn",
+  Info = "info",
+  Debug = "debug",
+  Notice = "notice",
+  Group = "group",
+  EndGroup = "endgroup",
+}
 
 /**
  * Logs a message to the console with GitHub Actions workflow commands.

@@ -80,7 +80,6 @@ interface BackupEngines {
 }
 
 @@doc(BackupEngineBaseResource.name, "Name of the backup management server.");
-@@doc(
-  BackupEngineBaseResource.properties,
+@@doc(BackupEngineBaseResource.properties,
   "BackupEngineBaseResource properties"
 );

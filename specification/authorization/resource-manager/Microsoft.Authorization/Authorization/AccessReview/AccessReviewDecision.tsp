@@ -70,7 +70,6 @@ interface AccessReviewDecisions {
 
 @@doc(AccessReviewDecision.name, "The id of the decision record.");
 @@doc(AccessReviewDecision.properties, "Access Review Decision properties.");
-@@doc(
-  AccessReviewDecisions.patch::parameters.properties,
+@@doc(AccessReviewDecisions.patch::parameters.properties,
   "Access review decision properties to patch."
 );

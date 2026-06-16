@@ -14,11 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed database Advanced Threat Protection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedDatabaseAdvancedThreatProtectionSettings
-)
 model ManagedDatabaseAdvancedThreatProtection
   is Azure.ResourceManager.ProxyResource<AdvancedThreatProtectionProperties> {
   ...ResourceNameParameter<
@@ -31,11 +27,7 @@ model ManagedDatabaseAdvancedThreatProtection
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedDatabaseAdvancedThreatProtectionSettings
-)
 interface ManagedDatabaseAdvancedThreatProtections {
   /**
    * Gets a managed database's Advanced Threat Protection state.
@@ -56,15 +48,12 @@ interface ManagedDatabaseAdvancedThreatProtections {
   listByDatabase is ArmResourceListByParent<ManagedDatabaseAdvancedThreatProtection>;
 }
 
-@@doc(
-  ManagedDatabaseAdvancedThreatProtection.name,
+@@doc(ManagedDatabaseAdvancedThreatProtection.name,
   "The name of the Advanced Threat Protection state."
 );
-@@doc(
-  ManagedDatabaseAdvancedThreatProtection.properties,
+@@doc(ManagedDatabaseAdvancedThreatProtection.properties,
   "Resource properties."
 );
-@@doc(
-  ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
+@@doc(ManagedDatabaseAdvancedThreatProtections.createOrUpdate::parameters.resource,
   "The managed database Advanced Threat Protection state."
 );

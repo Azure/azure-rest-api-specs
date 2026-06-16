@@ -1,60 +1,28 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "environmentName": "myenvironment",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
     "resourceGroupName": "examplerg",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    "environmentName": "myenvironment",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/reddog",
             "name": "reddog",
             "type": "Microsoft.App/managedEnvironments/daprcomponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/reddog",
             "properties": {
               "componentType": "state.azure.cosmosdb",
+              "version": "v1",
               "ignoreErrors": false,
               "initTimeout": "50s",
-              "metadata": [
-                {
-                  "name": "url",
-                  "value": "<COSMOS-URL>"
-                },
-                {
-                  "name": "database",
-                  "value": "itemsDB"
-                },
-                {
-                  "name": "collection",
-                  "value": "items"
-                },
-                {
-                  "name": "masterkey",
-                  "secretRef": "masterkey"
-                }
-              ],
-              "scopes": [
-                "container-app-1",
-                "container-app-2"
-              ],
               "secrets": [
                 {
                   "name": "masterkey"
                 }
               ],
-              "version": "v1"
-            }
-          },
-          {
-            "name": "vaultdog",
-            "type": "Microsoft.App/managedEnvironments/daprcomponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
-            "properties": {
-              "componentType": "state.azure.cosmosdb",
-              "ignoreErrors": false,
-              "initTimeout": "50s",
               "metadata": [
                 {
                   "name": "url",
@@ -76,19 +44,53 @@
               "scopes": [
                 "container-app-1",
                 "container-app-2"
-              ],
-              "secretStoreComponent": "my-secret-store",
-              "version": "v1"
+              ]
             }
           },
           {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
             "name": "vaultdog",
             "type": "Microsoft.App/managedEnvironments/daprcomponents",
-            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
             "properties": {
               "componentType": "state.azure.cosmosdb",
+              "version": "v1",
               "ignoreErrors": false,
               "initTimeout": "50s",
+              "secretStoreComponent": "my-secret-store",
+              "metadata": [
+                {
+                  "name": "url",
+                  "value": "<COSMOS-URL>"
+                },
+                {
+                  "name": "database",
+                  "value": "itemsDB"
+                },
+                {
+                  "name": "collection",
+                  "value": "items"
+                },
+                {
+                  "name": "masterkey",
+                  "secretRef": "masterkey"
+                }
+              ],
+              "scopes": [
+                "container-app-1",
+                "container-app-2"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprcomponents/vaultdog",
+            "name": "vaultdog",
+            "type": "Microsoft.App/managedEnvironments/daprcomponents",
+            "properties": {
+              "componentType": "state.azure.cosmosdb",
+              "version": "v1",
+              "ignoreErrors": false,
+              "initTimeout": "50s",
+              "secretStoreComponent": "my-secret-store",
               "metadata": [
                 {
                   "name": "url",
@@ -110,15 +112,11 @@
               "scopes": [
                 "container-app-1",
                 "container-app-2"
-              ],
-              "secretStoreComponent": "my-secret-store",
-              "version": "v1"
+              ]
             }
           }
         ]
       }
     }
-  },
-  "operationId": "DaprComponents_List",
-  "title": "List Dapr Components"
+  }
 }

@@ -26,7 +26,7 @@ model PrivateEndpointConnection
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is a helper interface defining legacy operation signatures with a custom path parameter (resourceName). The @armResourceOperations decorator is applied to the PrivateEndpointConnections interface that consumes these operations."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PrivateEndpointConnectionsOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -72,18 +72,15 @@ interface PrivateEndpointConnections {
   /**
    * Delete private endpoint connection with the specified name
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The existing API returns 200, 202, and 204 for delete which differs from the standard ARM delete response codes. Keeping for backward compatibility."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The existing API returns the PrivateEndpointConnection resource in the 200 and 202 delete response bodies. Keeping for backward compatibility."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deletePrivateEndpointConnection is PrivateEndpointConnectionsOps.DeleteWithoutOkAsync<
     PrivateEndpointConnection,
-    Response =
-      | ArmResponse<PrivateEndpointConnection>
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: PrivateEndpointConnection;
-        })
-      | ArmDeletedNoContentResponse
+    Response = ArmResponse<PrivateEndpointConnection> | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: PrivateEndpointConnection;
+    }) | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -95,15 +92,12 @@ interface PrivateEndpointConnections {
   >;
 }
 
-@@doc(
-  PrivateEndpointConnection.name,
+@@doc(PrivateEndpointConnection.name,
   "The name of the private endpoint connection"
 );
-@@doc(
-  PrivateEndpointConnection.properties,
+@@doc(PrivateEndpointConnection.properties,
   "The properties of a private endpoint connection"
 );
-@@doc(
-  PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
+@@doc(PrivateEndpointConnections.createOrUpdatePrivateEndpointConnection::parameters.resource,
   "The private endpoint connection with updated properties"
 );

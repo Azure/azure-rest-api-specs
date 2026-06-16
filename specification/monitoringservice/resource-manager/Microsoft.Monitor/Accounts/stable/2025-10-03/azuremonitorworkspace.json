@@ -756,7 +756,7 @@
         "tags": [
           "Issue"
         ],
-        "description": "Add or update alerts associated with an issue",
+        "description": "Add or update alerts in the issue",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -820,7 +820,7 @@
         "tags": [
           "Issue"
         ],
-        "description": "Add or update resources associated with an issue",
+        "description": "Add or update resources in the issue",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1518,11 +1518,6 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -1886,8 +1881,7 @@
         },
         "version": {
           "type": "string",
-          "description": "The version of Metrics Query Service that this AMW will use for all metric queries.",
-          "example": "1.0"
+          "description": "The version of Metrics Query Service that this AMW will use for all metric queries."
         }
       }
     },

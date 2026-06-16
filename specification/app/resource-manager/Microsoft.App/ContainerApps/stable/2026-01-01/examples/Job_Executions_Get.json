@@ -1,27 +1,26 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "jobName": "testcontainerAppsJob0",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "jobName": "testcontainerappsjob0",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
             "name": "testcontainerAppJob-27944454",
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/jobs/testcontainerAppsJob0/executions/testcontainerAppJob-27944454",
             "properties": {
-              "endTime": "2023-02-13T20:47:30+00:00",
-              "startTime": "2023-02-13T20:37:30+00:00",
               "status": "Running",
+              "startTime": "2023-02-13T20:37:30+00:00",
+              "endTime": "2023-02-13T20:47:30+00:00",
               "template": {
                 "containers": [
                   {
-                    "name": "testcontainerappsjob0",
                     "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testcontainerappsjob0",
                     "resources": {
                       "cpu": 0.5,
                       "memory": "1Gi"
@@ -30,29 +29,27 @@
                 ],
                 "initContainers": [
                   {
-                    "name": "testinitcontainerAppsJob0",
-                    "args": [
-                      "-c",
-                      "while true; do echo hello; sleep 10;done"
-                    ],
-                    "command": [
-                      "/bin/sh"
-                    ],
                     "image": "repo/testcontainerappsjob0:v4",
+                    "name": "testinitcontainerAppsJob0",
                     "resources": {
                       "cpu": 0.5,
                       "memory": "1Gi"
-                    }
+                    },
+                    "command": [
+                      "/bin/sh"
+                    ],
+                    "args": [
+                      "-c",
+                      "while true; do echo hello; sleep 10;done"
+                    ]
                   }
                 ]
               }
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     }
-  },
-  "operationId": "JobsExecutions_List",
-  "title": "Get a Container Apps Job Executions"
+  }
 }

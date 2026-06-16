@@ -1,56 +1,54 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "configName": "default",
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "rg1",
     "environmentName": "managedEnv",
+    "configName": "default",
+    "api-version": "2026-01-01",
     "maintenanceConfigurationEnvelope": {
       "properties": {
         "scheduledEntries": [
           {
-            "durationHours": 9,
+            "weekDay": "Sunday",
             "startHourUtc": 12,
-            "weekDay": "Sunday"
+            "durationHours": 9
           }
         ]
       }
-    },
-    "resourceGroupName": "rg1",
-    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9"
+    }
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "name": "default",
         "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "properties": {
           "scheduledEntries": [
             {
-              "durationHours": 9,
+              "weekDay": "Sunday",
               "startHourUtc": 12,
-              "weekDay": "Sunday"
+              "durationHours": 9
             }
           ]
         }
       }
     },
-    "201": {
+    "200": {
       "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "name": "default",
         "type": "Microsoft.App/ManagedEnvironments/maintenanceConfigurations",
-        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/rg1/providers/Microsoft.App/ManagedEnvironments/managedEnv/maintenanceConfigurations/default",
         "properties": {
           "scheduledEntries": [
             {
-              "durationHours": 9,
+              "weekDay": "Sunday",
               "startHourUtc": 12,
-              "weekDay": "Sunday"
+              "durationHours": 9
             }
           ]
         }
       }
     }
-  },
-  "operationId": "MaintenanceConfigurations_CreateOrUpdate",
-  "title": "ManagedEnvironmentMaintenanceConfigurationsCreateOrUpdate"
+  }
 }

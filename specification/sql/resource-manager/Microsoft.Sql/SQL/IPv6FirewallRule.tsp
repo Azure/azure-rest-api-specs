@@ -18,9 +18,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
 model IPv6FirewallRule extends ProxyResourceWithWritableName {
   /**
    * The properties of the IPv6 firewall rule.
@@ -29,9 +27,7 @@ model IPv6FirewallRule extends ProxyResourceWithWritableName {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
 interface IPv6FirewallRules {
   /**
    * Gets an IPv6 firewall rule.
@@ -87,7 +83,6 @@ interface IPv6FirewallRules {
 }
 
 @@doc(IPv6FirewallRule.properties, "Resource properties.");
-@@doc(
-  IPv6FirewallRules.createOrUpdate::parameters.resource,
+@@doc(IPv6FirewallRules.createOrUpdate::parameters.resource,
   "The required parameters for creating or updating an IPv6 firewall rule."
 );

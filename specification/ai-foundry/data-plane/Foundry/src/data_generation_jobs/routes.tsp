@@ -18,9 +18,9 @@ const DataGenerationJobsRequiredPreviews = #{
 @tag("DataGenerationJobs")
 interface DataGenerationJobs {
   /**
-   * Retrieves the specified data generation job and its current status.
+   * Gets the details of a data generation job by its ID.
    */
-  @summary("Get a data generation job")
+  @summary("Get info about a data generation job.")
   @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   get is queryJobStatusPreview<
@@ -31,7 +31,7 @@ interface DataGenerationJobs {
   /**
    * Returns a list of data generation jobs.
    */
-  @summary("List data generation jobs")
+  @summary("Returns a list of data generation jobs")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   list is listJobsPreview<
@@ -40,9 +40,9 @@ interface DataGenerationJobs {
   >;
 
   /**
-   * Submits a new data generation job for asynchronous execution.
+   * Creates a data generation job.
    */
-  @summary("Create a data generation job")
+  @summary("Creates a data generation job.")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   create is postJobPreview<
@@ -51,9 +51,9 @@ interface DataGenerationJobs {
   >;
 
   /**
-   * Cancels the specified data generation job if it is still in progress.
+   * Cancels a data generation job by its ID.
    */
-  @summary("Cancel a data generation job")
+  @summary("Cancels a data generation job.")
   @route("data_generation_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   cancel is cancelJobPreview<
@@ -62,9 +62,9 @@ interface DataGenerationJobs {
   >;
 
   /**
-   * Removes the specified data generation job and its associated output.
+   * Deletes a data generation job by its ID.
    */
-  @summary("Delete a data generation job")
+  @summary("Deletes a data generation job.")
   @route("data_generation_jobs/{jobId}")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;

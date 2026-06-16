@@ -1,8 +1,7 @@
-export const PRType = {
-  DataPlane: "data-plane",
-  ResourceManager: "resource-manager",
-} as const;
-export type PRType = (typeof PRType)[keyof typeof PRType];
+export enum PRType {
+  DataPlane = "data-plane",
+  ResourceManager = "resource-manager",
+}
 
 /**
  * The LabelContext is used by prSummary.ts / summary() and downstream invocations.

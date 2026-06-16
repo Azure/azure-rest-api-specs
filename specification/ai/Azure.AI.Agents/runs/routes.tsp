@@ -95,11 +95,9 @@ namespace Azure.AI.Agents {
 
       ...ApiVersionParameter,
       ...AgentsListOptions,
-    ):
-      | {
-          ...AgentsPagedResult<ThreadRun>;
-        }
-      | AgentV1Error;
+    ): {
+      ...AgentsPagedResult<ThreadRun>;
+    } | AgentV1Error;
 
     /**
      * Gets an existing run from an existing thread.

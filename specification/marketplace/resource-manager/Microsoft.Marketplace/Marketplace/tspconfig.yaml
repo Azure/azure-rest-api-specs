@@ -10,6 +10,12 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Marketplace"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.Marketplace"
+    flavor: azure
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.Marketplace"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -34,7 +40,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/marketplace"
     emitter-output-dir: "{output-dir}/{service-dir}/armmarketplace"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmarketplace/v2"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmarketplace"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

@@ -1,15 +1,17 @@
 import "../models/common.tsp";
 import "../models/RoutePolicy.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The RoutePolicy resource definition.")
-model RoutePolicy
-  is Azure.ResourceManager.TrackedResource<RoutePolicyProperties, false> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model RoutePolicy extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Route Policy.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -17,9 +19,11 @@ model RoutePolicy
   @segment("routePolicies")
   @visibility(Lifecycle.Read)
   name: string;
+
+  @doc("The RoutePolicy properties")
+  properties: RoutePolicyProperties;
 }
 
-@@doc(RoutePolicy.properties, "The RoutePolicy properties");
 @armResourceOperations
 interface RoutePolicies {
   @doc("Implements Route Policy GET method.")
@@ -84,19 +88,15 @@ interface RoutePolicies {
 }
 
 @@doc(RoutePolicies.create::parameters.resource, "Request payload.");
-@@doc(
-  RoutePolicies.update::parameters.properties,
+@@doc(RoutePolicies.update::parameters.properties,
   "Route Policy properties to update."
 );
-@@doc(
-  RoutePolicies.updateAdministrativeState::parameters.body,
+@@doc(RoutePolicies.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(RoutePolicies.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  RoutePolicies.validateConfiguration::parameters.body,
+@@doc(RoutePolicies.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );

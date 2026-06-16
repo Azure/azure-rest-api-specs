@@ -1,14 +1,14 @@
-import { type APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
 import {
-  type AzsdkBuildResponse,
-  type AzsdkGenerateResponse,
-  type AzsdkPackResponse,
+  AzsdkBuildResponse,
+  AzsdkGenerateResponse,
+  AzsdkPackResponse,
   buildExecutionReport,
   parseAzsdkResponse,
-} from "./azsdk-adapter.ts";
+} from "./azsdk-adapter.js";
 import {
   generateArtifact,
   getBreakingChangeInfo,
@@ -25,18 +25,18 @@ import {
   resolvePackagePath,
   selectGenerationTool,
   setPipelineVariables,
-} from "./command-helpers.ts";
-import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
-import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
-import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
+} from "./command-helpers.js";
+import { checkEmitterEnabled, EmitterCheckResult } from "./emitter-check.js";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
+import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
 import {
   execAsync,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
-  type SpecConfigs,
-} from "./utils.ts";
+  SpecConfigs,
+} from "./utils.js";
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
@@ -188,18 +188,10 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   }
 
   await installLanguageToolchain(commandInput);
-  logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
-  if (tool === "skipped") {
-    logMessage(
-      `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-      LogLevel.Info,
-    );
-    executionReport = {
-      packages: [],
-      executionResult: "succeeded",
-    };
-  } else if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
+
+  if (tool === "azsdk-cli" && commandInput.tspConfigPath) {
     // azsdk-cli path for TypeSpec specs
+    logMessage(`Generating SDK (azsdk-cli) from ${specConfigPathText}`, LogLevel.Group);
     const result = await runAzsdkGeneration(commandInput, commandInput.tspConfigPath);
     executionReport = result.executionReport;
     statusCode = result.statusCode;
@@ -207,6 +199,7 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
   } else {
     // Existing spec-gen-sdk path
     const specGenSdkCommand = prepareSpecGenSdkCommand(commandInput);
+    logMessage(`Generating SDK from ${specConfigPathText}`, LogLevel.Group);
     logMessage(`Runner command:${specGenSdkCommand.join(" ")}`);
     try {
       await runSpecGenSdkCommand(specGenSdkCommand);
@@ -329,16 +322,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
 
-    if (tool === "skipped") {
-      logMessage(
-        `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-        LogLevel.Info,
-      );
-      executionReport = {
-        packages: [],
-        executionResult: "succeeded",
-      };
-    } else if (tool === "azsdk-cli" && changedSpec.typespecProject) {
+    if (tool === "azsdk-cli" && changedSpec.typespecProject) {
       // azsdk-cli path for TypeSpec specs
       try {
         await resetGitRepo(commandInput.localSdkRepoPath);
@@ -515,17 +499,7 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
       continue;
     }
 
-    if (tool === "skipped") {
-      specConfigPath = specConfigs.readmePath ?? "";
-      logMessage(
-        `SDK generation from OpenAPI (readme.md) is not supported for ${commandInput.sdkRepoName}. Skipping spec.`,
-        LogLevel.Info,
-      );
-      executionReport = {
-        packages: [],
-        executionResult: "succeeded",
-      };
-    } else if (tool === "azsdk-cli" && specConfigs.tspconfigPath) {
+    if (tool === "azsdk-cli" && specConfigs.tspconfigPath) {
       // azsdk-cli path for TypeSpec specs
       specConfigPath = specConfigs.tspconfigPath;
       logMessage(`Using azsdk-cli for ${specConfigPath}`, LogLevel.Info);

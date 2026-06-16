@@ -1686,7 +1686,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/Microsoft.EventGrid/eventTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceTypeName}/{resourceName}/providers/microsoft.EventGrid/eventTypes": {
       "get": {
         "operationId": "Topics_ListEventTypes",
         "summary": "List topic event types.",
@@ -1745,287 +1745,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations": {
-      "get": {
-        "operationId": "NetworkSecurityPerimeterConfigurations_List",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "summary": "Get all network security perimeter configurations for resource.",
-        "description": "Get all network security perimeter configurations associated with a topic or domain.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ],
-            "x-ms-enum": {
-              "name": "NetworkSecurityPerimeterResourceType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                }
-              ]
-            }
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource group within the user's subscription.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkSecurityPerimeterConfigurations_List": {
-            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}": {
-      "get": {
-        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "summary": "Get a specific network security perimeter configuration.",
-        "description": "Get a specific network security perimeter configuration with a topic or domain.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ],
-            "x-ms-enum": {
-              "name": "NetworkSecurityPerimeterResourceType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                }
-              ]
-            }
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource group within the user's subscription.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "perimeterGuid",
-            "in": "path",
-            "description": "Unique identifier for perimeter",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "associationName",
-            "in": "path",
-            "description": "Association name to association network security perimeter resource to profile",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkSecurityPerimeterConfigurations_Get": {
-            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Get.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile": {
-      "post": {
-        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
-        "tags": [
-          "NetworkSecurityPerimeterConfigurations"
-        ],
-        "summary": "Reconcile a specific network security perimeter configuration for a given network security perimeter association.",
-        "description": "Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains"
-            ],
-            "x-ms-enum": {
-              "name": "NetworkSecurityPerimeterResourceType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                }
-              ]
-            }
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "The name of the resource group within the user's subscription.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-zA-Z0-9-]*$"
-          },
-          {
-            "name": "perimeterGuid",
-            "in": "path",
-            "description": "Unique identifier for perimeter",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "associationName",
-            "in": "path",
-            "description": "Association name to association network security perimeter resource to profile",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-            }
-          },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NetworkSecurityPerimeterConfigurations_Reconcile": {
-            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Reconcile.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/NetworkSecurityPerimeterConfiguration"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections": {
@@ -2129,460 +1848,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "operationId": "PrivateEndpointConnections_Get",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "summary": "Get a specific private endpoint connection.",
-        "description": "Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces",
-                  "description": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces",
-                  "description": "namespaces"
-                }
-              ]
-            }
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Get": {
-            "$ref": "./examples/PrivateEndpointConnections_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PrivateEndpointConnections_Update",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "summary": "Update a specific private endpoint connection.",
-        "description": "Update a specific private endpoint connection under a topic, domain or partner namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces",
-                  "description": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces",
-                  "description": "namespaces"
-                }
-              ]
-            }
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnection",
-            "in": "body",
-            "description": "The private endpoint connection object to update.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "201": {
-            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            },
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Update": {
-            "$ref": "./examples/PrivateEndpointConnections_Update.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/PrivateEndpointConnection"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "PrivateEndpointConnections_Delete",
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "summary": "Delete a specific private endpoint connection.",
-        "description": "Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "topics",
-              "domains",
-              "partnerNamespaces",
-              "namespaces"
-            ],
-            "x-ms-enum": {
-              "name": "PrivateEndpointConnectionsParentType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "topics",
-                  "value": "topics",
-                  "description": "topics"
-                },
-                {
-                  "name": "domains",
-                  "value": "domains",
-                  "description": "domains"
-                },
-                {
-                  "name": "partnerNamespaces",
-                  "value": "partnerNamespaces",
-                  "description": "partnerNamespaces"
-                },
-                {
-                  "name": "namespaces",
-                  "value": "namespaces",
-                  "description": "namespaces"
-                }
-              ]
-            }
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnections_Delete": {
-            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources": {
-      "get": {
-        "operationId": "PrivateLinkResources_ListByResource",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "summary": "List private link resources under specific topic, domain, or partner namespace or namespace.",
-        "description": "List all the private link resources under a topic, domain, or partner namespace or namespace.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourcesListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_ListByResource": {
-            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "operationId": "PrivateLinkResources_Get",
-        "tags": [
-          "PrivateLinkResources"
-        ],
-        "summary": "Get a private link resource.",
-        "description": "Get properties of a private link resource.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "parentType",
-            "in": "path",
-            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "parentName",
-            "in": "path",
-            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "privateLinkResourceName",
-            "in": "path",
-            "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateLinkResources_Get": {
-            "$ref": "./examples/PrivateLinkResources_Get.json"
-          }
         }
       }
     },
@@ -12007,6 +11272,741 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Get all network security perimeter configurations for resource.",
+        "description": "Get all network security perimeter configurations associated with a topic or domain.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkSecurityPerimeterResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                }
+              ]
+            }
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_List": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}": {
+      "get": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Get a specific network security perimeter configuration.",
+        "description": "Get a specific network security perimeter configuration with a topic or domain.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkSecurityPerimeterResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                }
+              ]
+            }
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "perimeterGuid",
+            "in": "path",
+            "description": "Unique identifier for perimeter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "description": "Association name to association network security perimeter resource to profile",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_Get": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}/reconcile": {
+      "post": {
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "summary": "Reconcile a specific network security perimeter configuration for a given network security perimeter association.",
+        "description": "Reconcile a specific network security perimeter configuration for a given network security perimeter association with a topic or domain.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource. This can be either \\\\'topics\\\\', or \\\\'domains\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains"
+            ],
+            "x-ms-enum": {
+              "name": "NetworkSecurityPerimeterResourceType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                }
+              ]
+            }
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "The name of the resource group within the user's subscription.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "perimeterGuid",
+            "in": "path",
+            "description": "Unique identifier for perimeter",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "associationName",
+            "in": "path",
+            "description": "Association name to association network security perimeter resource to profile",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkSecurityPerimeterConfigurations_Reconcile": {
+            "$ref": "./examples/NetworkSecurityPerimeterConfigurations_Reconcile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NetworkSecurityPerimeterConfiguration"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Get a specific private endpoint connection.",
+        "description": "Get a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces",
+                  "description": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces",
+                  "description": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Update",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Update a specific private endpoint connection.",
+        "description": "Update a specific private endpoint connection under a topic, domain or partner namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces",
+                  "description": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces",
+                  "description": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnection",
+            "in": "body",
+            "description": "The private endpoint connection object to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Update": {
+            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/PrivateEndpointConnection"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "summary": "Delete a specific private endpoint connection.",
+        "description": "Delete a specific private endpoint connection under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "topics",
+              "domains",
+              "partnerNamespaces",
+              "namespaces"
+            ],
+            "x-ms-enum": {
+              "name": "PrivateEndpointConnectionsParentType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "topics",
+                  "value": "topics",
+                  "description": "topics"
+                },
+                {
+                  "name": "domains",
+                  "value": "domains",
+                  "description": "domains"
+                },
+                {
+                  "name": "partnerNamespaces",
+                  "value": "partnerNamespaces",
+                  "description": "partnerNamespaces"
+                },
+                {
+                  "name": "namespaces",
+                  "value": "namespaces",
+                  "description": "namespaces"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Azure operation completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByResource",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "List private link resources under specific topic, domain, or partner namespace or namespace.",
+        "description": "List all the private link resources under a topic, domain, or partner namespace or namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_ListByResource": {
+            "$ref": "./examples/PrivateLinkResources_ListByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "summary": "Get a private link resource.",
+        "description": "Get properties of a private link resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "parentType",
+            "in": "path",
+            "description": "The type of the parent resource. This can be either \\\\'topics\\\\', \\\\'domains\\\\', or \\\\'partnerNamespaces\\\\' or \\\\'namespaces\\\\'.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parentName",
+            "in": "path",
+            "description": "The name of the parent resource (namely, either, the topic name, domain name, or partner namespace name or namespace name).",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "The name of private link resource will be either topic, domain, partnerNamespace or namespace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -16598,14 +16598,14 @@
         },
         "tags": {
           "type": "object",
-          "description": "Tags of the resource.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
         },
         "location": {
           "type": "string",
-          "description": "Location of the resource.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
@@ -16615,7 +16615,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },

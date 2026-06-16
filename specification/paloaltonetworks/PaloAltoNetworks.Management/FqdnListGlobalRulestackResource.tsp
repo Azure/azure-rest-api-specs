@@ -44,11 +44,8 @@ interface FqdnListGlobalRulestackResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FqdnListGlobalRulestackResource,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmNoContentResponse
   >;
 
   /**
@@ -58,7 +55,6 @@ interface FqdnListGlobalRulestackResources {
 }
 
 @@doc(FqdnListGlobalRulestackResource.name, "fqdn list name");
-@@doc(
-  FqdnListGlobalRulestackResource.properties,
+@@doc(FqdnListGlobalRulestackResource.properties,
   "The resource-specific properties for this resource."
 );

@@ -326,6 +326,14 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
             "name": "nodeCustomizationName",
             "in": "path",
             "description": "The name of the Node Customization resource.",
@@ -334,14 +342,6 @@
             "minLength": 1,
             "maxLength": 63,
             "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The request should only proceed if the targeted resource's etag matches the value provided.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
           },
           {
             "name": "properties",
@@ -551,8 +551,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
+            "maxLength": 64,
+            "pattern": "^[\\w\\-\\.]+$"
           }
         ],
         "responses": {
@@ -617,8 +617,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
+            "maxLength": 64,
+            "pattern": "^[\\w\\-\\.]+$"
           }
         ],
         "responses": {
@@ -742,8 +742,9 @@
         },
         "version": {
           "type": "string",
-          "description": "The client-provided version of the node customization.",
-          "pattern": "^(?![.-])[A-Za-z0-9_.-]{1,63}$"
+          "description": "An auto-generated value that changes when the other fields of the image customization are changed.",
+          "pattern": "^[\\w\\-\\.]+$",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -780,13 +781,11 @@
         },
         "scriptType": {
           "$ref": "#/definitions/ScriptType",
-          "description": "The runtime environment for the script (e.g. Bash).",
-          "example": "Bash"
+          "description": "The runtime environment for the script (e.g. Bash)."
         },
         "script": {
           "type": "string",
-          "description": "The script content to be executed in plain text. Do not include secrets.",
-          "example": "touch /hello_world.txt"
+          "description": "The script content to be executed in plain text. Do not include secrets."
         },
         "rebootAfter": {
           "type": "boolean",
@@ -809,6 +808,35 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "properties": {
+          "$ref": "#/definitions/NodeCustomizationUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "NodeCustomizationUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the NodeCustomization.",
+      "properties": {
+        "containerImages": {
+          "type": "array",
+          "description": "The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names",
+          "items": {
+            "type": "string"
+          }
+        },
+        "identityProfile": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+          "description": "The identity used to execute node customization tasks during image build time and provisioning time. \nIf not specified the default agentpool identity will be used.\nThis does not affect provisioned nodes."
+        },
+        "customizationScripts": {
+          "type": "array",
+          "description": "The scripts to customize the node before or after image capture.",
+          "items": {
+            "$ref": "#/definitions/NodeCustomizationScript"
+          },
+          "x-ms-identifiers": []
         }
       }
     },

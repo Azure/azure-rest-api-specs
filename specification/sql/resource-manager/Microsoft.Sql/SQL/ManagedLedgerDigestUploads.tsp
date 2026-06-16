@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * Azure SQL Database ledger digest upload settings.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 model ManagedLedgerDigestUploads
   is Azure.ResourceManager.ProxyResource<ManagedLedgerDigestUploadsProperties> {
   ...ResourceNameParameter<
@@ -29,9 +27,7 @@ model ManagedLedgerDigestUploads
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.ManagedLedgerDigestUploads)
 interface ManagedLedgerDigestUploadsOperationGroup {
   /**
    * Gets the current ledger digest upload configuration for a database.
@@ -46,10 +42,8 @@ interface ManagedLedgerDigestUploadsOperationGroup {
   @tag("ManagedLedgerDigestUploads")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedLedgerDigestUploads,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedLedgerDigestUploads>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ManagedLedgerDigestUploads> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedLedgerDigestUploads> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -71,7 +65,6 @@ interface ManagedLedgerDigestUploadsOperationGroup {
 
 @@doc(ManagedLedgerDigestUploads.name, "");
 @@doc(ManagedLedgerDigestUploads.properties, "Resource properties.");
-@@doc(
-  ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
+@@doc(ManagedLedgerDigestUploadsOperationGroup.createOrUpdate::parameters.resource,
   "The Ledger Digest Storage Endpoint."
 );

@@ -67,7 +67,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -81,7 +81,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -104,21 +104,19 @@ interface CertificateContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<CertificateContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<CertificateContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -187,7 +185,7 @@ interface CertificateContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 }
@@ -242,7 +240,7 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -256,7 +254,7 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -279,21 +277,19 @@ interface WorkspaceCertificate {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<CertificateContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<CertificateContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -362,23 +358,20 @@ interface WorkspaceCertificate {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 }
 
 @@maxLength(CertificateContract.name, 80);
 @@minLength(CertificateContract.name, 1);
-@@doc(
-  CertificateContract.name,
+@@doc(CertificateContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );
 @@doc(CertificateContract.properties, "Certificate properties details.");
-@@doc(
-  CertificateContracts.createOrUpdate::parameters.resource,
+@@doc(CertificateContracts.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );
-@@doc(
-  WorkspaceCertificate.createOrUpdate::parameters.resource,
+@@doc(WorkspaceCertificate.createOrUpdate::parameters.resource,
   "Create or Update parameters."
 );

@@ -80,7 +80,6 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available Storage Rest API operations."
 );

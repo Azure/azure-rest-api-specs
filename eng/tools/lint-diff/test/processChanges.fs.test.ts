@@ -1,7 +1,7 @@
 import { vol } from "memfs";
 import { afterEach, describe, expect, test, vi } from "vitest";
 
-import { readFileList } from "../src/processChanges.ts";
+import { readFileList } from "../src/processChanges.js";
 
 // These tests are in a separate module because fs mocking is difficult to undo
 

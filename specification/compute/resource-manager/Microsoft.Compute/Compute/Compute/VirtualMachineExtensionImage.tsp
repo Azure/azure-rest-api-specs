@@ -34,44 +34,34 @@ alias ImageTypePath = {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageOps
-  extends Azure.ResourceManager.Legacy.RoutedOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       ImageTypePath & KeysOf<VirtualMachineExtensionImage>,
       {
         #suppress "@azure-tools/typespec-azure-core/documentation-required"
         @path @segment("versions") version: string,
-      },
-      CloudError,
-      #{
-        useStaticRoute: true,
-        route: "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageTypeOps
-  extends Azure.ResourceManager.Legacy.RoutedOperations<
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
       ImageTypePath,
-      KeysOf<VirtualMachineExtensionImage>,
-      CloudError,
-      #{
-        useStaticRoute: true,
-        route: "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types",
-      }
+      KeysOf<VirtualMachineExtensionImage>
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}")
-  get is VirtualMachineExtensionImageOps.Read<VirtualMachineExtensionImage>;
+  get is VirtualMachineExtensionImageOps.ReadRoute<VirtualMachineExtensionImage>;
 
   /**
    * Gets a list of virtual machine extension image types.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
-  listTypes is VirtualMachineExtensionImageTypeOps.ListSinglePage<
+  listTypes is VirtualMachineExtensionImageTypeOps.ListRoute<
     VirtualMachineExtensionImage,
     Response = ArmResponse<VirtualMachineExtensionImage[]>
   >;
@@ -80,7 +70,7 @@ interface VirtualMachineExtensionImages {
    * Gets a list of virtual machine extension image versions.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
-  listVersions is VirtualMachineExtensionImageOps.ListSinglePage<
+  listVersions is VirtualMachineExtensionImageOps.ListRoute<
     VirtualMachineExtensionImage,
     Response = ArmResponse<VirtualMachineExtensionImage[]>,
     Parameters = {
@@ -102,7 +92,6 @@ interface VirtualMachineExtensionImages {
 }
 
 @@doc(VirtualMachineExtensionImage.name, "");
-@@doc(
-  VirtualMachineExtensionImage.properties,
+@@doc(VirtualMachineExtensionImage.properties,
   "Describes the properties of a Virtual Machine Extension Image."
 );

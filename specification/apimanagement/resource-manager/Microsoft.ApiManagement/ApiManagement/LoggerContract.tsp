@@ -66,7 +66,7 @@ interface LoggerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -80,7 +80,7 @@ interface LoggerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -97,21 +97,19 @@ interface LoggerContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<LoggerContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag?: string;
-        })
-      | (ArmResourceCreatedSyncResponse<LoggerContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag?: string;
-        })
+    Response = (ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }) | (ArmResourceCreatedSyncResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    })
   >;
 
   /**
@@ -134,7 +132,7 @@ interface LoggerContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -234,7 +232,7 @@ interface WorkspaceLogger {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -248,7 +246,7 @@ interface WorkspaceLogger {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -265,21 +263,19 @@ interface WorkspaceLogger {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<LoggerContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<LoggerContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -302,7 +298,7 @@ interface WorkspaceLogger {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -354,18 +350,15 @@ interface WorkspaceLogger {
 }
 
 @@maxLength(LoggerContract.name, 256);
-@@doc(
-  LoggerContract.name,
+@@doc(LoggerContract.name,
   "Logger identifier. Must be unique in the API Management service instance."
 );
 @@doc(LoggerContract.properties, "Logger entity contract properties.");
-@@doc(
-  LoggerContracts.createOrUpdate::parameters.resource,
+@@doc(LoggerContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(LoggerContracts.update::parameters.properties, "Update parameters.");
-@@doc(
-  WorkspaceLogger.createOrUpdate::parameters.resource,
+@@doc(WorkspaceLogger.createOrUpdate::parameters.resource,
   "Create parameters."
 );
 @@doc(WorkspaceLogger.update::parameters.properties, "Update parameters.");

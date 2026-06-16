@@ -94,11 +94,10 @@ Each subdirectory contains a `stable-2024-01-01.json` (previous) and
 | `new-vs-existing/`         | Mixed classification      | `bar` has no description in both versions (EXISTING); `baz` is newly added without description (NEW). |
 | `added-required-property/` | Optional becomes required | `sku` property changes from optional to required in WidgetProperties between versions.                |
 
-### `typespec/` -- TypeSpec Specification Files (4 files)
+### `typespec/` -- TypeSpec Specification Files (3 files)
 
 | File                             | Violations                    | Description                                                                                                                                                                                                                                           |
 | -------------------------------- | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `segment-casing-violations.tsp`  | @segment casing, naming, enum | @segment uses all-lowercase instead of camelCase (TSP-SEGMENT-CASE); PATCH named "patch" not "update" (TSP-PATCH-NAME); @operationId override; enum instead of union; plain string for ARM resource ID.                                               |
 | `secret-and-type-violations.tsp` | Secrets, type constraints     | Missing @secret on connectionString/adminPassword/primaryKey (SEC-SECRET-DETECT); #suppress for secret-prop; string instead of utcDateTime; string for numeric diskSizeGB (TSP-NUMERIC-TYPE); plain string for ARM resource ID (TSP-ARM-RESOURCE-ID). |
 | `anti-patterns.tsp`              | Common TypeSpec anti-patterns | Empty model `{}` instead of void for POST action; #suppress for no-empty-model; @flattenProperty on new API; default value flowing into PATCH; `\| null` on new property; underscore and ALL_CAPS enum values.                                        |
-| `x-ms-identifiers-violations.tsp` | x-ms-identifiers / @extension | `@extension("x-ms-identifiers", ...)` on array properties (forbidden -- use `@identifiers` or `@key`); `#suppress` of `missing-x-ms-identifiers` with FIXME placeholder text (TSP-4.1); vague "matching another resource" suppression (TSP-ARRAY-IDENTIFIERS). Also contains positive controls: `@identifiers(#["..."])`, `@identifiers(#[])`, and `@key` on item type. |

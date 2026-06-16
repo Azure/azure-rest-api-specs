@@ -1,14 +1,16 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Community resource definition.")
-model IpCommunity
-  is Azure.ResourceManager.TrackedResource<IpCommunityProperties, false> {
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model IpCommunity extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the IP Community.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -16,9 +18,10 @@ model IpCommunity
   @segment("ipCommunities")
   @visibility(Lifecycle.Read)
   name: string;
-}
 
-@@doc(IpCommunity.properties, "The IP Community Properties");
+  @doc("The IP Community Properties")
+  properties: IpCommunityProperties;
+}
 
 @armResourceOperations
 interface IpCommunities {
@@ -49,7 +52,6 @@ interface IpCommunities {
 }
 
 @@doc(IpCommunities.create::parameters.resource, "Request payload.");
-@@doc(
-  IpCommunities.update::parameters.properties,
+@@doc(IpCommunities.update::parameters.properties,
   "IP Community properties to update."
 );

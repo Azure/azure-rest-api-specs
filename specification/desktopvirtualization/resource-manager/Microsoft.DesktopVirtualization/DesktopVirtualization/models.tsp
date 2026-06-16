@@ -2716,12 +2716,6 @@ model HostPoolProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
-
-  /**
-   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
-   */
-  @added(Versions.vLatestPreview)
-  conditionalRdpProperty?: string;
 }
 
 /**
@@ -3321,12 +3315,6 @@ model ApplicationProperties {
   applicationType?: RemoteApplicationType;
 
   /**
-   * Additional shortcut settings for the remote application.
-   */
-  @added(Versions.vLatestPreview)
-  shortcutsExtension?: ShortcutsExtension;
-
-  /**
    * Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.
    */
   commandLineSetting: CommandLineSetting;
@@ -3432,12 +3420,6 @@ model ApplicationPatchProperties {
    * Resource Type of Application.
    */
   applicationType?: RemoteApplicationType;
-
-  /**
-   * Additional shortcut settings for the remote application.
-   */
-  @added(Versions.vLatestPreview)
-  shortcutsExtension?: ShortcutsExtension;
 }
 
 /**
@@ -3587,16 +3569,6 @@ model StartMenuItemProperties {
    * Index of the icon.
    */
   iconIndex?: int32;
-}
-
-/**
- * Additional shortcut settings for a remote application.
- */
-model ShortcutsExtension {
-  /**
-   * Indicates whether to create a desktop shortcut for the remote application.
-   */
-  putShortcutOnDesktop?: boolean;
 }
 
 /**
@@ -3818,12 +3790,6 @@ model HostPoolPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
-
-  /**
-   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
-   */
-  @added(Versions.vLatestPreview)
-  conditionalRdpProperty?: string;
 }
 
 /**
@@ -5518,7 +5484,6 @@ model ProvisioningStatusProperty {
 model ResourceProviderOperationListResult
   is Azure.Core.Page<ResourceProviderOperation>;
 
-@@Azure.ResourceManager.identifiers(
-  ResourceProviderOperationListResult.value,
+@@Azure.ResourceManager.identifiers(ResourceProviderOperationListResult.value,
   #[]
 );

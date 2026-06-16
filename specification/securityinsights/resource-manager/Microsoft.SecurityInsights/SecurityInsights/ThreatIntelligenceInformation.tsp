@@ -52,9 +52,7 @@ interface ThreatIntelligenceInformationOperations {
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
     ThreatIntelligenceIndicatorModel,
-    Response =
-      | ArmResourceUpdatedResponse<ThreatIntelligenceInformation>
-      | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
+    Response = ArmResourceUpdatedResponse<ThreatIntelligenceInformation> | ArmResourceCreatedSyncResponse<ThreatIntelligenceInformation>,
     Error = CloudError
   >;
 
@@ -129,19 +127,15 @@ interface ThreatIntelligenceInformationOperations {
   >;
 }
 
-@@doc(
-  ThreatIntelligenceInformation.name,
+@@doc(ThreatIntelligenceInformation.name,
   "Threat intelligence indicator name field."
 );
-@@doc(
-  ThreatIntelligenceInformationOperations.create::parameters.resource,
+@@doc(ThreatIntelligenceInformationOperations.create::parameters.resource,
   "Properties of threat intelligence indicators to create and update."
 );
-@@doc(
-  ThreatIntelligenceInformationOperations.appendTags::parameters.body,
+@@doc(ThreatIntelligenceInformationOperations.appendTags::parameters.body,
   "The threat intelligence append tags request body"
 );
-@@doc(
-  ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
+@@doc(ThreatIntelligenceInformationOperations.replaceTags::parameters.body,
   "Tags in the threat intelligence indicator to be replaced."
 );

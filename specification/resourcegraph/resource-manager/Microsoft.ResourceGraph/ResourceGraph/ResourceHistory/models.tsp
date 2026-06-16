@@ -70,7 +70,4 @@ model ResourcesHistoryRequestOptions {
   resultFormat?: ResultFormat;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ResourcesHistoryResult {
-  ...Record<unknown>;
-}
+alias ResourcesHistoryResult = Record<unknown>;

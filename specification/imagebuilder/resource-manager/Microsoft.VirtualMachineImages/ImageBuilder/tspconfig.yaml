@@ -17,11 +17,14 @@ options:
     service-name: "ImageBuilder"
     flavor: azure
     use-object-for-unknown: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.ImageBuilder"
+  "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ImageBuilder"
   "@azure-tools/typespec-python":
-    service-dir: "sdk/compute"
+    service-dir: "sdk/imagebuilder"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-imagebuilder"
     namespace: "azure.mgmt.imagebuilder"
     generate-test: true

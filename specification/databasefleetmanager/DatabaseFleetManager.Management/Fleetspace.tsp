@@ -90,11 +90,9 @@ interface Fleetspaces {
 
 @@doc(Fleetspace.name, "Name of the fleetspace.");
 @@doc(Fleetspace.properties, "A Fleetspace properties.");
-@@doc(
-  Fleetspaces.createOrUpdate::parameters.resource,
+@@doc(Fleetspaces.createOrUpdate::parameters.resource,
   "The fleet object to create or update."
 );
-@@doc(
-  Fleetspaces.registerServer::parameters.body,
+@@doc(Fleetspaces.registerServer::parameters.body,
   "The details of the register server operation."
 );

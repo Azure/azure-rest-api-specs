@@ -43,13 +43,11 @@ interface WorkloadNetworkDnsZones {
     | ErrorResponse;
 }
 
-@@clientName(
-  WorkloadNetworkDnsZones.create::parameters.resource,
+@@clientName(WorkloadNetworkDnsZones.create::parameters.resource,
   "workloadNetworkDnsZone"
 );
 
-@@clientName(
-  WorkloadNetworkDnsZones.update::parameters.properties,
+@@clientName(WorkloadNetworkDnsZones.update::parameters.properties,
   "workloadNetworkDnsZone"
 );
 

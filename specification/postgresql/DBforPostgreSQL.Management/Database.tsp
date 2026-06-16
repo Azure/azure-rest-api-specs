@@ -48,10 +48,8 @@ interface Databases {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -65,12 +63,10 @@ interface Databases {
 
 @@maxLength(Database.name, 63);
 @@minLength(Database.name, 1);
-@@doc(
-  Database.name,
+@@doc(Database.name,
   "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server."
 );
 @@doc(Database.properties, "Properties of a database.");
-@@doc(
-  Databases.create::parameters.resource,
+@@doc(Databases.create::parameters.resource,
   "Parameters required to create a new database."
 );

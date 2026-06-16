@@ -1,23 +1,22 @@
 {
   "parameters": {
-    "api-version": "2026-01-01",
-    "containerAppName": "testcanadacentral",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
     "resourceGroupName": "workerapps-rg-xj",
-    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744"
+    "containerAppName": "testcanadacentral",
+    "api-version": "2026-01-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
+            "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/testcanadacentral/authconfigs/current",
             "name": "current",
             "type": "Microsoft.App/containerapps/authconfigs",
-            "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/testcanadacentral/authconfigs/current",
             "properties": {
-              "encryptionSettings": {
-                "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
-                "containerAppAuthSigningSecretName": "testSigningSecretName"
+              "platform": {
+                "enabled": true
               },
               "globalValidation": {
                 "unauthenticatedClientAction": "AllowAnonymous"
@@ -30,16 +29,15 @@
                   }
                 }
               },
-              "platform": {
-                "enabled": true
+              "encryptionSettings": {
+                "containerAppAuthEncryptionSecretName": "testEncryptionSecretName",
+                "containerAppAuthSigningSecretName": "testSigningSecretName"
               }
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     }
-  },
-  "operationId": "ContainerAppsAuthConfigs_ListByContainerApp",
-  "title": "List Auth Configs by Container Apps"
+  }
 }

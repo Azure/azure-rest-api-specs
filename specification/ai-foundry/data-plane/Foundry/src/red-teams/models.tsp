@@ -161,7 +161,7 @@ model RedTeam {
   @doc("List of attack strategies or nested lists of attack strategies.")
   attackStrategies?: AttackStrategy[];
 
-  @doc("Simulation-only or Simulation + Evaluation. If `true` the scan outputs conversation not evaluation result. The service defaults to `false` if a value is not specified by the caller.")
+  @doc("Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.")
   simulationOnly?: boolean = false;
 
   @doc("List of risk categories to generate attack objectives for.")

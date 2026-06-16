@@ -59,7 +59,6 @@ interface GetTenantPolicyResponses {
 
 @@doc(GetTenantPolicyResponse.name, "");
 @@doc(GetTenantPolicyResponse.properties, "Tenant policy properties.");
-@@doc(
-  GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
+@@doc(GetTenantPolicyResponses.addUpdatePolicyForTenant::parameters.resource,
   ""
 );

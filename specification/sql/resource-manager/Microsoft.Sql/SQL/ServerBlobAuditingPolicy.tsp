@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A server blob auditing policy.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 model ServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
@@ -43,9 +41,7 @@ alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperati
   ServerBlobAuditingPolicyNameAlias
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
 interface ServerBlobAuditingPolicies {
   /**
    * Gets a server's blob auditing policy.
@@ -60,10 +56,8 @@ interface ServerBlobAuditingPolicies {
   @tag("BlobAuditing")
   createOrUpdate is ServerBlobAuditingPoliciesOps.CreateOrUpdateAsync<
     ServerBlobAuditingPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<ServerBlobAuditingPolicy>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
-          Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ServerBlobAuditingPolicy> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServerBlobAuditingPolicy> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -75,8 +69,7 @@ interface ServerBlobAuditingPolicies {
 
 @@doc(ServerBlobAuditingPolicy.name, "");
 @@doc(ServerBlobAuditingPolicy.properties, "Resource properties.");
-@@doc(
-  ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
+@@doc(ServerBlobAuditingPolicies.createOrUpdate::parameters.resource,
   "Properties of blob auditing policy"
 );
 

@@ -14,9 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A managed server DNS alias.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 model ManagedServerDnsAlias
   is Azure.ResourceManager.ProxyResource<ManagedServerDnsAliasProperties> {
   ...ResourceNameParameter<
@@ -27,9 +25,7 @@ model ManagedServerDnsAlias
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ManagedServerDnsAliases)
 interface ManagedServerDnsAliases {
   /**
    * Gets a server DNS alias.
@@ -43,14 +39,11 @@ interface ManagedServerDnsAliases {
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ManagedServerDnsAlias,
     Request = ManagedServerDnsAliasCreation,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedServerDnsAlias>
-      | ArmResourceCreatedResponse<
-          ManagedServerDnsAlias,
-          ArmLroLocationHeader<FinalResult = ManagedServerDnsAlias> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<ManagedServerDnsAlias> | ArmResourceCreatedResponse<
+      ManagedServerDnsAlias,
+      ArmLroLocationHeader<FinalResult = ManagedServerDnsAlias> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -59,10 +52,7 @@ interface ManagedServerDnsAliases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedServerDnsAlias,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**

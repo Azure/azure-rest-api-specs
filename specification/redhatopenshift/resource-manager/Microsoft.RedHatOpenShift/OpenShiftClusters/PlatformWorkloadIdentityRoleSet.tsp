@@ -64,11 +64,9 @@ interface PlatformWorkloadIdentityRoleSets {
 
 @@maxLength(PlatformWorkloadIdentityRoleSet.name, 63);
 @@minLength(PlatformWorkloadIdentityRoleSet.name, 1);
-@@doc(
-  PlatformWorkloadIdentityRoleSet.name,
+@@doc(PlatformWorkloadIdentityRoleSet.name,
   "The desired version value of the PlatformWorkloadIdentityRoleSet resource."
 );
-@@doc(
-  PlatformWorkloadIdentityRoleSet.properties,
+@@doc(PlatformWorkloadIdentityRoleSet.properties,
   "The properties for the PlatformWorkloadIdentityRoleSet resource."
 );

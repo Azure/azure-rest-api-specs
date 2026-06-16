@@ -17,7 +17,6 @@ import "./back-compatible.tsp";
 import "./ContainerGroup.tsp";
 import "./NGroup.tsp";
 import "./ContainerGroupProfile.tsp";
-import "./SandboxGroup.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
@@ -43,11 +42,6 @@ enum Versions {
    * The 2025-09-01 API version.
    */
   v2025_09_01: "2025-09-01",
-
-  /**
-   * The 2026-06-01-preview API version.
-   */
-  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations

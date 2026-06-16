@@ -14,11 +14,7 @@ namespace Microsoft.Sql;
 /**
  * A private link resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstancePrivateLinkResources
-)
 model ManagedInstancePrivateLink
   is Azure.ResourceManager.ProxyResource<ManagedInstancePrivateLinkProperties> {
   ...ResourceNameParameter<
@@ -29,11 +25,7 @@ model ManagedInstancePrivateLink
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(
-  Features.ManagedInstancePrivateLinkResources
-)
 interface ManagedInstancePrivateLinks {
   /**
    * Gets a private link resource for SQL server.
@@ -48,11 +40,9 @@ interface ManagedInstancePrivateLinks {
   listByManagedInstance is ArmResourceListByParent<ManagedInstancePrivateLink>;
 }
 
-@@doc(
-  ManagedInstancePrivateLink.name,
+@@doc(ManagedInstancePrivateLink.name,
   "The name of the private link resource."
 );
-@@doc(
-  ManagedInstancePrivateLink.properties,
+@@doc(ManagedInstancePrivateLink.properties,
   "The private link resource group id."
 );

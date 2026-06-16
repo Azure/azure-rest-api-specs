@@ -13,13 +13,11 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioClear, Access.public, "python");
 @@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "python");
-@@access(
-  VoiceLive.ClientEventConversationItemRetrieve,
+@@access(VoiceLive.ClientEventConversationItemRetrieve,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ClientEventConversationItemTruncate,
+@@access(VoiceLive.ClientEventConversationItemTruncate,
   Access.public,
   "python"
 );
@@ -35,74 +33,61 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.Response, Access.public, "python");
 @@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemRetrieved,
+@@access(VoiceLive.ServerEventConversationItemRetrieved,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemTruncated,
+@@access(VoiceLive.ServerEventConversationItemTruncated,
   Access.public,
   "python"
 );
 @@access(VoiceLive.ServerEventError, Access.public, "python");
 @@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+@@access(VoiceLive.ServerEventInputAudioBufferCommitted,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   Access.public,
   "python"
 );
 @@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDelta,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDone,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventResponseContentPartAdded,
+@@access(VoiceLive.ServerEventResponseContentPartAdded,
   Access.public,
   "python"
 );
 @@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseCreated, Access.public, "python");
 @@access(VoiceLive.ServerEventResponseDone, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
   Access.public,
   "python"
 );
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
   Access.public,
   "python"
 );
@@ -112,21 +97,6 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
-@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "python");
-@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
-@@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
-@@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
-@@access(
-  VoiceLive.ServerEventOutputAudioBufferStarted,
-  Access.public,
-  "python"
-);
-@@access(
-  VoiceLive.ServerEventOutputAudioBufferStopped,
-  Access.public,
-  "python"
-);
-
 @@access(VoiceLive.ToolChoice, Access.public, "python");
 
 @@clientName(VoiceLive.Scene, "SceneParams", "csharp");
@@ -134,44 +104,36 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
 @@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "python");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
+@@clientName(VoiceLive.ToolChoiceFunctionObject,
   "ToolChoiceFunctionSelection",
   "python"
 );
-@@clientName(VoiceLive.AvatarConfig.type, "avatar_type", "python");
 
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.internal, "csharp");
-@@access(
-  VoiceLive.ClientEventConversationItemCreate,
+@@access(VoiceLive.ClientEventConversationItemCreate,
   Access.internal,
   "csharp"
 );
-@@access(
-  VoiceLive.ClientEventConversationItemDelete,
+@@access(VoiceLive.ClientEventConversationItemDelete,
   Access.internal,
   "csharp"
 );
-@@access(
-  VoiceLive.ClientEventConversationItemRetrieve,
+@@access(VoiceLive.ClientEventConversationItemRetrieve,
   Access.internal,
   "csharp"
 );
-@@access(
-  VoiceLive.ClientEventConversationItemTruncate,
+@@access(VoiceLive.ClientEventConversationItemTruncate,
   Access.internal,
   "csharp"
 );
-@@access(
-  VoiceLive.ClientEventInputAudioBufferAppend,
+@@access(VoiceLive.ClientEventInputAudioBufferAppend,
   Access.internal,
   "csharp"
 );
 @@access(VoiceLive.ClientEventInputAudioBufferClear, Access.internal, "csharp");
-@@access(
-  VoiceLive.ClientEventInputAudioBufferCommit,
+@@access(VoiceLive.ClientEventInputAudioBufferCommit,
   Access.internal,
   "csharp"
 );
@@ -184,20 +146,6 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventResponseCreate, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
-@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.internal, "csharp");
-@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
-@@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
-@@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
-@@access(
-  VoiceLive.ServerEventOutputAudioBufferStarted,
-  Access.public,
-  "csharp"
-);
-@@access(
-  VoiceLive.ServerEventOutputAudioBufferStopped,
-  Access.public,
-  "csharp"
-);
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
@@ -206,23 +154,19 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventMcpListToolsInProgress, Access.public, "csharp");
 @@access(VoiceLive.ServerEventMcpListToolsCompleted, Access.public, "csharp");
 @@access(VoiceLive.ServerEventMcpListToolsFailed, Access.public, "csharp");
-@@access(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+@@access(VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
   Access.public,
   "csharp"
 );
-@@access(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+@@access(VoiceLive.ServerEventResponseMcpCallArgumentsDone,
   Access.public,
   "csharp"
 );
-@@access(
-  VoiceLive.ServerEventResponseMcpCallInProgress,
+@@access(VoiceLive.ServerEventResponseMcpCallInProgress,
   Access.public,
   "csharp"
 );
-@@access(
-  VoiceLive.ServerEventResponseMcpCallCompleted,
+@@access(VoiceLive.ServerEventResponseMcpCallCompleted,
   Access.public,
   "csharp"
 );
@@ -232,8 +176,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Modality, "InteractionModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "csharp");
-@@clientName(
-  VoiceLive.AzureCustomVoice.custom_lexicon_url,
+@@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url,
   "CustomLexiconUri",
   "csharp"
 );
@@ -247,191 +190,154 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "csharp");
 @@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "csharp");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "csharp");
-@@clientName(
-  VoiceLive.ResponseMessageItem,
+@@clientName(VoiceLive.ResponseMessageItem,
   "SessionResponseMessageItem",
   "csharp"
 );
 @@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "csharp");
-@@clientName(
-  VoiceLive.ResponseItemStatus,
+@@clientName(VoiceLive.ResponseItemStatus,
   "SessionResponseItemStatus",
   "csharp"
 );
 @@clientName(VoiceLive.ServerEvent, "SessionUpdate", "csharp");
-@@clientName(
-  VoiceLive.ServerEventSessionCreated,
+@@clientName(VoiceLive.ServerEventSessionCreated,
   "SessionUpdateSessionCreated",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventSessionUpdated,
+@@clientName(VoiceLive.ServerEventSessionUpdated,
   "SessionUpdateSessionUpdated",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventSessionAvatarConnecting,
+@@clientName(VoiceLive.ServerEventSessionAvatarConnecting,
   "SessionUpdateAvatarConnecting",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
   "SessionUpdateInputAudioBufferSpeechStarted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferCleared,
+@@clientName(VoiceLive.ServerEventInputAudioBufferCleared,
   "SessionUpdateInputAudioBufferCleared",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+@@clientName(VoiceLive.ServerEventInputAudioBufferCommitted,
   "SessionUpdateInputAudioBufferCommitted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseCreated,
+@@clientName(VoiceLive.ServerEventResponseCreated,
   "SessionUpdateResponseCreated",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseDone,
+@@clientName(VoiceLive.ServerEventResponseDone,
   "SessionUpdateResponseDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioDelta,
   "SessionUpdateResponseAudioDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioDone,
+@@clientName(VoiceLive.ServerEventResponseAudioDone,
   "SessionUpdateResponseAudioDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDelta,
   "SessionUpdateResponseAudioTranscriptDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDone,
   "SessionUpdateResponseAudioTranscriptDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta,
   "SessionUpdateResponseAudioTimestampDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDone,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDone,
   "SessionUpdateResponseAudioTimestampDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseTextDelta,
+@@clientName(VoiceLive.ServerEventResponseTextDelta,
   "SessionUpdateResponseTextDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseTextDone,
+@@clientName(VoiceLive.ServerEventResponseTextDone,
   "SessionUpdateResponseTextDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseContentPartAdded,
+@@clientName(VoiceLive.ServerEventResponseContentPartAdded,
   "SessionUpdateResponseContentPartAdded",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseContentPartDone,
+@@clientName(VoiceLive.ServerEventResponseContentPartDone,
   "SessionUpdateResponseContentPartDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseOutputItemAdded,
+@@clientName(VoiceLive.ServerEventResponseOutputItemAdded,
   "SessionUpdateResponseOutputItemAdded",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseOutputItemDone,
+@@clientName(VoiceLive.ServerEventResponseOutputItemDone,
   "SessionUpdateResponseOutputItemDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
   "SessionUpdateResponseFunctionCallArgumentsDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
   "SessionUpdateResponseFunctionCallArgumentsDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationBlendshapeDelta,
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDelta,
   "SessionUpdateResponseAnimationBlendshapeDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationBlendshapeDone,
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDone,
   "SessionUpdateResponseAnimationBlendshapeDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationVisemeDelta,
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta,
   "SessionUpdateResponseAnimationVisemeDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationVisemeDone,
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDone,
   "SessionUpdateResponseAnimationVisemeDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemCreated,
+@@clientName(VoiceLive.ServerEventConversationItemCreated,
   "SessionUpdateConversationItemCreated",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemDeleted,
+@@clientName(VoiceLive.ServerEventConversationItemDeleted,
   "SessionUpdateConversationItemDeleted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemRetrieved,
+@@clientName(VoiceLive.ServerEventConversationItemRetrieved,
   "SessionUpdateConversationItemRetrieved",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemTruncated,
+@@clientName(VoiceLive.ServerEventConversationItemTruncated,
   "SessionUpdateConversationItemTruncated",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
   "SessionUpdateConversationItemInputAudioTranscriptionCompleted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
   "SessionUpdateConversationItemInputAudioTranscriptionDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
   "SessionUpdateConversationItemInputAudioTranscriptionFailed",
   "csharp"
 );
 @@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "csharp");
-@@clientName(
-  VoiceLive.ServerEventErrorDetails,
+@@clientName(VoiceLive.ServerEventErrorDetails,
   "SessionUpdateErrorDetails",
   "csharp"
 );
@@ -439,202 +345,95 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "csharp");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "csharp");
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "csharp");
-@@clientName(VoiceLive.AvatarConfig.type, "AvatarKind", "csharp");
-@@clientName(VoiceLive.AvatarConfig.`model`, "BaseMode", "csharp");
-@@clientName(
-  VoiceLive.AvatarConfig.output_audit_audio,
-  "AuditOutputAudio",
-  "csharp"
-);
-@@clientName(VoiceLive.PhotoAvatarBaseModes, "PhotoAvatarBaseMode", "csharp");
-@@clientName(
-  VoiceLive.AzureAvatarVoiceSyncVoice,
-  "AzureAvatarSyncVoice",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
-  "CustomLexiconUri",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzureAvatarVoiceSyncVoice.custom_text_normalization_url,
-  "CustomTextNormalizationUri",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzureCustomVoice.custom_text_normalization_url,
-  "CustomTextNormalizationUri",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzurePersonalVoice.custom_lexicon_url,
-  "CustomLexiconUri",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzurePersonalVoice.custom_text_normalization_url,
-  "CustomTextNormalizationUri",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzureStandardVoice.custom_text_normalization_url,
-  "CustomTextNormalizationUri",
-  "csharp"
-);
-@@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
-@@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
-@@clientName(VoiceLive.AvatarConfigTypes, "AvatarConfigKind", "csharp");
-@@clientName(
-  VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
-  "MaiVoice1",
-  "csharp"
-);
-@@clientName(VoiceLive.RequestImageContentPart.image_url, "Uri", "csharp");
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
-  "LogProbs",
-  "csharp"
-);
-@@clientName(
-  VoiceLive.AzureSemanticDetection.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
   "TimeoutMs",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionEn.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
   "TimeoutMs",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
   "TimeoutMs",
   "csharp"
 );
 @@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "csharp");
-@@clientName(
-  VoiceLive.AzureSemanticVad,
+@@clientName(VoiceLive.AzureSemanticVad,
   "AzureSemanticVadTurnDetection",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadEn,
+@@clientName(VoiceLive.AzureSemanticVadEn,
   "AzureSemanticVadTurnDetectionEn",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual,
+@@clientName(VoiceLive.AzureSemanticVadMultilingual,
   "AzureSemanticVadTurnDetectionMultilingual",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetection,
+@@clientName(VoiceLive.AzureSemanticDetection,
   "AzureSemanticEouDetection",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionEn,
+@@clientName(VoiceLive.AzureSemanticDetectionEn,
   "AzureSemanticEouDetectionEn",
   "csharp"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionMultilingual,
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual,
   "AzureSemanticEouDetectionMultilingual",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventMcpListToolsInProgress,
+@@clientName(VoiceLive.ServerEventMcpListToolsInProgress,
   "SessionUpdateMcpListToolsInProgress",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventMcpListToolsCompleted,
+@@clientName(VoiceLive.ServerEventMcpListToolsCompleted,
   "SessionUpdateMcpListToolsCompleted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventMcpListToolsFailed,
+@@clientName(VoiceLive.ServerEventMcpListToolsFailed,
   "SessionUpdateMcpListToolsFailed",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
+@@clientName(VoiceLive.ServerEventResponseMcpCallArgumentsDelta,
   "SessionUpdateResponseMcpCallArgumentsDelta",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseMcpCallArgumentsDone,
+@@clientName(VoiceLive.ServerEventResponseMcpCallArgumentsDone,
   "SessionUpdateResponseMcpCallArgumentsDone",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseMcpCallInProgress,
+@@clientName(VoiceLive.ServerEventResponseMcpCallInProgress,
   "SessionUpdateResponseMcpCallInProgress",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseMcpCallCompleted,
+@@clientName(VoiceLive.ServerEventResponseMcpCallCompleted,
   "SessionUpdateResponseMcpCallCompleted",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseMcpCallFailed,
+@@clientName(VoiceLive.ServerEventResponseMcpCallFailed,
   "SessionUpdateResponseMcpCallFailed",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ResponseMCPListToolItem,
+@@clientName(VoiceLive.ResponseMCPListToolItem,
   "SessionResponseMcpListToolItem",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ResponseMCPCallItem,
+@@clientName(VoiceLive.ResponseMCPCallItem,
   "SessionResponseMcpCallItem",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ResponseMCPApprovalRequestItem,
+@@clientName(VoiceLive.ResponseMCPApprovalRequestItem,
   "SessionResponseMcpApprovalRequestItem",
   "csharp"
 );
-@@clientName(
-  VoiceLive.ResponseMCPApprovalResponseItem,
+@@clientName(VoiceLive.ResponseMCPApprovalResponseItem,
   "SessionResponseMcpApprovalResponseItem",
   "csharp"
 );
 @@clientName(VoiceLive.MCPServer, "VoiceLiveMcpServerDefinition", "csharp");
 @@clientName(VoiceLive.MCPTool, "VoiceLiveMcpTool", "csharp");
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
-@@alternateType(
-  VoiceLive.AzureAvatarVoiceSyncVoice.custom_lexicon_url,
-  url,
-  "csharp"
-);
-@@alternateType(
-  VoiceLive.AzureAvatarVoiceSyncVoice.custom_text_normalization_url,
-  url,
-  "csharp"
-);
-@@alternateType(VoiceLive.AzureCustomVoice.custom_lexicon_url, url, "csharp");
-@@alternateType(
-  VoiceLive.AzureCustomVoice.custom_text_normalization_url,
-  url,
-  "csharp"
-);
-@@alternateType(VoiceLive.AzurePersonalVoice.custom_lexicon_url, url, "csharp");
-@@alternateType(
-  VoiceLive.AzurePersonalVoice.custom_text_normalization_url,
-  url,
-  "csharp"
-);
-@@alternateType(
-  VoiceLive.AzureStandardVoice.custom_text_normalization_url,
-  url,
-  "csharp"
-);
-@@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
-@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");
@@ -660,18 +459,15 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.Response, Access.public, "java");
 @@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "java");
 @@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
   Access.public,
   "java"
 );
@@ -680,24 +476,20 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventError, Access.public, "java");
 @@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "java");
 @@access(VoiceLive.ServerEventInputAudioBufferCommitted, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   Access.public,
   "java"
 );
 @@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDelta,
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDone,
   Access.public,
   "java"
 );
@@ -705,13 +497,11 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseCreated, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseDone, Access.public, "java");
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
   Access.public,
   "java"
 );
-@@access(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
   Access.public,
   "java"
 );
@@ -721,47 +511,24 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "java");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "java");
 
-@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "java");
-@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "java");
-@@access(VoiceLive.ServerEventRtcCallError, Access.public, "java");
-@@access(VoiceLive.RtcCallErrorDetails, Access.public, "java");
-@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "java");
-@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "java");
-
 @@access(VoiceLive.ToolChoice, Access.public, "java");
 @@access(VoiceLive.Voice, Access.public, "java");
 
 @@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "java");
 @@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "java");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
+@@clientName(VoiceLive.ToolChoiceFunctionObject,
   "ToolChoiceFunctionSelection",
   "java"
 );
 
 @@clientName(VoiceLive.Modality, "InteractionModality", "java");
-@@clientName(VoiceLive.ClientEvent, "SessionClientEvent", "java");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "java");
-@@clientName(VoiceLive.Animation.outputs, "outputTypes", "java");
-@@clientName(VoiceLive.LogProbProperties.logprob, "logProb", "java");
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
-  "logProbs",
-  "java"
-);
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
-  "logProbs",
-  "java"
-);
-@@clientName(VoiceLive.RequestSession.animation, "animationOptions", "java");
-@@clientName(VoiceLive.ResponseSession.animation, "animationOptions", "java");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "java");
-@@clientName(
-  VoiceLive.AzureCustomVoice.custom_lexicon_url,
+@@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url,
   "CustomLexiconUri",
   "java"
 );
+@@clientName(VoiceLive.IceServer.urls, "Uris", "java");
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "java");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "java");
 @@clientName(VoiceLive.Response, "SessionResponse", "java");
@@ -771,475 +538,295 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.ContentPart, "VoiceLiveContentPart", "java");
 @@clientName(VoiceLive.MessageRole, "ResponseMessageRole", "java");
 @@clientName(VoiceLive.ResponseItem, "SessionResponseItem", "java");
-@@clientName(
-  VoiceLive.ResponseMessageItem,
+@@clientName(VoiceLive.ResponseMessageItem,
   "SessionResponseMessageItem",
   "java"
 );
 @@clientName(VoiceLive.ResponseStatus, "SessionResponseStatus", "java");
 @@clientName(VoiceLive.ResponseItemStatus, "SessionResponseItemStatus", "java");
-@@clientName(VoiceLive.ServerEvent, "SessionServerEvent", "java");
-@@clientName(
-  VoiceLive.ServerEventSessionCreated,
+@@clientName(VoiceLive.ServerEvent, "SessionUpdate", "java");
+@@clientName(VoiceLive.ServerEventSessionCreated,
   "SessionUpdateSessionCreated",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventSessionUpdated,
+@@clientName(VoiceLive.ServerEventSessionUpdated,
   "SessionUpdateSessionUpdated",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventSessionAvatarConnecting,
+@@clientName(VoiceLive.ServerEventSessionAvatarConnecting,
   "SessionUpdateAvatarConnecting",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
   "SessionUpdateInputAudioBufferSpeechStarted",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
   "SessionUpdateInputAudioBufferSpeechStopped",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferCleared,
+@@clientName(VoiceLive.ServerEventInputAudioBufferCleared,
   "SessionUpdateInputAudioBufferCleared",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferCommitted,
+@@clientName(VoiceLive.ServerEventInputAudioBufferCommitted,
   "SessionUpdateInputAudioBufferCommitted",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseCreated,
+@@clientName(VoiceLive.ServerEventResponseCreated,
   "SessionUpdateResponseCreated",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseDone,
+@@clientName(VoiceLive.ServerEventResponseDone,
   "SessionUpdateResponseDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioDelta,
   "SessionUpdateResponseAudioDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioDone,
+@@clientName(VoiceLive.ServerEventResponseAudioDone,
   "SessionUpdateResponseAudioDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDelta,
   "SessionUpdateResponseAudioTranscriptDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTranscriptDone,
+@@clientName(VoiceLive.ServerEventResponseAudioTranscriptDone,
   "SessionUpdateResponseAudioTranscriptDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDelta,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta,
   "SessionUpdateResponseAudioTimestampDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDone,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDone,
   "SessionUpdateResponseAudioTimestampDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseTextDelta,
+@@clientName(VoiceLive.ServerEventResponseTextDelta,
   "SessionUpdateResponseTextDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseTextDone,
+@@clientName(VoiceLive.ServerEventResponseTextDone,
   "SessionUpdateResponseTextDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseContentPartAdded,
+@@clientName(VoiceLive.ServerEventResponseContentPartAdded,
   "SessionUpdateResponseContentPartAdded",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseContentPartDone,
+@@clientName(VoiceLive.ServerEventResponseContentPartDone,
   "SessionUpdateResponseContentPartDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseOutputItemAdded,
+@@clientName(VoiceLive.ServerEventResponseOutputItemAdded,
   "SessionUpdateResponseOutputItemAdded",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseOutputItemDone,
+@@clientName(VoiceLive.ServerEventResponseOutputItemDone,
   "SessionUpdateResponseOutputItemDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
   "SessionUpdateResponseFunctionCallArgumentsDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+@@clientName(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
   "SessionUpdateResponseFunctionCallArgumentsDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationBlendshapeDelta,
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDelta,
   "SessionUpdateResponseAnimationBlendshapeDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationBlendshapeDone,
+@@clientName(VoiceLive.ServerEventResponseAnimationBlendshapeDone,
   "SessionUpdateResponseAnimationBlendshapeDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationVisemeDelta,
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta,
   "SessionUpdateResponseAnimationVisemeDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationVisemeDone,
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDone,
   "SessionUpdateResponseAnimationVisemeDone",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemCreated,
+@@clientName(VoiceLive.ServerEventConversationItemCreated,
   "SessionUpdateConversationItemCreated",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemDeleted,
+@@clientName(VoiceLive.ServerEventConversationItemDeleted,
   "SessionUpdateConversationItemDeleted",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemRetrieved,
+@@clientName(VoiceLive.ServerEventConversationItemRetrieved,
   "SessionUpdateConversationItemRetrieved",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemTruncated,
+@@clientName(VoiceLive.ServerEventConversationItemTruncated,
   "SessionUpdateConversationItemTruncated",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
   "SessionUpdateConversationItemInputAudioTranscriptionCompleted",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
   "SessionUpdateConversationItemInputAudioTranscriptionDelta",
   "java"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+@@clientName(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
   "SessionUpdateConversationItemInputAudioTranscriptionFailed",
   "java"
 );
 @@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "java");
-@@clientName(
-  VoiceLive.ServerEventErrorDetails,
+@@clientName(VoiceLive.ServerEventErrorDetails,
   "SessionUpdateErrorDetails",
   "java"
 );
-@@clientName(
-  VoiceLive.CachedTokenDetails.text_tokens,
-  "textTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.CachedTokenDetails.audio_tokens,
-  "audioTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.CachedTokenDetails.image_tokens,
-  "imageTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.InputTokenDetails.cached_tokens,
-  "cachedTokenCount",
-  "java"
-);
-@@clientName(VoiceLive.InputTokenDetails.text_tokens, "textTokenCount", "java");
-@@clientName(
-  VoiceLive.InputTokenDetails.audio_tokens,
-  "audioTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.InputTokenDetails.image_tokens,
-  "imageTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.OutputTokenDetails.text_tokens,
-  "textTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.OutputTokenDetails.audio_tokens,
-  "audioTokenCount",
-  "java"
-);
-@@clientName(
-  VoiceLive.OutputTokenDetails.reasoning_tokens,
-  "reasoningTokenCount",
-  "java"
-);
-@@clientName(VoiceLive.TokenUsage.total_tokens, "totalTokenCount", "java");
-@@clientName(VoiceLive.TokenUsage.input_tokens, "inputTokenCount", "java");
-@@clientName(VoiceLive.TokenUsage.output_tokens, "outputTokenCount", "java");
 @@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "java");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "java");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "java");
-@@clientName(VoiceLive.AvatarConfig, "AvatarOptions", "java");
-@@clientName(VoiceLive.RequestSession.avatar, "avatarOptions", "java");
-@@clientName(VoiceLive.ResponseSession.avatar, "avatarOptions", "java");
+@@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "java");
 @@clientName(VoiceLive.AzureSemanticDetection.timeout_ms, "TimeoutMs", "java");
-@@clientName(
-  VoiceLive.AzureSemanticDetectionEn.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
   "TimeoutMs",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
   "TimeoutMs",
   "java"
 );
 @@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "java");
-@@clientName(
-  VoiceLive.AzureSemanticVad,
+@@clientName(VoiceLive.AzureSemanticVad,
   "AzureSemanticVadTurnDetection",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadEn,
+@@clientName(VoiceLive.AzureSemanticVadEn,
   "AzureSemanticVadTurnDetectionEn",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual,
+@@clientName(VoiceLive.AzureSemanticVadMultilingual,
   "AzureSemanticVadTurnDetectionMultilingual",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetection,
+@@clientName(VoiceLive.AzureSemanticDetection,
   "AzureSemanticEouDetection",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionEn,
+@@clientName(VoiceLive.AzureSemanticDetectionEn,
   "AzureSemanticEouDetectionEn",
   "java"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionMultilingual,
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual,
   "AzureSemanticEouDetectionMultilingual",
   "java"
 );
 @@clientName(VoiceLive.Background, "VideoBackground", "java");
-@@clientName(VoiceLive.MCPTool, "McpTool", "java");
-@@clientName(VoiceLive.MCPServer, "McpServer", "java");
-@@clientName(VoiceLive.MCPApprovalType, "McpApprovalType", "java");
-@@clientName(
-  VoiceLive.MCPApprovalResponseRequestItem,
-  "McpApprovalResponseRequestItem",
-  "java"
-);
-@@clientName(
-  VoiceLive.ResponseMCPListToolItem,
-  "ResponseMcpListToolItem",
-  "java"
-);
-@@clientName(VoiceLive.ResponseMCPCallItem, "ResponseMcpCallItem", "java");
-@@clientName(
-  VoiceLive.ResponseMCPApprovalRequestItem,
-  "ResponseMcpApprovalRequestItem",
-  "java"
-);
-@@clientName(
-  VoiceLive.ResponseMCPApprovalResponseItem,
-  "ResponseMcpApprovalResponseItem",
-  "java"
-);
 
-@@clientName(
-  VoiceLive.AzureSemanticDetection.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
   "timeoutInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ClientEventConversationItemTruncate.audio_end_ms,
+@@clientName(VoiceLive.ClientEventConversationItemTruncate.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventConversationItemTruncated.audio_end_ms,
+@@clientName(VoiceLive.ServerEventConversationItemTruncated.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStopped.audio_end_ms,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStopped.audio_end_ms,
   "audioEndInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventInputAudioBufferSpeechStarted.audio_start_ms,
+@@clientName(VoiceLive.ServerEventInputAudioBufferSpeechStarted.audio_start_ms,
   "audioStartInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAnimationVisemeDelta.audio_offset_ms,
+@@clientName(VoiceLive.ServerEventResponseAnimationVisemeDelta.audio_offset_ms,
   "audioOffsetInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDelta.audio_offset_ms,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_offset_ms,
   "audioOffsetInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerEventResponseAudioTimestampDelta.audio_duration_ms,
+@@clientName(VoiceLive.ServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDurationInMs",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.AzureSemanticDetection.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetection.timeout_ms,
   "timeoutInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionEn.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionEn.timeout_ms,
   "timeoutInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms,
   "timeoutInMs",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.ServerVad.prefix_padding_ms,
+@@clientName(VoiceLive.ServerVad.prefix_padding_ms,
   "prefixPaddingInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.ServerVad.silence_duration_ms,
+@@clientName(VoiceLive.ServerVad.silence_duration_ms,
   "silenceDurationInMs",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.AzureSemanticVad.prefix_padding_ms,
+@@clientName(VoiceLive.AzureSemanticVad.prefix_padding_ms,
   "prefixPaddingInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVad.silence_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVad.silence_duration_ms,
   "silenceDurationInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVad.speech_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVad.speech_duration_ms,
   "speechDurationInMs",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.AzureSemanticVadEn.prefix_padding_ms,
+@@clientName(VoiceLive.AzureSemanticVadEn.prefix_padding_ms,
   "prefixPaddingInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadEn.silence_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVadEn.silence_duration_ms,
   "silenceDurationInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadEn.speech_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVadEn.speech_duration_ms,
   "speechDurationInMs",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual.prefix_padding_ms,
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.prefix_padding_ms,
   "prefixPaddingInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual.silence_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.silence_duration_ms,
   "silenceDurationInMs",
   "javascript"
 );
-@@clientName(
-  VoiceLive.AzureSemanticVadMultilingual.speech_duration_ms,
+@@clientName(VoiceLive.AzureSemanticVadMultilingual.speech_duration_ms,
   "speechDurationInMs",
   "javascript"
 );
 
 @@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "javascript");
-@@clientName(
-  VoiceLive.ToolChoiceFunctionObject,
+@@clientName(VoiceLive.ToolChoiceFunctionObject,
   "ToolChoiceFunctionSelection",
   "javascript"
 );
 
-@@clientName(
-  VoiceLive.InterimResponseConfigBase.latency_threshold_ms,
+@@clientName(VoiceLive.InterimResponseConfigBase.latency_threshold_ms,
   "latencyThresholdInMs",
   "javascript"
 );
-
-@@clientName(
-  VoiceLive.TranscriptionWord.offset_milliseconds,
-  "offsetInMs",
-  "javascript"
-);
-@@clientName(
-  VoiceLive.TranscriptionWord.duration_milliseconds,
-  "durationInMs",
-  "javascript"
-);
-@@clientName(
-  VoiceLive.TranscriptionPhrase.offset_milliseconds,
-  "offsetInMs",
-  "javascript"
-);
-@@clientName(
-  VoiceLive.TranscriptionPhrase.duration_milliseconds,
-  "durationInMs",
-  "javascript"
-);
-@@clientName(VoiceLive.Response, "VoiceLiveResponse", "javascript");
-
-// Explicit client declaration for emitters that require at least one client (e.g. Python).
-// This service is WebSocket-only and has no HTTP operations, so a client must be declared explicitly.
-// Marked internal so it is not part of the public Python API surface; a hand-written client wraps it.
-@access(Access.internal, "python")
-@client(
-  {
-    name: "VoiceLiveClient",
-    service: VoiceLive,
-  },
-  "python"
-)
-namespace VoiceLiveClient {
-
-}

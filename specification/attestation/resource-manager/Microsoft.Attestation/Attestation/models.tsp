@@ -447,6 +447,7 @@ model OperationList {
   /**
    * List of supported operations.
    */
+  @pageItems
   @identifiers(#["name"])
   value?: OperationsDefinition[];
 }

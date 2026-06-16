@@ -93,7 +93,7 @@ interface Issue {
     ListParameter,
     Page<RelatedAlert>
   >;
-  @doc("Add or update alerts associated with an issue")
+  @doc("Add or update alerts in the issue")
   addOrUpdateAlerts is ArmResourceActionSync<
     IssueResource,
     RelatedAlerts,
@@ -106,7 +106,7 @@ interface Issue {
     ListParameter,
     Page<RelatedResource>
   >;
-  @doc("Add or update resources associated with an issue")
+  @doc("Add or update resources in the issue")
   addOrUpdateResources is ArmResourceActionSync<
     IssueResource,
     RelatedResources,

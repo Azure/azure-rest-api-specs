@@ -13,8 +13,9 @@ namespace Microsoft.DataMigration;
 /**
  * An Azure Database Migration Service (classic) resource
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataMigrationService
-  is Azure.ResourceManager.ProxyResource<DataMigrationServiceProperties> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DataMigrationServiceProperties> {
   ...ResourceNameParameter<
     Resource = DataMigrationService,
     KeyName = "serviceName",
@@ -39,16 +40,6 @@ model DataMigrationService
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku?: ServiceSku;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 alias DataMigrationServiceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -95,14 +86,11 @@ interface DataMigrationServices {
   @tag("PUT")
   createOrUpdate is DataMigrationServiceOps.CreateOrUpdateAsync<
     DataMigrationService,
-    Response =
-      | ArmResourceUpdatedResponse<DataMigrationService>
-      | ArmResourceCreatedResponse<
-          DataMigrationService,
-          ArmLroLocationHeader<FinalResult = DataMigrationService> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<DataMigrationService> | ArmResourceCreatedResponse<
+      DataMigrationService,
+      ArmLroLocationHeader<FinalResult = DataMigrationService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -135,10 +123,7 @@ interface DataMigrationServices {
       @query("deleteRunningTasks")
       deleteRunningTasks?: boolean;
     },
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -239,15 +224,12 @@ interface DataMigrationServices {
 
 @@doc(DataMigrationService.name, "Name of the service");
 @@doc(DataMigrationService.properties, "Custom service properties");
-@@doc(
-  DataMigrationServices.createOrUpdate::parameters.resource,
+@@doc(DataMigrationServices.createOrUpdate::parameters.resource,
   "Information about the service"
 );
-@@doc(
-  DataMigrationServices.update::parameters.properties,
+@@doc(DataMigrationServices.update::parameters.properties,
   "Information about the service"
 );
-@@doc(
-  DataMigrationServices.checkChildrenNameAvailability::parameters.body,
+@@doc(DataMigrationServices.checkChildrenNameAvailability::parameters.body,
   "Requested name to validate"
 );

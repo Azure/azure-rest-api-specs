@@ -2,15 +2,17 @@ import "../models/common.tsp";
 import "../models/NetworkFabric.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric resource definition.")
-@added(Versions.v2025_07_15)
-model NetworkFabric
-  is Azure.ResourceManager.TrackedResource<NetworkFabricProperties, false> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkFabricProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkFabric extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Fabric.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,28 +21,17 @@ model NetworkFabric
   @visibility(Lifecycle.Read)
   name: string;
 
+  /** The NetworkFabric Properties */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The managed service identities assigned to this resource.")
-  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
-}
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "properties")
+  propertiesDeprecated: NetworkFabricProperties;
 
-@@doc(NetworkFabric.properties, "The NetworkFabric Properties");
-
-// this is deprecated here because in the two preview versions,
-// the properties property of this model does not have the "flattenProperty" decorator (x-ms-client-flatten in swagger)
-// therefore we have to use this way to declare two different models to achieve it.
-@doc("The Network Fabric resource definition.")
-@removed(Versions.v2025_07_15)
-@renamedFrom(Versions.v2025_07_15, "NetworkFabric")
-model NetworkFabricDeprecated
-  is Azure.ResourceManager.TrackedResource<NetworkFabricProperties, false> {
-  @doc("Name of the Network Fabric.")
-  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
-  @path
-  @key("networkFabricName")
-  @segment("networkFabrics")
-  @visibility(Lifecycle.Read)
-  name: string;
+  /** The NetworkFabric Properties */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @added(Versions.v2025_07_15)
+  properties: NetworkFabricProperties;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2024_06_15_preview)
@@ -48,91 +39,31 @@ model NetworkFabricDeprecated
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NetworkFabricDeprecated.properties, "The NetworkFabric Properties");
-
 @armResourceOperations
 interface NetworkFabrics {
   @doc("Get Network Fabric resource details.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   get is ArmResourceRead<NetworkFabric>;
 
-  @doc("Get Network Fabric resource details.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "get")
-  @sharedRoute
-  getDeprecated is ArmResourceRead<NetworkFabricDeprecated>;
-
   @doc("Create Network Fabric resource.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   create is ArmResourceCreateOrReplaceAsync<NetworkFabric>;
 
-  @doc("Create Network Fabric resource.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "create")
-  @sharedRoute
-  createDeprecated is ArmResourceCreateOrReplaceAsync<NetworkFabricDeprecated>;
-
   @doc("Update certain properties of the Network Fabric resource.")
   @patch(#{ implicitOptionality: false })
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   update is ArmCustomPatchAsync<NetworkFabric, NetworkFabricPatch>;
 
-  @doc("Update certain properties of the Network Fabric resource.")
-  @patch(#{ implicitOptionality: false })
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "update")
-  @sharedRoute
-  updateDeprecated is ArmCustomPatchAsync<
-    NetworkFabricDeprecated,
-    NetworkFabricPatch
-  >;
-
   @doc("Delete Network Fabric resource.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<NetworkFabric>;
 
-  @doc("Delete Network Fabric resource.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "delete")
-  @sharedRoute
-  deleteDeprecated is ArmResourceDeleteWithoutOkAsync<NetworkFabricDeprecated>;
-
   @doc("List all the Network Fabric resources in the given resource group.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   listByResourceGroup is ArmResourceListByParent<
     NetworkFabric,
     Response = NetworkFabricsListResult
   >;
 
-  @doc("List all the Network Fabric resources in the given resource group.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "listByResourceGroup")
-  @sharedRoute
-  listByResourceGroupDeprecated is ArmResourceListByParent<
-    NetworkFabricDeprecated,
-    Response = NetworkFabricsListResultDeprecated
-  >;
-
   @doc("List all the Network Fabric resources in the given subscription.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   listBySubscription is ArmListBySubscription<
     NetworkFabric,
     Response = NetworkFabricsListResult
-  >;
-
-  @doc("List all the Network Fabric resources in the given subscription.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "listBySubscription")
-  @sharedRoute
-  listBySubscriptionDeprecated is ArmListBySubscription<
-    NetworkFabricDeprecated,
-    Response = NetworkFabricsListResultDeprecated
   >;
 
   @doc("Provisions the underlying resources in the given Network Fabric instance.")
@@ -141,7 +72,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "provision")
   @sharedRoute
   provisionDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     CommonPostActionResponseForDeviceUpdate
   >;
@@ -162,7 +93,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "deprovision")
   @sharedRoute
   deprovisionDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     CommonPostActionResponseForDeviceUpdate
   >;
@@ -183,7 +114,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "upgrade")
   @sharedRoute
   upgradeDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     UpgradeNetworkFabricProperties,
     CommonPostActionResponseForStateUpdate
   >;
@@ -204,7 +135,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "refreshConfiguration")
   @sharedRoute
   refreshConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     CommonPostActionResponseForStateUpdate
   >;
@@ -225,7 +156,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "updateWorkloadManagementBfdConfiguration")
   @sharedRoute
   updateWorkloadManagementBfdConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
   >;
@@ -246,7 +177,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "updateInfraManagementBfdConfiguration")
   @sharedRoute
   updateInfraManagementBfdConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
   >;
@@ -261,20 +192,8 @@ interface NetworkFabrics {
     UpdateAdministrativeStateResponse
   >;
   @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  @added(Versions.v2025_07_15)
-  @sharedRoute
   validateConfiguration is ArmResourceActionAsync<
     NetworkFabric,
-    ValidateConfigurationProperties,
-    ValidateConfigurationResponse
-  >;
-
-  @doc("Validates the configuration of the underlying resources in the given Network Fabric instance.")
-  @removed(Versions.v2025_07_15)
-  @renamedFrom(Versions.v2025_07_15, "validateConfiguration")
-  @sharedRoute
-  validateConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
     ValidateConfigurationProperties,
     ValidateConfigurationResponse
   >;
@@ -285,7 +204,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "getTopology")
   @sharedRoute
   getTopologyDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     ValidateConfigurationResponse
   >;
@@ -306,7 +225,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "commitConfiguration")
   @sharedRoute
   commitConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     CommonPostActionResponseForStateUpdate
   >;
@@ -329,7 +248,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "commitBatchStatus")
   @sharedRoute
   commitBatchStatusDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     CommitBatchStatusRequest,
     CommitBatchStatusResponse
   >;
@@ -351,7 +270,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "discardCommitBatch")
   @sharedRoute
   discardCommitBatchDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     DiscardCommitBatchRequest,
     DiscardCommitBatchResponse
   >;
@@ -373,7 +292,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "lockFabric")
   @sharedRoute
   lockFabricDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     NetworkFabricLockRequest,
     CommonPostActionResponseForStateUpdate
   >;
@@ -395,7 +314,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "viewDeviceConfiguration")
   @sharedRoute
   viewDeviceConfigurationDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     ViewDeviceConfigurationResponse
   >;
@@ -417,7 +336,7 @@ interface NetworkFabrics {
   @renamedFrom(Versions.v2025_07_15, "armConfigurationDiff")
   @sharedRoute
   armConfigurationDiffDeprecated is ArmResourceActionAsync<
-    NetworkFabricDeprecated,
+    NetworkFabric,
     void,
     ArmConfigurationDiffResponse
   >;
@@ -481,62 +400,42 @@ interface NetworkFabrics {
 }
 
 @@doc(NetworkFabrics.create::parameters.resource, "Request payload.");
-@@doc(NetworkFabrics.createDeprecated::parameters.resource, "Request payload.");
-@@doc(
-  NetworkFabrics.update::parameters.properties,
+@@doc(NetworkFabrics.update::parameters.properties,
   "Network Fabric properties to update."
 );
-@@doc(
-  NetworkFabrics.updateDeprecated::parameters.properties,
+@@doc(NetworkFabrics.upgradeDeprecated::parameters.body,
   "Network Fabric properties to update."
 );
-@@doc(
-  NetworkFabrics.upgradeDeprecated::parameters.body,
+@@doc(NetworkFabrics.upgrade::parameters.body,
   "Network Fabric properties to update."
 );
-@@doc(
-  NetworkFabrics.upgrade::parameters.body,
-  "Network Fabric properties to update."
-);
-@@doc(
-  NetworkFabrics.updateWorkloadManagementBfdConfiguration::parameters.body,
+@@doc(NetworkFabrics.updateWorkloadManagementBfdConfiguration::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkFabrics.updateWorkloadManagementBfdConfigurationDeprecated::parameters.body,
+@@doc(NetworkFabrics.updateWorkloadManagementBfdConfigurationDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkFabrics.updateInfraManagementBfdConfiguration::parameters.body,
+@@doc(NetworkFabrics.updateInfraManagementBfdConfiguration::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkFabrics.updateInfraManagementBfdConfigurationDeprecated::parameters.body,
+@@doc(NetworkFabrics.updateInfraManagementBfdConfigurationDeprecated::parameters.body,
   "Request payload."
 );
 
-@@doc(
-  NetworkFabrics.validateConfiguration::parameters.body,
+@@doc(NetworkFabrics.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );
-@@doc(
-  NetworkFabrics.validateConfigurationDeprecated::parameters.body,
-  "Validate configuration properties."
-);
-@@doc(
-  NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
+@@doc(NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
   "Request payload."
 );
 @@doc(NetworkFabrics.commitBatchStatus::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.lockFabricDeprecated::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.lockFabric::parameters.body, "Request payload.");
-@@doc(
-  NetworkFabrics.discardCommitBatchDeprecated::parameters.body,
+@@doc(NetworkFabrics.discardCommitBatchDeprecated::parameters.body,
   "Request payload."
 );
 @@doc(NetworkFabrics.discardCommitBatch::parameters.body, "Request payload.");
 @@doc(NetworkFabrics.refreshConfiguration::parameters.body, "Request payload.");
-@@doc(
-  NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
+@@doc(NetworkFabrics.refreshConfigurationDeprecated::parameters.body,
   "Request payload."
 );

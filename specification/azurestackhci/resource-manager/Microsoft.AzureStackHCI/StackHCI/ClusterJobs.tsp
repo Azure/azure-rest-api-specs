@@ -16,21 +16,23 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Cluster Jobs resource
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @parentResource(Cluster)
 model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
   ...ResourceNameParameter<
     Resource = ClusterJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-]{3,64}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
   >;
 }
 
 /**
  * ClusterJobs operations
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 @armResourceOperations
 interface ClusterJobs {
   /** Get a ClusterJob */

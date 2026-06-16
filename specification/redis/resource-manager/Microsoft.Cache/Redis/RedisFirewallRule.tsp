@@ -48,7 +48,6 @@ interface RedisFirewallRules {
 
 @@doc(RedisFirewallRule.name, "The name of the firewall rule.");
 @@doc(RedisFirewallRule.properties, "redis cache firewall rule properties");
-@@doc(
-  RedisFirewallRules.createOrUpdate::parameters.resource,
+@@doc(RedisFirewallRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update redis firewall rule operation."
 );

@@ -56,17 +56,14 @@ interface DomainServices {
   @summary("Create or Update Domain Service (PUT Resource)")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     DomainService,
-    Response =
-      | ArmResourceUpdatedResponse<DomainService>
-      | ArmResourceCreatedResponse<
-          DomainService,
-          ArmLroLocationHeader<FinalResult = DomainService> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
-          @bodyRoot
-          _: DomainService;
-        }),
+    Response = ArmResourceUpdatedResponse<DomainService> | ArmResourceCreatedResponse<
+      DomainService,
+      ArmLroLocationHeader<FinalResult = DomainService> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> & {
+      @bodyRoot
+      _: DomainService;
+    }),
     Error = CloudError
   >;
 
@@ -79,12 +76,10 @@ interface DomainServices {
   update is ArmCustomPatchAsync<
     DomainService,
     PatchModel = DomainService,
-    Response =
-      | ArmResponse<DomainService>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = DomainService>> & {
-          @bodyRoot
-          _: DomainService;
-        }),
+    Response = ArmResponse<DomainService> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = DomainService>> & {
+      @bodyRoot
+      _: DomainService;
+    }),
     Error = CloudError
   >;
 
@@ -94,10 +89,8 @@ interface DomainServices {
   @summary("Delete Domain Service (DELETE Resource)")
   delete is ArmResourceDeleteWithoutOkAsync<
     DomainService,
-    Response =
-      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -135,11 +128,9 @@ interface DomainServices {
 
 @@doc(DomainService.name, "The name of the domain service.");
 @@doc(DomainService.properties, "Domain service properties");
-@@doc(
-  DomainServices.createOrUpdate::parameters.resource,
+@@doc(DomainServices.createOrUpdate::parameters.resource,
   "Properties supplied to the Create or Update a Domain Service operation."
 );
-@@doc(
-  DomainServices.update::parameters.properties,
+@@doc(DomainServices.update::parameters.properties,
   "Properties supplied to the Update a Domain Service operation."
 );

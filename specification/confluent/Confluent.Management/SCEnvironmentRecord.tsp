@@ -194,7 +194,6 @@ interface SCEnvironmentRecordCluster {
 
 @@doc(SCEnvironmentRecord.name, "Confluent environment id");
 @@doc(SCEnvironmentRecord.properties, "Environment properties");
-@@doc(
-  SCEnvironmentRecords.createOrUpdate::parameters.resource,
+@@doc(SCEnvironmentRecords.createOrUpdate::parameters.resource,
   "Confluent Environment resource model"
 );

@@ -1,15 +1,18 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Device resource definition.")
-model NetworkDevice
-  is Azure.ResourceManager.TrackedResource<NetworkDeviceProperties, false> {
+@Azure.ResourceManager.Private.armResourceInternal(NetworkDeviceProperties)
+@Http.Private.includeInapplicableMetadataInPayload(false)
+model NetworkDevice extends Azure.ResourceManager.Foundations.TrackedResource {
   @doc("Name of the Network Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,12 +22,15 @@ model NetworkDevice
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @doc("The NetworkDevice properties")
+  properties: NetworkDeviceProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @added(Versions.v2025_07_15)
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(NetworkDevice.properties, "The NetworkDevice properties");
 @armResourceOperations
 interface NetworkDevices {
   @doc("Gets the Network Device resource details.")
@@ -198,29 +204,24 @@ interface NetworkDevices {
 }
 
 @@doc(NetworkDevices.create::parameters.resource, "Request payload.");
-@@doc(
-  NetworkDevices.update::parameters.properties,
+@@doc(NetworkDevices.update::parameters.properties,
   "Network Device properties to update."
 );
 @@doc(NetworkDevices.rebootDeprecated::parameters.body, "Request payload.");
 @@doc(NetworkDevices.reboot::parameters.body, "Request payload.");
-@@doc(
-  NetworkDevices.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkDevices.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkDevices.updateAdministrativeState::parameters.body,
+@@doc(NetworkDevices.updateAdministrativeState::parameters.body,
   "Request payload."
 );
 @@doc(NetworkDevices.upgradeDeprecated::parameters.body, "Request payload.");
 @@doc(NetworkDevices.upgrade::parameters.body, "Request payload.");
 @@doc(NetworkDevices.runRoCommand::parameters.body, "Request the command.");
-@@doc(
-  NetworkDevices.runRoCommandDeprecated::parameters.body,
+@@doc(NetworkDevices.runRoCommandDeprecated::parameters.body,
   "Request the command."
 );
-@@doc(
-  NetworkDevices.runRwCommandDeprecated::parameters.body,
+@@doc(NetworkDevices.runRwCommandDeprecated::parameters.body,
   "Request the command."
 );
 @@doc(NetworkDevices.runRwCommand::parameters.body, "Request the command.");

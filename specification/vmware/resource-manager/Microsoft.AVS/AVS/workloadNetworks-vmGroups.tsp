@@ -43,13 +43,11 @@ interface WorkloadNetworkVmGroups {
     | ErrorResponse;
 }
 
-@@clientName(
-  WorkloadNetworkVmGroups.create::parameters.resource,
+@@clientName(WorkloadNetworkVmGroups.create::parameters.resource,
   "workloadNetworkVMGroup"
 );
 
-@@clientName(
-  WorkloadNetworkVmGroups.update::parameters.properties,
+@@clientName(WorkloadNetworkVmGroups.update::parameters.properties,
   "workloadNetworkVMGroup"
 );
 

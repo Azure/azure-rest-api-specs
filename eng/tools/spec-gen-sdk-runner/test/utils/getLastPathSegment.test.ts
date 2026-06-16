@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { getLastPathSegment } from "../../src/utils.ts";
+import { getLastPathSegment } from "../../src/utils.js";
 
 describe("getLastPathSegment", () => {
   test("extracts last segment from path", () => {

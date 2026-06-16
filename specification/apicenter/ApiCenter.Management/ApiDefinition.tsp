@@ -44,9 +44,7 @@ interface ApiDefinitions {
   importSpecification is ArmResourceActionAsync<
     ApiDefinition,
     ApiSpecImportRequest,
-    OkResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
+    OkResponse
   >;
   @doc("Exports the API specification.")
   exportSpecification is ArmResourceActionAsync<

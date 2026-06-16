@@ -54,13 +54,11 @@ interface PartnerNamespaces {
   update is ArmCustomPatchAsync<
     PartnerNamespace,
     PatchModel = PartnerNamespaceUpdateParameters,
-    Response =
-      | OkResponse
-      | ArmResourceCreatedResponse<
-          PartnerNamespace,
-          LroHeaders = ArmLroLocationHeader<FinalResult = PartnerNamespace> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
+    Response = OkResponse | ArmResourceCreatedResponse<
+      PartnerNamespace,
+      LroHeaders = ArmLroLocationHeader<FinalResult = PartnerNamespace> &
+        Azure.Core.Foundations.RetryAfterHeader
+    >
   >;
 
   /**
@@ -70,10 +68,7 @@ interface PartnerNamespaces {
   @summary("Delete a partner namespace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     PartnerNamespace,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -144,15 +139,12 @@ interface PartnerNamespaces {
 
 @@doc(PartnerNamespace.name, "Name of the partner namespace.");
 @@doc(PartnerNamespace.properties, "Properties of the Partner Namespace.");
-@@doc(
-  PartnerNamespaces.createOrUpdate::parameters.resource,
+@@doc(PartnerNamespaces.createOrUpdate::parameters.resource,
   "PartnerNamespace information."
 );
-@@doc(
-  PartnerNamespaces.update::parameters.properties,
+@@doc(PartnerNamespaces.update::parameters.properties,
   "Partner namespace update information."
 );
-@@doc(
-  PartnerNamespaces.regenerateKey::parameters.body,
+@@doc(PartnerNamespaces.regenerateKey::parameters.body,
   "Request body to regenerate key."
 );

@@ -1,6 +1,6 @@
-import { type Suggestion } from "../jsonOutput.ts";
-import { constructJsonPath } from "../summary.ts";
-import { getPropertyName } from "./helper.ts";
+import { Suggestion } from "../jsonOutput.js";
+import { constructJsonPath } from "../summary.js";
+import { getPropertyName } from "./helper.js";
 
 const knownPropertyDecoratorMapping: { [key: string]: string } = {
   minimum: "minValue",

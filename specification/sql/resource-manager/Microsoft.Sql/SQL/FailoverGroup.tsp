@@ -15,9 +15,7 @@ namespace Microsoft.Sql;
  * A failover group.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 model FailoverGroup
   is Azure.ResourceManager.ProxyResource<FailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -42,9 +40,7 @@ model FailoverGroup
   location?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
 interface FailoverGroups {
   /**
    * Gets a failover group.
@@ -57,14 +53,11 @@ interface FailoverGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FailoverGroup,
-    Response =
-      | ArmResourceUpdatedResponse<FailoverGroup>
-      | ArmResourceCreatedResponse<
-          FailoverGroup,
-          ArmLroLocationHeader<FinalResult = FailoverGroup> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<FailoverGroup> | ArmResourceCreatedResponse<
+      FailoverGroup,
+      ArmLroLocationHeader<FinalResult = FailoverGroup> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -82,10 +75,7 @@ interface FailoverGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     FailoverGroup,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -123,11 +113,9 @@ interface FailoverGroups {
 
 @@doc(FailoverGroup.name, "The name of the failover group.");
 @@doc(FailoverGroup.properties, "Resource properties.");
-@@doc(
-  FailoverGroups.createOrUpdate::parameters.resource,
+@@doc(FailoverGroups.createOrUpdate::parameters.resource,
   "The failover group parameters."
 );
-@@doc(
-  FailoverGroups.update::parameters.properties,
+@@doc(FailoverGroups.update::parameters.properties,
   "The failover group parameters."
 );

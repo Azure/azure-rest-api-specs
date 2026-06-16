@@ -37,7 +37,7 @@ interface ContentTypeContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag: string;
+      etag: string;
     }
   >;
 
@@ -54,21 +54,19 @@ interface ContentTypeContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<ContentTypeContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
-      | (ArmResourceCreatedSyncResponse<ContentTypeContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag: string;
-        })
+    Response = (ArmResponse<ContentTypeContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<ContentTypeContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -99,7 +97,6 @@ interface ContentTypeContracts {
 @@minLength(ContentTypeContract.name, 1);
 @@doc(ContentTypeContract.name, "Content type identifier.");
 @@doc(ContentTypeContract.properties, "Properties of the content type.");
-@@doc(
-  ContentTypeContracts.createOrUpdate::parameters.resource,
+@@doc(ContentTypeContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

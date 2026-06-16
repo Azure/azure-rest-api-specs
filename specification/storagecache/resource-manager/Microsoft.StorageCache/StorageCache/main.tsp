@@ -53,7 +53,6 @@ interface Operations
       CloudError
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available Resource Provider operations."
 );

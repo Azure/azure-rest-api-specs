@@ -52,7 +52,6 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists all of the available Microsoft.Marketplace REST API operations."
 );

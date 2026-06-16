@@ -50,13 +50,11 @@ interface Replicas {
   update is ArmCustomPatchAsync<
     Replica,
     PatchModel = Replica,
-    Response =
-      | ArmResponse<Replica>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: Replica;
-        })
+    Response = ArmResponse<Replica> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Replica> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: Replica;
+    })
   >;
 
   /**
@@ -87,11 +85,9 @@ interface Replicas {
 @@minLength(Replica.name, 3);
 @@doc(Replica.name, "The name of the replica.");
 @@doc(Replica.properties, "");
-@@doc(
-  Replicas.createOrUpdate::parameters.resource,
+@@doc(Replicas.createOrUpdate::parameters.resource,
   "Parameters for the create or update operation"
 );
-@@doc(
-  Replicas.update::parameters.properties,
+@@doc(Replicas.update::parameters.properties,
   "Parameters for the update operation"
 );

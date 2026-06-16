@@ -1,21 +1,22 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias DeploymentOperations = FoundryAzureOperations<{}>;
+alias DeploymentServiceTraits = SupportsClientRequestId &
+  NoRepeatableRequests &
+  NoConditionalRequests;
+
+alias DeploymentOperations = Azure.Core.ResourceOperations<DeploymentServiceTraits>;
 
 @tag("Deployments")
 interface Deployments {
-  @summary("Get a deployment")
-  @doc("Gets a deployed model.")
+  @doc("Get a deployed model.")
   get is DeploymentOperations.ResourceRead<Deployment>;
 
-  /** Returns the deployed models available in the current project, optionally filtered by publisher, model name, or deployment type. */
-  @summary("List deployments")
+  @doc("List all deployed models in the project")
   list is DeploymentOperations.ResourceList<
     Deployment,
     ListQueryParametersTrait<{

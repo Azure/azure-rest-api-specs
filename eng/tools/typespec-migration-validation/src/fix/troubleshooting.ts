@@ -1,6 +1,6 @@
-import { jsonOutput, type Suggestion } from "../jsonOutput.ts";
-import { handleAdded, handleChanged, handleDeleted } from "./definition.ts";
-import { checkElementAddedOrDeleted, checkElementChanged } from "./helper.ts";
+import { jsonOutput, Suggestion } from "../jsonOutput.js";
+import { handleAdded, handleChanged, handleDeleted } from "./definition.js";
+import { checkElementAddedOrDeleted, checkElementChanged } from "./helper.js";
 
 export function generatePrompts(jsonObj: any): string[] {
   const suggestedFixes: Suggestion[] = [];

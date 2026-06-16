@@ -60,7 +60,6 @@ interface Operations
       CloudError
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists available operations for the Microsoft.Batch provider"
 );

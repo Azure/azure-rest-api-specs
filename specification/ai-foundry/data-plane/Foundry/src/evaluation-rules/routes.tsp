@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -26,29 +26,26 @@ alias EvaluationRulesFilterQueryParams = {
 @tag("Evaluation Rules")
 interface EvaluationRules {
   // GET /evaluationrules/{id}
-  /** Retrieves the specified evaluation rule and its configuration. */
-  @summary("Get an evaluation rule")
-  get is FoundryResourceOperation<
+  @doc("Get an evaluation rule.")
+  get is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
     Azure.Core.Foundations.ResourceOkResponse<EvaluationRule>
   >;
 
   // DELETE /evaluationrules/{id}
-  /** Removes the specified evaluation rule from the project. */
-  @summary("Delete an evaluation rule")
+  @doc("Delete an evaluation rule.")
   @Http.delete
-  delete is FoundryResourceOperation<
+  delete is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {},
     Http.NoContentResponse
   >;
 
   // PUT /evaluationrules/{id}
-  /** Creates a new evaluation rule, or replaces the existing rule when the identifier matches. */
-  @summary("Create or update an evaluation rule")
+  @doc("Create or update an evaluation rule.")
   @Http.put
-  createOrUpdate is FoundryResourceOperation<
+  createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {
       ...EvaluationRulesPreviewHeader;
@@ -61,10 +58,9 @@ interface EvaluationRules {
   >;
 
   // GET /evaluationrules
-  /** Returns the evaluation rules configured for the project, optionally filtered by action type, agent name, or enabled state. */
-  @summary("List evaluation rules")
+  @doc("List all evaluation rules.")
   @Rest.listsResource(EvaluationRule)
-  list is FoundryResourceList<
+  list is Azure.Core.Foundations.ResourceList<
     EvaluationRule,
     EvaluationRulesFilterQueryParams,
     Azure.Core.Page<EvaluationRule>

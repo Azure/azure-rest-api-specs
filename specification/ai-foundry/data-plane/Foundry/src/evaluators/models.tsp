@@ -2,7 +2,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -129,7 +129,7 @@ model Dimension {
   @maxValue(10)
   weight: int32;
 
-  @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
+  @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. Defaults to `false`.")
   always_applicable?: boolean = false;
 }
 
@@ -204,22 +204,26 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model PromptEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model AgentEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model TracesEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model DatasetEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
 
@@ -291,9 +295,6 @@ model EvaluatorVersion {
 
   @doc("The categories of the evaluator")
   categories: EvaluatorCategory[];
-
-  @doc("Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).")
-  supported_evaluation_levels?: EvaluationLevel[] = #[EvaluationLevel.turn];
 
   @doc("Definition of the evaluator")
   @visibility(Lifecycle.Create, Lifecycle.Read)

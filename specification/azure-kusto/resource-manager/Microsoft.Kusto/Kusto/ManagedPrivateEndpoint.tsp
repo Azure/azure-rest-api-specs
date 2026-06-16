@@ -39,15 +39,12 @@ interface ManagedPrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedPrivateEndpoint,
-    Response =
-      | ArmResourceUpdatedResponse<ManagedPrivateEndpoint>
-      | ArmResourceCreatedResponse<ManagedPrivateEndpoint>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedPrivateEndpoint> &
-          ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpoint> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          @bodyRoot
-          _: ManagedPrivateEndpoint;
-        })
+    Response = ArmResourceUpdatedResponse<ManagedPrivateEndpoint> | ArmResourceCreatedResponse<ManagedPrivateEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedPrivateEndpoint> &
+      ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpoint> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
+      @bodyRoot
+      _: ManagedPrivateEndpoint;
+    })
   >;
 
   /**
@@ -58,17 +55,15 @@ interface ManagedPrivateEndpoints {
   update is ArmCustomPatchAsync<
     ManagedPrivateEndpoint,
     PatchModel = ManagedPrivateEndpoint,
-    Response =
-      | ArmResponse<ManagedPrivateEndpoint>
-      | (ArmAcceptedLroResponse<
-          "Managed private endpoint update accepted.",
-          LroHeaders = ArmLroLocationHeader<FinalResult = ManagedPrivateEndpoint> &
-            ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpoint> &
-            Azure.Core.Foundations.RetryAfterHeader
-        > & {
-          @bodyRoot
-          _: ManagedPrivateEndpoint;
-        })
+    Response = ArmResponse<ManagedPrivateEndpoint> | (ArmAcceptedLroResponse<
+      "Managed private endpoint update accepted.",
+      LroHeaders = ArmLroLocationHeader<FinalResult = ManagedPrivateEndpoint> &
+        ArmAsyncOperationHeader<FinalResult = ManagedPrivateEndpoint> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > & {
+      @bodyRoot
+      _: ManagedPrivateEndpoint;
+    })
   >;
 
   /**
@@ -77,12 +72,9 @@ interface ManagedPrivateEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedPrivateEndpoint,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -96,11 +88,9 @@ interface ManagedPrivateEndpoints {
 
 @@doc(ManagedPrivateEndpoint.name, "The name of the managed private endpoint.");
 @@doc(ManagedPrivateEndpoint.properties, "A managed private endpoint.");
-@@doc(
-  ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
+@@doc(ManagedPrivateEndpoints.createOrUpdate::parameters.resource,
   "The managed private endpoint parameters."
 );
-@@doc(
-  ManagedPrivateEndpoints.update::parameters.properties,
+@@doc(ManagedPrivateEndpoints.update::parameters.properties,
   "The managed private endpoint parameters."
 );

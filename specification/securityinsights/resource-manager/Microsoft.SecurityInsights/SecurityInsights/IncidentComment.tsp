@@ -97,7 +97,6 @@ interface IncidentComments {
 
 @@doc(IncidentComment.name, "Incident comment ID");
 @@doc(IncidentComment.properties, "Incident comment properties");
-@@doc(
-  IncidentComments.createOrUpdate::parameters.resource,
+@@doc(IncidentComments.createOrUpdate::parameters.resource,
   "The incident comment"
 );

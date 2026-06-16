@@ -81,9 +81,7 @@ interface ClusterManagers {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -126,7 +124,6 @@ interface ClusterManagers {
 @@doc(ClusterManager.properties, "The list of the resource properties.");
 @@doc(ClusterManagers.createOrUpdate::parameters.resource, "The request body.");
 @@doc(ClusterManagers.update::parameters.properties, "The request body.");
-@@doc(
-  ClusterManagers.updateRelayPrivateEndpointConnection::parameters.body,
+@@doc(ClusterManagers.updateRelayPrivateEndpointConnection::parameters.body,
   "The request body."
 );

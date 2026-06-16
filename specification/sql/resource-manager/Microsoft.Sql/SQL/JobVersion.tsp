@@ -15,9 +15,7 @@ namespace Microsoft.Sql;
 /**
  * A job version.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Job)
-@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 model JobVersion is Azure.ResourceManager.ProxyResource<never> {
   ...ResourceNameParameter<
     Resource = JobVersion,
@@ -61,9 +59,7 @@ alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.JobVersions)
 interface JobVersions {
   /**
    * Gets a job version.

@@ -1,9 +1,5 @@
-import { type EmitterCheckResult } from "./emitter-check.ts";
-import {
-  type ExecutionReport,
-  type ExecutionReportPackage,
-  type ExecutionResult,
-} from "./types.ts";
+import { EmitterCheckResult } from "./emitter-check.js";
+import { ExecutionReport, ExecutionReportPackage, ExecutionResult } from "./types.js";
 
 /**
  * Response shape from `azsdk pkg generate --output json`.

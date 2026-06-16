@@ -38,7 +38,7 @@ interface IdentityProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -52,7 +52,7 @@ interface IdentityProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -70,21 +70,19 @@ interface IdentityProviderContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response =
-      | (ArmResponse<IdentityProviderContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag?: string;
-        })
-      | (ArmResourceCreatedSyncResponse<IdentityProviderContract> & {
-          /**
-           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-           */
-          @header("ETag")
-          eTag?: string;
-        })
+    Response = (ArmResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }) | (ArmResourceCreatedSyncResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    })
   >;
 
   /**
@@ -107,7 +105,7 @@ interface IdentityProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 
@@ -147,21 +145,18 @@ interface IdentityProviderContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      eTag?: string;
+      etag?: string;
     }
   >;
 }
 
 @@doc(IdentityProviderContract.name, "Identity Provider Type identifier.");
-@@doc(
-  IdentityProviderContract.properties,
+@@doc(IdentityProviderContract.properties,
   "Identity Provider contract properties."
 );
-@@doc(
-  IdentityProviderContracts.createOrUpdate::parameters.resource,
+@@doc(IdentityProviderContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );
-@@doc(
-  IdentityProviderContracts.update::parameters.properties,
+@@doc(IdentityProviderContracts.update::parameters.properties,
   "Update parameters."
 );

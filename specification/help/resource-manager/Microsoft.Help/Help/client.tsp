@@ -8,26 +8,22 @@ using Microsoft.Help;
 @@clientName(ValidationScope.IpAddressFormat, "IPAddressFormat", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "required for pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  DiscoverySolutionNLPOperationGroup.discoverSolutions,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(DiscoverySolutionNLPOperationGroup.discoverSolutions,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "required for pageable"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
-  DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
   "csharp"
 );
 
 @@clientName(DiscoveryNlpRequest, "DiscoveryNlpContent", "csharp");
 @@clientName(ResponseOption, "ResponseConfig", "csharp");
-@@clientName(
-  RestartTroubleshooterResponse,
+@@clientName(RestartTroubleshooterResponse,
   "RestartTroubleshooterResult",
   "csharp"
 );
 @@clientName(TroubleshooterResponse, "TroubleshooterResult", "csharp");
-@@clientName(
-  CheckNameAvailabilityResponse,
+@@clientName(CheckNameAvailabilityResponse,
   "CheckNameAvailabilityResult",
   "csharp"
 );
@@ -35,8 +31,7 @@ using Microsoft.Help;
 //SDK Validation
 @@clientName(DiagnosticResource, "SelfHelpDiagnostic", "csharp");
 @@clientName(SolutionResource, "SelfHelpSolution", "csharp");
-@@clientName(
-  SimplifiedSolutionsResource,
+@@clientName(SimplifiedSolutionsResource,
   "SelfHelpSimplifiedSolution",
   "csharp"
 );
@@ -53,8 +48,7 @@ using Microsoft.Help;
 @@clientName(DiscoveryResponse, "SelfHelpDiscoverySolutionResult", "csharp");
 @@clientName(Error, "SelfHelpError", "csharp");
 @@clientName(Filter, "SelfHelpFilter", "csharp");
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "SelfHelpNameAvailabilityContent",
   "csharp"
 );
@@ -70,20 +64,17 @@ using Microsoft.Help;
 @@clientName(ContinueRequestBody, "TroubleshooterContinueContent", "csharp");
 @@clientName(StepInput, "TroubleshooterStepInput", "csharp");
 @@clientName(VideoGroup, "VideoGroupDetail", "csharp");
-@@clientName(
-  CheckNameAvailabilityResponse,
+@@clientName(CheckNameAvailabilityResponse,
   "SelfHelpNameAvailabilityResult",
   "csharp"
 );
 @@clientName(ValidationScope, "TroubleshooterValidationScope", "csharp");
 @@clientName(QuestionType, "TroubleshooterQuestionType", "csharp");
-@@clientName(
-  QuestionContentType,
+@@clientName(QuestionContentType,
   "TroubleshooterQuestionContentType",
   "csharp"
 );
-@@clientName(
-  QuestionContentType,
+@@clientName(QuestionContentType,
   "TroubleshooterQuestionContentType ",
   "csharp"
 );
@@ -92,23 +83,19 @@ using Microsoft.Help;
 @@clientName(Name, "SelfHelpName", "csharp");
 @@clientName(Type, "SelfHelpType", "csharp");
 @@clientName(SolutionType, "SelfHelpSolutionType", "csharp");
-@@clientName(
-  CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.name,
+@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.name,
   "ResourceName",
   "csharp"
 );
@@ -122,47 +109,39 @@ using Microsoft.Help;
 @@clientName(AutomatedCheckResult.type, "ResultType", "csharp");
 @@alternateType(DiagnosticResourceProperties.acceptedAt, utcDateTime, "csharp");
 @@clientName(DiagnosticResourceProperties.acceptedAt, "AcceptedOn", "csharp");
-@@clientName(
-  DiagnosticProvisioningState,
+@@clientName(DiagnosticProvisioningState,
   "SelfHelpProvisioningState",
   "csharp"
 );
 @@clientName(Confidence, "SelfHelpConfidence", "csharp");
 @@clientName(ValidationScope.URLFormat, "UrlFormat", "csharp");
-@@clientName(
-  SolutionResourceSelfHelps.get,
+@@clientName(SolutionResourceSelfHelps.get,
   "GetSelfHelpSolutionById",
   "csharp"
 );
-@@clientName(
-  CheckNameAvailabilityOperationGroup.checkNameAvailability,
+@@clientName(CheckNameAvailabilityOperationGroup.checkNameAvailability,
   "CheckSelfHelpNameAvailability",
   "csharp"
 );
-@@clientName(
-  DiscoverySolutionOperationGroup.list,
+@@clientName(DiscoverySolutionOperationGroup.list,
   "DiscoverSolutions",
   "csharp"
 );
-@@clientName(
-  DiscoverySolutionNLPOperationGroup.discoverSolutions,
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutions,
   "DiscoverSolutionsNlp",
   "csharp"
 );
-@@clientName(
-  DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
+@@clientName(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
   "DiscoverSolutionsNlp",
   "csharp"
 );
 
 // Java SDK: rename DiscoverySolutionNLPs to DiscoverySolutionNlps
-@@clientLocation(
-  DiscoverySolutionNLPOperationGroup.discoverSolutions,
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutions,
   "DiscoverySolutionNlp",
   "java"
 );
-@@clientLocation(
-  DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
+@@clientLocation(DiscoverySolutionNLPOperationGroup.discoverSolutionsBySubscription,
   "DiscoverySolutionNlp",
   "java"
 );

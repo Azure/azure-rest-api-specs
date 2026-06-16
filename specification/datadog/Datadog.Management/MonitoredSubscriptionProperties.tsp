@@ -40,14 +40,11 @@ interface MonitoredSubscriptions {
   @summary("Add the subscriptions that should be monitored by the Datadog monitor resource.")
   createorUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    Response =
-      | ArmResourceUpdatedResponse<MonitoredSubscriptionProperties>
-      | ArmResourceCreatedResponse<
-          MonitoredSubscriptionProperties,
-          ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
+      MonitoredSubscriptionProperties,
+      ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse,
     OptionalRequestBody = true
   >;
 
@@ -59,10 +56,8 @@ interface MonitoredSubscriptions {
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MonitoredSubscriptionProperties,
     Request = MonitoredSubscriptionProperties,
-    Response =
-      | ArmResponse<MonitoredSubscriptionProperties>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResponse<MonitoredSubscriptionProperties> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 
@@ -73,10 +68,7 @@ interface MonitoredSubscriptions {
   @summary("Updates the subscriptions that are being monitored by the Datadog monitor resource")
   delete is ArmResourceDeleteWithoutOkAsync<
     MonitoredSubscriptionProperties,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -89,12 +81,10 @@ interface MonitoredSubscriptions {
   >;
 }
 
-@@doc(
-  MonitoredSubscriptionProperties.name,
+@@doc(MonitoredSubscriptionProperties.name,
   "The configuration name. Only 'default' value is supported."
 );
-@@doc(
-  MonitoredSubscriptionProperties.properties,
+@@doc(MonitoredSubscriptionProperties.properties,
   "The request to update subscriptions needed to be monitored by the Datadog monitor resource."
 );
 @@doc(MonitoredSubscriptions.createorUpdate::parameters.resource, "");

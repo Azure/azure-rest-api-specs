@@ -46,10 +46,8 @@ interface CurrentQuotaLimitBases {
   createOrUpdate is Extension.CreateOrReplaceAsync<
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
-    Response =
-      | CurrentQuotaLimitBase
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ExceptionResponse
   >;
 
@@ -64,9 +62,7 @@ interface CurrentQuotaLimitBases {
     Extension.ScopeParameter,
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,
-    Response =
-      | CurrentQuotaLimitBase
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
+    Response = CurrentQuotaLimitBase | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader>,
     Error = ExceptionResponse
   >;
 
@@ -81,8 +77,7 @@ interface CurrentQuotaLimitBases {
   >;
 }
 
-@@doc(
-  CurrentQuotaLimitBase.name,
+@@doc(CurrentQuotaLimitBase.name,
   """
     Resource name for a given resource provider. For example:
     - SKU name for Microsoft.Compute
@@ -90,15 +85,12 @@ interface CurrentQuotaLimitBases {
      For Microsoft.Network PublicIPAddresses.
     """
 );
-@@doc(
-  CurrentQuotaLimitBase.properties,
+@@doc(CurrentQuotaLimitBase.properties,
   "Quota properties for the specified resource, based on the API called, Quotas or Usages."
 );
-@@doc(
-  CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
+@@doc(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "Quota request payload."
 );
-@@doc(
-  CurrentQuotaLimitBases.update::parameters.properties,
+@@doc(CurrentQuotaLimitBases.update::parameters.properties,
   "Quota requests payload."
 );

@@ -135,8 +135,7 @@ interface KeyVaultEkmRestClient {
 @@usage(KeyVault.RoleDefinition, Usage.input | Usage.output, "csharp");
 
 // JavaScript customizations
-@@clientName(
-  KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
+@@clientName(KeyVault.FullBackupOperation.azureStorageBlobContainerUri,
   "folderUri",
   "javascript"
 );

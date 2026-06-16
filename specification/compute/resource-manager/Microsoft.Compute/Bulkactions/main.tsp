@@ -4,8 +4,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./routes.tsp";
-import "./vmAttributes.tsp";
-import "./launchBulkInstancesOperation.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

@@ -111,18 +111,15 @@ op SignalRPrivateEndpointConnectionsDeleteCustomized(
   resourceName: string,
 ): void;
 
-@@override(
-  PrivateEndpointConnections.get,
+@@override(PrivateEndpointConnections.get,
   SignalRPrivateEndpointConnectionsGetCustomized,
   "java,go,python,javascript"
 );
-@@override(
-  PrivateEndpointConnections.update,
+@@override(PrivateEndpointConnections.update,
   SignalRPrivateEndpointConnectionsUpdateCustomized,
   "java,go,python,javascript"
 );
-@@override(
-  PrivateEndpointConnections.delete,
+@@override(PrivateEndpointConnections.delete,
   SignalRPrivateEndpointConnectionsDeleteCustomized,
   "java,go,python,javascript"
 );
@@ -212,18 +209,15 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
   resourceName: string,
 ): void;
 
-@@override(
-  SignalRSharedPrivateLinkResources.createOrUpdate,
+@@override(SignalRSharedPrivateLinkResources.createOrUpdate,
   SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized,
   "java,go,python,javascript"
 );
-@@override(
-  SignalRSharedPrivateLinkResources.get,
+@@override(SignalRSharedPrivateLinkResources.get,
   SignalRSharedPrivateLinkResourcesGetCustomized,
   "java,go,python,javascript"
 );
-@@override(
-  SignalRSharedPrivateLinkResources.delete,
+@@override(SignalRSharedPrivateLinkResources.delete,
   SignalRSharedPrivateLinkResourcesDeleteCustomized,
   "java,go,python,javascript"
 );
@@ -235,13 +229,11 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(SignalRResource, "SignalR", "csharp");
 @@clientName(CustomCertificate, "SignalRCustomCertificate", "csharp");
 @@clientName(CustomDomain, "SignalRCustomDomain", "csharp");
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "SignalRPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(
-  SharedPrivateLinkResource,
+@@clientName(SharedPrivateLinkResource,
   "SignalRSharedPrivateLinkResource",
   "csharp"
 );
@@ -254,8 +246,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(ResourceSku, "SignalRResourceSku", "csharp");
 @@clientName(ScaleType, "SignalRScaleType", "csharp");
 @@clientName(ServiceKind, "SignalRServiceKind", "csharp");
-@@clientName(
-  SharedPrivateLinkResourceStatus,
+@@clientName(SharedPrivateLinkResourceStatus,
   "SignalRSharedPrivateLinkResourceStatus",
   "csharp"
 );
@@ -264,23 +255,19 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(UpstreamAuthSettings.type, "AuthType", "csharp");
 @@clientName(UpstreamAuthType, "SignalRUpstreamAuthType", "csharp");
 @@clientName(UpstreamTemplate, "SignalRUpstreamTemplate", "csharp");
-@@clientName(
-  SignalRTlsSettings.clientCertEnabled,
+@@clientName(SignalRTlsSettings.clientCertEnabled,
   "IsClientCertEnabled",
   "csharp"
 );
-@@clientName(
-  SignalROperationGroup.checkNameAvailability,
+@@clientName(SignalROperationGroup.checkNameAvailability,
   "CheckSignalRNameAvailability",
   "csharp"
 );
-@@clientName(
-  SignalROperationGroup.checkNameAvailability::parameters.body,
+@@clientName(SignalROperationGroup.checkNameAvailability::parameters.body,
   "content",
   "csharp"
 );
-@@alternateType(
-  SignalROperationGroup.checkNameAvailability::parameters.location,
+@@alternateType(SignalROperationGroup.checkNameAvailability::parameters.location,
   azureLocation,
   "csharp"
 );
@@ -288,8 +275,7 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(CustomCertificateList, "SignalRCustomCertificateList", "csharp");
 @@clientName(CustomDomainList, "SignalRCustomDomainList", "csharp");
 @@clientName(NameAvailability, "SignalRNameAvailabilityResult", "csharp");
-@@clientName(
-  NameAvailabilityParameters,
+@@clientName(NameAvailabilityParameters,
   "SignalRNameAvailabilityContent",
   "csharp"
 );
@@ -297,23 +283,19 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@alternateType(NameAvailabilityParameters.type, armResourceType, "csharp");
 @@clientName(ACLAction, "SignalRNetworkAclAction", "csharp");
 @@clientName(PrivateEndpointACL, "SignalRPrivateEndpointAcl", "csharp");
-@@clientName(
-  PrivateEndpointConnectionList,
+@@clientName(PrivateEndpointConnectionList,
   "SignalRPrivateEndpointConnectionListResult",
   "csharp"
 );
-@@clientName(
-  PrivateLinkResourceList,
+@@clientName(PrivateLinkResourceList,
   "SignalRPrivateLinkResourceListResult",
   "csharp"
 );
-@@clientName(
-  ResourceLogConfiguration,
+@@clientName(ResourceLogConfiguration,
   "SignalRResourceLogConfiguration",
   "csharp"
 );
-@@clientName(
-  SharedPrivateLinkResourceList,
+@@clientName(SharedPrivateLinkResourceList,
   "SignalRSharedPrivateLinkResourceListResult",
   "csharp"
 );
@@ -322,23 +304,19 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(SignalRRequestType.RESTAPI, "RestApi", "csharp");
 @@alternateType(Sku.resourceType, armResourceType, "csharp");
 @@alternateType(CustomCertificateProperties.keyVaultBaseUri, url, "csharp");
-@@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
-@@alternateType(
-  UsagesOperationGroup.list::parameters.location,
+@@alternateType(UsagesOperationGroup.list::parameters.location,
   azureLocation,
   "csharp"
 );
-@@alternateType(
-  SharedPrivateLinkResourceProperties.privateLinkResourceId,
+@@alternateType(SharedPrivateLinkResourceProperties.privateLinkResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(
-  ShareablePrivateLinkResourceProperties.type,
+@@clientName(ShareablePrivateLinkResourceProperties.type,
   "ShareablePrivateLinkResourcePropertiesType",
   "csharp"
 );
@@ -347,32 +325,27 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(PrivateLinkResource, "SignalRPrivateLinkResource", "csharp");
 @@clientName(SignalRResources.list, "GetSignalRPrivateLinkResources", "csharp");
 @@clientName(RegenerateKeyParameters, "SignalRRegenerateKeyContent", "csharp");
-@@usage(
-  ShareablePrivateLinkResourceProperties,
+@@usage(ShareablePrivateLinkResourceProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 @@usage(ShareablePrivateLinkResourceType, Usage.input | Usage.output, "csharp");
 @@clientName(Replica, "SignalRReplica", "csharp");
-@@clientName(
-  SharedPrivateLinkResources,
+@@clientName(SharedPrivateLinkResources,
   "SignalRReplicaSharedPrivateLinkResources",
   "csharp"
 );
 @@alternateType(ResourceReference.id, armResourceIdentifier, "csharp");
-@@alternateType(
-  SignalRResource.identity,
+@@alternateType(SignalRResource.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@clientName(
-  ApplicationFirewallSettings,
+@@clientName(ApplicationFirewallSettings,
   "SignalRApplicationFirewallSettings",
   "csharp"
 );
-@@clientName(
-  ClientConnectionCountRule,
+@@clientName(ClientConnectionCountRule,
   "SignalRClientConnectionCountRule",
   "csharp"
 );
@@ -380,39 +353,32 @@ op SignalRSharedPrivateLinkResourcesDeleteCustomized(
 @@clientName(RouteSettings, "SignalRRouteSettings", "csharp");
 @@clientName(ServerlessSettings, "SignalRServerlessSettings", "csharp");
 @@clientName(UsagesOperationGroup.list, "GetUsages", "csharp");
-@@clientName(
-  SignalRResources.regenerateKey::parameters.body,
+@@clientName(SignalRResources.regenerateKey::parameters.body,
   "content",
   "csharp"
 );
-@@clientName(
-  ClientTrafficControlRule,
+@@clientName(ClientTrafficControlRule,
   "SignalRClientTrafficControlRule",
   "csharp"
 );
-@@clientName(
-  ThrottleByJwtCustomClaimRule,
+@@clientName(ThrottleByJwtCustomClaimRule,
   "SignalRThrottleByJwtCustomClaimRule",
   "csharp"
 );
-@@clientName(
-  ThrottleByJwtSignatureRule,
+@@clientName(ThrottleByJwtSignatureRule,
   "SignalRThrottleByJwtSignatureRule",
   "csharp"
 );
 @@clientName(ThrottleByUserIdRule, "SignalRThrottleByUserIdRule", "csharp");
-@@clientName(
-  TrafficThrottleByJwtCustomClaimRule,
+@@clientName(TrafficThrottleByJwtCustomClaimRule,
   "SignalRTrafficThrottleByJwtCustomClaimRule",
   "csharp"
 );
-@@clientName(
-  TrafficThrottleByJwtSignatureRule,
+@@clientName(TrafficThrottleByJwtSignatureRule,
   "SignalRTrafficThrottleByJwtSignatureRule",
   "csharp"
 );
-@@clientName(
-  TrafficThrottleByUserIdRule,
+@@clientName(TrafficThrottleByUserIdRule,
   "SignalRTrafficThrottleByUserIdRule",
   "csharp"
 );

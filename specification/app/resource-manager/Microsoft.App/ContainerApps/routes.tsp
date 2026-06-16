@@ -2,27 +2,16 @@
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.App;
-
-/** Custom location parameter with pattern matching original swagger */
-alias AppLocationParameter = {
-  /** The location for which resource usage is queried. */
-  @path
-  @segment("locations")
-  @pattern("^[-\\w\\._]+$")
-  location: string;
-};
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AvailableWorkloadProfilesOperationGroup {
@@ -38,7 +27,7 @@ interface AvailableWorkloadProfilesOperationGroup {
   get is ArmProviderActionSync<
     Response = AvailableWorkloadProfilesCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter
+    Parameters = LocationParameter
   >;
 }
 
@@ -55,7 +44,7 @@ interface BillingMetersOperationGroup {
   get is ArmProviderActionSync<
     Response = BillingMeterCollection,
     Scope = SubscriptionActionScope,
-    Parameters = LocationResourceParameter,
+    Parameters = LocationParameter,
     Error = DefaultErrorResponse
   >;
 }
@@ -66,11 +55,8 @@ interface BillingMetersOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
 @tag("Subscriptions")
-@action("getCustomDomainVerificationId")
 op getCustomDomainVerificationId is ArmProviderActionSync<
   Response = OkResponse & {
-    @header("Content-Type") contentType: "application/json";
-
     @bodyRoot
     customDomainVerificationId: CustomDomainVerificationId;
   },
@@ -91,7 +77,7 @@ interface UsagesOperationGroup {
   list is ArmProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
-    Parameters = AppLocationParameter,
+    Parameters = LocationParameter,
     Error = DefaultErrorResponse
   >;
 }

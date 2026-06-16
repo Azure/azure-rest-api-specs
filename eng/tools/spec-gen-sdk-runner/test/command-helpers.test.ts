@@ -1,4 +1,4 @@
-import { type APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,14 +11,13 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
-  selectGenerationTool,
   setPipelineVariables,
-} from "../src/command-helpers.ts";
-import * as log from "../src/log.ts";
-import { LogLevel } from "../src/log.ts";
-import * as specHelpers from "../src/spec-helpers.ts";
-import type { ExecutionReport } from "../src/types.ts";
-import * as utils from "../src/utils.ts";
+} from "../src/command-helpers.js";
+import * as log from "../src/log.js";
+import { LogLevel } from "../src/log.js";
+import * as specHelpers from "../src/spec-helpers.js";
+import type { ExecutionReport } from "../src/types.js";
+import * as utils from "../src/utils.js";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -647,40 +646,6 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
       expect(result2).toBe(true);
-    });
-  });
-
-  describe("selectGenerationTool", () => {
-    test("should return 'skipped' for Rust with only readme path", () => {
-      const result = selectGenerationTool(
-        undefined,
-        "specification/compute/resource-manager/readme.md",
-        SdkName.Rust,
-      );
-      expect(result).toBe("skipped");
-    });
-
-    test("should return 'spec-gen-sdk' for non-Rust with only readme path", () => {
-      const result = selectGenerationTool(
-        undefined,
-        "specification/compute/resource-manager/readme.md",
-        SdkName.Js,
-      );
-      expect(result).toBe("spec-gen-sdk");
-    });
-
-    test("should return 'spec-gen-sdk' for non-Rust with tspconfig path", () => {
-      const result = selectGenerationTool(
-        "specification/compute/Compute.Management/tspconfig.yaml",
-        undefined,
-        SdkName.Js,
-      );
-      expect(result).toBe("spec-gen-sdk");
-    });
-
-    test("should return 'spec-gen-sdk' when no paths are provided", () => {
-      const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
-      expect(result).toBe("spec-gen-sdk");
     });
   });
 });

@@ -143,9 +143,7 @@ interface BotChannels {
   update is BotChannelOps.CustomPatchSync<
     BotChannel,
     PatchModel = BotChannel,
-    Response =
-      | ArmResponse<BotChannel>
-      | ArmResourceCreatedSyncResponse<BotChannel>
+    Response = ArmResponse<BotChannel> | ArmResourceCreatedSyncResponse<BotChannel>
   >;
 
   /**
@@ -190,15 +188,12 @@ interface BotChannels {
 @@maxLength(BotChannel.name, 64);
 @@minLength(BotChannel.name, 2);
 @@doc(BotChannel.name, "The name of the Bot resource.");
-@@doc(
-  BotChannel.properties,
+@@doc(BotChannel.properties,
   "The set of properties specific to bot channel resource"
 );
-@@doc(
-  BotChannels.update::parameters.properties,
+@@doc(BotChannels.update::parameters.properties,
   "The parameters to provide for the created bot."
 );
-@@doc(
-  BotChannels.regenerateKeys::parameters.body,
+@@doc(BotChannels.regenerateKeys::parameters.body,
   "The parameters to provide for the created bot."
 );

@@ -2,12 +2,12 @@
   "name": "@azure-tools/oav-runner",
   "private": true,
   "type": "module",
-  "main": "src/main.ts",
+  "main": "dist/src/main.js",
   "bin": {
     "oav-runner": "cmd/oav-runner.js"
   },
   "scripts": {
-    "build": "tsc --noEmit",
+    "build": "tsc --build",
     "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -36,6 +36,6 @@
     "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=20.0.0"
   }
 }

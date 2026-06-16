@@ -5,6 +5,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "./ProvisioningState.tsp";
+import "@typespec/openapi";
+import "./ProvisioningState.tsp";
 import "./UpdateType.tsp";
 
 using TypeSpec.OpenAPI;
@@ -44,29 +46,6 @@ model SolutionTemplateProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The updatable properties of the SolutionTemplate.")
-model SolutionTemplateUpdateProperties {
-  @doc("Description of Solution template")
-  description?: string;
-
-  @doc("List of capabilities")
-  capabilities?: string[];
-
-  @doc("State of resource")
-  state?: ResourceState;
-
-  @doc("Flag to enable external validation")
-  enableExternalValidation?: boolean;
-}
-
-@doc("The type used for update operations of the SolutionTemplate.")
-model SolutionTemplateUpdate {
-  ...ArmTagsProperty;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: SolutionTemplateUpdateProperties;
-}
-
 @doc("Solution Template Resource. Contains capabilities and operations for creating versions.")
 model SolutionTemplate
   is Azure.ResourceManager.TrackedResource<SolutionTemplateProperties> {
@@ -104,7 +83,13 @@ interface SolutionTemplates {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<SolutionTemplate>;
 
   @doc("update a Solution Template Resource")
-  update is ArmCustomPatchSync<SolutionTemplate, SolutionTemplateUpdate>;
+  update is ArmCustomPatchSync<
+    SolutionTemplate,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      SolutionTemplate,
+      SolutionTemplateProperties
+    >
+  >;
 
   @doc("Create a Solution Template Version Resource")
   createVersion is ArmResourceActionAsync<

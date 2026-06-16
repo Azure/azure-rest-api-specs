@@ -95,12 +95,10 @@ interface ApplicationTypeVersionResources {
 }
 
 @@doc(ApplicationTypeVersionResource.name, "The application type version.");
-@@doc(
-  ApplicationTypeVersionResource.properties,
+@@doc(ApplicationTypeVersionResource.properties,
   "The properties of the application type version resource."
 );
-@@doc(
-  ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
+@@doc(ApplicationTypeVersionResources.createOrUpdate::parameters.resource,
   "The application type version resource."
 );
 

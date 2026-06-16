@@ -12,7 +12,8 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_04_30)
 interface OwnershipVouchers {
   /**
    * Validates ownership vouchers.
@@ -25,8 +26,7 @@ interface OwnershipVouchers {
   >;
 }
 
-@@doc(
-  OwnershipVouchers.validate::parameters.body,
+@@doc(OwnershipVouchers.validate::parameters.body,
   "Ownership vouchers to be validated."
 );
 @@clientName(OwnershipVouchers.validate::parameters.body, "validationRequest");

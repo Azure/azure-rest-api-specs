@@ -27,15 +27,6 @@ model ResolvedConfiguration {
 
 @doc("Solution Template Parameter")
 model SolutionTemplateParameter {
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Template Name")
-  solutionTemplate: string;
-
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Template Version Name")
-  solutionTemplateVersion: string;
-
-  @added(Versions.v2025_06_01)
   @doc("Solution Template Version ARM Id")
   solutionTemplateVersionId: string;
 
@@ -50,19 +41,6 @@ model SolutionTemplateParameter {
 
 @doc("Solution Version Parameter")
 model SolutionVersionParameter {
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Name")
-  solution: string;
-
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Version Name")
-  solutionVersion: string;
-
-  @removed(Versions.v2025_06_01)
-  @doc("Review ID")
-  reviewId: string;
-
-  @added(Versions.v2025_06_01)
   @doc("Solution Version ARM Id")
   solutionVersionId: string;
 }
@@ -108,26 +86,12 @@ model SolutionDependencyParameter {
 
 @doc("Install Solution Parameter")
 model InstallSolutionParameter {
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Name")
-  solution: string;
-
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Version Name")
-  solutionVersion: string;
-
-  @added(Versions.v2025_06_01)
   @doc("Solution Version ARM Id")
   solutionVersionId: string;
 }
 
 @doc("Uninstall Solution Parameter")
 model UninstallSolutionParameter {
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Name")
-  solutionName: string;
-
-  @added(Versions.v2025_06_01)
   @doc("Solution Template ARM Id")
   solutionTemplateId: string;
 
@@ -137,11 +101,6 @@ model UninstallSolutionParameter {
 
 @doc("Install Solution Parameter")
 model RemoveRevisionParameter {
-  @removed(Versions.v2025_06_01)
-  @doc("Solution Name")
-  solution: string;
-
-  @added(Versions.v2025_06_01)
   @doc("Solution Template ARM Id")
   solutionTemplateId: string;
 
@@ -157,7 +116,6 @@ model TargetProperties {
   @doc("Display name of target")
   displayName: string;
 
-  @added(Versions.v2025_06_01)
   @doc("ArmId of Context")
   contextId: Azure.Core.armResourceIdentifier<[
     {
@@ -192,49 +150,6 @@ model TargetProperties {
   provisioningState?: ProvisioningState;
 }
 
-@doc("The updatable properties of the Target.")
-model TargetUpdateProperties {
-  @doc("Description of target")
-  description?: string;
-
-  @doc("Display name of target")
-  displayName?: string;
-
-  @added(Versions.v2025_06_01)
-  @doc("ArmId of Context")
-  contextId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.Edge/contexts";
-    }
-  ]>;
-
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Suppress no-unknown to handle the datatype object used in dependent service"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppress arm-no-record to handle the datatype object used in dependent service"
-  @doc("target spec")
-  targetSpecification?: Record<unknown>;
-
-  @doc("List of capabilities")
-  capabilities?: string[];
-
-  @doc("Hierarchy Level")
-  hierarchyLevel?: string;
-
-  @doc("Scope of the target resource")
-  @pattern("^[a-z0-9]([-a-z0-9]*[a-z0-9])?$")
-  solutionScope?: string;
-
-  @doc("State of resource")
-  state?: ResourceState;
-}
-
-@doc("The type used for update operations of the Target.")
-model TargetUpdate {
-  ...ArmTagsProperty;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: TargetUpdateProperties;
-}
-
 @doc("Param that indicates if the delete should be forced")
 model ForceDeleteParameter {
   @doc("Force delete")
@@ -266,7 +181,13 @@ interface Targets {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Target>;
 
   @doc("update a Target Resource")
-  update is ArmCustomPatchAsync<Target, TargetUpdate>;
+  update is ArmCustomPatchAsync<
+    Target,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Target,
+      TargetProperties
+    >
+  >;
 
   @doc("Delete a Target Resource")
   delete is ArmResourceDeleteWithoutOkAsync<

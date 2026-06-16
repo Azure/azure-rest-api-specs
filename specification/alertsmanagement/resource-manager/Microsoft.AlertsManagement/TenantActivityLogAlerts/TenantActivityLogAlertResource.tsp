@@ -13,24 +13,18 @@ namespace Microsoft.AlertsManagement;
 /**
  * A Tenant Activity Log Alert rule resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TenantActivityLogAlertResource
-  is Azure.ResourceManager.ProxyResource<AlertRuleProperties, false> {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    AlertRuleProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = TenantActivityLogAlertResource,
     KeyName = "alertRuleName",
     SegmentName = "tenantActivityLogAlerts",
     NamePattern = "^[-\\w\\._\\(\\)]+$"
   >;
-
-  /** The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string = "global";
-
-  /** The tags of the resource. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -85,19 +79,15 @@ interface TenantActivityLogAlertResources {
   >;
 }
 
-@@doc(
-  TenantActivityLogAlertResource.name,
+@@doc(TenantActivityLogAlertResource.name,
   "The name of the Tenant Activity Log Alert rule."
 );
-@@doc(
-  TenantActivityLogAlertResource.properties,
+@@doc(TenantActivityLogAlertResource.properties,
   "The Activity Log Alert rule properties of the resource."
 );
-@@doc(
-  TenantActivityLogAlertResources.createOrUpdate::parameters.resource,
+@@doc(TenantActivityLogAlertResources.createOrUpdate::parameters.resource,
   "The Tenant Activity Log Alert rule to create or use for the update."
 );
-@@doc(
-  TenantActivityLogAlertResources.update::parameters.properties,
+@@doc(TenantActivityLogAlertResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );

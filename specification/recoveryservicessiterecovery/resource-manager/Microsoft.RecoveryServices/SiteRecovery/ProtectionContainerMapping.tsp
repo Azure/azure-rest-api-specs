@@ -48,10 +48,8 @@ interface ProtectionContainerMappings {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ProtectionContainerMapping,
     Request = CreateProtectionContainerMappingInput,
-    Response =
-      | ArmResourceUpdatedResponse<ProtectionContainerMapping>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerMapping> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<ProtectionContainerMapping> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ProtectionContainerMapping> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -95,10 +93,8 @@ interface ProtectionContainerMappings {
   delete is ArmResourceActionAsyncBase<
     ProtectionContainerMapping,
     RemoveProtectionContainerMappingInput,
-
-      | NoContentResponse
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<ProtectionContainerMapping>,
     Error = never
   >;
@@ -106,12 +102,10 @@ interface ProtectionContainerMappings {
 
 @@doc(ProtectionContainerMapping.name, "Protection Container mapping name.");
 @@doc(ProtectionContainerMapping.properties, "The custom data.");
-@@doc(
-  ProtectionContainerMappings.create::parameters.resource,
+@@doc(ProtectionContainerMappings.create::parameters.resource,
   "Mapping creation input."
 );
-@@doc(
-  ProtectionContainerMappings.update::parameters.properties,
+@@doc(ProtectionContainerMappings.update::parameters.properties,
   "Mapping update input."
 );
 @@doc(ProtectionContainerMappings.delete::parameters.body, "Removal input.");

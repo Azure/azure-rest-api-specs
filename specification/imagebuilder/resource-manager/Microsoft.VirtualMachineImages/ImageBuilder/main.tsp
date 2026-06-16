@@ -48,7 +48,6 @@ interface Operations
       Error = ErrorResponse
     > {}
 
-@@doc(
-  Operations.list,
+@@doc(Operations.list,
   "Lists available operations for the Microsoft.VirtualMachineImages provider"
 );

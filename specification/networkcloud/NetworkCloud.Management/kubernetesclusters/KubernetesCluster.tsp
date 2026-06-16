@@ -76,9 +76,7 @@ interface KubernetesClusters {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response =
-      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,8 +115,7 @@ interface KubernetesClusters {
 
 @@doc(KubernetesCluster.name, "The name of the Kubernetes cluster.");
 @@doc(KubernetesCluster.properties, "The list of the resource properties.");
-@@doc(
-  KubernetesClusters.createOrUpdate::parameters.resource,
+@@doc(KubernetesClusters.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(KubernetesClusters.update::parameters.properties, "The request body.");

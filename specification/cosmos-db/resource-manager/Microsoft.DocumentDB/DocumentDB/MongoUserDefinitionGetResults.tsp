@@ -42,10 +42,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   createUpdateMongoUserDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoUserDefinitionGetResults,
     Request = MongoUserDefinitionCreateUpdateParameters,
-    Response =
-      | ArmResourceUpdatedResponse<MongoUserDefinitionGetResults>
-      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
-          Azure.Core.Foundations.RetryAfterHeader>,
+    Response = ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -55,10 +53,7 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoUserDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoUserDefinitionGetResults,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -72,15 +67,12 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   >;
 }
 
-@@doc(
-  MongoUserDefinitionGetResults.name,
+@@doc(MongoUserDefinitionGetResults.name,
   "The ID for the User Definition {dbName.userName}."
 );
-@@doc(
-  MongoUserDefinitionGetResults.properties,
+@@doc(MongoUserDefinitionGetResults.properties,
   "Properties related to the User Definition."
 );
-@@doc(
-  MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
+@@doc(MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
   "The properties required to create or update a User Definition."
 );

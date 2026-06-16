@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "accountName": "contoso",
+    "api-version": "2023-10-01",
+    "body": {
+      "numbers": [
+        {
+          "details": {
+            "configuration": {
+              "customSipHeader": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+            },
+            "services": {
+              "teamsDrEnabled": true,
+              "teamsOcEnabled": false,
+              "zoomEnabled": false
+            }
+          },
+          "phoneNumber": "+44012345123001"
+        },
+        {
+          "details": {
+            "configuration": {
+              "customSipHeader": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+            },
+            "services": {
+              "teamsDrEnabled": false,
+              "teamsOcEnabled": false,
+              "zoomEnabled": false
+            }
+          },
+          "phoneNumber": "+44123451230012"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "numbers": [
+          {
+            "etag": "000000001",
+            "accountName": "contoso",
+            "details": {
+              "configuration": {
+                "customSipHeader": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+              },
+              "services": {
+                "teamsDrEnabled": true,
+                "teamsOcEnabled": false,
+                "zoomEnabled": false
+              }
+            },
+            "phoneNumber": "+44012345123001"
+          },
+          {
+            "accountName": "contoso",
+            "details": {
+              "configuration": {
+                "customSipHeader": "YhdVlLzhM1WdwX0d5-mXl6jihKglThsKWE3SmW"
+              },
+              "services": {
+                "teamsDrEnabled": false,
+                "teamsOcEnabled": false,
+                "zoomEnabled": false
+              }
+            },
+            "phoneNumber": "+44123451230012"
+          }
+        ]
+      }
+    }
+  }
+}

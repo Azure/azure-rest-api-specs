@@ -1,21 +1,21 @@
 import { kebabCase } from "change-case";
 import { writeFile } from "node:fs/promises";
 import { relative } from "node:path";
-import { getViolations } from "./correlateResults.ts";
+import { getViolations } from "./correlateResults.js";
 import {
-  type AutoRestMessage,
-  type AutorestRunResult,
-  type BeforeAfter,
-  type LintDiffViolation,
-} from "./lintdiff-types.ts";
-import { getRelatedArmRpcFromDoc } from "./markdown-utils.ts";
+  AutoRestMessage,
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+} from "./lintdiff-types.js";
+import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
 import {
   getDependencyVersion,
   getPathToDependency,
   isFailure,
   isWarning,
   relativizePath,
-} from "./util.ts";
+} from "./util.js";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 

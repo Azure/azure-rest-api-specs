@@ -68,8 +68,7 @@ using TypeSpec.Http;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CreditSummary.properties);
 
-@@clientLocation(
-  PriceSheetOperationGroup.downloadByBillingAccountPeriod,
+@@clientLocation(PriceSheetOperationGroup.downloadByBillingAccountPeriod,
   PriceSheet
 );
 
@@ -82,59 +81,47 @@ using TypeSpec.Http;
 @@clientLocation(ChargesOperationGroup.list, "Charges");
 
 @@clientLocation(BalancesOperationGroup.getByBillingAccount, "Balances");
-@@clientLocation(
-  BalancesOperationGroup.getForBillingPeriodByBillingAccount,
+@@clientLocation(BalancesOperationGroup.getForBillingPeriodByBillingAccount,
   "Balances"
 );
 
-@@clientLocation(
-  ReservationsSummariesOperationGroup.listByReservationOrder,
+@@clientLocation(ReservationsSummariesOperationGroup.listByReservationOrder,
   "ReservationsSummaries"
 );
-@@clientLocation(
-  ReservationsSummariesOperationGroup.listByReservationOrderAndReservation,
+@@clientLocation(ReservationsSummariesOperationGroup.listByReservationOrderAndReservation,
   "ReservationsSummaries"
 );
-@@clientLocation(
-  ReservationsSummariesOperationGroup.list,
+@@clientLocation(ReservationsSummariesOperationGroup.list,
   "ReservationsSummaries"
 );
 
-@@clientLocation(
-  ReservationsDetailsOperationGroup.listByReservationOrder,
+@@clientLocation(ReservationsDetailsOperationGroup.listByReservationOrder,
   "ReservationsDetails"
 );
-@@clientLocation(
-  ReservationsDetailsOperationGroup.listByReservationOrderAndReservation,
+@@clientLocation(ReservationsDetailsOperationGroup.listByReservationOrderAndReservation,
   "ReservationsDetails"
 );
 @@clientLocation(ReservationsDetailsOperationGroup.list, "ReservationsDetails");
 
-@@clientLocation(
-  ReservationRecommendationsOperationGroup.list,
+@@clientLocation(ReservationRecommendationsOperationGroup.list,
   "ReservationRecommendations"
 );
 
-@@clientLocation(
-  ReservationRecommendationDetailsOperationGroup.get,
+@@clientLocation(ReservationRecommendationDetailsOperationGroup.get,
   "ReservationRecommendationDetails"
 );
 
-@@clientLocation(
-  ReservationTransactionsOperationGroup.list,
+@@clientLocation(ReservationTransactionsOperationGroup.list,
   "ReservationTransactions"
 );
-@@clientLocation(
-  ReservationTransactionsOperationGroup.listByBillingProfile,
+@@clientLocation(ReservationTransactionsOperationGroup.listByBillingProfile,
   "ReservationTransactions"
 );
 
-@@clientLocation(
-  AggregatedCostOperationGroup.getByManagementGroup,
+@@clientLocation(AggregatedCostOperationGroup.getByManagementGroup,
   "AggregatedCost"
 );
-@@clientLocation(
-  AggregatedCostOperationGroup.getForBillingPeriodByManagementGroup,
+@@clientLocation(AggregatedCostOperationGroup.getForBillingPeriodByManagementGroup,
   "AggregatedCost"
 );
 
@@ -145,14 +132,27 @@ using TypeSpec.Http;
 @@clientLocation(LotsOperationGroup.listByBillingAccount, "Lots");
 @@clientLocation(LotsOperationGroup.listByCustomer, "Lots");
 
-@@path(
-  ResourceScopeActionScope.scope,
+@@path(ResourceScopeActionScope.scope,
   #{ allowReserved: true, name: "resourceScope" }
 );
 @@clientName(ResourceScopeActionScope.scope, "resourceScope");
 
 @@clientName(Amount, "amount");
 
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ProxyResource,
+  "ArmProxyResource",
+  "python"
+);
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "python"
+);
+
+@@clientName(BudgetOperatorType.In, "IN_ENUM", "python");
 @@clientName(Term.P1M, "P1_M", "python");
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");

@@ -93,8 +93,7 @@ op getCertificate is KeyVaultOperation<
 @@clientName(JsonWebKeyType, "CertificateKeyType", "java");
 @@clientName(KeyUsageType, "CertificateKeyUsage", "java");
 @@clientName(SubjectAlternativeNames.upns, "userPrincipalNames", "java");
-@@clientName(
-  SubjectAlternativeNames.uris,
+@@clientName(SubjectAlternativeNames.uris,
   "uniformResourceIdentifiers",
   "java"
 );
@@ -195,20 +194,17 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(CertificateIssuerSetParameters, "SetIssuerParameters", "go");
 @@clientName(CertificateIssuerUpdateParameters, "UpdateIssuerParameters", "go");
 @@clientName(CertificateMergeParameters, "MergeCertificateParameters", "go");
-@@clientName(
-  CertificateOperationUpdateParameter,
+@@clientName(CertificateOperationUpdateParameter,
   "UpdateCertificateOperationParameter",
   "go"
 );
-@@clientName(
-  CertificateRestoreParameters,
+@@clientName(CertificateRestoreParameters,
   "RestoreCertificateParameters",
   "go"
 );
 @@clientName(CertificateUpdateParameters, "UpdateCertificateParameters", "go");
 @@clientName(CertificateListResult, "CertificatePropertiesListResult", "go");
-@@clientName(
-  DeletedCertificateListResult,
+@@clientName(DeletedCertificateListResult,
   "DeletedCertificatePropertiesListResult",
   "go"
 );
@@ -222,8 +218,7 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(DeletedCertificateItem, "DeletedCertificateProperties", "go");
 @@clientName(IssuerBundle, "Issuer", "go");
 @@clientName(CertificateIssuerItem, "IssuerProperties", "go");
-@@clientName(
-  CertificateRestoreParameters.certificateBundleBackup,
+@@clientName(CertificateRestoreParameters.certificateBundleBackup,
   "CertificateBackup",
   "go"
 );
@@ -255,41 +250,34 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 // Elide createCertificate but keep the request model for a convenience poller (LRO).
 @@scope(KeyVault.createCertificate, "!rust");
 @@usage(CertificateCreateParameters, Usage.input, "rust");
-@@clientName(
-  CertificateCreateParameters,
+@@clientName(CertificateCreateParameters,
   "CreateCertificateParameters",
   "rust"
 );
 
-@@clientName(
-  CertificateImportParameters,
+@@clientName(CertificateImportParameters,
   "ImportCertificateParameters",
   "rust"
 );
 @@clientName(CertificateIssuerSetParameters, "SetIssuerParameters", "rust");
-@@clientName(
-  CertificateIssuerUpdateParameters,
+@@clientName(CertificateIssuerUpdateParameters,
   "UpdateIssuerParameters",
   "rust"
 );
 @@clientName(CertificateMergeParameters, "MergeCertificateParameters", "rust");
-@@clientName(
-  CertificateOperationUpdateParameter,
+@@clientName(CertificateOperationUpdateParameter,
   "UpdateCertificateOperationParameter",
   "rust"
 );
-@@clientName(
-  CertificateRestoreParameters,
+@@clientName(CertificateRestoreParameters,
   "RestoreCertificateParameters",
   "rust"
 );
-@@clientName(
-  CertificateUpdateParameters,
+@@clientName(CertificateUpdateParameters,
   "UpdateCertificatePropertiesParameters",
   "rust"
 );
-@@clientName(
-  DeletedCertificateListResult,
+@@clientName(DeletedCertificateListResult,
   "ListDeletedCertificatePropertiesResult",
   "rust"
 );
@@ -298,13 +286,11 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 
 @@clientName(getCertificates, "ListCertificateProperties", "rust");
 @@clientName(getCertificateIssuers, "ListIssuerProperties", "rust");
-@@clientName(
-  getCertificateVersions,
+@@clientName(getCertificateVersions,
   "ListCertificatePropertiesVersions",
   "rust"
 );
-@@clientName(
-  getDeletedCertificates,
+@@clientName(getDeletedCertificates,
   "ListDeletedCertificateProperties",
   "rust"
 );
@@ -326,8 +312,7 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(DeletedCertificateItem, "DeletedCertificateProperties", "rust");
 @@clientName(IssuerBundle, "Issuer", "rust");
 @@clientName(CertificateIssuerItem, "IssuerProperties", "rust");
-@@clientName(
-  CertificateRestoreParameters.certificateBundleBackup,
+@@clientName(CertificateRestoreParameters.certificateBundleBackup,
   "CertificateBackup",
   "rust"
 );

@@ -64,11 +64,9 @@ interface EnvironmentTypes {
 @@minLength(EnvironmentType.name, 3);
 @@doc(EnvironmentType.name, "The name of the environment type.");
 @@doc(EnvironmentType.properties, "Properties of an environment type.");
-@@doc(
-  EnvironmentTypes.createOrUpdate::parameters.resource,
+@@doc(EnvironmentTypes.createOrUpdate::parameters.resource,
   "Represents an Environment Type."
 );
-@@doc(
-  EnvironmentTypes.update::parameters.properties,
+@@doc(EnvironmentTypes.update::parameters.properties,
   "Updatable environment type properties."
 );

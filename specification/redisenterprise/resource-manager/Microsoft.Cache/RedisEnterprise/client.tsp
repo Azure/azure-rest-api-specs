@@ -9,8 +9,7 @@ using Microsoft.Cache;
 @@clientName(Microsoft.Cache, "RedisEnterpriseManagementClient", "javascript");
 @@clientName(Microsoft.Cache, "RedisEnterpriseManagementClient", "python");
 
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
   "ArmPrivateEndpointConnection",
   "python"
 );
@@ -19,13 +18,11 @@ using Microsoft.Cache;
 @@clientName(AccessKeys, "RedisEnterpriseDataAccessKeys", "csharp");
 @@clientName(AccessKeyType, "RedisEnterpriseAccessKeyType", "csharp");
 @@clientName(AofFrequency.OneS, "OneSecond", "csharp");
-@@clientName(
-  AzureCacheForRedisMigrationProperties.switchDns,
+@@clientName(AzureCacheForRedisMigrationProperties.switchDns,
   "IsSwitchDns",
   "csharp"
 );
-@@clientName(
-  AzureCacheForRedisMigrationProperties.skipDataMigration,
+@@clientName(AzureCacheForRedisMigrationProperties.skipDataMigration,
   "IsSkipDataMigration",
   "csharp"
 );
@@ -34,25 +31,21 @@ using Microsoft.Cache;
 @@clientName(ClusteringPolicy, "RedisEnterpriseClusteringPolicy", "csharp");
 @@clientName(ClusteringPolicy.OSSCluster, "OssCluster", "csharp");
 @@clientName(ClusterList, "RedisEnterpriseClusterList", "csharp");
-@@clientName(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryption,
+@@clientName(ClusterPropertiesEncryptionCustomerManagedKeyEncryption,
   "RedisEnterpriseCustomerManagedKeyEncryption",
   "csharp"
 );
-@@clientName(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,
+@@clientName(ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,
   "RedisEnterpriseCustomerManagedKeyEncryptionKeyIdentity",
   "csharp"
 );
-@@clientName(
-  CmkIdentityType,
+@@clientName(CmkIdentityType,
   "RedisEnterpriseCustomerManagedKeyIdentityType",
   "csharp"
 );
 @@clientName(Database, "RedisEnterpriseDatabase", "csharp");
 @@clientName(DatabaseList, "RedisEnterpriseDatabaseList", "csharp");
-@@clientName(
-  DatabasePropertiesGeoReplication,
+@@clientName(DatabasePropertiesGeoReplication,
   "RedisEnterpriseDatabaseGeoReplication",
   "csharp"
 );
@@ -62,21 +55,18 @@ using Microsoft.Cache;
 @@clientName(EvictionPolicy.VolatileLRU, "VolatileLfu", "csharp");
 @@clientName(EvictionPolicy.VolatileLFU, "VolatileLru", "csharp");
 @@clientName(EvictionPolicy.VolatileTTL, "VolatileTtl", "csharp");
-@@clientName(
-  ExportClusterParameters,
+@@clientName(ExportClusterParameters,
   "ExportRedisEnterpriseDatabaseContent",
   "csharp"
 );
 @@clientName(FlushParameters, "FlushRedisEnterpriseDatabaseContent", "csharp");
 @@clientName(ForceLinkParameters, "ForceLinkContent", "csharp");
-@@clientName(
-  ForceUnlinkParameters,
+@@clientName(ForceUnlinkParameters,
   "ForceUnlinkRedisEnterpriseDatabaseContent",
   "csharp"
 );
 @@clientName(HighAvailability, "RedisEnterpriseHighAvailability", "csharp");
-@@clientName(
-  ImportClusterParameters,
+@@clientName(ImportClusterParameters,
   "ImportRedisEnterpriseDatabaseContent",
   "csharp"
 );
@@ -84,24 +74,20 @@ using Microsoft.Cache;
 @@clientName(LinkState, "RedisEnterpriseDatabaseLinkState", "csharp");
 @@clientName(Module, "RedisEnterpriseModule", "csharp");
 @@clientName(Migration, "RedisEnterpriseMigration", "csharp");
-@@clientName(
-  MaintenanceDayOfWeek,
+@@clientName(MaintenanceDayOfWeek,
   "RedisEnterpriseMaintenanceDayOfWeek",
   "csharp"
 );
 @@clientName(MaintenanceWindow, "RedisEnterpriseMaintenanceWindow", "csharp");
-@@clientName(
-  MaintenanceWindowType,
+@@clientName(MaintenanceWindowType,
   "RedisEnterpriseMaintenanceWindowType",
   "csharp"
 );
-@@clientName(
-  MigrationProperties,
+@@clientName(MigrationProperties,
   "RedisEnterpriseMigrationProperties",
   "csharp"
 );
-@@clientName(
-  MigrationProvisioningState,
+@@clientName(MigrationProvisioningState,
   "RedisEnterpriseMigrationProvisioningState",
   "csharp"
 );
@@ -112,21 +98,18 @@ using Microsoft.Cache;
 @@clientName(Persistence.aofEnabled, "IsAofEnabled", "csharp");
 @@clientName(Persistence.rdbEnabled, "IsRdbEnabled", "csharp");
 @@clientName(Persistence, "RedisPersistenceSettings", "csharp");
-@@clientName(
-  PrivateEndpointConnection,
+@@clientName(PrivateEndpointConnection,
   "RedisEnterprisePrivateEndpointConnection",
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
 @@clientName(Protocol.Plaintext, "PlainText", "csharp");
 @@clientName(Protocol, "RedisEnterpriseClientProtocol", "csharp");
 @@clientName(ProvisioningState, "RedisEnterpriseProvisioningStatus", "csharp");
-@@clientName(
-  PublicNetworkAccess,
+@@clientName(PublicNetworkAccess,
   "RedisEnterprisePublicNetworkAccess",
   "csharp"
 );
@@ -135,8 +118,7 @@ using Microsoft.Cache;
 @@clientName(RdbFrequency.SixH, "SixHours", "csharp");
 @@clientName(RdbFrequency, "PersistenceSettingRdbFrequency", "csharp");
 @@clientName(RedundancyMode, "RedisEnterpriseRedundancyMode", "csharp");
-@@clientName(
-  RegenerateKeyParameters,
+@@clientName(RegenerateKeyParameters,
   "RedisEnterpriseRegenerateKeyContent",
   "csharp"
 );
@@ -146,30 +128,25 @@ using Microsoft.Cache;
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
-@@clientName(
-  OperationsStatusOperationGroup.get,
+@@clientName(OperationsStatusOperationGroup.get,
   "GetRedisEnterpriseOperationsStatus",
   "csharp"
 );
-@@clientName(
-  Clusters.listByCluster,
+@@clientName(Clusters.listByCluster,
   "GetPrivateLinkResourcesByCluster",
   "csharp"
 );
 @@alternateType(MaintenanceWindow.duration, duration, "csharp");
-@@alternateType(
-  AccessPolicyAssignmentPropertiesUser.objectId,
+@@alternateType(AccessPolicyAssignmentPropertiesUser.objectId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity.userAssignedIdentityResourceId,
+@@alternateType(ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity.userAssignedIdentityResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(LinkedDatabase.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(
-  ForceUnlinkParameters.ids,
+@@alternateType(ForceUnlinkParameters.ids,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
@@ -177,8 +154,7 @@ using Microsoft.Cache;
 @@alternateType(OperationStatus.startTime, utcDateTime, "csharp");
 @@alternateType(OperationStatus.endTime, utcDateTime, "csharp");
 @@alternateType(ExportClusterParameters.sasUri, url, "csharp");
-@@alternateType(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+@@alternateType(ClusterPropertiesEncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
   url,
   "csharp"
 );
@@ -187,76 +163,16 @@ using Microsoft.Cache;
 @@clientLocation(Clusters.create, "RedisEnterpriseCluster", "csharp");
 @@clientLocation(Clusters.update, "RedisEnterpriseCluster", "csharp");
 @@clientLocation(Clusters.delete, "RedisEnterpriseCluster", "csharp");
-@@clientLocation(
-  Clusters.listByResourceGroup,
+@@clientLocation(Clusters.listByResourceGroup,
   "RedisEnterpriseCluster",
   "csharp"
 );
 @@clientLocation(Clusters.list, "RedisEnterpriseCluster", "csharp");
-@@clientLocation(
-  Clusters.listSkusForScaling,
+@@clientLocation(Clusters.listSkusForScaling,
   "RedisEnterpriseCluster",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(
-  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
-  "csharp,javascript"
-);
-@@clientName(
-  DatabasePropertiesGeoReplication,
-  "DatabaseCommonPropertiesGeoReplication",
-  "javascript"
-);
-@@clientName(DatabaseProperties, "DatabaseCommonProperties", "javascript");
-@@clientName(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,
-  "ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity",
-  "javascript"
-);
-@@clientName(
-  ClusterPropertiesEncryptionCustomerManagedKeyEncryption,
-  "ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryption",
-  "javascript"
-);
-@@clientName(
-  ClusterPropertiesEncryption,
-  "ClusterCommonPropertiesEncryption",
-  "javascript"
-);
-@@clientName(ClusterProperties, "ClusterCommonProperties", "javascript");
-@@clientName(
-  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
-  "SystemAssignedUserAssigned",
-  "javascript"
-);
-@@clientName(
-  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
-  "ManagedServiceIdentity",
-  "javascript,python"
-);
-
-// java compatibility mitigations
-@@clientName(
-  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
-  "ManagedServiceIdentity",
-  "java"
-);
-@@clientName(ClusterCreateProperties, "ClusterProperties", "java");
-@@clientName(ClusterProperties, "ClusterCommonProperties", "java");
-@@clientName(DatabaseProperties, "DatabaseCommonProperties", "java");
-@@clientName(ClusterProperties.hostName, "hostname", "java");
-@@clientName(TlsVersion.One0, "ONE_ZERO", "java");
-@@clientName(TlsVersion.One1, "ONE_ONE", "java");
-@@clientName(TlsVersion.One2, "ONE_TWO", "java");
-@@clientName(RdbFrequency.TwelveH, "ONE_TWOH", "java");
-@@clientName(
-  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
-  "SYSTEM_ASSIGNED_USER_ASSIGNED",
-  "java,python"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
-@@Legacy.flattenProperty(
-  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
-  "java"
+@@Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "csharp"
 );

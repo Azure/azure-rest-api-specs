@@ -39,12 +39,10 @@ interface Projects {
     Project,
     PatchModel = ProjectUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response =
-      | Project
-      | ArmAcceptedLroResponse<
-          "Resource update request accepted.",
-          ArmLroLocationHeader<FinalResult = Project>
-        >
+    Response = Project | ArmAcceptedLroResponse<
+      "Resource update request accepted.",
+      ArmLroLocationHeader<FinalResult = Project>
+    >
   >;
 
   @doc("Deletes a project resource.")

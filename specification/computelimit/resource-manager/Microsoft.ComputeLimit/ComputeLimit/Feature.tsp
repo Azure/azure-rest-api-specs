@@ -1,11 +1,9 @@
-import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -44,13 +42,6 @@ union FeatureState {
   string,
 }
 
-/** Request body for feature enable action. */
-@added(Versions.v2026_06_01)
-model FeatureEnableRequest {
-  /** The Service Tree identifier associated with this feature action. */
-  serviceTreeId?: string;
-}
-
 /** Location-scoped operations for compute limit features. */
 @armResourceOperations
 @added(Versions.v2026_03_20)
@@ -63,33 +54,10 @@ interface Features {
 
   /** Enables a compute limit feature for the subscription at the specified location. */
   @action("enable")
-  @removed(Versions.v2026_06_01)
-  @renamedFrom(Versions.v2026_06_01, "enable")
-  @sharedRoute
-  enableLegacy is ArmResourceActionAsync<
+  enable is ArmResourceActionAsync<
     Feature,
     void,
     Azure.ResourceManager.Foundations.OperationStatusResult
-  >;
-
-  /** Enables a compute limit feature for the subscription at the specified location. */
-  @action("enable")
-  @added(Versions.v2026_06_01)
-  @sharedRoute
-  enable is ArmResourceActionAsync<
-    Feature,
-    FeatureEnableRequest,
-    Azure.ResourceManager.Foundations.OperationStatusResult,
-    Azure.ResourceManager.Foundations.DefaultBaseParameters<Feature>,
-    ArmLroLocationHeader<
-      Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-      Azure.ResourceManager.Foundations.OperationStatusResult,
-      string
-    > &
-      Azure.Core.Foundations.RetryAfterHeader,
-    {},
-    ErrorResponse,
-    true
   >;
 
   /** Disables a compute limit feature for the subscription at the specified location. */

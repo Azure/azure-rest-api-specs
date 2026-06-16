@@ -17,18 +17,6 @@ union JsonWebKeyType {
   string,
 
   /**
-   * Algorithm Key Pair.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  AKP: "AKP",
-
-  /**
-   * Algorithm Key Pair with private key material stored in HSM.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  AKP_HSM: "AKP-HSM",
-
-  /**
    * Elliptic Curve.
    */
   EC: "EC",
@@ -171,13 +159,13 @@ union JsonWebKeyWrapAlgorithm {
   A256_KW: "A256KW",
 
   /** 128-bit AES key wrap with padding. */
-  A128_KWPAD: "A128KWPAD",
+  A256_KWPAD: "A256KWPAD",
 
   /** 192-bit AES key wrap with padding. */
-  A192_KWPAD: "A192KWPAD",
+  A128_KWPAD: "A128KWPAD",
 
   /** 256-bit AES key wrap with padding. */
-  A256_KWPAD: "A256KWPAD",
+  A192_KWPAD: "A192KWPAD",
 
   /** CKM AES key wrap. */
   @added(KeyVault.Versions.`v7.6_preview.2`)
@@ -250,29 +238,6 @@ union JsonWebKeyEncryptionAlgorithm {
   /** CKM AES key wrap with padding. */
   @added(KeyVault.Versions.`v7.6_preview.2`)
   CKM_AES_KEY_WRAP_PAD: "CKM_AES_KEY_WRAP_PAD",
-}
-
-/**
- * The algorithm identifier for Algorithm Key Pair (AKP) keys.
- */
-@added(KeyVault.Versions.v2026_05_01_preview)
-union AKPAlgorithm {
-  string,
-
-  /**
-   * ML-DSA-44, as defined by FIPS 204 and draft-ietf-cose-dilithium.
-   */
-  ML_DSA_44: "ML-DSA-44",
-
-  /**
-   * ML-DSA-65, as defined by FIPS 204 and draft-ietf-cose-dilithium.
-   */
-  ML_DSA_65: "ML-DSA-65",
-
-  /**
-   * ML-DSA-87, as defined by FIPS 204 and draft-ietf-cose-dilithium.
-   */
-  ML_DSA_87: "ML-DSA-87",
 }
 
 /**
@@ -436,12 +401,6 @@ model KeyCreateParameters {
    */
   @encodedName("application/json", "release_policy")
   releasePolicy?: KeyReleasePolicy;
-
-  /**
-   * The algorithm for Algorithm Key Pair (AKP) keys. For valid values, see AKPAlgorithm.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  alg?: AKPAlgorithm;
 }
 
 /**
@@ -766,19 +725,6 @@ model JsonWebKey {
    */
   @encode("base64url")
   y?: bytes;
-
-  /**
-   * The algorithm identifier. This parameter is required when kty is AKP.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  alg?: AKPAlgorithm;
-
-  /**
-   * The public key for Algorithm Key Pair (AKP) keys.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  @encode("base64url")
-  `pub`?: bytes;
 }
 
 /**
@@ -1045,32 +991,13 @@ model KeySignParameters {
    * The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
-  algorithm?: JsonWebKeySignatureAlgorithm;
+  algorithm: JsonWebKeySignatureAlgorithm;
 
   /**
    * The value to operate on.
    */
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
-  value?: bytes;
-
-  /**
-   * The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.
-   * When specified, the algorithm and value fields must not be set. Only supported for ML-DSA (AKP) keys.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  @encodedName("application/json", "external_mu")
-  @encode("base64url")
-  externalMu?: bytes;
-
-  /**
-   * The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes.
-   * Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  @encode("base64url")
-  context?: bytes;
+  value: bytes;
 }
 
 /**
@@ -1081,15 +1008,13 @@ model KeyVerifyParameters {
    * The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
-  algorithm?: JsonWebKeySignatureAlgorithm;
+  algorithm: JsonWebKeySignatureAlgorithm;
 
   /**
    * The digest used for signing.
    */
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
-  digest?: bytes;
+  digest: bytes;
 
   /**
    * The signature to be verified.
@@ -1097,23 +1022,6 @@ model KeyVerifyParameters {
   @encodedName("application/json", "value")
   @encode("base64url")
   signature: bytes;
-
-  /**
-   * The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.
-   * When specified, the algorithm and digest fields must not be set. Only supported for ML-DSA (AKP) keys.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  @encodedName("application/json", "external_mu")
-  @encode("base64url")
-  externalMu?: bytes;
-
-  /**
-   * The application context string for ML-DSA verification (FIPS 204 Section 5.2). Must be 0-255 bytes.
-   * Must not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  @encode("base64url")
-  context?: bytes;
 }
 
 /**
@@ -1346,12 +1254,6 @@ model KeyProperties {
    */
   @encodedName("application/json", "crv")
   curve?: JsonWebKeyCurveName;
-
-  /**
-   * Algorithm Key Pair (AKP) algorithm. For valid values, see AKPAlgorithm.
-   */
-  @added(KeyVault.Versions.v2026_05_01_preview)
-  alg?: AKPAlgorithm;
 }
 
 /**

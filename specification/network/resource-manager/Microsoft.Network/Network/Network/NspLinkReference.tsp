@@ -59,10 +59,7 @@ interface NspLinkReferences {
   @tag("NetworkSecurityPerimeterLinkReferences")
   delete is ArmResourceDeleteWithoutOkAsync<
     NspLinkReference,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -93,7 +90,6 @@ interface NspLinkReferences {
 
 @@maxLength(NspLinkReference.name, 80);
 @@doc(NspLinkReference.name, "The name of the NSP linkReference.");
-@@doc(
-  NspLinkReference.properties,
+@@doc(NspLinkReference.properties,
   "Properties of the network security perimeter linkReference resource."
 );

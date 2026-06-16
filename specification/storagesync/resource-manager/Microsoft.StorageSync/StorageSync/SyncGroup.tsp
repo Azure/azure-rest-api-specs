@@ -34,11 +34,11 @@ interface SyncGroups {
     Response = SyncGroup & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -54,11 +54,11 @@ interface SyncGroups {
     Response = ArmResourceUpdatedResponse<SyncGroup> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -68,17 +68,15 @@ interface SyncGroups {
    */
   delete is ArmResourceDeleteSync<
     SyncGroup,
-    Response =
-      | (ArmDeletedResponse & {
-          @header("x-ms-correlation-request-id")
-          @doc("correlation request id")
-          xMsCorrelationRequestId?: string;
+    Response = (ArmDeletedResponse & {
+      @header("x-ms-correlation-request-id")
+      @doc("correlation request id")
+      correlationRequestId?: string;
 
-          @header("x-ms-request-id")
-          @doc("Request id")
-          xMsRequestId?: string;
-        })
-      | NoContentResponse,
+      @header("x-ms-request-id")
+      @doc("Request id")
+      requestId?: string;
+    }) | NoContentResponse,
     Error = StorageSyncError
   >;
 
@@ -90,11 +88,11 @@ interface SyncGroups {
     Response = ArmResponse<SyncGroupArray> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      xMsCorrelationRequestId?: string;
+      correlationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      xMsRequestId?: string;
+      requestId?: string;
     },
     Error = StorageSyncError
   >;

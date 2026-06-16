@@ -1,7 +1,7 @@
 import { fs as memfs, vol } from "memfs";
 import { beforeEach } from "node:test";
 import { describe, expect, test, vi } from "vitest";
-import { isFailure, isWarning, pathExists } from "../src/util.ts";
+import { isFailure, isWarning, pathExists } from "../src/util.js";
 
 vi.mock("fs/promises", () => {
   return {

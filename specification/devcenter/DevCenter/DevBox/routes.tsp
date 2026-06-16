@@ -136,20 +136,18 @@ interface DevBoxes {
       @bodyRoot
       body: DevBox;
     },
+    DevBox | {
+      @statusCode statusCode: 201;
 
-      | DevBox
-      | {
-          @statusCode statusCode: 201;
+      @header("Location")
+      location: ResourceLocation<DevBox>;
 
-          @header("Location")
-          location: ResourceLocation<DevBox>;
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
 
-          @pollingLocation
-          @header("Operation-Location")
-          operationLocation: string;
-
-          @bodyRoot body?: DevBox;
-        }
+      @bodyRoot body?: DevBox;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Does not fit any standard operation pattern"
@@ -164,22 +162,20 @@ interface DevBoxes {
       ...UserIdParameter;
       ...DevBoxNameParameter;
     },
+    {
+      @statusCode statusCode: 202;
 
-      | {
-          @statusCode statusCode: 202;
+      @header("Location")
+      location: string;
 
-          @header("Location")
-          location: string;
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
 
-          @pollingLocation
-          @header("Operation-Location")
-          operationLocation: string;
-
-          @bodyRoot body: OperationStatus;
-        }
-      | {
-          @statusCode statusCode: 204;
-        }
+      @bodyRoot body: OperationStatus;
+    } | {
+      @statusCode statusCode: 204;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Replacing Status Monitor"
@@ -572,22 +568,20 @@ interface DevBoxes {
       @bodyRoot
       body: DevBoxAddOn;
     },
+    DevBoxAddOn | {
+      @statusCode statusCode: 201;
 
-      | DevBoxAddOn
-      | {
-          @statusCode statusCode: 201;
+      @header("Location")
+      location: string;
 
-          @header("Location")
-          location: string;
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
 
-          @pollingLocation
-          @header("Operation-Location")
-          operationLocation: string;
-
-          @added(APIVersions.v2025_04_01_preview)
-          @bodyRoot
-          body?: DevBoxAddOn;
-        }
+      @added(APIVersions.v2025_04_01_preview)
+      @bodyRoot
+      body?: DevBoxAddOn;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"
@@ -603,22 +597,20 @@ interface DevBoxes {
       ...DevBoxNameParameter;
       ...DevBoxAddOnNameParameter;
     },
+    {
+      @statusCode statusCode: 202;
 
-      | {
-          @statusCode statusCode: 202;
+      @header("Location")
+      location: string;
 
-          @header("Location")
-          location: string;
+      @pollingLocation
+      @header("Operation-Location")
+      operationLocation: string;
 
-          @pollingLocation
-          @header("Operation-Location")
-          operationLocation: string;
-
-          @bodyRoot body: OperationStatus;
-        }
-      | {
-          @statusCode statusCode: 204;
-        }
+      @bodyRoot body: OperationStatus;
+    } | {
+      @statusCode statusCode: 204;
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong swagger"

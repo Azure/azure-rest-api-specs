@@ -66,10 +66,7 @@ interface Applications {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Application,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -99,7 +96,6 @@ interface Applications {
 
 @@doc(Application.name, "The constant value for the application name.");
 @@doc(Application.properties, "The properties of the application.");
-@@doc(
-  Applications.create::parameters.resource,
+@@doc(Applications.create::parameters.resource,
   "The application create request."
 );

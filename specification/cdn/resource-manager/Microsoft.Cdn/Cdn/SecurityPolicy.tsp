@@ -40,14 +40,11 @@ interface SecurityPolicies {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SecurityPolicy,
-    Response =
-      | ArmResourceUpdatedResponse<SecurityPolicy>
-      | ArmResourceCreatedResponse<SecurityPolicy>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
-          ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
-          @bodyRoot
-          _: SecurityPolicy;
-        })
+    Response = ArmResourceUpdatedResponse<SecurityPolicy> | ArmResourceCreatedResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
+      @bodyRoot
+      _: SecurityPolicy;
+    })
   >;
 
   /**
@@ -58,13 +55,11 @@ interface SecurityPolicies {
   patch is ArmCustomPatchAsync<
     SecurityPolicy,
     PatchModel = SecurityPolicyUpdateParameters,
-    Response =
-      | ArmResponse<SecurityPolicy>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
-          ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
-          @bodyRoot
-          _: SecurityPolicy;
-        })
+    Response = ArmResponse<SecurityPolicy> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = SecurityPolicy> &
+      ArmLroLocationHeader<FinalResult = SecurityPolicy>> & {
+      @bodyRoot
+      _: SecurityPolicy;
+    })
   >;
 
   /**
@@ -74,12 +69,9 @@ interface SecurityPolicies {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     SecurityPolicy,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          ArmLroLocationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -90,15 +82,12 @@ interface SecurityPolicies {
 }
 
 @@doc(SecurityPolicy.name, "Name of the security policy under the profile.");
-@@doc(
-  SecurityPolicy.properties,
+@@doc(SecurityPolicy.properties,
   "The json object that contains properties required to create a security policy"
 );
-@@doc(
-  SecurityPolicies.create::parameters.resource,
+@@doc(SecurityPolicies.create::parameters.resource,
   "The security policy properties."
 );
-@@doc(
-  SecurityPolicies.patch::parameters.properties,
+@@doc(SecurityPolicies.patch::parameters.properties,
   "Security policy update properties"
 );
