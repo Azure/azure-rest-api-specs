@@ -204,7 +204,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CommunityGalleryImageList"
             }
@@ -313,7 +313,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CommunityGalleryImageVersionList"
             }
@@ -435,7 +435,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SharedGalleryList"
             }
@@ -550,7 +550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SharedGalleryImageList"
             }
@@ -679,7 +679,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/SharedGalleryImageVersionList"
             }
@@ -4632,8 +4632,15 @@
           "$ref": "#/definitions/CommunityGalleryProperties",
           "description": "Describes the properties of a community gallery.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The public name of the community gallery."
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirCommunityGalleryResource"
@@ -4658,8 +4665,15 @@
           "$ref": "#/definitions/CommunityGalleryImageProperties",
           "description": "Describes the properties of a gallery image definition.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the community gallery image definition."
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirCommunityGalleryResource"
@@ -4791,8 +4805,15 @@
           "$ref": "#/definitions/CommunityGalleryImageVersionProperties",
           "description": "Describes the properties of a gallery image version.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the community gallery image version. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirCommunityGalleryResource"
@@ -7167,8 +7188,15 @@
           "$ref": "#/definitions/SharedGalleryProperties",
           "description": "Specifies the properties of a shared gallery",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The unique name of the Shared Gallery."
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirSharedGalleryResource"
@@ -7255,8 +7283,15 @@
           "$ref": "#/definitions/SharedGalleryImageProperties",
           "description": "Describes the properties of a gallery image definition.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Shared Gallery Image Definition from which the Image Versions are to be listed."
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirSharedGalleryResource"
@@ -7366,8 +7401,15 @@
           "$ref": "#/definitions/SharedGalleryImageVersionProperties",
           "description": "Describes the properties of a gallery image version.",
           "x-ms-client-flatten": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the gallery image version to be created. Needs to follow semantic version name pattern: The allowed characters are digit and period. Digits must be within the range of a 32-bit integer. Format: <MajorVersion>.<MinorVersion>.<Patch>"
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/PirSharedGalleryResource"
