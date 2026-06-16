@@ -10,6 +10,7 @@ import {
   parseAzsdkResponse,
 } from "./azsdk-adapter.ts";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
@@ -329,6 +330,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     }
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
+    let pipelineErrorsToLogAfterGroup: string[] = [];
 
     if (tool === "skipped") {
       logMessage(
@@ -381,12 +383,21 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
       try {
         executionReport = getExecutionReport(commandInput);
         if (commandInput.sdkLanguage === "azure-sdk-for-python") {
-          const pythonPackageValidationSucceeded = await validatePythonPackagesOnPyPI(
+          const pythonPackageValidation = await validatePythonPackagesOnPyPI(
             executionReport.packages,
           );
-          if (!pythonPackageValidationSucceeded) {
+          if (!pythonPackageValidation.succeeded) {
             statusCode = 1;
             executionReport.executionResult = "failed";
+            if (executionReport.vsoLogPath) {
+              appendErrorsToVsoLog(
+                executionReport.vsoLogPath,
+                "Python package namespace validation",
+                pythonPackageValidation.errors,
+              );
+            } else {
+              pipelineErrorsToLogAfterGroup = pythonPackageValidation.errors;
+            }
           }
         }
       } catch (error) {
@@ -436,6 +447,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     logMessage("ending group logging", LogLevel.EndGroup);
     if (executionReport?.vsoLogPath) {
       logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    } else {
+      for (const error of pipelineErrorsToLogAfterGroup) {
+        vsoLogIssue(error);
+      }
     }
   }
   // Process the spec-gen-sdk artifacts
