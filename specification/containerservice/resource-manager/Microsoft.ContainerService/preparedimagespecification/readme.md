@@ -82,7 +82,7 @@ See configuration in [readme.java.md](./readme.java.md)
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: GuidUsage
     from: preparedimagespecification.json
