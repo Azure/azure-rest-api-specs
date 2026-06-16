@@ -11,6 +11,7 @@ import "./routes/images.tsp";
 import "./routes/embeddings.tsp";
 import "./routes/files.tsp";
 import "./routes/uploads.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
