@@ -27,6 +27,7 @@ import "./operations/basedb/dbSystemOperations.tsp";
 import "./operations/basedb/dbVersionOperations.tsp";
 import "./versions.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
