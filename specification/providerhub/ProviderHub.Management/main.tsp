@@ -22,6 +22,7 @@ import "./ResourceTypeRegistration.tsp";
 import "./SkuResource.tsp";
 import "./AuthorizedApplication.tsp";
 import "./ProviderMonitorSetting.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
