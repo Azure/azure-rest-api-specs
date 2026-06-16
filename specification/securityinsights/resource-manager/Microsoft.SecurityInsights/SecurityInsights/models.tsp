@@ -4434,27 +4434,37 @@ model PackageList is Azure.Core.Page<PackageModel>;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model PackageProperties extends PackageBaseProperties {}
+model PackageProperties extends PackageBaseProperties {
+  /**
+   * The content id of the package
+   */
+  contentId: string;
+
+  /**
+   * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
+   */
+  contentProductId: string;
+
+  /**
+   * The package kind
+   */
+  contentKind: PackageKind;
+
+  /**
+   * the latest version number of the package
+   */
+  version: string;
+
+  /**
+   * The display name of the package
+   */
+  displayName: string;
+}
 
 /**
  * Describes package properties
  */
 model PackageBaseProperties {
-  /**
-   * The content id of the package
-   */
-  contentId?: string;
-
-  /**
-   * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
-   */
-  contentProductId?: string;
-
-  /**
-   * The package kind
-   */
-  contentKind?: PackageKind;
-
   /**
    * The version of the content schema.
    */
@@ -4479,16 +4489,6 @@ model PackageBaseProperties {
    * Flag indicates if this template is deprecated
    */
   isDeprecated?: Flag;
-
-  /**
-   * the latest version number of the package
-   */
-  version?: string;
-
-  /**
-   * The display name of the package
-   */
-  displayName?: string;
 
   /**
    * The description of the package
@@ -4683,6 +4683,32 @@ model ProductPackageList is Azure.Core.Page<ProductPackageModel>;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductPackageProperties {
   ...PackageBaseProperties;
+
+  /**
+   * The content id of the package
+   */
+  contentId: string;
+
+  /**
+   * The package kind
+   */
+  contentKind: PackageKind;
+
+  /**
+   * the latest version number of the package
+   */
+  version: string;
+
+  /**
+   * The display name of the package
+   */
+  displayName: string;
+
+  /**
+   * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
+   */
+  contentProductId?: string;
+
   ...ProductPackageAdditionalProperties;
 }
 
@@ -4719,16 +4745,11 @@ model ProductTemplateList is Azure.Core.Page<ProductTemplateModel>;
 model ProductTemplateProperties {
   ...TemplateBaseProperties;
   ...ProductTemplateAdditionalProperties;
-}
 
-/**
- * Template property bag.
- */
-model TemplateBaseProperties {
-  /**
+    /**
    * Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name
    */
-  contentId?: string;
+  contentId: string;
 
   /**
    * Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template
@@ -4743,23 +4764,33 @@ model TemplateBaseProperties {
   /**
    * Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks
    */
-  version?: string;
+  version: string;
 
   /**
    * The display name of the template
    */
-  displayName?: string;
+  displayName: string;
 
   /**
    * The kind of content the template is for.
    */
-  contentKind?: Kind;
+  contentKind: Kind;
 
   /**
    * Source of the content.  This is where/how it was created.
    */
-  source?: MetadataSource;
+  source: MetadataSource;
 
+  /**
+   * the package Id contains this template
+   */
+  packageId?: string;
+}
+
+/**
+ * Template property bag.
+ */
+model TemplateBaseProperties {
   /**
    * The creator of the content item.
    */
@@ -4831,11 +4862,6 @@ model TemplateBaseProperties {
   previewImagesDark?: string[];
 
   /**
-   * the package Id contains this template
-   */
-  packageId?: string;
-
-  /**
    * the packageKind of the package contains this template
    */
   packageKind?: PackageKind;
@@ -4875,6 +4901,45 @@ model TemplateList is Azure.Core.Page<TemplateModel>;
 model TemplateProperties {
   ...TemplateBaseProperties;
   ...TemplateAdditionalProperties;
+    /**
+   * Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name
+   */
+  contentId: string;
+
+  /**
+   * Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template
+   */
+  contentProductId: string;
+
+  /**
+   * Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks
+   */
+  packageVersion: string;
+
+  /**
+   * Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks
+   */
+  version: string;
+
+  /**
+   * The display name of the template
+   */
+  displayName: string;
+
+  /**
+   * The kind of content the template is for.
+   */
+  contentKind: Kind;
+
+  /**
+   * Source of the content.  This is where/how it was created.
+   */
+  source: MetadataSource;
+
+  /**
+   * the package Id contains this template
+   */
+  packageId: string;
 }
 
 /**
@@ -9781,32 +9846,32 @@ model ScheduledAlertRuleCommonProperties {
   /**
    * The query that creates alerts for this rule.
    */
-  query?: string;
+  query: string;
 
   /**
    * The frequency (in ISO 8601 duration format) for this alert rule to run.
    */
-  queryFrequency?: duration;
+  queryFrequency: duration;
 
   /**
    * The period (in ISO 8601 duration format) that this alert rule looks at.
    */
-  queryPeriod?: duration;
+  queryPeriod: duration;
 
   /**
    * The severity for alerts created by this alert rule.
    */
-  severity?: AlertSeverity;
+  severity: AlertSeverity;
 
   /**
    * The operation against the threshold that triggers alert rule.
    */
-  triggerOperator?: TriggerOperator;
+  triggerOperator: TriggerOperator;
 
   /**
    * The threshold triggers this alert rule.
    */
-  triggerThreshold?: int32;
+  triggerThreshold: int32;
 
   /**
    * The event grouping settings.
