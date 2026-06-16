@@ -7,6 +7,7 @@ import "./SharedLimit.tsp";
 import "./Feature.tsp";
 import "./VmFamily.tsp";
 import "./back-compat.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

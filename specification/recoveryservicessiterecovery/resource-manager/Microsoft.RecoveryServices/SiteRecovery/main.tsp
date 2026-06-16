@@ -39,6 +39,7 @@ import "./ReplicationProtectionIntent.tsp";
 import "./RecoveryPlan.tsp";
 import "./VaultSetting.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
