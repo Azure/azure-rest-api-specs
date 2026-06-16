@@ -159,6 +159,16 @@ namespace Microsoft.InsightsCombinedClient;
   Azure.Core.azureLocation,
   "csharp"
 );
+@@alternateType(
+  MetricAlertApi.MetricAlertPropertiesPatch.targetResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertPropertiesPatch.targetResourceRegion,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   ScheduledQueryRuleApi.ScheduledQueryRuleResource,
   "ScheduledQueryRule",
@@ -229,6 +239,21 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   PrivateLinkScopesApi.ScopedResource,
   "MonitorPrivateLinkScopedResource",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.AzureMonitorPrivateLinkScopeProperties.provisioningState,
+  "PrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@alternateType(
+  PrivateLinkScopesApi.ScopedResourceProperties.linkedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.ScopedResourceProperties.provisioningState,
+  "ScopedResourceProvisioningState",
   "csharp"
 );
 
@@ -582,6 +607,12 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(AutoScaleApi.AutoscaleSetting.name, "AutoscaleSettingName", "csharp");
 @@clientName(ActivityLogsApi.EventData, "EventDataInfo", "csharp");
 @@clientName(ActivityLogsApi.HttpRequestInfo, "EventDataHttpRequestInfo", "csharp");
+@@clientName(ActivityLogsApi.HttpRequestInfo.clientIpAddress, "ClientIPAddress", "csharp");
+@@alternateType(
+  ActivityLogsApi.HttpRequestInfo.clientIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
 @@clientName(ActivityLogsApi.EventLevel, "MonitorEventLevel", "csharp");
 @@clientName(LocalizableString, "MonitorLocalizableString", "csharp");
 @@clientName(MetricBaselinesApi.SingleMetricBaseline, "MonitorSingleMetricBaseline", "csharp");
