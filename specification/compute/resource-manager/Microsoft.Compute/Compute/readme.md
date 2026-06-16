@@ -34,9 +34,11 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-11-01-only
+tag: package-2025-11-01
 
 directive:
+  - suppress: MULTIPLE_API_VERSION
+    reason: Compute packages multiple sub-services that intentionally use different latest API versions.
   - where:
       - $.definitions.VirtualMachine.properties
     suppress:
