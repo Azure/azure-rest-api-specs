@@ -389,27 +389,33 @@ using Microsoft.EventGrid;
 
 @@clientLocation(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
-  EventSubscriptions
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
 );
 @@clientLocation(
   EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
-  EventSubscriptions
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
 );
 @@clientLocation(
   EventSubscriptionsOperationGroup.listRegionalBySubscription,
-  EventSubscriptions
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
 );
 @@clientLocation(
   EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
-  EventSubscriptions
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
 );
 @@clientLocation(
   EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
-  EventSubscriptions
+  "EventSubscriptionsSubscriptionScope",
+  "csharp"
 );
 @@clientLocation(
   EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
-  EventSubscriptions
+  "EventSubscriptionsResourceGroupScope",
+  "csharp"
 );
 
 @@clientLocation(TopicsOperationGroup.listEventTypes, Topics);
