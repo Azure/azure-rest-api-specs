@@ -19,7 +19,6 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
-    toolbox_search_preview: "toolbox_search_preview",
   }
 
   // General availability tools:
@@ -44,24 +43,6 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
-  /**
-   * Per-tool configuration that controls tool visibility and search behavior.
-   */
-  model ToolConfig {
-    /**
-     * When true, the tool is always included in agent context and visible in `tools/list`.
-     * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
-     */
-    pin?: boolean;
-
-    /**
-     * Additional text indexed for tool_search. Supplements the native tool description
-     * to improve discoverability. Does not alter `tools/list` output.
-     */
-    @maxLength(1000)
-    additional_search_text?: string;
-  }
-
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
     OpenAI.MCPTool,
@@ -70,8 +51,6 @@ namespace Azure.AI.Projects {
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
        */
       project_connection_id?: string,
-
-      ...ToolConfigExtension,
     }
   );
 
@@ -80,7 +59,6 @@ namespace Azure.AI.Projects {
     OpenAI.WebSearchTool,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
 
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -95,7 +73,6 @@ namespace Azure.AI.Projects {
     OpenAI.CodeInterpreterTool,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
     }
   );
 
@@ -104,7 +81,6 @@ namespace Azure.AI.Projects {
     OpenAI.ImageGenTool,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
     }
   );
 
@@ -113,7 +89,6 @@ namespace Azure.AI.Projects {
     OpenAI.LocalShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
     }
   );
 
@@ -122,7 +97,6 @@ namespace Azure.AI.Projects {
     OpenAI.FunctionShellToolParam,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
     }
   );
 
@@ -131,7 +105,6 @@ namespace Azure.AI.Projects {
     OpenAI.FileSearchTool,
     {
       ...ToolNameAndDescriptionExtension,
-      ...ToolConfigExtension,
     }
   );
 
@@ -166,18 +139,6 @@ namespace Azure.AI.Projects {
   };
 
   /**
-   * Optional tool configuration extension for controlling tool visibility and search behavior.
-   */
-  alias ToolConfigExtension = {
-    /**
-     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-     * Resolution order: exact tool name match takes priority over `*`.
-     * Unknown tool names are silently ignored at runtime.
-     */
-    tool_configs?: Record<ToolConfig>;
-  };
-
-  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -187,7 +148,6 @@ namespace Azure.AI.Projects {
     type: "bing_grounding";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -217,7 +177,6 @@ namespace Azure.AI.Projects {
     type: "fabric_dataagent_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The fabric data agent tool parameters.
@@ -247,7 +206,6 @@ namespace Azure.AI.Projects {
     type: "sharepoint_grounding_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The sharepoint grounding tool parameters.
@@ -265,7 +223,6 @@ namespace Azure.AI.Projects {
     type: "azure_ai_search";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -360,8 +317,6 @@ namespace Azure.AI.Projects {
      * The openapi function definition.
      */
     openapi: OpenApiFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
@@ -374,7 +329,6 @@ namespace Azure.AI.Projects {
     type: "bing_custom_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The bing custom search tool parameters.
@@ -392,7 +346,6 @@ namespace Azure.AI.Projects {
     type: "browser_automation_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -433,8 +386,6 @@ namespace Azure.AI.Projects {
      * The Azure Function Tool definition.
      */
     azure_function: AzureFunctionDefinition;
-
-    ...ToolConfigExtension;
   }
 
   /**
@@ -785,7 +736,6 @@ namespace Azure.AI.Projects {
     type: "capture_structured_outputs";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The structured outputs to capture from the model.
@@ -801,9 +751,6 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `"a2a_preview`.
      */
     type: "a2a_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * Base URL of the agent.
@@ -821,6 +768,8 @@ namespace Azure.AI.Projects {
      * The connection stores authentication and other connection details needed to connect to the A2A server.
      */
     project_connection_id?: string;
+
+    ...ToolNameAndDescriptionExtension;
   }
 
   /**
@@ -838,7 +787,6 @@ namespace Azure.AI.Projects {
     project_connection_id: string;
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   /**
@@ -873,7 +821,6 @@ namespace Azure.AI.Projects {
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   /**
@@ -886,7 +833,6 @@ namespace Azure.AI.Projects {
     type: "memory_search_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -922,7 +868,6 @@ namespace Azure.AI.Projects {
     type: "memory_search";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
 
     /**
      * The name of the memory store to use.
@@ -945,21 +890,6 @@ namespace Azure.AI.Projects {
      * Time to wait before updating memories after inactivity (seconds). Default 300.
      */
     update_delay?: int32 = 300;
-  }
-
-  /**
-   * A tool for searching over the agent's toolbox.
-   * When present, deferred tools are hidden from `tools/list` and only
-   * discoverable via `search_tools` queries at runtime.
-   */
-  model ToolboxSearchPreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `toolbox_search_preview`.
-     */
-    type: "toolbox_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   // ==============================================================================
