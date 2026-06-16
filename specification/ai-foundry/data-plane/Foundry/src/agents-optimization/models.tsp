@@ -8,8 +8,8 @@
 //   ApiError — standard error shape
 
 import "../common/models.tsp";
+import "../common/servicepatterns.tsp";
 import "../openai-evaluations/models.tsp";
-import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
