@@ -421,7 +421,6 @@ union AKSVolumeTypes {
  * Backup solution types for PostgreSQL Flexible Server.
  */
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_06_01)
 union BackupSolutionType {
   string,
 
@@ -2329,7 +2328,6 @@ model AzureBackupRehydrationRequest {
  * Type of Datasource object, used to initialize the right inherited type
  */
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_06_01)
 union ResumeProtectionRequestObjectType {
   string,
 
@@ -2342,7 +2340,6 @@ union ResumeProtectionRequestObjectType {
  */
 @discriminator("objectType")
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_06_01)
 model ResumeProtectionRequest {
   /**
    * Type of Datasource object, used to initialize the right inherited type
@@ -3279,7 +3276,6 @@ model AdlsBlobBackupDatasourceParametersForAutoProtection
  * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
  */
 @added(Versions.v2026_04_01_preview)
-@removed(Versions.v2026_06_01)
 model PostgreSqlFlexibleServerBackupDatasourceParameters
   extends BackupDatasourceParameters {
   /**

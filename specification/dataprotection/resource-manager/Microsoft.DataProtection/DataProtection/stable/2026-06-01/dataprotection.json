@@ -1720,9 +1720,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/resumeProtectionLegacy": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/resumeProtection": {
       "post": {
-        "operationId": "BackupInstances_ResumeProtectionLegacy",
+        "operationId": "BackupInstances_ResumeProtection",
         "tags": [
           "BackupInstanceResources"
         ],
@@ -1778,6 +1778,11 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ResumeProtection": {
+            "$ref": "./examples/BackupInstanceOperations/ResumeProtection.json"
           }
         },
         "x-ms-long-running-operation-options": {
