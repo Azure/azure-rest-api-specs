@@ -434,10 +434,10 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricAlertApi.Operator, "MetricCriteriaOperator", "csharp");
 @@clientName(
   AutoScaleApi.ScaleRuleMetricDimensionOperationType.Equals,
-  "Equal",
+  "EqualsValue",
   "csharp"
 );
-@@clientName(MetricAlertApi.Operator.Equals, "Equal", "csharp");
+@@clientName(MetricAlertApi.Operator.Equals, "EqualsValue", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting.enabled, "IsEnabled", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting.notifications, "Notifications", "csharp");
 @@clientName(AutoScaleApi.AutoscaleSetting.targetResourceUri, "TargetResourceId", "csharp");
@@ -506,7 +506,7 @@ namespace Microsoft.InsightsCombinedClient;
   "ETag",
   "csharp"
 );
-@@clientName(ActivityLogAlertsApi.AlertRuleLeafCondition.equals, "Equal", "csharp");
+@@clientName(ActivityLogAlertsApi.AlertRuleLeafCondition.equals, "EqualsValue", "csharp");
 @@clientName(
   ActivityLogAlertsApi.AlertRuleAnyOfOrLeafCondition,
   "ActivityLogAlertAnyOfOrLeafCondition",
@@ -624,6 +624,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(ActionGroupsApi.TestNotificationDetailsResponse.completedTime, "CompletedOn", "csharp");
 @@clientName(ActionGroupsApi.TestNotificationDetailsResponse.createdTime, "CreatedOn", "csharp");
 @@clientName(ScheduledQueryRuleApi.ScheduledQueryRuleProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@clientName(
   PrivateLinkScopesApi.PrivateLinkResources.listByPrivateLinkScope,
   "GetAllPrivateLinkResources",
