@@ -105,10 +105,10 @@ compatibility:
 
 **Steps**:
 
-1. **Identify Plan** — Get the release plan work item ID from the user.
+1. **Identify Plan** — Get the Release Plan ID or work item ID from the user (either is accepted).
 2. **Identify TypeSpec Project** — Get or confirm the TypeSpec project path.
 3. **Update** — Run `azure-sdk-mcp:azsdk_update_sdk_details_in_release_plan` with:
-   - `releasePlanWorkItemId` (required)
+   - `workItemId` (required — accepts either the Release Plan ID or the work item ID)
    - `typeSpecProjectPath` (required)
 
 **Tool**: `azure-sdk-mcp:azsdk_update_sdk_details_in_release_plan`
