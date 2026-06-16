@@ -276,6 +276,16 @@ stages:
           cd $(SpecRepoDirectory)
           echo "##[group]Run npm ci"
           npm ci
+
+          echo "##[group]npm install -g @github/copilot-sdk"
+          npm install -g @github/copilot-sdk
+
+          echo "##[group]npm install -g @github/copilot"
+          npm install -g @github/copilot@1.0.40
+
+          export AZSDK_COPILOT_CLI_PATH=$(which copilot)
+          copilot --version
+
           echo "##[endgroup]"
           node $(SpecRepoDirectory)/eng/tools/spec-gen-sdk-runner/cmd/spec-gen-sdk-runner.js \
             --scp $(SpecRepoDirectory) \
