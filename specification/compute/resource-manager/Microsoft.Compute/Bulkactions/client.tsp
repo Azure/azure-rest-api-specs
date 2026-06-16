@@ -174,9 +174,6 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
-// Pluralize collection properties (Array<...>).
-@@clientName(ResourceOperationDetails.resourceId, "resourceIds", "csharp");
-@@clientName(ResourceOperation.resourceId, "resourceIds", "csharp");
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
