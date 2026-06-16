@@ -48,3 +48,6 @@ using Napster.CompanionAPI;
   "NapsterProvisioningState",
   "csharp"
 );
+
+// Fix SaasGuid property type: should be Guid, not string
+@@alternateType(ActivateSaaSParameterRequest.saasGuid, uuid, "csharp");
