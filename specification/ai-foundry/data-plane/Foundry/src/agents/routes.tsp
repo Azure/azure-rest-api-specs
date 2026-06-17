@@ -450,6 +450,7 @@ interface Agents {
       @path agent_name: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
       ...CreateAgentSessionRequest;
     },
     ResourceCreatedResponse<AgentSessionResource>
@@ -478,6 +479,7 @@ interface Agents {
       @path session_id: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentSessionResource
   >;
@@ -506,6 +508,7 @@ interface Agents {
       @path session_id: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     NoContentResponse
   >;
@@ -556,6 +559,7 @@ interface Agents {
       @path agent_name: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentSessionResource>

@@ -50,6 +50,7 @@ interface AgentSessionFiles {
 
       @body content: bytes;
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
@@ -78,6 +79,7 @@ interface AgentSessionFiles {
       @query path: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     bytes
   >;
@@ -107,6 +109,7 @@ interface AgentSessionFiles {
       @query path?: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
       ...CommonPageQueryParameters;
     },
     SessionDirectoryListResponse
@@ -139,6 +142,7 @@ interface AgentSessionFiles {
       @query recursive?: boolean = false;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     void
   >;

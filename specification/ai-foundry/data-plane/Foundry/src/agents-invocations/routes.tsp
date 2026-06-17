@@ -56,6 +56,9 @@ interface AgentInvocations {
       @body request: unknown;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
+      ...FoundryRunTokenHeader;
+      ...FoundryFoundationTokenHeader;
     } & AgentInvocationPreviewHeader,
     {
       /** Unique identifier for this invocation. */
@@ -89,6 +92,7 @@ interface AgentInvocations {
       @path invocation_id: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     } & AgentInvocationPreviewHeader,
     {
       /** Session ID for this invocation. Returns the session ID associated with the invocation. */
@@ -125,6 +129,7 @@ interface AgentInvocations {
       @body request?: unknown;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     } & AgentInvocationPreviewHeader,
     {
       /** Session ID for this invocation. Returns the session ID associated with the invocation. */

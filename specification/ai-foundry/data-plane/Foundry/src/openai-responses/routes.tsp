@@ -25,7 +25,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader,
+    OpenAI.CreateResponse & UserIsolationKeyHeader & UserDelegationHeader & FoundryRunTokenHeader & FoundryFoundationTokenHeader,
 
       | (AgentSessionIdResponseHeader & OpenAI.Response)
       | (AgentSessionIdResponseHeader &
@@ -57,6 +57,7 @@ interface Responses {
       @query stream?: boolean = false;
       @query starting_after?: int32;
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
 
       | (AgentSessionIdResponseHeader & {
@@ -83,6 +84,7 @@ interface Responses {
       response_id: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: DeleteResponseResult;
@@ -106,6 +108,7 @@ interface Responses {
       response_id: string;
 
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: OpenAI.Response;
@@ -128,6 +131,7 @@ interface Responses {
 
       ...CommonPageQueryParameters;
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
       @body body: AgentsPagedResult<OpenAI.ItemResource>;
@@ -148,6 +152,7 @@ interface Responses {
       ...AgentIdQueryParam;
       ...ConversationIdQueryParam;
       ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.Response>
   >;

@@ -29,13 +29,47 @@ alias AcceptJsonHeader = {
 };
 
 /**
+ * @deprecated Use `UserDelegationHeader` (`x-ms-user-identity`) instead.
  * Optional request header carrying an opaque per-user isolation key forwarded to the agent
  * endpoint. When present, the service scopes endpoint-scoped data access (responses,
  * conversations, sessions) to the supplied user.
  */
+#deprecated "Use UserDelegationHeader (x-ms-user-identity) instead. This header will be removed in a future version."
 alias UserIsolationKeyHeader = {
-  /** Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user. */
+  /** @deprecated Use x-ms-user-identity instead. Opaque per-user isolation key used to scope endpoint-scoped data to a specific end user. */
   @header("x-ms-user-isolation-key") user_isolation_key?: string;
+};
+
+/**
+ * Optional request header carrying an opaque per-user identity for delegation.
+ * When present and the caller has the `agents/endpoint/delegateViaUserId` RBAC permission,
+ * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
+ * supplied user identity instead of the caller's own identity.
+ * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
+ */
+alias UserDelegationHeader = {
+  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission. */
+  @header("x-ms-user-identity") user_identity?: string;
+};
+
+/**
+ * Optional request header carrying a platform-issued run token for A2A identity propagation.
+ * On container protocol 2.0.0+, the container receives this header per-request and must
+ * forward it on outbound calls to other Foundry agents/services for identity and lineage propagation.
+ */
+alias FoundryRunTokenHeader = {
+  /** Platform-issued run token carrying caller identity and session context for A2A propagation. */
+  @header("x-foundry-run-token") foundry_run_token?: string;
+};
+
+/**
+ * Optional request header carrying the foundation token for A2A session-binding validation.
+ * Contains infrastructure claims (sessionId, agentGuid) used for triple-equality validation
+ * between FT and RT on the receiving side of A2A calls.
+ */
+alias FoundryFoundationTokenHeader = {
+  /** Platform-issued foundation token for session-binding validation on A2A calls. */
+  @header("x-foundry-foundation-token") foundry_foundation_token?: string;
 };
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
