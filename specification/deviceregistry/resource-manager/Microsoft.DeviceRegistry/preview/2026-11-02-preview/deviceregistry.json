@@ -5448,6 +5448,55 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/jobRuns": {
+      "get": {
+        "operationId": "JobRuns_ListByNamespace",
+        "description": "List job runs by namespace, across all jobs in the namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobRunListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_JobRuns_ByNamespace": {
+            "$ref": "./examples/List_JobRuns_ByNamespace.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/jobs": {
       "get": {
         "operationId": "Jobs_ListByNamespace",
@@ -5967,6 +6016,9 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/JobRunResultsFilterParameters"
           }
         ],
         "responses": {
@@ -5986,6 +6038,9 @@
         "x-ms-examples": {
           "JobRun Results": {
             "$ref": "./examples/Results_JobRun.json"
+          },
+          "JobRun Results Filtered By Status": {
+            "$ref": "./examples/Results_JobRun_FilteredByStatus.json"
           }
         }
       }
@@ -9668,6 +9723,15 @@
           "description": "Globally unique, immutable, non-reusable ID.",
           "readOnly": true
         },
+        "description": {
+          "type": "string",
+          "description": "A human-readable description of the job. Mutable on PUT.",
+          "maxLength": 1024,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "jobType": {
           "$ref": "#/definitions/JobTypeEnum",
           "description": "The type of the job. Set at create time; immutable thereafter.",
@@ -9811,14 +9875,57 @@
           "description": "The device UUID. ADR returns the device's stable UUID identifier (ADU surfaces device UUIDs in its private API; ADR re-emits them under this name to align with ADR-wide identifier conventions)."
         },
         "status": {
-          "type": "string",
-          "description": "The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied."
+          "$ref": "#/definitions/JobRunResultItemStatus",
+          "description": "The current per-device status for this run."
         },
         "reason": {
           "type": "string",
           "description": "Short, machine-readable diagnostic that pairs with status. Present only when status is Failed; an ADU-provided machine-readable code (e.g. DOWNLOAD_FAILED). Omitted for all other statuses, including Succeeded and InProgress."
         }
       }
+    },
+    "JobRunResultItemStatus": {
+      "type": "string",
+      "description": "The per-device status of a single job run result entry.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress",
+        "Canceled",
+        "NotApplied"
+      ],
+      "x-ms-enum": {
+        "name": "JobRunResultItemStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation succeeded on the device."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation failed on the device. See `reason` for an ADU-provided code."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The operation is currently in progress on the device."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled for the device."
+          },
+          {
+            "name": "NotApplied",
+            "value": "NotApplied",
+            "description": "The operation does not apply to the device."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "JobRunResultListResponse": {
       "type": "object",
@@ -13962,5 +14069,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "JobRunResultsFilterParameters": {
+      "name": "status",
+      "in": "query",
+      "description": "When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "statusFilter"
+    }
+  }
 }
