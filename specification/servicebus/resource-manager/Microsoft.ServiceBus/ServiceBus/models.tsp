@@ -92,6 +92,19 @@ union PublicNetworkAccess {
 }
 
 /**
+ * The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).
+ */
+union IpAddressType {
+  string,
+
+  /** The namespace supports IPv4 addresses only. */
+  IPv4: "IPv4",
+
+  /** The namespace supports both IPv4 and IPv6 addresses (dual stack). */
+  DualStack: "DualStack",
+}
+
+/**
  * Setting to Enable or Disable Confidential Compute
  */
 union Mode {
@@ -512,10 +525,10 @@ model SBNamespaceProperties {
   geoDataReplication?: GeoDataReplicationProperties;
 
   /**
-   * Value that indicates whether IPv6 is enabled for public network access.
+   * The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).
    */
   @added(Versions.v2026_01_01)
-  ipV6Enabled?: boolean;
+  ipAddressType?: IpAddressType;
 }
 
 /**
@@ -659,11 +672,6 @@ model NamespaceReplicaLocation {
    * GeoDR Role Types
    */
   roleType?: GeoDRRoleType;
-
-  /**
-   * Optional property that denotes the ARM ID of the Cluster. This is required, if a namespace replica should be placed in a Dedicated Event Hub Cluster
-   */
-  clusterArmId?: string;
 }
 
 /**
