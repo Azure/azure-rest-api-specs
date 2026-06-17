@@ -2189,6 +2189,79 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionFromManifestRequest'
+  /agents/{agent_name}:disable:
+    post:
+      operationId: Agents_disableAgent
+      summary: Disable an agent
+      description: |-
+        Disables the specified agent, preventing it from accepting new sessions or processing requests.
+        Existing active sessions are allowed to drain gracefully but no new sessions can be created.
+        This operation is idempotent — disabling an already-disabled agent returns success with no side effects.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to disable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+  /agents/{agent_name}:enable:
+    post:
+      operationId: Agents_enableAgent
+      summary: Enable an agent
+      description: |-
+        Enables the specified agent, allowing it to accept new sessions and process requests.
+        This operation is idempotent — enabling an already-enabled agent returns success with no side effects.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to enable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -8194,10 +8267,6 @@ paths:
                       - type: 'null'
                   usage:
                     $ref: '#/components/schemas/OpenAI.ResponseUsage'
-                  moderation:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Moderation'
-                      - type: 'null'
                   parallel_tool_calls:
                     type: boolean
                     description: Whether to allow the model to run tool calls in parallel.
@@ -8355,10 +8424,6 @@ paths:
                 instructions:
                   anyOf:
                     - type: string
-                    - type: 'null'
-                moderation:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.ModerationParam'
                     - type: 'null'
                 stream:
                   anyOf:
@@ -11480,6 +11545,7 @@ components:
         - object
         - id
         - name
+        - state
         - versions
       properties:
         object:
@@ -11494,6 +11560,11 @@ components:
           type: string
           maxLength: 63
           description: The name of the agent.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
+          readOnly: true
         versions:
           type: object
           properties:
@@ -11602,6 +11673,14 @@ components:
             - deleted
             - expired
       description: The status of an agent session.
+    AgentState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - enabled
+            - disabled
+      description: The operational state of an agent.
     AgentTaxonomyInput:
       type: object
       required:
@@ -13533,6 +13612,11 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The initial operational state of the agent. Defaults to 'enabled' if not specified.
+          default: enabled
         metadata:
           type: object
           unevaluatedProperties:
@@ -17952,6 +18036,7 @@ components:
             - create_file
           description: Create a new file with the provided diff.
           x-stainless-const: true
+          default: create_file
         path:
           type: string
           description: Path of the file to create.
@@ -17975,6 +18060,7 @@ components:
             - create_file
           description: The operation type. Always `create_file`.
           x-stainless-const: true
+          default: create_file
         path:
           type: string
           minLength: 1
@@ -17999,6 +18085,7 @@ components:
             - delete_file
           description: Delete the specified file.
           x-stainless-const: true
+          default: delete_file
         path:
           type: string
           description: Path of the file to delete.
@@ -18018,6 +18105,7 @@ components:
             - delete_file
           description: The operation type. Always `delete_file`.
           x-stainless-const: true
+          default: delete_file
         path:
           type: string
           minLength: 1
@@ -18083,6 +18171,7 @@ components:
             - apply_patch
           description: The type of the tool. Always `apply_patch`.
           x-stainless-const: true
+          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Allows the assistant to create, delete, or update files using unified diffs.
@@ -18100,6 +18189,7 @@ components:
             - update_file
           description: Update an existing file with the provided diff.
           x-stainless-const: true
+          default: update_file
         path:
           type: string
           description: Path of the file to update.
@@ -18123,6 +18213,7 @@ components:
             - update_file
           description: The operation type. Always `update_file`.
           x-stainless-const: true
+          default: update_file
         path:
           type: string
           minLength: 1
@@ -18308,6 +18399,7 @@ components:
             - click
           description: Specifies the event type. For a click action, this property is always `click`.
           x-stainless-const: true
+          default: click
         button:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ClickButtonType'
@@ -18622,6 +18714,7 @@ components:
             - computer_screenshot
           description: Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
           x-stainless-const: true
+          default: computer_screenshot
         image_url:
           anyOf:
             - type: string
@@ -18672,6 +18765,7 @@ components:
             - computer
           description: The type of the computer tool. Always `computer`.
           x-stainless-const: true
+          default: computer
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
@@ -18690,6 +18784,7 @@ components:
             - computer_use_preview
           description: The type of the computer use tool. Always `computer_use_preview`.
           x-stainless-const: true
+          default: computer_use_preview
         environment:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ComputerEnvironment'
@@ -18717,6 +18812,7 @@ components:
             - container_auto
           description: Automatically creates a container for this request
           x-stainless-const: true
+          default: container_auto
         file_ids:
           type: array
           items:
@@ -18753,6 +18849,7 @@ components:
             - container_file_citation
           description: The type of the container file citation. Always `container_file_citation`.
           x-stainless-const: true
+          default: container_file_citation
         container_id:
           type: string
           description: The ID of the container file.
@@ -18793,6 +18890,7 @@ components:
             - allowlist
           description: Allow outbound network access only to specified domains. Always `allowlist`.
           x-stainless-const: true
+          default: allowlist
         allowed_domains:
           type: array
           items:
@@ -18812,6 +18910,7 @@ components:
             - disabled
           description: Disable outbound network access. Always `disabled`.
           x-stainless-const: true
+          default: disabled
       allOf:
         - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
     OpenAI.ContainerNetworkPolicyParam:
@@ -18846,6 +18945,7 @@ components:
             - container_reference
           description: The environment type. Always `container_reference`.
           x-stainless-const: true
+          default: container_reference
         container_id:
           type: string
       allOf:
@@ -18903,7 +19003,6 @@ components:
           computer_call_output: '#/components/schemas/OpenAI.ConversationItemComputerToolCallOutput'
           tool_search_call: '#/components/schemas/OpenAI.ConversationItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ConversationItemToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ConversationItemAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ConversationItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ConversationItemCompactionBody'
           code_interpreter_call: '#/components/schemas/OpenAI.ConversationItemCodeInterpreterToolCall'
@@ -18921,35 +19020,6 @@ components:
           custom_tool_call_output: '#/components/schemas/OpenAI.ConversationItemCustomToolCallOutputResource'
       description: A single item within a conversation. The set of possible types are the same as the `output` type of a [Response object](/docs/api-reference/responses/object#responses/object-output).
       title: Conversation item
-    OpenAI.ConversationItemAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ConversationItem'
     OpenAI.ConversationItemApplyPatchToolCall:
       type: object
       required:
@@ -19948,7 +20018,6 @@ components:
             - computer_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - code_interpreter_call
@@ -20704,6 +20773,7 @@ components:
             - grammar
           description: Grammar format. Always `grammar`.
           x-stainless-const: true
+          default: grammar
         syntax:
           allOf:
             - $ref: '#/components/schemas/OpenAI.GrammarSyntax1'
@@ -20726,6 +20796,7 @@ components:
             - text
           description: Unconstrained text format. Always `text`.
           x-stainless-const: true
+          default: text
       allOf:
         - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
       description: Unconstrained free-form text.
@@ -20742,6 +20813,7 @@ components:
             - custom
           description: The type of the custom tool. Always `custom`.
           x-stainless-const: true
+          default: custom
         name:
           type: string
           description: The name of the custom tool, used to identify it in tool calls.
@@ -20817,6 +20889,7 @@ components:
             - double_click
           description: Specifies the event type. For a double click action, this property is always set to `double_click`.
           x-stainless-const: true
+          default: double_click
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -20847,6 +20920,7 @@ components:
             - drag
           description: Specifies the event type. For a drag action, this property is always set to `drag`.
           x-stainless-const: true
+          default: drag
         path:
           type: array
           items:
@@ -21616,6 +21690,7 @@ components:
             - file_citation
           description: The type of the file citation. Always `file_citation`.
           x-stainless-const: true
+          default: file_citation
         file_id:
           type: string
           description: The ID of the file.
@@ -21671,6 +21746,7 @@ components:
             - file_search
           description: The type of the file search tool. Always `file_search`.
           x-stainless-const: true
+          default: file_search
         vector_store_ids:
           type: array
           items:
@@ -22587,6 +22663,7 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
+          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -22607,6 +22684,7 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
+          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -22674,6 +22752,7 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
+          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcome'
       description: Indicates that the shell call exceeded its configured time limit.
@@ -22689,6 +22768,7 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
+          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcomeParam'
       description: Indicates that the shell call exceeded its configured time limit.
@@ -22710,6 +22790,7 @@ components:
             - shell
           description: The type of the shell tool. Always `shell`.
           x-stainless-const: true
+          default: shell
         environment:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
@@ -22805,6 +22886,7 @@ components:
             - function
           description: The type of the function tool. Always `function`.
           x-stainless-const: true
+          default: function
         name:
           type: string
           description: The name of the function to call.
@@ -23254,6 +23336,7 @@ components:
             - image_generation
           description: The type of the image generation tool. Always `image_generation`.
           x-stainless-const: true
+          default: image_generation
         model:
           anyOf:
             - type: string
@@ -23403,6 +23486,7 @@ components:
             - inline
           description: Defines an inline skill for this request.
           x-stainless-const: true
+          default: inline
         name:
           type: string
           description: The name of the skill.
@@ -23727,7 +23811,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.InputItemFunctionCallOutputItemParam'
           tool_search_call: '#/components/schemas/OpenAI.InputItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.InputItemToolSearchOutputItemParam'
-          additional_tools: '#/components/schemas/OpenAI.InputItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.InputItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.InputItemImageGenToolCall'
@@ -23748,38 +23831,6 @@ components:
         An item representing part of the context for the response to be
         generated by the model. Can contain text, images, and audio inputs,
         as well as previous assistant responses and tool call outputs.
-    OpenAI.InputItemAdditionalToolsItemParam:
-      type: object
-      required:
-        - type
-        - role
-        - tools
-      properties:
-        id:
-          anyOf:
-            - type: string
-            - type: 'null'
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The item type. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        role:
-          type: string
-          enum:
-            - developer
-          description: The role that provided the additional tools. Only `developer` is supported.
-          x-stainless-const: true
-          default: developer
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: A list of additional tools made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -24700,7 +24751,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -24836,7 +24886,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.ItemFunctionCallOutputItemParam'
           tool_search_call: '#/components/schemas/OpenAI.ItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.ItemToolSearchOutputItemParam'
-          additional_tools: '#/components/schemas/OpenAI.ItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.ItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.ItemImageGenToolCall'
@@ -24854,38 +24903,6 @@ components:
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemCustomToolCallOutput'
           custom_tool_call: '#/components/schemas/OpenAI.ItemCustomToolCall'
       description: Content item used to generate a response.
-    OpenAI.ItemAdditionalToolsItemParam:
-      type: object
-      required:
-        - type
-        - role
-        - tools
-      properties:
-        id:
-          anyOf:
-            - type: string
-            - type: 'null'
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The item type. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        role:
-          type: string
-          enum:
-            - developer
-          description: The role that provided the additional tools. Only `developer` is supported.
-          x-stainless-const: true
-          default: developer
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: A list of additional tools made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -25193,7 +25210,6 @@ components:
           function_call: '#/components/schemas/OpenAI.ItemFieldFunctionToolCall'
           tool_search_call: '#/components/schemas/OpenAI.ItemFieldToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemFieldToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ItemFieldAdditionalTools'
           function_call_output: '#/components/schemas/OpenAI.ItemFieldFunctionToolCallOutput'
           file_search_call: '#/components/schemas/OpenAI.ItemFieldFileSearchToolCall'
           web_search_call: '#/components/schemas/OpenAI.ItemFieldWebSearchToolCall'
@@ -25216,35 +25232,6 @@ components:
           custom_tool_call: '#/components/schemas/OpenAI.ItemFieldCustomToolCall'
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemFieldCustomToolCallOutput'
       description: An item representing a message, tool call, tool output, reasoning, or other response element.
-    OpenAI.ItemFieldAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemField'
     OpenAI.ItemFieldApplyPatchToolCall:
       type: object
       required:
@@ -26183,7 +26170,6 @@ components:
             - function_call
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - function_call_output
             - file_search_call
             - web_search_call
@@ -26841,6 +26827,7 @@ components:
             - item_reference
           description: The type of item to reference. Always `item_reference`.
           x-stainless-const: true
+          default: item_reference
         id:
           type: string
           description: The ID of the item to reference.
@@ -26868,7 +26855,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.ItemResourceFunctionToolCallOutput'
           tool_search_call: '#/components/schemas/OpenAI.ItemResourceToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemResourceToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ItemResourceAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ItemResourceReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemResourceCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.ItemResourceImageGenToolCall'
@@ -26886,35 +26872,6 @@ components:
           custom_tool_call: '#/components/schemas/OpenAI.ItemResourceCustomToolCallResource'
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemResourceCustomToolCallOutputResource'
       description: Content item used to generate a response.
-    OpenAI.ItemResourceAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.ItemResourceApplyPatchToolCall:
       type: object
       required:
@@ -27927,7 +27884,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -28093,7 +28049,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -28185,6 +28140,7 @@ components:
             - keypress
           description: Specifies the event type. For a keypress action, this property is always set to `keypress`.
           x-stainless-const: true
+          default: keypress
         keys:
           type: array
           items:
@@ -28271,6 +28227,7 @@ components:
             - local
           description: The environment type. Always `local`.
           x-stainless-const: true
+          default: local
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
       description: Represents the use of a local environment to perform shell actions.
@@ -28325,6 +28282,7 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
+          default: local_shell
         name:
           type: string
           description: Optional user-defined name for this tool or configuration.
@@ -28791,125 +28749,6 @@ components:
       anyOf:
         - type: string
         - $ref: '#/components/schemas/OpenAI.ChatModel'
-    OpenAI.Moderation:
-      type: object
-      required:
-        - input
-        - output
-      properties:
-        input:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
-          description: Moderation for the response input.
-        output:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
-          description: Moderation for the response output.
-      description: Moderation results or errors for the response input and output.
-      title: Moderation
-    OpenAI.ModerationEntry:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/OpenAI.ModerationEntryType'
-      discriminator:
-        propertyName: type
-        mapping:
-          moderation_result: '#/components/schemas/OpenAI.ModerationResultBody'
-          error: '#/components/schemas/OpenAI.ModerationErrorBody'
-      description: Moderation results or an error for a response moderation check.
-    OpenAI.ModerationEntryType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - moderation_result
-            - error
-    OpenAI.ModerationErrorBody:
-      type: object
-      required:
-        - type
-        - code
-        - message
-      properties:
-        type:
-          type: string
-          enum:
-            - error
-          description: The object type, which was always `error` for moderation failures.
-          x-stainless-const: true
-        code:
-          type: string
-          description: The error code.
-        message:
-          type: string
-          description: The error message.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
-      description: An error produced while attempting moderation for the response input or output.
-      title: Moderation error
-    OpenAI.ModerationInputType:
-      type: string
-      enum:
-        - text
-        - image
-    OpenAI.ModerationParam:
-      type: object
-      required:
-        - model
-      properties:
-        model:
-          type: string
-          description: The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
-      description: Configuration for running moderation on the input and output of this response.
-    OpenAI.ModerationResultBody:
-      type: object
-      required:
-        - type
-        - model
-        - flagged
-        - categories
-        - category_scores
-        - category_applied_input_types
-      properties:
-        type:
-          type: string
-          enum:
-            - moderation_result
-          description: The object type, which was always `moderation_result` for successful moderation results.
-          x-stainless-const: true
-        model:
-          type: string
-          description: The moderation model that produced this result.
-        flagged:
-          type: boolean
-          description: A boolean indicating whether the content was flagged by any category.
-        categories:
-          type: object
-          unevaluatedProperties:
-            type: boolean
-          description: A dictionary of moderation categories to booleans, True if the input is flagged under this category.
-          x-oaiTypeLabel: map
-        category_scores:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/OpenAI.numeric'
-          description: A dictionary of moderation categories to scores.
-          x-oaiTypeLabel: map
-        category_applied_input_types:
-          type: object
-          unevaluatedProperties:
-            type: array
-            items:
-              $ref: '#/components/schemas/OpenAI.ModerationInputType'
-          description: Which modalities of input are reflected by the score for each category.
-          x-oaiTypeLabel: map
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
-      description: A moderation result produced for the response input or output.
-      title: Moderation result
     OpenAI.MoveParam:
       type: object
       required:
@@ -28923,6 +28762,7 @@ components:
             - move
           description: Specifies the event type. For a move action, this property is always set to `move`.
           x-stainless-const: true
+          default: move
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -28955,6 +28795,7 @@ components:
             - namespace
           description: The type of the tool. Always `namespace`.
           x-stainless-const: true
+          default: namespace
         name:
           type: string
           minLength: 1
@@ -29118,7 +28959,6 @@ components:
           reasoning: '#/components/schemas/OpenAI.OutputItemReasoningItem'
           tool_search_call: '#/components/schemas/OpenAI.OutputItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.OutputItemToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.OutputItemAdditionalTools'
           compaction: '#/components/schemas/OpenAI.OutputItemCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.OutputItemImageGenToolCall'
           code_interpreter_call: '#/components/schemas/OpenAI.OutputItemCodeInterpreterToolCall'
@@ -29134,35 +28974,6 @@ components:
           mcp_approval_response: '#/components/schemas/OpenAI.OutputItemMcpApprovalResponseResource'
           custom_tool_call: '#/components/schemas/OpenAI.OutputItemCustomToolCallResource'
           custom_tool_call_output: '#/components/schemas/OpenAI.OutputItemCustomToolCallOutputResource'
-    OpenAI.OutputItemAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputItem'
     OpenAI.OutputItemApplyPatchToolCall:
       type: object
       required:
@@ -30131,7 +29942,6 @@ components:
             - reasoning
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - compaction
             - image_generation_call
             - code_interpreter_call
@@ -30622,10 +30432,6 @@ components:
             - type: 'null'
         usage:
           $ref: '#/components/schemas/OpenAI.ResponseUsage'
-        moderation:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Moderation'
-            - type: 'null'
         parallel_tool_calls:
           type: boolean
           description: Whether to allow the model to run tool calls in parallel.
@@ -33459,6 +33265,7 @@ components:
             - screenshot
           description: Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
           x-stainless-const: true
+          default: screenshot
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A screenshot action.
@@ -33478,6 +33285,7 @@ components:
             - scroll
           description: Specifies the event type. For a scroll action, this property is always set to `scroll`.
           x-stainless-const: true
+          default: scroll
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -33551,6 +33359,7 @@ components:
             - skill_reference
           description: References a skill created with the /v1/skills endpoint.
           x-stainless-const: true
+          default: skill_reference
         skill_id:
           type: string
           minLength: 1
@@ -33572,6 +33381,7 @@ components:
             - apply_patch
           description: The tool to call. Always `apply_patch`.
           x-stainless-const: true
+          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the apply_patch tool when executing a tool call.
@@ -33587,6 +33397,7 @@ components:
             - shell
           description: The tool to call. Always `shell`.
           x-stainless-const: true
+          default: shell
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
@@ -33603,6 +33414,7 @@ components:
             - summary_text
           description: The type of the object. Always `summary_text`.
           x-stainless-const: true
+          default: summary_text
         text:
           type: string
           description: A summary of the reasoning output from the model so far.
@@ -33621,6 +33433,7 @@ components:
           enum:
             - text
           x-stainless-const: true
+          default: text
         text:
           type: string
       allOf:
@@ -34058,6 +33871,7 @@ components:
             - tool_search
           description: The type of the tool. Always `tool_search`.
           x-stainless-const: true
+          default: tool_search
         execution:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
@@ -34157,6 +33971,7 @@ components:
             - type
           description: Specifies the event type. For a type action, this property is always set to `type`.
           x-stainless-const: true
+          default: type
         text:
           type: string
           description: The text to type.
@@ -34191,6 +34006,7 @@ components:
             - url_citation
           description: The type of the URL citation. Always `url_citation`.
           x-stainless-const: true
+          default: url_citation
         url:
           type: string
           format: uri
@@ -34247,6 +34063,7 @@ components:
             - wait
           description: Specifies the event type. For a wait action, this property is always set to `wait`.
           x-stainless-const: true
+          default: wait
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A wait action.
@@ -34296,6 +34113,7 @@ components:
       type: object
       required:
         - type
+        - query
       properties:
         type:
           type: string
@@ -34305,7 +34123,7 @@ components:
           x-stainless-const: true
         query:
           type: string
-          description: The search query.
+          description: '[DEPRECATED] The search query.'
           deprecated: true
         queries:
           type: array
@@ -34376,6 +34194,7 @@ components:
             - web_search_preview
           description: The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
           x-stainless-const: true
+          default: web_search_preview
         user_location:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ApproximateLocation'
@@ -34402,6 +34221,7 @@ components:
           enum:
             - web_search
           description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
+          default: web_search
         filters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'

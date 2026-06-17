@@ -72,6 +72,9 @@ model CreateAgentRequest {
   @maxLength(63)
   name: string;
 
+  @doc("The initial operational state of the agent. Defaults to 'enabled' if not specified.")
+  state?: AgentState = AgentState.enabled;
+
   ...CreateAgentVersionRequest;
 
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
@@ -101,6 +104,17 @@ union AgentObjectType {
   agentContainer: "agent.container",
 }
 
+@doc("The operational state of an agent.")
+union AgentState {
+  string,
+
+  @doc("Agent endpoint accepts requests. This is the default state on creation.")
+  enabled: "enabled",
+
+  @doc("Agent endpoint rejects all requests.")
+  disabled: "disabled",
+}
+
 model AgentObject {
   @doc("The object type, which is always 'agent'.")
   object: AgentObjectType.agent;
@@ -111,6 +125,10 @@ model AgentObject {
   @doc("The name of the agent.")
   @maxLength(63)
   name: string;
+
+  @doc("The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.")
+  @visibility(Lifecycle.Read)
+  state: AgentState;
 
   @doc("The latest version of the agent.")
   versions: {
