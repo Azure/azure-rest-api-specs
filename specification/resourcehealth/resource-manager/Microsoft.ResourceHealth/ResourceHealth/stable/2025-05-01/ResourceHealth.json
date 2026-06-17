@@ -138,15 +138,20 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "description": "The resource URI",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "$filter",
@@ -165,7 +170,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/availabilityStatus"
             }
@@ -187,9 +192,6 @@
     "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses": {
       "get": {
         "operationId": "ChildAvailabilityStatuses_List",
-        "tags": [
-          "ChildAvailabilityStatuses"
-        ],
         "description": "Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status",
         "parameters": [
           {
@@ -251,15 +253,20 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "name": "resourceUri",
             "in": "path",
-            "description": "undefined",
+            "description": "The resource URI",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The API version to use for this operation",
             "required": true,
             "type": "string",
-            "x-ms-skip-url-encoding": true
+            "minLength": 1,
+            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "$filter",
@@ -278,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/availabilityStatus"
             }
