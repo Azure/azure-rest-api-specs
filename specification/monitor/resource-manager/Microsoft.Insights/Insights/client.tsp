@@ -103,6 +103,16 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  MetricAlertApi.MetricAlertResources.list,
+  "GetAllMetricAlertsStatus",
+  "csharp"
+);
+@@clientName(
+  MetricAlertApi.MetricAlertResources.listByName,
+  "GetAllMetricAlertsStatusByName",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataCollectionEndpointResources.listByDataCollectionEndpoint,
   "GetDataCollectionRuleAssociations",
   "csharp"
@@ -755,12 +765,12 @@ enum MonitorConditionOperator {
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   MetricAlertApi.MetricAlertResources.list,
-  "java"
+  "csharp,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   MetricAlertApi.MetricAlertResources.listByName,
-  "java"
+  "csharp,java"
 );
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
