@@ -38,8 +38,15 @@
           ],
           "maxReplicationLagDurationInSeconds": 300
         },
-        "ipV6Enabled": true
-      }
+        "ipAddressType": "DualStack",
+        "publicNetworkAccess": "Enabled"
+      },
+      "sku": {
+        "name": "Standard",
+        "capacity": 1,
+        "tier": "Standard"
+      },
+      "tags": {}
     },
     "resourceGroupName": "ResurceGroupSample",
     "subscriptionId": "SampleSubscription"
@@ -97,7 +104,7 @@
             ],
             "maxReplicationLagDurationInSeconds": 300
           },
-          "ipV6Enabled": true,
+          "ipAddressType": "DualStack",
           "isAutoInflateEnabled": false,
           "kafkaEnabled": false,
           "maximumThroughputUnits": 0,
@@ -109,6 +116,7 @@
             }
           },
           "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
           "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/",
           "updatedAt": "2021-02-16T22:37:42.29Z",
           "zoneRedundant": false
@@ -173,6 +181,7 @@
             ],
             "maxReplicationLagDurationInSeconds": 300
           },
+          "ipAddressType": "DualStack",
           "isAutoInflateEnabled": false,
           "kafkaEnabled": false,
           "maximumThroughputUnits": 0,
@@ -183,6 +192,7 @@
             }
           },
           "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Enabled",
           "serviceBusEndpoint": "https://NamespaceSample.servicebus.windows-int.net:443/",
           "updatedAt": "2021-02-16T22:37:42.29Z",
           "zoneRedundant": false
@@ -198,5 +208,5 @@
     "202": {}
   },
   "operationId": "Namespaces_CreateOrUpdate",
-  "title": "NamespaceCreate"
+  "title": "NamespaceCreateWithIpAddressTypeDualStack"
 }
