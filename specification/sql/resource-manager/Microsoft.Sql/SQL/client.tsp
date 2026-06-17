@@ -1449,7 +1449,11 @@ union SqlNameAvailabilityResourceType {
 );
 
 // --- Enum value renames to match v1.4.0 contract ---
-@@clientName(CatalogCollationType.DATABASE_DEFAULT, "DatabaseDefault", "csharp");
+@@clientName(
+  CatalogCollationType.DATABASE_DEFAULT,
+  "DatabaseDefault",
+  "csharp"
+);
 @@clientName(
   CatalogCollationType.SQL_Latin1_General_CP1_CI_AS,
   "SqlLatin1GeneralCp1CiAs",
@@ -1503,7 +1507,11 @@ union SqlNameAvailabilityResourceType {
 );
 @@usage(SecurityEvent, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(ServerOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(InstancePoolOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  InstancePoolOperation,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
 @@usage(
   RefreshExternalGovernanceStatusOperationResultMI,
   Azure.ClientGenerator.Core.Usage.input,
@@ -1568,16 +1576,21 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 @@usage(SubscriptionUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(SyncAgentLinkedDatabase, Azure.ClientGenerator.Core.Usage.input, "csharp");
+@@usage(
+  SyncAgentLinkedDatabase,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
 @@usage(
   VulnerabilityAssessmentScanRecord,
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
-
-// Standalone setter regressions: input models / input contents whose
-// containing model already has a ctor in v1.4.0 but lost individual
-// setters because codegen no longer sees them as inputs.
+@@usage(
+  RestorableDroppedDatabase,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
 @@usage(DatabaseExtensions, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(TdeCertificate, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(
@@ -1637,7 +1650,6 @@ union SqlNameAvailabilityResourceType {
 @@clientName(StorageCapabilityStorageAccountType.ZRS, "Zrs", "csharp");
 @@clientName(StorageCapabilityStorageAccountType.GZRS, "Gzrs", "csharp");
 
-// --- Property casing fixes (IP/IPv6 capitalization, etc.) ---
 @@clientName(
   ServerFirewallRuleProperties.startIpAddress,
   "StartIPAddress",
@@ -1654,19 +1666,14 @@ union SqlNameAvailabilityResourceType {
   "SnaLu6Point2TransactionsEnabled",
   "csharp"
 );
-// --- Rename operations to match v1.4.0 method names (ApiCompat) ---
-@@clientName(
-  DeletedServersOperationGroup.list,
-  "GetDeletedServers",
-  "csharp"
-);
+@@clientName(DeletedServersOperationGroup.list, "GetDeletedServers", "csharp");
 @@clientName(
   SyncGroupsOperationGroup.listSyncDatabaseIds,
   "GetSyncDatabaseIdsSyncGroups",
   "csharp"
 );
 
-// SqlDatabaseResource sensitivity-label operations: v1.4 exposed long descriptive names.
+@@clientName(Databases.create, "CreateRestorePoint", "csharp");
 @@clientName(
   Databases.listCurrentByDatabase,
   "GetCurrentSensitivityLabels",
@@ -1685,5 +1692,28 @@ union SqlNameAvailabilityResourceType {
 @@clientName(
   Databases.sensitivityLabelsUpdate,
   "UpdateSensitivityLabel",
+  "csharp"
+);
+@@clientName(Databases.cancel, "CancelDatabaseOperation", "csharp");
+@@clientName(
+  ImportExportExtensionsOperationResults.createOrUpdate,
+  "CreateOrUpdateDatabaseExtension",
+  "csharp"
+);
+@@clientName(Databases.listByDatabase, "GetDatabaseColumns", "csharp");
+@@clientName(
+  Databases.databaseOperationsListByDatabase,
+  "GetDatabaseOperations",
+  "csharp"
+);
+@@clientName(
+  Databases.revalidate,
+  "RevalidateDatabaseEncryptionProtector",
+  "csharp"
+);
+@@clientName(Databases.revert, "RevertDatabaseEncryptionProtector", "csharp");
+@@alternateType(
+  SqlVulnerabilityAssessmentName,
+  VulnerabilityAssessmentName,
   "csharp"
 );
