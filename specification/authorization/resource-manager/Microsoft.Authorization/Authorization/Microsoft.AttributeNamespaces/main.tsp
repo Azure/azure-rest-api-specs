@@ -5,7 +5,7 @@
  *   isFullCompatible: true
  *   guessResourceKey: false
  * Version: 0.11.12
- * Date: 2026-03-18T03:27:30.573Z
+ * Date: 2026-03-18T03:37:24.450Z
  */
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -13,11 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./AccessReviewHistoryDefinition.tsp";
-import "./AccessReviewScheduleDefinition.tsp";
-import "./AccessReviewInstance.tsp";
-import "./AccessReviewDefaultSettings.tsp";
-import "./AccessReviewDecision.tsp";
+import "./AttributeNamespace.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -26,29 +22,21 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Access reviews service provides the workflow for running access reviews on different kind of resources.
+ * Attribute namespaces provide a way to organize attributes associated with Federated Managed Identities. These attributes can also be used in attribute-based access control conditions in Azure role assignments. These operations enable users to manage attribute namespaces at the provider level to guarantee tenant-level uniqueness.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace("Microsoft.Authorization")
 @service(#{ title: "AuthorizationManagementClient" })
 @versioned(Versions)
-// FIXME: Common type version not set. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-namespace Microsoft.AttributeNamespaces;
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+namespace Microsoft.AccessReview;
 
 /**
  * The available API versions.
  */
 enum Versions {
   /**
-   * The 2021-12-01-preview API version.
+   * The 2025-12-01-preview API version.
    */
-  v2021_12_01_preview: "2021-12-01-preview",
+  v2025_12_01_preview: "2025-12-01-preview",
 }
-
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<OperationListResult>,
-      ErrorDefinition
-    > {}
-
-@@doc(Operations.list, "Lists the operations available from this provider.");
