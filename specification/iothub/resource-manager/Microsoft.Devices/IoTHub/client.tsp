@@ -130,6 +130,7 @@ using Http;
 );
 @@clientName(KeyVaultKeyProperties, "IotHubKeyVaultKeyProperties", "csharp");
 @@clientName(Capabilities, "IotHubCapability", "csharp");
+@@clientName(GatewayVersion, "IotHubGatewayVersion", "csharp");
 @@clientName(IpVersion, "IotHubIPVersion", "csharp");
 @@clientName(IpVersion.ipv4, "IPv4", "csharp");
 @@clientName(IpVersion.ipv6, "IPv6", "csharp");
