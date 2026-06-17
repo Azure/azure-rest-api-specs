@@ -13,6 +13,8 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// This empty namespace is the merged SDK client target used by later client
+// customizations such as @@clientName and @@clientLocation.
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "CombineClient",
