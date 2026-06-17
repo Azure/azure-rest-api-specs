@@ -10,9 +10,12 @@ import { extractInputs } from "./context.js";
 export default async function setSpecGenSdkStatus({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
+  const details_url = inputs.details_url;
   const issue_number = inputs.issue_number;
-  if (!head_sha) {
-    throw new Error(`Required inputs are not valid: head_sha:${head_sha}`);
+  if (!details_url || !head_sha) {
+    throw new Error(
+      `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
+    );
   }
   const owner = inputs.owner;
   const repo = inputs.repo;
