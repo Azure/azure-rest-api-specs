@@ -12,7 +12,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$releaseVersion = 'v0.0.7-linux'
+$releaseVersion = 'v0.0.8-linux'
 $repository     = 'chunyu3/typespec-authoring-doc'
 $exeName        = 'azsdk'
 $downloadUrl    = "https://github.com/$repository/releases/download/$releaseVersion/$exeName"
