@@ -6069,7 +6069,7 @@ model DataDiskDetails {
  * Disk details
  */
 @added(Versions.v2026_07_01)
-model DiskDetails{
+model DiskDetails {
   /**
    * LUN of the disk
    */
@@ -6180,18 +6180,17 @@ model SecuredVMDetails {
   securedVMOsDiskEncryptionSetId?: string;
 
   /**
-   * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk. 
+   * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.
    */
   @added(Versions.v2026_07_01)
   dataDiskEncryptionSettings?: DataDiskEncryptionSettings;
 }
 
 /**
- * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk. 
+ * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.
  */
 @added(Versions.v2026_07_01)
 model DataDiskEncryptionSettings {
-
   /**
    * Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.
    */
@@ -6214,7 +6213,6 @@ model DataDiskEncryptionSettings {
  */
 @added(Versions.v2026_07_01)
 model PerDiskEncryptionSetId {
-
   /**
    *  LUN for Secured VM Data Disk
    */
