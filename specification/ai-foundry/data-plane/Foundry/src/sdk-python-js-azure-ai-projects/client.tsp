@@ -258,7 +258,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(MemoryStoreSearchRequest.items, exact("items"), "python");
-
+@@clientName(MemoryStoreSearchRequest.items, exact("items"), "javascript");
 @@clientName(MemoryStores.createMemoryStore, "create");
 @@clientName(MemoryStores.updateMemoryStore, "update");
 @@clientName(MemoryStores.getMemoryStore, "get");
