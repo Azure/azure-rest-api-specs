@@ -1,12 +1,12 @@
-import { mockFolder, mockSimpleGit } from "./mocks.js";
+import { mockFolder, mockSimpleGit } from "./mocks.ts";
 mockSimpleGit();
 
 import { strict as assert } from "node:assert";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
-import { ClientTspImportRule } from "../src/rules/client-tsp-import.js";
+import { ClientTspImportRule } from "../src/rules/client-tsp-import.ts";
 
 import * as fsPromises from "fs/promises";
-import * as utils from "../src/utils.js";
+import * as utils from "../src/utils.ts";
 
 describe("client-tsp-import", function () {
   let fileExistsSpy: MockInstance;
