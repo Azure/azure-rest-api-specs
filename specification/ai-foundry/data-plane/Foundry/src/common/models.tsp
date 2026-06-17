@@ -53,22 +53,36 @@ alias UserDelegationHeader = {
 };
 
 /**
- * Optional request header carrying a platform-issued run token for A2A identity propagation.
- * On container protocol 2.0.0+, the container receives this header per-request and must
- * forward it on outbound calls to other Foundry agents/services for identity and lineage propagation.
+ * Platform-injected request header carrying a per-request run token (JWT) for identity propagation.
+ * On container protocol 2.0.0+, the platform mints this token per inbound call and injects it
+ * into the request. The container **MUST** propagate this token on all outbound calls to Foundry
+ * platform services and other agents (A2A). SDK clients do not set this header directly —
+ * it is set by the platform when forwarding requests to the agent container.
+ *
+ * **Who sets it:** The Foundry platform (not the SDK caller).
+ * **Who reads it:** The agent container (via SDK helpers or manual extraction).
+ * **Who forwards it:** The agent container, on outbound tool/A2A calls.
  */
 alias FoundryRunTokenHeader = {
-  /** Platform-issued run token carrying caller identity and session context for A2A propagation. */
+  /** Platform-minted per-request run token (JWT) carrying caller identity and session context. Set by the platform, not by SDK callers. The container must propagate this on outbound calls. */
+  @extension("x-ms-foundry-meta", #{ platform_injected: true })
   @header("x-foundry-run-token") foundry_run_token?: string;
 };
 
 /**
- * Optional request header carrying the foundation token for A2A session-binding validation.
+ * Platform-injected request header carrying the foundation token for session-binding validation.
  * Contains infrastructure claims (sessionId, agentGuid) used for triple-equality validation
  * between FT and RT on the receiving side of A2A calls.
+ *
+ * **Who sets it:** The Foundry platform egress proxy (not the SDK caller or the container).
+ * **Who reads it:** The receiving Foundry service (platform-internal validation only).
+ * **Not customer-facing:** The container never reads, sets, or forwards this header.
+ * It is stamped automatically by the egress proxy on outbound A2A calls and validated
+ * on the receiving platform side. Included in the API spec for wire-level completeness only.
  */
 alias FoundryFoundationTokenHeader = {
-  /** Platform-issued foundation token for session-binding validation on A2A calls. */
+  /** Platform-injected foundation token for session-binding validation. Set by the egress proxy, not by SDK callers or container code. */
+  @extension("x-ms-foundry-meta", #{ platform_injected: true })
   @header("x-foundry-foundation-token") foundry_foundation_token?: string;
 };
 
