@@ -91,6 +91,22 @@ namespace Microsoft.InsightsCombinedClient;
   "GetNotificationStatus",
   "csharp"
 );
+@@clientName(ActivityLogsApi.ActivityLogsOperationGroup.list, "GetActivityLogs", "csharp");
+@@clientName(
+  ActivityLogsApi.TenantActivityLogsOperationGroup.list,
+  "GetTenantActivityLogs",
+  "csharp"
+);
+@@clientName(
+  ActivityLogsApi.EventCategoriesOperationGroup.list,
+  "GetEventCategories",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataCollectionEndpointResources.listByDataCollectionEndpoint,
+  "GetDataCollectionRuleAssociations",
+  "csharp"
+);
 @@clientName(
   ActivityLogAlertsApi.ActivityLogAlertResource,
   "ActivityLogAlert",
