@@ -1,11 +1,11 @@
-import { mockFolder, mockSimpleGit } from "./mocks.js";
+import { mockFolder, mockSimpleGit } from "./mocks.ts";
 mockSimpleGit();
 
 import { strict as assert } from "node:assert";
 import path from "path";
 import process from "process";
 import { describe, it } from "vitest";
-import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.js";
+import { gitDiffTopSpecFolder, normalizePath } from "../src/utils.ts";
 
 describe("util", function () {
   describe("normalize", function () {

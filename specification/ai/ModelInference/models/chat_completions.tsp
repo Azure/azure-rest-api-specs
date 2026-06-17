@@ -103,7 +103,7 @@ model ChatCompletionsOptions {
 
   @doc("""
     A list of tools the model may request to call. Currently, only functions are supported as a tool. The model
-    may response with a function call request and provide the input arguments in JSON format for that function.
+    may respond with a function call request and provide the input arguments in JSON format for that function.
     """)
   @minItems(1)
   tools?: ChatCompletionsToolDefinition[];
@@ -127,7 +127,7 @@ model ChatCompletionsOptions {
 
   @doc("""
     The modalities that the model is allowed to use for the chat completions response. The default modality
-    is `text`. Indicating an unsupported modality combination results in an 422 error.
+    is `text`.     Indicating an unsupported modality combination results in a 422 error.
     """)
   modalities?: ChatCompletionsModality[];
 
@@ -377,7 +377,7 @@ alias ChatChoiceCommon = {
 
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The operation already returns nulls"
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
-  @doc("The reason that this chat completions choice completed its generated.")
+  @doc("The reason that this chat completions choice completed its generation.")
   @visibility(Lifecycle.Read)
   finish_reason: CompletionsFinishReason | null;
 };
@@ -664,7 +664,7 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'image_url' for this type.")
   type: "image_url";
 
-  @doc("An internet location, which must be accessible to the model,from which the image may be retrieved.")
+  @doc("An internet location, which must be accessible to the model, from which the image may be retrieved.")
   @encodedName("application/json", "image_url")
   imageUrl: ChatMessageImageUrl;
 }
@@ -703,7 +703,7 @@ union ChatMessageImageDetailLevel {
 
 @doc("A structured chat content item containing an audio reference.")
 model ChatMessageAudioContentItem extends ChatMessageContentItem {
-  @doc("The discriminated object type: always 'image_url' for this type.")
+  @doc("The discriminated object type: always 'audio_url' for this type.")
   type: "audio_url";
 
   @doc("An internet location, which must be accessible to the model, from which the audio may be retrieved.")
@@ -711,7 +711,7 @@ model ChatMessageAudioContentItem extends ChatMessageContentItem {
   audioUrl: ChatMessageAudioUrl;
 }
 
-@doc("An internet location from which the model may retrieve an audio.")
+@doc("An internet location from which the model may retrieve audio.")
 model ChatMessageAudioUrl {
   @doc("The URL of the audio.")
   url: string;
