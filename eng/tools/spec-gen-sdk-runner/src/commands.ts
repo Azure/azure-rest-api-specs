@@ -128,6 +128,7 @@ async function runAzsdkGeneration(
           azsdkExe,
           breakingchangeDetectArgs,
         );
+        logMessage(`breaking change detect output: ${breakingchangeDetectOutput}`);
         breakingchangeResponse = parseAzsdkResponse<AzsdkDetectBreakingchangeResponse>(
           breakingchangeDetectOutput,
         );
