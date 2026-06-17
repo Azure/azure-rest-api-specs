@@ -241,7 +241,7 @@ using Microsoft.Billing;
   "getBillingPermissions",
   "csharp"
 );
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentionally restores GA 1.2.2 shared GetProducts method name for the billing profile products list operation."
 @@clientName(
   BillingProfiles.productsListByBillingProfile,
   "GetProducts",
@@ -408,7 +408,7 @@ using Microsoft.Billing;
   "getBillingPermissions",
   "csharp"
 );
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentionally restores GA 1.2.2 shared GetProducts method name for the invoice section products list operation."
 @@clientName(
   InvoiceSections.productsListByInvoiceSection,
   "GetProducts",
@@ -863,31 +863,31 @@ using Microsoft.Billing;
 // Restore GA inheritance: Reservation extended TrackedResource and the *Patch models extended
 // ProxyResource in 1.2.2. The new spec defines them as standalone models; this decorator
 // re-introduces the GA base type for source/binary compat.
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BillingAccountPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   BillingSubscriptionPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ProductPatch,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Reservation,
   Azure.ResourceManager.CommonTypes.TrackedResource,
   "csharp"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restores the GA 1.2.2 base type for source and binary compatibility."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Transaction,
   Azure.ResourceManager.CommonTypes.ProxyResource,

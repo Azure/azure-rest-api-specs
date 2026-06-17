@@ -28,7 +28,7 @@ namespace Microsoft.Billing;
 /**
  * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: AvailableBalance is intentionally modeled as plain proxy-resource-shaped data, not a deployable resource."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "AvailableBalance is intentionally modeled as plain proxy-resource-shaped data, not a deployable resource."
 model AvailableBalance extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * The Available Credit or Payment on Account Balance. The credit balance can be used to settle due or past due invoices.
@@ -38,16 +38,16 @@ model AvailableBalance extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Dictionary of metadata associated with the resource. It may not be populated for all resource types. Maximum key/value length supported of 256 characters. Keys/value should not empty value nor null. Keys can not contain < > % & \ ? /
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Preserves the existing ARM tags shape as a free-form string dictionary for SDK compatibility."
   tags?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: AvailableBalance is not a deployable Azure resource; @armResourceOperations does not apply."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "AvailableBalance is not a deployable Azure resource; @armResourceOperations does not apply."
 interface AvailableBalances {
   /**
    * The Available Credit or Payment on Account Balance for a billing account. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement or Microsoft Online Services Program.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the singleton request-path-is-non-resource GET used to maintain GA SDK method shape."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AvailableBalance")
   @get
@@ -64,12 +64,12 @@ interface AvailableBalances {
     | Azure.ResourceManager.CommonTypes.ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: AvailableBalance is not a deployable Azure resource; @armResourceOperations does not apply."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "AvailableBalance is not a deployable Azure resource; @armResourceOperations does not apply."
 interface AvailableBalanceOperationGroup {
   /**
    * The Available Credit or Payment on Account Balance for a billing profile. The credit balance can be used to settle due or past due invoices and is supported for billing accounts with agreement type Microsoft Customer Agreement. The payment on account balance is supported for billing accounts with agreement type Microsoft Customer Agreement.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserves the singleton request-path-is-non-resource GET used to maintain GA SDK method shape."
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/billing/")
   @tag("AvailableBalance")
   @get
