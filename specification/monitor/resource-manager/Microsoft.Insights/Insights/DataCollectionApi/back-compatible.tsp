@@ -85,6 +85,11 @@ using DataCollectionApi;
   DataCollectionRuleResources.listByRule,
   "DataCollectionRuleAssociations"
 );
+@@clientName(
+  DataCollectionRuleResources.listByRule,
+  "GetDataCollectionRuleAssociationsByRule",
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionRuleResource.properties);
 @@doc(
