@@ -449,7 +449,9 @@ op privateEndpointConnectionsUpdateCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResourceUpdatedResponse<Microsoft.Search.PrivateEndpointConnection> | CloudError;
+):
+  | ArmResourceUpdatedResponse<Microsoft.Search.PrivateEndpointConnection>
+  | CloudError;
 
 /**
  * Disconnects the private endpoint connection and deletes it from the search service.
@@ -478,7 +480,10 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResponse<Microsoft.Search.PrivateEndpointConnection> | NotFoundResponse | CloudError;
+):
+  | ArmResponse<Microsoft.Search.PrivateEndpointConnection>
+  | NotFoundResponse
+  | CloudError;
 
 /**
  * Gets a list of all supported private link resource types for the given service.
