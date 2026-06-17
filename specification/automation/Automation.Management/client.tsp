@@ -820,6 +820,21 @@ using TypeSpec.Rest;
 @@alternateType(JobSchedule.name, Azure.Core.uuid, "csharp");
 @@alternateType(JobScheduleProperties.jobScheduleId, Azure.Core.uuid, "csharp");
 @@alternateType(
+  SoftwareUpdateConfigurationMachineRunIdParameter.softwareUpdateConfigurationMachineRunId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SoftwareUpdateConfigurationRunIdParameter.softwareUpdateConfigurationRunId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SourceControlSyncJobIdParameter.sourceControlSyncJobId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
   PrivateEndpointProperty.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -1119,6 +1134,17 @@ namespace Microsoft.Automation {
     "csharp"
   );
 
+  alias DscCompilationJobIdParameter = {
+    /**
+     * The job id.
+     */
+    @path
+    @segment("compilationjobs")
+    #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
+    @format("uuid")
+    jobId: string;
+  };
+
   /**
    * SDK-only compatibility definition for the previous Dsc Compilation job API.
    */
@@ -1327,14 +1353,7 @@ namespace Microsoft.Automation {
     AutomationAccount,
     void,
     Azure.ResourceManager.ArmResponse<JobStreamListResult>,
-    Parameters = {
-      /**
-       * The job id.
-       */
-      @path
-      @segment("compilationjobs")
-      jobId: Azure.Core.uuid;
-    }
+    Parameters = DscCompilationJobIdParameter
   >;
 
   /**
@@ -1349,14 +1368,7 @@ namespace Microsoft.Automation {
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
     Response = Azure.ResourceManager.ArmResponse<JobStream>,
-    Parameters = {
-      /**
-       * The job id.
-       */
-      @path
-      @segment("compilationjobs")
-      jobId: Azure.Core.uuid;
-
+    Parameters = DscCompilationJobIdParameter & {
       /**
        * The job stream id.
        */
@@ -1366,6 +1378,8 @@ namespace Microsoft.Automation {
     }
   >;
 }
+
+@@alternateType(DscCompilationJobIdParameter.jobId, Azure.Core.uuid, "csharp");
 
 @@clientName(
   getDscCompilationJobStreams,
