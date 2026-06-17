@@ -1737,3 +1737,17 @@ union SqlNameAvailabilityResourceType {
   VulnerabilityAssessmentName,
   "csharp"
 );
+
+// we add this model in this namespace in order to replace some models with this model via alternateType decorator
+namespace Azure.ResourceManager.Models {
+  /** represents a reference to an existing resource by its id */
+  model SubResource {
+    /** the id */
+    id?: armResourceIdentifier;
+  }
+}
+@@alternateType(
+  SyncDatabaseIdProperties,
+  Azure.ResourceManager.Models.SubResource,
+  "csharp"
+);
