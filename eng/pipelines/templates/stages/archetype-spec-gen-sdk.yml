@@ -37,9 +37,9 @@ parameters:
   - name: TriggerSource
     type: string
     default: 'unspecified'
-
-variables:
-  - group: 'AzSDK_Eval_Variable_group'
+  - name: AzuresdkCopilotGithubPat
+    type: string
+    default: ""
 
 stages:
 - stage: ${{ iif(eq(parameters.SpecBatchTypes, ''), 'Build', format('Build_{0}', replace(parameters.SpecBatchTypes, '-', '_'))) }}
@@ -310,7 +310,7 @@ stages:
           continueOnError: true
         env:
           npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
-          GITHUB_TOKEN: $(azuresdk-copilot-github-pat)
+          GITHUB_TOKEN: ${{ parameters.AzuresdkCopilotGithubPat }}
 
       - template: /eng/common/pipelines/templates/steps/publish-artifact.yml
         parameters:

@@ -42,6 +42,9 @@ parameters:
     type: string
     default: 'unspecified'
     displayName: 'Trigger source'
+  - name: AzuresdkCopilotGithubPat
+    type: string
+    default: ""
 
 trigger: none
 
@@ -59,3 +62,4 @@ extends:
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
     TriggerSource: ${{ parameters.TriggerSource }}
+    AzuresdkCopilotGithubPat: ${{ parameters.AzuresdkCopilotGithubPat }}
