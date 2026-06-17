@@ -14097,7 +14097,7 @@
           "$ref": "#/definitions/TriggersOn"
         },
         "triggersWhen": {
-          "$ref": "#/definitions/TriggersWhen"
+          "$ref": "#/definitions/triggersWhen"
         },
         "conditions": {
           "type": "array",
@@ -19028,7 +19028,7 @@
         "false"
       ],
       "x-ms-enum": {
-        "name": "Flag",
+        "name": "flag",
         "modelAsString": true,
         "values": [
           {
@@ -29408,29 +29408,6 @@
         ]
       }
     },
-    "TriggersWhen": {
-      "type": "string",
-      "enum": [
-        "Created",
-        "Updated"
-      ],
-      "x-ms-enum": {
-        "name": "TriggersWhen",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "Trigger on created objects"
-          },
-          {
-            "name": "Updated",
-            "value": "Updated",
-            "description": "Trigger on updated objects"
-          }
-        ]
-      }
-    },
     "Ueba": {
       "type": "object",
       "description": "Settings with single toggle.",
@@ -31490,6 +31467,29 @@
           "description": "Threat type (e.g. \"Botnet\")",
           "readOnly": true
         }
+      }
+    },
+    "triggersWhen": {
+      "type": "string",
+      "enum": [
+        "Created",
+        "Updated"
+      ],
+      "x-ms-enum": {
+        "name": "triggersWhen",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Trigger on created objects"
+          },
+          {
+            "name": "Updated",
+            "value": "Updated",
+            "description": "Trigger on updated objects"
+          }
+        ]
       }
     }
   },

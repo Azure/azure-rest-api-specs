@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -94,7 +95,7 @@ union TriggersOn {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union TriggersWhen {
+union triggersWhen {
   string,
 
   /**
@@ -430,6 +431,18 @@ union PackageKind {
 /**
  * The boolean value the metadata is for.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released stable 2025-09-01 x-ms-enum name for backward compatibility"
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{
+    name: "flag",
+    modelAsString: true,
+    values: #[
+      #{ name: "true", value: "true", description: "true" },
+      #{ name: "false", value: "false", description: "false" }
+    ]
+  }
+)
 union Flag {
   string,
 
@@ -3983,7 +3996,7 @@ model AutomationRuleTriggeringLogic {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   triggersOn: TriggersOn;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  triggersWhen: TriggersWhen;
+  triggersWhen: triggersWhen;
 
   /**
    * The conditions to evaluate to determine if the automation rule should be triggered on a given object.
