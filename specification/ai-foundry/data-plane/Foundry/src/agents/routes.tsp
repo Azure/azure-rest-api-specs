@@ -56,13 +56,8 @@ interface Agents {
   @post
   @route("/agents")
   @sharedRoute
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   @tag("Agents")
-  createAgentFromCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+  createAgentFromCode is FoundryDataPlaneOperation<
     {
       @header contentType: "multipart/form-data";
 
@@ -116,13 +111,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}")
   @sharedRoute
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   @tag("Agents")
-  updateAgentFromCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+  updateAgentFromCode is FoundryDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -331,15 +321,8 @@ interface Agents {
   @summary("Update an agent endpoint")
   @patch(#{ implicitOptionality: true })
   @route("/agents/{agent_name}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agents")
-  patchAgentObject is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  patchAgentObject is FoundryDataPlaneOperation<
     {
       /** The name of the agent to retrieve. */
       @summary("The name of the agent to retrieve")
@@ -364,13 +347,8 @@ interface Agents {
   @post
   @route("/agents/{agent_name}/versions")
   @sharedRoute
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   @tag("Agent Versions")
-  createAgentVersionFromCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys,
+  createAgentVersionFromCode is FoundryDataPlaneOperation<
     {
       /**
        * The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.
@@ -406,13 +384,8 @@ interface Agents {
   @summary("Download agent code")
   @get
   @route("/agents/{agent_name}/code:download")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   @tag("Agents")
-  downloadAgentCode is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.code_agents_v1_preview,
+  downloadAgentCode is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -436,15 +409,8 @@ interface Agents {
   @summary("Create a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agent Sessions")
-  createSession is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  createSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
@@ -461,15 +427,8 @@ interface Agents {
   @summary("Get a session")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agent Sessions")
-  getSession is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  getSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -489,15 +448,8 @@ interface Agents {
   @summary("Delete a session")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agent Sessions")
-  deleteSession is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  deleteSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -516,15 +468,8 @@ interface Agents {
   @summary("Stop a session")
   @post
   @route("/agents/{agent_name}/endpoint/sessions/{session_id}:stop")
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agent Sessions")
-  stopSession is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  stopSession is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -542,15 +487,8 @@ interface Agents {
   @get
   @route("/agents/{agent_name}/endpoint/sessions")
   @list
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @tag("Agent Sessions")
-  listSessions is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.agent_endpoint_v1_preview,
+  listSessions is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -592,13 +530,8 @@ interface Agents {
   @summary("Stream console logs for a hosted agent session")
   @get
   @route("/agents/{agent_name}/versions/{agent_version}/sessions/{session_id}:logstream")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
   @tag("Agent Sessions")
-  getSessionLogStream is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  getSessionLogStream is FoundryDataPlaneOperation<
     {
       /** The name of the hosted agent. */
       @path agent_name: string;
