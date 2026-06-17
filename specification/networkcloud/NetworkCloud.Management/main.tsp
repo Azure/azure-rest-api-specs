@@ -36,6 +36,7 @@ import "./clusters/ClusterMetricsConfiguration.tsp";
 import "./kubernetesclusters/AgentPool.tsp";
 import "./kubernetesclusters/KubernetesClusterFeature.tsp";
 import "./virtualmachines/Console.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
