@@ -225,7 +225,6 @@ using Azure.AI.Projects;
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
-@@clientName(AgentProtocol.a2a, exact("A2A"), "python");
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
 @@clientName(OptimizationInlineDatasetInput.items, "dataset_items", "python");

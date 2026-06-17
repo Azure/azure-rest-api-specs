@@ -21472,24 +21472,6 @@
           }
         }
       },
-      "AgentProtocol": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "activity_protocol",
-              "responses",
-              "a2a",
-              "mcp",
-              "invocations",
-              "invocations_ws"
-            ]
-          }
-        ]
-      },
       "AgentReference": {
         "type": "object",
         "required": [
@@ -57123,7 +57105,7 @@
           "protocol": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/AgentProtocol"
+                "$ref": "#/components/schemas/AgentEndpointProtocol"
               }
             ],
             "description": "The protocol type."

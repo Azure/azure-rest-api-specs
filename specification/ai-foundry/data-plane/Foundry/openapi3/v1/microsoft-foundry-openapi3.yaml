@@ -11845,17 +11845,6 @@ components:
           x-ms-foundry-meta:
             required_previews:
               - AgentEndpoints=V1Preview
-    AgentProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - activity_protocol
-            - responses
-            - a2a
-            - mcp
-            - invocations
-            - invocations_ws
     AgentReference:
       type: object
       required:
@@ -35885,7 +35874,7 @@ components:
       properties:
         protocol:
           allOf:
-            - $ref: '#/components/schemas/AgentProtocol'
+            - $ref: '#/components/schemas/AgentEndpointProtocol'
           description: The protocol type.
         version:
           type: string

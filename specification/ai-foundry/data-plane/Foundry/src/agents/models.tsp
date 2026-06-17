@@ -280,18 +280,6 @@ union AgentVersionStatus {
   deleted: "deleted",
 }
 
-union AgentProtocol {
-  string,
-  activity_protocol: "activity_protocol",
-  responses: "responses",
-  a2a: "a2a",
-  mcp: "mcp",
-  invocations: "invocations",
-
-  @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
-  invocations_ws: "invocations_ws",
-}
-
 union AgentEndpointProtocol {
   string,
   activity: "activity",
@@ -561,7 +549,7 @@ model ContainerAppAgentDefinition extends AgentDefinition {
 @doc("A record mapping for a single protocol and its version.")
 model ProtocolVersionRecord {
   @doc("The protocol type.")
-  protocol: AgentProtocol;
+  protocol: AgentEndpointProtocol;
 
   @doc("The version string for the protocol, e.g. 'v0.1.1'.")
   version: string;
