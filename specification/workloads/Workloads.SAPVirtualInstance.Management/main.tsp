@@ -15,6 +15,7 @@ import "./SAPDatabaseInstance.tsp";
 import "./SAPApplicationServerInstance.tsp";
 import "./custom.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;

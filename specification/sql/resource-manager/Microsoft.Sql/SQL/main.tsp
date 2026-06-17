@@ -125,6 +125,7 @@ import "./VirtualNetworkRule.tsp";
 import "./WorkloadClassifier.tsp";
 import "./WorkloadGroup.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

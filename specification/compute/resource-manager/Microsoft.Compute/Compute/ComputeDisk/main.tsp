@@ -18,6 +18,7 @@ import "./DiskEncryptionSet.tsp";
 import "./DiskRestorePoint.tsp";
 import "./Snapshot.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

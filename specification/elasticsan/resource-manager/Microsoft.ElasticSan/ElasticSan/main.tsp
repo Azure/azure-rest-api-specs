@@ -19,6 +19,7 @@ import "./VolumeGroup.tsp";
 import "./Volume.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
