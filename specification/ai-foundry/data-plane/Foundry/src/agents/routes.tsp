@@ -534,6 +534,9 @@ interface Agents {
 
       /** The session identifier. */
       @path session_id: string;
+
+      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     NoContentResponse
   >;
