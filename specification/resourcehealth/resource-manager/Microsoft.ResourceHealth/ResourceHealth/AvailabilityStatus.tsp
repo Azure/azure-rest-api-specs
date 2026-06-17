@@ -18,7 +18,12 @@ namespace Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("current")
 @extensionResource
-model AvailabilityStatus extends ProxyResource {
+model AvailabilityStatus extends Foundations.ProxyResource {
+  /**
+   * Azure Resource Manager geo location of the resource.
+   */
+  location?: string;
+
   /**
    * Properties of availability state.
    */

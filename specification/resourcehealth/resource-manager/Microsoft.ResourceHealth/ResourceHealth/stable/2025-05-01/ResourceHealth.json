@@ -1509,10 +1509,6 @@
         }
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "ErrorResponse": {
       "type": "object",
       "description": "Error details.",
@@ -2175,28 +2171,6 @@
         }
       }
     },
-    "ProxyResource": {
-      "type": "object",
-      "description": "ARM proxy resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure Resource Manager Identity for the availabilityStatuses resource."
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "Microsoft.ResourceHealth/AvailabilityStatuses."
-        },
-        "location": {
-          "type": "string",
-          "description": "Azure Resource Manager geo location of the resource."
-        }
-      }
-    },
     "Scenario": {
       "type": "string",
       "enum": [
@@ -2310,6 +2284,10 @@
       "type": "object",
       "description": "availabilityStatus of a resource.",
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Azure Resource Manager geo location of the resource."
+        },
         "properties": {
           "$ref": "#/definitions/AvailabilityStatusProperties",
           "description": "Properties of availability state."
@@ -2317,7 +2295,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
