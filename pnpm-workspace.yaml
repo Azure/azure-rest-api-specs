@@ -4,6 +4,10 @@ packages:
   - "eng/tools"
   - "eng/tools/*"
 
+# Lowered from the pnpm 11 default of 1440 (24h) to unblock recently published
+# dependencies. Packages must be at least this many minutes old before install.
+minimumReleaseAge: 720
+
 allowBuilds:
   "@actions/github-script": true
   autorest: true
@@ -24,6 +28,7 @@ catalog:
   "@types/node": ^20.0.0
   "@types/semver": ^7.7.1
   "@vitest/coverage-v8": ^4.1.0
+  autorest: ^3.8.0
   cross-env: ^10.1.0
   debug: ^4.4.3
   eslint: ^10.0.0
