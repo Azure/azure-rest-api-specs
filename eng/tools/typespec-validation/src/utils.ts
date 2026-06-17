@@ -1,8 +1,8 @@
 import { execFile, execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
-import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, type PlatformPath } from "path";
+import { access, readdir, readFile, realpath } from "fs/promises";
+import defaultPath, { basename, dirname, join, resolve, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, type Suppression } from "suppressions";
 import { context } from "./index.ts";
@@ -14,8 +14,48 @@ debug.enable("simple-git");
 const localBinCache = new Map<string, string>();
 
 /**
- * Finds a local binary by walking up from a given directory to find node_modules/.bin/<name>.
- * Returns the absolute path to the binary file (symlink or shim JS file).
+ * Resolves a .bin shim to the actual JavaScript entry point file so it can be executed
+ * directly with `node` (process.execPath).
+ *
+ * On Unix/Linux/Mac, .bin entries are symlinks to the actual .js file; realpath() resolves them.
+ * On Windows, .bin entries are POSIX shell scripts (not executable by node.exe directly).
+ * In that case the .cmd shim is parsed to extract the embedded JS path.
+ */
+async function resolveActualBinScript(shimPath: string): Promise<string> {
+  // Try symlink resolution (Unix: .bin/<name> is a symlink -> actual .js file)
+  try {
+    const real = await realpath(shimPath);
+    if (/\.(js|cjs|mjs)$/.test(real)) {
+      return real;
+    }
+  } catch {
+    // Not a resolvable symlink
+  }
+
+  // Windows fallback: parse the .cmd shim which contains the actual JS path.
+  // npm/pnpm generate lines like:
+  //   "%_prog%"  "%dp0%\..\@typespec\compiler\cmd\tsp.js" %*
+  const cmdPath = shimPath + ".cmd";
+  try {
+    const content = await readFile(cmdPath, "utf-8");
+    const match = content.match(/"%dp0%\\([^"]+\.(?:js|cjs|mjs))"/i);
+    if (match) {
+      // match[1] is relative to the .bin directory (e.g. "..\@typespec\compiler\cmd\tsp.js")
+      return resolve(join(dirname(shimPath), match[1]));
+    }
+  } catch {
+    // .cmd file not found or unreadable
+  }
+
+  throw new Error(
+    `Could not resolve JavaScript entry point for binary shim: ${shimPath}. ` +
+      `The shim is not a symlink to a .js file and no .cmd file was found.`,
+  );
+}
+
+/**
+ * Finds a local binary by walking up from a given directory to find node_modules/.bin/<name>,
+ * then resolves the shim to the actual JavaScript entry point.
  * Results are cached by binary name and search directory to avoid redundant filesystem walks.
  */
 async function findLocalBin(name: string, searchDir: string): Promise<string> {
@@ -25,14 +65,21 @@ async function findLocalBin(name: string, searchDir: string): Promise<string> {
 
   let dir = searchDir;
   while (true) {
-    const candidate = join(dir, "node_modules", ".bin", name);
+    const shimPath = join(dir, "node_modules", ".bin", name);
+    let shimFound = false;
     try {
-      await access(candidate);
-      localBinCache.set(cacheKey, candidate);
-      return candidate;
+      await access(shimPath);
+      shimFound = true;
     } catch {
       // Not found at this level, walk up
     }
+
+    if (shimFound) {
+      const actualPath = await resolveActualBinScript(shimPath);
+      localBinCache.set(cacheKey, actualPath);
+      return actualPath;
+    }
+
     const parent = dirname(dir);
     if (parent === dir) {
       throw new Error(`Could not find binary '${name}' in any node_modules/.bin directory`);
