@@ -30,13 +30,6 @@ To see additional help and options, run:
 
 These are the global settings for the Compute API.
 
-### Suppression
-``` yaml
-directive:
-  - suppress: MULTIPLE_API_VERSION
-    reason: Compute packages multiple sub-services that intentionally use different latest API versions.
-```
-
 ```yaml
 title: ComputeManagementClient
 description: Compute Client
