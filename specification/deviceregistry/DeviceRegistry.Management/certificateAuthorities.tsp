@@ -166,15 +166,20 @@ interface CertificateAuthorities {
   createOrReplace is ArmResourceCreateOrReplaceAsync<CertificateAuthority>;
   delete is ArmResourceDeleteWithoutOkAsync<CertificateAuthority>;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<CertificateAuthority, CertificateAuthorityUpdate>;
+  update is ArmCustomPatchAsync<
+    CertificateAuthority,
+    CertificateAuthorityUpdate
+  >;
   listByNamespace is ArmResourceListByParent<CertificateAuthority>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
   @doc("Activates the Certificate Authority signed by external PKI.")
-  activate is ArmResourceActionNoResponseContentAsync<
+  activate is ArmResourceActionNoContentAsync<
     CertificateAuthority,
     ActivateCertificateAuthorityRequest
   >;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The final response has no content, so 204 is returned."
   @doc("Revokes the Certificate Authority issued by Microsoft PKI.")
-  revoke is ArmResourceActionNoResponseContentAsync<CertificateAuthority, void>;
+  revoke is ArmResourceActionNoContentAsync<CertificateAuthority, void>;
 }

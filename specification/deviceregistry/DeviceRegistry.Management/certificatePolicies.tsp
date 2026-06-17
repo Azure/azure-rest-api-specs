@@ -53,23 +53,6 @@ model CertificatePolicyConfiguration {
 @doc("Update model for Certificate Policy.")
 model CertificatePolicyUpdate {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<CertificatePolicy>;
-
-  @doc("The resource-specific properties for this resource.")
-  properties?: CertificatePolicyUpdateProperties;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Updatable properties for Certificate Policy.")
-model CertificatePolicyUpdateProperties {
-  @doc("The certificate configuration for update.")
-  certificate?: CertificatePolicyCertificateConfigurationUpdate;
-}
-
-@added(Versions.v2026_11_01_preview)
-@doc("Certificate Policy certificate configuration for update operations.")
-model CertificatePolicyCertificateConfigurationUpdate {
-  @doc("The leaf certificate configuration.")
-  leafCertificateConfiguration?: LeafCertificateConfigurationUpdate;
 }
 
 @added(Versions.v2026_11_01_preview)

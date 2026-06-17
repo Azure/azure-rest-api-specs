@@ -2600,6 +2600,9 @@
               }
             }
           },
+          "204": {
+            "description": "Action completed successfully."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3074,6 +3077,9 @@
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8091,16 +8097,6 @@
         }
       ]
     },
-    "CertificatePolicyCertificateConfigurationUpdate": {
-      "type": "object",
-      "description": "Certificate Policy certificate configuration for update operations.",
-      "properties": {
-        "leafCertificateConfiguration": {
-          "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
-          "description": "The leaf certificate configuration."
-        }
-      }
-    },
     "CertificatePolicyConfiguration": {
       "type": "object",
       "description": "The Certificate Policy certificate configuration.",
@@ -8166,20 +8162,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/CertificatePolicyUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "CertificatePolicyUpdateProperties": {
-      "type": "object",
-      "description": "Updatable properties for Certificate Policy.",
-      "properties": {
-        "certificate": {
-          "$ref": "#/definitions/CertificatePolicyCertificateConfigurationUpdate",
-          "description": "The certificate configuration for update."
         }
       }
     },
