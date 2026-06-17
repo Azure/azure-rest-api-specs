@@ -734,36 +734,6 @@
         "kind"
       ]
     },
-    "AllocationStrategy": {
-      "type": "string",
-      "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.",
-      "enum": [
-        "LowestPrice",
-        "CapacityOptimized",
-        "Prioritized"
-      ],
-      "x-ms-enum": {
-        "name": "AllocationStrategy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LowestPrice",
-            "value": "LowestPrice",
-            "description": "VMs are allocated based on the lowest price available."
-          },
-          {
-            "name": "CapacityOptimized",
-            "value": "CapacityOptimized",
-            "description": "VMs are allocated based on capacity availability."
-          },
-          {
-            "name": "Prioritized",
-            "value": "Prioritized",
-            "description": "VMs are allocated based on the rank specified for each VM size."
-          }
-        ]
-      }
-    },
     "AutomaticResourcePredictionsProfile": {
       "type": "object",
       "description": "The stand-by agent scheme is determined based on historical demand.",
@@ -2238,7 +2208,7 @@
     },
     "SkuProfile": {
       "type": "object",
-      "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy.",
+      "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes.",
       "properties": {
         "vmSizes": {
           "type": "array",
@@ -2249,10 +2219,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "allocationStrategy": {
-          "$ref": "#/definitions/AllocationStrategy",
-          "description": "Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated."
         }
       }
     },
@@ -2267,7 +2233,7 @@
         "rank": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the rank associated with the VM Size. VMs are allocated based on rank when the allocation strategy is set to 'Prioritized'."
+          "description": "Specifies the rank associated with the VM Size."
         }
       }
     },

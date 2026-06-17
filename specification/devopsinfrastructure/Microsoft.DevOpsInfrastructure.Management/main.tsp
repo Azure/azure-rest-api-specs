@@ -213,15 +213,12 @@ model DevOpsAzureSku {
   linuxNvmePath?: string;
 }
 
-@doc("Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes and an allocation strategy.")
+@doc("Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes.")
 @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
 model SkuProfile {
   @doc("Specifies the VM sizes for the virtual machine scale set.")
   @identifiers(#["name"])
   vmSizes?: SkuProfileVMSize[];
-
-  @doc("Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.")
-  allocationStrategy?: AllocationStrategy;
 }
 
 @doc("Specifies the VM Size.")
@@ -229,22 +226,8 @@ model SkuProfileVMSize {
   @doc("Specifies the name of the VM Size.")
   name?: string;
 
-  @doc("Specifies the rank associated with the VM Size. VMs are allocated based on rank when the allocation strategy is set to 'Prioritized'.")
+  @doc("Specifies the rank associated with the VM Size.")
   rank?: int32;
-}
-
-@doc("Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.")
-union AllocationStrategy {
-  string,
-
-  @doc("VMs are allocated based on the lowest price available.")
-  LowestPrice: "LowestPrice",
-
-  @doc("VMs are allocated based on capacity availability.")
-  CapacityOptimized: "CapacityOptimized",
-
-  @doc("VMs are allocated based on the rank specified for each VM size.")
-  Prioritized: "Prioritized",
 }
 
 @doc("The storage profile of the VMSS.")
