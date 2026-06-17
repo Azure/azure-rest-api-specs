@@ -63,8 +63,8 @@ model NamespaceProperties {
   dataEndpoint?: string;
 
   @added(Versions.v2026_11_01_preview)
-  @doc("Enables certificate management for the namespace.")
-  enableCertificateManagement?: boolean;
+  @doc("The certificate management state for the namespace.")
+  certificateManagement?: CertificateManagementState;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the messaging endpoints dictionary."
   @doc("Assigned and unassigned messaging endpoints.")
@@ -92,6 +92,18 @@ model NamespaceProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The certificate management state for the namespace.")
+union CertificateManagementState {
+  string,
+
+  @doc("Certificate management is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Certificate management is disabled.")
+  Disabled: "Disabled",
 }
 
 @added(Versions.v2024_10_01_preview)

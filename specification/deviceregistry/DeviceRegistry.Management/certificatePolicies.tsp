@@ -80,5 +80,5 @@ interface CertificatePolicies {
   delete is ArmResourceDeleteWithoutOkAsync<CertificatePolicy>;
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<CertificatePolicy, CertificatePolicyUpdate>;
-  listByCredential is ArmResourceListByParent<CertificatePolicy>;
+  listByCertificateAuthority is ArmResourceListByParent<CertificatePolicy>;
 }

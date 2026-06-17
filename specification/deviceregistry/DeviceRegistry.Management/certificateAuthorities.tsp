@@ -64,7 +64,7 @@ model CertificateAuthorityProperties {
 model RootCertificateAuthorityProperties
   extends CertificateAuthorityProperties {
   @doc("The self-signed, service-managed root Certificate Authority type.")
-  certificateAuthorityType: "Root";
+  certificateAuthorityType: CertificateAuthorityType.Root;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -72,11 +72,11 @@ model RootCertificateAuthorityProperties
 model IntermediateCertificateAuthorityProperties
   extends CertificateAuthorityProperties {
   @doc("The intermediate Certificate Authority type.")
-  certificateAuthorityType: "ICA";
+  certificateAuthorityType: CertificateAuthorityType.ICA;
 
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @doc("The name of the issuer Certificate Authority in the same Namespace.")
-  issuerCertificateAuthorityName: string;
+  @doc("The UUID of the issuer Certificate Authority in the same namespace.")
+  issuerCertificateAuthorityUuid: string;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -84,8 +84,9 @@ model IntermediateCertificateAuthorityProperties
 model BringYourOwnCertificateAuthorityProperties
   extends CertificateAuthorityProperties {
   @doc("The Bring Your Own Certificate Authority type.")
-  certificateAuthorityType: "BringYourOwn";
+  certificateAuthorityType: CertificateAuthorityType.BringYourOwn;
 
+  @visibility(Lifecycle.Read)
   @doc("Configuration for Bring Your Own.")
   bringYourOwn?: BringYourOwnConfiguration;
 }

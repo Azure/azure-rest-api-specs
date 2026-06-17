@@ -2600,7 +2600,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/certificateAuthorities/{certificateAuthorityName}/certificatePolicies": {
       "get": {
-        "operationId": "CertificatePolicies_ListByCredential",
+        "operationId": "CertificatePolicies_ListByCertificateAuthority",
         "tags": [
           "CertificatePolicies"
         ],
@@ -2648,11 +2648,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List_CertificatePolicies_ByCredential": {
-            "$ref": "./examples/List_CertificatePolicies_ByCredential.json"
           }
         },
         "x-ms-pageable": {
@@ -7739,7 +7734,8 @@
       "properties": {
         "bringYourOwn": {
           "$ref": "#/definitions/BringYourOwnConfiguration",
-          "description": "Configuration for Bring Your Own."
+          "description": "Configuration for Bring Your Own.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -7752,12 +7748,6 @@
     "BringYourOwnCertificateAuthorityPropertiesUpdate": {
       "type": "object",
       "description": "Properties for a Certificate Authority whose CA certificate is signed by an external issuer.",
-      "properties": {
-        "bringYourOwn": {
-          "$ref": "#/definitions/BringYourOwnConfiguration",
-          "description": "Configuration for Bring Your Own."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate"
@@ -8047,6 +8037,30 @@
           "$ref": "#/definitions/LeafCertificateConfigurationUpdate",
           "description": "The leaf certificate configuration."
         }
+      }
+    },
+    "CertificateManagementState": {
+      "type": "string",
+      "description": "The certificate management state for the namespace.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateManagementState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Certificate management is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Certificate management is disabled."
+          }
+        ]
       }
     },
     "CertificatePolicy": {
@@ -9595,9 +9609,9 @@
       "type": "object",
       "description": "Properties for an intermediate Certificate Authority signed by another same-namespace Certificate Authority.",
       "properties": {
-        "issuerCertificateAuthorityName": {
+        "issuerCertificateAuthorityUuid": {
           "type": "string",
-          "description": "The name of the issuer Certificate Authority in the same Namespace.",
+          "description": "The UUID of the issuer Certificate Authority in the same namespace.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -9605,7 +9619,7 @@
         }
       },
       "required": [
-        "issuerCertificateAuthorityName"
+        "issuerCertificateAuthorityUuid"
       ],
       "allOf": [
         {
@@ -12731,9 +12745,9 @@
           "description": "The data-plane endpoint used to perform operations in this namespace.",
           "readOnly": true
         },
-        "enableCertificateManagement": {
-          "type": "boolean",
-          "description": "Enables certificate management for the namespace."
+        "certificateManagement": {
+          "$ref": "#/definitions/CertificateManagementState",
+          "description": "The certificate management state for the namespace."
         },
         "messaging": {
           "$ref": "#/definitions/Messaging",
@@ -12766,9 +12780,9 @@
       "type": "object",
       "description": "The namespace properties model.",
       "properties": {
-        "enableCertificateManagement": {
-          "type": "boolean",
-          "description": "Enables certificate management for the namespace."
+        "certificateManagement": {
+          "$ref": "#/definitions/CertificateManagementState",
+          "description": "The certificate management state for the namespace."
         },
         "messaging": {
           "$ref": "#/definitions/Messaging",
