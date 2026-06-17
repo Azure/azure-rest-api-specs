@@ -22,6 +22,20 @@ namespace Microsoft.HealthcareApis;
   "ArmManagedServiceIdentityType",
   "python,javascript,go,java"
 );
+@@alternateType(DicomService.etag, Azure.Core.eTag, "csharp");
+@@alternateType(IotConnector.etag, Azure.Core.eTag, "csharp");
+@@alternateType(Workspace.etag, Azure.Core.eTag, "csharp");
+@@alternateType(ServicesDescription.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  ServiceManagedIdentity.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ServicesDescription.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(ServicesDescription, "HealthcareApisService", "csharp");
 @@clientName(ProvisioningState, "HealthcareApisProvisioningState", "csharp");
 @@clientName(
