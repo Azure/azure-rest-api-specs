@@ -1,7 +1,7 @@
 import "@typespec/openapi";
 
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "../openai-evaluations/models.tsp";
 
 using TypeSpec.Rest;

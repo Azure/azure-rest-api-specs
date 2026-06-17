@@ -1,5 +1,5 @@
 // Models for the AgentsOptimization data-plane surface.
-// Aligned with in-tree C# DTOs (Contracts/V1/Models/).
+// Aligned with in-tree C# DTOs (Contracts/V2Preview/Models/).
 //
 // Uses shared Foundry job infrastructure from servicepatterns.tsp:
 //   JobLike<TResult, TInputs> — base job shape (id, status, inputs, result, error)
@@ -8,8 +8,8 @@
 //   ApiError — standard error shape
 
 import "../common/models.tsp";
+import "../common/servicepatterns.tsp";
 import "../openai-evaluations/models.tsp";
-import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
 
@@ -45,11 +45,93 @@ union OptimizationMode {
 }
 
 // ---------------------------------------------------------------------------
+// Dataset input — discriminated union (inline items or registered reference)
+// ---------------------------------------------------------------------------
+
+/** Discriminator values for the dataset input union. */
+union OptimizationDatasetInputType {
+  string,
+
+  @doc("Inline dataset — items are provided directly in the request body.")
+  inline: "inline",
+
+  @doc("Reference to a registered Foundry dataset by name and version.")
+  reference: "reference",
+}
+
+/** Base discriminated model for dataset input. Either inline items or a registered reference. */
+@discriminator("type")
+model OptimizationDatasetInput {
+  @doc("Dataset input type discriminator.")
+  type: OptimizationDatasetInputType;
+}
+
+/** Inline dataset — items supplied directly in the request body. */
+model OptimizationInlineDatasetInput extends OptimizationDatasetInput {
+  @doc("Dataset input type discriminator.")
+  type: OptimizationDatasetInputType.inline;
+
+  @doc("Dataset items.")
+  items: OptimizationDatasetItem[];
+}
+
+/** Reference to a registered Foundry dataset. */
+model OptimizationReferenceDatasetInput extends OptimizationDatasetInput {
+  @doc("Dataset input type discriminator.")
+  type: OptimizationDatasetInputType.reference;
+
+  @doc("Registered dataset name.")
+  name: string;
+
+  @doc("Dataset version. If not specified, the latest version is used.")
+  version?: string;
+}
+
+/** A single item in an inline dataset. */
+model OptimizationDatasetItem {
+  @doc("The user query / prompt.")
+  query?: string;
+
+  @doc("Expected ground truth answer.")
+  ground_truth?: string;
+
+  @doc("Desired number of conversation turns for simulation mode (1-20).")
+  @minValue(1)
+  @maxValue(20)
+  desired_num_turns?: int32;
+
+  @doc("Per-item evaluation criteria.")
+  criteria?: OptimizationDatasetCriterion[];
+}
+
+/** Evaluation criterion: a name + instruction pair used for per-item scoring. */
+model OptimizationDatasetCriterion {
+  @doc("Criterion name.")
+  name: string;
+
+  @doc("Criterion instruction / description.")
+  instruction: string;
+}
+
+// ---------------------------------------------------------------------------
+// Evaluator reference
+// ---------------------------------------------------------------------------
+
+/** Reference to a named evaluator, optionally pinned to a version. */
+model OptimizationEvaluatorRef {
+  @doc("Evaluator name.")
+  name: string;
+
+  @doc("Evaluator version. If not specified, the latest version is used.")
+  version?: string;
+}
+
+// ---------------------------------------------------------------------------
 // Input models
 // ---------------------------------------------------------------------------
 
 @doc("Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.")
-model AgentIdentifier {
+model OptimizationAgentIdentifier {
   @doc("Registered Foundry agent name (required).")
   agent_name: string;
 
@@ -78,19 +160,11 @@ model OptimizationAgentDefinition {
   tools?: Record<unknown>[];
 }
 
-@doc("Reference to a registered dataset in the Foundry Dataset Service.")
-model DatasetRef {
-  @doc("Dataset name.")
-  name: string;
-
-  @doc("Dataset version. If not specified, the latest version is used.")
-  version?: string;
-}
-
 @doc("Tuning knobs and run-mode for an optimization job.")
 model OptimizationOptions {
-  @doc("Maximum optimization iterations per strategy. Must be >= 1. Default: 5.")
-  max_iterations?: int32 = 5;
+  @doc("Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.")
+  @minValue(1)
+  max_candidates?: int32 = 5;
 
   @doc("Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.")
   optimization_config?: Record<unknown>;
@@ -108,16 +182,16 @@ model OptimizationOptions {
 @doc("Caller-supplied inputs for an optimization job.")
 model OptimizationJobInputs {
   @doc("The agent (and pinned version) being optimized.")
-  agent: AgentIdentifier;
+  agent: OptimizationAgentIdentifier;
 
-  @doc("Reference to a registered training dataset (required).")
-  train_dataset_reference: DatasetRef;
+  @doc("Training dataset — either inline items or a reference to a registered dataset. Required.")
+  train_dataset: OptimizationDatasetInput;
 
   @doc("Optional held-out validation dataset for measuring generalization of the final candidate.")
-  validation_dataset_reference?: DatasetRef;
+  validation_dataset?: OptimizationDatasetInput;
 
-  @doc("Job-level evaluators (referenced by name). Per-task criteria may override. Default: ['task_adherence'].")
-  evaluators?: string[];
+  @doc("Job-level evaluators referenced by name and optional version. Required; at least one must be provided.")
+  evaluators: OptimizationEvaluatorRef[];
 
   @doc("Tuning knobs and run-mode.")
   options?: OptimizationOptions;
@@ -129,8 +203,8 @@ model OptimizationJobInputs {
 
 @doc("In-flight progress; only populated while status is queued or in_progress.")
 model OptimizationJobProgress {
-  @doc("1-based current iteration index.")
-  current_iteration: int32;
+  @doc("Number of candidates whose evaluation has completed so far.")
+  candidates_completed: int32;
 
   @doc("Best score observed so far across all candidates.")
   best_score: float64;
@@ -147,26 +221,14 @@ model OptimizationCandidate {
   @doc("Display name of the candidate (e.g., 'baseline', 'instruction-v2').")
   name: string;
 
-  @doc("The agent configuration that produced this candidate.")
-  config: OptimizationAgentDefinition;
-
   @doc("What was mutated from the baseline (e.g., {system_prompt: 'new prompt'}).")
-  mutations: Record<unknown>;
+  mutations?: Record<unknown>;
 
   @doc("Average composite score across all tasks.")
   avg_score: float64;
 
   @doc("Average token usage across all tasks.")
   avg_tokens: float64;
-
-  @doc("Fraction of tasks that met the pass threshold.")
-  pass_rate: float64;
-
-  @doc("Individual task-level scores.")
-  task_scores: OptimizationTaskResult[];
-
-  @doc("Whether this candidate is on the Pareto frontier (score vs cost).")
-  is_pareto_optimal: boolean;
 
   @doc("Foundry evaluation identifier used to score this candidate.")
   eval_id?: string;
@@ -217,66 +279,49 @@ model OptimizationTaskResult {
 
 @doc("Terminal-state result body. Populated when status is succeeded or failed.")
 model OptimizationJobResult {
-  @doc("Evaluation scores for the original (un-optimized) agent configuration.")
-  baseline?: OptimizationCandidate;
+  @doc("Candidate ID of the original (un-optimized) baseline evaluation.")
+  baseline?: string;
 
-  @doc("The highest-scoring candidate found during optimization.")
-  best?: OptimizationCandidate;
+  @doc("Candidate ID of the highest-scoring candidate found during optimization.")
+  best?: string;
 
   @doc("All evaluated candidates including baseline.")
   candidates?: OptimizationCandidate[];
-
-  @doc("The options used for this optimization run.")
-  options?: OptimizationOptions;
-
-  @doc("Non-fatal warnings from the optimization run (e.g., target attribute failures that were skipped).")
-  warnings?: string[];
-
-  @doc("True when all target attributes failed — only the baseline was evaluated.")
-  all_target_attributes_failed?: boolean;
 }
 
 // ---------------------------------------------------------------------------
-// Job resource — flat request body (no `inputs` wrapper) to match vienna contract
+// Job resource — extends JobLike per Foundry job guidelines
 // ---------------------------------------------------------------------------
 
 @doc("Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.")
-model OptimizationJob {
-  @doc("Server-assigned unique identifier.")
-  @visibility(Lifecycle.Read)
-  id: string;
-
-  @doc("Current lifecycle status.")
-  @visibility(Lifecycle.Read)
-  status: JobStatus;
-
-  @doc("Error details — populated only on failure.")
-  @visibility(Lifecycle.Read)
-  error?: ApiError;
-
-  @doc("Result produced on success.")
-  @visibility(Lifecycle.Read)
-  result?: OptimizationJobResult;
-
-  // --- Inputs (nested in response, echoing caller-supplied config) ---
-  @doc("Caller-supplied inputs.")
-  inputs?: OptimizationJobInputs;
-
+model OptimizationJob is JobLike<OptimizationJobResult, OptimizationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
 
-  @doc("The timestamp when the job was last updated (status, progress, or result change), represented in Unix time.")
+  @doc("The timestamp when the job was last updated, represented in Unix time.")
   @visibility(Lifecycle.Read)
-  updated_at?: FoundryTimestamp;
+  updated_at: FoundryTimestamp;
 
-  @doc("Progress while in flight. Absent in terminal states.")
+  @doc("Progress snapshot. May be present in terminal states reflecting last-known progress.")
   @visibility(Lifecycle.Read)
   progress?: OptimizationJobProgress;
 
-  @doc("Metadata about the dataset used for this optimization job.")
+  @doc("Non-fatal warnings emitted at any point during optimization.")
   @visibility(Lifecycle.Read)
-  dataset?: DatasetInfo;
+  warnings?: string[];
+}
+
+// ---------------------------------------------------------------------------
+// Slim list item — returned by LIST
+// ---------------------------------------------------------------------------
+
+@doc("Slim job representation returned by the LIST endpoint.")
+model OptimizationJobListItem
+  is OmitProperties<OptimizationJob, "inputs" | "result" | "warnings"> {
+  @doc("The agent targeted by this optimization job.")
+  @visibility(Lifecycle.Read)
+  agent?: OptimizationAgentIdentifier;
 }
 
 // ---------------------------------------------------------------------------
@@ -293,128 +338,4 @@ model PromotionInfo {
 
   @doc("Version of the Foundry agent this candidate was promoted to.")
   agent_version: string;
-}
-
-@doc("Request body for promoting a candidate to a Foundry agent version.")
-model PromoteCandidateRequest {
-  @doc("Name of the Foundry agent to promote to.")
-  agent_name: string;
-
-  @doc("Version of the Foundry agent to promote to.")
-  agent_version: string;
-}
-
-@doc("Response after successfully promoting a candidate.")
-model PromoteCandidateResponse {
-  @doc("The promoted candidate id.")
-  candidate_id: string;
-
-  @doc("Status after promotion.")
-  status: string;
-
-  @doc("Timestamp when promotion occurred, represented in Unix time.")
-  promoted_at: FoundryTimestamp;
-
-  @doc("Name of the Foundry agent promoted to.")
-  agent_name: string;
-
-  @doc("Version of the Foundry agent promoted to.")
-  agent_version: string;
-}
-
-// ---------------------------------------------------------------------------
-// Dataset info model
-// ---------------------------------------------------------------------------
-
-@doc("Metadata about the dataset used for optimization, surfaced in the response.")
-model DatasetInfo {
-  @doc("Dataset name when using a registered dataset reference. Null for inline datasets.")
-  name?: string;
-
-  @doc("Dataset version when using a registered dataset reference. Null for inline datasets.")
-  version?: string;
-
-  @doc("Number of tasks/rows in the dataset.")
-  task_count: int32;
-
-  @doc("True when the dataset was provided inline in the request body.")
-  is_inline: boolean;
-}
-
-// ---------------------------------------------------------------------------
-// Candidate sub-resource bodies
-// ---------------------------------------------------------------------------
-
-@doc("Deploy-config blob for a candidate. Suitable for setting OPTIMIZATION_CONFIG on a hosted-agent version.")
-model CandidateDeployConfig {
-  @doc("System prompt / instructions.")
-  instructions?: string;
-
-  @doc("Foundry deployment name.")
-  `model`?: string;
-
-  @doc("Optional sampling temperature.")
-  @minValue(0)
-  @maxValue(2)
-  temperature?: float32;
-
-  @doc("Optional skill overrides.")
-  skills?: Record<unknown>[];
-
-  @doc("Optional tool overrides.")
-  tools?: Record<unknown>[];
-}
-
-@doc("Full per-task evaluation results for a candidate, returned by GET /candidates/{id}/results.")
-model CandidateResults {
-  @doc("Owning candidate id.")
-  candidate_id: string;
-
-  @doc("Per-task evaluation rows.")
-  results: OptimizationTaskResult[];
-}
-
-@doc("Candidate metadata returned by GET /candidates/{id}.")
-model CandidateMetadata {
-  @doc("Server-assigned candidate identifier.")
-  candidate_id: string;
-
-  @doc("Owning optimization job id.")
-  job_id: string;
-
-  @doc("Display name of the candidate.")
-  candidate_name: string;
-
-  @doc("Candidate lifecycle status.")
-  status: string;
-
-  @doc("Candidate's aggregate score.")
-  score?: float64;
-
-  @doc("Whether detailed results are available for this candidate.")
-  has_results: boolean;
-
-  @doc("Timestamp when the candidate was created, represented in Unix time.")
-  created_at: FoundryTimestamp;
-
-  @doc("Timestamp when the candidate was last updated, represented in Unix time.")
-  updated_at: FoundryTimestamp;
-
-  @doc("Promotion metadata. Null if not promoted.")
-  promotion?: PromotionInfo;
-
-  @doc("Files in the candidate's blob directory.")
-  files: CandidateFileInfo[];
-}
-
-@doc("File entry in a candidate's blob directory.")
-model CandidateFileInfo {
-  @doc("Relative path of the file.")
-  path: string;
-
-  @doc("File type category (e.g. 'config', 'results').")
-  type: string;
-
-  @doc("File size in bytes.")
-  size_bytes: int64;
 }

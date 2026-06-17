@@ -1,8 +1,8 @@
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { normalizePath, runNpm } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { normalizePath, runNpm } from "../utils.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");

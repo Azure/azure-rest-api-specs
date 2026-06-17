@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -139,7 +139,7 @@ model TimerRoutineTrigger extends RoutineTrigger {
   type: RoutineTriggerType.timer;
 
   @doc("The UTC date and time at which the timer fires.")
-  at?: utcDateTime;
+  at?: FoundryTimestamp;
 }
 
 @doc("A GitHub issue routine trigger.")
