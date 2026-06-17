@@ -71,6 +71,7 @@ using Http;
   "ThumbprintString",
   "csharp"
 );
+@@alternateType(CertificateDescription.etag, eTag, "csharp");
 @@clientName(CertificateWithNonceDescription,
   "IotHubCertificateWithNonceDescription",
   "csharp"
@@ -186,6 +187,8 @@ using Http;
   "csharp"
 );
 @@clientName(EventHubConsumerGroupName.name, "Name", "csharp");
+@@alternateType(EventHubConsumerGroupInfo.etag, eTag, "csharp");
+@@alternateType(IotHubDescription.etag, eTag, "csharp");
 @@clientName(IotHubProperties.disableDeviceSAS, "DisableDeviceSas", "csharp");
 @@clientName(IotHubProperties.disableModuleSAS, "DisableModuleSas", "csharp");
 @@clientName(IotHubProperties.allowedFqdnList, "AllowedFqdns", "csharp");
