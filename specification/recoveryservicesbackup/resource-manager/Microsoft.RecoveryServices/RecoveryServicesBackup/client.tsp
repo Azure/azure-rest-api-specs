@@ -9,24 +9,6 @@ using Azure.ResourceManager;
 using Http;
 using Microsoft.RecoveryServices;
 
-@@clientLocation(
-  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
-  "Client",
-  "go"
-);
-@@clientLocation(
-  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
-  "Client",
-  "go"
-);
-@@clientLocation(
-  BackupResourceConfigOperationStatuses.getOperationStatus,
-  "Client",
-  "go"
-);
-
-@@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
-
 @@clientName(HttpStatusCode.Continue, "CONTINUE_ENUM", "python");
 
 // Migration mappings added to mitigate Java SDK breaking changes after TypeSpec migration
