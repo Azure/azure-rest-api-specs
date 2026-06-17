@@ -26,20 +26,55 @@ describe("checkPackageOnPyPI", () => {
     expect(result.status).toBe("notRegistered");
   });
 
-  test("returns checkFailed for non-200 and non-404 responses", async () => {
-    const fetchMock = vi.fn().mockResolvedValue(createFetchResponse(500));
+  test("returns checkFailed immediately for non-retryable HTTP errors", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(createFetchResponse(400));
+    const noSleep = vi.fn().mockResolvedValue(undefined);
 
-    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock);
+    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock, noSleep);
+
     expect(result.status).toBe("checkFailed");
-    expect(result.reason).toBe("PyPI returned HTTP 500");
+    expect(result.reason).toBe("PyPI returned HTTP 400");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(noSleep).not.toHaveBeenCalled();
   });
 
-  test("returns checkFailed for fetch errors", async () => {
-    const fetchMock = vi.fn().mockRejectedValue(new Error("network unavailable"));
+  test("retries on retryable HTTP status codes and returns checkFailed after max retries", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(createFetchResponse(503));
+    const noSleep = vi.fn().mockResolvedValue(undefined);
 
-    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock);
+    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock, noSleep);
+
+    expect(result.status).toBe("checkFailed");
+    expect(result.reason).toBe("PyPI returned HTTP 503");
+    expect(fetchMock).toHaveBeenCalledTimes(4); // 1 initial + 3 retries
+    expect(noSleep).toHaveBeenCalledTimes(3);
+    expect(noSleep).toHaveBeenCalledWith(1000);
+  });
+
+  test("succeeds on retry after transient failure", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(createFetchResponse(503))
+      .mockResolvedValueOnce(createFetchResponse(200));
+    const noSleep = vi.fn().mockResolvedValue(undefined);
+
+    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock, noSleep);
+
+    expect(result.status).toBe("registered");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(noSleep).toHaveBeenCalledTimes(1);
+  });
+
+  test("retries on fetch errors and returns checkFailed after max retries", async () => {
+    const fetchMock = vi.fn().mockRejectedValue(new Error("network unavailable"));
+    const noSleep = vi.fn().mockResolvedValue(undefined);
+
+    const result = await checkPackageOnPyPI("azure-mgmt-widget", fetchMock, noSleep);
+
     expect(result.status).toBe("checkFailed");
     expect(result.reason).toContain("Error: network unavailable");
+    expect(fetchMock).toHaveBeenCalledTimes(4);
+    expect(noSleep).toHaveBeenCalledTimes(3);
   });
 
   test("URL-encodes package names", async () => {
@@ -99,7 +134,7 @@ describe("validatePythonPackagesOnPyPI", () => {
     expect(result).toEqual({
       succeeded: false,
       errors: [
-        "Python package 'azure-mgmt-widget' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
+        "Python package 'azure-mgmt-widget' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review; 2. After namespace approval, trigger the package-name reservation pipeline: aka.ms/python-reserve-pkg",
       ],
     });
     expect(logSpy).toHaveBeenCalledWith(
@@ -113,8 +148,12 @@ describe("validatePythonPackagesOnPyPI", () => {
     const logSpy = vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const noSleep = vi.fn().mockResolvedValue(undefined);
 
-    const result = await validatePythonPackagesOnPyPI([{ packageName: "azure-mgmt-widget" }]);
+    const result = await validatePythonPackagesOnPyPI(
+      [{ packageName: "azure-mgmt-widget" }],
+      noSleep,
+    );
 
     expect(result).toEqual({
       succeeded: false,
@@ -145,7 +184,7 @@ describe("validatePythonPackagesOnPyPI", () => {
 
     expect(result.succeeded).toBe(false);
     expect(result.errors).toEqual([
-      "Python package 'azure-mgmt-new' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.",
+      "Python package 'azure-mgmt-new' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review; 2. After namespace approval, trigger the package-name reservation pipeline: aka.ms/python-reserve-pkg",
     ]);
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
