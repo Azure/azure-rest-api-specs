@@ -404,6 +404,20 @@ union OriginAuthenticationType {
 }
 
 /**
+ * The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.
+ */
+@added(Versions.v2026_07_01)
+union CertificateNameCheckValidationMode {
+  string,
+
+  /** Validate the certificate against the origin hostname. */
+  OriginHostname: "OriginHostname",
+
+  /** Validate the certificate against custom certificate subjects. */
+  CustomCertificateSubject: "CustomCertificateSubject",
+}
+
+/**
  * Supported protocols for the customer's endpoint.
  */
 union AFDEndpointProtocols {
@@ -3113,6 +3127,20 @@ model AFDOriginUpdatePropertiesParameters {
    * Whether to enable certificate name check at origin level
    */
   enforceCertificateNameCheck?: boolean = true;
+
+  /**
+   * The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.
+   */
+  @added(Versions.v2026_07_01)
+  certificateNameCheckValidationMode?: CertificateNameCheckValidationMode = CertificateNameCheckValidationMode.OriginHostname;
+
+  /**
+   * The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.
+   */
+  @added(Versions.v2026_07_01)
+  @minItems(1)
+  @maxItems(2)
+  customCertificateSubjects?: string[];
 }
 
 /**
