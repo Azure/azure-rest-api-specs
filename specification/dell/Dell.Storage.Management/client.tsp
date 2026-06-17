@@ -11,69 +11,84 @@ using LiftrBase.Storage;
 
 // CSharp
 @@clientName(FileSystemResource, "DellFileSystem", "csharp");
-@@clientName(FileSystemResourceProperties,
+@@clientName(
+  FileSystemResourceProperties,
   "DellFileSystemProperties",
   "csharp"
 );
 @@clientName(Capacity, "DellFileSystemCapacity", "csharp");
-@@clientName(EncryptionIdentityProperties,
+@@clientName(
+  EncryptionIdentityProperties,
   "DellFileSystemEncryptionIdentityProperties",
   "csharp"
 );
-@@clientName(EncryptionIdentityType,
+@@clientName(
+  EncryptionIdentityType,
   "DellFileSystemEncryptionIdentityType",
   "csharp"
 );
-@@clientName(EncryptionIdentityUpdateProperties,
+@@clientName(
+  EncryptionIdentityUpdateProperties,
   "DellFileSystemEncryptionIdentityPatchProperties",
   "csharp"
 );
-@@clientName(EncryptionProperties,
+@@clientName(
+  EncryptionProperties,
   "DellFileSystemEncryptionProperties",
   "csharp"
 );
-@@clientName(EncryptionUpdateProperties,
+@@clientName(
+  EncryptionUpdateProperties,
   "DellFileSystemEncryptionPatchProperties",
   "csharp"
 );
 @@clientName(MarketplaceDetails, "DellFileSystemMarketplaceDetails", "csharp");
-@@clientName(MarketplaceSubscriptionStatus,
+@@clientName(
+  MarketplaceSubscriptionStatus,
   "DellFileSystemMarketplaceSubscriptionStatus",
   "csharp"
 );
 @@clientName(ProvisioningState, "DellFileSystemProvisioningState", "csharp");
 @@clientName(UserDetails, "DellFileSystemUserDetails", "csharp");
 @@clientName(ResourceEncryptionType, "DellFileSystemEncryptionType", "csharp");
-@@clientName(ResourceEncryptionType.`Microsoft-managed keys (MMK)`,
+@@clientName(
+  ResourceEncryptionType.`Microsoft-managed keys (MMK)`,
   "MicrosoftManagedKeysMmk",
   "csharp"
 );
-@@clientName(ResourceEncryptionType.`Customer-managed keys (CMK)`,
+@@clientName(
+  ResourceEncryptionType.`Customer-managed keys (CMK)`,
   "CustomerManagedKeysCmk",
   "csharp"
 );
-@@alternateType(EncryptionIdentityProperties.identityResourceId,
+@@alternateType(
+  EncryptionIdentityProperties.identityResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(EncryptionIdentityUpdateProperties.identityResourceId,
+@@alternateType(
+  EncryptionIdentityUpdateProperties.identityResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FileSystemResourceProperties.delegatedSubnetId,
+@@alternateType(
+  FileSystemResourceProperties.delegatedSubnetId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+@@alternateType(
+  FileSystemResourceUpdateProperties.delegatedSubnetId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(FileSystemResourceProperties.oneFsUrl, url, "csharp");
-@@alternateType(FileSystemResourceUpdateProperties.delegatedSubnetId,
+@@alternateType(
+  FileSystemResourceUpdateProperties.delegatedSubnetId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(FileSystemResourceUpdate.identity,
+@@alternateType(
+  FileSystemResourceUpdate.identity,
   Azure.ResourceManager.Foundations.ManagedServiceIdentity,
   "csharp"
 );

@@ -75,12 +75,15 @@ interface ManagementPolicies {
   delete is ManagementPolicyOps.DeleteSync<ManagementPolicy>;
 }
 
-@@doc(ManagementPolicy.name,
+@@doc(
+  ManagementPolicy.name,
   "The name of the Storage Account Management Policy. It should always be 'default'"
 );
-@@doc(ManagementPolicy.properties,
+@@doc(
+  ManagementPolicy.properties,
   "Returns the Storage Account Data Policies Rules."
 );
-@@doc(ManagementPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  ManagementPolicies.createOrUpdate::parameters.resource,
   "The ManagementPolicy set to a storage account."
 );

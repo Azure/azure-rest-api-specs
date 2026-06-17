@@ -49,6 +49,7 @@ interface Reservations<
   get is ArmResourceRead<TReservation>;
   @doc("Create a reservation")
   create is ArmResourceCreateOrUpdateAsync<TReservation>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Update a reservation")
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<

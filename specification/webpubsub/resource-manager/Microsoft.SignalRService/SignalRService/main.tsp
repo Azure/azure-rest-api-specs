@@ -21,6 +21,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./SharedPrivateLinkResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -66,8 +67,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationList> | ErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationList>
+    | ErrorResponse;
 }

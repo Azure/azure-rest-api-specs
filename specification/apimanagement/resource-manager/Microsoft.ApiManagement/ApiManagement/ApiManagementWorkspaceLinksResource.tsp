@@ -69,13 +69,16 @@ interface ApiManagementWorkspaceLinksResources {
 
 @@maxLength(ApiManagementWorkspaceLinksResource.name, 80);
 @@minLength(ApiManagementWorkspaceLinksResource.name, 1);
-@@doc(ApiManagementWorkspaceLinksResource.name,
+@@doc(
+  ApiManagementWorkspaceLinksResource.name,
   "Workspace identifier. Must be unique in the current API Management service instance."
 );
-@@encodedName(ApiManagementWorkspaceLinksResource.etag,
+@@encodedName(
+  ApiManagementWorkspaceLinksResource.etag,
   "application/json",
   "etag"
 );
-@@doc(ApiManagementWorkspaceLinksResource.properties,
+@@doc(
+  ApiManagementWorkspaceLinksResource.properties,
   "Properties of the API Management WorkspaceLinks."
 );

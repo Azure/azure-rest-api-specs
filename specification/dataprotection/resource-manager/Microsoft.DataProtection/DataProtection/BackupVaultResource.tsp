@@ -138,7 +138,10 @@ interface BackupVaultResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is BackupVaultResourceOps.DeleteWithoutOkAsync<
     BackupVaultResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -175,7 +178,9 @@ interface BackupVaultResources {
     BackupVaultResource,
     ValidateForBackupRequest,
     OperationJobExtendedInfo,
-    Response = OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
+    Response =
+      | OperationJobExtendedInfo
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>,
     OverrideErrorType = CloudError
   >;
 
@@ -188,7 +193,9 @@ interface BackupVaultResources {
     BackupVaultResource,
     void,
     NoContentResponse,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> | NoContentResponse,
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>
+      | NoContentResponse,
     OverrideErrorType = CloudError
   >;
 
@@ -239,18 +246,20 @@ interface BackupVaultOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is BackupVaultOperationResultOps.Read<
     BackupVaultResource,
-    Response = ArmResponse<BackupVaultResource> | {
-      @statusCode _: 202;
+    Response =
+      | ArmResponse<BackupVaultResource>
+      | {
+          @statusCode _: 202;
 
-      @header("Azure-AsyncOperation")
-      azureAsyncOperation?: string;
+          @header("Azure-AsyncOperation")
+          azureAsyncOperation?: string;
 
-      @header("Location")
-      location?: string;
+          @header("Location")
+          location?: string;
 
-      @header("Retry-After")
-      retryAfter?: int32;
-    },
+          @header("Retry-After")
+          retryAfter?: int32;
+        },
     OverrideErrorType = CloudError
   >;
 
@@ -284,12 +293,15 @@ interface DeletedBackupVaults {
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");
 @@doc(BackupVaultResource.properties, "BackupVaultResource properties");
-@@doc(BackupVaultResources.createOrUpdate::parameters.resource,
+@@doc(
+  BackupVaultResources.createOrUpdate::parameters.resource,
   "Request body for operation"
 );
-@@doc(BackupVaultResources.update::parameters.properties,
+@@doc(
+  BackupVaultResources.update::parameters.properties,
   "Request body for operation"
 );
-@@doc(BackupVaultResources.validateForBackup::parameters.body,
+@@doc(
+  BackupVaultResources.validateForBackup::parameters.body,
   "Request body for operation"
 );

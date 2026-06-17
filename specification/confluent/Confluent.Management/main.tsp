@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-liftr-base";
 import "@typespec/openapi";
 import "./models.tsp";
 import "./back-compatible.tsp";
@@ -19,7 +20,10 @@ import "./SCEnvironmentRecord.tsp";
 import "./SCClusterRecord.tsp";
 import "./ConnectorResource.tsp";
 import "./TopicRecord.tsp";
+import "./NetworkGatewayResource.tsp";
+import "./AccessPointResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -53,6 +57,12 @@ enum Versions {
    * The 2025-08-18-preview API version.
    */
   v2025_08_18_preview: "2025-08-18-preview",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations {
@@ -65,8 +75,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationListResult> | ResourceProviderDefaultErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationListResult>
+    | ResourceProviderDefaultErrorResponse;
 }

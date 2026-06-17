@@ -1,13 +1,14 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { kebabCase } from "change-case";
-import { marked, Tokens } from "marked";
+import { marked, type Tokens } from "marked";
 import { inspect } from "util";
 
-export enum MarkdownType {
-  Arm = "arm",
-  DataPlane = "data-plane",
-  Default = "default",
-}
+export const MarkdownType = {
+  Arm: "arm",
+  DataPlane: "data-plane",
+  Default: "default",
+} as const;
+export type MarkdownType = (typeof MarkdownType)[keyof typeof MarkdownType];
 
 /**
  *
@@ -105,8 +106,13 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
       (token as Tokens.Heading).depth >= 1 &&
       (token as Tokens.Heading).text.trim().toLowerCase() === "related arm guideline code"
     ) {
-      // The next token should be a list
-      const next = tokens[i + 1];
+      // The next non-space token should be a list (marked may emit "space"
+      // tokens between block elements).
+      let j = i + 1;
+      while (tokens[j] && tokens[j].type === "space") {
+        j++;
+      }
+      const next = tokens[j];
       if (next && next.type === "list") {
         for (const item of (next as Tokens.List).items) {
           // item.text may contain comma-separated codes

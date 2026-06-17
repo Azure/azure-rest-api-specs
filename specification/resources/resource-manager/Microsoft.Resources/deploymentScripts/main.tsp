@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./DeploymentScript.tsp";
 import "./ScriptLog.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
