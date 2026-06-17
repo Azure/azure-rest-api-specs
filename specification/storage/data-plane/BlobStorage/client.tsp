@@ -185,14 +185,14 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@clientOption(
   KeyInfo.start,
   "serialize_with",
-  "azure_storage_common::models::rfc3339_seconds_only::option::serialize",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
   "rust"
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   KeyInfo.expiry,
   "serialize_with",
-  "azure_storage_common::models::rfc3339_seconds_only::option::serialize",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
   "rust"
 );
 
