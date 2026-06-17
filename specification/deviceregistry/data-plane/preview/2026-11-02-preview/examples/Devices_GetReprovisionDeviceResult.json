@@ -1,0 +1,44 @@
+{
+  "operationId": "Devices_GetReprovisionDeviceResult",
+  "title": "Get the result of a device-reprovisioning operation",
+  "parameters": {
+    "endpoint": "https://eastus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "00000000-0000-0000-0000-000000000099",
+    "deviceName": "device-abc-123",
+    "operationId": "op-reprov-001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "op-reprov-001",
+        "status": "Succeeded",
+        "startTime": "2026-09-01T12:00:00Z",
+        "endTime": "2026-09-01T12:00:34Z",
+        "result": {
+          "device": {
+            "name": "device-abc-123",
+            "uuid": "00000000-0000-0000-0000-000000000002",
+            "etag": "\"new-device-etag-after-reprovision\"",
+            "externalDeviceId": "device-abc-123"
+          },
+          "capability": {
+            "name": "capability-hub-b-xyz",
+            "uuid": "00000000-0000-0000-0000-0000000000b2",
+            "etag": "\"new-capability-etag\""
+          },
+          "authProfile": {
+            "name": "auth-profile-new",
+            "uuid": "00000000-0000-0000-0000-0000000000a2",
+            "etag": "\"new-auth-profile-etag\"",
+            "credentialId": "00000000-0000-0000-0000-0000000000c2"
+          },
+          "endpoint": {
+            "name": "my-new-iothub-endpoint-key",
+            "address": "my-new-iothub.azure-devices.net"
+          }
+        }
+      }
+    }
+  }
+}

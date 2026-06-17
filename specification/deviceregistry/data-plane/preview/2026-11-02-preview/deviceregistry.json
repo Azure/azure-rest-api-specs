@@ -52,10 +52,10 @@
   },
   "tags": [
     {
-      "name": "Operations"
+      "name": "Devices"
     },
     {
-      "name": "Devices"
+      "name": "Operations"
     },
     {
       "name": "Device Capabilities"
@@ -96,6 +96,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -134,10 +137,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -165,8 +177,117 @@
             "$ref": "./examples/Namespaces_GenerateReport.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}:reprovision": {
+      "post": {
+        "operationId": "Devices_Reprovision",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Reprovision an existing device to a new IoT Hub within the same namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the device resource. Used to prevent concurrent modifications.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ProvisionDeviceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reprovision a device to a new IoT Hub": {
+            "$ref": "./examples/Devices_Reprovision.json"
+          }
         },
         "x-ms-long-running-operation": true
       }
@@ -960,7 +1081,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/OperationIdHeaderParameter"
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
           },
           {
             "name": "body",
@@ -1001,10 +1122,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1025,9 +1155,6 @@
           "Issue an operational certificate for an IoT device": {
             "$ref": "./examples/DeviceAuthenticationProfiles_IssueCert.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -1065,7 +1192,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/OperationIdHeaderParameter"
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
           }
         ],
         "responses": {
@@ -1098,10 +1225,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1123,15 +1259,12 @@
             "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCerts.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}": {
       "get": {
-        "operationId": "IssueCertResults_Get",
+        "operationId": "DeviceAuthenticationProfiles_GetIssueCertResult",
         "tags": [
           "Device Authentication Profiles"
         ],
@@ -1174,6 +1307,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/IssueCertResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1191,14 +1331,14 @@
         },
         "x-ms-examples": {
           "Get the result of a long-running :issueCert operation": {
-            "$ref": "./examples/IssueCertResults_Get.json"
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetIssueCertResult.json"
           }
         }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertsResults/{operationId}": {
       "get": {
-        "operationId": "RevokeCertsResults_Get",
+        "operationId": "DeviceAuthenticationProfiles_GetRevokeCertsResult",
         "tags": [
           "Device Authentication Profiles"
         ],
@@ -1241,6 +1381,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RevokeCertsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -1258,7 +1405,63 @@
         },
         "x-ms-examples": {
           "Get the result of a long-running :revokeCerts operation": {
-            "$ref": "./examples/RevokeCertsResults_Get.json"
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetRevokeCertsResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles:getAuthenticationProfileByUuid": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Look up a device authentication profile by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetAuthenticationProfileByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device authentication profile by its UUID": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid.json"
           }
         }
       }
@@ -1690,6 +1893,73 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/reprovisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetReprovisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-reprovisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-reprovisioning operation": {
+            "$ref": "./examples/Devices_GetReprovisionDeviceResult.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
       "get": {
         "operationId": "DeviceStates_List",
@@ -2101,7 +2371,7 @@
         "tags": [
           "Devices"
         ],
-        "description": "Provision devices in a namespace.",
+        "description": "Provision a device in a namespace.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2112,6 +2382,36 @@
             "description": "The unique identifier of the namespace.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls which operations ADR performs. Defaults to full when omitted.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "full",
+              "registryOnly"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisionMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Full",
+                  "value": "full",
+                  "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+                },
+                {
+                  "name": "RegistryOnly",
+                  "value": "registryOnly",
+                  "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
           },
           {
             "name": "body",
@@ -2152,10 +2452,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -2173,12 +2482,12 @@
           }
         },
         "x-ms-examples": {
-          "Provision devices in a namespace": {
+          "Provision a device from IoT Hub (registry-only mode, X509 Hub-uploaded CA)": {
+            "$ref": "./examples/Devices_Provision_IotHubSource.json"
+          },
+          "Provision a device in a namespace": {
             "$ref": "./examples/Devices_Provision.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2233,6 +2542,72 @@
         "x-ms-examples": {
           "Query devices in a namespace": {
             "$ref": "./examples/Devices_Query.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/generateReportResults/{operationId}": {
+      "get": {
+        "operationId": "Namespaces_GetGenerateReportResult",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get the result of a `:generateReport` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GenerateReportResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a generate-report operation (group best updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupBestUpdates.json"
+          },
+          "Get the result of a generate-report operation (group installable updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupInstallableUpdates.json"
+          },
+          "Get the result of a generate-report operation (namespace update compliance)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult.json"
           }
         }
       }
@@ -2335,55 +2710,6 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/operations": {
-      "get": {
-        "operationId": "Operations_List",
-        "tags": [
-          "Operations"
-        ],
-        "description": "List long running operations.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedOperation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List long-running operations in a namespace": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/namespaces/{namespaceUuid}/operations/{operationId}": {
       "get": {
         "operationId": "Operations_Get",
@@ -2405,7 +2731,7 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "The unique identifier of the operation.",
+            "description": "The unique ID of the operation.",
             "required": true,
             "type": "string"
           }
@@ -2415,6 +2741,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -2431,17 +2764,68 @@
           }
         },
         "x-ms-examples": {
-          "Get the result of a completed device provisioning operation": {
-            "$ref": "./examples/Operations_Get_DeviceProvision.json"
-          },
-          "Get the result of a completed group best-updates compliance report": {
-            "$ref": "./examples/Operations_Get_GroupBestUpdates.json"
-          },
-          "Get the result of a completed group installable-updates report": {
-            "$ref": "./examples/Operations_Get_GroupInstallableUpdates.json"
-          },
           "Get the status of a long-running operation": {
             "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/provisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetProvisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-provisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProvisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-provisioning operation": {
+            "$ref": "./examples/Devices_GetProvisionDeviceResult.json"
           }
         }
       }
@@ -2504,7 +2888,8 @@
       "enum": [
         "SymmetricKey",
         "CertificateAuthority",
-        "SelfSignedX509Certificate"
+        "SelfSignedX509Certificate",
+        "X509HubUploadedCertificateAuthority"
       ],
       "x-ms-enum": {
         "name": "AuthenticationType",
@@ -2524,6 +2909,11 @@
             "name": "SelfSignedX509Certificate",
             "value": "SelfSignedX509Certificate",
             "description": "Self-signed X.509 certificate authentication."
+          },
+          {
+            "name": "X509HubUploadedCertificateAuthority",
+            "value": "X509HubUploadedCertificateAuthority",
+            "description": "X.509 certificate authority uploaded to IoT Hub. No additional credential fields required."
           }
         ]
       }
@@ -3456,6 +3846,30 @@
         }
       }
     },
+    "DeviceTwinMode": {
+      "type": "string",
+      "description": "The mode controlling how the device twin is populated on the new IoT Hub during reprovisioning.",
+      "enum": [
+        "Migrate",
+        "Replace"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceTwinMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Copy tags and desired properties from the old hub to the new hub."
+          },
+          {
+            "name": "Replace",
+            "value": "Replace",
+            "description": "Set tags and desired properties on the new hub to the caller-supplied values. Use with empty objects to reset the twin."
+          }
+        ]
+      }
+    },
     "DeviceUpdateId": {
       "type": "object",
       "description": "A unique identifier for an update referenced by the device update agent.",
@@ -3561,6 +3975,48 @@
       "discriminator": "reportType",
       "required": [
         "reportType"
+      ]
+    },
+    "GenerateReportResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:generateReport` action on a namespace.\nThe typed `result` is the produced `Report` (polymorphic over `reportType`).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/Report",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
       ]
     },
     "GetDeviceAuthenticationProfileKeysResponse": {
@@ -4216,7 +4672,7 @@
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
@@ -4226,7 +4682,19 @@
         },
         "result": {
           "$ref": "#/definitions/CertificateIssuanceResult",
-          "description": "The result of the certificate issuance, available once `status` is `Succeeded`.",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
@@ -4242,6 +4710,10 @@
         "type": "string",
         "format": "byte"
       }
+    },
+    "LongRunningOperationIdResponseHeader": {
+      "type": "object",
+      "description": "Response `Operation-Id` header used by long-running action operations\n(POST `:verb` endpoints)."
     },
     "Namespace": {
       "type": "object",
@@ -4308,88 +4780,40 @@
     },
     "Operation": {
       "type": "object",
-      "description": "A long-running operation status resource scoped to a namespace.",
+      "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique identifier of the operation.",
-          "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/OperationKind",
-          "description": "The kind of operation tracked by this status resource.",
+          "description": "The unique ID of the operation.",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error details when the operation failed.",
+          "description": "Error object that describes the error when status is \"Failed\".",
           "readOnly": true
         },
-        "executedAt": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time at which the operation was started (UTC).",
           "readOnly": true
         },
-        "expiresAt": {
+        "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the operation result expires (UTC).",
-          "readOnly": true
-        },
-        "result": {
-          "type": "object",
-          "description": "The operation results when `status` is `Succeeded`. The shape of this\nobject depends on `kind`; for report kinds it conforms to the\ncorresponding `Report` subtype returned by the originating action.",
-          "additionalProperties": {},
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
       "required": [
         "id",
-        "kind",
         "status"
       ]
-    },
-    "OperationKind": {
-      "type": "string",
-      "description": "The kind of long-running operation tracked by an `Operation` resource.",
-      "enum": [
-        "ProvisionDevice",
-        "GenerateReport.NamespaceUpdateComplianceReport",
-        "GenerateReport.GroupBestUpdatesComplianceReport",
-        "GenerateReport.GroupInstallableUpdatesReport"
-      ],
-      "x-ms-enum": {
-        "name": "OperationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ProvisionDevice",
-            "value": "ProvisionDevice",
-            "description": "Device provisioning status report."
-          },
-          {
-            "name": "NamespaceUpdateComplianceReport",
-            "value": "GenerateReport.NamespaceUpdateComplianceReport",
-            "description": "Compliance report describing the updating state of devices in the namespace."
-          },
-          {
-            "name": "GroupBestUpdatesComplianceReport",
-            "value": "GenerateReport.GroupBestUpdatesComplianceReport",
-            "description": "Report describing the best available updates and update compliance for the devices within a group."
-          },
-          {
-            "name": "GroupInstallableUpdatesReport",
-            "value": "GenerateReport.GroupInstallableUpdatesReport",
-            "description": "Report listing the installable updates for the devices within a group."
-          }
-        ]
-      }
     },
     "PagedDeviceAttribute": {
       "type": "object",
@@ -4475,27 +4899,6 @@
         "value"
       ]
     },
-    "PagedOperation": {
-      "type": "object",
-      "description": "Paged collection of Operation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Operation items on this page",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "ProvisionDeviceRequest": {
       "type": "object",
       "description": "Request body for the provision device endpoint.",
@@ -4550,6 +4953,72 @@
         "authProfile",
         "endpoint"
       ]
+    },
+    "ProvisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:provision` action on devices in a namespace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ProvisionMode": {
+      "type": "string",
+      "description": "Controls which operations ADR performs during provisioning.",
+      "enum": [
+        "full",
+        "registryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "full",
+            "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+          },
+          {
+            "name": "RegistryOnly",
+            "value": "registryOnly",
+            "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+          }
+        ]
+      }
     },
     "ProvisionedAuthProfileRef": {
       "type": "object",
@@ -4668,10 +5137,6 @@
         "value"
       ]
     },
-    "Record<unknown>": {
-      "type": "object",
-      "additionalProperties": {}
-    },
     "Report": {
       "type": "object",
       "description": "Base report type",
@@ -4722,6 +5187,91 @@
         ]
       }
     },
+    "ReprovisionDeviceRequest": {
+      "type": "object",
+      "description": "Request body for the reprovision device endpoint.",
+      "properties": {
+        "targetEndpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The target IoT Hub endpoint (the new hub) to move the device to."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success."
+        },
+        "deviceTwin": {
+          "$ref": "#/definitions/ReprovisionDeviceTwin",
+          "description": "Optional device twin configuration controlling how the new hub's twin is populated. If omitted, the new hub starts with an empty twin."
+        },
+        "deviceUuid": {
+          "type": "string",
+          "description": "Optional device UUID guard. If supplied and does not match the device's stored UUID, the request is rejected."
+        }
+      },
+      "required": [
+        "targetEndpoint"
+      ]
+    },
+    "ReprovisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:reprovision` action on a device.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ReprovisionDeviceTwin": {
+      "type": "object",
+      "description": "Device twin configuration for reprovisioning with an explicit mode.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/DeviceTwinMode",
+          "description": "How to populate the device twin on the new IoT Hub."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceTwin"
+        }
+      ]
+    },
     "RevokeCertsResult": {
       "type": "object",
       "description": "Status monitor for the long-running `:revokeCerts` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
@@ -4733,12 +5283,24 @@
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
@@ -5242,6 +5804,26 @@
       "type": "object",
       "description": "Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape\nis accepted; the service stores and returns the bag verbatim without inspection. Customers\nwho want to advertise a schema for their bag may include their own field (e.g. `$schema`).",
       "additionalProperties": {}
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
     }
   },
   "parameters": {
@@ -5254,6 +5836,14 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetAuthenticationProfileByUuidRequest": {
+      "name": "authenticationProfileUuid",
+      "in": "query",
+      "description": "The unique identifier of the authentication profile.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "GetCapabilityByUuidRequest": {
       "name": "capabilityUuid",
@@ -5295,7 +5885,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "OperationIdHeaderParameter": {
+    "LongRunningOperationIdHeader": {
       "name": "Operation-Id",
       "in": "header",
       "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",

@@ -87,6 +87,9 @@
             "type": "string"
           },
           {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -125,10 +128,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -155,9 +167,6 @@
           "Generate a namespace update compliance report": {
             "$ref": "./examples/Namespaces_GenerateReport.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
         },
         "x-ms-long-running-operation": true
       }
@@ -501,7 +510,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/OperationIdHeaderParameter"
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
           }
         ],
         "responses": {
@@ -534,10 +543,19 @@
               ]
             },
             "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
               "Operation-Location": {
                 "type": "string",
                 "format": "uri",
                 "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -559,15 +577,12 @@
             "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCerts.json"
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "operation-location"
-        },
         "x-ms-long-running-operation": true
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertsResults/{operationId}": {
       "get": {
-        "operationId": "RevokeCertsResults_Get",
+        "operationId": "DeviceAuthenticationProfiles_GetRevokeCertsResult",
         "tags": [
           "Device Authentication Profiles"
         ],
@@ -610,6 +625,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/RevokeCertsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -627,7 +649,7 @@
         },
         "x-ms-examples": {
           "Get the result of a long-running :revokeCerts operation": {
-            "$ref": "./examples/RevokeCertsResults_Get.json"
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetRevokeCertsResult.json"
           }
         }
       }
@@ -748,13 +770,13 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/operations": {
+    "/namespaces/{namespaceUuid}/generateReportResults/{operationId}": {
       "get": {
-        "operationId": "Operations_List",
+        "operationId": "Namespaces_GetGenerateReportResult",
         "tags": [
-          "Operations"
+          "Namespaces"
         ],
-        "description": "List long running operations.",
+        "description": "Get the result of a `:generateReport` operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -765,13 +787,27 @@
             "description": "The unique identifier of the namespace.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedOperation"
+              "$ref": "#/definitions/GenerateReportResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -788,12 +824,15 @@
           }
         },
         "x-ms-examples": {
-          "List long-running operations in a namespace": {
-            "$ref": "./examples/Operations_List.json"
+          "Get the result of a generate-report operation (group best updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupBestUpdates.json"
+          },
+          "Get the result of a generate-report operation (group installable updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupInstallableUpdates.json"
+          },
+          "Get the result of a generate-report operation (namespace update compliance)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -818,7 +857,7 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "The unique identifier of the operation.",
+            "description": "The unique ID of the operation.",
             "required": true,
             "type": "string"
           }
@@ -828,6 +867,13 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -844,12 +890,6 @@
           }
         },
         "x-ms-examples": {
-          "Get the result of a completed group best-updates compliance report": {
-            "$ref": "./examples/Operations_Get_GroupBestUpdates.json"
-          },
-          "Get the result of a completed group installable-updates report": {
-            "$ref": "./examples/Operations_Get_GroupInstallableUpdates.json"
-          },
           "Get the status of a long-running operation": {
             "$ref": "./examples/Operations_Get.json"
           }
@@ -1775,6 +1815,48 @@
         "reportType"
       ]
     },
+    "GenerateReportResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:generateReport` action on a namespace.\nThe typed `result` is the produced `Report` (polymorphic over `reportType`).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/Report",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
     "GetCapabilityByUuidRequest": {
       "type": "object",
       "description": "Request for looking up a capability by its UUID.",
@@ -2422,7 +2504,7 @@
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
@@ -2432,7 +2514,19 @@
         },
         "result": {
           "$ref": "#/definitions/CertificateIssuanceResult",
-          "description": "The result of the certificate issuance, available once `status` is `Succeeded`.",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
@@ -2448,6 +2542,10 @@
         "type": "string",
         "format": "byte"
       }
+    },
+    "LongRunningOperationIdResponseHeader": {
+      "type": "object",
+      "description": "Response `Operation-Id` header used by long-running action operations\n(POST `:verb` endpoints)."
     },
     "Namespace": {
       "type": "object",
@@ -2514,88 +2612,40 @@
     },
     "Operation": {
       "type": "object",
-      "description": "A long-running operation status resource scoped to a namespace.",
+      "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "The unique identifier of the operation.",
-          "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/OperationKind",
-          "description": "The kind of operation tracked by this status resource.",
+          "description": "The unique ID of the operation.",
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The current status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
-          "description": "Error details when the operation failed.",
+          "description": "Error object that describes the error when status is \"Failed\".",
           "readOnly": true
         },
-        "executedAt": {
+        "startTime": {
           "type": "string",
           "format": "date-time",
           "description": "The time at which the operation was started (UTC).",
           "readOnly": true
         },
-        "expiresAt": {
+        "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time at which the operation result expires (UTC).",
-          "readOnly": true
-        },
-        "result": {
-          "type": "object",
-          "description": "The operation results when `status` is `Succeeded`. The shape of this\nobject depends on `kind`; for report kinds it conforms to the\ncorresponding `Report` subtype returned by the originating action.",
-          "additionalProperties": {},
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
       "required": [
         "id",
-        "kind",
         "status"
       ]
-    },
-    "OperationKind": {
-      "type": "string",
-      "description": "The kind of long-running operation tracked by an `Operation` resource.",
-      "enum": [
-        "ProvisionDevice",
-        "GenerateReport.NamespaceUpdateComplianceReport",
-        "GenerateReport.GroupBestUpdatesComplianceReport",
-        "GenerateReport.GroupInstallableUpdatesReport"
-      ],
-      "x-ms-enum": {
-        "name": "OperationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ProvisionDevice",
-            "value": "ProvisionDevice",
-            "description": "Device provisioning status report."
-          },
-          {
-            "name": "NamespaceUpdateComplianceReport",
-            "value": "GenerateReport.NamespaceUpdateComplianceReport",
-            "description": "Compliance report describing the updating state of devices in the namespace."
-          },
-          {
-            "name": "GroupBestUpdatesComplianceReport",
-            "value": "GenerateReport.GroupBestUpdatesComplianceReport",
-            "description": "Report describing the best available updates and update compliance for the devices within a group."
-          },
-          {
-            "name": "GroupInstallableUpdatesReport",
-            "value": "GenerateReport.GroupInstallableUpdatesReport",
-            "description": "Report listing the installable updates for the devices within a group."
-          }
-        ]
-      }
     },
     "PagedDeviceAttribute": {
       "type": "object",
@@ -2648,27 +2698,6 @@
           "description": "The DeviceCapability items on this page",
           "items": {
             "$ref": "#/definitions/DeviceCapability"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedOperation": {
-      "type": "object",
-      "description": "Paged collection of Operation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Operation items on this page",
-          "items": {
-            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
@@ -2751,10 +2780,6 @@
         "value"
       ]
     },
-    "Record<unknown>": {
-      "type": "object",
-      "additionalProperties": {}
-    },
     "Report": {
       "type": "object",
       "description": "Base report type",
@@ -2816,12 +2841,24 @@
         },
         "status": {
           "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-          "description": "The status of the operation.",
+          "description": "The status of the operation",
           "readOnly": true
         },
         "error": {
           "$ref": "#/definitions/Azure.Core.Foundations.Error",
           "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
           "readOnly": true
         }
       },
@@ -3172,7 +3209,7 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "OperationIdHeaderParameter": {
+    "LongRunningOperationIdHeader": {
       "name": "Operation-Id",
       "in": "header",
       "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",

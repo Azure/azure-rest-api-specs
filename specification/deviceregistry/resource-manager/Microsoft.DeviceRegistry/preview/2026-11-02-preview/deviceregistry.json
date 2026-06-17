@@ -5472,6 +5472,9 @@
           }
         },
         "x-ms-examples": {
+          "Get_Job_RecoveryUpdate": {
+            "$ref": "./examples/Get_Job_RecoveryUpdate.json"
+          },
           "Get_Job_Update": {
             "$ref": "./examples/Get_Job_Update.json"
           }
@@ -5555,6 +5558,9 @@
           }
         },
         "x-ms-examples": {
+          "CreateOrReplace_Job_RecoveryUpdate": {
+            "$ref": "./examples/CreateOrReplace_Job_RecoveryUpdate.json"
+          },
           "CreateOrReplace_Job_Update": {
             "$ref": "./examples/CreateOrReplace_Job_Update.json"
           }
@@ -9621,14 +9627,6 @@
             "create"
           ]
         },
-        "target": {
-          "$ref": "#/definitions/JobTarget",
-          "description": "The target of the job. Set at create time; immutable thereafter.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource.",
@@ -9637,8 +9635,7 @@
       },
       "discriminator": "jobType",
       "required": [
-        "jobType",
-        "target"
+        "jobType"
       ]
     },
     "JobRun": {
@@ -9676,12 +9673,12 @@
           {
             "name": "CanceledByAnotherJob",
             "value": "CanceledByAnotherJob",
-            "description": "The run was canceled because another Update job targeting the same group was scheduled and superseded it."
+            "description": "The run was canceled because another job superseded it. For an Update job this happens when another Update job targeting the same group is scheduled; for a RecoveryUpdate job this happens when another RecoveryUpdate job for the same compatible devices is scheduled."
           },
           {
             "name": "CanceledByGroupDelete",
             "value": "CanceledByGroupDelete",
-            "description": "The run was canceled because the target group was deleted."
+            "description": "The run was canceled because the target group was deleted. This reason does not apply to RecoveryUpdate jobs, which do not target a group."
           }
         ]
       }
@@ -9945,7 +9942,8 @@
       "type": "string",
       "description": "The type of the job.",
       "enum": [
-        "Update"
+        "Update",
+        "RecoveryUpdate"
       ],
       "x-ms-enum": {
         "name": "JobTypeEnum",
@@ -9954,7 +9952,12 @@
           {
             "name": "Update",
             "value": "Update",
-            "description": "An update job. Targets devices for ADU deployments."
+            "description": "An update job. Targets a group of registered devices for ADU deployments."
+          },
+          {
+            "name": "RecoveryUpdate",
+            "value": "RecoveryUpdate",
+            "description": "A recovery update job. Targets all compatible devices for ADU deployments -- including devices not yet registered in ADR -- served exclusively via the ADU recovery device endpoint."
           }
         ]
       }
@@ -13091,7 +13094,7 @@
       },
       "readOnly": true
     },
-    "RootCertificateAuthorityProperties": {
+"RootCertificateAuthorityProperties": {
       "type": "object",
       "description": "Properties for a self-signed, service-managed root Certificate Authority.",
       "allOf": [
@@ -13109,7 +13112,41 @@
           "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate"
         }
       ],
-      "x-ms-discriminator-value": "Root"
+      "x-ms-discriminator-value": "Root""RecoveryUpdateJobDefinition": {
+      "type": "object",
+      "description": "Recovery-update-job definition. Used when jobType is RecoveryUpdate.",
+      "properties": {
+        "update": {
+          "$ref": "#/definitions/JobUpdateDefinition",
+          "description": "The update definition for the job."
+        }
+      },
+      "required": [
+        "update"
+      ]
+    },
+    "RecoveryUpdateJobProperties": {
+      "type": "object",
+      "description": "Job properties for a recovery update job (Day0).",
+      "properties": {
+        "definition": {
+          "$ref": "#/definitions/RecoveryUpdateJobDefinition",
+          "description": "The update definition for the recovery job. Set at create time; immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "definition"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "RecoveryUpdate"
     },
     "Schema": {
       "type": "object",
@@ -13674,6 +13711,14 @@
       "type": "object",
       "description": "Job properties for an Update job.",
       "properties": {
+        "target": {
+          "$ref": "#/definitions/JobTarget",
+          "description": "The target of the job. Set at create time; immutable thereafter.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "definition": {
           "$ref": "#/definitions/UpdateJobDefinition",
           "description": "The update definition for the job. Set at create time; immutable thereafter.",
@@ -13684,6 +13729,7 @@
         }
       },
       "required": [
+        "target",
         "definition"
       ],
       "allOf": [
@@ -13877,3 +13923,4 @@
   },
   "parameters": {}
 }
+
