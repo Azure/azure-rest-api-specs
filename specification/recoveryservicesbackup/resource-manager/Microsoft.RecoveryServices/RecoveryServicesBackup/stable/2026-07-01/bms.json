@@ -2311,6 +2311,12 @@
           "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_IdentityBasedRestoreDetails.json"
           },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails and Data Disk Encryption Settings": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_DataDiskEncryption_SingleEntry.json"
+          },
+          "Restore to New Azure IaasVm with IaasVMRestoreRequest with identityBasedRestoreDetails and per disk encryption settings": {
+            "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreRequest_DataDiskEncryption.json"
+          },
           "Restore to New Azure IaasVm with IaasVMRestoreWithRehydrationRequest": {
             "$ref": "./examples/AzureIaasVm/TriggerRestore_ALR_IaasVMRestoreWithRehydrationRequest.json"
           },
@@ -8955,6 +8961,42 @@
         }
       }
     },
+    "DataDiskDetails": {
+      "type": "object",
+      "description": "Data disk details",
+      "properties": {
+        "encryptedDataDisks": {
+          "type": "array",
+          "description": "List of data disks in the VM which are encrypted at the time of backup. This will be used to provide Disk Encryption Set Id for each data disk.",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DataDiskEncryptionSettings": {
+      "type": "object",
+      "description": "Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk.",
+      "properties": {
+        "perDiskEncryptionSetIds": {
+          "type": "array",
+          "description": "Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.",
+          "items": {
+            "$ref": "#/definitions/PerDiskEncryptionSetId"
+          },
+          "x-ms-identifiers": []
+        },
+        "dataDiskEncryptionSetId": {
+          "type": "string",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored."
+        },
+        "dataDiskEncryptionIdentity": {
+          "type": "string",
+          "description": "Managed Identity resource Id used to encrypt the data disk during restore."
+        }
+      }
+    },
     "DataMoveLevel": {
       "type": "string",
       "description": "DataMove Level",
@@ -9130,6 +9172,21 @@
             "value": "Disabled"
           }
         ]
+      }
+    },
+    "DiskDetails": {
+      "type": "object",
+      "description": "Disk details",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "LUN of the disk"
+        },
+        "diskName": {
+          "type": "string",
+          "description": "Disk name of the disk"
+        }
       }
     },
     "DiskExclusionProperties": {
@@ -10220,6 +10277,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Extended location of the VM recovery point,\nshould be null if VM is in public cloud"
+        },
+        "dataDiskMetadata": {
+          "$ref": "#/definitions/DataDiskDetails",
+          "description": "Data disk metadata for the VM recovery point"
         }
       },
       "allOf": [
@@ -11795,6 +11856,21 @@
             "value": "Overwrite"
           }
         ]
+      }
+    },
+    "PerDiskEncryptionSetId": {
+      "type": "object",
+      "description": "Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.",
+      "properties": {
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "LUN for Secured VM Data Disk"
+        },
+        "diskEncryptionSetId": {
+          "type": "string",
+          "description": "Disk Encryption Set Id for Secured VM Data Disk"
+        }
       }
     },
     "PointInTimeRange": {
@@ -13853,6 +13929,10 @@
         "securedVMOsDiskEncryptionSetId": {
           "type": "string",
           "description": "Gets or Sets Disk Encryption Set Id for Secured VM OS Disk"
+        },
+        "dataDiskEncryptionSettings": {
+          "$ref": "#/definitions/DataDiskEncryptionSettings",
+          "description": "Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk."
         }
       }
     },

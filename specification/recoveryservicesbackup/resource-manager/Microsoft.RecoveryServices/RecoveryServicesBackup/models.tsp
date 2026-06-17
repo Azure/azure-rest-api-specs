@@ -6045,8 +6045,41 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
   objectType: "IaasVMRecoveryPoint";
+
+  /**
+   * Data disk metadata for the VM recovery point
+   */
+  @added(Versions.v2026_07_01)
+  dataDiskMetadata?: DataDiskDetails;
 }
 
+/**
+ * Data disk details
+ */
+@added(Versions.v2026_07_01)
+model DataDiskDetails {
+  /**
+   * List of data disks in the VM which are encrypted at the time of backup. This will be used to provide Disk Encryption Set Id for each data disk.
+   */
+  @identifiers(#[])
+  encryptedDataDisks?: DiskDetails[];
+}
+
+/**
+ * Disk details
+ */
+@added(Versions.v2026_07_01)
+model DiskDetails{
+  /**
+   * LUN of the disk
+   */
+  lun?: int32;
+
+  /**
+   * Disk name of the disk
+   */
+  diskName?: string;
+}
 /**
  * BEK is bitlocker key.
  * KEK is encryption key for BEK
@@ -6145,6 +6178,52 @@ model SecuredVMDetails {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   securedVMOsDiskEncryptionSetId?: string;
+
+  /**
+   * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk. 
+   */
+  @added(Versions.v2026_07_01)
+  dataDiskEncryptionSettings?: DataDiskEncryptionSettings;
+}
+
+/**
+ * Data disk encryption settings for Secured VM. This will be used to provide Disk Encryption Set Id for each data disk. 
+ */
+@added(Versions.v2026_07_01)
+model DataDiskEncryptionSettings {
+
+  /**
+   * Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.
+   */
+  @identifiers(#[])
+  perDiskEncryptionSetIds?: PerDiskEncryptionSetId[];
+
+  /**
+   * Disk Encryption Set Id for Secured VM Data Disk. This will be used for all data disks if perDiskEncryptionSetIds is not provided. If perDiskEncryptionSetIds is provided, this will be ignored.
+   */
+  dataDiskEncryptionSetId?: string;
+
+  /**
+   * Managed Identity resource Id used to encrypt the data disk during restore.
+   */
+  dataDiskEncryptionIdentity?: string;
+}
+
+/**
+ * Per Disk Encryption Set Ids for Secured VM Data Disks. This will be used to provide Disk Encryption Set Id for each data disk.
+ */
+@added(Versions.v2026_07_01)
+model PerDiskEncryptionSetId {
+
+  /**
+   *  LUN for Secured VM Data Disk
+   */
+  lun?: int32;
+
+  /**
+   *  Disk Encryption Set Id for Secured VM Data Disk
+   */
+  diskEncryptionSetId?: string;
 }
 
 /**
