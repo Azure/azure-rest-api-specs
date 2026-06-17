@@ -29,18 +29,6 @@ model `search-management-request-options` {
   clientRequestId?: string;
 }
 
-/** Network security perimeter configuration */
-model AccessRulePropertiesSubscriptionsItem {
-  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
-  id?: armResourceIdentifier;
-}
-
-/** Subscriptions for inbound rules */
-model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
-  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
-  id?: armResourceIdentifier;
-}
-
 /**
  * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
  */
@@ -967,6 +955,11 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "go,csharp,javascript"
 );
 @@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
+/** Network security perimeter configuration */
+model AccessRulePropertiesSubscriptionsItem {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
@@ -1224,6 +1217,10 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "csharp"
 );
 /** Subscriptions for inbound rules */
+model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: Azure.Core.armResourceIdentifier;
+}
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   SearchServiceNetworkSecurityPerimeterInboundRuleSubscription[],
