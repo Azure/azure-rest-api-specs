@@ -12,8 +12,8 @@ using Azure.Core;
 );
 
 // @@usage(ChildJobProperties, Usage.input | Usage.output, "go");
-@@usage(JobProperties, Usage.input | Usage.output, "go");
-@@usage(JobResourceProperties, Usage.input | Usage.output, "go");
+// @@usage(JobProperties, Usage.input | Usage.output, "go");
+// @@usage(JobResourceProperties, Usage.input | Usage.output, "go");
 
 @@clientName(DrillResource, "DrillTarget", "csharp");
 @@clientName(DrillRunResource, "DrillRunTarget", "csharp");
