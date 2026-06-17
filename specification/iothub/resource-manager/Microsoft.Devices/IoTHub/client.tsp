@@ -189,6 +189,11 @@ using Http;
 @@clientName(EventHubConsumerGroupName.name, "Name", "csharp");
 @@alternateType(EventHubConsumerGroupInfo.etag, eTag, "csharp");
 @@alternateType(IotHubDescription.etag, eTag, "csharp");
+@@alternateType(
+  IotHubDescription.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 @@clientName(IotHubProperties.disableDeviceSAS, "DisableDeviceSas", "csharp");
 @@clientName(IotHubProperties.disableModuleSAS, "DisableModuleSas", "csharp");
 @@clientName(IotHubProperties.allowedFqdnList, "AllowedFqdns", "csharp");
