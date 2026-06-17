@@ -4,6 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

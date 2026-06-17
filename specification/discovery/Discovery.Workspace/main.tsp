@@ -12,6 +12,7 @@ import "./_conversation_message_logs.tsp";
 import "./_tool.tsp";
 import "./_task.tsp";
 import "./_discovery_agent.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
