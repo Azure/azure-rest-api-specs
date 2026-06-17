@@ -18,6 +18,7 @@ namespace Microsoft.Cdn;
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_02_01_preview)
 @parentResource(WebAgent)
 model KnowledgeSource
   is Azure.ResourceManager.ProxyResource<KnowledgeSourceProperties> {
@@ -34,6 +35,7 @@ model KnowledgeSource
  */
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_02_01_preview)
 model KnowledgeSourceAcceptedBody {
   /**
    * Defines a KnowledgeSource response body
@@ -41,11 +43,13 @@ model KnowledgeSourceAcceptedBody {
   @bodyRoot
   @added(Versions.v2025_09_01_preview)
   @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_02_01_preview)
   _: KnowledgeSource;
 }
 
 @added(Versions.v2025_09_01_preview)
 @removed(Versions.v2025_12_01)
+@added(Versions.v2026_02_01_preview)
 @armResourceOperations
 interface KnowledgeSources {
   /**
@@ -104,8 +108,19 @@ interface KnowledgeSources {
   /**
    * Remove the cache of a knowledge source.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @removed(Versions.v2025_12_01)
   purge is ArmResourceActionAsync<
+    KnowledgeSource,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader
+  >;
+
+  /**
+   * Rebuilds the cache of a knowledge source.
+   */
+  @renamedFrom(Versions.v2026_02_01_preview, "purge")
+  rebuild is ArmResourceActionAsync<
     KnowledgeSource,
     void,
     OkResponse,

@@ -6,7 +6,6 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./edgeactionsbasemodels.tsp";
-import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

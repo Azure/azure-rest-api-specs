@@ -3289,7 +3289,7 @@
           }
         },
         "x-ms-examples": {
-          "AFDCustomDomains_Delete": {
+          "AFDCustomDomains_RefreshValidationToken": {
             "$ref": "./examples/AFDCustomDomains_RefreshValidationToken.json"
           }
         },
@@ -6937,7 +6937,7 @@
           }
         },
         "x-ms-examples": {
-          "Profiles_CdnMigrationCommit": {
+          "Profiles_MigrationAbort": {
             "$ref": "./examples/Profiles_MigrationAbort.json"
           }
         },
@@ -10057,7 +10057,7 @@
         "tags": [
           "KnowledgeSources"
         ],
-        "description": "Remove the cache of a knowledge source.",
+        "description": "Rebuilds the cache of a knowledge source.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -15374,7 +15374,7 @@
         },
         "sourceType": {
           "$ref": "#/definitions/KnowledgeSourceType",
-          "description": "Format or origin of the knowledge source."
+          "description": "The source type of the knowledge source."
         },
         "url": {
           "type": "string",
@@ -15470,7 +15470,8 @@
         "values": [
           {
             "name": "SchemaOrgMarkup",
-            "value": "SchemaOrgMarkup"
+            "value": "SchemaOrgMarkup",
+            "description": "Schema.org markup source type"
           },
           {
             "name": "RssFeeds",
@@ -15478,7 +15479,8 @@
           },
           {
             "name": "Sitemap",
-            "value": "Sitemap"
+            "value": "Sitemap",
+            "description": "Sitemap source type"
           }
         ]
       }
@@ -15498,19 +15500,23 @@
         "values": [
           {
             "name": "EverySixHours",
-            "value": "EverySixHours"
+            "value": "EverySixHours",
+            "description": "Update the knowledge source every six hours."
           },
           {
             "name": "Daily",
-            "value": "Daily"
+            "value": "Daily",
+            "description": "Update the knowledge source every day."
           },
           {
             "name": "Weekly",
-            "value": "Weekly"
+            "value": "Weekly",
+            "description": "Update the knowledge source every week."
           },
           {
             "name": "Monthly",
-            "value": "Monthly"
+            "value": "Monthly",
+            "description": "Update the knowledge source every month."
           }
         ]
       }

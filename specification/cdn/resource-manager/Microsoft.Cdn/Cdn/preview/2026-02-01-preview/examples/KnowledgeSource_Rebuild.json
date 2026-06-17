@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "knowledgeSourceName": "myKnowledgeSource1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "webAgentName": "myWebAgent1"
+  },
+  "responses": {
+    "200": {
+      "description": "OK. The knowledge source cache has been rebuilt successfully."
+    },
+    "202": {
+      "description": "Accepted. The knowledge source cache rebuild operation has been accepted and will be completed asynchronously.",
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/RG/providers/Microsoft.Cdn/operationResults/operationId?api-version=2026-02-01-preview"
+      }
+    }
+  },
+  "operationId": "KnowledgeSources_Rebuild",
+  "title": "Rebuild Knowledge Source Cache"
+}
