@@ -243,6 +243,11 @@ directive:
       - BodyTopLevelProperties
     reason: Placement (introduced in version 2025-04-01) is an ARM level property
   - where:
+      - $.definitions.InterconnectBlock
+    suppress:
+      - BodyTopLevelProperties
+    reason: Placement is an ARM level property
+  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
@@ -404,6 +409,10 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].get.parameters
   - code: ParametersInPointGet
+    reason: Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].get.parameters
+  - code: ParametersInPointGet
     reason: Existing GET operation uses query parameters for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}"].get.parameters
@@ -490,6 +499,10 @@ suppressions:
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].delete
+  - code: DeleteResponseCodes
+    reason: Consistent with established Compute RP delete response patterns for SDK and behavioral consistency.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].delete
   - code: DeleteResponseCodes
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
@@ -869,6 +882,18 @@ input-file:
   - stable/2025-03-03/GalleryRP.json
 ```
 
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-03-03/GalleryRP.json
+```
+
 ### Tag: package-2026-03-02-only
 
 These settings apply only when `--tag=package-2026-03-02-only` is specified on the command line.
@@ -876,6 +901,15 @@ These settings apply only when `--tag=package-2026-03-02-only` is specified on t
 ```yaml $(tag) == 'package-2026-03-02-only'
 input-file:
   - stable/2026-03-02/DiskRP.json
+```
+
+### Tag: package-2026-03-01-only
+
+These settings apply only when `--tag=package-2026-03-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-only'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-11-01

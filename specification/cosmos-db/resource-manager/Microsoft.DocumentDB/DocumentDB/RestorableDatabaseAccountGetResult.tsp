@@ -112,19 +112,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableSqlResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableSqlResourcesListParameters,
     Error = CloudError
   >;
 
@@ -153,25 +141,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableMongodbCollectionsListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The resource ID of the MongoDB database.
-       */
-      @query("restorableMongodbDatabaseRid")
-      restorableMongodbDatabaseRid?: string;
-
-      /**
-       * Restorable MongoDB collections event feed start time.
-       */
-      @query("startTime")
-      startTime?: string;
-
-      /**
-       * Restorable MongoDB collections event feed end time.
-       */
-      @query("endTime")
-      endTime?: string;
-    },
+    Parameters = RestorableMongodbCollectionsListParameters,
     Error = CloudError
   >;
 
@@ -186,19 +156,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableMongodbResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableMongodbResourcesListParameters,
     Error = CloudError
   >;
 
@@ -260,19 +218,7 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableGremlinResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableGremlinResourcesListParameters,
     Error = CloudError
   >;
 
@@ -314,22 +260,86 @@ interface RestorableDatabaseAccountGetResults {
     void,
     ArmResponse<RestorableTableResourcesListResult>,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Parameters = {
-      /**
-       * The location where the restorable resources are located.
-       */
-      @query("restoreLocation")
-      restoreLocation?: string;
-
-      /**
-       * The timestamp when the restorable resources existed.
-       */
-      @query("restoreTimestampInUtc")
-      restoreTimestampInUtc?: string;
-    },
+    Parameters = RestorableTableResourcesListParameters,
     Error = CloudError
   >;
 }
+
+alias RestorableMongodbCollectionsListParameters = {
+  /**
+   * The resource ID of the MongoDB database.
+   */
+  @query("restorableMongodbDatabaseRid")
+  restorableMongodbDatabaseRid?: string;
+
+  /**
+   * Restorable MongoDB collections event feed start time.
+   */
+  @query("startTime")
+  startTime?: string;
+
+  /**
+   * Restorable MongoDB collections event feed end time.
+   */
+  @query("endTime")
+  endTime?: string;
+};
+
+alias RestorableMongodbResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
+
+alias RestorableSqlResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
+
+alias RestorableGremlinResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
+
+alias RestorableTableResourcesListParameters = {
+  /**
+   * The location where the restorable resources are located.
+   */
+  @query("restoreLocation")
+  restoreLocation?: string;
+
+  /**
+   * The timestamp when the restorable resources existed.
+   */
+  @query("restoreTimestampInUtc")
+  restoreTimestampInUtc?: string;
+};
 
 @@doc(
   RestorableDatabaseAccountGetResult.name,

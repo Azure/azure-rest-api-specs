@@ -81,3 +81,9 @@ namespace ClientCustomizations;
   "listSubscriptionsUnderManagementGroup",
   "javascript"
 );
+@@alternateType(EntityInfo.properties, EntityInfoProperties, "javascript");
+@@alternateType(
+  DescendantInfo.properties,
+  DescendantInfoProperties,
+  "javascript"
+);
