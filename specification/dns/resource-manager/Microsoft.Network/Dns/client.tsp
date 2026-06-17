@@ -69,7 +69,6 @@ using Microsoft.Network;
 @@clientName(ZoneType, "DnsZoneType", "csharp");
 @@clientName(SigningKey, "DnsSigningKey", "csharp");
 @@clientName(RecordSet, "DnsRecord", "csharp");
-@@clientName(ZoneUpdate, "ZoneUpdateOptions", "csharp");
 @@clientName(NsRecord.nsdname, "DnsNSDomainName", "csharp");
 @@clientName(PtrRecord.ptrdname, "DnsPtrDomainName", "csharp");
 @@clientName(RecordSetProperties.TTL, "TtlInSeconds", "csharp");
