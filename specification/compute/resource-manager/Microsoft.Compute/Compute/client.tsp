@@ -172,6 +172,21 @@ namespace ComputeCombine;
   "csharp"
 );
 @@clientName(RestorePointProperties.excludeDisks, "ExcludedDisks", "csharp");
+@@clientName(
+  RestartRecoveryPolicy.enabled,
+  "IsRestartRecoveryPolicyEnabled",
+  "csharp"
+);
+@@clientName(
+  StartRecoveryPolicy.enabled,
+  "IsStartRecoveryPolicyEnabled",
+  "csharp"
+);
+@@clientName(
+  ReimageRecoveryPolicy.enabled,
+  "IsReimageRecoveryPolicyEnabled",
+  "csharp"
+);
 
 // Replace Compute's local ExtendedLocation / ExtendedLocationType with ARM common types
 @@alternateType(
