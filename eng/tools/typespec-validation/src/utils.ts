@@ -16,9 +16,11 @@ const localBinCache = new Map<string, string>();
 /**
  * Finds a local binary by walking up from a given directory to find node_modules/.bin/<name>.
  * Returns the absolute path to the binary file (symlink or shim JS file).
+ * Results are cached by binary name and search directory to avoid redundant filesystem walks.
  */
 async function findLocalBin(name: string, searchDir: string): Promise<string> {
-  const cached = localBinCache.get(name);
+  const cacheKey = `${name}:${searchDir}`;
+  const cached = localBinCache.get(cacheKey);
   if (cached !== undefined) return cached;
 
   let dir = searchDir;
@@ -26,7 +28,7 @@ async function findLocalBin(name: string, searchDir: string): Promise<string> {
     const candidate = join(dir, "node_modules", ".bin", name);
     try {
       await access(candidate);
-      localBinCache.set(name, candidate);
+      localBinCache.set(cacheKey, candidate);
       return candidate;
     } catch {
       // Not found at this level, walk up

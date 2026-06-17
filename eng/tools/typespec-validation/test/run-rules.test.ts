@@ -147,7 +147,7 @@ describe("runRulesParallel", function () {
     expect(result.success).toBe(false);
     expect(result.executed).toEqual(["Rule1", "Rule2"]);
     expect(result.failed).toEqual(["Rule1"]);
-    // Both rules were executed (unlike runRules which stops on first failure)
+    // All rules execute concurrently regardless of failures (unlike runRules which stops on first failure)
     expect(rule2.executeFn).toHaveBeenCalledOnce();
   });
 

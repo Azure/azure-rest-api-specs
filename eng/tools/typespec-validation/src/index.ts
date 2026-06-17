@@ -1,6 +1,7 @@
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Suppression } from "suppressions";
+import { type RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
@@ -34,36 +35,40 @@ export async function runRulesParallel(
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
 
+  type RuleOutcome =
+    | { rule: Rule; suppressed: true; reason: string }
+    | { rule: Rule; suppressed: false; ruleResult: RuleResult };
+
   // Execute all rules concurrently
-  const ruleOutcomes = await Promise.all(
-    rules.map(async (rule) => {
+  const ruleOutcomes: RuleOutcome[] = await Promise.all(
+    rules.map(async (rule): Promise<RuleOutcome> => {
       if (rule.suppressable) {
         const ruleSuppressions = suppressions.filter(
           (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
         );
         if (ruleSuppressions.length > 0) {
-          return { rule, suppressed: true, reason: ruleSuppressions[0].reason, ruleResult: null };
+          return { rule, suppressed: true, reason: ruleSuppressions[0].reason };
         }
       }
       const ruleResult = await rule.execute(folder);
-      return { rule, suppressed: false as const, reason: undefined, ruleResult };
+      return { rule, suppressed: false, ruleResult };
     }),
   );
 
   // Report results in deterministic order (original rule order)
-  for (const { rule, suppressed, reason, ruleResult } of ruleOutcomes) {
-    console.log("\nExecuting rule: " + rule.name);
-    if (suppressed) {
-      console.log(`  Suppressed: ${reason}`);
-      result.suppressed.push(rule.name);
+  for (const outcome of ruleOutcomes) {
+    console.log("\nExecuting rule: " + outcome.rule.name);
+    if (outcome.suppressed) {
+      console.log(`  Suppressed: ${outcome.reason}`);
+      result.suppressed.push(outcome.rule.name);
     } else {
-      result.executed.push(rule.name);
-      if (ruleResult!.stdOutput) console.log(ruleResult!.stdOutput);
-      if (!ruleResult!.success) {
+      result.executed.push(outcome.rule.name);
+      if (outcome.ruleResult.stdOutput) console.log(outcome.ruleResult.stdOutput);
+      if (!outcome.ruleResult.success) {
         result.success = false;
-        result.failed.push(rule.name);
-        console.log("Rule " + rule.name + " failed");
-        if (ruleResult!.errorOutput) console.log(ruleResult!.errorOutput);
+        result.failed.push(outcome.rule.name);
+        console.log("Rule " + outcome.rule.name + " failed");
+        if (outcome.ruleResult.errorOutput) console.log(outcome.ruleResult.errorOutput);
       }
     }
   }
