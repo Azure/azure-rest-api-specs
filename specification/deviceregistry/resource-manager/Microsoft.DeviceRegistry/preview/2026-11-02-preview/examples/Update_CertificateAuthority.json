@@ -1,13 +1,12 @@
 {
-  "title": "Update_CertificatePolicy",
-  "operationId": "CertificatePolicies_Update",
+  "title": "Update_CertificateAuthority",
+  "operationId": "CertificateAuthorities_Update",
   "parameters": {
-    "api-version": "2026-11-01-preview",
+    "api-version": "2026-11-02-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgdeviceregistry",
     "namespaceName": "mynamespace",
     "certificateAuthorityName": "myrootca",
-    "certificatePolicyName": "mycertificatepolicy",
     "properties": {
       "tags": {
         "key5535": "soggdtfwzvheyqvinbwdcowcjvxe"
@@ -20,17 +19,19 @@
         "properties": {
           "provisioningState": "Succeeded",
           "uuid": "00000000-0000-0000-0000-000000000000",
-          "certificate": {
-            "validityPeriodInDays": 30
-          }
+          "certificateAuthorityType": "Root",
+          "keyType": "ECC",
+          "subject": "CN=myrootca",
+          "validityNotBefore": "2026-01-01T00:00:00Z",
+          "validityNotAfter": "2031-01-01T00:00:00Z"
         },
         "tags": {
           "key5535": "soggdtfwzvheyqvinbwdcowcjvxe"
         },
         "location": "East US 2",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myrootca/certificatePolicies/mycertificatepolicy",
-        "name": "mycertificatepolicy",
-        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities/certificatePolicies"
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myrootca",
+        "name": "myrootca",
+        "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities"
       }
     },
     "202": {

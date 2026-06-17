@@ -154,15 +154,19 @@ model ActivateCertificateAuthorityRequest {
 }
 
 @added(Versions.v2026_11_01_preview)
+@doc("Update model for Certificate Authority.")
+model CertificateAuthorityUpdate {
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<CertificateAuthority>;
+}
+
+@added(Versions.v2026_11_01_preview)
 @armResourceOperations
 interface CertificateAuthorities {
   get is ArmResourceRead<CertificateAuthority>;
   createOrReplace is ArmResourceCreateOrReplaceAsync<CertificateAuthority>;
   delete is ArmResourceDeleteWithoutOkAsync<CertificateAuthority>;
-  update is ArmResourcePatchAsync<
-    CertificateAuthority,
-    CertificateAuthorityProperties
-  >;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<CertificateAuthority, CertificateAuthorityUpdate>;
   listByNamespace is ArmResourceListByParent<CertificateAuthority>;
 
   @doc("Activates the Certificate Authority signed by external PKI.")

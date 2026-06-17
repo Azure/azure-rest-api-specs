@@ -2211,6 +2211,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List_CertificateAuthorities_ByNamespace": {
+            "$ref": "./examples/List_CertificateAuthorities_ByNamespace.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2266,6 +2271,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get_CertificateAuthority": {
+            "$ref": "./examples/Get_CertificateAuthority.json"
           }
         }
       },
@@ -2436,6 +2446,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update_CertificateAuthority": {
+            "$ref": "./examples/Update_CertificateAuthority.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2501,6 +2516,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete_CertificateAuthority": {
+            "$ref": "./examples/Delete_CertificateAuthority.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2639,6 +2659,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List_CertificatePolicies_ByCertificateAuthority": {
+            "$ref": "./examples/List_CertificatePolicies_ByCertificateAuthority.json"
           }
         },
         "x-ms-pageable": {
@@ -3046,6 +3071,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Revoke_CertificateAuthority": {
+            "$ref": "./examples/Revoke_CertificateAuthority.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6571,16 +6601,6 @@
       ],
       "x-ms-discriminator-value": "BringYourOwn"
     },
-    "BringYourOwnCertificateAuthorityPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for a Certificate Authority whose CA certificate is signed by an external issuer.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate"
-        }
-      ],
-      "x-ms-discriminator-value": "BringYourOwn"
-    },
     "BringYourOwnConfiguration": {
       "type": "object",
       "description": "Configuration for Bring Your Own Certificate Authority. When enabled, the Certificate Authority certificate is signed by an external issuer.",
@@ -6757,11 +6777,6 @@
         "keyType"
       ]
     },
-    "CertificateAuthorityPropertiesUpdate": {
-      "type": "object",
-      "description": "Details of the Certificate Authority resource.",
-      "discriminator": "certificateAuthorityType"
-    },
     "CertificateAuthorityStatus": {
       "type": "string",
       "description": "Status of the Certificate Authority certificate lifecycle.",
@@ -6824,18 +6839,16 @@
     },
     "CertificateAuthorityUpdate": {
       "type": "object",
-      "description": "A Certificate Authority resource.",
+      "description": "Update model for Certificate Authority.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "CertificateConfiguration": {
       "type": "object",
@@ -8200,16 +8213,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/CertificateAuthorityProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "ICA"
-    },
-    "IntermediateCertificateAuthorityPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for an intermediate Certificate Authority signed by another same-namespace Certificate Authority.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "ICA"
@@ -11316,16 +11319,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/CertificateAuthorityProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Root"
-    },
-    "RootCertificateAuthorityPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties for a self-signed, service-managed root Certificate Authority.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CertificateAuthorityPropertiesUpdate"
         }
       ],
       "x-ms-discriminator-value": "Root"
