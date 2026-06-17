@@ -19,6 +19,7 @@ import "./AdminRequestApprovalsResource.tsp";
 import "./Collection.tsp";
 import "./Offer.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

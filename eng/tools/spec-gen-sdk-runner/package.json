@@ -2,13 +2,13 @@
   "name": "@azure-tools/spec-gen-sdk-runner",
   "private": true,
   "type": "module",
-  "main": "dist/src/index.js",
+  "main": "src/index.ts",
   "version": "0.0.1",
   "bin": {
     "spec-gen-sdk-runner": "cmd/spec-gen-sdk-runner.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
     "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -20,7 +20,7 @@
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.18.0"
   },
   "dependencies": {
     "@azure-tools/specs-shared": "file:../../../.github/shared"

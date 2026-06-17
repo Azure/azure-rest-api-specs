@@ -634,6 +634,7 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");

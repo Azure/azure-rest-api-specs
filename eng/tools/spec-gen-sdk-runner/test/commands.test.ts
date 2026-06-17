@@ -2,17 +2,17 @@ import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
-import * as commandHelpers from "../src/command-helpers.js";
+import * as commandHelpers from "../src/command-helpers.ts";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
-} from "../src/commands.js";
-import * as log from "../src/log.js";
-import { LogLevel } from "../src/log.js";
-import * as changeFiles from "../src/spec-helpers.js";
-import type { ExecutionReport } from "../src/types.js";
-import * as utils from "../src/utils.js";
+} from "../src/commands.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as changeFiles from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
