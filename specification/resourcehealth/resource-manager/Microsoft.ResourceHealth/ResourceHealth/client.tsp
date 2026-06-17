@@ -167,7 +167,7 @@ using Azure.Core;
 );
 @@clientName(
   ChildResourcesOperationGroup.list,
-  "GetAvailabilityStatusOfChildResourceData",
+  "GetAvailabilityStatusOfChildResources",
   "csharp"
 );
 @@clientName(
