@@ -8,7 +8,6 @@ import "@typespec/openapi";
 import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
-import "./client-customizations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -16,9 +15,31 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
-using SearchClientCustomizations;
+using Microsoft.Search;
 
-namespace Microsoft.Search;
+namespace Customizations;
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model `search-management-request-options` {
+  /**
+   * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
+   */
+  @header("x-ms-client-request-id")
+  clientRequestId?: string;
+}
+
+/** Network security perimeter configuration */
+model AccessRulePropertiesSubscriptionsItem {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: armResourceIdentifier;
+}
+
+/** Subscriptions for inbound rules */
+model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
+  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
+  id?: armResourceIdentifier;
+}
 
 /**
  * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
@@ -406,7 +427,7 @@ op privateEndpointConnectionsGetCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResponse<PrivateEndpointConnection> | CloudError;
+): ArmResponse<Microsoft.Search.PrivateEndpointConnection> | CloudError;
 
 /**
  * Updates a private endpoint connection to the search service in the given resource group.
@@ -440,7 +461,7 @@ op privateEndpointConnectionsUpdateCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResourceUpdatedResponse<PrivateEndpointConnection> | CloudError;
+): ArmResourceUpdatedResponse<Microsoft.Search.PrivateEndpointConnection> | CloudError;
 
 /**
  * Disconnects the private endpoint connection and deletes it from the search service.
@@ -469,7 +490,7 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResponse<PrivateEndpointConnection> | NotFoundResponse | CloudError;
+): ArmResponse<Microsoft.Search.PrivateEndpointConnection> | NotFoundResponse | CloudError;
 
 /**
  * Gets a list of all supported private link resource types for the given service.
@@ -695,33 +716,6 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "service",
   "javascript"
 );
-
-// Customization operations are only used to override client SDK shapes via
-// @@override below. They must not be emitted into the OpenAPI/swagger output.
-@@scope(servicesCheckNameAvailabilityCustomization, "!autorest");
-@@scope(servicesCheckNameAvailabilityCustomizationForJs, "!autorest");
-@@scope(usagesListBySubscriptionCustomization, "!autorest");
-@@scope(usageBySubscriptionSkuCustomization, "!autorest");
-@@scope(searchServicesListBySubscriptionCustomization, "!autorest");
-@@scope(searchServicesListByResourceGroupCustomization, "!autorest");
-@@scope(searchGetCustomization, "!autorest");
-@@scope(searchCreateOrUpdateCustomization, "!autorest");
-@@scope(searchUpdateCustomization, "!autorest");
-@@scope(searchDeleteCustomization, "!autorest");
-@@scope(queryKeysCreateCustomization, "!autorest");
-@@scope(queryKeysDeleteCustomization, "!autorest");
-@@scope(adminKeysGetCustomization, "!autorest");
-@@scope(queryKeysListBySearchServiceCustomization, "!autorest");
-@@scope(privateEndpointConnectionsListByServiceCustomization, "!autorest");
-@@scope(privateEndpointConnectionsGetCustomization, "!autorest");
-@@scope(privateEndpointConnectionsUpdateCustomization, "!autorest");
-@@scope(privateEndpointConnectionsDeleteCustomization, "!autorest");
-@@scope(privateLinkResourcesListSupportedCustomization, "!autorest");
-@@scope(privateLinkResourcesRegenerateCustomization, "!autorest");
-@@scope(SharedPrivateLinkResourcesListByServiceCustomization, "!autorest");
-@@scope(SharedPrivateLinkResourcesGetCustomization, "!autorest");
-@@scope(SharedPrivateLinkResourcesCreateOrUpdateCustomization, "!autorest");
-@@scope(SharedPrivateLinkResourcesDeleteCustomization, "!autorest");
 
 @@Azure.ClientGenerator.Core.override(
   ServicesOperationGroup.checkNameAvailability,
@@ -1090,12 +1084,12 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnectionProperties,
+  Microsoft.Search.PrivateEndpointConnectionProperties,
   "SearchServicePrivateEndpointConnectionProperties",
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  Microsoft.Search.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -1173,7 +1167,7 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnection,
+  Microsoft.Search.PrivateEndpointConnection,
   "SearchPrivateEndpointConnection",
   "csharp"
 );
