@@ -7,6 +7,10 @@ namespace Azure.AI.Projects;
 @route("openai/v1/images")
 @tag("Images")
 interface Images {
+  /**You can call this endpoint with either:
+  - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).
+  - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.
+  Note that JSON requests use `images` (array) instead of the multipart `image` field.*/
   @sharedRoute
   @route("edits")
   @post
@@ -22,6 +26,10 @@ interface Images {
     OpenAI.ImagesResponse
   >;
 
+  /**You can call this endpoint with either:
+  - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).
+  - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.
+  Note that JSON requests use `images` (array) instead of the multipart `image` field.*/
   @sharedRoute
   @route("edits")
   @post

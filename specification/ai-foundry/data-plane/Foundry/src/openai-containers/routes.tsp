@@ -10,6 +10,7 @@ namespace Azure.AI.Projects;
 @route("openai/v1/containers")
 @tag("Containers")
 interface Containers {
+  /** Lists containers. */
   @list
   @get
   @summary("List Containers")
@@ -36,6 +37,7 @@ interface Containers {
     OpenAI.ContainerListResource
   >;
 
+  /** Creates a container. */
   @post
   @summary("Create Container")
   CreateContainer is OpenAIOperation<
@@ -46,6 +48,7 @@ interface Containers {
     OpenAI.ContainerResource
   >;
 
+  /** Delete a container. */
   @route("{container_id}")
   @delete
   @summary("Delete Container")
@@ -58,6 +61,7 @@ interface Containers {
     TypeSpec.Http.OkResponse
   >;
 
+  /** Retrieves a container. */
   @route("{container_id}")
   @get
   @summary("Retrieve Container")
@@ -69,6 +73,7 @@ interface Containers {
     OpenAI.ContainerResource
   >;
 
+  /** Lists container files. */
   @list
   @route("{container_id}/files")
   @get
@@ -95,6 +100,7 @@ interface Containers {
     OpenAI.ContainerFileListResource
   >;
 
+  /** Creates a container file. */
   @sharedRoute
   @route("{container_id}/files")
   @post
@@ -118,6 +124,7 @@ interface Containers {
     OpenAI.ContainerFileResource
   >;
 
+  /** Creates a container file. */
   @sharedRoute
   @route("{container_id}/files")
   @post
@@ -138,6 +145,7 @@ interface Containers {
     OpenAI.ContainerFileResource
   >;
 
+  /** Delete a container file. */
   @route("{container_id}/files/{file_id}")
   @delete
   @summary("Delete Container File")
@@ -152,6 +160,7 @@ interface Containers {
     TypeSpec.Http.OkResponse
   >;
 
+  /** Retrieves a container file. */
   @route("{container_id}/files/{file_id}")
   @get
   @summary("Retrieve Container File")
@@ -166,6 +175,7 @@ interface Containers {
     OpenAI.ContainerFileResource
   >;
 
+  /** Retrieves a container file content. */
   @route("{container_id}/files/{file_id}/content")
   @get
   @summary("Retrieve Container File Content")

@@ -85,6 +85,9 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
+  /**The maximum number of files in a single batch request is 2000.
+  Vector store file attach requests are rate limited per vector store (300 requests per minute across both this endpoint and `/vector_stores/{vector_store_id}/files`).
+  For ingesting multiple files into the same vector store, this batch endpoint is recommended.*/
   @route("{vector_store_id}/file_batches")
   @post
   @summary("Create a vector store file batch.")
@@ -206,6 +209,8 @@ interface VectorStores {
     OpenAI.ListVectorStoreFilesResponse
   >;
 
+  /**This endpoint is subject to a per-vector-store write rate limit of 300 requests per minute, shared with `/vector_stores/{vector_store_id}/file_batches`.
+  For uploading multiple files to the same vector store, use the file batches endpoint to reduce request volume.*/
   @route("{vector_store_id}/files")
   @post
   @summary("Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).")
