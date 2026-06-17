@@ -1,0 +1,16 @@
+id: release-plan-abandon-001
+name: Abandon Release Plan
+description: |
+  Test that the skill abandons a release plan after user confirmation.
+tags:
+  - basic
+  - abandon
+inputs:
+  prompt: "I need to abandon release plan with work item ID 11111. We decided not to proceed with this release."
+expected:
+  output_contains:
+    - "abandon"
+    - "release plan"
+  behavior:
+    max_tool_calls: 3
+    max_response_time_ms: 15000

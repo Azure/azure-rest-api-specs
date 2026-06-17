@@ -18,6 +18,7 @@ import "./MonitoringTagRules.tsp";
 import "./DatadogSingleSignOnResource.tsp";
 import "./MonitoredSubscriptionProperties.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

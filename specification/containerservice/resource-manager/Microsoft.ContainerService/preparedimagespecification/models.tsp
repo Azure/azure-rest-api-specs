@@ -38,9 +38,8 @@ model PreparedImageSpecificationProperties {
     """)
   identityProfile?: PreparedImageSpecificationManagedIdentityProfile;
 
-  @visibility(Lifecycle.Read)
-  @doc("An auto-generated value that changes when the other fields of the image customization are changed.")
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @doc("The client-provided version of the prepared image specification.")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
   version?: string;
 
   @visibility(Lifecycle.Read)
@@ -68,16 +67,6 @@ model PreparedImageSpecificationManagedIdentityProfile {
   @visibility(Lifecycle.Read)
   @doc("The client ID of the managed identity.")
   clientId?: Azure.Core.uuid;
-}
-
-@doc("The managed identity profile used by the prepared image specification for update operations.")
-model PreparedImageSpecificationManagedIdentityProfileUpdate {
-  @doc("The resource ID of the user-assigned managed identity.")
-  resourceId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-    }
-  ]>;
 }
 
 @doc("Prepared image specification script")
@@ -111,47 +100,9 @@ model PreparedImageSpecificationScript {
   postScriptAction?: PostScriptAction;
 }
 
-@doc("Prepared image specification script for update operations")
-model PreparedImageSpecificationScriptUpdate {
-  @doc("The name for the customization script.")
-  @pattern("^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$")
-  @maxLength(263)
-  name?: string;
-
-  @doc("The stage at which the script is executed.")
-  executionPoint?: ExecutionPoint;
-
-  @doc("The runtime environment for the script (e.g. Bash).")
-  @example("Bash")
-  scriptType?: ScriptType;
-
-  @doc("The script content to be executed in plain text. Do not include secrets.")
-  @example("echo 'initializing node'")
-  script?: string;
-
-  @doc("The action to take after successful script execution.")
-  postScriptAction?: PostScriptAction;
-}
-
-@doc("The updatable properties of the Prepared Image Specification resource.")
-model PreparedImageSpecificationPatchProperties {
-  @doc("The list of container images to cache on nodes. See https://kubernetes.io/docs/concepts/containers/images/#image-names")
-  containerImages?: string[];
-
-  @doc("The identity used to execute prepared image specification tasks during image build time and provisioning time.")
-  identityProfile?: PreparedImageSpecificationManagedIdentityProfileUpdate;
-
-  @doc("The scripts to customize the node before or after image capture.")
-  @identifiers(#[])
-  customizationScripts?: PreparedImageSpecificationScriptUpdate[];
-}
-
 @doc("Prepared image specification patch resource")
 model PreparedImageSpecificationPatch {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
-
-  @doc("Patchable prepared image specification properties.")
-  properties?: PreparedImageSpecificationPatchProperties;
 }
 
 @doc("The execution point for the script.")
@@ -209,9 +160,9 @@ union ProvisioningState {
 @doc("A version of the Prepared Image Specification resource.")
 model PreparedImageSpecificationVersion
   is ProxyResource<PreparedImageSpecificationProperties> {
-  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")
+  @pattern("^(?![.-])[A-Za-z0-9_.-]{1,63}$")
   @minLength(1)
-  @maxLength(128)
+  @maxLength(63)
   @doc("The version of the Prepared Image Specification.")
   @key("version")
   @path

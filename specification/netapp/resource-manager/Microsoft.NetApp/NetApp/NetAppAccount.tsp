@@ -61,6 +61,10 @@ model AccountProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   entraIdConfig?: EntraIdConfig;
 
   /**
@@ -94,6 +98,10 @@ model AccountProperties {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   ldapConfiguration?: LdapConfiguration;
 }
 
@@ -110,6 +118,12 @@ alias PatchModel<
  */
 @removed(Versions.v2026_01_15_preview)
 @renamedFrom(Versions.v2026_01_15_preview, "NetAppAccountPatch")
+@added(Versions.v2026_03_01)
+@removed(Versions.v2026_03_15_preview)
+@renamedFrom(Versions.v2026_03_15_preview, "NetAppAccountPatch")
+@added(Versions.v2026_04_01)
+@removed(Versions.v2026_04_15_preview)
+@renamedFrom(Versions.v2026_04_15_preview, "NetAppAccountPatch")
 model NetAppAccountPatchStable {
   /**
    * Resource location
@@ -157,6 +171,10 @@ model NetAppAccountPatchStable {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model NetAppAccountPatch is PatchModel<NetAppAccount> {
   /**
    * NetApp Account properties
@@ -167,14 +185,31 @@ model NetAppAccountPatch is PatchModel<NetAppAccount> {
 /**
  * NetApp account patch properties
  */
-model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
+model AccountPropertiesPatch
+  is PatchModel<AccountProperties, "entraIdConfig" | "ldapConfiguration"> {
   /**
    * Entra ID configuration for the account.
    */
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   entraIdConfig?: EntraIdConfigPatch;
+
+  /**
+   * LDAP Configuration for the account.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  ldapConfiguration?: LdapConfigurationPatch;
 }
 
 /**
@@ -183,6 +218,10 @@ model AccountPropertiesPatch is PatchModel<AccountProperties, "entraIdConfig"> {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
   /**
    * Using AKV config, certificate will be fetched, which will contain private key & public certificate, that correspond to the public certificate which is uploaded on the application created by customer. This will be used further for authentication.
@@ -196,14 +235,46 @@ model EntraIdConfigPatch is PatchModel<EntraIdConfig, "entraIdAkvConfig"> {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdAkvConfigPatch is PatchModel<EntraIdAkvConfig>;
 
+/**
+ * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+ */
+@added(Versions.v2026_04_15_preview)
+model BindPasswordAkvConfigPatch is PatchModel<BindPasswordAkvConfig>;
+
+/**
+ * LDAP configuration for PATCH operations (no default values)
+ */
+@added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+model LdapConfigurationPatch
+  is PatchModel<LdapConfiguration, "bindPasswordAkvConfig"> {
+  /**
+   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindPasswordAkvConfig?: BindPasswordAkvConfigPatch;
+}
 /**
  * Entra ID configuration for the account.
  */
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdConfig {
   /**
    * ApplicationId of the app created by customer to provide authentication and required API permissions for Microsoft Graph endpoint.
@@ -240,6 +311,10 @@ model EntraIdConfig {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model EntraIdAkvConfig {
   /**
    * The Azure Key Vault URI where the Entra ID credentials are stored.
@@ -269,6 +344,10 @@ model EntraIdAkvConfig {
 @added(Versions.v2025_12_15_preview)
 @removed(Versions.v2026_01_01)
 @added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 model LdapConfiguration {
   /**
    * Name of the LDAP configuration domain
@@ -304,49 +383,73 @@ model LdapConfiguration {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @maxLength(255)
   certificateCNHost?: string | null;
+
+  /**
+   * The authentication level to use when binding to the LDAP server, defaults to Anonymous.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindAuthenticationLevel?: BindAuthenticationLevel = BindAuthenticationLevel.Anonymous;
+
+  /**
+   * The distinguished name (DN) to bind as when performing LDAP operations.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "dominant mode of expression in the domain."
+  @added(Versions.v2026_04_15_preview)
+  @minLength(1)
+  @maxLength(255)
+  bindDN?: string;
+
+  /**
+   * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+   */
+  @added(Versions.v2026_04_15_preview)
+  bindPasswordAkvConfig?: BindPasswordAkvConfig;
 }
 
 /**
- * LDAP configuration for PATCH operations (no default values)
+ * The authentication level to use when binding to the LDAP server.
  */
-@added(Versions.v2025_12_15_preview)
-@removed(Versions.v2026_01_01)
-@added(Versions.v2026_01_15_preview)
-model LdapConfigurationPatch {
-  /**
-   * Name of the LDAP configuration domain
-   */
-  @maxLength(255)
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.-]{0,253}[a-zA-Z0-9]$")
-  domain?: string;
+@added(Versions.v2026_04_15_preview)
+union BindAuthenticationLevel {
+  string,
 
   /**
-   * List of LDAP server IP addresses (IPv4 only) for the LDAP domain.
+   * Anonymous bind i.e. no credentials provided
    */
-  ldapServers?: ipV4Address[];
+  Anonymous: "Anonymous",
 
   /**
-   * Specifies whether or not the LDAP traffic needs to be secured via TLS.
+   * Simple bind i.e. plain text credentials provided
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  ldapOverTLS?: boolean;
+  Simple: "Simple",
+}
+
+/**
+ * The Azure Key Vault configuration where the Bind DN (Distinguished Name) user password is stored.
+ */
+@added(Versions.v2026_04_15_preview)
+model BindPasswordAkvConfig {
+  /**
+   * The Azure Key Vault URI where the Bind DN user password is stored.
+   */
+  azureKeyVaultUri: url;
 
   /**
-   * When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded ldap servers CA certificate.
+   * The name of the secret in Azure Key Vault that contains the Bind DN user password.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  @maxLength(10240)
   @minLength(1)
-  @secret
-  serverCACertificate?: string;
+  @maxLength(127)
+  @pattern("^[a-zA-Z0-9-]+$")
+  secretName: string;
 
   /**
-   * The CN host name used while generating the certificate, LDAP Over TLS requires the CN host name to create DNS host entry.
+   * The ARM resource identifier of the user assigned identity used to authenticate with key vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  @maxLength(255)
-  certificateCNHost?: string | null;
+  userAssignedIdentity?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
 }
 
 @maxLength(255)
@@ -698,6 +801,12 @@ interface NetAppAccounts {
   @added(Versions.v2026_01_01)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "update")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "update")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "update")
   @sharedRoute
   updatePrevious is ArmCustomPatchAsync<
     NetAppAccount,
@@ -719,6 +828,10 @@ interface NetAppAccounts {
   @added(Versions.v2025_12_15_preview)
   @removed(Versions.v2026_01_01)
   @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @sharedRoute
   update is ArmCustomPatchAsync<
     NetAppAccount,
@@ -824,6 +937,18 @@ interface NetAppAccounts {
     BackupsMigrationRequest,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<NetAppAccount>
+  >;
+
+  /**
+   * Refresh LDAP Bind DN password by fetching the latest password from Azure Key Vault.
+   */
+  @added(Versions.v2026_04_15_preview)
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  refreshLdapBindPassword is ArmResourceActionNoResponseContentAsync<
+    NetAppAccount,
+    void,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
