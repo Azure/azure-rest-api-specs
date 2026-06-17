@@ -8,4 +8,8 @@ using Azure.ClientGenerator.Core;
 @@clientName(DomainGroupState, "ProgramEnrollmentDomainGroupState", "csharp");
 @@clientName(ProvisioningState, "ProgramEnrollmentProvisioningState", "csharp");
 
-@@clientName(Microsoft.ProgramEnrollment, "ProgramEnrollmentMgmtClient", "python");
+@@clientName(
+  Microsoft.ProgramEnrollment,
+  "ProgramEnrollmentMgmtClient",
+  "python"
+);
