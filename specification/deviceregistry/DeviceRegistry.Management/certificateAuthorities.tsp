@@ -166,7 +166,10 @@ interface CertificateAuthorities {
   createOrReplace is ArmResourceCreateOrReplaceAsync<CertificateAuthority>;
   delete is ArmResourceDeleteWithoutOkAsync<CertificateAuthority>;
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<CertificateAuthority, CertificateAuthorityUpdate>;
+  update is ArmCustomPatchAsync<
+    CertificateAuthority,
+    CertificateAuthorityUpdate
+  >;
   listByNamespace is ArmResourceListByParent<CertificateAuthority>;
 
   @doc("Activates the Certificate Authority signed by external PKI.")
