@@ -10,12 +10,9 @@ import { extractInputs } from "./context.js";
 export default async function setSpecGenSdkStatus({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
-  const details_url = inputs.details_url;
   const issue_number = inputs.issue_number;
-  if (!details_url || !head_sha) {
-    throw new Error(
-      `Required inputs are not valid: details_url:${details_url}, head_sha:${head_sha}`,
-    );
+  if (!head_sha) {
+    throw new Error(`Required inputs are not valid: head_sha:${head_sha}`);
   }
   const owner = inputs.owner;
   const repo = inputs.repo;
@@ -73,6 +70,14 @@ export async function setSpecGenSdkStatusImpl({
   core.info(`Found ${specGenSdkChecks.length} check runs from Azure Pipelines:`);
   for (const check of specGenSdkChecks) {
     core.info(`- ${check.name}: ${check.status} (${check.conclusion})`);
+  }
+
+  // No SDK Validation check runs exist for this commit (e.g. a PR without SDK-relevant changes that
+  // was reopened). Skip setting a status, to avoid creating a spurious "pending" status that would
+  // never be resolved, since the Azure DevOps pipelines won't run for such PRs.
+  if (specGenSdkChecks.length === 0) {
+    core.info("No SDK Validation check runs found. Skipping status update.");
+    return;
   }
 
   // Check if all SDK generation checks have completed
