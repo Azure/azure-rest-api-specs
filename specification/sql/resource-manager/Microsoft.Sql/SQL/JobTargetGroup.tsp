@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A group of job targets.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 model JobTargetGroup
   is Azure.ResourceManager.ProxyResource<JobTargetGroupProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model JobTargetGroup
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobTargetGroups)
 interface JobTargetGroups {
   /**
    * Gets a target group.

@@ -333,7 +333,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiContracts.apiRevisionListByService, "ApiRevision");
 @@clientName(ApiContracts.apiRevisionListByService, "ListByService");
 @@clientLocation(ApiContracts.listByApis, "ApiProduct");
-@@clientLocation(ApiContracts.listByTags, "Operation");
+@@clientLocation(ApiContracts.listByTags, "Operation", "!javascript");
+@@clientLocation(ApiContracts.listByTags, "OperationOperations", "javascript");
 @@clientName(WorkspaceApi.createOrUpdate::parameters.resource, "parameters");
 @@clientName(WorkspaceApi.update::parameters.properties, "parameters");
 @@clientLocation(
@@ -1579,11 +1580,23 @@ using Microsoft.ApiManagement;
 
 @@clientLocation(
   PrivateEndpointConnections.getByName,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnections.getByName,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 @@clientLocation(
   PrivateEndpointConnections.createOrUpdate,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnections.createOrUpdate,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 @@clientName(
   PrivateEndpointConnections.createOrUpdate::parameters.resource,
@@ -1591,11 +1604,23 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(
   PrivateEndpointConnections.delete,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnections.delete,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 @@clientLocation(
   PrivateEndpointConnections.listByService,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateEndpointConnections.listByService,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -1604,11 +1629,23 @@ using Microsoft.ApiManagement;
 
 @@clientLocation(
   PrivateLinkResources.getPrivateLinkResource,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateLinkResources.getPrivateLinkResource,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 @@clientLocation(
   PrivateLinkResources.listPrivateLinkResources,
-  "PrivateEndpointConnection"
+  "PrivateEndpointConnection",
+  "!javascript"
+);
+@@clientLocation(
+  PrivateLinkResources.listPrivateLinkResources,
+  "PrivateEndpointConnectionOperations",
+  "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
