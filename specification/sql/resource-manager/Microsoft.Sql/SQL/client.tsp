@@ -1057,23 +1057,43 @@ using Microsoft.Sql;
   "csharp"
 );
 @@clientName(
-  LongTermRetentionBackupsOperationGroup.listByResourceGroupLocation,
+  LongTermRetentionBackupsOperationGroup.listByLocation,
   "GetLongTermRetentionBackupsWithLocation",
   "csharp"
 );
 @@clientName(
-  LongTermRetentionBackupsOperationGroup.listByResourceGroupServer,
+  LongTermRetentionBackupsOperationGroup.listByResourceGroupLocation,
+  "GetLongTermRetentionBackupsWithResourceGroupLocation",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionBackupsOperationGroup.listByServer,
   "GetLongTermRetentionBackupsWithServer",
   "csharp"
 );
 @@clientName(
-  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupInstance,
+  LongTermRetentionBackupsOperationGroup.listByResourceGroupServer,
+  "GetLongTermRetentionBackupsWithResourceGroupServer",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByInstance,
   "GetLongTermRetentionManagedInstanceBackupsWithInstance",
   "csharp"
 );
 @@clientName(
-  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupLocation,
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupInstance,
+  "GetLongTermRetentionManagedInstanceBackupsWithResourceGroupInstance",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByLocation,
   "GetLongTermRetentionManagedInstanceBackupsWithLocation",
+  "csharp"
+);
+@@clientName(
+  LongTermRetentionManagedInstanceBackupsOperationGroup.listByResourceGroupLocation,
+  "GetLongTermRetentionManagedInstanceBackupsWithResourceGroupLocation",
   "csharp"
 );
 @@clientName(SqlVulnerabilityAssessments.execute, "ExecuteScan", "csharp");
