@@ -81,16 +81,18 @@ alias GatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @pattern("^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$")
     workspaceName: string;
   },
-  {
-    /**
-     * The Log Analytics gateway Id.
-     */
-    @path
-    @segment("gateways")
-    @key("gatewayId")
-    gatewayId: string;
-  }
+  GatewayNameParameter
 >;
+
+alias GatewayNameParameter = {
+  /**
+   * The Log Analytics gateway Id.
+   */
+  @path
+  @segment("gateways")
+  @key("gatewayId")
+  gatewayId: string;
+};
 
 alias PurgeOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {

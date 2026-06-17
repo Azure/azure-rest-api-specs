@@ -7,3 +7,9 @@ using Azure.ClientGenerator.Core;
 @@clientName(DomainGroup, "ProgramEnrollmentDomainGroup", "csharp");
 @@clientName(DomainGroupState, "ProgramEnrollmentDomainGroupState", "csharp");
 @@clientName(ProvisioningState, "ProgramEnrollmentProvisioningState", "csharp");
+
+@@clientName(
+  Microsoft.ProgramEnrollment,
+  "ProgramEnrollmentMgmtClient",
+  "python"
+);
