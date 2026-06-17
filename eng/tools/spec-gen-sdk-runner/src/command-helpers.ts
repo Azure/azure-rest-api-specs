@@ -1,30 +1,30 @@
 import {
-  APIViewRequestData,
+  type APIViewRequestData,
   SdkName,
   SdkNameSchema,
-  SpecGenSdkArtifactInfo,
+  type SpecGenSdkArtifactInfo,
 } from "@azure-tools/specs-shared/sdk-types";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { inspect } from "node:util";
-import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.js";
-import { groupSpecConfigPaths } from "./spec-helpers.js";
+import { LogIssueType, LogLevel, logMessage, setVsoVariable, vsoLogIssue } from "./log.ts";
+import { groupSpecConfigPaths } from "./spec-helpers.ts";
 import {
-  ExecutionReport,
-  SpecGenSdkCmdInput,
+  type ExecutionReport,
+  type SpecGenSdkCmdInput,
   SpecGenSdkRequiredSettings,
-  VsoLogs,
-} from "./types.js";
+  type VsoLogs,
+} from "./types.ts";
 import {
   execAsync,
   findReadmeFiles,
   getAllTypeSpecPaths,
   getArgumentValue,
   objectToMap,
-  SpecConfigs,
-} from "./utils.js";
+  type SpecConfigs,
+} from "./utils.ts";
 
 /**
  * Load execution-report.json.
@@ -77,7 +77,7 @@ export function parseArguments(): SpecGenSdkCmdInput {
   // Get the arguments passed to the script
   const args: string[] = process.argv.slice(2);
   const localSpecRepoPath: string = path.resolve(
-    getArgumentValue(args, "--scp", path.join(__dirname, "..", "..")),
+    getArgumentValue(args, "--scp", path.join(__dirname, "..")),
   );
   const sdkRepoName: string = getArgumentValue(args, "--lang", "azure-sdk-for-net");
   const localSdkRepoPath: string = path.resolve(

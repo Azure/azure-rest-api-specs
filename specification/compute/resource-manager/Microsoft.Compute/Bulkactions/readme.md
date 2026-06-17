@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-04-06-preview
+tag: package-2026-06-06
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
@@ -116,4 +116,27 @@ suppressions:
       https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"]
+```
+
+### Tag: package-2026-06-06
+
+These settings apply only when `--tag=package-2026-06-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-06'
+input-file:
+  - stable/2026-06-06/Bulkactions.json
+suppressions:
+  - code: ParameterNotUsingCommonTypes
+    reason: >
+      The location parameter is used as a segment-bound parameter in the
+      VirtualMachineBulkOperations action paths and cannot be a $ref to common-types
+      LocationParameter without losing the resource key binding.
+    from: Bulkactions.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart"].post.parameters[?(@.name=='location')]
 ```
