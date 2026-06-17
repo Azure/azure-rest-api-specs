@@ -3353,9 +3353,9 @@ model ManagedClusterSecurityProfileDefender {
   securityMonitoring?: ManagedClusterSecurityProfileDefenderSecurityMonitoring;
 
   /**
-   * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
+   * Microsoft Defender settings for security gating. This validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents deployment of images that do not meet security standards. For more information, see https://aka.ms/KubernetesDefenderAuditRule.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_05_01)
   securityGating?: ManagedClusterSecurityProfileDefenderSecurityGating;
 }
 
@@ -3370,30 +3370,30 @@ model ManagedClusterSecurityProfileDefenderSecurityMonitoring {
 }
 
 /**
- * Microsoft Defender settings for security gating, validates container images eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents the deployment of images that do not meet security standards.
+ * Microsoft Defender settings for security gating. This validates container image eligibility for deployment based on Defender for Containers security findings. Using Admission Controller, it either audits or prevents deployment of images that do not meet security standards.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_05_01)
 model ManagedClusterSecurityProfileDefenderSecurityGating {
   /**
-   * Whether to enable Defender security gating. When enabled, the gating feature will scan container images and audit or block the deployment of images that do not meet security standards according to the configured security rules.
+   * Whether to enable Defender security gating. When enabled, the gating feature scans container images and audits or blocks deployment of images that do not meet security standards according to configured security rules. For more information, see https://aka.ms/KubernetesDefenderAuditRule.
    */
   enabled?: boolean;
 
   /**
-   * List of identities that the admission controller will make use of in order to pull security artifacts from the registry. These are the same identities used by the cluster to pull container images. Each identity provided should have federated identity credential attached to it.
+   * List of identities that the admission controller uses to pull security artifacts from registries. These are the same identities used by the cluster to pull container images. For more information on configuring this identity, see https://learn.microsoft.com/en-us/azure/defender-for-cloud/gated-deployment-infrastructure-as-code.
    */
   @identifiers(#[])
-  identities?: ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem[];
+  identities?: ManagedClusterSecurityProfileDefenderSecurityGatingIdentity[];
 
   /**
-   * In use only while registry access granted by secret rather than managed identity. Set whether to grant the Defender gating agent access to the cluster's secrets for pulling images from registries. If secret access is denied and the registry requires pull secrets, the add-on will not perform any image validation. Default value is false.
+   * In use only while registry access is granted by secret rather than managed identity. Sets whether to grant the Defender gating agent access to cluster secrets for pulling images from registries. If secret access is denied and the registry requires pull secrets, the add-on will not perform image validation. Default value is false.
    */
   allowSecretAccess?: boolean;
 }
 
-/** Identity information used by Defender security gating to access container registries. */
-@added(Versions.v2026_05_02_preview)
-model ManagedClusterSecurityProfileDefenderSecurityGatingIdentitiesItem {
+/** Identity mapping used by Defender security gating for registry access. */
+@added(Versions.v2026_05_01)
+model ManagedClusterSecurityProfileDefenderSecurityGatingIdentity {
   /**
    * The container registry for which the identity will be used; the identity specified here should have a federated identity credential attached to it.
    */
