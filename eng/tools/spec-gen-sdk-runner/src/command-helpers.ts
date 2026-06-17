@@ -272,6 +272,33 @@ export function logIssuesToPipeline(logPath: string, specConfigDisplayText: stri
 }
 
 /**
+ * Appends errors to an existing Azure DevOps pipeline log file.
+ * @param logPath - The vso log file path.
+ * @param key - The log entry key.
+ * @param errors - The errors to append.
+ */
+export function appendErrorsToVsoLog(logPath: string, key: string, errors: string[]): void {
+  if (errors.length === 0) {
+    return;
+  }
+
+  let logContent: Record<string, { errors?: string[]; warnings?: string[] }>;
+  try {
+    logContent = JSON.parse(fs.readFileSync(logPath, "utf8")) as Record<
+      string,
+      { errors?: string[]; warnings?: string[] }
+    >;
+  } catch (error) {
+    throw new Error(`Runner: error reading log at ${logPath}:${inspect(error)}`, { cause: error });
+  }
+
+  const logEntry = logContent[key] ?? {};
+  logEntry.errors = [...(logEntry.errors ?? []), ...errors];
+  logContent[key] = logEntry;
+  fs.writeFileSync(logPath, JSON.stringify(logContent, undefined, 2));
+}
+
+/**
  * Process the breaking change label artifacts.
  *
  * @param executionReport - The spec-gen-sdk execution report.
