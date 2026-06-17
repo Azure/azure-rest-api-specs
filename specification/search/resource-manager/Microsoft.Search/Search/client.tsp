@@ -8,6 +8,7 @@ import "@typespec/openapi";
 import "./routes.tsp";
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./client-customizations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -15,18 +16,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
+using SearchClientCustomizations;
 
 namespace Microsoft.Search;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model `search-management-request-options` {
-  /**
-   * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
-   */
-  @header("x-ms-client-request-id")
-  clientRequestId?: string;
-}
 
 /**
  * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
@@ -704,6 +696,33 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "javascript"
 );
 
+// Customization operations are only used to override client SDK shapes via
+// @@override below. They must not be emitted into the OpenAPI/swagger output.
+@@scope(servicesCheckNameAvailabilityCustomization, "!autorest");
+@@scope(servicesCheckNameAvailabilityCustomizationForJs, "!autorest");
+@@scope(usagesListBySubscriptionCustomization, "!autorest");
+@@scope(usageBySubscriptionSkuCustomization, "!autorest");
+@@scope(searchServicesListBySubscriptionCustomization, "!autorest");
+@@scope(searchServicesListByResourceGroupCustomization, "!autorest");
+@@scope(searchGetCustomization, "!autorest");
+@@scope(searchCreateOrUpdateCustomization, "!autorest");
+@@scope(searchUpdateCustomization, "!autorest");
+@@scope(searchDeleteCustomization, "!autorest");
+@@scope(queryKeysCreateCustomization, "!autorest");
+@@scope(queryKeysDeleteCustomization, "!autorest");
+@@scope(adminKeysGetCustomization, "!autorest");
+@@scope(queryKeysListBySearchServiceCustomization, "!autorest");
+@@scope(privateEndpointConnectionsListByServiceCustomization, "!autorest");
+@@scope(privateEndpointConnectionsGetCustomization, "!autorest");
+@@scope(privateEndpointConnectionsUpdateCustomization, "!autorest");
+@@scope(privateEndpointConnectionsDeleteCustomization, "!autorest");
+@@scope(privateLinkResourcesListSupportedCustomization, "!autorest");
+@@scope(privateLinkResourcesRegenerateCustomization, "!autorest");
+@@scope(SharedPrivateLinkResourcesListByServiceCustomization, "!autorest");
+@@scope(SharedPrivateLinkResourcesGetCustomization, "!autorest");
+@@scope(SharedPrivateLinkResourcesCreateOrUpdateCustomization, "!autorest");
+@@scope(SharedPrivateLinkResourcesDeleteCustomization, "!autorest");
+
 @@Azure.ClientGenerator.Core.override(
   ServicesOperationGroup.checkNameAvailability,
   servicesCheckNameAvailabilityCustomization,
@@ -954,11 +973,6 @@ op SharedPrivateLinkResourcesDeleteCustomization(
   "go,csharp,javascript"
 );
 @@clientLocation(usageBySubscriptionSku, "ManagementClient", "go");
-/** Network security perimeter configuration */
-model AccessRulePropertiesSubscriptionsItem {
-  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
-  id?: Azure.Core.armResourceIdentifier;
-}
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
@@ -967,9 +981,17 @@ model AccessRulePropertiesSubscriptionsItem {
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
 
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
-@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyName,
+  "keyName",
+  "!autorest"
+);
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyVersion,
+  "keyVersion",
+  "!autorest"
+);
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri", "!autorest");
 
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
@@ -1208,10 +1230,6 @@ model AccessRulePropertiesSubscriptionsItem {
   "csharp"
 );
 /** Subscriptions for inbound rules */
-model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
-  /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
-  id?: Azure.Core.armResourceIdentifier;
-}
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   SearchServiceNetworkSecurityPerimeterInboundRuleSubscription[],
