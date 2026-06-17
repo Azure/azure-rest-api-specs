@@ -471,7 +471,11 @@ using Microsoft.AVS;
 @@clientName(WorkloadNetworkPublicIps.delete, "deletePublicIp", "java");
 
 // model
-@@clientName(VmVmPlacementPolicyProperties, "VmPlacementPolicyProperties");
+@@clientName(
+  VmVmPlacementPolicyProperties,
+  "VmPlacementPolicyProperties",
+  "!autorest"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity,

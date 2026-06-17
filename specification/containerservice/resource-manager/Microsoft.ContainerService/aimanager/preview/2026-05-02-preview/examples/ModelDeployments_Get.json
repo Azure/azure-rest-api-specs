@@ -1,0 +1,54 @@
+{
+  "title": "ModelDeployments_Get_MaximumSet",
+  "operationId": "ModelDeployments_Get",
+  "parameters": {
+    "api-version": "2026-05-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgaimanagers",
+    "aiManagerName": "aimanager1",
+    "namespaceName": "namespace-1",
+    "modelDeploymentName": "deployment-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "modelResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiModels/9806f0c862fdd920",
+          "modelSourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/modelSources/huggingface",
+          "performanceMode": "Balanced",
+          "vmSize": "Standard_NC96ads_A100_v4",
+          "scale": {
+            "autoscale": {
+              "minReplicas": 2,
+              "maxReplicas": 8
+            }
+          },
+          "status": {
+            "endpoint": "https://team-alpha.aks-cluster.eastus.aksapp.io/v1",
+            "engine": "vllm",
+            "engineVersion": "0.20.0",
+            "maxModelLen": 32768,
+            "quantization": "fp16",
+            "desiredReplicas": 4,
+            "currentReplicas": 4,
+            "peakTokensPerMinute": 12000,
+            "estimatedProvisionTimeSeconds": 900
+          }
+        },
+        "eTag": "\"abc123def456\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgaimanagers/providers/Microsoft.ContainerService/aiManagers/aimanager1/namespaces/namespace-1/modelDeployments/deployment-1",
+        "name": "deployment-1",
+        "type": "Microsoft.ContainerService/aiManagers/namespaces/modelDeployments",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-01T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

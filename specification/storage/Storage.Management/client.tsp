@@ -214,6 +214,33 @@ using Microsoft.Storage;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This operation is pageable for .Net SDK"
 @@markAsPageable(TableServices.list, "csharp");
 @@clientName(ManagementPolicy, "StorageAccountManagementPolicy", "csharp");
+
+/**
+ * The name of the blob inventory policy. It should always be 'default'.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
+@clientName("ManagementPolicyName", "csharp")
+union CSharpManagementPolicyName {
+  /** Default. */
+  Default: "default",
+}
+
+/**
+ * The name of the blob inventory policy. It should always be 'default'.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The enum is made closed for .NET SDK in order to recognize the corresponding resource a singleton"
+@clientName("BlobInventoryPolicyName", "csharp")
+union CSharpBlobInventoryPolicyName {
+  /** Default. */
+  Default: "default",
+}
+
+@@alternateType(ManagementPolicyName, CSharpManagementPolicyName, "csharp");
+@@alternateType(
+  BlobInventoryPolicyName,
+  CSharpBlobInventoryPolicyName,
+  "csharp"
+);
 @@clientName(
   PrivateEndpointConnection,
   "StoragePrivateEndpointConnection",
@@ -452,6 +479,13 @@ namespace Azure.ResourceManager.Models {
 );
 @@usage(
   BlobServiceProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DeletedAccount,
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,

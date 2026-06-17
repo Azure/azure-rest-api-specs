@@ -8,11 +8,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
  * .NET Component.
  */
+@removed(Versions.v2026_01_01)
 @parentResource(ManagedEnvironment)
 model DotNetComponent
   is Azure.ResourceManager.ProxyResource<DotNetComponentProperties> {
@@ -48,6 +50,7 @@ alias DotNetComponentOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+@removed(Versions.v2026_01_01)
 @armResourceOperations
 interface DotNetComponents {
   /**

@@ -1,0 +1,16 @@
+id: release-plan-update-001
+name: Update Release Plan
+description: |
+  Test that the skill updates release plan metadata including API spec PR URL and SDK release type.
+tags:
+  - basic
+  - update
+inputs:
+  prompt: "Update release plan 67890 with the new spec PR https://github.com/Azure/azure-rest-api-specs/pull/99999 and change the SDK release type to stable."
+expected:
+  output_contains:
+    - "update"
+    - "release plan"
+  behavior:
+    max_tool_calls: 5
+    max_response_time_ms: 20000

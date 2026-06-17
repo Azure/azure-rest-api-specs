@@ -27,6 +27,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
 import "./routes.tsp";
 import "./FabricMirroringSettings.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

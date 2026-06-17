@@ -584,3 +584,16 @@ using Microsoft.DevTestLab;
 @@alternateType(ArtifactProperties.parameters, unknown, "csharp");
 @@alternateType(ArmTemplateInfo.template, unknown, "csharp");
 @@alternateType(ArmTemplateInfo.parameters, unknown, "csharp");
+
+@@clientName(NotificationChannelProperties.webHookUrl, "webhookUrl", "java");
+@@clientName(LabVirtualMachineProperties.userName, "username", "java");
+@@clientName(
+  LabVirtualMachineCreationParameterProperties.userName,
+  "username",
+  "java"
+);
+@@alternateType(ArmTemplateProperties.contents, unknown, "java");
+@@alternateType(ArtifactProperties.parameters, unknown, "java");
+@@alternateType(ArmTemplateInfo.template, unknown, "java");
+@@alternateType(ArmTemplateInfo.parameters, unknown, "java");
+@@alternateType(ParametersValueFileInfo.parametersValueInfo, unknown, "java");

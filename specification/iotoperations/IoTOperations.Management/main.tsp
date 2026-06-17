@@ -19,6 +19,7 @@ import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
 import "./models/akri/service.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
