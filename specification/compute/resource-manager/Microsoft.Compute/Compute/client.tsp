@@ -999,17 +999,17 @@ model VMSizePropertiesWithAdditionalProperties {
 
 // Mark non-pageable list operations as pageable for backward compatibility.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+@@Legacy.markAsPageable(
   VirtualMachineExtensions.list,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+@@Legacy.markAsPageable(
   VirtualMachineScaleSetVMExtensions.list,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+@@Legacy.markAsPageable(
   VirtualMachineImagesOperationGroup.listByEdgeZone,
   "csharp"
 );
@@ -1632,6 +1632,7 @@ model VMSizePropertiesWithAdditionalProperties {
 @@alternateType(ImageDisk.blobUri, url, "csharp");
 @@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
 @@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
+@@useSystemTextJsonConverter(KeyVaultSecretReference, "csharp");
 @@alternateType(LogAnalyticsInputBase.blobContainerSasUri, url, "csharp");
 @@alternateType(
   RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri,
@@ -2273,7 +2274,7 @@ union ComputeUsageUnit {
 
 // Mark non-pageable list operations as pageable for backward compatibility.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+@@Legacy.markAsPageable(
   DiskAccesses.getPrivateLinkResources,
   "csharp"
 );
