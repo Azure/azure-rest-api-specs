@@ -35,6 +35,14 @@ options:
     head-as-boolean: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     inject-spans: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/resiliencemanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resiliencemanagement"
+    package-details:
+      name: "@azure/arm-resiliencemanagement"
+    flavor: azure
+    experimental-extensible-enums: true
+    compatibility-lro: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
