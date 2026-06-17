@@ -17,8 +17,13 @@ export interface PythonPackagesPyPIValidationResult {
 }
 
 type Fetch = typeof fetch;
+type Sleep = (ms: number) => Promise<void>;
 
 const PYPI_PACKAGE_BASE_URL = "https://pypi.org/pypi";
+const MAX_RETRIES = 3;
+const RETRY_DELAY_MS = 1000;
+const RETRYABLE_HTTP_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
+const defaultSleep: Sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function getPackageUrl(packageName: string): string {
   return `${PYPI_PACKAGE_BASE_URL}/${encodeURIComponent(packageName)}/json`;
@@ -27,36 +32,48 @@ function getPackageUrl(packageName: string): string {
 export async function checkPackageOnPyPI(
   packageName: string,
   fetchImpl: Fetch = fetch,
+  sleep: Sleep = defaultSleep,
 ): Promise<PyPIPackageValidationResult> {
   const packageUrl = getPackageUrl(packageName);
+  let lastFailureReason = "";
 
-  try {
-    const response = await fetchImpl(packageUrl);
-    if (response.status === 200) {
-      return { status: "registered", packageName, packageUrl };
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    if (attempt > 0) {
+      await sleep(RETRY_DELAY_MS);
     }
-    if (response.status === 404) {
-      return { status: "notRegistered", packageName, packageUrl };
+    try {
+      const response = await fetchImpl(packageUrl);
+      if (response.status === 200) {
+        return { status: "registered", packageName, packageUrl };
+      }
+      if (response.status === 404) {
+        return { status: "notRegistered", packageName, packageUrl };
+      }
+      if (!RETRYABLE_HTTP_STATUS_CODES.has(response.status)) {
+        return {
+          status: "checkFailed",
+          packageName,
+          packageUrl,
+          reason: `PyPI returned HTTP ${response.status}`,
+        };
+      }
+      lastFailureReason = `PyPI returned HTTP ${response.status}`;
+    } catch (error) {
+      lastFailureReason = inspect(error);
     }
-
-    return {
-      status: "checkFailed",
-      packageName,
-      packageUrl,
-      reason: `PyPI returned HTTP ${response.status}`,
-    };
-  } catch (error) {
-    return {
-      status: "checkFailed",
-      packageName,
-      packageUrl,
-      reason: inspect(error),
-    };
   }
+
+  return {
+    status: "checkFailed",
+    packageName,
+    packageUrl,
+    reason: lastFailureReason,
+  };
 }
 
 export async function validatePythonPackagesOnPyPI(
   packages: ExecutionReportPackage[],
+  sleep: Sleep = defaultSleep,
 ): Promise<PythonPackagesPyPIValidationResult> {
   const errors: string[] = [];
 
@@ -73,7 +90,7 @@ export async function validatePythonPackagesOnPyPI(
       `Checking whether Python package '${pkg.packageName}' is registered on PyPI.org...`,
       LogLevel.Info,
     );
-    const result = await checkPackageOnPyPI(pkg.packageName);
+    const result = await checkPackageOnPyPI(pkg.packageName, fetch, sleep);
 
     if (result.status === "registered") {
       logMessage(
@@ -85,7 +102,7 @@ export async function validatePythonPackagesOnPyPI(
 
     if (result.status === "notRegistered") {
       errors.push(
-        `Python package '${pkg.packageName}' is not registered on PyPI.org yet. To reserve this package name, complete these actions:\n1. Request namespace review at aka.ms/azsdk/ns-review. 2. After namespace approval, trigger the package-name reservation pipeline: https://dev.azure.com/azure-sdk/internal/_build?definitionId=8013.`,
+        `Python package '${pkg.packageName}' is not registered on PyPI.org yet. To reserve this package name, complete these actions: 1. Request namespace review at aka.ms/azsdk/ns-review; 2. After namespace approval, trigger the package-name reservation pipeline: aka.ms/python-reserve-pkg`,
       );
     } else {
       errors.push(
