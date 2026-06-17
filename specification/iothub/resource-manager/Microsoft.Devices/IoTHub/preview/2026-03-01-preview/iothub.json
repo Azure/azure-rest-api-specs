@@ -5013,7 +5013,9 @@
       "description": "Twin reference input parameter. This is an optional parameter",
       "properties": {
         "tags": {
-          "description": "Twin Tags"
+          "type": "object",
+          "description": "Twin Tags",
+          "additionalProperties": {}
         },
         "properties": {
           "$ref": "#/definitions/RoutingTwinProperties"
@@ -5024,10 +5026,14 @@
       "type": "object",
       "properties": {
         "desired": {
-          "description": "Twin desired properties"
+          "type": "object",
+          "description": "Twin desired properties",
+          "additionalProperties": {}
         },
         "reported": {
-          "description": "Twin desired properties"
+          "type": "object",
+          "description": "Twin reported properties",
+          "additionalProperties": {}
         }
       }
     },

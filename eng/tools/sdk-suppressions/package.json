@@ -2,13 +2,13 @@
   "name": "@azure-tools/sdk-suppressions",
   "private": true,
   "type": "module",
-  "main": "dist/src/index.js",
+  "main": "src/index.ts",
   "version": "1.0.0",
   "bin": {
     "get-sdk-suppressions-label": "cmd/sdk-suppressions-label.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
     "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
@@ -16,7 +16,7 @@
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=22.18.0"
   },
   "dependencies": {
     "@azure-tools/specs-shared": "file:../../../.github/shared",
