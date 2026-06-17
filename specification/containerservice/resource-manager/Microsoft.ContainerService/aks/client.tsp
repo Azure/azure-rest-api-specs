@@ -1617,6 +1617,15 @@ namespace Azure.ResourceManager.Models {
   "ContainerServiceGuardrailsAvailableVersion",
   "csharp"
 );
+@@clientName(
+  SafeguardsAvailableVersion,
+  "ContainerServiceSafeguardsAvailableVersion",
+  "csharp"
+);
+// Profile models: add a service/resource prefix so they aren't confused with the
+// Network SDK's "Bastion*" types.
+@@clientName(BastionProfile, "ManagedClusterBastionProfile", "csharp");
+@@clientName(BastionSku, "ManagedClusterBastionSku", "csharp");
 
 // TODO: drop the type replacement upon next major breaking change
 @@alternateType(
