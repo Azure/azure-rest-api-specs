@@ -19,7 +19,9 @@ using Common;
   service: [Microsoft.Network, Microsoft.Compute],
   autoMergeService: true,
 })
-namespace CombineClient {}
+namespace CombineClient {
+
+}
 
 // Define WritableSubResource in the ARM namespace for C# collection compatibility.
 namespace Azure.ResourceManager.Models {
