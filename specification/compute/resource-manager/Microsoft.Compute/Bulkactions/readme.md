@@ -125,4 +125,18 @@ These settings apply only when `--tag=package-2026-06-06` is specified on the co
 ```yaml $(tag) == 'package-2026-06-06'
 input-file:
   - stable/2026-06-06/Bulkactions.json
+suppressions:
+  - code: ParameterNotUsingCommonTypes
+    reason: >
+      The location parameter is used as a segment-bound parameter in the
+      VirtualMachineBulkOperations action paths and cannot be a $ref to common-types
+      LocationParameter without losing the resource key binding.
+    from: Bulkactions.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart"].post.parameters[?(@.name=='location')]
 ```
