@@ -334,6 +334,12 @@ union AgentPoolType {
    * Create an Agent Pool backed by a Single Instance VM orchestration mode.
    */
   VirtualMachines: "VirtualMachines",
+
+  /**
+   * Create an Agent Pool for BYO machines running the FlexNode agent.
+   */
+  @added(Versions.v2026_05_02_preview)
+  FlexNodes: "FlexNodes",
 }
 
 /**

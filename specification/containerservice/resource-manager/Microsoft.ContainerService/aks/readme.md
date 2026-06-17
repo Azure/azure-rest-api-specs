@@ -1530,6 +1530,10 @@ directive:
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
   - suppress: AvoidAdditionalProperties
     from: managedClusters.json
+    where: $.definitions.BootstrapNodeConfig.properties.labels
+    reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
+  - suppress: AvoidAdditionalProperties
+    from: managedClusters.json
     where: $.definitions.LocalDNSOverrides
     reason: User defined custom key-value pairs, similar to the allowed "user defined tags." These pairs can have any value, as there is no validation on the values
   - suppress: RequiredPropertiesMissingInResourceModel

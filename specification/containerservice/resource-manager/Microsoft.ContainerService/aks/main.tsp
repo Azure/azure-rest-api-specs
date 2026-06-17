@@ -23,6 +23,7 @@ import "./MeshUpgradeProfile.tsp";
 import "./MaintenanceConfiguration.tsp";
 import "./MaintenanceWindow.tsp";
 import "./ManagedNamespace.tsp";
+import "./FlexNodeBootstrap.tsp";
 import "./AgentPool.tsp";
 import "./AgentPoolUpgradeProfile.tsp";
 import "./Machine.tsp";
