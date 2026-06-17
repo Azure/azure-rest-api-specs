@@ -40,7 +40,7 @@ input-file:
 - preview/2025-12-01-preview/openapi.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
-    reason: "The TypeSpec source marks provisioningState with @visibility(Lifecycle.Read) and the emitter outputs readOnly:true, but it appears as a sibling of $ref. Per JSON Schema, readOnly next to $ref is ignored, so the lint rule still fires. This is an emitter limitation, not a spec authoring issue."
+    reason: "provisioningState/status are read-only via @visibility(Lifecycle.Read), but the autorest emitter renders this as `readOnly: true` placed as a sibling of `$ref`, which JSON Reference resolution discards before this resolved-schema rule evaluates (verified against @stoplight/json-ref-resolver). Both emitter-level fixes rewrite already-released API versions and are out of scope for this new-version-only PR: `use-read-only-status-schema` is project-global and regenerates the GA stable 2024-12-30 spec (triggering 1029/ReadonlyPropertyChanged breaking-change errors), and inlining the shared AdvancedThreatProtection/Maintenance/ServerBackup status enums likewise modifies prior versions. Scoped to package-flexibleserver-2025-12-01-preview only."
 ```
 
 ### Tag: package-flexibleserver-2025-06-01-preview
