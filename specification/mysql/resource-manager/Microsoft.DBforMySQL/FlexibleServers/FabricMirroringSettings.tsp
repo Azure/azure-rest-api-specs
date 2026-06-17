@@ -30,24 +30,15 @@ union FabricMirroringState {
 
 /**
  * Provisioning state of Fabric Mirroring.
- * Extensible string-based union per Azure guidelines.
+ * Extends the standard Azure.ResourceManager.ResourceProvisioningState with the
+ * non-terminal `Updating` state used by this resource.
  */
 @added(Versions.v2025_12_01_preview)
 union FabricMirroringProvisioningState {
-  /** Provisioning has succeeded. */
-  Succeeded: "Succeeded",
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /** Provisioning is in progress. */
   Updating: "Updating",
-
-  /** Provisioning was canceled. */
-  Canceled: "Canceled",
-
-  /** Provisioning has failed. */
-  Failed: "Failed",
-
-  /** Future/unknown values. */
-  string,
 }
 
 /**

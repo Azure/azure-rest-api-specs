@@ -5425,12 +5425,12 @@
     },
     "FabricMirroringProvisioningState": {
       "type": "string",
-      "description": "Provisioning state of Fabric Mirroring.\nExtensible string-based union per Azure guidelines.",
+      "description": "Provisioning state of Fabric Mirroring.\nExtends the standard Azure.ResourceManager.ResourceProvisioningState with the\nnon-terminal `Updating` state used by this resource.",
       "enum": [
         "Succeeded",
-        "Updating",
+        "Failed",
         "Canceled",
-        "Failed"
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "FabricMirroringProvisioningState",
@@ -5439,22 +5439,22 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Provisioning has succeeded."
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Updating",
             "value": "Updating",
             "description": "Provisioning is in progress."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Provisioning was canceled."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Provisioning has failed."
           }
         ]
       }
