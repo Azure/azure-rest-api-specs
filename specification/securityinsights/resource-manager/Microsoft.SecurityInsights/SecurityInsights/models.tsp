@@ -80,7 +80,7 @@ union CreatedByType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union TriggersOn {
+union triggersOn {
   string,
 
   /**
@@ -414,7 +414,7 @@ union EntityKindEnum {
 /**
  * The package kind
  */
-union PackageKind {
+union packageKind {
   string,
 
   /**
@@ -460,7 +460,7 @@ union Flag {
 /**
  * Source type of the content
  */
-union SourceKind {
+union sourceKind {
   string,
 
   /**
@@ -487,7 +487,7 @@ union SourceKind {
 /**
  * Type of support for content item
  */
-union SupportTier {
+union supportTier {
   string,
 
   /**
@@ -509,7 +509,7 @@ union SupportTier {
 /**
  * The kind of content the metadata is for.
  */
-union Kind {
+union kind {
   string,
 
   /**
@@ -2170,7 +2170,7 @@ union ProvisioningState {
 /**
  * The sourceType of the watchlist
  */
-union SourceType {
+union sourceType {
   string,
 
   /**
@@ -3076,7 +3076,7 @@ union CcpAuthType {
 /**
  * The HTTP method, default value GET.
  */
-union HttpMethodVerb {
+union httpMethodVerb {
   string,
 
   /**
@@ -3994,7 +3994,7 @@ model AutomationRuleTriggeringLogic {
   expirationTimeUtc?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  triggersOn: TriggersOn;
+  triggersOn: triggersOn;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   triggersWhen: triggersWhen;
 
@@ -4473,7 +4473,7 @@ model PackageProperties extends PackageBaseProperties {
   /**
    * The package kind
    */
-  contentKind: PackageKind;
+  contentKind: packageKind;
 
   /**
    * the latest version number of the package
@@ -4588,7 +4588,7 @@ model MetadataSource {
   /**
    * Source type of the content
    */
-  kind: SourceKind;
+  kind: sourceKind;
 
   /**
    * Name of the content source.  The repo name, solution name, LA workspace name etc.
@@ -4628,7 +4628,7 @@ model MetadataSupport {
   /**
    * Type of support for content item
    */
-  tier: SupportTier;
+  tier: supportTier;
 
   /**
    * Name of the support contact. Company or person.
@@ -4658,7 +4658,7 @@ model MetadataDependencies {
   /**
    * Type of the content item we depend on
    */
-  kind?: Kind;
+  kind?: kind;
 
   /**
    * Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.
@@ -4717,7 +4717,7 @@ model ProductPackageProperties {
   /**
    * The package kind
    */
-  contentKind: PackageKind;
+  contentKind: packageKind;
 
   /**
    * the latest version number of the package
@@ -4799,7 +4799,7 @@ model ProductTemplateProperties {
   /**
    * The kind of content the template is for.
    */
-  contentKind: Kind;
+  contentKind: kind;
 
   /**
    * Source of the content.  This is where/how it was created.
@@ -4889,7 +4889,7 @@ model TemplateBaseProperties {
   /**
    * the packageKind of the package contains this template
    */
-  packageKind?: PackageKind;
+  packageKind?: packageKind;
 
   /**
    * the name of the package contains this template
@@ -4954,7 +4954,7 @@ model TemplateProperties {
   /**
    * The kind of content the template is for.
    */
-  contentKind: Kind;
+  contentKind: kind;
 
   /**
    * Source of the content.  This is where/how it was created.
@@ -8505,7 +8505,7 @@ model WatchlistProperties {
   /**
    * The sourceType of the watchlist
    */
-  sourceType?: SourceType;
+  sourceType?: sourceType;
 
   /**
    * The time the watchlist was created
@@ -11836,7 +11836,7 @@ model RestApiPollerRequestConfig {
   /**
    * The HTTP method, default value GET.
    */
-  httpMethod?: HttpMethodVerb;
+  httpMethod?: httpMethodVerb;
 
   /**
    * The query time format. A remote server can have a query to pull data from range 'start' to 'end'. This property indicate what is the expected time format the remote server know to parse.

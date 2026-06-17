@@ -14094,7 +14094,7 @@
           "description": "Determines when the automation rule should automatically expire and be disabled."
         },
         "triggersOn": {
-          "$ref": "#/definitions/TriggersOn"
+          "$ref": "#/definitions/triggersOn"
         },
         "triggersWhen": {
           "$ref": "#/definitions/triggersWhen"
@@ -19860,42 +19860,6 @@
         }
       ]
     },
-    "HttpMethodVerb": {
-      "type": "string",
-      "description": "The HTTP method, default value GET.",
-      "enum": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ],
-      "x-ms-enum": {
-        "name": "HttpMethodVerb",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GET",
-            "value": "GET",
-            "description": "GET"
-          },
-          {
-            "name": "POST",
-            "value": "POST",
-            "description": "POST"
-          },
-          {
-            "name": "PUT",
-            "value": "PUT",
-            "description": "PUT"
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE",
-            "description": "DELETE"
-          }
-        ]
-      }
-    },
     "Hunt": {
       "type": "object",
       "description": "Represents a Hunt in Azure Security Insights.",
@@ -22020,150 +21984,6 @@
             "name": "Impact",
             "value": "Impact",
             "description": "The impact intent primary objective is to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process. This would often refer to techniques such as ransom-ware, defacement, data manipulation and others."
-          }
-        ]
-      }
-    },
-    "Kind": {
-      "type": "string",
-      "description": "The kind of content the metadata is for.",
-      "enum": [
-        "DataConnector",
-        "DataType",
-        "Workbook",
-        "WorkbookTemplate",
-        "Playbook",
-        "PlaybookTemplate",
-        "AnalyticsRuleTemplate",
-        "AnalyticsRule",
-        "HuntingQuery",
-        "InvestigationQuery",
-        "Parser",
-        "Watchlist",
-        "WatchlistTemplate",
-        "Solution",
-        "AzureFunction",
-        "LogicAppsCustomConnector",
-        "AutomationRule",
-        "ResourcesDataConnector",
-        "Notebook",
-        "Standalone",
-        "SummaryRule",
-        "CustomDetection"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DataConnector",
-            "value": "DataConnector",
-            "description": "DataConnector"
-          },
-          {
-            "name": "DataType",
-            "value": "DataType",
-            "description": "DataType"
-          },
-          {
-            "name": "Workbook",
-            "value": "Workbook",
-            "description": "Workbook"
-          },
-          {
-            "name": "WorkbookTemplate",
-            "value": "WorkbookTemplate",
-            "description": "WorkbookTemplate"
-          },
-          {
-            "name": "Playbook",
-            "value": "Playbook",
-            "description": "Playbook"
-          },
-          {
-            "name": "PlaybookTemplate",
-            "value": "PlaybookTemplate",
-            "description": "PlaybookTemplate"
-          },
-          {
-            "name": "AnalyticsRuleTemplate",
-            "value": "AnalyticsRuleTemplate",
-            "description": "AnalyticsRuleTemplate"
-          },
-          {
-            "name": "AnalyticsRule",
-            "value": "AnalyticsRule",
-            "description": "AnalyticsRule"
-          },
-          {
-            "name": "HuntingQuery",
-            "value": "HuntingQuery",
-            "description": "HuntingQuery"
-          },
-          {
-            "name": "InvestigationQuery",
-            "value": "InvestigationQuery",
-            "description": "InvestigationQuery"
-          },
-          {
-            "name": "Parser",
-            "value": "Parser",
-            "description": "Parser"
-          },
-          {
-            "name": "Watchlist",
-            "value": "Watchlist",
-            "description": "Watchlist"
-          },
-          {
-            "name": "WatchlistTemplate",
-            "value": "WatchlistTemplate",
-            "description": "WatchlistTemplate"
-          },
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "AzureFunction",
-            "value": "AzureFunction",
-            "description": "AzureFunction"
-          },
-          {
-            "name": "LogicAppsCustomConnector",
-            "value": "LogicAppsCustomConnector",
-            "description": "LogicAppsCustomConnector"
-          },
-          {
-            "name": "AutomationRule",
-            "value": "AutomationRule",
-            "description": "AutomationRule"
-          },
-          {
-            "name": "ResourcesDataConnector",
-            "value": "ResourcesDataConnector",
-            "description": "ResourcesDataConnector"
-          },
-          {
-            "name": "Notebook",
-            "value": "Notebook",
-            "description": "Notebook"
-          },
-          {
-            "name": "Standalone",
-            "value": "Standalone",
-            "description": "Standalone"
-          },
-          {
-            "name": "SummaryRule",
-            "value": "SummaryRule",
-            "description": "SummaryRule"
-          },
-          {
-            "name": "CustomDetection",
-            "value": "CustomDetection",
-            "description": "Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant."
           }
         ]
       }
@@ -24624,30 +24444,6 @@
         ]
       }
     },
-    "PackageKind": {
-      "type": "string",
-      "description": "The package kind",
-      "enum": [
-        "Solution",
-        "Standalone"
-      ],
-      "x-ms-enum": {
-        "name": "PackageKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "Standalone",
-            "value": "Standalone",
-            "description": "Standalone"
-          }
-        ]
-      }
-    },
     "PermissionProviderScope": {
       "type": "string",
       "description": "Permission provider scope",
@@ -26221,7 +26017,7 @@
           "x-nullable": true
         },
         "httpMethod": {
-          "$ref": "#/definitions/HttpMethodVerb",
+          "$ref": "#/definitions/httpMethodVerb",
           "description": "The HTTP method, default value GET."
         },
         "queryTimeFormat": {
@@ -27670,66 +27466,6 @@
         "repository"
       ]
     },
-    "SourceKind": {
-      "type": "string",
-      "description": "Source type of the content",
-      "enum": [
-        "LocalWorkspace",
-        "Community",
-        "Solution",
-        "SourceRepository"
-      ],
-      "x-ms-enum": {
-        "name": "SourceKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LocalWorkspace",
-            "value": "LocalWorkspace",
-            "description": "LocalWorkspace"
-          },
-          {
-            "name": "Community",
-            "value": "Community",
-            "description": "Community"
-          },
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "SourceRepository",
-            "value": "SourceRepository",
-            "description": "SourceRepository"
-          }
-        ]
-      }
-    },
-    "SourceType": {
-      "type": "string",
-      "description": "The sourceType of the watchlist",
-      "enum": [
-        "Local",
-        "AzureStorage"
-      ],
-      "x-ms-enum": {
-        "name": "SourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Local",
-            "value": "Local",
-            "description": "The source from local file."
-          },
-          {
-            "name": "AzureStorage",
-            "value": "AzureStorage",
-            "description": "The source from Azure storage."
-          }
-        ]
-      }
-    },
     "State": {
       "type": "string",
       "description": "State of recommendation.",
@@ -27911,36 +27647,6 @@
           "$ref": "#/definitions/EntityCommonProperties"
         }
       ]
-    },
-    "SupportTier": {
-      "type": "string",
-      "description": "Type of support for content item",
-      "enum": [
-        "Microsoft",
-        "Partner",
-        "Community"
-      ],
-      "x-ms-enum": {
-        "name": "SupportTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Microsoft",
-            "value": "Microsoft",
-            "description": "Microsoft"
-          },
-          {
-            "name": "Partner",
-            "value": "Partner",
-            "description": "Partner"
-          },
-          {
-            "name": "Community",
-            "value": "Community",
-            "description": "Community"
-          }
-        ]
-      }
     },
     "TICheckRequirements": {
       "type": "object",
@@ -28301,7 +28007,7 @@
           }
         },
         "packageKind": {
-          "$ref": "#/definitions/PackageKind",
+          "$ref": "#/definitions/packageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {
@@ -29385,29 +29091,6 @@
         "value"
       ]
     },
-    "TriggersOn": {
-      "type": "string",
-      "enum": [
-        "Incidents",
-        "Alerts"
-      ],
-      "x-ms-enum": {
-        "name": "TriggersOn",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Incidents",
-            "value": "Incidents",
-            "description": "Trigger on Incidents"
-          },
-          {
-            "name": "Alerts",
-            "value": "Alerts",
-            "description": "Trigger on Alerts"
-          }
-        ]
-      }
-    },
     "Ueba": {
       "type": "object",
       "description": "Settings with single toggle.",
@@ -29800,7 +29483,7 @@
           "description": "The filename of the watchlist, called 'source'"
         },
         "sourceType": {
-          "$ref": "#/definitions/SourceType",
+          "$ref": "#/definitions/sourceType",
           "description": "The sourceType of the watchlist"
         },
         "created": {
@@ -30282,6 +29965,42 @@
         "errorMessage"
       ]
     },
+    "httpMethodVerb": {
+      "type": "string",
+      "description": "The HTTP method, default value GET.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "x-ms-enum": {
+        "name": "httpMethodVerb",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GET",
+            "value": "GET",
+            "description": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "PUT"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "DELETE"
+          }
+        ]
+      }
+    },
     "jobItem": {
       "type": "object",
       "description": "An entity describing the publish status of a content item.",
@@ -30309,6 +30028,150 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "kind": {
+      "type": "string",
+      "description": "The kind of content the metadata is for.",
+      "enum": [
+        "DataConnector",
+        "DataType",
+        "Workbook",
+        "WorkbookTemplate",
+        "Playbook",
+        "PlaybookTemplate",
+        "AnalyticsRuleTemplate",
+        "AnalyticsRule",
+        "HuntingQuery",
+        "InvestigationQuery",
+        "Parser",
+        "Watchlist",
+        "WatchlistTemplate",
+        "Solution",
+        "AzureFunction",
+        "LogicAppsCustomConnector",
+        "AutomationRule",
+        "ResourcesDataConnector",
+        "Notebook",
+        "Standalone",
+        "SummaryRule",
+        "CustomDetection"
+      ],
+      "x-ms-enum": {
+        "name": "kind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataConnector",
+            "value": "DataConnector",
+            "description": "DataConnector"
+          },
+          {
+            "name": "DataType",
+            "value": "DataType",
+            "description": "DataType"
+          },
+          {
+            "name": "Workbook",
+            "value": "Workbook",
+            "description": "Workbook"
+          },
+          {
+            "name": "WorkbookTemplate",
+            "value": "WorkbookTemplate",
+            "description": "WorkbookTemplate"
+          },
+          {
+            "name": "Playbook",
+            "value": "Playbook",
+            "description": "Playbook"
+          },
+          {
+            "name": "PlaybookTemplate",
+            "value": "PlaybookTemplate",
+            "description": "PlaybookTemplate"
+          },
+          {
+            "name": "AnalyticsRuleTemplate",
+            "value": "AnalyticsRuleTemplate",
+            "description": "AnalyticsRuleTemplate"
+          },
+          {
+            "name": "AnalyticsRule",
+            "value": "AnalyticsRule",
+            "description": "AnalyticsRule"
+          },
+          {
+            "name": "HuntingQuery",
+            "value": "HuntingQuery",
+            "description": "HuntingQuery"
+          },
+          {
+            "name": "InvestigationQuery",
+            "value": "InvestigationQuery",
+            "description": "InvestigationQuery"
+          },
+          {
+            "name": "Parser",
+            "value": "Parser",
+            "description": "Parser"
+          },
+          {
+            "name": "Watchlist",
+            "value": "Watchlist",
+            "description": "Watchlist"
+          },
+          {
+            "name": "WatchlistTemplate",
+            "value": "WatchlistTemplate",
+            "description": "WatchlistTemplate"
+          },
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "AzureFunction",
+            "value": "AzureFunction",
+            "description": "AzureFunction"
+          },
+          {
+            "name": "LogicAppsCustomConnector",
+            "value": "LogicAppsCustomConnector",
+            "description": "LogicAppsCustomConnector"
+          },
+          {
+            "name": "AutomationRule",
+            "value": "AutomationRule",
+            "description": "AutomationRule"
+          },
+          {
+            "name": "ResourcesDataConnector",
+            "value": "ResourcesDataConnector",
+            "description": "ResourcesDataConnector"
+          },
+          {
+            "name": "Notebook",
+            "value": "Notebook",
+            "description": "Notebook"
+          },
+          {
+            "name": "Standalone",
+            "value": "Standalone",
+            "description": "Standalone"
+          },
+          {
+            "name": "SummaryRule",
+            "value": "SummaryRule",
+            "description": "SummaryRule"
+          },
+          {
+            "name": "CustomDetection",
+            "value": "CustomDetection",
+            "description": "Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant."
+          }
+        ]
       }
     },
     "metadataAuthor": {
@@ -30358,7 +30221,7 @@
           "description": "Id of the content item we depend on"
         },
         "kind": {
-          "$ref": "#/definitions/Kind",
+          "$ref": "#/definitions/kind",
           "description": "Type of the content item we depend on"
         },
         "version": {
@@ -30608,7 +30471,7 @@
       "description": "The original source of the content item, where it comes from.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/SourceKind",
+          "$ref": "#/definitions/sourceKind",
           "description": "Source type of the content"
         },
         "name": {
@@ -30629,7 +30492,7 @@
       "description": "Support information for the content item.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/SupportTier",
+          "$ref": "#/definitions/supportTier",
           "description": "Type of support for content item"
         },
         "name": {
@@ -30774,6 +30637,30 @@
         }
       }
     },
+    "packageKind": {
+      "type": "string",
+      "description": "The package kind",
+      "enum": [
+        "Solution",
+        "Standalone"
+      ],
+      "x-ms-enum": {
+        "name": "packageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "Standalone",
+            "value": "Standalone",
+            "description": "Standalone"
+          }
+        ]
+      }
+    },
     "packageList": {
       "type": "object",
       "description": "List available packages.",
@@ -30828,7 +30715,7 @@
           "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
         },
         "contentKind": {
-          "$ref": "#/definitions/PackageKind",
+          "$ref": "#/definitions/packageKind",
           "description": "The package kind"
         },
         "version": {
@@ -31004,7 +30891,7 @@
           "description": "The content id of the package"
         },
         "contentKind": {
-          "$ref": "#/definitions/PackageKind",
+          "$ref": "#/definitions/packageKind",
           "description": "The package kind"
         },
         "version": {
@@ -31167,7 +31054,7 @@
           }
         },
         "packageKind": {
-          "$ref": "#/definitions/PackageKind",
+          "$ref": "#/definitions/packageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {
@@ -31203,7 +31090,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/Kind",
+          "$ref": "#/definitions/kind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -31222,6 +31109,96 @@
         "contentKind",
         "source"
       ]
+    },
+    "sourceKind": {
+      "type": "string",
+      "description": "Source type of the content",
+      "enum": [
+        "LocalWorkspace",
+        "Community",
+        "Solution",
+        "SourceRepository"
+      ],
+      "x-ms-enum": {
+        "name": "sourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LocalWorkspace",
+            "value": "LocalWorkspace",
+            "description": "LocalWorkspace"
+          },
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community"
+          },
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "SourceRepository",
+            "value": "SourceRepository",
+            "description": "SourceRepository"
+          }
+        ]
+      }
+    },
+    "sourceType": {
+      "type": "string",
+      "description": "The sourceType of the watchlist",
+      "enum": [
+        "Local",
+        "AzureStorage"
+      ],
+      "x-ms-enum": {
+        "name": "sourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "The source from local file."
+          },
+          {
+            "name": "AzureStorage",
+            "value": "AzureStorage",
+            "description": "The source from Azure storage."
+          }
+        ]
+      }
+    },
+    "supportTier": {
+      "type": "string",
+      "description": "Type of support for content item",
+      "enum": [
+        "Microsoft",
+        "Partner",
+        "Community"
+      ],
+      "x-ms-enum": {
+        "name": "supportTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft"
+          },
+          {
+            "name": "Partner",
+            "value": "Partner",
+            "description": "Partner"
+          },
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community"
+          }
+        ]
+      }
     },
     "templateAdditionalProperties": {
       "type": "object",
@@ -31362,7 +31339,7 @@
           }
         },
         "packageKind": {
-          "$ref": "#/definitions/PackageKind",
+          "$ref": "#/definitions/packageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {
@@ -31409,7 +31386,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/Kind",
+          "$ref": "#/definitions/kind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -31467,6 +31444,29 @@
           "description": "Threat type (e.g. \"Botnet\")",
           "readOnly": true
         }
+      }
+    },
+    "triggersOn": {
+      "type": "string",
+      "enum": [
+        "Incidents",
+        "Alerts"
+      ],
+      "x-ms-enum": {
+        "name": "triggersOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Incidents",
+            "value": "Incidents",
+            "description": "Trigger on Incidents"
+          },
+          {
+            "name": "Alerts",
+            "value": "Alerts",
+            "description": "Trigger on Alerts"
+          }
+        ]
       }
     },
     "triggersWhen": {
