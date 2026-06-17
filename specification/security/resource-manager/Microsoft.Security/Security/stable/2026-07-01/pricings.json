@@ -69,10 +69,10 @@
         "operationId": "Pricings_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
           },
           {
             "$ref": "#/parameters/PricingName"
@@ -88,7 +88,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -118,10 +118,10 @@
         "operationId": "Pricings_Update",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
           },
           {
             "$ref": "#/parameters/PricingName"
@@ -146,7 +146,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -167,10 +167,10 @@
         "operationId": "Pricings_Delete",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeResourceId"
+            "$ref": "./common/v1/types.json#/parameters/ScopeResourceId"
           },
           {
             "$ref": "#/parameters/PricingName"
@@ -186,7 +186,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -215,13 +215,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeId"
+            "$ref": "./common/v1/types.json#/parameters/ScopeId"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ODataFilter"
+            "$ref": "./common/v1/types.json#/parameters/ODataFilter"
           }
         ],
         "responses": {
@@ -234,7 +234,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -243,40 +243,40 @@
     "/{scopeId}/providers/Microsoft.Security/pricings/global": {
       "put": {
         "x-ms-examples": {
-          "Batch update multiple pricing plans - success": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_Success_example.json"
+          "Global update multiple pricing plans - success": {
+            "$ref": "./examples/Pricings/GlobalUpdatePricings_Success_example.json"
           },
-          "Batch update with partial success": {
-            "$ref": "./examples/Pricings/BatchUpdatePricings_PartialSuccess_example.json"
+          "Global update with partial success": {
+            "$ref": "./examples/Pricings/GlobalUpdatePricings_PartialSuccess_example.json"
           }
         },
         "tags": [
           "Pricings"
         ],
-        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope by using the globalized pricings endpoint. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for globalized batch operations. Maximum of 30 pricing plans can be updated in a single request.",
+        "description": "Updates multiple Microsoft Defender for Cloud pricing configurations for the specified subscription scope by using the global pricings endpoint. This operation uses a best-effort approach where valid plans are saved atomically, while invalid plans return detailed error information. Only subscription-level scopes are supported for global update operations. Maximum of 30 pricing plans can be updated in a single request.",
         "operationId": "Pricings_GlobalUpdate",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "./common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
+            "$ref": "./common/v1/types.json#/parameters/ScopeIdSubscriptionOnly"
           },
           {
-            "$ref": "#/parameters/BatchPricingUpdateRequest"
+            "$ref": "#/parameters/GlobalPricingUpdateRequest"
           }
         ],
         "responses": {
           "200": {
-            "description": "Batch update completed. Check the response body for individual plan results and summary statistics.",
+            "description": "Global update completed. Check the response body for individual plan results and summary statistics.",
             "schema": {
-              "$ref": "#/definitions/BatchPricingUpdateResponse"
+              "$ref": "#/definitions/GlobalPricingUpdateResponse"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "./common/v1/types.json#/definitions/CloudError"
             }
           }
         }
@@ -312,7 +312,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+          "$ref": "./common/v1/types.json#/definitions/Resource"
         }
       ]
     },
@@ -572,7 +572,7 @@
         }
       }
     },
-    "BatchPricingUpdateRequest": {
+    "GlobalPricingUpdateRequest": {
       "type": "object",
       "description": "Request for updating multiple pricing configurations in a single operation",
       "required": [
@@ -581,9 +581,9 @@
       "properties": {
         "plansConfigurations": {
           "type": "array",
-          "description": "Array of pricing plan configurations to update. Maximum of 30 plans allowed per batch request.",
+          "description": "Array of pricing plan configurations to update. Maximum of 30 plans allowed per request.",
           "items": {
-            "$ref": "#/definitions/BatchPlanItem"
+            "$ref": "#/definitions/GlobalPlanItem"
           },
           "x-ms-identifiers": [
             "planName"
@@ -628,9 +628,9 @@
         ]
       }
     },
-    "BatchPlanItem": {
+    "GlobalPlanItem": {
       "type": "object",
-      "description": "Individual pricing plan configuration for batch update operation",
+      "description": "Individual pricing plan configuration for global update operation",
       "required": [
         "planName",
         "properties"
@@ -647,9 +647,9 @@
         }
       }
     },
-    "BatchPricingUpdateResponse": {
+    "GlobalPricingUpdateResponse": {
       "type": "object",
-      "description": "Response from batch pricing update operation containing results for each plan and operation summary",
+      "description": "Response from global pricing update operation containing results for each plan and operation summary",
       "required": [
         "results",
         "summary"
@@ -657,23 +657,23 @@
       "properties": {
         "results": {
           "type": "array",
-          "description": "Results for each individual pricing plan update within the batch operation",
+          "description": "Results for each individual pricing plan update within the global operation",
           "items": {
-            "$ref": "#/definitions/BatchPricingResult"
+            "$ref": "#/definitions/GlobalPricingResult"
           },
           "x-ms-identifiers": [
             "planName"
           ]
         },
         "summary": {
-          "$ref": "#/definitions/BatchOperationSummary",
-          "description": "Summary statistics for the batch operation including total, successful, and failed update counts"
+          "$ref": "#/definitions/GlobalOperationSummary",
+          "description": "Summary statistics for the global operation including total, successful, and failed update counts"
         }
       }
     },
-    "BatchPricingResult": {
+    "GlobalPricingResult": {
       "type": "object",
-      "description": "Result of updating a single pricing plan within a batch operation",
+      "description": "Result of updating a single pricing plan within a global operation",
       "required": [
         "planName",
         "success"
@@ -681,7 +681,7 @@
       "properties": {
         "planName": {
           "type": "string",
-          "description": "Name of the pricing plan that was processed in this batch operation"
+          "description": "Name of the pricing plan that was processed in this global operation"
         },
         "success": {
           "type": "boolean",
@@ -697,9 +697,9 @@
         }
       }
     },
-    "BatchOperationSummary": {
+    "GlobalOperationSummary": {
       "type": "object",
-      "description": "Summary statistics for batch operation results providing overview of operation success",
+      "description": "Summary statistics for global operation results providing overview of operation success",
       "required": [
         "totalRequested",
         "successfulUpdates",
@@ -709,7 +709,7 @@
         "totalRequested": {
           "type": "integer",
           "format": "int32",
-          "description": "Total number of pricing configurations requested for update in this batch",
+          "description": "Total number of pricing configurations requested for update in this operation",
           "minimum": 1,
           "maximum": 30
         },
@@ -752,13 +752,13 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "BatchPricingUpdateRequest": {
-      "name": "batchPricingRequest",
+    "GlobalPricingUpdateRequest": {
+      "name": "globalPricingRequest",
       "in": "body",
       "required": true,
-      "description": "Batch pricing update request containing multiple plan configurations (maximum 30 plans per batch)",
+      "description": "Global pricing update request containing multiple plan configurations (maximum 30 plans per request)",
       "schema": {
-        "$ref": "#/definitions/BatchPricingUpdateRequest"
+        "$ref": "#/definitions/GlobalPricingUpdateRequest"
       },
       "x-ms-parameter-location": "method"
     }
