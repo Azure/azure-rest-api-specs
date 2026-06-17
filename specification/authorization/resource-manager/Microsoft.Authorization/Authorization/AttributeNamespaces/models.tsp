@@ -9,7 +9,7 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.Common;
 
-namespace Microsoft.AccessReview;
+namespace Microsoft.AttributeNamespaces;
 
 /**
  * Request body for creating an attribute namespace.
