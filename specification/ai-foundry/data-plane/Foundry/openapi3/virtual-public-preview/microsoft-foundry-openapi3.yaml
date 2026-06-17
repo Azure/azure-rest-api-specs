@@ -3531,6 +3531,83 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/CreateAgentVersionFromManifestRequest'
+  /agents/{agent_name}:disable:
+    post:
+      operationId: Agents_disableAgent
+      summary: Disable an agent
+      description: |-
+        Disables the specified agent, preventing it from accepting new sessions or processing requests.
+        Existing active sessions are allowed to drain gracefully but no new sessions can be created.
+        This operation is idempotent — disabling an already-disabled agent returns success with no side effects.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to disable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
+  /agents/{agent_name}:enable:
+    post:
+      operationId: Agents_enableAgent
+      summary: Enable an agent
+      description: |-
+        Enables the specified agent, allowing it to accept new sessions and process requests.
+        This operation is idempotent — enabling an already-enabled agent returns success with no side effects.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent to enable.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
@@ -14459,6 +14536,7 @@ components:
         - object
         - id
         - name
+        - state
         - versions
       properties:
         object:
@@ -14473,6 +14551,11 @@ components:
           type: string
           maxLength: 63
           description: The name of the agent.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.
+          readOnly: true
         versions:
           type: object
           properties:
@@ -14603,6 +14686,14 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - AgentEndpoints=V1Preview
+    AgentState:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - enabled
+            - disabled
+      description: The operational state of an agent.
     AgentTaxonomyInput:
       type: object
       required:
@@ -16788,6 +16879,11 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
+        state:
+          allOf:
+            - $ref: '#/components/schemas/AgentState'
+          description: The initial operational state of the agent. Defaults to 'enabled' if not specified.
+          default: enabled
         metadata:
           type: object
           additionalProperties:
@@ -23018,7 +23114,6 @@ components:
           computer_call_output: '#/components/schemas/OpenAI.ConversationItemComputerToolCallOutput'
           tool_search_call: '#/components/schemas/OpenAI.ConversationItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ConversationItemToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ConversationItemAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ConversationItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ConversationItemCompactionBody'
           code_interpreter_call: '#/components/schemas/OpenAI.ConversationItemCodeInterpreterToolCall'
@@ -23036,35 +23131,6 @@ components:
           custom_tool_call_output: '#/components/schemas/OpenAI.ConversationItemCustomToolCallOutputResource'
       description: A single item within a conversation. The set of possible types are the same as the `output` type of a [Response object](/docs/api-reference/responses/object#responses/object-output).
       title: Conversation item
-    OpenAI.ConversationItemAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ConversationItem'
     OpenAI.ConversationItemApplyPatchToolCall:
       type: object
       required:
@@ -24053,7 +24119,6 @@ components:
             - computer_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - code_interpreter_call
@@ -27826,7 +27891,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.InputItemFunctionCallOutputItemParam'
           tool_search_call: '#/components/schemas/OpenAI.InputItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.InputItemToolSearchOutputItemParam'
-          additional_tools: '#/components/schemas/OpenAI.InputItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.InputItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.InputItemImageGenToolCall'
@@ -27847,37 +27911,6 @@ components:
         An item representing part of the context for the response to be
         generated by the model. Can contain text, images, and audio inputs,
         as well as previous assistant responses and tool call outputs.
-    OpenAI.InputItemAdditionalToolsItemParam:
-      type: object
-      required:
-        - type
-        - role
-        - tools
-      properties:
-        id:
-          type: string
-          nullable: true
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The item type. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        role:
-          type: string
-          enum:
-            - developer
-          description: The role that provided the additional tools. Only `developer` is supported.
-          x-stainless-const: true
-          default: developer
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: A list of additional tools made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -28777,7 +28810,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -28913,7 +28945,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.ItemFunctionCallOutputItemParam'
           tool_search_call: '#/components/schemas/OpenAI.ItemToolSearchCallItemParam'
           tool_search_output: '#/components/schemas/OpenAI.ItemToolSearchOutputItemParam'
-          additional_tools: '#/components/schemas/OpenAI.ItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.ItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.ItemImageGenToolCall'
@@ -28931,37 +28962,6 @@ components:
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemCustomToolCallOutput'
           custom_tool_call: '#/components/schemas/OpenAI.ItemCustomToolCall'
       description: Content item used to generate a response.
-    OpenAI.ItemAdditionalToolsItemParam:
-      type: object
-      required:
-        - type
-        - role
-        - tools
-      properties:
-        id:
-          type: string
-          nullable: true
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The item type. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        role:
-          type: string
-          enum:
-            - developer
-          description: The role that provided the additional tools. Only `developer` is supported.
-          x-stainless-const: true
-          default: developer
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: A list of additional tools made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -29261,7 +29261,6 @@ components:
           function_call: '#/components/schemas/OpenAI.ItemFieldFunctionToolCall'
           tool_search_call: '#/components/schemas/OpenAI.ItemFieldToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemFieldToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ItemFieldAdditionalTools'
           function_call_output: '#/components/schemas/OpenAI.ItemFieldFunctionToolCallOutput'
           file_search_call: '#/components/schemas/OpenAI.ItemFieldFileSearchToolCall'
           web_search_call: '#/components/schemas/OpenAI.ItemFieldWebSearchToolCall'
@@ -29284,35 +29283,6 @@ components:
           custom_tool_call: '#/components/schemas/OpenAI.ItemFieldCustomToolCall'
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemFieldCustomToolCallOutput'
       description: An item representing a message, tool call, tool output, reasoning, or other response element.
-    OpenAI.ItemFieldAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemField'
     OpenAI.ItemFieldApplyPatchToolCall:
       type: object
       required:
@@ -30241,7 +30211,6 @@ components:
             - function_call
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - function_call_output
             - file_search_call
             - web_search_call
@@ -30918,7 +30887,6 @@ components:
           function_call_output: '#/components/schemas/OpenAI.ItemResourceFunctionToolCallOutput'
           tool_search_call: '#/components/schemas/OpenAI.ItemResourceToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.ItemResourceToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.ItemResourceAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ItemResourceReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemResourceCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.ItemResourceImageGenToolCall'
@@ -30936,35 +30904,6 @@ components:
           custom_tool_call: '#/components/schemas/OpenAI.ItemResourceCustomToolCallResource'
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemResourceCustomToolCallOutputResource'
       description: Content item used to generate a response.
-    OpenAI.ItemResourceAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.ItemResourceApplyPatchToolCall:
       type: object
       required:
@@ -31967,7 +31906,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -32129,7 +32067,6 @@ components:
             - function_call_output
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -33047,7 +32984,6 @@ components:
           reasoning: '#/components/schemas/OpenAI.OutputItemReasoningItem'
           tool_search_call: '#/components/schemas/OpenAI.OutputItemToolSearchCall'
           tool_search_output: '#/components/schemas/OpenAI.OutputItemToolSearchOutput'
-          additional_tools: '#/components/schemas/OpenAI.OutputItemAdditionalTools'
           compaction: '#/components/schemas/OpenAI.OutputItemCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.OutputItemImageGenToolCall'
           code_interpreter_call: '#/components/schemas/OpenAI.OutputItemCodeInterpreterToolCall'
@@ -33063,35 +32999,6 @@ components:
           mcp_approval_response: '#/components/schemas/OpenAI.OutputItemMcpApprovalResponseResource'
           custom_tool_call: '#/components/schemas/OpenAI.OutputItemCustomToolCallResource'
           custom_tool_call_output: '#/components/schemas/OpenAI.OutputItemCustomToolCallOutputResource'
-    OpenAI.OutputItemAdditionalTools:
-      type: object
-      required:
-        - type
-        - id
-        - role
-        - tools
-      properties:
-        type:
-          type: string
-          enum:
-            - additional_tools
-          description: The type of the item. Always `additional_tools`.
-          x-stainless-const: true
-          default: additional_tools
-        id:
-          type: string
-          description: The unique ID of the additional tools item.
-        role:
-          allOf:
-            - $ref: '#/components/schemas/OpenAI.MessageRole'
-          description: The role that provided the additional tools.
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: The additional tool definitions made available at this item.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.OutputItem'
     OpenAI.OutputItemApplyPatchToolCall:
       type: object
       required:
@@ -34050,7 +33957,6 @@ components:
             - reasoning
             - tool_search_call
             - tool_search_output
-            - additional_tools
             - compaction
             - image_generation_call
             - code_interpreter_call
@@ -38229,6 +38135,7 @@ components:
       type: object
       required:
         - type
+        - query
       properties:
         type:
           type: string
@@ -38238,7 +38145,7 @@ components:
           x-stainless-const: true
         query:
           type: string
-          description: The search query.
+          description: '[DEPRECATED] The search query.'
           deprecated: true
         queries:
           type: array
