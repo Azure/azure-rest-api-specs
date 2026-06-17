@@ -200,11 +200,7 @@ using Azure.Core;
   "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
   "csharp"
 );
-@@clientName(
-  RecommendedAction.actionUrlText,
-  "ActionUriText",
-  "csharp"
-);
+@@clientName(RecommendedAction.actionUrlText, "ActionUriText", "csharp");
 
 @@clientName(
   RecommendedAction.`_ActionUrl.Comment`,
