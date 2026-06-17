@@ -1,6 +1,6 @@
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNpm } from "../utils.ts";
+import { gitDiffTopSpecFolder, runBin } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -11,9 +11,10 @@ export class FormatRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    let [err, stdout, stderr] = await runNpm(
+    let [err, stdout, stderr] = await runBin(
+      "tsp",
       // Format parent folder to include shared files
-      ["exec", "--no", "--", "tsp", "format", "../**/*.tsp"],
+      ["format", "../**/*.tsp"],
       folder,
     );
     if (err) {
@@ -23,10 +24,7 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
-    [err, stdout, stderr] = await runNpm(
-      ["exec", "--no", "--", "prettier", "--write", "tspconfig.yaml"],
-      folder,
-    );
+    [err, stdout, stderr] = await runBin("prettier", ["--write", "tspconfig.yaml"], folder);
     if (err) {
       success = false;
       errorOutput += err.message;

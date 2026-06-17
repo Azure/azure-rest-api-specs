@@ -23,6 +23,55 @@ export interface RunRulesResult {
 }
 
 /**
+ * Runs rules concurrently and waits for all to complete before reporting results.
+ * Results are reported in deterministic order (rule list order).
+ * Unlike runRules, this does NOT stop after the first failure — all rules run to completion.
+ */
+export async function runRulesParallel(
+  rules: Rule[],
+  folder: string,
+  suppressions: Suppression[],
+): Promise<RunRulesResult> {
+  const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
+
+  // Execute all rules concurrently
+  const ruleOutcomes = await Promise.all(
+    rules.map(async (rule) => {
+      if (rule.suppressable) {
+        const ruleSuppressions = suppressions.filter(
+          (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
+        );
+        if (ruleSuppressions.length > 0) {
+          return { rule, suppressed: true, reason: ruleSuppressions[0].reason, ruleResult: null };
+        }
+      }
+      const ruleResult = await rule.execute(folder);
+      return { rule, suppressed: false as const, reason: undefined, ruleResult };
+    }),
+  );
+
+  // Report results in deterministic order (original rule order)
+  for (const { rule, suppressed, reason, ruleResult } of ruleOutcomes) {
+    console.log("\nExecuting rule: " + rule.name);
+    if (suppressed) {
+      console.log(`  Suppressed: ${reason}`);
+      result.suppressed.push(rule.name);
+    } else {
+      result.executed.push(rule.name);
+      if (ruleResult!.stdOutput) console.log(ruleResult!.stdOutput);
+      if (!ruleResult!.success) {
+        result.success = false;
+        result.failed.push(rule.name);
+        console.log("Rule " + rule.name + " failed");
+        if (ruleResult!.errorOutput) console.log(ruleResult!.errorOutput);
+      }
+    }
+  }
+
+  return result;
+}
+
+/**
  * Runs the given rules against a folder, handling per-rule suppressions
  * for rules that opt in via `suppressable: true`.
  */
@@ -107,20 +156,29 @@ export async function main() {
     return;
   }
 
-  const rules: Rule[] = [
+  // Lightweight rules: pure file/config reads, safe to run concurrently
+  const lightweightRules: Rule[] = [
     new FolderStructureRule(),
     new NpmPrefixRule(),
     new EmitAutorestRule(),
     new FlavorAzureRule(),
     new LinterRulesetRule(),
-    new CompileRule(),
-    new FormatRule(),
     new SdkTspConfigValidationRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions);
+  // Process-spawning rules: run sequentially after lightweight rules pass
+  const sequentialRules: Rule[] = [new CompileRule(), new FormatRule()];
 
-  if (!result.success) {
+  const parallelResult = await runRulesParallel(lightweightRules, absolutePath, suppressions);
+
+  if (!parallelResult.success) {
+    process.exitCode = 1;
+    return;
+  }
+
+  const seqResult = await runRules(sequentialRules, absolutePath, suppressions);
+
+  if (!seqResult.success) {
     process.exitCode = 1;
   }
 }

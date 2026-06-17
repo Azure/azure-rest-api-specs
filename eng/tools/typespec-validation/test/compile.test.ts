@@ -16,7 +16,7 @@ const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
-  let runNpmSpy: MockInstance;
+  let runBinSpy: MockInstance;
 
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
@@ -28,10 +28,10 @@ describe("compile", function () {
         errorOutput: "",
       }),
     );
-    runNpmSpy = vi
-      .spyOn(utils, "runNpm")
-      .mockImplementation((args, cwd) =>
-        Promise.resolve([null, `runNpm ${args.join(" ")} at ${cwd}`, ""]),
+    runBinSpy = vi
+      .spyOn(utils, "runBin")
+      .mockImplementation((name, args, cwd) =>
+        Promise.resolve([null, `runBin ${name} ${args.join(" ")} at ${cwd}`, ""]),
       );
   });
 
@@ -54,7 +54,7 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       (): Promise<[Error | null, string, string]> => Promise.resolve([null, compileOutput, ""]),
     );
 
@@ -72,7 +72,7 @@ describe("compile", function () {
   });
 
   it("should succeed if output has no generated swaggers", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, "not-swagger", ""]),
     );
@@ -84,7 +84,7 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -114,7 +114,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
@@ -139,7 +139,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
@@ -163,7 +163,7 @@ describe("compile", function () {
     const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
@@ -186,7 +186,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
     );
 
@@ -212,7 +212,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
     const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
     );
 
@@ -236,7 +236,7 @@ describe("compile", function () {
     const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
     const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> =>
         Promise.resolve([null, latestPreviewPath, ""]),
     );
@@ -262,7 +262,7 @@ describe("compile", function () {
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
@@ -282,7 +282,7 @@ describe("compile", function () {
   });
 
   it("supports suppressions", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -321,7 +321,7 @@ describe("compile", function () {
   });
 
   it("throws on invalid suppressions", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -341,9 +341,9 @@ describe("compile", function () {
   });
 
   it("should skip git diff check if compile fails", async function () {
-    runNpmSpy.mockImplementation(
-      async (args: string[]): Promise<[Error | null, string, string]> => {
-        if (args.join(" ").includes("tsp compile")) {
+    runBinSpy.mockImplementation(
+      async (name: string, args: string[]): Promise<[Error | null, string, string]> => {
+        if (name === "tsp" && args[0] === "compile") {
           return Promise.resolve([
             { name: "compilation_error", message: "compilation error" },
             "running tsp compile",
@@ -361,7 +361,7 @@ describe("compile", function () {
   });
 
   it("should fail if git diff fails", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -384,7 +384,7 @@ describe("compile", function () {
   });
 
   it("should succeed if git diff succeeds", async function () {
-    runNpmSpy.mockImplementation(
+    runBinSpy.mockImplementation(
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 

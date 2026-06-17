@@ -52,14 +52,15 @@ if ($typespecFolders) {
     # Example: '{"checkingAllSpecs"=true}'
     $context = @{ checkingAllSpecs = $checkingAllSpecs } | ConvertTo-Json -Compress
 
-    LogInfo "npm exec --no -- tsv $typespecFolder ""$context"""
+    $tsvScript = Join-Path $PSScriptRoot "../tools/typespec-validation/cmd/tsv.js"
+    LogInfo "node $tsvScript $typespecFolder ""$context"""
 
     if ($DryRun) {
       LogGroupEnd
       continue
     }
 
-    npm exec --no -- tsv $typespecFolder "$context" 2>&1 | Write-Host
+    node $tsvScript $typespecFolder "$context" 2>&1 | Write-Host
     if ($LASTEXITCODE) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."

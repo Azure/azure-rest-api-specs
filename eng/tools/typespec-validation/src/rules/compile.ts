@@ -6,7 +6,7 @@ import pc from "picocolors";
 import stripAnsi from "strip-ansi";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNpm } from "../utils.ts";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runBin } from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -18,11 +18,7 @@ export class CompileRule implements Rule {
     let errorOutput = "";
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
-      const [err, stdout, stderr] = await runNpm([
-        "exec",
-        "--no",
-        "--",
-        "tsp",
+      const [err, stdout, stderr] = await runBin("tsp", [
         "compile",
         "--list-files",
         "--warn-as-error",
@@ -214,11 +210,7 @@ export class CompileRule implements Rule {
 
     const clientTsp = path.join(folder, "client.tsp");
     if (await fileExists(clientTsp)) {
-      const [err, stdout, stderr] = await runNpm([
-        "exec",
-        "--no",
-        "--",
-        "tsp",
+      const [err, stdout, stderr] = await runBin("tsp", [
         "compile",
         "--no-emit",
         "--warn-as-error",

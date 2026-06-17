@@ -1,4 +1,4 @@
-import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { execFile, execNpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
@@ -9,6 +9,62 @@ import { context } from "./index.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
+
+// Cache for resolved local binary paths (keyed by binary name)
+const localBinCache = new Map<string, string>();
+
+/**
+ * Finds a local binary by walking up from a given directory to find node_modules/.bin/<name>.
+ * Returns the absolute path to the binary file (symlink or shim JS file).
+ */
+async function findLocalBin(name: string, searchDir: string): Promise<string> {
+  const cached = localBinCache.get(name);
+  if (cached !== undefined) return cached;
+
+  let dir = searchDir;
+  while (true) {
+    const candidate = join(dir, "node_modules", ".bin", name);
+    try {
+      await access(candidate);
+      localBinCache.set(name, candidate);
+      return candidate;
+    } catch {
+      // Not found at this level, walk up
+    }
+    const parent = dirname(dir);
+    if (parent === dir) {
+      throw new Error(`Could not find binary '${name}' in any node_modules/.bin directory`);
+    }
+    dir = parent;
+  }
+}
+
+/**
+ * Runs a local binary from node_modules/.bin directly via node, bypassing npm exec overhead.
+ */
+export async function runBin(
+  name: string,
+  args: string[],
+  cwd?: string,
+): Promise<[Error | null, string, string]> {
+  const searchDir = cwd ?? process.cwd();
+  const binPath = await findLocalBin(name, searchDir);
+
+  try {
+    const { stdout, stderr } = await execFile(process.execPath, [binPath, ...args], {
+      logger: new ConsoleLogger(),
+      maxBuffer: 64 * 1024 * 1024,
+      cwd,
+    });
+    return [null, stdout, stderr];
+  } catch (error) {
+    if (isExecError(error)) {
+      return [error, error.stdout ?? "", error.stderr ?? ""];
+    } else {
+      throw error;
+    }
+  }
+}
 
 // Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
 export async function runNpm(
