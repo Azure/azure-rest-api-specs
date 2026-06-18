@@ -1521,7 +1521,7 @@ union SqlNameAvailabilityResourceType {
 // (v1.4.0 ApiCompat mitigations)
 //
 // Marking these models as `Usage.input` makes the C# generator emit them
-// as roundtrippable (Input | Output), which restores the public
+// as round trippable (Input | Output), which restores the public
 // parameterless constructor and writable property setters that the
 // v1.4.0 contract exposed.
 // =====================================================================
