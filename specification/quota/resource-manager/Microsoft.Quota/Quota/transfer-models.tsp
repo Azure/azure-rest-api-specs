@@ -192,7 +192,7 @@ model QuotaTransferProperties {
   createdAt?: utcDateTime;
 
   /**
-   * Time at which a Pending transfer expires if not actioned.
+   * Time at which a Pending transfer expires if the recipient has not approved or rejected it.
    */
   @visibility(Lifecycle.Read)
   expiresAt?: utcDateTime;
