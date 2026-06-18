@@ -113,19 +113,21 @@ interface IssueContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<IssueContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<IssueContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<IssueContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<IssueContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -280,7 +282,8 @@ interface Issue {
 
 @@maxLength(IssueContract.name, 256);
 @@minLength(IssueContract.name, 1);
-@@doc(IssueContract.name,
+@@doc(
+  IssueContract.name,
   "Issue identifier. Must be unique in the current API Management service instance."
 );
 @@doc(IssueContract.properties, "Properties of the Issue.");

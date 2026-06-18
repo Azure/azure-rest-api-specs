@@ -283,10 +283,14 @@ union IdentityType {
 /**
  * Sku name of the Cloud HSM Cluster
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-enum CloudHsmClusterSkuName {
-  Standard_B1,
-  `Standard B10`,
+union CloudHsmClusterSkuName {
+  string,
+
+  /** Standard_B1 SKU */
+  Standard_B1: "Standard_B1",
+
+  /** Standard B10 SKU */
+  StandardB10: "Standard B10",
 }
 
 /**

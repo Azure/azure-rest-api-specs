@@ -27,6 +27,7 @@ import "./operations/basedb/dbSystemOperations.tsp";
 import "./operations/basedb/dbVersionOperations.tsp";
 import "./versions.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -44,7 +45,8 @@ namespace Oracle.Database;
 interface Operations extends Azure.ResourceManager.Operations {}
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(Operations.list,
+@@Autorest.example(
+  Operations.list,
   "./examples/operations_list.json",
   "List Operations"
 );

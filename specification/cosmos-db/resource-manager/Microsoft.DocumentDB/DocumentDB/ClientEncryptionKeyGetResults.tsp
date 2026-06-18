@@ -40,8 +40,10 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
   createUpdateClientEncryptionKey is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ClientEncryptionKeyGetResults,
     Request = ClientEncryptionKeyCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ClientEncryptionKeyGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ClientEncryptionKeyGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<ClientEncryptionKeyGetResults>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ClientEncryptionKeyGetResults> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -53,12 +55,15 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
   >;
 }
 
-@@doc(ClientEncryptionKeyGetResults.name,
+@@doc(
+  ClientEncryptionKeyGetResults.name,
   "Cosmos DB ClientEncryptionKey name."
 );
-@@doc(ClientEncryptionKeyGetResults.properties,
+@@doc(
+  ClientEncryptionKeyGetResults.properties,
   "The properties of a ClientEncryptionKey"
 );
-@@doc(ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey::parameters.resource,
+@@doc(
+  ClientEncryptionKeyGetResultsOperationGroup.createUpdateClientEncryptionKey::parameters.resource,
   "The parameters to provide for the client encryption key."
 );

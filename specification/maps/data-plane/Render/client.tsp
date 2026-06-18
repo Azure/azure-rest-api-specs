@@ -4,8 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using MapsRender;
 
-@@clientName(MapTileset.minzoom, "minZoom");
-@@clientName(MapTileset.maxzoom, "maxZoom");
+@@clientName(MapTileset.minzoom, "minZoom", "!autorest");
+@@clientName(MapTileset.maxzoom, "maxZoom", "!autorest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
 @@Legacy.clientDefaultValue(ResponseFormatParameters.format, "json", "python");

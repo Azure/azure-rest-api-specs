@@ -12,6 +12,16 @@ namespace Customizations;
 @@clientName(KeyVault, "Secret", "rust");
 @@clientName(KeyVault, "Client", "go");
 
+// C# customizations: the public Key Vault Secrets surface in .NET is the
+// hand-written `SecretClient`, so the generated low-level transport is renamed
+// to avoid colliding with the user-facing types. The TypeSpec emitter places
+// these in the same namespace, and an internal handwritten `SecretAttributes`
+// struct already exists in `Azure.Security.KeyVault.Secrets`. Renaming the
+// wire model for C# only keeps the .NET source tree compilable while leaving
+// every other language unaffected.
+@@clientName(KeyVault, "KeyVaultSecretsClient", "csharp");
+@@clientName(SecretAttributes, "SecretAttributesBundle", "csharp");
+
 using KeyVault;
 
 // Make optional path parameter required for all languages
@@ -155,7 +165,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "go");
 @@clientName(SecretSetParameters, "SetSecretParameters", "go");
 @@clientName(SecretUpdateParameters, "UpdateSecretPropertiesParameters", "go");
-@@clientName(DeletedSecretListResult,
+@@clientName(
+  DeletedSecretListResult,
   "DeletedSecretPropertiesListResult",
   "go"
 );
@@ -173,11 +184,13 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretBundle, "Secret", "rust");
 @@clientName(SecretRestoreParameters, "RestoreSecretParameters", "rust");
 @@clientName(SecretSetParameters, "SetSecretParameters", "rust");
-@@clientName(SecretUpdateParameters,
+@@clientName(
+  SecretUpdateParameters,
   "UpdateSecretPropertiesParameters",
   "rust"
 );
-@@clientName(DeletedSecretListResult,
+@@clientName(
+  DeletedSecretListResult,
   "ListDeletedSecretPropertiesResult",
   "rust"
 );
@@ -189,7 +202,8 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 // Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
 @@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "rust");
 
-@@clientName(SecretRestoreParameters.secretBundleBackup,
+@@clientName(
+  SecretRestoreParameters.secretBundleBackup,
   "SecretBackup",
   "rust"
 );

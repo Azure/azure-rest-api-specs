@@ -76,27 +76,32 @@ interface OracleSubscriptions
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(OracleSubscriptions.listBySubscription,
+@@Autorest.example(
+  OracleSubscriptions.listBySubscription,
   "./examples/oracleSubscriptions_listBySubscription.json",
   "List Oracle Subscriptions by subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(OracleSubscriptions.createOrUpdate,
+@@Autorest.example(
+  OracleSubscriptions.createOrUpdate,
   "./examples/oracleSubscriptions_create.json",
   "Create or Update Oracle Subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(OracleSubscriptions.get,
+@@Autorest.example(
+  OracleSubscriptions.get,
   "./examples/oracleSubscriptions_get.json",
   "Get Oracle Subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(OracleSubscriptions.update,
+@@Autorest.example(
+  OracleSubscriptions.update,
   "./examples/oracleSubscriptions_patch.json",
   "Patch Oracle Subscription"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"
-@@Autorest.example(OracleSubscriptions.delete,
+@@Autorest.example(
+  OracleSubscriptions.delete,
   "./examples/oracleSubscriptions_delete.json",
   "Delete Oracle Subscription"
 );

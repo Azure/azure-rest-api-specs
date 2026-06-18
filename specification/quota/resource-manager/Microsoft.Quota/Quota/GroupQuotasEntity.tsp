@@ -109,11 +109,13 @@ interface GroupQuotasEntities {
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is GroupQuotasEntitiesOps.CreateOrUpdateAsync<
     GroupQuotasEntity,
-    Response = ArmResourceUpdatedResponse<GroupQuotasEntity> | ArmResourceCreatedResponse<
-      GroupQuotasEntity,
-      ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<GroupQuotasEntity>
+      | ArmResourceCreatedResponse<
+          GroupQuotasEntity,
+          ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     OptionalRequestBody = true
   >;
 
@@ -125,8 +127,10 @@ interface GroupQuotasEntities {
   update is GroupQuotasEntitiesOps.CustomPatchAsync<
     GroupQuotasEntity,
     PatchModel = GroupQuotasEntityPatch,
-    Response = ArmResponse<GroupQuotasEntity> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<GroupQuotasEntity>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GroupQuotasEntity> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true
   >;
 
@@ -136,8 +140,10 @@ interface GroupQuotasEntities {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.ManagementGroup<"managementGroupId">,
     GroupQuotasEntity,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -210,13 +216,16 @@ interface GroupQuotasEntities {
 
 @@maxLength(GroupQuotasEntity.name, 63);
 @@minLength(GroupQuotasEntity.name, 3);
-@@doc(GroupQuotasEntity.name,
+@@doc(
+  GroupQuotasEntity.name,
   "The GroupQuota name. The name should be unique for the provided context tenantId/MgId."
 );
 @@doc(GroupQuotasEntity.properties, "Properties");
-@@doc(GroupQuotasEntities.createOrUpdate::parameters.resource,
+@@doc(
+  GroupQuotasEntities.createOrUpdate::parameters.resource,
   "The GroupQuota body details for creation or update of a GroupQuota entity."
 );
-@@doc(GroupQuotasEntities.update::parameters.properties,
+@@doc(
+  GroupQuotasEntities.update::parameters.properties,
   "The  GroupQuotas Patch Request."
 );

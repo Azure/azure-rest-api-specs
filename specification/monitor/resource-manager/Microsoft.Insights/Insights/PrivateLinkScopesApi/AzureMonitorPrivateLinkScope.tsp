@@ -63,15 +63,19 @@ interface AzureMonitorPrivateLinkScopes {
   list is ArmListBySubscription<AzureMonitorPrivateLinkScope>;
 }
 
-@@doc(AzureMonitorPrivateLinkScope.name,
+@@doc(
+  AzureMonitorPrivateLinkScope.name,
   "The name of the Azure Monitor PrivateLinkScope resource."
 );
-@@doc(AzureMonitorPrivateLinkScope.properties,
+@@doc(
+  AzureMonitorPrivateLinkScope.properties,
   "Properties that define a Azure Monitor PrivateLinkScope resource."
 );
-@@doc(AzureMonitorPrivateLinkScopes.createOrUpdate::parameters.resource,
+@@doc(
+  AzureMonitorPrivateLinkScopes.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update a Azure Monitor PrivateLinkScope."
 );
-@@doc(AzureMonitorPrivateLinkScopes.updateTags::parameters.properties,
+@@doc(
+  AzureMonitorPrivateLinkScopes.updateTags::parameters.properties,
   "Updated tag information to set into the PrivateLinkScope instance."
 );

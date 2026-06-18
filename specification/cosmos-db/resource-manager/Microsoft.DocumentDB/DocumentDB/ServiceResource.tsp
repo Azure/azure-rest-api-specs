@@ -49,8 +49,10 @@ interface ServiceResources {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ServiceResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<ServiceResource>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -65,7 +67,10 @@ interface ServiceResources {
   @tag("EmbeddingGenerator")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -83,6 +88,7 @@ interface ServiceResources {
 @@minLength(ServiceResource.name, 3);
 @@doc(ServiceResource.name, "Cosmos DB service name.");
 @@doc(ServiceResource.properties, "Services response resource.");
-@@doc(ServiceResources.create::parameters.resource,
+@@doc(
+  ServiceResources.create::parameters.resource,
   "The Service resource parameters."
 );
