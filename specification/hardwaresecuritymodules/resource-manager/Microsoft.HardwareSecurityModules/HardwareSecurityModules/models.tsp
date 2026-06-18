@@ -854,7 +854,7 @@ model PaymentHsmProperties {
   mgmtFqdn?: string;
 
   /**
-   * The Payment HSM State. Values are: Deploying, ConfiguringSlb, Starting, Failed, Deleting, DeletingSlbEntry, InitialProvisioning, Updating
+   * The Payment HSM State. Values are: Allocating, Deploying, Starting, Started, Degraded, Failed, Resetting, Deleting, Updating
    */
   state?: string;
 
@@ -870,7 +870,8 @@ model PaymentHsmProperties {
 @Versioning.added(Versions.v2025_12_01_preview)
 union PaymentHsmClusterSkuFamily {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** B family SKU */
   B: "B",
 }
 
@@ -880,7 +881,8 @@ union PaymentHsmClusterSkuFamily {
 @Versioning.added(Versions.v2025_12_01_preview)
 union PaymentHsmClusterSkuName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+
+  /** Standard_B1v2 SKU */
   Standard_B1v2: "Standard_B1v2",
 }
 
@@ -908,12 +910,8 @@ model PaymentHsmClusterSku {
 /**
  * Patchable properties of the Payment HSM Cluster
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The 'sku' envelope property is create-only and is intentionally not updatable via PATCH, so it is deliberately omitted from the patch model."
 @Versioning.added(Versions.v2025_12_01_preview)
 model PaymentHsmClusterPatchParameters {
-  /**
-   * The Payment HSM Cluster's tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 }
