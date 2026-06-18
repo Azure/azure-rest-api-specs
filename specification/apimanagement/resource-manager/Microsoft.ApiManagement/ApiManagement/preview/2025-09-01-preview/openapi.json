@@ -22810,7 +22810,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}": {
       "get": {
         "operationId": "OpenIdConnectProvider_Get",
         "tags": [
@@ -22838,7 +22838,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -22900,7 +22900,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -22990,7 +22990,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -23068,7 +23068,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -23131,7 +23131,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -23164,7 +23164,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{openId}/listSecrets": {
       "post": {
         "operationId": "OpenIdConnectProvider_ListSecrets",
         "tags": [
@@ -23192,7 +23192,7 @@
             "pattern": "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           },
           {
-            "name": "opid",
+            "name": "openId",
             "in": "path",
             "description": "Identifier of the OpenID Connect Provider.",
             "required": true,
@@ -54380,15 +54380,27 @@
       "description": "Association entity contract properties.",
       "properties": {
         "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state.",
-          "enum": [
-            "created"
-          ],
-          "x-ms-enum": {
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/AssociationEntityProvisioningState",
+          "description": "Provisioning state."
         }
+      }
+    },
+    "AssociationEntityProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state.",
+      "enum": [
+        "created"
+      ],
+      "x-ms-enum": {
+        "name": "AssociationEntityProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "created",
+            "description": "Created."
+          }
+        ]
       }
     },
     "AsyncOperationStatus": {
