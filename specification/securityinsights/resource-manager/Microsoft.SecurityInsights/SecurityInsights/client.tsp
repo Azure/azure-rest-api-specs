@@ -5,6 +5,12 @@ using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core;
 
 @@clientName(
+  Microsoft.SecurityInsights,
+  "SecurityInsightsMgmtClient",
+  "python"
+);
+
+@@clientName(
   Azure.ResourceManager.CommonTypes.ActionType,
   "OperationActionType",
   "java"
@@ -66,7 +72,24 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
-  "go"
+  "go,python"
 );
 @@clientLocation(listGeodataByIp, "SecurityInsightsClient", "go");
 @@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
+
+@@clientName(EntityKindEnum, "EntityKind", "python");
+@@clientName(
+  ThreatIntelligenceResourceInnerKind,
+  "ThreatIntelligenceResourceKindEnum",
+  "python"
+);
+@@clientName(
+  ThreatIntelligenceSortingOrder,
+  "ThreatIntelligenceSortingCriteriaEnum",
+  "python"
+);
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
+  "listQueryIndicators",
+  "javascript"
+);

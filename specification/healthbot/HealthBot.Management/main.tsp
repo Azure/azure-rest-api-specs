@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./back-compatible.tsp";
 import "./HealthBot.tsp";
 import "./models.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

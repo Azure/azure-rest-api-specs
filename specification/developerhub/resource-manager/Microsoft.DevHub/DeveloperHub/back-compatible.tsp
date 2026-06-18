@@ -20,14 +20,25 @@ using Microsoft.DevHub;
 @@clientLocation(GitHubOAuthResponses.gitHubOAuth, Microsoft.DevHub);
 @@clientName(GitHubOAuthResponses.gitHubOAuth::parameters.body, "parameters");
 
-@@clientLocation(Workflows.get, "Workflow");
-@@clientLocation(Workflows.createOrUpdate, "Workflow");
+@@clientLocation(Workflows.get, "Workflow", "!javascript");
+@@clientLocation(Workflows.createOrUpdate, "Workflow", "!javascript");
 @@clientName(Workflows.createOrUpdate::parameters.resource, "parameters");
-@@clientLocation(Workflows.updateTags, "Workflow");
+@@clientLocation(Workflows.updateTags, "Workflow", "!javascript");
 @@clientName(Workflows.updateTags::parameters.properties, "parameters");
-@@clientLocation(Workflows.delete, "Workflow");
-@@clientLocation(Workflows.listByResourceGroup, "Workflow");
-@@clientLocation(Workflows.list, "Workflow");
+@@clientLocation(Workflows.delete, "Workflow", "!javascript");
+@@clientLocation(Workflows.listByResourceGroup, "Workflow", "!javascript");
+@@clientLocation(Workflows.list, "Workflow", "!javascript");
+
+@@clientLocation(Workflows.get, "WorkflowOperations", "javascript");
+@@clientLocation(Workflows.createOrUpdate, "WorkflowOperations", "javascript");
+@@clientLocation(Workflows.updateTags, "WorkflowOperations", "javascript");
+@@clientLocation(Workflows.delete, "WorkflowOperations", "javascript");
+@@clientLocation(
+  Workflows.listByResourceGroup,
+  "WorkflowOperations",
+  "javascript"
+);
+@@clientLocation(Workflows.list, "WorkflowOperations", "javascript");
 
 @@clientLocation(AdooAuthResponses.get, "ADOOAuth", "!java");
 @@clientLocation(AdooAuthResponses.list, "ADOOAuth", "!java");
@@ -46,6 +57,60 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthListResponse, "ADOOAuthListResponse");
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
+
+@@clientName(
+  AdooAuthCallRequest,
+  "DeveloperHubADOOAuthCallRequestContent",
+  "csharp"
+);
+@@clientName(
+  AdooAuthInfoResponse,
+  "DeveloperHubADOOAuthInfoResponseResult",
+  "csharp"
+);
+@@clientName(
+  DeleteWorkflowResponse,
+  "DeveloperHubDeleteWorkflowResponseResult",
+  "csharp"
+);
+@@clientName(
+  ExportTemplateRequest,
+  "DeveloperHubExportTemplateRequestContent",
+  "csharp"
+);
+@@clientName(
+  GenerateVersionedTemplateResponse,
+  "DeveloperHubGenerateVersionedTemplateResponseResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthCallRequest,
+  "DeveloperHubGitHubOAuthCallRequestContent",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthInfoResponse,
+  "DeveloperHubGitHubOAuthInfoResponseResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthListResponse,
+  "DeveloperHubGitHubOAuthListResponseResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.Operation,
+  "DeveloperHubOperationInfo",
+  "csharp"
+);
+@@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
+@@clientName(PrLinkResponse, "DeveloperHubPrLinkResponseResult", "csharp");
+@@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");
+@@clientName(
+  ScaleTemplateRequest,
+  "DeveloperHubScaleTemplateRequestContent",
+  "csharp"
+);
 
 @@visibility(
   Azure.ResourceManager.Foundations.OperationListResult.nextLink,

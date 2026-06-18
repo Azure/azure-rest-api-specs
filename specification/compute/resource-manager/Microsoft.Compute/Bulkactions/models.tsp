@@ -265,9 +265,6 @@ model BulkVMConfiguration {
 
   @doc("Identifier for the created virtual machine. If not provided, a name will be generated based on the resource prefix.")
   name?: string;
-
-  @doc("Resource group name for the virtual machine.")
-  resourceGroupName?: string;
 }
 
 @doc("Resource creation data model")
@@ -339,11 +336,7 @@ model ResourceOperationDetails {
   operationId: string;
 
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
-  resourceId?: Array<armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines";
-    }
-  ]>>;
+  resourceId?: armResourceIdentifier;
 
   @doc("Type of operation performed on the resources")
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
@@ -381,11 +374,7 @@ model ResourceOperationDetails {
 @doc("High level response from an operation on a resource")
 model ResourceOperation {
   @doc("Unique identifier for the resource involved in the operation, for example Azure resource ID")
-  resourceId?: Array<armResourceIdentifier<[
-    {
-      type: "Microsoft.Compute/virtualMachines";
-    }
-  ]>>;
+  resourceId?: armResourceIdentifier;
 
   @doc("Resource level error code if it exists")
   errorCode?: string;

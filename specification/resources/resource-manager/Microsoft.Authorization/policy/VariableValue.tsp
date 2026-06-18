@@ -18,6 +18,7 @@ namespace Microsoft.Authorization;
  */
 // Preview-only resource type: added in the preview API version.
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @subscriptionResource
 @parentResource(Variable)
 model VariableValue
@@ -105,6 +106,7 @@ alias VariableValueManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOp
 >;
 
 @added(Versions.v2025_12_01_preview)
+@removed(Versions.v2026_06_01)
 @armResourceOperations
 interface VariableValues {
   /**

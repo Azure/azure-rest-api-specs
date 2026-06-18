@@ -22,20 +22,20 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the FileStorage API.
+These are the global settings for the DataLakeStorage API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-02-tsp
+tag: package-2026-06-tsp
 use-internal-constructors: true
 add-credentials: true
 ```
 
-### Tag: package-2026-04-tsp
+### Tag: package-2026-06-tsp
 
-These settings apply only when `--tag=package-2026-02-tsp` is specified on the command line.
+These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-02-tsp'
+```yaml $(tag) == 'package-2026-06-tsp'
 input-file:
   - stable/2026-06-06/generated_datalake.json
 ```
