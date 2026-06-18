@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2026-10-tsp` is specified on the c
 
 ``` yaml $(tag) == 'package-2026-10-tsp'
 input-file:
-- stable/2026-10-06/file.json
+- stable/2026-10-06/generated_file.json
 ```
 
 ### Suppression
