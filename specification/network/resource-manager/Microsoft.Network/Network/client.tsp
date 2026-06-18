@@ -1694,6 +1694,32 @@ union ProvisioningStateUnion {
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AzfwVnet", "javascript");
 @@clientName(VM, "Vm", "javascript");
 @@clientName(AzureFirewallSkuName.AZFW_VNet, "AZFWVnet", "go");
+
+// C# management-plane migration naming compatibility.
+@@clientName(Commit, "NetworkManagerCommit", "csharp");
+@@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
+@@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
+@@clientName(Geo, "CidrAdvertisingGeoCode", "csharp");
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
+  "RequestTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.dedicatedBackendConnection,
+  "IsDedicatedBackendConnectionEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateCertChainAndExpiry,
+  "IsValidateCertChainAndExpiryEnabled",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.validateSNI,
+  "IsValidateSniEnabled",
+  "csharp"
+);
 @@clientName(
   FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
