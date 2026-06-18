@@ -557,7 +557,7 @@
     },
     "/controls/schedule": {
       "get": {
-        "operationId": "Schedules_Get",
+        "operationId": "ControlSchedules_Get",
         "description": "Get the global control schedule.",
         "parameters": [
           {
@@ -583,15 +583,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Schedules_Get": {
-            "$ref": "./examples/Schedules_Get_Gen.json"
-          }
         }
       },
       "put": {
-        "operationId": "Schedules_CreateOrUpdate",
+        "operationId": "ControlSchedules_CreateOrUpdate",
         "description": "Create or update the global control schedule.",
         "parameters": [
           {
@@ -624,11 +619,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Schedules_CreateOrUpdate": {
-            "$ref": "./examples/Schedules_CreateOrUpdate_Gen.json"
           }
         }
       }
@@ -725,15 +715,10 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/NetworkProperties"
-            },
-            "headers": {
-              "Operation-Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -753,8 +738,7 @@
           "Settings_CreateManagedPrivateEndpoint": {
             "$ref": "./examples/Settings_CreateManagedPrivateEndpoint_Gen.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/settings/mpe/exists": {

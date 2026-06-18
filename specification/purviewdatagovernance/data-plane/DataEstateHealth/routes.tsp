@@ -23,12 +23,6 @@ model Created201Response<T> {
   @body body: T;
 }
 
-model Accepted202Response<T> {
-  @statusCode statusCode: 202;
-  @header("Operation-Location") operationLocation: string;
-  @body body: T;
-}
-
 // ============================================================================
 // Analytics Schedule
 // ============================================================================
@@ -163,7 +157,7 @@ interface Controls {
 // ============================================================================
 
 @doc("Operations for managing control schedules.")
-interface Schedules {
+interface ControlSchedules {
   @doc("Get the global control schedule.")
   @route("/controls/schedule")
   @get
@@ -246,16 +240,13 @@ interface Settings {
     | Created201Response<ManagedPrivateEndpointExistsResponse>
     | ErrorResponse;
 
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Custom LRO operation requires x-ms-long-running-operation extension."
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the service client, not via a standard polling operation."
   @doc("Create a managed private endpoint.")
   @route("/settings/mpe")
   @post
-  @extension("x-ms-long-running-operation", true)
   createManagedPrivateEndpoint(
     ...ApiVersionParameter,
     @body body: ManagedPrivateEndpointRequest,
-  ): Accepted202Response<NetworkProperties> | ErrorResponse;
+  ): Created201Response<NetworkProperties> | ErrorResponse;
 }
 
 // ============================================================================
