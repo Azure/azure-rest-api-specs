@@ -16111,12 +16111,14 @@ model ErrorPage {
   /**
    * The substatus code for which the error page will be used
    */
-  substatusCode: int32;
+  @added(Versions.v2026_07_15)
+  substatusCode?: int32;
 
   /**
    * The name of the error page. For example, '404' or 'maintenance'
    */
-  name: string;
+  @added(Versions.v2026_07_15)
+  name?: string;
 
   /**
    * The content of the error page. There is a 10kb limit imposed on custom error page content.
