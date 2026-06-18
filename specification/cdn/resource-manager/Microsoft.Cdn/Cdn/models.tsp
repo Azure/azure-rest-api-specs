@@ -3132,7 +3132,7 @@ model AFDOriginUpdatePropertiesParameters {
    * The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.
    */
   @added(Versions.v2026_07_01)
-  certificateNameCheckValidationMode?: CertificateNameCheckValidationMode = CertificateNameCheckValidationMode.OriginHostname;
+  certificateNameCheckValidationMode?: CertificateNameCheckValidationMode;
 
   /**
    * The list of custom certificate subjects to validate against. Only applicable when certificateNameCheckValidationMode is 'CustomCertificateSubject'. Must contain 1 or 2 entries.
