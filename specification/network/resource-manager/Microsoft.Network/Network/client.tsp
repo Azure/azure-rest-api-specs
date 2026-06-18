@@ -1700,6 +1700,20 @@ union ProvisioningStateUnion {
 @@clientName(Subgroup, "InterconnectGroupSubgroup", "csharp");
 @@clientName(VM, "BastionShareableLinkVirtualMachine", "csharp");
 @@clientName(Geo, "CidrAdvertisingGeoCode", "csharp");
+@@clientName(Geo.GLOBAL, "Global", "csharp");
+@@clientName(Geo.AFRI, "Afri", "csharp");
+@@clientName(Geo.APAC, "Apac", "csharp");
+@@clientName(Geo.EURO, "Euro", "csharp");
+@@clientName(Geo.LATAM, "Latam", "csharp");
+@@clientName(Geo.NAM, "Nam", "csharp");
+@@clientName(Geo.OCEANIA, "Oceania", "csharp");
+@@clientName(BastionShareableLinkListRequest, "BastionShareableLinkListContent", "csharp");
+@@clientName(ExpressRouteLinkFailoverStopApiParameters, "ExpressRouteLinkFailoverStopContent", "csharp");
+@@clientName(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters.stopParameters, "ExpressRouteCircuitFailoverStopContent", "csharp");
+@@clientName(ExpressRouteGateways.stopSiteFailoverTest::parameters.stopParameters, "ExpressRouteGatewayFailoverStopContent", "csharp");
+@@clientName(ChildResource, "NetworkChildResource", "csharp");
+@@clientName(ProxyResource, "NetworkProxyResource", "csharp");
+@@clientName(WritableResource, "NetworkWritableResource", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
   "RequestTimeoutInSeconds",
@@ -1720,6 +1734,20 @@ union ProvisioningStateUnion {
   "IsValidateSniEnabled",
   "csharp"
 );
+@@clientName(Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS, "PreferHttps", "csharp");
+@@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.customBgpIpAddress, "CustomBgpIPAddress", "csharp");
+@@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.ipConfigurationId, "IPConfigurationId", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.customBgpIpAddresses, "CustomBgpIPAddresses", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.defaultBgpIpAddresses, "DefaultBgpIPAddresses", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.ipConfigurationId, "IPConfigurationId", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.tunnelIpAddresses, "TunnelIPAddresses", "csharp");
+@@clientName(Microsoft.Network.ApplicationGatewayConnectionDraining.drainTimeoutInSec, "DrainTimeoutInSeconds", "csharp");
+@@clientName(Common.TrafficAnalyticsProperties.trafficAnalyticsInterval, "TrafficAnalyticsIntervalInMinutes", "csharp");
+@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.privateIpAddress, "PrivateIPAddress", "csharp");
+@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.publicIpAddress, "PublicIPAddress", "csharp");
+@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration, "VpnConnectionDurationInSeconds", "csharp");
+@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionTime, "VpnConnectionOn", "csharp");
+@@alternateType(Microsoft.Network.NetworkManagerConnectionProperties.networkManagerId, armResourceIdentifier, "csharp");
 @@clientName(
   FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
