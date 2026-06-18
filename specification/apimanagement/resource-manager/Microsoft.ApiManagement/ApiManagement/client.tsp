@@ -496,6 +496,8 @@ op replacePurge(
 @@clientName(AuthorizationServerContractBaseProperties.supportState, "DoesSupportState", "csharp");
 @@clientName(PortalSettingsContractProperties.subscriptions, "IsSubscriptions", "csharp");
 @@clientName(PortalSettingsContractProperties.userRegistration, "IsUserRegistration", "csharp");
+@@clientName(SubscriptionsDelegationSettingsProperties.enabled, "IsSubscriptionDelegationEnabled", "csharp");
+@@clientName(RegistrationDelegationSettingsProperties.enabled, "IsUserRegistrationDelegationEnabled", "csharp");
 @@alternateType(PortalSettingsContractProperties.url, url, "csharp");
 @@alternateType(IssueContractBaseProperties.apiId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(IssueContractProperties.userId, Azure.Core.armResourceIdentifier, "csharp");
