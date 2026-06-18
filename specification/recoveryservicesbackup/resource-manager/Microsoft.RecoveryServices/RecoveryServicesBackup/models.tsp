@@ -289,6 +289,31 @@ union SourceSideScanStatus {
 }
 
 /**
+ * Source scan configuration status for enabling or disabling source scan
+ */
+@added(Versions.v2026_07_01)
+union SourceScanAction {
+  string,
+
+  /** Enable source scan */
+  Enable: "Enable",
+
+  /** Disable source scan */
+  Disable: "Disable",
+}
+
+/**
+ * Request to configure source scan for a protected item
+ */
+@added(Versions.v2026_07_01)
+model ProtectedItemConfigureSourceScanRequest {
+  /**
+   * Source scan action to perform
+   */
+  sourceScanAction?: SourceScanAction;
+}
+
+/**
  * Threat summary for the container
  */
 @added(Versions.v2026_01_31_preview)

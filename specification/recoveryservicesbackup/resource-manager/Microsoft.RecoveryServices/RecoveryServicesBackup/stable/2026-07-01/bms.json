@@ -73,6 +73,9 @@
       "name": "Backups"
     },
     {
+      "name": "ConfigureSourceScan"
+    },
+    {
       "name": "RecoveryPointsRecommendedForMove"
     },
     {
@@ -1723,6 +1726,96 @@
             "$ref": "./examples/Common/TriggerBackup_Post.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan": {
+      "post": {
+        "operationId": "ConfigureSourceScan_Configure",
+        "tags": [
+          "ConfigureSourceScan"
+        ],
+        "description": "Configures source scan for a protected item. This is an asynchronous operation. To know the status of the\noperation, call GetProtectedItemOperationResult API.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the VaultResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "The name of the BackupFabricResource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Name of the container whose details need to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemConfigureSourceScanRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure Source Scan for Protected Item": {
+            "$ref": "./examples/AzureIaasVm/ConfigureSourceScan.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
@@ -12392,6 +12485,16 @@
         "protectedItemType"
       ]
     },
+    "ProtectedItemConfigureSourceScanRequest": {
+      "type": "object",
+      "description": "Request to configure source scan for a protected item",
+      "properties": {
+        "sourceScanAction": {
+          "$ref": "#/definitions/SourceScanAction",
+          "description": "Source scan action to perform"
+        }
+      }
+    },
     "ProtectedItemHealthStatus": {
       "type": "string",
       "description": "Health status of the backup item, evaluated based on last heartbeat received",
@@ -14124,6 +14227,30 @@
           {
             "name": "AlwaysON",
             "value": "AlwaysON"
+          }
+        ]
+      }
+    },
+    "SourceScanAction": {
+      "type": "string",
+      "description": "Source scan configuration status for enabling or disabling source scan",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "SourceScanAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable source scan"
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable source scan"
           }
         ]
       }
