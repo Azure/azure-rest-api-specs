@@ -459,6 +459,16 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(
+  AzureADPartnerClientAuthenticationProperties.azureActiveDirectoryApplicationIdOrUri,
+  url,
+  "csharp"
+);
+@@clientName(
+  AlternativeAuthenticationNameSource.ClientCertificateIp,
+  "ClientCertificateIP",
+  "csharp"
+);
+@@alternateType(
   WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId,
   Azure.Core.uuid,
   "csharp"
