@@ -28,6 +28,7 @@ export function createRequestHook(endpoint, logger) {
 }
 
 /**
+ * Creates a hook that logs the HTTP status code and rate-limit information from each response.
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(response: import("@octokit/types").OctokitResponse<any>) => void}
  */
