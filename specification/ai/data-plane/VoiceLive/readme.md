@@ -79,3 +79,7 @@ directive:
     from: VoiceLive.json
     reason: OpenAI and Azure require two different discriminators.
 ```
+
+## Contributing
+
+VoiceLive uses the **label-based (`v1`) versioning** pattern. For authoring rules — how to add GA and preview features, promote preview to GA, handle breaking changes, and compile/send a PR — see [CONTRIBUTING.md](CONTRIBUTING.md). For the full design and rationale, see [docs/versioning.md](docs/versioning.md).
