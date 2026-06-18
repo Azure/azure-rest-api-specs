@@ -4391,13 +4391,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/previewMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/listMembers": {
       "post": {
-        "operationId": "Groups_PreviewMembers",
+        "operationId": "Groups_ListMembers",
         "tags": [
           "Groups"
         ],
-        "description": "Gets a stored preview of members that was determined during the last refresh.",
+        "description": "Lists the current members of a namespace group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4427,13 +4427,19 @@
             "minLength": 3,
             "maxLength": 64,
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/GroupListMembersQueryParameters.top"
+          },
+          {
+            "$ref": "#/parameters/GroupListMembersQueryParameters.skipToken"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GroupPreviewMembersResponse"
+              "$ref": "#/definitions/GroupListMembersResult"
             }
           },
           "default": {
@@ -4441,11 +4447,6 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Group PreviewMembers": {
-            "$ref": "./examples/PreviewMembers_Group.json"
           }
         }
       }
@@ -7838,6 +7839,25 @@
         }
       ]
     },
+    "GroupListMembersResult": {
+      "type": "object",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "The ARM resource IDs of the group members returned in this page.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to the next page of results, if more results remain within the requested top limit."
+        }
+      },
+      "required": [
+        "members"
+      ]
+    },
     "GroupListResult": {
       "type": "object",
       "description": "The response of a Group list operation.",
@@ -7898,19 +7918,6 @@
             "description": "The group is ready."
           }
         ]
-      }
-    },
-    "GroupPreviewMembersResponse": {
-      "type": "object",
-      "description": "Response for the preview members operation.",
-      "properties": {
-        "members": {
-          "type": "array",
-          "description": "A preview of member resource IDs.",
-          "items": {
-            "type": "string"
-          }
-        }
       }
     },
     "GroupProperties": {
@@ -12655,5 +12662,25 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "GroupListMembersQueryParameters.skipToken": {
+      "name": "$skiptoken",
+      "in": "query",
+      "description": "Opaque continuation token from a previous listMembers response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skipToken"
+    },
+    "GroupListMembersQueryParameters.top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Optional cap on the total number of group members to return across this list operation.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    }
+  }
 }
