@@ -80,9 +80,8 @@ model RefreshGroupMembersResult is ArmOperationStatus {
   @visibility(Lifecycle.Read)
   lastRefreshTimestamp?: utcDateTime;
 }
- 
-alias RefreshMembersLroHeaders =
-  Azure.Core.Foundations.RetryAfterHeader &
+
+alias RefreshMembersLroHeaders = Azure.Core.Foundations.RetryAfterHeader &
   ArmCombinedLroHeaders<FinalResult = RefreshGroupMembersResult>;
 
 @added(Versions.v2026_11_02_preview)
@@ -105,7 +104,7 @@ interface Groups {
   @useFinalStateVia("azure-async-operation")
   refreshMembers is ArmResourceActionNoResponseContentAsync<
     Resource = Group,
-    Request = void, 
+    Request = void,
     LroHeaders = RefreshMembersLroHeaders
   >;
 
