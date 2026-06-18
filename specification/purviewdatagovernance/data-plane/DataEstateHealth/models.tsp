@@ -583,7 +583,7 @@ model ScheduleMonthlyOccurrence {
 }
 
 @doc("Fine-grained recurrence pattern for a control schedule.")
-model ScheduleRecurrence {
+model Recurrence {
   @doc("Hours of the day at which to run (0 through 23).")
   hours: int32[];
 
@@ -626,7 +626,7 @@ model Schedule {
   endTime?: utcDateTime;
 
   @doc("Fine-grained recurrence pattern within the chosen frequency.")
-  recurrence?: ScheduleRecurrence;
+  recurrence?: Recurrence;
 
   @doc("The time zone (IANA name) used to interpret startTime, endTime, and recurrence.")
   timeZone?: string;

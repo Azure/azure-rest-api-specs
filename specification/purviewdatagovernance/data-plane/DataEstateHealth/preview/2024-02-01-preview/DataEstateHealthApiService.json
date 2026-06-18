@@ -1847,6 +1847,57 @@
         "end"
       ]
     },
+    "Recurrence": {
+      "type": "object",
+      "description": "Fine-grained recurrence pattern for a control schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours of the day at which to run (0 through 23).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "Minutes of the hour at which to run (0 through 59).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "Days of the month on which to run (1 through 31).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "Days of the week on which to run.",
+          "items": {
+            "$ref": "#/definitions/ScheduleWeekDay"
+          }
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
+          "items": {
+            "$ref": "#/definitions/ScheduleMonthlyOccurrence"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes",
+        "monthDays",
+        "weekDays",
+        "monthlyOccurrences"
+      ]
+    },
     "Rule": {
       "type": "object",
       "description": "Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.",
@@ -2113,7 +2164,7 @@
           "description": "The end time of the schedule."
         },
         "recurrence": {
-          "$ref": "#/definitions/ScheduleRecurrence",
+          "$ref": "#/definitions/Recurrence",
           "description": "Fine-grained recurrence pattern within the chosen frequency."
         },
         "timeZone": {
@@ -2169,57 +2220,6 @@
       "required": [
         "day",
         "occurrence"
-      ]
-    },
-    "ScheduleRecurrence": {
-      "type": "object",
-      "description": "Fine-grained recurrence pattern for a control schedule.",
-      "properties": {
-        "hours": {
-          "type": "array",
-          "description": "Hours of the day at which to run (0 through 23).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "minutes": {
-          "type": "array",
-          "description": "Minutes of the hour at which to run (0 through 59).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "monthDays": {
-          "type": "array",
-          "description": "Days of the month on which to run (1 through 31).",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "weekDays": {
-          "type": "array",
-          "description": "Days of the week on which to run.",
-          "items": {
-            "$ref": "#/definitions/ScheduleWeekDay"
-          }
-        },
-        "monthlyOccurrences": {
-          "type": "array",
-          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
-          "items": {
-            "$ref": "#/definitions/ScheduleMonthlyOccurrence"
-          }
-        }
-      },
-      "required": [
-        "hours",
-        "minutes",
-        "monthDays",
-        "weekDays",
-        "monthlyOccurrences"
       ]
     },
     "ScheduleState": {
