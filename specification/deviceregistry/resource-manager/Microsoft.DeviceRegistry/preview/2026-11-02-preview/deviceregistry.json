@@ -6026,7 +6026,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobRunResultsFilter"
+              "$ref": "#/definitions/JobRunResultsRequest"
             }
           }
         ],
@@ -9998,13 +9998,13 @@
         }
       }
     },
-    "JobRunResultsFilter": {
+    "JobRunResultsRequest": {
       "type": "object",
       "description": "Optional request body for browsing job run results.",
       "properties": {
-        "statusFilter": {
+        "filter": {
           "type": "string",
-          "description": "When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied."
+          "description": "An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Accepted status values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied. When omitted, all device results are returned."
         }
       }
     },

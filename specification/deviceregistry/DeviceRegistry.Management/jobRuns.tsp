@@ -167,20 +167,20 @@ union JobRunResultItemStatus {
 }
 
 // NOTE: ADU's backing API supports filtering device-level results by a
-// single state value. `status` is therefore a single-valued, optional
-// equality-match filter passed through to ADU -- not an OData `$filter`.
-// Omitting it returns all device results unfiltered. It is carried in the
-// POST request body (not a query parameter) because ARM forbids POST/action
-// operations from declaring query parameters other than `api-version`.
+// single state value. The filter is therefore an OData-style boolean
+// expression over the result `status` field (e.g. "status eq 'Failed'"),
+// aligned with the Azure API Guidelines `filter` convention. Omitting it
+// returns all device results unfiltered. It is carried in the POST request
+// body (not a query parameter) because ARM forbids POST/action operations
+// from declaring query parameters other than `api-version`.
 //
-// NOTE (for review): the filter is typed as `string` (not the
-// `JobRunResultItemStatus` union) on purpose. Accepted values mirror
-// `JobRunResultItemStatus`; they are documented below and validated by ADU.
+// NOTE (for review): accepted `status` values mirror `JobRunResultItemStatus`
+// (Succeeded, Failed, InProgress, Canceled, NotApplied) and are validated by ADU.
 @added(Versions.v2026_11_02_preview)
 @doc("Optional request body for browsing job run results.")
-model JobRunResultsFilter {
-  @doc("When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied.")
-  statusFilter?: string;
+model JobRunResultsRequest {
+  @doc("An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Accepted status values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied. When omitted, all device results are returned.")
+  filter?: string;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -203,7 +203,7 @@ interface JobRuns {
   @doc("Browse the results of a job run to find individual device statuses.")
   results is ArmResourceActionSync<
     JobRun,
-    JobRunResultsFilter,
+    JobRunResultsRequest,
     JobRunResultListResponse
   >;
 }
