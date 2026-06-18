@@ -45,7 +45,6 @@ import "./TransferDetails.tsp";
 import "./PartnerTransferDetails.tsp";
 import "./RecipientTransferDetails.tsp";
 import "./routes.tsp";
-import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
