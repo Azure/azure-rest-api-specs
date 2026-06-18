@@ -100,7 +100,11 @@ union BareMetalMachineHardwareValidationResult {
  * The log level for the monitoring configuration status of the bare metal machine.
  */
 @added(Versions.v2026_05_01_preview)
-union BareMetalMachineMetricsConfigurationStatusLogLevel {
+@renamedFrom(
+  Versions.v2026_07_01,
+  "BareMetalMachineMetricsConfigurationStatusLogLevel"
+)
+union BareMetalMachineMonitoringConfigurationStatusLogLevel {
   string,
 
   /**
@@ -118,7 +122,11 @@ union BareMetalMachineMetricsConfigurationStatusLogLevel {
  * The metrics level for the monitoring configuration status of the bare metal machine.
  */
 @added(Versions.v2026_05_01_preview)
-union BareMetalMachineMetricsConfigurationStatusMetricsLevel {
+@renamedFrom(
+  Versions.v2026_07_01,
+  "BareMetalMachineMetricsConfigurationStatusMetricsLevel"
+)
+union BareMetalMachineMonitoringConfigurationStatusMetricsLevel {
   string,
 
   /**
@@ -673,12 +681,12 @@ model BareMetalMachineMonitoringConfigurationStatus {
   /**
    * The log level for the monitoring configuration status of the bare metal machine.
    */
-  logLevel?: BareMetalMachineMetricsConfigurationStatusLogLevel;
+  logLevel?: BareMetalMachineMonitoringConfigurationStatusLogLevel;
 
   /**
    * The metrics level for the monitoring configuration status of the bare metal machine.
    */
-  metricsLevel?: BareMetalMachineMetricsConfigurationStatusMetricsLevel;
+  metricsLevel?: BareMetalMachineMonitoringConfigurationStatusMetricsLevel;
 }
 
 /**

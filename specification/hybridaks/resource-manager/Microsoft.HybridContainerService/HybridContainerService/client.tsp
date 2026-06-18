@@ -5,5 +5,6 @@ using Microsoft.HybridContainerService;
 
 @@Azure.ClientGenerator.Core.clientName(
   HybridIdentityMetadataOperationGroup,
-  "HybridIdentityMetadata"
+  "HybridIdentityMetadata",
+  "!autorest"
 );

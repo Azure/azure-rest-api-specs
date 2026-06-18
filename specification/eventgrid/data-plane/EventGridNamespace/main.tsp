@@ -2,6 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme" "SharedAccessKey is not supported by typespec-autorest"
 @useAuth(
