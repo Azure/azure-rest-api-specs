@@ -213,9 +213,9 @@ model ReprovisionDeviceRequest {
 // Reprovision-device status monitor endpoint
 // ──────────────────────────────────────────────
 
-/** Status monitor for the long-running `:reprovision` action on a device. */
+/** Status monitor for the long-running `:reprovision` action on a device in a namespace. */
 @added(Versions.v2026_11_02_preview)
-@parentResource(Device)
+@parentResource(Namespace)
 @resource("reprovisionDeviceResults")
 model ReprovisionDeviceResultStatusMonitor
   is LongRunningOperationStatus<ProvisionDeviceResult>;

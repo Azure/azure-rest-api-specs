@@ -62,6 +62,10 @@ model NamespaceProperties {
   @visibility(Lifecycle.Read)
   dataEndpoint?: string;
 
+  @added(Versions.v2026_11_01_preview)
+  @doc("The certificate management state for the namespace.")
+  certificateManagement?: CertificateManagementState;
+
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the messaging endpoints dictionary."
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
@@ -88,6 +92,18 @@ model NamespaceProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The certificate management state for the namespace.")
+union CertificateManagementState {
+  string,
+
+  @doc("Certificate management is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Certificate management is disabled.")
+  Disabled: "Disabled",
 }
 
 @added(Versions.v2024_10_01_preview)
@@ -124,6 +140,11 @@ model MessagingEndpoint {
   @doc("The linking state of this messaging endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The error detail surfaced when this messaging endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning configuration for this messaging endpoint.")
@@ -203,6 +224,10 @@ model ProvisioningEndpoint {
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this provisioning endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -224,6 +249,10 @@ model UpdatingEndpoint {
   @doc("The linking state of this device update endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this device update endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 
   // Intentionally typed as string, not url. Values are bare hostnames
   // without scheme (e.g., "account.api.adu.microsoft.com").
@@ -271,6 +300,18 @@ union NamespaceLinkingStateValue {
 
   @doc("Linking failed.")
   Failed: "Failed",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Error detail for an endpoint whose linking state is Failed. Present only while the linking state is Failed and removed when the endpoint recovers.")
+model NamespaceLinkingError {
+  @doc("Error code that classifies the linking failure.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("Human-readable message describing the linking failure.")
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 @added(Versions.v2026_11_01_preview)

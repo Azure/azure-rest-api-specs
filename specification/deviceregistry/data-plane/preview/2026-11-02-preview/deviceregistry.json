@@ -1893,73 +1893,6 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}/reprovisionDeviceResults/{operationId}": {
-      "get": {
-        "operationId": "Devices_GetReprovisionDeviceResult",
-        "tags": [
-          "Devices"
-        ],
-        "description": "Get the result of a device-reprovisioning operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "The unique ID of the operation.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReprovisionDeviceResultStatusMonitor"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get the result of a device-reprovisioning operation": {
-            "$ref": "./examples/Devices_GetReprovisionDeviceResult.json"
-          }
-        }
-      }
-    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
       "get": {
         "operationId": "DeviceStates_List",
@@ -2826,6 +2759,66 @@
         "x-ms-examples": {
           "Get the result of a device-provisioning operation": {
             "$ref": "./examples/Devices_GetProvisionDeviceResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/reprovisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetReprovisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-reprovisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-reprovisioning operation": {
+            "$ref": "./examples/Devices_GetReprovisionDeviceResult.json"
           }
         }
       }
@@ -5214,7 +5207,7 @@
     },
     "ReprovisionDeviceResultStatusMonitor": {
       "type": "object",
-      "description": "Status monitor for the long-running `:reprovision` action on a device.",
+      "description": "Status monitor for the long-running `:reprovision` action on a device in a namespace.",
       "properties": {
         "id": {
           "type": "string",

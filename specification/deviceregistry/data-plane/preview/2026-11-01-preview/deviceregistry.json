@@ -64,6 +64,9 @@
       "name": "Device Attributes"
     },
     {
+      "name": "Groups"
+    },
+    {
       "name": "Namespaces"
     }
   ],
@@ -832,6 +835,55 @@
           },
           "Get the result of a generate-report operation (namespace update compliance)": {
             "$ref": "./examples/Namespaces_GetGenerateReportResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/groups:getGroupsForDevice": {
+      "post": {
+        "operationId": "Groups_GetGroupsForDevice",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Returns the groups that a device belongs to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetGroupsForDeviceRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetGroupsForDeviceResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get group memberships for a device": {
+            "$ref": "./examples/Groups_GetGroupsForDevice.json"
           }
         }
       }
@@ -1920,19 +1972,6 @@
       },
       "required": [
         "groupUuid"
-      ]
-    },
-    "GetGroupsForDeviceRequest": {
-      "type": "object",
-      "description": "Request for looking up a device's groups.",
-      "properties": {
-        "deviceUuid": {
-          "type": "string",
-          "description": "The unique identifier of the device."
-        }
-      },
-      "required": [
-        "deviceUuid"
       ]
     },
     "GetGroupsForDeviceResult": {
@@ -3208,6 +3247,14 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "GetGroupsForDeviceRequest": {
+      "name": "deviceUuid",
+      "in": "query",
+      "description": "The unique identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "LongRunningOperationIdHeader": {
       "name": "Operation-Id",
