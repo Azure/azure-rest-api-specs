@@ -1,0 +1,55 @@
+{
+  "title": "Get_Namespace_With_FailedLinkingEndpoint",
+  "operationId": "Namespaces_Get",
+  "description": "Get a namespace whose messaging endpoint failed to link. The linkingError carries a customer-actionable code and message and is present only while linkingState is Failed. It is removed automatically once the endpoint recovers.",
+  "parameters": {
+    "api-version": "2026-11-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace",
+        "name": "my-namespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "eastus",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "provisioningState": "Failed",
+          "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "dataEndpoint": "eastus.api.deviceregistry.azure.com",
+          "messaging": {
+            "endpoints": {
+              "hub-primary": {
+                "endpointType": "Microsoft.Devices/IotHubs",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Devices/IotHubs/my-hub",
+                "inboundCallerIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "linkingState": "Failed",
+                "linkingError": {
+                  "code": "LinkInitiateFailed",
+                  "message": "The namespace's managed identity is not authorized to link the Hub resource. Grant it access on the resource, then resubmit the request."
+                }
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-27T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-27T00:00:00Z"
+        }
+      }
+    }
+  }
+}
