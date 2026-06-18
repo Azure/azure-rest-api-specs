@@ -1923,7 +1923,7 @@ using Microsoft.ApiManagement;
 @@clientName(BackendSessionIdSource, "Backend-sessionId-source", "!python");
 @@clientName(HttpHeader, "HTTPHeader", "!java");
 @@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
-@@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings", "!python");
+@@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings", "!(python,csharp)");
 @@clientName(LlmMessageLogTypes, "Llm-message-log-types", "!python");
 @@clientName(
   ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,

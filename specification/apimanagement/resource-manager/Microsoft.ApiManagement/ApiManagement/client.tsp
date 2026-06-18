@@ -6,9 +6,12 @@ using Microsoft.ApiManagement;
 using Http;
 using Azure.ResourceManager;
 
-// C# compatibility replacements used to preserve the previous ResourceData base type
-// for patch models. The original TypeSpec models extend ApimResource; the replacements
-// extend the ARM common Resource envelope and copy the original non-envelope properties.
+/**
+ * C# compatibility replacement that preserves the previous `ResourceData` base type for the API
+ * gateway patch model. The original TypeSpec model extends `ApimResource`; this replacement
+ * extends the ARM common `Resource` envelope and copies the original non-envelope properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility model intentionally uses the CSharp prefix to mirror the previous SDK type name."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve previous C# ResourceData base type during MPG migration"
 model CSharpApiGatewayPatch extends Azure.ResourceManager.CommonTypes.Resource {
   ...OmitProperties<
@@ -17,6 +20,12 @@ model CSharpApiGatewayPatch extends Azure.ResourceManager.CommonTypes.Resource {
   >;
 }
 
+/**
+ * C# compatibility replacement that preserves the previous `ResourceData` base type for the API
+ * Management service patch model. It extends the ARM common `Resource` envelope and copies the
+ * original non-envelope properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "C# compatibility model intentionally uses the CSharp prefix to mirror the previous SDK type name."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve previous C# ResourceData base type during MPG migration"
 model CSharpApiManagementServicePatch
   extends Azure.ResourceManager.CommonTypes.Resource {
@@ -26,9 +35,10 @@ model CSharpApiManagementServicePatch
   >;
 }
 
-// C# compatibility enum surfaced by the previous AutoRest SDK for association
-// provisioning state. Keep it in client.tsp and apply it with @@alternateType so
-// the OpenAPI output remains unchanged.
+/**
+ * C# compatibility enum surfaced by the previous AutoRest SDK for association provisioning state.
+ * Kept in client.tsp and applied with `@@alternateType` so the OpenAPI output remains unchanged.
+ */
 union AssociationEntityProvisioningState {
   string,
 
@@ -573,7 +583,9 @@ op replacePurge(
 @@clientName(OperationStatusOperationGroup.get, "GetOperationStatus", "csharp");
 @@clientName(OperationsResultsOperationGroup.get, "GetOperationsResult", "csharp");
 @@clientName(TagTagResourceContractProperties, "AssociatedTagProperties", "csharp");
-@@clientName(LlmDiagnosticSettings, "LlmDiagnosticSettings", "csharp");
+// Avoid a C# case-only collision with the model `LLMDiagnosticSettings`
+// (one-file-per-type can't coexist with case-insensitive MSBuild Compile items).
+@@clientName(LlmDiagnosticSettings, "LlmDiagnosticLogState", "csharp");
 @@clientName(AssociationContractProperties.provisioningState, "ProvisioningState", "csharp");
 @@alternateType(AssociationContractProperties.provisioningState, AssociationEntityProvisioningState, "csharp");
 @@clientName(ConnectivityIssue.type, "IssueType", "csharp");
