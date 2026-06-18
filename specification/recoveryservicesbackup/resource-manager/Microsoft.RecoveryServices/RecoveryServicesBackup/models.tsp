@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -3476,6 +3477,28 @@ model RecoveryPointProperties {
    * Bool to indicate whether RP is in soft delete state or not
    */
   isSoftDeleted?: boolean;
+
+  /**
+   * Immutability properties of the recovery point.
+   */
+  @added(Versions.v2026_05_01)
+  immutabilityProperties?: RecoveryPointImmutabilityProperties;
+}
+
+/**
+ * Immutability properties of a recovery point.
+ */
+@added(Versions.v2026_05_01)
+model RecoveryPointImmutabilityProperties {
+  /**
+   * Whether the recovery point is immutable.
+   */
+  isImmutable: boolean;
+
+  /**
+   * Expiry time of immutability in UTC. Omitted when immutability is as per policy.
+   */
+  expiryTime?: utcDateTime;
 }
 
 /**
@@ -8743,6 +8766,7 @@ model ClientDiscoveryResponse {
  */
 @Azure.Core.lroStatus
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -8765,6 +8789,7 @@ union CrossTenantProvisioningState {
  * Represents the configuration linking a source vault to a target vault across tenants.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -8809,6 +8834,7 @@ model CrossTenantVaultMappingProperties {
  * Request to remove a cross-tenant vault mapping for cross-tenant restore.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -8820,6 +8846,7 @@ model RemoveCrossTenantVaultMappingRequest {
  * State of a vault mapping.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union VaultMappingState {
   string,
 
@@ -8835,6 +8862,7 @@ union VaultMappingState {
  * Contains information about whether a source vault is mapped to a target vault.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -8851,6 +8879,7 @@ model CrossTenantVaultMappingStatusResponse {
  * Request to generate a vault credential certificate for cross-tenant restore.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -8862,6 +8891,7 @@ model VaultCredentialCertificateRequest {
  * Options for self-signed certificate generation.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -8874,6 +8904,7 @@ model VaultCredentialCertificateCreateOptions {
  * and associated AAD identity details for MARS agent registration.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -8891,6 +8922,7 @@ model VaultCredentialCertificateResponse
  * Authentication type used by the vault credential certificate.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union AuthType {
   string,
 
@@ -8903,6 +8935,7 @@ union AuthType {
  * and AAD service principal identity details required by MARS agent.
  */
 @added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.

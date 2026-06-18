@@ -101,6 +101,52 @@ each suppression must be individually challenged:
 
 ---
 
+## Recommending Removal of an Existing Suppression (RPC-SUPPRESS-REMOVE-SAFELY)
+
+When a reviewer (human or agent) recommends that an author **remove** an
+existing suppression, the recommendation MUST make the precondition
+explicit: removing a suppression is only safe when the underlying lint
+violation has already been fixed in the same PR. Otherwise CI will fail
+the moment the suppression is gone.
+
+The presence of a suppression is itself evidence that the rule fires on
+the emitted artifact. A self-contradictory or vague reason (e.g.,
+_"the property is already readOnly"_, _"known pattern inherited from
+existing resources"_) is not evidence that the rule has stopped firing;
+it is evidence that the previous author did not articulate why. Treat
+unclear reasons as a signal to **investigate the emitted shape**, not
+as license to recommend deletion.
+
+**When recommending removal, the comment body MUST:**
+
+1. **Lead with the precondition, not the option list.** "Removing this
+   suppression is safe only if you have first verified the rule no
+   longer fires on the emitted OpenAPI" -- before any "you could
+   either (a) remove or (b) narrow" framing.
+2. **State the verification required.** Cite the specific emitted
+   jsonpath, shape, or grep the author should run (e.g., for
+   `ProvisioningStateMustBeReadOnly`: confirm no `provisioningState`
+   property in the emitted swagger is shaped as `{ "$ref": "...",
+"readOnly": true }`, because `readOnly` siblings of `$ref` are
+   ignored per JSON Schema).
+3. **Name the safe alternative explicitly.** If the rule still fires
+   on the emitted artifact, the alternatives are (a) fix the source so
+   the emitter produces a compliant shape, or (b) narrow the
+   suppression with a specific `from:` / `where:` clause and a real
+   reason. Removal is not an option in that branch.
+4. **Not list "remove" as a peer of "narrow" without the conditional.**
+   A bare "either (a) remove if no longer needed, or (b) narrow" puts
+   the burden of the verification on the author and routinely leads to
+   deletion-without-verification followed by CI failure. The conditional
+   ("if no longer needed") is doing all the work and must be unpacked.
+
+This rule applies whether the recommendation is posted by a human
+reviewer or by the automated review agent. The same comment-authoring
+discipline applies to recommending removal of `suppressions.yaml`
+entries.
+
+---
+
 ## Suppression Scoping Rules (RPC-SUPPRESS-SCOPE)
 
 - Suppressions are scoped to the `readme.md` tag block they appear in.

@@ -44,7 +44,9 @@ alias CertificateOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("certificates")
     @key
     certificateName: string;
-  }
+  },
+  ErrorType = CommonTypes.ErrorResponse,
+  ResourceName = "ContainerAppConnectedEnvironmentCertificate"
 >;
 
 @armResourceOperations
@@ -94,7 +96,6 @@ interface Certificates {
     Certificate,
     Response = ArmResponse<CertificateCollection>
   >;
-
   /**
    * Get the specified Certificate.
    */
@@ -162,7 +163,9 @@ alias CertificateOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperatio
     @segment("certificates")
     @key
     certificateName: string;
-  }
+  },
+  ErrorType = CommonTypes.ErrorResponse,
+  ResourceName = "ContainerAppManagedEnvironmentCertificate"
 >;
 
 @@doc(Certificate.name, "Name of the Certificate.");

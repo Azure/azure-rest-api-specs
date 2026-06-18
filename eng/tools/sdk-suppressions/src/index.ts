@@ -1,5 +1,5 @@
 import { exit } from "process";
-import { updateSdkSuppressionsLabels } from "./updateSdkSuppressionsLabel.js";
+import { updateSdkSuppressionsLabels } from "./updateSdkSuppressionsLabel.ts";
 
 function getArgsError(args: string[]): string {
   return (

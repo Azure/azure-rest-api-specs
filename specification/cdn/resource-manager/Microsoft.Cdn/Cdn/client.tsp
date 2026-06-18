@@ -194,12 +194,12 @@ using Azure.ResourceManager;
 @@clientName(
   RequestSchemeMatchValue,
   "RequestSchemeMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(
   IsDeviceMatchValue,
   "IsDeviceMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
@@ -207,7 +207,7 @@ using Azure.ResourceManager;
 @@clientName(
   RequestMethodMatchValue,
   "RequestMethodMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(CheckHostNameAvailabilityInput.hostName, "hostname", "java");
 @@clientName(AFDDomainProperties.hostName, "hostname", "java");
@@ -1420,6 +1420,7 @@ using Azure.ResourceManager;
 // Python SDK customizations: preserve client name and enum member names from the
 // pre-migration Swagger SDK to avoid breaking changes for existing consumers.
 @@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
 @@clientName(
   PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
   "TWO_HUNDRED",
@@ -1446,6 +1447,29 @@ using Azure.ResourceManager;
   "python"
 );
 
+// Preserve pre-migration Swagger enum names to avoid breaking changes for Python consumers.
+@@clientName(
+  IsDeviceMatchValue,
+  "IsDeviceMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestMethodMatchValue,
+  "RequestMethodMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestSchemeMatchValue,
+  "RequestSchemeMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  KeyVaultSigningKeyParametersType,
+  "KeyVaultSigningKeyParametersTypeName",
+  "python"
+);
+@@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
+
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods
 @@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
@@ -1463,3 +1487,4 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
+@@clientName(CreatedByType, "IdentityType", "javascript");

@@ -8,6 +8,7 @@ import "./models.tsp";
 import "./resources.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
