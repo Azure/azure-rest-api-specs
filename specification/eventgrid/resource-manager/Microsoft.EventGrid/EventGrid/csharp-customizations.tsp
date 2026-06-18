@@ -434,16 +434,20 @@ namespace Customization;
 );
 @@clientName(
   EventDeliverySchema.CloudEventSchemaV1_0,
-  "CloudEventSchemaV1_0",
+  exact("CloudEventSchemaV1_0"),
   "csharp"
 );
 @@clientName(
   InputSchema.CloudEventSchemaV1_0,
-  "CloudEventSchemaV1_0",
+  exact("CloudEventSchemaV1_0"),
   "csharp"
 );
 @@alternateType(PartnerDetails.setupUri, url, "csharp");
-@@alternateType(CustomerManagedKeyEncryption.keyEncryptionKeyUrl, url, "csharp");
+@@alternateType(
+  CustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  url,
+  "csharp"
+);
 @@alternateType(
   PartnerEventSubscriptionDestinationProperties.resourceId,
   Azure.Core.armResourceIdentifier,
