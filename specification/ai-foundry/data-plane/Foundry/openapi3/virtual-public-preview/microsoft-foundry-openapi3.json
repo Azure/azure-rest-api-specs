@@ -16168,6 +16168,15 @@
                     "usage": {
                       "$ref": "#/components/schemas/OpenAI.ResponseUsage"
                     },
+                    "moderation": {
+                      "type": "object",
+                      "allOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Moderation"
+                        }
+                      ],
+                      "nullable": true
+                    },
                     "parallel_tool_calls": {
                       "type": "boolean",
                       "description": "Whether to allow the model to run tool calls in parallel.",
@@ -16415,6 +16424,15 @@
                   },
                   "instructions": {
                     "type": "string",
+                    "nullable": true
+                  },
+                  "moderation": {
+                    "type": "object",
+                    "allOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.ModerationParam"
+                      }
+                    ],
                     "nullable": true
                   },
                   "stream": {
@@ -26186,7 +26204,9 @@
         },
         "discriminator": {
           "propertyName": "type",
-          "mapping": {}
+          "mapping": {
+            "azure_ai_source": "#/components/schemas/AzureAIDataSourceConfig"
+          }
         },
         "description": "Base class for run data sources with discriminator support."
       },
@@ -31143,7 +31163,8 @@
             "red_team_seed_prompts": "#/components/schemas/RedTeamSeedPromptsItemGenerationParams",
             "red_team_taxonomy": "#/components/schemas/RedTeamTaxonomyItemGenerationParams",
             "response_retrieval": "#/components/schemas/ResponseRetrievalItemGenerationParams",
-            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams"
+            "conversation_gen_preview": "#/components/schemas/ConversationGenPreviewItemGenerationParams",
+            "synthetic_data_gen_preview": "#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams"
           }
         },
         "description": "Represents the set of parameters used to control item generation operations."
@@ -32312,12 +32333,12 @@
       "ModelPendingUploadResponse": {
         "type": "object",
         "required": [
-          "blobReferenceForConsumption",
+          "blobReference",
           "pendingUploadId",
           "pendingUploadType"
         ],
         "properties": {
-          "blobReferenceForConsumption": {
+          "blobReference": {
             "allOf": [
               {
                 "$ref": "#/components/schemas/BlobReference"
@@ -32676,8 +32697,7 @@
               "create_file"
             ],
             "description": "Create a new file with the provided diff.",
-            "x-stainless-const": true,
-            "default": "create_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -32710,8 +32730,7 @@
               "create_file"
             ],
             "description": "The operation type. Always `create_file`.",
-            "x-stainless-const": true,
-            "default": "create_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -32745,8 +32764,7 @@
               "delete_file"
             ],
             "description": "Delete the specified file.",
-            "x-stainless-const": true,
-            "default": "delete_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -32774,8 +32792,7 @@
               "delete_file"
             ],
             "description": "The operation type. Always `delete_file`.",
-            "x-stainless-const": true,
-            "default": "delete_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -32875,8 +32892,7 @@
               "apply_patch"
             ],
             "description": "The type of the tool. Always `apply_patch`.",
-            "x-stainless-const": true,
-            "default": "apply_patch"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -32901,8 +32917,7 @@
               "update_file"
             ],
             "description": "Update an existing file with the provided diff.",
-            "x-stainless-const": true,
-            "default": "update_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -32935,8 +32950,7 @@
               "update_file"
             ],
             "description": "The operation type. Always `update_file`.",
-            "x-stainless-const": true,
-            "default": "update_file"
+            "x-stainless-const": true
           },
           "path": {
             "type": "string",
@@ -33158,8 +33172,7 @@
               "click"
             ],
             "description": "Specifies the event type. For a click action, this property is always `click`.",
-            "x-stainless-const": true,
-            "default": "click"
+            "x-stainless-const": true
           },
           "button": {
             "allOf": [
@@ -33593,8 +33606,7 @@
               "computer_screenshot"
             ],
             "description": "Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.",
-            "x-stainless-const": true,
-            "default": "computer_screenshot"
+            "x-stainless-const": true
           },
           "image_url": {
             "type": "string",
@@ -33661,8 +33673,7 @@
               "computer"
             ],
             "description": "The type of the computer tool. Always `computer`.",
-            "x-stainless-const": true,
-            "default": "computer"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -33688,8 +33699,7 @@
               "computer_use_preview"
             ],
             "description": "The type of the computer use tool. Always `computer_use_preview`.",
-            "x-stainless-const": true,
-            "default": "computer_use_preview"
+            "x-stainless-const": true
           },
           "environment": {
             "allOf": [
@@ -33736,8 +33746,7 @@
               "container_auto"
             ],
             "description": "Automatically creates a container for this request",
-            "x-stainless-const": true,
-            "default": "container_auto"
+            "x-stainless-const": true
           },
           "file_ids": {
             "type": "array",
@@ -33790,8 +33799,7 @@
               "container_file_citation"
             ],
             "description": "The type of the container file citation. Always `container_file_citation`.",
-            "x-stainless-const": true,
-            "default": "container_file_citation"
+            "x-stainless-const": true
           },
           "container_id": {
             "type": "string",
@@ -33852,8 +33860,7 @@
               "allowlist"
             ],
             "description": "Allow outbound network access only to specified domains. Always `allowlist`.",
-            "x-stainless-const": true,
-            "default": "allowlist"
+            "x-stainless-const": true
           },
           "allowed_domains": {
             "type": "array",
@@ -33882,8 +33889,7 @@
               "disabled"
             ],
             "description": "Disable outbound network access. Always `disabled`.",
-            "x-stainless-const": true,
-            "default": "disabled"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -33938,8 +33944,7 @@
               "container_reference"
             ],
             "description": "The environment type. Always `container_reference`.",
-            "x-stainless-const": true,
-            "default": "container_reference"
+            "x-stainless-const": true
           },
           "container_id": {
             "type": "string"
@@ -35656,7 +35661,8 @@
           "propertyName": "type",
           "mapping": {
             "text": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText",
-            "json_object": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject"
+            "json_object": "#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject",
+            "json_schema": "#/components/schemas/OpenAI.ResponseFormatJsonSchema"
           }
         },
         "description": "An object specifying the format that the model must output.\nSetting to `{ \"type\": \"json_schema\", \"json_schema\": {...} }` enables\nStructured Outputs which ensures the model will match your supplied JSON\nschema. Learn more in the [Structured Outputs\nguide](/docs/guides/structured-outputs).\nSetting to `{ \"type\": \"json_object\" }` enables the older JSON mode, which\nensures the message the model generates is valid JSON. Using `json_schema`\nis preferred for models that support it."
@@ -36546,8 +36552,7 @@
               "grammar"
             ],
             "description": "Grammar format. Always `grammar`.",
-            "x-stainless-const": true,
-            "default": "grammar"
+            "x-stainless-const": true
           },
           "syntax": {
             "allOf": [
@@ -36582,8 +36587,7 @@
               "text"
             ],
             "description": "Unconstrained text format. Always `text`.",
-            "x-stainless-const": true,
-            "default": "text"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -36607,8 +36611,7 @@
               "custom"
             ],
             "description": "The type of the custom tool. Always `custom`.",
-            "x-stainless-const": true,
-            "default": "custom"
+            "x-stainless-const": true
           },
           "name": {
             "type": "string",
@@ -36720,8 +36723,7 @@
               "double_click"
             ],
             "description": "Specifies the event type. For a double click action, this property is always set to `double_click`.",
-            "x-stainless-const": true,
-            "default": "double_click"
+            "x-stainless-const": true
           },
           "x": {
             "allOf": [
@@ -36768,8 +36770,7 @@
               "drag"
             ],
             "description": "Specifies the event type. For a drag action, this property is always set to `drag`.",
-            "x-stainless-const": true,
-            "default": "drag"
+            "x-stainless-const": true
           },
           "path": {
             "type": "array",
@@ -37823,8 +37824,7 @@
               "file_citation"
             ],
             "description": "The type of the file citation. Always `file_citation`.",
-            "x-stainless-const": true,
-            "default": "file_citation"
+            "x-stainless-const": true
           },
           "file_id": {
             "type": "string",
@@ -37908,8 +37908,7 @@
               "file_search"
             ],
             "description": "The type of the file search tool. Always `file_search`.",
-            "x-stainless-const": true,
-            "default": "file_search"
+            "x-stainless-const": true
           },
           "vector_store_ids": {
             "type": "array",
@@ -39214,8 +39213,7 @@
               "exit"
             ],
             "description": "The outcome type. Always `exit`.",
-            "x-stainless-const": true,
-            "default": "exit"
+            "x-stainless-const": true
           },
           "exit_code": {
             "allOf": [
@@ -39247,8 +39245,7 @@
               "exit"
             ],
             "description": "The outcome type. Always `exit`.",
-            "x-stainless-const": true,
-            "default": "exit"
+            "x-stainless-const": true
           },
           "exit_code": {
             "allOf": [
@@ -39355,8 +39352,7 @@
               "timeout"
             ],
             "description": "The outcome type. Always `timeout`.",
-            "x-stainless-const": true,
-            "default": "timeout"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -39379,8 +39375,7 @@
               "timeout"
             ],
             "description": "The outcome type. Always `timeout`.",
-            "x-stainless-const": true,
-            "default": "timeout"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -39411,8 +39406,7 @@
               "shell"
             ],
             "description": "The type of the shell tool. Always `shell`.",
-            "x-stainless-const": true,
-            "default": "shell"
+            "x-stainless-const": true
           },
           "environment": {
             "type": "object",
@@ -39553,8 +39547,7 @@
               "function"
             ],
             "description": "The type of the function tool. Always `function`.",
-            "x-stainless-const": true,
-            "default": "function"
+            "x-stainless-const": true
           },
           "name": {
             "type": "string",
@@ -40000,8 +39993,7 @@
               "image_generation"
             ],
             "description": "The type of the image generation tool. Always `image_generation`.",
-            "x-stainless-const": true,
-            "default": "image_generation"
+            "x-stainless-const": true
           },
           "model": {
             "anyOf": [
@@ -40195,8 +40187,7 @@
               "inline"
             ],
             "description": "Defines an inline skill for this request.",
-            "x-stainless-const": true,
-            "default": "inline"
+            "x-stainless-const": true
           },
           "name": {
             "type": "string",
@@ -44901,8 +44892,7 @@
               "item_reference"
             ],
             "description": "The type of item to reference. Always `item_reference`.",
-            "x-stainless-const": true,
-            "default": "item_reference"
+            "x-stainless-const": true
           },
           "id": {
             "type": "string",
@@ -46720,8 +46710,7 @@
               "keypress"
             ],
             "description": "Specifies the event type. For a keypress action, this property is always set to `keypress`.",
-            "x-stainless-const": true,
-            "default": "keypress"
+            "x-stainless-const": true
           },
           "keys": {
             "type": "array",
@@ -46841,8 +46830,7 @@
               "local"
             ],
             "description": "The environment type. Always `local`.",
-            "x-stainless-const": true,
-            "default": "local"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -46918,8 +46906,7 @@
               "local_shell"
             ],
             "description": "The type of the local shell tool. Always `local_shell`.",
-            "x-stainless-const": true,
-            "default": "local_shell"
+            "x-stainless-const": true
           },
           "name": {
             "type": "string",
@@ -47219,7 +47206,8 @@
             "reasoning_text": "#/components/schemas/OpenAI.MessageContentReasoningTextContent",
             "refusal": "#/components/schemas/OpenAI.MessageContentRefusalContent",
             "input_image": "#/components/schemas/OpenAI.MessageContentInputImageContent",
-            "input_file": "#/components/schemas/OpenAI.MessageContentInputFileContent"
+            "input_file": "#/components/schemas/OpenAI.MessageContentInputFileContent",
+            "summary_text": "#/components/schemas/OpenAI.SummaryTextContent"
           }
         },
         "description": "A content part that makes up an input or output item."
@@ -47559,6 +47547,182 @@
           }
         ]
       },
+      "OpenAI.Moderation": {
+        "type": "object",
+        "required": [
+          "input",
+          "output"
+        ],
+        "properties": {
+          "input": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ModerationEntry"
+              }
+            ],
+            "description": "Moderation for the response input."
+          },
+          "output": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.ModerationEntry"
+              }
+            ],
+            "description": "Moderation for the response output."
+          }
+        },
+        "description": "Moderation results or errors for the response input and output.",
+        "title": "Moderation"
+      },
+      "OpenAI.ModerationEntry": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/OpenAI.ModerationEntryType"
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "moderation_result": "#/components/schemas/OpenAI.ModerationResultBody",
+            "error": "#/components/schemas/OpenAI.ModerationErrorBody"
+          }
+        },
+        "description": "Moderation results or an error for a response moderation check."
+      },
+      "OpenAI.ModerationEntryType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "moderation_result",
+              "error"
+            ]
+          }
+        ]
+      },
+      "OpenAI.ModerationErrorBody": {
+        "type": "object",
+        "required": [
+          "type",
+          "code",
+          "message"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "error"
+            ],
+            "description": "The object type, which was always `error` for moderation failures.",
+            "x-stainless-const": true
+          },
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ModerationEntry"
+          }
+        ],
+        "description": "An error produced while attempting moderation for the response input or output.",
+        "title": "Moderation error"
+      },
+      "OpenAI.ModerationInputType": {
+        "type": "string",
+        "enum": [
+          "text",
+          "image"
+        ]
+      },
+      "OpenAI.ModerationParam": {
+        "type": "object",
+        "required": [
+          "model"
+        ],
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'."
+          }
+        },
+        "description": "Configuration for running moderation on the input and output of this response."
+      },
+      "OpenAI.ModerationResultBody": {
+        "type": "object",
+        "required": [
+          "type",
+          "model",
+          "flagged",
+          "categories",
+          "category_scores",
+          "category_applied_input_types"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "moderation_result"
+            ],
+            "description": "The object type, which was always `moderation_result` for successful moderation results.",
+            "x-stainless-const": true
+          },
+          "model": {
+            "type": "string",
+            "description": "The moderation model that produced this result."
+          },
+          "flagged": {
+            "type": "boolean",
+            "description": "A boolean indicating whether the content was flagged by any category."
+          },
+          "categories": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "A dictionary of moderation categories to booleans, True if the input is flagged under this category.",
+            "x-oaiTypeLabel": "map"
+          },
+          "category_scores": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/OpenAI.numeric"
+            },
+            "description": "A dictionary of moderation categories to scores.",
+            "x-oaiTypeLabel": "map"
+          },
+          "category_applied_input_types": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/OpenAI.ModerationInputType"
+              }
+            },
+            "description": "Which modalities of input are reflected by the score for each category.",
+            "x-oaiTypeLabel": "map"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.ModerationEntry"
+          }
+        ],
+        "description": "A moderation result produced for the response input or output.",
+        "title": "Moderation result"
+      },
       "OpenAI.MoveParam": {
         "type": "object",
         "required": [
@@ -47573,8 +47737,7 @@
               "move"
             ],
             "description": "Specifies the event type. For a move action, this property is always set to `move`.",
-            "x-stainless-const": true,
-            "default": "move"
+            "x-stainless-const": true
           },
           "x": {
             "allOf": [
@@ -47623,8 +47786,7 @@
               "namespace"
             ],
             "description": "The type of the tool. Always `namespace`.",
-            "x-stainless-const": true,
-            "default": "namespace"
+            "x-stainless-const": true
           },
           "name": {
             "type": "string",
@@ -49921,6 +50083,15 @@
           },
           "usage": {
             "$ref": "#/components/schemas/OpenAI.ResponseUsage"
+          },
+          "moderation": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Moderation"
+              }
+            ],
+            "nullable": true
           },
           "parallel_tool_calls": {
             "type": "boolean",
@@ -53355,8 +53526,7 @@
               "screenshot"
             ],
             "description": "Specifies the event type. For a screenshot action, this property is always set to `screenshot`.",
-            "x-stainless-const": true,
-            "default": "screenshot"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -53383,8 +53553,7 @@
               "scroll"
             ],
             "description": "Specifies the event type. For a scroll action, this property is always set to `scroll`.",
-            "x-stainless-const": true,
-            "default": "scroll"
+            "x-stainless-const": true
           },
           "x": {
             "allOf": [
@@ -53483,8 +53652,7 @@
               "skill_reference"
             ],
             "description": "References a skill created with the /v1/skills endpoint.",
-            "x-stainless-const": true,
-            "default": "skill_reference"
+            "x-stainless-const": true
           },
           "skill_id": {
             "type": "string",
@@ -53515,8 +53683,7 @@
               "apply_patch"
             ],
             "description": "The tool to call. Always `apply_patch`.",
-            "x-stainless-const": true,
-            "default": "apply_patch"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -53539,8 +53706,7 @@
               "shell"
             ],
             "description": "The tool to call. Always `shell`.",
-            "x-stainless-const": true,
-            "default": "shell"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -53564,8 +53730,7 @@
               "summary_text"
             ],
             "description": "The type of the object. Always `summary_text`.",
-            "x-stainless-const": true,
-            "default": "summary_text"
+            "x-stainless-const": true
           },
           "text": {
             "type": "string",
@@ -53592,8 +53757,7 @@
             "enum": [
               "text"
             ],
-            "x-stainless-const": true,
-            "default": "text"
+            "x-stainless-const": true
           },
           "text": {
             "type": "string"
@@ -54150,8 +54314,7 @@
               "tool_search"
             ],
             "description": "The type of the tool. Always `tool_search`.",
-            "x-stainless-const": true,
-            "default": "tool_search"
+            "x-stainless-const": true
           },
           "execution": {
             "allOf": [
@@ -54269,8 +54432,7 @@
               "type"
             ],
             "description": "Specifies the event type. For a type action, this property is always set to `type`.",
-            "x-stainless-const": true,
-            "default": "type"
+            "x-stainless-const": true
           },
           "text": {
             "type": "string",
@@ -54319,8 +54481,7 @@
               "url_citation"
             ],
             "description": "The type of the URL citation. Always `url_citation`.",
-            "x-stainless-const": true,
-            "default": "url_citation"
+            "x-stainless-const": true
           },
           "url": {
             "type": "string",
@@ -54396,8 +54557,7 @@
               "wait"
             ],
             "description": "Specifies the event type. For a wait action, this property is always set to `wait`.",
-            "x-stainless-const": true,
-            "default": "wait"
+            "x-stainless-const": true
           }
         },
         "allOf": [
@@ -54567,8 +54727,7 @@
               "web_search_preview"
             ],
             "description": "The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.",
-            "x-stainless-const": true,
-            "default": "web_search_preview"
+            "x-stainless-const": true
           },
           "user_location": {
             "type": "object",
@@ -54613,8 +54772,7 @@
             "enum": [
               "web_search"
             ],
-            "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.",
-            "default": "web_search"
+            "description": "The type of the web search tool. One of `web_search` or `web_search_2025_08_26`."
           },
           "filters": {
             "type": "object",

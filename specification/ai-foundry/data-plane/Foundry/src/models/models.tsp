@@ -185,7 +185,7 @@ model ModelPendingUploadRequest {
 @doc("Represents the response for a model pending upload request.")
 model ModelPendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
-  blobReferenceForConsumption: BlobReference;
+  blobReference: BlobReference;
 
   @doc("ID for this upload request.")
   pendingUploadId: string;
