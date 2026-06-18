@@ -1,0 +1,102 @@
+name: Namespace Approval
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - labeled
+      - unlabeled
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  detect-namespaces:
+    if: github.event.action == 'opened' || github.event.action == 'synchronize'
+    name: Detect Namespace Changes
+
+    runs-on: ubuntu-24.04
+
+    outputs:
+      has_pending: ${{ steps.detect.outputs.has_pending }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node and install dependencies
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - id: detect
+        name: Detect namespace changes
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: detectNamespaces } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
+            await detectNamespaces({ github, context, core });
+
+  validate-approval:
+    if: github.event.action == 'labeled'
+    name: Validate Namespace Approval
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          sparse-checkout: |
+            .github
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Validate namespace approval label
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: validateApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/validate-approval.js');
+            await validateApproval({ github, context, core });
+
+  status-check:
+    name: Namespace Approval Status
+    needs: [detect-namespaces, validate-approval]
+    if: always()
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Verify namespace approval status
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { data: pr } = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+            const labels = pr.labels.map((l) => l.name);
+
+            if (!labels.includes("namespace-review-required")) {
+              core.info("No namespace review required, passing");
+              return;
+            }
+
+            const pendingLabels = labels.filter((l) => l.endsWith("-namespace-pending"));
+            if (pendingLabels.length > 0) {
+              core.setFailed(
+                `Namespace approval pending for: ${pendingLabels
+                  .map((l) => l.replace("-namespace-pending", ""))
+                  .join(", ")}`,
+              );
+            } else if (labels.includes("namespace-approved")) {
+              core.info("All namespaces approved - merge allowed");
+            }
