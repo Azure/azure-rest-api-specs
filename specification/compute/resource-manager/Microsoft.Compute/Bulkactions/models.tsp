@@ -295,12 +295,16 @@ model BulkVMConfiguration {
 
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed VM configuration passthrough"
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: BulkVMConfiguration;
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration)
+  baseProfile?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON objects to allow loosely-typed per-VM overrides"
   @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
-  resourceOverrides?: BulkVMConfiguration[];
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration[])
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
