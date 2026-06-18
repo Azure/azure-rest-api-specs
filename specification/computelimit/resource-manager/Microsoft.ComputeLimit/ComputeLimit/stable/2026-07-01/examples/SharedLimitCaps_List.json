@@ -1,0 +1,37 @@
+{
+  "title": "List shared limit caps in a region for the caller's subscription",
+  "operationId": "SharedLimitCaps_ListBySubscriptionLocationResource",
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimitCaps/StandardDSv3Family",
+            "name": "StandardDSv3Family",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimitCaps",
+            "properties": {
+              "defaultMemberCap": 500,
+              "isBoundedCap": true,
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimitCaps/StandardFSv2Family",
+            "name": "StandardFSv2Family",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimitCaps",
+            "properties": {
+              "defaultMemberCap": 600,
+              "isBoundedCap": false,
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

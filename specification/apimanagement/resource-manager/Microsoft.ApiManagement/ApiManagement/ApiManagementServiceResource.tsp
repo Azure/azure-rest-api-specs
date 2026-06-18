@@ -177,7 +177,7 @@ interface ApiManagementServiceResources {
     ApiManagementServiceResource,
     Response =
       | ArmDeletedResponse
-      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @bodyRoot
           _: ApiManagementServiceResource;
@@ -873,7 +873,6 @@ interface ApiManagementServiceResources {
   ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
-@@encodedName(ApiManagementServiceResource.etag, "application/json", "etag");
 @@doc(
   ApiManagementServiceResource.properties,
   "Properties of the API Management service."

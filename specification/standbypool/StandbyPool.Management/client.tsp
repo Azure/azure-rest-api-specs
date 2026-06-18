@@ -6,8 +6,6 @@ using Azure.Core;
 using Azure.ResourceManager.CommonTypes;
 using Microsoft.StandbyPool;
 
-@@access(Operations.list, Access.internal, "csharp");
-
 @@clientName(
   StandbyContainerGroupPoolResource,
   "StandbyContainerGroupPool",

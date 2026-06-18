@@ -1,11 +1,8 @@
-import debug from "debug";
+import { packageDirectory } from "package-directory";
 import { simpleGit } from "simple-git";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { normalizePath, runNpm } from "../utils.js";
-
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { normalizePath } from "../utils.ts";
 
 export class NpmPrefixRule implements Rule {
   readonly name = "NpmPrefix";
@@ -26,7 +23,7 @@ export class NpmPrefixRule implements Rule {
       };
     }
 
-    const actual_npm_prefix = normalizePath((await runNpm(["prefix"], folder))[1].trim());
+    const actual_npm_prefix = normalizePath((await packageDirectory({ cwd: folder })) ?? folder);
 
     let success = true;
     const stdOutput =

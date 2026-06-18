@@ -1,0 +1,656 @@
+name: arm-api-reviewer-eval-protocol-safety
+description: |
+  Protocol safety tests (16xxxx). Validates Reviewer/Critic gate behavior that
+  is not exercised by local spec fixtures: subagent fallback handoff,
+  session invalidation, and downstream-CI telemetry markers.
+
+defaults:
+  runs: 1
+  timeout: "240s"
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 160001 -- Subagent dispatch failure must produce handoff and no findings
+  - name: critic-subagent-failure-session-handoff
+    prompt: |
+      Reply with exactly the following Markdown and nothing else. No
+      preamble, no commentary, no explanation, no trailing notes. The first
+      character of your reply MUST be `<` (the start of the HTML comment on
+      line 1 of the block below). Do not wrap the reply in a code fence; do
+      not paraphrase; do not add disclaimers.
+
+      Expected reply (copy verbatim):
+
+      ```text
+      <!-- review-state: critic-mode=pending | iteration=1 | pr=Azure/azure-rest-api-specs#12345 -->
+
+      Subagent invocation is not available in this session. To run the critic, please open a new chat with the `ARM API Review Critic` agent selected and paste in the Step 6 report, head SHA, file list, and previous-version source (path plus base SHA/ref, or `None - new service`). When you reply, paste the Critic's output **verbatim including the header fields (`PR:`, `Head SHA:`, `Base SHA/Ref:` when present, `Iteration:`), the `### Verdict` table, and the `### Per-finding annotations` table** - I parse those sections programmatically; free-form approval ("looks fine") is not sufficient. Reply 'skip critic' to bypass independent verification and accept reviewer self-check only (not recommended).
+      ```
+
+      The text inside the ```text fence above is the exact response. Begin
+      your reply with the `<!-- review-state: ...` marker as the literal
+      first character.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state pending marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=pending \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
+      - type: output-contains
+        name: "session handoff prompt emitted"
+        config:
+          substring: "Subagent invocation is not available in this session"
+      - type: output-contains
+        name: "skip critic option disclosed"
+        config:
+          substring: "skip critic"
+      - type: output-not-matches
+        name: "no findings rendered"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
+      - type: prompt
+    rubric:
+      - The first line is the review-state marker with `critic-mode=pending`
+      - The response emits the session-handoff prompt and waits for pasted Critic output or explicit skip
+      - No API findings, posting prompt, or next-step recommendation are rendered
+
+  # 160002 -- Critic INVALIDATED kills the session and findings stay hidden
+  - name: critic-invalidated-stops-session
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#12345.
+      Step 1 pinned session head SHA
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`. The ARM API Review Critic
+      just returned `Finding accuracy: INVALIDATED` with reason
+      `session-sha-moved`; it reports the pinned SHA above and a current PR
+      head SHA of `cccccccccccccccccccccccccccccccccccccccc`. Iteration
+      counter is 1.
+
+      Emit the SESSION INVALIDATED response defined in agent.md "Canonical
+      output templates" Template A. Do NOT fold any Critic corrections,
+      render any findings, or emit a Reconciliation Plan -- the response is
+      only the marker, the heading, the SHA block, and the two-option menu.
+
+      Template A is defined in agent.md as follows (substitute only the
+      bracketed `<placeholders>`; the heading and the `(a) Restart` /
+      `(b) Abandon` menu wording MUST be byte-for-byte identical):
+
+      ```markdown
+      <!-- review-state: critic-mode=invalidated | iteration=<N> | pr=<owner/repo#number> -->
+
+      # SESSION INVALIDATED
+
+      The Critic reported that the session SHA has moved (or is unreachable) since Step 1 pinned it. The findings drafted in Step 6 were judged against a tree that no longer matches the PR head, so they are unsafe to present or post.
+
+      - **Session SHA pinned in Step 1:** `<full-40-char-session-sha>`
+      - **Current PR head SHA:** `<full-40-char-current-head-sha>`
+      - **Invalidation reason:** `<session-sha-moved | session-sha-unreachable>`
+      - **Iteration when invalidation fired:** `<N>`
+
+      Choose one:
+
+      - **(a) Restart** -- re-run from Step 1 against the new head SHA, pinning a fresh session SHA.
+      - **(b) Abandon** -- stop the review session without posting anything.
+
+      Reply `(a)` or `(b)`. I will not present findings, post comments, or iterate further until you choose.
+      ```
+
+      Substitute `<N>` with `1`, `<owner/repo#number>` with
+      `Azure/azure-rest-api-specs#12345`, `<full-40-char-session-sha>` with
+      `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`,
+      `<full-40-char-current-head-sha>` with
+      `cccccccccccccccccccccccccccccccccccccccc`, and pick
+      `session-sha-moved` for the invalidation reason.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state invalidated marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=invalidated \| iteration=1 \| pr=Azure/azure-rest-api-specs#12345 -->'
+      - type: output-contains
+        name: "session invalidated stated"
+        config:
+          substring: "SESSION INVALIDATED"
+      - type: output-contains
+        name: "old sha shown"
+        config:
+          substring: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      - type: output-contains
+        name: "new sha shown"
+        config:
+          substring: "cccccccccccccccccccccccccccccccccccccccc"
+      - type: output-not-matches
+        name: "no findings rendered"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|### Suggestions"
+      - type: prompt
+    rubric:
+      - The response reports SHA drift and offers restart or abandon only
+      - No Critic corrections are folded into the report
+      - No findings, graphs, or posting prompts are rendered
+
+  # 160003 -- Conflict-aware recommendations carry downstream-rule telemetry
+  - name: downstream-ci-conflict-marker-required
+    prompt: |
+      You are drafting a single ARM API review finding (Step 6 canonical body)
+      where the recommendation is to switch a plain string property named
+      `tenantId` to `format: uuid`. Per the downstream-CI impact rule, this
+      collides with required LintDiff rule R3017 (GuidUsage). The finding
+      MUST be rendered as a three-option recommendation (not a directive)
+      AND its trailing telemetry marker MUST carry the `downstream-rule:
+      R3017` field, per agent.md "Canonical output templates" Template C
+      "Downstream-CI-conflict finding".
+
+      Emit only the canonical comment body (Markdown), severity Suggestion,
+      classification new, and the complete 6+1-field telemetry marker as the
+      literal last line. Use placeholder rule ID `<RULE-ID>`, placeholder
+      head SHA `aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa`, and a placeholder
+      file path of `<file-path>` line `<N>`. Do NOT render a report header,
+      reconciliation plan, or posting menu -- just the single canonical
+      comment body that would later be posted verbatim per the Reviewer-
+      Posted Parity rule.
+
+      Template C (canonical posted-comment body) is defined in agent.md as
+      follows. The trailing telemetry marker is an HTML comment, pipe-
+      separated, with `:` between field name and value, in fixed field order:
+
+      ````markdown
+      **[NEW] 🟡 Suggestion** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Downstream-CI conflict:** This recommendation would collide with required LintDiff rule R3017 (GuidUsage). Three options are available -- the reviewer cannot dictate which one to take:
+
+      1. **Accept the downstream rule and keep the current shape** -- leave `tenantId` as `type: string` (no `format: uuid`), accepting the readability trade-off documented in R3017.
+      2. **Change shape and suppress the downstream rule with justification** -- switch to `format: uuid` AND add a `suppressions.yaml` entry for `R3017` on this path with a non-vague reason that quotes the API design rationale.
+      3. **Raise to the API board** -- if neither trade-off is acceptable for this resource, escalate the rule conflict for resolution.
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: suggestion | classification: new | critic: pass | head-sha: <full-40-char-sha> | downstream-rule: R3017 -->
+      ````
+
+      The body MUST present the three options (not a single corrective fix),
+      and the marker MUST include the trailing `downstream-rule: R3017` field
+      after `head-sha:` (this is the 7-field downstream variant of the
+      6-field base marker). Substitute the placeholder head SHA above; leave
+      `<RULE-ID>`, `<file-path>`, and `<N>` as literal placeholders.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "multi-option recommendation"
+        config:
+          pattern: '(?is)(three options|1\..*2\..*3\.|Switch to `uuid`.*Keep `type: string`.*override)'
+      - type: output-contains
+        name: "downstream-rule marker present"
+        config:
+          substring: "downstream-rule: R3017"
+      - type: output-matches
+        name: "not directive phrasing"
+        config:
+          pattern: "(?i)Suggestion"
+      - type: prompt
+    rubric:
+      - The recommendation is phrased as options, not a directive to use UUID
+      - The comment includes `downstream-rule: R3017` in the telemetry marker
+      - The severity is Suggestion unless the prompt supplies unambiguous acceptable criteria
+
+  # 160004 -- Happy-path: Critic PASS, READY TO POST report rendered with subagent marker
+  - name: critic-pass-renders-ready-to-post
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#54321.
+      Step 1 pinned session head SHA
+      `dddddddddddddddddddddddddddddddddddddddd` and base SHA
+      `eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee`. You assembled a Step 6 draft
+      with exactly two findings (one Blocking, one Suggestion) and dispatched
+      the `ARM API Review Critic` subagent successfully on iteration 1. The
+      Critic returned `Finding accuracy: PASS` (both findings High confidence,
+      no DROPs / DOWNGRADEs / RECLASSIFYs), `Graph integrity: PASS`,
+      `Reconciliation accuracy: PASS`, `Coverage: APPROVE`. No adjustments
+      needed.
+
+      Emit the final Step 6 report rendered for the human. The response MUST
+      begin with `<!-- review-state: critic-mode=subagent | iteration=1 |
+      pr=Azure/azure-rest-api-specs#54321 -->` as the literal first line, set
+      the `Next-step recommendation` to `READY TO POST` at the top of the
+      report, render both findings using the Template C canonical body shape
+      with the full 6-field telemetry marker (placeholder rule IDs
+      `<RULE-ID-1>` / `<RULE-ID-2>` and head-sha
+      `dddddddddddddddddddddddddddddddddddddddd` are acceptable), and finish
+      with the Step 8 plan-approval menu (Execute plan / Execute selectively
+      / Cancel). Do NOT render a CAUTION banner, a SESSION INVALIDATED
+      heading, or a session-handoff prompt -- the happy path is silent about
+      the Critic mode in the body, but the marker still records it.
+
+      Template C is defined in agent.md as follows. Every posted comment ends
+      with the marker as its literal last line; every field is required on
+      every post (substitute the explicit placeholder if a value is not
+      supplied):
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING (e.g., "Introduced in this PR - this property did not exist in the previous version at base SHA <short-base-sha>")>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      ````
+
+      The trailing telemetry marker is an HTML comment (literal `<!-- ... -->`),
+      pipe-separated, with `:` (not `=`) between field name and value. Field
+      order is fixed: `posted-by`, `rule`, `severity`, `classification`,
+      `critic`, `head-sha`. Do NOT render telemetry as a visible blockquote
+      (`> **Telemetry:** ...`) or with `=` separators -- those forms are not
+      machine-readable.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state subagent marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=1 \| pr=Azure/azure-rest-api-specs#54321 -->'
+      - type: output-contains
+        name: "READY TO POST recommendation rendered"
+        config:
+          substring: "READY TO POST"
+      - type: output-matches
+        name: "full 6-field telemetry marker on findings"
+        config:
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*severity:\s*(blocking|warning|suggestion)\s*\|\s*classification:\s*(new|existing)\s*\|\s*critic:\s*pass\s*\|\s*head-sha:\s*(?:[0-9a-fA-F]{40}|<full-40-char-sha>)'
+      - type: output-not-matches
+        name: "no CAUTION banner or session-invalidated on happy path"
+        config:
+          pattern: '(?i)\[!CAUTION\]|SESSION INVALIDATED|Subagent invocation is not available'
+      - type: prompt
+    rubric:
+      - The first line is the review-state marker with `critic-mode=subagent`
+      - The `Next-step recommendation` at the top of the report is `READY TO POST`
+      - Each finding body uses the canonical Template C shape with the full 6-field telemetry marker (`critic: pass`)
+      - No CAUTION banner, no SESSION INVALIDATED heading, no session-handoff prompt is rendered
+      - The plan-approval menu is offered with `Execute plan` recommended as the default
+
+  # 160005 -- Step 1 SHA pinning emits the marker on the very first progress message
+  - name: step1-pins-session-and-base-sha
+    prompt: >
+      Start an ARM API review for pull request
+      `https://github.com/Azure/azure-rest-api-specs/pull/77777`. Perform
+      Step 1 (pin the session head SHA and base SHA, decline if the PR is
+      not in an ARM-eligible repo). Assume the host's GitHub adapter returns
+      head SHA `1111111111111111111111111111111111111111` and base SHA
+      `2222222222222222222222222222222222222222`. The PR is in
+      `Azure/azure-rest-api-specs` so it IS in scope; do not decline.
+
+      Emit ONLY your very first chat response after Step 1 completes -- the
+      progress message that reports the pinned SHAs and announces that you
+      are starting Step 2 (loading instructions). The response MUST begin
+      with `<!-- review-state: critic-mode=pending | iteration=1 |
+      pr=Azure/azure-rest-api-specs#77777 -->` as the literal first line,
+      then report both the session head SHA
+      `1111111111111111111111111111111111111111` and the base SHA
+      `2222222222222222222222222222222222222222` verbatim (full 40 chars
+      each), and then announce that Step 2 is starting. Do NOT render
+      findings, a Reconciliation Plan, or a Critic verdict -- those happen
+      in later steps.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state pending marker on first turn"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=pending \| iteration=1 \| pr=Azure/azure-rest-api-specs#77777 -->'
+      - type: output-contains
+        name: "head SHA pinned verbatim"
+        config:
+          substring: "1111111111111111111111111111111111111111"
+      - type: output-contains
+        name: "base SHA pinned verbatim"
+        config:
+          substring: "2222222222222222222222222222222222222222"
+      - type: output-not-matches
+        name: "no premature findings or critic verdict"
+        config:
+          pattern: "(?i)## API Review:|### Blocking Issues|### Warnings|Next-step recommendation|Critic verdict"
+      - type: prompt
+    rubric:
+      - The first line is the review-state marker with `critic-mode=pending` and `iteration=1`
+      - Both the head SHA and the base SHA are echoed verbatim in their full 40-character form
+      - The message announces that the next step (Step 2) is starting
+      - No findings, no Critic output, no Reconciliation Plan is rendered
+
+  # 160006 -- Iteration 2 marker: re-rendered report after a Critic FAIL was reconciled
+  - name: iteration-2-after-critic-reconciliation
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#88888.
+      Step 1 pinned session head SHA
+      `9999999999999999999999999999999999999999`.
+
+      Iteration 1: you presented three findings (F1, F2, F3) to the Critic.
+      The Critic returned `Finding accuracy: FAIL` with one FAIL on F2
+      (reason `rule-not-found`; the cited rule ID was wrong). You dropped F2
+      per Step 7 item 9, then re-invoked the Critic. Iteration 2: Critic
+      returned `Finding accuracy: PASS` on the remaining two findings (F1, F3),
+      `Graph integrity: PASS`, `Reconciliation accuracy: PASS`, `Coverage:
+      APPROVE`.
+
+      Emit the final Step 6 report rendered for the human after iteration 2.
+      The response MUST begin with `<!-- review-state: critic-mode=subagent
+      | iteration=2 | pr=Azure/azure-rest-api-specs#88888 -->` as the literal
+      first line, set the `Next-step recommendation` to `REVISE RECOMMENDED`
+      (because a DROP was applied across iterations), and render only F1 and
+      F3 -- F2 must NOT appear in the final report. Use placeholder rule IDs
+      `<RULE-ID-F1>` and `<RULE-ID-F3>` and head-sha
+      `9999999999999999999999999999999999999999`. Do NOT mention F2 in the
+      findings list (an iteration-history note acknowledging that one
+      finding was dropped during reconciliation is acceptable).
+
+      Each finding body MUST follow agent.md "Canonical output templates"
+      Template C exactly, ending with the full 6-field telemetry marker
+      (`<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity:
+      <blocking|warning|suggestion> | classification: <new|existing> |
+      critic: pass | head-sha: 9999999999999999999999999999999999999999 -->`).
+      Template C is defined in agent.md as follows:
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: pass | head-sha: <full-40-char-sha> -->
+      ````
+
+      Substitute the head-sha value above for every finding; the rule IDs may
+      remain as `<RULE-ID-F1>` and `<RULE-ID-F3>` placeholders.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state subagent marker with iteration=2"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=2 \| pr=Azure/azure-rest-api-specs#88888 -->'
+      - type: output-contains
+        name: "REVISE RECOMMENDED recommendation"
+        config:
+          substring: "REVISE RECOMMENDED"
+      - type: output-matches
+        name: "F2 dropped from findings list"
+        config:
+          # Negative-grader inverse: passes when no Blocking/Warning/Suggestion
+          # finding *body* introduces "F2" as a finding label. The iteration-
+          # history note may mention F2 in prose, but it must not appear as a
+          # numbered finding (e.g., "**F2 -**" or "### F2 ").
+          pattern: '(?s)^(?!.*\*\*F2\b.*[-\u2013\u2014]).*$'
+      - type: prompt
+    rubric:
+      - The first line is the review-state marker with `iteration=2`
+      - Only F1 and F3 appear as numbered findings in the report; F2 does not
+      - The `Next-step recommendation` reflects that a reconciliation adjustment was applied (`REVISE RECOMMENDED`)
+      - A brief iteration-history note acknowledging the F2 DROP across iterations is acceptable but optional
+
+  # 160007 -- Override-reason marker is emitted when human overrides a Critic FAIL
+  - name: override-reason-marker-on-human-override
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#99999.
+      Step 1 pinned session head SHA
+      `abcdefabcdefabcdefabcdefabcdefabcdefabcd`. On iteration 1, the
+      `ARM API Review Critic` subagent returned `Finding accuracy: FAIL`
+      with reason `rule-not-found` on a Blocking finding citing rule
+      `RPC-Put-V1-22`. The human reviewed the FAIL and elected to OVERRIDE
+      it (Step 7 item 13 choice b), supplying the following structured
+      justification (already validated by the Override-reason validator):
+
+        "Rule citation verified against the RPC contract at anchor
+        `rpc-put-rules.md#rpc-put-v1-22` (lines 145-160); the Critic's
+        rule-not-found verdict is a stale instruction-file index, not an
+        actual missing rule."
+
+      Emit the canonical Template C posted-comment body for the overridden
+      finding. The body MUST end with the full 7-field telemetry marker
+      (`critic: override` and `override-reason: <text>`), use head-sha
+      `abcdefabcdefabcdefabcdefabcdefabcdefabcd`, severity `blocking`,
+      classification `new`, rule `RPC-Put-V1-22`, and include the
+      `**Note:** Critic FAILed this finding ...` reviewer-override line
+      defined in Step 7 item 13.4. Do NOT emit the abbreviated marker
+      form and do NOT omit `override-reason:` -- both fields are required
+      whenever `critic=override`.
+
+      Template C (canonical posted-comment body) and the human-override
+      variant are defined in agent.md as follows. The trailing telemetry
+      marker is an HTML comment, pipe-separated, with `:` between field
+      name and value, in fixed field order:
+
+      ````markdown
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/<instruction-or-skill-path>#<anchor>)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** <why this is NEW vs EXISTING>.
+
+      **Suggested fix:**
+
+      ```<lang>
+      <code or JSON snippet>
+      ```
+
+      **Note:** Critic FAILed this finding (<critic-reason>); reviewer overrode with justification: <override-reason>.
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: override | head-sha: <full-40-char-sha> | override-reason: <validator-approved reason that quotes the rule text or cites the anchor that contradicts the Critic's FAIL> -->
+      ````
+
+      Step 7 item 13.4 specifies that when overriding a Critic FAIL, the
+      finding body MUST include the literal line:
+
+          **Note:** Critic FAILed this finding (<reason>); reviewer overrode with justification: <reason>.
+
+      The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->`
+      is NEVER acceptable on an `critic=override` post; the full 7-field form
+      (with `override-reason:` as the last field) is required.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "telemetry marker has critic=override and override-reason"
+        config:
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*RPC-Put-V1-22\s*\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*override\s*\|\s*head-sha:\s*abcdefabcdefabcdefabcdefabcdefabcdefabcd\s*\|\s*override-reason:\s*[^>]{20,}\s*-->'
+      - type: output-matches
+        name: "reviewer-override note present in body"
+        config:
+          pattern: '(?is)\*\*Note:\*\*\s*Critic\s*FAILed\s*this\s*finding'
+      - type: output-not-matches
+        name: "abbreviated marker form not used"
+        config:
+          # Disallows the short marker form `<!-- posted-by: arm-api-reviewer-agent -->`
+          # only when it appears OUTSIDE inline-code backticks. Agents
+          # frequently quote the abbreviated form educationally (e.g.,
+          # repeating the prompt's "do NOT emit `<!-- posted-by: ... -->`"
+          # phrasing) and we don't want such pedagogical references to fail
+          # this check -- only an actual bare emission of the marker should.
+          pattern: '(?<!`)<!--\s*posted-by:\s*arm-api-reviewer-agent\s*-->(?!`)'
+      - type: prompt
+    rubric:
+      - The trailing telemetry marker contains `critic: override` and a non-empty `override-reason:` field that quotes the rule text or cites the anchor
+      - The body contains the `**Note:** Critic FAILed this finding ...` reviewer-override line per Step 7 item 13.4
+      - The abbreviated marker form `<!-- posted-by: arm-api-reviewer-agent -->` is NOT used; the full 7-field form is required when `critic=override`
+      - The rule ID `RPC-Put-V1-22` is rendered as a markdown hyperlink to the authoritative instruction or reference file
+
+  # 160008 -- Telemetry-degraded fallback marker when a required field cannot be assembled
+  - name: telemetry-degraded-fallback-marker
+    prompt: |
+      Reply with exactly the following Markdown and nothing else. No
+      preamble, no commentary, no refusal, no explanation. The first
+      character of your reply MUST be `*` (the start of the Markdown
+      bold marker on line 1 of the block below). Do not wrap the reply
+      in an outer code fence; do not paraphrase; do not add disclaimers.
+
+      Expected reply (copy verbatim, preserving the inner code fence
+      and the HTML comment as the literal last line):
+
+      ````text
+      **[NEW] 🟠 Warning** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/openapi-review.instructions.md#oapi027)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** Introduced in this PR -- this property did not exist in the previous version.
+
+      **Suggested fix:**
+
+      ```json
+      { "readOnly": true }
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: head-sha-unavailable -->
+      ````
+
+      The text inside the ````text fence above is the exact response.
+      Begin your reply with the `**[NEW] 🟠 Warning**` opening as the
+      literal first characters.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        name: "minimal degraded marker present"
+        config:
+          substring: "telemetry: degraded"
+      - type: output-contains
+        name: "reason field populated"
+        config:
+          substring: "reason: head-sha-unavailable"
+      - type: output-not-matches
+        name: "full 6-field marker not emitted"
+        config:
+          # The minimal marker form replaces the full 6-field marker -- the
+          # full form would have severity/classification/critic/head-sha
+          # fields that the prompt explicitly says cannot be assembled.
+          pattern: 'posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:'
+      - type: output-not-matches
+        name: "no fabricated head-sha"
+        config:
+          # head-sha must be omitted entirely, not faked. Reject any
+          # head-sha: token in the marker outside the fixed example
+          # placeholder in the prompt body.
+          pattern: 'head-sha:\s*[0-9a-fA-F]'
+      - type: prompt
+    rubric:
+      - The trailing telemetry marker uses the minimal `telemetry: degraded` form, not the full 6-field form
+      - The `reason:` field is populated with `head-sha-unavailable`
+      - No `head-sha:` value is fabricated to satisfy the full marker shape
+      - The comment body still renders (the post itself is not skipped)
+
+  # 160009 -- critic: unknown emitted when per-finding verdict cannot be looked up
+  - name: critic-unknown-fallback-value
+    prompt: |
+      Reply with exactly the following Markdown and nothing else. No
+      preamble, no commentary, no refusal, no explanation. The first
+      character of your reply MUST be `*` (the start of the Markdown
+      bold marker on line 1 of the block below). Do not wrap the reply
+      in an outer code fence; do not paraphrase; do not add disclaimers.
+
+      Expected reply (copy verbatim, preserving the inner code fence
+      and the HTML comment as the literal last line):
+
+      ````text
+      **[NEW] 🔴 Blocking** **[[<RULE-ID>](https://github.com/Azure/azure-rest-api-specs/blob/main/.github/instructions/arm-api-review.instructions.md#rpc-put-v1-22)]** `<file-path>` - line <N> - <issue description>
+
+      **Classification reasoning:** Introduced in this PR -- this property did not exist in the previous version.
+
+      **Suggested fix:**
+
+      ```json
+      { "properties": { "provisioningState": { "type": "string" } } }
+      ```
+
+      <!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID> | severity: blocking | classification: new | critic: unknown | head-sha: 1234567890abcdef1234567890abcdef12345678 -->
+      ````
+
+      The text inside the ````text fence above is the exact response.
+      Begin your reply with the `**[NEW] 🔴 Blocking**` opening as the
+      literal first characters.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "critic: unknown marker present"
+        config:
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent\s*\|\s*rule:\s*[^|]+\|\s*severity:\s*blocking\s*\|\s*classification:\s*new\s*\|\s*critic:\s*unknown\s*\|\s*head-sha:\s*1234567890abcdef1234567890abcdef12345678'
+      - type: output-not-matches
+        name: "no fabricated critic: pass"
+        config:
+          # Must not silently fall back to `pass` when no Critic ran. The
+          # prompt explicitly says no per-finding verdict was produced.
+          pattern: '<!--\s*posted-by:\s*arm-api-reviewer-agent[^>]*critic:\s*pass'
+      - type: prompt
+    rubric:
+      - The `critic:` field in the marker is the literal `unknown`, not `pass` or `na`
+      - No fabricated Critic verdict is implied in the body text either (no "Critic verified" or similar wording)
+      - The marker is otherwise the full 6-field form, not the minimal `telemetry: degraded` fallback
+
+  # 160010 -- ARMChangesRequested label is NOT proposed when zero comments will post
+  - name: armchanges-label-skipped-on-clean-plan
+    prompt: |
+      You are the ARM API Reviewer for PR Azure/azure-rest-api-specs#54321.
+      Step 1 pinned session head SHA
+      `dddddddddddddddddddddddddddddddddddddddd`. The Critic returned
+      `Finding accuracy: PASS`, `Graph integrity: PASS`,
+      `Reconciliation accuracy: N/A` (Input #6 was `reconciliation
+      skipped`), `Coverage: APPROVE`. The Step 6 report has **zero**
+      findings (the spec is clean -- no POST-NEW, no RESOLVE-AND-REPOST,
+      no SKIP-COVERED, no REPLY-LINE-SHIFT, no Scenario E/F dispositions).
+      No `WaitForARMFeedback` label is currently on the PR.
+
+      Emit the Step 8 plan-approval prompt (the human action menu). Per
+      Step 9 of agent.md, `ARMChangesRequested` is gated on at least one
+      POST-NEW or RESOLVE-AND-REPOST action actually executing; with zero
+      findings, the label add MUST NOT appear in the bundled label
+      proposal. The response MUST begin with `<!-- review-state:
+      critic-mode=subagent | iteration=1 |
+      pr=Azure/azure-rest-api-specs#54321 -->` as the literal first line.
+
+      Do NOT propose adding `ARMChangesRequested`. Do NOT propose removing
+      `WaitForARMFeedback` (it isn't present). State explicitly in the
+      bundled label section that no label changes are needed because the
+      review is clean.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "review-state subagent marker"
+        config:
+          pattern: '(?s)^<!-- review-state: critic-mode=subagent \| iteration=1 \| pr=Azure/azure-rest-api-specs#54321 -->'
+      - type: output-not-matches
+        name: "ARMChangesRequested NOT proposed for add"
+        config:
+          # Reject any phrasing that proposes adding the label. The label
+          # name may still appear in prose explaining WHY it's being
+          # skipped, so match only proposal-shaped contexts.
+          pattern: '(?i)(add(?:ing)?|apply|propose adding|will add)\s+(?:the\s+)?`?ARMChangesRequested`?'
+      - type: output-contains
+        name: "explicit skip stated"
+        config:
+          # The disclosure rule (Step 9) says the bundled section MUST
+          # report which labels were intentionally skipped and why.
+          substring: "ARMChangesRequested"
+      - type: prompt
+    rubric:
+      - The plan-approval prompt is emitted with no proposal to add `ARMChangesRequested`
+      - The response explicitly explains that no label changes are needed on a clean review
+      - The plan-approval menu still offers Execute plan / Execute selectively / Cancel for completeness (even though there is nothing to execute)

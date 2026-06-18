@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL managed instance administrator.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 model ManagedInstanceAdministrator
   is Azure.ResourceManager.ProxyResource<ManagedInstanceAdministratorProperties> {
   ...ResourceNameParameter<
@@ -26,7 +28,9 @@ model ManagedInstanceAdministrator
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceAdministrators)
 interface ManagedInstanceAdministrators {
   /**
    * Gets a managed instance administrator.
