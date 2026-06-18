@@ -51,26 +51,28 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
+@doc("Query parameters for listing current members of a namespace group.")
 model GroupListMembersQueryParameters {
-   @doc("""
-   Optional cap on the total number of group members to return across this list operation.
-   """)
-   @query("$top")
-   top?: int32;
- 
-   @doc("Opaque continuation token from a previous listMembers response.")
-   @query("$skiptoken")
-   skipToken?: string;
- }
- 
- @added(Versions.v2026_11_02_preview)
- model GroupListMembersResult {
-   @doc("The ARM resource IDs of the group members returned in this page.")
-   members: string[];
- 
-   @doc("The URL to the next page of results, if more results remain within the requested top limit.")
-   nextLink?: string;
- }
+  @doc("""
+  Optional cap on the total number of group members to return across this list operation.
+  """)
+  @query("$top")
+  top?: int32;
+
+  @doc("Opaque continuation token from a previous listMembers response.")
+  @query("$skiptoken")
+  skipToken?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("Response for the list members operation.")
+model GroupListMembersResult {
+  @doc("The ARM resource IDs of the group members returned in this page.")
+  members: string[];
+
+  @doc("The URL to the next page of results, if more results remain within the requested top limit.")
+  nextLink?: string;
+}
 
 @added(Versions.v2026_11_02_preview)
 @armResourceOperations
