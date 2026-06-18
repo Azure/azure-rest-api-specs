@@ -8874,29 +8874,8 @@
           "default": true
         },
         "certificateNameCheckValidationMode": {
-          "type": "string",
-          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.",
-          "default": "OriginHostname",
-          "enum": [
-            "OriginHostname",
-            "CustomCertificateSubject"
-          ],
-          "x-ms-enum": {
-            "name": "CertificateNameCheckValidationMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "OriginHostname",
-                "value": "OriginHostname",
-                "description": "Validate the certificate against the origin hostname."
-              },
-              {
-                "name": "CustomCertificateSubject",
-                "value": "CustomCertificateSubject",
-                "description": "Validate the certificate against custom certificate subjects."
-              }
-            ]
-          }
+          "$ref": "#/definitions/CertificateNameCheckValidationMode",
+          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true."
         },
         "customCertificateSubjects": {
           "type": "array",
@@ -8994,29 +8973,8 @@
           "default": true
         },
         "certificateNameCheckValidationMode": {
-          "type": "string",
-          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true.",
-          "default": "OriginHostname",
-          "enum": [
-            "OriginHostname",
-            "CustomCertificateSubject"
-          ],
-          "x-ms-enum": {
-            "name": "CertificateNameCheckValidationMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "OriginHostname",
-                "value": "OriginHostname",
-                "description": "Validate the certificate against the origin hostname."
-              },
-              {
-                "name": "CustomCertificateSubject",
-                "value": "CustomCertificateSubject",
-                "description": "Validate the certificate against custom certificate subjects."
-              }
-            ]
-          }
+          "$ref": "#/definitions/CertificateNameCheckValidationMode",
+          "description": "The validation mode for certificate name check. Only applicable when enforceCertificateNameCheck is true."
         },
         "customCertificateSubjects": {
           "type": "array",
@@ -9877,6 +9835,30 @@
           "description": "Resource status of the policy.",
           "readOnly": true
         }
+      }
+    },
+    "CertificateNameCheckValidationMode": {
+      "type": "string",
+      "description": "The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.",
+      "enum": [
+        "OriginHostname",
+        "CustomCertificateSubject"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateNameCheckValidationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OriginHostname",
+            "value": "OriginHostname",
+            "description": "Validate the certificate against the origin hostname."
+          },
+          {
+            "name": "CustomCertificateSubject",
+            "value": "CustomCertificateSubject",
+            "description": "Validate the certificate against custom certificate subjects."
+          }
+        ]
       }
     },
     "CertificateSource": {
