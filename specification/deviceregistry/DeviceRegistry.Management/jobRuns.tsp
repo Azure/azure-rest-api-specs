@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common/provisioningState.tsp";
@@ -9,6 +10,7 @@ import "./jobs.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.DeviceRegistry;
@@ -137,10 +139,48 @@ model JobRunResultItem {
   deviceUuid?: string;
 
   @doc("The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied.")
-  status?: string;
+  status?: JobRunResultItemStatus;
 
   @doc("Short, machine-readable diagnostic that pairs with status. Present only when status is Failed; an ADU-provided machine-readable code (e.g. DOWNLOAD_FAILED). Omitted for all other statuses, including Succeeded and InProgress.")
   reason?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("The per-device status of a single job run result entry.")
+union JobRunResultItemStatus {
+  string,
+
+  @doc("The operation succeeded on the device.")
+  Succeeded: "Succeeded",
+
+  @doc("The operation failed on the device. See `reason` for an ADU-provided code.")
+  Failed: "Failed",
+
+  @doc("The operation is currently in progress on the device.")
+  InProgress: "InProgress",
+
+  @doc("The operation was canceled for the device.")
+  Canceled: "Canceled",
+
+  @doc("The operation does not apply to the device.")
+  NotApplied: "NotApplied",
+}
+
+// NOTE: ADU's backing API supports filtering device-level results by a
+// single state value. The filter is therefore an OData-style boolean
+// expression over the result `status` field (e.g. "status eq 'Failed'"),
+// aligned with the Azure API Guidelines `filter` convention. Omitting it
+// returns all device results unfiltered. It is carried in the POST request
+// body (not a query parameter) because ARM forbids POST/action operations
+// from declaring query parameters other than `api-version`.
+//
+// NOTE (for review): accepted `status` values mirror `JobRunResultItemStatus`
+// (Succeeded, Failed, InProgress, Canceled, NotApplied) and are validated by ADU.
+@added(Versions.v2026_11_02_preview)
+@doc("Optional request body for browsing job run results.")
+model JobRunResultsRequest {
+  @doc("An OData-style filter expression that selects which device result entries to return, aligned with the Azure API Guidelines `filter` convention. Currently supports equality on the result status, e.g. \"status eq 'Failed'\". Accepted status values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied. When omitted, all device results are returned.")
+  filter?: string;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -161,5 +201,41 @@ interface JobRuns {
   listByJob is ArmResourceListByParent<JobRun>;
 
   @doc("Browse the results of a job run to find individual device statuses.")
-  results is ArmResourceActionSync<JobRun, void, JobRunResultListResponse>;
+  results is ArmResourceActionSync<
+    JobRun,
+    JobRunResultsRequest,
+    JobRunResultListResponse
+  >;
+}
+
+// NOTE: A namespace-scoped aggregate list of job runs across every job in
+// the namespace. JobRun's @parentResource is Job, so the standard
+// ArmResourceListByParent (list by Job) cannot express this grandparent
+// scope -- its parent-key extraction always includes `jobName`. It is
+// therefore modeled as an explicit @get list routed at the namespace
+// scope, in a plain interface so the ARM resource auto-routing does not
+// re-derive the path from the resource's parent chain. It still returns
+// the standard paged JobRun envelope (x-ms-pageable via nextLink).
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Grandparent-scoped aggregate list of JobRun; cannot use the standard ARM list-by-parent template because JobRun's parent is Job, not Namespace."
+@added(Versions.v2026_11_02_preview)
+interface JobRunsByNamespace {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom grandparent-scoped list; not expressible via ArmResourceListByParent because parent-key extraction always includes jobName."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId keeps this namespace-scoped list in the JobRuns SDK operation group instead of a separate JobRunsByNamespace group."
+  @doc("List job runs by namespace, across all jobs in the namespace.")
+  @operationId("JobRuns_ListByNamespace")
+  @get
+  @list
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/jobRuns")
+  listByNamespace(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    @doc("The name of the namespace.")
+    @path
+    @minLength(3)
+    @maxLength(64)
+    @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
+    namespaceName: string,
+  ): ArmResponse<ResourceListResult<JobRun>> | ErrorResponse;
 }

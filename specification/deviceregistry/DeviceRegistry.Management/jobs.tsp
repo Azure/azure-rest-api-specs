@@ -51,6 +51,11 @@ model JobProperties {
   @visibility(Lifecycle.Read)
   uuid?: string;
 
+  @doc("A human-readable description of the job. Mutable on PUT.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @maxLength(1024)
+  description?: string;
+
   @doc("The type of the job. Set at create time; immutable thereafter.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   jobType: JobTypeEnum;
