@@ -6,6 +6,7 @@ import "./scheduler.tsp";
 import "./taskhub.tsp";
 import "./retentionpolicy.tsp";
 import "./transparentDataEncryption.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
