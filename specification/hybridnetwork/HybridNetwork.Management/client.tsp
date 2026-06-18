@@ -205,7 +205,8 @@ using TypeSpec.Http;
 
 @@clientName(NSDArtifactProfile, "NsdArtifactProfile", "java, csharp");
 @@clientName(NFVIs, "NfvIs", "java");
-@@clientName(NFVIs, "NfviEntry", "csharp");
+@@clientName(NFVIs, "NfviDetails", "csharp");
+@@clientName(NfviDetails, "NfviSiteDetails", "csharp");
 @@clientName(
   LongRunningOperation,
   "CancelableLongRunningOperationType",
