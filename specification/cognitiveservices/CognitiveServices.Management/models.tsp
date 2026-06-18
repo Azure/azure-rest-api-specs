@@ -2143,9 +2143,7 @@ model NetworkInjection {
 }
 
 /**
- * Extensible agent infrastructure configuration. Carries the Azure resource IDs of the agent
- * storage dependencies. Modeled as an object so future capability-backed resources can be added
- * without changing the account or project contract.
+ * Extensible agent infrastructure configuration. Carries the Azure resource IDs of the agent storage dependencies. Modeled as an object so future capability-backed resources can be added without changing the account or project contract.
  */
 @added(Versions.v2026_05_15_preview)
 model InfrastructureSettings {
@@ -4174,9 +4172,7 @@ model ProjectProperties {
   isDefault?: boolean;
 
   /**
-   * Effective agent infrastructure settings for the project. Optional partial override of the
-   * account defaults; omitted fields inherit from the parent account when present. Settable only
-   * at create time.
+   * Effective agent infrastructure settings for the project. Optional partial override of the account defaults; omitted fields inherit from the parent account when present. Settable only at create time.
    */
   @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
