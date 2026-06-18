@@ -102,7 +102,11 @@ export async function execNpm(args, options = {}) {
     // launched through a shell: since the fix for CVE-2024-27980, Node refuses to
     // spawn .cmd/.bat files unless shell is enabled. On other platforms, call the
     // "pnpm" binary directly with shell disabled to avoid shell quoting/parsing risks.
-    const result = await execFileImpl(isWindows ? "pnpm.cmd" : "pnpm", allArgs, {
+    // Exclude the platform-specific branch from coverage (only one side runs per OS).
+    /* v8 ignore next */
+    const file = isWindows ? "pnpm.cmd" : "pnpm";
+
+    const result = await execFileImpl(file, allArgs, {
       cwd,
       maxBuffer,
       shell: isWindows,
