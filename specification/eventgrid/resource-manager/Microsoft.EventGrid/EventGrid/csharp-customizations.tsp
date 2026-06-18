@@ -443,6 +443,7 @@ namespace Customization;
   "csharp"
 );
 @@alternateType(PartnerDetails.setupUri, url, "csharp");
+@@alternateType(CustomerManagedKeyEncryption.keyEncryptionKeyUrl, url, "csharp");
 @@alternateType(
   PartnerEventSubscriptionDestinationProperties.resourceId,
   Azure.Core.armResourceIdentifier,
