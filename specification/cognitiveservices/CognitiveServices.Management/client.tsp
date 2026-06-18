@@ -685,7 +685,12 @@ op regenerateKeyCustom(
 );
 @@clientName(
   ManagedNetworkProvisionOptions,
-  "CognitiveServicesManagedNetworkProvisionOptions",
+  "CognitiveServicesManagedNetworkProvisionConfig",
+  "csharp"
+);
+@@clientName(
+  FoundryAutoUpgrade.plannedByMicrosoft,
+  "IsPlannedByMicrosoft",
   "csharp"
 );
 @@clientName(

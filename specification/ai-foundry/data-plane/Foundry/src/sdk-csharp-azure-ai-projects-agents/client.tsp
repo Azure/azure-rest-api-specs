@@ -1,4 +1,10 @@
-import "./main.tsp";
+import "../sdk-common/error.default.tsp";
+import "../agents/routes.tsp";
+import "../toolboxes/routes.tsp";
+import "../skills/routes.tsp";
+import "../agents-session-files/routes.tsp";
+import "../managed-blueprints/routes.tsp";
+import "../agents-optimization/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -264,10 +270,4 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.get, Access.internal);
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateConfig, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateFile, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateResults, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
 }
