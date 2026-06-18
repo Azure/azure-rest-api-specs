@@ -23,7 +23,6 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByUuid, Access.internal);
 
 @@access(Microsoft.DeviceRegistry.Groups.getGroupByUuid, Access.internal);
-@@access(Microsoft.DeviceRegistry.Groups.getGroupsForDevice, Access.internal);
 
 @@access(Microsoft.DeviceRegistry.DeviceCapabilities.createOrReplace,
   Access.internal

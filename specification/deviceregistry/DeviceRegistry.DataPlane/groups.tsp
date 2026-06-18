@@ -89,7 +89,7 @@ interface Groups {
   >;
 
   /** Returns the groups that a device belongs to. */
-  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  @added(Versions.v2026_11_01_preview)
   getGroupsForDevice is ResourceOperations.ResourceCollectionAction<
     Group,
     GetGroupsForDeviceRequest,
