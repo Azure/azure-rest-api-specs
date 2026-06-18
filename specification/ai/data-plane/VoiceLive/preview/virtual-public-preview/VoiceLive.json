@@ -1892,33 +1892,6 @@
         "error"
       ]
     },
-    "ExperimentalBargeInConfig": {
-      "type": "object",
-      "description": "(Preview) Configuration for experimental barge-in behavior.\n\nThis model is preview-only surface on the `v1` channel: it is added at the virtual\n`PuPr` version and removed at `v1` so it appears in the preview swagger but not in the\nGA `v1` swagger. At runtime it is gated behind the `VoiceLive-Features: BargeIn=V1Preview`\nopt-in header (see `VoiceLiveFeaturesOptInKeys.barge_in_v1_preview`). When the feature\ngraduates to GA, drop the `@removed(Versions.v1)` decorator (and the header gate) so it\nbecomes part of the evergreen `v1` contract.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether experimental barge-in is enabled for the session.",
-          "default": false
-        },
-        "sensitivity": {
-          "type": "number",
-          "format": "float",
-          "description": "Sensitivity of barge-in detection. Range: 0.0 (least sensitive) to 1.0 (most sensitive).\nHigher values let the caller interrupt the assistant more easily.",
-          "minimum": 0,
-          "maximum": 1
-        },
-        "min_speech_duration_ms": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Minimum duration of caller speech, in milliseconds, required to trigger a barge-in.",
-          "minimum": 0
-        }
-      },
-      "required": [
-        "enabled"
-      ]
-    },
     "FileSearchResult": {
       "type": "object",
       "description": "A file search result entry.",
@@ -3131,10 +3104,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "experimental_barge_in": {
-          "$ref": "#/definitions/ExperimentalBargeInConfig",
-          "description": "(Preview) Experimental barge-in tuning that lets the caller interrupt the assistant more\naggressively. This is preview-only surface: it is opted into at runtime via the\n`VoiceLive-Features: BargeIn=V1Preview` request header and is intentionally fenced out of\nthe GA `v1` swagger via `@removed(Versions.v1)`."
         }
       }
     },
@@ -3958,10 +3927,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "experimental_barge_in": {
-          "$ref": "#/definitions/ExperimentalBargeInConfig",
-          "description": "(Preview) Experimental barge-in tuning that lets the caller interrupt the assistant more\naggressively. This is preview-only surface: it is opted into at runtime via the\n`VoiceLive-Features: BargeIn=V1Preview` request header and is intentionally fenced out of\nthe GA `v1` swagger via `@removed(Versions.v1)`."
         },
         "agent": {
           "$ref": "#/definitions/AgentConfig",
@@ -6783,24 +6748,6 @@
       "required": [
         "message"
       ]
-    },
-    "VoiceLiveFeaturesOptInKeys": {
-      "type": "string",
-      "description": "Feature opt-in keys for VoiceLive preview capabilities.\n\nMirrors Foundry's `FoundryFeaturesOptInKeys`: each member is a feature flag opt-in\nstring sent on the `VoiceLive-Features` header (see `WithConditionalVoiceLivePreviewHeader`)\nto enable preview features. This is the preview-only registry of opt-in keys: the union\nexists on the virtual `PuPr` channel and is fenced out of GA `v1` via `@removed(Versions.v1)`,\nsince every opt-in key gates a preview feature. It is an open union (`string`) so future\npreview keys can be added without a breaking change.",
-      "enum": [
-        "BargeIn=V1Preview"
-      ],
-      "x-ms-enum": {
-        "name": "VoiceLiveFeaturesOptInKeys",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "barge_in_v1_preview",
-            "value": "BargeIn=V1Preview",
-            "description": "Opt-in key enabling the experimental barge-in preview feature."
-          }
-        ]
-      }
     }
   },
   "parameters": {}
