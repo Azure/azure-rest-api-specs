@@ -729,11 +729,19 @@ model EouDetection {
       | "semantic_detection_v1_multilingual"
       | string
   )
+  @typeChangedFrom(
+    Versions.v1,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | "smart_end_of_turn_detection"
+      | string
+  )
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
     | "semantic_detection_v1_multilingual"
-    | "smart_end_of_turn_detection"
     | string;
 }
 
