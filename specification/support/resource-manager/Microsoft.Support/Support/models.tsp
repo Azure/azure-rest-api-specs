@@ -412,7 +412,7 @@ model ProblemClassificationsClassificationResult {
   relatedService?: ClassificationService;
 
   /**
-   * Identifier of the article associated with this problem classification result.
+   * Identifier of the article associated with this problem classification result. This identifier is only available when Alchemy responds.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "articleId is intentionally nullable: the service may explicitly return null when no article is associated with the problem classification result."
   @visibility(Lifecycle.Read)
