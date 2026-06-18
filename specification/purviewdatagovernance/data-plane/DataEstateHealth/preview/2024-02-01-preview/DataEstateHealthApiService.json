@@ -557,7 +557,7 @@
     },
     "/controls/schedule": {
       "get": {
-        "operationId": "ControlSchedules_Get",
+        "operationId": "Schedules_Get",
         "description": "Get the global control schedule.",
         "parameters": [
           {
@@ -583,10 +583,15 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get_Gen.json"
+          }
         }
       },
       "put": {
-        "operationId": "ControlSchedules_CreateOrUpdate",
+        "operationId": "Schedules_CreateOrUpdate",
         "description": "Create or update the global control schedule.",
         "parameters": [
           {
@@ -619,6 +624,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_CreateOrUpdate": {
+            "$ref": "./examples/Schedules_CreateOrUpdate_Gen.json"
           }
         }
       }

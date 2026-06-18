@@ -157,7 +157,7 @@ interface Controls {
 // ============================================================================
 
 @doc("Operations for managing control schedules.")
-interface ControlSchedules {
+interface Schedules {
   @doc("Get the global control schedule.")
   @route("/controls/schedule")
   @get
