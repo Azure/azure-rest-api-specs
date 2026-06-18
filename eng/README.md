@@ -20,13 +20,11 @@ Below are code convention we strive to follow in `eng` directory:
 ### pnpm and the lock file
 
 - This repo uses [pnpm] workspaces. **Do not use `npm` or `yarn`.** Running
-  `npm install`, `npm ci`, or `yarn` fails fast with an `EBADDEVENGINES` error that
-  tells you to use pnpm — this is enforced by the `devEngines.packageManager` field in
-  the root `package.json`.
+  `npm install`, `npm ci`, or `yarn` fails fast (npm cannot resolve the `catalog:` and
+  `workspace:` dependency protocols), so contributors must use pnpm.
 - You do **not** need to install pnpm manually. The root `package.json` pins the pnpm
-  version (`devEngines.packageManager.version`) with `onFail: "download"`, so pnpm
-  self-versions: the first time you run any `pnpm` command it auto-downloads and
-  switches to the pinned version.
+  version via the `packageManager` field, so pnpm self-versions: the first time you run
+  any `pnpm` command it auto-downloads and switches to the pinned version.
 - Install dependencies from the repo root with `pnpm install`. There is a single
   top-level `pnpm-lock.yaml`; do not add other lock files.
 - We maintain a single `pnpm-workspace.yaml` at the root that lists workspace packages
@@ -36,8 +34,7 @@ Below are code convention we strive to follow in `eng` directory:
   commit the resulting `pnpm-lock.yaml` changes so the lock file stays in sync and free
   of unused dependencies.
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
-  (which reads `devEngines.packageManager.version`) and runs
-  `pnpm install --frozen-lockfile`.
+  (which reads the `packageManager` field) and runs `pnpm install --frozen-lockfile`.
 
 ## Linting and prettier
 

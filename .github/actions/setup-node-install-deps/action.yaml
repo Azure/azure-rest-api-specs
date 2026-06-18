@@ -12,25 +12,16 @@ inputs:
     description: "Working directory"
     default: "."
   package-json-file:
-    description: 'Path (relative to the repository root) of the package.json containing the "devEngines.packageManager" field used to select the pnpm version'
+    description: 'Path (relative to the repository root) of the package.json containing the "packageManager" field used to select the pnpm version'
     default: "package.json"
 
 runs:
   using: "composite"
 
   steps:
-    - name: Read pnpm version from devEngines
-      id: pnpm-version
-      shell: bash
-      run: |
-        VERSION="$(node -p "require('./${PACKAGE_JSON_FILE}').devEngines.packageManager.version")"
-        echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-      env:
-        PACKAGE_JSON_FILE: ${{ inputs.package-json-file }}
-
     - uses: pnpm/action-setup@v6
       with:
-        version: ${{ steps.pnpm-version.outputs.version }}
+        package_json_file: ${{ inputs.package-json-file }}
 
     - uses: actions/setup-node@v6
       with:
