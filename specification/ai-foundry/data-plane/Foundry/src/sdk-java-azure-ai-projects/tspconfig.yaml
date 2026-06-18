@@ -18,9 +18,10 @@ options:
     flavor: azure
   # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java
   # - run `tsp-client sync` from package folder
-  # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter && npx tsp compile`
+  # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter`
+  # - still from `TempTypeSpecFiles` folder, run `npx tsp compile .\sdk-java-azure-ai-projects\client.tsp --emit typespec-extension-exporter`
   # - verify creation/update of the `cutomizations/beta-annotations.csv` file
-  # - run `cd .. && tsp-client generate && rm -Force TempTypeSpecFiles`
+  # - run `cd .. && tsp-client generate`
   "typespec-extension-exporter":
     keys: x-ms-foundry-meta
     output-shape: tsp-ast-input
