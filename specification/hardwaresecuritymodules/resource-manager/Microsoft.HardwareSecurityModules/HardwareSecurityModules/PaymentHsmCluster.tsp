@@ -26,7 +26,7 @@ model PaymentHsmCluster
   /**
    * SKU details
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Payment HSM Cluster exposes a service-specific, strongly-typed SKU as a resource envelope property, consistent with the existing CloudHsmCluster resource. The ARM common-types Sku cannot represent the service's enumerated SKU name and family values."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sku?: PaymentHsmClusterSku;
 }

@@ -2838,7 +2838,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "The Payment HSM Cluster's tags",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
@@ -2932,7 +2932,8 @@
         "values": [
           {
             "name": "B",
-            "value": "B"
+            "value": "B",
+            "description": "B family SKU"
           }
         ]
       }
@@ -2949,7 +2950,8 @@
         "values": [
           {
             "name": "Standard_B1v2",
-            "value": "Standard_B1v2"
+            "value": "Standard_B1v2",
+            "description": "Standard_B1v2 SKU"
           }
         ]
       }
@@ -2968,7 +2970,7 @@
         },
         "state": {
           "type": "string",
-          "description": "The Payment HSM State. Values are: Deploying, ConfiguringSlb, Starting, Failed, Deleting, DeletingSlbEntry, InitialProvisioning, Updating"
+          "description": "The Payment HSM State. Values are: Deploying, ConfiguringSlb, Starting, Started, Failed, Relocating, Deleting, DeletingSlbEntry, InitialProvisioning, Updating, Degraded"
         },
         "stateMessage": {
           "type": "string",
