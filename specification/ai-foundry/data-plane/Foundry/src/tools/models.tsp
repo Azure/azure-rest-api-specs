@@ -1,4 +1,5 @@
 import "../memory-stores/models.tsp";
+import "../toolboxes/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
