@@ -327,6 +327,7 @@ model LaunchBulkInstancesOperationListResult {
 // Routes: BulkActions interface (8 operations)
 // ============================================================
 
+@removed(Versions.`2026-06-06`)
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface LaunchBulkInstancesOperation {
   @doc("Gets an instance of LaunchBulkInstancesOperations.")
