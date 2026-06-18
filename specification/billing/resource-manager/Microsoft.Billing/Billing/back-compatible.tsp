@@ -149,11 +149,7 @@ using Microsoft.Billing;
   BillingProfiles.invoicesListByBillingProfile,
   "ListByBillingProfile"
 );
-@@clientLocation(
-  BillingProfiles.productsListByBillingProfile,
-  Products,
-  "!csharp"
-);
+@@clientLocation(BillingProfiles.productsListByBillingProfile, Products);
 @@clientName(
   BillingProfiles.productsListByBillingProfile,
   "ListByBillingProfile"
@@ -528,11 +524,7 @@ using Microsoft.Billing;
   InvoiceSections.billingSubscriptionsListByInvoiceSection,
   "ListByInvoiceSection"
 );
-@@clientLocation(
-  InvoiceSections.productsListByInvoiceSection,
-  Products,
-  "!csharp"
-);
+@@clientLocation(InvoiceSections.productsListByInvoiceSection, Products);
 @@clientName(
   InvoiceSections.productsListByInvoiceSection,
   "ListByInvoiceSection"
