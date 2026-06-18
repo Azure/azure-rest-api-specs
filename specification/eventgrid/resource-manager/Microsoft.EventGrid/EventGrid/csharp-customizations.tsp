@@ -541,6 +541,16 @@ namespace Customization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: force legacy flattening for migrated EventGrid ARM data models"
 @@flattenProperty(VerifiedPartner.properties, "csharp");
 
+// Read-only resources that need mutable properties for GA API compatibility
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: GA SDK exposed public setters on read-only resource data types"
+@@usage(VerifiedPartner, Usage.input | Usage.output, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: GA SDK exposed public setters on read-only resource data types"
+@@usage(TopicTypeInfo, Usage.input | Usage.output, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: GA SDK exposed public setters on read-only resource data types"
+@@usage(DomainTopic, Usage.input | Usage.output, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Backward compatibility: GA SDK exposed public setters on read-only resource data types"
+@@usage(ExtensionTopic, Usage.input | Usage.output, "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(Subscriptions.getDeliveryAttributes, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
