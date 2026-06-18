@@ -59,36 +59,7 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
-@parentResource(Group)
-@doc("The status of a refresh members operation.")
-model RefreshGroupMembersResult
-  is ProxyResource<RefreshGroupMembersResultProperties> {
-  @doc("The operation ID.")
-  @key("operationId")
-  @segment("refreshGroupMembersResults")
-  @path
-  name: string;
-}
-
-@added(Versions.v2026_11_02_preview)
-@doc("The properties of a refresh group members result.")
-model RefreshGroupMembersResultProperties {
-  @doc("The current status of the operation.")
-  @visibility(Lifecycle.Read)
-  status: Azure.Core.Foundations.OperationState;
-
-  @doc("Error details when the operation failed.")
-  @visibility(Lifecycle.Read)
-  error?: Azure.ResourceManager.CommonTypes.ErrorDetail;
-
-  @doc("The start time of the operation.")
-  @visibility(Lifecycle.Read)
-  startTime?: utcDateTime;
-
-  @doc("The end time of the operation.")
-  @visibility(Lifecycle.Read)
-  endTime?: utcDateTime;
-
+model RefreshGroupMembersResult is ArmOperationStatus {
   @doc("The total count of members in the group after the refresh.")
   @visibility(Lifecycle.Read)
   totalMemberCount?: int64;
@@ -109,13 +80,10 @@ model RefreshGroupMembersResultProperties {
   @visibility(Lifecycle.Read)
   lastRefreshTimestamp?: utcDateTime;
 }
-
-@added(Versions.v2026_11_02_preview)
-@tag("Groups")
-interface RefreshGroupMembersResults {
-  /** Get the status of the group refresh long-running operation. */
-  get is ResourceOperations.ResourceRead<RefreshGroupMembersResult>;
-}
+ 
+alias RefreshMembersLroHeaders =
+  Azure.Core.Foundations.RetryAfterHeader &
+  ArmCombinedLroHeaders<FinalResult = RefreshGroupMembersResult>;
 
 @added(Versions.v2026_11_02_preview)
 @armResourceOperations
@@ -134,8 +102,12 @@ interface Groups {
   >;
 
   @doc("Refreshes the members of this group.")
-  @pollingOperation(RefreshGroupMembersResults.get)
-  refreshMembers is ArmResourceActionNoResponseContentAsync<Group, void>;
+  @useFinalStateVia("azure-async-operation")
+  refreshMembers is ArmResourceActionNoResponseContentAsync<
+    Resource = Group,
+    Request = void, 
+    LroHeaders = RefreshMembersLroHeaders
+  >;
 
   @doc("Returns the current count of members of this group.")
   getCurrentMemberCount is ArmResourceActionSync<
