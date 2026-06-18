@@ -4,12 +4,15 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./devices.tsp";
+import "./common/longRunningOperation.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
+using Azure.Core.Foundations;
+using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -43,11 +46,16 @@ union AuthenticationType {
   /** Symmetric key authentication. */
   SymmetricKey: "SymmetricKey",
 
-  /** Certificate authority authentication. */
+  /** Certificate authority authentication.
+      TODO: Change to "X509Certificate" */
   CertificateAuthority: "CertificateAuthority",
 
   /** Self-signed X.509 certificate authentication. */
   SelfSignedX509Certificate: "SelfSignedX509Certificate",
+
+  /** X.509 certificate authority uploaded to IoT Hub. No additional credential fields required. */
+  @added(Versions.v2026_11_02_preview)
+  X509HubUploadedCertificateAuthority: "X509HubUploadedCertificateAuthority",
 }
 
 /** Authentication information for the device. */
@@ -80,6 +88,14 @@ model SelfSignedX509CertificateAuthenticationProfileProperties
   selfSignedThumbprints: SelfSignedThumbprints;
 }
 
+/** Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required. */
+@added(Versions.v2026_11_02_preview)
+model X509HubUploadedCertificateAuthorityAuthenticationProfileProperties
+  extends AuthenticationProfileProperties {
+  /** The authentication type. */
+  type: AuthenticationType.X509HubUploadedCertificateAuthority;
+}
+
 /** Symmetric key authentication details. */
 model SymmetricKeyCredentials {
   /** The primary symmetric key. */
@@ -107,6 +123,57 @@ model CertificateAuthorityCredentials {
 }
 
 // ──────────────────────────────────────────────
+// Certificate issuance action models
+// ──────────────────────────────────────────────
+
+/** Certificate issuance request. */
+model CertificateIssuanceRequest {
+  /**
+   * Base64-encoded DER certificate signing request (CSR) without PEM
+   * headers and footers. Format of the CSR is in PKCS 10. The CN field of
+   * the CSR must be set to the device's external device id (registrationId).
+   */
+  csr: bytes;
+}
+
+/**
+ * The full chain of the issued certificate, including any intermediate
+ * certification authorities (ICAs) and the root certification authority
+ * (CA). The first certificate in the list is the issued leaf certificate.
+ * Each subsequent certificate is the issuer of the previous.
+ */
+model IssuedCertificateChain is bytes[];
+
+/** Certificate issuance result. */
+model CertificateIssuanceResult {
+  /** The full chain of the issued certificate. */
+  @visibility(Lifecycle.Read)
+  issuedCertificateChain: IssuedCertificateChain;
+}
+
+// ──────────────────────────────────────────────
+// Issue-cert status monitor endpoint
+// ──────────────────────────────────────────────
+
+/** Status monitor for the long-running `:issueCert` action on a device authentication profile. */
+@parentResource(DeviceAuthenticationProfile)
+@resource("issueCertResults")
+model IssueCertResult is LongRunningOperationStatus<CertificateIssuanceResult>;
+
+// ──────────────────────────────────────────────
+// Revoke-cert status monitor endpoint
+// ──────────────────────────────────────────────
+
+/**
+ * Status monitor for the long-running `:revokeCerts` action on a device authentication
+ * profile. The operation has no payload to return on success; `status` carries the
+ * outcome and `error` carries failure details.
+ */
+@parentResource(DeviceAuthenticationProfile)
+@resource("revokeCertsResults")
+model RevokeCertsResult is LongRunningOperationStatus;
+
+// ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles operation models
 // ──────────────────────────────────────────────
 
@@ -118,6 +185,14 @@ model GetDeviceAuthenticationProfileKeysResponse {
   symmetricKey: SymmetricKeyCredentials;
 }
 
+/** Request for looking up a device authentication profile by its UUID. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+model GetAuthenticationProfileByUuidRequest {
+  /** The unique identifier of the authentication profile. */
+  @query
+  authenticationProfileUuid: string;
+}
+
 // ──────────────────────────────────────────────
 // DeviceAuthenticationProfiles interface
 // ──────────────────────────────────────────────
@@ -126,19 +201,30 @@ model GetDeviceAuthenticationProfileKeysResponse {
 @tag("Device Authentication Profiles")
 interface DeviceAuthenticationProfiles {
   /** Create or replace a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceAuthenticationProfile>;
 
   /** Get a device authentication profile. */
   get is ResourceOperations.ResourceRead<DeviceAuthenticationProfile>;
 
   /** Update a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceAuthenticationProfile>;
 
   /** Delete a device authentication profile. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   delete is ResourceOperations.ResourceDelete<DeviceAuthenticationProfile>;
 
   /** List authentication profiles for a device. */
   list is ResourceOperations.ResourceList<DeviceAuthenticationProfile>;
+
+  /** Look up a device authentication profile by its unique identifier. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  getAuthenticationProfileByUuid is ResourceOperations.ResourceCollectionAction<
+    DeviceAuthenticationProfile,
+    GetAuthenticationProfileByUuidRequest,
+    DeviceAuthenticationProfile
+  >;
 
   /**
    * Retrieve the plaintext symmetric keys of a device authentication
@@ -150,5 +236,71 @@ interface DeviceAuthenticationProfiles {
     DeviceAuthenticationProfile,
     {},
     GetDeviceAuthenticationProfileKeysResponse
+  >;
+
+  /**
+   * Issue an operational X.509 certificate for the device. The certificate is
+   * signed using the certificate authority policy bound to this authentication
+   * profile. Applies to Microsoft-managed X.509 authentication profiles. The
+   * issued certificate chain is delivered by the GET on the corresponding
+   * `issueCertResults` status monitor endpoint.
+   */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  @pollingOperation(IssueCertResults.get)
+  issueCert is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    CertificateIssuanceRequest & LongRunningOperationIdHeader,
+    {},
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
+  >;
+
+  /**
+   * Revoke certificates issued for the device authentication profile. Applies to
+   * Microsoft-managed X.509 certificates: invalidates outstanding certificates
+   * via the PKI revocation list. The authentication profile itself is preserved.
+   * Status is polled via the dedicated GET on the corresponding
+   * `revokeCertsResults` status monitor endpoint.
+   */
+  @pollingOperation(RevokeCertsResults.get)
+  revokeCerts is ResourceOperations.LongRunningResourceAction<
+    DeviceAuthenticationProfile,
+    LongRunningOperationIdHeader,
+    {},
+    Azure.Core.Foundations.Error,
+    LongRunningActionResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:issueCert` action. */
+@tag("Device Authentication Profiles")
+interface IssueCertResults {
+  /** Get the status of a long-running `:issueCert` operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_IssueCert` action that produces these
+  // results) rather than as a top-level `IssueCertResults_Get` method.
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  @operationId("DeviceAuthenticationProfiles_GetIssueCertResult")
+  get is ResourceOperations.ResourceRead<
+    IssueCertResult,
+    LongRunningStatusMonitorResponseHeadersTrait
+  >;
+}
+
+/** Polling operations for the long-running `:revokeCerts` action. */
+@tag("Device Authentication Profiles")
+interface RevokeCertsResults {
+  /** Get the status of a long-running `:revokeCerts` operation. */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Intentional: keep this GET grouped with DeviceAuthenticationProfiles in generated SDK clients."
+  // Override the emitted operationId to surface this status monitor under
+  // the `DeviceAuthenticationProfiles` SDK client (matches the wire-side
+  // `DeviceAuthenticationProfiles_RevokeCerts` action that produces these
+  // results) rather than as a top-level `RevokeCertsResults_Get` method.
+  @operationId("DeviceAuthenticationProfiles_GetRevokeCertsResult")
+  get is ResourceOperations.ResourceRead<
+    RevokeCertsResult,
+    LongRunningStatusMonitorResponseHeadersTrait
   >;
 }

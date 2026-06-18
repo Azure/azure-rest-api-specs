@@ -1,0 +1,29 @@
+{
+  "title": "JobRun Results Filtered By Status",
+  "operationId": "JobRuns_Results",
+  "description": "Browse the results of a job run, returning only entries whose status is Failed.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1",
+    "jobName": "adr-job-update-01",
+    "runName": "c560dcd9-cd8e-413b-859c-d0ebcb94236f",
+    "body": {
+      "filter": "status eq 'Failed'"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "deviceUuid": "a2b6c33d-8f01-4e22-b774-771b7fa46f88",
+            "status": "Failed",
+            "reason": "DOWNLOAD_FAILED"
+          }
+        ]
+      }
+    }
+  }
+}

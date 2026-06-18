@@ -1,0 +1,54 @@
+{
+  "title": "Get_Namespace_With_LinkedUpdatingEndpoint",
+  "operationId": "Namespaces_Get",
+  "description": "Get a namespace with a linked device update (ADU) endpoint in Succeeded state. Read-only address fields are resolved from the ADU ARM resource properties at commit time.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace",
+        "name": "my-namespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "eastus",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "dataEndpoint": "eastus.api.deviceregistry.azure.com",
+          "updating": {
+            "endpoints": {
+              "my-adu": {
+                "endpointType": "Microsoft.DeviceUpdate/linkedAccounts",
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceUpdate/linkedAccounts/my-adu-account",
+                "inboundCallerIdentity": {
+                  "type": "SystemAssigned"
+                },
+                "linkingState": "Succeeded",
+                "serviceAddress": "my-adu-account.api.adu.microsoft.com",
+                "deviceAddress": "my-adu-account.device-api.adu.microsoft.com",
+                "legacyDeviceAddress": "my-adu-account.device-api-legacy.adu.microsoft.com"
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-27T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-27T00:00:00Z"
+        }
+      }
+    }
+  }
+}

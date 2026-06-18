@@ -56,14 +56,18 @@ model DeviceStateProperties {
 @tag("Device States")
 interface DeviceStates {
   /** Create or replace a device state. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceState>;
 
   /** Get a device state. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   get is ResourceOperations.ResourceRead<DeviceState>;
 
   /** Update a device state. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceState>;
 
   /** List device states for a device. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   list is ResourceOperations.ResourceList<DeviceState>;
 }

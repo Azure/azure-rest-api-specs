@@ -284,13 +284,19 @@ union InstallResultFailureOrigin {
 @tag("Device Attributes")
 interface DeviceAttributes {
   /** Create or replace a device attribute. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   createOrReplace is ResourceOperations.ResourceCreateOrReplace<DeviceAttribute>;
 
   /** Get a device attribute. */
   get is ResourceOperations.ResourceRead<DeviceAttribute>;
 
   /** Update a device attribute. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   update is ResourceOperations.ResourceCreateOrUpdate<DeviceAttribute>;
+
+  /** Delete a device attribute. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  delete is ResourceOperations.ResourceDelete<DeviceAttribute>;
 
   /** List device attributes for a device. */
   list is ResourceOperations.ResourceList<DeviceAttribute>;

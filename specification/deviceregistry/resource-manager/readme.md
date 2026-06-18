@@ -68,6 +68,7 @@ suppressions:
       - $.definitions.Management.properties.endpoints
       - $.definitions.Messaging.properties.endpoints
       - $.definitions.NamespaceProvisioning.properties.endpoints
+      - $.definitions.NamespaceUpdating.properties.endpoints
       - $.definitions.MessagingEndpoints.properties.inbound
       - $.definitions.MessagingEndpointsUpdate.properties.inbound
       - $.definitions.OutboundEndpoints.properties.assigned
@@ -152,6 +153,7 @@ suppressions:
       - $.definitions.Management.properties.endpoints
       - $.definitions.Messaging.properties.endpoints
       - $.definitions.NamespaceProvisioning.properties.endpoints
+      - $.definitions.NamespaceUpdating.properties.endpoints
       - $.definitions.MessagingEndpoints.properties.inbound
       - $.definitions.MessagingEndpointsUpdate.properties.inbound
       - $.definitions.OutboundEndpoints.properties.assigned

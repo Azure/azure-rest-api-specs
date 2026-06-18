@@ -1,0 +1,78 @@
+{
+  "title": "List_JobRuns_ByNamespace",
+  "operationId": "JobRuns_ListByNamespace",
+  "description": "List job runs by namespace, across all jobs in the namespace.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "namespace-1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-update-01/runs/c560dcd9-cd8e-413b-859c-d0ebcb94236f",
+            "name": "c560dcd9-cd8e-413b-859c-d0ebcb94236f",
+            "type": "Microsoft.DeviceRegistry/namespaces/jobs/runs",
+            "systemData": {
+              "createdBy": "00003442-0000-0000-0000-494059220000",
+              "createdByType": "Application",
+              "createdAt": "2026-11-15T14:30:00Z",
+              "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-11-15T15:30:00Z"
+            },
+            "properties": {
+              "uuid": "91339e2f-7339-4b18-a6ae-dd3d392a4275",
+              "status": "Succeeded",
+              "scheduledTime": "2026-11-15T14:30:00Z",
+              "startTime": "2026-11-15T14:30:05Z",
+              "endTime": "2026-11-15T15:25:00Z",
+              "results": {
+                "total": 1500,
+                "succeeded": 1478,
+                "failed": 22,
+                "inProgress": 0,
+                "pending": 0,
+                "canceled": 0,
+                "notApplied": 0
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/namespace-1/jobs/adr-job-recovery-01/runs/2f0d4b1a-6c3e-4f9b-8d21-7a5e9c0b1d34",
+            "name": "2f0d4b1a-6c3e-4f9b-8d21-7a5e9c0b1d34",
+            "type": "Microsoft.DeviceRegistry/namespaces/jobs/runs",
+            "systemData": {
+              "createdBy": "00003442-0000-0000-0000-494059220000",
+              "createdByType": "Application",
+              "createdAt": "2026-11-16T09:00:00Z",
+              "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-11-16T09:45:00Z"
+            },
+            "properties": {
+              "uuid": "b7c9e1d2-3f44-4a55-9c66-1e2f3a4b5c6d",
+              "status": "Active",
+              "scheduledTime": "2026-11-16T09:00:00Z",
+              "startTime": "2026-11-16T09:00:05Z",
+              "results": {
+                "total": 320,
+                "succeeded": 100,
+                "failed": 2,
+                "inProgress": 118,
+                "pending": 100,
+                "canceled": 0,
+                "notApplied": 0
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

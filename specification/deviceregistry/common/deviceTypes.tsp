@@ -16,9 +16,6 @@ model DevicePropertiesBase {
   /** Device model. */
   `model`?: string;
 
-  /** Device operating system. */
-  operatingSystem?: string;
-
-  /** Device operating system version. */
-  operatingSystemVersion?: string;
+  /** The software revision for this device. */
+  softwareRevision?: string;
 }

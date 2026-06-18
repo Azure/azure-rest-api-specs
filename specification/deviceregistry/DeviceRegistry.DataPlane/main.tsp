@@ -6,12 +6,12 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "./devices.tsp";
 import "./deviceCapabilities.tsp";
+import "./deviceAuthenticationProfiles.tsp";
 import "./deviceStates.tsp";
 import "./deviceAttributes.tsp";
 import "./groups.tsp";
 import "./namespaces.tsp";
 import "./operations.tsp";
-import "./certificateIssuance.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -45,6 +45,9 @@ namespace Microsoft.DeviceRegistry;
 enum Versions {
   /** The 2026-11-01-preview API version. */
   v2026_11_01_preview: "2026-11-01-preview",
+
+  /** The 2026-11-02-preview API version. */
+  v2026_11_02_preview: "2026-11-02-preview",
 }
 
 alias ResourceOperations = Azure.Core.ResourceOperations<NoConditionalRequests &

@@ -1,0 +1,5891 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Device Registry Service",
+    "version": "2026-11-02-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Device Registry endpoints (protocol and hostname).",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "6ce3f5ab-5f16-4633-a660-21ceb8d74c01"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "6ce3f5ab-5f16-4633-a660-21ceb8d74c01": ""
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Devices"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Device Capabilities"
+    },
+    {
+      "name": "Device Authentication Profiles"
+    },
+    {
+      "name": "Device States"
+    },
+    {
+      "name": "Device Attributes"
+    },
+    {
+      "name": "Groups"
+    },
+    {
+      "name": "Namespaces"
+    }
+  ],
+  "paths": {
+    "/namespaces/{namespaceUuid}:generateReport": {
+      "post": {
+        "operationId": "Namespaces_GenerateReport",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Generate a report for a namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateReportRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Report",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a group best-updates compliance report": {
+            "$ref": "./examples/Namespaces_GenerateReport_GroupBestUpdates.json"
+          },
+          "Generate a group installable-updates report": {
+            "$ref": "./examples/Namespaces_GenerateReport_GroupInstallableUpdates.json"
+          },
+          "Generate a namespace update compliance report": {
+            "$ref": "./examples/Namespaces_GenerateReport.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}:reprovision": {
+      "post": {
+        "operationId": "Devices_Reprovision",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Reprovision an existing device to a new IoT Hub within the same namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "The ETag of the device resource. Used to prevent concurrent modifications.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ProvisionDeviceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reprovision a device to a new IoT Hub": {
+            "$ref": "./examples/Devices_Reprovision.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
+      "get": {
+        "operationId": "DeviceAttributes_List",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "List device attributes for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List cloud device states for a device": {
+            "$ref": "./examples/DeviceAttributes_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes/{attributeName}": {
+      "get": {
+        "operationId": "DeviceAttributes_Get",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Get a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the update device state": {
+            "$ref": "./examples/DeviceAttributes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceAttributes_CreateOrReplace",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Create or replace a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace the update device state": {
+            "$ref": "./examples/DeviceAttributes_CreateOrReplace_Update.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceAttributes_Update",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Update a device attribute.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAttribute"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update fields on the update device state": {
+            "$ref": "./examples/DeviceAttributes_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceAttributes_Delete",
+        "tags": [
+          "Device Attributes"
+        ],
+        "description": "Delete a device attribute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "attributeName",
+            "in": "path",
+            "description": "The name of the device attribute.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "update"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceAttributeName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "update",
+                  "value": "update",
+                  "description": "The update attribute of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete device attribution.": {
+            "$ref": "./examples/DeviceAttributes_Delete.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_List",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "List authentication profiles for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List authentication profiles for a device": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_Get",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceAuthenticationProfiles_CreateOrReplace",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Create or replace a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_CreateOrReplace.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceAuthenticationProfiles_Update",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Update a device authentication profile.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfileCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceAuthenticationProfiles_Delete",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Delete a device authentication profile.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_Delete.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:getKeys": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetKeys",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Retrieve the plaintext symmetric keys of a device authentication\nprofile. Only valid when the profile's authentication type is\nSymmetricKey; profiles of any other type return 400 with the\nInvalidAuthenticationType error code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetDeviceAuthenticationProfileKeysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieve the symmetric keys of a SymmetricKey device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetKeys.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:issueCert": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_IssueCert",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Issue an operational X.509 certificate for the device. The certificate is\nsigned using the certificate authority policy bound to this authentication\nprofile. Applies to Microsoft-managed X.509 authentication profiles. The\nissued certificate chain is delivered by the GET on the corresponding\n`issueCertResults` status monitor endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateIssuanceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue an operational certificate for an IoT device": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_IssueCert.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}:revokeCerts": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_RevokeCerts",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Revoke certificates issued for the device authentication profile. Applies to\nMicrosoft-managed X.509 certificates: invalidates outstanding certificates\nvia the PKI revocation list. The authentication profile itself is preserved.\nStatus is polled via the dedicated GET on the corresponding\n`revokeCertsResults` status monitor endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "type": "object",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Revoke certificates for a device authentication profile": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_RevokeCerts.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/issueCertResults/{operationId}": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_GetIssueCertResult",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get the status of a long-running `:issueCert` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IssueCertResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a long-running :issueCert operation": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetIssueCertResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles/{authenticationProfileName}/revokeCertsResults/{operationId}": {
+      "get": {
+        "operationId": "DeviceAuthenticationProfiles_GetRevokeCertsResult",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Get the status of a long-running `:revokeCerts` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authenticationProfileName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RevokeCertsResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a long-running :revokeCerts operation": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetRevokeCertsResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/authenticationProfiles:getAuthenticationProfileByUuid": {
+      "post": {
+        "operationId": "DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid",
+        "tags": [
+          "Device Authentication Profiles"
+        ],
+        "description": "Look up a device authentication profile by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetAuthenticationProfileByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceAuthenticationProfile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device authentication profile by its UUID": {
+            "$ref": "./examples/DeviceAuthenticationProfiles_GetAuthenticationProfileByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities": {
+      "get": {
+        "operationId": "DeviceCapabilities_List",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "List capabilities for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List capabilities for a device": {
+            "$ref": "./examples/DeviceCapabilities_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities/{capabilityName}": {
+      "get": {
+        "operationId": "DeviceCapabilities_Get",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "Get a device capability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device capability": {
+            "$ref": "./examples/DeviceCapabilities_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceCapabilities_CreateOrReplace",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "Create or replace a device capability.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a device capability": {
+            "$ref": "./examples/DeviceCapabilities_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "DeviceCapabilities_Update",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "Update a device capability.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceCapabilityCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a device capability": {
+            "$ref": "./examples/DeviceCapabilities_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeviceCapabilities_Delete",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a device capability": {
+            "$ref": "./examples/DeviceCapabilities_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/capabilities:getCapabilityByUuid": {
+      "post": {
+        "operationId": "DeviceCapabilities_GetCapabilityByUuid",
+        "tags": [
+          "Device Capabilities"
+        ],
+        "description": "Look up a capability by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetCapabilityByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a capability by its UUID": {
+            "$ref": "./examples/DeviceCapabilities_GetCapabilityByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/states": {
+      "get": {
+        "operationId": "DeviceStates_List",
+        "tags": [
+          "Device States"
+        ],
+        "description": "List device states for a device.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedDeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List states for a device": {
+            "$ref": "./examples/DeviceStates_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices/{deviceName}/states/{stateName}": {
+      "get": {
+        "operationId": "DeviceStates_Get",
+        "tags": [
+          "Device States"
+        ],
+        "description": "Get a device state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stateName",
+            "in": "path",
+            "description": "The name of the device state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a device state": {
+            "$ref": "./examples/DeviceStates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DeviceStates_CreateOrReplace",
+        "tags": [
+          "Device States"
+        ],
+        "description": "Create or replace a device state.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stateName",
+            "in": "path",
+            "description": "The name of the device state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or replace a device state": {
+            "$ref": "./examples/DeviceStates_CreateOrReplace.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DeviceStates_Update",
+        "tags": [
+          "Device States"
+        ],
+        "description": "Update a device state.",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceName",
+            "in": "path",
+            "description": "The name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stateName",
+            "in": "path",
+            "description": "The name of the device state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "DeviceStateName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The default state of a device."
+                }
+              ]
+            }
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The resource instance.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceStateCreateOrUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DeviceState"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a device state": {
+            "$ref": "./examples/DeviceStates_Update.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:getDeviceByExternalId": {
+      "post": {
+        "operationId": "Devices_GetDeviceByExternalId",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Look up a device by its external identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetDeviceByExternalIdRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device by its external ID": {
+            "$ref": "./examples/Devices_GetDeviceByExternalId.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:getDeviceByUuid": {
+      "post": {
+        "operationId": "Devices_GetDeviceByUuid",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Look up a device by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetDeviceByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a device by its UUID": {
+            "$ref": "./examples/Devices_GetDeviceByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:provision": {
+      "post": {
+        "operationId": "Devices_Provision",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Provision a device in a namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "mode",
+            "in": "query",
+            "description": "Controls which operations ADR performs. Defaults to full when omitted.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "full",
+              "registryOnly"
+            ],
+            "x-ms-enum": {
+              "name": "ProvisionMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Full",
+                  "value": "full",
+                  "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+                },
+                {
+                  "name": "RegistryOnly",
+                  "value": "registryOnly",
+                  "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/LongRunningOperationIdHeader"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProvisionDeviceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ProvisionDeviceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Provision a device from IoT Hub (registry-only mode, X509 Hub-uploaded CA)": {
+            "$ref": "./examples/Devices_Provision_IotHubSource.json"
+          },
+          "Provision a device in a namespace": {
+            "$ref": "./examples/Devices_Provision.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:query": {
+      "post": {
+        "operationId": "Devices_Query",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Query devices in a namespace using a query expression.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryDevicesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query devices in a namespace": {
+            "$ref": "./examples/Devices_Query.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/generateReportResults/{operationId}": {
+      "get": {
+        "operationId": "Namespaces_GetGenerateReportResult",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get the result of a `:generateReport` operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GenerateReportResult"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a generate-report operation (group best updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupBestUpdates.json"
+          },
+          "Get the result of a generate-report operation (group installable updates)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult_GroupInstallableUpdates.json"
+          },
+          "Get the result of a generate-report operation (namespace update compliance)": {
+            "$ref": "./examples/Namespaces_GetGenerateReportResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/groups:getGroupByUuid": {
+      "post": {
+        "operationId": "Groups_GetGroupByUuid",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Look up a group by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetGroupByUuidRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Look up a group by its UUID": {
+            "$ref": "./examples/Groups_GetGroupByUuid.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/groups:getGroupsForDevice": {
+      "post": {
+        "operationId": "Groups_GetGroupsForDevice",
+        "tags": [
+          "Groups"
+        ],
+        "description": "Returns the groups that a device belongs to.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/GetGroupsForDeviceRequest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GetGroupsForDeviceResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get group memberships for a device": {
+            "$ref": "./examples/Groups_GetGroupsForDevice.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/operations/{operationId}": {
+      "get": {
+        "operationId": "Operations_Get",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Get the status of a long-running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the status of a long-running operation": {
+            "$ref": "./examples/Operations_Get.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/provisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetProvisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-provisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ProvisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-provisioning operation": {
+            "$ref": "./examples/Devices_GetProvisionDeviceResult.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/reprovisionDeviceResults/{operationId}": {
+      "get": {
+        "operationId": "Devices_GetReprovisionDeviceResult",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Get the result of a device-reprovisioning operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The unique ID of the operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceResultStatusMonitor"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the result of a device-reprovisioning operation": {
+            "$ref": "./examples/Devices_GetReprovisionDeviceResult.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AgentInfo": {
+      "type": "object",
+      "description": "Information reported by the device update agent.",
+      "properties": {
+        "compatibilityProperties": {
+          "type": "object",
+          "description": "Properties used to determine compatibility with available updates.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The agent profile identifier."
+        },
+        "agentSdkVersion": {
+          "type": "string",
+          "description": "The version of the agent SDK in use on the device."
+        }
+      }
+    },
+    "AuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/AuthenticationType",
+          "description": "The authentication type."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "AuthenticationType": {
+      "type": "string",
+      "description": "The authentication type for IoT Hub.",
+      "enum": [
+        "SymmetricKey",
+        "CertificateAuthority",
+        "SelfSignedX509Certificate",
+        "X509HubUploadedCertificateAuthority"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SymmetricKey",
+            "value": "SymmetricKey",
+            "description": "Symmetric key authentication."
+          },
+          {
+            "name": "CertificateAuthority",
+            "value": "CertificateAuthority",
+            "description": "Certificate authority authentication.\n      TODO: Change to \"X509Certificate\""
+          },
+          {
+            "name": "SelfSignedX509Certificate",
+            "value": "SelfSignedX509Certificate",
+            "description": "Self-signed X.509 certificate authentication."
+          },
+          {
+            "name": "X509HubUploadedCertificateAuthority",
+            "value": "X509HubUploadedCertificateAuthority",
+            "description": "X.509 certificate authority uploaded to IoT Hub. No additional credential fields required."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "BestUpdate": {
+      "type": "object",
+      "description": "A best-available update for a subset of devices in the group.",
+      "properties": {
+        "targetDevices": {
+          "$ref": "#/definitions/TargetDevices",
+          "description": "The devices that this update targets.",
+          "readOnly": true
+        },
+        "updateId": {
+          "$ref": "#/definitions/UpdateId",
+          "description": "The identifier of the best-available update for the targeted devices.",
+          "readOnly": true
+        },
+        "devicesNotOnBestUpdateCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of devices in the group that target this update but are not yet running it.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetDevices",
+        "updateId",
+        "devicesNotOnBestUpdateCount"
+      ]
+    },
+    "CapabilityProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a device capability.",
+      "enum": [
+        "Linking",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Linking",
+            "value": "Linking",
+            "description": "The capability is being linked."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The capability has been successfully provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The capability provisioning has failed."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The capability is being deleted."
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "The capability has been deleted."
+          }
+        ]
+      }
+    },
+    "CapabilityType": {
+      "type": "string",
+      "description": "The type of a device capability.",
+      "enum": [
+        "IoTHub",
+        "Update"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IoTHub",
+            "value": "IoTHub",
+            "description": "IoT Hub connection."
+          },
+          {
+            "name": "Update",
+            "value": "Update",
+            "description": "Device Update connection."
+          }
+        ]
+      }
+    },
+    "CertificateAuthorityAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentials",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        }
+      },
+      "required": [
+        "certificateAuthority"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "CertificateAuthority"
+    },
+    "CertificateAuthorityAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "certificateAuthority": {
+          "$ref": "#/definitions/CertificateAuthorityCredentialsCreateOrUpdate",
+          "description": "Certificate authority credentials. Required when type is CertificateAuthority."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "CertificateAuthority"
+    },
+    "CertificateAuthorityCredentials": {
+      "type": "object",
+      "description": "Certificate authority credentials for device provisioning.",
+      "properties": {
+        "adrCertificatePolicyResourceId": {
+          "type": "string",
+          "description": "ADR certificate policy resource ID."
+        }
+      },
+      "required": [
+        "adrCertificatePolicyResourceId"
+      ]
+    },
+    "CertificateAuthorityCredentialsCreateOrUpdate": {
+      "type": "object",
+      "description": "Certificate authority credentials for device provisioning.",
+      "properties": {
+        "adrCertificatePolicyResourceId": {
+          "type": "string",
+          "description": "ADR certificate policy resource ID."
+        }
+      }
+    },
+    "CertificateIssuanceRequest": {
+      "type": "object",
+      "description": "Certificate issuance request.",
+      "properties": {
+        "csr": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64-encoded DER certificate signing request (CSR) without PEM\nheaders and footers. Format of the CSR is in PKCS 10. The CN field of\nthe CSR must be set to the device's external device id (registrationId)."
+        }
+      },
+      "required": [
+        "csr"
+      ]
+    },
+    "CertificateIssuanceResult": {
+      "type": "object",
+      "description": "Certificate issuance result.",
+      "properties": {
+        "issuedCertificateChain": {
+          "$ref": "#/definitions/IssuedCertificateChain",
+          "description": "The full chain of the issued certificate.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "issuedCertificateChain"
+      ]
+    },
+    "DataPlaneResourceBase": {
+      "type": "object",
+      "description": "Resource metadata properties (etag).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "Device": {
+      "type": "object",
+      "description": "A device resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "The resource-specific properties for this device."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "deviceUuid": {
+          "type": "string",
+          "description": "The UUID of the device that this attribute belongs to. Used to verify that the device attribute\nmatches the reverse lookup document and is not for an older device that was deleted and\nre-created with the same `deviceName`.",
+          "readOnly": true
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "type",
+        "name",
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceAttributeName",
+          "description": "The name of the device attribute.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "reportedBy": {
+          "$ref": "#/definitions/DeviceAttributeReportedBy",
+          "description": "The cloud service that reports this device attribute."
+        }
+      },
+      "discriminator": "reportedBy",
+      "required": [
+        "reportedBy"
+      ]
+    },
+    "DeviceAttributeName": {
+      "type": "string",
+      "description": "Well-known device attribute names.",
+      "enum": [
+        "update"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "update",
+            "value": "update",
+            "description": "The update attribute of a device."
+          }
+        ]
+      }
+    },
+    "DeviceAttributeReportedBy": {
+      "type": "string",
+      "description": "The cloud service that reports a device attribute.",
+      "enum": [
+        "Microsoft.DeviceUpdate",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceAttributeReportedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU",
+            "value": "Microsoft.DeviceUpdate",
+            "description": "Reported by Azure Device Update."
+          },
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Reported by a customer."
+          }
+        ]
+      }
+    },
+    "DeviceAuthenticationProfile": {
+      "type": "object",
+      "description": "A device authentication resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Authentication information for the device."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DeviceAuthenticationProfileCreateOrUpdate": {
+      "type": "object",
+      "description": "A device authentication resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate",
+          "description": "Authentication information for the device."
+        }
+      }
+    },
+    "DeviceCapability": {
+      "type": "object",
+      "description": "A device capability resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceCapabilityProperties",
+          "description": "The resource-specific properties for this capability."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DeviceCapabilityActivationState": {
+      "type": "string",
+      "description": "Whether a capability is enabled or disabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceCapabilityActivationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The capability is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The capability is disabled."
+          }
+        ]
+      }
+    },
+    "DeviceCapabilityCreateOrUpdate": {
+      "type": "object",
+      "description": "A device capability resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate",
+          "description": "The resource-specific properties for this capability."
+        }
+      }
+    },
+    "DeviceCapabilityProperties": {
+      "type": "object",
+      "description": "Properties of a device capability resource.",
+      "properties": {
+        "capabilityType": {
+          "$ref": "#/definitions/CapabilityType",
+          "description": "The type of this device capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "capabilityProvider": {
+          "type": "string",
+          "description": "The name given to the capability provider on the namespace resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/CapabilityProvisioningState",
+          "description": "The provisioning status of this capability.",
+          "readOnly": true
+        },
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
+        }
+      },
+      "discriminator": "capabilityType",
+      "required": [
+        "capabilityType",
+        "capabilityProvider",
+        "activationState"
+      ]
+    },
+    "DeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Properties of a device capability resource.",
+      "properties": {
+        "capabilityType": {
+          "$ref": "#/definitions/CapabilityType",
+          "description": "The type of this device capability resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "capabilityProvider": {
+          "type": "string",
+          "description": "The name given to the capability provider on the namespace resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "activationState": {
+          "$ref": "#/definitions/DeviceCapabilityActivationState",
+          "description": "Whether a capability is enabled or disabled."
+        }
+      },
+      "discriminator": "capabilityType",
+      "required": [
+        "capabilityType"
+      ]
+    },
+    "DeviceProperties": {
+      "type": "object",
+      "description": "Properties of a device resource.",
+      "properties": {
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "The software revision for this device."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "DevicePropertiesBase": {
+      "type": "object",
+      "description": "Common device properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "manufacturer": {
+          "type": "string",
+          "description": "Device manufacturer."
+        },
+        "model": {
+          "type": "string",
+          "description": "Device model."
+        },
+        "softwareRevision": {
+          "type": "string",
+          "description": "The software revision for this device."
+        }
+      }
+    },
+    "DeviceResponse": {
+      "type": "object",
+      "description": "Response model for device lookup POST actions (excludes deviceName key).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceProperties",
+          "description": "The resource-specific properties for this device."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "DeviceState": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "properties"
+      ]
+    },
+    "DeviceStateCreateOrUpdate": {
+      "type": "object",
+      "description": "A device state resource that is a device twin.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "$ref": "#/definitions/DeviceStateName",
+          "description": "The name of the device state.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/DeviceStateProperties",
+          "description": "The device twin properties."
+        }
+      }
+    },
+    "DeviceStateName": {
+      "type": "string",
+      "description": "Well-known device state names.",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceStateName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "default",
+            "value": "default",
+            "description": "The default state of a device."
+          }
+        ]
+      }
+    },
+    "DeviceStateProperties": {
+      "type": "object",
+      "description": "Twin properties of a device state.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired state values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reported": {
+          "type": "object",
+          "description": "The reported state values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeviceTwin": {
+      "type": "object",
+      "description": "Initial device twin configuration to apply during provisioning.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Device twin tags.",
+          "additionalProperties": {}
+        },
+        "properties": {
+          "$ref": "#/definitions/TwinProperties",
+          "description": "The device twin properties."
+        }
+      }
+    },
+    "DeviceTwinMode": {
+      "type": "string",
+      "description": "The mode controlling how the device twin is populated on the new IoT Hub during reprovisioning.",
+      "enum": [
+        "Migrate",
+        "Replace"
+      ],
+      "x-ms-enum": {
+        "name": "DeviceTwinMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Migrate",
+            "value": "Migrate",
+            "description": "Copy tags and desired properties from the old hub to the new hub."
+          },
+          {
+            "name": "Replace",
+            "value": "Replace",
+            "description": "Set tags and desired properties on the new hub to the caller-supplied values. Use with empty objects to reset the twin."
+          }
+        ]
+      }
+    },
+    "DeviceUpdateId": {
+      "type": "object",
+      "description": "A unique identifier for an update referenced by the device update agent.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "DeviceUpdateIdCreateOrUpdate": {
+      "type": "object",
+      "description": "A unique identifier for an update referenced by the device update agent.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider of the update."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update."
+        }
+      }
+    },
+    "GenerateGroupBestUpdatesComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
+    "GenerateGroupInstallableUpdatesReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
+    },
+    "GenerateNamespaceUpdateComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a NamespaceUpdateCompliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GenerateReportRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
+    "GenerateReportRequest": {
+      "type": "object",
+      "description": "Request body for generating a report.",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report to generate."
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The target of this report (e.g. group resource)."
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
+      ]
+    },
+    "GenerateReportResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:generateReport` action on a namespace.\nThe typed `result` is the produced `Report` (polymorphic over `reportType`).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/Report",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "GetDeviceAuthenticationProfileKeysResponse": {
+      "type": "object",
+      "description": "Response body for the getKeys action.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Plaintext symmetric keys for the device authentication profile."
+        }
+      },
+      "required": [
+        "symmetricKey"
+      ]
+    },
+    "GetGroupsForDeviceResult": {
+      "type": "object",
+      "description": "Result of querying group memberships for a device.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "groups": {
+          "type": "array",
+          "description": "The groups that this device belongs to.",
+          "items": {
+            "$ref": "#/definitions/GroupReference"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "groups"
+      ]
+    },
+    "Group": {
+      "type": "object",
+      "description": "A group resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The UUID of this capability resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The entity tag for the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/GroupProperties",
+          "description": "The resource-specific properties for this group."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "GroupBestUpdatesComplianceReport": {
+      "type": "object",
+      "description": "Result of a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that this report was generated against.",
+          "readOnly": true
+        },
+        "updateCompliance": {
+          "$ref": "#/definitions/GroupUpdateCompliance",
+          "description": "Group-level update compliance counters.",
+          "readOnly": true
+        },
+        "bestUpdates": {
+          "type": "array",
+          "description": "The best-available updates for devices in the group. May be empty.",
+          "items": {
+            "$ref": "#/definitions/BestUpdate"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "reportTarget",
+        "updateCompliance",
+        "bestUpdates"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
+    "GroupInstallableUpdatesReport": {
+      "type": "object",
+      "description": "Result of a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that this report was generated against.",
+          "readOnly": true
+        },
+        "installableUpdatesAndTargetDevices": {
+          "type": "array",
+          "description": "Installable updates grouped by the devices they target. May be empty.",
+          "items": {
+            "$ref": "#/definitions/InstallableUpdatesForTargetDevices"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "reportTarget",
+        "installableUpdatesAndTargetDevices"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
+    },
+    "GroupMembershipState": {
+      "type": "string",
+      "description": "The membership state of a group.",
+      "enum": [
+        "Creating",
+        "RefreshingMembers",
+        "Ready"
+      ],
+      "x-ms-enum": {
+        "name": "GroupMembershipState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The group is being created."
+          },
+          {
+            "name": "RefreshingMembers",
+            "value": "RefreshingMembers",
+            "description": "The group is refreshing its members."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The group is ready."
+          }
+        ]
+      }
+    },
+    "GroupProperties": {
+      "type": "object",
+      "description": "Properties of a group resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the group."
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "The type of group that determines what kind of resources can be members.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastMembershipRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating the last time the group membership was refreshed.",
+          "readOnly": true
+        },
+        "membershipState": {
+          "$ref": "#/definitions/GroupMembershipState",
+          "description": "The membership state of the group.",
+          "readOnly": true
+        },
+        "query": {
+          "type": "string",
+          "description": "The query string used to determine group membership.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "groupType",
+        "query"
+      ]
+    },
+    "GroupPropertiesBase": {
+      "type": "object",
+      "description": "Common group properties shared across data-plane and control-plane.",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Globally unique, immutable, non-reusable ID.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-readable display name for the group."
+        },
+        "groupType": {
+          "$ref": "#/definitions/GroupType",
+          "description": "The type of group that determines what kind of resources can be members.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "lastMembershipRefreshTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A timestamp indicating the last time the group membership was refreshed.",
+          "readOnly": true
+        },
+        "membershipState": {
+          "$ref": "#/definitions/GroupMembershipState",
+          "description": "The membership state of the group.",
+          "readOnly": true
+        },
+        "query": {
+          "type": "string",
+          "description": "The query string used to determine group membership.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "groupType",
+        "query"
+      ]
+    },
+    "GroupReference": {
+      "type": "object",
+      "description": "A reference to a group that a device belongs to.",
+      "properties": {
+        "groupUuid": {
+          "type": "string",
+          "description": "The unique identifier of the group."
+        }
+      },
+      "required": [
+        "groupUuid"
+      ]
+    },
+    "GroupType": {
+      "type": "string",
+      "description": "The type of group.",
+      "enum": [
+        "Device"
+      ],
+      "x-ms-enum": {
+        "name": "GroupType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Device",
+            "value": "Device",
+            "description": "A group of devices."
+          }
+        ]
+      }
+    },
+    "GroupUpdateCompliance": {
+      "type": "object",
+      "description": "Group-level update compliance counters.",
+      "properties": {
+        "totalUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the group that are eligible for updates.",
+          "readOnly": true
+        },
+        "onBestUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices that are currently on the best available update.",
+          "readOnly": true
+        },
+        "bestUpdateAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices for which a better update is available but not yet applied.",
+          "readOnly": true
+        },
+        "devicesInProgressOnBestUpdate": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices currently being updated to the best available update.",
+          "readOnly": true
+        },
+        "totalNotUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the group that are not eligible for updates.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalUpdateableDeviceCount",
+        "onBestUpdateDeviceCount",
+        "bestUpdateAvailableDeviceCount",
+        "devicesInProgressOnBestUpdate",
+        "totalNotUpdateableDeviceCount"
+      ]
+    },
+    "InstallResult": {
+      "type": "object",
+      "description": "The terminal result of an update attempt as reported by the device update agent.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/InstallResultOutcome",
+          "description": "Authoritative terminal outcome of the update attempt."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/InstallResultFailureOrigin",
+          "description": "Best-effort hint identifying which subsystem produced the failure. Value is `NOT_APPLICABLE` for successful install."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Result code representing an install result. 0 or negative failures designate failures, positive values indicate success."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Comma-separated list of agent ExtendedResultCode (ERC) values for diagnostic correlation. Each value is the unsigned hexadecimal representation of an `int32`.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable result details.",
+          "maxLength": 1024
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Per-step results of the steps defined by the manifest's `instructions.steps`.",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/UpdateStepResult"
+          }
+        }
+      },
+      "required": [
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ]
+    },
+    "InstallResultCreateOrUpdate": {
+      "type": "object",
+      "description": "The terminal result of an update attempt as reported by the device update agent.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/InstallResultOutcome",
+          "description": "Authoritative terminal outcome of the update attempt."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/InstallResultFailureOrigin",
+          "description": "Best-effort hint identifying which subsystem produced the failure. Value is `NOT_APPLICABLE` for successful install."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Result code representing an install result. 0 or negative failures designate failures, positive values indicate success."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Comma-separated list of agent ExtendedResultCode (ERC) values for diagnostic correlation. Each value is the unsigned hexadecimal representation of an `int32`.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable result details.",
+          "maxLength": 1024
+        },
+        "stepResults": {
+          "type": "array",
+          "description": "Per-step results of the steps defined by the manifest's `instructions.steps`.",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/definitions/UpdateStepResult"
+          }
+        }
+      }
+    },
+    "InstallResultFailureOrigin": {
+      "type": "string",
+      "description": "Best-effort hint identifying which subsystem produced an install failure.",
+      "enum": [
+        "ADU_CLOUD_SERVICE",
+        "ADU_MANAGED_RESOURCE",
+        "AGENT_CORE",
+        "AGENT_EXTENSION",
+        "AGENT_DEPENDENCY",
+        "DEVICE",
+        "OTHER",
+        "NOT_APPLICABLE"
+      ],
+      "x-ms-enum": {
+        "name": "InstallResultFailureOrigin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ADU_CLOUD_SERVICE",
+            "value": "ADU_CLOUD_SERVICE",
+            "description": "Failure communicating with the ADU cloud service."
+          },
+          {
+            "name": "ADU_MANAGED_RESOURCE",
+            "value": "ADU_MANAGED_RESOURCE",
+            "description": "Failure related to ADU managed resources. (e.g. CDN download failure)"
+          },
+          {
+            "name": "AGENT_CORE",
+            "value": "AGENT_CORE",
+            "description": "Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities)."
+          },
+          {
+            "name": "AGENT_EXTENSION",
+            "value": "AGENT_EXTENSION",
+            "description": "Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly."
+          },
+          {
+            "name": "AGENT_DEPENDENCY",
+            "value": "AGENT_DEPENDENCY",
+            "description": "Failure in an agent dependency (e.g. local identity service)."
+          },
+          {
+            "name": "DEVICE",
+            "value": "DEVICE",
+            "description": "Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions."
+          },
+          {
+            "name": "OTHER",
+            "value": "OTHER",
+            "description": "Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin."
+          },
+          {
+            "name": "NOT_APPLICABLE",
+            "value": "NOT_APPLICABLE",
+            "description": "This failure origin must be used for non-failed result outcomes."
+          }
+        ]
+      }
+    },
+    "InstallResultOutcome": {
+      "type": "string",
+      "description": "Authoritative terminal outcome of an update attempt or step, as reported by the device update agent.",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELED",
+        "SKIPPED"
+      ],
+      "x-ms-enum": {
+        "name": "InstallResultOutcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SUCCEEDED",
+            "value": "SUCCEEDED",
+            "description": "The step or workflow completed successfully."
+          },
+          {
+            "name": "FAILED",
+            "value": "FAILED",
+            "description": "The step or workflow failed."
+          },
+          {
+            "name": "CANCELED",
+            "value": "CANCELED",
+            "description": "The step or workflow was canceled before reaching a terminal state."
+          },
+          {
+            "name": "SKIPPED",
+            "value": "SKIPPED",
+            "description": "The step was skipped because it was not required."
+          }
+        ]
+      }
+    },
+    "InstallableUpdatesForTargetDevices": {
+      "type": "object",
+      "description": "The set of installable updates available for a class of target devices in the group.",
+      "properties": {
+        "targetDevices": {
+          "$ref": "#/definitions/TargetDevices",
+          "description": "The devices that this set of updates targets.",
+          "readOnly": true
+        },
+        "installableUpdates": {
+          "type": "array",
+          "description": "The updates that can be installed on the targeted devices.",
+          "items": {
+            "$ref": "#/definitions/UpdateId"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "targetDevices",
+        "installableUpdates"
+      ]
+    },
+    "IotHubDeviceCapabilityProperties": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "IoT Hub's authentication profile."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The IoT Hub's endpoint."
+        }
+      },
+      "required": [
+        "authenticationProfileResourceId",
+        "endpoint"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
+    },
+    "IotHubDeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "The device capability properties for an IoTHub capability",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "IoT Hub's authentication profile."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/IotHubEndpointCreateOrUpdate",
+          "description": "The IoT Hub's endpoint."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "IoTHub"
+    },
+    "IotHubEndpoint": {
+      "type": "object",
+      "description": "IoT Hub endpoint target for device provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
+        }
+      },
+      "required": [
+        "name",
+        "address"
+      ]
+    },
+    "IotHubEndpointCreateOrUpdate": {
+      "type": "object",
+      "description": "IoT Hub endpoint target for device provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net)."
+        }
+      }
+    },
+    "IssueCertResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:issueCert` action on a device authentication profile.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/CertificateIssuanceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "IssuedCertificateChain": {
+      "type": "array",
+      "description": "The full chain of the issued certificate, including any intermediate\ncertification authorities (ICAs) and the root certification authority\n(CA). The first certificate in the list is the issued leaf certificate.\nEach subsequent certificate is the issuer of the previous.",
+      "items": {
+        "type": "string",
+        "format": "byte"
+      }
+    },
+    "LongRunningOperationIdResponseHeader": {
+      "type": "object",
+      "description": "Response `Operation-Id` header used by long-running action operations\n(POST `:verb` endpoints)."
+    },
+    "Namespace": {
+      "type": "object",
+      "description": "A device registry namespace.",
+      "properties": {
+        "namespaceUuid": {
+          "type": "string",
+          "description": "The unique identifier of the namespace.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "namespaceUuid"
+      ]
+    },
+    "NamespaceUpdateComplianceReport": {
+      "type": "object",
+      "description": "Result of a NamespaceUpdateCompliance report.",
+      "properties": {
+        "totalUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the namespace that are eligible for updates.",
+          "readOnly": true
+        },
+        "onLatestUpdateDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices that are currently on the latest available update.",
+          "readOnly": true
+        },
+        "newUpdatesAvailableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices for which a newer update is available but not yet applied.",
+          "readOnly": true
+        },
+        "updatesInProgressDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of updateable devices currently being updated to the latest available update.",
+          "readOnly": true
+        },
+        "totalNotUpdateableDeviceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of devices in the namespace that are not eligible for updates.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "totalUpdateableDeviceCount",
+        "onLatestUpdateDeviceCount",
+        "newUpdatesAvailableDeviceCount",
+        "updatesInProgressDeviceCount",
+        "totalNotUpdateableDeviceCount"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
+    "Operation": {
+      "type": "object",
+      "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "PagedDeviceAttribute": {
+      "type": "object",
+      "description": "Paged collection of DeviceAttribute items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceAttribute items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceAttribute"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceAuthenticationProfile": {
+      "type": "object",
+      "description": "Paged collection of DeviceAuthenticationProfile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceAuthenticationProfile items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceAuthenticationProfile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceCapability": {
+      "type": "object",
+      "description": "Paged collection of DeviceCapability items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedDeviceState": {
+      "type": "object",
+      "description": "Paged collection of DeviceState items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The DeviceState items on this page",
+          "items": {
+            "$ref": "#/definitions/DeviceState"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ProvisionDeviceRequest": {
+      "type": "object",
+      "description": "Request body for the provision device endpoint.",
+      "properties": {
+        "iotHubDeviceId": {
+          "type": "string",
+          "description": "The device identity in IoT Hub."
+        },
+        "targetEndpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The service endpoint identifier as returned by the GetNamespace API."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Operational authentication configuration."
+        },
+        "deviceTwin": {
+          "$ref": "#/definitions/DeviceTwin",
+          "description": "Initial device twin configuration to apply during provisioning."
+        }
+      },
+      "required": [
+        "iotHubDeviceId",
+        "targetEndpoint",
+        "authentication"
+      ]
+    },
+    "ProvisionDeviceResult": {
+      "type": "object",
+      "description": "Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against.",
+      "properties": {
+        "device": {
+          "$ref": "#/definitions/ProvisionedDeviceRef",
+          "description": "Reference to the provisioned Device resource."
+        },
+        "capability": {
+          "$ref": "#/definitions/ProvisionedResourceRef",
+          "description": "Reference to the provisioned Capability child resource."
+        },
+        "authProfile": {
+          "$ref": "#/definitions/ProvisionedAuthProfileRef",
+          "description": "Reference to the provisioned AuthenticationProfile child resource."
+        },
+        "endpoint": {
+          "$ref": "#/definitions/ProvisionedEndpointRef",
+          "description": "Reference to the messaging endpoint the device was provisioned against."
+        }
+      },
+      "required": [
+        "device",
+        "capability",
+        "authProfile",
+        "endpoint"
+      ]
+    },
+    "ProvisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:provision` action on devices in a namespace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ProvisionMode": {
+      "type": "string",
+      "description": "Controls which operations ADR performs during provisioning.",
+      "enum": [
+        "full",
+        "registryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "full",
+            "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+          },
+          {
+            "name": "RegistryOnly",
+            "value": "registryOnly",
+            "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+          }
+        ]
+      }
+    },
+    "ProvisionedAuthProfileRef": {
+      "type": "object",
+      "description": "Reference to a provisioned AuthenticationProfile resource, including the id of the underlying credential.",
+      "properties": {
+        "credentialId": {
+          "type": "string",
+          "description": "GUID identifying the underlying credential. Only set for CertificateAuthority authentication; omitted otherwise."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceRef"
+        }
+      ]
+    },
+    "ProvisionedDeviceRef": {
+      "type": "object",
+      "description": "Reference to a provisioned Device resource.",
+      "properties": {
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The IoT Hub device id (equal to the originating request's iotHubDeviceId)."
+        }
+      },
+      "required": [
+        "externalDeviceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceRef"
+        }
+      ]
+    },
+    "ProvisionedEndpointRef": {
+      "type": "object",
+      "description": "Reference to the messaging endpoint the device was provisioned against.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name of the target endpoint."
+        },
+        "address": {
+          "type": "string",
+          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net), echoed from the originating request."
+        }
+      },
+      "required": [
+        "name",
+        "address"
+      ]
+    },
+    "ProvisionedResourceRef": {
+      "type": "object",
+      "description": "Reference to a provisioned RPaaS resource: its ARM name, system-assigned UUID, and the etag observed at the final write performed during provisioning.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The ARM resource name."
+        },
+        "uuid": {
+          "type": "string",
+          "description": "The system-assigned UUID of the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag observed at the final write performed by the orchestration against this resource."
+        }
+      },
+      "required": [
+        "name",
+        "uuid",
+        "etag"
+      ]
+    },
+    "QueryDevicesRequest": {
+      "type": "object",
+      "description": "Request body for querying devices in a namespace.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The query expression to evaluate against devices in the namespace."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of results to return in this page."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Opaque continuation token returned by a previous query response."
+        }
+      },
+      "required": [
+        "query"
+      ]
+    },
+    "QueryDevicesResponse": {
+      "type": "object",
+      "description": "Response body for a device query: a page of projected results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The page of query results. Each element is a projected JSON document whose shape is determined by the query.",
+          "items": {
+            "type": "object",
+            "additionalProperties": {}
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for retrieving the next page of results. Present only when more results exist."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Report": {
+      "type": "object",
+      "description": "Base report type",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report.",
+          "readOnly": true
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The scope the report was generated against.",
+          "readOnly": true
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
+      ]
+    },
+    "ReportType": {
+      "type": "string",
+      "description": "The type of report.",
+      "enum": [
+        "NamespaceUpdateComplianceReport",
+        "GroupBestUpdatesComplianceReport",
+        "GroupInstallableUpdatesReport"
+      ],
+      "x-ms-enum": {
+        "name": "ReportType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NamespaceUpdateComplianceReport",
+            "value": "NamespaceUpdateComplianceReport",
+            "description": "Compliance report describing the updating state of devices in the namespace."
+          },
+          {
+            "name": "GroupBestUpdatesComplianceReport",
+            "value": "GroupBestUpdatesComplianceReport",
+            "description": "Report describing the best available updates and update compliance for the devices within a group."
+          },
+          {
+            "name": "GroupInstallableUpdatesReport",
+            "value": "GroupInstallableUpdatesReport",
+            "description": "Report listing the installable updates for the devices within a group."
+          }
+        ]
+      }
+    },
+    "ReprovisionDeviceRequest": {
+      "type": "object",
+      "description": "Request body for the reprovision device endpoint.",
+      "properties": {
+        "targetEndpoint": {
+          "$ref": "#/definitions/IotHubEndpoint",
+          "description": "The target IoT Hub endpoint (the new hub) to move the device to."
+        },
+        "authentication": {
+          "$ref": "#/definitions/AuthenticationProfileProperties",
+          "description": "Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success."
+        },
+        "deviceTwin": {
+          "$ref": "#/definitions/ReprovisionDeviceTwin",
+          "description": "Optional device twin configuration controlling how the new hub's twin is populated. If omitted, the new hub starts with an empty twin."
+        },
+        "deviceUuid": {
+          "type": "string",
+          "description": "Optional device UUID guard. If supplied and does not match the device's stored UUID, the request is rejected."
+        }
+      },
+      "required": [
+        "targetEndpoint"
+      ]
+    },
+    "ReprovisionDeviceResultStatusMonitor": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:reprovision` action on a device in a namespace.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "result": {
+          "$ref": "#/definitions/ProvisionDeviceResult",
+          "description": "The result of the operation. Available once `status` is `Succeeded`.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "ReprovisionDeviceTwin": {
+      "type": "object",
+      "description": "Device twin configuration for reprovisioning with an explicit mode.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/DeviceTwinMode",
+          "description": "How to populate the device twin on the new IoT Hub."
+        }
+      },
+      "required": [
+        "mode"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceTwin"
+        }
+      ]
+    },
+    "RevokeCertsResult": {
+      "type": "object",
+      "description": "Status monitor for the long-running `:revokeCerts` action on a device authentication\nprofile. The operation has no payload to return on success; `status` carries the\noutcome and `error` carries failure details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique ID of the operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error object that describes the error when status is \"Failed\".",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation was started (UTC).",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the operation reached a terminal state (UTC).",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    },
+    "SelfSignedThumbprints": {
+      "type": "object",
+      "description": "Self-signed X.509 certificate thumbprints for device authentication.",
+      "properties": {
+        "primaryThumbprint": {
+          "type": "string",
+          "description": "Primary certificate thumbprint."
+        },
+        "secondaryThumbprint": {
+          "type": "string",
+          "description": "Secondary certificate thumbprint."
+        }
+      },
+      "required": [
+        "primaryThumbprint",
+        "secondaryThumbprint"
+      ]
+    },
+    "SelfSignedThumbprintsCreateOrUpdate": {
+      "type": "object",
+      "description": "Self-signed X.509 certificate thumbprints for device authentication.",
+      "properties": {
+        "primaryThumbprint": {
+          "type": "string",
+          "description": "Primary certificate thumbprint."
+        },
+        "secondaryThumbprint": {
+          "type": "string",
+          "description": "Secondary certificate thumbprint."
+        }
+      }
+    },
+    "SelfSignedX509CertificateAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprints",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "required": [
+        "selfSignedThumbprints"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SelfSignedX509Certificate"
+    },
+    "SelfSignedX509CertificateAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "selfSignedThumbprints": {
+          "$ref": "#/definitions/SelfSignedThumbprintsCreateOrUpdate",
+          "description": "Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SelfSignedX509Certificate"
+    },
+    "SymmetricKeyAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentials",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        }
+      },
+      "required": [
+        "symmetricKey"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "SymmetricKey"
+    },
+    "SymmetricKeyAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication information for the device.",
+      "properties": {
+        "symmetricKey": {
+          "$ref": "#/definitions/SymmetricKeyCredentialsCreateOrUpdate",
+          "description": "Symmetric key details. Required when type is SymmetricKey."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "SymmetricKey"
+    },
+    "SymmetricKeyCredentials": {
+      "type": "object",
+      "description": "Symmetric key authentication details.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The primary symmetric key.",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The secondary symmetric key.",
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "primaryKey",
+        "secondaryKey"
+      ]
+    },
+    "SymmetricKeyCredentialsCreateOrUpdate": {
+      "type": "object",
+      "description": "Symmetric key authentication details.",
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The primary symmetric key.",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The secondary symmetric key.",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "TargetDevices": {
+      "type": "object",
+      "description": "Criteria selecting which devices an update targets.",
+      "properties": {
+        "compatProperties": {
+          "type": "object",
+          "description": "Free-form compatibility properties (e.g. manufacturer, model) used to match devices.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "agentProfile": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The agent profile that the targeted devices must implement.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "compatProperties",
+        "agentProfile"
+      ]
+    },
+    "TwinProperties": {
+      "type": "object",
+      "description": "Device twin desired properties.",
+      "properties": {
+        "desired": {
+          "type": "object",
+          "description": "The desired properties to set on the device twin.",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "UpdateDeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceAttributeProperties",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttribute"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
+    },
+    "UpdateDeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute reported by Azure Device Update.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpdateDeviceAttributePropertiesCreateOrUpdate",
+          "description": "Properties reported by Azure Device Update."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft.DeviceUpdate"
+    },
+    "UpdateDeviceAttributeProperties": {
+      "type": "object",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`"
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the update currently installed on the device."
+        },
+        "agentInfoEtag": {
+          "type": "string",
+          "description": "The entity tag for the reported `agentInfo`."
+        },
+        "agentInfo": {
+          "$ref": "#/definitions/AgentInfo",
+          "description": "Information reported by the device update agent."
+        },
+        "latestUpdateJobInfo": {
+          "$ref": "#/definitions/UpdateJobInfo",
+          "description": "Information about the most recent update job targeting this device."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "UpdateDeviceAttributePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Properties of the update device attribute, reported by the Azure Device Update agent.",
+      "properties": {
+        "schema": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL of the JSON Schema document describing the concrete shape of this property bag. Optional\nadvertisement so clients can validate the bag without out-of-band documentation. The service\ndoes not validate or dereference this field — any string is accepted. Suggested value:\n`https://raw.githubusercontent.com/Azure/azure-rest-api-specs/<commit-sha>/specification/deviceregistry/schemas/UpdateDeviceAttributeProperties.json`"
+        },
+        "deviceClassId": {
+          "type": "string",
+          "description": "The device class identifier, calculated by ADU from `agentInfo.compatibilityProperties` and `agentInfo.agentProfile`."
+        },
+        "installedUpdateId": {
+          "$ref": "#/definitions/DeviceUpdateIdCreateOrUpdate",
+          "description": "The identifier of the update currently installed on the device."
+        },
+        "agentInfoEtag": {
+          "type": "string",
+          "description": "The entity tag for the reported `agentInfo`."
+        },
+        "agentInfo": {
+          "$ref": "#/definitions/AgentInfo",
+          "description": "Information reported by the device update agent."
+        },
+        "latestUpdateJobInfo": {
+          "$ref": "#/definitions/UpdateJobInfoCreateOrUpdate",
+          "description": "Information about the most recent update job targeting this device."
+        }
+      },
+      "additionalProperties": {}
+    },
+    "UpdateDeviceCapabilityProperties": {
+      "type": "object",
+      "description": "The device capabilities properties for an update capability.",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "Update's authentication profile."
+        }
+      },
+      "required": [
+        "authenticationProfileResourceId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Update"
+    },
+    "UpdateDeviceCapabilityPropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "The device capabilities properties for an update capability.",
+      "properties": {
+        "authenticationProfileResourceId": {
+          "type": "string",
+          "description": "Update's authentication profile."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceCapabilityPropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "Update"
+    },
+    "UpdateId": {
+      "type": "object",
+      "description": "Identifies a specific update by provider, name, and version.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider that published the update.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the update.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the update.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
+      ]
+    },
+    "UpdateJobInfo": {
+      "type": "object",
+      "description": "Information about an update job targeting a device.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The identifier of the update job workflow."
+        },
+        "state": {
+          "$ref": "#/definitions/UpdateJobState",
+          "description": "The current state of the update job."
+        },
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the update being applied by the job."
+        },
+        "installResult": {
+          "$ref": "#/definitions/InstallResult",
+          "description": "The result of installing the update on the device, if available."
+        }
+      },
+      "required": [
+        "workflowId",
+        "state",
+        "updateId"
+      ]
+    },
+    "UpdateJobInfoCreateOrUpdate": {
+      "type": "object",
+      "description": "Information about an update job targeting a device.",
+      "properties": {
+        "workflowId": {
+          "type": "string",
+          "description": "The identifier of the update job workflow."
+        },
+        "state": {
+          "$ref": "#/definitions/UpdateJobState",
+          "description": "The current state of the update job."
+        },
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateIdCreateOrUpdate",
+          "description": "The identifier of the update being applied by the job."
+        },
+        "installResult": {
+          "$ref": "#/definitions/InstallResultCreateOrUpdate",
+          "description": "The result of installing the update on the device, if available."
+        }
+      }
+    },
+    "UpdateJobState": {
+      "type": "string",
+      "description": "The state of an update job on a device.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "InProgress",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "UpdateJobState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The update job completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The update job failed."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The update job is in progress."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The update job was canceled."
+          }
+        ]
+      }
+    },
+    "UpdateStepResult": {
+      "type": "object",
+      "description": "The terminal result of an individual installation step.",
+      "properties": {
+        "updateId": {
+          "$ref": "#/definitions/DeviceUpdateId",
+          "description": "The identifier of the leaf update worked on by this step. ADU resolves this from the manifest's `instructions.steps` (inline step → parent updateId; reference step → child updateId)."
+        },
+        "outcome": {
+          "$ref": "#/definitions/InstallResultOutcome",
+          "description": "Authoritative terminal outcome of this step."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/InstallResultFailureOrigin",
+          "description": "Best-effort hint identifying which subsystem produced the failure for this step. Value is `NOT_APPLICABLE` for successful install."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Step-level install result code. Same semantics as `InstallResult.resultCode`."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Step-level extended result codes. Same format as `InstallResult.extendedResultCodes`.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable result details for this step.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "updateId",
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ]
+    },
+    "UserDeviceAttribute": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttribute"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeCreateOrUpdate": {
+      "type": "object",
+      "description": "A device attribute reported by a customer or other non-Microsoft caller. The `properties` bag\nis opaque — the service stores customer-defined fields verbatim and returns them on read.\nThe service does not interpret, validate, or constrain the bag's contents.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserDeviceAttributeProperties",
+          "description": "Customer-defined opaque property bag."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceAttributeCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "User"
+    },
+    "UserDeviceAttributeProperties": {
+      "type": "object",
+      "description": "Customer-defined opaque property bag for a `User`-reported device attribute. Any field shape\nis accepted; the service stores and returns the bag verbatim without inspection. Customers\nwho want to advertise a schema for their bag may include their own field (e.g. `$schema`).",
+      "additionalProperties": {}
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfileProperties": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfileProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
+    },
+    "X509HubUploadedCertificateAuthorityAuthenticationProfilePropertiesCreateOrUpdate": {
+      "type": "object",
+      "description": "Authentication for devices whose client certificate is rooted to a CA uploaded to IoT Hub. No additional credential fields are required.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate"
+        }
+      ],
+      "x-ms-discriminator-value": "X509HubUploadedCertificateAuthority"
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "GetAuthenticationProfileByUuidRequest": {
+      "name": "authenticationProfileUuid",
+      "in": "query",
+      "description": "The unique identifier of the authentication profile.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetCapabilityByUuidRequest": {
+      "name": "capabilityUuid",
+      "in": "query",
+      "description": "The unique identifier of the capability.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDeviceByExternalIdRequest": {
+      "name": "externalDeviceId",
+      "in": "query",
+      "description": "The external identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetDeviceByUuidRequest": {
+      "name": "deviceUuid",
+      "in": "query",
+      "description": "The unique identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetGroupByUuidRequest": {
+      "name": "groupUuid",
+      "in": "query",
+      "description": "The unique identifier of the group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "GetGroupsForDeviceRequest": {
+      "name": "deviceUuid",
+      "in": "query",
+      "description": "The unique identifier of the device.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "LongRunningOperationIdHeader": {
+      "name": "Operation-Id",
+      "in": "header",
+      "description": "Optional client-supplied identifier for the operation's status monitor.\nIf omitted, the service generates a GUID.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
+    }
+  }
+}

@@ -37,7 +37,7 @@ model Namespace is TrackedResource<NamespaceProperties> {
 @added(Versions.v2024_10_01_preview)
 @doc("The namespace messaging endpoints model.")
 model Messaging {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
   @doc("Dictionary of messaging endpoints.")
   endpoints?: Record<MessagingEndpoint>;
 }
@@ -62,7 +62,11 @@ model NamespaceProperties {
   @visibility(Lifecycle.Read)
   dataEndpoint?: string;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  @added(Versions.v2026_11_01_preview)
+  @doc("The certificate management state for the namespace.")
+  certificateManagement?: CertificateManagementState;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the messaging endpoints dictionary."
   @doc("Assigned and unassigned messaging endpoints.")
   messaging?: Messaging;
 
@@ -71,7 +75,7 @@ model NamespaceProperties {
   @added(Versions.v2026_02_01_preview)
   management?: Management;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the provisioning endpoints dictionary."
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning endpoints associated with this namespace.")
   provisioning?: NamespaceProvisioning;
@@ -80,9 +84,26 @@ model NamespaceProperties {
   @doc("The identity used for outbound calls from the ADR namespace. If not specified and the namespace has a system-assigned identity enabled, the system-assigned identity is used by default.")
   outboundIdentity?: OutboundIdentity;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Container wrapping the device update endpoints dictionary."
+  @added(Versions.v2026_11_01_preview)
+  @doc("The device update endpoints associated with this namespace.")
+  updating?: NamespaceUpdating;
+
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The certificate management state for the namespace.")
+union CertificateManagementState {
+  string,
+
+  @doc("Certificate management is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Certificate management is disabled.")
+  Disabled: "Disabled",
 }
 
 @added(Versions.v2024_10_01_preview)
@@ -96,6 +117,8 @@ model MessagingEndpoint {
   @added(Versions.v2025_07_01_preview)
   endpointType?: string;
 
+  // Intentionally typed as string, not url. Values are bare hostnames
+  // without scheme (e.g., "myhub.azure-devices.net").
   @added(Versions.v2025_07_01_preview)
   @madeOptional(Versions.v2026_11_01_preview)
   @doc("The endpoint address used by services.")
@@ -117,6 +140,11 @@ model MessagingEndpoint {
   @doc("The linking state of this messaging endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @added(Versions.v2026_11_01_preview)
+  @doc("The error detail surfaced when this messaging endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 
   @added(Versions.v2026_11_01_preview)
   @doc("The provisioning configuration for this messaging endpoint.")
@@ -164,19 +192,31 @@ union MessagingEndpointAvailability {
 @added(Versions.v2026_11_01_preview)
 @doc("The provisioning endpoints associated with this namespace.")
 model NamespaceProvisioning {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
   @doc("Dictionary of provisioning endpoints.")
   endpoints?: Record<ProvisioningEndpoint>;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The device update endpoints associated with this namespace.")
+model NamespaceUpdating {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Dictionary keyed by user-supplied endpoint name."
+  @doc("Dictionary of device update endpoints.")
+  endpoints?: Record<UpdatingEndpoint>;
 }
 
 @added(Versions.v2026_11_01_preview)
 @doc("A provisioning service endpoint linked to this namespace.")
 model ProvisioningEndpoint {
   @doc("Type of provisioning resource.")
-  endpointType: string;
+  endpointType: ProvisioningEndpointType;
 
   @doc("The provisioning endpoint Azure resource Id.")
-  resourceId: string;
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Devices/provisioningServices";
+    }
+  ]>;
 
   @doc("The identity the linked resource uses to call the ADR namespace.")
   inboundCallerIdentity: InboundCallerIdentity;
@@ -184,6 +224,67 @@ model ProvisioningEndpoint {
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this provisioning endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("A device update endpoint linked to this namespace.")
+model UpdatingEndpoint {
+  @doc("Type of device update resource.")
+  endpointType: UpdatingEndpointType;
+
+  @doc("The device update endpoint Azure resource Id.")
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceUpdate/linkedAccounts";
+    }
+  ]>;
+
+  @doc("The identity the linked resource uses to call the ADR namespace.")
+  inboundCallerIdentity: InboundCallerIdentity;
+
+  @doc("The linking state of this device update endpoint.")
+  @visibility(Lifecycle.Read)
+  linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this device update endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
+
+  // Intentionally typed as string, not url. Values are bare hostnames
+  // without scheme (e.g., "account.api.adu.microsoft.com").
+  @doc("The service-facing endpoint address.")
+  @visibility(Lifecycle.Read)
+  serviceAddress?: string;
+
+  @doc("The device-facing endpoint address.")
+  @visibility(Lifecycle.Read)
+  deviceAddress?: string;
+
+  @doc("The legacy device-facing endpoint address for older client SDKs.")
+  @visibility(Lifecycle.Read)
+  legacyDeviceAddress?: string;
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of provisioning resource that can be linked to a namespace.")
+union ProvisioningEndpointType {
+  string,
+
+  @doc("Azure Device Provisioning Service.")
+  DPS: "Microsoft.Devices/provisioningServices",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("The type of device update resource that can be linked to a namespace.")
+union UpdatingEndpointType {
+  string,
+
+  @doc("Azure Device Update linked account.")
+  ADU: "Microsoft.DeviceUpdate/linkedAccounts",
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -199,6 +300,18 @@ union NamespaceLinkingStateValue {
 
   @doc("Linking failed.")
   Failed: "Failed",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Error detail for an endpoint whose linking state is Failed. Present only while the linking state is Failed and removed when the endpoint recovers.")
+model NamespaceLinkingError {
+  @doc("Error code that classifies the linking failure.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("Human-readable message describing the linking failure.")
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -244,26 +357,6 @@ union OutboundIdentityType {
   @doc("User-assigned managed identity.")
   UserAssigned: "UserAssigned",
 }
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Request body for the bulk import operation on a Namespace resource.")
-model NamespaceBulkImportRequest {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the bulk import operation on a Namespace resource.")
-model NamespaceBulkImportResponse {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Request body for the bulk export operation on a Namespace resource.")
-model NamespaceBulkExportRequest {}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Placeholder model for future expansion."
-@added(Versions.v2026_11_01_preview)
-@doc("Response for the bulk export operation on a Namespace resource.")
-model NamespaceBulkExportResponse {}
 
 @added(Versions.v2025_07_01_preview)
 @doc("Request body for the migrate resources operation in to Namespace resource.")
@@ -333,28 +426,6 @@ interface Namespaces {
     Namespace,
     NamespaceMigrateRequest,
     NamespaceMigrateResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Bulk import devices into the namespace from a provided storage account.")
-  @added(Versions.v2026_11_01_preview)
-  bulkImport is ArmResourceActionAsync<
-    Namespace,
-    NamespaceBulkImportRequest,
-    NamespaceBulkImportResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
-
-  @doc("Bulk export device metadata from the namespace into a storage account.")
-  @added(Versions.v2026_11_01_preview)
-  bulkExport is ArmResourceActionAsync<
-    Namespace,
-    NamespaceBulkExportRequest,
-    NamespaceBulkExportResponse,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader

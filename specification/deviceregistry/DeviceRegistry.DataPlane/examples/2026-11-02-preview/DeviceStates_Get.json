@@ -1,0 +1,29 @@
+{
+  "operationId": "DeviceStates_Get",
+  "title": "Get a device state",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "deviceName": "my-device-01",
+    "stateName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "etag": "\"a1b2c3d4-0000-0800-0000-66fcb0290000\"",
+        "uuid": "s1a2b3c4-5678-90ab-cdef-1234567890ab",
+        "type": "Microsoft.DeviceRegistry/namespaces/devices/states",
+        "properties": {
+          "desired": {
+            "firmware": "2.0.1"
+          },
+          "reported": {
+            "firmware": "1.9.0"
+          }
+        },
+        "name": "default"
+      }
+    }
+  }
+}
