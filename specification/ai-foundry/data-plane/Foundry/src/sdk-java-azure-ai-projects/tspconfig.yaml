@@ -17,15 +17,10 @@ options:
       FilesFileDetails: SkillFileDetails
     flavor: azure
   # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java
-  # SDK's @Beta annotation customization. Inert unless this emitter is selected
-  # (e.g. `tsp compile <client.tsp> --emit typespec-extension-exporter`); a plain
-  # `tsp compile` ignores this block. The emitter is not in the spec repo's
-  # dependencies — install it locally first (npm link or npm install --no-save).
-  # `emitter-output-dir` mirrors the Java SDK module layout so the CSV lands in
-  # the module's customizations/ folder (where the @Beta customization reads it)
-  # when `output-dir` points at the azure-sdk-for-java repo root — exactly what
-  # `tsp-client` sets. For revapi suppressions instead, set output-shape: revapi,
-  # output-format: json, output-file: projects.revapi.json.
+  # - run `tsp-client sync` from package folder
+  # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter && npx tsp compile`
+  # - verify creation/update of the `cutomizations/beta-annotations.csv` file
+  # - run `cd .. && tsp-client generate && rm -Force TempTypeSpecFiles`
   "typespec-extension-exporter":
     keys: x-ms-foundry-meta
     output-shape: tsp-ast-input
