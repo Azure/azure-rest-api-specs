@@ -41,6 +41,21 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/openapi.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    reason: |
+      All `provisioningState` properties on QuotaTransfer and IncomingQuotaTransfer
+      reference `Azure.ResourceManager.ResourceProvisioningState` and are emitted
+      with `readOnly: true` in the sibling property of the `$ref`. This is a known
+      LintDiff false positive on `$ref`-based provisioningState properties — see
+      https://github.com/Azure/azure-openapi-validator/issues/637.
+  - code: GuidUsage
+    reason: |
+      The `transferId` server-generated identifier and the `sourceSubscriptionId`
+      / `sourceTenantId` properties are Azure subscription/tenant/correlation
+      identifiers that are GUIDs by ARM contract. The same `format: uuid` is used
+      for `SubscriptionIdParameter` and `TenantIdParameter` in common-types v5.
+      ARM API review board sign-off is being tracked alongside this preview.
 ```
 
 ### Tag: package-2025-09-01
@@ -160,30 +175,6 @@ suppressions:
     from: groupquota.json
     where: $.paths["/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Quota/groupQuotas/{groupQuotaName}/groupQuotaLimits/{resourceName}".delete
     reason: Quota cannot be deleted or reduced. It is not supported by any resource provider.
-```
-
-``` yaml
-directive:
-  - suppress: ProvisioningStateMustBeReadOnly
-    from:
-      - preview/2026-09-01-preview/openapi.json
-    reason: |
-      All `provisioningState` properties on QuotaTransfer and IncomingQuotaTransfer
-      are emitted with `readOnly: true` (they reference
-      `Azure.ResourceManager.ResourceProvisioningState` and carry the read-only
-      sibling). This is a known LintDiff false positive on `$ref`-based
-      provisioningState properties — see
-      https://github.com/Azure/azure-openapi-validator/issues/637.
-  - suppress: GuidUsage
-    from:
-      - preview/2026-09-01-preview/openapi.json
-    reason: |
-      The `transferId` server-generated identifier and the
-      `sourceSubscriptionId` / `sourceTenantId` / `destinationTenantId` /
-      `destinationSubscription` properties are Azure subscription/tenant/
-      correlation identifiers that are GUIDs by ARM contract; declaring them
-      `format: uuid` keeps the wire contract precise for SDK callers. ARM API
-      review board sign-off is being tracked alongside this preview.
 ```
 
 ---
