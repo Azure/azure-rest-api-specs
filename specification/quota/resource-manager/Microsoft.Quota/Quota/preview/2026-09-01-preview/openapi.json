@@ -143,6 +143,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "QuotaRequestHistory": {
+            "$ref": "./examples/getQuotaRequestsHistory.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -188,6 +193,17 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "QuotaRequestFailed": {
+            "$ref": "./examples/getQuotaRequestStatusFailed.json"
+          },
+          "QuotaRequestInProgress": {
+            "$ref": "./examples/getQuotaRequestStatusInProgress.json"
+          },
+          "QuotaRequestStatus": {
+            "$ref": "./examples/getQuotaRequestStatusById.json"
+          }
         }
       }
     },
@@ -229,6 +245,17 @@
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_listQuotaLimitsForCompute": {
+            "$ref": "./examples/getComputeQuotaLimits.json"
+          },
+          "Quotas_listQuotaLimitsForNetwork": {
+            "$ref": "./examples/getNetworkQuotaLimits.json"
+          },
+          "Quotas_listQuotaLimitsMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesQuotaLimits.json"
           }
         },
         "x-ms-pageable": {
@@ -281,6 +308,14 @@
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_Get_Request_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuQuotaLimit.json"
+          },
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuQuotaLimit.json"
           }
         }
       },
@@ -347,6 +382,20 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Quotas_PutRequest_ForNetwork": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequest.json"
+          },
+          "Quotas_PutRequest_ForNetwork_StandardSkuPublicIpAddressesResource": {
+            "$ref": "./examples/putNetworkOneSkuQuotaRequestStandardSkuPublicIpAddresses.json"
+          },
+          "Quotas_Put_Request_ForCompute": {
+            "$ref": "./examples/putComputeOneSkuQuotaRequest.json"
+          },
+          "Quotas_Request_ForMachineLearningServices_LowPriorityResource": {
+            "$ref": "./examples/putMachineLearningServicesQuotaRequestLowPriority.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CurrentQuotaLimitBase"
@@ -411,6 +460,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Quotas_Request_PatchForCompute": {
+            "$ref": "./examples/patchComputeQuotaRequest.json"
+          },
+          "Quotas_Request_PatchForNetwork": {
+            "$ref": "./examples/patchNetworkOneSkuQuotaRequest.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/CurrentQuotaLimitBase"
@@ -456,6 +513,17 @@
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Quotas_listUsagesForCompute": {
+            "$ref": "./examples/getComputeUsages.json"
+          },
+          "Quotas_listUsagesForNetwork": {
+            "$ref": "./examples/getNetworkUsages.json"
+          },
+          "Quotas_listUsagesMachineLearningServices": {
+            "$ref": "./examples/getMachineLearningServicesUsages.json"
           }
         },
         "x-ms-pageable": {
@@ -509,6 +577,14 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Quotas_UsagesRequest_ForCompute": {
+            "$ref": "./examples/getComputeOneSkuUsages.json"
+          },
+          "Quotas_UsagesRequest_ForNetwork": {
+            "$ref": "./examples/getNetworkOneSkuUsages.json"
+          }
         }
       }
     },
@@ -545,6 +621,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_List_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/ListGroupQuotas.json"
           }
         },
         "x-ms-pageable": {
@@ -595,6 +676,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/GetGroupQuotas.json"
           }
         }
       },
@@ -671,6 +757,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotas_Put_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PutGroupQuotas.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -751,6 +842,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotas_Patch_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/PatchGroupQuotas.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/GroupQuotasEntity"
@@ -817,6 +913,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotas_Delete_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotas/DeleteGroupQuotas.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -873,6 +974,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_Get": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_Get.json"
           }
         }
       }
@@ -936,6 +1042,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLimits_Get_Request_ForCompute": {
+            "$ref": "./examples/GroupQuotaLimits/ListGroupQuotaLimits-Compute.json"
           }
         }
       },
@@ -1027,6 +1138,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequests_Update": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/PatchGroupQuotaLimitsRequests-Compute.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/GroupQuotaLimitList"
@@ -1095,6 +1211,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotaLimitsRequest_List": {
+            "$ref": "./examples/GroupQuotaLimitsRequests/GroupQuotaLimitsRequests_List.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1159,6 +1280,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotasEnforcement_Get": {
+            "$ref": "./examples/GroupQuotasEnforcement/GetGroupQuotaEnforcement.json"
           }
         }
       },
@@ -1251,6 +1377,14 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_CreateOrUpdate": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcement.json"
+          },
+          "GroupQuotaLocationSettings_CreateOrUpdate_Failed": {
+            "$ref": "./examples/GroupQuotasEnforcement/PutGroupQuotaEnforcementFailed.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1347,6 +1481,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotaLocationSettings_Patch": {
+            "$ref": "./examples/GroupQuotasEnforcement/PatchGroupQuotaEnforcement.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/GroupQuotasEnforcementStatus"
@@ -1415,6 +1554,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotasUsages_List": {
+            "$ref": "./examples/GroupQuotaUsages/GetGroupQuotaUsages.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1463,6 +1607,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptionRequests_List": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1521,6 +1670,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptionRequests_Get": {
+            "$ref": "./examples/SubscriptionRequests/SubscriptionRequests_Get.json"
+          }
         }
       }
     },
@@ -1567,6 +1721,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_List_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/ListGroupQuotaSubscriptions.json"
           }
         },
         "x-ms-pageable": {
@@ -1625,6 +1784,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Get_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/GetGroupQuotaSubscriptions.json"
           }
         }
       },
@@ -1697,6 +1861,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Put_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/PutGroupQuotasSubscription.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/GroupQuotaSubscriptionId"
@@ -1767,6 +1936,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Patch_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/PatchGroupQuotasSubscription.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1843,6 +2017,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "GroupQuotaSubscriptions_Delete_Subscriptions": {
+            "$ref": "./examples/GroupQuotasSubscriptions/DeleteGroupQuotaSubscriptions.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1913,6 +2092,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_List_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_List-Compute.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1980,6 +2164,11 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocationRequests_Get_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/SubscriptionQuotaAllocationRequests_Get-Compute.json"
+          }
         }
       }
     },
@@ -2045,6 +2234,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_List_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocation/SubscriptionQuotaAllocation_List-Compute.json"
           }
         }
       },
@@ -2139,6 +2333,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "SubscriptionQuotaAllocation_Patch_Request_ForCompute": {
+            "$ref": "./examples/SubscriptionQuotaAllocationRequests/PatchSubscriptionQuotaAllocationRequest-Compute.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/SubscriptionQuotaAllocationsList"
@@ -2171,6 +2370,11 @@
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperations": {
+            "$ref": "./examples/GetOperations.json"
           }
         },
         "x-ms-pageable": {
