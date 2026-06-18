@@ -74,6 +74,7 @@ using TypeSpec.Http;
 @@clientName(DaemonSet.ready, "ReadyNumberOfPods", "csharp");
 @@clientName(DaemonSet.upToDate, "UpToDateNumberOfPods", "csharp");
 @@clientName(DaemonSet.available, "AvailableNumberOfPods", "csharp");
+@@clientName(ReferencedResource, "ReferencedResourceById", "csharp");
 @@alternateType(
   ReferencedResource.id,
   Azure.Core.armResourceIdentifier,
