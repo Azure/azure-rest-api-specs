@@ -13,29 +13,29 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */
-export function createBeforeRequestHook(endpoint, logger) {
+export function createRequestHook(endpoint, logger) {
   /**
    * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
    */
-  function beforeRequestHook(options) {
+  function requestHook(options) {
     const request = endpoint(options);
     logger.info(
       `[github] ${request.method.toUpperCase()} ${request.url} ${request.body ? JSON.stringify(request.body) : ""}`,
     );
   }
 
-  return beforeRequestHook;
+  return requestHook;
 }
 
 /**
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(response: import("@octokit/types").OctokitResponse<any>) => void}
  */
-export function createAfterRequestHook(logger) {
+export function createResponseHook(logger) {
   /**
    * @param {import("@octokit/types").OctokitResponse<any>} response
    */
-  function afterRequestHook(response) {
+  function responseHook(response) {
     const {
       "x-ratelimit-limit": limitHeader,
       "x-ratelimit-remaining": remainingHeader,
@@ -72,5 +72,5 @@ export function createAfterRequestHook(logger) {
     );
   }
 
-  return afterRequestHook;
+  return responseHook;
 }

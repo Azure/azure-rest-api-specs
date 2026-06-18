@@ -1,19 +1,19 @@
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { add, Duration } from "../../shared/src/time.js";
-import { createBeforeRequestHook, createAfterRequestHook } from "../src/github.js";
+import { createRequestHook, createResponseHook } from "../src/github.js";
 import { createMockLogger } from "./mocks.js";
 
-describe("createBeforeRequestHook", () => {
+describe("createRequestHook", () => {
   it("logs request info with body", () => {
     const mockLogger = createMockLogger();
-    const beforeRequestHook = createBeforeRequestHook(
+    const requestHook = createRequestHook(
       /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {object} */ r) => r),
       mockLogger,
     );
 
     expect(
-      beforeRequestHook({
+      requestHook({
         method: "GET",
         url: "https://test-url.com",
         body: { "test-key": "test-value" },
@@ -30,13 +30,13 @@ describe("createBeforeRequestHook", () => {
 
   it("logs request info without body", () => {
     const mockLogger = createMockLogger();
-    const beforeRequestHook = createBeforeRequestHook(
+    const requestHook = createRequestHook(
       /** @type {import("@octokit/types").EndpointInterface} */ ((/** @type {object} */ r) => r),
       mockLogger,
     );
 
     expect(
-      beforeRequestHook({
+      requestHook({
         method: "GET",
         url: "https://test-url.com",
       }),
@@ -51,7 +51,7 @@ describe("createBeforeRequestHook", () => {
   });
 });
 
-describe("createAfterRequestHook", () => {
+describe("createResponseHook", () => {
   beforeEach(() => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2025-01-01T00:00:00Z"));
@@ -63,10 +63,10 @@ describe("createAfterRequestHook", () => {
 
   it("logs to debug if missing rate limit header", () => {
     const mockLogger = createMockLogger();
-    const afterRequestHook = createAfterRequestHook(mockLogger);
+    const responseHook = createResponseHook(mockLogger);
 
     expect(
-      afterRequestHook(
+      responseHook(
         /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({ headers: {} }),
       ),
     ).toBeUndefined();
@@ -82,12 +82,12 @@ describe("createAfterRequestHook", () => {
 
   it("logs to info if all rate limit headers", () => {
     const mockLogger = createMockLogger();
-    const afterRequestHook = createAfterRequestHook(mockLogger);
+    const responseHook = createResponseHook(mockLogger);
 
     const reset = (add(new Date(), 30 * Duration.Minute).getTime() / Duration.Second).toFixed(0);
 
     expect(
-      afterRequestHook(
+      responseHook(
         /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
           status: 200,
           headers: {
@@ -106,7 +106,7 @@ describe("createAfterRequestHook", () => {
     `);
 
     expect(
-      afterRequestHook(
+      responseHook(
         /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
           status: 200,
           headers: {
@@ -125,7 +125,7 @@ describe("createAfterRequestHook", () => {
     `);
 
     expect(
-      afterRequestHook(
+      responseHook(
         /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
           status: 200,
           headers: {
@@ -144,7 +144,7 @@ describe("createAfterRequestHook", () => {
     `);
 
     expect(
-      afterRequestHook(
+      responseHook(
         /** @type {import("@octokit/types").OctokitResponse<any, number>} */ ({
           status: 200,
           headers: {
