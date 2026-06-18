@@ -143,7 +143,7 @@ using TypeSpec.Http;
 );
 @@alternateType(
   ArtifactStorePropertiesFormat.storageResourceId,
-  Azure.Core.azureLocation,
+  Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(
@@ -204,7 +204,13 @@ using TypeSpec.Http;
 @@alternateType(NetworkFunction.etag, Azure.Core.eTag, "csharp");
 
 @@clientName(NSDArtifactProfile, "NsdArtifactProfile", "java, csharp");
-@@clientName(NFVIs, "NfvIs", "java, csharp");
+@@clientName(NFVIs, "NfvIs", "java");
+@@clientName(NFVIs, "NfviEntry", "csharp");
+@@clientName(
+  LongRunningOperation,
+  "CancelableLongRunningOperationType",
+  "csharp"
+);
 @@clientName(AzureCoreNFVIDetails, "AzureCoreNfviDetails", "java");
 @@clientName(
   AzureArcK8sClusterNFVIDetails,
