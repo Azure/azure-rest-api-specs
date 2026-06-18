@@ -2470,8 +2470,7 @@
             "in": "path",
             "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           }
         ],
         "responses": {
@@ -2529,8 +2528,7 @@
             "in": "path",
             "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "If-Match",
@@ -2641,8 +2639,7 @@
             "in": "path",
             "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
             "required": true,
-            "type": "string",
-            "format": "uuid"
+            "type": "string"
           },
           {
             "name": "If-Match",
@@ -3146,11 +3143,6 @@
         "actor",
         "occurredAt"
       ]
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -3896,7 +3888,7 @@
           "readOnly": true
         },
         "transferId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Server-generated identifier of the transfer (matches the URI key).",
           "readOnly": true
         },
@@ -3907,12 +3899,12 @@
           "readOnly": true
         },
         "sourceSubscriptionId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Donor subscription id. The recipient subscription is the one in the request URI.",
           "readOnly": true
         },
         "sourceTenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Donor tenant id, resolved by the service from the donor subscription.",
           "readOnly": true
         },
@@ -4594,7 +4586,7 @@
           "readOnly": true
         },
         "transferId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Server-generated identifier the recipient uses to address the transfer on the\nincomingQuotaTransfers URI.",
           "readOnly": true
         },
@@ -4609,11 +4601,11 @@
           "maxLength": 500
         },
         "destinationSubscription": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Recipient subscription id. Must differ from the donor subscription."
         },
         "destinationTenantId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "type": "string",
           "description": "Recipient tenant id, resolved by the service from the recipient subscription.",
           "readOnly": true
         },

@@ -134,7 +134,7 @@ model QuotaTransferProperties {
    * incomingQuotaTransfers URI.
    */
   @visibility(Lifecycle.Read)
-  transferId?: uuid;
+  transferId?: string;
 
   /**
    * Human-friendly label surfaced on customer GET responses and recipient inbox listings.
@@ -151,13 +151,13 @@ model QuotaTransferProperties {
   /**
    * Recipient subscription id. Must differ from the donor subscription.
    */
-  destinationSubscription: uuid;
+  destinationSubscription: string;
 
   /**
    * Recipient tenant id, resolved by the service from the recipient subscription.
    */
   @visibility(Lifecycle.Read)
-  destinationTenantId?: uuid;
+  destinationTenantId?: string;
 
   /**
    * Billing account id both donor and recipient subscriptions must roll up to.
@@ -239,7 +239,7 @@ model IncomingQuotaTransferProperties {
    * Server-generated identifier of the transfer (matches the URI key).
    */
   @visibility(Lifecycle.Read)
-  transferId?: uuid;
+  transferId?: string;
 
   /**
    * Fully qualified ARM resource id of the donor-side quotaTransfers resource.
@@ -251,13 +251,13 @@ model IncomingQuotaTransferProperties {
    * Donor subscription id. The recipient subscription is the one in the request URI.
    */
   @visibility(Lifecycle.Read)
-  sourceSubscriptionId?: uuid;
+  sourceSubscriptionId?: string;
 
   /**
    * Donor tenant id, resolved by the service from the donor subscription.
    */
   @visibility(Lifecycle.Read)
-  sourceTenantId?: uuid;
+  sourceTenantId?: string;
 
   /**
    * Billing account id both donor and recipient subscriptions roll up to.

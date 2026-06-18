@@ -70,7 +70,7 @@ interface IncomingQuotaTransferOps
          */
         @path
         @segment("incomingQuotaTransfers")
-        transferId: uuid,
+        transferId: string,
       }
     > {}
 
@@ -94,7 +94,7 @@ interface IncomingQuotaTransferSubscriptionOps
          */
         @path
         @segment("incomingQuotaTransfers")
-        transferId: uuid,
+        transferId: string,
       }
     > {}
 

@@ -49,13 +49,6 @@ suppressions:
       with `readOnly: true` in the sibling property of the `$ref`. This is a known
       LintDiff false positive on `$ref`-based provisioningState properties — see
       https://github.com/Azure/azure-openapi-validator/issues/637.
-  - code: GuidUsage
-    reason: |
-      The `transferId` server-generated identifier and the `sourceSubscriptionId`
-      / `sourceTenantId` properties are Azure subscription/tenant/correlation
-      identifiers that are GUIDs by ARM contract. The same `format: uuid` is used
-      for `SubscriptionIdParameter` and `TenantIdParameter` in common-types v5.
-      ARM API review board sign-off is being tracked alongside this preview.
 ```
 
 ### Tag: package-2025-09-01
