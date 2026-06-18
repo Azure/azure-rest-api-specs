@@ -1090,3 +1090,35 @@ op regenerateKeyCustom(
   azureLocation,
   "csharp"
 );
+
+// Additional renames: add CognitiveServices prefix for consistency
+@@clientName(
+  ManagedComputeDeployment,
+  "CognitiveServicesManagedComputeDeployment",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProperties,
+  "CognitiveServicesManagedComputeDeploymentProperties",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentInfo,
+  "CognitiveServicesManagedComputeDeploymentInfo",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProvisioningDetails,
+  "CognitiveServicesManagedComputeDeploymentProvisioningDetails",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentRoutes,
+  "CognitiveServicesManagedComputeDeploymentRoutes",
+  "csharp"
+);
+@@clientName(
+  ComputeProvisioningState,
+  "CognitiveServicesComputeProvisioningState",
+  "csharp"
+);
