@@ -1,0 +1,61 @@
+{
+  "title": "CreateEntry",
+  "operationId": "CreateEntry",
+  "parameters": {
+    "api-version": "2026-03-26",
+    "body": "{binary}",
+    "Content-Type": "application/cose",
+    "accept": "application/cose; application/cbor"
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Content-Type": "application/scitt-receipt+cose",
+        "x-ms-ccf-transaction-id": "2.131"
+      },
+      "body": "{binary}"
+    },
+    "303": {
+      "headers": {
+        "Location": "https://example.com/entries/2.131",
+        "x-ms-ccf-transaction-id": "2.131"
+      }
+    },
+    "400": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "401": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "404": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "429": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "500": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    },
+    "503": {
+      "headers": {
+        "Content-Type": "application/concise-problem-details+cbor"
+      },
+      "body": "{binary}"
+    }
+  }
+}

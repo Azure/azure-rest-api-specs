@@ -149,11 +149,8 @@ using Microsoft.Billing;
   BillingProfiles.invoicesListByBillingProfile,
   "ListByBillingProfile"
 );
-@@clientLocation(
-  BillingProfiles.productsListByBillingProfile,
-  Products,
-  "!csharp"
-);
+@@clientLocation(BillingProfiles.productsListByBillingProfile, Products);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: why is it conflicting for c#"
 @@clientName(
   BillingProfiles.productsListByBillingProfile,
   "ListByBillingProfile"
@@ -528,11 +525,8 @@ using Microsoft.Billing;
   InvoiceSections.billingSubscriptionsListByInvoiceSection,
   "ListByInvoiceSection"
 );
-@@clientLocation(
-  InvoiceSections.productsListByInvoiceSection,
-  Products,
-  "!csharp"
-);
+@@clientLocation(InvoiceSections.productsListByInvoiceSection, Products);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: why is it conflicting for c#"
 @@clientName(
   InvoiceSections.productsListByInvoiceSection,
   "ListByInvoiceSection"

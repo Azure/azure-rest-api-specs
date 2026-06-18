@@ -38,78 +38,18 @@ using PolicyInsightsApi;
   Remediations.createOrUpdateAtManagementGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  RemediationSubscriptionOperations.getAtSubscription,
-  Remediations
-);
-@@clientLocation(
-  RemediationSubscriptionOperations.createOrUpdateAtSubscription,
-  Remediations
-);
 @@clientName(
-  RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
+  Remediations.createOrUpdateAtSubscription::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  RemediationSubscriptionOperations.deleteAtSubscription,
-  Remediations
-);
-@@clientLocation(
-  RemediationSubscriptionOperations.listForSubscription,
-  Remediations
-);
-@@clientLocation(
-  RemediationSubscriptionOperations.listDeploymentsAtSubscription,
-  Remediations
-);
-@@clientLocation(
-  RemediationSubscriptionOperations.cancelAtSubscription,
-  Remediations
-);
-@@clientLocation(
-  RemediationResourceGroupOperations.getAtResourceGroup,
-  Remediations
-);
-@@clientLocation(
-  RemediationResourceGroupOperations.createOrUpdateAtResourceGroup,
-  Remediations
-);
 @@clientName(
-  RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+  Remediations.createOrUpdateAtResourceGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  RemediationResourceGroupOperations.deleteAtResourceGroup,
-  Remediations
-);
-@@clientLocation(
-  RemediationResourceGroupOperations.listForResourceGroup,
-  Remediations
-);
-@@clientLocation(
-  RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
-  Remediations
-);
-@@clientLocation(
-  RemediationResourceGroupOperations.cancelAtResourceGroup,
-  Remediations
-);
-@@clientLocation(RemediationResourceOperations.getAtResource, Remediations);
-@@clientLocation(
-  RemediationResourceOperations.createOrUpdateAtResource,
-  Remediations
-);
 @@clientName(
-  RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
+  Remediations.createOrUpdateAtResource::parameters.resource,
   "parameters"
 );
-@@clientLocation(RemediationResourceOperations.deleteAtResource, Remediations);
-@@clientLocation(RemediationResourceOperations.listForResource, Remediations);
-@@clientLocation(
-  RemediationResourceOperations.listDeploymentsAtResource,
-  Remediations
-);
-@@clientLocation(RemediationResourceOperations.cancelAtResource, Remediations);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Remediation.properties);
 
@@ -121,37 +61,14 @@ using PolicyInsightsApi;
   Attestations.createOrUpdateAtSubscription::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  AttestationResourceGroupOperations.getAtResourceGroup,
-  Attestations
-);
-@@clientLocation(
-  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup,
-  Attestations
-);
 @@clientName(
-  AttestationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+  Attestations.createOrUpdateAtResourceGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(
-  AttestationResourceGroupOperations.deleteAtResourceGroup,
-  Attestations
-);
-@@clientLocation(
-  AttestationResourceGroupOperations.listForResourceGroup,
-  Attestations
-);
-@@clientLocation(AttestationOperationGroup.getAtResource, Attestations);
-@@clientLocation(
-  AttestationOperationGroup.createOrUpdateAtResource,
-  Attestations
-);
 @@clientName(
-  AttestationOperationGroup.createOrUpdateAtResource::parameters.resource,
+  Attestations.createOrUpdateAtResource::parameters.resource,
   "parameters"
 );
-@@clientLocation(AttestationOperationGroup.deleteAtResource, Attestations);
-@@clientLocation(AttestationOperationGroup.listForResource, Attestations);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Attestation.properties);
 
