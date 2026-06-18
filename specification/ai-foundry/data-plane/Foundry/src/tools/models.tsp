@@ -58,53 +58,11 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.WebSearchTool,
     {
-      ...ToolNameAndDescriptionExtension,
-
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
        * resource attached to the tool.
        */
       custom_search_configuration?: WebSearchConfiguration,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.CodeInterpreterTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.ImageGenTool,
-    {
-      ...ToolNameAndDescriptionExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.LocalShellToolParam,
-    {
-      ...ToolNameAndDescriptionExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.FunctionShellToolParam,
-    {
-      ...ToolNameAndDescriptionExtension,
-    }
-  );
-
-  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-  @@copyProperties(
-    OpenAI.FileSearchTool,
-    {
-      ...ToolNameAndDescriptionExtension,
     }
   );
 
@@ -124,21 +82,6 @@ namespace Azure.AI.Projects {
   }
 
   /**
-   * Optional name and description fields for tool definitions and nested tool configurations.
-   */
-  alias ToolNameAndDescriptionExtension = {
-    /**
-     * Optional user-defined name for this tool or configuration.
-     */
-    name?: string;
-
-    /**
-     * Optional user-defined description for this tool or configuration.
-     */
-    description?: string;
-  };
-
-  /**
    * The input definition information for a bing grounding search tool as used to configure an agent.
    */
   model BingGroundingTool extends OpenAI.Tool {
@@ -146,8 +89,6 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'bing_grounding'.
      */
     type: "bing_grounding";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -176,8 +117,6 @@ namespace Azure.AI.Projects {
      */
     type: "fabric_dataagent_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The fabric data agent tool parameters.
      */
@@ -205,8 +144,6 @@ namespace Azure.AI.Projects {
      */
     type: "sharepoint_grounding_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The sharepoint grounding tool parameters.
      */
@@ -221,8 +158,6 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'azure_ai_search'.
      */
     type: "azure_ai_search";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The azure ai search index resource.
@@ -328,8 +263,6 @@ namespace Azure.AI.Projects {
      */
     type: "bing_custom_search_preview";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The bing custom search tool parameters.
      */
@@ -344,8 +277,6 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'browser_automation_preview'.
      */
     type: "browser_automation_preview";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The Browser Automation Tool parameters.
@@ -735,8 +666,6 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
-    ...ToolNameAndDescriptionExtension;
-
     /**
      * The structured outputs to capture from the model.
      */
@@ -769,7 +698,6 @@ namespace Azure.AI.Projects {
      */
     project_connection_id?: string;
 
-    ...ToolNameAndDescriptionExtension;
   }
 
   /**
@@ -786,7 +714,6 @@ namespace Azure.AI.Projects {
      */
     project_connection_id: string;
 
-    ...ToolNameAndDescriptionExtension;
   }
 
   /**
@@ -820,7 +747,6 @@ namespace Azure.AI.Projects {
     #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
     require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
 
-    ...ToolNameAndDescriptionExtension;
   }
 
   /**
@@ -831,8 +757,6 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search_preview";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
@@ -866,8 +790,6 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `memory_search_preview`.
      */
     type: "memory_search";
-
-    ...ToolNameAndDescriptionExtension;
 
     /**
      * The name of the memory store to use.
