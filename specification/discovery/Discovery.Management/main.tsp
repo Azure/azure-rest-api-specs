@@ -15,6 +15,7 @@ import "../Discovery.Workspace.Management/all.tsp";
 import "../Discovery.Supercomputer.Management/all.tsp";
 import "./storageAsset.tsp";
 import "./storageContainer.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
