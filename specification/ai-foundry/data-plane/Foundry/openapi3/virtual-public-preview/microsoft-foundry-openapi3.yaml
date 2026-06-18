@@ -13150,6 +13150,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an A2A (Agent-to-Agent) tool call.
+    A2aProtocolConfiguration:
+      type: object
+      description: Configuration specific to the A2A protocol.
     AISearchIndexResource:
       type: object
       properties:
@@ -13174,6 +13177,13 @@ components:
           type: string
           description: Index asset id for search resource.
       description: A AI Search Index resource.
+    ActivityProtocolConfiguration:
+      type: object
+      properties:
+        enable_m365_public_endpoint:
+          type: boolean
+          description: Whether to enable the M365 public endpoint for the activity protocol.
+      description: Configuration specific to the activity protocol.
     AgentBlueprintReference:
       type: object
       required:
@@ -13533,7 +13543,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentEndpointProtocol'
-          description: The protocols that the agent supports
+          description: 'Deprecated: Use protocol_configuration instead. The presence of a key in protocol_configuration declares the protocol is enabled.'
+        protocol_configuration:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolConfiguration'
+          description: Per-protocol configuration for the agent endpoint.
         authorization_schemes:
           type: array
           items:
@@ -13550,7 +13564,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AgentEndpointProtocol'
-          description: The protocols that the agent supports
+          description: 'Deprecated: Use protocol_configuration instead. The presence of a key in protocol_configuration declares the protocol is enabled.'
+        protocol_configuration:
+          allOf:
+            - $ref: '#/components/schemas/ProtocolConfiguration'
+          description: Per-protocol configuration for the agent endpoint.
         authorization_schemes:
           type: array
           items:
@@ -20024,6 +20042,12 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
+    InvocationsProtocolConfiguration:
+      type: object
+      description: Configuration specific to the invocations protocol.
+    InvocationsWsProtocolConfiguration:
+      type: object
+      description: Configuration specific to the WebSocket-based invocations protocol.
     InvokeAgentInvocationsApiDispatchPayload:
       type: object
       required:
@@ -20253,6 +20277,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/IndexUpdate'
       description: Managed Azure AI Search Index Definition
+    McpProtocolConfiguration:
+      type: object
+      description: Configuration specific to the MCP protocol.
     MemoryCommandToolCall:
       type: object
       required:
@@ -38769,6 +38796,34 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
+    ProtocolConfiguration:
+      type: object
+      properties:
+        activity:
+          allOf:
+            - $ref: '#/components/schemas/ActivityProtocolConfiguration'
+          description: Configuration for the activity protocol.
+        responses:
+          allOf:
+            - $ref: '#/components/schemas/ResponsesProtocolConfiguration'
+          description: Configuration for the responses protocol.
+        a2a:
+          allOf:
+            - $ref: '#/components/schemas/A2aProtocolConfiguration'
+          description: Configuration for the A2A protocol.
+        mcp:
+          allOf:
+            - $ref: '#/components/schemas/McpProtocolConfiguration'
+          description: Configuration for the MCP protocol.
+        invocations:
+          allOf:
+            - $ref: '#/components/schemas/InvocationsProtocolConfiguration'
+          description: Configuration for the invocations protocol.
+        invocations_ws:
+          allOf:
+            - $ref: '#/components/schemas/InvocationsWsProtocolConfiguration'
+          description: Configuration for the WebSocket-based invocations protocol.
+      description: Per-protocol configuration for the agent endpoint.
     ProtocolVersionRecord:
       type: object
       required:
@@ -39056,6 +39111,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for response retrieval item generation.
+    ResponsesProtocolConfiguration:
+      type: object
+      description: Configuration specific to the responses protocol.
     RiskCategory:
       anyOf:
         - type: string
