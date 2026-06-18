@@ -2,17 +2,18 @@ import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
-import * as commandHelpers from "../src/command-helpers.js";
+import * as commandHelpers from "../src/command-helpers.ts";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
-} from "../src/commands.js";
-import * as log from "../src/log.js";
-import { LogLevel } from "../src/log.js";
-import * as changeFiles from "../src/spec-helpers.js";
-import type { ExecutionReport } from "../src/types.js";
-import * as utils from "../src/utils.js";
+} from "../src/commands.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
+import * as changeFiles from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
   return mockFn.mock.calls.map((args: unknown[]) => {
@@ -195,6 +196,7 @@ describe("generateSdkForSingleSpec", () => {
     vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const pypiValidationSpy = vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI");
     vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -207,6 +209,7 @@ describe("generateSdkForSingleSpec", () => {
       `SDK generation from OpenAPI (readme.md) is not supported for ${mockCommandInput.sdkRepoName}. Skipping spec.`,
       LogLevel.Info,
     );
+    expect(pypiValidationSpy).not.toHaveBeenCalled();
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
   });
 });
@@ -255,6 +258,7 @@ describe("generateSdkForSpecPr", () => {
     vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const pypiValidationSpy = vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI");
     vi.spyOn(log, "logMessage").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
@@ -277,6 +281,7 @@ describe("generateSdkForSpecPr", () => {
       mockExecutionReport.vsoLogPath,
       serviceFolderPath,
     );
+    expect(pypiValidationSpy).not.toHaveBeenCalled();
     expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
       mockCommandInput,
       "succeeded", // overallExecutionResult
@@ -286,6 +291,142 @@ describe("generateSdkForSpecPr", () => {
       "", // stagedArtifactsFolder
       [], // apiViewRequestData
       true, // sdkGenerationExecuted
+    );
+  });
+
+  test("should validate Python PR package registration on PyPI", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-python",
+      sdkLanguage: SdkName.Python,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: [
+          "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
+        ],
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [{ packageName: "azure-mgmt-widget" }],
+      vsoLogPath: "path/to/log",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const pypiValidationSpy = vi
+      .spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI")
+      .mockResolvedValue({ succeeded: true, errors: [] });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const { statusCode, executionResult } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(0);
+    expect(executionResult).toBe("succeeded");
+    expect(pypiValidationSpy).toHaveBeenCalledWith(mockExecutionReport.packages);
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "succeeded",
+      false,
+      true,
+      false,
+      "",
+      [],
+      true,
+    );
+  });
+
+  test("should fail Python PR validation when package is not registered on PyPI", async () => {
+    const mockCommandInput = {
+      localSdkRepoPath: "path/to/local/repo",
+      localSpecRepoPath: "/spec/path",
+      workingFolder: "/working/folder",
+      runMode: "spec-pull-request",
+      sdkRepoName: "azure-sdk-for-python-pr",
+      sdkLanguage: SdkName.Python,
+      specCommitSha: "",
+      specRepoHttpsUrl: "",
+    };
+    const mockChangedSpecs = [
+      {
+        specs: [
+          "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/preview/2021-10-01-preview/examples/Employees_Get.json",
+        ],
+        typespecProject: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+        readmeMd: "specification/contosowidgetmanager/resource-manager/readme.md",
+      },
+    ];
+    const mockExecutionReport = {
+      executionResult: "succeeded",
+      packages: [{ packageName: "azure-mgmt-newwidget" }],
+      vsoLogPath: "path/to/log",
+    };
+
+    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(mockCommandInput);
+    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue(["mock-command"]);
+    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue(mockChangedSpecs);
+    vi.spyOn(utils, "resetGitRepo").mockResolvedValue(undefined);
+    vi.spyOn(utils, "runSpecGenSdkCommand").mockResolvedValue(undefined);
+    vi.spyOn(commandHelpers, "getExecutionReport").mockReturnValue(
+      mockExecutionReport as ExecutionReport,
+    );
+    vi.spyOn(commandHelpers, "getBreakingChangeInfo").mockReturnValue(false);
+    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
+    vi.spyOn(commandHelpers, "logIssuesToPipeline").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+    const appendErrorsToVsoLogSpy = vi
+      .spyOn(commandHelpers, "appendErrorsToVsoLog")
+      .mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+    vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI").mockResolvedValue({
+      succeeded: false,
+      errors: ["Python package validation failed"],
+    });
+    vi.spyOn(log, "logMessage").mockImplementation(() => {
+      // mock implementation intentionally left blank
+    });
+
+    const { statusCode, executionResult } = await generateSdkForSpecPr();
+
+    expect(statusCode).toBe(1);
+    expect(executionResult).toBe("failed");
+    expect(appendErrorsToVsoLogSpy).toHaveBeenCalledWith(
+      "path/to/log",
+      "Python package namespace validation",
+      ["Python package validation failed"],
+    );
+    expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
+      mockCommandInput,
+      "failed",
+      false,
+      true,
+      false,
+      "",
+      [],
+      true,
     );
   });
 
@@ -672,6 +813,7 @@ describe("generateSdkForBatchSpecs", () => {
     vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {
       // mock implementation intentionally left blank
     });
+    const pypiValidationSpy = vi.spyOn(pythonPypiValidation, "validatePythonPackagesOnPyPI");
 
     const code = await generateSdkForBatchSpecs(mockBatchType);
     expect(commandHelpers.getSpecPaths).toHaveBeenCalledWith(mockBatchType, "/spec/path");
@@ -685,6 +827,7 @@ describe("generateSdkForBatchSpecs", () => {
       `Runner: markdown file written to ${markdownFilePath}`,
     );
     expect(log.vsoAddAttachment).toHaveBeenCalledWith("Generation Summary", markdownFilePath);
+    expect(pypiValidationSpy).not.toHaveBeenCalled();
 
     const calls = getNormalizedFsCalls(fs.writeFileSync as Mock);
     expect(calls).toMatchSnapshot();

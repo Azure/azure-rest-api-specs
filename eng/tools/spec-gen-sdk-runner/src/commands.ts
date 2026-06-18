@@ -1,15 +1,16 @@
-import { APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
 import {
-  AzsdkBuildResponse,
-  AzsdkGenerateResponse,
-  AzsdkPackResponse,
+  type AzsdkBuildResponse,
+  type AzsdkGenerateResponse,
+  type AzsdkPackResponse,
   buildExecutionReport,
   parseAzsdkResponse,
-} from "./azsdk-adapter.js";
+} from "./azsdk-adapter.ts";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
@@ -25,18 +26,19 @@ import {
   resolvePackagePath,
   selectGenerationTool,
   setPipelineVariables,
-} from "./command-helpers.js";
-import { checkEmitterEnabled, EmitterCheckResult } from "./emitter-check.js";
-import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.js";
-import { detectChangedSpecConfigFiles } from "./spec-helpers.js";
-import { CommandResult, ExecutionReport, SpecGenSdkCmdInput } from "./types.js";
+} from "./command-helpers.ts";
+import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
+import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
+import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
+import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
   execAsync,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
-  SpecConfigs,
-} from "./utils.js";
+  type SpecConfigs,
+} from "./utils.ts";
 
 /**
  * Run the azsdk-cli generation flow for a single TypeSpec spec:
@@ -328,6 +330,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     }
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
+    let pipelineErrorsToLogAfterGroup: string[] = [];
 
     if (tool === "skipped") {
       logMessage(
@@ -379,6 +382,24 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
+        if (commandInput.sdkLanguage === "azure-sdk-for-python") {
+          const pythonPackageValidation = await validatePythonPackagesOnPyPI(
+            executionReport.packages,
+          );
+          if (!pythonPackageValidation.succeeded) {
+            statusCode = 1;
+            executionReport.executionResult = "failed";
+            if (executionReport.vsoLogPath) {
+              appendErrorsToVsoLog(
+                executionReport.vsoLogPath,
+                "Python package namespace validation",
+                pythonPackageValidation.errors,
+              );
+            } else {
+              pipelineErrorsToLogAfterGroup = pythonPackageValidation.errors;
+            }
+          }
+        }
       } catch (error) {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
@@ -426,6 +447,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     logMessage("ending group logging", LogLevel.EndGroup);
     if (executionReport?.vsoLogPath) {
       logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    } else {
+      for (const error of pipelineErrorsToLogAfterGroup) {
+        vsoLogIssue(error);
+      }
     }
   }
   // Process the spec-gen-sdk artifacts

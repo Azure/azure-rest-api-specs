@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./backward-compatibles.tsp";
 import "./models.tsp";
 import "./Site.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

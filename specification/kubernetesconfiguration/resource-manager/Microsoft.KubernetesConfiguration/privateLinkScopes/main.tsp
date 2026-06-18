@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./KubernetesConfigurationPrivateLinkScope.tsp";
 import "./PrivateLinkResource.tsp";
 import "./PrivateEndpointConnection.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from "fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "fs";
 import { glob } from "glob";
 import { dirname, join, resolve } from "path";
 
@@ -10,22 +10,21 @@ import pkg from "lodash";
 const { isEqual } = pkg;
 
 import {
-  ChangeHandler,
+  type ChangeHandler,
   ChangeTypes,
-  DiffResult,
+  type DiffResult,
   FileTypes,
-  PRChange,
-  ReadmeTag,
-} from "./diff-types.js";
+  type PRChange,
+  type ReadmeTag,
+} from "./diff-types.ts";
 
-import { Label, LabelContext, PRType } from "./labelling-types.js";
+import { Label, type LabelContext, PRType } from "./labelling-types.ts";
 
-import { ImpactAssessment } from "./ImpactAssessment.js";
-import { PRContext } from "./PRContext.js";
+import { type ImpactAssessment } from "./ImpactAssessment.ts";
+import { PRContext } from "./PRContext.ts";
 
 import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -658,37 +657,35 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   return ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
 }
 
-export const getRPaaSFolderList = async (
-  client: Octokit,
-  owner: string,
-  repoName: string,
-): Promise<string[]> => {
-  const branch = "main";
-  const folder = "specification";
+export const getRPaaSFolderList = (targetDirectory: string): string[] => {
+  const armLeasesFolder = join(targetDirectory, ".github", "arm-leases");
 
-  const res = await client.rest.repos.getContent({
-    owner,
-    repo: repoName,
-    path: folder,
-    ref: branch,
-  });
+  const folderNames: Set<string> = new Set();
 
-  console.log(
-    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
-  );
+  // Read folders from arm-leases directory to include RPs that have active leases
+  // (indicating they are already registered in RPSaaSMaster)
+  try {
+    if (!existsSync(armLeasesFolder)) {
+      console.log(`arm-leases folder not found at ${armLeasesFolder}`);
+      return [];
+    }
 
-  // Extract folder names from the response
-  if (Array.isArray(res.data)) {
-    const folderNames = res.data
-      .filter((item: any) => item.type === "dir") // Only get directories
-      .map((item: any) => item.name); // Extract the name property
+    const entries = readdirSync(armLeasesFolder);
+    const armLeasesFolders = entries.filter((name: string) => {
+      const fullPath = join(armLeasesFolder, name);
+      return statSync(fullPath).isDirectory() && name !== "scripts";
+    });
 
-    console.log(`Found ${folderNames.length} folders: ${folderNames.join(", ")}`);
-    return folderNames;
+    armLeasesFolders.forEach((name: string) => folderNames.add(name));
+    console.log(
+      `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
+    );
+  } catch (error) {
+    console.log(`Failed to get folder list from ${armLeasesFolder}: ${error}`);
   }
 
-  console.log("No folders found or unexpected response format");
-  return [];
+  console.log(`Total unique RP folders: ${folderNames.size}`);
+  return Array.from(folderNames);
 };
 
 export function getRPRootFolderName(swaggerFile: string): string | undefined {
