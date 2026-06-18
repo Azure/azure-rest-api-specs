@@ -1194,7 +1194,7 @@ model RoutingEventStreamProperties {
   /**
    * Method used to authenticate against the event stream endpoint
    */
-  authenticationType?: AuthenticationType;
+  authenticationType?: AuthenticationType = AuthenticationType.identityBased;
 
   /**
    * Managed identity properties of routing event stream endpoint.
@@ -1202,17 +1202,17 @@ model RoutingEventStreamProperties {
   identity?: ManagedIdentity;
 
   /**
-   * The workspace Id for the event stream endpoint.
+   * The unique GUID of the target Microsoft Fabric workspace for the event stream endpoint.
    */
   workspaceId?: string;
 
   /**
-   * The event stream Id.
+   * The unique GUID of the target event stream under the workspace.
    */
   eventStreamId?: string;
 
   /**
-   * The custom source Id.
+   * The unique GUID of the custom source for the event stream.
    */
   sourceId?: string;
 }

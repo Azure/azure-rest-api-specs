@@ -4726,8 +4726,29 @@
           "description": "Event hub name on the event hub namespace"
         },
         "authenticationType": {
-          "$ref": "#/definitions/AuthenticationType",
-          "description": "Method used to authenticate against the event stream endpoint"
+          "type": "string",
+          "description": "Method used to authenticate against the event stream endpoint",
+          "default": "identityBased",
+          "enum": [
+            "keyBased",
+            "identityBased"
+          ],
+          "x-ms-enum": {
+            "name": "AuthenticationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "keyBased",
+                "value": "keyBased",
+                "description": "keyBased"
+              },
+              {
+                "name": "identityBased",
+                "value": "identityBased",
+                "description": "identityBased"
+              }
+            ]
+          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity",
@@ -4735,15 +4756,15 @@
         },
         "workspaceId": {
           "type": "string",
-          "description": "The workspace Id for the event stream endpoint."
+          "description": "The unique GUID of the target Microsoft Fabric workspace for the event stream endpoint."
         },
         "eventStreamId": {
           "type": "string",
-          "description": "The event stream Id."
+          "description": "The unique GUID of the target event stream under the workspace."
         },
         "sourceId": {
           "type": "string",
-          "description": "The custom source Id."
+          "description": "The unique GUID of the custom source for the event stream."
         }
       },
       "required": [
