@@ -1707,8 +1707,16 @@ union ProvisioningStateUnion {
 @@clientName(Geo.LATAM, "Latam", "csharp");
 @@clientName(Geo.NAM, "Nam", "csharp");
 @@clientName(Geo.OCEANIA, "Oceania", "csharp");
-@@clientName(BastionShareableLinkListRequest, "BastionShareableLinkListContent", "csharp");
-@@clientName(ExpressRouteLinkFailoverStopApiParameters, "ExpressRouteLinkFailoverStopContent", "csharp");
+@@clientName(
+  BastionShareableLinkListRequest,
+  "BastionShareableLinkListContent",
+  "csharp"
+);
+@@clientName(
+  ExpressRouteLinkFailoverStopApiParameters,
+  "ExpressRouteLinkFailoverStopContent",
+  "csharp"
+);
 @@clientName(ChildResource, "NetworkChildResource", "csharp");
 @@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
 @@clientName(WritableResource, "NetworkWritableResource", "csharp");
@@ -1732,20 +1740,76 @@ union ProvisioningStateUnion {
   "IsValidateSniEnabled",
   "csharp"
 );
-@@clientName(Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS, "PreferHttps", "csharp");
-@@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.customBgpIpAddress, "CustomBgpIPAddress", "csharp");
-@@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.ipConfigurationId, "IPConfigurationId", "csharp");
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.customBgpIpAddresses, "CustomBgpIPAddresses", "csharp");
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.defaultBgpIpAddresses, "DefaultBgpIPAddresses", "csharp");
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.ipconfigurationId, "IPConfigurationId", "csharp");
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.tunnelIpAddresses, "TunnelIPAddresses", "csharp");
-@@clientName(Microsoft.Network.ApplicationGatewayConnectionDraining.drainTimeoutInSec, "DrainTimeoutInSeconds", "csharp");
-@@clientName(Common.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval, "TrafficAnalyticsIntervalInMinutes", "csharp");
-@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.privateIpAddress, "PrivateIPAddress", "csharp");
-@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.publicIpAddress, "PublicIPAddress", "csharp");
-@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration, "VpnConnectionDurationInSeconds", "csharp");
-@@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionTime, "VpnConnectionOn", "csharp");
-@@alternateType(Microsoft.Network.NetworkManagerConnectionProperties.networkManagerId, armResourceIdentifier, "csharp");
+@@clientName(
+  Microsoft.Network.ConnectionMonitorHttpConfiguration.preferHTTPS,
+  "PreferHttps",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.customBgpIpAddress,
+  "CustomBgpIPAddress",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.ipConfigurationId,
+  "IPConfigurationId",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IPConfigurationBgpPeeringAddress.customBgpIpAddresses,
+  "CustomBgpIPAddresses",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IPConfigurationBgpPeeringAddress.defaultBgpIpAddresses,
+  "DefaultBgpIPAddresses",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IPConfigurationBgpPeeringAddress.ipconfigurationId,
+  "IPConfigurationId",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.IPConfigurationBgpPeeringAddress.tunnelIpAddresses,
+  "TunnelIPAddresses",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewayConnectionDraining.drainTimeoutInSec,
+  "DrainTimeoutInSeconds",
+  "csharp"
+);
+@@clientName(
+  Common.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval,
+  "TrafficAnalyticsIntervalInMinutes",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.privateIpAddress,
+  "PrivateIPAddress",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.publicIpAddress,
+  "PublicIPAddress",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration,
+  "VpnConnectionDurationInSeconds",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionTime,
+  "VpnConnectionOn",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkManagerConnectionProperties.networkManagerId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@clientName(
   FirewallPolicyPropertiesFormat.explicitProxy,
   "ExplicitProxySettings",
