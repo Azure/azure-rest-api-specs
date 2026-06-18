@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2025-11-01
+tag: package-2026-03-01
 
 directive:
   - where:
@@ -243,6 +243,11 @@ directive:
       - BodyTopLevelProperties
     reason: Placement (introduced in version 2025-04-01) is an ARM level property
   - where:
+      - $.definitions.InterconnectBlock
+    suppress:
+      - BodyTopLevelProperties
+    reason: Placement is an ARM level property
+  - where:
       - $.definitions.StorageProfile.properties.alignRegionalDisksToVMZone
     suppress:
       - EnumInsteadOfBoolean
@@ -401,6 +406,10 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].get.parameters
   - code: ParametersInPointGet
+    reason: Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].get.parameters
+  - code: ParametersInPointGet
     reason: Existing GET operation uses query parameters for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/proximityPlacementGroups/{proximityPlacementGroupName}"].get.parameters
@@ -487,6 +496,10 @@ suppressions:
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}"].delete
+  - code: DeleteResponseCodes
+    reason: Consistent with established Compute RP delete response patterns for SDK and behavioral consistency.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/interconnectBlocks/{interconnectBlockName}"].delete
   - code: DeleteResponseCodes
     reason: Existing delete response codes maintained for backward compatibility.
     from: ComputeRP.json
@@ -852,6 +865,27 @@ suppressions:
     reason: Existing property name maintained for backward compatibility.
     from: ComputeRP.json
     where: $.definitions.DedicatedHostGroupPropertiesAdditionalCapabilities.properties.ultraSSDEnabled
+```
+
+### Tag: package-2026-03-01
+
+These settings apply only when `--tag=package-2026-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-01'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
+  - stable/2025-01-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2025-03-03/GalleryRP.json
+```
+
+### Tag: package-2026-03-01-only
+
+These settings apply only when `--tag=package-2026-03-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-only'
+input-file:
+  - stable/2026-03-01/ComputeRP.json
 ```
 
 ### Tag: package-2025-11-01
