@@ -7,6 +7,10 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
+const ToolboxesRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+};
+
 /**
  * Per-tool configuration that controls tool visibility and search behavior.
  */
@@ -38,6 +42,21 @@ alias ToolConfigExtension = {
 };
 
 /**
+ * Optional name and description fields for tool definitions and nested tool configurations.
+ */
+alias ToolNameAndDescriptionExtension = {
+  /**
+   * Optional user-defined name for this tool or configuration.
+   */
+  name?: string;
+
+  /**
+   * Optional user-defined description for this tool or configuration.
+   */
+  description?: string;
+};
+
+/**
  * Spreads `Source`, changing the selected properties to optional.
  */
 model WithFieldsOptional<Source, Keys extends string> {
@@ -59,6 +78,7 @@ alias ToolboxMCPToolType = "mcp";
 alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2APreviewToolType = "a2a_preview";
+alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
@@ -74,6 +94,7 @@ union ToolboxToolType {
   azure_ai_search: ToolboxAzureAISearchToolType,
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
+  browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
@@ -160,6 +181,15 @@ model A2APreviewToolboxTool extends ToolboxTool {
 }
 
 /**
+ * A browser automation tool stored in a toolbox.
+ */
+model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationPreviewToolType;
+
+  ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
  * A WorkIQ tool stored in a toolbox.
  */
 model WorkIQPreviewToolboxTool extends ToolboxTool {
@@ -186,7 +216,6 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
    */
   type: ToolboxSearchPreviewToolType;
 }
-
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
