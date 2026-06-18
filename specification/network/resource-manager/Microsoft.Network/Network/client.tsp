@@ -3961,6 +3961,38 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Keep the C# operation location parameters aligned with the GA AutoRest surface.
+// The TypeSpec ARM location parameter is string, but these Network operations shipped as AzureLocation.
+@@alternateType(
+  Microsoft.Network.CheckDnsNameAvailability.checkDnsNameAvailability::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.LoadBalancersOperationGroup.swapPublicIpAddresses::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibility::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.ServiceTagsOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
 @@alternateType(
   Common.ApplicationSecurityGroupPropertiesFormat.resourceGuid,
   uuid,
