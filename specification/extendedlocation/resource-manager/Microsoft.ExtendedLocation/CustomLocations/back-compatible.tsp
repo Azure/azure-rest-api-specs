@@ -7,7 +7,7 @@ using Microsoft.ExtendedLocation;
 @@Legacy.flattenProperty(customLocationOperation.display);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(patchableCustomLocations.properties,"!javascript");
+@@Legacy.flattenProperty(patchableCustomLocations.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EnabledResourceType.properties);
@@ -39,6 +39,6 @@ using Microsoft.ExtendedLocation;
 @@clientName(Operations.list, "ListOperations");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(CustomLocations.update::parameters.properties,"!javascript");
+@@Legacy.flattenProperty(CustomLocations.update::parameters.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(ResourceSyncRules.update::parameters.properties,"!javascript");
+@@Legacy.flattenProperty(ResourceSyncRules.update::parameters.properties);
