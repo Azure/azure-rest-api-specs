@@ -13,29 +13,29 @@ import { Duration, formatDuration, getDuration, subtract } from "../../shared/sr
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(options: import("@octokit/types").RequestParameters & {url: string, method: string}) => void}
  */
-export function createLogHook(endpoint, logger) {
+export function createBeforeRequestHook(endpoint, logger) {
   /**
    * @param {import("@octokit/types").RequestParameters & {url: string, method: string}} options
    */
-  function logHook(options) {
+  function beforeRequestHook(options) {
     const request = endpoint(options);
     logger.info(
       `[github] ${request.method.toUpperCase()} ${request.url} ${request.body ? JSON.stringify(request.body) : ""}`,
     );
   }
 
-  return logHook;
+  return beforeRequestHook;
 }
 
 /**
  * @param {import('../../shared/src/logger.js').ILogger} logger
  * @returns {(response: import("@octokit/types").OctokitResponse<any>) => void}
  */
-export function createRateLimitHook(logger) {
+export function createAfterRequestHook(logger) {
   /**
    * @param {import("@octokit/types").OctokitResponse<any>} response
    */
-  function rateLimitHook(response) {
+  function afterRequestHook(response) {
     const {
       "x-ratelimit-limit": limitHeader,
       "x-ratelimit-remaining": remainingHeader,
@@ -67,10 +67,10 @@ export function createRateLimitHook(logger) {
     // const resource = headers["x-ratelimit-resource"];
 
     logger.info(
-      `[github] load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}` +
+      `[github] status: ${response.status}, load: ${toPercent(load)}, used: ${used}, remaining: ${remaining}` +
         `, reset: ${formatDuration(getDuration(new Date(), reset))}`,
     );
   }
 
-  return rateLimitHook;
+  return afterRequestHook;
 }
