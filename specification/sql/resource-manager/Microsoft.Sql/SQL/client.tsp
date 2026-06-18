@@ -1327,7 +1327,20 @@ union SqlNameAvailabilityResourceType {
   SqlNameAvailabilityResourceType,
   "csharp"
 );
+@@usage(
+  RecommendedSensitivityLabelUpdateProperties,
 
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RecommendedSensitivityLabelUpdate,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 @@usage(EndpointCertificate, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(DatabaseColumn, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@clientName(
@@ -1408,11 +1421,7 @@ union SqlNameAvailabilityResourceType {
 @@alternateType(ManagedInstanceOperation.name, uuid, "csharp");
 @@alternateType(InstancePoolOperation.name, uuid, "csharp");
 @@clientName(ElasticPools.cancel, "CancelElasticPoolOperation", "csharp");
-@@clientName(
-  ManagedInstancePrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
-  "ConnectionState",
-  "csharp"
-);
+
 @@clientName(
   ManagedInstances.create,
   "CreateManagedInstanceTdeCertificate",
@@ -1428,6 +1437,9 @@ union SqlNameAvailabilityResourceType {
   "content",
   "csharp"
 );
+@@clientName(ServerUsageProperties.nextResetTime, "NextResetOn", "csharp");
+@@clientName(ResourceWithWritableName.type, "ResourceType", "csharp");
+@@alternateType(ResourceWithWritableName.type, armResourceType, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
@@ -1624,6 +1636,56 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 
+// Setter regressions vs v1.4.0: add Usage.input on the model and its inner *Properties bag
+// so that flat-projected properties are emitted with public setters and list properties
+// are emitted as IList<T> rather than IReadOnlyList<T>.
+@@usage(
+  RecommendedSensitivityLabelUpdate,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  RecommendedSensitivityLabelUpdateProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SensitivityLabelUpdate,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  SensitivityLabelUpdateProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseExtensionsProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineListInputProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  DatabaseSqlVulnerabilityAssessmentRuleBaselineInputProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  TdeCertificateProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(
+  QueryStatisticsProperties,
+  Azure.ClientGenerator.Core.Usage.input,
+  "csharp"
+);
+@@usage(QueryMetricInterval, Azure.ClientGenerator.Core.Usage.input, "csharp");
+
 @@clientName(AvailabilityZoneType.`1`, "One", "csharp");
 @@clientName(AvailabilityZoneType.`2`, "Two", "csharp");
 @@clientName(AvailabilityZoneType.`3`, "Three", "csharp");
@@ -1737,6 +1799,12 @@ union SqlNameAvailabilityResourceType {
   VulnerabilityAssessmentName,
   "csharp"
 );
+@@clientName(LegacyDataMaskingFunction.CCN, "Ccn", "csharp");
+@@clientName(LegacyDataMaskingFunction.SSN, "Ssn", "csharp");
+@@clientName(DataMaskingFunction.CCN, "Ccn", "csharp");
+@@clientName(DataMaskingFunction.SSN, "Ssn", "csharp");
+@@clientName(RestorePointType.CONTINUOUS, "Continuous", "csharp");
+@@clientName(RestorePointType.DISCRETE, "Discrete", "csharp");
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
@@ -1751,3 +1819,14 @@ namespace Azure.ResourceManager.Models {
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );
+
+// Change the BlobAuditingPolicyName from fixed enum to extensible enum
+/**
+ * The name of the blob auditing policy.
+ */
+union BlobAuditingPolicyNameType {
+  BlobAuditingPolicyName,
+  string,
+}
+@@alternateType(BlobAuditingPolicyName, BlobAuditingPolicyNameType, "csharp");
+@@clientName(BlobAuditingPolicyNameType, "BlobAuditingPolicyName", "csharp");

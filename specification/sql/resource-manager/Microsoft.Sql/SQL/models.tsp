@@ -2959,6 +2959,11 @@ union ServerNetworkAccessFlag {
    * Disabled
    */
   Disabled: "Disabled",
+
+  /**
+   * SecuredByPerimeter
+   */
+  SecuredByPerimeter: "SecuredByPerimeter",
 }
 
 /**
@@ -4065,7 +4070,7 @@ enum BlobAuditingPolicyName {
   /**
    * default
    */
-  default,
+  default
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -14663,6 +14668,18 @@ model ServerUsageProperties {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  resourceName?: string;
+
+  /**
+   * The next reset time for the metric (ISO8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  nextResetTime?: utcDateTime;
 }
 
 /**
