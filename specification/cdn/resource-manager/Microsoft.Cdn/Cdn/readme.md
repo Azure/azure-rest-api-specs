@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-2026-07` is specified on the comma
 ```yaml $(tag) == 'package-2026-07'
 input-file:
   - stable/2026-07-01/openapi.json
+```
   
 ### Tag: package-2025-12
 
