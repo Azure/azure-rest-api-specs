@@ -680,14 +680,18 @@ model AudioInputTranscriptionOptions {
       | "gpt-4o-mini-transcribe"
       | "azure-speech"
   )
-  `model`:
-    | string
-    | "whisper-1"
-    | "gpt-4o-transcribe"
-    | "gpt-4o-mini-transcribe"
-    | "gpt-4o-transcribe-diarize"
-    | "mai-transcribe-1"
-    | "azure-speech";
+  @typeChangedFrom(
+    Versions.v1,
+
+      | string
+      | "whisper-1"
+      | "gpt-4o-transcribe"
+      | "gpt-4o-mini-transcribe"
+      | "gpt-4o-transcribe-diarize"
+      | "mai-transcribe-1"
+      | "azure-speech"
+  )
+  `model`: string;
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
   language?: string;
@@ -721,6 +725,7 @@ union Modality {
 @usage(RequestUsage)
 model EouDetection {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Intentionally a plain string discriminator at v1 to allow free-form model values."
   @typeChangedFrom(
     Versions.v2026_06_01_preview,
 
@@ -738,11 +743,7 @@ model EouDetection {
       | "smart_end_of_turn_detection"
       | string
   )
-  `model`:
-    | "semantic_detection_v1"
-    | "semantic_detection_v1_en"
-    | "semantic_detection_v1_multilingual"
-    | string;
+  `model`: string;
 }
 
 /** Threshold level settings for Azure semantic end-of-utterance detection. */
