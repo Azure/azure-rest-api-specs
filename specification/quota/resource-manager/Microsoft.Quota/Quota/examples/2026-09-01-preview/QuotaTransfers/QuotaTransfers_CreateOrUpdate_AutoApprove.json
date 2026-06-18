@@ -1,0 +1,75 @@
+{
+  "operationId": "QuotaTransfers_CreateOrUpdate",
+  "title": "QuotaTransfers_CreateOrUpdate - autoApprove same-tenant",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000001",
+    "targetProvider": "Microsoft.Compute",
+    "region": "eastus",
+    "transferName": "compute-stdDv5-autoapprove-202",
+    "resource": {
+      "properties": {
+        "displayName": "Move 25 Dv5 vCPU - auto approved",
+        "destinationSubscription": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+        "billingAccountId": "1234567890",
+        "resourceName": "standardDv5Family",
+        "amount": 25,
+        "autoApprove": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-autoapprove-202",
+        "name": "compute-stdDv5-autoapprove-202",
+        "type": "Microsoft.Quota/quotaTransfers",
+        "etag": "\"def456\"",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "transferStatus": "Completed",
+          "transferId": "abcdef12-3456-7890-abcd-ef1234567890",
+          "displayName": "Move 25 Dv5 vCPU - auto approved",
+          "destinationSubscription": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+          "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+          "billingAccountId": "1234567890",
+          "resourceName": "standardDv5Family",
+          "amount": 25,
+          "autoApprove": true,
+          "createdAt": "2026-09-10T18:05:00Z",
+          "createdBy": "donor-admin@contoso.com",
+          "approval": {
+            "actor": "donor-admin@contoso.com",
+            "occurredAt": "2026-09-10T18:05:02Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Quota/locations/eastus/operationStatuses/op-9a2e?api-version=2026-09-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-autoapprove-202",
+        "name": "compute-stdDv5-autoapprove-202",
+        "type": "Microsoft.Quota/quotaTransfers",
+        "etag": "\"def456\"",
+        "properties": {
+          "provisioningState": "Accepted",
+          "transferStatus": "Pending",
+          "transferId": "abcdef12-3456-7890-abcd-ef1234567890",
+          "displayName": "Move 25 Dv5 vCPU - auto approved",
+          "destinationSubscription": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+          "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+          "billingAccountId": "1234567890",
+          "resourceName": "standardDv5Family",
+          "amount": 25,
+          "autoApprove": true,
+          "createdAt": "2026-09-10T18:05:00Z",
+          "createdBy": "donor-admin@contoso.com"
+        }
+      }
+    }
+  }
+}
