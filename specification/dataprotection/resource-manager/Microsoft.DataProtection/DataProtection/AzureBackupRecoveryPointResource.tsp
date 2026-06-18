@@ -60,7 +60,6 @@ interface AzureBackupRecoveryPointResources {
 }
 
 @@doc(AzureBackupRecoveryPointResource.name, "");
-@@doc(
-  AzureBackupRecoveryPointResource.properties,
+@@doc(AzureBackupRecoveryPointResource.properties,
   "AzureBackupRecoveryPointResource properties"
 );
