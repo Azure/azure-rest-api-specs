@@ -7,10 +7,6 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
-const ToolboxesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
-};
-
 /**
  * Per-tool configuration that controls tool visibility and search behavior.
  */
