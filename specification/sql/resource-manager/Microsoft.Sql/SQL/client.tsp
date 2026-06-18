@@ -394,6 +394,27 @@ using Microsoft.Sql;
   "csharp"
 );
 @@clientName(MinimalTlsVersion, "SqlMinimalTlsVersion", "csharp");
+@@clientName(MinimalTlsVersion.None, "TlsNone", "csharp");
+@@clientName(
+  MinimalTlsVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  MinimalTlsVersion.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  MinimalTlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  MinimalTlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 @@clientName(BackupStorageAccessTier, "SqlBackupStorageAccessTier", "csharp");
 @@clientName(Phase, "DatabaseOperationPhase", "csharp");
 @@clientName(PhaseDetails, "DatabaseOperationPhaseDetails", "csharp");
