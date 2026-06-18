@@ -1709,10 +1709,10 @@ union ProvisioningStateUnion {
 @@clientName(Geo.OCEANIA, "Oceania", "csharp");
 @@clientName(BastionShareableLinkListRequest, "BastionShareableLinkListContent", "csharp");
 @@clientName(ExpressRouteLinkFailoverStopApiParameters, "ExpressRouteLinkFailoverStopContent", "csharp");
-@@clientName(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters.stopParameters, "ExpressRouteCircuitFailoverStopContent", "csharp");
-@@clientName(ExpressRouteGateways.stopSiteFailoverTest::parameters.stopParameters, "ExpressRouteGatewayFailoverStopContent", "csharp");
+@@clientName(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters, "ExpressRouteCircuitFailoverStopContent", "csharp");
+@@clientName(ExpressRouteGateways.stopSiteFailoverTest::parameters, "ExpressRouteGatewayFailoverStopContent", "csharp");
 @@clientName(ChildResource, "NetworkChildResource", "csharp");
-@@clientName(ProxyResource, "NetworkProxyResource", "csharp");
+@@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
 @@clientName(WritableResource, "NetworkWritableResource", "csharp");
 @@clientName(
   Microsoft.Network.ApplicationGatewayBackendHttpSettingsPropertiesFormat.requestTimeout,
@@ -1739,10 +1739,10 @@ union ProvisioningStateUnion {
 @@clientName(Microsoft.Network.GatewayCustomBgpIpAddressIpConfiguration.ipConfigurationId, "IPConfigurationId", "csharp");
 @@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.customBgpIpAddresses, "CustomBgpIPAddresses", "csharp");
 @@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.defaultBgpIpAddresses, "DefaultBgpIPAddresses", "csharp");
-@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.ipConfigurationId, "IPConfigurationId", "csharp");
+@@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.ipconfigurationId, "IPConfigurationId", "csharp");
 @@clientName(Microsoft.Network.IPConfigurationBgpPeeringAddress.tunnelIpAddresses, "TunnelIPAddresses", "csharp");
 @@clientName(Microsoft.Network.ApplicationGatewayConnectionDraining.drainTimeoutInSec, "DrainTimeoutInSeconds", "csharp");
-@@clientName(Common.TrafficAnalyticsProperties.trafficAnalyticsInterval, "TrafficAnalyticsIntervalInMinutes", "csharp");
+@@clientName(Common.TrafficAnalyticsConfigurationProperties.trafficAnalyticsInterval, "TrafficAnalyticsIntervalInMinutes", "csharp");
 @@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.privateIpAddress, "PrivateIPAddress", "csharp");
 @@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.publicIpAddress, "PublicIPAddress", "csharp");
 @@clientName(Microsoft.Network.VpnClientConnectionHealthDetail.vpnConnectionDuration, "VpnConnectionDurationInSeconds", "csharp");
