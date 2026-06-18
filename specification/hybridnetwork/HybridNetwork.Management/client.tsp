@@ -15,7 +15,8 @@ using TypeSpec.Http;
 @@usage(Component, Usage.input | Usage.output);
 @@clientName(ExecuteRequestParameters, "ExecuteRequestContent", "csharp");
 @@clientName(ProxyArtifact.list, "GetProxyArtifacts", "csharp");
-@@clientName(ProxyArtifact.proxyArtifactGet,
+@@clientName(
+  ProxyArtifact.proxyArtifactGet,
   "GetProxyArtifactVersions",
   "csharp"
 );
@@ -29,24 +30,29 @@ using TypeSpec.Http;
 @@clientName(DaemonSet, "KubernetesDaemonSet", "csharp");
 @@clientName(HelmInstallOptions, "HelmInstallConfig", "csharp");
 @@clientName(HelmUpgradeOptions, "HelmUpgradeConfig", "csharp");
-@@clientName(HelmMappingRuleProfileOptions,
+@@clientName(
+  HelmMappingRuleProfileOptions,
   "HelmMappingRuleProfileConfig",
   "csharp"
 );
 @@clientName(AzureCoreNFVIDetails, "AzureCoreNfviDetails", "csharp");
-@@clientName(AzureOperatorNexusClusterNFVIDetails,
+@@clientName(
+  AzureOperatorNexusClusterNFVIDetails,
   "AzureOperatorNexusClusterNfviDetails",
   "csharp"
 );
-@@clientName(VirtualNetworkFunctionNFVIType,
+@@clientName(
+  VirtualNetworkFunctionNFVIType,
   "VirtualNetworkFunctionNfviType",
   "csharp"
 );
-@@clientName(ContainerizedNetworkFunctionNFVIType,
+@@clientName(
+  ContainerizedNetworkFunctionNFVIType,
   "ContainerizedNetworkFunctionNfviType",
   "csharp"
 );
-@@clientName(VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
+@@clientName(
+  VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
   "VirtualNetworkFunctionDefinitionVersion",
   "csharp"
 );
@@ -68,121 +74,170 @@ using TypeSpec.Http;
 @@clientName(DaemonSet.ready, "ReadyNumberOfPods", "csharp");
 @@clientName(DaemonSet.upToDate, "UpToDateNumberOfPods", "csharp");
 @@clientName(DaemonSet.available, "AvailableNumberOfPods", "csharp");
-@@alternateType(ReferencedResource.id,
+@@alternateType(
+  ReferencedResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(networkServiceDesignVersionPropertiesFormat.configurationGroupSchemaReferences,
+@@clientName(
+  networkServiceDesignVersionPropertiesFormat.configurationGroupSchemaReferences,
   "ReferencedConfigurationGroupSchemas",
   "csharp"
 );
-@@clientName(SiteNetworkServicePropertiesFormat.desiredStateConfigurationGroupValueReferences,
+@@clientName(
+  SiteNetworkServicePropertiesFormat.desiredStateConfigurationGroupValueReferences,
   "DesiredStateConfigurationGroupValueReferencedResources",
   "csharp"
 );
-@@clientName(SiteNetworkServicePropertiesFormat.lastStateConfigurationGroupValueReferences,
+@@clientName(
+  SiteNetworkServicePropertiesFormat.lastStateConfigurationGroupValueReferences,
   "LastStateConfigurationGroupValueReferencedResources",
   "csharp"
 );
-@@clientName(SitePropertiesFormat.siteNetworkServiceReferences,
+@@clientName(
+  SitePropertiesFormat.siteNetworkServiceReferences,
   "ReferencedSiteNetworkServices",
   "csharp"
 );
-@@alternateType(NetworkFunctionPropertiesFormat.nfviId,
+@@alternateType(
+  NetworkFunctionPropertiesFormat.nfviId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(OpenDeploymentResourceReference.id,
+@@alternateType(
+  OpenDeploymentResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(SecretDeploymentResourceReference.id,
+@@alternateType(
+  SecretDeploymentResourceReference.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(AzureStorageAccountContainerCredential.containerSasUri,
+@@alternateType(
+  AzureStorageAccountContainerCredential.containerSasUri,
   url,
   "csharp"
 );
-@@alternateType(AzureStorageAccountCredential.storageAccountId,
+@@alternateType(
+  AzureStorageAccountCredential.storageAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ArtifactStorePropertiesFormat.storageResourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(ArtifactStorePropertiesFormatManagedResourceGroupConfiguration.location,
+@@clientName(AzureStorageAccountCredential.expiry, "ExpiryOn", "csharp");
+@@alternateType(
+  configurationGroupValuePropertiesFormat.configurationGroupSchemaOfferingLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(ManagedResourceGroupConfiguration.location,
+@@alternateType(
+  NetworkFunctionPropertiesFormat.networkFunctionDefinitionOfferingLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(AzureCoreNFVIDetails.location,
+@@alternateType(
+  SiteNetworkServicePropertiesFormat.networkServiceDesignVersionOfferingLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@clientName(AzureArcK8sClusterNFVIDetails,
+@@alternateType(
+  ArtifactStorePropertiesFormat.storageResourceId,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ArtifactStorePropertiesFormatManagedResourceGroupConfiguration.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  ManagedResourceGroupConfiguration.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  AzureCoreNFVIDetails.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@clientName(
+  AzureArcK8sClusterNFVIDetails,
   "AzureArcK8SClusterNfviDetails",
   "csharp"
 );
-@@alternateType(AzureContainerRegistryScopedTokenCredential.acrServerUrl,
+@@alternateType(
+  AzureContainerRegistryScopedTokenCredential.acrServerUrl,
   url,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@clientName(
+  AzureContainerRegistryScopedTokenCredential.expiry,
+  "ExpiryOn",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.ProxyResource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.ProxyResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.TrackedResource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.TrackedResource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ProxyArtifactListOverview.id,
+@@alternateType(
+  ProxyArtifactListOverview.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(ProxyArtifactVersionsListOverview.id,
+@@alternateType(
+  ProxyArtifactVersionsListOverview.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(NetworkFunction.etag, Azure.Core.eTag, "csharp");
 
-@@clientName(NSDArtifactProfile, "NsdArtifactProfile", "java");
-@@clientName(NFVIs, "NfvIs", "java");
+@@clientName(NSDArtifactProfile, "NsdArtifactProfile", "java, csharp");
+@@clientName(NFVIs, "NfvIs", "java, csharp");
 @@clientName(AzureCoreNFVIDetails, "AzureCoreNfviDetails", "java");
-@@clientName(AzureArcK8sClusterNFVIDetails,
+@@clientName(
+  AzureArcK8sClusterNFVIDetails,
   "AzureArcK8SClusterNfviDetails",
   "java,python"
 );
-@@clientName(AzureOperatorNexusClusterNFVIDetails,
+@@clientName(
+  AzureOperatorNexusClusterNFVIDetails,
   "AzureOperatorNexusClusterNfviDetails",
   "java"
 );
-@@clientName(VirtualNetworkFunctionNFVIType,
+@@clientName(
+  VirtualNetworkFunctionNFVIType,
   "VirtualNetworkFunctionNfviType",
   "java"
 );
-@@clientName(ContainerizedNetworkFunctionNFVIType,
+@@clientName(
+  ContainerizedNetworkFunctionNFVIType,
   "ContainerizedNetworkFunctionNfviType",
   "java"
 );
-@@clientName(VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
+@@clientName(
+  VirtualNetworkFunctionNetworkFunctionDefinitionVersion,
   "VirtualNetworkFunctionDefinitionVersion",
   "java,python,go"
 );
 
-@@clientName(Microsoft.HybridNetwork,
+@@clientName(
+  Microsoft.HybridNetwork,
   "HybridNetworkManagementClient",
   "python,javascript"
 );
-@@clientName(AzureArcK8sClusterNFVIDetails,
+@@clientName(
+  AzureArcK8sClusterNFVIDetails,
   "AzureArcK8SClusterNFVIDetails",
   "python"
 );
@@ -238,12 +293,16 @@ op proxyArtifactUpdateState(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body
   parameters: ArtifactChangeState,
-): ArmResponse<ProxyArtifactVersionsListOverview> | ArmAcceptedLroResponse<
-  "Request of updating artifact state is accepted.",
-  ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
-> | ErrorResponse;
+):
+  | ArmResponse<ProxyArtifactVersionsListOverview>
+  | ArmAcceptedLroResponse<
+      "Request of updating artifact state is accepted.",
+      ArmLroLocationHeader<FinalResult = ProxyArtifactVersionsListOverview>
+    >
+  | ErrorResponse;
 
-@@override(ProxyArtifact.updateState,
+@@override(
+  ProxyArtifact.updateState,
   proxyArtifactUpdateState,
   "go,javascript"
 );
