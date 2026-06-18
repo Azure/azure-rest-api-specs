@@ -29,7 +29,6 @@ model QuotaTransfer
     SegmentName = "quotaTransfers",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,62}$"
   >;
-
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Standard ARM etag envelope property."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
@@ -133,7 +132,8 @@ interface QuotaTransfers {
   >;
 }
 
-@@doc(QuotaTransfer.name,
+@@doc(
+  QuotaTransfer.name,
   "The donor-chosen name segment of the quota transfer."
 );
 @@doc(QuotaTransfer.properties, "Properties of the quota transfer.");

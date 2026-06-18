@@ -30,7 +30,6 @@ model IncomingQuotaTransfer
     SegmentName = "incomingQuotaTransfers",
     NamePattern = ""
   >;
-
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Standard ARM etag envelope property."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
@@ -187,9 +186,11 @@ interface IncomingQuotaTransfers {
   >;
 }
 
-@@doc(IncomingQuotaTransfer.name,
+@@doc(
+  IncomingQuotaTransfer.name,
   "Server-generated GUID identifier of the incoming quota transfer."
 );
-@@doc(IncomingQuotaTransfer.properties,
+@@doc(
+  IncomingQuotaTransfer.properties,
   "Properties of the incoming quota transfer."
 );
