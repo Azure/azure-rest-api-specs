@@ -4,7 +4,6 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -57,20 +56,31 @@ alias ToolFields<Source> = {
   ...OmitProperties<Source, "name" | "description" | "type">;
 };
 
+alias ToolboxCodeInterpreterToolType = "code_interpreter";
+alias ToolboxFileSearchToolType = "file_search";
+alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxMCPToolType = "mcp";
+alias ToolboxAzureAISearchToolType = "azure_ai_search";
+alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2APreviewToolType = "a2a_preview";
+alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
+alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
+
 /**
  * Supported tool types for tools stored in a toolbox.
  */
 union ToolboxToolType {
-  code_interpreter: "code_interpreter",
-  file_search: "file_search",
-  web_search: "web_search",
-  mcp: "mcp",
-  azure_ai_search: "azure_ai_search",
-  openapi: "openapi",
-  a2a_preview: "a2a_preview",
-  work_iq_preview: "work_iq_preview",
-  fabric_iq_preview: "fabric_iq_preview",
-  toolbox_search_preview: "toolbox_search_preview",
+  code_interpreter: ToolboxCodeInterpreterToolType,
+  file_search: ToolboxFileSearchToolType,
+  web_search: ToolboxWebSearchToolType,
+  mcp: ToolboxMCPToolType,
+  azure_ai_search: ToolboxAzureAISearchToolType,
+  openapi: ToolboxOpenApiToolType,
+  a2a_preview: ToolboxA2APreviewToolType,
+  work_iq_preview: ToolboxWorkIQPreviewToolType,
+  fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  toolbox_search_preview: ToolboxSearchPreviewToolType,
 }
 
 /**
@@ -91,7 +101,7 @@ model ToolboxTool {
  * A code interpreter tool stored in a toolbox.
  */
 model CodeInterpreterToolboxTool extends ToolboxTool {
-  type: "code_interpreter";
+  type: ToolboxCodeInterpreterToolType;
 
   ...ToolFields<OpenAI.CodeInterpreterTool>;
 }
@@ -100,7 +110,7 @@ model CodeInterpreterToolboxTool extends ToolboxTool {
  * A file search tool stored in a toolbox.
  */
 model FileSearchToolboxTool extends ToolboxTool {
-  type: "file_search";
+  type: ToolboxFileSearchToolType;
 
   ...WithFieldsOptional<
     ToolFields<OpenAI.FileSearchTool>,
@@ -112,7 +122,7 @@ model FileSearchToolboxTool extends ToolboxTool {
  * A web search tool stored in a toolbox.
  */
 model WebSearchToolboxTool extends ToolboxTool {
-  type: "web_search";
+  type: ToolboxWebSearchToolType;
 
   ...ToolFields<OpenAI.WebSearchTool>;
 }
@@ -121,7 +131,7 @@ model WebSearchToolboxTool extends ToolboxTool {
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
-  type: "mcp";
+  type: ToolboxMCPToolType;
 
   ...ToolFields<OpenAI.MCPTool>;
 }
@@ -130,7 +140,7 @@ model MCPToolboxTool extends ToolboxTool {
  * An Azure AI Search tool stored in a toolbox.
  */
 model AzureAISearchToolboxTool extends ToolboxTool {
-  type: "azure_ai_search";
+  type: ToolboxAzureAISearchToolType;
 
   ...ToolFields<AzureAISearchTool>;
 }
@@ -139,7 +149,7 @@ model AzureAISearchToolboxTool extends ToolboxTool {
  * An OpenAPI tool stored in a toolbox.
  */
 model OpenApiToolboxTool extends ToolboxTool {
-  type: "openapi";
+  type: ToolboxOpenApiToolType;
 
   ...ToolFields<OpenApiTool>;
 }
@@ -148,7 +158,7 @@ model OpenApiToolboxTool extends ToolboxTool {
  * An A2A tool stored in a toolbox.
  */
 model A2APreviewToolboxTool extends ToolboxTool {
-  type: "a2a_preview";
+  type: ToolboxA2APreviewToolType;
 
   ...ToolFields<A2APreviewTool>;
 }
@@ -157,7 +167,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
  * A WorkIQ tool stored in a toolbox.
  */
 model WorkIQPreviewToolboxTool extends ToolboxTool {
-  type: "work_iq_preview";
+  type: ToolboxWorkIQPreviewToolType;
 
   ...ToolFields<WorkIQPreviewTool>;
 }
@@ -166,7 +176,7 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
  * A FabricIQ tool stored in a toolbox.
  */
 model FabricIQPreviewToolboxTool extends ToolboxTool {
-  type: "fabric_iq_preview";
+  type: ToolboxFabricIQPreviewToolType;
 
   ...ToolFields<FabricIQPreviewTool>;
 }
@@ -178,7 +188,7 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
    */
-  type: "toolbox_search_preview";
+  type: ToolboxSearchPreviewToolType;
 }
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
