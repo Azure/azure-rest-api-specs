@@ -7083,19 +7083,7 @@ model AssociationContractProperties {
   /**
    * Provisioning state.
    */
-  provisioningState?: AssociationEntityProvisioningState;
-}
-
-/**
- * Provisioning state.
- */
-union AssociationEntityProvisioningState {
-  string,
-
-  /**
-   * Created.
-   */
-  Created: "created",
+  provisioningState?: "created";
 }
 
 /**

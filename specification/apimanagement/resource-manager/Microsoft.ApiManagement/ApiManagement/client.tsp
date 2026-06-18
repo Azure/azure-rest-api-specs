@@ -26,6 +26,18 @@ model CSharpApiManagementServicePatch
   >;
 }
 
+// C# compatibility enum surfaced by the previous AutoRest SDK for association
+// provisioning state. Keep it in client.tsp and apply it with @@alternateType so
+// the OpenAPI output remains unchanged.
+union AssociationEntityProvisioningState {
+  string,
+
+  /**
+   * Created.
+   */
+  Created: "created",
+}
+
 // Java-specific compatibility customizations generated per TypeSpec migration guidance.
 @@clientName(
   Microsoft.ApiManagement.PreferredIPVersion,
@@ -225,8 +237,6 @@ op replacePurge(
 @@apiVersion(ApiManagementSku.apiVersions, false);
 
 @@clientName(GatewayHostnameConfigurationContractProperties.negotiateClientCertificate, "IsClientCertificateRequired", "csharp");
-@@clientName(SubscriptionsDelegationSettingsProperties.enabled, "IsSubscriptionDelegationEnabled", "csharp");
-@@clientName(RegistrationDelegationSettingsProperties.enabled, "IsUserRegistrationDelegationEnabled", "csharp");
 @@clientName(BackendTlsProperties.validateCertificateChain, "ShouldValidateCertificateChain", "csharp");
 @@clientName(BackendTlsProperties.validateCertificateName, "ShouldValidateCertificateName", "csharp");
 @@clientName(HostnameConfiguration.defaultSslBinding, "IsDefaultSslBindingEnabled", "csharp");
@@ -563,6 +573,7 @@ op replacePurge(
 @@clientName(TagTagResourceContractProperties, "AssociatedTagProperties", "csharp");
 @@clientName(LlmDiagnosticSettings, "LlmDiagnosticSettings", "csharp");
 @@clientName(AssociationContractProperties.provisioningState, "ProvisioningState", "csharp");
+@@alternateType(AssociationContractProperties.provisioningState, AssociationEntityProvisioningState, "csharp");
 @@clientName(ConnectivityIssue.type, "IssueType", "csharp");
 @@clientName(ApiManagementServiceApplyNetworkConfigurationParameters, "ApiManagementServiceApplyNetworkConfigurationContent", "csharp");
 @@clientName(PolicyCollection, "PolicyListResult", "csharp");
