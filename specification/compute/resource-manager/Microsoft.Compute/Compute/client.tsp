@@ -999,15 +999,9 @@ model VMSizePropertiesWithAdditionalProperties {
 
 // Mark non-pageable list operations as pageable for backward compatibility.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Legacy.markAsPageable(
-  VirtualMachineExtensions.list,
-  "csharp"
-);
+@@Legacy.markAsPageable(VirtualMachineExtensions.list, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Legacy.markAsPageable(
-  VirtualMachineScaleSetVMExtensions.list,
-  "csharp"
-);
+@@Legacy.markAsPageable(VirtualMachineScaleSetVMExtensions.list, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
 @@Legacy.markAsPageable(
   VirtualMachineImagesOperationGroup.listByEdgeZone,
@@ -2274,10 +2268,7 @@ union ComputeUsageUnit {
 
 // Mark non-pageable list operations as pageable for backward compatibility.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve C# pageable surface from the previous SDK."
-@@Legacy.markAsPageable(
-  DiskAccesses.getPrivateLinkResources,
-  "csharp"
-);
+@@Legacy.markAsPageable(DiskAccesses.getPrivateLinkResources, "csharp");
 
 // .NET back-compat: restore previously shipped acronym/casing for extensible-enum members.
 @@clientName(DiskStorageAccountTypes.Standard_LRS, "StandardLrs", "csharp");
