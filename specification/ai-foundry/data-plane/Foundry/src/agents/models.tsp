@@ -9,9 +9,7 @@ namespace Azure.AI.Projects;
 
 const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
-    AgentDefinitionOptInKeys.code_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview
   ],
 };
@@ -28,12 +26,6 @@ model CreateAgentVersionRequest {
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
 }
@@ -80,23 +72,14 @@ model CreateAgentRequest {
   @maxLength(63)
   name: string;
 
+  @doc("The initial operational state of the agent. Defaults to 'enabled' if not specified.")
+  state?: AgentState = AgentState.enabled;
+
   ...CreateAgentVersionRequest;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent")
   agent_endpoint?: AgentEndpointConfig;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
 }
@@ -105,10 +88,6 @@ model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model PatchAgentRequest {
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
@@ -125,6 +104,17 @@ union AgentObjectType {
   agentContainer: "agent.container",
 }
 
+@doc("The operational state of an agent.")
+union AgentState {
+  string,
+
+  @doc("Agent endpoint accepts requests. This is the default state on creation.")
+  enabled: "enabled",
+
+  @doc("Agent endpoint rejects all requests.")
+  disabled: "disabled",
+}
+
 model AgentObject {
   @doc("The object type, which is always 'agent'.")
   object: AgentObjectType.agent;
@@ -136,56 +126,30 @@ model AgentObject {
   @maxLength(63)
   name: string;
 
+  @doc("The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.")
+  @visibility(Lifecycle.Read)
+  state: AgentState;
+
   @doc("The latest version of the agent.")
   versions: {
     latest: AgentVersionObject;
   };
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   agent_card?: AgentCard;
 }
 
@@ -221,42 +185,18 @@ model AgentVersionObject {
   @doc("Error details if the agent version provisioning failed.")
   error?: ApiError;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
   instance_identity?: AgentIdentity;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint?: AgentIdentity;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The blueprint for the agent")
   @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{
-      required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview],
-    }
-  )
   @doc("The unique GUID identifier of the agent.")
   @visibility(Lifecycle.Read)
   agent_guid?: string;
@@ -403,10 +343,6 @@ model WorkflowAgentDefinition extends AgentDefinition {
 }
 
 @doc("Container-based deployment configuration for a hosted agent.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model ContainerConfiguration {
   @doc("The container image for the hosted agent.")
   @example("my-registry.azurecr.io/my-hosted-agent:latest")
@@ -414,10 +350,6 @@ model ContainerConfiguration {
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model CodeConfiguration {
   @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
   runtime: string;
@@ -472,10 +404,6 @@ model ExternalAgentDefinition extends AgentDefinition {
 }
 
 @doc("The hosted agent definition.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
 
@@ -502,17 +430,9 @@ model HostedAgentDefinition extends AgentDefinition {
   environment_variables?: Record<string>;
 
   @doc("Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   container_configuration?: ContainerConfiguration;
 
   @doc("The protocols that the agent supports for ingress communication.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   @example(#[
     #{ protocol: "responses", version: "v0.1.1" },
     #{ protocol: "a2a", version: "v0.3.0" }
@@ -520,10 +440,6 @@ model HostedAgentDefinition extends AgentDefinition {
   protocol_versions?: ProtocolVersionRecord[];
 
   @doc("Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-  )
   code_configuration?: CodeConfiguration;
 
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
@@ -640,27 +556,15 @@ union ContainerLogKind {
   system: "system",
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union VersionSelectorType {
   string,
   FixedRatio: "FixedRatio",
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model VersionSelector {
   version_selection_rules: VersionSelectionRule[];
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @discriminator("type")
 model VersionSelectionRule {
   type: VersionSelectorType;
@@ -669,10 +573,6 @@ model VersionSelectionRule {
   agent_version: string;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model FixedRatioVersionSelectionRule extends VersionSelectionRule {
   type: VersionSelectorType.FixedRatio;
 
@@ -682,19 +582,11 @@ model FixedRatioVersionSelectionRule extends VersionSelectionRule {
   traffic_percentage: int32;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @discriminator("type")
 model AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
 
@@ -702,52 +594,28 @@ model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   isolation_key_source?: IsolationKeySource;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.BotService;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model BotServiceRbacAuthorizationScheme
   extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
 }
 
 @discriminator("kind")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model IsolationKeySource {
   kind: IsolationKeySourceKind;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model EntraIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Entra;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model HeaderIsolationKeySource extends IsolationKeySource {
   kind: IsolationKeySourceKind.Header;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union AgentEndpointAuthorizationSchemeType {
   string,
   Entra: "Entra",
@@ -755,20 +623,12 @@ union AgentEndpointAuthorizationSchemeType {
   BotServiceRbac: "BotServiceRbac",
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union IsolationKeySourceKind {
   string,
   Entra: "Entra",
   Header: "Header",
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model AgentEndpointConfig {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
   version_selector?: VersionSelector;
@@ -780,10 +640,6 @@ model AgentEndpointConfig {
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model AgentIdentity {
   @doc("The principal ID of the agent instance")
   principal_id: string;
@@ -792,28 +648,16 @@ model AgentIdentity {
   client_id: string;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union AgentBlueprintReferenceType {
   string,
   ManagedAgentIdentityBlueprint: "ManagedAgentIdentityBlueprint",
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @discriminator("type")
 model AgentBlueprintReference {
   type: AgentBlueprintReferenceType;
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
   type: AgentBlueprintReferenceType.ManagedAgentIdentityBlueprint;
 
@@ -822,24 +666,12 @@ model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
 }
 
 /** A skill example string with a maximum length of 1024 characters. */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @maxLength(1024)
 scalar AgentCardSkillExample extends string;
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @maxLength(32)
 scalar AgentCardSkillTag extends string;
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model AgentCardSkill {
   @doc("a unique identifier for the skill")
   @maxLength(64)
@@ -864,10 +696,6 @@ model AgentCardSkill {
   examples?: AgentCardSkillExample[];
 }
 
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model AgentCard {
   @doc("The version of the agent card.")
   @maxLength(32)
@@ -890,10 +718,6 @@ model AgentCard {
  * so it is not included in this model.
  * The content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header.
  */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model CreateAgentVersionFromCodeMetadata {
   @doc("A human-readable description of the agent.")
   @maxLength(512)
@@ -906,10 +730,6 @@ model CreateAgentVersionFromCodeMetadata {
 }
 
 /** Multipart request body for updating or versioning a code-based agent (POST /agents/{name} and POST /agents/{name}/versions). */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model CreateAgentVersionFromCodeContent {
   /** JSON metadata including description and hosted definition. */
   metadata: HttpPart<CreateAgentVersionFromCodeMetadata>;
@@ -919,10 +739,6 @@ model CreateAgentVersionFromCodeContent {
 }
 
 /** Multipart request body for creating a new code-based agent (POST /agents). Inherits from CreateAgentVersionFromCodeContent for future extensibility. */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model CreateAgentFromCodeContent {
   ...CreateAgentVersionFromCodeContent;
 }
@@ -933,10 +749,6 @@ model CreateAgentFromCodeContent {
  * can route to a zip-aware handler. Streaming is preserved (`bytes` body) regardless
  * of the content-type label.
  */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.code_agents_v1_preview] }
-)
 model DownloadAgentCodeResponse {
   @doc("The media type of the returned package content.")
   @header("Content-Type")
@@ -958,10 +770,6 @@ model DownloadAgentCodeResponse {
 // ── Session Status ──────────────────────────────────────
 
 /** The status of an agent session. */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union AgentSessionStatus {
   string,
 
@@ -993,10 +801,6 @@ union AgentSessionStatus {
 // ── Version Indicator ───────────────────────────────────
 
 /** The type of version indicator used to determine the agent version backing a session. */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 union VersionIndicatorType {
   string,
 
@@ -1006,10 +810,6 @@ union VersionIndicatorType {
 
 /** Base class for version indicators. Uses type discriminator for polymorphism. */
 @doc("Version indicator determining which agent version backs the session.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 @discriminator("type")
 model VersionIndicator {
   /** The type of version indicator. */
@@ -1017,10 +817,6 @@ model VersionIndicator {
 }
 
 /** Version indicator that references a specific agent version by name. */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model VersionRefIndicator extends VersionIndicator {
   /** Discriminator value for version_ref. */
   type: VersionIndicatorType.VersionRef;
@@ -1033,10 +829,6 @@ model VersionRefIndicator extends VersionIndicator {
 
 /** Represents an agent session resource. */
 @doc("An agent session providing a long-lived compute sandbox for hosted agent invocations.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model AgentSessionResource {
   /** The session identifier. */
   agent_session_id: string;
@@ -1067,10 +859,6 @@ model AgentSessionResource {
 
 /** Request body for creating a new agent session. */
 @doc("Request to create a new agent session.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
 model CreateAgentSessionRequest {
   /** Optional caller-provided session ID. If specified, it must be unique within the agent endpoint. Auto-generated if omitted. */
   agent_session_id?: string;
@@ -1083,10 +871,6 @@ model CreateAgentSessionRequest {
  * Known SSE event types emitted by the hosted agent session log stream.
  * Additional event types may be introduced in future versions.
  */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 union SessionLogEventType {
   string,
 
@@ -1115,10 +899,6 @@ union SessionLogEventType {
  * data: {"timestamp":"2026-03-10T09:34:52.714Z","stream":"status","message":"Successfully connected to container"}
  * ```
  */
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model SessionLogEvent {
   @doc("The SSE event type. Currently `log`, but additional event types may be added in the future. Clients should ignore unrecognized event types.")
   @example("log")
@@ -1131,10 +911,6 @@ model SessionLogEvent {
 // ── Telemetry Unions ────────────────────────────────────
 
 @doc("The kind of telemetry export endpoint.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 union TelemetryEndpointKind {
   string,
 
@@ -1143,10 +919,6 @@ union TelemetryEndpointKind {
 }
 
 @doc("The type of telemetry data to export.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 union TelemetryDataKind {
   string,
 
@@ -1161,10 +933,6 @@ union TelemetryDataKind {
 }
 
 @doc("The transport protocol for telemetry export.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 union TelemetryTransportProtocol {
   string,
 
@@ -1178,10 +946,6 @@ union TelemetryTransportProtocol {
 // ── Telemetry Auth (discriminated by "type") ────────────
 
 @doc("The type of authentication for a telemetry endpoint.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 union TelemetryEndpointAuthType {
   string,
 
@@ -1191,20 +955,12 @@ union TelemetryEndpointAuthType {
 
 @doc("Authentication configuration for a telemetry endpoint.")
 @discriminator("type")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model TelemetryEndpointAuth {
   @doc("The authentication type.")
   type: TelemetryEndpointAuthType;
 }
 
 @doc("Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
   @doc("The authentication type, always 'header' for header-based secret authentication.")
   type: TelemetryEndpointAuthType.header;
@@ -1225,10 +981,6 @@ model HeaderTelemetryEndpointAuth extends TelemetryEndpointAuth {
 // ── Telemetry Config & Endpoint (discriminated by "kind") ─
 
 @doc("Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model TelemetryConfig {
   @doc("Customer-supplied telemetry export endpoint configurations.")
   @minItems(1)
@@ -1238,10 +990,6 @@ model TelemetryConfig {
 
 @doc("A telemetry export endpoint configuration.")
 @discriminator("kind")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model TelemetryEndpoint {
   @doc("The telemetry export endpoint kind.")
   kind: TelemetryEndpointKind;
@@ -1255,10 +1003,6 @@ model TelemetryEndpoint {
 }
 
 @doc("An OTLP (OpenTelemetry Protocol) telemetry export endpoint.")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-)
 model OtlpTelemetryEndpoint extends TelemetryEndpoint {
   @doc("The endpoint kind, always 'OTLP' for OpenTelemetry Protocol endpoints.")
   kind: TelemetryEndpointKind.OTLP;

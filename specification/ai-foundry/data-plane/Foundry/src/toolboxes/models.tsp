@@ -180,7 +180,6 @@ model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
    */
   type: "toolbox_search_preview";
 }
-
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
