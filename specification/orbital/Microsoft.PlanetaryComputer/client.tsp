@@ -131,6 +131,62 @@ namespace Customizations;
 @@clientName(MultiLineString, "GeoJsonMultiLineString", "java");
 @@clientName(MultiPolygon, "GeoJsonMultiPolygon", "java");
 
+// === Java-only method renames: WithTms/NoTms naming convention ===
+// TMS-path variants renamed to WithTms, non-TMS variants renamed to NoTms for Java only.
+// Python and JavaScript retain the original names defined in the interface.
+
+// Item tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getTile, "getTileWithTms", "java");
+@@clientName(Data.getTileByFormat, "getTileWithTmsByFormat", "java");
+@@clientName(Data.getTileByScale, "getTileWithTmsByScale", "java");
+@@clientName(Data.getTileByScaleAndFormat, "getTileWithTmsByScaleAndFormat", "java");
+
+// Item tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getTileNoTms, "getTileNoTms", "java");
+@@clientName(Data.getTileNoTmsByFormat, "getTileNoTmsByFormat", "java");
+@@clientName(Data.getTileNoTmsByScale, "getTileNoTmsByScale", "java");
+@@clientName(Data.getTileNoTmsByScaleAndFormat, "getTileNoTmsByScaleAndFormat", "java");
+
+// Item TileJSON / WMTS → WithTms
+@@clientName(Data.getItemTileJsonByTms, "getItemTileJsonWithTms", "java");
+@@clientName(Data.getItemWmtsCapabilitiesByTms, "getItemWmtsCapabilitiesWithTms", "java");
+
+// Collection tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getCollectionTile, "getCollectionTileWithTms", "java");
+@@clientName(Data.getCollectionTileByFormat, "getCollectionTileWithTmsByFormat", "java");
+@@clientName(Data.getCollectionTileByScale, "getCollectionTileWithTmsByScale", "java");
+@@clientName(Data.getCollectionTileByScaleAndFormat, "getCollectionTileWithTmsByScaleAndFormat", "java");
+
+// Collection tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getCollectionTileNoTms, "getCollectionTileNoTms", "java");
+@@clientName(Data.getCollectionTileNoTmsByFormat, "getCollectionTileNoTmsByFormat", "java");
+@@clientName(Data.getCollectionTileNoTmsByScale, "getCollectionTileNoTmsByScale", "java");
+@@clientName(Data.getCollectionTileNoTmsByScaleAndFormat, "getCollectionTileNoTmsByScaleAndFormat", "java");
+
+// Collection TileJSON / WMTS / Assets → WithTms/NoTms
+@@clientName(Data.getCollectionTileJsonByTms, "getCollectionTileJsonWithTms", "java");
+@@clientName(Data.getCollectionWmtsCapabilitiesByTms, "getCollectionWmtsCapabilitiesWithTms", "java");
+@@clientName(Data.getCollectionAssetsForTile, "getCollectionAssetsForTileWithTms", "java");
+@@clientName(Data.getCollectionAssetsForTileNoTms, "getCollectionAssetsForTileNoTms", "java");
+
+// Search tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getSearchTile, "getSearchTileWithTms", "java");
+@@clientName(Data.getSearchTileByFormat, "getSearchTileWithTmsByFormat", "java");
+@@clientName(Data.getSearchTileByScale, "getSearchTileWithTmsByScale", "java");
+@@clientName(Data.getSearchTileByScaleAndFormat, "getSearchTileWithTmsByScaleAndFormat", "java");
+@@clientName(Data.getSearchAssetsForTile, "getSearchAssetsForTileWithTms", "java");
+
+// Search tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getSearchTileNoTms, "getSearchTileNoTms", "java");
+@@clientName(Data.getSearchTileNoTmsByFormat, "getSearchTileNoTmsByFormat", "java");
+@@clientName(Data.getSearchTileNoTmsByScale, "getSearchTileNoTmsByScale", "java");
+@@clientName(Data.getSearchTileNoTmsByScaleAndFormat, "getSearchTileNoTmsByScaleAndFormat", "java");
+@@clientName(Data.getSearchAssetsForTileNoTms, "getSearchAssetsForTileNoTms", "java");
+
+// Search TileJSON / WMTS → WithTms
+@@clientName(Data.getSearchTileJsonByTms, "getSearchTileJsonWithTms", "java");
+@@clientName(Data.getSearchWmtsCapabilitiesByTms, "getSearchWmtsCapabilitiesWithTms", "java");
+
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderConfiguration", "csharp");
 @@clientName(StacCollection, "StacCollectionResource", "csharp");
@@ -408,13 +464,13 @@ interface Data {
 
   // Item Tile Variants (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getTileWithTms is MosaicItemsTileMatrixSetsPlain.getZxy;
+  getTile is MosaicItemsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getTileWithTmsByFormat is MosaicItemsTileMatrixSetsFormat.getZxyByFormat;
+  getTileByFormat is MosaicItemsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getTileWithTmsByScale is MosaicItemsTileMatrixSetsScale.getZxyByScale;
+  getTileByScale is MosaicItemsTileMatrixSetsScale.getZxyByScale;
   @added(Versions.v2026_04_15)
-  getTileWithTmsByScaleAndFormat is MosaicItemsTileMatrixSetsScaleByFormat.getZxyScaleByFormat;
+  getTileByScaleAndFormat is MosaicItemsTileMatrixSetsScaleByFormat.getZxyScaleByFormat;
 
   // Item Tile Variants (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
@@ -463,13 +519,13 @@ interface Data {
   @added(Versions.v2026_04_15)
   getItemTileJson is MosaicItemsTileJson.get;
   @added(Versions.v2026_04_15)
-  getItemTileJsonWithTms is MosaicItemsTileMatrixSetsTileJson.get;
+  getItemTileJsonByTms is MosaicItemsTileMatrixSetsTileJson.get;
 
   // Item WMTS
   @added(Versions.v2026_04_15)
   getItemWmtsCapabilities is MosaicItemsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getItemWmtsCapabilitiesWithTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
+  getItemWmtsCapabilitiesByTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Item Point
   @added(Versions.v2026_04_15)
@@ -498,13 +554,13 @@ interface Data {
 
   // Collection Tiles (TileMatrixSetId as path)
   @added(Versions.v2026_04_15)
-  getCollectionTileWithTmsByScaleAndFormat is MosaicCollectionsTileMatrixSets.getZxyScaleByFormat;
+  getCollectionTileByScaleAndFormat is MosaicCollectionsTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileWithTms is MosaicCollectionsTileMatrixSetsPlain.getZxy;
+  getCollectionTile is MosaicCollectionsTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getCollectionTileWithTmsByFormat is MosaicCollectionsTileMatrixSetsFormat.getZxyByFormat;
+  getCollectionTileByFormat is MosaicCollectionsTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getCollectionTileWithTmsByScale is MosaicCollectionsTileMatrixSetsScale.getZxyByScale;
+  getCollectionTileByScale is MosaicCollectionsTileMatrixSetsScale.getZxyByScale;
 
   // Collection Tiles (without TileMatrixSetId in path)
   @added(Versions.v2026_04_15)
@@ -520,17 +576,17 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionTileJson is MosaicCollectionsTileJson.get;
   @added(Versions.v2026_04_15)
-  getCollectionTileJsonWithTms is MosaicCollectionsTileMatrixSetsTileJson.get;
+  getCollectionTileJsonByTms is MosaicCollectionsTileMatrixSetsTileJson.get;
 
   // Collection WMTS
   @added(Versions.v2026_04_15)
   getCollectionWmtsCapabilities is MosaicCollectionsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getCollectionWmtsCapabilitiesWithTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
+  getCollectionWmtsCapabilitiesByTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Collection Assets
   @added(Versions.v2026_04_15)
-  getCollectionAssetsForTileWithTms is MosaicCollectionsAssetsForTileMatrixSets.getZxyAssets;
+  getCollectionAssetsForTile is MosaicCollectionsAssetsForTileMatrixSets.getZxyAssets;
   @added(Versions.v2026_04_15)
   getCollectionAssetsForTileNoTms is MosaicCollectionsAssetsForTiles.getZxyAssets;
   @added(Versions.v2026_04_15)
@@ -568,22 +624,22 @@ interface Data {
   getSearchTilesetMetadata is MosaicSearchesTileSetMetadata.get;
   // Search Tiles with TileMatrixSetId (4 variants)
   @added(Versions.v2026_04_15)
-  getSearchTileWithTmsByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
+  getSearchTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchTileWithTms is MosaicSearchesTileMatrixSetsPlain.getZxy;
+  getSearchTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getSearchTileWithTmsByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
+  getSearchTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getSearchTileWithTmsByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
+  getSearchTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
   // Search Assets for Tile (with TileMatrixSetId)
   @added(Versions.v2026_04_15)
-  getSearchAssetsForTileWithTms is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
+  getSearchAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
   // Search TileJSON with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchTileJsonWithTms is MosaicSearchesTileMatrixSetsTileJson.get;
+  getSearchTileJsonByTms is MosaicSearchesTileMatrixSetsTileJson.get;
   // Search WMTS with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchWmtsCapabilitiesWithTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
+  getSearchWmtsCapabilitiesByTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
   // Search Info
   @added(Versions.v2026_04_15)
   getSearchInfo is MosaicSearchesInfoSearch.get;
