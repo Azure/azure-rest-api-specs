@@ -410,6 +410,13 @@ model ProblemClassificationsClassificationResult {
   @OpenAPI.extension("x-ms-client-flatten", true)
   @added(Versions.v2026_06_01)
   relatedService?: ClassificationService;
+
+  /**
+   * Identifier of the article associated with this problem classification result.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_06_15)
+  articleId?: string;
 }
 
 /**
