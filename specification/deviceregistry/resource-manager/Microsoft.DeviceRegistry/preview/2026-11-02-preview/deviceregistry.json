@@ -6021,7 +6021,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "$ref": "#/parameters/JobRunResultsFilterParameters"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobRunResultsFilter"
+            }
           }
         ],
         "responses": {
@@ -9879,7 +9885,7 @@
         },
         "status": {
           "$ref": "#/definitions/JobRunResultItemStatus",
-          "description": "The current per-device status for this run."
+          "description": "The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied."
         },
         "reason": {
           "type": "string",
@@ -9989,6 +9995,16 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of targets the operation does not apply to. Update jobs only; computed by ADR as total - (succeeded + failed + inProgress + canceled)."
+        }
+      }
+    },
+    "JobRunResultsFilter": {
+      "type": "object",
+      "description": "Optional request body for browsing job run results.",
+      "properties": {
+        "statusFilter": {
+          "type": "string",
+          "description": "When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied."
         }
       }
     },
@@ -14103,15 +14119,5 @@
       }
     }
   },
-  "parameters": {
-    "JobRunResultsFilterParameters": {
-      "name": "status",
-      "in": "query",
-      "description": "When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "statusFilter"
-    }
-  }
+  "parameters": {}
 }

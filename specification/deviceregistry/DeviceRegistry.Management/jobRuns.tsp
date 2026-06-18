@@ -138,7 +138,7 @@ model JobRunResultItem {
   @doc("The device UUID. ADR returns the device's stable UUID identifier (ADU surfaces device UUIDs in its private API; ADR re-emits them under this name to align with ADR-wide identifier conventions).")
   deviceUuid?: string;
 
-  @doc("The current per-device status for this run.")
+  @doc("The current per-device status for this run. One of: Succeeded, Failed, InProgress, Canceled, NotApplied.")
   status?: JobRunResultItemStatus;
 
   @doc("Short, machine-readable diagnostic that pairs with status. Present only when status is Failed; an ADU-provided machine-readable code (e.g. DOWNLOAD_FAILED). Omitted for all other statuses, including Succeeded and InProgress.")
@@ -168,18 +168,17 @@ union JobRunResultItemStatus {
 
 // NOTE: ADU's backing API supports filtering device-level results by a
 // single state value. `status` is therefore a single-valued, optional
-// query parameter (equality match) passed through to ADU -- not an OData
-// `$filter`. Omitting it returns all device results unfiltered.
+// equality-match filter passed through to ADU -- not an OData `$filter`.
+// Omitting it returns all device results unfiltered. It is carried in the
+// POST request body (not a query parameter) because ARM forbids POST/action
+// operations from declaring query parameters other than `api-version`.
 //
 // NOTE (for review): the filter is typed as `string` (not the
-// `JobRunResultItemStatus` union) on purpose. typespec-autorest leaks an
-// invalid `readOnly: true` onto query parameters that are typed with a named
-// union/enum, which fails swagger validation. Accepted values mirror
+// `JobRunResultItemStatus` union) on purpose. Accepted values mirror
 // `JobRunResultItemStatus`; they are documented below and validated by ADU.
 @added(Versions.v2026_11_02_preview)
-@doc("Optional query parameters for browsing job run results.")
-model JobRunResultsFilterParameters {
-  @query("status")
+@doc("Optional request body for browsing job run results.")
+model JobRunResultsFilter {
   @doc("When set, returns only device result entries whose status equals this value. Accepted values mirror JobRunResultItemStatus: Succeeded, Failed, InProgress, Canceled, NotApplied.")
   statusFilter?: string;
 }
@@ -204,9 +203,8 @@ interface JobRuns {
   @doc("Browse the results of a job run to find individual device statuses.")
   results is ArmResourceActionSync<
     JobRun,
-    void,
-    JobRunResultListResponse,
-    Parameters = JobRunResultsFilterParameters
+    JobRunResultsFilter,
+    JobRunResultListResponse
   >;
 }
 
