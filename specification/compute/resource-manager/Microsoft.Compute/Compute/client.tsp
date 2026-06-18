@@ -1627,6 +1627,11 @@ model VMSizePropertiesWithAdditionalProperties {
 @@alternateType(KeyVaultKeyReference.keyUrl, url, "csharp");
 @@alternateType(KeyVaultSecretReference.secretUrl, url, "csharp");
 @@useSystemTextJsonConverter(KeyVaultSecretReference, "csharp");
+@@clientName(
+  AutomaticSkuMigrationPolicy.enabled,
+  "isAutomaticSkuMigrationPolicyEnabled",
+  "csharp"
+);
 @@alternateType(LogAnalyticsInputBase.blobContainerSasUri, url, "csharp");
 @@alternateType(
   RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri,
