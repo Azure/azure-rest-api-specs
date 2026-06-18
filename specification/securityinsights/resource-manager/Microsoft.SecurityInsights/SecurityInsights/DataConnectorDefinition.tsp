@@ -78,6 +78,7 @@ interface DataConnectorDefinitions {
 }
 
 @@doc(DataConnectorDefinition.name, "The data connector definition name.");
-@@doc(DataConnectorDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  DataConnectorDefinitions.createOrUpdate::parameters.resource,
   "The data connector definition"
 );

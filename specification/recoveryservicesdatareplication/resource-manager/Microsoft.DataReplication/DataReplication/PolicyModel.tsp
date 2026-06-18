@@ -26,7 +26,8 @@ model PolicyModel
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(Policy.create::parameters.resource,
+@@OpenAPI.extension(
+  Policy.create::parameters.resource,
   "x-ms-client-name",
   "body"
 );

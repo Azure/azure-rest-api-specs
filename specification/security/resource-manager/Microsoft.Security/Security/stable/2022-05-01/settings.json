@@ -382,13 +382,14 @@
       "type": "object",
       "description": "The kind of the security setting",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource."
-        },
         "kind": {
           "$ref": "#/definitions/SettingKind",
-          "description": "the kind of the settings string"
+          "description": "the kind of the settings string",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "discriminator": "kind",

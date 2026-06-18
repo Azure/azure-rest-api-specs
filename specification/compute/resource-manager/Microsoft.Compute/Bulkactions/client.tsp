@@ -5,107 +5,198 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 
-@@clientName(VirtualMachineBulkOperations.bulkDeallocate,
-  "BulkDeallocateOperation"
+@@clientName(
+  VirtualMachineBulkOperations.bulkDeallocate,
+  "BulkDeallocateOperation",
+  "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkHibernate,
-  "BulkHibernateOperation"
+@@clientName(
+  VirtualMachineBulkOperations.bulkHibernate,
+  "BulkHibernateOperation",
+  "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkStart, "BulkStartOperation");
-@@clientName(VirtualMachineBulkOperations.bulkGetOperationsStatus,
-  "BulkGetOperationsStatus"
+@@clientName(
+  VirtualMachineBulkOperations.bulkStart,
+  "BulkStartOperation",
+  "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancel, "BulkCancelOperations");
-@@clientName(VirtualMachineBulkOperations.bulkCreate, "BulkCreateOperation");
-@@clientName(VirtualMachineBulkOperations.bulkDelete, "BulkDeleteOperation");
-@@clientName(VirtualMachineBulkOperations.bulkReimage, "BulkReimageOperation");
-@@clientName(VirtualMachineBulkOperations.bulkVdiFlexCreate,
-  "BulkVdiFlexCreateOperation"
+@@clientName(
+  VirtualMachineBulkOperations.bulkGetOperationsStatus,
+  "BulkGetOperationsStatus",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkCancel,
+  "BulkCancelOperations",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkCreate,
+  "BulkCreateOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkDelete,
+  "BulkDeleteOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkReimage,
+  "BulkReimageOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkVdiFlexCreate,
+  "BulkVdiFlexCreateOperation",
+  "!autorest"
 );
 
-@@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
+@@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
-@@clientName(DeallocateResourceOperationResponse,
+@@clientName(
+  DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeallocateResourceOperationResponse.type,
+@@clientName(
+  DeallocateResourceOperationResponse.type,
   "ResourceType",
   "csharp"
 );
-@@clientName(ExecutionParameters,
+@@clientName(
+  ExecutionParameters,
   "ScheduledActionExecutionParameterDetail",
   "csharp"
 );
-@@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse,
+@@clientName(
+  GetOperationStatusResponse,
+  "GetBulkOperationStatusResult",
+  "csharp"
+);
+@@clientName(
+  HibernateResourceOperationResponse,
   "HibernateResourceOperationResult",
   "csharp"
 );
 @@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
-@@clientName(ResourceOperation, "ResourceOperationResult", "csharp");
+@@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
-@@clientName(RetryPolicy, "UserRequestRetryPolicy", "csharp");
-@@clientName(StartResourceOperationResponse,
+@@clientName(RetryPolicy, "BulkOperationRetryPolicy", "csharp");
+@@clientName(
+  StartResourceOperationResponse,
   "StartResourceOperationResult",
   "csharp"
 );
 @@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
-@@clientName(OperationErrorDetails.timeStamp,
+@@clientName(
+  OperationErrorDetails.timeStamp,
   "errorDetailsTimestamp",
   "csharp,javascript,java,python"
 );
 
-@@clientName(DeleteResourceOperationResponse,
+@@clientName(
+  DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(CreateResourceOperationResponse,
+@@clientName(DeleteResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(
+  CreateResourceOperationResponse,
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent");
-@@clientName(CancelOperationsRequest, "CancelOperationsContent");
-@@clientName(ManagedDiskParameters, "ManagedDiskParametersContent");
-@@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!autorest");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!autorest");
+@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!autorest");
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!autorest");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent", "!autorest");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetOperationStatusContent",
+  "!autorest"
+);
+@@clientName(CancelOperationsRequest, "CancelOperationsContent", "!autorest");
+@@clientName(
+  ManagedDiskParameters,
+  "ManagedDiskParametersContent",
+  "!autorest"
+);
+@@clientName(
+  DiskEncryptionSetParameters,
+  "DiskEncryptionSetParametersContent",
+  "!autorest"
+);
 
-@@clientName(UserInitiatedRedeploy.automaticallyApprove,
-  "UserInitiatedRedeployAutomaticallyApprove"
+@@clientName(
+  UserInitiatedRedeploy.automaticallyApprove,
+  "UserInitiatedRedeployAutomaticallyApprove",
+  "!autorest"
 );
-@@clientName(UserInitiatedReboot.automaticallyApprove,
-  "UserInitiatedRebootAutomaticallyApprove"
+@@clientName(
+  UserInitiatedReboot.automaticallyApprove,
+  "UserInitiatedRebootAutomaticallyApprove",
+  "!autorest"
 );
-@@clientName(AllInstancesDown.automaticallyApprove,
-  "AllInstancesDownAutomaticallyApprove"
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
+  "AllInstancesDownAutomaticallyApprove",
+  "!autorest"
 );
-@@clientName(ExecuteVdiCreateRequest,
+@@clientName(
+  ExecuteVdiCreateRequest,
   "BulkActionsExecuteVdiCreateRequestContent",
   "csharp"
 );
-@@clientName(ExecuteReimageRequest,
+@@clientName(
+  ExecuteReimageRequest,
   "BulkActionsExecuteReimageRequestContent",
   "csharp"
 );
-@@clientName(ReimageResourceOperationResponse,
+@@clientName(
+  ReimageResourceOperationResponse,
   "BulkActionsReimageResourceOperationResponseResult",
   "csharp"
 );
-@@clientName(VirtualMachineReimageParameters,
+@@clientName(
+  VirtualMachineReimageParameters,
   "BulkActionsVirtualMachineReimageParametersContent",
   "csharp"
 );
-@@clientName(OSProfileProvisioningData,
+@@clientName(
+  OSProfileProvisioningData,
   "BulkActionsOsProfileProvisioningContent",
   "csharp"
 );
+
+// =====================================================================
+// .NET naming convention fixes (C# only)
+// =====================================================================
+// Expand "Op" abbreviation to "Operation".
+@@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
+@@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
+// Drop redundant type-name prefix; align with FallbackOperationInfo.error.
+@@clientName(
+  ResourceOperationDetails.resourceOperationError,
+  "error",
+  "csharp"
+);
+// Correct .NET casing for TimeZone.
+@@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
+
+@@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
+@@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
+@@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
+@@clientName(ResourceOperationError, "ComputeBulkOperationError", "csharp");
+
+@@clientName(
+  FallbackOperationInfo,
+  "ComputeBulkFallbackOperationInfo",
+  "csharp"
+);
+
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
 // parameter because its name contains "apiversion". This causes

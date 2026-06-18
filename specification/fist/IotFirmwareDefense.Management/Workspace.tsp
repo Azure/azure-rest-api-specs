@@ -44,6 +44,7 @@ interface Workspaces {
   /**
    * The operation to update a firmware analysis workspaces.
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Workspace,
@@ -87,12 +88,15 @@ interface Workspaces {
   >;
 }
 
-@@doc(Workspaces.create::parameters.resource,
+@@doc(
+  Workspaces.create::parameters.resource,
   "Parameters when creating a firmware analysis workspace."
 );
-@@doc(Workspaces.update::parameters.properties,
+@@doc(
+  Workspaces.update::parameters.properties,
   "Parameters when updating a firmware analysis workspace."
 );
-@@doc(Workspaces.generateUploadUrl::parameters.body,
+@@doc(
+  Workspaces.generateUploadUrl::parameters.body,
   "Parameters when requesting a URL to upload firmware."
 );

@@ -36,6 +36,7 @@ interface AzureLargeStorageInstances {
     """)
   get is ArmResourceRead<AzureLargeStorageInstance>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("""
     Patches the Tags field of a Azure Large Storage Instance for the specified
     subscription, resource group, and instance name.
@@ -75,7 +76,8 @@ interface AzureLargeStorageInstances {
   listBySubscription is ArmListBySubscription<AzureLargeStorageInstance>;
 }
 #suppress "deprecated" "LEGACY - DO NOT COPY - FIX"
-@@encodedName(AzureLargeStorageInstances.update::parameters.properties,
+@@encodedName(
+  AzureLargeStorageInstances.update::parameters.properties,
   "application/json",
   "tagsParameter"
 );

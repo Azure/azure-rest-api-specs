@@ -97,6 +97,9 @@ interface OperationResultsOperationGroup {
      */
     @path
     operationResultId: string,
-  ): ArmResponse<OperationResultsDescription> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultsDescription> &
-    Azure.Core.Foundations.RetryAfterHeader> | Error;
+  ):
+    | ArmResponse<OperationResultsDescription>
+    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultsDescription> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | Error;
 }
