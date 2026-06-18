@@ -1709,8 +1709,6 @@ union ProvisioningStateUnion {
 @@clientName(Geo.OCEANIA, "Oceania", "csharp");
 @@clientName(BastionShareableLinkListRequest, "BastionShareableLinkListContent", "csharp");
 @@clientName(ExpressRouteLinkFailoverStopApiParameters, "ExpressRouteLinkFailoverStopContent", "csharp");
-@@clientName(ExpressRouteCircuits.stopCircuitLinkFailoverTest::parameters, "ExpressRouteCircuitFailoverStopContent", "csharp");
-@@clientName(ExpressRouteGateways.stopSiteFailoverTest::parameters, "ExpressRouteGatewayFailoverStopContent", "csharp");
 @@clientName(ChildResource, "NetworkChildResource", "csharp");
 @@clientName(Microsoft.Network.ProxyResource, "NetworkProxyResource", "csharp");
 @@clientName(WritableResource, "NetworkWritableResource", "csharp");
