@@ -142,6 +142,11 @@ model MessagingEndpoint {
   linkingState?: NamespaceLinkingStateValue;
 
   @added(Versions.v2026_11_01_preview)
+  @doc("The error detail surfaced when this messaging endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
+
+  @added(Versions.v2026_11_01_preview)
   @doc("The provisioning configuration for this messaging endpoint.")
   provisioning?: MessagingEndpointProvisioning;
 }
@@ -219,6 +224,10 @@ model ProvisioningEndpoint {
   @doc("The linking state of this provisioning endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this provisioning endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 }
 
 @added(Versions.v2026_11_01_preview)
@@ -240,6 +249,10 @@ model UpdatingEndpoint {
   @doc("The linking state of this device update endpoint.")
   @visibility(Lifecycle.Read)
   linkingState?: NamespaceLinkingStateValue;
+
+  @doc("The error detail surfaced when this device update endpoint is in the Failed linking state.")
+  @visibility(Lifecycle.Read)
+  linkingError?: NamespaceLinkingError;
 
   // Intentionally typed as string, not url. Values are bare hostnames
   // without scheme (e.g., "account.api.adu.microsoft.com").
@@ -287,6 +300,18 @@ union NamespaceLinkingStateValue {
 
   @doc("Linking failed.")
   Failed: "Failed",
+}
+
+@added(Versions.v2026_11_01_preview)
+@doc("Error detail for an endpoint whose linking state is Failed. Present only while the linking state is Failed and removed when the endpoint recovers.")
+model NamespaceLinkingError {
+  @doc("Error code that classifies the linking failure.")
+  @visibility(Lifecycle.Read)
+  code?: string;
+
+  @doc("Human-readable message describing the linking failure.")
+  @visibility(Lifecycle.Read)
+  message?: string;
 }
 
 @added(Versions.v2026_11_01_preview)

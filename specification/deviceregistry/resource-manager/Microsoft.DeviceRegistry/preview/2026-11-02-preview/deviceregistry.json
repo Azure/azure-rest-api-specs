@@ -1182,6 +1182,9 @@
           "Get_Namespace": {
             "$ref": "./examples/Get_Namespace.json"
           },
+          "Get_Namespace_With_FailedLinkingEndpoint": {
+            "$ref": "./examples/Get_Namespace_With_FailedLinkingEndpoint.json"
+          },
           "Get_Namespace_With_LinkedUpdatingEndpoint": {
             "$ref": "./examples/Get_Namespace_With_LinkedUpdatingEndpoint.json"
           }
@@ -10465,6 +10468,11 @@
           "description": "The linking state of this messaging endpoint.",
           "readOnly": true
         },
+        "linkingError": {
+          "$ref": "#/definitions/NamespaceLinkingError",
+          "description": "The error detail surfaced when this messaging endpoint is in the Failed linking state.",
+          "readOnly": true
+        },
         "provisioning": {
           "$ref": "#/definitions/MessagingEndpointProvisioning",
           "description": "The provisioning configuration for this messaging endpoint."
@@ -12712,6 +12720,22 @@
         "name"
       ]
     },
+    "NamespaceLinkingError": {
+      "type": "object",
+      "description": "Error detail for an endpoint whose linking state is Failed. Present only while the linking state is Failed and removed when the endpoint recovers.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code that classifies the linking failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable message describing the linking failure.",
+          "readOnly": true
+        }
+      }
+    },
     "NamespaceLinkingStateValue": {
       "type": "string",
       "description": "The linking state values for namespace endpoint entries.",
@@ -13180,6 +13204,11 @@
         "linkingState": {
           "$ref": "#/definitions/NamespaceLinkingStateValue",
           "description": "The linking state of this provisioning endpoint.",
+          "readOnly": true
+        },
+        "linkingError": {
+          "$ref": "#/definitions/NamespaceLinkingError",
+          "description": "The error detail surfaced when this provisioning endpoint is in the Failed linking state.",
           "readOnly": true
         }
       },
@@ -13932,6 +13961,11 @@
         "linkingState": {
           "$ref": "#/definitions/NamespaceLinkingStateValue",
           "description": "The linking state of this device update endpoint.",
+          "readOnly": true
+        },
+        "linkingError": {
+          "$ref": "#/definitions/NamespaceLinkingError",
+          "description": "The error detail surfaced when this device update endpoint is in the Failed linking state.",
           "readOnly": true
         },
         "serviceAddress": {
