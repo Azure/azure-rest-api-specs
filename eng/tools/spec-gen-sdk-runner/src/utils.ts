@@ -3,7 +3,7 @@ import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
+import { LogLevel, logMessage } from "./log.ts";
 
 type Dirent = fs.Dirent;
 

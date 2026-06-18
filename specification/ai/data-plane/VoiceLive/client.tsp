@@ -484,6 +484,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.MCPApprovalType, "McpApprovalKind", "csharp");
 @@clientName(VoiceLive.ReasoningEffort.xhigh, "ExtraHigh", "csharp");
+@@clientName(VoiceLive.AvatarConfigTypes, "AvatarConfigKind", "csharp");
 @@clientName(
   VoiceLive.PersonalVoiceModels.`MAI-Voice-1`,
   "MaiVoice1",
@@ -633,6 +634,7 @@ using Azure.ClientGenerator.Core;
 );
 @@alternateType(VoiceLive.RequestImageContentPart.image_url, url, "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+@@alternateType(VoiceLive.MCPServer.server_url, url, "csharp");
 
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");

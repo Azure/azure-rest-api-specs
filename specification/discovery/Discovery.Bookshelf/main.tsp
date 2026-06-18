@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "./shared.tsp";
 import "./_knowledgeBase.tsp";
 import "./_knowledgeBase_version.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

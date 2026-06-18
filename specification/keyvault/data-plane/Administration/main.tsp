@@ -15,6 +15,7 @@ import "./common/common.tsp";
 
 // Import the main administration definitions (for compatibility)
 import "./administration.tsp";
+import "./client.tsp";
 
 // Import client customizations
 
@@ -89,4 +90,9 @@ enum Versions {
    * The 2026-03-01-preview API version.
    */
   v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
 }

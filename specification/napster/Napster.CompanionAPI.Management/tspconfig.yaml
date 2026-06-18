@@ -8,9 +8,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-go":
-    service-dir: sdk/resourcemanager/napstercompanionapi
-    emitter-output-dir: "{output-dir}/{service-dir}/armnapstercompanionapi"
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armnapstercompanionapi
+    service-dir: sdk/resourcemanager/napsteromniagentapi
+    emitter-output-dir: "{output-dir}/{service-dir}/armnapsteromniagentapi"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armnapsteromniagentapi
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -18,28 +18,28 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-napstercompanionapi"
-    namespace: azure.mgmt.napstercompanionapi
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-napsteromniagentapi"
+    namespace: azure.mgmt.napsteromniagentapi
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-napstercompanionapi"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-napsteromniagentapi"
     flavor: azure
-    namespace: com.azure.resourcemanager.napstercompanionapi
-    service-name: NapsterCompanionApi
+    namespace: com.azure.resourcemanager.napsteromniagentapi
+    service-name: NapsterOmniagentApi
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-napstercompanionapi"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-napsteromniagentapi"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-napstercompanionapi"
+      name: "@azure/arm-napsteromniagentapi"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.NapsterCompanionApi"
-    emitter-output-dir: "{output-dir}/sdk/napstercompanionapi/{namespace}"
+    namespace: "Azure.ResourceManager.NapsterOmniagentApi"
+    emitter-output-dir: "{output-dir}/sdk/napsteromniagentapi/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 parameters:
   service-dir:
-    default: sdk/napstercompanionapi
+    default: sdk/napsteromniagentapi
