@@ -270,6 +270,7 @@ union SoftDeleteFeatureState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 union SourceSideScanStatus {
   string,
 
@@ -281,6 +282,10 @@ union SourceSideScanStatus {
 
   /** Source side scan is not applicable */
   NotApplicable: "NotApplicable",
+
+  /** Source side scan configuration failed */
+  @added(Versions.v2026_07_01)
+  ConfigurationFailed: "ConfigurationFailed",
 }
 
 /**
@@ -288,6 +293,7 @@ union SourceSideScanStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 union SourceSideScanSummary {
   string,
 
@@ -302,6 +308,10 @@ union SourceSideScanSummary {
 
   /** Scan summary indicates healthy state */
   Healthy: "Healthy",
+
+  /** No threats reported */
+  @added(Versions.v2026_07_01)
+  NoThreatsReported: "NoThreatsReported",
 }
 
 /**
@@ -309,6 +319,7 @@ union SourceSideScanSummary {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -326,6 +337,7 @@ model SourceSideScanInfo {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 union ThreatStatus {
   string,
 
@@ -350,6 +362,7 @@ union ThreatStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 union ThreatState {
   string,
 
@@ -371,6 +384,7 @@ union ThreatState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 union ThreatSeverity {
   string,
 
@@ -392,6 +406,7 @@ union ThreatSeverity {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_07_01)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -2387,6 +2402,7 @@ model ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_07_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2419,6 +2435,7 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_07_01)
   threatStatus?: ThreatStatus;
 
   /**
@@ -2426,6 +2443,7 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_07_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
