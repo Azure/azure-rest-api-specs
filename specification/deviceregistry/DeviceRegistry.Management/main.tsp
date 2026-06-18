@@ -32,7 +32,6 @@ using Azure.ResourceManager;
 using Azure.ResourceManager.CommonTypes.Private;
 using Azure.ResourceManager.Private;
 using Azure.ResourceManager.Foundations;
-using Azure.Core.Traits;
 
 @armProviderNamespace
 @service(#{ title: "Microsoft.DeviceRegistry management service" })
