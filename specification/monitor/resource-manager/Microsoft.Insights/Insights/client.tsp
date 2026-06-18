@@ -113,6 +113,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  MetricsApi.MetricsOperationGroup.list,
+  "GetMonitorMetrics",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataCollectionEndpointResources.listByDataCollectionEndpoint,
   "GetDataCollectionRuleAssociations",
   "csharp"
