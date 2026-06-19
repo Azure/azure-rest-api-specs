@@ -55,9 +55,9 @@ arm-api-reviewer/
 | 13xxxx | Citation & posted parity      | 3     | Rule-ID hyperlinks; chat↔PR byte-for-byte parity; refusal to shorten                                                                                                                                                                                                          |
 | 14xxxx | suppressions.yaml continuity  | 2     | Missing reason in new entry; security-rule suppression                                                                                                                                                                                                                        |
 | 15xxxx | Fast-path triage              | 3     | Examples-only fast path; schema change forces full; uncertain→full                                                                                                                                                                                                            |
-| 16xxxx | Protocol safety               | 10    | Subagent handoff; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
+| 16xxxx | Protocol safety               | 11    | Subagent auto-unavailable; empty-response not pass; INVALIDATED stops session; downstream-rule telemetry; happy-path READY TO POST; Step 1 SHA pinning; iteration-2 reconciliation marker; override-reason marker; telemetry-degraded fallback; critic=unknown fallback; ARMChangesRequested skip on clean plan |
 
-Total: 51 stimuli across 16 eval files.
+Total: 52 stimuli across 16 eval files.
 
 ## Fixtures
 
@@ -85,7 +85,7 @@ VS Code with GitHub Copilot active.
 ```powershell
 cd .github/skills/evals/arm-api-reviewer
 
-# Run the full suite (48 stimuli, sequential -- safest)
+# Run the full suite (52 stimuli, sequential -- safest)
 .\run-evals.ps1
 
 # Point to an existing vally clone instead of re-cloning
@@ -137,7 +137,7 @@ cd .github/skills/evals/arm-api-reviewer
 # (vally is a monorepo; the CLI binary lives under packages/cli)
 export VALLY_CLI="/path/to/vally/packages/cli/dist/index.js"
 
-# Run the full suite (all 48 stimuli, 5 concurrent workers)
+# Run the full suite (all 52 stimuli, 5 concurrent workers)
 node $VALLY_CLI eval --suite all --verbose
 
 # Run a single category

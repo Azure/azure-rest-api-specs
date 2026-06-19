@@ -84,7 +84,7 @@ browser "find on page".
 | 5   | Assign a confidence level                    | High/Medium/Low + override-reason validation.                                                                                                                                                                                                                                                                        |
 | 6   | Hunt for missed violations (advisory)        | Six bias filters; suppress declined candidates per Input #8.                                                                                                                                                                                                                                                         |
 | 7   | Re-verify the reconciliation plan            | Independent re-anchor of every Step 5.5 plan entry.                                                                                                                                                                                                                                                                  |
-| 8   | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `graphs-produced: false` or `degraded`. Under `graphs-produced: downgraded` the resource/operation/version-delta views are skipped but the sensitive-data-flow view is still re-derived. Runs once per iteration, independent of steps 1-7. |
+| 8   | Independent graph re-derivation              | Build graphs from scratch; diff against Reviewer's Mermaid. Skipped when `Graphs: false` without a banner (fast path). When `Graphs: false` with the Step-3.5-failure banner the resource/operation/version-delta views are skipped but the sensitive-data-flow view is still re-derived. Runs once per iteration, independent of steps 1-7. |
 | --  | Iteration discipline                         | Session-SHA recheck and FAIL-set carryover. Hard cap = 3 iterations.                                                                                                                                                                                                                                                 |
 | --  | Output schema                                | The exact structure the Reviewer parses.                                                                                                                                                                                                                                                                             |
 
@@ -108,7 +108,7 @@ shared protocol; do not restate the fields here.
 
 | Direction | Marker                                        | Where                                                                                                                                                                                   | Source of truth                                                                                                                                                 |
 | --------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response (dispatch return or session-handoff paste). Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
+| Emits     | `<!-- critic-verdict: ... -->`                | Literal **first line** of every Critic response. Mirrors the `### Verdict` table that follows so the Reviewer can parse it programmatically. | [protocol -> Critic-verdict marker](./protocols/arm-api-review-critic.protocol.md#critic-verdict-marker-per-critic-response)                                    |
 | Reads     | `posted-by: arm-api-reviewer-agent` substring | Inside an existing PR comment body during reconciliation validation (step 7). Identifies a comment as agent-origin.                                                                     | [protocol -> Per-comment telemetry marker](./protocols/arm-api-review-critic.protocol.md#per-comment-telemetry-marker-step-6-canonical-body-and-step-8-posting) |
 
 The Critic does **not** emit any other HTML marker. It does **not** read
@@ -179,7 +179,7 @@ chat text only; it does not write to the workspace.
 If a finding's re-fetch fails via **both** MCP and the `gh` CLI fallback
 (e.g., the user is not authenticated to the private repo at all), mark
 that finding `FAIL: file-fetch-failed` and surface the tooling problem to
-the Reviewer so it escalates via the session-handoff fallback. Do not
+the Reviewer so it can escalate the finding appropriately. Do not
 attempt to validate against file content quoted in the Reviewer's report.
 
 ## Why this agent exists
@@ -202,9 +202,9 @@ produces its structured findings report (Step 6 of the reviewer's workflow)
 and **before** any human posting decision (Step 8).
 
 Inputs you receive from the reviewer. The canonical wire format is the
-YAML template at
+template at
 [`./protocols/arm-api-review-critic-inputs.template.md`](./protocols/arm-api-review-critic-inputs.template.md);
-the shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). FAIL any invocation whose prompt does not contain exactly one `# critic-inputs/v1` block. The list below restates the field meanings for in-file readability
+the shared protocol file ([./protocols/arm-api-review-critic.protocol.md](./protocols/arm-api-review-critic.protocol.md)) defines the field semantics (see its "Inputs the Reviewer passes to the Critic" section). The Critic accepts **tolerant prose input**: labeled fields in any order; missing optional fields fall back to documented defaults. Only Inputs #1, #2, and #3 are required -- a prompt missing any required field returns `Finding accuracy = FAIL` reason `missing-inputs`. The list below restates the field meanings for in-file readability
 and adds Critic-specific behavioral notes that are not in the protocol.
 
 1. The PR URL (owner, repo, number).
@@ -249,31 +249,29 @@ classification (for example, `base-sha: <sha>; path: <path>`), or
    what new evidence justifies the re-surfacing. Empty list on iteration
    1. Without this suppression, advisory items oscillate forever and
       convergence becomes impossible except via the iteration cap.
-9. **Graph production flag** - `graphs-produced: true|false|downgraded|degraded`.
-   - `true`: perform the full independent graph re-derivation and diff against the Reviewer's Mermaid output.
-   - `false`: record `Graph integrity = N/A` and skip re-derivation entirely (fast path, Step 3.5 skipped by design). **Forbidden on full-review PRs** -- if you see `false` while Input #4 contains a full-review file set, treat the inputs as malformed and FAIL with `missing-inputs`.
-   - `downgraded`: record `Graph integrity = N/A` for rendered-diff purposes, but **independently re-derive the sensitive-data-flow view in summary form** -- the resource and operation views are skipped because the Reviewer downgraded them on size grounds, but secret-leak analysis is rendering-cost-insensitive and remains the highest-value missed-violation signal. Surface any new secret-bearing LIST-response findings in the advisory `Likely missed violations` section.
-   - `degraded`: record `Graph integrity = N/A` and skip re-derivation. Also verify that the Reviewer's Step 6 report contains the required `[!CAUTION]` Step-3.5-failure banner with a `Reason:` line; if the banner is missing, FAIL with `missing-step35-banner` (advisory, not finding-level). Surface the missing structural analysis in the Critic output so the Reviewer cannot quietly suppress the banner.
+9. **Graphs flag** - `Graphs: true` or `Graphs: false` (default `false`).
+   - `Graphs: true`: perform the full independent graph re-derivation and diff against the Reviewer's Mermaid output (full-review PRs where Step 3.5 ran successfully and graphs appear in the report).
+   - `Graphs: false`: record `Graph integrity = N/A`. Two sub-cases distinguished by the presence of a `[!CAUTION]` banner in the Step 6 report:
+     - **No banner** (fast-path-by-design): skip re-derivation entirely. This is the expected state for fast-path PRs where Step 3.5 was intentionally skipped.
+     - **With `[!CAUTION]` Step-3.5-failure banner** (attempted and failed): record `Graph integrity = N/A` but **independently re-derive the sensitive-data-flow view in summary form** -- the resource and operation views are skipped because rendering was not possible, but secret-leak analysis is rendering-cost-insensitive and remains the highest-value missed-violation signal. Surface any new secret-bearing LIST-response findings in the advisory `Likely missed violations` section. Also verify the banner contains a `Reason:` line; if it is missing, FAIL with `missing-step35-banner` (advisory, not finding-level).
+   - The four-value `downgraded`/`degraded` schema is deprecated. If you receive `graphs-produced: downgraded` or `graphs-produced: degraded`, treat as `Graphs: false` per the rules above.
 10. **Current iteration number** (`1` through `3`). Echo this value
     verbatim in your output header (`Iteration: <n> of 3`); do not infer
     it from the length of prior-FAIL-set inputs.
 
-Input validation is strict and fail-fast:
+Input parsing is **tolerant prose**: labeled fields are accepted in any order; unrecognized or extra fields are silently ignored. Missing optional fields fall back to documented defaults per the [shared protocol](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic):
 
-- Inputs 1-10 are required on every invocation. **None may be omitted.**
-- On iteration 1, Inputs #7 and #8 MUST be passed as an explicit empty
-  list (`[]` or the literal string `none`). Omission is not equivalent
-  and FAILs the run -- the protocol's input contract is "pass all ten on
-  every invocation" (see [`./protocols/arm-api-review-critic.protocol.md` -> Inputs the Reviewer passes to the Critic](./protocols/arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic)).
-- Input 6 must be either a real reconciliation plan or the literal
-  sentinel `reconciliation skipped`.
-- Input 9 must be explicitly `graphs-produced: true`,
-  `graphs-produced: false`, `graphs-produced: downgraded`, or
-  `graphs-produced: degraded`.
-- Input 10 must be an integer `1` through `3`.
+- Inputs #1, #2, and #3 (PR URL, session SHA, Step 6 findings report) are **required** on every invocation. A prompt missing any of these returns `Finding accuracy = FAIL` reason `missing-inputs`.
+- Input #4 (reviewed files): defaults to inferred from findings when absent.
+- Input #5 (previous-version path): defaults to `None - new service` when absent.
+- Input #6 (reconciliation plan): defaults to the literal sentinel `reconciliation skipped` when absent.
+- Inputs #7 and #8 (prior FAIL sets, considered-and-declined list): default to empty list when absent.
+- Input #9 (Graphs flag): defaults to `Graphs: false` when absent.
+- Input #10 (iteration number): defaults to `1` when absent.
+- Input 10 must be an integer `1` through `3` when present.
 
 If validation fails, return `Finding accuracy = FAIL` with reason
-`missing-inputs` and list exactly which inputs were missing or malformed.
+`missing-inputs` and list exactly which required inputs were missing or malformed.
 
 ## Hard constraints
 
@@ -467,10 +465,11 @@ fails:
   → `FAIL: rule-not-found` (fabricated rule ID).
 
 Both `downstream-ci-conflict` and `suppression-path-mismatch` are
-**non-overridable** via the per-comment `critic: override` marker, on
-the same footing as reconciliation FAILs: the Reviewer must correct
-the finding, drop it, or escalate per
-`arm-api-reviewer.agent.md` Step 7.
+**overridable with a valid justification** via the per-comment `critic: override`
+marker (same path as any other finding-level FAIL per Reviewer Step 7
+item 13). The Reviewer must correct the finding or supply a validated
+`override-reason`; escalate to `MANUAL DECISION REQUIRED` if neither
+is possible.
 
 ### Step 5: Assign a confidence level
 
@@ -688,8 +687,11 @@ SHA and re-derive the conclusion yourself.
 **Critic-side limits.**
 
 - Severity: this step is **binding** when it returns `FAIL`. A reconciliation
-  `FAIL` cannot be overridden by the Reviewer via the standard `critic:
-override` finding-marker path; see Reviewer Step 7 item 9.
+  `FAIL` is overridable via the standard `critic: override`
+  finding-marker path with a valid justification (same validator as all
+  other overrides per Reviewer Step 7 item 9). The Critic reports the
+  FAIL and recommended correction; the Reviewer or human supplies the
+  override if warranted.
 - Downgrade-only still applies: you may recommend dropping a disposition or
   demoting SKIP-COVERED -> POST-NEW, but you may **not** recommend upgrading a
   POST-NEW to a SKIP/RESOLVE on your own initiative - that is a Reviewer
@@ -706,7 +708,7 @@ readability and adds the value definitions the Reviewer expects to parse.
 | Track                   | Values                                               | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | ----------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Finding accuracy        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding. `PASS` = every finding re-verified at High or Medium confidence. `WARN` = all findings re-verified, but >= 1 at Low confidence. `FAIL` = >= 1 finding has a wrong line, misapplied rule, wrong classification, or a file that could not be fetched. `INVALIDATED` = session SHA moved or became unreachable; this overrides every other track and kills the session.                                                                                      |
-| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. `N/A` is valid only when Input #9 is `graphs-produced: false`. |
+| Graph integrity         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication`. `PASS` = your independently-derived graphs match the reviewer's Mermaid output (modulo missed-violation candidates). `WARN` = structural differences exist that suggest missed violations (advisory). `FAIL: fabrication` = the reviewer's Mermaid contains nodes or edges not derivable from the re-fetched files; the reviewer **must** correct before posting. `N/A` is valid when `Graphs: false` (no banner) or when the Step-3.5-failure caution banner is present. |
 | Reconciliation accuracy | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`. `PASS` = every Step 5.5 plan entry independently re-verified at session SHA. `WARN` = entries verified, but >= 1 Scenario E/F proof anchor required heavy interpretation; flag for human spot-check. `FAIL` = >= 1 entry is `skip-not-justified`, `shift-misclassified`, `fix-not-verified`, `fix-anchor-wrong`, or `fix-anchor-unreachable`. `N/A` = Input #6 was the literal `reconciliation skipped`.                                      |
 | Coverage quality        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory. Whether the reviewer applied the full checklists, performed the previous-version comparison, and ran the suppression-continuity analysis. **Never** gates posting on its own.                                                                                                                                                                                                                                                                            |
 

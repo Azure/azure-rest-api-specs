@@ -26,7 +26,7 @@ wins**. File bugs against the agent that drifted.
 | **Fast path / Full review**      | Two review-depth tracks selected in Reviewer Step 1. Fast path skips Steps 3, 3.5, 4a, 5; Full review runs all steps.                                                                                                                 |
 | **Sentinel string**              | A literal string passed between agents that signals "this input is intentionally absent in a specific way" -- currently only `reconciliation skipped`.                                                                                |
 | **Finding-level FAIL**           | A Critic `FAIL` on a specific finding from the Reviewer's report (wrong line, rule misapplied, etc.). Overridable per the override workflow.                                                                                          |
-| **Reconciliation FAIL**          | A Critic `FAIL` on a Step 5.5 reconciliation-plan entry. **Non-overridable**; only correct, drop, demote, or escalate.                                                                                                                |
+| **Reconciliation FAIL**          | A Critic `FAIL` on a Step 5.5 reconciliation-plan entry. Overridable with a validated justification; see [Non-overridable FAIL catalog](#non-overridable-fail-catalog).                                                               |
 | **Graph-fabrication FAIL**       | A Critic `Graph integrity = FAIL: fabrication` verdict. **Non-overridable**; the Reviewer must drop dependent findings and re-derive.                                                                                                 |
 | **INVALIDATED**                  | Critic `Finding accuracy = INVALIDATED` (session SHA moved or unreachable). Kills the entire session; no findings may be posted.                                                                                                      |
 | **Next-step recommendation**     | An internal label set by the Reviewer at Step 7 based on the Critic's verdicts (`READY TO POST` / `REVISE RECOMMENDED` / `MANUAL DECISION REQUIRED` / `SESSION INVALIDATED`); gates Step 8 posting.                                   |
@@ -41,101 +41,76 @@ wins**. File bugs against the agent that drifted.
 
 ## Inputs the Reviewer passes to the Critic
 
-Pass all ten on every Critic invocation in this exact order. Missing or
-malformed inputs MUST cause the Critic to return `Finding accuracy = FAIL`
-with reason `missing-inputs`.
+Pass all ten on every Critic invocation. The Critic uses **tolerant prose
+parsing**: it reads labeled fields in any order from the dispatch prompt
+and applies the documented default for any optional field that is absent.
+A required field (PR URL, Session SHA, Iteration) that is absent or
+malformed causes the Critic to return `Finding accuracy = FAIL` with
+reason `missing-inputs`.
 
-### Canonical input-block serialization
+### Canonical input-block format
 
-The template both agents include is in a dedicated file:
-[`./arm-api-review-critic-inputs.template.md`](./arm-api-review-critic-inputs.template.md). Copy that
-template verbatim into every dispatch prompt and every session-handoff
-paste; the schema below restates it for in-file readability but the
-template file is the single source of truth.
+The template both agents use is in a dedicated file:
+[`./arm-api-review-critic-inputs.template.md`](./arm-api-review-critic-inputs.template.md).
+Copy that template into every dispatch prompt; the Critic accepts any
+reasonable prose rendering of the labeled fields. The schema below
+restates field meanings for in-file readability.
 
-To avoid host-dependent prose drift, the Reviewer MUST serialize the ten
-inputs as a single fenced YAML block in the prompt body it sends to the
-Critic dispatch (or pastes into the session-handoff prompt). The Critic
-MUST refuse to validate any invocation whose prompt does not contain
-exactly one such block. The block schema is:
+| #   | Input                              | Default when absent             | Notes                                                                                                                                                                                                                                                                                                                                                                                          |
+| --- | ---------------------------------- | ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | PR URL                             | **Required -- no default**      | `owner/repo#number` form.                                                                                                                                                                                                                                                                                                                                                                      |
+| 2   | Session SHA                        | **Required -- no default**      | Full 40-char commit SHA pinned at Reviewer Step 1. **Binding for every PR-head file fetch.**                                                                                                                                                                                                                                                                                                   |
+| 3   | Step 6 findings report             | **Required -- no default**      | Verbatim, under the `## Step 6 findings report` heading.                                                                                                                                                                                                                                                                                                                                       |
+| 4   | List of files reviewed             | Derive from the findings report | Workspace-relative paths. If absent, the Critic infers from cited files in Input #3.                                                                                                                                                                                                                                                                                                          |
+| 5   | Previous-version source            | `None - new service`            | The base-branch path **and base SHA/ref** used for `[NEW]`/`[EXISTING]` classification, or `None - new service`. Changed PR files are fetched at Input #2; previous-version files at this source.                                                                                                                                                                                             |
+| 6   | Step 5.5 reconciliation plan       | `reconciliation skipped`        | Verbatim, under the `## Step 5.5 reconciliation plan` heading, or the sentinel `reconciliation skipped`. If absent, the Critic treats as the sentinel and records `Reconciliation accuracy = N/A`.                                                                                                                                                                                             |
+| 7   | Prior iterations' FAIL set summary | Empty (none)                    | The two most recent prior iterations' rule-ID + file/line tuples. Empty on iteration 1. Used to suppress already-considered failures across iterations.                                                                                                                                                                                                                                        |
+| 8   | Considered-and-declined list       | Empty (none)                    | Prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. The Critic MUST suppress these unless fresh evidence justifies re-surfacing.                                                                                                                                                                             |
+| 9   | Graphs flag                        | `false`                         | `Graphs: true` = Mermaid graphs in the Step 6 report; full graph-diff. `Graphs: false` = fast path or graph derivation unavailable; Critic records `Graph integrity = N/A`. On full-review PRs where the size guardrail tripped, pass `Graphs: false` and the Critic still re-derives the sensitive-data-flow view in summary form. The four-value `downgraded/degraded` split is deprecated. |
+| 10  | Current iteration number           | `1`                             | `1` through `3`. The Critic's output header echoes this verbatim.                                                                                                                                                                                                                                                                                                                              |
 
-````markdown
-```yaml
-# critic-inputs/v1
-pr_url: https://github.com/<owner>/<repo>/pull/<number>
-session_sha: <full-40-char-sha> # Input #2
-files_reviewed: # Input #4
-  - path/to/file-a.json
-  - path/to/file-b.tsp
-previous_version: # Input #5; null when new service
-  base_sha_or_ref: <sha-or-ref>
-  path: specification/<service>/.../stable/<prev-version>
-prior_fail_sets: # Input #7; [] on iteration 1
-  iteration_n_minus_1: []
-  iteration_n_minus_2: []
-considered_and_declined: [] # Input #8; [] on iteration 1
-graphs_produced: true # Input #9
-iteration: 1 # Input #10; 1..3
-```
-````
+### Compact-mode dispatch (iterations 2 and 3)
 
-Input #3 (Step 6 findings report) and Input #6 (Step 5.5 reconciliation
-plan, or the sentinel `reconciliation skipped`) follow the YAML block
-under explicit `## Step 6 findings report` and `## Step 5.5 reconciliation
-plan` H2 headings, verbatim. Their size and markdown nesting make YAML
-serialization brittle; keep them as native markdown but framed by the
-named headings so the Critic can parse them deterministically.
+When the Reviewer re-invokes the Critic after revisions (iteration 2 or 3),
+it MAY use a **compact-mode** payload to reduce dispatch size:
 
-Empty lists MUST be serialized as `[]` (not omitted, not `null`); see the
-"Iteration-1 empty-list rule" below. The `# critic-inputs/v1` header
-comment is part of the contract -- the Critic uses it to validate that it
-received an input block in this schema rather than free-form prose.
+- Pass only the **changed findings** (findings that were added, dropped, or
+  modified since the prior iteration) under the `## Step 6 findings report`
+  heading.
+- Include a **carry-over verdict summary**: a brief inline list of unchanged
+  findings with their prior-iteration Critic verdicts, labeled
+  `## Carry-over verdicts`.
+- **Re-pin the session SHA** before each compact-mode dispatch: run
+  `gh pr view <n> --json headRefOid` (or `get_pull_request`) to confirm
+  `head.sha` still equals the pinned session SHA. If it has moved, abort
+  per the session-invalidation rule.
+- **File-drift check (`carry-over-stale`).** For each carry-over finding,
+  re-fetch the cited file at the session SHA. If the file content at the
+  cited line has changed since the prior iteration, mark the finding
+  `carry-over-stale` and promote it from the carry-over list to the
+  changed-findings section so the Critic re-verifies it fully.
 
-| #   | Input                              | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| --- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | PR URL                             | `owner/repo#number` form.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| 2   | Session SHA                        | Full 40-char commit SHA pinned at Reviewer Step 1. **Binding for every PR-head file fetch.**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| 3   | Step 6 findings report             | Verbatim.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| 4   | List of files reviewed             | Workspace-relative paths.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| 5   | Previous-version source            | The base-branch path **and base SHA/ref** used for `[NEW]`/`[EXISTING]` classification, e.g. `base-sha: <sha>; path: <path>`, or `None - new service`. Changed PR files are fetched at Input #2; previous-version files are fetched at this base source.                                                                                                                                                                                                                                                                                                                                                                               |
-| 6   | Step 5.5 reconciliation plan       | Verbatim. If reconciliation was skipped, pass the literal string `reconciliation skipped` (see Sentinel strings).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| 7   | Prior iterations' FAIL set summary | The two most recent prior iterations' rule-ID + file/line tuples. Empty list on iteration 1 (see note below). Used by the Critic to suppress already-considered failures across iterations.                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 8   | Considered-and-declined list       | Prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. The Critic MUST suppress these unless fresh evidence justifies re-surfacing. Empty list on iteration 1.                                                                                                                                                                                                                                                                                                                                                                                         |
-| 9   | Graph production flag              | `graphs-produced: true\|false\|downgraded\|degraded`. `true` = Mermaid graphs in the Step 6 report; full graph-diff. `false` = fast path (Step 3.5 skipped by design); silent N/A. **`false` is forbidden on full-review PRs** -- use `degraded`. `downgraded` = full-review PR that tripped the Step 3.5 size guardrail; Critic records `Graph integrity = N/A` but **MUST** independently re-derive the sensitive-data-flow view in summary form. `degraded` = full-review graph derivation attempted and failed after retry; Critic records `Graph integrity = N/A` and the Reviewer's Step 6 report MUST carry the failure banner. |
-| 10  | Current iteration number           | `1` through `3`. The Critic's output header echoes this verbatim; do not infer from input length.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+The Critic treats compact-mode input as equivalent to a full payload for
+the carried-over items: carry-over verdicts are binding unless the
+`carry-over-stale` flag is set, in which case the Critic re-evaluates
+from scratch.
 
-> **Iteration-1 empty-list rule (load-bearing).** On iteration 1, Inputs #7
-> and #8 MUST be passed as an **explicit** empty list -- literally `[]` or
-> the literal string `none`. Omission is **not** equivalent and causes
-> `Finding accuracy = FAIL` with reason `missing-inputs`. The contract is
-> "pass all ten inputs on every invocation"; iteration 1 satisfies that
-> contract for #7 and #8 by passing an explicit empty container, not by
-> dropping the field.
+### Non-empty response invariant
 
-## Session-handoff verification (fallback path)
+An empty return or "Agent completed with no output" from a Critic dispatch
+is a **host-side failure**, not a Critic PASS. The Reviewer MUST:
 
-When subagent dispatch is unavailable and the Reviewer accepts a
-human-pasted Critic output, the Reviewer MUST validate the pasted output
-before folding it into the report:
+1. Treat the empty return as a dispatch failure.
+2. Retry the dispatch up to **3 total attempts** (the first attempt counts;
+   attempts 2 and 3 use the compact-mode payload if available).
+3. After 3 failed attempts, automatically fall back to
+   `critic-mode=unavailable` per the `[!CAUTION]` banner rules -- **no
+   user action required**. The Reviewer MUST disclose the auto-fallback in
+   the report.
 
-- The Critic header field `PR:` exactly matches the current PR under review.
-- The Critic header field `Head SHA:` exactly matches the session SHA pinned
-  in Reviewer Step 1.
-- The Critic header field `Base SHA/Ref:` matches Input #5 when present, or is
-  omitted / `n/a` only when Input #5 is `None - new service`.
-- The Critic header field `Iteration:` is a valid `1` through `3` and is
-  consistent with the Reviewer's current iteration loop.
-- The pasted output begins with a valid `<!-- critic-verdict: ... -->`
-  marker (literal first line) whose field values match the `### Verdict`
-  table body byte-for-byte. A missing or malformed marker, or values that
-  disagree with the table, is a handoff failure per the
-  [Critic-verdict marker parsing contract](#critic-verdict-marker-per-critic-response).
-- The pasted output includes, verbatim, both the `### Verdict` section and
-  the `### Per-finding annotations` section.
-
-If any check fails, the Reviewer MUST reject the pasted output as invalid
-handoff data and request a corrected verbatim paste. Free-form acknowledgments
-such as "looks fine" are never valid substitutes.
+An empty return MUST NEVER be interpreted as a clean PASS or as an implicit
+`Finding accuracy = PASS`. A missing Critic verdict is always a host-side
+failure until the Critic explicitly returns a verdict.
 
 ## Critic verdict tracks
 
@@ -145,7 +120,7 @@ one is advisory.
 | Track                       | Values                                               | Binding?                         | Notes                                                                                                                                                                                                                                                                                                                                                                            |
 | --------------------------- | ---------------------------------------------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Finding accuracy**        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding                          | `INVALIDATED` (reasons: `session-sha-moved`, `session-sha-unreachable`) overrides every other track and kills the session.                                                                                                                                                                                                                                                       |
-| **Graph integrity**         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication` | `N/A` legitimate when Input #9 is `graphs-produced: false`, `downgraded`, or `degraded`. Under `downgraded` the Critic still re-derives the sensitive-data-flow view; under `degraded` no re-derivation happens and the Reviewer's report carries the failure banner. Missed leaks surface in the advisory `Likely missed violations` section, not in the Graph-integrity track. |
+| **Graph integrity**         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication` | `N/A` legitimate when `Graphs: false`. When `Graphs: false` without a Step-3.5-failure banner (fast path), re-derivation is fully skipped. When `Graphs: false` with the banner (full-review derivation failed), the Critic still re-derives the sensitive-data-flow view; missed leaks surface in the advisory `Likely missed violations` section, not in the Graph-integrity track. The deprecated four-value `graphs-produced` schema is still accepted for backward compatibility; `downgraded` and `degraded` are treated as `Graphs: false`. |
 | **Reconciliation accuracy** | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`              | `N/A` only legitimate when Input #6 was the sentinel `reconciliation skipped`.                                                                                                                                                                                                                                                                                                   |
 | **Coverage quality**        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory only                    | Never gates posting.                                                                                                                                                                                                                                                                                                                                                             |
 
@@ -177,20 +152,19 @@ approval prompts, SHA-drift reports.
 <!-- markdownlint-disable MD013 -->
 
 ```html
-<!-- review-state: critic-mode={pending|subagent|session-handoff|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
+<!-- review-state: critic-mode={pending|subagent|unavailable|invalidated} | iteration={N} | pr={owner/repo#number} -->
 ```
 
 <!-- markdownlint-enable MD013 -->
 
-| Field         | Values                                                                                                | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `critic-mode` | `pending`                                                                                             | Review session is live after Step 1 pinned SHAs, but the Critic has not returned yet. Only progress, fetch-error, or handoff messages may use this value. **`pending` is forbidden on any response that contains finding sections** (`## API Review:`, `### Blocking Issues`, `### Warnings`, `### Suggestions`, per-finding Mermaid graphs, or a Reconciliation Plan). Emitting findings under `pending` is a constraint violation; use `subagent`, `session-handoff`, `unavailable`, or `invalidated` once the Critic gate has resolved. |
-|               | `subagent`                                                                                            | State A: Critic dispatched as subagent and verdict folded in.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-|               | `session-handoff`                                                                                     | State A via human-pasted verdict from the fallback prompt.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-|               | `unavailable`                                                                                         | State C: human explicitly opted out at Step 7 fallback Rung 2. `[!CAUTION]` banner rendered. **Never `skipped` -- that value is forbidden.**                                                                                                                                                                                                                                                                                                                                                                                               |
-|               | `invalidated`                                                                                         | State D: Critic returned `Finding accuracy = INVALIDATED`. SHA-drift report only; no findings rendered.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| `iteration`   | `1`-`3` (Critic iteration this response reflects); `0` for Reviewer-detected drift between iterations | Echo of Input #10 for the most recent Critic call. See note below on `iteration=0`.                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
-| `pr`          | `owner/repo#number`                                                                                   | Used by State A's session-boundary check.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Field         | Values                                                                                                | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `critic-mode` | `pending`                                                                                             | Review session is live after Step 1 pinned SHAs, but the Critic has not returned yet. Only progress, fetch-error, or retry messages may use this value. **`pending` is forbidden on any response that contains finding sections** (`## API Review:`, `### Blocking Issues`, `### Warnings`, `### Suggestions`, per-finding Mermaid graphs, or a Reconciliation Plan). Emitting findings under `pending` is a constraint violation; use `subagent`, `unavailable`, or `invalidated` once the Critic gate has resolved. |
+|               | `subagent`                                                                                            | State A: Critic dispatched as subagent and verdict folded in.                                                                                                                                                                                                                                                                                                                                                                         |
+|               | `unavailable`                                                                                         | State C: all dispatch attempts failed (empty-response or error) and the auto-fallback fired. `[!CAUTION]` banner rendered. **Never `skipped` -- that value is forbidden.**                                                                                                                                                                                                                                                            |
+|               | `invalidated`                                                                                         | State D: Critic returned `Finding accuracy = INVALIDATED`. SHA-drift report only; no findings rendered.                                                                                                                                                                                                                                                                                                                               |
+| `iteration`   | `1`-`3` (Critic iteration this response reflects); `0` for Reviewer-detected drift between iterations | Echo of Input #10 for the most recent Critic call. See note below on `iteration=0`.                                                                                                                                                                                                                                                                                                                                                   |
+| `pr`          | `owner/repo#number`                                                                                   | Used by State A's session-boundary check.                                                                                                                                                                                                                                                                                                                                                                                             |
 
 Exempt from the marker: responses emitted **before** Step 1 pins the
 session SHA (e.g., out-of-scope-repo decline messages).
@@ -230,7 +204,7 @@ that is shown to the human and later posted. Not on reply-only comments
 | `classification`  | `new` / `existing`                    | From Step 4a.                                                                                                                                                                                                                                                                               |
 | `critic`          | `pass`                                | Default -- Critic returned PASS at High confidence.                                                                                                                                                                                                                                         |
 |                   | `warn`                                | Critic returned PASS at Medium/Low confidence, human accepted as-is.                                                                                                                                                                                                                        |
-|                   | `override`                            | Human explicitly overrode a finding-level Critic FAIL. **REQUIRES `override-reason`.** Reconciliation FAILs and graph-fabrication FAILs are never `override`.                                                                                                                               |
+|                   | `override`                            | Human explicitly overrode a finding-level Critic FAIL. **REQUIRES `override-reason`.** Graph-fabrication FAILs (`Graph integrity: fabrication`) are never `override`; all other FAIL reasons are overridable with a valid `override-reason`.                                                                                                                                                                                             |
 |                   | `unknown`                             | Fallback value emitted only when the per-finding verdict cannot be looked up (e.g., response-scope `critic-mode` is `unavailable` and no per-finding verdict was produced). See [Telemetry fallback policy](#telemetry-fallback-policy-load-bearing); do not fabricate `pass` in this case. |
 | `head-sha`        | Full 40-char session SHA              | Short SHAs forbidden in this marker.                                                                                                                                                                                                                                                        |
 | `downstream-rule` | Linter rule ID                        | REQUIRED when a finding's fix adds or tightens a type, format, decorator, `x-ms-*` extension, or schema constraint in a conflict-aware area from `linter-rule-coverage.md` (for example, `R3017`). Optional otherwise.                                                                      |
@@ -246,8 +220,7 @@ finding-scope and records the per-finding verdict.
 Hidden HTML comment as the **literal first line** of every Critic response.
 Mirrors the role of the Reviewer's `review-state` marker: gives a
 machine-auditable header before the structured `### Verdict` table that
-follows. Required on every Critic dispatch return and every
-session-handoff paste.
+follows. Required on every Critic dispatch return.
 
 <!-- markdownlint-disable MD013 -->
 
@@ -260,7 +233,7 @@ session-handoff paste.
 | Field            | Values                                               | Notes                                                                                                                   |
 | ---------------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `finding`        | `pass` / `warn` / `fail` / `invalidated`             | Mirrors `Finding accuracy` row of the `### Verdict` table. Lowercase.                                                   |
-| `graph`          | `pass` / `warn` / `fail-fabrication` / `na`          | Mirrors `Graph integrity` row. `na` legitimate when Input #9 was `graphs-produced: false`, `downgraded`, or `degraded`. |
+| `graph`          | `pass` / `warn` / `fail-fabrication` / `na`          | Mirrors `Graph integrity` row. `na` legitimate when Input #9 was `Graphs: false`.                                       |
 | `reconciliation` | `pass` / `warn` / `fail` / `na`                      | Mirrors `Reconciliation accuracy` row. `na` only when Input #6 was the sentinel.                                        |
 | `coverage`       | `approve` / `request-expansion` / `needs-discussion` | Mirrors `Coverage quality` row.                                                                                         |
 | `iteration`      | `1`-`3`                                              | Echo of Input #10.                                                                                                      |
@@ -269,10 +242,10 @@ session-handoff paste.
 **Parsing contract.** The Reviewer parses this marker first, then
 cross-checks the values against the `### Verdict` table body. If the
 marker is missing, malformed, or disagrees with the table body, the
-Reviewer treats the response as a session-handoff validation failure
-(see "Session-handoff verification" above) and rejects it. This makes
-Critic output programmatically auditable without depending on
-markdown-table parsing alone.
+Reviewer treats the response as a dispatch failure and applies the
+bounded-retry / auto-unavailable policy (see "Non-empty response
+invariant" above). This makes Critic output programmatically auditable
+without depending on markdown-table parsing alone.
 
 The Critic produces no other HTML markers. In particular, the Critic
 MUST NOT emit a `review-state` marker (that is the Reviewer's
@@ -286,35 +259,41 @@ human override (`critic: override` per-comment marker) and which cannot.
 Both agent files reference this table; do not restate the contents
 elsewhere.
 
-| FAIL reason                    | Critic step                     | Non-overridable?         | Recovery                                                                   |
-| ------------------------------ | ------------------------------- | ------------------------ | -------------------------------------------------------------------------- |
-| `wrong-line`                   | Re-validation 2                 | No                       | Reviewer fixes the line number and re-invokes the Critic.                  |
-| `line-in-conflict-region`      | Re-validation 2                 | No (`WARN`)              | Reviewer drops the finding or waits for conflict resolution.               |
-| `rule-not-found`               | Re-validation 3                 | Override allowed         | Override-reason must cite the corrected instruction-file anchor.           |
-| `rule-misapplied`              | Re-validation 3                 | Override allowed         | Override-reason must quote the rule text that supports the finding.        |
-| `misclassified`                | Re-validation 4                 | No                       | Reviewer applies the Critic's `[NEW]`/`[EXISTING]` correction.             |
-| `downstream-ci-conflict`       | Re-validation 4.5               | **Yes**                  | Reviewer phrases as multi-option, adds suppression + `downstream-rule:`.   |
-| `suppression-path-mismatch`    | Re-validation 4.5               | **Yes**                  | Reviewer renders `where:` from the quoted `jsonpath`, segment-for-segment. |
-| `override-reason-invalid`      | Re-validation 5                 | **Yes**                  | Reviewer supplies a valid justification or drops the finding.              |
-| `unescaped-mention`            | Re-validation 6.5               | **Yes**                  | Reviewer backticks every `@<token>` outside code spans.                    |
-| `hash-number-autolink`         | Re-validation 6.5               | **Yes**                  | Reviewer removes `#` prefix on bare finding numbers.                       |
-| `skip-not-justified`           | Re-validation 7                 | **Yes** (reconciliation) | Demote SKIP-COVERED to POST-NEW.                                           |
-| `shift-misclassified`          | Re-validation 7                 | **Yes** (reconciliation) | Reclassify between Scenarios B and C.                                      |
-| `fix-not-verified`             | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
-| `fix-anchor-wrong`             | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
-| `fix-anchor-unreachable`       | Re-validation 7                 | **Yes** (reconciliation) | Drop the Scenario E/F entry; thread stays open.                            |
-| `Graph integrity: fabrication` | Independent graph re-derivation | **Yes**                  | Reviewer drops dependent findings, re-derives graphs, re-invokes Critic.   |
-| `file-fetch-failed`            | Re-validation 1                 | No                       | Reviewer drops the finding and reports the fetch failure to the human.     |
-| `session-sha-moved`            | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                |
-| `session-sha-unreachable`      | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                |
-| `missing-inputs`               | Input validation                | No                       | Reviewer fixes the input block (see canonical schema) and re-dispatches.   |
+The catalog has been reduced to **6 non-overridable reasons** (marked
+**Yes** below). All other FAIL reasons are overridable with a validated
+`override-reason` justification.
+
+| FAIL reason                    | Critic step                     | Non-overridable?         | Recovery                                                                                                        |
+| ------------------------------ | ------------------------------- | ------------------------ | --------------------------------------------------------------------------------------------------------------- |
+| `wrong-line`                   | Re-validation 2                 | No                       | Reviewer fixes the line number and re-invokes the Critic.                                                       |
+| `line-in-conflict-region`      | Re-validation 2                 | No (`WARN`)              | Reviewer drops the finding or waits for conflict resolution.                                                    |
+| `rule-not-found`               | Re-validation 3                 | Override allowed         | Override-reason must cite the corrected instruction-file anchor.                                                |
+| `rule-misapplied`              | Re-validation 3                 | Override allowed         | Override-reason must quote the rule text that supports the finding.                                             |
+| `misclassified`                | Re-validation 4                 | No                       | Reviewer applies the Critic's `[NEW]`/`[EXISTING]` correction.                                                  |
+| `downstream-ci-conflict`       | Re-validation 4.5               | Override allowed         | Override-reason must cite the reference file section that justifies the shape change; OR correct per Recovery.  |
+| `suppression-path-mismatch`    | Re-validation 4.5               | Override allowed         | Override-reason must quote the jsonpath and justify the mismatch; OR re-render `where:` segment-for-segment.    |
+| `override-reason-invalid`      | Re-validation 5                 | **Yes**                  | Reviewer supplies a valid justification or drops the finding.                                                   |
+| `unescaped-mention`            | Re-validation 6.5               | **Yes**                  | Reviewer backticks every `@<token>` outside code spans.                                                         |
+| `hash-number-autolink`         | Re-validation 6.5               | **Yes**                  | Reviewer removes `#` prefix on bare finding numbers.                                                            |
+| `skip-not-justified`           | Re-validation 7                 | Override allowed         | Override-reason must justify why the existing coverage is adequate; OR demote SKIP-COVERED to POST-NEW.         |
+| `shift-misclassified`          | Re-validation 7                 | Override allowed         | Override-reason must justify the scenario choice; OR reclassify between Scenarios B and C.                      |
+| `fix-not-verified`             | Re-validation 7                 | Override allowed         | Override-reason must cite the proof-of-fix anchor; OR drop the Scenario E/F entry; thread stays open.          |
+| `fix-anchor-wrong`             | Re-validation 7                 | Override allowed         | Override-reason must supply the corrected anchor; OR drop the Scenario E/F entry; thread stays open.            |
+| `fix-anchor-unreachable`       | Re-validation 7                 | Override allowed         | Override-reason must explain why the anchor is correct; OR drop the Scenario E/F entry; thread stays open.      |
+| `Graph integrity: fabrication` | Independent graph re-derivation | **Yes**                  | Reviewer drops dependent findings, re-derives graphs, re-invokes Critic.                                        |
+| `file-fetch-failed`            | Re-validation 1                 | No                       | Reviewer drops the finding and reports the fetch failure to the human.                                          |
+| `session-sha-moved`            | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                                                     |
+| `session-sha-unreachable`      | Re-validation 1                 | **Yes** (kills session)  | Only legal action: restart from Reviewer Step 1 or abandon.                                                     |
+| `missing-inputs`               | Input validation                | No                       | Reviewer fixes the input block (see canonical format) and re-dispatches.                                        |
 
 "Non-overridable" means the `critic: override` per-comment marker
 (human-supplied `override-reason`) does NOT clear the FAIL. The Reviewer's
-only legal responses are the ones listed in "Recovery". A reconciliation
-or graph-fabrication FAIL that the human disagrees with escalates the
-whole review to `MANUAL DECISION REQUIRED` for per-row human consent --
-not to an override.
+only legal responses are the ones listed in "Recovery". The 6
+non-overridable reasons are: `override-reason-invalid`, `unescaped-mention`,
+`hash-number-autolink`, `Graph integrity: fabrication`, `session-sha-moved`,
+and `session-sha-unreachable`. A graph-fabrication FAIL that the human
+disagrees with escalates the whole review to `MANUAL DECISION REQUIRED`
+for per-row human consent -- not to an override.
 
 ### Telemetry fallback policy (load-bearing)
 
