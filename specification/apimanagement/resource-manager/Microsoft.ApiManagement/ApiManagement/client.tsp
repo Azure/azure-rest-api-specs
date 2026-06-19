@@ -737,6 +737,18 @@ op replacePurge(
 @@usage(UserTokenParameters, Usage.input | Usage.output);
 @@alternateType(DeletedServiceContract.location, Azure.Core.azureLocation, "csharp");
 
+// Property renames to preserve old SDK names after @@flattenProperty (properties bag already flattened in back-compatible.tsp)
+@@clientName(OperationContractProperties.urlTemplate, "UriTemplate", "csharp");
+@@clientName(OperationUpdateContractProperties.urlTemplate, "UriTemplate", "csharp");
+@@clientName(DeployConfigurationParameterProperties.force, "ForceDelete", "csharp");
+@@clientName(DiagnosticContractUpdateProperties.logClientIp, "IsLogClientIPEnabled", "csharp");
+@@clientName(AccessInformationCreateParameterProperties.enabled, "IsDirectAccessEnabled", "csharp");
+@@clientName(AccessInformationUpdateParameterProperties.enabled, "IsDirectAccessEnabled", "csharp");
+
+// PortalDelegationSettings.properties flatten now applies to csharp (removed "!csharp" scope in back-compatible.tsp)
+@@clientName(PortalDelegationSettingsProperties.url, "Uri", "csharp");
+@@alternateType(PortalDelegationSettingsProperties.url, url, "csharp");
+
 // Framework WritableSubResource is not modeled by ARM TypeSpec common-types.
 // Define it here so @@alternateType can preserve the old SDK surface for { id } references.
 namespace Azure.ResourceManager.Models {
