@@ -17,6 +17,7 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
+    reminder_preview: "reminder_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
   }
@@ -812,6 +813,24 @@ namespace Azure.AI.Projects {
      * Time to wait before updating memories after inactivity (seconds). Default 300.
      */
     update_delay?: int32 = 300;
+  }
+
+  // ==============================================================================
+  // Reminder Preview Tool
+  // ==============================================================================
+
+  /**
+   * A built-in tool that schedules the agent to re-invoke itself after a delay.
+   * The model passes a single `minutes` argument (positive integer) when calling
+   * this tool. The service creates a one-shot timer routine that fires after the
+   * specified delay and re-invokes the agent on the same conversation thread.
+   * No pre-created routine is required.
+   */
+  model ReminderPreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `reminder_preview`.
+     */
+    type: "reminder_preview";
   }
 
   // ==============================================================================

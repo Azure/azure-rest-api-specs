@@ -79,6 +79,7 @@ alias ToolboxAzureAISearchToolType = "azure_ai_search";
 alias ToolboxOpenApiToolType = "openapi";
 alias ToolboxA2APreviewToolType = "a2a_preview";
 alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
@@ -95,6 +96,7 @@ union ToolboxToolType {
   openapi: ToolboxOpenApiToolType,
   a2a_preview: ToolboxA2APreviewToolType,
   browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+  reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
@@ -187,6 +189,13 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
 
   ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A reminder tool stored in a toolbox.
+ */
+model ReminderPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxReminderPreviewToolType;
 }
 
 /**
