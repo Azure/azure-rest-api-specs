@@ -697,10 +697,6 @@ model AgentEndpointAuthorizationScheme {
 )
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-
-  #deprecated "isolation_key_source is deprecated. Precedence-based identity resolution (x-ms-user-identity header + RBAC) replaces per-agent isolation key source configuration."
-  @doc("@deprecated The source from which the per-user isolation key is derived. Deprecated — precedence-based identity resolution handles all cases automatically.")
-  isolation_key_source?: IsolationKeySource;
 }
 
 @extension(
@@ -720,34 +716,6 @@ model BotServiceRbacAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
 }
 
-#deprecated "IsolationKeySource is deprecated. Precedence-based identity resolution replaces per-agent isolation key source configuration."
-@discriminator("kind")
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
-model IsolationKeySource {
-  kind: IsolationKeySourceKind;
-}
-
-#deprecated "EntraIsolationKeySource is deprecated. Precedence-based identity resolution replaces per-agent isolation key source configuration."
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
-model EntraIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Entra;
-}
-
-#deprecated "HeaderIsolationKeySource is deprecated. Precedence-based identity resolution replaces per-agent isolation key source configuration."
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
-model HeaderIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Header;
-}
-
 @extension(
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
@@ -757,17 +725,6 @@ union AgentEndpointAuthorizationSchemeType {
   Entra: "Entra",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
-}
-
-#deprecated "IsolationKeySourceKind is deprecated. Precedence-based identity resolution replaces per-agent isolation key source configuration."
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[AgentDefinitionOptInKeys.agent_endpoint_v1_preview] }
-)
-union IsolationKeySourceKind {
-  string,
-  Entra: "Entra",
-  Header: "Header",
 }
 
 @extension(

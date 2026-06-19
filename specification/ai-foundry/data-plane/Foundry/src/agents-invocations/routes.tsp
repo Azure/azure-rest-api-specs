@@ -55,7 +55,6 @@ interface AgentInvocations {
       /** The request body. */
       @body request: unknown;
 
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     } & AgentInvocationPreviewHeader,
     {
@@ -89,7 +88,6 @@ interface AgentInvocations {
       /** The unique identifier of the invocation. */
       @path invocation_id: string;
 
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     } & AgentInvocationPreviewHeader,
     {
@@ -126,7 +124,6 @@ interface AgentInvocations {
       /** Optional request body. */
       @body request?: unknown;
 
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     } & AgentInvocationPreviewHeader,
     {

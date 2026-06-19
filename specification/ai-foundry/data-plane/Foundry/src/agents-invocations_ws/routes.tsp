@@ -44,8 +44,6 @@ interface AgentWebsocket {
       foundry_features_query?: AgentDefinitionOptInKeys[] = #[
         AgentDefinitionOptInKeys.hosted_agents_v1_preview
       ];
-
-      ...UserIsolationKeyHeader;
     } & AgentWebsocketPreviewHeader,
     {
       /** Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request. */

@@ -29,17 +29,6 @@ alias AcceptJsonHeader = {
 };
 
 /**
- * @deprecated This header is deprecated and will be removed in a future version.
- * Identity resolution is now handled automatically by the platform via precedence-based
- * resolution (caller JWT, RBAC, x-ms-user-identity on invoke APIs).
- */
-alias UserIsolationKeyHeader = {
-  /** @deprecated This header is deprecated. Identity resolution is now handled by the platform automatically. */
-  #deprecated "This header is deprecated. Precedence-based identity resolution replaces manual isolation key passing."
-  @header("x-ms-user-isolation-key") user_isolation_key?: string;
-};
-
-/**
  * Optional request header carrying an opaque per-user identity for delegation.
  * When present and the caller has the `agents/endpoint/delegateViaUserId` RBAC permission,
  * the service scopes endpoint-scoped data (responses, conversations, sessions) to the

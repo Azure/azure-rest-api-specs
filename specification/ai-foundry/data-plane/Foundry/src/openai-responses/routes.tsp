@@ -25,7 +25,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader & UserDelegationHeader,
+    OpenAI.CreateResponse & UserDelegationHeader,
 
       | (AgentSessionIdResponseHeader & OpenAI.Response)
       | (AgentSessionIdResponseHeader &
@@ -56,7 +56,6 @@ interface Responses {
 
       @query stream?: boolean = false;
       @query starting_after?: int32;
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     },
 
@@ -83,7 +82,6 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
@@ -107,7 +105,6 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
@@ -130,7 +127,6 @@ interface Responses {
       response_id: string;
 
       ...CommonPageQueryParameters;
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
@@ -151,7 +147,6 @@ interface Responses {
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
       ...ConversationIdQueryParam;
-      ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.Response>

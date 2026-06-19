@@ -49,7 +49,6 @@ interface AgentSessionFiles {
       @header("Content-Type") contentType: "application/octet-stream";
 
       @body content: bytes;
-      ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
@@ -76,8 +75,6 @@ interface AgentSessionFiles {
 
       /** The file path to download from the sandbox, relative to the session home directory. */
       @query path: string;
-
-      ...UserIsolationKeyHeader;
     },
     bytes
   >;
@@ -106,7 +103,6 @@ interface AgentSessionFiles {
       /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
       @query path?: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     SessionDirectoryListResponse
@@ -137,8 +133,6 @@ interface AgentSessionFiles {
 
       /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
       @query recursive?: boolean = false;
-
-      ...UserIsolationKeyHeader;
     },
     void
   >;
