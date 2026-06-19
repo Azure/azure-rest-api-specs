@@ -267,6 +267,7 @@ op replacePurge(
 @@clientName(RegistrationDelegationSettingsProperties, "RegistrationDelegationSettingProperties", "csharp");
 @@clientName(OpenidConnectProviderContract, "ApiManagementOpenIdConnectProvider", "csharp");
 @@clientName(OpenidConnectProviderUpdateContract, "ApiManagementOpenIdConnectProviderPatch", "csharp");
+@@clientName(OpenidConnectProviderContract.name, "openId", "csharp");
 @@clientName(VirtualNetworkConfiguration.vnetid, "VnetId", "csharp");
 @@clientName(AccessInformationContract, "TenantAccessInfo", "csharp");
 @@clientName(AccessInformationContractProperties.id, "AccessInfoType", "csharp");
