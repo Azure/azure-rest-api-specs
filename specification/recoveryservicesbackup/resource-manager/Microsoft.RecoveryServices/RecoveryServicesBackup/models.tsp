@@ -271,6 +271,8 @@ union SoftDeleteFeatureState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union SourceSideScanStatus {
   string,
 
@@ -289,6 +291,8 @@ union SourceSideScanStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union SourceSideScanSummary {
   string,
 
@@ -310,6 +314,8 @@ union SourceSideScanSummary {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model SourceSideScanInfo {
   /**
    * Threat status of the container
@@ -327,6 +333,8 @@ model SourceSideScanInfo {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union ThreatStatus {
   string,
 
@@ -351,6 +359,8 @@ union ThreatStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union ThreatState {
   string,
 
@@ -372,6 +382,8 @@ union ThreatState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union ThreatSeverity {
   string,
 
@@ -393,6 +405,8 @@ union ThreatSeverity {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model ThreatInfo {
   /**
    * Threat Subject
@@ -741,6 +755,8 @@ union PolicyType {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union VMWorkloadPolicyType {
   string,
 
@@ -851,6 +867,8 @@ union ProtectedItemState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union ProtectionLevel {
   string,
 
@@ -866,6 +884,8 @@ union ProtectionLevel {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 union InstanceProtectionReadiness {
   string,
 
@@ -1010,11 +1030,15 @@ union RestorePointQueryType {
   /** Snapshot restore point type */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1302,6 +1326,8 @@ union ContainerType {
   /** HANA scale-out container type */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -2388,6 +2414,8 @@ model ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
 
@@ -2420,6 +2448,8 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   threatStatus?: ThreatStatus;
 
   /**
@@ -2427,6 +2457,8 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
 }
@@ -3227,6 +3259,8 @@ model UnlockDeleteResponse {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3239,6 +3273,8 @@ model UpdateRecoveryPointRequest {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3251,6 +3287,8 @@ model PatchRecoveryPointInput {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3613,6 +3651,8 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4658,6 +4698,8 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   parentProtectedItem?: string;
 
   /**
@@ -4665,6 +4707,8 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4674,6 +4718,8 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SQL acronym in naming"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5198,6 +5244,8 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5366,6 +5414,8 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   baseSnapshotRPId?: string;
 
   /**
@@ -5374,6 +5424,8 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   baseRPDatasourceId?: string;
 
   /**
@@ -5382,6 +5434,8 @@ model BmsrpQueryObject {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving existing API naming convention from prior swagger versions"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   getLatestRPOnly?: boolean;
 }
 
@@ -5799,6 +5853,8 @@ model DailySchedule {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserving original API naming convention"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -7742,6 +7798,8 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses SAP acronym in naming"
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
