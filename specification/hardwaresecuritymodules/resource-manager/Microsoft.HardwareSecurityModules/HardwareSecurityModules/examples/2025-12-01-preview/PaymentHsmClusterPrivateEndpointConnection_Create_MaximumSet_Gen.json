@@ -4,7 +4,7 @@
     "api-version": "2025-12-01-preview",
     "paymentHsmClusterName": "phsm1",
     "peConnectionName": "sample-pec",
-    "resource": {
+    "properties": {
       "properties": {
         "privateLinkServiceConnectionState": {
           "description": "My name is Joe and I am approving this.",
@@ -18,6 +18,32 @@
   "title": "PaymentHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen",
   "responses": {
     "200": {
+      "body": {
+        "name": "sample-pec",
+        "type": "Microsoft.HardwareSecurityModules/paymentHsmClusters/privateEndpointConnections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/phsm1/privateEndpointConnections/sample-pec",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.Network/privateEndpoints/sample-pec"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "My name is Joe and I am approving this.",
+            "actionsRequired": "None",
+            "status": "Approved"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:00:00.0000000Z",
+          "createdBy": "User1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+          "lastModifiedBy": "User2",
+          "lastModifiedByType": "User"
+        }
+      }
+    },
+    "201": {
       "body": {
         "name": "sample-pec",
         "type": "Microsoft.HardwareSecurityModules/paymentHsmClusters/privateEndpointConnections",

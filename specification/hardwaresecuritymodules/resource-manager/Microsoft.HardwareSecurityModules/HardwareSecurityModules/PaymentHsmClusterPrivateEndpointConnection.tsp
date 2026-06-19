@@ -28,7 +28,7 @@ model PaymentHsmClusterPrivateEndpointConnection
   /**
    * Modified whenever there is a change in the state of private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The private endpoint connection resource exposes an 'etag' for optimistic concurrency control, consistent with the existing CloudHsmCluster private endpoint connection resource. It is not part of the standard ARM proxy resource envelope."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "The private endpoint connection resource exposes an 'etag' for optimistic concurrency control, consistent with the existing CloudHsmCluster private endpoint connection resource."
   etag?: string;
 }
 
@@ -43,11 +43,7 @@ interface PaymentHsmClusterPrivateEndpointConnections {
   /**
    * Creates or updates the private endpoint connection for the Payment Hsm Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The private endpoint connection create/update is synchronous and returns 200 only, consistent with the existing CloudHsmCluster private endpoint connection resource."
-  create is ArmResourceCreateOrReplaceSync<
-    PaymentHsmClusterPrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<PaymentHsmClusterPrivateEndpointConnection>
-  >;
+  create is ArmResourceCreateOrReplaceSync<PaymentHsmClusterPrivateEndpointConnection>;
 
   /**
    * Deletes the private endpoint connection for the Payment Hsm Cluster.

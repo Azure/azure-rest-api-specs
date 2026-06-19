@@ -2201,7 +2201,7 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "resource",
+            "name": "properties",
             "in": "body",
             "description": "Parameters of the PrivateEndpointConnection",
             "required": true,
@@ -2213,6 +2213,12 @@
         "responses": {
           "200": {
             "description": "Resource 'PaymentHsmClusterPrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PaymentHsmClusterPrivateEndpointConnection' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
             }
@@ -2305,7 +2311,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/{paymentHsmClusterName}/privateLinkResources": {
       "get": {
-        "operationId": "PaymentHsmClusters_ListByPaymentHsmCluster",
+        "operationId": "PaymentHsmClusterPrivateLinkResources_ListByPaymentHsmCluster",
         "tags": [
           "PaymentHsmClusters"
         ],
@@ -3155,7 +3161,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties."
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
         },
         "etag": {
           "type": "string",
