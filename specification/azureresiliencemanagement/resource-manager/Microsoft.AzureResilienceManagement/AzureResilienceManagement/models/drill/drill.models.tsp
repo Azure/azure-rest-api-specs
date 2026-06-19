@@ -105,6 +105,7 @@ model DrillProperties {
 
   @doc("Managed RG v2 properties.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_06_01_preview)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("The discriminator for the Drill object hierarchy.")
@@ -832,6 +833,7 @@ model ValidateForExecutionResponse {
 }
 
 @doc("Configuration of the managed on behalf of resource.")
+@removed(Versions.v2026_06_01_preview)
 model ManagedOnBehalfOfConfiguration {
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
@@ -839,6 +841,7 @@ model ManagedOnBehalfOfConfiguration {
 }
 
 @doc("MoboBroker resource.")
+@removed(Versions.v2026_06_01_preview)
 model MoboBrokerResource {
   /**
    * The fully qualified resource ID of the MoboBroker resource.
