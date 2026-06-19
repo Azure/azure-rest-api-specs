@@ -12,18 +12,34 @@
       "body": {
         "value": [
           {
-            "name": "sample-pls",
+            "name": "sample-pls1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/phsm1/privateLinkResources/sample-pls1",
             "type": "Microsoft.HardwareSecurityModules/paymentHsmClusters/privateLinkResources",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/phsm1/privateLinkResources/sample-pls",
             "properties": {
-              "groupId": "paymentHsm",
+              "groupId": "management",
               "requiredMembers": [
-                "hsm1",
-                "hsm2",
-                "hsm3"
+                "mgmt1",
+                "mgmt2",
+                "mgmt3"
               ],
               "requiredZoneNames": [
                 "privatelink.paymenthsm.azure.net"
+              ]
+            }
+          },
+          {
+            "name": "sample-pls2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/phsm1/privateLinkResources/sample-pls2",
+            "type": "Microsoft.HardwareSecurityModules/paymentHsmClusters/privateLinkResources",
+            "properties": {
+              "groupId": "application",
+              "requiredMembers": [
+                "app1",
+                "app2",
+                "app3"
+              ],
+              "requiredZoneNames": [
+                "privatelink.phsm.azure.net"
               ]
             }
           }
