@@ -7,7 +7,6 @@ import "./models.tsp";
 import "./devices.tsp";
 import "./deviceCapabilities.tsp";
 import "./deviceAuthenticationProfiles.tsp";
-import "./deviceStates.tsp";
 import "./deviceAttributes.tsp";
 import "./groups.tsp";
 import "./namespaces.tsp";

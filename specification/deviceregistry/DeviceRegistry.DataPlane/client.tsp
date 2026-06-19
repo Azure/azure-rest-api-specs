@@ -33,13 +33,6 @@ using Azure.ClientGenerator.Core;
   Access.internal
 );
 
-@@access(Microsoft.DeviceRegistry.DeviceStates.createOrReplace,
-  Access.internal
-);
-@@access(Microsoft.DeviceRegistry.DeviceStates.get, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceStates.update, Access.internal);
-@@access(Microsoft.DeviceRegistry.DeviceStates.list, Access.internal);
-
 @@access(Microsoft.DeviceRegistry.DeviceAttributes.createOrReplace,
   Access.internal
 );
