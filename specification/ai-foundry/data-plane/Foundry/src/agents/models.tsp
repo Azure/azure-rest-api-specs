@@ -603,6 +603,11 @@ model BotServiceRbacAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
 }
 
+model BotServiceTenantAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
+}
+
 @discriminator("kind")
 model IsolationKeySource {
   kind: IsolationKeySourceKind;
@@ -621,6 +626,7 @@ union AgentEndpointAuthorizationSchemeType {
   Entra: "Entra",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
+  BotServiceTenant: "BotServiceTenant",
 }
 
 union IsolationKeySourceKind {
