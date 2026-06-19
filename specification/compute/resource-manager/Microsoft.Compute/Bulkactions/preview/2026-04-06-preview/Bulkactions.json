@@ -1351,6 +1351,11 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "Azure.ResourceManager.CommonTypes.ExtendedLocation": {
       "type": "object",
       "description": "The complex type of the extended location.",
@@ -3880,7 +3885,7 @@
           }
         },
         "subscriptionId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Subscription id attached to the request"
         },
         "deadline": {

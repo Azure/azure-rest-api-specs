@@ -342,7 +342,7 @@ model ResourceOperationDetails {
   opType?: ResourceOperationType = ResourceOperationType.Unknown;
 
   @doc("Subscription id attached to the request")
-  subscriptionId?: string;
+  subscriptionId?: uuid;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("Deadline for the operation")
