@@ -3447,6 +3447,13 @@ model RaiPolicyProperties {
    */
   @identifiers(#[])
   safetyProviders?: SafetyProviderConfig[];
+
+  /**
+   * Egress (outbound network) policy controlling which external endpoints sandboxed
+   * agents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions.
+   */
+  @added(Versions.v2026_05_15_preview)
+  egressPolicy?: RaiEgressPolicyConfig;
 }
 
 /**
@@ -6555,40 +6562,28 @@ model ManagedComputeCapacityListResult {
 }
 
 /**
- * The type of agent guardrails policy.
- */
-@added(Versions.v2026_05_15_preview)
-union AgentGuardrailsType {
-  string,
-
-  /** Egress policy for controlling outbound network traffic from sandboxes. */
-  Egress: "Egress",
-}
-
-/**
- * The enforcement mode for an agent guardrails policy.
+ * The enforcement mode for egress rules.
  * If omitted on create, the server defaults to Enforced.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsMode {
+union RaiEgressMode {
   string,
 
-  /** Policy rules are enforced. Matching traffic is allowed or denied per rule actions. */
+  /** Rules are enforced. Matching traffic is allowed or denied per rule actions. */
   Enforced: "Enforced",
 
   /**
-   * Policy rules are evaluated and logged. A would-be Deny is logged but not blocked — the request is
-   * forwarded — so a customer can preview what a policy would reject without breaking traffic. Allow,
-   * Transform, and Rewrite are applied exactly as in Enforced.
+   * Rules are evaluated and logged but not enforced. A would-be Deny is logged but traffic
+   * is still forwarded, allowing customers to preview policy impact without breaking traffic.
    */
   Audit: "Audit",
 }
 
 /**
- * The default action when no user-defined policy rules match.
+ * The default action when no user-defined egress rules match.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsDefaultAction {
+union RaiEgressDefaultAction {
   string,
 
   /** Allow traffic by default when no rules match. */
@@ -6599,10 +6594,10 @@ union AgentGuardrailsDefaultAction {
 }
 
 /**
- * The kind of action a policy rule takes when it matches.
+ * The kind of action an egress rule takes when it matches.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsActionType {
+union RaiEgressRuleActionType {
   string,
 
   /** Allow the matched traffic. */
@@ -6622,13 +6617,13 @@ union AgentGuardrailsActionType {
  * The operation to apply to a header in a Transform or Rewrite action.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsHeaderOperation {
+union RaiEgressHeaderOperation {
   string,
 
   /** Set or overwrite the header value, creating it if it does not exist. */
   Set: "Set",
 
-  /** Add the header only if it isn't already present. */
+  /** Add the header only if it is not already present. */
   Insert: "Insert",
 
   /** Remove the header if present. */
@@ -6639,7 +6634,7 @@ union AgentGuardrailsHeaderOperation {
  * The managed identity type used to resolve a header value from a token.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsManagedIdentityType {
+union RaiEgressManagedIdentityType {
   string,
 
   /** The sandbox's system-assigned managed identity. */
@@ -6653,7 +6648,7 @@ union AgentGuardrailsManagedIdentityType {
  * A reference to a stored secret used as a header value.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsSecretRef {
+model RaiEgressSecretRef {
   /** Identifier of the secret to inject. */
   secretId: string;
 
@@ -6669,7 +6664,7 @@ model AgentGuardrailsSecretRef {
  * A reference to a managed-identity token used as a header value.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsManagedIdentityRef {
+model RaiEgressManagedIdentityRef {
   /** The resource/audience the token is requested for. */
   resource: string;
 
@@ -6677,7 +6672,7 @@ model AgentGuardrailsManagedIdentityRef {
   format?: string;
 
   /** Which managed identity to use. Defaults to SystemAssigned if omitted. */
-  type?: AgentGuardrailsManagedIdentityType;
+  type?: RaiEgressManagedIdentityType;
 
   /** Resource ID of the user-assigned identity. Required when type is UserAssigned. */
   identityResourceId?: string;
@@ -6687,12 +6682,12 @@ model AgentGuardrailsManagedIdentityRef {
  * A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsHeaderValueRef {
+model RaiEgressHeaderValueRef {
   /** Resolve the value from a stored secret. */
-  secretRef?: AgentGuardrailsSecretRef;
+  secretRef?: RaiEgressSecretRef;
 
   /** Resolve the value from a managed-identity token. */
-  managedIdentityRef?: AgentGuardrailsManagedIdentityRef;
+  managedIdentityRef?: RaiEgressManagedIdentityRef;
 }
 
 /**
@@ -6701,9 +6696,9 @@ model AgentGuardrailsHeaderValueRef {
  * For Remove operations, neither value nor valueRef should be set.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsHeaderTransform {
+model RaiEgressHeaderTransform {
   /** The operation to perform on this header. */
-  operation: AgentGuardrailsHeaderOperation;
+  operation: RaiEgressHeaderOperation;
 
   /** The HTTP header name (e.g., "Authorization", "X-Custom-Auth"). */
   name: string;
@@ -6718,14 +6713,14 @@ model AgentGuardrailsHeaderTransform {
   value?: string;
 
   /** A dynamic header value resolved at request time from a secret or managed identity. */
-  valueRef?: AgentGuardrailsHeaderValueRef;
+  valueRef?: RaiEgressHeaderValueRef;
 }
 
 /**
  * Where a Rewrite action sends matched traffic. At least one field must be set.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsRewriteTarget {
+model RaiEgressRewriteTarget {
   /** Target scheme ("http" or "https"). Original scheme is kept if omitted. */
   scheme?: string;
 
@@ -6740,33 +6735,33 @@ model AgentGuardrailsRewriteTarget {
 }
 
 /**
- * The action a policy rule takes when it matches.
+ * The action an egress rule takes when it matches.
  * - Allow/Deny: no additional fields needed; headers and rewrite must not be set.
  * - Transform: headers is required with at least one entry; rewrite must not be set.
  * - Rewrite: rewrite is required with at least one of scheme/host/path/targetPort;
  *   headers is optional for injecting headers alongside the redirect.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsRuleAction {
+model RaiEgressRuleAction {
   /** The kind of action. */
-  actionType: AgentGuardrailsActionType;
+  actionType: RaiEgressRuleActionType;
 
   /**
    * Header transforms to apply. Required for Transform; optional for Rewrite;
    * not allowed for Allow or Deny.
    */
   @identifiers(#["name"])
-  headers?: AgentGuardrailsHeaderTransform[];
+  headers?: RaiEgressHeaderTransform[];
 
   /** Destination override. Required for Rewrite; not allowed otherwise. */
-  rewrite?: AgentGuardrailsRewriteTarget;
+  rewrite?: RaiEgressRewriteTarget;
 }
 
 /**
- * The type of a policy rule, determining what kind of traffic matching it performs.
+ * The type of an egress rule, determining what kind of traffic matching it performs.
  */
 @added(Versions.v2026_05_15_preview)
-union AgentGuardrailsRuleType {
+union RaiEgressRuleType {
   string,
 
   /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
@@ -6774,13 +6769,13 @@ union AgentGuardrailsRuleType {
 }
 
 /**
- * The match criteria for a policy rule.
+ * The match criteria for an egress rule.
  * If both host and path are omitted, the rule matches all traffic.
  * Host uses DNS wildcard syntax (e.g., "*.openai.com" matches "api.openai.com").
  * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsRuleMatch {
+model RaiEgressRuleMatch {
   /**
    * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
    * A leading "*." matches any subdomain. Omit to match all hosts.
@@ -6795,10 +6790,10 @@ model AgentGuardrailsRuleMatch {
 }
 
 /**
- * A single rule within an agent guardrails policy.
+ * A single egress rule. Rules are evaluated in order; first match wins.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsRule {
+model RaiEgressRule {
   /**
    * Name of the rule. Must be unique within the policy.
    */
@@ -6812,53 +6807,50 @@ model AgentGuardrailsRule {
   /**
    * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
    */
-  ruleType?: AgentGuardrailsRuleType;
+  ruleType?: RaiEgressRuleType;
 
   /**
    * The match criteria for this rule.
    */
-  match?: AgentGuardrailsRuleMatch;
+  match?: RaiEgressRuleMatch;
 
   /**
    * The action to take when this rule matches, including the action type and any
    * type-specific configuration (headers for Transform, rewrite target for Rewrite).
    */
-  action?: AgentGuardrailsRuleAction;
+  action: RaiEgressRuleAction;
 }
 
 /**
- * Properties of a Cognitive Services Agent Guardrails resource.
+ * Egress (outbound network) policy configuration nested within an RAI policy.
+ * Controls which external endpoints sandboxed agents can reach and what
+ * transformations (header injection, URL rewrite) are applied to matching traffic.
  */
 @added(Versions.v2026_05_15_preview)
-model AgentGuardrailsProperties {
+model RaiEgressPolicyConfig {
   /**
-   * The type of policy.
-   */
-  policyType?: AgentGuardrailsType;
-
-  /**
-   * The enforcement mode for this policy.
+   * The enforcement mode for egress rules.
    * If omitted on create, the server defaults to Enforced. On subsequent GET
    * requests, the server always returns the effective mode.
    */
-  mode?: AgentGuardrailsMode;
+  mode?: RaiEgressMode;
 
   /**
    * The default action when no user-defined rules match. This is security-critical:
    * Allow means unmatched traffic is permitted; Deny means it is blocked.
    */
-  defaultAction: AgentGuardrailsDefaultAction;
+  defaultAction: RaiEgressDefaultAction;
 
   /**
-   * Description of the policy.
+   * Description of the egress policy.
    */
   description?: string;
 
   /**
-   * Ordered list of user-defined policy rules. First matching rule wins.
+   * Ordered list of user-defined egress rules. First matching rule wins.
    */
   @identifiers(#["name"])
-  rules?: AgentGuardrailsRule[];
+  rules?: RaiEgressRule[];
 
   /**
    * Read-only list of system-managed rules that ensure Azure infrastructure
@@ -6868,29 +6860,5 @@ model AgentGuardrailsProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
-  systemRules?: AgentGuardrailsRule[];
-
-  /**
-   * The provisioning state of the policy resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
-
-/**
- * A paginated list of Agent Guardrails resources.
- */
-@added(Versions.v2026_05_15_preview)
-model AgentGuardrailsListResult {
-  /**
-   * The link to the next page of Agent Guardrails objects.
-   */
-  @nextLink
-  nextLink?: string;
-
-  /**
-   * The list of Agent Guardrails resources.
-   */
-  @pageItems
-  value?: AgentGuardrailsResource[];
+  systemRules?: RaiEgressRule[];
 }

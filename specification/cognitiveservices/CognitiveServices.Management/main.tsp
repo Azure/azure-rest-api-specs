@@ -43,7 +43,6 @@ import "./ManagedComputeUsages.tsp";
 import "./Compute.tsp";
 import "./Workbench.tsp";
 import "./ManagedComputeCapacity.tsp";
-import "./Policy.tsp";
 import "./routes.tsp";
 
 using TypeSpec.Rest;
