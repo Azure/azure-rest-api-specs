@@ -5428,6 +5428,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -5452,7 +5457,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
       }
@@ -7781,6 +7786,37 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
+    },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "BillingContainer": {
       "type": "object",
@@ -13343,6 +13379,82 @@
         }
       ],
       "x-ms-discriminator-value": "RecoveryUpdate"
+    },
+    "RefreshGroupMembersResult": {
+      "type": "object",
+      "description": "Standard Azure Resource Manager operation status response, used as the response\nbody for `GetResourceOperationStatus`.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The operation status"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier for the operationStatus resource"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the operationStatus resource",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation start time",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Operation complete time",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "double",
+          "description": "The progress made toward completing the operation",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Errors that occurred if the operation ended with Canceled or Failed status",
+          "readOnly": true
+        },
+        "totalMemberCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count of members in the group after the refresh.",
+          "readOnly": true
+        },
+        "membersAddedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members added during the refresh.",
+          "readOnly": true
+        },
+        "membersRemovedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members removed during the refresh.",
+          "readOnly": true
+        },
+        "membersFailedCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count of members that failed to be processed during the refresh.",
+          "readOnly": true
+        },
+        "lastRefreshTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last successful refresh.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "id"
+      ]
     },
     "RootCertificateAuthorityProperties": {
       "type": "object",
