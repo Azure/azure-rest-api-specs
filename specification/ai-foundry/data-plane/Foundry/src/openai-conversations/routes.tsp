@@ -19,7 +19,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody & UserIsolationKeyHeader,
+    OpenAI.CreateConversationBody,
     OpenAI.ConversationResource
   >;
 
@@ -36,7 +36,6 @@ interface Conversations {
       @path conversation_id: string;
 
       ...OpenAI.UpdateConversationBody;
-      ...UserIsolationKeyHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -52,8 +51,6 @@ interface Conversations {
     {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -69,8 +66,6 @@ interface Conversations {
     {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     OpenAI.DeletedConversationResource
   >;
@@ -90,7 +85,6 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
-      ...UserIsolationKeyHeader;
     },
     AgentsPagedResult<OpenAI.ConversationResource>
   >;
@@ -117,8 +111,6 @@ interface Conversations {
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @maxItems(20)
       items: OpenAI.Item[];
-
-      ...UserIsolationKeyHeader;
     },
     OpenAI.ConversationItemList
   >;
@@ -137,8 +129,6 @@ interface Conversations {
 
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     OpenAI.OutputItem
   >;
@@ -157,8 +147,6 @@ interface Conversations {
 
       /** The id of the conversation item to delete. */
       @path item_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -178,7 +166,6 @@ interface Conversations {
 
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
-      ...UserIsolationKeyHeader;
     },
     AgentsPagedResult<OpenAI.OutputItem>
   >;

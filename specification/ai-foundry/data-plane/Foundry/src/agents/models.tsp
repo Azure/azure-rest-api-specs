@@ -577,9 +577,6 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-
-  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
-  isolation_key_source?: IsolationKeySource;
 }
 
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
@@ -596,31 +593,12 @@ model BotServiceTenantAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
 }
 
-@discriminator("kind")
-model IsolationKeySource {
-  kind: IsolationKeySourceKind;
-}
-
-model EntraIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Entra;
-}
-
-model HeaderIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Header;
-}
-
 union AgentEndpointAuthorizationSchemeType {
   string,
   Entra: "Entra",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
   BotServiceTenant: "BotServiceTenant",
-}
-
-union IsolationKeySourceKind {
-  string,
-  Entra: "Entra",
-  Header: "Header",
 }
 
 @doc("Per-protocol configuration for the agent endpoint.")

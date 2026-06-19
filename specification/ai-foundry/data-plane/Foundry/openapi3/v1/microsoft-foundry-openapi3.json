@@ -1379,10 +1379,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -1547,10 +1547,10 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -1635,10 +1635,10 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -1723,15 +1723,6 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -1798,15 +1789,6 @@
             "in": "path",
             "required": true,
             "description": "The name of the agent.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -1962,15 +1944,6 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -2104,15 +2077,6 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2186,15 +2150,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           },
           {
             "name": "api-version",
@@ -2287,15 +2242,6 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2368,15 +2314,6 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -2442,15 +2379,6 @@
             "in": "path",
             "required": true,
             "description": "The session identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -10005,17 +9933,7 @@
         "operationId": "createConversation",
         "summary": "Create a conversation",
         "description": "Creates a new conversation resource.",
-        "parameters": [
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -10128,15 +10046,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10216,15 +10125,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10286,15 +10186,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10343,15 +10234,6 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -10421,15 +10303,6 @@
               }
             },
             "explode": false
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10556,15 +10429,6 @@
               "$ref": "#/components/schemas/OpenAI.ItemType"
             },
             "explode": false
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10653,15 +10517,6 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
@@ -10719,15 +10574,6 @@
             "in": "path",
             "required": true,
             "description": "The id of the conversation item to delete.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-user-isolation-key",
-            "in": "header",
-            "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
             }
@@ -12255,10 +12101,10 @@
         "description": "Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.",
         "parameters": [
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -12995,10 +12841,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -13167,10 +13013,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -13241,10 +13087,10 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -13312,10 +13158,10 @@
             }
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -13424,10 +13270,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-isolation-key",
+            "name": "x-ms-user-identity",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.",
             "schema": {
               "type": "string"
             }
@@ -17433,6 +17279,24 @@
             "description": "The authorization schemes supported by the agent endpoint"
           }
         }
+      },
+      "AgentEndpointProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "activity",
+              "responses",
+              "a2a",
+              "mcp",
+              "invocations",
+              "invocations_ws"
+            ]
+          }
+        ]
       },
       "AgentEvaluatorGenerationJobSource": {
         "type": "object",
@@ -22163,14 +22027,6 @@
             "enum": [
               "Entra"
             ]
-          },
-          "isolation_key_source": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/IsolationKeySource"
-              }
-            ],
-            "description": "The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted."
           }
         },
         "allOf": [
@@ -22200,25 +22056,6 @@
           }
         ],
         "description": "Entra ID credential definition"
-      },
-      "EntraIsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "Entra"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IsolationKeySource"
-          }
-        ]
       },
       "Eval": {
         "type": "object",
@@ -24737,25 +24574,6 @@
           ]
         }
       },
-      "HeaderIsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "type": "string",
-            "enum": [
-              "Header"
-            ]
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/IsolationKeySource"
-          }
-        ]
-      },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
         "required": [
@@ -25514,38 +25332,6 @@
             "Routines=V1Preview"
           ]
         }
-      },
-      "IsolationKeySource": {
-        "type": "object",
-        "required": [
-          "kind"
-        ],
-        "properties": {
-          "kind": {
-            "$ref": "#/components/schemas/IsolationKeySourceKind"
-          }
-        },
-        "discriminator": {
-          "propertyName": "kind",
-          "mapping": {
-            "Entra": "#/components/schemas/EntraIsolationKeySource",
-            "Header": "#/components/schemas/HeaderIsolationKeySource"
-          }
-        }
-      },
-      "IsolationKeySourceKind": {
-        "anyOf": [
-          {
-            "type": "string"
-          },
-          {
-            "type": "string",
-            "enum": [
-              "Entra",
-              "Header"
-            ]
-          }
-        ]
       },
       "ItemGenerationParams": {
         "type": "object",
