@@ -1182,7 +1182,7 @@ interface File {
   @route("?comp=rangelist")
   @get
   @list
-  getAllRangeList is StorageOperationResponseBody<
+  listAllRanges is StorageOperationResponseBody<
     {
       ...ShareSnapshotParameter;
       ...PreviousSnapshotParameter;
