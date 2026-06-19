@@ -15011,6 +15011,22 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - EgressPolicy=V1Preview
+    EgressPolicyHttpMethod:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - GET
+            - POST
+            - PUT
+            - PATCH
+            - DELETE
+            - HEAD
+            - OPTIONS
+      description: HTTP method for matching hosted-agent egress traffic.
+      x-ms-foundry-meta:
+        required_previews:
+          - EgressPolicy=V1Preview
     EgressPolicyMode:
       anyOf:
         - type: string
@@ -15120,6 +15136,12 @@ components:
         path:
           type: string
           description: Optional path pattern to match, such as '/api/*'.
+        methods:
+          type: array
+          items:
+            $ref: '#/components/schemas/EgressPolicyHttpMethod'
+          minItems: 1
+          description: Optional HTTP methods to match. If omitted, the rule matches all methods.
       description: Traffic matching criteria for a hosted-agent egress policy rule.
       x-ms-foundry-meta:
         required_previews:
@@ -15138,6 +15160,7 @@ components:
       type: object
       required:
         - type
+        - headers
       properties:
         type:
           type: string
@@ -15147,6 +15170,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EgressPolicyHeaderTransformConfig'
+          minItems: 1
           description: Header transformations to apply to matching application egress.
       allOf:
         - $ref: '#/components/schemas/EgressPolicyRuleActionConfig'

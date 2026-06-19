@@ -431,6 +431,36 @@ union EgressPolicyRuleType {
   "x-ms-foundry-meta",
   #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
 )
+@doc("HTTP method for matching hosted-agent egress traffic.")
+union EgressPolicyHttpMethod {
+  string,
+
+  @doc("Match HTTP GET requests.")
+  GET: "GET",
+
+  @doc("Match HTTP POST requests.")
+  POST: "POST",
+
+  @doc("Match HTTP PUT requests.")
+  PUT: "PUT",
+
+  @doc("Match HTTP PATCH requests.")
+  PATCH: "PATCH",
+
+  @doc("Match HTTP DELETE requests.")
+  DELETE: "DELETE",
+
+  @doc("Match HTTP HEAD requests.")
+  HEAD: "HEAD",
+
+  @doc("Match HTTP OPTIONS requests.")
+  OPTIONS: "OPTIONS",
+}
+
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.egress_policy_v1_preview] }
+)
 @doc("Action type for a hosted-agent egress policy rule.")
 union EgressPolicyRuleActionType {
   string,
@@ -501,6 +531,10 @@ model EgressPolicyRuleMatchConfig {
 
   @doc("Optional path pattern to match, such as '/api/*'.")
   path?: string;
+
+  @minItems(1)
+  @doc("Optional HTTP methods to match. If omitted, the rule matches all methods.")
+  methods?: EgressPolicyHttpMethod[];
 }
 
 @extension(
@@ -609,8 +643,9 @@ model EgressPolicyDenyActionConfig extends EgressPolicyRuleActionConfig {
 model EgressPolicyTransformActionConfig extends EgressPolicyRuleActionConfig {
   type: EgressPolicyRuleActionType.transform;
 
+  @minItems(1)
   @doc("Header transformations to apply to matching application egress.")
-  headers?: EgressPolicyHeaderTransformConfig[];
+  headers: EgressPolicyHeaderTransformConfig[];
 }
 
 @extension(
