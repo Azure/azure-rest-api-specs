@@ -1748,30 +1748,34 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           },
           {
             "name": "fabricName",
             "in": "path",
-            "description": "The name of the BackupFabricResource",
+            "description": "The name of the backup fabric.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           },
           {
             "name": "containerName",
             "in": "path",
             "description": "Name of the container whose details need to be fetched.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           },
           {
             "name": "protectedItemName",
             "in": "path",
             "description": "Backed up item name whose details are to be fetched.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^.+$"
           },
           {
             "name": "body",
@@ -1784,9 +1788,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
