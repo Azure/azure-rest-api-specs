@@ -17,10 +17,10 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
+    reminder_preview: "reminder_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
-    reminder_preview: "reminder_preview",
   }
 
   // General availability tools:
@@ -834,7 +834,6 @@ namespace Azure.AI.Projects {
     type: "reminder_preview";
 
     ...ToolNameAndDescriptionExtension;
-    ...ToolConfigExtension;
   }
 
   // ==============================================================================
