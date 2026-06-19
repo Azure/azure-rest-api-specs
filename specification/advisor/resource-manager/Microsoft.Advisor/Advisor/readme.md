@@ -93,6 +93,18 @@ suppressions:
     where:
       - $.definitions["AssessmentTypeListResult"]
       - $.definitions["WorkloadListResult"]
+  - code: PostResponseCodes
+    reason: Pre-existing pattern from Triage operations; not related to Advisor Score changes.
+    from:
+      - openapi.json
+  - code: GuidUsage
+    reason: Pre-existing pattern; GUID is required for this service.
+    from:
+      - openapi.json
+  - code: DescriptionMustNotBeNodeName
+    reason: Pre-existing enum value descriptions from existing APIs.
+    from:
+      - openapi.json
 ```
 
 ### Tag: package-2025-05-preview
