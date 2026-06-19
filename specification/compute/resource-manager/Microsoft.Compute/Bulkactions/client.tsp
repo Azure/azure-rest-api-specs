@@ -7,24 +7,48 @@ namespace Microsoft.Compute;
 
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
-  "BulkDeallocateOperation"
+  "BulkDeallocateOperation",
+  "!autorest"
 );
 @@clientName(
   VirtualMachineBulkOperations.bulkHibernate,
-  "BulkHibernateOperation"
+  "BulkHibernateOperation",
+  "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkStart, "BulkStartOperation");
+@@clientName(
+  VirtualMachineBulkOperations.bulkStart,
+  "BulkStartOperation",
+  "!autorest"
+);
 @@clientName(
   VirtualMachineBulkOperations.bulkGetOperationsStatus,
-  "BulkGetOperationsStatus"
+  "BulkGetOperationsStatus",
+  "!autorest"
 );
-@@clientName(VirtualMachineBulkOperations.bulkCancel, "BulkCancelOperations");
-@@clientName(VirtualMachineBulkOperations.bulkCreate, "BulkCreateOperation");
-@@clientName(VirtualMachineBulkOperations.bulkDelete, "BulkDeleteOperation");
-@@clientName(VirtualMachineBulkOperations.bulkReimage, "BulkReimageOperation");
+@@clientName(
+  VirtualMachineBulkOperations.bulkCancel,
+  "BulkCancelOperations",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkCreate,
+  "BulkCreateOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkDelete,
+  "BulkDeleteOperation",
+  "!autorest"
+);
+@@clientName(
+  VirtualMachineBulkOperations.bulkReimage,
+  "BulkReimageOperation",
+  "!autorest"
+);
 @@clientName(
   VirtualMachineBulkOperations.bulkVdiFlexCreate,
-  "BulkVdiFlexCreateOperation"
+  "BulkVdiFlexCreateOperation",
+  "!autorest"
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
@@ -84,27 +108,42 @@ namespace Microsoft.Compute;
   "CreateResourceOperationResult",
   "csharp"
 );
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent");
-@@clientName(GetOperationStatusRequest, "GetBulkOperationStatusContent");
-@@clientName(CancelOperationsRequest, "CancelBulkOperationsContent");
-@@clientName(ManagedDiskParameters, "ManagedDiskParametersContent");
-@@clientName(DiskEncryptionSetParameters, "DiskEncryptionSetParametersContent");
+@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!autorest");
+@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!autorest");
+@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!autorest");
+@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "!autorest");
+@@clientName(ExecuteStartRequest, "ExecuteStartContent", "!autorest");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetOperationStatusContent",
+  "!autorest"
+);
+@@clientName(CancelOperationsRequest, "CancelOperationsContent", "!autorest");
+@@clientName(
+  ManagedDiskParameters,
+  "ManagedDiskParametersContent",
+  "!autorest"
+);
+@@clientName(
+  DiskEncryptionSetParameters,
+  "DiskEncryptionSetParametersContent",
+  "!autorest"
+);
 
 @@clientName(
   UserInitiatedRedeploy.automaticallyApprove,
-  "UserInitiatedRedeployAutomaticallyApprove"
+  "UserInitiatedRedeployAutomaticallyApprove",
+  "!autorest"
 );
 @@clientName(
   UserInitiatedReboot.automaticallyApprove,
-  "UserInitiatedRebootAutomaticallyApprove"
+  "UserInitiatedRebootAutomaticallyApprove",
+  "!autorest"
 );
 @@clientName(
   AllInstancesDown.automaticallyApprove,
-  "AllInstancesDownAutomaticallyApprove"
+  "AllInstancesDownAutomaticallyApprove",
+  "!autorest"
 );
 @@clientName(
   ExecuteVdiCreateRequest,
@@ -135,9 +174,6 @@ namespace Microsoft.Compute;
 // =====================================================================
 // .NET naming convention fixes (C# only)
 // =====================================================================
-// Pluralize collection properties (Array<...>).
-@@clientName(ResourceOperationDetails.resourceId, "resourceIds", "csharp");
-@@clientName(ResourceOperation.resourceId, "resourceIds", "csharp");
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
@@ -168,3 +204,18 @@ namespace Microsoft.Compute;
 // 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
 // =====================================================================
 @@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(Resources, "disable-safe-flatten", true, "csharp");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
+
+@@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetBulkOperationStatusContent",
+  "csharp"
+);

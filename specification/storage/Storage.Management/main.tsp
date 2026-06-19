@@ -38,6 +38,7 @@ import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
 import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
