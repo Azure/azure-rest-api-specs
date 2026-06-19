@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
   "service-dir":
     default: "sdk/qumulo"
 output-dir: "{project-root}/"
@@ -12,12 +12,17 @@ options:
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/Qumulo.Storage.json"
   "@azure-tools/typespec-ts":
+    typespec-title-map:
+      StorageClient: QumuloStorage
     experimental-extensible-enums: true
     service-dir: "sdk/liftrqumulo"
     emitter-output-dir: "{output-dir}/{service-dir}/arm-qumulo"
     flavor: azure
     package-details:
       name: "@azure/arm-qumulo"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Qumulo"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-name: "azure-mgmt-qumulo"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-qumulo"
@@ -41,9 +46,6 @@ options:
     namespace: "com.azure.resourcemanager.qumulo"
     service-name: "Qumulo"
     flavor: azure
-  "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.Qumulo"
-    emitter-output-dir: "{output-dir}/sdk/qumulo/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
