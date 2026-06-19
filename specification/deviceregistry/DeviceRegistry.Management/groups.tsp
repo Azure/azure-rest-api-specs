@@ -69,10 +69,17 @@ model GroupListMembersQueryParameters {
 @doc("Response for the list members operation.")
 model GroupListMembersResult {
   @doc("The ARM resource IDs of the group members returned in this page.")
-  members: string[];
+  members: GroupListMember[];
 
   @doc("The URL to the next page of results, if more results remain within the requested top limit.")
   nextLink?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("An individual member of the group, returned as part of the list members operation.")
+model GroupListMember {
+  @doc("The ARM resource ID of the group member.")
+  id: string;
 }
 
 @added(Versions.v2026_11_02_preview)

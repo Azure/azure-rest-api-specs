@@ -9210,6 +9210,19 @@
         }
       ]
     },
+    "GroupListMember": {
+      "type": "object",
+      "description": "An individual member of the group, returned as part of the list members operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource ID of the group member."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "GroupListMembersResult": {
       "type": "object",
       "description": "Response for the list members operation.",
@@ -9218,7 +9231,7 @@
           "type": "array",
           "description": "The ARM resource IDs of the group members returned in this page.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/GroupListMember"
           }
         },
         "nextLink": {
