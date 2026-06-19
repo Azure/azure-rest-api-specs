@@ -588,7 +588,20 @@ enum KeyVaultNameUnavailableReason {
 /**
  * SKU of the managed HSM Pool
  */
-union ManagedHsmSkuName {
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed enum retained unchanged for already-released GA API versions 2025-05-01 and 2026-02-01 per Azure Breaking Changes Board guidance; superseded by the extensible union ManagedHsmSkuNameV2 starting in 2026-03-01-preview."
+enum ManagedHsmSkuName {
+  Standard_B1,
+  Custom_B32,
+  Custom_B6,
+  Custom_C42,
+  Custom_C10,
+}
+
+/**
+ * SKU of the managed HSM Pool
+ */
+@Versioning.added(KeyVault.Versions.v2026_03_01_preview)
+union ManagedHsmSkuNameV2 {
   string,
 
   /** Standard_B1 SKU */
@@ -1916,7 +1929,8 @@ model ManagedHsmSku {
   /**
    * SKU of the managed HSM Pool
    */
-  name: ManagedHsmSkuName;
+  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_03_01_preview, ManagedHsmSkuName)
+  name: ManagedHsmSkuNameV2;
 }
 
 /**
