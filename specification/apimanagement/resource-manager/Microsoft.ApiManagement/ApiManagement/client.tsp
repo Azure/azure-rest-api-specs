@@ -424,7 +424,6 @@ op replacePurge(
 @@clientName(NamedValueCreateContract, "ApiManagementNamedValueCreateOrUpdateContent", "csharp");
 @@clientName(ApiManagementGatewayConfigConnectionResource, "ApiGatewayConfigConnection", "csharp");
 @@clientName(ApiManagementGatewayResource, "ApiGateway", "csharp");
-@@clientName(ApiManagementGatewayResources.delete, "DeleteRaw", "csharp");
 @@clientName(ApiManagementGatewayResources.listAvailableSkus, "GetAvailableSkusApiManagementGatewaySkus", "csharp");
 @@clientName(ApiManagementWorkspaceLinksResource, "ApiManagementWorkspaceLinks", "csharp");
 @@alternateType(AllPoliciesContractProperties.referencePolicyId, Azure.Core.armResourceIdentifier, "csharp");
