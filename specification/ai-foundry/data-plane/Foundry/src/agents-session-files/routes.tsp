@@ -30,7 +30,6 @@ interface AgentSessionFiles {
   uploadSessionFile is FoundryDataPlaneOperation<
     {
       ...UploadSessionFileParams;
-      ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
@@ -45,7 +44,6 @@ interface AgentSessionFiles {
   downloadSessionFile is FoundryDataPlaneOperation<
     {
       ...DownloadSessionFileParams;
-      ...UserIsolationKeyHeader;
     },
     bytes
   >;
@@ -61,7 +59,6 @@ interface AgentSessionFiles {
   listSessionFiles is FoundryDataPlaneOperation<
     {
       ...ListSessionFilesParams;
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     SessionDirectoryListResponse
@@ -77,7 +74,6 @@ interface AgentSessionFiles {
   deleteSessionFile is FoundryDataPlaneOperation<
     {
       ...DeleteSessionFileParams;
-      ...UserIsolationKeyHeader;
     },
     void
   >;
