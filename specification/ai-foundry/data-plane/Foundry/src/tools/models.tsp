@@ -20,6 +20,7 @@ namespace Azure.AI.Projects {
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
+    reminder_preview: "reminder_preview",
   }
 
   // General availability tools:
@@ -957,6 +958,27 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `toolbox_search_preview`.
      */
     type: "toolbox_search_preview";
+
+    ...ToolNameAndDescriptionExtension;
+    ...ToolConfigExtension;
+  }
+
+  // ==============================================================================
+  // Reminder Preview Tool
+  // ==============================================================================
+
+  /**
+   * A built-in tool that schedules the agent to re-invoke itself after a delay.
+   * The model passes a single `minutes` argument (positive integer) when calling
+   * this tool. The service creates a one-shot timer routine that fires after the
+   * specified delay and re-invokes the agent on the same conversation thread.
+   * No pre-created routine is required.
+   */
+  model ReminderPreviewTool extends OpenAI.Tool {
+    /**
+     * The type of the tool. Always `reminder_preview`.
+     */
+    type: "reminder_preview";
 
     ...ToolNameAndDescriptionExtension;
     ...ToolConfigExtension;

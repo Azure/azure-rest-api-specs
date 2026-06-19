@@ -71,6 +71,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgentVersion, "getVersion");
 @@clientName(Agents.deleteAgentVersion, "deleteVersion");
 @@clientName(Agents.listAgentVersions, "listVersions");
+@@clientName(Agents.enableAgent, "enable");
+@@clientName(Agents.disableAgent, "disable");
 @@clientName(
   Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",

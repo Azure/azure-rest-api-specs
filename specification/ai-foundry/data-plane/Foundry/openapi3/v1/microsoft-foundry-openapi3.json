@@ -803,8 +803,9 @@
         "x-ms-description-override": "Creates a new agent or a new version of an existing agent.",
         "x-ms-summary-override": "Create an agent",
         "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
+          "conditional_previews": [
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         },
         "tags": [
@@ -1101,11 +1102,6 @@
         },
         "x-ms-description-override": "Updates the agent by adding a new version if there are any changes to the agent definition. If no changes, returns the existing agent version.",
         "x-ms-summary-override": "Update an agent",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        },
         "tags": [
           "Agents"
         ],
@@ -1208,18 +1204,6 @@
         "description": "Applies a merge-patch update to the specified agent endpoint configuration.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -1284,11 +1268,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       }
     },
@@ -1298,18 +1277,6 @@
         "summary": "Download agent code",
         "description": "Downloads the code zip for a code-based hosted agent.\nReturns the previously-uploaded zip (`application/zip`).\n\nIf `agent_version` is supplied, returns that version's code zip; otherwise\nreturns the latest version's code zip.\n\nThe SHA-256 digest of the returned bytes matches the `content_hash` on the\nresolved version's `code_configuration`.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "CodeAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -1383,12 +1350,7 @@
         },
         "tags": [
           "Agents"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/protocols/invocations": {
@@ -1423,18 +1385,6 @@
             "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
             }
           },
           {
@@ -1505,11 +1455,6 @@
             }
           },
           "description": "The request body."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
         }
       }
     },
@@ -1526,18 +1471,6 @@
             "description": "The name of the agent.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
             }
           },
           {
@@ -1586,12 +1519,7 @@
         },
         "tags": [
           "Agent Invocations"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}": {
@@ -1625,18 +1553,6 @@
             "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
             }
           },
           {
@@ -1691,12 +1607,7 @@
         },
         "tags": [
           "Agent Invocations"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/protocols/invocations/{invocation_id}/cancel": {
@@ -1730,18 +1641,6 @@
             "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
             }
           },
           {
@@ -1805,11 +1704,6 @@
             }
           },
           "description": "Optional request body."
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
         }
       }
     },
@@ -1819,18 +1713,6 @@
         "summary": "Create a session",
         "description": "Creates a new session for an agent endpoint.\nThe endpoint resolves the backing agent version from `version_indicator` and\nenforces session ownership using the provided isolation key for session-mutating operations.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -1904,11 +1786,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "get": {
@@ -1916,18 +1793,6 @@
         "summary": "List sessions for an agent",
         "description": "Returns a paged collection of sessions associated with the specified agent endpoint.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2059,12 +1924,7 @@
         },
         "tags": [
           "Agent Sessions"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files": {
@@ -2073,18 +1933,6 @@
         "summary": "List session files",
         "description": "Returns files and directories at the specified path in the session sandbox.\nThe response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2209,30 +2057,13 @@
         },
         "tags": [
           "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "AgentSessionFiles_deleteSessionFile",
         "summary": "Delete a session file",
         "description": "Deletes the specified file or directory from the session sandbox.\nWhen `recursive` is false, deleting a non-empty directory returns 409 Conflict.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2319,12 +2150,7 @@
         },
         "tags": [
           "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content": {
@@ -2333,18 +2159,6 @@
         "summary": "Upload a session file",
         "description": "Uploads binary file content to the specified path in the session sandbox.\nThe service stores the file relative to the session home directory and rejects payloads larger than 50 MB.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2437,11 +2251,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
         }
       },
       "get": {
@@ -2449,18 +2258,6 @@
         "summary": "Download a session file",
         "description": "Downloads the file at the specified sandbox path as a binary stream.\nThe path is resolved relative to the session home directory.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2543,12 +2340,7 @@
         },
         "tags": [
           "Agent Session Files"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{session_id}": {
@@ -2557,18 +2349,6 @@
         "summary": "Get a session",
         "description": "Retrieves the details of a hosted agent session by agent name and session identifier.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2641,30 +2421,13 @@
         },
         "tags": [
           "Agent Sessions"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "Agents_deleteSession",
         "summary": "Delete a session",
         "description": "Deletes a session synchronously.\nReturns 204 No Content when the session is deleted or does not exist.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2730,12 +2493,7 @@
         },
         "tags": [
           "Agent Sessions"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/sessions/{session_id}:stop": {
@@ -2744,18 +2502,6 @@
         "summary": "Stop a session",
         "description": "Terminates the specified hosted agent session and returns 204 No Content when the request succeeds.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
-          },
           {
             "name": "agent_name",
             "in": "path",
@@ -2812,12 +2558,7 @@
         },
         "tags": [
           "Agent Sessions"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/import": {
@@ -2973,8 +2714,9 @@
         "x-ms-description-override": "Creates a new version for the specified agent and returns the created version resource.",
         "x-ms-summary-override": "Create an agent version",
         "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
+          "conditional_previews": [
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
           ]
         },
         "tags": [
@@ -3291,18 +3033,6 @@
         "description": "Streams console logs (stdout / stderr) for a specific hosted agent session\nas a Server-Sent Events (SSE) stream.\n\nEach SSE frame contains:\n- `event`: always `\"log\"`\n- `data`: a plain-text log line (currently JSON-formatted, but the schema\nis not contractual and may include additional keys or change format\nover time — clients should treat it as an opaque string)\n\nExample SSE frames:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting FoundryCBAgent server on port 8088\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.130Z\",\"stream\":\"stderr\",\"message\":\"INFO: Application startup complete.\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:35:52.714Z\",\"stream\":\"status\",\"message\":\"No logs since last 60 seconds\"}\n```\n\nThe stream remains open until the client disconnects or the server\nterminates the connection. Clients should handle reconnection as needed.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "agent_name",
             "in": "path",
             "required": true,
@@ -3374,12 +3104,7 @@
         },
         "tags": [
           "Agent Sessions"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/agents/{agent_name}/versions:import": {
@@ -3450,6 +3175,112 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateAgentVersionFromManifestRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_name}:disable": {
+      "post": {
+        "operationId": "Agents_disableAgent",
+        "summary": "Disable an agent",
+        "description": "Disables the specified agent, preventing it from accepting new sessions or processing requests.\nExisting active sessions are allowed to drain gracefully but no new sessions can be created.\nThis operation is idempotent — disabling an already-disabled agent returns success with no side effects.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to disable.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{agent_name}:enable": {
+      "post": {
+        "operationId": "Agents_enableAgent",
+        "summary": "Enable an agent",
+        "description": "Enables the specified agent, allowing it to accept new sessions and process requests.\nThis operation is idempotent — enabling an already-enabled agent returns success with no side effects.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent to enable.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
               }
             }
           }
@@ -16199,18 +16030,6 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -16281,12 +16100,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}": {
@@ -16302,18 +16116,6 @@
             "description": "The name of the toolbox to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16361,12 +16163,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "patch": {
         "operationId": "updateToolbox",
@@ -16375,18 +16172,6 @@
         "parameters": [
           {
             "$ref": "#/components/parameters/UpdateToolboxRequest.name"
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -16443,11 +16228,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "delete": {
@@ -16462,18 +16242,6 @@
             "description": "The name of the toolbox to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16514,12 +16282,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions": {
@@ -16536,18 +16299,6 @@
             "schema": {
               "type": "string",
               "maxLength": 256
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16644,11 +16395,6 @@
               }
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
         }
       },
       "get": {
@@ -16706,18 +16452,6 @@
               "type": "string"
             },
             "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
-            }
           },
           {
             "name": "api-version",
@@ -16790,12 +16524,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/toolboxes/{name}/versions/{version}": {
@@ -16820,18 +16549,6 @@
             "description": "The version identifier to retrieve.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16879,12 +16596,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       },
       "delete": {
         "operationId": "deleteToolboxVersion",
@@ -16907,18 +16619,6 @@
             "description": "The version identifier to delete.",
             "schema": {
               "type": "string"
-            }
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Toolboxes=V1Preview"
-              ]
             }
           },
           {
@@ -16959,12 +16659,7 @@
         },
         "tags": [
           "Toolboxes"
-        ],
-        "x-ms-foundry-meta": {
-          "conditional_previews": [
-            "Toolboxes=V1Preview"
-          ]
-        }
+        ]
       }
     }
   },
@@ -17360,11 +17055,6 @@
           "mapping": {
             "ManagedAgentIdentityBlueprint": "#/components/schemas/ManagedAgentIdentityBlueprintReference"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentBlueprintReferenceType": {
@@ -17378,12 +17068,7 @@
               "ManagedAgentIdentityBlueprint"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "AgentCard": {
         "type": "object",
@@ -17412,11 +17097,6 @@
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentCardSkill": {
@@ -17459,31 +17139,16 @@
             "maxItems": 5,
             "description": "A list of example scenarios that the skill can perform."
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentCardSkillExample": {
         "type": "string",
         "maxLength": 1024,
-        "description": "A skill example string with a maximum length of 1024 characters.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "A skill example string with a maximum length of 1024 characters."
       },
       "AgentCardSkillTag": {
         "type": "string",
-        "maxLength": 32,
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "maxLength": 32
       },
       "AgentCardUpdate": {
         "type": "object",
@@ -17508,11 +17173,6 @@
             "maxItems": 16,
             "description": "The set of skills that an agent can perform."
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentClusterInsightRequest": {
@@ -17637,9 +17297,7 @@
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
-            "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
           ]
         }
@@ -17647,10 +17305,7 @@
       "AgentDefinitionOptInKeys": {
         "type": "string",
         "enum": [
-          "HostedAgents=V1Preview",
           "WorkflowAgents=V1Preview",
-          "AgentEndpoints=V1Preview",
-          "CodeAgents=V1Preview",
           "ExternalAgents=V1Preview"
         ],
         "description": "Feature opt-in keys for agent definition operations supporting hosted or workflow agents."
@@ -17672,11 +17327,6 @@
             "BotService": "#/components/schemas/BotServiceAuthorizationScheme",
             "BotServiceRbac": "#/components/schemas/BotServiceRbacAuthorizationScheme"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentEndpointAuthorizationSchemeType": {
@@ -17692,12 +17342,7 @@
               "BotServiceRbac"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "AgentEndpointConfig": {
         "type": "object",
@@ -17724,11 +17369,6 @@
             },
             "description": "The authorization schemes supported by the agent endpoint"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentEndpointConfigUpdate": {
@@ -17756,11 +17396,6 @@
             },
             "description": "The authorization schemes supported by the agent endpoint"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentEndpointProtocol": {
@@ -17892,11 +17527,6 @@
             "type": "string",
             "description": "The client ID of the agent instance. Also referred to as the instance ID"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "AgentKind": {
@@ -17921,6 +17551,7 @@
           "object",
           "id",
           "name",
+          "state",
           "versions"
         ],
         "properties": {
@@ -17940,6 +17571,15 @@
             "maxLength": 63,
             "description": "The name of the agent."
           },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentState"
+              }
+            ],
+            "description": "The operational state of the agent. Controls whether the agent endpoint accepts or rejects requests.",
+            "readOnly": true
+          },
           "versions": {
             "type": "object",
             "properties": {
@@ -17958,12 +17598,7 @@
                 "$ref": "#/components/schemas/AgentEndpointConfig"
               }
             ],
-            "description": "The endpoint configuration for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "The endpoint configuration for the agent"
           },
           "instance_identity": {
             "allOf": [
@@ -17972,11 +17607,6 @@
               }
             ],
             "description": "The instance identity of the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "blueprint": {
@@ -17986,11 +17616,6 @@
               }
             ],
             "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "blueprint_reference": {
@@ -18000,24 +17625,10 @@
               }
             ],
             "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "agent_card": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/AgentCard"
-              }
-            ],
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "$ref": "#/components/schemas/AgentCard"
           }
         }
       },
@@ -18095,12 +17706,7 @@
             "readOnly": true
           }
         },
-        "description": "An agent session providing a long-lived compute sandbox for hosted agent invocations.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "An agent session providing a long-lived compute sandbox for hosted agent invocations."
       },
       "AgentSessionStatus": {
         "anyOf": [
@@ -18121,12 +17727,22 @@
             ]
           }
         ],
-        "description": "The status of an agent session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "The status of an agent session."
+      },
+      "AgentState": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
+          }
+        ],
+        "description": "The operational state of an agent."
       },
       "AgentTaxonomyInput": {
         "type": "object",
@@ -18277,11 +17893,6 @@
               }
             ],
             "description": "The instance identity of the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "blueprint": {
@@ -18291,11 +17902,6 @@
               }
             ],
             "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "blueprint_reference": {
@@ -18305,21 +17911,11 @@
               }
             ],
             "description": "The blueprint for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           },
           "agent_guid": {
             "type": "string",
             "description": "The unique GUID identifier of the agent.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            },
             "readOnly": true
           }
         }
@@ -20169,12 +19765,7 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "BotServiceRbacAuthorizationScheme": {
         "type": "object",
@@ -20193,12 +19784,7 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "BrowserAutomationPreviewTool": {
         "type": "object",
@@ -20597,12 +20183,7 @@
             "readOnly": true
           }
         },
-        "description": "Code-based deployment configuration for a hosted agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
+        "description": "Code-based deployment configuration for a hosted agent."
       },
       "CodeDependencyResolution": {
         "anyOf": [
@@ -20746,12 +20327,7 @@
             ]
           }
         },
-        "description": "Container-based deployment configuration for a hosted agent.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
+        "description": "Container-based deployment configuration for a hosted agent."
       },
       "ContentFilterResult": {
         "type": "object",
@@ -21015,6 +20591,15 @@
             "maxLength": 63,
             "description": "The unique name that identifies the agent. Name can be used to retrieve/update/delete the agent.\n- Must start and end with alphanumeric characters,\n- Can contain hyphens in the middle\n- Must not exceed 63 characters."
           },
+          "state": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentState"
+              }
+            ],
+            "description": "The initial operational state of the agent. Defaults to 'enabled' if not specified.",
+            "default": "enabled"
+          },
           "metadata": {
             "type": "object",
             "unevaluatedProperties": {
@@ -21037,9 +20622,7 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
-                "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
               ]
             }
@@ -21050,12 +20633,7 @@
                 "$ref": "#/components/schemas/AgentBlueprintReference"
               }
             ],
-            "description": "The blueprint reference for the agent.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "The blueprint reference for the agent."
           },
           "agent_endpoint": {
             "allOf": [
@@ -21063,12 +20641,7 @@
                 "$ref": "#/components/schemas/AgentEndpointConfig"
               }
             ],
-            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "An optional endpoint configuration. If not specified, a default endpoint configuration will be set for the agent"
           },
           "agent_card": {
             "allOf": [
@@ -21076,19 +20649,12 @@
                 "$ref": "#/components/schemas/AgentCard"
               }
             ],
-            "description": "Optional agent card for the agent",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "Optional agent card for the agent"
           }
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
-            "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
           ]
         }
@@ -21112,12 +20678,7 @@
             "description": "Determines which agent version backs the session."
           }
         },
-        "description": "Request to create a new agent session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "Request to create a new agent session."
       },
       "CreateAgentVersionFromCodeContent": {
         "type": "object",
@@ -21167,12 +20728,7 @@
             "description": "The hosted agent definition including code_configuration (runtime, entry_point), cpu, memory, and protocol_versions."
           }
         },
-        "description": "JSON metadata for code-based agent operations (create, update, create version).\nThe agent name comes from the URL path parameter or the `x-ms-agent-name` header,\nso it is not included in this model.\nThe content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "CodeAgents=V1Preview"
-          ]
-        }
+        "description": "JSON metadata for code-based agent operations (create, update, create version).\nThe agent name comes from the URL path parameter or the `x-ms-agent-name` header,\nso it is not included in this model.\nThe content hash (SHA-256 of the zip) is carried in the `x-ms-code-zip-sha256` header."
       },
       "CreateAgentVersionFromManifestRequest": {
         "type": "object",
@@ -21233,9 +20789,7 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
-                "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
               ]
             }
@@ -21246,19 +20800,12 @@
                 "$ref": "#/components/schemas/AgentBlueprintReference"
               }
             ],
-            "description": "The blueprint reference for the agent.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "The blueprint reference for the agent."
           }
         },
         "x-ms-foundry-meta": {
           "conditional_previews": [
-            "HostedAgents=V1Preview",
             "WorkflowAgents=V1Preview",
-            "CodeAgents=V1Preview",
             "ExternalAgents=V1Preview"
           ]
         }
@@ -22586,12 +22133,7 @@
           {
             "$ref": "#/components/schemas/AgentEndpointAuthorizationScheme"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "EntraIDCredentials": {
         "type": "object",
@@ -22632,12 +22174,7 @@
           {
             "$ref": "#/components/schemas/IsolationKeySource"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "Eval": {
         "type": "object",
@@ -24832,12 +24369,7 @@
           {
             "$ref": "#/components/schemas/VersionSelectionRule"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "FolderDatasetVersion": {
         "type": "object",
@@ -25091,12 +24623,7 @@
           {
             "$ref": "#/components/schemas/IsolationKeySource"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "HeaderTelemetryEndpointAuth": {
         "type": "object",
@@ -25141,12 +24668,7 @@
             "$ref": "#/components/schemas/TelemetryEndpointAuth"
           }
         ],
-        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header."
       },
       "HostedAgentDefinition": {
         "type": "object",
@@ -25202,12 +24724,7 @@
                 "$ref": "#/components/schemas/ContainerConfiguration"
               }
             ],
-            "description": "Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "CodeAgents=V1Preview"
-              ]
-            }
+            "description": "Container-based deployment configuration. Provide this for image-based deployments. Mutually exclusive with code_configuration — the service validates that exactly one is set."
           },
           "protocol_versions": {
             "type": "array",
@@ -25226,12 +24743,7 @@
                   "version": "v0.3.0"
                 }
               ]
-            ],
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "CodeAgents=V1Preview"
-              ]
-            }
+            ]
           },
           "code_configuration": {
             "allOf": [
@@ -25239,12 +24751,7 @@
                 "$ref": "#/components/schemas/CodeConfiguration"
               }
             ],
-            "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "CodeAgents=V1Preview"
-              ]
-            }
+            "description": "Code-based deployment configuration. Provide this for code-based deployments. Mutually exclusive with container_configuration — the service validates that exactly one is set."
           },
           "telemetry_config": {
             "allOf": [
@@ -25260,12 +24767,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The hosted agent definition.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "The hosted agent definition."
       },
       "HourlyRecurrenceSchedule": {
         "type": "object",
@@ -25890,11 +25392,6 @@
             "Entra": "#/components/schemas/EntraIsolationKeySource",
             "Header": "#/components/schemas/HeaderIsolationKeySource"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "IsolationKeySourceKind": {
@@ -25909,12 +25406,7 @@
               "Header"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "ItemGenerationParams": {
         "type": "object",
@@ -26031,12 +25523,7 @@
           {
             "$ref": "#/components/schemas/AgentBlueprintReference"
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -27093,15 +26580,6 @@
           "version"
         ],
         "properties": {
-          "systemData": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/SystemDataV3"
-              }
-            ],
-            "description": "System related metadata",
-            "readOnly": true
-          },
           "blobUri": {
             "type": "string",
             "format": "uri",
@@ -49753,6 +49231,7 @@
             "fabric_iq_preview": "#/components/schemas/FabricIQPreviewTool",
             "memory_search_preview": "#/components/schemas/MemorySearchPreviewTool",
             "toolbox_search_preview": "#/components/schemas/ToolboxSearchPreviewTool",
+            "reminder_preview": "#/components/schemas/ReminderPreviewTool",
             "code_interpreter": "#/components/schemas/OpenAI.CodeInterpreterTool",
             "function": "#/components/schemas/OpenAI.FunctionTool",
             "file_search": "#/components/schemas/OpenAI.FileSearchTool",
@@ -50224,6 +49703,7 @@
               "work_iq_preview",
               "fabric_iq_preview",
               "toolbox_search_preview",
+              "reminder_preview",
               "azure_ai_search",
               "azure_function",
               "bing_grounding",
@@ -51643,12 +51123,7 @@
             "$ref": "#/components/schemas/TelemetryEndpoint"
           }
         ],
-        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint."
       },
       "PageOrder": {
         "type": "string",
@@ -51928,11 +51403,6 @@
             ],
             "description": "Optional agent card for the agent"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "PendingUploadRequest": {
@@ -52633,6 +52103,42 @@
           }
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
+      },
+      "ReminderPreviewTool": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "reminder_preview"
+            ],
+            "description": "The type of the tool. Always `reminder_preview`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Optional user-defined name for this tool or configuration."
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional user-defined description for this tool or configuration."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Per-tool configuration map. Keys are tool names or `*` (catch-all default).\nResolution order: exact tool name match takes priority over `*`.\nUnknown tool names are silently ignored at runtime."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/OpenAI.Tool"
+          }
+        ],
+        "description": "A built-in tool that schedules the agent to re-invoke itself after a delay.\nThe model passes a single `minutes` argument (positive integer) when calling\nthis tool. The service creates a one-shot timer routine that fires after the\nspecified delay and re-invokes the agent on the same conversation thread.\nNo pre-created routine is required."
       },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
@@ -53572,12 +53078,7 @@
             ]
           }
         },
-        "description": "A single Server-Sent Event frame emitted by the hosted agent session log stream.\n\nEach frame contains an `event` field identifying the event type and a `data`\nfield carrying the payload as plain text. Although the current `data` payload\nis JSON-formatted, its schema is not contractual — additional keys may appear\nand the format may change over time. Clients should treat `data` as an\nopaque string and optionally attempt JSON parsing.\n\nNew event types may be added in the future. Clients should gracefully\nignore unrecognized event types.\n\nWire format:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n```",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "A single Server-Sent Event frame emitted by the hosted agent session log stream.\n\nEach frame contains an `event` field identifying the event type and a `data`\nfield carrying the payload as plain text. Although the current `data` payload\nis JSON-formatted, its schema is not contractual — additional keys may appear\nand the format may change over time. Clients should treat `data` as an\nopaque string and optionally attempt JSON parsing.\n\nNew event types may be added in the future. Clients should gracefully\nignore unrecognized event types.\n\nWire format:\n```\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:33:17.121Z\",\"stream\":\"stdout\",\"message\":\"Starting server on port 18080\"}\n\nevent: log\ndata: {\"timestamp\":\"2026-03-10T09:34:52.714Z\",\"stream\":\"status\",\"message\":\"Successfully connected to container\"}\n```"
       },
       "SessionLogEventType": {
         "anyOf": [
@@ -53591,12 +53092,7 @@
             ]
           }
         ],
-        "description": "Known SSE event types emitted by the hosted agent session log stream.\nAdditional event types may be introduced in future versions.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "Known SSE event types emitted by the hosted agent session log stream.\nAdditional event types may be introduced in future versions."
       },
       "SharepointGroundingToolCall": {
         "type": "object",
@@ -54139,36 +53635,6 @@
         ],
         "description": "Represents the parameters for synthetic data generation item generation."
       },
-      "SystemDataV3": {
-        "type": "object",
-        "properties": {
-          "createdAt": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "Timestamp of resource creation"
-          },
-          "createdBy": {
-            "type": "string",
-            "description": "Identity that created the resource"
-          },
-          "createdByType": {
-            "type": "string",
-            "description": "Type of identity that created the resource"
-          },
-          "lastModifiedAt": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/FoundryTimestamp"
-              }
-            ],
-            "description": "Timestamp of last resource modification"
-          }
-        },
-        "description": "System metadata for a resource"
-      },
       "Target": {
         "type": "object",
         "required": [
@@ -54363,12 +53829,7 @@
             "description": "Customer-supplied telemetry export endpoint configurations."
           }
         },
-        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "Customer-supplied telemetry configuration for exporting container logs, traces, and metrics."
       },
       "TelemetryDataKind": {
         "anyOf": [
@@ -54384,12 +53845,7 @@
             ]
           }
         ],
-        "description": "The type of telemetry data to export.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "The type of telemetry data to export."
       },
       "TelemetryEndpoint": {
         "type": "object",
@@ -54435,12 +53891,7 @@
             "OTLP": "#/components/schemas/OtlpTelemetryEndpoint"
           }
         },
-        "description": "A telemetry export endpoint configuration.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "A telemetry export endpoint configuration."
       },
       "TelemetryEndpointAuth": {
         "type": "object",
@@ -54463,12 +53914,7 @@
             "header": "#/components/schemas/HeaderTelemetryEndpointAuth"
           }
         },
-        "description": "Authentication configuration for a telemetry endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "Authentication configuration for a telemetry endpoint."
       },
       "TelemetryEndpointAuthType": {
         "anyOf": [
@@ -54482,12 +53928,7 @@
             ]
           }
         ],
-        "description": "The type of authentication for a telemetry endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "The type of authentication for a telemetry endpoint."
       },
       "TelemetryEndpointKind": {
         "anyOf": [
@@ -54501,12 +53942,7 @@
             ]
           }
         ],
-        "description": "The kind of telemetry export endpoint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "The kind of telemetry export endpoint."
       },
       "TelemetryTransportProtocol": {
         "anyOf": [
@@ -54521,12 +53957,7 @@
             ]
           }
         ],
-        "description": "The transport protocol for telemetry export.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
+        "description": "The transport protocol for telemetry export."
       },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",
@@ -55281,9 +54712,7 @@
             "description": "The agent definition. This can be a workflow, hosted agent, or a simple agent definition.",
             "x-ms-foundry-meta": {
               "conditional_previews": [
-                "HostedAgents=V1Preview",
                 "WorkflowAgents=V1Preview",
-                "CodeAgents=V1Preview",
                 "ExternalAgents=V1Preview"
               ]
             }
@@ -55294,12 +54723,7 @@
                 "$ref": "#/components/schemas/AgentBlueprintReference"
               }
             ],
-            "description": "The blueprint reference for the agent.",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "AgentEndpoints=V1Preview"
-              ]
-            }
+            "description": "The blueprint reference for the agent."
           }
         }
       },
@@ -55404,12 +54828,7 @@
             "version_ref": "#/components/schemas/VersionRefIndicator"
           }
         },
-        "description": "Version indicator determining which agent version backs the session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "Version indicator determining which agent version backs the session."
       },
       "VersionIndicatorType": {
         "anyOf": [
@@ -55423,12 +54842,7 @@
             ]
           }
         ],
-        "description": "The type of version indicator used to determine the agent version backing a session.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "The type of version indicator used to determine the agent version backing a session."
       },
       "VersionRefIndicator": {
         "type": "object",
@@ -55454,12 +54868,7 @@
             "$ref": "#/components/schemas/VersionIndicator"
           }
         ],
-        "description": "Version indicator that references a specific agent version by name.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        "description": "Version indicator that references a specific agent version by name."
       },
       "VersionSelectionRule": {
         "type": "object",
@@ -55481,11 +54890,6 @@
           "mapping": {
             "FixedRatio": "#/components/schemas/FixedRatioVersionSelectionRule"
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "VersionSelector": {
@@ -55500,11 +54904,6 @@
               "$ref": "#/components/schemas/VersionSelectionRule"
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "VersionSelectorType": {
@@ -55518,12 +54917,7 @@
               "FixedRatio"
             ]
           }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
-        }
+        ]
       },
       "VersionSelectorUpdate": {
         "type": "object",
@@ -55534,11 +54928,6 @@
               "$ref": "#/components/schemas/VersionSelectionRule"
             }
           }
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "AgentEndpoints=V1Preview"
-          ]
         }
       },
       "WebSearchConfiguration": {
