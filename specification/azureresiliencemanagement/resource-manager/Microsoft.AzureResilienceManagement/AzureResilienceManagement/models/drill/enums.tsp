@@ -364,17 +364,16 @@ union HealthStatus {
 }
 
 /**
- * Enum for ForceInclusionState
+ * Enum for ForceInclusionAndUpdate
  */
-@doc("Enum for ForceInclusionState")
-@renamedFrom(Versions.v2026_06_01_preview, "ForceInclusionAndUpdate")
-union ForceInclusionState {
+@doc("Enum for ForceInclusionAndUpdate")
+union ForceInclusionAndUpdate {
   string,
 
-  @doc("Enable ForceInclusionState.")
+  @doc("Enable ForceInclusionAndUpdate.")
   Enable: "Enable",
 
-  @doc("Disable ForceInclusionState.")
+  @doc("Disable ForceInclusionAndUpdate.")
   Disable: "Disable",
 }
 

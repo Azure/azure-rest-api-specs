@@ -5060,7 +5060,7 @@
           "description": "Add, Update, Delete resource lists"
         },
         "forceInclusionAndUpdate": {
-          "$ref": "#/definitions/ForceInclusionState",
+          "$ref": "#/definitions/ForceInclusionAndUpdate",
           "description": "Whether to allow inclusion and update despite attention reasons."
         }
       },
@@ -5127,6 +5127,53 @@
         "region": {
           "type": "string",
           "description": "Region where Drill's internal resources will be created."
+        }
+      }
+    },
+    "AssociatedIdentity": {
+      "type": "object",
+      "description": "Definition of associated identity linked with the various resources.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity type linked with the resource"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity id linked with the resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AssociatedIdentityUpdate": {
+      "type": "object",
+      "description": "Definition of associated identity linked with the various resources.",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "Identity type linked with the resource"
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity id linked with the resource",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
         }
       }
     },
@@ -5392,11 +5439,11 @@
       "description": "Chaos Resource properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity to use for Chaos Resource operations."
         },
         "chaosResourceIdentityForFaults": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity to be used by the Chaos Resource for invoking faults on resources."
         },
         "chaosResourceId": {
@@ -5430,11 +5477,11 @@
       "description": "Chaos Resource properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentityUpdate",
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity to use for Chaos Resource operations."
         },
         "chaosResourceIdentityForFaults": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentityUpdate",
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity to be used by the Chaos Resource for invoking faults on resources."
         }
       }
@@ -6032,8 +6079,8 @@
           "description": "Fault Properties",
           "readOnly": true
         },
-        "forceInclusionState": {
-          "$ref": "#/definitions/ForceInclusionState",
+        "forceInclusionAndUpdate": {
+          "$ref": "#/definitions/ForceInclusionAndUpdate",
           "description": "ForceInclusion status for this resource. Has the customer forceIncluded it?",
           "readOnly": true
         },
@@ -7096,26 +7143,26 @@
         }
       }
     },
-    "ForceInclusionState": {
+    "ForceInclusionAndUpdate": {
       "type": "string",
-      "description": "Enum for ForceInclusionState",
+      "description": "Enum for ForceInclusionAndUpdate",
       "enum": [
         "Enable",
         "Disable"
       ],
       "x-ms-enum": {
-        "name": "ForceInclusionState",
+        "name": "ForceInclusionAndUpdate",
         "modelAsString": true,
         "values": [
           {
             "name": "Enable",
             "value": "Enable",
-            "description": "Enable ForceInclusionState."
+            "description": "Enable ForceInclusionAndUpdate."
           },
           {
             "name": "Disable",
             "value": "Disable",
-            "description": "Disable ForceInclusionState."
+            "description": "Disable ForceInclusionAndUpdate."
           }
         ]
       }
@@ -8334,7 +8381,7 @@
       "description": "Drill monitoring properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity to use for Drill monitoring operations."
         },
         "logAnalyticsWorkspaceId": {
@@ -8396,7 +8443,7 @@
       "description": "Drill monitoring properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentityUpdate",
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity to use for Drill monitoring operations."
         }
       }
@@ -8920,7 +8967,7 @@
           }
         },
         "associatedIdentity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "The identity associated with actionResourceId for RBAC."
         }
       },
@@ -9493,7 +9540,7 @@
       "description": "RecoveryPlan properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity to use for RecoveryPlan operations."
         },
         "recoveryPlanId": {
@@ -9525,7 +9572,7 @@
       "description": "RecoveryPlan properties.",
       "properties": {
         "identity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentityUpdate",
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity to use for RecoveryPlan operations."
         }
       }
@@ -9734,7 +9781,7 @@
           "pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
         },
         "associatedIdentity": {
-          "$ref": "#/definitions/ResilienceManagementAssociatedIdentity",
+          "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity details associated to the resource, which will be used for performing any operations on it"
         },
         "errorDetails": {
@@ -9911,53 +9958,6 @@
             "description": "Resource is Healthy."
           }
         ]
-      }
-    },
-    "ResilienceManagementAssociatedIdentity": {
-      "type": "object",
-      "description": "Definition of associated identity linked with the various resources.",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "Identity type linked with the resource"
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "User assigned identity id linked with the resource",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "ResilienceManagementAssociatedIdentityUpdate": {
-      "type": "object",
-      "description": "Definition of associated identity linked with the various resources.",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "Identity type linked with the resource"
-        },
-        "userAssignedIdentity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "User assigned identity id linked with the resource",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
       }
     },
     "ResiliencyEligibilityCategory": {

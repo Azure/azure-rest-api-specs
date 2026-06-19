@@ -133,6 +133,12 @@ using Azure.Core;
   azureLocation[],
   "csharp"
 );
+@@clientName(ForceInclusionAndUpdate, "ForceInclusionState", "csharp");
+@@clientName(
+  AssociatedIdentity,
+  "ResilienceManagementAssociatedIdentity",
+  "csharp"
+);
 @@clientName(GoalResource, "GoalMembers", "csharp");
 @@clientName(RecoveryResource, "RecoveryMembers", "csharp");
 @@clientName(Drill, "ResilienceManagementDrill", "csharp");
