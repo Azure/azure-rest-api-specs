@@ -17,8 +17,10 @@ using Azure.ClientGenerator.Core;
   Access.internal
 );
 @@access(Microsoft.DeviceRegistry.Devices.query, Access.internal);
-@@access(Microsoft.DeviceRegistry.Devices.count, Access.internal);
-@@access(Microsoft.DeviceRegistry.Devices.distinct, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.queryCount, Access.internal);
+@@access(Microsoft.DeviceRegistry.Devices.queryDistinctValues,
+  Access.internal
+);
 @@access(Microsoft.DeviceRegistry.Devices.getDeviceByExternalId,
   Access.internal
 );

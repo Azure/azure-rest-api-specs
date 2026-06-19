@@ -96,21 +96,21 @@ model QueryDevicesResponse {
 
 /** Request body for counting devices in a namespace. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model CountDevicesRequest {
+model QueryCountRequest {
   /** Optional filter clause applied to the count (e.g. `WHERE properties.deviceClassId = 'dc-1'`). When omitted, all devices in the namespace are counted. */
   query?: string;
 }
 
 /** Response body for a device count: a single aggregate scalar. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model CountDevicesResponse {
+model QueryCountResponse {
   /** The number of devices in the namespace that match the supplied filter. */
   count: int64;
 }
 
 /** Request body for enumerating the distinct values of a single device field within a namespace. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model DistinctDevicesRequest {
+model QueryDistinctValuesRequest {
   /** The device field to project distinct values of (e.g. `properties.deviceClassId`). */
   field: string;
 
@@ -126,7 +126,7 @@ model DistinctDevicesRequest {
 
 /** Response body for a distinct device-field query: a page of scalar values. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model DistinctDevicesResponse {
+model QueryDistinctValuesResponse {
   /** The page of distinct scalar values for the requested field. */
   value: string[];
 
@@ -293,18 +293,18 @@ interface Devices {
 
   /** Count devices in a namespace that match an optional filter. */
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-  count is ResourceOperations.ResourceCollectionAction<
+  queryCount is ResourceOperations.ResourceCollectionAction<
     Device,
-    CountDevicesRequest,
-    CountDevicesResponse
+    QueryCountRequest,
+    QueryCountResponse
   >;
 
-  /** Enumerate the distinct values of a single device field within a namespace. */
+  /** Query the distinct values of a single device field within a namespace. */
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-  distinct is ResourceOperations.ResourceCollectionAction<
+  queryDistinctValues is ResourceOperations.ResourceCollectionAction<
     Device,
-    DistinctDevicesRequest,
-    DistinctDevicesResponse
+    QueryDistinctValuesRequest,
+    QueryDistinctValuesResponse
   >;
 
   /** Provision a device in a namespace. */
