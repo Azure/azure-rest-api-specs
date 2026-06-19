@@ -357,10 +357,6 @@ model ResourceOperationError {
 
   @doc("Detailed message about the error")
   errorDetails: string;
-
-  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("Resource notification details.")
-  resourceNotificationDetails?: ResourceNotificationDetails;
 }
 
 @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
@@ -424,6 +420,10 @@ model ResourceOperationDetails {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Resource notification details.")
+  resourceNotificationDetails?: ResourceNotificationDetails;
 }
 
 @doc("High level response from an operation on a resource")
