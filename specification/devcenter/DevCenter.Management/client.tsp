@@ -27,7 +27,7 @@ using Microsoft.DevCenter;
 );
 
 @@clientName(
-  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
+  Microsoft.DevCenter.KeyEncryptionKeyIdentityUpdate,
   "DevCenterKeyEncryptionKeyIdentity",
   "csharp"
 );
