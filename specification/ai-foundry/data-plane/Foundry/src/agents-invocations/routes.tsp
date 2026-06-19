@@ -57,8 +57,6 @@ interface AgentInvocations {
 
       ...UserIsolationKeyHeader;
       ...UserDelegationHeader;
-      ...FoundryRunTokenHeader;
-      ...FoundryFoundationTokenHeader;
     } & AgentInvocationPreviewHeader,
     {
       /** Unique identifier for this invocation. */

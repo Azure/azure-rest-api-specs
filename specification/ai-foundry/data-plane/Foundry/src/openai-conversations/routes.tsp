@@ -19,7 +19,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody & UserIsolationKeyHeader & UserDelegationHeader,
+    OpenAI.CreateConversationBody & UserIsolationKeyHeader,
     OpenAI.ConversationResource
   >;
 
@@ -37,7 +37,6 @@ interface Conversations {
 
       ...OpenAI.UpdateConversationBody;
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -55,7 +54,6 @@ interface Conversations {
       @path conversation_id: string;
 
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -73,7 +71,6 @@ interface Conversations {
       @path conversation_id: string;
 
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.DeletedConversationResource
   >;
@@ -94,7 +91,6 @@ interface Conversations {
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.ConversationResource>
   >;
@@ -123,7 +119,6 @@ interface Conversations {
       items: OpenAI.Item[];
 
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.ConversationItemList
   >;
@@ -144,7 +139,6 @@ interface Conversations {
       @path item_id: string;
 
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.OutputItem
   >;
@@ -165,7 +159,6 @@ interface Conversations {
       @path item_id: string;
 
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -186,7 +179,6 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
       ...UserIsolationKeyHeader;
-      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.OutputItem>
   >;

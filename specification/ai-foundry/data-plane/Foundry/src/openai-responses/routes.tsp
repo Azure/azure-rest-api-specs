@@ -25,7 +25,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserIsolationKeyHeader & UserDelegationHeader & FoundryRunTokenHeader & FoundryFoundationTokenHeader,
+    OpenAI.CreateResponse & UserIsolationKeyHeader & UserDelegationHeader,
 
       | (AgentSessionIdResponseHeader & OpenAI.Response)
       | (AgentSessionIdResponseHeader &

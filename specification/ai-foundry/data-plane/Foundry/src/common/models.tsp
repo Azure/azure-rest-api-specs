@@ -29,14 +29,13 @@ alias AcceptJsonHeader = {
 };
 
 /**
- * @deprecated Use `UserDelegationHeader` (`x-ms-user-identity`) instead.
- * Optional request header carrying an opaque per-user isolation key forwarded to the agent
- * endpoint. When present, the service scopes endpoint-scoped data access (responses,
- * conversations, sessions) to the supplied user.
+ * @deprecated This header is deprecated and will be removed in a future version.
+ * Identity resolution is now handled automatically by the platform via precedence-based
+ * resolution (caller JWT, RBAC, x-ms-user-identity on invoke APIs).
  */
-#deprecated "Use UserDelegationHeader (x-ms-user-identity) instead. This header will be removed in a future version."
 alias UserIsolationKeyHeader = {
-  /** @deprecated Use x-ms-user-identity instead. Opaque per-user isolation key used to scope endpoint-scoped data to a specific end user. */
+  /** @deprecated This header is deprecated. Identity resolution is now handled by the platform automatically. */
+  #deprecated "This header is deprecated. Precedence-based identity resolution replaces manual isolation key passing."
   @header("x-ms-user-isolation-key") user_isolation_key?: string;
 };
 
@@ -52,39 +51,9 @@ alias UserDelegationHeader = {
   @header("x-ms-user-identity") user_identity?: string;
 };
 
-/**
- * Platform-injected request header carrying a per-request run token (JWT) for identity propagation.
- * On container protocol 2.0.0+, the platform mints this token per inbound call and injects it
- * into the request. The container **MUST** propagate this token on all outbound calls to Foundry
- * platform services and other agents (A2A). SDK clients do not set this header directly —
- * it is set by the platform when forwarding requests to the agent container.
- *
- * **Who sets it:** The Foundry platform (not the SDK caller).
- * **Who reads it:** The agent container (via SDK helpers or manual extraction).
- * **Who forwards it:** The agent container, on outbound tool/A2A calls.
- */
-alias FoundryRunTokenHeader = {
-  /** Platform-minted per-request run token (JWT) carrying caller identity and session context. Set by the platform, not by SDK callers. The container must propagate this on outbound calls. */
-  @extension("x-ms-foundry-meta", #{ platform_injected: true })
-  @header("x-foundry-run-token") foundry_run_token?: string;
-};
-
-/**
- * Platform-injected request header carrying the foundation token for session-binding validation.
- * Contains infrastructure claims (sessionId, agentGuid) used for triple-equality validation
- * between FT and RT on the receiving side of A2A calls.
- *
- * **Who sets it:** The Foundry platform egress proxy (not the SDK caller or the container).
- * **Who reads it:** The receiving Foundry service (platform-internal validation only).
- * **Not customer-facing:** The container never reads, sets, or forwards this header.
- * It is stamped automatically by the egress proxy on outbound A2A calls and validated
- * on the receiving platform side. Included in the API spec for wire-level completeness only.
- */
-alias FoundryFoundationTokenHeader = {
-  /** Platform-injected foundation token for session-binding validation. Set by the egress proxy, not by SDK callers or container code. */
-  @extension("x-ms-foundry-meta", #{ platform_injected: true })
-  @header("x-foundry-foundation-token") foundry_foundation_token?: string;
-};
+// NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
+// are NOT part of the public API spec. They are injected by the platform and resolved
+// server-side. If needed for contracts, they should be added in the contracts entry point.
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
