@@ -40,6 +40,12 @@ input-file:
 - preview/2025-12-01-preview/openapi.json
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
+    from: preview/2025-12-01-preview/openapi.json
+    where:
+      - "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/fabricMirroringSettings/{fabricMirroringSettingsName}'].*.responses.*.schema"
+      - "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}'].*.responses.*.schema"
+      - "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/backupsV2/{backupName}'].*.responses.*.schema"
+      - "$.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/maintenances/{maintenanceName}'].*.responses.*.schema"
     reason: "provisioningState/status are read-only via @visibility(Lifecycle.Read), but the autorest emitter renders this as `readOnly: true` placed as a sibling of `$ref`, which JSON Reference resolution discards before this resolved-schema rule evaluates (verified against @stoplight/json-ref-resolver). Both emitter-level fixes rewrite already-released API versions and are out of scope for this new-version-only PR: `use-read-only-status-schema` is project-global and regenerates the GA stable 2024-12-30 spec (triggering 1029/ReadonlyPropertyChanged breaking-change errors), and inlining the shared AdvancedThreatProtection/Maintenance/ServerBackup status enums likewise modifies prior versions. Scoped to package-flexibleserver-2025-12-01-preview only."
 ```
 
