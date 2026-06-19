@@ -26,16 +26,16 @@ These are the global settings for the Support API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-06-15
+tag: package-2026-07-01
 ```
 
-### Tag: package-2026-06-15
+### Tag: package-2026-07-01
 
-These settings apply only when `--tag=package-2026-06-15` is specified on the command line.
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-06-15'
+```yaml $(tag) == 'package-2026-07-01'
 input-file:
-  - stable/2026-06-15/support.json
+  - stable/2026-07-01/support.json
 
 suppressions:
   - code: ConsistentPatchProperties

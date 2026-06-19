@@ -416,7 +416,7 @@ model ProblemClassificationsClassificationResult {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "articleId is intentionally nullable: the service may explicitly return null when no article is associated with the problem classification result."
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_06_15)
+  @added(Versions.v2026_07_01)
   articleId?: string | null;
 }
 
