@@ -132,6 +132,14 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
     where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionVdiPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionVdiPayload.properties.resourceOverrides.items
 ```
 ### Tag: package-2026-04-06-preview
 
