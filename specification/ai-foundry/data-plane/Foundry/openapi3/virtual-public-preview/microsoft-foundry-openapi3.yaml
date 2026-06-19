@@ -12694,7 +12694,7 @@ paths:
                 tools:
                   type: array
                   items:
-                    $ref: '#/components/schemas/OpenAI.Tool'
+                    $ref: '#/components/schemas/ToolboxTool'
                   description: The list of tools to include in this version.
                 skills:
                   type: array
@@ -13061,20 +13061,6 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         base_url:
           type: string
           format: uri
@@ -13092,6 +13078,32 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
+    A2APreviewToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - a2a_preview
+        base_url:
+          type: string
+          format: uri
+          description: Base URL of the agent.
+        agent_card_path:
+          type: string
+          description: |-
+            The path to the agent card relative to the `base_url`.
+            If not provided, defaults to  `/.well-known/agent-card.json`
+        project_connection_id:
+          type: string
+          description: |-
+            The connection ID in the project for the A2A server.
+            The connection stores authentication and other connection details needed to connect to the A2A server.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: An A2A tool stored in a toolbox.
     A2AToolCall:
       type: object
       required:
@@ -13524,6 +13536,7 @@ components:
           Entra: '#/components/schemas/EntraAuthorizationScheme'
           BotService: '#/components/schemas/BotServiceAuthorizationScheme'
           BotServiceRbac: '#/components/schemas/BotServiceRbacAuthorizationScheme'
+          BotServiceTenant: '#/components/schemas/BotServiceTenantAuthorizationScheme'
     AgentEndpointAuthorizationSchemeType:
       anyOf:
         - type: string
@@ -13532,6 +13545,7 @@ components:
             - Entra
             - BotService
             - BotServiceRbac
+            - BotServiceTenant
     AgentEndpointConfig:
       type: object
       properties:
@@ -14514,20 +14528,6 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -14599,6 +14599,23 @@ components:
             The indices attached to this agent. There can be a maximum of 1 index
             resource attached to the agent.
       description: A set of index resources used by the `azure_ai_search` tool.
+    AzureAISearchToolboxTool:
+      type: object
+      required:
+        - type
+        - azure_ai_search
+      properties:
+        type:
+          type: string
+          enum:
+            - azure_ai_search
+        azure_ai_search:
+          allOf:
+            - $ref: '#/components/schemas/AzureAISearchToolResource'
+          description: The azure ai search index resource.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: An Azure AI Search tool stored in a toolbox.
     AzureAITraceDataSourcePreviewEvalRunDataSource:
       type: object
       required:
@@ -14944,14 +14961,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
           description: The Azure Function Tool definition.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an Azure Function Tool, as used to configure an Agent.
@@ -15086,20 +15095,6 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -15218,20 +15213,6 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -15330,6 +15311,17 @@ components:
             - BotServiceRbac
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+    BotServiceTenantAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - BotServiceTenant
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     BrowserAutomationPreviewTool:
       type: object
       required:
@@ -15341,20 +15333,6 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -15362,6 +15340,23 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+    BrowserAutomationPreviewToolboxTool:
+      type: object
+      required:
+        - type
+        - browser_automation_preview
+      properties:
+        type:
+          type: string
+          enum:
+            - browser_automation_preview
+        browser_automation_preview:
+          allOf:
+            - $ref: '#/components/schemas/BrowserAutomationToolParameters'
+          description: The Browser Automation Tool parameters.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A browser automation tool stored in a toolbox.
     BrowserAutomationToolCall:
       type: object
       required:
@@ -15442,20 +15437,6 @@ components:
           enum:
             - capture_structured_outputs
           description: The type of the tool. Always `capture_structured_outputs`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         outputs:
           allOf:
             - $ref: '#/components/schemas/StructuredOutputDefinition'
@@ -15629,6 +15610,27 @@ components:
             - bundled
             - remote_build
       description: How package dependencies are resolved at deployment time for a code-based hosted agent.
+    CodeInterpreterToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter
+        container:
+          anyOf:
+            - type: string
+            - $ref: '#/components/schemas/OpenAI.AutoCodeInterpreterToolParam'
+          description: |-
+            The code interpreter container. Can be a container ID or an object that
+            specifies uploaded file IDs to make available to your code, along with an
+            optional `memory_limit` setting.
+            If not provided, the service assumes auto.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A code interpreter tool stored in a toolbox.
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -19323,23 +19325,39 @@ components:
             - type: 'null'
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
+    FabricIQPreviewToolboxTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - fabric_iq_preview
+        project_connection_id:
+          type: string
+          description: The ID of the FabricIQ project connection.
+        server_label:
+          type: string
+          description: (Optional) The label of the FabricIQ MCP server to connect to.
+        server_url:
+          type: string
+          format: uri
+          description: (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+            - type: 'null'
+          description: (Optional) Whether the agent requires approval before executing actions. Default is always.
+          default: always
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A FabricIQ tool stored in a toolbox.
     FileDataGenerationJobOutput:
       type: object
       required:
@@ -19406,6 +19424,35 @@ components:
       allOf:
         - $ref: '#/components/schemas/DatasetVersionUpdate'
       description: FileDatasetVersion Definition
+    FileSearchToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - file_search
+        max_num_results:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+          description: The maximum number of results to return. This number should be between 1 and 50 inclusive.
+        ranking_options:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.RankingOptions'
+          description: Ranking options for search.
+        filters:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Filters'
+            - type: 'null'
+        vector_store_ids:
+          type: array
+          items:
+            type: string
+          description: The IDs of the vector stores to search.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A file search tool stored in a toolbox.
     FilterStrategyType:
       anyOf:
         - type: string
@@ -20217,6 +20264,89 @@ components:
           format: float
           description: Dropout rate used during training. Informational — not used at serving time.
       description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
+    MCPToolboxTool:
+      type: object
+      required:
+        - type
+        - server_label
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp
+        server_label:
+          type: string
+          description: A label for this MCP server, used to identify it in tool calls.
+        server_url:
+          type: string
+          format: uri
+          description: |-
+            The URL for the MCP server. One of `server_url` or `connector_id` must be
+              provided.
+        connector_id:
+          type: string
+          enum:
+            - connector_dropbox
+            - connector_gmail
+            - connector_googlecalendar
+            - connector_googledrive
+            - connector_microsoftteams
+            - connector_outlookcalendar
+            - connector_outlookemail
+            - connector_sharepoint
+          description: |-
+            Identifier for service connectors, like those available in ChatGPT. One of
+              `server_url` or `connector_id` must be provided. Learn more about service
+              connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              Currently supported `connector_id` values are:
+              - Dropbox: `connector_dropbox`
+              - Gmail: `connector_gmail`
+              - Google Calendar: `connector_googlecalendar`
+              - Google Drive: `connector_googledrive`
+              - Microsoft Teams: `connector_microsoftteams`
+              - Outlook Calendar: `connector_outlookcalendar`
+              - Outlook Email: `connector_outlookemail`
+              - SharePoint: `connector_sharepoint`
+        authorization:
+          type: string
+          description: |-
+            An OAuth access token that can be used with a remote MCP server, either
+              with a custom MCP server URL or a service connector. Your application
+              must handle the OAuth authorization flow and provide the token here.
+        server_description:
+          type: string
+          description: Optional description of the MCP server, used to provide more context.
+        headers:
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
+        allowed_tools:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
+            - type: 'null'
+        require_approval:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
+            - type: string
+              enum:
+                - always
+                - never
+            - type: 'null'
+          default: always
+        defer_loading:
+          type: boolean
+          description: Whether this MCP tool is deferred and discovered via tool search.
+        project_connection_id:
+          type: string
+          description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: An MCP tool stored in a toolbox.
     ManagedAgentIdentityBlueprint:
       type: object
       required:
@@ -20429,20 +20559,6 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -20476,20 +20592,6 @@ components:
           enum:
             - memory_search
           description: The type of the tool. Always `memory_search_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -20849,20 +20951,6 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -21621,20 +21709,6 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         container:
           anyOf:
             - type: string
@@ -24931,20 +25005,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -25957,20 +26017,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
             - type: 'null'
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -26582,20 +26628,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -31568,20 +31600,6 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -31733,14 +31751,6 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -37012,14 +37022,13 @@ components:
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
-          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewTool'
           reminder_preview: '#/components/schemas/ReminderPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
-          function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
-          computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
           web_search: '#/components/schemas/OpenAI.WebSearchTool'
           mcp: '#/components/schemas/OpenAI.MCPTool'
+          function: '#/components/schemas/OpenAI.FunctionTool'
+          computer_use_preview: '#/components/schemas/OpenAI.ComputerUsePreviewTool'
           image_generation: '#/components/schemas/OpenAI.ImageGenTool'
           local_shell: '#/components/schemas/OpenAI.LocalShellToolParam'
           shell: '#/components/schemas/OpenAI.FunctionShellToolParam'
@@ -37363,10 +37372,10 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
+            - reminder_preview
             - work_iq_preview
             - fabric_iq_preview
             - toolbox_search_preview
-            - reminder_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -37683,20 +37692,6 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -37882,14 +37877,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an OpenAPI tool as used to configure an agent.
@@ -37951,6 +37938,23 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an OpenAPI tool call.
+    OpenApiToolboxTool:
+      type: object
+      required:
+        - type
+        - openapi
+      properties:
+        type:
+          type: string
+          enum:
+            - openapi
+        openapi:
+          allOf:
+            - $ref: '#/components/schemas/OpenApiFunctionDefinition'
+          description: The openapi function definition.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: An OpenAPI tool stored in a toolbox.
     OptimizationAgentIdentifier:
       type: object
       required:
@@ -39088,14 +39092,6 @@ components:
         description:
           type: string
           description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -39104,6 +39100,18 @@ components:
         this tool. The service creates a one-shot timer routine that fires after the
         specified delay and re-invokes the agent on the same conversation thread.
         No pre-created routine is required.
+    ReminderPreviewToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - reminder_preview
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A reminder tool stored in a toolbox.
     ResponseRetrievalItemGenerationParams:
       type: object
       required:
@@ -39819,20 +39827,6 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -40473,7 +40467,7 @@ components:
             - $ref: '#/components/schemas/RaiConfig'
           description: Responsible AI content filtering configuration.
       description: Policy configuration for a toolbox, including content safety and other governance settings.
-    ToolboxSearchPreviewTool:
+    ToolboxSearchPreviewToolboxTool:
       type: object
       required:
         - type
@@ -40483,26 +40477,9 @@ components:
           enum:
             - toolbox_search_preview
           description: The type of the tool. Always `toolbox_search_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: |-
-        A tool for searching over the agent's toolbox.
-        When present, deferred tools are hidden from `tools/list` and only
-        discoverable via `search_tools` queries at runtime.
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A toolbox search tool stored in a toolbox.
     ToolboxSkill:
       type: object
       required:
@@ -40537,6 +40514,61 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxSkill'
       description: A reference to an existing skill to include in a toolbox.
+    ToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          allOf:
+            - $ref: '#/components/schemas/ToolboxToolType'
+          description: The type of tool.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
+      discriminator:
+        propertyName: type
+        mapping:
+          code_interpreter: '#/components/schemas/CodeInterpreterToolboxTool'
+          file_search: '#/components/schemas/FileSearchToolboxTool'
+          web_search: '#/components/schemas/WebSearchToolboxTool'
+          mcp: '#/components/schemas/MCPToolboxTool'
+          azure_ai_search: '#/components/schemas/AzureAISearchToolboxTool'
+          openapi: '#/components/schemas/OpenApiToolboxTool'
+          a2a_preview: '#/components/schemas/A2APreviewToolboxTool'
+          browser_automation_preview: '#/components/schemas/BrowserAutomationPreviewToolboxTool'
+          reminder_preview: '#/components/schemas/ReminderPreviewToolboxTool'
+          work_iq_preview: '#/components/schemas/WorkIQPreviewToolboxTool'
+          fabric_iq_preview: '#/components/schemas/FabricIQPreviewToolboxTool'
+          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolboxTool'
+      description: An abstract representation of a tool stored in a toolbox.
+    ToolboxToolType:
+      type: string
+      enum:
+        - code_interpreter
+        - file_search
+        - web_search
+        - mcp
+        - azure_ai_search
+        - openapi
+        - a2a_preview
+        - browser_automation_preview
+        - reminder_preview
+        - work_iq_preview
+        - fabric_iq_preview
+        - toolbox_search_preview
+      description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object
       required:
@@ -40582,7 +40614,7 @@ components:
         tools:
           type: array
           items:
-            $ref: '#/components/schemas/OpenAI.Tool'
+            $ref: '#/components/schemas/ToolboxTool'
           description: The list of tools contained in this toolbox version.
         skills:
           type: array
@@ -41058,6 +41090,40 @@ components:
           type: string
           description: Name of the custom configuration instance given to config.
       description: A web search configuration for bing custom search
+    WebSearchToolboxTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - web_search
+        filters:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
+            - type: 'null'
+        user_location:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.WebSearchApproximateLocation'
+            - type: 'null'
+        search_context_size:
+          type: string
+          enum:
+            - low
+            - medium
+            - high
+          description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
+          default: medium
+        custom_search_configuration:
+          allOf:
+            - $ref: '#/components/schemas/WebSearchConfiguration'
+          description: |-
+            The project connections attached to this tool. There can be a maximum of 1 connection
+            resource attached to the tool.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A web search tool stored in a toolbox.
     WeeklyRecurrenceSchedule:
       type: object
       required:
@@ -41091,23 +41157,25 @@ components:
         project_connection_id:
           type: string
           description: The ID of the WorkIQ project connection.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: |-
-            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-            Resolution order: exact tool name match takes priority over `*`.
-            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
+    WorkIQPreviewToolboxTool:
+      type: object
+      required:
+        - type
+        - project_connection_id
+      properties:
+        type:
+          type: string
+          enum:
+            - work_iq_preview
+        project_connection_id:
+          type: string
+          description: The ID of the WorkIQ project connection.
+      allOf:
+        - $ref: '#/components/schemas/ToolboxTool'
+      description: A WorkIQ tool stored in a toolbox.
     WorkflowActionOutputItem:
       type: object
       required:
