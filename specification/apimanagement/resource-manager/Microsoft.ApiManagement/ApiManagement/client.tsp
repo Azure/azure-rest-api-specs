@@ -473,6 +473,7 @@ op replacePurge(
 @@clientName(ApiManagementServiceResources.listByRequest, "GetReportsByRequest", "csharp");
 @@clientName(GatewayContracts.listTrace, "GetTraceRaw", "csharp");
 @@clientName(GatewayContracts.gatewayApiGetEntityTag, "GetGatewayApiEntityTagRaw", "csharp");
+@@clientName(GatewayContracts.gatewayApiDelete, "DeleteGatewayApi", "csharp");
 @@clientName(GroupContracts.checkEntityExists, "CheckGroupUserEntityExistsRaw", "csharp");
 @@clientName(GroupContracts.groupUserDelete, "DeleteGroupUser", "csharp");
 @@clientName(NotificationContracts.notificationRecipientEmailCheckEntityExists, "CheckNotificationRecipientEmailEntityExistsRaw", "csharp");
