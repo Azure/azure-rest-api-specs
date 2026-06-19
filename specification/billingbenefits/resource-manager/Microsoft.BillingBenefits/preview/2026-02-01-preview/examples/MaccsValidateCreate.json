@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "Maccs",
+          "properties": {
+            "allowContributors": true,
+            "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+            "commitment": {
+              "amount": 10000,
+              "currencyCode": "USD",
+              "grain": "FullTerm"
+            },
+            "displayName": "Test MACC Benefit",
+            "endAt": "2028-07-31T23:59:59Z",
+            "entityType": "Primary",
+            "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+            "startAt": "2026-07-01T00:00:00Z",
+            "systemId": null
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "MaccsValidateCreate"
+}

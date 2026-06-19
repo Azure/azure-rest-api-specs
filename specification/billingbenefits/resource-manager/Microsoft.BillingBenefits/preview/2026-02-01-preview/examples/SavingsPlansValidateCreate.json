@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "SavingsPlans",
+          "properties": {
+            "appliedScopeProperties": {
+              "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+            },
+            "appliedScopeType": "Single",
+            "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+            "commitment": {
+              "amount": 15.23,
+              "currencyCode": "USD",
+              "grain": "Hourly"
+            },
+            "displayName": "ComputeSavingsPlan_2026-07-01",
+            "term": "P1Y"
+          },
+          "sku": {
+            "name": "Compute_Savings_Plan"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Benefit_Validate",
+  "title": "SavingsPlansValidateCreate"
+}
