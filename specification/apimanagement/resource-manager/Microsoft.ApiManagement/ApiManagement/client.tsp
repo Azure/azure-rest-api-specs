@@ -480,6 +480,8 @@ op replacePurge(
 @@clientName(ProductContracts.productGroupCheckEntityExists, "CheckProductGroupEntityExistsRaw", "csharp");
 @@clientName(ApiManagementServiceOperationGroup.checkNameAvailability, "CheckApiManagementServiceNameAvailability", "csharp");
 @@clientName(ApiManagementServiceOperationGroup.getDomainOwnershipIdentifier, "GetApiManagementServiceDomainOwnershipIdentifier", "csharp");
+@@clientName(DeletedServicesOperationGroup.listBySubscription, "GetApiManagementDeletedServices", "csharp");
+@@clientName(ApiManagementSkusOperationGroup.list, "GetApiManagementSkus", "csharp");
 @@clientName(ContentTypeContracts.listByService, "GetContentTypes", "csharp");
 @@clientName(ContentTypeContracts.get, "GetContentType", "csharp");
 @@clientName(ContentTypeContracts.createOrUpdate, "CreateOrUpdateContentType", "csharp");
