@@ -29,12 +29,7 @@ interface AgentSessionFiles {
   @summary("Upload a session file")
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  uploadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  uploadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -60,12 +55,7 @@ interface AgentSessionFiles {
   @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  downloadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  downloadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -87,12 +77,7 @@ interface AgentSessionFiles {
   @get
   @list
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  listSessionFiles is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  listSessionFiles is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -115,12 +100,7 @@ interface AgentSessionFiles {
   @summary("Delete a session file")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  deleteSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  deleteSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
