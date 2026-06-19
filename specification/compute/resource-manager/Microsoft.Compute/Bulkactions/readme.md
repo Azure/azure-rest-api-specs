@@ -116,6 +116,22 @@ suppressions:
       https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"]
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: Bulkactions.json
+    where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
 ```
 ### Tag: package-2026-04-06-preview
 
