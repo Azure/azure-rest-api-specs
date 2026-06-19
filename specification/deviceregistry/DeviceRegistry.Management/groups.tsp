@@ -57,11 +57,11 @@ model GroupListMembersQueryParameters {
   @doc("""
     Optional cap on the total number of group members to return across this list operation.
     """)
-  @query("$top")
+  @query("top")
   top?: int32;
 
   @doc("Opaque continuation token from a previous listMembers response.")
-  @query("$skiptoken")
+  @query("skiptoken")
   skipToken?: string;
 }
 
