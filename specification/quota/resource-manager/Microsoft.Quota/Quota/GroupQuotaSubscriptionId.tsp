@@ -21,7 +21,8 @@ model GroupQuotaSubscriptionId
     Resource = GroupQuotaSubscriptionId,
     KeyName = "subscriptionId",
     SegmentName = "subscriptions",
-    NamePattern = ""
+    NamePattern = "",
+    Type = Azure.Core.uuid
   >;
 }
 
@@ -126,8 +127,6 @@ interface GroupQuotaSubscriptionIds {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@format(GroupQuotaSubscriptionId.name, "uuid");
 @@doc(
   GroupQuotaSubscriptionId.name,
   "The ID of the target subscription. The value must be an UUID."

@@ -12200,6 +12200,11 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureADPartnerClientAuthentication": {
       "type": "object",
       "description": "Microsoft Entra ID Partner Client Authentication",
@@ -14592,8 +14597,7 @@
       "description": "The details of the Federated Identity Credential (FIC) used with the resource.",
       "properties": {
         "federatedClientId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Multi-Tenant Microsoft Entra ID Application where the Federated Identity Credential (FIC) is associated with."
         }
       },
@@ -16524,8 +16528,7 @@
       "description": "Information about the partner.",
       "properties": {
         "partnerRegistrationImmutableId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The immutableId of the corresponding partner registration."
         },
         "partnerName": {
@@ -16829,8 +16832,7 @@
       "description": "Properties of the Partner Destination.",
       "properties": {
         "partnerRegistrationImmutableId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The immutable Id of the corresponding partner registration."
         },
         "endpointServiceContext": {
@@ -17303,8 +17305,7 @@
           "readOnly": true
         },
         "partnerRegistrationImmutableId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The immutableId of the corresponding partner registration.\nNote: This property is marked for deprecation and is not supported in any future GA API version"
         }
       }
@@ -17472,8 +17473,7 @@
       "description": "Properties of the Partner Topic.",
       "properties": {
         "partnerRegistrationImmutableId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The immutableId of the corresponding partner registration."
         },
         "source": {
@@ -20067,8 +20067,7 @@
       "description": "Properties of the verified partner.",
       "properties": {
         "partnerRegistrationImmutableId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "ImmutableId of the corresponding partner registration."
         },
         "organizationName": {

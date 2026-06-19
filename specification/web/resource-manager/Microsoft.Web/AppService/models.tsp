@@ -2366,10 +2366,8 @@ model SiteProperties {
   /**
    * Specifies an operation id if this site has a pending operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  inProgressOperationId?: string;
+  inProgressOperationId?: Azure.Core.uuid;
 
   /**
    * Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.
@@ -3842,9 +3840,7 @@ model CloningInfo {
    * Correlation ID of cloning operation. This ID ties multiple cloning operations
    * together to use the same snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  correlationId?: string;
+  correlationId?: Azure.Core.uuid;
 
   /**
    * <code>true</code> to overwrite destination app; otherwise, <code>false</code>.
@@ -4379,9 +4375,7 @@ model Operation {
   /**
    * Applicable only for stamp operation ids.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  geoMasterOperationId?: string;
+  geoMasterOperationId?: Azure.Core.uuid;
 }
 
 /**
@@ -7459,9 +7453,7 @@ model RecommendationProperties {
   /**
    * A GUID value that each recommendation object is associated with.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  recommendationId?: string;
+  recommendationId?: Azure.Core.uuid;
 
   /**
    * Full ARM resource ID string that this recommendation object is associated with.
@@ -7599,9 +7591,7 @@ model RecommendationRuleProperties {
    * Recommendation ID of an associated recommendation object tied to the rule, if exists.
    * If such an object doesn't exist, it is set to null.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  recommendationId?: string;
+  recommendationId?: Azure.Core.uuid;
 
   /**
    * Localized detailed description of the rule.
@@ -9815,10 +9805,8 @@ model SitePatchResourceProperties {
   /**
    * Specifies an operation id if this site has a pending operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  inProgressOperationId?: string;
+  inProgressOperationId?: Azure.Core.uuid;
 
   /**
    * Property to allow or block all public traffic. Allowed Values: 'Enabled', 'Disabled' or an empty string.

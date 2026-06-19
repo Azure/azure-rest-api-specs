@@ -1224,10 +1224,8 @@ model AssociatedWorkspace {
   /**
    * Associated workspace immutable id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  workspaceId?: string;
+  workspaceId?: Azure.Core.uuid;
 
   /**
    * Associated workspace resource name.

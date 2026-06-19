@@ -1282,10 +1282,8 @@ model MachineProperties {
   /**
    * Specifies the hybrid machine unique ID.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @format("uuid")
-  vmId?: string;
+  vmId?: Azure.Core.uuid;
 
   /**
    * Specifies the hybrid machine display name.
@@ -1334,10 +1332,8 @@ model MachineProperties {
   /**
    * Specifies the Arc Machine's unique SMBIOS ID
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  vmUuid?: string;
+  vmUuid?: Azure.Core.uuid;
 
   /**
    * Machine Extensions information (deprecated field)
@@ -1642,9 +1638,7 @@ model AgentUpgrade {
   /**
    * The correlation ID associated with an agent upgrade operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  correlationId?: string;
+  correlationId?: Azure.Core.uuid;
 
   /**
    * Specifies if the machine's agent should be upgraded
@@ -2373,10 +2367,8 @@ model MachineAssessPatchesResult {
   /**
    * The activity ID of the operation that produced this result.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  assessmentActivityId?: string;
+  assessmentActivityId?: Azure.Core.uuid;
 
   /**
    * The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred.

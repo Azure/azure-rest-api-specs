@@ -4507,8 +4507,7 @@
           "readOnly": true
         },
         "clusterUuid": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The unique identifier of the AML file system cluster.",
           "readOnly": true
         },
@@ -5835,6 +5834,11 @@
           "description": "URL to get the next set of auto import job list results, if there are any."
         }
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "BlobNfsTarget": {
       "type": "object",

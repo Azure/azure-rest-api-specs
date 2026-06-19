@@ -1218,10 +1218,8 @@ model AmlFilesystemProperties {
   /**
    * The unique identifier of the AML file system cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  clusterUuid?: string;
+  clusterUuid?: Azure.Core.uuid;
 
   /**
    * Health of the AML file system.

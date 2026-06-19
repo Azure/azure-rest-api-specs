@@ -294,7 +294,6 @@ interface Databases {
       /**
        * The operation identifier.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @path
       @segment("operations")
       operationId: Azure.Core.uuid;

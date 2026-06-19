@@ -299,7 +299,6 @@ model CertificateProperties {
   /**
    * The certificate's expiration date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @encode(DateTimeKnownEncoding.rfc7231)
   expiry?: utcDateTime;
@@ -323,7 +322,6 @@ model CertificateProperties {
   /**
    * The certificate's creation date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @encode(DateTimeKnownEncoding.rfc7231)
   created?: utcDateTime;
@@ -331,7 +329,6 @@ model CertificateProperties {
   /**
    * The certificate's last update date and time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @encode(DateTimeKnownEncoding.rfc7231)
   updated?: utcDateTime;
@@ -635,18 +632,14 @@ model ManagedServiceIdentity {
   /**
    * The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  principalId?: string;
+  principalId?: Azure.Core.uuid;
 
   /**
    * The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  @format("uuid")
-  tenantId?: string;
+  tenantId?: Azure.Core.uuid;
 
   /**
    * Type of managed service identity (where both SystemAssigned and UserAssigned types are allowed).

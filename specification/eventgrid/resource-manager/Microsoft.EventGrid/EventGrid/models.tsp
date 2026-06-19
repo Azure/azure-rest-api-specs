@@ -3162,9 +3162,7 @@ model FederatedIdentityCredentialInfo {
   /**
    * The Multi-Tenant Microsoft Entra ID Application where the Federated Identity Credential (FIC) is associated with.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  federatedClientId: string;
+  federatedClientId: Azure.Core.uuid;
 }
 
 /**
@@ -4221,9 +4219,7 @@ model Partner {
   /**
    * The immutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  partnerRegistrationImmutableId?: string;
+  partnerRegistrationImmutableId?: Azure.Core.uuid;
 
   /**
    * The partner name.
@@ -4272,9 +4268,7 @@ model PartnerDestinationProperties {
   /**
    * The immutable Id of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  partnerRegistrationImmutableId?: string;
+  partnerRegistrationImmutableId?: Azure.Core.uuid;
 
   /**
    * Endpoint context associated with this partner destination.
@@ -4460,9 +4454,7 @@ model PartnerRegistrationProperties {
    * The immutableId of the corresponding partner registration.
    * Note: This property is marked for deprecation and is not supported in any future GA API version
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  partnerRegistrationImmutableId?: string;
+  partnerRegistrationImmutableId?: Azure.Core.uuid;
 }
 
 /**
@@ -4483,9 +4475,7 @@ model PartnerTopicProperties {
   /**
    * The immutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  partnerRegistrationImmutableId?: string;
+  partnerRegistrationImmutableId?: Azure.Core.uuid;
 
   /**
    * Source associated with this partner topic. This represents a unique partner resource.
@@ -5291,9 +5281,7 @@ model VerifiedPartnerProperties {
   /**
    * ImmutableId of the corresponding partner registration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @format("uuid")
-  partnerRegistrationImmutableId?: string;
+  partnerRegistrationImmutableId?: Azure.Core.uuid;
 
   /**
    * Official name of the Partner.

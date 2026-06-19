@@ -139,15 +139,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Error = CloudError
   >;
@@ -164,15 +162,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = SearchService> &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -193,15 +189,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Error = CloudError
   >;
@@ -219,15 +213,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Response = OkResponse | NoContentResponse,
     Error = CloudError
@@ -245,15 +237,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Response = SearchServiceListResult,
     Error = CloudError
@@ -271,15 +261,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Response = SearchServiceListResult,
     Error = CloudError
@@ -300,15 +288,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Error = CloudError
   >;
@@ -328,15 +314,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     OverrideErrorType = CloudError
   >;
@@ -357,15 +341,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     OverrideErrorType = CloudError
   >;
@@ -386,15 +368,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Error = CloudError
   >;
@@ -416,15 +396,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     OverrideErrorType = CloudError
   >;
@@ -458,15 +436,13 @@ interface SearchServices {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
         "x-ms-parameter-grouping",
         #{ name: "search-management-request-options" }
       )
       @OpenAPI.extension("x-ms-client-request-id", true)
-      clientRequestId?: string;
+      clientRequestId?: Azure.Core.uuid;
     },
     Error = CloudError
   >;

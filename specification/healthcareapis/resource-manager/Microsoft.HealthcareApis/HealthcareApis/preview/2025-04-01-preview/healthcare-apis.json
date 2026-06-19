@@ -3085,6 +3085,11 @@
         ]
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "CheckNameAvailabilityParameters": {
       "type": "object",
       "description": "Input values.",
@@ -4652,14 +4657,12 @@
           "description": "Type of identity being specified, currently SystemAssigned and None are allowed."
         },
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The service principal ID of the system assigned identity. This property will only be provided for a system assigned identity.",
           "readOnly": true
         },
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The tenant ID of the system assigned identity. This property will only be provided for a system assigned identity.",
           "readOnly": true
         },

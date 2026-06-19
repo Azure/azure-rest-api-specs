@@ -40650,6 +40650,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "AzureActiveDirectory": {
       "type": "object",
       "description": "The configuration settings of the Azure Active directory provider.",
@@ -41795,8 +41800,7 @@
       "description": "Information needed for cloning operation.",
       "properties": {
         "correlationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Correlation ID of cloning operation. This ID ties multiple cloning operations\ntogether to use the same snapshot."
         },
         "overwrite": {
@@ -47837,8 +47841,7 @@
           "description": "Time when operation will expire."
         },
         "geoMasterOperationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Applicable only for stamp operation ids."
         }
       }
@@ -49327,8 +49330,7 @@
           "description": "Timestamp when this instance was created."
         },
         "recommendationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "A GUID value that each recommendation object is associated with."
         },
         "resourceId": {
@@ -49468,8 +49470,7 @@
           "description": "Localized name of the rule (Good for UI)."
         },
         "recommendationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Recommendation ID of an associated recommendation object tied to the rule, if exists.\nIf such an object doesn't exist, it is set to null."
         },
         "description": {
@@ -52301,8 +52302,7 @@
           "description": "Site redundancy mode"
         },
         "inProgressOperationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies an operation id if this site has a pending operation.",
           "readOnly": true
         },
@@ -52624,8 +52624,7 @@
           "description": "Site redundancy mode"
         },
         "inProgressOperationId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "Specifies an operation id if this site has a pending operation.",
           "readOnly": true
         },

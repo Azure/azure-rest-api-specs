@@ -1734,6 +1734,11 @@
         }
       }
     },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
     "BackupScheduleType": {
       "type": "string",
       "description": "Backup schedule type.",
@@ -2228,8 +2233,7 @@
       "description": "Azure Active Directory identity configuration for a resource.",
       "properties": {
         "principalId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory principal id.",
           "readOnly": true
         },
@@ -2238,8 +2242,7 @@
           "description": "The identity type. Set this to 'SystemAssigned' in order to automatically create and assign an Azure Active Directory principal for the resource."
         },
         "tenantId": {
-          "type": "string",
-          "format": "uuid",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Azure Active Directory tenant id.",
           "readOnly": true
         }

@@ -139,10 +139,8 @@ interface RecommendationsOperationGroup {
     /**
      * The operation ID, which can be found from the Location field in the generate recommendation response header.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @format("uuid")
     @path
-    operationId: string,
+    operationId: Azure.Core.uuid,
   ): ArmAcceptedResponse | NoContentResponse | ArmDefaultErrorResponse;
 }
 
