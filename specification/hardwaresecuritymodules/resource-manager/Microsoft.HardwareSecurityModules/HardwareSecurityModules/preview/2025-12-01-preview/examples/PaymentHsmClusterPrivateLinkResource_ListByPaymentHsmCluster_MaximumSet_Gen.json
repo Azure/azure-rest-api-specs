@@ -1,0 +1,34 @@
+{
+  "operationId": "PaymentHsmClusters_ListByPaymentHsmCluster",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "paymentHsmClusterName": "phsm1",
+    "resourceGroupName": "rgpaymenthsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "PaymentHsmClusterPrivateLinkResource_ListByPaymentHsmCluster_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sample-pls",
+            "type": "Microsoft.HardwareSecurityModules/paymentHsmClusters/privateLinkResources",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgpaymenthsm/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/phsm1/privateLinkResources/sample-pls",
+            "properties": {
+              "groupId": "paymentHsm",
+              "requiredMembers": [
+                "hsm1",
+                "hsm2",
+                "hsm3"
+              ],
+              "requiredZoneNames": [
+                "privatelink.paymenthsm.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -53,6 +53,9 @@
     },
     {
       "name": "PaymentHsmClusters"
+    },
+    {
+      "name": "PaymentHsmClusterPrivateEndpointConnections"
     }
   ],
   "paths": {
@@ -2050,6 +2053,307 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/{paymentHsmClusterName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PaymentHsmClusterPrivateEndpointConnections_ListByPaymentHsmCluster",
+        "tags": [
+          "PaymentHsmClusterPrivateEndpointConnections"
+        ],
+        "description": "The List operation gets information about the private endpoint connections associated with the Payment HSM Cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paymentHsmClusterName",
+            "in": "path",
+            "description": "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 23,
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentHsmClusterPrivateEndpointConnection_ListByPaymentHsmCluster_MaximumSet_Gen": {
+            "$ref": "./examples/PaymentHsmClusterPrivateEndpointConnection_ListByPaymentHsmCluster_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/{paymentHsmClusterName}/privateEndpointConnections/{peConnectionName}": {
+      "get": {
+        "operationId": "PaymentHsmClusterPrivateEndpointConnections_Get",
+        "tags": [
+          "PaymentHsmClusterPrivateEndpointConnections"
+        ],
+        "description": "Gets the private endpoint connection for the Payment Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paymentHsmClusterName",
+            "in": "path",
+            "description": "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 23,
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection associated with the Payment HSM Cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen": {
+            "$ref": "./examples/PaymentHsmClusterPrivateEndpointConnection_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PaymentHsmClusterPrivateEndpointConnections_Create",
+        "tags": [
+          "PaymentHsmClusterPrivateEndpointConnections"
+        ],
+        "description": "Creates or updates the private endpoint connection for the Payment Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paymentHsmClusterName",
+            "in": "path",
+            "description": "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 23,
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection associated with the Payment HSM Cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters of the PrivateEndpointConnection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PaymentHsmClusterPrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen": {
+            "$ref": "./examples/PaymentHsmClusterPrivateEndpointConnection_Create_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PaymentHsmClusterPrivateEndpointConnections_Delete",
+        "tags": [
+          "PaymentHsmClusterPrivateEndpointConnections"
+        ],
+        "description": "Deletes the private endpoint connection for the Payment Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paymentHsmClusterName",
+            "in": "path",
+            "description": "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 23,
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "description": "Name of the private endpoint connection associated with the Payment HSM Cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 24,
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/PaymentHsmClusterPrivateEndpointConnection_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/paymentHsmClusters/{paymentHsmClusterName}/privateLinkResources": {
+      "get": {
+        "operationId": "PaymentHsmClusters_ListByPaymentHsmCluster",
+        "tags": [
+          "PaymentHsmClusters"
+        ],
+        "description": "Gets the private link resources supported for the Payment Hsm Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "paymentHsmClusterName",
+            "in": "path",
+            "description": "The name of the Payment HSM Cluster within the specified resource group. Payment HSM Cluster names must be between 3 and 23 characters in length.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 23,
+            "pattern": "^[a-zA-Z0-9-]{3,23}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaymentHsmClusterPrivateLinkResource_ListByPaymentHsmCluster_MaximumSet_Gen": {
+            "$ref": "./examples/PaymentHsmClusterPrivateLinkResource_ListByPaymentHsmCluster_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2845,6 +3149,46 @@
         }
       }
     },
+    "PaymentHsmClusterPrivateEndpointConnection": {
+      "type": "object",
+      "description": "The private endpoint connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "Modified whenever there is a change in the state of private endpoint connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PaymentHsmClusterPrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PaymentHsmClusterPrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PaymentHsmClusterPrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PaymentHsmClusterProperties": {
       "type": "object",
       "description": "Properties of a Payment HSM Cluster.",
@@ -2874,7 +3218,7 @@
           "type": "array",
           "description": "List of private endpoint connection resources",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PaymentHsmClusterPrivateEndpointConnection"
           },
           "readOnly": true,
           "x-ms-identifiers": [
