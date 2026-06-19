@@ -5,114 +5,114 @@ info:
 tags:
   - name: EvaluationSuiteGenerationJobs
   - name: Fine-Tuning
-  - name: Insights
-    parent: Evaluations
-  - name: Evalsuite
-    parent: Evaluations
-  - name: Redteams
-    parent: Evaluations
-    description: Red Teaming
-  - name: Evaluation Taxonomies
-    parent: Evaluations
-  - name: Evaluators
-    parent: Evaluations
-  - name: Evaluation Rules
-    parent: Evaluations
-  - name: Evals
-    parent: Evaluations
-  - name: Evaluations
-  - name: EvaluatorGenerationJobs
-    parent: Platform APIs
-    description: Evaluator generation jobs
-  - name: AgentOptimizationJobs
-    parent: Platform APIs
-    description: Agent optimization jobs
-  - name: DataGenerationJobs
-    parent: Platform APIs
-    description: Data generation jobs
-  - name: Deployments
-    parent: Platform APIs
-  - name: Toolboxes
-    parent: Platform APIs
-  - name: Skills
-    parent: Platform APIs
-  - name: Schedules
-    parent: Platform APIs
-  - name: Routines
-    parent: Platform APIs
-  - name: Videos
-    parent: Platform APIs
-  - name: Vector stores
-    parent: Platform APIs
-    description: Vector Stores
-  - name: Uploads
-    parent: Platform APIs
-  - name: Threads
-    parent: Platform APIs
-  - name: Realtime
-    parent: Platform APIs
-  - name: Moderations
-    parent: Platform APIs
-  - name: Images
-    parent: Platform APIs
-  - name: Files
-    parent: Platform APIs
-  - name: Embeddings
-    parent: Platform APIs
-  - name: Containers
-    parent: Platform APIs
-  - name: Completions
-    parent: Platform APIs
-  - name: Batch
-    parent: Platform APIs
-  - name: Audio
-    parent: Platform APIs
-  - name: Assistants
-    parent: Platform APIs
-  - name: Chat
-    parent: Platform APIs
-  - name: Memory Stores
-    parent: Platform APIs
-  - name: Models
-    parent: Platform APIs
-  - name: Fine-tuning
-    parent: Platform APIs
-    description: Fine-Tuning
-  - name: Scheduler
-    parent: Platform APIs
-  - name: Connections
-    parent: Platform APIs
-  - name: Indexes
-    parent: Platform APIs
-  - name: Datasets
-    parent: Platform APIs
-  - name: Platform APIs
-  - name: Agent Containers
+  - name: Responses Root
+    description: Responses
+  - name: Responses
+    parent: Responses Root
+    description: Responses (OpenAI)
+  - name: Conversations
+    parent: Responses Root
+    description: Conversations (OpenAI)
+  - name: Agents Root
+    description: Agents
+  - name: Agents
     parent: Agents Root
-  - name: Agent Versions
-    parent: Agents Root
-  - name: Agent Session Files
-    parent: Agents Root
-  - name: Agent Sessions
+    description: Agent Management
+  - name: Agent Invocations
     parent: Agents Root
   - name: Agent Invocations WebSocket
     parent: Agents Root
     description: Agent Invocations (WebSocket)
-  - name: Agent Invocations
+  - name: Agent Sessions
     parent: Agents Root
-  - name: Agents
+  - name: Agent Session Files
     parent: Agents Root
-    description: Agent Management
-  - name: Agents Root
-    description: Agents
-  - name: Conversations
-    parent: Responses Root
-    description: Conversations (OpenAI)
-  - name: Responses
-    parent: Responses Root
-    description: Responses (OpenAI)
-  - name: Responses Root
-    description: Responses
+  - name: Agent Versions
+    parent: Agents Root
+  - name: Agent Containers
+    parent: Agents Root
+  - name: Platform APIs
+  - name: Datasets
+    parent: Platform APIs
+  - name: Indexes
+    parent: Platform APIs
+  - name: Connections
+    parent: Platform APIs
+  - name: Scheduler
+    parent: Platform APIs
+  - name: Fine-tuning
+    parent: Platform APIs
+    summary: Fine-Tuning
+  - name: Models
+    parent: Platform APIs
+  - name: Memory Stores
+    parent: Platform APIs
+  - name: Chat
+    parent: Platform APIs
+  - name: Assistants
+    parent: Platform APIs
+  - name: Audio
+    parent: Platform APIs
+  - name: Batch
+    parent: Platform APIs
+  - name: Completions
+    parent: Platform APIs
+  - name: Containers
+    parent: Platform APIs
+  - name: Embeddings
+    parent: Platform APIs
+  - name: Files
+    parent: Platform APIs
+  - name: Images
+    parent: Platform APIs
+  - name: Moderations
+    parent: Platform APIs
+  - name: Realtime
+    parent: Platform APIs
+  - name: Threads
+    parent: Platform APIs
+  - name: Uploads
+    parent: Platform APIs
+  - name: Vector stores
+    parent: Platform APIs
+    summary: Vector Stores
+  - name: Videos
+    parent: Platform APIs
+  - name: Routines
+    parent: Platform APIs
+  - name: Schedules
+    parent: Platform APIs
+  - name: Skills
+    parent: Platform APIs
+  - name: Toolboxes
+    parent: Platform APIs
+  - name: Deployments
+    parent: Platform APIs
+  - name: DataGenerationJobs
+    parent: Platform APIs
+    summary: Data generation jobs
+  - name: AgentOptimizationJobs
+    parent: Platform APIs
+    summary: Agent optimization jobs
+  - name: EvaluatorGenerationJobs
+    parent: Platform APIs
+    summary: Evaluator generation jobs
+  - name: Evaluations
+  - name: Evals
+    parent: Evaluations
+  - name: Evaluation Rules
+    parent: Evaluations
+  - name: Evaluators
+    parent: Evaluations
+  - name: Evaluation Taxonomies
+    parent: Evaluations
+  - name: Redteams
+    parent: Evaluations
+    summary: Red Teaming
+  - name: Evalsuite
+    parent: Evaluations
+  - name: Insights
+    parent: Evaluations
 paths:
   /agent_optimization_jobs:
     post:
@@ -10084,9 +10084,10 @@ paths:
                     deprecated: true
                   safety_identifier:
                     type: string
+                    maxLength: 64
                     description: |-
                       A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-                        The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                        The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                   prompt_cache_key:
                     type: string
                     description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
@@ -10096,7 +10097,7 @@ paths:
                     anyOf:
                       - type: string
                         enum:
-                          - in-memory
+                          - in_memory
                           - 24h
                       - type: 'null'
                   previous_response_id:
@@ -10113,10 +10114,6 @@ paths:
                   background:
                     anyOf:
                       - type: boolean
-                      - type: 'null'
-                  max_output_tokens:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.integer'
                       - type: 'null'
                   max_tool_calls:
                     anyOf:
@@ -10205,6 +10202,10 @@ paths:
                       - type: 'null'
                   usage:
                     $ref: '#/components/schemas/OpenAI.ResponseUsage'
+                  moderation:
+                    anyOf:
+                      - $ref: '#/components/schemas/OpenAI.Moderation'
+                      - type: 'null'
                   parallel_tool_calls:
                     type: boolean
                     description: Whether to allow the model to run tool calls in parallel.
@@ -10212,6 +10213,10 @@ paths:
                   conversation:
                     anyOf:
                       - $ref: '#/components/schemas/OpenAI.ConversationReference'
+                      - type: 'null'
+                  max_output_tokens:
+                    anyOf:
+                      - $ref: '#/components/schemas/OpenAI.integer'
                       - type: 'null'
                   agent:
                     allOf:
@@ -10297,9 +10302,10 @@ paths:
                   deprecated: true
                 safety_identifier:
                   type: string
+                  maxLength: 64
                   description: |-
                     A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-                      The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                      The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
                 prompt_cache_key:
                   type: string
                   description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
@@ -10309,7 +10315,7 @@ paths:
                   anyOf:
                     - type: string
                       enum:
-                        - in-memory
+                        - in_memory
                         - 24h
                     - type: 'null'
                 previous_response_id:
@@ -10326,10 +10332,6 @@ paths:
                 background:
                   anyOf:
                     - type: boolean
-                    - type: 'null'
-                max_output_tokens:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.integer'
                     - type: 'null'
                 max_tool_calls:
                   anyOf:
@@ -10375,6 +10377,10 @@ paths:
                   anyOf:
                     - type: string
                     - type: 'null'
+                moderation:
+                  anyOf:
+                    - $ref: '#/components/schemas/OpenAI.ModerationParam'
+                    - type: 'null'
                 stream:
                   anyOf:
                     - type: boolean
@@ -10394,6 +10400,10 @@ paths:
                         $ref: '#/components/schemas/OpenAI.ContextManagementParam'
                     - type: 'null'
                   description: Context management configuration for this request.
+                max_output_tokens:
+                  anyOf:
+                    - $ref: '#/components/schemas/OpenAI.integer'
+                    - type: 'null'
                 agent:
                   allOf:
                     - $ref: '#/components/schemas/AgentReference'
@@ -13516,6 +13526,7 @@ components:
           Entra: '#/components/schemas/EntraAuthorizationScheme'
           BotService: '#/components/schemas/BotServiceAuthorizationScheme'
           BotServiceRbac: '#/components/schemas/BotServiceRbacAuthorizationScheme'
+          BotServiceTenant: '#/components/schemas/BotServiceTenantAuthorizationScheme'
     AgentEndpointAuthorizationSchemeType:
       anyOf:
         - type: string
@@ -13524,6 +13535,7 @@ components:
             - Entra
             - BotService
             - BotServiceRbac
+            - BotServiceTenant
     AgentEndpointConfig:
       type: object
       properties:
@@ -13868,17 +13880,6 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-    AgentProtocol:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - activity_protocol
-            - responses
-            - a2a
-            - mcp
-            - invocations
-            - invocations_ws
     AgentReference:
       type: object
       required:
@@ -15292,6 +15293,17 @@ components:
             - BotServiceRbac
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
+    BotServiceTenantAuthorizationScheme:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - BotServiceTenant
+      allOf:
+        - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     BrowserAutomationPreviewTool:
       type: object
       required:
@@ -16616,7 +16628,8 @@ components:
           description: The overall object JSON schema for the run data source items.
       discriminator:
         propertyName: type
-        mapping: {}
+        mapping:
+          azure_ai_source: '#/components/schemas/AzureAIDataSourceConfig'
       description: Base class for run data sources with discriminator support.
     DatasetDataGenerationJobOutput:
       type: object
@@ -20181,6 +20194,7 @@ components:
           red_team_taxonomy: '#/components/schemas/RedTeamTaxonomyItemGenerationParams'
           response_retrieval: '#/components/schemas/ResponseRetrievalItemGenerationParams'
           conversation_gen_preview: '#/components/schemas/ConversationGenPreviewItemGenerationParams'
+          synthetic_data_gen_preview: '#/components/schemas/SyntheticDataGenerationPreviewItemGenerationParams'
       description: Represents the set of parameters used to control item generation operations.
     ItemGenerationParamsType:
       anyOf:
@@ -20300,6 +20314,9 @@ components:
                 - never
             - type: 'null'
           default: always
+        defer_loading:
+          type: boolean
+          description: Whether this MCP tool is deferred and discovered via tool search.
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
@@ -21050,11 +21067,6 @@ components:
         - name
         - version
       properties:
-        systemData:
-          allOf:
-            - $ref: '#/components/schemas/SystemDataV3'
-          description: System related metadata
-          readOnly: true
         blobUri:
           type: string
           format: uri
@@ -21244,7 +21256,6 @@ components:
             - create_file
           description: Create a new file with the provided diff.
           x-stainless-const: true
-          default: create_file
         path:
           type: string
           description: Path of the file to create.
@@ -21268,7 +21279,6 @@ components:
             - create_file
           description: The operation type. Always `create_file`.
           x-stainless-const: true
-          default: create_file
         path:
           type: string
           minLength: 1
@@ -21293,7 +21303,6 @@ components:
             - delete_file
           description: Delete the specified file.
           x-stainless-const: true
-          default: delete_file
         path:
           type: string
           description: Path of the file to delete.
@@ -21313,7 +21322,6 @@ components:
             - delete_file
           description: The operation type. Always `delete_file`.
           x-stainless-const: true
-          default: delete_file
         path:
           type: string
           minLength: 1
@@ -21379,7 +21387,6 @@ components:
             - apply_patch
           description: The type of the tool. Always `apply_patch`.
           x-stainless-const: true
-          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Allows the assistant to create, delete, or update files using unified diffs.
@@ -21397,7 +21404,6 @@ components:
             - update_file
           description: Update an existing file with the provided diff.
           x-stainless-const: true
-          default: update_file
         path:
           type: string
           description: Path of the file to update.
@@ -21421,7 +21427,6 @@ components:
             - update_file
           description: The operation type. Always `update_file`.
           x-stainless-const: true
-          default: update_file
         path:
           type: string
           minLength: 1
@@ -21507,6 +21512,12 @@ components:
     OpenAI.ChatModel:
       type: string
       enum:
+        - gpt-5.4
+        - gpt-5.4-mini
+        - gpt-5.4-nano
+        - gpt-5.4-mini-2026-03-17
+        - gpt-5.4-nano-2026-03-17
+        - gpt-5.3-chat-latest
         - gpt-5.2
         - gpt-5.2-2025-12-11
         - gpt-5.2-chat-latest
@@ -21601,7 +21612,6 @@ components:
             - click
           description: Specifies the event type. For a click action, this property is always `click`.
           x-stainless-const: true
-          default: click
         button:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ClickButtonType'
@@ -21614,6 +21624,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate where the click occurred.
+        keys:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A click action.
@@ -21734,6 +21750,18 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+        prompt_cache_key:
+          anyOf:
+            - type: string
+            - type: 'null'
+        prompt_cache_retention:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.PromptCacheRetentionEnum'
+            - type: 'null'
+        service_tier:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ServiceTierEnum'
+            - type: 'null'
     OpenAI.ComparisonFilter:
       type: object
       required:
@@ -21750,6 +21778,8 @@ components:
             - gte
             - lt
             - lte
+            - in
+            - nin
           description: |-
             Specifies the comparison operator: `eq`, `ne`, `gt`, `gte`, `lt`, `lte`, `in`, `nin`.
               - `eq`: equals
@@ -21821,6 +21851,14 @@ components:
           scroll: '#/components/schemas/OpenAI.ScrollParam'
           type: '#/components/schemas/OpenAI.TypeParam'
           wait: '#/components/schemas/OpenAI.WaitParam'
+    OpenAI.ComputerActionList:
+      type: array
+      items:
+        $ref: '#/components/schemas/OpenAI.ComputerAction'
+      description: |-
+        Flattened batched actions for `computer_use`. Each action includes an
+        `type` discriminator and action-specific fields.
+      title: Computer Action List
     OpenAI.ComputerActionType:
       anyOf:
         - type: string
@@ -21866,6 +21904,7 @@ components:
         - type
         - image_url
         - file_id
+        - detail
       properties:
         type:
           type: string
@@ -21873,7 +21912,6 @@ components:
             - computer_screenshot
           description: Specifies the event type. For a computer screenshot, this property is always set to `computer_screenshot`.
           x-stainless-const: true
-          default: computer_screenshot
         image_url:
           anyOf:
             - type: string
@@ -21883,6 +21921,10 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ImageDetail'
+          description: The detail level of the screenshot image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A screenshot of a computer.
@@ -21909,6 +21951,21 @@ components:
           type: string
           description: The identifier of an uploaded file that contains the screenshot.
       description: A computer screenshot image used with the computer use tool.
+    OpenAI.ComputerTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - computer
+          description: The type of the computer tool. Always `computer`.
+          x-stainless-const: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
+      title: Computer
     OpenAI.ComputerUsePreviewTool:
       type: object
       required:
@@ -21923,7 +21980,6 @@ components:
             - computer_use_preview
           description: The type of the computer use tool. Always `computer_use_preview`.
           x-stainless-const: true
-          default: computer_use_preview
         environment:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ComputerEnvironment'
@@ -21951,7 +22007,6 @@ components:
             - container_auto
           description: Automatically creates a container for this request
           x-stainless-const: true
-          default: container_auto
         file_ids:
           type: array
           items:
@@ -21988,7 +22043,6 @@ components:
             - container_file_citation
           description: The type of the container file citation. Always `container_file_citation`.
           x-stainless-const: true
-          default: container_file_citation
         container_id:
           type: string
           description: The ID of the container file.
@@ -22029,19 +22083,12 @@ components:
             - allowlist
           description: Allow outbound network access only to specified domains. Always `allowlist`.
           x-stainless-const: true
-          default: allowlist
         allowed_domains:
           type: array
           items:
             type: string
           minItems: 1
           description: A list of allowed domains when type is `allowlist`.
-        domain_secrets:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyDomainSecretParam'
-          minItems: 1
-          description: Optional domain-scoped secrets for allowlisted domains.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
     OpenAI.ContainerNetworkPolicyDisabledParam:
@@ -22055,29 +22102,8 @@ components:
             - disabled
           description: Disable outbound network access. Always `disabled`.
           x-stainless-const: true
-          default: disabled
       allOf:
         - $ref: '#/components/schemas/OpenAI.ContainerNetworkPolicyParam'
-    OpenAI.ContainerNetworkPolicyDomainSecretParam:
-      type: object
-      required:
-        - domain
-        - name
-        - value
-      properties:
-        domain:
-          type: string
-          minLength: 1
-          description: The domain associated with the secret.
-        name:
-          type: string
-          minLength: 1
-          description: The name of the secret to inject for the domain.
-        value:
-          type: string
-          minLength: 1
-          maxLength: 10485760
-          description: The secret value to inject for the domain.
     OpenAI.ContainerNetworkPolicyParam:
       type: object
       required:
@@ -22110,7 +22136,6 @@ components:
             - container_reference
           description: The environment type. Always `container_reference`.
           x-stainless-const: true
-          default: container_reference
         container_id:
           type: string
       allOf:
@@ -22159,14 +22184,18 @@ components:
         propertyName: type
         mapping:
           message: '#/components/schemas/OpenAI.ConversationItemMessage'
-          function_call: '#/components/schemas/OpenAI.ConversationItemFunctionToolCallResource'
-          function_call_output: '#/components/schemas/OpenAI.ConversationItemFunctionToolCallOutputResource'
+          function_call: '#/components/schemas/OpenAI.ConversationItemFunctionToolCall'
+          function_call_output: '#/components/schemas/OpenAI.ConversationItemFunctionToolCallOutput'
           file_search_call: '#/components/schemas/OpenAI.ConversationItemFileSearchToolCall'
           web_search_call: '#/components/schemas/OpenAI.ConversationItemWebSearchToolCall'
           image_generation_call: '#/components/schemas/OpenAI.ConversationItemImageGenToolCall'
           computer_call: '#/components/schemas/OpenAI.ConversationItemComputerToolCall'
-          computer_call_output: '#/components/schemas/OpenAI.ConversationItemComputerToolCallOutputResource'
+          computer_call_output: '#/components/schemas/OpenAI.ConversationItemComputerToolCallOutput'
+          tool_search_call: '#/components/schemas/OpenAI.ConversationItemToolSearchCall'
+          tool_search_output: '#/components/schemas/OpenAI.ConversationItemToolSearchOutput'
+          additional_tools: '#/components/schemas/OpenAI.ConversationItemAdditionalTools'
           reasoning: '#/components/schemas/OpenAI.ConversationItemReasoningItem'
+          compaction: '#/components/schemas/OpenAI.ConversationItemCompactionBody'
           code_interpreter_call: '#/components/schemas/OpenAI.ConversationItemCodeInterpreterToolCall'
           local_shell_call: '#/components/schemas/OpenAI.ConversationItemLocalShellToolCall'
           local_shell_call_output: '#/components/schemas/OpenAI.ConversationItemLocalShellToolCallOutput'
@@ -22178,10 +22207,39 @@ components:
           mcp_approval_request: '#/components/schemas/OpenAI.ConversationItemMcpApprovalRequest'
           mcp_approval_response: '#/components/schemas/OpenAI.ConversationItemMcpApprovalResponseResource'
           mcp_call: '#/components/schemas/OpenAI.ConversationItemMcpToolCall'
-          custom_tool_call: '#/components/schemas/OpenAI.ConversationItemCustomToolCall'
-          custom_tool_call_output: '#/components/schemas/OpenAI.ConversationItemCustomToolCallOutput'
+          custom_tool_call: '#/components/schemas/OpenAI.ConversationItemCustomToolCallResource'
+          custom_tool_call_output: '#/components/schemas/OpenAI.ConversationItemCustomToolCallOutputResource'
       description: A single item within a conversation. The set of possible types are the same as the `output` type of a [Response object](/docs/api-reference/responses/object#responses/object-output).
       title: Conversation item
+    OpenAI.ConversationItemAdditionalTools:
+      type: object
+      required:
+        - type
+        - id
+        - role
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The type of the item. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        id:
+          type: string
+          description: The unique ID of the additional tools item.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.MessageRole'
+          description: The role that provided the additional tools.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The additional tool definitions made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
     OpenAI.ConversationItemApplyPatchToolCall:
       type: object
       required:
@@ -22304,13 +22362,39 @@ components:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A tool call to run code.
       title: Code interpreter tool call
+    OpenAI.ConversationItemCompactionBody:
+      type: object
+      required:
+        - type
+        - id
+        - encrypted_content
+      properties:
+        type:
+          type: string
+          enum:
+            - compaction
+          description: The type of the item. Always `compaction`.
+          x-stainless-const: true
+          default: compaction
+        id:
+          type: string
+          description: The unique ID of the compaction item.
+        encrypted_content:
+          type: string
+          description: The encrypted content that was produced by compaction.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+      description: A compaction item generated by the [`v1/responses/compact` API](/docs/api-reference/responses/compact).
+      title: Compaction item
     OpenAI.ConversationItemComputerToolCall:
       type: object
       required:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -22328,6 +22412,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -22348,10 +22434,11 @@ components:
         A tool call to a computer use tool. See the
         [computer use guide](/docs/guides/tools-computer-use) for more information.
       title: Computer tool call
-    OpenAI.ConversationItemComputerToolCallOutputResource:
+    OpenAI.ConversationItemComputerToolCallOutput:
       type: object
       required:
         - type
+        - id
         - call_id
         - output
       properties:
@@ -22365,6 +22452,7 @@ components:
         id:
           type: string
           description: The ID of the computer tool call output.
+          readOnly: true
         call_id:
           type: string
           description: The ID of the computer tool call that produced the output.
@@ -22388,42 +22476,15 @@ components:
               `incomplete`. Populated when input items are returned via API.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
-    OpenAI.ConversationItemCustomToolCall:
-      type: object
-      required:
-        - type
-        - call_id
-        - name
-        - input
-      properties:
-        type:
-          type: string
-          enum:
-            - custom_tool_call
-          description: The type of the custom tool call. Always `custom_tool_call`.
-          x-stainless-const: true
-        id:
-          type: string
-          description: The unique ID of the custom tool call in the OpenAI platform.
-        call_id:
-          type: string
-          description: An identifier used to map this custom tool call to a tool call output.
-        name:
-          type: string
-          description: The name of the custom tool being called.
-        input:
-          type: string
-          description: The input for the custom tool call generated by the model.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ConversationItem'
-      description: A call to a custom tool created by the model.
-      title: Custom tool call
-    OpenAI.ConversationItemCustomToolCallOutput:
+      description: The output of a computer tool call.
+      title: Computer tool call output
+    OpenAI.ConversationItemCustomToolCallOutputResource:
       type: object
       required:
         - type
         - call_id
         - output
+        - status
       properties:
         type:
           type: string
@@ -22446,10 +22507,60 @@ components:
           description: |-
             The output from the custom tool call generated by your code.
               Can be a string or an list of output content.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
-      description: The output of a custom tool call from your code, being sent back to the model.
-      title: Custom tool call output
+      title: ResponseCustomToolCallOutputItem
+    OpenAI.ConversationItemCustomToolCallResource:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - input
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call
+          description: The type of the custom tool call. Always `custom_tool_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call in the OpenAI platform.
+        call_id:
+          type: string
+          description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
+        name:
+          type: string
+          description: The name of the custom tool being called.
+        input:
+          type: string
+          description: The input for the custom tool call generated by the model.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+      title: ResponseCustomToolCallItem
     OpenAI.ConversationItemFileSearchToolCall:
       type: object
       required:
@@ -22524,7 +22635,7 @@ components:
           description: The shell commands and limits that describe how to run the tool call.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallStatus'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
           anyOf:
@@ -22562,7 +22673,7 @@ components:
           description: The unique ID of the shell tool call generated by the model.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallOutputStatusEnum'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
         output:
           type: array
@@ -22580,9 +22691,56 @@ components:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: The output of a shell tool call that was emitted.
       title: Shell call output
-    OpenAI.ConversationItemFunctionToolCallOutputResource:
+    OpenAI.ConversationItemFunctionToolCall:
       type: object
       required:
+        - id
+        - type
+        - call_id
+        - name
+        - arguments
+      properties:
+        id:
+          type: string
+          description: The unique ID of the function tool call.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - function_call
+          description: The type of the function tool call. Always `function_call`.
+          x-stainless-const: true
+        call_id:
+          type: string
+          description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
+        name:
+          type: string
+          description: The name of the function to run.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the function.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+      description: |-
+        A tool call to run a function. See the
+        [function calling guide](/docs/guides/function-calling) for more information.
+      title: Function tool call
+    OpenAI.ConversationItemFunctionToolCallOutput:
+      type: object
+      required:
+        - id
         - type
         - call_id
         - output
@@ -22592,6 +22750,7 @@ components:
           description: |-
             The unique ID of the function tool call output. Populated when this item
               is returned via API.
+          readOnly: true
         type:
           type: string
           enum:
@@ -22621,43 +22780,8 @@ components:
               `incomplete`. Populated when items are returned via API.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
-    OpenAI.ConversationItemFunctionToolCallResource:
-      type: object
-      required:
-        - type
-        - call_id
-        - name
-        - arguments
-      properties:
-        id:
-          type: string
-          description: The unique ID of the function tool call.
-        type:
-          type: string
-          enum:
-            - function_call
-          description: The type of the function tool call. Always `function_call`.
-          x-stainless-const: true
-        call_id:
-          type: string
-          description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the function to run.
-        arguments:
-          type: string
-          description: A JSON string of the arguments to pass to the function.
-        status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          description: |-
-            The status of the item. One of `in_progress`, `completed`, or
-              `incomplete`. Populated when items are returned via API.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+      description: The output of a function tool call.
+      title: Function tool call output
     OpenAI.ConversationItemImageGenToolCall:
       type: object
       required:
@@ -22880,9 +23004,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A list of tools available on an MCP server.
@@ -22965,6 +23087,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.MessageContent'
           description: The content of the message
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ConversationItem'
       description: A message to or from the model.
@@ -23016,6 +23142,87 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.ConversationItemToolSearchCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The type of the item. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        id:
+          type: string
+          description: The unique ID of the tool search call item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          description: Arguments used for the tool search call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: The status of the tool search call item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
+    OpenAI.ConversationItemToolSearchOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - tools
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The type of the item. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        id:
+          type: string
+          description: The unique ID of the tool search output item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by tool search.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: The status of the tool search output item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ConversationItem'
     OpenAI.ConversationItemType:
       anyOf:
         - type: string
@@ -23029,7 +23236,11 @@ components:
             - image_generation_call
             - computer_call
             - computer_call_output
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
             - reasoning
+            - compaction
             - code_interpreter_call
             - local_shell_call
             - local_shell_call_output
@@ -23165,6 +23376,7 @@ components:
         mapping:
           text: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatText'
           json_object: '#/components/schemas/OpenAI.CreateChatCompletionRequestResponseFormatResponseFormatJsonObject'
+          json_schema: '#/components/schemas/OpenAI.ResponseFormatJsonSchema'
       description: |-
         An object specifying the format that the model must output.
         Setting to `{ "type": "json_schema", "json_schema": {...} }` enables
@@ -23782,7 +23994,6 @@ components:
             - grammar
           description: Grammar format. Always `grammar`.
           x-stainless-const: true
-          default: grammar
         syntax:
           allOf:
             - $ref: '#/components/schemas/OpenAI.GrammarSyntax1'
@@ -23805,7 +24016,6 @@ components:
             - text
           description: Unconstrained text format. Always `text`.
           x-stainless-const: true
-          default: text
       allOf:
         - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
       description: Unconstrained free-form text.
@@ -23822,7 +24032,6 @@ components:
             - custom
           description: The type of the custom tool. Always `custom`.
           x-stainless-const: true
-          default: custom
         name:
           type: string
           description: The name of the custom tool, used to identify it in tool calls.
@@ -23833,6 +24042,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.CustomToolParamFormat'
           description: The input format for the custom tool. Default is unconstrained text.
+        defer_loading:
+          type: boolean
+          description: Whether this tool should be deferred and discovered via tool search.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)
@@ -23880,12 +24092,14 @@ components:
         - low
         - high
         - auto
+        - original
     OpenAI.DoubleClickAction:
       type: object
       required:
         - type
         - x
         - 'y'
+        - keys
       properties:
         type:
           type: string
@@ -23893,7 +24107,6 @@ components:
             - double_click
           description: Specifies the event type. For a double click action, this property is always set to `double_click`.
           x-stainless-const: true
-          default: double_click
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -23902,6 +24115,12 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate where the double click occurred.
+        keys:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A double click action.
@@ -23918,7 +24137,6 @@ components:
             - drag
           description: Specifies the event type. For a drag action, this property is always set to `drag`.
           x-stainless-const: true
-          default: drag
         path:
           type: array
           items:
@@ -23931,6 +24149,12 @@ components:
                 { x: 200, y: 300 }
               ]
               ```
+        keys:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A drag action.
@@ -23959,6 +24183,10 @@ components:
           description: |-
             Text, image, or audio input to the model, used to generate a response.
               Can also contain previous assistant responses.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
         type:
           type: string
           enum:
@@ -23983,6 +24211,8 @@ components:
         `assistant` role are presumed to have been generated by the model in previous
         interactions.
       title: Input message
+    OpenAI.EmptyModelParam:
+      type: object
     OpenAI.Error:
       type: object
       required:
@@ -24676,7 +24906,6 @@ components:
             - file_citation
           description: The type of the file citation. Always `file_citation`.
           x-stainless-const: true
-          default: file_citation
         file_id:
           type: string
           description: The ID of the file.
@@ -24691,6 +24920,11 @@ components:
         - $ref: '#/components/schemas/OpenAI.Annotation'
       description: A citation to a file.
       title: File citation
+    OpenAI.FileInputDetail:
+      type: string
+      enum:
+        - low
+        - high
     OpenAI.FilePath:
       type: object
       required:
@@ -24727,7 +24961,6 @@ components:
             - file_search
           description: The type of the file search tool. Always `file_search`.
           x-stainless-const: true
-          default: file_search
         vector_store_ids:
           type: array
           items:
@@ -25334,13 +25567,17 @@ components:
         filename:
           type: string
           description: The name of the file to be sent to the model.
+        file_data:
+          type: string
+          description: The content of the file to be sent to the model.
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
-        file_data:
-          type: string
-          description: The content of the file to be sent to the model.
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FileInputDetail'
+          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
       description: A file input to the model.
@@ -25370,7 +25607,7 @@ components:
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
-          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+          description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -25404,6 +25641,18 @@ components:
             - input_image
             - input_file
     OpenAI.FunctionCallItemStatus:
+      type: string
+      enum:
+        - in_progress
+        - completed
+        - incomplete
+    OpenAI.FunctionCallOutputStatusEnum:
+      type: string
+      enum:
+        - in_progress
+        - completed
+        - incomplete
+    OpenAI.FunctionCallStatus:
       type: string
       enum:
         - in_progress
@@ -25614,7 +25863,6 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
-          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -25635,7 +25883,6 @@ components:
             - exit
           description: The outcome type. Always `exit`.
           x-stainless-const: true
-          default: exit
         exit_code:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -25686,6 +25933,12 @@ components:
           enum:
             - timeout
             - exit
+    OpenAI.FunctionShellCallOutputStatusEnum:
+      type: string
+      enum:
+        - in_progress
+        - completed
+        - incomplete
     OpenAI.FunctionShellCallOutputTimeoutOutcome:
       type: object
       required:
@@ -25697,7 +25950,6 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
-          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcome'
       description: Indicates that the shell call exceeded its configured time limit.
@@ -25713,11 +25965,16 @@ components:
             - timeout
           description: The outcome type. Always `timeout`.
           x-stainless-const: true
-          default: timeout
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputOutcomeParam'
       description: Indicates that the shell call exceeded its configured time limit.
       title: Shell call timeout outcome
+    OpenAI.FunctionShellCallStatus:
+      type: string
+      enum:
+        - in_progress
+        - completed
+        - incomplete
     OpenAI.FunctionShellToolParam:
       type: object
       required:
@@ -25729,7 +25986,6 @@ components:
             - shell
           description: The type of the shell tool. Always `shell`.
           x-stainless-const: true
-          default: shell
         environment:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
@@ -25811,7 +26067,6 @@ components:
             - function
           description: The type of the function tool. Always `function`.
           x-stainless-const: true
-          default: function
         name:
           type: string
           description: The name of the function to call.
@@ -25828,53 +26083,45 @@ components:
           anyOf:
             - type: boolean
             - type: 'null'
+        defer_loading:
+          type: boolean
+          description: Whether this function is deferred and loaded via tool search.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Defines a function in your own code the model can choose to call. Learn more about [function calling](https://platform.openai.com/docs/guides/function-calling).
       title: Function
-    OpenAI.FunctionToolCallOutput:
+    OpenAI.FunctionToolParam:
       type: object
       required:
+        - name
         - type
-        - call_id
-        - output
       properties:
-        id:
+        name:
           type: string
-          description: |-
-            The unique ID of the function tool call output. Populated when this item
-              is returned via API.
+          minLength: 1
+          maxLength: 128
+          pattern: ^[a-zA-Z0-9_-]+$
+        description:
+          anyOf:
+            - type: string
+            - type: 'null'
+        parameters:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
+            - type: 'null'
+        strict:
+          anyOf:
+            - type: boolean
+            - type: 'null'
         type:
           type: string
           enum:
-            - function_call_output
-          description: The type of the function tool call output. Always `function_call_output`.
+            - function
           x-stainless-const: true
-        call_id:
-          type: string
-          description: The unique ID of the function tool call generated by the model.
-        output:
-          oneOf:
-            - type: string
-            - type: array
-              items:
-                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
-          description: |-
-            The output from the function call generated by your code.
-              Can be a string or an list of output content.
-        status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          description: |-
-            The status of the item. One of `in_progress`, `completed`, or
-              `incomplete`. Populated when items are returned via API.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemField'
-      description: The output of a function tool call.
-      title: Function tool call output
+          default: function
+        defer_loading:
+          type: boolean
+          description: Whether this function should be deferred and discovered via tool search.
     OpenAI.GraderLabelModel:
       type: object
       required:
@@ -26251,6 +26498,7 @@ components:
         - low
         - high
         - auto
+        - original
     OpenAI.ImageGenActionEnum:
       type: string
       enum:
@@ -26268,7 +26516,6 @@ components:
             - image_generation
           description: The type of the image generation tool. Always `image_generation`.
           x-stainless-const: true
-          default: image_generation
         model:
           anyOf:
             - type: string
@@ -26290,15 +26537,15 @@ components:
               or `auto`. Default: `auto`.
           default: auto
         size:
-          type: string
-          enum:
-            - 1024x1024
-            - 1024x1536
-            - 1536x1024
-            - auto
-          description: |-
-            The size of the generated image. One of `1024x1024`, `1024x1536`,
-              `1536x1024`, or `auto`. Default: `auto`.
+          anyOf:
+            - type: string
+            - type: string
+              enum:
+                - 1024x1024
+                - 1024x1536
+                - 1536x1024
+                - auto
+          description: The size of the generated images. For `gpt-image-2` and `gpt-image-2-2026-04-21`, arbitrary resolutions are supported as `WIDTHxHEIGHT` strings, for example `1536x864`. Width and height must both be divisible by 16 and the requested aspect ratio must be between 1:3 and 3:1. Resolutions above `2560x1440` are experimental, and the maximum supported resolution is `3840x2160`. The requested size must also satisfy the model's current pixel and edge limits. The standard sizes `1024x1024`, `1536x1024`, and `1024x1536` are supported by the GPT image models; `auto` is supported for models that allow automatic sizing. For `dall-e-2`, use one of `256x256`, `512x512`, or `1024x1024`. For `dall-e-3`, use one of `1024x1024`, `1792x1024`, or `1024x1792`.
           default: auto
         output_format:
           type: string
@@ -26382,6 +26629,7 @@ components:
             - memory_search_call.results
       description: |-
         Specify additional output data to include in the model response. Currently supported values are:
+        - `web_search_call.results`: Include the search results of the web search tool call.
         - `web_search_call.action.sources`: Include the sources of the web search tool call.
         - `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items.
         - `computer_call_output.output.image_url`: Include image urls from the computer call output.
@@ -26403,7 +26651,6 @@ components:
             - inline
           description: Defines an inline skill for this request.
           x-stainless-const: true
-          default: inline
         name:
           type: string
           description: The name of the skill.
@@ -26506,13 +26753,17 @@ components:
         filename:
           type: string
           description: The name of the file to be sent to the model.
+        file_data:
+          type: string
+          description: The content of the file to be sent to the model.
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
-        file_data:
-          type: string
-          description: The content of the file to be sent to the model.
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FileInputDetail'
+          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputContent'
       description: A file input to the model.
@@ -26542,7 +26793,7 @@ components:
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
-          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+          description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputContent'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -26600,13 +26851,17 @@ components:
         filename:
           type: string
           description: The name of the file to be sent to the model.
+        file_data:
+          type: string
+          description: The content of the file to be sent to the model.
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
-        file_data:
-          type: string
-          description: The content of the file to be sent to the model.
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FileInputDetail'
+          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
       description: A file input to the model.
       title: Input file
     OpenAI.InputFileContentParam:
@@ -26638,6 +26893,10 @@ components:
             - type: string
               format: uri
             - type: 'null'
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FileInputDetail'
+          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
       description: A file input to the model.
       title: Input file
     OpenAI.InputImageContent:
@@ -26665,7 +26924,7 @@ components:
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
-          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+          description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
       title: Input image
     OpenAI.InputImageContentParamAutoParam:
@@ -26714,6 +26973,9 @@ components:
           web_search_call: '#/components/schemas/OpenAI.InputItemWebSearchToolCall'
           function_call: '#/components/schemas/OpenAI.InputItemFunctionToolCall'
           function_call_output: '#/components/schemas/OpenAI.InputItemFunctionCallOutputItemParam'
+          tool_search_call: '#/components/schemas/OpenAI.InputItemToolSearchCallItemParam'
+          tool_search_output: '#/components/schemas/OpenAI.InputItemToolSearchOutputItemParam'
+          additional_tools: '#/components/schemas/OpenAI.InputItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.InputItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.InputItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.InputItemImageGenToolCall'
@@ -26734,6 +26996,38 @@ components:
         An item representing part of the context for the response to be
         generated by the model. Can contain text, images, and audio inputs,
         as well as previous assistant responses and tool call outputs.
+    OpenAI.InputItemAdditionalToolsItemParam:
+      type: object
+      required:
+        - type
+        - role
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The item type. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        role:
+          type: string
+          enum:
+            - developer
+          description: The role that provided the additional tools. Only `developer` is supported.
+          x-stainless-const: true
+          default: developer
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: A list of additional tools made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -26923,7 +27217,6 @@ components:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -26941,6 +27234,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -26981,6 +27276,9 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
         name:
           type: string
           description: The name of the custom tool being called.
@@ -27191,6 +27489,7 @@ components:
     OpenAI.InputItemFunctionToolCall:
       type: object
       required:
+        - id
         - type
         - call_id
         - name
@@ -27199,6 +27498,7 @@ components:
         id:
           type: string
           description: The unique ID of the function tool call.
+          readOnly: true
         type:
           type: string
           enum:
@@ -27208,6 +27508,9 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
         name:
           type: string
           description: The name of the function to run.
@@ -27415,9 +27718,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.InputItem'
       description: A list of tools available on an MCP server.
@@ -27497,6 +27798,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
         status:
           type: string
           enum:
@@ -27557,6 +27862,77 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.InputItemToolSearchCallItemParam:
+      type: object
+      required:
+        - type
+        - arguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The item type. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
+          description: The arguments supplied to the tool search call.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.InputItem'
+    OpenAI.InputItemToolSearchOutputItemParam:
+      type: object
+      required:
+        - type
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The item type. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by the tool search output.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.InputItem'
     OpenAI.InputItemType:
       anyOf:
         - type: string
@@ -27570,6 +27946,9 @@ components:
             - web_search_call
             - function_call
             - function_call_output
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -27626,44 +28005,6 @@ components:
         The results of a web search tool call. See the
         [web search guide](/docs/guides/tools-web-search) for more information.
       title: Web search tool call
-    OpenAI.InputMessage:
-      type: object
-      required:
-        - type
-        - role
-        - content
-      properties:
-        type:
-          type: string
-          enum:
-            - message
-          description: The type of the message input. Always set to `message`.
-          x-stainless-const: true
-        role:
-          type: string
-          enum:
-            - user
-            - system
-            - developer
-          description: The role of the message input. One of `user`, `system`, or `developer`.
-        status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          description: |-
-            The status of item. One of `in_progress`, `completed`, or
-              `incomplete`. Populated when items are returned via API.
-        content:
-          $ref: '#/components/schemas/OpenAI.InputMessageContentList'
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Item'
-      description: |-
-        A message input to the model with a role indicating instruction following
-        hierarchy. Instructions given with the `developer` or `system` role take
-        precedence over instructions given with the `user` role.
-      title: Input message
     OpenAI.InputMessageContentList:
       type: array
       items:
@@ -27672,43 +28013,6 @@ components:
         A list of one or many input items to the model, containing different content
         types.
       title: Input item content list
-    OpenAI.InputMessageResource:
-      type: object
-      required:
-        - type
-        - role
-        - content
-        - id
-      properties:
-        type:
-          type: string
-          enum:
-            - message
-          description: The type of the message input. Always set to `message`.
-          x-stainless-const: true
-        role:
-          type: string
-          enum:
-            - user
-            - system
-            - developer
-          description: The role of the message input. One of `user`, `system`, or `developer`.
-        status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          description: |-
-            The status of item. One of `in_progress`, `completed`, or
-              `incomplete`. Populated when items are returned via API.
-        content:
-          $ref: '#/components/schemas/OpenAI.InputMessageContentList'
-        id:
-          type: string
-          description: The unique ID of the message input.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.InputParam:
       oneOf:
         - type: string
@@ -27770,7 +28074,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          message: '#/components/schemas/OpenAI.InputMessage'
+          message: '#/components/schemas/OpenAI.ItemInputMessage'
           output_message: '#/components/schemas/OpenAI.ItemOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemFileSearchToolCall'
           computer_call: '#/components/schemas/OpenAI.ItemComputerToolCall'
@@ -27778,6 +28082,9 @@ components:
           web_search_call: '#/components/schemas/OpenAI.ItemWebSearchToolCall'
           function_call: '#/components/schemas/OpenAI.ItemFunctionToolCall'
           function_call_output: '#/components/schemas/OpenAI.ItemFunctionCallOutputItemParam'
+          tool_search_call: '#/components/schemas/OpenAI.ItemToolSearchCallItemParam'
+          tool_search_output: '#/components/schemas/OpenAI.ItemToolSearchOutputItemParam'
+          additional_tools: '#/components/schemas/OpenAI.ItemAdditionalToolsItemParam'
           reasoning: '#/components/schemas/OpenAI.ItemReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemCompactionSummaryItemParam'
           image_generation_call: '#/components/schemas/OpenAI.ItemImageGenToolCall'
@@ -27795,6 +28102,38 @@ components:
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemCustomToolCallOutput'
           custom_tool_call: '#/components/schemas/OpenAI.ItemCustomToolCall'
       description: Content item used to generate a response.
+    OpenAI.ItemAdditionalToolsItemParam:
+      type: object
+      required:
+        - type
+        - role
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The item type. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        role:
+          type: string
+          enum:
+            - developer
+          description: The role that provided the additional tools. Only `developer` is supported.
+          x-stainless-const: true
+          default: developer
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: A list of additional tools made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemApplyPatchToolCallItemParam:
       type: object
       required:
@@ -27984,7 +28323,6 @@ components:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -28002,6 +28340,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -28042,6 +28382,9 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
         name:
           type: string
           description: The name of the custom tool being called.
@@ -28094,14 +28437,17 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          function_call_output: '#/components/schemas/OpenAI.FunctionToolCallOutput'
           message: '#/components/schemas/OpenAI.ItemFieldMessage'
           function_call: '#/components/schemas/OpenAI.ItemFieldFunctionToolCall'
+          tool_search_call: '#/components/schemas/OpenAI.ItemFieldToolSearchCall'
+          tool_search_output: '#/components/schemas/OpenAI.ItemFieldToolSearchOutput'
+          additional_tools: '#/components/schemas/OpenAI.ItemFieldAdditionalTools'
+          function_call_output: '#/components/schemas/OpenAI.ItemFieldFunctionToolCallOutput'
           file_search_call: '#/components/schemas/OpenAI.ItemFieldFileSearchToolCall'
           web_search_call: '#/components/schemas/OpenAI.ItemFieldWebSearchToolCall'
           image_generation_call: '#/components/schemas/OpenAI.ItemFieldImageGenToolCall'
           computer_call: '#/components/schemas/OpenAI.ItemFieldComputerToolCall'
-          computer_call_output: '#/components/schemas/OpenAI.ItemFieldComputerToolCallOutputResource'
+          computer_call_output: '#/components/schemas/OpenAI.ItemFieldComputerToolCallOutput'
           reasoning: '#/components/schemas/OpenAI.ItemFieldReasoningItem'
           compaction: '#/components/schemas/OpenAI.ItemFieldCompactionBody'
           code_interpreter_call: '#/components/schemas/OpenAI.ItemFieldCodeInterpreterToolCall'
@@ -28118,6 +28464,35 @@ components:
           custom_tool_call: '#/components/schemas/OpenAI.ItemFieldCustomToolCall'
           custom_tool_call_output: '#/components/schemas/OpenAI.ItemFieldCustomToolCallOutput'
       description: An item representing a message, tool call, tool output, reasoning, or other response element.
+    OpenAI.ItemFieldAdditionalTools:
+      type: object
+      required:
+        - type
+        - id
+        - role
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The type of the item. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        id:
+          type: string
+          description: The unique ID of the additional tools item.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.MessageRole'
+          description: The role that provided the additional tools.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The additional tool definitions made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
     OpenAI.ItemFieldApplyPatchToolCall:
       type: object
       required:
@@ -28273,7 +28648,6 @@ components:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -28291,6 +28665,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -28311,10 +28687,11 @@ components:
         A tool call to a computer use tool. See the
         [computer use guide](/docs/guides/tools-computer-use) for more information.
       title: Computer tool call
-    OpenAI.ItemFieldComputerToolCallOutputResource:
+    OpenAI.ItemFieldComputerToolCallOutput:
       type: object
       required:
         - type
+        - id
         - call_id
         - output
       properties:
@@ -28328,6 +28705,7 @@ components:
         id:
           type: string
           description: The ID of the computer tool call output.
+          readOnly: true
         call_id:
           type: string
           description: The ID of the computer tool call that produced the output.
@@ -28351,6 +28729,8 @@ components:
               `incomplete`. Populated when input items are returned via API.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
+      description: The output of a computer tool call.
+      title: Computer tool call output
     OpenAI.ItemFieldCustomToolCall:
       type: object
       required:
@@ -28371,6 +28751,9 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
         name:
           type: string
           description: The name of the custom tool being called.
@@ -28487,7 +28870,7 @@ components:
           description: The shell commands and limits that describe how to run the tool call.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallStatus'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
           anyOf:
@@ -28525,7 +28908,7 @@ components:
           description: The unique ID of the shell tool call generated by the model.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallOutputStatusEnum'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
         output:
           type: array
@@ -28546,6 +28929,7 @@ components:
     OpenAI.ItemFieldFunctionToolCall:
       type: object
       required:
+        - id
         - type
         - call_id
         - name
@@ -28554,6 +28938,7 @@ components:
         id:
           type: string
           description: The unique ID of the function tool call.
+          readOnly: true
         type:
           type: string
           enum:
@@ -28563,6 +28948,9 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
         name:
           type: string
           description: The name of the function to run.
@@ -28584,6 +28972,51 @@ components:
         A tool call to run a function. See the
         [function calling guide](/docs/guides/function-calling) for more information.
       title: Function tool call
+    OpenAI.ItemFieldFunctionToolCallOutput:
+      type: object
+      required:
+        - id
+        - type
+        - call_id
+        - output
+      properties:
+        id:
+          type: string
+          description: |-
+            The unique ID of the function tool call output. Populated when this item
+              is returned via API.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - function_call_output
+          description: The type of the function tool call output. Always `function_call_output`.
+          x-stainless-const: true
+        call_id:
+          type: string
+          description: The unique ID of the function tool call generated by the model.
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
+          description: |-
+            The output from the function call generated by your code.
+              Can be a string or an list of output content.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
+      description: The output of a function tool call.
+      title: Function tool call output
     OpenAI.ItemFieldImageGenToolCall:
       type: object
       required:
@@ -28770,9 +29203,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A list of tools available on an MCP server.
@@ -28855,6 +29286,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.MessageContent'
           description: The content of the message
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemField'
       description: A message to or from the model.
@@ -28906,6 +29341,87 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.ItemFieldToolSearchCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The type of the item. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        id:
+          type: string
+          description: The unique ID of the tool search call item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          description: Arguments used for the tool search call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: The status of the tool search call item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
+    OpenAI.ItemFieldToolSearchOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - tools
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The type of the item. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        id:
+          type: string
+          description: The unique ID of the tool search output item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by tool search.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: The status of the tool search output item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemField'
     OpenAI.ItemFieldType:
       anyOf:
         - type: string
@@ -28913,6 +29429,9 @@ components:
           enum:
             - message
             - function_call
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
             - function_call_output
             - file_search_call
             - web_search_call
@@ -29141,6 +29660,7 @@ components:
     OpenAI.ItemFunctionToolCall:
       type: object
       required:
+        - id
         - type
         - call_id
         - name
@@ -29149,6 +29669,7 @@ components:
         id:
           type: string
           description: The unique ID of the function tool call.
+          readOnly: true
         type:
           type: string
           enum:
@@ -29158,6 +29679,9 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
         name:
           type: string
           description: The name of the function to run.
@@ -29212,6 +29736,50 @@ components:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: An image generation request made by the model.
       title: Image generation call
+    OpenAI.ItemInputMessage:
+      type: object
+      required:
+        - type
+        - role
+        - content
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - message
+          description: The type of the message input. Always set to `message`.
+          x-stainless-const: true
+          default: message
+        role:
+          type: string
+          enum:
+            - user
+            - system
+            - developer
+          description: The role of the message input. One of `user`, `system`, or `developer`.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        content:
+          $ref: '#/components/schemas/OpenAI.InputMessageContentList'
+        id:
+          type: string
+          description: The unique ID of the message input.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        A message input to the model with a role indicating instruction following
+        hierarchy. Instructions given with the `developer` or `system` role take
+        precedence over instructions given with the `user` role.
+      title: Input message
     OpenAI.ItemLocalShellToolCall:
       type: object
       required:
@@ -29365,9 +29933,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Item'
       description: A list of tools available on an MCP server.
@@ -29447,6 +30013,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
         status:
           type: string
           enum:
@@ -29519,7 +30089,6 @@ components:
             - item_reference
           description: The type of item to reference. Always `item_reference`.
           x-stainless-const: true
-          default: item_reference
         id:
           type: string
           description: The ID of the item to reference.
@@ -29537,14 +30106,19 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          message: '#/components/schemas/OpenAI.InputMessageResource'
+          message: '#/components/schemas/OpenAI.ItemResourceInputMessage'
           output_message: '#/components/schemas/OpenAI.ItemResourceOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.ItemResourceFileSearchToolCall'
           computer_call: '#/components/schemas/OpenAI.ItemResourceComputerToolCall'
-          computer_call_output: '#/components/schemas/OpenAI.ItemResourceComputerToolCallOutputResource'
+          computer_call_output: '#/components/schemas/OpenAI.ItemResourceComputerToolCallOutput'
           web_search_call: '#/components/schemas/OpenAI.ItemResourceWebSearchToolCall'
-          function_call: '#/components/schemas/OpenAI.ItemResourceFunctionToolCallResource'
-          function_call_output: '#/components/schemas/OpenAI.ItemResourceFunctionToolCallOutputResource'
+          function_call: '#/components/schemas/OpenAI.ItemResourceFunctionToolCall'
+          function_call_output: '#/components/schemas/OpenAI.ItemResourceFunctionToolCallOutput'
+          tool_search_call: '#/components/schemas/OpenAI.ItemResourceToolSearchCall'
+          tool_search_output: '#/components/schemas/OpenAI.ItemResourceToolSearchOutput'
+          additional_tools: '#/components/schemas/OpenAI.ItemResourceAdditionalTools'
+          reasoning: '#/components/schemas/OpenAI.ItemResourceReasoningItem'
+          compaction: '#/components/schemas/OpenAI.ItemResourceCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.ItemResourceImageGenToolCall'
           code_interpreter_call: '#/components/schemas/OpenAI.ItemResourceCodeInterpreterToolCall'
           local_shell_call: '#/components/schemas/OpenAI.ItemResourceLocalShellToolCall'
@@ -29557,7 +30131,38 @@ components:
           mcp_approval_request: '#/components/schemas/OpenAI.ItemResourceMcpApprovalRequest'
           mcp_approval_response: '#/components/schemas/OpenAI.ItemResourceMcpApprovalResponseResource'
           mcp_call: '#/components/schemas/OpenAI.ItemResourceMcpToolCall'
+          custom_tool_call: '#/components/schemas/OpenAI.ItemResourceCustomToolCallResource'
+          custom_tool_call_output: '#/components/schemas/OpenAI.ItemResourceCustomToolCallOutputResource'
       description: Content item used to generate a response.
+    OpenAI.ItemResourceAdditionalTools:
+      type: object
+      required:
+        - type
+        - id
+        - role
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The type of the item. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        id:
+          type: string
+          description: The unique ID of the additional tools item.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.MessageRole'
+          description: The role that provided the additional tools.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The additional tool definitions made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.ItemResourceApplyPatchToolCall:
       type: object
       required:
@@ -29680,13 +30285,39 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: A tool call to run code.
       title: Code interpreter tool call
+    OpenAI.ItemResourceCompactionBody:
+      type: object
+      required:
+        - type
+        - id
+        - encrypted_content
+      properties:
+        type:
+          type: string
+          enum:
+            - compaction
+          description: The type of the item. Always `compaction`.
+          x-stainless-const: true
+          default: compaction
+        id:
+          type: string
+          description: The unique ID of the compaction item.
+        encrypted_content:
+          type: string
+          description: The encrypted content that was produced by compaction.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: A compaction item generated by the [`v1/responses/compact` API](/docs/api-reference/responses/compact).
+      title: Compaction item
     OpenAI.ItemResourceComputerToolCall:
       type: object
       required:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -29704,6 +30335,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -29724,10 +30357,11 @@ components:
         A tool call to a computer use tool. See the
         [computer use guide](/docs/guides/tools-computer-use) for more information.
       title: Computer tool call
-    OpenAI.ItemResourceComputerToolCallOutputResource:
+    OpenAI.ItemResourceComputerToolCallOutput:
       type: object
       required:
         - type
+        - id
         - call_id
         - output
       properties:
@@ -29741,6 +30375,7 @@ components:
         id:
           type: string
           description: The ID of the computer tool call output.
+          readOnly: true
         call_id:
           type: string
           description: The ID of the computer tool call that produced the output.
@@ -29764,6 +30399,91 @@ components:
               `incomplete`. Populated when input items are returned via API.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: The output of a computer tool call.
+      title: Computer tool call output
+    OpenAI.ItemResourceCustomToolCallOutputResource:
+      type: object
+      required:
+        - type
+        - call_id
+        - output
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call_output
+          description: The type of the custom tool call output. Always `custom_tool_call_output`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call output in the OpenAI platform.
+        call_id:
+          type: string
+          description: The call ID, used to map this custom tool call output to a custom tool call.
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
+          description: |-
+            The output from the custom tool call generated by your code.
+              Can be a string or an list of output content.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      title: ResponseCustomToolCallOutputItem
+    OpenAI.ItemResourceCustomToolCallResource:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - input
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call
+          description: The type of the custom tool call. Always `custom_tool_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call in the OpenAI platform.
+        call_id:
+          type: string
+          description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
+        name:
+          type: string
+          description: The name of the custom tool being called.
+        input:
+          type: string
+          description: The input for the custom tool call generated by the model.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      title: ResponseCustomToolCallItem
     OpenAI.ItemResourceFileSearchToolCall:
       type: object
       required:
@@ -29838,7 +30558,7 @@ components:
           description: The shell commands and limits that describe how to run the tool call.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallStatus'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
           anyOf:
@@ -29876,7 +30596,7 @@ components:
           description: The unique ID of the shell tool call generated by the model.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallOutputStatusEnum'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
         output:
           type: array
@@ -29894,9 +30614,56 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: The output of a shell tool call that was emitted.
       title: Shell call output
-    OpenAI.ItemResourceFunctionToolCallOutputResource:
+    OpenAI.ItemResourceFunctionToolCall:
       type: object
       required:
+        - id
+        - type
+        - call_id
+        - name
+        - arguments
+      properties:
+        id:
+          type: string
+          description: The unique ID of the function tool call.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - function_call
+          description: The type of the function tool call. Always `function_call`.
+          x-stainless-const: true
+        call_id:
+          type: string
+          description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
+        name:
+          type: string
+          description: The name of the function to run.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the function.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: |-
+        A tool call to run a function. See the
+        [function calling guide](/docs/guides/function-calling) for more information.
+      title: Function tool call
+    OpenAI.ItemResourceFunctionToolCallOutput:
+      type: object
+      required:
+        - id
         - type
         - call_id
         - output
@@ -29906,6 +30673,7 @@ components:
           description: |-
             The unique ID of the function tool call output. Populated when this item
               is returned via API.
+          readOnly: true
         type:
           type: string
           enum:
@@ -29935,43 +30703,8 @@ components:
               `incomplete`. Populated when items are returned via API.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
-    OpenAI.ItemResourceFunctionToolCallResource:
-      type: object
-      required:
-        - type
-        - call_id
-        - name
-        - arguments
-      properties:
-        id:
-          type: string
-          description: The unique ID of the function tool call.
-        type:
-          type: string
-          enum:
-            - function_call
-          description: The type of the function tool call. Always `function_call`.
-          x-stainless-const: true
-        call_id:
-          type: string
-          description: The unique ID of the function tool call generated by the model.
-        name:
-          type: string
-          description: The name of the function to run.
-        arguments:
-          type: string
-          description: A JSON string of the arguments to pass to the function.
-        status:
-          type: string
-          enum:
-            - in_progress
-            - completed
-            - incomplete
-          description: |-
-            The status of the item. One of `in_progress`, `completed`, or
-              `incomplete`. Populated when items are returned via API.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: The output of a function tool call.
+      title: Function tool call output
     OpenAI.ItemResourceImageGenToolCall:
       type: object
       required:
@@ -30005,6 +30738,50 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: An image generation request made by the model.
       title: Image generation call
+    OpenAI.ItemResourceInputMessage:
+      type: object
+      required:
+        - type
+        - role
+        - content
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - message
+          description: The type of the message input. Always set to `message`.
+          x-stainless-const: true
+          default: message
+        role:
+          type: string
+          enum:
+            - user
+            - system
+            - developer
+          description: The role of the message input. One of `user`, `system`, or `developer`.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        content:
+          $ref: '#/components/schemas/OpenAI.InputMessageContentList'
+        id:
+          type: string
+          description: The unique ID of the message input.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: |-
+        A message input to the model with a role indicating instruction following
+        hierarchy. Instructions given with the `developer` or `system` role take
+        precedence over instructions given with the `user` role.
+      title: Input message
     OpenAI.ItemResourceLocalShellToolCall:
       type: object
       required:
@@ -30158,9 +30935,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: A list of tools available on an MCP server.
@@ -30240,6 +31015,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
         status:
           type: string
           enum:
@@ -30253,6 +31032,134 @@ components:
         - $ref: '#/components/schemas/OpenAI.ItemResource'
       description: An output message from the model.
       title: Output message
+    OpenAI.ItemResourceReasoningItem:
+      type: object
+      required:
+        - type
+        - id
+        - summary
+      properties:
+        type:
+          type: string
+          enum:
+            - reasoning
+          description: The type of the object. Always `reasoning`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique identifier of the reasoning content.
+        encrypted_content:
+          anyOf:
+            - type: string
+            - type: 'null'
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.SummaryTextContent'
+          description: Reasoning summary content.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ReasoningTextContent'
+          description: Reasoning text content.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+      description: |-
+        A description of the chain of thought used by a reasoning model while generating
+        a response. Be sure to include these items in your `input` to the Responses API
+        for subsequent turns of a conversation if you are manually
+        [managing context](/docs/guides/conversation-state).
+      title: Reasoning
+    OpenAI.ItemResourceToolSearchCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The type of the item. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        id:
+          type: string
+          description: The unique ID of the tool search call item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          description: Arguments used for the tool search call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: The status of the tool search call item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
+    OpenAI.ItemResourceToolSearchOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - tools
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The type of the item. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        id:
+          type: string
+          description: The unique ID of the tool search output item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by tool search.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: The status of the tool search output item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ItemResource'
     OpenAI.ItemResourceType:
       anyOf:
         - type: string
@@ -30266,6 +31173,11 @@ components:
             - web_search_call
             - function_call
             - function_call_output
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
+            - reasoning
+            - compaction
             - image_generation_call
             - code_interpreter_call
             - local_shell_call
@@ -30278,6 +31190,8 @@ components:
             - mcp_approval_request
             - mcp_approval_response
             - mcp_call
+            - custom_tool_call
+            - custom_tool_call_output
             - structured_outputs
             - oauth_consent_request
             - memory_search_call
@@ -30341,6 +31255,77 @@ components:
         The results of a web search tool call. See the
         [web search guide](/docs/guides/tools-web-search) for more information.
       title: Web search tool call
+    OpenAI.ItemToolSearchCallItemParam:
+      type: object
+      required:
+        - type
+        - arguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The item type. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
+          description: The arguments supplied to the tool search call.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+    OpenAI.ItemToolSearchOutputItemParam:
+      type: object
+      required:
+        - type
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The item type. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by the tool search output.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
     OpenAI.ItemType:
       anyOf:
         - type: string
@@ -30354,6 +31339,9 @@ components:
             - web_search_call
             - function_call
             - function_call_output
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
             - reasoning
             - compaction
             - image_generation_call
@@ -30445,7 +31433,6 @@ components:
             - keypress
           description: Specifies the event type. For a keypress action, this property is always set to `keypress`.
           x-stainless-const: true
-          default: keypress
         keys:
           type: array
           items:
@@ -30532,23 +31519,10 @@ components:
             - local
           description: The environment type. Always `local`.
           x-stainless-const: true
-          default: local
       allOf:
         - $ref: '#/components/schemas/OpenAI.FunctionShellCallEnvironment'
       description: Represents the use of a local environment to perform shell actions.
       title: Local Environment
-    OpenAI.LocalShellCallOutputStatusEnum:
-      type: string
-      enum:
-        - in_progress
-        - completed
-        - incomplete
-    OpenAI.LocalShellCallStatus:
-      type: string
-      enum:
-        - in_progress
-        - completed
-        - incomplete
     OpenAI.LocalShellExecAction:
       type: object
       required:
@@ -30599,7 +31573,6 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
-          default: local_shell
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -30745,6 +31718,9 @@ components:
                 - never
             - type: 'null'
           default: always
+        defer_loading:
+          type: boolean
+          description: Whether this MCP tool is deferred and discovered via tool search.
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
@@ -30804,6 +31780,7 @@ components:
           refusal: '#/components/schemas/OpenAI.MessageContentRefusalContent'
           input_image: '#/components/schemas/OpenAI.MessageContentInputImageContent'
           input_file: '#/components/schemas/OpenAI.MessageContentInputFileContent'
+          summary_text: '#/components/schemas/OpenAI.SummaryTextContent'
       description: A content part that makes up an input or output item.
     OpenAI.MessageContentInputFileContent:
       type: object
@@ -30824,13 +31801,17 @@ components:
         filename:
           type: string
           description: The name of the file to be sent to the model.
+        file_data:
+          type: string
+          description: The content of the file to be sent to the model.
         file_url:
           type: string
           format: uri
           description: The URL of the file to be sent to the model.
-        file_data:
-          type: string
-          description: The content of the file to be sent to the model.
+        detail:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FileInputDetail'
+          description: The detail level of the file to be sent to the model. Use `low` for the default rendering behavior, or `high` to render the file at higher quality. Defaults to `low`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: A file input to the model.
@@ -30860,7 +31841,7 @@ components:
         detail:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageDetail'
-          description: The detail level of the image to be sent to the model. One of `high`, `low`, or `auto`. Defaults to `auto`.
+          description: The detail level of the image to be sent to the model. One of `high`, `low`, `auto`, or `original`. Defaults to `auto`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.MessageContent'
       description: An image input to the model. Learn about [image inputs](/docs/guides/vision).
@@ -30970,6 +31951,15 @@ components:
             - input_image
             - computer_screenshot
             - input_file
+    OpenAI.MessagePhase:
+      type: string
+      enum:
+        - commentary
+        - final_answer
+      description: |-
+        Labels an `assistant` message as intermediate commentary (`commentary`) or the final answer (`final_answer`).
+        For models like `gpt-5.3-codex` and beyond, when sending follow-up requests, preserve and resend
+        phase on all assistant messages — dropping it can degrade performance. Not used for user messages.
     OpenAI.MessageRole:
       type: string
       enum:
@@ -31027,6 +32017,125 @@ components:
       anyOf:
         - type: string
         - $ref: '#/components/schemas/OpenAI.ChatModel'
+    OpenAI.Moderation:
+      type: object
+      required:
+        - input
+        - output
+      properties:
+        input:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+          description: Moderation for the response input.
+        output:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+          description: Moderation for the response output.
+      description: Moderation results or errors for the response input and output.
+      title: Moderation
+    OpenAI.ModerationEntry:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ModerationEntryType'
+      discriminator:
+        propertyName: type
+        mapping:
+          moderation_result: '#/components/schemas/OpenAI.ModerationResultBody'
+          error: '#/components/schemas/OpenAI.ModerationErrorBody'
+      description: Moderation results or an error for a response moderation check.
+    OpenAI.ModerationEntryType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - moderation_result
+            - error
+    OpenAI.ModerationErrorBody:
+      type: object
+      required:
+        - type
+        - code
+        - message
+      properties:
+        type:
+          type: string
+          enum:
+            - error
+          description: The object type, which was always `error` for moderation failures.
+          x-stainless-const: true
+        code:
+          type: string
+          description: The error code.
+        message:
+          type: string
+          description: The error message.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+      description: An error produced while attempting moderation for the response input or output.
+      title: Moderation error
+    OpenAI.ModerationInputType:
+      type: string
+      enum:
+        - text
+        - image
+    OpenAI.ModerationParam:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          type: string
+          description: The moderation model to use for moderated completions, e.g. 'omni-moderation-latest'.
+      description: Configuration for running moderation on the input and output of this response.
+    OpenAI.ModerationResultBody:
+      type: object
+      required:
+        - type
+        - model
+        - flagged
+        - categories
+        - category_scores
+        - category_applied_input_types
+      properties:
+        type:
+          type: string
+          enum:
+            - moderation_result
+          description: The object type, which was always `moderation_result` for successful moderation results.
+          x-stainless-const: true
+        model:
+          type: string
+          description: The moderation model that produced this result.
+        flagged:
+          type: boolean
+          description: A boolean indicating whether the content was flagged by any category.
+        categories:
+          type: object
+          unevaluatedProperties:
+            type: boolean
+          description: A dictionary of moderation categories to booleans, True if the input is flagged under this category.
+          x-oaiTypeLabel: map
+        category_scores:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/OpenAI.numeric'
+          description: A dictionary of moderation categories to scores.
+          x-oaiTypeLabel: map
+        category_applied_input_types:
+          type: object
+          unevaluatedProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/OpenAI.ModerationInputType'
+          description: Which modalities of input are reflected by the score for each category.
+          x-oaiTypeLabel: map
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ModerationEntry'
+      description: A moderation result produced for the response input or output.
+      title: Moderation result
     OpenAI.MoveParam:
       type: object
       required:
@@ -31040,7 +32149,6 @@ components:
             - move
           description: Specifies the event type. For a move action, this property is always set to `move`.
           x-stainless-const: true
-          default: move
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -31049,10 +32157,50 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The y-coordinate to move to.
+        keys:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A mouse move action.
       title: Move
+    OpenAI.NamespaceToolParam:
+      type: object
+      required:
+        - type
+        - name
+        - description
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - namespace
+          description: The type of the tool. Always `namespace`.
+          x-stainless-const: true
+        name:
+          type: string
+          minLength: 1
+          description: The namespace name used in tool calls (for example, `crm`).
+        description:
+          type: string
+          minLength: 1
+          description: A description of the namespace shown to the model.
+        tools:
+          type: array
+          items:
+            anyOf:
+              - $ref: '#/components/schemas/OpenAI.FunctionToolParam'
+              - $ref: '#/components/schemas/OpenAI.CustomToolParam'
+          minItems: 1
+          description: The function/custom tools available inside this namespace.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Groups function/custom tools under a shared namespace.
+      title: Namespace
     OpenAI.OutputContent:
       type: object
       required:
@@ -31194,13 +32342,19 @@ components:
           output_message: '#/components/schemas/OpenAI.OutputItemOutputMessage'
           file_search_call: '#/components/schemas/OpenAI.OutputItemFileSearchToolCall'
           function_call: '#/components/schemas/OpenAI.OutputItemFunctionToolCall'
+          function_call_output: '#/components/schemas/OpenAI.OutputItemFunctionToolCallOutput'
           web_search_call: '#/components/schemas/OpenAI.OutputItemWebSearchToolCall'
           computer_call: '#/components/schemas/OpenAI.OutputItemComputerToolCall'
+          computer_call_output: '#/components/schemas/OpenAI.OutputItemComputerToolCallOutput'
           reasoning: '#/components/schemas/OpenAI.OutputItemReasoningItem'
+          tool_search_call: '#/components/schemas/OpenAI.OutputItemToolSearchCall'
+          tool_search_output: '#/components/schemas/OpenAI.OutputItemToolSearchOutput'
+          additional_tools: '#/components/schemas/OpenAI.OutputItemAdditionalTools'
           compaction: '#/components/schemas/OpenAI.OutputItemCompactionBody'
           image_generation_call: '#/components/schemas/OpenAI.OutputItemImageGenToolCall'
           code_interpreter_call: '#/components/schemas/OpenAI.OutputItemCodeInterpreterToolCall'
           local_shell_call: '#/components/schemas/OpenAI.OutputItemLocalShellToolCall'
+          local_shell_call_output: '#/components/schemas/OpenAI.OutputItemLocalShellToolCallOutput'
           shell_call: '#/components/schemas/OpenAI.OutputItemFunctionShellCall'
           shell_call_output: '#/components/schemas/OpenAI.OutputItemFunctionShellCallOutput'
           apply_patch_call: '#/components/schemas/OpenAI.OutputItemApplyPatchToolCall'
@@ -31208,7 +32362,38 @@ components:
           mcp_call: '#/components/schemas/OpenAI.OutputItemMcpToolCall'
           mcp_list_tools: '#/components/schemas/OpenAI.OutputItemMcpListTools'
           mcp_approval_request: '#/components/schemas/OpenAI.OutputItemMcpApprovalRequest'
-          custom_tool_call: '#/components/schemas/OpenAI.OutputItemCustomToolCall'
+          mcp_approval_response: '#/components/schemas/OpenAI.OutputItemMcpApprovalResponseResource'
+          custom_tool_call: '#/components/schemas/OpenAI.OutputItemCustomToolCallResource'
+          custom_tool_call_output: '#/components/schemas/OpenAI.OutputItemCustomToolCallOutputResource'
+    OpenAI.OutputItemAdditionalTools:
+      type: object
+      required:
+        - type
+        - id
+        - role
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The type of the item. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        id:
+          type: string
+          description: The unique ID of the additional tools item.
+        role:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.MessageRole'
+          description: The role that provided the additional tools.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The additional tool definitions made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
     OpenAI.OutputItemApplyPatchToolCall:
       type: object
       required:
@@ -31364,7 +32549,6 @@ components:
         - type
         - id
         - call_id
-        - action
         - pending_safety_checks
         - status
       properties:
@@ -31382,6 +32566,8 @@ components:
           description: An identifier used when responding to the tool call with output.
         action:
           $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
         pending_safety_checks:
           type: array
           items:
@@ -31402,13 +32588,99 @@ components:
         A tool call to a computer use tool. See the
         [computer use guide](/docs/guides/tools-computer-use) for more information.
       title: Computer tool call
-    OpenAI.OutputItemCustomToolCall:
+    OpenAI.OutputItemComputerToolCallOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - output
+      properties:
+        type:
+          type: string
+          enum:
+            - computer_call_output
+          description: The type of the computer tool call output. Always `computer_call_output`.
+          x-stainless-const: true
+          default: computer_call_output
+        id:
+          type: string
+          description: The ID of the computer tool call output.
+          readOnly: true
+        call_id:
+          type: string
+          description: The ID of the computer tool call that produced the output.
+        acknowledged_safety_checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
+          description: |-
+            The safety checks reported by the API that have been acknowledged by the
+              developer.
+        output:
+          $ref: '#/components/schemas/OpenAI.ComputerScreenshotImage'
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the message input. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when input items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a computer tool call.
+      title: Computer tool call output
+    OpenAI.OutputItemCustomToolCallOutputResource:
+      type: object
+      required:
+        - type
+        - call_id
+        - output
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call_output
+          description: The type of the custom tool call output. Always `custom_tool_call_output`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call output in the OpenAI platform.
+        call_id:
+          type: string
+          description: The call ID, used to map this custom tool call output to a custom tool call.
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
+          description: |-
+            The output from the custom tool call generated by your code.
+              Can be a string or an list of output content.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      title: ResponseCustomToolCallOutputItem
+    OpenAI.OutputItemCustomToolCallResource:
       type: object
       required:
         - type
         - call_id
         - name
         - input
+        - status
       properties:
         type:
           type: string
@@ -31422,16 +32694,27 @@ components:
         call_id:
           type: string
           description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
         name:
           type: string
           description: The name of the custom tool being called.
         input:
           type: string
           description: The input for the custom tool call generated by the model.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
-      description: A call to a custom tool created by the model.
-      title: Custom tool call
+      title: ResponseCustomToolCallItem
     OpenAI.OutputItemFileSearchToolCall:
       type: object
       required:
@@ -31506,7 +32789,7 @@ components:
           description: The shell commands and limits that describe how to run the tool call.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallStatus'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallStatus'
           description: The status of the shell call. One of `in_progress`, `completed`, or `incomplete`.
         environment:
           anyOf:
@@ -31544,7 +32827,7 @@ components:
           description: The unique ID of the shell tool call generated by the model.
         status:
           allOf:
-            - $ref: '#/components/schemas/OpenAI.LocalShellCallOutputStatusEnum'
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputStatusEnum'
           description: The status of the shell call output. One of `in_progress`, `completed`, or `incomplete`.
         output:
           type: array
@@ -31565,6 +32848,7 @@ components:
     OpenAI.OutputItemFunctionToolCall:
       type: object
       required:
+        - id
         - type
         - call_id
         - name
@@ -31573,6 +32857,7 @@ components:
         id:
           type: string
           description: The unique ID of the function tool call.
+          readOnly: true
         type:
           type: string
           enum:
@@ -31582,6 +32867,9 @@ components:
         call_id:
           type: string
           description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
         name:
           type: string
           description: The name of the function to run.
@@ -31603,6 +32891,51 @@ components:
         A tool call to run a function. See the
         [function calling guide](/docs/guides/function-calling) for more information.
       title: Function tool call
+    OpenAI.OutputItemFunctionToolCallOutput:
+      type: object
+      required:
+        - id
+        - type
+        - call_id
+        - output
+      properties:
+        id:
+          type: string
+          description: |-
+            The unique ID of the function tool call output. Populated when this item
+              is returned via API.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - function_call_output
+          description: The type of the function tool call output. Always `function_call_output`.
+          x-stainless-const: true
+        call_id:
+          type: string
+          description: The unique ID of the function tool call generated by the model.
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
+          description: |-
+            The output from the function call generated by your code.
+              Can be a string or an list of output content.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a function tool call.
+      title: Function tool call output
     OpenAI.OutputItemImageGenToolCall:
       type: object
       required:
@@ -31670,6 +33003,37 @@ components:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A tool call to run a command on the local shell.
       title: Local shell call
+    OpenAI.OutputItemLocalShellToolCallOutput:
+      type: object
+      required:
+        - type
+        - id
+        - output
+      properties:
+        type:
+          type: string
+          enum:
+            - local_shell_call_output
+          description: The type of the local shell tool call output. Always `local_shell_call_output`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the local shell tool call generated by the model.
+        output:
+          type: string
+          description: A JSON string of the output of the local shell tool call.
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: The output of a local shell tool call.
+      title: Local shell call output
     OpenAI.OutputItemMcpApprovalRequest:
       type: object
       required:
@@ -31701,6 +33065,37 @@ components:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A request for human approval of a tool invocation.
       title: MCP approval request
+    OpenAI.OutputItemMcpApprovalResponseResource:
+      type: object
+      required:
+        - type
+        - id
+        - approval_request_id
+        - approve
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp_approval_response
+          description: The type of the item. Always `mcp_approval_response`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the approval response
+        approval_request_id:
+          type: string
+          description: The ID of the approval request being answered.
+        approve:
+          type: boolean
+          description: Whether the request was approved.
+        reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+      description: A response to an MCP approval request.
+      title: MCP approval response
     OpenAI.OutputItemMcpListTools:
       type: object
       required:
@@ -31727,9 +33122,7 @@ components:
             $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
           description: The tools available on the server.
         error:
-          anyOf:
-            - type: string
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A list of tools available on an MCP server.
@@ -31809,6 +33202,10 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.OutputMessageContent'
           description: The content of the output message.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
         status:
           type: string
           enum:
@@ -31869,6 +33266,87 @@ components:
         for subsequent turns of a conversation if you are manually
         [managing context](/docs/guides/conversation-state).
       title: Reasoning
+    OpenAI.OutputItemToolSearchCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - arguments
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The type of the item. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        id:
+          type: string
+          description: The unique ID of the tool search call item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          description: Arguments used for the tool search call.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallStatus'
+          description: The status of the tool search call item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
+    OpenAI.OutputItemToolSearchOutput:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - execution
+        - tools
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The type of the item. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        id:
+          type: string
+          description: The unique ID of the tool search output item.
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by tool search.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallOutputStatusEnum'
+          description: The status of the tool search output item that was recorded.
+        created_by:
+          type: string
+          description: The identifier of the actor that created the item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.OutputItem'
     OpenAI.OutputItemType:
       anyOf:
         - type: string
@@ -31877,13 +33355,19 @@ components:
             - output_message
             - file_search_call
             - function_call
+            - function_call_output
             - web_search_call
             - computer_call
+            - computer_call_output
             - reasoning
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
             - compaction
             - image_generation_call
             - code_interpreter_call
             - local_shell_call
+            - local_shell_call_output
             - shell_call
             - shell_call_output
             - apply_patch_call
@@ -31891,7 +33375,9 @@ components:
             - mcp_call
             - mcp_list_tools
             - mcp_approval_request
+            - mcp_approval_response
             - custom_tool_call
+            - custom_tool_call_output
             - structured_outputs
             - oauth_consent_request
             - memory_search_call
@@ -32044,6 +33530,11 @@ components:
       description: |-
         Reference to a prompt template and its variables.
         [Learn more](/docs/guides/text?api-mode=responses#reusable-prompts).
+    OpenAI.PromptCacheRetentionEnum:
+      type: string
+      enum:
+        - in_memory
+        - 24h
     OpenAI.RankerVersionType:
       type: string
       enum:
@@ -32064,6 +33555,81 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.HybridSearchOptions'
           description: Weights that control how reciprocal rank fusion balances semantic embedding matches versus sparse keyword matches when hybrid search is enabled.
+    OpenAI.RealtimeMCPError:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.RealtimeMcpErrorType'
+      discriminator:
+        propertyName: type
+        mapping:
+          protocol_error: '#/components/schemas/OpenAI.RealtimeMCPProtocolError'
+          tool_execution_error: '#/components/schemas/OpenAI.RealtimeMCPToolExecutionError'
+          http_error: '#/components/schemas/OpenAI.RealtimeMCPHTTPError'
+    OpenAI.RealtimeMCPHTTPError:
+      type: object
+      required:
+        - type
+        - code
+        - message
+      properties:
+        type:
+          type: string
+          enum:
+            - http_error
+          x-stainless-const: true
+        code:
+          $ref: '#/components/schemas/OpenAI.integer'
+        message:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+      title: Realtime MCP HTTP error
+    OpenAI.RealtimeMCPProtocolError:
+      type: object
+      required:
+        - type
+        - code
+        - message
+      properties:
+        type:
+          type: string
+          enum:
+            - protocol_error
+          x-stainless-const: true
+        code:
+          $ref: '#/components/schemas/OpenAI.integer'
+        message:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+      title: Realtime MCP protocol error
+    OpenAI.RealtimeMCPToolExecutionError:
+      type: object
+      required:
+        - type
+        - message
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_execution_error
+          x-stainless-const: true
+        message:
+          type: string
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+      title: Realtime MCP tool execution error
+    OpenAI.RealtimeMcpErrorType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - protocol_error
+            - tool_execution_error
+            - http_error
     OpenAI.Reasoning:
       type: object
       properties:
@@ -32169,9 +33735,10 @@ components:
           deprecated: true
         safety_identifier:
           type: string
+          maxLength: 64
           description: |-
             A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-              The IDs should be a string that uniquely identifies each user. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+              The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
         prompt_cache_key:
           type: string
           description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
@@ -32181,7 +33748,7 @@ components:
           anyOf:
             - type: string
               enum:
-                - in-memory
+                - in_memory
                 - 24h
             - type: 'null'
         previous_response_id:
@@ -32198,10 +33765,6 @@ components:
         background:
           anyOf:
             - type: boolean
-            - type: 'null'
-        max_output_tokens:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         max_tool_calls:
           anyOf:
@@ -32290,6 +33853,10 @@ components:
             - type: 'null'
         usage:
           $ref: '#/components/schemas/OpenAI.ResponseUsage'
+        moderation:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Moderation'
+            - type: 'null'
         parallel_tool_calls:
           type: boolean
           description: Whether to allow the model to run tool calls in parallel.
@@ -32297,6 +33864,10 @@ components:
         conversation:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ConversationReference'
+            - type: 'null'
+        max_output_tokens:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         agent:
           allOf:
@@ -32343,6 +33914,8 @@ components:
           type: string
           contentEncoding: base64
           description: A chunk of Base64 encoded response audio bytes.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial audio response.
       x-oaiMeta:
         name: response.audio.delta
@@ -32370,6 +33943,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the delta.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the audio response is complete.
       x-oaiMeta:
         name: response.audio.done
@@ -32400,6 +33975,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial transcript of audio.
       x-oaiMeta:
         name: response.audio.transcript.delta
@@ -32427,6 +34004,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the full audio transcript is completed.
       x-oaiMeta:
         name: response.audio.transcript.done
@@ -32466,6 +34045,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event, used to order streaming events.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial code snippet is streamed by the code interpreter.
       x-oaiMeta:
         name: response.code_interpreter_call_code.delta
@@ -32507,6 +34088,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event, used to order streaming events.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the code snippet is finalized by the code interpreter.
       x-oaiMeta:
         name: response.code_interpreter_call_code.done
@@ -32544,6 +34127,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event, used to order streaming events.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the code interpreter call is completed.
       x-oaiMeta:
         name: response.code_interpreter_call.completed
@@ -32580,6 +34165,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event, used to order streaming events.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a code interpreter call is in progress.
       x-oaiMeta:
         name: response.code_interpreter_call.in_progress
@@ -32616,6 +34203,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event, used to order streaming events.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the code interpreter is actively interpreting the code snippet.
       x-oaiMeta:
         name: response.code_interpreter_call.interpreting
@@ -32648,6 +34237,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number for this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the model response is complete.
       x-oaiMeta:
         name: response.completed
@@ -32742,6 +34333,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a new content part is added.
       x-oaiMeta:
         name: response.content_part.added
@@ -32794,6 +34387,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.OutputContent'
           description: The content part that is done.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a content part is done.
       x-oaiMeta:
         name: response.content_part.done
@@ -32832,6 +34427,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number for this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: An event that is emitted when a response is created.
       x-oaiMeta:
         name: response.created
@@ -32903,6 +34500,8 @@ components:
         delta:
           type: string
           description: The incremental input data (delta) for the custom tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Event representing a delta (partial update) to the input of a custom tool call.
       title: ResponseCustomToolCallInputDelta
       x-oaiMeta:
@@ -32944,6 +34543,8 @@ components:
         input:
           type: string
           description: The complete input data for the custom tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Event indicating that input for a custom tool call is complete.
       title: ResponseCustomToolCallInputDone
       x-oaiMeta:
@@ -33020,6 +34621,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an error occurs.
       x-oaiMeta:
         name: error
@@ -33053,6 +34656,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Response'
           description: The response that failed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: An event that is emitted when a response fails.
       x-oaiMeta:
         name: response.failed
@@ -33118,6 +34723,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a file search call is completed (results found).
       x-oaiMeta:
         name: response.file_search_call.completed
@@ -33154,6 +34761,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a file search call is initiated.
       x-oaiMeta:
         name: response.file_search_call.in_progress
@@ -33190,6 +34799,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a file search is currently searching.
       x-oaiMeta:
         name: response.file_search_call.searching
@@ -33305,6 +34916,8 @@ components:
         delta:
           type: string
           description: The function-call arguments delta that is added.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial function-call arguments delta.
       x-oaiMeta:
         name: response.function_call_arguments.delta
@@ -33349,6 +34962,8 @@ components:
         arguments:
           type: string
           description: The function-call arguments.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when function-call arguments are finalized.
       x-oaiMeta:
         name: response.function_call_arguments.done
@@ -33387,6 +35002,8 @@ components:
         item_id:
           type: string
           description: The unique identifier of the image generation item being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an image generation tool call has completed and the final image is available.
       title: ResponseImageGenCallCompletedEvent
       x-oaiMeta:
@@ -33424,6 +35041,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the image generation item being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an image generation tool call is actively generating an image (intermediate state).
       title: ResponseImageGenCallGeneratingEvent
       x-oaiMeta:
@@ -33461,6 +35080,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the image generation item being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an image generation tool call is in progress.
       title: ResponseImageGenCallInProgressEvent
       x-oaiMeta:
@@ -33507,6 +35128,8 @@ components:
         partial_image_b64:
           type: string
           description: Base64-encoded partial image data, suitable for rendering as an image.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial image is available during image generation streaming.
       title: ResponseImageGenCallPartialImageEvent
       x-oaiMeta:
@@ -33542,6 +35165,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the response is in progress.
       x-oaiMeta:
         name: response.in_progress
@@ -33613,6 +35238,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: An event that is emitted when a response finishes as incomplete.
       x-oaiMeta:
         name: response.incomplete
@@ -33670,7 +35297,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.ResponseLogProbTopLogprobs'
-          description: The log probability of the top 20 most likely tokens.
+          description: The log probabilities of up to 20 of the most likely tokens.
       description: |-
         A logprob is the logarithmic probability that the model assigns to producing
         a particular token at a given position in the sequence. Less-negative (higher)
@@ -33711,6 +35338,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the arguments of an MCP tool call.
       title: ResponseMCPCallArgumentsDeltaEvent
       x-oaiMeta:
@@ -33753,6 +35382,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the arguments for an MCP tool call are finalized.
       title: ResponseMCPCallArgumentsDoneEvent
       x-oaiMeta:
@@ -33791,6 +35422,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an MCP  tool call has completed successfully.
       title: ResponseMCPCallCompletedEvent
       x-oaiMeta:
@@ -33828,6 +35461,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an MCP  tool call has failed.
       title: ResponseMCPCallFailedEvent
       x-oaiMeta:
@@ -33865,6 +35500,8 @@ components:
         item_id:
           type: string
           description: The unique identifier of the MCP tool call item being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an MCP  tool call is in progress.
       title: ResponseMCPCallInProgressEvent
       x-oaiMeta:
@@ -33902,6 +35539,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the list of available MCP tools has been successfully retrieved.
       title: ResponseMCPListToolsCompletedEvent
       x-oaiMeta:
@@ -33939,6 +35578,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the attempt to list available MCP tools has failed.
       title: ResponseMCPListToolsFailedEvent
       x-oaiMeta:
@@ -33976,6 +35617,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when the system is in the process of retrieving the list of available MCP tools.
       title: ResponseMCPListToolsInProgressEvent
       x-oaiMeta:
@@ -34014,6 +35657,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.OutputItem'
           description: The output item that was added.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a new output item is added.
       x-oaiMeta:
         name: response.output_item.added
@@ -34057,6 +35702,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.OutputItem'
           description: The output item that was marked done.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an output item is marked done.
       x-oaiMeta:
         name: response.output_item.done
@@ -34120,6 +35767,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.Annotation'
           description: The annotation object being added. (See annotation schema for details.)
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when an annotation is added to output text content.
       title: ResponseOutputTextAnnotationAddedEvent
       x-oaiMeta:
@@ -34176,6 +35825,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number for this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a response is queued and waiting to be processed.
       title: ResponseQueuedEvent
       x-oaiMeta:
@@ -34227,6 +35878,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ResponseReasoningSummaryPartAddedEventPart'
           description: The summary part that was added.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a new reasoning summary part is added.
       x-oaiMeta:
         name: response.reasoning_summary_part.added
@@ -34291,6 +35944,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ResponseReasoningSummaryPartDoneEventPart'
           description: The completed summary part.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a reasoning summary part is completed.
       x-oaiMeta:
         name: response.reasoning_summary_part.done
@@ -34356,6 +36011,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning summary text.
       x-oaiMeta:
         name: response.reasoning_summary_text.delta
@@ -34405,6 +36062,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a reasoning summary text is completed.
       x-oaiMeta:
         name: response.reasoning_summary_text.done
@@ -34454,6 +36113,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning text.
       x-oaiMeta:
         name: response.reasoning_text.delta
@@ -34501,6 +36162,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a reasoning text is completed.
       x-oaiMeta:
         name: response.reasoning_text.done
@@ -34548,6 +36211,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial refusal text.
       x-oaiMeta:
         name: response.refusal.delta
@@ -34595,6 +36260,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of this event.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when refusal text is finalized.
       x-oaiMeta:
         name: response.refusal.done
@@ -34608,6 +36275,127 @@ components:
             "refusal": "final refusal text",
             "sequence_number": 1
           }
+    OpenAI.ResponseStreamEvent:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ResponseStreamEventType'
+      discriminator:
+        propertyName: type
+        mapping:
+          response.audio.transcript.delta: '#/components/schemas/OpenAI.ResponseAudioTranscriptDeltaEvent'
+          response.code_interpreter_call_code.delta: '#/components/schemas/OpenAI.ResponseCodeInterpreterCallCodeDeltaEvent'
+          response.code_interpreter_call.in_progress: '#/components/schemas/OpenAI.ResponseCodeInterpreterCallInProgressEvent'
+          response.code_interpreter_call.interpreting: '#/components/schemas/OpenAI.ResponseCodeInterpreterCallInterpretingEvent'
+          response.content_part.added: '#/components/schemas/OpenAI.ResponseContentPartAddedEvent'
+          response.created: '#/components/schemas/OpenAI.ResponseCreatedEvent'
+          error: '#/components/schemas/OpenAI.ResponseErrorEvent'
+          response.file_search_call.in_progress: '#/components/schemas/OpenAI.ResponseFileSearchCallInProgressEvent'
+          response.file_search_call.searching: '#/components/schemas/OpenAI.ResponseFileSearchCallSearchingEvent'
+          response.function_call_arguments.delta: '#/components/schemas/OpenAI.ResponseFunctionCallArgumentsDeltaEvent'
+          response.in_progress: '#/components/schemas/OpenAI.ResponseInProgressEvent'
+          response.failed: '#/components/schemas/OpenAI.ResponseFailedEvent'
+          response.incomplete: '#/components/schemas/OpenAI.ResponseIncompleteEvent'
+          response.output_item.added: '#/components/schemas/OpenAI.ResponseOutputItemAddedEvent'
+          response.reasoning_summary_part.added: '#/components/schemas/OpenAI.ResponseReasoningSummaryPartAddedEvent'
+          response.reasoning_summary_text.delta: '#/components/schemas/OpenAI.ResponseReasoningSummaryTextDeltaEvent'
+          response.reasoning_text.delta: '#/components/schemas/OpenAI.ResponseReasoningTextDeltaEvent'
+          response.refusal.delta: '#/components/schemas/OpenAI.ResponseRefusalDeltaEvent'
+          response.output_text.delta: '#/components/schemas/OpenAI.ResponseTextDeltaEvent'
+          response.web_search_call.in_progress: '#/components/schemas/OpenAI.ResponseWebSearchCallInProgressEvent'
+          response.web_search_call.searching: '#/components/schemas/OpenAI.ResponseWebSearchCallSearchingEvent'
+          response.image_generation_call.generating: '#/components/schemas/OpenAI.ResponseImageGenCallGeneratingEvent'
+          response.image_generation_call.in_progress: '#/components/schemas/OpenAI.ResponseImageGenCallInProgressEvent'
+          response.image_generation_call.partial_image: '#/components/schemas/OpenAI.ResponseImageGenCallPartialImageEvent'
+          response.mcp_call_arguments.delta: '#/components/schemas/OpenAI.ResponseMCPCallArgumentsDeltaEvent'
+          response.mcp_call.failed: '#/components/schemas/OpenAI.ResponseMCPCallFailedEvent'
+          response.mcp_call.in_progress: '#/components/schemas/OpenAI.ResponseMCPCallInProgressEvent'
+          response.mcp_list_tools.failed: '#/components/schemas/OpenAI.ResponseMCPListToolsFailedEvent'
+          response.mcp_list_tools.in_progress: '#/components/schemas/OpenAI.ResponseMCPListToolsInProgressEvent'
+          response.output_text.annotation.added: '#/components/schemas/OpenAI.ResponseOutputTextAnnotationAddedEvent'
+          response.queued: '#/components/schemas/OpenAI.ResponseQueuedEvent'
+          response.custom_tool_call_input.delta: '#/components/schemas/OpenAI.ResponseCustomToolCallInputDeltaEvent'
+          response.audio.done: '#/components/schemas/OpenAI.ResponseAudioDoneEvent'
+          response.audio.transcript.done: '#/components/schemas/OpenAI.ResponseAudioTranscriptDoneEvent'
+          response.code_interpreter_call_code.done: '#/components/schemas/OpenAI.ResponseCodeInterpreterCallCodeDoneEvent'
+          response.code_interpreter_call.completed: '#/components/schemas/OpenAI.ResponseCodeInterpreterCallCompletedEvent'
+          response.completed: '#/components/schemas/OpenAI.ResponseCompletedEvent'
+          response.content_part.done: '#/components/schemas/OpenAI.ResponseContentPartDoneEvent'
+          response.file_search_call.completed: '#/components/schemas/OpenAI.ResponseFileSearchCallCompletedEvent'
+          response.function_call_arguments.done: '#/components/schemas/OpenAI.ResponseFunctionCallArgumentsDoneEvent'
+          response.output_item.done: '#/components/schemas/OpenAI.ResponseOutputItemDoneEvent'
+          response.reasoning_summary_part.done: '#/components/schemas/OpenAI.ResponseReasoningSummaryPartDoneEvent'
+          response.reasoning_summary_text.done: '#/components/schemas/OpenAI.ResponseReasoningSummaryTextDoneEvent'
+          response.reasoning_text.done: '#/components/schemas/OpenAI.ResponseReasoningTextDoneEvent'
+          response.refusal.done: '#/components/schemas/OpenAI.ResponseRefusalDoneEvent'
+          response.output_text.done: '#/components/schemas/OpenAI.ResponseTextDoneEvent'
+          response.web_search_call.completed: '#/components/schemas/OpenAI.ResponseWebSearchCallCompletedEvent'
+          response.image_generation_call.completed: '#/components/schemas/OpenAI.ResponseImageGenCallCompletedEvent'
+          response.mcp_call_arguments.done: '#/components/schemas/OpenAI.ResponseMCPCallArgumentsDoneEvent'
+          response.mcp_call.completed: '#/components/schemas/OpenAI.ResponseMCPCallCompletedEvent'
+          response.mcp_list_tools.completed: '#/components/schemas/OpenAI.ResponseMCPListToolsCompletedEvent'
+          response.custom_tool_call_input.done: '#/components/schemas/OpenAI.ResponseCustomToolCallInputDoneEvent'
+          response.audio.delta: '#/components/schemas/OpenAI.ResponseAudioDeltaEvent'
+    OpenAI.ResponseStreamEventType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - response.audio.delta
+            - response.audio.done
+            - response.audio.transcript.delta
+            - response.audio.transcript.done
+            - response.code_interpreter_call_code.delta
+            - response.code_interpreter_call_code.done
+            - response.code_interpreter_call.completed
+            - response.code_interpreter_call.in_progress
+            - response.code_interpreter_call.interpreting
+            - response.completed
+            - response.content_part.added
+            - response.content_part.done
+            - response.created
+            - error
+            - response.file_search_call.completed
+            - response.file_search_call.in_progress
+            - response.file_search_call.searching
+            - response.function_call_arguments.delta
+            - response.function_call_arguments.done
+            - response.in_progress
+            - response.failed
+            - response.incomplete
+            - response.output_item.added
+            - response.output_item.done
+            - response.reasoning_summary_part.added
+            - response.reasoning_summary_part.done
+            - response.reasoning_summary_text.delta
+            - response.reasoning_summary_text.done
+            - response.reasoning_text.delta
+            - response.reasoning_text.done
+            - response.refusal.delta
+            - response.refusal.done
+            - response.output_text.delta
+            - response.output_text.done
+            - response.web_search_call.completed
+            - response.web_search_call.in_progress
+            - response.web_search_call.searching
+            - response.image_generation_call.completed
+            - response.image_generation_call.generating
+            - response.image_generation_call.in_progress
+            - response.image_generation_call.partial_image
+            - response.mcp_call_arguments.delta
+            - response.mcp_call_arguments.done
+            - response.mcp_call.completed
+            - response.mcp_call.failed
+            - response.mcp_call.in_progress
+            - response.mcp_list_tools.completed
+            - response.mcp_list_tools.failed
+            - response.mcp_list_tools.in_progress
+            - response.output_text.annotation.added
+            - response.queued
+            - response.custom_tool_call_input.delta
+            - response.custom_tool_call_input.done
     OpenAI.ResponseStreamOptions:
       type: object
       properties:
@@ -34662,6 +36450,8 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.ResponseLogProb'
           description: The log probabilities of the tokens in the delta.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is an additional text delta.
       x-oaiMeta:
         name: response.output_text.delta
@@ -34715,6 +36505,8 @@ components:
           items:
             $ref: '#/components/schemas/OpenAI.ResponseLogProb'
           description: The log probabilities of the tokens in the delta.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when text content is finalized.
       x-oaiMeta:
         name: response.output_text.done
@@ -34811,6 +36603,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the web search call being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a web search call is completed.
       x-oaiMeta:
         name: response.web_search_call.completed
@@ -34847,6 +36641,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the web search call being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a web search call is initiated.
       x-oaiMeta:
         name: response.web_search_call.in_progress
@@ -34883,6 +36679,8 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The sequence number of the web search call being processed.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a web search call is executing.
       x-oaiMeta:
         name: response.web_search_call.searching
@@ -34905,7 +36703,6 @@ components:
             - screenshot
           description: Specifies the event type. For a screenshot action, this property is always set to `screenshot`.
           x-stainless-const: true
-          default: screenshot
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A screenshot action.
@@ -34925,7 +36722,6 @@ components:
             - scroll
           description: Specifies the event type. For a scroll action, this property is always set to `scroll`.
           x-stainless-const: true
-          default: scroll
         x:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -34942,10 +36738,21 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.integer'
           description: The vertical scroll distance.
+        keys:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A scroll action.
       title: Scroll
+    OpenAI.SearchContentType:
+      type: string
+      enum:
+        - text
+        - image
     OpenAI.SearchContextSize:
       type: string
       enum:
@@ -34969,6 +36776,13 @@ components:
         - If set to '[flex](/docs/guides/flex-processing)' or '[priority](https://openai.com/api-priority-processing/)', then the request will be processed with the corresponding service tier.
         - When not set, the default behavior is 'auto'.
         When the `service_tier` parameter is set, the response body will include the `service_tier` value based on the processing mode actually used to serve the request. This response value may be different from the value set in the parameter.
+    OpenAI.ServiceTierEnum:
+      type: string
+      enum:
+        - auto
+        - default
+        - flex
+        - priority
     OpenAI.SkillReferenceParam:
       type: object
       required:
@@ -34981,7 +36795,6 @@ components:
             - skill_reference
           description: References a skill created with the /v1/skills endpoint.
           x-stainless-const: true
-          default: skill_reference
         skill_id:
           type: string
           minLength: 1
@@ -35003,7 +36816,6 @@ components:
             - apply_patch
           description: The tool to call. Always `apply_patch`.
           x-stainless-const: true
-          default: apply_patch
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the apply_patch tool when executing a tool call.
@@ -35019,7 +36831,6 @@ components:
             - shell
           description: The tool to call. Always `shell`.
           x-stainless-const: true
-          default: shell
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Forces the model to call the shell tool when a tool call is required.
@@ -35036,7 +36847,6 @@ components:
             - summary_text
           description: The type of the object. Always `summary_text`.
           x-stainless-const: true
-          default: summary_text
         text:
           type: string
           description: A summary of the reasoning output from the model so far.
@@ -35055,7 +36865,6 @@ components:
           enum:
             - text
           x-stainless-const: true
-          default: text
         text:
           type: string
       allOf:
@@ -35199,6 +37008,9 @@ components:
           custom: '#/components/schemas/OpenAI.CustomToolParam'
           web_search_preview: '#/components/schemas/OpenAI.WebSearchPreviewTool'
           apply_patch: '#/components/schemas/OpenAI.ApplyPatchToolParam'
+          computer: '#/components/schemas/OpenAI.ComputerTool'
+          namespace: '#/components/schemas/OpenAI.NamespaceToolParam'
+          tool_search: '#/components/schemas/OpenAI.ToolSearchToolParam'
       description: A tool that can be used to generate a response.
     OpenAI.ToolChoiceAllowed:
       type: object
@@ -35251,6 +37063,34 @@ components:
           type: string
           enum:
             - code_interpreter
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+      description: |-
+        Indicates that the model should use a built-in tool to generate a response.
+        [Learn more about built-in tools](https://platform.openai.com/docs/guides/tools).
+    OpenAI.ToolChoiceComputer:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - computer
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+      description: |-
+        Indicates that the model should use a built-in tool to generate a response.
+        [Learn more about built-in tools](https://platform.openai.com/docs/guides/tools).
+    OpenAI.ToolChoiceComputerUse:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - computer_use
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -35394,6 +37234,8 @@ components:
           web_search_preview_2025_03_11: '#/components/schemas/OpenAI.ToolChoiceWebSearchPreview20250311'
           image_generation: '#/components/schemas/OpenAI.ToolChoiceImageGeneration'
           code_interpreter: '#/components/schemas/OpenAI.ToolChoiceCodeInterpreter'
+          computer: '#/components/schemas/OpenAI.ToolChoiceComputer'
+          computer_use: '#/components/schemas/OpenAI.ToolChoiceComputerUse'
       description: |-
         How the model should select which tool (or tools) to use when generating
         a response. See the `tools` parameter to see how to specify which tools
@@ -35415,6 +37257,8 @@ components:
             - web_search_preview_2025_03_11
             - image_generation
             - code_interpreter
+            - computer
+            - computer_use
     OpenAI.ToolChoiceWebSearchPreview:
       type: object
       required:
@@ -35443,6 +37287,38 @@ components:
       description: |-
         Indicates that the model should use a built-in tool to generate a response.
         [Learn more about built-in tools](https://platform.openai.com/docs/guides/tools).
+    OpenAI.ToolSearchExecutionType:
+      type: string
+      enum:
+        - server
+        - client
+    OpenAI.ToolSearchToolParam:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - tool_search
+          description: The type of the tool. Always `tool_search`.
+          x-stainless-const: true
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search is executed by the server or by the client.
+        description:
+          anyOf:
+            - type: string
+            - type: 'null'
+        parameters:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: Hosted or BYOT tool search configuration for deferred tools.
+      title: Tool search tool
     OpenAI.ToolType:
       anyOf:
         - type: string
@@ -35450,6 +37326,7 @@ components:
           enum:
             - function
             - file_search
+            - computer
             - computer_use_preview
             - web_search
             - mcp
@@ -35458,6 +37335,8 @@ components:
             - local_shell
             - shell
             - custom
+            - namespace
+            - tool_search
             - web_search_preview
             - apply_patch
             - a2a_preview
@@ -35469,6 +37348,7 @@ components:
             - reminder_preview
             - work_iq_preview
             - fabric_iq_preview
+            - toolbox_search_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -35524,7 +37404,6 @@ components:
             - type
           description: Specifies the event type. For a type action, this property is always set to `type`.
           x-stainless-const: true
-          default: type
         text:
           type: string
           description: The text to type.
@@ -35559,7 +37438,6 @@ components:
             - url_citation
           description: The type of the URL citation. Always `url_citation`.
           x-stainless-const: true
-          default: url_citation
         url:
           type: string
           format: uri
@@ -35616,7 +37494,6 @@ components:
             - wait
           description: Specifies the event type. For a wait action, this property is always set to `wait`.
           x-stainless-const: true
-          default: wait
       allOf:
         - $ref: '#/components/schemas/OpenAI.ComputerAction'
       description: A wait action.
@@ -35666,7 +37543,6 @@ components:
       type: object
       required:
         - type
-        - query
       properties:
         type:
           type: string
@@ -35676,7 +37552,7 @@ components:
           x-stainless-const: true
         query:
           type: string
-          description: '[DEPRECATED] The search query.'
+          description: The search query.
           deprecated: true
         queries:
           type: array
@@ -35705,6 +37581,7 @@ components:
           x-stainless-const: true
         url:
           type: string
+          format: uri
     OpenAI.WebSearchApproximateLocation:
       type: object
       required:
@@ -35746,7 +37623,6 @@ components:
             - web_search_preview
           description: The type of the web search tool. One of `web_search_preview` or `web_search_preview_2025_03_11`.
           x-stainless-const: true
-          default: web_search_preview
         user_location:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ApproximateLocation'
@@ -35755,6 +37631,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.SearchContextSize'
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
+        search_content_types:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.SearchContentType'
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).
@@ -35769,7 +37649,6 @@ components:
           enum:
             - web_search
           description: The type of the web search tool. One of `web_search` or `web_search_2025_08_26`.
-          default: web_search
         filters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
@@ -36893,7 +38772,7 @@ components:
       properties:
         protocol:
           allOf:
-            - $ref: '#/components/schemas/AgentProtocol'
+            - $ref: '#/components/schemas/AgentEndpointProtocol'
           description: The protocol type.
         version:
           type: string
@@ -37152,6 +39031,12 @@ components:
           enum:
             - reminder_preview
           description: The type of the tool. Always `reminder_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -38163,24 +40048,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for synthetic data generation item generation.
-    SystemDataV3:
-      type: object
-      properties:
-        createdAt:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp of resource creation
-        createdBy:
-          type: string
-          description: Identity that created the resource
-        createdByType:
-          type: string
-          description: Type of identity that created the resource
-        lastModifiedAt:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp of last resource modification
-      description: System metadata for a resource
     SystemMessage:
       type: object
       required:
