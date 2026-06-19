@@ -116,7 +116,7 @@ interface ConfigureSourceScan {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan")
   @post
   @tag("ConfigureSourceScan")
-  configureSourceScan(
+  execute(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
