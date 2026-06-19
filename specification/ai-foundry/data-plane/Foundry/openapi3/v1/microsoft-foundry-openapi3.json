@@ -17434,6 +17434,24 @@
           }
         }
       },
+      "AgentEndpointProtocol": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "activity",
+              "responses",
+              "a2a",
+              "mcp",
+              "invocations",
+              "invocations_ws"
+            ]
+          }
+        ]
+      },
       "AgentEvaluatorGenerationJobSource": {
         "type": "object",
         "required": [
@@ -54487,20 +54505,27 @@
         "description": "An abstract representation of a tool stored in a toolbox."
       },
       "ToolboxToolType": {
-        "type": "string",
-        "enum": [
-          "code_interpreter",
-          "file_search",
-          "web_search",
-          "mcp",
-          "azure_ai_search",
-          "openapi",
-          "a2a_preview",
-          "browser_automation_preview",
-          "reminder_preview",
-          "work_iq_preview",
-          "fabric_iq_preview",
-          "toolbox_search_preview"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "code_interpreter",
+              "file_search",
+              "web_search",
+              "mcp",
+              "azure_ai_search",
+              "openapi",
+              "a2a_preview",
+              "browser_automation_preview",
+              "reminder_preview",
+              "work_iq_preview",
+              "fabric_iq_preview",
+              "toolbox_search_preview"
+            ]
+          }
         ],
         "description": "Supported tool types for tools stored in a toolbox."
       },
