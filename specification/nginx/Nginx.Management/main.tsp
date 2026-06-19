@@ -18,6 +18,7 @@ import "./NginxCertificate.tsp";
 import "./NginxConfigurationResponse.tsp";
 import "./NginxDeployment.tsp";
 import "./NginxDeploymentWafPolicy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -40,6 +41,11 @@ enum Versions {
    * The 2025-03-01-preview API version.
    */
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /**
+   * The 2025-11-01 API version.
+   */
+  v2025_11_01: "2025-11-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

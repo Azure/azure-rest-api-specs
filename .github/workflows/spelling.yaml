@@ -24,6 +24,11 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - name: Run spelling check
         run: |
           ./eng/common/scripts/check-spelling-in-changed-files.ps1 `

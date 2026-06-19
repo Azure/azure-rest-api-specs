@@ -8478,12 +8478,27 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/PolicyProperties",
-          "description": "The resource-specific properties for this resource."
+          "description": "The RP-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },

@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -30,10 +31,19 @@ enum Versions {
 
   //------- Autoaction versions
   /** 2025-04-15-preview version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-04-15-preview`,
 
   /** 2026-01-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2026-01-01-preview`,
+
+  /** 2026-03-01-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-03-01-preview`,
+
+  /** 2026-04-15-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-04-15-preview`,
 }

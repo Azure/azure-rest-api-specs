@@ -2,16 +2,14 @@ import "../models/common.tsp";
 import "../models/AccessControlList.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Access Control List resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model AccessControlList
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<AccessControlListProperties, false> {
   @doc("Name of the Access Control List.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -19,10 +17,9 @@ model AccessControlList
   @segment("accessControlLists")
   @visibility(Lifecycle.Read)
   name: string;
-
-  /** The Access ControlList properties */
-  properties: AccessControlListProperties;
 }
+
+@@doc(AccessControlList.properties, "The Access ControlList properties.");
 
 @armResourceOperations
 interface AccessControlLists {
@@ -40,16 +37,36 @@ interface AccessControlLists {
   delete is ArmResourceDeleteWithoutOkAsync<AccessControlList>;
 
   @doc("Implements AccessControlLists list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<AccessControlList>;
+  listByResourceGroup is ArmResourceListByParent<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements AccessControlLists list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<AccessControlList>;
+  listBySubscription is ArmListBySubscription<
+    AccessControlList,
+    Response = AccessControlListsListResult
+  >;
 
   @doc("Implements the operation to the underlying resources.")
-  updateAdministrativeState is ArmResourceActionAsync<
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
     AccessControlList,
     UpdateAdministrativeState,
     CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Implements the operation to the underlying resources.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    AccessControlList,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
   >;
 
   @doc("Implements the operation to the underlying resources.")
@@ -68,9 +85,19 @@ interface AccessControlLists {
 }
 
 @@doc(AccessControlLists.create::parameters.resource, "Request payload.");
-@@doc(AccessControlLists.update::parameters.properties,
+@@doc(
+  AccessControlLists.update::parameters.properties,
   "Access Control List properties to update."
 );
-@@doc(AccessControlLists.updateAdministrativeState::parameters.body,
+@@doc(
+  AccessControlLists.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(
+  AccessControlLists.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(
+  AccessControlLists.validateConfiguration::parameters.body,
   "Request payload."
 );

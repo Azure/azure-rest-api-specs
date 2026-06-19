@@ -1,15 +1,14 @@
+import * as core from "@actions/core";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
-import { setOutput } from "@azure-tools/specs-shared/error-reporting";
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
-import { evaluateImpact, getRPaaSFolderList } from "./impact.js";
+import { evaluateImpact, getRPaaSFolderList } from "./impact.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
-import { Octokit } from "@octokit/rest";
 import { writeFile } from "fs/promises";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { parseArgs, type ParseArgsConfig } from "node:util";
 import { resolve } from "path";
-import { LabelContext } from "./labelling-types.js";
-import { PRContext } from "./PRContext.js";
+import { type LabelContext } from "./labelling-types.ts";
+import { PRContext } from "./PRContext.ts";
 
 export async function main() {
   const config: ParseArgsConfig = {
@@ -77,6 +76,8 @@ export async function main() {
   const targetGitRoot = await getRootFolder(targetDirectory);
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
+    gitOptions: ["--no-renames"],
     logger: defaultLogger,
     paths: ["specification"],
   });
@@ -88,13 +89,8 @@ export async function main() {
   const prNumber = opts.number as string;
   const isDraft = opts.isDraft as boolean;
 
-  // create github client (use token if available, otherwise unauthenticated. we will throw if unhandled)
-  const github = new Octokit({
-    ...(process.env.GITHUB_TOKEN && { auth: process.env.GITHUB_TOKEN }),
-  });
-
-  // this is a request to get the list of RPaaS folders from azure-rest-api-specs -> main branch -> dump specification folder names
-  const mainSpecFolders = await getRPaaSFolderList(github, owner, repo);
+  // Get the list of RPaaS folders from the target branch's arm-leases directory (read from disk)
+  const mainSpecFolders = getRPaaSFolderList(targetGitRoot);
 
   const labelContext: LabelContext = {
     // summarize-impact only triggers on PR code changes, not label changes.  Since this code cannot depend
@@ -123,5 +119,5 @@ export async function main() {
   // Intentionally doesn't use GITHUB_STEP_SUMMARY, since it's not a markdown summary for GH UI
   const summaryFile = resolve("summary.json");
   await writeFile(summaryFile, JSON.stringify(impact, null, 2));
-  setOutput("summary", summaryFile);
+  core.setOutput("summary", summaryFile);
 }

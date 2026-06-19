@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-10-02-preview
+tag: package-2026-01-01
 ```
 
 ### Suppression
@@ -56,41 +56,37 @@ These settings apply only when `--tag=package-preview-2025-10-02-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-02-preview'
 input-file:
-  - preview/2025-10-02-preview/AppResiliency.json
-  - preview/2025-10-02-preview/AuthConfigs.json
-  - preview/2025-10-02-preview/AvailableWorkloadProfiles.json
-  - preview/2025-10-02-preview/BillingMeters.json
-  - preview/2025-10-02-preview/Builders.json
-  - preview/2025-10-02-preview/Builds.json
-  - preview/2025-10-02-preview/CommonDefinitions.json
-  - preview/2025-10-02-preview/ConnectedEnvironments.json
-  - preview/2025-10-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2025-10-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2025-10-02-preview/ContainerApps.json
-  - preview/2025-10-02-preview/ContainerAppsBuilds.json
-  - preview/2025-10-02-preview/ContainerAppsFunctions.json
-  - preview/2025-10-02-preview/ContainerAppsLabelHistory.json
-  - preview/2025-10-02-preview/ContainerAppsPatches.json
-  - preview/2025-10-02-preview/ContainerAppsRevisions.json
-  - preview/2025-10-02-preview/Diagnostics.json
-  - preview/2025-10-02-preview/DotNetComponents.json
-  - preview/2025-10-02-preview/FunctionsExtension.json
-  - preview/2025-10-02-preview/Global.json
-  - preview/2025-10-02-preview/JavaComponents.json
-  - preview/2025-10-02-preview/Jobs.json
-  - preview/2025-10-02-preview/LogicAppsExtension.json
-  - preview/2025-10-02-preview/ManagedEnvironments.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
-  - preview/2025-10-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2025-10-02-preview/SessionPools.json
-  - preview/2025-10-02-preview/SourceControls.json
-  - preview/2025-10-02-preview/Subscriptions.json
-  - preview/2025-10-02-preview/Usages.json
+  - preview/2025-10-02-preview/openapi.json
+```
+
+### Tag: package-2026-01-01
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/openapi.json
+directive:
+  - suppress: PatchBodyParametersSchema
+    from: openapi.json
+    reason: |
+      Pre-existing. Java Component and Session Pool use discriminator/identity type as required property.
+      Managed Service Identity requires type for patching.
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    reason: |
+      Pre-existing. Scale rule metadata and service bind customized keys use additionalProperties.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: openapi.json
+    reason: |
+      Pre-existing. Do not introduce breaking changes in GA services.
+  - suppress: LroErrorContent
+    from: openapi.json
+    reason: |
+      Pre-existing. Using the same error response as other APIs.
 ```
 
 ### Tag: package-2025-07-01

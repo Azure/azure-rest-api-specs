@@ -1,11 +1,14 @@
 // Tiles for STAC Items interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.common.images.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
 
@@ -32,18 +35,21 @@ model StatisticsQueryParameters {
   categorical?: boolean;
 
   /**
-   * List of values for which to report counts.
+   * List of pixel categorical values for which to report counts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("c")
   @query(#{ explode: true })
-  c?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  categoriesPixels?: int32[];
 
   /**
    * List of percentile values (default to [2, 98]).
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("p")
   @query(#{ explode: true })
-  p?: int32[];
+  percentiles?: int32[];
 
   /**
    *
@@ -87,7 +93,8 @@ model TileMatrixSetQueryParameters {
    * 1.0 = 258x258).
    */
   @query("buffer")
-  buffer?: string;
+  @typeChangedFrom(Versions.v2026_04_15, string)
+  buffer?: float32;
 
   /**
    * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -100,6 +107,38 @@ model TileMatrixSetQueryParameters {
    */
   @query("resampling")
   resampling?: Resampling = Resampling.nearest;
+}
+
+/**
+ * Xarray indexing method to use for inexact matches
+ */
+@added(Versions.v2026_04_15)
+union SelMethod {
+  string,
+
+  /** Nearest neighbor method */
+  nearest: "nearest",
+
+  /** Linear interpolation */
+  linear: "linear",
+
+  /** Bilinear interpolation */
+  bilinear: "bilinear",
+
+  /** Cubic interpolation */
+  cubic: "cubic",
+
+  /** Cubic spline interpolation */
+  cubic_spline: "cubic_spline",
+
+  /** Lanczos interpolation */
+  lanczos: "lanczos",
+
+  /** Area-weighted interpolation */
+  area: "area",
+
+  /** Mode (most common) value */
+  mode: "mode",
 }
 
 /**
@@ -116,7 +155,81 @@ model SubDatasetQueryParameters {
    * The index of a subdataset band within the asset.
    */
   @query("subdataset_bands")
-  subdatasetBands?: string[];
+  @typeChangedFrom(Versions.v2026_04_15, string[])
+  subdatasetBands?: int32[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Datetime to use for subsetting the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("datetime")
+  datetime?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
+}
+
+/**
+ * Subdataset query parameters for collection-level mosaic operations.
+ * Same as SubDatasetQueryParameters but without datetime (which is already
+ * provided by CollectionMosaicFilterQueryParameters).
+ */
+@added(Versions.v2026_04_15)
+model CollectionSubDatasetQueryParameters {
+  /**
+   * The name of a subdataset within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_name")
+  subdatasetName?: string;
+
+  /**
+   * The index of a subdataset band within the asset.
+   */
+  @added(Versions.v2026_04_15)
+  @query("subdataset_bands")
+  subdatasetBands?: int32[];
+
+  /**
+   * Coordinate Reference System.
+   */
+  @added(Versions.v2026_04_15)
+  @query("crs")
+  crs?: string;
+
+  /**
+   * Xarray Indexing using dimension names `{dimension}={value}`.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @added(Versions.v2026_04_15)
+  @query(#{ explode: true })
+  sel?: string[];
+
+  /**
+   * Xarray indexing method to use for inexact matches.
+   */
+  @added(Versions.v2026_04_15)
+  @query("sel_method")
+  selMethod?: SelMethod;
 }
 
 /**
@@ -166,14 +279,9 @@ model BoundingBoxPathParameters {
 }
 
 /**
- * Point model.
- *
- * response model for `/point` endpoints
- */
-/**
  * Response model for point query operations providing values at a specific location
  */
-model TitilerCoreModelsResponsesPoint {
+model TilerCoreModelsResponsesPoint {
   /**
    * Geographic coordinates [longitude, latitude] of the queried point
    */
@@ -192,22 +300,6 @@ model TitilerCoreModelsResponsesPoint {
 }
 
 /**
- * Return dataset's basic info or the list of available assets.
- */
-model InfoOperationResponse {
-  /**
-   * status code for info operation response
-   */
-  @statusCode statusCode: 200;
-
-  /**
-   * body for info operation response
-   */
-  @summary("Response Info Api Collections  Collection Id  Items  Item Id  Info Get")
-  data: TilerInfo;
-}
-
-/**
  * Dataset Info.
  */
 @summary("TilerInfo")
@@ -218,7 +310,7 @@ model TilerInfo {
   @minItems(4)
   @maxItems(4)
   @summary("Bounds")
-  bounds: float64[];
+  bounds: float32[];
 
   /**
    * Band Metadata
@@ -245,74 +337,73 @@ model TilerInfo {
    */
   @summary("Nodata Type")
   @encodedName("application/json", "nodata_type")
-  nodataType?: NoDataType;
+  noDataType?: NoDataType;
 
   /**
    * Color interpretation
    */
-  @summary("Colorinterp")
-  colorinterp?: string[];
+  @encodedName("application/json", "colorinterp")
+  colorInterpretation?: string[];
 
   /**
    * Driver
    */
-  @summary("Driver")
   driver?: string;
 
   /**
    * Count
    */
-  @summary("Count")
   count?: int32;
 
   /**
    * Width
    */
-  @summary("Width")
   width?: int32;
 
   /**
    * Height
    */
-  @summary("Height")
   height?: int32;
 
   /**
    * Overviews
    */
-  @summary("Overviews")
-  overviews?: string[];
+  overviews?: int32[];
 
   /**
    * Scales
    */
-  @summary("Scales")
-  scales?: int64[];
+  scales?: int32[];
 
   /**
    * Offsets
    */
-  @summary("Offsets")
-  offsets?: int64[];
+  offsets?: int32[];
 
   /**
    * Colormap
    */
-  @summary("Colormap")
   colormap?: Record<string[]>;
 
   /**
    * Minzoom
    */
-  @summary("Minzoom")
-  minzoom?: int64;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maxzoom
    */
-  @summary("Maxzoom")
-  maxzoom?: int64;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32;
+
+  /**
+   * Coordinate Reference System
+   */
+  @encodedName("application/json", "crs")
+  coordinateReferenceSystem?: string;
 }
+
 /**
  * Union type for band metadata elements
  */
@@ -357,7 +448,7 @@ union NoDataType {
 /**
  * Return a list of supported assets.
  */
-model AvailableAssetsResponse {
+model AvailableAssets {
   /**
    * status code for available assets response
    */
@@ -372,35 +463,20 @@ model AvailableAssetsResponse {
 }
 
 /**
- * Return dataset's statistics.
- */
-model AssetStatisticsResponse {
-  /**
-   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
-   */
-  @statusCode
-  statusCode: 200;
-
-  /**
-   * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
-   */
-  @summary("Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get")
-  data: Record<BandStatistics>;
-}
-
-/**
  * Statistical information about a data band.
  */
 model BandStatistics {
   /**
    * Minimum value in the band.
    */
-  min: float32;
+  @encodedName("application/json", "min")
+  minimum: float32;
 
   /**
    * Maximum value in the band.
    */
-  max: float32;
+  @encodedName("application/json", "max")
+  maximum: float32;
 
   /**
    * Mean value of the band.
@@ -483,12 +559,12 @@ model BandStatistics {
 /**
  * Return dataset's statistics.
  */
-model StatisticsResponse is Record<BandStatistics>;
+model TilerStacItemStatistics is Record<BandStatistics>;
 
 /**
  * Successful Response
  */
-model WmtsCapabilitiesResponse {
+model WmtsCapabilities {
   /**
    * status code for wmts capabilities
    */
@@ -506,114 +582,32 @@ model WmtsCapabilitiesResponse {
 }
 
 /**
- *
- * https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md
+ * Properties for STAC Item statistics GeoJSON Feature
  */
-/**
- * Collection of STAC items with statistical information
- */
-model GeoJsonStatisticsItemCollectionResponse {
-  /**
-   * GeoJSON type identifier for ItemCollection
-   */
-  type: ItemCollectionType;
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacItemStatisticsGeoJsonProperties {
+  ...Record<unknown>;
 
   /**
-   * Array of STAC items with statistics
+   * Statistical information for each band in the asset
    */
-  features: GeoJsonStatisticsItemResponse[];
-
-  /**
-   * Bounding box coordinates [west, south, east, north]
-   */
-  bbox?: float64[];
-
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * MSFT Created
-   */
-  @encodedName("application/json", "msft:_created")
-  msftCreated?: string;
-
-  /**
-   * MSFT Updated
-   */
-  @encodedName("application/json", "msft:_updated")
-  msftUpdated?: string;
-
-  /**
-   * MSFT Short Description
-   */
-  @maxLength(300)
-  @encodedName("application/json", "msft:short_description")
-  msftShortDescription?: string;
-
-  /**
-   * List of STAC extension URLs used by this item collection
-   */
-  @encodedName("application/json", "stac_extensions")
-  stacExtensions?: url[];
-
-  /**
-   * Related links for the item collection
-   */
-  links?: Link[];
-
-  /**
-   *
-   * https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification
-   *
-   * Pagination context for the response
-   */
-  context?: ContextExtension;
+  statistics: Record<BandStatistics>;
 }
 
 /**
  * STAC Item representing a spatiotemporal asset with statistical information
  */
-model GeoJsonStatisticsItemResponse {
-  ...Feature;
-  ...MicrosoftStacProperties;
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacItemStatisticsGeoJson {
+  ...FeatureBase;
 
   /**
-   * Stac Version
+   * GeoJSON type identifier for Feature
    */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
+  type: FeatureType;
 
   /**
-   * ID of the STAC collection this item belongs to
+   * Feature properties
    */
-  collection?: string;
-
-  /**
-   * Properties
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: ItemProperties;
-
-  /**
-   * MSFT Timestamp
-   */
-  @encodedName("application/json", "_msft:ts")
-  msftTimestamp?: string;
-
-  /**
-   * MSFT ETag
-   */
-  @encodedName("application/json", "_msft:etag")
-  msftEtag?: string;
-
-  /**
-   * List of STAC extension URLs used by this item
-   */
-  @encodedName("application/json", "stac_extensions")
-  stacExtensions?: url[];
+  properties?: StacItemStatisticsGeoJsonProperties;
 }

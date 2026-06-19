@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
 
@@ -9,9 +10,17 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.MachineLearningServices;
 
+/**
+ * InferenceEndpoint is a preview-only resource.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @parentResource(Workspace)
 model InferenceEndpoint
   is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
@@ -26,12 +35,19 @@ model InferenceEndpoint
   /**
    * Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API includes additional envelope properties"
   kind?: string;
 
   ...Azure.ResourceManager.ResourceSkuProperty;
 }
 
+/**
+ * InferenceEndpointOps is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -65,6 +81,13 @@ interface InferenceEndpointOps
       }
     > {}
 
+/**
+ * InferenceEndpoints is preview-only.
+ */
+@removed(Versions.v2025_12_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface InferenceEndpoints {
   /**
@@ -80,51 +103,58 @@ interface InferenceEndpoints {
   @summary("Create or update InferenceEndpoint (asynchronous).")
   createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
     InferenceEndpoint,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
-      InferenceEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmResourceCreatedResponse<
+          InferenceEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Update InferenceEndpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Existing API uses custom patch envelope"
   @patch(#{ implicitOptionality: false })
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
-    PatchModel = void,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    PatchModel = Record<unknown>,
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
    * Delete InferenceEndpoint (asynchronous).
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete InferenceEndpoint (asynchronous).")
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -169,18 +199,23 @@ interface InferenceEndpoints {
 }
 
 @@doc(InferenceEndpoint.name, "InferenceEndpoint name.");
-@@doc(InferenceEndpoint.properties,
+@@doc(
+  InferenceEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferenceEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  InferenceEndpoints.createOrUpdate::parameters.resource,
   "InferenceEndpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoints.update::parameters.properties,
+@@doc(
+  InferenceEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoint.identity,
+@@doc(
+  InferenceEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferenceEndpoint.sku,
+@@doc(
+  InferenceEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

@@ -7,18 +7,18 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/appconfiguration.json"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration"
+    generation-subdir: "_generated"
     namespace: "azure.appconfiguration"
     package-pprint-name: "App Configuration Data"
     package-mode: dataplane
     flavor: azure
-    generate-test: true
-    generate-sample: true
+    generate-test: false
+    generate-sample: false
   "@azure-tools/typespec-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.Data.AppConfiguration"
@@ -30,17 +30,28 @@ options:
     namespace: Azure.Data.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-appconfiguration-rest"
-    generate-metadata: true
-    is-modular-library: false
+    emitter-output-dir: "{output-dir}/{service-dir}/app-configuration"
+    generate-metadata: false
+    is-modular-library: true
     package-details:
-      name: "@azure-rest/azure-appconfiguration"
-      description: "Azure App Configuration"
+      name: "@azure/app-configuration"
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-data-appconfiguration"
     namespace: com.azure.data.appconfiguration
+    models-subpackage: "implementation.models"
+    customization-class: "customization/src/main/java/AppConfigurationCustomizations.java"
     flavor: azure
+    generate-tests: false
+    generate-samples: false
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/data/azappconfig/v2"
+    service-dir: "sdk/data"
+    emitter-output-dir: "{output-dir}/{service-dir}/azappconfig/internal/generated"
+    slice-elements-byval: true
+    generate-fakes: false
+    inject-spans: false
+    file-prefix: "zz_"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

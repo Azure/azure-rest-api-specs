@@ -164,24 +164,31 @@ interface MonitorResources {
 }
 
 @@doc(MonitorResource.name, "Monitor resource name");
-@@doc(MonitorResource.properties,
+@@doc(
+  MonitorResource.properties,
   "The resource-specific properties for this resource."
 );
-@@doc(MonitorResources.listMonitoredResources::parameters.body,
+@@doc(
+  MonitorResources.listMonitoredResources::parameters.body,
   "The details of the log status request."
 );
-@@doc(MonitorResources.manageAgentInstallation::parameters.body,
+@@doc(
+  MonitorResources.manageAgentInstallation::parameters.body,
   "List of resources and action"
 );
-@@doc(MonitorResources.getMetricStatus::parameters.body,
+@@doc(
+  MonitorResources.getMetricStatus::parameters.body,
   "The details of the metric status request."
 );
-@@doc(MonitorResources.upgradePlan::parameters.body,
+@@doc(
+  MonitorResources.upgradePlan::parameters.body,
   "The details of the upgrade plan request."
 );
-@@doc(MonitorResources.getSSODetails::parameters.body,
+@@doc(
+  MonitorResources.getSSODetails::parameters.body,
   "The details of the get sso details request."
 );
-@@doc(MonitorResources.listLinkableEnvironments::parameters.body,
+@@doc(
+  MonitorResources.listLinkableEnvironments::parameters.body,
   "The details of the linkable environment request."
 );

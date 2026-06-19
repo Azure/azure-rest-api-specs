@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/trustedsigning"
+    default: "sdk/artifactsigning"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -11,26 +11,26 @@ options:
     emit-common-types-schema: "never"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/codeSigningAccount.json"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-artifactsigning"
     flavor: "azure"
-    namespace: "com.azure.resourcemanager.trustedsigning"
-    service-name: "Trusted Signing"
+    namespace: "com.azure.resourcemanager.artifactsigning"
+    service-name: "Artifact Signing"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trustedsigning"
-    namespace: "azure.mgmt.trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-artifactsigning"
+    namespace: "azure.mgmt.artifactsigning"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-artifactsigning"
     flavor: azure
     package-details:
-      name: "@azure/arm-trustedsigning"
+      name: "@azure/arm-artifactsigning"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/trustedsigning"
-    emitter-output-dir: "{output-dir}/{service-dir}/armtrustedsigning"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armtrustedsigning"
+    service-dir: "sdk/resourcemanager/artifactsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/armartifactsigning"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armartifactsigning"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -38,7 +38,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.TrustedSigning"
+    namespace: "Azure.ResourceManager.ArtifactSigning"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:

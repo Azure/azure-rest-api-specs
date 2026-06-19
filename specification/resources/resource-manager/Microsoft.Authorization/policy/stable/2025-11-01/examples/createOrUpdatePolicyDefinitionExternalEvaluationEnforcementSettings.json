@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "parameters": {
+      "properties": {
+        "description": "Randomly disable VM allocation in eastus by having policy rule reference the outcome of invoking an external endpoint using the CoinFlip endpoint that returns random values.",
+        "displayName": "Randomize VM Allocation",
+        "externalEvaluationEnforcementSettings": {
+          "endpointSettings": {
+            "kind": "CoinFlip",
+            "details": {
+              "successProbability": 0.5
+            }
+          },
+          "missingTokenAction": "audit",
+          "roleDefinitionIds": [
+            "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/roleDefinitions/f0cc2aea-b517-48f6-8f9e-0c01c687907b"
+          ]
+        },
+        "metadata": {
+          "category": "VM"
+        },
+        "mode": "Indexed",
+        "policyRule": {
+          "if": {
+            "allOf": [
+              {
+                "equals": "Microsoft.Compute/virtualMachines",
+                "field": "type"
+              },
+              {
+                "equals": "eastus",
+                "field": "location"
+              },
+              {
+                "equals": "false",
+                "value": "[claims().isValid]"
+              }
+            ]
+          },
+          "then": {
+            "effect": "deny"
+          }
+        }
+      }
+    },
+    "policyDefinitionName": "RandomizeVMAllocation",
+    "subscriptionId": "ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "RandomizeVMAllocation",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/RandomizeVMAllocation",
+        "properties": {
+          "description": "Randomly disable VM allocation in eastus by having policy rule reference the outcome of invoking an external endpoint using the CoinFlip endpoint that returns random values.",
+          "displayName": "Randomize VM Allocation",
+          "externalEvaluationEnforcementSettings": {
+            "endpointSettings": {
+              "kind": "CoinFlip",
+              "details": {
+                "successProbability": 0.5
+              }
+            },
+            "missingTokenAction": "audit",
+            "roleDefinitionIds": [
+              "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/roleDefinitions/f0cc2aea-b517-48f6-8f9e-0c01c687907b"
+            ]
+          },
+          "metadata": {
+            "category": "VM"
+          },
+          "mode": "Indexed",
+          "policyRule": {
+            "if": {
+              "allOf": [
+                {
+                  "equals": "Microsoft.Compute/virtualMachines",
+                  "field": "type"
+                },
+                {
+                  "equals": "eastus",
+                  "field": "location"
+                },
+                {
+                  "equals": "false",
+                  "value": "[claims().isValid]"
+                }
+              ]
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "policyType": "Custom",
+          "version": "1.2.1",
+          "versions": [
+            "1.2.1",
+            "1.0.0"
+          ]
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyDefinitions_CreateOrUpdate",
+  "title": "Create or update a policy definition with external evaluation enforcement settings"
+}

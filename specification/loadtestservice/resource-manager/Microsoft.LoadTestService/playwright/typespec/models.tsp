@@ -13,7 +13,10 @@ namespace Playwright.Management;
 @doc("Playwright workspace resource.")
 model PlaywrightWorkspace is TrackedResource<PlaywrightWorkspaceProperties> {
   ...ResourceNameParameter<PlaywrightWorkspace>;
+  ...ManagedServiceIdentityProperty;
 }
+
+@@added(PlaywrightWorkspace.identity, Versions.v2026_02_01_preview);
 
 @doc("Playwright workspace resource properties.")
 model PlaywrightWorkspaceProperties {
@@ -37,6 +40,10 @@ model PlaywrightWorkspaceProperties {
   @minLength(3)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
   workspaceId?: string;
+
+  @added(Versions.v2026_02_01_preview)
+  @doc("Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.")
+  reporting?: EnablementStatus = EnablementStatus.Disabled;
 
   @added(Versions.v2026_01_01_preview)
   @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")

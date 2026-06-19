@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Azure.ResourceManager.TrustedSigning
-  output-folder: $(csharp-sdks-folder)/trustedsigning/management/Azure.ResourceManager.TrustedSigning/GeneratedProtocol
+  namespace: Azure.ResourceManager.ArtifactSigning
+  output-folder: $(csharp-sdks-folder)/artifactsigning/management/Azure.ResourceManager.ArtifactSigning/GeneratedProtocol
 ```

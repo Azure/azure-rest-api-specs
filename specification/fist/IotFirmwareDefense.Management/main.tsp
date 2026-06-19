@@ -14,6 +14,7 @@ import "./SbomComponentResource.tsp";
 import "./SummaryResource.tsp";
 import "./Workspace.tsp";
 import "./UsageMetric.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -36,4 +37,7 @@ enum Versions {
 
   @doc("The 2025-08-02 API version.")
   v2025_08_02: "2025-08-02",
+
+  @doc("The 2025-12-01-preview API version.")
+  v2025_12_01_preview: "2025-12-01-preview",
 }

@@ -27,7 +27,33 @@ model NamespaceResource
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: Sku;
 }
+alias NamespaceResourceListParameters = {
+  /**
+   * Skip token for subsequent requests.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
 
+  /**
+   * Maximum number of results to return.
+   */
+  @query("$top")
+  $top?: int32 = 100;
+};
+
+alias NamespaceResourceListAllParameters = {
+  /**
+   * Skip token for subsequent requests.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
+
+  /**
+   * Maximum number of results to return.
+   */
+  @query("$top")
+  $top?: int32 = 100;
+};
 @armResourceOperations
 interface NamespaceResources {
   /**
@@ -59,19 +85,7 @@ interface NamespaceResources {
    */
   list is ArmResourceListByParent<
     NamespaceResource,
-    Parameters = {
-      /**
-       * Skip token for subsequent requests.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
-
-      /**
-       * Maximum number of results to return.
-       */
-      @query("$top")
-      $top?: int32 = 100;
-    },
+    Parameters = NamespaceResourceListParameters,
     Response = NamespaceListResult
   >;
 
@@ -80,19 +94,7 @@ interface NamespaceResources {
    */
   listAll is ArmListBySubscription<
     NamespaceResource,
-    Parameters = {
-      /**
-       * Skip token for subsequent requests.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
-
-      /**
-       * Maximum number of results to return.
-       */
-      @query("$top")
-      $top?: int32 = 100;
-    },
+    Parameters = NamespaceResourceListAllParameters,
     Response = NamespaceListResult
   >;
 
@@ -120,10 +122,12 @@ interface NamespaceResources {
 @@minLength(NamespaceResource.name, 1);
 @@doc(NamespaceResource.name, "Namespace name");
 @@doc(NamespaceResource.properties, "Represents namespace properties.");
-@@doc(NamespaceResources.createOrUpdate::parameters.resource,
+@@doc(
+  NamespaceResources.createOrUpdate::parameters.resource,
   "Request content."
 );
 @@doc(NamespaceResources.update::parameters.properties, "Request content.");
-@@doc(NamespaceResources.checkNotificationHubAvailability::parameters.body,
+@@doc(
+  NamespaceResources.checkNotificationHubAvailability::parameters.body,
   "Request content."
 );

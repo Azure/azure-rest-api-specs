@@ -4,13 +4,13 @@ import {
   outputAnnotatedErrors,
   outputErrorSummary,
   outputSuccessSummary,
-  ReportableOavError,
-} from "./formatting.js";
-import { checkExamples, checkSpecs } from "./runner.js";
+  type ReportableOavError,
+} from "./formatting.ts";
+import { checkExamples, checkSpecs } from "./runner.ts";
 
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import fs from "node:fs/promises";
-import { parseArgs, ParseArgsConfig } from "node:util";
+import { parseArgs, type ParseArgsConfig } from "node:util";
 import { resolve } from "path";
 
 export async function main() {
@@ -93,9 +93,9 @@ export async function main() {
     outputAnnotatedErrors(errorList);
 
     // print the errors in a summary report that we can later output to
-    outputErrorSummary(errorList, reportName);
+    await outputErrorSummary(errorList, reportName);
   } else {
-    outputSuccessSummary(scannedSwaggerFiles, reportName);
+    await outputSuccessSummary(scannedSwaggerFiles, reportName);
   }
 
   process.exit(exitCode);

@@ -54,18 +54,21 @@ interface OperationResultOperationGroup {
     operationId: string,
 
     ...LocationResourceParameter,
-  ): OperationJobExtendedInfo | {
-    @statusCode _: 202;
+  ):
+    | OperationJobExtendedInfo
+    | {
+        @statusCode _: 202;
 
-    @header("Azure-AsyncOperation")
-    azureAsyncOperation?: string;
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation?: string;
 
-    @header("Location")
-    location?: string;
+        @header("Location")
+        location?: string;
 
-    @header("Retry-After")
-    retryAfter?: int32;
-  } | CloudError;
+        @header("Retry-After")
+        retryAfter?: int32;
+      }
+    | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -117,7 +120,7 @@ interface DataProtectionOperationGroup {
     Request = FeatureValidationRequestBase,
     Response = FeatureValidationResponseBase,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = CloudError
   >;
 }
@@ -140,7 +143,10 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: CrossRegionRestoreRequestObject,
-  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>> | ErrorResponse;
+  ):
+    | OperationJobExtendedInfo
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
+    | ErrorResponse;
 
   /**
    * Validates whether Cross Region Restore can be triggered for DataSource.
@@ -158,7 +164,10 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: ValidateCrossRegionRestoreRequestObject,
-  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>> | ErrorResponse;
+  ):
+    | OperationJobExtendedInfo
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

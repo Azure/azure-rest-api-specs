@@ -38,7 +38,6 @@ interface SavingsPlanModels {
   /**
    * Get savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     SavingsPlanModel,
     Parameters = {
@@ -53,18 +52,19 @@ interface SavingsPlanModels {
   /**
    * Update savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SavingsPlanModel,
     PatchModel = SavingsPlanUpdateRequest,
-    Response = ArmResponse<SavingsPlanModel> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SavingsPlanModel>> | ArmResourceNotFoundResponse
+    Response =
+      | ArmResponse<SavingsPlanModel>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SavingsPlanModel>>
+      | ArmNotFoundResponse
   >;
 
   /**
    * List savings plans in an order.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   list is ArmResourceListByParent<
     SavingsPlanModel,
     Response = ArmResponse<SavingsPlanModelList>
@@ -73,7 +73,6 @@ interface SavingsPlanModels {
   /**
    * Validate savings plan patch.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("validate")
   validateUpdate is ArmResourceActionSync<
     SavingsPlanModel,
@@ -84,16 +83,19 @@ interface SavingsPlanModels {
 
 @@doc(SavingsPlanModel.name, "ID of the savings plan");
 @@doc(SavingsPlanModel.properties, "Savings plan properties");
-@@doc(SavingsPlanModels.update::parameters.properties,
+@@doc(
+  SavingsPlanModels.update::parameters.properties,
   "Request body for patching a savings plan order alias"
 );
-@@doc(SavingsPlanModels.validateUpdate::parameters.body,
+@@doc(
+  SavingsPlanModels.validateUpdate::parameters.body,
   "Request body for validating a savings plan patch request"
 );
 
-@@clientInitialization(Microsoft.BillingBenefits,
+@@clientInitialization(
+  Microsoft.BillingBenefits,
   {
     parameters: ExpandParameter,
   },
-  "!go,!javascript"
+  "!go,!javascript,!csharp"
 );

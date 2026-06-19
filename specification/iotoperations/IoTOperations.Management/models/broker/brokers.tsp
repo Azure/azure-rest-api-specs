@@ -64,6 +64,12 @@ model BrokerProperties {
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 
+  @visibility(Lifecycle.Read)
+  @doc("The status for the broker.")
+  @added(Versions.`2026-03-01`)
+  status?: BrokerStatus;
+
+  #suppress "deprecated" "ResourceHealth is deprecated, use 'status.healthState' instead."
   ...ResourceHealth;
 }
 
@@ -617,4 +623,12 @@ union SubscriberMessageDropStrategy {
 
   @doc("The oldest message is dropped.")
   DropOldest: "DropOldest",
+}
+
+/** BrokerStatus status. */
+@added(Versions.`2026-03-01`)
+model BrokerStatus {
+  /** The health state of the Broker. */
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthStatus;
 }

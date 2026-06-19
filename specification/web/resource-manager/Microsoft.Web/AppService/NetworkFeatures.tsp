@@ -55,7 +55,8 @@ interface NetworkFeaturesOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface NetworkFeaturesOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
@@ -96,7 +97,8 @@ interface NetworkFeaturesSlotOperationGroupOps
         view: string,
       }
     > {}
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface NetworkFeaturesSlotOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
@@ -108,6 +110,7 @@ interface NetworkFeaturesSlotOperationGroup {
     OverrideErrorType = DefaultErrorResponse
   >;
 }
-@@doc(NetworkFeatures.properties,
+@@doc(
+  NetworkFeatures.properties,
   "NetworkFeatures resource specific properties"
 );

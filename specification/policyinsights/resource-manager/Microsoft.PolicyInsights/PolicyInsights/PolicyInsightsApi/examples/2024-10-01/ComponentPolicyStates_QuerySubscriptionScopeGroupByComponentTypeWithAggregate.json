@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "$apply": "groupby((componentType,complianceState),aggregate($count as count))",
+    "$filter": "policyAssignmentId eq '/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "api-version": "2024-10-01",
+    "componentPolicyStatesResource": "latest",
+    "subscriptionId": "e78961ba-36fe-4739-9212-e3031b4c8db7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "complianceState": "NonCompliant",
+            "componentType": "Certificate",
+            "count": 26
+          },
+          {
+            "complianceState": "Compliant",
+            "componentType": "Certificate",
+            "count": 10
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ComponentPolicyStates_ListQueryResultsForSubscription",
+  "title": "Query latest component policy compliance state count grouped by component type at subscription scope filtered by given assignment."
+}

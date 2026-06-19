@@ -35,6 +35,11 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Setup Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
       - name: Run spelling check
         run: |
           $allFiles = Get-ChildItem -Path specification -Recurse -File

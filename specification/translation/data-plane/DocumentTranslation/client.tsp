@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 @TypeSpec.Versioning.useDependency(
-  DocumentTranslation.Versions.v2024_11_01_preview
+  DocumentTranslation.Versions.v2025_12_01_preview
 )
 namespace ClientCustomizations;
 
@@ -46,36 +46,62 @@ interface SingleDocumentTranslationClient {
   documentTranslate is DocumentTranslation.DocumentTranslationOperations.documentTranslate;
 }
 
-@@clientName(SingleDocumentTranslationClient.documentTranslate, "translate");
-
-@@clientName(DocumentTranslation.StatusSummary, "translationStatusSummary");
-
-@@clientName(DocumentTranslation.StorageSource, "translationStorageSource");
-
-@@clientName(DocumentTranslation.GetTranslationsStatusOptions.ids,
-  "translationIds"
+@@clientName(
+  SingleDocumentTranslationClient.documentTranslate,
+  "translate",
+  "!autorest"
 );
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.id, "translationId");
+@@clientName(
+  DocumentTranslation.StatusSummary,
+  "translationStatusSummary",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.GetDocumentsStatusOptions.ids, "documentIds");
+@@clientName(
+  DocumentTranslation.StorageSource,
+  "translationStorageSource",
+  "!autorest"
+);
 
-@@clientName(DocumentTranslation.DocumentTranslateBody.body,
+@@clientName(
+  DocumentTranslation.GetTranslationsStatusOptions.ids,
+  "translationIds",
+  "!autorest"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.id,
+  "translationId",
+  "!autorest"
+);
+
+@@clientName(
+  DocumentTranslation.GetDocumentsStatusOptions.ids,
+  "documentIds",
+  "!autorest"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentTranslateBody.body,
   "documentTranslateContent",
   "csharp, java"
 );
 
-@@clientName(DocumentTranslation.StartTranslationDetails,
+@@clientName(
+  DocumentTranslation.StartTranslationDetails,
   "translationBatch",
   "csharp, java"
 );
 
-@@clientName(DocumentTranslation.SourceInput,
+@@clientName(
+  DocumentTranslation.SourceInput,
   "TranslationSource",
   "csharp, java"
 );
 
-@@clientName(DocumentTranslation.TargetInput,
+@@clientName(
+  DocumentTranslation.TargetInput,
   "TranslationTarget",
   "csharp, java"
 );
@@ -88,7 +114,8 @@ interface SingleDocumentTranslationClient {
 
 @@convenientAPI(DocumentTranslationClient.getDocumentsStatus, false, "java");
 
-@@access(DocumentTranslationClient.getSupportedFormats,
+@@access(
+  DocumentTranslationClient.getSupportedFormats,
   Access.internal,
   "python"
 );
@@ -106,27 +133,32 @@ interface SingleDocumentTranslationClient {
 @@access(DocumentTranslation.FileFormatType, Access.public, "python");
 @@usage(DocumentTranslation.FileFormatType, Usage.output, "python");
 
-@@clientName(DocumentTranslationClient.startTranslation,
+@@clientName(
+  DocumentTranslationClient.startTranslation,
   "_begin_translation",
   "python"
 );
 
-@@clientName(DocumentTranslationClient.getDocumentsStatus,
+@@clientName(
+  DocumentTranslationClient.getDocumentsStatus,
   "list_document_statuses",
   "python"
 );
 
-@@clientName(DocumentTranslationClient.getTranslationsStatus,
+@@clientName(
+  DocumentTranslationClient.getTranslationsStatus,
   "list_translation_statuses",
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+@@clientName(
+  DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "created_on",
   "python"
 );
 
-@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+@@clientName(
+  DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
   "last_updated_on",
   "python"
 );
@@ -135,45 +167,71 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.Glossary.version, "format_version", "python");
 
-@@clientName(DocumentTranslation.Glossary,
+@@clientName(
+  DocumentTranslation.Glossary,
   "TranslationGlossary",
   "python, java"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.createdDateTimeUtc,
+@@clientName(
+  DocumentTranslation.DocumentStatus.createdDateTimeUtc,
   "created_on",
   "python"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
+@@clientName(
+  DocumentTranslation.DocumentStatus.lastActionDateTimeUtc,
   "last_updated_on",
   "python"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.path,
+@@clientName(
+  DocumentTranslation.DocumentStatus.path,
   "translated_document_url",
   "python"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.sourcePath,
+@@clientName(
+  DocumentTranslation.DocumentStatus.sourcePath,
   "source_document_url",
   "python"
 );
 
 @@clientName(DocumentTranslation.DocumentStatus.to, "translated_to", "python");
 
-@@clientName(DocumentTranslation.DocumentStatus.progress,
+@@clientName(
+  DocumentTranslation.DocumentStatus.progress,
   "translation_progress",
   "python"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus.characterCharged,
+@@clientName(
+  DocumentTranslation.DocumentStatus.characterCharged,
   "characters_charged",
   "python"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharged,
+  "images_charged",
+  "python"
+);
+
+@@clientName(
+  DocumentTranslation.DocumentStatus.imageCharacterDetected,
+  "image_characters_detected",
+  "python"
+);
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalCharacterCharged,
   "total_characters_charged",
+  "python"
+);
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageCharged,
+  "total_images_charged",
   "python"
 );
 
@@ -181,17 +239,20 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.FileFormat.format, "file_format", "python");
 
-@@clientName(DocumentTranslation.FileFormat.defaultVersion,
+@@clientName(
+  DocumentTranslation.FileFormat.defaultVersion,
   "default_format_version",
   "python"
 );
 
-@@clientName(DocumentTranslation.FileFormat.versions,
+@@clientName(
+  DocumentTranslation.FileFormat.versions,
   "format_versions",
   "python"
 );
 
-@@clientName(DocumentTranslation.FileFormat,
+@@clientName(
+  DocumentTranslation.FileFormat,
   "DocumentTranslationFileFormat",
   "python"
 );
@@ -200,7 +261,8 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.TargetInput, "TranslationTarget", "python");
 
-@@clientName(DocumentTranslation.TranslationError,
+@@clientName(
+  DocumentTranslation.TranslationError,
   "DocumentTranslationError",
   "python"
 );
@@ -209,58 +271,68 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.Status.Cancelling, "canceling", "python");
 
-@@clientName(DocumentTranslation.BatchRequest,
+@@clientName(
+  DocumentTranslation.BatchRequest,
   "documentTranslationInput",
   "java"
 );
 
 @@clientName(DocumentTranslationClient.startTranslation, "translation", "java");
 
-@@clientName(DocumentTranslationClient.getDocumentsStatus,
+@@clientName(
+  DocumentTranslationClient.getDocumentsStatus,
   "listDocumentStatuses",
   "java"
 );
 
-@@clientName(DocumentTranslationClient.getTranslationsStatus,
+@@clientName(
+  DocumentTranslationClient.getTranslationsStatus,
   "listTranslationStatuses",
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatus,
+@@clientName(
+  DocumentTranslation.TranslationStatus,
   "translationStatusResult",
   "java"
 );
 
-@@clientName(DocumentTranslation.DocumentStatus,
+@@clientName(
+  DocumentTranslation.DocumentStatus,
   "documentStatusResult",
   "java"
 );
 
 @@clientName(DocumentTranslation.Status, "translationStatus", "java");
 
-@@clientName(DocumentTranslation.TranslationStatus.createdDateTimeUtc,
+@@clientName(
+  DocumentTranslation.TranslationStatus.createdDateTimeUtc,
   "createdOn",
   "java"
 );
 
-@@clientName(DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
+@@clientName(
+  DocumentTranslation.TranslationStatus.lastActionDateTimeUtc,
   "lastUpdatedOn",
   "java"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.cancelled,
+@@clientName(
+  DocumentTranslation.StatusSummary.cancelled,
   "cancelledCount",
   "java"
 );
 
 @@clientName(DocumentTranslation.StatusSummary.failed, "failedCount", "java");
 
-@@clientName(DocumentTranslation.StatusSummary.inProgress,
+@@clientName(
+  DocumentTranslation.StatusSummary.inProgress,
   "inProgressCount",
   "java"
 );
 
-@@clientName(DocumentTranslation.StatusSummary.notYetStarted,
+@@clientName(
+  DocumentTranslation.StatusSummary.notYetStarted,
   "notYetStartedCount",
   "java"
 );
@@ -269,7 +341,16 @@ interface SingleDocumentTranslationClient {
 
 @@clientName(DocumentTranslation.StatusSummary.total, "totalCount", "java");
 
-@@clientName(DocumentTranslation.StatusSummary.totalCharacterCharged,
+@@clientName(
+  DocumentTranslation.StatusSummary.totalCharacterCharged,
   "totalCharactersChargedCount",
   "java"
 );
+
+@@clientName(
+  DocumentTranslation.StatusSummary.totalImageCharged,
+  "totalImagesChargedCount",
+  "java"
+);
+
+@@usage(DocumentTranslation.DocumentTranslateContent, Usage.json, "csharp");

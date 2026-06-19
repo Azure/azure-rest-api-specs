@@ -72,32 +72,34 @@ interface ModelVersions {
   @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
     ModelVersion,
-    Response = ArmResourceUpdatedResponse<ModelVersion> | (ArmResourceCreatedResponse<
-      ModelVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ModelVersion>
+      | (ArmResourceCreatedResponse<ModelVersion, ArmAsyncOperationHeader> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -306,18 +308,23 @@ interface ModelVersionOperationGroup {
 }
 
 @@doc(ModelVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(ModelVersion.properties,
+@@doc(
+  ModelVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ModelVersions.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersions.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  ModelVersions.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(ModelVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ModelVersionOperationGroup.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(ModelVersionOperationGroup.publish::parameters.body,
+@@doc(
+  ModelVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

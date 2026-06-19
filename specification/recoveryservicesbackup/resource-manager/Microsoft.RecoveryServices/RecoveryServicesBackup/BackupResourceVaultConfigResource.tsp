@@ -12,22 +12,27 @@ namespace Microsoft.RecoveryServices;
 /**
  * Backup resource vault config details.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy TrackedResourceWithOptionalLocation for back compatibility"
 @singleton("vaultconfig")
 @parentResource(VaultResource)
 model BackupResourceVaultConfigResource
-  is TrackedResourceWithOptionalLocation<BackupResourceVaultConfig> {
+  is ProxyResource<BackupResourceVaultConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceVaultConfigResource,
     KeyName = "backupconfig",
     SegmentName = "backupconfig",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Backward compatibility for optional ETag"
   eTag?: string;
 }
 
@@ -71,12 +76,15 @@ interface BackupResourceVaultConfigs {
 }
 
 @@doc(BackupResourceVaultConfigResource.name, "");
-@@doc(BackupResourceVaultConfigResource.properties,
+@@doc(
+  BackupResourceVaultConfigResource.properties,
   "BackupResourceVaultConfigResource properties"
 );
-@@doc(BackupResourceVaultConfigs.put::parameters.resource,
+@@doc(
+  BackupResourceVaultConfigs.put::parameters.resource,
   "resource config request"
 );
-@@doc(BackupResourceVaultConfigs.update::parameters.properties,
+@@doc(
+  BackupResourceVaultConfigs.update::parameters.properties,
   "resource config request"
 );

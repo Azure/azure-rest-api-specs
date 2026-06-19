@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ScalingPlan.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -43,15 +45,9 @@ interface ScalingPlanPooledSchedules {
    * Update a ScalingPlanPooledSchedule.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     ScalingPlanPooledSchedule,
-    ScalingPlanPooledSchedulePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlanSchedule?: ScalingPlanPooledSchedulePatch;
-    }
+    ScalingPlanPooledSchedulePatch
   >;
 
   /**
@@ -90,9 +86,15 @@ interface ScalingPlanPooledSchedules {
 @@maxLength(ScalingPlanPooledSchedule.name, 64);
 @@minLength(ScalingPlanPooledSchedule.name, 1);
 @@doc(ScalingPlanPooledSchedule.name, "The name of the ScalingPlanSchedule");
-@@doc(ScalingPlanPooledSchedule.properties,
+@@doc(
+  ScalingPlanPooledSchedule.properties,
   "Detailed properties for ScalingPlanPooledSchedule"
 );
-@@doc(ScalingPlanPooledSchedules.create::parameters.resource,
+@@doc(
+  ScalingPlanPooledSchedules.create::parameters.resource,
   "Object containing ScalingPlanPooledSchedule definitions."
+);
+@@clientName(
+  ScalingPlanPooledSchedules.update::parameters.body,
+  "scalingPlanSchedule"
 );

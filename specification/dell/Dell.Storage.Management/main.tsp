@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./LiftrBase/main.tsp";
 import "./LiftrBase.Storage/main.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -38,6 +39,7 @@ enum Versions {
   /**
    * The 2025-03-21 API version.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   v2025_03_21: "2025-03-21",
 }
 
@@ -80,6 +82,7 @@ interface FileSystems {
   listBySubscription is ArmListBySubscription<LiftrBase.Storage.FileSystemResource>;
 }
 
-@@doc(LiftrBase.Storage.FileSystemResource.name,
+@@doc(
+  LiftrBase.Storage.FileSystemResource.name,
   "Name of the filesystem resource"
 );

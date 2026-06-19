@@ -326,3 +326,9 @@ model QuotaBucketRequestPropertiesDimensions {
 @doc("Values returned by the List operation.")
 model PagedOutboundEnvironmentEndpoint
   is Azure.Core.Page<OutboundEnvironmentEndpoint>;
+
+model LoadTestResourceUpdate
+  is Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    LoadTestResource,
+    LoadTestProperties
+  >;

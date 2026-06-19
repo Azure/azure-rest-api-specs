@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./CustomOperations.tsp";
 
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -43,16 +45,7 @@ interface Workspaces {
    * Update a workspace.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    Workspace,
-    WorkspacePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot workspace?: WorkspacePatch;
-    }
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<Workspace, WorkspacePatch>;
 
   /**
    * Remove a workspace.
@@ -99,6 +92,8 @@ interface Workspaces {
 @@minLength(Workspace.name, 3);
 @@doc(Workspace.name, "The name of the workspace");
 @@doc(Workspace.properties, "Detailed properties for Workspace");
-@@doc(Workspaces.createOrUpdate::parameters.resource,
+@@doc(
+  Workspaces.createOrUpdate::parameters.resource,
   "Object containing Workspace definitions."
 );
+@@clientName(Workspaces.update::parameters.body, "workspace");

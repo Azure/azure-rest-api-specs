@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "name": "sample-mhsm",
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "sample-pec1",
+            "type": "Microsoft.KeyVault/managedhsms/privateEndpointConnections",
+            "etag": "",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec1",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe1"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "sample-pec2",
+            "type": "Microsoft.KeyVault/managedhsms/privateEndpointConnections",
+            "etag": "",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/managedhsms/sample-mhsm/privateEndpointConnections/sample-pec2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MHSMPrivateEndpointConnections_ListByResource",
+  "title": "List managed HSM Pools in a subscription"
+}

@@ -72,32 +72,37 @@ interface EnvironmentVersions {
   @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
-    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<
-      EnvironmentVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<EnvironmentVersion>
+      | (ArmResourceCreatedResponse<
+          EnvironmentVersion,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete version.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -235,15 +240,19 @@ interface EnvironmentVersionOperationGroup {
 }
 
 @@doc(EnvironmentVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(EnvironmentVersion.properties,
+@@doc(
+  EnvironmentVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
   "Definition of EnvironmentVersion."
 );
-@@doc(EnvironmentVersionOperationGroup.publish::parameters.body,
+@@doc(
+  EnvironmentVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

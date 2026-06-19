@@ -2,12 +2,12 @@
   "name": "@azure-tools/oav-runner",
   "private": true,
   "type": "module",
-  "main": "dist/src/main.js",
+  "main": "src/main.ts",
   "bin": {
     "oav-runner": "cmd/oav-runner.js"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
     "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -17,24 +17,25 @@
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "dependencies": {
+    "@actions/core": "^3.0.0",
     "@azure-tools/specs-shared": "file:../../../.github/shared",
     "js-yaml": "^4.1.0",
-    "oav": "4.0.3",
-    "simple-git": "^3.27.0"
+    "oav": "4.0.4",
+    "simple-git": "^3.36.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^10.0.0",
     "@types/node": "^20.0.0",
-    "@vitest/coverage-v8": "^4.0.15",
+    "@vitest/coverage-v8": "^4.1.0",
     "cross-env": "^10.1.0",
-    "eslint": "^9.22.0",
-    "prettier": "3.8.1",
+    "eslint": "^10.0.0",
+    "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~5.9.2",
-    "typescript-eslint": "^8.45.0",
-    "vitest": "^4.0.15"
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.0"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.14.1"
   }
 }

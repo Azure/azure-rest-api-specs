@@ -1,0 +1,117 @@
+name: arm-api-reviewer-eval-report-format
+description: |
+  Report format and structure test (11xxxx).
+  Validates that the reviewer output includes exact line numbers, rule IDs,
+  fix suggestions, and structured sections.
+
+defaults:
+  runs: 1
+  timeout: "300s"
+  model: claude-opus-4.6-1m
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 110001 — Report format structure
+  - name: verify-report-format-structure
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification file for
+      compliance with Azure REST API Guidelines and ARM RPC rules. This is a new
+      service with no previous API version. Report all findings using the standard
+      review report format with rule IDs, exact line numbers, JSON paths, and fix
+      suggestions.
+
+      File: specification/fmtsvc/resource-manager/Microsoft.FmtService/stable/2025-01-01/fmtsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "line numbers present"
+        config:
+          # Matches line number citations in any common format:
+          #   "Line 42", "Lines: 29", "**Lines:** 29" (colon inside bold span),
+          #   "**Line(s)** | 29", "line 29-35", "Lines 142-150".
+          # The character class allows any combination of whitespace, ':', '*',
+          # and '|' between the "Line(s)" token and the digits, in any order.
+          pattern: "[Ll]ines?(?:\\(s\\))?[\\s:*|]+\\d+"
+      - type: output-matches
+        name: "rule IDs present"
+        config:
+          # Accepts the canonical SEC-SECRET-DETECT plus common Azure rule-ID
+          # patterns produced by various tooling: RPC-* contracts, Spectral
+          # R-codes (R3017, R4015), OAPI codes (OAPI034), WHATIF codes,
+          # TSP-* TypeSpec rules, ARG (Azure Resource Graph), and PLCY policy
+          # codes. Any of these counts as a valid rule-ID citation.
+          pattern: "SEC-SECRET-DETECT|SecretPropertyDetection|SecretsIn(?:Properties|Response)|RPC-[A-Za-z]+-V\\d+-\\d+|R\\d{4}|OAPI\\d{3}|WHATIF-\\d{3}|TSP-[A-Z][A-Z0-9-]+|ARG\\d{3}|PLCY\\d{3}"
+      - type: output-not-matches
+        name: "no see-above placeholder response"
+        config:
+          # Catches the subagent-handoff regression: agent drafts the report
+          # internally then sends only a back-reference as the final message.
+          pattern: "(?i)(report (is )?above|already (provided|finished|generated)|see above|no additional action needed|as (rendered|shown) above)"
+      - type: prompt
+    rubric:
+      - Each finding cites a specific line number (e.g., line 42) -- not vague references like "near end"
+      - Each finding includes a rule ID (e.g., SEC-SECRET-DETECT, RPC-Put-V1-22)
+      - Each finding includes a concrete fix suggestion
+      - The output has organized sections (Blocking Issues, Warnings, Summary, or similar)
+
+  # 110002 -- Critic process invisibility on the happy path
+  - name: critic-invisible-on-clean-spec
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+    prompt: >
+      Review the following ARM resource-manager OpenAPI specification. This is
+      a clean specification with no expected blocking violations.
+
+      Per the "Process visibility" guidance in
+      `.github/agents/arm-api-reviewer.agent.md` (Step 6), the critic always
+      runs but its presence is internal quality control, not narrative. On the
+      happy path the chat-rendered report MUST NOT contain critic narration:
+      no `Critic verdict:` line, no `Critic mode:` line, no
+      `Next-step recommendation:` line, and no per-finding `Critic: PASS`
+      annotations. Critic visibility is reserved for exceptions (severity
+      downgrade, classification flip, dropped findings, override, or critic
+      unavailable).
+
+      Produce the standard report.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no Critic verdict line"
+        config:
+          pattern: "(?i)\\*\\*Critic verdict:\\*\\*|^Critic verdict:"
+      - type: output-not-matches
+        name: "no Critic mode line"
+        config:
+          pattern: "(?i)\\*\\*Critic mode:\\*\\*|^Critic mode:"
+      - type: output-not-matches
+        name: "no per-finding Critic PASS annotation"
+        config:
+          # Catches "**Critic:** ✅ PASS", "Critic: PASS", "Critic: ✅ PASS"
+          pattern: "(?i)\\*?\\*?Critic:\\*?\\*?\\s*(?:✅\\s*)?PASS"
+      - type: output-not-matches
+        name: "no Next-step recommendation line"
+        config:
+          pattern: "(?i)\\*\\*Next-step recommendation:\\*\\*|^Next-step recommendation:"
+      - type: prompt
+    rubric:
+      - The report does NOT contain a `Critic verdict:` header line
+      - The report does NOT contain a `Critic mode:` header line
+      - The report does NOT contain a `Next-step recommendation:` header line on the happy path
+      - "No finding carries a `Critic: \u2705 PASS` annotation, a `Critic: PASS` annotation, or any equivalent affirmative critic narration"
+      - The report still uses the standard section structure (e.g., Blocking Issues, Warnings, Summary). A compact summary table or compliance checklist substituting for empty `### Blocking Issues -- None` / `### Warnings -- None` sections is acceptable when the spec has zero findings -- the standard skeleton is only required when there are findings to organize.
+      - An optional "Findings dropped after critic review" section is omitted entirely on the happy path (it should only render when non-empty)

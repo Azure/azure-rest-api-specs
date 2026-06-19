@@ -39,6 +39,7 @@ import "./Elastic/ElasticBackupPolicy.tsp";
 import "./Elastic/ElasticBackup.tsp";
 import "./ActiveDirectory.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -65,19 +66,9 @@ enum Versions {
   v2025_06_01: "2025-06-01",
 
   /**
-   * The 2025-07-01-preview API version.
-   */
-  v2025_07_01_preview: "2025-07-01-preview",
-
-  /**
    * The 2025-08-01 API version.
    */
   v2025_08_01: "2025-08-01",
-
-  /**
-   * The 2025-08-01-preview API version.
-   */
-  v2025_08_01_preview: "2025-08-01-preview",
 
   /**
    * The 2025-09-01 API version.
@@ -85,10 +76,45 @@ enum Versions {
   v2025_09_01: "2025-09-01",
 
   /**
-   * The 2025-09-01-preview API version.
+   * The 2025-12-01 API version.
    */
-  @previewVersion
-  v2025_09_01_preview: "2025-09-01-preview",
+  v2025_12_01: "2025-12-01",
+
+  /**
+   * The 2025-12-15-preview API version.
+   */
+  v2025_12_15_preview: "2025-12-15-preview",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-01-15-preview API version.
+   */
+  v2026_01_15_preview: "2026-01-15-preview",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
+
+  /**
+   * The 2026-04-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_04_15_preview: "2026-04-15-preview",
 }
 
 interface Operations

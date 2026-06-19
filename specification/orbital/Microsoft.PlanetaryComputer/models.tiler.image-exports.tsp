@@ -3,35 +3,39 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.common.images.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-
 namespace Microsoft.PlanetaryComputer;
 
 /**
  * Parameters for requesting a rendered image from a collection
  */
-model ImageRequest {
+model ImageParameters {
   /**
    * Cql
    */
-  cql: Cql;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  cql: Record<unknown>;
+
+  /**
+   * Zoom
+   */
+  zoom?: float32;
 
   /**
    * Geometry
    */
-  geometry?: GeoJson;
+  geometry?: Geometry;
 
   /**
    * JSON-encoded visualization parameters
    */
   @encodedName("application/json", "render_params")
-  renderParams: string;
+  renderParameters: string;
 
   /**
    * Width of the output image in pixels
    */
-  cols: int32;
+  @encodedName("application/json", "cols")
+  columns: int32;
 
   /**
    * Height of the output image in pixels
@@ -39,17 +43,23 @@ model ImageRequest {
   rows: int32;
 
   /**
-   * Output format for the generated image
-   */
-  format?: ImageRequestFormat = ImageRequestFormat.png;
-
-  /**
    * Whether to include branding on the output image
    */
   showBranding?: boolean = true;
 
   /**
-   * Whether to apply masking to invalid or no-data areas
+   * Image size
    */
-  mask?: boolean;
+  @pattern("^[1-9][0-9]*x[1-9][0-9]*$")
+  imageSize?: string;
+}
+
+/**
+ * Response model for image exports
+ */
+model ImageResponse {
+  /**
+   * URL of the exported image
+   */
+  url: url;
 }

@@ -42,7 +42,6 @@ interface SavingsPlanOrderAliasModels {
   /**
    * Get a savings plan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   get is ArmResourceRead<
     SavingsPlanOrderAliasModel,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
@@ -60,9 +59,11 @@ interface SavingsPlanOrderAliasModels {
 }
 
 @@doc(SavingsPlanOrderAliasModel.name, "Name of the savings plan order alias");
-@@doc(SavingsPlanOrderAliasModel.properties,
+@@doc(
+  SavingsPlanOrderAliasModel.properties,
   "Savings plan order alias properties"
 );
-@@doc(SavingsPlanOrderAliasModels.create::parameters.resource,
+@@doc(
+  SavingsPlanOrderAliasModels.create::parameters.resource,
   "Request body for creating a savings plan order alias"
 );

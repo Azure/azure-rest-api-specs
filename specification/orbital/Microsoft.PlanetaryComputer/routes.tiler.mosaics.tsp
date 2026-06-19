@@ -1,23 +1,102 @@
 // Tiles for STAC Collections Mosaics interfaces
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tiler.common.tsp";
 import "./models.tiler.mosaics.tsp";
+import "./models.common.versions.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.PlanetaryComputer;
+
+// Common signature aliases for client overrides
+alias getMosaicsTileCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getMosaicsTileJsonCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+@removed(Versions.v2026_04_15)
 interface MosaicsTiles {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format} endpoints instead"
+  @summary("Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -29,7 +108,7 @@ interface MosaicsTiles {
 
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
       ...ZxyPathParameters;
 
       /**
@@ -37,7 +116,7 @@ interface MosaicsTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
@@ -55,71 +134,49 @@ interface MosaicsTiles {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileMatrixSets {
   /**
    * Create map tile.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tile Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/ endpoints instead"
+  @summary("Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}@{scale}x.{format}")
   @get
-  getZxyScalexFormat is Azure.Core.Foundations.Operation<
+  getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsTileCustomizedCommonSignatures;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
-    TileResponse | NoContentResponse
+    TileResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileJsonOperations {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tilejson.json` endpoints instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tilejson.json instead"
+  @summary("TileJson (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tilejson.json")
   @get
@@ -140,14 +197,14 @@ interface MosaicsTileJsonOperations {
        * Identifier selecting one of the TileMatrixSetId supported (default: 'WebMercatorQuad').
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -166,7 +223,7 @@ interface MosaicsTileJsonOperations {
        */
       @query("buffer")
       @minValueExclusive(0)
-      buffer?: float64;
+      buffer?: float32;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -178,7 +235,7 @@ interface MosaicsTileJsonOperations {
        * STAC Collection ID
        */
       @query("collection")
-      collection?: string;
+      collectionId?: string;
 
       /**
        * Resampling method
@@ -193,13 +250,13 @@ interface MosaicsTileJsonOperations {
       pixelSelection?: PixelSelection = PixelSelection.first;
 
       /**
-       * Algorithm name
+       * Terrain algorithm name
        */
       @query("algorithm")
-      algorithm?: Algorithm;
+      algorithm?: TerrainAlgorithm;
 
       /**
-       * Algorithm parameter
+       * Terrain algorithm parameters
        */
       @query("algorithm_params")
       algorithmParams?: string;
@@ -229,41 +286,29 @@ interface MosaicsTileJsonOperations {
       @query("return_mask")
       returnMask?: boolean = true;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsTileMatrixSetsTileJson {
   /**
    * Return TileJSON document for a searchId.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Tilejson Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/tilejson.json instead"
+  @summary("TileJson Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/tilejson.json")
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
-      ...AlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsTileJsonCustomizedCommonSignatures;
       ...ZoomQueryParameters;
 
       /**
@@ -271,7 +316,7 @@ interface MosaicsTileMatrixSetsTileJson {
        * not (jpeg).
        */
       @query("tile_format")
-      tileFormat?: ImageType;
+      tileFormat?: TilerImageFormat;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -282,22 +327,30 @@ interface MosaicsTileMatrixSetsTileJson {
 
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
+      ...TilePaddingQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetadata
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsWmtsMosaics {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Wmts")
+  #deprecated "Use /data/mosaic/searches/{searchId}/WMTSCapabilities.xml instead"
+  @summary("Wmts (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/WMTSCapabilities.xml")
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+
       /**
        * Search Id (pgSTAC Search Hash)
        */
@@ -311,13 +364,13 @@ interface MosaicsWmtsMosaics {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -327,43 +380,37 @@ interface MosaicsWmtsMosaics {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsWmtsMosaicsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Wmts Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml instead"
+  @summary("Wmts Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/{tileMatrixSetId}/WMTSCapabilities.xml")
   @get
   getCapabilitiesXml is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...AssetQueryParameters;
+      ...TerrainAlgorithmQueryParameters;
+      ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures;
 
       /**
        * Output image type. Default is png.
        */
       @query("tile_format")
-      tileFormat?: ImageType = ImageType.png;
+      tileFormat?: TilerImageFormat = TilerImageFormat.png;
 
       /**
        * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
@@ -373,8 +420,10 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
       tileScale?: int32 = 1;
 
       ...ZoomQueryParameters;
+      ...TileMatrixSetQueryParameters;
+      ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesXmlResponse | NoContentResponse
+    WmtsCapabilitiesXmlResponse
   >;
 }
 
@@ -384,21 +433,25 @@ interface MosaicsRegisterSearch {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Register Search")
-  @tag("Tiles for STAC Collections Mosaics")
+  @tag("Tiles for STAC Searches")
   @route("/data/mosaic/register")
   @post
   register is Azure.Core.Foundations.Operation<
     RegisterMosaic,
-    RegisterResponse
+    TilerMosaicSearchRegistrationResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsInfoSearch {
   /**
    * Get Search query metadata.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/info` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Info Search")
+  #deprecated "Use /data/mosaic/searches/{searchId}/info instead"
+  @summary("Info Search (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/info")
   @get
@@ -412,16 +465,20 @@ interface MosaicsInfoSearch {
       @pattern(".*")
       searchId: string;
     },
-    TitilerPgstacModelInfo
+    TilerStacSearchRegistration
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForTiles {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Tile")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{z}/{x}/{y}/assets instead"
+  @summary("Assets For Tile (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{z}/{x}/{y}/assets")
   @get
@@ -443,18 +500,22 @@ interface MosaicsAssetsForTiles {
        * 'WebMercatorQuad')
        */
       @query("tileMatrixSetId")
-      tileMatrixSetId?: Tilematrixsetid = Tilematrixsetid.WebMercatorQuad;
+      tileMatrixSetId?: TileMatrixSetId = TileMatrixSetId.WebMercatorQuad;
     },
-    ApplicationJsonResponse | NoContentResponse
+    ApplicationJsonResponse
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForTileMatrixSets {
   /**
    * Return a list of assets which overlap a given tile
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Tile Tilematrixsetid As Path")
+  #deprecated "Use /data/mosaic/searches/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets instead"
+  @summary("Assets For Tile Tilematrixsetid As Path (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
   @route("/data/mosaic/{searchId}/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets")
   @get
@@ -478,22 +539,34 @@ interface MosaicsAssetsForTileMatrixSets {
       @pattern(".*")
       tileMatrixSetId: string;
 
+      /**
+       * STAC Collection Identifier
+       */
+      @query("collection")
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
       ...ZxyPathParameters;
     },
-    ApplicationJsonResponse | NoContentResponse
+    TilerAssetGeoJson[]
   >;
 }
 
+@removed(Versions.v2026_04_15)
 interface MosaicsAssetsForPoints {
   /**
    * Return a list of assets for a given point.
+   *
+   * Note: If you are using stable API version 2026-04-15, please use `/data/mosaic/searches/{searchId}/{longitude},{latitude}/assets` instead. The old endpoint is associated with the preview API version, which is deprecated and will be removed in a future release.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  @summary("Assets For Point")
+  #deprecated "Use /data/mosaic/searches/{searchId}/{longitude},{latitude}/assets instead"
+  @summary("Assets For Point (Deprecated)")
   @tag("Tiles for STAC Collections Mosaics")
-  @route("/data/mosaic/{searchId}/{lon},{lat}/assets")
+  @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")
   @get
-  getLonLatAssets is Azure.Core.Foundations.Operation<
+  getPointAssets is Azure.Core.Foundations.Operation<
     {
       /**
        * Search Id (pgSTAC Search Hash)
@@ -509,20 +582,20 @@ interface MosaicsAssetsForPoints {
        * Longitude
        */
       @path
-      lon: float32;
+      longitude: float32;
 
       /**
        * Latitude
        */
       @path
-      lat: float32;
+      latitude: float32;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
     },
-    ApplicationJsonResponse | NoContentResponse
+    StacItemPointAsset[]
   >;
 }

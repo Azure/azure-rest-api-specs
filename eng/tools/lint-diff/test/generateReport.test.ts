@@ -10,15 +10,15 @@ import {
   getLine,
   getPathSegment,
   iconFor,
-} from "../src/generateReport.js";
+} from "../src/generateReport.ts";
 import {
-  AutoRestMessage,
-  AutorestRunResult,
-  BeforeAfter,
-  LintDiffViolation,
-  Source,
-} from "../src/lintdiff-types.js";
-import { isWindows } from "./test-util.js";
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { isWindows } from "./test-util.ts";
 
 import { vol } from "memfs";
 
@@ -32,8 +32,8 @@ vi.mock("node:fs/promises", async () => {
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { readFile } from "fs/promises";
 
-vi.mock("../src/util.js", async () => {
-  const original = await vi.importActual("../src/util.js");
+vi.mock("../src/util.ts", async () => {
+  const original = await vi.importActual("../src/util.ts");
   return {
     ...original,
     getDependencyVersion: vi.fn().mockResolvedValue("1.0.0"),
@@ -88,7 +88,7 @@ describe("getLine", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -142,7 +142,7 @@ describe("getFile", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
 
@@ -208,7 +208,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a };
@@ -239,7 +239,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "warning" };
@@ -253,7 +253,7 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = { ...a, level: "error" };
@@ -267,12 +267,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -284,12 +284,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -301,12 +301,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -318,12 +318,12 @@ describe("compareLintDiffViolations", () => {
       level: "warning",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 2, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b = {
       ...a,
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
     };
 
     const actual = compareLintDiffViolations(a, b);
@@ -335,7 +335,7 @@ describe("compareLintDiffViolations", () => {
       level: "fatal",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -352,7 +352,7 @@ describe("compareLintDiffViolations", () => {
       level: "error",
       code: "SomeCode1",
       message: "Some Message",
-      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source],
+      source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
       details: {},
     } as LintDiffViolation;
     const b: LintDiffViolation = {
@@ -383,7 +383,7 @@ describe("generateLintDiffReport", () => {
           document:
             "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
           position: { line: 1, colomn: 1 },
-        } as Source,
+        },
       ],
       details: {},
     };
@@ -427,7 +427,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -486,7 +486,7 @@ describe("generateLintDiffReport", () => {
       | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-      **[must fix]The following errors/warnings are intorduced by current PR:**
+      **[must fix]The following errors/warnings are introduced by current PR:**
 
       | Rule | Message | Related RPC [For API reviewers] |
       | ---- | ------- | ------------------------------- |
@@ -568,7 +568,7 @@ describe("generateLintDiffReport", () => {
             document:
               "/home/test/specification/contosowidgetmanager/data-plane/Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json",
             position: { line: 1, colomn: 1 },
-          } as Source,
+          },
         ],
         details: {},
       };
@@ -613,7 +613,7 @@ describe("generateLintDiffReport", () => {
         | default | [default](https://github.com/repo/path/blob/compareSha/file1.md) | [default](https://github.com/repo/path/blob/baseBranch/file1.md) |
 
 
-        **[must fix]The following errors/warnings are intorduced by current PR:**
+        **[must fix]The following errors/warnings are introduced by current PR:**
 
         | Rule | Message | Related RPC [For API reviewers] |
         | ---- | ------- | ------------------------------- |

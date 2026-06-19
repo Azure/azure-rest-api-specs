@@ -54,7 +54,10 @@ interface StorageMovers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     StorageMover,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -75,7 +78,8 @@ interface StorageMovers {
 }
 
 @@doc(StorageMover.name, "The name of the Storage Mover resource.");
-@@doc(StorageMover.properties,
+@@doc(
+  StorageMover.properties,
   "The resource specific properties for the Storage Mover resource."
 );
 @@doc(StorageMovers.createOrUpdate::parameters.resource, "");

@@ -196,6 +196,17 @@ union AlertsState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union CrossSubscriptionRestoreState {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -241,6 +252,20 @@ union ImmutabilityState {
   Unlocked: "Unlocked",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Locked: "Locked",
+}
+
+/**
+ * Immutability config type.
+ */
+@added(Versions.v2026_05_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is governed by policy. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Immutability duration is time-based. */
+  TimeBased: "TimeBased",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -870,6 +895,12 @@ model VaultProperties {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_01_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Restore Settings of the vault
    */
   restoreSettings?: RestoreSettings;
@@ -1181,6 +1212,17 @@ model ClassicAlertSettings {
 }
 
 /**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_01_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
+}
+
+/**
  * Restore Settings  of the vault
  */
 model RestoreSettings {
@@ -1245,6 +1287,30 @@ model SecuritySettings {
 model ImmutabilitySettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration of the vault — selects whether immutability is
+   * inherited from the backup policy (AsPerPolicy) or fixed for a specific
+   * duration (TimeBased).
+   */
+  @added(Versions.v2026_05_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Immutability configuration of vault.
+ */
+@added(Versions.v2026_05_01)
+model ImmutabilityConfiguration {
+  /** Immutability type. 'AsPerPolicy' inherits duration from backup policy; 'TimeBased' requires explicit durationInDays. */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.
+   */
+  @minValue(30)
+  @maxValue(36135)
+  durationInDays?: int32;
 }
 
 /**
@@ -1730,27 +1796,35 @@ model DeletedVaultUndeleteInput {
   properties: DeletedVaultUndeleteInputProperties;
 }
 
-@@doc(VaultPropertiesEncryption.infrastructureEncryption,
+@@doc(
+  VaultPropertiesEncryption.infrastructureEncryption,
   "Enabling/Disabling the Double Encryption state"
 );
-@@doc(VaultPropertiesMoveDetails.operationId,
+@@doc(
+  VaultPropertiesMoveDetails.operationId,
   "OperationId of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.startTimeUtc,
+@@doc(
+  VaultPropertiesMoveDetails.startTimeUtc,
   "Start Time of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.completionTimeUtc,
+@@doc(
+  VaultPropertiesMoveDetails.completionTimeUtc,
   "End Time of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.sourceResourceId,
+@@doc(
+  VaultPropertiesMoveDetails.sourceResourceId,
   "Source Resource of the Resource Move Operation"
 );
-@@doc(VaultPropertiesMoveDetails.targetResourceId,
+@@doc(
+  VaultPropertiesMoveDetails.targetResourceId,
   "Target Resource of the Resource Move Operation"
 );
-@@doc(VaultPropertiesRedundancySettings.standardTierStorageRedundancy,
+@@doc(
+  VaultPropertiesRedundancySettings.standardTierStorageRedundancy,
   "The storage redundancy setting of a vault"
 );
-@@doc(VaultPropertiesRedundancySettings.crossRegionRestore,
+@@doc(
+  VaultPropertiesRedundancySettings.crossRegionRestore,
   "Flag to show if Cross Region Restore is enabled on the Vault or not"
 );

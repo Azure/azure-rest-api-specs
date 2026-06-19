@@ -10,17 +10,21 @@ using Face;
 @TypeSpec.Versioning.useDependency(Face.Versions.v1_2)
 namespace ClientCustomizations;
 
-@@clientName(RecognitionModel, "FaceRecognitionModel");
-@@clientName(DetectionModel, "FaceDetectionModel");
-@@clientName(VerificationResult, "FaceVerificationResult");
-@@clientName(FindSimilarResult, "FaceFindSimilarResult");
-@@clientName(GroupingResult, "FaceGroupingResult");
-@@clientName(LivenessDecision, "FaceLivenessDecision");
-@@clientName(ImageType, "FaceImageType");
-@@clientName(OperationStatus, "FaceOperationStatus");
-@@clientName(TrainingResult, "FaceTrainingResult");
-@@clientName(IdentificationCandidate, "FaceIdentificationCandidate");
-@@clientName(IdentificationResult, "FaceIdentificationResult");
+@@clientName(RecognitionModel, "FaceRecognitionModel", "!autorest");
+@@clientName(DetectionModel, "FaceDetectionModel", "!autorest");
+@@clientName(VerificationResult, "FaceVerificationResult", "!autorest");
+@@clientName(FindSimilarResult, "FaceFindSimilarResult", "!autorest");
+@@clientName(GroupingResult, "FaceGroupingResult", "!autorest");
+@@clientName(LivenessDecision, "FaceLivenessDecision", "!autorest");
+@@clientName(ImageType, "FaceImageType", "!autorest");
+@@clientName(OperationStatus, "FaceOperationStatus", "!autorest");
+@@clientName(TrainingResult, "FaceTrainingResult", "!autorest");
+@@clientName(
+  IdentificationCandidate,
+  "FaceIdentificationCandidate",
+  "!autorest"
+);
+@@clientName(IdentificationResult, "FaceIdentificationResult", "!autorest");
 
 @@access(DetectionModel, Access.public);
 @@access(RecognitionModel, Access.public);
@@ -93,7 +97,7 @@ interface FaceClient {
     name: "FaceAdministrationClient",
     service: Face,
   },
-  "csharp,python,javascript,go"
+  "!java"
 )
 namespace FaceAdministrationClient {
   /**

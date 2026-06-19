@@ -27,7 +27,9 @@ import "./CertificateObjectLocalRulestackResource.tsp";
 import "./FqdnListLocalRulestackResource.tsp";
 import "./LocalRulesResource.tsp";
 import "./PrefixListResource.tsp";
+import "./CustomCaptureConfigurationsFirewallResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -50,6 +52,16 @@ enum Versions {
    * The 2025-10-08 API version.
    */
   v2025_10_08: "2025-10-08",
+
+  /**
+   * The 2026-01-26-preview API version.
+   */
+  v2026_01_26_preview: "2026-01-26-preview",
+
+  /**
+   * The 2026-05-11-preview API version.
+   */
+  v2026_05_11_preview: "2026-05-11-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

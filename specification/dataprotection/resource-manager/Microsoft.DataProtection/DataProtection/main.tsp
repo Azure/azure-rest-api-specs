@@ -23,6 +23,7 @@ import "./ResourceGuardResource.tsp";
 import "./DppBaseResource.tsp";
 import "./ResourceGuardProxyBaseResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -52,6 +53,16 @@ enum Versions {
    * The 2025-09-01 API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

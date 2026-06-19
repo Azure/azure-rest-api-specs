@@ -76,7 +76,7 @@ interface Environments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Standard operations produce wrong operation definition"
   @doc("Partially updates an environment.")
   @route("/projects/{projectName}/users/{userId}/environments/{environmentName}")
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @added(APIVersions.v2024_02_01)
   patchEnvironment is Azure.Core.Foundations.Operation<
     {
@@ -108,22 +108,24 @@ interface Environments {
       ...EnvironmentNameParameter;
       ...ForceDeleteEnvironmentQueryParameter;
     },
-    {
-      @statusCode
-      statusCode: 202;
 
-      @bodyRoot body: OperationStatus;
+      | {
+          @statusCode
+          statusCode: 202;
 
-      @header("Location")
-      location: string;
+          @bodyRoot body: OperationStatus;
 
-      @pollingLocation
-      @header("Operation-Location")
-      operationLocation: string;
-    } | {
-      @statusCode
-      statusCode: 204;
-    }
+          @header("Location")
+          location: string;
+
+          @pollingLocation
+          @header("Operation-Location")
+          operationLocation: string;
+        }
+      | {
+          @statusCode
+          statusCode: 204;
+        }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Missing key"

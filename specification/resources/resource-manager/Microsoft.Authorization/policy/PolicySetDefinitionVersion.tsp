@@ -2,10 +2,12 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./PolicySetDefinition.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -41,7 +43,7 @@ alias PolicySetDefinitionVersionOps = Azure.ResourceManager.Legacy.ExtensionOper
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {},
@@ -69,7 +71,7 @@ alias PolicySetDefinitionVersionTenantOps = Azure.ResourceManager.Legacy.Extensi
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {},
@@ -102,7 +104,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
   },
   {
@@ -112,7 +114,7 @@ alias PolicySetDefinitionVersionManagementGroupOps = Azure.ResourceManager.Legac
     @path
     @segment("policySetDefinitions")
     @key
-    @pattern("^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$")
+    @pattern("^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$")
     policySetDefinitionName: string;
 
     /** The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number */
@@ -255,15 +257,19 @@ interface PolicySetDefinitionVersions {
   >;
 }
 
-@@doc(PolicySetDefinitionVersion.name,
+@@doc(
+  PolicySetDefinitionVersion.name,
   "The policy set definition version.  The format is x.y.z where x is the major version number, y is the minor version number, and z is the patch number"
 );
-@@doc(PolicySetDefinitionVersion.properties,
+@@doc(
+  PolicySetDefinitionVersion.properties,
   "The policy set definition version properties."
 );
-@@doc(PolicySetDefinitionVersions.createOrUpdate::parameters.resource,
+@@doc(
+  PolicySetDefinitionVersions.createOrUpdate::parameters.resource,
   "The policy set definition properties."
 );
-@@doc(PolicySetDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  PolicySetDefinitionVersions.createOrUpdateAtManagementGroup::parameters.resource,
   "The policy set definition version properties."
 );

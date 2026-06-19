@@ -36,15 +36,7 @@ These settings apply only when `--tag=package-2018-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-06'
 input-file:
-- stable/2018-06-01/datafactory.json
-- stable/2018-06-01/entityTypes/DataFlow.json
-- stable/2018-06-01/entityTypes/Dataset.json
-- stable/2018-06-01/entityTypes/IntegrationRuntime.json
-- stable/2018-06-01/entityTypes/LinkedService.json
-- stable/2018-06-01/entityTypes/ManagedPrivateEndpoint.json
-- stable/2018-06-01/entityTypes/Pipeline.json
-- stable/2018-06-01/entityTypes/Trigger.json
-- stable/2018-06-01/entityTypes/ChangeDataCapture.json
+- stable/2018-06-01/openapi.json
 suppressions:
   - code: PropertiesTypeObjectNoDefinition
     reason: ADF parameterization feature is widely adopted and requires object type for most of the swagger properties.

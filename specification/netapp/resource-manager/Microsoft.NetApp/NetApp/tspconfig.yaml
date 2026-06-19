@@ -10,7 +10,6 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/netapp.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
@@ -21,6 +20,7 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+    api-version: "2026-04-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-netapp"
     namespace: "com.azure.resourcemanager.netapp"
@@ -29,22 +29,30 @@ options:
     float32-as-double: false
     client-side-validations: true
     uuid-as-string: false
+    api-version: "2026-04-01"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-netapp"
     flavor: azure
     experimental-extensible-enums: true
+    ignore-nullable-on-optional: false
     package-details:
       name: "@azure/arm-netapp"
+    api-version: "2026-04-01"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.NetApp"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-04-01"
   "@azure-tools/typespec-go":
     emitter-output-dir: "{output-dir}/{service-dir}/armnetapp"
     service-dir: "sdk/resourcemanager/netapp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetapp/v8"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnetapp/v10"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    api-version: "2026-04-01"
 
 linter:
   extends:

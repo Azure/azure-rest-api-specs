@@ -87,33 +87,38 @@ interface FeaturestoreEntityContainers {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturestoreEntityContainer,
-    Response = ArmResourceUpdatedResponse<FeaturestoreEntityContainer> | (ArmResourceCreatedResponse<
-      FeaturestoreEntityContainer,
-      ArmAsyncOperationHeader
-    > &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    Response =
+      | ArmResourceUpdatedResponse<FeaturestoreEntityContainer>
+      | (ArmResourceCreatedResponse<
+          FeaturestoreEntityContainer,
+          ArmAsyncOperationHeader
+        > &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -127,12 +132,15 @@ interface FeaturestoreEntityContainers {
   >;
 }
 
-@@doc(FeaturestoreEntityContainer.name,
+@@doc(
+  FeaturestoreEntityContainer.name,
   "Container name. This is case-sensitive."
 );
-@@doc(FeaturestoreEntityContainer.properties,
+@@doc(
+  FeaturestoreEntityContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
+@@doc(
+  FeaturestoreEntityContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

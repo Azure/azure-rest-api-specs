@@ -1,0 +1,222 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "frontDoorName": "frontDoor1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "frontDoor1",
+        "type": "Microsoft.Network/frontDoor",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1",
+        "location": "westus",
+        "properties": {
+          "backendPools": [
+            {
+              "name": "backendPool1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1",
+              "properties": {
+                "backends": [
+                  {
+                    "address": "w3.contoso.com",
+                    "enabledState": "Enabled",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "priority": 2,
+                    "weight": 1
+                  },
+                  {
+                    "address": "contoso.com.website-us-west-2.othercloud.net",
+                    "enabledState": "Enabled",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "priority": 1,
+                    "privateEndpointStatus": "Approved",
+                    "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
+                    "privateLinkLocation": "eastus",
+                    "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
+                    "weight": 2
+                  },
+                  {
+                    "address": "10.0.1.5",
+                    "enabledState": "Enabled",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "priority": 1,
+                    "privateEndpointStatus": "Approved",
+                    "privateLinkAlias": "APPSERVER.d84e61f0-0870-4d24-9746-7438fa0019d1.westus2.azure.privatelinkservice",
+                    "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
+                    "weight": 1
+                  }
+                ],
+                "healthProbeSettings": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/healthProbeSettings/healthProbeSettings1"
+                },
+                "loadBalancingSettings": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1"
+                }
+              }
+            }
+          ],
+          "backendPoolsSettings": {
+            "enforceCertificateNameCheck": "Enabled",
+            "sendRecvTimeoutSeconds": 60
+          },
+          "cname": "frontDoor1.azurefd.net",
+          "enabledState": "Enabled",
+          "frontendEndpoints": [
+            {
+              "name": "frontendEndpoint1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1",
+              "properties": {
+                "hostName": "www.contoso.com",
+                "sessionAffinityEnabledState": "Enabled",
+                "sessionAffinityTtlSeconds": 60,
+                "webApplicationFirewallPolicyLink": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1"
+                }
+              }
+            },
+            {
+              "name": "default",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default",
+              "properties": {
+                "hostName": "frontDoor1.azurefd.net"
+              }
+            }
+          ],
+          "healthProbeSettings": [
+            {
+              "name": "healthProbeSettings1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/healthProbeSettings/healthProbeSettings1",
+              "properties": {
+                "path": "/",
+                "enabledState": "Enabled",
+                "healthProbeMethod": "HEAD",
+                "intervalInSeconds": 120,
+                "protocol": "Http"
+              }
+            }
+          ],
+          "loadBalancingSettings": [
+            {
+              "name": "loadBalancingSettings1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/loadBalancingSettings/loadBalancingSettings1",
+              "properties": {
+                "sampleSize": 4,
+                "successfulSamplesRequired": 2
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "resourceState": "Enabled",
+          "routingRules": [
+            {
+              "name": "routingRule1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/routingRule1",
+              "properties": {
+                "acceptedProtocols": [
+                  "Http"
+                ],
+                "enabledState": "Enabled",
+                "frontendEndpoints": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/frontendEndpoint1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/frontendEndpoints/default"
+                  }
+                ],
+                "patternsToMatch": [
+                  "/*"
+                ],
+                "routeConfiguration": {
+                  "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                  "backendPool": {
+                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                  },
+                  "customForwardingPath": "",
+                  "forwardingProtocol": "MatchRequest"
+                },
+                "rulesEngine": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/rulesEngines/rulesEngine1"
+                },
+                "webApplicationFirewallPolicyLink": {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies/policy1"
+                }
+              }
+            }
+          ],
+          "rulesEngines": [
+            {
+              "name": "rulesEngine1",
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/rulesEngines/rulesEngine1",
+              "properties": {
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "action": {
+                      "routeConfigurationOverride": {
+                        "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                        "customFragment": "fragment",
+                        "customHost": "www.bing.com",
+                        "customPath": "/api",
+                        "customQueryString": "a=b",
+                        "redirectProtocol": "HttpsOnly",
+                        "redirectType": "Moved"
+                      }
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchValue": [
+                          "CH"
+                        ],
+                        "rulesEngineMatchVariable": "RemoteAddr",
+                        "rulesEngineOperator": "GeoMatch"
+                      }
+                    ],
+                    "matchProcessingBehavior": "Stop",
+                    "priority": 1
+                  },
+                  {
+                    "name": "Rule2",
+                    "action": {
+                      "responseHeaderActions": [
+                        {
+                          "headerActionType": "Overwrite",
+                          "headerName": "Cache-Control",
+                          "value": "public, max-age=31536000"
+                        }
+                      ]
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchValue": [
+                          "jpg"
+                        ],
+                        "rulesEngineMatchVariable": "FilenameExtension",
+                        "rulesEngineOperator": "Equal",
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ],
+                    "priority": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "FrontDoors_Get",
+  "title": "Get Front Door"
+}

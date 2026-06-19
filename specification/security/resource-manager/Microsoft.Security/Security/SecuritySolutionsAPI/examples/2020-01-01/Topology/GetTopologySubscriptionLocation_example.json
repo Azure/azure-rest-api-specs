@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "ascLocation": "centralus",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vnets",
+            "type": "Microsoft.Security/locations/topologies",
+            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/vnets",
+            "location": "westus",
+            "properties": {
+              "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
+              "topologyResources": [
+                {
+                  "children": [
+                    {
+                      "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet"
+                    }
+                  ],
+                  "location": "westus",
+                  "networkZones": "Internal",
+                  "recommendationsExist": false,
+                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet",
+                  "severity": "Healthy",
+                  "topologyScore": 0
+                }
+              ]
+            }
+          },
+          {
+            "name": "subnets",
+            "type": "Microsoft.Security/locations/topologies",
+            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/subnets",
+            "location": "westus",
+            "properties": {
+              "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
+              "topologyResources": [
+                {
+                  "location": "westus",
+                  "networkZones": "Internal",
+                  "parents": [
+                    {
+                      "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet"
+                    }
+                  ],
+                  "recommendationsExist": false,
+                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet",
+                  "severity": "Healthy",
+                  "topologyScore": 5
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Topology_ListByHomeRegion",
+  "title": "Get topology on a subscription from security data location"
+}

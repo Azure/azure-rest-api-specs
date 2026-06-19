@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01",
+    "body": {
+      "properties": {
+        "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "id": "/providers/microsoft.capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188",
+        "properties": {
+          "netPayable": {
+            "amount": 149254.8,
+            "currencyCode": "USD"
+          },
+          "policyResult": {
+            "policyErrors": null
+          },
+          "purchasesTotal": {
+            "amount": 153214.8,
+            "currencyCode": "USD"
+          },
+          "refundsTotal": {
+            "amount": 3960,
+            "currencyCode": "USD"
+          },
+          "reservationsToExchange": [
+            {
+              "billingInformation": {
+                "billingCurrencyProratedAmount": {
+                  "amount": 149254.8,
+                  "currencyCode": "USD"
+                },
+                "billingCurrencyRemainingCommitmentAmount": {
+                  "amount": 0,
+                  "currencyCode": "USD"
+                },
+                "billingCurrencyTotalPaidAmount": {
+                  "amount": 153214.8,
+                  "currencyCode": "USD"
+                }
+              },
+              "billingRefundAmount": {
+                "amount": 3960,
+                "currencyCode": "USD"
+              },
+              "quantity": 1,
+              "reservationId": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6",
+              "status": "Succeeded"
+            }
+          ],
+          "reservationsToPurchase": [
+            {
+              "billingCurrencyTotal": {
+                "amount": 19800,
+                "currencyCode": "USD"
+              },
+              "properties": {
+                "location": "westus",
+                "properties": {
+                  "appliedScopeType": "Shared",
+                  "billingPlan": "Upfront",
+                  "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+                  "displayName": "testDisplayName",
+                  "quantity": 1,
+                  "renew": false,
+                  "reservedResourceProperties": {
+                    "instanceFlexibility": "On"
+                  },
+                  "reservedResourceType": "VirtualMachines",
+                  "term": "P1Y"
+                },
+                "sku": {
+                  "name": "Standard_B1ls"
+                }
+              },
+              "reservationId": "/providers/microsoft.capacity/reservationOrders/1e85c519-b815-4169-8d79-62fc460c608f/reservations/0c80fceb-305c-40a8-b5a6-11445807bbb3",
+              "reservationOrderId": "/providers/microsoft.capacity/reservationOrders/1e85c519-b815-4169-8d79-62fc460c608f",
+              "status": "Succeeded"
+            }
+          ],
+          "savingsPlansToPurchase": [
+            {
+              "billingCurrencyTotal": {
+                "amount": 133414.8,
+                "currencyCode": "USD"
+              },
+              "properties": {
+                "properties": {
+                  "appliedScopeProperties": {
+                    "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+                  },
+                  "appliedScopeType": "Single",
+                  "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+                  "commitment": {
+                    "amount": 15.23,
+                    "currencyCode": "USD",
+                    "grain": "Hourly"
+                  },
+                  "displayName": "ComputeSavingsPlan",
+                  "term": "P1Y"
+                },
+                "sku": {
+                  "name": "Compute_Savings_Plan"
+                }
+              },
+              "savingsPlanId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+              "savingsPlanOrderId": "/providers/Microsoft.BillingBenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000",
+              "status": "Succeeded"
+            }
+          ],
+          "sessionId": "66e2ac8f-439e-4345-8235-6fef07608081"
+        },
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/Microsoft.Capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01",
+        "Location": "https://management.azure.com/Microsoft.Capacity/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "Exchange_Post",
+  "title": "Exchange"
+}

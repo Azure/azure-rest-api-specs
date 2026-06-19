@@ -55,12 +55,13 @@ alias StaticSiteUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
     name: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites",
   }
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("StaticSites")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.
@@ -79,10 +80,12 @@ interface StaticSiteARMResources {
   @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
-    Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteARMResource>> & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -96,10 +99,12 @@ interface StaticSiteARMResources {
   updateStaticSite is ArmCustomPatchSync<
     StaticSiteARMResource,
     PatchModel = StaticSitePatchResource,
-    Response = ArmResponse<StaticSiteARMResource> | (AcceptedResponse & {
-      @bodyRoot
-      _: StaticSiteARMResource;
-    }),
+    Response =
+      | ArmResponse<StaticSiteARMResource>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: StaticSiteARMResource;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -140,7 +145,7 @@ interface StaticSiteARMResources {
   @summary("Gets the list of users of a static site.")
   @action("listUsers")
   @list
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/listUsers")
   listStaticSiteUsers is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     void,
@@ -159,7 +164,7 @@ interface StaticSiteARMResources {
    * Description for Deletes the user entry from the static site.
    */
   @summary("Deletes the user entry from the static site.")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   @delete
   deleteStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
@@ -182,9 +187,10 @@ interface StaticSiteARMResources {
   /**
    * Description for Updates a user entry with the listed roles
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-path-casing-conflicts" "Legacy"
   @summary("Updates a user entry with the listed roles")
-  @patch(#{ implicitOptionality: true })
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
+  @patch(#{ implicitOptionality: false })
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/authproviders/{authprovider}/users/{userid}")
   updateStaticSiteUser is StaticSiteUserOps.ActionSync<
     StaticSiteARMResource,
     StaticSiteUserARMResource,
@@ -378,25 +384,32 @@ interface StaticSiteARMResources {
 
 @@doc(StaticSiteARMResource.name, "Name of the static site.");
 @@doc(StaticSiteARMResource.properties, "Core resource properties");
-@@doc(StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSite::parameters.resource,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSite::parameters.properties,
+@@doc(
+  StaticSiteARMResources.updateStaticSite::parameters.properties,
   "A JSON representation of the staticsite properties. See example."
 );
-@@doc(StaticSiteARMResources.updateStaticSiteUser::parameters.body,
+@@doc(
+  StaticSiteARMResources.updateStaticSiteUser::parameters.body,
   "A JSON representation of the StaticSiteUser properties. See example."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings::parameters.body,
   "The dictionary containing the static site app settings to update."
 );
-@@doc(StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
+@@doc(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings::parameters.body,
   "The dictionary containing the static site function app settings to update."
 );
-@@doc(StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
+@@doc(
+  StaticSiteARMResources.createUserRolesInvitationLink::parameters.body,
   ""
 );
 @@doc(StaticSiteARMResources.resetStaticSiteApiKey::parameters.body, "");
-@@doc(StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
+@@doc(
+  StaticSiteARMResources.createZipDeploymentForStaticSite::parameters.body,
   "A JSON representation of the StaticSiteZipDeployment properties. See example."
 );

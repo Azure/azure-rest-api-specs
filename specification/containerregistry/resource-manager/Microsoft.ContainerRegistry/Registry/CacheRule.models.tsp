@@ -1,3 +1,8 @@
+import "@azure-tools/typespec-azure-resource-manager";
+
+using Azure.ResourceManager;
+using Versioning;
+
 namespace Microsoft.ContainerRegistry;
 
 /**
@@ -8,6 +13,12 @@ model CacheRuleProperties {
    * The ARM resource ID of the credential store which is associated with the cache rule.
    */
   credentialSetResourceId?: string;
+
+  /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
 
   /**
    * Source repository pulled from upstream.
@@ -35,6 +46,64 @@ model CacheRuleProperties {
 }
 
 /**
+ * The type of authentication configuration used by a cache rule to access an upstream registry.
+ */
+@added(Versions.vLatestPreview)
+union AdditionalAuthenticationType {
+  string,
+
+  /**
+   * Google Artifact Registry (GAR) authentication via workload identity federation.
+   */
+  GoogleArtifactRegistry: "GoogleArtifactRegistry",
+}
+
+/**
+ * Authentication configuration used by a cache rule to access an upstream registry.
+ */
+@discriminator("authenticationType")
+@added(Versions.vLatestPreview)
+model AdditionalAuthenticationProperties {
+  /**
+   * Authentication type discriminator.
+   */
+  authenticationType: AdditionalAuthenticationType;
+}
+
+/**
+ * Google Artifact Registry (GAR) authentication configuration.
+ */
+@added(Versions.vLatestPreview)
+model GarAuthenticationProperties extends AdditionalAuthenticationProperties {
+  authenticationType: "GoogleArtifactRegistry";
+
+  /**
+   * The Google Cloud Platform project that is configured for authentication
+   * Permissions should be granted to principal://iam.googleapis.com/projects/{ProjectNumber}/locations/global/workloadIdentityPools/{WorkloadIdentityPool}/providers/{WorkloadIdentityProvider}/subject/{ManagedIdentityPrincipal}
+   */
+  @minLength(5)
+  @maxLength(30)
+  @pattern("^[1-9][0-9]{4,29}$")
+  projectNumber: string;
+
+  /**
+   * The Google Cloud platform workload identity pool used for authentication.
+   */
+  @minLength(4)
+  @maxLength(32)
+  @pattern("^[a-z][a-z0-9-]{2,30}[a-z0-9]$")
+  workloadIdentityPool: string;
+
+  /**
+   * The Google Cloud Platform workload identity provider used for authentication.
+   */
+  @minLength(4)
+  @maxLength(32)
+  @pattern("^[a-z][a-z0-9-]{2,30}[a-z0-9]$")
+  workloadIdentityProvider: string;
+}
+
+/**
  * The parameters for updating a cache rule.
  */
 model CacheRuleUpdateParameters {
@@ -44,6 +113,13 @@ model CacheRuleUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: CacheRuleUpdateProperties;
+
+  /**
+   * The identity of the cache rule.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Unable to use `added` decorator on spread property. Use `...ManagedServiceIdentityProperty` instead when feature has been GA'd."
+  @added(Versions.vLatestPreview)
+  identity?: IdentityProperties;
 }
 
 /**
@@ -54,6 +130,12 @@ model CacheRuleUpdateProperties {
    * The ARM resource ID of the credential store which is associated with the Cache rule.
    */
   credentialSetResourceId?: string;
+
+  /**
+   * Authentication configuration used by the cache rule to access the upstream source repository.
+   */
+  @added(Versions.vLatestPreview)
+  additionalAuthenticationProperties?: AdditionalAuthenticationProperties;
 }
 
 /**

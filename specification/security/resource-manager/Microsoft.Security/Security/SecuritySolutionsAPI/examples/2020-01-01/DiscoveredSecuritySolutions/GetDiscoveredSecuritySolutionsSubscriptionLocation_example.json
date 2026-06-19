@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2020-01-01",
+    "ascLocation": "centralus",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "CP",
+            "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg1/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/CP",
+            "location": "eastus",
+            "properties": {
+              "offer": "cisco-asav",
+              "publisher": "cisco",
+              "securityFamily": "Ngfw",
+              "sku": "asav-azure-byol"
+            }
+          },
+          {
+            "name": "paloalto7",
+            "type": "Microsoft.Security/locations/discoveredSecuritySolutions",
+            "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg2/providers/Microsoft.Security/locations/centralus/discoveredSecuritySolutions/paloalto7",
+            "location": "eastus2",
+            "properties": {
+              "offer": "vmseries1",
+              "publisher": "paloaltonetworks",
+              "securityFamily": "Ngfw",
+              "sku": "byol"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiscoveredSecuritySolutions_ListByHomeRegion",
+  "title": "Get discovered security solutions from a security data location"
+}

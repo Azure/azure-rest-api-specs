@@ -600,13 +600,6 @@
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/Domain"
-            },
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
             }
           },
           "default": {
@@ -991,14 +984,7 @@
             "description": "The request has succeeded."
           },
           "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."

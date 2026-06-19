@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -26,6 +27,7 @@ enum Versions {
   v2024_09_18_preview: "2024-09-18-preview",
 
   /** 2024-09-18 version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_09_18: "2024-09-18",
@@ -108,6 +110,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instances {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<InstanceResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<InstanceResource, InstanceResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;

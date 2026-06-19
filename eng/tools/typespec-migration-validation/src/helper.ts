@@ -1,7 +1,7 @@
-import { OpenAPI2Document } from "@azure-tools/typespec-autorest";
+import { type OpenAPI2Document } from "@azure-tools/typespec-autorest";
 import fs from "fs";
 import path from "path";
-import { logWarning } from "./log.js";
+import { logWarning } from "./log.ts";
 
 /**
  * Reads all files in a directory recursively, excluding paths containing a specified string
@@ -62,7 +62,7 @@ export function mergeFiles(folderPath: string): OpenAPI2Document {
   };
 
   for (const file of files) {
-    const fileContent = readFileContent(file);
+    const fileContent = readFileContent(file).replace(/^\uFEFF/, "");
     const jsonContent: OpenAPI2Document = JSON.parse(fileContent);
     mergedContent.info = jsonContent.info;
 

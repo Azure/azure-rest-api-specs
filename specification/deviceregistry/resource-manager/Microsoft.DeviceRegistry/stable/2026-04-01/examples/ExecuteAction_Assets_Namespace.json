@@ -1,0 +1,41 @@
+{
+  "title": "Namespace Asset Execute Action",
+  "operationId": "NamespaceAssets_ExecuteAction",
+  "description": "Execute Action on Namespace Asset Resource.",
+  "parameters": {
+    "api-version": "2026-04-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "assetName": "my-asset-1",
+    "body": {
+      "managementActionName": "my-asset-action-1",
+      "managementGroupName": "my-asset-group-1",
+      "payload": {
+        "prop1": "value1",
+        "prop2": "123",
+        "prop3": true,
+        "prop4": {
+          "subProp1": "subValue1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "response": "The action was executed by asset successfully.",
+        "managementActionName": "my-asset-action-1",
+        "managementGroupName": "my-asset-group-1",
+        "assetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.IoTWorkspaces/deviceRegistries/my-namespace-1/assets/my-asset-1"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://contoso.com/subscriptions/00000000-0000-0000-0000-000000000000/locations/westus/operationsStatuses/someguid"
+      }
+    }
+  }
+}

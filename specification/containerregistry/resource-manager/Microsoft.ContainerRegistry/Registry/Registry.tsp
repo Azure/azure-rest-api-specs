@@ -53,11 +53,13 @@ interface Registries {
   update is ArmCustomPatchAsync<
     Registry,
     PatchModel = RegistryUpdateParameters,
-    Response = ArmResponse<Registry> | ArmResourceCreatedResponse<
-      Registry,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = Registry> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<Registry>
+      | ArmResourceCreatedResponse<
+          Registry,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = Registry> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   /**
@@ -66,7 +68,10 @@ interface Registries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -152,18 +157,23 @@ interface Registries {
 @@minLength(Registry.name, 5);
 @@doc(Registry.name, "The name of the container registry.");
 @@doc(Registry.properties, "The properties of the container registry.");
-@@doc(Registries.create::parameters.resource,
+@@doc(
+  Registries.create::parameters.resource,
   "The parameters for creating a container registry."
 );
-@@doc(Registries.update::parameters.properties,
+@@doc(
+  Registries.update::parameters.properties,
   "The parameters for updating a container registry."
 );
-@@doc(Registries.importImage::parameters.body,
+@@doc(
+  Registries.importImage::parameters.body,
   "The parameters specifying the image to copy and the source container registry."
 );
-@@doc(Registries.regenerateCredential::parameters.body,
+@@doc(
+  Registries.regenerateCredential::parameters.body,
   "Specifies name of the password which should be regenerated -- password or password2."
 );
-@@doc(Registries.generateCredentials::parameters.body,
+@@doc(
+  Registries.generateCredentials::parameters.body,
   "The parameters for generating credentials."
 );

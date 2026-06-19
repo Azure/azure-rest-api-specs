@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "aggregationInterval": "Hourly",
+    "api-version": "2025-10-01",
+    "endDateTimeUTC": "2019-09-21T17:32:28Z",
+    "experimentName": "MyExperiment",
+    "profileName": "MyProfile",
+    "resourceGroupName": "MyResourceGroup",
+    "startDateTimeUTC": "2019-07-21T17:32:28Z",
+    "subscriptionId": "subid",
+    "timeseriesType": "MeasurementCounts"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/MyResourceGroup/providers/Microsoft.Network/NetworkExperimentProfiles/MyProfile/Experiments/MyExperiment/Timeseries",
+        "properties": {
+          "aggregationInterval": "Hourly",
+          "country": "United States",
+          "endDateTimeUTC": "2019-08-02",
+          "endpoint": "https://endpointA.com",
+          "startDateTimeUTC": "2019-07-29",
+          "timeseriesData": [
+            {
+              "dateTimeUTC": "2019-07-22T17:32:28Z",
+              "value": 79
+            }
+          ],
+          "timeseriesType": "MeasurementCounts"
+        }
+      }
+    }
+  },
+  "operationId": "Reports_GetTimeseries",
+  "title": "Gets a Timeseries for a given Experiment"
+}

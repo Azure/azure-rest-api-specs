@@ -2,11 +2,11 @@
 // TODO: Enable eslint, fix errors
 
 import { join } from "path";
-import { Suppression } from "suppressions";
+import { type Suppression } from "suppressions";
 import { parse as yamlParse } from "yaml";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { fileExists, getSuppressions, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { fileExists, getSuppressions, readTspConfig } from "../utils.ts";
 
 type ExpectedValueType = string | boolean | RegExp;
 type SkipResult = { shouldSkip: boolean; reason?: string };
@@ -229,10 +229,11 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
       };
     }
     // Handle various path formats with different prefixes
-    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
-    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
-    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
-    // Format 4: {output-dir}/sdk/dellstorage/{xxxx} where we need to validate "{xxxx}"
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor          → azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor                       → azure-mgmt-advisor
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings            → azadmin/settings
+    // Format 4: {output-dir}/sdk/dellstorage/{xxxx}                    → {xxxx} (resolved below)
+    // Format 5: {output-dir}/sdk/recoveryservices-backup/Azure.Foo     → Azure.Foo
 
     let extractedPath: string;
     if (!actualValue.includes("/")) {
@@ -243,11 +244,15 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
         (part) => !(part === "{output-dir}" || part === "{service-dir}"),
       );
 
-      // If the last part is a variable (e.g., {namespace}, {package-name}, {xxxx}), use it as extractedPath
-      const lastPart = pathParts[pathParts.length - 1];
+      // If the last part is a variable (e.g., {namespace}, {package-name}), use just that (Format 4)
+      const lastPart = filteredParts[filteredParts.length - 1];
       if (lastPart.startsWith("{") && lastPart.endsWith("}")) {
         extractedPath = lastPart;
       } else {
+        // Strip a leading sdk/<service-name>/ segment if present (Format 5)
+        if (filteredParts.length >= 3 && filteredParts[0] === "sdk") {
+          filteredParts.splice(0, 2);
+        }
         extractedPath = filteredParts.join("/");
       }
     }
@@ -772,6 +777,41 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
   }
 }
 
+// ----- CSharp mgmt emitter requirement rule -----
+const CSHARP_MGMT_EMITTER = "@azure-typespec/http-client-csharp-mgmt";
+const LEGACY_CSHARP_EMITTER = "@azure-tools/typespec-csharp";
+
+export class TspConfigCsharpMgmtEmitterRequiredSubRule extends TspconfigSubRuleBase {
+  constructor() {
+    super("emit", CSHARP_MGMT_EMITTER);
+  }
+
+  protected skip(_config: any, folder: string): SkipResult {
+    return skipForDataPlane(folder);
+  }
+
+  protected validate(config: any): RuleResult {
+    const emit: string[] | undefined = config?.emit;
+    const options: Record<string, any> | undefined = config?.options;
+
+    const hasLegacyEmitter =
+      emit?.includes(LEGACY_CSHARP_EMITTER) || options?.[LEGACY_CSHARP_EMITTER] !== undefined;
+
+    if (hasLegacyEmitter) {
+      return this.createFailedResult(
+        `Management plane TypeSpec projects must not use the legacy "${LEGACY_CSHARP_EMITTER}" emitter`,
+        `Please use "${CSHARP_MGMT_EMITTER}" instead of "${LEGACY_CSHARP_EMITTER}" in your tspconfig.yaml`,
+      );
+    }
+
+    return { success: true };
+  }
+
+  public getPathOfKeyToValidate(): string {
+    return `emit.${CSHARP_MGMT_EMITTER}`;
+  }
+}
+
 /**
  * Required rules: When a tspconfig.yaml exists, any applicable rule in the requiredRules array
  * that fails validation will cause the entire SdkTspConfigValidationRule to fail. For example,
@@ -780,6 +820,7 @@ export class TspConfigCsharpMgmtNamespaceSubRule extends TspconfigEmitterOptions
  */
 export const requiredRules = [
   new TspConfigCommonAzServiceDirMatchPatternSubRule(),
+  new TspConfigCsharpMgmtEmitterRequiredSubRule(),
   new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Versioning;
 
 namespace Microsoft.Batch;
 /**
@@ -27,15 +28,15 @@ model Certificate
   /**
    * The ETag of the resource, used for concurrency statements.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 }
 
@@ -45,7 +46,8 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   get is ArmResourceRead<
     Certificate,
     Response = ArmResponse<Certificate> & {
@@ -61,8 +63,9 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   create is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     Certificate,
     Request = CertificateCreateOrUpdateParameters,
@@ -70,14 +73,14 @@ interface Certificates {
       /**
        * The entity state (ETag) version of the certificate to update. A value of "*" can be used to apply the operation only if the certificate already exists. If omitted, this operation will always be applied.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new certificate to be created, but to prevent updating an existing certificate. Other values will be ignored.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
@@ -94,7 +97,8 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     Certificate,
@@ -103,7 +107,7 @@ interface Certificates {
       /**
        * The entity state (ETag) version of the certificate to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -120,18 +124,23 @@ interface Certificates {
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy design"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   listByBatchAccount is ArmResourceListByParent<
     Certificate,
     Parameters = {
@@ -162,7 +171,8 @@ interface Certificates {
    *
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
-  #deprecated "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #deprecated "Removal of feature"
+  @removed(Versions.v2025_06_01)
   @action("cancelDelete")
   cancelDeletion is ArmResourceActionSync<
     Certificate,
@@ -180,31 +190,40 @@ interface Certificates {
 
 @@maxLength(Certificate.name, 45);
 @@minLength(Certificate.name, 5);
-@@doc(Certificate.name,
+@@doc(
+  Certificate.name,
   "The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5."
 );
-@@doc(Certificate.properties,
+@@doc(
+  Certificate.properties,
   "The properties associated with the certificate."
 );
-@@doc(Certificates.create::parameters.resource,
+@@doc(
+  Certificates.create::parameters.resource,
   "Additional parameters for certificate creation."
 );
-@@doc(Certificates.update::parameters.properties,
+@@doc(
+  Certificates.update::parameters.properties,
   "Certificate entity to update."
 );
-@@summary(Certificates.listByBatchAccount,
+@@summary(
+  Certificates.listByBatchAccount,
   "Lists all of the certificates in the specified account."
 );
-@@summary(Certificates.get,
+@@summary(
+  Certificates.get,
   "Gets information about the specified certificate."
 );
-@@summary(Certificates.create,
+@@summary(
+  Certificates.create,
   "Creates a new certificate inside the specified account."
 );
-@@summary(Certificates.update,
+@@summary(
+  Certificates.update,
   "Updates the properties of an existing certificate."
 );
 @@summary(Certificates.delete, "Deletes the specified certificate.");
-@@summary(Certificates.cancelDeletion,
+@@summary(
+  Certificates.cancelDeletion,
   "Cancels a failed deletion of a certificate from the specified account."
 );

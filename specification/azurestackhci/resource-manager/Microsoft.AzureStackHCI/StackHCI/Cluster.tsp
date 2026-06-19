@@ -33,7 +33,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 }
 
 // here is the augment decorator for versioning
-@@removed(Cluster.kind, Versions.v2026_02_01);
+@@added(Cluster.kind, Versions.v2026_04_30);
 
 @armResourceOperations
 interface Clusters {
@@ -63,7 +63,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -128,7 +131,7 @@ interface Clusters {
   /**
    * Changes ring of a cluster
    */
-  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   changeRing is ArmResourceActionAsync<Cluster, ChangeRingRequest, Cluster>;
 
   /**
@@ -173,16 +176,20 @@ interface Clusters {
 @@doc(Cluster.properties, "Cluster properties.");
 @@doc(Clusters.create::parameters.resource, "Details of the HCI cluster.");
 @@doc(Clusters.update::parameters.properties, "Details of the HCI cluster.");
-@@doc(Clusters.uploadCertificate::parameters.body,
+@@doc(
+  Clusters.uploadCertificate::parameters.body,
   "Upload certificate request."
 );
-@@doc(Clusters.extendSoftwareAssuranceBenefit::parameters.body,
+@@doc(
+  Clusters.extendSoftwareAssuranceBenefit::parameters.body,
   "Software Assurance Change Request Payload"
 );
 @@doc(Clusters.changeRing::parameters.body, "Change ring request payload");
-@@doc(Clusters.triggerLogCollection::parameters.body,
+@@doc(
+  Clusters.triggerLogCollection::parameters.body,
   "Trigger Log Collection Request Payload"
 );
-@@doc(Clusters.configureRemoteSupport::parameters.body,
+@@doc(
+  Clusters.configureRemoteSupport::parameters.body,
   "Configure Remote Support Request Payload"
 );

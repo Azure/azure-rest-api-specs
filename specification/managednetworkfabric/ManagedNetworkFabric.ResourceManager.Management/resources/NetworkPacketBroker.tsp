@@ -1,17 +1,17 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
-
 using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkPacketBroker resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkPacketBroker
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<
+    NetworkPacketBrokerProperties,
+    false
+  > {
   @doc("Name of the Network Packet Broker.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -20,10 +20,13 @@ model NetworkPacketBroker
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** The NetworkPacketBroker properties */
-  properties: NetworkPacketBrokerProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(NetworkPacketBroker.properties, "The NetworkPacketBroker properties");
 @armResourceOperations
 interface NetworkPacketBrokers {
   @doc("Retrieves details of this Network Packet Broker.")
@@ -40,13 +43,20 @@ interface NetworkPacketBrokers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkPacketBroker>;
 
   @doc("Displays NetworkPacketBrokers list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<NetworkPacketBroker>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 
   @doc("Displays Network Packet Brokers list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<NetworkPacketBroker>;
+  listBySubscription is ArmListBySubscription<
+    NetworkPacketBroker,
+    Response = NetworkPacketBrokersListResult
+  >;
 }
 
 @@doc(NetworkPacketBrokers.create::parameters.resource, "Request payload.");
-@@doc(NetworkPacketBrokers.update::parameters.properties,
+@@doc(
+  NetworkPacketBrokers.update::parameters.properties,
   "Network Packet Broker properties to update."
 );

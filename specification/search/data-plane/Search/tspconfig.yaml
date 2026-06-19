@@ -5,7 +5,6 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/search.json"
   "@azure-tools/typespec-python":
@@ -13,10 +12,12 @@ options:
     package-name: "{package-dir}"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
+    api-version: "2026-04-01"
   "@azure-typespec/http-client-csharp":
     namespace: "Azure.Search.Documents"
     model-namespace: true
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.Search.Documents"
+    api-version: "2026-04-01" # TODO: Remove api version pin when 2026-04-01 bugs are addressed in .NET SDK.
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/search-documents"
     generate-metadata: false
@@ -24,6 +25,7 @@ options:
     experimental-extensible-enums: true
     is-modular-library: true
     enable-model-namespace: false
+    api-version: "2026-04-01"
     package-details:
       name: "@azure/search-documents"
     flavor: azure
@@ -32,6 +34,13 @@ options:
     namespace: "com.azure.search.documents"
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-search-documents"
+    api-version: "2026-04-01"
+    customization-class: "customizations/src/main/java/SearchCustomizations.java"
+    use-object-for-unknown: true
+    partial-update: true
+    float32-as-double: false
+    generate-samples: false
+    generate-tests: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"

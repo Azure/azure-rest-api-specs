@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "$apply": "groupby((type,complianceState),aggregate($count as count))",
+    "$filter": "policyAssignmentId eq '/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "api-version": "2024-10-01",
+    "componentPolicyStatesResource": "latest",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName/providers/Microsoft.PolicyInsights/componentPolicyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "complianceState": "NonCompliant",
+            "componentType": "Certificate",
+            "count": 26
+          },
+          {
+            "complianceState": "Compliant",
+            "componentType": "Certificate",
+            "count": 10
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ComponentPolicyStates_ListQueryResultsForResourceGroup",
+  "title": "Query latest component policy compliance state count grouped by component type at resource group scope filtered by given assignment."
+}

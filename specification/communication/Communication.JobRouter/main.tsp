@@ -6,6 +6,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -20,7 +21,7 @@ using Azure.Core.Traits;
   "Azure Communication Routing Service",
   {
     @doc("Uri of your Communication resource")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(Versions)

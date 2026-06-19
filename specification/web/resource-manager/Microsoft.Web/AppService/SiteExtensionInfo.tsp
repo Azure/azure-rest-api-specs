@@ -55,7 +55,8 @@ interface SiteExtensionInfoOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteExtensionInfos {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
@@ -77,11 +78,14 @@ interface SiteExtensionInfos {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -137,7 +141,8 @@ interface SiteExtensionInfoOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
@@ -160,11 +165,14 @@ interface SiteExtensionInfoOperationGroup {
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
       Azure.Core.Foundations.RetryAfterHeader,
     Request = void,
-    Response = ArmResponse<SiteExtensionInfo> | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmTooManyRequestsResponse,
+    Response =
+      | ArmResponse<SiteExtensionInfo>
+      | ArmResourceCreatedResponse<
+          SiteExtensionInfo,
+          LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmTooManyRequestsResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
   /**
@@ -191,6 +199,7 @@ interface SiteExtensionInfoOperationGroup {
 }
 
 @@doc(SiteExtensionInfo.name, "Site extension name.");
-@@doc(SiteExtensionInfo.properties,
+@@doc(
+  SiteExtensionInfo.properties,
   "SiteExtensionInfo resource specific properties"
 );

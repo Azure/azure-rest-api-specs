@@ -1,0 +1,72 @@
+{
+  "title": "PrivateEndpointConnections_ListByFileShare",
+  "operationId": "PrivateEndpointConnections_ListByFileShare",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "0681745E-3F9F-4966-80E6-69624A3B29F2",
+    "resourceGroupName": "rgfileshares",
+    "resourceName": "fileshare"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "groupIds": [
+                "fileshare"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/0681745E-3F9F-4966-80E6-69624A3B29F2/resourceGroups/rgfileshares/providers/Microsoft.Network/privateEndpoints/testPrivateEndpoint1"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Auto-approved",
+                "actionsRequired": "None"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0681745E-3F9F-4966-80E6-69624A3B29F2/resourceGroups/rgfileshares/providers/Microsoft.FileShares/fileShares/fileshare/privateEndpointConnections/privateEndpointConnection1",
+            "name": "privateEndpointConnection1",
+            "type": "Microsoft.FileShares/fileShares/privateEndpointConnections",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-23T12:37:53.955Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-23T12:37:53.955Z"
+            }
+          },
+          {
+            "properties": {
+              "groupIds": [
+                "fileshare"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/0681745E-3F9F-4966-80E6-69624A3B29F2/resourceGroups/rgfileshares/providers/Microsoft.Network/privateEndpoints/testPrivateEndpoint2"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Pending",
+                "description": "Pending approval",
+                "actionsRequired": "None"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/0681745E-3F9F-4966-80E6-69624A3B29F2/resourceGroups/rgfileshares/providers/Microsoft.FileShares/fileShares/fileshare/privateEndpointConnections/privateEndpointConnection2",
+            "name": "privateEndpointConnection2",
+            "type": "Microsoft.FileShares/fileShares/privateEndpointConnections",
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-07-23T12:37:53.955Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-07-23T12:37:53.955Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

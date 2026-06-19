@@ -105,9 +105,11 @@ interface ForwardingRules {
 
 @@doc(ForwardingRule.name, "The name of the forwarding rule.");
 @@doc(ForwardingRule.properties, "Properties of the forwarding rule.");
-@@doc(ForwardingRules.createOrUpdate::parameters.resource,
+@@doc(
+  ForwardingRules.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(ForwardingRules.update::parameters.properties,
+@@doc(
+  ForwardingRules.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

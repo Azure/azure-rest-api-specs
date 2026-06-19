@@ -13,41 +13,23 @@ namespace Microsoft.DevTestLab;
 /**
  * A cost item.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model LabCost extends Resource {
-  @visibility(Lifecycle.Read)
-  @path
-  @key
-  @segment("costs")
-  name: string;
+@parentResource(Lab)
+model LabCost is Azure.ResourceManager.ProxyResource<LabCostProperties, false> {
+  ...ResourceNameParameter<
+    Resource = LabCost,
+    KeyName = "costName",
+    SegmentName = "costs",
+    NamePattern = ""
+  >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
-  properties: LabCostProperties;
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 }
-
-@armResourceOperations
-interface LabCostOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** The name of the lab. */
-        @path @segment("labs") labName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = LabCost,
-        KeyName = "name",
-        SegmentName = "costs",
-        NamePattern = ""
-      >>
-    > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
@@ -57,7 +39,7 @@ interface Costs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_Get")
-  get is LabCostOps.Read<
+  get is ArmResourceRead<
     LabCost,
     Parameters = {
       /**
@@ -73,7 +55,7 @@ interface Costs {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Costs_CreateOrUpdate")
-  createOrUpdate is LabCostOps.CreateOrUpdateSync<LabCost>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<LabCost>;
 }
 
 @@doc(LabCost.name, "The name of the cost.");

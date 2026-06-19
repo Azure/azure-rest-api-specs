@@ -8,12 +8,12 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/ManagedIdentity.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
 
   "@azure-tools/typespec-python":
+    service-dir: "sdk/resources"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-msi"
     namespace: "azure.mgmt.msi"
     generate-test: true
@@ -25,7 +25,10 @@ options:
     service-name: "Msi"
     flavor: azure
     premium: true
+    generate-tests: false
+    client-side-validations: true
     enable-sync-stack: false
+    uuid-as-string: false
     service-dir: "sdk/msi"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-msi"
@@ -43,6 +46,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ManagedServiceIdentities"
+    emitter-output-dir: "{output-dir}/sdk/managedserviceidentity/Azure.ResourceManager.ManagedServiceIdentities"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

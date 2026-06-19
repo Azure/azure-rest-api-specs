@@ -61,7 +61,8 @@ interface ProcessInfoOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessInfos {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -104,14 +105,16 @@ interface ProcessInfos {
   getInstanceProcessDump is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
-    {
-      @header("Content-Type")
-      contentType: "*/*";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | ArmNotFoundResponse,
+      | {
+          @header("Content-Type")
+          contentType: "*/*";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -153,7 +156,8 @@ interface ProcessInfoOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -196,14 +200,16 @@ interface ProcessInfoOperationGroup {
   getProcessDump is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    {
-      @header("Content-Type")
-      contentType: "*/*";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | ArmNotFoundResponse,
+      | {
+          @header("Content-Type")
+          contentType: "*/*";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -257,7 +263,8 @@ interface InstanceProcessSlotOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface InstanceProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -301,14 +308,16 @@ interface InstanceProcessSlotOperationGroup {
   getInstanceProcessDumpSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
-    {
-      @header("Content-Type")
-      contentType: "*/*";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | ArmNotFoundResponse,
+      | {
+          @header("Content-Type")
+          contentType: "*/*";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -356,7 +365,8 @@ interface ProcessSlotOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -399,14 +409,16 @@ interface ProcessSlotOperationGroup {
   getProcessDumpSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
-    {
-      @header("Content-Type")
-      contentType: "*/*";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | ArmNotFoundResponse,
+      | {
+          @header("Content-Type")
+          contentType: "*/*";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 

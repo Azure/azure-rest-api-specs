@@ -81,7 +81,7 @@ alias QuotaCounterKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QuotaCounterKeyParentParameters,
   QuotaCounterKeyParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}",
   }
 >;
 
@@ -124,9 +124,24 @@ alias QuotaPeriodKeyOps = Azure.ResourceManager.Legacy.RoutedOperations<
   QuotaPeriodKeyParentParameters,
   QuotaPeriodKeyParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods",
   }
 >;
+
+alias ApiManagementServiceListPagingParameters = {
+  /**
+   * Number of records to return.
+   */
+  @query("$top")
+  @minValue(1)
+  $top?: int32;
+
+  /**
+   * Skip token for retrieving the next page of results.
+   */
+  @query("$skipToken")
+  $skipToken?: string;
+};
 
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface ApiManagementServiceResources {
@@ -160,11 +175,14 @@ interface ApiManagementServiceResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementServiceResource,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementServiceResource> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: ApiManagementServiceResource;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: ApiManagementServiceResource;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -172,6 +190,7 @@ interface ApiManagementServiceResources {
    */
   listByResourceGroup is ArmResourceListByParent<
     ApiManagementServiceResource,
+    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 
@@ -180,6 +199,7 @@ interface ApiManagementServiceResources {
    */
   list is ArmListBySubscription<
     ApiManagementServiceResource,
+    Parameters = ApiManagementServiceListPagingParameters,
     Response = ArmResponse<ApiManagementServiceListResult>
   >;
 
@@ -458,7 +478,7 @@ interface ApiManagementServiceResources {
    * Updates all the quota counter values specified with the existing quota counter key to a value in the specified service instance. This should be used for reset of the quota counter values.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}")
   quotaByCounterKeysUpdate is QuotaCounterKeyOps.ActionSync<
     ApiManagementServiceResource,
@@ -487,7 +507,7 @@ interface ApiManagementServiceResources {
    * Updates an existing quota counter value in the specified service instance.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @patch(#{ implicitOptionality: true })
+  @patch(#{ implicitOptionality: false })
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/quotas/{quotaCounterKey}/periods/{quotaPeriodKey}")
   quotaByPeriodKeysUpdate is QuotaPeriodKeyOps.ActionSync<
     ApiManagementServiceResource,
@@ -849,37 +869,47 @@ interface ApiManagementServiceResources {
 
 @@maxLength(ApiManagementServiceResource.name, 50);
 @@minLength(ApiManagementServiceResource.name, 1);
-@@doc(ApiManagementServiceResource.name,
+@@doc(
+  ApiManagementServiceResource.name,
   "The name of the API Management service."
 );
-@@encodedName(ApiManagementServiceResource.etag, "application/json", "etag");
-@@doc(ApiManagementServiceResource.properties,
+@@doc(
+  ApiManagementServiceResource.properties,
   "Properties of the API Management service."
 );
-@@doc(ApiManagementServiceResources.createOrUpdate::parameters.resource,
+@@doc(
+  ApiManagementServiceResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@doc(ApiManagementServiceResources.update::parameters.properties,
+@@doc(
+  ApiManagementServiceResources.update::parameters.properties,
   "Parameters supplied to the CreateOrUpdate API Management service operation."
 );
-@@doc(ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
+@@doc(
+  ApiManagementServiceResources.performConnectivityCheckAsync::parameters.body,
   "Connectivity Check request parameters."
 );
-@@doc(ApiManagementServiceResources.restore::parameters.body,
+@@doc(
+  ApiManagementServiceResources.restore::parameters.body,
   "Parameters supplied to the Restore API Management service from backup operation."
 );
-@@doc(ApiManagementServiceResources.backup::parameters.body,
+@@doc(
+  ApiManagementServiceResources.backup::parameters.body,
   "Parameters supplied to the ApiManagementService_Backup operation."
 );
-@@doc(ApiManagementServiceResources.migrateToStv2::parameters.body,
+@@doc(
+  ApiManagementServiceResources.migrateToStv2::parameters.body,
   "Optional parameters supplied to migrate service."
 );
-@@doc(ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
+@@doc(
+  ApiManagementServiceResources.applyNetworkConfigurationUpdates::parameters.body,
   "Parameters supplied to the Apply Network Configuration operation. If the parameters are empty, all the regions in which the Api Management service is deployed will be updated sequentially without incurring downtime in the region."
 );
-@@doc(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
+@@doc(
+  ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
   "The value of the quota counter to be applied to all quota counter periods."
 );
-@@doc(ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
+@@doc(
+  ApiManagementServiceResources.quotaByPeriodKeysUpdate::parameters.body,
   "The value of the Quota counter to be applied on the specified period."
 );

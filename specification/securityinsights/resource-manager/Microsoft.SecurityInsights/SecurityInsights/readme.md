@@ -92,40 +92,7 @@ These settings apply only when `--tag=package-preview-2025-07-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-07-01'
 input-file:
-  - preview/2025-07-01-preview/AlertRules.json
-  - preview/2025-07-01-preview/AutomationRules.json
-  - preview/2025-07-01-preview/BillingStatistics.json
-  - preview/2025-07-01-preview/Bookmarks.json
-  - preview/2025-07-01-preview/ContentPackages.json
-  - preview/2025-07-01-preview/ContentProductPackages.json
-  - preview/2025-07-01-preview/ContentProductTemplates.json
-  - preview/2025-07-01-preview/ContentTemplates.json
-  - preview/2025-07-01-preview/dataConnectorDefinitions.json
-  - preview/2025-07-01-preview/dataConnectors.json
-  - preview/2025-07-01-preview/EnrichmentWithWorkspace.json
-  - preview/2025-07-01-preview/Entities.json
-  - preview/2025-07-01-preview/EntityQueries.json
-  - preview/2025-07-01-preview/EntityQueryTemplates.json
-  - preview/2025-07-01-preview/FileImports.json
-  - preview/2025-07-01-preview/Hunts.json
-  - preview/2025-07-01-preview/Incidents.json
-  - preview/2025-07-01-preview/Metadata.json
-  - preview/2025-07-01-preview/OfficeConsents.json
-  - preview/2025-07-01-preview/OnboardingStates.json
-  - preview/2025-07-01-preview/operations.json
-  - preview/2025-07-01-preview/Recommendations.json
-  - preview/2025-07-01-preview/SecurityMLAnalyticsSettings.json
-  - preview/2025-07-01-preview/Settings.json
-  - preview/2025-07-01-preview/SourceControls.json
-  - preview/2025-07-01-preview/ThreatIntelligence.json
-  - preview/2025-07-01-preview/ThreatIntelligenceCount.json
-  - preview/2025-07-01-preview/ThreatIntelligenceQuery.json
-  - preview/2025-07-01-preview/TriggeredAnalyticsRuleRuns.json
-  - preview/2025-07-01-preview/Watchlists.json
-  - preview/2025-07-01-preview/WorkspaceManagerAssignments.json
-  - preview/2025-07-01-preview/WorkspaceManagerConfigurations.json
-  - preview/2025-07-01-preview/WorkspaceManagerGroups.json
-  - preview/2025-07-01-preview/WorkspaceManagerMembers.json
+  - preview/2025-07-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
     from: dataConnectors.json
@@ -233,7 +200,6 @@ input-file:
   - preview/2025-04-01-preview/Recommendations.json
   - preview/2025-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2025-04-01-preview/Settings.json
-  - preview/2025-04-01-preview/SourceControls.json
   - preview/2025-04-01-preview/ThreatIntelligence.json
   - preview/2025-04-01-preview/ThreatIntelligenceCount.json
   - preview/2025-04-01-preview/ThreatIntelligenceQuery.json
@@ -308,7 +274,6 @@ input-file:
   - stable/2025-03-01/OnboardingStates.json
   - stable/2025-03-01/operations.json
   - stable/2025-03-01/SecurityMLAnalyticsSettings.json
-  - stable/2025-03-01/SourceControls.json
   - stable/2025-03-01/ThreatIntelligence.json
   - stable/2025-03-01/Watchlists.json
 suppressions:
@@ -347,7 +312,6 @@ input-file:
   - preview/2025-01-01-preview/Recommendations.json
   - preview/2025-01-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2025-01-01-preview/Settings.json
-  - preview/2025-01-01-preview/SourceControls.json
   - preview/2025-01-01-preview/ThreatIntelligence.json
   - preview/2025-01-01-preview/ThreatIntelligenceCount.json
   - preview/2025-01-01-preview/ThreatIntelligenceQuery.json
@@ -389,7 +353,6 @@ input-file:
   - preview/2024-10-01-preview/Recommendations.json
   - preview/2024-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-10-01-preview/Settings.json
-  - preview/2024-10-01-preview/SourceControls.json
   - preview/2024-10-01-preview/ThreatIntelligence.json
   - preview/2024-10-01-preview/ThreatIntelligenceCount.json
   - preview/2024-10-01-preview/ThreatIntelligenceQuery.json
@@ -459,7 +422,6 @@ input-file:
   - preview/2024-04-01-preview/Recommendations.json
   - preview/2024-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-04-01-preview/Settings.json
-  - preview/2024-04-01-preview/SourceControls.json
   - preview/2024-04-01-preview/ThreatIntelligence.json
   - preview/2024-04-01-preview/ThreatIntelligenceCount.json
   - preview/2024-04-01-preview/ThreatIntelligenceQuery.json
@@ -562,7 +524,6 @@ input-file:
   - preview/2024-01-01-preview/Recommendations.json
   - preview/2024-01-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2024-01-01-preview/Settings.json
-  - preview/2024-01-01-preview/SourceControls.json
   - preview/2024-01-01-preview/ThreatIntelligence.json
   - preview/2024-01-01-preview/ThreatIntelligenceCount.json
   - preview/2024-01-01-preview/ThreatIntelligenceQuery.json
@@ -604,7 +565,6 @@ input-file:
   - preview/2023-12-01-preview/Recommendations.json
   - preview/2023-12-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-12-01-preview/Settings.json
-  - preview/2023-12-01-preview/SourceControls.json
   - preview/2023-12-01-preview/ThreatIntelligence.json
   - preview/2023-12-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-12-01-preview/Watchlists.json
@@ -667,7 +627,6 @@ input-file:
   - preview/2023-10-01-preview/Recommendations.json
   - preview/2023-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-10-01-preview/Settings.json
-  - preview/2023-10-01-preview/SourceControls.json
   - preview/2023-10-01-preview/ThreatIntelligence.json
   - preview/2023-10-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-10-01-preview/Watchlists.json
@@ -707,7 +666,6 @@ input-file:
   - preview/2023-09-01-preview/Recommendations.json
   - preview/2023-09-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-09-01-preview/Settings.json
-  - preview/2023-09-01-preview/SourceControls.json
   - preview/2023-09-01-preview/ThreatIntelligence.json
   - preview/2023-09-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-09-01-preview/Watchlists.json
@@ -747,7 +705,6 @@ input-file:
   - preview/2023-08-01-preview/Recommendations.json
   - preview/2023-08-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-08-01-preview/Settings.json
-  - preview/2023-08-01-preview/SourceControls.json
   - preview/2023-08-01-preview/ThreatIntelligence.json
   - preview/2023-08-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-08-01-preview/Watchlists.json
@@ -787,7 +744,6 @@ input-file:
   - preview/2023-07-01-preview/Recommendations.json
   - preview/2023-07-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-07-01-preview/Settings.json
-  - preview/2023-07-01-preview/SourceControls.json
   - preview/2023-07-01-preview/ThreatIntelligence.json
   - preview/2023-07-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-07-01-preview/Watchlists.json
@@ -827,7 +783,6 @@ input-file:
   - preview/2023-06-01-preview/Recommendations.json
   - preview/2023-06-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-06-01-preview/Settings.json
-  - preview/2023-06-01-preview/SourceControls.json
   - preview/2023-06-01-preview/ThreatIntelligence.json
   - preview/2023-06-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-06-01-preview/Watchlists.json
@@ -866,7 +821,6 @@ input-file:
   - preview/2023-05-01-preview/Recommendations.json
   - preview/2023-05-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-05-01-preview/Settings.json
-  - preview/2023-05-01-preview/SourceControls.json
   - preview/2023-05-01-preview/ThreatIntelligence.json
   - preview/2023-05-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-05-01-preview/Watchlists.json
@@ -904,7 +858,6 @@ input-file:
   - preview/2023-04-01-preview/Recommendations.json
   - preview/2023-04-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-04-01-preview/Settings.json
-  - preview/2023-04-01-preview/SourceControls.json
   - preview/2023-04-01-preview/ThreatIntelligence.json
   - preview/2023-04-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-04-01-preview/Watchlists.json
@@ -937,7 +890,6 @@ input-file:
   - preview/2023-03-01-preview/Recommendations.json
   - preview/2023-03-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-03-01-preview/Settings.json
-  - preview/2023-03-01-preview/SourceControls.json
   - preview/2023-03-01-preview/ThreatIntelligence.json
   - preview/2023-03-01-preview/TriggeredAnalyticsRuleRuns.json
   - preview/2023-03-01-preview/Watchlists.json
@@ -986,7 +938,6 @@ input-file:
   - preview/2023-02-01-preview/Recommendations.json
   - preview/2023-02-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2023-02-01-preview/Settings.json
-  - preview/2023-02-01-preview/SourceControls.json
   - preview/2023-02-01-preview/ThreatIntelligence.json
   - preview/2023-02-01-preview/Watchlists.json
   - preview/2023-02-01-preview/dataConnectors.json
@@ -1014,7 +965,6 @@ input-file:
   - preview/2022-12-01-preview/Recommendations.json
   - preview/2022-12-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-12-01-preview/Settings.json
-  - preview/2022-12-01-preview/SourceControls.json
   - preview/2022-12-01-preview/ThreatIntelligence.json
   - preview/2022-12-01-preview/Watchlists.json
   - preview/2022-12-01-preview/dataConnectors.json
@@ -1059,7 +1009,6 @@ input-file:
   - preview/2022-11-01-preview/OnboardingStates.json
   - preview/2022-11-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-11-01-preview/Settings.json
-  - preview/2022-11-01-preview/SourceControls.json
   - preview/2022-11-01-preview/Recommendations.json
   - preview/2022-11-01-preview/ThreatIntelligence.json
   - preview/2022-11-01-preview/Watchlists.json
@@ -1087,7 +1036,6 @@ input-file:
   - preview/2022-10-01-preview/OnboardingStates.json
   - preview/2022-10-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-10-01-preview/Settings.json
-  - preview/2022-10-01-preview/SourceControls.json
   - preview/2022-10-01-preview/ThreatIntelligence.json
   - preview/2022-10-01-preview/Watchlists.json
   - preview/2022-10-01-preview/dataConnectors.json
@@ -1114,7 +1062,6 @@ input-file:
   - preview/2022-09-01-preview/OnboardingStates.json
   - preview/2022-09-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-09-01-preview/Settings.json
-  - preview/2022-09-01-preview/SourceControls.json
   - preview/2022-09-01-preview/ThreatIntelligence.json
   - preview/2022-09-01-preview/Watchlists.json
   - preview/2022-09-01-preview/dataConnectors.json
@@ -1141,7 +1088,6 @@ input-file:
   - preview/2022-08-01-preview/OnboardingStates.json
   - preview/2022-08-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-08-01-preview/Settings.json
-  - preview/2022-08-01-preview/SourceControls.json
   - preview/2022-08-01-preview/ThreatIntelligence.json
   - preview/2022-08-01-preview/Watchlists.json
   - preview/2022-08-01-preview/dataConnectors.json
@@ -1167,7 +1113,6 @@ input-file:
   - preview/2022-07-01-preview/OnboardingStates.json
   - preview/2022-07-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-07-01-preview/Settings.json
-  - preview/2022-07-01-preview/SourceControls.json
   - preview/2022-07-01-preview/ThreatIntelligence.json
   - preview/2022-07-01-preview/Watchlists.json
   - preview/2022-07-01-preview/dataConnectors.json
@@ -1210,7 +1155,6 @@ input-file:
   - preview/2022-06-01-preview/OnboardingStates.json
   - preview/2022-06-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-06-01-preview/Settings.json
-  - preview/2022-06-01-preview/SourceControls.json
   - preview/2022-06-01-preview/ThreatIntelligence.json
   - preview/2022-06-01-preview/Watchlists.json
   - preview/2022-06-01-preview/dataConnectors.json
@@ -1236,7 +1180,6 @@ input-file:
   - preview/2022-05-01-preview/OnboardingStates.json
   - preview/2022-05-01-preview/SecurityMLAnalyticsSettings.json
   - preview/2022-05-01-preview/Settings.json
-  - preview/2022-05-01-preview/SourceControls.json
   - preview/2022-05-01-preview/ThreatIntelligence.json
   - preview/2022-05-01-preview/Watchlists.json
   - preview/2022-05-01-preview/dataConnectors.json
@@ -1261,7 +1204,6 @@ input-file:
   - preview/2022-04-01-preview/OfficeConsents.json
   - preview/2022-04-01-preview/OnboardingStates.json
   - preview/2022-04-01-preview/Settings.json
-  - preview/2022-04-01-preview/SourceControls.json
   - preview/2022-04-01-preview/ThreatIntelligence.json
   - preview/2022-04-01-preview/Watchlists.json
   - preview/2022-04-01-preview/dataConnectors.json
@@ -1286,7 +1228,6 @@ input-file:
   - preview/2022-01-01-preview/OfficeConsents.json
   - preview/2022-01-01-preview/OnboardingStates.json
   - preview/2022-01-01-preview/Settings.json
-  - preview/2022-01-01-preview/SourceControls.json
   - preview/2022-01-01-preview/ThreatIntelligence.json
   - preview/2022-01-01-preview/Watchlists.json
   - preview/2022-01-01-preview/dataConnectors.json
@@ -1311,7 +1252,6 @@ input-file:
   - preview/2021-10-01-preview/OfficeConsents.json
   - preview/2021-10-01-preview/OnboardingStates.json
   - preview/2021-10-01-preview/Settings.json
-  - preview/2021-10-01-preview/SourceControls.json
   - preview/2021-10-01-preview/ThreatIntelligence.json
   - preview/2021-10-01-preview/Watchlists.json
   - preview/2021-10-01-preview/dataConnectors.json
@@ -1334,7 +1274,6 @@ input-file:
 - preview/2021-09-01-preview/Metadata.json
 - preview/2021-09-01-preview/OnboardingStates.json
 - preview/2021-09-01-preview/Settings.json
-- preview/2021-09-01-preview/SourceControls.json
 - preview/2021-09-01-preview/Watchlists.json
 - preview/2021-09-01-preview/dataConnectors.json
 - preview/2021-09-01-preview/ThreatIntelligence.json
@@ -1400,7 +1339,6 @@ input-file:
 - preview/2021-03-01-preview/Settings.json
 - preview/2021-03-01-preview/OnboardingStates.json
 - preview/2021-03-01-preview/operations.json
-- preview/2021-03-01-preview/SourceControls.json
 - preview/2021-03-01-preview/dataConnectors.json
 - preview/2021-03-01-preview/Watchlists.json
 - preview/2021-03-01-preview/AlertRules.json

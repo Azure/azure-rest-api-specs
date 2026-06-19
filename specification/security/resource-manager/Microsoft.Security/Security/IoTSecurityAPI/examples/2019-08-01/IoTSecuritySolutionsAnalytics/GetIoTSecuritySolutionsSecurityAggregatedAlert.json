@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "aggregatedAlertName": "IoT_Bruteforce_Fail/2019-02-02",
+    "api-version": "2019-08-01",
+    "resourceGroupName": "MyGroup",
+    "solutionName": "default",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_Bruteforce_Fail/2019-02-02",
+        "type": "Microsoft.Security/iotSecuritySolutions/analyticsModels/aggregatedAlerts",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_Bruteforce_Fail/2019-02-02",
+        "properties": {
+          "description": "Multiple unsuccsseful login attempts identified. A Bruteforce attack on the device failed.",
+          "actionTaken": "Detected",
+          "aggregatedDateUtc": "2019-02-02",
+          "alertDisplayName": "Failed Bruteforce",
+          "alertType": "IoT_Bruteforce_Fail",
+          "count": 50,
+          "effectedResourceType": "IoT Device",
+          "logAnalyticsQuery": "SecurityAlert | where tolower(ResourceId) == tolower('/subscriptions/b77ec8a9-04ed-48d2-a87a-e5887b978ba6/resourceGroups/IoT-Solution-DemoEnv/providers/Microsoft.Devices/IotHubs/rtogm-hub') and tolower(AlertName) == tolower('Custom Alert - number of device to cloud messages in MQTT protocol is not in the allowed range') | extend DeviceId=parse_json(ExtendedProperties)['DeviceId'] | project DeviceId, TimeGenerated, DisplayName, AlertSeverity, Description, RemediationSteps, ExtendedProperties",
+          "remediationSteps": "",
+          "reportedSeverity": "Low",
+          "systemSource": "Devices",
+          "topDevicesList": [
+            {
+              "alertsCount": 100,
+              "deviceId": "testDevice1",
+              "lastOccurrence": "10:42"
+            },
+            {
+              "alertsCount": 80,
+              "deviceId": "testDevice2",
+              "lastOccurrence": "15:42"
+            }
+          ],
+          "vendorName": "Microsoft"
+        }
+      }
+    }
+  },
+  "operationId": "IotSecuritySolutionsAnalyticsAggregatedAlert_Get",
+  "title": "Get the aggregated security analytics alert of yours IoT Security solution. This aggregation is performed by alert name"
+}

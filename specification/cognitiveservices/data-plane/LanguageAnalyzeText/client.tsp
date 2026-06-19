@@ -6,555 +6,1155 @@ using Azure.ClientGenerator.Core;
 
 namespace Language.AnalyzeTextClientCustomizations;
 
-@@clientName(Text, "TextAnalysis");
+@@clientName(Text, "TextAnalysis", "!autorest");
 
-@@clientName(Tasks, "TextActions");
-@@clientName(State, "TextActionState");
-@@clientName(Error, "AnalyzeTextError");
+@@clientName(Tasks, "TextActions", "!autorest");
+@@clientName(State, "TextActionState", "!autorest");
+@@clientName(Error, "AnalyzeTextError", "!autorest");
 
-@@clientName(Match, "EntityLinkingMatch");
-@@clientName(Entity, "NamedEntity");
-@@clientName(EntityWithMetadata, "NamedEntityWithMetadata");
-@@clientName(EntityInferenceOptions, "EntityInferenceConfig");
-@@clientName(Temporality, "HealthcareAssertionTemporality");
-@@clientName(Conditionality, "HealthcareAssertionConditionality");
-@@clientName(Certainty, "HealthcareAssertionCertainty");
-@@clientName(Association, "HealthcareAssertionAssociation");
-@@clientName(SentimentResponse, "SentimentResult");
+@@clientName(Match, "EntityLinkingMatch", "!autorest");
+@@clientName(Entity, "NamedEntity", "!autorest");
+@@clientName(EntityWithMetadata, "NamedEntityWithMetadata", "!autorest");
+@@clientName(EntityInferenceOptions, "EntityInferenceConfig", "!autorest");
+@@clientName(Temporality, "HealthcareAssertionTemporality", "!autorest");
+@@clientName(Conditionality, "HealthcareAssertionConditionality", "!autorest");
+@@clientName(Certainty, "HealthcareAssertionCertainty", "!autorest");
+@@clientName(Association, "HealthcareAssertionAssociation", "!autorest");
+@@clientName(SentimentResponse, "SentimentResult", "!autorest");
 
-@@clientName(JobState.createdDateTime, "CreatedAt");
+@@clientName(JobState.createdDateTime, "CreatedAt", "!autorest");
 
-@@clientName(JobState.expirationDateTime, "ExpiresOn");
+@@clientName(JobState.expirationDateTime, "ExpiresOn", "!autorest");
 
-@@clientName(JobState.lastUpdatedDateTime, "LastUpdatedAt");
+@@clientName(JobState.lastUpdatedDateTime, "LastUpdatedAt", "!autorest");
 
-@@clientName(BaseEntityOverlapPolicy, "EntityOverlapPolicy");
+@@clientName(BaseEntityOverlapPolicy, "EntityOverlapPolicy", "!autorest");
 
-@@clientName(BaseTemporalMetadata, "TemporalMetadata");
+@@clientName(BaseTemporalMetadata, "TemporalMetadata", "!autorest");
 
-@@clientName(BaseTemporalMetadata.dateValues, "Dates");
+@@clientName(BaseTemporalMetadata.dateValues, "Dates", "!autorest");
 
-@@clientName(EntityCategory.GPE, "GeoPoliticalEntity");
+@@clientName(EntityCategory.GPE, "GeoPoliticalEntity", "!autorest");
 
-@@clientName(EntityCategory.IP, "IpAddress");
+@@clientName(EntityCategory.IP, "IpAddress", "!autorest");
 
-@@clientName(EntityCategory.URL, "Uri");
+@@clientName(EntityCategory.URL, "Uri", "!autorest");
 
-@@clientName(ErrorCode, "AnalyzeTextErrorCode");
+@@clientName(ErrorCode, "AnalyzeTextErrorCode", "!autorest");
 
-@@clientName(WarningCodeValue, "WarningCode");
+@@clientName(WarningCodeValue, "WarningCode", "!autorest");
 
-@@clientName(DocumentSentimentValue, "DocumentSentiment");
+@@clientName(DocumentSentimentValue, "DocumentSentiment", "!autorest");
 
-@@clientName(TokenSentimentValue, "TokenSentiment");
+@@clientName(TokenSentimentValue, "TokenSentiment", "!autorest");
 
-@@clientName(PiiCategoriesExclude.ABARoutingNumber, "AbaRoutingNumber");
-@@clientName(PiiCategoriesExclude.ARNationalIdentityNumber,
-  "ArNationalIdentityNumber"
-);
-@@clientName(PiiCategoriesExclude.AUBankAccountNumber, "AuBankAccountNumber");
-@@clientName(PiiCategoriesExclude.AUDriversLicenseNumber,
-  "AuDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.AUMedicalAccountNumber,
-  "AuMedicalAccountNumber"
-);
-@@clientName(PiiCategoriesExclude.AUPassportNumber, "AuPassportNumber");
-@@clientName(PiiCategoriesExclude.AUTaxFileNumber, "AuTaxFileNumber");
-@@clientName(PiiCategoriesExclude.AUBusinessNumber, "AuBusinessNumber");
-@@clientName(PiiCategoriesExclude.AUCompanyNumber, "AuCompanyNumber");
-@@clientName(PiiCategoriesExclude.ATIdentityCard, "AtIdentityCard");
-@@clientName(PiiCategoriesExclude.ATTaxIdentificationNumber,
-  "AtTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.ATValueAddedTaxNumber,
-  "AtValueAddedTaxNumber"
-);
-@@clientName(PiiCategoriesExclude.AzureDocumentDBAuthKey,
-  "AzureDocumentDbauthKey"
-);
-@@clientName(PiiCategoriesExclude.AzureIAASDatabaseConnectionAndSQLString,
-  "AzureIaasDatabaseConnectionAndSqlString"
-);
-@@clientName(PiiCategoriesExclude.AzureSAS, "AzureSas");
-@@clientName(PiiCategoriesExclude.BENationalNumber, "BeNationalNumber");
-@@clientName(PiiCategoriesExclude.BENationalNumberV2, "BeNationalNumberV2");
-@@clientName(PiiCategoriesExclude.BEValueAddedTaxNumber,
-  "BeValueAddedTaxNumber"
-);
-@@clientName(PiiCategoriesExclude.BRCPFNumber, "BrCpfNumber");
-@@clientName(PiiCategoriesExclude.BRLegalEntityNumber, "BrLegalEntityNumber");
-@@clientName(PiiCategoriesExclude.BRNationalIDRG, "BrNationalIdRg");
-@@clientName(PiiCategoriesExclude.BGUniformCivilNumber, "BgUniformCivilNumber");
-@@clientName(PiiCategoriesExclude.CABankAccountNumber, "CaBankAccountNumber");
-@@clientName(PiiCategoriesExclude.CADriversLicenseNumber,
-  "CaDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.CAHealthServiceNumber,
-  "CaHealthServiceNumber"
-);
-@@clientName(PiiCategoriesExclude.CAPassportNumber, "CaPassportNumber");
-@@clientName(PiiCategoriesExclude.CAPersonalHealthIdentification,
-  "CaPersonalHealthIdentification"
-);
-@@clientName(PiiCategoriesExclude.CASocialInsuranceNumber,
-  "CaSocialInsuranceNumber"
-);
-@@clientName(PiiCategoriesExclude.CLIdentityCardNumber, "ClIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.CNResidentIdentityCardNumber,
-  "CnResidentIdentityCardNumber"
-);
-@@clientName(PiiCategoriesExclude.HRIdentityCardNumber, "HrIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.HRNationalIDNumber, "HrNationalIdNumber");
-@@clientName(PiiCategoriesExclude.HRPersonalIdentificationNumber,
-  "HrPersonalIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.HRPersonalIdentificationOIBNumberV2,
-  "HrPersonalIdentificationOIBNumberV2"
-);
-@@clientName(PiiCategoriesExclude.CYIdentityCard, "CyIdentityCard");
-@@clientName(PiiCategoriesExclude.CYTaxIdentificationNumber,
-  "CyTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.CZPersonalIdentityNumber,
-  "CzPersonalIdentityNumber"
-);
-@@clientName(PiiCategoriesExclude.CZPersonalIdentityV2, "CzPersonalIdentityV2");
-@@clientName(PiiCategoriesExclude.DKPersonalIdentificationNumber,
-  "DkPersonalIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.DKPersonalIdentificationV2,
-  "DkPersonalIdentificationV2"
-);
-@@clientName(PiiCategoriesExclude.EEPersonalIdentificationCode,
-  "EePersonalIdentificationCode"
-);
-@@clientName(PiiCategoriesExclude.EUDebitCardNumber, "EuDebitCardNumber");
-@@clientName(PiiCategoriesExclude.EUDriversLicenseNumber,
-  "EuDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.EUGPSCoordinates, "EuGpsCoordinates");
-@@clientName(PiiCategoriesExclude.EUNationalIdentificationNumber,
-  "EuNationalIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.EUPassportNumber, "EuPassportNumber");
-@@clientName(PiiCategoriesExclude.EUSocialSecurityNumber,
-  "EuSocialSecurityNumber"
-);
-@@clientName(PiiCategoriesExclude.EUTaxIdentificationNumber,
-  "EuTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.FIEuropeanHealthNumber,
-  "FiEuropeanHealthNumber"
-);
-@@clientName(PiiCategoriesExclude.FINationalID, "FiNationalId");
-@@clientName(PiiCategoriesExclude.FINationalIDV2, "FiNationalIdV2");
-@@clientName(PiiCategoriesExclude.FIPassportNumber, "FiPassportNumber");
-@@clientName(PiiCategoriesExclude.FRDriversLicenseNumber,
-  "FrDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.FRHealthInsuranceNumber,
-  "FrHealthInsuranceNumber"
-);
-@@clientName(PiiCategoriesExclude.FRNationalID, "FrNationalId");
-@@clientName(PiiCategoriesExclude.FRPassportNumber, "FrPassportNumber");
-@@clientName(PiiCategoriesExclude.FRSocialSecurityNumber,
-  "FrSocialSecurityNumber"
-);
-@@clientName(PiiCategoriesExclude.FRTaxIdentificationNumber,
-  "FrTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.FRValueAddedTaxNumber,
-  "FrValueAddedTaxNumber"
-);
-@@clientName(PiiCategoriesExclude.DEDriversLicenseNumber,
-  "DeDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.DEPassportNumber, "DePassportNumber");
-@@clientName(PiiCategoriesExclude.DEIdentityCardNumber, "DeIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.DETaxIdentificationNumber,
-  "DeTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.DEValueAddedNumber, "DeValueAddedNumber");
-@@clientName(PiiCategoriesExclude.GRNationalIDCard, "GrNationalIdCard");
-@@clientName(PiiCategoriesExclude.GRNationalIDV2, "GrNationalIdV2");
-@@clientName(PiiCategoriesExclude.GRTaxIdentificationNumber,
-  "GrTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.HKIdentityCardNumber, "HkIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.HUValueAddedNumber, "HuValueAddedNumber");
-@@clientName(PiiCategoriesExclude.HUPersonalIdentificationNumber,
-  "HuPersonalIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.HUTaxIdentificationNumber,
-  "HuTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.INPermanentAccount, "InPermanentAccount");
-@@clientName(PiiCategoriesExclude.INUniqueIdentificationNumber,
-  "InUniqueIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.IDIdentityCardNumber, "IdIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.IEPersonalPublicServiceNumber,
-  "IePersonalPublicServiceNumber"
-);
-@@clientName(PiiCategoriesExclude.IEPersonalPublicServiceNumberV2,
-  "IePersonalPublicServiceNumberV2"
-);
-@@clientName(PiiCategoriesExclude.ILBankAccountNumber, "IlBankAccountNumber");
-@@clientName(PiiCategoriesExclude.ILNationalID, "IlNationalId");
-@@clientName(PiiCategoriesExclude.ITDriversLicenseNumber,
-  "ItDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.ITFiscalCode, "ItFiscalCode");
-@@clientName(PiiCategoriesExclude.ITValueAddedTaxNumber,
-  "ItValueAddedTaxNumber"
-);
-@@clientName(PiiCategoriesExclude.JPBankAccountNumber, "JpBankAccountNumber");
-@@clientName(PiiCategoriesExclude.JPDriversLicenseNumber,
-  "JpDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.JPPassportNumber, "JpPassportNumber");
-@@clientName(PiiCategoriesExclude.JPResidentRegistrationNumber,
-  "JpResidentRegistrationNumber"
-);
-@@clientName(PiiCategoriesExclude.JPSocialInsuranceNumber,
-  "JpSocialInsuranceNumber"
-);
-@@clientName(PiiCategoriesExclude.JPMyNumberCorporate, "JpMyNumberCorporate");
-@@clientName(PiiCategoriesExclude.JPMyNumberPersonal, "JpMyNumberPersonal");
-@@clientName(PiiCategoriesExclude.JPResidenceCardNumber,
-  "JpResidenceCardNumber"
-);
-@@clientName(PiiCategoriesExclude.LVPersonalCode, "LvPersonalCode");
-@@clientName(PiiCategoriesExclude.LTPersonalCode, "LtPersonalCode");
-@@clientName(PiiCategoriesExclude.LUNationalIdentificationNumberNatural,
-  "LuNationalIdentificationNumberNatural"
-);
-@@clientName(PiiCategoriesExclude.LUNationalIdentificationNumberNonNatural,
-  "LuNationalIdentificationNumberNonNatural"
-);
-@@clientName(PiiCategoriesExclude.MYIdentityCardNumber, "MyIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.MTIdentityCardNumber, "MtIdentityCardNumber");
-@@clientName(PiiCategoriesExclude.MTTaxIDNumber, "MtTaxIdNumber");
-@@clientName(PiiCategoriesExclude.NLCitizensServiceNumber,
-  "NlCitizensServiceNumber"
-);
-@@clientName(PiiCategoriesExclude.NLCitizensServiceNumberV2,
-  "NlCitizensServiceNumberV2"
-);
-@@clientName(PiiCategoriesExclude.NLTaxIdentificationNumber,
-  "NlTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.NLValueAddedTaxNumber,
-  "NlValueAddedTaxNumber"
-);
-@@clientName(PiiCategoriesExclude.NZBankAccountNumber, "NzBankAccountNumber");
-@@clientName(PiiCategoriesExclude.NZDriversLicenseNumber,
-  "NzDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.NZInlandRevenueNumber,
-  "NzInlandRevenueNumber"
-);
-@@clientName(PiiCategoriesExclude.NZMinistryOfHealthNumber,
-  "NzMinistryOfHealthNumber"
-);
-@@clientName(PiiCategoriesExclude.NZSocialWelfareNumber,
-  "NzSocialWelfareNumber"
-);
-@@clientName(PiiCategoriesExclude.NOIdentityNumber, "NoIdentityNumber");
-@@clientName(PiiCategoriesExclude.PHUnifiedMultiPurposeIDNumber,
-  "PhUnifiedMultiPurposeIdNumber"
-);
-@@clientName(PiiCategoriesExclude.PLIdentityCard, "PlIdentityCard");
-@@clientName(PiiCategoriesExclude.PLNationalID, "PlNationalId");
-@@clientName(PiiCategoriesExclude.PLNationalIDV2, "PlNationalIdV2");
-@@clientName(PiiCategoriesExclude.PLPassportNumber, "PlPassportNumber");
-@@clientName(PiiCategoriesExclude.PLTaxIdentificationNumber,
-  "PlTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.PLREGONNumber, "PlRegonNumber");
-@@clientName(PiiCategoriesExclude.PTCitizenCardNumber, "PtCitizenCardNumber");
-@@clientName(PiiCategoriesExclude.PTCitizenCardNumberV2,
-  "PtCitizenCardNumberV2"
-);
-@@clientName(PiiCategoriesExclude.PTTaxIdentificationNumber,
-  "PtTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.ROPersonalNumericalCode,
-  "RoPersonalNumericalCode"
-);
-@@clientName(PiiCategoriesExclude.RUPassportNumberDomestic,
-  "RuPassportNumberDomestic"
-);
-@@clientName(PiiCategoriesExclude.RUPassportNumberInternational,
-  "RuPassportNumberInternational"
-);
-@@clientName(PiiCategoriesExclude.SANationalID, "SaNationalId");
-@@clientName(PiiCategoriesExclude.SGNationalRegistrationIdentityCardNumber,
-  "SgNationalRegistrationIdentityCardNumber"
-);
-@@clientName(PiiCategoriesExclude.SKPersonalNumber, "SkPersonalNumber");
-@@clientName(PiiCategoriesExclude.SITaxIdentificationNumber,
-  "SiTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.SIUniqueMasterCitizenNumber,
-  "SiUniqueMasterCitizenNumber"
-);
-@@clientName(PiiCategoriesExclude.ZAIdentificationNumber,
-  "ZaIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.KRResidentRegistrationNumber,
-  "KrResidentRegistrationNumber"
-);
-@@clientName(PiiCategoriesExclude.ESDNI, "EsDni");
-@@clientName(PiiCategoriesExclude.ESSocialSecurityNumber,
-  "EsSocialSecurityNumber"
-);
-@@clientName(PiiCategoriesExclude.ESTaxIdentificationNumber,
-  "EsTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.SQLServerConnectionString,
-  "SqlServerConnectionString"
-);
-@@clientName(PiiCategoriesExclude.SENationalID, "SeNationalId");
-@@clientName(PiiCategoriesExclude.SENationalIDV2, "SeNationalIdV2");
-@@clientName(PiiCategoriesExclude.SEPassportNumber, "SePassportNumber");
-@@clientName(PiiCategoriesExclude.SETaxIdentificationNumber,
-  "SeTaxIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.SWIFTCode, "SwiftCode");
-@@clientName(PiiCategoriesExclude.CHSocialSecurityNumber,
-  "ChSocialSecurityNumber"
-);
-@@clientName(PiiCategoriesExclude.TWNationalID, "TwNationalId");
-@@clientName(PiiCategoriesExclude.TWPassportNumber, "TwPassportNumber");
-@@clientName(PiiCategoriesExclude.TWResidentCertificate,
-  "TwResidentCertificate"
-);
-@@clientName(PiiCategoriesExclude.THPopulationIdentificationCode,
-  "ThPopulationIdentificationCode"
-);
-@@clientName(PiiCategoriesExclude.TRNationalIdentificationNumber,
-  "TrNationalIdentificationNumber"
-);
-@@clientName(PiiCategoriesExclude.UKDriversLicenseNumber,
-  "UkDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.UKElectoralRollNumber,
-  "UkElectoralRollNumber"
-);
-@@clientName(PiiCategoriesExclude.UKNationalHealthNumber,
-  "UkNationalHealthNumber"
-);
-@@clientName(PiiCategoriesExclude.UKNationalInsuranceNumber,
-  "UkNationalInsuranceNumber"
-);
-@@clientName(PiiCategoriesExclude.UKUniqueTaxpayerNumber,
-  "UkUniqueTaxpayerNumber"
-);
-@@clientName(PiiCategoriesExclude.USUKPassportNumber, "UsUkPassportNumber");
-@@clientName(PiiCategoriesExclude.USBankAccountNumber, "UsBankAccountNumber");
-@@clientName(PiiCategoriesExclude.USDriversLicenseNumber,
-  "UsDriversLicenseNumber"
-);
-@@clientName(PiiCategoriesExclude.USIndividualTaxpayerIdentification,
-  "UsIndividualTaxpayerIdentification"
-);
-@@clientName(PiiCategoriesExclude.USSocialSecurityNumber,
-  "UsSocialSecurityNumber"
-);
-@@clientName(PiiCategoriesExclude.UAPassportNumberDomestic,
-  "UaPassportNumberDomestic"
-);
-@@clientName(PiiCategoriesExclude.UAPassportNumberInternational,
-  "UaPassportNumberInternational"
+@@clientName(
+  PiiCategoriesExclude.ABARoutingNumber,
+  "AbaRoutingNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ARNationalIdentityNumber,
+  "ArNationalIdentityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUBankAccountNumber,
+  "AuBankAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUDriversLicenseNumber,
+  "AuDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUMedicalAccountNumber,
+  "AuMedicalAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUPassportNumber,
+  "AuPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUTaxFileNumber,
+  "AuTaxFileNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUBusinessNumber,
+  "AuBusinessNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AUCompanyNumber,
+  "AuCompanyNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ATIdentityCard,
+  "AtIdentityCard",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ATTaxIdentificationNumber,
+  "AtTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ATValueAddedTaxNumber,
+  "AtValueAddedTaxNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AzureDocumentDBAuthKey,
+  "AzureDocumentDbauthKey",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.AzureIAASDatabaseConnectionAndSQLString,
+  "AzureIaasDatabaseConnectionAndSqlString",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.AzureSAS, "AzureSas", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.BENationalNumber,
+  "BeNationalNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BENationalNumberV2,
+  "BeNationalNumberV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BEValueAddedTaxNumber,
+  "BeValueAddedTaxNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.BRCPFNumber, "BrCpfNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.BRLegalEntityNumber,
+  "BrLegalEntityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BRNationalIDRG,
+  "BrNationalIdRg",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.BGUniformCivilNumber,
+  "BgUniformCivilNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CABankAccountNumber,
+  "CaBankAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CADriversLicenseNumber,
+  "CaDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CAHealthServiceNumber,
+  "CaHealthServiceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CAPassportNumber,
+  "CaPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CAPersonalHealthIdentification,
+  "CaPersonalHealthIdentification",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CASocialInsuranceNumber,
+  "CaSocialInsuranceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CLIdentityCardNumber,
+  "ClIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CNResidentIdentityCardNumber,
+  "CnResidentIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HRIdentityCardNumber,
+  "HrIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HRNationalIDNumber,
+  "HrNationalIdNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HRPersonalIdentificationNumber,
+  "HrPersonalIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HRPersonalIdentificationOIBNumberV2,
+  "HrPersonalIdentificationOIBNumberV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CYIdentityCard,
+  "CyIdentityCard",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CYTaxIdentificationNumber,
+  "CyTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CZPersonalIdentityNumber,
+  "CzPersonalIdentityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.CZPersonalIdentityV2,
+  "CzPersonalIdentityV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DKPersonalIdentificationNumber,
+  "DkPersonalIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DKPersonalIdentificationV2,
+  "DkPersonalIdentificationV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EEPersonalIdentificationCode,
+  "EePersonalIdentificationCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUDebitCardNumber,
+  "EuDebitCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUDriversLicenseNumber,
+  "EuDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUGPSCoordinates,
+  "EuGpsCoordinates",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUNationalIdentificationNumber,
+  "EuNationalIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUPassportNumber,
+  "EuPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUSocialSecurityNumber,
+  "EuSocialSecurityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.EUTaxIdentificationNumber,
+  "EuTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FIEuropeanHealthNumber,
+  "FiEuropeanHealthNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.FINationalID, "FiNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.FINationalIDV2,
+  "FiNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FIPassportNumber,
+  "FiPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FRDriversLicenseNumber,
+  "FrDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FRHealthInsuranceNumber,
+  "FrHealthInsuranceNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.FRNationalID, "FrNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.FRPassportNumber,
+  "FrPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FRSocialSecurityNumber,
+  "FrSocialSecurityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FRTaxIdentificationNumber,
+  "FrTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.FRValueAddedTaxNumber,
+  "FrValueAddedTaxNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DEDriversLicenseNumber,
+  "DeDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DEPassportNumber,
+  "DePassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DEIdentityCardNumber,
+  "DeIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DETaxIdentificationNumber,
+  "DeTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.DEValueAddedNumber,
+  "DeValueAddedNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.GRNationalIDCard,
+  "GrNationalIdCard",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.GRNationalIDV2,
+  "GrNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.GRTaxIdentificationNumber,
+  "GrTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HKIdentityCardNumber,
+  "HkIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HUValueAddedNumber,
+  "HuValueAddedNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HUPersonalIdentificationNumber,
+  "HuPersonalIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.HUTaxIdentificationNumber,
+  "HuTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.INPermanentAccount,
+  "InPermanentAccount",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.INUniqueIdentificationNumber,
+  "InUniqueIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.IDIdentityCardNumber,
+  "IdIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.IEPersonalPublicServiceNumber,
+  "IePersonalPublicServiceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.IEPersonalPublicServiceNumberV2,
+  "IePersonalPublicServiceNumberV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ILBankAccountNumber,
+  "IlBankAccountNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.ILNationalID, "IlNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.ITDriversLicenseNumber,
+  "ItDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.ITFiscalCode, "ItFiscalCode", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.ITValueAddedTaxNumber,
+  "ItValueAddedTaxNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPBankAccountNumber,
+  "JpBankAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPDriversLicenseNumber,
+  "JpDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPPassportNumber,
+  "JpPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPResidentRegistrationNumber,
+  "JpResidentRegistrationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPSocialInsuranceNumber,
+  "JpSocialInsuranceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPMyNumberCorporate,
+  "JpMyNumberCorporate",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPMyNumberPersonal,
+  "JpMyNumberPersonal",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.JPResidenceCardNumber,
+  "JpResidenceCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.LVPersonalCode,
+  "LvPersonalCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.LTPersonalCode,
+  "LtPersonalCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.LUNationalIdentificationNumberNatural,
+  "LuNationalIdentificationNumberNatural",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.LUNationalIdentificationNumberNonNatural,
+  "LuNationalIdentificationNumberNonNatural",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.MYIdentityCardNumber,
+  "MyIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.MTIdentityCardNumber,
+  "MtIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.MTTaxIDNumber, "MtTaxIdNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.NLCitizensServiceNumber,
+  "NlCitizensServiceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NLCitizensServiceNumberV2,
+  "NlCitizensServiceNumberV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NLTaxIdentificationNumber,
+  "NlTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NLValueAddedTaxNumber,
+  "NlValueAddedTaxNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NZBankAccountNumber,
+  "NzBankAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NZDriversLicenseNumber,
+  "NzDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NZInlandRevenueNumber,
+  "NzInlandRevenueNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NZMinistryOfHealthNumber,
+  "NzMinistryOfHealthNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NZSocialWelfareNumber,
+  "NzSocialWelfareNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.NOIdentityNumber,
+  "NoIdentityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PHUnifiedMultiPurposeIDNumber,
+  "PhUnifiedMultiPurposeIdNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PLIdentityCard,
+  "PlIdentityCard",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.PLNationalID, "PlNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.PLNationalIDV2,
+  "PlNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PLPassportNumber,
+  "PlPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PLTaxIdentificationNumber,
+  "PlTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.PLREGONNumber, "PlRegonNumber", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.PTCitizenCardNumber,
+  "PtCitizenCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PTCitizenCardNumberV2,
+  "PtCitizenCardNumberV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.PTTaxIdentificationNumber,
+  "PtTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ROPersonalNumericalCode,
+  "RoPersonalNumericalCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.RUPassportNumberDomestic,
+  "RuPassportNumberDomestic",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.RUPassportNumberInternational,
+  "RuPassportNumberInternational",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.SANationalID, "SaNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.SGNationalRegistrationIdentityCardNumber,
+  "SgNationalRegistrationIdentityCardNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SKPersonalNumber,
+  "SkPersonalNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SITaxIdentificationNumber,
+  "SiTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SIUniqueMasterCitizenNumber,
+  "SiUniqueMasterCitizenNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ZAIdentificationNumber,
+  "ZaIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.KRResidentRegistrationNumber,
+  "KrResidentRegistrationNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.ESDNI, "EsDni", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.ESSocialSecurityNumber,
+  "EsSocialSecurityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.ESTaxIdentificationNumber,
+  "EsTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SQLServerConnectionString,
+  "SqlServerConnectionString",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.SENationalID, "SeNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.SENationalIDV2,
+  "SeNationalIdV2",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SEPassportNumber,
+  "SePassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.SETaxIdentificationNumber,
+  "SeTaxIdentificationNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.SWIFTCode, "SwiftCode", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.CHSocialSecurityNumber,
+  "ChSocialSecurityNumber",
+  "!autorest"
+);
+@@clientName(PiiCategoriesExclude.TWNationalID, "TwNationalId", "!autorest");
+@@clientName(
+  PiiCategoriesExclude.TWPassportNumber,
+  "TwPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.TWResidentCertificate,
+  "TwResidentCertificate",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.THPopulationIdentificationCode,
+  "ThPopulationIdentificationCode",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.TRNationalIdentificationNumber,
+  "TrNationalIdentificationNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UKDriversLicenseNumber,
+  "UkDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UKElectoralRollNumber,
+  "UkElectoralRollNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UKNationalHealthNumber,
+  "UkNationalHealthNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UKNationalInsuranceNumber,
+  "UkNationalInsuranceNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UKUniqueTaxpayerNumber,
+  "UkUniqueTaxpayerNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USUKPassportNumber,
+  "UsUkPassportNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USBankAccountNumber,
+  "UsBankAccountNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USDriversLicenseNumber,
+  "UsDriversLicenseNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USIndividualTaxpayerIdentification,
+  "UsIndividualTaxpayerIdentification",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.USSocialSecurityNumber,
+  "UsSocialSecurityNumber",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UAPassportNumberDomestic,
+  "UaPassportNumberDomestic",
+  "!autorest"
+);
+@@clientName(
+  PiiCategoriesExclude.UAPassportNumberInternational,
+  "UaPassportNumberInternational",
+  "!autorest"
 );
 
-@@clientName(WeightUnit.ShortTonUS, "ShortTonUs");
-@@clientName(WeightUnit.ShortHundredWeightUS, "ShortHundredWeightUs");
+@@clientName(WeightUnit.ShortTonUS, "ShortTonUs", "!autorest");
+@@clientName(
+  WeightUnit.ShortHundredWeightUS,
+  "ShortHundredWeightUs",
+  "!autorest"
+);
 
 @@access(AnalyzeTextTask, Access.public);
-@@clientName(AnalyzeTextTask, "AnalyzeTextInput");
-@@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind");
+@@clientName(AnalyzeTextTask, "AnalyzeTextInput", "!autorest");
+@@clientName(AnalyzeTextTaskKind, "AnalyzeTextInputKind", "!autorest");
 
-@@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput");
-@@clientName(MultiLanguageAnalysisInput.documents, "MultiLanguageInputs");
-@@clientName(LanguageDetectionAnalysisInput, "LanguageDetectionTextInput");
-@@clientName(LanguageDetectionAnalysisInput.documents, "LanguageInputs");
-@@clientName(AnalyzeTextSentimentAnalysisInput, "TextSentimentAnalysisInput");
-@@clientName(AnalyzeTextSentimentAnalysisInput.parameters, "ActionContent");
-@@clientName(AnalyzeTextSentimentAnalysisInput.analysisInput, "TextInput");
-@@clientName(SentimentAnalysisTaskParameters, "SentimentAnalysisActionContent");
+@@clientName(MultiLanguageAnalysisInput, "MultiLanguageTextInput", "!autorest");
+@@clientName(
+  MultiLanguageAnalysisInput.documents,
+  "MultiLanguageInputs",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionAnalysisInput,
+  "LanguageDetectionTextInput",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionAnalysisInput.documents,
+  "LanguageInputs",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput,
+  "TextSentimentAnalysisInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextSentimentAnalysisInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  SentimentAnalysisTaskParameters,
+  "SentimentAnalysisActionContent",
+  "!autorest"
+);
 
-@@clientName(AnalyzeTextPiiEntitiesRecognitionInput,
-  "TextPiiEntitiesRecognitionInput"
+@@clientName(
+  AnalyzeTextPiiEntitiesRecognitionInput,
+  "TextPiiEntitiesRecognitionInput",
+  "!autorest"
 );
-@@clientName(AnalyzeTextPiiEntitiesRecognitionInput.parameters,
-  "ActionContent"
+@@clientName(
+  AnalyzeTextPiiEntitiesRecognitionInput.parameters,
+  "ActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextPiiEntitiesRecognitionInput.analysisInput, "TextInput");
-@@clientName(PiiTaskParameters, "PiiActionContent");
+@@clientName(
+  AnalyzeTextPiiEntitiesRecognitionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(PiiTaskParameters, "PiiActionContent", "!autorest");
 
-@@clientName(AnalyzeTextLanguageDetectionInput, "TextLanguageDetectionInput");
-@@clientName(AnalyzeTextLanguageDetectionInput.parameters, "ActionContent");
-@@clientName(AnalyzeTextLanguageDetectionInput.analysisInput, "TextInput");
-@@clientName(LanguageDetectionTaskParameters, "LanguageDetectionActionContent");
-@@clientName(AnalyzeTextKeyPhraseExtractionInput,
-  "TextKeyPhraseExtractionInput"
+@@clientName(
+  AnalyzeTextLanguageDetectionInput,
+  "TextLanguageDetectionInput",
+  "!autorest"
 );
-@@clientName(AnalyzeTextKeyPhraseExtractionInput.parameters, "ActionContent");
-@@clientName(AnalyzeTextKeyPhraseExtractionInput.analysisInput, "TextInput");
-@@clientName(KeyPhraseTaskParameters, "KeyPhraseActionContent");
-@@clientName(AnalyzeTextEntityRecognitionInput, "TextEntityRecognitionInput");
-@@clientName(AnalyzeTextEntityRecognitionInput.parameters, "ActionContent");
-@@clientName(AnalyzeTextEntityRecognitionInput.analysisInput, "TextInput");
-@@clientName(EntitiesTaskParameters, "EntitiesActionContent");
-@@clientName(EntitiesTaskParameters.exclusionList, "Exclusions");
-@@clientName(EntitiesTaskParameters.inclusionList, "Inclusions");
+@@clientName(
+  AnalyzeTextLanguageDetectionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextLanguageDetectionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  LanguageDetectionTaskParameters,
+  "LanguageDetectionActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextKeyPhraseExtractionInput,
+  "TextKeyPhraseExtractionInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextKeyPhraseExtractionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextKeyPhraseExtractionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(KeyPhraseTaskParameters, "KeyPhraseActionContent", "!autorest");
+@@clientName(
+  AnalyzeTextEntityRecognitionInput,
+  "TextEntityRecognitionInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityRecognitionInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityRecognitionInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(EntitiesTaskParameters, "EntitiesActionContent", "!autorest");
+@@clientName(EntitiesTaskParameters.exclusionList, "Exclusions", "!autorest");
+@@clientName(EntitiesTaskParameters.inclusionList, "Inclusions", "!autorest");
 
-@@clientName(AnalyzeTextEntityLinkingInput, "TextEntityLinkingInput");
-@@clientName(AnalyzeTextEntityLinkingInput.parameters, "ActionContent");
-@@clientName(AnalyzeTextEntityLinkingInput.analysisInput, "TextInput");
-@@clientName(EntityLinkingTaskParameters, "EntityLinkingActionContent");
+@@clientName(
+  AnalyzeTextEntityLinkingInput,
+  "TextEntityLinkingInput",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityLinkingInput.parameters,
+  "ActionContent",
+  "!autorest"
+);
+@@clientName(
+  AnalyzeTextEntityLinkingInput.analysisInput,
+  "TextInput",
+  "!autorest"
+);
+@@clientName(
+  EntityLinkingTaskParameters,
+  "EntityLinkingActionContent",
+  "!autorest"
+);
 
-@@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult");
-@@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind");
+@@clientName(AnalyzeTextTaskResult, "AnalyzeTextResult", "!autorest");
+@@clientName(AnalyzeTextTaskResultsKind, "AnalyzeTextResultsKind", "!autorest");
 
-@@clientName(SentimentTaskResult, "AnalyzeTextSentimentResult");
-@@clientName(PiiTaskResult, "AnalyzeTextPiiResult");
-@@clientName(LanguageDetectionTaskResult, "AnalyzeTextLanguageDetectionResult");
-@@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult");
-@@clientName(EntityLinkingTaskResult, "AnalyzeTextEntityLinkingResult");
-@@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult");
+@@clientName(SentimentTaskResult, "AnalyzeTextSentimentResult", "!autorest");
+@@clientName(PiiTaskResult, "AnalyzeTextPiiResult", "!autorest");
+@@clientName(
+  LanguageDetectionTaskResult,
+  "AnalyzeTextLanguageDetectionResult",
+  "!autorest"
+);
+@@clientName(EntitiesTaskResult, "AnalyzeTextEntitiesResult", "!autorest");
+@@clientName(
+  EntityLinkingTaskResult,
+  "AnalyzeTextEntityLinkingResult",
+  "!autorest"
+);
+@@clientName(KeyPhraseTaskResult, "AnalyzeTextKeyPhraseResult", "!autorest");
 
-@@clientName(AnalyzeTextJobsInput, "AnalyzeTextOperationInput");
-@@clientName(AnalyzeTextJobsInput.analysisInput, "TextInput");
-@@clientName(AnalyzeTextJobsInput.tasks, "Actions");
+@@clientName(AnalyzeTextJobsInput, "AnalyzeTextOperationInput", "!autorest");
+@@clientName(AnalyzeTextJobsInput.analysisInput, "TextInput", "!autorest");
+@@clientName(AnalyzeTextJobsInput.tasks, "Actions", "!autorest");
 
-@@clientName(AnalyzeTextLROTask, "AnalyzeTextOperationAction");
-@@clientName(AnalyzeTextLROTask.taskName, "Name");
+@@clientName(AnalyzeTextLROTask, "AnalyzeTextOperationAction", "!autorest");
+@@clientName(AnalyzeTextLROTask.taskName, "Name", "!autorest");
 
-@@clientName(AnalyzeTextLROTaskKind, "AnalyzeTextOperationActionKind");
-@@clientName(SentimentAnalysisLROTask, "SentimentAnalysisOperationAction");
-@@clientName(ExtractiveSummarizationLROTask,
-  "ExtractiveSummarizationOperationAction"
+@@clientName(
+  AnalyzeTextLROTaskKind,
+  "AnalyzeTextOperationActionKind",
+  "!autorest"
 );
-@@clientName(ExtractiveSummarizationLROTask.parameters, "ActionContent");
-@@clientName(ExtractiveSummarizationTaskParameters,
-  "ExtractiveSummarizationActionContent"
+@@clientName(
+  SentimentAnalysisLROTask,
+  "SentimentAnalysisOperationAction",
+  "!autorest"
 );
-@@clientName(AbstractiveSummarizationLROTask,
-  "AbstractiveSummarizationOperationAction"
+@@clientName(
+  ExtractiveSummarizationLROTask,
+  "ExtractiveSummarizationOperationAction",
+  "!autorest"
 );
-@@clientName(AbstractiveSummarizationLROTask.parameters, "ActionContent");
-@@clientName(AbstractiveSummarizationTaskParameters,
-  "AbstractiveSummarizationActionContent"
+@@clientName(
+  ExtractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
 );
-@@clientName(CustomMultiLabelClassificationLROTask,
-  "CustomMultiLabelClassificationOperationAction"
+@@clientName(
+  ExtractiveSummarizationTaskParameters,
+  "ExtractiveSummarizationActionContent",
+  "!autorest"
 );
-@@clientName(CustomMultiLabelClassificationLROTask.parameters, "ActionContent");
-@@clientName(CustomMultiLabelClassificationTaskParameters,
-  "CustomMultiLabelClassificationActionContent"
+@@clientName(
+  AbstractiveSummarizationLROTask,
+  "AbstractiveSummarizationOperationAction",
+  "!autorest"
 );
-@@clientName(CustomSingleLabelClassificationLROTask,
-  "CustomSingleLabelClassificationOperationAction"
+@@clientName(
+  AbstractiveSummarizationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
 );
-@@clientName(CustomSingleLabelClassificationLROTask.parameters,
-  "ActionContent"
+@@clientName(
+  AbstractiveSummarizationTaskParameters,
+  "AbstractiveSummarizationActionContent",
+  "!autorest"
 );
-@@clientName(CustomSingleLabelClassificationTaskParameters,
-  "CustomSingleLabelClassificationActionContent"
+@@clientName(
+  CustomMultiLabelClassificationLROTask,
+  "CustomMultiLabelClassificationOperationAction",
+  "!autorest"
 );
-@@clientName(CustomEntitiesTaskParameters, "CustomEntitiesActionContent");
-@@clientName(AnalyzeTextLROResultsKind, "AnalyzeTextOperationResultsKind");
-@@clientName(AnalyzeTextLROResultsKind.SentimentAnalysisLROResults,
-  "SentimentAnalysisOperationResults"
+@@clientName(
+  CustomMultiLabelClassificationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.EntityRecognitionLROResults,
-  "EntityRecognitionOperationResults"
+@@clientName(
+  CustomMultiLabelClassificationTaskParameters,
+  "CustomMultiLabelClassificationActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults,
-  "PiiEntityRecognitionOperationResults"
+@@clientName(
+  CustomSingleLabelClassificationLROTask,
+  "CustomSingleLabelClassificationOperationAction",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults,
-  "KeyPhraseExtractionOperationResults"
+@@clientName(
+  CustomSingleLabelClassificationLROTask.parameters,
+  "ActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.EntityLinkingLROResults,
-  "EntityLinkingOperationResults"
+@@clientName(
+  CustomSingleLabelClassificationTaskParameters,
+  "CustomSingleLabelClassificationActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.HealthcareLROResults,
-  "HealthcareOperationResults"
+@@clientName(
+  CustomEntitiesTaskParameters,
+  "CustomEntitiesActionContent",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults,
-  "CustomEntityRecognitionOperationResults"
+@@clientName(
+  AnalyzeTextLROResultsKind,
+  "AnalyzeTextOperationResultsKind",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.CustomSingleLabelClassificationLROResults,
-  "CustomSingleLabelClassificationOperationResults"
+@@clientName(
+  AnalyzeTextLROResultsKind.SentimentAnalysisLROResults,
+  "SentimentAnalysisOperationResults",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.CustomMultiLabelClassificationLROResults,
-  "CustomMultiLabelClassificationOperationResults"
+@@clientName(
+  AnalyzeTextLROResultsKind.EntityRecognitionLROResults,
+  "EntityRecognitionOperationResults",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.ExtractiveSummarizationLROResults,
-  "ExtractiveSummarizationOperationResults"
+@@clientName(
+  AnalyzeTextLROResultsKind.PiiEntityRecognitionLROResults,
+  "PiiEntityRecognitionOperationResults",
+  "!autorest"
 );
-@@clientName(AnalyzeTextLROResultsKind.AbstractiveSummarizationLROResults,
-  "AbstractiveSummarizationOperationResults"
+@@clientName(
+  AnalyzeTextLROResultsKind.KeyPhraseExtractionLROResults,
+  "KeyPhraseExtractionOperationResults",
+  "!autorest"
 );
-@@clientName(AbstractiveSummarizationLROResult,
-  "AbstractiveSummarizationOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.EntityLinkingLROResults,
+  "EntityLinkingOperationResults",
+  "!autorest"
 );
-@@clientName(ExtractiveSummarizationLROResult,
-  "ExtractiveSummarizationOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.HealthcareLROResults,
+  "HealthcareOperationResults",
+  "!autorest"
 );
-@@clientName(PiiEntityRecognitionLROResult,
-  "PiiEntityRecognitionOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.CustomEntityRecognitionLROResults,
+  "CustomEntityRecognitionOperationResults",
+  "!autorest"
 );
-@@clientName(KeyPhraseExtractionLROResult,
-  "KeyPhraseExtractionOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.CustomSingleLabelClassificationLROResults,
+  "CustomSingleLabelClassificationOperationResults",
+  "!autorest"
 );
-@@clientName(EntityRecognitionLROResult, "EntityRecognitionOperationResult");
-@@clientName(EntityLinkingLROResult, "EntityLinkingOperationResult");
-@@clientName(CustomMultiLabelClassificationLROResult,
-  "CustomMultiLabelClassificationOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.CustomMultiLabelClassificationLROResults,
+  "CustomMultiLabelClassificationOperationResults",
+  "!autorest"
 );
-@@clientName(CustomSingleLabelClassificationLROResult,
-  "CustomSingleLabelClassificationOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.ExtractiveSummarizationLROResults,
+  "ExtractiveSummarizationOperationResults",
+  "!autorest"
 );
-@@clientName(CustomEntityRecognitionLROResult,
-  "CustomEntityRecognitionOperationResult"
+@@clientName(
+  AnalyzeTextLROResultsKind.AbstractiveSummarizationLROResults,
+  "AbstractiveSummarizationOperationResults",
+  "!autorest"
 );
-@@clientName(EntitiesDocumentResultWithMetadataDetectedLanguage,
-  "EntityActionResult"
+@@clientName(
+  AbstractiveSummarizationLROResult,
+  "AbstractiveSummarizationOperationResult",
+  "!autorest"
 );
-@@clientName(EntitiesDocumentResultWithMetadata,
-  "EntityActionResultWithMetadata"
+@@clientName(
+  ExtractiveSummarizationLROResult,
+  "ExtractiveSummarizationOperationResult",
+  "!autorest"
 );
-@@clientName(ClassificationDocumentResultWithDetectedLanguage,
-  "ClassificationActionResult"
+@@clientName(
+  PiiEntityRecognitionLROResult,
+  "PiiEntityRecognitionOperationResult",
+  "!autorest"
 );
-@@clientName(EntityLinkingResultWithDetectedLanguage,
-  "EntityLinkingActionResult"
+@@clientName(
+  KeyPhraseExtractionLROResult,
+  "KeyPhraseExtractionOperationResult",
+  "!autorest"
 );
-@@clientName(KeyPhrasesDocumentResultWithDetectedLanguage,
-  "KeyPhrasesActionResult"
+@@clientName(
+  EntityRecognitionLROResult,
+  "EntityRecognitionOperationResult",
+  "!autorest"
 );
-@@clientName(SentimentDocumentResultWithDetectedLanguage,
-  "SentimentActionResult"
+@@clientName(
+  EntityLinkingLROResult,
+  "EntityLinkingOperationResult",
+  "!autorest"
 );
-@@clientName(ExtractedSummaryDocumentResultWithDetectedLanguage,
-  "ExtractedSummaryActionResult"
+@@clientName(
+  CustomMultiLabelClassificationLROResult,
+  "CustomMultiLabelClassificationOperationResult",
+  "!autorest"
 );
-@@clientName(AbstractiveSummaryDocumentResultWithDetectedLanguage,
-  "AbstractiveSummaryActionResult"
+@@clientName(
+  CustomSingleLabelClassificationLROResult,
+  "CustomSingleLabelClassificationOperationResult",
+  "!autorest"
 );
-@@clientName(HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
-  "HealthcareActionResult"
+@@clientName(
+  CustomEntityRecognitionLROResult,
+  "CustomEntityRecognitionOperationResult",
+  "!autorest"
 );
-@@clientName(EntitiesDocumentResultWithDetectedLanguage,
-  "CustomEntityActionResult"
+@@clientName(
+  EntitiesDocumentResultWithMetadataDetectedLanguage,
+  "EntityActionResult",
+  "!autorest"
 );
-@@clientName(PiiEntityWithTags, "PiiEntity");
+@@clientName(
+  EntitiesDocumentResultWithMetadata,
+  "EntityActionResultWithMetadata",
+  "!autorest"
+);
+@@clientName(
+  ClassificationDocumentResultWithDetectedLanguage,
+  "ClassificationActionResult",
+  "!autorest"
+);
+@@clientName(
+  EntityLinkingResultWithDetectedLanguage,
+  "EntityLinkingActionResult",
+  "!autorest"
+);
+@@clientName(
+  KeyPhrasesDocumentResultWithDetectedLanguage,
+  "KeyPhrasesActionResult",
+  "!autorest"
+);
+@@clientName(
+  SentimentDocumentResultWithDetectedLanguage,
+  "SentimentActionResult",
+  "!autorest"
+);
+@@clientName(
+  ExtractedSummaryDocumentResultWithDetectedLanguage,
+  "ExtractedSummaryActionResult",
+  "!autorest"
+);
+@@clientName(
+  AbstractiveSummaryDocumentResultWithDetectedLanguage,
+  "AbstractiveSummaryActionResult",
+  "!autorest"
+);
+@@clientName(
+  HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage,
+  "HealthcareActionResult",
+  "!autorest"
+);
+@@clientName(
+  EntitiesDocumentResultWithDetectedLanguage,
+  "CustomEntityActionResult",
+  "!autorest"
+);
+@@clientName(PiiEntityWithTags, "PiiEntity", "!autorest");
 
 @@clientName(analyzeTextSubmitJob, "analyzeTextJob", "python");
 @@clientName(analyzeTextCancelJob, "cancelJob", "python");
@@ -562,3 +1162,15 @@ namespace Language.AnalyzeTextClientCustomizations;
 
 @@clientName(AnalyzeTextJobState, "AnalyzeTextOperationState", "python");
 @@clientName(AnalyzeTextJobState.tasks, "Actions", "python");
+
+@@clientName(fhirVersion.`4.0.1`, "ENUM_4_0_1", "python");
+
+@@clientName(CustomEntitiesLROTask, "CustomEntitiesOperationAction", "csharp");
+@@clientName(EntitiesLROTask, "EntitiesOperationAction", "csharp");
+@@clientName(EntityLinkingLROTask, "EntityLinkingOperationAction", "csharp");
+@@clientName(HealthcareLROTask, "HealthcareOperationAction", "csharp");
+@@clientName(KeyPhraseLROTask, "KeyPhraseOperationAction", "csharp");
+@@clientName(PiiLROTask, "PiiOperationAction", "csharp");
+@@clientName(AnalyzeTextLROResult, "AnalyzeTextOperationResult", "csharp");
+@@clientName(HealthcareLROResult, "HealthcareOperationResult", "csharp");
+@@clientName(SentimentLROResult, "SentimentOperationResult", "csharp");

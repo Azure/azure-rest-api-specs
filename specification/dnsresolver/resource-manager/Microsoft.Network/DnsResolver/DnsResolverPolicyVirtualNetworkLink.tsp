@@ -106,15 +106,19 @@ interface DnsResolverPolicyVirtualNetworkLinks {
 
 @@maxLength(DnsResolverPolicyVirtualNetworkLink.name, 80);
 @@minLength(DnsResolverPolicyVirtualNetworkLink.name, 1);
-@@doc(DnsResolverPolicyVirtualNetworkLink.name,
+@@doc(
+  DnsResolverPolicyVirtualNetworkLink.name,
   "The name of the DNS resolver policy virtual network link for the DNS resolver policy."
 );
-@@doc(DnsResolverPolicyVirtualNetworkLink.properties,
+@@doc(
+  DnsResolverPolicyVirtualNetworkLink.properties,
   "Properties of the DNS resolver policy virtual network link."
 );
-@@doc(DnsResolverPolicyVirtualNetworkLinks.createOrUpdate::parameters.resource,
+@@doc(
+  DnsResolverPolicyVirtualNetworkLinks.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsResolverPolicyVirtualNetworkLinks.update::parameters.properties,
+@@doc(
+  DnsResolverPolicyVirtualNetworkLinks.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

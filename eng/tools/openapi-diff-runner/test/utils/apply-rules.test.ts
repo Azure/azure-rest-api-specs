@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.js";
-import { logMessage, logWarning } from "../../src/log.js";
-import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.js";
-import { OadMessage } from "../../src/types/oad-types.js";
-import { applyRules } from "../../src/utils/apply-rules.js";
+import { BreakingChangeLabelsToBeAdded } from "../../src/command-helpers.ts";
+import { logMessage, logWarning } from "../../src/log.ts";
+import { ApiVersionLifecycleStage } from "../../src/types/breaking-change.ts";
+import { type OadMessage } from "../../src/types/oad-types.ts";
+import { applyRules } from "../../src/utils/apply-rules.ts";
 
 // Mock the command-helpers module
-vi.mock("../../src/command-helpers.js", () => ({
+vi.mock("../../src/command-helpers.ts", () => ({
   BreakingChangeLabelsToBeAdded: {
     add: vi.fn(),
     clear: vi.fn(),
@@ -15,8 +15,9 @@ vi.mock("../../src/command-helpers.js", () => ({
 }));
 
 // Mock the log module
-vi.mock("../../src/log.js", () => ({
+vi.mock("../../src/log.ts", () => ({
   logMessage: vi.fn(),
+  logMessageAsync: vi.fn(),
   logWarning: vi.fn(),
   LogLevel: {
     Info: "Info",
@@ -26,7 +27,7 @@ vi.mock("../../src/log.js", () => ({
 }));
 
 // Mock the oad-rule-map module
-vi.mock("../../src/utils/oad-rule-map.js", () => ({
+vi.mock("../../src/utils/oad-rule-map.ts", () => ({
   oadMessagesRuleMap: [
     {
       scenario: "SameVersion",
@@ -74,10 +75,10 @@ describe("apply-rules", () => {
   });
 
   describe("applyRules", () => {
-    it("should apply matching rule for same version scenario", () => {
+    it("should apply matching rule for same version scenario", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage()];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
@@ -87,10 +88,10 @@ describe("apply-rules", () => {
       );
     });
 
-    it("should apply matching rule for cross version scenario", () => {
+    it("should apply matching rule for cross version scenario", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage()];
 
-      const result = applyRules(oadMessages, "CrossVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "CrossVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
@@ -100,10 +101,14 @@ describe("apply-rules", () => {
       );
     });
 
-    it("should downgrade error to warning for cross version against previous preview", () => {
+    it("should downgrade error to warning for cross version against previous preview", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage()];
 
-      const result = applyRules(oadMessages, "CrossVersion", ApiVersionLifecycleStage.PREVIEW);
+      const result = await applyRules(
+        oadMessages,
+        "CrossVersion",
+        ApiVersionLifecycleStage.PREVIEW,
+      );
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
@@ -111,10 +116,10 @@ describe("apply-rules", () => {
       expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
-    it("should use VersioningReviewRequired label for same version preview", () => {
+    it("should use VersioningReviewRequired label for same version preview", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage()];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.PREVIEW);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.PREVIEW);
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Error");
@@ -122,10 +127,10 @@ describe("apply-rules", () => {
       expect(BreakingChangeLabelsToBeAdded.add).toHaveBeenCalledWith("VersioningReviewRequired");
     });
 
-    it("should not add label for warning severity", () => {
+    it("should not add label for warning severity", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage("RemovedProperty", "1002")];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
@@ -133,10 +138,10 @@ describe("apply-rules", () => {
       expect(BreakingChangeLabelsToBeAdded.add).not.toHaveBeenCalled();
     });
 
-    it("should use fallback rule when no matching rule found", () => {
+    it("should use fallback rule when no matching rule found", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage("TypeChanged", "1003")];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result).toHaveLength(1);
       expect(result[0].type).toBe("Warning");
@@ -146,13 +151,13 @@ describe("apply-rules", () => {
       );
     });
 
-    it("should handle multiple messages", () => {
+    it("should handle multiple messages", async () => {
       const oadMessages: OadMessage[] = [
         createTestOadMessage("AddedRequiredProperty", "1001"),
         createTestOadMessage("RemovedProperty", "1002"),
       ];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result).toHaveLength(2);
       expect(result[0].type).toBe("Error");
@@ -165,7 +170,7 @@ describe("apply-rules", () => {
       );
     });
 
-    it("should preserve original message properties", () => {
+    it("should preserve original message properties", async () => {
       const originalMessage: OadMessage = {
         type: "Info",
         code: "AddedRequiredProperty",
@@ -181,7 +186,11 @@ describe("apply-rules", () => {
         old: { location: "specification/test.json#L8", path: "specification/test.json" },
       };
 
-      const result = applyRules([originalMessage], "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(
+        [originalMessage],
+        "SameVersion",
+        ApiVersionLifecycleStage.STABLE,
+      );
 
       expect(result[0]).toMatchObject({
         code: "AddedRequiredProperty",
@@ -198,21 +207,21 @@ describe("apply-rules", () => {
       });
     });
 
-    it("should log entry and exit", () => {
+    it("should log entry and exit", async () => {
       const oadMessages: OadMessage[] = [createTestOadMessage()];
 
-      applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(logMessage).toHaveBeenCalledWith("ENTER definition applyRules");
       expect(logMessage).toHaveBeenCalledWith("RETURN definition applyRules");
     });
 
-    it("should warn when rule has error severity but no label", () => {
+    it("should warn when rule has error severity but no label", async () => {
       // This test would require mocking the rule map differently,
       // but the current implementation should handle this case
       const oadMessages: OadMessage[] = [createTestOadMessage("TypeChanged", "1001")];
 
-      const result = applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
+      const result = await applyRules(oadMessages, "SameVersion", ApiVersionLifecycleStage.STABLE);
 
       expect(result[0].type).toBe("Warning");
       expect(logWarning).toHaveBeenCalledWith(

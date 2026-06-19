@@ -26,21 +26,21 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   /**
    * The type of identity used for the Batch Pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
   identity?: BatchPoolIdentity;
 
   /**
    * The ETag of the resource, used for concurrency statements.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 }
 
@@ -65,21 +65,21 @@ interface Pools {
   /**
    * Creates a new pool inside the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
   create is ArmResourceCreateOrReplaceSync<
     Pool,
     Parameters = {
       /**
        * The entity state (ETag) version of the pool to update. A value of "*" can be used to apply the operation only if the pool already exists. If omitted, this operation will always be applied.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-Match")
       `If-Match`?: string;
 
       /**
        * Set to '*' to allow a new pool to be created, but to prevent updating an existing pool. Other values will be ignored.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-None-Match")
       `If-None-Match`?: string;
     },
@@ -104,7 +104,7 @@ interface Pools {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -121,10 +121,13 @@ interface Pools {
   /**
    * Deletes the specified pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy design"
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -205,10 +208,12 @@ interface Pools {
 @@minLength(Pool.name, 1);
 @@doc(Pool.name, "The pool name. This must be unique within the account.");
 @@doc(Pool.properties, "The properties associated with the pool.");
-@@doc(Pools.create::parameters.resource,
+@@doc(
+  Pools.create::parameters.resource,
   "Additional parameters for pool creation."
 );
-@@doc(Pools.update::parameters.properties,
+@@doc(
+  Pools.update::parameters.properties,
   "Pool properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
 );
 @@summary(Pools.stopResize, "Stops an ongoing resize operation on the pool.");

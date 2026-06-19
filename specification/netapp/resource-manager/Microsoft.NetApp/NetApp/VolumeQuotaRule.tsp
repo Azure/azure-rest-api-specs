@@ -49,7 +49,7 @@ model VolumeQuotaRulesProperties {
    * Type of quota
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  quotaType?: Type;
+  quotaType?: QuotaType;
 
   /**
    * UserID/GroupID/SID based on the quota target type. UserID and groupID can be found by running ‘id’ or ‘getent’ command for the user or group and SID can be found by running <wmic useraccount where name='user-name' get sid>
@@ -61,7 +61,7 @@ model VolumeQuotaRulesProperties {
 /**
  * Type of quota
  */
-union Type {
+union QuotaType {
   string,
 
   /**
@@ -132,7 +132,10 @@ interface VolumeQuotaRules {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     VolumeQuotaRule,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -146,9 +149,11 @@ interface VolumeQuotaRules {
 
 @@doc(VolumeQuotaRule.name, "The name of volume quota rule");
 @@doc(VolumeQuotaRule.properties, "Volume Quota Rule Properties");
-@@doc(VolumeQuotaRules.create::parameters.resource,
+@@doc(
+  VolumeQuotaRules.create::parameters.resource,
   "Quota rule object supplied in the body of the operation."
 );
-@@doc(VolumeQuotaRules.update::parameters.properties,
+@@doc(
+  VolumeQuotaRules.update::parameters.properties,
   "Quota rule object supplied in the body of the operation."
 );

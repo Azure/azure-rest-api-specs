@@ -55,10 +55,12 @@ interface ManagedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**
@@ -69,10 +71,12 @@ interface ManagedClusters {
   update is ArmCustomPatchAsync<
     ManagedCluster,
     PatchModel = ManagedClusterUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**
@@ -96,6 +100,8 @@ interface ManagedClusters {
   /**
    * Gets a fault simulation by the simulationId.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   getFaultSimulation is ArmResourceActionSync<
     ManagedCluster,
@@ -106,6 +112,8 @@ interface ManagedClusters {
   /**
    * Gets the list of recent fault simulations for the cluster.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   @list
   listFaultSimulation is ArmResourceActionSync<
@@ -117,6 +125,8 @@ interface ManagedClusters {
   /**
    * Starts a fault simulation on the cluster.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   startFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -129,6 +139,8 @@ interface ManagedClusters {
   /**
    * Stops a fault simulation on the cluster.
    */
+  @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_05_01_preview)
   @tag("FaultSimulation")
   stopFaultSimulation is ArmResourceActionAsync<
     ManagedCluster,
@@ -160,9 +172,26 @@ interface ManagedApplyMaintenanceWindow {
    * Action to Apply Maintenance window on the Service Fabric Managed Clusters, right now. Any pending update will be applied.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @removed(Versions.v2026_05_01_preview)
   @action("applyMaintenanceWindow")
+  @sharedRoute
   @operationId("managedApplyMaintenanceWindow_Post")
-  post is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
+  postNoBody is ArmResourceActionSync<ManagedCluster, void, OkResponse>;
+
+  /**
+   * Action to Apply Maintenance window on the Service Fabric Managed Clusters. Any pending update will be applied.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Backwards compatibility with non-standard operation id"
+  @added(Versions.v2026_05_01_preview)
+  @action("applyMaintenanceWindow")
+  @sharedRoute
+  @operationId("managedApplyMaintenanceWindow_Post")
+  post is ArmResourceActionSync<
+    ManagedCluster,
+    ApplyMaintenanceWindowRequest,
+    OkResponse,
+    OptionalRequestBody = true
+  >;
 }
 
 @armResourceOperations
@@ -182,19 +211,24 @@ interface ManagedMaintenanceWindowStatus {
 
 @@doc(ManagedCluster.name, "The name of the cluster resource.");
 @@doc(ManagedCluster.properties, "The managed cluster resource properties");
-@@doc(ManagedClusters.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedClusters.createOrUpdate::parameters.resource,
   "The cluster resource."
 );
-@@doc(ManagedClusters.update::parameters.properties,
+@@doc(
+  ManagedClusters.update::parameters.properties,
   "The managed cluster resource updated tags."
 );
-@@doc(ManagedClusters.getFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.getFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
-@@doc(ManagedClusters.startFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.startFaultSimulation::parameters.body,
   "parameters describing the fault simulation."
 );
-@@doc(ManagedClusters.stopFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.stopFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 
@@ -452,6 +486,12 @@ model ManagedClusterProperties {
    */
   @added(Versions.v2025_06_01_preview)
   enableOutboundOnlyNodeTypes?: boolean;
+
+  /**
+   * Determines whether to skip the assignment of the managed network security group (SF-NSG) to the cluster subnet when using a bring-your-own virtual network (BYOVNET) configuration. The default value is false.
+   */
+  @added(Versions.v2026_02_01)
+  skipManagedNsgAssignment?: boolean;
 }
 
 /**
@@ -1046,6 +1086,27 @@ model ManagedMaintenanceWindowStatusContent {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "UTC is a well known abbreviation"
   @visibility(Lifecycle.Read)
   lastWindowEndTimeUTC?: utcDateTime;
+}
+
+/**
+ * Describes the request to apply a maintenance window on a Service Fabric Managed Cluster.
+ */
+@added(Versions.v2026_05_01_preview)
+model ApplyMaintenanceWindowRequest {
+  /**
+   * Effective start date of the maintenance window in yyyy-MM-dd HH:mm format. If not provided, defaults to the current time.
+   */
+  startDateTime?: string;
+
+  /**
+   * Duration of the maintenance window in hh:mm format. If not provided, defaults to 5 hours. Example: 08:30 for 8 and a half hours.
+   */
+  duration?: string;
+
+  /**
+   * Name of the timezone. List of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell. If not provided, defaults to UTC. Example: Pacific Standard Time, UTC, W. Europe Standard Time, Korea Standard Time, Central Australia Standard Time.
+   */
+  timeZone?: string;
 }
 
 /**

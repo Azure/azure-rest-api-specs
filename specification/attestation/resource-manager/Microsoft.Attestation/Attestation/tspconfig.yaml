@@ -6,7 +6,6 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/attestation.json"
     emit-lro-options: "all"
@@ -32,13 +31,16 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/attestation"
     emitter-output-dir: "{output-dir}/{service-dir}/armattestation"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armattestation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armattestation/v2"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.Attestation"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

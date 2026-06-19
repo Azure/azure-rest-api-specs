@@ -1,17 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.common.geojson.tsp";
-import "./models.common.cql.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
 
 /**
  * Defines the sorting directions for query results in STAC API.
  */
-union SortDirections {
+union StacSearchSortingDirection {
   string,
 
   /**
@@ -36,7 +34,7 @@ union SortDirections {
  *
  * Defines the supported filter languages for STAC API queries.
  */
-union FilterLang {
+union FilterLanguage {
   string,
 
   /**
@@ -59,7 +57,7 @@ union FilterLang {
  * Queryable data types for the queryables extension.
  * These are the data types supported by Basic CQL2.
  */
-union QueryableDefinitionDataType {
+union StacQueryableDefinitionDataType {
   /**
    * Character strings.
    * Example: 'This is a literal string.'
@@ -99,7 +97,7 @@ union QueryableDefinitionDataType {
 /**
  * Represents the GeoJSON feature collection type for STAC item collections.
  */
-union ItemCollectionType {
+union StacItemCollectionType {
   string,
 
   /**
@@ -114,8 +112,8 @@ union ItemCollectionType {
  *
  * Represents the STAC API landing page with links to available resources.
  */
-model LandingPage {
-  ...MicrosoftStacProperties;
+model StacLandingPage {
+  ...StacMicrosoftProperties;
   ...StacExtensionsList;
 
   /**
@@ -149,7 +147,7 @@ model LandingPage {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Type
@@ -164,7 +162,7 @@ model LandingPage {
  *
  * Represents the OGC API conformance declaration.
  */
-model ConformanceClasses {
+model StacConformanceClasses {
   /**
    * List of OGC API conformance classes implemented by this API.
    */
@@ -173,12 +171,10 @@ model ConformanceClasses {
 
 /**
  * Search model.
- *
- * Overrides the validation for datetime from the base request model.
- *
+ * *
  * Defines parameters for a STAC search POST request.
  */
-model SearchPostRequest {
+model StacSearchParameters {
   /**
    * List of collection IDs to search within.
    */
@@ -192,12 +188,13 @@ model SearchPostRequest {
   /**
    * Bounding box for spatial filtering in format [west, south, east, north].
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
 
   /**
    * GeoJSON geometry for spatial filtering.
    */
-  intersects?: GeoJson;
+  intersects?: Geometry;
 
   /**
    * Temporal filter in RFC 3339 format, can be a single time or range.
@@ -213,58 +210,55 @@ model SearchPostRequest {
 
   /**
    * Conf
-   */
-  conf?: Record<string>;
-
-  /**
-   * Whether to sign asset URLs in the response.
-   */
-  sign?: SignType;
-
-  /**
-   * URL signature duration in seconds.
-   */
-  duration?: int32;
-
-  /**
-   * https://github.com/stac-api-extensions/query
    *
-   * Query
+   * Overrides datetime validation from the base request model.
    */
-  query?: Record<StringRecord>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC conf requires union types."
+  @encodedName("application/json", "conf")
+  conformanceClass?: Record<unknown>;
 
   /**
-   * https://github.com/stac-api-extensions/sort
+   * STAC Query
    *
+   * See the [STAC Query Extension](https://github.com/stac-api-extensions/query).
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC query requires union types."
+  query?: Record<unknown>;
+
+  /**
    * Sort criteria for the search results.
+   *
+   * See the [STAC Sort Extension](https://github.com/stac-api-extensions/sort).
    */
-  sortby?: SortExtension[];
+  @encodedName("application/json", "sortby")
+  sortBy?: StacSortExtension[];
 
   /**
-   * https://github.com/stac-api-extensions/fields
+   * Specifies which fields to include or exclude in the STAC search results.
    *
-   * Specifies which fields to include or exclude in the response.
+   * See the [STAC Fields Extension](https://github.com/stac-api-extensions/fields).
    */
-  fields?: SearchPostRequestFields[];
+  fields?: SearchOptionsFields[];
 
   /**
-   * https://github.com/stac-api-extensions/filter
+   * CQL2 Filter
    *
-   * Filter
+   * See the [STAC Filter Extension](https://github.com/stac-api-extensions/filter).
    */
-  filter?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON query requires union types."
+  filter?: Record<unknown>;
 
   /**
    * Coordinate reference system for the filter.
    */
   @encodedName("application/json", "filter-crs")
-  filterCrs?: string;
+  filterCoordinateReferenceSystem?: string;
 
   /**
    * Filter language to use for the filter expression.
    */
   @encodedName("application/json", "filter-lang")
-  filterLang?: FilterLang = FilterLang.`cql-json`;
+  filterLang?: FilterLanguage = FilterLanguage.`cql-json`;
 
   /**
    * Pagination token for fetching the next set of results.
@@ -278,7 +272,7 @@ model SearchPostRequest {
  *
  * Represents a sort specification for STAC API queries.
  */
-model SortExtension {
+model StacSortExtension {
   /**
    * The field name to sort by.
    */
@@ -288,7 +282,7 @@ model SortExtension {
   /**
    * The sort direction (ascending or descending).
    */
-  direction: SortDirections;
+  direction: StacSearchSortingDirection;
 }
 
 /**
@@ -300,7 +294,7 @@ model SortExtension {
  *
  * Controls which fields to include or exclude from the response.
  */
-model SearchPostRequestFields {
+model SearchOptionsFields {
   /**
    * Array of field names to include in the response.
    */
@@ -318,16 +312,16 @@ model SearchPostRequestFields {
  *
  * Represents a collection of STAC collections with links.
  */
-model FeatureCollections {
+model StacCatalogCollections {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Array of STAC collections available in the catalog.
    */
-  #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
   collections: StacCollection[];
 }
 
@@ -337,9 +331,11 @@ model FeatureCollections {
  *
  * Represents a STAC collection.
  */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "STAC specification"
 @resource("collections")
 model StacCollection {
-  ...MicrosoftStacProperties;
+  ...Record<unknown>;
+  ...StacMicrosoftProperties;
   ...StacExtensionsList;
 
   /**
@@ -368,7 +364,7 @@ model StacCollection {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Human-readable title for the collection.
@@ -384,7 +380,15 @@ model StacCollection {
   /**
    * Assets
    */
-  assets?: Record<Asset>;
+  assets?: Record<StacAsset>;
+
+  /**
+   * Item Assets
+   *
+   * See the [Item Assets Definition Extension Specification](https://github.com/stac-extensions/item-assets)
+   */
+  @encodedName("application/json", "item_assets")
+  itemAssets?: Record<StacItemAsset>;
 
   /**
    * License identifier for the collection data.
@@ -395,7 +399,7 @@ model StacCollection {
   /**
    * Spatial and temporal extent of the collection.
    */
-  extent: Extent;
+  extent: StacExtensionExtent;
 
   /**
    * Keywords describing the collection.
@@ -405,14 +409,15 @@ model StacCollection {
   /**
    * Organizations or individuals who provide the collection data.
    */
-  providers?: Provider[];
+  providers?: StacProvider[];
 
   /**
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#summaries
-   *
    * Summaries
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  summaries?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  summaries?: Record<unknown>;
 }
 
 /**
@@ -422,9 +427,9 @@ model StacCollection {
  * Represents a STAC asset, which is a file or resource associated with a STAC item.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model Asset {
+model StacAsset {
   ...Record<unknown>;
-  ...CommonMetadata;
+  ...StacCommonMetadata;
 
   /**
    * Human-readable title for the asset.
@@ -455,11 +460,49 @@ model Asset {
 
 /**
  *
+ * https://github.com/stac-extensions/item-assets
+ *
+ * Represents a STAC item asset, which describes the assets available under any item in the collection.
+ */
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+model StacItemAsset {
+  ...Record<unknown>;
+  ...StacCommonMetadata;
+
+  /**
+   * Human-readable title for the asset.
+   */
+  title: string;
+
+  /**
+   * Detailed description of the asset.
+   */
+  description?: string;
+
+  /**
+   * URL to the asset file.
+   */
+  @minLength(1)
+  href?: string;
+
+  /**
+   * Media type of the asset.
+   */
+  type: string;
+
+  /**
+   * Roles of the asset within the item.
+   */
+  roles?: string[];
+}
+
+/**
+ *
  * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#provider-object
  *
  * Represents information about a data provider for STAC collections and items.
  */
-model Provider {
+model StacProvider {
   /**
    * Name of the provider organization or individual.
    */
@@ -488,22 +531,20 @@ model Provider {
  *
  * Represents the spatial and temporal extent of a STAC collection.
  */
-model Extent {
+model StacExtensionExtent {
   /**
-   *
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object
-   *
    * Spatial extent defined by bounding boxes.
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  spatial: SpatialExtent;
+  spatial: StacExtensionSpatialExtent;
 
   /**
-   *
-   * https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#temporal-extent-object
-   *
    * Temporal extent defined by time intervals.
+   *
+   * See the [STAC Collection Spec](https://github.com/radiantearth/stac-spec/blob/v1.0.0/collection-spec/collection-spec.md#spatial-extent-object).
    */
-  temporal: TimeInterval;
+  temporal: StacCollectionTemporalExtent;
 }
 
 /**
@@ -512,11 +553,12 @@ model Extent {
  *
  * Represents the spatial extent of a STAC collection with bounding boxes.
  */
-model SpatialExtent {
+model StacExtensionSpatialExtent {
   /**
    * Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].
    */
-  bbox?: float64[][];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[][];
 }
 
 /**
@@ -525,39 +567,17 @@ model SpatialExtent {
  *
  * Represents the temporal extent of a STAC collection with time intervals.
  */
-model TimeInterval {
+model StacCollectionTemporalExtent {
   /**
    * Array of time intervals in format [[start_datetime, end_datetime]].
    */
-  interval: string[][];
-}
-
-/**
- * QueryableDefinitionType
- */
-model QueryableDefinitionType {
-  /**
-   * Whether to create a database index for this property.
-   */
-  @encodedName("application/json", "create_index")
-  createIndex?: boolean;
-
-  /**
-   * Data type of the queryable property.
-   */
-  @encodedName("application/json", "data_type")
-  dataType?: QueryableDefinitionDataType = QueryableDefinitionDataType.string;
-
-  /**
-   * Description
-   */
-  description?: string;
+  interval: (utcDateTime | null)[][];
 }
 
 /**
  * Definition of a queryable field for STAC API filtering.
  */
-model QueryableDefinition {
+model StacQueryable {
   /**
    * Name of the queryable field.
    */
@@ -567,7 +587,8 @@ model QueryableDefinition {
   /**
    * Metadata for the queryable field.
    */
-  definition: QueryableDefinitionType;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  definition: Record<unknown>;
 
   /**
    * Whether to create a database index for this field.
@@ -579,7 +600,7 @@ model QueryableDefinition {
    * Data type of the queryable field.
    */
   @encodedName("application/json", "data_type")
-  dataType?: QueryableDefinitionDataType = QueryableDefinitionDataType.string;
+  dataType?: StacQueryableDefinitionDataType = StacQueryableDefinitionDataType.string;
 }
 
 /**
@@ -588,7 +609,7 @@ model QueryableDefinition {
  *
  * Context information for a search response including pagination details.
  */
-model ContextExtension {
+model StacContextExtension {
   /**
    * Number of items returned in the response.
    */
@@ -606,14 +627,51 @@ model ContextExtension {
 }
 
 /**
+ * Enum discriminator for STAC item and collection types.
+ */
+union StacModelType {
+  string,
+
+  /**
+   * GeoJSON Feature type.
+   */
+  Feature: "Feature",
+
+  /**
+   * GeoJSON FeatureCollection type.
+   */
+  FeatureCollection: "FeatureCollection",
+}
+
+/**
+ * Base type for STAC items and collections with discriminator.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Work around Python SDK bug."
+@discriminator("type")
+model StacItemOrStacItemCollection {
+  /**
+   * Stac Version
+   */
+  @minLength(1)
+  @encodedName("application/json", "stac_version")
+  stacVersion?: string = "1.0.0";
+
+  /**
+   * Links to related resources and endpoints.
+   */
+  links?: StacLink[];
+
+  ...StacMicrosoftProperties;
+  ...StacExtensionsList;
+}
+
+/**
  * Represents a STAC Item, which is a GeoJSON Feature with additional metadata.
  */
 @resource("items")
 @parentResource(StacCollection)
-model StacItem {
+model StacItem extends StacItemOrStacItemCollection {
   ...FeatureBase;
-  ...MicrosoftStacProperties;
-  ...StacExtensionsList;
 
   /**
    * Unique identifier for the feature
@@ -623,11 +681,9 @@ model StacItem {
   id: string;
 
   /**
-   * Stac Version
+   * GeoJSON type identifier for Feature
    */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
+  type: StacModelType.Feature;
 
   /**
    * ID of the STAC collection this item belongs to.
@@ -635,32 +691,33 @@ model StacItem {
   collection?: string;
 
   /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
    * Attributes associated with the feature
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: ItemProperties;
-
-  /**
-   * Links to related resources and endpoints.
-   */
-  links: Link[];
+  properties: StacItemProperties;
 
   /**
    * Assets
    */
-  assets: Record<Asset>;
+  assets: Record<StacAsset>;
 
   /**
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")
-  msftTimestamp?: string;
+  timestamp?: utcDateTime;
 
   /**
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  msftEtag?: string;
+  eTag?: string;
 }
 
 /**
@@ -669,9 +726,9 @@ model StacItem {
  * https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#properties-object
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model ItemProperties {
+model StacItemProperties {
   ...Record<unknown>;
-  ...CommonMetadata;
+  ...StacCommonMetadata;
 
   /**
    * Human-readable title for the item.
@@ -707,14 +764,11 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollection {
-  ...MicrosoftStacProperties;
-  ...StacExtensionsList;
-
+model StacItemCollection extends StacItemOrStacItemCollection {
   /**
    * GeoJSON FeatureCollection type.
    */
-  type: ItemCollectionType;
+  type: StacModelType.FeatureCollection;
 
   /**
    * Array of STAC Items in the collection.
@@ -724,54 +778,43 @@ model ItemCollection {
   /**
    * Bounding box of all items in format [west, south, east, north].
    */
-  bbox?: float64[];
-
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * Links to related resources and endpoints.
-   */
-  links?: Link[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32[];
 
   /**
    * Context information for the search response.
    */
-  context?: ContextExtension;
+  context?: StacContextExtension;
 }
 
 /**
  * Microsoft STAC Properties
  */
-model MicrosoftStacProperties {
+model StacMicrosoftProperties {
   /**
    * MSFT Created
    */
   @encodedName("application/json", "msft:_created")
-  msftCreated?: string;
+  createdOn?: utcDateTime;
 
   /**
    * MSFT Updated
    */
   @encodedName("application/json", "msft:_updated")
-  msftUpdated?: string;
+  updatedOn?: utcDateTime;
 
   /**
    * MSFT Short Description
    */
   @maxLength(300)
   @encodedName("application/json", "msft:short_description")
-  msftShortDescription?: string;
+  shortDescription?: string;
 }
 
 /**
  * Common Metadata
  */
-model CommonMetadata {
+model StacCommonMetadata {
   /**
    * Platform that acquired the data.
    */
@@ -795,7 +838,7 @@ model CommonMetadata {
   /**
    * Organizations or individuals who provide the data.
    */
-  providers?: Provider[];
+  providers?: StacProvider[];
 
   /**
    * Ground sample distance in meters.
@@ -832,7 +875,7 @@ model StacExtensionsList {
  *
  * Represents a link.
  */
-model Link {
+model StacLink {
   /**
    * The relationship type of the link.
    */
@@ -846,7 +889,7 @@ model Link {
   /**
    * The MIME type of the linked resource.
    */
-  type?: LinkType = LinkType.`application/json`;
+  type?: StacLinkType = StacLinkType.`application/json`;
 
   /**
    * The URL of the link.
@@ -879,7 +922,8 @@ model Link {
   /**
    * For POST requests, the resource can specify the HTTP body as a JSON object.
    */
-  body?: Record<string>;
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
+  body?: Record<unknown>;
 
   /**
    * Indicates whether the client is expected to merge the body value into the current request body before following the link.
@@ -890,15 +934,9 @@ model Link {
 }
 
 /**
- * Represents a string record.
- */
-@doc("String record.")
-model StringRecord is Record<string>;
-
-/**
  * MIME types for links.
  */
-union LinkType {
+union StacLinkType {
   string,
 
   /**
@@ -970,7 +1008,7 @@ union LinkType {
 /**
  * Represent the signature type for asset URLs.
  */
-union SignType {
+union StacAssetUrlSigningMode {
   string,
 
   /**

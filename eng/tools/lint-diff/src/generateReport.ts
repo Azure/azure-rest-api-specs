@@ -1,21 +1,21 @@
 import { kebabCase } from "change-case";
 import { writeFile } from "node:fs/promises";
 import { relative } from "node:path";
-import { getViolations } from "./correlateResults.js";
+import { getViolations } from "./correlateResults.ts";
 import {
-  AutoRestMessage,
-  AutorestRunResult,
-  BeforeAfter,
-  LintDiffViolation,
-} from "./lintdiff-types.js";
-import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
+  type AutoRestMessage,
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+} from "./lintdiff-types.ts";
+import { getRelatedArmRpcFromDoc } from "./markdown-utils.ts";
 import {
   getDependencyVersion,
   getPathToDependency,
   isFailure,
   isWarning,
   relativizePath,
-} from "./util.js";
+} from "./util.ts";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
@@ -73,7 +73,7 @@ export async function generateLintDiffReport(
 
   console.log(`New violations: ${newViolations.length}`);
   if (newViolations.length > 0) {
-    outputMarkdown += "**[must fix]The following errors/warnings are intorduced by current PR:**\n";
+    outputMarkdown += "**[must fix]The following errors/warnings are introduced by current PR:**\n";
     if (newViolations.length > 50) {
       outputMarkdown += `${LIMIT_50_MESSAGE}\n`;
     }

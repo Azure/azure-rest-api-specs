@@ -1,0 +1,166 @@
+{
+  "title": "ServerlessRuntimes_Update",
+  "operationId": "ServerlessRuntimes_Update",
+  "parameters": {
+    "api-version": "2025-11-27",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg-example",
+    "organizationName": "myOrganization",
+    "serverlessRuntimeName": "myServerlessRuntime",
+    "properties": {
+      "properties": {
+        "description": "Updated production serverless runtime",
+        "platform": "AZURE",
+        "applicationType": "CDI",
+        "computeUnits": "8",
+        "executionTimeout": "7200",
+        "serverlessAccountLocation": "westus",
+        "serverlessRuntimeDataDisks": [
+          {
+            "type": "NFS",
+            "serverHostOrIpAddress": "10.0.0.10",
+            "sourceMount": "/source/data-updated",
+            "targetMount": "/target/data-updated",
+            "mountOptions": "rw,sync"
+          }
+        ],
+        "serverlessRuntimeNetworkProfile": {
+          "networkInterfaceConfiguration": {
+            "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet",
+            "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+            "vnetResourceGuid": "vnet-guid-001"
+          }
+        },
+        "advancedCustomProperties": [],
+        "supplementaryFileLocation": "/files/supplementary",
+        "serverlessRuntimeConfig": {
+          "cdiConfigProps": [
+            {
+              "engineName": "CDI Engine",
+              "engineVersion": "2.0",
+              "applicationConfigs": [
+                {
+                  "type": "string",
+                  "name": "updatedConfig",
+                  "value": "updatedValue",
+                  "platform": "AZURE",
+                  "customized": "true",
+                  "defaultValue": "default"
+                }
+              ]
+            }
+          ],
+          "cdieConfigProps": [
+            {
+              "engineName": "CDIE Engine",
+              "engineVersion": "2.0",
+              "applicationConfigs": [
+                {
+                  "type": "string",
+                  "name": "updatedConfig",
+                  "value": "updatedValue",
+                  "platform": "AZURE",
+                  "customized": "true",
+                  "defaultValue": "default"
+                }
+              ]
+            }
+          ]
+        },
+        "serverlessRuntimeTags": [
+          {
+            "name": "environment",
+            "value": "staging"
+          }
+        ],
+        "serverlessRuntimeUserContextProperties": {
+          "userContextToken": "user-ctx-token-updated"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Updated production serverless runtime",
+          "platform": "AZURE",
+          "applicationType": "CDI",
+          "computeUnits": "8",
+          "executionTimeout": "7200",
+          "serverlessAccountLocation": "westus",
+          "serverlessRuntimeDataDisks": [
+            {
+              "type": "NFS",
+              "serverHostOrIpAddress": "10.0.0.10",
+              "sourceMount": "/source/data-updated",
+              "targetMount": "/target/data-updated",
+              "mountOptions": "rw,sync"
+            }
+          ],
+          "serverlessRuntimeNetworkProfile": {
+            "networkInterfaceConfiguration": {
+              "vnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default",
+              "vnetResourceGuid": "vnet-guid-001"
+            }
+          },
+          "advancedCustomProperties": [],
+          "supplementaryFileLocation": "/files/supplementary",
+          "serverlessRuntimeConfig": {
+            "cdiConfigProps": [
+              {
+                "engineName": "CDI Engine",
+                "engineVersion": "2.0",
+                "applicationConfigs": [
+                  {
+                    "type": "string",
+                    "name": "updatedConfig",
+                    "value": "updatedValue",
+                    "platform": "AZURE",
+                    "customized": "true",
+                    "defaultValue": "default"
+                  }
+                ]
+              }
+            ],
+            "cdieConfigProps": [
+              {
+                "engineName": "CDIE Engine",
+                "engineVersion": "2.0",
+                "applicationConfigs": [
+                  {
+                    "type": "string",
+                    "name": "updatedConfig",
+                    "value": "updatedValue",
+                    "platform": "AZURE",
+                    "customized": "true",
+                    "defaultValue": "default"
+                  }
+                ]
+              }
+            ]
+          },
+          "serverlessRuntimeTags": [
+            {
+              "name": "environment",
+              "value": "staging"
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Informatica.DataManagement/organizations/myOrganization/serverlessRuntimes/myServerlessRuntime",
+        "name": "myServerlessRuntime",
+        "type": "Informatica.DataManagement/organizations/serverlessRuntimes",
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2024-01-01T00:00:00.000Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-01-02T00:00:00.000Z"
+        }
+      }
+    }
+  }
+}

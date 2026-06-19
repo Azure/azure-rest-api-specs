@@ -187,6 +187,20 @@ describe("Swagger", () => {
     );
   });
 
+  it("sorts refs in toJSONAsync", async () => {
+    // a.json has 2+ refs (nesting/b.json, c.json, etc.) so the sort comparator gets invoked
+    const swagger = new Swagger(
+      resolve(__dirname, "fixtures/getAffectedSwaggers/specification/1/data-plane/a.json"),
+    );
+    const json = /** @type {import('../src/swagger.js').SwaggerJSON} */ (
+      await swagger.toJSONAsync({ includeRefs: true })
+    );
+    const refs = /** @type {import('../src/swagger.js').SwaggerJSON[]} */ (json.refs);
+    expect(refs.length).toBe(4);
+    // ensure at least first two elements are sorted correctly
+    expect(refs[0].path.localeCompare(refs[1].path)).toBeLessThan(0);
+  });
+
   // TODO: Test that path is resolved against backpointer
 
   it("excludes example files", async () => {
@@ -227,6 +241,15 @@ describe("Swagger", () => {
         ],
       ]),
     );
+  });
+
+  it("returns cached examples on second call", async () => {
+    const swagger = new Swagger(resolve(__dirname, "fixtures/swagger/ignoreExamples/swagger.json"));
+    const examples1 = await swagger.getExamples();
+    const examples2 = await swagger.getExamples();
+
+    // Both calls should return the same (cached) Map instance
+    expect(examples2).toBe(examples1);
   });
 
   it("computes versionKind from path", () => {

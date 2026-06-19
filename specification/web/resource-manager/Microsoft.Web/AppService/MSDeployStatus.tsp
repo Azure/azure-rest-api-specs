@@ -54,12 +54,13 @@ interface MSDeployStatusOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatuses {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -80,11 +81,13 @@ interface MSDeployStatuses {
   @summary("Invoke the MSDeploy web app extension.")
   createMSDeployOperation is MSDeployStatusOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -131,12 +134,13 @@ interface MSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -155,11 +159,13 @@ interface MSDeployStatusOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createInstanceMSDeployOperation is MSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -206,12 +212,13 @@ interface MSDeployStatusSlotOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface MSDeployStatusSlotOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -229,11 +236,13 @@ interface MSDeployStatusSlotOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createMSDeployOperationSlot is MSDeployStatusSlotOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -285,13 +294,14 @@ interface InstanceMSDeployStatusOperationGroupOps
         @path
         @segment("extensions")
         @key
-        mSDeploy: "mSDeploy",
+        MSDeploy: "MSDeploy",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
@@ -310,11 +320,13 @@ interface InstanceMSDeployStatusOperationGroup {
   @summary("Invoke the MSDeploy web app extension.")
   createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
-    Response = ArmResourceCreatedResponse<
-      MSDeployStatus,
-      ArmLroLocationHeader<FinalResult = MSDeployStatus> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmConflictResponse,
+    Response =
+      | ArmResourceCreatedResponse<
+          MSDeployStatus,
+          ArmLroLocationHeader<FinalResult = MSDeployStatus> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmConflictResponse,
     Request = MSDeploy,
     OverrideErrorType = DefaultErrorResponse
   >;
@@ -336,15 +348,19 @@ interface InstanceMSDeployStatusOperationGroup {
 
 @@doc(MSDeployStatus.name, "");
 @@doc(MSDeployStatus.properties, "MSDeployStatus resource specific properties");
-@@doc(MSDeployStatuses.createMSDeployOperation::parameters.resource,
+@@doc(
+  MSDeployStatuses.createMSDeployOperation::parameters.resource,
   "Details of MSDeploy operation"
 );
-@@doc(MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
+@@doc(
+  MSDeployStatusOperationGroup.createInstanceMSDeployOperation::parameters.resource,
   "Details of MSDeploy operation"
 );
-@@doc(MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
+@@doc(
+  MSDeployStatusSlotOperationGroup.createMSDeployOperationSlot::parameters.resource,
   "Details of MSDeploy operation"
 );
-@@doc(InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
+@@doc(
+  InstanceMSDeployStatusOperationGroup.createInstanceMSDeployOperationSlot::parameters.resource,
   "Details of MSDeploy operation"
 );

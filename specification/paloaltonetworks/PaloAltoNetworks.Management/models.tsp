@@ -2,8 +2,10 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 
@@ -255,6 +257,18 @@ union BillingCycle {
   WEEKLY: "WEEKLY",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MONTHLY: "MONTHLY",
+}
+
+/**
+ * Firewall SKU type
+ */
+@added(Versions.v2026_01_26_preview)
+union FirewallSkuType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  STANDARD: "STANDARD",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PREMIUM: "PREMIUM",
 }
 
 /**
@@ -1226,6 +1240,12 @@ model FirewallDeploymentProperties {
    * panEtag info
    */
   panEtag?: string;
+
+  /**
+   * Firewall SKU type, Default will be STANDARD.
+   */
+  @added(Versions.v2026_01_26_preview)
+  firewallSku?: string = "STANDARD";
 
   /**
    * Network settings
@@ -2211,4 +2231,112 @@ model LocalRulestackResourceUpdateProperties {
    * Security Profile
    */
   securityServices?: SecurityServices;
+}
+
+@added(Versions.v2026_05_11_preview)
+@doc("Network protocol filter for packet capture.")
+union CustomCaptureConfigurationsProtocol {
+  string,
+
+  @doc("Transmission Control Protocol.")
+  "TCP",
+
+  @doc("User Datagram Protocol.")
+  "UDP",
+}
+
+@added(Versions.v2026_05_11_preview)
+@doc("Firewall stage at which to capture packets.")
+union CustomCaptureConfigurationsStage {
+  string,
+
+  @doc("Capture packets when received by the firewall.")
+  "Receive",
+
+  @doc("Capture packets when transmitted by the firewall.")
+  "Transmit",
+
+  @doc("Capture packets at the firewall processing stage.")
+  "Firewall",
+
+  @doc("Capture packets that were dropped by the firewall.")
+  "Drop",
+}
+
+@added(Versions.v2026_05_11_preview)
+@doc("Current state of the custom capture operation. Single source of truth — clients poll until this reaches a terminal value (Success / Failed).")
+union CustomCaptureConfigurationsStatus {
+  string,
+
+  @doc("Capture is still running.")
+  "InProgress",
+
+  @doc("Capture completed successfully and the file has been written to storage.")
+  "Success",
+
+  @doc("Capture failed; see properties.pcapDetailReason and the root error envelope for details.")
+  "Failed",
+}
+
+@added(Versions.v2026_05_11_preview)
+@doc("A single packet-capture filter rule. sourcePort is OPTIONAL — when omitted, any source port matches.")
+model CustomCaptureConfigurationsFilter {
+  @doc("Network protocol — TCP or UDP.")
+  protocol: CustomCaptureConfigurationsProtocol;
+
+  @doc("Source IPv4 address in dotted format (e.g., 10.0.0.5).")
+  sourceIpAddress: string;
+
+  @doc("Source port number (1-65535). Optional — omit to match any source port.")
+  @minValue(1)
+  @maxValue(65535)
+  sourcePort?: int32;
+
+  @doc("Destination IPv4 address in dotted format (e.g., 52.39.204.87).")
+  destinationIpAddress: string;
+
+  @doc("Destination port number (1-65535). Required.")
+  @minValue(1)
+  @maxValue(65535)
+  destinationPort: int32;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Sync proxy resource: capture state is tracked by the read-only `pcapStatus` field, which is the single source of truth; a separate provisioningState is intentionally omitted."
+@added(Versions.v2026_05_11_preview)
+@doc("Properties of a Custom Capture Configuration. NOTE: this is a sync proxy resource, NOT an LRO — there is intentionally no provisioningState field.")
+model CustomCaptureConfigurationsProperties {
+  @doc("List of filters to match packets against (1-4 entries). Required on PUT (input). May be omitted in GET responses while pcapStatus is InProgress because the backend has not finalized echo-back yet; echoed in terminal Success responses.")
+  @identifiers(#[])
+  @minItems(1)
+  @maxItems(4)
+  pcapFilter?: CustomCaptureConfigurationsFilter[];
+
+  @doc("List of firewall stages where packets should be captured (1-4 entries). Required on PUT (input). May be omitted in GET responses while pcapStatus is InProgress because the backend has not finalized echo-back yet; echoed in terminal Success responses.")
+  @minItems(1)
+  @maxItems(4)
+  pcapStages?: CustomCaptureConfigurationsStage[];
+
+  @doc("Capture duration in seconds (1-180). Required on PUT (input). May be omitted in GET responses while pcapStatus is InProgress because the backend has not finalized echo-back yet; echoed in terminal Success responses.")
+  @minValue(1)
+  @maxValue(180)
+  durationInSec?: int32;
+
+  @doc("ARM resource ID of the customer's storage account where the capture file will be written. Required on PUT (input). May be omitted in GET responses while pcapStatus is InProgress because the backend has not finalized echo-back yet; echoed in terminal Success responses.")
+  storageAccountResourceId?: string;
+
+  @doc("Current capture status. Read-only. Clients should poll GET until this is Success or Failed.")
+  @visibility(Lifecycle.Read)
+  pcapStatus?: CustomCaptureConfigurationsStatus;
+
+  @doc("Detailed reason for the current status, populated by PAN. Typically set when pcapStatus is Failed. Read-only.")
+  @visibility(Lifecycle.Read)
+  pcapDetailReason?: string;
+
+  @doc("Polling-cadence hint in seconds. Set on non-terminal responses (pcapStatus = InProgress) so clients know how long to wait before the next GET. Omitted on terminal responses (Success / Failed). Read-only.")
+  @visibility(Lifecycle.Read)
+  nextCheckInSeconds?: int32;
+
+  @doc("Human-readable status message for display in client UIs (Portal blade, CLI output, etc.). English only. Read-only.")
+  @visibility(Lifecycle.Read)
+  message?: string;
 }

@@ -36,7 +36,7 @@ interface AttestationProvidersOperationGroup {
   getDefaultByLocation is ArmProviderActionSync<
     Response = AttestationProvider,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = CloudError
   >;
 }

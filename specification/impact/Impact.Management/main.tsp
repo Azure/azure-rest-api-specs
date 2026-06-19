@@ -1,6 +1,4 @@
-// First, import the common Microsoft.Voiceservice definition
 import "./impact.tsp";
-//
 
 // Then import the resource API definitions
 import "./workloadImpacts.tsp";
@@ -9,6 +7,7 @@ import "./commonModels.tsp";
 import "./insights.tsp";
 //import "./topologyImpacts.tsp";
 import "./connectors.tsp";
+import "./client.tsp";
 
 // Common elements:
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.

@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./StorageTask.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,10 +40,16 @@ enum Versions {
    * The 2023-01-01 API version.
    */
   v2023_01_01: "2023-01-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  v2026_03_01: "2026-03-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Storage Actions Rest API operations."
 );

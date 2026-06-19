@@ -3,10 +3,10 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { fileExists, normalizePath, readTspConfig } from "../utils.js";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.ts";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -14,6 +14,7 @@ debug.enable("simple-git");
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
   readonly description = "Verify spec directory's folder structure and naming conventions.";
+  readonly suppressable = true;
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
@@ -25,6 +26,23 @@ export class FolderStructureRule implements Rule {
     // must be using "folder structure v2".  Otherwise, it must be using v1.
     const structureVersion =
       relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
+
+    if (structureVersion === 1) {
+      const suppressions = (await getSuppressions(folder)).filter((s) =>
+        s.rules?.includes(this.name),
+      );
+      const suppressMustUseV2 = suppressions.find((s) => s.subRules?.includes("MustUseV2"));
+
+      if (suppressMustUseV2) {
+        stdOutput += `Folder '${folder}' is not using "folder structure v2", but was suppressed.\n`;
+      } else {
+        return {
+          success: false,
+          stdOutput: stdOutput,
+          errorOutput: `Folder '${folder}' must use "folder structure v2". See https://aka.ms/azsdk/spec-dirs \n`,
+        };
+      }
+    }
 
     stdOutput += `folder: ${folder}\n`;
     if (!(await fileExists(folder))) {

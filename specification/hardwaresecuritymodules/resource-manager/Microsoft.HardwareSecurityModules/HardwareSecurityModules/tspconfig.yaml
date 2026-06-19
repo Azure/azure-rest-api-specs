@@ -8,7 +8,6 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -32,6 +31,7 @@ options:
       HardwareSecurityModulesClient: AzureDedicatedHSMResourceProvider
     flavor: "azure"
     experimental-extensible-enums: true
+    ignore-nullable-on-optional: false
     package-details:
       name: "@azure/arm-hardwaresecuritymodules"
   "@azure-tools/typespec-go":
