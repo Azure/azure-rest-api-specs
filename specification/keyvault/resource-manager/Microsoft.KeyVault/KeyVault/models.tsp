@@ -1929,7 +1929,10 @@ model ManagedHsmSku {
   /**
    * SKU of the managed HSM Pool
    */
-  @Versioning.typeChangedFrom(KeyVault.Versions.v2026_03_01_preview, ManagedHsmSkuName)
+  @Versioning.typeChangedFrom(
+    KeyVault.Versions.v2026_03_01_preview,
+    ManagedHsmSkuName
+  )
   name: ManagedHsmSkuNameV2;
 }
 
