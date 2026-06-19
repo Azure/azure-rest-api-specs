@@ -105,8 +105,8 @@ interface Backups {
   >;
 }
 
-@added(Versions.v2026_07_01)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom route definition for configureSourceScan action"
+@added(Versions.v2026_07_01)
 interface ConfigureSourceScan {
   /**
    * Configures source scan for a protected item. This is an asynchronous operation. To know the status of the
@@ -116,7 +116,7 @@ interface ConfigureSourceScan {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan")
   @post
   @tag("ConfigureSourceScan")
-  configure(
+  configureSourceScan(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
@@ -144,7 +144,11 @@ interface ConfigureSourceScan {
     /** The content of the action request */
     @bodyRoot
     body: ProtectedItemConfigureSourceScanRequest,
-  ): ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader> | ErrorResponse;
+  ):
+    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+        ArmLroLocationHeader>
+    | ArmNoContentResponse
+    | ErrorResponse;
 }
 
 @armResourceOperations
