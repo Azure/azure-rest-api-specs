@@ -71,7 +71,7 @@ model RecoveryResourceProperties {
   recoveryGroupId?: string;
 
   @doc("Identity details associated to the resource, which will be used for performing any operations on it")
-  associatedIdentity?: AssociatedIdentity;
+  associatedIdentity?: ResilienceManagementAssociatedIdentity;
 
   @doc("Error details associated with the resource.")
   @visibility(Lifecycle.Read)

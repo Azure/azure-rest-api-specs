@@ -105,6 +105,7 @@ model DrillProperties {
 
   @doc("Managed RG v2 properties.")
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2026_06_01_preview)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("The discriminator for the Drill object hierarchy.")
@@ -198,7 +199,7 @@ model RegionalDrill is ProxyResource<RegionalDrillProperties> {
 @removed(Versions.v2026_04_01_preview)
 model MetricsPropertiesOfDrill {
   @doc("Identity to use for metrics operations.")
-  identity: AssociatedIdentity;
+  identity: ResilienceManagementAssociatedIdentity;
 
   @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
   @identifiers(#[])
@@ -212,7 +213,7 @@ model MetricsPropertiesOfDrill {
 @removed(Versions.v2026_04_01_preview)
 model HealthModelPropertiesOfDrill {
   @doc("Identity to use for Health Model operations.")
-  identity: AssociatedIdentity;
+  identity: ResilienceManagementAssociatedIdentity;
 
   @doc("Full ARM Id of the Health Model.")
   healthModelId: armResourceIdentifier<[
@@ -230,7 +231,7 @@ model HealthModelPropertiesOfDrill {
 model MonitoringPropertiesOfDrill {
   @doc("Identity to use for Drill monitoring operations.")
   @added(Versions.v2026_03_01_preview)
-  identity?: AssociatedIdentity;
+  identity?: ResilienceManagementAssociatedIdentity;
 
   @doc("Full ARM Id of the Log analytics workspace created by Resiliency service where health data is collected.")
   @visibility(Lifecycle.Read)
@@ -300,7 +301,7 @@ model MetricsToTrack {
 @doc("RecoveryPlan properties.")
 model RecoveryPlanPropertiesOfDrill {
   @doc("Identity to use for RecoveryPlan operations.")
-  identity: AssociatedIdentity;
+  identity: ResilienceManagementAssociatedIdentity;
 
   @doc("Recovery Orchestration plan associated with this Drill.")
   @visibility(Lifecycle.Read)
@@ -328,10 +329,10 @@ model ChaosExperimentPropertiesOfDrill {
   region?: string;
 
   @doc("Identity to use for Chaos Experiment operations.")
-  identity?: AssociatedIdentity;
+  identity?: ResilienceManagementAssociatedIdentity;
 
   @doc("Identity to be used by the Chaos Experiment for invoking faults on resources.")
-  chaosExperimentIdentityForFaults?: AssociatedIdentity;
+  chaosExperimentIdentityForFaults?: ResilienceManagementAssociatedIdentity;
 
   @doc("Chaos Experiment resource created for this Drill")
   @visibility(Lifecycle.Read)
@@ -355,11 +356,11 @@ model ChaosExperimentPropertiesOfDrill {
 model ChaosResourcePropertiesOfDrill {
   @doc("Identity to use for Chaos Resource operations.")
   @added(Versions.v2026_03_01_preview)
-  identity: AssociatedIdentity;
+  identity: ResilienceManagementAssociatedIdentity;
 
   @doc("Identity to be used by the Chaos Resource for invoking faults on resources.")
   @added(Versions.v2026_03_01_preview)
-  chaosResourceIdentityForFaults: AssociatedIdentity;
+  chaosResourceIdentityForFaults: ResilienceManagementAssociatedIdentity;
 
   @doc("Chaos Resource created for this Drill")
   @added(Versions.v2026_03_01_preview)
@@ -577,7 +578,7 @@ model AddOrUpdateResourcesRequest {
   resourceLists?: ResourceLists;
 
   @doc("Whether to allow inclusion and update despite attention reasons.")
-  forceInclusionAndUpdate?: ForceInclusionAndUpdate;
+  forceInclusionAndUpdate?: ForceInclusionState;
 }
 
 @doc("Add, Update, Delete resource lists")
@@ -832,6 +833,7 @@ model ValidateForExecutionResponse {
 }
 
 @doc("Configuration of the managed on behalf of resource.")
+@removed(Versions.v2026_06_01_preview)
 model ManagedOnBehalfOfConfiguration {
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
@@ -839,6 +841,7 @@ model ManagedOnBehalfOfConfiguration {
 }
 
 @doc("MoboBroker resource.")
+@removed(Versions.v2026_06_01_preview)
 model MoboBrokerResource {
   /**
    * The fully qualified resource ID of the MoboBroker resource.

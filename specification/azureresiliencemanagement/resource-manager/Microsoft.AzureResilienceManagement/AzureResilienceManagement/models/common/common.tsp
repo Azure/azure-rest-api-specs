@@ -17,7 +17,8 @@ namespace Microsoft.AzureResilienceManagement;
 alias ServiceGroupRoute = "/providers/Microsoft.Management/serviceGroups";
 
 @doc("Definition of associated identity linked with the various resources.")
-model AssociatedIdentity {
+@renamedFrom(Versions.v2026_06_01_preview, "AssociatedIdentity")
+model ResilienceManagementAssociatedIdentity {
   @doc("Identity type linked with the resource")
   type: Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType;
 

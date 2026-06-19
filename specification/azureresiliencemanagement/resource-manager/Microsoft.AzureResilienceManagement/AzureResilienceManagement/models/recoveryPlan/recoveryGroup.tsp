@@ -69,7 +69,7 @@ model RecoveryGroupCustomRunbookAction extends RecoveryGroupBaseAction {
   parameters?: Record<string>;
 
   @doc("The identity associated with actionResourceId for RBAC.")
-  associatedIdentity?: AssociatedIdentity;
+  associatedIdentity?: ResilienceManagementAssociatedIdentity;
 }
 
 // Define the main model
