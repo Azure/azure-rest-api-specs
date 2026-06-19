@@ -41,6 +41,22 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/openapi.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    reason: |
+      `provisioningState` properties on QuotaTransfer and IncomingQuotaTransfer
+      reference the shared `Azure.ResourceManager.ResourceProvisioningState` enum
+      via `$ref` and are emitted with `readOnly: true` on the sibling property.
+      LintDiff's legacy validator does not detect readOnly on `$ref`-based
+      properties; see https://github.com/Azure/azure-openapi-validator/issues/637.
+
+      The documented workaround (`use-read-only-status-schema: true` on the
+      typespec-autorest emitter) is not applicable here because this TypeSpec
+      project also emits the shipped stable spec (`stable/2025-09-01/openapi.json`).
+      Enabling the option re-emits status enum schemas with `readOnly: true` in
+      both versions, and the Cross-Version BreakingChange checker reports those
+      schema-level flips as 18 property-level `ReadonlyPropertyChanged` errors
+      against every property in 2025-09-01 that references a status enum.
 ```
 
 ### Tag: package-2025-09-01
