@@ -692,18 +692,6 @@ model AudioInputTranscriptionOptions {
       | "azure-speech"
   )
   `model`: string;
-  @typeChangedFrom(
-    Versions.v1,
-
-      | string
-      | "whisper-1"
-      | "gpt-4o-transcribe"
-      | "gpt-4o-mini-transcribe"
-      | "gpt-4o-transcribe-diarize"
-      | "mai-transcribe-1"
-      | "azure-speech"
-  )
-  `model`: string;
 
   /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
   language?: string;
