@@ -41,14 +41,6 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/openapi.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    reason: |
-      All `provisioningState` properties on QuotaTransfer and IncomingQuotaTransfer
-      reference `Azure.ResourceManager.ResourceProvisioningState` and are emitted
-      with `readOnly: true` in the sibling property of the `$ref`. This is a known
-      LintDiff false positive on `$ref`-based provisioningState properties — see
-      https://github.com/Azure/azure-openapi-validator/issues/637.
 ```
 
 ### Tag: package-2025-09-01
