@@ -1,0 +1,19 @@
+{
+  "operationId": "Devices_Count",
+  "title": "Count devices in a namespace",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "query": "WHERE properties.deviceClassId = 'dc-1'"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 1234
+      }
+    }
+  }
+}
