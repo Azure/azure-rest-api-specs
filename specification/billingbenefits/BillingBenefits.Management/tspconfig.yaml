@@ -6,6 +6,7 @@ emit:
 options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
+    use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/billingbenefits.json"
@@ -22,14 +23,11 @@ options:
     namespace: "com.azure.resourcemanager.billingbenefits"
     service-name: "BillingBenefits" # human-readable service name, whitespace allowed
     flavor: azure
-  "@azure-typespec/http-client-csharp-mgmt":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.ResourceManager.BillingBenefits"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-billingbenefits"
     typespec-title-map:
       BillingBenefitsClient: BillingBenefitsRP
-    compatibility-lro: true
+    is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -37,7 +35,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/billingbenefits"
     emitter-output-dir: "{output-dir}/{service-dir}/armbillingbenefits"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbillingbenefits/v2"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbillingbenefits"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
