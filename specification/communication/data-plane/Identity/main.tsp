@@ -18,9 +18,7 @@ using Azure.Core;
   "Azure Communication Identity Service",
   {
     @doc("The communication resource, for example https://my-resource.communication.azure.com")
-    @extension("x-ms-parameter-location", "client")
-    @format("url")
-    endpoint: string,
+    endpoint: url,
   }
 )
 @versioned(Versions)
