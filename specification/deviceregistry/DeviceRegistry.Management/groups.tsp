@@ -55,8 +55,8 @@ model GroupMemberCountResponse {
 @doc("Query parameters for listing current members of a namespace group.")
 model GroupListMembersQueryParameters {
   @doc("""
-  Optional cap on the total number of group members to return across this list operation.
-  """)
+    Optional cap on the total number of group members to return across this list operation.
+    """)
   @query("$top")
   top?: int32;
 
@@ -74,32 +74,6 @@ model GroupListMembersResult {
   @doc("The URL to the next page of results, if more results remain within the requested top limit.")
   nextLink?: string;
 }
-
-@added(Versions.v2026_11_02_preview)
-model RefreshGroupMembersResult is ArmOperationStatus {
-  @doc("The total count of members in the group after the refresh.")
-  @visibility(Lifecycle.Read)
-  totalMemberCount?: int64;
-
-  @doc("The count of members added during the refresh.")
-  @visibility(Lifecycle.Read)
-  membersAddedCount?: int64;
-
-  @doc("The count of members removed during the refresh.")
-  @visibility(Lifecycle.Read)
-  membersRemovedCount?: int64;
-
-  @doc("The count of members that failed to be processed during the refresh.")
-  @visibility(Lifecycle.Read)
-  membersFailedCount?: int64;
-
-  @doc("The timestamp of the last successful refresh.")
-  @visibility(Lifecycle.Read)
-  lastRefreshTimestamp?: utcDateTime;
-}
-
-alias RefreshMembersLroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-  ArmCombinedLroHeaders<FinalResult = RefreshGroupMembersResult>;
 
 @added(Versions.v2026_11_02_preview)
 model RefreshGroupMembersResult is ArmOperationStatus {
@@ -151,11 +125,11 @@ interface Groups {
     GroupMemberCountResponse
   >;
 
- @doc("Lists the current members of a namespace group.")
- op listMembers is ArmResourceActionSync<
+  @doc("Lists the current members of a namespace group.")
+  listMembers is ArmResourceActionSync<
     Group,
     void,
     GroupListMembersResult,
     Parameters = GroupListMembersQueryParameters
- >;
+  >;
 }
