@@ -742,6 +742,11 @@ op replacePurge(
 @@clientName(BackendSubnetConfiguration.id, "SubnetId", "csharp");
 @@alternateType(BackendSubnetConfiguration.id, Azure.Core.armResourceIdentifier, "csharp");
 
+// Flatten pool to expose PoolServices directly on backend data/patch models
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK backward compatibility: flatten pool for direct PoolServices access"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendBaseParameters.pool, "csharp");
+@@clientName(BackendBaseParametersPool.services, "PoolServices", "csharp");
+
 // Property renames to preserve old SDK names after @@flattenProperty (properties bag already flattened in back-compatible.tsp)
 @@clientName(OperationContractProperties.urlTemplate, "UriTemplate", "csharp");
 @@clientName(OperationUpdateContractProperties.urlTemplate, "UriTemplate", "csharp");
