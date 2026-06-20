@@ -738,6 +738,10 @@ op replacePurge(
 @@usage(UserTokenParameters, Usage.input | Usage.output);
 @@alternateType(DeletedServiceContract.location, Azure.Core.azureLocation, "csharp");
 
+// BackendSubnetConfiguration.id -> SubnetId (ResourceIdentifier) to match old SDK surface
+@@clientName(BackendSubnetConfiguration.id, "SubnetId", "csharp");
+@@alternateType(BackendSubnetConfiguration.id, Azure.Core.armResourceIdentifier, "csharp");
+
 // Property renames to preserve old SDK names after @@flattenProperty (properties bag already flattened in back-compatible.tsp)
 @@clientName(OperationContractProperties.urlTemplate, "UriTemplate", "csharp");
 @@clientName(OperationUpdateContractProperties.urlTemplate, "UriTemplate", "csharp");
