@@ -122,3 +122,14 @@ op replaceTestRoute(
 
 @@override(IotHubDescriptions.testRoute, replaceTestRoute);
 @@clientName(replaceTestRoute::parameters.body, "input", "go,javascript");
+
+@@clientLocation(
+  GroupIdInformations.get,
+  "PrivateLinkResourcesOperations",
+  "javascript"
+);
+@@clientLocation(
+  GroupIdInformations.list,
+  "PrivateLinkResourcesOperations",
+  "javascript"
+);

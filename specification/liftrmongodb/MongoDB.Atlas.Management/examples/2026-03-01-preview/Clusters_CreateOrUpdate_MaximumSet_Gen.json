@@ -1,0 +1,65 @@
+{
+  "title": "Clusters_CreateOrUpdate_MaximumSet",
+  "operationId": "Clusters_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "1E4BD993-6890-4E69-8966-81482D7502EF",
+    "resourceGroupName": "rgopenapi",
+    "organizationName": "myOrganization",
+    "projectName": "myProject",
+    "clusterName": "myCluster",
+    "resource": {
+      "properties": {
+        "clusterTier": "FREE",
+        "regionName": "eastus"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/1E4BD993-6890-4E69-8966-81482D7502EF/resourceGroups/rgopenapi/providers/MongoDB.Atlas/organizations/myOrganization/projects/myProject/clusters/myCluster",
+        "name": "myCluster",
+        "type": "MongoDB.Atlas/organizations/projects/clusters",
+        "properties": {
+          "clusterName": "myCluster",
+          "clusterTier": "FREE",
+          "regionName": "eastus",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "rxmwavptbhnfjbl",
+          "createdByType": "User",
+          "createdAt": "2026-03-18T10:44:11.098Z",
+          "lastModifiedBy": "vvyjmiqdxlzkubu",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-18T10:44:11.099Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/1E4BD993-6890-4E69-8966-81482D7502EF/resourceGroups/rgopenapi/providers/MongoDB.Atlas/organizations/myOrganization/projects/myProject/clusters/myCluster",
+        "name": "myCluster",
+        "type": "MongoDB.Atlas/organizations/projects/clusters",
+        "properties": {
+          "clusterName": "myCluster",
+          "clusterTier": "FREE",
+          "regionName": "eastus",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "rxmwavptbhnfjbl",
+          "createdByType": "User",
+          "createdAt": "2026-03-18T10:44:11.098Z",
+          "lastModifiedBy": "vvyjmiqdxlzkubu",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-18T10:44:11.099Z"
+        }
+      }
+    }
+  }
+}
