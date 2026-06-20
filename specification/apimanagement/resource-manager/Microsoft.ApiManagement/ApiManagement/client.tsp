@@ -360,6 +360,7 @@ op replacePurge(
 @@clientName(Method, "HttpMethodConfiguration", "csharp");
 @@clientName(Method.GET, "Get", "csharp");
 @@clientName(HttpHeader, "HttpHeaderConfiguration", "csharp");
+@@usage(HttpHeader, Usage.input | Usage.output);
 @@clientName(NotificationName.BCC, "Bcc", "csharp");
 @@clientName(OpenIdAuthenticationSettingsContract.openidProviderId, "OpenIdProviderId", "csharp");
 @@clientName(OperationResultContractProperties.id, "OperationResultIdentifier", "csharp");
