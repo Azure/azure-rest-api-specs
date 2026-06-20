@@ -392,9 +392,13 @@ op replacePurge(
 
 // C# compat: the old SDK had a separate enum GatewayRegenerateKeyType for the gateway context.
 // Define a copy and apply @@alternateType so the generator uses it instead of TokenGenerationUsedKeyType.
-enum GatewayRegenerateKeyType {
-  primary,
-  secondary,
+/** The Key being regenerated. */
+union GatewayRegenerateKeyType {
+  string,
+  /** Primary key. */
+  primary: "primary",
+  /** Secondary key. */
+  secondary: "secondary",
 }
 @@alternateType(GatewayKeyRegenerationRequestContract.keyType, GatewayRegenerateKeyType, "csharp");
 @@clientName(Verbosity, "TraceVerbosityLevel", "csharp");
