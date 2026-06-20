@@ -1500,8 +1500,6 @@ union SqlNameAvailabilityResourceType {
   azureLocation,
   "csharp"
 );
-
-// --- Enum value renames to match v1.4.0 contract ---
 @@clientName(
   CatalogCollationType.DATABASE_DEFAULT,
   "DatabaseDefault",
@@ -1516,15 +1514,6 @@ union SqlNameAvailabilityResourceType {
 @@clientName(DiffBackupIntervalInHours.`12`, "Twelve", "csharp");
 @@clientName(DiffBackupIntervalInHours.`24`, "TwentyFour", "csharp");
 
-// =====================================================================
-// Restore parameterless ctor + setters for output-only models
-// (v1.4.0 ApiCompat mitigations)
-//
-// Marking these models as `Usage.input` makes the C# generator emit them
-// as round trippable (Input | Output), which restores the public
-// parameterless constructor and writable property setters that the
-// v1.4.0 contract exposed.
-// =====================================================================
 @@usage(DatabaseOperation, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(DatabaseUsage, Azure.ClientGenerator.Core.Usage.input, "csharp");
 @@usage(
@@ -1657,9 +1646,6 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 
-// Setter regressions vs v1.4.0: add Usage.input on the model and its inner *Properties bag
-// so that flat-projected properties are emitted with public setters and list properties
-// are emitted as IList<T> rather than IReadOnlyList<T>.
 @@usage(
   RecommendedSensitivityLabelUpdate,
   Azure.ClientGenerator.Core.Usage.input,
