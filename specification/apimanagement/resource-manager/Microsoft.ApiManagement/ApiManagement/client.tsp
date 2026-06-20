@@ -373,6 +373,8 @@ op replacePurge(
 @@clientName(TagResourceContract, "TagResourceContractDetails", "csharp");
 @@clientName(ApiTagResourceContractProperties, "AssociatedApiProperties", "csharp");
 @@clientName(OperationTagResourceContractProperties, "AssociatedOperationProperties", "csharp");
+@@clientName(OperationTagResourceContractProperties.urlTemplate, "UriTemplate", "csharp");
+@@usage(OperationTagResourceContractProperties, Usage.input | Usage.output);
 @@clientName(ProductTagResourceContractProperties, "AssociatedProductProperties", "csharp");
 @@clientName(AuthorizationMethod.HEAD, "Head", "csharp");
 @@clientName(AuthorizationMethod.OPTIONS, "Options", "csharp");
@@ -399,6 +401,8 @@ op replacePurge(
 @@clientName(Microsoft.ApiManagement.PrivateLinkResource, "ApiManagementPrivateLinkResource", "csharp");
 @@clientName(HostnameConfiguration.keyVaultId, "keyVaultSecretUri", "csharp");
 @@clientName(ParameterContract.required, "IsRequired", "csharp");
+@@clientName(ParameterContract.type, "ParameterContractType", "csharp");
+@@usage(ParameterContract, Usage.input | Usage.output);
 @@clientName(SchemaType, "ApiSchemaType", "csharp");
 @@clientName(ApiRevisionContract.privateUrl, "privateUriString", "csharp");
 @@clientName(ApiContractProperties.serviceUrl, "serviceLink", "csharp");
@@ -516,6 +520,8 @@ op replacePurge(
 @@alternateType(IssueContractProperties.userId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(LoggerContractProperties.resourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(ConnectivityHop.resourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@clientName(ConnectivityHop.type, "ConnectivityHopType", "csharp");
+@@usage(ConnectivityHop, Usage.input | Usage.output);
 @@alternateType(RemotePrivateEndpointConnectionWrapper.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(RemotePrivateEndpointConnectionWrapper.type, Azure.Core.armResourceType, "csharp");
 @@clientName(RemotePrivateEndpointConnectionWrapper.type, "resourceType", "csharp");
