@@ -389,6 +389,14 @@ op replacePurge(
 @@clientName(AccessType, "StorageAccountAccessType", "csharp");
 @@clientName(GatewayKeyRegenerationRequestContract, "GatewayKeyRegenerateContent", "csharp");
 @@clientName(KeyType, "TokenGenerationUsedKeyType", "csharp");
+
+// C# compat: the old SDK had a separate enum GatewayRegenerateKeyType for the gateway context.
+// Define a copy and apply @@alternateType so the generator uses it instead of TokenGenerationUsedKeyType.
+enum GatewayRegenerateKeyType {
+  primary,
+  secondary,
+}
+@@alternateType(GatewayKeyRegenerationRequestContract.keyType, GatewayRegenerateKeyType, "csharp");
 @@clientName(Verbosity, "TraceVerbosityLevel", "csharp");
 @@clientName(State, "IssueState", "csharp");
 @@clientName(Severity, "IssueSeverity", "csharp");
