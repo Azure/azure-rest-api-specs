@@ -64,6 +64,11 @@ describe("createReleasePlanWithKnownInputs", () => {
         body: expect.stringContaining("View Release Plan"),
       }),
     );
+    expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: expect.stringContaining("2025-06-01-preview"),
+      }),
+    );
   });
 
   it("does not comment when azsdk create output is invalid JSON", async () => {

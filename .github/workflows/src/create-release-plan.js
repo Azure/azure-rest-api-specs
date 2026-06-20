@@ -82,11 +82,14 @@ export async function validateAndSetReleasePlanInputs({
     return;
   }
 
+  // Allow callers to pass either the project URL or the tspconfig.yaml URL; normalize to project URL.
+  const normalizedTspProjectPath = tspProjectPath.replace(/\/tspconfig\.yaml$/, "");
+
   const tspProjectPathRegex =
-    /^https:\/\/github\.com\/Azure\/(?:azure-rest-api-specs|azure-rest-api-specs-pr)\/[A-Za-z0-9\/-]+\/tspconfig\.yaml$/;
-  if (!tspProjectPathRegex.test(tspProjectPath)) {
+    /^https:\/\/github\.com\/Azure\/(?:azure-rest-api-specs|azure-rest-api-specs-pr)\/[A-Za-z0-9\/-]+$/;
+  if (!tspProjectPathRegex.test(normalizedTspProjectPath)) {
     core.warning(
-      "Invalid TypeSpec project path. Expected URL starting with https://github.com/Azure/azure-rest-api-specs or https://github.com/Azure/azure-rest-api-specs-pr, containing only /, a-z, A-Z, 0-9, -, and ending with /tspconfig.yaml.",
+      "Invalid TypeSpec project path. Expected URL starting with https://github.com/Azure/azure-rest-api-specs or https://github.com/Azure/azure-rest-api-specs-pr, containing only /, a-z, A-Z, 0-9, -. Optional trailing /tspconfig.yaml is ignored.",
     );
     return;
   }
@@ -106,7 +109,7 @@ export async function validateAndSetReleasePlanInputs({
 
   core.setOutput("skip", "false");
   core.setOutput("pr_number", String(prNumber));
-  core.setOutput("tsp_project_path", tspProjectPath);
+  core.setOutput("tsp_project_path", normalizedTspProjectPath);
   core.setOutput("api_version", apiVersion);
 }
 
@@ -195,6 +198,7 @@ export async function createReleasePlanWithKnownInputs({
   if (planId) {
     body += `| **Release Plan ID** | ${planId} |\n`;
   }
+  body += `| **API Version** | \`${apiVersion}\` |\n`;
   body += `| **TypeSpec Project** | \`${tspProjectPath}\` |\n`;
 
   await github.rest.issues.createComment({

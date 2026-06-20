@@ -42,10 +42,12 @@ describe("getTypeSpecProjectInfo", () => {
     vi.restoreAllMocks();
   });
 
-  /** @param {string[]} files */
+  /** @param {Array<string | { filename: string, status?: string }>} files */
   function mockPrFiles(files) {
     github.rest.pulls.listFiles = vi.fn().mockResolvedValue({
-      data: files.map((f) => ({ filename: f })),
+      data: files.map((f) =>
+        typeof f === "string" ? { filename: f, status: "modified" } : { status: "modified", ...f },
+      ),
     });
   }
 
@@ -82,6 +84,33 @@ describe("getTypeSpecProjectInfo", () => {
     expect(result.tspProjectPaths).toHaveLength(2);
     expect(result.tspProjectPaths).toContain("specification/foo/Microsoft.Foo/Service1");
     expect(result.tspProjectPaths).toContain("specification/bar/Microsoft.Bar/Service2");
+  });
+
+  it("uses single changed tspconfig.yaml as authoritative project path even with other changed directories", async () => {
+    mockPrFiles([
+      { filename: "specification/dell/resource-manager/Dell.Storage/Dell/tspconfig.yaml", status: "modified" },
+      "specification/other/serviceA/main.tsp",
+      "specification/other/serviceB/models/foo.tsp",
+    ]);
+    vi.mocked(existsSync).mockReturnValue(false);
+
+    const result = await getTypeSpecProjectInfo(github, context, core);
+
+    expect(result.tspProjectPaths).toEqual(["specification/dell/resource-manager/Dell.Storage/Dell"]);
+    expect(result.tspProjectUrls).toEqual([
+      "https://github.com/Azure/azure-rest-api-specs/specification/dell/resource-manager/Dell.Storage/Dell",
+    ]);
+  });
+
+  it("ignores removed tspconfig.yaml when selecting authoritative changed tspconfig file", async () => {
+    mockPrFiles([
+      { filename: "specification/foo/Microsoft.Foo/Service/tspconfig.yaml", status: "removed" },
+      { filename: "specification/bar/Microsoft.Bar/Service/tspconfig.yaml", status: "added" },
+    ]);
+
+    const result = await getTypeSpecProjectInfo(github, context, core);
+
+    expect(result.tspProjectPaths).toEqual(["specification/bar/Microsoft.Bar/Service"]);
   });
 
   it("detects preview from file path pattern", async () => {
@@ -233,6 +262,24 @@ describe("detectApiVersions", () => {
     expect(result.apiVersions).toContain("2025-06-01");
     expect(result.apiVersions).toContain("2025-09-01-preview");
     expect(result.isPreview).toBe(true);
+  });
+
+  it("sorts multiple API versions with latest first", async () => {
+    const files = [
+      "specification/foo/stable/2025-06-01/foo.json",
+      "specification/foo/preview/2025-09-01-preview/bar.json",
+      "specification/foo/stable/2025-09-01/baz.json",
+      "specification/foo/stable/2024-12-01/qux.json",
+    ];
+
+    const result = await detectApiVersions(files, "specification/foo", "/workspace", core);
+
+    expect(result.apiVersions).toEqual([
+      "2025-09-01",
+      "2025-09-01-preview",
+      "2025-06-01",
+      "2024-12-01",
+    ]);
   });
 
   it("falls back to main.tsp when no versions in file paths", async () => {

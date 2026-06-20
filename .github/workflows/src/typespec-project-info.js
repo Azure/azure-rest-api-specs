@@ -6,6 +6,10 @@ import { join, posix } from "path";
  */
 
 /**
+ * @typedef {{ filename: string, status?: string }} PullRequestChangedFile
+ */
+
+/**
  * Identifies TypeSpec project path(s) and API version info from modified files in a PR.
  *
  * Uses the GitHub API to fetch the list of changed files (reliable across forks and
@@ -30,7 +34,7 @@ export async function getTypeSpecProjectInfo(github, context, core, options = {}
   core.info(`Fetching changed files for PR #${prNumber} via GitHub API`);
 
   const allFiles = await getPrChangedFiles(github, owner, repo, prNumber);
-  const specFiles = allFiles.filter((f) => f.startsWith("specification/"));
+  const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
 
   if (specFiles.length === 0) {
     core.info("No specification files changed in this PR.");
@@ -43,23 +47,28 @@ export async function getTypeSpecProjectInfo(github, context, core, options = {}
   /** @type {Set<string>} */
   const tspProjectPathsSet = new Set();
 
-  // First, check if any changed file IS a tspconfig.yaml (direct match)
-  for (const file of specFiles) {
-    if (file.endsWith("/tspconfig.yaml")) {
-      // Extract project path by removing the filename
-      const projectPath = posix.dirname(file);
+  const changedTspConfigs = specFiles.filter(
+    (f) => f.filename.endsWith("/tspconfig.yaml") && f.status !== "removed",
+  );
+
+  if (changedTspConfigs.length > 0) {
+    // If PR directly changes tspconfig.yaml, trust those paths and skip filesystem probing.
+    for (const file of changedTspConfigs) {
+      const projectPath = posix.dirname(file.filename);
       tspProjectPathsSet.add(projectPath);
-      core.info(`Found tspconfig.yaml at: ${projectPath}`);
+      core.info(`Found changed tspconfig.yaml at: ${projectPath} (status: ${file.status ?? "unknown"})`);
     }
-  }
 
-  // For remaining TypeSpec files, walk up the directory tree to find tspconfig.yaml
-  const filesWithoutTspConfig = specFiles.filter((file) => !file.endsWith("/tspconfig.yaml"));
-
-  for (const file of filesWithoutTspConfig) {
-    const projectPath = findTspConfigDir(file, workspace);
-    if (projectPath) {
-      tspProjectPathsSet.add(projectPath);
+    if (changedTspConfigs.length === 1) {
+      core.info("Exactly one non-removed tspconfig.yaml changed; using it as authoritative TypeSpec project path.");
+    }
+  } else {
+    // No changed tspconfig.yaml in PR: fall back to filesystem probing from changed files.
+    for (const file of specFiles) {
+      const projectPath = findTspConfigDir(file.filename, workspace);
+      if (projectPath) {
+        tspProjectPathsSet.add(projectPath);
+      }
     }
   }
 
@@ -74,16 +83,17 @@ export async function getTypeSpecProjectInfo(github, context, core, options = {}
     return { tspProjectPaths: [], tspProjectUrls: [], apiVersions: [], isPreview: false };
   }
 
-  // Convert relative paths to absolute URLs to tspconfig.yaml
+  // Convert relative paths to absolute TypeSpec project URLs (without tspconfig.yaml suffix)
   const tspProjectUrls = tspProjectPaths.map(
-    (path) => `https://github.com/${owner}/${repo}/${path}/tspconfig.yaml`,
+    (path) => `https://github.com/${owner}/${repo}/${path}`,
   );
 
   core.info(`TypeSpec project URLs: ${JSON.stringify(tspProjectUrls)}`);
 
   // Detect API versions and preview status
   const tspProjectPath = tspProjectPaths.length === 1 ? tspProjectPaths[0] : null;
-  const versionResult = await detectApiVersions(specFiles, tspProjectPath, workspace, core);
+  const specFilePaths = specFiles.map((f) => f.filename);
+  const versionResult = await detectApiVersions(specFilePaths, tspProjectPath, workspace, core);
 
   return {
     tspProjectPaths,
@@ -100,10 +110,10 @@ export async function getTypeSpecProjectInfo(github, context, core, options = {}
  * @param {string} owner
  * @param {string} repo
  * @param {number} prNumber
- * @returns {Promise<string[]>}
+ * @returns {Promise<PullRequestChangedFile[]>}
  */
 async function getPrChangedFiles(github, owner, repo, prNumber) {
-  /** @type {string[]} */
+  /** @type {PullRequestChangedFile[]} */
   const allFiles = [];
   let page = 1;
 
@@ -117,7 +127,7 @@ async function getPrChangedFiles(github, owner, repo, prNumber) {
     });
 
     if (files.length === 0) break;
-    allFiles.push(...files.map((f) => f.filename));
+    allFiles.push(...files.map((f) => ({ filename: f.filename, status: f.status })));
     if (files.length < 100) break;
     page++;
   }
@@ -189,5 +199,54 @@ export async function detectApiVersions(files, tspProjectPath, workspace, core) 
     }
   }
 
-  return { apiVersions: [...apiVersions], isPreview };
+  const sortedApiVersions = [...apiVersions].sort(compareApiVersionsDesc);
+  if (sortedApiVersions.length > 1) {
+    core.info(
+      `Sorted API versions (latest first): ${JSON.stringify(sortedApiVersions)}. Latest: ${sortedApiVersions[0]}`,
+    );
+  }
+
+  return { apiVersions: sortedApiVersions, isPreview };
+}
+
+/**
+ * Compare API versions in descending order (latest first).
+ * Version format: YYYY-MM-DD or YYYY-MM-DD-preview.
+ * For the same date, GA is considered newer than preview.
+ *
+ * @param {string} a
+ * @param {string} b
+ * @returns {number}
+ */
+function compareApiVersionsDesc(a, b) {
+  const pa = parseApiVersion(a);
+  const pb = parseApiVersion(b);
+
+  if (pa.year !== pb.year) return pb.year - pa.year;
+  if (pa.month !== pb.month) return pb.month - pa.month;
+  if (pa.day !== pb.day) return pb.day - pa.day;
+
+  if (pa.isPreview !== pb.isPreview) {
+    return pa.isPreview ? 1 : -1;
+  }
+
+  return b.localeCompare(a);
+}
+
+/**
+ * @param {string} version
+ * @returns {{ year: number, month: number, day: number, isPreview: boolean }}
+ */
+function parseApiVersion(version) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})(-preview)?$/.exec(version);
+  if (!match) {
+    return { year: 0, month: 0, day: 0, isPreview: false };
+  }
+
+  return {
+    year: Number.parseInt(match[1], 10),
+    month: Number.parseInt(match[2], 10),
+    day: Number.parseInt(match[3], 10),
+    isPreview: Boolean(match[4]),
+  };
 }
