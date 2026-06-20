@@ -3573,3 +3573,51 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   webAppsStartWebSiteNetworkTraceOperationSlotForJs,
   "javascript"
 );
+
+// =============================================================================
+// C# (.NET) client customizations
+// Renames to preserve names used by the legacy Azure.ResourceManager.AppService SDK.
+// =============================================================================
+
+@@clientName(HttpLogsConfig, "AppServiceHttpLogsConfig", "csharp");
+@@clientName(NameValuePair, "AppServiceNameValuePair", "csharp");
+@@clientName(OperationStatus, "AppServiceOperationStatus", "csharp");
+@@clientName(SkuCapacity, "AppServiceSkuCapacity", "csharp");
+@@clientName(SkuDescription, "AppServiceSkuDescription", "csharp");
+@@clientName(Capability, "AppServiceSkuCapability", "csharp");
+@@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
+@@clientName(EndpointDependency, "AppServiceEndpointDependency", "csharp");
+@@clientName(HostType, "AppServiceHostType", "csharp");
+@@clientName(Identifier, "AppServiceIdentifier", "csharp");
+@@clientName(AzureBlobStorageApplicationLogsConfig, "AppServiceBlobStorageApplicationLogsConfig", "csharp");
+@@clientName(AzureTableStorageApplicationLogsConfig, "AppServiceTableStorageApplicationLogsConfig", "csharp");
+@@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
+@@clientName(AppServicePlanRestrictions, "AppServicePlanRestriction", "csharp");
+@@clientName(StatusOptions, "AppServicePlanStatus", "csharp");
+@@clientName(StorageType, "ArtifactStorageType", "csharp");
+@@clientName(DataSource, "DetectorDataSource", "csharp");
+@@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
+@@clientName(Solution, "DiagnosticSolution", "csharp");
+@@clientName(ContentLink, "WebAppContentLink", "csharp");
+@@clientName(EnvironmentVariable, "WebAppEnvironmentVariable", "csharp");
+@@clientName(RetryHistory, "WebAppRetryHistory", "csharp");
+@@clientName(RunActionCorrelation, "WebAppRunActionCorrelation", "csharp");
+@@clientName(ResourceReference, "WorkflowResourceReference", "csharp");
+@@clientName(AuthType, "SiteContainerAuthType", "csharp");
+@@clientName(VolumeMount, "SiteContainerVolumeMount", "csharp");
+@@clientName(Template, "StaticSiteTemplate", "csharp");
+@@clientName(RecurrenceFrequency, "WorkflowRecurrenceFrequency", "csharp");
+@@clientName(RecurrenceSchedule, "WorkflowRecurrenceSchedule", "csharp");
+@@clientName(WorkflowTriggerListCallbackUrlQueries, "WorkflowTriggerListCallbackUriQueries", "csharp");
+@@clientName(RepetitionIndex, "WorkflowRunActionRepetitionIndex", "csharp");
+@@clientName(ComputeModeOptions, "ComputeModeOption", "csharp");
+@@clientName(WorkerSizeOptions, "WorkerSizeOption", "csharp");
+@@clientName(FunctionAppRuntimes, "FunctionAppRuntime", "csharp");
+@@clientName(FunctionsScaleAndConcurrency, "FunctionAppScaleAndConcurrency", "csharp");
+@@clientName(ContainerThrottlingData, "ContainerThrottlingInfo", "csharp");
+@@clientName(StaticSiteLinkedBackend, "StaticSiteLinkedBackendInfo", "csharp");
+@@clientName(DatabaseConnectionOverview, "StaticSiteDatabaseConnectionOverview", "csharp");
+@@clientName(KeyValuePairStringObject, "DataProviderKeyValuePair", "csharp");
+@@clientName(Channels, "RecommendationChannel", "csharp");
+@@clientName(Microsoft.Web.ErrorResponse, "WorkflowErrorResponse", "csharp");
+@@clientNamespace(Microsoft.Web, "Azure.ResourceManager.AppService", "csharp");
