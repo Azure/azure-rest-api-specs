@@ -392,13 +392,14 @@ op replacePurge(
 
 // C# compat: the old SDK had a separate enum GatewayRegenerateKeyType for the gateway context.
 // Define a copy and apply @@alternateType so the generator uses it instead of TokenGenerationUsedKeyType.
+#suppress "@azure-tools/typespec-azure-core/no-enum" "C# SDK backward compatibility: fixed enum needed to match old SDK type"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Documented via doc comments"
 /** The Key being regenerated. */
-union GatewayRegenerateKeyType {
-  string,
+enum GatewayRegenerateKeyType {
   /** Primary key. */
-  primary: "primary",
+  primary,
   /** Secondary key. */
-  secondary: "secondary",
+  secondary,
 }
 @@alternateType(GatewayKeyRegenerationRequestContract.keyType, GatewayRegenerateKeyType, "csharp");
 @@clientName(Verbosity, "TraceVerbosityLevel", "csharp");
