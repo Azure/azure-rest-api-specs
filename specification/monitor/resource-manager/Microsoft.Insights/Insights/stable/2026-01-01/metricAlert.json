@@ -427,9 +427,6 @@
           "Get an alert rule status": {
             "$ref": "./examples/getMetricAlertStatus.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -469,7 +466,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MetricAlertStatus"
+              "$ref": "#/definitions/MetricAlertStatusCollection"
             }
           },
           "default": {
@@ -505,27 +502,27 @@
           {
             "name": "Average",
             "value": "Average",
-            "description": "The average aggregation."
+            "description": "Average"
           },
           {
             "name": "Count",
             "value": "Count",
-            "description": "The count aggregation."
+            "description": "Count"
           },
           {
             "name": "Minimum",
             "value": "Minimum",
-            "description": "The minimum aggregation."
+            "description": "Minimum"
           },
           {
             "name": "Maximum",
             "value": "Maximum",
-            "description": "The maximum aggregation."
+            "description": "Maximum"
           },
           {
             "name": "Total",
             "value": "Total",
-            "description": "The total aggregation."
+            "description": "Total"
           }
         ]
       }
@@ -628,17 +625,17 @@
           {
             "name": "GreaterThan",
             "value": "GreaterThan",
-            "description": "Greater than operator."
+            "description": "GreaterThan"
           },
           {
             "name": "LessThan",
             "value": "LessThan",
-            "description": "Less than operator."
+            "description": "LessThan"
           },
           {
             "name": "GreaterOrLessThan",
             "value": "GreaterOrLessThan",
-            "description": "Greater than or less than operator."
+            "description": "GreaterOrLessThan"
           }
         ]
       }
@@ -658,17 +655,17 @@
           {
             "name": "Low",
             "value": "Low",
-            "description": "Low sensitivity."
+            "description": "Low"
           },
           {
             "name": "Medium",
             "value": "Medium",
-            "description": "Medium sensitivity."
+            "description": "Medium"
           },
           {
             "name": "High",
             "value": "High",
-            "description": "High sensitivity."
+            "description": "High"
           }
         ]
       }
@@ -1038,10 +1035,6 @@
           "x-ms-identifiers": [
             "id"
           ]
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items."
         }
       }
     },
@@ -1132,12 +1125,12 @@
           {
             "name": "StaticThresholdCriterion",
             "value": "StaticThresholdCriterion",
-            "description": "Static threshold criterion."
+            "description": "StaticThresholdCriterion"
           },
           {
             "name": "DynamicThresholdCriterion",
             "value": "DynamicThresholdCriterion",
-            "description": "Dynamic threshold criterion."
+            "description": "DynamicThresholdCriterion"
           }
         ]
       }
@@ -1201,17 +1194,17 @@
           {
             "name": "SystemAssigned",
             "value": "SystemAssigned",
-            "description": "System assigned identity."
+            "description": "SystemAssigned"
           },
           {
             "name": "UserAssigned",
             "value": "UserAssigned",
-            "description": "User assigned identity."
+            "description": "UserAssigned"
           },
           {
             "name": "None",
             "value": "None",
-            "description": "No managed identity."
+            "description": "None"
           }
         ]
       }
@@ -1320,22 +1313,22 @@
           {
             "name": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
             "value": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
-            "description": "Alert criteria for a single resource with multiple metrics."
+            "description": "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria"
           },
           {
             "name": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
             "value": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
-            "description": "Alert criteria for multiple resources with multiple metrics."
+            "description": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria"
           },
           {
             "name": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
             "value": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria",
-            "description": "Alert criteria for web test location availability."
+            "description": "Microsoft.Azure.Monitor.WebtestLocationAvailabilityCriteria"
           },
           {
             "name": "Microsoft.Azure.Monitor.PromQLCriteria",
             "value": "Microsoft.Azure.Monitor.PromQLCriteria",
-            "description": "Alert criteria for Prometheus QL queries."
+            "description": "Microsoft.Azure.Monitor.PromQLCriteria"
           }
         ]
       }
