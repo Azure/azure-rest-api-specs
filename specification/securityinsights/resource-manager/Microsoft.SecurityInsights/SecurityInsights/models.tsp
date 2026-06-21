@@ -627,6 +627,18 @@ union kind {
 /**
  * Operator used for list of dependencies in criteria array.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released stable 2025-09-01 x-ms-enum name for backward compatibility"
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{
+    name: "operator",
+    modelAsString: true,
+    values: #[
+      #{ name: "AND", value: "AND", description: "AND" },
+      #{ name: "OR", value: "OR", description: "OR" }
+    ]
+  }
+)
 union MetadataDependencyOperator {
   string,
 
@@ -1667,6 +1679,18 @@ union IncidentTaskStatus {
 /**
  * Status of the pull request.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released stable 2025-09-01 x-ms-enum name for backward compatibility"
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{
+    name: "state",
+    modelAsString: true,
+    values: #[
+      #{ name: "Open", value: "Open", description: "Open" },
+      #{ name: "Closed", value: "Closed", description: "Closed" }
+    ]
+  }
+)
 union PullRequestState {
   string,
 
@@ -2067,6 +2091,23 @@ union TIObjectKind {
 /**
  * The provisioning state of the watchlist
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released stable 2025-09-01 x-ms-enum name for backward compatibility"
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{
+    name: "ProvisioningState",
+    modelAsString: true,
+    values: #[
+      #{ name: "New", value: "New", description: "The New provisioning state." },
+      #{ name: "InProgress", value: "InProgress", description: "The InProgress provisioning state." },
+      #{ name: "Uploading", value: "Uploading", description: "The Uploading provisioning state." },
+      #{ name: "Deleting", value: "Deleting", description: "The Deleting provisioning state." },
+      #{ name: "Succeeded", value: "Succeeded", description: "The Succeeded provisioning state." },
+      #{ name: "Failed", value: "Failed", description: "The Failed provisioning state." },
+      #{ name: "Canceled", value: "Canceled", description: "The Canceled provisioning state." }
+    ]
+  }
+)
 union WatchlistProvisioningState {
   string,
 
@@ -2110,6 +2151,20 @@ union WatchlistProvisioningState {
  * The provisioning state of the workspace manager job
  */
 @added(Versions.v2025_10_01_preview)
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released preview x-ms-enum name for backward compatibility"
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{
+    name: "provisioningState",
+    modelAsString: true,
+    values: #[
+      #{ name: "Succeeded", value: "Succeeded", description: "The job succeeded" },
+      #{ name: "Canceled", value: "Canceled", description: "The job was canceled" },
+      #{ name: "InProgress", value: "InProgress", description: "The job is in progress" },
+      #{ name: "Failed", value: "Failed", description: "The job failed" }
+    ]
+  }
+)
 union JobProvisioningState {
   string,
 
