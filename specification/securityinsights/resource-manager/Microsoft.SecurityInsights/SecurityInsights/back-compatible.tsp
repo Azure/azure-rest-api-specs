@@ -718,6 +718,24 @@ using Microsoft.SecurityInsights;
   "productTemplateAdditionalProperties"
 );
 @@visibility(RelationList.nextLink, Lifecycle.Read);
+@@visibility(AlertRulesList.nextLink, Lifecycle.Read);
+@@visibility(ActionsList.nextLink, Lifecycle.Read);
+@@visibility(AlertRuleTemplatesList.nextLink, Lifecycle.Read);
+@@visibility(BookmarkList.nextLink, Lifecycle.Read);
+@@visibility(PackageList.nextLink, Lifecycle.Read);
+@@visibility(ProductPackageList.nextLink, Lifecycle.Read);
+@@visibility(ProductTemplateList.nextLink, Lifecycle.Read);
+@@visibility(TemplateList.nextLink, Lifecycle.Read);
+@@visibility(DataConnectorList.nextLink, Lifecycle.Read);
+@@visibility(IncidentList.nextLink, Lifecycle.Read);
+@@visibility(IncidentCommentList.nextLink, Lifecycle.Read);
+@@visibility(MetadataList.nextLink, Lifecycle.Read);
+@@visibility(SecurityMLAnalyticsSettingsList.nextLink, Lifecycle.Read);
+@@visibility(RepoList.nextLink, Lifecycle.Read);
+@@visibility(SourceControlList.nextLink, Lifecycle.Read);
+@@visibility(ThreatIntelligenceInformationList.nextLink, Lifecycle.Read);
+@@visibility(WatchlistList.nextLink, Lifecycle.Read);
+@@visibility(WatchlistItemList.nextLink, Lifecycle.Read);
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators::parameters.body,
   "ThreatIntelligenceFilteringCriteria"
