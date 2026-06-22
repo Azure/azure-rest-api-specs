@@ -1,0 +1,2567 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PurviewDataEstateHealth",
+    "version": "2024-02-01-preview",
+    "description": "Creates a data plane client for Purview Data Estate Health.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/datagovernance/dataestate",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The endpoint of the Purview Data Estate Health service. Example: https://api.purview-service.microsoft.com/",
+        "required": true,
+        "type": "string",
+        "enum": [
+          "https://api.purview-service.microsoft.com/"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://purview.azure.net/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/analytics/schedule": {
+      "get": {
+        "operationId": "AnalyticsSchedules_Get",
+        "description": "Get the analytics global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_Get": {
+            "$ref": "./examples/AnalyticsSchedules_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AnalyticsSchedules_CreateOrUpdate",
+        "description": "Create or update the analytics global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AnalyticsScheduleRequest"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_CreateOrUpdate": {
+            "$ref": "./examples/AnalyticsSchedules_CreateOrUpdate_Gen.json"
+          }
+        }
+      }
+    },
+    "/analytics/schedule/getjoblogs": {
+      "get": {
+        "operationId": "AnalyticsSchedules_GetJobLogs",
+        "description": "Get analytics job logs for the global schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AnalyticsJobLogs"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AnalyticsSchedules_GetJobLogs": {
+            "$ref": "./examples/AnalyticsSchedules_GetJobLogs_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls": {
+      "get": {
+        "operationId": "Controls_List",
+        "description": "List all governance controls.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ControlListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_List": {
+            "$ref": "./examples/Controls_List_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/{id}": {
+      "get": {
+        "operationId": "Controls_Get",
+        "description": "Get a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Control"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_Get": {
+            "$ref": "./examples/Controls_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Controls_Update",
+        "description": "Update a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Control"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Control"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_Update": {
+            "$ref": "./examples/Controls_Update_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/{id}/reset": {
+      "post": {
+        "operationId": "Controls_Reset",
+        "description": "Reset a governance control by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the control.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Control"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_Reset": {
+            "$ref": "./examples/Controls_Reset_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments": {
+      "get": {
+        "operationId": "Assessments_List",
+        "description": "List all assessments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/AssessmentListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_List": {
+            "$ref": "./examples/Assessments_List_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments/{id}": {
+      "get": {
+        "operationId": "Assessments_Get",
+        "description": "Get an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_Get": {
+            "$ref": "./examples/Assessments_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Assessments_Update",
+        "description": "Update an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_Update": {
+            "$ref": "./examples/Assessments_Update_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/assessments/{id}/reset": {
+      "post": {
+        "operationId": "Assessments_Reset",
+        "description": "Reset an assessment by its unique identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the assessment.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Assessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Assessments_Reset": {
+            "$ref": "./examples/Assessments_Reset_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/reset": {
+      "post": {
+        "operationId": "Controls_ResetAll",
+        "description": "Reset all governance controls.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Controls_ResetAll": {
+            "$ref": "./examples/Controls_ResetAll_Gen.json"
+          }
+        }
+      }
+    },
+    "/controls/schedule": {
+      "get": {
+        "operationId": "Schedules_Get",
+        "description": "Get the global control schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_Get": {
+            "$ref": "./examples/Schedules_Get_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Schedules_CreateOrUpdate",
+        "description": "Create or update the global control schedule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Schedules_CreateOrUpdate": {
+            "$ref": "./examples/Schedules_CreateOrUpdate_Gen.json"
+          }
+        }
+      }
+    },
+    "/scores/query": {
+      "post": {
+        "operationId": "Scores_Query",
+        "description": "Query scores aggregated by control or control group. Use 'type=ControlNode' with controlIds in body for individual controls, or 'type=ControlGroup' with controlGroupIds in body for control groups.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Aggregation type: 'ControlNode' for individual controls, 'ControlGroup' for control groups.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "ControlNode",
+              "ControlGroup"
+            ],
+            "x-ms-enum": {
+              "name": "ScoreQueryType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "name": "ControlNode",
+                  "value": "ControlNode",
+                  "description": "Aggregate by individual control."
+                },
+                {
+                  "name": "ControlGroup",
+                  "value": "ControlGroup",
+                  "description": "Aggregate by control group."
+                }
+              ]
+            }
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryScoresRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AggregatedScore"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Scores_Query": {
+            "$ref": "./examples/Scores_Query_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/mpe": {
+      "post": {
+        "operationId": "Settings_CreateManagedPrivateEndpoint",
+        "description": "Create a managed private endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/NetworkProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_CreateManagedPrivateEndpoint": {
+            "$ref": "./examples/Settings_CreateManagedPrivateEndpoint_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/mpe/exists": {
+      "post": {
+        "operationId": "Settings_CheckManagedPrivateEndpointExists",
+        "description": "Check if a managed private endpoint exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointExistsResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointExistsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_CheckManagedPrivateEndpointExists": {
+            "$ref": "./examples/Settings_CheckManagedPrivateEndpointExists_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/storageConfig": {
+      "get": {
+        "operationId": "Settings_GetStorageConfig",
+        "description": "Get the current storage configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_GetStorageConfig": {
+            "$ref": "./examples/Settings_GetStorageConfig_Gen.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Settings_UpdateStorageConfig",
+        "description": "Update the storage configuration.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageConfigUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/StorageConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_UpdateStorageConfig": {
+            "$ref": "./examples/Settings_UpdateStorageConfig_Gen.json"
+          }
+        }
+      }
+    },
+    "/settings/storageConfig/connectivity": {
+      "post": {
+        "operationId": "Settings_TestStorageConfigConnectivity",
+        "description": "Test storage configuration connectivity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageConfigUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StorageConfigConnectivityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Settings_TestStorageConfigConnectivity": {
+            "$ref": "./examples/Settings_TestStorageConfigConnectivity_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AggregatedScore": {
+      "type": "object",
+      "description": "Score data aggregated by control or control group. The shape of items depends on the `type` query parameter used in the request: when `type=ControlNode`, `controlId` and `computingJobId` are populated; when `type=ControlGroup`, those fields are omitted.",
+      "properties": {
+        "controlGroupId": {
+          "type": "string",
+          "description": "The control group ID."
+        },
+        "scheduleRunId": {
+          "type": "string",
+          "description": "The schedule run ID."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the score."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The score value."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The control ID. Present only when the query was issued with `type=ControlNode`."
+        },
+        "computingJobId": {
+          "type": "string",
+          "description": "The computing job ID. Present only when the query was issued with `type=ControlNode`."
+        }
+      },
+      "required": [
+        "controlGroupId",
+        "scheduleRunId",
+        "time",
+        "score"
+      ]
+    },
+    "AnalyticsJobLogs": {
+      "type": "object",
+      "description": "Analytics job log entry.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The unique identifier of the job."
+        },
+        "jobStatus": {
+          "type": "string",
+          "description": "The status of the job."
+        },
+        "errorMessage": {
+          "type": "string",
+          "description": "Error message if the job failed."
+        },
+        "timeStamp": {
+          "type": "string",
+          "description": "The timestamp of the log entry."
+        }
+      }
+    },
+    "AnalyticsScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for analytics schedule.",
+      "enum": [
+        "Hour",
+        "Day",
+        "Week",
+        "Month"
+      ],
+      "x-ms-enum": {
+        "name": "AnalyticsScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Hour",
+            "value": "Hour",
+            "description": "Hourly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          }
+        ]
+      }
+    },
+    "AnalyticsScheduleRequest": {
+      "type": "object",
+      "description": "Request to create or update an analytics schedule.",
+      "properties": {
+        "frequency": {
+          "$ref": "#/definitions/AnalyticsScheduleFrequency",
+          "description": "The frequency of the analytics schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval between schedule runs."
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleState",
+          "description": "The status of the schedule."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the schedule."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the schedule."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone for the schedule."
+        }
+      },
+      "required": [
+        "frequency",
+        "interval",
+        "startTime"
+      ]
+    },
+    "Assessment": {
+      "type": "object",
+      "description": "An assessment resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the assessment.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the assessment.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The assessment's display name."
+        },
+        "targetEntityType": {
+          "$ref": "#/definitions/AssessmentTargetEntityType",
+          "description": "The kind of entity this assessment evaluates."
+        },
+        "targetQualityType": {
+          "$ref": "#/definitions/AssessmentTargetQualityType",
+          "description": "The quality dimension this assessment evaluates."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The rules that constitute this assessment.",
+          "items": {
+            "$ref": "#/definitions/AssessmentRule"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "AssessmentListResponse": {
+      "type": "object",
+      "description": "Paged collection of assessment results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of items.",
+          "items": {
+            "$ref": "#/definitions/Assessment"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of items."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for the next page of results."
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ]
+    },
+    "AssessmentRule": {
+      "type": "object",
+      "description": "A rule attached to an assessment. The `rule` payload uses the shared Rule discriminated union.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the rule within the assessment."
+        },
+        "rule": {
+          "$ref": "#/definitions/Rule",
+          "description": "The rule definition (simple, group, or expression)."
+        },
+        "actionProperties": {
+          "$ref": "#/definitions/AssessmentRuleActionProperties",
+          "description": "Optional metadata describing what to do when the rule fires."
+        }
+      },
+      "required": [
+        "id",
+        "rule"
+      ]
+    },
+    "AssessmentRuleActionProperties": {
+      "type": "object",
+      "description": "Action metadata applied when an assessment rule fires (e.g. for health alerts).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Human-readable name for the resulting action."
+        },
+        "severity": {
+          "$ref": "#/definitions/AssessmentRuleSeverity",
+          "description": "Severity of the resulting action."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why the rule fired, surfaced to end users."
+        },
+        "recommendation": {
+          "type": "string",
+          "description": "Recommended remediation surfaced to end users."
+        }
+      },
+      "required": [
+        "name",
+        "severity",
+        "reason",
+        "recommendation"
+      ]
+    },
+    "AssessmentRuleSeverity": {
+      "type": "string",
+      "description": "Severity classification for an assessment rule's action.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentRuleSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low"
+          },
+          {
+            "name": "Medium",
+            "value": "Medium"
+          },
+          {
+            "name": "High",
+            "value": "High"
+          }
+        ]
+      }
+    },
+    "AssessmentTargetEntityType": {
+      "type": "string",
+      "description": "Target entity kind evaluated by an assessment.",
+      "enum": [
+        "DataAsset",
+        "DataProduct",
+        "BusinessDomain",
+        "CriticalDataElement"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentTargetEntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataAsset",
+            "value": "DataAsset"
+          },
+          {
+            "name": "DataProduct",
+            "value": "DataProduct"
+          },
+          {
+            "name": "BusinessDomain",
+            "value": "BusinessDomain"
+          },
+          {
+            "name": "CriticalDataElement",
+            "value": "CriticalDataElement"
+          }
+        ]
+      }
+    },
+    "AssessmentTargetQualityType": {
+      "type": "string",
+      "description": "Quality dimension evaluated by an assessment.",
+      "enum": [
+        "MetadataQuality",
+        "DataQuality"
+      ],
+      "x-ms-enum": {
+        "name": "AssessmentTargetQualityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "MetadataQuality",
+            "value": "MetadataQuality",
+            "description": "Metadata quality assessment."
+          },
+          {
+            "name": "DataQuality",
+            "value": "DataQuality",
+            "description": "Data quality assessment."
+          }
+        ]
+      }
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "ContactItem": {
+      "type": "object",
+      "description": "A single contact reference on a governance entity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The contact principal id."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the contact's relationship to the entity."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Contacts": {
+      "type": "object",
+      "description": "Contacts grouped by role for a governance entity.",
+      "properties": {
+        "owner": {
+          "type": "array",
+          "description": "Principals identified as owners of the entity.",
+          "items": {
+            "$ref": "#/definitions/ContactItem"
+          }
+        },
+        "expert": {
+          "type": "array",
+          "description": "Principals identified as subject-matter experts on the entity.",
+          "items": {
+            "$ref": "#/definitions/ContactItem"
+          }
+        }
+      }
+    },
+    "Control": {
+      "type": "object",
+      "description": "A governance control resource. Use the `type` discriminator to determine whether this is a ControlGroup or ControlNode.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the control.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the control.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The control's display name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Free-form description of the control."
+        },
+        "contacts": {
+          "$ref": "#/definitions/Contacts",
+          "description": "Contacts associated with the control, grouped by role."
+        },
+        "reserved": {
+          "type": "boolean",
+          "description": "True when the control is reserved (system-managed)."
+        },
+        "statusPaletteConfig": {
+          "$ref": "#/definitions/ControlStatusPaletteConfig",
+          "description": "Configuration for selecting a status palette for the control."
+        },
+        "type": {
+          "$ref": "#/definitions/ControlType",
+          "description": "Discriminates between control group and control node variants."
+        },
+        "status": {
+          "$ref": "#/definitions/ControlStatus",
+          "description": "The control's lifecycle status."
+        },
+        "systemTemplate": {
+          "type": "string",
+          "description": "The system template name used to seed this control."
+        },
+        "systemTemplateEntityId": {
+          "type": "string",
+          "description": "The system template entity id used to seed this control."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "Current score for the control (server-computed).",
+          "readOnly": true
+        },
+        "scores": {
+          "type": "array",
+          "description": "Recent score history for the control (server-computed).",
+          "items": {
+            "$ref": "#/definitions/ControlScore"
+          },
+          "readOnly": true
+        },
+        "targetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Target score for the control (server-computed).",
+          "readOnly": true
+        },
+        "lastRefreshed": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last server-side refresh of computed fields.",
+          "readOnly": true
+        },
+        "statusPalette": {
+          "$ref": "#/definitions/StatusPalette",
+          "description": "Resolved status palette currently applied to the control (server-computed).",
+          "readOnly": true
+        },
+        "group": {
+          "type": "string",
+          "description": "Resolved parent group name (server-computed from typeProperties.groupId).",
+          "readOnly": true
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "id",
+        "name",
+        "type"
+      ]
+    },
+    "ControlGroup": {
+      "type": "object",
+      "description": "A control group aggregating child controls.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Control"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlGroup"
+    },
+    "ControlListResponse": {
+      "type": "object",
+      "description": "Paged collection of control results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of items.",
+          "items": {
+            "$ref": "#/definitions/Control"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total count of items."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for the next page of results."
+        }
+      },
+      "required": [
+        "value",
+        "count"
+      ]
+    },
+    "ControlNode": {
+      "type": "object",
+      "description": "A leaf control that performs evaluations.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/ControlNodeTypeProperties",
+          "description": "Type-specific properties for this control node."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Control"
+        }
+      ],
+      "x-ms-discriminator-value": "ControlNode"
+    },
+    "ControlNodeTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties present on ControlNode variants.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The parent control group id."
+        },
+        "domains": {
+          "type": "array",
+          "description": "Business domain ids this control applies to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "assessmentId": {
+          "type": "string",
+          "description": "The assessment id evaluated by this control, when applicable."
+        }
+      }
+    },
+    "ControlScore": {
+      "type": "object",
+      "description": "An individual score record returned with control responses.",
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the score was recorded."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric score value."
+        },
+        "controlGroupId": {
+          "type": "string",
+          "description": "The owning control group id, when scored at group level."
+        },
+        "controlId": {
+          "type": "string",
+          "description": "The owning control id, when scored at node level."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the score record."
+        },
+        "computingJobId": {
+          "type": "string",
+          "description": "Identifier of the computing job that produced this score."
+        }
+      },
+      "required": [
+        "time",
+        "score"
+      ]
+    },
+    "ControlStatus": {
+      "type": "string",
+      "description": "Status of a governance control.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "InDevelopment"
+      ],
+      "x-ms-enum": {
+        "name": "ControlStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The control is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The control is disabled."
+          },
+          {
+            "name": "InDevelopment",
+            "value": "InDevelopment",
+            "description": "The control is in development."
+          }
+        ]
+      }
+    },
+    "ControlStatusPaletteConfig": {
+      "type": "object",
+      "description": "Configuration for selecting a status palette for a control.",
+      "properties": {
+        "fallbackStatusPaletteId": {
+          "type": "string",
+          "description": "The palette to apply when no rule matches."
+        },
+        "targetScore": {
+          "type": "number",
+          "format": "double",
+          "description": "The target score used by certain palette rules."
+        },
+        "statusPaletteRules": {
+          "type": "array",
+          "description": "Rules evaluated in order to select a palette.",
+          "items": {
+            "$ref": "#/definitions/ControlStatusPaletteRule"
+          }
+        }
+      }
+    },
+    "ControlStatusPaletteRule": {
+      "type": "object",
+      "description": "A single status palette assignment based on a rule. When the rule evaluates true the referenced palette is applied.",
+      "properties": {
+        "statusPaletteId": {
+          "type": "string",
+          "description": "The palette to apply when the rule matches."
+        },
+        "rule": {
+          "$ref": "#/definitions/Rule",
+          "description": "The rule that drives the palette assignment."
+        }
+      },
+      "required": [
+        "rule"
+      ]
+    },
+    "ControlType": {
+      "type": "string",
+      "description": "Discriminator for governance control variants.",
+      "enum": [
+        "ControlGroup",
+        "ControlNode"
+      ],
+      "x-ms-enum": {
+        "name": "ControlType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ControlGroup",
+            "value": "ControlGroup",
+            "description": "A control group that aggregates child controls."
+          },
+          {
+            "name": "ControlNode",
+            "value": "ControlNode",
+            "description": "A leaf control that performs evaluations."
+          }
+        ]
+      }
+    },
+    "DataSourceType": {
+      "type": "string",
+      "description": "Supported data source types for managed private endpoints.",
+      "enum": [
+        "Fabric",
+        "ADLSGen2"
+      ],
+      "x-ms-enum": {
+        "name": "DataSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Microsoft Fabric data source."
+          },
+          {
+            "name": "ADLSGen2",
+            "value": "ADLSGen2",
+            "description": "Azure Data Lake Storage Gen2 data source."
+          }
+        ]
+      }
+    },
+    "ExpressionRule": {
+      "type": "object",
+      "description": "A rule whose evaluation is driven by an expression string.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/ExpressionRuleTypeProperties",
+          "description": "The expression rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "ExpressionRule"
+    },
+    "ExpressionRuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for an expression rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/RuleCheckPoint",
+          "description": "The data point evaluated by the expression."
+        },
+        "expression": {
+          "type": "string",
+          "description": "The expression to evaluate."
+        }
+      },
+      "required": [
+        "checkPoint",
+        "expression"
+      ]
+    },
+    "ManagedPrivateEndpointExistsResponse": {
+      "type": "object",
+      "description": "Response indicating whether a managed private endpoint exists.",
+      "properties": {
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint ID."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "The data source type."
+        }
+      }
+    },
+    "ManagedPrivateEndpointRequest": {
+      "type": "object",
+      "description": "Request to check or create a managed private endpoint.",
+      "properties": {
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "$ref": "#/definitions/DataSourceType",
+          "description": "The data source type."
+        }
+      },
+      "required": [
+        "targetResourceId",
+        "dataSourceType"
+      ]
+    },
+    "NetworkProperties": {
+      "type": "object",
+      "description": "Network properties including managed private endpoint information.",
+      "properties": {
+        "isManagedVnetEnabled": {
+          "type": "boolean",
+          "description": "Whether managed virtual network is enabled."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource."
+        },
+        "dataSourceType": {
+          "type": "string",
+          "description": "The data source type."
+        },
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint ID."
+        },
+        "markedForDeletion": {
+          "type": "boolean",
+          "description": "Whether the endpoint is marked for deletion."
+        }
+      }
+    },
+    "QueryScoresRequest": {
+      "type": "object",
+      "description": "Unified request for querying scores. When type=ControlNode, provide controlIds. When type=ControlGroup, provide controlGroupIds.",
+      "properties": {
+        "domainIds": {
+          "type": "array",
+          "description": "Filter by domain IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recordLatestCounts": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of latest score records to return."
+        },
+        "recordTimeRange": {
+          "$ref": "#/definitions/QueryScoresRequestTimeRange",
+          "description": "Time range filter for scores."
+        },
+        "status": {
+          "type": "string",
+          "description": "Filter by control status."
+        },
+        "controlIds": {
+          "type": "array",
+          "description": "The control IDs to query scores for. Required when type=ControlNode.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "controlGroupIds": {
+          "type": "array",
+          "description": "The control group IDs to query scores for. Required when type=ControlGroup.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "QueryScoresRequestTimeRange": {
+      "type": "object",
+      "description": "Time range for score queries.",
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start of the time range."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end of the time range."
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ]
+    },
+    "Recurrence": {
+      "type": "object",
+      "description": "Fine-grained recurrence pattern for a control schedule.",
+      "properties": {
+        "hours": {
+          "type": "array",
+          "description": "Hours of the day at which to run (0 through 23).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "minutes": {
+          "type": "array",
+          "description": "Minutes of the hour at which to run (0 through 59).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "monthDays": {
+          "type": "array",
+          "description": "Days of the month on which to run (1 through 31).",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "weekDays": {
+          "type": "array",
+          "description": "Days of the week on which to run.",
+          "items": {
+            "$ref": "#/definitions/ScheduleWeekDay"
+          }
+        },
+        "monthlyOccurrences": {
+          "type": "array",
+          "description": "Monthly occurrence specifications (e.g. 2nd Tuesday).",
+          "items": {
+            "$ref": "#/definitions/ScheduleMonthlyOccurrence"
+          }
+        }
+      },
+      "required": [
+        "hours",
+        "minutes",
+        "monthDays",
+        "weekDays",
+        "monthlyOccurrences"
+      ]
+    },
+    "Rule": {
+      "type": "object",
+      "description": "Base shape for a governance rule. Use the `type` discriminator to determine which concrete rule variant is present.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/RuleType",
+          "description": "Discriminates the rule variant."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "RuleCheckPoint": {
+      "type": "string",
+      "description": "Identifier of a checkable property within a rule.",
+      "enum": [
+        "Score",
+        "DataProductDescriptionContent",
+        "DataProductDescriptionLength"
+      ],
+      "x-ms-enum": {
+        "name": "RuleCheckPoint",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Score",
+            "value": "Score"
+          },
+          {
+            "name": "DataProductDescriptionContent",
+            "value": "DataProductDescriptionContent"
+          },
+          {
+            "name": "DataProductDescriptionLength",
+            "value": "DataProductDescriptionLength"
+          }
+        ]
+      }
+    },
+    "RuleGroup": {
+      "type": "object",
+      "description": "A rule that combines nested rules with a logical operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/RuleGroupTypeProperties",
+          "description": "The group's type-specific properties (groupOperator + nested rules)."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "RuleGroup"
+    },
+    "RuleGroupOperator": {
+      "type": "string",
+      "description": "Logical combinator for a rule group.",
+      "enum": [
+        "And",
+        "Or",
+        "Not"
+      ],
+      "x-ms-enum": {
+        "name": "RuleGroupOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "And",
+            "value": "And"
+          },
+          {
+            "name": "Or",
+            "value": "Or"
+          },
+          {
+            "name": "Not",
+            "value": "Not"
+          }
+        ]
+      }
+    },
+    "RuleGroupTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a rule group.",
+      "properties": {
+        "groupOperator": {
+          "$ref": "#/definitions/RuleGroupOperator",
+          "description": "How nested rules are combined."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The nested rules combined by groupOperator.",
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        }
+      }
+    },
+    "RuleOperator": {
+      "type": "string",
+      "description": "Comparison operator for a simple rule.",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "GreaterThan",
+        "GreaterThanOrEqual",
+        "LessThan",
+        "LessThanOrEqual",
+        "Contains",
+        "StartsWith",
+        "EndsWith",
+        "InRange",
+        "IsNull",
+        "IsEmpty",
+        "IsTrue",
+        "IsNullOrEmpty",
+        "IsNotNullOrEmpty",
+        "Normalize",
+        "RegexMatch"
+      ],
+      "x-ms-enum": {
+        "name": "RuleOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "Equal"
+          },
+          {
+            "name": "NotEqual",
+            "value": "NotEqual"
+          },
+          {
+            "name": "GreaterThan",
+            "value": "GreaterThan"
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": "GreaterThanOrEqual"
+          },
+          {
+            "name": "LessThan",
+            "value": "LessThan"
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "LessThanOrEqual"
+          },
+          {
+            "name": "Contains",
+            "value": "Contains"
+          },
+          {
+            "name": "StartsWith",
+            "value": "StartsWith"
+          },
+          {
+            "name": "EndsWith",
+            "value": "EndsWith"
+          },
+          {
+            "name": "InRange",
+            "value": "InRange"
+          },
+          {
+            "name": "IsNull",
+            "value": "IsNull"
+          },
+          {
+            "name": "IsEmpty",
+            "value": "IsEmpty"
+          },
+          {
+            "name": "IsTrue",
+            "value": "IsTrue"
+          },
+          {
+            "name": "IsNullOrEmpty",
+            "value": "IsNullOrEmpty"
+          },
+          {
+            "name": "IsNotNullOrEmpty",
+            "value": "IsNotNullOrEmpty"
+          },
+          {
+            "name": "Normalize",
+            "value": "Normalize"
+          },
+          {
+            "name": "RegexMatch",
+            "value": "RegexMatch"
+          }
+        ]
+      }
+    },
+    "RuleType": {
+      "type": "string",
+      "description": "Discriminator for governance rule variants.",
+      "enum": [
+        "RuleGroup",
+        "SimpleRule",
+        "ExpressionRule"
+      ],
+      "x-ms-enum": {
+        "name": "RuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RuleGroup",
+            "value": "RuleGroup",
+            "description": "A logical group combining nested rules."
+          },
+          {
+            "name": "SimpleRule",
+            "value": "SimpleRule",
+            "description": "A simple checkPoint/operator/operand rule."
+          },
+          {
+            "name": "ExpressionRule",
+            "value": "ExpressionRule",
+            "description": "An expression-based rule."
+          }
+        ]
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "description": "A control schedule resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the schedule.",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the schedule.",
+          "readOnly": true
+        },
+        "frequency": {
+          "$ref": "#/definitions/ScheduleFrequency",
+          "description": "The frequency of the schedule."
+        },
+        "status": {
+          "$ref": "#/definitions/ScheduleState",
+          "description": "The status of the schedule."
+        },
+        "interval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The interval between schedule runs, expressed in the unit defined by frequency."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the schedule."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the schedule."
+        },
+        "recurrence": {
+          "$ref": "#/definitions/Recurrence",
+          "description": "Fine-grained recurrence pattern within the chosen frequency."
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "The time zone (IANA name) used to interpret startTime, endTime, and recurrence."
+        }
+      }
+    },
+    "ScheduleFrequency": {
+      "type": "string",
+      "description": "Frequency for a control schedule.",
+      "enum": [
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Month",
+            "value": "Month",
+            "description": "Monthly frequency."
+          },
+          {
+            "name": "Week",
+            "value": "Week",
+            "description": "Weekly frequency."
+          },
+          {
+            "name": "Day",
+            "value": "Day",
+            "description": "Daily frequency."
+          }
+        ]
+      }
+    },
+    "ScheduleMonthlyOccurrence": {
+      "type": "object",
+      "description": "A monthly occurrence specification for a control schedule (e.g. the 2nd Tuesday of each month).",
+      "properties": {
+        "day": {
+          "$ref": "#/definitions/ScheduleWeekDay",
+          "description": "The day of the week."
+        },
+        "occurrence": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordinal occurrence within the month (e.g. 1 for first, 2 for second)."
+        }
+      },
+      "required": [
+        "day",
+        "occurrence"
+      ]
+    },
+    "ScheduleState": {
+      "type": "string",
+      "description": "State of a schedule.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The schedule is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The schedule is disabled."
+          }
+        ]
+      }
+    },
+    "ScheduleWeekDay": {
+      "type": "string",
+      "description": "Day of the week used by control schedule recurrence.",
+      "enum": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduleWeekDay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Sunday",
+            "value": "Sunday"
+          },
+          {
+            "name": "Monday",
+            "value": "Monday"
+          },
+          {
+            "name": "Tuesday",
+            "value": "Tuesday"
+          },
+          {
+            "name": "Wednesday",
+            "value": "Wednesday"
+          },
+          {
+            "name": "Thursday",
+            "value": "Thursday"
+          },
+          {
+            "name": "Friday",
+            "value": "Friday"
+          },
+          {
+            "name": "Saturday",
+            "value": "Saturday"
+          }
+        ]
+      }
+    },
+    "SimpleRule": {
+      "type": "object",
+      "description": "A leaf rule that compares a checkPoint against an operand using an operator.",
+      "properties": {
+        "typeProperties": {
+          "$ref": "#/definitions/SimpleRuleTypeProperties",
+          "description": "The simple rule's type-specific properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Rule"
+        }
+      ],
+      "x-ms-discriminator-value": "SimpleRule"
+    },
+    "SimpleRuleTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for a simple rule.",
+      "properties": {
+        "checkPoint": {
+          "$ref": "#/definitions/RuleCheckPoint",
+          "description": "The data point to evaluate."
+        },
+        "operator": {
+          "$ref": "#/definitions/RuleOperator",
+          "description": "The comparison operator."
+        },
+        "operand": {
+          "type": "string",
+          "description": "The operand to compare against. Optional for operators that take no operand (e.g. IsNull)."
+        }
+      }
+    },
+    "StatusPalette": {
+      "type": "object",
+      "description": "A status palette definition (color label).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the palette."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the palette."
+        },
+        "name": {
+          "type": "string",
+          "description": "The palette name."
+        },
+        "color": {
+          "type": "string",
+          "description": "The palette color (typically a hex code)."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "color"
+      ]
+    },
+    "StorageConfig": {
+      "type": "object",
+      "description": "Storage configuration for Purview Data Estate Health.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the storage configuration."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType",
+          "description": "Type of storage backing this configuration."
+        },
+        "status": {
+          "$ref": "#/definitions/StorageStatus",
+          "description": "Status of the storage configuration."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System data envelope for the storage configuration."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/StorageConfigTypeProperties",
+          "description": "Type-specific properties whose shape depends on the storage `type`."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/StorageConfigNetworkProperties",
+          "description": "Network properties associated with the storage configuration."
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "status",
+        "systemData",
+        "typeProperties"
+      ]
+    },
+    "StorageConfigConnectivityResult": {
+      "type": "object",
+      "description": "Result of a storage configuration connectivity test.",
+      "properties": {
+        "succeeded": {
+          "type": "boolean",
+          "description": "Whether the connectivity test was successful."
+        },
+        "message": {
+          "type": "string",
+          "description": "Diagnostic message describing the connectivity test outcome. Empty string when the test succeeded."
+        }
+      },
+      "required": [
+        "succeeded",
+        "message"
+      ]
+    },
+    "StorageConfigNetworkProperties": {
+      "type": "object",
+      "description": "Network properties associated with a storage configuration, including managed virtual network and managed private endpoint information.",
+      "properties": {
+        "isManagedVnetEnabled": {
+          "type": "boolean",
+          "description": "Whether managed virtual network is enabled for this storage configuration."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target storage resource."
+        },
+        "mpeId": {
+          "type": "string",
+          "description": "The managed private endpoint identifier."
+        },
+        "mpeStatus": {
+          "type": "string",
+          "description": "The status of the managed private endpoint. Possible values include `Approved`, `Rejected`, `Pending`, `Provisioning`, or an empty string when no endpoint exists."
+        },
+        "markedForDeletion": {
+          "type": "boolean",
+          "description": "Whether the managed private endpoint is marked for deletion."
+        }
+      }
+    },
+    "StorageConfigTypeProperties": {
+      "type": "object",
+      "description": "Type-specific properties for the storage configuration. The actual fields\npopulated depend on the parent StorageConfig.type: `locationURL` is set when\ntype is `Fabric`; `endpoint` is set when type is `ADLSGen2`.",
+      "properties": {
+        "locationURL": {
+          "type": "string",
+          "description": "Fabric workspace location URL. Required when StorageConfig.type is `Fabric`."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "Azure Data Lake Storage Gen2 endpoint URL. Required when StorageConfig.type is `ADLSGen2`."
+        }
+      }
+    },
+    "StorageConfigUpdate": {
+      "type": "object",
+      "description": "Partial storage configuration payload used when updating the configuration or testing its connectivity. All properties are optional so callers can supply only the fields they want to change or validate.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the storage configuration."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageType",
+          "description": "Type of storage backing this configuration."
+        },
+        "status": {
+          "$ref": "#/definitions/StorageStatus",
+          "description": "Status of the storage configuration."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System data envelope for the storage configuration."
+        },
+        "typeProperties": {
+          "$ref": "#/definitions/StorageConfigTypeProperties",
+          "description": "Type-specific properties whose shape depends on the storage `type`."
+        },
+        "networkProperties": {
+          "$ref": "#/definitions/StorageConfigNetworkProperties",
+          "description": "Network properties associated with the storage configuration."
+        }
+      }
+    },
+    "StorageStatus": {
+      "type": "string",
+      "description": "Status of a Purview Data Estate Health storage configuration.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "StorageStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "The storage configuration is disabled."
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "The storage configuration is enabled."
+          }
+        ]
+      }
+    },
+    "StorageType": {
+      "type": "string",
+      "description": "Type of storage backing a Purview Data Estate Health storage configuration.",
+      "enum": [
+        "Fabric",
+        "ADLSGen2"
+      ],
+      "x-ms-enum": {
+        "name": "StorageType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fabric",
+            "value": "Fabric",
+            "description": "Microsoft Fabric storage."
+          },
+          {
+            "name": "ADLSGen2",
+            "value": "ADLSGen2",
+            "description": "Azure Data Lake Storage Gen2 storage."
+          }
+        ]
+      }
+    },
+    "SystemData": {
+      "type": "object",
+      "description": "System metadata for a resource.",
+      "properties": {
+        "createdBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was created."
+        },
+        "lastModifiedBy": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The unique identifier of the user who last modified the resource."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp when the resource was last modified."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
+}
