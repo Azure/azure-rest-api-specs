@@ -36,7 +36,3 @@ using Microsoft.NetworkFunction;
 
 @@clientLocation(Operations.list, "NetworkFunction");
 @@clientName(Operations.list, "ListOperations");
-@@Legacy.flattenProperty(
-  AzureTrafficCollectors.createOrUpdate::parameters.resource,
-  "javascript"
-);

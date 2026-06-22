@@ -3,6 +3,8 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.NetworkFunction;
+using Azure.ResourceManager;
+using Azure.Core;
 
 @@clientName(
   Microsoft.NetworkFunction,
@@ -54,7 +56,11 @@ using Microsoft.NetworkFunction;
 @@alternateType(AzureTrafficCollector.etag, Azure.Core.eTag, "csharp");
 @@alternateType(CollectorPolicy.etag, Azure.Core.eTag, "csharp");
 
-@@clientLocation(Operations.list, "NetworkFunctionOperations", "csharp");
+@@clientLocation(
+  Microsoft.NetworkFunction.Operations.list,
+  "NetworkFunctionOperations",
+  "csharp"
+);
 
 // We add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
@@ -64,3 +70,47 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
+
+op AzureTrafficCollectorsCreateOrUpdate(
+  ...Azure.ResourceManager.ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...ResourceGroupParameter,
+  ...ProviderNamespace<SubscriptionActionScope>,
+  azureTrafficCollectorName: string,
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location: string,
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>,
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: string,
+
+  /**
+   * The virtualHub to which the Azure Traffic Collector belongs.
+   */
+  virtualHub?: ResourceReference,
+
+  @visibility(Lifecycle.Read)
+  name?: string,
+):
+  | Microsoft.NetworkFunction.AzureTrafficCollector
+  | Azure.Core.Foundations.RetryAfterHeader
+  | Microsoft.NetworkFunction.CloudError;
+@@override(
+  AzureTrafficCollectors.createOrUpdate,
+  AzureTrafficCollectorsCreateOrUpdate,
+  "javascript"
+);
