@@ -194,7 +194,7 @@ namespace Microsoft.Compute;
 // Correct .NET casing for TimeZone.
 @@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
 
-// Fix SubscriptionId type on ResourceOperationDetails (string/uuid -> Guid?)
+// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
 @@alternateType(
   ResourceOperationDetails.subscriptionId,
   Azure.Core.uuid,
