@@ -1,0 +1,40 @@
+{
+  "title": "Get RefreshGroupMembersResult",
+  "operationId": "RefreshGroupMembersResults_Get",
+  "description": "Gets the status of a refresh members operation.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-3",
+    "groupName": "my-group-1",
+    "operationId": "00000000-0000-0000-0000-000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-3/groups/my-group-1/refreshGroupMembersResults/00000000-0000-0000-0000-000000000001",
+        "name": "00000000-0000-0000-0000-000000000001",
+        "type": "Microsoft.DeviceRegistry/namespaces/groups/refreshGroupMembersResults",
+        "properties": {
+          "status": "Succeeded",
+          "startTime": "2025-01-01T00:00:00Z",
+          "endTime": "2025-01-01T00:05:00Z",
+          "totalMemberCount": 1500,
+          "membersAddedCount": 100,
+          "membersRemovedCount": 50,
+          "membersFailedCount": 0,
+          "lastRefreshTimestamp": "2025-01-01T00:05:00Z"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2025-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-01-01T00:05:00Z"
+        }
+      }
+    }
+  }
+}

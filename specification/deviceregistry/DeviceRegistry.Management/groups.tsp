@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -58,6 +59,32 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
+model RefreshGroupMembersResult is ArmOperationStatus {
+  @doc("The total count of members in the group after the refresh.")
+  @visibility(Lifecycle.Read)
+  totalMemberCount?: int64;
+
+  @doc("The count of members added during the refresh.")
+  @visibility(Lifecycle.Read)
+  membersAddedCount?: int64;
+
+  @doc("The count of members removed during the refresh.")
+  @visibility(Lifecycle.Read)
+  membersRemovedCount?: int64;
+
+  @doc("The count of members that failed to be processed during the refresh.")
+  @visibility(Lifecycle.Read)
+  membersFailedCount?: int64;
+
+  @doc("The timestamp of the last successful refresh.")
+  @visibility(Lifecycle.Read)
+  lastRefreshTimestamp?: utcDateTime;
+}
+
+alias RefreshMembersLroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+  ArmCombinedLroHeaders<FinalResult = RefreshGroupMembersResult>;
+
+@added(Versions.v2026_11_02_preview)
 @armResourceOperations
 interface Groups {
   get is ArmResourceRead<Group>;
@@ -74,7 +101,12 @@ interface Groups {
   >;
 
   @doc("Refreshes the members of this group.")
-  refreshMembers is ArmResourceActionNoResponseContentAsync<Group, void>;
+  @useFinalStateVia("azure-async-operation")
+  refreshMembers is ArmResourceActionNoResponseContentAsync<
+    Resource = Group,
+    Request = void,
+    LroHeaders = RefreshMembersLroHeaders
+  >;
 
   @doc("Returns the current count of members of this group.")
   getCurrentMemberCount is ArmResourceActionSync<
