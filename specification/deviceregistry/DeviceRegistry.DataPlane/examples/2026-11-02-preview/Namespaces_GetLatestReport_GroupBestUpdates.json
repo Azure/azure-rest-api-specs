@@ -1,0 +1,60 @@
+{
+  "operationId": "Namespaces_GetLatestReport",
+  "title": "Get the latest group best-updates compliance report",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-02-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "reportType": "GroupBestUpdatesComplianceReport",
+      "reportTarget": "f7e6d5c4-3210-fedc-ba98-76543210fedc"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "reportType": "GroupBestUpdatesComplianceReport",
+        "reportTarget": "f7e6d5c4-3210-fedc-ba98-76543210fedc",
+        "updateCompliance": {
+          "totalUpdateableDeviceCount": 150,
+          "onBestUpdateDeviceCount": 0,
+          "bestUpdateAvailableDeviceCount": 150,
+          "devicesInProgressOnBestUpdate": 0,
+          "totalNotUpdateableDeviceCount": 1000
+        },
+        "bestUpdates": [
+          {
+            "targetDevices": {
+              "compatProperties": {
+                "manufacturer": "contoso",
+                "model": "tractor"
+              },
+              "agentProfile": 1
+            },
+            "updateId": {
+              "provider": "contoso",
+              "name": "tractor",
+              "version": "1.0"
+            },
+            "devicesNotOnBestUpdateCount": 100
+          },
+          {
+            "targetDevices": {
+              "compatProperties": {
+                "manufacturer": "fabrikam",
+                "model": "toaster"
+              },
+              "agentProfile": 1
+            },
+            "updateId": {
+              "provider": "contoso",
+              "name": "toaster",
+              "version": "2.0"
+            },
+            "devicesNotOnBestUpdateCount": 50
+          }
+        ]
+      }
+    }
+  }
+}
