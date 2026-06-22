@@ -10807,6 +10807,7 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterSet"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -10817,6 +10818,7 @@
           "items": {
             "$ref": "#/definitions/ActivityOutputType"
           },
+          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -11467,7 +11469,12 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the connection."
+          "description": "Gets or sets the description of the connection.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "connectionType": {
           "$ref": "#/definitions/ConnectionTypeAssociationProperty",
@@ -11591,7 +11598,12 @@
       "properties": {
         "isGlobal": {
           "type": "boolean",
-          "description": "Gets or sets a Boolean value to indicate if the connection type is global."
+          "description": "Gets or sets a Boolean value to indicate if the connection type is global.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "fieldDefinitions": {
           "type": "object",
@@ -11881,7 +11893,12 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the credential."
+          "description": "Gets or sets the description of the credential.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -12190,15 +12207,30 @@
       "properties": {
         "logVerbose": {
           "type": "boolean",
-          "description": "Gets or sets verbose log option."
+          "description": "Gets or sets verbose log option.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "logProgress": {
           "type": "boolean",
-          "description": "Gets or sets progress log option."
+          "description": "Gets or sets progress log option.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "source": {
           "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source."
+          "description": "Gets or sets the source.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "parameters": {
           "type": "object",
@@ -12209,7 +12241,12 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the configuration."
+          "description": "Gets or sets the description of the configuration.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -12318,6 +12355,24 @@
           "type": "string",
           "description": "Gets or sets the description."
         }
+      }
+    },
+    "DscConfigurationProvisioningStateCompatibility": {
+      "type": "string",
+      "description": "SDK-only compatibility extensible enum for the previous DscConfigurationProvisioningState API.",
+      "enum": [
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "DscConfigurationProvisioningStateCompatibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded."
+          }
+        ]
       }
     },
     "DscConfigurationState": {
@@ -12478,11 +12533,21 @@
       "properties": {
         "source": {
           "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source."
+          "description": "Gets or sets the source.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node."
+          "description": "Gets or sets the configuration of the node.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "incrementNodeConfigurationBuild": {
           "type": "boolean",
@@ -13756,7 +13821,11 @@
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningState",
           "description": "The current provisioning state of the job.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -14568,6 +14637,98 @@
         ]
       }
     },
+    "ModuleProvisioningStateCompatibility": {
+      "type": "string",
+      "description": "SDK-only compatibility fixed enum for the previous ModuleProvisioningState API.",
+      "enum": [
+        "Created",
+        "Creating",
+        "StartingImportModuleRunbook",
+        "RunningImportModuleRunbook",
+        "ContentRetrieved",
+        "ContentDownloaded",
+        "ContentValidated",
+        "ConnectionTypeImported",
+        "ContentStored",
+        "ModuleDataStored",
+        "ActivitiesStored",
+        "ModuleImportRunbookComplete",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ModuleProvisioningStateCompatibility",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "StartingImportModuleRunbook",
+            "value": "StartingImportModuleRunbook"
+          },
+          {
+            "name": "RunningImportModuleRunbook",
+            "value": "RunningImportModuleRunbook"
+          },
+          {
+            "name": "ContentRetrieved",
+            "value": "ContentRetrieved"
+          },
+          {
+            "name": "ContentDownloaded",
+            "value": "ContentDownloaded"
+          },
+          {
+            "name": "ContentValidated",
+            "value": "ContentValidated"
+          },
+          {
+            "name": "ConnectionTypeImported",
+            "value": "ConnectionTypeImported"
+          },
+          {
+            "name": "ContentStored",
+            "value": "ContentStored"
+          },
+          {
+            "name": "ModuleDataStored",
+            "value": "ModuleDataStored"
+          },
+          {
+            "name": "ActivitiesStored",
+            "value": "ActivitiesStored"
+          },
+          {
+            "name": "ModuleImportRunbookComplete",
+            "value": "ModuleImportRunbookComplete"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Cancelled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          }
+        ]
+      }
+    },
     "ModuleUpdateParameters": {
       "type": "object",
       "description": "The parameters supplied to the update module operation.",
@@ -14580,12 +14741,18 @@
         "name": {
           "type": "string",
           "description": "Gets or sets name of the resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "location": {
           "type": "string",
           "description": "Gets or sets the location of the resource.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "update"
+          ]
         },
         "tags": {
           "type": "object",
@@ -15430,11 +15597,21 @@
       "properties": {
         "logVerbose": {
           "type": "boolean",
-          "description": "Gets or sets verbose log option."
+          "description": "Gets or sets verbose log option.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "logProgress": {
           "type": "boolean",
-          "description": "Gets or sets progress log option."
+          "description": "Gets or sets progress log option.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "runtimeEnvironment": {
           "type": "string",
@@ -15446,20 +15623,40 @@
         },
         "draft": {
           "$ref": "#/definitions/RunbookDraft",
-          "description": "Gets or sets the draft runbook properties."
+          "description": "Gets or sets the draft runbook properties.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "publishContentLink": {
           "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the published runbook content link."
+          "description": "Gets or sets the published runbook content link.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the runbook."
+          "description": "Gets or sets the description of the runbook.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "logActivityTrace": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the activity-level tracing options of the runbook."
+          "description": "Gets or sets the activity-level tracing options of the runbook.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -15643,6 +15840,24 @@
           "type": "string",
           "description": "Gets or sets the description."
         }
+      }
+    },
+    "RunbookProvisioningStateCompatibility": {
+      "type": "string",
+      "description": "SDK-only compatibility extensible enum for the previous RunbookProvisioningState API.",
+      "enum": [
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "RunbookProvisioningStateCompatibility",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Succeeded."
+          }
+        ]
       }
     },
     "RunbookState": {
@@ -16714,7 +16929,8 @@
         "value": {
           "type": "object",
           "description": "The values of the job stream.",
-          "additionalProperties": {}
+          "additionalProperties": {},
+          "readOnly": true
         }
       }
     },

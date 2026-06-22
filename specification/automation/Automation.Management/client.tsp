@@ -155,16 +155,19 @@ using TypeSpec.Rest;
 @@clientName(SourceControl, "AutomationSourceControl", "csharp");
 @@clientName(Variable, "AutomationVariable", "csharp");
 @@clientName(Watcher, "AutomationWatcher", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated Watcher resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Watcher,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated DeletedAutomationAccount resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   DeletedAutomationAccount,
   Azure.ResourceManager.Foundations.Resource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated SourceControlSyncJob resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   SourceControlSyncJob,
   Azure.ResourceManager.Foundations.Resource,
@@ -298,6 +301,7 @@ using TypeSpec.Rest;
   "GetAllNodeCountInformation",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for node count information."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.nodeCountInformationGet,
   "csharp"
@@ -307,6 +311,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurations",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configurations."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationsList,
   "csharp"
@@ -327,6 +332,7 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@pageItems(KeyListResult.keys);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for automation account keys."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.keysListByAutomationAccount,
   "csharp"
@@ -353,6 +359,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurationMachineRuns",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configuration machine runs."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
   "csharp"
@@ -367,6 +374,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurationRuns",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configuration runs."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationRunsList,
   "csharp"
@@ -1012,6 +1020,7 @@ using TypeSpec.Rest;
   "DeletedAutomationAccounts",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for deleted automation accounts."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   deletedAutomationAccountsOperationGroup.listBySubscription,
   "csharp"
@@ -1043,6 +1052,7 @@ namespace Microsoft.Automation {
   /**
    * SDK-only compatibility fixed enum for the previous ModuleProvisioningState API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-enum" "SDK-only C# compatibility type preserves the previous fixed enum API."
   enum ModuleProvisioningStateCompatibility {
     Created: "Created",
     Creating: "Creating",
@@ -1067,6 +1077,7 @@ namespace Microsoft.Automation {
    */
   union DscConfigurationProvisioningStateCompatibility {
     string,
+    /** Succeeded. */
     Succeeded: "Succeeded",
   }
 
@@ -1075,6 +1086,7 @@ namespace Microsoft.Automation {
    */
   union RunbookProvisioningStateCompatibility {
     string,
+    /** Succeeded. */
     Succeeded: "Succeeded",
   }
 
