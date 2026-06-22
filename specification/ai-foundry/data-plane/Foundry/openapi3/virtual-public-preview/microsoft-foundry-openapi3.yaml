@@ -1382,9 +1382,25 @@ paths:
         Returns files and directories at the specified path in the session sandbox.
         The response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.
       parameters:
-        - $ref: '#/components/parameters/ListSessionFilesParams.agent_name'
-        - $ref: '#/components/parameters/ListSessionFilesParams.agent_session_id'
-        - $ref: '#/components/parameters/ListSessionFilesParams.path'
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.
+          schema:
+            type: string
+          explode: false
         - name: limit
           in: query
           required: false
@@ -1460,10 +1476,33 @@ paths:
         Deletes the specified file or directory from the session sandbox.
         When `recursive` is false, deleting a non-empty directory returns 409 Conflict.
       parameters:
-        - $ref: '#/components/parameters/DeleteSessionFileParams.agent_name'
-        - $ref: '#/components/parameters/DeleteSessionFileParams.agent_session_id'
-        - $ref: '#/components/parameters/DeleteSessionFileParams.path'
-        - $ref: '#/components/parameters/DeleteSessionFileParams.recursive'
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The file or directory path to delete, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
+        - name: recursive
+          in: query
+          required: false
+          description: Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.
+          schema:
+            type: boolean
+            default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -1496,9 +1535,25 @@ paths:
         Uploads binary file content to the specified path in the session sandbox.
         The service stores the file relative to the session home directory and rejects payloads larger than 50 MB.
       parameters:
-        - $ref: '#/components/parameters/UploadSessionFileParams.agent_name'
-        - $ref: '#/components/parameters/UploadSessionFileParams.agent_session_id'
-        - $ref: '#/components/parameters/UploadSessionFileParams.path'
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The destination file path within the sandbox, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -1540,9 +1595,25 @@ paths:
         Downloads the file at the specified sandbox path as a binary stream.
         The path is resolved relative to the session home directory.
       parameters:
-        - $ref: '#/components/parameters/DownloadSessionFileParams.agent_name'
-        - $ref: '#/components/parameters/DownloadSessionFileParams.agent_session_id'
-        - $ref: '#/components/parameters/DownloadSessionFileParams.path'
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: path
+          required: true
+          description: The session ID.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The file path to download from the sandbox, relative to the session home directory.
+          schema:
+            type: string
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -12750,37 +12821,6 @@ components:
       schema:
         type: string
         maxLength: 128
-    DeleteSessionFileParams.agent_name:
-      name: agent_name
-      in: path
-      required: true
-      description: The name of the agent.
-      schema:
-        type: string
-    DeleteSessionFileParams.agent_session_id:
-      name: agent_session_id
-      in: path
-      required: true
-      description: The session ID.
-      schema:
-        type: string
-    DeleteSessionFileParams.path:
-      name: path
-      in: query
-      required: true
-      description: The file or directory path to delete, relative to the session home directory.
-      schema:
-        type: string
-      explode: false
-    DeleteSessionFileParams.recursive:
-      name: recursive
-      in: query
-      required: false
-      description: Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.
-      schema:
-        type: boolean
-        default: false
-      explode: false
     DisableRoutineParameters:
       name: routine_name
       in: path
@@ -12797,28 +12837,6 @@ components:
       schema:
         type: string
         maxLength: 128
-    DownloadSessionFileParams.agent_name:
-      name: agent_name
-      in: path
-      required: true
-      description: The name of the agent.
-      schema:
-        type: string
-    DownloadSessionFileParams.agent_session_id:
-      name: agent_session_id
-      in: path
-      required: true
-      description: The session ID.
-      schema:
-        type: string
-    DownloadSessionFileParams.path:
-      name: path
-      in: query
-      required: true
-      description: The file path to download from the sandbox, relative to the session home directory.
-      schema:
-        type: string
-      explode: false
     EnableRoutineParameters:
       name: routine_name
       in: path
@@ -12917,28 +12935,6 @@ components:
       schema:
         type: string
       explode: false
-    ListSessionFilesParams.agent_name:
-      name: agent_name
-      in: path
-      required: true
-      description: The name of the agent.
-      schema:
-        type: string
-    ListSessionFilesParams.agent_session_id:
-      name: agent_session_id
-      in: path
-      required: true
-      description: The session ID.
-      schema:
-        type: string
-    ListSessionFilesParams.path:
-      name: path
-      in: query
-      required: false
-      description: The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.
-      schema:
-        type: string
-      explode: false
     UpdateToolboxRequest.name:
       name: name
       in: path
@@ -12946,28 +12942,6 @@ components:
       description: The name of the toolbox to update.
       schema:
         type: string
-    UploadSessionFileParams.agent_name:
-      name: agent_name
-      in: path
-      required: true
-      description: The name of the agent.
-      schema:
-        type: string
-    UploadSessionFileParams.agent_session_id:
-      name: agent_session_id
-      in: path
-      required: true
-      description: The session ID.
-      schema:
-        type: string
-    UploadSessionFileParams.path:
-      name: path
-      in: query
-      required: true
-      description: The destination file path within the sandbox, relative to the session home directory.
-      schema:
-        type: string
-      explode: false
   schemas:
     A2APreviewTool:
       type: object

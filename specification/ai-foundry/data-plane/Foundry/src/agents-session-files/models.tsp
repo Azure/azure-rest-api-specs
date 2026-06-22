@@ -6,8 +6,8 @@ namespace Azure.AI.Projects;
 // Request parameter models
 // ---------------------------------------------------------------------------
 
-@doc("Parameters for uploading a file to a session sandbox.")
-model UploadSessionFileParams {
+// Parameters for uploading a file to a session sandbox
+alias UploadSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
@@ -21,10 +21,10 @@ model UploadSessionFileParams {
   @header("Content-Type") contentType: "application/octet-stream";
 
   @body content: bytes;
-}
+};
 
-@doc("Parameters for downloading a file from a session sandbox.")
-model DownloadSessionFileParams {
+// Parameters for downloading a file from a session sandbox
+alias DownloadSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
@@ -33,10 +33,10 @@ model DownloadSessionFileParams {
 
   /** The file path to download from the sandbox, relative to the session home directory. */
   @query path: string;
-}
+};
 
-@doc("Parameters for listing files in a session sandbox.")
-model ListSessionFilesParams {
+// Parameters for listing files in a session sandbox
+alias ListSessionFilesParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
@@ -45,10 +45,10 @@ model ListSessionFilesParams {
 
   /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
   @query path?: string;
-}
+};
 
-@doc("Parameters for deleting a file from a session sandbox.")
-model DeleteSessionFileParams {
+// Parameters for deleting a file from a session sandbox
+alias DeleteSessionFileParams = {
   /** The name of the agent. */
   @path agent_name: string;
 
@@ -60,7 +60,7 @@ model DeleteSessionFileParams {
 
   /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
   @query recursive?: boolean = false;
-}
+};
 
 // ---------------------------------------------------------------------------
 // Response models

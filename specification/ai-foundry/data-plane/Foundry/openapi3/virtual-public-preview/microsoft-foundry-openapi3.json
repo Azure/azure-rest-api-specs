@@ -2043,13 +2043,32 @@
         "description": "Returns files and directories at the specified path in the session sandbox.\nThe response includes only the immediate children of the target directory and defaults to the session home directory when no path is supplied.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/ListSessionFilesParams.agent_name"
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/ListSessionFilesParams.agent_session_id"
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/ListSessionFilesParams.path"
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "description": "The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           },
           {
             "name": "limit",
@@ -2146,16 +2165,43 @@
         "description": "Deletes the specified file or directory from the session sandbox.\nWhen `recursive` is false, deleting a non-empty directory returns 409 Conflict.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/DeleteSessionFileParams.agent_name"
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/DeleteSessionFileParams.agent_session_id"
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/DeleteSessionFileParams.path"
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file or directory path to delete, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           },
           {
-            "$ref": "#/components/parameters/DeleteSessionFileParams.recursive"
+            "name": "recursive",
+            "in": "query",
+            "required": false,
+            "description": "Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -2205,13 +2251,32 @@
         "description": "Uploads binary file content to the specified path in the session sandbox.\nThe service stores the file relative to the session home directory and rejects payloads larger than 50 MB.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/UploadSessionFileParams.agent_name"
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/UploadSessionFileParams.agent_session_id"
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/UploadSessionFileParams.path"
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The destination file path within the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -2276,13 +2341,32 @@
         "description": "Downloads the file at the specified sandbox path as a binary stream.\nThe path is resolved relative to the session home directory.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/DownloadSessionFileParams.agent_name"
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/DownloadSessionFileParams.agent_session_id"
+            "name": "agent_session_id",
+            "in": "path",
+            "required": true,
+            "description": "The session ID.",
+            "schema": {
+              "type": "string"
+            }
           },
           {
-            "$ref": "#/components/parameters/DownloadSessionFileParams.path"
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The file path to download from the sandbox, relative to the session home directory.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           },
           {
             "name": "api-version",
@@ -19416,45 +19500,6 @@
           "maxLength": 128
         }
       },
-      "DeleteSessionFileParams.agent_name": {
-        "name": "agent_name",
-        "in": "path",
-        "required": true,
-        "description": "The name of the agent.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "DeleteSessionFileParams.agent_session_id": {
-        "name": "agent_session_id",
-        "in": "path",
-        "required": true,
-        "description": "The session ID.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "DeleteSessionFileParams.path": {
-        "name": "path",
-        "in": "query",
-        "required": true,
-        "description": "The file or directory path to delete, relative to the session home directory.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
-      "DeleteSessionFileParams.recursive": {
-        "name": "recursive",
-        "in": "query",
-        "required": false,
-        "description": "Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller.",
-        "schema": {
-          "type": "boolean",
-          "default": false
-        },
-        "explode": false
-      },
       "DisableRoutineParameters": {
         "name": "routine_name",
         "in": "path",
@@ -19474,34 +19519,6 @@
           "type": "string",
           "maxLength": 128
         }
-      },
-      "DownloadSessionFileParams.agent_name": {
-        "name": "agent_name",
-        "in": "path",
-        "required": true,
-        "description": "The name of the agent.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "DownloadSessionFileParams.agent_session_id": {
-        "name": "agent_session_id",
-        "in": "path",
-        "required": true,
-        "description": "The session ID.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "DownloadSessionFileParams.path": {
-        "name": "path",
-        "in": "query",
-        "required": true,
-        "description": "The file path to download from the sandbox, relative to the session home directory.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
       },
       "EnableRoutineParameters": {
         "name": "routine_name",
@@ -19625,34 +19642,6 @@
         },
         "explode": false
       },
-      "ListSessionFilesParams.agent_name": {
-        "name": "agent_name",
-        "in": "path",
-        "required": true,
-        "description": "The name of the agent.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "ListSessionFilesParams.agent_session_id": {
-        "name": "agent_session_id",
-        "in": "path",
-        "required": true,
-        "description": "The session ID.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "ListSessionFilesParams.path": {
-        "name": "path",
-        "in": "query",
-        "required": false,
-        "description": "The directory path to list, relative to the session home directory. Defaults to the home directory if not provided.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
-      },
       "UpdateToolboxRequest.name": {
         "name": "name",
         "in": "path",
@@ -19661,34 +19650,6 @@
         "schema": {
           "type": "string"
         }
-      },
-      "UploadSessionFileParams.agent_name": {
-        "name": "agent_name",
-        "in": "path",
-        "required": true,
-        "description": "The name of the agent.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "UploadSessionFileParams.agent_session_id": {
-        "name": "agent_session_id",
-        "in": "path",
-        "required": true,
-        "description": "The session ID.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "UploadSessionFileParams.path": {
-        "name": "path",
-        "in": "query",
-        "required": true,
-        "description": "The destination file path within the sandbox, relative to the session home directory.",
-        "schema": {
-          "type": "string"
-        },
-        "explode": false
       }
     },
     "schemas": {
