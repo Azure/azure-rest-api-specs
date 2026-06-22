@@ -1503,7 +1503,11 @@ using Microsoft.DataFactory;
 // LinkedService/Dataset/Activity types, so the standalone envelope models are redundant
 // public surface; keep them internal to preserve the GA-compatible public API.
 @@access(AmazonRdsForLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AmazonRdsForSqlServerLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  AmazonRdsForSqlServerLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(AmazonRedshiftLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(AmazonS3DatasetTypeProperties, Access.internal, "csharp");
 @@access(AppendVariableActivityTypeProperties, Access.internal, "csharp");
@@ -1511,24 +1515,56 @@ using Microsoft.DataFactory;
 @@access(AzureBlobDatasetTypeProperties, Access.internal, "csharp");
 @@access(AzureBlobFSDatasetTypeProperties, Access.internal, "csharp");
 @@access(AzureBlobFSLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureBlobStorageLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureDatabricksDetltaLakeLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  AzureBlobStorageLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  AzureDatabricksDetltaLakeLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(AzureDatabricksLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureDataExplorerLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureDataLakeAnalyticsLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  AzureDataExplorerLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  AzureDataLakeAnalyticsLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(AzureDataLakeStoreDatasetTypeProperties, Access.internal, "csharp");
-@@access(AzureDataLakeStoreLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureMLExecutePipelineActivityTypeProperties, Access.internal, "csharp");
+@@access(
+  AzureDataLakeStoreLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  AzureMLExecutePipelineActivityTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(AzureMLLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(AzureMLServiceLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(AzurePostgreSqlLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(AzureSearchLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(AzureSqlDatabaseLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  AzureSqlDatabaseLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(AzureSqlDWLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(AzureSqlMILinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(CassandraLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(CmdkeySetupTypeProperties, Access.internal, "csharp");
-@@access(CommonDataServiceForAppsLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  CommonDataServiceForAppsLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(ConcurLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(CosmosDbLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(CustomActivityTypeProperties, Access.internal, "csharp");
@@ -1548,7 +1584,11 @@ using Microsoft.DataFactory;
 @@access(HBaseLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(HdfsLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(HDInsightLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(HDInsightOnDemandLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  HDInsightOnDemandLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(HiveLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(HttpDatasetTypeProperties, Access.internal, "csharp");
 @@access(HttpLinkedServiceTypeProperties, Access.internal, "csharp");
@@ -1566,7 +1606,11 @@ using Microsoft.DataFactory;
 @@access(OdbcLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(Office365LinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(OracleLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(OracleServiceCloudLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  OracleServiceCloudLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(PhoenixLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(PostgreSqlV2LinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(PrestoLinkedServiceTypeProperties, Access.internal, "csharp");
@@ -1574,10 +1618,22 @@ using Microsoft.DataFactory;
 @@access(RestResourceDatasetTypeProperties, Access.internal, "csharp");
 @@access(RestServiceLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(SalesforceLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(SalesforceServiceCloudLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  SalesforceServiceCloudLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(SapBWLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(SapCloudForCustomerLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(SapCloudForCustomerResourceDatasetTypeProperties, Access.internal, "csharp");
+@@access(
+  SapCloudForCustomerLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
+@@access(
+  SapCloudForCustomerResourceDatasetTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(SapEccLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(SapEccResourceDatasetTypeProperties, Access.internal, "csharp");
 @@access(SapOdpLinkedServiceTypeProperties, Access.internal, "csharp");
@@ -1589,7 +1645,11 @@ using Microsoft.DataFactory;
 @@access(ServicePrincipalCredentialTypeProperties, Access.internal, "csharp");
 @@access(SetVariableActivityTypeProperties, Access.internal, "csharp");
 @@access(SftpServerLinkedServiceTypeProperties, Access.internal, "csharp");
-@@access(SharePointOnlineListLinkedServiceTypeProperties, Access.internal, "csharp");
+@@access(
+  SharePointOnlineListLinkedServiceTypeProperties,
+  Access.internal,
+  "csharp"
+);
 @@access(SnowflakeLinkedV2ServiceTypeProperties, Access.internal, "csharp");
 @@access(SparkLinkedServiceTypeProperties, Access.internal, "csharp");
 @@access(SqlServerBaseLinkedServiceTypeProperties, Access.internal, "csharp");
@@ -1607,4 +1667,3 @@ using Microsoft.DataFactory;
 @@access(WebTableDatasetTypeProperties, Access.internal, "csharp");
 @@access(XmlDatasetTypeProperties, Access.internal, "csharp");
 @@access(ZendeskLinkedServiceTypeProperties, Access.internal, "csharp");
-
