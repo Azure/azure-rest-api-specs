@@ -11,6 +11,7 @@ import "./KubernetesVersionProfile.tsp";
 import "./VmSkuProfile.tsp";
 import "./VirtualNetwork.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -20,6 +20,7 @@ import "./Project.tsp";
 import "./JobDefinition.tsp";
 import "./Connection.tsp";
 import "./JobRun.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
