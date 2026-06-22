@@ -60,7 +60,7 @@ namespace Microsoft.Compute;
 );
 @@clientName(
   DeallocateResourceOperationResponse.type,
-  "ResourceType",
+  "ResourceTypeName",
   "csharp"
 );
 @@clientName(
@@ -78,7 +78,7 @@ namespace Microsoft.Compute;
   "HibernateResourceOperationResult",
   "csharp"
 );
-@@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(HibernateResourceOperationResponse.type, "ResourceTypeName", "csharp");
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
@@ -89,7 +89,7 @@ namespace Microsoft.Compute;
   "StartResourceOperationResult",
   "csharp"
 );
-@@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 @@clientName(
   OperationErrorDetails.timeStamp,
@@ -102,7 +102,7 @@ namespace Microsoft.Compute;
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(DeleteResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(DeleteResourceOperationResponse.type, "ResourceTypeName", "csharp");
 @@clientName(
   CreateResourceOperationResponse,
   "CreateResourceOperationResult",
@@ -185,6 +185,13 @@ namespace Microsoft.Compute;
 );
 // Correct .NET casing for TimeZone.
 @@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
+
+// Fix SubscriptionId type on ResourceOperationDetails (string/uuid -> Guid?)
+@@alternateType(
+  ResourceOperationDetails.subscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
 
 @@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
 @@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
