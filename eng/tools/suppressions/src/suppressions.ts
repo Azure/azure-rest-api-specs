@@ -48,7 +48,7 @@ const suppressionSchema = z.array(
         rules: s.rules,
         subRules: s["sub-rules"],
         reason: s.reason,
-      } as Suppression;
+      };
     }),
 );
 

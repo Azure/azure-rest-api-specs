@@ -1017,3 +1017,108 @@ op regenerateKeyCustom(
 @@access(SkuChangeInfo, Access.public, "csharp");
 @@access(UserOwnedAmlWorkspace, Access.public, "csharp");
 @@access(UserOwnedStorage, Access.public, "csharp");
+
+// --- C# SDK review comment resolutions ---
+
+// Resource renames: add service context to generic names
+@@clientName(Compute, "CognitiveServicesCompute", "csharp");
+@@clientName(ComputeProperties, "CognitiveServicesComputeProperties", "csharp");
+@@clientName(Workbench, "CognitiveServicesWorkbench", "csharp");
+@@clientName(
+  WorkbenchProperties,
+  "CognitiveServicesWorkbenchProperties",
+  "csharp"
+);
+
+// Model renames: suffix fixes and generic name resolution
+@@clientName(
+  EvaluateDeploymentPoliciesRequest,
+  "EvaluateDeploymentPoliciesContent",
+  "csharp"
+);
+@@clientName(
+  EvaluateDeploymentPoliciesResponse,
+  "EvaluateDeploymentPoliciesResult",
+  "csharp"
+);
+@@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
+@@clientName(
+  ResourceIdentityType,
+  "CognitiveServicesComputeIdentityType",
+  "csharp"
+);
+@@clientName(Pool, "CognitiveServicesComputePool", "csharp");
+@@clientName(
+  ConnectivityEndpoints,
+  "CognitiveServicesComputeConnectivityEndpoints",
+  "csharp"
+);
+@@clientName(SshSettings, "CognitiveServicesComputeSshSettings", "csharp");
+@@clientName(SafetyProviderConfig, "RaiSafetyProviderSourceConfig", "csharp");
+
+// Property renames: boolean prefix and DateTimeOffset suffix conventions
+@@clientName(
+  AccountProperties.storedCompletionsDisabled,
+  "IsStoredCompletionsDisabled",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProvisioningDetails.lastOperationTimestamp,
+  "LastOperationOn",
+  "csharp"
+);
+@@clientName(SshSettings.adminEnabled, "IsAdminEnabled", "csharp");
+
+// Type changes: use standard ARM types for etag, location, identity
+@@alternateType(Compute.etag, eTag, "csharp");
+@@alternateType(Compute.location, azureLocation, "csharp");
+@@alternateType(
+  Compute.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(Workbench.etag, eTag, "csharp");
+@@alternateType(Workbench.location, azureLocation, "csharp");
+@@alternateType(
+  Workbench.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(ManagedComputeDeployment.etag, eTag, "csharp");
+@@alternateType(
+  ManagedComputeCapacityProperties.location,
+  azureLocation,
+  "csharp"
+);
+
+// Additional renames: add CognitiveServices prefix for consistency
+@@clientName(
+  ManagedComputeDeployment,
+  "CognitiveServicesManagedComputeDeployment",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProperties,
+  "CognitiveServicesManagedComputeDeploymentProperties",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentInfo,
+  "CognitiveServicesManagedComputeDeploymentInfo",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentProvisioningDetails,
+  "CognitiveServicesManagedComputeDeploymentProvisioningDetails",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeDeploymentRoutes,
+  "CognitiveServicesManagedComputeDeploymentRoutes",
+  "csharp"
+);
+@@clientName(
+  ComputeProvisioningState,
+  "CognitiveServicesComputeProvisioningState",
+  "csharp"
+);
