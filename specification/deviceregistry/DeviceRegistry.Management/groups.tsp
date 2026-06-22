@@ -55,10 +55,11 @@ model GroupMemberCountResponse {
 @doc("Query parameters for listing current members of a namespace group.")
 model GroupListMembersQueryParameters {
   @doc("""
-    Optional cap on the total number of group members to return across this list operation.
+    Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.
     """)
-  @query("top")
-  top?: int32;
+  @maxValue(1000)
+  @query("maxpagesize")
+  maxPageSize?: int32;
 
   @doc("Opaque continuation token from a previous listMembers response.")
   @query("skiptoken")
@@ -71,7 +72,7 @@ model GroupListMembersResult {
   @doc("The ARM resource IDs of the group members returned in this page.")
   members: GroupListMember[];
 
-  @doc("The URL to the next page of results, if more results remain within the requested top limit.")
+  @doc("The URL to the next page of results, if more results remain after the requested page.")
   nextLink?: string;
 }
 

@@ -5359,7 +5359,7 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "$ref": "#/parameters/GroupListMembersQueryParameters.top"
+            "$ref": "#/parameters/GroupListMembersQueryParameters.maxPageSize"
           },
           {
             "$ref": "#/parameters/GroupListMembersQueryParameters.skipToken"
@@ -9236,7 +9236,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URL to the next page of results, if more results remain within the requested top limit."
+          "description": "The URL to the next page of results, if more results remain after the requested page."
         }
       },
       "required": [
@@ -14258,6 +14258,17 @@
     }
   },
   "parameters": {
+    "GroupListMembersQueryParameters.maxPageSize": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "maximum": 1000,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "maxPageSize"
+    },
     "GroupListMembersQueryParameters.skipToken": {
       "name": "skiptoken",
       "in": "query",
@@ -14266,15 +14277,6 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "skipToken"
-    },
-    "GroupListMembersQueryParameters.top": {
-      "name": "top",
-      "in": "query",
-      "description": "Optional cap on the total number of group members to return across this list operation.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
     }
   }
 }
