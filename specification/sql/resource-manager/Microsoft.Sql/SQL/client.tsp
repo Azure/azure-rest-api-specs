@@ -879,6 +879,16 @@ using Microsoft.Sql;
 @@clientName(AuthMetadataLookupModes.AzureAD, "Aad", "csharp");
 @@clientName(ClientClassificationSource.MIP, "Mip", "csharp");
 @@clientName(DataMaskingRuleProperties.id, "RuleId", "csharp");
+@@clientName(
+  DataMaskingRuleProperties.ruleState,
+  "DataMaskingRuleState",
+  "csharp"
+);
+@@clientName(
+  DataMaskingRuleProperties.maskingFunction,
+  "DataMaskingFunction",
+  "csharp"
+);
 @@clientName(ReplicaSynchronizationHealth.NOT_HEALTHY, "NotHealthy", "csharp");
 @@clientName(
   ManagedInstanceVcoresCapability.supportedMemoryLimitsMB,
@@ -1808,8 +1818,35 @@ union SqlNameAvailabilityResourceType {
 );
 @@clientName(LegacyDataMaskingFunction.CCN, "Ccn", "csharp");
 @@clientName(LegacyDataMaskingFunction.SSN, "Ssn", "csharp");
+// Rename the extensible `DataMaskingFunction` union and `DataMaskingRuleState` union to distinct names so the legacy fixed-enum types `DataMaskingFunction` and `DataMaskingRuleState` can be preserved in custom code for binary back-compat.
+@@clientName(DataMaskingFunction, "SqlDataMaskingFunction", "csharp");
 @@clientName(DataMaskingFunction.CCN, "Ccn", "csharp");
 @@clientName(DataMaskingFunction.SSN, "Ssn", "csharp");
+@@clientName(DataMaskingRuleState, "SqlDataMaskingRuleState", "csharp");
+@@usage(
+  DataMaskingFunction,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataMaskingRuleState,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@access(
+  DataMaskingFunction,
+  Azure.ClientGenerator.Core.Access.public,
+  "csharp"
+);
+@@access(
+  DataMaskingRuleState,
+  Azure.ClientGenerator.Core.Access.public,
+  "csharp"
+);
 @@clientName(RestorePointType.CONTINUOUS, "Continuous", "csharp");
 @@clientName(RestorePointType.DISCRETE, "Discrete", "csharp");
 
