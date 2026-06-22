@@ -135,6 +135,10 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@clientName(Python2Package, "AutomationAccountPython2Package", "csharp");
+@@clientName(Package, "AutomationPackage", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Use an Automation-scoped C# resource name for the Package child resource."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Use an Automation-scoped C# resource name for the Package child resource."
+@@clientOption(Packages.get, "resource-name", "AutomationPackage", "csharp");
 @@clientName(Certificate, "AutomationCertificate", "csharp");
 @@clientName(Connection, "AutomationConnection", "csharp");
 @@clientName(ConnectionType, "AutomationConnectionType", "csharp");
@@ -401,12 +405,12 @@ using TypeSpec.Rest;
 @@clientName(ModuleUpdateParameters, "AutomationAccountModulePatch", "csharp");
 @@clientName(
   PythonPackageCreateParameters,
-  "AutomationAccountPython2PackageCreateOrUpdateContent",
+  "AutomationPythonPackageCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   PythonPackageUpdateParameters,
-  "AutomationAccountPython2PackagePatch",
+  "AutomationPythonPackagePatch",
   "csharp"
 );
 @@clientName(Statistics, "AutomationAccountStatistics", "csharp");
@@ -559,7 +563,17 @@ using TypeSpec.Rest;
 );
 @@clientName(
   PackageCreateOrUpdateParameters,
-  "PackageCreateOrUpdateContent",
+  "AutomationPackageCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(PackageCreateOrUpdateParameters.allOf, "TrackedResource", "csharp");
+@@clientName(PackageUpdateParameters, "AutomationPackagePatch", "csharp");
+@@clientName(PackageUpdateParameters.allOf, "TrackedResource", "csharp");
+@@clientName(PackageProperties.allOf, "ResourceSystemData", "csharp");
+@@clientName(PackageErrorInfo, "AutomationPackageErrorInfo", "csharp");
+@@clientName(
+  PackageProvisioningState,
+  "AutomationPackageProvisioningState",
   "csharp"
 );
 @@clientName(
