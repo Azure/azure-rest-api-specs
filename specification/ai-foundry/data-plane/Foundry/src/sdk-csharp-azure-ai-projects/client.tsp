@@ -14,6 +14,9 @@ import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../toolboxes/models.tsp";
+import "../agents/models.tsp";
+import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
