@@ -49,7 +49,7 @@ TypeSpec-only changes (no namespace modification) do **not** reset approval.
 | `namespace-approved-all`    | Architect (mgmt) | Shortcut: approves all pending languages |
 | `Mgmt`                      | Bot              | PR is management plane                   |
 
-Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`, `cpp`, `rust`
+Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`
 
 ## Authorized Approvers
 
@@ -64,8 +64,6 @@ Defined in [`.github/namespace-approvers.yml`](../.github/namespace-approvers.ym
 | Python               | @xirzec, @kashifkhan          |
 | TypeScript           | @xirzec, @maorleger           |
 | Go                   | @jhendrixMSFT                 |
-| C++                  | @LarryOsterman                |
-| Rust                 | @heaths, @LarryOsterman       |
 | Mgmt (all languages) | @ArthurMa1978, @m-nash        |
 
 <!-- cspell:enable -->

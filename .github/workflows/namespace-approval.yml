@@ -43,7 +43,7 @@ jobs:
             await detectNamespaces({ github, context, core });
 
   validate-approval:
-    if: github.event.action == 'labeled'
+    if: github.event.action == 'labeled' || github.event.action == 'unlabeled'
     name: Validate Namespace Approval
 
     runs-on: ubuntu-24.04

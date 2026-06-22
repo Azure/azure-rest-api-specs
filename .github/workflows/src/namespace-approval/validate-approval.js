@@ -8,55 +8,113 @@ import yaml from "js-yaml";
  */
 
 /**
- * Validate that a namespace approval label was added by an authorized approver.
- *
- * @param {import("@actions/github-script").AsyncFunctionArguments} args
+ * @typedef {Object} ValidateContext
+ * @property {import("@actions/github-script").AsyncFunctionArguments["github"]} github
+ * @property {import("@actions/github-script").AsyncFunctionArguments["context"]} context
+ * @property {import("@actions/github-script").AsyncFunctionArguments["core"]} core
+ * @property {ApproversConfig} approversConfig
+ * @property {string} targetLabel
+ * @property {string} actor
+ * @property {number} prNumber
+ * @property {boolean} isMgmt
  */
-export default async function validateApproval({ github, context, core }) {
-  /** @type {ApproversConfig} */
-  let approversConfig;
-  try {
-    const content = readFileSync(".github/namespace-approvers.yml", "utf8");
-    approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
-  } catch (e) {
-    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(e));
+
+/** @type {string[]} */
+const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
+
+/**
+ * Get all authorized approvers as a flat list.
+ *
+ * @param {ApproversConfig} approversConfig
+ * @returns {string[]}
+ */
+function getAllApprovers(approversConfig) {
+  const mgmtApprovers = approversConfig["management-plane"]?.all ?? [];
+  return [
+    ...new Set([...mgmtApprovers, ...Object.values(approversConfig["data-plane"] ?? {}).flat()]),
+  ];
+}
+
+/**
+ * Handle unlabeled event: re-apply pending labels if removed by unauthorized user.
+ *
+ * @param {ValidateContext} ctx
+ */
+async function handleUnlabeled({
+  github,
+  context,
+  core,
+  approversConfig,
+  targetLabel,
+  actor,
+  prNumber,
+}) {
+  // Only guard namespace-related labels
+  if (!targetLabel.endsWith("-namespace-pending") && targetLabel !== "namespace-review-required") {
+    core.info(`${targetLabel} is not a namespace label, skipping`);
     return;
   }
 
-  const payload = /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent} */ (
-    context.payload
-  );
+  // Allow bots and authorized approvers to remove labels
+  if (ALLOWED_BOT_LOGINS.includes(actor)) {
+    core.info(`${actor} is a trusted bot, allowing label removal`);
+    return;
+  }
 
-  const prNumber = payload.pull_request.number;
   /** @type {string[]} */
-  const labels = payload.pull_request.labels.map((l) => l.name);
-
-  if (!labels.includes("namespace-review-required")) {
-    core.info("No namespace review, skipping");
+  const allApprovers = getAllApprovers(approversConfig);
+  if (allApprovers.includes(actor)) {
+    core.info(`${actor} is an authorized approver, allowing label removal`);
     return;
   }
 
-  const addedLabel = payload.label.name;
-  const isMgmt = labels.includes("Mgmt");
-  const actor = payload.sender.login;
+  // Unauthorized removal — re-apply the label
+  core.warning(`${actor} is not authorized to remove ${targetLabel}, re-applying`);
 
+  await github.rest.issues.addLabels({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    issue_number: prNumber,
+    labels: [targetLabel],
+  });
+
+  await github.rest.issues.createComment({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    issue_number: prNumber,
+    body: `⚠️ @${actor} is not authorized to remove \`${targetLabel}\`. Only authorized namespace approvers can remove namespace labels.\n\nLabel has been re-applied.`,
+  });
+}
+
+/**
+ * Handle labeled event: validate approval labels from authorized approvers.
+ *
+ * @param {ValidateContext & { labels: string[] }} ctx
+ */
+async function handleLabeled({
+  github,
+  context,
+  core,
+  approversConfig,
+  targetLabel,
+  actor,
+  prNumber,
+  isMgmt,
+  labels,
+}) {
   /** @type {string[]} */
   let langsToApprove;
 
-  if (addedLabel === "namespace-approved-all") {
-    // Shortcut: approve all pending languages at once
-    const mgmtApprovers = approversConfig["management-plane"]?.all ?? [];
+  if (targetLabel === "namespace-approved-all") {
     /** @type {string[]} */
-    const allApprovers = [
-      ...new Set([...mgmtApprovers, ...Object.values(approversConfig["data-plane"] ?? {}).flat()]),
-    ];
+    const allApprovers = getAllApprovers(approversConfig);
 
     if (!allApprovers.includes(actor)) {
       await github.rest.issues.removeLabel({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: prNumber,
-        name: addedLabel,
+        name: targetLabel,
       });
       await github.rest.issues.createComment({
         owner: context.repo.owner,
@@ -71,9 +129,9 @@ export default async function validateApproval({ github, context, core }) {
       .filter((l) => l.endsWith("-namespace-pending"))
       .map((l) => l.replace("-namespace-pending", ""));
   } else {
-    const match = addedLabel.match(/^(\w+)-namespace-approved$/);
+    const match = targetLabel.match(/^(\w+)-namespace-approved$/);
     if (!match) {
-      core.info(`${addedLabel} is not a namespace approval label`);
+      core.info(`${targetLabel} is not a namespace approval label`);
       return;
     }
 
@@ -91,13 +149,13 @@ export default async function validateApproval({ github, context, core }) {
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: prNumber,
-        name: addedLabel,
+        name: targetLabel,
       });
       await github.rest.issues.createComment({
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: prNumber,
-        body: `⚠️ @${actor} is not authorized to approve **${lang}** namespace. Authorized approvers: ${authorizedList.join(", ")}.\n\nLabel \`${addedLabel}\` has been removed.`,
+        body: `⚠️ @${actor} is not authorized to approve **${lang}** namespace. Authorized approvers: ${authorizedList.join(", ")}.\n\nLabel \`${targetLabel}\` has been removed.`,
       });
       return;
     }
@@ -120,7 +178,7 @@ export default async function validateApproval({ github, context, core }) {
       // label may not exist
     }
 
-    if (addedLabel === "namespace-approved-all") {
+    if (targetLabel === "namespace-approved-all") {
       const approvedLabel = `${lang}-namespace-approved`;
       try {
         await github.rest.issues.getLabel({
@@ -217,4 +275,66 @@ export default async function validateApproval({ github, context, core }) {
       body: "## ✅ Namespace Approved\n\nAll required namespace approvals received. This PR is clear to merge from a namespace perspective.",
     });
   }
+}
+
+/**
+ * Validate namespace label changes by authorized approvers.
+ * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
+ *
+ * @param {import("@actions/github-script").AsyncFunctionArguments} args
+ */
+export default async function validateApproval({ github, context, core }) {
+  /** @type {ApproversConfig} */
+  let approversConfig;
+  try {
+    const content = readFileSync(".github/namespace-approvers.yml", "utf8");
+    approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
+  } catch (e) {
+    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(e));
+    return;
+  }
+
+  const payload = /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent} */ (
+    context.payload
+  );
+
+  const prNumber = payload.pull_request.number;
+  /** @type {string[]} */
+  const labels = payload.pull_request.labels.map((l) => l.name);
+  const targetLabel = payload.label.name;
+  const actor = payload.sender.login;
+  const isMgmt = labels.includes("Mgmt");
+
+  // Handle unlabeled: guard against unauthorized removal of pending/required labels
+  if (payload.action === "unlabeled") {
+    return await handleUnlabeled({
+      github,
+      context,
+      core,
+      approversConfig,
+      targetLabel,
+      actor,
+      prNumber,
+      isMgmt,
+    });
+  }
+
+  // Skip if no namespace review is required
+  if (!labels.includes("namespace-review-required")) {
+    core.info("No namespace review, skipping");
+    return;
+  }
+
+  // Handle labeled: validate approval labels
+  return await handleLabeled({
+    github,
+    context,
+    core,
+    approversConfig,
+    targetLabel,
+    actor,
+    prNumber,
+    isMgmt,
+    labels,
+  });
 }
