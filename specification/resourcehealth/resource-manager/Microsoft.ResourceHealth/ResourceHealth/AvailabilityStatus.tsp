@@ -57,7 +57,7 @@ interface AvailabilityStatuses {
   @tag("AvailabilityStatuses")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
   @get
-  @route("/{resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current")
+  @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current")
   getByResource(
     /** The resource URI */
     @path
@@ -166,7 +166,7 @@ interface ChildAvailabilityStatuses {
   @tag("ChildAvailabilityStatuses")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
   @get
-  @route("/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current")
+  @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current")
   getByResource(
     /** The resource URI */
     @path
