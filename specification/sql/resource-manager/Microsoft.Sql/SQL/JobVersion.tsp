@@ -57,7 +57,7 @@ alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("versions")
     @key
-    @Azure.ClientGenerator.Core.alternateType(string, "csharp") // The jobVersion is name of the resource JobVersion which must be a string, but the swagger defines it as int32, so we need to use alternateType to make it backwards compatible with the swagger definition. Make this csharp only because it's the only language that stricktly forces the type of the resource name to be string.
+    @Azure.ClientGenerator.Core.alternateType(string, "csharp") // The jobVersion is name of the resource JobVersion which must be a string, but the swagger defines it as int32, so we need to use alternateType to make it backwards compatible with the swagger definition. Make this csharp only because it's the only language that forces the type of the resource name to be string.
     jobVersion: int32;
   }
 >;
