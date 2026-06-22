@@ -294,9 +294,10 @@ export default async function validateApproval({ github, context, core }) {
     return;
   }
 
-  const payload = /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent} */ (
-    context.payload
-  );
+  const payload =
+    /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent | import("@octokit/webhooks-types").PullRequestUnlabeledEvent} */ (
+      context.payload
+    );
 
   const prNumber = payload.pull_request.number;
   /** @type {string[]} */

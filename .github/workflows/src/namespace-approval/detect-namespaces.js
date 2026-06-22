@@ -2,6 +2,7 @@ import { execSync } from "child_process";
 import { existsSync, readFileSync, rmSync } from "fs";
 import yaml from "js-yaml";
 import { dirname, join } from "path";
+import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
 /**
  * @typedef {Object} ApproversConfig
@@ -284,13 +285,35 @@ export default async function detectNamespaces({ github, context, core }) {
     return approversConfig["data-plane"]?.[lang] ?? ["TBD"];
   };
 
+  // Validate namespace format against rules
+  const formatRules = loadFormatRules(core);
+  /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
+  const formatResults = {};
+  if (formatRules) {
+    for (const [lang, ns] of Object.entries(namespacesFound)) {
+      formatResults[lang] = validateNamespaceFormat(lang, ns, formatRules);
+    }
+  }
+
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
   const baseRef = payload.pull_request.base.ref;
   let body = `## Namespace Review Required\n\n**Plane:** ${planeType}\n\n`;
-  body += `| Language | Proposed Namespace | Status | Approvers |\n`;
-  body += `|----------|-------------------|--------|----------|\n`;
+  body += `| Language | Proposed Namespace | Format | Status | Approvers |\n`;
+  body += `|----------|-------------------|--------|--------|----------|\n`;
   for (const [lang, ns] of Object.entries(namespacesFound)) {
-    body += `| ${lang} | \`${ns}\` | ⏳ Pending | ${getApprovers(lang).join(", ")} |\n`;
+    const fmt = formatResults[lang];
+    const formatStatus = !fmt ? "—" : fmt.valid ? "✅" : `⚠️ Invalid`;
+    body += `| ${lang} | \`${ns}\` | ${formatStatus} | ⏳ Pending | ${getApprovers(lang).join(", ")} |\n`;
+  }
+
+  // Add format warnings if any
+  const formatErrors = Object.values(formatResults).filter((r) => !r.valid);
+  if (formatErrors.length > 0) {
+    body += `\n> **⚠️ Format issues detected:**\n`;
+    for (const err of formatErrors) {
+      body += `> - **${err.language}:** ${err.error}\n`;
+    }
+    body += `>\n> _Format validation does not block approval but should be reviewed._\n`;
   }
   body += `\n**How to approve:**\n`;
   body += `- Per language: apply \`<language>-namespace-approved\` label\n`;
