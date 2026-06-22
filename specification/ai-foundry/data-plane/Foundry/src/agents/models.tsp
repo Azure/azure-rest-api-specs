@@ -610,7 +610,7 @@ model ProtocolConfiguration {
   responses?: ResponsesProtocolConfiguration;
 
   @doc("Configuration for the A2A protocol.")
-  a2a?: A2aProtocolConfiguration;
+  a2a?: A2AProtocolConfiguration;
 
   @doc("Configuration for the MCP protocol.")
   mcp?: McpProtocolConfiguration;
@@ -632,7 +632,7 @@ model ActivityProtocolConfiguration {
 model ResponsesProtocolConfiguration {}
 
 @doc("Configuration specific to the A2A protocol.")
-model A2aProtocolConfiguration {}
+model A2AProtocolConfiguration {}
 
 @doc("Configuration specific to the MCP protocol.")
 model McpProtocolConfiguration {}
