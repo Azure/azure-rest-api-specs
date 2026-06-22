@@ -14,7 +14,11 @@ using Microsoft.DevCenter;
 
 @@clientName(Microsoft.DevCenter.DevCenterSku, "SkuInfo", "go");
 
-@@clientName(Microsoft.DevCenter.UserRoleAssignment, "UserRoleAssignmentValue");
+@@clientName(
+  Microsoft.DevCenter.UserRoleAssignment,
+  "UserRoleAssignmentValue",
+  "!autorest"
+);
 
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
@@ -542,17 +546,17 @@ using Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AllowedEnvironmentType.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   AttachedNetworkConnection.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Catalog.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -562,7 +566,7 @@ using Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   DevBoxDefinition.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -572,27 +576,27 @@ using Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   DevCenter.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   EnvironmentDefinition.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   EnvironmentType.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Gallery.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   HealthCheckStatusDetails.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -609,19 +613,22 @@ using Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ImageVersion.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   NetworkConnection.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Pool.properties,
+  "csharp,javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ProjectEnvironmentType.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -631,12 +638,12 @@ using Microsoft.DevCenter;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Project.properties,
-  "csharp"
+  "csharp,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Schedule.properties,
-  "csharp"
+  "csharp,javascript"
 );
 
 @@alternateType(

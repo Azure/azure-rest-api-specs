@@ -52,6 +52,18 @@ model BrokerProperties {
   @doc("This setting controls whether Kubernetes CPU resource limits are requested. Increasing the number of replicas or workers proportionally increases the amount of CPU resources requested. If this setting is enabled and there are insufficient CPU resources, an error will be emitted.")
   generateResourceLimits?: GenerateResourceLimits;
 
+  @doc("""
+      Handling of high-priority messages in the event that regular-priority messages are being backpressured.
+    
+      When set to "Accept", the broker continues to accept high-priority messages even while regular-priority messages are rejected due to backpressure.
+    
+      When set to "Reject", backpressure also affects high-priority messages.
+    
+      Defaults to "Accept".
+    """)
+  @added(Versions.`2026-07-01`)
+  highPriorityMessagesBackpressureHandling?: HighPriorityMessagesBackpressureHandling;
+
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Memory profile of Broker.")
   memoryProfile?: BrokerMemoryProfile = BrokerMemoryProfile.Medium;
@@ -493,6 +505,18 @@ union OperatorValues {
 model GenerateResourceLimits {
   @doc("The toggle to enable/disable cpu resource limits.")
   cpu?: OperationalMode = Enabled;
+}
+
+@doc("Handling of high-priority messages during backpressure state.")
+@added(Versions.`2026-07-01`)
+union HighPriorityMessagesBackpressureHandling {
+  string,
+
+  @doc("When the broker rejects regular-priority messages due to backpressure, it continues to accept high-priority messages.")
+  Accept: "Accept",
+
+  @doc("When the broker rejects regular-priority messages due to backpressure, it also rejects high-priority messages.")
+  Reject: "Reject",
 }
 
 @doc("Cert Manager Cert properties")

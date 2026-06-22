@@ -2134,9 +2134,9 @@
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge": {
       "post": {
-        "operationId": "ScheduledEvent_Acknowledge",
-        "summary": "Post Scheduled Event Acknowledgement",
-        "description": "Post Scheduled Event Acknowledgement",
+        "operationId": "ScheduledEvents_Acknowledge",
+        "summary": "Post ScheduledEvents Acknowledgement",
+        "description": "Post ScheduledEvents Acknowledgement",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2164,7 +2164,7 @@
           {
             "name": "scheduledEventId",
             "in": "path",
-            "description": "Scheduled Event Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+            "description": "ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
             "required": true,
             "type": "string"
           }
@@ -2173,7 +2173,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ScheduledEventApproveResponse"
+              "$ref": "#/definitions/ScheduledEventsApproveResponse"
             }
           },
           "default": {
@@ -2184,7 +2184,7 @@
           }
         },
         "x-ms-examples": {
-          "ScheduledEvents_Acknowledge": {
+          "Post ScheduledEvents Acknowledgement": {
             "$ref": "./examples/ScheduledEvents_Acknowledge.json"
           }
         }
@@ -2697,9 +2697,9 @@
         }
       }
     },
-    "ScheduledEventApproveResponse": {
+    "ScheduledEventsApproveResponse": {
       "type": "object",
-      "description": "Response of scheduled event acknowledge",
+      "description": "Response of ScheduledEvents acknowledge",
       "properties": {
         "value": {
           "type": "string",

@@ -194,12 +194,12 @@ using Azure.ResourceManager;
 @@clientName(
   RequestSchemeMatchValue,
   "RequestSchemeMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(
   IsDeviceMatchValue,
   "IsDeviceMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
@@ -207,7 +207,7 @@ using Azure.ResourceManager;
 @@clientName(
   RequestMethodMatchValue,
   "RequestMethodMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(CheckHostNameAvailabilityInput.hostName, "hostname", "java");
 @@clientName(AFDDomainProperties.hostName, "hostname", "java");
@@ -1487,3 +1487,4 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
+@@clientName(CreatedByType, "IdentityType", "javascript");

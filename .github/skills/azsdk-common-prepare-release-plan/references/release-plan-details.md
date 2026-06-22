@@ -8,18 +8,8 @@ Collect these details (do not use temporary values):
 
 - **Service Tree ID**: GUID format - confirm with user
 - **Product Service Tree ID**: GUID format - confirm with user
-- **Expected Release Timeline**: "Month YYYY" format
-- **API Release Type** (required): One of "Private Preview", "Public Preview", or "GA"
-- **SDK Release Type** (optional): "beta" or "stable". Defaults to "beta" for Private Preview and Public Preview, "stable" for GA.
-
-## API Release Type and Spec PR Validation
-
-When creating or updating a release plan with a spec PR:
-
-- **Private Preview**: Spec PR must be in `azure-rest-api-specs-pr` (private repo). A public spec PR in `azure-rest-api-specs` is NOT allowed.
-- **Public Preview** or **GA**: Spec PR must be in `azure-rest-api-specs` (public repo). A private spec PR in `azure-rest-api-specs-pr` is NOT allowed.
-
-If user provides an invalid combination, inform them of the correct pairing.
+- **Expected Release Timeline**: "Month YYYY" format (e.g. "June 2026"). Do NOT use "2026-06" or "06/2026" — these are invalid.
+- **SDK Release Type**: "beta" (preview) or "stable" (GA)
 
 ## SDK Details Update
 

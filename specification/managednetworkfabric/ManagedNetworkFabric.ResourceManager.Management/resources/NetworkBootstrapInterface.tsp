@@ -1,21 +1,18 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the NetworkBootstrapInterface resource.")
 @parentResource(NetworkBootstrapDevice)
-@Azure.ResourceManager.Private.armResourceInternal(
-  NetworkBootstrapInterfaceProperties
-)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkBootstrapInterface
-  extends Azure.ResourceManager.Foundations.ProxyResource {
+  is Azure.ResourceManager.ProxyResource<
+    NetworkBootstrapInterfaceProperties,
+    false
+  > {
   @doc("Name of the Network Bootstrap Interface.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -23,12 +20,12 @@ model NetworkBootstrapInterface
   @segment("networkBootstrapInterfaces")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkBootstrapInterface properties")
-  properties: NetworkBootstrapInterfaceProperties;
 }
 
+@@doc(
+  NetworkBootstrapInterface.properties,
+  "The NetworkBootstrapInterface properties"
+);
 @armResourceOperations
 @added(Versions.v2025_07_15)
 interface NetworkBootstrapInterfaces {
