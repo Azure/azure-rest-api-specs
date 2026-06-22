@@ -35,18 +35,18 @@ Considered and declined: none
 
 ## Field reference
 
-| Field                 | Required?          | Default when absent          | Notes                                                                                      |
-| --------------------- | ------------------ | ---------------------------- | ------------------------------------------------------------------------------------------ |
-| PR                    | **Yes**            | —                            | Full GitHub URL or `owner/repo#number`.                                                    |
-| Session SHA           | **Yes**            | —                            | Full 40-char commit SHA pinned at Reviewer Step 1.                                         |
-| Iteration             | No                 | `1`                          | `1` through `3`.                                                                           |
-| Graphs                | No                 | `false`                      | `true` = Mermaid graphs in report; full graph-diff. `false` = graph N/A.                  |
-| Files reviewed        | No                 | Derived from findings        | Comma-separated or line-separated workspace-relative paths.                                |
-| Previous version      | No                 | `None - new service`         | Path and SHA/ref used for [NEW]/[EXISTING] classification.                                 |
-| Prior fail sets       | No                 | Empty (none)                 | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.                   |
-| Considered and declined | No               | Empty (none)                 | Candidates the Reviewer chose not to promote, with one-line rationales.                    |
-| Step 6 findings report  | **Yes**          | —                            | Verbatim, under the `## Step 6 findings report` heading.                                   |
-| Step 5.5 reconciliation plan | No          | `reconciliation skipped`     | Verbatim, under the `## Step 5.5 reconciliation plan` heading, or the sentinel.            |
+| Field                        | Required? | Default when absent      | Notes                                                                           |
+| ---------------------------- | --------- | ------------------------ | ------------------------------------------------------------------------------- |
+| PR                           | **Yes**   | —                        | Full GitHub URL or `owner/repo#number`.                                         |
+| Session SHA                  | **Yes**   | —                        | Full 40-char commit SHA pinned at Reviewer Step 1.                              |
+| Iteration                    | No        | `1`                      | `1` through `3`.                                                                |
+| Graphs                       | No        | `false`                  | `true` = Mermaid graphs in report; full graph-diff. `false` = graph N/A.        |
+| Files reviewed               | No        | Derived from findings    | Comma-separated or line-separated workspace-relative paths.                     |
+| Previous version             | No        | `None - new service`     | Path and SHA/ref used for [NEW]/[EXISTING] classification.                      |
+| Prior fail sets              | No        | Empty (none)             | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.        |
+| Considered and declined      | No        | Empty (none)             | Candidates the Reviewer chose not to promote, with one-line rationales.         |
+| Step 6 findings report       | **Yes**   | —                        | Verbatim, under the `## Step 6 findings report` heading.                        |
+| Step 5.5 reconciliation plan | No        | `reconciliation skipped` | Verbatim, under the `## Step 5.5 reconciliation plan` heading, or the sentinel. |
 
 ## Compact-mode template (iterations 2 and 3)
 
