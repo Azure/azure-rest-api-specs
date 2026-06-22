@@ -62,9 +62,11 @@ interface ProjectEnvironmentTypes {
 @@minLength(ProjectEnvironmentType.name, 3);
 @@doc(ProjectEnvironmentType.name, "The name of the environment type.");
 @@doc(ProjectEnvironmentType.properties, "Properties of an environment type.");
-@@doc(ProjectEnvironmentTypes.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectEnvironmentTypes.createOrUpdate::parameters.resource,
   "Represents a Project Environment Type."
 );
-@@doc(ProjectEnvironmentTypes.update::parameters.properties,
+@@doc(
+  ProjectEnvironmentTypes.update::parameters.properties,
   "Updatable project environment type properties."
 );

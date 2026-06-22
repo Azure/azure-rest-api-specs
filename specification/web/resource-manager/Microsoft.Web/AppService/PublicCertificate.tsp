@@ -55,7 +55,8 @@ interface PublicCertificateOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PublicCertificates {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
@@ -126,7 +127,8 @@ interface PublicCertificateOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PublicCertificateOperationGroup {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
@@ -169,12 +171,15 @@ interface PublicCertificateOperationGroup {
 }
 
 @@doc(PublicCertificate.name, "Public certificate name.");
-@@doc(PublicCertificate.properties,
+@@doc(
+  PublicCertificate.properties,
   "PublicCertificate resource specific properties"
 );
-@@doc(PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
+@@doc(
+  PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
   "Public certificate details. This is the JSON representation of a PublicCertificate object."
 );
-@@doc(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
+@@doc(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
   "Public certificate details. This is the JSON representation of a PublicCertificate object."
 );

@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustoRgTest",
+    "clusterName": "kustoCluster",
+    "databaseName": "KustoDatabase8",
+    "api-version": "2025-02-14",
+    "parameters": {
+      "kind": "ReadWrite",
+      "properties": {
+        "keyVaultProperties": {
+          "keyVaultUri": "https://mydbvault.vault.azure.net",
+          "keyName": "myDatabaseCMKKey",
+          "keyVersion": "87654321-8765-4321-8765-876543218765",
+          "userIdentity": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoDatabaseIdentity",
+          "federatedIdentityClientId": "22222222-3333-4444-5555-666666666666"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8",
+        "name": "kustoCluster/KustoDatabase8",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "kind": "ReadWrite",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://mydbvault.vault.azure.net",
+            "keyName": "myDatabaseCMKKey",
+            "keyVersion": "87654321-8765-4321-8765-876543218765",
+            "userIdentity": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoDatabaseIdentity",
+            "federatedIdentityClientId": "22222222-3333-4444-5555-666666666666"
+          }
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2025-02-14"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8",
+        "name": "kustoCluster/KustoDatabase8",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "kind": "ReadWrite",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Running",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://mydbvault.vault.azure.net",
+            "keyName": "myDatabaseCMKKey",
+            "keyVersion": "87654321-8765-4321-8765-876543218765",
+            "userIdentity": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoDatabaseIdentity",
+            "federatedIdentityClientId": "22222222-3333-4444-5555-666666666666"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789098/providers/Microsoft.Kusto/locations/westus/operationResults/742bef43-608b-4b58-ba96-6f7a32ec5f0f?api-version=2025-02-14"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.Kusto/Clusters/kustoCluster/Databases/KustoDatabase8",
+        "name": "kustoCluster/KustoDatabase8",
+        "type": "Microsoft.Kusto/Clusters/Databases",
+        "kind": "ReadWrite",
+        "location": "westus",
+        "properties": {
+          "provisioningState": "Running",
+          "keyVaultProperties": {
+            "keyVaultUri": "https://mydbvault.vault.azure.net",
+            "keyName": "myDatabaseCMKKey",
+            "keyVersion": "87654321-8765-4321-8765-876543218765",
+            "userIdentity": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustoRgTest/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kustoDatabaseIdentity",
+            "federatedIdentityClientId": "22222222-3333-4444-5555-666666666666"
+          }
+        }
+      }
+    }
+  }
+}

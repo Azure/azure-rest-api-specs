@@ -2,18 +2,15 @@ import "../models/common.tsp";
 import "../models/NetworkMonitor.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The NetworkMonitor resource definition.")
 @added(Versions.v2024_06_15_preview)
-@Azure.ResourceManager.Private.armResourceInternal(NetworkMonitorProperties)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
+model NetworkMonitor
+  is Azure.ResourceManager.TrackedResource<NetworkMonitorProperties, false> {
   @doc("Name of the Network Monitor.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,12 +18,9 @@ model NetworkMonitor extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("networkMonitors")
   @visibility(Lifecycle.Read)
   name: string;
-
-  /** The NetworkFabric Properties */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  properties: NetworkMonitorProperties;
 }
 
+@@doc(NetworkMonitor.properties, "The NetworkMonitor properties.");
 @armResourceOperations
 @added(Versions.v2024_06_15_preview)
 interface NetworkMonitors {
@@ -57,6 +51,7 @@ interface NetworkMonitors {
   >;
 }
 
-@@doc(NetworkMonitors.updateAdministrativeState::parameters.body,
+@@doc(
+  NetworkMonitors.updateAdministrativeState::parameters.body,
   "Request payload."
 );

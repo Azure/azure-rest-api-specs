@@ -42,7 +42,7 @@ options:
     rename-model:
       DatabaseAccountGetPropertiesDatabaseAccountOfferType: DatabaseAccountOfferType
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos/v4"
     service-dir: "sdk/resourcemanager/cosmos"
     emitter-output-dir: "{output-dir}/{service-dir}/armcosmos"
     generate-fakes: true
@@ -51,6 +51,10 @@ options:
     flavor: azure
     generate-samples: true
     head-as-boolean: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    enable-wire-path-attribute: true
+    namespace: "Azure.ResourceManager.CosmosDB"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

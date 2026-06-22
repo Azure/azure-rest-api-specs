@@ -21,6 +21,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./RedisCacheAccessPolicy.tsp";
 import "./RedisCacheAccessPolicyAssignment.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,6 +48,11 @@ enum Versions {
    * The 2024-11-01 API version.
    */
   v2024_11_01: "2024-11-01",
+
+  /**
+   * The 2025-08-01-preview API version.
+   */
+  v2025_08_01_preview: "2025-08-01-preview",
 }
 
 interface Operations

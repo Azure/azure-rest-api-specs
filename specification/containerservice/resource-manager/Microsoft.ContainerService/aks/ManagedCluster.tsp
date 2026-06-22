@@ -323,7 +323,7 @@ interface ManagedClusters {
        * ignore-pod-disruption-budget=true to delete those pods on a node without considering Pod Disruption Budget
        */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-      @added(Versions.v2026_01_02_preview)
+      @added(Versions.v2026_04_02_preview)
       @query("ignore-pod-disruption-budget")
       `ignore-pod-disruption-budget`?: boolean;
     }
@@ -572,7 +572,7 @@ interface ManagedClusters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
   @tag("ManagedClusters")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_04_02_preview)
   rebalanceLoadBalancers is ArmResourceActionAsync<
     ManagedCluster,
     RebalanceLoadBalancersRequestBody,
@@ -625,7 +625,7 @@ interface ManagedClusters {
   @list
   @get
   @action("operations")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_04_02_preview)
   operationStatusResultList is ArmResourceActionSync<
     ManagedCluster,
     void,
@@ -638,7 +638,7 @@ interface ManagedClusters {
   @tag("ManagedClusters")
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/operations/{operationId}")
-  @added(Versions.v2026_01_02_preview)
+  @added(Versions.v2026_04_02_preview)
   operationStatusResultGet is ManagedClusterOps.ActionSync<
     ManagedCluster,
     void,
@@ -673,22 +673,28 @@ interface ManagedClusterOps
 @@minLength(ManagedCluster.name, 1);
 @@doc(ManagedCluster.name, "The name of the managed cluster resource.");
 @@doc(ManagedCluster.properties, "Properties of a managed cluster.");
-@@doc(ManagedClusters.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedClusters.createOrUpdate::parameters.resource,
   "The managed cluster to create or update."
 );
-@@doc(ManagedClusters.updateTags::parameters.properties,
+@@doc(
+  ManagedClusters.updateTags::parameters.properties,
   "Parameters supplied to the Update Managed Cluster Tags operation."
 );
-@@doc(ManagedClusters.resetServicePrincipalProfile::parameters.body,
+@@doc(
+  ManagedClusters.resetServicePrincipalProfile::parameters.body,
   "The service principal profile to set on the managed cluster."
 );
-@@doc(ManagedClusters.resetAADProfile::parameters.body,
+@@doc(
+  ManagedClusters.resetAADProfile::parameters.body,
   "The AAD profile to set on the Managed Cluster"
 );
 @@doc(ManagedClusters.runCommand::parameters.body, "The run command request");
-@@doc(ManagedClusters.rebalanceLoadBalancers::parameters.body,
+@@doc(
+  ManagedClusters.rebalanceLoadBalancers::parameters.body,
   "The names of the load balancers to be rebalanced. If set to empty, all load balancers will be rebalanced."
 );
-@@doc(ManagedClusters.post::parameters.body,
+@@doc(
+  ManagedClusters.post::parameters.body,
   "Parameters required in order to resolve a private link service ID."
 );

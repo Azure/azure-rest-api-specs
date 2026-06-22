@@ -1,16 +1,14 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
-
 using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The IP Prefix resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
+model IpPrefix
+  is Azure.ResourceManager.TrackedResource<IpPrefixProperties, false> {
   @doc("Name of the IP Prefix.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -18,10 +16,9 @@ model IpPrefix extends Azure.ResourceManager.Foundations.TrackedResource {
   @segment("ipPrefixes")
   @visibility(Lifecycle.Read)
   name: string;
-
-  /** The IP Prefix properties */
-  properties: IpPrefixProperties;
 }
+
+@@doc(IpPrefix.properties, "The IP Prefix properties");
 
 @armResourceOperations
 interface IpPrefixes {
@@ -39,13 +36,20 @@ interface IpPrefixes {
   delete is ArmResourceDeleteWithoutOkAsync<IpPrefix>;
 
   @doc("Implements IpPrefixes list by resource group GET method.")
-  listByResourceGroup is ArmResourceListByParent<IpPrefix>;
+  listByResourceGroup is ArmResourceListByParent<
+    IpPrefix,
+    Response = IpPrefixesListResult
+  >;
 
   @doc("Implements IpPrefixes list by subscription GET method.")
-  listBySubscription is ArmListBySubscription<IpPrefix>;
+  listBySubscription is ArmListBySubscription<
+    IpPrefix,
+    Response = IpPrefixesListResult
+  >;
 }
 
 @@doc(IpPrefixes.create::parameters.resource, "Request payload.");
-@@doc(IpPrefixes.update::parameters.properties,
+@@doc(
+  IpPrefixes.update::parameters.properties,
   "IP Prefix properties to update."
 );

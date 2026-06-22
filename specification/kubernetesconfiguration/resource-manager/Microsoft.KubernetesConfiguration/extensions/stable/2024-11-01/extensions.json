@@ -569,17 +569,17 @@
       ],
       "x-ms-enum": {
         "name": "AKSIdentityType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "SystemAssigned",
             "value": "SystemAssigned",
-            "description": "SystemAssigned"
+            "description": "SystemAssigned identity"
           },
           {
             "name": "UserAssigned",
             "value": "UserAssigned",
-            "description": "UserAssigned"
+            "description": "UserAssigned identity"
           }
         ]
       }
@@ -600,22 +600,22 @@
           {
             "name": "User",
             "value": "User",
-            "description": "User"
+            "description": "Created through an interactive sign-in by a person."
           },
           {
             "name": "Application",
             "value": "Application",
-            "description": "Application"
+            "description": "Created by an app registration or service principal acting as a client."
           },
           {
             "name": "ManagedIdentity",
             "value": "ManagedIdentity",
-            "description": "ManagedIdentity"
+            "description": "Created via an Azure managed identity (system- or user-assigned)."
           },
           {
             "name": "Key",
             "value": "Key",
-            "description": "Key"
+            "description": "Created using a key-based credential flow supported by some services."
           }
         ]
       }
@@ -788,17 +788,17 @@
               {
                 "name": "Error",
                 "value": "Error",
-                "description": "Error"
+                "description": "Indicates an error status from the extension."
               },
               {
                 "name": "Warning",
                 "value": "Warning",
-                "description": "Warning"
+                "description": "Indicates a warning status from the extension."
               },
               {
                 "name": "Information",
                 "value": "Information",
-                "description": "Information"
+                "description": "Indicates an informational status from the extension."
               }
             ]
           }
@@ -849,17 +849,17 @@
           {
             "name": "Error",
             "value": "Error",
-            "description": "Error"
+            "description": "Indicates an error status from the extension."
           },
           {
             "name": "Warning",
             "value": "Warning",
-            "description": "Warning"
+            "description": "Indicates a warning status from the extension."
           },
           {
             "name": "Information",
             "value": "Information",
-            "description": "Information"
+            "description": "Indicates an informational status from the extension."
           }
         ]
       }
@@ -967,32 +967,32 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Resource creation failed."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "Resource creation was canceled."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creating"
+            "description": "Resource is being created."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Updating"
+            "description": "Resource is being updated."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "Resource is being deleted."
           }
         ]
       }

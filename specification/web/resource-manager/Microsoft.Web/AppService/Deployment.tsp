@@ -54,7 +54,8 @@ interface DeploymentOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface Deployments {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
@@ -138,7 +139,8 @@ interface DeploymentOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface DeploymentOperationGroup {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
@@ -196,6 +198,7 @@ interface DeploymentOperationGroup {
 @@doc(Deployment.name, "Deployment ID.");
 @@doc(Deployment.properties, "Deployment resource specific properties");
 @@doc(Deployments.createDeployment::parameters.resource, "Deployment details.");
-@@doc(DeploymentOperationGroup.createDeploymentSlot::parameters.resource,
+@@doc(
+  DeploymentOperationGroup.createDeploymentSlot::parameters.resource,
   "Deployment details."
 );

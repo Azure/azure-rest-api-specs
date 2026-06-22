@@ -16,14 +16,15 @@ parameters:
     displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
   - name: ApiVersion
     type: string
-    default: ''
+    default: 'none'
     displayName: 'API version'
   - name: SdkReleaseType
     type: string
     values:
+      - 'none'
       - 'beta'
       - 'stable'
-    default: 'beta'
+    default: 'none'
     displayName: 'SDK release type'
   - name: CreatePullRequest
     type: boolean
@@ -37,6 +38,10 @@ parameters:
     type: number
     default: 0
     displayName: 'Release plan work item id'
+  - name: TriggerSource
+    type: string
+    default: 'unspecified'
+    displayName: 'Trigger source'
 
 trigger: none
 
@@ -53,3 +58,4 @@ extends:
     CreatePullRequest: ${{ parameters.CreatePullRequest }}
     ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
     ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
+    TriggerSource: ${{ parameters.TriggerSource }}

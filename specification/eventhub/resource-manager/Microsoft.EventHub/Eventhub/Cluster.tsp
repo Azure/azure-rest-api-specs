@@ -13,9 +13,7 @@ namespace Microsoft.EventHub;
 /**
  * Single Event Hubs Cluster resource in List or Get operations.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Cluster
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ClusterProperties> {
+model Cluster is Azure.ResourceManager.ProxyResource<ClusterProperties> {
   ...ResourceNameParameter<
     Resource = Cluster,
     KeyName = "clusterName",
@@ -26,8 +24,18 @@ model Cluster
   /**
    * Properties of the cluster SKU.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   sku?: ClusterSku;
+
+  /** Resource location. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  /** Resource tags. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 @armResourceOperations
@@ -40,11 +48,14 @@ interface Clusters {
   /**
    * Creates or updates an instance of an Event Hubs Cluster.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Cluster>
+      | ArmResourceCreatedResponse<Cluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
@@ -55,18 +66,24 @@ interface Clusters {
   update is ArmCustomPatchAsync<
     Cluster,
     PatchModel = Cluster,
-    Response = ArmResponse<Cluster> | ArmResourceCreatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResponse<Cluster>
+      | ArmResourceCreatedResponse<Cluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Cluster> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 
   /**
    * Deletes an existing Event Hubs Cluster. This operation is idempotent.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing DELETE operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = ErrorResponse
   >;
 
@@ -98,14 +115,17 @@ interface Clusters {
   /**
    * Replace all specified Event Hubs Cluster settings with those contained in the request body. Leaves the settings not specified in the request body unmodified.
    */
-  #suppress "@typespec/http/patch-implicit-optional" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@typespec/http/patch-implicit-optional" "PATCH operation properties are explicitly defined as required/optional matching the original OpenAPI specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Existing long-running operation does not use the standard location header pattern as defined in the original OpenAPI specification."
   @patch
   @action("quotaConfiguration/default")
   patch is ArmResourceActionSync<
     Cluster,
     ClusterQuotaConfigurationProperties,
-    ArmResponse<ClusterQuotaConfigurationProperties> | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties> | AcceptedResponse,
+
+      | ArmResponse<ClusterQuotaConfigurationProperties>
+      | ArmResourceCreatedSyncResponse<ClusterQuotaConfigurationProperties>
+      | AcceptedResponse,
     Error = ErrorResponse
   >;
 
@@ -125,15 +145,19 @@ interface Clusters {
 @@maxLength(Cluster.name, 50);
 @@minLength(Cluster.name, 6);
 @@doc(Cluster.name, "The name of the Event Hubs Cluster.");
-@@doc(Cluster.properties,
+@@doc(
+  Cluster.properties,
   "Event Hubs Cluster properties supplied in responses in List or Get operations."
 );
-@@doc(Clusters.createOrUpdate::parameters.resource,
+@@doc(
+  Clusters.createOrUpdate::parameters.resource,
   "Parameters for creating a eventhub cluster resource."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The properties of the Event Hubs Cluster which should be updated."
 );
-@@doc(Clusters.patch::parameters.body,
+@@doc(
+  Clusters.patch::parameters.body,
   "Parameters for creating an Event Hubs Cluster resource."
 );

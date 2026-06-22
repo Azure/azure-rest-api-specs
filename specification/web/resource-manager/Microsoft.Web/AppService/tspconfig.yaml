@@ -19,12 +19,26 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice-generated"
-    namespace: "com.azure.resourcemanager.appservice.generated"
-    service-name: "AppService" # human-readable service name, whitespace allowed
+    api-version: "2025-05-01"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appservice"
+    namespace: "com.azure.resourcemanager.appservice"
+    service-name: "AppService"
     flavor: azure
+    premium: true
+    generate-tests: false
+    client-side-validations: true
+    enable-sync-stack: false
+    use-object-for-unknown: true
+    uuid-as-string: false
+    float32-as-double: false
+    add-inner: AppServiceCertificate
+    remove-inner: CsmDeploymentStatus
+    rename-model:
+      ApiKVReferencePropertiesSource: ConfigReferenceSource
+      OpenIdConnectClientCredentialMethod: ClientCredentialMethod
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-appservice"
+    treat-unknown-as-record: true
     flavor: "azure"
     compatibility-lro: true
     experimental-extensible-enums: true
@@ -33,7 +47,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v5"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v6"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

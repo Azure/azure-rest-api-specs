@@ -18,6 +18,7 @@ import "./Creator.tsp";
 import "./PrivateLinkResource.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -46,6 +47,7 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "List operations available for the Maps Resource Provider"
 );

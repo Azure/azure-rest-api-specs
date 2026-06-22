@@ -5,44 +5,36 @@
     "module": "NodeNext",
     // override "importHelpers:true" in root tsconfig.json
     "importHelpers": false,
-    // required to use project references
-    "composite": true,
+    "noEmit": true,
+    "erasableSyntaxOnly": true,
+    "verbatimModuleSyntax": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    // default changed to [] (empty array) in typescript v6
+    "types": ["node"],
   },
-  // Compile nothing at this level
-  "files": [],
-  "references": [
-    {
-      "path": "./lint-diff",
-    },
-    {
-      "path": "./oav-runner",
-    },
-    {
-      "path": "./sdk-suppressions",
-    },
-    {
-      "path": "./openapi-diff-runner",
-    },
-    {
-      "path": "./spec-gen-sdk-runner",
-    },
-    {
-      "path": "./suppressions",
-    },
-    {
-      "path": "./tsp-client-tests",
-    },
-    {
-      "path": "./typespec-migration-validation",
-    },
-    {
-      "path": "./typespec-requirement",
-    },
-    {
-      "path": "./typespec-validation",
-    },
-    {
-      "path": "./summarize-impact",
-    },
+  "include": [
+    "lint-diff/src/**/*.ts",
+    "lint-diff/test/**/*.ts",
+    "oav-runner/src/**/*.ts",
+    "oav-runner/test/**/*.ts",
+    "openapi-diff-runner/src/**/*.ts",
+    "openapi-diff-runner/test/**/*.ts",
+    "sdk-suppressions/src/**/*.ts",
+    "sdk-suppressions/test/**/*.ts",
+    "spec-gen-sdk-runner/src/**/*.ts",
+    "spec-gen-sdk-runner/test/**/*.ts",
+    "summarize-impact/src/**/*.ts",
+    "summarize-impact/test/**/*.ts",
+    "suppressions/src/**/*.ts",
+    "suppressions/test/**/*.ts",
+    "tsp-client-tests/src/**/*.ts",
+    "tsp-client-tests/test/**/*.ts",
+    "typespec-migration-validation/src/**/*.ts",
+    "typespec-migration-validation/test/**/*.ts",
+    "typespec-requirement/src/**/*.ts",
+    "typespec-requirement/test/**/*.ts",
+    "typespec-validation/src/**/*.ts",
+    "typespec-validation/test/**/*.ts",
   ],
 }

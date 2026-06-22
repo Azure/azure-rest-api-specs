@@ -75,5 +75,7 @@ model MongoDBChatExtensionParameters {
   @doc("""
     The vectorization source to use with the MongoDB chat extension.
     """)
-  embedding_dependency: OnYourDataEndpointVectorizationSource | OnYourDataDeploymentNameVectorizationSource;
+  embedding_dependency:
+    | OnYourDataEndpointVectorizationSource
+    | OnYourDataDeploymentNameVectorizationSource;
 }

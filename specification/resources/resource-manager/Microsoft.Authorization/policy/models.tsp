@@ -60,6 +60,12 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
+   * The selector kind to filter policies by the resource percentage.
+   */
+  @added(Versions.v2026_06_01)
+  resourcePercentage: "resourcePercentage",
+
+  /**
    * The selector kind to filter policies by the user principal ID.
    */
   @added(Versions.v2025_12_01_preview)
@@ -477,6 +483,14 @@ model Selector {
    * The list of values to filter out.
    */
   notIn?: string[];
+
+  /**
+   * The percent of total resources that will be governed by the policy.
+   */
+  @added(Versions.v2026_06_01)
+  @maxValue(99)
+  @minValue(1)
+  progress?: int32;
 }
 
 /**
@@ -1189,29 +1203,14 @@ model PolicyLogInfo {
   policySetDefinitionName?: string;
 
   /**
-   * The policy set definition display name.
-   */
-  policySetDefinitionDisplayName?: string;
-
-  /**
    * The policy set definition version.
    */
   policySetDefinitionVersion?: string;
 
   /**
-   * The policy set definition category.
-   */
-  policySetDefinitionCategory?: string;
-
-  /**
    * The policy definition name.
    */
   policyDefinitionName?: string;
-
-  /**
-   * The policy definition display name.
-   */
-  policyDefinitionDisplayName?: string;
 
   /**
    * The policy definition version.
@@ -1224,11 +1223,6 @@ model PolicyLogInfo {
   policyDefinitionEffect?: string;
 
   /**
-   * An array of policy definition group names.
-   */
-  policyDefinitionGroupNames?: string[];
-
-  /**
    * The policy assignment Id.
    */
   policyAssignmentId?: string;
@@ -1239,11 +1233,6 @@ model PolicyLogInfo {
   policyAssignmentName?: string;
 
   /**
-   * The policy assignment display name.
-   */
-  policyAssignmentDisplayName?: string;
-
-  /**
    * The policy assignment version.
    */
   policyAssignmentVersion?: string;
@@ -1252,32 +1241,13 @@ model PolicyLogInfo {
    * The policy assignment scope.
    */
   policyAssignmentScope?: string;
-
-  /**
-   * The resource location.
-   */
-  resourceLocation?: string;
-
-  /**
-   * The management group ancestors.
-   */
-  ancestors?: string;
-
-  /**
-   * The policy compliance reason code.
-   */
-  complianceReasonCode?: string;
-
-  /**
-   * An array of policy exemption Ids.
-   */
-  policyExemptionIds?: string[];
 }
 
 /**
  * The policy exemption category. Possible values are Waiver and Mitigated.
  */
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 union ExemptionCategory {
   string,
 
@@ -1293,7 +1263,7 @@ union ExemptionCategory {
 }
 
 /**
- * The option whether validate the exemption is at or under the assignment scope.
+ * The option to validate whether the exemption or enrollment is at or under the assignment scope.
  */
 @added(Versions.v2025_12_01_preview)
 union AssignmentScopeValidation {
@@ -1315,6 +1285,7 @@ union AssignmentScopeValidation {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionProperties {
   /**
    * The ID of the policy assignment that is being exempted.
@@ -1368,6 +1339,7 @@ model PolicyExemptionProperties {
  * The policy exemption for Patch request.
  */
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionUpdate {
   /**
    * The policy exemption properties for Patch request.
@@ -1379,6 +1351,7 @@ model PolicyExemptionUpdate {
  * The policy exemption properties for Patch request.
  */
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyExemptionUpdateProperties {
   /**
    * The resource selector list to filter policies by resource properties.
@@ -1393,10 +1366,97 @@ model PolicyExemptionUpdateProperties {
 }
 
 /**
+ * The policy enrollment properties.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Policy resources are modeled without provisioningState to keep consistency with existing policy resource contracts"
+@added(Versions.v2026_01_01_preview)
+model PolicyEnrollmentProperties {
+  /**
+   * The ID of the policy assignment that is being enrolled.
+   */
+  policyAssignmentId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Authorization/policyAssignments";
+    }
+  ]>;
+
+  /**
+   * The policy assignment instance ID associated with this enrollment.
+   * The value is set to the instance ID of the policy assignment the policyAssignmentId references when the enrollment is created or updated.
+   * The format is a GUID string.
+   */
+  @visibility(Lifecycle.Read)
+  policyAssignmentInstanceId?: Azure.Core.uuid;
+
+  /**
+   * The policy definition reference IDs for policy definitions in an assigned policy set definition.
+   * These IDs correspond to a subset of `policyDefinitions[*].policyDefinitionReferenceId` in the policy set definition.
+   * When specified and not empty, only the referenced policy definitions will be enrolled to. Otherwise, the entire policy set is enrolled to
+   */
+  policyDefinitionReferenceIds?: string[];
+
+  /**
+   * The display name of the policy enrollment.
+   */
+  displayName?: string;
+
+  /**
+   * The description of the policy enrollment.
+   */
+  description?: string;
+
+  /**
+   * The policy enrollment metadata. Metadata is an open ended object and is typically a collection of key value pairs.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  metadata?: unknown;
+
+  /**
+   * The option whether to validate the enrollment is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#[])
+  resourceSelectors?: ResourceSelector[];
+}
+
+/**
+ * The policy enrollment for Patch request.
+ */
+@added(Versions.v2026_01_01_preview)
+model PolicyEnrollmentUpdate {
+  /**
+   * The policy enrollment properties for Patch request.
+   */
+  properties?: PolicyEnrollmentUpdateProperties;
+}
+
+/**
+ * The policy enrollment properties for Patch request.
+ */
+@added(Versions.v2026_01_01_preview)
+model PolicyEnrollmentUpdateProperties {
+  /**
+   * The option whether to validate the enrollment is at or under the assignment scope.
+   */
+  assignmentScopeValidation?: AssignmentScopeValidation;
+
+  /**
+   * The resource selector list to filter policies by resource properties.
+   */
+  @identifiers(#[])
+  resourceSelectors?: ResourceSelector[];
+}
+
+/**
  * The variable properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableProperties {
   /**
    * Variable column definitions.
@@ -1409,6 +1469,7 @@ model PolicyVariableProperties {
  * The variable column.
  */
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableColumn {
   /**
    * The name of this policy variable column.
@@ -1421,6 +1482,7 @@ model PolicyVariableColumn {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableValueProperties {
   /**
    * Variable value column value array.
@@ -1433,6 +1495,7 @@ model PolicyVariableValueProperties {
  * The name value tuple for this variable value column.
  */
 @added(Versions.v2025_12_01_preview)
+@added(Versions.v2026_01_01_preview)
 model PolicyVariableValueColumnValue {
   /**
    * Column name for the variable value

@@ -8,14 +8,14 @@
     "cross-env": "^10.1.0",
     "eslint": "^10.0.0",
     "execa": "^9.3.0",
-    "prettier": "3.8.1",
+    "prettier": "3.8.3",
     "prettier-plugin-organize-imports": "^4.2.0",
-    "typescript": "~5.9.2",
-    "typescript-eslint": "^8.56.0",
-    "vitest": "^4.0.15"
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.0"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
     "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
     "format": "prettier . --ignore-path ../.prettierignore --write",
     "format:check": "prettier . --ignore-path ../.prettierignore --check",
@@ -25,6 +25,6 @@
     "test:ci": "vitest run --reporter=verbose"
   },
   "engines": {
-    "node": ">=20.0.0"
+    "node": ">=24.14.1"
   }
 }

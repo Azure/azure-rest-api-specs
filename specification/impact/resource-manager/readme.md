@@ -20,22 +20,24 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### AutoRest v3 Suppressions
 
-```yaml
+``` yaml
 suppressions:
-  - code: AvoidAdditionalProperties
+    
+  - code: GuidUsage
+    reason: this is for getting a subscriptionId from customers
     from: impact.json
-    where: $.definitions.WorkloadImpactProperties.properties
-    reason:
-      Property additionalProperties in WorkloadImpactProperties is necessary to be dynamic since it contains metadata
-      and will be different for different categories
-  - code: AvoidAdditionalProperties
-    from: impact.json
-    where: $.definitions.WorkloadImpactProperties.properties.additionalProperties
-    reason: Typespec generated definition
+
   - code: AvoidAnonymousTypes
-    where: $.definitions.WorkloadImpactProperties.properties.additionalProperties 
+    reason: this is for associating user assigned managed identity with connectors resource
     from: impact.json
-    reason: Typespec generated definitions contain anonymous types.
+
+  - code: EnumInsteadOfBoolean
+    reason: this is the right data type for the given context.
+    from: impact.json
+
+  - code: AvoidAdditionalProperties
+    reason: this is needed as its the extensible property bag for storing custom metadata associated with an impact.
+    from: impact.json
 ```
 
 ## Configuration
@@ -47,7 +49,27 @@ These are the global settings for the impact.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-05-01-preview
+tag: package-2026-01-01-preview
+```
+
+### Tag: package-2026-01-01-preview
+
+These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01-preview'
+input-file:
+  - Microsoft.Impact/preview/2026-01-01-preview/impact.json
+tag: package-2026-01-01-preview
+```
+
+### Tag: package-2025-01-01-preview
+
+These settings apply only when `--tag=package-2025-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-01-01-preview'
+input-file:
+  - Microsoft.Impact/preview/2025-01-01-preview/impact.json
+tag: package-2025-01-01-preview
 ```
 
 ### Tag: package-2024-05-01-preview
@@ -72,6 +94,9 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-net
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
@@ -82,9 +107,17 @@ swagger-to-sdk:
 
 See configuration in [readme.az.md](./readme.az.md)
 
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

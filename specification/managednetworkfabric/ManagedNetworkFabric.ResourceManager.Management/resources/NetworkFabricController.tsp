@@ -1,18 +1,18 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Fabric Controller resource definition.")
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkFabricController
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<
+    NetworkFabricControllerProperties,
+    false
+  > {
   @doc("Name of the Network Fabric Controller.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -21,10 +21,16 @@ model NetworkFabricController
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("The NetworkFabricController Properties")
-  properties: NetworkFabricControllerProperties;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
+  @added(Versions.v2025_07_15)
+  @doc("The managed service identities assigned to this resource.")
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(
+  NetworkFabricController.properties,
+  "The NetworkFabricController Properties"
+);
 @armResourceOperations
 interface NetworkFabricControllers {
   @doc("Shows the provisioning status of Network Fabric Controller.")
@@ -44,13 +50,20 @@ interface NetworkFabricControllers {
   delete is ArmResourceDeleteWithoutOkAsync<NetworkFabricController>;
 
   @doc("Lists all the NetworkFabricControllers thats available in the resource group.")
-  listByResourceGroup is ArmResourceListByParent<NetworkFabricController>;
+  listByResourceGroup is ArmResourceListByParent<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 
   @doc("Lists all the NetworkFabricControllers by subscription.")
-  listBySubscription is ArmListBySubscription<NetworkFabricController>;
+  listBySubscription is ArmListBySubscription<
+    NetworkFabricController,
+    Response = NetworkFabricControllersListResult
+  >;
 }
 
 @@doc(NetworkFabricControllers.create::parameters.resource, "Request payload.");
-@@doc(NetworkFabricControllers.update::parameters.properties,
+@@doc(
+  NetworkFabricControllers.update::parameters.properties,
   "Network Fabric Controller properties to update."
 );

@@ -61,7 +61,8 @@ interface VnetGatewayOps
       }
     > {}
 
-@armResourceOperations
+@tag("AppServicePlans")
+@armResourceOperations(#{ omitTags: true })
 interface VnetGateways {
   /**
    * Description for Get a Virtual Network gateway.
@@ -119,7 +120,8 @@ interface VnetGatewayOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
@@ -184,7 +186,8 @@ interface VnetConnectionGatewayOperationGroupOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
@@ -220,22 +223,28 @@ interface VnetConnectionGatewayOperationGroup {
   >;
 }
 
-@@doc(VnetGateway.name,
+@@doc(
+  VnetGateway.name,
   "Name of the gateway. Only the 'primary' gateway is supported."
 );
 @@doc(VnetGateway.properties, "VnetGateway resource specific properties");
-@@doc(VnetGateways.updateVnetGateway::parameters.resource,
+@@doc(
+  VnetGateways.updateVnetGateway::parameters.resource,
   "Definition of the gateway."
 );
-@@doc(VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
+@@doc(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
   "The properties to update this gateway with."
 );
-@@doc(VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
+@@doc(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
   "The properties to update this gateway with."
 );
-@@doc(VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
+@@doc(
+  VnetConnectionGatewayOperationGroup.createOrUpdateVnetConnectionGateway::parameters.resource,
   "The properties to update this gateway with."
 );
-@@doc(VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
+@@doc(
+  VnetConnectionGatewayOperationGroup.updateVnetConnectionGateway::parameters.properties,
   "The properties to update this gateway with."
 );

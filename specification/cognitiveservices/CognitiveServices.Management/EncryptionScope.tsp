@@ -27,15 +27,15 @@ model EncryptionScope
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'tags' on the resource envelope for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<tags> type used for 'EncryptionScope' to support extensible key-value pairs matching service behavior"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -66,13 +66,16 @@ interface EncryptionScopes {
   >;
 }
 
-@@doc(EncryptionScope.name,
+@@doc(
+  EncryptionScope.name,
   "The name of the encryptionScope associated with the Cognitive Services Account"
 );
 @@encodedName(EncryptionScope.etag, "application/json", "etag");
-@@doc(EncryptionScope.properties,
+@@doc(
+  EncryptionScope.properties,
   "Properties of Cognitive Services EncryptionScope."
 );
-@@doc(EncryptionScopes.createOrUpdate::parameters.resource,
+@@doc(
+  EncryptionScopes.createOrUpdate::parameters.resource,
   "The encryptionScope properties."
 );

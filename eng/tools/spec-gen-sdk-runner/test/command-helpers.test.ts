@@ -1,9 +1,10 @@
-import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getRequiredSettingValue,
@@ -11,13 +12,14 @@ import {
   logIssuesToPipeline,
   parseArguments,
   prepareSpecGenSdkCommand,
+  selectGenerationTool,
   setPipelineVariables,
-} from "../src/command-helpers.js";
-import * as log from "../src/log.js";
-import { LogLevel } from "../src/log.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import type { ExecutionReport } from "../src/types.js";
-import * as utils from "../src/utils.js";
+} from "../src/command-helpers.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as specHelpers from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -366,6 +368,51 @@ describe("commands.ts", () => {
     });
   });
 
+  describe("appendErrorsToVsoLog", () => {
+    test("should append errors to an existing log entry", () => {
+      const mockLogContent = {
+        key1: { errors: ["error1"], warnings: ["warning1"] },
+      };
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockLogContent));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "key1", ["error2"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            key1: { errors: ["error1", "error2"], warnings: ["warning1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+
+    test("should create a new log entry when the key does not exist", () => {
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({}));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "Python package namespace validation", ["error1"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            "Python package namespace validation": { errors: ["error1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+  });
+
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
       const mockExecutionReport: ExecutionReport = {
@@ -622,12 +669,12 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      // Based on the constants in types.ts, JS SDK requires check for data plane
       expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
-      // .NET SDK set (dataplane: false)
-      expect(result3).toBe(false);
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
     });
 
     test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
@@ -646,6 +693,40 @@ describe("commands.ts", () => {
 
       const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
       expect(result2).toBe(true);
+    });
+  });
+
+  describe("selectGenerationTool", () => {
+    test("should return 'skipped' for Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Rust,
+      );
+      expect(result).toBe("skipped");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with tspconfig path", () => {
+      const result = selectGenerationTool(
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        undefined,
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' when no paths are provided", () => {
+      const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
+      expect(result).toBe("spec-gen-sdk");
     });
   });
 });

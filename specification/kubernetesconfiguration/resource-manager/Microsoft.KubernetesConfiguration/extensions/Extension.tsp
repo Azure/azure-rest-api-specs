@@ -2,12 +2,15 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.KubernetesConfiguration;
 /**
@@ -26,6 +29,14 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: Azure.ResourceManager.CommonTypes.Identity;
+
+  /**
+   * The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This field is allowed at the top-level as per the ARM resource specification."
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @added(Versions.v2025_03_01)
+  managedBy?: armResourceIdentifier;
 
   ...Azure.ResourceManager.ResourcePlanProperty;
 }
@@ -142,11 +153,13 @@ interface Extensions {
     Extension,
     PatchModel = PatchExtension,
     Parameters = {},
-    Response = ArmResponse<Extension> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Extension> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Extension;
-    })
+    Response =
+      | ArmResponse<Extension>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = Extension> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Extension;
+        })
   >;
 
   /**
@@ -165,8 +178,11 @@ interface Extensions {
       @query("forceDelete")
       forceDelete?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -191,9 +207,11 @@ interface Extensions {
 
 @@doc(Extension.name, "Name of the Extension.");
 @@doc(Extension.properties, "Properties of an Extension resource");
-@@doc(Extensions.create::parameters.resource,
+@@doc(
+  Extensions.create::parameters.resource,
   "Properties necessary to Create an Extension."
 );
-@@doc(Extensions.update::parameters.properties,
+@@doc(
+  Extensions.update::parameters.properties,
   "Properties to Patch in an existing Extension."
 );

@@ -71,7 +71,8 @@ interface WorkflowEnvelopeOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WorkflowEnvelopes {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
@@ -120,7 +121,8 @@ interface WorkflowEnvelopeOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WorkflowEnvelopeOperationGroup {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.

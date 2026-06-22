@@ -1,0 +1,9 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: dont want to modify old swagger specs generated with cadl, Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - resource-manager/Microsoft.Impact/preview/2024-05-01-preview/impact.json

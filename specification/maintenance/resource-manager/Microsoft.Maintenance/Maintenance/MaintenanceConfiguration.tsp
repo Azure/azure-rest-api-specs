@@ -55,7 +55,8 @@ interface MaintenanceConfigurationOps
           SegmentName = "publicMaintenanceConfigurations",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceGroupApplyUpdate"
     > {}
 
 @armResourceOperations
@@ -134,7 +135,9 @@ interface MaintenanceConfigurationOperationGroup {
    */
   delete is MaintenanceConfigurationOperationGroupOps.DeleteSync<
     MaintenanceConfiguration,
-    Response = ArmResponse<MaintenanceConfiguration> | ArmDeletedNoContentResponse,
+    Response =
+      | ArmResponse<MaintenanceConfiguration>
+      | ArmDeletedNoContentResponse,
     ErrorType = MaintenanceError
   >;
 
@@ -162,12 +165,15 @@ interface MaintenanceConfigurationOperationGroup {
 }
 
 @@doc(MaintenanceConfiguration.name, "Maintenance Configuration Name");
-@@doc(MaintenanceConfiguration.properties,
+@@doc(
+  MaintenanceConfiguration.properties,
   "Gets or sets properties of the resource"
 );
-@@doc(MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  MaintenanceConfigurationOperationGroup.createOrUpdate::parameters.resource,
   "The configuration"
 );
-@@doc(MaintenanceConfigurationOperationGroup.update::parameters.properties,
+@@doc(
+  MaintenanceConfigurationOperationGroup.update::parameters.properties,
   "The configuration"
 );

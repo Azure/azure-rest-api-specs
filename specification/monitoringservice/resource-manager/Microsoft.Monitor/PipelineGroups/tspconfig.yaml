@@ -1,0 +1,48 @@
+parameters:
+  "service-dir":
+    default: "sdk/monitorpipelinegroups"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/pipelineGroups.json"
+    new-line: lf
+    omit-unreachable-types: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitorpipelinegroups"
+    namespace: "azure.mgmt.monitorpipelinegroups"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/monitorpipelinegroups"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitorpipelinegroups"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitorpipelinegroups"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitorpipelinegroups"
+    namespace: com.azure.resourcemanager.monitorpipelinegroups
+    service-name: "Azure Monitor Pipelines"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitorpipelinegroups"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-monitorpipelinegroups"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Monitor.PipelineGroups"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"

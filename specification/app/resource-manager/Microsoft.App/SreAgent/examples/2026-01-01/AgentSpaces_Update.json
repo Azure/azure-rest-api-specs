@@ -1,0 +1,49 @@
+{
+  "title": "AgentSpaces_Update",
+  "operationId": "AgentSpaces_Update",
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "agentSpaceName": "testAgentSpace",
+    "api-version": "2026-01-01",
+    "properties": {
+      "tags": {
+        "environment": "staging",
+        "version": "v2.0"
+      },
+      "properties": {
+        "maxAgentCount": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/agentSpaces/testAgentSpace",
+        "name": "testAgentSpace",
+        "type": "Microsoft.App/agentSpaces",
+        "location": "East US",
+        "tags": {
+          "environment": "staging",
+          "version": "v2.0"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "22222222-3333-4444-5555-666666666666",
+          "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "maxAgentCount": 20,
+          "currentAgentCount": 8
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationResults/fedcba98-7654-3210-fedc-ba9876543210",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/providers/Microsoft.App/locations/eastus/operationStatuses/fedcba98-7654-3210-fedc-ba9876543210"
+      }
+    }
+  }
+}

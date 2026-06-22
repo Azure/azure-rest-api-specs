@@ -60,7 +60,8 @@ interface WebJobOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebJobs {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
@@ -105,7 +106,8 @@ interface WebJobOperationGroupOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebJobOperationGroup {
   /**
    * Description for Get webjob information for an app, or a deployment slot.

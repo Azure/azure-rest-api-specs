@@ -14,28 +14,35 @@ namespace Microsoft.CognitiveServices;
 /**
  * Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy usage decorator required for 'Project' to maintain SDK backward compatibility"
 @parentResource(Account)
-model Project
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
+model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   ...ResourceNameParameter<
     Resource = Project,
     KeyName = "projectName",
     SegmentName = "projects",
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /**
+   * The geo-location where the resource lives
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Day 0 Property"
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  location?: string;
 
   /**
    * Resource Etag.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'etag' on the resource envelope for backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'identity' on the resource envelope for backward compatibility"
   identity?: Identity;
 }
 @armResourceOperations(#{ omitTags: true })
@@ -49,38 +56,50 @@ interface Projects {
   /**
    * Create Cognitive Services Account's Project. Project is a sub-resource of an account which give AI developer it's individual container to work on.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "PUT response codes for 'get' match existing service endpoint behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'get' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesProjects")
   create is ArmResourceCreateOrReplaceAsync<
     Project,
-    Response = ArmResourceUpdatedResponse<Project> | ArmResourceCreatedResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Project>
+      | ArmResourceCreatedResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
    * Updates a Cognitive Services Project
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "'create' returns no response body, matching existing service endpoint behavior"
   @tag("CognitiveServicesProjects")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     Project,
     PatchModel = Project,
-    Response = ArmResponse<Project> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
-      @bodyRoot
-      _: Project;
-    })
+    Response =
+      | ArmResponse<Project>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Project>> & {
+          @bodyRoot
+          _: Project;
+        })
   >;
 
   /**
    * Deletes a Cognitive Services project from the resource group.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Delete response codes match existing service endpoint behavior — Projects_Delete always completes synchronously (HTTP 200)"
   @tag("CognitiveServicesProjects")
-  delete is ArmResourceDeleteWithoutOkAsync<Project>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Project,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Returns all the projects in a Cognitive Services account.
@@ -93,9 +112,11 @@ interface Projects {
 @@minLength(Project.name, 2);
 @@doc(Project.name, "The name of Cognitive Services account's project.");
 @@doc(Project.properties, "Properties of Cognitive Services project.");
-@@doc(Projects.create::parameters.resource,
+@@doc(
+  Projects.create::parameters.resource,
   "The parameters to provide for the created project."
 );
-@@doc(Projects.update::parameters.properties,
+@@doc(
+  Projects.update::parameters.properties,
   "The parameters to provide for the created project."
 );

@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 @armProviderNamespace
 @service(#{ title: "Informatica.DataManagement" })
@@ -91,6 +92,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
@@ -123,6 +125,7 @@ interface ServerlessRuntimes
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
@@ -330,6 +333,7 @@ model OrganizationProperties {
   @doc("Company details.")
   companyDetails?: CompanyDetails;
 
+  @visibility(Lifecycle.Create)
   @doc("Link Organization")
   linkOrganization?: LinkOrganization;
 }
@@ -413,7 +417,10 @@ model InformaticaProperties {
 
 @doc("Link Organization")
 model LinkOrganization {
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret extension to avoid format:password breaking change from @secret"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Already marked with x-ms-secret extension"
+  @visibility(Lifecycle.Create)
+  @OpenAPI.extension("x-ms-secret", true)
   @doc("Link organization token")
   token?: string;
 }

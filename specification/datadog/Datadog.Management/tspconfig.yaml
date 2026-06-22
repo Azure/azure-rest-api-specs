@@ -27,6 +27,7 @@ options:
     service-dir: sdk/datadog
     emitter-output-dir: "{output-dir}/{service-dir}/arm-datadog"
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-datadog"
@@ -40,6 +41,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    # use-legacy-resource-detection: false
+    namespace: "Azure.ResourceManager.Datadog"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 These are the global settings for the Resource API.
 
-``` yaml
+```yaml
 title: ResourceManagementClient
 description: ResourceManagement Client
 openapi-type: arm
@@ -33,7 +33,7 @@ tag: package-resources-2025-04
 
 These settings apply only when `--tag=package-resources-2023-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2023-07'
+```yaml $(tag) == 'package-resources-2023-07'
 input-file:
   - stable/2023-07-01/resources.json
 ```
@@ -42,7 +42,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2024-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2024-03'
+```yaml $(tag) == 'package-resources-2024-03'
 input-file:
   - stable/2024-03-01/resources.json
 ```
@@ -51,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2024-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2024-07'
+```yaml $(tag) == 'package-resources-2024-07'
 input-file:
   - stable/2024-07-01/resources.json
 ```
@@ -60,7 +60,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2024-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2024-11'
+```yaml $(tag) == 'package-resources-2024-11'
 input-file:
   - stable/2024-11-01/resources.json
 ```
@@ -69,7 +69,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2025-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2025-03'
+```yaml $(tag) == 'package-resources-2025-03'
 input-file:
   - stable/2025-03-01/resources.json
 ```
@@ -78,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2025-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2025-04'
+```yaml $(tag) == 'package-resources-2025-04'
 input-file:
   - stable/2025-04-01/resources.json
 ```
@@ -87,44 +87,44 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2025-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2025-08-preview'
+```yaml $(tag) == 'package-resources-2025-08-preview'
 input-file:
-- stable/2025-04-01/resources.json
-- preview/2025-08-01-preview/batch.json
+  - stable/2025-04-01/resources.json
+  - preview/2025-08-01-preview/batch.json
 ```
 
 ### Tag: package-resources-2022-09
 
 These settings apply only when `--tag=package-resources-2022-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2022-09'
+```yaml $(tag) == 'package-resources-2022-09'
 input-file:
-- stable/2022-09-01/resources.json
+  - stable/2022-09-01/resources.json
 ```
 
 ### Tag: package-resources-2021-04
 
 These settings apply only when `--tag=package-resources-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2021-04'
+```yaml $(tag) == 'package-resources-2021-04'
 input-file:
-- stable/2021-04-01/resources.json
+  - stable/2021-04-01/resources.json
 ```
 
 ### Tag: package-resources-2021-01
 
 These settings apply only when `--tag=package-resources-2021-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2021-01'
+```yaml $(tag) == 'package-resources-2021-01'
 input-file:
-- stable/2021-01-01/resources.json
+  - stable/2021-01-01/resources.json
 ```
 
 ### Tag: package-resources-2020-10
 
 These settings apply only when `--tag=package-resources-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-10'
+```yaml $(tag) == 'package-resources-2020-10'
 input-file:
   - stable/2020-10-01/resources.json
 ```
@@ -133,7 +133,7 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2020-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-08'
+```yaml $(tag) == 'package-resources-2020-08'
 input-file:
   - stable/2020-08-01/resources.json
 ```
@@ -142,131 +142,131 @@ input-file:
 
 These settings apply only when `--tag=package-resources-2020-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2020-06'
+```yaml $(tag) == 'package-resources-2020-06'
 input-file:
-- stable/2020-06-01/resources.json
+  - stable/2020-06-01/resources.json
 ```
 
 ### Tag: package-resources-2019-10
 
 These settings apply only when `--tag=package-resources-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-10'
+```yaml $(tag) == 'package-resources-2019-10'
 input-file:
-- stable/2019-10-01/resources.json
+  - stable/2019-10-01/resources.json
 ```
 
 ### Tag: package-resources-2019-08
 
 These settings apply only when `--tag=package-resources-2019-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-08'
+```yaml $(tag) == 'package-resources-2019-08'
 input-file:
-- stable/2019-08-01/resources.json
+  - stable/2019-08-01/resources.json
 ```
 
 ### Tag: package-resources-2019-07
 
 These settings apply only when `--tag=package-resources-2019-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-07'
+```yaml $(tag) == 'package-resources-2019-07'
 input-file:
-- stable/2019-07-01/resources.json
+  - stable/2019-07-01/resources.json
 ```
 
 ### Tag: package-resources-2019-0510
 
 These settings apply only when `--tag=package-resources-2019-0510` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-0510'
+```yaml $(tag) == 'package-resources-2019-0510'
 input-file:
-- stable/2019-05-10/resources.json
+  - stable/2019-05-10/resources.json
 ```
 
 ### Tag: package-resources-2019-05
 
 These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-05'
+```yaml $(tag) == 'package-resources-2019-05'
 input-file:
-- stable/2019-05-01/resources.json
+  - stable/2019-05-01/resources.json
 ```
 
 ### Tag: package-resources-2019-03
 
 These settings apply only when `--tag=package-resources-2019-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-03'
+```yaml $(tag) == 'package-resources-2019-03'
 input-file:
-- stable/2019-03-01/resources.json
+  - stable/2019-03-01/resources.json
 ```
 
 ### Tag: package-resources-2018-05
 
 These settings apply only when `--tag=package-resources-2018-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2018-05'
+```yaml $(tag) == 'package-resources-2018-05'
 input-file:
-- stable/2018-05-01/resources.json
+  - stable/2018-05-01/resources.json
 ```
 
 ### Tag: package-resources-2018-02
 
 These settings apply only when `--tag=package-resources-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2018-02'
+```yaml $(tag) == 'package-resources-2018-02'
 input-file:
-- stable/2018-02-01/resources.json
+  - stable/2018-02-01/resources.json
 ```
 
 ### Tag: package-resources-2017-05
 
 These settings apply only when `--tag=package-resources-2017-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2017-05'
+```yaml $(tag) == 'package-resources-2017-05'
 input-file:
-- stable/2017-05-10/resources.json
+  - stable/2017-05-10/resources.json
 ```
 
 ### Tag: package-resources-2016-09
 
 These settings apply only when `--tag=package-resources-2016-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2016-09'
+```yaml $(tag) == 'package-resources-2016-09'
 input-file:
-- stable/2016-09-01/resources.json
+  - stable/2016-09-01/resources.json
 ```
 
 ### Tag: package-resources-2016-07
 
 These settings apply only when `--tag=package-resources-2016-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2016-07'
+```yaml $(tag) == 'package-resources-2016-07'
 input-file:
-- stable/2016-07-01/resources.json
+  - stable/2016-07-01/resources.json
 ```
 
 ### Tag: package-resources-2016-02
 
 These settings apply only when `--tag=package-resources-2016-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2016-02'
+```yaml $(tag) == 'package-resources-2016-02'
 input-file:
-- stable/2016-02-01/resources.json
+  - stable/2016-02-01/resources.json
 ```
 
 ### Tag: package-resources-2015-11
 
 These settings apply only when `--tag=package-resources-2015-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2015-11'
+```yaml $(tag) == 'package-resources-2015-11'
 input-file:
-- stable/2015-11-01/resources.json
+  - stable/2015-11-01/resources.json
 ```
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: UniqueResourcePaths
     from: resources.json
@@ -283,7 +283,7 @@ directive:
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.GenericResourceExpanded.properties
-    reason: 'createdTime,changedTime & provisioningState are top-level properties'
+    reason: "createdTime,changedTime & provisioningState are top-level properties"
   - suppress: BodyTopLevelProperties
     from: resources.json
     where: $.definitions.TagDetails.properties
@@ -505,7 +505,7 @@ directive:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python

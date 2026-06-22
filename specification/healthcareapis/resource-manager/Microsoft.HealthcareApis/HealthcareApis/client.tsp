@@ -1,0 +1,38 @@
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+
+namespace Microsoft.HealthcareApis;
+
+@@clientName(
+  Microsoft.HealthcareApis,
+  "HealthcareApisManagementClient",
+  "python,javascript"
+);
+@@clientLocation(DicomServiceOperationGroup.delete, DicomServices, "python");
+@@clientLocation(DicomServiceOperationGroup.update, DicomServices, "python");
+@@clientLocation(FhirServiceOperationGroup.delete, FhirServices, "python");
+@@clientLocation(FhirServiceOperationGroup.update, FhirServices, "python");
+@@clientLocation(IotConnectorOperationGroup.delete, IotConnectors, "python");
+@@clientLocation(IotConnectorOperationGroup.update, IotConnectors, "python");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ArmManagedServiceIdentityType",
+  "python,javascript,go,java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(
+  PrivateEndpointConnectionDescription.properties,
+  "java,javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(
+  PrivateLinkResourceDescription.properties,
+  "java,javascript"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate Java breaking change from Swagger to TypeSpec"
+@@Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection.properties,
+  "java,javascript"
+);

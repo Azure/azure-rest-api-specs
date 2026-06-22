@@ -12,6 +12,7 @@ import "./models/language.detection.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/sentiment.analysis.tsp";
 import "./models/summarization.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -20,14 +21,16 @@ using Azure.Core;
 using Azure.Core.Traits;
 /** The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.authorizationCode,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Microsoft Cognitive Language Service - Text Analysis" })
 @server(
@@ -55,11 +58,11 @@ enum Versions {
   /** Version 2025-11-01 */
   v2025_11_01: "2025-11-01",
 
-  /** Version 2025-05-15-preview */
-  v2025_05_15_preview: "2025-05-15-preview",
+  /** Version 2026-05-01 */
+  v2026_05_01: "2026-05-01",
 
-  /** Version 2025-11-15-preview */
-  v2025_11_15_preview: "2025-11-15-preview",
+  /** Version 2026-05-15-preview */
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &

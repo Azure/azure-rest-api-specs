@@ -2797,17 +2797,12 @@ model SharedGalleryInviteProperties {
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceCommunity<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirCommunityGalleryResource {
+model ProxyResourceCommunity<Properties extends {}>
+  extends PirCommunityGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 
@@ -2825,17 +2820,12 @@ model ProxyResourceCommunity<
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceShared<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirSharedGalleryResource {
+model ProxyResourceShared<Properties extends {}>
+  extends PirSharedGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 
@@ -2848,35 +2838,44 @@ model ProxyResourceShared<
   parentName: string;
 }
 @@doc(CommunityGalleryImageList.value, "A list of community gallery images.");
-@@doc(CommunityGalleryImageVersionList.value,
+@@doc(
+  CommunityGalleryImageVersionList.value,
   "A list of community gallery image versions."
 );
-@@doc(CommunityGalleryImageVersionList.nextLink,
+@@doc(
+  CommunityGalleryImageVersionList.nextLink,
   "The URI to fetch the next page of community gallery image versions. Call ListNext() with this to fetch the next page of community gallery image versions."
 );
-@@doc(GalleryApplicationVersionList.value,
+@@doc(
+  GalleryApplicationVersionList.value,
   "A list of gallery Application Versions."
 );
-@@doc(GalleryApplicationVersionList.nextLink,
+@@doc(
+  GalleryApplicationVersionList.nextLink,
   "The uri to fetch the next page of gallery Application Versions. Call ListNext() with this to fetch the next page of gallery Application Versions."
 );
 @@doc(GalleryImageList.value, "A list of Shared Image Gallery images.");
-@@doc(GalleryImageList.nextLink,
+@@doc(
+  GalleryImageList.nextLink,
   "The uri to fetch the next page of Image Definitions in the Shared Image Gallery. Call ListNext() with this to fetch the next page of gallery image definitions."
 );
-@@doc(GalleryImageVersionList.nextLink,
+@@doc(
+  GalleryImageVersionList.nextLink,
   "The uri to fetch the next page of gallery image versions. Call ListNext() with this to fetch the next page of gallery image versions."
 );
 @@doc(GalleryImageVersionList.value, "A list of gallery image versions.");
-@@doc(GalleryList.nextLink,
+@@doc(
+  GalleryList.nextLink,
   "The uri to fetch the next page of galleries. Call ListNext() with this to fetch the next page of galleries."
 );
 @@doc(GalleryList.value, "A list of galleries.");
 @@doc(SharedGalleryImageList.value, "A list of shared gallery images.");
-@@doc(SharedGalleryImageList.nextLink,
+@@doc(
+  SharedGalleryImageList.nextLink,
   "The uri to fetch the next page of shared gallery images. Call ListNext() with this to fetch the next page of shared gallery images."
 );
-@@doc(SharedGalleryList.nextLink,
+@@doc(
+  SharedGalleryList.nextLink,
   "The uri to fetch the next page of shared galleries. Call ListNext() with this to fetch the next page of shared galleries."
 );
 @@doc(SharedGalleryList.value, "A list of shared galleries.");

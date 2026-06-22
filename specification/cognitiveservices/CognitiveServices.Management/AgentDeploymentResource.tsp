@@ -28,7 +28,7 @@ alias AgentDeploymentsListParameters = {
   /**
    * Names of agent deployments to retrieve.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Query parameter 'names' serialization matches existing service behavior"
   @query(#{ name: "names", explode: true })
   names?: string[];
 
@@ -105,7 +105,8 @@ interface AgentDeploymentResourcesOps
         @segment("agentDeployments")
         @key
         deploymentName: string,
-      }
+      },
+      ResourceName = "CognitiveServicesAgentDeployment"
     > {}
 
 @armResourceOperations(#{ omitTags: true })
@@ -122,24 +123,26 @@ interface AgentDeploymentResources {
   @tag("AgentDeployment")
   createOrUpdate is AgentDeploymentResourcesOps.CreateOrUpdateAsync<
     AgentDeployment,
-    Response = ArmResponse<AgentDeployment> | ArmResourceCreatedResponse<
-      AgentDeployment,
-      LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeployment> & {
-        /**
-         * URI to poll for asynchronous operation status.
-         */
-        @header("Azure-AsyncOperation")
-        azureAsyncOperation: string;
+    Response =
+      | ArmResponse<AgentDeployment>
+      | ArmResourceCreatedResponse<
+          AgentDeployment,
+          LroHeaders = ArmLroLocationHeader<FinalResult = AgentDeployment> & {
+            /**
+             * URI to poll for asynchronous operation status.
+             */
+            @header("Azure-AsyncOperation")
+            azureAsyncOperation: string;
 
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-        @header("x-ms-async-operation-timeout")
-        @format("duration")
-        asyncOperationTimeout: string;
-      }
-    >
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+            @header("x-ms-async-operation-timeout")
+            @format("duration")
+            asyncOperationTimeout: string;
+          }
+        >
   >;
 
   /**
@@ -179,20 +182,25 @@ interface AgentDeploymentResources {
   >;
 }
 
-@@doc(AgentDeployment.name,
+@@doc(
+  AgentDeployment.name,
   "The name of the deployment associated with the Cognitive Services Account"
 );
-@@doc(AgentDeployment.properties,
+@@doc(
+  AgentDeployment.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(AgentDeploymentResources.createOrUpdate::parameters.resource,
+@@doc(
+  AgentDeploymentResources.createOrUpdate::parameters.resource,
   "Agent Deployment definition object."
 );
 @@summary(AgentDeploymentResources.get, "Gets an Agent Deployment by name.");
-@@summary(AgentDeploymentResources.list,
+@@summary(
+  AgentDeploymentResources.list,
   "Lists Agent Deployments in the application."
 );
-@@summary(AgentDeploymentResources.createOrUpdate,
+@@summary(
+  AgentDeploymentResources.createOrUpdate,
   "Creates or updates an Agent Deployment (asynchronous)."
 );
 @@summary(AgentDeploymentResources.delete, "Delete Agent Deployment.");
