@@ -33,13 +33,3 @@ model ProvisionedAuthProfileRef extends ProvisionedResourceRef {
   /** GUID identifying the underlying credential. Only set for CertificateAuthority authentication; omitted otherwise. */
   credentialId?: string;
 }
-
-/** Reference to the messaging endpoint the device was provisioned against. */
-@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model ProvisionedEndpointRef {
-  /** Display name of the target endpoint. */
-  name: string;
-
-  /** IoT Hub service endpoint address (e.g. myhub.azure-devices.net), echoed from the originating request. */
-  address: string;
-}
