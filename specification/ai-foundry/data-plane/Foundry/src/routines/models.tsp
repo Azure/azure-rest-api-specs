@@ -340,6 +340,9 @@ model RoutineRun {
   @doc("The configured trigger name that produced the routine attempt.")
   trigger_name?: string;
 
+  @doc("The event payload captured from the event that triggered the routine attempt, when available.")
+  trigger_event_payload?: Record<unknown>;
+
   @doc("The source path that created the routine attempt.")
   attempt_source?: RoutineAttemptSource;
 
