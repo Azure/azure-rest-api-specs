@@ -1289,10 +1289,17 @@ model DeploymentExtensionDefinition {
   version?: string;
 
   /**
-   * The extension configuration ID. It uniquely identifies a deployment control plane within an extension.
+   * The extension configuration ID. It uniquely identifies a deployment target within an extension.
    */
   @visibility(Lifecycle.Read)
   configId?: string;
+
+  /**
+   * The extension configuration hash. Can be used to distinguish different configurations that have the same config ID.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  configHash?: string;
 
   /**
    * The extension configuration.
