@@ -616,11 +616,10 @@ model DeviceRegistryNamespaceDescription {
   location?: Azure.Core.azureLocation;
 
   /**
-   * Properties related to linking this provisioning service with the Azure Device Registry namespace.
+   * The linking state of this namespace.
    */
   @added(Versions.v2026_06_01_preview)
-  @visibility(Lifecycle.Read)
-  linkingProperties?: LinkingProperties;
+  linkingState?: LinkingState;
 }
 
 /**
@@ -987,44 +986,6 @@ model CertificateBodyDescription {
    * True indicates that the certificate will be created in verified state and proof of possession will not be required.
    */
   isVerified?: boolean;
-}
-
-/**
- * The last error encountered when linking the provisioning service with an Azure Device Registry.
- * Mirrors the shape used by the IoT Hub Device Registry linking error model.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkingError {
-  /** The error code. */
-  @visibility(Lifecycle.Read)
-  code?: string;
-
-  /** The HTTP status code. */
-  @visibility(Lifecycle.Read)
-  httpStatusCode?: string;
-
-  /** The error message. */
-  @visibility(Lifecycle.Read)
-  message?: string;
-
-  /** The error details. */
-  @visibility(Lifecycle.Read)
-  details?: string;
-}
-
-/**
- * Properties related to linking the provisioning service with an Azure Device Registry namespace.
- * Read-only; populated by the service as the linking lifecycle progresses.
- */
-@added(Versions.v2026_06_01_preview)
-model LinkingProperties {
-  /** Indicates whether the provisioning service is linked with an Azure Device Registry. */
-  @visibility(Lifecycle.Read)
-  state?: LinkingState;
-
-  /** The last error encountered when linking with the Azure Device Registry. */
-  @visibility(Lifecycle.Read)
-  error?: LinkingError;
 }
 
 /**
