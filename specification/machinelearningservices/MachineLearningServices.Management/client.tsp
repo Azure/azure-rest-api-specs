@@ -747,6 +747,11 @@ using Microsoft.MachineLearningServices;
 @@alternateType(DataVersionBaseProperties.dataUri, url, "csharp");
 @@alternateType(HDInsightProperties.address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(
+  CustomLocationParameter.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
   IdAssetReference.assetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
