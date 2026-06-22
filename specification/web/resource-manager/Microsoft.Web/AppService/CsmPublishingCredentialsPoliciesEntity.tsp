@@ -53,7 +53,8 @@ interface CsmPublishingCredentialsPoliciesEntityOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteFtpPublishingCredentialsPolicy"
     > {}
 
 @tag("WebApps")
@@ -164,7 +165,8 @@ interface FtpAllowedSlotOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteSlotFtpPublishingCredentialsPolicy"
     > {}
 
 @tag("WebApps")

@@ -52,7 +52,8 @@ interface PublicCertificateOps
         @segment("publicCertificates")
         @key
         publicCertificateName: string,
-      }
+      },
+      ResourceName = "WebSitePublicCertificate"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface PublicCertificateOperationGroupOps
         @segment("publicCertificates")
         @key
         publicCertificateName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotPublicCertificate"
     > {}
 
 @tag("WebApps")

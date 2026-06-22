@@ -50,7 +50,8 @@ interface SiteConfigResourceOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteConfig"
     > {}
 
 @tag("WebApps")
@@ -153,7 +154,8 @@ interface ListConfigurationsOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSlotConfig"
     > {}
 
 @tag("WebApps")
@@ -217,7 +219,8 @@ interface SiteConfigSlotResourceOperationGroupOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSlotConfig"
     > {}
 
 @tag("WebApps")
