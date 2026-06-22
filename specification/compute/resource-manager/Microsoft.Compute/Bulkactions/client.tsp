@@ -204,3 +204,18 @@ namespace Microsoft.Compute;
 // 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
 // =====================================================================
 @@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(Resources, "disable-safe-flatten", true, "csharp");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
+
+@@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetBulkOperationStatusContent",
+  "csharp"
+);
