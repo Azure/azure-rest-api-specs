@@ -76,6 +76,7 @@ using Http;
   "IotHubCertificateWithNonceDescription",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy hierarchy shaping for backward-compatible generated SDK surface."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CertificateWithNonceDescription,
   Azure.ResourceManager.Foundations.Resource,
   "csharp"
@@ -183,6 +184,7 @@ using Http;
   "EventHubConsumerGroupInfoCreateOrUpdateContent",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy flattening for backward-compatible generated SDK surface."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubConsumerGroupBodyDescription.properties,
   "csharp"
 );
@@ -264,12 +266,15 @@ using Http;
   "GetIotHubUserSubscriptionQuota",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(ResourceProviderCommonOperationGroup.getSubscriptionQuota,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(CertificateDescriptions.listByIotHub,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(GroupIdInformations.list,
   "csharp"
 );
