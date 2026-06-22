@@ -45,55 +45,8 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
-            const { getTypeSpecProjectInfo } =
-              await import('${{ github.workspace }}/.github/workflows/src/typespec-project-info.js');
-
-            let prNumber;
-            if (context.eventName === 'pull_request') {
-              prNumber = context.payload.pull_request.number;
-            } else if (context.eventName === 'workflow_dispatch') {
-              prNumber = parseInt('${{ inputs.pr_number }}', 10);
-            }
-
-            const info = await getTypeSpecProjectInfo(github, context, core, { prNumber });
-
-            const shouldCreateReleasePlan =
-              info.tspProjectPaths.length === 1 && info.apiVersions.length > 0;
-
-            core.setOutput('should_create_release_plan', String(shouldCreateReleasePlan));
-            core.setOutput('tsp_project_count', String(info.tspProjectPaths.length));
-            core.setOutput('api_version_count', String(info.apiVersions.length));
-
-            core.info(`Should create release plan: ${shouldCreateReleasePlan}`);
-            core.info(`TypeSpec projects: ${info.tspProjectPaths.length}`);
-            core.info(`API versions: ${info.apiVersions.length}`);
-
-            if (info.apiVersions.length > 1) {
-              core.info(
-                `Multiple API versions detected; selecting latest: ${info.apiVersions[0]}`
-              );
-            }
-
-            if (shouldCreateReleasePlan) {
-              core.setOutput('tsp_project_path', info.tspProjectUrls[0]);
-              core.setOutput('api_version', info.apiVersions[0]);
-              // Encode URL so slashes are safe in artifact names
-              core.setOutput('tsp_project_path_encoded', encodeURIComponent(info.tspProjectUrls[0]));
-            }
-
-            if (!shouldCreateReleasePlan && info.tspProjectPaths.length > 1) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                body:
-                  "Multiple TypeSpec project changes are identified in this PR. " +
-                  "The release plan cannot be automatically created. " +
-                  "Please create it manually using the **azsdk agent** in VS Code. " +
-                  "See [release plan documentation](https://aka.ms/azsdk/releaseplan-dashboard) for details.",
-              });
-              core.info("Posted comment: multiple TypeSpec projects detected.");
-            }
+            const { analyzeTypeSpecProjectChanges } = await import('${{ github.workspace }}/.github/workflows/src/create-release-plan.js');
+            await analyzeTypeSpecProjectChanges({ github, context, core, prNumberRaw: '${{ inputs.pr_number }}' });
 
       - name: Upload analysis result artifact
         uses: ./.github/actions/add-empty-artifact

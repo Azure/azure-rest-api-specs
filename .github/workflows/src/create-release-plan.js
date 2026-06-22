@@ -1,4 +1,68 @@
+import { getTypeSpecProjectInfo } from "./typespec-project-info.js";
 import { execSync } from "node:child_process";
+
+/**
+ * Analyze TypeSpec changes in a PR and set workflow outputs for release-plan generation.
+ *
+ * @param {Object} params
+ * @param {import('@actions/github-script').AsyncFunctionArguments['github']} params.github
+ * @param {import('@actions/github-script').AsyncFunctionArguments['context']} params.context
+ * @param {import('@actions/github-script').AsyncFunctionArguments['core']} params.core
+ * @param {number|string|undefined} [params.prNumberRaw]
+ * @returns {Promise<void>}
+ */
+export async function analyzeTypeSpecProjectChanges({ github, context, core, prNumberRaw }) {
+  let prNumber;
+  if (context.eventName === "pull_request") {
+    prNumber = context.payload.pull_request.number;
+  } else if (context.eventName === "workflow_dispatch") {
+    prNumber = Number.parseInt(String(prNumberRaw ?? ""), 10);
+  }
+
+  if (!prNumber || prNumber <= 0) {
+    core.warning("Invalid PR number for analyze workflow.");
+    core.setOutput("should_create_release_plan", "false");
+    core.setOutput("tsp_project_count", "0");
+    core.setOutput("api_version_count", "0");
+    return;
+  }
+
+  const info = await getTypeSpecProjectInfo(github, context, core, { prNumber });
+
+  const shouldCreateReleasePlan = info.tspProjectPaths.length === 1 && info.apiVersions.length > 0;
+
+  core.setOutput("should_create_release_plan", String(shouldCreateReleasePlan));
+  core.setOutput("tsp_project_count", String(info.tspProjectPaths.length));
+  core.setOutput("api_version_count", String(info.apiVersions.length));
+
+  core.info(`Should create release plan: ${shouldCreateReleasePlan}`);
+  core.info(`TypeSpec projects: ${info.tspProjectPaths.length}`);
+  core.info(`API versions: ${info.apiVersions.length}`);
+
+  if (info.apiVersions.length > 1) {
+    core.info(`Multiple API versions detected; selecting latest: ${info.apiVersions[0]}`);
+  }
+
+  if (shouldCreateReleasePlan) {
+    core.setOutput("tsp_project_path", info.tspProjectUrls[0]);
+    core.setOutput("api_version", info.apiVersions[0]);
+    core.setOutput("tsp_project_path_encoded", encodeURIComponent(info.tspProjectUrls[0]));
+  }
+
+  if (!shouldCreateReleasePlan && info.tspProjectPaths.length > 1) {
+    await github.rest.issues.createComment({
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: prNumber,
+      body:
+        "Multiple TypeSpec project changes are identified in this PR. " +
+        "The release plan cannot be automatically created. " +
+        "Please create it manually using the **azsdk agent** in VS Code. " +
+        "See [release plan documentation](https://aka.ms/azsdk/releaseplan-dashboard) for details.",
+    });
+    core.info("Posted comment: multiple TypeSpec projects detected.");
+  }
+}
 
 /**
  * Computes the target release month as "Month YYYY" for next month.
