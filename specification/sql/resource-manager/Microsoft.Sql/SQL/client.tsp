@@ -1458,16 +1458,7 @@ union SqlNameAvailabilityResourceType {
   "CreateManagedInstanceTdeCertificate",
   "csharp"
 );
-@@clientName(
-  LongTermRetentionBackups.changeAccessTier::parameters.body,
-  "content",
-  "csharp"
-);
-@@clientName(
-  LongTermRetentionBackupOperationGroup.changeAccessTierByResourceGroup::parameters.body,
-  "content",
-  "csharp"
-);
+
 @@clientName(ServerUsageProperties.nextResetTime, "NextResetOn", "csharp");
 @@clientName(ResourceWithWritableName.type, "ResourceType", "csharp");
 @@alternateType(ResourceWithWritableName.type, armResourceType, "csharp");
@@ -1720,7 +1711,12 @@ union SqlNameAvailabilityResourceType {
   "SqlServer2025",
   "csharp"
 );
-
+@@clientName(
+  ManagedInstanceDtcProperties.fqdnEnabled,
+  "IsFqdnEnabled",
+  "csharp"
+);
+@@alternateType(SyncGroupsType, SyncGroupLogType, "csharp");
 @@clientName(PerformanceLevelUnit.DTU, "Dtu", "csharp");
 
 @@clientName(ReplicationState.PENDING, "Pending", "csharp");
@@ -1811,6 +1807,7 @@ union SqlNameAvailabilityResourceType {
   "csharp"
 );
 @@clientName(Databases.revert, "RevertDatabaseEncryptionProtector", "csharp");
+@@clientName(Jobs.create, "StartJobExecution", "csharp");
 @@alternateType(
   SqlVulnerabilityAssessmentName,
   VulnerabilityAssessmentName,

@@ -53,8 +53,7 @@ interface CapabilitiesOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * If specified, restricts the response to only include the selected item.
@@ -87,8 +86,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -120,8 +118,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the server
@@ -160,8 +157,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -193,8 +189,7 @@ interface LongTermRetentionBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the server
@@ -242,8 +237,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -293,8 +287,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the managed instance.
@@ -333,8 +326,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * Whether or not to only get the latest backup for each database.
@@ -384,8 +376,7 @@ interface LongTermRetentionManagedInstanceBackupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
 
       /**
        * The name of the managed instance.
@@ -448,8 +439,7 @@ interface SyncGroupsOperationGroup {
        */
       @path
       @segment("locations")
-      @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-      locationName: string;
+      locationName: Azure.Core.azureLocation;
     }
   >;
 }

@@ -36,8 +36,7 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    @Azure.ClientGenerator.Core.alternateType(Azure.Core.azureLocation) // The type of this parameter is Azure location.
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** Name of usage metric to return. */
