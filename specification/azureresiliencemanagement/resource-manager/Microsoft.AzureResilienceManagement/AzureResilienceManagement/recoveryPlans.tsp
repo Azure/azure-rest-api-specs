@@ -42,7 +42,7 @@ interface RecoveryPlans {
   >;
 
   @route(ServiceGroupRoute)
-  update is ArmResourcePatchAsync<
+  update is ArmCustomPatchAsync<
     RecoveryPlan,
     RecoveryPlanProperties,
     ServiceGroupParameters
