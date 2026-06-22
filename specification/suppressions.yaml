@@ -331,3 +331,13 @@
     - options.@azure-tools/typespec-ts.*
   paths:
     - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: >
+    Importing client.tsp leaks an ARM-resource model into the SDK; resolving it
+    requires changing the JS SDK shape, which is not ready yet.
+  rules: [ClientTspImport]
+  paths:
+    - migrate/resource-manager/Microsoft.Migrate/Waves
+    - storagecache/resource-manager/Microsoft.StorageCache/StorageCache
+    - frontdoor/resource-manager/Microsoft.Network/FrontDoor
