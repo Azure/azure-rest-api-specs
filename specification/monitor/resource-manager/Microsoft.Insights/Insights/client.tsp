@@ -118,6 +118,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  MetricsApi.Response,
+  "MonitorMetricsResult",
+  "csharp"
+);
+@@clientName(
   MetricsApi.MetricsOperationGroup.listAtSubscriptionScope,
   "GetMonitorMetrics",
   "csharp"
