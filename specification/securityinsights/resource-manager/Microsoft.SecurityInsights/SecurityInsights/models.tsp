@@ -509,8 +509,6 @@ union supportTier {
 /**
  * The kind of content the metadata is for.
  */
-#suppress "@azure-tools/typespec-azure-core/friendly-name" "Used to keep the generated definition name (metadataKind) distinct from the property name while preserving the original x-ms-enum name 'kind'."
-@friendlyName("metadataKind")
 union kind {
   string,
 
