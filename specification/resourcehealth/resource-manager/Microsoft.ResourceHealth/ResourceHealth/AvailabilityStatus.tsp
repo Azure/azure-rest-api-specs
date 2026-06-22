@@ -112,50 +112,62 @@ interface AvailabilityStatuses {
   /**
    * Lists all historical availability transitions and impacting events for a single resource.
    */
+  @list
+  @get
+  @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses")
   @tag("AvailabilityStatuses")
   @action("availabilityStatuses")
-  list is Extension.ListByTarget<
-    Extension.ScopeParameter,
-    AvailabilityStatus,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
-       */
-      @query("$filter")
-      $filter?: string;
+  list(
+    ...ApiVersionParameter,
 
-      /**
-       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
-       */
-      @query("$expand")
-      $expand?: string;
-    },
-    Response = availabilityStatusListResult,
-    Error = ErrorResponse
-  >;
+    /** The resource URI */
+    @path
+    resourceUri: string,
+
+    /**
+     * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+     */
+    @query("$expand")
+    $expand?: string
+  ): availabilityStatusListResult | ErrorResponse;
 
   /**
    * Lists the current availability status for all the resources in the resource group.
    */
+  @list
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ResourceHealth/availabilityStatuses")
+  @action("availabilityStatuses")
   @tag("AvailabilityStatuses")
-  listByResourceGroup is AvailabilityStatusesOps.List<
-    AvailabilityStatus,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
-       */
-      @query("$filter")
-      $filter?: string;
+  listByResourceGroup(
+    ...ApiVersionParameter,
 
-      /**
-       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
-       */
-      @query("$expand")
-      $expand?: string;
-    },
-    Response = availabilityStatusListResult,
-    OverrideErrorType = ErrorResponse
-  >;
+    /** The subscription ID */
+    @path
+    subscriptionId: string,
+
+    /** The name of the resource group. */
+    @path
+    resourceGroupName: string,
+
+    /**
+     * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+     */
+    @query("$expand")
+    $expand?: string
+  ): availabilityStatusListResult | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The 'current' endpoints are non-resource operations"

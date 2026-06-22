@@ -85,7 +85,7 @@
           {
             "name": "resourceUri",
             "in": "path",
-            "description": "The fully qualified Azure Resource manager identifier of the resource.",
+            "description": "The resource URI",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -1318,10 +1318,18 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription ID",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of the resource group.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "$filter",
