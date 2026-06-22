@@ -16615,7 +16615,81 @@
         ]
       }
     },
-    "kind": {
+    "metadataAuthor": {
+      "type": "object",
+      "description": "Publisher or creator of the content item.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the author. Company or person."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email of author contact"
+        },
+        "link": {
+          "type": "string",
+          "description": "Link for author/vendor page"
+        }
+      }
+    },
+    "metadataCategories": {
+      "type": "object",
+      "description": "ies for the solution content item",
+      "properties": {
+        "domains": {
+          "type": "array",
+          "description": "domain for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verticals": {
+          "type": "array",
+          "description": "Industry verticals for the solution content item",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metadataDependencies": {
+      "type": "object",
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
+      "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Id of the content item we depend on"
+        },
+        "kind": {
+          "$ref": "#/definitions/metadataKind",
+          "description": "Type of the content item we depend on"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the content item"
+        },
+        "operator": {
+          "$ref": "#/definitions/MetadataDependencyOperator",
+          "description": "Operator used for list of dependencies in criteria array."
+        },
+        "criteria": {
+          "type": "array",
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "items": {
+            "$ref": "#/definitions/metadataDependencies"
+          },
+          "x-ms-identifiers": [
+            "contentId"
+          ]
+        }
+      }
+    },
+    "metadataKind": {
       "type": "string",
       "description": "The kind of content the metadata is for.",
       "enum": [
@@ -16751,80 +16825,6 @@
             "description": "SummaryRule"
           }
         ]
-      }
-    },
-    "metadataAuthor": {
-      "type": "object",
-      "description": "Publisher or creator of the content item.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the author. Company or person."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email of author contact"
-        },
-        "link": {
-          "type": "string",
-          "description": "Link for author/vendor page"
-        }
-      }
-    },
-    "metadataCategories": {
-      "type": "object",
-      "description": "ies for the solution content item",
-      "properties": {
-        "domains": {
-          "type": "array",
-          "description": "domain for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        },
-        "verticals": {
-          "type": "array",
-          "description": "Industry verticals for the solution content item",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "metadataDependencies": {
-      "type": "object",
-      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "Id of the content item we depend on"
-        },
-        "kind": {
-          "$ref": "#/definitions/kind",
-          "description": "Type of the content item we depend on"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the content item"
-        },
-        "operator": {
-          "$ref": "#/definitions/MetadataDependencyOperator",
-          "description": "Operator used for list of dependencies in criteria array."
-        },
-        "criteria": {
-          "type": "array",
-          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
-          "items": {
-            "$ref": "#/definitions/metadataDependencies"
-          },
-          "x-ms-identifiers": [
-            "contentId"
-          ]
-        }
       }
     },
     "metadataPatch": {
@@ -17636,7 +17636,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/metadataKind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -17933,7 +17933,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/metadataKind",
           "description": "The kind of content the template is for."
         },
         "source": {
