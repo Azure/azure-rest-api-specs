@@ -158,32 +158,6 @@ interface AvailabilityStatuses {
   >;
 }
 
-alias ChildAvailabilityStatusOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** undefined */
-    @path(#{ allowReserved: true })
-    @segment("")
-    @key
-    resourceUri: string;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.ResourceHealth";
-  },
-  {},
-  {
-    /** undefined */
-    @path
-    @segment("childAvailabilityStatuses")
-    @key
-    current: "current";
-  }
->;
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The 'current' endpoints are non-resource operations"
 interface ChildAvailabilityStatuses {
   /**
