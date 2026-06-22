@@ -116,6 +116,11 @@ namespace Microsoft.Compute;
   "CreateResourceOperationResult",
   "csharp"
 );
+@@clientName(
+  CreateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!autorest");
 @@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "!autorest");
 @@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "!autorest");
@@ -166,6 +171,11 @@ namespace Microsoft.Compute;
 @@clientName(
   ReimageResourceOperationResponse,
   "BulkActionsReimageResourceOperationResponseResult",
+  "csharp"
+);
+@@clientName(
+  ReimageResourceOperationResponse.type,
+  "ResourceTypeName",
   "csharp"
 );
 @@clientName(
