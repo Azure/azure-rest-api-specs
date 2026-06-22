@@ -5359,10 +5359,13 @@
             "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
           },
           {
-            "$ref": "#/parameters/GroupListMembersQueryParameters.maxPageSize"
-          },
-          {
-            "$ref": "#/parameters/GroupListMembersQueryParameters.skipToken"
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupListMembersRequest"
+            }
           }
         ],
         "responses": {
@@ -9223,6 +9226,22 @@
         "id"
       ]
     },
+    "GroupListMembersRequest": {
+      "type": "object",
+      "description": "Request body for listing current members of a namespace group.",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.",
+          "maximum": 1000
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Opaque continuation token from a previous listMembers response."
+        }
+      }
+    },
     "GroupListMembersResult": {
       "type": "object",
       "description": "Response for the list members operation.",
@@ -9234,9 +9253,9 @@
             "$ref": "#/definitions/GroupListMember"
           }
         },
-        "nextLink": {
+        "skipToken": {
           "type": "string",
-          "description": "The URL to the next page of results, if more results remain after the requested page."
+          "description": "Opaque continuation token to use in the next listMembers request, if more results remain after the requested page."
         }
       },
       "required": [
@@ -14257,26 +14276,5 @@
       }
     }
   },
-  "parameters": {
-    "GroupListMembersQueryParameters.maxPageSize": {
-      "name": "maxpagesize",
-      "in": "query",
-      "description": "Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "maximum": 1000,
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "maxPageSize"
-    },
-    "GroupListMembersQueryParameters.skipToken": {
-      "name": "skiptoken",
-      "in": "query",
-      "description": "Opaque continuation token from a previous listMembers response.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "skipToken"
-    }
-  }
+  "parameters": {}
 }

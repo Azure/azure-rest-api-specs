@@ -52,17 +52,15 @@ model GroupMemberCountResponse {
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("Query parameters for listing current members of a namespace group.")
-model GroupListMembersQueryParameters {
+@doc("Request body for listing current members of a namespace group.")
+model GroupListMembersRequest {
   @doc("""
     Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.
     """)
   @maxValue(1000)
-  @query("maxpagesize")
-  maxPageSize?: int32;
+  pageSize?: int32;
 
   @doc("Opaque continuation token from a previous listMembers response.")
-  @query("skiptoken")
   skipToken?: string;
 }
 
@@ -72,8 +70,9 @@ model GroupListMembersResult {
   @doc("The group members returned in this page.")
   members: GroupListMember[];
 
-  @doc("The URL to the next page of results, if more results remain after the requested page.")
-  nextLink?: string;
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a paging cursor, not a credential or secret."
+  @doc("Opaque continuation token to use in the next listMembers request, if more results remain after the requested page.")
+  skipToken?: string;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -136,8 +135,7 @@ interface Groups {
   @doc("Lists the current members of a namespace group.")
   listMembers is ArmResourceActionSync<
     Group,
-    void,
-    GroupListMembersResult,
-    Parameters = GroupListMembersQueryParameters
+    GroupListMembersRequest,
+    GroupListMembersResult
   >;
 }
