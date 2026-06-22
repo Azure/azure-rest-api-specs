@@ -272,6 +272,26 @@ namespace Microsoft.HealthcareApis;
   "KeyEncryptionKeyUri",
   "csharp"
 );
+@@clientName(
+  MetricDimension.toBeExportedForShoebox,
+  "IsExportedForShoebox",
+  "csharp"
+);
+@@clientName(
+  MetricSpecification.fillGapWithZero,
+  "IsFillGapWithZero",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Mitigate C# breaking change from Swagger to TypeSpec"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnectionDescription.properties,
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
 @@alternateType(
   EncryptionCustomerManagedKeyEncryption.keyEncryptionKeyUrl,
   url,
