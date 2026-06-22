@@ -84,15 +84,15 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/cancel"].post.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}/virtualMachines"].get.parameters[?(@.name=='location')]
       - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"].get.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCreate"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart"].post.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkVdiFlexCreate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCreate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDeallocate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkDelete"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkGetOperationStatus"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkHibernate"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkReimage"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkStart"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkVdiFlexCreate"].post.parameters[?(@.name=='location')]
   - code: MissingSegmentsInNestedResourceListOperation
     reason: >
       listVirtualMachines is the canonical child resource list URL pattern emitted by
@@ -124,14 +124,6 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
     where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: Bulkactions.json
-    where: $.definitions.ResourceProvisionFlexPayload.properties.baseProfile
-  - code: AvoidAdditionalProperties
-    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
-    from: Bulkactions.json
-    where: $.definitions.ResourceProvisionFlexPayload.properties.resourceOverrides.items
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
