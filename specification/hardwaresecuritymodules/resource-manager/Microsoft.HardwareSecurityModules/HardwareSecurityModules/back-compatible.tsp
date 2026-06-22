@@ -42,9 +42,18 @@ using Microsoft.HardwareSecurityModules;
 );
 @@clientName(PaymentHsmClusters.createOrUpdate::parameters.resource, "body");
 @@clientName(PaymentHsmClusters.update::parameters.properties, "body");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the CloudHsmCluster sibling resource shape (Go SDK / autorest output only)."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the CloudHsmCluster sibling resource shape."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PaymentHsmCluster.properties,
+  "!python,!java,!csharp,!javascript"
+);
+@@clientName(
+  PaymentHsmClusterPrivateEndpointConnections.create::parameters.resource,
+  "properties"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility with the CloudHsmCluster sibling private endpoint connection shape."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PaymentHsmClusterPrivateEndpointConnection.properties,
   "!python,!java,!csharp,!javascript"
 );
 @@clientName(
@@ -107,4 +116,9 @@ using Microsoft.HardwareSecurityModules;
   DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
   "DedicatedHsm",
   "!csharp"
+);
+//PaymentHsmClusters operations
+@@clientLocation(
+  PaymentHsmClusters.listByPaymentHsmCluster,
+  "PaymentHsmClusterPrivateLinkResources"
 );

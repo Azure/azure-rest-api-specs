@@ -818,7 +818,7 @@ model PaymentHsmClusterProperties {
    */
   @visibility(Lifecycle.Read)
   @identifiers(#["name"])
-  privateEndpointConnections?: PrivateEndpointConnection[];
+  privateEndpointConnections?: PaymentHsmClusterPrivateEndpointConnection[];
 
   /**
    * The Payment HSM Cluster's provisioningState

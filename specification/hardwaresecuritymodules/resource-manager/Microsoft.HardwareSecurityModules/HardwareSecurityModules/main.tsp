@@ -17,6 +17,7 @@ import "./CloudHsmCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./DedicatedHsm.tsp";
 import "./PaymentHsmCluster.tsp";
+import "./PaymentHsmClusterPrivateEndpointConnection.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;

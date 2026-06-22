@@ -86,6 +86,18 @@ interface PaymentHsmClusters {
       $skiptoken?: string;
     }
   >;
+
+  /**
+   * Gets the private link resources supported for the Payment Hsm Cluster.
+   */
+  @get
+  @action("privateLinkResources")
+  @list
+  listByPaymentHsmCluster is ArmResourceActionSync<
+    PaymentHsmCluster,
+    void,
+    CommonTypes.PrivateLinkResourceListResult
+  >;
 }
 
 @@maxLength(PaymentHsmCluster.name, 23);
