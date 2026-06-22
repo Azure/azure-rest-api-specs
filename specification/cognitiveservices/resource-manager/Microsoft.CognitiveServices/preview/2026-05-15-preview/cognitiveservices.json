@@ -18569,7 +18569,7 @@
           {
             "name": "Audit",
             "value": "Audit",
-            "description": "Rules are evaluated and logged but not enforced. A would-be Deny is logged but traffic\nis still forwarded, allowing customers to preview policy impact without breaking traffic."
+            "description": "Rules are evaluated and logged but not enforced. Traffic is always forwarded regardless of\nrule action. A would-be Deny is logged but not applied. Transform and Rewrite actions are\nstill applied to matching traffic (only Deny enforcement is suppressed)."
           }
         ]
       }
@@ -18618,7 +18618,7 @@
     },
     "RaiEgressRewriteTarget": {
       "type": "object",
-      "description": "Where a Rewrite action sends matched traffic. At least one field must be set.",
+      "description": "Where a Rewrite action sends matched traffic. At least one field must be set;\nomitted fields retain the original request values. This constraint is enforced\nby the server (400 Bad Request if all fields are omitted).",
       "properties": {
         "scheme": {
           "type": "string",

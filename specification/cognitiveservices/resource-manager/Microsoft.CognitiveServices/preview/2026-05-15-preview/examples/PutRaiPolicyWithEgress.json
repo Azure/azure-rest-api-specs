@@ -46,6 +46,31 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "rewrite-legacy-api",
+              "description": "Rewrite legacy API hostname to new internal endpoint",
+              "ruleType": "Fqdn",
+              "match": {
+                "host": "legacy-api.contoso.com",
+                "path": "/v1/*"
+              },
+              "action": {
+                "actionType": "Rewrite",
+                "rewrite": {
+                  "scheme": "https",
+                  "host": "api-v2.internal.contoso.com",
+                  "path": "/v2/{path}",
+                  "targetPort": 8443
+                },
+                "headers": [
+                  {
+                    "operation": "Set",
+                    "name": "X-Forwarded-Host",
+                    "value": "legacy-api.contoso.com"
+                  }
+                ]
+              }
             }
           ]
         }
@@ -99,6 +124,31 @@
                           "type": "SystemAssigned"
                         }
                       }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "rewrite-legacy-api",
+                "description": "Rewrite legacy API hostname to new internal endpoint",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "legacy-api.contoso.com",
+                  "path": "/v1/*"
+                },
+                "action": {
+                  "actionType": "Rewrite",
+                  "rewrite": {
+                    "scheme": "https",
+                    "host": "api-v2.internal.contoso.com",
+                    "path": "/v2/{path}",
+                    "targetPort": 8443
+                  },
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "X-Forwarded-Host",
+                      "value": "legacy-api.contoso.com"
                     }
                   ]
                 }
@@ -176,6 +226,31 @@
                           "type": "SystemAssigned"
                         }
                       }
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "rewrite-legacy-api",
+                "description": "Rewrite legacy API hostname to new internal endpoint",
+                "ruleType": "Fqdn",
+                "match": {
+                  "host": "legacy-api.contoso.com",
+                  "path": "/v1/*"
+                },
+                "action": {
+                  "actionType": "Rewrite",
+                  "rewrite": {
+                    "scheme": "https",
+                    "host": "api-v2.internal.contoso.com",
+                    "path": "/v2/{path}",
+                    "targetPort": 8443
+                  },
+                  "headers": [
+                    {
+                      "operation": "Set",
+                      "name": "X-Forwarded-Host",
+                      "value": "legacy-api.contoso.com"
                     }
                   ]
                 }

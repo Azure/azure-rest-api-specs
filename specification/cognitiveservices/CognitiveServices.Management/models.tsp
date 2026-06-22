@@ -6573,8 +6573,9 @@ union RaiEgressMode {
   Enforced: "Enforced",
 
   /**
-   * Rules are evaluated and logged but not enforced. A would-be Deny is logged but traffic
-   * is still forwarded, allowing customers to preview policy impact without breaking traffic.
+   * Rules are evaluated and logged but not enforced. Traffic is always forwarded regardless of
+   * rule action. A would-be Deny is logged but not applied. Transform and Rewrite actions are
+   * still applied to matching traffic (only Deny enforcement is suppressed).
    */
   Audit: "Audit",
 }
@@ -6717,7 +6718,9 @@ model RaiEgressHeaderTransform {
 }
 
 /**
- * Where a Rewrite action sends matched traffic. At least one field must be set.
+ * Where a Rewrite action sends matched traffic. At least one field must be set;
+ * omitted fields retain the original request values. This constraint is enforced
+ * by the server (400 Bad Request if all fields are omitted).
  */
 @added(Versions.v2026_05_15_preview)
 model RaiEgressRewriteTarget {
