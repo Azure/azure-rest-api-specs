@@ -87,27 +87,30 @@ model NamespaceUpdateComplianceReport extends Report {
 }
 
 // ──────────────────────────────────────────────
-// Concrete selector stubs (one per ReportType).
+// Concrete request stubs (one per ReportType).
 // Add report-specific input fields to the relevant subclass as the
 // product evolves; each subclass already inherits `reportTarget` and
-// pins its `reportType` discriminator.
+// pins its `reportType` discriminator. They extend `ReportSelector`
+// (the discriminated base) so the `reportType` discriminator is
+// preserved; the LRO id header is layered on separately at the
+// `:generateReport` operation, not on these selector variants.
 // ──────────────────────────────────────────────
 
-/** Selector for a NamespaceUpdateCompliance report. */
-model NamespaceUpdateComplianceReportSelector extends ReportSelector {
+/** Request to generate a NamespaceUpdateCompliance report. */
+model NamespaceUpdateComplianceReportRequest extends ReportSelector {
   reportType: ReportType.NamespaceUpdateComplianceReport;
 }
 
-/** Selector for a GroupBestUpdates compliance report. */
-model GroupBestUpdatesComplianceReportSelector extends ReportSelector {
+/** Request to generate a GroupBestUpdates compliance report. */
+model GroupBestUpdatesComplianceReportRequest extends ReportSelector {
   reportType: ReportType.GroupBestUpdatesComplianceReport;
 
   /** The group that the report is generated against. */
   reportTarget: string;
 }
 
-/** Selector for a GroupInstallableUpdates report. */
-model GroupInstallableUpdatesReportSelector extends ReportSelector {
+/** Request to generate a GroupInstallableUpdates report. */
+model GroupInstallableUpdatesReportRequest extends ReportSelector {
   reportType: ReportType.GroupInstallableUpdatesReport;
 
   /** The group that the report is generated against. */
@@ -233,6 +236,14 @@ model GroupInstallableUpdatesReport extends Report {
 @resource("generateReportResults")
 model GenerateReportResult is LongRunningOperationStatus<Report>;
 
+/**
+ * Request for the long-running `:generateReport` action: a report selector
+ * combined with the long-running operation id header. Defined as an alias so
+ * the `reportType` discriminator on `ReportSelector` is preserved on the wire
+ * (a spread `model` would flatten it and break `@discriminator`).
+ */
+alias GenerateReportRequest = ReportSelector & LongRunningOperationIdHeader;
+
 // ──────────────────────────────────────────────
 // Namespaces interface
 // ──────────────────────────────────────────────
@@ -244,7 +255,7 @@ interface Namespaces {
   @pollingOperation(GenerateReportResults.get)
   generateReport is ResourceOperations.LongRunningResourceAction<
     Namespace,
-    ReportSelector & LongRunningOperationIdHeader,
+    GenerateReportRequest,
     Report,
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait
