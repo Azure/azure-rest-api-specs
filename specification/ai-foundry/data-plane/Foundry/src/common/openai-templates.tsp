@@ -31,7 +31,7 @@ op OpenAIAgentOperation<
   ErrorResponse = ApiErrorResponse
 > is OpenAIOperation<
   {
-    ...UserIsolationKeyHeader;
+    ...UserDelegationHeader;
     ...Params;
   },
   Response,
@@ -46,7 +46,7 @@ op OpenAIAgentSessionOperation<
   Params extends Reflection.Model,
   Response extends Reflection.Model,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...Params):
+>(...UserDelegationHeader, ...Params):
   | (Response & AgentSessionIdResponseHeader)
   | AzureRangeErrorResponse<ErrorResponse>;
 
@@ -58,7 +58,7 @@ op OpenAIAgentStreamingOperation<
   Params extends Reflection.Model,
   Event,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...Params):
+>(...UserDelegationHeader, ...Params):
   | SseResponseOf<Event>
   | AzureRangeErrorResponse<ErrorResponse>;
 
@@ -71,7 +71,7 @@ op OpenAIAgentPagedOperation<
   ErrorResponse = ApiErrorResponse
 > is OpenAIOperation<
   {
-    ...UserIsolationKeyHeader;
+    ...UserDelegationHeader;
     ...Params;
   },
   Response,
@@ -86,6 +86,6 @@ op OpenAIAgentFilteredPagedOperation<
   Params extends Reflection.Model,
   Item extends Reflection.Model,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...CommonPageQueryParameters, ...Params):
+>(...UserDelegationHeader, ...CommonPageQueryParameters, ...Params):
   | AgentsPagedResult<Item>
   | AzureRangeErrorResponse<ErrorResponse>;
