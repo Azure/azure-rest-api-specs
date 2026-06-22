@@ -41,10 +41,15 @@ interface RecoveryPlans {
     ServiceGroupParameters
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @route(ServiceGroupRoute)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     RecoveryPlan,
-    RecoveryPlanProperties,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      RecoveryPlan,
+      RecoveryPlanPatchProperties
+    >,
     ServiceGroupParameters
   >;
 

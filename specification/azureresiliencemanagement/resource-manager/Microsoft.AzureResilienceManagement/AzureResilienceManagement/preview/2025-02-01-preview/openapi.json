@@ -9444,6 +9444,22 @@
         }
       }
     },
+    "RecoveryPlanPatchProperties": {
+      "type": "object",
+      "description": "PATCH properties for the recovery orchestration plan.",
+      "properties": {
+        "planDescription": {
+          "type": "string",
+          "description": "A description of the recovery orchestration plan.",
+          "minLength": 5,
+          "maxLength": 50
+        },
+        "recoveryGroupsSetting": {
+          "$ref": "#/definitions/RecoveryGroupsSetting",
+          "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
+        }
+      }
+    },
     "RecoveryPlanProperties": {
       "type": "object",
       "description": "Properties of the recovery orchestration plan.",
@@ -9534,22 +9550,6 @@
         }
       }
     },
-    "RecoveryPlanPropertiesUpdate": {
-      "type": "object",
-      "description": "Properties of the recovery orchestration plan.",
-      "properties": {
-        "planDescription": {
-          "type": "string",
-          "description": "A description of the recovery orchestration plan.",
-          "minLength": 5,
-          "maxLength": 50
-        },
-        "recoveryGroupsSetting": {
-          "$ref": "#/definitions/RecoveryGroupsSettingUpdate",
-          "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
-        }
-      }
-    },
     "RecoveryPlanState": {
       "type": "string",
       "description": "Specifies the state of the recovery orchestration plan.",
@@ -9606,22 +9606,33 @@
     },
     "RecoveryPlanUpdate": {
       "type": "object",
-      "description": "Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.",
+      "description": "The type used for update operations of the RecoveryPlan.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecoveryPlanPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
         "identity": {
           "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/RecoveryPlanUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+      }
+    },
+    "RecoveryPlanUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the RecoveryPlan.",
+      "properties": {
+        "planDescription": {
+          "type": "string",
+          "description": "A description of the recovery orchestration plan.",
+          "minLength": 5,
+          "maxLength": 50
+        },
+        "recoveryGroupsSetting": {
+          "$ref": "#/definitions/RecoveryGroupsSettingUpdate",
+          "description": "Settings for the recovery orchestration groups associated with the recovery orchestration plan."
         }
-      ]
+      }
     },
     "RecoveryResource": {
       "type": "object",
