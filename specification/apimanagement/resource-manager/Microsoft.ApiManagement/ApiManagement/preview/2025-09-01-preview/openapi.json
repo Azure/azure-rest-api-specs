@@ -3082,6 +3082,12 @@
           "ApiManagementCreateMcpApi": {
             "$ref": "./examples/ApiManagementCreateMcpApi.json"
           },
+          "ApiManagementCreateMcpApiFederation": {
+            "$ref": "./examples/ApiManagementCreateMcpApiFederation.json"
+          },
+          "ApiManagementCreateMcpApiFromExistingApi": {
+            "$ref": "./examples/ApiManagementCreateMcpApiFromExistingApi.json"
+          },
           "ApiManagementCreateODataApi": {
             "$ref": "./examples/ApiManagementCreateODataApi.json"
           },
@@ -52573,6 +52579,17 @@
         "mcpProperties": {
           "$ref": "#/definitions/McpProperties",
           "description": "Properties specific to MCP API type."
+        },
+        "toolServerId": {
+          "type": "string",
+          "description": "ToolServer identifier for MCP federation. References an existing ToolServer entity.\nMutually exclusive with the API backend."
+        },
+        "mcpTools": {
+          "type": "array",
+          "description": "Expose-existing-API scenario: array of MCP tools exposed by this MCP API, each mapping an existing\nAPI operation (see operationId). Alternative to creating tools via the `tools` sub-resource. Only valid\nwhen type is 'mcp'. Cannot be combined with a backend (pass-through).",
+          "items": {
+            "$ref": "#/definitions/McpToolContract"
+          }
         }
       }
     },
@@ -59758,67 +59775,71 @@
     },
     "McpEndpoint": {
       "type": "object",
-      "description": "Endpoint definition for MCP API type.",
+      "description": "A single MCP transport endpoint, mapped to a relative URL on the backend MCP server.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "MCP endpoint name, e.g. 'sse' or 'messages'.",
-          "minLength": 1,
-          "maxLength": 300
-        },
         "uriTemplate": {
           "type": "string",
           "description": "Relative URL path that must start with '/'.",
           "pattern": "^/.*$"
         }
+      }
+    },
+    "McpEndpoints": {
+      "type": "object",
+      "description": "MCP transport endpoints for the pass-through scenario. Each property is a known MCP transport route\nmapped to a relative URL on the backend MCP server. Defining a property opts that route in.",
+      "properties": {
+        "sse": {
+          "$ref": "#/definitions/McpEndpoint",
+          "description": "HTTP+SSE transport: the SSE stream endpoint."
+        },
+        "messages": {
+          "$ref": "#/definitions/McpEndpoint",
+          "description": "HTTP+SSE transport: the message (POST) endpoint."
+        },
+        "mcp": {
+          "$ref": "#/definitions/McpEndpoint",
+          "description": "Streamable HTTP transport endpoint."
+        }
+      }
+    },
+    "McpProperties": {
+      "type": "object",
+      "description": "Properties specific to MCP API type. An MCP API is created in one of three ways:\n1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId) and, optionally, `endpoints`.\n2. Expose existing API operations as MCP tools: set `mcpTools` (or use the `tools` sub-resource); do not set a backend.\n3. Federation router: set `toolServerId` together with `isFederationRouter`.",
+      "properties": {
+        "endpoints": {
+          "$ref": "#/definitions/McpEndpoints",
+          "description": "Pass-through scenario only: maps known MCP transport routes (sse, messages, mcp) to relative URLs on\nthe backend MCP server. Optional (both SSE and Streamable HTTP are handled automatically). Mutually\nexclusive with isFederationRouter."
+        },
+        "isFederationRouter": {
+          "type": "boolean",
+          "description": "When true, this MCP API acts as a shared federation router. The gateway auto-injects a synthetic\nPOST /{toolServerId}/mcp operation. Mutually exclusive with endpoints."
+        }
+      }
+    },
+    "McpToolContract": {
+      "type": "object",
+      "description": "MCP tool details. An MCP tool exposes an existing API operation as a callable tool.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "MCP tool name. Must contain only letters, numbers, underscores, and hyphens.",
+          "minLength": 1,
+          "maxLength": 100,
+          "pattern": "^[\\w]+$|^[\\w][\\w\\-]*[\\w]$"
+        },
+        "description": {
+          "type": "string",
+          "description": "MCP tool description. Must be 1000 characters or less.",
+          "maxLength": 1000
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Resource identifier of the operation this MCP tool maps to, e.g.\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}."
+        }
       },
       "required": [
         "name"
       ]
-    },
-    "McpProperties": {
-      "type": "object",
-      "description": "Properties specific to MCP API type.",
-      "properties": {
-        "transportType": {
-          "$ref": "#/definitions/McpTransportType",
-          "description": "Transport type for Model Context Protocol API."
-        },
-        "endpoints": {
-          "type": "array",
-          "description": "Collection of MCP endpoint definitions with relative URLs.",
-          "items": {
-            "$ref": "#/definitions/McpEndpoint"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
-    "McpTransportType": {
-      "type": "string",
-      "description": "Transport type for Model Context Protocol API.",
-      "enum": [
-        "sse",
-        "streamable"
-      ],
-      "x-ms-enum": {
-        "name": "McpTransportType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "sse",
-            "value": "sse",
-            "description": "This API uses HTTP+SSE transport type."
-          },
-          {
-            "name": "streamable",
-            "value": "streamable",
-            "description": "This API uses the Streamable HTTP transport type."
-          }
-        ]
-      }
     },
     "Method": {
       "type": "string",
@@ -64883,12 +64904,14 @@
     },
     "ToolContractProperties": {
       "type": "object",
+      "description": "Properties of an MCP tool exposed by an MCP API. A tool maps an existing API operation so it can be\ndiscovered and invoked by MCP clients.",
       "properties": {
         "displayName": {
           "type": "string",
           "description": "Tool Name. MCP tool name must contain only letters, numbers, underscores, and hyphens.",
           "minLength": 1,
-          "maxLength": 300
+          "maxLength": 100,
+          "pattern": "^[\\w]+$|^[\\w][\\w\\-]*[\\w]$"
         },
         "description": {
           "type": "string",
@@ -64898,6 +64921,10 @@
         "operationId": {
           "type": "string",
           "description": "Identifier of the operation this MCP tool is associated with in the form of /apis/{apiId}/operations/{operationId}."
+        },
+        "policies": {
+          "type": "string",
+          "description": "Tool policies (raw policy document)."
         }
       }
     },

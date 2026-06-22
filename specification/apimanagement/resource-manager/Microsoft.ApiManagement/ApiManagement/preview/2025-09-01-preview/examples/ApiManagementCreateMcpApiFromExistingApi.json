@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "apiId": "weather-mcp",
+    "parameters": {
+      "properties": {
+        "type": "mcp",
+        "path": "weather-mcp",
+        "description": "Exposes existing Weather API operations as MCP tools",
+        "displayName": "Weather MCP",
+        "protocols": [
+          "https"
+        ],
+        "mcpTools": [
+          {
+            "name": "get-current-weather",
+            "description": "Returns the current weather for a given city.",
+            "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getCurrentWeather"
+          },
+          {
+            "name": "get-forecast",
+            "description": "Returns a multi-day forecast for a given city.",
+            "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getForecast"
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "weather-mcp",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-mcp",
+        "properties": {
+          "type": "mcp",
+          "path": "weather-mcp",
+          "description": "Exposes existing Weather API operations as MCP tools",
+          "apiRevision": "1",
+          "authenticationSettings": null,
+          "displayName": "Weather MCP",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "https"
+          ],
+          "provisioningState": "InProgress",
+          "subscriptionKeyParameterNames": null,
+          "mcpTools": [
+            {
+              "name": "get-current-weather",
+              "description": "Returns the current weather for a given city.",
+              "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getCurrentWeather"
+            },
+            {
+              "name": "get-forecast",
+              "description": "Returns a multi-day forecast for a given city.",
+              "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getForecast"
+            }
+          ]
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2025-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-mcp?api-version=2025-09-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
+      }
+    },
+    "201": {
+      "body": {
+        "name": "weather-mcp",
+        "type": "Microsoft.ApiManagement/service/apis",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-mcp",
+        "properties": {
+          "type": "mcp",
+          "path": "weather-mcp",
+          "description": "Exposes existing Weather API operations as MCP tools",
+          "apiRevision": "1",
+          "authenticationSettings": null,
+          "displayName": "Weather MCP",
+          "isCurrent": true,
+          "isOnline": true,
+          "protocols": [
+            "https"
+          ],
+          "provisioningState": "InProgress",
+          "subscriptionKeyParameterNames": null,
+          "mcpTools": [
+            {
+              "name": "get-current-weather",
+              "description": "Returns the current weather for a given city.",
+              "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getCurrentWeather"
+            },
+            {
+              "name": "get-forecast",
+              "description": "Returns a multi-day forecast for a given city.",
+              "operationId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-api/operations/getForecast"
+            }
+          ]
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/operationResults/5c730e343244df1b9cb56e85?api-version=2025-09-01-preview",
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/weather-mcp?api-version=2025-09-01-preview&asyncId=5c730e343244df1b9cb56e85&asyncCode=200"
+      }
+    }
+  },
+  "operationId": "Api_CreateOrUpdate",
+  "title": "ApiManagementCreateMcpApiFromExistingApi"
+}

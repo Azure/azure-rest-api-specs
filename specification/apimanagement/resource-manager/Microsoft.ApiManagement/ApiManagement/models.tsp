@@ -320,33 +320,9 @@ union SoapApiType {
 }
 
 /**
- * Transport type for Model Context Protocol API.
- */
-union McpTransportType {
-  string,
-
-  /**
-   * This API uses HTTP+SSE transport type.
-   */
-  sse: "sse",
-
-  /**
-   * This API uses the Streamable HTTP transport type.
-   */
-  streamable: "streamable",
-}
-
-/**
- * Endpoint definition for MCP API type.
+ * A single MCP transport endpoint, mapped to a relative URL on the backend MCP server.
  */
 model McpEndpoint {
-  /**
-   * MCP endpoint name, e.g. 'sse' or 'messages'.
-   */
-  @maxLength(300)
-  @minLength(1)
-  name: string;
-
   /**
    * Relative URL path that must start with '/'.
    */
@@ -355,19 +331,70 @@ model McpEndpoint {
 }
 
 /**
- * Properties specific to MCP API type.
+ * MCP transport endpoints for the pass-through scenario. Each property is a known MCP transport route
+ * mapped to a relative URL on the backend MCP server. Defining a property opts that route in.
+ */
+model McpEndpoints {
+  /**
+   * HTTP+SSE transport: the SSE stream endpoint.
+   */
+  sse?: McpEndpoint;
+
+  /**
+   * HTTP+SSE transport: the message (POST) endpoint.
+   */
+  messages?: McpEndpoint;
+
+  /**
+   * Streamable HTTP transport endpoint.
+   */
+  mcp?: McpEndpoint;
+}
+
+/**
+ * Properties specific to MCP API type. An MCP API is created in one of three ways:
+ * 1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId) and, optionally, `endpoints`.
+ * 2. Expose existing API operations as MCP tools: set `mcpTools` (or use the `tools` sub-resource); do not set a backend.
+ * 3. Federation router: set `toolServerId` together with `isFederationRouter`.
  */
 model McpProperties {
   /**
-   * Transport type for Model Context Protocol API.
+   * Pass-through scenario only: maps known MCP transport routes (sse, messages, mcp) to relative URLs on
+   * the backend MCP server. Optional (both SSE and Streamable HTTP are handled automatically). Mutually
+   * exclusive with isFederationRouter.
    */
-  transportType?: McpTransportType;
+  endpoints?: McpEndpoints;
 
   /**
-   * Collection of MCP endpoint definitions with relative URLs.
+   * When true, this MCP API acts as a shared federation router. The gateway auto-injects a synthetic
+   * POST /{toolServerId}/mcp operation. Mutually exclusive with endpoints.
    */
-  @identifiers(#["name"])
-  endpoints?: McpEndpoint[];
+  isFederationRouter?: boolean;
+}
+
+/**
+ * MCP tool details. An MCP tool exposes an existing API operation as a callable tool.
+ */
+model McpToolContract {
+  /**
+   * MCP tool name. Must contain only letters, numbers, underscores, and hyphens.
+   */
+  @maxLength(100)
+  @minLength(1)
+  @pattern("^[\\w]+$|^[\\w][\\w\\-]*[\\w]$")
+  name: string;
+
+  /**
+   * MCP tool description. Must be 1000 characters or less.
+   */
+  @maxLength(1000)
+  description?: string;
+
+  /**
+   * Resource identifier of the operation this MCP tool maps to, e.g.
+   * /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}/operations/{operationId}.
+   */
+  operationId?: string;
 }
 
 /**
@@ -2260,6 +2287,19 @@ model ApiEntityBaseContract {
    * Properties specific to MCP API type.
    */
   mcpProperties?: McpProperties;
+
+  /**
+   * ToolServer identifier for MCP federation. References an existing ToolServer entity.
+   * Mutually exclusive with the API backend.
+   */
+  toolServerId?: string;
+
+  /**
+   * Expose-existing-API scenario: array of MCP tools exposed by this MCP API, each mapping an existing
+   * API operation (see operationId). Alternative to creating tools via the `tools` sub-resource. Only valid
+   * when type is 'mcp'. Cannot be combined with a backend (pass-through).
+   */
+  mcpTools?: McpToolContract[];
 }
 
 /**
@@ -3967,14 +4007,18 @@ model ToolCollection {
   nextLink?: string;
 }
 
+/**
+ * Properties of an MCP tool exposed by an MCP API. A tool maps an existing API operation so it can be
+ * discovered and invoked by MCP clients.
+ */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ToolContractProperties {
   /**
    * Tool Name. MCP tool name must contain only letters, numbers, underscores, and hyphens.
    */
-  @maxLength(300)
+  @maxLength(100)
   @minLength(1)
+  @pattern("^[\\w]+$|^[\\w][\\w\\-]*[\\w]$")
   displayName?: string;
 
   /**
@@ -3987,6 +4031,11 @@ model ToolContractProperties {
    * Identifier of the operation this MCP tool is associated with in the form of /apis/{apiId}/operations/{operationId}.
    */
   operationId?: string;
+
+  /**
+   * Tool policies (raw policy document).
+   */
+  policies?: string;
 }
 
 /**
