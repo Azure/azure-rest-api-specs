@@ -3425,6 +3425,17 @@ model ServerPropertiesForPatch {
   createMode?: CreateModeForPatch;
 
   /**
+   * Identifier of the server to be used as the source of the new server. Required when 'createMode' is 'PointInTimeRestore', 'GeoRestore', 'Replica', or 'ReviveDropped'. This property is returned only when the target server is a read replica.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Update)
+  sourceServerResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.DBforPostgreSQL/flexibleServers";
+    }
+  ]>;
+
+  /**
    * Role of the server in a replication set.
    */
   replicationRole?: ReplicationRole;
