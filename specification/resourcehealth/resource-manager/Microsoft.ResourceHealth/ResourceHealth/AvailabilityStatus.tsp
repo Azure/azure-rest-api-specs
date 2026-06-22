@@ -219,25 +219,29 @@ interface ChildAvailabilityStatuses {
   /**
    * Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status
    */
+  @list
+  @get
+  @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses")
   @segment("childAvailabilityStatuses")
-  list is ChildAvailabilityStatusOps.List<
-    AvailabilityStatus,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
-       */
-      @query("$filter")
-      $filter?: string;
+  list(
+    ...ApiVersionParameter,
 
-      /**
-       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
-       */
-      @query("$expand")
-      $expand?: string;
-    },
-    Response = availabilityStatusListResult,
-    ErrorType = ErrorResponse
-  >;
+    /** The resource URI */
+    @path
+    resourceUri: string,
+
+    /**
+     * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+     */
+    @query("$expand")
+    $expand?: string
+  ): availabilityStatusListResult | ErrorResponse;
 }
 
 @@doc(AvailabilityStatus.name, "");
