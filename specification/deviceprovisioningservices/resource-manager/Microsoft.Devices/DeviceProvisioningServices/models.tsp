@@ -1050,11 +1050,6 @@ union LinkingState {
   Succeeded: "Succeeded",
 
   /**
-   * The linking process failed.
-   */
-  Failed: "Failed",
-
-  /**
    * The linked Device Registry namespace no longer exists.
    */
   Orphaned: "Orphaned",
