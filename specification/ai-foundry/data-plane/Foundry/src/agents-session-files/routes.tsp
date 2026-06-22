@@ -29,12 +29,7 @@ interface AgentSessionFiles {
   @summary("Upload a session file")
   @put
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  uploadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  uploadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -49,7 +44,6 @@ interface AgentSessionFiles {
       @header("Content-Type") contentType: "application/octet-stream";
 
       @body content: bytes;
-      ...UserIsolationKeyHeader;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
@@ -61,12 +55,7 @@ interface AgentSessionFiles {
   @summary("Download a session file")
   @get
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  downloadSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  downloadSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -76,8 +65,6 @@ interface AgentSessionFiles {
 
       /** The file path to download from the sandbox, relative to the session home directory. */
       @query path: string;
-
-      ...UserIsolationKeyHeader;
     },
     bytes
   >;
@@ -90,12 +77,7 @@ interface AgentSessionFiles {
   @get
   @list
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  listSessionFiles is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  listSessionFiles is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -106,7 +88,6 @@ interface AgentSessionFiles {
       /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
       @query path?: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     SessionDirectoryListResponse
@@ -119,12 +100,7 @@ interface AgentSessionFiles {
   @summary("Delete a session file")
   @delete
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[AgentDefinitionOptInKeys.hosted_agents_v1_preview] }
-  )
-  deleteSessionFile is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.hosted_agents_v1_preview,
+  deleteSessionFile is FoundryDataPlaneOperation<
     {
       /** The name of the agent. */
       @path agent_name: string;
@@ -137,8 +113,6 @@ interface AgentSessionFiles {
 
       /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
       @query recursive?: boolean = false;
-
-      ...UserIsolationKeyHeader;
     },
     void
   >;

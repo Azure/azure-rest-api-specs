@@ -71,6 +71,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.getAgentVersion, "getVersion");
 @@clientName(Agents.deleteAgentVersion, "deleteVersion");
 @@clientName(Agents.listAgentVersions, "listVersions");
+@@clientName(Agents.enableAgent, "enable");
+@@clientName(Agents.disableAgent, "disable");
 @@clientName(
   Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
@@ -225,7 +227,6 @@ using Azure.AI.Projects;
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
-@@clientName(AgentProtocol.a2a, exact("A2A"), "python");
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
 @@clientName(OptimizationInlineDatasetInput.items, "dataset_items", "python");

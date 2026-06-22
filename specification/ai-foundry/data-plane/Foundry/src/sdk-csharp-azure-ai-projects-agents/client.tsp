@@ -43,7 +43,6 @@ namespace Azure.AI.Projects {
 
   @@clientName(AgentObject, "ProjectsAgentRecord");
   @@clientName(AgentKind, "ProjectsAgentKind");
-  @@clientName(AgentProtocol, "ProjectsAgentProtocol");
   @@clientName(AgentSessionResource, "ProjectAgentSession");
   @@access(AgentSessionResource, Access.public);
 
