@@ -12996,6 +12996,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
+    A2AProtocolConfiguration:
+      type: object
+      description: Configuration specific to the A2A protocol.
     A2AToolCall:
       type: object
       required:
@@ -13054,9 +13057,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an A2A (Agent-to-Agent) tool call.
-    A2aProtocolConfiguration:
-      type: object
-      description: Configuration specific to the A2A protocol.
     AISearchIndexResource:
       type: object
       properties:
@@ -38651,7 +38651,7 @@ components:
           description: Configuration for the responses protocol.
         a2a:
           allOf:
-            - $ref: '#/components/schemas/A2aProtocolConfiguration'
+            - $ref: '#/components/schemas/A2AProtocolConfiguration'
           description: Configuration for the A2A protocol.
         mcp:
           allOf:
