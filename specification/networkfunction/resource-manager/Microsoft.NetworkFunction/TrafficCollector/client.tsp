@@ -70,12 +70,20 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-
-op AzureTrafficCollectorsCreateOrUpdate(
+/**
+ * azureTrafficCollectorsCreateOrUpdate.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+op azureTrafficCollectorsCreateOrUpdate(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...ResourceGroupParameter,
   ...ProviderNamespace<SubscriptionActionScope>,
+
+  /**
+   * azureTrafficCollectorName.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   azureTrafficCollectorName: string,
 
   /**
@@ -103,6 +111,9 @@ op AzureTrafficCollectorsCreateOrUpdate(
    */
   virtualHub?: ResourceReference,
 
+  /**
+   * The name of the Azure Traffic Collector.
+   */
   @visibility(Lifecycle.Read)
   name?: string,
 ):
@@ -111,6 +122,6 @@ op AzureTrafficCollectorsCreateOrUpdate(
   | Microsoft.NetworkFunction.CloudError;
 @@override(
   AzureTrafficCollectors.createOrUpdate,
-  AzureTrafficCollectorsCreateOrUpdate,
+  azureTrafficCollectorsCreateOrUpdate,
   "javascript"
 );
