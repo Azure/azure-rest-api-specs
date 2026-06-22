@@ -28,6 +28,12 @@ using Microsoft.Network;
 @@clientName(PrivateZone, "PrivateDnsZone", "csharp");
 @@clientName(RecordSet, "PrivateDnsRecord", "csharp");
 @@clientName(RecordType, "PrivateDnsRecordType", "csharp");
+@@clientName(RecordType.AAAA, "Aaaaa", "csharp");
+@@clientName(RecordType.CNAME, "Cname", "csharp");
+@@clientName(RecordType.PTR, "Ptr", "csharp");
+@@clientName(RecordType.SOA, "Soa", "csharp");
+@@clientName(RecordType.SRV, "Srv", "csharp");
+@@clientName(RecordType.TXT, "Txt", "csharp");
 @@clientName(ProvisioningState, "PrivateDnsProvisioningState", "csharp");
 @@clientName(ResolutionPolicy, "PrivateDnsResolutionPolicy", "csharp");
 @@clientName(ARecord, "PrivateDnsARecordInfo", "csharp");
@@ -38,6 +44,7 @@ using Microsoft.Network;
 @@clientName(SoaRecord, "PrivateDnsSoaRecordInfo", "csharp");
 @@clientName(SrvRecord, "PrivateDnsSrvRecordInfo", "csharp");
 @@clientName(TxtRecord, "PrivateDnsTxtRecordInfo", "csharp");
+@@clientName(RecordSetProperties, "PrivateDnsRecordSetProperties", "csharp");
 @@clientName(
   PrivateZoneProperties.maxNumberOfRecordSets,
   "maxNumberOfRecords",
