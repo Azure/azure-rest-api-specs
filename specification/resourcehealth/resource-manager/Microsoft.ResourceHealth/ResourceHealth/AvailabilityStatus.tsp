@@ -84,27 +84,30 @@ interface AvailabilityStatuses {
   /**
    * Lists the current availability status for all the resources in the subscription.
    */
+  @list
+  @get
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/availabilityStatuses")
   @action("availabilityStatuses")
   @tag("AvailabilityStatuses")
-  listBySubscriptionId is Extension.ListByTarget<
-    Extension.Subscription,
-    AvailabilityStatus,
-    Parameters = {
-      /**
-       * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
-       */
-      @query("$filter")
-      $filter?: string;
+  listBySubscriptionId(
+    ...ApiVersionParameter,
 
-      /**
-       * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
-       */
-      @query("$expand")
-      $expand?: string;
-    },
-    Response = availabilityStatusListResult,
-    Error = ErrorResponse
-  >;
+    /** The subscription ID */
+    @path
+    subscriptionId: string,
+
+    /**
+     * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
+     */
+    @query("$expand")
+    $expand?: string
+  ): availabilityStatusListResult | ErrorResponse;
 
   /**
    * Lists all historical availability transitions and impacting events for a single resource.
