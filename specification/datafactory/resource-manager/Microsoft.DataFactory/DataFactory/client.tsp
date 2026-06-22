@@ -689,19 +689,14 @@ using Microsoft.DataFactory;
   "GetPrivateLinkResources",
   "csharp"
 );
-@@clientName(
-  Factories.privateLinkResourcesGet,
-  "GetPrivateLinkResources",
-  "csharp"
-);
-@@clientName(Factories.queryByFactory, "getPipelineRuns", "csharp");
+@@clientName(Factories.queryByFactory, "GetPipelineRuns", "csharp");
 @@clientName(Factories.queryByPipelineRun, "GetActivityRun", "csharp");
 @@clientName(
   Factories.queryFeatureValuesByFactory,
   "GetExposureControlFeatures",
   "csharp"
 );
-@@clientName(Factories.triggerRunsQueryByFactory, "getTriggerRuns", "csharp");
+@@clientName(Factories.triggerRunsQueryByFactory, "GetTriggerRuns", "csharp");
 @@clientName(Factories.triggersQueryByFactory, "GetTriggers", "csharp");
 @@clientName(
   FactoriesOperationGroup.configureFactoryRepo,
@@ -1667,3 +1662,74 @@ using Microsoft.DataFactory;
 @@access(WebTableDatasetTypeProperties, Access.internal, "csharp");
 @@access(XmlDatasetTypeProperties, Access.internal, "csharp");
 @@access(ZendeskLinkedServiceTypeProperties, Access.internal, "csharp");
+
+// Restore the GA (AutoRest) Pageable<T>/AsyncPageable<T> surface for the POST "query"/list
+// actions. back-compatible.tsp relocates these operations to REST-only sub-clients, so for C#
+// we pin each one back onto its parent resource (@@clientLocation override) and mark it pageable
+// (every response model carries `@pageItems value`), letting the generator emit
+// Pageable<TItem>/AsyncPageable<TItem> directly instead of a single Response<envelope>.
+@@clientLocation(Factories.queryByFactory, Factories, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Factories.queryByFactory,
+  "csharp"
+);
+@@clientName(Factories.queryByFactory::parameters.body, "content", "csharp");
+
+@@clientLocation(Factories.queryByPipelineRun, Factories, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Factories.queryByPipelineRun,
+  "csharp"
+);
+@@clientName(
+  Factories.queryByPipelineRun::parameters.body,
+  "content",
+  "csharp"
+);
+
+@@clientLocation(Factories.triggerRunsQueryByFactory, Factories, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Factories.triggerRunsQueryByFactory,
+  "csharp"
+);
+@@clientName(
+  Factories.triggerRunsQueryByFactory::parameters.body,
+  "content",
+  "csharp"
+);
+
+@@clientLocation(Factories.privateLinkResourcesGet, Factories, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Factories.privateLinkResourcesGet,
+  "csharp"
+);
+
+@@clientLocation(
+  IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
+  IntegrationRuntimeResources,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  IntegrationRuntimeResources.listOutboundNetworkDependenciesEndpoints,
+  "csharp"
+);
+
+@@clientLocation(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
+  IntegrationRuntimeResources,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet,
+  "csharp"
+);
+@@clientName(
+  IntegrationRuntimeResources.integrationRuntimeObjectMetadataGet::parameters.body,
+  "content",
+  "csharp"
+);
