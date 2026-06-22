@@ -175,7 +175,6 @@ using Http;
 @@clientName(TestRouteInput, "IotHubTestRouteContent", "csharp");
 @@clientName(TestRouteResult, "IotHubTestRouteResult", "csharp");
 @@clientName(TestRouteResultDetails, "IotHubTestRouteResultDetails", "csharp");
-@@visibility(TestRouteResultDetails.compilationErrors, Lifecycle.Read);
 @@clientName(MatchedRoute, "IotHubMatchedRoute", "csharp");
 @@clientName(ExportDevicesRequest, "ExportDevicesContent", "csharp");
 @@clientName(ImportDevicesRequest, "IotHubImportDevicesContent", "csharp");

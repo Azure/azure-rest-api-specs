@@ -39,7 +39,7 @@ alias PrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperatio
     /** The name of the IoT Hub */
     @path
     @key
-    @segment("IotHubs")
+    @segment("iotHubs")
     resourceName: string;
   },
   {

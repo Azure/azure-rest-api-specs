@@ -35,7 +35,7 @@ alias GroupIdInformationOps = Azure.ResourceManager.Legacy.LegacyOperations<
     /** The name of the IoT Hub */
     @path
     @key
-    @segment("IotHubs")
+    @segment("iotHubs")
     resourceName: string;
   },
   {
