@@ -1346,16 +1346,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1383,16 +1380,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1415,16 +1409,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1513,16 +1504,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1554,16 +1542,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1666,7 +1651,7 @@
           "description": "The software revision for this device."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -1702,47 +1687,6 @@
           "description": "The software revision for this device."
         }
       }
-    },
-    "DeviceResponse": {
-      "type": "object",
-      "description": "Response model for device lookup POST actions (excludes deviceName key).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this device."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
     },
     "DeviceTwin": {
       "type": "object",
@@ -1904,16 +1848,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1949,16 +1890,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -2147,7 +2085,7 @@
           ]
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -2342,42 +2280,42 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ADU_CLOUD_SERVICE",
+            "name": "AduCloudService",
             "value": "ADU_CLOUD_SERVICE",
             "description": "Failure communicating with the ADU cloud service."
           },
           {
-            "name": "ADU_MANAGED_RESOURCE",
+            "name": "AduManagedResource",
             "value": "ADU_MANAGED_RESOURCE",
             "description": "Failure related to ADU managed resources. (e.g. CDN download failure)"
           },
           {
-            "name": "AGENT_CORE",
+            "name": "AgentCore",
             "value": "AGENT_CORE",
             "description": "Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities)."
           },
           {
-            "name": "AGENT_EXTENSION",
+            "name": "AgentExtension",
             "value": "AGENT_EXTENSION",
             "description": "Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly."
           },
           {
-            "name": "AGENT_DEPENDENCY",
+            "name": "AgentDependency",
             "value": "AGENT_DEPENDENCY",
             "description": "Failure in an agent dependency (e.g. local identity service)."
           },
           {
-            "name": "DEVICE",
+            "name": "Device",
             "value": "DEVICE",
             "description": "Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions."
           },
           {
-            "name": "OTHER",
+            "name": "Other",
             "value": "OTHER",
             "description": "Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin."
           },
           {
-            "name": "NOT_APPLICABLE",
+            "name": "NotApplicable",
             "value": "NOT_APPLICABLE",
             "description": "This failure origin must be used for non-failed result outcomes."
           }
@@ -2398,22 +2336,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "SUCCEEDED",
+            "name": "Succeeded",
             "value": "SUCCEEDED",
             "description": "The step or workflow completed successfully."
           },
           {
-            "name": "FAILED",
+            "name": "Failed",
             "value": "FAILED",
             "description": "The step or workflow failed."
           },
           {
-            "name": "CANCELED",
+            "name": "Canceled",
             "value": "CANCELED",
             "description": "The step or workflow was canceled before reaching a terminal state."
           },
           {
-            "name": "SKIPPED",
+            "name": "Skipped",
             "value": "SKIPPED",
             "description": "The step was skipped because it was not required."
           }
@@ -2712,32 +2650,47 @@
         "value"
       ]
     },
-    "ProvisionDeviceRequest": {
-      "type": "object",
-      "description": "Request body for the provision device endpoint.",
-      "properties": {
-        "iotHubDeviceId": {
-          "type": "string",
-          "description": "The device identity in IoT Hub."
-        },
-        "targetEndpoint": {
-          "$ref": "#/definitions/IotHubEndpoint",
-          "description": "The service endpoint identifier as returned by the GetNamespace API."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationProfileProperties",
-          "description": "Operational authentication configuration."
-        },
-        "deviceTwin": {
-          "$ref": "#/definitions/DeviceTwin",
-          "description": "Initial device twin configuration to apply during provisioning."
-        }
-      },
-      "required": [
-        "iotHubDeviceId",
-        "targetEndpoint",
-        "authentication"
-      ]
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a data-plane resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      }
     },
     "QueryDevicesRequest": {
       "type": "object",

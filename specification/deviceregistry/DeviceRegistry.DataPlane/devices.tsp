@@ -43,15 +43,7 @@ model DeviceProperties {
 
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
-}
-
-/** Response model for device lookup POST actions (excludes deviceName key). */
-model DeviceResponse {
-  ...DataPlaneResourceBase;
-
-  /** The resource-specific properties for this device. */
-  properties?: DeviceProperties;
+  provisioningState?: ProvisioningState;
 }
 
 // ──────────────────────────────────────────────
@@ -152,8 +144,13 @@ model DeviceTwin {
 }
 
 /** Request body for the provision device endpoint. */
+@added(Versions.v2026_11_02_preview)
 model ProvisionDeviceRequest {
-  /** The device identity in IoT Hub. */
+  /** Controls which operations ADR performs. Defaults to full when omitted. */
+  @query
+  mode?: ProvisionMode;
+
+  /** The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID. */
   iotHubDeviceId: string;
 
   /** The service endpoint identifier as returned by the GetNamespace API. */
@@ -176,10 +173,10 @@ union ProvisionMode {
   string,
 
   /** Full provisioning: ADR creates the device in IoT Hub and sets twin data. */
-  Full: "full",
+  Full: "Full",
 
   /** Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub. */
-  RegistryOnly: "registryOnly",
+  RegistryOnly: "RegistryOnly",
 }
 
 /** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
@@ -195,7 +192,7 @@ model ProvisionDeviceResult {
   authProfile: ProvisionedAuthProfileRef;
 
   /** Reference to the messaging endpoint the device was provisioned against. */
-  endpoint: ProvisionedEndpointRef;
+  endpoint: IotHubEndpoint;
 }
 
 // ──────────────────────────────────────────────
@@ -236,6 +233,10 @@ model ReprovisionDeviceTwin extends DeviceTwin {
 /** Request body for the reprovision device endpoint. */
 @added(Versions.v2026_11_02_preview)
 model ReprovisionDeviceRequest {
+  /** The ETag of the device resource. Used to prevent concurrent modifications. */
+  @header("If-Match")
+  ifMatch?: string;
+
   /** The target IoT Hub endpoint (the new hub) to move the device to. */
   targetEndpoint: IotHubEndpoint;
 
@@ -272,7 +273,7 @@ interface Devices {
   getDeviceByUuid is ResourceOperations.ResourceCollectionAction<
     Device,
     GetDeviceByUuidRequest,
-    DeviceResponse
+    Device
   >;
 
   /** Look up a device by its external identifier. */
@@ -280,7 +281,7 @@ interface Devices {
   getDeviceByExternalId is ResourceOperations.ResourceCollectionAction<
     Device,
     GetDeviceByExternalIdRequest,
-    DeviceResponse
+    Device
   >;
 
   /** Query devices in a namespace using a query expression. */
@@ -312,14 +313,7 @@ interface Devices {
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
   provision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
-    {
-      /** Controls which operations ADR performs. Defaults to full when omitted. */
-      @query
-      mode?: ProvisionMode;
-
-      ...ProvisionDeviceRequest;
-      ...LongRunningOperationIdHeader;
-    },
+    ProvisionDeviceRequest,
     ProvisionDeviceResult,
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait
@@ -330,14 +324,7 @@ interface Devices {
   @added(Versions.v2026_11_02_preview)
   reprovision is ResourceOperations.LongRunningResourceAction<
     Device,
-    {
-      /** The ETag of the device resource. Used to prevent concurrent modifications. */
-      @header("If-Match")
-      ifMatch?: string;
-
-      ...ReprovisionDeviceRequest;
-      ...LongRunningOperationIdHeader;
-    },
+    ReprovisionDeviceRequest,
     ProvisionDeviceResult,
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait

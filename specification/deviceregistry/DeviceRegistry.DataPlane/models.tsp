@@ -16,17 +16,37 @@ model DataPlaneResourceBase {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   name: string;
 
-  /** The UUID of this capability resource. */
+  /** Globally unique, immutable, non-reusable identifier of the resource. */
   @visibility(Lifecycle.Read)
   uuid?: string;
 
   /** The type of the resource. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @visibility(Lifecycle.Read)
   type: string;
 
   /** The entity tag for the resource. */
   @visibility(Lifecycle.Read)
   etag?: string;
+}
+
+/** The provisioning state of a data-plane resource. */
+union ProvisioningState {
+  string,
+
+  /** Resource has been created. */
+  Succeeded: "Succeeded",
+
+  /** Resource creation failed. */
+  Failed: "Failed",
+
+  /** Resource creation was canceled. */
+  Canceled: "Canceled",
+
+  /** Resource has been accepted by the server. */
+  Accepted: "Accepted",
+
+  /** Resource is being deleted. */
+  Deleting: "Deleting",
 }
 
 // ──────────────────────────────────────────────

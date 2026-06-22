@@ -19,10 +19,10 @@ model Job is TrackedResource<JobProperties> {
   @doc("The name of the job.")
   @key("jobName")
   @segment("jobs")
-  @pattern("^[a-z0-9][a-z0-9-]*[a-z0-9]$")
+  @pattern("^[0-9a-zA-Z][a-zA-Z0-9-]*$")
   @path
   @minLength(3)
-  @maxLength(64)
+  @maxLength(63)
   name: string;
 }
 
@@ -137,7 +137,7 @@ union UpdateJobSchedulingType {
   string,
 
   @doc("The job runs continuously against the target group until superseded, canceled, or the parent job is deleted.")
-  Continuous: "continuous",
+  Continuous: "Continuous",
 }
 
 @added(Versions.v2026_11_02_preview)

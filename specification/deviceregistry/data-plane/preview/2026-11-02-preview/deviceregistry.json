@@ -263,15 +263,7 @@
             "type": "string"
           },
           {
-            "name": "If-Match",
-            "in": "header",
-            "description": "The ETag of the device resource. Used to prevent concurrent modifications.",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "ifMatch"
-          },
-          {
-            "$ref": "#/parameters/LongRunningOperationIdHeader"
+            "$ref": "#/parameters/ReprovisionDeviceRequest.ifMatch"
           },
           {
             "name": "body",
@@ -1976,7 +1968,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeviceResponse"
+              "$ref": "#/definitions/Device"
             }
           },
           "default": {
@@ -2025,7 +2017,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeviceResponse"
+              "$ref": "#/definitions/Device"
             }
           },
           "default": {
@@ -2067,34 +2059,7 @@
             "type": "string"
           },
           {
-            "name": "mode",
-            "in": "query",
-            "description": "Controls which operations ADR performs. Defaults to full when omitted.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "full",
-              "registryOnly"
-            ],
-            "x-ms-enum": {
-              "name": "ProvisionMode",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "Full",
-                  "value": "full",
-                  "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
-                },
-                {
-                  "name": "RegistryOnly",
-                  "value": "registryOnly",
-                  "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
-                }
-              ]
-            }
-          },
-          {
-            "$ref": "#/parameters/LongRunningOperationIdHeader"
+            "$ref": "#/parameters/ProvisionDeviceRequest.mode"
           },
           {
             "name": "body",
@@ -3065,16 +3030,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3102,16 +3064,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3134,16 +3093,13 @@
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3179,14 +3135,6 @@
       "type": "object",
       "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
       "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "name": {
           "$ref": "#/definitions/DeviceAttributeName",
           "description": "The name of the device attribute.",
@@ -3262,16 +3210,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3301,14 +3246,6 @@
             "create"
           ]
         },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "properties": {
           "$ref": "#/definitions/AuthenticationProfilePropertiesCreateOrUpdate",
           "description": "Authentication information for the device."
@@ -3330,16 +3267,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3390,14 +3324,6 @@
           "x-ms-mutability": [
             "read",
             "update",
-            "create"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
             "create"
           ]
         },
@@ -3499,7 +3425,7 @@
           "description": "The software revision for this device."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -3535,47 +3461,6 @@
           "description": "The software revision for this device."
         }
       }
-    },
-    "DeviceResponse": {
-      "type": "object",
-      "description": "Response model for device lookup POST actions (excludes deviceName key).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this device."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
     },
     "DeviceTwin": {
       "type": "object",
@@ -3727,16 +3612,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3772,16 +3654,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -3970,7 +3849,7 @@
           ]
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -4202,42 +4081,42 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ADU_CLOUD_SERVICE",
+            "name": "AduCloudService",
             "value": "ADU_CLOUD_SERVICE",
             "description": "Failure communicating with the ADU cloud service."
           },
           {
-            "name": "ADU_MANAGED_RESOURCE",
+            "name": "AduManagedResource",
             "value": "ADU_MANAGED_RESOURCE",
             "description": "Failure related to ADU managed resources. (e.g. CDN download failure)"
           },
           {
-            "name": "AGENT_CORE",
+            "name": "AgentCore",
             "value": "AGENT_CORE",
             "description": "Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities)."
           },
           {
-            "name": "AGENT_EXTENSION",
+            "name": "AgentExtension",
             "value": "AGENT_EXTENSION",
             "description": "Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly."
           },
           {
-            "name": "AGENT_DEPENDENCY",
+            "name": "AgentDependency",
             "value": "AGENT_DEPENDENCY",
             "description": "Failure in an agent dependency (e.g. local identity service)."
           },
           {
-            "name": "DEVICE",
+            "name": "Device",
             "value": "DEVICE",
             "description": "Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions."
           },
           {
-            "name": "OTHER",
+            "name": "Other",
             "value": "OTHER",
             "description": "Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin."
           },
           {
-            "name": "NOT_APPLICABLE",
+            "name": "NotApplicable",
             "value": "NOT_APPLICABLE",
             "description": "This failure origin must be used for non-failed result outcomes."
           }
@@ -4258,22 +4137,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "SUCCEEDED",
+            "name": "Succeeded",
             "value": "SUCCEEDED",
             "description": "The step or workflow completed successfully."
           },
           {
-            "name": "FAILED",
+            "name": "Failed",
             "value": "FAILED",
             "description": "The step or workflow failed."
           },
           {
-            "name": "CANCELED",
+            "name": "Canceled",
             "value": "CANCELED",
             "description": "The step or workflow was canceled before reaching a terminal state."
           },
           {
-            "name": "SKIPPED",
+            "name": "Skipped",
             "value": "SKIPPED",
             "description": "The step was skipped because it was not required."
           }
@@ -4612,7 +4491,7 @@
       "properties": {
         "iotHubDeviceId": {
           "type": "string",
-          "description": "The device identity in IoT Hub."
+          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID."
         },
         "targetEndpoint": {
           "$ref": "#/definitions/IotHubEndpoint",
@@ -4650,7 +4529,7 @@
           "description": "Reference to the provisioned AuthenticationProfile child resource."
         },
         "endpoint": {
-          "$ref": "#/definitions/ProvisionedEndpointRef",
+          "$ref": "#/definitions/IotHubEndpoint",
           "description": "Reference to the messaging endpoint the device was provisioned against."
         }
       },
@@ -4707,8 +4586,8 @@
       "type": "string",
       "description": "Controls which operations ADR performs during provisioning.",
       "enum": [
-        "full",
-        "registryOnly"
+        "Full",
+        "RegistryOnly"
       ],
       "x-ms-enum": {
         "name": "ProvisionMode",
@@ -4716,12 +4595,12 @@
         "values": [
           {
             "name": "Full",
-            "value": "full",
+            "value": "Full",
             "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
           },
           {
             "name": "RegistryOnly",
-            "value": "registryOnly",
+            "value": "RegistryOnly",
             "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
           }
         ]
@@ -4760,24 +4639,6 @@
         }
       ]
     },
-    "ProvisionedEndpointRef": {
-      "type": "object",
-      "description": "Reference to the messaging endpoint the device was provisioned against.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Display name of the target endpoint."
-        },
-        "address": {
-          "type": "string",
-          "description": "IoT Hub service endpoint address (e.g. myhub.azure-devices.net), echoed from the originating request."
-        }
-      },
-      "required": [
-        "name",
-        "address"
-      ]
-    },
     "ProvisionedResourceRef": {
       "type": "object",
       "description": "Reference to a provisioned RPaaS resource: its ARM name, system-assigned UUID, and the etag observed at the final write performed during provisioning.",
@@ -4800,6 +4661,48 @@
         "uuid",
         "etag"
       ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a data-plane resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      }
     },
     "QueryCountRequest": {
       "type": "object",
@@ -5688,6 +5591,43 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "operationId"
+    },
+    "ProvisionDeviceRequest.mode": {
+      "name": "mode",
+      "in": "query",
+      "description": "Controls which operations ADR performs. Defaults to full when omitted.",
+      "required": false,
+      "type": "string",
+      "enum": [
+        "Full",
+        "RegistryOnly"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "Full provisioning: ADR creates the device in IoT Hub and sets twin data."
+          },
+          {
+            "name": "RegistryOnly",
+            "value": "RegistryOnly",
+            "description": "Registry-only provisioning: ADR creates registry resources but skips IoT Hub operations. Used when the device already exists in Hub."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "ReprovisionDeviceRequest.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The ETag of the device resource. Used to prevent concurrent modifications.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
     }
   }
 }
