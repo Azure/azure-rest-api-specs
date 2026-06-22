@@ -78,7 +78,11 @@ namespace Microsoft.Compute;
   "HibernateResourceOperationResult",
   "csharp"
 );
-@@clientName(HibernateResourceOperationResponse.type, "ResourceTypeName", "csharp");
+@@clientName(
+  HibernateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
@@ -102,7 +106,11 @@ namespace Microsoft.Compute;
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(DeleteResourceOperationResponse.type, "ResourceTypeName", "csharp");
+@@clientName(
+  DeleteResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
 @@clientName(
   CreateResourceOperationResponse,
   "CreateResourceOperationResult",
