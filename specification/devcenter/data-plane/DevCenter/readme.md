@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2026-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2026-01-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2026-01-01-preview/devcenter.json
+  - preview/2026-01-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-2025-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-08-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-08-01-preview/devcenter.json
+  - preview/2025-08-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
+  - preview/2025-07-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -81,7 +81,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-04-01-preview/devcenter.json
+  - preview/2025-04-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2025-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-02-01'
 input-file:
-  - Microsoft.DevCenter/stable/2025-02-01/devcenter.json
+  - stable/2025-02-01/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -111,7 +111,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2024-10-01-preview/devcenter.json
+  - preview/2024-10-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -126,7 +126,7 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2024-09-01-preview/devcenter.json
+  - preview/2024-09-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -141,7 +141,7 @@ These settings apply only when `--tag=package-2024-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2024-08-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2024-08-01-preview/devcenter.json
+  - preview/2024-08-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -156,7 +156,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2024-05-01-preview/devcenter.json
+  - preview/2024-05-01-preview/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-2024-02-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2024-02-01'
 input-file:
-  - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
+  - stable/2024-02-01/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -188,9 +188,9 @@ These settings apply only when `--tag=package-2023-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2023-10-01-preview/devbox.json
-  - Microsoft.DevCenter/preview/2023-10-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-10-01-preview/environments.json
+  - preview/2023-10-01-preview/devbox.json
+  - preview/2023-10-01-preview/devcenter.json
+  - preview/2023-10-01-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation
@@ -203,9 +203,9 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2023-09-01-preview/devbox.json
-  - Microsoft.DevCenter/preview/2023-09-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-09-01-preview/environments.json
+  - preview/2023-09-01-preview/devbox.json
+  - preview/2023-09-01-preview/devcenter.json
+  - preview/2023-09-01-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation
@@ -218,9 +218,9 @@ These settings apply only when `--tag=package-2023-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2023-07-01-preview/devbox.json
-  - Microsoft.DevCenter/preview/2023-07-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-07-01-preview/environments.json
+  - preview/2023-07-01-preview/devbox.json
+  - preview/2023-07-01-preview/devcenter.json
+  - preview/2023-07-01-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation
@@ -233,7 +233,7 @@ These settings apply only when `--tag=package-2023-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-01'
 input-file:
-  - Microsoft.DevCenter/stable/2023-04-01/devcenter.json
+  - stable/2023-04-01/devcenter.json
 
 directive:
   - suppress: HostParametersValidation
@@ -250,9 +250,9 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2023-01-01-preview/devbox.json
-  - Microsoft.DevCenter/preview/2023-01-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-01-01-preview/environments.json
+  - preview/2023-01-01-preview/devbox.json
+  - preview/2023-01-01-preview/devcenter.json
+  - preview/2023-01-01-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation
@@ -265,9 +265,9 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.DevCenter/preview/2022-11-11-preview/devbox.json
-  - Microsoft.DevCenter/preview/2022-11-11-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-11-11-preview/environments.json
+  - preview/2022-11-11-preview/devbox.json
+  - preview/2022-11-11-preview/devcenter.json
+  - preview/2022-11-11-preview/environments.json
 
 directive:
   - suppress: HostParametersValidation

@@ -162,7 +162,7 @@ These settings apply only when `--tag=package-preview-2026-01-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2026-01-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2026-01-01-preview/DevCenterRP.json
+  - preview/2026-01-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-10-01-preview
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-10-01-preview/DevCenterRP.json
+  - preview/2025-10-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-07-01-preview
@@ -180,7 +180,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/DevCenterRP.json
+  - preview/2025-07-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-04-01-preview
@@ -189,9 +189,9 @@ These settings apply only when `--tag=package-preview-2025-04-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-04-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2025-04-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2025-04-01-preview/vdi.json
+  - preview/2025-04-01-preview/commonDefinitions.json
+  - preview/2025-04-01-preview/devcenter.json
+  - preview/2025-04-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -204,9 +204,9 @@ These settings apply only when `--tag=package-2025-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-02-01'
 input-file:
-  - Microsoft.DevCenter/stable/2025-02-01/commonDefinitions.json
-  - Microsoft.DevCenter/stable/2025-02-01/devcenter.json
-  - Microsoft.DevCenter/stable/2025-02-01/vdi.json
+  - stable/2025-02-01/commonDefinitions.json
+  - stable/2025-02-01/devcenter.json
+  - stable/2025-02-01/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -219,9 +219,9 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - Microsoft.DevCenter/preview/2024-10-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2024-10-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-10-01-preview/vdi.json
+  - preview/2024-10-01-preview/commonDefinitions.json
+  - preview/2024-10-01-preview/devcenter.json
+  - preview/2024-10-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -234,9 +234,9 @@ These settings apply only when `--tag=package-preview-2024-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-08'
 input-file:
-  - Microsoft.DevCenter/preview/2024-08-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2024-08-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-08-01-preview/vdi.json
+  - preview/2024-08-01-preview/commonDefinitions.json
+  - preview/2024-08-01-preview/devcenter.json
+  - preview/2024-08-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -249,9 +249,9 @@ These settings apply only when `--tag=package-preview-2024-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-07'
 input-file:
-  - Microsoft.DevCenter/preview/2024-07-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2024-07-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-07-01-preview/vdi.json
+  - preview/2024-07-01-preview/commonDefinitions.json
+  - preview/2024-07-01-preview/devcenter.json
+  - preview/2024-07-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -264,9 +264,9 @@ These settings apply only when `--tag=package-preview-2024-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-06'
 input-file:
-  - Microsoft.DevCenter/preview/2024-06-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2024-06-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-06-01-preview/vdi.json
+  - preview/2024-06-01-preview/commonDefinitions.json
+  - preview/2024-06-01-preview/devcenter.json
+  - preview/2024-06-01-preview/vdi.json
 suppressions:
   - code: PatchBodyParametersSchema
     from: vdi.json
@@ -279,9 +279,9 @@ These settings apply only when `--tag=package-preview-2024-05` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-05'
 input-file:
-  - Microsoft.DevCenter/preview/2024-05-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2024-05-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2024-05-01-preview/vdi.json
+  - preview/2024-05-01-preview/commonDefinitions.json
+  - preview/2024-05-01-preview/devcenter.json
+  - preview/2024-05-01-preview/vdi.json
 ```
 ### Tag: package-2024-02
 
@@ -289,9 +289,9 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.DevCenter/stable/2024-02-01/commonDefinitions.json
-  - Microsoft.DevCenter/stable/2024-02-01/devcenter.json
-  - Microsoft.DevCenter/stable/2024-02-01/vdi.json
+  - stable/2024-02-01/commonDefinitions.json
+  - stable/2024-02-01/devcenter.json
+  - stable/2024-02-01/vdi.json
 ```
 
 ### Tag: package-preview-2023-10
@@ -300,9 +300,9 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
-  - Microsoft.DevCenter/preview/2023-10-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2023-10-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-10-01-preview/vdi.json
+  - preview/2023-10-01-preview/commonDefinitions.json
+  - preview/2023-10-01-preview/devcenter.json
+  - preview/2023-10-01-preview/vdi.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -311,9 +311,9 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - Microsoft.DevCenter/preview/2023-08-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2023-08-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-08-01-preview/vdi.json
+  - preview/2023-08-01-preview/commonDefinitions.json
+  - preview/2023-08-01-preview/devcenter.json
+  - preview/2023-08-01-preview/vdi.json
 ```
 
 ### Tag: package-2023-04
@@ -322,9 +322,9 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-04'
 input-file:
-  - Microsoft.DevCenter/stable/2023-04-01/commonDefinitions.json
-  - Microsoft.DevCenter/stable/2023-04-01/devcenter.json
-  - Microsoft.DevCenter/stable/2023-04-01/vdi.json
+  - stable/2023-04-01/commonDefinitions.json
+  - stable/2023-04-01/devcenter.json
+  - stable/2023-04-01/vdi.json
 ```
 
 ### Tag: package-preview-2023-01
@@ -333,9 +333,9 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.DevCenter/preview/2023-01-01-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2023-01-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2023-01-01-preview/vdi.json
+  - preview/2023-01-01-preview/commonDefinitions.json
+  - preview/2023-01-01-preview/devcenter.json
+  - preview/2023-01-01-preview/vdi.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -344,9 +344,9 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - Microsoft.DevCenter/preview/2022-11-11-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2022-11-11-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-11-11-preview/vdi.json
+  - preview/2022-11-11-preview/commonDefinitions.json
+  - preview/2022-11-11-preview/devcenter.json
+  - preview/2022-11-11-preview/vdi.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -355,9 +355,9 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
-  - Microsoft.DevCenter/preview/2022-10-12-preview/commonDefinitions.json
-  - Microsoft.DevCenter/preview/2022-10-12-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-10-12-preview/vdi.json
+  - preview/2022-10-12-preview/commonDefinitions.json
+  - preview/2022-10-12-preview/devcenter.json
+  - preview/2022-10-12-preview/vdi.json
 ```
 
 ### Tag: package-2022-08-01-preview
@@ -366,8 +366,8 @@ These settings apply only when `--tag=package-2022-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2022-08-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-08-01-preview/vdi.json
+  - preview/2022-08-01-preview/devcenter.json
+  - preview/2022-08-01-preview/vdi.json
 ```
 
 ### Tag: package-2022-09-01-preview
@@ -376,8 +376,8 @@ These settings apply only when `--tag=package-2022-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-09-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2022-09-01-preview/devcenter.json
-  - Microsoft.DevCenter/preview/2022-09-01-preview/vdi.json
+  - preview/2022-09-01-preview/devcenter.json
+  - preview/2022-09-01-preview/vdi.json
 ```
 
 ---
