@@ -97,7 +97,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenerateReportRequest"
+              "$ref": "#/definitions/ReportSelector"
             }
           }
         ],
@@ -172,6 +172,66 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}:getLatestReport": {
+      "post": {
+        "operationId": "Namespaces_GetLatestReport",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get the most recently generated report of the given type and target\nwithout triggering a new report generation. Returns the report directly\nwith 200 OK; no polling.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportSelector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest group best-updates compliance report": {
+            "$ref": "./examples/Namespaces_GetLatestReport_GroupBestUpdates.json"
+          },
+          "Get the latest group installable-updates report": {
+            "$ref": "./examples/Namespaces_GetLatestReport_GroupInstallableUpdates.json"
+          },
+          "Get the latest namespace update compliance report": {
+            "$ref": "./examples/Namespaces_GetLatestReport.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
@@ -1666,72 +1726,6 @@
         "version"
       ]
     },
-    "GenerateGroupBestUpdatesComplianceReportRequest": {
-      "type": "object",
-      "description": "Request to generate a GroupBestUpdates compliance report.",
-      "properties": {
-        "reportTarget": {
-          "type": "string",
-          "description": "The group that the report is generated against."
-        }
-      },
-      "required": [
-        "reportTarget"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
-    },
-    "GenerateGroupInstallableUpdatesReportRequest": {
-      "type": "object",
-      "description": "Request to generate a GroupInstallableUpdates report.",
-      "properties": {
-        "reportTarget": {
-          "type": "string",
-          "description": "The group that the report is generated against."
-        }
-      },
-      "required": [
-        "reportTarget"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
-    },
-    "GenerateNamespaceUpdateComplianceReportRequest": {
-      "type": "object",
-      "description": "Request to generate a NamespaceUpdateCompliance report.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
-    },
-    "GenerateReportRequest": {
-      "type": "object",
-      "description": "Request body for generating a report.",
-      "properties": {
-        "reportType": {
-          "$ref": "#/definitions/ReportType",
-          "description": "The type of report to generate."
-        },
-        "reportTarget": {
-          "type": "string",
-          "description": "The target of this report (e.g. group resource)."
-        }
-      },
-      "discriminator": "reportType",
-      "required": [
-        "reportType"
-      ]
-    },
     "GenerateReportResult": {
       "type": "object",
       "description": "Status monitor for the long-running `:generateReport` action on a namespace.\nThe typed `result` is the produced `Report` (polymorphic over `reportType`).",
@@ -1954,6 +1948,25 @@
       ],
       "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
     },
+    "GroupBestUpdatesComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
     "GroupInstallableUpdatesReport": {
       "type": "object",
       "description": "Result of a GroupInstallableUpdates report.",
@@ -1979,6 +1992,25 @@
       "allOf": [
         {
           "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
+    },
+    "GroupInstallableUpdatesReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
         }
       ],
       "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
@@ -2508,6 +2540,16 @@
       ],
       "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
     },
+    "NamespaceUpdateComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a NamespaceUpdateCompliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
     "Operation": {
       "type": "object",
       "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
@@ -2706,6 +2748,24 @@
           "type": "string",
           "description": "The scope the report was generated against.",
           "readOnly": true
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
+      ]
+    },
+    "ReportSelector": {
+      "type": "object",
+      "description": "Selector identifying a report by type and target. Shared as the request\nbody for both the `:generateReport` and `:getLatestReport` actions.",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report."
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The target of this report (e.g. group resource)."
         }
       },
       "discriminator": "reportType",
