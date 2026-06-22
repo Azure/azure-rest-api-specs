@@ -2169,6 +2169,114 @@
         }
       }
     },
+    "/namespaces/{namespaceUuid}/devices:queryCount": {
+      "post": {
+        "operationId": "Devices_QueryCount",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Count devices in a namespace that match an optional filter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryCountRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Count devices in a namespace": {
+            "$ref": "./examples/Devices_QueryCount.json"
+          }
+        }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:queryDistinctValues": {
+      "post": {
+        "operationId": "Devices_QueryDistinctValues",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Query the distinct values of a single device field within a namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryDistinctValuesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryDistinctValuesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query distinct device-class IDs in a namespace": {
+            "$ref": "./examples/Devices_QueryDistinctValues.json"
+          }
+        }
+      }
+    },
     "/namespaces/{namespaceUuid}/generateReportResults/{operationId}": {
       "get": {
         "operationId": "Namespaces_GetGenerateReportResult",
@@ -4651,6 +4759,30 @@
         "etag"
       ]
     },
+    "QueryCountRequest": {
+      "type": "object",
+      "description": "Request body for counting devices in a namespace.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Optional filter clause applied to the count (e.g. `WHERE properties.deviceClassId = 'dc-1'`). When omitted, all devices in the namespace are counted."
+        }
+      }
+    },
+    "QueryCountResponse": {
+      "type": "object",
+      "description": "Response body for a device count: a single aggregate scalar.",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of devices in the namespace that match the supplied filter."
+        }
+      },
+      "required": [
+        "count"
+      ]
+    },
     "QueryDevicesRequest": {
       "type": "object",
       "description": "Request body for querying devices in a namespace.",
@@ -4688,6 +4820,52 @@
         "continuationToken": {
           "type": "string",
           "description": "Continuation token for retrieving the next page of results. Present only when more results exist."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryDistinctValuesRequest": {
+      "type": "object",
+      "description": "Request body for enumerating the distinct values of a single device field within a namespace.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The device field to project distinct values of (e.g. `properties.deviceClassId`)."
+        },
+        "query": {
+          "type": "string",
+          "description": "Optional filter clause applied before the distinct projection (e.g. `WHERE groupMemberships.Contains('g-1')`). When omitted, distinct values across all devices in the namespace are returned."
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of distinct values to return in this page."
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Opaque continuation token returned by a previous distinct response."
+        }
+      },
+      "required": [
+        "field"
+      ]
+    },
+    "QueryDistinctValuesResponse": {
+      "type": "object",
+      "description": "Response body for a distinct device-field query: a page of scalar values.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The page of distinct scalar values for the requested field.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "Continuation token for retrieving the next page of distinct values. Present only when more results exist."
         }
       },
       "required": [

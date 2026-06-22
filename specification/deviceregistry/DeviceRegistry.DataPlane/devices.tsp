@@ -94,6 +94,46 @@ model QueryDevicesResponse {
   continuationToken?: string;
 }
 
+/** Request body for counting devices in a namespace. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+model QueryCountRequest {
+  /** Optional filter clause applied to the count (e.g. `WHERE properties.deviceClassId = 'dc-1'`). When omitted, all devices in the namespace are counted. */
+  query?: string;
+}
+
+/** Response body for a device count: a single aggregate scalar. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+model QueryCountResponse {
+  /** The number of devices in the namespace that match the supplied filter. */
+  count: int64;
+}
+
+/** Request body for enumerating the distinct values of a single device field within a namespace. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+model QueryDistinctValuesRequest {
+  /** The device field to project distinct values of (e.g. `properties.deviceClassId`). */
+  field: string;
+
+  /** Optional filter clause applied before the distinct projection (e.g. `WHERE groupMemberships.Contains('g-1')`). When omitted, distinct values across all devices in the namespace are returned. */
+  query?: string;
+
+  /** Maximum number of distinct values to return in this page. */
+  top?: int32;
+
+  /** Opaque continuation token returned by a previous distinct response. */
+  continuationToken?: string;
+}
+
+/** Response body for a distinct device-field query: a page of scalar values. */
+@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+model QueryDistinctValuesResponse {
+  /** The page of distinct scalar values for the requested field. */
+  value: string[];
+
+  /** Continuation token for retrieving the next page of distinct values. Present only when more results exist. */
+  continuationToken?: string;
+}
+
 /** Device twin desired properties. */
 model TwinProperties {
   /** The desired properties to set on the device twin. */
@@ -249,6 +289,22 @@ interface Devices {
     Device,
     QueryDevicesRequest,
     QueryDevicesResponse
+  >;
+
+  /** Count devices in a namespace that match an optional filter. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  queryCount is ResourceOperations.ResourceCollectionAction<
+    Device,
+    QueryCountRequest,
+    QueryCountResponse
+  >;
+
+  /** Query the distinct values of a single device field within a namespace. */
+  @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
+  queryDistinctValues is ResourceOperations.ResourceCollectionAction<
+    Device,
+    QueryDistinctValuesRequest,
+    QueryDistinctValuesResponse
   >;
 
   /** Provision a device in a namespace. */
