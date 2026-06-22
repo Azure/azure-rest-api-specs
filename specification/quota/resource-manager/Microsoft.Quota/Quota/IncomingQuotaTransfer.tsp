@@ -28,7 +28,7 @@ model IncomingQuotaTransfer
     Resource = IncomingQuotaTransfer,
     KeyName = "transferId",
     SegmentName = "incomingQuotaTransfers",
-    NamePattern = ""
+    NamePattern = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
   >;
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Standard ARM etag envelope property."
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
@@ -70,6 +70,7 @@ interface IncomingQuotaTransferOps
          */
         @path
         @segment("incomingQuotaTransfers")
+        @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
         transferId: string,
       }
     > {}
