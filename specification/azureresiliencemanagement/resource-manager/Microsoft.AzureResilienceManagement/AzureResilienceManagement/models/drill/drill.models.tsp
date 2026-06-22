@@ -104,6 +104,7 @@ model DrillProperties {
   lastResyncReadinessCheckTime?: utcDateTime;
 
   @doc("Managed RG v2 properties.")
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
@@ -832,18 +833,22 @@ model ValidateForExecutionResponse {
 }
 
 @doc("Configuration of the managed on behalf of resource.")
+@removed(Versions.v2026_06_01_preview)
 model ManagedOnBehalfOfConfiguration {
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources?: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
+@removed(Versions.v2026_06_01_preview)
 model MoboBrokerResource {
   /**
    * The fully qualified resource ID of the MoboBroker resource.
    * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
    */
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   id?: string;
 }
