@@ -113,17 +113,6 @@ model RecoveryPlanProperties {
   errorDetails?: CommonTypes.ErrorDetail;
 }
 
-@doc("PATCH properties for the recovery orchestration plan.")
-model RecoveryPlanPatchProperties {
-  @doc("A description of the recovery orchestration plan.")
-  @minLength(5)
-  @maxLength(50)
-  planDescription?: string;
-
-  @doc("Settings for the recovery orchestration groups associated with the recovery orchestration plan.")
-  recoveryGroupsSetting?: RecoveryGroupsSetting;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 @tenantResource
 @doc("Represents a recovery orchestration plan resource in the Azure Resilience Management provider namespace.")
