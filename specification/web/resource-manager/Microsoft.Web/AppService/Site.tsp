@@ -1898,6 +1898,33 @@ interface WebApps {
   >;
 
   /**
+   * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
+   */
+  @summary("Invoke onedeploy status API /api/deployments and gets the deployment status for the site")
+  @get
+  @action("extensions/onedeploy")
+  getOneDeployStatusSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<unknown>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Invoke the OneDeploy publish web app extension.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Invoke the OneDeploy publish web app extension.")
+  @put
+  @action("extensions/onedeploy")
+  createOneDeployOperationSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<unknown>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
   @summary("Fetch a short lived token that can be exchanged for a master key.")
