@@ -759,6 +759,16 @@ using Microsoft.MachineLearningServices;
 );
 @@alternateType(Compute.resourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(
+  AmlComputeNodeInformation.privateIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(
+  AmlComputeNodeInformation.publicIpAddress,
+  Azure.Core.ipV4Address,
+  "csharp"
+);
+@@alternateType(
   JobBaseProperties.componentId,
   Azure.Core.armResourceIdentifier,
   "csharp"
