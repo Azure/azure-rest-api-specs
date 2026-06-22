@@ -38,16 +38,48 @@ using Microsoft.Network;
 @@clientName(SoaRecord, "PrivateDnsSoaRecordInfo", "csharp");
 @@clientName(SrvRecord, "PrivateDnsSrvRecordInfo", "csharp");
 @@clientName(TxtRecord, "PrivateDnsTxtRecordInfo", "csharp");
-@@clientName(PrivateZoneProperties.maxNumberOfRecordSets, "maxNumberOfRecords", "csharp");
-@@clientName(PrivateZoneProperties.numberOfRecordSets, "numberOfRecords", "csharp");
-@@clientName(PrivateZoneProperties.provisioningState, "PrivateDnsProvisioningState", "csharp");
-@@clientName(VirtualNetworkLinkProperties.virtualNetwork, "VirtualNetworkId", "csharp");
-@@clientName(VirtualNetworkLinkProperties.resolutionPolicy, "PrivateDnsResolutionPolicy", "csharp");
-@@clientName(VirtualNetworkLinkProperties.provisioningState, "PrivateDnsProvisioningState", "csharp");
+@@clientName(
+  PrivateZoneProperties.maxNumberOfRecordSets,
+  "maxNumberOfRecords",
+  "csharp"
+);
+@@clientName(
+  PrivateZoneProperties.numberOfRecordSets,
+  "numberOfRecords",
+  "csharp"
+);
+@@clientName(
+  PrivateZoneProperties.provisioningState,
+  "PrivateDnsProvisioningState",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkLinkProperties.virtualNetwork,
+  "VirtualNetworkId",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkLinkProperties.resolutionPolicy,
+  "PrivateDnsResolutionPolicy",
+  "csharp"
+);
+@@clientName(
+  VirtualNetworkLinkProperties.provisioningState,
+  "PrivateDnsProvisioningState",
+  "csharp"
+);
 @@clientName(RecordSetProperties.ttl, "TtlInSeconds", "csharp");
 @@clientName(RecordSetProperties.aRecords, "PrivateDnsARecords", "csharp");
-@@clientName(RecordSetProperties.aaaaRecords, "PrivateDnsAaaaRecords", "csharp");
-@@clientName(RecordSetProperties.cnameRecord, "PrivateDnsCnameRecord", "csharp");
+@@clientName(
+  RecordSetProperties.aaaaRecords,
+  "PrivateDnsAaaaRecords",
+  "csharp"
+);
+@@clientName(
+  RecordSetProperties.cnameRecord,
+  "PrivateDnsCnameRecord",
+  "csharp"
+);
 @@clientName(RecordSetProperties.mxRecords, "PrivateDnsMXRecords", "csharp");
 @@clientName(RecordSetProperties.ptrRecords, "PrivateDnsPtrRecords", "csharp");
 @@clientName(RecordSetProperties.soaRecord, "PrivateDnsSoaRecord", "csharp");
@@ -66,7 +98,11 @@ using Microsoft.Network;
 @@alternateType(PrivateZone.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PrivateZone.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(VirtualNetworkLink.etag, Azure.Core.eTag, "csharp");
-@@alternateType(VirtualNetworkLink.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  VirtualNetworkLink.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
