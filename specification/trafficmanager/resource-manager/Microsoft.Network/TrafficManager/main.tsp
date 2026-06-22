@@ -19,6 +19,7 @@ import "./TrafficManagerGeographicHierarchy.tsp";
 import "./HeatMapModel.tsp";
 import "./UserMetricsModel.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

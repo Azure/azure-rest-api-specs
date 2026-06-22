@@ -6,6 +6,7 @@ import "../common/common.tsp";
 
 import "./models.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 // Import client customizations
 using TypeSpec.Http;

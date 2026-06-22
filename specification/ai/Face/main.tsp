@@ -8,6 +8,7 @@ import "./routes.facelist.tsp";
 import "./routes.persondirectory.tsp";
 import "./routes.persongroup.tsp";
 import "./routes.session.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
