@@ -70,10 +70,10 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-/**
- * azureTrafficCollectorsCreateOrUpdate.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" ""
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-client-generator-core/no-corresponding-method-param" "override"
 op azureTrafficCollectorsCreateOrUpdate(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...SubscriptionIdParameter,
