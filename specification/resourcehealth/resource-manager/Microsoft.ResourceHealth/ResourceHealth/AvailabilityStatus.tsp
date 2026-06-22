@@ -54,8 +54,8 @@ interface AvailabilityStatuses {
   /**
    * Gets current availability status for a single resource
    */
-  @tag("AvailabilityStatuses")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
+  @tag("AvailabilityStatuses")
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current")
   getByResource(
@@ -78,7 +78,7 @@ interface AvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): AvailabilityStatus | ErrorResponse;
 
   /**
@@ -106,7 +106,7 @@ interface AvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): availabilityStatusListResult | ErrorResponse;
 
   /**
@@ -134,7 +134,7 @@ interface AvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): availabilityStatusListResult | ErrorResponse;
 
   /**
@@ -166,7 +166,7 @@ interface AvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): availabilityStatusListResult | ErrorResponse;
 }
 
@@ -175,8 +175,8 @@ interface ChildAvailabilityStatuses {
   /**
    * Gets current availability status for a single resource
    */
-  @tag("ChildAvailabilityStatuses")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a non-resource operation"
+  @tag("ChildAvailabilityStatuses")
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current")
   getByResource(
@@ -199,7 +199,7 @@ interface ChildAvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): AvailabilityStatus | ErrorResponse;
 
   /**
@@ -226,7 +226,7 @@ interface ChildAvailabilityStatuses {
      * Setting $expand=recommendedactions in url query expands the recommendedactions in the response.
      */
     @query("$expand")
-    $expand?: string
+    $expand?: string,
   ): availabilityStatusListResult | ErrorResponse;
 }
 
