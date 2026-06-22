@@ -17095,22 +17095,6 @@
       "type": "object",
       "description": "Describes package properties",
       "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/packageKind",
-          "description": "The package kind"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        },
         "contentSchemaVersion": {
           "type": "string",
           "description": "The version of the content schema."
@@ -17194,13 +17178,7 @@
           "type": "string",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         }
-      },
-      "required": [
-        "contentId",
-        "contentKind",
-        "version",
-        "displayName"
-      ]
+      }
     },
     "packageKind": {
       "type": "string",
@@ -17272,13 +17250,33 @@
       "type": "object",
       "description": "Describes package properties",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
         "contentProductId": {
           "type": "string",
           "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/packageKind",
+          "description": "The package kind"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
         }
       },
       "required": [
-        "contentProductId"
+        "contentId",
+        "contentProductId",
+        "contentKind",
+        "version",
+        "displayName"
       ],
       "allOf": [
         {
@@ -17350,22 +17348,6 @@
       "type": "object",
       "description": "Describes package properties",
       "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/packageKind",
-          "description": "The package kind"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        },
         "contentSchemaVersion": {
           "type": "string",
           "description": "The version of the content schema."
@@ -17448,6 +17430,22 @@
         "icon": {
           "type": "string",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
+        },
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/packageKind",
+          "description": "The package kind"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
         },
         "contentProductId": {
           "type": "string",

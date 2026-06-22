@@ -4516,19 +4516,14 @@ model PackageList is Azure.Core.Page<PackageModel>;
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PackageProperties extends PackageBaseProperties {
   /**
-   * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
-   */
-  contentProductId: string;
-}
-
-/**
- * Describes package properties
- */
-model PackageBaseProperties {
-  /**
    * The content id of the package
    */
   contentId: string;
+
+  /**
+   * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
+   */
+  contentProductId: string;
 
   /**
    * The package kind
@@ -4544,7 +4539,12 @@ model PackageBaseProperties {
    * The display name of the package
    */
   displayName: string;
+}
 
+/**
+ * Describes package properties
+ */
+model PackageBaseProperties {
   /**
    * The version of the content schema.
    */
@@ -4763,6 +4763,26 @@ model ProductPackageList is Azure.Core.Page<ProductPackageModel>;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductPackageProperties {
   ...PackageBaseProperties;
+
+  /**
+   * The content id of the package
+   */
+  contentId: string;
+
+  /**
+   * The package kind
+   */
+  contentKind: packageKind;
+
+  /**
+   * the latest version number of the package
+   */
+  version: string;
+
+  /**
+   * The display name of the package
+   */
+  displayName: string;
 
   /**
    * Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package
