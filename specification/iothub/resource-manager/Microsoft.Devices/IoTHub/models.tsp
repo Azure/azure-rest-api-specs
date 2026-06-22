@@ -104,6 +104,18 @@ union AuthenticationType {
 }
 
 /**
+ * Specifies authentication type being used for connecting to the event stream account.
+ */
+union EventStreamAuthenticationType {
+  string,
+
+  /**
+   * identityBased authentication
+   */
+  identityBased: "identityBased",
+}
+
+/**
  * Encoding that is used to serialize messages to blobs. Supported values are 'avro', 'avrodeflate', and 'JSON'. Default value is 'avro'.
  */
 union RoutingStorageContainerPropertiesEncoding {
@@ -1194,7 +1206,7 @@ model RoutingEventStreamProperties {
   /**
    * Method used to authenticate against the event stream endpoint
    */
-  authenticationType?: AuthenticationType = AuthenticationType.identityBased;
+  authenticationType?: EventStreamAuthenticationType;
 
   /**
    * Managed identity properties of routing event stream endpoint.

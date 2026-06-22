@@ -2907,6 +2907,24 @@
         }
       }
     },
+    "EventStreamAuthenticationType": {
+      "type": "string",
+      "description": "Specifies authentication type being used for connecting to the event stream account.",
+      "enum": [
+        "identityBased"
+      ],
+      "x-ms-enum": {
+        "name": "EventStreamAuthenticationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "identityBased",
+            "value": "identityBased",
+            "description": "identityBased authentication"
+          }
+        ]
+      }
+    },
     "ExportDevicesRequest": {
       "type": "object",
       "description": "Use to provide parameters when requesting an export of all devices in the IoT hub.",
@@ -4726,29 +4744,8 @@
           "description": "Event hub name on the event hub namespace"
         },
         "authenticationType": {
-          "type": "string",
-          "description": "Method used to authenticate against the event stream endpoint",
-          "default": "identityBased",
-          "enum": [
-            "keyBased",
-            "identityBased"
-          ],
-          "x-ms-enum": {
-            "name": "AuthenticationType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "keyBased",
-                "value": "keyBased",
-                "description": "keyBased"
-              },
-              {
-                "name": "identityBased",
-                "value": "identityBased",
-                "description": "identityBased"
-              }
-            ]
-          }
+          "$ref": "#/definitions/EventStreamAuthenticationType",
+          "description": "Method used to authenticate against the event stream endpoint"
         },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity",
