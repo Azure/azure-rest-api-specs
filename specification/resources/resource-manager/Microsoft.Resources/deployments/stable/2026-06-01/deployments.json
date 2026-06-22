@@ -3649,7 +3649,12 @@
         },
         "configId": {
           "type": "string",
-          "description": "The extension configuration ID. It uniquely identifies a deployment control plane within an extension.",
+          "description": "The extension configuration ID. It uniquely identifies a deployment target within an extension.",
+          "readOnly": true
+        },
+        "configHash": {
+          "type": "string",
+          "description": "The extension configuration hash. Can be used to distinguish different configurations that have the same config ID.",
           "readOnly": true
         },
         "config": {
