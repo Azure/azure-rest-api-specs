@@ -24,7 +24,7 @@ using TypeSpec.Versioning;
 // Go SDK Breaking Changes Resolution for TypeSpec conversion
 @@clientName(DatabaseAadAuthInfo, "DatabaseAADAuthInfo", "go");
 
-@@clientName(ActionType, "ActionTypeFlag");
+@@clientName(ActionType, "ActionTypeFlag", "!autorest");
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
