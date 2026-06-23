@@ -60,6 +60,7 @@ namespace SdkCustomizations;
 @@alternateType(FeatureFlagsRequestParams.select, string[], "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
+@@alternateType(FeatureFlagFilter.parameters, Record<string>, "csharp");
 
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
