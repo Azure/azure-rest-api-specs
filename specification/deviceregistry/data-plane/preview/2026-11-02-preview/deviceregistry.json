@@ -1130,9 +1130,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/LongRunningOperationIdHeader"
-          },
-          {
             "name": "body",
             "in": "body",
             "required": true,
@@ -1770,12 +1767,26 @@
             "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/DeviceCapability"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
             }
           },
           "default": {
@@ -1795,7 +1806,11 @@
           "Update a device capability": {
             "$ref": "./examples/DeviceCapabilities_Update.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DeviceCapabilities_Delete",
@@ -2472,7 +2487,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Get the status of a long-running operation.",
+        "description": "Get the latest state for a namespace-scoped long-running operation.\nReturns the current status, and includes error details when the operation\nreaches a failed terminal state.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -2674,28 +2689,28 @@
       "type": "object",
       "description": "Authentication information for the device.",
       "properties": {
-        "type": {
+        "authenticationType": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "The authentication type."
         }
       },
-      "discriminator": "type",
+      "discriminator": "authenticationType",
       "required": [
-        "type"
+        "authenticationType"
       ]
     },
     "AuthenticationProfilePropertiesCreateOrUpdate": {
       "type": "object",
       "description": "Authentication information for the device.",
       "properties": {
-        "type": {
+        "authenticationType": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "The authentication type."
         }
       },
-      "discriminator": "type",
+      "discriminator": "authenticationType",
       "required": [
-        "type"
+        "authenticationType"
       ]
     },
     "AuthenticationType": {
@@ -3089,7 +3104,7 @@
     },
     "DeviceAttribute": {
       "type": "object",
-      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "description": "A device attribute resource stores cloud-side metadata for a device, such as software versions reported\nby Azure Device Update or user-defined device attribution used to select the devices during management\nworkflows. It is separate from live device telemetry.",
       "properties": {
         "uuid": {
           "type": "string",
@@ -3133,7 +3148,7 @@
     },
     "DeviceAttributeCreateOrUpdate": {
       "type": "object",
-      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "description": "A device attribute resource stores cloud-side metadata for a device, such as software versions reported\nby Azure Device Update or user-defined device attribution used to select the devices during management\nworkflows. It is separate from live device telemetry.",
       "properties": {
         "name": {
           "$ref": "#/definitions/DeviceAttributeName",
@@ -3197,7 +3212,7 @@
     },
     "DeviceAuthenticationProfile": {
       "type": "object",
-      "description": "A device authentication resource.",
+      "description": "A device authentication profile resource defines how a device authenticates to cloud services such\nas IoT Hub and Device Update. Supported authentication types include symmetric key and X.509 certificate\nauthentication.",
       "properties": {
         "name": {
           "type": "string",
@@ -3235,7 +3250,7 @@
     },
     "DeviceAuthenticationProfileCreateOrUpdate": {
       "type": "object",
-      "description": "A device authentication resource.",
+      "description": "A device authentication profile resource defines how a device authenticates to cloud services such\nas IoT Hub and Device Update. Supported authentication types include symmetric key and X.509 certificate\nauthentication.",
       "properties": {
         "name": {
           "type": "string",
@@ -3254,7 +3269,7 @@
     },
     "DeviceCapability": {
       "type": "object",
-      "description": "A device capability resource.",
+      "description": "A device capability resource represents the device's connection to a service such as IoT Hub\nor Device Update. It stores settings for the connection, including whether the service is\nenabled for the device and the authentication profile the device uses to communicate\nwith the service.",
       "properties": {
         "name": {
           "type": "string",
@@ -3316,7 +3331,7 @@
     },
     "DeviceCapabilityCreateOrUpdate": {
       "type": "object",
-      "description": "A device capability resource.",
+      "description": "A device capability resource represents the device's connection to a service such as IoT Hub\nor Device Update. It stores settings for the connection, including whether the service is\nenabled for the device and the authentication profile the device uses to communicate\nwith the service.",
       "properties": {
         "name": {
           "type": "string",
@@ -3420,9 +3435,13 @@
           "type": "string",
           "description": "Device model."
         },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Device hardware revision."
+        },
         "softwareRevision": {
           "type": "string",
-          "description": "The software revision for this device."
+          "description": "Device software revision."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3456,9 +3475,13 @@
           "type": "string",
           "description": "Device model."
         },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Device hardware revision."
+        },
         "softwareRevision": {
           "type": "string",
-          "description": "The software revision for this device."
+          "description": "Device software revision."
         }
       }
     },

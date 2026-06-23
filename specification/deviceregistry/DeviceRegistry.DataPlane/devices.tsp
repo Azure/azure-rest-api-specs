@@ -14,8 +14,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
-using Azure.Core.Foundations;
-using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 

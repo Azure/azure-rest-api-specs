@@ -6,8 +6,6 @@ import "./devices.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -34,7 +32,11 @@ union DeviceAttributeReportedBy {
   User: "User",
 }
 
-/** A device attribute resource that holds properties managed by cloud services and not sent to the device. */
+/**
+ * A device attribute resource stores cloud-side metadata for a device, such as software versions reported
+ * by Azure Device Update or user-defined device attribution used to select the devices during management
+ * workflows. It is separate from live device telemetry.
+ */
 @resource("attributes")
 @parentResource(Device)
 @discriminator("reportedBy")
@@ -280,7 +282,7 @@ union InstallResultFailureOrigin {
 // Device attributes interface
 // ──────────────────────────────────────────────
 
-/** CRUD operations on device attributes. */
+/** Operations on device attributes. */
 @tag("Device Attributes")
 interface DeviceAttributes {
   /** Create or replace a device attribute. */
