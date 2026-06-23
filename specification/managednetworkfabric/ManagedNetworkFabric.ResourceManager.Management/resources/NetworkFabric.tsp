@@ -275,6 +275,7 @@ interface NetworkFabrics {
   >;
 
   @action("validateConfiguration")
+  @added(Versions.v2025_07_15)
   @removed(Versions.v2026_01_15_preview)
   @renamedFrom(Versions.v2026_01_15_preview, "validateConfiguration")
   @sharedRoute
