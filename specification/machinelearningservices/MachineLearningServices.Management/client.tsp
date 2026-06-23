@@ -521,6 +521,12 @@ using Microsoft.MachineLearningServices;
 @@clientName(ResourceName, "MachineLearningResourceName", "csharp");
 @@clientName(ResourceQuota, "MachineLearningResourceQuota", "csharp");
 @@clientName(
+  CertificateDatastoreCredentials,
+  "MachineLearningCertificateDatastoreCredentials",
+  "csharp"
+);
+@@clientName(Objective, "MachineLearningObjective", "csharp");
+@@clientName(
   SasDatastoreCredentials,
   "MachineLearningSasDatastoreCredentials",
   "csharp"
@@ -539,6 +545,12 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
+  ServicePrincipalDatastoreCredentials,
+  "MachineLearningServicePrincipalDatastoreCredentials",
+  "csharp"
+);
+@@clientName(PrivateEndpoint, "MachineLearningPrivateEndpoint", "csharp");
+@@clientName(
   PrivateLinkResource,
   "MachineLearningPrivateLinkResource",
   "csharp"
@@ -556,6 +568,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningStackEnsembleSettings",
   "csharp"
 );
+@@clientName(SweepJob, "MachineLearningSweepJob", "csharp");
 @@clientName(SweepJobLimits, "MachineLearningSweepJobLimits", "csharp");
 @@clientName(SynapseSpark, "MachineLearningSynapseSpark", "csharp");
 @@clientName(
