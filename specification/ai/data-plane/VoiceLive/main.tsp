@@ -14,18 +14,6 @@ namespace VoiceLive;
 
 /** API versioning. */
 enum Versions {
-  /** Version 2025-10-01. */
-  v2025_10_01: "2025-10-01",
-
-  /** Version 2026-01-01-preview. */
-  v2026_01_01_preview: "2026-01-01-preview",
-
-  /** Version 2026-04-10. */
-  v2026_04_10: "2026-04-10",
-
-  /** Version 2026-06-01-preview. */
-  v2026_06_01_preview: "2026-06-01-preview",
-
   /**
    * An interim virtual API version representing backwards compatibility changes moving
    * from public preview to general availability.
