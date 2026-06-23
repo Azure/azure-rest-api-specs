@@ -65,7 +65,8 @@ alias BillingRoleAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingProfileRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -155,7 +156,8 @@ alias BillingRoleAssignmentByCustomerOps = Azure.ResourceManager.Legacy.Extensio
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingCustomerRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -245,7 +247,8 @@ alias BillingRoleAssignmentByInvoiceSectionOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingInvoiceSectionRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -321,7 +324,8 @@ alias BillingRoleAssignmentByBillingAccountOps = Azure.ResourceManager.Legacy.Ex
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -416,7 +420,8 @@ alias BillingRoleAssignmentByDepartmentOps = Azure.ResourceManager.Legacy.Extens
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingDepartmentRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -492,7 +497,8 @@ alias BillingRoleAssignmentByEnrollmentAccountOps = Azure.ResourceManager.Legacy
     @key
     @pattern("^[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12}(_[a-fA-F0-9]{8}[-]?([a-fA-F0-9]{4}[-]?){3}[a-fA-F0-9]{12})?$")
     billingRoleAssignmentName: string;
-  }
+  },
+  "BillingEnrollmentAccountRoleAssignment"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -537,18 +543,23 @@ interface BillingRoleAssignmentByEnrollmentAccount {
   >;
 }
 
-@@doc(BillingRoleAssignment.name,
+@@doc(
+  BillingRoleAssignment.name,
   "The ID that uniquely identifies a role assignment."
 );
-@@doc(BillingRoleAssignment.properties,
+@@doc(
+  BillingRoleAssignment.properties,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByBillingAccount.createOrUpdateByBillingAccount::parameters.resource,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByDepartment.createOrUpdateByDepartment::parameters.resource,
   "The properties of the billing role assignment."
 );
-@@doc(BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
+@@doc(
+  BillingRoleAssignmentByEnrollmentAccount.createOrUpdateByEnrollmentAccount::parameters.resource,
   "The properties of the billing role assignment."
 );

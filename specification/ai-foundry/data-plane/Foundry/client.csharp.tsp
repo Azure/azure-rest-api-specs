@@ -60,12 +60,14 @@ namespace Azure.AI.Projects;
 @@clientName(Index, "AIProjectIndex", "csharp");
 @@clientName(CosmosDBIndex, "AIProjectCosmosDBIndex", "csharp");
 @@clientName(BaseCredentials, "AIProjectConnectionBaseCredential", "csharp");
-@@clientName(ApiKeyCredentials,
+@@clientName(
+  ApiKeyCredentials,
   "AIProjectConnectionApiKeyCredential",
   "csharp"
 );
 @@clientName(CustomCredential, "AIProjectConnectionCustomCredential", "csharp");
-@@clientName(EntraIDCredentials,
+@@clientName(
+  EntraIDCredentials,
   "AIProjectConnectionEntraIdCredential",
   "csharp"
 );
@@ -86,7 +88,8 @@ namespace Azure.AI.Projects;
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Connections.get, "getConnection", "csharp");
-@@clientName(Connections.getWithCredentials,
+@@clientName(
+  Connections.getWithCredentials,
   "getConnectionWithCredentials",
   "csharp"
 );
@@ -106,7 +109,8 @@ namespace Azure.AI.Projects;
 @@access(Connections.getWithCredentials, Access.internal);
 
 // The fix for ambiguous import of OperationState
-@@clientName(Azure.Core.Foundations.OperationState,
+@@clientName(
+  Azure.Core.Foundations.OperationState,
   "operationStatus",
   "csharp"
 );
@@ -115,7 +119,8 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.ROT13, "Rot13", "csharp");
 
-@@alternateType(DayOfWeek,
+@@alternateType(
+  DayOfWeek,
   {
     identity: "System.DayOfWeek",
   },

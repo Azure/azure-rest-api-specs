@@ -25,6 +25,7 @@ import "./ConsumerGroup.tsp";
 import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -62,6 +63,7 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Event Hub REST API operations."
 );

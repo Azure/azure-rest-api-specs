@@ -24,12 +24,14 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-redisenterprisecache"
     package-details:
       name: "@azure/arm-redisenterprisecache"
-    is-modular-library: true
+    compatibility-lro: true
     experimental-extensible-enums: true
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-redisenterprise"
     namespace: com.azure.resourcemanager.redisenterprise
+    service-name: Redis Enterprise
+    float32-as-double: false
     flavor: azure
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armredisenterprise/v4"

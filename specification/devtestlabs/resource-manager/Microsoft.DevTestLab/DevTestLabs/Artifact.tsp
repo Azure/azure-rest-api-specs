@@ -92,6 +92,7 @@ interface Artifacts {
 
 @@doc(Artifact.name, "The name of the artifact.");
 @@doc(Artifact.properties, "The properties of the resource.");
-@@doc(Artifacts.generateArmTemplate::parameters.body,
+@@doc(
+  Artifacts.generateArmTemplate::parameters.body,
   "Parameters for generating an ARM template for deploying artifacts."
 );

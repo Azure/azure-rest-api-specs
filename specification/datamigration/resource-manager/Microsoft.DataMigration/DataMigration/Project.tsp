@@ -14,10 +14,8 @@ namespace Microsoft.DataMigration;
 /**
  * A project resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DataMigrationService)
-model Project
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProjectProperties> {
+model Project is Azure.ResourceManager.ProxyResource<ProjectProperties> {
   ...ResourceNameParameter<
     Resource = Project,
     KeyName = "projectName",
@@ -30,6 +28,16 @@ model Project
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 }
 
 alias ProjectOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -121,7 +129,8 @@ interface Projects {
 
 @@doc(Project.name, "Name of the project");
 @@doc(Project.properties, "Project properties");
-@@doc(Projects.createOrUpdate::parameters.resource,
+@@doc(
+  Projects.createOrUpdate::parameters.resource,
   "Information about the project"
 );
 @@doc(Projects.update::parameters.properties, "Information about the project");

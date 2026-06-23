@@ -46,9 +46,9 @@ interface Operations {
   @get
   @armResourceList(OperationListResult)
   @list
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }
 
 /**
