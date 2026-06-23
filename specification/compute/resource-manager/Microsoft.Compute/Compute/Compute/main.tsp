@@ -30,6 +30,7 @@ import "./RestorePointCollection.tsp";
 import "./RestorePoint.tsp";
 import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
+import "./InterconnectBlock.tsp";
 import "./VirtualMachineRunCommand.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
@@ -70,6 +71,12 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2026-03-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_03_01: "2026-03-01",
 }
 
 // Fix https://github.com/Azure/typespec-azure/issues/4518 to use template
