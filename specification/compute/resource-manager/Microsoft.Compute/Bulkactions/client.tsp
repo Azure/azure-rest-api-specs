@@ -251,7 +251,11 @@ namespace Microsoft.Compute;
 // derive the location from the resource group. Mark the generated
 // operations internal so only those wrappers are public.
 // =====================================================================
-@@access(VirtualMachineBulkOperations.bulkDeallocate, Access.internal, "csharp");
+@@access(
+  VirtualMachineBulkOperations.bulkDeallocate,
+  Access.internal,
+  "csharp"
+);
 @@access(VirtualMachineBulkOperations.bulkHibernate, Access.internal, "csharp");
 @@access(VirtualMachineBulkOperations.bulkStart, Access.internal, "csharp");
 @@access(VirtualMachineBulkOperations.bulkDelete, Access.internal, "csharp");
