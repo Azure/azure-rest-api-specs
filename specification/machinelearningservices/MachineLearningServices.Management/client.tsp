@@ -176,11 +176,6 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
-  EndpointDeploymentResourcePropertiesBasicResources,
-  "MachineLearningWorkspaceConnectionDeployment",
-  "csharp"
-);
-@@clientName(
   EndpointResourcePropertiesBasicResource,
   "MachineLearningEndpoint",
   "csharp"
