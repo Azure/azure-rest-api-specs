@@ -69,7 +69,7 @@ interface MetricAlertResources {
   get is ArmResourceRead<MetricAlertResource, Error = MetricAlertErrorResponse>;
 
   /**
-   * Create or update an metric alert definition.
+   * Create or update a metric alert definition.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("MetricAlerts")
@@ -80,7 +80,7 @@ interface MetricAlertResources {
   >;
 
   /**
-   * Update an metric alert definition.
+   * Update a metric alert definition.
    */
   @patch(#{ implicitOptionality: false })
   @tag("MetricAlerts")

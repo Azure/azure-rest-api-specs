@@ -199,7 +199,7 @@
         "tags": [
           "MetricAlerts"
         ],
-        "description": "Create or update an metric alert definition.",
+        "description": "Create or update a metric alert definition.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -230,6 +230,12 @@
         "responses": {
           "200": {
             "description": "Resource 'MetricAlertResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/MetricAlertResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'MetricAlertResource' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/MetricAlertResource"
             }
@@ -285,7 +291,7 @@
         "tags": [
           "MetricAlerts"
         ],
-        "description": "Update an metric alert definition.",
+        "description": "Update a metric alert definition.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
