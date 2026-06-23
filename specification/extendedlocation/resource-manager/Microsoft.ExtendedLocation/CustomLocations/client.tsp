@@ -5,6 +5,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ExtendedLocation;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 
 @@clientName(
   Microsoft.ExtendedLocation,
