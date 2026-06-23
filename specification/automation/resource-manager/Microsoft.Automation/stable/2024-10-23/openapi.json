@@ -10807,7 +10807,6 @@
           "items": {
             "$ref": "#/definitions/ActivityParameterSet"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -10818,7 +10817,6 @@
           "items": {
             "$ref": "#/definitions/ActivityOutputType"
           },
-          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -11469,12 +11467,7 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the connection.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the description of the connection."
         },
         "connectionType": {
           "$ref": "#/definitions/ConnectionTypeAssociationProperty",
@@ -11598,12 +11591,7 @@
       "properties": {
         "isGlobal": {
           "type": "boolean",
-          "description": "Gets or sets a Boolean value to indicate if the connection type is global.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets a Boolean value to indicate if the connection type is global."
         },
         "fieldDefinitions": {
           "type": "object",
@@ -11893,12 +11881,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the credential.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the description of the credential."
         }
       },
       "required": [
@@ -12207,30 +12190,15 @@
       "properties": {
         "logVerbose": {
           "type": "boolean",
-          "description": "Gets or sets verbose log option.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets verbose log option."
         },
         "logProgress": {
           "type": "boolean",
-          "description": "Gets or sets progress log option.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets progress log option."
         },
         "source": {
           "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the source."
         },
         "parameters": {
           "type": "object",
@@ -12241,12 +12209,7 @@
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the configuration.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the description of the configuration."
         }
       },
       "required": [
@@ -12533,21 +12496,11 @@
       "properties": {
         "source": {
           "$ref": "#/definitions/ContentSource",
-          "description": "Gets or sets the source.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the source."
         },
         "configuration": {
           "$ref": "#/definitions/DscConfigurationAssociationProperty",
-          "description": "Gets or sets the configuration of the node.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the configuration of the node."
         },
         "incrementNodeConfigurationBuild": {
           "type": "boolean",
@@ -13821,11 +13774,7 @@
         "provisioningState": {
           "$ref": "#/definitions/JobProvisioningState",
           "description": "The current provisioning state of the job.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "readOnly": true
         }
       }
     },
@@ -14741,18 +14690,12 @@
         "name": {
           "type": "string",
           "description": "Gets or sets name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         },
         "location": {
           "type": "string",
           "description": "Gets or sets the location of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update"
-          ]
+          "readOnly": true
         },
         "tags": {
           "type": "object",
@@ -15597,21 +15540,11 @@
       "properties": {
         "logVerbose": {
           "type": "boolean",
-          "description": "Gets or sets verbose log option.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets verbose log option."
         },
         "logProgress": {
           "type": "boolean",
-          "description": "Gets or sets progress log option.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets progress log option."
         },
         "runtimeEnvironment": {
           "type": "string",
@@ -15623,40 +15556,20 @@
         },
         "draft": {
           "$ref": "#/definitions/RunbookDraft",
-          "description": "Gets or sets the draft runbook properties.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the draft runbook properties."
         },
         "publishContentLink": {
           "$ref": "#/definitions/ContentLink",
-          "description": "Gets or sets the published runbook content link.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the published runbook content link."
         },
         "description": {
           "type": "string",
-          "description": "Gets or sets the description of the runbook.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the description of the runbook."
         },
         "logActivityTrace": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the activity-level tracing options of the runbook.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+          "description": "Gets or sets the activity-level tracing options of the runbook."
         }
       },
       "required": [
@@ -16929,8 +16842,7 @@
         "value": {
           "type": "object",
           "description": "The values of the job stream.",
-          "additionalProperties": {},
-          "readOnly": true
+          "additionalProperties": {}
         }
       }
     },
