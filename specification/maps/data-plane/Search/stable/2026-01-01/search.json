@@ -634,7 +634,7 @@
                   {
                     "name": "Continent",
                     "value": "Continent",
-                    "description": "One of the Earth’s major landmasses."
+                    "description": "One of the Earth's major landmasses."
                   },
                   {
                     "name": "CountryRegion",
@@ -889,7 +889,7 @@
                   {
                     "name": "Ocean",
                     "value": "Ocean",
-                    "description": "One of the major divisions of Earth’s global ocean."
+                    "description": "One of the major divisions of Earth's global ocean."
                   },
                   {
                     "name": "OfficeBuilding",
@@ -1761,7 +1761,7 @@
     },
     "AutocompleteProperties": {
       "type": "object",
-      "description": "The `properties` payload of an `AutocompleteFeature`. Carries the result’s classification\n(`typeGroup`, `type`), its parsed address, and (for many `Place`-typed results) a separate\ndisplay name.",
+      "description": "The `properties` payload of an `AutocompleteFeature`. Carries the result's classification\n(`typeGroup`, `type`), its parsed address, and (for many `Place`-typed results) a separate\ndisplay name.",
       "properties": {
         "typeGroup": {
           "$ref": "#/definitions/AutocompleteResultTypeGroupsEnum",
@@ -1787,7 +1787,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "The `GeoJSON` object type of the response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",
@@ -2084,7 +2084,7 @@
           {
             "name": "Continent",
             "value": "Continent",
-            "description": "One of the Earth’s major landmasses."
+            "description": "One of the Earth's major landmasses."
           },
           {
             "name": "CountryRegion",
@@ -2339,7 +2339,7 @@
           {
             "name": "Ocean",
             "value": "Ocean",
-            "description": "One of the major divisions of Earth’s global ocean."
+            "description": "One of the major divisions of Earth's global ocean."
           },
           {
             "name": "OfficeBuilding",
@@ -2680,7 +2680,7 @@
     },
     "Boundary": {
       "type": "object",
-      "description": "The successful response body returned by `Get Polygon`. Encoded as a\n[`GeoJSON Feature`](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) whose `geometry` is\na `GeometryCollection` of one or more `Polygon` or `MultiPolygon` shapes describing the\noutline of the requested geographical area, and whose `properties` carry the area’s\ndisplay name and copyright attribution.",
+      "description": "The successful response body returned by `Get Polygon`. Encoded as a\n[`GeoJSON Feature`](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) whose `geometry` is\na `GeometryCollection` of one or more `Polygon` or `MultiPolygon` shapes describing the\noutline of the requested geographical area, and whose `properties` carry the area's\ndisplay name and copyright attribution.",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureTypeEnum",
@@ -2828,7 +2828,7 @@
     },
     "ConfidenceEnum": {
       "type": "string",
-      "description": "The level of confidence that the geocoded location result is a match. Use this value together\nwith the match codes to obtain more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors, including the relative\nimportance of the geocoded location and the user’s location, if specified.",
+      "description": "The level of confidence that the geocoded location result is a match. Use this value together\nwith the match codes to obtain more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors, including the relative\nimportance of the geocoded location and the user's location, if specified.",
       "enum": [
         "High",
         "Medium",
@@ -2935,7 +2935,7 @@
           {
             "name": "FeatureCollection",
             "value": "FeatureCollection",
-            "description": "The `GeoJSON FeatureCollection` object type. This appears as the root of every response body."
+            "description": "The `GeoJSON FeatureCollection` object type. This appears as the root of every successful response body."
           }
         ]
       }
@@ -2980,7 +2980,7 @@
         },
         "bbox": {
           "type": "array",
-          "description": "The smallest axis-aligned rectangle that contains the feature's geometry, in WGS 84\nlongitude/latitude order. Encoded as `[westLon, southLat, eastLon, northLat]` per\n[RFC 7946 §5](https://datatracker.ietf.org/doc/html/rfc7946#section-5).",
+          "description": "The smallest axis-aligned rectangle that contains the feature's geometry, in WGS 84\nlongitude/latitude order. Encoded as `[westLon, southLat, eastLon, northLat]` per\n[RFC 7946, Section 5](https://datatracker.ietf.org/doc/html/rfc7946#section-5).",
           "items": {
             "type": "number",
             "format": "double"
@@ -3436,11 +3436,11 @@
         },
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "The `GeoJSON` object type of this entry’s success body. Always `FeatureCollection`, as\ndefined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). Populated only when the\nentry succeeded."
+          "description": "The `GeoJSON` object type of this entry's success body. Always `FeatureCollection`, as\ndefined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). Populated only when the\nentry succeeded."
         },
         "features": {
           "type": "array",
-          "description": "The array of `GeoJSON Feature` objects geocoded for this batch entry’s query. Each\n`Feature` represents a single geocoded location with details exposed via `properties` and\nits primary coordinate via `geometry`. Populated only when the entry succeeded.",
+          "description": "The array of `GeoJSON Feature` objects geocoded for this batch entry's query. Each\n`Feature` represents a single geocoded location with details exposed via `properties` and\nits primary coordinate via `geometry`. Populated only when the entry succeeded.",
           "items": {
             "$ref": "#/definitions/FeaturesItem"
           }
@@ -3477,7 +3477,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "The `GeoJSON` object type of the response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",

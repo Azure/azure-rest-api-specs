@@ -17,7 +17,7 @@ union FeatureCollectionEnum {
   string,
 
   /**
-   * The `GeoJSON FeatureCollection` object type. This appears as the root of every response body.
+   * The `GeoJSON FeatureCollection` object type. This appears as the root of every successful response body.
    */
   FeatureCollection: "FeatureCollection",
 }
@@ -40,7 +40,7 @@ union FeatureTypeEnum {
  * with the match codes to obtain more complete information about the match.
  *
  * The confidence of a geocoded location is based on many factors, including the relative
- * importance of the geocoded location and the user’s location, if specified.
+ * importance of the geocoded location and the user's location, if specified.
  */
 union ConfidenceEnum {
   string,
@@ -539,7 +539,7 @@ union AutocompleteResultTypeEnum {
   CommunityCenter: "CommunityCenter",
 
   /**
-   * One of the Earth’s major landmasses.
+   * One of the Earth's major landmasses.
    */
   Continent: "Continent",
 
@@ -805,7 +805,7 @@ union AutocompleteResultTypeEnum {
   ObservationPoint: "ObservationPoint",
 
   /**
-   * One of the major divisions of Earth’s global ocean.
+   * One of the major divisions of Earth's global ocean.
    */
   Ocean: "Ocean",
 
@@ -1080,7 +1080,7 @@ union AutocompleteResultTypeEnum {
  */
 model GeocodingResponse {
   /**
-   * The `GeoJSON` object type of the response body. Always `FeatureCollection`, as defined in
+   * The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in
    * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
@@ -1133,7 +1133,7 @@ model FeaturesItem {
   /**
    * The smallest axis-aligned rectangle that contains the feature's geometry, in WGS 84
    * longitude/latitude order. Encoded as `[westLon, southLat, eastLon, northLat]` per
-   * [RFC 7946 §5](https://datatracker.ietf.org/doc/html/rfc7946#section-5).
+   * [RFC 7946, Section 5](https://datatracker.ietf.org/doc/html/rfc7946#section-5).
    */
   bbox?: float64[];
 }
@@ -1528,14 +1528,14 @@ model GeocodingBatchResponseItem {
   optionalId?: string;
 
   /**
-   * The `GeoJSON` object type of this entry’s success body. Always `FeatureCollection`, as
+   * The `GeoJSON` object type of this entry's success body. Always `FeatureCollection`, as
    * defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). Populated only when the
    * entry succeeded.
    */
   type?: FeatureCollectionEnum;
 
   /**
-   * The array of `GeoJSON Feature` objects geocoded for this batch entry’s query. Each
+   * The array of `GeoJSON Feature` objects geocoded for this batch entry's query. Each
    * `Feature` represents a single geocoded location with details exposed via `properties` and
    * its primary coordinate via `geometry`. Populated only when the entry succeeded.
    */
@@ -1560,7 +1560,7 @@ model GeocodingBatchResponseItem {
  * The successful response body returned by `Get Polygon`. Encoded as a
  * [`GeoJSON Feature`](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) whose `geometry` is
  * a `GeometryCollection` of one or more `Polygon` or `MultiPolygon` shapes describing the
- * outline of the requested geographical area, and whose `properties` carry the area’s
+ * outline of the requested geographical area, and whose `properties` carry the area's
  * display name and copyright attribution.
  */
 model Boundary {
@@ -1693,7 +1693,7 @@ model ReverseGeocodingBatchRequestItem {
  */
 model AutocompleteResponse {
   /**
-   * The `GeoJSON` object type of the response body. Always `FeatureCollection`, as defined in
+   * The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in
    * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
@@ -1745,7 +1745,7 @@ model AutocompleteFeature {
 }
 
 /**
- * The `properties` payload of an `AutocompleteFeature`. Carries the result’s classification
+ * The `properties` payload of an `AutocompleteFeature`. Carries the result's classification
  * (`typeGroup`, `type`), its parsed address, and (for many `Place`-typed results) a separate
  * display name.
  */
