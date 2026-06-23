@@ -549,7 +549,6 @@ using Microsoft.MachineLearningServices;
   "MachineLearningServicePrincipalDatastoreCredentials",
   "csharp"
 );
-@@clientName(PrivateEndpoint, "MachineLearningPrivateEndpoint", "csharp");
 @@clientName(
   PrivateLinkResource,
   "MachineLearningPrivateLinkResource",
