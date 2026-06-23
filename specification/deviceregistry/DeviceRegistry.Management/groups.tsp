@@ -45,17 +45,42 @@ model GroupProperties {
 }
 
 @added(Versions.v2026_11_02_preview)
-@doc("Response for the preview members operation.")
-model GroupPreviewMembersResponse {
-  @doc("A preview of member resource IDs.")
-  members?: string[];
-}
-
-@added(Versions.v2026_11_02_preview)
 @doc("Response for the get current member count operation.")
 model GroupMemberCountResponse {
   @doc("The current count of members in the group.")
   count?: int64;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("Request body for listing current members of a namespace group.")
+model GroupListMembersRequest {
+  @doc("""
+    Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.
+    """)
+  @maxValue(1000)
+  pageSize?: int32;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a paging cursor, not a credential or secret."
+  @doc("Opaque continuation token from a previous listMembers response.")
+  skipToken?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("Response for the list members operation.")
+model GroupListMembersResult {
+  @doc("The group members returned in this page.")
+  members: GroupListMember[];
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a paging cursor, not a credential or secret."
+  @doc("Opaque continuation token to use in the next listMembers request, if more results remain after the requested page.")
+  skipToken?: string;
+}
+
+@added(Versions.v2026_11_02_preview)
+@doc("An individual member of the group, returned as part of the list members operation.")
+model GroupListMember {
+  @doc("The ARM resource ID of the group member.")
+  id: string;
 }
 
 @added(Versions.v2026_11_02_preview)
@@ -93,13 +118,6 @@ interface Groups {
   delete is ArmResourceDeleteWithoutOkAsync<Group>;
   listByNamespace is ArmResourceListByParent<Group>;
 
-  @doc("Gets a stored preview of members that was determined during the last refresh.")
-  previewMembers is ArmResourceActionSync<
-    Group,
-    void,
-    GroupPreviewMembersResponse
-  >;
-
   @doc("Refreshes the members of this group.")
   @useFinalStateVia("azure-async-operation")
   refreshMembers is ArmResourceActionNoResponseContentAsync<
@@ -113,5 +131,12 @@ interface Groups {
     Group,
     void,
     GroupMemberCountResponse
+  >;
+
+  @doc("Lists the current members of a namespace group.")
+  listMembers is ArmResourceActionSync<
+    Group,
+    GroupListMembersRequest,
+    GroupListMembersResult
   >;
 }

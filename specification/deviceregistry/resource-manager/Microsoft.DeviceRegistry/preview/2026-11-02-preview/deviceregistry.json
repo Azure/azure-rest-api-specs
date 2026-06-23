@@ -5321,13 +5321,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/previewMembers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/groups/{groupName}/listMembers": {
       "post": {
-        "operationId": "Groups_PreviewMembers",
+        "operationId": "Groups_ListMembers",
         "tags": [
           "Groups"
         ],
-        "description": "Gets a stored preview of members that was determined during the last refresh.",
+        "description": "Lists the current members of a namespace group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5357,13 +5357,22 @@
             "minLength": 3,
             "maxLength": 63,
             "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupListMembersRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GroupPreviewMembersResponse"
+              "$ref": "#/definitions/GroupListMembersResult"
             }
           },
           "default": {
@@ -5374,8 +5383,8 @@
           }
         },
         "x-ms-examples": {
-          "Group PreviewMembers": {
-            "$ref": "./examples/PreviewMembers_Group.json"
+          "Group ListMembers": {
+            "$ref": "./examples/ListMembers_Group.json"
           }
         }
       }
@@ -9208,6 +9217,55 @@
         }
       ]
     },
+    "GroupListMember": {
+      "type": "object",
+      "description": "An individual member of the group, returned as part of the list members operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ARM resource ID of the group member."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GroupListMembersRequest": {
+      "type": "object",
+      "description": "Request body for listing current members of a namespace group.",
+      "properties": {
+        "pageSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional maximum number of group members to return in the requested page. The maximum page size is 1000 members.",
+          "maximum": 1000
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Opaque continuation token from a previous listMembers response."
+        }
+      }
+    },
+    "GroupListMembersResult": {
+      "type": "object",
+      "description": "Response for the list members operation.",
+      "properties": {
+        "members": {
+          "type": "array",
+          "description": "The group members returned in this page.",
+          "items": {
+            "$ref": "#/definitions/GroupListMember"
+          }
+        },
+        "skipToken": {
+          "type": "string",
+          "description": "Opaque continuation token to use in the next listMembers request, if more results remain after the requested page."
+        }
+      },
+      "required": [
+        "members"
+      ]
+    },
     "GroupListResult": {
       "type": "object",
       "description": "The response of a Group list operation.",
@@ -9268,19 +9326,6 @@
             "description": "The group is ready."
           }
         ]
-      }
-    },
-    "GroupPreviewMembersResponse": {
-      "type": "object",
-      "description": "Response for the preview members operation.",
-      "properties": {
-        "members": {
-          "type": "array",
-          "description": "A preview of member resource IDs.",
-          "items": {
-            "type": "string"
-          }
-        }
       }
     },
     "GroupProperties": {
