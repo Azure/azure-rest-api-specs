@@ -43,12 +43,6 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@usage(DscConfiguration, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(DscCompilationJob, Azure.ClientGenerator.Core.Usage.input, "csharp");
-@@usage(
-  DscCompilationJobCreateOrUpdateContent,
-  Azure.ClientGenerator.Core.Usage.input,
-  "csharp"
-);
 @@usage(
   DscConfigurationAssociationProperty,
   Azure.ClientGenerator.Core.Usage.input,
@@ -141,6 +135,10 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@clientName(Python2Package, "AutomationAccountPython2Package", "csharp");
+@@clientName(Package, "AutomationPackage", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Use an Automation-scoped C# resource name for the Package child resource."
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Use an Automation-scoped C# resource name for the Package child resource."
+@@clientOption(Packages.get, "resource-name", "AutomationPackage", "csharp");
 @@clientName(Certificate, "AutomationCertificate", "csharp");
 @@clientName(Connection, "AutomationConnection", "csharp");
 @@clientName(ConnectionType, "AutomationConnectionType", "csharp");
@@ -157,16 +155,19 @@ using TypeSpec.Rest;
 @@clientName(SourceControl, "AutomationSourceControl", "csharp");
 @@clientName(Variable, "AutomationVariable", "csharp");
 @@clientName(Watcher, "AutomationWatcher", "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated Watcher resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Watcher,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated DeletedAutomationAccount resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   DeletedAutomationAccount,
   Azure.ResourceManager.Foundations.Resource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK resource hierarchy for the migrated SourceControlSyncJob resource."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   SourceControlSyncJob,
   Azure.ResourceManager.Foundations.Resource,
@@ -300,6 +301,7 @@ using TypeSpec.Rest;
   "GetAllNodeCountInformation",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for node count information."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.nodeCountInformationGet,
   "csharp"
@@ -309,6 +311,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurations",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configurations."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationsList,
   "csharp"
@@ -329,6 +332,7 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@pageItems(KeyListResult.keys);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for automation account keys."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.keysListByAutomationAccount,
   "csharp"
@@ -338,7 +342,11 @@ using TypeSpec.Rest;
   "GetAutomationJobs",
   "csharp"
 );
-@@access(AutomationAccounts.jobListByAutomationAccount, Access.internal, "csharp");
+@@access(
+  AutomationAccounts.jobListByAutomationAccount,
+  Access.internal,
+  "csharp"
+);
 @@clientName(
   AutomationAccounts.linkedWorkspaceGet,
   "GetLinkedWorkspace",
@@ -355,6 +363,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurationMachineRuns",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configuration machine runs."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationMachineRunsList,
   "csharp"
@@ -369,6 +378,7 @@ using TypeSpec.Rest;
   "GetSoftwareUpdateConfigurationRuns",
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for software update configuration runs."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   AutomationAccounts.softwareUpdateConfigurationRunsList,
   "csharp"
@@ -407,12 +417,12 @@ using TypeSpec.Rest;
 @@clientName(ModuleUpdateParameters, "AutomationAccountModulePatch", "csharp");
 @@clientName(
   PythonPackageCreateParameters,
-  "AutomationAccountPython2PackageCreateOrUpdateContent",
+  "AutomationPythonPackageCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(
   PythonPackageUpdateParameters,
-  "AutomationAccountPython2PackagePatch",
+  "AutomationPythonPackagePatch",
   "csharp"
 );
 @@clientName(Statistics, "AutomationAccountStatistics", "csharp");
@@ -565,7 +575,21 @@ using TypeSpec.Rest;
 );
 @@clientName(
   PackageCreateOrUpdateParameters,
-  "PackageCreateOrUpdateContent",
+  "AutomationPackageCreateOrUpdateContent",
+  "csharp"
+);
+@@clientName(
+  PackageCreateOrUpdateParameters.allOf,
+  "TrackedResource",
+  "csharp"
+);
+@@clientName(PackageUpdateParameters, "AutomationPackagePatch", "csharp");
+@@clientName(PackageUpdateParameters.allOf, "TrackedResource", "csharp");
+@@clientName(PackageProperties.allOf, "ResourceSystemData", "csharp");
+@@clientName(PackageErrorInfo, "AutomationPackageErrorInfo", "csharp");
+@@clientName(
+  PackageProvisioningState,
+  "AutomationPackageProvisioningState",
   "csharp"
 );
 @@clientName(
@@ -607,39 +631,6 @@ using TypeSpec.Rest;
 @@clientName(
   DscConfigurationCreateOrUpdateProperties.logProgress,
   "IsLogProgressEnabled",
-  "csharp"
-);
-@@clientName(DscCompilationJobProperties.creationTime, "CreatedOn", "csharp");
-@@clientName(DscCompilationJobProperties.startTime, "StartOn", "csharp");
-@@clientName(DscCompilationJobProperties.endTime, "EndOn", "csharp");
-@@clientName(
-  DscCompilationJobProperties.lastModifiedTime,
-  "LastModifiedOn",
-  "csharp"
-);
-@@clientName(
-  DscCompilationJobProperties.lastStatusModifiedTime,
-  "LastStatusModifiedOn",
-  "csharp"
-);
-@@clientName(
-  DscCompilationJobCreateOrUpdateProperties.incrementNodeConfigurationBuild,
-  "IsIncrementNodeConfigurationBuildRequired",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore previous C# DscCompilationJob flattened model shape."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DscCompilationJob.properties,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore previous C# DscCompilationJob flattened model shape."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DscCompilationJobProperties.configuration,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore previous C# DscCompilationJob create content shape."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  DscCompilationJobCreateOrUpdateContent.properties,
   "csharp"
 );
 @@clientName(
@@ -820,6 +811,21 @@ using TypeSpec.Rest;
 @@alternateType(JobSchedule.name, Azure.Core.uuid, "csharp");
 @@alternateType(JobScheduleProperties.jobScheduleId, Azure.Core.uuid, "csharp");
 @@alternateType(
+  SoftwareUpdateConfigurationMachineRunIdParameter.softwareUpdateConfigurationMachineRunId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SoftwareUpdateConfigurationRunIdParameter.softwareUpdateConfigurationRunId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  SourceControlSyncJobIdParameter.sourceControlSyncJobId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
   PrivateEndpointProperty.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -850,107 +856,6 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@alternateType(JobProperties.jobId, Azure.Core.uuid, "csharp");
-@@visibility(
-  JobProperties.provisioningState,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(ModuleUpdateParameters.name, Lifecycle.Read, Lifecycle.Update);
-@@visibility(ModuleUpdateParameters.location, Lifecycle.Read, Lifecycle.Update);
-@@visibility(ActivityProperties.parameterSets, Lifecycle.Read);
-@@visibility(ActivityProperties.outputTypes, Lifecycle.Read);
-@@visibility(SourceControlSyncJobStreamByIdProperties.value, Lifecycle.Read);
-@@visibility(
-  ConnectionCreateOrUpdateProperties.description,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  ConnectionTypeCreateOrUpdateProperties.isGlobal,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  CredentialCreateOrUpdateProperties.description,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscConfigurationCreateOrUpdateProperties.description,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscConfigurationCreateOrUpdateProperties.logProgress,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscConfigurationCreateOrUpdateProperties.logVerbose,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscConfigurationCreateOrUpdateProperties.source,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscNodeConfigurationCreateOrUpdateParametersProperties.configuration,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  DscNodeConfigurationCreateOrUpdateParametersProperties.source,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.description,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.draft,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.logActivityTrace,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.logProgress,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.logVerbose,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
-@@visibility(
-  RunbookCreateOrUpdateProperties.publishContentLink,
-  Lifecycle.Read,
-  Lifecycle.Create,
-  Lifecycle.Update
-);
 @@alternateType(JobCollectionItemProperties.jobId, Azure.Core.uuid, "csharp");
 @@alternateType(jobNavigation.id, Azure.Core.uuid, "csharp");
 @@alternateType(
@@ -1022,6 +927,7 @@ using TypeSpec.Rest;
   "DeletedAutomationAccounts",
   "python"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for deleted automation accounts."
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   deletedAutomationAccountsOperationGroup.listBySubscription,
   "csharp"
@@ -1053,22 +959,39 @@ namespace Microsoft.Automation {
   /**
    * SDK-only compatibility fixed enum for the previous ModuleProvisioningState API.
    */
-  enum ModuleProvisioningStateCompatibility {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "SDK-only compatibility type that must remain closed to match the previous non-extensible enum."
+  union ModuleProvisioningStateCompatibility {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Created: "Created",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Creating: "Creating",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     StartingImportModuleRunbook: "StartingImportModuleRunbook",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     RunningImportModuleRunbook: "RunningImportModuleRunbook",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentRetrieved: "ContentRetrieved",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentDownloaded: "ContentDownloaded",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentValidated: "ContentValidated",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ConnectionTypeImported: "ConnectionTypeImported",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentStored: "ContentStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ModuleDataStored: "ModuleDataStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ActivitiesStored: "ActivitiesStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ModuleImportRunbookComplete: "ModuleImportRunbookComplete",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Succeeded: "Succeeded",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Failed: "Failed",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Cancelled: "Canceled",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Updating: "Updating",
   }
 
@@ -1077,6 +1000,8 @@ namespace Microsoft.Automation {
    */
   union DscConfigurationProvisioningStateCompatibility {
     string,
+
+    /** Succeeded. */
     Succeeded: "Succeeded",
   }
 
@@ -1085,6 +1010,8 @@ namespace Microsoft.Automation {
    */
   union RunbookProvisioningStateCompatibility {
     string,
+
+    /** Succeeded. */
     Succeeded: "Succeeded",
   }
 
@@ -1118,267 +1045,4 @@ namespace Microsoft.Automation {
     RunbookProvisioningStateCompatibility,
     "csharp"
   );
-
-  /**
-   * SDK-only compatibility definition for the previous Dsc Compilation job API.
-   */
-  @parentResource(AutomationAccount)
-  model DscCompilationJob
-    is Azure.ResourceManager.ProxyResource<DscCompilationJobProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = DscCompilationJob,
-      KeyName = "compilationJobName",
-      SegmentName = "compilationjobs",
-      NamePattern = ""
-    >;
-  }
-
-  /**
-   * SDK-only compatibility properties for the previous Dsc Compilation job API.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "SDK-only C# compatibility for previous DscCompilationJob API."
-  model DscCompilationJobProperties {
-    /**
-     * Gets or sets the configuration.
-     */
-    configuration?: DscConfigurationAssociationProperty;
-
-    /**
-     * Gets the compilation job started by.
-     */
-    @visibility(Lifecycle.Read)
-    startedBy?: string;
-
-    /**
-     * Gets the id of the job.
-     */
-    @visibility(Lifecycle.Read)
-    jobId?: Azure.Core.uuid;
-
-    /**
-     * Gets the creation time of the job.
-     */
-    @visibility(Lifecycle.Read)
-    creationTime?: utcDateTime;
-
-    /**
-     * The current provisioning state of the job.
-     */
-    provisioningState?: JobProvisioningState;
-
-    /**
-     * Gets or sets the runOn which specifies the group name where the job is to be executed.
-     */
-    runOn?: string;
-
-    /**
-     * Gets or sets the status of the job.
-     */
-    status?: JobStatus;
-
-    /**
-     * Gets or sets the status details of the job.
-     */
-    statusDetails?: string;
-
-    /**
-     * Gets the start time of the job.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-nullable" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @visibility(Lifecycle.Read)
-    startTime?: utcDateTime | null;
-
-    /**
-     * Gets the end time of the job.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-nullable" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @visibility(Lifecycle.Read)
-    endTime?: utcDateTime | null;
-
-    /**
-     * Gets the exception of the job.
-     */
-    @visibility(Lifecycle.Read)
-    exception?: string;
-
-    /**
-     * Gets the last modified time of the job.
-     */
-    @visibility(Lifecycle.Read)
-    lastModifiedTime?: utcDateTime;
-
-    /**
-     * Gets the last status modified time of the job.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-nullable" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @visibility(Lifecycle.Read)
-    lastStatusModifiedTime?: utcDateTime | null;
-
-    /**
-     * Gets or sets the parameters of the job.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "SDK-only C# compatibility for previous DscCompilationJob API."
-    parameters?: Record<string>;
-  }
-
-  /**
-   * SDK-only compatibility response model for the list job operation.
-   */
-  model DscCompilationJobListResult is Azure.Core.Page<DscCompilationJob>;
-
-  /**
-   * SDK-only compatibility parameters for the create compilation job operation.
-   */
-  model DscCompilationJobCreateOrUpdateContent {
-    /**
-     * Gets or sets the list of compilation job properties.
-     */
-    properties?: DscCompilationJobCreateOrUpdateProperties;
-
-    /**
-     * Gets or sets name of the resource.
-     */
-    name?: string;
-
-    /**
-     * Gets or sets the location of the resource.
-     */
-    location?: string;
-
-    /**
-     * Gets or sets the tags attached to the resource.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "SDK-only C# compatibility for previous DscCompilationJob API."
-    tags?: Record<string>;
-  }
-
-  /**
-   * SDK-only compatibility properties for the create compilation job operation.
-   */
-  model DscCompilationJobCreateOrUpdateProperties {
-    /**
-     * Gets or sets the configuration.
-     */
-    configuration: DscConfigurationAssociationProperty;
-
-    /**
-     * Gets or sets the parameters of the job.
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "SDK-only C# compatibility for previous DscCompilationJob API."
-    parameters?: Record<string>;
-
-    /**
-     * If a new build version of NodeConfiguration is required.
-     */
-    incrementNodeConfigurationBuild?: boolean;
-  }
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "SDK-only C# compatibility for previous DscCompilationJob API."
-  @tag("DscCompilationJob")
-  @armResourceOperations(#{ omitTags: true })
-  interface DscCompilationJobs {
-    /**
-     * Creates the Dsc compilation job of the configuration.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dscconfigurationcompilejoboperations")
-    createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
-      DscCompilationJob,
-      Request = DscCompilationJobCreateOrUpdateContent,
-      Response = Azure.ResourceManager.ArmResourceCreatedSyncResponse<DscCompilationJob>
-    >;
-
-    /**
-     * Retrieve the Dsc configuration compilation job identified by job id.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/dsccompilationjoboperations")
-    get is Azure.ResourceManager.ArmResourceRead<DscCompilationJob>;
-
-    /**
-     * Retrieve a list of dsc compilation jobs.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-openapi" "SDK-only C# compatibility for previous DscCompilationJob API."
-    @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/compilationjoboperations")
-    listByAutomationAccount is Azure.ResourceManager.ArmResourceListByParent<
-      DscCompilationJob,
-      Parameters = {
-        /**
-         * The filter to apply on the operation.
-         */
-        @query("$filter")
-        $filter?: string;
-      },
-      Response = Azure.ResourceManager.ArmResponse<DscCompilationJobListResult>
-    >;
-  }
-
-  /**
-   * Retrieve all the job streams for the compilation Job.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK-only C# compatibility for previous DscCompilationJob API."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "SDK-only C# compatibility for previous DscCompilationJob API."
-  @tag("DscCompilationJob")
-  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
-  @list
-  @get
-  @action("streams")
-  op getDscCompilationJobStreams is Azure.ResourceManager.ArmResourceActionSync<
-    AutomationAccount,
-    void,
-    Azure.ResourceManager.ArmResponse<JobStreamListResult>,
-    Parameters = {
-      /**
-       * The job id.
-       */
-      @path
-      @segment("compilationjobs")
-      jobId: Azure.Core.uuid;
-    }
-  >;
-
-  /**
-   * Retrieve the job stream identified by job stream id.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK-only C# compatibility for previous DscCompilationJob API."
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "SDK-only C# compatibility for previous DscCompilationJob API."
-  @tag("DscCompilationJob")
-  @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/jobstreamoperations")
-  @get
-  op getStreamDscCompilationJob is Azure.ResourceManager.ArmResourceRead<
-    AutomationAccount,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
-    Response = Azure.ResourceManager.ArmResponse<JobStream>,
-    Parameters = {
-      /**
-       * The job id.
-       */
-      @path
-      @segment("compilationjobs")
-      jobId: Azure.Core.uuid;
-
-      /**
-       * The job stream id.
-       */
-      @path
-      @segment("streams")
-      jobStreamId: string;
-    }
-  >;
 }
-
-@@clientName(
-  getDscCompilationJobStreams,
-  "GetDscCompilationJobStreams",
-  "csharp"
-);
-@@access(getDscCompilationJobStreams, Access.internal, "csharp");
-@@clientLocation(getDscCompilationJobStreams, "AutomationAccount", "csharp");
-
-@@clientName(
-  getStreamDscCompilationJob,
-  "GetStreamDscCompilationJob",
-  "csharp"
-);
-@@access(getStreamDscCompilationJob, Access.internal, "csharp");
-@@clientLocation(getStreamDscCompilationJob, "AutomationAccount", "csharp");

@@ -3801,6 +3801,7 @@ model JobProperties {
   /**
    * The current provisioning state of the job.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: JobProvisioningState;
 }
