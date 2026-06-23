@@ -106,6 +106,8 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11, exact("WEB_SEARCH_PREVIEW_2025_03_11"), "python");
 @@clientName(OpenAI.RankerVersionType.`default-2024-11-15`, exact("DEFAULT_2024_11_15"), "python");
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
