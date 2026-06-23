@@ -148,11 +148,11 @@ model ProvisionDeviceRequest {
   @query
   mode?: ProvisionMode;
 
-  /** The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID. */
-  iotHubDeviceId: string;
+  /** The external device identity. */
+  externalDeviceId: string;
 
-  /** The service endpoint identifier as returned by the GetNamespace API. */
-  targetEndpoint: IotHubEndpoint;
+  /** The messaging endpoint name as returned by the GetNamespace API. */
+  messagingEndpointName: string;
 
   /** Operational authentication configuration. */
   authentication: AuthenticationProfileProperties;
@@ -177,7 +177,7 @@ union ProvisionMode {
   RegistryOnly: "RegistryOnly",
 }
 
-/** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against. */
+/** Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the device address. */
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionDeviceResult {
   /** Reference to the provisioned Device resource. */
@@ -189,8 +189,8 @@ model ProvisionDeviceResult {
   /** Reference to the provisioned AuthenticationProfile child resource. */
   authProfile: ProvisionedAuthProfileRef;
 
-  /** Reference to the messaging endpoint the device was provisioned against. */
-  endpoint: IotHubEndpoint;
+  /** The device address (e.g. myhub.azure-devices.net). */
+  deviceAddress: string;
 }
 
 // ──────────────────────────────────────────────
@@ -235,8 +235,11 @@ model ReprovisionDeviceRequest {
   @header("If-Match")
   ifMatch?: string;
 
-  /** The target IoT Hub endpoint (the new hub) to move the device to. */
-  targetEndpoint: IotHubEndpoint;
+  /** The external device identity used to look up the device. */
+  externalDeviceId: string;
+
+  /** The messaging endpoint name of the new hub to move the device to. */
+  messagingEndpointName: string;
 
   /** Optional authentication configuration. If omitted, the device's existing AuthenticationProfile is preserved. If supplied, a new AuthenticationProfile is created and the old one is deleted after success. */
   authentication?: AuthenticationProfileProperties;
@@ -320,7 +323,7 @@ interface Devices {
   /** Reprovision an existing device to a new IoT Hub within the same namespace. */
   @pollingOperation(ReprovisionDeviceResults.get)
   @added(Versions.v2026_11_02_preview)
-  reprovision is ResourceOperations.LongRunningResourceAction<
+  reprovision is ResourceOperations.LongRunningResourceCollectionAction<
     Device,
     ReprovisionDeviceRequest,
     ProvisionDeviceResult,

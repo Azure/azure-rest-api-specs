@@ -237,110 +237,6 @@
         }
       }
     },
-    "/namespaces/{namespaceUuid}/devices/{deviceName}:reprovision": {
-      "post": {
-        "operationId": "Devices_Reprovision",
-        "tags": [
-          "Devices"
-        ],
-        "description": "Reprovision an existing device to a new IoT Hub within the same namespace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "namespaceUuid",
-            "in": "path",
-            "description": "The unique identifier of the namespace.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "deviceName",
-            "in": "path",
-            "description": "The name of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ReprovisionDeviceRequest.ifMatch"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReprovisionDeviceRequest"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/ProvisionDeviceResult",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
-            },
-            "headers": {
-              "Operation-Id": {
-                "type": "string",
-                "description": "The ID of the long-running operation's status monitor."
-              },
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Reprovision a device to a new IoT Hub": {
-            "$ref": "./examples/Devices_Reprovision.json"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
       "get": {
         "operationId": "DeviceAttributes_List",
@@ -2315,6 +2211,103 @@
             "$ref": "./examples/Devices_QueryDistinctValues.json"
           }
         }
+      }
+    },
+    "/namespaces/{namespaceUuid}/devices:reprovision": {
+      "post": {
+        "operationId": "Devices_Reprovision",
+        "tags": [
+          "Devices"
+        ],
+        "description": "Reprovision an existing device to a new IoT Hub within the same namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ReprovisionDeviceRequest.ifMatch"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReprovisionDeviceRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "type": "object",
+              "description": "Provides status details for long running operations.",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/ProvisionDeviceResult",
+                  "description": "The result of the operation."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ]
+            },
+            "headers": {
+              "Operation-Id": {
+                "type": "string",
+                "description": "The ID of the long-running operation's status monitor."
+              },
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reprovision a device to a new IoT Hub": {
+            "$ref": "./examples/Devices_Reprovision.json"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/namespaces/{namespaceUuid}/generateReportResults/{operationId}": {
@@ -4512,13 +4505,13 @@
       "type": "object",
       "description": "Request body for the provision device endpoint.",
       "properties": {
-        "iotHubDeviceId": {
+        "externalDeviceId": {
           "type": "string",
-          "description": "The Device ID provided by the customer. Also used by IoT Hub to hold the IoT Hub device ID."
+          "description": "The external device identity."
         },
-        "targetEndpoint": {
-          "$ref": "#/definitions/IotHubEndpoint",
-          "description": "The service endpoint identifier as returned by the GetNamespace API."
+        "messagingEndpointName": {
+          "type": "string",
+          "description": "The messaging endpoint name as returned by the GetNamespace API."
         },
         "authentication": {
           "$ref": "#/definitions/AuthenticationProfileProperties",
@@ -4530,14 +4523,14 @@
         }
       },
       "required": [
-        "iotHubDeviceId",
-        "targetEndpoint",
+        "externalDeviceId",
+        "messagingEndpointName",
         "authentication"
       ]
     },
     "ProvisionDeviceResult": {
       "type": "object",
-      "description": "Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the messaging endpoint the device was provisioned against.",
+      "description": "Result of a successful device provisioning operation. Returns nested references to the Device, Capability, and AuthenticationProfile resources written by the orchestration, plus the device address.",
       "properties": {
         "device": {
           "$ref": "#/definitions/ProvisionedDeviceRef",
@@ -4551,16 +4544,16 @@
           "$ref": "#/definitions/ProvisionedAuthProfileRef",
           "description": "Reference to the provisioned AuthenticationProfile child resource."
         },
-        "endpoint": {
-          "$ref": "#/definitions/IotHubEndpoint",
-          "description": "Reference to the messaging endpoint the device was provisioned against."
+        "deviceAddress": {
+          "type": "string",
+          "description": "The device address (e.g. myhub.azure-devices.net)."
         }
       },
       "required": [
         "device",
         "capability",
         "authProfile",
-        "endpoint"
+        "deviceAddress"
       ]
     },
     "ProvisionDeviceResultStatusMonitor": {
@@ -4650,7 +4643,7 @@
       "properties": {
         "externalDeviceId": {
           "type": "string",
-          "description": "The IoT Hub device id (equal to the originating request's iotHubDeviceId)."
+          "description": "The external device identity (equal to the originating request's externalDeviceId)."
         }
       },
       "required": [
@@ -4912,9 +4905,13 @@
       "type": "object",
       "description": "Request body for the reprovision device endpoint.",
       "properties": {
-        "targetEndpoint": {
-          "$ref": "#/definitions/IotHubEndpoint",
-          "description": "The target IoT Hub endpoint (the new hub) to move the device to."
+        "externalDeviceId": {
+          "type": "string",
+          "description": "The external device identity used to look up the device."
+        },
+        "messagingEndpointName": {
+          "type": "string",
+          "description": "The messaging endpoint name of the new hub to move the device to."
         },
         "authentication": {
           "$ref": "#/definitions/AuthenticationProfileProperties",
@@ -4930,7 +4927,8 @@
         }
       },
       "required": [
-        "targetEndpoint"
+        "externalDeviceId",
+        "messagingEndpointName"
       ]
     },
     "ReprovisionDeviceResultStatusMonitor": {
