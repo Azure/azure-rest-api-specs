@@ -177,10 +177,10 @@ namespace Microsoft.NetworkFunction {
       @identifiers(#[])
       emissionPolicies?: EmissionPoliciesPropertiesFormat[],
     ):
-      | ArmResourceUpdatedResponse<AzureTrafficCollector>
+      | ArmResourceUpdatedResponse<CollectorPolicy>
       | ArmResourceCreatedResponse<
-          AzureTrafficCollector,
-          ArmAsyncOperationHeader<FinalResult = AzureTrafficCollector> &
+          CollectorPolicy,
+          ArmAsyncOperationHeader<FinalResult = CollectorPolicy> &
             Azure.Core.Foundations.RetryAfterHeader
         >
       | CloudError;
