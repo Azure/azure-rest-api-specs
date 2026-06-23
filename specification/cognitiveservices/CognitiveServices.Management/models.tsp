@@ -3447,6 +3447,13 @@ model RaiPolicyProperties {
    */
   @identifiers(#[])
   safetyProviders?: SafetyProviderConfig[];
+
+  /**
+   * Egress (outbound network) policy controlling which external endpoints sandboxed
+   * agents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions.
+   */
+  @added(Versions.v2026_05_15_preview)
+  egressPolicy?: RaiEgressPolicyConfig;
 }
 
 /**
@@ -6552,4 +6559,296 @@ model ManagedComputeCapacityListResult {
   @visibility(Lifecycle.Read)
   @identifiers(#["id"])
   value?: ManagedComputeCapacity[];
+}
+
+/**
+ * The enforcement mode for egress rules.
+ * If omitted on create, the server defaults to Enforced.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressMode {
+  string,
+
+  /** Rules are enforced. Matching traffic is allowed or denied per rule actions. */
+  Enforced: "Enforced",
+
+  /**
+   * Rules are evaluated and logged but not enforced. Traffic is always forwarded regardless of
+   * rule action. A would-be Deny is logged but not applied. Transform and Rewrite actions are
+   * still applied to matching traffic (only Deny enforcement is suppressed).
+   */
+  Audit: "Audit",
+}
+
+/**
+ * The default action when no user-defined egress rules match.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressDefaultAction {
+  string,
+
+  /** Allow traffic by default when no rules match. */
+  Allow: "Allow",
+
+  /** Deny traffic by default when no rules match. */
+  Deny: "Deny",
+}
+
+/**
+ * URL scheme for rewrite targets. Only HTTP and HTTPS are supported.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressScheme {
+  string,
+
+  /** HTTP scheme. */
+  Http: "http",
+
+  /** HTTPS scheme. */
+  Https: "https",
+}
+
+/**
+ * The kind of action an egress rule takes when it matches.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressRuleActionType {
+  string,
+
+  /** Allow the matched traffic. */
+  Allow: "Allow",
+
+  /** Deny the matched traffic. */
+  Deny: "Deny",
+
+  /** Forward the matched traffic after applying header transforms. Requires at least one header. */
+  Transform: "Transform",
+
+  /** Redirect the matched traffic to a new destination, optionally applying header transforms. Requires a rewrite target. */
+  Rewrite: "Rewrite",
+}
+
+/**
+ * The operation to apply to a header in a Transform or Rewrite action.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressHeaderOperation {
+  string,
+
+  /** Set or overwrite the header value, creating it if it does not exist. */
+  Set: "Set",
+
+  /** Add the header only if it is not already present. */
+  Insert: "Insert",
+
+  /** Remove the header if present. */
+  Remove: "Remove",
+}
+
+/**
+ * A reference to a stored secret used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressSecretRef {
+  /** Identifier of the secret to inject. */
+  secretId: string;
+
+  /** Optional key within the secret. */
+  @secret
+  secretKey?: string;
+
+  /** Optional format for the resolved value; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+}
+
+/**
+ * A reference to a managed-identity token used as a header value.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressManagedIdentityRef {
+  /** The resource/audience the token is requested for. */
+  resource: string;
+
+  /** Optional format for the resolved token; "{value}" is the placeholder, e.g. "Bearer {value}". */
+  format?: string;
+}
+
+/**
+ * A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressHeaderValueRef {
+  /** Resolve the value from a stored secret. */
+  secretRef?: RaiEgressSecretRef;
+
+  /** Resolve the value from a managed-identity token. */
+  managedIdentityRef?: RaiEgressManagedIdentityRef;
+}
+
+/**
+ * A header transformation applied to matched traffic.
+ * For Set or Insert operations, exactly one of value or valueRef must be provided.
+ * For Remove operations, neither value nor valueRef should be set.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressHeaderTransform {
+  /** The operation to perform on this header. */
+  operation: RaiEgressHeaderOperation;
+
+  /** The HTTP header name (e.g., "Authorization", "X-Custom-Auth"). */
+  name: string;
+
+  /**
+   * A static header value. Write-only: accepted on create/update, never returned on read.
+   * If omitted on update, the existing value is preserved. Use this for non-sensitive values;
+   * for credentials, use valueRef instead.
+   */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  value?: string;
+
+  /** A dynamic header value resolved at request time from a secret or managed identity. */
+  valueRef?: RaiEgressHeaderValueRef;
+}
+
+/**
+ * Where a Rewrite action sends matched traffic. At least one field must be set;
+ * omitted fields retain the original request values. This constraint is enforced
+ * by the server (400 Bad Request if all fields are omitted).
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressRewriteTarget {
+  /** Target scheme. Original scheme is kept if omitted. */
+  scheme?: RaiEgressScheme;
+
+  /** Target host. Original host is kept if omitted. */
+  host?: string;
+
+  /** Target path (literal string). Original path (and query) is kept if omitted. */
+  path?: string;
+}
+
+/**
+ * The action an egress rule takes when it matches.
+ * - Allow/Deny: no additional fields needed; headers and rewrite must not be set.
+ * - Transform: headers is required with at least one entry; rewrite must not be set.
+ * - Rewrite: rewrite is required with at least one of scheme/host/path;
+ *   headers is optional for injecting headers alongside the redirect.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressRuleAction {
+  /** The kind of action. */
+  actionType: RaiEgressRuleActionType;
+
+  /**
+   * Header transforms to apply. Required for Transform; optional for Rewrite;
+   * not allowed for Allow or Deny.
+   */
+  @identifiers(#["name"])
+  headers?: RaiEgressHeaderTransform[];
+
+  /** Destination override. Required for Rewrite; not allowed otherwise. */
+  rewrite?: RaiEgressRewriteTarget;
+}
+
+/**
+ * The type of an egress rule, determining what kind of traffic matching it performs.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressRuleType {
+  string,
+
+  /** Fully qualified domain name (FQDN) based rule matching on host and path patterns. */
+  Fqdn: "Fqdn",
+}
+
+/**
+ * The match criteria for an egress rule.
+ * If both host and path are omitted, the rule matches all traffic.
+ * Host uses DNS wildcard syntax (e.g., "*.openai.com" matches "api.openai.com").
+ * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressRuleMatch {
+  /**
+   * Host pattern to match using DNS wildcard syntax (e.g., "*.openai.com").
+   * A leading "*." matches any subdomain. Omit to match all hosts.
+   */
+  host?: string;
+
+  /**
+   * Path pattern to match using URI prefix with '*' wildcard (e.g., "/v1/*").
+   * Omit to match all paths.
+   */
+  path?: string;
+}
+
+/**
+ * A single egress rule. Rules are evaluated in order; first match wins.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressRule {
+  /**
+   * Name of the rule. Must be unique within the policy.
+   */
+  name: string;
+
+  /**
+   * Description of the rule.
+   */
+  description?: string;
+
+  /**
+   * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
+   */
+  ruleType: RaiEgressRuleType;
+
+  /**
+   * The match criteria for this rule.
+   */
+  match?: RaiEgressRuleMatch;
+
+  /**
+   * The action to take when this rule matches, including the action type and any
+   * type-specific configuration (headers for Transform, rewrite target for Rewrite).
+   */
+  action: RaiEgressRuleAction;
+}
+
+/**
+ * Egress (outbound network) policy configuration nested within an RAI policy.
+ * Controls which external endpoints sandboxed agents can reach and what
+ * transformations (header injection, URL rewrite) are applied to matching traffic.
+ */
+@added(Versions.v2026_05_15_preview)
+model RaiEgressPolicyConfig {
+  /**
+   * The enforcement mode for egress rules.
+   * If omitted on create, the server defaults to Enforced. On subsequent GET
+   * requests, the server always returns the effective mode.
+   */
+  mode?: RaiEgressMode;
+
+  /**
+   * The default action when no user-defined rules match.
+   * Deny blocks unmatched traffic; Allow permits it. Transform and Rewrite rules
+   * are always applied to their matched traffic regardless of this setting —
+   * defaultAction only governs traffic that does not match any rule.
+   * If omitted on create, the server defaults to Deny (fail-closed). On subsequent
+   * GET requests, the server always returns the effective value.
+   */
+  defaultAction?: RaiEgressDefaultAction;
+
+  /**
+   * Description of the egress policy.
+   */
+  description?: string;
+
+  /**
+   * Ordered list of egress rules. First matching rule wins.
+   * Rules are evaluated in declaration order; the first rule whose match criteria
+   * are satisfied determines the action taken on the request.
+   */
+  @identifiers(#["name"])
+  rules?: RaiEgressRule[];
 }

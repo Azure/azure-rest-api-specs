@@ -9925,6 +9925,9 @@
         "x-ms-examples": {
           "PutRaiPolicy": {
             "$ref": "./examples/PutRaiPolicy.json"
+          },
+          "PutRaiPolicyWithEgress": {
+            "$ref": "./examples/PutRaiPolicyWithEgress.json"
           }
         }
       },
@@ -18398,6 +18401,366 @@
         }
       }
     },
+    "RaiEgressDefaultAction": {
+      "type": "string",
+      "description": "The default action when no user-defined egress rules match.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressDefaultAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow traffic by default when no rules match."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny traffic by default when no rules match."
+          }
+        ]
+      }
+    },
+    "RaiEgressHeaderOperation": {
+      "type": "string",
+      "description": "The operation to apply to a header in a Transform or Rewrite action.",
+      "enum": [
+        "Set",
+        "Insert",
+        "Remove"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressHeaderOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Set",
+            "value": "Set",
+            "description": "Set or overwrite the header value, creating it if it does not exist."
+          },
+          {
+            "name": "Insert",
+            "value": "Insert",
+            "description": "Add the header only if it is not already present."
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove the header if present."
+          }
+        ]
+      }
+    },
+    "RaiEgressHeaderTransform": {
+      "type": "object",
+      "description": "A header transformation applied to matched traffic.\nFor Set or Insert operations, exactly one of value or valueRef must be provided.\nFor Remove operations, neither value nor valueRef should be set.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/RaiEgressHeaderOperation",
+          "description": "The operation to perform on this header."
+        },
+        "name": {
+          "type": "string",
+          "description": "The HTTP header name (e.g., \"Authorization\", \"X-Custom-Auth\")."
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "A static header value. Write-only: accepted on create/update, never returned on read.\nIf omitted on update, the existing value is preserved. Use this for non-sensitive values;\nfor credentials, use valueRef instead.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "valueRef": {
+          "$ref": "#/definitions/RaiEgressHeaderValueRef",
+          "description": "A dynamic header value resolved at request time from a secret or managed identity."
+        }
+      },
+      "required": [
+        "operation",
+        "name"
+      ]
+    },
+    "RaiEgressHeaderValueRef": {
+      "type": "object",
+      "description": "A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.",
+      "properties": {
+        "secretRef": {
+          "$ref": "#/definitions/RaiEgressSecretRef",
+          "description": "Resolve the value from a stored secret."
+        },
+        "managedIdentityRef": {
+          "$ref": "#/definitions/RaiEgressManagedIdentityRef",
+          "description": "Resolve the value from a managed-identity token."
+        }
+      }
+    },
+    "RaiEgressManagedIdentityRef": {
+      "type": "object",
+      "description": "A reference to a managed-identity token used as a header value.",
+      "properties": {
+        "resource": {
+          "type": "string",
+          "description": "The resource/audience the token is requested for."
+        },
+        "format": {
+          "type": "string",
+          "description": "Optional format for the resolved token; \"{value}\" is the placeholder, e.g. \"Bearer {value}\"."
+        }
+      },
+      "required": [
+        "resource"
+      ]
+    },
+    "RaiEgressMode": {
+      "type": "string",
+      "description": "The enforcement mode for egress rules.\nIf omitted on create, the server defaults to Enforced.",
+      "enum": [
+        "Enforced",
+        "Audit"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enforced",
+            "value": "Enforced",
+            "description": "Rules are enforced. Matching traffic is allowed or denied per rule actions."
+          },
+          {
+            "name": "Audit",
+            "value": "Audit",
+            "description": "Rules are evaluated and logged but not enforced. Traffic is always forwarded regardless of\nrule action. A would-be Deny is logged but not applied. Transform and Rewrite actions are\nstill applied to matching traffic (only Deny enforcement is suppressed)."
+          }
+        ]
+      }
+    },
+    "RaiEgressPolicyConfig": {
+      "type": "object",
+      "description": "Egress (outbound network) policy configuration nested within an RAI policy.\nControls which external endpoints sandboxed agents can reach and what\ntransformations (header injection, URL rewrite) are applied to matching traffic.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/RaiEgressMode",
+          "description": "The enforcement mode for egress rules.\nIf omitted on create, the server defaults to Enforced. On subsequent GET\nrequests, the server always returns the effective mode."
+        },
+        "defaultAction": {
+          "$ref": "#/definitions/RaiEgressDefaultAction",
+          "description": "The default action when no user-defined rules match.\nDeny blocks unmatched traffic; Allow permits it. Transform and Rewrite rules\nare always applied to their matched traffic regardless of this setting —\ndefaultAction only governs traffic that does not match any rule.\nIf omitted on create, the server defaults to Deny (fail-closed). On subsequent\nGET requests, the server always returns the effective value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the egress policy."
+        },
+        "rules": {
+          "type": "array",
+          "description": "Ordered list of egress rules. First matching rule wins.\nRules are evaluated in declaration order; the first rule whose match criteria\nare satisfied determines the action taken on the request.",
+          "items": {
+            "$ref": "#/definitions/RaiEgressRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "RaiEgressRewriteTarget": {
+      "type": "object",
+      "description": "Where a Rewrite action sends matched traffic. At least one field must be set;\nomitted fields retain the original request values. This constraint is enforced\nby the server (400 Bad Request if all fields are omitted).",
+      "properties": {
+        "scheme": {
+          "$ref": "#/definitions/RaiEgressScheme",
+          "description": "Target scheme. Original scheme is kept if omitted."
+        },
+        "host": {
+          "type": "string",
+          "description": "Target host. Original host is kept if omitted."
+        },
+        "path": {
+          "type": "string",
+          "description": "Target path (literal string). Original path (and query) is kept if omitted."
+        }
+      }
+    },
+    "RaiEgressRule": {
+      "type": "object",
+      "description": "A single egress rule. Rules are evaluated in order; first match wins.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule. Must be unique within the policy."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the rule."
+        },
+        "ruleType": {
+          "$ref": "#/definitions/RaiEgressRuleType",
+          "description": "The type of rule (e.g., Fqdn). Determines how match criteria are interpreted."
+        },
+        "match": {
+          "$ref": "#/definitions/RaiEgressRuleMatch",
+          "description": "The match criteria for this rule."
+        },
+        "action": {
+          "$ref": "#/definitions/RaiEgressRuleAction",
+          "description": "The action to take when this rule matches, including the action type and any\ntype-specific configuration (headers for Transform, rewrite target for Rewrite)."
+        }
+      },
+      "required": [
+        "name",
+        "ruleType",
+        "action"
+      ]
+    },
+    "RaiEgressRuleAction": {
+      "type": "object",
+      "description": "The action an egress rule takes when it matches.\n- Allow/Deny: no additional fields needed; headers and rewrite must not be set.\n- Transform: headers is required with at least one entry; rewrite must not be set.\n- Rewrite: rewrite is required with at least one of scheme/host/path;\nheaders is optional for injecting headers alongside the redirect.",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/RaiEgressRuleActionType",
+          "description": "The kind of action."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Header transforms to apply. Required for Transform; optional for Rewrite;\nnot allowed for Allow or Deny.",
+          "items": {
+            "$ref": "#/definitions/RaiEgressHeaderTransform"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "rewrite": {
+          "$ref": "#/definitions/RaiEgressRewriteTarget",
+          "description": "Destination override. Required for Rewrite; not allowed otherwise."
+        }
+      },
+      "required": [
+        "actionType"
+      ]
+    },
+    "RaiEgressRuleActionType": {
+      "type": "string",
+      "description": "The kind of action an egress rule takes when it matches.",
+      "enum": [
+        "Allow",
+        "Deny",
+        "Transform",
+        "Rewrite"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressRuleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the matched traffic."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the matched traffic."
+          },
+          {
+            "name": "Transform",
+            "value": "Transform",
+            "description": "Forward the matched traffic after applying header transforms. Requires at least one header."
+          },
+          {
+            "name": "Rewrite",
+            "value": "Rewrite",
+            "description": "Redirect the matched traffic to a new destination, optionally applying header transforms. Requires a rewrite target."
+          }
+        ]
+      }
+    },
+    "RaiEgressRuleMatch": {
+      "type": "object",
+      "description": "The match criteria for an egress rule.\nIf both host and path are omitted, the rule matches all traffic.\nHost uses DNS wildcard syntax (e.g., \"*.openai.com\" matches \"api.openai.com\").\nPath uses URI prefix matching with '*' as a single-segment wildcard (e.g., \"/v1/*\" matches \"/v1/chat\").",
+      "properties": {
+        "host": {
+          "type": "string",
+          "description": "Host pattern to match using DNS wildcard syntax (e.g., \"*.openai.com\").\nA leading \"*.\" matches any subdomain. Omit to match all hosts."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path pattern to match using URI prefix with '*' wildcard (e.g., \"/v1/*\").\nOmit to match all paths."
+        }
+      }
+    },
+    "RaiEgressRuleType": {
+      "type": "string",
+      "description": "The type of an egress rule, determining what kind of traffic matching it performs.",
+      "enum": [
+        "Fqdn"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressRuleType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fqdn",
+            "value": "Fqdn",
+            "description": "Fully qualified domain name (FQDN) based rule matching on host and path patterns."
+          }
+        ]
+      }
+    },
+    "RaiEgressScheme": {
+      "type": "string",
+      "description": "URL scheme for rewrite targets. Only HTTP and HTTPS are supported.",
+      "enum": [
+        "http",
+        "https"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "http",
+            "description": "HTTP scheme."
+          },
+          {
+            "name": "Https",
+            "value": "https",
+            "description": "HTTPS scheme."
+          }
+        ]
+      }
+    },
+    "RaiEgressSecretRef": {
+      "type": "object",
+      "description": "A reference to a stored secret used as a header value.",
+      "properties": {
+        "secretId": {
+          "type": "string",
+          "description": "Identifier of the secret to inject."
+        },
+        "secretKey": {
+          "type": "string",
+          "format": "password",
+          "description": "Optional key within the secret.",
+          "x-ms-secret": true
+        },
+        "format": {
+          "type": "string",
+          "description": "Optional format for the resolved value; \"{value}\" is the placeholder, e.g. \"Bearer {value}\"."
+        }
+      },
+      "required": [
+        "secretId"
+      ]
+    },
     "RaiExternalSafetyProviderResult": {
       "type": "object",
       "description": "The list of cognitive services RAI External Safety Providers.",
@@ -18706,6 +19069,10 @@
             "$ref": "#/definitions/SafetyProviderConfig"
           },
           "x-ms-identifiers": []
+        },
+        "egressPolicy": {
+          "$ref": "#/definitions/RaiEgressPolicyConfig",
+          "description": "Egress (outbound network) policy controlling which external endpoints sandboxed\nagents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions."
         }
       }
     },
