@@ -22,8 +22,10 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @parentResource(Workspace)
-model InferenceEndpoint
-  is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
+model InferenceEndpoint is Azure.ResourceManager.TrackedResource<
+  InferenceEndpointProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = InferenceEndpoint,
     KeyName = "endpointName",

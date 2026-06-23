@@ -11,8 +11,10 @@ namespace NewRelic.Observability;
 /**
  * A Monitor Resource by NewRelic
  */
-model NewRelicMonitorResource
-  is Azure.ResourceManager.TrackedResource<MonitorProperties, false> {
+model NewRelicMonitorResource is Azure.ResourceManager.TrackedResource<
+  MonitorProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = NewRelicMonitorResource,
     KeyName = "monitorName",

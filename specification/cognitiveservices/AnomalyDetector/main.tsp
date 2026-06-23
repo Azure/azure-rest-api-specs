@@ -47,8 +47,10 @@ using TypeSpec.Versioning;
 namespace AnomalyDetector;
 
 @doc("The secret key for your Azure Cognitive Services subscription.")
-model AnomalyDetectorApiKeyAuth
-  is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
+model AnomalyDetectorApiKeyAuth is ApiKeyAuth<
+  ApiKeyLocation.header,
+  "Ocp-Apim-Subscription-Key"
+>;
 
 enum APIVersion {
   v1_1: "v1.1",

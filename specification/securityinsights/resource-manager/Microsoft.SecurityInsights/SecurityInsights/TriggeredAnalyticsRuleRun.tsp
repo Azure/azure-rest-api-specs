@@ -13,11 +13,10 @@ namespace Microsoft.SecurityInsights;
 /**
  * The triggered analytics rule run
  */
-model TriggeredAnalyticsRuleRun
-  is Azure.ResourceManager.ProxyResource<
-    TriggeredAnalyticsRuleRunProperties,
-    false
-  > {
+model TriggeredAnalyticsRuleRun is Azure.ResourceManager.ProxyResource<
+  TriggeredAnalyticsRuleRunProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = TriggeredAnalyticsRuleRun,
     KeyName = "ruleRunId",

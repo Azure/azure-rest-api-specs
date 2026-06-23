@@ -22,8 +22,10 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @parentResource(Workspace)
-model InferenceGroup
-  is Azure.ResourceManager.TrackedResource<InferenceGroupProperties, false> {
+model InferenceGroup is Azure.ResourceManager.TrackedResource<
+  InferenceGroupProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = InferenceGroup,
     KeyName = "groupName",

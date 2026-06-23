@@ -15,8 +15,10 @@ namespace PaloAltoNetworks.Cloudngfw;
  * PostRulestack rule list
  */
 @parentResource(GlobalRulestackResource)
-model PostRulesResource
-  is Azure.ResourceManager.ProxyResource<RuleEntry, false> {
+model PostRulesResource is Azure.ResourceManager.ProxyResource<
+  RuleEntry,
+  false
+> {
   ...ResourceNameParameter<
     Resource = PostRulesResource,
     KeyName = "priority",

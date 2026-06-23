@@ -21,8 +21,10 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
-model RaiPolicyPropertiesBasicResource
-  is Azure.ResourceManager.ProxyResource<RaiPolicyProperties, false> {
+model RaiPolicyPropertiesBasicResource is Azure.ResourceManager.ProxyResource<
+  RaiPolicyProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = RaiPolicyPropertiesBasicResource,
     KeyName = "raiPolicyName",

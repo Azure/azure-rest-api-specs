@@ -13,11 +13,10 @@ namespace Microsoft.ApiManagement;
 /**
  * A single API Management service resource in List or Get response.
  */
-model ApiManagementServiceResource
-  is Azure.ResourceManager.TrackedResource<
-    ApiManagementServiceProperties,
-    false
-  > {
+model ApiManagementServiceResource is Azure.ResourceManager.TrackedResource<
+  ApiManagementServiceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ApiManagementServiceResource,
     KeyName = "serviceName",

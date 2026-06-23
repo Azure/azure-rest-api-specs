@@ -15,8 +15,10 @@ namespace Microsoft.SignalRService;
  * A custom domain
  */
 @parentResource(SignalRResource)
-model CustomDomain
-  is Azure.ResourceManager.ProxyResource<CustomDomainProperties, false> {
+model CustomDomain is Azure.ResourceManager.ProxyResource<
+  CustomDomainProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomDomain,
     KeyName = "name",
