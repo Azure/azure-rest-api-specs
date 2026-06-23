@@ -4,7 +4,7 @@ excludeAgent: "code-review"
 
 ## Prerequisites
 
-- run `npm ci` to install the dependencies
+- run `pnpm install` to install the dependencies
 - To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
 - When using Copilot from Visual Studio or VS Code (not applicable when using Coding Agent on Github.com):
   - **Always run** the [`azsdk_verify_setup`](../../eng/common/instructions/azsdk-tools/verify-setup.instructions.md) tool first to validate the user's development environment for SDK MCP tools.

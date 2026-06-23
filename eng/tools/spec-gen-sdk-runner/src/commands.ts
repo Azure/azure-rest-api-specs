@@ -84,6 +84,8 @@ async function runAzsdkGeneration(
   const tspClientDir = path.join(commandInput.localSdkRepoPath, "eng", "common", "tsp-client");
   if (fs.existsSync(path.join(tspClientDir, "package.json"))) {
     logMessage(`Installing tsp-client dependencies at ${tspClientDir}`, LogLevel.Info);
+    // This runs inside the cloned target SDK repo (e.g. azure-sdk-for-python), which
+    // manages its own dependencies with npm — not this repo's pnpm workspace.
     await execAsync("npm ci", { cwd: tspClientDir });
   }
 

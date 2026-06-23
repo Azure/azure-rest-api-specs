@@ -61,7 +61,7 @@ Every TypeSpec project **MUST** contain:
 
 A TypeSpec project **MUST NOT** contain:
 
-- `package.json` or `package-lock.json` (use the repo-root one)
+- `package.json` or `pnpm-lock.yaml` (use the repo-root one)
 - Multiple `tspconfig.yaml` files for the same service
 
 ### 1.3 Generated Files
@@ -287,10 +287,10 @@ Users can convert a specification from swagger to typespec by using `tsp-client`
 1. Install the dependencies specified in the package.json at the root of this repository. Command:
 
 ```
-npm ci
+pnpm install --frozen-lockfile
 ```
 
-2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `npx tsp-client convert --swagger-readme <path to your readme>`
+2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `pnpm exec tsp-client convert --swagger-readme <path to your readme>`
 3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec when compared to the original swagger definitions.
 4. For both data plane and management plane specifications, you should update the implementation according to the information provided under the Initial migration checklist section below.
 
@@ -312,9 +312,9 @@ steps:
 ### Additional considerations
 
 - DO ensure you pull in the latest `main` from the Azure/azure-rest-api-specs repo to stay up to date with latest dependencies
-- DO run `npm ci` to get a clean install of the package.json dependencies
-- Avoid modifying the package.json or package-lock.json files at the root of the azure-rest-api-specs repo
-- Avoid adding your own package.json or package-lock.json files in your project directory
+- DO run `pnpm install --frozen-lockfile` to get a clean install of the package.json dependencies
+- Avoid modifying the package.json or pnpm-lock.yaml files at the root of the azure-rest-api-specs repo
+- Avoid adding your own package.json or pnpm-lock.yaml files in your project directory
 - Avoid adding multiple tspconfig.yaml files for your service specification
 - DO consult [ci-fix.md][ci-fix] for fixes to common CI errors reported
 

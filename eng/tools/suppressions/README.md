@@ -53,14 +53,14 @@ Build the package (see [contributing](#folder-structure--contributing)), then qu
 with the `get-suppressions` CLI:
 
 ```
-npx get-suppressions <tool-name> <path-to-file-or-directory>
+pnpm exec get-suppressions <tool-name> <path-to-file-or-directory>
 ```
 
 It prints a JSON array of the suppressions (which may be empty) for the given tool that apply to the
 given file or directory:
 
 ```
-npx get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
+pnpm exec get-suppressions TypeSpecRequirement specification/foo/data-plane/Foo/stable/2023-01-01/Foo.json
 [{"tool":"TypeSpecRequirement","paths":["data-plane/Foo/stable/2023-01-01/*.json"],"reason":"foo"}]
 ```
 
@@ -104,7 +104,7 @@ eng/tools/suppressions
 ### `cmd`
 
 CLI entry point exposed via `package.json` `"bin"`.
-[`cmd/get-suppressions.js`](./cmd/get-suppressions.js) backs `npx get-suppressions` by running the
+[`cmd/get-suppressions.js`](./cmd/get-suppressions.js) backs `pnpm exec get-suppressions` by running the
 built `dist/src/index.js`.
 
 ### `test`
@@ -124,12 +124,12 @@ from `dist/`), then add or update tests under `test/`.
 
 Useful scripts (run from `eng/tools/suppressions`):
 
-| Command                | Description                                               |
-| ---------------------- | --------------------------------------------------------- |
-| `npm run build`        | Compile TypeScript to `dist/`.                            |
-| `npm test`             | Run tests in watch mode (vitest).                         |
-| `npm run test:ci`      | Run tests once with coverage.                             |
-| `npm run lint`         | Run ESLint.                                               |
-| `npm run format`       | Auto-format with prettier.                                |
-| `npm run format:check` | Check formatting without writing.                         |
-| `npm run check`        | Run build, lint, format check, and tests (the full gate). |
+| Command                 | Description                                               |
+| ----------------------- | --------------------------------------------------------- |
+| `pnpm run build`        | Compile TypeScript to `dist/`.                            |
+| `pnpm test`             | Run tests in watch mode (vitest).                         |
+| `pnpm run test:ci`      | Run tests once with coverage.                             |
+| `pnpm run lint`         | Run ESLint.                                               |
+| `pnpm run format`       | Auto-format with prettier.                                |
+| `pnpm run format:check` | Check formatting without writing.                         |
+| `pnpm run check`        | Run build, lint, format check, and tests (the full gate). |

@@ -45,7 +45,7 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
 
           # powershell glob syntax
-          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
           # regex syntax, to support protected paths within larger excluded paths
           $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")

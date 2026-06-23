@@ -59,7 +59,7 @@ export async function runChecks(
         autorestArgs.push(`--tag=${tag}`);
       }
       autorestArgs.push(changedFilePath);
-      const autorestCommand = `npm exec -- ${autorestArgs.join(" ")}`;
+      const autorestCommand = `pnpm exec ${autorestArgs.join(" ")}`;
       console.log(`\tAutorest command: ${autorestCommand}`);
 
       let lintDiffResult: AutorestRunResult;
