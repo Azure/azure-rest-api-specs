@@ -691,9 +691,9 @@ using Microsoft.MachineLearningServices;
 @@access(EncryptionKeyVaultUpdateProperties, Access.public, "csharp");
 @@access(TriggerType, Access.public, "csharp");
 @@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
-@@access(
+@@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
-  Access.internal,
+  "MachineLearningError",
   "csharp"
 );
 @@clientName(
