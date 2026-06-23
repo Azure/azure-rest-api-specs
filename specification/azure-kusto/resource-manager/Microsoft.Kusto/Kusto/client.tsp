@@ -1,8 +1,12 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
+using TypeSpec.Http;
 using Microsoft.Kusto;
 
 @@clientName(Microsoft.Kusto, "KustoManagementClient", "javascript,python");
@@ -527,6 +531,7 @@ using Microsoft.Kusto;
 // Restore the GA check-name `ResourceType` enums for C#. The TypeSpec models each check-name
 // request `type` as a constant string literal, but the GA SDK exposed a public extensible enum
 // plus a `ResourceType` property; these csharp-only types/decorators keep that surface.
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoClusterType {
   string,
 
@@ -534,6 +539,7 @@ union KustoClusterType {
   MicrosoftKustoClusters: "Microsoft.Kusto/clusters",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union AttachedDatabaseType {
   string,
 
@@ -541,6 +547,7 @@ union AttachedDatabaseType {
   MicrosoftKustoClustersAttachedDatabaseConfigurations: "Microsoft.Kusto/clusters/attachedDatabaseConfigurations",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoScriptType {
   string,
 
@@ -548,6 +555,7 @@ union KustoScriptType {
   MicrosoftKustoClustersDatabasesScripts: "Microsoft.Kusto/clusters/databases/scripts",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoDataConnectionType {
   string,
 
@@ -555,6 +563,7 @@ union KustoDataConnectionType {
   MicrosoftKustoClustersDatabasesDataConnections: "Microsoft.Kusto/clusters/databases/dataConnections",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoManagedPrivateEndpointsType {
   string,
 
@@ -562,6 +571,7 @@ union KustoManagedPrivateEndpointsType {
   MicrosoftKustoClustersManagedPrivateEndpoints: "Microsoft.Kusto/clusters/managedPrivateEndpoints",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoClusterPrincipalAssignmentType {
   string,
 
@@ -569,6 +579,7 @@ union KustoClusterPrincipalAssignmentType {
   MicrosoftKustoClustersPrincipalAssignments: "Microsoft.Kusto/clusters/principalAssignments",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union KustoDatabasePrincipalAssignmentType {
   string,
 
@@ -699,6 +710,7 @@ union KustoDatabasePrincipalAssignmentType {
 );
 
 // 8th check-name ResourceType enum (sandbox custom images)
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "csharp GA compat"
 union SandboxCustomImageType {
   string,
 
@@ -736,8 +748,6 @@ union SandboxCustomImageType {
 
 // Language extension enum values (GA names)
 @@clientName(LanguageExtensionName.PYTHON, "Python", "csharp");
-@@clientName(LanguageExtensionImageName.Python3_6_5, "Python3_6_5", "csharp");
-@@clientName(LanguageExtensionImageName.Python3_10_8, "Python3_10_8", "csharp");
 
 // ---- Migration compat batch 3: property name/type fixes to match GA ----
 @@clientName(ScriptProperties.scriptUrl, "ScriptUri", "csharp");
@@ -822,3 +832,23 @@ union SandboxCustomImageType {
   Usage.input | Usage.output,
   "csharp"
 );
+
+// Restore GA pageable return type for the database principal add/remove actions.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp GA compat"
+@@markAsPageable(Databases.addPrincipals, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp GA compat"
+@@markAsPageable(Databases.removePrincipals, "csharp");
+@@alternateType(
+  ClustersOperationGroup.checkNameAvailability::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  SkusOperationGroup.list::parameters.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+
+// PrivateLinkResource is read-only; GA still exposed a public ctor on the data model. Mark it as input
+// for C# so the generated KustoPrivateLinkResourceData gets a public constructor (and is not sealed).
+@@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
