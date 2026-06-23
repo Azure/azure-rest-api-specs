@@ -94,9 +94,6 @@ using Azure.AI.Projects;
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
 
-// Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
-@@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
-
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`4g`, exact("MEMORY_4GB"), "python");
@@ -108,6 +105,7 @@ using Azure.AI.Projects;
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
+@@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
 
@@ -143,7 +141,7 @@ using Azure.AI.Projects;
 );
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
 
-@@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
+
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
