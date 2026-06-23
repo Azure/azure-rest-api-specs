@@ -42,7 +42,9 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
     clusterName: string;
   },
   {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    /**
+     * The resource provider for the Kubernetes configuration.
+     */
     @path
     @key
     @segment("providers")
