@@ -97,7 +97,11 @@ async function extractNamespaces(file, namespacesFound, core) {
     isDataPlane = true;
   }
 
-  const outputDir = join(process.env.RUNNER_TEMP || tmpdir(), "typespec-metadata", basename(tspDir));
+  const outputDir = join(
+    process.env.RUNNER_TEMP || tmpdir(),
+    "typespec-metadata",
+    basename(tspDir),
+  );
   await rm(outputDir, { recursive: true, force: true });
 
   core.info(`Running typespec-metadata emitter on ${tspDir}`);

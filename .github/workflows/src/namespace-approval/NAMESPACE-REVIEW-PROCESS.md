@@ -57,14 +57,14 @@ Defined in [`.github/namespace-approvers.yml`](../../../namespace-approvers.yml)
 
 <!-- cspell:disable -->
 
-| Scope                | Approvers                      |
-| -------------------- | ------------------------------ |
-| .NET                 | @jsquire, @m-nash              |
+| Scope                | Approvers                     |
+| -------------------- | ----------------------------- |
+| .NET                 | @jsquire, @m-nash             |
 | Java                 | @JonathanGiles, @alzimmermsft |
-| Python               | @xirzec, @kashifkhan           |
-| TypeScript           | @xirzec, @maorleger            |
-| Go                   | @jhendrixMSFT                  |
-| Mgmt (all languages) | @ArthurMa1978, @m-nash         |
+| Python               | @xirzec, @kashifkhan          |
+| TypeScript           | @xirzec, @maorleger           |
+| Go                   | @jhendrixMSFT                 |
+| Mgmt (all languages) | @ArthurMa1978, @m-nash        |
 
 <!-- cspell:enable -->
 

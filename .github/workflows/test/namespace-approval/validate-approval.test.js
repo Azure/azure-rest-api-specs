@@ -123,7 +123,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "namespace-review-required" }] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -163,7 +165,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "namespace-review-required" }] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -185,7 +189,9 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -251,9 +257,9 @@ describe("validate-approval", () => {
 
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ call) => String(call[0]));
-      expect(infoArgs.some((/** @type {string} */ message) => message.includes("trusted bot"))).toBe(
-        true,
-      );
+      expect(
+        infoArgs.some((/** @type {string} */ message) => message.includes("trusted bot")),
+      ).toBe(true);
     });
 
     it("should allow authorized approver to remove pending label", async () => {
@@ -285,9 +291,9 @@ describe("validate-approval", () => {
 
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
       const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ call) => String(call[0]));
-      expect(infoArgs.some((/** @type {string} */ message) => message.includes("not a namespace label"))).toBe(
-        true,
-      );
+      expect(
+        infoArgs.some((/** @type {string} */ message) => message.includes("not a namespace label")),
+      ).toBe(true);
     });
 
     it("should guard namespace-review-required label too", async () => {

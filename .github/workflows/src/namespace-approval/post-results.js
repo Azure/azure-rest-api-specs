@@ -1,7 +1,7 @@
 import { readFile, unlink, writeFile } from "fs/promises";
+import yaml from "js-yaml";
 import { tmpdir } from "os";
 import { join } from "path";
-import yaml from "js-yaml";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.js";
 import { PER_PAGE_MAX } from "../../../shared/src/github.js";
@@ -117,6 +117,7 @@ async function ensureLabel(github, owner, repo, label) {
       owner,
       repo,
       name: label,
+      // cspell:ignore fbbf
       color: LABEL_COLORS[label] ?? (label.includes("pending") ? "fbbf24" : "94a3b8"),
     });
   }

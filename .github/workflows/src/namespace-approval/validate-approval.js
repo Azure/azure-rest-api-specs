@@ -214,7 +214,8 @@ async function handleLabeled({
     issue_number: prNumber,
   });
   const botComment = comments.data.find(
-    (comment) => comment.user?.type === "Bot" && comment.body?.includes("<!-- namespace-review-bot -->"),
+    (comment) =>
+      comment.user?.type === "Bot" && comment.body?.includes("<!-- namespace-review-bot -->"),
   );
 
   if (botComment?.body) {
