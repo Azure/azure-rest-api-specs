@@ -48,21 +48,13 @@
   "paths": {
     "/access/teamsExtension/:exchangeAccessToken": {
       "post": {
-        "operationId": "TeamsExtensionToken_Exchange",
+        "operationId": "TeamsExtensionOperations_ExchangeToken",
         "tags": [
           "TeamsExtension"
         ],
         "summary": "Exchanges a Teams Phone token for an ACS user access token.",
         "description": "Exchanges a Teams Phone token for an ACS user access token.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
           {
             "name": "body",
             "in": "body",
@@ -89,14 +81,14 @@
         },
         "x-ms-examples": {
           "Exchange a Teams Phone token": {
-            "$ref": "./examples/TeamsExtensionToken_Exchange.json"
+            "$ref": "./examples/TeamsExtensionOperations_ExchangeToken.json"
           }
         }
       }
     },
     "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
       "get": {
-        "operationId": "TeamsExtensionAssignment_Get",
+        "operationId": "TeamsExtensionOperations_GetAssignment",
         "tags": [
           "TeamsExtension"
         ],
@@ -116,14 +108,6 @@
             "description": "Object Id we want to get the assignment for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
@@ -142,12 +126,12 @@
         },
         "x-ms-examples": {
           "Get Assignment": {
-            "$ref": "./examples/TeamsExtensionAssignment_Get.json"
+            "$ref": "./examples/TeamsExtensionOperations_GetAssignment.json"
           }
         }
       },
       "put": {
-        "operationId": "TeamsExtensionAssignment_Upsert",
+        "operationId": "TeamsExtensionOperations_UpsertAssignment",
         "tags": [
           "TeamsExtension"
         ],
@@ -167,14 +151,6 @@
             "description": "Object Id we want to update the assignment for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "body",
@@ -208,12 +184,12 @@
         },
         "x-ms-examples": {
           "Create or Update Assignment": {
-            "$ref": "./examples/TeamsExtensionAssignment_Upsert.json"
+            "$ref": "./examples/TeamsExtensionOperations_UpsertAssignment.json"
           }
         }
       },
       "delete": {
-        "operationId": "TeamsExtensionAssignment_Delete",
+        "operationId": "TeamsExtensionOperations_DeleteAssignment",
         "tags": [
           "TeamsExtension"
         ],
@@ -233,14 +209,6 @@
             "description": "Object Id we want to remove the assignment for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
@@ -256,28 +224,20 @@
         },
         "x-ms-examples": {
           "Delete Assignment": {
-            "$ref": "./examples/TeamsExtensionAssignment_Delete.json"
+            "$ref": "./examples/TeamsExtensionOperations_DeleteAssignment.json"
           }
         }
       }
     },
     "/identities": {
       "post": {
-        "operationId": "CommunicationIdentity_Create",
+        "operationId": "IdentityOperations_Create",
         "tags": [
           "Identity"
         ],
         "summary": "Create a new identity, and optionally, an access token.",
         "description": "Create a new identity, and optionally, an access token.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
           {
             "name": "body",
             "in": "body",
@@ -304,14 +264,14 @@
         },
         "x-ms-examples": {
           "Create an Identity and optionally an access token": {
-            "$ref": "./examples/CommunicationIdentity_Create.json"
+            "$ref": "./examples/IdentityOperations_Create.json"
           }
         }
       }
     },
     "/identities/{id}": {
       "delete": {
-        "operationId": "CommunicationIdentity_Delete",
+        "operationId": "IdentityOperations_Delete",
         "tags": [
           "Identity"
         ],
@@ -324,14 +284,6 @@
             "description": "Identifier of the identity to be deleted.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
@@ -347,14 +299,14 @@
         },
         "x-ms-examples": {
           "Delete an identity": {
-            "$ref": "./examples/CommunicationIdentity_Delete.json"
+            "$ref": "./examples/IdentityOperations_Delete.json"
           }
         }
       }
     },
     "/identities/{id}/:issueAccessToken": {
       "post": {
-        "operationId": "CommunicationIdentity_IssueAccessToken",
+        "operationId": "IdentityOperations_IssueAccessToken",
         "tags": [
           "Identity"
         ],
@@ -367,14 +319,6 @@
             "description": "Identifier of the identity to issue token for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "body",
@@ -402,14 +346,14 @@
         },
         "x-ms-examples": {
           "Issue an access token": {
-            "$ref": "./examples/CommunicationIdentity_IssueAccessToken.json"
+            "$ref": "./examples/IdentityOperations_IssueAccessToken.json"
           }
         }
       }
     },
     "/identities/{id}/:revokeAccessTokens": {
       "post": {
-        "operationId": "CommunicationIdentity_RevokeAccessTokens",
+        "operationId": "IdentityOperations_RevokeAccessTokens",
         "tags": [
           "Identity"
         ],
@@ -422,14 +366,6 @@
             "description": "Identifier of the identity.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
           }
         ],
         "responses": {
@@ -445,28 +381,20 @@
         },
         "x-ms-examples": {
           "Revoke access tokens": {
-            "$ref": "./examples/CommunicationIdentity_RevokeAccessTokens.json"
+            "$ref": "./examples/IdentityOperations_RevokeAccessTokens.json"
           }
         }
       }
     },
     "/teamsUser/:exchangeAccessToken": {
       "post": {
-        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
+        "operationId": "TeamsUserOperations_ExchangeTeamsUserAccessToken",
         "tags": [
           "TeamsUser"
         ],
         "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "description": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "Version of API to invoke.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
           {
             "name": "body",
             "in": "body",
@@ -493,7 +421,7 @@
         },
         "x-ms-examples": {
           "Exchange a Teams user access token": {
-            "$ref": "./examples/CommunicationIdentity_ExchangeTeamsUserAccessToken.json"
+            "$ref": "./examples/TeamsUserOperations_ExchangeTeamsUserAccessToken.json"
           }
         }
       }
