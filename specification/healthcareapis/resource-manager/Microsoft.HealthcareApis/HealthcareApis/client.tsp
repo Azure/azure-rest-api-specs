@@ -44,6 +44,7 @@ namespace Microsoft.HealthcareApis;
   "csharp"
 );
 @@clientName(ServiceEventState, "FhirServiceEventState", "csharp");
+@@clientName(ActionType, "OperationActionType", "csharp");
 @@clientName(
   CheckNameAvailabilityParameters,
   "HealthcareApisNameAvailabilityContent",
