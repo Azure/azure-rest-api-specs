@@ -10,27 +10,35 @@ using TypeSpec.Versioning;
 namespace MapsSearch;
 
 /**
- * The `GeoJSON` object type used at the root of geocoding and autocomplete responses. The only
- * value is `FeatureCollection`, as defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
+ * The `GeoJSON` object type used at the root of successful responses from the forward
+ * geocoding, reverse geocoding, and autocomplete operations (including their batch
+ * variants). The only value is `FeatureCollection`, as defined in
+ * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). `Get Polygon` is the one exception:
+ * its response root is a `GeoJSON Feature` — see `FeatureTypeEnum`.
  */
 union FeatureCollectionEnum {
   string,
 
   /**
-   * The `GeoJSON FeatureCollection` object type. This appears as the root of every successful response body.
+   * The `GeoJSON FeatureCollection` object type. Appears as the root of every successful
+   * geocoding, reverse geocoding, and autocomplete response body. `Get Polygon` uses a
+   * `Feature` root instead.
    */
   FeatureCollection: "FeatureCollection",
 }
 
 /**
- * The `GeoJSON` object type used to tag each Feature in a response. The only value is `Feature`,
- * as defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
+ * The `GeoJSON` object type for `Feature` objects. Tags each entry inside the `features`
+ * array of a `FeatureCollection` response (geocoding, reverse geocoding, autocomplete) and
+ * appears at the root of the `Get Polygon` response. The only value is `Feature`, as
+ * defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
  */
 union FeatureTypeEnum {
   string,
 
   /**
-   * The `GeoJSON Feature` object type. This appears on every Feature object in the response.
+   * The `GeoJSON Feature` object type. Appears on every Feature inside a `FeatureCollection`
+   * response, and at the root of the `Get Polygon` response.
    */
   Feature: "Feature",
 }
@@ -1080,7 +1088,8 @@ union AutocompleteResultTypeEnum {
  */
 model GeocodingResponse {
   /**
-   * The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in
+   * The `GeoJSON` object type of a successful `Get Geocoding` or `Get Reverse Geocoding`
+   * response body. Always `FeatureCollection`, as defined in
    * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
@@ -1693,8 +1702,8 @@ model ReverseGeocodingBatchRequestItem {
  */
 model AutocompleteResponse {
   /**
-   * The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in
-   * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
+   * The `GeoJSON` object type of a successful `Get Autocomplete` response body. Always
+   * `FeatureCollection`, as defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).
    */
   type?: FeatureCollectionEnum;
 

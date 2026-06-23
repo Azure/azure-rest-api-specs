@@ -1787,7 +1787,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "The `GeoJSON` object type of a successful `Get Autocomplete` response body. Always\n`FeatureCollection`, as defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",
@@ -2924,7 +2924,7 @@
     },
     "FeatureCollectionEnum": {
       "type": "string",
-      "description": "The `GeoJSON` object type used at the root of geocoding and autocomplete responses. The only\nvalue is `FeatureCollection`, as defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+      "description": "The `GeoJSON` object type used at the root of successful responses from the forward\ngeocoding, reverse geocoding, and autocomplete operations (including their batch\nvariants). The only value is `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). `Get Polygon` is the one exception:\nits response root is a `GeoJSON Feature` — see `FeatureTypeEnum`.",
       "enum": [
         "FeatureCollection"
       ],
@@ -2935,14 +2935,14 @@
           {
             "name": "FeatureCollection",
             "value": "FeatureCollection",
-            "description": "The `GeoJSON FeatureCollection` object type. This appears as the root of every successful response body."
+            "description": "The `GeoJSON FeatureCollection` object type. Appears as the root of every successful\ngeocoding, reverse geocoding, and autocomplete response body. `Get Polygon` uses a\n`Feature` root instead."
           }
         ]
       }
     },
     "FeatureTypeEnum": {
       "type": "string",
-      "description": "The `GeoJSON` object type used to tag each Feature in a response. The only value is `Feature`,\nas defined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+      "description": "The `GeoJSON` object type for `Feature` objects. Tags each entry inside the `features`\narray of a `FeatureCollection` response (geocoding, reverse geocoding, autocomplete) and\nappears at the root of the `Get Polygon` response. The only value is `Feature`, as\ndefined in [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
       "enum": [
         "Feature"
       ],
@@ -2953,7 +2953,7 @@
           {
             "name": "Feature",
             "value": "Feature",
-            "description": "The `GeoJSON Feature` object type. This appears on every Feature object in the response."
+            "description": "The `GeoJSON Feature` object type. Appears on every Feature inside a `FeatureCollection`\nresponse, and at the root of the `Get Polygon` response."
           }
         ]
       }
@@ -3477,7 +3477,7 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionEnum",
-          "description": "The `GeoJSON` object type of a successful response body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
+          "description": "The `GeoJSON` object type of a successful `Get Geocoding` or `Get Reverse Geocoding`\nresponse body. Always `FeatureCollection`, as defined in\n[RFC 7946](https://www.rfc-editor.org/rfc/rfc7946)."
         },
         "features": {
           "type": "array",
