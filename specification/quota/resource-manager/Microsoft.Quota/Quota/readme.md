@@ -44,11 +44,14 @@ input-file:
 suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: |
-      `provisioningState` properties on QuotaTransfer and IncomingQuotaTransfer
-      reference the shared `Azure.ResourceManager.ResourceProvisioningState` enum
-      via `$ref` and are emitted with `readOnly: true` on the sibling property.
-      LintDiff's legacy validator does not detect readOnly on `$ref`-based
-      properties; see https://github.com/Azure/azure-openapi-validator/issues/637.
+      `provisioningState` on QuotaTransfer and IncomingQuotaTransfer is emitted as
+      `{ "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+      "readOnly": true }`. Per OpenAPI 2.0 / JSON Schema, sibling keywords of
+      `$ref` are ignored, so this `readOnly` is not honored at the contract level
+      and the linter is arguably firing correctly. Runtime intent is nonetheless
+      unambiguous from the TypeSpec source (`@visibility(Lifecycle.Read)` on
+      `provisioningState`), and the same `{ $ref + readOnly }` shape is already
+      in use elsewhere in this spec (e.g. `LROResponseProperties`).
 
       The documented workaround (`use-read-only-status-schema: true` on the
       typespec-autorest emitter) is not applicable here because this TypeSpec
@@ -57,6 +60,11 @@ suppressions:
       both versions, and the Cross-Version BreakingChange checker reports those
       schema-level flips as 18 property-level `ReadonlyPropertyChanged` errors
       against every property in 2025-09-01 that references a status enum.
+
+      Suppressing for this preview only. Tracked for a real fix before GA: emit
+      `provisioningState` via an `allOf` wrap (so `readOnly` lands on the property
+      rather than as an ignored sibling of `$ref`), or inline the status enum on
+      the transfer resources, which removes the need for this suppression.
 ```
 
 ### Tag: package-2025-09-01
