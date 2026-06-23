@@ -171,6 +171,11 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
+  EndpointDeploymentResourcePropertiesBasicResource,
+  "MachineLearningWorkspaceConnectionDeployment",
+  "csharp"
+);
+@@clientName(
   AADAuthTypeWorkspaceConnectionProperties,
   "AadAuthTypeWorkspaceConnectionProperties",
   "csharp"
@@ -593,7 +598,11 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(SASCredential, "SasCredential", "csharp");
 @@clientName(SASCredentialDto, "SasCredentialDto", "csharp");
-@@clientName(WorkspaceUpdateParameters, "MachineLearningWorkspacePatch", "csharp");
+@@clientName(
+  WorkspaceUpdateParameters,
+  "MachineLearningWorkspacePatch",
+  "csharp"
+);
 @@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "csharp");
 @@clientName(WeekDay, "MachineLearningDayOfWeek", "csharp");
 @@clientName(ComputeWeekDay, "MachineLearningComputeWeekDay", "csharp");
@@ -1053,11 +1062,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningWorkspaceQuotaUpdate",
   "csharp"
 );
-@@clientName(
-  UpdateWorkspaceQuotas.type,
-  "UpdateWorkspaceQuotasType",
-  "csharp"
-);
+@@clientName(UpdateWorkspaceQuotas.type, "UpdateWorkspaceQuotasType", "csharp");
 @@clientName(BindOptions, "MountBindOptions", "csharp");
 @@clientName(VolumeDefinition.type, "DefinitionType", "csharp");
 @@clientName(Mpi, "MpiDistributionConfiguration", "csharp");

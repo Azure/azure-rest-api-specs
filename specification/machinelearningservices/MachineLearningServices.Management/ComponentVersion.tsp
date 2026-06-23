@@ -56,7 +56,7 @@ interface ComponentVersionOps
         version: string,
       },
       ErrorResponse,
-      "MachineLearninRegistryComponentVersion"
+      "MachineLearningRegistryComponentVersion"
     > {}
 
 @armResourceOperations
