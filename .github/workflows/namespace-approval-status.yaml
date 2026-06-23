@@ -1,0 +1,85 @@
+name: "Namespace Approval - Set Status"
+
+on:
+  pull_request_target:
+    types:
+      - labeled
+      - unlabeled
+  workflow_run:
+    workflows: ["Namespace Approval - Analyze Code"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: write
+
+jobs:
+  post-results:
+    if: github.event_name == 'workflow_run'
+    name: Post Namespace Results
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Setup Node and install dependencies
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Post namespace review comment
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: postResults } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/post-results.js');
+            await postResults({ github, context, core });
+
+  validate-approval:
+    if: >
+      github.event_name == 'pull_request_target' &&
+      (github.event.action == 'labeled' || github.event.action == 'unlabeled')
+    name: Validate Namespace Approval
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Validate namespace approval label
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: validateApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/validate-approval.js');
+            await validateApproval({ github, context, core });
+
+  status-check:
+    name: Namespace Approval Status
+    needs: [post-results, validate-approval]
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            .github/
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Verify namespace approval status
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { default: statusCheck } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/status-check.js');
+            await statusCheck({ github, context, core });

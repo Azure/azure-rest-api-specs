@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 
 /**
@@ -49,13 +49,11 @@ async function handleUnlabeled({
   actor,
   prNumber,
 }) {
-  // Only guard namespace-related labels
   if (!targetLabel.endsWith("-namespace-pending") && targetLabel !== "namespace-review-required") {
     core.info(`${targetLabel} is not a namespace label, skipping`);
     return;
   }
 
-  // Allow bots and authorized approvers to remove labels
   if (ALLOWED_BOT_LOGINS.includes(actor)) {
     core.info(`${actor} is a trusted bot, allowing label removal`);
     return;
@@ -68,7 +66,6 @@ async function handleUnlabeled({
     return;
   }
 
-  // Unauthorized removal — re-apply the label
   core.warning(`${actor} is not authorized to remove ${targetLabel}, re-applying`);
 
   await github.rest.issues.addLabels({
@@ -126,8 +123,8 @@ async function handleLabeled({
     }
 
     langsToApprove = labels
-      .filter((l) => l.endsWith("-namespace-pending"))
-      .map((l) => l.replace("-namespace-pending", ""));
+      .filter((label) => label.endsWith("-namespace-pending"))
+      .map((label) => label.replace("-namespace-pending", ""));
   } else {
     const match = targetLabel.match(/^(\w+)-namespace-approved$/);
     if (!match) {
@@ -165,7 +162,6 @@ async function handleLabeled({
 
   core.info(`Approving languages: ${langsToApprove.join(", ")} by ${actor}`);
 
-  // Apply per-language approved labels and remove pending labels
   for (const lang of langsToApprove) {
     try {
       await github.rest.issues.removeLabel({
@@ -203,15 +199,14 @@ async function handleLabeled({
     }
   }
 
-  // Update bot comment
   const { data: currentPR } = await github.rest.pulls.get({
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: prNumber,
   });
   /** @type {string[]} */
-  const currentLabels = currentPR.labels.map((l) => l.name ?? "");
-  const pendingLabels = currentLabels.filter((l) => l.endsWith("-namespace-pending"));
+  const currentLabels = currentPR.labels.map((label) => label.name ?? "");
+  const pendingLabels = currentLabels.filter((label) => label.endsWith("-namespace-pending"));
 
   const comments = await github.rest.issues.listComments({
     owner: context.repo.owner,
@@ -219,7 +214,7 @@ async function handleLabeled({
     issue_number: prNumber,
   });
   const botComment = comments.data.find(
-    (c) => c.user?.type === "Bot" && c.body?.includes("<!-- namespace-review-bot -->"),
+    (comment) => comment.user?.type === "Bot" && comment.body?.includes("<!-- namespace-review-bot -->"),
   );
 
   if (botComment?.body) {
@@ -287,10 +282,10 @@ export default async function validateApproval({ github, context, core }) {
   /** @type {ApproversConfig} */
   let approversConfig;
   try {
-    const content = readFileSync(".github/namespace-approvers.yml", "utf8");
+    const content = await readFile(".github/namespace-approvers.yml", "utf8");
     approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
-  } catch (e) {
-    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(e));
+  } catch (error) {
+    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(error));
     return;
   }
 
@@ -301,12 +296,11 @@ export default async function validateApproval({ github, context, core }) {
 
   const prNumber = payload.pull_request.number;
   /** @type {string[]} */
-  const labels = payload.pull_request.labels.map((l) => l.name);
+  const labels = payload.pull_request.labels.map((label) => label.name);
   const targetLabel = payload.label.name;
   const actor = payload.sender.login;
   const isMgmt = labels.includes("Mgmt");
 
-  // Handle unlabeled: guard against unauthorized removal of pending/required labels
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
       github,
@@ -320,13 +314,11 @@ export default async function validateApproval({ github, context, core }) {
     });
   }
 
-  // Skip if no namespace review is required
   if (!labels.includes("namespace-review-required")) {
     core.info("No namespace review, skipping");
     return;
   }
 
-  // Handle labeled: validate approval labels
   return await handleLabeled({
     github,
     context,

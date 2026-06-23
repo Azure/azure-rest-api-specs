@@ -10,14 +10,16 @@ This process is automated via GitHub Actions on this repository.
 
 ### Detection
 
-When a PR modifies any `tspconfig.yaml` file, the workflow:
+When a PR modifies any `tspconfig.yaml` file, the analyze-code workflow:
 
 1. Identifies which languages have namespace/package-name configuration
-2. Extracts namespaces using the `@azure-tools/typespec-metadata` emitter (primary) with YAML parsing fallback
+2. Extracts namespaces using the `@azure-tools/typespec-metadata` emitter
 3. Determines if the service is data-plane or management-plane
-4. Applies `<lang>-namespace-pending` labels for each detected language
+4. Uploads namespace results for the status workflow
 
-### Approval
+### Status + Approval
+
+The status workflow posts the namespace review comment, applies `<lang>-namespace-pending` labels, and validates architect approval labels.
 
 - **Data plane:** Each language architect approves their language by applying `<lang>-namespace-approved`
 - **Management plane:** ArthurMa1978 or m-nash can apply `namespace-approved-all` to approve all languages at once
@@ -32,13 +34,11 @@ A required status check (`namespace-approval`) blocks merge until all pending na
 
 ### Reset on Change
 
-If a service team pushes a commit that **changes** a namespace value (not just TypeSpec code), the approval for that language is reset:
+If a service team pushes a commit that changes namespace configuration, the approval for that language is reset:
 
 - The `<lang>-namespace-approved` label is removed
 - The `<lang>-namespace-pending` label is re-applied
 - The status check fails again until re-approved
-
-TypeSpec-only changes (no namespace modification) do **not** reset approval.
 
 ## Labels
 
@@ -53,18 +53,18 @@ Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`
 
 ## Authorized Approvers
 
-Defined in [`.github/namespace-approvers.yml`](../.github/namespace-approvers.yml):
+Defined in [`.github/namespace-approvers.yml`](../../../namespace-approvers.yml):
 
 <!-- cspell:disable -->
 
-| Scope                | Approvers                     |
-| -------------------- | ----------------------------- |
-| .NET                 | @jsquire, @m-nash             |
+| Scope                | Approvers                      |
+| -------------------- | ------------------------------ |
+| .NET                 | @jsquire, @m-nash              |
 | Java                 | @JonathanGiles, @alzimmermsft |
-| Python               | @xirzec, @kashifkhan          |
-| TypeScript           | @xirzec, @maorleger           |
-| Go                   | @jhendrixMSFT                 |
-| Mgmt (all languages) | @ArthurMa1978, @m-nash        |
+| Python               | @xirzec, @kashifkhan           |
+| TypeScript           | @xirzec, @maorleger            |
+| Go                   | @jhendrixMSFT                  |
+| Mgmt (all languages) | @ArthurMa1978, @m-nash         |
 
 <!-- cspell:enable -->
 
@@ -72,10 +72,10 @@ Defined in [`.github/namespace-approvers.yml`](../.github/namespace-approvers.ym
 
 No action needed beyond your normal workflow:
 
-1. Add/modify namespace in your `tspconfig.yaml`
+1. Add or modify namespace in your `tspconfig.yaml`
 2. Open a PR as usual
-3. The bot will apply pending labels and post a status table
-4. Wait for architects to approve — they're notified via labels
+3. The bot posts a status table and applies pending labels
+4. Wait for architects to approve
 5. Once approved, the status check passes and the PR can merge
 
 ## For Architects

@@ -1,6 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import statusCheck from "../../src/namespace-approval/status-check.js";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.js";
+
+vi.mock("../../src/context.js", () => ({
+  extractInputs: vi.fn(),
+}));
+
+import { extractInputs } from "../../src/context.js";
+import statusCheck from "../../src/namespace-approval/status-check.js";
 
 describe("status-check", () => {
   /** @type {ReturnType<typeof createMockGithub>} */
@@ -22,10 +28,16 @@ describe("status-check", () => {
     github = createMockGithub();
     context = createMockContext();
     core = createMockCore();
+    vi.mocked(extractInputs).mockResolvedValue({
+      owner: "owner",
+      repo: "repo",
+      issue_number: 42,
+      head_sha: "head",
+      run_id: Number.NaN,
+    });
   });
 
   it("should pass when no namespace-review-required label", async () => {
-    context.payload = { pull_request: { number: 42 } };
     github.rest.pulls.get.mockResolvedValue({
       data: { labels: [{ name: "other-label" }] },
     });
@@ -37,7 +49,6 @@ describe("status-check", () => {
   });
 
   it("should fail when pending labels remain", async () => {
-    context.payload = { pull_request: { number: 42 } };
     github.rest.pulls.get.mockResolvedValue({
       data: {
         labels: [
@@ -56,7 +67,6 @@ describe("status-check", () => {
   });
 
   it("should pass when all namespaces approved", async () => {
-    context.payload = { pull_request: { number: 42 } };
     github.rest.pulls.get.mockResolvedValue({
       data: {
         labels: [

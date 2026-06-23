@@ -1,38 +1,32 @@
-import { execSync } from "child_process";
-import { existsSync, readFileSync, rmSync } from "fs";
-import yaml from "js-yaml";
-import { dirname, join } from "path";
+import { access, readFile, rm, writeFile } from "fs/promises";
+import { tmpdir } from "os";
+import { basename, dirname, join } from "path";
+import { z } from "zod";
+import { getChangedFiles } from "../../../shared/src/changed-files.js";
+import { execFile, execNpmExec } from "../../../shared/src/exec.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
-/**
- * @typedef {Object} ApproversConfig
- * @property {Record<string, string[]>} [data-plane]
- * @property {{ all?: string[] }} [management-plane]
- */
+const TypeSpecMetadataSchema = z.object({
+  typespec: z
+    .object({
+      type: z.enum(["management", "data"]).optional(),
+    })
+    .optional(),
+  languages: z
+    .record(
+      z.string(),
+      z.array(
+        z.object({
+          namespace: z.string().optional(),
+          packageName: z.string().optional(),
+        }),
+      ),
+    )
+    .optional(),
+});
 
-/**
- * @typedef {Object} TypeSpecMetadataEntry
- * @property {string} [namespace]
- * @property {string} [packageName]
- */
-
-/**
- * @typedef {Object} TypeSpecMetadata
- * @property {{ type?: string }} [typespec]
- * @property {Record<string, TypeSpecMetadataEntry[]>} [languages]
- */
-
-/**
- * @typedef {Object} TspConfigEmitterOptions
- * @property {string} [namespace]
- * @property {{ name?: string }} [package-details]
- * @property {string} [module]
- */
-
-/**
- * @typedef {Object} TspConfig
- * @property {Record<string, TspConfigEmitterOptions>} [options]
- */
+/** @typedef {{ namespace?: string, packageName?: string }} TypeSpecMetadataEntry */
+/** @typedef {Record<string, TypeSpecMetadataEntry[]>} TypeSpecLanguages */
 
 /** @type {Record<string, string>} */
 const EMITTER_TO_LANG = {
@@ -45,46 +39,55 @@ const EMITTER_TO_LANG = {
   go: "go",
 };
 
-/** @type {Record<string, string>} */
-const FALLBACK_EMITTER_MAP = {
-  "@azure-typespec/http-client-csharp": "dotnet",
-  "@azure-typespec/http-client-csharp-mgmt": "dotnet",
-  "@azure-tools/typespec-csharp": "dotnet",
-  "@azure-tools/typespec-java": "java",
-  "@azure-tools/typespec-python": "python",
-  "@azure-tools/typespec-ts": "typescript",
-  "@azure-tools/typespec-go": "go",
-};
-
 /**
- * Load approvers configuration from YAML file.
- *
- * @param {import("@actions/core")} core
- * @returns {ApproversConfig | null}
+ * @param {string} path
+ * @returns {Promise<boolean>}
  */
-function loadApproversConfig(core) {
+async function exists(path) {
   try {
-    const content = readFileSync(".github/namespace-approvers.yml", "utf8");
-    return /** @type {ApproversConfig} */ (yaml.load(content));
-  } catch (e) {
-    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(e));
-    return null;
+    await access(path);
+    return true;
+  } catch {
+    return false;
   }
 }
 
 /**
- * Extract namespaces from tspconfig.yaml using typespec-metadata emitter with YAML fallback.
+ * Sparse checkout only materializes .github/, so hydrate changed TypeSpec directories on demand.
+ *
+ * @param {string} file
+ * @param {import("@actions/core")} core
+ */
+async function ensureTypeSpecFilesAvailable(file, core) {
+  if (await exists(file)) {
+    return;
+  }
+
+  const tspDir = dirname(file);
+  const workspace = process.env.GITHUB_WORKSPACE ?? process.cwd();
+  core.info(`Hydrating ${tspDir} from git for namespace detection`);
+  await execFile("git", ["checkout", "HEAD", "--", tspDir], {
+    cwd: workspace,
+  });
+}
+
+/**
+ * Extract namespaces from tspconfig.yaml using typespec-metadata emitter.
  *
  * @param {string} file - Path to tspconfig.yaml
  * @param {Record<string, string>} namespacesFound - Map of language to namespace (mutated)
  * @param {import("@actions/core")} core
- * @returns {{ isMgmt: boolean, isDataPlane: boolean }}
+ * @returns {Promise<{ isMgmt: boolean, isDataPlane: boolean }>}
  */
-function extractNamespaces(file, namespacesFound, core) {
+async function extractNamespaces(file, namespacesFound, core) {
   let isMgmt = false;
   let isDataPlane = false;
 
-  if (!existsSync(file)) return { isMgmt, isDataPlane };
+  await ensureTypeSpecFilesAvailable(file, core);
+  if (!(await exists(file))) {
+    core.info(`Skipping missing file: ${file}`);
+    return { isMgmt, isDataPlane };
+  }
 
   const tspDir = dirname(file);
 
@@ -94,262 +97,118 @@ function extractNamespaces(file, namespacesFound, core) {
     isDataPlane = true;
   }
 
-  // Try typespec-metadata emitter first
-  try {
-    core.info(`Running typespec-metadata emitter on ${tspDir}`);
-    execSync(
-      `npx tsp compile "${tspDir}" --emit "@azure-tools/typespec-metadata" --output-dir "${tspDir}" --option "@azure-tools/typespec-metadata.format=json"`,
-      { stdio: "pipe", timeout: 120000 },
-    );
+  const outputDir = join(process.env.RUNNER_TEMP || tmpdir(), "typespec-metadata", basename(tspDir));
+  await rm(outputDir, { recursive: true, force: true });
 
-    const metadataPath = join(
+  core.info(`Running typespec-metadata emitter on ${tspDir}`);
+  await execNpmExec(
+    [
+      "tsp",
+      "compile",
       tspDir,
-      "@azure-tools",
-      "typespec-metadata",
-      "typespec-metadata.json",
-    );
-    if (!existsSync(metadataPath)) throw new Error("metadata file not found");
+      "--emit",
+      "@azure-tools/typespec-metadata",
+      "--output-dir",
+      outputDir,
+      "--option",
+      "@azure-tools/typespec-metadata.format=json",
+    ],
+    {
+      cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
+    },
+  );
 
-    const metadataRaw = /** @type {unknown} */ (JSON.parse(readFileSync(metadataPath, "utf8")));
-    const metadata = /** @type {TypeSpecMetadata} */ (metadataRaw);
+  const metadataPath = join(
+    outputDir,
+    "@azure-tools",
+    "typespec-metadata",
+    "typespec-metadata.json",
+  );
+  const metadata = TypeSpecMetadataSchema.parse(JSON.parse(await readFile(metadataPath, "utf8")));
 
-    if (metadata.typespec?.type === "management") isMgmt = true;
-    if (metadata.typespec?.type === "data") isDataPlane = true;
+  if (metadata.typespec?.type === "management") {
+    isMgmt = true;
+  }
+  if (metadata.typespec?.type === "data") {
+    isDataPlane = true;
+  }
 
-    const languages = metadata.languages ?? {};
-    for (const [langKey, entries] of Object.entries(languages)) {
-      const lang = EMITTER_TO_LANG[langKey] ?? langKey;
-      if (entries.length > 0) {
-        const firstEntry = entries[0];
-        const ns = firstEntry.namespace ?? firstEntry.packageName;
-        if (ns) namespacesFound[lang] = ns;
-      }
-    }
-
-    try {
-      rmSync(join(tspDir, "@azure-tools"), { recursive: true });
-    } catch {
-      // ignore cleanup errors
-    }
-  } catch (e) {
-    core.warning(`typespec-metadata emitter failed: ${String(e)}. Falling back to YAML parse.`);
-    const content = readFileSync(file, "utf8");
-    const parsed = /** @type {TspConfig} */ (yaml.load(content));
-    if (!parsed?.options) return { isMgmt, isDataPlane };
-
-    for (const [emitter, lang] of Object.entries(FALLBACK_EMITTER_MAP)) {
-      const opts = parsed.options[emitter];
-      if (!opts) continue;
-      if (opts.namespace) namespacesFound[lang] = opts.namespace;
-      else if (opts["package-details"]?.name) namespacesFound[lang] = opts["package-details"].name;
-      else if (opts.module) namespacesFound[lang] = opts.module;
+  const languages = /** @type {TypeSpecLanguages} */ (metadata.languages ?? {});
+  for (const [langKey, entries] of Object.entries(languages)) {
+    const lang = EMITTER_TO_LANG[langKey] ?? langKey;
+    const firstEntry = entries[0];
+    const namespace = firstEntry?.namespace ?? firstEntry?.packageName;
+    if (namespace) {
+      namespacesFound[lang] = namespace;
     }
   }
 
+  await rm(outputDir, { recursive: true, force: true });
   return { isMgmt, isDataPlane };
 }
 
 /**
- * Detect namespace changes in a PR and apply pending labels.
+ * Detect namespace changes in a PR and write results to an artifact file.
  *
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
-export default async function detectNamespaces({ github, context, core }) {
-  const approversConfig = loadApproversConfig(core);
-  if (!approversConfig) return;
+export default async function detectNamespaces({ context, core }) {
+  try {
+    const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+      context.payload
+    );
 
-  const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
-    context.payload
-  );
+    const changedFiles = (
+      await getChangedFiles({
+        cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
+        paths: ["specification"],
+      })
+    ).filter((file) => /specification\/.*\/tspconfig\.yaml$/.test(file));
 
-  const baseSha = payload.pull_request.base.sha;
-  const headSha = payload.pull_request.head.sha;
-  const diffOutput = execSync(`git diff --name-only ${baseSha}...${headSha}`).toString().trim();
-  const changedFiles = diffOutput
-    .split("\n")
-    .filter((f) => /specification\/.*\/tspconfig\.yaml$/.test(f));
+    if (changedFiles.length === 0) {
+      core.info("No tspconfig.yaml changes detected, skipping");
+      return;
+    }
 
-  if (changedFiles.length === 0) {
-    core.info("No tspconfig.yaml changes detected, skipping");
-    return;
-  }
+    core.info(`Found tspconfig.yaml changes: ${changedFiles.join(", ")}`);
 
-  core.info(`Found tspconfig.yaml changes: ${changedFiles.join(", ")}`);
+    /** @type {Record<string, string>} */
+    const namespacesFound = {};
+    let isMgmt = false;
+    let isDataPlane = false;
 
-  /** @type {Record<string, string>} */
-  const namespacesFound = {};
-  let isMgmt = false;
-  let isDataPlane = false;
-
-  for (const file of changedFiles) {
-    const result = extractNamespaces(file, namespacesFound, core);
-    if (result.isMgmt) isMgmt = true;
-    if (result.isDataPlane) isDataPlane = true;
-  }
-
-  const prNumber = payload.pull_request.number;
-
-  // On synchronize: reset approvals for changed namespaces
-  if (payload.action === "synchronize") {
-    const { data: currentPR } = await github.rest.pulls.get({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      pull_number: prNumber,
-    });
-    /** @type {string[]} */
-    const existingLabels = currentPR.labels.map((l) => l.name ?? "");
-
-    for (const lang of Object.keys(namespacesFound)) {
-      const approvedLabel = `${lang}-namespace-approved`;
-      if (existingLabels.includes(approvedLabel)) {
-        core.info(`Namespace changed for ${lang}, resetting approval`);
-        try {
-          await github.rest.issues.removeLabel({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: prNumber,
-            name: approvedLabel,
-          });
-        } catch {
-          // label may not exist
-        }
+    for (const file of changedFiles) {
+      const result = await extractNamespaces(file, namespacesFound, core);
+      if (result.isMgmt) {
+        isMgmt = true;
+      }
+      if (result.isDataPlane) {
+        isDataPlane = true;
       }
     }
 
-    for (const label of ["namespace-approved-all", "namespace-approved"]) {
-      if (existingLabels.includes(label)) {
-        try {
-          await github.rest.issues.removeLabel({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            issue_number: prNumber,
-            name: label,
-          });
-        } catch {
-          // label may not exist
-        }
+    const formatRules = loadFormatRules(core);
+    /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
+    const formatResults = {};
+    if (formatRules) {
+      for (const [language, namespace] of Object.entries(namespacesFound)) {
+        formatResults[language] = validateNamespaceFormat(language, namespace, formatRules);
       }
     }
+
+    const results = {
+      namespacesFound,
+      isMgmt,
+      isDataPlane,
+      formatResults,
+      prNumber: payload.pull_request.number,
+      action: payload.action,
+    };
+    const resultsPath = join(process.env.RUNNER_TEMP || ".", "namespace-results.json");
+    await writeFile(resultsPath, JSON.stringify(results, null, 2));
+    core.setOutput("results", "true");
+    core.setOutput("results_path", resultsPath);
+  } catch (error) {
+    core.setFailed(`Namespace detection failed: ${String(error)}`);
   }
-
-  const languages = Object.keys(namespacesFound);
-  if (languages.length === 0) {
-    core.info("No namespace changes detected");
-    return;
-  }
-
-  // Apply labels
-  /** @type {string[]} */
-  const labelsToAdd = ["namespace-review-required"];
-  if (isMgmt) labelsToAdd.push("Mgmt");
-  if (isDataPlane) labelsToAdd.push("data-plane");
-  for (const lang of languages) labelsToAdd.push(`${lang}-namespace-pending`);
-
-  // cspell:words fbbf
-  for (const label of labelsToAdd) {
-    try {
-      await github.rest.issues.getLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        name: label,
-      });
-    } catch {
-      /** @type {Record<string, string>} */
-      const colors = { "namespace-review-required": "e11d48" };
-      await github.rest.issues.createLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        name: label,
-        color: colors[label] ?? (label.includes("pending") ? "fbbf24" : "94a3b8"),
-      });
-    }
-  }
-
-  await github.rest.issues.addLabels({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issue_number: prNumber,
-    labels: labelsToAdd,
-  });
-
-  // Build bot comment
-  /**
-   * @param {string} lang
-   * @returns {string[]}
-   */
-  const getApprovers = (lang) => {
-    if (isMgmt) {
-      const mgmtApprovers = approversConfig["management-plane"]?.all;
-      if (mgmtApprovers) return mgmtApprovers;
-    }
-    return approversConfig["data-plane"]?.[lang] ?? ["TBD"];
-  };
-
-  // Validate namespace format against rules
-  const formatRules = loadFormatRules(core);
-  /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
-  const formatResults = {};
-  if (formatRules) {
-    for (const [lang, ns] of Object.entries(namespacesFound)) {
-      formatResults[lang] = validateNamespaceFormat(lang, ns, formatRules);
-    }
-  }
-
-  const planeType = isMgmt ? "Management Plane" : "Data Plane";
-  const baseRef = payload.pull_request.base.ref;
-  let body = `## Namespace Review Required\n\n**Plane:** ${planeType}\n\n`;
-  body += `| Language | Proposed Namespace | Format | Status | Approvers |\n`;
-  body += `|----------|-------------------|--------|--------|----------|\n`;
-  for (const [lang, ns] of Object.entries(namespacesFound)) {
-    const fmt = formatResults[lang];
-    const formatStatus = !fmt ? "—" : fmt.valid ? "✅" : `⚠️ Invalid`;
-    body += `| ${lang} | \`${ns}\` | ${formatStatus} | ⏳ Pending | ${getApprovers(lang).join(", ")} |\n`;
-  }
-
-  // Add format warnings if any
-  const formatErrors = Object.values(formatResults).filter((r) => !r.valid);
-  if (formatErrors.length > 0) {
-    body += `\n> **⚠️ Format issues detected:**\n`;
-    for (const err of formatErrors) {
-      body += `> - **${err.language}:** ${err.error}\n`;
-    }
-    body += `>\n> _Format validation does not block approval but should be reviewed._\n`;
-  }
-  body += `\n**How to approve:**\n`;
-  body += `- Per language: apply \`<language>-namespace-approved\` label\n`;
-  body += `- All at once: apply \`namespace-approved-all\` label (shortcut for mgmt plane)\n\n`;
-  body += `Merge is blocked until all languages are approved.\n`;
-  if (payload.action === "synchronize") {
-    body += `\n> ⚠️ **Namespace changed** — approvals for affected languages have been reset.\n`;
-  }
-  body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
-  body += `_Namespaces extracted via [@azure-tools/typespec-metadata](https://www.npmjs.com/package/@azure-tools/typespec-metadata) emitter_\n`;
-  body += `<!-- namespace-review-bot -->`;
-
-  const comments = await github.rest.issues.listComments({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issue_number: prNumber,
-  });
-  const botComment = comments.data.find(
-    (c) => c.user?.type === "Bot" && c.body?.includes("<!-- namespace-review-bot -->"),
-  );
-
-  if (botComment) {
-    await github.rest.issues.updateComment({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      comment_id: botComment.id,
-      body,
-    });
-  } else {
-    await github.rest.issues.createComment({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      issue_number: prNumber,
-      body,
-    });
-  }
-
-  core.setOutput("has_pending", "true");
 }

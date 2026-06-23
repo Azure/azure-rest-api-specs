@@ -3,15 +3,14 @@ import { createMockContext, createMockCore, createMockGithub } from "../mocks.js
 
 // cspell:words jsquire xirzec
 
-// Mock fs and js-yaml so validate-approval.js doesn't hit disk
-vi.mock("fs", () => ({
-  readFileSync: vi.fn(),
+vi.mock("fs/promises", () => ({
+  readFile: vi.fn(),
 }));
 vi.mock("js-yaml", () => ({
   default: { load: vi.fn() },
 }));
 
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import validateApproval from "../../src/namespace-approval/validate-approval.js";
 
@@ -28,7 +27,7 @@ const approversConfig = {
 };
 
 function setupMocks() {
-  /** @type {ReturnType<typeof vi.fn>} */ (readFileSync).mockReturnValue("yaml-content");
+  /** @type {ReturnType<typeof vi.fn>} */ (readFile).mockResolvedValue("yaml-content");
   /** @type {ReturnType<typeof vi.fn>} */ (yaml.load).mockReturnValue(approversConfig);
 }
 
@@ -77,7 +76,6 @@ describe("validate-approval", () => {
     context = createMockContext();
     core = createMockCore();
 
-    // Extend mock with methods used by validate-approval
     /** @type {any} */ (github.rest.issues).createComment = vi.fn();
     /** @type {any} */ (github.rest.issues).getLabel = vi.fn();
     /** @type {any} */ (github.rest.issues).createLabel = vi.fn();
@@ -125,9 +123,7 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "namespace-review-required" }] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi
-        .fn()
-        .mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -167,9 +163,7 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [{ name: "namespace-review-required" }] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi
-        .fn()
-        .mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -191,9 +185,7 @@ describe("validate-approval", () => {
       github.rest.pulls.get.mockResolvedValue({
         data: { labels: [] },
       });
-      /** @type {any} */ (github.rest.issues).listComments = vi
-        .fn()
-        .mockResolvedValue({ data: [] });
+      /** @type {any} */ (github.rest.issues).listComments = vi.fn().mockResolvedValue({ data: [] });
 
       await validateApproval(args());
 
@@ -258,8 +250,10 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ c) => String(c[0]));
-      expect(infoArgs.some((/** @type {string} */ m) => m.includes("trusted bot"))).toBe(true);
+      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ call) => String(call[0]));
+      expect(infoArgs.some((/** @type {string} */ message) => message.includes("trusted bot"))).toBe(
+        true,
+      );
     });
 
     it("should allow authorized approver to remove pending label", async () => {
@@ -273,10 +267,10 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ c) => String(c[0]));
-      expect(infoArgs.some((/** @type {string} */ m) => m.includes("authorized approver"))).toBe(
-        true,
-      );
+      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ call) => String(call[0]));
+      expect(
+        infoArgs.some((/** @type {string} */ message) => message.includes("authorized approver")),
+      ).toBe(true);
     });
 
     it("should ignore non-namespace labels on unlabeled", async () => {
@@ -290,8 +284,8 @@ describe("validate-approval", () => {
       await validateApproval(args());
 
       expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
-      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ c) => String(c[0]));
-      expect(infoArgs.some((/** @type {string} */ m) => m.includes("not a namespace label"))).toBe(
+      const infoArgs = core.info.mock.calls.map((/** @type {unknown[]} */ call) => String(call[0]));
+      expect(infoArgs.some((/** @type {string} */ message) => message.includes("not a namespace label"))).toBe(
         true,
       );
     });
