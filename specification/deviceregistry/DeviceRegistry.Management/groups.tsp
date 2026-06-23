@@ -60,6 +60,7 @@ model GroupListMembersRequest {
   @maxValue(1000)
   pageSize?: int32;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This is a paging cursor, not a credential or secret."
   @doc("Opaque continuation token from a previous listMembers response.")
   skipToken?: string;
 }
