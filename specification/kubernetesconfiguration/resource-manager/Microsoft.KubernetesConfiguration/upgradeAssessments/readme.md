@@ -44,9 +44,6 @@ suppressions:
   - code: OperationsAPIImplementation
     from: upgradeAssessments.json
     reason: Operations API is implemented as a separate service.
-  - code: ResourceNameRestriction
-    from: upgradeAssessments.json
-    reason: Existing service contract needs to be backward compatible.
 ```
 
 ---

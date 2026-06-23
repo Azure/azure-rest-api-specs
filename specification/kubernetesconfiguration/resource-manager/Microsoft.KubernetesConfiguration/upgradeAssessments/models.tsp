@@ -155,8 +155,13 @@ model ReadinessCheck {
 // ─── ARM resource properties ──────────────────────────────────────────────────
 
 /** Properties of a single UpgradeAssessment ARM resource. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not have a provisioning state per the original Swagger design"
 model UpgradeAssessmentProperties {
+  /**
+   * Provisioning state of the UpgradeAssessment.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ResourceProvisioningState;
+
   /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
   @visibility(Lifecycle.Read)
   currentKubernetesVersion?: string;

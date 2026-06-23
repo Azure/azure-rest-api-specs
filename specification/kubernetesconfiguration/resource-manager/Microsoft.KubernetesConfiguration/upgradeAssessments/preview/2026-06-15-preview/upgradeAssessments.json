@@ -183,6 +183,36 @@
     }
   },
   "definitions": {
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      }
+    },
     "CompatibilityStatus": {
       "type": "string",
       "description": "Compatibility status of a cluster component with the target Kubernetes version.",
@@ -467,6 +497,11 @@
       "type": "object",
       "description": "Properties of a single UpgradeAssessment ARM resource.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "Provisioning state of the UpgradeAssessment.",
+          "readOnly": true
+        },
         "currentKubernetesVersion": {
           "type": "string",
           "description": "Current Kubernetes version running on the cluster (e.g., '1.29').",
