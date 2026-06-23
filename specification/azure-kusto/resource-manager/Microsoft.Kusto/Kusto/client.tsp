@@ -782,11 +782,16 @@ union SandboxCustomImageType {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+@@alternateType(
   ClusterProperties.languageExtensions,
+  LanguageExtension[],
   "csharp"
 );
-// @@clientName(LanguageExtensionsList.value, "LanguageExtensionsValue", "csharp");
+@@clientName(
+  ClusterProperties.languageExtensions,
+  "LanguageExtensionsValue",
+  "csharp"
+);
 
 @@alternateType(ClusterPrincipalProperties.tenantId, uuid, "csharp");
 @@alternateType(DatabasePrincipalProperties.tenantId, uuid, "csharp");
