@@ -2,6 +2,7 @@ import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Suppression } from "suppressions";
 import { type Rule } from "./rule.ts";
+import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
 import { FlavorAzureRule } from "./rules/flavor-azure.ts";
@@ -113,6 +114,7 @@ export async function main() {
     new EmitAutorestRule(),
     new FlavorAzureRule(),
     new LinterRulesetRule(),
+    new ClientTspImportRule(),
     new CompileRule(),
     new FormatRule(),
     new SdkTspConfigValidationRule(),

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -320,6 +321,30 @@ model ImageRepositoryCredentials {
 }
 
 /**
+ * ImageRepositoryCredentialsPatch represents the credentials used to login to the image repository for patch operations.
+ */
+@added(Versions.v2026_07_01)
+model ImageRepositoryCredentialsPatch {
+  /**
+   * The password or token used to access an image in the target repository.
+   */
+  @minLength(1)
+  @secret
+  password?: string;
+
+  /**
+   * The URL of the authentication server used to validate the repository credentials.
+   */
+  registryUrl?: string;
+
+  /**
+   * The username used to access an image in the target repository.
+   */
+  @minLength(1)
+  username?: string;
+}
+
+/**
  * OsDisk represents configuration of the boot disk.
  */
 model OsDisk {
@@ -408,7 +433,8 @@ model VirtualMachinePatchProperties {
   /**
    * The credentials used to login to the image repository that has access to the specified image.
    */
-  vmImageRepositoryCredentials?: ImageRepositoryCredentials;
+  @typeChangedFrom(Versions.v2026_07_01, ImageRepositoryCredentials)
+  vmImageRepositoryCredentials?: ImageRepositoryCredentialsPatch;
 }
 
 /**

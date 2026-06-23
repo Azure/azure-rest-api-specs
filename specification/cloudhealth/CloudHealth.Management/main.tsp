@@ -309,6 +309,10 @@ union RefreshInterval {
   @doc("Ten Minutes")
   PT10M: "PT10M",
 
+  @added(Versions.v2026_05_01_preview)
+  @doc("Fifteen Minutes")
+  PT15M: "PT15M",
+
   @doc("Thirty Minutes")
   PT30M: "PT30M",
 
