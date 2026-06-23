@@ -9,6 +9,18 @@ options:
     api-version: "v1"
     # plugins:
     #   - "../codegen"
+  # Exports the @extension("x-ms-foundry-meta", ...) beta entities as grouped class/field lists
+  # - run `tsp-client sync` from package folder
+  # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter`
+  # - still from `TempTypeSpecFiles` folder, run `npx tsp compile .\sdk-csharp-azure-ai-projects-agents\client.tsp --emit typespec-extension-exporter`
+  # - TODO: define output-dir
+  # - run `cd .. && tsp-client generate`
+  "typespec-extension-exporter":
+    keys: x-ms-foundry-meta
+    output-shape: list
+    output-format: yaml
+    output-file: list.yaml
+    language: csharp
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
