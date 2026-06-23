@@ -113,6 +113,19 @@ using Microsoft.Network;
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");
 @@alternateType(ARecord.ipv4Address, Azure.Core.ipV4Address, "csharp");
 @@alternateType(AaaaRecord.ipv6Address, Azure.Core.ipV6Address, "csharp");
+@@alternateType(
+  VirtualNetworkLinkProperties.virtualNetwork,
+  Azure.ResourceManager.Models.WritableSubResource,
+  "csharp"
+);
+
+namespace Azure.ResourceManager.Models {
+  /** Represents a reference to an existing resource by its id. */
+  model WritableSubResource {
+    /** The resource id. */
+    id?: Azure.Core.armResourceIdentifier;
+  }
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "backward compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
