@@ -470,47 +470,6 @@ model BackendPoolReplacement extends BasicResourceWithSettableIDName {
 @@alternateType(PolicySettings.redirectUrl, url, "csharp");
 
 @@alternateType(
-  Microsoft.Network.Resource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-@@alternateType(
-  ResourcewithSettableName,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-@@alternateType(
-  BasicResource,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  FrontDoor,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  Experiment,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  Profile,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  RulesEngine,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  WebApplicationFirewallPolicy,
-  #{ isAzureResource: true }
-);
-
-@@alternateType(
   GetLatencyScorecardsParameters.endDateTimeUTC,
   utcDateTime,
   "csharp"
