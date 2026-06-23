@@ -135,7 +135,37 @@ namespace Microsoft.NetworkFunction {
     createOrUpdate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureTrafficCollector>,
       ...Azure.ResourceManager.ProviderNamespace<AzureTrafficCollector>,
-      ...AzureTrafficCollector,
+
+      /**
+       * azureTrafficCollectorName.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      azureTrafficCollectorName: string,
+
+      /**
+       * Resource location.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      location: string,
+
+      /**
+       * Resource tags.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+
+      /**
+       * A unique read-only string that changes whenever the resource is updated.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @visibility(Lifecycle.Read)
+      etag?: string,
+
+      /**
+       * The virtualHub to which the Azure Traffic Collector belongs.
+       */
+      virtualHub?: ResourceReference,
     ):
       | ArmResourceUpdatedResponse<AzureTrafficCollector>
       | ArmResourceCreatedResponse<
@@ -145,12 +175,6 @@ namespace Microsoft.NetworkFunction {
         >
       | CloudError;
   }
-
-  @@clientName(
-    AzureTrafficCollectorsScope.createOrUpdate::parameters.name,
-    "azureTrafficCollectorName",
-    "javascript"
-  );
 
   @@scope(AzureTrafficCollectorsScope.createOrUpdate, "javascript");
   @@clientLocation(
