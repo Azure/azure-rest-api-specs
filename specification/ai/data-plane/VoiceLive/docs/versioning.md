@@ -50,18 +50,18 @@ VoiceLive-Features: BargeIn=V1Preview, Transcription=V1Preview, CustomVoice=V1Pr
 
 We follow the same TypeSpec authoring pattern as Azure AI Foundry services, deliberately tracking Foundry's `@added`/`@removed` versioning mechanics so that VoiceLive stays aligned if those mechanics evolve. The model below mirrors that pattern: the virtual channel is the staging area; `v1` is the live evergreen GA that only grows. Three change types:
 
-- **Add a GA feature** — straight into `v1`: `@added(Versions.v1)`.
+- **Add a GA feature** — anchor at `@added(Versions.PuPr)` (**not** `@added(Versions.v1)`). Since `PuPr` is declared just before `v1`, the surface flows forward into `v1` automatically while also appearing on the preview channel — keeping `virtual-public-preview` a strict superset of `v1`. (Leaving it undecorated would leak it into the frozen dated versions; adding it at `v1` would hide it from the preview channel.)
 - **Add a preview feature** — incubate on the virtual channel, fenced from GA: `@added(Versions.PuPr)` + `@removed(Versions.v1)` (appears in `virtual-public-preview`, behind the header; absent from `stable/v1`).
 - **Promote preview → GA** — delete the `@removed(Versions.v1)` line (keep `@added(Versions.PuPr)`); it now flows into `stable/v1` as a normal optional field, header gate dropped. No version bump.
 - **Breaking change** — can't touch `v1`; mint `v2` and fence both shapes (`@removed(Versions.v2)` old / `@added(Versions.v2)` new).
 
-Rule of thumb: `@added(PuPr) + @removed(v1)` = previewing · drop `@removed(v1)` = GA it · additive stays in `v1` · breaking → new `v2`.
+Rule of thumb: `@added(PuPr)` = additive (flows into both `PuPr` and `v1`) · `@added(PuPr) + @removed(v1)` = previewing · drop `@removed(v1)` = GA it · `@added(v1)` = GA-only, hidden from preview · breaking → new `v2`.
 
 **Preview surface is unconstrained.** The only contracts that must stay backward-compatible are `v1` and frozen dated versions. The evergreen `virtual-public-preview` channel carries no compatibility promise — as long as `v1` isn't broken, preview features can be freely added, deleted, retyped, or broken between builds (including breaking one preview feature with another), with no `v2` and no version bump.
 
 ## 6. Migration (date-stamped → `v1`)
 
-Per-client, opt-in — nothing breaks. Make `stable/v1` a backward-compatible **superset** of `2026-04-10`, keep dated versions frozen in the enum, stop minting new dated stable versions (additive GA changes use `@added(Versions.v1)`), and let customers switch `api-version` to `v1` when ready. **Checklist:** `v1` has no removals vs `2026-04-10`, no field made required/retyped, new GA fields optional, preview surface fenced with `@removed(Versions.v1)`.
+Per-client, opt-in — nothing breaks. Make `stable/v1` a backward-compatible **superset** of `2026-04-10`, keep dated versions frozen in the enum, stop minting new dated stable versions (additive GA changes use `@added(Versions.PuPr)` so they land in both `v1` and the preview channel), and let customers switch `api-version` to `v1` when ready. **Checklist:** `v1` has no removals vs `2026-04-10`, no field made required/retyped, new GA fields optional, preview surface fenced with `@removed(Versions.v1)`.
 
 ## 7. Limitations to notice
 

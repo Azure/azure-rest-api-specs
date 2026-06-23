@@ -14,12 +14,16 @@ Only **backward-compatible** changes may flow into `stable/v1` (and any frozen d
 
 ## Adding a GA feature
 
-Add the surface directly to `v1` with the `@added` decorator. Keep new fields **optional**.
+Anchor new GA surface at `@added(Versions.PuPr)` — **not** `@added(Versions.v1)`. Because `PuPr` (`virtual-public-preview`) is declared just before `v1` in the `Versions` enum, surface added at `PuPr` automatically flows forward into `v1` too, so it lands in **both** the preview channel and `stable/v1`. This keeps `virtual-public-preview` a strict superset of `v1` (the Foundry invariant). Keep new fields **optional**.
 
 ```tsp
-@added(Versions.v1)
+@added(Versions.PuPr)
 newOptionalField?: string;
 ```
+
+> Do **not** leave new surface undecorated — it would leak into the frozen dated versions (`stable/2026-04-10`, etc.) and produce diffs there. Anchoring at `@added(Versions.PuPr)` keeps it out of the frozen versions while landing it in both `PuPr` and `v1`.
+>
+> Reserve `@added(Versions.v1)` for the rare case where you deliberately want a feature in GA but **absent** from the preview channel. Anything added at `v1` lands *after* the `PuPr` snapshot, so it will **not** appear in `preview/virtual-public-preview/VoiceLive.json`.
 
 ## Adding a preview feature
 
