@@ -852,3 +852,33 @@ union SandboxCustomImageType {
 // PrivateLinkResource is read-only; GA still exposed a public ctor on the data model. Mark it as input
 // for C# so the generated KustoPrivateLinkResourceData gets a public constructor (and is not sealed).
 @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
+
+/**
+ * Class representing an update to a Kusto cluster.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model KustoClusterPatch
+  extends Azure.ResourceManager.CommonTypes.TrackedResource {
+  /**
+   * The SKU of the cluster.
+   */
+  sku?: AzureSku;
+
+  /**
+   * The availability zones of the cluster.
+   */
+  zones?: string[];
+
+  /**
+   * The identity of the cluster, if configured.
+   */
+  identity?: Identity;
+
+  /**
+   * The cluster properties.
+   */
+  properties?: ClusterProperties;
+}
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@flattenProperty(KustoClusterPatch.properties);
+@@alternateType(ClusterUpdate, KustoClusterPatch, "csharp");
