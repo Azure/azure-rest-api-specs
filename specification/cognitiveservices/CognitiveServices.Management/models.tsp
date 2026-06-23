@@ -6595,6 +6595,20 @@ union RaiEgressDefaultAction {
 }
 
 /**
+ * URL scheme for rewrite targets. Only HTTP and HTTPS are supported.
+ */
+@added(Versions.v2026_05_15_preview)
+union RaiEgressScheme {
+  string,
+
+  /** HTTP scheme. */
+  Http: "http",
+
+  /** HTTPS scheme. */
+  Https: "https",
+}
+
+/**
  * The kind of action an egress rule takes when it matches.
  */
 @added(Versions.v2026_05_15_preview)
@@ -6704,8 +6718,8 @@ model RaiEgressHeaderTransform {
  */
 @added(Versions.v2026_05_15_preview)
 model RaiEgressRewriteTarget {
-  /** Target scheme ("http" or "https"). Original scheme is kept if omitted. */
-  scheme?: string;
+  /** Target scheme. Original scheme is kept if omitted. */
+  scheme?: RaiEgressScheme;
 
   /** Target host. Original host is kept if omitted. */
   host?: string;
@@ -6787,7 +6801,7 @@ model RaiEgressRule {
   /**
    * The type of rule (e.g., Fqdn). Determines how match criteria are interpreted.
    */
-  ruleType?: RaiEgressRuleType;
+  ruleType: RaiEgressRuleType;
 
   /**
    * The match criteria for this rule.
@@ -6818,8 +6832,10 @@ model RaiEgressPolicyConfig {
   /**
    * The default action when no user-defined rules match. This is security-critical:
    * Allow means unmatched traffic is permitted; Deny means it is blocked.
+   * If omitted on create, the server defaults to Deny (fail-closed). On subsequent
+   * GET requests, the server always returns the effective value.
    */
-  defaultAction: RaiEgressDefaultAction;
+  defaultAction?: RaiEgressDefaultAction;
 
   /**
    * Description of the egress policy.

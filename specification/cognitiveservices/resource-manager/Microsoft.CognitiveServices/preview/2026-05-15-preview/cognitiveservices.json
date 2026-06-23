@@ -18552,7 +18552,7 @@
         },
         "defaultAction": {
           "$ref": "#/definitions/RaiEgressDefaultAction",
-          "description": "The default action when no user-defined rules match. This is security-critical:\nAllow means unmatched traffic is permitted; Deny means it is blocked."
+          "description": "The default action when no user-defined rules match. This is security-critical:\nAllow means unmatched traffic is permitted; Deny means it is blocked.\nIf omitted on create, the server defaults to Deny (fail-closed). On subsequent\nGET requests, the server always returns the effective value."
         },
         "description": {
           "type": "string",
@@ -18568,18 +18568,15 @@
             "name"
           ]
         }
-      },
-      "required": [
-        "defaultAction"
-      ]
+      }
     },
     "RaiEgressRewriteTarget": {
       "type": "object",
       "description": "Where a Rewrite action sends matched traffic. At least one field must be set;\nomitted fields retain the original request values. This constraint is enforced\nby the server (400 Bad Request if all fields are omitted).",
       "properties": {
         "scheme": {
-          "type": "string",
-          "description": "Target scheme (\"http\" or \"https\"). Original scheme is kept if omitted."
+          "$ref": "#/definitions/RaiEgressScheme",
+          "description": "Target scheme. Original scheme is kept if omitted."
         },
         "host": {
           "type": "string",
@@ -18618,6 +18615,7 @@
       },
       "required": [
         "name",
+        "ruleType",
         "action"
       ]
     },
@@ -18712,6 +18710,30 @@
             "name": "Fqdn",
             "value": "Fqdn",
             "description": "Fully qualified domain name (FQDN) based rule matching on host and path patterns."
+          }
+        ]
+      }
+    },
+    "RaiEgressScheme": {
+      "type": "string",
+      "description": "URL scheme for rewrite targets. Only HTTP and HTTPS are supported.",
+      "enum": [
+        "http",
+        "https"
+      ],
+      "x-ms-enum": {
+        "name": "RaiEgressScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "http",
+            "description": "HTTP scheme."
+          },
+          {
+            "name": "Https",
+            "value": "https",
+            "description": "HTTPS scheme."
           }
         ]
       }
