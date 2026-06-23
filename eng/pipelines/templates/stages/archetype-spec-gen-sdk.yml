@@ -50,7 +50,7 @@ stages:
     variables:
       - template: /eng/pipelines/templates/variables/image.yml
       - name: NodeVersion
-        value: '22.x'
+        value: '24.x'
       - name: PythonVersion
         value: '3.13'
       - name: PipelineArtifactsName
@@ -243,8 +243,12 @@ stages:
           fi
 
           if [ "${{ parameters.ApiVersion }}" != "" ] && [ "${{ parameters.ApiVersion }}" != "none" ]; then
-            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }} --sdk-release-type ${{ parameters.SdkReleaseType }}"
-            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }}, SDK Release Type: ${{ parameters.SdkReleaseType }},"
+            optional_params="$optional_params --api-version ${{ parameters.ApiVersion }}"
+            sdk_gen_info="$sdk_gen_info API Version: ${{ parameters.ApiVersion }},"
+          fi
+          if [ "${{ parameters.SdkReleaseType }}" != "" ] && [ "${{ parameters.SdkReleaseType }}" != "none" ]; then
+            optional_params="$optional_params --sdk-release-type ${{ parameters.SdkReleaseType }}"
+            sdk_gen_info="$sdk_gen_info SDK Release Type: ${{ parameters.SdkReleaseType }},"
           fi
           sdk_gen_info="$sdk_gen_info and CommitSHA: '$updatedSpecRepoCommit' in SpecRepo: '${{ parameters.SpecRepoUrl }}'"
 
@@ -348,6 +352,7 @@ stages:
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
+              -UpdateExistingPullRequest $true
         
 
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:

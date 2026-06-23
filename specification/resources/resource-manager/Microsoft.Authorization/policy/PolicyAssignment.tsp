@@ -21,7 +21,7 @@ model PolicyAssignment
     Resource = PolicyAssignment,
     KeyName = "policyAssignmentName",
     SegmentName = "policyAssignments",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 
   /**

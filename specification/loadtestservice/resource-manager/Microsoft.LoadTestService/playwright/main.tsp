@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./typespec/routes.tsp";
 import "./typespec/quotas.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
