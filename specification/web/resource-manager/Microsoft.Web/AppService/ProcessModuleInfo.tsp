@@ -270,6 +270,7 @@ interface ProcessModuleSlotOperationGroup {
 }
 
 @@doc(ProcessModuleInfo.name, "Module base address.");
-@@doc(ProcessModuleInfo.properties,
+@@doc(
+  ProcessModuleInfo.properties,
   "ProcessModuleInfo resource specific properties"
 );

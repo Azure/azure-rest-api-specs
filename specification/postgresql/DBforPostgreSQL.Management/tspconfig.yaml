@@ -36,7 +36,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/postgresql"
     emitter-output-dir: "{output-dir}/{service-dir}/armpostgresqlflexibleservers"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqlflexibleservers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresqlflexibleservers/v6"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -76,6 +76,11 @@ options:
       - where:
           verb: Set
         remove: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    package-name: "Azure.ResourceManager.PostgreSql"
+    namespace: "{package-name}.FlexibleServers"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
+    enable-wire-path-attribute: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

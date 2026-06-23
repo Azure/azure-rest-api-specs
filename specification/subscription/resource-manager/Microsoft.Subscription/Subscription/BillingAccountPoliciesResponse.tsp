@@ -43,6 +43,7 @@ interface BillingAccountPoliciesResponses {
 }
 
 @@doc(BillingAccountPoliciesResponse.name, "");
-@@doc(BillingAccountPoliciesResponse.properties,
+@@doc(
+  BillingAccountPoliciesResponse.properties,
   "Billing account policies response properties."
 );

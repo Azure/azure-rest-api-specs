@@ -4,16 +4,19 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Communication;
 
-@@clientName(Microsoft.Communication,
+@@clientName(
+  Microsoft.Communication,
   "CommunicationServiceManagementClient",
   "javascript,python,java"
 );
-@@clientName(CommunicationServices_ProvisioningState,
+@@clientName(
+  CommunicationServices_ProvisioningState,
   "CommunicationServicesProvisioningState",
   "python"
 );
 @@clientName(Domains_ProvisioningState, "DomainsProvisioningState", "python");
-@@clientName(EmailServices_ProvisioningState,
+@@clientName(
+  EmailServices_ProvisioningState,
   "EmailServicesProvisioningState",
   "python"
 );
@@ -31,35 +34,42 @@ using Microsoft.Communication;
 @@clientName(DomainPropertiesVerificationRecords.DMARC, "dmarc", "java");
 
 @@clientName(CommunicationServiceProperties.hostName, "hostname", "java");
-@@clientName(SuppressionListProperties.createdTimeStamp,
+@@clientName(
+  SuppressionListProperties.createdTimeStamp,
   "createdTimestamp",
   "java"
 );
-@@clientName(SuppressionListProperties.lastUpdatedTimeStamp,
+@@clientName(
+  SuppressionListProperties.lastUpdatedTimeStamp,
   "lastUpdatedTimestamp",
   "java"
 );
-@@clientName(NameAvailabilityParameters,
+@@clientName(
+  NameAvailabilityParameters,
   "CommunicationServiceNameAvailabilityContent",
   "csharp"
 );
 @@clientName(TaggedResource, "CommunicationAcceptTags", "csharp");
 @@clientName(DomainResource, "CommunicationDomainResource", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "CommunicationNameAvailabilityReason",
   "csharp"
 );
-@@clientName(RegenerateKeyParameters,
+@@clientName(
+  RegenerateKeyParameters,
   "RegenerateCommunicationServiceKeyContent",
   "csharp"
 );
-@@clientName(VerificationParameter,
+@@clientName(
+  VerificationParameter,
   "DomainsRecordVerificationContent",
   "csharp"
 );
 @@clientName(VerificationType, "DomainRecordVerificationType", "csharp");
 @@clientName(VerificationStatus, "DomainRecordVerificationStatus", "csharp");
-@@clientName(VerificationStatusRecord,
+@@clientName(
+  VerificationStatusRecord,
   "DomainVerificationStatusRecord",
   "csharp"
 );
@@ -67,67 +77,82 @@ using Microsoft.Communication;
 @@clientName(DnsRecord.ttl, "TimeToLiveInSeconds", "csharp");
 @@clientName(DnsRecord, "VerificationDnsRecord", "csharp");
 @@clientName(Domains_ProvisioningState, "DomainProvisioningState", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "CommunicationServiceProvisioningState",
   "csharp"
 );
 @@clientName(SuppressionListProperties.createdTimeStamp, "CreatedOn", "csharp");
-@@clientName(SuppressionListProperties.lastUpdatedTimeStamp,
+@@clientName(
+  SuppressionListProperties.lastUpdatedTimeStamp,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(CommunicationServiceProperties.disableLocalAuth,
+@@clientName(
+  CommunicationServiceProperties.disableLocalAuth,
   "IsLocalAuthDisabled",
   "csharp"
 );
 @@clientName(SmtpUsernameResource, "CommunicationSmtpUsername", "csharp");
-@@clientName(SuppressionListAddressResource,
+@@clientName(
+  SuppressionListAddressResource,
   "EmailSuppressionListAddress",
   "csharp"
 );
 @@clientName(SuppressionListResource, "EmailSuppressionList", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.PublicNetworkAccess,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PublicNetworkAccess,
   "CommunicationPublicNetworkAccess",
   "csharp"
 );
 @@alternateType(SmtpUsernameProperties.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(CommunicationServiceProperties.immutableResourceId,
+@@alternateType(
+  CommunicationServiceProperties.immutableResourceId,
   Azure.Core.uuid,
   "csharp"
 );
-@@alternateType(CommunicationServiceProperties.notificationHubId,
+@@alternateType(
+  CommunicationServiceProperties.notificationHubId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LinkNotificationHubParameters.resourceId,
+@@alternateType(
+  LinkNotificationHubParameters.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(LinkedNotificationHub.resourceId,
+@@alternateType(
+  LinkedNotificationHub.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(CommunicationServices.checkNameAvailability,
+@@clientName(
+  CommunicationServices.checkNameAvailability,
   "CheckCommunicationNameAvailability",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "CommunicationNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "CommunicationNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(LinkNotificationHubParameters,
+@@clientName(
+  LinkNotificationHubParameters,
   "LinkNotificationHubContent",
   "csharp"
 );
-@@clientName(SenderUsernameResourceCollection,
+@@clientName(
+  SenderUsernameResourceCollection,
   "SenderUsernameResourceListResult",
   "csharp"
 );
@@ -143,24 +168,29 @@ using Microsoft.Communication;
 @@clientName(VerificationType.DKIM, "Dkim", "csharp");
 @@clientName(VerificationType.DKIM2, "Dkim2", "csharp");
 @@clientName(VerificationType.DMARC, "Dmarc", "csharp");
-@@alternateType(SuppressionListProperties.createdTimeStamp,
+@@alternateType(
+  SuppressionListProperties.createdTimeStamp,
   utcDateTime,
   "csharp"
 );
-@@alternateType(SuppressionListProperties.lastUpdatedTimeStamp,
+@@alternateType(
+  SuppressionListProperties.lastUpdatedTimeStamp,
   utcDateTime,
   "csharp"
 );
 @@clientName(DnsRecord.type, "DnsRecordType", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@clientName(EmailServices.listVerifiedExchangeOnlineDomains,
+@@clientName(
+  EmailServices.listVerifiedExchangeOnlineDomains,
   "GetVerifiedExchangeOnlineDomainsEmailServices",
   "csharp"
 );

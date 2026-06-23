@@ -37,8 +37,14 @@ import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
+import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
+import "./ManagedComputeUsages.tsp";
+import "./Compute.tsp";
+import "./Workbench.tsp";
+import "./ManagedComputeCapacity.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -78,10 +84,21 @@ enum Versions {
    * The 2026-03-01 API version.
    */
   v2026_03_01: "2026-03-01",
+
+  /**
+   * The 2026-03-15-preview API version.
+   */
+  v2026_03_15_preview: "2026-03-15-preview",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all the available Cognitive Services account operations."
 );

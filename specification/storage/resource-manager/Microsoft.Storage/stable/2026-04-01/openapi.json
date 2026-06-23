@@ -8498,25 +8498,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "AzureEntityResource": {
       "type": "object",
       "title": "Entity Resource",
@@ -9094,7 +9075,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+          "$ref": "#/definitions/TrackedResourceUpdate"
         }
       ]
     },
@@ -9390,7 +9371,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+          "$ref": "#/definitions/TrackedResourceUpdate"
         }
       ]
     },
@@ -16219,6 +16200,24 @@
       },
       "required": [
         "uniqueId"
+      ]
+    },
+    "TrackedResourceUpdate": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
       ]
     },
     "TriggerParameters": {

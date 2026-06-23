@@ -28,6 +28,7 @@ import "./PrivateEndpointConnectionResource.tsp";
 import "./GlobalParameterResource.tsp";
 import "./ChangeDataCaptureResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -59,6 +60,7 @@ interface Operations
       Error = CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists the available Azure Data Factory API operations."
 );

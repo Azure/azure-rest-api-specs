@@ -9,6 +9,7 @@ import "./FirewallRule.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Replica.tsp";
 import "./User.tsp";
+import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -47,4 +48,10 @@ enum Versions {
 
   /** Azure Cosmos DB for Mongo vCore clusters api version 2025-09-01. */
   v2025_09_01: "2025-09-01",
+
+  /** Azure Cosmos DB for Mongo vCore clusters api version 2026-02-01-preview. */
+  v2026_02_01_preview: "2026-02-01-preview",
+
+  /** Azure Cosmos DB for Mongo vCore clusters api version 2026-06-01. */
+  v2026_06_01: "2026-06-01",
 }

@@ -71,11 +71,13 @@ interface CurrentQuotaLimitBases {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CurrentQuotaLimitBase,
     QuotaPutBaseParam,
-    Response = ArmResourceUpdatedResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
-      QuotaRequestSubmitResponse201,
-      ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResourceUpdatedResponse<CurrentQuotaLimitBase>
+      | ArmCreatedResponse<
+          QuotaRequestSubmitResponse201,
+          ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = ExceptionResponse
   >;
 
@@ -94,11 +96,13 @@ interface CurrentQuotaLimitBases {
     CurrentQuotaLimitBase,
     PatchModel = CurrentQuotaLimitBase,
     BaseParameters = QuotaPatchBaseParam,
-    Response = ArmResponse<CurrentQuotaLimitBase> | ArmCreatedResponse<
-      QuotaRequestSubmitResponse201,
-      ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >,
+    Response =
+      | ArmResponse<CurrentQuotaLimitBase>
+      | ArmCreatedResponse<
+          QuotaRequestSubmitResponse201,
+          ExtraHeaders = ArmLroLocationHeader<FinalResult = CurrentQuotaLimitBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >,
     Error = ExceptionResponse
   >;
 
@@ -121,13 +125,16 @@ interface CurrentQuotaLimitBases {
   >;
 }
 
-@@doc(CurrentQuotaLimitBase.name,
+@@doc(
+  CurrentQuotaLimitBase.name,
   "The resource name for a resource provider, such as SKU name for Microsoft.Compute, Sku or TotalLowPriorityCores for Microsoft.MachineLearningServices"
 );
 @@doc(CurrentQuotaLimitBase.properties, "Quota properties for the resource.");
-@@doc(CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
+@@doc(
+  CurrentQuotaLimitBases.createOrUpdate::parameters.resource,
   "Quota requests payload."
 );
-@@doc(CurrentQuotaLimitBases.update::parameters.properties,
+@@doc(
+  CurrentQuotaLimitBases.update::parameters.properties,
   "Payload for the quota request."
 );

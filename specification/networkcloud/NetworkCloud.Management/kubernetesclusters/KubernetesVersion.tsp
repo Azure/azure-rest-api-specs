@@ -79,7 +79,9 @@ interface KubernetesVersions {
       ...IfMatchParameter;
       ...IfNoneMatchParameter;
     },
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationStatusResult>>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -109,7 +111,8 @@ interface KubernetesVersions {
 
 @@doc(KubernetesVersion.name, "The name of the Kubernetes version resource.");
 @@doc(KubernetesVersion.properties, "The list of the resource properties.");
-@@doc(KubernetesVersions.createOrUpdate::parameters.resource,
+@@doc(
+  KubernetesVersions.createOrUpdate::parameters.resource,
   "The request body."
 );
 @@doc(KubernetesVersions.update::parameters.properties, "The request body.");
