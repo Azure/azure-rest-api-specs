@@ -18512,43 +18512,11 @@
         "format": {
           "type": "string",
           "description": "Optional format for the resolved token; \"{value}\" is the placeholder, e.g. \"Bearer {value}\"."
-        },
-        "type": {
-          "$ref": "#/definitions/RaiEgressManagedIdentityType",
-          "description": "Which managed identity to use. Defaults to SystemAssigned if omitted."
-        },
-        "identityResourceId": {
-          "type": "string",
-          "description": "Resource ID of the user-assigned identity. Required when type is UserAssigned."
         }
       },
       "required": [
         "resource"
       ]
-    },
-    "RaiEgressManagedIdentityType": {
-      "type": "string",
-      "description": "The managed identity type used to resolve a header value from a token.",
-      "enum": [
-        "SystemAssigned",
-        "UserAssigned"
-      ],
-      "x-ms-enum": {
-        "name": "RaiEgressManagedIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssigned",
-            "value": "SystemAssigned",
-            "description": "The sandbox's system-assigned managed identity."
-          },
-          {
-            "name": "UserAssigned",
-            "value": "UserAssigned",
-            "description": "A user-assigned managed identity. When selected, identityResourceId is required."
-          }
-        ]
-      }
     },
     "RaiEgressMode": {
       "type": "string",
@@ -18620,11 +18588,6 @@
         "path": {
           "type": "string",
           "description": "Target path. Original path (and query) is kept if omitted."
-        },
-        "targetPort": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Target port. Original port is kept if omitted."
         }
       }
     },
@@ -18660,7 +18623,7 @@
     },
     "RaiEgressRuleAction": {
       "type": "object",
-      "description": "The action an egress rule takes when it matches.\n- Allow/Deny: no additional fields needed; headers and rewrite must not be set.\n- Transform: headers is required with at least one entry; rewrite must not be set.\n- Rewrite: rewrite is required with at least one of scheme/host/path/targetPort;\nheaders is optional for injecting headers alongside the redirect.",
+      "description": "The action an egress rule takes when it matches.\n- Allow/Deny: no additional fields needed; headers and rewrite must not be set.\n- Transform: headers is required with at least one entry; rewrite must not be set.\n- Rewrite: rewrite is required with at least one of scheme/host/path;\nheaders is optional for injecting headers alongside the redirect.",
       "properties": {
         "actionType": {
           "$ref": "#/definitions/RaiEgressRuleActionType",
