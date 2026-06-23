@@ -66,29 +66,28 @@ interface MetricAlertResources {
    * Retrieve an alert rule definition.
    */
   @tag("MetricAlerts")
-  get is ArmResourceRead<
-    MetricAlertResource,
-    Error = Microsoft.Common.ErrorResponse
-  >;
+  get is ArmResourceRead<MetricAlertResource, Error = MetricAlertErrorResponse>;
 
   /**
-   * Create or update a metric alert definition.
+   * Create or update an metric alert definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("MetricAlerts")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
-    Error = Microsoft.Common.ErrorResponse
+    Response = ArmResourceUpdatedResponse<MetricAlertResource>,
+    Error = MetricAlertErrorResponse
   >;
 
   /**
-   * Update a metric alert definition.
+   * Update an metric alert definition.
    */
   @patch(#{ implicitOptionality: false })
   @tag("MetricAlerts")
   update is ArmCustomPatchSync<
     MetricAlertResource,
     PatchModel = MetricAlertResourcePatch,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -97,7 +96,7 @@ interface MetricAlertResources {
   @tag("MetricAlerts")
   delete is ArmResourceDeleteSync<
     MetricAlertResource,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -107,7 +106,7 @@ interface MetricAlertResources {
   listByResourceGroup is ArmResourceListByParent<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -117,7 +116,7 @@ interface MetricAlertResources {
   listBySubscription is ArmListBySubscription<
     MetricAlertResource,
     Response = ArmResponse<MetricAlertResourceCollection>,
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -137,7 +136,7 @@ interface MetricAlertResources {
       @segment("metricAlerts")
       ruleName: string;
     },
-    Error = Microsoft.Common.ErrorResponse
+    Error = MetricAlertErrorResponse
   >;
 
   /**
@@ -156,7 +155,7 @@ interface MetricAlertResources {
       @segment("status")
       statusName: string;
     },
-    OverrideErrorType = Microsoft.Common.ErrorResponse
+    OverrideErrorType = MetricAlertErrorResponse
   >;
 }
 
