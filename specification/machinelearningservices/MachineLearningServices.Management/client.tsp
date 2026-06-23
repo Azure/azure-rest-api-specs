@@ -939,21 +939,51 @@ using Microsoft.MachineLearningServices;
 @@clientName(DeltaModelStatusResponse, "DeltaModelStatusResult", "csharp");
 @@clientName(AzureOpenAiHyperParameters, "AzureOpenAiHyperContent", "csharp");
 @@clientName(
+  FqdnEndpointsPropertyBag,
+  Azure.ClientGenerator.Core.exact("FqdnEndpointsPropertyBag"),
+  "csharp"
+);
+@@clientName(
+  PTUDeploymentUsage,
+  Azure.ClientGenerator.Core.exact("PtuDeploymentUsage"),
+  "csharp"
+);
+@@clientName(
   ManagedNetworkSettingsPropertiesBasicResource,
-  "ManagedNetworkSettingsPropertiesBasic",
+  "MachineLearningManagedNetworkSettings",
   "csharp"
 );
 @@clientName(
   RaiBlocklistItemPropertiesBasicResource,
-  "RaiBlocklistItemPropertiesBasic",
+  "RaiBlocklistItem",
   "csharp"
 );
 @@clientName(
   RaiBlocklistPropertiesBasicResource,
-  "RaiBlocklistPropertiesBasic",
+  "RaiBlocklist",
   "csharp"
 );
 @@clientName(RaiPolicyPropertiesBasicResource, "RaiPolicy", "csharp");
+@@clientName(
+  EndpointModelDeprecationProperties.fineTune,
+  "FineTuneOn",
+  "csharp"
+);
+@@clientName(
+  EndpointModelDeprecationProperties.inference,
+  "InferenceOn",
+  "csharp"
+);
+@@alternateType(
+  EndpointResourceProperties.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RegistryListCredentialsResult.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 @@clientName(
   WorkspaceProperties.provisionNetworkNow,
   "IsProvisionNetworkNow",
