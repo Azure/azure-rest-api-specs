@@ -18592,21 +18592,10 @@
         },
         "rules": {
           "type": "array",
-          "description": "Ordered list of user-defined egress rules. First matching rule wins.",
+          "description": "Ordered list of egress rules. First matching rule wins.\nRules are evaluated in declaration order; the first rule whose match criteria\nare satisfied determines the action taken on the request.",
           "items": {
             "$ref": "#/definitions/RaiEgressRule"
           },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "systemRules": {
-          "type": "array",
-          "description": "Read-only list of system-managed rules that ensure Azure infrastructure\nconnectivity (e.g., storage, authentication, monitoring endpoints).\nThese rules are always enforced regardless of user-defined rules and\ncannot be modified or removed by users.",
-          "items": {
-            "$ref": "#/definitions/RaiEgressRule"
-          },
-          "readOnly": true,
           "x-ms-identifiers": [
             "name"
           ]

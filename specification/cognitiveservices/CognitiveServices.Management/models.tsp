@@ -6850,18 +6850,10 @@ model RaiEgressPolicyConfig {
   description?: string;
 
   /**
-   * Ordered list of user-defined egress rules. First matching rule wins.
+   * Ordered list of egress rules. First matching rule wins.
+   * Rules are evaluated in declaration order; the first rule whose match criteria
+   * are satisfied determines the action taken on the request.
    */
   @identifiers(#["name"])
   rules?: RaiEgressRule[];
-
-  /**
-   * Read-only list of system-managed rules that ensure Azure infrastructure
-   * connectivity (e.g., storage, authentication, monitoring endpoints).
-   * These rules are always enforced regardless of user-defined rules and
-   * cannot be modified or removed by users.
-   */
-  @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
-  systemRules?: RaiEgressRule[];
 }
