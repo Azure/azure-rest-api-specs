@@ -176,6 +176,11 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
+  EndpointDeploymentResourcePropertiesBasicResources,
+  "MachineLearningWorkspaceConnectionDeployment",
+  "csharp"
+);
+@@clientName(
   EndpointResourcePropertiesBasicResource,
   "MachineLearningEndpoint",
   "csharp"
@@ -1391,6 +1396,11 @@ using Microsoft.MachineLearningServices;
   "java"
 );
 @@clientName(Registries.getBlobReferenceSAS, "getBlobReferenceSas", "java");
+@@clientName(
+  Registries.getBlobReferenceSAS,
+  "GetBlobReferenceSasRegistryDataReference",
+  "csharp"
+);
 @@clientName(NotebookAccessTokenResult.hostName, "hostname", "java");
 @@clientName(UserAccountCredentials.adminUserName, "adminUsername", "java");
 @@clientName(ComputeInstanceSshSettings.adminUserName, "adminUsername", "java");
