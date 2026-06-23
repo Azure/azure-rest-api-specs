@@ -10,6 +10,7 @@ import "./models/summarization.tsp";
 import "./models/pii.tsp";
 import "./models/common.tsp";
 import "./models/common.union.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

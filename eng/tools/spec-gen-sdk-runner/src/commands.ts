@@ -10,6 +10,7 @@ import {
   parseAzsdkResponse,
 } from "./azsdk-adapter.ts";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getExecutionReport,
@@ -28,6 +29,7 @@ import {
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
 import { LogLevel, logMessage, vsoAddAttachment, vsoLogIssue } from "./log.ts";
+import { validatePythonPackagesOnPyPI } from "./python-pypi-validation.ts";
 import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
@@ -328,6 +330,7 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     }
 
     logMessage(`Generating SDK from ${changedSpecPathText}`, LogLevel.Group);
+    let pipelineErrorsToLogAfterGroup: string[] = [];
 
     if (tool === "skipped") {
       logMessage(
@@ -379,6 +382,24 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
+        if (commandInput.sdkLanguage === "azure-sdk-for-python") {
+          const pythonPackageValidation = await validatePythonPackagesOnPyPI(
+            executionReport.packages,
+          );
+          if (!pythonPackageValidation.succeeded) {
+            statusCode = 1;
+            executionReport.executionResult = "failed";
+            if (executionReport.vsoLogPath) {
+              appendErrorsToVsoLog(
+                executionReport.vsoLogPath,
+                "Python package namespace validation",
+                pythonPackageValidation.errors,
+              );
+            } else {
+              pipelineErrorsToLogAfterGroup = pythonPackageValidation.errors;
+            }
+          }
+        }
       } catch (error) {
         logMessage(`Runner: error reading execution-report.json:${inspect(error)}`, LogLevel.Error);
         statusCode = 1;
@@ -426,6 +447,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
     logMessage("ending group logging", LogLevel.EndGroup);
     if (executionReport?.vsoLogPath) {
       logIssuesToPipeline(executionReport.vsoLogPath, changedSpecPathText);
+    } else {
+      for (const error of pipelineErrorsToLogAfterGroup) {
+        vsoLogIssue(error);
+      }
     }
   }
   // Process the spec-gen-sdk artifacts

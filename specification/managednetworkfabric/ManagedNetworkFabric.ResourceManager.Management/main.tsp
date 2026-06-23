@@ -60,6 +60,7 @@ import "./resources/NetworkBootstrapInterface.tsp";
 import "./resources/EdgeConnector.tsp";
 import "./resources/Fabric.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
