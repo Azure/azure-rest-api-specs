@@ -16,6 +16,9 @@ model DevicePropertiesBase {
   /** Device model. */
   `model`?: string;
 
-  /** The software revision for this device. */
+  /** Device hardware revision. */
+  hardwareRevision?: string;
+
+  /** Device software revision. */
   softwareRevision?: string;
 }

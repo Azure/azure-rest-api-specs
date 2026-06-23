@@ -22,7 +22,7 @@ model ProvisionedResourceRef {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required to mirror C# class hierarchy emitted by @typespec/http-server-csharp; no polymorphic dispatch."
 @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
 model ProvisionedDeviceRef extends ProvisionedResourceRef {
-  /** The IoT Hub device id (equal to the originating request's iotHubDeviceId). */
+  /** The external device identity (equal to the originating request's externalDeviceId). */
   externalDeviceId: string;
 }
 
@@ -32,14 +32,4 @@ model ProvisionedDeviceRef extends ProvisionedResourceRef {
 model ProvisionedAuthProfileRef extends ProvisionedResourceRef {
   /** GUID identifying the underlying credential. Only set for CertificateAuthority authentication; omitted otherwise. */
   credentialId?: string;
-}
-
-/** Reference to the messaging endpoint the device was provisioned against. */
-@added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-model ProvisionedEndpointRef {
-  /** Display name of the target endpoint. */
-  name: string;
-
-  /** IoT Hub service endpoint address (e.g. myhub.azure-devices.net), echoed from the originating request. */
-  address: string;
 }

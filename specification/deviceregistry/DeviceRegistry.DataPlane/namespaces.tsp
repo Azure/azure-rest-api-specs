@@ -35,11 +35,12 @@ union ReportType {
 }
 
 /**
- * Request body for generating a report.
+ * Selector identifying a report by type and target. Shared as the request
+ * body for both the `:generateReport` and `:getLatestReport` actions.
  */
 @discriminator("reportType")
-model GenerateReportRequest {
-  /** The type of report to generate. */
+model ReportSelector {
+  /** The type of report. */
   reportType: ReportType;
 
   /** The target of this report (e.g. group resource). */
@@ -89,18 +90,19 @@ model NamespaceUpdateComplianceReport extends Report {
 // Concrete request stubs (one per ReportType).
 // Add report-specific input fields to the relevant subclass as the
 // product evolves; each subclass already inherits `reportTarget` and
-// pins its `reportType` discriminator.
+// pins its `reportType` discriminator. They extend `ReportSelector`
+// (the discriminated base) so the `reportType` discriminator is
+// preserved; the LRO id header is layered on separately at the
+// `:generateReport` operation, not on these selector variants.
 // ──────────────────────────────────────────────
 
 /** Request to generate a NamespaceUpdateCompliance report. */
-model GenerateNamespaceUpdateComplianceReportRequest
-  extends GenerateReportRequest {
+model NamespaceUpdateComplianceReportRequest extends ReportSelector {
   reportType: ReportType.NamespaceUpdateComplianceReport;
 }
 
 /** Request to generate a GroupBestUpdates compliance report. */
-model GenerateGroupBestUpdatesComplianceReportRequest
-  extends GenerateReportRequest {
+model GroupBestUpdatesComplianceReportRequest extends ReportSelector {
   reportType: ReportType.GroupBestUpdatesComplianceReport;
 
   /** The group that the report is generated against. */
@@ -108,8 +110,7 @@ model GenerateGroupBestUpdatesComplianceReportRequest
 }
 
 /** Request to generate a GroupInstallableUpdates report. */
-model GenerateGroupInstallableUpdatesReportRequest
-  extends GenerateReportRequest {
+model GroupInstallableUpdatesReportRequest extends ReportSelector {
   reportType: ReportType.GroupInstallableUpdatesReport;
 
   /** The group that the report is generated against. */
@@ -235,6 +236,14 @@ model GroupInstallableUpdatesReport extends Report {
 @resource("generateReportResults")
 model GenerateReportResult is LongRunningOperationStatus<Report>;
 
+/**
+ * Request for the long-running `:generateReport` action: a report selector
+ * combined with the long-running operation id header. Defined as an alias so
+ * the `reportType` discriminator on `ReportSelector` is preserved on the wire
+ * (a spread `model` would flatten it and break `@discriminator`).
+ */
+alias GenerateReportRequest = ReportSelector & LongRunningOperationIdHeader;
+
 // ──────────────────────────────────────────────
 // Namespaces interface
 // ──────────────────────────────────────────────
@@ -246,10 +255,21 @@ interface Namespaces {
   @pollingOperation(GenerateReportResults.get)
   generateReport is ResourceOperations.LongRunningResourceAction<
     Namespace,
-    GenerateReportRequest & LongRunningOperationIdHeader,
+    GenerateReportRequest,
     Report,
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait
+  >;
+
+  /**
+   * Get the most recently generated report of the given type and target
+   * without triggering a new report generation. Returns the report directly
+   * with 200 OK; no polling.
+   */
+  getLatestReport is ResourceOperations.ResourceAction<
+    Namespace,
+    ReportSelector,
+    Report
   >;
 }
 

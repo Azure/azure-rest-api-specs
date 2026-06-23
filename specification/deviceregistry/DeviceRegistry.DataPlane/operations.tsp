@@ -6,11 +6,7 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 import "./common/longRunningOperation.tsp";
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
-using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -35,7 +31,11 @@ model Operation is LongRunningOperationStatus;
 /** Operations on long-running operation status resources. */
 @tag("Operations")
 interface Operations {
-  /** Get the status of a long-running operation. */
+  /**
+   * Get the latest state for a namespace-scoped long-running operation.
+   * Returns the current status, and includes error details when the operation
+   * reaches a failed terminal state.
+   */
   get is ResourceOperations.ResourceRead<
     Operation,
     LongRunningStatusMonitorResponseHeadersTrait

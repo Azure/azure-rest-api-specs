@@ -38,7 +38,7 @@ model GroupProperties {
 
   /** The provisioning state of the resource. */
   @visibility(Lifecycle.Read)
-  provisioningState?: string;
+  provisioningState?: ProvisioningState;
 }
 
 // ──────────────────────────────────────────────

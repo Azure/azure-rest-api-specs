@@ -5,16 +5,13 @@
     "endpoint": "https://eastus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-02-preview",
     "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
-    "mode": "registryOnly",
+    "mode": "RegistryOnly",
     "Operation-Id": "op-hub-prov-001",
     "body": {
-      "iotHubDeviceId": "hub-device-001",
-      "targetEndpoint": {
-        "name": "my-iothub",
-        "address": "my-iothub.azure-devices.net"
-      },
+      "externalDeviceId": "hub-device-001",
+      "messagingEndpointName": "my-iothub",
       "authentication": {
-        "type": "X509HubUploadedCertificateAuthority"
+        "authenticationType": "X509HubUploadedCertificateAuthority"
       }
     }
   },

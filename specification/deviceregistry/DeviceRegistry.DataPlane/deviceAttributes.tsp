@@ -6,8 +6,6 @@ import "./devices.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
-using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -34,7 +32,11 @@ union DeviceAttributeReportedBy {
   User: "User",
 }
 
-/** A device attribute resource that holds properties managed by cloud services and not sent to the device. */
+/**
+ * A device attribute resource stores cloud-side metadata for a device, such as software versions reported
+ * by Azure Device Update or user-defined device attribution used to select the devices during management
+ * workflows. It is separate from live device telemetry.
+ */
 @resource("attributes")
 @parentResource(Device)
 @discriminator("reportedBy")
@@ -235,16 +237,16 @@ union InstallResultOutcome {
   string,
 
   /** The step or workflow completed successfully. */
-  SUCCEEDED: "SUCCEEDED",
+  Succeeded: "SUCCEEDED",
 
   /** The step or workflow failed. */
-  FAILED: "FAILED",
+  Failed: "FAILED",
 
   /** The step or workflow was canceled before reaching a terminal state. */
-  CANCELED: "CANCELED",
+  Canceled: "CANCELED",
 
   /** The step was skipped because it was not required. */
-  SKIPPED: "SKIPPED",
+  Skipped: "SKIPPED",
 }
 
 /** Best-effort hint identifying which subsystem produced an install failure. */
@@ -252,35 +254,35 @@ union InstallResultFailureOrigin {
   string,
 
   /** Failure communicating with the ADU cloud service. */
-  ADU_CLOUD_SERVICE: "ADU_CLOUD_SERVICE",
+  AduCloudService: "ADU_CLOUD_SERVICE",
 
   /** Failure related to ADU managed resources. (e.g. CDN download failure) */
-  ADU_MANAGED_RESOURCE: "ADU_MANAGED_RESOURCE",
+  AduManagedResource: "ADU_MANAGED_RESOURCE",
 
   /** Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities). */
-  AGENT_CORE: "AGENT_CORE",
+  AgentCore: "AGENT_CORE",
 
   /** Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly. */
-  AGENT_EXTENSION: "AGENT_EXTENSION",
+  AgentExtension: "AGENT_EXTENSION",
 
   /** Failure in an agent dependency (e.g. local identity service). */
-  AGENT_DEPENDENCY: "AGENT_DEPENDENCY",
+  AgentDependency: "AGENT_DEPENDENCY",
 
   /** Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions. */
-  DEVICE: "DEVICE",
+  Device: "DEVICE",
 
   /** Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin. */
-  OTHER: "OTHER",
+  Other: "OTHER",
 
   /** This failure origin must be used for non-failed result outcomes. */
-  NOT_APPLICABLE: "NOT_APPLICABLE",
+  NotApplicable: "NOT_APPLICABLE",
 }
 
 // ──────────────────────────────────────────────
 // Device attributes interface
 // ──────────────────────────────────────────────
 
-/** CRUD operations on device attributes. */
+/** Operations on device attributes. */
 @tag("Device Attributes")
 interface DeviceAttributes {
   /** Create or replace a device attribute. */

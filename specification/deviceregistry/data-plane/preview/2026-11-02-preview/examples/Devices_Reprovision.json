@@ -5,16 +5,13 @@
     "endpoint": "https://eastus.api.deviceregistry.contoso.com",
     "api-version": "2026-11-02-preview",
     "namespaceUuid": "00000000-0000-0000-0000-000000000099",
-    "deviceName": "device-abc-123",
     "If-Match": "\"etag-value-from-get-device\"",
     "Operation-Id": "op-reprov-001",
     "body": {
-      "targetEndpoint": {
-        "name": "my-new-iothub-endpoint-key",
-        "address": "my-new-iothub.azure-devices.net"
-      },
+      "externalDeviceId": "device-abc-123",
+      "messagingEndpointName": "my-new-iothub-endpoint-key",
       "authentication": {
-        "type": "SymmetricKey",
+        "authenticationType": "SymmetricKey",
         "symmetricKey": {
           "primaryKey": "dGhpcyBpcyBhIG5ldyBwcmltYXJ5IGtleQ==",
           "secondaryKey": "dGhpcyBpcyBhIG5ldyBzZWNvbmRhcnkga2V5"

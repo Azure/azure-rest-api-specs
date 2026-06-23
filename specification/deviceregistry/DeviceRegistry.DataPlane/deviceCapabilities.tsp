@@ -8,18 +8,20 @@ import "./devices.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
 // ──────────────────────────────────────────────
 // Device capability resource
-// NOTE: DeviceCapabilityProperties is aligned with the control plane capability models.
-// Keep in sync when making changes.
 // ──────────────────────────────────────────────
 
-/** A device capability resource. */
+/**
+ * A device capability resource represents the device's connection to a service such as IoT Hub
+ * or Device Update. It stores settings for the connection, including whether the service is
+ * enabled for the device and the authentication profile the device uses to communicate
+ * with the service.
+ */
 @resource("capabilities")
 @parentResource(Device)
 model DeviceCapability {
@@ -149,8 +151,9 @@ interface DeviceCapabilities {
   get is ResourceOperations.ResourceRead<DeviceCapability>;
 
   /** Update a device capability. */
+  @pollingOperation(Operations.get)
   @added(Versions.v2026_11_02_preview) // Private Preview (Internal) at Ignite
-  update is ResourceOperations.ResourceCreateOrUpdate<DeviceCapability>;
+  update is ResourceOperations.LongRunningResourceCreateOrUpdate<DeviceCapability>;
 
   /** Delete a device capability. This is a long-running operation that tears down any provider-side resources (e.g. IoT Hub device registration) before removing the capability document. */
   @pollingOperation(Operations.get)

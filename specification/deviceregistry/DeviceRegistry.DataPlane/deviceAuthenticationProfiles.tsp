@@ -11,8 +11,6 @@ using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 using Azure.Core;
-using Azure.Core.Foundations;
-using Azure.Core.Traits;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -20,7 +18,11 @@ namespace Microsoft.DeviceRegistry;
 // Device authentication resource
 // ──────────────────────────────────────────────
 
-/** A device authentication resource. */
+/**
+ * A device authentication profile resource defines how a device authenticates to cloud services such
+ * as IoT Hub and Device Update. Supported authentication types include symmetric key and X.509 certificate
+ * authentication.
+ */
 @resource("authenticationProfiles")
 @parentResource(Device)
 model DeviceAuthenticationProfile {
@@ -33,10 +35,10 @@ model DeviceAuthenticationProfile {
 @@key(DeviceAuthenticationProfile.name, "authenticationProfileName");
 
 /** Authentication information for the device. */
-@discriminator("type")
+@discriminator("authenticationType")
 model AuthenticationProfileProperties {
   /** The authentication type. */
-  type: AuthenticationType;
+  authenticationType: AuthenticationType;
 }
 
 /** The authentication type for IoT Hub. */
@@ -62,7 +64,7 @@ union AuthenticationType {
 model SymmetricKeyAuthenticationProfileProperties
   extends AuthenticationProfileProperties {
   /** The authentication type. */
-  type: AuthenticationType.SymmetricKey;
+  authenticationType: AuthenticationType.SymmetricKey;
 
   /** Symmetric key details. Required when type is SymmetricKey. */
   symmetricKey: SymmetricKeyCredentials;
@@ -72,7 +74,7 @@ model SymmetricKeyAuthenticationProfileProperties
 model CertificateAuthorityAuthenticationProfileProperties
   extends AuthenticationProfileProperties {
   /** The authentication type. */
-  type: AuthenticationType.CertificateAuthority;
+  authenticationType: AuthenticationType.CertificateAuthority;
 
   /** Certificate authority credentials. Required when type is CertificateAuthority. */
   certificateAuthority: CertificateAuthorityCredentials;
@@ -82,7 +84,7 @@ model CertificateAuthorityAuthenticationProfileProperties
 model SelfSignedX509CertificateAuthenticationProfileProperties
   extends AuthenticationProfileProperties {
   /** The authentication type. */
-  type: AuthenticationType.SelfSignedX509Certificate;
+  authenticationType: AuthenticationType.SelfSignedX509Certificate;
 
   /** Self-signed X.509 thumbprints. Required when type is SelfSignedX509Certificate. */
   selfSignedThumbprints: SelfSignedThumbprints;
@@ -93,7 +95,7 @@ model SelfSignedX509CertificateAuthenticationProfileProperties
 model X509HubUploadedCertificateAuthorityAuthenticationProfileProperties
   extends AuthenticationProfileProperties {
   /** The authentication type. */
-  type: AuthenticationType.X509HubUploadedCertificateAuthority;
+  authenticationType: AuthenticationType.X509HubUploadedCertificateAuthority;
 }
 
 /** Symmetric key authentication details. */
@@ -249,7 +251,7 @@ interface DeviceAuthenticationProfiles {
   @pollingOperation(IssueCertResults.get)
   issueCert is ResourceOperations.LongRunningResourceAction<
     DeviceAuthenticationProfile,
-    CertificateIssuanceRequest & LongRunningOperationIdHeader,
+    CertificateIssuanceRequest,
     {},
     Azure.Core.Foundations.Error,
     LongRunningActionResponseHeadersTrait

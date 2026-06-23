@@ -97,7 +97,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GenerateReportRequest"
+              "$ref": "#/definitions/ReportSelector"
             }
           }
         ],
@@ -172,6 +172,66 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/namespaces/{namespaceUuid}:getLatestReport": {
+      "post": {
+        "operationId": "Namespaces_GetLatestReport",
+        "tags": [
+          "Namespaces"
+        ],
+        "description": "Get the most recently generated report of the given type and target\nwithout triggering a new report generation. Returns the report directly\nwith 200 OK; no polling.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "namespaceUuid",
+            "in": "path",
+            "description": "The unique identifier of the namespace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportSelector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Report"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the latest group best-updates compliance report": {
+            "$ref": "./examples/Namespaces_GetLatestReport_GroupBestUpdates.json"
+          },
+          "Get the latest group installable-updates report": {
+            "$ref": "./examples/Namespaces_GetLatestReport_GroupInstallableUpdates.json"
+          },
+          "Get the latest namespace update compliance report": {
+            "$ref": "./examples/Namespaces_GetLatestReport.json"
+          }
+        }
       }
     },
     "/namespaces/{namespaceUuid}/devices/{deviceName}/attributes": {
@@ -894,7 +954,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Get the status of a long-running operation.",
+        "description": "Get the latest state for a namespace-scoped long-running operation.\nReturns the current status, and includes error details when the operation\nreaches a failed terminal state.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -976,14 +1036,14 @@
       "type": "object",
       "description": "Authentication information for the device.",
       "properties": {
-        "type": {
+        "authenticationType": {
           "$ref": "#/definitions/AuthenticationType",
           "description": "The authentication type."
         }
       },
-      "discriminator": "type",
+      "discriminator": "authenticationType",
       "required": [
-        "type"
+        "authenticationType"
       ]
     },
     "AuthenticationType": {
@@ -1286,16 +1346,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1323,16 +1380,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1351,20 +1405,17 @@
     },
     "DeviceAttribute": {
       "type": "object",
-      "description": "A device attribute resource that holds properties managed by cloud services and not sent to the device.",
+      "description": "A device attribute resource stores cloud-side metadata for a device, such as software versions reported\nby Azure Device Update or user-defined device attribution used to select the devices during management\nworkflows. It is separate from live device telemetry.",
       "properties": {
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1440,7 +1491,7 @@
     },
     "DeviceAuthenticationProfile": {
       "type": "object",
-      "description": "A device authentication resource.",
+      "description": "A device authentication profile resource defines how a device authenticates to cloud services such\nas IoT Hub and Device Update. Supported authentication types include symmetric key and X.509 certificate\nauthentication.",
       "properties": {
         "name": {
           "type": "string",
@@ -1453,16 +1504,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1481,7 +1529,7 @@
     },
     "DeviceCapability": {
       "type": "object",
-      "description": "A device capability resource.",
+      "description": "A device capability resource represents the device's connection to a service such as IoT Hub\nor Device Update. It stores settings for the connection, including whether the service is\nenabled for the device and the authentication profile the device uses to communicate\nwith the service.",
       "properties": {
         "name": {
           "type": "string",
@@ -1494,16 +1542,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1601,12 +1646,16 @@
           "type": "string",
           "description": "Device model."
         },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Device hardware revision."
+        },
         "softwareRevision": {
           "type": "string",
-          "description": "The software revision for this device."
+          "description": "Device software revision."
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -1637,52 +1686,15 @@
           "type": "string",
           "description": "Device model."
         },
+        "hardwareRevision": {
+          "type": "string",
+          "description": "Device hardware revision."
+        },
         "softwareRevision": {
           "type": "string",
-          "description": "The software revision for this device."
+          "description": "Device software revision."
         }
       }
-    },
-    "DeviceResponse": {
-      "type": "object",
-      "description": "Response model for device lookup POST actions (excludes deviceName key).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "uuid": {
-          "type": "string",
-          "description": "The UUID of this capability resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The entity tag for the resource.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/DeviceProperties",
-          "description": "The resource-specific properties for this device."
-        }
-      },
-      "required": [
-        "name",
-        "type"
-      ]
     },
     "DeviceTwin": {
       "type": "object",
@@ -1720,72 +1732,6 @@
         "provider",
         "name",
         "version"
-      ]
-    },
-    "GenerateGroupBestUpdatesComplianceReportRequest": {
-      "type": "object",
-      "description": "Request to generate a GroupBestUpdates compliance report.",
-      "properties": {
-        "reportTarget": {
-          "type": "string",
-          "description": "The group that the report is generated against."
-        }
-      },
-      "required": [
-        "reportTarget"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
-    },
-    "GenerateGroupInstallableUpdatesReportRequest": {
-      "type": "object",
-      "description": "Request to generate a GroupInstallableUpdates report.",
-      "properties": {
-        "reportTarget": {
-          "type": "string",
-          "description": "The group that the report is generated against."
-        }
-      },
-      "required": [
-        "reportTarget"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
-    },
-    "GenerateNamespaceUpdateComplianceReportRequest": {
-      "type": "object",
-      "description": "Request to generate a NamespaceUpdateCompliance report.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/GenerateReportRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
-    },
-    "GenerateReportRequest": {
-      "type": "object",
-      "description": "Request body for generating a report.",
-      "properties": {
-        "reportType": {
-          "$ref": "#/definitions/ReportType",
-          "description": "The type of report to generate."
-        },
-        "reportTarget": {
-          "type": "string",
-          "description": "The target of this report (e.g. group resource)."
-        }
-      },
-      "discriminator": "reportType",
-      "required": [
-        "reportType"
       ]
     },
     "GenerateReportResult": {
@@ -1910,16 +1856,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -1955,16 +1898,13 @@
         },
         "uuid": {
           "type": "string",
-          "description": "The UUID of this capability resource.",
+          "description": "Globally unique, immutable, non-reusable identifier of the resource.",
           "readOnly": true
         },
         "type": {
           "type": "string",
           "description": "The type of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "etag": {
           "type": "string",
@@ -2016,6 +1956,25 @@
       ],
       "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
     },
+    "GroupBestUpdatesComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupBestUpdates compliance report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupBestUpdatesComplianceReport"
+    },
     "GroupInstallableUpdatesReport": {
       "type": "object",
       "description": "Result of a GroupInstallableUpdates report.",
@@ -2041,6 +2000,25 @@
       "allOf": [
         {
           "$ref": "#/definitions/Report"
+        }
+      ],
+      "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
+    },
+    "GroupInstallableUpdatesReportRequest": {
+      "type": "object",
+      "description": "Request to generate a GroupInstallableUpdates report.",
+      "properties": {
+        "reportTarget": {
+          "type": "string",
+          "description": "The group that the report is generated against."
+        }
+      },
+      "required": [
+        "reportTarget"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
         }
       ],
       "x-ms-discriminator-value": "GroupInstallableUpdatesReport"
@@ -2115,7 +2093,7 @@
           ]
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
           "readOnly": true
         }
@@ -2310,42 +2288,42 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "ADU_CLOUD_SERVICE",
+            "name": "AduCloudService",
             "value": "ADU_CLOUD_SERVICE",
             "description": "Failure communicating with the ADU cloud service."
           },
           {
-            "name": "ADU_MANAGED_RESOURCE",
+            "name": "AduManagedResource",
             "value": "ADU_MANAGED_RESOURCE",
             "description": "Failure related to ADU managed resources. (e.g. CDN download failure)"
           },
           {
-            "name": "AGENT_CORE",
+            "name": "AgentCore",
             "value": "AGENT_CORE",
             "description": "Failure in the ADU agent core components (workflow, state machine, manifest parsing, common utilities)."
           },
           {
-            "name": "AGENT_EXTENSION",
+            "name": "AgentExtension",
             "value": "AGENT_EXTENSION",
             "description": "Failure in a customer-supplied content handler or extension code (content handler, communication provider, log provider, component enumerator). The ADU agent core functioned correctly."
           },
           {
-            "name": "AGENT_DEPENDENCY",
+            "name": "AgentDependency",
             "value": "AGENT_DEPENDENCY",
             "description": "Failure in an agent dependency (e.g. local identity service)."
           },
           {
-            "name": "DEVICE",
+            "name": "Device",
             "value": "DEVICE",
             "description": "Device-side problem — storage, battery, hardware fault, transient device condition (busy, maintenance mode), permissions."
           },
           {
-            "name": "OTHER",
+            "name": "Other",
             "value": "OTHER",
             "description": "Failure origin does not fit into any of the predefined categories. This is also used as the default failure origin."
           },
           {
-            "name": "NOT_APPLICABLE",
+            "name": "NotApplicable",
             "value": "NOT_APPLICABLE",
             "description": "This failure origin must be used for non-failed result outcomes."
           }
@@ -2366,22 +2344,22 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "SUCCEEDED",
+            "name": "Succeeded",
             "value": "SUCCEEDED",
             "description": "The step or workflow completed successfully."
           },
           {
-            "name": "FAILED",
+            "name": "Failed",
             "value": "FAILED",
             "description": "The step or workflow failed."
           },
           {
-            "name": "CANCELED",
+            "name": "Canceled",
             "value": "CANCELED",
             "description": "The step or workflow was canceled before reaching a terminal state."
           },
           {
-            "name": "SKIPPED",
+            "name": "Skipped",
             "value": "SKIPPED",
             "description": "The step was skipped because it was not required."
           }
@@ -2570,6 +2548,16 @@
       ],
       "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
     },
+    "NamespaceUpdateComplianceReportRequest": {
+      "type": "object",
+      "description": "Request to generate a NamespaceUpdateCompliance report.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReportSelector"
+        }
+      ],
+      "x-ms-discriminator-value": "NamespaceUpdateComplianceReport"
+    },
     "Operation": {
       "type": "object",
       "description": "Central status monitor for resource long-running operations on a namespace\n(e.g. DeviceCapability create-or-replace / delete). Action LROs (POST\n`:verb` endpoints) have their own per-action status-monitor endpoints\nand do not surface here.",
@@ -2670,32 +2658,47 @@
         "value"
       ]
     },
-    "ProvisionDeviceRequest": {
-      "type": "object",
-      "description": "Request body for the provision device endpoint.",
-      "properties": {
-        "iotHubDeviceId": {
-          "type": "string",
-          "description": "The device identity in IoT Hub."
-        },
-        "targetEndpoint": {
-          "$ref": "#/definitions/IotHubEndpoint",
-          "description": "The service endpoint identifier as returned by the GetNamespace API."
-        },
-        "authentication": {
-          "$ref": "#/definitions/AuthenticationProfileProperties",
-          "description": "Operational authentication configuration."
-        },
-        "deviceTwin": {
-          "$ref": "#/definitions/DeviceTwin",
-          "description": "Initial device twin configuration to apply during provisioning."
-        }
-      },
-      "required": [
-        "iotHubDeviceId",
-        "targetEndpoint",
-        "authentication"
-      ]
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a data-plane resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Resource has been accepted by the server."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
+          }
+        ]
+      }
     },
     "QueryDevicesRequest": {
       "type": "object",
@@ -2753,6 +2756,24 @@
           "type": "string",
           "description": "The scope the report was generated against.",
           "readOnly": true
+        }
+      },
+      "discriminator": "reportType",
+      "required": [
+        "reportType"
+      ]
+    },
+    "ReportSelector": {
+      "type": "object",
+      "description": "Selector identifying a report by type and target. Shared as the request\nbody for both the `:generateReport` and `:getLatestReport` actions.",
+      "properties": {
+        "reportType": {
+          "$ref": "#/definitions/ReportType",
+          "description": "The type of report."
+        },
+        "reportTarget": {
+          "type": "string",
+          "description": "The target of this report (e.g. group resource)."
         }
       },
       "discriminator": "reportType",

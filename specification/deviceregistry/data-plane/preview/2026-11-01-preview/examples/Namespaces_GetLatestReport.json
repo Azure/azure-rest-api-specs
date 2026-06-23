@@ -1,0 +1,24 @@
+{
+  "operationId": "Namespaces_GetLatestReport",
+  "title": "Get the latest namespace update compliance report",
+  "parameters": {
+    "endpoint": "https://westus.api.deviceregistry.contoso.com",
+    "api-version": "2026-11-01-preview",
+    "namespaceUuid": "a1b2c3d4-5678-90ab-cdef-1234567890ab",
+    "body": {
+      "reportType": "NamespaceUpdateComplianceReport"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "reportType": "NamespaceUpdateComplianceReport",
+        "totalUpdateableDeviceCount": 120,
+        "onLatestUpdateDeviceCount": 95,
+        "newUpdatesAvailableDeviceCount": 20,
+        "updatesInProgressDeviceCount": 5,
+        "totalNotUpdateableDeviceCount": 8
+      }
+    }
+  }
+}
