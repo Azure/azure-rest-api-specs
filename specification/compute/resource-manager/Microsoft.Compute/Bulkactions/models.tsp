@@ -555,7 +555,7 @@ model ExecuteDeallocateRequest {
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information")
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -569,7 +569,7 @@ model ExecuteHibernateRequest {
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information")
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -583,7 +583,7 @@ model ExecuteStartRequest {
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information")
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 }
 
@@ -638,7 +638,7 @@ model ExecuteReimageRequest {
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information")
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 
   @doc("Reimage parameters including base profile and per-resource overrides")
@@ -706,7 +706,7 @@ model ExecuteDeleteRequest {
   resources?: Resources;
 
   @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
-  @doc("The resources for the request with resource context information")
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
   resourcesWithContext?: ResourcesWithContext;
 
   @doc("Forced delete resource item")

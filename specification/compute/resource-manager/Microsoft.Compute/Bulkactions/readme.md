@@ -106,6 +106,11 @@ suppressions:
       (cascade-delete VMs yes or no), so an enum would add no expressive power.
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/{name}"].delete.parameters[*]
+  - code: EnumInsteadOfBoolean
+    reason: >
+      verifyVmAgentHealth is a binary on-off flag indicating whether to perform a post-Start VM agent health check (yes or no), so an enum would add no expressive power.
+    from: Bulkactions.json
+    where: $.definitions.ExecutionParameters.properties.verifyVmAgentHealth
   - code: PathForNestedResource
     reason: >
       The GetOperationStatus endpoint is the async operation poller URL for
