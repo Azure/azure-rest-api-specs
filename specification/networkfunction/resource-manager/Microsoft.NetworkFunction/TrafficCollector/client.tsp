@@ -5,6 +5,10 @@ using Azure.ClientGenerator.Core;
 using Microsoft.NetworkFunction;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 @@clientName(
   Microsoft.NetworkFunction,
@@ -86,6 +90,8 @@ namespace Microsoft.NetworkFunction {
        * azureTrafficCollectorName.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      @segment("azureTrafficCollectors")
       azureTrafficCollectorName: string,
 
       /**
@@ -124,7 +130,7 @@ namespace Microsoft.NetworkFunction {
   @armResourceOperations
   interface CollectorPoliciesScope {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-    createOrUpdateDuplicate(
+    createOrUpdate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<CollectorPolicy>,
       ...Azure.ResourceManager.ProviderNamespace<CollectorPolicy>,
 
@@ -132,8 +138,12 @@ namespace Microsoft.NetworkFunction {
        * azureTrafficCollectorName.
        */
       #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      @segment("azureTrafficCollectors")
       azureTrafficCollectorName: string,
 
+      @path
+      @segment("collectorPolicies")
       collectorPolicyName: string,
 
       /**
@@ -177,14 +187,14 @@ namespace Microsoft.NetworkFunction {
   }
 
   @@scope(AzureTrafficCollectorsScope.createOrUpdate, "javascript");
-  @@scope(CollectorPoliciesScope.createOrUpdateDuplicate, "javascript");
+  @@scope(CollectorPoliciesScope.createOrUpdate, "javascript");
   @@clientLocation(
     AzureTrafficCollectorsScope.createOrUpdate,
     "AzureTrafficCollectors",
     "javascript"
   );
   @@clientLocation(
-    CollectorPoliciesScope.createOrUpdateDuplicate,
+    CollectorPoliciesScope.createOrUpdate,
     "CollectorPolicies",
     "javascript"
   );
