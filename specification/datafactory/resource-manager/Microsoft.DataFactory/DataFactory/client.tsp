@@ -1700,6 +1700,18 @@ using Microsoft.DataFactory;
   "csharp"
 );
 
+@@clientLocation(Factories.triggersQueryByFactory, Factories, "csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Factories.triggersQueryByFactory,
+  "csharp"
+);
+@@clientName(
+  Factories.triggersQueryByFactory::parameters.body,
+  "content",
+  "csharp"
+);
+
 @@clientLocation(Factories.privateLinkResourcesGet, Factories, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
