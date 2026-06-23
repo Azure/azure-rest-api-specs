@@ -8,6 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
   getRequiredSettingValue,
@@ -368,6 +369,51 @@ describe("commands.ts", () => {
       }).toThrow(`Runner: error reading log at ${mockLogPath}:Error: ${mockLogError}`);
       expect(log.logMessage).not.toHaveBeenCalled();
       expect(log.vsoLogIssue).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("appendErrorsToVsoLog", () => {
+    test("should append errors to an existing log entry", () => {
+      const mockLogContent = {
+        key1: { errors: ["error1"], warnings: ["warning1"] },
+      };
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockLogContent));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "key1", ["error2"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            key1: { errors: ["error1", "error2"], warnings: ["warning1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+
+    test("should create a new log entry when the key does not exist", () => {
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({}));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "Python package namespace validation", ["error1"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            "Python package namespace validation": { errors: ["error1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
     });
   });
 
