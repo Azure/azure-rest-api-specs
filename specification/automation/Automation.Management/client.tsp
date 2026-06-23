@@ -809,6 +809,18 @@ using TypeSpec.Rest;
 @@alternateType(Runbook.etag, Azure.Core.eTag, "csharp");
 @@alternateType(Watcher.etag, Azure.Core.eTag, "csharp");
 @@alternateType(JobSchedule.name, Azure.Core.uuid, "csharp");
+@@alternateType(JobProperties.jobId, Azure.Core.uuid, "csharp");
+@@alternateType(JobCollectionItemProperties.jobId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  updateConfigurationMachineRunProperties.correlationId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  updateConfigurationMachineRunProperties.sourceComputerId,
+  Azure.Core.uuid,
+  "csharp"
+);
 @@alternateType(JobScheduleProperties.jobScheduleId, Azure.Core.uuid, "csharp");
 @@alternateType(
   SoftwareUpdateConfigurationMachineRunIdParameter.softwareUpdateConfigurationMachineRunId,

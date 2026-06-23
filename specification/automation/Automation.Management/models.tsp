@@ -3741,7 +3741,8 @@ model JobProperties {
    * Gets or sets the id of the job.
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  jobId?: Azure.Core.uuid;
+  @format("uuid")
+  jobId?: string;
 
   /**
    * Gets or sets the creation time of the job.
@@ -3887,7 +3888,8 @@ model JobCollectionItemProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  jobId?: Azure.Core.uuid;
+  @format("uuid")
+  jobId?: string;
 
   /**
    * Gets or sets the job started by.
@@ -5482,14 +5484,16 @@ model updateConfigurationMachineRunProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  correlationId?: Azure.Core.uuid;
+  @format("uuid")
+  correlationId?: string;
 
   /**
    * source computer id of the software update configuration machine run
    */
   #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  sourceComputerId?: Azure.Core.uuid;
+  @format("uuid")
+  sourceComputerId?: string;
 
   /**
    * Start time of the software update configuration machine run.
