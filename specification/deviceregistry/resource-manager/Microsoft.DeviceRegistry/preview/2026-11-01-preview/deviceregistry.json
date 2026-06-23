@@ -3761,6 +3761,163 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/policies/{policyName}/activateBringYourOwnRoot": {
+      "post": {
+        "operationId": "Policies_ActivateBringYourOwnRoot",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Activates a Bring Your Own Root (BYOR) certificate authority on a Credential Policy by merging a customer-supplied certificate chain into the policy's ICA.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ActivateBringYourOwnRootRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_ActivateBringYourOwnRoot": {
+            "$ref": "./examples/Policies_ActivateBringYourOwnRoot.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/policies/{policyName}/revokeIssuer": {
+      "post": {
+        "operationId": "Policies_RevokeIssuer",
+        "tags": [
+          "Policies"
+        ],
+        "description": "Revokes the current issuing certificate authority for a Credential Policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "namespaceName",
+            "in": "path",
+            "description": "The name of the namespace.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "The name of the Policy tracked resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[0-9a-zA-Z][a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Policies_RevokeIssuer": {
+            "$ref": "./examples/Policies_RevokeIssuer.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DeviceRegistry/namespaces/{namespaceName}/credentials/default/synchronize": {
       "post": {
         "operationId": "Credentials_Synchronize",
@@ -5835,6 +5992,19 @@
     }
   },
   "definitions": {
+    "ActivateBringYourOwnRootRequest": {
+      "type": "object",
+      "description": "The request body for the activate Bring Your Own Root (BYOR) action on a Credential Policy.",
+      "properties": {
+        "certificateChain": {
+          "type": "string",
+          "description": "Certificate chain in PEM format. Certificates must be ordered from leaf to root and\nconcatenated, including the signed certificate that matches the CSR previously generated\nby the service for this policy."
+        }
+      },
+      "required": [
+        "certificateChain"
+      ]
+    },
     "ActivateCertificateAuthorityRequest": {
       "type": "object",
       "description": "Request payload for activating a Certificate Authority with a signed certificate.",
@@ -6631,6 +6801,68 @@
         }
       }
     },
+    "BringYourOwnRoot": {
+      "type": "object",
+      "description": "Configuration for Bring Your Own Root. When enabled, customers provide their own CA-signed certificates instead of using the service-managed CA.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether Bring Your Own Root is enabled. This can only be set at creation time and cannot be changed afterward.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "certificateSigningRequest": {
+          "type": "string",
+          "description": "Certificate Signing Request (CSR) in PEM format, generated by the service. Sign this CSR\nwith your Certificate Authority and activate via the activateBringYourOwnRoot action. A new\nCSR is generated at policy creation and when certificates near expiration.",
+          "readOnly": true
+        },
+        "issuingCertificateThumbprint": {
+          "type": "string",
+          "description": "Thumbprint of the issuing certificate.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BringYourOwnRootStatus",
+          "description": "The status of the Bring Your Own Root configuration, indicating the current state of the certificate lifecycle.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled"
+      ]
+    },
+    "BringYourOwnRootStatus": {
+      "type": "string",
+      "description": "Status of the Bring Your Own Root configuration.",
+      "enum": [
+        "PendingActivation",
+        "Active",
+        "ActiveButPendingRenewal"
+      ],
+      "x-ms-enum": {
+        "name": "BringYourOwnRootStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PendingActivation",
+            "value": "PendingActivation",
+            "description": "The CSR has been generated and is waiting for the customer to provide the signed certificate."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "The signed certificate has been successfully uploaded and validated, and the CA is active."
+          },
+          {
+            "name": "ActiveButPendingRenewal",
+            "value": "ActiveButPendingRenewal",
+            "description": "The certificate is nearing expiration (within renewal window) or has expired. A new CSR has been generated and is waiting for the customer to provide a new signed certificate."
+          }
+        ]
+      }
+    },
     "BrokerStateStoreDestinationConfiguration": {
       "type": "object",
       "description": "The configuration for a MQTT broker state store destination.",
@@ -6687,6 +6919,10 @@
           "format": "date-time",
           "description": "Certificate is valid not after this date. Format ISO8601. Generated based on validity period.",
           "readOnly": true
+        },
+        "bringYourOwnRoot": {
+          "$ref": "#/definitions/BringYourOwnRoot",
+          "description": "Configuration for Bring Your Own Root."
         }
       },
       "required": [

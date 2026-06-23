@@ -1,0 +1,22 @@
+{
+  "title": "Policies_ActivateBringYourOwnRoot",
+  "operationId": "Policies_ActivateBringYourOwnRoot",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgdeviceregistry",
+    "namespaceName": "mynamespace",
+    "policyName": "mypolicy",
+    "body": {
+      "certificateChain": "-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJANe...\n-----END CERTIFICATE-----\n-----BEGIN CERTIFICATE-----\nMIIBkTCB+wIJANf...\n-----END CERTIFICATE-----"
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    },
+    "204": {}
+  }
+}
