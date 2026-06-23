@@ -21,6 +21,11 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoint, "MachineLearningFqdnEndpoint", "csharp");
 @@clientName(FqdnEndpointDetail, "MachineLearningFqdnEndpointDetail", "csharp");
 @@clientName(FqdnEndpoints, "MachineLearningFqdnEndpoints", "csharp");
+@@clientName(
+  Workspaces.provisionManagedNetwork,
+  "ProvisionManagedNetworkManagedNetworkProvision",
+  "csharp"
+);
 
 // Fix duplicate property names in C# - property and type have same name after PascalCase
 @@clientName(
