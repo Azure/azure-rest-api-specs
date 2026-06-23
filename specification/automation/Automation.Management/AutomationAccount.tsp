@@ -38,9 +38,9 @@ alias SoftwareUpdateConfigurationMachineRunIdParameter = {
   /**
    * The Id of the software update configuration machine run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @path
   @segment("softwareUpdateConfigurationMachineRuns")
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @format("uuid")
   softwareUpdateConfigurationMachineRunId: string;
 };
@@ -49,9 +49,9 @@ alias SoftwareUpdateConfigurationRunIdParameter = {
   /**
    * The Id of the software update configuration run.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @path
   @segment("softwareUpdateConfigurationRuns")
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @format("uuid")
   softwareUpdateConfigurationRunId: string;
 };

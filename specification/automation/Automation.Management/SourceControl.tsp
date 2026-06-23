@@ -29,9 +29,9 @@ alias SourceControlSyncJobIdParameter = {
   /**
    * The source control sync job id.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @path
   @segment("sourceControlSyncJobs")
-  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
   @format("uuid")
   sourceControlSyncJobId: string;
 };
