@@ -1,16 +1,19 @@
 {
-  "title": "CreateOrReplace_CertificateAuthority_BringYourOwn",
+  "title": "CreateOrReplace_CertificateAuthority_ExternalIssuer",
   "operationId": "CertificateAuthorities_CreateOrReplace",
   "parameters": {
     "api-version": "2026-11-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgdeviceregistry",
     "namespaceName": "mynamespace",
-    "certificateAuthorityName": "mybyoca",
+    "certificateAuthorityName": "myexternalica",
     "resource": {
       "properties": {
-        "certificateAuthorityType": "BringYourOwn",
-        "keyType": "ECC"
+        "certificateAuthorityType": "ICA",
+        "keyType": "ECC",
+        "issuer": {
+          "issuerType": "External"
+        }
       },
       "tags": {
         "key1088": "xzrpbqsac"
@@ -24,21 +27,22 @@
         "properties": {
           "provisioningState": "Succeeded",
           "uuid": "00000000-0000-0000-0000-000000000000",
-          "certificateAuthorityType": "BringYourOwn",
+          "certificateAuthorityType": "ICA",
           "keyType": "ECC",
-          "bringYourOwn": {
+          "issuer": {
+            "issuerType": "External",
             "certificateSigningRequest": "-----BEGIN CERTIFICATE REQUEST-----\\nMIID...\\n-----END CERTIFICATE REQUEST-----",
             "thumbprint": "A1B2C3D4E5F6",
             "status": "PendingActivation"
           },
-          "subject": "CN=mybyoca"
+          "subject": "CN=myexternalica"
         },
         "tags": {
           "key1088": "xzrpbqsac"
         },
         "location": "East US 2",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/mybyoca",
-        "name": "mybyoca",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myexternalica",
+        "name": "myexternalica",
         "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities"
       }
     },
@@ -50,21 +54,22 @@
         "properties": {
           "provisioningState": "Succeeded",
           "uuid": "00000000-0000-0000-0000-000000000000",
-          "certificateAuthorityType": "BringYourOwn",
+          "certificateAuthorityType": "ICA",
           "keyType": "ECC",
-          "bringYourOwn": {
+          "issuer": {
+            "issuerType": "External",
             "certificateSigningRequest": "-----BEGIN CERTIFICATE REQUEST-----\\nMIID...\\n-----END CERTIFICATE REQUEST-----",
             "thumbprint": "A1B2C3D4E5F6",
             "status": "PendingActivation"
           },
-          "subject": "CN=mybyoca"
+          "subject": "CN=myexternalica"
         },
         "tags": {
           "key1088": "xzrpbqsac"
         },
         "location": "East US 2",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/mybyoca",
-        "name": "mybyoca",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgdeviceregistry/providers/Microsoft.DeviceRegistry/namespaces/mynamespace/certificateAuthorities/myexternalica",
+        "name": "myexternalica",
         "type": "Microsoft.DeviceRegistry/namespaces/certificateAuthorities"
       }
     }
