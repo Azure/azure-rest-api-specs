@@ -6724,7 +6724,7 @@ model RaiEgressRewriteTarget {
   /** Target host. Original host is kept if omitted. */
   host?: string;
 
-  /** Target path. Original path (and query) is kept if omitted. */
+  /** Target path (literal string). Original path (and query) is kept if omitted. */
   path?: string;
 }
 
@@ -6830,8 +6830,10 @@ model RaiEgressPolicyConfig {
   mode?: RaiEgressMode;
 
   /**
-   * The default action when no user-defined rules match. This is security-critical:
-   * Allow means unmatched traffic is permitted; Deny means it is blocked.
+   * The default action when no user-defined rules match.
+   * Deny blocks unmatched traffic; Allow permits it. Transform and Rewrite rules
+   * are always applied to their matched traffic regardless of this setting —
+   * defaultAction only governs traffic that does not match any rule.
    * If omitted on create, the server defaults to Deny (fail-closed). On subsequent
    * GET requests, the server always returns the effective value.
    */

@@ -18552,7 +18552,7 @@
         },
         "defaultAction": {
           "$ref": "#/definitions/RaiEgressDefaultAction",
-          "description": "The default action when no user-defined rules match. This is security-critical:\nAllow means unmatched traffic is permitted; Deny means it is blocked.\nIf omitted on create, the server defaults to Deny (fail-closed). On subsequent\nGET requests, the server always returns the effective value."
+          "description": "The default action when no user-defined rules match.\nDeny blocks unmatched traffic; Allow permits it. Transform and Rewrite rules\nare always applied to their matched traffic regardless of this setting —\ndefaultAction only governs traffic that does not match any rule.\nIf omitted on create, the server defaults to Deny (fail-closed). On subsequent\nGET requests, the server always returns the effective value."
         },
         "description": {
           "type": "string",
@@ -18584,7 +18584,7 @@
         },
         "path": {
           "type": "string",
-          "description": "Target path. Original path (and query) is kept if omitted."
+          "description": "Target path (literal string). Original path (and query) is kept if omitted."
         }
       }
     },
