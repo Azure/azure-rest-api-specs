@@ -104,6 +104,7 @@ model DrillProperties {
   lastResyncReadinessCheckTime?: utcDateTime;
 
   @doc("Managed RG v2 properties.")
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
@@ -690,6 +691,10 @@ model DrillPatchProperties {
 @doc("Additional properties for Failover.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionProperties {
+  @doc("Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.")
+  @added(Versions.v2026_06_01_preview)
+  operationName?: DrillRunTasks;
+
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
   sourceLocations: string[];
@@ -832,18 +837,22 @@ model ValidateForExecutionResponse {
 }
 
 @doc("Configuration of the managed on behalf of resource.")
+@removed(Versions.v2026_06_01_preview)
 model ManagedOnBehalfOfConfiguration {
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   @doc("Associated MoboBrokerResources.")
   moboBrokerResources?: MoboBrokerResource[];
 }
 
 @doc("MoboBroker resource.")
+@removed(Versions.v2026_06_01_preview)
 model MoboBrokerResource {
   /**
    * The fully qualified resource ID of the MoboBroker resource.
    * Example: `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`
    */
+  @removed(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Read)
   id?: string;
 }

@@ -1,6 +1,7 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

@@ -40,6 +40,33 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}"]
     reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusterTierRegions"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/clusters/{clusterName}"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: PathResourceProviderNamePascalCase
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/MongoDB.Atlas/organizations/{organizationName}/projects/{projectName}/tierLimitReached"]
+    reason: MongoDB.Atlas namespace is business requirement.
+  - suppress: RepeatedPathInfo
+    from: openapi.json
+    reason: The projectName and clusterName in resource properties are needed for LIST responses to return resource names alongside server-assigned IDs.
   - suppress: AvoidAnonymousTypes
     from: openapi.json
     reason: Typespec generated definitions contain anonymous types.
@@ -53,6 +80,15 @@ These are the global settings for the LiftrMongoDB service.
 openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2025-06-01
+```
+
+### Tag: package-2026-03-01-preview
+
+These settings apply only when `--tag=package-2026-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-01-preview'
+input-file:
+  - MongoDB.Atlas/preview/2026-03-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-06-01
