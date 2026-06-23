@@ -28,7 +28,7 @@ using Microsoft.Network;
 @@clientName(PrivateZone, "PrivateDnsZone", "csharp");
 @@clientName(RecordSet, "PrivateDnsRecord", "csharp");
 @@clientName(RecordType, "PrivateDnsRecordType", "csharp");
-@@clientName(RecordType.AAAA, "Aaaaa", "csharp");
+@@clientName(RecordType.AAAA, "Aaaa", "csharp");
 @@clientName(RecordType.CNAME, "Cname", "csharp");
 @@clientName(RecordType.PTR, "Ptr", "csharp");
 @@clientName(RecordType.SOA, "Soa", "csharp");
