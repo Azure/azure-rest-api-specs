@@ -176,6 +176,16 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
+  EndpointResourcePropertiesBasicResource,
+  "MachineLearningEndpoint",
+  "csharp"
+);
+@@clientName(
+  RaiBlocklistItemBulkRequest,
+  "RaiBlocklistItemBulkContent",
+  "csharp"
+);
+@@clientName(
   AADAuthTypeWorkspaceConnectionProperties,
   "AadAuthTypeWorkspaceConnectionProperties",
   "csharp"
@@ -681,6 +691,11 @@ using Microsoft.MachineLearningServices;
 @@access(EncryptionKeyVaultUpdateProperties, Access.public, "csharp");
 @@access(TriggerType, Access.public, "csharp");
 @@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
+@@access(
+  Azure.ResourceManager.CommonTypes.ErrorResponse,
+  Access.internal,
+  "csharp"
+);
 @@clientName(
   DataVersionBaseProperties,
   "MachineLearningDataVersionProperties",
@@ -798,6 +813,21 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@alternateType(
+  EncryptionProperty.cosmosDbResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EncryptionProperty.searchAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EncryptionProperty.storageAccountResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
   ManagedIdentity.resourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -894,10 +924,18 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(
+  WorkspacePropertiesUpdateParameters,
+  "MachineLearningWorkspacePropertiesPatch",
+  "csharp"
+);
+@@clientName(
   DeploymentLogsRequest,
   "MachineLearningDeploymentLogsContent",
   "csharp"
 );
+@@clientName(DeltaModelListRequest, "DeltaModelListContent", "csharp");
+@@clientName(DeltaModelModifyRequest, "DeltaModelModifyContent", "csharp");
+@@clientName(DeltaModelStatusRequest, "DeltaModelStatusContent", "csharp");
 @@clientName(
   EndpointServiceConnectionStatus,
   "EndpointServiceConnectionStatus",
@@ -1089,6 +1127,7 @@ using Microsoft.MachineLearningServices;
   "csharp"
 );
 @@clientName(EndpointAuthMode, "MachineLearningEndpointAuthMode", "csharp");
+@@clientName(AuthMode.AAD, Azure.ClientGenerator.Core.exact("Aad"), "csharp");
 @@clientName(BatchLoggingLevel, "MachineLearningBatchLoggingLevel", "csharp");
 @@clientName(AssetReferenceBase, "MachineLearningAssetReferenceBase", "csharp");
 @@clientName(BatchOutputAction, "MachineLearningBatchOutputAction", "csharp");
