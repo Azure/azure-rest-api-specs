@@ -1,4 +1,10 @@
 parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
   "service-directory-name":
     default: "communication"
   "service-dir":
@@ -17,3 +23,21 @@ options:
     output-file: "{version-status}/{version}/CommunicationIdentity.json"
     emitter-output-dir: "{project-root}"
     omit-unreachable-types: true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Communication.Identity
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-identity"
+    namespace: "azure.communication.identity"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-communication-identity"
+    namespace: com.azure.communication.identity
+    service-name: Identity
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/communication-identity-rest"
+    package-details:
+      name: "@azure/communication-identity"
+      description: "Azure client library for Azure Communication Identity services"
+    flavor: azure
