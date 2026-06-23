@@ -20,7 +20,7 @@ union Severity {
   string,
 
   /** No issues found. */
-  Pass: "Pass",
+  None: "None",
 
   /** Non-blocking issues found; upgrade is possible but action is recommended. */
   Warning: "Warning",
@@ -45,7 +45,7 @@ union CompatibilityStatus {
   /** Component is incompatible with the target version. */
   Incompatible: "Incompatible",
 
-  /** Compatibility status is unknown. */
+  /** Compatibility could not be determined due to insufficient information. */
   Unknown: "Unknown",
 }
 
@@ -61,15 +61,6 @@ union ReadinessCategory {
 
   /** Pod disruption budget check. */
   PodDisruptionBudget: "PodDisruptionBudget",
-
-  /** Addon compatibility check. */
-  Addon: "Addon",
-
-  /** Storage compatibility check. */
-  Storage: "Storage",
-
-  /** Networking compatibility check. */
-  Networking: "Networking",
 }
 
 // ─── UpgradeAssessment sub-models ─────────────────────────────────────────────
@@ -140,7 +131,7 @@ model DeprecatedApiUsage {
   lastUsageObservedAt?: utcDateTime;
 
   /** Severity of continued use of this deprecated API. */
-  severity: Severity;
+  severity?: Severity;
 }
 
 /** A single cluster readiness check result. */
@@ -155,7 +146,7 @@ model ReadinessCheck {
   name?: string;
 
   /** Severity of the check result. */
-  severity: Severity;
+  severity?: Severity;
 
   /** Human-readable reason when severity is not 'pass'. */
   details?: string;

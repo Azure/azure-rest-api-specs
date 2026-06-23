@@ -214,7 +214,7 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Compatibility status is unknown."
+            "description": "Compatibility could not be determined due to insufficient information."
           }
         ]
       }
@@ -292,8 +292,7 @@
       "required": [
         "group",
         "version",
-        "resource",
-        "severity"
+        "resource"
       ]
     },
     "HttpVerbUsageMetrics": {
@@ -343,10 +342,7 @@
       "enum": [
         "NodeStatus",
         "APIServerHealth",
-        "PodDisruptionBudget",
-        "Addon",
-        "Storage",
-        "Networking"
+        "PodDisruptionBudget"
       ],
       "x-ms-enum": {
         "name": "ReadinessCategory",
@@ -366,21 +362,6 @@
             "name": "PodDisruptionBudget",
             "value": "PodDisruptionBudget",
             "description": "Pod disruption budget check."
-          },
-          {
-            "name": "Addon",
-            "value": "Addon",
-            "description": "Addon compatibility check."
-          },
-          {
-            "name": "Storage",
-            "value": "Storage",
-            "description": "Storage compatibility check."
-          },
-          {
-            "name": "Networking",
-            "value": "Networking",
-            "description": "Networking compatibility check."
           }
         ]
       }
@@ -407,15 +388,14 @@
         }
       },
       "required": [
-        "category",
-        "severity"
+        "category"
       ]
     },
     "Severity": {
       "type": "string",
       "description": "Severity of an upgrade-assessment finding or readiness check.",
       "enum": [
-        "Pass",
+        "None",
         "Warning",
         "Critical",
         "Unknown"
@@ -425,8 +405,8 @@
         "modelAsString": true,
         "values": [
           {
-            "name": "Pass",
-            "value": "Pass",
+            "name": "None",
+            "value": "None",
             "description": "No issues found."
           },
           {
