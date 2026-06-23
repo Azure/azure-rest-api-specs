@@ -943,6 +943,7 @@ using Microsoft.MachineLearningServices;
   Azure.ClientGenerator.Core.exact("FqdnEndpointsPropertyBag"),
   "csharp"
 );
+@@clientName(ExternalFQDNResponse, "ExternalFqdnResult", "csharp");
 @@clientName(
   PTUDeploymentUsage,
   Azure.ClientGenerator.Core.exact("PtuDeploymentUsage"),
