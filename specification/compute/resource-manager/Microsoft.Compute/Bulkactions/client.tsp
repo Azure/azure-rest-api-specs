@@ -60,7 +60,7 @@ namespace Microsoft.Compute;
 );
 @@clientName(
   DeallocateResourceOperationResponse.type,
-  "ResourceType",
+  "ResourceTypeName",
   "csharp"
 );
 @@clientName(
@@ -78,7 +78,11 @@ namespace Microsoft.Compute;
   "HibernateResourceOperationResult",
   "csharp"
 );
-@@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(
+  HibernateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
 @@clientName(OperationState, "ScheduledActionOperationState", "csharp");
 
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
@@ -89,7 +93,7 @@ namespace Microsoft.Compute;
   "StartResourceOperationResult",
   "csharp"
 );
-@@clientName(StartResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 @@clientName(
   OperationErrorDetails.timeStamp,
@@ -102,10 +106,19 @@ namespace Microsoft.Compute;
   "DeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(DeleteResourceOperationResponse.type, "ResourceType", "csharp");
+@@clientName(
+  DeleteResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
 @@clientName(
   CreateResourceOperationResponse,
   "CreateResourceOperationResult",
+  "csharp"
+);
+@@clientName(
+  CreateResourceOperationResponse.type,
+  "ResourceTypeName",
   "csharp"
 );
 @@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "!autorest");
@@ -161,6 +174,11 @@ namespace Microsoft.Compute;
   "csharp"
 );
 @@clientName(
+  ReimageResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+@@clientName(
   VirtualMachineReimageParameters,
   "BulkActionsVirtualMachineReimageParametersContent",
   "csharp"
@@ -186,6 +204,13 @@ namespace Microsoft.Compute;
 // Correct .NET casing for TimeZone.
 @@clientName(ResourceOperationDetails.timezone, "timeZone", "csharp");
 
+// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
+@@alternateType(
+  ResourceOperationDetails.subscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
 @@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
 @@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
 @@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
@@ -204,3 +229,18 @@ namespace Microsoft.Compute;
 // 2026-04-15-preview for field NetworkAPIVersion". Override the heuristic.
 // =====================================================================
 @@apiVersion(NetworkProfile.networkApiVersion, false, "go");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(Resources, "disable-safe-flatten", true, "csharp");
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve type for public API surface"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Preserve type for public API surface"
+@@clientOption(ExecutionParameters, "disable-safe-flatten", true, "csharp");
+
+@@clientName(CancelOperationsRequest, "CancelBulkOperationsContent", "csharp");
+@@clientName(
+  GetOperationStatusRequest,
+  "GetBulkOperationStatusContent",
+  "csharp"
+);
