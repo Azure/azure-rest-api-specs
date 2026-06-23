@@ -936,6 +936,41 @@ using Microsoft.MachineLearningServices;
 @@clientName(DeltaModelListRequest, "DeltaModelListContent", "csharp");
 @@clientName(DeltaModelModifyRequest, "DeltaModelModifyContent", "csharp");
 @@clientName(DeltaModelStatusRequest, "DeltaModelStatusContent", "csharp");
+@@clientName(DeltaModelStatusResponse, "DeltaModelStatusResult", "csharp");
+@@clientName(AzureOpenAiHyperParameters, "AzureOpenAiHyperContent", "csharp");
+@@clientName(
+  WorkspaceProperties.provisionNetworkNow,
+  "IsProvisionNetworkNow",
+  "csharp"
+);
+@@clientName(
+  EndpointModelSkuRateLimitRuleProperties.dynamicThrottlingEnabled,
+  "IsDynamicThrottlingEnabled",
+  "csharp"
+);
+@@clientName(ImageDetails.exists, "DoesExist", "csharp");
+@@clientName(
+  ComputeInstanceProperties.releaseQuotaOnStop,
+  "ShouldReleaseQuotaOnStop",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineSize.premiumIO,
+  Azure.ClientGenerator.Core.exact("SupportsPremiumIO"),
+  "csharp"
+);
+@@clientName(BindOptions.createHostPath, "ShouldCreateHostPath", "csharp");
+@@clientName(OsPatchingStatus.rebootPending, "IsRebootPending", "csharp");
+@@clientName(RaiBlocklistConfig.blocking, "IsBlocking", "csharp");
+@@clientName(RaiPolicyContentFilter.blocking, "IsBlocking", "csharp");
+@@clientName(Ray.includeDashboard, "IsIncludeDashboard", "csharp");
+@@clientName(SecretExpiry.expirableSecret, "IsExpirableSecret", "csharp");
+@@clientName(
+  ServerlessComputeSettings.serverlessComputeNoPublicIP,
+  Azure.ClientGenerator.Core.exact("HasNoPublicIP"),
+  "csharp"
+);
+@@clientName(VulnerabilityDetails.patchable, "IsPatchable", "csharp");
 @@clientName(
   EndpointServiceConnectionStatus,
   "EndpointServiceConnectionStatus",
@@ -1128,6 +1163,16 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(EndpointAuthMode, "MachineLearningEndpointAuthMode", "csharp");
 @@clientName(AuthMode.AAD, Azure.ClientGenerator.Core.exact("Aad"), "csharp");
+@@clientName(
+  ServerlessInferenceEndpointAuthMode.AAD,
+  Azure.ClientGenerator.Core.exact("Aad"),
+  "csharp"
+);
+@@clientName(
+  ServerlessInferenceEndpointAuthMode.KeyAndAAD,
+  Azure.ClientGenerator.Core.exact("KeyAndAad"),
+  "csharp"
+);
 @@clientName(BatchLoggingLevel, "MachineLearningBatchLoggingLevel", "csharp");
 @@clientName(AssetReferenceBase, "MachineLearningAssetReferenceBase", "csharp");
 @@clientName(BatchOutputAction, "MachineLearningBatchOutputAction", "csharp");
