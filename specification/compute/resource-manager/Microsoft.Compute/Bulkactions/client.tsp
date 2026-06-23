@@ -197,6 +197,45 @@ namespace Microsoft.Compute;
   "csharp"
 );
 
+// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
+@@alternateType(
+  ResourceOperationDetails.subscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+@@clientName(
+  DeallocateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  HibernateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  DeleteResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  CreateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  ReimageResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
+
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
 // parameter because its name contains "apiversion". This causes
