@@ -777,7 +777,6 @@ input-file:
 - stable/2023-05-01/ServerVulnerabilityAssessmentsSettings.json
 - stable/2023-11-15/apiCollections.json
 - stable/2026-07-01/pricings.json
-- preview/2025-10-01-preview/pricings.json
 - stable/2024-08-01/security-SecurityStandards.json
 - stable/2026-01-01/privateLinks.json
 
