@@ -1,0 +1,54 @@
+{
+  "title": "Put Private Frontend",
+  "operationId": "FrontendsInterface_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "frontendName": "pfe1",
+    "resource": {
+      "location": "NorthCentralUS",
+      "properties": {
+        "type": "private",
+        "association": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/associations/as1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pfe1",
+        "location": "NorthCentralUS",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/pfe1",
+        "properties": {
+          "fqdn": "pfe1.abc123.privatelink.alb.azure.com",
+          "type": "private",
+          "association": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/associations/as1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pfe1",
+        "location": "NorthCentralUS",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/frontends",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/pfe1",
+        "properties": {
+          "fqdn": "pfe1.abc123.privatelink.alb.azure.com",
+          "type": "private",
+          "association": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/associations/as1"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
