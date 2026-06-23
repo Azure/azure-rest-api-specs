@@ -498,7 +498,11 @@
       "description": "Properties of a single UpgradeAssessment ARM resource.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProvisioningState"
+            }
+          ],
           "description": "Provisioning state of the UpgradeAssessment.",
           "readOnly": true
         },
