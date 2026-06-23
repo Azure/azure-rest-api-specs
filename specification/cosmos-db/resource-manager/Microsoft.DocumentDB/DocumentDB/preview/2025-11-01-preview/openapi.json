@@ -3,7 +3,12 @@
   "info": {
     "title": "Cosmos DB",
     "version": "2025-11-01-preview",
-    "description": "Azure Cosmos DB Throughput Pool REST API"
+    "description": "Azure Cosmos DB Throughput Pool REST API",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
   },
   "schemes": [
     "https"
@@ -60,9 +65,6 @@
     },
     {
       "name": "MaterializedViewsBuilder"
-    },
-    {
-      "name": "EmbeddingGenerator"
     },
     {
       "name": "ThroughputPools"
@@ -13322,8 +13324,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Gets the status of service.",
         "parameters": [
@@ -13374,9 +13375,6 @@
           "DataTransferServiceGet": {
             "$ref": "./examples/CosmosDBDataTransferServiceGet.json"
           },
-          "EmbeddingGeneratorServiceGet": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceGet.json"
-          },
           "GraphAPIComputeServiceGet": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceGet.json"
           },
@@ -13394,8 +13392,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Creates a service.",
         "parameters": [
@@ -13469,9 +13466,6 @@
           "DataTransferServiceCreate": {
             "$ref": "./examples/CosmosDBDataTransferServiceCreate.json"
           },
-          "EmbeddingGeneratorServiceCreate": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceCreate.json"
-          },
           "GraphAPIComputeServiceCreate": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceCreate.json"
           },
@@ -13494,8 +13488,7 @@
           "DataTransfer",
           "SqlDedicatedGateway",
           "GraphAPICompute",
-          "MaterializedViewsBuilder",
-          "EmbeddingGenerator"
+          "MaterializedViewsBuilder"
         ],
         "description": "Deletes service with the given serviceName.",
         "parameters": [
@@ -13559,9 +13552,6 @@
         "x-ms-examples": {
           "DataTransferServiceDelete": {
             "$ref": "./examples/CosmosDBDataTransferServiceDelete.json"
-          },
-          "EmbeddingGeneratorServiceDelete": {
-            "$ref": "./examples/CosmosDBEmbeddingGeneratorServiceDelete.json"
           },
           "GraphAPIComputeServiceDelete": {
             "$ref": "./examples/CosmosDBGraphAPIComputeServiceDelete.json"
@@ -21333,21 +21323,21 @@
           "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -21356,7 +21346,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -21754,21 +21744,21 @@
           "description": "The properties of an Azure Cosmos DB Cassandra table",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -21777,7 +21767,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -21916,21 +21906,21 @@
           "description": "The properties of an Azure Cosmos DB Cassandra view",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -21939,7 +21929,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -22191,21 +22181,21 @@
           "$ref": "#/definitions/ClusterResourceProperties",
           "description": "Properties of a managed Cassandra cluster."
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedCassandraManagedServiceIdentity",
@@ -22214,7 +22204,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -24020,10 +24010,6 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
-        "enableEmbeddingGenerator": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
-        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update/create operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -24291,10 +24277,6 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
-        "enableEmbeddingGenerator": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
-        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "The object that represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -24358,21 +24340,21 @@
           "description": "Properties for the database account.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -24409,7 +24391,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -24661,10 +24643,6 @@
           "type": "boolean",
           "description": "Flag to indicate whether to enable MaterializedViews on the Cosmos DB account"
         },
-        "enableEmbeddingGenerator": {
-          "type": "boolean",
-          "description": "Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account"
-        },
         "keysMetadata": {
           "$ref": "#/definitions/DatabaseAccountKeysMetadata",
           "description": "This property is ignored during the update operation, as the metadata is read-only. The object represents the metadata for the Account Keys of the Cosmos DB account.",
@@ -24830,92 +24808,6 @@
           {
             "name": "Dotproduct",
             "value": "dotproduct"
-          }
-        ]
-      }
-    },
-    "EmbeddingGeneratorRegionalServiceResource": {
-      "type": "object",
-      "description": "Resource for a regional service location.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RegionalServiceResource"
-        }
-      ]
-    },
-    "EmbeddingGeneratorServiceResourceCreateUpdateProperties": {
-      "type": "object",
-      "description": "Properties for Create or Update request for EmbeddingGeneratorServiceResource",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResourceCreateUpdateProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "EmbeddingGenerator"
-    },
-    "EmbeddingGeneratorServiceResourceProperties": {
-      "type": "object",
-      "description": "Properties for EmbeddingGeneratorServiceResource.",
-      "properties": {
-        "locations": {
-          "type": "array",
-          "description": "An array that contains all of the locations for the service.",
-          "items": {
-            "$ref": "#/definitions/EmbeddingGeneratorRegionalServiceResource"
-          },
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "EmbeddingGenerator"
-    },
-    "EmbeddingSource": {
-      "type": "object",
-      "description": "Represents the embedding source configuration for the Embedding Generator service.\nWhen specified on a vector embedding, the service will automatically generate embeddings from source document fields.",
-      "properties": {
-        "sourcePaths": {
-          "type": "array",
-          "description": "The list of source paths in the document to generate embeddings from.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "endpoint": {
-          "type": "string",
-          "description": "The endpoint URL of the Microsoft Foundry resource."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "The model deployment name used for generating embeddings."
-        },
-        "modelName": {
-          "type": "string",
-          "description": "The name of the embedding model."
-        },
-        "authType": {
-          "$ref": "#/definitions/EmbeddingSourceAuthenticationType",
-          "description": "The authentication type Azure Cosmos DB uses when calling the embedding model endpoint."
-        }
-      }
-    },
-    "EmbeddingSourceAuthenticationType": {
-      "type": "string",
-      "description": "The type of authentication to use when calling the embedding provider API.",
-      "enum": [
-        "Entra"
-      ],
-      "x-ms-enum": {
-        "name": "EmbeddingSourceAuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Entra",
-            "value": "Entra",
-            "description": "Microsoft Entra ID based authentication."
           }
         ]
       }
@@ -25704,21 +25596,21 @@
           "description": "The properties of an Azure Cosmos DB Graph resource.",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -25727,7 +25619,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -25839,21 +25731,21 @@
           "description": "The properties of an Azure Cosmos DB SQL database",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -25862,7 +25754,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -26031,21 +25923,21 @@
           "description": "The properties of an Azure Cosmos DB Gremlin graph",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -26054,7 +25946,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -27300,21 +27192,21 @@
           "description": "The properties of an Azure Cosmos DB MongoDB collection",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -27323,7 +27215,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -27495,21 +27387,21 @@
           "description": "The properties of an Azure Cosmos DB MongoDB database",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -27518,7 +27410,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -30535,8 +30427,7 @@
         "SqlDedicatedGateway",
         "DataTransfer",
         "GraphAPICompute",
-        "MaterializedViewsBuilder",
-        "EmbeddingGenerator"
+        "MaterializedViewsBuilder"
       ],
       "x-ms-enum": {
         "name": "ServiceType",
@@ -30557,11 +30448,6 @@
           {
             "name": "MaterializedViewsBuilder",
             "value": "MaterializedViewsBuilder"
-          },
-          {
-            "name": "EmbeddingGenerator",
-            "value": "EmbeddingGenerator",
-            "description": "Embedding Generator service type."
           }
         ]
       }
@@ -30705,21 +30591,21 @@
           "description": "The properties of an Azure Cosmos DB container",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -30728,7 +30614,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -30952,21 +30838,21 @@
           "description": "The properties of an Azure Cosmos DB SQL database",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -30975,7 +30861,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31311,21 +31197,21 @@
           "description": "The properties of an Azure Cosmos DB storedProcedure",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -31334,7 +31220,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31452,21 +31338,21 @@
           "description": "The properties of an Azure Cosmos DB trigger",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -31475,7 +31361,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31601,21 +31487,21 @@
           "description": "The properties of an Azure Cosmos DB userDefinedFunction",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -31624,7 +31510,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -31827,21 +31713,21 @@
           "description": "The properties of an Azure Cosmos DB Table",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -31850,7 +31736,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -32274,21 +32160,21 @@
           "description": "The properties of an Azure Cosmos DB resource throughput",
           "x-ms-client-flatten": true
         },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "location": {
           "type": "string",
-          "description": "The location of the resource group to which the resource belongs.",
+          "description": "The geo-location where the resource lives",
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with \\\"defaultExperience\\\": \\\"Cassandra\\\". Current \\\"defaultExperience\\\" values also include \\\"Table\\\", \\\"Graph\\\", \\\"DocumentDB\\\", and \\\"MongoDB\\\".",
-          "additionalProperties": {
-            "type": "string"
-          }
         },
         "identity": {
           "$ref": "#/definitions/ManagedServiceIdentity",
@@ -32297,7 +32183,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
         }
       ]
     },
@@ -32667,10 +32553,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of dimensions in the vector."
-        },
-        "embeddingSource": {
-          "$ref": "#/definitions/EmbeddingSource",
-          "description": "The embedding source configuration to automatically generate embeddings at the configured paths."
         }
       },
       "required": [

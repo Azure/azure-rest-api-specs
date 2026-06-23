@@ -1211,6 +1211,7 @@ union ServiceType {
   /**
    * Embedding Generator service type.
    */
+  @added(Versions.v2026_04_01_preview)
   EmbeddingGenerator: "EmbeddingGenerator",
 }
 
@@ -1740,6 +1741,7 @@ model DatabaseAccountGetProperties {
   /**
    * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
 
   /**
@@ -2555,6 +2557,7 @@ model DatabaseAccountUpdateProperties {
   /**
    * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
 
   /**
@@ -2797,6 +2800,7 @@ model DatabaseAccountCreateUpdateProperties {
   /**
    * Flag to indicate whether to enable Integrated Embeddings on the Cosmos DB account
    */
+  @added(Versions.v2026_04_01_preview)
   enableEmbeddingGenerator?: boolean;
 
   /**
@@ -4433,6 +4437,7 @@ model VectorEmbedding {
   /**
    * The embedding source configuration to automatically generate embeddings at the configured paths.
    */
+  @added(Versions.v2026_04_01_preview)
   embeddingSource?: EmbeddingSource;
 }
 
@@ -4440,6 +4445,7 @@ model VectorEmbedding {
  * Represents the embedding source configuration for the Embedding Generator service.
  * When specified on a vector embedding, the service will automatically generate embeddings from source document fields.
  */
+@added(Versions.v2026_04_01_preview)
 model EmbeddingSource {
   /**
    * The list of source paths in the document to generate embeddings from.
@@ -4447,7 +4453,7 @@ model EmbeddingSource {
   sourcePaths?: string[];
 
   /**
-   * The endpoint URL of the Microsoft Foundry resource.
+   * The endpoint URL of the AI model provider resource.
    */
   endpoint?: string;
 
@@ -4470,6 +4476,7 @@ model EmbeddingSource {
 /**
  * The type of authentication to use when calling the embedding provider API.
  */
+@added(Versions.v2026_04_01_preview)
 union EmbeddingSourceAuthenticationType {
   string,
 
@@ -9575,6 +9582,7 @@ model MaterializedViewsBuilderServiceResourceCreateUpdateProperties
 /**
  * Describes the service response property for EmbeddingGenerator.
  */
+@added(Versions.v2026_04_01_preview)
 model EmbeddingGeneratorServiceResource {
   /**
    * Properties for EmbeddingGeneratorServiceResource.
@@ -9585,6 +9593,7 @@ model EmbeddingGeneratorServiceResource {
 /**
  * Properties for EmbeddingGeneratorServiceResource.
  */
+@added(Versions.v2026_04_01_preview)
 model EmbeddingGeneratorServiceResourceProperties
   extends ServiceResourceProperties {
   /**
@@ -9604,12 +9613,14 @@ model EmbeddingGeneratorServiceResourceProperties
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_04_01_preview)
 model EmbeddingGeneratorRegionalServiceResource
   extends RegionalServiceResource {}
 
 /**
  * Properties for Create or Update request for EmbeddingGeneratorServiceResource
  */
+@added(Versions.v2026_04_01_preview)
 model EmbeddingGeneratorServiceResourceCreateUpdateProperties
   extends ServiceResourceCreateUpdateProperties {
   /**
