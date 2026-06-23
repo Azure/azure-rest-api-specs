@@ -1,0 +1,202 @@
+{
+  "title": "EdgeMachineDeploymentSettings_CreateOrUpdate",
+  "operationId": "EdgeMachineDeploymentSettings_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "deploymentSettingName": "default",
+    "api-version": "2026-05-01-preview",
+    "resource": {
+      "properties": {
+        "deploymentConfiguration": {
+          "version": "10.2.0.0",
+          "scaleUnits": [
+            {
+              "deploymentData": {
+                "iScsiConfig": {
+                  "iScsiNetworkConfig": {
+                    "adapterProperties": {
+                      "jumboPacket": 9014,
+                      "priorityValue8021ActionIscsi": 4,
+                      "bandwidthPercentageIscsi": 50
+                    },
+                    "adapterIPConfig": [
+                      {
+                        "networkAdapterName": "iSCSI-A",
+                        "vlanId": 401,
+                        "addressPrefix": "10.10.50.0/24",
+                        "targetPortalAddresses": [
+                          {
+                            "ipAddress": "10.0.0.1",
+                            "nextHop": "10.10.50.1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "chapSettings": {
+                    "chapType": "Bidirectional",
+                    "chapUsername": "hci-initiator",
+                    "mutualChapUsername": "hci-target"
+                  },
+                  "initiatorIqn": "iqn.2025-01.com.example:storage-target"
+                },
+                "secrets": [
+                  {
+                    "secretName": "n42r2202-cl-IscsiChapSecret",
+                    "eceSecretName": "chapCredential",
+                    "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiChapSecret"
+                  },
+                  {
+                    "secretName": "n42r2202-cl-IscsiMutualChapSecret",
+                    "eceSecretName": "mutualChapCredential",
+                    "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiMutualChapSecret"
+                  },
+                  {
+                    "secretName": "n42r2202-cl-AzureStackLCMUserCredential",
+                    "eceSecretName": "AzureStackLCMUserCredential",
+                    "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-AzureStackLCMUserCredential"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "deploymentConfiguration": {
+            "version": "10.2.0.0",
+            "scaleUnits": [
+              {
+                "deploymentData": {
+                  "iScsiConfig": {
+                    "iScsiNetworkConfig": {
+                      "adapterProperties": {
+                        "jumboPacket": 9014,
+                        "priorityValue8021ActionIscsi": 4,
+                        "bandwidthPercentageIscsi": 50
+                      },
+                      "adapterIPConfig": [
+                        {
+                          "networkAdapterName": "iSCSI-A",
+                          "vlanId": 401,
+                          "addressPrefix": "10.10.50.0/24",
+                          "targetPortalAddresses": [
+                            {
+                              "ipAddress": "10.0.0.1",
+                              "nextHop": "10.10.50.1"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "chapSettings": {
+                      "chapType": "Bidirectional",
+                      "chapUsername": "hci-initiator",
+                      "mutualChapUsername": "hci-target"
+                    },
+                    "initiatorIqn": "iqn.2025-01.com.example:storage-target"
+                  },
+                  "secrets": [
+                    {
+                      "secretName": "n42r2202-cl-IscsiChapSecret",
+                      "eceSecretName": "chapCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiChapSecret"
+                    },
+                    {
+                      "secretName": "n42r2202-cl-IscsiMutualChapSecret",
+                      "eceSecretName": "mutualChapCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiMutualChapSecret"
+                    },
+                    {
+                      "secretName": "n42r2202-cl-AzureStackLCMUserCredential",
+                      "eceSecretName": "AzureStackLCMUserCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-AzureStackLCMUserCredential"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/deploymentSettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/deploymentSettings"
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "deploymentConfiguration": {
+            "version": "10.2.0.0",
+            "scaleUnits": [
+              {
+                "deploymentData": {
+                  "iScsiConfig": {
+                    "iScsiNetworkConfig": {
+                      "adapterProperties": {
+                        "jumboPacket": 9014,
+                        "priorityValue8021ActionIscsi": 4,
+                        "bandwidthPercentageIscsi": 50
+                      },
+                      "adapterIPConfig": [
+                        {
+                          "networkAdapterName": "iSCSI-A",
+                          "vlanId": 401,
+                          "addressPrefix": "10.10.50.0/24",
+                          "targetPortalAddresses": [
+                            {
+                              "ipAddress": "10.0.0.1",
+                              "nextHop": "10.10.50.1"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "chapSettings": {
+                      "chapType": "Bidirectional",
+                      "chapUsername": "hci-initiator",
+                      "mutualChapUsername": "hci-target"
+                    },
+                    "initiatorIqn": "iqn.2025-01.com.example:storage-target"
+                  },
+                  "secrets": [
+                    {
+                      "secretName": "n42r2202-cl-IscsiChapSecret",
+                      "eceSecretName": "chapCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiChapSecret"
+                    },
+                    {
+                      "secretName": "n42r2202-cl-IscsiMutualChapSecret",
+                      "eceSecretName": "mutualChapCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-IscsiMutualChapSecret"
+                    },
+                    {
+                      "secretName": "n42r2202-cl-AzureStackLCMUserCredential",
+                      "eceSecretName": "AzureStackLCMUserCredential",
+                      "secretLocation": "https://n42r2202clkv.vault.azure.net/secrets/n42r2202-cl-AzureStackLCMUserCredential"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "provisioningState": "Accepted"
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/deploymentSettings/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/deploymentSettings"
+      }
+    }
+  }
+}
