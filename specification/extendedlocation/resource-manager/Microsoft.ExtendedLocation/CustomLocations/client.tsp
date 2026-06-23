@@ -98,109 +98,77 @@ using Azure.ResourceManager;
 @@usage(EnabledResourceType, Usage.input, "csharp");
 @@usage(EnabledResourceTypePropertiesTypesMetadataItem, Usage.input, "csharp");
 
-@@override(CustomLocations.update, customLocationsUpdate, "javascript");
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op customLocationsUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  provider: "Microsoft.ExtendedLocation",
-  resourceName: string,
+namespace Microsoft.ExtendedLocation {
+  @@scope(CustomLocations.update, "!javascript");
+  @@scope(ResourceSyncRules.update, "!javascript");
 
-  /**
-   * Identity for the resource.
-   */
-  identity?: Identity,
+  @armResourceOperations
+  interface CustomLocationsScope {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    update(
+      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<customLocation>,
+      ...Azure.ResourceManager.ProviderNamespace<customLocation>,
 
-  /**
-   * This is optional input that contains the authentication that should be used to generate the namespace.
-   */
-  authentication?: customLocationPropertiesAuthentication,
+      @path
+      @segment("customLocations")
+      resourceName: string,
 
-  /**
-   * Contains the reference to the add-on that contains charts to deploy CRDs and operators.
-   */
-  clusterExtensionIds?: string[],
+      /**
+       * Identity for the resource.
+       */
+      identity?: Identity,
 
-  /**
-   * Display name for the Custom Locations location.
-   */
-  displayName?: string,
+      ...customLocationProperties,
 
-  /**
-   * Connected Cluster or AKS Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions.
-   */
-  hostResourceId?: string,
+      /**
+       * Resource tags
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+    ):
+      | Azure.ResourceManager.ArmResponse<Microsoft.ExtendedLocation.customLocation>
+      | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  }
+  @armResourceOperations
+  interface ResourceSyncRulesScope {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    update(
+      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<resourceSyncRule>,
+      ...Azure.ResourceManager.ProviderNamespace<resourceSyncRule>,
 
-  /**
-   * Type of host the Custom Locations is referencing (Kubernetes, etc...).
-   */
-  hostType?: HostType,
+      @path
+      @segment("customLocations")
+      resourceName: string,
 
-  /**
-   * Kubernetes namespace that will be created on the specified cluster.
-   */
-  `namespace`?: string,
+      @path
+      @segment("resourceSyncRules")
+      childResourceName: string,
 
-  /**
-   * Provisioning State for the Custom Location.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  provisioningState?: string,
+      ...resourceSyncRuleProperties,
 
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.ExtendedLocation.customLocation>
-  | Azure.ResourceManager.CommonTypes.ErrorResponse;
-@@override(ResourceSyncRules.update, resourceSyncRulesUpdate, "javascript");
+      /**
+       * Resource tags
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+    ):
+      | (ArmResponse<resourceSyncRule> &
+          ArmAsyncOperationHeader<FinalResult = resourceSyncRule> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceSyncRulesUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  provider: "Microsoft.ExtendedLocation",
-  resourceName: string,
-  childResourceName: string,
-
-  /**
-   * Priority represents a priority of the Resource Sync Rule
-   */
-  priority?: int32,
-
-  /**
-   * Provisioning State for the Resource Sync Rule.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  provisioningState?: string,
-
-  /**
-   * A label selector is composed of two parts, matchLabels and matchExpressions. The first part, matchLabels is a map of {key,value} pairs. A single {key,value} in the matchLabels map is equivalent to an element of matchExpressions, whose key field is 'key', the operator is 'In', and the values array contains only 'value'. The second part, matchExpressions is a list of resource selector requirements. Valid operators include In, NotIn, Exists, and DoesNotExist. The values set must be non-empty in the case of In and NotIn. The values set must be empty in the case of Exists and DoesNotExist. All of the requirements, from both matchLabels and matchExpressions must all be satisfied in order to match.
-   */
-  selector?: ResourceSyncRulePropertiesSelector,
-
-  /**
-   * For an unmapped custom resource, its labels will be used to find matching resource sync rules. If this resource sync rule is one of the matching rules with highest priority, then the unmapped custom resource will be projected to the target resource group associated with this resource sync rule. The user creating this resource sync rule should have write permissions on the target resource group and this write permission will be validated when creating the resource sync rule.
-   */
-  targetResourceGroup?: string,
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>,
-):
-  | {
-      statusCode: 200;
-      body: Microsoft.ExtendedLocation.resourceSyncRule;
-      azureAsyncOperation: string;
-      retryAfter: int32;
-    }
-  | Azure.ResourceManager.CommonTypes.ErrorResponse;
+  @@scope(CustomLocationsScope.update, "javascript");
+  @@scope(ResourceSyncRulesScope.update, "javascript");
+  @@clientLocation(
+    CustomLocationsScope.update,
+    "CustomLocations",
+    "javascript"
+  );
+  @@clientLocation(
+    ResourceSyncRulesScope.update,
+    "ResourceSyncRules",
+    "javascript"
+  );
+}
