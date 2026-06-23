@@ -182,6 +182,8 @@ namespace Azure.AI.Projects;
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
 
+@@clientName(ContinuousEvaluationRuleAction.evalId, "evaluationId");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
