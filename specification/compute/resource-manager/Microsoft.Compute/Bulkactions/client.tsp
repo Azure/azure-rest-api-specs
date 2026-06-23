@@ -244,3 +244,34 @@ namespace Microsoft.Compute;
   "GetBulkOperationStatusContent",
   "csharp"
 );
+
+// =====================================================================
+// C# only: each bulk operation takes a location path parameter, but the
+// public surface exposes hand-authored wrapper extension methods that
+// derive the location from the resource group. Mark the generated
+// operations internal so only those wrappers are public.
+// =====================================================================
+@@access(VirtualMachineBulkOperations.bulkDeallocate, Access.internal, "csharp");
+@@access(VirtualMachineBulkOperations.bulkHibernate, Access.internal, "csharp");
+@@access(VirtualMachineBulkOperations.bulkStart, Access.internal, "csharp");
+@@access(VirtualMachineBulkOperations.bulkDelete, Access.internal, "csharp");
+@@access(
+  VirtualMachineBulkOperations.bulkGetOperationsStatus,
+  Access.internal,
+  "csharp"
+);
+@@access(VirtualMachineBulkOperations.bulkCancel, Access.internal, "csharp");
+
+// Keep the request/response models public; the wrapper methods expose them.
+@@access(ExecuteDeallocateRequest, Access.public, "csharp");
+@@access(ExecuteHibernateRequest, Access.public, "csharp");
+@@access(ExecuteStartRequest, Access.public, "csharp");
+@@access(ExecuteDeleteRequest, Access.public, "csharp");
+@@access(GetOperationStatusRequest, Access.public, "csharp");
+@@access(CancelOperationsRequest, Access.public, "csharp");
+@@access(DeallocateResourceOperationResponse, Access.public, "csharp");
+@@access(HibernateResourceOperationResponse, Access.public, "csharp");
+@@access(StartResourceOperationResponse, Access.public, "csharp");
+@@access(DeleteResourceOperationResponse, Access.public, "csharp");
+@@access(GetOperationStatusResponse, Access.public, "csharp");
+@@access(CancelOperationsResponse, Access.public, "csharp");
