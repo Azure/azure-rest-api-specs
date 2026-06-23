@@ -15,6 +15,20 @@ namespace Microsoft.KubernetesConfiguration;
 
 // ─── UpgradeAssessment enums ──────────────────────────────────────────────────
 
+/** Provisioning state of a resource. */
+union ProvisioningState {
+  string,
+
+  /** Resource is active. */
+  Succeeded: "Succeeded",
+
+  /** Resource provisioning has failed. */
+  Failed: "Failed",
+
+  /** Resource is being deleted. */
+  Canceled: "Canceled",
+}
+
 /** Severity of an upgrade-assessment finding or readiness check. */
 union Severity {
   string,
@@ -160,7 +174,7 @@ model UpgradeAssessmentProperties {
    * Provisioning state of the UpgradeAssessment.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: ProvisioningState;
 
   /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
   @visibility(Lifecycle.Read)
