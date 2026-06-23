@@ -7,6 +7,7 @@ import "./personDirectoryRoutes.tsp";
 import "./models.tsp";
 import "./documentContent.tsp";
 import "./audioVisualContent.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

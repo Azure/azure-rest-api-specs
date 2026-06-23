@@ -22,6 +22,7 @@ import "./PeeringServicePrefix.tsp";
 import "./PeeringService.tsp";
 import "./routes.tsp";
 import "./legacy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

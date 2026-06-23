@@ -16,17 +16,27 @@ using PurviewDataAccess;
 
 namespace Customizations;
 
-@@clientName(DataSubscriptions.createOrReplace, "CreateOrUpdate");
-@@clientName(DataSubscriptions.replaceDraft, "Save");
-@@clientName(Workflows.createOrReplace, "CreateOrUpdate");
-@@clientName(Workflows.getRuns, "ListRuns");
+@@clientName(DataSubscriptions.createOrReplace, "CreateOrUpdate", "!autorest");
+@@clientName(DataSubscriptions.replaceDraft, "Save", "!autorest");
+@@clientName(Workflows.createOrReplace, "CreateOrUpdate", "!autorest");
+@@clientName(Workflows.getRuns, "ListRuns", "!autorest");
 @@clientName(
   DataProductPolicySets.createOrReplaceApplied,
-  "CreateOrUpdateApplied"
+  "CreateOrUpdateApplied",
+  "!autorest"
 );
-@@clientName(DomainPolicySets.createOrReplaceApplied, "CreateOrUpdateApplied");
-@@clientName(TermPolicySets.createOrReplaceApplied, "CreateOrUpdateApplied");
+@@clientName(
+  DomainPolicySets.createOrReplaceApplied,
+  "CreateOrUpdateApplied",
+  "!autorest"
+);
+@@clientName(
+  TermPolicySets.createOrReplaceApplied,
+  "CreateOrUpdateApplied",
+  "!autorest"
+);
 @@clientName(
   CriticalDataElementPolicySets.createOrReplaceApplied,
-  "CreateOrUpdateApplied"
+  "CreateOrUpdateApplied",
+  "!autorest"
 );

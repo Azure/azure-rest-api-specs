@@ -18,6 +18,7 @@ import "./NginxCertificate.tsp";
 import "./NginxConfigurationResponse.tsp";
 import "./NginxDeployment.tsp";
 import "./NginxDeploymentWafPolicy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
