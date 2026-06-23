@@ -6632,20 +6632,6 @@ union RaiEgressHeaderOperation {
 }
 
 /**
- * The managed identity type used to resolve a header value from a token.
- */
-@added(Versions.v2026_05_15_preview)
-union RaiEgressManagedIdentityType {
-  string,
-
-  /** The sandbox's system-assigned managed identity. */
-  SystemAssigned: "SystemAssigned",
-
-  /** A user-assigned managed identity. When selected, identityResourceId is required. */
-  UserAssigned: "UserAssigned",
-}
-
-/**
  * A reference to a stored secret used as a header value.
  */
 @added(Versions.v2026_05_15_preview)
@@ -6671,12 +6657,6 @@ model RaiEgressManagedIdentityRef {
 
   /** Optional format for the resolved token; "{value}" is the placeholder, e.g. "Bearer {value}". */
   format?: string;
-
-  /** Which managed identity to use. Defaults to SystemAssigned if omitted. */
-  type?: RaiEgressManagedIdentityType;
-
-  /** Resource ID of the user-assigned identity. Required when type is UserAssigned. */
-  identityResourceId?: string;
 }
 
 /**
@@ -6732,16 +6712,13 @@ model RaiEgressRewriteTarget {
 
   /** Target path. Original path (and query) is kept if omitted. */
   path?: string;
-
-  /** Target port. Original port is kept if omitted. */
-  targetPort?: int32;
 }
 
 /**
  * The action an egress rule takes when it matches.
  * - Allow/Deny: no additional fields needed; headers and rewrite must not be set.
  * - Transform: headers is required with at least one entry; rewrite must not be set.
- * - Rewrite: rewrite is required with at least one of scheme/host/path/targetPort;
+ * - Rewrite: rewrite is required with at least one of scheme/host/path;
  *   headers is optional for injecting headers alongside the redirect.
  */
 @added(Versions.v2026_05_15_preview)
