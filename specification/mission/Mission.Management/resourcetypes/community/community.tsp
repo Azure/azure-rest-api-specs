@@ -53,7 +53,8 @@ model ApprovalSettingConfiguration {
   approvalPolicy?: ApprovalPolicy;
 
   @doc("Minimum number of approvers required for this approval setting.")
-  minimumApproversRequired?: int64;
+  @minValue(0)
+  minimumApproversRequired?: int32;
 
   @identifiers(#["approverEntraId"])
   @doc("List of mandatory approvers for this approval setting.")
