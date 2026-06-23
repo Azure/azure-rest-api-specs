@@ -23,6 +23,7 @@ import "./TopicRecord.tsp";
 import "./NetworkGatewayResource.tsp";
 import "./AccessPointResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
