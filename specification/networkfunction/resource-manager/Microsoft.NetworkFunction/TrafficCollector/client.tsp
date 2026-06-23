@@ -70,61 +70,7 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
-// #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-// #suppress "@azure-tools/typespec-client-generator-core/no-corresponding-method-param" "override"
-// op azureTrafficCollectorsCreateOrUpdate(
-//   ...Azure.ResourceManager.ApiVersionParameter,
-//   ...SubscriptionIdParameter,
-//   ...ResourceGroupParameter,
-//   ...ProviderNamespace<SubscriptionActionScope>,
-
-//   /**
-//    * azureTrafficCollectorName.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   azureTrafficCollectorName: string,
-
-//   /**
-//    * Resource location.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   location: string,
-
-//   /**
-//    * Resource tags.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   tags?: Record<string>,
-
-//   /**
-//    * A unique read-only string that changes whenever the resource is updated.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-//   @visibility(Lifecycle.Read)
-//   etag?: string,
-
-//   /**
-//    * The virtualHub to which the Azure Traffic Collector belongs.
-//    */
-//   virtualHub?: ResourceReference,
-
-//   /**
-//    * The name of the Azure Traffic Collector.
-//    */
-//   @visibility(Lifecycle.Read)
-//   name?: string,
-// ):
-//   | Microsoft.NetworkFunction.AzureTrafficCollector
-//   | Azure.Core.Foundations.RetryAfterHeader
-//   | Microsoft.NetworkFunction.CloudError;
-// @@override(
-//   AzureTrafficCollectors.createOrUpdate,
-//   azureTrafficCollectorsCreateOrUpdate,
-//   "javascript"
-// );
+#suppress "@typespec/http/duplicate-operation" "customization"
 namespace Microsoft.NetworkFunction {
   @@scope(AzureTrafficCollectors.createOrUpdate, "!javascript");
   @@scope(CollectorPolicies.createOrUpdate, "!javascript");
@@ -133,6 +79,7 @@ namespace Microsoft.NetworkFunction {
   interface AzureTrafficCollectorsScope {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    #suppress "@typespec/http/duplicate-operation" "customization"
     createOrUpdate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureTrafficCollector>,
       ...Azure.ResourceManager.ProviderNamespace<AzureTrafficCollector>,
@@ -178,7 +125,7 @@ namespace Microsoft.NetworkFunction {
   }
   @armResourceOperations
   interface CollectorPoliciesScope {
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
+    #suppress "@typespec/http/duplicate-operation" "customization"
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
     createOrUpdate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<CollectorPolicy>,
