@@ -105,21 +105,24 @@
             "in": "path",
             "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
             "name": "clusterResourceName",
             "in": "path",
             "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters, appliances.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           },
           {
             "name": "clusterName",
             "in": "path",
             "description": "The name of the kubernetes cluster.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-_.]+$"
           }
         ],
         "responses": {

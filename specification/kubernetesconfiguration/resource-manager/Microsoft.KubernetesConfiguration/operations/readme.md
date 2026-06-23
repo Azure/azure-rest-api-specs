@@ -40,6 +40,10 @@ These settings apply only when `--tag=package-2025-04` is specified on the comma
 ``` yaml $(tag) == 'package-2025-04'
 input-file:
   - stable/2025-04-01/operations.json
+suppressions:
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: User RP limitation 
 ```
 
 ---
@@ -50,7 +54,11 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2025-03'
 input-file:
-  - stable/2025-03-01/operations.json           
+  - stable/2025-03-01/operations.json
+suppressions:
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: User RP limitation 
 ```
 
 ---

@@ -25,6 +25,7 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
     @path
     @segment("providers")
     @key
+    @pattern("^[a-zA-Z0-9-_.]+$")
     clusterRp: string;
 
     /**
@@ -32,6 +33,7 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
      */
     @key
     @path
+    @pattern("^[a-zA-Z0-9-_.]+$")
     clusterResourceName: string;
 
     /**
@@ -39,6 +41,7 @@ alias OperationStatusOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionO
      */
     @key
     @path
+    @pattern("^[a-zA-Z0-9-_.]+$")
     clusterName: string;
   },
   {
