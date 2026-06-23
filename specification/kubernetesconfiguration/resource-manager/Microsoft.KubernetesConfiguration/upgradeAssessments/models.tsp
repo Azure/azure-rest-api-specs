@@ -15,20 +15,6 @@ namespace Microsoft.KubernetesConfiguration;
 
 // ─── UpgradeAssessment enums ──────────────────────────────────────────────────
 
-/** Provisioning state of a resource. */
-union ProvisioningState {
-  string,
-
-  /** Resource is active. */
-  Succeeded: "Succeeded",
-
-  /** Resource provisioning has failed. */
-  Failed: "Failed",
-
-  /** Resource is being deleted. */
-  Canceled: "Canceled",
-}
-
 /** Severity of an upgrade-assessment finding or readiness check. */
 union Severity {
   string,
@@ -169,13 +155,8 @@ model ReadinessCheck {
 // ─── ARM resource properties ──────────────────────────────────────────────────
 
 /** Properties of a single UpgradeAssessment ARM resource. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a read-only resource and doesn't "
 model UpgradeAssessmentProperties {
-  /**
-   * Provisioning state of the UpgradeAssessment.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-
   /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
   @visibility(Lifecycle.Read)
   currentKubernetesVersion?: string;

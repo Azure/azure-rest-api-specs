@@ -336,36 +336,6 @@
         }
       }
     },
-    "ProvisioningState": {
-      "type": "string",
-      "description": "Provisioning state of a resource.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource is active."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource provisioning has failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource is being deleted."
-          }
-        ]
-      }
-    },
     "ReadinessCategory": {
       "type": "string",
       "description": "Category of a cluster readiness check.",
@@ -497,11 +467,6 @@
       "type": "object",
       "description": "Properties of a single UpgradeAssessment ARM resource.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the UpgradeAssessment.",
-          "readOnly": true
-        },
         "currentKubernetesVersion": {
           "type": "string",
           "description": "Current Kubernetes version running on the cluster (e.g., '1.29').",
