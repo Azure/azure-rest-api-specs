@@ -958,11 +958,7 @@ using Microsoft.MachineLearningServices;
   "RaiBlocklistItem",
   "csharp"
 );
-@@clientName(
-  RaiBlocklistPropertiesBasicResource,
-  "RaiBlocklist",
-  "csharp"
-);
+@@clientName(RaiBlocklistPropertiesBasicResource, "RaiBlocklist", "csharp");
 @@clientName(RaiPolicyPropertiesBasicResource, "RaiPolicy", "csharp");
 @@clientName(
   EndpointModelDeprecationProperties.fineTune,
