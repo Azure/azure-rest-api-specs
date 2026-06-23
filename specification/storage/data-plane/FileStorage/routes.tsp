@@ -1154,7 +1154,6 @@ interface File {
   >;
 
   /** Returns the list of valid page ranges for a file or snapshot of a file. */
-  @sharedRoute
   @route("?comp=rangelist")
   @get
   getRangeList is StorageOperationResponseBody<
@@ -1167,39 +1166,23 @@ interface File {
       ...AllowTrailingDotParameter;
       ...FileRequestIntentParameter;
       ...SupportRenameHeader;
+
+      /** A string value that identifies the portion of the list to be returned with the next List Ranges operation. */
+      @added(Versions.v2026_10_06)
+      @query
+      marker?: string;
+
+      /** Specifies the maximum number of ranges to return. */
+      @added(Versions.v2026_10_06)
+      @query
+      @minValue(1)
+      maxresults?: int32;
     },
     {
       ...LastModifiedResponseHeader;
       ...EtagResponseHeader;
       ...FileContentLengthResponseHeader;
       @body rangeList: ShareFileRangeList;
-    }
-  >;
-
-  /** Returns a paginated list of valid page ranges for a file or snapshot of a file. */
-  @added(Versions.v2026_10_06)
-  @sharedRoute
-  @route("?comp=rangelist")
-  @get
-  @list
-  listAllRanges is StorageOperationResponseBody<
-    {
-      ...ShareSnapshotParameter;
-      ...PreviousSnapshotParameter;
-      ...TimeoutParameter;
-      ...RangeHeader;
-      ...LeaseIdOptionalParameter;
-      ...AllowTrailingDotParameter;
-      ...FileRequestIntentParameter;
-      ...SupportRenameHeader;
-      ...MarkerParameter;
-      ...MaxResultsParameter;
-    },
-    {
-      ...LastModifiedResponseHeader;
-      ...EtagResponseHeader;
-      ...FileContentLengthResponseHeader;
-      @body rangeList: ShareFileRangeListSegment;
     }
   >;
 

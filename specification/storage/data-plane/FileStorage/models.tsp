@@ -986,25 +986,9 @@ model ShareFileRangeList {
   @Xml.unwrapped
   @Xml.name("ClearRange")
   clearRanges?: ClearRange[];
-}
-
-/** The paginated list of file ranges */
-@added(Versions.v2026_10_06)
-@Xml.name("Ranges")
-model ShareFileRangeListSegment {
-  /** The file ranges. */
-  @pageItems
-  @Xml.unwrapped
-  @Xml.name("Range")
-  ranges?: FileRange[];
-
-  /** The clear ranges. */
-  @Xml.unwrapped
-  @Xml.name("ClearRange")
-  clearRanges?: ClearRange[];
 
   /** The next marker. */
-  @continuationToken
+  @added(Versions.v2026_10_06)
   @Xml.name("NextMarker")
   nextMarker?: string;
 }
