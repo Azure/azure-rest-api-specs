@@ -326,6 +326,8 @@ model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
 
+@@alternateType(RoutineRunStatus, string, "java");
+
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
 // EvaluationSuiteGenerationJobs onto the Evaluators sub-client
