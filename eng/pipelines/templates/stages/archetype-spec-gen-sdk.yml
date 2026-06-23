@@ -224,10 +224,10 @@ stages:
         displayName: 'Run automation init script'
         condition: and(succeeded(), contains(variables['SdkRepoDirectory'], 'azure-sdk-for-go'))
       - script: |
-          set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
-          export PATH="$PATH"
+          # set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
+          # export PATH="$PATH"
           
-          bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
+          # bash "$(SdkRepoDirectory)/eng/scripts/automation_init.sh"
 
           export PATH="/mnt/vss/_work/1/s/gofolder/bin:$PATH"
           
