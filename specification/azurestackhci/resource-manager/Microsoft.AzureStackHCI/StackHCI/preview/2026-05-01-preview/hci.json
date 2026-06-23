@@ -12436,7 +12436,9 @@
         "AzureStackLCMUserCredential",
         "DefaultARBApplication",
         "LocalAdminCredential",
-        "WitnessStorageKey"
+        "WitnessStorageKey",
+        "chapCredential",
+        "mutualChapCredential"
       ],
       "x-ms-enum": {
         "name": "EceSecrets",
@@ -12461,6 +12463,16 @@
             "name": "WitnessStorageKey",
             "value": "WitnessStorageKey",
             "description": "WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster."
+          },
+          {
+            "name": "chapCredential",
+            "value": "chapCredential",
+            "description": "chapCredential used for iSCSI CHAP authentication during edge machine node preparation."
+          },
+          {
+            "name": "mutualChapCredential",
+            "value": "mutualChapCredential",
+            "description": "mutualChapCredential used for iSCSI mutual (bidirectional) CHAP authentication during edge machine node preparation."
           }
         ]
       }
@@ -12832,9 +12844,17 @@
       "type": "object",
       "description": "The deployment data of an edge machine.",
       "properties": {
-        "iScsiNetworkConfig": {
+        "iScsiConfig": {
           "$ref": "#/definitions/IscsiConfig",
-          "description": "iSCSI network configuration for the edge machine."
+          "description": "iSCSI configuration for the edge machine."
+        },
+        "secrets": {
+          "type": "array",
+          "description": "Protected parameters (secret references) stored in Key Vault and applied\nduring edge machine node preparation, for example iSCSI CHAP credentials.",
+          "items": {
+            "$ref": "#/definitions/EceDeploymentSecrets"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -16554,7 +16574,7 @@
     },
     "IscsiChapSettings": {
       "type": "object",
-      "description": "CHAP authentication settings for an iSCSI target portal.",
+      "description": "CHAP authentication settings for an iSCSI connection. The CHAP secrets\nthemselves are referenced via the deployment data secrets (Key Vault), not\ncarried inline.",
       "properties": {
         "chapType": {
           "$ref": "#/definitions/IscsiChapType",
@@ -16564,17 +16584,9 @@
           "type": "string",
           "description": "CHAP username used by the initiator to authenticate to the target."
         },
-        "chapSecret": {
-          "$ref": "#/definitions/IscsiSecretReference",
-          "description": "Reference to the Key Vault secret holding the CHAP password (secret) used\nby the initiator to authenticate to the target."
-        },
         "mutualChapUsername": {
           "type": "string",
           "description": "Mutual CHAP username used by the target to authenticate to the initiator.\nApplicable only when chapType is Bidirectional."
-        },
-        "mutualChapSecret": {
-          "$ref": "#/definitions/IscsiSecretReference",
-          "description": "Reference to the Key Vault secret holding the mutual CHAP password (secret)\nused by the target to authenticate to the initiator. Applicable only when\nchapType is Bidirectional."
         }
       }
     },
@@ -16610,19 +16622,29 @@
     },
     "IscsiConfig": {
       "type": "object",
+      "description": "iSCSI configuration.",
+      "properties": {
+        "iScsiNetworkConfig": {
+          "$ref": "#/definitions/IscsiNetworkConfig",
+          "description": "iSCSI network configuration including adapter properties and per-adapter IP configuration."
+        },
+        "chapSettings": {
+          "$ref": "#/definitions/IscsiChapSettings",
+          "description": "CHAP authentication settings used when connecting to the iSCSI target portals."
+        },
+        "initiatorIqn": {
+          "type": "string",
+          "description": "iSCSI Qualified Name (IQN) of the initiator."
+        }
+      }
+    },
+    "IscsiNetworkConfig": {
+      "type": "object",
       "description": "iSCSI network configuration.",
       "properties": {
         "adapterProperties": {
           "$ref": "#/definitions/IscsiAdapterProperties",
           "description": "Common adapter properties applied to all iSCSI network adapters."
-        },
-        "mpioPolicy": {
-          "$ref": "#/definitions/IscsiMpioPolicy",
-          "description": "Multipath I/O (MPIO) load balancing policy applied to the iSCSI sessions."
-        },
-        "chapSettings": {
-          "$ref": "#/definitions/IscsiChapSettings",
-          "description": "CHAP authentication settings used when connecting to the iSCSI target portals."
         },
         "adapterIPConfig": {
           "type": "array",
@@ -16633,39 +16655,6 @@
           "x-ms-identifiers": [
             "networkAdapterName"
           ]
-        }
-      }
-    },
-    "IscsiMpioPolicy": {
-      "type": "string",
-      "description": "Multipath I/O (MPIO) load balancing policy for iSCSI sessions.",
-      "enum": [
-        "RoundRobin"
-      ],
-      "x-ms-enum": {
-        "name": "IscsiMpioPolicy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RoundRobin",
-            "value": "RoundRobin",
-            "description": "Round robin: distribute I/O across all available paths in rotation."
-          }
-        ]
-      }
-    },
-    "IscsiSecretReference": {
-      "type": "object",
-      "description": "Reference to a secret stored in Key Vault.",
-      "properties": {
-        "secretName": {
-          "type": "string",
-          "description": "Name of the secret stored in Key Vault."
-        },
-        "secretLocation": {
-          "type": "string",
-          "format": "uri",
-          "description": "Key Vault URI of the secret."
         }
       }
     },

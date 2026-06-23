@@ -833,6 +833,18 @@ union EceSecrets {
    * WitnessStorageKey used for setting up a cloud witness for AzureStackHCI cluster.
    */
   WitnessStorageKey: "WitnessStorageKey",
+
+  /**
+   * chapCredential used for iSCSI CHAP authentication during edge machine node preparation.
+   */
+  @added(Versions.v2026_05_01_preview)
+  chapCredential: "chapCredential",
+
+  /**
+   * mutualChapCredential used for iSCSI mutual (bidirectional) CHAP authentication during edge machine node preparation.
+   */
+  @added(Versions.v2026_05_01_preview)
+  mutualChapCredential: "mutualChapCredential",
 }
 
 /**
@@ -10405,25 +10417,27 @@ model EdgeMachineScaleUnits {
 @added(Versions.v2026_05_01_preview)
 model EdgeMachineDeploymentData {
   /**
-   * iSCSI network configuration for the edge machine.
+   * iSCSI configuration for the edge machine.
    */
-  iScsiNetworkConfig?: IscsiConfig;
+  iScsiConfig?: IscsiConfig;
+
+  /**
+   * Protected parameters (secret references) stored in Key Vault and applied
+   * during edge machine node preparation, for example iSCSI CHAP credentials.
+   */
+  @identifiers(#[])
+  secrets?: EceDeploymentSecrets[];
 }
 
 /**
- * iSCSI network configuration.
+ * iSCSI configuration.
  */
 @added(Versions.v2026_05_01_preview)
 model IscsiConfig {
   /**
-   * Common adapter properties applied to all iSCSI network adapters.
+   * iSCSI network configuration including adapter properties and per-adapter IP configuration.
    */
-  adapterProperties?: IscsiAdapterProperties;
-
-  /**
-   * Multipath I/O (MPIO) load balancing policy applied to the iSCSI sessions.
-   */
-  mpioPolicy?: IscsiMpioPolicy;
+  iScsiNetworkConfig?: IscsiNetworkConfig;
 
   /**
    * CHAP authentication settings used when connecting to the iSCSI target portals.
@@ -10431,27 +10445,27 @@ model IscsiConfig {
   chapSettings?: IscsiChapSettings;
 
   /**
+   * iSCSI Qualified Name (IQN) of the initiator.
+   */
+  initiatorIqn?: string;
+}
+
+/**
+ * iSCSI network configuration.
+ */
+@added(Versions.v2026_05_01_preview)
+model IscsiNetworkConfig {
+  /**
+   * Common adapter properties applied to all iSCSI network adapters.
+   */
+  adapterProperties?: IscsiAdapterProperties;
+
+  /**
    * Per-adapter IP configuration for the iSCSI network adapters.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the iSCSI network configuration wire format."
   @identifiers(#["networkAdapterName"])
   adapterIPConfig?: IscsiAdapterIPConfig[];
-}
-
-/**
- * Multipath I/O (MPIO) load balancing policy for iSCSI sessions.
- */
-@added(Versions.v2026_05_01_preview)
-union IscsiMpioPolicy {
-  string,
-
-  /** Round robin: distribute I/O across all available paths in rotation. */
-  RoundRobin: "RoundRobin",
-  // Additional MPIO policies can be added as needed:
-  // RoundRobinWithSubset: "RoundRobinWithSubset",
-  // FailOverOnly: "FailOverOnly",
-  // LeastQueueDepth: "LeastQueueDepth",
-  // LeastBlocks: "LeastBlocks",
 }
 
 /**
@@ -10519,7 +10533,9 @@ model IscsiTargetPortalAddress {
 }
 
 /**
- * CHAP authentication settings for an iSCSI target portal.
+ * CHAP authentication settings for an iSCSI connection. The CHAP secrets
+ * themselves are referenced via the deployment data secrets (Key Vault), not
+ * carried inline.
  */
 @added(Versions.v2026_05_01_preview)
 model IscsiChapSettings {
@@ -10534,23 +10550,10 @@ model IscsiChapSettings {
   chapUsername?: string;
 
   /**
-   * Reference to the Key Vault secret holding the CHAP password (secret) used
-   * by the initiator to authenticate to the target.
-   */
-  chapSecret?: IscsiSecretReference;
-
-  /**
    * Mutual CHAP username used by the target to authenticate to the initiator.
    * Applicable only when chapType is Bidirectional.
    */
   mutualChapUsername?: string;
-
-  /**
-   * Reference to the Key Vault secret holding the mutual CHAP password (secret)
-   * used by the target to authenticate to the initiator. Applicable only when
-   * chapType is Bidirectional.
-   */
-  mutualChapSecret?: IscsiSecretReference;
 }
 
 /**
@@ -10568,20 +10571,4 @@ union IscsiChapType {
 
   /** Bidirectional (mutual) CHAP: initiator and target authenticate each other. */
   Bidirectional: "Bidirectional",
-}
-
-/**
- * Reference to a secret stored in Key Vault.
- */
-@added(Versions.v2026_05_01_preview)
-model IscsiSecretReference {
-  /**
-   * Name of the secret stored in Key Vault.
-   */
-  secretName?: string;
-
-  /**
-   * Key Vault URI of the secret.
-   */
-  secretLocation?: url;
 }
