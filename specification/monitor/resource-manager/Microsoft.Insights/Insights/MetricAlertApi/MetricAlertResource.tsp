@@ -75,7 +75,9 @@ interface MetricAlertResources {
   @tag("MetricAlerts")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
-    Response = ArmResourceUpdatedResponse<MetricAlertResource>,
+    Response =
+      | ArmResourceUpdatedResponse<MetricAlertResource>
+      | ArmResourceCreatedResponse<MetricAlertResource>,
     Error = MetricAlertErrorResponse
   >;
 
