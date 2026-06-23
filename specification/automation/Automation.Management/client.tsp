@@ -342,7 +342,11 @@ using TypeSpec.Rest;
   "GetAutomationJobs",
   "csharp"
 );
-@@access(AutomationAccounts.jobListByAutomationAccount, Access.internal, "csharp");
+@@access(
+  AutomationAccounts.jobListByAutomationAccount,
+  Access.internal,
+  "csharp"
+);
 @@clientName(
   AutomationAccounts.linkedWorkspaceGet,
   "GetLinkedWorkspace",
@@ -574,7 +578,11 @@ using TypeSpec.Rest;
   "AutomationPackageCreateOrUpdateContent",
   "csharp"
 );
-@@clientName(PackageCreateOrUpdateParameters.allOf, "TrackedResource", "csharp");
+@@clientName(
+  PackageCreateOrUpdateParameters.allOf,
+  "TrackedResource",
+  "csharp"
+);
 @@clientName(PackageUpdateParameters, "AutomationPackagePatch", "csharp");
 @@clientName(PackageUpdateParameters.allOf, "TrackedResource", "csharp");
 @@clientName(PackageProperties.allOf, "ResourceSystemData", "csharp");
@@ -951,23 +959,39 @@ namespace Microsoft.Automation {
   /**
    * SDK-only compatibility fixed enum for the previous ModuleProvisioningState API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-enum" "SDK-only C# compatibility type preserves the previous fixed enum API."
-  enum ModuleProvisioningStateCompatibility {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "SDK-only compatibility type that must remain closed to match the previous non-extensible enum."
+  union ModuleProvisioningStateCompatibility {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Created: "Created",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Creating: "Creating",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     StartingImportModuleRunbook: "StartingImportModuleRunbook",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     RunningImportModuleRunbook: "RunningImportModuleRunbook",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentRetrieved: "ContentRetrieved",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentDownloaded: "ContentDownloaded",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentValidated: "ContentValidated",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ConnectionTypeImported: "ConnectionTypeImported",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ContentStored: "ContentStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ModuleDataStored: "ModuleDataStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ActivitiesStored: "ActivitiesStored",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     ModuleImportRunbookComplete: "ModuleImportRunbookComplete",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Succeeded: "Succeeded",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Failed: "Failed",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Cancelled: "Canceled",
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
     Updating: "Updating",
   }
 
@@ -976,6 +1000,7 @@ namespace Microsoft.Automation {
    */
   union DscConfigurationProvisioningStateCompatibility {
     string,
+
     /** Succeeded. */
     Succeeded: "Succeeded",
   }
@@ -985,6 +1010,7 @@ namespace Microsoft.Automation {
    */
   union RunbookProvisioningStateCompatibility {
     string,
+
     /** Succeeded. */
     Succeeded: "Succeeded",
   }
