@@ -939,6 +939,22 @@ using Microsoft.MachineLearningServices;
 @@clientName(DeltaModelStatusResponse, "DeltaModelStatusResult", "csharp");
 @@clientName(AzureOpenAiHyperParameters, "AzureOpenAiHyperContent", "csharp");
 @@clientName(
+  ManagedNetworkSettingsPropertiesBasicResource,
+  "ManagedNetworkSettingsPropertiesBasic",
+  "csharp"
+);
+@@clientName(
+  RaiBlocklistItemPropertiesBasicResource,
+  "RaiBlocklistItemPropertiesBasic",
+  "csharp"
+);
+@@clientName(
+  RaiBlocklistPropertiesBasicResource,
+  "RaiBlocklistPropertiesBasic",
+  "csharp"
+);
+@@clientName(RaiPolicyPropertiesBasicResource, "RaiPolicy", "csharp");
+@@clientName(
   WorkspaceProperties.provisionNetworkNow,
   "IsProvisionNetworkNow",
   "csharp"
