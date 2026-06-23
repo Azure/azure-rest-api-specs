@@ -380,8 +380,8 @@ union AutocompleteResultTypeGroupsEnum {
    * Suggestions that resolve to named places — including administrative regions, populated
    * places, neighborhoods, natural features, and points of interest. Defined as the
    * complement of the `Address` group: every member of `AutocompleteResultTypeEnum` except
-   * `Address` and `RoadBlock`. Examples include `AdminDivision1`, `Neighborhood`,
-   * `PopulatedPlace`, `Airport`, `Hospital`, and `Forest`.
+   * `Address` and `RoadBlock`. Examples include `AdminDivision1`, `Neighborhood`, and
+   * `PopulatedPlace`.
    */
   Place: "Place",
 }
