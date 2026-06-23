@@ -70,7 +70,6 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
-#suppress "@typespec/http/duplicate-operation" "customization"
 namespace Microsoft.NetworkFunction {
   @@scope(AzureTrafficCollectors.createOrUpdate, "!javascript");
   @@scope(CollectorPolicies.createOrUpdate, "!javascript");
@@ -79,7 +78,6 @@ namespace Microsoft.NetworkFunction {
   interface AzureTrafficCollectorsScope {
     #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-    #suppress "@typespec/http/duplicate-operation" "customization"
     createOrUpdate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureTrafficCollector>,
       ...Azure.ResourceManager.ProviderNamespace<AzureTrafficCollector>,
@@ -125,9 +123,8 @@ namespace Microsoft.NetworkFunction {
   }
   @armResourceOperations
   interface CollectorPoliciesScope {
-    #suppress "@typespec/http/duplicate-operation" "customization"
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-    createOrUpdate(
+    createOrUpdateDuplicate(
       ...Azure.ResourceManager.Foundations.DefaultBaseParameters<CollectorPolicy>,
       ...Azure.ResourceManager.ProviderNamespace<CollectorPolicy>,
 
@@ -180,14 +177,14 @@ namespace Microsoft.NetworkFunction {
   }
 
   @@scope(AzureTrafficCollectorsScope.createOrUpdate, "javascript");
-  @@scope(CollectorPoliciesScope.createOrUpdate, "javascript");
+  @@scope(CollectorPoliciesScope.createOrUpdateDuplicate, "javascript");
   @@clientLocation(
     AzureTrafficCollectorsScope.createOrUpdate,
     "AzureTrafficCollectors",
     "javascript"
   );
   @@clientLocation(
-    CollectorPoliciesScope.createOrUpdate,
+    CollectorPoliciesScope.createOrUpdateDuplicate,
     "CollectorPolicies",
     "javascript"
   );
