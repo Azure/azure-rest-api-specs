@@ -127,6 +127,7 @@ namespace Azure.ResourceManager.Models {
 // );
 namespace Microsoft.NetworkFunction {
   @@scope(AzureTrafficCollectors.createOrUpdate, "!javascript");
+  @@scope(CollectorPolicies.createOrUpdate, "!javascript");
 
   @armResourceOperations
   interface AzureTrafficCollectorsScope {
@@ -175,11 +176,72 @@ namespace Microsoft.NetworkFunction {
         >
       | CloudError;
   }
+  @armResourceOperations
+  interface CollectorPoliciesScope {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    createOrUpdate(
+      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<CollectorPolicy>,
+      ...Azure.ResourceManager.ProviderNamespace<CollectorPolicy>,
+
+      /**
+       * azureTrafficCollectorName.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      azureTrafficCollectorName: string,
+
+      collectorPolicyName: string,
+
+      /**
+       * Resource location.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      location: string,
+
+      /**
+       * Resource tags.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+
+      /**
+       * A unique read-only string that changes whenever the resource is updated.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @visibility(Lifecycle.Read)
+      etag?: string,
+
+      /**
+       * Ingestion policies.
+       */
+      ingestionPolicy?: IngestionPolicyPropertiesFormat,
+
+      /**
+       * Emission policies.
+       */
+      @identifiers(#[])
+      emissionPolicies?: EmissionPoliciesPropertiesFormat[],
+    ):
+      | ArmResourceUpdatedResponse<AzureTrafficCollector>
+      | ArmResourceCreatedResponse<
+          AzureTrafficCollector,
+          ArmAsyncOperationHeader<FinalResult = AzureTrafficCollector> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | CloudError;
+  }
 
   @@scope(AzureTrafficCollectorsScope.createOrUpdate, "javascript");
+  @@scope(CollectorPoliciesScope.createOrUpdate, "javascript");
   @@clientLocation(
     AzureTrafficCollectorsScope.createOrUpdate,
     "AzureTrafficCollectors",
+    "javascript"
+  );
+  @@clientLocation(
+    CollectorPoliciesScope.createOrUpdate,
+    "CollectorPolicies",
     "javascript"
   );
 }
