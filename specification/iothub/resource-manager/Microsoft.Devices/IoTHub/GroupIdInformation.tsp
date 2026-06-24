@@ -3,7 +3,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
-import "./IotHubDescription.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -14,15 +13,21 @@ namespace Microsoft.Devices;
 /**
  * The group information for creating a private endpoint on an IotHub
  */
-@parentResource(IotHubDescription)
-model GroupIdInformation
-  is Azure.ResourceManager.ProxyResource<GroupIdInformationProperties, false> {
-  ...ResourceNameParameter<
-    Resource = GroupIdInformation,
-    KeyName = "groupId",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
+model GroupIdInformation {
+  /** The resource identifier. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** The resource name. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** The resource type. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /** The properties for a group information object */
+  properties: GroupIdInformationProperties;
 }
 
 alias GroupIdInformationOps = Azure.ResourceManager.Legacy.LegacyOperations<

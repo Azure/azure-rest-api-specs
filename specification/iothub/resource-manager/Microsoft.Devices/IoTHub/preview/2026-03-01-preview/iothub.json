@@ -3045,6 +3045,21 @@
       "type": "object",
       "description": "The group information for creating a private endpoint on an IotHub",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The resource identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/GroupIdInformationProperties",
           "description": "The properties for a group information object"
@@ -3052,11 +3067,6 @@
       },
       "required": [
         "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
       ]
     },
     "GroupIdInformationProperties": {
