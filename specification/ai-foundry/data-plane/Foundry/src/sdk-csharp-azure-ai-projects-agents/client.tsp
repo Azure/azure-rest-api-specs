@@ -14,6 +14,7 @@ using Azure.Core.Experimental;
 namespace Azure.AI.Projects {
   @@usage(CreateAgentVersionFromManifestRequest, Usage.input);
   @@access(CreateAgentVersionFromManifestRequest, Access.public);
+  @@clientName(CreateAgentVersionFromManifestRequest, "AgentVersionFromManifestContent");
 
   @@usage(CreateAgentVersionRequest, Usage.input);
   @@access(CreateAgentVersionRequest, Access.public);
@@ -237,11 +238,15 @@ namespace Azure.AI.Projects {
   @@access(PatchAgentRequest, Access.public);
   @@clientName(PatchAgentRequest, "PatchAgentOptions");
   @@access(Agents.patchAgentObject, Access.internal);
+  @@clientName(Agents.patchAgentObject, "PatchAgent")
   @@access(Agents.getSessionLogStream, Access.internal);
 
   @@usage(CreateAgentFromCodeContent, Usage.input);
   @@access(CreateAgentFromCodeContent, Access.public);
-  @@clientName(CreateAgentFromCodeContent, "CreateAgentFromCodeOptions");
+  @@clientName(CreateAgentFromCodeContent, "AgentFromCodeOptions");
+  @@clientName(CreateAgentVersionFromCodeMetadata, "AgentVersionFromCodeMetadata");
+  
+  @@clientName(AgentCardSkill.tags, "Labels");
 
   // --------------------------------------------------------------------------------
   // Hide Agent administration operations, containing the foundry features
@@ -266,6 +271,13 @@ namespace Azure.AI.Projects {
 
   @@clientName(ToolboxObject, "ToolboxRecord");
   @@clientName(ToolboxVersionObject, "ToolboxVersion");
+  
+  @@clientName(Toolboxes.createToolboxVersion, "CreateVersion");
+  @@clientName(Toolboxes.getToolbox, "Get");
+  @@clientName(Toolboxes.getToolboxVersion, "GetVersion");
+  @@clientName(Toolboxes.updateToolbox, "UpdateDefaultVersion");
+  @@clientName(Toolboxes.deleteToolboxVersion, "DeleteVersion");
+  @@clientName(Toolboxes.deleteToolbox, "Delete");
 
   // --------------------------------------------------------------------------------
   // AgentSessionFiles sub‐client
@@ -273,14 +285,20 @@ namespace Azure.AI.Projects {
 
   // Hide the protocol methods and methods using feature headers
   @@access(AgentSessionFiles.uploadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.uploadSessionFile, "Upload");
   @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.downloadSessionFile, "Download");
   @@access(AgentSessionFiles.listSessionFiles, Access.internal);
+  @@clientName(AgentSessionFiles.list, "GetAll");
   @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.deleteSessionFile, "Delete");
 
   // --------------------------------------------------------------------------------
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(Skill, "AgentsSkill");
+  @@clientName(DeleteSkillResponse, "SkillDeletionResult");
+  @@clientName(DeleteSkillVersionResponse, "SkillVersionDeletionResult");
 
   // --------------------------------------------------------------------------------
   // AgentOptimizationJobs sub‐client
