@@ -794,6 +794,7 @@ union SandboxCustomImageType {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp compat"
 @@flattenProperty(ClusterProperties.languageExtensions, "csharp");
+@@clientName(LanguageExtensionsList.value, "LanguageExtensionsValue", "csharp");
 
 @@alternateType(ClusterPrincipalProperties.tenantId, uuid, "csharp");
 @@alternateType(DatabasePrincipalProperties.tenantId, uuid, "csharp");
