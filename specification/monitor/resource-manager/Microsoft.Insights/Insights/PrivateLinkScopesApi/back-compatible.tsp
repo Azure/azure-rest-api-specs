@@ -38,7 +38,6 @@ using PrivateLinkScopesApi;
 
 @@clientLocation(ScopedResources.get, "PrivateLinkScopedResources");
 @@clientLocation(ScopedResources.createOrUpdate, "PrivateLinkScopedResources");
-@@clientName(ScopedResources.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(ScopedResources.delete, "PrivateLinkScopedResources");
 @@clientLocation(
   ScopedResources.listByPrivateLinkScope,

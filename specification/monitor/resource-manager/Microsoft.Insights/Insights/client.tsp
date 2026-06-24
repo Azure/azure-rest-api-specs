@@ -352,6 +352,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  PrivateLinkScopesApi.ScopedResources.createOrUpdate::parameters.resource,
+  "parameters",
+  "csharp"
+);
+@@clientName(
   PrivateLinkScopesApi.AzureMonitorPrivateLinkScopeProperties.provisioningState,
   "PrivateLinkScopeProvisioningState",
   "csharp"
