@@ -32,7 +32,7 @@ alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager
     ...ApiVersionParameter;
 
     /**
-     * The identifier of the resource.
+     * The fully qualified Azure Resource manager identifier of the resource.
      */
     @path(#{ allowReserved: true })
     @minLength(1)
