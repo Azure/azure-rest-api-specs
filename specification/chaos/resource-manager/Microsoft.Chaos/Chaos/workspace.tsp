@@ -71,7 +71,6 @@ interface Workspaces {
   /**
    * Refreshes recommendation status for all scenarios in a given workspace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Async LRO POST returning 202 + Location, not a synchronous POST"
   refreshRecommendations is ArmResourceActionNoContentAsyncWithLocationResult<
     Workspace,
     void,

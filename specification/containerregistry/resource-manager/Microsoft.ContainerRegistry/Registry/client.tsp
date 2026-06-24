@@ -47,7 +47,6 @@ namespace Microsoft.ContainerRegistry {
   }
 }
 // Hide the original enum from the public surface; clients should use ContainerRegistryResourceTypeExtensible instead.
-@@access(ContainerRegistryResourceType, Access.internal, "csharp");
 
 @@alternateType(ArchivePackageSourceProperties.url, url, "csharp");
 @@alternateType(
@@ -308,6 +307,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(LoggingProperties, "ConnectedRegistryLogging", "csharp");
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
+@@clientName(
+  WritableCacheRepos,
+  "ContainerRegistryWritableCacheRepos",
+  "csharp"
+);
 @@clientName(
   Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
   "ContainerRegistryResourceType",

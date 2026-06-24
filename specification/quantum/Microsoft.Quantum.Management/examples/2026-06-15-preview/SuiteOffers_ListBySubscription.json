@@ -1,0 +1,39 @@
+{
+  "operationId": "SuiteOffers_ListBySubscription",
+  "title": "SuiteOffers_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2026-06-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Quantum/suiteOffers/provider1",
+            "name": "provider1",
+            "type": "Microsoft.Quantum/suiteOffers",
+            "properties": {
+              "providerId": "provider1",
+              "providerName": "Contoso Provider 1",
+              "description": "Contoso Provider 1 description",
+              "companyName": "Contoso",
+              "location": "West US",
+              "quotas": {
+                "standardMinutesLifetime": 5000,
+                "highMinutesLifetime": 200
+              },
+              "targetQuotas": [
+                {
+                  "targetId": "provider1.target1",
+                  "standardMinutesLifetime": 3000,
+                  "highMinutesLifetime": 100
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

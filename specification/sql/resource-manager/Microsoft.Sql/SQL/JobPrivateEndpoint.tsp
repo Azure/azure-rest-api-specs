@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A job agent private endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(JobAgent)
+@Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 model JobPrivateEndpoint
   is Azure.ResourceManager.ProxyResource<JobPrivateEndpointProperties> {
   ...ResourceNameParameter<
@@ -25,7 +27,9 @@ model JobPrivateEndpoint
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.JobPrivateEndpoints)
 interface JobPrivateEndpoints {
   /**
    * Gets a private endpoint.
