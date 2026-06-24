@@ -338,3 +338,13 @@ model CustomMonitoredSubscription {
   CustomMonitoredSubscription,
   "javascript"
 );
+@@clientName(
+  MonitoredSubscription,
+  "CustomMonitoredSubscription",
+  "javascript"
+);
+@@clientName(
+  CustomMonitoredSubscription,
+  "MonitoredSubscription",
+  "javascript"
+);
