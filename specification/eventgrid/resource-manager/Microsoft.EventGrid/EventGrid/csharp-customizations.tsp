@@ -153,14 +153,15 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
 
-// GA parity: the SDK already exposes domain-topic event subscription listing via
-// DomainTopicEventSubscriptionCollection.GetAll(). Hide the duplicate extension projection.
-@@scope(EventSubscriptions.listByDomainTopic, "!csharp");
-// GA parity: keep split/perimeter compatibility wrappers as public surface; generated NSP Get
-// operation overloads should remain internal for C#.
-@@access(NetworkSecurityPerimeterConfigurations.get, Access.internal, "csharp");
-// GA parity: list-by-resource data projection is exposed via EventSubscriptionCollection in GA.
-@@access(EventSubscriptionOperationGroup.listByResource, Access.internal, "csharp");
+// GA parity: keep these operations public but rename to align with existing SDK shapes.
+@@clientName(EventSubscriptions.listByDomainTopic, "GetAll", "csharp");
+@@clientLocation(
+  EventSubscriptions.listByDomainTopic,
+  "DomainTopicEventSubscriptions",
+  "csharp"
+);
+@@clientName(NetworkSecurityPerimeterConfigurations.get, "Get", "csharp");
+@@clientName(EventSubscriptionOperationGroup.listByResource, "GetAll", "csharp");
 @@clientLocation(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "EventSubscriptionsSubscriptionScope",
