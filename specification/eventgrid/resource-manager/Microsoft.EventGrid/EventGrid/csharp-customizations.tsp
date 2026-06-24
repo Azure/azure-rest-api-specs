@@ -159,6 +159,8 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 // GA parity: keep split/perimeter compatibility wrappers as public surface; generated NSP Get
 // operation overloads should remain internal for C#.
 @@access(NetworkSecurityPerimeterConfigurations.get, Access.internal, "csharp");
+// GA parity: list-by-resource data projection is exposed via EventSubscriptionCollection in GA.
+@@access(EventSubscriptions.listByResource, Access.internal, "csharp");
 @@clientLocation(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "EventSubscriptionsSubscriptionScope",
