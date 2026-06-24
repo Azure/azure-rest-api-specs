@@ -896,7 +896,37 @@ model KustoClusterPatch
   "csharp"
 );
 @@alternateType(
+  EventGridConnectionWithManagedIdentityProperties.storageAccountResourceIdForManagedIdentity,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventGridConnectionWithManagedIdentityProperties.eventHubResourceIdForManagedIdentity,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventGridConnectionWithManagedIdentityProperties.eventGridResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventGridConnectionWithManagedIdentityProperties.managedIdentityObjectId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
   EventHubConnectionWithManagedIdentityProperties.managedIdentityResourceId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventHubConnectionWithManagedIdentityProperties.eventHubResourceIdForManagedIdentity,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventHubConnectionWithManagedIdentityProperties.managedIdentityObjectId,
+  uuid,
   "csharp"
 );
