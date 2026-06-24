@@ -68,14 +68,47 @@ using Microsoft.CloudHealth;
 @@clientName(DataAnnotation, "EntityDataAnnotation", "csharp");
 @@clientName(
   GetDataAnnotationsRequest,
-  "EntityGetDataAnnotationsRequest",
+  "EntityGetDataAnnotationsContent",
   "csharp"
 );
 @@clientName(
   GetDataAnnotationsResponse,
-  "EntityGetDataAnnotationsResponse",
+  "EntityGetDataAnnotationsResult",
   "csharp"
 );
+@@clientName(EntityHistoryRequest, "EntityHistoryContent", "csharp");
+@@clientName(EntityHistoryResponse, "EntityHistoryResult", "csharp");
+@@clientName(SignalHistoryRequest, "EntitySignalHistoryContent", "csharp");
+@@clientName(SignalHistoryResponse, "EntitySignalHistoryResult", "csharp");
+@@clientName(
+  AddDataAnnotationRequest,
+  "EntityAddDataAnnotationContent",
+  "csharp"
+);
+@@clientName(
+  GetSignalRecommendationsResponse,
+  "EntityGetSignalRecommendationsResult",
+  "csharp"
+);
+@@clientName(HealthReportRequest, "EntityHealthReportContent", "csharp");
+@@clientName(ThresholdRuleV2, "EntitySignalThresholdRuleV2", "csharp");
+@@clientName(ThresholdRuleV2.operator, "SignalOperator", "csharp");
+@@clientName(SignalGroups, "EntitySignalGroups", "csharp");
+@@clientName(AzureResourceSignal, "ResourceSignal", "csharp");
+@@clientName(AzureResourceSignals, "ResourceSignals", "csharp");
+@@clientName(AzureMonitorWorkspaceSignals, "MonitorWorkspaceSignals", "csharp");
+@@clientName(
+  AzureResourceHealthSignalStatus,
+  "ResourceHealthSignalStatus",
+  "csharp"
+);
+@@clientName(AzureResourceHealthSignal, "ResourceHealthSignal", "csharp");
+@@clientName(
+  DependenciesSignalGroupV2.ignoreUnknown,
+  "shouldIgnoreUnknown",
+  "csharp"
+);
+@@clientName(LookBackWindow, "DynamicThresholdLookBackWindow", "csharp");
 
 // JavaScript SDK visibility workaround:
 // For write operations whose body models contain server-side read-only properties

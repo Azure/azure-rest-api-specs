@@ -73,17 +73,17 @@ using Microsoft.DesktopVirtualization;
   "^[-\\w\\._,\\(\\)]+$"
 );
 
-@@clientName(MSIXImages, "MsixImages", "autorest");
+@@clientName(MSIXImages, "MsixImages", "autorest,java");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ActiveSessionHostConfiguration.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicationGroup.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -93,67 +93,72 @@ using Microsoft.DesktopVirtualization;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Application.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Desktop.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   HostPool.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   MSIXPackage.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   Workspace.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateEndpointConnectionWithSystemData.properties,
-  "autorest"
+  "autorest,java"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
+  "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ScalingPlanPersonalSchedule.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ScalingPlan.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ScalingPlanPooledSchedule.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SessionHost.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SessionHostConfiguration.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SessionHostManagement.properties,
-  "autorest"
+  "autorest,java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   UserSession.properties,
-  "autorest"
+  "autorest,java"
 );
 
 @@Azure.ClientGenerator.Core.clientName(
