@@ -38,6 +38,12 @@ using Http;
   "java"
 );
 
+@@scope(GroupIdInformations.get, "!csharp");
+@@scope(GroupIdInformations.list, "!csharp");
+@@usage(GroupIdInformation, Usage.output, "csharp");
+@@usage(GroupIdInformationProperties, Usage.output, "csharp");
+@@usage(PrivateLinkResources, Usage.output, "csharp");
+
 // Keep legacy Go struct field names with "Iso8601" casing.
 @@clientName(
   StorageEndpointProperties.sasTtlAsIso8601,
