@@ -67,7 +67,6 @@ using Microsoft.Elastic;
   "$DO_NOT_NORMALIZE$vMIngestion",
   "javascript"
 );
-@@clientName(ElasticMonitorResources.details, "Details");
 @@clientLocation(
   ElasticMonitorResources.vMCollectionUpdate,
   "VMCollection",
