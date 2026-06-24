@@ -21,6 +21,16 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoint, "MachineLearningFqdnEndpoint", "csharp");
 @@clientName(FqdnEndpointDetail, "MachineLearningFqdnEndpointDetail", "csharp");
 @@clientName(FqdnEndpoints, "MachineLearningFqdnEndpoints", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint,
+  "MachineLearningPrivateEndpoint",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // Fix duplicate property names in C# - property and type have same name after PascalCase
 @@clientName(
@@ -952,10 +962,14 @@ using Microsoft.MachineLearningServices;
 @@clientName(AzureOpenAiHyperParameters, "AzureOpenAiHyperContent", "csharp");
 @@clientName(
   FqdnEndpointsPropertyBag,
-  Azure.ClientGenerator.Core.exact("FqdnEndpointsPropertyBag"),
+  "MachineLearningFqdnEndpointGroup",
   "csharp"
 );
-@@clientName(ExternalFQDNResponse, "ExternalFqdnResult", "csharp");
+@@clientName(
+  ExternalFQDNResponse,
+  "MachineLearningExternalFQDNResult",
+  "csharp"
+);
 @@clientName(
   PTUDeploymentUsage,
   Azure.ClientGenerator.Core.exact("PtuDeploymentUsage"),
@@ -966,6 +980,12 @@ using Microsoft.MachineLearningServices;
   "MachineLearningManagedNetworkSettings",
   "csharp"
 );
+@@clientName(
+  ManagedNetworkSettingsEx,
+  "MachineLearningManagedNetworkSettingsDetails",
+  "csharp"
+);
+@@clientName(FinetuningDetails, "FineTuningDetails", "csharp");
 @@clientName(
   RaiBlocklistItemPropertiesBasicResource,
   "RaiBlocklistItem",
