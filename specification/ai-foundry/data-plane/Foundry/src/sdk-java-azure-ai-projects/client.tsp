@@ -184,6 +184,12 @@ namespace Azure.AI.Projects;
 
 @@clientName(ContinuousEvaluationRuleAction.evalId, "evaluationId");
 
+@@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
+
+@@clientName(AttackStrategy.Base64, "Base_64");
+@@clientName(AttackStrategy.ROT13, "ROT_13");
+
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------

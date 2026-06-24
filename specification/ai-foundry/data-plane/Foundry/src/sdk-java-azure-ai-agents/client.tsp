@@ -81,6 +81,8 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
+@@clientName(_PreviewAgentToolType.fabric_dataagent_preview, "FABRIC_DATA_AGENT_PREVIEW");
+
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
