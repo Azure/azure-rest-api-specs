@@ -857,6 +857,7 @@ union SandboxCustomImageType {
  * Class representing an update to a Kusto cluster.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// this model should sync to model ClusterUpdate except for extending TrackedResource, for csharp compatibility.
 model KustoClusterPatch
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
