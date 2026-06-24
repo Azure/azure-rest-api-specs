@@ -26,6 +26,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningPrivateEndpoint",
   "csharp"
 );
+@@clientName(PrivateEndpointResource, "RegistryPrivateEndpoint", "csharp");
 @@alternateType(
   Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
   Azure.Core.armResourceIdentifier,
