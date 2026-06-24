@@ -22,8 +22,8 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy private link operation"
-  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "preserve existing wire parameter name"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"
@@ -33,9 +33,9 @@ interface PrivateLinkResources {
   /**
    * Gets the private link resources that need to be created for a Azure Monitor PrivateLinkScope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "legacy operation returns a single page"
-  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "preserve existing wire parameter name"
-  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "legacy operation returns a single page"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/invalid-parameter-rename" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "privateLinkResourceName",
     "groupName"

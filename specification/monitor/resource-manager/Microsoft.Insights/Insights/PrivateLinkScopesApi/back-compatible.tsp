@@ -33,11 +33,9 @@ using PrivateLinkScopesApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "restore flattened private link resource data shape for C# compatibility"
-@@Legacy.flattenProperty(PrivateLinkResource.properties);
-
 @@clientLocation(ScopedResources.get, "PrivateLinkScopedResources");
 @@clientLocation(ScopedResources.createOrUpdate, "PrivateLinkScopedResources");
+@@clientName(ScopedResources.createOrUpdate::parameters.resource, "parameters");
 @@clientLocation(ScopedResources.delete, "PrivateLinkScopedResources");
 @@clientLocation(
   ScopedResources.listByPrivateLinkScope,

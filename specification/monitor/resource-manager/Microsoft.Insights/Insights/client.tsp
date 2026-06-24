@@ -346,14 +346,14 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@usage(PrivateLinkScopesApi.PrivateLinkResource, Usage.input, "csharp");
-@@clientName(
-  PrivateLinkScopesApi.ScopedResource,
-  "MonitorPrivateLinkScopedResource",
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "restore flattened private link resource data shape for C# compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkScopesApi.PrivateLinkResource.properties,
   "csharp"
 );
 @@clientName(
-  PrivateLinkScopesApi.ScopedResources.createOrUpdate::parameters.resource,
-  "parameters",
+  PrivateLinkScopesApi.ScopedResource,
+  "MonitorPrivateLinkScopedResource",
   "csharp"
 );
 @@clientName(
