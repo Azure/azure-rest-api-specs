@@ -255,6 +255,10 @@ model FlexProperties {
 
   @doc("The zone allocation policy for distributing VMs across availability zones")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected.")
+  minCapacity?: int32;
 }
 
 /**

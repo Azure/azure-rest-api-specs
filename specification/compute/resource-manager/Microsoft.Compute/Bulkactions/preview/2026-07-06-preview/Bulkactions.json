@@ -2376,6 +2376,11 @@
         "zoneAllocationPolicy": {
           "$ref": "#/definitions/ZoneAllocationPolicy",
           "description": "The zone allocation policy for distributing VMs across availability zones"
+        },
+        "minCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected."
         }
       },
       "required": [
