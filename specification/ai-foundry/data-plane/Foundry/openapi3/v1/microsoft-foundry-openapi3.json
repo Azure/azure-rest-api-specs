@@ -16860,6 +16860,10 @@
         ],
         "description": "An A2A tool stored in a toolbox."
       },
+      "A2AProtocolConfiguration": {
+        "type": "object",
+        "description": "Configuration specific to the A2A protocol."
+      },
       "A2AToolCall": {
         "type": "object",
         "required": [
@@ -16950,10 +16954,6 @@
           }
         ],
         "description": "The output of an A2A (Agent-to-Agent) tool call."
-      },
-      "A2aProtocolConfiguration": {
-        "type": "object",
-        "description": "Configuration specific to the A2A protocol."
       },
       "AISearchIndexResource": {
         "type": "object",
@@ -51753,7 +51753,7 @@
           "a2a": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/A2aProtocolConfiguration"
+                "$ref": "#/components/schemas/A2AProtocolConfiguration"
               }
             ],
             "description": "Configuration for the A2A protocol."
@@ -52546,6 +52546,11 @@
           "trigger_name": {
             "type": "string",
             "description": "The configured trigger name that produced the routine attempt."
+          },
+          "trigger_event_payload": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "The event payload captured from the event that triggered the routine attempt, when available."
           },
           "attempt_source": {
             "allOf": [
