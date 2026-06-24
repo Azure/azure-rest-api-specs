@@ -152,6 +152,7 @@ using Microsoft.NetApp;
 @@clientName(WeeklySchedule, "SnapshotPolicyWeeklySchedule", "csharp");
 @@clientName(CacheLifeCycleState, "NetAppCacheLifeCycleState", "csharp");
 @@clientName(CacheProvisioningState, "NetAppCacheProvisioningState", "csharp");
+@@clientName(CacheFileAccessLogs, "NetAppCacheFileAccessLogs", "csharp");
 @@clientName(CifsChangeNotifyState, "NetAppCifsChangeNotifyState", "csharp");
 @@clientName(EnableWriteBackState, "NetAppEnableWriteBackState", "csharp");
 @@clientName(EncryptionState, "NetAppEncryptionState", "csharp");
