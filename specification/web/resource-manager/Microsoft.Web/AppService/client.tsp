@@ -6,6 +6,7 @@ using Http;
 using Azure.ClientGenerator.Core;
 using Microsoft.Web;
 using Azure.ResourceManager;
+using Azure.Core;
 
 namespace Customizations;
 
@@ -109,1224 +110,6 @@ namespace Customizations;
   "python"
 );
 
-// =============================================================================
-// Migrated from autorest.md rename-mapping (C# emitter only)
-// =============================================================================
-
-// --- Model renames ---
-@@clientName(AddressResponse, "AppServiceEnvironmentAddressResult", "csharp");
-@@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
-@@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
-@@clientName(AnalysisDefinition, "WebSiteAnalysisDefinition", "csharp");
-@@clientName(ApiKVReference, "ApiKeyVaultReference", "csharp");
-@@clientName(
-  ApiKVReferenceCollection,
-  "AppServiceApiKeyVaultReferenceList",
-  "csharp"
-);
-@@clientName(Apple, "AppServiceAppleProvider", "csharp");
-@@clientName(AppleRegistration, "AppServiceAppleRegistration", "csharp");
-@@clientName(
-  ApplicationStackCollection,
-  "ApplicationStackListResult",
-  "csharp"
-);
-@@clientName(
-  AppServiceEnvironment,
-  "AppServiceEnvironmentProperties",
-  "csharp"
-);
-@@clientName(
-  AppServiceEnvironmentCollection,
-  "AppServiceEnvironmentListResult",
-  "csharp"
-);
-@@clientName(
-  AppServiceEnvironmentPatchResource,
-  "AppServiceEnvironmentPatchContent",
-  "csharp"
-);
-@@clientName(AppServiceEnvironmentResource, "AppServiceEnvironment", "csharp");
-@@clientName(AppServicePlanCollection, "AppServicePlanListResult", "csharp");
-@@clientName(
-  AppServicePlanPatchResource,
-  "AppServicePlanPatchContent",
-  "csharp"
-);
-@@clientName(AseRegion, "AppServiceAseRegion", "csharp");
-@@clientName(
-  AuthenticationType,
-  "FunctionAppStorageAccountAuthenticationType",
-  "csharp"
-);
-@@clientName(Microsoft.Web.AuthType, "SiteContainerAuthType", "csharp");
-@@clientName(AzureActiveDirectory, "AppServiceAadProvider", "csharp");
-@@clientName(AzureActiveDirectoryLogin, "AppServiceAadLoginFlow", "csharp");
-@@clientName(
-  AzureActiveDirectoryRegistration,
-  "AppServiceAadRegistration",
-  "csharp"
-);
-@@clientName(
-  AzureActiveDirectoryValidation,
-  "AppServiceAadValidation",
-  "csharp"
-);
-@@clientName(
-  AzureBlobStorageApplicationLogsConfig,
-  "AppServiceBlobStorageApplicationLogsConfig",
-  "csharp"
-);
-@@clientName(
-  AzureBlobStorageHttpLogsConfig,
-  "AppServiceBlobStorageHttpLogsConfig",
-  "csharp"
-);
-@@clientName(
-  AzureResourceErrorInfo,
-  "WorkflowExpressionResourceErrorInfo",
-  "csharp"
-);
-@@clientName(AzureResourceType, "AppServiceResourceType", "csharp");
-@@clientName(AzureStaticWebApps, "AppServiceStaticWebAppsProvider", "csharp");
-@@clientName(
-  AzureStaticWebAppsRegistration,
-  "AppServiceStaticWebAppsRegistration",
-  "csharp"
-);
-@@clientName(AzureStorageInfoValue, "AppServiceStorageAccessInfo", "csharp");
-@@clientName(
-  AzureStoragePropertyDictionaryResource,
-  "AzureStoragePropertyDictionary",
-  "csharp"
-);
-@@clientName(AzureStorageProtocol, "AppServiceStorageProtocol", "csharp");
-@@clientName(AzureStorageState, "AppServiceStorageAccountState", "csharp");
-@@clientName(AzureStorageType, "AppServiceStorageType", "csharp");
-@@clientName(
-  AzureTableStorageApplicationLogsConfig,
-  "AppServiceTableStorageApplicationLogsConfig",
-  "csharp"
-);
-@@clientName(BackupItem, "WebAppBackup", "csharp");
-@@clientName(BackupItemCollection, "WebAppBackupItemListResult", "csharp");
-@@clientName(BackupItemStatus, "WebAppBackupStatus", "csharp");
-@@clientName(BackupRequest, "WebAppBackupInfo", "csharp");
-@@clientName(BackupSchedule, "WebAppBackupSchedule", "csharp");
-@@clientName(BasicAuthName, "StaticSiteBasicAuthName", "csharp");
-@@clientName(
-  BillingMeterCollection,
-  "AppServiceBillingMeterListResult",
-  "csharp"
-);
-@@clientName(BuildStatus, "StaticSiteBuildStatus", "csharp");
-@@clientName(Capability, "AppServiceSkuCapability", "csharp");
-@@clientName(Certificate, "AppCertificate", "csharp");
-@@clientName(CertificateCollection, "AppCertificateListResult", "csharp");
-@@clientName(CertificatePatchResource, "AppCertificatePatch", "csharp");
-@@clientName(Channels, "RecommendationChannel", "csharp");
-@@clientName(ContainerThrottlingData, "ContainerThrottlingInfo", "csharp");
-@@clientName(ContentHash, "WebAppContentHash", "csharp");
-@@clientName(ContentLink, "WebAppContentLink", "csharp");
-@@clientName(
-  ContinuousWebJobCollection,
-  "ContinuousWebJobListResult",
-  "csharp"
-);
-@@clientName(CookieExpiration, "WebAppCookieExpiration", "csharp");
-@@clientName(CsmOperationCollection, "CsmOperationListResult", "csharp");
-@@clientName(CsmPublishingProfileOptions, "CsmPublishingProfile", "csharp");
-@@clientName(CsmUsageQuotaCollection, "CsmUsageQuotaListResult", "csharp");
-@@clientName(DaprConfig, "AppDaprConfig", "csharp");
-@@clientName(DaprLogLevel, "AppDaprLogLevel", "csharp");
-@@clientName(DatabaseConnection, "StaticSiteDatabaseConnection", "csharp");
-@@clientName(
-  DatabaseConnectionOverview,
-  "StaticSiteDatabaseConnectionOverview",
-  "csharp"
-);
-@@clientName(
-  DatabaseConnectionPatchRequest,
-  "StaticSiteDatabaseConnectionPatchContent",
-  "csharp"
-);
-@@clientName(DataSource, "DetectorDataSource", "csharp");
-@@clientName(DayOfWeek, "WebAppDayOfWeek", "csharp");
-@@clientName(DefaultAction, "SiteDefaultAction", "csharp");
-@@clientName(DeletedAppRestoreRequest, "DeletedAppRestoreContent", "csharp");
-@@clientName(DeletedWebAppCollection, "DeletedWebAppListResult", "csharp");
-@@clientName(Deployment, "WebAppDeployment", "csharp");
-@@clientName(DeploymentCollection, "WebAppDeploymentListResult", "csharp");
-@@clientName(DetectorResponse, "AppServiceDetector", "csharp");
-@@clientName(
-  DetectorResponseCollection,
-  "AppServiceDetectorListResult",
-  "csharp"
-);
-@@clientName(
-  DiagnosticAnalysisCollection,
-  "WebSiteAnalysisDefinitionListResult",
-  "csharp"
-);
-@@clientName(
-  DiagnosticCategoryCollection,
-  "DiagnosticCategoryListResult",
-  "csharp"
-);
-@@clientName(DiagnosticData, "DiagnosticDataset", "csharp");
-@@clientName(
-  DiagnosticDetectorCollection,
-  "DiagnosticDetectorListResult",
-  "csharp"
-);
-@@clientName(Dimension, "MetricDimension", "csharp");
-@@clientName(
-  DnlResourceNameAvailability,
-  "DnlResourceNameAvailabilityResult",
-  "csharp"
-);
-@@clientName(EnabledConfig, "WebAppEnabledConfig", "csharp");
-@@clientName(EnvironmentVariable, "WebAppEnvironmentVariable", "csharp");
-@@clientName(ErrorInfo, "WebAppErrorInfo", "csharp");
-@@clientName(ErrorProperties, "WebAppErrorProperties", "csharp");
-@@clientName(Microsoft.Web.ErrorResponse, "WebAppErrorResponse", "csharp");
-@@clientName(Experiments, "RoutingRuleExperiments", "csharp");
-@@clientName(Expression, "WorkflowExpression", "csharp");
-@@clientName(ExpressionRoot, "WorkflowExpressionRoot", "csharp");
-@@clientName(Facebook, "AppServiceFacebookProvider", "csharp");
-@@clientName(FrequencyUnit, "BackupFrequencyUnit", "csharp");
-@@clientName(
-  FunctionAppStackCollection,
-  "FunctionAppStackListResult",
-  "csharp"
-);
-@@clientName(
-  FunctionEnvelopeCollection,
-  "FunctionEnvelopeListResult",
-  "csharp"
-);
-@@clientName(
-  FunctionsAlwaysReadyConfig,
-  "FunctionAppAlwaysReadyConfig",
-  "csharp"
-);
-@@clientName(FunctionsDeploymentStorage, "FunctionAppStorage", "csharp");
-@@clientName(
-  FunctionsDeploymentStorageType,
-  "FunctionAppStorageType",
-  "csharp"
-);
-@@clientName(
-  FunctionsDeploymentStorageAuthentication,
-  "FunctionAppStorageAuthentication",
-  "csharp"
-);
-@@clientName(FunctionsRuntime, "FunctionAppRuntime", "csharp");
-@@clientName(
-  FunctionsScaleAndConcurrency,
-  "FunctionAppScaleAndConcurrency",
-  "csharp"
-);
-@@clientName(GeoRegionCollection, "AppServiceGeoRegionListResult", "csharp");
-@@clientName(GitHub, "AppServiceGitHubProvider", "csharp");
-@@clientName(Google, "AppServiceGoogleProvider", "csharp");
-@@clientName(HandlerMapping, "HttpRequestHandlerMapping", "csharp");
-@@clientName(HostKeys, "FunctionAppHostKeys", "csharp");
-@@clientName(HostNameBindingCollection, "HostNameBindingListResult", "csharp");
-@@clientName(
-  HybridConnectionCollection,
-  "HybridConnectionListResult",
-  "csharp"
-);
-@@clientName(IdentifierCollection, "AppServiceIdentifierListResult", "csharp");
-@@clientName(
-  InAvailabilityReasonType,
-  "AppServiceNameUnavailableReason",
-  "csharp"
-);
-@@clientName(
-  InboundEnvironmentEndpointCollection,
-  "InboundEnvironmentEndpointListResult",
-  "csharp"
-);
-@@clientName(InsightStatus, "DetectorInsightStatus", "csharp");
-@@clientName(IpAddress, "WebAppIPAddress", "csharp");
-@@clientName(IpAddressRange, "WebAppIPAddressRange", "csharp");
-@@clientName(IssueType, "DetectorIssueType", "csharp");
-@@clientName(JsonSchema, "WebAppJsonSchema", "csharp");
-@@clientName(KeyInfo, "WebAppKeyInfo", "csharp");
-@@clientName(KeyType, "WebAppKeyType", "csharp");
-@@clientName(KeyValuePairStringObject, "DataProviderKeyValuePair", "csharp");
-@@clientName(KubeEnvironmentCollection, "KubeEnvironmentListResult", "csharp");
-@@clientName(Login, "WebAppLoginInfo", "csharp");
-@@clientName(LogLevel, "WebAppLogLevel", "csharp");
-@@clientName(MSDeploy, "WebAppMSDeploy", "csharp");
-@@clientName(MSDeployLog, "WebAppMSDeployLog", "csharp");
-@@clientName(MSDeployLogEntry, "WebAppMSDeployLogEntry", "csharp");
-@@clientName(MSDeployLogEntryType, "WebAppMSDeployLogEntryType", "csharp");
-@@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
-@@clientName(NetworkTrace, "WebAppNetworkTrace", "csharp");
-@@clientName(Nonce, "LoginFlowNonceSettings", "csharp");
-@@clientName(
-  OutboundEnvironmentEndpointCollection,
-  "OutboundEnvironmentEndpointListResult",
-  "csharp"
-);
-@@clientName(ParameterType, "WebAppParameterType", "csharp");
-@@clientName(PerfMonCounterCollection, "PerfMonCounterListResult", "csharp");
-@@clientName(PerfMonResponse, "PerfMonResponseInfo", "csharp");
-@@clientName(
-  PremierAddOnOfferCollection,
-  "PremierAddOnOfferListResult",
-  "csharp"
-);
-@@clientName(
-  PrivateEndpointConnectionCollection,
-  "RemotePrivateEndpointConnectionListResult",
-  "csharp"
-);
-@@clientName(
-  PrivateLinkConnectionApprovalRequestResource,
-  "PrivateLinkConnectionApprovalRequestInfo",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Web.PrivateLinkResource,
-  "AppServicePrivateLinkResourceData",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Web.PrivateLinkResourceProperties,
-  "AppServicePrivateLinkResourceProperties",
-  "csharp"
-);
-@@clientName(ProcessInfoCollection, "ProcessInfoListResult", "csharp");
-@@clientName(
-  ProcessModuleInfoCollection,
-  "ProcessModuleInfoListResult",
-  "csharp"
-);
-@@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
-@@clientName(
-  ProcessThreadInfoCollection,
-  "WebAppProcessThreadInfoListResult",
-  "csharp"
-);
-@@clientName(
-  PublicCertificateCollection,
-  "PublicCertificateListResult",
-  "csharp"
-);
-@@clientName(
-  PublishingCredentialsPoliciesCollection,
-  "PublishingCredentialsPoliciesListResult",
-  "csharp"
-);
-@@clientName(PushSettings, "WebAppPushSettings", "csharp");
-@@clientName(Recommendation, "AppServiceRecommendation", "csharp");
-@@clientName(
-  RecommendationCollection,
-  "AppServiceRecommendationListResult",
-  "csharp"
-);
-@@clientName(RecurrenceFrequency, "WorkflowRecurrenceFrequency", "csharp");
-@@clientName(RecurrenceSchedule, "WorkflowRecurrenceSchedule", "csharp");
-@@clientName(
-  RegenerateActionParameter,
-  "WorkflowRegenerateActionContent",
-  "csharp"
-);
-@@clientName(Rendering, "DiagnosticDataRendering", "csharp");
-@@clientName(RenderingType, "DiagnosticDataRenderingType", "csharp");
-@@clientName(RepetitionIndex, "WorkflowRunActionRepetitionIndex", "csharp");
-@@clientName(Request, "WebAppRequest", "csharp");
-@@clientName(RequestHistory, "WebAppRequestHistory", "csharp");
-@@clientName(
-  RequestHistoryProperties,
-  "WebAppRequestHistoryProperties",
-  "csharp"
-);
-@@clientName(ResourceCollection, "AppServicePlanResourceListResult", "csharp");
-@@clientName(ResourceConfig, "FunctionAppResourceConfig", "csharp");
-@@clientName(
-  ResourceHealthMetadataCollection,
-  "ResourceHealthMetadataListResult",
-  "csharp"
-);
-@@clientName(
-  ResourceMetricDefinitionCollection,
-  "ResourceMetricDefinitionListResult",
-  "csharp"
-);
-@@clientName(
-  ResourceNameAvailability,
-  "AppServiceNameAvailabilityResult",
-  "csharp"
-);
-@@clientName(
-  ResourceNameAvailabilityRequest,
-  "AppServiceNameAvailabilityRequest",
-  "csharp"
-);
-@@clientName(ResourceReference, "WorkflowResourceReference", "csharp");
-@@clientName(Microsoft.Web.Response, "WebAppResponse", "csharp");
-@@clientName(ResponseMetaData, "DetectorMetadata", "csharp");
-@@clientName(RestoreRequest, "RestoreRequestInfo", "csharp");
-@@clientName(RetryHistory, "WebAppRetryHistory", "csharp");
-@@clientName(RouteType, "AppServiceVirtualNetworkRouteType", "csharp");
-@@clientName(RunActionCorrelation, "WebAppRunActionCorrelation", "csharp");
-@@clientName(RunCorrelation, "WebAppRunCorrelation", "csharp");
-@@clientName(RuntimeName, "FunctionAppRuntimeName", "csharp");
-@@clientName(Site, "WebSite", "csharp");
-@@clientName(SiteAvailabilityState, "WebSiteAvailabilityState", "csharp");
-@@clientName(SiteConfigResourceCollection, "SiteConfigListResult", "csharp");
-@@clientName(
-  SiteConfigurationSnapshotInfoCollection,
-  "SiteConfigurationSnapshotInfoListResult",
-  "csharp"
-);
-@@clientName(
-  SiteExtensionInfoCollection,
-  "SiteExtensionInfoListResult",
-  "csharp"
-);
-@@clientName(SitePatchResource, "SitePatchInfo", "csharp");
-@@clientName(SkuCapacity, "AppServiceSkuCapacity", "csharp");
-@@clientName(SkuDescription, "AppServiceSkuDescription", "csharp");
-@@clientName(SkuInfo, "AppServicePoolSkuInfo", "csharp");
-@@clientName(SkuInfoCollection, "AppServicePoolSkuInfoListResult", "csharp");
-@@clientName(SkuInfos, "AppServiceSkuResult", "csharp");
-@@clientName(SlotDifferenceCollection, "SlotDifferenceListResult", "csharp");
-@@clientName(Snapshot, "AppSnapshot", "csharp");
-@@clientName(SnapshotCollection, "AppSnapshotListResult", "csharp");
-@@clientName(Solution, "DiagnosticSolution", "csharp");
-@@clientName(SolutionType, "DiagnosticSolutionType", "csharp");
-@@clientName(
-  SourceControlCollection,
-  "AppServiceSourceControlListResult",
-  "csharp"
-);
-@@clientName(SslState, "HostNameBindingSslState", "csharp");
-@@clientName(StampCapacityCollection, "StampCapacityListResult", "csharp");
-@@clientName(StaticSite, "StaticSiteProperties", "csharp");
-@@clientName(StaticSiteARMResource, "StaticSite", "csharp");
-@@clientName(
-  StaticSiteBasicAuthPropertiesARMResource,
-  "StaticSiteBasicAuthProperties",
-  "csharp"
-);
-@@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");
-@@clientName(StaticSiteBuildCollection, "StaticSiteBuildListResult", "csharp");
-@@clientName(StaticSiteCollection, "StaticSiteListResult", "csharp");
-@@clientName(
-  StaticSiteCustomDomainOverviewARMResource,
-  "StaticSiteCustomDomainOverview",
-  "csharp"
-);
-@@clientName(
-  StaticSiteCustomDomainOverviewCollection,
-  "StaticSiteCustomDomainOverviewListResult",
-  "csharp"
-);
-@@clientName(
-  StaticSiteCustomDomainRequestPropertiesARMResource,
-  "StaticSiteCustomDomainContent",
-  "csharp"
-);
-@@clientName(
-  StaticSiteFunctionOverviewARMResource,
-  "StaticSiteFunctionOverview",
-  "csharp"
-);
-@@clientName(
-  StaticSiteFunctionOverviewCollection,
-  "StaticSiteFunctionOverviewListResult",
-  "csharp"
-);
-@@clientName(StaticSiteLinkedBackend, "StaticSiteLinkedBackendInfo", "csharp");
-@@clientName(
-  StaticSiteLinkedBackendARMResource,
-  "StaticSiteLinkedBackend",
-  "csharp"
-);
-@@clientName(
-  StaticSiteResetPropertiesARMResource,
-  "StaticSiteResetContent",
-  "csharp"
-);
-@@clientName(StaticSiteTemplateOptions, "StaticSiteTemplate", "csharp");
-@@clientName(StaticSiteUserARMResource, "StaticSiteUser", "csharp");
-@@clientName(StaticSiteUserCollection, "StaticSiteUserListResult", "csharp");
-@@clientName(
-  StaticSiteUserInvitationRequestResource,
-  "StaticSiteUserInvitationContent",
-  "csharp"
-);
-@@clientName(
-  StaticSiteUserInvitationResponseResource,
-  "StaticSiteUserInvitationResult",
-  "csharp"
-);
-@@clientName(
-  StaticSiteUserProvidedFunctionApp,
-  "LegacyStaticSiteUserProvidedFunctionApp",
-  "csharp"
-); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
-@@alternateType(
-  StaticSiteUserProvidedFunctionApp,
-  StaticSiteUserProvidedFunctionAppARMResource
-); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
-@@clientName(
-  StaticSiteUserProvidedFunctionAppProperties,
-  "LegacyStaticSiteUserProvidedFunctionAppProperties",
-  "csharp"
-); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
-@@alternateType(
-  StaticSiteUserProvidedFunctionAppProperties,
-  StaticSiteUserProvidedFunctionAppARMResourceProperties
-); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
-@@clientName(
-  StaticSiteUserProvidedFunctionAppARMResource,
-  "StaticSiteUserProvidedFunctionApp",
-  "csharp"
-);
-@@clientName(
-  StaticSiteUserProvidedFunctionAppARMResourceProperties,
-  "StaticSiteUserProvidedFunctionAppProperties",
-  "csharp"
-);
-@@clientName(
-  StaticSiteUserProvidedFunctionAppsCollection,
-  "StaticSiteUserProvidedFunctionAppsListResult",
-  "csharp"
-);
-@@clientName(
-  StaticSiteZipDeployment,
-  "StaticSiteZipDeploymentProperties",
-  "csharp"
-);
-@@clientName(
-  StaticSiteZipDeploymentARMResource,
-  "StaticSiteZipDeployment",
-  "csharp"
-);
-@@clientName(Status, "AppServiceStatusInfo", "csharp");
-@@clientName(StatusOptions, "AppServicePlanStatus", "csharp");
-@@clientName(StorageMigrationResponse, "StorageMigrationResult", "csharp");
-@@clientName(StorageType, "ArtifactStorageType", "csharp");
-@@clientName(StringDictionary, "AppServiceConfigurationDictionary", "csharp");
-@@clientName(StringList, "StaticSiteStringList", "csharp");
-@@clientName(SupportedTlsVersions, "AppServiceSupportedTlsVersion", "csharp");
-@@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
-@@clientName(TlsCipherSuites, "AppServiceTlsCipherSuite", "csharp");
-@@clientName(
-  TriggeredJobHistoryCollection,
-  "TriggeredJobHistoryListResult",
-  "csharp"
-);
-@@clientName(TriggeredWebJobCollection, "TriggeredWebJobListResult", "csharp");
-@@clientName(TriggerTypes, "FunctionTriggerType", "csharp");
-@@clientName(Twitter, "AppServiceTwitterProvider", "csharp");
-@@clientName(
-  UpgradeAvailability,
-  "AppServiceEnvironmentUpgradeAvailability",
-  "csharp"
-);
-@@clientName(
-  UpgradePreference,
-  "AppServiceEnvironmentUpgradePreference",
-  "csharp"
-);
-@@clientName(UsageCollection, "AppServiceUsageListResult", "csharp");
-@@clientName(User, "PublishingUser", "csharp");
-@@clientName(ValidateRequest, "AppServiceValidateContent", "csharp");
-@@clientName(ValidateResponse, "AppServiceValidateResult", "csharp");
-@@clientName(VnetGateway, "AppServiceVirtualNetworkGateway", "csharp");
-@@clientName(VnetInfo, "AppServiceVirtualNetworkProperties", "csharp");
-@@clientName(VnetInfoResource, "AppServiceVirtualNetwork", "csharp");
-@@clientName(
-  VnetParameters,
-  "AppServiceVirtualNetworkValidationContent",
-  "csharp"
-);
-@@clientName(VnetRoute, "AppServiceVirtualNetworkRoute", "csharp");
-@@clientName(
-  VnetValidationFailureDetails,
-  "VirtualNetworkValidationFailureDetails",
-  "csharp"
-);
-@@clientName(
-  VnetValidationTestFailure,
-  "VirtualNetworkValidationTestFailure",
-  "csharp"
-);
-@@clientName(VolumeMount, "SiteContainerVolumeMount", "csharp");
-@@clientName(WebAppCollection, "WebAppListResult", "csharp");
-@@clientName(
-  WebAppInstanceStatusCollection,
-  "WebAppInstanceStatusListResult",
-  "csharp"
-);
-@@clientName(WebAppStackCollection, "WebAppStackListResult", "csharp");
-@@clientName(WebJobCollection, "WebJobCListResult", "csharp");
-@@clientName(WorkerPoolCollection, "AppServiceWorkerPoolListResult", "csharp");
-@@clientName(WorkerPoolResource, "AppServiceWorkerPool", "csharp");
-@@clientName(Workflow, "WorkflowData", "csharp");
-@@clientName(WorkflowOutputParameter, "WorkflowOutputContent", "csharp");
-@@clientName(WorkflowParameter, "WorkflowContent", "csharp");
-@@clientName(
-  WorkflowTriggerListCallbackUrlQueries,
-  "WorkflowTriggerListCallbackUriQueries",
-  "csharp"
-);
-
-// --- Property renames on Properties companion models (flattened ARM resources) ---
-@@clientName(
-  AddressResponseProperties.vipMappings,
-  "VirtualIPMappings",
-  "csharp"
-);
-@@clientName(ApiKVReferenceProperties.identityType, "Identity", "csharp");
-@@clientName(ApplicationStackResource.name, "StackName", "csharp");
-@@clientName(AppServiceEnvironment.suspended, "IsSuspended", "csharp");
-@@clientName(AppServiceEnvironment.zoneRedundant, "IsZoneRedundant", "csharp");
-@@clientName(
-  AppServicePlanProperties.asyncScalingEnabled,
-  "IsAsyncScalingEnabled",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanProperties.elasticScaleEnabled,
-  "IsElasticScaleEnabled",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanProperties.freeOfferExpirationTime,
-  "FreeOfferExpireOn",
-  "csharp"
-);
-@@clientName(AppServicePlanProperties.hyperV, "IsHyperV", "csharp");
-@@clientName(
-  AppServicePlanProperties.perSiteScaling,
-  "IsPerSiteScaling",
-  "csharp"
-);
-@@clientName(AppServicePlanProperties.reserved, "IsReserved", "csharp");
-@@clientName(
-  AppServicePlanProperties.spotExpirationTime,
-  "SpotExpireOn",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanProperties.zoneRedundant,
-  "IsZoneRedundant",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanPatchResourceProperties.elasticScaleEnabled,
-  "IsElasticScaleEnabled",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanPatchResourceProperties.hyperV,
-  "IsHyperV",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanPatchResourceProperties.perSiteScaling,
-  "IsPerSiteScaling",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanPatchResourceProperties.reserved,
-  "IsReserved",
-  "csharp"
-);
-@@clientName(
-  AppServicePlanPatchResourceProperties.zoneRedundant,
-  "IsZoneRedundant",
-  "csharp"
-);
-@@clientName(
-  AseRegionProperties.dedicatedHost,
-  "IsDedicatedHostEnabled",
-  "csharp"
-);
-@@clientName(AseRegionProperties.standard, "IsStandard", "csharp");
-@@clientName(
-  AseRegionProperties.zoneRedundant,
-  "IsZoneRedundantEnabled",
-  "csharp"
-);
-@@clientName(
-  AseV3NetworkingConfigurationProperties.ftpEnabled,
-  "IsFtpEnabled",
-  "csharp"
-);
-@@clientName(
-  AseV3NetworkingConfigurationProperties.remoteDebugEnabled,
-  "IsRemoteDebugEnabled",
-  "csharp"
-);
-@@clientName(
-  AzureActiveDirectoryRegistration.clientSecretCertificateThumbprint,
-  "ClientSecretCertificateThumbprintString",
-  "csharp"
-);
-@@clientName(
-  AzureTableStorageApplicationLogsConfig.sasUrl,
-  "SasUriString",
-  "csharp"
-);
-@@clientName(BackupItemProperties.created, "CreatedOn", "csharp");
-@@clientName(BackupItemProperties.finishedTimeStamp, "FinishedOn", "csharp");
-@@clientName(
-  BackupItemProperties.lastRestoreTimeStamp,
-  "LastRestoreOn",
-  "csharp"
-);
-@@clientName(BackupItemProperties.name, "BackupName", "csharp");
-@@clientName(BackupItemProperties.scheduled, "IsScheduled", "csharp");
-@@clientName(BackupRequestProperties.enabled, "IsEnabled", "csharp");
-@@clientName(CertificateProperties.expirationDate, "ExpireOn", "csharp");
-@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
-@@clientName(CertificateProperties.valid, "IsValid", "csharp");
-@@clientName(
-  CertificatePatchResourceProperties.thumbprint,
-  "ThumbprintString",
-  "csharp"
-);
-@@clientName(CertificatePatchResourceProperties.valid, "IsValid", "csharp");
-@@clientName(ContinuousWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
-@@clientName(
-  DatabaseConnectionProperties.resourceId,
-  "DatabaseConnectionResourceId",
-  "csharp"
-);
-@@clientName(
-  DatabaseConnectionPatchRequestProperties.resourceId,
-  "DatabaseConnectionResourceId",
-  "csharp"
-);
-@@clientName(DeploymentProperties.active, "IsActive", "csharp");
-@@clientName(
-  HostNameBindingProperties.thumbprint,
-  "ThumbprintString",
-  "csharp"
-);
-@@clientName(HybridConnectionProperties.relayArmUri, "relayArmId", "csharp");
-@@clientName(
-  KubeEnvironmentProperties.internalLoadBalancerEnabled,
-  "IsInternalLoadBalancerEnabled",
-  "csharp"
-);
-@@clientName(
-  KubeEnvironmentPatchResourceProperties.internalLoadBalancerEnabled,
-  "IsInternalLoadBalancerEnabled",
-  "csharp"
-);
-@@clientName(
-  MigrateMySqlStatusProperties.localMySqlEnabled,
-  "IsLocalMySqlEnabled",
-  "csharp"
-);
-@@clientName(MSDeployProperties.appOffline, "IsAppOffline", "csharp");
-@@clientName(MSDeployStatusProperties.complete, "IsComplete", "csharp");
-@@clientName(
-  PremierAddOnOfferProperties.promoCodeRequired,
-  "IsPromoCodeRequired",
-  "csharp"
-);
-@@clientName(PrivateAccessProperties.enabled, "IsEnabled", "csharp");
-@@clientName(ProcessInfoProperties.threads, "ProcessThreads", "csharp");
-@@clientName(
-  PublicCertificateProperties.thumbprint,
-  "ThumbprintString",
-  "csharp"
-);
-@@clientName(
-  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
-  "IpAddresses",
-  "csharp"
-);
-@@clientName(
-  ResourceHealthMetadataProperties.signalAvailability,
-  "IsSignalAvailable",
-  "csharp"
-);
-@@clientName(
-  SiteProperties.clientAffinityEnabled,
-  "IsClientAffinityEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteProperties.clientAffinityPartitioningEnabled,
-  "IsClientAffinityPartitioningEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteProperties.clientAffinityProxyEnabled,
-  "IsClientAffinityProxyEnabled",
-  "csharp"
-);
-@@clientName(SiteProperties.clientCertEnabled, "IsClientCertEnabled", "csharp");
-@@clientName(SiteProperties.enabled, "IsEnabled", "csharp");
-@@clientName(
-  SiteProperties.endToEndEncryptionEnabled,
-  "IsEndToEndEncryptionEnabled",
-  "csharp"
-);
-@@clientName(SiteProperties.hostNamesDisabled, "IsHostNameDisabled", "csharp");
-@@clientName(SiteProperties.httpsOnly, "IsHttpsOnly", "csharp");
-@@clientName(SiteProperties.hyperV, "IsHyperV", "csharp");
-@@clientName(SiteProperties.reserved, "IsReserved", "csharp");
-@@clientName(
-  SiteProperties.scmSiteAlsoStopped,
-  "IsScmSiteAlsoStopped",
-  "csharp"
-);
-@@clientName(SiteProperties.serverFarmId, "AppServicePlanId", "csharp");
-@@clientName(SiteProperties.sshEnabled, "IsSshEnabled", "csharp");
-@@clientName(
-  SiteProperties.storageAccountRequired,
-  "IsStorageAccountRequired",
-  "csharp"
-);
-@@clientName(SiteProperties.suspendedTill, "SuspendOn", "csharp");
-@@clientName(
-  SiteAuthSettingsProperties.clientSecretCertificateThumbprint,
-  "ClientSecretCertificateThumbprintString",
-  "csharp"
-);
-@@clientName(SiteAuthSettingsProperties.enabled, "IsEnabled", "csharp");
-@@clientName(
-  SiteAuthSettingsProperties.tokenStoreEnabled,
-  "IsTokenStoreEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteConfig.acrUseManagedIdentityCreds,
-  "UseManagedIdentityCreds",
-  "csharp"
-);
-@@clientName(SiteConfig.alwaysOn, "IsAlwaysOn", "csharp");
-@@clientName(SiteConfig.autoHealEnabled, "IsAutoHealEnabled", "csharp");
-@@clientName(
-  SiteConfig.detailedErrorLoggingEnabled,
-  "IsDetailedErrorLoggingEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteConfig.functionsRuntimeScaleMonitoringEnabled,
-  "IsFunctionsRuntimeScaleMonitoringEnabled",
-  "csharp"
-);
-@@clientName(SiteConfig.http20Enabled, "IsHttp20Enabled", "csharp");
-@@clientName(SiteConfig.httpLoggingEnabled, "IsHttpLoggingEnabled", "csharp");
-@@clientName(SiteConfig.localMySqlEnabled, "IsLocalMySqlEnabled", "csharp");
-@@clientName(
-  SiteConfig.remoteDebuggingEnabled,
-  "IsRemoteDebuggingEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteConfig.requestTracingEnabled,
-  "IsRequestTracingEnabled",
-  "csharp"
-);
-@@clientName(
-  SiteConfig.scmIpSecurityRestrictionsUseMain,
-  "AllowIPSecurityRestrictionsForScmToUseMain",
-  "csharp"
-);
-@@clientName(SiteConfig.vnetRouteAllEnabled, "IsVnetRouteAllEnabled", "csharp");
-@@clientName(SiteConfig.webSocketsEnabled, "IsWebSocketsEnabled", "csharp");
-@@clientName(
-  SiteConfigurationSnapshotInfoProperties.time,
-  "SnapshotTakenTime",
-  "csharp"
-);
-@@clientName(
-  SiteLogsConfigProperties.detailedErrorMessages,
-  "IsDetailedErrorMessages",
-  "csharp"
-);
-@@clientName(
-  SiteLogsConfigProperties.failedRequestsTracing,
-  "IsFailedRequestsTracing",
-  "csharp"
-);
-@@clientName(
-  SitePatchResourceProperties.clientAffinityEnabled,
-  "IsClientAffinityEnabled",
-  "csharp"
-);
-@@clientName(
-  SitePatchResourceProperties.clientAffinityProxyEnabled,
-  "IsClientAffinityProxyEnabled",
-  "csharp"
-);
-@@clientName(
-  SitePatchResourceProperties.clientCertEnabled,
-  "IsClientCertEnabled",
-  "csharp"
-);
-@@clientName(SitePatchResourceProperties.enabled, "IsEnabled", "csharp");
-@@clientName(
-  SitePatchResourceProperties.hostNamesDisabled,
-  "IsHostNameDisabled",
-  "csharp"
-);
-@@clientName(SitePatchResourceProperties.httpsOnly, "IsHttpsOnly", "csharp");
-@@clientName(SitePatchResourceProperties.hyperV, "IsHyperV", "csharp");
-@@clientName(
-  SitePatchResourceProperties.lastModifiedTimeUtc,
-  "LastModifiedOn",
-  "csharp"
-);
-@@clientName(SitePatchResourceProperties.reserved, "IsReserved", "csharp");
-@@clientName(
-  SitePatchResourceProperties.scmSiteAlsoStopped,
-  "IsScmSiteAlsoStopped",
-  "csharp"
-);
-@@clientName(
-  SitePatchResourceProperties.storageAccountRequired,
-  "IsStorageAccountRequired",
-  "csharp"
-);
-@@clientName(SitePatchResourceProperties.suspendedTill, "SuspendOn", "csharp");
-@@clientName(
-  SiteSourceControlProperties.deploymentRollbackEnabled,
-  "IsDeploymentRollbackEnabled",
-  "csharp"
-);
-@@clientName(
-  StaticSiteBuildARMResourceProperties.createdTimeUtc,
-  "CreatedOn",
-  "csharp"
-);
-@@clientName(
-  SwiftVirtualNetworkProperties.swiftSupported,
-  "IsSwiftSupported",
-  "csharp"
-);
-@@clientName(
-  TriggeredWebJobProperties.storageAccountRequired,
-  "IsStorageAccountRequired",
-  "csharp"
-);
-@@clientName(TriggeredWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
-@@clientName(
-  WebAppRuntimeSettings.remoteDebuggingSupported,
-  "IsRemoteDebuggingSupported",
-  "csharp"
-);
-@@clientName(WebJobProperties.using_sdk, "IsUsingSdk", "csharp");
-@@clientName(
-  WebSiteInstanceStatusProperties.healthCheckUrl,
-  "healthCheckUrlString",
-  "csharp"
-);
-@@clientName(WorkflowTriggerHistoryProperties.fired, "IsFired", "csharp");
-
-// --- Property renames on non-resource sub-models (no `.properties.` segment) ---
-@@clientName(Apple.enabled, "IsEnabled", "csharp");
-@@clientName(AuthPlatform.enabled, "IsEnabled", "csharp");
-@@clientName(AzureActiveDirectory.enabled, "IsEnabled", "csharp");
-@@clientName(
-  AzureActiveDirectoryLogin.disableWWWAuthenticate,
-  "IsWwwAuthenticateDisabled",
-  "csharp"
-);
-@@clientName(AzureBlobStorageHttpLogsConfig.enabled, "IsEnabled", "csharp");
-@@clientName(AzureStaticWebApps.enabled, "IsEnabled", "csharp");
-@@clientName(
-  BackupSchedule.keepAtLeastOneBackup,
-  "ShouldKeepAtLeastOneBackup",
-  "csharp"
-);
-@@clientName(BackupSchedule.lastExecutionTime, "LastExecutedOn", "csharp");
-@@clientName(CloningInfo.overwrite, "CanOverwrite", "csharp");
-@@clientName(
-  CorsSettings.supportCredentials,
-  "IsCredentialsSupported",
-  "csharp"
-);
-@@clientName(
-  CsmPublishingProfileOptions.includeDisasterRecoveryEndpoints,
-  "IsIncludeDisasterRecoveryEndpoints",
-  "csharp"
-);
-@@clientName(CustomOpenIdConnectProvider.enabled, "IsEnabled", "csharp");
-@@clientName(DaprConfig.enableApiLogging, "IsApiLoggingEnabled", "csharp");
-@@clientName(DaprConfig.enabled, "IsEnabled", "csharp");
-@@clientName(
-  Dimension.toBeExportedForShoebox,
-  "IsToBeExportedForShoebox",
-  "csharp"
-);
-@@clientName(Microsoft.Web.ErrorResponse.error, "ErrorInfo", "csharp");
-@@clientName(Facebook.enabled, "IsEnabled", "csharp");
-@@clientName(FileSystemHttpLogsConfig.enabled, "IsEnabled", "csharp");
-@@clientName(
-  FunctionAppRuntimeSettings.remoteDebuggingSupported,
-  "IsRemoteDebuggingSupported",
-  "csharp"
-);
-@@clientName(
-  FunctionsAlwaysReadyConfig.instanceCount,
-  "AlwaysReadyInstanceCount",
-  "csharp"
-);
-@@clientName(FunctionsDeploymentStorage.type, "StorageType", "csharp");
-@@clientName(
-  FunctionsScaleAndConcurrency.instanceMemoryMB,
-  "FunctionAppInstanceMemoryMB",
-  "csharp"
-);
-@@clientName(
-  FunctionsScaleAndConcurrency.maximumInstanceCount,
-  "FunctionAppMaximumInstanceCount",
-  "csharp"
-);
-@@clientName(
-  FunctionsScaleAndConcurrencyTriggersHttp.perInstanceConcurrency,
-  "ConcurrentHttpPerInstanceConcurrency",
-  "csharp"
-);
-@@clientName(GitHub.enabled, "IsEnabled", "csharp");
-@@clientName(
-  GlobalValidation.requireAuthentication,
-  "IsAuthenticationRequired",
-  "csharp"
-);
-@@clientName(Google.enabled, "IsEnabled", "csharp");
-@@clientName(HostNameSslState.thumbprint, "ThumbprintString", "csharp");
-@@clientName(HttpSettings.requireHttps, "IsHttpsRequired", "csharp");
-@@clientName(IpSecurityRestriction.ipAddress, "IPAddressOrCidr", "csharp");
-@@clientName(LegacyMicrosoftAccount.enabled, "IsEnabled", "csharp");
-@@clientName(
-  MetricSpecification.enableRegionalMdmAccount,
-  "IsRegionalMdmAccountEnabled",
-  "csharp"
-);
-@@clientName(
-  MetricSpecification.supportsInstanceLevelAggregation,
-  "IsInstanceLevelAggregationSupported",
-  "csharp"
-);
-@@clientName(
-  OpenAuthenticationAccessPolicies.policies,
-  "OpenAuthenticationPolicyList",
-  "csharp"
-);
-@@clientName(OutboundVnetRouting.allTraffic, "IsAllTrafficEnabled", "csharp");
-@@clientName(
-  OutboundVnetRouting.applicationTraffic,
-  "IsApplicationTrafficEnabled",
-  "csharp"
-);
-@@clientName(
-  OutboundVnetRouting.contentShareTraffic,
-  "IsContentShareTrafficEnabled",
-  "csharp"
-);
-@@clientName(
-  OutboundVnetRouting.imagePullTraffic,
-  "IsImagePullTrafficEnabled",
-  "csharp"
-);
-@@clientName(
-  OutboundVnetRouting.backupRestoreTraffic,
-  "IsBackupRestoreTrafficEnabled",
-  "csharp"
-);
-@@clientName(
-  ResourceNameAvailability.nameAvailable,
-  "IsNameAvailable",
-  "csharp"
-);
-@@clientName(RestoreRequestProperties.overwrite, "CanOverwrite", "csharp");
-@@clientName(
-  SnapshotRestoreRequestProperties.overwrite,
-  "CanOverwrite",
-  "csharp"
-);
-@@clientName(
-  StackMajorVersion.applicationInsights,
-  "IsApplicationInsights",
-  "csharp"
-);
-@@clientName(TokenStore.enabled, "IsEnabled", "csharp");
-@@clientName(Twitter.enabled, "IsEnabled", "csharp");
-@@clientName(VirtualApplication.preloadEnabled, "IsPreloadEnabled", "csharp");
-@@clientName(VirtualIPMapping.inUse, "IsInUse", "csharp");
-@@clientName(VnetInfo.certThumbprint, "CertThumbprintString", "csharp");
-@@clientName(VnetInfo.resyncRequired, "IsResyncRequired", "csharp");
-@@clientName(
-  VnetValidationFailureDetailsProperties.failed,
-  "IsFailed",
-  "csharp"
-);
-@@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
-@@clientName(
-  WorkflowTriggerListCallbackUrlQueries.se,
-  "SasTimestamp",
-  "csharp"
-);
-@@clientName(
-  WorkflowTriggerListCallbackUrlQueries.sig,
-  "SasSignature",
-  "csharp"
-);
-@@clientName(
-  WorkflowTriggerListCallbackUrlQueries.sp,
-  "SasPermission",
-  "csharp"
-);
-@@clientName(WorkflowTriggerListCallbackUrlQueries.sv, "SasVersion", "csharp");
-@@clientName(ApiDefinitionInfo.url, "ApiDefinitionUriStringValue", "csharp");
-@@clientName(
-  FunctionsDeploymentStorage.value,
-  "AzureStorageUriStringValue",
-  "csharp"
-);
-
-// --- Enum value renames ---
-@@clientName(
-  TlsCipherSuites.TLS_AES_128_GCM_SHA256,
-  "TlsAes128GcmSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_AES_256_GCM_SHA384,
-  "TlsAes256GcmSha384",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
-  "TlsECDiffieHellmanECDsaWithAes128CbcSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
-  "TlsECDiffieHellmanECDsaWithAes128GcmSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
-  "TlsECDiffieHellmanECDsaWithAes256GcmSha384",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
-  "TlsECDiffieHellmanRsaWithAes128CbcSha",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
-  "TlsECDiffieHellmanRsaWithAes128CbcSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
-  "TlsECDiffieHellmanRsaWithAes128GcmSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
-  "TlsECDiffieHellmanRsaWithAes256CbcSha",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
-  "TlsECDiffieHellmanRsaWithAes256CbcSha384",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
-  "TlsECDiffieHellmanRsaWithAes256GcmSha384",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA,
-  "TlsRsaWithAes128CbcSha",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA256,
-  "TlsRsaWithAes128CbcSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_128_GCM_SHA256,
-  "TlsRsaWithAes128GcmSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA,
-  "TlsRsaWithAes256CbcSha",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA256,
-  "TlsRsaWithAes256CbcSha256",
-  "csharp"
-);
-@@clientName(
-  TlsCipherSuites.TLS_RSA_WITH_AES_256_GCM_SHA384,
-  "TlsRsaWithAes256GcmSha384",
-  "csharp"
-);
-
-// --- Migrated from autorest.md prepend-rp-prefix (add "AppService" prefix for C#) ---
-@@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
-@@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
-@@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
-@@clientName(
-  BlobStorageTokenStore,
-  "AppServiceBlobStorageTokenStore",
-  "csharp"
-);
-@@clientName(CorsSettings, "AppServiceCorsSettings", "csharp");
-@@clientName(
-  DatabaseBackupSetting,
-  "AppServiceDatabaseBackupSetting",
-  "csharp"
-);
-@@clientName(DatabaseType, "AppServiceDatabaseType", "csharp");
-@@clientName(DeploymentLocations, "AppServiceDeploymentLocations", "csharp");
-@@clientName(EndpointDependency, "AppServiceEndpointDependency", "csharp");
-@@clientName(EndpointDetail, "AppServiceEndpointDetail", "csharp");
-@@clientName(ForwardProxy, "AppServiceForwardProxy", "csharp");
-@@clientName(FtpsState, "AppServiceFtpsState", "csharp");
-@@clientName(GeoRegion, "AppServiceGeoRegion", "csharp");
-@@clientName(HostNameType, "AppServiceHostNameType", "csharp");
-@@clientName(HostType, "AppServiceHostType", "csharp");
-@@clientName(HttpLogsConfig, "AppServiceHttpLogsConfig", "csharp");
-@@clientName(HttpSettings, "AppServiceHttpSettings", "csharp");
-@@clientName(HttpSettingsRoutes, "AppServiceHttpSettingsRoutes", "csharp");
-@@clientName(Identifier, "AppServiceIdentifier", "csharp");
-@@clientName(IdentityProviders, "AppServiceIdentityProviders", "csharp");
-@@clientName(IpFilterTag, "AppServiceIpFilterTag", "csharp");
-@@clientName(IPMode, "AppServiceIPMode", "csharp");
-@@clientName(
-  IpSecurityRestriction,
-  "AppServiceIpSecurityRestriction",
-  "csharp"
-);
-@@clientName(NameValuePair, "AppServiceNameValuePair", "csharp");
-@@clientName(Operation, "AppServiceOperation", "csharp");
-@@clientName(OperationStatus, "AppServiceOperationStatus", "csharp");
-@@clientName(SourceControl, "AppServiceSourceControl", "csharp");
-@@clientName(TokenStore, "AppServiceTokenStore", "csharp");
-@@clientName(UsageState, "AppServiceUsageState", "csharp");
-@@clientName(
-  VirtualNetworkProfile,
-  "AppServiceVirtualNetworkProfile",
-  "csharp"
-);
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -4794,3 +3577,1480 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   webAppsStartWebSiteNetworkTraceOperationSlotForJs,
   "javascript"
 );
+
+// =============================================================================
+// Migrated from autorest.md rename-mapping (C# emitter only)
+// =============================================================================
+
+// --- Model renames ---
+@@clientName(AddressResponse, "AppServiceEnvironmentAddressResult", "csharp");
+@@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
+@@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
+@@clientName(AnalysisDefinition, "WebSiteAnalysisDefinition", "csharp");
+@@clientName(ApiKVReference, "ApiKeyVaultReference", "csharp");
+@@clientName(
+  ApiKVReferenceCollection,
+  "AppServiceApiKeyVaultReferenceList",
+  "csharp"
+);
+@@clientName(Apple, "AppServiceAppleProvider", "csharp");
+@@clientName(AppleRegistration, "AppServiceAppleRegistration", "csharp");
+@@clientName(
+  ApplicationStackCollection,
+  "ApplicationStackListResult",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment,
+  "AppServiceEnvironmentProperties",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentCollection,
+  "AppServiceEnvironmentListResult",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentPatchResource,
+  "AppServiceEnvironmentPatchContent",
+  "csharp"
+);
+@@clientName(AppServiceEnvironmentResource, "AppServiceEnvironment", "csharp");
+@@clientName(AppServicePlanCollection, "AppServicePlanListResult", "csharp");
+@@clientName(
+  AppServicePlanPatchResource,
+  "AppServicePlanPatchContent",
+  "csharp"
+);
+@@clientName(AseRegion, "AppServiceAseRegion", "csharp");
+@@clientName(
+  AuthenticationType,
+  "FunctionAppStorageAccountAuthenticationType",
+  "csharp"
+);
+@@clientName(Microsoft.Web.AuthType, "SiteContainerAuthType", "csharp");
+@@clientName(AzureActiveDirectory, "AppServiceAadProvider", "csharp");
+@@clientName(AzureActiveDirectoryLogin, "AppServiceAadLoginFlow", "csharp");
+@@clientName(
+  AzureActiveDirectoryRegistration,
+  "AppServiceAadRegistration",
+  "csharp"
+);
+@@clientName(
+  AzureActiveDirectoryValidation,
+  "AppServiceAadValidation",
+  "csharp"
+);
+@@clientName(
+  AzureBlobStorageApplicationLogsConfig,
+  "AppServiceBlobStorageApplicationLogsConfig",
+  "csharp"
+);
+@@clientName(
+  AzureBlobStorageHttpLogsConfig,
+  "AppServiceBlobStorageHttpLogsConfig",
+  "csharp"
+);
+@@clientName(
+  AzureResourceErrorInfo,
+  "WorkflowExpressionResourceErrorInfo",
+  "csharp"
+);
+@@clientName(AzureResourceType, "AppServiceResourceType", "csharp");
+@@clientName(AzureStaticWebApps, "AppServiceStaticWebAppsProvider", "csharp");
+@@clientName(
+  AzureStaticWebAppsRegistration,
+  "AppServiceStaticWebAppsRegistration",
+  "csharp"
+);
+@@clientName(AzureStorageInfoValue, "AppServiceStorageAccessInfo", "csharp");
+@@clientName(
+  AzureStoragePropertyDictionaryResource,
+  "AzureStoragePropertyDictionary",
+  "csharp"
+);
+@@clientName(AzureStorageProtocol, "AppServiceStorageProtocol", "csharp");
+@@clientName(AzureStorageState, "AppServiceStorageAccountState", "csharp");
+@@clientName(AzureStorageType, "AppServiceStorageType", "csharp");
+@@clientName(
+  AzureTableStorageApplicationLogsConfig,
+  "AppServiceTableStorageApplicationLogsConfig",
+  "csharp"
+);
+@@clientName(BackupItem, "WebAppBackup", "csharp");
+@@clientName(BackupItemCollection, "WebAppBackupItemListResult", "csharp");
+@@clientName(BackupItemStatus, "WebAppBackupStatus", "csharp");
+@@clientName(BackupRequest, "WebAppBackupInfo", "csharp");
+@@clientName(BackupSchedule, "WebAppBackupSchedule", "csharp");
+@@clientName(BasicAuthName, "StaticSiteBasicAuthName", "csharp");
+@@clientName(
+  BillingMeterCollection,
+  "AppServiceBillingMeterListResult",
+  "csharp"
+);
+@@clientName(BuildStatus, "StaticSiteBuildStatus", "csharp");
+@@clientName(Capability, "AppServiceSkuCapability", "csharp");
+@@clientName(Certificate, "AppCertificate", "csharp");
+@@clientName(CertificateCollection, "AppCertificateListResult", "csharp");
+@@clientName(CertificatePatchResource, "AppCertificatePatch", "csharp");
+@@clientName(Channels, "RecommendationChannel", "csharp");
+@@clientName(ContainerThrottlingData, "ContainerThrottlingInfo", "csharp");
+@@clientName(ContentHash, "WebAppContentHash", "csharp");
+@@clientName(ContentLink, "WebAppContentLink", "csharp");
+@@clientName(
+  ContinuousWebJobCollection,
+  "ContinuousWebJobListResult",
+  "csharp"
+);
+@@clientName(CookieExpiration, "WebAppCookieExpiration", "csharp");
+@@clientName(CsmOperationCollection, "CsmOperationListResult", "csharp");
+@@clientName(CsmPublishingProfileOptions, "CsmPublishingProfile", "csharp");
+@@clientName(CsmUsageQuotaCollection, "CsmUsageQuotaListResult", "csharp");
+@@clientName(DaprConfig, "AppDaprConfig", "csharp");
+@@clientName(DaprLogLevel, "AppDaprLogLevel", "csharp");
+@@clientName(DatabaseConnection, "StaticSiteDatabaseConnection", "csharp");
+@@clientName(
+  DatabaseConnectionOverview,
+  "StaticSiteDatabaseConnectionOverview",
+  "csharp"
+);
+@@clientName(
+  DatabaseConnectionPatchRequest,
+  "StaticSiteDatabaseConnectionPatchContent",
+  "csharp"
+);
+@@clientName(DataSource, "DetectorDataSource", "csharp");
+@@clientName(DayOfWeek, "WebAppDayOfWeek", "csharp");
+@@clientName(DefaultAction, "SiteDefaultAction", "csharp");
+@@clientName(DeletedAppRestoreRequest, "DeletedAppRestoreContent", "csharp");
+@@clientName(DeletedWebAppCollection, "DeletedWebAppListResult", "csharp");
+@@clientName(Deployment, "WebAppDeployment", "csharp");
+@@clientName(DeploymentCollection, "WebAppDeploymentListResult", "csharp");
+@@clientName(DetectorResponse, "AppServiceDetector", "csharp");
+@@clientName(
+  DetectorResponseCollection,
+  "AppServiceDetectorListResult",
+  "csharp"
+);
+@@clientName(
+  DiagnosticAnalysisCollection,
+  "WebSiteAnalysisDefinitionListResult",
+  "csharp"
+);
+@@clientName(
+  DiagnosticCategoryCollection,
+  "DiagnosticCategoryListResult",
+  "csharp"
+);
+@@clientName(DiagnosticData, "DiagnosticDataset", "csharp");
+@@clientName(
+  DiagnosticDetectorCollection,
+  "DiagnosticDetectorListResult",
+  "csharp"
+);
+@@clientName(Dimension, "MetricDimension", "csharp");
+@@clientName(
+  DnlResourceNameAvailability,
+  "DnlResourceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(EnabledConfig, "WebAppEnabledConfig", "csharp");
+@@clientName(EnvironmentVariable, "WebAppEnvironmentVariable", "csharp");
+@@clientName(ErrorInfo, "WebAppErrorInfo", "csharp");
+@@clientName(ErrorProperties, "WebAppErrorProperties", "csharp");
+@@clientName(Microsoft.Web.ErrorResponse, "WebAppErrorResponse", "csharp");
+@@clientName(Experiments, "RoutingRuleExperiments", "csharp");
+@@clientName(Expression, "WorkflowExpression", "csharp");
+@@clientName(ExpressionRoot, "WorkflowExpressionRoot", "csharp");
+@@clientName(Facebook, "AppServiceFacebookProvider", "csharp");
+@@clientName(FrequencyUnit, "BackupFrequencyUnit", "csharp");
+@@clientName(
+  FunctionAppStackCollection,
+  "FunctionAppStackListResult",
+  "csharp"
+);
+@@clientName(
+  FunctionEnvelopeCollection,
+  "FunctionEnvelopeListResult",
+  "csharp"
+);
+@@clientName(
+  FunctionsAlwaysReadyConfig,
+  "FunctionAppAlwaysReadyConfig",
+  "csharp"
+);
+@@clientName(FunctionsDeploymentStorage, "FunctionAppStorage", "csharp");
+@@clientName(
+  FunctionsDeploymentStorageType,
+  "FunctionAppStorageType",
+  "csharp"
+);
+@@clientName(
+  FunctionsDeploymentStorageAuthentication,
+  "FunctionAppStorageAuthentication",
+  "csharp"
+);
+@@clientName(FunctionsRuntime, "FunctionAppRuntime", "csharp");
+@@clientName(
+  FunctionsScaleAndConcurrency,
+  "FunctionAppScaleAndConcurrency",
+  "csharp"
+);
+@@clientName(GeoRegionCollection, "AppServiceGeoRegionListResult", "csharp");
+@@clientName(GitHub, "AppServiceGitHubProvider", "csharp");
+@@clientName(Google, "AppServiceGoogleProvider", "csharp");
+@@clientName(HandlerMapping, "HttpRequestHandlerMapping", "csharp");
+@@clientName(HostKeys, "FunctionAppHostKeys", "csharp");
+@@clientName(HostNameBindingCollection, "HostNameBindingListResult", "csharp");
+@@clientName(
+  HybridConnectionCollection,
+  "HybridConnectionListResult",
+  "csharp"
+);
+@@clientName(IdentifierCollection, "AppServiceIdentifierListResult", "csharp");
+@@clientName(
+  InAvailabilityReasonType,
+  "AppServiceNameUnavailableReason",
+  "csharp"
+);
+@@clientName(
+  InboundEnvironmentEndpointCollection,
+  "InboundEnvironmentEndpointListResult",
+  "csharp"
+);
+@@clientName(InsightStatus, "DetectorInsightStatus", "csharp");
+@@clientName(IpAddress, "WebAppIPAddress", "csharp");
+@@clientName(IpAddressRange, "WebAppIPAddressRange", "csharp");
+@@clientName(IssueType, "DetectorIssueType", "csharp");
+@@clientName(JsonSchema, "WebAppJsonSchema", "csharp");
+@@clientName(KeyInfo, "WebAppKeyInfo", "csharp");
+@@clientName(KeyType, "WebAppKeyType", "csharp");
+@@clientName(KeyValuePairStringObject, "DataProviderKeyValuePair", "csharp");
+@@clientName(KubeEnvironmentCollection, "KubeEnvironmentListResult", "csharp");
+@@clientName(Login, "WebAppLoginInfo", "csharp");
+@@clientName(LogLevel, "WebAppLogLevel", "csharp");
+@@clientName(MSDeploy, "WebAppMSDeploy", "csharp");
+@@clientName(MSDeployLog, "WebAppMSDeployLog", "csharp");
+@@clientName(MSDeployLogEntry, "WebAppMSDeployLogEntry", "csharp");
+@@clientName(MSDeployLogEntryType, "WebAppMSDeployLogEntryType", "csharp");
+@@clientName(NameIdentifier, "AppServiceDomainNameIdentifier", "csharp");
+@@clientName(NetworkTrace, "WebAppNetworkTrace", "csharp");
+@@clientName(Nonce, "LoginFlowNonceSettings", "csharp");
+@@clientName(
+  OutboundEnvironmentEndpointCollection,
+  "OutboundEnvironmentEndpointListResult",
+  "csharp"
+);
+@@clientName(ParameterType, "WebAppParameterType", "csharp");
+@@clientName(PerfMonCounterCollection, "PerfMonCounterListResult", "csharp");
+@@clientName(PerfMonResponse, "PerfMonResponseInfo", "csharp");
+@@clientName(
+  PremierAddOnOfferCollection,
+  "PremierAddOnOfferListResult",
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnectionCollection,
+  "RemotePrivateEndpointConnectionListResult",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkConnectionApprovalRequestResource,
+  "PrivateLinkConnectionApprovalRequestInfo",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.PrivateLinkResource,
+  "AppServicePrivateLinkResourceData",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.PrivateLinkResourceProperties,
+  "AppServicePrivateLinkResourceProperties",
+  "csharp"
+);
+@@clientName(ProcessInfoCollection, "ProcessInfoListResult", "csharp");
+@@clientName(
+  ProcessModuleInfoCollection,
+  "ProcessModuleInfoListResult",
+  "csharp"
+);
+@@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
+@@clientName(
+  ProcessThreadInfoCollection,
+  "WebAppProcessThreadInfoListResult",
+  "csharp"
+);
+@@clientName(
+  PublicCertificateCollection,
+  "PublicCertificateListResult",
+  "csharp"
+);
+@@clientName(
+  PublishingCredentialsPoliciesCollection,
+  "PublishingCredentialsPoliciesListResult",
+  "csharp"
+);
+@@clientName(PushSettings, "WebAppPushSettings", "csharp");
+@@clientName(Recommendation, "AppServiceRecommendation", "csharp");
+@@clientName(
+  RecommendationCollection,
+  "AppServiceRecommendationListResult",
+  "csharp"
+);
+@@clientName(RecurrenceFrequency, "WorkflowRecurrenceFrequency", "csharp");
+@@clientName(RecurrenceSchedule, "WorkflowRecurrenceSchedule", "csharp");
+@@clientName(
+  RegenerateActionParameter,
+  "WorkflowRegenerateActionContent",
+  "csharp"
+);
+@@clientName(Rendering, "DiagnosticDataRendering", "csharp");
+@@clientName(RenderingType, "DiagnosticDataRenderingType", "csharp");
+@@clientName(RepetitionIndex, "WorkflowRunActionRepetitionIndex", "csharp");
+@@clientName(Request, "WebAppRequest", "csharp");
+@@clientName(RequestHistory, "WebAppRequestHistory", "csharp");
+@@clientName(
+  RequestHistoryProperties,
+  "WebAppRequestHistoryProperties",
+  "csharp"
+);
+@@clientName(ResourceCollection, "AppServicePlanResourceListResult", "csharp");
+@@clientName(ResourceConfig, "FunctionAppResourceConfig", "csharp");
+@@clientName(
+  ResourceHealthMetadataCollection,
+  "ResourceHealthMetadataListResult",
+  "csharp"
+);
+@@clientName(
+  ResourceMetricDefinitionCollection,
+  "ResourceMetricDefinitionListResult",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailability,
+  "AppServiceNameAvailabilityResult",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailabilityRequest,
+  "AppServiceNameAvailabilityRequest",
+  "csharp"
+);
+@@clientName(ResourceReference, "WorkflowResourceReference", "csharp");
+@@clientName(Microsoft.Web.Response, "WebAppResponse", "csharp");
+@@clientName(ResponseMetaData, "DetectorMetadata", "csharp");
+@@clientName(RestoreRequest, "RestoreRequestInfo", "csharp");
+@@clientName(RetryHistory, "WebAppRetryHistory", "csharp");
+@@clientName(RouteType, "AppServiceVirtualNetworkRouteType", "csharp");
+@@clientName(RunActionCorrelation, "WebAppRunActionCorrelation", "csharp");
+@@clientName(RunCorrelation, "WebAppRunCorrelation", "csharp");
+@@clientName(RuntimeName, "FunctionAppRuntimeName", "csharp");
+@@clientName(Site, "WebSite", "csharp");
+@@clientName(SiteAvailabilityState, "WebSiteAvailabilityState", "csharp");
+@@clientName(SiteConfigResourceCollection, "SiteConfigListResult", "csharp");
+@@clientName(
+  SiteConfigurationSnapshotInfoCollection,
+  "SiteConfigurationSnapshotInfoListResult",
+  "csharp"
+);
+@@clientName(
+  SiteExtensionInfoCollection,
+  "SiteExtensionInfoListResult",
+  "csharp"
+);
+@@clientName(SitePatchResource, "SitePatchInfo", "csharp");
+@@clientName(SkuCapacity, "AppServiceSkuCapacity", "csharp");
+@@clientName(SkuDescription, "AppServiceSkuDescription", "csharp");
+@@clientName(SkuInfo, "AppServicePoolSkuInfo", "csharp");
+@@clientName(SkuInfoCollection, "AppServicePoolSkuInfoListResult", "csharp");
+@@clientName(SkuInfos, "AppServiceSkuResult", "csharp");
+@@clientName(SlotDifferenceCollection, "SlotDifferenceListResult", "csharp");
+@@clientName(Snapshot, "AppSnapshot", "csharp");
+@@clientName(SnapshotCollection, "AppSnapshotListResult", "csharp");
+@@clientName(Solution, "DiagnosticSolution", "csharp");
+@@clientName(SolutionType, "DiagnosticSolutionType", "csharp");
+@@clientName(
+  SourceControlCollection,
+  "AppServiceSourceControlListResult",
+  "csharp"
+);
+@@clientName(SslState, "HostNameBindingSslState", "csharp");
+@@clientName(StampCapacityCollection, "StampCapacityListResult", "csharp");
+@@clientName(StaticSite, "StaticSiteProperties", "csharp");
+@@clientName(StaticSiteARMResource, "StaticSite", "csharp");
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResource,
+  "StaticSiteBasicAuthProperties",
+  "csharp"
+);
+@@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");
+@@clientName(StaticSiteBuildCollection, "StaticSiteBuildListResult", "csharp");
+@@clientName(StaticSiteCollection, "StaticSiteListResult", "csharp");
+@@clientName(
+  StaticSiteCustomDomainOverviewARMResource,
+  "StaticSiteCustomDomainOverview",
+  "csharp"
+);
+@@clientName(
+  StaticSiteCustomDomainOverviewCollection,
+  "StaticSiteCustomDomainOverviewListResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteCustomDomainRequestPropertiesARMResource,
+  "StaticSiteCustomDomainContent",
+  "csharp"
+);
+@@clientName(
+  StaticSiteFunctionOverviewARMResource,
+  "StaticSiteFunctionOverview",
+  "csharp"
+);
+@@clientName(
+  StaticSiteFunctionOverviewCollection,
+  "StaticSiteFunctionOverviewListResult",
+  "csharp"
+);
+@@clientName(StaticSiteLinkedBackend, "StaticSiteLinkedBackendInfo", "csharp");
+@@clientName(
+  StaticSiteLinkedBackendARMResource,
+  "StaticSiteLinkedBackend",
+  "csharp"
+);
+@@clientName(
+  StaticSiteResetPropertiesARMResource,
+  "StaticSiteResetContent",
+  "csharp"
+);
+@@clientName(StaticSiteTemplateOptions, "StaticSiteTemplate", "csharp");
+@@clientName(StaticSiteUserARMResource, "StaticSiteUser", "csharp");
+@@clientName(StaticSiteUserCollection, "StaticSiteUserListResult", "csharp");
+@@clientName(
+  StaticSiteUserInvitationRequestResource,
+  "StaticSiteUserInvitationContent",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserInvitationResponseResource,
+  "StaticSiteUserInvitationResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionApp,
+  "LegacyStaticSiteUserProvidedFunctionApp",
+  "csharp"
+); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
+@@alternateType(
+  StaticSiteUserProvidedFunctionApp,
+  StaticSiteUserProvidedFunctionAppARMResource,
+  "csharp"
+); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
+@@clientName(
+  StaticSiteUserProvidedFunctionAppProperties,
+  "LegacyStaticSiteUserProvidedFunctionAppProperties",
+  "csharp"
+); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
+@@alternateType(
+  StaticSiteUserProvidedFunctionAppProperties,
+  StaticSiteUserProvidedFunctionAppARMResourceProperties,
+  "csharp"
+); // StaticSiteUserProvidedFunctionAppARMResource and StaticSiteUserProvidedFunctionApp are two models with exactly same properties but different names. Here we manually replace the references so that these two models are combined
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResource,
+  "StaticSiteUserProvidedFunctionApp",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties,
+  "StaticSiteUserProvidedFunctionAppProperties",
+  "csharp"
+);
+@@clientName(
+  StaticSiteUserProvidedFunctionAppsCollection,
+  "StaticSiteUserProvidedFunctionAppsListResult",
+  "csharp"
+);
+@@clientName(
+  StaticSiteZipDeployment,
+  "StaticSiteZipDeploymentProperties",
+  "csharp"
+);
+@@clientName(
+  StaticSiteZipDeploymentARMResource,
+  "StaticSiteZipDeployment",
+  "csharp"
+);
+@@clientName(Status, "AppServiceStatusInfo", "csharp");
+@@clientName(StatusOptions, "AppServicePlanStatus", "csharp");
+@@clientName(StorageMigrationResponse, "StorageMigrationResult", "csharp");
+@@clientName(StorageType, "ArtifactStorageType", "csharp");
+@@clientName(StringDictionary, "AppServiceConfigurationDictionary", "csharp");
+@@clientName(StringList, "StaticSiteStringList", "csharp");
+@@clientName(SupportedTlsVersions, "AppServiceSupportedTlsVersion", "csharp");
+@@clientName(SupportTopic, "DetectorSupportTopic", "csharp");
+@@clientName(TlsCipherSuites, "AppServiceTlsCipherSuite", "csharp");
+@@clientName(
+  TriggeredJobHistoryCollection,
+  "TriggeredJobHistoryListResult",
+  "csharp"
+);
+@@clientName(TriggeredWebJobCollection, "TriggeredWebJobListResult", "csharp");
+@@clientName(TriggerTypes, "FunctionTriggerType", "csharp");
+@@clientName(Twitter, "AppServiceTwitterProvider", "csharp");
+@@clientName(
+  UpgradeAvailability,
+  "AppServiceEnvironmentUpgradeAvailability",
+  "csharp"
+);
+@@clientName(
+  UpgradePreference,
+  "AppServiceEnvironmentUpgradePreference",
+  "csharp"
+);
+@@clientName(UsageCollection, "AppServiceUsageListResult", "csharp");
+@@clientName(User, "PublishingUser", "csharp");
+@@clientName(ValidateRequest, "AppServiceValidateContent", "csharp");
+@@clientName(ValidateResponse, "AppServiceValidateResult", "csharp");
+@@clientName(VnetGateway, "AppServiceVirtualNetworkGateway", "csharp");
+@@clientName(VnetInfo, "AppServiceVirtualNetworkProperties", "csharp");
+@@clientName(VnetInfoResource, "AppServiceVirtualNetwork", "csharp");
+@@clientName(
+  VnetParameters,
+  "AppServiceVirtualNetworkValidationContent",
+  "csharp"
+);
+@@clientName(VnetRoute, "AppServiceVirtualNetworkRoute", "csharp");
+@@clientName(
+  VnetValidationFailureDetails,
+  "VirtualNetworkValidationFailureDetails",
+  "csharp"
+);
+@@clientName(
+  VnetValidationTestFailure,
+  "VirtualNetworkValidationTestFailure",
+  "csharp"
+);
+@@clientName(VolumeMount, "SiteContainerVolumeMount", "csharp");
+@@clientName(WebAppCollection, "WebAppListResult", "csharp");
+@@clientName(
+  WebAppInstanceStatusCollection,
+  "WebAppInstanceStatusListResult",
+  "csharp"
+);
+@@clientName(WebAppStackCollection, "WebAppStackListResult", "csharp");
+@@clientName(WebJobCollection, "WebJobCListResult", "csharp");
+@@clientName(WorkerPoolCollection, "AppServiceWorkerPoolListResult", "csharp");
+@@clientName(WorkerPoolResource, "AppServiceWorkerPool", "csharp");
+@@clientName(Workflow, "WorkflowData", "csharp");
+@@clientName(WorkflowOutputParameter, "WorkflowOutputContent", "csharp");
+@@clientName(WorkflowParameter, "WorkflowContent", "csharp");
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries,
+  "WorkflowTriggerListCallbackUriQueries",
+  "csharp"
+);
+
+// --- Property renames on Properties companion models (flattened ARM resources) ---
+@@clientName(
+  AddressResponseProperties.vipMappings,
+  "VirtualIPMappings",
+  "csharp"
+);
+@@clientName(ApiKVReferenceProperties.identityType, "Identity", "csharp");
+@@clientName(ApplicationStackResource.name, "StackName", "csharp");
+@@clientName(AppServiceEnvironment.suspended, "IsSuspended", "csharp");
+@@clientName(AppServiceEnvironment.zoneRedundant, "IsZoneRedundant", "csharp");
+@@clientName(
+  AppServicePlanProperties.asyncScalingEnabled,
+  "IsAsyncScalingEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.elasticScaleEnabled,
+  "IsElasticScaleEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.freeOfferExpirationTime,
+  "FreeOfferExpireOn",
+  "csharp"
+);
+@@clientName(AppServicePlanProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(
+  AppServicePlanProperties.perSiteScaling,
+  "IsPerSiteScaling",
+  "csharp"
+);
+@@clientName(AppServicePlanProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  AppServicePlanProperties.spotExpirationTime,
+  "SpotExpireOn",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.elasticScaleEnabled,
+  "IsElasticScaleEnabled",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.hyperV,
+  "IsHyperV",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.perSiteScaling,
+  "IsPerSiteScaling",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.reserved,
+  "IsReserved",
+  "csharp"
+);
+@@clientName(
+  AppServicePlanPatchResourceProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(
+  AseRegionProperties.dedicatedHost,
+  "IsDedicatedHostEnabled",
+  "csharp"
+);
+@@clientName(AseRegionProperties.standard, "IsStandard", "csharp");
+@@clientName(
+  AseRegionProperties.zoneRedundant,
+  "IsZoneRedundantEnabled",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.ftpEnabled,
+  "IsFtpEnabled",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.remoteDebugEnabled,
+  "IsRemoteDebugEnabled",
+  "csharp"
+);
+@@clientName(
+  AzureActiveDirectoryRegistration.clientSecretCertificateThumbprint,
+  "ClientSecretCertificateThumbprintString",
+  "csharp"
+);
+@@clientName(
+  AzureTableStorageApplicationLogsConfig.sasUrl,
+  "SasUriString",
+  "csharp"
+);
+@@clientName(BackupItemProperties.created, "CreatedOn", "csharp");
+@@clientName(BackupItemProperties.finishedTimeStamp, "FinishedOn", "csharp");
+@@clientName(
+  BackupItemProperties.lastRestoreTimeStamp,
+  "LastRestoreOn",
+  "csharp"
+);
+@@clientName(BackupItemProperties.name, "BackupName", "csharp");
+@@clientName(BackupItemProperties.scheduled, "IsScheduled", "csharp");
+@@clientName(BackupRequestProperties.enabled, "IsEnabled", "csharp");
+@@clientName(CertificateProperties.expirationDate, "ExpireOn", "csharp");
+@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
+@@clientName(CertificateProperties.valid, "IsValid", "csharp");
+@@clientName(
+  CertificatePatchResourceProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(CertificatePatchResourceProperties.valid, "IsValid", "csharp");
+@@clientName(ContinuousWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  DatabaseConnectionProperties.resourceId,
+  "DatabaseConnectionResourceId",
+  "csharp"
+);
+@@clientName(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  "DatabaseConnectionResourceId",
+  "csharp"
+);
+@@clientName(DeploymentProperties.active, "IsActive", "csharp");
+@@clientName(
+  HostNameBindingProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(HybridConnectionProperties.relayArmUri, "relayArmId", "csharp");
+@@clientName(
+  KubeEnvironmentProperties.internalLoadBalancerEnabled,
+  "IsInternalLoadBalancerEnabled",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.internalLoadBalancerEnabled,
+  "IsInternalLoadBalancerEnabled",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlStatusProperties.localMySqlEnabled,
+  "IsLocalMySqlEnabled",
+  "csharp"
+);
+@@clientName(MSDeployProperties.appOffline, "IsAppOffline", "csharp");
+@@clientName(MSDeployStatusProperties.complete, "IsComplete", "csharp");
+@@clientName(
+  PremierAddOnOfferProperties.promoCodeRequired,
+  "IsPromoCodeRequired",
+  "csharp"
+);
+@@clientName(PrivateAccessProperties.enabled, "IsEnabled", "csharp");
+@@clientName(ProcessInfoProperties.threads, "ProcessThreads", "csharp");
+@@clientName(
+  PublicCertificateProperties.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  "IpAddresses",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataProperties.signalAvailability,
+  "IsSignalAvailable",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityEnabled,
+  "IsClientAffinityEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityPartitioningEnabled,
+  "IsClientAffinityPartitioningEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.clientAffinityProxyEnabled,
+  "IsClientAffinityProxyEnabled",
+  "csharp"
+);
+@@clientName(SiteProperties.clientCertEnabled, "IsClientCertEnabled", "csharp");
+@@clientName(SiteProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SiteProperties.endToEndEncryptionEnabled,
+  "IsEndToEndEncryptionEnabled",
+  "csharp"
+);
+@@clientName(SiteProperties.hostNamesDisabled, "IsHostNameDisabled", "csharp");
+@@clientName(SiteProperties.httpsOnly, "IsHttpsOnly", "csharp");
+@@clientName(SiteProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(SiteProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  SiteProperties.scmSiteAlsoStopped,
+  "IsScmSiteAlsoStopped",
+  "csharp"
+);
+@@clientName(SiteProperties.serverFarmId, "AppServicePlanId", "csharp");
+@@clientName(SiteProperties.sshEnabled, "IsSshEnabled", "csharp");
+@@clientName(
+  SiteProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(SiteProperties.suspendedTill, "SuspendOn", "csharp");
+@@clientName(
+  SiteAuthSettingsProperties.clientSecretCertificateThumbprint,
+  "ClientSecretCertificateThumbprintString",
+  "csharp"
+);
+@@clientName(SiteAuthSettingsProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SiteAuthSettingsProperties.tokenStoreEnabled,
+  "IsTokenStoreEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.acrUseManagedIdentityCreds,
+  "UseManagedIdentityCreds",
+  "csharp"
+);
+@@clientName(SiteConfig.alwaysOn, "IsAlwaysOn", "csharp");
+@@clientName(SiteConfig.autoHealEnabled, "IsAutoHealEnabled", "csharp");
+@@clientName(
+  SiteConfig.detailedErrorLoggingEnabled,
+  "IsDetailedErrorLoggingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.functionsRuntimeScaleMonitoringEnabled,
+  "IsFunctionsRuntimeScaleMonitoringEnabled",
+  "csharp"
+);
+@@clientName(SiteConfig.http20Enabled, "IsHttp20Enabled", "csharp");
+@@clientName(SiteConfig.httpLoggingEnabled, "IsHttpLoggingEnabled", "csharp");
+@@clientName(SiteConfig.localMySqlEnabled, "IsLocalMySqlEnabled", "csharp");
+@@clientName(
+  SiteConfig.remoteDebuggingEnabled,
+  "IsRemoteDebuggingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.requestTracingEnabled,
+  "IsRequestTracingEnabled",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictionsUseMain,
+  "AllowIPSecurityRestrictionsForScmToUseMain",
+  "csharp"
+);
+@@clientName(SiteConfig.vnetRouteAllEnabled, "IsVnetRouteAllEnabled", "csharp");
+@@clientName(SiteConfig.webSocketsEnabled, "IsWebSocketsEnabled", "csharp");
+@@clientName(
+  SiteConfigurationSnapshotInfoProperties.time,
+  "SnapshotTakenTime",
+  "csharp"
+);
+@@clientName(
+  SiteLogsConfigProperties.detailedErrorMessages,
+  "IsDetailedErrorMessages",
+  "csharp"
+);
+@@clientName(
+  SiteLogsConfigProperties.failedRequestsTracing,
+  "IsFailedRequestsTracing",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientAffinityEnabled,
+  "IsClientAffinityEnabled",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientAffinityProxyEnabled,
+  "IsClientAffinityProxyEnabled",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.clientCertEnabled,
+  "IsClientCertEnabled",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.enabled, "IsEnabled", "csharp");
+@@clientName(
+  SitePatchResourceProperties.hostNamesDisabled,
+  "IsHostNameDisabled",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.httpsOnly, "IsHttpsOnly", "csharp");
+@@clientName(SitePatchResourceProperties.hyperV, "IsHyperV", "csharp");
+@@clientName(
+  SitePatchResourceProperties.lastModifiedTimeUtc,
+  "LastModifiedOn",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.reserved, "IsReserved", "csharp");
+@@clientName(
+  SitePatchResourceProperties.scmSiteAlsoStopped,
+  "IsScmSiteAlsoStopped",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(SitePatchResourceProperties.suspendedTill, "SuspendOn", "csharp");
+@@clientName(
+  SiteSourceControlProperties.deploymentRollbackEnabled,
+  "IsDeploymentRollbackEnabled",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResourceProperties.createdTimeUtc,
+  "CreatedOn",
+  "csharp"
+);
+@@clientName(
+  SwiftVirtualNetworkProperties.swiftSupported,
+  "IsSwiftSupported",
+  "csharp"
+);
+@@clientName(
+  TriggeredWebJobProperties.storageAccountRequired,
+  "IsStorageAccountRequired",
+  "csharp"
+);
+@@clientName(TriggeredWebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  WebAppRuntimeSettings.remoteDebuggingSupported,
+  "IsRemoteDebuggingSupported",
+  "csharp"
+);
+@@clientName(WebJobProperties.using_sdk, "IsUsingSdk", "csharp");
+@@clientName(
+  WebSiteInstanceStatusProperties.healthCheckUrl,
+  "healthCheckUrlString",
+  "csharp"
+);
+@@clientName(WorkflowTriggerHistoryProperties.fired, "IsFired", "csharp");
+
+// --- Property renames on non-resource sub-models (no `.properties.` segment) ---
+@@clientName(Apple.enabled, "IsEnabled", "csharp");
+@@clientName(AuthPlatform.enabled, "IsEnabled", "csharp");
+@@clientName(AzureActiveDirectory.enabled, "IsEnabled", "csharp");
+@@clientName(
+  AzureActiveDirectoryLogin.disableWWWAuthenticate,
+  "IsWwwAuthenticateDisabled",
+  "csharp"
+);
+@@clientName(AzureBlobStorageHttpLogsConfig.enabled, "IsEnabled", "csharp");
+@@clientName(AzureStaticWebApps.enabled, "IsEnabled", "csharp");
+@@clientName(
+  BackupSchedule.keepAtLeastOneBackup,
+  "ShouldKeepAtLeastOneBackup",
+  "csharp"
+);
+@@clientName(BackupSchedule.lastExecutionTime, "LastExecutedOn", "csharp");
+@@clientName(CloningInfo.overwrite, "CanOverwrite", "csharp");
+@@clientName(
+  CorsSettings.supportCredentials,
+  "IsCredentialsSupported",
+  "csharp"
+);
+@@clientName(
+  CsmPublishingProfileOptions.includeDisasterRecoveryEndpoints,
+  "IsIncludeDisasterRecoveryEndpoints",
+  "csharp"
+);
+@@clientName(CustomOpenIdConnectProvider.enabled, "IsEnabled", "csharp");
+@@clientName(DaprConfig.enableApiLogging, "IsApiLoggingEnabled", "csharp");
+@@clientName(DaprConfig.enabled, "IsEnabled", "csharp");
+@@clientName(
+  Dimension.toBeExportedForShoebox,
+  "IsToBeExportedForShoebox",
+  "csharp"
+);
+@@clientName(Microsoft.Web.ErrorResponse.error, "ErrorInfo", "csharp");
+@@clientName(Facebook.enabled, "IsEnabled", "csharp");
+@@clientName(FileSystemHttpLogsConfig.enabled, "IsEnabled", "csharp");
+@@clientName(
+  FunctionAppRuntimeSettings.remoteDebuggingSupported,
+  "IsRemoteDebuggingSupported",
+  "csharp"
+);
+@@clientName(
+  FunctionsAlwaysReadyConfig.instanceCount,
+  "AlwaysReadyInstanceCount",
+  "csharp"
+);
+@@clientName(FunctionsDeploymentStorage.type, "StorageType", "csharp");
+@@clientName(
+  FunctionsScaleAndConcurrency.instanceMemoryMB,
+  "FunctionAppInstanceMemoryMB",
+  "csharp"
+);
+@@clientName(
+  FunctionsScaleAndConcurrency.maximumInstanceCount,
+  "FunctionAppMaximumInstanceCount",
+  "csharp"
+);
+@@clientName(
+  FunctionsScaleAndConcurrencyTriggersHttp.perInstanceConcurrency,
+  "ConcurrentHttpPerInstanceConcurrency",
+  "csharp"
+);
+@@clientName(GitHub.enabled, "IsEnabled", "csharp");
+@@clientName(
+  GlobalValidation.requireAuthentication,
+  "IsAuthenticationRequired",
+  "csharp"
+);
+@@clientName(Google.enabled, "IsEnabled", "csharp");
+@@clientName(HostNameSslState.thumbprint, "ThumbprintString", "csharp");
+@@clientName(HttpSettings.requireHttps, "IsHttpsRequired", "csharp");
+@@clientName(IpSecurityRestriction.ipAddress, "IPAddressOrCidr", "csharp");
+@@clientName(LegacyMicrosoftAccount.enabled, "IsEnabled", "csharp");
+@@clientName(
+  MetricSpecification.enableRegionalMdmAccount,
+  "IsRegionalMdmAccountEnabled",
+  "csharp"
+);
+@@clientName(
+  MetricSpecification.supportsInstanceLevelAggregation,
+  "IsInstanceLevelAggregationSupported",
+  "csharp"
+);
+@@clientName(
+  OpenAuthenticationAccessPolicies.policies,
+  "OpenAuthenticationPolicyList",
+  "csharp"
+);
+@@clientName(OutboundVnetRouting.allTraffic, "IsAllTrafficEnabled", "csharp");
+@@clientName(
+  OutboundVnetRouting.applicationTraffic,
+  "IsApplicationTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.contentShareTraffic,
+  "IsContentShareTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.imagePullTraffic,
+  "IsImagePullTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  OutboundVnetRouting.backupRestoreTraffic,
+  "IsBackupRestoreTrafficEnabled",
+  "csharp"
+);
+@@clientName(
+  ResourceNameAvailability.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(RestoreRequestProperties.overwrite, "CanOverwrite", "csharp");
+@@clientName(
+  SnapshotRestoreRequestProperties.overwrite,
+  "CanOverwrite",
+  "csharp"
+);
+@@clientName(
+  StackMajorVersion.applicationInsights,
+  "IsApplicationInsights",
+  "csharp"
+);
+@@clientName(TokenStore.enabled, "IsEnabled", "csharp");
+@@clientName(Twitter.enabled, "IsEnabled", "csharp");
+@@clientName(VirtualApplication.preloadEnabled, "IsPreloadEnabled", "csharp");
+@@clientName(VirtualIPMapping.inUse, "IsInUse", "csharp");
+@@clientName(VnetInfo.certThumbprint, "CertThumbprintString", "csharp");
+@@clientName(VnetInfo.resyncRequired, "IsResyncRequired", "csharp");
+@@clientName(
+  VnetValidationFailureDetailsProperties.failed,
+  "IsFailed",
+  "csharp"
+);
+@@clientName(VolumeMount.readOnly, "IsReadOnly", "csharp");
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.se,
+  "SasTimestamp",
+  "csharp"
+);
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.sig,
+  "SasSignature",
+  "csharp"
+);
+@@clientName(
+  WorkflowTriggerListCallbackUrlQueries.sp,
+  "SasPermission",
+  "csharp"
+);
+@@clientName(WorkflowTriggerListCallbackUrlQueries.sv, "SasVersion", "csharp");
+@@clientName(ApiDefinitionInfo.url, "ApiDefinitionUriStringValue", "csharp");
+@@clientName(
+  FunctionsDeploymentStorage.value,
+  "AzureStorageUriStringValue",
+  "csharp"
+);
+
+// --- Enum value renames ---
+@@clientName(
+  TlsCipherSuites.TLS_AES_128_GCM_SHA256,
+  "TlsAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_AES_256_GCM_SHA384,
+  "TlsAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+  "TlsECDiffieHellmanECDsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+  "TlsECDiffieHellmanECDsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+  "TlsECDiffieHellmanECDsaWithAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+  "TlsECDiffieHellmanRsaWithAes128CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+  "TlsECDiffieHellmanRsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+  "TlsECDiffieHellmanRsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+  "TlsECDiffieHellmanRsaWithAes256CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+  "TlsECDiffieHellmanRsaWithAes256CbcSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+  "TlsECDiffieHellmanRsaWithAes256GcmSha384",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA,
+  "TlsRsaWithAes128CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_CBC_SHA256,
+  "TlsRsaWithAes128CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_128_GCM_SHA256,
+  "TlsRsaWithAes128GcmSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA,
+  "TlsRsaWithAes256CbcSha",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_CBC_SHA256,
+  "TlsRsaWithAes256CbcSha256",
+  "csharp"
+);
+@@clientName(
+  TlsCipherSuites.TLS_RSA_WITH_AES_256_GCM_SHA384,
+  "TlsRsaWithAes256GcmSha384",
+  "csharp"
+);
+
+// --- Migrated from autorest.md prepend-rp-prefix (add "AppService" prefix for C#) ---
+@@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
+@@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
+@@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
+@@clientName(
+  BlobStorageTokenStore,
+  "AppServiceBlobStorageTokenStore",
+  "csharp"
+);
+@@clientName(CorsSettings, "AppServiceCorsSettings", "csharp");
+@@clientName(
+  DatabaseBackupSetting,
+  "AppServiceDatabaseBackupSetting",
+  "csharp"
+);
+@@clientName(DatabaseType, "AppServiceDatabaseType", "csharp");
+@@clientName(DeploymentLocations, "AppServiceDeploymentLocations", "csharp");
+@@clientName(EndpointDependency, "AppServiceEndpointDependency", "csharp");
+@@clientName(EndpointDetail, "AppServiceEndpointDetail", "csharp");
+@@clientName(ForwardProxy, "AppServiceForwardProxy", "csharp");
+@@clientName(FtpsState, "AppServiceFtpsState", "csharp");
+@@clientName(GeoRegion, "AppServiceGeoRegion", "csharp");
+@@clientName(HostNameType, "AppServiceHostNameType", "csharp");
+@@clientName(HostType, "AppServiceHostType", "csharp");
+@@clientName(HttpLogsConfig, "AppServiceHttpLogsConfig", "csharp");
+@@clientName(HttpSettings, "AppServiceHttpSettings", "csharp");
+@@clientName(HttpSettingsRoutes, "AppServiceHttpSettingsRoutes", "csharp");
+@@clientName(Identifier, "AppServiceIdentifier", "csharp");
+@@clientName(IdentityProviders, "AppServiceIdentityProviders", "csharp");
+@@clientName(IpFilterTag, "AppServiceIpFilterTag", "csharp");
+@@clientName(IPMode, "AppServiceIPMode", "csharp");
+@@clientName(
+  IpSecurityRestriction,
+  "AppServiceIpSecurityRestriction",
+  "csharp"
+);
+@@clientName(NameValuePair, "AppServiceNameValuePair", "csharp");
+@@clientName(Operation, "AppServiceOperation", "csharp");
+@@clientName(OperationStatus, "AppServiceOperationStatus", "csharp");
+@@clientName(SourceControl, "AppServiceSourceControl", "csharp");
+@@clientName(TokenStore, "AppServiceTokenStore", "csharp");
+@@clientName(UsageState, "AppServiceUsageState", "csharp");
+@@clientName(
+  VirtualNetworkProfile,
+  "AppServiceVirtualNetworkProfile",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(AnalysisDefinitions.executeSiteAnalysis, "Execute", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  DetectorDefinitionResources.executeSiteDetector,
+  "Execute",
+  "csharp"
+);
+@@clientName(Recommendations.disableRecommendationForSite, "Disable", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.deleteStaticSiteUser,
+  "DeleteUser",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.detachStaticSite, "Detach", "csharp");
+@@clientName(
+  StaticSiteARMResources.listStaticSiteAppSettings,
+  "GetAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.listStaticSiteConfiguredRoles,
+  "GetConfiguredRoles",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteARMResources.listStaticSiteFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.listStaticSiteUsers, "GetUsers", "csharp");
+@@clientName(
+  StaticSiteARMResources.resetStaticSiteApiKey,
+  "ResetApiKey",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.updateStaticSiteUser,
+  "UpdateUser",
+  "csharp"
+);
+@@clientName(
+  checkNameAvailability,
+  "CheckAppServiceNameAvailability",
+  "csharp"
+);
+@@clientName(
+  AppServicePlans.listHybridConnections,
+  "GetHybridConnectionRelays",
+  "csharp"
+);
+@@clientName(
+  HybridConnections.listWebAppsByHybridConnection,
+  "GetAllWebAppsByHybridConnection",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctions,
+  "GetFunctions",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild,
+  "CreateZipDeployment",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Function names can be duplicated across different operation groups, so we suppress this warning for now."
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.resetAllFilters,
+  "ResetAllRecommendationFilters",
+  "csharp"
+);
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow,
+  "PreviewStaticSiteWorkflow",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
+  "GetWebAppStacksByLocation",
+  "csharp"
+);
+@@clientName(
+  getSubscriptionDeploymentLocations,
+  "GetAppServiceDeploymentLocations",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.disableRecommendationForSubscription,
+  "DisableAppServiceRecommendation",
+  "csharp"
+);
+@@clientName(WebApps.listSnapshotsSlot, "GetSlotSnapshots", "csharp");
+@@clientName(
+  WebApps.listSnapshotsFromDRSecondarySlot,
+  "GetSlotSnapshotsFromDRSecondary",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentResources.listWebApps,
+  "GetAllWebAppData",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataNonResourceOperationGroup.listByResourceGroup,
+  "GetAllResourceHealthMetadataData",
+  "csharp"
+);
+@@clientName(
+  listSiteIdentifiersAssignedToHostName,
+  "GetAllSiteIdentifierData",
+  "csharp"
+);
+@@clientName(
+  SiteConfigResourceOperationGroup.listConfigurations,
+  "GetAllConfigurationData",
+  "csharp"
+);
+@@clientName(Sites.listHybridConnections, "GetHybridConnections", "csharp");
+@@clientName(Sites.listPremierAddOns, "GetAllPremierAddOnData", "csharp");
+@@clientName(
+  Sites.listRelayServiceConnections,
+  "GetAllRelayServiceConnectionData",
+  "csharp"
+);
+@@clientName(Sites.listSiteBackups, "GetAllSiteBackupData", "csharp");
+@@clientName(
+  SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
+  "GetAllConfigurationSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listHybridConnectionsSlot,
+  "GetHybridConnectionsSlot",
+  "csharp"
+);
+@@clientName(
+  WebApps.listPremierAddOnsSlot,
+  "GetAllPremierAddOnSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listRelayServiceConnectionsSlot,
+  "GetAllRelayServiceConnectionSlotData",
+  "csharp"
+);
+@@clientName(WebApps.listSiteBackupsSlot, "GetAllSiteBackupSlotData", "csharp");
+@@clientName(
+  ProcessInfos.listInstanceProcessThreads,
+  "GetSiteInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.listProcessThreads,
+  "GetSiteProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
+  "GetSiteSlotProcessThreads",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  "GetSiteSlotInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  regionalCheckNameAvailability,
+  "CheckDnlResourceNameAvailability",
+  "csharp"
+);
+
+// ARM resource identifiers (arm-id)
+@@alternateType(VirtualNetworkProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(HostingEnvironmentProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(KubeEnvironmentProfile.id, armResourceIdentifier, "csharp");
+@@alternateType(VnetInfo.vnetResourceId, armResourceIdentifier, "csharp");
+@@alternateType(CloningInfo.sourceWebAppId, armResourceIdentifier, "csharp");
+@@alternateType(
+  CloningInfo.trafficManagerProfileId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(RecommendationProperties.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(SupportTopic.pesId, armResourceIdentifier, "csharp");
+@@alternateType(
+  DeletedAppRestoreRequestProperties.deletedSiteId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SnapshotRecoverySource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  StaticSiteUserProvidedFunctionAppARMResourceProperties.functionAppResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+
+// ARM resource types (resource-type)
+@@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
+@@alternateType(HostingEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(KubeEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(SkuInfo.resourceType, armResourceType, "csharp");
+@@alternateType(SkuInfos.resourceType, armResourceType, "csharp");
+@@alternateType(ResourceReference.type, armResourceType, "csharp");
+
+// UUIDs (uuid)
+@@alternateType(BillingMeterProperties.meterId, uuid, "csharp");
+
+// IP addresses (ip-address)
+@@alternateType(AddressResponseProperties.serviceIpAddress, ipV4Address, "csharp");
+@@alternateType(
+  AddressResponseProperties.internalIpAddress,
+  ipV4Address,
+  "csharp"
+);
+@@alternateType(
+  AddressResponseProperties.outboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
+
+// Durations (format: duration)
+@@alternateType(LogSpecification.blobDuration, duration, "csharp");
+@@alternateType(MetricAvailability.blobDuration, duration, "csharp");
+@@alternateType(TriggeredJobRun.duration, duration, "csharp");
