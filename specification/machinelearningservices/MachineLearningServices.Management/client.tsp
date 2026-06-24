@@ -23,7 +23,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(FqdnEndpoints, "MachineLearningFqdnEndpoints", "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpoint,
-  "MachineLearningPrivateEndpoint",
+  "PrivateEndpointBase",
   "csharp"
 );
 @@clientName(PrivateEndpointResource, "RegistryPrivateEndpoint", "csharp");
@@ -968,7 +968,7 @@ using Microsoft.MachineLearningServices;
 );
 @@clientName(
   ExternalFQDNResponse,
-  "MachineLearningExternalFQDNResult",
+  "MachineLearningExternalFqdnResult",
   "csharp"
 );
 @@clientName(
