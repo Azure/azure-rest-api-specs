@@ -14,7 +14,7 @@ namespace MapsSearch;
  * geocoding, reverse geocoding, and autocomplete operations (including their batch
  * variants). The only value is `FeatureCollection`, as defined in
  * [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946). `Get Polygon` is the one exception:
- * its response root is a `GeoJSON Feature` — see `FeatureTypeEnum`.
+ * its response root is a `GeoJSON Feature`, see `FeatureTypeEnum`.
  */
 union FeatureCollectionEnum {
   string,
@@ -376,7 +376,7 @@ union AutocompleteResultTypeGroupsEnum {
   Address: "Address",
 
   /**
-   * Suggestions that resolve to named places — including administrative regions, populated
+   * Suggestions that resolve to named places, including administrative regions, populated
    * places, neighborhoods, natural features, and points of interest. Constituent types in
    * `AutocompleteResultTypeEnum`: every member except `Address` and `RoadBlock`. Examples
    * include `AdminDivision1`, `Neighborhood`, and `PopulatedPlace`.
@@ -1169,7 +1169,7 @@ model FeaturesItemProperties {
    * How the geocoding service produced this result relative to the query: a direct match at the
    * requested specificity (`Good`), one of several candidates (`Ambiguous`), or a fallback to a
    * less precise level of the geographic hierarchy (`UpHierarchy`). Multiple values may be
-   * present — for example, an `Ambiguous` plus `UpHierarchy` pairing indicates that the service
+   * present. For example, an `Ambiguous` plus `UpHierarchy` pairing indicates that the service
    * could not match the requested specificity and found multiple matches at a coarser level. See
    * `MatchCodesEnum` for per-value descriptions; combine with `confidence` for a complete
    * picture of match quality.
@@ -1184,7 +1184,7 @@ model FeaturesItemProperties {
 
   /**
    * One or more geocode points for the location, each marked with how it was derived
-   * (`calculationMethod`) and what it is best suited for (`usageTypes`) — for example, `Display`
+   * (`calculationMethod`) and what it is best suited for (`usageTypes`). For example, `Display`
    * for visual placement on a map, or `Route` for use as a navigation destination.
    */
   geocodePoints?: GeocodePointsItem[];
@@ -1192,19 +1192,19 @@ model FeaturesItemProperties {
 
 /**
  * The address of a geocoded or autocomplete-suggested location, parsed into structured fields.
- * Sparseness is normal: only the fields that the resolved entity supplies are populated — for
+ * Sparseness is normal: only the fields that the resolved entity supplies are populated. For
  * example, `streetName` and `streetNumber` appear only for street-level addresses, and
  * `intersection` appears only for road-intersection results.
  */
 model Address {
   /**
-   * The first line of the address, typically the street name and number — for example,
+   * The first line of the address, typically the street name and number. For example,
    * `"15127 NE 24th St"`.
    */
   addressLine?: string;
 
   /**
-   * The locality the address falls within: usually a city, town, or village. Example:
+   * The locality the address falls within: usually a city, town, or village. For example:
    * `"Redmond"`.
    */
   locality?: string;
@@ -1260,19 +1260,19 @@ model Address {
 }
 
 /**
- * An administrative subdivision that contains an address — for example, a state, province, or
+ * An administrative subdivision that contains an address. For example, a state, province, or
  * county. Returned as one entry in the parent `Address.adminDistricts` array, where entries are
  * ordered from coarsest to finest.
  */
 model AddressAdminDistrictsItem {
   /**
-   * The full name of the subdivision — for example, `"Washington"` for a U.S. state, or
+   * The full name of the subdivision. For example, `"Washington"` for a U.S. state, or
    * `"King County"` for a county.
    */
   name?: string;
 
   /**
-   * The short or abbreviated form of the subdivision name, when one is defined — for example,
+   * The short or abbreviated form of the subdivision name, when one is defined. For example,
    * `"WA"` for a U.S. state. Finer subdivisions often have no distinct short form, in which case
    * `shortName` repeats `name` (such as `"King County"`).
    */
@@ -1285,14 +1285,14 @@ model AddressAdminDistrictsItem {
  */
 model AddressCountryRegion {
   /**
-   * The ISO 3166-1 Alpha-2 country code for the country or region — for example, `"US"` for the
+   * The ISO 3166-1 Alpha-2 country code for the country or region. For example, `"US"` for the
    * United States, or `"GB"` for the United Kingdom.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract"
   ISO?: string;
 
   /**
-   * The display name of the country or region — for example, `"United States"`.
+   * The display name of the country or region. For example, `"United States"`.
    */
   name?: string;
 }
@@ -1320,7 +1320,7 @@ model Intersection {
   secondaryStreet2?: string;
 
   /**
-   * A short label describing the form of the intersection — for example, distinguishing an
+   * A short label describing the form of the intersection. For example, distinguishing an
    * at-grade crossroads from a grade-separated crossing such as a bridge or overpass.
    */
   intersectionType?: string;
@@ -1347,7 +1347,7 @@ model GeocodePointsItem {
   geometry?: GeoJsonPoint;
 
   /**
-   * How the point was computed — for example, snapped to the rooftop of a building or
+   * How the point was computed. For example, snapped to the rooftop of a building or
    * interpolated along a road centerline. See `CalculationMethodEnum` for the value list.
    */
   calculationMethod?: CalculationMethodEnum;
@@ -1399,14 +1399,14 @@ model GeocodingBatchRequestItem {
   top?: int32 = 5;
 
   /**
-   * A free-form string describing the location to geocode — typically an address or landmark
+   * A free-form string describing the location to geocode, typically an address or landmark
    * name. When set, the structured location fields below (`addressLine`, `locality`,
    * `countryRegion`, the `adminDistrict` levels, `postalCode`) are ignored.
    */
   query?: string;
 
   /**
-   * The street line of the address — typically the street name and number, or any other
+   * The street line of the address, typically the street name and number, or any other
    * official street-level address. Ignored when `query` is set.
    */
   addressLine?: string;
@@ -1414,7 +1414,7 @@ model GeocodingBatchRequestItem {
   /**
    * An [ISO 3166-1 Alpha-2 region/country
    * code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) that scopes the search to a single
-   * country or region — for example, `"FR"` for France. Ignored when `query` is set.
+   * country or region. For example, `"FR"` for France. Ignored when `query` is set.
    */
   countryRegion?: string;
 
@@ -1444,12 +1444,12 @@ model GeocodingBatchRequestItem {
 
   /**
    * The first-order administrative subdivision (such as a state or province) supplied as a name
-   * or short code — for example, `"WA"` for Washington. Ignored when `query` is set.
+   * or short code. For example, `"WA"` for Washington. Ignored when `query` is set.
    */
   adminDistrict?: string;
 
   /**
-   * The second-order administrative subdivision (such as a county) — for example, `"King"` for
+   * The second-order administrative subdivision (such as a county). For example, `"King"` for
    * King County. Ignored when `query` is set.
    */
   adminDistrict2?: string;
@@ -1461,7 +1461,7 @@ model GeocodingBatchRequestItem {
   adminDistrict3?: string;
 
   /**
-   * The locality (city, town, or village) component of the address — for example, `"Seattle"`.
+   * The locality (city, town, or village) component of the address. For example, `"Seattle"`.
    * Ignored when `query` is set.
    */
   locality?: string;
@@ -1479,7 +1479,7 @@ model GeocodingBatchRequestItem {
  */
 model GeocodingBatchResponse {
   /**
-   * Aggregate counts for the batch as a whole — the total submitted queries and how many of
+   * Aggregate counts for the batch as a whole, the total submitted queries and how many of
    * them completed successfully.
    */
   summary?: GeocodingBatchResponseSummary;
@@ -1556,7 +1556,7 @@ model GeocodingBatchResponseItem {
   nextLink?: string;
 
   /**
-   * Diagnostic information for a query that failed inside the batch — the per-entry error
+   * Diagnostic information for a query that failed inside the batch, the per-entry error
    * path complementing the success path on `features`. Populated only when the entry failed;
    * see `ErrorDetail` for the per-error shape.
    */
@@ -1593,12 +1593,12 @@ model Boundary {
 
 /**
  * The `properties` payload of a `Boundary`. Carries the display name of the returned
- * geographical area along with copyright attribution — both an API-wide notice and
+ * geographical area along with copyright attribution, both an API-wide notice and
  * per-geometry data-provider credits.
  */
 model BoundaryProperties {
   /**
-   * The display name of the geographical area — for example, `"Bellevue"` for a city boundary.
+   * The display name of the geographical area, for example, `"Bellevue"` for a city boundary.
    */
   name?: string;
 
@@ -1634,7 +1634,7 @@ model GeometryCopyright {
   sourceName?: string;
 
   /**
-   * The human-readable attribution string for the data provider — for example, `"TomTom"`.
+   * The human-readable attribution string for the data provider. For example, `"TomTom"`.
    * May be a vendor name or a fuller copyright notice.
    */
   copyright?: string;
@@ -1671,7 +1671,7 @@ model ReverseGeocodingBatchRequestItem {
   optionalId?: string;
 
   /**
-   * The location to reverse-geocode, encoded as `[longitude, latitude]` in WGS 84 order — for
+   * The location to reverse-geocode, encoded as `[longitude, latitude]` in WGS 84 order. For
    * example, `[-122.138681, 47.630358]` for a point in Redmond, Washington.
    */
   coordinates?: float64[];
@@ -1739,7 +1739,7 @@ model AutocompleteFeature {
    * The coordinate of the autocomplete suggestion as a
    * [`GeoJSON Point`](https://tools.ietf.org/html/rfc7946#section-3.1.2), with values in WGS 84
    * longitude/latitude order. May be omitted when the suggestion does not resolve to a single
-   * representative coordinate — for example, broad regional or place-name suggestions.
+   * representative coordinate, for example, broad regional or place-name suggestions.
    */
   geometry?: GeoJsonPoint;
 
@@ -1764,7 +1764,7 @@ model AutocompleteProperties {
   typeGroup?: AutocompleteResultTypeGroupsEnum;
 
   /**
-   * The specific entity kind that the result resolves to — for example, an address, a populated
+   * The specific entity kind that the result resolves to. For example, an address, a populated
    * place, a park, or a landmark. See `AutocompleteResultTypeEnum` for the full value list,
    * partitioned into the `Address` and `Place` groups by `AutocompleteResultTypeGroupsEnum`.
    */
