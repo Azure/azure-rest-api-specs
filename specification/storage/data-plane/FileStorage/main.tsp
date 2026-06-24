@@ -33,4 +33,7 @@ namespace Storage.File;
 enum Versions {
   /** API Version 2026-06-06 */
   v2026_06_06: "2026-06-06",
+
+  /** API Version 2026-10-06 */
+  v2026_10_06: "2026-10-06",
 }

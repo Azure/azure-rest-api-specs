@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 
 namespace Storage.File;
@@ -1152,6 +1154,7 @@ interface File {
   >;
 
   /** Returns the list of valid page ranges for a file or snapshot of a file. */
+  @sharedRoute
   @route("?comp=rangelist")
   @get
   getRangeList is StorageOperationResponseBody<
@@ -1170,6 +1173,33 @@ interface File {
       ...EtagResponseHeader;
       ...FileContentLengthResponseHeader;
       @body rangeList: ShareFileRangeList;
+    }
+  >;
+
+  /** Returns a paginated list of valid page ranges for a file or snapshot of a file. */
+  @added(Versions.v2026_10_06)
+  @sharedRoute
+  @route("?comp=rangelist")
+  @get
+  @list
+  listAllRanges is StorageOperationResponseBody<
+    {
+      ...ShareSnapshotParameter;
+      ...PreviousSnapshotParameter;
+      ...TimeoutParameter;
+      ...RangeHeader;
+      ...LeaseIdOptionalParameter;
+      ...AllowTrailingDotParameter;
+      ...FileRequestIntentParameter;
+      ...SupportRenameHeader;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+    },
+    {
+      ...LastModifiedResponseHeader;
+      ...EtagResponseHeader;
+      ...FileContentLengthResponseHeader;
+      @body rangeList: ShareFileRangeListSegment;
     }
   >;
 
