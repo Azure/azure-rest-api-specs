@@ -38,7 +38,7 @@ are permitted:
 [A-Za-z][A-Za-z0-9]*  ← specifies allowed characters
 ```
 
-A **negative lookahead** (`(?!...)`) used *alongside* a positive
+A **negative lookahead** (`(?!...)`) used _alongside_ a positive
 character class is also acceptable, because the positive class still
 defines what is permitted:
 
@@ -51,7 +51,7 @@ defines what is permitted:
 
 A pattern where the primary character-matching construct is a
 **negated character class** (`[^...]`) that lists characters which are
-*not* allowed, with all other characters implicitly permitted:
+_not_ allowed, with all other characters implicitly permitted:
 
 ```
 [^<>*%&]       ← denylist: anything except these chars is allowed
@@ -78,13 +78,13 @@ This creates a gap between what the spec permits and what the service
 actually accepts, because backend validation routinely rejects such
 inputs. Practical consequences:
 
-| Input | Denylist `^[^<>%&:\\?/]+$` | Allowlist `^[A-Za-z0-9_.-]+$` |
-|---|---|---|
-| `my-policy_v1` | ✅ Matches | ✅ Matches |
-| `my🎉policy` (emoji) | ✅ Matches | ❌ Does not match |
-| `policy\x00name` (null byte) | ✅ Matches | ❌ Does not match |
-| `policy\tname` (tab) | ✅ Matches | ❌ Does not match |
-| `политика` (Cyrillic) | ✅ Matches | ❌ Does not match |
+| Input                        | Denylist `^[^<>%&:\\?/]+$` | Allowlist `^[A-Za-z0-9_.-]+$` |
+| ---------------------------- | -------------------------- | ----------------------------- |
+| `my-policy_v1`               | ✅ Matches                 | ✅ Matches                    |
+| `my🎉policy` (emoji)         | ✅ Matches                 | ❌ Does not match             |
+| `policy\x00name` (null byte) | ✅ Matches                 | ❌ Does not match             |
+| `policy\tname` (tab)         | ✅ Matches                 | ❌ Does not match             |
+| `политика` (Cyrillic)        | ✅ Matches                 | ❌ Does not match             |
 
 An overly permissive spec pattern leads to:
 
@@ -124,10 +124,10 @@ Severity depends on whether the property or parameter is **new** (not
 present in the previous API version) or **existing** (carried forward
 from a prior version):
 
-| Context | Severity | Rationale |
-|---|---|---|
-| **New** property/parameter with a denylist pattern | **Blocking** | No backward-compatibility concern; use an allowlist from the start. |
-| **Existing** property/parameter carrying a denylist pattern forward from a prior version | **Warning** | Changing to an allowlist may reject values that existing resources were created with (regression risk). |
+| Context                                                                                  | Severity     | Rationale                                                                                               |
+| ---------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------------------------------------------------------- |
+| **New** property/parameter with a denylist pattern                                       | **Blocking** | No backward-compatibility concern; use an allowlist from the start.                                     |
+| **Existing** property/parameter carrying a denylist pattern forward from a prior version | **Warning**  | Changing to an allowlist may reject values that existing resources were created with (regression risk). |
 
 ### Regression Risk for Existing Properties
 
@@ -332,7 +332,7 @@ model Widget is TrackedResource<WidgetProperties> {
 > the OpenAPI validator packages.
 
 The existing `ResourceNameRestriction` linter rule (`--`) validates
-that resource name parameters *have* a pattern constraint, but does
+that resource name parameters _have_ a pattern constraint, but does
 not validate whether the pattern is an allowlist or a denylist.
 (Instruction coverage: `arm-api-review.instructions.md` §15.7,
 PREFLIGHT-005.)

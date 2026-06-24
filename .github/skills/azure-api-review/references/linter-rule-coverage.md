@@ -262,9 +262,9 @@ instruction files.
 
 ## Pattern Constraint Rules
 
-| Linter Rule ID | Name                     | Instruction Coverage                                       | Status     |
-| -------------- | ------------------------ | ---------------------------------------------------------- | ---------- |
-| *(none)*       | DenylistPatternDetection | openapi-review §4 (OAPI-PATTERN-ALLOWLIST); pattern-validation.md | ❌ NO AUTOMATED RULE |
+| Linter Rule ID | Name                     | Instruction Coverage                                              | Status               |
+| -------------- | ------------------------ | ----------------------------------------------------------------- | -------------------- |
+| _(none)_       | DenylistPatternDetection | openapi-review §4 (OAPI-PATTERN-ALLOWLIST); pattern-validation.md | ❌ NO AUTOMATED RULE |
 
 > ❌ **No automated linter rule** currently exists for `OAPI-PATTERN-ALLOWLIST`
 > in `@microsoft.azure/openapi-validator`, `@azure-tools/typespec-azure-core`,
@@ -272,7 +272,7 @@ instruction files.
 > exclusively by the ARM API Reviewer agent during code review. A follow-up
 > issue should be filed to add an automated rule to the OpenAPI validator and
 > TypeSpec linter packages. The existing `ResourceNameRestriction` rule
-> verifies that a `pattern` *exists* on resource name parameters but does not
+> verifies that a `pattern` _exists_ on resource name parameters but does not
 > verify whether the pattern is an allowlist or a denylist.
 
 ---
@@ -296,6 +296,6 @@ instruction files.
 
 ### Missing Automated Linter Rules
 
-| Rule ID  | Name                     | Status | Follow-Up |
-| -------- | ------------------------ | ------ | --------- |
-| *(none)* | DenylistPatternDetection | ❌ No automated rule | File a follow-up issue to add `OAPI-PATTERN-ALLOWLIST` to `@azure-tools/typespec-azure-core` and `@microsoft.azure/openapi-validator`. Agent-level coverage: `openapi-review.instructions.md §4`, `typespec-review.instructions.md §2.2`, `arm-api-review.instructions.md §21.4`, and [`pattern-validation.md`](pattern-validation.md). |
+| Rule ID  | Name                     | Status               | Follow-Up                                                                                                                                                                                                                                                                                                                               |
+| -------- | ------------------------ | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _(none)_ | DenylistPatternDetection | ❌ No automated rule | File a follow-up issue to add `OAPI-PATTERN-ALLOWLIST` to `@azure-tools/typespec-azure-core` and `@microsoft.azure/openapi-validator`. Agent-level coverage: `openapi-review.instructions.md §4`, `typespec-review.instructions.md §2.2`, `arm-api-review.instructions.md §21.4`, and [`pattern-validation.md`](pattern-validation.md). |
