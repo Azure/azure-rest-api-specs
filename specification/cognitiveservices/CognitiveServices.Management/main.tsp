@@ -44,6 +44,7 @@ import "./Compute.tsp";
 import "./Workbench.tsp";
 import "./ManagedComputeCapacity.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
