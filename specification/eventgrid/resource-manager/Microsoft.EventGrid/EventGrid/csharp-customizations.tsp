@@ -126,10 +126,6 @@ namespace Customization;
   "csharp"
 );
 
-@@scope(NetworkSecurityPerimeterConfigurations.get, "!csharp");
-@@scope(NetworkSecurityPerimeterConfigurations.list, "!csharp");
-@@scope(NetworkSecurityPerimeterConfigurations.reconcile, "!csharp");
-
 @@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
