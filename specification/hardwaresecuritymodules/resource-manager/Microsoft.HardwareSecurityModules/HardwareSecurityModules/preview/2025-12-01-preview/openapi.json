@@ -2969,6 +2969,96 @@
         }
       }
     },
+    "HsmState": {
+      "type": "string",
+      "description": "The state of an HSM resource.",
+      "enum": [
+        "Unknown",
+        "Deploying",
+        "ConfiguringSlb",
+        "Starting",
+        "Started",
+        "Failed",
+        "Relocating",
+        "Deleting",
+        "DeletingSlbEntry",
+        "InitialProvisioning",
+        "Updating",
+        "Degraded",
+        "DelayedDeletion"
+      ],
+      "x-ms-enum": {
+        "name": "HsmState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The HSM state is unknown."
+          },
+          {
+            "name": "Deploying",
+            "value": "Deploying",
+            "description": "The HSM is being deployed."
+          },
+          {
+            "name": "ConfiguringSlb",
+            "value": "ConfiguringSlb",
+            "description": "The HSM's software load balancer (SLB) is being configured."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "The HSM is starting."
+          },
+          {
+            "name": "Started",
+            "value": "Started",
+            "description": "The HSM has started and is running."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The HSM has failed."
+          },
+          {
+            "name": "Relocating",
+            "value": "Relocating",
+            "description": "The HSM is being relocated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The HSM is being deleted."
+          },
+          {
+            "name": "DeletingSlbEntry",
+            "value": "DeletingSlbEntry",
+            "description": "The HSM's software load balancer (SLB) entry is being deleted."
+          },
+          {
+            "name": "InitialProvisioning",
+            "value": "InitialProvisioning",
+            "description": "The HSM is being provisioned for the first time."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The HSM is being updated."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "The HSM is running in a degraded state."
+          },
+          {
+            "name": "DelayedDeletion",
+            "value": "DelayedDeletion",
+            "description": "The HSM deletion has been delayed."
+          }
+        ]
+      }
+    },
     "JsonWebKeyType": {
       "type": "string",
       "description": "Provisioning state.",
@@ -3320,8 +3410,8 @@
           "description": "Mgmt FQDN of the Payment HSM"
         },
         "state": {
-          "type": "string",
-          "description": "The Payment HSM State. Values are: Deploying, ConfiguringSlb, Starting, Started, Failed, Relocating, Deleting, DeletingSlbEntry, InitialProvisioning, Updating, Degraded"
+          "$ref": "#/definitions/HsmState",
+          "description": "The Payment HSM State."
         },
         "stateMessage": {
           "type": "string",

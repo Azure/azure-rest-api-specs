@@ -113,6 +113,53 @@ union ProvisioningState {
 }
 
 /**
+ * The state of an HSM resource.
+ */
+@Versioning.added(Versions.v2025_12_01_preview)
+union HsmState {
+  string,
+
+  /** The HSM state is unknown. */
+  Unknown: "Unknown",
+
+  /** The HSM is being deployed. */
+  Deploying: "Deploying",
+
+  /** The HSM's software load balancer (SLB) is being configured. */
+  ConfiguringSlb: "ConfiguringSlb",
+
+  /** The HSM is starting. */
+  Starting: "Starting",
+
+  /** The HSM has started and is running. */
+  Started: "Started",
+
+  /** The HSM has failed. */
+  Failed: "Failed",
+
+  /** The HSM is being relocated. */
+  Relocating: "Relocating",
+
+  /** The HSM is being deleted. */
+  Deleting: "Deleting",
+
+  /** The HSM's software load balancer (SLB) entry is being deleted. */
+  DeletingSlbEntry: "DeletingSlbEntry",
+
+  /** The HSM is being provisioned for the first time. */
+  InitialProvisioning: "InitialProvisioning",
+
+  /** The HSM is being updated. */
+  Updating: "Updating",
+
+  /** The HSM is running in a degraded state. */
+  Degraded: "Degraded",
+
+  /** The HSM deletion has been delayed. */
+  DelayedDeletion: "DelayedDeletion",
+}
+
+/**
  * The Cloud HSM Cluster public network access
  */
 union PublicNetworkAccess {
@@ -854,9 +901,9 @@ model PaymentHsmProperties {
   mgmtFqdn?: string;
 
   /**
-   * The Payment HSM State. Values are: Deploying, ConfiguringSlb, Starting, Started, Failed, Relocating, Deleting, DeletingSlbEntry, InitialProvisioning, Updating, Degraded
+   * The Payment HSM State.
    */
-  state?: string;
+  state?: HsmState;
 
   /**
    * The Payment HSM State message
