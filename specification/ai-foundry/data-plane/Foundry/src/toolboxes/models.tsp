@@ -38,21 +38,6 @@ alias ToolConfigExtension = {
 };
 
 /**
- * Optional name and description fields for tool definitions and nested tool configurations.
- */
-alias ToolNameAndDescriptionExtension = {
-  /**
-   * Optional user-defined name for this tool or configuration.
-   */
-  name?: string;
-
-  /**
-   * Optional user-defined description for this tool or configuration.
-   */
-  description?: string;
-};
-
-/**
  * Spreads `Source`, changing the selected properties to optional.
  */
 model WithFieldsOptional<Source, Keys extends string> {
@@ -64,7 +49,7 @@ model WithFieldsOptional<Source, Keys extends string> {
  * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
  */
 alias ToolFields<Source> = {
-  ...OmitProperties<Source, "name" | "description" | "type">;
+  ...OmitProperties<Source, "type">;
 };
 
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
@@ -108,7 +93,6 @@ model ToolboxTool {
    */
   type: ToolboxToolType;
 
-  ...ToolNameAndDescriptionExtension;
   ...ToolConfigExtension;
 }
 
