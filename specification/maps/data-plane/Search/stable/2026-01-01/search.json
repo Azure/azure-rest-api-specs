@@ -143,14 +143,14 @@
           {
             "name": "view",
             "in": "query",
-            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven't defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
             "required": false,
             "type": "string"
           },
           {
             "name": "coordinates",
             "in": "query",
-            "description": "A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat",
+            "description": "A point on the earth specified as a longitude and latitude. When you specify this parameter, the user's location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat",
             "required": false,
             "type": "array",
             "items": {
@@ -245,7 +245,7 @@
       "get": {
         "operationId": "Search_GetGeocodeAutocomplete",
         "summary": "Use to get ranked list of suggested entities based on a user's location and a partial query.",
-        "description": "Given a request with a user’s location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.",
+        "description": "Given a request with a user's location and a partial query that serves as the prefix of a full query string (referred to as a query prefix), the Azure Maps Autocomplete API returns a list of suggested entities that the user is most likely searching for. These entities are ranked from most to least likely.",
         "produces": [
           "application/geo+json",
           "application/json"
@@ -280,7 +280,7 @@
           {
             "name": "coordinates",
             "in": "query",
-            "description": "Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
+            "description": "Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user's location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
             "required": false,
             "type": "array",
             "items": {
@@ -335,12 +335,12 @@
                   {
                     "name": "Address",
                     "value": "Address",
-                    "description": "Suggestions that resolve to a specific address or a road segment, contrasted with the\n`Place` group which covers named places and geographic features. Constituent types in\n`AutocompleteResultTypeEnum`: `Address`, `RoadBlock`."
+                    "description": "Suggestions that resolve to a specific address or a road segment. Constituent types in\n`AutocompleteResultTypeEnum`: `Address`, `RoadBlock`."
                   },
                   {
                     "name": "Place",
                     "value": "Place",
-                    "description": "Suggestions that resolve to named places — including administrative regions, populated\nplaces, neighborhoods, natural features, and points of interest. Defined as the\ncomplement of the `Address` group: every member of `AutocompleteResultTypeEnum` except\n`Address` and `RoadBlock`. Examples include `AdminDivision1`, `Neighborhood`, and\n`PopulatedPlace`."
+                    "description": "Suggestions that resolve to named places — including administrative regions, populated\nplaces, neighborhoods, natural features, and points of interest. Constituent types in\n`AutocompleteResultTypeEnum`: every member except `Address` and `RoadBlock`. Examples\ninclude `AdminDivision1`, `Neighborhood`, and `PopulatedPlace`."
                   }
                 ]
               }
@@ -1149,7 +1149,7 @@
           {
             "name": "view",
             "in": "query",
-            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven't defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
             "required": false,
             "type": "string"
           },
@@ -1376,7 +1376,7 @@
           {
             "name": "view",
             "in": "query",
-            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven't defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
             "required": false,
             "type": "string"
           }
@@ -1516,7 +1516,7 @@
           {
             "name": "view",
             "in": "query",
-            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven’t defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
+            "description": "A string that represents an [ISO 3166-1 Alpha-2 region/country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2). This will alter Geopolitical disputed borders and labels to align with the specified user region. By default, the View parameter is set to “Auto” even if you haven't defined it in the request.\n\nPlease refer to [Supported Views](https://aka.ms/AzureMapsLocalizationViews) for details and to see the available Views.",
             "required": false,
             "type": "string"
           },
@@ -2608,12 +2608,12 @@
           {
             "name": "Address",
             "value": "Address",
-            "description": "Suggestions that resolve to a specific address or a road segment, contrasted with the\n`Place` group which covers named places and geographic features. Constituent types in\n`AutocompleteResultTypeEnum`: `Address`, `RoadBlock`."
+            "description": "Suggestions that resolve to a specific address or a road segment. Constituent types in\n`AutocompleteResultTypeEnum`: `Address`, `RoadBlock`."
           },
           {
             "name": "Place",
             "value": "Place",
-            "description": "Suggestions that resolve to named places — including administrative regions, populated\nplaces, neighborhoods, natural features, and points of interest. Defined as the\ncomplement of the `Address` group: every member of `AutocompleteResultTypeEnum` except\n`Address` and `RoadBlock`. Examples include `AdminDivision1`, `Neighborhood`, and\n`PopulatedPlace`."
+            "description": "Suggestions that resolve to named places — including administrative regions, populated\nplaces, neighborhoods, natural features, and points of interest. Constituent types in\n`AutocompleteResultTypeEnum`: every member except `Address` and `RoadBlock`. Examples\ninclude `AdminDivision1`, `Neighborhood`, and `PopulatedPlace`."
           }
         ]
       }
