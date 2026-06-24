@@ -101,3 +101,5 @@ enum OldMarketplaceSubscriptionStatus {
   Suspended,
   Unsubscribed,
 }
+
+@@clientName(Qumulo.Storage.Versions.v2_stable, "V20240619", "javascript");
