@@ -700,6 +700,12 @@ namespace Azure.AI.Projects {
      */
     project_connection_id?: string;
 
+    /**
+     * When `true`, Foundry sends its credentials when fetching the remote
+     * agent's Agent Card. The service defaults to `false` if a value is not
+     * specified by the caller (anonymous fetch).
+     */
+    send_credentials_for_agent_card?: boolean = false;
   }
 
   /**

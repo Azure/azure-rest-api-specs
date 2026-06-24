@@ -13021,6 +13021,13 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
@@ -13047,6 +13054,13 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
