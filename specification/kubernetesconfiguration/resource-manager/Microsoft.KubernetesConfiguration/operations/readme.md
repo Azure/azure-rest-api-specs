@@ -86,11 +86,5 @@ suppressions:
   - code: OperationsApiTenantLevelOnly
     from: operations.json
     reason: User RP limitation
-  - code: OperationsApiResponseSchema
-    from: operations.json
-    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
-  - code: OperationsApiSchemaUsesCommonTypes
-    from: operations.json
-    reason: Cluster-scoped async operations endpoint uses custom schema for operation status tracking, not standard operations catalog
 ```
 
