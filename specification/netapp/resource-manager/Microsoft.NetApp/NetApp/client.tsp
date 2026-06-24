@@ -152,6 +152,7 @@ using Microsoft.NetApp;
 @@clientName(WeeklySchedule, "SnapshotPolicyWeeklySchedule", "csharp");
 @@clientName(CacheLifeCycleState, "NetAppCacheLifeCycleState", "csharp");
 @@clientName(CacheProvisioningState, "NetAppCacheProvisioningState", "csharp");
+@@clientName(CacheFileAccessLogs, "NetAppCacheFileAccessLogs", "csharp");
 @@clientName(CifsChangeNotifyState, "NetAppCifsChangeNotifyState", "csharp");
 @@clientName(EnableWriteBackState, "NetAppEnableWriteBackState", "csharp");
 @@clientName(EncryptionState, "NetAppEncryptionState", "csharp");
@@ -913,4 +914,8 @@ using Microsoft.NetApp;
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
 
-@@clientLocation(NetAppAccounts.refreshLdapBindPassword, "Accounts");
+@@clientLocation(
+  NetAppAccounts.refreshLdapBindPassword,
+  "Accounts",
+  "!autorest"
+);

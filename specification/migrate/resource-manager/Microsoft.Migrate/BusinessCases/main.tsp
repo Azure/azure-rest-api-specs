@@ -10,6 +10,7 @@ import "./BusinessCaseApiVersions.tsp";
 
 // Add Business case service routes here.
 import "./businesscaseroutes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
