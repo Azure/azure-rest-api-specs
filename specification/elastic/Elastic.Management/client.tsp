@@ -338,8 +338,3 @@ model CustomMonitoredSubscription {
   CustomMonitoredSubscription,
   "javascript"
 );
-@@alternateType(
-  SubscriptionList.monitoredSubscriptionList,
-  CustomMonitoredSubscription[],
-  "javascript"
-);
