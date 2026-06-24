@@ -272,6 +272,13 @@ op replacePurge(
   "csharp"
 );
 @@clientName(
+  ApiManagementServiceBaseProperties.zoneRedundant,
+  "IsZoneRedundant",
+  "csharp"
+);
+@@clientName(GatewayHostnameBindingResource, "GatewayHostnameBinding", "csharp");
+@@alternateType(GatewayHostnameBindingResource.eTag, Azure.Core.eTag, "csharp");
+@@clientName(
   BackendTlsProperties.validateCertificateChain,
   "ShouldValidateCertificateChain",
   "csharp"
