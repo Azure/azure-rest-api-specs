@@ -152,6 +152,10 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(SystemTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
+
+// GA parity: the SDK already exposes domain-topic event subscription listing via
+// DomainTopicEventSubscriptionCollection.GetAll(). Hide the duplicate extension projection.
+@@scope(EventSubscriptions.listByDomainTopic, "!csharp");
 @@clientLocation(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "EventSubscriptionsSubscriptionScope",
