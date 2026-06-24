@@ -187,7 +187,7 @@ using Azure.Core;
 );
 @@clientName(
   AvailabilityStatuses.listByResourceGroup,
-  "GetAvailabilityStatusResourcesByResourceGroup",
+  "GetAvailabilityStatusesByResourceGroup",
   "csharp"
 );
 @@clientName(
@@ -195,15 +195,27 @@ using Azure.Core;
   "GetAvailabilityStatusesBySubscription",
   "csharp"
 );
+@@clientName(AvailabilityStatuses.list, "GetAvailabilityStatuses", "csharp");
 @@clientName(
   TenantEventOperationGroup.listByTenantIdAndEventId,
   "GetSecurityAdvisoryImpactedResourcesByTenantIdAndEventId",
   "csharp"
 );
 @@clientName(RecommendedAction.actionUrlText, "ActionUriText", "csharp");
-
+@@clientName(EventSubTypeValues, "EventSubTypeValue", "csharp");
 @@clientName(
   RecommendedAction.`_ActionUrl.Comment`,
   "ActionUriComment",
   "csharp"
 );
+
+// Align new 2025-05-01 billing APIs with .NET naming: fix the "Id" acronym casing and
+// the upstream "Billling" typo for C# only (the wire/operationId keep the spec spelling).
+@@clientName(EventSubTypeValues.MeterIDChanges, "MeterIdChanges", "csharp");
+@@clientName(
+  EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
+  "FetchBillingCommunicationDetailsBySubscriptionIdAndTrackingId",
+  "csharp"
+);
+// Do not surface the RP operations list as a public TenantResource.GetAll API.
+@@access(Operations.list, Access.internal, "csharp");
