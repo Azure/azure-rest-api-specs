@@ -5737,6 +5737,8 @@ model ManagedComputeDeploymentProperties {
    * Deployment capabilities represented as key-value pairs.
    * Example: { assetsV2: "true" }.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'ManagedComputeDeploymentProperties' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
 
