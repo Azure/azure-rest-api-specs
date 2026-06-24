@@ -781,10 +781,10 @@ model QueryAnswerResult is Record<unknown> {
 }
 
 /** Contains debugging information that can be used to further explore your search results. */
+@added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_04_01)
 model DebugInfo {
   /** Contains debugging information specific to query rewrites. */
-  @added(Versions.v2026_05_01_preview)
-  @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
   queryRewrites?: QueryRewritesDebugInfo;
 }

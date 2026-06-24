@@ -317,6 +317,21 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@usage(RedisLinkedServer, Usage.output, "csharp");
 
 @@clientName(TlsVersion, "RedisTlsVersion", "csharp");
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
