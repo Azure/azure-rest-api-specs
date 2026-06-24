@@ -6,6 +6,13 @@ using Microsoft.EventGrid;
 
 namespace Customization;
 
+union PrivateEndpointConnectionsParentTypeCSharp {
+  string,
+  topics: "topics",
+  domains: "domains",
+  partnerNamespaces: "partnerNamespaces",
+}
+
 @@clientName(Microsoft.EventGrid.Channel, "PartnerNamespaceChannel", "csharp");
 @@clientName(
   ChannelProvisioningState,
@@ -123,6 +130,11 @@ namespace Customization;
     domains: "EventGridDomainPrivateEndpointConnection",
     partnerNamespaces: "EventGridPartnerNamespacePrivateEndpointConnection",
   },
+  "csharp"
+);
+@@alternateType(
+  PrivateEndpointConnections.listByResource::parameters.parentType,
+  PrivateEndpointConnectionsParentTypeCSharp,
   "csharp"
 );
 
