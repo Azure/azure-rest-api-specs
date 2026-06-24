@@ -3981,7 +3981,12 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(StaticSiteARMResource, "StaticSite", "csharp");
 @@clientName(
   StaticSiteBasicAuthPropertiesARMResource,
-  "StaticSiteBasicAuthProperties",
+  "StaticSiteBasicAuthProperty",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBasicAuthPropertiesARMResourceProperties,
+  "StaticSiteBasicAuthPropertyProperties",
   "csharp"
 );
 @@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");

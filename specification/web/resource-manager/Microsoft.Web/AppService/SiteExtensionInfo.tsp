@@ -53,7 +53,7 @@ interface SiteExtensionInfoOps
         @key
         siteExtensionId: string,
       },
-      ResourceName = "WebSiteSiteExtension"
+      ResourceName = "WebSiteExtension"
     > {}
 
 @tag("WebApps")
@@ -140,7 +140,7 @@ interface SiteExtensionInfoOperationGroupOps
         @key
         siteExtensionId: string,
       },
-      ResourceName = "WebSiteSlotSiteExtension"
+      ResourceName = "WebSiteSlotExtension"
     > {}
 
 @tag("WebApps")
