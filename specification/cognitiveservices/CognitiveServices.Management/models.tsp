@@ -6505,6 +6505,7 @@ model ManagedComputeCapacityProperties {
   /**
    * The Azure region where the capacity is available.
    */
+  @removed(Versions.v2026_05_01)
   @visibility(Lifecycle.Read)
   location?: string;
 
