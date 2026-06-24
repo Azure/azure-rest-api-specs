@@ -247,7 +247,7 @@ model CommunityProperties is CommunityBaseModel {
   @visibility(Lifecycle.Read)
   dedicatedHubList?: DedicatedHubResource[];
 
-  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsModel;
 
@@ -273,7 +273,7 @@ model CommunityPatchProperties
   @doc("Maintenance Mode configuration.")
   maintenanceModeConfiguration?: MaintenanceModeConfigurationPatchModel;
 
-  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   @doc("Community Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsPatchModel;
 

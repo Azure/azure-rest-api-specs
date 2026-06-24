@@ -44,7 +44,7 @@ union TransitOptionType {
 }
 
 @doc("Specifies the security provider for the transit hub.")
-@added(Microsoft.Mission.Versions.v2026_01_01_preview)
+@added(Microsoft.Mission.Versions.v2026_03_01_preview)
 union SecurityProvider {
   string,
 
@@ -91,7 +91,7 @@ model TransitHubProperties {
   resourceCollection?: armResourceIdentifier[];
 
   @doc("Specifies the security provider for the transit hub.")
-  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   securityProvider?: SecurityProvider;
 }
 

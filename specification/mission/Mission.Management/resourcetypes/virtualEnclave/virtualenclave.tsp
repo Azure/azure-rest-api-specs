@@ -241,7 +241,7 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
   @doc("Approval requirements for various actions on the enclave's resources.")
   approvalSettings?: VirtualEnclaveApprovalSettings;
 
-  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsModel;
 }
@@ -263,7 +263,7 @@ model VirtualEnclavePatchProperties
   @doc("Approval requirements for various actions on the enclave's resources.")
   approvalSettings?: VirtualEnclaveApprovalSettingsPatchProperties;
 
-  @added(Microsoft.Mission.Versions.v2026_01_01_preview)
+  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
   @doc("Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs")
   monitoringSettings?: MonitoringSettingsPatchModel;
 }
