@@ -286,8 +286,7 @@ interface DedicatedHub {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmAsyncOperationHeader
   >;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
-  @patch(#{ implicitOptionality: true })
+  @patch
   update is ArmCustomPatchAsync<
     DedicatedHubResource,
     PatchModel = DedicatedHubPatchModel
