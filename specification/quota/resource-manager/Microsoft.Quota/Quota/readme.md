@@ -41,30 +41,6 @@ These settings apply only when `--tag=package-2026-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-09-01-preview'
 input-file:
   - preview/2026-09-01-preview/openapi.json
-suppressions:
-  - code: ProvisioningStateMustBeReadOnly
-    reason: |
-      `provisioningState` on QuotaTransfer and IncomingQuotaTransfer is emitted as
-      `{ "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
-      "readOnly": true }`. Per OpenAPI 2.0 / JSON Schema, sibling keywords of
-      `$ref` are ignored, so this `readOnly` is not honored at the contract level
-      and the linter is arguably firing correctly. Runtime intent is nonetheless
-      unambiguous from the TypeSpec source (`@visibility(Lifecycle.Read)` on
-      `provisioningState`), and the same `{ $ref + readOnly }` shape is already
-      in use elsewhere in this spec (e.g. `LROResponseProperties`).
-
-      The documented workaround (`use-read-only-status-schema: true` on the
-      typespec-autorest emitter) is not applicable here because this TypeSpec
-      project also emits the shipped stable spec (`stable/2025-09-01/openapi.json`).
-      Enabling the option re-emits status enum schemas with `readOnly: true` in
-      both versions, and the Cross-Version BreakingChange checker reports those
-      schema-level flips as 18 property-level `ReadonlyPropertyChanged` errors
-      against every property in 2025-09-01 that references a status enum.
-
-      Suppressing for this preview only. Tracked for a real fix before GA: emit
-      `provisioningState` via an `allOf` wrap (so `readOnly` lands on the property
-      rather than as an ignored sibling of `$ref`), or inline the status enum on
-      the transfer resources, which removes the need for this suppression.
 ```
 
 ### Tag: package-2025-09-01

@@ -9,7 +9,34 @@ using Azure.ResourceManager;
 namespace Microsoft.Quota;
 
 /**
- * Status of a quota transfer.
+ * Provisioning state of the ARM long-running operation that last wrote to a quota
+ * transfer resource (the donor PUT, or the recipient approve / reject actions).
+ * Reflects the infrastructure outcome of that call only; the business outcome of the
+ * transfer itself is reported separately on `transferStatus`.
+ */
+@added(Versions.v2026_09_01_preview)
+union TransferProvisioningState {
+  string,
+
+  /**
+   * The LRO completed successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The LRO terminated with a failure.
+   */
+  Failed: "Failed",
+
+  /**
+   * The LRO was canceled before it reached a terminal state.
+   */
+  Canceled: "Canceled",
+}
+
+/**
+ * Business status of a quota transfer. Distinct from `provisioningState`, which only
+ * reports the ARM LRO outcome of the most recent call.
  */
 @added(Versions.v2026_09_01_preview)
 union TransferStatus {
@@ -39,6 +66,11 @@ union TransferStatus {
    * The recipient rejected the transfer.
    */
   Rejected: "Rejected",
+
+  /**
+   * The transfer aged out before the recipient approved or rejected it.
+   */
+  Expired: "Expired",
 
   /**
    * The transfer terminated with a failure.
@@ -121,7 +153,7 @@ model QuotaTransferProperties {
    * The status of the underlying ARM resource operation.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: TransferProvisioningState;
 
   /**
    * The business status of the transfer.
@@ -227,7 +259,7 @@ model IncomingQuotaTransferProperties {
    * The status of the underlying ARM resource operation.
    */
   @visibility(Lifecycle.Read)
-  provisioningState?: ResourceProvisioningState;
+  provisioningState?: TransferProvisioningState;
 
   /**
    * The business status of the transfer.

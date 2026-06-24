@@ -3147,36 +3147,6 @@
         "occurredAt"
       ]
     },
-    "Azure.ResourceManager.ResourceProvisioningState": {
-      "type": "string",
-      "description": "The provisioning state of a resource type.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
-          }
-        ]
-      }
-    },
     "CancellationRecord": {
       "type": "object",
       "description": "Record of a cancellation action on a transfer.",
@@ -3881,7 +3851,7 @@
       "description": "Recipient-side projection properties of a quota transfer.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/TransferProvisioningState",
           "description": "The status of the underlying ARM resource operation.",
           "readOnly": true
         },
@@ -4429,7 +4399,8 @@
             "value": "InProgress"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "QuotaRequestStatusDetails": {
       "type": "object",
@@ -4579,7 +4550,7 @@
       "description": "Donor-side properties of a quota transfer.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "$ref": "#/definitions/TransferProvisioningState",
           "description": "The status of the underlying ARM resource operation.",
           "readOnly": true
         },
@@ -4749,7 +4720,8 @@
             "description": "The quota request has been canceled."
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceBaseRequest": {
       "type": "object",
@@ -5112,15 +5084,47 @@
         }
       }
     },
+    "TransferProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the ARM long-running operation that last wrote to a quota\ntransfer resource (the donor PUT, or the recipient approve / reject actions).\nReflects the infrastructure outcome of that call only; the business outcome of the\ntransfer itself is reported separately on `transferStatus`.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "TransferProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The LRO completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The LRO terminated with a failure."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The LRO was canceled before it reached a terminal state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "TransferStatus": {
       "type": "string",
-      "description": "Status of a quota transfer.",
+      "description": "Business status of a quota transfer. Distinct from `provisioningState`, which only\nreports the ARM LRO outcome of the most recent call.",
       "enum": [
         "Pending",
         "Accepted",
         "Completed",
         "Cancelled",
         "Rejected",
+        "Expired",
         "Failed"
       ],
       "x-ms-enum": {
@@ -5151,6 +5155,11 @@
             "name": "Rejected",
             "value": "Rejected",
             "description": "The recipient rejected the transfer."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The transfer aged out before the recipient approved or rejected it."
           },
           {
             "name": "Failed",
