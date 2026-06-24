@@ -333,6 +333,11 @@ model CustomMonitoredSubscription {
    */
   tagRules?: MonitoringTagRulesProperties;
 }
+@@alternateType(
+  MonitoredSubscription,
+  CustomMonitoredSubscription,
+  "javascript"
+);
 @@clientName(
   MonitoredSubscription,
   "CustomMonitoredSubscription",
@@ -341,10 +346,5 @@ model CustomMonitoredSubscription {
 @@clientName(
   CustomMonitoredSubscription,
   "MonitoredSubscription",
-  "javascript"
-);
-@@alternateType(
-  SubscriptionList.monitoredSubscriptionList,
-  CustomMonitoredSubscription[],
   "javascript"
 );
