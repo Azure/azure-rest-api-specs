@@ -15,13 +15,7 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 }
 
 @@alternateType(
-  PrivateEndpointConnectionOps.parentType,
-  PrivateEndpointConnectionsParentTypeCsharp,
-  "csharp"
-);
-
-@@alternateType(
-  PrivateEndpointConnections.listByResource::parameters.parentType,
+  PrivateEndpointConnectionsParentType,
   PrivateEndpointConnectionsParentTypeCsharp,
   "csharp"
 );
