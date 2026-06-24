@@ -1,0 +1,107 @@
+parameters:
+  - name: Test-release-Plan
+    type: boolean
+    default: false
+
+trigger:
+  paths:
+    include:
+      - specification/**
+
+pr: none
+
+stages:
+  - stage: ReleasePlanCreation
+    displayName: "Stage : Release Plan Creation"
+    jobs:
+      - job: ReleasePlan
+        displayName: Create or Find Release Plan
+        pool:
+          name: $(LINUXPOOL)
+          vmImage: $(LINUXVMIMAGE)
+
+        variables:
+          - template: /eng/pipelines/templates/variables/globals.yml
+          - template: /eng/pipelines/templates/variables/image.yml
+          - name: NodeVersion
+            value: "22.x"
+
+        steps:
+          - checkout: self
+            fetchDepth: 2
+
+          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
+            parameters:
+              npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
+
+          - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
+          - task: UseNode@1
+            displayName: "Install Node.js"
+            inputs:
+              version: $(NodeVersion)
+
+          - script: |
+              set -euo pipefail
+              npm install
+              npm run build
+            displayName: "Install and build release-plan tool"
+            workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
+            env:
+              npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+
+          - task: AzureCLI@2
+            displayName: "Get Release Plan details"
+            condition: succeeded()
+            continueOnError: true
+            workingDirectory: $(Build.SourcesDirectory)
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $commitSha = "$(Build.SourceVersion)"
+                if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                  Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
+                  $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
+                }
+
+                if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                  Write-Host "##vso[task.logissue type=error]Unable to determine commit SHA from Build.SourceVersion or repository HEAD."
+                  exit 1
+                }
+
+                Write-Host "Using commit SHA: $commitSha"
+
+                $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+
+                node eng/tools/release-plan/cmd/release-plan.js `
+                  --commit-sha $commitSha `
+                  --repo "$(Build.Repository.Name)" `
+                  --workspace "$(Build.SourcesDirectory)" `
+                  --azsdk-path "$(AZSDK)" `
+                  --test-release-plan "${{ parameters['Test-release-Plan'] }}" `
+                  --output-file $outputPath
+
+          - pwsh: |
+              $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+              if (!(Test-Path $outputPath)) {
+                New-Item -ItemType Directory -Force -Path (Split-Path $outputPath -Parent) | Out-Null
+                '{"outcome":"not_found","releasePlan":null,"details":{}}' | Out-File -FilePath $outputPath -Encoding utf8
+              }
+            displayName: "Ensure release plan artifact file exists"
+            condition: succeededOrFailed()
+
+          - task: PublishPipelineArtifact@1
+            displayName: "Publish release plan details artifact"
+            condition: succeededOrFailed()
+            inputs:
+              targetPath: "$(Build.ArtifactStagingDirectory)/release-plan"
+              artifactName: "release-plan-details"
+              publishLocation: "pipeline"
