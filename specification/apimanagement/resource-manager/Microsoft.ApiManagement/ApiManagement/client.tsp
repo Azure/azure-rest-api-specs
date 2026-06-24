@@ -276,7 +276,11 @@ op replacePurge(
   "IsZoneRedundant",
   "csharp"
 );
-@@clientName(GatewayHostnameBindingResource, "GatewayHostnameBinding", "csharp");
+@@clientName(
+  GatewayHostnameBindingResource,
+  "GatewayHostnameBinding",
+  "csharp"
+);
 @@alternateType(GatewayHostnameBindingResource.eTag, Azure.Core.eTag, "csharp");
 @@clientName(
   BackendTlsProperties.validateCertificateChain,
