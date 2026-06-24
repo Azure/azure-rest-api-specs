@@ -1013,7 +1013,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -1126,7 +1126,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -1185,7 +1185,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -8485,7 +8485,13 @@ paths:
       operationId: createConversation
       summary: Create a conversation
       description: Creates a new conversation resource.
-      parameters: []
+      parameters:
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8572,6 +8578,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8624,6 +8636,12 @@ paths:
           description: The id of the conversation to update.
           schema:
             type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8662,6 +8680,12 @@ paths:
           description: The id of the conversation to retrieve.
           schema:
             type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8692,6 +8716,12 @@ paths:
           in: path
           required: true
           description: The id of the conversation to delete.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -8738,6 +8768,12 @@ paths:
             items:
               type: string
           explode: false
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8832,6 +8868,12 @@ paths:
           schema:
             $ref: '#/components/schemas/OpenAI.ItemType'
           explode: false
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8890,6 +8932,12 @@ paths:
           description: The id of the conversation item to retrieve.
           schema:
             type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -8926,6 +8974,12 @@ paths:
           in: path
           required: true
           description: The id of the conversation item to delete.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -9932,7 +9986,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -10385,7 +10439,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -10497,7 +10551,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -10544,7 +10598,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -10589,7 +10643,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -10673,7 +10727,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/delegateViaUserId/action` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
