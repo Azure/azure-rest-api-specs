@@ -8,17 +8,17 @@ using Microsoft.DevCenter;
 @@clientName(
   Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
   "CustomerManagedKeyEncryption",
-  "!csharp"
+  "!csharp,!java,!go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
   "KeyEncryptionKeyIdentity",
-  "!java,!go"
+  "!csharp,!java,!go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "KeyEncryptionKeyIdentityType",
-  "!java,!csharp"
+  "!csharp,!java,!go"
 );
 @@clientName(Azure.Core.uuid, "uuid");
 

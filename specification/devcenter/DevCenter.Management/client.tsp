@@ -33,6 +33,12 @@ using Microsoft.DevCenter;
 );
 
 @@clientName(
+  Microsoft.DevCenter.KeyEncryptionKeyIdentityUpdate,
+  "KeyEncryptionKeyIdentity",
+  "java,go"
+);
+
+@@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
   "IdentityType",
   "java"
