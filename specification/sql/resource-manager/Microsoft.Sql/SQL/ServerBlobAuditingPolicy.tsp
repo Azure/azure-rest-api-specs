@@ -40,7 +40,8 @@ alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperati
     @key
     serverName: string;
   },
-  ServerBlobAuditingPolicyNameAlias
+  ServerBlobAuditingPolicyNameAlias,
+  ResourceName = "SqlServerBlobAuditingPolicy"
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
