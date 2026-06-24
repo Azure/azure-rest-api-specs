@@ -209,7 +209,7 @@ function buildCommentBody({
   }
   body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
   body += `_Process: [.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md)_\n`;
-  body += `_Namespaces extracted via [@azure-tools/typespec-metadata](https://www.npmjs.com/package/@azure-tools/typespec-metadata) emitter_`;
+  body += `_Namespaces extracted from tspconfig.yaml emitter options_`;
   return body;
 }
 

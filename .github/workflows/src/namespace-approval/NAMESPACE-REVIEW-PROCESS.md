@@ -13,8 +13,8 @@ This process is automated via GitHub Actions on this repository.
 When a PR modifies any `tspconfig.yaml` file, the analyze-code workflow:
 
 1. Identifies which languages have namespace/package-name configuration
-2. Extracts namespaces using the `@azure-tools/typespec-metadata` emitter
-3. Determines if the service is data-plane or management-plane
+2. Extracts namespaces by parsing `tspconfig.yaml` emitter options directly
+3. Determines if the service is data-plane or management-plane (via path and linter config)
 4. Uploads namespace results for the status workflow
 
 ### Status + Approval

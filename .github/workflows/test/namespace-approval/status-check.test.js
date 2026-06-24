@@ -39,18 +39,22 @@ describe("status-check", () => {
 
   it("should pass when no namespace-review-required label", async () => {
     github.rest.pulls.get.mockResolvedValue({
-      data: { labels: [{ name: "other-label" }] },
+      data: { labels: [{ name: "other-label" }], head: { sha: "abc123" } },
     });
 
     await statusCheck(args());
 
     expect(core.info).toHaveBeenCalledWith("No namespace review required, passing");
     expect(core.setFailed).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "success", context: "Namespace Approval" }),
+    );
   });
 
   it("should fail when pending labels remain", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
+        head: { sha: "abc123" },
         labels: [
           { name: "namespace-review-required" },
           { name: "java-namespace-pending" },
@@ -61,14 +65,19 @@ describe("status-check", () => {
 
     await statusCheck(args());
 
-    const failMsg = String(core.setFailed.mock.calls[0][0]);
-    expect(failMsg).toContain("java");
-    expect(failMsg).toContain("dotnet");
+    const infoMsg = String(core.info.mock.calls.find((c) => String(c[0]).includes("pending"))?.[0]);
+    expect(infoMsg).toContain("java");
+    expect(infoMsg).toContain("dotnet");
+    expect(core.setFailed).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "pending", context: "Namespace Approval" }),
+    );
   });
 
   it("should pass when all namespaces approved", async () => {
     github.rest.pulls.get.mockResolvedValue({
       data: {
+        head: { sha: "abc123" },
         labels: [
           { name: "namespace-review-required" },
           { name: "namespace-approved" },
@@ -81,5 +90,8 @@ describe("status-check", () => {
 
     expect(core.info).toHaveBeenCalledWith("All namespaces approved - merge allowed");
     expect(core.setFailed).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ state: "success", context: "Namespace Approval" }),
+    );
   });
 });

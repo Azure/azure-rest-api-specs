@@ -1,42 +1,23 @@
-import { access, readFile, rm, writeFile } from "fs/promises";
-import { tmpdir } from "os";
-import { basename, dirname, join } from "path";
-import { z } from "zod";
+import { access, readFile, writeFile } from "fs/promises";
+import yaml from "js-yaml";
+import { dirname, join } from "path";
 import { getChangedFiles } from "../../../shared/src/changed-files.js";
-import { execFile, execNpmExec } from "../../../shared/src/exec.js";
+import { execFile } from "../../../shared/src/exec.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
-const TypeSpecMetadataSchema = z.object({
-  typespec: z
-    .object({
-      type: z.enum(["management", "data"]).optional(),
-    })
-    .optional(),
-  languages: z
-    .record(
-      z.string(),
-      z.array(
-        z.object({
-          namespace: z.string().optional(),
-          packageName: z.string().optional(),
-        }),
-      ),
-    )
-    .optional(),
-});
-
-/** @typedef {{ namespace?: string, packageName?: string }} TypeSpecMetadataEntry */
-/** @typedef {Record<string, TypeSpecMetadataEntry[]>} TypeSpecLanguages */
-
-/** @type {Record<string, string>} */
+/**
+ * Map of emitter package name suffix to normalized language key.
+ * @type {Record<string, string>}
+ */
 const EMITTER_TO_LANG = {
-  csharp: "dotnet",
+  "typespec-csharp": "dotnet",
   "http-client-csharp": "dotnet",
   "http-client-csharp-mgmt": "dotnet",
-  java: "java",
-  python: "python",
-  typescript: "typescript",
-  go: "go",
+  "typespec-java": "java",
+  "typespec-python": "python",
+  "typespec-ts": "typescript",
+  "typespec-go": "go",
+  "typespec-rust": "rust",
 };
 
 /**
@@ -72,7 +53,24 @@ async function ensureTypeSpecFilesAvailable(file, core) {
 }
 
 /**
- * Extract namespaces from tspconfig.yaml using typespec-metadata emitter.
+ * Resolve the normalized language from an emitter package name.
+ * e.g. "@azure-tools/typespec-java" → "java"
+ *
+ * @param {string} emitterKey - Full emitter package name (e.g. "@azure-tools/typespec-java")
+ * @returns {string | undefined}
+ */
+function resolveLanguage(emitterKey) {
+  for (const [suffix, lang] of Object.entries(EMITTER_TO_LANG)) {
+    if (emitterKey.endsWith(`/${suffix}`) || emitterKey === suffix) {
+      return lang;
+    }
+  }
+  return undefined;
+}
+
+/**
+ * Extract namespaces directly from tspconfig.yaml emitter options.
+ * Parses the `options` section to find `namespace` or `package-details.name` per language emitter.
  *
  * @param {string} file - Path to tspconfig.yaml
  * @param {Record<string, string>} namespacesFound - Map of language to namespace (mutated)
@@ -89,65 +87,75 @@ async function extractNamespaces(file, namespacesFound, core) {
     return { isMgmt, isDataPlane };
   }
 
-  const tspDir = dirname(file);
-
   if (file.includes(".Management/") || file.includes("/resource-manager/")) {
     isMgmt = true;
   } else {
     isDataPlane = true;
   }
 
-  const outputDir = join(
-    process.env.RUNNER_TEMP || tmpdir(),
-    "typespec-metadata",
-    basename(tspDir),
-  );
-  await rm(outputDir, { recursive: true, force: true });
+  core.info(`Parsing tspconfig.yaml for namespace info: ${file}`);
+  const content = await readFile(file, "utf8");
+  const config = /** @type {Record<string, unknown>} */ (yaml.load(content));
 
-  core.info(`Running typespec-metadata emitter on ${tspDir}`);
-  await execNpmExec(
-    [
-      "tsp",
-      "compile",
-      tspDir,
-      "--emit",
-      "@azure-tools/typespec-metadata",
-      "--output-dir",
-      outputDir,
-      "--option",
-      "@azure-tools/typespec-metadata.format=json",
-    ],
-    {
-      cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
-    },
-  );
-
-  const metadataPath = join(
-    outputDir,
-    "@azure-tools",
-    "typespec-metadata",
-    "typespec-metadata.json",
-  );
-  const metadata = TypeSpecMetadataSchema.parse(JSON.parse(await readFile(metadataPath, "utf8")));
-
-  if (metadata.typespec?.type === "management") {
-    isMgmt = true;
-  }
-  if (metadata.typespec?.type === "data") {
-    isDataPlane = true;
+  if (!config || typeof config !== "object") {
+    core.warning(`Could not parse tspconfig.yaml: ${file}`);
+    return { isMgmt, isDataPlane };
   }
 
-  const languages = /** @type {TypeSpecLanguages} */ (metadata.languages ?? {});
-  for (const [langKey, entries] of Object.entries(languages)) {
-    const lang = EMITTER_TO_LANG[langKey] ?? langKey;
-    const firstEntry = entries[0];
-    const namespace = firstEntry?.namespace ?? firstEntry?.packageName;
-    if (namespace) {
-      namespacesFound[lang] = namespace;
+  // Linter extends is the most reliable plane indicator — override path-based guess
+  const linter = /** @type {Record<string, unknown> | undefined} */ (config.linter);
+  if (linter) {
+    const linterExtends = /** @type {string[] | undefined} */ (linter.extends);
+    if (linterExtends?.some((e) => e.includes("resource-manager"))) {
+      isMgmt = true;
+      isDataPlane = false;
+    } else if (linterExtends?.some((e) => e.includes("data-plane"))) {
+      isDataPlane = true;
+      isMgmt = false;
     }
   }
 
-  await rm(outputDir, { recursive: true, force: true });
+  const options = /** @type {Record<string, Record<string, unknown>> | undefined} */ (
+    config.options
+  );
+  if (!options) {
+    core.info(`No emitter options found in ${file}`);
+    return { isMgmt, isDataPlane };
+  }
+
+  for (const [emitterKey, emitterOpts] of Object.entries(options)) {
+    const lang = resolveLanguage(emitterKey);
+    if (!lang || !emitterOpts || typeof emitterOpts !== "object") {
+      continue;
+    }
+
+    // Prefer `namespace`, fall back to `package-details.name`, `module`, `crate-name`
+    const ns = /** @type {string | undefined} */ (emitterOpts.namespace);
+    if (ns) {
+      namespacesFound[lang] = ns;
+      continue;
+    }
+
+    const packageDetails = /** @type {Record<string, unknown> | undefined} */ (
+      emitterOpts["package-details"]
+    );
+    if (packageDetails?.name) {
+      namespacesFound[lang] = String(packageDetails.name);
+      continue;
+    }
+
+    const module = /** @type {string | undefined} */ (emitterOpts.module);
+    if (module) {
+      namespacesFound[lang] = module;
+      continue;
+    }
+
+    const crateName = /** @type {string | undefined} */ (emitterOpts["crate-name"]);
+    if (crateName) {
+      namespacesFound[lang] = crateName;
+    }
+  }
+
   return { isMgmt, isDataPlane };
 }
 
