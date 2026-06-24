@@ -122,6 +122,7 @@ namespace Customization;
     topics: "EventGridTopicPrivateEndpointConnection",
     domains: "EventGridDomainPrivateEndpointConnection",
     partnerNamespaces: "EventGridPartnerNamespacePrivateEndpointConnection",
+    namespaces: "EventGridNamespacePrivateEndpointConnection",
   },
   "csharp"
 );
