@@ -3882,6 +3882,13 @@ model EceReportedProperties {
    */
   @visibility(Lifecycle.Read)
   deploymentStatus?: EceActionStatus;
+
+  /**
+   * Captures the customer's intent to enable or disable Confidential Virtual Machine (CVM) support on the cluster.
+   */
+  @added(Versions.v2026_05_01_preview)
+  @visibility(Lifecycle.Read)
+  confidentialVmIntent?: ConfidentialVmIntent;
 }
 
 /**
