@@ -2284,6 +2284,12 @@ model VirtualMachineScaleSetOSProfile {
   adminPassword?: string;
 
   /**
+   * Specifies whether the administrator account should be disabled on the virtual machines in the scale set. When set to true, the virtual machines are created without a local administrator account, and adminUsername, adminPassword, and (for Linux) SSH public keys must not be specified. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  disableAdminAccount?: boolean;
+
+  /**
    * Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)
    */
   customData?: string;
@@ -5737,6 +5743,12 @@ model OSProfile {
   @doc("Specifies the password of the administrator account. <br><br> **Minimum-length (Windows):** 8 characters <br><br> **Minimum-length (Linux):** 6 characters <br><br> **Max-length (Windows):** 123 characters <br><br> **Max-length (Linux):** 72 characters <br><br> **Complexity requirements:** 3 out of 4 conditions below need to be fulfilled <br> Has lower characters <br>Has upper characters <br> Has a digit <br> Has a special character (Regex match [\\W_]) <br><br> **Disallowed values:** \"abc@123\", \"P@$$w0rd\", \"P@ssw0rd\", \"P@ssword123\", \"Pa$$word\", \"pass@word1\", \"Password!\", \"Password1\", \"Password22\", \"iloveyou!\" <br><br> For resetting the password, see [How to reset the Remote Desktop service or its login password in a Windows VM](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/reset-rdp) <br><br> For resetting root password, see [Manage users, SSH, and check or repair disks on Azure Linux VMs using the VMAccess Extension](https://docs.microsoft.com/troubleshoot/azure/virtual-machines/troubleshoot-ssh-connection)")
   @secret
   adminPassword?: string;
+
+  /**
+   * Specifies whether the administrator account should be disabled on the virtual machine. When set to true, the virtual machine is created without a local administrator account, and adminUsername, adminPassword, and (for Linux) SSH public keys must not be specified. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  disableAdminAccount?: boolean;
 
   /**
    * Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. **Note: Do not pass any secrets or passwords in customData property.** This property cannot be updated after the VM is created. The property 'customData' is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/blog/custom-data-and-cloud-init-on-windows-azure/). For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init).
