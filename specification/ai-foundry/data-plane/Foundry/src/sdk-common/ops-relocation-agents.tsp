@@ -10,6 +10,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects {
 
+// Relocate these operations from the AgentSessionFiles interface to the Agents interface
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.uploadSessionFile, Agents);
 @@clientLocation(
   Azure.AI.Projects.AgentSessionFiles.downloadSessionFile,
@@ -17,18 +18,6 @@ namespace Azure.AI.Projects {
 );
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.listSessionFiles, Agents);
 @@clientLocation(Azure.AI.Projects.AgentSessionFiles.deleteSessionFile, Agents);
-
-@@clientLocation(Azure.AI.Projects.Agents.patchAgentObject, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.createSession, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.getSession, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.deleteSession, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.stopSession, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.listSessions, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.getSessionLogStream, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.createAgentFromCode, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.updateAgentFromCode, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.createAgentVersionFromCode, Agents);
-@@clientLocation(Azure.AI.Projects.Agents.downloadAgentCode, Agents);
 
 };
 

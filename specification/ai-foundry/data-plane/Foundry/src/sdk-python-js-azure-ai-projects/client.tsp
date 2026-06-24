@@ -30,8 +30,8 @@ import "../data_generation_jobs/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
-import "../sdk-common/beta-ops-relocation-agents.tsp";
-import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -89,7 +89,7 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
-@@clientName(Agents.patchAgentObject, "patchAgentDetails", "python");
+@@clientName(Agents.patchAgentObject, "updateDetails", "python");
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");

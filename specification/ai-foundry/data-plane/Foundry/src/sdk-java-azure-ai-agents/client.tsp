@@ -1,7 +1,7 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
-import "../sdk-common/beta-ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
 import "../memory-stores/routes.tsp";
