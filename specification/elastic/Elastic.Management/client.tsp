@@ -309,3 +309,32 @@ using Microsoft.Elastic;
   "csharp"
 );
 @@clientName(ElasticMonitorResources.vMHostList, "GetVmHosts", "csharp");
+/**
+ * The list of subscriptions and it's monitoring status by current Elastic monitor.
+ */
+model CustomMonitoredSubscription {
+  /**
+   * The subscriptionId to be monitored.
+   */
+  subscriptionId?: string;
+
+  /**
+   * The state of monitoring.
+   */
+  status?: Status;
+
+  /**
+   * The reason of not monitoring the subscription.
+   */
+  error?: string;
+
+  /**
+   * Definition of the properties for a TagRules resource.
+   */
+  tagRules?: MonitoringTagRulesProperties;
+}
+@@alternateType(
+  MonitoredSubscription,
+  CustomMonitoredSubscription,
+  "javascript"
+);
