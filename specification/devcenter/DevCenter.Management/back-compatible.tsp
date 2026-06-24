@@ -7,15 +7,18 @@ using Microsoft.DevCenter;
 // Remove namespace qualification from CommonTypes encryption types for OpenAPI compatibility
 @@clientName(
   Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
-  "CustomerManagedKeyEncryption"
+  "CustomerManagedKeyEncryption",
+  "!csharp"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
-  "KeyEncryptionKeyIdentity"
+  "KeyEncryptionKeyIdentity",
+  "!java,!go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
-  "KeyEncryptionKeyIdentityType"
+  "KeyEncryptionKeyIdentityType",
+  "!java,!csharp"
 );
 @@clientName(Azure.Core.uuid, "uuid");
 
