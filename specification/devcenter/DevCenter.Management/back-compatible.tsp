@@ -20,7 +20,7 @@ using Microsoft.DevCenter;
   "KeyEncryptionKeyIdentityType",
   "!csharp,!java,!go"
 );
-@@clientName(Azure.Core.uuid, "uuid");
+@@clientName(Azure.Core.uuid, "uuid", "!csharp,!java,!go");
 
 @@clientName(DevCenters.createOrUpdate::parameters.resource, "body");
 @@clientName(DevCenters.update::parameters.properties, "body");
