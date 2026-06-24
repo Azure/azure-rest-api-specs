@@ -794,11 +794,6 @@ union SandboxCustomImageType {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp compat"
 @@flattenProperty(ClusterProperties.languageExtensions, "csharp");
-@@clientName(
-  ClusterProperties.languageExtensions,
-  "LanguageExtensionsValue",
-  "csharp"
-);
 
 @@alternateType(ClusterPrincipalProperties.tenantId, uuid, "csharp");
 @@alternateType(DatabasePrincipalProperties.tenantId, uuid, "csharp");
@@ -880,3 +875,12 @@ model KustoClusterPatch
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(KustoClusterPatch.properties);
 @@alternateType(ClusterUpdate, KustoClusterPatch, "csharp");
+
+@@clientName(
+  LanguageExtensionImageName.Python3_10_8,
+  Azure.ClientGenerator.Core.exact("Python3_10_8")
+);
+@@clientName(
+  LanguageExtensionImageName.Python3_6_5,
+  Azure.ClientGenerator.Core.exact("Python3_6_5")
+);
