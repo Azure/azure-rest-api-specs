@@ -61,6 +61,7 @@ model ApprovalSettingConfiguration {
   mandatoryApprovers?: MandatoryApprover[];
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Using @friendlyName to preserve schema name 'ApprovalSettings' in old version openapi output"
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @removed(Microsoft.Mission.Versions.v2025_11_01_preview)
 @doc("ApprovalSettings Properties")
@@ -157,6 +158,7 @@ model ApprovalSettings {
   enclaveMaintenanceMode?: ApprovalSettingConfiguration;
 }
 
+#suppress "@azure-tools/typespec-azure-core/friendly-name" "Using @friendlyName to preserve schema name 'ApprovalSettingsPatchProperties' in old version openapi output"
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @removed(Microsoft.Mission.Versions.v2025_11_01_preview)
 @doc("ApprovalSettings Properties")
