@@ -140,12 +140,14 @@ namespace Microsoft.InsightsCombinedClient;
   "GetAllMetricAlertsStatusByName",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "preserve the shipped C# overload name for resource-scope metric retrieval"
 @@clientName(
   MetricsApi.MetricsOperationGroup.list,
   "GetMonitorMetrics",
   "csharp"
 );
 @@clientName(MetricsApi.Response, "MonitorMetricsResult", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "preserve the shipped C# overload name for subscription-scope metric retrieval"
 @@clientName(
   MetricsApi.MetricsOperationGroup.listAtSubscriptionScope,
   "GetMonitorMetrics",
@@ -946,27 +948,56 @@ namespace Microsoft.InsightsCombinedClient;
 // LRO status polling endpoints are implementation details and should not generate public C# SDK methods.
 @@scope(PrivateLinkScopeOperationStatusOperationGroup.get, "!csharp");
 
+/** Days of the week accepted by Monitor recurring schedules. */
 union MonitorDayOfWeek {
   string,
+
+  /** Sunday. */
   Sunday: "Sunday",
+
+  /** Monday. */
   Monday: "Monday",
+
+  /** Tuesday. */
   Tuesday: "Tuesday",
+
+  /** Wednesday. */
   Wednesday: "Wednesday",
+
+  /** Thursday. */
   Thursday: "Thursday",
+
+  /** Friday. */
   Friday: "Friday",
+
+  /** Saturday. */
   Saturday: "Saturday",
 }
 
+/** Monitor autoscale operation type. */
 union MonitorOperationType {
   string,
+
+  /** Scale operation. */
   Scale: "Scale",
 }
 
+/** Monitor condition comparison operator. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "C# compatibility alternate type must generate the shipped MonitorConditionOperator extensible enum"
 enum MonitorConditionOperator {
+  /** Greater than. */
   GreaterThan: "GreaterThan",
+
+  /** Greater than or equal. */
   GreaterThanOrEqual: "GreaterThanOrEqual",
+
+  /** Less than. */
   LessThan: "LessThan",
+
+  /** Less than or equal. */
   LessThanOrEqual: "LessThanOrEqual",
+
+  /** Equals. */
   EqualsValue: "Equals",
 }
 

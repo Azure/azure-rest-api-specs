@@ -37,7 +37,6 @@ alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager
     @path(#{ allowReserved: true })
     @minLength(1)
     resourceUri: string;
-
   },
   {
     ...Azure.ResourceManager.Legacy.Provider;
