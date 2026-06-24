@@ -792,11 +792,8 @@ union SandboxCustomImageType {
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
-@@alternateType(
-  ClusterProperties.languageExtensions,
-  LanguageExtension[],
-  "csharp"
-);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp compat"
+@@flattenProperty(ClusterProperties.languageExtensions, "csharp");
 @@clientName(
   ClusterProperties.languageExtensions,
   "LanguageExtensionsValue",
