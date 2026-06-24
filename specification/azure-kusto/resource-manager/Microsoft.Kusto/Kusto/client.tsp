@@ -915,6 +915,11 @@ model KustoClusterPatch
   uuid,
   "csharp"
 );
+@@clientName(
+  EventGridConnectionWithManagedIdentityProperties.ignoreFirstRecord,
+  "ShouldIgnoreFirstRecord",
+  "csharp"
+);
 @@alternateType(
   EventHubConnectionWithManagedIdentityProperties.managedIdentityResourceId,
   Azure.Core.armResourceIdentifier,
