@@ -1,19 +1,19 @@
-name: "Namespace Approval - Set Status"
+name: "Namespace Approval - Validate Labels"
 
 on:
-  workflow_run:
-    workflows: ["Namespace Approval - Analyze Code"]
-    types: [completed]
+  pull_request_target:
+    types:
+      - labeled
+      - unlabeled
 
 permissions:
-  actions: read
   contents: read
   pull-requests: write
   statuses: write
 
 jobs:
-  post-results:
-    name: Post Namespace Results
+  validate-approval:
+    name: Validate Namespace Approval
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v6
@@ -24,15 +24,15 @@ jobs:
       - name: Install dependencies for github-script actions
         uses: ./.github/actions/install-deps-github-script
 
-      - name: Post namespace review comment
+      - name: Validate namespace approval label
         uses: actions/github-script@v8
         with:
           script: |
-            const { default: postResults } =
-              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/post-results.js');
-            await postResults({ github, context, core });
+            const { default: validateApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/validate-approval.js');
+            await validateApproval({ github, context, core });
 
-      - name: Set namespace approval status
+      - name: Update namespace approval status
         uses: actions/github-script@v8
         with:
           script: |
