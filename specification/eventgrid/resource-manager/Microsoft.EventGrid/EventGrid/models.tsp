@@ -1968,6 +1968,11 @@ union PrivateEndpointConnectionsParentType {
    * partnerNamespaces
    */
   partnerNamespaces: "partnerNamespaces",
+
+  /**
+   * namespaces
+   */
+  namespaces: "namespaces",
 }
 
 /**

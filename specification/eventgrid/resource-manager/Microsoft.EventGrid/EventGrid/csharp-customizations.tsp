@@ -6,6 +6,20 @@ using Microsoft.EventGrid;
 
 namespace Customization;
 
+// C#-only union for PrivateEndpointConnectionsParentType without namespaces entry
+union PrivateEndpointConnectionsParentTypeCsharp {
+  string,
+  topics: "topics",
+  domains: "domains",
+  partnerNamespaces: "partnerNamespaces",
+}
+
+@@alternateType(
+  PrivateEndpointConnectionsParentType,
+  PrivateEndpointConnectionsParentTypeCsharp,
+  "csharp"
+);
+
 @@clientName(Microsoft.EventGrid.Channel, "PartnerNamespaceChannel", "csharp");
 @@clientName(
   ChannelProvisioningState,
@@ -122,7 +136,6 @@ namespace Customization;
     topics: "EventGridTopicPrivateEndpointConnection",
     domains: "EventGridDomainPrivateEndpointConnection",
     partnerNamespaces: "EventGridPartnerNamespacePrivateEndpointConnection",
-    namespaces: "EventGridNamespacePrivateEndpointConnection",
   },
   "csharp"
 );
