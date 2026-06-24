@@ -132,11 +132,13 @@ namespace Azure.AI.Projects {
     /**
      * Optional user-defined name for this tool or configuration.
      */
+    #deprecated "Optional user-defined name for this tool or configuration is deprecated."
     name?: string;
 
     /**
      * Optional user-defined description for this tool or configuration.
      */
+    #deprecated "Optional user-defined description for this tool or configuration is deprecated."
     description?: string;
   };
 
