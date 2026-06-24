@@ -66,7 +66,7 @@ async function ensureTypeSpecFilesAvailable(file, core) {
   const tspDir = dirname(file);
   const workspace = process.env.GITHUB_WORKSPACE ?? process.cwd();
   core.info(`Hydrating ${tspDir} from git for namespace detection`);
-  await execFile("git", ["checkout", "HEAD", "--", tspDir], {
+  await execFile("git", ["sparse-checkout", "add", tspDir], {
     cwd: workspace,
   });
 }
