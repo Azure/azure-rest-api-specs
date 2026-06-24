@@ -2,6 +2,10 @@ import "../sdk-common/error.default.tsp";
 import "../common/servicepatterns.tsp";
 import "../openai-conversations/routes.tsp";
 import "../openai-responses/routes.tsp";
+import "../toolboxes/models.tsp";
+import "../agents/models.tsp";
+import "../toolboxes/models.tsp";
+import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;

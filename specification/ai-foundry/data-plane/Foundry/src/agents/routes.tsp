@@ -448,7 +448,6 @@ interface Agents {
       /** The name of the agent to create a session for. */
       @path agent_name: string;
 
-      ...UserIsolationKeyHeader;
       ...CreateAgentSessionRequest;
     },
     ResourceCreatedResponse<AgentSessionResource>
@@ -468,8 +467,6 @@ interface Agents {
 
       /** The session identifier. */
       @path session_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     AgentSessionResource
   >;
@@ -489,8 +486,6 @@ interface Agents {
 
       /** The session identifier. */
       @path session_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     NoContentResponse
   >;
@@ -526,7 +521,6 @@ interface Agents {
       /** The name of the agent. */
       @path agent_name: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<AgentSessionResource>

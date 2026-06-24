@@ -19,7 +19,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody & UserIsolationKeyHeader,
+    OpenAI.CreateConversationBody & UserDelegationHeader,
     OpenAI.ConversationResource
   >;
 
@@ -36,7 +36,7 @@ interface Conversations {
       @path conversation_id: string;
 
       ...OpenAI.UpdateConversationBody;
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -53,7 +53,7 @@ interface Conversations {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
 
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -70,7 +70,7 @@ interface Conversations {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
 
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.DeletedConversationResource
   >;
@@ -90,7 +90,7 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.ConversationResource>
   >;
@@ -118,7 +118,7 @@ interface Conversations {
       @maxItems(20)
       items: OpenAI.Item[];
 
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationItemList
   >;
@@ -138,7 +138,7 @@ interface Conversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
 
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.OutputItem
   >;
@@ -158,7 +158,7 @@ interface Conversations {
       /** The id of the conversation item to delete. */
       @path item_id: string;
 
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -178,7 +178,7 @@ interface Conversations {
 
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
-      ...UserIsolationKeyHeader;
+      ...UserDelegationHeader;
     },
     AgentsPagedResult<OpenAI.OutputItem>
   >;

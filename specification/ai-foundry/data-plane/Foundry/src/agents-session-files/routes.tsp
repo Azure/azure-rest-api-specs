@@ -3,8 +3,6 @@ import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -31,20 +29,7 @@ interface AgentSessionFiles {
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   uploadSessionFile is FoundryDataPlaneOperation<
     {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The session ID. */
-      @path agent_session_id: string;
-
-      /** The destination file path within the sandbox, relative to the session home directory. */
-      @query path: string;
-
-      /** The binary file content to upload. */
-      @header("Content-Type") contentType: "application/octet-stream";
-
-      @body content: bytes;
-      ...UserIsolationKeyHeader;
+      ...UploadSessionFileParams;
     },
     ResourceCreatedResponse<SessionFileWriteResponse>
   >;
@@ -58,16 +43,7 @@ interface AgentSessionFiles {
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files/content")
   downloadSessionFile is FoundryDataPlaneOperation<
     {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The session ID. */
-      @path agent_session_id: string;
-
-      /** The file path to download from the sandbox, relative to the session home directory. */
-      @query path: string;
-
-      ...UserIsolationKeyHeader;
+      ...DownloadSessionFileParams;
     },
     bytes
   >;
@@ -82,16 +58,7 @@ interface AgentSessionFiles {
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   listSessionFiles is FoundryDataPlaneOperation<
     {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The session ID. */
-      @path agent_session_id: string;
-
-      /** The directory path to list, relative to the session home directory. Defaults to the home directory if not provided. */
-      @query path?: string;
-
-      ...UserIsolationKeyHeader;
+      ...ListSessionFilesParams;
       ...CommonPageQueryParameters;
     },
     SessionDirectoryListResponse
@@ -106,19 +73,7 @@ interface AgentSessionFiles {
   @route("/agents/{agent_name}/endpoint/sessions/{agent_session_id}/files")
   deleteSessionFile is FoundryDataPlaneOperation<
     {
-      /** The name of the agent. */
-      @path agent_name: string;
-
-      /** The session ID. */
-      @path agent_session_id: string;
-
-      /** The file or directory path to delete, relative to the session home directory. */
-      @query path: string;
-
-      /** Whether to recursively delete directory contents. The service defaults to `false` if a value is not specified by the caller. */
-      @query recursive?: boolean = false;
-
-      ...UserIsolationKeyHeader;
+      ...DeleteSessionFileParams;
     },
     void
   >;

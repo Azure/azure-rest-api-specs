@@ -577,9 +577,6 @@ model AgentEndpointAuthorizationScheme {
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
   type: AgentEndpointAuthorizationSchemeType.Entra;
-
-  @doc("The source from which the per-user isolation key is derived for requests authorized via this scheme. Defaults to Entra-based isolation when omitted.")
-  isolation_key_source?: IsolationKeySource;
 }
 
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
@@ -591,17 +588,9 @@ model BotServiceRbacAuthorizationScheme
   type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
 }
 
-@discriminator("kind")
-model IsolationKeySource {
-  kind: IsolationKeySourceKind;
-}
-
-model EntraIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Entra;
-}
-
-model HeaderIsolationKeySource extends IsolationKeySource {
-  kind: IsolationKeySourceKind.Header;
+model BotServiceTenantAuthorizationScheme
+  extends AgentEndpointAuthorizationScheme {
+  type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
 }
 
 union AgentEndpointAuthorizationSchemeType {
@@ -609,20 +598,61 @@ union AgentEndpointAuthorizationSchemeType {
   Entra: "Entra",
   BotService: "BotService",
   BotServiceRbac: "BotServiceRbac",
+  BotServiceTenant: "BotServiceTenant",
 }
 
-union IsolationKeySourceKind {
-  string,
-  Entra: "Entra",
-  Header: "Header",
+@doc("Per-protocol configuration for the agent endpoint.")
+model ProtocolConfiguration {
+  @doc("Configuration for the activity protocol.")
+  activity?: ActivityProtocolConfiguration;
+
+  @doc("Configuration for the responses protocol.")
+  responses?: ResponsesProtocolConfiguration;
+
+  @doc("Configuration for the A2A protocol.")
+  a2a?: A2AProtocolConfiguration;
+
+  @doc("Configuration for the MCP protocol.")
+  mcp?: McpProtocolConfiguration;
+
+  @doc("Configuration for the invocations protocol.")
+  invocations?: InvocationsProtocolConfiguration;
+
+  @doc("Configuration for the WebSocket-based invocations protocol.")
+  invocations_ws?: InvocationsWsProtocolConfiguration;
 }
+
+@doc("Configuration specific to the activity protocol.")
+model ActivityProtocolConfiguration {
+  @doc("Whether to enable the M365 public endpoint for the activity protocol.")
+  enable_m365_public_endpoint?: boolean;
+}
+
+@doc("Configuration specific to the responses protocol.")
+model ResponsesProtocolConfiguration {}
+
+@doc("Configuration specific to the A2A protocol.")
+model A2AProtocolConfiguration {}
+
+@doc("Configuration specific to the MCP protocol.")
+model McpProtocolConfiguration {}
+
+@doc("Configuration specific to the invocations protocol.")
+model InvocationsProtocolConfiguration {}
+
+@doc("Configuration specific to the WebSocket-based invocations protocol.")
+model InvocationsWsProtocolConfiguration {}
 
 model AgentEndpointConfig {
   @doc("The version selector of the agent endpoint determines how traffic is routed to different versions of the agent.")
   version_selector?: VersionSelector;
 
-  @doc("The protocols that the agent supports")
+  @removed(Versions.v1)
+  @doc("Deprecated: Use protocol_configuration instead. The presence of a key in protocol_configuration declares the protocol is enabled.")
   protocols?: AgentEndpointProtocol[];
+
+  @doc("Per-protocol configuration for the agent endpoint.")
+  protocol_configuration?: ProtocolConfiguration;
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
