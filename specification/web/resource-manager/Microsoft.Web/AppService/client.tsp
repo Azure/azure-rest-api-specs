@@ -3575,3 +3575,205 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   webAppsStartWebSiteNetworkTraceOperationSlotForJs,
   "javascript"
 );
+
+// =============================================================================
+// .NET (csharp) operation renames migrated from
+// sdk/websites/Azure.ResourceManager.AppService/src/autorest.md
+// (override-operation-name section).
+// =============================================================================
+
+@@clientName(AnalysisDefinitions.executeSiteAnalysis, "Execute", "csharp");
+@@clientName(
+  DetectorDefinitionResources.executeSiteDetector,
+  "Execute",
+  "csharp"
+);
+@@clientName(Recommendations.disableRecommendationForSite, "Disable", "csharp");
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.createOrUpdateStaticSiteFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.deleteStaticSiteUser,
+  "DeleteUser",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.detachStaticSite, "Detach", "csharp");
+@@clientName(
+  StaticSiteARMResources.listStaticSiteAppSettings,
+  "GetAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.listStaticSiteConfiguredRoles,
+  "GetConfiguredRoles",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.listStaticSiteFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(StaticSiteARMResources.listStaticSiteUsers, "GetUsers", "csharp");
+@@clientName(
+  StaticSiteARMResources.resetStaticSiteApiKey,
+  "ResetApiKey",
+  "csharp"
+);
+@@clientName(
+  StaticSiteARMResources.updateStaticSiteUser,
+  "UpdateUser",
+  "csharp"
+);
+@@clientName(
+  checkNameAvailability,
+  "CheckAppServiceNameAvailability",
+  "csharp"
+);
+@@clientName(
+  AppServicePlans.listHybridConnections,
+  "GetHybridConnectionRelays",
+  "csharp"
+);
+@@clientName(
+  HybridConnections.listWebAppsByHybridConnection,
+  "GetAllWebAppsByHybridConnection",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildAppSettings,
+  "CreateOrUpdateAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.createOrUpdateStaticSiteBuildFunctionAppSettings,
+  "CreateOrUpdateFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctions,
+  "GetFunctions",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.createZipDeploymentForStaticSiteBuild,
+  "CreateZipDeployment",
+  "csharp"
+);
+@@clientName(
+  StaticSiteBuildARMResources.listStaticSiteBuildFunctionAppSettings,
+  "GetFunctionAppSettings",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.resetAllFilters,
+  "ResetAllRecommendationFilters",
+  "csharp"
+);
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow,
+  "PreviewStaticSiteWorkflow",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
+  "GetWebAppStacksByLocation",
+  "csharp"
+);
+@@clientName(
+  getSubscriptionDeploymentLocations,
+  "GetAppServiceDeploymentLocations",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.disableRecommendationForSubscription,
+  "DisableAppServiceRecommendation",
+  "csharp"
+);
+@@clientName(WebApps.listSnapshotsSlot, "GetSlotSnapshots", "csharp");
+@@clientName(
+  WebApps.listSnapshotsFromDRSecondarySlot,
+  "GetSlotSnapshotsFromDRSecondary",
+  "csharp"
+);
+// All below operations should be removed once the polymorphic change is ready.
+@@clientName(
+  AppServiceEnvironmentResources.listWebApps,
+  "GetAllWebAppData",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataNonResourceOperationGroup.listByResourceGroup,
+  "GetAllResourceHealthMetadataData",
+  "csharp"
+);
+@@clientName(
+  listSiteIdentifiersAssignedToHostName,
+  "GetAllSiteIdentifierData",
+  "csharp"
+);
+@@clientName(
+  SiteConfigResourceOperationGroup.listConfigurations,
+  "GetAllConfigurationData",
+  "csharp"
+);
+@@clientName(Sites.listHybridConnections, "GetHybridConnections", "csharp");
+@@clientName(Sites.listPremierAddOns, "GetAllPremierAddOnData", "csharp");
+@@clientName(
+  Sites.listRelayServiceConnections,
+  "GetAllRelayServiceConnectionData",
+  "csharp"
+);
+@@clientName(Sites.listSiteBackups, "GetAllSiteBackupData", "csharp");
+@@clientName(
+  SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
+  "GetAllConfigurationSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listHybridConnectionsSlot,
+  "GetHybridConnectionsSlot",
+  "csharp"
+);
+@@clientName(
+  WebApps.listPremierAddOnsSlot,
+  "GetAllPremierAddOnSlotData",
+  "csharp"
+);
+@@clientName(
+  WebApps.listRelayServiceConnectionsSlot,
+  "GetAllRelayServiceConnectionSlotData",
+  "csharp"
+);
+@@clientName(WebApps.listSiteBackupsSlot, "GetAllSiteBackupSlotData", "csharp");
+@@clientName(
+  ProcessInfos.listInstanceProcessThreads,
+  "GetSiteInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.listProcessThreads,
+  "GetSiteProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
+  "GetSiteSlotProcessThreads",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  "GetSiteSlotInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  regionalCheckNameAvailability,
+  "CheckDnlResourceNameAvailability",
+  "csharp"
+);
