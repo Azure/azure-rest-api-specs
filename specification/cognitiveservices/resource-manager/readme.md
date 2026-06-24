@@ -114,6 +114,10 @@ suppressions:
     where:
       - $.definitions.ProjectProperties.properties.endpoints
   - code: AvoidAdditionalProperties
+    reason: capabilities is a read-only string map of model capability flags resolved from the asset store system metadata. Keys are dynamic capability names not predefined by the service, backed by a Dictionary of string. Same pattern as the existing AccountModel.capabilities and DeploymentProperties.capabilities.
+    where:
+      - $.definitions.ManagedComputeDeploymentProperties.properties.capabilities
+  - code: AvoidAdditionalProperties
     reason: Provide customers ability to assign customize labels to rules.
     where:
       - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues

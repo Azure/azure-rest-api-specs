@@ -16159,6 +16159,14 @@
             "create"
           ]
         },
+        "capabilities": {
+          "type": "object",
+          "description": "Deployment capabilities represented as key-value pairs.\nExample: { assetsV2: \"true\" }.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "computeId": {
           "type": "string",
           "description": "Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.",

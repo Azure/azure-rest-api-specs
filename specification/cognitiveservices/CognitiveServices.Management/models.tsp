@@ -5741,6 +5741,15 @@ model ManagedComputeDeploymentProperties {
   versionUpgradeOption?: DeploymentModelVersionUpgradeOption;
 
   /**
+   * Deployment capabilities represented as key-value pairs.
+   * Example: { assetsV2: "true" }.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'ManagedComputeDeploymentProperties' to support extensible key-value pairs matching service behavior"
+  @added(Versions.v2026_05_15_preview)
+  @visibility(Lifecycle.Read)
+  capabilities?: Record<string>;
+
+  /**
    * Foundry compute ARM resource ID for VM-backed managed compute deployments. Required when sku.name is VmManagedCompute; immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
