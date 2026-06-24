@@ -376,8 +376,8 @@ model ResourceOperationDetails {
 }
 
 @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
-@doc("Information about the flexible allocation of a virtual machine.")
-model VmAllocationInfo {
+@doc("Information about a virtual machine.")
+model VmInfo {
   @doc("The name of the VM size, eg Standard_D2ads_v5")
   vmSize?: string;
 
@@ -404,8 +404,8 @@ model ResourceOperation {
   operation?: ResourceOperationDetails;
 
   @added(Microsoft.Compute.Versions.`2026-05-06-preview`)
-  @doc("Information about the flexible allocation of the virtual machine")
-  vmAllocationInfo?: VmAllocationInfo;
+  @doc("Information about the virtual machine")
+  vmInfo?: VmInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
