@@ -125,7 +125,6 @@ namespace Customization;
   },
   "csharp"
 );
-@@scope(PrivateEndpointConnectionsParentType.namespaces, "!csharp");
 
 @@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
