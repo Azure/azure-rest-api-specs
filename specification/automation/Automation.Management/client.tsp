@@ -962,6 +962,11 @@ using TypeSpec.Rest;
   "ModuleProvisioningState",
   "csharp"
 );
+@@alternateType(
+  AutomationAccount.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
 
 @@clientName(AutomationAccounts.automation, "listAutomation", "javascript");
 @@clientName(

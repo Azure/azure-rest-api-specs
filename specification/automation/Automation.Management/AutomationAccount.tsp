@@ -25,13 +25,14 @@ model AutomationAccount
   /**
    * Gets or sets the etag of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the existing identity property to keep the swagger compatibility."
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  ...ManagedServiceIdentityProperty;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the existing identity property to keep the swagger compatibility."
+  identity?: Identity;
 }
 
 alias SoftwareUpdateConfigurationMachineRunIdParameter = {
