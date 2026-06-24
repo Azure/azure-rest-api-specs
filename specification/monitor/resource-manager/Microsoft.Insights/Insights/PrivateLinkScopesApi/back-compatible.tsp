@@ -33,7 +33,6 @@ using PrivateLinkScopesApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
-@@usage(PrivateLinkResource, Usage.input, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "restore flattened private link resource data shape for C# compatibility"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 

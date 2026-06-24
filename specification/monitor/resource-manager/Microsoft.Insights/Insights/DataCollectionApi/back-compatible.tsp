@@ -85,19 +85,9 @@ using DataCollectionApi;
   DataCollectionRuleResources.listByRule,
   "DataCollectionRuleAssociations"
 );
-@@clientName(
-  DataCollectionRuleResources.listByRule,
-  "GetDataCollectionRuleAssociationsByRule",
-  "csharp"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataCollectionRuleResource.properties);
 @@doc(
   Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   "Resource entity tag (ETag)."
-);
-@@alternateType(
-  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
-  Azure.Core.eTag,
-  "csharp"
 );

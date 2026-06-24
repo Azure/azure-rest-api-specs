@@ -167,6 +167,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.DataCollectionRuleResources.listByRule,
+  "GetDataCollectionRuleAssociationsByRule",
+  "csharp"
+);
+@@clientName(
   ActivityLogAlertsApi.ActivityLogAlertResource,
   "ActivityLogAlert",
   "csharp"
@@ -340,6 +345,7 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorPrivateLinkResource",
   "csharp"
 );
+@@usage(PrivateLinkScopesApi.PrivateLinkResource, Usage.input, "csharp");
 @@clientName(
   PrivateLinkScopesApi.ScopedResource,
   "MonitorPrivateLinkScopedResource",
@@ -601,6 +607,11 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@alternateType(
   DataCollectionApi.DataCollectionEndpointResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
   Azure.Core.eTag,
   "csharp"
 );
