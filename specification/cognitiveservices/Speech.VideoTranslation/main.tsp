@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-autorest";
 import "@typespec/openapi";
+import "./client.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;

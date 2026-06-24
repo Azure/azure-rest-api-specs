@@ -56,7 +56,7 @@ interface MaintenanceConfigurationOps
           NamePattern = ""
         >>,
       },
-      "MaintenancePublicConfiguration"
+      "MaintenanceGroupApplyUpdate"
     > {}
 
 @armResourceOperations

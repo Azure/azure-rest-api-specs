@@ -22,7 +22,7 @@ using Microsoft.ManagedOps;
 @@clientName(DesiredConfiguration, "ManagedOpsDesiredConfiguration", "csharp");
 @@clientName(
   DesiredConfigurationUpdate,
-  "ManagedOpsDesiredConfigurationUpdate",
+  "ManagedOpsDesiredConfigurationPatch",
   "csharp"
 );
 @@clientName(
