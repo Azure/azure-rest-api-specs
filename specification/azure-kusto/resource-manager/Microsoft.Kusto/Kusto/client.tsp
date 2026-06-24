@@ -884,3 +884,19 @@ model KustoClusterPatch
   LanguageExtensionImageName.Python3_6_5,
   Azure.ClientGenerator.Core.exact("Python3_6_5")
 );
+
+@@alternateType(
+  ScriptProperties.managedIdentityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventGridConnectionWithManagedIdentityProperties.managedIdentityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EventHubConnectionWithManagedIdentityProperties.managedIdentityResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
