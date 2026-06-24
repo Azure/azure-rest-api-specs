@@ -174,12 +174,7 @@ using TypeSpec.Rest;
   "csharp"
 );
 @@clientName(Webhook, "AutomationWebhook", "csharp");
-@@access(ModuleProvisioningState, Access.internal, "csharp");
-@@clientName(
-  ModuleProvisioningState,
-  "ModuleProvisioningStateGenerated",
-  "csharp"
-);
+
 @@clientName(
   updateConfiguration,
   "SoftwareUpdateConfigurationSpecificProperties",
@@ -957,6 +952,16 @@ using TypeSpec.Rest;
   "AutomationPrivateLinkResources",
   "csharp"
 );
+@@clientName(
+  ModuleProvisioningState,
+  "AutomationModuleProvisioningState",
+  "csharp"
+);
+@@clientName(
+  ModuleProperties.provisioningState,
+  "ModuleProvisioningState",
+  "csharp"
+);
 
 @@clientName(AutomationAccounts.automation, "listAutomation", "javascript");
 @@clientName(
@@ -965,96 +970,32 @@ using TypeSpec.Rest;
   "javascript"
 );
 
-namespace Microsoft.Automation {
-  using Azure.ResourceManager;
+/**
+ * Provisioning state of the configuration.
+ */
+union DscConfigurationProvisioningState {
+  string,
 
-  /**
-   * SDK-only compatibility fixed enum for the previous ModuleProvisioningState API.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "SDK-only compatibility type that must remain closed to match the previous non-extensible enum."
-  union ModuleProvisioningStateCompatibility {
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Created: "Created",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Creating: "Creating",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    StartingImportModuleRunbook: "StartingImportModuleRunbook",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    RunningImportModuleRunbook: "RunningImportModuleRunbook",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ContentRetrieved: "ContentRetrieved",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ContentDownloaded: "ContentDownloaded",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ContentValidated: "ContentValidated",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ConnectionTypeImported: "ConnectionTypeImported",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ContentStored: "ContentStored",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ModuleDataStored: "ModuleDataStored",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ActivitiesStored: "ActivitiesStored",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    ModuleImportRunbookComplete: "ModuleImportRunbookComplete",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Succeeded: "Succeeded",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Failed: "Failed",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Cancelled: "Canceled",
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "SDK-only compatibility enum variant."
-    Updating: "Updating",
-  }
-
-  /**
-   * SDK-only compatibility extensible enum for the previous DscConfigurationProvisioningState API.
-   */
-  union DscConfigurationProvisioningStateCompatibility {
-    string,
-
-    /** Succeeded. */
-    Succeeded: "Succeeded",
-  }
-
-  /**
-   * SDK-only compatibility extensible enum for the previous RunbookProvisioningState API.
-   */
-  union RunbookProvisioningStateCompatibility {
-    string,
-
-    /** Succeeded. */
-    Succeeded: "Succeeded",
-  }
-
-  @@clientName(
-    ModuleProvisioningStateCompatibility,
-    "ModuleProvisioningState",
-    "csharp"
-  );
-  @@alternateType(
-    ModuleProvisioningState,
-    ModuleProvisioningStateCompatibility,
-    "csharp"
-  );
-  @@clientName(
-    DscConfigurationProvisioningStateCompatibility,
-    "DscConfigurationProvisioningState",
-    "csharp"
-  );
-  @@alternateType(
-    DscConfigurationProperties.provisioningState,
-    DscConfigurationProvisioningStateCompatibility,
-    "csharp"
-  );
-  @@clientName(
-    RunbookProvisioningStateCompatibility,
-    "RunbookProvisioningState",
-    "csharp"
-  );
-  @@alternateType(
-    RunbookProperties.provisioningState,
-    RunbookProvisioningStateCompatibility,
-    "csharp"
-  );
+  /** Succeeded. */
+  Succeeded: "Succeeded",
 }
+@@alternateType(
+  DscConfigurationProperties.provisioningState,
+  DscConfigurationProvisioningState,
+  "csharp"
+);
+
+/**
+ * Provisioning state of the runbook.
+ */
+union RunbookProvisioningState {
+  string,
+
+  /** Succeeded. */
+  Succeeded: "Succeeded",
+}
+@@alternateType(
+  RunbookProperties.provisioningState,
+  RunbookProvisioningState,
+  "csharp"
+);
