@@ -1,21 +1,18 @@
 import "../models/common.tsp";
 
 using TypeSpec.Rest;
-using Azure.ResourceManager;
 using TypeSpec.Http;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance is required here to maintain compatibility with existing API structure"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("The Network Bootstrap Device resource definition.")
-@Azure.ResourceManager.Private.armResourceInternal(
-  NetworkBootstrapDeviceProperties
-)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 model NetworkBootstrapDevice
-  extends Azure.ResourceManager.Foundations.TrackedResource {
+  is Azure.ResourceManager.TrackedResource<
+    NetworkBootstrapDeviceProperties,
+    false
+  > {
   @doc("Name of the Network Bootstrap Device.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -25,14 +22,14 @@ model NetworkBootstrapDevice
   name: string;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The NetworkBootstrapDevice properties")
-  properties: NetworkBootstrapDeviceProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
   @doc("The managed service identities assigned to this resource.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@@doc(
+  NetworkBootstrapDevice.properties,
+  "The NetworkBootstrapDevice properties"
+);
 @armResourceOperations
 @added(Versions.v2025_07_15)
 interface NetworkBootstrapDevices {

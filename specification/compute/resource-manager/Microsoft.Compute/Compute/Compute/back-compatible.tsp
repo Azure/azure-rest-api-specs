@@ -25,7 +25,8 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VirtualMachineScaleSetUpdate.properties
+  VirtualMachineScaleSetUpdate.properties,
+  "!csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
@@ -206,7 +207,8 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VirtualMachineScaleSet.properties
+  VirtualMachineScaleSet.properties,
+  "!csharp"
 );
 
 @@clientName(
@@ -240,7 +242,8 @@ using Common;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  VirtualMachineScaleSetVM.properties
+  VirtualMachineScaleSetVM.properties,
+  "!csharp"
 );
 
 @@clientName(
