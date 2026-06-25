@@ -713,7 +713,23 @@ using Microsoft.MachineLearningServices;
 @@clientName(Caching, "MachineLearningCachingType", "csharp");
 @@access(EncryptionKeyVaultUpdateProperties, Access.public, "csharp");
 @@access(TriggerType, Access.public, "csharp");
+@@access(ComputePowerAction, Access.public, "csharp");
+@@access(ProvisioningStatus, Access.public, "csharp");
+@@access(ComputeWeekDay, Access.public, "csharp");
+@@access(Cron, Access.public, "csharp");
+@@access(Password, Access.public, "csharp");
+@@access(Recurrence, Access.public, "csharp");
+@@access(RecurrenceFrequency, Access.public, "csharp");
+@@access(ComputeRecurrenceSchedule, Access.public, "csharp");
+@@access(ScheduleBase, Access.public, "csharp");
+@@access(ScheduleProvisioningState, Access.public, "csharp");
+@@access(ScheduleStatus, Access.public, "csharp");
 @@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
+// Preserve the GA C# hierarchy where outbound rules are direct workspace children.
+@@access(OutboundRuleBasicResourceOperationGroup.get, Access.internal, "csharp");
+@@access(OutboundRuleBasicResourceOperationGroup.createOrUpdate, Access.internal, "csharp");
+@@access(OutboundRuleBasicResourceOperationGroup.delete, Access.internal, "csharp");
+@@access(OutboundRuleBasicResourceOperationGroup.list, Access.internal, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "MachineLearningError",
@@ -724,6 +740,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningDataVersionProperties",
   "csharp"
 );
+@@clientName(DataVersionBase, "MachineLearningDataVersion", "csharp");
 @@clientName(JobBaseProperties, "MachineLearningJobProperties", "csharp");
 @@clientName(
   PartialMinimalTrackedResource,
@@ -1348,7 +1365,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(OrderString, "MachineLearningOrderString", "csharp");
 @@clientName(
   OutboundRuleBasicResource,
-  "MachineLearningOutboundRuleBasicResource",
+  "MachineLearningOutboundRuleBasic",
   "csharp"
 );
 @@clientName(OutputDeliveryMode, "MachineLearningOutputDeliveryMode", "csharp");
