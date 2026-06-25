@@ -26,6 +26,37 @@ model PortalSignupSettings
   >;
 }
 
+// ResourceName = "ApiManagementPortalSignUpSetting" makes the C# emitter
+// produce ApiManagementPortalSignUpSettingResource.cs / Collection.cs
+// (matching the GA contract).
+@armResourceOperations
+interface PortalSignupSettingsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Portal setting singleton key. */
+        @path
+        @segment("portalsettings")
+        @key
+        portalsetting: "signup",
+      },
+      ResourceName = "ApiManagementPortalSignUpSetting"
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SignUpSettings {
@@ -33,7 +64,7 @@ interface SignUpSettings {
    * Get Sign Up Settings for the Portal
    */
   #deprecated "deprecated"
-  get is ArmResourceRead<
+  get is PortalSignupSettingsOps.Read<
     PortalSignupSettings,
     Response = ArmResponse<PortalSignupSettings> & {
       /**
@@ -48,7 +79,7 @@ interface SignUpSettings {
    * Gets the entity state (Etag) version of the SignUpSettings.
    */
   #deprecated "deprecated"
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is PortalSignupSettingsOps.CheckExistence<
     PortalSignupSettings,
     Response = OkResponse & {
       /**
@@ -64,7 +95,7 @@ interface SignUpSettings {
    */
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is PortalSignupSettingsOps.CreateOrUpdateSync<
     PortalSignupSettings,
     Parameters = {
       /**
@@ -82,17 +113,10 @@ interface SignUpSettings {
    */
   #deprecated "deprecated"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is PortalSignupSettingsOps.CustomPatchSync<
     PortalSignupSettings,
     PatchModel = PortalSignupSettings,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmNoContentResponse
   >;
 }

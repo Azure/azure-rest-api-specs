@@ -26,11 +26,41 @@ model AuthorizationServerContract
 }
 
 @armResourceOperations
+interface AuthorizationServerContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identifier of the authorization server. */
+        @path
+        @segment("authorizationServers")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
+        authsid: string,
+      },
+      ResourceName = "ApiManagementAuthorizationServer"
+    > {}
+@armResourceOperations
 interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is AuthorizationServerContractsOps.Read<
     AuthorizationServerContract,
     Response = ArmResponse<AuthorizationServerContract> & {
       /**
@@ -44,7 +74,7 @@ interface AuthorizationServerContracts {
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is AuthorizationServerContractsOps.CheckExistence<
     AuthorizationServerContract,
     Response = OkResponse & {
       /**
@@ -58,7 +88,7 @@ interface AuthorizationServerContracts {
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is AuthorizationServerContractsOps.CreateOrUpdateSync<
     AuthorizationServerContract,
     Parameters = {
       /**
@@ -89,17 +119,10 @@ interface AuthorizationServerContracts {
    * Updates the details of the authorization server specified by its identifier.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is AuthorizationServerContractsOps.CustomPatchSync<
     AuthorizationServerContract,
     PatchModel = AuthorizationServerUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<AuthorizationServerContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -112,22 +135,15 @@ interface AuthorizationServerContracts {
   /**
    * Deletes specific authorization server instance.
    */
-  delete is ArmResourceDeleteSync<
+  delete is AuthorizationServerContractsOps.DeleteSync<
     AuthorizationServerContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  listByService is ArmResourceListByParent<
+  listByService is AuthorizationServerContractsOps.List<
     AuthorizationServerContract,
     Parameters = {
       /**
@@ -156,7 +172,7 @@ interface AuthorizationServerContracts {
   /**
    * Gets the client secret details of the authorization server.
    */
-  listSecrets is ArmResourceActionSync<
+  listSecrets is AuthorizationServerContractsOps.ActionSync<
     AuthorizationServerContract,
     void,
     Response = ArmResponse<AuthorizationServerSecretsContract> & {

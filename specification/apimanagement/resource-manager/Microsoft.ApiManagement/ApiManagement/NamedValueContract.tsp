@@ -51,7 +51,8 @@ interface NamedValueContractOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         namedValueId: string,
-      }
+      },
+      ResourceName = "ApiManagementNamedValue"
     > {}
 
 @armResourceOperations
@@ -126,14 +127,7 @@ interface NamedValueContracts {
   update is NamedValueContractOps.CustomPatchAsync<
     NamedValueContract,
     PatchModel = NamedValueUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response =
       | (ArmResponse<NamedValueContract> & {
           /**
@@ -150,14 +144,7 @@ interface NamedValueContracts {
    */
   delete is NamedValueContractOps.DeleteSync<
     NamedValueContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -265,7 +252,8 @@ interface WorkspaceNamedValueOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         namedValueId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceNamedValue"
     > {}
 
 @armResourceOperations
@@ -338,14 +326,7 @@ interface WorkspaceNamedValue {
   update is WorkspaceNamedValueOps.CustomPatchAsync<
     NamedValueContract,
     PatchModel = NamedValueUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response =
       | (ArmResponse<NamedValueContract> & {
           /**
@@ -362,14 +343,7 @@ interface WorkspaceNamedValue {
    */
   delete is WorkspaceNamedValueOps.DeleteSync<
     NamedValueContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

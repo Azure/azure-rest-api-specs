@@ -63,7 +63,8 @@ interface TagDescriptionContractsOps
         @minLength(1)
         @maxLength(80)
         tagDescriptionId: string,
-      }
+      },
+      ResourceName = "ApiTagDescription"
     > {}
 
 @armResourceOperations
@@ -71,7 +72,7 @@ interface TagDescriptionContracts {
   /**
    * Get Tag description in scope of API
    */
-  get is ArmResourceRead<
+  get is TagDescriptionContractsOps.Read<
     TagDescriptionContract,
     Response = ArmResponse<TagDescriptionContract> & {
       /**
@@ -85,7 +86,7 @@ interface TagDescriptionContracts {
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is TagDescriptionContractsOps.CheckExistence<
     TagDescriptionContract,
     Response = OkResponse & {
       /**
@@ -130,22 +131,15 @@ interface TagDescriptionContracts {
   /**
    * Delete tag description for the Api.
    */
-  delete is ArmResourceDeleteSync<
+  delete is TagDescriptionContractsOps.DeleteSync<
     TagDescriptionContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists all Tags descriptions in scope of API. Model similar to swagger - tagDescription is defined on API level but tag may be assigned to the Operations
    */
-  listByService is ArmResourceListByParent<
+  listByService is TagDescriptionContractsOps.List<
     TagDescriptionContract,
     Parameters = {
       /**

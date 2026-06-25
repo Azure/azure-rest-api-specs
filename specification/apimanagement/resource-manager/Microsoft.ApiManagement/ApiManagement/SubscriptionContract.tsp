@@ -51,7 +51,8 @@ interface SubscriptionContractOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ApiManagementSubscription"
     > {}
 
 @armResourceOperations
@@ -136,7 +137,7 @@ interface SubscriptionContracts {
   update is SubscriptionContractOps.CustomPatchSync<
     SubscriptionContract,
     PatchModel = SubscriptionUpdateParameters,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * Notify change in Subscription State.
        *  - If false, do not send any email notification for change of state of subscription
@@ -144,13 +145,6 @@ interface SubscriptionContracts {
        */
       @query("notify")
       notify?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
 
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
@@ -172,14 +166,7 @@ interface SubscriptionContracts {
    */
   delete is SubscriptionContractOps.DeleteSync<
     SubscriptionContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -278,7 +265,8 @@ interface UserSubscriptionOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ApiManagementUserSubscription"
     > {}
 
 @armResourceOperations
@@ -361,7 +349,8 @@ interface WorkspaceSubscriptionOps
         @pattern("^[^*#&+:<>?]+$")
         @maxLength(256)
         sid: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceSubscription"
     > {}
 
 @armResourceOperations
@@ -446,7 +435,7 @@ interface WorkspaceSubscription {
   update is WorkspaceSubscriptionOps.CustomPatchSync<
     SubscriptionContract,
     PatchModel = SubscriptionUpdateParameters,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * Notify change in Subscription State.
        *  - If false, do not send any email notification for change of state of subscription
@@ -454,13 +443,6 @@ interface WorkspaceSubscription {
        */
       @query("notify")
       notify?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
 
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
@@ -482,14 +464,7 @@ interface WorkspaceSubscription {
    */
   delete is WorkspaceSubscriptionOps.DeleteSync<
     SubscriptionContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

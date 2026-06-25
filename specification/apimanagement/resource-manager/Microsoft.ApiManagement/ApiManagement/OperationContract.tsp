@@ -60,7 +60,8 @@ interface OperationContractOps
         @minLength(1)
         @maxLength(80)
         operationId: string,
-      }
+      },
+      ResourceName = "ApiOperation"
     > {}
 
 @armResourceOperations
@@ -130,14 +131,7 @@ interface OperationContracts {
   update is OperationContractOps.CustomPatchSync<
     OperationContract,
     PatchModel = OperationUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<OperationContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -152,14 +146,7 @@ interface OperationContracts {
    */
   delete is OperationContractOps.DeleteSync<
     OperationContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -241,7 +228,8 @@ interface WorkspaceApiOperationOps
         @minLength(1)
         @maxLength(80)
         operationId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiOperation"
     > {}
 
 @armResourceOperations
@@ -311,14 +299,7 @@ interface WorkspaceApiOperation {
   update is WorkspaceApiOperationOps.CustomPatchSync<
     OperationContract,
     PatchModel = OperationUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<OperationContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -333,14 +314,7 @@ interface WorkspaceApiOperation {
    */
   delete is WorkspaceApiOperationOps.DeleteSync<
     OperationContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**

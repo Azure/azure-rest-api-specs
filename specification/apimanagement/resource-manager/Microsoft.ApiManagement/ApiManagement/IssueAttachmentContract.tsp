@@ -26,11 +26,59 @@ model IssueAttachmentContract
 }
 
 @armResourceOperations
+interface IssueAttachmentContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("apis")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
+        apiId: string,
+
+        /** Issue identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("issues")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
+        issueId: string,
+      },
+      {
+        /** Attachment identifier within an Issue. Must be unique in the current Issue. */
+        @path
+        @segment("attachments")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
+        attachmentId: string,
+      },
+      ResourceName = "ApiIssueAttachment"
+    > {}
+@armResourceOperations
 interface IssueAttachmentContracts {
   /**
    * Gets the details of the issue Attachment for an API specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is IssueAttachmentContractsOps.Read<
     IssueAttachmentContract,
     Response = ArmResponse<IssueAttachmentContract> & {
       /**
@@ -44,7 +92,7 @@ interface IssueAttachmentContracts {
   /**
    * Gets the entity state (Etag) version of the issue Attachment for an API specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is IssueAttachmentContractsOps.CheckExistence<
     IssueAttachmentContract,
     Response = OkResponse & {
       /**
@@ -58,7 +106,7 @@ interface IssueAttachmentContracts {
   /**
    * Creates a new Attachment for the Issue in an API or updates an existing one.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is IssueAttachmentContractsOps.CreateOrUpdateSync<
     IssueAttachmentContract,
     Parameters = {
       /**
@@ -88,22 +136,15 @@ interface IssueAttachmentContracts {
   /**
    * Deletes the specified comment from an Issue.
    */
-  delete is ArmResourceDeleteSync<
+  delete is IssueAttachmentContractsOps.DeleteSync<
     IssueAttachmentContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists all attachments for the Issue associated with the specified API.
    */
-  listByService is ArmResourceListByParent<
+  listByService is IssueAttachmentContractsOps.List<
     IssueAttachmentContract,
     Parameters = {
       /**

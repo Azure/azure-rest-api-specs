@@ -60,7 +60,8 @@ interface IssueContractOps
         @minLength(1)
         @maxLength(256)
         issueId: string,
-      }
+      },
+      ResourceName = "ApiIssue"
     > {}
 
 @armResourceOperations
@@ -137,14 +138,7 @@ interface IssueContracts {
   update is IssueContractOps.CustomPatchSync<
     IssueContract,
     PatchModel = IssueUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<IssueContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -159,14 +153,7 @@ interface IssueContracts {
    */
   delete is IssueContractOps.DeleteSync<
     IssueContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -231,7 +218,8 @@ interface IssueOps
         @minLength(1)
         @maxLength(256)
         issueId: string,
-      }
+      },
+      ResourceName = "ApiManagementIssue"
     > {}
 
 @armResourceOperations

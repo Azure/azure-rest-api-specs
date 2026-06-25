@@ -45,12 +45,13 @@ interface EmailTemplateContractsOps
         serviceName: string,
       },
       {
-        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        /** Email Template Name Identifier. */
         @path
         @segment("templates")
         @key
         templateName: TemplateName,
-      }
+      },
+      ResourceName = "ApiManagementEmailTemplate"
     > {}
 
 @armResourceOperations
@@ -58,7 +59,7 @@ interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is EmailTemplateContractsOps.Read<
     EmailTemplateContract,
     Response = ArmResponse<EmailTemplateContract> & {
       /**
@@ -72,7 +73,7 @@ interface EmailTemplateContracts {
   /**
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is EmailTemplateContractsOps.CheckExistence<
     EmailTemplateContract,
     Response = OkResponse & {
       /**
@@ -103,17 +104,10 @@ interface EmailTemplateContracts {
    * Updates API Management email template
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is EmailTemplateContractsOps.CustomPatchSync<
     EmailTemplateContract,
     PatchModel = EmailTemplateUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<EmailTemplateContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -126,22 +120,15 @@ interface EmailTemplateContracts {
   /**
    * Reset the Email Template to default template provided by the API Management service instance.
    */
-  delete is ArmResourceDeleteSync<
+  delete is EmailTemplateContractsOps.DeleteSync<
     EmailTemplateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Gets all email templates
    */
-  listByService is ArmResourceListByParent<
+  listByService is EmailTemplateContractsOps.List<
     EmailTemplateContract,
     Parameters = {
       /**

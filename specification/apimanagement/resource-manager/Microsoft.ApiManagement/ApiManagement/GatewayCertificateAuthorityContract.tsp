@@ -26,11 +26,49 @@ model GatewayCertificateAuthorityContract
 }
 
 @armResourceOperations
+interface GatewayCertificateAuthorityContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+
+        /** Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed' */
+        @path
+        @segment("gateways")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        gatewayId: string,
+      },
+      {
+        /** Identifier of the certificate entity. Must be unique in the current API Management service instance. */
+        @path
+        @segment("certificateAuthorities")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
+        certificateId: string,
+      },
+      ResourceName = "ApiManagementGatewayCertificateAuthority"
+    > {}
+@armResourceOperations
 interface GatewayCertificateAuthorityContracts {
   /**
    * Get assigned Gateway Certificate Authority details.
    */
-  get is ArmResourceRead<
+  get is GatewayCertificateAuthorityContractsOps.Read<
     GatewayCertificateAuthorityContract,
     Response = ArmResponse<GatewayCertificateAuthorityContract> & {
       /**
@@ -44,7 +82,7 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is GatewayCertificateAuthorityContractsOps.CheckExistence<
     GatewayCertificateAuthorityContract,
     Response = OkResponse & {
       /**
@@ -58,7 +96,7 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is GatewayCertificateAuthorityContractsOps.CreateOrUpdateSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
       /**
@@ -88,22 +126,15 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Remove relationship between Certificate Authority and Gateway entity.
    */
-  delete is ArmResourceDeleteSync<
+  delete is GatewayCertificateAuthorityContractsOps.DeleteSync<
     GatewayCertificateAuthorityContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists the collection of Certificate Authorities for the specified Gateway entity.
    */
-  listByService is ArmResourceListByParent<
+  listByService is GatewayCertificateAuthorityContractsOps.List<
     GatewayCertificateAuthorityContract,
     Parameters = {
       /**

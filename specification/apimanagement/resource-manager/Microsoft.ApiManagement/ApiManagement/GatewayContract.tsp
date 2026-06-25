@@ -70,12 +70,44 @@ alias GatewayApiOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
+// ResourceName = "ApiGateway" makes the C# emitter produce
+// ApiGatewayResource.cs / Collection.cs (matching GA contract).
+@armResourceOperations
+interface GatewayContractOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed' */
+        @path
+        @segment("gateways")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        gatewayId: string,
+      },
+      ResourceName = "ApiGateway"
+    > {}
+
 @armResourceOperations(#{ allowStaticRoutes: true })
 interface GatewayContracts {
   /**
    * Gets the details of the Gateway specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is GatewayContractOps.Read<
     GatewayContract,
     Response = ArmResponse<GatewayContract> & {
       /**
@@ -89,7 +121,7 @@ interface GatewayContracts {
   /**
    * Gets the entity state (Etag) version of the Gateway specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is GatewayContractOps.CheckExistence<
     GatewayContract,
     Response = OkResponse & {
       /**
@@ -103,7 +135,7 @@ interface GatewayContracts {
   /**
    * Creates or updates a Gateway to be used in Api Management instance.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is GatewayContractOps.CreateOrUpdateSync<
     GatewayContract,
     Parameters = {
       /**
@@ -134,17 +166,10 @@ interface GatewayContracts {
    * Updates the details of the gateway specified by its identifier.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is GatewayContractOps.CustomPatchSync<
     GatewayContract,
     PatchModel = GatewayContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<GatewayContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -157,22 +182,15 @@ interface GatewayContracts {
   /**
    * Deletes specific Gateway.
    */
-  delete is ArmResourceDeleteSync<
+  delete is GatewayContractOps.DeleteSync<
     GatewayContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists a collection of gateways registered with service instance.
    */
-  listByService is ArmResourceListByParent<
+  listByService is GatewayContractOps.List<
     GatewayContract,
     Parameters = {
       /**
@@ -201,7 +219,7 @@ interface GatewayContracts {
   /**
    * Retrieves gateway keys.
    */
-  listKeys is ArmResourceActionSync<
+  listKeys is GatewayContractOps.ActionSync<
     GatewayContract,
     void,
     Response = ArmResponse<GatewayKeysContract> & {
@@ -216,7 +234,7 @@ interface GatewayContracts {
   /**
    * Regenerates specified gateway key invalidating any tokens created with it.
    */
-  regenerateKey is ArmResourceActionSync<
+  regenerateKey is GatewayContractOps.ActionSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract,
     NoContentResponse
@@ -225,7 +243,7 @@ interface GatewayContracts {
   /**
    * Gets the Shared Access Authorization Token for the gateway.
    */
-  generateToken is ArmResourceActionSync<
+  generateToken is GatewayContractOps.ActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
     ArmResponse<GatewayTokenContract>
@@ -234,7 +252,7 @@ interface GatewayContracts {
   /**
    * Action is invalidating all debug credentials issued for gateway.
    */
-  invalidateDebugCredentials is ArmResourceActionSync<
+  invalidateDebugCredentials is GatewayContractOps.ActionSync<
     GatewayContract,
     void,
     NoContentResponse
@@ -243,7 +261,7 @@ interface GatewayContracts {
   /**
    * Create new debug credentials for gateway.
    */
-  listDebugCredentials is ArmResourceActionSync<
+  listDebugCredentials is GatewayContractOps.ActionSync<
     GatewayContract,
     GatewayListDebugCredentialsContract,
     ArmResponse<GatewayDebugCredentialsContract>
@@ -252,7 +270,7 @@ interface GatewayContracts {
   /**
    * Fetches trace collected by gateway.
    */
-  listTrace is ArmResourceActionSync<
+  listTrace is GatewayContractOps.ActionSync<
     GatewayContract,
     GatewayListTraceContract,
     ArmResponse<Record<unknown>>
@@ -264,7 +282,7 @@ interface GatewayContracts {
   @get
   @action("apis")
   @list
-  gatewayApiListByService is ArmResourceActionSync<
+  gatewayApiListByService is GatewayContractOps.ActionSync<
     GatewayContract,
     void,
     ArmResponse<ApiCollection>,

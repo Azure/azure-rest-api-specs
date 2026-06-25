@@ -26,6 +26,37 @@ model PortalDelegationSettings
   >;
 }
 
+// ResourceName = "ApiManagementPortalDelegationSetting" makes the C# emitter
+// produce ApiManagementPortalDelegationSettingResource.cs / Collection.cs
+// (matching the GA contract).
+@armResourceOperations
+interface PortalDelegationSettingsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Portal setting singleton key. */
+        @path
+        @segment("portalsettings")
+        @key
+        portalsetting: "delegation",
+      },
+      ResourceName = "ApiManagementPortalDelegationSetting"
+    > {}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface DelegationSettings {
@@ -33,7 +64,7 @@ interface DelegationSettings {
    * Get Delegation Settings for the Portal.
    */
   #deprecated "deprecated"
-  get is ArmResourceRead<
+  get is PortalDelegationSettingsOps.Read<
     PortalDelegationSettings,
     Response = ArmResponse<PortalDelegationSettings> & {
       /**
@@ -48,7 +79,7 @@ interface DelegationSettings {
    * Gets the entity state (Etag) version of the DelegationSettings.
    */
   #deprecated "deprecated"
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is PortalDelegationSettingsOps.CheckExistence<
     PortalDelegationSettings,
     Response = OkResponse & {
       /**
@@ -64,7 +95,7 @@ interface DelegationSettings {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #deprecated "deprecated"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is PortalDelegationSettingsOps.CreateOrUpdateSync<
     PortalDelegationSettings,
     Parameters = {
       /**
@@ -82,17 +113,10 @@ interface DelegationSettings {
    */
   #deprecated "deprecated"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is PortalDelegationSettingsOps.CustomPatchSync<
     PortalDelegationSettings,
     PatchModel = PortalDelegationSettings,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmNoContentResponse
   >;
 
@@ -100,7 +124,7 @@ interface DelegationSettings {
    * Gets the secret validation key of the DelegationSettings.
    */
   #deprecated "deprecated"
-  listSecrets is ArmResourceActionSync<
+  listSecrets is PortalDelegationSettingsOps.ActionSync<
     PortalDelegationSettings,
     void,
     ArmResponse<PortalSettingValidationKeyContract>

@@ -54,17 +54,42 @@ alias ApiManagementGatewayListPagingParameters = {
   $skipToken?: string;
 };
 
+// ResourceName = "ApiManagementGateway" makes the C# emitter produce
+// ApiManagementGatewayResource.cs / Collection.cs / ApiManagementGatewayData.cs
+// (matching the GA contract) under modern arm-resource detection.
+@armResourceOperations
+interface ApiManagementGatewayResourceOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+      },
+      {
+        /** The name of the API Management gateway. */
+        @path
+        @segment("gateways")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(45)
+        gatewayName: string,
+      },
+      ResourceName = "ApiManagementGateway"
+    > {}
+
 @armResourceOperations
 interface ApiManagementGatewayResources {
   /**
    * Gets an API Management gateway resource description.
    */
-  get is ArmResourceRead<ApiManagementGatewayResource>;
+  get is ApiManagementGatewayResourceOps.Read<ApiManagementGatewayResource>;
 
   /**
    * Creates or updates an API Management gateway. This is long running operation and could take several minutes to complete.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is ApiManagementGatewayResourceOps.CreateOrUpdateAsync<
     ApiManagementGatewayResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementGatewayResource> &
       Azure.Core.Foundations.RetryAfterHeader
@@ -74,7 +99,7 @@ interface ApiManagementGatewayResources {
    * Updates an existing API Management gateway.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is ApiManagementGatewayResourceOps.CustomPatchAsync<
     ApiManagementGatewayResource,
     PatchModel = ApiManagementGatewayUpdateParameters
   >;
@@ -84,7 +109,7 @@ interface ApiManagementGatewayResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is ApiManagementGatewayResourceOps.DeleteWithoutOkAsync<
     ApiManagementGatewayResource,
     Response =
       | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementGatewayResource>> & {
@@ -97,7 +122,7 @@ interface ApiManagementGatewayResources {
   /**
    * List all API Management gateways within a resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<
+  listByResourceGroup is ApiManagementGatewayResourceOps.List<
     ApiManagementGatewayResource,
     Parameters = ApiManagementGatewayListPagingParameters,
     Response = ArmResponse<ApiManagementGatewayListResult>
@@ -119,7 +144,7 @@ interface ApiManagementGatewayResources {
   @action("skus")
   @list
   @summary("Gets available SKUs for API Management gateway")
-  listAvailableSkus is ArmResourceActionSync<
+  listAvailableSkus is ApiManagementGatewayResourceOps.ActionSync<
     ApiManagementGatewayResource,
     void,
     ArmResponse<GatewayResourceSkuResults>

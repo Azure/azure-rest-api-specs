@@ -26,11 +26,40 @@ model OpenidConnectProviderContract
 }
 
 @armResourceOperations
+interface OpenidConnectProviderContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identifier of the OpenID Connect Provider. */
+        @path
+        @segment("openidConnectProviders")
+        @key
+        @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
+        opid: string,
+      },
+      ResourceName = "ApiManagementOpenIdConnectProvider"
+    > {}
+@armResourceOperations
 interface OpenidConnectProviderContracts {
   /**
    * Gets specific OpenID Connect Provider without secrets.
    */
-  get is ArmResourceRead<
+  get is OpenidConnectProviderContractsOps.Read<
     OpenidConnectProviderContract,
     Response = ArmResponse<OpenidConnectProviderContract> & {
       /**
@@ -44,7 +73,7 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is OpenidConnectProviderContractsOps.CheckExistence<
     OpenidConnectProviderContract,
     Response = OkResponse & {
       /**
@@ -58,7 +87,7 @@ interface OpenidConnectProviderContracts {
   /**
    * Creates or updates the OpenID Connect Provider.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is OpenidConnectProviderContractsOps.CreateOrUpdateSync<
     OpenidConnectProviderContract,
     Parameters = {
       /**
@@ -89,17 +118,10 @@ interface OpenidConnectProviderContracts {
    * Updates the specific OpenID Connect Provider.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is OpenidConnectProviderContractsOps.CustomPatchSync<
     OpenidConnectProviderContract,
     PatchModel = OpenidConnectProviderUpdateContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<OpenidConnectProviderContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -112,22 +134,15 @@ interface OpenidConnectProviderContracts {
   /**
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
-  delete is ArmResourceDeleteSync<
+  delete is OpenidConnectProviderContractsOps.DeleteSync<
     OpenidConnectProviderContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists of all the OpenId Connect Providers.
    */
-  listByService is ArmResourceListByParent<
+  listByService is OpenidConnectProviderContractsOps.List<
     OpenidConnectProviderContract,
     Parameters = {
       /**
@@ -156,7 +171,7 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the client secret details of the OpenID Connect Provider.
    */
-  listSecrets is ArmResourceActionSync<
+  listSecrets is OpenidConnectProviderContractsOps.ActionSync<
     OpenidConnectProviderContract,
     void,
     ArmResponse<ClientSecretContract> & {

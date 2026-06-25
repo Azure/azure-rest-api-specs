@@ -25,13 +25,42 @@ model PortalRevisionContract
   >;
 }
 
+@armResourceOperations
+interface PortalRevisionContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Portal revision identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("portalRevisions")
+        @key
+        @minLength(1)
+        @maxLength(256)
+        portalRevisionId: string,
+      },
+      ResourceName = "ApiManagementPortalRevision"
+    > {}
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface PortalRevisionContracts {
   /**
    * Gets the developer portal's revision specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is PortalRevisionContractsOps.Read<
     PortalRevisionContract,
     Response = ArmResponse<PortalRevisionContract> & {
       /**
@@ -45,7 +74,7 @@ interface PortalRevisionContracts {
   /**
    * Gets the developer portal revision specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is PortalRevisionContractsOps.CheckExistence<
     PortalRevisionContract,
     Response = OkResponse & {
       /**
@@ -60,7 +89,7 @@ interface PortalRevisionContracts {
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrUpdate is PortalRevisionContractsOps.CreateOrUpdateAsync<
     PortalRevisionContract,
     Response = ArmResourceCreatedResponse<
       PortalRevisionContract,
@@ -78,17 +107,10 @@ interface PortalRevisionContracts {
    * Updates the description of specified portal revision or makes it current.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<
+  update is PortalRevisionContractsOps.CustomPatchAsync<
     PortalRevisionContract,
     PatchModel = PortalRevisionContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response =
       | (ArmResponse<PortalRevisionContract> & {
           /**
@@ -103,7 +125,7 @@ interface PortalRevisionContracts {
   /**
    * Lists developer portal's revisions.
    */
-  listByService is ArmResourceListByParent<
+  listByService is PortalRevisionContractsOps.List<
     PortalRevisionContract,
     Parameters = {
       /**

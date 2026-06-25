@@ -26,11 +26,40 @@ model UserContract
 }
 
 @armResourceOperations
+interface UserContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** User identifier. Must be unique in the current API Management service instance. */
+        @path
+        @segment("users")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        userId: string,
+      },
+      ResourceName = "ApiManagementUser"
+    > {}
+@armResourceOperations
 interface UserContracts {
   /**
    * Gets the details of the user specified by its identifier.
    */
-  get is ArmResourceRead<
+  get is UserContractsOps.Read<
     UserContract,
     Response = ArmResponse<UserContract> & {
       /**
@@ -44,7 +73,7 @@ interface UserContracts {
   /**
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is UserContractsOps.CheckExistence<
     UserContract,
     Response = OkResponse & {
       /**
@@ -96,17 +125,10 @@ interface UserContracts {
    * Updates the details of the user specified by its identifier.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is UserContractsOps.CustomPatchSync<
     UserContract,
     PatchModel = UserUpdateParameters,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    },
+    Parameters = IfMatchHeaderParameter,
     Response = ArmResponse<UserContract> & {
       /**
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
@@ -119,9 +141,9 @@ interface UserContracts {
   /**
    * Deletes specific user.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<
+  delete is UserContractsOps.DeleteWithoutOkAsync<
     UserContract,
-    Parameters = {
+    Parameters = IfMatchHeaderParameter & {
       /**
        * Whether to delete user's subscription or not.
        */
@@ -133,13 +155,6 @@ interface UserContracts {
        */
       @query("notify")
       notify?: boolean;
-
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
 
       /**
        * Determines the type of application which send the create user request. Default is legacy publisher portal.
@@ -155,7 +170,7 @@ interface UserContracts {
   /**
    * Lists a collection of registered users in the specified service instance.
    */
-  listByService is ArmResourceListByParent<
+  listByService is UserContractsOps.List<
     UserContract,
     Parameters = {
       /**
@@ -190,7 +205,7 @@ interface UserContracts {
   /**
    * Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
    */
-  generateSsoUrl is ArmResourceActionSync<
+  generateSsoUrl is UserContractsOps.ActionSync<
     UserContract,
     void,
     ArmResponse<GenerateSsoUrlResult>
@@ -200,7 +215,7 @@ interface UserContracts {
    * Gets the Shared Access Authorization Token for the User.
    */
   @action("token")
-  getSharedAccessToken is ArmResourceActionSync<
+  getSharedAccessToken is UserContractsOps.ActionSync<
     UserContract,
     UserTokenParameters,
     ArmResponse<UserTokenResult>
@@ -212,7 +227,7 @@ interface UserContracts {
   @get
   @action("groups")
   @list
-  list is ArmResourceActionSync<
+  list is UserContractsOps.ActionSync<
     UserContract,
     void,
     ArmResponse<GroupCollection>,
@@ -245,7 +260,7 @@ interface UserContracts {
   @get
   @action("identities")
   @list
-  userIdentitiesList is ArmResourceActionSync<
+  userIdentitiesList is UserContractsOps.ActionSync<
     UserContract,
     void,
     ArmResponse<UserIdentityCollection>
@@ -255,7 +270,7 @@ interface UserContracts {
    * Sends confirmation
    */
   @action("confirmations/password/send")
-  send is ArmResourceActionSync<
+  send is UserContractsOps.ActionSync<
     UserContract,
     void,
     NoContentResponse,

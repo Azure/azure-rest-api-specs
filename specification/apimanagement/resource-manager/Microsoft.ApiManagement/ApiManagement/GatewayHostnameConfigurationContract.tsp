@@ -26,11 +26,48 @@ model GatewayHostnameConfigurationContract
 }
 
 @armResourceOperations
+interface GatewayHostnameConfigurationContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+
+        /** Gateway entity identifier. Must be unique in the current API Management service instance. Must not have value 'managed' */
+        @path
+        @segment("gateways")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        gatewayId: string,
+      },
+      {
+        /** Gateway hostname configuration identifier. Must be unique in the scope of parent Gateway entity. */
+        @path
+        @segment("hostnameConfigurations")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        hcId: string,
+      },
+      ResourceName = "ApiManagementGatewayHostnameConfiguration"
+    > {}
+@armResourceOperations
 interface GatewayHostnameConfigurationContracts {
   /**
    * Get details of a hostname configuration
    */
-  get is ArmResourceRead<
+  get is GatewayHostnameConfigurationContractsOps.Read<
     GatewayHostnameConfigurationContract,
     Response = ArmResponse<GatewayHostnameConfigurationContract> & {
       /**
@@ -44,7 +81,7 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
-  getEntityTag is ArmResourceCheckExistence<
+  getEntityTag is GatewayHostnameConfigurationContractsOps.CheckExistence<
     GatewayHostnameConfigurationContract,
     Response = OkResponse & {
       /**
@@ -58,7 +95,7 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Creates of updates hostname configuration for a Gateway.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is GatewayHostnameConfigurationContractsOps.CreateOrUpdateSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
       /**
@@ -88,22 +125,15 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Deletes the specified hostname configuration from the specified Gateway.
    */
-  delete is ArmResourceDeleteSync<
+  delete is GatewayHostnameConfigurationContractsOps.DeleteSync<
     GatewayHostnameConfigurationContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
    * Lists the collection of hostname configurations for the specified gateway.
    */
-  listByService is ArmResourceListByParent<
+  listByService is GatewayHostnameConfigurationContractsOps.List<
     GatewayHostnameConfigurationContract,
     Parameters = {
       /**

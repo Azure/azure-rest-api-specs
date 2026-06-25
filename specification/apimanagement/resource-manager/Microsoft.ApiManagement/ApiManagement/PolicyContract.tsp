@@ -75,7 +75,8 @@ interface PolicyContractOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiOperationPolicy"
     > {}
 
 @armResourceOperations
@@ -144,14 +145,7 @@ interface PolicyContracts {
    */
   delete is PolicyContractOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -204,7 +198,8 @@ interface GraphQLApiResolverPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceApiResolverPolicy"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -274,14 +269,7 @@ interface GraphQLApiResolverPolicy {
    */
   delete is GraphQLApiResolverPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -325,7 +313,8 @@ interface ApiPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiPolicy"
     > {}
 
 @armResourceOperations
@@ -394,14 +383,7 @@ interface ApiPolicy {
    */
   delete is ApiPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -436,7 +418,8 @@ interface PolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiManagementPolicy"
     > {}
 
 @armResourceOperations
@@ -505,14 +488,7 @@ interface Policy {
    */
   delete is PolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -555,7 +531,8 @@ interface ProductPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ApiManagementProductPolicy"
     > {}
 
 @armResourceOperations
@@ -624,14 +601,7 @@ interface ProductPolicy {
    */
   delete is ProductPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -675,7 +645,8 @@ interface WorkspacePolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspacePolicy"
     > {}
 
 @armResourceOperations
@@ -744,14 +715,7 @@ interface WorkspacePolicy {
    */
   delete is WorkspacePolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -812,7 +776,8 @@ interface WorkspaceApiOperationPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiOperationPolicy"
     > {}
 
 @armResourceOperations
@@ -881,14 +846,7 @@ interface WorkspaceApiOperationPolicy {
    */
   delete is WorkspaceApiOperationPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -941,7 +899,8 @@ interface WorkspaceApiPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiPolicy"
     > {}
 
 @armResourceOperations
@@ -1010,14 +969,7 @@ interface WorkspaceApiPolicy {
    */
   delete is WorkspaceApiPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
@@ -1069,7 +1021,8 @@ interface WorkspaceProductPolicyOps
         @segment("policies")
         @key
         policyId: PolicyIdName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProductPolicy"
     > {}
 
 @armResourceOperations
@@ -1138,14 +1091,7 @@ interface WorkspaceProductPolicy {
    */
   delete is WorkspaceProductPolicyOps.DeleteSync<
     PolicyContract,
-    Parameters = {
-      /**
-       * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header("If-Match")
-      `If-Match`: string;
-    }
+    Parameters = IfMatchHeaderParameter
   >;
 
   /**
