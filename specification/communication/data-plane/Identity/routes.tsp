@@ -15,73 +15,81 @@ namespace Azure.Communication.IdentityService;
 @route("/identities")
 interface IdentityOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Create a new identity, and optionally, an access token.")
   @doc("Create a new identity, and optionally, an access token.")
   @post
-  create(
-    @doc("If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.")
-    @body
-    body?: CommunicationIdentityCreateRequest,
-  ):
-    | {
-        @statusCode statusCode: 201;
-        @body result: CommunicationIdentityAccessTokenResult;
-      }
-    | CommunicationErrorResponse;
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.")
+      @body
+      body?: CommunicationIdentityCreateRequest;
+    },
+    {
+      @statusCode statusCode: 201;
+      @body result: CommunicationIdentityAccessTokenResult;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @doc("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @route("/{id}")
   @delete
-  delete(
-    @doc("Identifier of the identity to be deleted.")
-    @path
-    id: string,
-  ):
-    | {
-        @statusCode statusCode: 204;
-      }
-    | CommunicationErrorResponse;
+  delete is Azure.Core.Foundations.Operation<
+    {
+      @doc("Identifier of the identity to be deleted.")
+      @path
+      id: string;
+    },
+    {
+      @statusCode statusCode: 204;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Revoke all access tokens for the specific identity.")
   @doc("Revoke all access tokens for the specific identity.")
   @route("/{id}/:revokeAccessTokens")
   @post
-  revokeAccessTokens(
-    @doc("Identifier of the identity.")
-    @path
-    id: string,
-  ):
-    | {
-        @statusCode statusCode: 204;
-      }
-    | CommunicationErrorResponse;
+  revokeAccessTokens is Azure.Core.Foundations.Operation<
+    {
+      @doc("Identifier of the identity.")
+      @path
+      id: string;
+    },
+    {
+      @statusCode statusCode: 204;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Issue a new token for an identity.")
   @doc("Issue a new token for an identity.")
   @route("/{id}/:issueAccessToken")
   @post
-  issueAccessToken(
-    @doc("Identifier of the identity to issue token for.")
-    @path
-    id: string,
+  issueAccessToken is Azure.Core.Foundations.Operation<
+    {
+      @doc("Identifier of the identity to issue token for.")
+      @path
+      id: string;
 
-    @doc("Requested scopes for the new token.")
-    @body
-    body: CommunicationIdentityAccessTokenRequest,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body result: CommunicationIdentityAccessToken;
-      }
-    | CommunicationErrorResponse;
+      @doc("Requested scopes for the new token.")
+      @body
+      body: CommunicationIdentityAccessTokenRequest;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body result: CommunicationIdentityAccessToken;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 }
 
 // --- Teams User operations ---
@@ -89,21 +97,23 @@ interface IdentityOperations {
 @tag("TeamsUser")
 interface TeamsUserOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.")
   @doc("Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.")
   @route("/teamsUser/:exchangeAccessToken")
   @post
-  exchangeTeamsUserAccessToken(
-    @doc("Request payload for the token exchange.")
-    @body
-    body: TeamsUserExchangeTokenRequest,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body result: CommunicationIdentityAccessToken;
-      }
-    | CommunicationErrorResponse;
+  exchangeTeamsUserAccessToken is Azure.Core.Foundations.Operation<
+    {
+      @doc("Request payload for the token exchange.")
+      @body
+      body: TeamsUserExchangeTokenRequest;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body result: CommunicationIdentityAccessToken;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 }
 
 // --- Teams Extension operations ---
@@ -111,90 +121,99 @@ interface TeamsUserOperations {
 @tag("TeamsExtension")
 interface TeamsExtensionOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Exchanges a Teams Phone token for an ACS user access token.")
   @doc("Exchanges a Teams Phone token for an ACS user access token.")
   @route("/access/teamsExtension/:exchangeAccessToken")
   @post
-  exchangeToken(
-    @doc("Request payload for the token exchange.")
-    @body
-    body: TeamsExtensionExchangeTokenRequest,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body result: CommunicationIdentityAccessTokenResult;
-      }
-    | CommunicationErrorResponse;
+  exchangeToken is Azure.Core.Foundations.Operation<
+    {
+      @doc("Request payload for the token exchange.")
+      @body
+      body: TeamsExtensionExchangeTokenRequest;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body result: CommunicationIdentityAccessTokenResult;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Get Teams Phone access assignment by object id.")
   @doc("Get Teams Phone access assignment by object id.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @get
-  getAssignment(
-    @doc("Tenant Id we want to get the assignment for.")
-    @path
-    tenantId: string,
+  getAssignment is Azure.Core.Foundations.Operation<
+    {
+      @doc("Tenant Id we want to get the assignment for.")
+      @path
+      tenantId: string;
 
-    @doc("Object Id we want to get the assignment for.")
-    @path
-    objectId: string,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body result: TeamsExtensionAssignmentResponse;
-      }
-    | CommunicationErrorResponse;
+      @doc("Object Id we want to get the assignment for.")
+      @path
+      objectId: string;
+    },
+    {
+      @statusCode statusCode: 200;
+      @body result: TeamsExtensionAssignmentResponse;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving original operation name from swagger"
   @summary("Creates or replaces a Teams Phone access assignment.")
   @doc("Creates or replaces a Teams Phone access assignment.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @put
-  upsertAssignment(
-    @doc("Tenant Id we want to update the assignment for.")
-    @path
-    tenantId: string,
+  upsertAssignment is Azure.Core.Foundations.Operation<
+    {
+      @doc("Tenant Id we want to update the assignment for.")
+      @path
+      tenantId: string;
 
-    @doc("Object Id we want to update the assignment for.")
-    @path
-    objectId: string,
+      @doc("Object Id we want to update the assignment for.")
+      @path
+      objectId: string;
 
-    @doc("Values we want to set.")
-    @body
-    body: TeamsExtensionAssignmentCreateOrUpdateRequest,
-  ):
-    | {
-        @statusCode statusCode: 200;
-        @body result: TeamsExtensionAssignmentResponse;
-      }
-    | {
-        @statusCode statusCode: 201;
-        @body result: TeamsExtensionAssignmentResponse;
-      }
-    | CommunicationErrorResponse;
+      @doc("Values we want to set.")
+      @body
+      body: TeamsExtensionAssignmentCreateOrUpdateRequest;
+    },
+
+      | {
+          @statusCode statusCode: 200;
+          @body result: TeamsExtensionAssignmentResponse;
+        }
+      | {
+          @statusCode statusCode: 201;
+          @body result: TeamsExtensionAssignmentResponse;
+        },
+    {},
+    CommunicationErrorResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "API version is passed by the client, not per-operation"
   @summary("Removes a Teams Phone access assignment.")
   @doc("Removes a Teams Phone access assignment.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @delete
-  deleteAssignment(
-    @doc("Tenant Id we want to remove the assignment for.")
-    @path
-    tenantId: string,
+  deleteAssignment is Azure.Core.Foundations.Operation<
+    {
+      @doc("Tenant Id we want to remove the assignment for.")
+      @path
+      tenantId: string;
 
-    @doc("Object Id we want to remove the assignment for.")
-    @path
-    objectId: string,
-  ):
-    | {
-        @statusCode statusCode: 204;
-      }
-    | CommunicationErrorResponse;
+      @doc("Object Id we want to remove the assignment for.")
+      @path
+      objectId: string;
+    },
+    {
+      @statusCode statusCode: 204;
+    },
+    {},
+    CommunicationErrorResponse
+  >;
 }

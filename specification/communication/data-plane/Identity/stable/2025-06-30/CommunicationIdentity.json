@@ -56,6 +56,9 @@
         "description": "Exchanges a Teams Phone token for an ACS user access token.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "Request payload for the token exchange.",
@@ -95,6 +98,9 @@
         "summary": "Get Teams Phone access assignment by object id.",
         "description": "Get Teams Phone access assignment by object id.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "tenantId",
             "in": "path",
@@ -138,6 +144,9 @@
         "summary": "Creates or replaces a Teams Phone access assignment.",
         "description": "Creates or replaces a Teams Phone access assignment.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "tenantId",
             "in": "path",
@@ -197,6 +206,9 @@
         "description": "Removes a Teams Phone access assignment.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "tenantId",
             "in": "path",
             "description": "Tenant Id we want to remove the assignment for.",
@@ -239,6 +251,9 @@
         "description": "Create a new identity, and optionally, an access token.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "body",
             "in": "body",
             "description": "If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.",
@@ -279,6 +294,9 @@
         "description": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "Identifier of the identity to be deleted.",
@@ -313,6 +331,9 @@
         "summary": "Issue a new token for an identity.",
         "description": "Issue a new token for an identity.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "id",
             "in": "path",
@@ -361,6 +382,9 @@
         "description": "Revoke all access tokens for the specific identity.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "Identifier of the identity.",
@@ -395,6 +419,9 @@
         "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "description": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "body",
             "in": "body",
@@ -716,5 +743,16 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    }
+  }
 }
