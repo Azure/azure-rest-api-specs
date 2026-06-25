@@ -183,15 +183,19 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 // NOT exist on main: DomainTopicResource.GetByDomainTopic* and
 // MockableEventGridArmClient.GetByResource*.
 //
-// listByDomainTopic: fully scoped out of C#. The customization's DomainTopicResource branch
-// delegates to the GENERATED DomainTopicEventSubscriptionCollection.GetAll (produced from
-// EventSubscriptions.list), so none of listByDomainTopic's generated plumbing is needed.
-@@scope(EventSubscriptions.listByDomainTopic, "!csharp");
-// listByResource: only internalized (NOT fully scoped out). The customization's default
-// scope branch reuses this op's GENERATED plumbing
-// (EventSubscriptionsGetByResource*CollectionResultOfT + the REST client method), so the op
-// must keep generating internally; internal access just removes the duplicate public
-// MockableEventGridArmClient.GetByResource* method.
+// Both ops are internalized (NOT scoped out): the customization's DomainTopicResource and
+// default scope branches reuse these ops' GENERATED plumbing
+// (EventSubscriptions*CollectionResultOfT + the REST client methods on the EventSubscriptions
+// REST client), so the ops must keep generating internally. Internal access just removes the
+// duplicate public methods.
+//
+// NOTE: listByDomainTopic (EventSubscriptions_ListByDomainTopic ->
+// .../topics/{topic}/providers/Microsoft.EventGrid/eventSubscriptions) is a DIFFERENT REST
+// route than DomainTopicEventSubscriptions_List
+// (.../topics/{topic}/eventSubscriptions, used by DomainTopicEventSubscriptionCollection.GetAll).
+// main's EventSubscriptionCollection.GetAll calls ListByDomainTopic, so the customization MUST
+// use this op's plumbing (not delegate to DomainTopicEventSubscriptionCollection) to match main.
+@@access(EventSubscriptions.listByDomainTopic, Access.internal, "csharp");
 @@access(
   EventSubscriptionOperationGroup.listByResource,
   Access.internal,
