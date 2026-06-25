@@ -885,6 +885,13 @@ using TypeSpec.Rest;
   duration,
   "csharp"
 );
+@@clientName(RuntimeEnvironment, "AutomationRuntimeEnvironment", "csharp");
+@@clientName(
+  RuntimeEnvironmentProperties,
+  "AutomationRuntimeEnvironmentProperties",
+  "csharp"
+);
+
 // Model renames
 @@clientName(SUCScheduleProperties, "SucScheduleProperties", "java");
 @@clientName(
