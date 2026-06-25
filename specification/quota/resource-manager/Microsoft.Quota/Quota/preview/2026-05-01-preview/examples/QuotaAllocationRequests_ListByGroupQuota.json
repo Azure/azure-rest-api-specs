@@ -1,0 +1,40 @@
+{
+  "title": "QuotaAllocationRequests_ListByGroupQuota",
+  "operationId": "QuotaAllocationRequests_ListByGroupQuota",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "api-version": "2026-05-01-preview",
+    "$filter": "location eq eastus",
+    "$top": 50,
+    "$skiptoken": ""
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/quotaAllocationRequests/requestId",
+            "name": "requestId",
+            "type": "Microsoft.Quota/quotaAllocationRequests",
+            "properties": {
+              "requestedResource": {
+                "properties": {
+                  "limit": 10,
+                  "name": {
+                    "value": "standardDv2Family"
+                  },
+                  "region": "eastus"
+                }
+              },
+              "requestSubmitTime": "2024-03-09T02:15:13.1930011Z",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/quotaAllocationRequests?api-version=2026-05-01-preview&$skiptoken=nextPageToken"
+      }
+    }
+  }
+}
