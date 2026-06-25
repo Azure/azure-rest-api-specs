@@ -693,6 +693,26 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@alternateType(
+  MetricAlertApi.MetricAlertResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  MetricAlertApi.MetricAlertResourcePatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ScheduledQueryRuleApi.ScheduledQueryRuleResource.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
+  ScheduledQueryRuleApi.ScheduledQueryRuleResourcePatch.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
   DataCollectionApi.DataCollectionRule.dataCollectionEndpointId,
   Azure.Core.armResourceIdentifier,
   "csharp"
