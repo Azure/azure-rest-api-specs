@@ -91,6 +91,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
+@@clientName(MCPToolboxTool, "McpToolboxTool");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
@@ -191,6 +192,8 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+@@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
+@@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
