@@ -37,7 +37,7 @@ alias ManagedDatabaseMoveOperationResultsOps = Azure.ResourceManager.Legacy.Lega
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The ID of the managed database move operation. */
