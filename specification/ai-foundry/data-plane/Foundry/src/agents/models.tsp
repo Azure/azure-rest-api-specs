@@ -395,12 +395,6 @@ model ExternalAgentDefinition extends AgentDefinition {
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
 
-  @doc("""
-    An array of tools the hosted agent's model may call while generating a response. You
-    can specify which tool to use by setting the `tool_choice` parameter.
-    """)
-  tools?: OpenAI.Tool[];
-
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
    * See [vCPU and memory allocation requirements](https://learn.microsoft.com/azure/container-apps/containers#allocations).
