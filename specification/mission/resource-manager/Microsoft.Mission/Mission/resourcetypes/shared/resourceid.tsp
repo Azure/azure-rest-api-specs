@@ -92,6 +92,38 @@ scalar TransitHubResourceId
     }
   ]>;
 
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+scalar DedicatedHubResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Mission/communities/dedicatedHubs",
+    }
+  ]>;
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+scalar VirtualHubResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualHubs",
+    }
+  ]>;
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+scalar FirewallResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/azureFirewalls",
+    }
+  ]>;
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+scalar FirewallPolicyResourceId
+  extends armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firewallPolicies",
+    }
+  ]>;
+
 @removed(Microsoft.Mission.Versions.v2025_05_01_preview)
 scalar IPGroupResourceId
   extends armResourceIdentifier<[
