@@ -1895,6 +1895,8 @@ using Microsoft.ApiManagement;
 
 @@clientLocation(OperationsResultsOperationGroup.get, "OperationsResults");
 
+@@clientLocation(AiGatewayOperationStatusOperationGroup.get, "AiGatewayOperationStatus");
+
 @@clientLocation(Operations.list, "ApiManagementOperations");
 
 @@clientName(

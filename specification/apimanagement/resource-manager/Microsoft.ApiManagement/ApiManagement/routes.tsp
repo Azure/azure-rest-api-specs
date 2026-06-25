@@ -218,3 +218,32 @@ interface OperationsResultsOperationGroup {
       })
     | ErrorResponse;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface AiGatewayOperationStatusOperationGroup {
+  /**
+   * Returns the current status of an async operation for an AI Gateway.
+   */
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{locationName}/aiGatewayOperationStatuses/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+
+    /**
+     * The name of the location.
+     */
+    @path
+    @minLength(1)
+    @maxLength(256)
+    locationName: string,
+
+    /**
+     * The ID of an ongoing async operation.
+     */
+    @path
+    @minLength(1)
+    @maxLength(80)
+    operationId: string,
+  ): ArmResponse<CommonTypes.OperationStatusResult> | ErrorResponse;
+}

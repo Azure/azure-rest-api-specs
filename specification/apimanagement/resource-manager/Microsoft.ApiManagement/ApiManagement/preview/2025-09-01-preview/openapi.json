@@ -556,6 +556,52 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{locationName}/aiGatewayOperationStatuses/{operationId}": {
+      "get": {
+        "operationId": "AiGatewayOperationStatus_Get",
+        "description": "Returns the current status of an async operation for an AI Gateway.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the location.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of an ongoing async operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/deletedservices/{serviceName}": {
       "get": {
         "operationId": "DeletedServices_GetByName",

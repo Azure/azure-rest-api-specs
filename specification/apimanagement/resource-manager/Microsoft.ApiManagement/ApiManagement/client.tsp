@@ -1386,6 +1386,11 @@ enum GatewayRegenerateKeyType {
   "csharp"
 );
 @@clientName(
+  AiGatewayOperationStatusOperationGroup.get,
+  "GetAiGatewayOperationStatus",
+  "csharp"
+);
+@@clientName(
   TagTagResourceContractProperties,
   "AssociatedTagProperties",
   "csharp"
