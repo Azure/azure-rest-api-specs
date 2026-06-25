@@ -38,7 +38,6 @@ using Microsoft.Network;
 
 @@clientName(RecordSets.createOrUpdate::parameters.resource, "parameters");
 @@clientName(RecordSets.update::parameters.properties, "parameters");
-@@clientName(RecordSets.update::parameters.properties, "data", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecordSet.properties);
