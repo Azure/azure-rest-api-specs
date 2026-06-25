@@ -93,6 +93,7 @@ interface QuotaTransfers {
    * cached outcome and the same `transferId`; a retry with a different financial body
    * returns 409 BodyMismatch.
    */
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is QuotaTransferOps.CreateOrUpdateAsync<QuotaTransfer>;
 
   /**

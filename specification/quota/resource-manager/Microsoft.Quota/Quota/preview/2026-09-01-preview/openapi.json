@@ -2902,7 +2902,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/QuotaTransfer"
         },
         "x-ms-long-running-operation": true
@@ -4574,7 +4574,7 @@
           "description": "Donor-supplied free-text rationale captured at submit time.",
           "maxLength": 500
         },
-        "destinationSubscription": {
+        "destinationSubscriptionId": {
           "type": "string",
           "description": "Recipient subscription id. Must differ from the donor subscription."
         },
@@ -4632,7 +4632,7 @@
       },
       "required": [
         "displayName",
-        "destinationSubscription",
+        "destinationSubscriptionId",
         "billingAccountId",
         "resourceName",
         "amount"

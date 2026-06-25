@@ -183,7 +183,7 @@ model QuotaTransferProperties {
   /**
    * Recipient subscription id. Must differ from the donor subscription.
    */
-  destinationSubscription: string;
+  destinationSubscriptionId: string;
 
   /**
    * Recipient tenant id, resolved by the service from the recipient subscription.
