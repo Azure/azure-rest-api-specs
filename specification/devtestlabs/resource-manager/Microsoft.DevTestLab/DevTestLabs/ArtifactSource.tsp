@@ -103,9 +103,11 @@ interface ArtifactSources {
 
 @@doc(ArtifactSource.name, "The name of the artifact source.");
 @@doc(ArtifactSource.properties, "The properties of the resource.");
-@@doc(ArtifactSources.createOrUpdate::parameters.resource,
+@@doc(
+  ArtifactSources.createOrUpdate::parameters.resource,
   "Properties of an artifact source."
 );
-@@doc(ArtifactSources.update::parameters.properties,
+@@doc(
+  ArtifactSources.update::parameters.properties,
   "Properties of an artifact source."
 );

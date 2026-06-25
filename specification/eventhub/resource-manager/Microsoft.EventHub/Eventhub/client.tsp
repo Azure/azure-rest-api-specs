@@ -4,7 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
-@@clientName(Microsoft.EventHub,
+@@clientName(
+  Microsoft.EventHub,
   "EventHubManagementClient",
   "python,javascript,java"
 );
@@ -16,55 +17,66 @@ using Microsoft.EventHub;
 @@clientName(TlsVersion.`1.3`, "One3", "go");
 
 // Fix field naming changes for Go SDK backward compatibility
-@@clientName(RetentionDescription.minCompactionLagTimeInMinutes,
+@@clientName(
+  RetentionDescription.minCompactionLagTimeInMinutes,
   "MinCompactionLagInMins",
   "go"
 );
 
 // csharp configuration
-@@clientName(Microsoft.EventHub.EventHubs,
+@@clientName(
+  Microsoft.EventHub.EventHubs,
   "EventHubAuthorizationRule",
   "csharp"
 );
-@@clientName(AuthorizationRules,
+@@clientName(
+  AuthorizationRules,
   "EventHubsNamespaceAuthorizationRule",
   "csharp"
 );
-@@clientName(DisasterRecoveryConfigs,
+@@clientName(
+  DisasterRecoveryConfigs,
   "EventHubsDisasterRecoveryAuthorizationRule",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "EventHubsPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(Clusters.configurationGet, "GetConfiguration", "csharp");
-@@clientName(EHNamespaces.privateLinkResourcesGet,
+@@clientName(
+  EHNamespaces.privateLinkResourcesGet,
   "GetPrivateLinkResources",
   "csharp"
 );
 @@clientName(NetworkRuleSets.getNetworkRuleSet, "GetNetworkRuleSet", "csharp");
-@@clientName(NetworkRuleSets.listNetworkRuleSet,
+@@clientName(
+  NetworkRuleSets.listNetworkRuleSet,
   "ListNetworkRuleSets",
   "csharp"
 );
 @@clientName(EHNamespaces.failover, "FailOver", "csharp");
-@@clientName(EHNamespaces.checkNameAvailability,
+@@clientName(
+  EHNamespaces.checkNameAvailability,
   "CheckEventHubsDisasterRecoveryNameAvailability",
   "csharp"
 );
-@@clientName(NamespacesOperationGroup.checkNameAvailability,
+@@clientName(
+  NamespacesOperationGroup.checkNameAvailability,
   "CheckEventHubsNamespaceNameAvailability",
   "csharp"
 );
-@@clientName(ClustersOperationGroup.listAvailableClusterRegion,
+@@clientName(
+  ClustersOperationGroup.listAvailableClusterRegion,
   "GetAvailableClusterRegionClusters",
   "csharp"
 );
 @@clientName(Clusters.patch, "PatchConfiguration", "csharp");
 @@clientName(CaptureIdentity.type, "IdentityType", "csharp");
 @@clientName(NWRuleSetIpRules.ipMask, "IPMask", "csharp");
-@@clientName(PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -75,86 +87,103 @@ using Microsoft.EventHub;
 @@alternateType(ClusterProperties.createdAt, utcDateTime, "csharp");
 @@clientName(ClusterProperties.updatedAt, "UpdatedOn", "csharp");
 @@alternateType(ClusterProperties.updatedAt, utcDateTime, "csharp");
-@@alternateType(EHNamespaceProperties.clusterArmId,
+@@alternateType(
+  EHNamespaceProperties.clusterArmId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(DefaultAction, "EventHubsNetworkRuleSetDefaultAction", "csharp");
-@@clientName(PublicNetworkAccessFlag,
+@@clientName(
+  PublicNetworkAccessFlag,
   "EventHubsPublicNetworkAccessFlag",
   "csharp"
 );
 @@clientName(NWRuleSetIpRules, "EventHubsNetworkRuleSetIPRules", "csharp");
 @@clientName(NetworkRuleIPAction, "EventHubsNetworkRuleIPAction", "csharp");
-@@clientName(NWRuleSetVirtualNetworkRules,
+@@clientName(
+  NWRuleSetVirtualNetworkRules,
   "EventHubsNetworkRuleSetVirtualNetworkRules",
   "csharp"
 );
-@@clientName(EndPointProvisioningState,
+@@clientName(
+  EndPointProvisioningState,
   "EventHubsPrivateEndpointConnectionProvisioningState",
   "csharp"
 );
-@@clientName(ConnectionState,
+@@clientName(
+  ConnectionState,
   "EventHubsPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(PrivateLinkConnectionStatus,
+@@clientName(
+  PrivateLinkConnectionStatus,
   "EventHubsPrivateLinkConnectionStatus",
   "csharp"
 );
 @@clientName(ProvisioningState, "EventHubsClusterProvisioningState", "csharp");
 @@clientName(CleanupPolicyRetentionDescription.Compact, "Compaction", "csharp");
-@@alternateType(NetworkSecurityPerimeterConfigurationProperties.sourceResourceId,
+@@alternateType(
+  NetworkSecurityPerimeterConfigurationProperties.sourceResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(ApplicationGroupPolicy,
+@@clientName(
+  ApplicationGroupPolicy,
   "EventHubsApplicationGroupPolicy",
   "csharp"
 );
-@@clientName(ApplicationGroupPolicy.type,
+@@clientName(
+  ApplicationGroupPolicy.type,
   "ApplicationGroupPolicyType",
   "csharp"
 );
-@@clientName(RegenerateAccessKeyParameters,
+@@clientName(
+  RegenerateAccessKeyParameters,
   "EventHubsRegenerateAccessKeyContent",
   "csharp"
 );
 @@clientName(KeyType, "EventHubsAccessKeyType", "csharp");
 @@clientName(ArmDisasterRecovery, "EventHubsDisasterRecovery", "csharp");
-@@clientName(ProvisioningStateDR,
+@@clientName(
+  ProvisioningStateDR,
   "EventHubsDisasterRecoveryProvisioningState",
   "csharp"
 );
 @@clientName(RoleDisasterRecovery, "EventHubsDisasterRecoveryRole", "csharp");
 @@clientName(Eventhub, "EventHub", "csharp");
 @@clientName(Destination, "EventHubDestination", "csharp");
-@@alternateType(DestinationProperties.storageAccountResourceId,
+@@alternateType(
+  DestinationProperties.storageAccountResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(CheckNameAvailabilityParameter,
+@@clientName(
+  CheckNameAvailabilityParameter,
   "EventHubsNameAvailabilityContent",
   "csharp"
 );
-@@clientName(CheckNameAvailabilityResult,
+@@clientName(
+  CheckNameAvailabilityResult,
   "EventHubsNameAvailabilityResult",
   "csharp"
 );
 @@clientName(UnavailableReason, "EventHubsNameUnavailableReason", "csharp");
 @@clientName(FailOver, "EventHubsNamespaceFailover", "csharp");
-@@clientName(GeoDataReplicationProperties,
+@@clientName(
+  GeoDataReplicationProperties,
   "EventHubsNamespaceGeoDataReplicationProperties",
   "csharp"
 );
 @@clientName(GeoDRRoleType, "EventHubsNamespaceGeoDRRoleType", "csharp");
-@@alternateType(NamespaceReplicaLocation.clusterArmId,
+@@alternateType(
+  NamespaceReplicaLocation.clusterArmId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@clientName(Mode, "EventHubsConfidentialComputeMode", "csharp");
 @@clientName(TimestampType, "EventHubsTimestampType", "csharp");
-@@clientName(NamespaceReplicaLocation,
+@@clientName(
+  NamespaceReplicaLocation,
   "EventHubsNamespaceReplicaLocation",
   "csharp"
 );
@@ -168,12 +197,14 @@ using Microsoft.EventHub;
 // java naming mitigations
 @@clientName(NetworkRuleIPAction, "NetworkRuleIpAction", "java");
 @@clientName(SchemaGroupProperties.eTag, "etag", "java");
-@@clientLocation(NetworkSecurityPerimeterConfigurations.list,
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.list,
   "NetworkSecurityPerimeterConfigurations",
   "java"
 );
 
-@@alternateType(DestinationProperties.dataLakeSubscriptionId,
+@@alternateType(
+  DestinationProperties.dataLakeSubscriptionId,
   Azure.Core.uuid,
   "java"
 );
@@ -184,42 +215,51 @@ using Microsoft.EventHub;
 @@clientName(TlsVersion.`1.2`, "Tls1_2", "csharp");
 @@clientName(TlsVersion.`1.3`, "Tls1_3", "csharp");
 @@clientName(PublicNetworkAccess, "EventHubsPublicNetworkAccess", "csharp");
-@@clientName(ProvisioningIssueProperties,
+@@clientName(
+  ProvisioningIssueProperties,
   "EventHubsProvisioningIssueProperties",
   "csharp"
 );
 @@clientName(ProvisioningIssue, "EventHubsProvisioningIssue", "csharp");
 @@usage(ProvisioningIssue, Usage.input, "csharp");
 @@clientName(MetricId, "EventHubsMetricId", "csharp");
-@@clientName(NetworkSecurityPerimeter,
+@@clientName(
+  NetworkSecurityPerimeter,
   "EventHubsNetworkSecurityPerimeter",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfiguration,
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
   "EventHubsNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationPropertiesProfile,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationPropertiesProfile,
   "EventHubsNetworkSecurityPerimeterConfigurationPropertiesProfile",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationPropertiesResourceAssociation,
   "EventHubsNetworkSecurityPerimeterConfigurationPropertiesResourceAssociation",
   "csharp"
 );
-@@clientName(NetworkSecurityPerimeterConfigurationProvisioningState,
+@@clientName(
+  NetworkSecurityPerimeterConfigurationProvisioningState,
   "EventHubsNetworkSecurityPerimeterConfigurationProvisioningState",
   "csharp"
 );
-@@clientName(NspAccessRuleDirection,
+@@clientName(
+  NspAccessRuleDirection,
   "EventHubsNspAccessRuleDirection",
   "csharp"
 );
-@@clientName(NspAccessRuleProperties,
+@@clientName(
+  NspAccessRuleProperties,
   "EventHubsNspAccessRuleProperties",
   "csharp"
 );
-@@clientName(ResourceAssociationAccessMode,
+@@clientName(
+  ResourceAssociationAccessMode,
   "EventHubsResourceAssociationAccessMode",
   "csharp"
 );
@@ -241,45 +281,55 @@ using Microsoft.EventHub;
 @@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
 @@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
 @@usage(FailOver, Usage.input | Usage.output, "csharp");
-@@usage(NspAccessRulePropertiesSubscriptionsItem,
+@@usage(
+  NspAccessRulePropertiesSubscriptionsItem,
   Usage.input | Usage.output,
   "csharp"
 );
 // Mark list operations as pageable for C# backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(Clusters.listNamespaces,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  Clusters.listNamespaces,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(ClustersOperationGroup.listAvailableClusterRegion,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ClustersOperationGroup.listAvailableClusterRegion,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(EHNamespaces.privateLinkResourcesGet,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  EHNamespaces.privateLinkResourcesGet,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility with pageable list operations"
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(NetworkSecurityPerimeterConfigurations.list,
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  NetworkSecurityPerimeterConfigurations.list,
   "csharp"
 );
-@@clientLocation(AuthorizationRules.getAuthorizationRule,
+@@clientLocation(
+  AuthorizationRules.getAuthorizationRule,
   AuthorizationRules,
   "csharp"
 );
-@@clientLocation(AuthorizationRules.createOrUpdateAuthorizationRule,
+@@clientLocation(
+  AuthorizationRules.createOrUpdateAuthorizationRule,
   AuthorizationRules,
   "csharp"
 );
-@@clientLocation(AuthorizationRules.deleteAuthorizationRule,
+@@clientLocation(
+  AuthorizationRules.deleteAuthorizationRule,
   AuthorizationRules,
   "csharp"
 );
-@@clientLocation(AuthorizationRules.listAuthorizationRules,
+@@clientLocation(
+  AuthorizationRules.listAuthorizationRules,
   AuthorizationRules,
   "csharp"
 );
 @@clientLocation(AuthorizationRules.listKeys, AuthorizationRules, "csharp");
-@@clientLocation(AuthorizationRules.regenerateKeys,
+@@clientLocation(
+  AuthorizationRules.regenerateKeys,
   AuthorizationRules,
   "csharp"
 );
@@ -291,58 +341,70 @@ using Microsoft.EventHub;
 @@alternateType(ApplicationGroup.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(SchemaGroup.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(NetworkRuleSet.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(PrivateEndpointConnection.location,
+@@alternateType(
+  PrivateEndpointConnection.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(NetworkSecurityPerimeterConfiguration.location,
+@@alternateType(
+  NetworkSecurityPerimeterConfiguration.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 @@alternateType(AvailableCluster.location, Azure.Core.azureLocation, "csharp");
-@@alternateType(NetworkSecurityPerimeter.location,
+@@alternateType(
+  NetworkSecurityPerimeter.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(ArmDisasterRecovery.location,
+@@alternateType(
+  ArmDisasterRecovery.location,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(EHNamespace.identity,
+@@alternateType(
+  EHNamespace.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 @@alternateType(KeyVaultProperties.keyVaultUri, url, "csharp");
-@@alternateType(DestinationProperties.dataLakeSubscriptionId,
+@@alternateType(
+  DestinationProperties.dataLakeSubscriptionId,
   Azure.Core.uuid,
   "csharp"
 );
 @@alternateType(SchemaGroupProperties.eTag, Azure.Core.eTag, "csharp");
-@@alternateType(FailOverProperties.primaryLocation,
+@@alternateType(
+  FailOverProperties.primaryLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(EHNamespaceIdListResult.value,
+@@alternateType(
+  EHNamespaceIdListResult.value,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
 @@clientName(NamespaceReplicaLocation.roleType, "RoleType", "csharp");
-@@clientName(NspAccessRulePropertiesSubscriptionsItem,
+@@clientName(
+  NspAccessRulePropertiesSubscriptionsItem,
   "EventHubsNspAccessRulePropertiesSubscriptionsItem",
   "csharp"
 );
-@@clientName(NspAccessRulePropertiesSubscriptionsItem.id,
+@@clientName(
+  NspAccessRulePropertiesSubscriptionsItem.id,
   "SubscriptionId",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Subnet.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(NspAccessRuleProperties.subscriptions,
+@@alternateType(
+  NspAccessRuleProperties.subscriptions,
   Azure.ResourceManager.Models.SubResource[],
   "csharp"
 );
@@ -350,18 +412,21 @@ using Microsoft.EventHub;
 @@alternateType(EHNamespace, EventHubsNamespace, "csharp");
 @@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
 @@alternateType(NspAccessRule, EventHubsNspAccessRule, "csharp");
-@@alternateType(PrivateLinkResource,
+@@alternateType(
+  PrivateLinkResource,
   EventHubsPrivateLinkResourceData,
   "csharp"
 );
 @@alternateType(Encryption.keySource, EventHubsKeySource, "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsCluster.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EventHubsCluster.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EventHubsNamespace.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EventHubsNamespace.properties,
   "csharp"
 );
 

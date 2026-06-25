@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 
@@ -177,5 +178,6 @@ model ConsolePatchProperties {
   /**
    * The SSH public key that will be provisioned for user access. The user is expected to have the corresponding SSH private key for logging in.
    */
-  sshPublicKey?: SshPublicKey;
+  @typeChangedFrom(Versions.v2026_07_01, SshPublicKey)
+  sshPublicKey?: SshPublicKeyPatch;
 }

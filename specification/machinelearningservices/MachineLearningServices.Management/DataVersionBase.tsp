@@ -54,7 +54,9 @@ interface DataVersionBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -86,7 +88,9 @@ interface DataVersionWithNamePatternBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -104,17 +108,19 @@ interface DataVersionBases {
   @summary("Create or update version.")
   createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
     DataVersionBase,
-    Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<
-      DataVersionBase,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataVersionBase>
+      | (ArmResourceCreatedResponse<
+          DataVersionBase,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = DataVersionBase> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -124,13 +130,16 @@ interface DataVersionBases {
   @summary("Delete version.")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -213,7 +222,9 @@ interface DataVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataVersion"
     > {}
 
 @armResourceOperations
@@ -293,16 +304,20 @@ interface DataVersions {
 }
 
 @@doc(DataVersionBase.name, "Version identifier.");
-@@doc(DataVersionBase.properties,
+@@doc(
+  DataVersionBase.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataVersionBases.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersionBases.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(DataVersionBases.createOrGetStartPendingUpload::parameters.body,
+@@doc(
+  DataVersionBases.createOrGetStartPendingUpload::parameters.body,
   "Pending upload request object"
 );
-@@doc(DataVersions.createOrUpdate::parameters.resource,
+@@doc(
+  DataVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
 @@doc(DataVersions.publish::parameters.body, "Destination registry info");

@@ -55,10 +55,12 @@ interface ManagedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Day 0 Property"
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
     ManagedCluster,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**
@@ -69,10 +71,12 @@ interface ManagedClusters {
   update is ArmCustomPatchAsync<
     ManagedCluster,
     PatchModel = ManagedClusterUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ManagedCluster> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
-      @bodyRoot
-      _: ManagedCluster;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCluster>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagedCluster>> & {
+          @bodyRoot
+          _: ManagedCluster;
+        })
   >;
 
   /**
@@ -207,19 +211,24 @@ interface ManagedMaintenanceWindowStatus {
 
 @@doc(ManagedCluster.name, "The name of the cluster resource.");
 @@doc(ManagedCluster.properties, "The managed cluster resource properties");
-@@doc(ManagedClusters.createOrUpdate::parameters.resource,
+@@doc(
+  ManagedClusters.createOrUpdate::parameters.resource,
   "The cluster resource."
 );
-@@doc(ManagedClusters.update::parameters.properties,
+@@doc(
+  ManagedClusters.update::parameters.properties,
   "The managed cluster resource updated tags."
 );
-@@doc(ManagedClusters.getFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.getFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
-@@doc(ManagedClusters.startFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.startFaultSimulation::parameters.body,
   "parameters describing the fault simulation."
 );
-@@doc(ManagedClusters.stopFaultSimulation::parameters.body,
+@@doc(
+  ManagedClusters.stopFaultSimulation::parameters.body,
   "parameter with fault simulation id."
 );
 

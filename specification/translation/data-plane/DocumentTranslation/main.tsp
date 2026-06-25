@@ -3,6 +3,7 @@ import "@typespec/http";
 import "./routes.tsp";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -12,14 +13,16 @@ using Azure.Core;
 @service(#{ title: "Azure.AI.DocumentTranslation" })
 @versioned(DocumentTranslation.Versions)
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.authorizationCode,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @server(
   "{endpoint}/translator",

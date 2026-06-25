@@ -53,6 +53,7 @@ import "./Job.tsp";
 import "./WorkspaceManagerConfiguration.tsp";
 import "./WorkspaceManagerGroup.tsp";
 import "./WorkspaceManagerMember.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -82,6 +83,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<OperationsList, CloudError> {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all operations available Azure Security Insights Resource Provider."
 );

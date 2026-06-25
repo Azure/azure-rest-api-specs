@@ -59,8 +59,9 @@ interface UsageAggregatesOperationGroup {
   @tag("UsageAggregates")
   @action("UsageAggregates")
   list is ArmProviderActionSync<
-    Response = ResourceListResult<UsageAggregation> | (ArmAcceptedResponse &
-      ErrorObjectResponse),
+    Response =
+      | ResourceListResult<UsageAggregation>
+      | (ArmAcceptedResponse & ErrorObjectResponse),
     Scope = SubscriptionActionScope,
     Parameters = UsageAggregatesOperationGroupListParameters,
     Error = ErrorObjectResponse

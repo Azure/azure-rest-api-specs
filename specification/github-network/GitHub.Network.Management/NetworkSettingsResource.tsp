@@ -49,20 +49,25 @@ interface NetworkSettingsResources {
   listBySubscription is ArmListBySubscription<NetworkSettingsResource>;
 }
 
-@@doc(NetworkSettingsResources.create::parameters.resource,
+@@doc(
+  NetworkSettingsResources.create::parameters.resource,
   "GitHub.Network networkSettings resource create parameters."
 );
-@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources.create::parameters.resource,
+@@Azure.ClientGenerator.Core.clientName(
+  NetworkSettingsResources.create::parameters.resource,
   "networkSettings"
 );
 
-@@doc(NetworkSettingsResources.update::parameters.properties,
+@@doc(
+  NetworkSettingsResources.update::parameters.properties,
   "Parameters for updating the properties of the GitHub.Network resource."
 );
-@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources.update::parameters.properties,
+@@Azure.ClientGenerator.Core.clientName(
+  NetworkSettingsResources.update::parameters.properties,
   "networkSettings"
 );
 
-@@Azure.ClientGenerator.Core.clientName(NetworkSettingsResources,
+@@Azure.ClientGenerator.Core.clientName(
+  NetworkSettingsResources,
   "networkSettings"
 );

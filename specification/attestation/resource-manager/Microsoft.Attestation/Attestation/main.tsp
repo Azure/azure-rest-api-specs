@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./AttestationProvider.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -51,8 +52,7 @@ interface Operations {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<OperationList> | CloudError;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<OperationList>
+    | CloudError;
 }

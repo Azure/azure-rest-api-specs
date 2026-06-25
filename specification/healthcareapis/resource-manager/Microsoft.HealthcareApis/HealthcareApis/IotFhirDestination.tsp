@@ -54,14 +54,17 @@ interface IotFhirDestinations {
   @tag("IotConnectors")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     IotFhirDestination,
-    Response = ArmResourceUpdatedResponse<IotFhirDestination> | ArmResourceCreatedResponse<
-      IotFhirDestination,
-      ArmLroLocationHeader<FinalResult = IotFhirDestination> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | (ArmAcceptedLroResponse & {
-      @bodyRoot
-      _: IotFhirDestination;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<IotFhirDestination>
+      | ArmResourceCreatedResponse<
+          IotFhirDestination,
+          ArmLroLocationHeader<FinalResult = IotFhirDestination> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | (ArmAcceptedLroResponse & {
+          @bodyRoot
+          _: IotFhirDestination;
+        }),
     Error = ErrorDetails
   >;
 
@@ -72,7 +75,10 @@ interface IotFhirDestinations {
   @tag("IotConnectors")
   delete is ArmResourceDeleteWithoutOkAsync<
     IotFhirDestination,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -89,10 +95,12 @@ interface IotFhirDestinations {
 
 @@maxLength(IotFhirDestination.name, 24);
 @@minLength(IotFhirDestination.name, 3);
-@@doc(IotFhirDestination.name,
+@@doc(
+  IotFhirDestination.name,
   "The name of IoT Connector FHIR destination resource."
 );
 @@doc(IotFhirDestination.properties, "IoT FHIR Destination settings.");
-@@doc(IotFhirDestinations.createOrUpdate::parameters.resource,
+@@doc(
+  IotFhirDestinations.createOrUpdate::parameters.resource,
   "The parameters for creating or updating an IoT Connector FHIR destination resource."
 );

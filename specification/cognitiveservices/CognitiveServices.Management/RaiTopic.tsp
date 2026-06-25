@@ -65,11 +65,13 @@ interface RaiTopics {
   >;
 }
 
-@@doc(RaiTopic.name,
+@@doc(
+  RaiTopic.name,
   "The name of the Rai Topic associated with the Cognitive Services Account"
 );
 @@encodedName(RaiTopic.etag, "application/json", "etag");
 @@doc(RaiTopic.properties, "Properties of Cognitive Services Rai Topic.");
-@@doc(RaiTopics.createOrUpdate::parameters.resource,
+@@doc(
+  RaiTopics.createOrUpdate::parameters.resource,
   "Properties describing the rai topic."
 );
