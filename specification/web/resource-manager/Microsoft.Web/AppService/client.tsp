@@ -3577,10 +3577,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "javascript"
 );
 
-// =============================================================================
-// Migrated from autorest.md rename-mapping (C# emitter only)
-// =============================================================================
-
 // --- Model renames ---
 @@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
 @@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
@@ -3876,6 +3872,13 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
 @@clientName(
+  ProcessThreadInfoProperties,
+  "WebAppProcessThreadInfoProperties",
+  "csharp"
+);
+@@clientName(ComputeModeOptions, "ComputeModeOption", "csharp");
+@@clientName(WorkerSizeOptions, "WorkerSizeOption", "csharp");
+@@clientName(
   ProcessThreadInfoCollection,
   "WebAppProcessThreadInfoListResult",
   "csharp"
@@ -3988,31 +3991,16 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "StaticSiteBasicAuthPropertyProperties",
   "csharp"
 );
-@@clientName(
-  HybridConnectionLimits,
-  "HybridConnectionLimit",
-  "csharp"
-);
+@@clientName(HybridConnectionLimits, "HybridConnectionLimit", "csharp");
 @@clientName(
   HybridConnectionLimitsProperties,
   "HybridConnectionLimitProperties",
   "csharp"
 );
-@@clientName(
-  NetworkFeatures,
-  "NetworkFeature",
-  "csharp"
-);
-@@clientName(
-  NetworkFeaturesProperties,
-  "NetworkFeatureProperties",
-  "csharp"
-);
-@@clientName(
-  SiteConfigResource,
-  "SiteConfig",
-  "csharp"
-);
+@@clientName(NetworkFeatures, "NetworkFeature", "csharp");
+@@clientName(NetworkFeaturesProperties, "NetworkFeatureProperties", "csharp");
+@@clientName(SiteConfig, "SiteConfigProperties", "csharp");
+@@clientName(SiteConfigResource, "SiteConfig", "csharp");
 @@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");
 @@clientName(StaticSiteBuildCollection, "StaticSiteBuildListResult", "csharp");
 @@clientName(StaticSiteCollection, "StaticSiteListResult", "csharp");
@@ -4113,6 +4101,17 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(Status, "AppServiceStatusInfo", "csharp");
 @@clientName(StatusOptions, "AppServicePlanStatus", "csharp");
 @@clientName(StorageMigrationResponse, "StorageMigrationResult", "csharp");
+@@clientName(
+  StorageMigrationResponseProperties,
+  "StorageMigrationProperties",
+  "csharp"
+);
+@@clientName(StorageMigrationOptions, "StorageMigrationContent", "csharp");
+@@clientName(
+  StorageMigrationOptionsProperties,
+  "StorageMigrationContentProperties",
+  "csharp"
+);
 @@clientName(StorageType, "ArtifactStorageType", "csharp");
 @@clientName(StringDictionary, "AppServiceConfigurationDictionary", "csharp");
 @@clientName(StringList, "StaticSiteStringList", "csharp");
@@ -4177,6 +4176,12 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(
   WorkflowTriggerListCallbackUrlQueries,
   "WorkflowTriggerListCallbackUriQueries",
+  "csharp"
+);
+@@clientName(ApiKVReference, "ApiKeyVaultReference", "csharp");
+@@clientName(
+  ApiKVReferenceProperties,
+  "ApiKeyVaultReferenceProperties",
   "csharp"
 );
 
@@ -4346,7 +4351,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(
   RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
-  "IpAddresses",
+  "IPAddresses",
   "csharp"
 );
 @@clientName(
@@ -4779,8 +4784,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "TlsRsaWithAes256GcmSha384",
   "csharp"
 );
-
-// --- Migrated from autorest.md prepend-rp-prefix (add "AppService" prefix for C#) ---
+@@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
 @@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
 @@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
 @@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
@@ -4809,11 +4813,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(HttpSettingsRoutes, "AppServiceHttpSettingsRoutes", "csharp");
 @@clientName(Identifier, "AppServiceIdentifier", "csharp");
 @@clientName(IdentityProviders, "AppServiceIdentityProviders", "csharp");
-@@clientName(IpFilterTag, "AppServiceIpFilterTag", "csharp");
+@@clientName(IpFilterTag, "AppServiceIPFilterTag", "csharp");
 @@clientName(IPMode, "AppServiceIPMode", "csharp");
 @@clientName(
   IpSecurityRestriction,
-  "AppServiceIpSecurityRestriction",
+  "AppServiceIPSecurityRestriction",
   "csharp"
 );
 @@clientName(NameValuePair, "AppServiceNameValuePair", "csharp");
@@ -5091,3 +5095,388 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@alternateType(LogSpecification.blobDuration, duration, "csharp");
 @@alternateType(MetricAvailability.blobDuration, duration, "csharp");
 @@alternateType(TriggeredJobRun.duration, duration, "csharp");
+
+// Reparent ProxyOnlyResource-derived models to Azure.ResourceManager.CommonTypes.ProxyResource for csharp
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServiceEnvironmentPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PushSettings,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ResourceMetricDefinition,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Web.Usage,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AppServicePlanPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  HybridConnectionKey,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CertificatePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DiagnosticAnalysis,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DiagnosticDetectorResponse,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Snapshot,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  KubeEnvironmentPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ApplicationStackResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  FunctionAppStack,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  WebAppStack,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Recommendation,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  BillingMeter,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CustomHostnameSites,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  GeoRegion,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AseRegion,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PremierAddOnOffer,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetParameters,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetValidationFailureDetails,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  VnetValidationTestFailure,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitesWorkflowPreviewRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitesWorkflowPreview,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RemotePrivateEndpointConnection,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserProvidedFunctionApp,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSitePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StringDictionary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteFunctionOverviewARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteZipDeploymentARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserInvitationRequestResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteUserInvitationResponseResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteCustomDomainRequestPropertiesARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StringList,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StaticSiteResetPropertiesARMResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SitePatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CustomHostnameAnalysisResult,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  BackupRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SiteAuthSettings,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AzureStoragePropertyDictionaryResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ConnectionStringDictionary,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SiteConfigurationSnapshotInfo,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MSDeploy,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MSDeployLog,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ProcessThreadInfo,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  MigrateMySqlRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkSecurityPerimeterConfiguration,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SitePhpErrorLogFlag,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PremierAddOnPatchResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DeletedAppRestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SnapshotRestoreRequest,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SlotDifference,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PrivateLinkConnectionApprovalRequestResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StorageMigrationOptions,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StorageMigrationResponse,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+@@scope(RelayServiceConnectionEntityProperties.resourceType, "!csharp");
+@@scope(BillingMeterProperties.resourceType, "!csharp");
+
+@@clientName(ApplicationStack.name, "StackName", "csharp");
+@@clientName(DeletedSiteProperties.kind, "DeletedSiteKind", "csharp");
+@@clientName(StackPreferredOs, "StackPreferredOS", "csharp");
+
+/**
+ * The method that should be used to authenticate the user.
+ */
+union ClientCredentialMethod {
+  string,
+
+  /** ClientSecretPost. */
+  ClientSecretPost: "ClientSecretPost",
+}
+@@alternateType(
+  OpenIdConnectClientCredential.method,
+  ClientCredentialMethod,
+  "csharp"
+);
+/**
+ * The source of the configuration reference.
+ */
+union ConfigReferenceSource {
+  string,
+
+  /** KeyVault. */
+  KeyVault: "KeyVault",
+}
+@@alternateType(
+  ApiKVReferenceProperties.source,
+  ConfigReferenceSource,
+  "csharp"
+);
