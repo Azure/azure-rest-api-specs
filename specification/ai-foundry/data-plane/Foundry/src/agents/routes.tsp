@@ -310,6 +310,9 @@ interface Agents {
       @path agent_name: string;
 
       ...CommonPageQueryParameters;
+
+      /** (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned). */
+      @query include_drafts?: boolean = false;
     },
     AgentsPagedResult<AgentVersionObject>
   >;

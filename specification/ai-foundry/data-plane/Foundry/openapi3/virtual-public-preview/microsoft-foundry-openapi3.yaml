@@ -2119,6 +2119,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: include_drafts
+          in: query
+          required: false
+          description: (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).
+          schema:
+            type: boolean
+            default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -14028,6 +14036,10 @@ components:
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
+        draft:
+          type: boolean
+          description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
+          default: false
         status:
           allOf:
             - $ref: '#/components/schemas/AgentVersionStatus'
@@ -16068,6 +16080,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          default: false
         agent_endpoint:
           allOf:
             - $ref: '#/components/schemas/AgentEndpointConfig'
@@ -16197,6 +16213,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          default: false
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
