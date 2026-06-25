@@ -190,7 +190,7 @@ using Microsoft.Kusto;
 );
 @@clientName(ResourceSkuCapabilities, "KustoResourceSkuCapabilities", "csharp");
 @@clientName(ResourceSkuZoneDetails, "KustoResourceSkuZoneDetails", "csharp");
-@@clientName(SkuDescriptionList, "kustoSkuDescriptionList", "csharp");
+@@clientName(SkuDescriptionList, "KustoSkuDescriptionList", "csharp");
 @@clientName(OutboundAccess, "KustoCalloutPolicyOutboundAccess", "csharp");
 @@clientName(ZoneStatus, "KustoClusterZoneStatus", "csharp");
 @@clientName(ScriptLevel, "KustoScriptLevel", "csharp");
@@ -851,8 +851,9 @@ union SandboxCustomImageType {
 /**
  * Class representing an update to a Kusto cluster.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "csharp GA compat"
 // this model should sync to model ClusterUpdate except for extending TrackedResource, for csharp compatibility.
+// https://github.com/Azure/azure-sdk-for-net/issues/60173
 model KustoClusterPatch
   extends Azure.ResourceManager.CommonTypes.TrackedResource {
   /**
@@ -875,17 +876,19 @@ model KustoClusterPatch
    */
   properties?: ClusterProperties;
 }
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp GA compat"
 @@flattenProperty(KustoClusterPatch.properties);
 @@alternateType(ClusterUpdate, KustoClusterPatch, "csharp");
 
 @@clientName(
   LanguageExtensionImageName.Python3_10_8,
-  Azure.ClientGenerator.Core.exact("Python3_10_8")
+  Azure.ClientGenerator.Core.exact("Python3_10_8"),
+  "csharp"
 );
 @@clientName(
   LanguageExtensionImageName.Python3_6_5,
-  Azure.ClientGenerator.Core.exact("Python3_6_5")
+  Azure.ClientGenerator.Core.exact("Python3_6_5"),
+  "csharp"
 );
 
 @@alternateType(
