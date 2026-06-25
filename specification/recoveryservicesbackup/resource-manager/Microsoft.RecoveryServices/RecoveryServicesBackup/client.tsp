@@ -16,16 +16,16 @@ using Microsoft.RecoveryServices;
 );
 @@clientLocation(
   BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
-  "RecoveryServicesClient",
+  "Client",
   "go"
 );
 @@clientLocation(
   BackupResourceConfigOperationStatuses.getOperationStatus,
-  "RecoveryServicesClient",
+  "Client",
   "go"
 );
 
-@@clientLocation(RecoveryPoints.moveRecoveryPoint, "RecoveryServicesClient", "go");
+@@clientLocation(RecoveryPoints.moveRecoveryPoint, "Client", "go");
 
 @@clientName(HttpStatusCode.Continue, "CONTINUE_ENUM", "python");
 
@@ -461,7 +461,7 @@ using Microsoft.RecoveryServices;
 @@clientName(
   Microsoft.RecoveryServices,
   "RecoveryServicesBackupClient",
-  "javascript,python"
+  "javascript,python,go"
 );
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
