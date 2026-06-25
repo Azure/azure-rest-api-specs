@@ -79,7 +79,7 @@ model OccurrenceResource is ScheduledActionResource {
 @@identifiers(OccurrenceResourceListResponse.value, #[]);
 model OccurrenceResourceListResponse is Azure.Core.Page<OccurrenceResource>;
 
-@doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (ACST) 2025-05-30T22:03:00+09:30, (PST) 2025-05-30T06:35:00-07:00")
+@doc("Request to ask for a delay in an occurrence, delay should be set to client local time eg (PST) 2025-05-30T06:35:00-07:00")
 model DelayRequest {
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The exact time to delay the operations to")
