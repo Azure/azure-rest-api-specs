@@ -5,7 +5,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.ConfidentialLedger;
 
 // Mitigate breaking change: "AadBasedSecurityPrincipal" was renamed to "AADBasedSecurityPrincipal"
-@@clientName(Microsoft.ConfidentialLedger.AADBasedSecurityPrincipal,
+@@clientName(
+  Microsoft.ConfidentialLedger.AADBasedSecurityPrincipal,
   "AadBasedSecurityPrincipal",
   "java"
 );
@@ -28,48 +29,58 @@ using Microsoft.ConfidentialLedger;
 @@clientName(ManagedCCFRestore, "ManagedCcfRestore", "java");
 @@clientName(ManagedCCFRestoreResponse, "ManagedCcfRestoreResponse", "java");
 
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
   "ConfidentialLedgerNameAvailabilityContent",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse,
   "ConfidentialLedgerNameAvailabilityResult",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityResponse.nameAvailable,
   "IsNameAvailable",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
   "ConfidentialLedgerNameUnavailableReason",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   "ResourceType",
   "csharp"
 );
-@@alternateType(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest.type,
   Azure.Core.armResourceType,
   "csharp"
 );
 @@clientName(LedgerProperties, "ConfidentialLedgerProperties", "csharp");
 @@clientName(LedgerRoleName, "ConfidentialLedgerRoleName", "csharp");
 @@clientName(LedgerType, "ConfidentialLedgerType", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "ConfidentialLedgerProvisioningState",
   "csharp"
 );
 @@clientName(LedgerSku, "ConfidentialLedgerSku", "csharp");
-@@clientName(ConfidentialLedgerFilesExport,
+@@clientName(
+  ConfidentialLedgerFilesExport,
   "ConfidentialLedgerFilesExportContent",
   "csharp"
 );
-@@clientName(ConfidentialLedgerFilesExportResponse,
+@@clientName(
+  ConfidentialLedgerFilesExportResponse,
   "ConfidentialLedgerFilesExportResult",
   "csharp"
 );
 @@alternateType(AADBasedSecurityPrincipal.tenantId, Azure.Core.uuid, "csharp");
-@@alternateType(AADBasedSecurityPrincipal.principalId,
+@@alternateType(
+  AADBasedSecurityPrincipal.principalId,
   Azure.Core.uuid,
   "csharp"
 );
@@ -79,12 +90,14 @@ using Microsoft.ConfidentialLedger;
 @@clientName(RunningState, "ConfidentialLedgerRunningState", "csharp");
 @@clientName(ApplicationType, "ConfidentialLedgerApplicationType", "csharp");
 @@clientName(EnclavePlatform, "ConfidentialLedgerEnclavePlatform", "csharp");
-@@clientName(Microsoft.ConfidentialLedger.checkNameAvailability,
+@@clientName(
+  Microsoft.ConfidentialLedger.checkNameAvailability,
   "CheckConfidentialLedgerNameAvailability",
   "csharp"
 );
 @@clientName(AADBasedSecurityPrincipal, "AadBasedSecurityPrincipal", "csharp");
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );

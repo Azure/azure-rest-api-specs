@@ -22,6 +22,7 @@ import "./ChatTranscriptDetails.tsp";
 import "./FileWorkspaceDetails.tsp";
 import "./FileDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -35,7 +36,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Microsoft.Support" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Support;
 
 /**
@@ -45,12 +45,14 @@ enum Versions {
   /**
    * The 2024-04-01 API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_04_01: "2024-04-01",
 
   /**
-   * The 2025-06-01-preview API version.
+   * The 2026-06-01 API version.
    */
-  v2025_06_01_preview: "2025-06-01-preview",
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

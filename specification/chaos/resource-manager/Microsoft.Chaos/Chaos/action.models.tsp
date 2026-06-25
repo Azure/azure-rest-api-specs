@@ -17,7 +17,6 @@ namespace Microsoft.Chaos;
 @subscriptionResource
 @parentResource(SubscriptionLocationResource)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model Action is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
   ...ResourceNameParameter<
     Resource = Action,
@@ -32,7 +31,6 @@ model Action is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
  */
 @parentResource(Action)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionVersion
   is Azure.ResourceManager.ProxyResource<ActionProperties, false> {
   ...ResourceNameParameter<
@@ -47,7 +45,6 @@ model ActionVersion
  * Union of action types.
  */
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 union ActionKind {
   string,
 
@@ -66,7 +63,6 @@ union ActionKind {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionProperties {
   /**
    * Canonical identifier of the action (e.g., "microsoft-compute-shutdown/1.0").
@@ -129,7 +125,6 @@ model ActionProperties {
  * Model that represents a target type supported by an action.
  */
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionSupportedTargetType {
   /**
    * The Azure resource type (e.g., "Microsoft.Compute/virtualMachines").
@@ -146,12 +141,10 @@ model ActionSupportedTargetType {
  * Model that represents a list of Action resources and a link for pagination.
  */
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionListResult is Azure.Core.Page<Action>;
 
 /**
  * Model that represents a list of Action Version resources and a link for pagination.
  */
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
-@removed(Microsoft.Chaos.Versions.v2025_01_01)
 model ActionVersionListResult is Azure.Core.Page<ActionVersion>;

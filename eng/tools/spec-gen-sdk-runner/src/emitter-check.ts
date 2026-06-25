@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { inspect } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
-import { execAsync } from "./utils.js";
+import { LogLevel, logMessage } from "./log.ts";
+import { execAsync } from "./utils.ts";
 
 /**
  * Metadata output from the @azure-tools/typespec-metadata emitter.

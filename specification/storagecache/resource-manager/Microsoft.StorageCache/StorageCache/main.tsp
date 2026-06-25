@@ -21,6 +21,7 @@ import "./ExpansionJob.tsp";
 import "./Cache.tsp";
 import "./StorageTarget.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -53,6 +54,7 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Resource Provider operations."
 );

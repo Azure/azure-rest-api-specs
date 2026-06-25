@@ -5,44 +5,53 @@ using Microsoft.HardwareSecurityModules;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupResult.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  BackupResult.properties,
   "!python,!java,!csharp,!javascript"
 );
 @@clientName(Error.innererror, "innerError");
 @@clientName(CloudHsmClusters.createOrUpdate::parameters.resource, "body");
 @@clientName(CloudHsmClusters.update::parameters.properties, "body");
-@@clientName(CloudHsmClusters.restore::parameters.body,
+@@clientName(
+  CloudHsmClusters.restore::parameters.body,
   "restoreRequestProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CloudHsmCluster.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudHsmCluster.properties,
   "!python,!java,!csharp,!javascript"
 );
-@@clientName(PrivateEndpointConnections.create::parameters.resource,
+@@clientName(
+  PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateEndpointConnection.properties,
   "!python,!java,!csharp,!javascript"
 );
 @@clientName(DedicatedHsms.createOrUpdate::parameters.resource, "parameters");
 @@clientName(DedicatedHsms.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHsm.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DedicatedHsm.properties,
   "!python,!java,!csharp,!javascript"
 );
-@@clientName(CloudHsmClusters.validateBackupProperties::parameters.body,
+@@clientName(
+  CloudHsmClusters.validateBackupProperties::parameters.body,
   "backupRequestProperties",
   "!csharp"
 );
-@@clientName(CloudHsmClusters.backup::parameters.body,
+@@clientName(
+  CloudHsmClusters.backup::parameters.body,
   "backupRequestProperties",
   "!csharp"
 );
-@@clientName(CloudHsmClusters.validateRestoreProperties::parameters.body,
+@@clientName(
+  CloudHsmClusters.validateRestoreProperties::parameters.body,
   "restoreRequestProperties",
   "!csharp"
 );
@@ -50,27 +59,33 @@ using Microsoft.HardwareSecurityModules;
 //These ensure consistent operationId generation and client method naming in the output
 //All @operationId decorators have been removed after adding these client customizations
 //CloudHsmClusters operations
-@@clientLocation(CloudHsmClusters.listByCloudHsmCluster,
+@@clientLocation(
+  CloudHsmClusters.listByCloudHsmCluster,
   "CloudHsmClusterPrivateLinkResources"
 );
-@@clientLocation(CloudHsmClusters.cloudHsmClusterBackupStatusGet,
+@@clientLocation(
+  CloudHsmClusters.cloudHsmClusterBackupStatusGet,
   "CloudHsmClusterBackupStatus"
 );
 @@clientName(CloudHsmClusters.cloudHsmClusterBackupStatusGet, "Get");
-@@clientLocation(CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
+@@clientLocation(
+  CloudHsmClusters.cloudHsmClusterRestoreStatusGet,
   "CloudHsmClusterRestoreStatus"
 );
 @@clientName(CloudHsmClusters.cloudHsmClusterRestoreStatusGet, "Get");
 //PrivateEndpointConnections operations
-@@clientLocation(PrivateEndpointConnections.get,
+@@clientLocation(
+  PrivateEndpointConnections.get,
   "CloudHsmClusterPrivateEndpointConnections",
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnections.create,
+@@clientLocation(
+  PrivateEndpointConnections.create,
   "CloudHsmClusterPrivateEndpointConnections",
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnections.delete,
+@@clientLocation(
+  PrivateEndpointConnections.delete,
   "CloudHsmClusterPrivateEndpointConnections",
   "!csharp"
 );
@@ -81,7 +96,8 @@ using Microsoft.HardwareSecurityModules;
 @@clientLocation(DedicatedHsms.delete, "DedicatedHsm", "!csharp");
 @@clientLocation(DedicatedHsms.listByResourceGroup, "DedicatedHsm", "!csharp");
 @@clientLocation(DedicatedHsms.listBySubscription, "DedicatedHsm", "!csharp");
-@@clientLocation(DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
+@@clientLocation(
+  DedicatedHsms.listOutboundNetworkDependenciesEndpoints,
   "DedicatedHsm",
   "!csharp"
 );

@@ -7,6 +7,7 @@ import "./commonModels.tsp";
 import "./insights.tsp";
 //import "./topologyImpacts.tsp";
 import "./connectors.tsp";
+import "./client.tsp";
 
 // Common elements:
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
