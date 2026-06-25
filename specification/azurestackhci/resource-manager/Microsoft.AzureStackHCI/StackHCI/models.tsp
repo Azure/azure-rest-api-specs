@@ -10461,6 +10461,12 @@ model IscsiNetworkConfig {
   adapterProperties?: IscsiAdapterProperties;
 
   /**
+   * Target portal addresses reachable through the iSCSI network adapters.
+   */
+  @identifiers(#["ipAddress"])
+  targetPortalAddresses?: IscsiTargetPortalAddress[];
+
+  /**
    * Per-adapter IP configuration for the iSCSI network adapters.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name matches the iSCSI network configuration wire format."
@@ -10508,12 +10514,6 @@ model IscsiAdapterIPConfig {
    * Address prefix (CIDR notation) for the iSCSI network adapter.
    */
   addressPrefix?: string;
-
-  /**
-   * Target portal addresses reachable through this iSCSI network adapter.
-   */
-  @identifiers(#["ipAddress"])
-  targetPortalAddresses?: IscsiTargetPortalAddress[];
 }
 
 /**

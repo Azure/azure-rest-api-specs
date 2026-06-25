@@ -16558,16 +16558,6 @@
         "addressPrefix": {
           "type": "string",
           "description": "Address prefix (CIDR notation) for the iSCSI network adapter."
-        },
-        "targetPortalAddresses": {
-          "type": "array",
-          "description": "Target portal addresses reachable through this iSCSI network adapter.",
-          "items": {
-            "$ref": "#/definitions/IscsiTargetPortalAddress"
-          },
-          "x-ms-identifiers": [
-            "ipAddress"
-          ]
         }
       }
     },
@@ -16665,6 +16655,16 @@
         "adapterProperties": {
           "$ref": "#/definitions/IscsiAdapterProperties",
           "description": "Common adapter properties applied to all iSCSI network adapters."
+        },
+        "targetPortalAddresses": {
+          "type": "array",
+          "description": "Target portal addresses reachable through the iSCSI network adapters.",
+          "items": {
+            "$ref": "#/definitions/IscsiTargetPortalAddress"
+          },
+          "x-ms-identifiers": [
+            "ipAddress"
+          ]
         },
         "adapterIPConfig": {
           "type": "array",

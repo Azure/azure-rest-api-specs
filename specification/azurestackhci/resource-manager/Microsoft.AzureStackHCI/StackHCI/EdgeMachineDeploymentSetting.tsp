@@ -51,13 +51,16 @@ interface EdgeMachineDeploymentSettings {
   listByEdgeMachine is ArmResourceListByParent<EdgeMachineDeploymentSetting>;
 }
 
-@@doc(EdgeMachineDeploymentSetting.name,
+@@doc(
+  EdgeMachineDeploymentSetting.name,
   "Name of Edge Machine Deployment Setting"
 );
-@@doc(EdgeMachineDeploymentSetting.properties,
+@@doc(
+  EdgeMachineDeploymentSetting.properties,
   "The resource-specific properties for this resource."
 );
-@@visibility(EdgeMachineDeploymentSetting.properties,
+@@visibility(
+  EdgeMachineDeploymentSetting.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
