@@ -50,13 +50,13 @@ namespace Azure.AI.Projects {
    */
   alias DeprecatedToolNameAndDescriptionExtension = {
     /**
-     * Optional user-defined name for this tool or configuration.
+     * Deprecated. This property is deprecated and will be removed in a future version.
      */
     #deprecated "This property is deprecated and will be removed in a future version."
     name?: string;
 
     /**
-     * Optional user-defined description for this tool or configuration.
+     * Deprecated. This property is deprecated and will be removed in a future version.
      */
     #deprecated "This property is deprecated and will be removed in a future version."
     description?: string;
@@ -67,9 +67,7 @@ namespace Azure.AI.Projects {
    */
   alias DeprecatedToolConfigExtension = {
     /**
-     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
-     * Resolution order: exact tool name match takes priority over `*`.
-     * Unknown tool names are silently ignored at runtime.
+     * Deprecated. This property is deprecated and will be removed in a future version.
      */
     #deprecated "This property is deprecated and will be removed in a future version."
     tool_configs?: Record<ToolConfig>;
