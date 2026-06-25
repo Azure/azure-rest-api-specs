@@ -139,53 +139,137 @@ namespace Customizations;
 @@clientName(Data.getTile, "getTileWithTms", "java");
 @@clientName(Data.getTileByFormat, "getTileWithTmsByFormat", "java");
 @@clientName(Data.getTileByScale, "getTileWithTmsByScale", "java");
-@@clientName(Data.getTileByScaleAndFormat, "getTileWithTmsByScaleAndFormat", "java");
+@@clientName(
+  Data.getTileByScaleAndFormat,
+  "getTileWithTmsByScaleAndFormat",
+  "java"
+);
 
 // Item tile variants (no TileMatrixSetId in path) → NoTms
 @@clientName(Data.getTileNoTms, "getTileNoTms", "java");
 @@clientName(Data.getTileNoTmsByFormat, "getTileNoTmsByFormat", "java");
 @@clientName(Data.getTileNoTmsByScale, "getTileNoTmsByScale", "java");
-@@clientName(Data.getTileNoTmsByScaleAndFormat, "getTileNoTmsByScaleAndFormat", "java");
+@@clientName(
+  Data.getTileNoTmsByScaleAndFormat,
+  "getTileNoTmsByScaleAndFormat",
+  "java"
+);
 
 // Item TileJSON / WMTS → WithTms
 @@clientName(Data.getItemTileJsonByTms, "getItemTileJsonWithTms", "java");
-@@clientName(Data.getItemWmtsCapabilitiesByTms, "getItemWmtsCapabilitiesWithTms", "java");
+@@clientName(
+  Data.getItemWmtsCapabilitiesByTms,
+  "getItemWmtsCapabilitiesWithTms",
+  "java"
+);
 
 // Collection tile variants (TileMatrixSetId as path) → WithTms
 @@clientName(Data.getCollectionTile, "getCollectionTileWithTms", "java");
-@@clientName(Data.getCollectionTileByFormat, "getCollectionTileWithTmsByFormat", "java");
-@@clientName(Data.getCollectionTileByScale, "getCollectionTileWithTmsByScale", "java");
-@@clientName(Data.getCollectionTileByScaleAndFormat, "getCollectionTileWithTmsByScaleAndFormat", "java");
+@@clientName(
+  Data.getCollectionTileByFormat,
+  "getCollectionTileWithTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileByScale,
+  "getCollectionTileWithTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileByScaleAndFormat,
+  "getCollectionTileWithTmsByScaleAndFormat",
+  "java"
+);
 
 // Collection tile variants (no TileMatrixSetId in path) → NoTms
 @@clientName(Data.getCollectionTileNoTms, "getCollectionTileNoTms", "java");
-@@clientName(Data.getCollectionTileNoTmsByFormat, "getCollectionTileNoTmsByFormat", "java");
-@@clientName(Data.getCollectionTileNoTmsByScale, "getCollectionTileNoTmsByScale", "java");
-@@clientName(Data.getCollectionTileNoTmsByScaleAndFormat, "getCollectionTileNoTmsByScaleAndFormat", "java");
+@@clientName(
+  Data.getCollectionTileNoTmsByFormat,
+  "getCollectionTileNoTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileNoTmsByScale,
+  "getCollectionTileNoTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileNoTmsByScaleAndFormat,
+  "getCollectionTileNoTmsByScaleAndFormat",
+  "java"
+);
 
 // Collection TileJSON / WMTS / Assets → WithTms/NoTms
-@@clientName(Data.getCollectionTileJsonByTms, "getCollectionTileJsonWithTms", "java");
-@@clientName(Data.getCollectionWmtsCapabilitiesByTms, "getCollectionWmtsCapabilitiesWithTms", "java");
-@@clientName(Data.getCollectionAssetsForTile, "getCollectionAssetsForTileWithTms", "java");
-@@clientName(Data.getCollectionAssetsForTileNoTms, "getCollectionAssetsForTileNoTms", "java");
+@@clientName(
+  Data.getCollectionTileJsonByTms,
+  "getCollectionTileJsonWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionWmtsCapabilitiesByTms,
+  "getCollectionWmtsCapabilitiesWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionAssetsForTile,
+  "getCollectionAssetsForTileWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionAssetsForTileNoTms,
+  "getCollectionAssetsForTileNoTms",
+  "java"
+);
 
 // Search tile variants (TileMatrixSetId as path) → WithTms
 @@clientName(Data.getSearchTile, "getSearchTileWithTms", "java");
-@@clientName(Data.getSearchTileByFormat, "getSearchTileWithTmsByFormat", "java");
+@@clientName(
+  Data.getSearchTileByFormat,
+  "getSearchTileWithTmsByFormat",
+  "java"
+);
 @@clientName(Data.getSearchTileByScale, "getSearchTileWithTmsByScale", "java");
-@@clientName(Data.getSearchTileByScaleAndFormat, "getSearchTileWithTmsByScaleAndFormat", "java");
-@@clientName(Data.getSearchAssetsForTile, "getSearchAssetsForTileWithTms", "java");
+@@clientName(
+  Data.getSearchTileByScaleAndFormat,
+  "getSearchTileWithTmsByScaleAndFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchAssetsForTile,
+  "getSearchAssetsForTileWithTms",
+  "java"
+);
 
 // Search tile variants (no TileMatrixSetId in path) → NoTms
 @@clientName(Data.getSearchTileNoTms, "getSearchTileNoTms", "java");
-@@clientName(Data.getSearchTileNoTmsByFormat, "getSearchTileNoTmsByFormat", "java");
-@@clientName(Data.getSearchTileNoTmsByScale, "getSearchTileNoTmsByScale", "java");
-@@clientName(Data.getSearchTileNoTmsByScaleAndFormat, "getSearchTileNoTmsByScaleAndFormat", "java");
-@@clientName(Data.getSearchAssetsForTileNoTms, "getSearchAssetsForTileNoTms", "java");
+@@clientName(
+  Data.getSearchTileNoTmsByFormat,
+  "getSearchTileNoTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchTileNoTmsByScale,
+  "getSearchTileNoTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getSearchTileNoTmsByScaleAndFormat,
+  "getSearchTileNoTmsByScaleAndFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchAssetsForTileNoTms,
+  "getSearchAssetsForTileNoTms",
+  "java"
+);
 
 // Search TileJSON / WMTS → WithTms
 @@clientName(Data.getSearchTileJsonByTms, "getSearchTileJsonWithTms", "java");
-@@clientName(Data.getSearchWmtsCapabilitiesByTms, "getSearchWmtsCapabilitiesWithTms", "java");
+@@clientName(
+  Data.getSearchWmtsCapabilitiesByTms,
+  "getSearchWmtsCapabilitiesWithTms",
+  "java"
+);
 
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderConfiguration", "csharp");
