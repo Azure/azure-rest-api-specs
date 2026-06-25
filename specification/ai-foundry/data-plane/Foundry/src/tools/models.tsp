@@ -45,6 +45,38 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  /**
+   * Deprecated name and description fields retained for SDK backward compatibility.
+   * These fields now live on ToolboxTool and should not be used on tool definitions.
+   */
+  alias DeprecatedToolNameAndDescriptionExtension = {
+    /**
+     * Optional user-defined name for this tool or configuration.
+     */
+    #deprecated "Use name on ToolboxTool instead."
+    name?: string;
+
+    /**
+     * Optional user-defined description for this tool or configuration.
+     */
+    #deprecated "Use description on ToolboxTool instead."
+    description?: string;
+  };
+
+  /**
+   * Deprecated tool_configs field retained for SDK backward compatibility.
+   * This field now lives on ToolboxTool and should not be used on tool definitions.
+   */
+  alias DeprecatedToolConfigExtension = {
+    /**
+     * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+     * Resolution order: exact tool name match takes priority over `*`.
+     * Unknown tool names are silently ignored at runtime.
+     */
+    #deprecated "Use tool_configs on ToolboxTool instead."
+    tool_configs?: Record<ToolConfig>;
+  };
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
     OpenAI.MCPTool,
@@ -53,6 +85,8 @@ namespace Azure.AI.Projects {
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
        */
       project_connection_id?: string,
+
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -60,11 +94,59 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.WebSearchTool,
     {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
        * resource attached to the tool.
        */
       custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.CodeInterpreterTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.ImageGenTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.LocalShellToolParam,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.FunctionShellToolParam,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.FileSearchTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -91,6 +173,9 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'bing_grounding'.
      */
     type: "bing_grounding";
+
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -160,6 +245,9 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'azure_ai_search'.
      */
     type: "azure_ai_search";
+
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -250,6 +338,8 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
+    ...DeprecatedToolConfigExtension;
+
     /**
      * The openapi function definition.
      */
@@ -314,6 +404,8 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'browser_automation'.
      */
     type: "azure_function";
+
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The Azure Function Tool definition.
@@ -667,6 +759,9 @@ namespace Azure.AI.Projects {
      * The type of the tool. Always `capture_structured_outputs`.
      */
     type: "capture_structured_outputs";
+
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The structured outputs to capture from the model.
