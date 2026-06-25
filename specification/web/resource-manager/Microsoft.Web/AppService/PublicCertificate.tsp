@@ -53,7 +53,7 @@ interface PublicCertificateOps
         @key
         publicCertificateName: string,
       },
-      ResourceName = "WebSitePublicCertificate"
+      ResourceName = "SitePublicCertificate"
     > {}
 
 @tag("WebApps")

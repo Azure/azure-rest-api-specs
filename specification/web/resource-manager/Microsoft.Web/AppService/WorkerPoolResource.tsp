@@ -56,7 +56,8 @@ interface WorkerPoolResourceOps
         @segment("multiRolePools")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "HostingEnvironmentMultiRolePool"
     > {}
 
 alias WorkerPoolActionParamsOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -245,7 +246,8 @@ interface AppServiceEnvironmentOps
         @segment("workerPools")
         @key
         workerPoolName: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentWorkerPool"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })

@@ -61,7 +61,7 @@ interface ApiKVReferenceOps
         @key
         appSettingKey: string,
       },
-      ResourceName = "WebSiteConfigAppSetting"
+      ResourceName = "SiteConfigAppsetting"
     > {}
 
 @tag("WebApps")

@@ -53,7 +53,7 @@ interface PremierAddOnOps
         @key
         premierAddOnName: string,
       },
-      ResourceName = "WebSitePremierAddOn"
+      ResourceName = "WebSitePremierAddon"
     > {}
 
 @tag("WebApps")

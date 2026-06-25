@@ -97,7 +97,8 @@ interface WorkflowRegenerateAccessKeyOps
         @segment("workflows")
         @key
         workflowName: string,
-      }
+      },
+      ResourceName = "WorkflowAccessKey"
     > {}
 
 @tag("WebApps")

@@ -110,7 +110,6 @@ namespace Customizations;
   "python"
 );
 
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 op diagnosticsExecuteSiteAnalysisSlotCustomized(
@@ -3583,7 +3582,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 // =============================================================================
 
 // --- Model renames ---
-@@clientName(AddressResponse, "AppServiceEnvironmentAddressResult", "csharp");
+@@clientName(AddressResponse, "AppServiceEnvironmentAddress", "csharp");
 @@clientName(AllowedPrincipals, "AppServiceAadAllowedPrincipals", "csharp");
 @@clientName(AnalysisData, "AnalysisDetectorEvidences", "csharp");
 @@clientName(AnalysisDefinition, "WebSiteAnalysisDefinition", "csharp");
@@ -3987,6 +3986,31 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(
   StaticSiteBasicAuthPropertiesARMResourceProperties,
   "StaticSiteBasicAuthPropertyProperties",
+  "csharp"
+);
+@@clientName(
+  HybridConnectionLimits,
+  "HybridConnectionLimit",
+  "csharp"
+);
+@@clientName(
+  HybridConnectionLimitsProperties,
+  "HybridConnectionLimitProperties",
+  "csharp"
+);
+@@clientName(
+  NetworkFeatures,
+  "NetworkFeature",
+  "csharp"
+);
+@@clientName(
+  NetworkFeaturesProperties,
+  "NetworkFeatureProperties",
+  "csharp"
+);
+@@clientName(
+  SiteConfigResource,
+  "SiteConfig",
   "csharp"
 );
 @@clientName(StaticSiteBuildARMResource, "StaticSiteBuild", "csharp");
@@ -5017,7 +5041,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RecommendationProperties.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(
+  RecommendationProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(SupportTopic.pesId, armResourceIdentifier, "csharp");
 @@alternateType(
   DeletedAppRestoreRequestProperties.deletedSiteId,
@@ -5043,7 +5071,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@alternateType(BillingMeterProperties.meterId, uuid, "csharp");
 
 // IP addresses (ip-address)
-@@alternateType(AddressResponseProperties.serviceIpAddress, ipV4Address, "csharp");
+@@alternateType(
+  AddressResponseProperties.serviceIpAddress,
+  ipV4Address,
+  "csharp"
+);
 @@alternateType(
   AddressResponseProperties.internalIpAddress,
   ipV4Address,
