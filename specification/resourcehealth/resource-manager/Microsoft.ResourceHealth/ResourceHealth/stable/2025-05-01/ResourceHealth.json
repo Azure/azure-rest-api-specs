@@ -85,7 +85,7 @@
           {
             "name": "resourceUri",
             "in": "path",
-            "description": "The resource URI",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -138,21 +138,15 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The resource URI",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "$filter",
@@ -171,7 +165,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/availabilityStatus"
             }
@@ -193,6 +187,9 @@
     "/{resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses": {
       "get": {
         "operationId": "ChildAvailabilityStatuses_List",
+        "tags": [
+          "ChildAvailabilityStatuses"
+        ],
         "description": "Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status",
         "parameters": [
           {
@@ -201,7 +198,7 @@
           {
             "name": "resourceUri",
             "in": "path",
-            "description": "The resource URI",
+            "description": "undefined",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -254,21 +251,15 @@
         "description": "Gets current availability status for a single resource",
         "parameters": [
           {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "name": "resourceUri",
             "in": "path",
-            "description": "The resource URI",
+            "description": "undefined",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The API version to use for this operation",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "x-ms-client-name": "apiVersion"
           },
           {
             "name": "$filter",
@@ -287,7 +278,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/availabilityStatus"
             }
@@ -908,11 +899,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription ID",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$filter",
@@ -1318,18 +1305,10 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription ID",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of the resource group.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "$filter",
@@ -1529,6 +1508,10 @@
           "description": "Brief description of cause of the resource becoming unavailable."
         }
       }
+    },
+    "Azure.Core.armResourceType": {
+      "type": "string",
+      "description": "Represents an Azure Resource Type."
     },
     "ErrorResponse": {
       "type": "object",
@@ -2192,6 +2175,28 @@
         }
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "ARM proxy resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure Resource Manager Identity for the availabilityStatuses resource."
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "Microsoft.ResourceHealth/AvailabilityStatuses."
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure Resource Manager geo location of the resource."
+        }
+      }
+    },
     "Scenario": {
       "type": "string",
       "enum": [
@@ -2305,10 +2310,6 @@
       "type": "object",
       "description": "availabilityStatus of a resource.",
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Azure Resource Manager geo location of the resource."
-        },
         "properties": {
           "$ref": "#/definitions/AvailabilityStatusProperties",
           "description": "Properties of availability state."
@@ -2316,7 +2317,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },

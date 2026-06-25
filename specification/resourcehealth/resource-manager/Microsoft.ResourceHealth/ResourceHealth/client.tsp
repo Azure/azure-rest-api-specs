@@ -219,3 +219,15 @@ using Azure.Core;
 );
 // Do not surface the RP operations list as a public TenantResource.GetAll API.
 @@access(Operations.list, Access.internal, "csharp");
+
+// Keep the GA wire contract (AvailabilityStatus extends the local `ProxyResource`, so the
+// generated Swagger stays byte-identical), but rebase it onto the common-types ProxyResource for
+// C# only. This makes the .NET SDK emit `ResourceHealthAvailabilityStatus : ResourceData` (a
+// model) as in the released package, instead of a full Resource/Collection surface. C#-only; the
+// service definition / Swagger is unaffected.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AvailabilityStatus,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);

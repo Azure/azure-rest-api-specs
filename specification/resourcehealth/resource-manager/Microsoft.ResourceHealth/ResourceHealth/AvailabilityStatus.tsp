@@ -16,38 +16,12 @@ namespace Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model AvailabilityStatus extends Foundations.ProxyResource {
-  /**
-   * Azure Resource Manager geo location of the resource.
-   */
-  location?: string;
-
+model AvailabilityStatus extends ProxyResource {
   /**
    * Properties of availability state.
    */
   properties?: AvailabilityStatusProperties;
 }
-
-alias AvailabilityStatusesOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.ResourceHealth";
-  },
-  {
-    /** undefined */
-    @path
-    @segment("availabilityStatuses")
-    @key
-    current: "current";
-  }
->;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "The 'current' endpoints are non-resource operations"
 interface AvailabilityStatuses {
@@ -59,14 +33,11 @@ interface AvailabilityStatuses {
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/availabilityStatuses/current")
   getByResource(
-    /** The resource URI */
+    ...ApiVersionParameter,
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
     @path
     resourceUri: string,
-
-    /** The API version to use for this operation */
-    @query("api-version")
-    @minLength(1)
-    apiVersion: string,
 
     /**
      * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
@@ -79,7 +50,7 @@ interface AvailabilityStatuses {
      */
     @query("$expand")
     $expand?: string,
-  ): AvailabilityStatus | ErrorResponse;
+  ): ArmResponse<AvailabilityStatus> | ErrorResponse;
 
   /**
    * Lists the current availability status for all the resources in the subscription.
@@ -91,10 +62,7 @@ interface AvailabilityStatuses {
   @tag("AvailabilityStatuses")
   listBySubscriptionId(
     ...ApiVersionParameter,
-
-    /** The subscription ID */
-    @path
-    subscriptionId: string,
+    ...SubscriptionIdParameter,
 
     /**
      * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
@@ -120,7 +88,7 @@ interface AvailabilityStatuses {
   list(
     ...ApiVersionParameter,
 
-    /** The resource URI */
+    /** The fully qualified Azure Resource manager identifier of the resource. */
     @path
     resourceUri: string,
 
@@ -147,14 +115,8 @@ interface AvailabilityStatuses {
   @tag("AvailabilityStatuses")
   listByResourceGroup(
     ...ApiVersionParameter,
-
-    /** The subscription ID */
-    @path
-    subscriptionId: string,
-
-    /** The name of the resource group. */
-    @path
-    resourceGroupName: string,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
 
     /**
      * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
@@ -180,14 +142,11 @@ interface ChildAvailabilityStatuses {
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses/current")
   getByResource(
-    /** The resource URI */
+    ...ApiVersionParameter,
+
+    /** undefined */
     @path
     resourceUri: string,
-
-    /** The API version to use for this operation */
-    @query("api-version")
-    @minLength(1)
-    apiVersion: string,
 
     /**
      * The filter to apply on the operation. For more information please see https://docs.microsoft.com/en-us/rest/api/apimanagement/apis?redirectedfrom=MSDN
@@ -200,7 +159,7 @@ interface ChildAvailabilityStatuses {
      */
     @query("$expand")
     $expand?: string,
-  ): AvailabilityStatus | ErrorResponse;
+  ): ArmResponse<AvailabilityStatus> | ErrorResponse;
 
   /**
    * Lists the historical availability statuses for a single child resource. Use the nextLink property in the response to get the next page of availability status
@@ -209,10 +168,11 @@ interface ChildAvailabilityStatuses {
   @get
   @route("/{+resourceUri}/providers/Microsoft.ResourceHealth/childAvailabilityStatuses")
   @segment("childAvailabilityStatuses")
+  @tag("ChildAvailabilityStatuses")
   list(
     ...ApiVersionParameter,
 
-    /** The resource URI */
+    /** undefined */
     @path
     resourceUri: string,
 
