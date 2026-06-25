@@ -65,14 +65,22 @@ interface AzureDataTransfer {
     Request = Schema,
     Response = ValidateSchemaResult
   >;
+
+  /**
+   * Retrieves the pipeline metadata associated with a specified pipeline.
+   */
+  @added(Versions.v2026_02_06_preview)
+  @autoRoute
+  listPipelineMetadata is ArmProviderActionSync<
+    Request = ListPipelineMetadataRequest,
+    Response = ListPipelineMetadataResult
+  >;
 }
 
-@@clientName(
-  AzureDataTransfer.listApprovedSchemas::parameters.body,
+@@clientName(AzureDataTransfer.listApprovedSchemas::parameters.body,
   "pipeline"
 );
 @@clientName(AzureDataTransfer.validateSchema::parameters.body, "schema");
-@@doc(
-  AzureDataTransfer.listApprovedSchemas::parameters.body,
+@@doc(AzureDataTransfer.listApprovedSchemas::parameters.body,
   "The request payload for listing approved schemas."
 );

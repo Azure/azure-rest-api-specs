@@ -126,6 +126,12 @@ union ForceDisabledStatus {
    */
   @added(Versions.v2025_05_30_preview)
   PipelineForceDisabled: "PipelineForceDisabled",
+
+  /**
+   * Defines disablement of a Flow due to the FlowProfile being disabled.
+   */
+  @added(Versions.v2026_02_06_preview)
+  FlowProfileForceDisabled: "FlowProfileForceDisabled",
 }
 
 /**
@@ -281,6 +287,12 @@ union FlowProfileStatus {
    * Defines a FlowProfile that is enabled.
    */
   Enabled: "Enabled",
+
+  /**
+   * Defines a FlowProfile that is disabled.
+   */
+  @added(Versions.v2026_02_06_preview)
+  Disabled: "Disabled",
 }
 
 /**
@@ -548,6 +560,12 @@ union TargetType {
    * The action executing is targeting a flow type.
    */
   FlowType: "FlowType",
+
+  /**
+   * The action executing is targeting a flow profile.
+   */
+  @added(Versions.v2026_02_06_preview)
+  FlowProfile: "FlowProfile",
 }
 
 /**
@@ -933,6 +951,7 @@ model Subscriber {
 /**
  * The connections resource patch definition.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Supressing rule to match prior OpenAPI v2 JSON specification, consideration is given on adding the ResourcePlanProperty in future updates."
 model ConnectionsPatch {
   ...ManagedServiceIdentityProperty;
   ...ArmTagsProperty;
@@ -1083,8 +1102,17 @@ model FlowProperties {
   streamLatency?: int64;
 
   /**
+   * The passphrase used for SRT streams (non-secret)
+   */
+  @removed(Versions.v2026_02_06_preview)
+  @renamedFrom(Versions.v2026_02_06_preview, "passphrase")
+  deprecatedPassphrase?: string;
+
+  /**
    * The passphrase used for SRT streams
    */
+  @added(Versions.v2026_02_06_preview)
+  @secret
   passphrase?: string;
 
   /**
@@ -1320,8 +1348,42 @@ model Plan {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Supressing rule to match prior OpenAPI v2 JSON specification, consideration is given on adding the ResourcePlanProperty in future updates."
 model FlowsPatch {
+  /**
+   * Properties of flows patch body.
+   */
+  @added(Versions.v2026_02_06_preview)
+  properties?: FlowsPatchProperties;
+
   ...ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+}
+
+/**
+ * Properties of flows patch body.
+ */
+@added(Versions.v2026_02_06_preview)
+model FlowsPatchProperties {
+  /* FMV properties */
+  /**
+   * The protocol of the stream
+   */
+  streamProtocol?: StreamProtocol;
+
+  /**
+   * The passphrase used for SRT streams
+   */
+  @secret
+  passphrase?: string;
+
+  /**
+   * The flow stream identifier
+   */
+  streamId?: string;
+
+  /**
+   * The latency of the stream in milliseconds
+   */
+  streamLatency?: int64;
 }
 
 /**
@@ -1394,8 +1456,17 @@ model SetDestinationEndpoints {
  */
 model SetStreamPassphrase {
   /**
+   * The passphrase used for SRT streams (non-secret)
+   */
+  @removed(Versions.v2026_02_06_preview)
+  @renamedFrom(Versions.v2026_02_06_preview, "value")
+  deprecatedValue?: string;
+
+  /**
    * The passphrase used for SRT streams
    */
+  @added(Versions.v2026_02_06_preview)
+  @secret
   value?: string;
 }
 
@@ -1483,7 +1554,8 @@ model Action {
   /**
    * Targets for the action
    */
-  targets: string[];
+  @madeOptional(Versions.v2026_02_06_preview)
+  targets?: string[];
 
   /**
    * Business justification for the action
@@ -1627,4 +1699,73 @@ model PipelineConnectionProperties {
    */
   @visibility(Lifecycle.Read)
   internalMetadata?: InternalMetadataProperties;
+}
+
+/**
+ * Defines the required request body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2026_02_06_preview)
+model ListPipelineMetadataRequest {
+  /**
+   * The name of the pipeline for which to retrieve associated metadata.
+   */
+  pipeline: string;
+}
+
+/**
+ * Defines the response body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2026_02_06_preview)
+model ListPipelineMetadataResult {
+  /**
+   * Returns the settings associated with send direction of the pipeline.
+   */
+  send?: DirectionSettings;
+
+  /**
+   * Returns the settings associated with receive direction of the pipeline.
+   */
+  receive?: DirectionSettings;
+}
+
+/**
+ * Describes the available settings and supported features for a specific
+ * transfer direction (Send or Receive) within a pipeline.
+ */
+@added(Versions.v2026_02_06_preview)
+model DirectionSettings {
+  /**
+   * Indicates whether this direction completes the connection linking process.
+   */
+  completeLinking: EnablementStatus;
+
+  /**
+   * Indicates whether connections in this direction require approval.
+   */
+  connectionApprovals: EnablementStatus;
+
+  /**
+   * Indicates whether flow approvals are required for this direction.
+   */
+  flowApprovals?: EnablementStatus;
+
+  /**
+   * The flow types supported for this direction.
+   */
+  flowTypesAvailable?: FlowType[];
+
+  /**
+   * Indicates whether schema validation is required for data transfer in this direction.
+   */
+  messagingFlowTypeSchemaValidation?: EnablementStatus;
+
+  /**
+   * The data class types available for FlowProfile-based transfers in this direction.
+   */
+  flowProfileDataClassesAvailable?: DataClassType[];
+
+  /**
+   * The pricing options available for messaging flows in this direction.
+   */
+  messagingFlowsPricingOptions?: FlowBillingTier[];
 }
