@@ -152,6 +152,19 @@ using Compute;
   "java"
 );
 
+// C# naming fixes for Azure.ResourceManager.Compute 1.15.0 stable API review.
+@@clientName(ExternalHealthPolicy, "ComputeExternalHealthPolicy", "csharp");
+@@clientName(
+  StorageAlignmentStatus,
+  "ComputeStorageAlignmentStatus",
+  "csharp"
+);
+@@clientName(
+  StorageFaultDomainAlignmentType,
+  "ComputeStorageFaultDomainAlignmentType",
+  "csharp"
+);
+
 // Scale set IP configuration properties
 @@clientName(
   VirtualMachineScaleSetIPConfigurationProperties.publicIPAddressConfiguration,
