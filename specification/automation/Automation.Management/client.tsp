@@ -323,13 +323,12 @@ using TypeSpec.Rest;
 );
 @@clientName(
   AutomationAccounts.keysListByAutomationAccount,
-  "GetAutomationAccountKeys",
+  "GetAutomationAccountKeysInternal",
   "csharp"
 );
-@@pageItems(KeyListResult.keys);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore the previous C# SDK pageable shape for automation account keys."
-@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+@@access(
   AutomationAccounts.keysListByAutomationAccount,
+  Access.internal,
   "csharp"
 );
 @@clientName(
