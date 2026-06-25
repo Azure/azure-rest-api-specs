@@ -6,8 +6,8 @@ import type {
   AzsdkRunner,
   CommandResult,
   EnsureReleasePlanResult,
-  ReleasePlanData,
   ReleasePlanCommandContext,
+  ReleasePlanData,
 } from "./types.js";
 
 /**
