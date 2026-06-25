@@ -351,23 +351,25 @@ interface KnowledgeBases {
     @doc("The search request body.")
     @body
     body: SearchRequest,
-  ): {
-    @statusCode _: 202;
+  ):
+    | {
+        @statusCode _: 202;
 
-    @header("Operation-Location")
-    operationLocation: ResourceLocation<KnowledgeBase>;
+        @header("Operation-Location")
+        operationLocation: ResourceLocation<KnowledgeBase>;
 
-    @body body: {
-      @doc("The unique ID of the operation.")
-      id: string;
+        @body body: {
+          @doc("The unique ID of the operation.")
+          id: string;
 
-      @doc("The status of the operation.")
-      status: Azure.Core.Foundations.OperationState;
+          @doc("The status of the operation.")
+          status: Azure.Core.Foundations.OperationState;
 
-      @doc("Error object that describes the error when status is 'Failed'.")
-      error?: Azure.Core.Foundations.Error;
-    };
-  } | Azure.Core.Foundations.ErrorResponse;
+          @doc("Error object that describes the error when status is 'Failed'.")
+          error?: Azure.Core.Foundations.Error;
+        };
+      }
+    | Azure.Core.Foundations.ErrorResponse;
 
   @doc("Delete a KnowledgeBase.")
   @pollingOperation(KnowledgeBases.getOperationStatus)
