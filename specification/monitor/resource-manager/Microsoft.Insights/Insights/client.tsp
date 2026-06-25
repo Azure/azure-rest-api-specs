@@ -130,11 +130,7 @@ namespace Microsoft.InsightsCombinedClient;
   "GetEventCategories",
   "csharp"
 );
-@@clientName(
-  AlertRulesIncidentsApi.Incident,
-  "MonitorAlertRuleIncident",
-  "csharp"
-);
+@@clientName(AlertRulesIncidentsApi.Incident, "MonitorIncident", "csharp");
 @@clientName(
   MetricAlertApi.MetricAlertResources.list,
   "GetAllMetricAlertsStatus",
