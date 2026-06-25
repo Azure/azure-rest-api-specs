@@ -56,7 +56,9 @@ interface DataVersionBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -88,7 +90,9 @@ interface DataVersionWithNamePatternBaseOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataVersion"
     > {}
 
 @armResourceOperations
@@ -220,7 +224,9 @@ interface DataVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataVersion"
     > {}
 
 @armResourceOperations

@@ -51,7 +51,9 @@ interface EnvironmentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         environmentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryEnvironmentContainer"
     > {}
 
 @armResourceOperations
@@ -147,7 +149,9 @@ interface EnvironmentContainerOperationGroupOps
         @segment("environments")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningEnvironmentContainer"
     > {}
 
 @armResourceOperations
