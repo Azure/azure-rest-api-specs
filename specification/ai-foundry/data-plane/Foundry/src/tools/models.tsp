@@ -47,25 +47,23 @@ namespace Azure.AI.Projects {
 
   /**
    * Deprecated name and description fields retained for SDK backward compatibility.
-   * These fields now live on ToolboxTool and should not be used on tool definitions.
    */
   alias DeprecatedToolNameAndDescriptionExtension = {
     /**
      * Optional user-defined name for this tool or configuration.
      */
-    #deprecated "Use name on ToolboxTool instead."
+    #deprecated "This property is deprecated and will be removed in a future version."
     name?: string;
 
     /**
      * Optional user-defined description for this tool or configuration.
      */
-    #deprecated "Use description on ToolboxTool instead."
+    #deprecated "This property is deprecated and will be removed in a future version."
     description?: string;
   };
 
   /**
    * Deprecated tool_configs field retained for SDK backward compatibility.
-   * This field now lives on ToolboxTool and should not be used on tool definitions.
    */
   alias DeprecatedToolConfigExtension = {
     /**
@@ -73,7 +71,7 @@ namespace Azure.AI.Projects {
      * Resolution order: exact tool name match takes priority over `*`.
      * Unknown tool names are silently ignored at runtime.
      */
-    #deprecated "Use tool_configs on ToolboxTool instead."
+    #deprecated "This property is deprecated and will be removed in a future version."
     tool_configs?: Record<ToolConfig>;
   };
 
