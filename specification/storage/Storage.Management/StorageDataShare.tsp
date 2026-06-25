@@ -43,7 +43,7 @@ interface DataShares {
   /**
    * Update a Storage DataShare.
    */
-  update is ArmResourcePatchAsync<DataShare, StorageDataShareProperties>;
+  update is ArmCustomPatchAsync<DataShare, PatchModel = DataShareUpdate>;
 
   /**
    * Delete a Storage DataShare.

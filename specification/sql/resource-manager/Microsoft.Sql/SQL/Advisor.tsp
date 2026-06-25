@@ -63,10 +63,13 @@ alias AdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("advisors")
     @key
     advisorName: string;
-  }
+  },
+  ResourceName = "SqlDatabaseAdvisor"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.DatabaseAdvisors)
 interface Advisors {
   /**
    * Gets a database advisor.
@@ -116,10 +119,13 @@ alias ServerAdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("advisors")
     @key
     advisorName: string;
-  }
+  },
+  ResourceName = "SqlServerAdvisor"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.ServerAdvisors)
 interface ServerAdvisors {
   /**
    * Gets a server advisor.

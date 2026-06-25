@@ -42,3 +42,29 @@ using Azure.ClientGenerator.Core;
 
 @@access(TextTranslation.transliterate, Access.internal, "java");
 @@access(TextTranslation.TransliteratedText, Access.public, "java");
+
+@@clientName(
+  TextTranslation.TranslationText.sourceCharacters,
+  "sourceCharacterCount",
+  "java"
+);
+@@clientName(
+  TextTranslation.TranslationText.instructionTokens,
+  "instructionTokenCount",
+  "java"
+);
+@@clientName(
+  TextTranslation.TranslationText.sourceTokens,
+  "sourceTokenCount",
+  "java"
+);
+@@clientName(
+  TextTranslation.TranslationText.responseTokens,
+  "responseTokenCount",
+  "java"
+);
+@@clientName(
+  TextTranslation.TranslationText.targetTokens,
+  "targetTokenCount",
+  "java"
+);

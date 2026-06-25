@@ -20,6 +20,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model EndpointDeploymentResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<
@@ -40,6 +41,7 @@ model EndpointDeploymentResourcePropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -70,7 +72,9 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningWorkspaceConnectionDeployment"
     > {}
 
 /**
@@ -79,6 +83,7 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentResourcePropertiesBasicResources {
   /**
@@ -130,6 +135,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeploymentOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -160,7 +166,9 @@ interface EndpointDeploymentOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "EndpointDeployment"
     > {}
 
 /**
@@ -169,6 +177,7 @@ interface EndpointDeploymentOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
 @armResourceOperations
 interface EndpointDeployment {
   /**
