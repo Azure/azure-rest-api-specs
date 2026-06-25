@@ -14,25 +14,7 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-v1
-```
-
-### Tag: package-v1
-
-These settings apply only when `--tag=package-v1` is specified on the command line.
-
-```yaml $(tag) == 'package-v1'
-input-file:
-  - stable/v1/VoiceLive.json
-```
-
-### Tag: package-virtual-public-preview
-
-These settings apply only when `--tag=package-virtual-public-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-virtual-public-preview'
-input-file:
-  - preview/virtual-public-preview/VoiceLive.json
+tag: package-2026-06-01-preview
 ```
 
 ### Tag: package-2026-06-01-preview
@@ -79,7 +61,3 @@ directive:
     from: VoiceLive.json
     reason: OpenAI and Azure require two different discriminators.
 ```
-
-## Contributing
-
-VoiceLive uses the **label-based (`v1`) versioning** pattern. For authoring rules — how to add GA and preview features, promote preview to GA, handle breaking changes, and compile/send a PR — see [CONTRIBUTING.md](CONTRIBUTING.md). For the full design and rationale, see [docs/versioning.md](docs/versioning.md).

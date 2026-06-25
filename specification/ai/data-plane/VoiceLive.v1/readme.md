@@ -1,0 +1,49 @@
+# VoiceLive
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for VoiceLive.
+
+## Configuration
+
+### Basic Information
+
+This is a TypeSpec project so we only want to readme to default the default tag and point to the outputted swagger file.
+This is used for some tools such as doc generation and swagger apiview generation it isn't used for SDK code gen as we
+use the native TypeSpec code generation configured in the tspconfig.yaml file.
+
+```yaml
+openapi-type: data-plane
+tag: package-v1
+```
+
+### Tag: package-v1
+
+These settings apply only when `--tag=package-v1` is specified on the command line.
+
+```yaml $(tag) == 'package-v1'
+input-file:
+  - stable/v1/VoiceLive.json
+```
+
+### Tag: package-virtual-public-preview
+
+These settings apply only when `--tag=package-virtual-public-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-virtual-public-preview'
+input-file:
+  - preview/virtual-public-preview/VoiceLive.json
+```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: OAV133
+    from: VoiceLive.json
+    reason: OpenAI and Azure require two different discriminators.
+```
+
+## Contributing
+
+VoiceLive uses the **label-based (`v1`) versioning** pattern. For authoring rules — how to add GA and preview features, promote preview to GA, handle breaking changes, and compile/send a PR — see [CONTRIBUTING.md](CONTRIBUTING.md). For the full design and rationale, see [docs/versioning.md](docs/versioning.md).

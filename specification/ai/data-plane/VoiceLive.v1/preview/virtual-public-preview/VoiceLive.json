@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "VoiceLive",
-    "version": "v1",
+    "version": "virtual-public-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -267,7 +267,18 @@
       "properties": {
         "model": {
           "type": "string",
-          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'mai-transcribe-1', 'azure-speech'."
+          "description": "The transcription model to use. Supported values:\n'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',\n'mai-transcribe-1', 'azure-speech'.",
+          "enum": [
+            "whisper-1",
+            "gpt-4o-transcribe",
+            "gpt-4o-mini-transcribe",
+            "gpt-4o-transcribe-diarize",
+            "mai-transcribe-1",
+            "azure-speech"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "language": {
           "type": "string",
@@ -1554,7 +1565,15 @@
       "description": "Top-level union for end-of-utterance (EOU) semantic detection configuration.",
       "properties": {
         "model": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "semantic_detection_v1",
+            "semantic_detection_v1_en",
+            "semantic_detection_v1_multilingual"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         }
       },
       "discriminator": "model",

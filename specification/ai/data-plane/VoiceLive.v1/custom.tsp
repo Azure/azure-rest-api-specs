@@ -70,10 +70,6 @@ model RequestSession {
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
 
-  /** Whether the model is allowed to call tools in parallel. */
-  @added(Versions.v2026_06_01_preview)
-  parallel_tool_calls?: boolean = true;
-
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
 
@@ -86,15 +82,12 @@ model RequestSession {
    * Constrains effort on reasoning for reasoning models. Check model documentation for supported values for each model.
    * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
    */
-  @added(Versions.v2026_01_01_preview)
   reasoning_effort?: ReasoningEffort;
 
   /** Configuration for interim response generation during latency or tool calls. */
-  @added(Versions.v2026_01_01_preview)
   interim_response?: InterimResponseConfig;
 
   /** List of include options for the session (e.g., logprobs, phrases, file search results). */
-  @added(Versions.v2026_04_10)
   include?: SessionIncludeOption[];
 
   /**
@@ -104,7 +97,6 @@ model RequestSession {
    * Foundry resource logs for tracing and diagnostics. Keys can be a maximum of 64 characters
    * long and values can be a maximum of 512 characters long.
    */
-  @added(Versions.v2026_04_10)
   metadata?: Record<string>;
 }
 
@@ -113,7 +105,6 @@ model RequestSession {
  * Reducing reasoning effort can result in faster responses and fewer tokens used on reasoning in a response.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_01_01_preview)
 union ReasoningEffort {
   string,
 
@@ -177,11 +168,9 @@ union OAIVoice {
   verse: "verse",
 
   /** Marin voice. */
-  @added(Versions.v2026_01_01_preview)
   marin: "marin",
 
   /** Cedar voice. */
-  @added(Versions.v2026_01_01_preview)
   cedar: "cedar",
 }
 
@@ -225,7 +214,6 @@ union AzureVoiceType {
   azure_personal: "azure-personal",
 
   /** Azure avatar voice sync. */
-  @added(Versions.v2026_04_10)
   avatar_voice_sync: "avatar-voice-sync",
 }
 /** Azure custom voice configuration. */
@@ -458,17 +446,14 @@ union PersonalVoiceModels {
   "PhoenixV2Neural",
 
   /** Use the latest Dragon HD Omni model. */
-  @added(Versions.v2026_04_10)
   "DragonHDOmniLatestNeural",
 
   /** Use the MAI-Voice-1 model. */
-  @added(Versions.v2026_04_10)
   `MAI-Voice-1`: "MAI-Voice-1",
 }
 
 /** Azure avatar voice sync configuration. Uses personal voice synthesis with avatar character. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_04_10)
 @usage(DualUsage)
 model AzureAvatarVoiceSyncVoice extends AzureVoice {
   type: AzureVoiceType.avatar_voice_sync;
@@ -536,68 +521,6 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
   volume?: string;
 }
 
-/**
- * Currently known voice names for the Azure realtime native voice type.
- * This is an extensible enum; additional voice names may be accepted by the
- * service in the future.
- */
-@added(Versions.v2026_06_01_preview)
-union AzureRealtimeNativeVoiceName {
-  string,
-
-  /** Aarti voice. */
-  aarti: "aarti",
-
-  /** Andrew voice. */
-  andrew: "andrew",
-
-  /** Ava voice. */
-  ava: "ava",
-
-  /** Denise voice. */
-  denise: "denise",
-
-  /** Diya voice. */
-  diya: "diya",
-
-  /** Elsa voice. */
-  elsa: "elsa",
-
-  /** Florian voice. */
-  florian: "florian",
-
-  /** Francisca voice. */
-  francisca: "francisca",
-
-  /** Meera voice. */
-  meera: "meera",
-
-  /** Xiaoxiao voice. */
-  xiaoxiao: "xiaoxiao",
-
-  /** Yunxi voice. */
-  yunxi: "yunxi",
-
-  /** Ximena voice. */
-  ximena: "ximena",
-}
-
-/**
- * Azure realtime native voice configuration. These voices are natively
- * supported by the `azure-realtime` model and offer higher quality speech
- * synthesis than standard Azure voices. Only valid when using the
- * `azure-realtime` model.
- */
-@added(Versions.v2026_06_01_preview)
-@usage(DualUsage)
-model AzureRealtimeNativeVoice {
-  /** The type of the voice. */
-  type: "azure-realtime-native";
-
-  /** The name of the Azure realtime native voice. */
-  name: AzureRealtimeNativeVoiceName;
-}
-
 // --- Top-level Voice union -------------------------------------------------
 
 /** Union of all supported voice configurations. */
@@ -606,9 +529,6 @@ union Voice {
   OAIVoice,
   OpenAIVoice,
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
-
-  @added(Versions.v2026_06_01_preview)
-  AzureRealtimeNativeVoice,
 }
 
 /** Input audio format types supported. */
@@ -634,11 +554,9 @@ union OutputAudioFormat {
   pcm16: "pcm16",
 
   /** 16-bit PCM audio format at 8kHz sampling rate */
-  @added(Versions.v2026_01_01_preview)
   pcm16_8000hz: "pcm16_8000hz",
 
   /** 16-bit PCM audio format at 16kHz sampling rate */
-  @added(Versions.v2026_01_01_preview)
   pcm16_16000hz: "pcm16_16000hz",
 
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
@@ -667,15 +585,6 @@ model AudioInputTranscriptionOptions {
    * 'mai-transcribe-1', 'azure-speech'.
    */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
-  @typeChangedFrom(
-    Versions.v2026_04_10,
-
-      | string
-      | "whisper-1"
-      | "gpt-4o-transcribe"
-      | "gpt-4o-mini-transcribe"
-      | "azure-speech"
-  )
   `model`:
     | string
     | "whisper-1"
@@ -717,19 +626,11 @@ union Modality {
 @usage(RequestUsage)
 model EouDetection {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Keeping inline union to avoid breaking changes."
-  @typeChangedFrom(
-    Versions.v2026_06_01_preview,
-
-      | "semantic_detection_v1"
-      | "semantic_detection_v1_en"
-      | "semantic_detection_v1_multilingual"
-      | string
-  )
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Extensible string discriminator with known GA values."
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
     | "semantic_detection_v1_multilingual"
-    | "smart_end_of_turn_detection"
     | string;
 }
 
@@ -787,25 +688,6 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
   threshold_level?: EouThresholdLevel;
 
   /** Timeout in milliseconds. Recommended instead of `timeout`. */
-  @minValue(0)
-  timeout_ms?: int32;
-}
-
-/**
- * Audio-based end-of-turn detection. Operates directly on the input audio
- * stream rather than text. Use `threshold_level` and `timeout_ms` to tune
- * detection.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_06_01_preview)
-@usage(RequestUsage)
-model SmartEndOfTurnDetection extends EouDetection {
-  `model`: "smart_end_of_turn_detection";
-
-  /** Threshold level setting. One of `low`, `medium`, `high`, or `default`. */
-  threshold_level?: EouThresholdLevel;
-
-  /** Timeout in milliseconds. */
   @minValue(0)
   timeout_ms?: int32;
 }
@@ -983,38 +865,6 @@ model AudioNoiseReduction {
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
-
-  /**
-   * The source of the echo cancellation reference signal.
-   * - `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).
-   * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
-   */
-  @added(Versions.v2026_06_01_preview)
-  reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
-
-  /**
-   * Number of input audio channels.
-   * - `1`: Mono input (default).
-   * - `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.
-   * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
-   */
-  @added(Versions.v2026_06_01_preview)
-  @minValue(1)
-  @maxValue(2)
-  channels?: int32 = 1;
-}
-
-/** The source of the echo cancellation reference signal. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
-@added(Versions.v2026_06_01_preview)
-union EchoCancellationReferenceSource {
-  string,
-
-  /** EC uses the internal TTS loopback as the reference signal. */
-  server: "server",
-
-  /** EC uses the client-supplied reference channel from the stereo input stream. */
-  client: "client",
 }
 
 /** Output timestamp types supported in audio response content. */
@@ -1050,7 +900,6 @@ model Animation {
 
 /** Configuration for avatar's zoom level, position, rotation and movement amplitude in the video frame. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model Scene {
   /** Zoom level of the avatar. Range is (0, +∞). Values less than 1 zoom out, values greater than 1 zoom in. */
@@ -1080,7 +929,6 @@ model Scene {
 @usage(RequestUsage)
 model AvatarConfig {
   /** Type of avatar to use. */
-  @added(Versions.v2026_01_01_preview)
   type?: AvatarConfigTypes;
 
   /** Optional list of ICE servers to use for WebRTC connection establishment. */
@@ -1093,7 +941,6 @@ model AvatarConfig {
   style?: string;
 
   /** Base model to use for the avatar. Required for photo avatar. */
-  @added(Versions.v2026_01_01_preview)
   `model`?: PhotoAvatarBaseModes;
 
   /** Indicates whether the avatar is customized or not. */
@@ -1103,20 +950,16 @@ model AvatarConfig {
   video?: VideoParams;
 
   /** Configuration for the avatar's zoom level, position, rotation and movement amplitude in the video frame. */
-  @added(Versions.v2026_01_01_preview)
   scene?: Scene;
 
   /** Output protocol for avatar streaming. Default is 'webrtc'. */
-  @added(Versions.v2026_01_01_preview)
   output_protocol?: AvatarOutputProtocol = AvatarOutputProtocol.webrtc;
 
   /** When enabled, forwards audit audio via WebSocket for review/debugging purposes, even when avatar output is delivered via WebRTC. */
-  @added(Versions.v2026_01_01_preview)
   output_audit_audio?: boolean = false;
 }
 
 /** Avatar config types */
-@added(Versions.v2026_01_01_preview)
 union AvatarConfigTypes {
   string,
 
@@ -1128,7 +971,6 @@ union AvatarConfigTypes {
 }
 
 /** Photo avatar base modes */
-@added(Versions.v2026_01_01_preview)
 union PhotoAvatarBaseModes {
   string,
 
@@ -1137,7 +979,6 @@ union PhotoAvatarBaseModes {
 }
 
 /** Avatar config output protocols */
-@added(Versions.v2026_01_01_preview)
 union AvatarOutputProtocol {
   string,
 
@@ -1184,7 +1025,6 @@ model AgentConfig {
 // --- Interim Response Configuration ----------------------------------------
 
 /** Triggers that can activate interim response generation. */
-@added(Versions.v2026_01_01_preview)
 union InterimResponseTrigger {
   string,
 
@@ -1197,7 +1037,6 @@ union InterimResponseTrigger {
 
 /** Union of interim response configuration types. */
 #suppress "@azure-tools/typespec-autorest/union-unsupported" // Discriminated union for interim response config types.
-@added(Versions.v2026_01_01_preview)
 union InterimResponseConfig {
   StaticInterimResponseConfig,
   LlmInterimResponseConfig,
@@ -1205,7 +1044,6 @@ union InterimResponseConfig {
 
 /** Base model for interim response configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_01_01_preview)
 @discriminator("type")
 @usage(RequestUsage)
 model InterimResponseConfigBase {
@@ -1224,7 +1062,6 @@ model InterimResponseConfigBase {
 }
 
 /** Interim response configuration types. */
-@added(Versions.v2026_01_01_preview)
 union InterimResponseConfigType {
   string,
 
@@ -1240,7 +1077,6 @@ union InterimResponseConfigType {
  * Randomly selects from configured texts when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model StaticInterimResponseConfig extends InterimResponseConfigBase {
   type: InterimResponseConfigType.static_interim_response;
@@ -1254,7 +1090,6 @@ model StaticInterimResponseConfig extends InterimResponseConfigBase {
  * Uses LLM to generate context-aware interim responses when any trigger condition is met.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@added(Versions.v2026_01_01_preview)
 @usage(RequestUsage)
 model LlmInterimResponseConfig extends InterimResponseConfigBase {
   type: InterimResponseConfigType.llm_interim_response;
@@ -1336,7 +1171,6 @@ model Background {
 // -----------------------------------------------------------------------
 
 /** Options for what additional data to include in session responses. */
-@added(Versions.v2026_04_10)
 union SessionIncludeOption {
   string,
 
