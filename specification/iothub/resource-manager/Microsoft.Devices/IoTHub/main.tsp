@@ -19,6 +19,7 @@ import "./CertificateDescription.tsp";
 import "./GroupIdInformation.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -62,7 +62,8 @@ alias BillingSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("billingSubscriptions")
     @key
     billingSubscriptionName: string;
-  }
+  },
+  "BillingProfileSubscription"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -119,7 +120,8 @@ alias BillingSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extens
     @segment("billingSubscriptions")
     @key
     billingSubscriptionName: string;
-  }
+  },
+  "BillingSubscription"
 >;
 
 @armResourceOperations(#{ omitTags: true })

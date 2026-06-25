@@ -3,6 +3,12 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.NetworkFunction;
+using Azure.ResourceManager;
+using Azure.Core;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 @@clientName(
   Microsoft.NetworkFunction,
@@ -54,7 +60,11 @@ using Microsoft.NetworkFunction;
 @@alternateType(AzureTrafficCollector.etag, Azure.Core.eTag, "csharp");
 @@alternateType(CollectorPolicy.etag, Azure.Core.eTag, "csharp");
 
-@@clientLocation(Operations.list, "NetworkFunctionOperations", "csharp");
+@@clientLocation(
+  Microsoft.NetworkFunction.Operations.list,
+  "NetworkFunctionOperations",
+  "csharp"
+);
 
 // We add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
@@ -63,4 +73,129 @@ namespace Azure.ResourceManager.Models {
     /** The resource id. */
     id?: Azure.Core.armResourceIdentifier;
   }
+}
+namespace Microsoft.NetworkFunction {
+  @@scope(AzureTrafficCollectors.createOrUpdate, "!javascript");
+  @@scope(CollectorPolicies.createOrUpdate, "!javascript");
+
+  @armResourceOperations
+  interface AzureTrafficCollectorsScope {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "client customization"
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    createOrUpdate(
+      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<AzureTrafficCollector>,
+      ...Azure.ResourceManager.ProviderNamespace<AzureTrafficCollector>,
+
+      /**
+       * azureTrafficCollectorName.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      @segment("azureTrafficCollectors")
+      azureTrafficCollectorName: string,
+
+      /**
+       * Resource location.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      location: string,
+
+      /**
+       * Resource tags.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+
+      /**
+       * A unique read-only string that changes whenever the resource is updated.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @visibility(Lifecycle.Read)
+      etag?: string,
+
+      /**
+       * The virtualHub to which the Azure Traffic Collector belongs.
+       */
+      virtualHub?: ResourceReference,
+    ):
+      | ArmResourceUpdatedResponse<AzureTrafficCollector>
+      | ArmResourceCreatedResponse<
+          AzureTrafficCollector,
+          ArmAsyncOperationHeader<FinalResult = AzureTrafficCollector> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | CloudError;
+  }
+  @armResourceOperations
+  interface CollectorPoliciesScope {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+    createOrUpdate(
+      ...Azure.ResourceManager.Foundations.DefaultBaseParameters<CollectorPolicy>,
+      ...Azure.ResourceManager.ProviderNamespace<CollectorPolicy>,
+
+      /**
+       * azureTrafficCollectorName.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @path
+      @segment("azureTrafficCollectors")
+      azureTrafficCollectorName: string,
+
+      @path
+      @segment("collectorPolicies")
+      collectorPolicyName: string,
+
+      /**
+       * Resource location.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      location: string,
+
+      /**
+       * Resource tags.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      tags?: Record<string>,
+
+      /**
+       * A unique read-only string that changes whenever the resource is updated.
+       */
+      #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @visibility(Lifecycle.Read)
+      etag?: string,
+
+      /**
+       * Ingestion policies.
+       */
+      ingestionPolicy?: IngestionPolicyPropertiesFormat,
+
+      /**
+       * Emission policies.
+       */
+      @identifiers(#[])
+      emissionPolicies?: EmissionPoliciesPropertiesFormat[],
+    ):
+      | ArmResourceUpdatedResponse<CollectorPolicy>
+      | ArmResourceCreatedResponse<
+          CollectorPolicy,
+          ArmAsyncOperationHeader<FinalResult = CollectorPolicy> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | CloudError;
+  }
+
+  @@scope(AzureTrafficCollectorsScope.createOrUpdate, "javascript");
+  @@scope(CollectorPoliciesScope.createOrUpdate, "javascript");
+  @@clientLocation(
+    AzureTrafficCollectorsScope.createOrUpdate,
+    "AzureTrafficCollectors",
+    "javascript"
+  );
+  @@clientLocation(
+    CollectorPoliciesScope.createOrUpdate,
+    "CollectorPolicies",
+    "javascript"
+  );
 }
