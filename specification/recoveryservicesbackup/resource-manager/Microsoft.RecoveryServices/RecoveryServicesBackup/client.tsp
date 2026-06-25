@@ -11,7 +11,7 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(
   BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
-  "RecoveryServicesClient",
+  "Client",
   "go"
 );
 @@clientLocation(
