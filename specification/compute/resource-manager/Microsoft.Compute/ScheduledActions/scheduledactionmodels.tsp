@@ -82,11 +82,24 @@ model ScheduledActionResource {
 @@identifiers(ResourceListResponse.value, #[]);
 model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 
+@doc("Represents the writable fields of a scheduled action resource used in attach and patch requests.")
+model ScheduledActionResourceInput {
+  @doc("""
+    The ARM Id of the resource.
+    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+    """)
+  resourceId: ValidScheduledActionResourceId;
+
+  @doc("The desired notification settings for the specified resource.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings?: Array<NotificationProperties>;
+}
+
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
   @Azure.ResourceManager.identifiers(#["resourceId"])
-  resources: Array<ScheduledActionResource>;
+  resources: Array<ScheduledActionResourceInput>;
 }
 
 @doc("Request model to detach a list of scheduled action resources.")
@@ -99,7 +112,7 @@ model ResourceDetachRequest {
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
   @Azure.ResourceManager.identifiers(#["resourceId"])
-  resources: Array<ScheduledActionResource>;
+  resources: Array<ScheduledActionResourceInput>;
 }
 
 @doc("The request to cancel an occurrence.")
@@ -136,7 +149,7 @@ model ScheduledActionProperties {
   resourceType: ResourceType;
 
   @doc("The action the scheduled action should perform in the resources")
-  actionType: ActionType;
+  actionType: ScheduledActionType;
 
   #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
   @doc("The time which the scheduled action is supposed to start running")

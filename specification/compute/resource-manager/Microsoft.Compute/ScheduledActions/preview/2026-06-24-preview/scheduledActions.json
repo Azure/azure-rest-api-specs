@@ -1454,36 +1454,6 @@
     }
   },
   "definitions": {
-    "ActionType": {
-      "type": "string",
-      "description": "Specify which action user wants to be performed on the resources",
-      "enum": [
-        "Start",
-        "Deallocate",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "ActionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Start",
-            "value": "Start",
-            "description": "Perform a start action on the specified resources"
-          },
-          {
-            "name": "Deallocate",
-            "value": "Deallocate",
-            "description": "Perform a deallocate action on the specified resources"
-          },
-          {
-            "name": "Hibernate",
-            "value": "Hibernate",
-            "description": "Perform hibernate and deallocate on the specified resources"
-          }
-        ]
-      }
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -2184,7 +2154,7 @@
           "type": "array",
           "description": "List of resources to be attached/patched",
           "items": {
-            "$ref": "#/definitions/ScheduledActionResource"
+            "$ref": "#/definitions/ScheduledActionResourceInput"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -2291,7 +2261,7 @@
           "type": "array",
           "description": "The list of resources we watch to patch",
           "items": {
-            "$ref": "#/definitions/ScheduledActionResource"
+            "$ref": "#/definitions/ScheduledActionResourceInput"
           },
           "x-ms-identifiers": [
             "resourceId"
@@ -2432,7 +2402,7 @@
           "description": "The type of resource the scheduled action is targeting"
         },
         "actionType": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/ScheduledActionType",
           "description": "The action the scheduled action should perform in the resources"
         },
         "startTime": {
@@ -2519,6 +2489,29 @@
         "resourceId"
       ]
     },
+    "ScheduledActionResourceInput": {
+      "type": "object",
+      "description": "Represents the writable fields of a scheduled action resource used in attach and patch requests.",
+      "properties": {
+        "resourceId": {
+          "$ref": "#/definitions/ValidScheduledActionResourceId",
+          "description": "The ARM Id of the resource.\n\"subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}\""
+        },
+        "notificationSettings": {
+          "type": "array",
+          "description": "The desired notification settings for the specified resource.",
+          "items": {
+            "$ref": "#/definitions/NotificationProperties"
+          },
+          "x-ms-identifiers": [
+            "destination"
+          ]
+        }
+      },
+      "required": [
+        "resourceId"
+      ]
+    },
     "ScheduledActionResources": {
       "type": "object",
       "description": "The scheduled action extension",
@@ -2555,6 +2548,36 @@
         "value"
       ]
     },
+    "ScheduledActionType": {
+      "type": "string",
+      "description": "Specify which action user wants to be performed on the resources",
+      "enum": [
+        "Start",
+        "Deallocate",
+        "Hibernate"
+      ],
+      "x-ms-enum": {
+        "name": "ScheduledActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Start",
+            "value": "Start",
+            "description": "Perform a start action on the specified resources"
+          },
+          {
+            "name": "Deallocate",
+            "value": "Deallocate",
+            "description": "Perform a deallocate action on the specified resources"
+          },
+          {
+            "name": "Hibernate",
+            "value": "Hibernate",
+            "description": "Perform hibernate and deallocate on the specified resources"
+          }
+        ]
+      }
+    },
     "ScheduledActionUpdate": {
       "type": "object",
       "description": "The type used for update operations of the ScheduledAction.",
@@ -2581,7 +2604,7 @@
           "description": "The type of resource the scheduled action is targeting"
         },
         "actionType": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/ScheduledActionType",
           "description": "The action the scheduled action should perform in the resources"
         },
         "startTime": {
@@ -2624,7 +2647,7 @@
           "description": "The type of resource the scheduled action is targeting"
         },
         "actionType": {
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/ScheduledActionType",
           "description": "The action the scheduled action should perform in the resources"
         },
         "startTime": {
