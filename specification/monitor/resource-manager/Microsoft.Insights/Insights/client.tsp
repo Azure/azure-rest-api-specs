@@ -329,6 +329,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@alternateType(
+  ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettingsResource.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
   ServiceDiagnosticsSettingsApi.ServiceDiagnosticSettings.storageAccountId,
   Azure.Core.armResourceIdentifier,
   "csharp"
@@ -382,6 +387,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@alternateType(
   PrivateLinkScopesApi.ScopedResourceProperties.linkedResourceId,
   Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PrivateLinkScopesApi.ScopedResourceProperties.subscriptionLocation,
+  Azure.Core.azureLocation,
   "csharp"
 );
 @@clientName(
@@ -723,6 +733,22 @@ namespace Microsoft.InsightsCombinedClient;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@alternateType(
+  DataCollectionApi.Metadata.provisionedByResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.StorageBlob.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DataCollectionApi.AdxDestination.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(DataCollectionApi.AdxDestination.ingestionUri, url, "csharp");
 @@clientName(
   DataCollectionApi.DataCollectionRuleAssociationProxyOnlyResource.etag,
   "ETag",
@@ -1063,6 +1089,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   Azure.ResourceManager.CommonTypes.Severity,
   "MonitorNetworkSecurityPerimeterConfigurationIssueSeverity",
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
+  Azure.Core.azureLocation,
   "csharp"
 );
 
