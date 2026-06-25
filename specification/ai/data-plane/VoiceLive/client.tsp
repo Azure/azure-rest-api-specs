@@ -112,6 +112,21 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "python");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "python");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "python");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "python");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "python"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "python"
+);
+
 @@access(VoiceLive.ToolChoice, Access.public, "python");
 
 @@clientName(VoiceLive.Scene, "SceneParams", "csharp");
@@ -169,6 +184,20 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventResponseCreate, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionAvatarConnect, Access.internal, "csharp");
 @@access(VoiceLive.ClientEventSessionUpdate, Access.internal, "csharp");
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.internal, "csharp");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "csharp");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "csharp");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "csharp");
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStarted,
+  Access.public,
+  "csharp"
+);
+@@access(
+  VoiceLive.ServerEventOutputAudioBufferStopped,
+  Access.public,
+  "csharp"
+);
 @@access(VoiceLive.VideoCrop.bottom_right, Access.internal, "csharp");
 @@access(VoiceLive.VideoCrop.top_left, Access.internal, "csharp");
 @@access(VoiceLive.Response.voice, Access.internal, "csharp");
@@ -691,6 +720,13 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDelta, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "java");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "java");
+
+@@access(VoiceLive.ClientEventRtcCallSdpCreate, Access.public, "java");
+@@access(VoiceLive.ServerEventRtcCallSdpCreated, Access.public, "java");
+@@access(VoiceLive.ServerEventRtcCallError, Access.public, "java");
+@@access(VoiceLive.RtcCallErrorDetails, Access.public, "java");
+@@access(VoiceLive.ServerEventOutputAudioBufferStarted, Access.public, "java");
+@@access(VoiceLive.ServerEventOutputAudioBufferStopped, Access.public, "java");
 
 @@access(VoiceLive.ToolChoice, Access.public, "java");
 @@access(VoiceLive.Voice, Access.public, "java");
