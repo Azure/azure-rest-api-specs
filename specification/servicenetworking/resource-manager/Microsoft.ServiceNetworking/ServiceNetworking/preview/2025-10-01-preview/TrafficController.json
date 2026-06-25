@@ -52,13 +52,13 @@
       "name": "TrafficControllerInterface"
     },
     {
-      "name": "Operations"
-    },
-    {
       "name": "PrivateEndpointConnectionsInterface"
     },
     {
       "name": "PrivateLinkResourcesInterface"
+    },
+    {
+      "name": "Operations"
     }
   ],
   "paths": {
@@ -1045,6 +1045,352 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnectionsInterface_ListByTrafficController",
+        "tags": [
+          "PrivateEndpointConnectionsInterface"
+        ],
+        "description": "List PrivateEndpointConnection resources by TrafficController",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private Endpoint Connections": {
+            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnectionsInterface_Get",
+        "tags": [
+          "PrivateEndpointConnectionsInterface"
+        ],
+        "description": "Get a PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private Endpoint Connection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnectionsInterface_Update",
+        "tags": [
+          "PrivateEndpointConnectionsInterface"
+        ],
+        "description": "Create a PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private Endpoint Connection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionPut.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnectionsInterface_Delete",
+        "tags": [
+          "PrivateEndpointConnectionsInterface"
+        ],
+        "description": "Delete a PrivateEndpointConnection",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "Private Endpoint Connection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Private Endpoint Connection": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResourcesInterface_ListByTrafficController",
+        "tags": [
+          "PrivateLinkResourcesInterface"
+        ],
+        "description": "List PrivateLinkResource resources by TrafficController",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private Link Resources": {
+            "$ref": "./examples/PrivateLinkResourcesGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResourcesInterface_Get",
+        "tags": [
+          "PrivateLinkResourcesInterface"
+        ],
+        "description": "Get a PrivateLinkResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "trafficControllerName",
+            "in": "path",
+            "description": "traffic controller name for path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "Private Link Resource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Private Link Resource": {
+            "$ref": "./examples/PrivateLinkResourceGet.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/securityPolicies": {
       "get": {
         "operationId": "SecurityPoliciesInterface_ListByTrafficController",
@@ -1364,346 +1710,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateEndpointConnections": {
-      "get": {
-        "operationId": "PrivateEndpointConnectionsInterface_ListByTrafficController",
-        "tags": [
-          "PrivateEndpointConnectionsInterface"
-        ],
-        "description": "List PrivateEndpointConnection resources by TrafficController",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Private Endpoint Connections": {
-            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "operationId": "PrivateEndpointConnectionsInterface_Get",
-        "tags": [
-          "PrivateEndpointConnectionsInterface"
-        ],
-        "description": "Get a PrivateEndpointConnection",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private Endpoint Connection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Private Endpoint Connection": {
-            "$ref": "./examples/PrivateEndpointConnectionGet.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "PrivateEndpointConnectionsInterface_Update",
-        "tags": [
-          "PrivateEndpointConnectionsInterface"
-        ],
-        "description": "Update a PrivateEndpointConnection to approve or reject it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private Endpoint Connection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update Private Endpoint Connection": {
-            "$ref": "./examples/PrivateEndpointConnectionPut.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "PrivateEndpointConnectionsInterface_Delete",
-        "tags": [
-          "PrivateEndpointConnectionsInterface"
-        ],
-        "description": "Delete a PrivateEndpointConnection",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          },
-          {
-            "name": "privateEndpointConnectionName",
-            "in": "path",
-            "description": "Private Endpoint Connection",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete Private Endpoint Connection": {
-            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateLinkResources": {
-      "get": {
-        "operationId": "PrivateLinkResourcesInterface_ListByTrafficController",
-        "tags": [
-          "PrivateLinkResourcesInterface"
-        ],
-        "description": "List PrivateLinkResource resources by TrafficController",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Private Link Resources": {
-            "$ref": "./examples/PrivateLinkResourcesGet.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceNetworking/trafficControllers/{trafficControllerName}/privateLinkResources/{privateLinkResourceName}": {
-      "get": {
-        "operationId": "PrivateLinkResourcesInterface_Get",
-        "tags": [
-          "PrivateLinkResourcesInterface"
-        ],
-        "description": "Get a PrivateLinkResource",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "trafficControllerName",
-            "in": "path",
-            "description": "traffic controller name for path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          },
-          {
-            "name": "privateLinkResourceName",
-            "in": "path",
-            "description": "Private Link Resource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Private Link Resource": {
-            "$ref": "./examples/PrivateLinkResourceGet.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1855,6 +1861,29 @@
         }
       ]
     },
+    "FrontendAssociation": {
+      "type": "object",
+      "description": "Reference to an Association resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Association."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "FrontendAssociationUpdate": {
+      "type": "object",
+      "description": "Reference to an Association resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the Association."
+        }
+      }
+    },
     "FrontendListResult": {
       "type": "object",
       "description": "The response of a Frontend list operation.",
@@ -1885,6 +1914,14 @@
           "description": "The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.",
           "readOnly": true
         },
+        "type": {
+          "$ref": "#/definitions/FrontendType",
+          "description": "Frontend Type."
+        },
+        "association": {
+          "$ref": "#/definitions/FrontendAssociation",
+          "description": "Reference to an Association resource that contains the subnet where the private frontend should be deployed."
+        },
         "securityPolicyConfigurations": {
           "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Frontend Security Policy Configuration"
@@ -1893,15 +1930,31 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State of Traffic Controller Frontend Resource",
           "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/FrontendType",
-          "description": "Frontend Type."
-        },
-        "association": {
-          "$ref": "#/definitions/FrontendAssociation",
-          "description": "Reference to an Association resource that contains the subnet where the private frontend should be deployed."
         }
+      }
+    },
+    "FrontendType": {
+      "type": "string",
+      "description": "Frontend Type Enum",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "FrontendType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "public",
+            "description": "Public frontend accessible via a public IP address."
+          },
+          {
+            "name": "Private",
+            "value": "private",
+            "description": "Private frontend accessible only through a private endpoint."
+          }
+        ]
       }
     },
     "FrontendUpdate": {
@@ -1926,10 +1979,6 @@
       "type": "object",
       "description": "The updatable properties of the Frontend.",
       "properties": {
-        "securityPolicyConfigurations": {
-          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
-          "description": "Frontend Security Policy Configuration"
-        },
         "type": {
           "$ref": "#/definitions/FrontendType",
           "description": "Frontend Type."
@@ -1937,6 +1986,10 @@
         "association": {
           "$ref": "#/definitions/FrontendAssociationUpdate",
           "description": "Reference to an Association resource that contains the subnet where the private frontend should be deployed."
+        },
+        "securityPolicyConfigurations": {
+          "$ref": "#/definitions/SecurityPolicyConfigurationsUpdate",
+          "description": "Frontend Security Policy Configuration"
         }
       }
     },
@@ -2057,6 +2110,192 @@
             "name": "IpAccessRules",
             "value": "ipAccessRules",
             "description": "Policy of Type IpAccessRules"
+          }
+        ]
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "Private Endpoint Connection resource of Traffic Controller.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of a Private Endpoint Connection.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpointReference",
+          "description": "The private endpoint resource.",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "The connection state of the private endpoint connection."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the private endpoint connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateEndpointReference": {
+      "type": "object",
+      "description": "Reference to a private endpoint resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of the private endpoint.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group ID.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource private DNS zone names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "description": "The state of a private link service connection.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Connection is pending approval."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "Connection is approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "Connection is rejected."
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected",
+            "description": "Connection is disconnected."
           }
         ]
       }
@@ -2323,6 +2562,14 @@
           },
           "readOnly": true
         },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "Private Endpoint Connections List",
+          "items": {
+            "$ref": "#/definitions/ResourceId"
+          },
+          "readOnly": true
+        },
         "securityPolicyConfigurations": {
           "$ref": "#/definitions/SecurityPolicyConfigurations",
           "description": "Security Policy Configuration"
@@ -2330,14 +2577,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "type": "array",
-          "description": "Private Endpoint Connections List",
-          "items": {
-            "$ref": "#/definitions/ResourceId"
-          },
           "readOnly": true
         }
       }
@@ -2413,239 +2652,6 @@
         "id": {
           "type": "string",
           "description": "Resource ID of the Waf Security Policy"
-        }
-      }
-    },
-    "FrontendType": {
-      "type": "string",
-      "description": "Frontend Type Enum",
-      "enum": [
-        "public",
-        "private"
-      ],
-      "x-ms-enum": {
-        "name": "FrontendType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Public",
-            "value": "public",
-            "description": "Public frontend accessible via a public IP address."
-          },
-          {
-            "name": "Private",
-            "value": "private",
-            "description": "Private frontend accessible only through a private endpoint."
-          }
-        ]
-      }
-    },
-    "FrontendAssociation": {
-      "type": "object",
-      "description": "Reference to an Association resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the Association."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "FrontendAssociationUpdate": {
-      "type": "object",
-      "description": "Reference to an Association resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the Association."
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "type": "object",
-      "description": "Private Endpoint Connection resource of Traffic Controller.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "description": "The response of a PrivateEndpointConnection list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateEndpointConnection items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "type": "object",
-      "description": "Properties of a Private Endpoint Connection.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointReference",
-          "description": "The private endpoint resource.",
-          "readOnly": true
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
-          "description": "The connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the private endpoint connection.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateEndpointReference": {
-      "type": "object",
-      "description": "Reference to a private endpoint resource.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource ID of the private endpoint.",
-          "readOnly": true
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
-      "type": "object",
-      "description": "The state of a private link service connection.",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        },
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "A message indicating if changes on the service provider require any updates on the consumer."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStatus": {
-      "type": "string",
-      "description": "The private endpoint connection status.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "PrivateLinkServiceConnectionStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Pending",
-            "value": "Pending",
-            "description": "Connection is pending approval."
-          },
-          {
-            "name": "Approved",
-            "value": "Approved",
-            "description": "Connection is approved."
-          },
-          {
-            "name": "Rejected",
-            "value": "Rejected",
-            "description": "Connection is rejected."
-          },
-          {
-            "name": "Disconnected",
-            "value": "Disconnected",
-            "description": "Connection is disconnected."
-          }
-        ]
-      }
-    },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A private link resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "description": "The response of a PrivateLinkResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The PrivateLinkResource items on this page",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "Properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group ID.",
-          "readOnly": true
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource private DNS zone names.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     }
