@@ -41,7 +41,8 @@ model ScheduledActionsSchedule {
 }
 
 @doc("Schedule properties for update (PATCH). All properties are optional so individual fields can be patched (merge semantics); omitting a property preserves the current value.")
-model ScheduledActionsScheduleUpdate is OptionalProperties<ScheduledActionsSchedule>;
+model ScheduledActionsScheduleUpdate
+  is OptionalProperties<ScheduledActionsSchedule>;
 
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
