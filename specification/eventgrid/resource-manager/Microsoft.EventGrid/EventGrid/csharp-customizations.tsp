@@ -192,7 +192,11 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 // (EventSubscriptionsGetByResource*CollectionResultOfT + the REST client method), so the op
 // must keep generating internally; internal access just removes the duplicate public
 // MockableEventGridArmClient.GetByResource* method.
-@@access(EventSubscriptionOperationGroup.listByResource, Access.internal, "csharp");
+@@access(
+  EventSubscriptionOperationGroup.listByResource,
+  Access.internal,
+  "csharp"
+);
 
 @@clientName(NetworkSecurityPerimeterConfigurations.get, "Get", "csharp");
 // The six list* provider actions below intentionally share three GA-compatible client names
