@@ -223,15 +223,19 @@ interface WorkspaceProductGroupLink {
 
 @@maxLength(ProductGroupLinkContract.name, 80);
 @@minLength(ProductGroupLinkContract.name, 1);
-@@doc(ProductGroupLinkContract.name,
+@@doc(
+  ProductGroupLinkContract.name,
   "Product-Group link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(ProductGroupLinkContract.properties,
+@@doc(
+  ProductGroupLinkContract.properties,
   "Product-group link entity contract properties."
 );
-@@doc(ProductGroupLinkContracts.createOrUpdate::parameters.resource,
+@@doc(
+  ProductGroupLinkContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceProductGroupLink.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceProductGroupLink.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

@@ -40,9 +40,11 @@ interface StorageAccountMigrations {
   >;
 }
 
-@@doc(StorageAccountMigration.name,
+@@doc(
+  StorageAccountMigration.name,
   "The name of the Storage Account Migration. It should always be 'default'"
 );
-@@doc(StorageAccountMigration.properties,
+@@doc(
+  StorageAccountMigration.properties,
   "The properties of a storage account’s ongoing or enqueued migration."
 );

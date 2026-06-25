@@ -136,9 +136,11 @@ interface PrivateAccessOperationGroup {
 
 @@doc(PrivateAccess.name, "");
 @@doc(PrivateAccess.properties, "PrivateAccess resource specific properties");
-@@doc(PrivateAccesses.putPrivateAccessVnet::parameters.resource,
+@@doc(
+  PrivateAccesses.putPrivateAccessVnet::parameters.resource,
   "The information for the private access"
 );
-@@doc(PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
+@@doc(
+  PrivateAccessOperationGroup.putPrivateAccessVnetSlot::parameters.resource,
   "The information for the private access"
 );

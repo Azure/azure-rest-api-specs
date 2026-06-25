@@ -3,11 +3,13 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "TenantActivityLogAlertsMgmtClient",
   "python"
 );
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "TenantActivityLogAlertsManagementClient",
   "javascript"
 );

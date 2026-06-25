@@ -5,51 +5,62 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.RecoveryServices;
 
-@@clientName(BackupResourceStorageConfigsNonCRR.update::parameters.resource,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.update::parameters.resource,
   "parameters"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
   "parameters"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
   "parameters"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
   "parameters"
 );
 
-@@clientName(ProtectionIntentResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ProtectionIntentResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 
 @@clientName(BackupResourceVaultConfigs.put::parameters.resource, "parameters");
-@@clientName(BackupResourceVaultConfigs.update::parameters.properties,
+@@clientName(
+  BackupResourceVaultConfigs.update::parameters.properties,
   "parameters"
 );
 
 @@clientName(RecoveryPoints.update::parameters.properties, "parameters");
 
-@@clientName(BackupResourceEncryptionConfigs.update::parameters.resource,
+@@clientName(
+  BackupResourceEncryptionConfigs.update::parameters.resource,
   "parameters"
 );
 
-@@clientName(PrivateEndpointConnectionResources.put::parameters.resource,
+@@clientName(
+  PrivateEndpointConnectionResources.put::parameters.resource,
   "parameters"
 );
 
 @@clientName(ProtectedItems.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Backups.trigger::parameters.body, "parameters");
-@@clientName(RecoveryPointsRecommendedForMove.list::parameters.body,
+@@clientName(
+  RecoveryPointsRecommendedForMove.list::parameters.body,
   "parameters"
 );
 
 @@clientName(RecoveryPoints.moveRecoveryPoint::parameters.body, "parameters");
 @@clientName(Restores.trigger::parameters.body, "parameters");
-@@clientName(ItemLevelRecoveryConnections.provision::parameters.body,
+@@clientName(
+  ItemLevelRecoveryConnections.provision::parameters.body,
   "parameters"
 );
 
-@@clientName(ProtectionPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ProtectionPolicies.createOrUpdate::parameters.resource,
   "parameters"
 );
 
@@ -58,64 +69,78 @@ using Microsoft.RecoveryServices;
 @@clientName(ResourceGuardProxy.put::parameters.resource, "parameters");
 @@clientName(ResourceGuardProxy.unlockDelete::parameters.body, "parameters");
 
-@@clientName(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "BMSPrepareDataMove"
 );
-@@clientName(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   "BMSTriggerDataMove"
 );
 
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+@@clientLocation(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   Microsoft.RecoveryServices,
   "!csharp,!go"
 );
-@@clientLocation(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+@@clientLocation(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   Microsoft.RecoveryServices,
   "!csharp,!go"
 );
-@@clientLocation(BackupResourceConfigOperationStatuses.getOperationStatus,
+@@clientLocation(
+  BackupResourceConfigOperationStatuses.getOperationStatus,
   Microsoft.RecoveryServices,
   "!csharp,!go"
 );
 
-@@clientLocation(PrivateEndpointConnectionResources.get,
+@@clientLocation(
+  PrivateEndpointConnectionResources.get,
   "PrivateEndpointConnection",
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnectionResources.put,
+@@clientLocation(
+  PrivateEndpointConnectionResources.put,
   "PrivateEndpointConnection",
   "!csharp"
 );
-@@clientLocation(PrivateEndpointConnectionResources.delete,
+@@clientLocation(
+  PrivateEndpointConnectionResources.delete,
   "PrivateEndpointConnection",
   "!csharp"
 );
-@@clientLocation(PrivateEndpointOperationStatuses.getOperationStatus,
+@@clientLocation(
+  PrivateEndpointOperationStatuses.getOperationStatus,
   "PrivateEndpoint",
   "!csharp"
 );
 
 @@clientLocation(ProtectionIntentResources.get, "ProtectionIntent", "!csharp");
-@@clientLocation(ProtectionIntentResources.createOrUpdate,
+@@clientLocation(
+  ProtectionIntentResources.createOrUpdate,
   "ProtectionIntent",
   "!csharp"
 );
-@@clientLocation(ProtectionIntentResources.delete,
+@@clientLocation(
+  ProtectionIntentResources.delete,
   "ProtectionIntent",
   "!csharp"
 );
 
-@@clientLocation(RecoveryPoints.moveRecoveryPoint,
+@@clientLocation(
+  RecoveryPoints.moveRecoveryPoint,
   Microsoft.RecoveryServices,
   "!csharp,!go"
 );
 
-@@clientLocation(ProtectionContainersOperationGroup.refresh,
+@@clientLocation(
+  ProtectionContainersOperationGroup.refresh,
   ProtectionContainers,
   "!csharp"
 );
 
-@@clientLocation(ProtectionIntentOperationGroup.validate,
+@@clientLocation(
+  ProtectionIntentOperationGroup.validate,
   "ProtectionIntent",
   "!csharp"
 );
@@ -123,7 +148,8 @@ using Microsoft.RecoveryServices;
 @@clientLocation(OperationOperationGroup.validate, "Operation", "!csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureIaaSClassicComputeVMProtectedItem,
+@@hierarchyBuilding(
+  AzureIaaSClassicComputeVMProtectedItem,
   AzureIaaSVMProtectedItem
 );
 
@@ -131,47 +157,56 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(AzureIaaSComputeVMProtectedItem, AzureIaaSVMProtectedItem);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPAseDatabaseProtectedItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPAseDatabaseProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaDatabaseProtectedItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaDatabaseProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaDBInstanceProtectedItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaDBInstanceProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLDatabaseProtectedItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLDatabaseProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectedItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLInstanceProtectedItem,
   AzureVmWorkloadProtectedItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaPointInTimeRecoveryPoint,
   AzureWorkloadPointInTimeRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPAseRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSAPAseRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPAsePointInTimeRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSAPAsePointInTimeRecoveryPoint,
   AzureWorkloadPointInTimeRecoveryPoint
 );
 
@@ -179,42 +214,50 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(AzureWorkloadSQLRecoveryPoint, AzureWorkloadRecoveryPoint);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSQLPointInTimeRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadPointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadPointInTimeRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaPointInTimeRestoreRequest,
   AzureWorkloadSAPHanaRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPAseRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPAseRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPAsePointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPAsePointInTimeRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSQLRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSQLPointInTimeRestoreRequest,
   AzureWorkloadRestoreRequest
 );
 
@@ -228,7 +271,8 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(AzureIaaSComputeVMContainer, IaaSVMContainer);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureIaaSClassicComputeVMProtectableItem,
+@@hierarchyBuilding(
+  AzureIaaSClassicComputeVMProtectableItem,
   IaaSVMProtectableItem
 );
 
@@ -236,142 +280,170 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(AzureIaaSComputeVMProtectableItem, IaaSVMProtectableItem);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureSQLAGWorkloadContainerProtectionContainer,
+@@hierarchyBuilding(
+  AzureSQLAGWorkloadContainerProtectionContainer,
   AzureWorkloadContainer
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVMAppContainerProtectionContainer,
+@@hierarchyBuilding(
+  AzureVMAppContainerProtectionContainer,
   AzureWorkloadContainer
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPAseDatabaseProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPAseDatabaseProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPAseSystemProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPAseSystemProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaDBInstance,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaDBInstance,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaDatabaseProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaDatabaseProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaHSRProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaHSRProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaScaleoutProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaScaleoutProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaSystemProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaSystemProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLAvailabilityGroupProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLAvailabilityGroupProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLDatabaseProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLDatabaseProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLInstanceProtectableItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLInstanceProtectableItem,
   AzureVmWorkloadProtectableItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadAutoProtectionIntent,
+@@hierarchyBuilding(
+  AzureWorkloadAutoProtectionIntent,
   AzureRecoveryServiceVaultProtectionIntent
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLAutoProtectionIntent,
+@@hierarchyBuilding(
+  AzureWorkloadSQLAutoProtectionIntent,
   AzureWorkloadAutoProtectionIntent
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaPointInTimeRestoreWithRehydrateRequest,
   AzureWorkloadSAPHanaPointInTimeRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPHanaRestoreWithRehydrateRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPHanaRestoreWithRehydrateRequest,
   AzureWorkloadSAPHanaRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSQLPointInTimeRestoreRequest,
   AzureWorkloadSQLRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSQLPointInTimeRestoreWithRehydrateRequest,
   AzureWorkloadSQLPointInTimeRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLRestoreWithRehydrateRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSQLRestoreWithRehydrateRequest,
   AzureWorkloadSQLRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPAseDatabaseWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPAseDatabaseWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPAseSystemWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPAseSystemWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaDatabaseWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaDatabaseWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSAPHanaSystemWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSAPHanaSystemWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLDatabaseWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLDatabaseWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureVmWorkloadSQLInstanceWorkloadItem,
+@@hierarchyBuilding(
+  AzureVmWorkloadSQLInstanceWorkloadItem,
   AzureVmWorkloadItem
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadPointInTimeRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadPointInTimeRecoveryPoint,
   AzureWorkloadRecoveryPoint
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSAPAsePointInTimeRestoreRequest,
+@@hierarchyBuilding(
+  AzureWorkloadSAPAsePointInTimeRestoreRequest,
   AzureWorkloadSAPAseRestoreRequest
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(AzureWorkloadSQLPointInTimeRecoveryPoint,
+@@hierarchyBuilding(
+  AzureWorkloadSQLPointInTimeRecoveryPoint,
   AzureWorkloadSQLRecoveryPoint
 );
 
@@ -379,6 +451,7 @@ using Microsoft.RecoveryServices;
 @@hierarchyBuilding(IaasVMRestoreWithRehydrationRequest, IaasVMRestoreRequest);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@hierarchyBuilding(ValidateIaasVMRestoreOperationRequest,
+@@hierarchyBuilding(
+  ValidateIaasVMRestoreOperationRequest,
   ValidateRestoreOperationRequest
 );

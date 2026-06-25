@@ -17,6 +17,7 @@ import "./Domain.tsp";
 import "./DomainOwnershipIdentifier.tsp";
 import "./TopLevelDomain.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -50,9 +51,11 @@ interface Operations
       DefaultErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Description for Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
 );
-@@summary(Operations.list,
+@@summary(
+  Operations.list,
   "Implements Csm operations Api to exposes the list of available Csm Apis under the resource provider"
 );

@@ -146,7 +146,8 @@ interface DataCollectionRuleResources {
   >;
 }
 
-@@doc(DataCollectionRuleResource.name,
+@@doc(
+  DataCollectionRuleResource.name,
   "The name of the data collection rule. The name is case insensitive."
 );
 @@doc(DataCollectionRuleResource.properties, "");

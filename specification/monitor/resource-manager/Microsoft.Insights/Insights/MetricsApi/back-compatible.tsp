@@ -3,7 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using MetricsApi;
 
-@@clientLocation(MetricDefinitionsOperationGroup.listAtSubscriptionScope,
+@@clientLocation(
+  MetricDefinitionsOperationGroup.listAtSubscriptionScope,
   "MetricDefinitions"
 );
 @@clientLocation(MetricDefinitionsOperationGroup.list, "MetricDefinitions");

@@ -37,6 +37,7 @@ import "./Variable.tsp";
 import "./Watcher.tsp";
 import "./Webhook.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -66,6 +67,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<ArmResponse<OperationListResult>> {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Automation REST API operations."
 );

@@ -75,7 +75,9 @@ interface ProductList {
     @doc(SearchParameterDescription)
     @query
     $search?: string,
-  ): ArmResponse<ResourceListCustomResult<ProductSummary>> | DiscoveryErrorPayload;
+  ):
+    | ArmResponse<ResourceListCustomResult<ProductSummary>>
+    | DiscoveryErrorPayload;
 
   /** Lists products for subscription. */
   listBySubscription is ArmListBySubscriptionCustom<

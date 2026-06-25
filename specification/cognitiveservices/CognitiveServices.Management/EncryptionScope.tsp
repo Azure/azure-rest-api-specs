@@ -66,13 +66,16 @@ interface EncryptionScopes {
   >;
 }
 
-@@doc(EncryptionScope.name,
+@@doc(
+  EncryptionScope.name,
   "The name of the encryptionScope associated with the Cognitive Services Account"
 );
 @@encodedName(EncryptionScope.etag, "application/json", "etag");
-@@doc(EncryptionScope.properties,
+@@doc(
+  EncryptionScope.properties,
   "Properties of Cognitive Services EncryptionScope."
 );
-@@doc(EncryptionScopes.createOrUpdate::parameters.resource,
+@@doc(
+  EncryptionScopes.createOrUpdate::parameters.resource,
   "The encryptionScope properties."
 );

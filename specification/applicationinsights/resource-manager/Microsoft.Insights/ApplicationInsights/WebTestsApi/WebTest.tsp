@@ -90,12 +90,15 @@ interface WebTests {
 }
 
 @@doc(WebTest.name, "The name of the Application Insights WebTest resource.");
-@@doc(WebTest.properties,
+@@doc(
+  WebTest.properties,
   "Metadata describing a web test for an Azure resource."
 );
-@@doc(WebTests.createOrUpdate::parameters.resource,
+@@doc(
+  WebTests.createOrUpdate::parameters.resource,
   "Properties that need to be specified to create or update an Application Insights web test definition."
 );
-@@doc(WebTests.updateTags::parameters.properties,
+@@doc(
+  WebTests.updateTags::parameters.properties,
   "Updated tag information to associate with the web test resource."
 );

@@ -212,8 +212,10 @@ interface AccessInformationContracts {
     AccessInformationContract,
     Request = DeployConfigurationParameters,
     Result = void,
-    Response = ArmResponse<OperationResultContract> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<OperationResultContract>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -228,7 +230,9 @@ interface AccessInformationContracts {
     AccessInformationContract,
     Request = SaveConfigurationParameter,
     Result = void,
-    Response = ArmResponse<OperationResultContract> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
+    Response =
+      | ArmResponse<OperationResultContract>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
   >;
 
   /**
@@ -238,7 +242,9 @@ interface AccessInformationContracts {
     AccessInformationContract,
     DeployConfigurationParameters,
     Result = void,
-    Response = OperationResultContract | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
+    Response =
+      | OperationResultContract
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OperationResultContract>>
   >;
 
   /**
@@ -253,24 +259,31 @@ interface AccessInformationContracts {
   >;
 }
 
-@@doc(AccessInformationContract.name,
+@@doc(
+  AccessInformationContract.name,
   "The identifier of the Access configuration."
 );
-@@doc(AccessInformationContract.properties,
+@@doc(
+  AccessInformationContract.properties,
   "AccessInformation entity contract properties."
 );
-@@doc(AccessInformationContracts.create::parameters.resource,
+@@doc(
+  AccessInformationContracts.create::parameters.resource,
   "Parameters supplied to retrieve the Tenant Access Information."
 );
-@@doc(AccessInformationContracts.update::parameters.properties,
+@@doc(
+  AccessInformationContracts.update::parameters.properties,
   "Parameters supplied to retrieve the Tenant Access Information."
 );
-@@doc(AccessInformationContracts.deploy::parameters.body,
+@@doc(
+  AccessInformationContracts.deploy::parameters.body,
   "Deploy Configuration parameters."
 );
-@@doc(AccessInformationContracts.save::parameters.body,
+@@doc(
+  AccessInformationContracts.save::parameters.body,
   "Save Configuration parameters."
 );
-@@doc(AccessInformationContracts.validate::parameters.body,
+@@doc(
+  AccessInformationContracts.validate::parameters.body,
   "Validate Configuration parameters."
 );

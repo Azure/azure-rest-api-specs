@@ -7,7 +7,8 @@ using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
   "!javascript"
 );
 
@@ -15,28 +16,34 @@ using Microsoft.RecoveryServices;
 @@clientName(Vaults.update::parameters.properties, "vault");
 @@clientName(Vaults.create::parameters.resource, "certificateRequest");
 
-@@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+@@clientName(
+  VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceResourceExtendedInfoDetails",
   "!python"
 );
-@@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+@@clientName(
+  VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceExtendedInfoDetails",
   "python"
 );
-@@clientName(VaultExtendedInfoResources.update::parameters.properties,
+@@clientName(
+  VaultExtendedInfoResources.update::parameters.properties,
   "resourceResourceExtendedInfoDetails",
   "!python"
 );
-@@clientName(VaultExtendedInfoResources.update::parameters.properties,
+@@clientName(
+  VaultExtendedInfoResources.update::parameters.properties,
   "resourceExtendedInfoDetails",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  VaultExtendedInfoResource.properties,
   "!javascript"
 );
-@@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
+@@clientName(
+  RecoveryServicesOperationGroup.capabilities::parameters.body,
   "input"
 );
 
@@ -44,32 +51,38 @@ using Microsoft.RecoveryServices;
 // These ensure consistent operationId generation in the output
 
 // PrivateLinkResourceOperationGroup operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get,
+@@clientLocation(
+  PrivateLinkResourceOperationGroup.get,
   "PrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(PrivateLinkResourceOperationGroup.list,
+@@clientLocation(
+  PrivateLinkResourceOperationGroup.list,
   "PrivateLinkResources",
   "!csharp"
 );
 
 // RecoveryServicesOperationGroup operations
-@@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
+@@clientLocation(
+  RecoveryServicesOperationGroup.checkNameAvailability,
   "RecoveryServices",
   "!csharp"
 );
-@@clientLocation(RecoveryServicesOperationGroup.capabilities,
+@@clientLocation(
+  RecoveryServicesOperationGroup.capabilities,
   "RecoveryServices",
   "!csharp"
 );
-@@alternateType(RecoveryServicesOperationGroup.capabilities::parameters.location,
+@@alternateType(
+  RecoveryServicesOperationGroup.capabilities::parameters.location,
   azureLocation,
   "csharp"
 );
 
 // Vaults operations
 @@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
-@@clientLocation(Vaults.registeredIdentitiesDelete,
+@@clientLocation(
+  Vaults.registeredIdentitiesDelete,
   "RegisteredIdentities",
   "!csharp"
 );
@@ -81,15 +94,18 @@ using Microsoft.RecoveryServices;
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
 // VaultExtendedInfoResources operations
-@@clientLocation(VaultExtendedInfoResources.get,
+@@clientLocation(
+  VaultExtendedInfoResources.get,
   "VaultExtendedInfo",
   "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
+@@clientLocation(
+  VaultExtendedInfoResources.createOrUpdate,
   "VaultExtendedInfo",
   "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.update,
+@@clientLocation(
+  VaultExtendedInfoResources.update,
   "VaultExtendedInfo",
   "!csharp"
 );
