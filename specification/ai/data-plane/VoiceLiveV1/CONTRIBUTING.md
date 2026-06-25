@@ -1,6 +1,6 @@
 # Contributing to the VoiceLive TypeSpec
 
-This folder (`VoiceLive.v1/`) uses the **label-based (`v1`) versioning** pattern, like Azure AI Foundry. `v1` is the evergreen GA contract that only grows; preview surface is staged on the build-time-only `virtual-public-preview` channel and gated at runtime by the `VoiceLive-Features` header. For the design and rationale, see [docs/versioning.md](docs/versioning.md).
+This folder (`VoiceLiveV1/`) uses the **label-based (`v1`) versioning** pattern, like Azure AI Foundry. `v1` is the evergreen GA contract that only grows; preview surface is staged on the build-time-only `virtual-public-preview` channel and gated at runtime by the `VoiceLive-Features` header. For the design and rationale, see [docs/versioning.md](docs/versioning.md).
 
 > **Date-stamped versions live elsewhere.** The dated contracts (`2025-10-01`, `2026-04-10`, …) are a **separate project** in the sibling [`VoiceLive/`](../VoiceLive/) folder. This project's `Versions` enum is permanently just `PuPr` and `v1`; edits here never touch the dated versions.
 

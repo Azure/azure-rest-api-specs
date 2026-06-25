@@ -1,14 +1,14 @@
 # VoiceLive Versioning Design: the `v1` (label-based) Pattern
 
 > Status: Active
-> Applies to: `specification/ai/data-plane/VoiceLive.v1`
+> Applies to: `specification/ai/data-plane/VoiceLiveV1`
 > Pattern source: [Azure AI Foundry data-plane spec](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/ai-foundry/data-plane/Foundry)
 
 ## 1. Summary
 
 VoiceLive adopts Foundry's **evergreen `v1` pattern**: one rolling GA label (`v1`), a build-time-only virtual preview channel (`virtual-public-preview`) to author/fence preview surface, and a per-feature opt-in header (`VoiceLive-Features`) that enables preview behavior on `v1`. Clients pick the contract with `api-version` and flip preview with the header — never `api-version=virtual-public-preview`. Additive features need no new dated version.
 
-> **Two separate projects.** The date-stamped contracts (`2025-10-01`, `2026-04-10`, `2026-01-01-preview`, …) live in the **sibling `VoiceLive/` folder** — an independent TypeSpec compilation with its own `Versions` enum and its own `stable/`+`preview/` swagger. **This** project (`VoiceLive.v1/`) is the label-based one: its `Versions` enum is permanently just `PuPr` (`virtual-public-preview`) and `v1`, and only `stable/v1/` and `preview/virtual-public-preview/` exist here. No dated version is ever added to this enum, and changes here never touch the dated versions in `VoiceLive/`. Where dated versions appear below, they're either historical context or examples drawn from the sibling folder.
+> **Two separate projects.** The date-stamped contracts (`2025-10-01`, `2026-04-10`, `2026-01-01-preview`, …) live in the **sibling `VoiceLive/` folder** — an independent TypeSpec compilation with its own `Versions` enum and its own `stable/`+`preview/` swagger. **This** project (`VoiceLiveV1/`) is the label-based one: its `Versions` enum is permanently just `PuPr` (`virtual-public-preview`) and `v1`, and only `stable/v1/` and `preview/virtual-public-preview/` exist here. No dated version is ever added to this enum, and changes here never touch the dated versions in `VoiceLive/`. Where dated versions appear below, they're either historical context or examples drawn from the sibling folder.
 
 ## 2. Time-based vs label-based
 
@@ -65,7 +65,7 @@ Rule of thumb (this project): `PuPr` is the default/base version. **plain option
 
 ## 6. Relationship to the date-stamped `VoiceLive/` project
 
-The dated contracts (`2025-10-01`, `2026-04-10`, and the `*-preview` snapshots) live in the sibling `VoiceLive/` folder as a **separate, frozen** TypeSpec project. This `VoiceLive.v1/` project is the label-based successor; the two are compiled independently and never share an enum. Customers migrate **per-client, opt-in** by switching `api-version` from a date to `v1` when ready — nothing breaks because `stable/v1` is authored as a backward-compatible **superset** of the latest dated GA contract. New additive GA changes go only into this project (as plain optional fields); the dated versions in `VoiceLive/` stay frozen and are never regenerated from here.
+The dated contracts (`2025-10-01`, `2026-04-10`, and the `*-preview` snapshots) live in the sibling `VoiceLive/` folder as a **separate, frozen** TypeSpec project. This `VoiceLiveV1/` project is the label-based successor; the two are compiled independently and never share an enum. Customers migrate **per-client, opt-in** by switching `api-version` from a date to `v1` when ready — nothing breaks because `stable/v1` is authored as a backward-compatible **superset** of the latest dated GA contract. New additive GA changes go only into this project (as plain optional fields); the dated versions in `VoiceLive/` stay frozen and are never regenerated from here.
 
 ## 7. Limitations to notice
 
