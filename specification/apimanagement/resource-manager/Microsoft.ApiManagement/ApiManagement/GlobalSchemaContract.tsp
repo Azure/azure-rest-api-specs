@@ -51,7 +51,8 @@ interface GlobalSchemaContractOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ApiManagementGlobalSchema"
     > {}
 
 @armResourceOperations
@@ -197,7 +198,8 @@ interface WorkspaceGlobalSchemaOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceSchema"
     > {}
 
 @armResourceOperations
