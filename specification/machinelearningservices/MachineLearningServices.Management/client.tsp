@@ -724,6 +724,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningDataVersionProperties",
   "csharp"
 );
+@@clientName(DataVersionBase, "MachineLearningDataVersion", "csharp");
 @@clientName(JobBaseProperties, "MachineLearningJobProperties", "csharp");
 @@clientName(
   PartialMinimalTrackedResource,
@@ -1348,7 +1349,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(OrderString, "MachineLearningOrderString", "csharp");
 @@clientName(
   OutboundRuleBasicResource,
-  "MachineLearningOutboundRuleBasicResource",
+  "MachineLearningOutboundRuleBasic",
   "csharp"
 );
 @@clientName(OutputDeliveryMode, "MachineLearningOutputDeliveryMode", "csharp");
