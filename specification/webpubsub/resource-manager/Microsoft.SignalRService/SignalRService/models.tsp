@@ -518,7 +518,8 @@ model ResourceSku {
    *
    * `Basic` is deprecated, use `Standard` instead.
    */
-  tier?: WebPubSubSkuTier;
+  @renamedFrom(Versions.v2025_08_01_preview, "tier")
+  tierNew?: WebPubSubSkuTier;
 
   /**
    * Not used. Retained for future use.
