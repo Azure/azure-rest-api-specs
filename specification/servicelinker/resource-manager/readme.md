@@ -27,7 +27,7 @@ These are the global settings for the ServiceLinker.
 ```yaml
 title: ServiceLinkerManagementClient
 openapi-type: arm
-openapi-subtype : rpaas
+openapi-subtype: rpaas
 tag: package-2024-07-01-preview
 ```
 
