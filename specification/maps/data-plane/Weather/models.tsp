@@ -3703,11 +3703,26 @@ model AirQuality {
   index?: float32;
 
   /**
-   * An internationally normalized air-quality index that is comparable
-   * across locations regardless of the local AQI scale. Ratings range from
-   * 0 to 300 and up, with higher numbers indicating worse air quality. The
-   * index covers concentrations of **PM2.5**, **PM10**, **NO2**, **SO2**,
-   * **CO**, and **O3**. For example, *22.1*.
+   * A normalized air-quality index designed to be comparable across
+   * locations, independent of any local AQI scale. The value is the
+   * highest individual sub-index across the six measured pollutants
+   * (**PM2.5**, **PM10**, **NO2**, **SO2**, **CO**, **O3**); the
+   * pollutant producing that maximum is returned in `dominantPollutant`.
+   *
+   * Range and categories:
+   *
+   * | Value   | Category       |
+   * | ------- | -------------- |
+   * | 0-20    | Excellent      |
+   * | 21-50   | Fair           |
+   * | 51-100  | Poor           |
+   * | 101-150 | Unhealthy      |
+   * | 151-250 | Very unhealthy |
+   * | 251+    | Dangerous      |
+   *
+   * For example, given sub-indices CO *0.6*, SO2 *1.1*, PM2.5 *6.5*,
+   * NO2 *6.7*, PM10 *12.2*, O3 *22.1*, `globalIndex` is *22.1* and
+   * `dominantPollutant` is *Ozone*.
    */
   globalIndex?: float32;
 

@@ -2270,7 +2270,7 @@
         "globalIndex": {
           "type": "number",
           "format": "float",
-          "description": "An internationally normalized air-quality index that is comparable\nacross locations regardless of the local AQI scale. Ratings range from\n0 to 300 and up, with higher numbers indicating worse air quality. The\nindex covers concentrations of **PM2.5**, **PM10**, **NO2**, **SO2**,\n**CO**, and **O3**. For example, *22.1*."
+          "description": "A normalized air-quality index designed to be comparable across\nlocations, independent of any local AQI scale. The value is the\nhighest individual sub-index across the six measured pollutants\n(**PM2.5**, **PM10**, **NO2**, **SO2**, **CO**, **O3**); the\npollutant producing that maximum is returned in `dominantPollutant`.\n\nRange and categories:\n\n| Value   | Category       |\n| ------- | -------------- |\n| 0-20    | Excellent      |\n| 21-50   | Fair           |\n| 51-100  | Poor           |\n| 101-150 | Unhealthy      |\n| 151-250 | Very unhealthy |\n| 251+    | Dangerous      |\n\nFor example, given sub-indices CO *0.6*, SO2 *1.1*, PM2.5 *6.5*,\nNO2 *6.7*, PM10 *12.2*, O3 *22.1*, `globalIndex` is *22.1* and\n`dominantPollutant` is *Ozone*."
         },
         "dominantPollutant": {
           "$ref": "#/definitions/DominantPollutant",
