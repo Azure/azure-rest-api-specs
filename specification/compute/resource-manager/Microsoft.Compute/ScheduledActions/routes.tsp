@@ -26,7 +26,7 @@ interface ScheduledActions {
     ScheduledAction,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
       ScheduledAction,
-      ScheduledActionProperties
+      ScheduledActionPropertiesUpdate
     >,
     LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;

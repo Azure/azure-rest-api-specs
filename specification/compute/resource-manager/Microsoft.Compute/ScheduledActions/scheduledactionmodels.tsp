@@ -25,13 +25,13 @@ model ScheduledActionsSchedule {
   timeZone: string;
 
   @doc("The week days the scheduled action is supposed to run on. If empty, it means it will run on every week day.")
-  requestedWeekDays: WeekDay[];
+  requestedWeekDays?: WeekDay[];
 
   @doc("The months the scheduled action is supposed to run on. If empty, it means it will run on every month.")
-  requestedMonths: Month[];
+  requestedMonths?: Month[];
 
   @doc("The days of the month the scheduled action is supposed to run on. If empty, it means it will run on every day of the month.")
-  requestedDaysOfTheMonth: DayOfTheMonth[];
+  requestedDaysOfTheMonth?: DayOfTheMonth[];
 
   @doc("The execution parameters the scheduled action is supposed to follow")
   executionParameters?: ExecutionParameters;
@@ -39,6 +39,9 @@ model ScheduledActionsSchedule {
   @doc("The type of deadline the scheduled action is supposed to follow for the schedule. If no value is passed, it will default to InitiateAt.")
   deadlineType?: DeadlineType;
 }
+
+@doc("Schedule properties for update (PATCH). All properties are optional so individual fields can be patched (merge semantics); omitting a property preserves the current value.")
+model ScheduledActionsScheduleUpdate is OptionalProperties<ScheduledActionsSchedule>;
 
 scalar ValidScheduledActionResourceId
   extends armResourceIdentifier<[
@@ -161,6 +164,37 @@ model ScheduledActionProperties {
 
   @doc("The schedule the scheduled action is supposed to follow")
   schedule: ScheduledActionsSchedule;
+
+  @doc("The notification settings for the scheduled action")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  notificationSettings: Array<NotificationProperties>;
+
+  @doc("Tell if the scheduled action is disabled or not")
+  disabled?: boolean = false;
+
+  @doc("The status of the last provisioning operation performed on the resource.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Scheduled action properties for update (PATCH). Mirrors ScheduledActionProperties but the schedule uses an all-optional model so individual schedule fields can be patched (merge semantics); omitting a field preserves the current value.")
+model ScheduledActionPropertiesUpdate {
+  @doc("The type of resource the scheduled action is targeting")
+  resourceType: ResourceType;
+
+  @doc("The action the scheduled action should perform in the resources")
+  actionType: ScheduledActionType;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @doc("The time which the scheduled action is supposed to start running")
+  startTime: offsetDateTime;
+
+  #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
+  @doc("The time when the scheduled action is supposed to stop scheduling")
+  endTime?: offsetDateTime;
+
+  @doc("The schedule the scheduled action is supposed to follow")
+  schedule?: ScheduledActionsScheduleUpdate;
 
   @doc("The notification settings for the scheduled action")
   @Azure.ResourceManager.identifiers(#["destination"])
