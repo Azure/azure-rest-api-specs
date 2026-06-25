@@ -794,7 +794,9 @@ union SandboxCustomImageType {
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp compat"
 @@flattenProperty(ClusterProperties.languageExtensions, "csharp");
-@@clientName(LanguageExtensionsList.value, "LanguageExtensionsValue", "csharp");
+// TODO: use spec renaming and remove custom properties in KustoClusterData and KustoClusterPatch
+// after this issue fixed: https://github.com/Azure/azure-sdk-for-net/issues/60237
+// @@clientName(LanguageExtensionsList.value, "LanguageExtensionsValue", "csharp");
 
 @@alternateType(ClusterPrincipalProperties.tenantId, uuid, "csharp");
 @@alternateType(DatabasePrincipalProperties.tenantId, uuid, "csharp");
