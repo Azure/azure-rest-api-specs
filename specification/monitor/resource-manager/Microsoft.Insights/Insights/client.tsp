@@ -368,6 +368,16 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorPrivateLinkResource",
   "csharp"
 );
+@@clientName(
+  PrivateLinkScopesApi.ScopedResourceKind,
+  "MonitorScopedResourceKind",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkScopesApi.ScopedResourceProvisioningState,
+  "MonitorScopedResourceProvisioningState",
+  "csharp"
+);
 @@usage(PrivateLinkScopesApi.PrivateLinkResource, Usage.input, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "restore flattened private link resource data shape for C# compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -538,6 +548,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   DataCollectionApi.StorageBlob,
   "DataCollectionRuleEnrichmentStorageBlob",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.ApplicationInsights,
+  "MonitorApplicationInsightsReference",
   "csharp"
 );
 @@clientName(
@@ -855,6 +870,11 @@ namespace Microsoft.InsightsCombinedClient;
   "ScheduledQueryRuleTimeAggregationType",
   "csharp"
 );
+@@clientName(
+  Microsoft.Common.CriterionType,
+  "ScheduledQueryRuleCriterionType",
+  "csharp"
+);
 @@clientName(ScheduledQueryRuleApi.Dimension, "MonitorDimension", "csharp");
 @@clientName(
   ScheduledQueryRuleApi.DimensionOperator,
@@ -1046,6 +1066,31 @@ namespace Microsoft.InsightsCombinedClient;
 @@scope(PrivateLinkScopeOperationStatusOperationGroup.get, "!csharp");
 
 // Monitor C# names for Network Security Perimeter common types need package and feature context.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter,
+  "MonitorNetworkSecurityPerimeter",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfiguration,
+  "MonitorNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties,
+  "MonitorNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProvisioningState,
+  "MonitorNetworkSecurityPerimeterConfigurationProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.NetworkSecurityProfile,
+  "MonitorNetworkSecurityProfile",
+  "csharp"
+);
 @@clientName(
   Azure.ResourceManager.CommonTypes.AccessRule,
   "MonitorNetworkSecurityPerimeterConfigurationAccessRule",
