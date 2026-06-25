@@ -48,7 +48,9 @@ interface CodeContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         codeName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryCodeContainer"
     > {}
 
 @armResourceOperations
@@ -137,7 +139,9 @@ interface CodeContainerOperationGroupOps
         @segment("codes")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningCodeContainer"
     > {}
 
 @armResourceOperations

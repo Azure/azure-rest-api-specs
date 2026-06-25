@@ -19,6 +19,7 @@ namespace Microsoft.CognitiveServices;
  */
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @subscriptionResource
 model ManagedComputeCapacity
   is Azure.ResourceManager.ProxyResource<ManagedComputeCapacityProperties> {
@@ -33,6 +34,7 @@ model ManagedComputeCapacity
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "'ManagedComputeCapacities' is a read-only resource type that does not support delete operations"
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations(#{ omitTags: true })
 interface ManagedComputeCapacities {
   /**
