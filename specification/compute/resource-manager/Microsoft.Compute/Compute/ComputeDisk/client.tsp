@@ -35,27 +35,3 @@ using ComputeDisk;
   "getSecureVMGuestStateSas",
   "java"
 );
-
-// C# naming fixes for Azure.ResourceManager.Compute 1.15.0 stable API review.
-@@clientName(ConfidentialVMVersion, "ConfidentialVmVersion", "csharp");
-@@clientName(
-  DiskSecurityProfile.confidentialVMVersion,
-  "ConfidentialVmVersion",
-  "csharp"
-);
-@@clientName(ImmutabilityPolicyData, "ImmutabilityPolicyContent", "csharp");
-@@clientName(
-  ImmutabilityPolicyLockData,
-  "ImmutabilityPolicyLockContent",
-  "csharp"
-);
-@@clientName(
-  Snapshots.updateImmutabilityPolicy::parameters.body,
-  "content",
-  "csharp"
-);
-@@clientName(
-  Snapshots.updateImmutabilityPolicyLock::parameters.body,
-  "content",
-  "csharp"
-);
