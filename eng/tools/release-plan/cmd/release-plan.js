@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
-import { main } from "../dist/src/index.js";
+const releasePlanModule = /** @type {typeof import("../src/index.ts")} */ (
+  await import("../dist/src/index.js")
+);
 
-await main();
+await releasePlanModule.main();
