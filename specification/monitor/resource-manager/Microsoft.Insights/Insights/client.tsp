@@ -131,6 +131,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  AlertRulesIncidentsApi.Incident,
+  "MonitorAlertRuleIncident",
+  "csharp"
+);
+@@clientName(
   MetricAlertApi.MetricAlertResources.list,
   "GetAllMetricAlertsStatus",
   "csharp"
@@ -138,6 +143,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   MetricAlertApi.MetricAlertResources.listByName,
   "GetAllMetricAlertsStatusByName",
+  "csharp"
+);
+@@clientName(
+  MetricAlertApi.ResolveConfiguration.autoResolved,
+  "IsAutoResolved",
   "csharp"
 );
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "preserve the shipped C# overload name for resource-scope metric retrieval"
@@ -156,6 +166,16 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   MetricsApi.MetricsOperationGroup.listAtSubscriptionScopePost,
   "GetMonitorMetricsWithPost",
+  "csharp"
+);
+@@clientName(
+  MetricsApi.AggregationType,
+  "MonitorMetricAggregationType",
+  "csharp"
+);
+@@clientName(
+  MetricsApi.SubscriptionScopeMetricsRequestBodyParameters,
+  "SubscriptionScopeMetricsContent",
   "csharp"
 );
 @@clientName(
@@ -507,6 +527,36 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   DataCollectionApi.StorageTableDestination,
   "DataCollectionRuleStorageTableDestination",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.StorageBlob,
+  "DataCollectionRuleEnrichmentStorageBlob",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.DataFlow.captureOverflow,
+  "ShouldCaptureOverflow",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.OtelLogsDataSource.replaceResourceIdWithReference,
+  "ShouldReplaceResourceIdWithReference",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.OtelLogsDirectDataSource.replaceResourceIdWithReference,
+  "ShouldReplaceResourceIdWithReference",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.OtelTracesDataSource.replaceResourceIdWithReference,
+  "ShouldReplaceResourceIdWithReference",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.OtelTracesDirectDataSource.replaceResourceIdWithReference,
+  "ShouldReplaceResourceIdWithReference",
   "csharp"
 );
 @@clientName(
@@ -935,6 +985,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  ScheduledQueryRuleApi.RuleResolveConfiguration.autoResolved,
+  "IsAutoResolved",
+  "csharp"
+);
+@@clientName(
   Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
@@ -947,6 +1002,53 @@ namespace Microsoft.InsightsCombinedClient;
 
 // LRO status polling endpoints are implementation details and should not generate public C# SDK methods.
 @@scope(PrivateLinkScopeOperationStatusOperationGroup.get, "!csharp");
+
+// Monitor C# names for Network Security Perimeter common types need package and feature context.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRule,
+  "MonitorNetworkSecurityPerimeterConfigurationAccessRule",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleDirection,
+  "MonitorNetworkSecurityPerimeterConfigurationAccessRuleDirection",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties,
+  "MonitorNetworkSecurityPerimeterConfigurationAccessRuleProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.IssueType,
+  "MonitorNetworkSecurityPerimeterConfigurationIssueType",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssue,
+  "MonitorNetworkSecurityPerimeterConfigurationProvisioningIssue",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ProvisioningIssueProperties,
+  "MonitorNetworkSecurityPerimeterConfigurationProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociation,
+  "MonitorNetworkSecurityPerimeterConfigurationResourceAssociation",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceAssociationAccessMode,
+  "MonitorNetworkSecurityPerimeterConfigurationResourceAssociationAccessMode",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Severity,
+  "MonitorNetworkSecurityPerimeterConfigurationIssueSeverity",
+  "csharp"
+);
 
 /** Days of the week accepted by Monitor recurring schedules. */
 union MonitorDayOfWeek {
@@ -1186,10 +1288,15 @@ model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
+@@clientName(
+  AccessRulePropertiesSubscriptionsItem,
+  "MonitorNetworkSecurityPerimeterConfigurationAccessRuleSubscription",
+  "csharp"
+);
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
-  AccessRulePropertiesSubscriptionsItem,
-  "go"
+  AccessRulePropertiesSubscriptionsItem[],
+  "csharp,go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorDetail,
