@@ -166,33 +166,71 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
 
-// Keep listByDomainTopic on EventSubscriptionCollection.GetAll (GA-compatible shape and route).
+// Hide these two list routes from the C# SDK public surface to preserve GA/main API shape.
+//
+// WHY: On main, the (old) generator collapses FOUR event-subscription list routes into a
+// single scope-dispatched EventSubscriptionCollection.GetAll(...) that branches on the
+// parent resource type:
+//   SubscriptionResource    -> ListGlobalBySubscription
+//   ResourceGroupResource   -> ListGlobalByResourceGroup
+//   DomainTopicResource     -> ListByDomainTopic   (this op)
+//   (any other scope)       -> ListByResource      (this op)
+// The new mgmt generator cannot reproduce that multi-route "scope collection" collapse, so
+// EventSubscriptionCollection.GetAll is supplied by the SDK customization at
+// src/Customized/EventSubscriptionCollection.cs.
+//
+// If we let these two ops generate normally, they surface as EXTRA public methods that do
+// NOT exist on main: DomainTopicResource.GetByDomainTopic* and
+// MockableEventGridArmClient.GetByResource*.
+//
+// listByDomainTopic: fully scoped out of C#. The customization's DomainTopicResource branch
+// delegates to the GENERATED DomainTopicEventSubscriptionCollection.GetAll (produced from
+// EventSubscriptions.list), so none of listByDomainTopic's generated plumbing is needed.
+@@scope(EventSubscriptions.listByDomainTopic, "!csharp");
+// listByResource: only internalized (NOT fully scoped out). The customization's default
+// scope branch reuses this op's GENERATED plumbing
+// (EventSubscriptionsGetByResource*CollectionResultOfT + the REST client method), so the op
+// must keep generating internally; internal access just removes the duplicate public
+// MockableEventGridArmClient.GetByResource* method.
+@@access(EventSubscriptionOperationGroup.listByResource, Access.internal, "csharp");
+
 @@clientName(NetworkSecurityPerimeterConfigurations.get, "Get", "csharp");
+// The six list* provider actions below intentionally share three GA-compatible client names
+// (one pair each for the subscription-scope and resource-group-scope extension variants). The
+// names are duplicated on purpose to preserve the pre-migration public method names; the two
+// operations in each pair live on different extension scopes and are disambiguated by the SDK
+// mockable layer, so the duplicate-client-name warning is expected and suppressed here.
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "GetGlobalEventSubscriptionsDataForTopicType",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
   "GetGlobalEventSubscriptionsDataForTopicType",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listRegionalBySubscription,
   "GetRegionalEventSubscriptionsData",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
   "GetRegionalEventSubscriptionsData",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
   "GetRegionalEventSubscriptionsDataForTopicType",
   "csharp"
 );
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentional GA-compatible duplicate name across subscription/resource-group extension scopes."
 @@clientName(
   EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
   "GetRegionalEventSubscriptionsDataForTopicType",
