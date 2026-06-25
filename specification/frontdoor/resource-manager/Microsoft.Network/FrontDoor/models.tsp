@@ -587,6 +587,34 @@ union ManagedRuleSetStatus {
 }
 
 /**
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.
+ */
+@added(Versions.v2026_04_01)
+union ParanoiaLevel {
+  string,
+
+  /**
+   * Paranoia level 1.
+   */
+  PL1: "PL1",
+
+  /**
+   * Paranoia level 2.
+   */
+  PL2: "PL2",
+
+  /**
+   * Paranoia level 3.
+   */
+  PL3: "PL3",
+
+  /**
+   * Paranoia level 4.
+   */
+  PL4: "PL4",
+}
+
+/**
  * Resource status of the policy.
  */
 union PolicyResourceState {
@@ -2465,7 +2493,7 @@ model ManagedRuleDefinition {
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
-  paranoiaLevel?: int32;
+  paranoiaLevel?: ParanoiaLevel;
 }
 
 /**

@@ -4549,8 +4549,7 @@
           "readOnly": true
         },
         "paranoiaLevel": {
-          "type": "integer",
-          "format": "int32",
+          "$ref": "#/definitions/ParanoiaLevel",
           "description": "Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.",
           "readOnly": true
         }
@@ -5366,6 +5365,42 @@
             "name": "ClientFingerprint",
             "value": "ClientFingerprint",
             "description": "Client Finger print Operator"
+          }
+        ]
+      }
+    },
+    "ParanoiaLevel": {
+      "type": "string",
+      "description": "OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.",
+      "enum": [
+        "PL1",
+        "PL2",
+        "PL3",
+        "PL4"
+      ],
+      "x-ms-enum": {
+        "name": "ParanoiaLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PL1",
+            "value": "PL1",
+            "description": "Paranoia level 1."
+          },
+          {
+            "name": "PL2",
+            "value": "PL2",
+            "description": "Paranoia level 2."
+          },
+          {
+            "name": "PL3",
+            "value": "PL3",
+            "description": "Paranoia level 3."
+          },
+          {
+            "name": "PL4",
+            "value": "PL4",
+            "description": "Paranoia level 4."
           }
         ]
       }
