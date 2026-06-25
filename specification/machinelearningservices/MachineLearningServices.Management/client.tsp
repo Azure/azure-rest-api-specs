@@ -713,17 +713,6 @@ using Microsoft.MachineLearningServices;
 @@clientName(Caching, "MachineLearningCachingType", "csharp");
 @@access(EncryptionKeyVaultUpdateProperties, Access.public, "csharp");
 @@access(TriggerType, Access.public, "csharp");
-@@access(ComputePowerAction, Access.public, "csharp");
-@@access(ProvisioningStatus, Access.public, "csharp");
-@@access(ComputeWeekDay, Access.public, "csharp");
-@@access(Cron, Access.public, "csharp");
-@@access(Password, Access.public, "csharp");
-@@access(Recurrence, Access.public, "csharp");
-@@access(RecurrenceFrequency, Access.public, "csharp");
-@@access(ComputeRecurrenceSchedule, Access.public, "csharp");
-@@access(ScheduleBase, Access.public, "csharp");
-@@access(ScheduleProvisioningState, Access.public, "csharp");
-@@access(ScheduleStatus, Access.public, "csharp");
 @@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
