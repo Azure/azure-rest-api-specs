@@ -5507,6 +5507,35 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies the constraints for flexible VM sizing.
+ */
+@added(Versions.v2026_04_01)
+model FlexProfileConstraints {
+  /**
+   * Specifies the architecture type(s) for which the flexible profile is applicable.
+   * Examples: x64, arm64. When specified, only VMs of the specified architecture types will be considered for allocation.
+   */
+  architectureType?: string[];
+}
+
+/**
+ * Specifies flexible virtual machine sizing options.
+ */
+@added(Versions.v2026_04_01)
+model FlexProfile {
+  /**
+   * Specifies whether flexible sizing is enabled. When enabled, Azure can allocate alternative VM sizes
+   * from the same family that meet the constraints, if the preferred size is unavailable.
+   */
+  enabled?: boolean;
+
+  /**
+   * Specifies the constraints for flexible VM sizing, such as required architecture types.
+   */
+  constraints?: FlexProfileConstraints;
+}
+
+/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -5525,6 +5554,14 @@ model HardwareProfile {
    */
   @added(Versions.v2026_04_01)
   processorMode?: ProcessorMode;
+
+  /**
+   * Specifies the flexible sizing options for the virtual machine. When enabled, Azure can allocate alternative VM sizes
+   * if the preferred size is unavailable, subject to the specified constraints. Either vmSize or flexProfile should be
+   * specified in the request, but not both. When flexProfile is used, the allocated VM size will be returned in the vmSize property in the response.
+   */
+  @added(Versions.v2026_04_01)
+  flexProfile?: FlexProfile;
 }
 
 /**

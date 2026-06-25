@@ -10619,6 +10619,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a VM with flexible sizing": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithFlexProfile.json"
+          },
           "Get a Virtual Machine.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
           },
@@ -10770,6 +10773,9 @@
           },
           "Create a VM with encryption identity": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionIdentity.json"
+          },
+          "Create a VM with flexible sizing enabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithFlexProfile.json"
           },
           "Create a VM with network interface configuration": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfiguration.json"
@@ -10969,6 +10975,9 @@
           },
           "Update a VM by force-detaching data disk": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          },
+          "Update a VM's flexible sizing configuration": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_WithFlexProfile.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15173,6 +15182,33 @@
         }
       }
     },
+    "FlexProfile": {
+      "type": "object",
+      "description": "Specifies flexible virtual machine sizing options.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether flexible sizing is enabled. When enabled, Azure can allocate alternative VM sizes\nfrom the same family that meet the constraints, if the preferred size is unavailable."
+        },
+        "constraints": {
+          "$ref": "#/definitions/FlexProfileConstraints",
+          "description": "Specifies the constraints for flexible VM sizing, such as required architecture types."
+        }
+      }
+    },
+    "FlexProfileConstraints": {
+      "type": "object",
+      "description": "Specifies the constraints for flexible VM sizing.",
+      "properties": {
+        "architectureType": {
+          "type": "array",
+          "description": "Specifies the architecture type(s) for which the flexible profile is applicable.\nExamples: x64, arm64. When specified, only VMs of the specified architecture types will be considered for allocation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "HardwareProfile": {
       "type": "object",
       "description": "Specifies the hardware settings for the virtual machine.",
@@ -15188,6 +15224,10 @@
         "processorMode": {
           "$ref": "#/definitions/ProcessorMode",
           "description": "Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01."
+        },
+        "flexProfile": {
+          "$ref": "#/definitions/FlexProfile",
+          "description": "Specifies the flexible sizing options for the virtual machine. When enabled, Azure can allocate alternative VM sizes\nif the preferred size is unavailable, subject to the specified constraints. Either vmSize or flexProfile should be\nspecified in the request, but not both. When flexProfile is used, the allocated VM size will be returned in the vmSize property in the response."
         }
       }
     },
