@@ -670,8 +670,8 @@ model HourlyForecastResult {
  */
 model HourlyForecast {
   /**
-   * Date and time of the forecast in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * Date and time of the forecast in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (yyyy-mm-ddThh:mm:ss±hh:mm). For example, *2019-11-14T16:00:00-08:00*.
    */
   date?: utcDateTime;
@@ -1157,8 +1157,8 @@ model IntervalSummary {
  */
 model ForecastInterval {
   /**
-   * The start of this forecast interval, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * The start of this forecast interval, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (`yyyy-mm-ddThh:mm:ss±hh:mm`). For example, *2019-11-14T15:18:00-08:00*.
    */
   startTime?: utcDateTime;
@@ -1284,8 +1284,8 @@ model QuarterDayForecastResult {
  */
 model QuarterDayForecast {
   /**
-   * The calendar date this quarter-day belongs to, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * The calendar date this quarter-day belongs to, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (`yyyy-mm-ddThh:mm:ss±hh:mm`) at the start of the day. For example,
    * *2019-11-14T00:00:00-08:00*. Use `effectiveDate` for the actual start
    * time of this quarter.
@@ -1293,8 +1293,8 @@ model QuarterDayForecast {
   date?: utcDateTime;
 
   /**
-   * The start of this quarter-day period, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * The start of this quarter-day period, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (`yyyy-mm-ddThh:mm:ss±hh:mm`). For example, *2019-11-14T07:00:00-08:00*
    * for the morning quarter on November 14, 2019.
    */
@@ -1512,8 +1512,8 @@ model CurrentConditionsResult {
  */
 model CurrentConditions {
   /**
-   * The date and time of this observation, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * The date and time of this observation, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    */
   dateTime?: utcDateTime;
@@ -1878,8 +1878,8 @@ model DailyForecastResult {
  */
 model DailyForecastSummary {
   /**
-   * The start of the window covered by this summary, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format - for example,
+   * The start of the window covered by this summary, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format - for example,
    * *2019-10-27T19:39:57-08:00*. May be later than the start of the
    * requested forecast window if the summarized event begins partway
    * through it.
@@ -1887,8 +1887,8 @@ model DailyForecastSummary {
   startDate?: utcDateTime;
 
   /**
-   * The end of the window covered by this summary, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format - for example,
+   * The end of the window covered by this summary, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format - for example,
    * *2019-10-29T07:00:00-08:00*. May be earlier than the end of the
    * requested forecast window if the summarized event ends before it.
    */
@@ -2848,8 +2848,8 @@ model AlertArea {
   summary?: string;
 
   /**
-   * The date and time at which the alert begins for this area, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * The date and time at which the alert begins for this area, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    * If the alert spans multiple time zones, the value reflects the local
    * time at the coordinates supplied on the request.
@@ -2858,7 +2858,7 @@ model AlertArea {
 
   /**
    * The date and time at which the alert ends or will end for this area,
-   * in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format
+   * in [RFC 3339](https://datatracker.ietf.org/doc/html/rfc3339) format
    * (yyyy-mm-ddThh:mm:ss-hh:mm). For example, *2025-04-29T07:00:00-07:00*.
    * If the alert spans multiple time zones, the value reflects the local
    * time at the coordinates supplied on the request.
@@ -4352,8 +4352,8 @@ model DailyHistoricalNormalsResult {
  */
 model DailyHistoricalNormals {
   /**
-   * The calendar day these normals describe, in [ISO
-   * 8601](https://en.wikipedia.org/wiki/ISO_8601) extended format with
+   * The calendar day these normals describe, in [RFC
+   * 3339](https://datatracker.ietf.org/doc/html/rfc3339) extended format with
    * a time-zone offset (yyyy-mm-ddThh:mm:ss+hh:mm). For example,
    * *2012-01-20T00:00:00-04:00* - the time component is always
    * *00:00:00* and the offset reflects the queried location's standard
