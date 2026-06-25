@@ -7,10 +7,23 @@ using Microsoft.EventGrid;
 namespace Customization;
 
 // C#-only union for PrivateEndpointConnectionsParentType without namespaces entry
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Matches source union pattern; string member has no inline docs"
 union PrivateEndpointConnectionsParentTypeCsharp {
   string,
+
+  /**
+   * topics
+   */
   topics: "topics",
+
+  /**
+   * domains
+   */
   domains: "domains",
+
+  /**
+   * partnerNamespaces
+   */
   partnerNamespaces: "partnerNamespaces",
 }
 
@@ -153,44 +166,8 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 @@clientName(PartnerTopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
 @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
 
-// GA parity: the SDK already exposes domain-topic event subscription listing via
-// DomainTopicEventSubscriptionCollection.GetAll(). Hide the duplicate extension projection.
-@@scope(EventSubscriptions.listByDomainTopic, "!csharp");
-// GA parity: keep split/perimeter compatibility wrappers as public surface; generated NSP Get
-// operation overloads should remain internal for C#.
-@@access(NetworkSecurityPerimeterConfigurations.get, Access.internal, "csharp");
-// GA parity: list-by-resource data projection is exposed via EventSubscriptionCollection in GA.
-@@access(EventSubscriptionOperationGroup.listByResource, Access.internal, "csharp");
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
-  "EventSubscriptionsSubscriptionScope",
-  "csharp"
-);
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listGlobalByResourceGroupForTopicType,
-  "EventSubscriptionsResourceGroupScope",
-  "csharp"
-);
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listRegionalBySubscription,
-  "EventSubscriptionsSubscriptionScope",
-  "csharp"
-);
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listRegionalByResourceGroup,
-  "EventSubscriptionsResourceGroupScope",
-  "csharp"
-);
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
-  "EventSubscriptionsSubscriptionScope",
-  "csharp"
-);
-@@clientLocation(
-  EventSubscriptionsOperationGroup.listRegionalByResourceGroupForTopicType,
-  "EventSubscriptionsResourceGroupScope",
-  "csharp"
-);
+// Keep listByDomainTopic on EventSubscriptionCollection.GetAll (GA-compatible shape and route).
+@@clientName(NetworkSecurityPerimeterConfigurations.get, "Get", "csharp");
 @@clientName(
   EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
   "GetGlobalEventSubscriptionsDataForTopicType",
