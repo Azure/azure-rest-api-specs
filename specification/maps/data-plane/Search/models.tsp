@@ -370,16 +370,14 @@ union AutocompleteResultTypeGroupsEnum {
   string,
 
   /**
-   * Suggestions that resolve to a specific address or a road segment. Constituent types in
-   * `AutocompleteResultTypeEnum`: `Address`, `RoadBlock`.
+   * Suggestions that resolve to a specific address or a road segment.
    */
   Address: "Address",
 
   /**
    * Suggestions that resolve to named places, including administrative regions, populated
-   * places, neighborhoods, natural features, and points of interest. Constituent types in
-   * `AutocompleteResultTypeEnum`: every member except `Address` and `RoadBlock`. Examples
-   * include `AdminDivision1`, `Neighborhood`, and `PopulatedPlace`.
+   * places, neighborhoods, natural features, and points of interest. Examples include
+   * `AdminDivision1`, `Neighborhood`, and `PopulatedPlace`.
    */
   Place: "Place",
 }
