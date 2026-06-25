@@ -7672,6 +7672,16 @@
         "isSoftDeleteEnabled": {
           "type": "boolean",
           "description": "Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time."
+        },
+        "retentionPeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The retention period in days for a soft-deleted resource. After this period elapses, the soft-deleted gallery image version transitions to a simulated hard-deleted state."
+        },
+        "gracePeriodInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unconsumable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted."
         }
       }
     },
