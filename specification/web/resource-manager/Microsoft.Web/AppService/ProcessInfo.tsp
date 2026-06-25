@@ -105,16 +105,15 @@ interface ProcessInfos {
   getInstanceProcessDump is ProcessInfoOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -200,16 +199,15 @@ interface ProcessInfoOperationGroup {
   getProcessDump is ProcessInfoOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -308,16 +306,15 @@ interface InstanceProcessSlotOperationGroup {
   getInstanceProcessDumpSlot is InstanceProcessSlotOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -409,16 +406,15 @@ interface ProcessSlotOperationGroup {
   getProcessDumpSlot is ProcessSlotOperationGroupOps.ActionSync<
     ProcessInfo,
     void,
+    | {
+        @header("Content-Type")
+        contentType: "*/*";
 
-      | {
-          @header("Content-Type")
-          contentType: "*/*";
-
-          @doc("Receipt body in COSE format")
-          @bodyRoot
-          body: bytes;
-        }
-      | ArmNotFoundResponse,
+        @doc("Receipt body in COSE format")
+        @bodyRoot
+        body: bytes;
+      }
+    | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
