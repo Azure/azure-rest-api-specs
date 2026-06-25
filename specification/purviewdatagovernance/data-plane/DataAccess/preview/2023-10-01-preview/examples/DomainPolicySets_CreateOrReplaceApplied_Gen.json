@@ -1,0 +1,35 @@
+{
+  "title": "DomainPolicySets_CreateOrReplaceApplied",
+  "operationId": "DomainPolicySets_CreateOrReplaceApplied",
+  "parameters": {
+    "api-version": "2023-10-01-preview",
+    "domainId": "55555555-6666-7777-8888-999999999999",
+    "policySet": {
+      "targetResource": {
+        "targetId": "55555555-6666-7777-8888-999999999999",
+        "targetType": "Domain"
+      },
+      "policySetKind": "Domain",
+      "policies": {
+        "managerApprovalRequired": true,
+        "dataCopyPermitted": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "policySetId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+        "targetResource": {
+          "targetId": "55555555-6666-7777-8888-999999999999",
+          "targetType": "Domain"
+        },
+        "policySetKind": "Domain",
+        "policies": {
+          "managerApprovalRequired": true,
+          "dataCopyPermitted": false
+        }
+      }
+    }
+  }
+}
