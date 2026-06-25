@@ -725,11 +725,6 @@ using Microsoft.MachineLearningServices;
 @@access(ScheduleProvisioningState, Access.public, "csharp");
 @@access(ScheduleStatus, Access.public, "csharp");
 @@access(PrivateEndpointResource.subnetArmId, Access.internal, "csharp");
-// Preserve the GA C# hierarchy where outbound rules are direct workspace children.
-@@access(OutboundRuleBasicResourceOperationGroup.get, Access.internal, "csharp");
-@@access(OutboundRuleBasicResourceOperationGroup.createOrUpdate, Access.internal, "csharp");
-@@access(OutboundRuleBasicResourceOperationGroup.delete, Access.internal, "csharp");
-@@access(OutboundRuleBasicResourceOperationGroup.list, Access.internal, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "MachineLearningError",

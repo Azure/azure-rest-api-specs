@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./Workspace.tsp";
-import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -25,28 +24,6 @@ model OutboundRuleBasicResource
     NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
   >;
 }
-
-@removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-@added(Versions.v2026_03_15_preview)
-@parentResource(ManagedNetworkSettingsPropertiesBasicResource)
-model ManagedNetworkOutboundRuleBasicResource
-  is Azure.ResourceManager.ProxyResource<OutboundRule, false> {
-  ...ResourceNameParameter<
-    Resource = ManagedNetworkOutboundRuleBasicResource,
-    KeyName = "ruleName",
-    SegmentName = "outboundRules",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-  >;
-}
-
-@removed(Versions.v2025_12_01)
-@added(Versions.v2026_01_15_preview)
-@removed(Versions.v2026_03_01)
-@added(Versions.v2026_03_15_preview)
-model ManagedNetworkOutboundRuleListResult
-  is Azure.Core.Page<ManagedNetworkOutboundRuleBasicResource>;
 
 @armResourceOperations
 interface OutboundRuleBasicResourceOps
@@ -164,14 +141,14 @@ interface OutboundRuleBasicResourceOperationGroup {
    * The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.
    */
   @summary("The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.")
-  get is OutboundRuleBasicResourceOperationGroupOps.Read<ManagedNetworkOutboundRuleBasicResource>;
+  get is OutboundRuleBasicResourceOperationGroupOps.Read<OutboundRuleBasicResource>;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing API returns additional response codes"
   createOrUpdate is OutboundRuleBasicResourceOperationGroupOps.CreateOrUpdateAsync<
-    ManagedNetworkOutboundRuleBasicResource,
+    OutboundRuleBasicResource,
     Response =
-      | ArmResourceUpdatedResponse<ManagedNetworkOutboundRuleBasicResource>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedNetworkOutboundRuleBasicResource>> &
+      | ArmResourceUpdatedResponse<OutboundRuleBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = OutboundRuleBasicResource>> &
           Azure.Core.Foundations.RetryAfterHeader)
   >;
 
@@ -179,15 +156,15 @@ interface OutboundRuleBasicResourceOperationGroup {
    * The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.
    */
   @summary("The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.")
-  delete is OutboundRuleBasicResourceOperationGroupOps.DeleteWithoutOkAsync<ManagedNetworkOutboundRuleBasicResource>;
+  delete is OutboundRuleBasicResourceOperationGroupOps.DeleteWithoutOkAsync<OutboundRuleBasicResource>;
 
   /**
    * The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.
    */
   @summary("The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.")
   list is OutboundRuleBasicResourceOperationGroupOps.List<
-    ManagedNetworkOutboundRuleBasicResource,
-    Response = ManagedNetworkOutboundRuleListResult
+    OutboundRuleBasicResource,
+    Response = OutboundRuleListResult
   >;
 }
 
@@ -197,14 +174,6 @@ interface OutboundRuleBasicResourceOperationGroup {
 );
 @@doc(
   OutboundRuleBasicResource.properties,
-  "Outbound Rule for the managed network of a machine learning workspace."
-);
-@@doc(
-  ManagedNetworkOutboundRuleBasicResource.name,
-  "Name of the workspace managed network outbound rule"
-);
-@@doc(
-  ManagedNetworkOutboundRuleBasicResource.properties,
   "Outbound Rule for the managed network of a machine learning workspace."
 );
 @@doc(
