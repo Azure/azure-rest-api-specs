@@ -18,5 +18,6 @@ import "./src/openai-evaluations/routes.tsp";
 import "./src/openai-finetuning/routes.tsp";
 import "./src/openai-responses/routes.tsp";
 import "./src/red-teams/routes.tsp";
+import "./src/reinforcement-learning/routes.tsp";
 import "./src/schedules/routes.tsp";
 import "./client.tsp";

@@ -51,6 +51,9 @@
       "name": "Redteams"
     },
     {
+      "name": "ReinforcementLearning"
+    },
+    {
       "name": "Schedules"
     }
   ],
@@ -7191,6 +7194,761 @@
         }
       }
     },
+    "/rle/environments/{environmentId}/sandboxes": {
+      "post": {
+        "operationId": "RLESandboxes_createSandbox",
+        "description": "Lease a fresh sandbox for a hosted RLE environment.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SandboxCreate"
+              }
+            }
+          },
+          "description": "The resource instance."
+        }
+      },
+      "get": {
+        "operationId": "RLESandboxes_listSandboxes",
+        "description": "List the sandboxes currently leased for an environment.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedSandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}": {
+      "get": {
+        "operationId": "RLESandboxes_getSandbox",
+        "description": "Fetch the latest lifecycle state for a leased sandbox.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      },
+      "delete": {
+        "operationId": "RLESandboxes_deleteSandbox",
+        "description": "Release a leased sandbox. The SDK treats this as best-effort teardown.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/health": {
+      "get": {
+        "operationId": "RLEEnvironmentRuntime_health",
+        "description": "Return environment health details.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/metadata": {
+      "get": {
+        "operationId": "RLEEnvironmentRuntime_getMetadata",
+        "description": "Return environment metadata.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/reset": {
+      "post": {
+        "operationId": "RLEEnvironmentRuntime_reset",
+        "description": "Start a new episode and return the initial observation.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StepResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/schema": {
+      "get": {
+        "operationId": "RLEEnvironmentRuntime_schema",
+        "description": "Return environment-provided action and observation schemas.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/state": {
+      "get": {
+        "operationId": "RLEEnvironmentRuntime_state",
+        "description": "Return the current environment state.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EnvState"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rle/environments/{environmentId}/sandboxes/{sandboxId}/step": {
+      "post": {
+        "operationId": "RLEEnvironmentRuntime_step",
+        "description": "Apply an action and return the resulting transition.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "Sandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StepResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StepRequest"
+              }
+            }
+          }
+        }
+      }
+    },
     "/schedules": {
       "get": {
         "operationId": "Schedules_list",
@@ -10765,6 +11523,21 @@
           }
         ],
         "description": "Entra ID credential definition"
+      },
+      "EnvState": {
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "description": "Current episode identifier, when one is active."
+          },
+          "stepCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of completed steps in the current episode."
+          }
+        },
+        "description": "Snapshot returned by the RLE environment `state` endpoint."
       },
       "Eval": {
         "type": "object",
@@ -36714,6 +37487,27 @@
         },
         "description": "Paged collection of RedTeam items"
       },
+      "PagedSandbox": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Sandbox"
+            },
+            "description": "The Sandbox items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Sandbox items"
+      },
       "PagedSchedule": {
         "type": "object",
         "required": [
@@ -37302,6 +38096,21 @@
         ],
         "description": "Represents the parameters for red team taxonomy item generation."
       },
+      "ResetRequest": {
+        "type": "object",
+        "properties": {
+          "seed": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Optional deterministic seed for the next episode."
+          },
+          "episodeId": {
+            "type": "string",
+            "description": "Optional caller-provided episode identifier."
+          }
+        },
+        "description": "Request body for starting or restarting an RLE environment episode."
+      },
       "ResponseRetrievalItemGenerationParams": {
         "type": "object",
         "required": [
@@ -37412,6 +38221,66 @@
           }
         ],
         "description": "The type of sample used in the analysis."
+      },
+      "Sandbox": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Sandbox identifier, assigned by the service.",
+            "readOnly": true
+          },
+          "status": {
+            "type": "string",
+            "description": "Sandbox lifecycle status. The SDK treats `Running` as ready and `Failed` as\nfailed; `Stopped` is also terminal.",
+            "readOnly": true
+          },
+          "url": {
+            "type": "string",
+            "description": "Base URL for the sandbox runtime API. Present once the sandbox is `Running`.",
+            "readOnly": true
+          },
+          "error": {
+            "type": "string",
+            "description": "Failure detail when the sandbox enters a failed state.",
+            "readOnly": true
+          }
+        },
+        "description": "A sandbox leased from a hosted RLE environment."
+      },
+      "SandboxCreate": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "Optional environment image or package version to run."
+          },
+          "cpu": {
+            "type": "number",
+            "format": "double",
+            "description": "Requested CPU allocation for the sandbox, in cores."
+          },
+          "memory": {
+            "type": "string",
+            "description": "Requested memory allocation, for example '2Gi'."
+          },
+          "disk": {
+            "type": "string",
+            "description": "Requested disk allocation, for example '10Gi'."
+          },
+          "envVars": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Environment variables to inject into the sandbox."
+          }
+        },
+        "description": "A sandbox leased from a hosted RLE environment."
       },
       "SasCredential": {
         "type": "object",
@@ -37778,6 +38647,58 @@
           }
         },
         "description": "Sku information"
+      },
+      "StepRequest": {
+        "type": "object",
+        "required": [
+          "action"
+        ],
+        "properties": {
+          "action": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Environment-specific action payload."
+          }
+        },
+        "description": "Request body for applying an action to the current RLE episode."
+      },
+      "StepResult": {
+        "type": "object",
+        "properties": {
+          "observation": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Environment-specific observation payload."
+          },
+          "reward": {
+            "type": "number",
+            "format": "double",
+            "description": "Reward for the transition, when the environment provides one."
+          },
+          "terminated": {
+            "type": "boolean",
+            "description": "True when the episode reached a natural terminal state."
+          },
+          "truncated": {
+            "type": "boolean",
+            "description": "True when an external limit ended the episode."
+          },
+          "done": {
+            "type": "boolean",
+            "description": "Legacy single terminal flag. New payloads should prefer `terminated` and `truncated`."
+          },
+          "info": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Gymnasium info payload."
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Legacy metadata payload. The SDK maps it to `info` when `info` is absent."
+          }
+        },
+        "description": "Outcome returned by RLE `reset` and `step` in the OpenEnv / Gymnasium wire shape."
       },
       "StructuredInputDefinition": {
         "type": "object",
