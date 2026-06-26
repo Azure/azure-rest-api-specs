@@ -3607,7 +3607,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(
   AppServiceEnvironmentPatchResource,
-  "AppServiceEnvironmentPatchContent",
+  "AppServiceEnvironmentPatch",
   "csharp"
 );
 @@clientName(AppServiceEnvironmentResource, "AppServiceEnvironment", "csharp");
@@ -3616,7 +3616,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@access(ResourceMetricAvailability, Access.public, "csharp");
 @@clientName(
   AppServicePlanPatchResource,
-  "AppServicePlanPatchContent",
+  "AppServicePlanPatch",
   "csharp"
 );
 @@clientName(AseRegion, "AppServiceAseRegion", "csharp");
@@ -3938,7 +3938,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(
   ResourceNameAvailabilityRequest,
-  "AppServiceNameAvailabilityRequest",
+  "AppServiceNameAvailabilityContent",
   "csharp"
 );
 @@clientName(ResourceReference, "WorkflowResourceReference", "csharp");
@@ -5499,6 +5499,62 @@ union ConfigReferenceSource {
   "ListResourceHealthMetadata",
   "csharp"
 );
+
+
+// Theme D-IP: restore GA "IP" acronym casing (TSP uses ip*, GA uses IP*).
+@@clientName(SiteConfig.ipSecurityRestrictions, "IPSecurityRestrictions", "csharp");
+@@clientName(SiteConfig.ipSecurityRestrictionsDefaultAction, "IPSecurityRestrictionsDefaultAction", "csharp");
+@@clientName(SiteConfig.scmIpSecurityRestrictions, "ScmIPSecurityRestrictions", "csharp");
+@@clientName(SiteConfig.scmIpSecurityRestrictionsDefaultAction, "ScmIPSecurityRestrictionsDefaultAction", "csharp");
+@@clientName(SiteProperties.ipMode, "IPMode", "csharp");
+@@clientName(AppServiceEnvironment.ipsslAddressCount, "IPSslAddressCount", "csharp");
+@@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
+@@clientName(ServerFarmInstance.ipAddress, "IPAddress", "csharp");
+@@clientName(RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses, "IPAddresses", "csharp");
+@@clientName(RemotePrivateEndpointConnectionProperties.ipAddresses, "IPAddresses", "csharp");
+
+// Theme D-Acronyms: restore additional GA acronym casing.
+@@clientName(BillingMeterProperties.osType, "OSType", "csharp");
+@@clientName(MSDeployCore.dbType, "DBType", "csharp");
+@@clientName(SiteProperties.outboundIpAddresses, "OutboundIPAddresses", "csharp");
+@@clientName(SiteProperties.possibleOutboundIpAddresses, "PossibleOutboundIPAddresses", "csharp");
+@@clientName(AseV3NetworkingConfigurationProperties.externalInboundIpAddresses, "ExternalInboundIPAddresses", "csharp");
+@@clientName(AseV3NetworkingConfigurationProperties.internalInboundIpAddresses, "InternalInboundIPAddresses", "csharp");
+@@clientName(AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses, "LinuxOutboundIPAddresses", "csharp");
+@@clientName(AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses, "WindowsOutboundIPAddresses", "csharp");
+@@clientName(AseV3NetworkingConfigurationProperties.inboundIpAddressOverride, "InboundIPAddressOverride", "csharp");
+@@clientName(FlowEndpoints.accessEndpointIpAddresses, "AccessEndpointIPAddresses", "csharp");
+@@clientName(FlowEndpoints.outgoingIpAddresses, "OutgoingIPAddresses", "csharp");
+@@clientName(FlowAccessControlConfigurationPolicy.allowedCallerIpAddresses, "AllowedCallerIPAddresses", "csharp");
+@@clientName(AppServiceEnvironment.userWhitelistedIpRanges, "UserWhitelistedIPRanges", "csharp");
+@@clientName(KubeEnvironmentProperties.staticIp, "StaticIP", "csharp");
+@@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
+@@clientName(AddressResponseProperties.outboundIpAddresses, "OutboundIPAddresses", "csharp");
+
+// Theme D-Id: restore GA ResourceIdentifier typing for *Id properties (TSP uses string).
+@@alternateType(CertificatePatchResourceProperties.keyVaultId, armResourceIdentifier, "csharp");
+@@alternateType(CertificatePatchResourceProperties.serverFarmId, armResourceIdentifier, "csharp");
+@@alternateType(ValidateProperties.serverFarmId, armResourceIdentifier, "csharp");
+@@alternateType(VnetParametersProperties.subnetResourceId, armResourceIdentifier, "csharp");
+@@alternateType(SitePatchResourceProperties.serverFarmId, armResourceIdentifier, "csharp");
+@@alternateType(SitePatchResourceProperties.virtualNetworkSubnetId, armResourceIdentifier, "csharp");
+@@alternateType(DatabaseConnectionProperties.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(DatabaseConnectionPatchRequestProperties.resourceId, armResourceIdentifier, "csharp");
+@@alternateType(StaticSiteLinkedBackend.backendResourceId, armResourceIdentifier, "csharp");
+@@alternateType(SwiftVirtualNetworkProperties.subnetResourceId, armResourceIdentifier, "csharp");
+@@alternateType(SiteProperties.serverFarmId, armResourceIdentifier, "csharp");
+@@alternateType(SiteProperties.virtualNetworkSubnetId, armResourceIdentifier, "csharp");
+@@alternateType(KubeEnvironmentProperties.aksResourceID, armResourceIdentifier, "csharp");
+@@clientName(KubeEnvironmentProperties.aksResourceID, "AksResourceId", "csharp");
+
+
+// Theme C: GA name preservation for renames missed during initial migration.
+@@clientName(CheckNameResourceTypes, "CheckNameResourceType", "csharp");
+@@clientName(DnlResourceNameAvailabilityRequest, "DnlResourceNameAvailabilityContent", "csharp");
+@@clientName(ProviderOsTypeSelected, "ProviderOSTypeSelected", "csharp");
+@@clientName(ProviderStackOsType, "ProviderStackOSType", "csharp");
+@@clientName(StaticSitesWorkflowPreview, "StaticSitesWorkflowPreviewContent", "csharp");
+@@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
 
 @@usage(
   AbnormalTimePeriod,
