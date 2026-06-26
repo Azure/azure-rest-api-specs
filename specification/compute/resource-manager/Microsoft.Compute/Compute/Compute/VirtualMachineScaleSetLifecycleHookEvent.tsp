@@ -61,10 +61,9 @@ interface VirtualMachineScaleSetLifeCycleHookEvents {
    * The operation to update a virtual machine scale set lifecycle hook event.
    */
   @patch(#{ implicitOptionality: false })
-  update is ComputeCustomPatchSync<
+  update is ComputeCustomPatchAsync<
     VMScaleSetLifecycleHookEvent,
-    VMScaleSetLifecycleHookEventUpdate,
-    Response = ArmResponse<VMScaleSetLifecycleHookEvent>
+    VMScaleSetLifecycleHookEventUpdate
   >;
 
   /**
