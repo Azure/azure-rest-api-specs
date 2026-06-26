@@ -474,7 +474,8 @@
         },
         "targetKubernetesVersion": {
           "type": "string",
-          "description": "Target Kubernetes version to evaluate for upgrade (e.g., '1.30')."
+          "description": "Target Kubernetes version to evaluate for upgrade (e.g., '1.30').",
+          "readOnly": true
         },
         "assessmentTime": {
           "type": "string",
@@ -494,7 +495,9 @@
             "$ref": "#/definitions/ComponentCompatibility"
           },
           "readOnly": true,
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "deprecatedApis": {
           "type": "array",

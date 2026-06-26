@@ -155,13 +155,14 @@ model ReadinessCheck {
 // ─── ARM resource properties ──────────────────────────────────────────────────
 
 /** Properties of a single UpgradeAssessment ARM resource. */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This is a read-only resource and doesn't "
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "UpgradeAssessment is a read-only resource (GET/LIST only, no PUT) with no provisioning lifecycle, so provisioningState is intentionally omitted."
 model UpgradeAssessmentProperties {
   /** Current Kubernetes version running on the cluster (e.g., '1.29'). */
   @visibility(Lifecycle.Read)
   currentKubernetesVersion?: string;
 
   /** Target Kubernetes version to evaluate for upgrade (e.g., '1.30'). */
+  @visibility(Lifecycle.Read)
   targetKubernetesVersion?: string;
 
   /**
@@ -180,7 +181,7 @@ model UpgradeAssessmentProperties {
    * Per-component compatibility results with the target Kubernetes version.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @identifiers(#["name"])
   componentCompatibility?: ComponentCompatibility[];
 
   /**
