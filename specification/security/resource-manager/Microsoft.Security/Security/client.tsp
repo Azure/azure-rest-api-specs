@@ -1788,6 +1788,13 @@ model CSharpSecurityAssessmentStatusResult
   "csharp"
 );
 @@clientName(PricingsAPI.PricingTier, "SecurityCenterPricingTier", "csharp");
+@@clientName(PricingsAPI.Enforce, "SecurityPolicyEnforce", "csharp");
+@@clientName(PricingsAPI.Extension, "SecurityConnectorExtension", "csharp");
+@@clientName(
+  PricingsAPI.IsEnabled,
+  "SecurityCenterExtensionIsEnabled",
+  "csharp"
+);
 @@clientName(SecureScoreAPI.ControlType, "SecurityControlType", "csharp");
 @@clientName(SensitivitySettingsAPI.BuiltInInfoType.type, "Dns", "csharp");
 @@clientName(
@@ -1804,6 +1811,17 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(
   SecuritySolutionsAPI.ConnectionType,
   "SecurityCenterConnectionType",
+  "csharp"
+);
+@@clientName(SecurityStandardsAPI.Effect, "SecurityCenterEffect", "csharp");
+@@clientName(
+  SecurityStandardsAPI.ExemptionCategory,
+  "SecurityExemptionCategory",
+  "csharp"
+);
+@@clientName(
+  HealthReportsAPI.environmentDetails,
+  "SecurityConnectorEnvironmentDetails",
   "csharp"
 );
 @@clientName(
