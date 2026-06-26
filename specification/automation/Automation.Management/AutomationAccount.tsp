@@ -25,15 +25,37 @@ model AutomationAccount
   /**
    * Gets or sets the etag of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the existing identity property to keep the swagger compatibility."
   etag?: string;
 
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Keep the existing identity property to keep the swagger compatibility."
   identity?: Identity;
 }
+
+alias SoftwareUpdateConfigurationMachineRunIdParameter = {
+  /**
+   * The Id of the software update configuration machine run.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
+  @path
+  @segment("softwareUpdateConfigurationMachineRuns")
+  @format("uuid")
+  softwareUpdateConfigurationMachineRunId: string;
+};
+
+alias SoftwareUpdateConfigurationRunIdParameter = {
+  /**
+   * The Id of the software update configuration run.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
+  @path
+  @segment("softwareUpdateConfigurationRuns")
+  @format("uuid")
+  softwareUpdateConfigurationRunId: string;
+};
 
 @armResourceOperations(#{ omitTags: true })
 interface AutomationAccounts {
@@ -326,16 +348,7 @@ interface AutomationAccounts {
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
     Response = ArmResponse<softwareUpdateConfigurationMachineRun>,
-    Parameters = {
-      /**
-       * The Id of the software update configuration machine run.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("softwareUpdateConfigurationMachineRuns")
-      softwareUpdateConfigurationMachineRunId: string;
-
+    Parameters = SoftwareUpdateConfigurationMachineRunIdParameter & {
       /**
        * Identifies this specific client request.
        */
@@ -394,16 +407,7 @@ interface AutomationAccounts {
     AutomationAccount,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AutomationAccount>,
     Response = ArmResponse<softwareUpdateConfigurationRun>,
-    Parameters = {
-      /**
-       * The Id of the software update configuration run.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("softwareUpdateConfigurationRuns")
-      softwareUpdateConfigurationRunId: string;
-
+    Parameters = SoftwareUpdateConfigurationRunIdParameter & {
       /**
        * Identifies this specific client request.
        */

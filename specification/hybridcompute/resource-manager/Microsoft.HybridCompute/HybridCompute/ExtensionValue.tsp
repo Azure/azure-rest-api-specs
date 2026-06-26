@@ -34,7 +34,7 @@ alias ExtensionValueOps = Legacy.ExtensionOperations<
     @path
     @segment("locations")
     @key("location")
-    location: string;
+    location: Azure.Core.azureLocation;
 
     /** The publisher of the Extension being received. */
     @path
