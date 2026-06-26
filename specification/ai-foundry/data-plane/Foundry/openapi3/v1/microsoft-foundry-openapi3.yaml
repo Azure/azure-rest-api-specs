@@ -11915,6 +11915,9 @@ components:
             - multi_turn
             - crescendo
       description: Strategies for attacks.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -38173,6 +38176,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - WorkflowAgents=V1Preview
+          - ExternalAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:

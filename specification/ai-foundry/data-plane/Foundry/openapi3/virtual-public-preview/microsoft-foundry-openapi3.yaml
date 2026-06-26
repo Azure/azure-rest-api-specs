@@ -13711,6 +13711,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -14204,6 +14207,9 @@ components:
             - multi_turn
             - crescendo
       description: Strategies for attacks.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -16811,6 +16817,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Dataset source for evaluation suite generation jobs — reference to a dataset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -18118,6 +18127,9 @@ components:
             - tool_use
             - task
       description: The data generation type.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationDatasetReference:
       type: object
       required:
@@ -18136,6 +18148,9 @@ components:
             Optional — if not provided, schema is inferred at runtime from the data.
             Only applicable for uri_folder datasets.
       description: Reference to a dataset by name and version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationLevel:
       anyOf:
         - type: string
@@ -18338,6 +18353,9 @@ components:
           maximum: 1000
           description: 'Maximum number of samples to generate. Valid range: 15-1000.'
       description: Options for dataset generation within an evaluation suite generation job.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationCategory:
       anyOf:
         - type: string
@@ -18346,6 +18364,9 @@ components:
             - quality
             - safety
       description: The category of evaluator generation.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJob:
       type: object
       required:
@@ -18392,6 +18413,9 @@ components:
           description: Token consumption summary. Populated on terminal states.
           readOnly: true
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobCreate:
       type: object
       properties:
@@ -18400,6 +18424,9 @@ components:
             - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
           description: Caller-supplied inputs.
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobInputs:
       type: object
       required:
@@ -18457,6 +18484,9 @@ components:
             Default: turn (single-turn evaluation).
             Use conversation for multi-turn evaluation.
       description: Caller-supplied inputs for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationTokenUsage:
       type: object
       properties:
@@ -18473,6 +18503,9 @@ components:
           format: int64
           description: Total tokens consumed.
       description: Token usage summary for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSource:
       type: object
       required:
@@ -18493,6 +18526,9 @@ components:
           traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
           dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
       description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSourceType:
       anyOf:
         - type: string
@@ -18503,6 +18539,9 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluation suite generation jobs.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunRequest:
       type: object
       properties:
@@ -18517,6 +18556,9 @@ components:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
       description: Request body for running an evaluation from a suite.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResponse:
       type: object
       required:
@@ -18536,6 +18578,9 @@ components:
             $ref: '#/components/schemas/EvaluationSuiteRunResult'
           description: The run results. Currently a single-element array; will support multiple runs in the future.
       description: Response from running an evaluation suite.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResult:
       type: object
       required:
@@ -18559,6 +18604,9 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the run was created.
       description: Result of a single evaluation run within a suite execution.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteSubtype:
       anyOf:
         - type: string
@@ -18567,6 +18615,9 @@ components:
             - default
             - benchmark
       description: The subtype of an evaluation suite.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersion:
       type: object
       required:
@@ -18638,6 +18689,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionCreate:
       type: object
       required:
@@ -18707,6 +18761,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionUpdate:
       type: object
       required:
@@ -18776,6 +18833,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTarget:
       type: object
       required:
@@ -39189,6 +39249,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -41245,6 +41308,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TracesEvaluatorGenerationJobSource:
       type: object
       required:
@@ -41439,6 +41505,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - WorkflowAgents=V1Preview
+          - ExternalAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:

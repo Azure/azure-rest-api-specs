@@ -20766,7 +20766,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from."
+        "description": "Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "AgentEvaluatorGenerationJobSource": {
         "type": "object",
@@ -21508,7 +21513,12 @@
             ]
           }
         ],
-        "description": "Strategies for attacks."
+        "description": "Strategies for attacks.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "RedTeams=V1Preview"
+          ]
+        }
       },
       "Azure.Core.Foundations.Error": {
         "type": "object",
@@ -25411,7 +25421,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset."
+        "description": "Dataset source for evaluation suite generation jobs — reference to a dataset.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
@@ -26947,7 +26962,12 @@
             ]
           }
         ],
-        "description": "The data generation type."
+        "description": "The data generation type.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationDatasetReference": {
         "type": "object",
@@ -26968,7 +26988,12 @@
             "description": "Name of the schema file within the dataset's blob folder (e.g., \"a3f2b1c4_schema.json\").\nOptional — if not provided, schema is inferred at runtime from the data.\nOnly applicable for uri_folder datasets."
           }
         },
-        "description": "Reference to a dataset by name and version."
+        "description": "Reference to a dataset by name and version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationLevel": {
         "anyOf": [
@@ -27288,7 +27313,12 @@
             "description": "Maximum number of samples to generate. Valid range: 15-1000."
           }
         },
-        "description": "Options for dataset generation within an evaluation suite generation job."
+        "description": "Options for dataset generation within an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationCategory": {
         "anyOf": [
@@ -27303,7 +27333,12 @@
             ]
           }
         ],
-        "description": "The category of evaluator generation."
+        "description": "The category of evaluator generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJob": {
         "type": "object",
@@ -27381,7 +27416,12 @@
             "readOnly": true
           }
         },
-        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJobCreate": {
         "type": "object",
@@ -27395,7 +27435,12 @@
             "description": "Caller-supplied inputs."
           }
         },
-        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion."
+        "description": "Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationJobInputs": {
         "type": "object",
@@ -27470,7 +27515,12 @@
             "description": "Evaluation level for the generated suite.\nDefault: turn (single-turn evaluation).\nUse conversation for multi-turn evaluation."
           }
         },
-        "description": "Caller-supplied inputs for an evaluation suite generation job."
+        "description": "Caller-supplied inputs for an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteGenerationTokenUsage": {
         "type": "object",
@@ -27491,7 +27541,12 @@
             "description": "Total tokens consumed."
           }
         },
-        "description": "Token usage summary for an evaluation suite generation job."
+        "description": "Token usage summary for an evaluation suite generation job.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteJobSource": {
         "type": "object",
@@ -27521,7 +27576,12 @@
             "dataset": "#/components/schemas/DatasetEvaluationSuiteJobSource"
           }
         },
-        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`."
+        "description": "The base source model for evaluation suite generation jobs. Polymorphic over `type`.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteJobSourceType": {
         "anyOf": [
@@ -27538,7 +27598,12 @@
             ]
           }
         ],
-        "description": "The supported source types for evaluation suite generation jobs."
+        "description": "The supported source types for evaluation suite generation jobs.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunRequest": {
         "type": "object",
@@ -27560,7 +27625,12 @@
             "description": "Overrides the suite's default evaluation level. If omitted, uses the level from the suite."
           }
         },
-        "description": "Request body for running an evaluation from a suite."
+        "description": "Request body for running an evaluation from a suite.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunResponse": {
         "type": "object",
@@ -27586,7 +27656,12 @@
             "description": "The run results. Currently a single-element array; will support multiple runs in the future."
           }
         },
-        "description": "Response from running an evaluation suite."
+        "description": "Response from running an evaluation suite.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteRunResult": {
         "type": "object",
@@ -27622,7 +27697,12 @@
             "description": "Timestamp when the run was created."
           }
         },
-        "description": "Result of a single evaluation run within a suite execution."
+        "description": "Result of a single evaluation run within a suite execution.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteSubtype": {
         "anyOf": [
@@ -27637,7 +27717,12 @@
             ]
           }
         ],
-        "description": "The subtype of an evaluation suite."
+        "description": "The subtype of an evaluation suite.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersion": {
         "type": "object",
@@ -27732,7 +27817,12 @@
             "readOnly": true
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersionCreate": {
         "type": "object",
@@ -27826,7 +27916,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationSuiteVersionUpdate": {
         "type": "object",
@@ -27920,7 +28015,12 @@
             "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals."
+        "description": "An evaluation suite bundles testing criteria — an optional dataset, one or more\nevaluator configs with thresholds and init params — into a reusable, named artifact that\ncan gate agent changes across batch, scheduled, continuous, and CI/CD evals.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluationTarget": {
         "type": "object",
@@ -57252,7 +57352,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user."
+        "description": "Prompt source for evaluation suite generation jobs — inline text provided by the user.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "PromptEvaluatorGenerationJobSource": {
         "type": "object",
@@ -60347,7 +60452,12 @@
             "$ref": "#/components/schemas/EvaluationSuiteJobSource"
           }
         ],
-        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights."
+        "description": "Traces source for evaluation suite generation jobs — conversation traces from Application Insights.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "TracesEvaluatorGenerationJobSource": {
         "type": "object",
@@ -60623,6 +60733,12 @@
             ],
             "description": "The blueprint reference for the agent."
           }
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "WorkflowAgents=V1Preview",
+            "ExternalAgents=V1Preview"
+          ]
         }
       },
       "UpdateEvalParametersBody": {
