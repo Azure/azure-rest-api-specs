@@ -19,6 +19,7 @@ import "./AccessPolicyAssignment.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Migration.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

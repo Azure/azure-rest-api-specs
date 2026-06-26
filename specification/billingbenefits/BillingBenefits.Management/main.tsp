@@ -26,6 +26,7 @@ import "./ConditionalCredit.tsp";
 import "./ConditionalCreditContributor.tsp";
 import "./CreditSource.tsp";
 import "./FreeServices.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

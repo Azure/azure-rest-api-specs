@@ -40,6 +40,7 @@ import "./workloadNetworks-virtualMachines.tsp";
 import "./workloadNetworks-vmGroups.tsp";
 import "./workloadNetworks.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
