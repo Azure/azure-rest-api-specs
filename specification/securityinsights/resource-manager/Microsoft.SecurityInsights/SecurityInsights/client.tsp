@@ -565,6 +565,10 @@ using Azure.ClientGenerator.Core.Legacy;
   "LastUpdatedOn",
   "csharp"
 );
+@@clientName(MicrosoftSecurityProductName.`Azure Security Center for IoT`,
+  "AzureSecurityCenterForIot",
+  "csharp"
+);
 @@clientName(MLBehaviorAnalyticsAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
@@ -1198,6 +1202,10 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@alternateType(ActionPropertiesBase.logicAppResourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(AlertRules.triggerRuleRun, "TriggerRuleRunAlertRule", "csharp");
+@@clientName(Status, "SecurityInsightsContentStatus", "csharp");
+@@clientName(TemplateProperties, "SecurityInsightsContentTemplateProperties", "csharp");
+@@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
+@@clientName(JobItem, "SecurityInsightsContentJobItem", "csharp");
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
   "listQueryIndicators",
