@@ -181,6 +181,7 @@ interface Policies {
   >;
   @sharedRoute
   listByResourceGroup is ArmResourceListByParent<Policy>;
+  @doc("A long-running resource action.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"
   revokeIssuer is ArmResourceActionNoContentAsync<Policy, void>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "lintdiff issue"

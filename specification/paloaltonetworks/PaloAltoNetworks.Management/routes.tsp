@@ -15,6 +15,7 @@ namespace PaloAltoNetworks.Cloudngfw;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
+  @doc("A long-running provider action.")
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_createProductSerialNumber")
@@ -24,6 +25,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
+  @doc("A long-running provider action.")
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listCloudManagerTenants")
@@ -33,6 +35,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
+  @doc("A long-running provider action.")
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listProductSerialNumberStatus")
@@ -42,6 +45,7 @@ interface PaloAltoNetworksCloudngfwOperationsOperationGroup {
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
+  @doc("A long-running provider action.")
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PaloAltoNetworksCloudngfwOperations_listSupportInfo")

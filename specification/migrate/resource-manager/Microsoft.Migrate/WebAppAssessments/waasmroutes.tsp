@@ -29,6 +29,7 @@ interface WebAppAssessmentV3Operations {
   @added(WAApiVersions.v2024_03_03_preview)
   delete is ArmResourceDeleteSync<WebAppAssessmentV3>;
 
+  @doc("A long-running resource action.")
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Download URL Post Action body is empty."
   @added(WAApiVersions.v2024_03_03_preview)
   downloadUrl is ArmResourceActionAsync<WebAppAssessmentV3, {}, DownloadUrl>;

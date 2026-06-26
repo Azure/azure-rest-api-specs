@@ -102,6 +102,7 @@ interface EdgeActions {
   listByResourceGroup is ArmResourceListByParent<EdgeAction>;
   listBySubscription is ArmListBySubscription<EdgeAction>;
 
+  @doc("A long-running resource action.")
   @removed(Versions.`2025-12-01-preview`)
   addAttachment is ArmResourceActionAsync<
     EdgeAction,
@@ -109,6 +110,7 @@ interface EdgeActions {
     EdgeActionAttachmentResponse
   >;
 
+  @doc("A long-running resource action.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Operation matches 2024 baseline with 200, 202 responses"
   @removed(Versions.`2025-12-01-preview`)
   deleteAttachment is ArmResourceActionNoContentAsync<
@@ -139,6 +141,7 @@ interface EdgeActionVersions {
     | ArmDeletedNoContentResponse
   >;
   listByEdgeAction is ArmResourceListByParent<EdgeActionVersion>;
+  @doc("A long-running resource action.")
   deployVersionCode is ArmResourceActionAsync<
     EdgeActionVersion,
     VersionCode,
