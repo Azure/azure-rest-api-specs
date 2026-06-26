@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const InsightsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.insights_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.insights_v1_preview],
 };
 
 @doc("The response body for cluster insights.")

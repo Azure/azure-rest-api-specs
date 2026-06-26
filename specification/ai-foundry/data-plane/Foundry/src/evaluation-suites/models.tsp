@@ -10,7 +10,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const EvaluationSuitesRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
 const EvaluationSuiteGenerationJobsRequiredPreviews = #{

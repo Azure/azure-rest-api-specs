@@ -6,7 +6,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const DataGenerationJobsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview],
 };
 
 @doc("The supported data generation job types.")
