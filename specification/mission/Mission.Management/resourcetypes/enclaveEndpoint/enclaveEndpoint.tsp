@@ -59,10 +59,6 @@ model EnclaveEndpointProperties {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Whether approval is needed for the connection (True or False).")
   approvalRequired?: boolean;
-
-  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
-  @doc("Whether update mode is automatic or manual.")
-  updateMode?: UpdateMode;
 }
 
 @doc("Enclave Endpoint patchable Properties")

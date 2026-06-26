@@ -69,11 +69,6 @@ model EnclaveConnectionProperties {
   @visibility(Lifecycle.Read)
   @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
   resourceCollection?: armResourceIdentifier[];
-
-  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
-  @doc("Destination Endpoint supports automatic or manual updates.")
-  @visibility(Lifecycle.Read)
-  updateMode?: UpdateMode;
 }
 
 @doc("Enclave Connection patchable Properties")

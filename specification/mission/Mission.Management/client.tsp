@@ -63,12 +63,7 @@ using Microsoft.Mission;
 );
 @@clientName(Approver, "VirtualEnclaveApprover", "csharp");
 @@clientName(ApprovalPolicy, "VirtualEnclaveApprovalPolicy", "csharp");
-@@clientName(ApprovalSettings, "VirtualEnclaveBaseApprovalSettings", "csharp");
-@@clientName(
-  LegacyApprovalSettings,
-  "VirtualEnclaveLegacyApprovalSettings",
-  "csharp"
-);
+@@clientName(ApprovalSettings, "VirtualEnclaveApprovalSettings", "csharp");
 @@clientName(ApprovalStatus, "VirtualEnclaveApprovalStatus", "csharp");
 @@clientName(
   CheckAddressSpaceAvailabilityResponse,

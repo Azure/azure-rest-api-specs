@@ -43,18 +43,6 @@ union TransitOptionType {
   Peering: "Peering",
 }
 
-@doc("Specifies the security provider for the transit hub.")
-@added(Microsoft.Mission.Versions.v2026_03_01_preview)
-union SecurityProvider {
-  string,
-
-  @doc("No security provider")
-  None: "None",
-
-  @doc("Azure Firewall security provider")
-  AzureFirewall: "AzureFirewall",
-}
-
 @doc("TransitOptionParams Properties")
 model TransitOptionParams {
   @doc("Transit Option Params scaleUnits.")
@@ -89,10 +77,6 @@ model TransitHubProperties {
   @visibility(Lifecycle.Read)
   @typeChangedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, string[])
   resourceCollection?: armResourceIdentifier[];
-
-  @doc("Specifies the security provider for the transit hub.")
-  @added(Microsoft.Mission.Versions.v2026_03_01_preview)
-  securityProvider?: SecurityProvider;
 }
 
 @doc("Transit Hub patchable Properties")
