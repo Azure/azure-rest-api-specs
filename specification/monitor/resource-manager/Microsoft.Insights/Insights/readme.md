@@ -32,10 +32,11 @@ title: MonitorClient
 description: Monitor Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-08
 directive:
   - suppress: Example Validations
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
+  - suppress: MULTIPLE_API_VERSION
+    reason: "This is a large umbrella readme that intentionally bundles multiple Monitor sub-services each pinned to their own latest stable/preview API version. The mixed API versions are by design."
 ```
 
 ### Tag: package-2025-08
@@ -53,11 +54,20 @@ input-file:
   - stable/2016-03-01/logProfiles.json
   - stable/2024-02-01/metrics.json
   - stable/2026-01-01/activityLogAlerts_API.json
-  - preview/2024-03-01-preview/metricAlert.json
+  - stable/2026-06-01/metricAlert.json
   - stable/2026-03-01/scheduledQueryRule_API.json
   - stable/2019-03-01/metricBaselines.json
   - preview/2024-10-01-preview/actionGroups.json
   - stable/2021-10-01/networkSecurityPerimeter.json
+```
+
+### Tag: package-2026-06-01
+
+These settings apply only when `--tag=package-2026-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-06-01'
+input-file:
+  - stable/2026-06-01/metricAlert.json
 ```
 
 ### Tag: package-2026-03-01
