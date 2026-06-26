@@ -170,10 +170,6 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Insights stores sub‐client
 // --------------------------------------------------------------------------------
-
-@@access(Insights.generate, Access.internal);
-@@access(Insights.get, Access.internal);
-@@access(Insights.list, Access.internal);
 @@clientName(InsightSummary.method, "MethodName", "csharp");
 
 // --------------------------------------------------------------------------------
