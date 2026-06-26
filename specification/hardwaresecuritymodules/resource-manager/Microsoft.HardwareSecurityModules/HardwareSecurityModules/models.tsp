@@ -887,14 +887,14 @@ model PaymentHsmClusterProperties {
   /**
    * The application trusted issuer for the Payment HSM Cluster
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Create)
   applicationTrustedIssuer: string;
 
   /**
    * The management trusted issuer for the Payment HSM Cluster
    */
-  @added(Versions.v2026_01_01_preview)
+  @added(Versions.v2026_06_01_preview)
   @visibility(Lifecycle.Create)
   managementTrustedIssuer: string;
 }
