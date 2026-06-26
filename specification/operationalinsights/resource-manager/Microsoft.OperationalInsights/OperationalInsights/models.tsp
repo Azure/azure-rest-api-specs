@@ -566,6 +566,12 @@ union ColumnDataTypeHintEnum {
    * A standard V4/V6 ip address following the standard shape, x.x.x.x/y:y:y:y:y:y:y:y
    */
   ip: "ip",
+
+  /**
+   * A vector of single-precision floating-point values used for semantic / similarity search.
+   */
+  @added(Versions.v2026_03_01)
+  vector16: "vector16",
 }
 
 /**
