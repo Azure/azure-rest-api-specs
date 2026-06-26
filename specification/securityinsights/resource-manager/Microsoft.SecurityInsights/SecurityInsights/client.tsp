@@ -565,10 +565,6 @@ using Azure.ClientGenerator.Core.Legacy;
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(MicrosoftSecurityProductName.`Azure Security Center for IoT`,
-  "AzureSecurityCenterForIot",
-  "csharp"
-);
 @@clientName(MLBehaviorAnalyticsAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
