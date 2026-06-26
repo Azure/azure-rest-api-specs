@@ -99,20 +99,15 @@ interface SourceControls {
    * Creates the sync job for a source control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @put
-  create is ArmResourceRead<
+  create is Legacy.CreateOrReplaceSync<
     SourceControl,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
+    SourceControlSyncJobCreateParameters,
     Response = ArmResourceCreatedSyncResponse<SourceControlSyncJob>,
-    Parameters = SourceControlSyncJobIdParameter & {
-      /**
-       * The parameters supplied to the create source control sync job operation.
-       */
-      @body
-      parameters: SourceControlSyncJobCreateParameters;
-    }
+    Parameters = SourceControlSyncJobIdParameter
   >;
 
   /**
@@ -204,4 +199,8 @@ interface SourceControls {
 @@doc(
   SourceControls.update::parameters.properties,
   "The parameters supplied to the update source control operation."
+);
+@@doc(
+  SourceControls.create::parameters.resource,
+  "The parameters supplied to the create source control sync job operation."
 );
