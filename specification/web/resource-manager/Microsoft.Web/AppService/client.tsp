@@ -3439,6 +3439,7 @@ op webAppsStartNetworkTraceForJs(
   @query("maxFrameLength")
   maxFrameLength?: int32,
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @query("sasUrl")
   sasUrl?: string,
 
@@ -3480,6 +3481,7 @@ op webAppsStartNetworkTraceSlotForJs(
   @query("maxFrameLength")
   maxFrameLength?: int32,
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @query("sasUrl")
   sasUrl?: string,
 
@@ -3517,6 +3519,7 @@ op webAppsStartWebSiteNetworkTraceOperationForJs(
   @query("maxFrameLength")
   maxFrameLength?: int32,
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @query("sasUrl")
   sasUrl?: string,
 
@@ -3558,6 +3561,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   @query("maxFrameLength")
   maxFrameLength?: int32,
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @query("sasUrl")
   sasUrl?: string,
 

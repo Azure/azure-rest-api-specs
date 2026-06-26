@@ -15,6 +15,7 @@ model AzureEntraAuth
   is OAuth2Auth<[
     {
       type: OAuth2FlowType.clientCredentials;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       tokenUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/token";
       scopes: ["https://quantum.microsoft.com/.default"];
     }

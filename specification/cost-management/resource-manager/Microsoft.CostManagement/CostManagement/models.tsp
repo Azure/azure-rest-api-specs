@@ -1752,12 +1752,14 @@ model AsyncOperationStatusProperties {
   /**
    * Sas url to the async benefit utilization summaries report. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   reportUrl?: BenefitUtilizationSummaryReportSchema;
 
   /**
    * Sas url to async benefit utilization summaries report in secondary storage in case of primary outage. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   secondaryReportUrl?: BenefitUtilizationSummaryReportSchema;
 
@@ -2718,7 +2720,9 @@ model DownloadURL {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   downloadUrl?: string;
 }
 
@@ -3853,7 +3857,9 @@ model ReportURL {
   /**
    * The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   reportUrl?: ReservationReportSchema;
 
   /**
@@ -3877,6 +3883,8 @@ model PricesheetDownloadProperties {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   downloadUrl?: string;
 
   /**
@@ -4074,6 +4082,7 @@ model EAPricesheetDownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 

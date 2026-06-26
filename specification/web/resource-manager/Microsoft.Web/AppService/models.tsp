@@ -1780,6 +1780,7 @@ model CustomDnsSuffixConfigurationProperties {
   /**
    * The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -3080,6 +3081,7 @@ model RampUpRule {
   /**
    * Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   changeDecisionCallbackUrl?: string;
 
   /**
@@ -8135,11 +8137,13 @@ model PremierAddOnOfferProperties {
   /**
    * Privacy policy URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   privacyPolicyUrl?: string;
 
   /**
    * Legal terms URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   legalTermsUrl?: string;
 
   /**
@@ -8394,6 +8398,7 @@ model ValidateProperties {
   /**
    * Base URL of the container registry
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   containerRegistryBaseUrl?: string;
 
   /**
@@ -8476,6 +8481,7 @@ model StaticSitesWorkflowPreviewRequestProperties {
   /**
    * URL for the repository of the static site.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repositoryUrl?: string;
 
   /**
@@ -8582,6 +8588,7 @@ model StaticSite {
   /**
    * URL for the repository of the static site.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repositoryUrl?: string;
 
   /**
@@ -8819,6 +8826,7 @@ model StaticSiteTemplateOptions {
   /**
    * URL of the template repository. The newly generated repository will be based on this one.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   templateRepositoryUrl?: string;
 
   /**
@@ -9273,11 +9281,13 @@ model StaticSiteZipDeployment {
   /**
    * URL for the zipped app content
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   appZipUrl?: string;
 
   /**
    * URL for the zipped api content
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   apiZipUrl?: string;
 
   /**
@@ -9317,6 +9327,7 @@ model StaticSiteBasicAuthPropertiesARMResourceProperties {
   /**
    * Url to the secret in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl?: string;
 
   /**
@@ -9404,6 +9415,7 @@ model StaticSiteUserInvitationResponseResourceProperties {
   /**
    * The url for the invitation link
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   invitationUrl?: string;
 }
@@ -9965,6 +9977,7 @@ model BackupRequestProperties {
   /**
    * SAS URL to the container.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   storageAccountUrl: string;
 
   /**
@@ -10056,6 +10069,7 @@ model BackupItemProperties {
   /**
    * SAS URL for the storage account container which contains this backup.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   storageAccountUrl?: string;
 
@@ -10161,6 +10175,7 @@ model RestoreRequestProperties {
   /**
    * SAS URL to the container.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   storageAccountUrl: string;
 
   /**
@@ -11453,6 +11468,7 @@ model AzureTableStorageApplicationLogsConfig {
   /**
    * SAS URL to an Azure table with add/query/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl: string;
 }
 
@@ -11468,6 +11484,7 @@ model AzureBlobStorageApplicationLogsConfig {
   /**
    * SAS url to a azure blob container with read/write/list/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -11526,6 +11543,7 @@ model AzureBlobStorageHttpLogsConfig {
   /**
    * SAS url to a azure blob container with read/write/list/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -11635,6 +11653,7 @@ model ContinuousWebJobProperties {
    * Log URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   log_url?: string;
 
   /**
@@ -11652,6 +11671,7 @@ model ContinuousWebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**
@@ -12059,6 +12079,7 @@ model FunctionSecrets {
    * Trigger URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   trigger_url?: string;
 }
 
@@ -12188,21 +12209,25 @@ model WebSiteInstanceStatusProperties {
   /**
    * Link to the GetStatusApi in Kudu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   statusUrl?: string;
 
   /**
    * Link to the Diagnose and Solve Portal
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   detectorUrl?: string;
 
   /**
    * Link to the console to web app instance
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   consoleUrl?: string;
 
   /**
    * Link to the console to web app instance
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   healthCheckUrl?: string;
 
   /**
@@ -13742,30 +13767,35 @@ model SiteExtensionInfoProperties {
    * Extension URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extension_url?: string;
 
   /**
    * Project URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   project_url?: string;
 
   /**
    * Icon URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   icon_url?: string;
 
   /**
    * License URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   license_url?: string;
 
   /**
    * Feed URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   feed_url?: string;
 
   /**
@@ -13900,6 +13930,7 @@ model SiteSourceControlProperties {
   /**
    * Repository or source control URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   repoUrl?: string;
 
@@ -13986,6 +14017,7 @@ model GitHubActionContainerConfiguration {
   /**
    * The server URL for the container registry where the build will be hosted.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serverUrl?: string;
 
   /**
@@ -14025,12 +14057,14 @@ model TriggeredWebJobProperties {
    * History URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   history_url?: string;
 
   /**
    * Scheduler Logs URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scheduler_logs_url?: string;
 
   /**
@@ -14048,6 +14082,7 @@ model TriggeredWebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**
@@ -14129,12 +14164,14 @@ model TriggeredJobRun {
    * Output URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   output_url?: string;
 
   /**
    * Error URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   error_url?: string;
 
   /**
@@ -14196,6 +14233,7 @@ model WebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**

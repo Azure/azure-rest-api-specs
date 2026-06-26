@@ -1793,6 +1793,7 @@ alias SourceRangeParameterRequired = {
 /** The source URL parameter. */
 alias SourceUrlParameter = {
   /** Specifies the URL of the source. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @header("x-ms-copy-source")
   sourceUrl: string;
 };

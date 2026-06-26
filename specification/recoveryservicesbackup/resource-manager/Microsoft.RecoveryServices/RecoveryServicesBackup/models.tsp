@@ -5359,6 +5359,7 @@ model BEKDetails {
   /**
    * Secret is BEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl?: string;
 
   /**
@@ -5744,11 +5745,13 @@ model EncryptionDetails {
   /**
    * Key Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   kekUrl?: string;
 
   /**
    * Secret Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretKeyUrl?: string;
 
   /**
@@ -5769,6 +5772,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   blobUrl?: string;
 
   /**
@@ -5780,6 +5784,7 @@ model ExportJobsOperationResultInfo extends OperationResultInfoBase {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   excelFileBlobUrl?: string;
 
   /**
@@ -6138,6 +6143,7 @@ model KEKDetails {
   /**
    * Key is KEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: string;
 
   /**

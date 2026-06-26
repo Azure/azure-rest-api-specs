@@ -850,6 +850,7 @@ model GitHubOAuthCallRequest {
   /**
    * The URL the client will redirect to on successful authentication. If empty, no redirect will occur.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   redirectUrl?: string;
 }
 
@@ -1477,6 +1478,7 @@ model AdooAuthCallRequest {
   /**
    * The URL the client will redirect to on successful authentication. If empty, no redirect will occur.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   redirectUrl?: string;
 }
 

@@ -835,6 +835,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -873,6 +874,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1252,6 +1254,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2197,6 +2200,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2235,6 +2239,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2615,6 +2620,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },

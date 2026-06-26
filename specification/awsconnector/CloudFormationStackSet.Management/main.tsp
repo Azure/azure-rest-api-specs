@@ -257,6 +257,7 @@ model DeploymentTargets {
   @doc("AWS accounts that you want to create stack instances in the specified Region(s) for.")
   accounts?: string[];
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Returns the value of the AccountsUrl property.")
   accountsUrl?: string;
 

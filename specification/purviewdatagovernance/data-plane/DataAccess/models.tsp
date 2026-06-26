@@ -475,6 +475,7 @@ model ApprovalWorkflow {
   @doc("The identifier of the workflow definition this approval is associated with.")
   workflowId: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The callback URL the workflow uses to report the approval outcome.")
   callbackUrl: string;
 
