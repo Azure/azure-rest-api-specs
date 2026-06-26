@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Represents the Last Known Good (LKG) revision status for a site.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @parentResource(Site)
 model LastKnownGoodResource
   is Azure.ResourceManager.ProxyResource<LastKnownGoodProperties> {
@@ -33,7 +33,7 @@ model LastKnownGoodResource
   kind?: string;
 }
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @armResourceOperations
 interface LastKnownGoodOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -59,7 +59,7 @@ interface LastKnownGoodOps
       }
     > {}
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface LastKnownGoods {

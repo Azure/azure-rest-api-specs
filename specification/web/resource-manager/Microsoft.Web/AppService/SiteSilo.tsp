@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Represents a silo of an App Service site.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @parentResource(Site)
 model SiteSilo is Azure.ResourceManager.TrackedResource<SiteSiloProperties> {
   ...ResourceNameParameter<
@@ -32,7 +32,7 @@ model SiteSilo is Azure.ResourceManager.TrackedResource<SiteSiloProperties> {
   kind?: string;
 }
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @armResourceOperations
 interface SiteSiloOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -58,7 +58,7 @@ interface SiteSiloOps
       }
     > {}
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface SiteSilos {

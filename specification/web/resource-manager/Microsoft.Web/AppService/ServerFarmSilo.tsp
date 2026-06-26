@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Represents a silo of an App Service plan.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @parentResource(AppServicePlan)
 model ServerFarmSilo
   is Azure.ResourceManager.TrackedResource<ServerFarmSiloProperties> {
@@ -33,7 +33,7 @@ model ServerFarmSilo
   kind?: string;
 }
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @armResourceOperations
 interface ServerFarmSiloOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -59,7 +59,7 @@ interface ServerFarmSiloOps
       }
     > {}
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @tag("AppServicePlans")
 @armResourceOperations(#{ omitTags: true })
 interface ServerFarmSilos {

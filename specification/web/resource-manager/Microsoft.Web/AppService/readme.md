@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-03
+tag: package-2026-06
 ```
 
 ### Suppression
@@ -109,13 +109,13 @@ directive:
     reason: MSDeploy is the intentional name matching the existing service API.
 ```
 
-### Tag: package-2026-06-01-preview
+### Tag: package-2026-06
 
-These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-06-01-preview'
+```yaml $(tag) == 'package-2026-06'
 input-file:
-    - preview/2026-06-01-preview/openapi.json
+  - stable/2026-06-01/openapi.json
 ```
 
 ### Tag: package-2026-03

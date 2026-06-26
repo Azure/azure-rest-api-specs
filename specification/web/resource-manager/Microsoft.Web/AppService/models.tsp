@@ -16401,7 +16401,7 @@ model StorageMount {
 /**
  * Provisioning state for a silo resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 union SiloProvisioningState {
   string,
 
@@ -16421,7 +16421,7 @@ union SiloProvisioningState {
 /**
  * Traffic routing mode for silos.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 union SiloFailOverMode {
   string,
 
@@ -16438,7 +16438,7 @@ union SiloFailOverMode {
 /**
  * Networking override configuration for a site silo.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model SiloNetworkingOverride {
   /**
    * Virtual network subnet resource ID override for the silo.
@@ -16449,7 +16449,7 @@ model SiloNetworkingOverride {
 /**
  * Properties of a site silo resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model SiteSiloProperties {
   /**
    * ARM location of the silo.
@@ -16538,13 +16538,13 @@ model SiteSiloProperties {
 /**
  * Collection of site silo resources.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model SiteSiloCollection is Azure.Core.Page<SiteSilo>;
 
 /**
  * Properties of an App Service plan silo resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model ServerFarmSiloProperties {
   /**
    * ARM location of the App Service plan silo.
@@ -16593,13 +16593,13 @@ model ServerFarmSiloProperties {
 /**
  * Collection of App Service plan silo resources.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model ServerFarmSiloCollection is Azure.Core.Page<ServerFarmSilo>;
 
 /**
  * Traffic configuration for a single endpoint (region) within a ManagedTrafficConfig.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model EndpointTrafficConfig {
   /**
    * Normalized Azure region name (e.g., "eastus", "westus").
@@ -16630,7 +16630,7 @@ model EndpointTrafficConfig {
 /**
  * Properties of a managed traffic configuration resource.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model ManagedTrafficConfigProperties {
   /**
    * Traffic routing mode: Active (weighted) or Passive (priority-based failover).
@@ -16653,7 +16653,7 @@ model ManagedTrafficConfigProperties {
 /**
  * Collection of managed traffic configuration resources.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model ManagedTrafficConfigCollection
   is Azure.Core.Page<ManagedTrafficConfigResource>;
 
@@ -16661,7 +16661,7 @@ model ManagedTrafficConfigCollection
  * Properties of the Last Known Good revision for a site.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "LastKnownGood is a simple read-only data model, not a provisionable resource"
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model LastKnownGoodProperties {
   /**
    * Name of the primary site.
@@ -16678,13 +16678,13 @@ model LastKnownGoodProperties {
 /**
  * Collection of Last Known Good resources.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model LastKnownGoodCollection is Azure.Core.Page<LastKnownGoodResource>;
 
 /**
  * Update model for ServerFarmSilo. Supports updating tags.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model ServerFarmSiloPatchResource {
   /** Kind of resource. */
   kind?: string;
@@ -16697,7 +16697,7 @@ model ServerFarmSiloPatchResource {
 /**
  * Update model for SiteSilo. Supports updating tags.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 model SiteSiloPatchResource {
   /** Kind of resource. */
   kind?: string;

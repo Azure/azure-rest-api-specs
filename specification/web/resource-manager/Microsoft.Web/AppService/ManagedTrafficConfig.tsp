@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Managed traffic configuration for a site, controlling how traffic is routed across silos.
  */
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @parentResource(Site)
 model ManagedTrafficConfigResource
   is Azure.ResourceManager.ProxyResource<ManagedTrafficConfigProperties> {
@@ -33,7 +33,7 @@ model ManagedTrafficConfigResource
   kind?: string;
 }
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @armResourceOperations
 interface ManagedTrafficConfigOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -59,7 +59,7 @@ interface ManagedTrafficConfigOps
       }
     > {}
 
-@added(Versions.v2026_06_01_preview)
+@added(Versions.v2026_06_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface ManagedTrafficConfigs {
