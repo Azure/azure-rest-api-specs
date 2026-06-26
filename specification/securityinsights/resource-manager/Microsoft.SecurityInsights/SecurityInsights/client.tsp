@@ -1195,3 +1195,8 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@alternateType(ActionPropertiesBase.logicAppResourceId, Azure.Core.armResourceIdentifier, "csharp");
 @@clientName(AlertRules.triggerRuleRun, "TriggerRuleRunAlertRule", "csharp");
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
+  "listQueryIndicators",
+  "javascript"
+);
