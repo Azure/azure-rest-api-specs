@@ -11,6 +11,8 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.MachineLearningServices;
+
+// cspell:ignore Learnin
 /**
  * Azure Resource Manager resource envelope.
  */
@@ -56,7 +58,7 @@ interface ComponentVersionOps
         version: string,
       },
       ErrorResponse,
-      "MachineLearningRegistryComponentVersion"
+      "MachineLearninRegistryComponentVersion"
     > {}
 
 @armResourceOperations

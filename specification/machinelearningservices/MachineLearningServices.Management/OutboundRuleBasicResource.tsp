@@ -128,7 +128,7 @@ interface OutboundRuleBasicResourceOperationGroupOps
         ruleName: string,
       },
       ErrorResponse,
-      "MachineLearningOutboundRuleBasic"
+      "ManagedNetworkOutboundRuleBasic"
     > {}
 
 @removed(Versions.v2025_12_01)

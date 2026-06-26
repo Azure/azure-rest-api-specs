@@ -25,6 +25,17 @@ model SourceControl
   >;
 }
 
+alias SourceControlSyncJobIdParameter = {
+  /**
+   * The source control sync job id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
+  @path
+  @segment("sourceControlSyncJobs")
+  @format("uuid")
+  sourceControlSyncJobId: string;
+};
+
 @armResourceOperations(#{ omitTags: true })
 interface SourceControls {
   /**
@@ -88,23 +99,19 @@ interface SourceControls {
    * Creates the sync job for a source control.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("SourceControlSyncJob")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/sourcecontrolsyncjoboperations")
   @put
-  create is Legacy.CreateOrReplaceSync<
+  create is ArmResourceRead<
     SourceControl,
-    SourceControlSyncJobCreateParameters,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResourceCreatedSyncResponse<SourceControlSyncJob>,
-    Parameters = {
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
-       * The source control sync job id.
+       * The parameters supplied to the create source control sync job operation.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
+      @body
+      parameters: SourceControlSyncJobCreateParameters;
     }
   >;
 
@@ -119,16 +126,7 @@ interface SourceControls {
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResponse<SourceControlSyncJobById>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-    }
+    Parameters = SourceControlSyncJobIdParameter
   >;
 
   /**
@@ -166,16 +164,7 @@ interface SourceControls {
     SourceControl,
     void,
     ArmResponse<SourceControlSyncJobStreamsListBySyncJob>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
        * The filter to apply on the operation.
        */
@@ -195,16 +184,7 @@ interface SourceControls {
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResponse<SourceControlSyncJobStreamById>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
        * The id of the sync job stream.
        */
@@ -224,8 +204,4 @@ interface SourceControls {
 @@doc(
   SourceControls.update::parameters.properties,
   "The parameters supplied to the update source control operation."
-);
-@@doc(
-  SourceControls.create::parameters.resource,
-  "The parameters supplied to the create source control sync job operation."
 );
