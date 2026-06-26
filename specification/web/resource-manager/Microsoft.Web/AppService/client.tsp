@@ -3057,7 +3057,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(Sites.update, "java");
 
 @@clientName(
-  Microsoft.Web.AppServiceErrorResponse,
+  Microsoft.Web.ErrorResponse,
   "WorkflowErrorResponse",
   "!go,!javascript,!autorest"
 );
