@@ -89,11 +89,16 @@ describe("GitHub PR file listing", () => {
   });
 
   it("creates Octokit instances with default settings", () => {
-    const ghCom = createOctokit(undefined);
-    const ghe = createOctokit("token");
-
-    expect(ghCom).toBeDefined();
-    expect(ghe).toBeDefined();
+    // Stub token so getGitHubAuthToken() never falls back to `execSync("gh auth token")` in CI.
+    vi.stubEnv("GITHUB_TOKEN", "test-token");
+    try {
+      const ghCom = createOctokit(undefined);
+      const ghe = createOctokit("token");
+      expect(ghCom).toBeDefined();
+      expect(ghe).toBeDefined();
+    } finally {
+      vi.unstubAllEnvs();
+    }
   });
 
   it("returns null when no specification files are modified", async () => {
