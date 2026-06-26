@@ -1855,7 +1855,7 @@ model CSharpSecurityAssessmentStatusResult
 );
 @@clientName(
   SqlVulnerabilityAssessmentsAPI.RulesResultsInput.latestScan,
-  "IsLatestScan",
+  "LatestScan",
   "csharp"
 );
 @@clientName(
