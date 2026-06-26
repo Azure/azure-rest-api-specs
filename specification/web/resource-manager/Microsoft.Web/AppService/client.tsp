@@ -3612,6 +3612,8 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(AppServiceEnvironmentResource, "AppServiceEnvironment", "csharp");
 @@clientName(AppServicePlanCollection, "AppServicePlanListResult", "csharp");
+@@clientName(AppServicePlanRestrictions, "AppServicePlanRestriction", "csharp");
+@@access(ResourceMetricAvailability, Access.public, "csharp");
 @@clientName(
   AppServicePlanPatchResource,
   "AppServicePlanPatchContent",
@@ -3873,7 +3875,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
 @@clientName(
   ProcessThreadInfoProperties,
-  "WebAppProcessThreadInfoProperties",
+  "WebAppProcessThreadProperties",
   "csharp"
 );
 @@clientName(ComputeModeOptions, "ComputeModeOption", "csharp");
@@ -5478,5 +5480,19 @@ union ConfigReferenceSource {
 @@alternateType(
   ApiKVReferenceProperties.source,
   ConfigReferenceSource,
+  "csharp"
+);
+
+// Disambiguate ResourceHealthMetadata Read vs List on the same legacy operation
+// group; without these renames the generator emits two CreateGetBySite[Slot]Request
+// methods with identical signatures.
+@@clientName(
+  ResourceHealthMetadataOperationGroup.listBySite,
+  "ListResourceHealthMetadata",
+  "csharp"
+);
+@@clientName(
+  BySiteSlotOperationGroup.listBySiteSlot,
+  "ListResourceHealthMetadata",
   "csharp"
 );
