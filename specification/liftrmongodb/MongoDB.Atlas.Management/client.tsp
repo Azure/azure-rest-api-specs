@@ -63,6 +63,15 @@ using MongoDB.Atlas;
 @@clientName(MongoDB.Atlas.ClusterTier.FREE, "Free", "csharp");
 @@clientName(MongoDB.Atlas.ClusterTier.FLEX, "Flex", "csharp");
 
+// Boolean property: use the .NET "Is*" assertion-style name. The wire name
+// ("backups") and nullability (bool?) are unchanged; this only renames the
+// public C# property identifier.
+@@clientName(
+  MongoDB.Atlas.ClusterProperties.backups,
+  "IsBackupsEnabled",
+  "csharp"
+);
+
 // Tier and region preview models. Apply the MongoDBAtlas* prefix for naming
 // consistency, and rename the "Response" suffix to "Result" so the public model
 // names satisfy the AZC0030 analyzer. Client-only (csharp) renames; the wire
