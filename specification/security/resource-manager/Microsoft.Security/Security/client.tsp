@@ -1854,11 +1854,6 @@ model CSharpSecurityAssessmentStatusResult
   "csharp"
 );
 @@clientName(
-  SqlVulnerabilityAssessmentsAPI.RulesResultsInput.latestScan,
-  "LatestScan",
-  "csharp"
-);
-@@clientName(
   SubAssessmentsAPI.ServerVulnerabilityProperties.patchable,
   "IsPatchable",
   "csharp"
