@@ -829,7 +829,10 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 @@clientName(SupportTier, "SecurityInsightsSupportTier", "csharp");
 @@clientName(TemplateModel, "SecurityInsightsTemplate", "csharp");
-@@clientName(TemplateProperties, "SecurityInsightsContentTemplateProperties", "csharp");
+@@clientName(TemplateProperties,
+  "SecurityInsightsContentTemplateProperties",
+  "csharp"
+);
 @@clientName(TemplateStatus,
   "SecurityInsightsAlertRuleTemplateStatus",
   "csharp"
@@ -887,11 +890,11 @@ using Azure.ClientGenerator.Core.Legacy;
   "SecurityInsightsThreatIntelligenceIndicatorData",
   "csharp"
 );
-@@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
 @@clientName(ThreatIntelligenceInformation,
   "SecurityInsightsThreatIntelligenceIndicatorBase",
   "csharp"
 );
+@@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
 @@alternateType(ThreatIntelligenceIndicatorProperties.created, utcDateTime, "csharp");
 @@alternateType(ThreatIntelligenceIndicatorProperties.externalLastUpdatedTimeUtc, utcDateTime, "csharp");
 @@alternateType(ThreatIntelligenceIndicatorProperties.lastUpdatedTimeUtc, utcDateTime, "csharp");
@@ -1055,8 +1058,8 @@ using Azure.ClientGenerator.Core.Legacy;
 @@usage(IoTDeviceEntity, Usage.input, "csharp");
 @@usage(IpEntity, Usage.input, "csharp");
 @@usage(Job, Usage.input, "csharp");
-@@clientName(JobItem, "SecurityInsightsContentJobItem", "csharp");
 @@usage(JobItem, Usage.input, "csharp");
+@@clientName(JobItem, "SecurityInsightsContentJobItem", "csharp");
 @@usage(MailboxEntity, Usage.input, "csharp");
 @@usage(MailClusterEntity, Usage.input, "csharp");
 @@usage(MailMessageEntity, Usage.input, "csharp");
