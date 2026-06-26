@@ -3350,7 +3350,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
@@ -3418,7 +3418,7 @@ paths:
               $ref: '#/components/schemas/DataGenerationJob'
         description: The job to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:
     get:
@@ -3476,7 +3476,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
@@ -3522,7 +3522,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
@@ -3573,7 +3573,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /datasets:
     get:
@@ -4525,7 +4525,7 @@ paths:
               $ref: '#/components/schemas/EvaluationSuiteVersionCreate'
         description: The evaluation suite version to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluation_suites/{name}/versions/{version}:
     get:
@@ -4738,7 +4738,7 @@ paths:
               $ref: '#/components/schemas/EvaluationSuiteRunRequest'
         description: The run request parameters.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluationrules:
     get:
@@ -13301,6 +13301,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Insights on set of Agent Evaluation Results
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     AgentClusterInsightResult:
       type: object
       required:
@@ -13317,6 +13320,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     AgentContainerObject:
       type: object
       required:
@@ -13479,6 +13485,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -13731,6 +13740,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -13754,6 +13766,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentFilterTraceSource:
       type: object
       required:
@@ -13987,6 +14002,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationTaxonomyInput'
       description: Input configuration for the evaluation taxonomy when the input type is agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentTaxonomyInputUpdate:
       type: object
       properties:
@@ -14007,6 +14025,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationTaxonomyInputUpdate'
       description: Input configuration for the evaluation taxonomy when the input type is agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentVersionObject:
       type: object
       required:
@@ -14155,6 +14176,9 @@ components:
             $ref: '#/components/schemas/FoundryModelArtifactProfileSignal'
           description: Signals detected in the model artifact
       description: Artifact profile of the model
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     AssetCredentialResponse:
       type: object
       required:
@@ -14219,6 +14243,9 @@ components:
             - multi_turn
             - crescendo
       description: Strategies for attacks.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -15054,6 +15081,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RedTeamTargetConfig'
       description: Azure OpenAI model configuration. The API version would be selected by the service for querying the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     BaseCredentials:
       type: object
       required:
@@ -15508,6 +15538,9 @@ components:
           format: int32
           description: Size of the chart element.
       description: Coordinates for the analysis chart.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     ChatSummaryMemoryItem:
       type: object
       required:
@@ -15563,6 +15596,9 @@ components:
               Coordinates are intended only for client-side visualization and do not
               modify the canonical insights results.
       description: Insights from the cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     ClusterTokenUsage:
       type: object
       required:
@@ -15583,6 +15619,9 @@ components:
           format: int32
           description: total token usage
       description: Token usage for cluster analysis
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     CodeBasedEvaluatorDefinition:
       type: object
       required:
@@ -15617,6 +15656,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -16389,6 +16431,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: Cron based trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     CustomCredential:
       type: object
       required:
@@ -16455,6 +16500,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Daily recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     DataGenerationJob:
       type: object
       required:
@@ -16496,6 +16544,9 @@ components:
           description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
       description: Data Generation Job resource.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobInputs:
       type: object
       required:
@@ -16525,6 +16576,9 @@ components:
             - $ref: '#/components/schemas/DataGenerationJobOutputOptions'
           description: Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.
       description: Caller-supplied inputs for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOptions:
       type: object
       required:
@@ -16556,6 +16610,9 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
       description: Options for managing data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutput:
       type: object
       required:
@@ -16571,6 +16628,9 @@ components:
           file: '#/components/schemas/FileDataGenerationJobOutput'
           dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
       description: Output information for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputOptions:
       type: object
       properties:
@@ -16586,6 +16646,9 @@ components:
             type: string
           description: Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
       description: Output options for data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputType:
       anyOf:
         - type: string
@@ -16594,6 +16657,9 @@ components:
             - file
             - dataset
       description: The supported output file types for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobResult:
       type: object
       required:
@@ -16613,6 +16679,9 @@ components:
             - $ref: '#/components/schemas/DataGenerationTokenUsage'
           description: The token usage information for the data generation job.
       description: Result produced by a successful data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobScenario:
       anyOf:
         - type: string
@@ -16622,6 +16691,9 @@ components:
             - reinforcement_finetuning
             - evaluation
       description: The supported scenarios for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobSource:
       type: object
       required:
@@ -16642,6 +16714,9 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobSource'
           file: '#/components/schemas/FileDataGenerationJobSource'
       description: The base source model for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobSourceType:
       anyOf:
         - type: string
@@ -16652,6 +16727,9 @@ components:
             - traces
             - file
       description: The supported source types for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobType:
       anyOf:
         - type: string
@@ -16661,6 +16739,9 @@ components:
             - traces
             - tool_use
       description: The supported data generation job types.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationModelOptions:
       type: object
       required:
@@ -16670,6 +16751,9 @@ components:
           type: string
           description: Base model name used to generate data.
       description: LLM model options for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationTokenUsage:
       type: object
       required:
@@ -16693,6 +16777,9 @@ components:
           description: Total number of tokens used.
           readOnly: true
       description: Token usage information for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataSourceConfig:
       type: object
       required:
@@ -16746,6 +16833,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DatasetEvaluationSuiteJobSource:
       type: object
       required:
@@ -16769,6 +16859,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Dataset source for evaluation suite generation jobs — reference to a dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -16792,6 +16885,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DatasetReference:
       type: object
       required:
@@ -16805,6 +16901,9 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DatasetType:
       anyOf:
         - type: string
@@ -16891,6 +16990,9 @@ components:
             - Friday
             - Saturday
       description: Days of the week for recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     DeleteAgentResponse:
       type: object
       required:
@@ -17049,6 +17151,9 @@ components:
           type: boolean
           description: Whether the skill was successfully deleted.
       description: A deleted skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     DeleteSkillVersionResponse:
       type: object
       required:
@@ -17071,6 +17176,9 @@ components:
           type: string
           description: The version that was deleted.
       description: A deleted skill version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Deployment:
       type: object
       required:
@@ -17137,6 +17245,9 @@ components:
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -17350,6 +17461,9 @@ components:
           type: boolean
           description: indicates if the check passed or failed
       description: Result of the evaluation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRun:
       type: object
       required:
@@ -17883,6 +17997,9 @@ components:
             - $ref: '#/components/schemas/TreatmentEffectType'
           description: Type of treatment effect.
       description: Metric comparison for a treatment against the baseline.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRunResultComparison:
       type: object
       required:
@@ -17911,6 +18028,9 @@ components:
             $ref: '#/components/schemas/EvalRunResultCompareItem'
           description: List of comparison results for each treatment run.
       description: Comparison results for treatment runs against the baseline.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRunResultSummary:
       type: object
       required:
@@ -17935,6 +18055,9 @@ components:
           format: float
           description: Standard deviation of the metric in the evaluation run.
       description: Summary statistics of a metric in an evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     Evaluation:
       type: object
       required:
@@ -18007,6 +18130,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Evaluation Comparison Request
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationComparisonInsightResult:
       type: object
       required:
@@ -18030,6 +18156,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationDataGenerationType:
       anyOf:
         - type: string
@@ -18040,6 +18169,9 @@ components:
             - tool_use
             - task
       description: The data generation type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationDatasetReference:
       type: object
       required:
@@ -18058,6 +18190,9 @@ components:
             Optional — if not provided, schema is inferred at runtime from the data.
             Only applicable for uri_folder datasets.
       description: Reference to a dataset by name and version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationLevel:
       anyOf:
         - type: string
@@ -18084,6 +18219,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightSample'
       description: A sample from the evaluation result.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationRule:
       type: object
       required:
@@ -18197,6 +18335,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Insights on set of Evaluation Results
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationRunClusterInsightResult:
       type: object
       required:
@@ -18213,6 +18354,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation run cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationScheduleTask:
       type: object
       required:
@@ -18234,6 +18378,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     EvaluationSuiteDataGenerationOptions:
       type: object
       properties:
@@ -18248,6 +18395,9 @@ components:
           maximum: 1000
           description: 'Maximum number of samples to generate. Valid range: 15-1000.'
       description: Options for dataset generation within an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationCategory:
       anyOf:
         - type: string
@@ -18256,6 +18406,9 @@ components:
             - quality
             - safety
       description: The category of evaluator generation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJob:
       type: object
       required:
@@ -18302,6 +18455,9 @@ components:
           description: Token consumption summary. Populated on terminal states.
           readOnly: true
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobCreate:
       type: object
       properties:
@@ -18310,6 +18466,9 @@ components:
             - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
           description: Caller-supplied inputs.
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobInputs:
       type: object
       required:
@@ -18367,6 +18526,9 @@ components:
             Default: turn (single-turn evaluation).
             Use conversation for multi-turn evaluation.
       description: Caller-supplied inputs for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationTokenUsage:
       type: object
       properties:
@@ -18383,6 +18545,9 @@ components:
           format: int64
           description: Total tokens consumed.
       description: Token usage summary for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSource:
       type: object
       required:
@@ -18403,6 +18568,9 @@ components:
           traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
           dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
       description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSourceType:
       anyOf:
         - type: string
@@ -18413,6 +18581,9 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluation suite generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunRequest:
       type: object
       properties:
@@ -18427,6 +18598,9 @@ components:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
       description: Request body for running an evaluation from a suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResponse:
       type: object
       required:
@@ -18446,6 +18620,9 @@ components:
             $ref: '#/components/schemas/EvaluationSuiteRunResult'
           description: The run results. Currently a single-element array; will support multiple runs in the future.
       description: Response from running an evaluation suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResult:
       type: object
       required:
@@ -18469,6 +18646,9 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the run was created.
       description: Result of a single evaluation run within a suite execution.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteSubtype:
       anyOf:
         - type: string
@@ -18477,6 +18657,9 @@ components:
             - default
             - benchmark
       description: The subtype of an evaluation suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersion:
       type: object
       required:
@@ -18548,6 +18731,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionCreate:
       type: object
       required:
@@ -18617,6 +18803,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionUpdate:
       type: object
       required:
@@ -18686,6 +18875,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationTarget:
       type: object
       required:
@@ -18741,6 +18933,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyCreateOrUpdate:
       type: object
       required:
@@ -18769,6 +18964,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInput:
       type: object
       required:
@@ -18783,6 +18981,9 @@ components:
         mapping:
           agent: '#/components/schemas/AgentTaxonomyInput'
       description: Input configuration for the evaluation taxonomy.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInputType:
       anyOf:
         - type: string
@@ -18791,6 +18992,9 @@ components:
             - agent
             - policy
       description: Type of the evaluation taxonomy input.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInputUpdate:
       type: object
       required:
@@ -18805,6 +19009,9 @@ components:
         mapping:
           agent: '#/components/schemas/AgentTaxonomyInputUpdate'
       description: Input configuration for the evaluation taxonomy.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyUpdate:
       type: object
       properties:
@@ -18831,6 +19038,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorCategory:
       anyOf:
         - type: string
@@ -18840,6 +19050,9 @@ components:
             - safety
             - agents
       description: The category of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorConfiguration:
       type: object
       required:
@@ -18900,6 +19113,9 @@ components:
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
           rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorDefinitionType:
       anyOf:
         - type: string
@@ -18912,6 +19128,9 @@ components:
             - openai_graders
             - rubric
       description: The type of evaluator definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
       required:
@@ -18928,6 +19147,9 @@ components:
             type: string
           description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
       description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationInputs:
       type: object
       required:
@@ -18956,6 +19178,9 @@ components:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
       description: Caller-supplied inputs for an evaluator generation job.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJob:
       type: object
       required:
@@ -19002,6 +19227,9 @@ components:
           description: Token consumption summary. Populated when the job reaches a terminal state.
           readOnly: true
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobCreate:
       type: object
       properties:
@@ -19010,6 +19238,9 @@ components:
             - $ref: '#/components/schemas/EvaluatorGenerationInputs'
           description: Caller-supplied inputs.
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobSource:
       type: object
       required:
@@ -19027,6 +19258,9 @@ components:
           traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
           dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
       description: The base source model for evaluator generation jobs. Polymorphic over `type`.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobSourceType:
       anyOf:
         - type: string
@@ -19037,6 +19271,9 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluator generation jobs.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationTokenUsage:
       type: object
       required:
@@ -19057,6 +19294,9 @@ components:
           format: int64
           description: Total tokens consumed (input + output).
       description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -19084,6 +19324,9 @@ components:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
       description: Evaluator Metric
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetricDirection:
       anyOf:
         - type: string
@@ -19093,6 +19336,9 @@ components:
             - decrease
             - neutral
       description: The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetricType:
       anyOf:
         - type: string
@@ -19102,6 +19348,9 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -19110,6 +19359,9 @@ components:
             - builtin
             - custom
       description: The type of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersion:
       type: object
       required:
@@ -19180,6 +19432,9 @@ components:
           description: The version of the resource
           readOnly: true
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersionCreate:
       type: object
       required:
@@ -19224,6 +19479,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersionUpdate:
       type: object
       properties:
@@ -19256,6 +19514,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     ExternalAgentDefinition:
       type: object
       required:
@@ -19428,6 +19689,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Azure OpenAI file output for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     FileDataGenerationJobSource:
       type: object
       required:
@@ -19445,6 +19709,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: File source for data generation jobs — Azure OpenAI file input.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     FileDatasetVersion:
       type: object
       required:
@@ -19561,6 +19828,9 @@ components:
             - RuntimeDependent
             - Unknown
       description: The artifact profile category.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelArtifactProfileSignal:
       anyOf:
         - type: string
@@ -19572,6 +19842,9 @@ components:
             - NativeBinary
             - UnknownFormat
       description: Signals detected in the model artifact.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelSourceType:
       anyOf:
         - type: string
@@ -19580,6 +19853,9 @@ components:
             - LocalUpload
             - TrainingJob
       description: The source type of the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWarning:
       type: object
       properties:
@@ -19591,6 +19867,9 @@ components:
           type: string
           description: The warning message.
       description: A warning associated with a model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWarningCode:
       anyOf:
         - type: string
@@ -19599,6 +19878,9 @@ components:
             - RuntimeDependentArtifact
             - UnclassifiedArtifact
       description: Warning code for model artifacts.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWeightType:
       anyOf:
         - type: string
@@ -19608,6 +19890,9 @@ components:
             - LoRA
             - DraftModel
       description: The weight type of the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -19768,6 +20053,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Hourly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     HumanEvaluationPreviewRuleAction:
       type: object
       required:
@@ -19929,6 +20217,9 @@ components:
           description: The result of the insights report.
           readOnly: true
       description: The response body for cluster insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightCluster:
       type: object
       required:
@@ -19969,6 +20260,9 @@ components:
             $ref: '#/components/schemas/InsightSample'
           description: List of samples that belong to this cluster. Empty if samples are part of subclusters.
       description: A cluster of analysis samples.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightModelConfiguration:
       type: object
       required:
@@ -19978,6 +20272,9 @@ components:
           type: string
           description: The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.
       description: Configuration of the model used in the insight generation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightRequest:
       type: object
       required:
@@ -19994,6 +20291,9 @@ components:
           AgentClusterInsight: '#/components/schemas/AgentClusterInsightRequest'
           EvaluationComparison: '#/components/schemas/EvaluationComparisonInsightRequest'
       description: The request of the insights report.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightResult:
       type: object
       required:
@@ -20010,6 +20310,9 @@ components:
           EvaluationRunClusterInsight: '#/components/schemas/EvaluationRunClusterInsightResult'
           AgentClusterInsight: '#/components/schemas/AgentClusterInsightResult'
       description: The result of the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightSample:
       type: object
       required:
@@ -20038,6 +20341,9 @@ components:
         mapping:
           EvaluationResultSample: '#/components/schemas/EvaluationResultSample'
       description: A sample from the analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightScheduleTask:
       type: object
       required:
@@ -20055,6 +20361,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Insight task for the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     InsightSummary:
       type: object
       required:
@@ -20084,6 +20393,9 @@ components:
             - $ref: '#/components/schemas/ClusterTokenUsage'
           description: Token usage while performing clustering analysis
       description: Summary of the error cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightType:
       anyOf:
         - type: string
@@ -20093,6 +20405,9 @@ components:
             - AgentClusterInsight
             - EvaluationComparison
       description: The request of the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightsMetadata:
       type: object
       required:
@@ -20107,6 +20422,9 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InvocationsProtocolConfiguration:
       type: object
       description: Configuration specific to the invocations protocol.
@@ -20274,6 +20592,9 @@ components:
           format: float
           description: Dropout rate used during training. Informational — not used at serving time.
       description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     MCPToolboxTool:
       type: object
       required:
@@ -20978,6 +21299,9 @@ components:
           format: uri
           description: Blob URI of the model asset to fetch credentials for.
       description: Request to fetch credentials for a model asset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelDeployment:
       type: object
       required:
@@ -21040,6 +21364,9 @@ components:
             - TemporaryBlobReference
           description: The type of pending upload. Only TemporaryBlobReference is supported for models.
       description: Represents a request for a pending upload of a model version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelPendingUploadResponse:
       type: object
       required:
@@ -21063,6 +21390,9 @@ components:
             - TemporaryBlobReference
           description: The type of pending upload. Only TemporaryBlobReference is supported for models.
       description: Represents the response for a model pending upload request.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelSamplingParams:
       type: object
       properties:
@@ -21097,6 +21427,9 @@ components:
           type: string
           description: The job ID that produced this model
       description: Source information for the model
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelVersion:
       type: object
       required:
@@ -21155,6 +21488,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Model Version Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     MonthlyRecurrenceSchedule:
       type: object
       required:
@@ -21175,6 +21511,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Monthly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     NoAuthenticationCredentials:
       type: object
       required:
@@ -21232,6 +21571,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: One-time trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     OpenAI.Annotation:
       type: object
       required:
@@ -38073,6 +38415,9 @@ components:
           type: string
           description: Pinned agent version. Defaults to latest if omitted.
       description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationCandidate:
       type: object
       required:
@@ -38109,6 +38454,9 @@ components:
             - $ref: '#/components/schemas/PromotionInfo'
           description: Promotion metadata. Null if the candidate has not been promoted.
       description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetCriterion:
       type: object
       required:
@@ -38122,6 +38470,9 @@ components:
           type: string
           description: Criterion instruction / description.
       description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetInput:
       type: object
       required:
@@ -38137,6 +38488,9 @@ components:
           inline: '#/components/schemas/OptimizationInlineDatasetInput'
           reference: '#/components/schemas/OptimizationReferenceDatasetInput'
       description: Base discriminated model for dataset input. Either inline items or a registered reference.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetInputType:
       anyOf:
         - type: string
@@ -38145,6 +38499,9 @@ components:
             - inline
             - reference
       description: Discriminator values for the dataset input union.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetItem:
       type: object
       properties:
@@ -38166,6 +38523,9 @@ components:
             $ref: '#/components/schemas/OptimizationDatasetCriterion'
           description: Per-item evaluation criteria.
       description: A single item in an inline dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationEvaluatorRef:
       type: object
       required:
@@ -38178,6 +38538,9 @@ components:
           type: string
           description: Evaluator version. If not specified, the latest version is used.
       description: Reference to a named evaluator, optionally pinned to a version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationInlineDatasetInput:
       type: object
       required:
@@ -38197,6 +38560,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Inline dataset — items supplied directly in the request body.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJob:
       type: object
       required:
@@ -38250,6 +38616,9 @@ components:
           description: Non-fatal warnings emitted at any point during optimization.
           readOnly: true
       description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobInputs:
       type: object
       required:
@@ -38279,6 +38648,9 @@ components:
             - $ref: '#/components/schemas/OptimizationOptions'
           description: Tuning knobs and run-mode.
       description: Caller-supplied inputs for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobListItem:
       type: object
       required:
@@ -38322,6 +38694,9 @@ components:
           description: The agent targeted by this optimization job.
           readOnly: true
       description: Slim job representation returned by the LIST endpoint.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobProgress:
       type: object
       required:
@@ -38342,6 +38717,9 @@ components:
           format: double
           description: Wall-clock time elapsed in seconds since the job began executing.
       description: In-flight progress; only populated while status is queued or in_progress.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobResult:
       type: object
       properties:
@@ -38357,6 +38735,9 @@ components:
             $ref: '#/components/schemas/OptimizationCandidate'
           description: All evaluated candidates including baseline.
       description: Terminal-state result body. Populated when status is succeeded or failed.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationOptions:
       type: object
       properties:
@@ -38381,6 +38762,9 @@ components:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
       description: Tuning knobs and run-mode for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationReferenceDatasetInput:
       type: object
       required:
@@ -38401,6 +38785,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OtlpTelemetryEndpoint:
       type: object
       required:
@@ -38742,6 +39129,9 @@ components:
           type: string
           description: Version of the Foundry agent this candidate was promoted to.
       description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     PromptAgentDefinition:
       type: object
       required:
@@ -38837,6 +39227,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -38857,6 +39250,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     PromptEvaluationSuiteJobSource:
       type: object
       required:
@@ -38877,6 +39273,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -38897,6 +39296,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     ProtocolConfiguration:
       type: object
       properties:
@@ -38965,6 +39367,9 @@ components:
           Weekly: '#/components/schemas/WeeklyRecurrenceSchedule'
           Monthly: '#/components/schemas/MonthlyRecurrenceSchedule'
       description: Recurrence schedule model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RecurrenceTrigger:
       type: object
       required:
@@ -38998,6 +39403,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: Recurrence based trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RecurrenceType:
       anyOf:
         - type: string
@@ -39008,6 +39416,9 @@ components:
             - Weekly
             - Monthly
       description: Recurrence type.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RedTeam:
       type: object
       required:
@@ -39061,6 +39472,9 @@ components:
             - $ref: '#/components/schemas/RedTeamTargetConfig'
           description: Target configuration for the red-team run.
       description: Red team details.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     RedTeamEvalRunDataSource:
       type: object
       required:
@@ -39152,6 +39566,9 @@ components:
         mapping:
           AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
       description: Abstract class for target configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     RedTeamTaxonomyItemGenerationParams:
       type: object
       required:
@@ -39267,6 +39684,9 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Routine:
       type: object
       required:
@@ -39566,6 +39986,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     SASCredentials:
       type: object
       required:
@@ -39591,6 +40014,9 @@ components:
             - EvaluationResultSample
         - type: string
       description: The type of sample used in the analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     SasCredential:
       type: object
       required:
@@ -39660,6 +40086,9 @@ components:
           description: System metadata for the resource.
           readOnly: true
       description: Schedule model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleProvisioningStatus:
       anyOf:
         - type: string
@@ -39671,6 +40100,9 @@ components:
             - Succeeded
             - Failed
       description: Schedule provisioning status.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleRoutineTrigger:
       type: object
       required:
@@ -39728,6 +40160,9 @@ components:
           description: Properties of the schedule run.
           readOnly: true
       description: Schedule run model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleTask:
       type: object
       required:
@@ -39748,6 +40183,9 @@ components:
           Evaluation: '#/components/schemas/EvaluationScheduleTask'
           Insight: '#/components/schemas/InsightScheduleTask'
       description: Schedule task model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleTaskType:
       anyOf:
         - type: string
@@ -39756,6 +40194,9 @@ components:
             - Evaluation
             - Insight
       description: Type of the task.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     SessionDirectoryEntry:
       type: object
       required:
@@ -39962,6 +40403,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with SimpleQnA type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     SimpleQnAFineTuningQuestionType:
       anyOf:
         - type: string
@@ -39970,6 +40414,9 @@ components:
             - short_answer
             - long_answer
       description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     Skill:
       type: object
       required:
@@ -40002,6 +40449,9 @@ components:
           type: string
           description: The latest version for the skill.
       description: A skill resource.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillInlineContent:
       type: object
       required:
@@ -40033,6 +40483,9 @@ components:
             type: string
           description: List of pre-approved tools the skill may use. Experimental.
       description: Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillName:
       type: string
       maxLength: 64
@@ -40070,6 +40523,9 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill version was created.
       description: A specific version of a skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Sku:
       type: object
       required:
@@ -40325,6 +40781,9 @@ components:
             type: string
           description: Additional properties for the taxonomy category.
       description: Taxonomy category definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TaxonomySubCategory:
       type: object
       required:
@@ -40350,6 +40809,9 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TelemetryConfig:
       type: object
       required:
@@ -40551,6 +41013,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     ToolboxObject:
       type: object
       required:
@@ -40793,6 +41258,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     TracesDataGenerationJobSource:
       type: object
       required:
@@ -40827,6 +41295,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     TracesEvaluationSuiteJobSource:
       type: object
       required:
@@ -40861,6 +41332,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     TracesEvaluatorGenerationJobSource:
       type: object
       required:
@@ -40895,6 +41369,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TracesPreviewEvalRunDataSource:
       type: object
       required:
@@ -40956,6 +41433,9 @@ components:
             - Degraded
         - type: string
       description: Treatment Effect Type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     Trigger:
       type: object
       required:
@@ -40972,6 +41452,9 @@ components:
           Recurrence: '#/components/schemas/RecurrenceTrigger'
           OneTime: '#/components/schemas/OneTimeTrigger'
       description: Base model for Trigger of the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     TriggerType:
       anyOf:
         - type: string
@@ -40981,6 +41464,9 @@ components:
             - Recurrence
             - OneTime
       description: Type of the trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     UpdateAgentFromManifestRequest:
       type: object
       required:
@@ -41044,6 +41530,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - WorkflowAgents=V1Preview
+          - ExternalAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -41072,6 +41562,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Request body for updating a model version. Only description and tags can be modified.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     UpdateToolboxRequest:
       type: object
       required:
@@ -41254,6 +41747,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     WorkIQPreviewTool:
       type: object
       required:
