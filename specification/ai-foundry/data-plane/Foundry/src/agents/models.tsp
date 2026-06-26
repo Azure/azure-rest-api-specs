@@ -84,6 +84,7 @@ model CreateAgentRequest {
   agent_card?: AgentCard;
 }
 
+@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...CreateAgentVersionRequest;
 }

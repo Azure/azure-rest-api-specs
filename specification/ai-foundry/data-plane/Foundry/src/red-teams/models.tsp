@@ -10,6 +10,7 @@ const RedTeamsRequiredPreviews = #{
 };
 
 @doc("Strategies for attacks.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 union AttackStrategy {
   string,
 

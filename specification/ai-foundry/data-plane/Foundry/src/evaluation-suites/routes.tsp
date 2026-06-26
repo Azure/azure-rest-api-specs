@@ -19,10 +19,6 @@ alias EvaluationSuiteFilterQueryParams = {
 // CRUD operations (versioned asset pattern)
 // ---------------------------------------------------------------------------
 
-const EvaluationSuitesRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
 @removed(Versions.v1)
 interface EvaluationSuites
   extends VersionedOperations<
@@ -81,10 +77,6 @@ interface EvaluationSuites
 // ---------------------------------------------------------------------------
 // Generate API (LRO jobs pattern — follows evaluator_generation_jobs)
 // ---------------------------------------------------------------------------
-
-const EvaluationSuiteGenerationJobsRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
