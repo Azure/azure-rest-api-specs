@@ -2736,21 +2736,73 @@ model LatestGalleryImageVersion {
 }
 
 /**
+ * The shared gallery hosting subscription's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
+model SharedGallerySubscriptionProperties {
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  id?: string;
+}
+
+/**
+ * This property specifies the share invite status. Possible values are: **Pending,** **Accepted,** **Rejected.**
+ */
+union ShareInviteStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Pending: "Pending",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Accepted: "Accepted",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Rejected: "Rejected",
+}
+
+/**
+ * The shared gallery invite's properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+@added(Versions.v2025_12_03)
+model SharedGalleryInviteProperties {
+  /**
+   * The type of sharing group. Possible values are: **Subscriptions,** **AADTenants.**
+   */
+  type?: SharingProfileGroupTypes;
+
+  /**
+   * id of the subscription that hosts the shared gallery.
+   */
+  sharedGallerySubscriptionId?: string;
+
+  /**
+   * shared gallery name that was originally shared.
+   */
+  sharedGalleryName?: string;
+
+  /**
+   * location of the shared gallery.
+   */
+  location?: string;
+
+  /**
+   * The status of the invite. Possible values are: **Pending,** **Accepted,** **Rejected.**
+   */
+  status?: ShareInviteStatus;
+}
+
+/**
  * Concrete proxy resource types can be created by aliasing this type using a specific property type.
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceCommunity<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirCommunityGalleryResource {
+model ProxyResourceCommunity<Properties extends {}>
+  extends PirCommunityGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 
@@ -2768,17 +2820,12 @@ model ProxyResourceCommunity<
  *
  * See more details on [different Azure Resource Manager resource type here.](https://azure.github.io/typespec-azure/docs/howtos/ARM/resource-type)
  * @template Properties A model containing the provider-specific properties for this resource
- * @template PropertiesOptional A boolean flag indicating whether the resource `Properties` field is marked as optional or required. Default true is optional and recommended.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required to keep parentName out of the payload while preserving C# resource-key shape."
 @doc("Concrete proxy resource types can be created by aliasing this type using a specific property type.")
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResourceShared<
-  Properties extends {},
-  PropertiesOptional extends valueof boolean = true
-> extends PirSharedGalleryResource {
+model ProxyResourceShared<Properties extends {}>
+  extends PirSharedGalleryResource {
   @doc("The resource-specific properties for this resource.")
   properties?: Properties;
 

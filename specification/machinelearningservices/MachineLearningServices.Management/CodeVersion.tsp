@@ -54,7 +54,9 @@ interface CodeVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryCodeVersion"
     > {}
 
 @armResourceOperations
@@ -169,7 +171,9 @@ interface CodeVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningCodeVersion"
     > {}
 
 @armResourceOperations

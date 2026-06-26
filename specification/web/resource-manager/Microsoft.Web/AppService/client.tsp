@@ -7,6 +7,8 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Web;
 using Azure.ResourceManager;
 
+namespace Customizations;
+
 // python
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
@@ -606,7 +608,7 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomized(
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
   webAppsDeletePrivateEndpointConnectionSlotCustomized,
-  "!javascript"
+  "!javascript,!autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3057,7 +3059,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@clientName(
   Microsoft.Web.AppServiceErrorResponse,
   "WorkflowErrorResponse",
-  "!javascript"
+  "!go,!javascript,!autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1,0 +1,48 @@
+{
+  "operationId": "IncomingQuotaTransfers_Approve",
+  "title": "IncomingQuotaTransfers_Approve",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+    "targetProvider": "Microsoft.Compute",
+    "region": "eastus",
+    "transferId": "12345678-1234-1234-1234-1234567890ab",
+    "If-Match": "abc123",
+    "body": {
+      "comment": "Approved by capacity team."
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000002/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/incomingQuotaTransfers/12345678-1234-1234-1234-1234567890ab",
+        "name": "12345678-1234-1234-1234-1234567890ab",
+        "type": "Microsoft.Quota/incomingQuotaTransfers",
+        "etag": "r-abc2",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "transferStatus": "Completed",
+          "transferId": "12345678-1234-1234-1234-1234567890ab",
+          "transferRef": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-uplift-101",
+          "sourceSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000001",
+          "sourceTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000098",
+          "billingAccountId": "1234567890",
+          "resourceName": "standardDv5Family",
+          "amount": 50,
+          "sourceEtag": "abc124",
+          "approval": {
+            "comment": "Approved by capacity team.",
+            "actor": "recipient-admin@contoso.com",
+            "occurredAt": "2026-11-10T20:00:05Z"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000002/providers/Microsoft.Quota/locations/eastus/operationResults/op-approve-1f2a?api-version=2026-09-01-preview",
+        "Retry-After": 15
+      }
+    }
+  }
+}
