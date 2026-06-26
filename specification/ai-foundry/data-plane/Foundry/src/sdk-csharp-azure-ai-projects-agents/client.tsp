@@ -45,7 +45,10 @@ namespace Azure.AI.Projects {
   @@clientName(AgentEndpointProtocol.activity, "ActivityProtocol");
   @@clientName(AgentKind, "ProjectsAgentKind");
   @@clientName(AgentSessionResource, "ProjectAgentSession");
+  @@clientName(SessionLogEventType, "SessionLogEventKind");
   @@access(AgentSessionResource, Access.public);
+  
+  @@clientName(JobStatus, "AgentsJobStatus");
 
   @@clientName(
     BingGroundingSearchToolParameters,
@@ -92,6 +95,8 @@ namespace Azure.AI.Projects {
     "SharePointGroundingToolOptions"
   );
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
+  @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -216,6 +221,7 @@ namespace Azure.AI.Projects {
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");
+  @@clientName(EvaluationLevel, "AgentsEvaluationLevel");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -239,11 +245,15 @@ namespace Azure.AI.Projects {
   @@access(PatchAgentRequest, Access.public);
   @@clientName(PatchAgentRequest, "PatchAgentOptions");
   @@access(Agents.patchAgentObject, Access.internal);
+  @@clientName(Agents.patchAgentObject, "PatchAgent");
   @@access(Agents.getSessionLogStream, Access.internal);
 
   @@usage(CreateAgentFromCodeContent, Usage.input);
   @@access(CreateAgentFromCodeContent, Access.public);
-  @@clientName(CreateAgentFromCodeContent, "CreateAgentFromCodeOptions");
+  @@clientName(CreateAgentFromCodeContent, "AgentFromCodeOptions");
+  @@clientName(CreateAgentVersionFromCodeMetadata, "AgentVersionFromCodeMetadata");
+  
+  @@clientName(AgentCardSkill.tags, "Labels");
 
   // --------------------------------------------------------------------------------
   // Hide Agent administration operations, containing the foundry features
@@ -268,6 +278,16 @@ namespace Azure.AI.Projects {
 
   @@clientName(ToolboxObject, "ToolboxRecord");
   @@clientName(ToolboxVersionObject, "ToolboxVersion");
+  
+  @@clientName(Toolboxes.createToolboxVersion, "CreateVersion");
+  @@clientName(Toolboxes.getToolbox, "Get");
+  @@clientName(Toolboxes.getToolboxVersion, "GetVersion");
+  @@clientName(Toolboxes.updateToolbox, "UpdateDefaultVersion");
+  @@clientName(Toolboxes.deleteToolboxVersion, "DeleteVersion");
+  @@clientName(Toolboxes.deleteToolbox, "Delete");
+  @@clientName(Toolboxes.listToolboxes, "GetAll");
+  @@clientName(Toolboxes.listToolboxVersions, "GetVersions");
+  @@clientName(ToolConfig.pin, "IsPinned");
 
   // --------------------------------------------------------------------------------
   // AgentSessionFiles sub‐client
@@ -275,14 +295,25 @@ namespace Azure.AI.Projects {
 
   // Hide the protocol methods and methods using feature headers
   @@access(AgentSessionFiles.uploadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.uploadSessionFile, "Upload");
   @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.downloadSessionFile, "Download");
   @@access(AgentSessionFiles.listSessionFiles, Access.internal);
   @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.deleteSessionFile, "Delete");
+  
+  @@clientName(SessionDirectoryEntry.modified_time, "ModifiedAt");
+  @@clientName(SessionDirectoryEntry.size, "SizeInBytes");
 
   // --------------------------------------------------------------------------------
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(Skill, "AgentsSkill");
+  @@clientName(Skills.updateSkill, "UpdateDefaultVersion");
+  @@clientName(DeleteSkillResponse, "SkillDeletionResult");
+  @@clientName(DeleteSkillVersionResponse, "SkillVersionDeletionResult");
+  
+  @@clientName(CreateSkillVersionRequest.default, "isDefault");
 
   // --------------------------------------------------------------------------------
   // AgentOptimizationJobs sub‐client
@@ -291,4 +322,6 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.get, Access.internal);
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
+  
+  @@clientName(OptimizationDatasetItem.desired_num_turns, "DesiredTurnCount");
 }
