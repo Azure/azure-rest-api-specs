@@ -163,13 +163,11 @@ function runCreateReleasePlan(
     );
   }
 
-  const typeSpecPathForCreate = toTypeSpecPathForCreate(context.tspProjectPath, context.prUrl);
-
   const args = [
     "release-plan",
     "create",
     "--typespec-path",
-    typeSpecPathForCreate,
+    context.tspProjectPath,
     "--api-release-type",
     context.apiReleaseType,
     "--sdk-type",
@@ -200,30 +198,6 @@ function runCreateReleasePlan(
   } catch {
     throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
   }
-}
-
-/**
- * Converts TypeSpec project path to format required for release plan creation.
- * If the path is already a URL, returns it as-is. Otherwise, constructs a GitHub URL
- * using the owner and repo from the PR URL.
- * @param tspProjectPath Relative TypeSpec project path or full URL
- * @param prUrl Pull request URL for extracting GitHub owner and repo
- * @returns TypeSpec path in URL format for release plan creation
- */
-function toTypeSpecPathForCreate(tspProjectPath: string, prUrl: string): string {
-  if (/^https?:\/\//i.test(tspProjectPath)) {
-    return tspProjectPath;
-  }
-
-  const match = /^https:\/\/github\.com\/([^/]+)\/([^/]+)\/pull\/\d+$/i.exec(prUrl.trim());
-  if (!match) {
-    return tspProjectPath;
-  }
-
-  const owner = match[1];
-  const repo = match[2];
-  const normalizedPath = tspProjectPath.replace(/^\/+/, "");
-  return `https://github.com/${owner}/${repo}/${normalizedPath}`;
 }
 
 /**
