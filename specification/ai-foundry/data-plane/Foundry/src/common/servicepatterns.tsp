@@ -87,6 +87,7 @@ op FoundryDataPlaneOperation<
 union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
+  draft_agents_v1_preview: "DraftAgents=V1Preview",
   @removed(Versions.v1)
   hosted_agents_v1_preview: "HostedAgents=V1Preview",
   @removed(Versions.v1)
