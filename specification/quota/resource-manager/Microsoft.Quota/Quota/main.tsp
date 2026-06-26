@@ -50,6 +50,12 @@ enum Versions {
    * The 2025-09-01 API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  @previewVersion
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 @armResourceOperations
