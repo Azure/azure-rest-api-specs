@@ -1,8 +1,13 @@
 import "../common/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const RedTeamsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.red_teams_v1_preview],
+};
 
 @doc("Strategies for attacks.")
 union AttackStrategy {
@@ -94,6 +99,7 @@ union AttackStrategy {
 }
 
 @doc("Risk category for the attack objective.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 union RiskCategory {
   string,
 
@@ -129,6 +135,7 @@ union RiskCategory {
 }
 
 @doc("Azure OpenAI model configuration. The API version would be selected by the service for querying the model.")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model AzureOpenAIModelConfiguration extends RedTeamTargetConfig {
   type: "AzureOpenAIModel";
 
@@ -138,6 +145,7 @@ model AzureOpenAIModelConfiguration extends RedTeamTargetConfig {
 
 @doc("Abstract class for target configuration.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model RedTeamTargetConfig {
   @doc("Type of the model configuration.")
   type: string;
@@ -145,6 +153,7 @@ model RedTeamTargetConfig {
 
 @doc("Red team details.")
 @resource("runs")
+@extension("x-ms-foundry-meta", RedTeamsRequiredPreviews)
 model RedTeam {
   @doc("Identifier of the red team run.")
   @key("name")

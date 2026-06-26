@@ -10,6 +10,7 @@ const MemoryStoreRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",
