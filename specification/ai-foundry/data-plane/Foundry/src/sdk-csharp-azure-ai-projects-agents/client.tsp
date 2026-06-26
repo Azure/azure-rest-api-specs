@@ -324,5 +324,4 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.delete, Access.internal);
   
   @@clientName(OptimizationDatasetItem.desired_num_turns, "DesiredTurnCount");
-  @@clientName(OptimizationJobProgress.elapsed_seconds, "ElapsedTime");
 }
