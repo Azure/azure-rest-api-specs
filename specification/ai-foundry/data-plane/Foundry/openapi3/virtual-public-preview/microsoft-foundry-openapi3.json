@@ -3092,6 +3092,17 @@
             "explode": false
           },
           {
+            "name": "include_drafts",
+            "in": "query",
+            "required": false,
+            "description": "(Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "explode": false
+          },
+          {
             "name": "api-version",
             "in": "query",
             "required": true,
@@ -21241,6 +21252,11 @@
           "definition": {
             "$ref": "#/components/schemas/AgentDefinition"
           },
+          "draft": {
+            "type": "boolean",
+            "description": "Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.",
+            "default": false
+          },
           "status": {
             "allOf": [
               {
@@ -21944,6 +21960,24 @@
             ],
             "description": "The object type, which is always 'azure_ai_search'."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "azure_ai_search": {
             "allOf": [
               {
@@ -22070,6 +22104,14 @@
             "enum": [
               "azure_ai_search"
             ]
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "azure_ai_search": {
             "allOf": [
@@ -22612,6 +22654,14 @@
             ],
             "description": "The object type, which is always 'browser_automation'."
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "azure_function": {
             "allOf": [
               {
@@ -22997,6 +23047,24 @@
             ],
             "description": "The object type, which is always 'bing_grounding'."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "bing_grounding": {
             "allOf": [
               {
@@ -23363,6 +23431,24 @@
             ],
             "description": "The type of the tool. Always `capture_structured_outputs`."
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "outputs": {
             "allOf": [
               {
@@ -23614,6 +23700,14 @@
               }
             ],
             "description": "The code interpreter container. Can be a container ID or an object that\nspecifies uploaded file IDs to make available to your code, along with an\noptional `memory_limit` setting.\nIf not provided, the service assumes auto."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -24205,6 +24299,11 @@
             ],
             "description": "The blueprint reference for the agent."
           },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "default": false
+          },
           "agent_endpoint": {
             "allOf": [
               {
@@ -24371,6 +24470,11 @@
               }
             ],
             "description": "The blueprint reference for the agent."
+          },
+          "draft": {
+            "type": "boolean",
+            "description": "(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.",
+            "default": false
           }
         },
         "x-ms-foundry-meta": {
@@ -28855,6 +28959,14 @@
               }
             ]
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "vector_store_ids": {
             "type": "array",
             "items": {
@@ -29205,13 +29317,6 @@
             "enum": [
               "hosted"
             ]
-          },
-          "tools": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/OpenAI.Tool"
-            },
-            "description": "An array of tools the hosted agent's model may call while generating a response. You\ncan specify which tool to use by setting the `tool_choice` parameter."
           },
           "cpu": {
             "type": "string",
@@ -30170,6 +30275,14 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -32213,6 +32326,24 @@
             ],
             "description": "The type of the code interpreter tool. Always `code_interpreter`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "container": {
             "anyOf": [
@@ -37106,6 +37237,24 @@
                 "type": "null"
               }
             ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -38648,6 +38797,24 @@
                 "type": "null"
               }
             ]
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -39363,6 +39530,24 @@
               }
             ],
             "description": "Whether to generate a new image or edit an existing image. Default: `auto`."
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -46713,6 +46898,24 @@
             ],
             "description": "The type of the local shell tool. Always `local_shell`.",
             "x-stainless-const": true
+          },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -46925,6 +47128,14 @@
           "project_connection_id": {
             "type": "string",
             "description": "The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server."
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           }
         },
         "allOf": [
@@ -54853,6 +55064,24 @@
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
           },
+          "name": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "custom_search_configuration": {
             "allOf": [
               {
@@ -55124,6 +55353,14 @@
             ],
             "description": "The object type, which is always 'openapi'."
           },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
+          },
           "openapi": {
             "allOf": [
               {
@@ -55243,6 +55480,14 @@
             "enum": [
               "openapi"
             ]
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "openapi": {
             "allOf": [
@@ -59994,6 +60239,14 @@
             ],
             "description": "High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.",
             "default": "medium"
+          },
+          "tool_configs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/ToolConfig"
+            },
+            "description": "Deprecated. This property is deprecated and will be removed in a future version.",
+            "deprecated": true
           },
           "custom_search_configuration": {
             "allOf": [

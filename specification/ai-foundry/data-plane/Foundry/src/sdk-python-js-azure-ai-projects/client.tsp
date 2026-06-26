@@ -120,6 +120,9 @@ using Azure.AI.Projects;
 @@usage(SessionFileWriteResponse, Usage.output);
 @@access(SessionFileWriteResponse, Access.public);
 
+// Since we hand-write a method "download_session_file_to_path", we need to rename this one so the difference is clear:
+@@clientName(AgentSessionFiles.downloadSessionFile, "download_session_file_as_bytes", "python");
+
 @@clientName(UploadSessionFileParams.path, "remote_path", "python");
 @@clientName(DownloadSessionFileParams.path, "remote_path", "python");
 @@clientName(ListSessionFilesParams.path, "remote_path", "python");
@@ -130,7 +133,8 @@ using Azure.AI.Projects;
 @@scope(Agents.createAgentFromCode, "!(python, javascript)");
 @@scope(Agents.updateAgentFromCode, "!(python, javascript)");
 
-@@clientName(Agents.downloadAgentCode, "download_code", "python");
+// Since we hand-write a method "download_code_to_path", we need to rename this one so the difference is clear:
+@@clientName(Agents.downloadAgentCode, "download_code_as_bytes", "python");
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");

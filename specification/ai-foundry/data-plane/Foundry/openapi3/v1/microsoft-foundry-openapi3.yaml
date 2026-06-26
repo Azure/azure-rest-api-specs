@@ -1863,6 +1863,14 @@ paths:
           schema:
             type: string
           explode: false
+        - name: include_drafts
+          in: query
+          required: false
+          description: (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).
+          schema:
+            type: boolean
+            default: false
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -11760,6 +11768,10 @@ components:
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
+        draft:
+          type: boolean
+          description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
+          default: false
         status:
           allOf:
             - $ref: '#/components/schemas/AgentVersionStatus'
@@ -12199,6 +12211,20 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -12280,6 +12306,12 @@ components:
           type: string
           enum:
             - azure_ai_search
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -12628,6 +12660,12 @@ components:
           enum:
             - azure_function
           description: The object type, which is always 'browser_automation'.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         azure_function:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
@@ -12884,6 +12922,20 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -13108,6 +13160,20 @@ components:
           enum:
             - capture_structured_outputs
           description: The type of the tool. Always `capture_structured_outputs`.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         outputs:
           allOf:
             - $ref: '#/components/schemas/StructuredOutputDefinition'
@@ -13299,6 +13365,12 @@ components:
             specifies uploaded file IDs to make available to your code, along with an
             optional `memory_limit` setting.
             If not provided, the service assumes auto.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A code interpreter tool stored in a toolbox.
@@ -13618,6 +13690,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          default: false
         agent_endpoint:
           allOf:
             - $ref: '#/components/schemas/AgentEndpointConfig'
@@ -13747,6 +13823,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          default: false
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
@@ -16370,6 +16450,12 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         vector_store_ids:
           type: array
           items:
@@ -16591,13 +16677,6 @@ components:
           type: string
           enum:
             - hosted
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: |-
-            An array of tools the hosted agent's model may call while generating a response. You
-            can specify which tool to use by setting the `tool_choice` parameter.
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -17193,6 +17272,12 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.
@@ -18494,6 +18579,20 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         container:
           anyOf:
             - type: string
@@ -21790,6 +21889,20 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -22802,6 +22915,20 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
             - type: 'null'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -23413,6 +23540,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -28385,6 +28526,20 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -28536,6 +28691,12 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -34457,6 +34618,20 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -34638,6 +34813,12 @@ components:
           enum:
             - openapi
           description: The object type, which is always 'openapi'.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
@@ -34713,6 +34894,12 @@ components:
           type: string
           enum:
             - openapi
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
@@ -37751,6 +37938,12 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'

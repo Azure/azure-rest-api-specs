@@ -28,6 +28,9 @@ model CreateAgentVersionRequest {
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
+
+  @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
+  draft?: boolean = false;
 }
 
 model CreateAgentVersionFromManifestRequest {
@@ -85,7 +88,7 @@ model CreateAgentRequest {
 }
 
 model UpdateAgentRequest {
-  ...CreateAgentVersionRequest;
+  ...OmitProperties<CreateAgentVersionRequest, "draft">;
 }
 
 model PatchAgentRequest {
@@ -177,6 +180,9 @@ model AgentVersionObject {
   created_at: FoundryTimestamp;
 
   definition: AgentDefinition;
+
+  @doc("Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.")
+  draft?: boolean = false;
 
   @doc("The provisioning status of the agent version. Defaults to 'active' for non-hosted agents. For hosted agents, reflects infrastructure readiness.")
   status?: AgentVersionStatus;
@@ -394,12 +400,6 @@ model ExternalAgentDefinition extends AgentDefinition {
 @doc("The hosted agent definition.")
 model HostedAgentDefinition extends AgentDefinition {
   kind: AgentKind.hosted;
-
-  @doc("""
-    An array of tools the hosted agent's model may call while generating a response. You
-    can specify which tool to use by setting the `tool_choice` parameter.
-    """)
-  tools?: OpenAI.Tool[];
 
   /**
    * When specify the `cpu` and `memory`, the total CPU and memory allocated to all the containers in a container app must add up to one of the following combinations.
