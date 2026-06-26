@@ -4789,7 +4789,10 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
 // Flatten SiteConfig.apiDefinition to match GA surface (ApiDefinitionInfo type was hidden).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SiteConfig.apiDefinition, "csharp");
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SiteConfig.apiDefinition,
+  "csharp"
+);
 @@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
 @@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
 @@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
@@ -5494,5 +5497,720 @@ union ConfigReferenceSource {
 @@clientName(
   BySiteSlotOperationGroup.listBySiteSlot,
   "ListResourceHealthMetadata",
+  "csharp"
+);
+
+@@usage(
+  AbnormalTimePeriod,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AnalysisData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AnalysisDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApiKVReference,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApplicationStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ApplicationStackResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  AseRegion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BackupItem,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  BillingMeter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerCpuStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerCpuUsage,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerMemoryStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerNetworkInterfaceStatistics,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContainerThrottlingData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContentLink,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ContinuousWebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CustomHostnameAnalysisResult,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CustomHostnameSites,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataProviderMetadata,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataSource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataTableResponseColumn,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DataTableResponseObject,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DeletedSite,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorAbnormalTimePeriod,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorDefinitionResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DetectorResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticAnalysis,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticCategory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticData,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticDetectorResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticMetricSample,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  DiagnosticMetricSet,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ErrorProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  FunctionAppStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  GeoRegion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  HybridConnectionKey,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  HybridConnectionLimits,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Usage,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MigrateMySqlStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MSDeployLog,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MSDeployStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  NetworkFeatures,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  PremierAddOnOffer,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessModuleInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessThreadInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ProcessThreadInfoProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  QueryUtterancesResult,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  QueryUtterancesResults,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Recommendation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RecommendationRule,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RemotePrivateEndpointConnection,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Rendering,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RepetitionIndex,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Request,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RequestHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RequestHistoryProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ResourceHealthMetadata,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ResourceMetricDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Response,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RetryHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RunActionCorrelation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  RunCorrelation,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SampleUtterance,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteConfigurationSnapshotInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteExtensionInfo,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SitePhpErrorLogFlag,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SlotDifference,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Snapshot,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Solution,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StackMajorVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StackMinorVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteBuildARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteCustomDomainOverviewARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteFunctionOverviewARMResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSitesWorkflowPreview,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StaticSiteUserInvitationResponseResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Web.Status,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StorageMigrationResponse,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StringList,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredJobHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredJobRun,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  TriggeredWebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VirtualIPMapping,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VnetValidationFailureDetails,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  VnetValidationTestFailure,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebAppStack,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebJob,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WebSiteInstanceStatus,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowEnvelope,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowEnvelopeProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowHealth,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowOutputParameter,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRun,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRunAction,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowRunActionRepetitionDefinition,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowTrigger,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowTriggerHistory,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  WorkflowVersion,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
