@@ -100,7 +100,7 @@ interface RequestHistories {
    */
   get is RequestHistoryOps.Read<
     RequestHistory,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -108,7 +108,7 @@ interface RequestHistories {
    */
   list is RequestHistoryOps.List<
     RequestHistory,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 }
 

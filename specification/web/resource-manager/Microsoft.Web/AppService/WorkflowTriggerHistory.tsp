@@ -86,7 +86,7 @@ interface WorkflowTriggerHistories {
    */
   get is WorkflowTriggerHistoriesOps.Read<
     WorkflowTriggerHistory,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -107,7 +107,7 @@ interface WorkflowTriggerHistories {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -118,7 +118,7 @@ interface WorkflowTriggerHistories {
     Request = void,
     Result = void,
     Response = ArmAcceptedLroResponse,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 }
 

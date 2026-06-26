@@ -80,7 +80,7 @@ interface WorkflowVersions {
    */
   get is WorkflowVersionsOps.Read<
     WorkflowVersion,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -95,7 +95,7 @@ interface WorkflowVersions {
       @query("$top")
       $top?: int32;
     },
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 }
 

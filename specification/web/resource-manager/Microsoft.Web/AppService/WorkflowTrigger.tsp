@@ -80,7 +80,7 @@ interface WorkflowTriggers {
    */
   get is WorkflowTriggersOps.Read<
     WorkflowTrigger,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -101,7 +101,7 @@ interface WorkflowTriggers {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -111,7 +111,7 @@ interface WorkflowTriggers {
     WorkflowTrigger,
     void,
     ArmResponse<WorkflowTriggerCallbackUrl>,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 
   /**
@@ -123,7 +123,7 @@ interface WorkflowTriggers {
     {
       @body body: void;
     },
-    OverrideErrorType = DefaultErrorResponse,
+    OverrideErrorType = ErrorResponse,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader<FinalResult = void>
   >;
@@ -137,7 +137,7 @@ interface WorkflowTriggers {
     WorkflowTrigger,
     void,
     ArmResponse<JsonSchema>,
-    OverrideErrorType = DefaultErrorResponse
+    OverrideErrorType = ErrorResponse
   >;
 }
 
