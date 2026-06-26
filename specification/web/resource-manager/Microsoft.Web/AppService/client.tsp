@@ -4787,6 +4787,9 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 @@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
+// Flatten SiteConfig.apiDefinition to match GA surface (ApiDefinitionInfo type was hidden).
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SiteConfig.apiDefinition, "csharp");
 @@clientName(ApiDefinitionInfo, "AppServiceApiDefinitionInfo", "csharp");
 @@clientName(ArmPlan, "AppServiceArmPlan", "csharp");
 @@clientName(BillingMeter, "AppServiceBillingMeter", "csharp");
@@ -5483,9 +5486,6 @@ union ConfigReferenceSource {
   "csharp"
 );
 
-// Disambiguate ResourceHealthMetadata Read vs List on the same legacy operation
-// group; without these renames the generator emits two CreateGetBySite[Slot]Request
-// methods with identical signatures.
 @@clientName(
   ResourceHealthMetadataOperationGroup.listBySite,
   "ListResourceHealthMetadata",
