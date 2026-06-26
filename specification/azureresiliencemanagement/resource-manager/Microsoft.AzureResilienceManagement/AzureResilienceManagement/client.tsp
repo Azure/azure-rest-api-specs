@@ -5,9 +5,11 @@ using Azure.ClientGenerator.Core;
 using Microsoft.AzureResilienceManagement;
 using Azure.Core;
 
-// @@usage(ChildJobProperties, Usage.input | Usage.output, "go");
-@@usage(JobProperties, Usage.input | Usage.output, "go");
-@@usage(JobResourceProperties, Usage.input | Usage.output, "go");
+@@clientName(
+  Microsoft.AzureResilienceManagement,
+  "ResilienceManagementClient",
+  "python"
+);
 
 @@clientName(DrillResource, "DrillTarget", "csharp");
 @@clientName(DrillRunResource, "DrillRunTarget", "csharp");
