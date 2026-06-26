@@ -320,54 +320,15 @@ union SoapApiType {
 }
 
 /**
- * A single MCP transport endpoint, mapped to a relative URL on the backend MCP server.
- */
-model McpEndpoint {
-  /**
-   * Relative URL path that must start with '/'.
-   */
-  @pattern("^/.*$")
-  uriTemplate?: string;
-}
-
-/**
- * MCP transport endpoints for the pass-through scenario. Each property is a known MCP transport route
- * mapped to a relative URL on the backend MCP server. Defining a property opts that route in.
- */
-model McpEndpoints {
-  /**
-   * HTTP+SSE transport: the SSE stream endpoint.
-   */
-  sse?: McpEndpoint;
-
-  /**
-   * HTTP+SSE transport: the message (POST) endpoint.
-   */
-  messages?: McpEndpoint;
-
-  /**
-   * Streamable HTTP transport endpoint.
-   */
-  mcp?: McpEndpoint;
-}
-
-/**
  * Properties specific to MCP API type. An MCP API is created in one of three ways:
- * 1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId) and, optionally, `endpoints`.
+ * 1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId).
  * 2. Expose existing API operations as MCP tools: set `mcpTools` (or use the `tools` sub-resource); do not set a backend.
  * 3. Federation router: set `toolServerId` together with `isFederationRouter`.
  */
 model McpProperties {
   /**
-   * Pass-through scenario only: maps known MCP transport routes (sse, messages, mcp) to relative URLs on
-   * the backend MCP server. Optional (both SSE and Streamable HTTP are handled automatically). Mutually
-   * exclusive with isFederationRouter.
-   */
-  endpoints?: McpEndpoints;
-
-  /**
    * When true, this MCP API acts as a shared federation router. The gateway auto-injects a synthetic
-   * POST /{toolServerId}/mcp operation. Mutually exclusive with endpoints.
+   * POST /{toolServerId}/mcp operation.
    */
   isFederationRouter?: boolean;
 }

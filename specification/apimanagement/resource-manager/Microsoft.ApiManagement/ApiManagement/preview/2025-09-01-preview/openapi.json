@@ -59773,46 +59773,13 @@
         }
       }
     },
-    "McpEndpoint": {
-      "type": "object",
-      "description": "A single MCP transport endpoint, mapped to a relative URL on the backend MCP server.",
-      "properties": {
-        "uriTemplate": {
-          "type": "string",
-          "description": "Relative URL path that must start with '/'.",
-          "pattern": "^/.*$"
-        }
-      }
-    },
-    "McpEndpoints": {
-      "type": "object",
-      "description": "MCP transport endpoints for the pass-through scenario. Each property is a known MCP transport route\nmapped to a relative URL on the backend MCP server. Defining a property opts that route in.",
-      "properties": {
-        "sse": {
-          "$ref": "#/definitions/McpEndpoint",
-          "description": "HTTP+SSE transport: the SSE stream endpoint."
-        },
-        "messages": {
-          "$ref": "#/definitions/McpEndpoint",
-          "description": "HTTP+SSE transport: the message (POST) endpoint."
-        },
-        "mcp": {
-          "$ref": "#/definitions/McpEndpoint",
-          "description": "Streamable HTTP transport endpoint."
-        }
-      }
-    },
     "McpProperties": {
       "type": "object",
-      "description": "Properties specific to MCP API type. An MCP API is created in one of three ways:\n1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId) and, optionally, `endpoints`.\n2. Expose existing API operations as MCP tools: set `mcpTools` (or use the `tools` sub-resource); do not set a backend.\n3. Federation router: set `toolServerId` together with `isFederationRouter`.",
+      "description": "Properties specific to MCP API type. An MCP API is created in one of three ways:\n1. Pass-through a custom MCP server: set the API backend (serviceUrl/backendId).\n2. Expose existing API operations as MCP tools: set `mcpTools` (or use the `tools` sub-resource); do not set a backend.\n3. Federation router: set `toolServerId` together with `isFederationRouter`.",
       "properties": {
-        "endpoints": {
-          "$ref": "#/definitions/McpEndpoints",
-          "description": "Pass-through scenario only: maps known MCP transport routes (sse, messages, mcp) to relative URLs on\nthe backend MCP server. Optional (both SSE and Streamable HTTP are handled automatically). Mutually\nexclusive with isFederationRouter."
-        },
         "isFederationRouter": {
           "type": "boolean",
-          "description": "When true, this MCP API acts as a shared federation router. The gateway auto-injects a synthetic\nPOST /{toolServerId}/mcp operation. Mutually exclusive with endpoints."
+          "description": "When true, this MCP API acts as a shared federation router. The gateway auto-injects a synthetic\nPOST /{toolServerId}/mcp operation."
         }
       }
     },
