@@ -48,7 +48,9 @@ interface ComponentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         componentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentContainer"
     > {}
 
 @armResourceOperations
@@ -137,7 +139,9 @@ interface ComponentContainerOperationGroupOps
         @segment("components")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentContainer"
     > {}
 
 @armResourceOperations

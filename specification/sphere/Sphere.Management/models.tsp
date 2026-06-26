@@ -706,7 +706,7 @@ model ProductUpdate {
    * The updatable properties of the Product.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!java")
   properties?: ProductUpdateProperties;
 }
 
@@ -728,7 +728,7 @@ model DeviceGroupUpdate {
    * The updatable properties of the DeviceGroup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!java")
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -780,7 +780,7 @@ model DeviceUpdate {
    * The updatable properties of the Device.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!java")
   properties?: DeviceUpdateProperties;
 }
 
