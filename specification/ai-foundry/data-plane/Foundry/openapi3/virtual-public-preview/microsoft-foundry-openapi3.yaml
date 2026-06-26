@@ -38392,7 +38392,7 @@ components:
           description: Pinned agent version. Defaults to latest if omitted.
       description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationCandidate:
       type: object
@@ -38431,7 +38431,7 @@ components:
           description: Promotion metadata. Null if the candidate has not been promoted.
       description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetCriterion:
       type: object
@@ -38447,7 +38447,7 @@ components:
           description: Criterion instruction / description.
       description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetInput:
       type: object
@@ -38465,7 +38465,7 @@ components:
           reference: '#/components/schemas/OptimizationReferenceDatasetInput'
       description: Base discriminated model for dataset input. Either inline items or a registered reference.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetInputType:
       anyOf:
@@ -38476,7 +38476,7 @@ components:
             - reference
       description: Discriminator values for the dataset input union.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetItem:
       type: object
@@ -38500,7 +38500,7 @@ components:
           description: Per-item evaluation criteria.
       description: A single item in an inline dataset.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationEvaluatorRef:
       type: object
@@ -38515,7 +38515,7 @@ components:
           description: Evaluator version. If not specified, the latest version is used.
       description: Reference to a named evaluator, optionally pinned to a version.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationInlineDatasetInput:
       type: object
@@ -38537,7 +38537,7 @@ components:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Inline dataset — items supplied directly in the request body.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationJob:
       type: object
@@ -38593,7 +38593,7 @@ components:
           readOnly: true
       description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobInputs:
       type: object
@@ -38625,7 +38625,7 @@ components:
           description: Tuning knobs and run-mode.
       description: Caller-supplied inputs for an optimization job.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobListItem:
       type: object
@@ -38671,7 +38671,7 @@ components:
           readOnly: true
       description: Slim job representation returned by the LIST endpoint.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobProgress:
       type: object
@@ -38694,7 +38694,7 @@ components:
           description: Wall-clock time elapsed in seconds since the job began executing.
       description: In-flight progress; only populated while status is queued or in_progress.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobResult:
       type: object
@@ -38712,7 +38712,7 @@ components:
           description: All evaluated candidates including baseline.
       description: Terminal-state result body. Populated when status is succeeded or failed.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationOptions:
       type: object
@@ -38739,7 +38739,7 @@ components:
           description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
       description: Tuning knobs and run-mode for an optimization job.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OptimizationReferenceDatasetInput:
       type: object
@@ -38762,7 +38762,7 @@ components:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     OtlpTelemetryEndpoint:
       type: object
@@ -39106,7 +39106,7 @@ components:
           description: Version of the Foundry agent this candidate was promoted to.
       description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - AgentsOptimization=V2Preview
     PromptAgentDefinition:
       type: object
