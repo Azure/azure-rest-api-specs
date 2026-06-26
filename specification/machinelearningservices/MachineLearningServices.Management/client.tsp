@@ -63,11 +63,11 @@ using Microsoft.MachineLearningServices;
   "java"
 );
 
-@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java");
+@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java,javascript");
 @@clientName(
   EndpointServiceConnectionStatus,
   "PrivateEndpointServiceConnectionStatus",
-  "java"
+  "java,javascript"
 );
 @@clientName(
   ListWorkspaceKeysResult.userStorageArmId,
