@@ -397,7 +397,7 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.InputItem, unknown, "java");
 
 // Erase strongly-typed payloads on the namespace / tool_search Tool variants.
-@@alternateType(OpenAI.NamespaceToolParam.tools, unknown[], "java");
+@@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
 @@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
 
 // TimeZone property override via model indirection
