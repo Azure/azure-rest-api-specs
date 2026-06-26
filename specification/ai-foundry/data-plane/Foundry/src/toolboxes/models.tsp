@@ -64,7 +64,7 @@ model WithFieldsOptional<Source, Keys extends string> {
  * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
  */
 alias ToolFields<Source> = {
-  ...OmitProperties<Source, "name" | "description" | "type">;
+  ...OmitProperties<Source, "name" | "description" | "type" | "tool_configs">;
 };
 
 alias ToolboxCodeInterpreterToolType = "code_interpreter";
