@@ -4055,7 +4055,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   StaticSiteUserProvidedFunctionApp,
   "LegacyStaticSiteUserProvidedFunctionApp",
   "csharp"
-); // Rename this model to avoid name collision with StaticSiteUserProvidedFunctionAppARMResource
+);
 @@alternateType(
   StaticSiteUserProvidedFunctionApp,
   StaticSiteUserProvidedFunctionAppARMResource,
@@ -4183,7 +4183,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 
-// --- Property renames on Properties companion models (flattened ARM resources) ---
 @@clientName(
   AddressResponseProperties.vipMappings,
   "VirtualIPMappings",
@@ -4533,7 +4532,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 );
 @@clientName(WorkflowTriggerHistoryProperties.fired, "IsFired", "csharp");
 
-// --- Property renames on non-resource sub-models (no `.properties.` segment) ---
 @@clientName(Apple.enabled, "IsEnabled", "csharp");
 @@clientName(AuthPlatform.enabled, "IsEnabled", "csharp");
 @@clientName(AzureActiveDirectory.enabled, "IsEnabled", "csharp");
@@ -4696,7 +4694,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 
-// --- Enum value renames ---
 @@clientName(
   TlsCipherSuites.TLS_AES_128_GCM_SHA256,
   "TlsAes128GcmSha256",
@@ -4783,7 +4780,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 @@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
-// Flatten SiteConfig.apiDefinition to match GA surface (ApiDefinitionInfo type was hidden).
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   SiteConfig.apiDefinition,
@@ -5038,7 +5034,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 
-// ARM resource identifiers (arm-id)
 @@alternateType(VirtualNetworkProfile.id, armResourceIdentifier, "csharp");
 @@alternateType(HostingEnvironmentProfile.id, armResourceIdentifier, "csharp");
 @@alternateType(KubeEnvironmentProfile.id, armResourceIdentifier, "csharp");
@@ -5067,18 +5062,13 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 
-// ARM resource types (resource-type)
 @@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
 @@alternateType(HostingEnvironmentProfile.type, armResourceType, "csharp");
 @@alternateType(KubeEnvironmentProfile.type, armResourceType, "csharp");
 @@alternateType(SkuInfo.resourceType, armResourceType, "csharp");
 @@alternateType(SkuInfos.resourceType, armResourceType, "csharp");
 @@alternateType(ResourceReference.type, armResourceType, "csharp");
-
-// UUIDs (uuid)
 @@alternateType(BillingMeterProperties.meterId, uuid, "csharp");
-
-// IP addresses (ip-address)
 @@alternateType(
   AddressResponseProperties.serviceIpAddress,
   ipV4Address,
@@ -5094,13 +5084,10 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   ipV4Address[],
   "csharp"
 );
-
-// Durations (format: duration)
 @@alternateType(LogSpecification.blobDuration, duration, "csharp");
 @@alternateType(MetricAvailability.blobDuration, duration, "csharp");
 @@alternateType(TriggeredJobRun.duration, duration, "csharp");
 
-// Reparent ProxyOnlyResource-derived models to Azure.ResourceManager.CommonTypes.ProxyResource for csharp
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   AppServiceEnvironmentPatchResource,
@@ -5786,6 +5773,165 @@ union ConfigReferenceSource {
   azureLocation,
   "csharp"
 );
+
+// Theme D5-LocationParam: retype standard ARM LocationParameter.location to AzureLocation.
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.LocationParameter.location,
+  azureLocation,
+  "csharp"
+);
+
+@@clientName(
+  SiteRecommendations.listHistoryForWebApp,
+  "GetHistoryForWebAppRecommendations",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.listRecommendedRulesForWebApp,
+  "GetRecommendedRulesForWebAppRecommendations",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.disableAllForWebApp,
+  "DisableAllForWebAppRecommendation",
+  "csharp"
+);
+@@clientName(
+  SiteRecommendations.resetAllFiltersForWebApp,
+  "ResetAllFiltersForWebAppRecommendation",
+  "csharp"
+);
+@@clientName(
+  SiteWorkflows.regenerateAccessKey,
+  "RegenerateAccessKeyWorkflow",
+  "csharp"
+);
+@@clientName(SiteWorkflows.validate, "ValidateWorkflow", "csharp");
+@@clientName(
+  AppServiceEnvironmentRecommendations.listHistoryForHostingEnvironment,
+  "GetHistoryForHostingEnvironmentRecommendations",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.listRecommendedRulesForHostingEnvironment,
+  "GetRecommendedRulesForHostingEnvironmentRecommendations",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.disableAllForHostingEnvironment,
+  "DisableAllForHostingEnvironmentRecommendation",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentRecommendations.resetAllFiltersForHostingEnvironment,
+  "ResetAllFiltersForHostingEnvironmentRecommendation",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getAvailableStacks,
+  "GetAvailableStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacks,
+  "GetFunctionAppStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getFunctionAppStacksForLocation,
+  "GetFunctionAppStacksForLocationProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacks,
+  "GetWebAppStacksProviders",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getWebAppStacksForLocation,
+  "GetWebAppStacksByLocation",
+  "csharp"
+);
+@@clientName(
+  ProviderOperationGroup.getAvailableStacksOnPrem,
+  "GetAvailableStacksOnPremProviders",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.list,
+  "GetRecommendations",
+  "csharp"
+);
+@@clientName(
+  RecommendationsOperationGroup.resetAllFilters,
+  "ResetAllFiltersRecommendation",
+  "csharp"
+);
+@@clientName(
+  ResourceHealthMetadataNonResourceOperationGroup.list,
+  "GetAllResourceHealthMetadata",
+  "csharp"
+);
+@@clientName(
+  GetUsagesInLocationOperationGroup.list,
+  "GetGetUsagesInLocations",
+  "csharp"
+);
+@@clientName(
+  StaticSitesOperationGroup.previewWorkflow,
+  "PreviewStaticSiteWorkflow",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironmentResources.listOperations,
+  "GetOperationsProviders",
+  "csharp"
+);
+@@clientName(
+  DeletedSites.getDeletedWebAppByLocation,
+  "GetDeletedWebAppByLocationDeletedWebApp",
+  "csharp"
+);
+@@clientName(
+  ProcessInfos.listInstanceProcessThreads,
+  "GetInstanceProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.listProcessThreads,
+  "GetProcessThreads",
+  "csharp"
+);
+@@clientName(
+  ProcessInfos.getInstanceProcessDump,
+  "GetInstanceProcessDump",
+  "csharp"
+);
+@@clientName(
+  ProcessInfoOperationGroup.getProcessDump,
+  "GetProcessDump",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+  "GetInstanceProcessDumpSlot",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.getProcessDumpSlot,
+  "GetProcessDumpSlot",
+  "csharp"
+);
+@@clientName(
+  InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+  "GetInstanceProcessThreadsSlot",
+  "csharp"
+);
+@@clientName(
+  ProcessSlotOperationGroup.listProcessThreadsSlot,
+  "GetProcessThreadsSlot",
+  "csharp"
+);
 @@clientName(CheckNameResourceTypes, "CheckNameResourceType", "csharp");
 @@clientName(
   DnlResourceNameAvailabilityRequest,
@@ -5795,8 +5941,13 @@ union ConfigReferenceSource {
 @@clientName(ProviderOsTypeSelected, "ProviderOSTypeSelected", "csharp");
 @@clientName(ProviderStackOsType, "ProviderStackOSType", "csharp");
 @@clientName(
-  StaticSitesWorkflowPreview,
+  StaticSitesWorkflowPreviewRequest,
   "StaticSitesWorkflowPreviewContent",
+  "csharp"
+);
+@@clientName(
+  StaticSitesWorkflowPreviewRequestProperties,
+  "StaticSitesWorkflowPreviewContentProperties",
   "csharp"
 );
 @@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
@@ -6513,5 +6664,20 @@ union ConfigReferenceSource {
 
     | Azure.ClientGenerator.Core.Usage.input
     | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Web.ManagedServiceIdentity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.ipsslAddressCount,
+  "IPSslAddressCount",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.userWhitelistedIpRanges,
+  "UserWhitelistedIPRanges",
   "csharp"
 );
