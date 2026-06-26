@@ -154,10 +154,24 @@
           {
             "name": "upgradeAssessmentName",
             "in": "path",
-            "description": "Name of the UpgradeAssessments resource.",
+            "description": "Name of the upgrade assessment. Must be 'default'; only one upgrade assessment exists per cluster.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-z]([a-z0-9._-]{0,126}[a-z0-9])?$"
+            "pattern": "^default$",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "UpgradeAssessmentName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "default",
+                  "value": "default",
+                  "description": "The only valid instance; one assessment per cluster."
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -462,6 +476,24 @@
       "required": [
         "value"
       ]
+    },
+    "UpgradeAssessmentName": {
+      "type": "string",
+      "description": "Allowed instance name for the upgrade assessment singleton.",
+      "enum": [
+        "default"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeAssessmentName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "default",
+            "value": "default",
+            "description": "The only valid instance; one assessment per cluster."
+          }
+        ]
+      }
     },
     "UpgradeAssessmentProperties": {
       "type": "object",

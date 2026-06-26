@@ -11,17 +11,24 @@ using TypeSpec.Http;
 
 namespace Microsoft.KubernetesConfiguration;
 
+/** Allowed instance name for the upgrade assessment singleton. */
+union UpgradeAssessmentName {
+  string,
+
+  /** The only valid instance; one assessment per cluster. */
+  default: "default",
+}
+
 /**
  * ARM resource representing a Kubernetes cluster upgrade assessment.
  */
 model UpgradeAssessment
   is Azure.ResourceManager.ProxyResource<UpgradeAssessmentProperties> {
-  ...ResourceNameParameter<
-    Resource = UpgradeAssessment,
-    KeyName = "upgradeAssessmentName",
-    SegmentName = "upgradeAssessments",
-    NamePattern = "^[a-z]([a-z0-9._-]{0,126}[a-z0-9])?$"
-  >;
+  @path
+  @key("upgradeAssessmentName")
+  @segment("upgradeAssessments")
+  @pattern("^default$")
+  name: UpgradeAssessmentName;
 }
 
 /**
@@ -87,7 +94,10 @@ interface UpgradeAssessments {
   list is UpgradeAssessmentOps.List<UpgradeAssessment>;
 }
 
-@@doc(UpgradeAssessment.name, "Name of the UpgradeAssessments resource.");
+@@doc(
+  UpgradeAssessment.name,
+  "Name of the upgrade assessment. Must be 'default'; only one upgrade assessment exists per cluster."
+);
 @@doc(
   UpgradeAssessment.properties,
   "Properties of the UpgradeAssessments resource."
