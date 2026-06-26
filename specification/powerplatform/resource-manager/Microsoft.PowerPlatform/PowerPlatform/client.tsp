@@ -161,4 +161,4 @@ op enterpriseUpdate(
 
 @@override(EnterprisePolicies.update, enterpriseUpdate);
 
-@@clientName(Microsoft.PowerPlatform, "PowerPlatformMgmtClient", "python")
+@@clientName(Microsoft.PowerPlatform, "PowerPlatformMgmtClient", "python");
