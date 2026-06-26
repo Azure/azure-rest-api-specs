@@ -141,14 +141,14 @@ interface StorageTasks {
   /**
    * Stops all active running assignments for the storage task
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Matches stopAssignment pattern in Microsoft.Storage"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Existing API returns 200 or 204 for this action"
   @added(Versions.v2026_03_01)
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("stopAllAssignments")
   stopAllAssignments is ArmResourceActionAsync<
     StorageTask,
     void,
-    void,
+    OkResponse | NoContentResponse,
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
