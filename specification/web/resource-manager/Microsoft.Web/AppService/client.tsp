@@ -5774,7 +5774,6 @@ union ConfigReferenceSource {
   "csharp"
 );
 
-// Theme D5-LocationParam: retype standard ARM LocationParameter.location to AzureLocation.
 @@alternateType(
   Azure.ResourceManager.CommonTypes.LocationParameter.location,
   azureLocation,
@@ -6679,5 +6678,15 @@ union ConfigReferenceSource {
 @@clientName(
   AppServiceEnvironment.userWhitelistedIpRanges,
   "UserWhitelistedIPRanges",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Web.ManagedServiceIdentityType,
+  "AppServiceManagedServiceIdentityType",
+  "csharp"
+);
+@@clientName(
+  DefaultIdentity.identityType,
+  "managedServiceIdentityType",
   "csharp"
 );
