@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "MonitorManagementClient",
-    "version": "2024-03-01-preview",
+    "version": "2026-01-01",
     "description": "Azure Monitor client to create/update/delete metric based alerts.",
     "x-typespec-generated": [
       {
@@ -278,7 +278,7 @@
           "Create or update an alert rule on Resource group(s)": {
             "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json"
           },
-          "Create or update an alert rule on Subscription ": {
+          "Create or update an alert rule on Subscription": {
             "$ref": "./examples/createOrUpdateMetricAlertSubscription.json"
           },
           "Create or update an alert rules with dimensions": {
@@ -952,6 +952,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "The URL to get the next set of results."
         }
       }
