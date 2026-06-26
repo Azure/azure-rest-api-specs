@@ -493,14 +493,22 @@ union PrivateEndpointConnectionsParentTypeCsharp {
   url,
   "csharp"
 );
-@@alternateType(
-  PartnerEventSubscriptionDestinationProperties.resourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
+// Keep ResourceId as string for GA API parity (main exposed string, not ResourceIdentifier).
 @@alternateType(
   VerifiedPartnerProperties.partnerRegistrationImmutableId,
   Azure.Core.uuid,
+  "csharp"
+);
+// Restore GA Guid? type for FederatedClientId (uuid-format string -> Guid).
+@@alternateType(
+  FederatedIdentityCredentialInfo.federatedClientId,
+  Azure.Core.uuid,
+  "csharp"
+);
+// Restore GA property name (new generator names it "Type").
+@@clientName(
+  NetworkSecurityPerimeterProfileAccessRule.type,
+  "NetworkSecurityPerimeterProfileAccessRuleType",
   "csharp"
 );
 @@alternateType(
