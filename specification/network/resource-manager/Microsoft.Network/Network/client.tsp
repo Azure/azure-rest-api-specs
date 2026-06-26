@@ -1601,20 +1601,20 @@ union ProvisioningStateUnion {
   "java"
 );
 
-@@clientName(FirewallPolicyIDPSSignatureDirection.`0`, "Zero", "go");
-@@clientName(FirewallPolicyIDPSSignatureDirection.`1`, "One", "go");
-@@clientName(FirewallPolicyIDPSSignatureDirection.`2`, "Two", "go");
-@@clientName(FirewallPolicyIDPSSignatureDirection.`3`, "Three", "go");
-@@clientName(FirewallPolicyIDPSSignatureDirection.`4`, "Four", "go");
-@@clientName(FirewallPolicyIDPSSignatureDirection.`5`, "Five", "go");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`0`, "Zero", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`1`, "One", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`2`, "Two", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`3`, "Three", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`4`, "Four", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureDirection.`5`, "Five", "go,csharp");
 
-@@clientName(FirewallPolicyIDPSSignatureMode.`0`, "Zero", "go");
-@@clientName(FirewallPolicyIDPSSignatureMode.`1`, "One", "go");
-@@clientName(FirewallPolicyIDPSSignatureMode.`2`, "Two", "go");
+@@clientName(FirewallPolicyIDPSSignatureMode.`0`, "Zero", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureMode.`1`, "One", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureMode.`2`, "Two", "go,csharp");
 
-@@clientName(FirewallPolicyIDPSSignatureSeverity.`1`, "One", "go");
-@@clientName(FirewallPolicyIDPSSignatureSeverity.`2`, "Two", "go");
-@@clientName(FirewallPolicyIDPSSignatureSeverity.`3`, "Three", "go");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`1`, "One", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`2`, "Two", "go,csharp");
+@@clientName(FirewallPolicyIDPSSignatureSeverity.`3`, "Three", "go,csharp");
 
 @@clientLocation(
   BastionHosts.deleteBastionShareableLink,
