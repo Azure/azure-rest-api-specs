@@ -12306,12 +12306,6 @@ components:
           type: string
           enum:
             - azure_ai_search
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -13365,12 +13359,6 @@ components:
             specifies uploaded file IDs to make available to your code, along with an
             optional `memory_limit` setting.
             If not provided, the service assumes auto.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A code interpreter tool stored in a toolbox.
@@ -16450,12 +16438,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         vector_store_ids:
           type: array
           items:
@@ -17272,12 +17254,6 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.
@@ -34894,12 +34870,6 @@ components:
           type: string
           enum:
             - openapi
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
@@ -37938,12 +37908,6 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
