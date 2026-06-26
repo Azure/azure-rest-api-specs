@@ -2098,9 +2098,19 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
+  FirewallPolicyIDPSQuerySortOrder,
+  "FirewallPolicyIdpsQuerySortOrder",
+  "csharp"
+);
+@@clientName(
   FirewallPolicyIDPSSignatureDirection,
   "FirewallPolicyIdpsSignatureDirection",
   "java"
+);
+@@clientName(
+  FirewallPolicyIDPSSignatureDirection,
+  "FirewallPolicyIdpsSignatureDirection",
+  "csharp"
 );
 @@clientName(
   FirewallPolicyIDPSSignatureMode,
@@ -2108,9 +2118,19 @@ op replaceprivateDnsZoneGroupsList(
   "java"
 );
 @@clientName(
+  FirewallPolicyIDPSSignatureMode,
+  "FirewallPolicyIdpsSignatureMode",
+  "csharp"
+);
+@@clientName(
   FirewallPolicyIDPSSignatureSeverity,
   "FirewallPolicyIdpsSignatureSeverity",
   "java"
+);
+@@clientName(
+  FirewallPolicyIDPSSignatureSeverity,
+  "FirewallPolicyIdpsSignatureSeverity",
+  "csharp"
 );
 @@clientName(Microsoft.Network.IdpsQueryObject, "IdpsQueryObject", "java");
 @@clientName(
