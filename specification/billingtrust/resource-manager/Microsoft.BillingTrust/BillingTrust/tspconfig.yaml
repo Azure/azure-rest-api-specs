@@ -12,27 +12,27 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.BillingTrust"
+    namespace: "Azure.ResourceManager.Billing.Trust"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-billingtrust"
-    namespace: "azure.mgmt.billingtrust"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-billing-trust"
+    namespace: "azure.mgmt.billing.trust"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-billingtrust"
-    namespace: "com.azure.resourcemanager.billingtrust"
-    service-name: "BillingTrust"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-billing-trust"
+    namespace: "com.azure.resourcemanager.billing.trust"
+    service-name: "Billing.Trust"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-billingtrust"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-billing-trust"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-billingtrust"
+      name: "@azure/arm-billing-trust"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/billingtrust"
+    service-dir: "sdk/resourcemanager/billing/trust"
     emitter-output-dir: "{output-dir}/{service-dir}/armbillingtrust"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbillingtrust"
     fix-const-stuttering: true
