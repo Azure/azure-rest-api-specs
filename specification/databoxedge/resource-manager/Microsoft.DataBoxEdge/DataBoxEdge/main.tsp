@@ -33,6 +33,7 @@ import "./Container.tsp";
 import "./Trigger.tsp";
 import "./User.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
