@@ -3059,7 +3059,7 @@ op webAppsUpdateVnetConnectionSlotCustomized(
 @@clientName(
   Microsoft.Web.AppServiceErrorResponse,
   "WorkflowErrorResponse",
-  "!javascript,!autorest"
+  "!go,!javascript,!autorest"
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
