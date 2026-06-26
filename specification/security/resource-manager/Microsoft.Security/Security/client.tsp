@@ -1790,7 +1790,22 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(PricingsAPI.PricingTier, "SecurityCenterPricingTier", "csharp");
 @@clientName(SecureScoreAPI.ControlType, "SecurityControlType", "csharp");
 @@clientName(SensitivitySettingsAPI.BuiltInInfoType.type, "Dns", "csharp");
+@@clientName(
+  AlertsAPI.AlertSimulatorBundlesRequestProperties,
+  "SecurityAlertSimulatorBundlesRequestProperties",
+  "csharp"
+);
+@@clientName(
+  AlertsAPI.BundleType,
+  "SecurityAlertSimulatorBundleType",
+  "csharp"
+);
 @@clientName(AlertsAPI.BundleType.DNS, "Dns", "csharp");
+@@clientName(
+  SecuritySolutionsAPI.ConnectionType,
+  "SecurityCenterConnectionType",
+  "csharp"
+);
 @@clientName(
   GovernanceAPI.GovernanceRuleProperties.includeMemberScopes,
   "IsIncludeMemberScopes",
