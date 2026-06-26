@@ -47,6 +47,8 @@ namespace Azure.AI.Projects {
   @@clientName(AgentSessionResource, "ProjectAgentSession");
   @@clientName(SessionLogEventType, "SessionLogEventKind");
   @@access(AgentSessionResource, Access.public);
+  
+  @@clientName(JobStatus, "AgentsJobStatus");
 
   @@clientName(
     BingGroundingSearchToolParameters,
@@ -219,6 +221,7 @@ namespace Azure.AI.Projects {
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");
+  @@clientName(EvaluationLevel, "AgentsEvaluationLevel");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
