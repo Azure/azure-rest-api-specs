@@ -517,7 +517,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -2055,7 +2055,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -2128,7 +2128,7 @@ paths:
           schema:
             type: string
             enum:
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
         - name: include_drafts
           in: query
           required: false
@@ -2137,11 +2137,11 @@ paths:
             type: boolean
             x-ms-foundry-meta:
               conditional_previews:
-                - AgentsDraft=V1Preview
+                - DraftAgents=V1Preview
             default: false
           x-ms-foundry-meta:
             conditional_previews:
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
           explode: false
         - name: api-version
           in: query
@@ -2192,7 +2192,7 @@ paths:
         - Agent Versions
       x-ms-foundry-meta:
         conditional_previews:
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}:
     get:
       operationId: Agents_getAgentVersion
@@ -13502,13 +13502,13 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
         - WorkflowAgents=V1Preview
         - ExternalAgents=V1Preview
-        - AgentsDraft=V1Preview
+        - DraftAgents=V1Preview
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
@@ -14062,7 +14062,7 @@ components:
           description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
           x-ms-foundry-meta:
             conditional_previews:
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
           default: false
         status:
           allOf:
@@ -16088,7 +16088,7 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -16098,7 +16098,7 @@ components:
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
           x-ms-foundry-meta:
             conditional_previews:
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
           default: false
         agent_endpoint:
           allOf:
@@ -16112,7 +16112,7 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -16226,7 +16226,7 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
@@ -16236,13 +16236,13 @@ components:
           description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
           x-ms-foundry-meta:
             conditional_previews:
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
           default: false
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
-          - AgentsDraft=V1Preview
+          - DraftAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -41039,7 +41039,7 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
-              - AgentsDraft=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
