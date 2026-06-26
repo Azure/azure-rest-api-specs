@@ -516,6 +516,32 @@ union PrivateEndpointConnectionsParentTypeCsharp {
   "NetworkSecurityPerimeterProfileAccessRuleType",
   "csharp"
 );
+// Add EventGrid service prefix to generically-named new types for contextual clarity.
+@@clientName(
+  ConfidentialComputeMode,
+  "EventGridConfidentialComputeMode",
+  "csharp"
+);
+@@clientName(
+  KeyEncryptionIdentityType,
+  "EventGridKeyEncryptionIdentityType",
+  "csharp"
+);
+@@clientName(
+  KeyEncryptionKeyIdentity,
+  "EventGridKeyEncryptionKeyIdentity",
+  "csharp"
+);
+@@clientName(
+  KeyEncryptionKeyStatus,
+  "EventGridKeyEncryptionKeyStatus",
+  "csharp"
+);
+@@clientName(
+  CustomerManagedKeyEncryption,
+  "EventGridCustomerManagedKeyEncryption",
+  "csharp"
+);
 @@alternateType(
   WebhookAuthenticationSettings.azureActiveDirectoryApplicationIdOrUri,
   url,
