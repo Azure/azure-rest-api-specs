@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Quota Extension API",
-    "version": "2025-09-01",
+    "version": "2026-09-01-preview",
     "description": "Microsoft Azure Quota Resource Provider",
     "x-typespec-generated": [
       {
@@ -77,6 +77,12 @@
     },
     {
       "name": "QuotaRequestStatus"
+    },
+    {
+      "name": "QuotaTransfers"
+    },
+    {
+      "name": "IncomingQuotaTransfers"
     }
   ],
   "paths": {
@@ -2375,6 +2381,717 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/incomingQuotaTransfers": {
+      "get": {
+        "operationId": "IncomingQuotaTransfers_List",
+        "tags": [
+          "IncomingQuotaTransfers"
+        ],
+        "description": "List incoming quota transfers at the (subscription, targetProvider, region) scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransferListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncomingQuotaTransfers_List": {
+            "$ref": "./examples/IncomingQuotaTransfers/IncomingQuotaTransfers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/incomingQuotaTransfers/{transferId}": {
+      "get": {
+        "operationId": "IncomingQuotaTransfers_Get",
+        "tags": [
+          "IncomingQuotaTransfers"
+        ],
+        "description": "Get an incoming quota transfer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferId",
+            "in": "path",
+            "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransfer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncomingQuotaTransfers_Get": {
+            "$ref": "./examples/IncomingQuotaTransfers/IncomingQuotaTransfers_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/incomingQuotaTransfers/{transferId}/approve": {
+      "post": {
+        "operationId": "IncomingQuotaTransfers_Approve",
+        "tags": [
+          "IncomingQuotaTransfers"
+        ],
+        "description": "Approve a Pending incoming quota transfer. Long-running. The `If-Match` header value\nmust equal `properties.sourceEtag` returned on a prior GET; a stale value yields\n412 SourceResourceModified.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferId",
+            "in": "path",
+            "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Optimistic-concurrency precondition. Must equal `properties.sourceEtag` from a\nprior GET on the incoming transfer.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Specifies the date and time at which the request was first created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransferApproveRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransfer"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncomingQuotaTransfers_Approve": {
+            "$ref": "./examples/IncomingQuotaTransfers/IncomingQuotaTransfers_Approve.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/IncomingQuotaTransfer"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/incomingQuotaTransfers/{transferId}/reject": {
+      "post": {
+        "operationId": "IncomingQuotaTransfers_Reject",
+        "tags": [
+          "IncomingQuotaTransfers"
+        ],
+        "description": "Reject a Pending incoming quota transfer. Synchronous. The `If-Match` header value\nmust equal `properties.sourceEtag` returned on a prior GET.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferId",
+            "in": "path",
+            "description": "Server-generated identifier of the transfer (matches `properties.transferId`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Optimistic-concurrency precondition. Must equal `properties.sourceEtag` from a\nprior GET on the incoming transfer.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Specifies the date and time at which the request was first created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransferRejectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransfer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncomingQuotaTransfers_Reject": {
+            "$ref": "./examples/IncomingQuotaTransfers/IncomingQuotaTransfers_Reject.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/quotaTransfers": {
+      "get": {
+        "operationId": "QuotaTransfers_List",
+        "tags": [
+          "QuotaTransfers"
+        ],
+        "description": "List quota transfers at the (subscription, targetProvider, region) scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to. A transfer URI is region-singular.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTransferListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaTransfers_List": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/quotaTransfers/{transferName}": {
+      "get": {
+        "operationId": "QuotaTransfers_Get",
+        "tags": [
+          "QuotaTransfers"
+        ],
+        "description": "Get a quota transfer.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to. A transfer URI is region-singular.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferName",
+            "in": "path",
+            "description": "The donor-chosen name segment of the quota transfer. Used as the idempotency key\nfor retries on the donor side.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTransfer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaTransfers_Get": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "QuotaTransfers_CreateOrUpdate",
+        "tags": [
+          "QuotaTransfers"
+        ],
+        "description": "Submit a quota transfer. Idempotent on the URI: a retry with the same body returns the\ncached outcome and the same `transferId`; a retry with a different financial body\nreturns 409 BodyMismatch.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to. A transfer URI is region-singular.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferName",
+            "in": "path",
+            "description": "The donor-chosen name segment of the quota transfer. Used as the idempotency key\nfor retries on the donor side.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,62}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaTransfer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'QuotaTransfer' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaTransfer"
+            }
+          },
+          "201": {
+            "description": "Resource 'QuotaTransfer' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/QuotaTransfer"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaTransfers_CreateOrUpdate - autoApprove same-tenant": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_CreateOrUpdate_AutoApprove.json"
+          },
+          "QuotaTransfers_CreateOrUpdate - donor submit": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/QuotaTransfer"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "QuotaTransfers_Delete",
+        "tags": [
+          "QuotaTransfers"
+        ],
+        "description": "Delete a quota transfer record. Quota is not moved by delete; only the resource entry\nis removed.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to. A transfer URI is region-singular.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferName",
+            "in": "path",
+            "description": "The donor-chosen name segment of the quota transfer. Used as the idempotency key\nfor retries on the donor side.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,62}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaTransfers_Delete": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{targetProvider}/locations/{region}/providers/Microsoft.Quota/quotaTransfers/{transferName}/cancel": {
+      "post": {
+        "operationId": "QuotaTransfers_Cancel",
+        "tags": [
+          "QuotaTransfers"
+        ],
+        "description": "Cancel a Pending quota transfer. Synchronous. Transitions the transfer to Cancelled\nand returns the refreshed resource envelope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "targetProvider",
+            "in": "path",
+            "description": "The ARM provider namespace whose quota is being transferred (for example,\n`Microsoft.Compute`).",
+            "required": true,
+            "type": "string",
+            "pattern": "^Microsoft\\.[A-Za-z0-9]+$"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "The Azure region the quota transfer applies to. A transfer URI is region-singular.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transferName",
+            "in": "path",
+            "description": "The donor-chosen name segment of the quota transfer. Used as the idempotency key\nfor retries on the donor side.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{2,62}$"
+          },
+          {
+            "name": "Repeatability-Request-ID",
+            "in": "header",
+            "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "repeatabilityRequestId"
+          },
+          {
+            "name": "Repeatability-First-Sent",
+            "in": "header",
+            "description": "Specifies the date and time at which the request was first created.",
+            "required": false,
+            "type": "string",
+            "format": "date-time",
+            "x-ms-client-name": "repeatabilityFirstSent"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/QuotaTransferCancelRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/QuotaTransfer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "QuotaTransfers_Cancel": {
+            "$ref": "./examples/QuotaTransfers/QuotaTransfers_Cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/incomingQuotaTransfers": {
+      "get": {
+        "operationId": "IncomingQuotaTransfers_ListBySubscription",
+        "tags": [
+          "IncomingQuotaTransfers"
+        ],
+        "description": "List incoming quota transfers across every targetProvider and region for the\nsubscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IncomingQuotaTransferListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncomingQuotaTransfers_ListBySubscription": {
+            "$ref": "./examples/IncomingQuotaTransfers/IncomingQuotaTransfers_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -2405,6 +3122,54 @@
           "description": "The amount of quota allocated to this subscriptionId from the GroupQuotasEntity."
         }
       }
+    },
+    "ApprovalRecord": {
+      "type": "object",
+      "description": "Record of an approval action on a transfer.",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Optional free-text comment supplied by the approver.",
+          "maxLength": 500
+        },
+        "actor": {
+          "type": "string",
+          "description": "Principal that performed the approval (typically a UPN or service principal id)."
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp at which the approval was recorded."
+        }
+      },
+      "required": [
+        "actor",
+        "occurredAt"
+      ]
+    },
+    "CancellationRecord": {
+      "type": "object",
+      "description": "Record of a cancellation action on a transfer.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Optional free-text reason supplied by the donor when cancelling.",
+          "maxLength": 500
+        },
+        "actor": {
+          "type": "string",
+          "description": "Principal that performed the cancellation."
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp at which the cancellation was recorded."
+        }
+      },
+      "required": [
+        "actor",
+        "occurredAt"
+      ]
     },
     "CommonResourceProperties": {
       "type": "object",
@@ -3029,6 +3794,137 @@
         ]
       }
     },
+    "IncomingQuotaTransfer": {
+      "type": "object",
+      "description": "Recipient-side projection of a quota transfer. The URI key `{transferId}` is the\nserver-generated GUID returned to the donor in the PUT response under\n`properties.transferId`. The resource is read-only from the recipient side; state\nchanges occur through the approve and reject actions.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IncomingQuotaTransferProperties",
+          "description": "Properties of the incoming quota transfer."
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IncomingQuotaTransferApproveRequest": {
+      "type": "object",
+      "description": "Request body for the recipient approve action.",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "description": "Optional free-text comment recorded on the transfer.",
+          "maxLength": 500
+        }
+      }
+    },
+    "IncomingQuotaTransferListResult": {
+      "type": "object",
+      "description": "The response of a IncomingQuotaTransfer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IncomingQuotaTransfer items on this page",
+          "items": {
+            "$ref": "#/definitions/IncomingQuotaTransfer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IncomingQuotaTransferProperties": {
+      "type": "object",
+      "description": "Recipient-side projection properties of a quota transfer.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TransferProvisioningState",
+          "description": "The status of the underlying ARM resource operation.",
+          "readOnly": true
+        },
+        "transferStatus": {
+          "$ref": "#/definitions/TransferStatus",
+          "description": "The business status of the transfer.",
+          "readOnly": true
+        },
+        "transferId": {
+          "type": "string",
+          "description": "Server-generated identifier of the transfer (matches the URI key).",
+          "readOnly": true
+        },
+        "transferRef": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource id of the donor-side quotaTransfers resource.",
+          "readOnly": true
+        },
+        "sourceSubscriptionId": {
+          "type": "string",
+          "description": "Donor subscription id. The recipient subscription is the one in the request URI.",
+          "readOnly": true
+        },
+        "sourceTenantId": {
+          "type": "string",
+          "description": "Donor tenant id, resolved by the service from the donor subscription.",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Billing account id both donor and recipient subscriptions roll up to.",
+          "readOnly": true
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The quota dimension being moved.",
+          "readOnly": true
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Amount being transferred in the resource's native unit.",
+          "readOnly": true
+        },
+        "sourceEtag": {
+          "type": "string",
+          "description": "ETag of the donor-side source document at the time the inbox entry was projected. Used\nas the If-Match value on approve and reject requests.",
+          "readOnly": true
+        },
+        "approval": {
+          "$ref": "#/definitions/ApprovalRecord",
+          "description": "Approval record. Populated when `transferStatus` is `Accepted` or `Completed`.\nMutually exclusive with `rejection`.",
+          "readOnly": true
+        },
+        "rejection": {
+          "$ref": "#/definitions/RejectionRecord",
+          "description": "Rejection record. Populated when `transferStatus` is `Rejected`.\nMutually exclusive with `approval`.",
+          "readOnly": true
+        }
+      }
+    },
+    "IncomingQuotaTransferRejectRequest": {
+      "type": "object",
+      "description": "Request body for the recipient reject action.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Optional free-text reason recorded on the transfer.",
+          "maxLength": 500
+        }
+      }
+    },
     "LROResponse": {
       "type": "object",
       "description": "The provisioning state for the operation.",
@@ -3597,6 +4493,175 @@
         }
       }
     },
+    "QuotaTransfer": {
+      "type": "object",
+      "description": "A quota transfer authored on the donor side. The donor selects the URI segment\n`{transferName}`; the recipient addresses the same logical transfer via the\nserver-generated `properties.transferId` GUID on the `incomingQuotaTransfers` URI.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QuotaTransferProperties",
+          "description": "Properties of the quota transfer."
+        },
+        "etag": {
+          "type": "string",
+          "description": "\"If etag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.\")",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "QuotaTransferCancelRequest": {
+      "type": "object",
+      "description": "Request body for the donor cancel action.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Optional free-text reason recorded on the transfer.",
+          "maxLength": 500
+        }
+      }
+    },
+    "QuotaTransferListResult": {
+      "type": "object",
+      "description": "The response of a QuotaTransfer list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QuotaTransfer items on this page",
+          "items": {
+            "$ref": "#/definitions/QuotaTransfer"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QuotaTransferProperties": {
+      "type": "object",
+      "description": "Donor-side properties of a quota transfer.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/TransferProvisioningState",
+          "description": "The status of the underlying ARM resource operation.",
+          "readOnly": true
+        },
+        "transferStatus": {
+          "$ref": "#/definitions/TransferStatus",
+          "description": "The business status of the transfer.",
+          "readOnly": true
+        },
+        "transferId": {
+          "type": "string",
+          "description": "Server-generated identifier the recipient uses to address the transfer on the\nincomingQuotaTransfers URI.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Human-friendly label surfaced on customer GET responses and recipient inbox listings.",
+          "maxLength": 80
+        },
+        "comment": {
+          "type": "string",
+          "description": "Donor-supplied free-text rationale captured at submit time.",
+          "maxLength": 500
+        },
+        "destinationSubscriptionId": {
+          "type": "string",
+          "description": "Recipient subscription id. Must differ from the donor subscription."
+        },
+        "destinationTenantId": {
+          "type": "string",
+          "description": "Recipient tenant id, resolved by the service from the recipient subscription.",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Billing account id both donor and recipient subscriptions must roll up to."
+        },
+        "resourceName": {
+          "type": "string",
+          "description": "The quota dimension being moved, scoped by the URI's target provider\n(for example, `standardDv5Family` under Microsoft.Compute)."
+        },
+        "amount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Amount to transfer in the resource's native unit (e.g. vCPU count).",
+          "minimum": 1
+        },
+        "autoApprove": {
+          "type": "boolean",
+          "description": "Same-tenant one-shot opt-in. When true, the donor PUT admission-checks recipient-side\nRBAC and cap at submit time and drives the transfer to terminal Completed within the\nsame LRO, with no recipient approve required. The outcome is reflected by\n`transferStatus`: `Completed` means the auto path committed; `Pending` means it did\nnot (e.g. cross-tenant, missing RBAC, cap exceeded) and the recipient must approve.",
+          "default": false
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time the transfer was created.",
+          "readOnly": true
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time at which a Pending transfer expires if the recipient has not approved or rejected it.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "Principal that created the transfer.",
+          "readOnly": true
+        },
+        "approval": {
+          "$ref": "#/definitions/ApprovalRecord",
+          "description": "Approval record. Populated when `transferStatus` is `Accepted` or `Completed`.\nMutually exclusive with `cancellation`.",
+          "readOnly": true
+        },
+        "cancellation": {
+          "$ref": "#/definitions/CancellationRecord",
+          "description": "Cancellation record. Populated when `transferStatus` is `Cancelled`.\nMutually exclusive with `approval`.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "displayName",
+        "destinationSubscriptionId",
+        "billingAccountId",
+        "resourceName",
+        "amount"
+      ]
+    },
+    "RejectionRecord": {
+      "type": "object",
+      "description": "Record of a rejection action on a transfer.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Optional free-text reason supplied by the recipient when rejecting.",
+          "maxLength": 500
+        },
+        "actor": {
+          "type": "string",
+          "description": "Principal that performed the rejection."
+        },
+        "occurredAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp at which the rejection was recorded."
+        }
+      },
+      "required": [
+        "actor",
+        "occurredAt"
+      ]
+    },
     "RequestState": {
       "type": "string",
       "description": "Request status.",
@@ -4017,6 +5082,91 @@
           "description": "Resource display name.",
           "readOnly": true
         }
+      }
+    },
+    "TransferProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the ARM long-running operation that last wrote to a quota\ntransfer resource (the donor PUT, or the recipient approve / reject actions).\nReflects the infrastructure outcome of that call only; the business outcome of the\ntransfer itself is reported separately on `transferStatus`.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "TransferProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The LRO completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The LRO terminated with a failure."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The LRO was canceled before it reached a terminal state."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "TransferStatus": {
+      "type": "string",
+      "description": "Business status of a quota transfer. Distinct from `provisioningState`, which only\nreports the ARM LRO outcome of the most recent call.",
+      "enum": [
+        "Pending",
+        "Accepted",
+        "Completed",
+        "Cancelled",
+        "Rejected",
+        "Expired",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "TransferStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The transfer has been created on the donor side and is awaiting recipient action."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The recipient has approved the transfer; quota commit is in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "The transfer has been applied and quota is committed at the recipient."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The donor cancelled the transfer before it was approved."
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected",
+            "description": "The recipient rejected the transfer."
+          },
+          {
+            "name": "Expired",
+            "value": "Expired",
+            "description": "The transfer aged out before the recipient approved or rejected it."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The transfer terminated with a failure."
+          }
+        ]
       }
     },
     "UsagesLimits": {
