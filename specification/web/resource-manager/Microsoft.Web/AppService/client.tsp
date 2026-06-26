@@ -3614,11 +3614,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(AppServicePlanCollection, "AppServicePlanListResult", "csharp");
 @@clientName(AppServicePlanRestrictions, "AppServicePlanRestriction", "csharp");
 @@access(ResourceMetricAvailability, Access.public, "csharp");
-@@clientName(
-  AppServicePlanPatchResource,
-  "AppServicePlanPatch",
-  "csharp"
-);
+@@clientName(AppServicePlanPatchResource, "AppServicePlanPatch", "csharp");
 @@clientName(AseRegion, "AppServiceAseRegion", "csharp");
 @@clientName(
   AuthenticationType,
@@ -5500,60 +5496,309 @@ union ConfigReferenceSource {
   "csharp"
 );
 
-
-// Theme D-IP: restore GA "IP" acronym casing (TSP uses ip*, GA uses IP*).
-@@clientName(SiteConfig.ipSecurityRestrictions, "IPSecurityRestrictions", "csharp");
-@@clientName(SiteConfig.ipSecurityRestrictionsDefaultAction, "IPSecurityRestrictionsDefaultAction", "csharp");
-@@clientName(SiteConfig.scmIpSecurityRestrictions, "ScmIPSecurityRestrictions", "csharp");
-@@clientName(SiteConfig.scmIpSecurityRestrictionsDefaultAction, "ScmIPSecurityRestrictionsDefaultAction", "csharp");
+@@clientName(
+  SiteConfig.ipSecurityRestrictions,
+  "IPSecurityRestrictions",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.ipSecurityRestrictionsDefaultAction,
+  "IPSecurityRestrictionsDefaultAction",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictions,
+  "ScmIPSecurityRestrictions",
+  "csharp"
+);
+@@clientName(
+  SiteConfig.scmIpSecurityRestrictionsDefaultAction,
+  "ScmIPSecurityRestrictionsDefaultAction",
+  "csharp"
+);
 @@clientName(SiteProperties.ipMode, "IPMode", "csharp");
-@@clientName(AppServiceEnvironment.ipsslAddressCount, "IPSslAddressCount", "csharp");
+@@clientName(
+  AppServiceEnvironment.ipsslAddressCount,
+  "IPSslAddressCount",
+  "csharp"
+);
 @@clientName(EndpointDetail.ipAddress, "IPAddress", "csharp");
 @@clientName(ServerFarmInstance.ipAddress, "IPAddress", "csharp");
-@@clientName(RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses, "IPAddresses", "csharp");
-@@clientName(RemotePrivateEndpointConnectionProperties.ipAddresses, "IPAddresses", "csharp");
+@@clientName(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
+@@clientName(
+  RemotePrivateEndpointConnectionProperties.ipAddresses,
+  "IPAddresses",
+  "csharp"
+);
 
-// Theme D-Acronyms: restore additional GA acronym casing.
 @@clientName(BillingMeterProperties.osType, "OSType", "csharp");
 @@clientName(MSDeployCore.dbType, "DBType", "csharp");
-@@clientName(SiteProperties.outboundIpAddresses, "OutboundIPAddresses", "csharp");
-@@clientName(SiteProperties.possibleOutboundIpAddresses, "PossibleOutboundIPAddresses", "csharp");
-@@clientName(AseV3NetworkingConfigurationProperties.externalInboundIpAddresses, "ExternalInboundIPAddresses", "csharp");
-@@clientName(AseV3NetworkingConfigurationProperties.internalInboundIpAddresses, "InternalInboundIPAddresses", "csharp");
-@@clientName(AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses, "LinuxOutboundIPAddresses", "csharp");
-@@clientName(AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses, "WindowsOutboundIPAddresses", "csharp");
-@@clientName(AseV3NetworkingConfigurationProperties.inboundIpAddressOverride, "InboundIPAddressOverride", "csharp");
-@@clientName(FlowEndpoints.accessEndpointIpAddresses, "AccessEndpointIPAddresses", "csharp");
-@@clientName(FlowEndpoints.outgoingIpAddresses, "OutgoingIPAddresses", "csharp");
-@@clientName(FlowAccessControlConfigurationPolicy.allowedCallerIpAddresses, "AllowedCallerIPAddresses", "csharp");
-@@clientName(AppServiceEnvironment.userWhitelistedIpRanges, "UserWhitelistedIPRanges", "csharp");
+@@clientName(
+  SiteProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  SiteProperties.possibleOutboundIpAddresses,
+  "PossibleOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.externalInboundIpAddresses,
+  "ExternalInboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.internalInboundIpAddresses,
+  "InternalInboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses,
+  "LinuxOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses,
+  "WindowsOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AseV3NetworkingConfigurationProperties.inboundIpAddressOverride,
+  "InboundIPAddressOverride",
+  "csharp"
+);
+@@clientName(
+  FlowEndpoints.accessEndpointIpAddresses,
+  "AccessEndpointIPAddresses",
+  "csharp"
+);
+@@clientName(
+  FlowEndpoints.outgoingIpAddresses,
+  "OutgoingIPAddresses",
+  "csharp"
+);
+@@clientName(
+  FlowAccessControlConfigurationPolicy.allowedCallerIpAddresses,
+  "AllowedCallerIPAddresses",
+  "csharp"
+);
+@@clientName(
+  AppServiceEnvironment.userWhitelistedIpRanges,
+  "UserWhitelistedIPRanges",
+  "csharp"
+);
 @@clientName(KubeEnvironmentProperties.staticIp, "StaticIP", "csharp");
 @@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
-@@clientName(AddressResponseProperties.outboundIpAddresses, "OutboundIPAddresses", "csharp");
+@@clientName(
+  AddressResponseProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
 
-// Theme D-Id: restore GA ResourceIdentifier typing for *Id properties (TSP uses string).
-@@alternateType(CertificatePatchResourceProperties.keyVaultId, armResourceIdentifier, "csharp");
-@@alternateType(CertificatePatchResourceProperties.serverFarmId, armResourceIdentifier, "csharp");
-@@alternateType(ValidateProperties.serverFarmId, armResourceIdentifier, "csharp");
-@@alternateType(VnetParametersProperties.subnetResourceId, armResourceIdentifier, "csharp");
-@@alternateType(SitePatchResourceProperties.serverFarmId, armResourceIdentifier, "csharp");
-@@alternateType(SitePatchResourceProperties.virtualNetworkSubnetId, armResourceIdentifier, "csharp");
-@@alternateType(DatabaseConnectionProperties.resourceId, armResourceIdentifier, "csharp");
-@@alternateType(DatabaseConnectionPatchRequestProperties.resourceId, armResourceIdentifier, "csharp");
-@@alternateType(StaticSiteLinkedBackend.backendResourceId, armResourceIdentifier, "csharp");
-@@alternateType(SwiftVirtualNetworkProperties.subnetResourceId, armResourceIdentifier, "csharp");
+@@alternateType(
+  CertificatePatchResourceProperties.keyVaultId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  CertificatePatchResourceProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  ValidateProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  VnetParametersProperties.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SitePatchResourceProperties.serverFarmId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SitePatchResourceProperties.virtualNetworkSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteLinkedBackend.backendResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  SwiftVirtualNetworkProperties.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(SiteProperties.serverFarmId, armResourceIdentifier, "csharp");
-@@alternateType(SiteProperties.virtualNetworkSubnetId, armResourceIdentifier, "csharp");
-@@alternateType(KubeEnvironmentProperties.aksResourceID, armResourceIdentifier, "csharp");
-@@clientName(KubeEnvironmentProperties.aksResourceID, "AksResourceId", "csharp");
+@@alternateType(
+  SiteProperties.virtualNetworkSubnetId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  KubeEnvironmentProperties.aksResourceID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentProperties.aksResourceID,
+  "AksResourceId",
+  "csharp"
+);
 
+@@alternateType(ResourceMetricDefinitionProperties.resourceUri, url, "csharp");
+@@alternateType(BackupItemProperties.storageAccountUrl, url, "csharp");
+@@alternateType(BackupRequestProperties.storageAccountUrl, url, "csharp");
+@@alternateType(RestoreRequestProperties.storageAccountUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.consoleUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.statusUrl, url, "csharp");
+@@alternateType(WebSiteInstanceStatusProperties.detectorUrl, url, "csharp");
+@@alternateType(PremierAddOnOfferProperties.legalTermsUrl, url, "csharp");
+@@alternateType(PremierAddOnOfferProperties.privacyPolicyUrl, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.log_url, url, "csharp");
+@@alternateType(ContinuousWebJobProperties.url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.history_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.scheduler_logs_url, url, "csharp");
+@@alternateType(TriggeredWebJobProperties.url, url, "csharp");
+@@alternateType(WebJobProperties.url, url, "csharp");
+@@alternateType(WebJobProperties.extra_info_url, url, "csharp");
+@@alternateType(ValidateProperties.containerRegistryBaseUrl, url, "csharp");
+@@alternateType(
+  StaticSitesWorkflowPreviewRequestProperties.repositoryUrl,
+  url,
+  "csharp"
+);
+@@alternateType(SiteExtensionInfoProperties.project_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.license_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.feed_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.extension_url, url, "csharp");
+@@alternateType(SiteExtensionInfoProperties.icon_url, url, "csharp");
+@@alternateType(
+  CustomDnsSuffixConfigurationProperties.certificateUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteBasicAuthPropertiesARMResourceProperties.secretUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteUserInvitationResponseResourceProperties.invitationUrl,
+  url,
+  "csharp"
+);
+@@alternateType(StaticSiteZipDeployment.apiZipUrl, url, "csharp");
+@@alternateType(StaticSiteZipDeployment.appZipUrl, url, "csharp");
+@@alternateType(StaticSite.repositoryUrl, url, "csharp");
+@@alternateType(VnetGatewayProperties.vpnPackageUri, url, "csharp");
+@@alternateType(UserProperties.scmUri, url, "csharp");
+@@alternateType(SiteSourceControlProperties.repoUrl, url, "csharp");
+@@alternateType(
+  RelayServiceConnectionEntityProperties.biztalkUri,
+  url,
+  "csharp"
+);
 
-// Theme C: GA name preservation for renames missed during initial migration.
+@@clientName(
+  SiteConfig.acrUserManagedIdentityID,
+  "AcrUserManagedIdentityId",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.possibleOutboundIpAddresses,
+  "PossibleOutboundIPAddresses",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.staticIp,
+  "StaticIP",
+  "csharp"
+);
+@@clientName(
+  KubeEnvironmentPatchResourceProperties.aksResourceID,
+  "AksResourceId",
+  "csharp"
+);
+@@clientName(DatabaseConnectionProperties.resourceId, "ResourceId", "csharp");
+@@clientName(
+  DatabaseConnectionPatchRequestProperties.resourceId,
+  "ResourceId",
+  "csharp"
+);
+
+@@alternateType(
+  HybridConnectionProperties.relayArmUri,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  KubeEnvironmentPatchResourceProperties.aksResourceID,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  StaticSiteLinkedBackendARMResourceProperties.backendResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(SiteProperties.inProgressOperationId, uuid, "csharp");
+@@alternateType(
+  SitePatchResourceProperties.inProgressOperationId,
+  uuid,
+  "csharp"
+);
+@@alternateType(RecommendationProperties.recommendationId, uuid, "csharp");
+@@alternateType(RecommendationRuleProperties.recommendationId, uuid, "csharp");
+@@alternateType(HostingEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(KubeEnvironmentProfile.type, armResourceType, "csharp");
+@@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
+@@alternateType(
+  BillingMeterProperties.billingLocation,
+  azureLocation,
+  "csharp"
+);
 @@clientName(CheckNameResourceTypes, "CheckNameResourceType", "csharp");
-@@clientName(DnlResourceNameAvailabilityRequest, "DnlResourceNameAvailabilityContent", "csharp");
+@@clientName(
+  DnlResourceNameAvailabilityRequest,
+  "DnlResourceNameAvailabilityContent",
+  "csharp"
+);
 @@clientName(ProviderOsTypeSelected, "ProviderOSTypeSelected", "csharp");
 @@clientName(ProviderStackOsType, "ProviderStackOSType", "csharp");
-@@clientName(StaticSitesWorkflowPreview, "StaticSitesWorkflowPreviewContent", "csharp");
+@@clientName(
+  StaticSitesWorkflowPreview,
+  "StaticSitesWorkflowPreviewContent",
+  "csharp"
+);
 @@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
 
 @@usage(
