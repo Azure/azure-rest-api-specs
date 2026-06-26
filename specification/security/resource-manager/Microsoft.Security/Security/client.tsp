@@ -1369,7 +1369,7 @@ op privateLinkResourcesGetCustomization(
 );
 @@clientName(
   SecurityConnectorsAPI.GitlabScopeEnvironmentData,
-  "GitlabScopeEnvironmentInfo",
+  "GitLabScopeEnvironmentInfo",
   "csharp"
 );
 @@clientName(
@@ -1912,6 +1912,11 @@ model CSharpSecurityAssessmentStatusResult
   "SecurityConnectorIdentity",
   "csharp"
 );
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ResourceIdentityType,
+  "SecurityConnectorIdentityType",
+  "csharp"
+);
 @@clientName(Common.ResourceDetails, "SecurityCenterResourceDetails", "csharp");
 @@clientName(
   HealthReportsAPI.resourceDetails,
@@ -1927,6 +1932,11 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(
   DefenderForStorageAPI.BlobScanResultsOptions,
   "BlobScanResultsConfig",
+  "csharp"
+);
+@@clientName(
+  SensitivitySettingsAPI.GetSensitivitySettingsResponsePropertiesMipInformation,
+  "SensitivitySettingsMipInformation",
   "csharp"
 );
 @@alternateType(
