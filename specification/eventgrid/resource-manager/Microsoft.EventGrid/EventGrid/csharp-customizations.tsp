@@ -493,7 +493,12 @@ union PrivateEndpointConnectionsParentTypeCsharp {
   url,
   "csharp"
 );
-// Keep ResourceId as string for GA API parity (main exposed string, not ResourceIdentifier).
+// Expose ResourceId as ResourceIdentifier (better type than the GA string).
+@@alternateType(
+  PartnerEventSubscriptionDestinationProperties.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(
   VerifiedPartnerProperties.partnerRegistrationImmutableId,
   Azure.Core.uuid,
