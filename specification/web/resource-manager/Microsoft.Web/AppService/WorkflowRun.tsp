@@ -78,7 +78,10 @@ interface WorkflowRuns {
   /**
    * Gets a workflow run.
    */
-  get is WorkflowRunsOps.Read<WorkflowRun, OverrideErrorType = ErrorResponse>;
+  get is WorkflowRunsOps.Read<
+    WorkflowRun,
+    OverrideErrorType = DefaultErrorResponse
+  >;
 
   /**
    * Gets a list of workflow runs.
@@ -98,7 +101,7 @@ interface WorkflowRuns {
       @query("$filter")
       $filter?: string;
     },
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -110,7 +113,7 @@ interface WorkflowRuns {
     {
       @body body: void;
     },
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

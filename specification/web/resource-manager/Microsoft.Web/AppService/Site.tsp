@@ -1466,7 +1466,7 @@ interface SiteWorkflows {
     {
       @body body: void;
     },
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -1478,7 +1478,7 @@ interface SiteWorkflows {
     {
       @body body: void;
     },
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 

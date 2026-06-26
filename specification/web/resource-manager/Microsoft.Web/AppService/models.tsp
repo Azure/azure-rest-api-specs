@@ -14300,7 +14300,7 @@ model RegenerateActionParameter {
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
 @error
-model ErrorResponse {
+model AppServiceErrorResponse {
   /**
    * The error properties.
    */
@@ -14768,7 +14768,7 @@ model RetryHistory {
   /**
    * Gets the error response.
    */
-  error?: ErrorResponse;
+  error?: AppServiceErrorResponse;
 }
 
 /**
@@ -16735,7 +16735,7 @@ model StaticSitesOperationStatusProperties {
   /**
    * Error details for the asynchronous operation, if any.
    */
-  error?: ErrorResponse;
+  error?: AppServiceErrorResponse;
 }
 
 /**

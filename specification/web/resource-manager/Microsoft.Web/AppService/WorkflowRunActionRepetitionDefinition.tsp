@@ -97,7 +97,7 @@ interface WorkflowRunActionRepetitionDefinitions {
    */
   get is WorkflowRunActionRepetitionDefinitionOps.Read<
     WorkflowRunActionRepetitionDefinition,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -106,7 +106,7 @@ interface WorkflowRunActionRepetitionDefinitions {
   list is WorkflowRunActionRepetitionDefinitionOps.List<
     WorkflowRunActionRepetitionDefinition,
     Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -117,7 +117,7 @@ interface WorkflowRunActionRepetitionDefinitions {
     WorkflowRunActionRepetitionDefinition,
     void,
     ArmResponse<ExpressionTraces>,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 @armResourceOperations
@@ -188,7 +188,7 @@ interface WorkflowRunActionScopeRepetitions {
    */
   get is WorkflowRunActionScopeRepetitionOps.Read<
     WorkflowRunActionRepetitionDefinition,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 
   /**
@@ -197,7 +197,7 @@ interface WorkflowRunActionScopeRepetitions {
   list is WorkflowRunActionScopeRepetitionOps.List<
     WorkflowRunActionRepetitionDefinition,
     Response = ArmResponse<WorkflowRunActionRepetitionDefinitionCollection>,
-    OverrideErrorType = ErrorResponse
+    OverrideErrorType = DefaultErrorResponse
   >;
 }
 
