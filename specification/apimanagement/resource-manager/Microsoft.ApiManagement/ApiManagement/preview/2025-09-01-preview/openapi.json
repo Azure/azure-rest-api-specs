@@ -574,7 +574,8 @@
             "required": true,
             "type": "string",
             "minLength": 1,
-            "maxLength": 256
+            "maxLength": 256,
+            "pattern": "^[-\\w\\._]+$"
           },
           {
             "name": "operationId",
@@ -598,6 +599,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get AI Gateway operation status": {
+            "$ref": "./examples/ApiManagementGetAiGatewayOperationStatus.json"
           }
         }
       }
@@ -20366,7 +20372,8 @@
             "description": "Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.",
             "required": true,
             "type": "string",
-            "minLength": 1
+            "minLength": 1,
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {
