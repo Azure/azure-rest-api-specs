@@ -178,6 +178,9 @@ stages:
             Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
           displayName: "Validate and update SDK repository commitish"
 
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           Paths:
@@ -195,7 +198,7 @@ stages:
               WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-            TokenToUseForAuth: $(azuresdk-github-pat)
+            TokenToUseForAuth: $(GH_TOKEN)
             PreserveAuthToken: true
 
       - task: UseNode@1
@@ -290,6 +293,8 @@ stages:
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
             $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
@@ -348,7 +353,7 @@ stages:
               -BaseBranch "main"
               -PROwner "$(SdkRepoOwner)"
               -PRBranch "$(SdkPullRequestSourceBranch)"
-              -AuthToken "$(azuresdk-github-pat)"
+              -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}
