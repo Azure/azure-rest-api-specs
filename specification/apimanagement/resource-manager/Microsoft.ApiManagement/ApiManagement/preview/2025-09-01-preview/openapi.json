@@ -556,7 +556,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{locationName}/aiGatewayOperationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/aiGatewayOperationStatuses/{operationId}": {
       "get": {
         "operationId": "AiGatewayOperationStatus_Get",
         "description": "Returns the current status of an async operation for an AI Gateway.",
@@ -568,23 +568,10 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "locationName",
-            "in": "path",
-            "description": "The name of the location.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 256,
-            "pattern": "^[-\\w\\._]+$"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "name": "operationId",
-            "in": "path",
-            "description": "The ID of an ongoing async operation.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 80
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
           }
         ],
         "responses": {
