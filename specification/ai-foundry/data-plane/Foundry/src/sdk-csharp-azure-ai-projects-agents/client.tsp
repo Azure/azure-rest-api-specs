@@ -97,6 +97,9 @@ namespace Azure.AI.Projects {
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
   @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
+  
+  @@clientName(DeprecatedToolConfigExtension.tool_configs, "ToolConfigInternal");
+  @@access(DeprecatedToolConfigExtension, Access.internal);
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
