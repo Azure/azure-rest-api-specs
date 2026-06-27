@@ -4779,6 +4779,32 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "TlsRsaWithAes256GcmSha384",
   "csharp"
 );
+// Back-compat property renames moved from SDK customizations to align with GA names.
+@@clientName(KubeEnvironmentProfile.type, "ResourceType", "csharp");
+@@clientName(OpenAuthenticationAccessPolicy.type, "ProviderType", "csharp");
+@@clientName(RegistryAdapter.type, "AdapterType", "csharp");
+@@clientName(ResourceReference.type, "ResourceType", "csharp");
+@@clientName(StorageMount.type, "MountType", "csharp");
+@@clientName(MSDeployLogEntry.type, "EntryType", "csharp");
+@@clientName(WorkflowParameter.type, "WebAppParameterType", "csharp");
+@@clientName(ProcessThreadInfoProperties.identifier, "Id", "csharp");
+@@clientName(InstallScriptSource.type, "ScriptType", "csharp");
+@@clientName(
+  StaticSiteDatabaseConnectionConfigurationFileOverview.type,
+  "StaticSiteDatabaseConnectionConfigurationFileOverviewType",
+  "csharp"
+);
+@@clientName(WebAppStackProperties.preferredOs, "PreferredOS", "csharp");
+@@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
+
+// Back-compat enum-value renames moved from SDK customizations to align with GA names.
+@@clientName(ScmType.VSTSRM, "Vstsrm", "csharp");
+@@clientName(SupportedTlsVersions.`1.0`, Azure.ClientGenerator.Core.exact("Tls1_0"), "csharp");
+@@clientName(SupportedTlsVersions.`1.1`, Azure.ClientGenerator.Core.exact("Tls1_1"), "csharp");
+@@clientName(SupportedTlsVersions.`1.2`, Azure.ClientGenerator.Core.exact("Tls1_2"), "csharp");
+@@clientName(SupportedTlsVersions.`1.3`, Azure.ClientGenerator.Core.exact("Tls1_3"), "csharp");
+@@clientName(ValidateResourceTypes.Site, "WebSite", "csharp");
+
 @@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -5863,7 +5889,7 @@ union ConfigReferenceSource {
 );
 @@clientName(
   RecommendationsOperationGroup.resetAllFilters,
-  "ResetAllFiltersRecommendation",
+  "ResetAllRecommendationFilters",
   "csharp"
 );
 @@clientName(
@@ -5883,7 +5909,7 @@ union ConfigReferenceSource {
 );
 @@clientName(
   AppServiceEnvironmentResources.listOperations,
-  "GetOperationsProviders",
+  "GetOperations",
   "csharp"
 );
 @@clientName(
