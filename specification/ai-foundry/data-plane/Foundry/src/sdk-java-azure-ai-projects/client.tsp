@@ -1,4 +1,5 @@
 import "../common/service.tsp";
+import "../sdk-common/error.default.tsp";
 
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
@@ -16,7 +17,7 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
-import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-projects.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;

@@ -1,5 +1,5 @@
 import "./models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "../common/models.tsp";
 
 using TypeSpec.Http;
@@ -11,10 +11,6 @@ namespace Azure.AI.Projects;
 alias ModelsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.models_v1_preview>;
 
 alias ListModelVersionsParameters = {};
-
-const ModelsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.models_v1_preview],
-};
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
 @tag("Models")

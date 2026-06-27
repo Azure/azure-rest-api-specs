@@ -2,7 +2,7 @@ import "@typespec/openapi";
 import "@typespec/versioning";
 
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -10,7 +10,12 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluatorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("The category of the evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorCategory {
   string,
 
@@ -25,6 +30,7 @@ union EvaluatorCategory {
 }
 
 @doc("The type of the evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorType {
   string,
 
@@ -36,6 +42,7 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDefinitionType {
   string,
 
@@ -64,6 +71,7 @@ union EvaluatorDefinitionType {
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
@@ -79,6 +87,7 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
@@ -108,6 +117,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Prompt-based evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -120,6 +130,7 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   id: string;
@@ -137,6 +148,7 @@ model Dimension {
 }
 
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
@@ -163,6 +175,7 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("Reference to a versioned Foundry Dataset.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
@@ -172,6 +185,7 @@ model DatasetReference {
 }
 
 @doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationArtifacts {
   @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
   dataset: DatasetReference;
@@ -188,6 +202,7 @@ model EvaluatorGenerationArtifacts {
 // ============================================================================
 
 @doc("The supported source types for evaluator generation jobs.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorGenerationJobSourceType {
   string,
 
@@ -206,6 +221,7 @@ union EvaluatorGenerationJobSourceType {
 
 @doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
@@ -216,21 +232,25 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
@@ -240,6 +260,7 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 // ============================================================================
 
 @doc("Caller-supplied inputs for an evaluator generation job.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationInputs {
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
@@ -261,6 +282,7 @@ model EvaluatorGenerationInputs {
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationTokenUsage {
   @doc("Number of input (prompt) tokens consumed.")
   input_tokens: int64;
@@ -273,6 +295,7 @@ model EvaluatorGenerationTokenUsage {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJob
   is JobLike<EvaluatorVersion, EvaluatorGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
@@ -290,6 +313,7 @@ model EvaluatorGenerationJob
 
 @doc("Evaluator Definition")
 @resource("evaluators")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
@@ -341,6 +365,7 @@ model EvaluatorCredentialRequest {
 }
 
 @doc("Evaluator Metric")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorMetric {
   @doc("Type of the metric.")
   type?: EvaluatorMetricType;
@@ -362,6 +387,7 @@ model EvaluatorMetric {
 }
 
 @doc("The type of the evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricType {
   string,
 
@@ -376,6 +402,7 @@ union EvaluatorMetricType {
 }
 
 @doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricDirection {
   string,
 

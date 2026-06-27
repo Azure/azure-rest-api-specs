@@ -1,4 +1,10 @@
-import "./main.tsp";
+import "../sdk-common/error.default.tsp";
+import "../agents/routes.tsp";
+import "../toolboxes/routes.tsp";
+import "../skills/routes.tsp";
+import "../agents-session-files/routes.tsp";
+import "../managed-blueprints/routes.tsp";
+import "../agents-optimization/routes.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -27,22 +33,29 @@ namespace Azure.AI.Projects {
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(Agents, "AgentAdministrationClient", "csharp");
-  @@clientInitialization(Azure.AI.Projects.Agents,
+  @@clientInitialization(
+    Azure.AI.Projects.Agents,
     {
       initializedBy: InitializedBy.parent | InitializedBy.individually,
     }
   );
 
   @@clientName(AgentObject, "ProjectsAgentRecord");
+  @@clientName(AgentEndpointProtocol, "ProjectsAgentProtocol");
+  @@clientName(AgentEndpointProtocol.activity, "ActivityProtocol");
   @@clientName(AgentKind, "ProjectsAgentKind");
-  @@clientName(AgentProtocol, "ProjectsAgentProtocol");
   @@clientName(AgentSessionResource, "ProjectAgentSession");
+  @@clientName(SessionLogEventType, "SessionLogEventKind");
   @@access(AgentSessionResource, Access.public);
+  
+  @@clientName(JobStatus, "AgentsJobStatus");
 
-  @@clientName(BingGroundingSearchToolParameters,
+  @@clientName(
+    BingGroundingSearchToolParameters,
     "BingGroundingSearchToolOptions"
   );
-  @@clientName(ContainerAppAgentDefinition,
+  @@clientName(
+    ContainerAppAgentDefinition,
     "ContainerApplicationAgentDefinition"
   );
   //  @@clientName(CreatedBy, "AgentResponseItemSource");
@@ -52,30 +65,38 @@ namespace Azure.AI.Projects {
 
   @@clientName(OpenApiTool, "OpenAPITool");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
-  @@clientName(OpenApiAnonymousAuthDetails,
+  @@clientName(
+    OpenApiAnonymousAuthDetails,
     "OpenAPIAnonymousAuthenticationDetails"
   );
   @@clientName(OpenApiAuthDetails, "OpenApiAuthenticationDetails");
-  @@clientName(OpenApiManagedAuthDetails,
+  @@clientName(
+    OpenApiManagedAuthDetails,
     "OpenAPIManagedAuthenticationDetails"
   );
-  @@clientName(OpenApiProjectConnectionAuthDetails,
+  @@clientName(
+    OpenApiProjectConnectionAuthDetails,
     "OpenApiProjectConnectionAuthenticationDetails"
   );
-  @@clientName(OpenApiProjectConnectionSecurityScheme,
+  @@clientName(
+    OpenApiProjectConnectionSecurityScheme,
     "OpenApiProjectConnectionSecurityScheme"
   );
   @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
 
-  @@clientName(OpenApiFunctionDefinition.auth,
+  @@clientName(
+    OpenApiFunctionDefinition.auth,
     "AuthenticationDetails",
     "csharp"
   );
   @@clientName(RaiConfig, "ContentFilterConfiguration");
-  @@clientName(SharepointGroundingToolParameters,
+  @@clientName(
+    SharepointGroundingToolParameters,
     "SharePointGroundingToolOptions"
   );
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
+  @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(FabricIQPreviewToolboxTool.server_url, "ServerUri");
 
   // --------------------------------------------------------------------------------
   // Renames and visibility changes for targeted suppressions
@@ -94,7 +115,8 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam");
 
   @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
-  @@clientName(OpenAI.AutoCodeInterpreterToolParam,
+  @@clientName(
+    OpenAI.AutoCodeInterpreterToolParam,
     "InternalAutoCodeInterpreterToolParam"
   );
 
@@ -144,40 +166,49 @@ namespace Azure.AI.Projects {
 
   @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
 
-  @@clientName(BingCustomSearchToolParameters,
+  @@clientName(
+    BingCustomSearchToolParameters,
     "BingCustomSearchToolOptions",
     "csharp"
   );
-  @@clientName(BrowserAutomationToolParameters,
+  @@clientName(
+    BrowserAutomationToolParameters,
     "BrowserAutomationToolOptions",
     "csharp"
   );
-  @@clientName(BingGroundingSearchConfiguration.set_lang,
+  @@clientName(
+    BingGroundingSearchConfiguration.set_lang,
     "BingUserInterfaceLanguage",
     "csharp"
   );
   @@clientName(BingGroundingTool.bing_grounding, "SearchToolOptions", "csharp");
-  @@clientName(BrowserAutomationPreviewTool.browser_automation_preview,
+  @@clientName(
+    BrowserAutomationPreviewTool.browser_automation_preview,
     "ToolParameters",
     "csharp"
   );
-  @@clientName(BrowserAutomationToolParameters.connection,
+  @@clientName(
+    BrowserAutomationToolParameters.connection,
     "ToolConnectionParameters",
     "csharp"
   );
-  @@clientName(CaptureStructuredOutputsTool.outputs,
+  @@clientName(
+    CaptureStructuredOutputsTool.outputs,
     "OutputDefinition",
     "csharp"
   );
-  @@clientName(MemorySearchPreviewTool.update_delay,
+  @@clientName(
+    MemorySearchPreviewTool.update_delay,
     "UpdateDelayInSecs",
     "csharp"
   );
-  @@clientName(MicrosoftFabricPreviewTool.fabric_dataagent_preview,
+  @@clientName(
+    MicrosoftFabricPreviewTool.fabric_dataagent_preview,
     "ToolOptions",
     "csharp"
   );
-  @@clientName(SharepointPreviewTool.sharepoint_grounding_preview,
+  @@clientName(
+    SharepointPreviewTool.sharepoint_grounding_preview,
     "ToolOptions",
     "csharp"
   );
@@ -185,10 +216,12 @@ namespace Azure.AI.Projects {
   @@clientName(TelemetryEndpointAuth, "TelemetryEndpointAuthentication");
   @@clientName(TelemetryEndpoint.auth, "Authentication");
   @@clientName(TelemetryEndpoint.data, "ExportedDataTypes");
-  @@clientName(TelemetryEndpointAuthType,
+  @@clientName(
+    TelemetryEndpointAuthType,
     "TelemetryEndpointAuthenticationKind"
   );
   @@clientName(TelemetryDataKind, "ExportedDataTypes");
+  @@clientName(EvaluationLevel, "AgentsEvaluationLevel");
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -212,11 +245,15 @@ namespace Azure.AI.Projects {
   @@access(PatchAgentRequest, Access.public);
   @@clientName(PatchAgentRequest, "PatchAgentOptions");
   @@access(Agents.patchAgentObject, Access.internal);
+  @@clientName(Agents.patchAgentObject, "PatchAgent");
   @@access(Agents.getSessionLogStream, Access.internal);
 
   @@usage(CreateAgentFromCodeContent, Usage.input);
   @@access(CreateAgentFromCodeContent, Access.public);
-  @@clientName(CreateAgentFromCodeContent, "CreateAgentFromCodeOptions");
+  @@clientName(CreateAgentFromCodeContent, "AgentFromCodeOptions");
+  @@clientName(CreateAgentVersionFromCodeMetadata, "AgentVersionFromCodeMetadata");
+  
+  @@clientName(AgentCardSkill.tags, "Labels");
 
   // --------------------------------------------------------------------------------
   // Hide Agent administration operations, containing the foundry features
@@ -241,6 +278,16 @@ namespace Azure.AI.Projects {
 
   @@clientName(ToolboxObject, "ToolboxRecord");
   @@clientName(ToolboxVersionObject, "ToolboxVersion");
+  
+  @@clientName(Toolboxes.createToolboxVersion, "CreateVersion");
+  @@clientName(Toolboxes.getToolbox, "Get");
+  @@clientName(Toolboxes.getToolboxVersion, "GetVersion");
+  @@clientName(Toolboxes.updateToolbox, "UpdateDefaultVersion");
+  @@clientName(Toolboxes.deleteToolboxVersion, "DeleteVersion");
+  @@clientName(Toolboxes.deleteToolbox, "Delete");
+  @@clientName(Toolboxes.listToolboxes, "GetAll");
+  @@clientName(Toolboxes.listToolboxVersions, "GetVersions");
+  @@clientName(ToolConfig.pin, "IsPinned");
 
   // --------------------------------------------------------------------------------
   // AgentSessionFiles sub‐client
@@ -248,14 +295,25 @@ namespace Azure.AI.Projects {
 
   // Hide the protocol methods and methods using feature headers
   @@access(AgentSessionFiles.uploadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.uploadSessionFile, "Upload");
   @@access(AgentSessionFiles.downloadSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.downloadSessionFile, "Download");
   @@access(AgentSessionFiles.listSessionFiles, Access.internal);
   @@access(AgentSessionFiles.deleteSessionFile, Access.internal);
+  @@clientName(AgentSessionFiles.deleteSessionFile, "Delete");
+  
+  @@clientName(SessionDirectoryEntry.modified_time, "ModifiedAt");
+  @@clientName(SessionDirectoryEntry.size, "SizeInBytes");
 
   // --------------------------------------------------------------------------------
   // Skills sub‐client
   // --------------------------------------------------------------------------------
   @@clientName(Skill, "AgentsSkill");
+  @@clientName(Skills.updateSkill, "UpdateDefaultVersion");
+  @@clientName(DeleteSkillResponse, "SkillDeletionResult");
+  @@clientName(DeleteSkillVersionResponse, "SkillVersionDeletionResult");
+  
+  @@clientName(CreateSkillVersionRequest.default, "isDefault");
 
   // --------------------------------------------------------------------------------
   // AgentOptimizationJobs sub‐client
@@ -264,10 +322,6 @@ namespace Azure.AI.Projects {
   @@access(AgentOptimizationJobs.get, Access.internal);
   @@access(AgentOptimizationJobs.cancel, Access.internal);
   @@access(AgentOptimizationJobs.delete, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateConfig, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateFile, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
-  @@access(AgentOptimizationJobs.getCandidateResults, Access.internal);
-  @@access(AgentOptimizationJobs.promoteCandidate, Access.internal);
+  
+  @@clientName(OptimizationDatasetItem.desired_num_turns, "DesiredTurnCount");
 }
