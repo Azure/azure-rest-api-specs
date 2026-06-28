@@ -9,11 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
  * GlobalRulestack fqdnList
  */
+@removed(Versions.v2026_01_26_preview)
 @parentResource(GlobalRulestackResource)
 model FqdnListGlobalRulestackResource
   is Azure.ResourceManager.ProxyResource<FqdnObject, false> {
@@ -25,6 +27,7 @@ model FqdnListGlobalRulestackResource
   >;
 }
 
+@removed(Versions.v2026_01_26_preview)
 @armResourceOperations
 interface FqdnListGlobalRulestackResources {
   /**

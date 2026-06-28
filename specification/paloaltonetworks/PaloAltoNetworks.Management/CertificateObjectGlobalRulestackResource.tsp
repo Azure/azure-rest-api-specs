@@ -9,11 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace PaloAltoNetworks.Cloudngfw;
 /**
  * GlobalRulestack Certificate Object
  */
+@removed(Versions.v2026_01_26_preview)
 @parentResource(GlobalRulestackResource)
 model CertificateObjectGlobalRulestackResource
   is Azure.ResourceManager.ProxyResource<CertificateObject, false> {
@@ -25,6 +27,7 @@ model CertificateObjectGlobalRulestackResource
   >;
 }
 
+@removed(Versions.v2026_01_26_preview)
 @armResourceOperations
 interface CertificateObjectGlobalRulestackResources {
   /**
