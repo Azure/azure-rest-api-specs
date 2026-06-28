@@ -4351,6 +4351,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "IPAddresses",
   "csharp"
 );
+@@alternateType(
+  RemotePrivateEndpointConnectionARMResourceProperties.ipAddresses,
+  ipV4Address[],
+  "csharp"
+);
 @@clientName(
   ResourceHealthMetadataProperties.signalAvailability,
   "IsSignalAvailable",
@@ -5190,6 +5195,18 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Microsoft.Web.PrivateLinkResource,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ResponseMessageEnvelopeRemotePrivateEndpointConnection,
+  Azure.ResourceManager.CommonTypes.ProxyResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   AppServiceEnvironmentPatchResource,
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
@@ -5621,6 +5638,11 @@ union ConfigReferenceSource {
   "IPAddresses",
   "csharp"
 );
+@@alternateType(
+  RemotePrivateEndpointConnectionProperties.ipAddresses,
+  ipV4Address[],
+  "csharp"
+);
 
 @@clientName(BillingMeterProperties.osType, "OSType", "csharp");
 @@clientName(MSDeployCore.dbType, "DBType", "csharp");
@@ -5639,9 +5661,19 @@ union ConfigReferenceSource {
   "ExternalInboundIPAddresses",
   "csharp"
 );
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.externalInboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
 @@clientName(
   AseV3NetworkingConfigurationProperties.internalInboundIpAddresses,
   "InternalInboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.internalInboundIpAddresses,
+  ipV4Address[],
   "csharp"
 );
 @@clientName(
@@ -5649,9 +5681,19 @@ union ConfigReferenceSource {
   "LinuxOutboundIPAddresses",
   "csharp"
 );
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.linuxOutboundIpAddresses,
+  ipV4Address[],
+  "csharp"
+);
 @@clientName(
   AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses,
   "WindowsOutboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AseV3NetworkingConfigurationProperties.windowsOutboundIpAddresses,
+  ipV4Address[],
   "csharp"
 );
 @@clientName(
@@ -5684,6 +5726,11 @@ union ConfigReferenceSource {
 @@clientName(
   AddressResponseProperties.outboundIpAddresses,
   "OutboundIPAddresses",
+  "csharp"
+);
+@@alternateType(
+  AddressResponseProperties.outboundIpAddresses,
+  ipV4Address[],
   "csharp"
 );
 
@@ -6819,7 +6866,7 @@ union ConfigReferenceSource {
 /**
  * Function key info.
  */
-model CorrectedKeyInfo {
+model WebAppKeyInfo {
   /**
    * Properties of function key info.
    */
@@ -6839,5 +6886,5 @@ model WebAppKeyInfoProperties {
    */
   value?: string;
 }
-@@alternateType(KeyInfo, CorrectedKeyInfo, "csharp");
-@@clientName(KeyInfo, "WebAppKeyInfo", "csharp");
+@@alternateType(KeyInfo, WebAppKeyInfo, "csharp");
+
