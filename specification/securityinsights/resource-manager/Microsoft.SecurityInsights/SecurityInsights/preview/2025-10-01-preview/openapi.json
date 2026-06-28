@@ -27944,6 +27944,34 @@
       "type": "object",
       "description": "Template property bag.",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the template"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/kind",
+          "description": "The kind of content the template is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
         "author": {
           "$ref": "#/definitions/metadataAuthor",
           "description": "The creator of the content item."
@@ -28016,6 +28044,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "packageId": {
+          "type": "string",
+          "description": "the package Id contains this template"
         },
         "packageKind": {
           "$ref": "#/definitions/packageKind",
@@ -30566,6 +30598,18 @@
       "type": "object",
       "description": "Describes package properties",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/packageKind",
+          "description": "The package kind"
+        },
         "contentSchemaVersion": {
           "type": "string",
           "description": "The version of the content schema."
@@ -30585,6 +30629,14 @@
         "isDeprecated": {
           "$ref": "#/definitions/Flag",
           "description": "Flag indicates if this template is deprecated"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
         },
         "description": {
           "type": "string",
@@ -30720,35 +30772,6 @@
     "packageProperties": {
       "type": "object",
       "description": "Describes package properties",
-      "properties": {
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/packageKind",
-          "description": "The package kind"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        }
-      },
-      "required": [
-        "contentId",
-        "contentProductId",
-        "contentKind",
-        "version",
-        "displayName"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/packageBaseProperties"
@@ -30819,6 +30842,18 @@
       "type": "object",
       "description": "Describes package properties",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "The content id of the package"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/packageKind",
+          "description": "The package kind"
+        },
         "contentSchemaVersion": {
           "type": "string",
           "description": "The version of the content schema."
@@ -30838,6 +30873,14 @@
         "isDeprecated": {
           "$ref": "#/definitions/Flag",
           "description": "Flag indicates if this template is deprecated"
+        },
+        "version": {
+          "type": "string",
+          "description": "the latest version number of the package"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the package"
         },
         "description": {
           "type": "string",
@@ -30902,26 +30945,6 @@
           "type": "string",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         },
-        "contentId": {
-          "type": "string",
-          "description": "The content id of the package"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/packageKind",
-          "description": "The package kind"
-        },
-        "version": {
-          "type": "string",
-          "description": "the latest version number of the package"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the package"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
-        },
         "installedVersion": {
           "type": "string",
           "description": "The version of the installed package, null or absent means not installed."
@@ -30934,13 +30957,7 @@
         "packagedContent": {
           "description": "The json of the ARM template to deploy. Expandable."
         }
-      },
-      "required": [
-        "contentId",
-        "contentKind",
-        "version",
-        "displayName"
-      ]
+      }
     },
     "productTemplateAdditionalProperties": {
       "type": "object",
@@ -30997,6 +31014,34 @@
       "type": "object",
       "description": "Template property bag.",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the template"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/kind",
+          "description": "The kind of content the template is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
         "author": {
           "$ref": "#/definitions/metadataAuthor",
           "description": "The creator of the content item."
@@ -31070,6 +31115,10 @@
             "type": "string"
           }
         },
+        "packageId": {
+          "type": "string",
+          "description": "the package Id contains this template"
+        },
         "packageKind": {
           "$ref": "#/definitions/packageKind",
           "description": "the packageKind of the package contains this template"
@@ -31085,47 +31134,8 @@
         },
         "packagedContent": {
           "description": "The json of the ARM template to deploy"
-        },
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
-        },
-        "packageVersion": {
-          "type": "string",
-          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the template"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/kind",
-          "description": "The kind of content the template is for."
-        },
-        "source": {
-          "$ref": "#/definitions/metadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "packageId": {
-          "type": "string",
-          "description": "the package Id contains this template"
         }
-      },
-      "required": [
-        "contentId",
-        "version",
-        "displayName",
-        "contentKind",
-        "source"
-      ]
+      }
     },
     "sourceKind": {
       "type": "string",
@@ -31283,6 +31293,34 @@
       "type": "object",
       "description": "Template property bag.",
       "properties": {
+        "contentId": {
+          "type": "string",
+          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
+        },
+        "contentProductId": {
+          "type": "string",
+          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
+        },
+        "packageVersion": {
+          "type": "string",
+          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the template"
+        },
+        "contentKind": {
+          "$ref": "#/definitions/kind",
+          "description": "The kind of content the template is for."
+        },
+        "source": {
+          "$ref": "#/definitions/metadataSource",
+          "description": "Source of the content.  This is where/how it was created."
+        },
         "author": {
           "$ref": "#/definitions/metadataAuthor",
           "description": "The creator of the content item."
@@ -31356,6 +31394,10 @@
             "type": "string"
           }
         },
+        "packageId": {
+          "type": "string",
+          "description": "the package Id contains this template"
+        },
         "packageKind": {
           "$ref": "#/definitions/packageKind",
           "description": "the packageKind of the package contains this template"
@@ -31382,50 +31424,8 @@
           "x-ms-identifiers": [
             "contentId"
           ]
-        },
-        "contentId": {
-          "type": "string",
-          "description": "Static ID for the content.  Used to identify dependencies and content from solutions or community.  Hard-coded/static for out of the box content and solutions. Dynamic for user-created.  This is the resource name"
-        },
-        "contentProductId": {
-          "type": "string",
-          "description": "Unique ID for the content. It should be generated based on the contentId of the package, contentId of the template, contentKind of the template and the contentVersion of the template"
-        },
-        "packageVersion": {
-          "type": "string",
-          "description": "Version of the package.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the content.  Default and recommended format is numeric (e.g. 1, 1.0, 1.0.0, 1.0.0.0), following ARM metadata best practices.  Can also be any string, but then we cannot guarantee any version checks"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the template"
-        },
-        "contentKind": {
-          "$ref": "#/definitions/kind",
-          "description": "The kind of content the template is for."
-        },
-        "source": {
-          "$ref": "#/definitions/metadataSource",
-          "description": "Source of the content.  This is where/how it was created."
-        },
-        "packageId": {
-          "type": "string",
-          "description": "the package Id contains this template"
         }
-      },
-      "required": [
-        "contentId",
-        "contentProductId",
-        "packageVersion",
-        "version",
-        "displayName",
-        "contentKind",
-        "source",
-        "packageId"
-      ]
+      }
     },
     "threatIntelligence": {
       "type": "object",
