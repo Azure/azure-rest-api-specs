@@ -6930,3 +6930,5 @@ model WebAppKeyInfoProperties {
   "csharp"
 );
 
+
+@@alternateType(WorkflowEnvelope.location, azureLocation, "csharp");
