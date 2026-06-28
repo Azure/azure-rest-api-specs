@@ -54,10 +54,21 @@ input-file:
   - stable/2024-02-01/metrics.json
   - stable/2026-01-01/activityLogAlerts_API.json
   - preview/2024-03-01-preview/metricAlert.json
+  - stable/2026-01-01/metricAlert.json
   - stable/2026-03-01/scheduledQueryRule_API.json
   - stable/2019-03-01/metricBaselines.json
   - preview/2024-10-01-preview/actionGroups.json
   - stable/2021-10-01/networkSecurityPerimeter.json
+```
+
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/activityLogAlerts_API.json
+  - stable/2026-01-01/metricAlert.json
 ```
 
 ### Tag: package-2026-03-01
