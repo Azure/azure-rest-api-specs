@@ -5553,6 +5553,12 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   Azure.ResourceManager.CommonTypes.ProxyResource,
   "csharp"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  Workflow,
+  Azure.ResourceManager.Foundations.TrackedResource,
+  "csharp"
+);
 @@scope(RelayServiceConnectionEntityProperties.resourceType, "!csharp");
 @@scope(BillingMeterProperties.resourceType, "!csharp");
 
@@ -6887,4 +6893,40 @@ model WebAppKeyInfoProperties {
   value?: string;
 }
 @@alternateType(KeyInfo, WebAppKeyInfo, "csharp");
+
+@@usage(
+  SiteConfig,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SiteConfigResource,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  MigrateMySqlRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  StorageMigrationOptions,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  SnapshotRestoreRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
 
