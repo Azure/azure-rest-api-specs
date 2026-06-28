@@ -2040,8 +2040,7 @@ using Microsoft.Web;
 );
 @@clientLocation(
   SiteConfigSnapshotSlotResourceOperationGroup.listConfigurationsSlot,
-  WebApps,
-  "!csharp"
+  WebApps
 );
 @@clientLocation(
   SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,

@@ -6790,3 +6790,13 @@ union ConfigReferenceSource {
   "managedServiceIdentityType",
   "csharp"
 );
+@@clientName(
+  AddressResponses.getVipInfo,
+  "GetAppServiceEnvironmentIPAddresses",
+  "csharp"
+);
+@@clientLocation(
+  SiteConfigResourceOperationGroup.listConfigurations,
+  Sites,
+  "csharp"
+);
