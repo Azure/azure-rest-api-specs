@@ -3816,7 +3816,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(IpAddressRange, "WebAppIPAddressRange", "csharp");
 @@clientName(IssueType, "DetectorIssueType", "csharp");
 @@clientName(JsonSchema, "WebAppJsonSchema", "csharp");
-@@clientName(KeyInfo, "WebAppKeyInfo", "csharp");
 @@clientName(KeyType, "WebAppKeyType", "csharp");
 @@clientName(KeyValuePairStringObject, "DataProviderKeyValuePair", "csharp");
 @@clientName(KubeEnvironmentCollection, "KubeEnvironmentListResult", "csharp");
@@ -4137,6 +4136,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(UsageCollection, "AppServiceUsageListResult", "csharp");
 @@clientName(User, "PublishingUser", "csharp");
 @@clientName(ValidateRequest, "AppServiceValidateContent", "csharp");
+@@clientName(ValidateRequest.type, "ValidateResourceType", "csharp");
 @@clientName(ValidateResponse, "AppServiceValidateResult", "csharp");
 @@clientName(VnetGateway, "AppServiceVirtualNetworkGateway", "csharp");
 @@clientName(VnetInfo, "AppServiceVirtualNetworkProperties", "csharp");
@@ -6052,6 +6052,20 @@ union ConfigReferenceSource {
 @@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
 
 @@usage(
+  ValidateProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  ValidateRequest,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
   AbnormalTimePeriod,
 
     | Azure.ClientGenerator.Core.Usage.input
@@ -6800,3 +6814,30 @@ union ConfigReferenceSource {
   Sites,
   "csharp"
 );
+
+// According to https://github.com/Azure/azure-sdk-for-net/issues/35146, fix the KeyInfo model to be compatible with the real response from the service.
+/**
+ * Function key info.
+ */
+model CorrectedKeyInfo {
+  /**
+   * Properties of function key info.
+   */
+  properties?: WebAppKeyInfoProperties;
+}
+/**
+ * Properties of function key info.
+ */
+model WebAppKeyInfoProperties {
+  /**
+   * Key name
+   */
+  name?: string;
+
+  /**
+   * Key value
+   */
+  value?: string;
+}
+@@alternateType(KeyInfo, CorrectedKeyInfo, "csharp");
+@@clientName(KeyInfo, "WebAppKeyInfo", "csharp");
