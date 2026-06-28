@@ -4797,13 +4797,87 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(WebAppStackProperties.preferredOs, "PreferredOS", "csharp");
 @@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
 
+// More back-compat property renames to align with GA 1.5.0 names.
+@@clientName(AzureStorageInfoValue.type, "StorageType", "csharp");
+@@clientName(HostingEnvironmentProfile.type, "ResourceType", "csharp");
+@@clientName(VirtualNetworkProfile.type, "ResourceType", "csharp");
+@@clientName(DetectorInfo.type, "DetectorType", "csharp");
+@@clientName(Rendering.type, "RenderingType", "csharp");
+@@clientName(Solution.type, "SolutionType", "csharp");
+@@clientName(
+  FunctionsDeploymentStorageAuthentication.type,
+  "AuthenticationType",
+  "csharp"
+);
+@@clientName(ConnStringInfo.type, "ConnectionStringType", "csharp");
+@@clientName(ConnStringValueTypePair.type, "ConnectionStringType", "csharp");
+@@clientName(ResourceNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(DnlResourceNameAvailabilityRequest.type, "ResourceType", "csharp");
+@@clientName(
+  SnapshotRestoreRequestProperties.overwrite,
+  "CanOverwrite",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlRequestProperties.connectionString,
+  "ConnectionString",
+  "csharp"
+);
+@@clientName(
+  MigrateMySqlRequestProperties.migrationType,
+  "MigrationType",
+  "csharp"
+);
+@@clientName(
+  StorageMigrationOptionsProperties.azurefilesConnectionString,
+  "AzurefilesConnectionString",
+  "csharp"
+);
+@@clientName(
+  StorageMigrationOptionsProperties.azurefilesShare,
+  "AzurefilesShare",
+  "csharp"
+);
+
+// Additional renames for missing GA members.
+@@clientName(DetectorAbnormalTimePeriod.type, "IssueType", "csharp");
+@@clientName(Sites.swapSlotWithProduction, "SwapSlot", "csharp");
+@@clientName(WebApps.swapSlotSlot, "SwapSlot", "csharp");
+
 // Back-compat enum-value renames moved from SDK customizations to align with GA names.
 @@clientName(ScmType.VSTSRM, "Vstsrm", "csharp");
-@@clientName(SupportedTlsVersions.`1.0`, Azure.ClientGenerator.Core.exact("Tls1_0"), "csharp");
-@@clientName(SupportedTlsVersions.`1.1`, Azure.ClientGenerator.Core.exact("Tls1_1"), "csharp");
-@@clientName(SupportedTlsVersions.`1.2`, Azure.ClientGenerator.Core.exact("Tls1_2"), "csharp");
-@@clientName(SupportedTlsVersions.`1.3`, Azure.ClientGenerator.Core.exact("Tls1_3"), "csharp");
+@@clientName(
+  SupportedTlsVersions.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  SupportedTlsVersions.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 @@clientName(ValidateResourceTypes.Site, "WebSite", "csharp");
+@@clientName(CheckNameResourceTypes.Site, "WebSite", "csharp");
+@@clientName(RouteType.DEFAULT, "Default", "csharp");
+@@clientName(RouteType.INHERITED, "Inherited", "csharp");
+@@clientName(RouteType.STATIC, "Static", "csharp");
+@@clientName(SslState.IpBasedEnabled, "IPBasedEnabled", "csharp");
+@@clientName(SiteRuntimeState.READY, "Ready", "csharp");
+@@clientName(SiteRuntimeState.STOPPED, "Stopped", "csharp");
+@@clientName(SiteRuntimeState.UNKNOWN, "Unknown", "csharp");
+@@clientName(ConnectionStringType.SQLServer, "SqlServer", "csharp");
+@@clientName(ConnectionStringType.SQLAzure, "SqlAzure", "csharp");
+@@clientName(ConnectionStringType.PostgreSQL, "PostgreSql", "csharp");
 
 @@clientName(ValidateResourceTypes, "ValidateResourceType", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty for back-compat."
