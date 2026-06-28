@@ -3868,11 +3868,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "csharp"
 );
 @@clientName(ProcessThreadInfo, "WebAppProcessThreadInfo", "csharp");
-@@clientName(
-  ProcessThreadInfoProperties,
-  "WebAppProcessThreadProperties",
-  "csharp"
-);
 @@clientName(ComputeModeOptions, "ComputeModeOption", "csharp");
 @@clientName(WorkerSizeOptions, "WorkerSizeOption", "csharp");
 @@clientName(
@@ -4792,7 +4787,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@clientName(StorageMount.type, "MountType", "csharp");
 @@clientName(MSDeployLogEntry.type, "EntryType", "csharp");
 @@clientName(WorkflowParameter.type, "WebAppParameterType", "csharp");
-@@clientName(ProcessThreadInfoProperties.identifier, "Id", "csharp");
 @@clientName(InstallScriptSource.type, "ScriptType", "csharp");
 @@clientName(
   StaticSiteDatabaseConnectionConfigurationFileOverview.type,
@@ -5562,7 +5556,6 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
 @@scope(RelayServiceConnectionEntityProperties.resourceType, "!csharp");
 @@scope(BillingMeterProperties.resourceType, "!csharp");
 
-@@clientName(ApplicationStack.name, "StackName", "csharp");
 @@clientName(DeletedSiteProperties.kind, "KindPropertiesKind", "csharp");
 @@clientName(StackPreferredOs, "StackPreferredOS", "csharp");
 
@@ -6462,13 +6455,6 @@ union ConfigReferenceSource {
   "csharp"
 );
 @@usage(
-  ProcessThreadInfoProperties,
-
-    | Azure.ClientGenerator.Core.Usage.input
-    | Azure.ClientGenerator.Core.Usage.output,
-  "csharp"
-);
-@@usage(
   QueryUtterancesResult,
 
     | Azure.ClientGenerator.Core.Usage.input
@@ -6929,40 +6915,70 @@ model WebAppKeyInfoProperties {
     | Azure.ClientGenerator.Core.Usage.output,
   "csharp"
 );
+@@usage(
+  CertificateProperties,
 
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  CertificatePatchResourceProperties,
 
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
+@@clientName(ApplicationStack.name, "StackName", "csharp");
+@@alternateType(
+  Microsoft.Web.ExtendedLocation,
+  Azure.ResourceManager.CommonTypes.ExtendedLocation,
+  "csharp"
+);
 @@alternateType(WorkflowEnvelope.location, azureLocation, "csharp");
-
-// ===== GA backward compatibility customizations (csharp) =====
-// CerBlob: GA 1.5.0 had a settable byte[] CerBlob; spec @visibility(Lifecycle.Read)
-// removes the setter. Restore Create+Update visibility for csharp so we can ship
-// a backward-compatible setter (the SDK customization layer converts BinaryData<->byte[]).
-@@visibility(CertificateProperties.cerBlob, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
-@@visibility(CertificatePatchResourceProperties.cerBlob, Lifecycle.Read, Lifecycle.Create, Lifecycle.Update);
-
-// ConnectionStringType.DocDb: GA shipped with the unconventional casing "DocDB".
 @@clientName(ConnectionStringType.DocDb, "DocDB", "csharp");
-
-// ApplicationStack.name: see line 5565 — renamed to "Name" for csharp.
-// ApplicationStackResource.Name (inherited from ResourceData) gets a `new`
-// modifier in a customization partial to silence CS0108.
-
-// AppServicePlanHybridConnectionNamespaceRelayResource:
-// GA exposed `GetWebAppsByHybridConnection` for the names-listing call and
-// `GetAllWebAppsByHybridConnection` for the data-listing call. The new
-// generator only emits the names-listing call under the latter name. Rename
-// it for csharp so we can re-introduce the GA contract via a customization.
-@@clientName(HybridConnections.listWebAppsByHybridConnection, "GetWebAppsByHybridConnection", "csharp");
-
-// RemotePrivateEndpointConnection / RemotePrivateEndpointConnectionARMResource:
-// GA exposed PrivateEndpointId as Azure.Core.ResourceIdentifier; the new
-// generator emits it as `string` (from the inner ArmIdWrapper.id).
+@@clientName(
+  HybridConnections.listWebAppsByHybridConnection,
+  "GetWebAppsByHybridConnection",
+  "csharp"
+);
 @@alternateType(ArmIdWrapper.id, armResourceIdentifier, "csharp");
 
-// ResourceMetricDefinition has a flat back-compat shape with @@flattenProperty
-// in back-compatible.tsp. The inner ResourceMetricDefinitionProperties has a
-// `properties: Record<string>` field whose flattened name collides with the
-// outer `properties`. Rename the inner record-field for csharp so the other
-// four read-only properties (unit, primaryAggregationType, metricAvailabilities,
-// resourceUri) survive the flatten.
-@@clientName(ResourceMetricDefinitionProperties.properties, "MetricValues", "csharp");
+// According to https://github.com/Azure/azure-sdk-for-net/issues/39126, fix the `ProcessThreadInfo` definition based on the return result.
+/**
+ * Process Thread properties.
+ */
+model WebAppProcessThreadProperties {
+  /**
+   * Thread ID.
+   */
+  id?: int32;
+
+  /**
+   * HRef URI.
+   */
+  href?: url;
+
+  /**
+   * Thread state.
+   */
+  state?: string;
+}
+@@usage(
+  WebAppProcessThreadProperties,
+
+    | Azure.ClientGenerator.Core.Usage.input
+    | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@alternateType(
+  ProcessThreadInfo.properties,
+  WebAppProcessThreadProperties,
+  "csharp"
+);
+@@alternateType(
+  ProcessInfoProperties.threads,
+  WebAppProcessThreadProperties[],
+  "csharp"
+);
