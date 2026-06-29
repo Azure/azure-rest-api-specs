@@ -290,7 +290,7 @@ Users can convert a specification from swagger to typespec by using `tsp-client`
 pnpm ci
 ```
 
-2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `pnpm exec tsp-client convert --swagger-readme <path to your readme>`
+2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `pnpm tsp-client convert --swagger-readme <path to your readme>`
 3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec when compared to the original swagger definitions.
 4. For both data plane and management plane specifications, you should update the implementation according to the information provided under the Initial migration checklist section below.
 

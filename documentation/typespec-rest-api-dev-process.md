@@ -41,19 +41,19 @@ If you are developing within your own ADO repo first and then submitting into `a
 - Ensure you can run TypeSpec command within the repo folders.
 
   ```npm
-     pnpm exec tsp --version
+     pnpm tsp --version
   ```
 
 - One-time set up: Install TypeSpec VisualStudio or VS Code extensions to get syntex highlighting, tool tips in IDE:
   
   ```npm
-    pnpm exec tsp code install
+    pnpm tsp code install
   ```
 
   OR
 
     ```npm
-      pnpm exec tsp vs install
+      pnpm tsp vs install
     ```
 
 #### 2.2  VS Code with local docker .devcontainer
@@ -88,12 +88,12 @@ Please first review recommended folder structure detailed in [this document](htt
 2. Create a new TypeSpec project based on Azure template with command:
 
     ```cli
-       pnpm exec tsp init https://aka.ms/typespec/azure-init
+       pnpm tsp init https://aka.ms/typespec/azure-init
     ```
 3. Compile the generated TypeSpec project with command:
 
     ```cli
-      pnpm exec tsp compile .
+      pnpm tsp compile .
     ```
 
     The generated OpenAPI files should be correctly placed in the `{service}`folders following the naming conventions.
@@ -135,7 +135,7 @@ Please first review recommended folder structure detailed in [this document](htt
       ```
 
    - in the root directory, run `pnpm install`
-   - in the project directory, `pnpm exec tsp compile`. This will generate OpenAPI files under `{service}` folders.
+   - in the project directory, `pnpm tsp compile`. This will generate OpenAPI files under `{service}` folders.
 
 6. Ensure all generated files under `{service}` have been added to PR.
 

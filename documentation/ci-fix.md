@@ -193,10 +193,10 @@ cd specification/contosowidgetmanager
 pnpm install
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
-pnpm exec prettier --check **/*.json
+pnpm prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
-pnpm exec prettier --write **/*.json
+pnpm prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.
