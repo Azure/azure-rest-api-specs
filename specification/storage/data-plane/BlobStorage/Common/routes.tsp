@@ -665,7 +665,6 @@ interface Container {
         contentType: "application/vnd.apache.arrow.stream" | "application/xml";
 
         @body body: bytes;
-
         ...DateResponseHeaderPrivate;
         ...ApiVersionHeader;
         ...RequestIdResponseHeader;
@@ -712,8 +711,10 @@ interface Container {
     accept: "application/vnd.apache.arrow.stream,application/xml",
 
     ...PrefixParameter,
+
     /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
     @query delimiter: string,
+
     ...MarkerParameter,
     ...MaxResultsParameter,
     ...ListBlobsIncludeParameter,
@@ -731,7 +732,6 @@ interface Container {
         contentType: "application/vnd.apache.arrow.stream" | "application/xml";
 
         @body body: bytes;
-
         ...DateResponseHeaderPrivate;
         ...ApiVersionHeader;
         ...RequestIdResponseHeader;
