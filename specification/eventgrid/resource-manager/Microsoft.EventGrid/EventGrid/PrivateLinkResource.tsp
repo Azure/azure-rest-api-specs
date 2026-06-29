@@ -48,6 +48,10 @@ interface PrivateLinkResourceOps
          * The type of the parent resource. This can be either \\'topics\\', \\'domains\\', or \\'partnerNamespaces\\' or \\'namespaces\\'.
          */
         @path
+        @Azure.ClientGenerator.Core.alternateType(
+          PrivateEndpointConnectionsParentType,
+          "csharp"
+        )
         parentType: string,
 
         /**

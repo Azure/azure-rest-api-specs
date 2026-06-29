@@ -12,105 +12,713 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using Azure.ClientGenerator.Core;
 
-namespace Microsoft.EventGrid;
-/**
- * The Client resource.
- */
-@parentResource(Namespace)
-model Client is Azure.ResourceManager.ProxyResource<ClientProperties> {
-  ...ResourceNameParameter<
-    Resource = Client,
-    KeyName = "clientName",
-    SegmentName = "clients",
-    NamePattern = "^[-a-zA-Z0-9:\\._]*$"
-  >;
+namespace Microsoft.EventGrid {
+  /**
+   * The Client resource.
+   */
+  @parentResource(Namespace)
+  model Client is Azure.ResourceManager.ProxyResource<ClientProperties> {
+    ...ResourceNameParameter<
+      Resource = Client,
+      KeyName = "clientName",
+      SegmentName = "clients",
+      NamePattern = "^[-a-zA-Z0-9:\\._]*$"
+    >;
+  }
+
+  @armResourceOperations
+  interface Clients {
+    /**
+     * Get properties of a client.
+     */
+    @summary("Get a client.")
+    get is ArmResourceRead<Client>;
+
+    /**
+     * Create or update a client with the specified parameters.
+     */
+    @summary("Create or update a client.")
+    createOrUpdate is ArmResourceCreateOrReplaceAsync<Client>;
+
+    /**
+     * Delete an existing client.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @summary("Delete a client.")
+    delete is ArmResourceDeleteWithoutOkAsync<
+      Client,
+      Response =
+        | ArmDeletedResponse
+        | ArmDeleteAcceptedLroResponse
+        | ArmDeletedNoContentResponse
+    >;
+
+    /**
+     * Get all the permission bindings under a namespace.
+     */
+    @summary("List all permission bindings under a namespace.")
+    listByNamespace is ArmResourceListByParent<
+      Client,
+      Parameters = {
+        /**
+         * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
+         */
+        @query("$filter")
+        $filter?: string;
+
+        /**
+         * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
+         */
+        @query("$top")
+        $top?: int32;
+      },
+      Response = ArmResponse<ClientsListResult>
+    >;
+  }
+
+  @@maxLength(Client.name, 128);
+  @@minLength(Client.name, 1);
+  @@doc(Client.name, "Name of the client.");
+  @@doc(Client.properties, "The properties of client.");
+  @@doc(Clients.createOrUpdate::parameters.resource, "Client information.");
+
+  // 1.1.0 back-compat wrapper: EventGridPrivateLinkResourceData inherited from
+  // ResourceData. The spec PrivateLinkResource uses @customAzureResource and
+  // therefore the MPG generator does NOT emit `: ResourceData` automatically.
+  // Per §4.13 + §4.26(b) of mpg-api-diff: declare a wrapper that extends the
+  // common Resource type and swap via @@alternateType. The wrapper keeps the
+  // @customAzureResource decorator so per-parent expansion (EventGridDomain*,
+  // EventGridTopic*, EventGridPartnerNamespace*, EventGridNamespace*) keeps
+  // working.
+  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Required for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "Required for backward compatibility"
+  @Azure.ResourceManager.Legacy.customAzureResource
+  @doc("Information of the private link resource.")
+  model EventGridPrivateLinkResource
+    extends Azure.ResourceManager.CommonTypes.Resource {
+    ...OmitProperties<PrivateLinkResource, "id" | "name" | "type">;
+  }
+
+  @@clientName(TlsVersion.`1.0`, "One0", "go,javascript,csharp");
+  @@clientName(TlsVersion.`1.1`, "One1", "go,javascript,csharp");
+  @@clientName(TlsVersion.`1.2`, "One2", "go,javascript,csharp");
+
+  @@clientName(
+    WebHookEventSubscriptionDestinationProperties,
+    "WebhookEventSubscriptionDestinationProperties",
+    "java"
+  );
+  @@clientName(
+    WebHookEventSubscriptionDestination,
+    "WebhookEventSubscriptionDestination",
+    "java"
+  );
+  @@clientName(
+    Microsoft.EventGrid,
+    "EventGridManagementClient",
+    "python, javascript"
+  );
+  @@clientName(TlsVersion.`1.0`, "ONE0", "python");
+  @@clientName(TlsVersion.`1.1`, "ONE1", "python");
+  @@clientName(TlsVersion.`1.2`, "ONE2", "python");
+  @@clientName(
+    Azure.ResourceManager.ResourceProvisioningState,
+    "ArmResourceProvisioningState",
+    "python"
+  );
+  @@clientName(
+    Azure.ResourceManager.ResourceProvisioningState,
+    "ArmResourceProvisioningState",
+    "java"
+  );
+
+  // === C# configurations ===
+
+  // clientName
+  @@clientName(
+    AlternativeAuthenticationNameSource.ClientCertificateIp,
+    "ClientCertificateIP",
+    "csharp"
+  );
+  @@clientName(Channel, "PartnerNamespaceChannel", "csharp");
+  @@clientName(
+    ChannelProperties.expirationTimeIfNotActivatedUtc,
+    "ExpireOnIfNotActivated",
+    "csharp"
+  );
+  @@clientName(
+    ChannelProvisioningState,
+    "PartnerNamespaceChannelProvisioningState",
+    "csharp"
+  );
+  @@clientName(Channels.getFullUrl, "GetFullUri", "csharp");
+  @@clientName(ChannelType, "PartnerNamespaceChannelType", "csharp");
+  @@clientName(
+    ChannelUpdateParametersProperties.expirationTimeIfNotActivatedUtc,
+    "ExpireOnIfNotActivated",
+    "csharp"
+  );
+  @@clientName(Client, "EventGridNamespaceClient", "csharp");
+  @@clientName(
+    ClientCertificateValidationScheme.IpMatchesAuthenticationName,
+    "IPMatchesAuthenticationName",
+    "csharp"
+  );
+  @@clientName(ClientGroup, "EventGridNamespaceClientGroup", "csharp");
+  @@clientName(
+    ClientProvisioningState,
+    "EventGridNamespaceClientProvisioningState",
+    "csharp"
+  );
+  @@clientName(ClientState, "EventGridNamespaceClientState", "csharp");
+  @@clientName(
+    ConnectionState,
+    "EventGridPrivateEndpointConnectionState",
+    "csharp"
+  );
+  @@clientName(CustomDomainIdentity.type, "IdentityType", "csharp");
+  @@clientName(
+    CustomJwtAuthenticationManagedIdentity.type,
+    "IdentityType",
+    "csharp"
+  );
+  @@clientName(
+    CustomWebhookAuthenticationManagedIdentity.type,
+    "IdentityType",
+    "csharp"
+  );
+  @@clientName(DeliveryAttributeMapping.type, "MappingType", "csharp");
+  @@clientName(Domain, "EventGridDomain", "csharp");
+  @@clientName(DomainEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+  @@clientName(
+    DomainProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(DomainProperties.endpoint, "Endpoint", "csharp");
+  @@clientName(DomainProperties.inboundIpRules, "InboundIPRules", "csharp");
+  @@clientName(
+    DomainProvisioningState,
+    "EventGridDomainProvisioningState",
+    "csharp"
+  );
+  @@clientName(
+    DomainRegenerateKeyRequest,
+    "EventGridDomainRegenerateKeyContent",
+    "csharp"
+  );
+  @@clientName(
+    DomainSharedAccessKeys,
+    "EventGridDomainSharedAccessKeys",
+    "csharp"
+  );
+  @@clientName(
+    DomainUpdateParameterProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(
+    DomainUpdateParameterProperties.inboundIpRules,
+    "InboundIPRules",
+    "csharp"
+  );
+  @@clientName(EventSubscription, "EventGridSubscription", "csharp");
+  @@clientName(
+    EventSubscriptionFilter.enableAdvancedFilteringOnArrays,
+    "IsAdvancedFilteringOnArraysEnabled",
+    "csharp"
+  );
+  @@clientName(EventSubscriptionFullUrl.endpointUrl, "Endpoint", "csharp");
+  @@clientName(EventSubscriptionIdentity.type, "IdentityType", "csharp");
+  @@clientName(
+    EventSubscriptionOperationGroup.getFullUrl,
+    "GetFullUri",
+    "csharp"
+  );
+  @@clientName(
+    EventSubscriptionProperties.expirationTimeUtc,
+    "ExpireOn",
+    "csharp"
+  );
+  @@clientName(EventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+  // Only the subscription-scoped listings are renamed to the legacy SDK names.
+  // The resource-group-scoped variants keep their operation-default names
+  // (GetGlobalByResourceGroupForTopicType, GetRegionalByResourceGroup,
+  // GetRegionalByResourceGroupForTopicType) to match the previously published
+  // 1.1.0 surface and to avoid a generator name-collision that produces a
+  // mis-typed CollectionResult constructor when both scopes share the same
+  // C# name.
+  @@clientName(
+    EventSubscriptionsOperationGroup.listGlobalBySubscriptionForTopicType,
+    "GetGlobalEventSubscriptionsDataForTopicType",
+    "csharp"
+  );
+  @@clientName(
+    EventSubscriptionsOperationGroup.listRegionalBySubscription,
+    "GetRegionalEventSubscriptionsData",
+    "csharp"
+  );
+  @@clientName(
+    EventSubscriptionsOperationGroup.listRegionalBySubscriptionForTopicType,
+    "GetRegionalEventSubscriptionsDataForTopicType",
+    "csharp"
+  );
+  @@clientName(
+    EventSubscriptionUpdateParameters,
+    "EventGridSubscriptionPatch",
+    "csharp"
+  );
+  @@clientName(
+    EventSubscriptionUpdateParameters.expirationTimeUtc,
+    "ExpireOn",
+    "csharp"
+  );
+  @@clientName(EventType, "EventTypeUnderTopic", "csharp");
+  @@clientName(EventTypeInfo, "PartnerTopicEventTypeInfo", "csharp");
+  @@clientName(Filter, "EventGridFilter", "csharp");
+  @@clientName(InboundIpRule, "EventGridInboundIPRule", "csharp");
+  @@clientName(InboundIpRule.ipMask, "IPMask", "csharp");
+  @@clientName(InputSchema, "EventGridInputSchema", "csharp");
+  @@clientName(InputSchemaMapping, "EventGridInputSchemaMapping", "csharp");
+  @@clientName(IpActionType, "EventGridIPActionType", "csharp");
+  @@clientName(
+    JsonInputSchemaMapping,
+    "EventGridJsonInputSchemaMapping",
+    "csharp"
+  );
+  @@clientName(Namespace, "EventGridNamespace", "csharp");
+  @@clientName(NamespaceProperties.inboundIpRules, "InboundIPRules", "csharp");
+  @@clientName(
+    NamespaceRegenerateKeyRequest,
+    "NamespaceRegenerateKeyContent",
+    "csharp"
+  );
+  @@clientName(
+    NamespaceUpdateParameterProperties.inboundIpRules,
+    "InboundIPRules",
+    "csharp"
+  );
+  @@clientName(Partner, "EventGridPartnerContent", "csharp");
+  @@clientName(
+    Partner.authorizationExpirationTimeInUtc,
+    "AuthorizationExpireOn",
+    "csharp"
+  );
+  @@clientName(
+    PartnerDestinationProperties.expirationTimeIfNotActivatedUtc,
+    "ExpireOnIfNotActivated",
+    "csharp"
+  );
+  @@clientName(
+    PartnerNamespaceProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(PartnerNamespaceProperties.endpoint, "Endpoint", "csharp");
+  @@clientName(
+    PartnerNamespaceProperties.inboundIpRules,
+    "InboundIPRules",
+    "csharp"
+  );
+  @@clientName(
+    PartnerNamespaceRegenerateKeyRequest,
+    "PartnerNamespaceRegenerateKeyContent",
+    "csharp"
+  );
+  @@clientName(
+    PartnerNamespaceUpdateParameterProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(
+    PartnerNamespaceUpdateParameterProperties.inboundIpRules,
+    "InboundIPRules",
+    "csharp"
+  );
+  @@clientName(
+    PartnerTopicEventSubscriptions.getFullUrl,
+    "GetFullUri",
+    "csharp"
+  );
+  @@clientName(
+    PartnerTopicProperties.expirationTimeIfNotActivatedUtc,
+    "ExpireOnIfNotActivated",
+    "csharp"
+  );
+  @@clientName(
+    PermissionBinding,
+    "EventGridNamespacePermissionBinding",
+    "csharp"
+  );
+  @@clientName(
+    PersistedConnectionStatus,
+    "EventGridPrivateEndpointPersistedConnectionStatus",
+    "csharp"
+  );
+  // PrivateEndpointConnection clientName - generates EventGridPrivateEndpointConnectionData (shared data class)
+  @@clientName(
+    PrivateEndpointConnection,
+    "EventGridPrivateEndpointConnection",
+    "csharp"
+  );
+  // PrivateLinkResource — swap to the wrapper that inherits CommonTypes.Resource
+  // so the generated C# data class inherits ResourceData (1.1.0 baseline).
+  @@alternateType(PrivateLinkResource, EventGridPrivateLinkResource, "csharp");
+  // Rename PrivateLinkServiceConnectionState back to ConnectionState for backward compat
+  @@clientName(
+    PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+    "ConnectionState",
+    "csharp"
+  );
+  @@clientName(PublicNetworkAccess, "EventGridPublicNetworkAccess", "csharp");
+  @@clientName(ReadinessState, "PartnerTopicReadinessState", "csharp");
+  @@clientName(ResourceMoveChangeHistory.changedTimeUtc, "ChangedOn", "csharp");
+  @@clientName(
+    ResourceProvisioningState,
+    "EventGridResourceProvisioningState",
+    "csharp"
+  );
+  @@clientName(ResourceRegionType, "EventGridResourceRegionType", "csharp");
+  @@clientName(RetryPolicy, "EventSubscriptionRetryPolicy", "csharp");
+  @@clientName(RoutingIdentityInfo.type, "IdentityType", "csharp");
+  @@clientName(Subscription, "NamespaceTopicEventSubscription", "csharp");
+  @@clientName(SubscriptionFullUrl, "SubscriptionFullUri", "csharp");
+  @@clientName(SubscriptionFullUrl.endpointUrl, "EndpointUri", "csharp");
+  @@clientName(SubscriptionProperties.expirationTimeUtc, "ExpireOn", "csharp");
+  @@clientName(Subscriptions.getFullUrl, "GetFullUri", "csharp");
+  @@clientName(
+    SubscriptionUpdateParameters,
+    "NamespaceTopicEventSubscriptionPatch",
+    "csharp"
+  );
+  @@clientName(
+    SubscriptionUpdateParametersProperties.expirationTimeUtc,
+    "ExpireOn",
+    "csharp"
+  );
+  @@clientName(
+    SystemTopicEventSubscriptions.getFullUrl,
+    "GetFullUri",
+    "csharp"
+  );
+  @@clientName(Topic, "EventGridTopic", "csharp");
+  @@clientName(TopicEventSubscriptions.getFullUrl, "GetFullUri", "csharp");
+  @@clientName(
+    TopicProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(TopicProperties.endpoint, "Endpoint", "csharp");
+  @@clientName(TopicProperties.inboundIpRules, "InboundIPRules", "csharp");
+  @@clientName(
+    TopicProvisioningState,
+    "EventGridTopicProvisioningState",
+    "csharp"
+  );
+  @@clientName(
+    TopicRegenerateKeyRequest,
+    "TopicRegenerateKeyContent",
+    "csharp"
+  );
+  @@clientName(TopicsOperationGroup.listEventTypes, "GetEventTypes", "csharp");
+  @@clientName(TopicTypeInfo, "TopicType", "csharp");
+  @@clientName(
+    TopicUpdateParameterProperties.disableLocalAuth,
+    "IsLocalAuthDisabled",
+    "csharp"
+  );
+  @@clientName(
+    TopicUpdateParameterProperties.inboundIpRules,
+    "InboundIPRules",
+    "csharp"
+  );
+  @@clientName(
+    WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryApplicationIdOrUri,
+    "UriOrAzureActiveDirectoryApplicationId",
+    "csharp"
+  );
+  @@clientName(
+    WebHookEventSubscriptionDestinationProperties.endpointBaseUrl,
+    "BaseEndpoint",
+    "csharp"
+  );
+  @@clientName(
+    WebHookEventSubscriptionDestinationProperties.endpointUrl,
+    "Endpoint",
+    "csharp"
+  );
+  @@clientName(
+    NetworkSecurityPerimeterProfileAccessRule.type,
+    "NetworkSecurityPerimeterProfileAccessRuleType",
+    "csharp"
+  );
+
+  // alternateType
+  @@alternateType(
+    AzureFunctionEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    AzureADPartnerClientAuthenticationProperties.azureActiveDirectoryApplicationIdOrUri,
+    url,
+    "csharp"
+  );
+  @@alternateType(CustomDomainConfiguration.certificateUrl, url, "csharp");
+  @@alternateType(
+    Domain.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(DomainProperties.endpoint, url, "csharp");
+  @@alternateType(
+    DomainUpdateParameters.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    EventHubEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(EventSubscriptionFullUrl.endpointUrl, url, "csharp");
+  @@alternateType(EventTypeProperties.schemaUrl, url, "csharp");
+  @@alternateType(
+    FederatedIdentityCredentialInfo.federatedClientId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    HybridConnectionEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(InlineEventProperties.dataSchemaUrl, url, "csharp");
+  @@alternateType(InlineEventProperties.documentationUrl, url, "csharp");
+  @@alternateType(IssuerCertificateInfo.certificateUrl, url, "csharp");
+  @@alternateType(
+    Namespace.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    NamespaceUpdateParameters.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    NetworkSecurityPerimeterInfo.location,
+    Azure.Core.azureLocation,
+    "csharp"
+  );
+  @@alternateType(
+    Partner.partnerRegistrationImmutableId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerDestinationProperties.partnerRegistrationImmutableId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(PartnerDetails.setupUri, url, "csharp");
+  @@alternateType(PartnerNamespaceProperties.endpoint, url, "csharp");
+  @@alternateType(
+    PartnerNamespaceProperties.partnerRegistrationFullyQualifiedId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerRegistrationProperties.partnerRegistrationImmutableId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerTopic.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerTopicInfo.azureSubscriptionId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerTopicProperties.partnerRegistrationImmutableId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    PartnerTopicUpdateParameters.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  // Change PrivateEndpoint.id from string to ResourceIdentifier for backward compat
+  @@alternateType(
+    PrivateEndpoint.id,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    ServiceBusQueueEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    ServiceBusTopicEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    StorageBlobDeadLetterDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    StorageQueueEventSubscriptionDestinationProperties.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(SubscriptionFullUrl.endpointUrl, url, "csharp");
+  @@alternateType(
+    SystemTopic.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    SystemTopicProperties.metricResourceId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    SystemTopicProperties.source,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    SystemTopicUpdateParameters.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    Topic.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(TopicProperties.endpoint, url, "csharp");
+  @@alternateType(
+    TopicUpdateParameters.identity,
+    Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+    "csharp"
+  );
+  @@alternateType(
+    VerifiedPartnerProperties.partnerRegistrationImmutableId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    WebhookAuthenticationSettings.azureActiveDirectoryApplicationIdOrUri,
+    url,
+    "csharp"
+  );
+  @@alternateType(
+    WebHookEventSubscriptionDestinationProperties.azureActiveDirectoryTenantId,
+    Azure.Core.uuid,
+    "csharp"
+  );
+  @@alternateType(
+    WebHookEventSubscriptionDestinationProperties.endpointBaseUrl,
+    url,
+    "csharp"
+  );
+  @@alternateType(
+    WebHookEventSubscriptionDestinationProperties.endpointUrl,
+    url,
+    "csharp"
+  );
+
+  // usage
+  @@usage(DomainTopic, Usage.input, "csharp");
+  @@usage(EventType, Usage.input, "csharp");
+  @@usage(ExtensionTopic, Usage.input, "csharp");
+  @@usage(NetworkSecurityPerimeterConfiguration, Usage.input, "csharp");
+  @@usage(
+    NetworkSecurityPerimeterConfigurationProperties,
+    Usage.input,
+    "csharp"
+  );
+  @@usage(PartnerConfiguration, Usage.input, "csharp");
+  @@usage(PartnerDetails, Usage.input, "csharp");
+  @@usage(TopicTypeAdditionalEnforcedPermission, Usage.input, "csharp");
+  @@usage(TopicTypeInfo, Usage.input, "csharp");
+  @@usage(VerifiedPartner, Usage.input, "csharp");
+
+  // Azure.ClientGenerator.Core.Legacy.markAsPageable
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    DomainEventSubscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    EventSubscriptionOperationGroup.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    EventSubscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    PartnerTopicEventSubscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    Subscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    SystemTopicEventSubscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+    TopicEventSubscriptions.getDeliveryAttributes,
+    "csharp"
+  );
+
+  // Azure.ClientGenerator.Core.Legacy.hierarchyBuilding
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    PartnerConfiguration,
+    Azure.ResourceManager.CommonTypes.TrackedResource,
+    "csharp"
+  );
 }
 
-@armResourceOperations
-interface Clients {
-  /**
-   * Get properties of a client.
-   */
-  @summary("Get a client.")
-  get is ArmResourceRead<Client>;
-
-  /**
-   * Create or update a client with the specified parameters.
-   */
-  @summary("Create or update a client.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Client>;
-
-  /**
-   * Delete an existing client.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Delete a client.")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    Client,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse
-      | ArmDeletedNoContentResponse
-  >;
-
-  /**
-   * Get all the permission bindings under a namespace.
-   */
-  @summary("List all permission bindings under a namespace.")
-  listByNamespace is ArmResourceListByParent<
-    Client,
-    Parameters = {
-      /**
-       * The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.
-       */
-      @query("$top")
-      $top?: int32;
-    },
-    Response = ArmResponse<ClientsListResult>
-  >;
+// Define WritableSubResource in the ARM Models namespace so the @@alternateType
+// (csharp-only) below retargets the array property to
+// Azure.ResourceManager.Resources.Models.WritableSubResource in the generated
+// C# SDK. Wire shape { id?: string } is identical to NetworkSecurityPerimeterSubscription,
+// so the emitted swagger is unaffected.
+namespace Azure.ResourceManager.Models {
+  model WritableSubResource {
+    id?: Azure.Core.armResourceIdentifier;
+  }
 }
 
-@@maxLength(Client.name, 128);
-@@minLength(Client.name, 1);
-@@doc(Client.name, "Name of the client.");
-@@doc(Client.properties, "The properties of client.");
-@@doc(Clients.createOrUpdate::parameters.resource, "Client information.");
-
-@@clientName(TlsVersion.`1.0`, "One0", "go,javascript");
-@@clientName(TlsVersion.`1.1`, "One1", "go,javascript");
-@@clientName(TlsVersion.`1.2`, "One2", "go,javascript");
-
-@@clientName(
-  WebHookEventSubscriptionDestinationProperties,
-  "WebhookEventSubscriptionDestinationProperties",
-  "java"
-);
-@@clientName(
-  WebHookEventSubscriptionDestination,
-  "WebhookEventSubscriptionDestination",
-  "java"
-);
-@@clientName(
-  Microsoft.EventGrid,
-  "EventGridManagementClient",
-  "python, javascript"
-);
-@@clientName(TlsVersion.`1.0`, "ONE0", "python");
-@@clientName(TlsVersion.`1.1`, "ONE1", "python");
-@@clientName(TlsVersion.`1.2`, "ONE2", "python");
-@@clientName(
-  Azure.ResourceManager.ResourceProvisioningState,
-  "ArmResourceProvisioningState",
-  "python"
-);
-@@clientName(
-  Azure.ResourceManager.ResourceProvisioningState,
-  "ArmResourceProvisioningState",
-  "java"
+@@alternateType(
+  Microsoft.EventGrid.NetworkSecurityPerimeterProfileAccessRuleProperties.subscriptions,
+  Azure.ResourceManager.Models.WritableSubResource[],
+  "csharp"
 );
