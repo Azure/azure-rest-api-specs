@@ -98,7 +98,7 @@ enum Versions {
   "application/json",
   "payload"
 );
-@@clientName(Services.update::parameters.properties, "payload");
+@@clientName(Services.update::parameters.properties, "payload", "!javascript");
 
 #suppress "deprecated" "LEGACY - DO NOT COPY THIS DOESN'T MAKE SENSE - FIX"
 @@encodedName(
