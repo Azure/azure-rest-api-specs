@@ -699,7 +699,7 @@ interface Container {
     }
   >;
 
-  /** The List Blobs hierarchy operation returns a list of the blobs under the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client. */
+  /** The List Blobs hierarchy operation returns a list of the blobs under the specified container. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @added(Versions.v2026_12_06)
