@@ -1,4 +1,6 @@
 import child_process from "child_process";
+import spawn from "cross-spawn";
+import { dirname, join } from "path";
 import { promisify } from "util";
 const execFileImpl = promisify(child_process.execFile);
 
@@ -11,7 +13,7 @@ const execFileImpl = promisify(child_process.execFile);
 
 /**
  * @typedef {Object} NpmPrefixOptions
- * @property {string} [prefix] Prefix to pass to pnpm via "--prefix".
+ * @property {string} [prefix] Prefix to pass to npm/pnpm via "--prefix".
  */
 
 /**
@@ -80,7 +82,7 @@ export async function execFile(file, args, options = {}) {
 }
 
 /**
- * Calls `execFile()` with appropriate arguments to run `pnpm` on all platforms
+ * Calls `execFile()` with appropriate arguments to run `npm` on all platforms
  *
  * @param {string[]} args
  * @param {ExecNpmOptions} [options]
@@ -88,43 +90,40 @@ export async function execFile(file, args, options = {}) {
  * @throws {ExecError}
  */
 export async function execNpm(args, options = {}) {
-  const { prefix, cwd, logger, maxBuffer = 16 * 1024 * 1024 } = options;
+  const { prefix } = options;
+
+  // Exclude platform-specific code from coverage
+  /* v8 ignore start */
+  const { file, defaultArgs } =
+    process.platform === "win32"
+      ? {
+          // Only way I could find to run "npm" on Windows, without using the shell (e.g. "cmd /c npm ...")
+          //
+          // "node.exe", ["--", "npm-cli.js", ...args]
+          //
+          // The "--" MUST come BEFORE "npm-cli.js", to ensure args are sent to the script unchanged.
+          // If the "--" comes after "npm-cli.js", the args sent to the script will be ["--", ...args],
+          // which is NOT equivalent, and can break if args itself contains another "--".
+
+          // example: "C:\Program Files\nodejs\node.exe"
+          file: process.execPath,
+
+          // example: "C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js"
+          defaultArgs: [
+            "--",
+            join(dirname(process.execPath), "node_modules", "npm", "bin", "npm-cli.js"),
+          ],
+        }
+      : { file: "npm", defaultArgs: [] };
+  /* v8 ignore stop */
 
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
-  const allArgs = [...prefixArgs, ...args];
 
-  logger?.info(`execNpm(${JSON.stringify(allArgs)})`);
-
-  try {
-    const isWindows = process.platform === "win32";
-
-    // On Windows, pnpm is installed as the "pnpm.cmd" batch shim, which can only be
-    // launched through a shell: since the fix for CVE-2024-27980, Node refuses to
-    // spawn .cmd/.bat files unless shell is enabled. On other platforms, call the
-    // "pnpm" binary directly with shell disabled to avoid shell quoting/parsing risks.
-    // Exclude the platform-specific branch from coverage (only one side runs per OS).
-    /* v8 ignore next */
-    const file = isWindows ? "pnpm.cmd" : "pnpm";
-
-    const result = await execFileImpl(file, allArgs, {
-      cwd,
-      maxBuffer,
-      shell: isWindows,
-    });
-
-    logger?.debug(`stdout: '${result.stdout}'`);
-    logger?.debug(`stderr: '${result.stderr}'`);
-
-    return result;
-  } catch (error) {
-    /* v8 ignore next */
-    logger?.debug(`error: '${JSON.stringify(error)}'`);
-    throw error;
-  }
+  return await execFile(file, [...defaultArgs, ...prefixArgs, ...args], options);
 }
 
 /**
- * Calls `pnpm exec` with the given arguments.
+ * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
  *
  * @param {string[]} args
  * @param {ExecNpmOptions} [options]
@@ -132,5 +131,108 @@ export async function execNpm(args, options = {}) {
  * @throws {ExecError}
  */
 export async function execNpmExec(args, options = {}) {
-  return await execNpm(["exec", ...args], options);
+  return await execNpm(["exec", "--no", "--", ...args], options);
+}
+
+/**
+ * Calls `cross-spawn` with appropriate arguments to run `pnpm` on all platforms.
+ *
+ * Uses `cross-spawn` instead of `child_process.execFile()` so that the `pnpm.cmd`
+ * batch shim can be resolved and launched safely on Windows without enabling a
+ * shell. Enabling a shell (e.g. `shell: true`) would reintroduce quoting and
+ * shell-parsing risks, so it is intentionally avoided.
+ *
+ * @param {string[]} args
+ * @param {ExecNpmOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execPnpm(args, options = {}) {
+  const { prefix, cwd, logger, maxBuffer = 16 * 1024 * 1024 } = options;
+
+  const prefixArgs = prefix ? ["--prefix", prefix] : [];
+  const allArgs = [...prefixArgs, ...args];
+
+  logger?.info(`execPnpm(${JSON.stringify(allArgs)})`);
+
+  return await new Promise((resolve, reject) => {
+    // cross-spawn resolves "pnpm" to the "pnpm.cmd" shim on Windows and spawns it
+    // directly (shell disabled), avoiding shell quoting/parsing risks while still
+    // working cross-platform.
+    const child = spawn("pnpm", allArgs, { cwd });
+
+    let stdout = "";
+    let stderr = "";
+    let settled = false;
+
+    /**
+     * Ensures the promise is settled at most once, even though several events
+     * (data overflow, error, close) may fire after the result is known.
+     *
+     * @param {() => void} action
+     */
+    const settle = (action) => {
+      if (settled) return;
+      settled = true;
+      action();
+    };
+
+    /** @param {ExecError} error */
+    const fail = (error) =>
+      settle(() => {
+        error.stdout = stdout;
+        error.stderr = stderr;
+        logger?.debug(`error: '${JSON.stringify(error)}'`);
+        reject(error);
+      });
+
+    /** @param {"stdout" | "stderr"} streamName */
+    const failMaxBuffer = (streamName) => {
+      child.kill();
+      const error = /** @type {ExecError} */ (new Error(`${streamName} maxBuffer length exceeded`));
+      error.code = /** @type {any} */ ("ERR_CHILD_PROCESS_STDIO_MAXBUFFER");
+      fail(error);
+    };
+
+    child.stdout?.on("data", (data) => {
+      stdout += data;
+      if (Buffer.byteLength(stdout) > maxBuffer) failMaxBuffer("stdout");
+    });
+
+    child.stderr?.on("data", (data) => {
+      stderr += data;
+      if (Buffer.byteLength(stderr) > maxBuffer) failMaxBuffer("stderr");
+    });
+
+    // Only fires if the process could not be spawned at all (e.g. "pnpm" missing).
+    /* v8 ignore next */
+    child.on("error", (error) => fail(/** @type {ExecError} */ (error)));
+
+    child.on("close", (code) => {
+      logger?.debug(`stdout: '${stdout}'`);
+      logger?.debug(`stderr: '${stderr}'`);
+
+      if (code === 0) {
+        settle(() => resolve({ stdout, stderr }));
+      } else {
+        const error = /** @type {ExecError} */ (
+          new Error(`pnpm ${allArgs.join(" ")} exited with code ${code}`)
+        );
+        error.code = /** @type {any} */ (code);
+        fail(error);
+      }
+    });
+  });
+}
+
+/**
+ * Calls `execPnpm()` with arguments ["exec", ...] prepended.
+ *
+ * @param {string[]} args
+ * @param {ExecNpmOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execPnpmExec(args, options = {}) {
+  return await execPnpm(["exec", ...args], options);
 }
