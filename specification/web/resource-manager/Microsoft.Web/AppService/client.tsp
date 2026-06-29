@@ -6982,3 +6982,5 @@ model WebAppProcessThreadProperties {
   WebAppProcessThreadProperties[],
   "csharp"
 );
+
+@@clientName(SiteContainerCollection, "SiteContainerListResult", "csharp");
