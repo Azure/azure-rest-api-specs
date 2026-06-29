@@ -59,7 +59,7 @@
   "paths": {
     "/api/hubs/{hub}/chat/conversations/{conversationId}": {
       "get": {
-        "operationId": "Chat_GetConversation",
+        "operationId": "WebPubSubChatService_GetConversation",
         "tags": [
           "chat"
         ],
@@ -109,17 +109,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_GetConversation": {
-            "$ref": "./examples/Chat_GetConversation.json"
-          }
         }
       }
     },
     "/api/hubs/{hub}/chat/conversations/{conversationId}/messages": {
       "get": {
-        "operationId": "Chat_ListMessages",
+        "operationId": "WebPubSubChatService_ListMessages",
         "tags": [
           "chat"
         ],
@@ -193,11 +188,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Chat_ListMessages": {
-            "$ref": "./examples/Chat_ListMessages.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -205,7 +195,7 @@
     },
     "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}": {
       "patch": {
-        "operationId": "Chat_UpdateMessage",
+        "operationId": "WebPubSubChatService_UpdateMessage",
         "tags": [
           "chat"
         ],
@@ -295,15 +285,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_UpdateMessage": {
-            "$ref": "./examples/Chat_UpdateMessage.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Chat_DeleteMessage",
+        "operationId": "WebPubSubChatService_DeleteMessage",
         "tags": [
           "chat"
         ],
@@ -372,17 +357,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_DeleteMessage": {
-            "$ref": "./examples/Chat_DeleteMessage.json"
-          }
         }
       }
     },
     "/api/hubs/{hub}/chat/roles": {
       "get": {
-        "operationId": "Chat_ListRoles",
+        "operationId": "WebPubSubChatService_ListRoles",
         "tags": [
           "chat"
         ],
@@ -434,11 +414,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Chat_ListRoles": {
-            "$ref": "./examples/Chat_ListRoles.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -446,7 +421,7 @@
     },
     "/api/hubs/{hub}/chat/roles/{roleName}": {
       "get": {
-        "operationId": "Chat_GetRole",
+        "operationId": "WebPubSubChatService_GetRole",
         "tags": [
           "chat"
         ],
@@ -496,15 +471,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_GetRole": {
-            "$ref": "./examples/Chat_GetRole.json"
-          }
         }
       },
       "put": {
-        "operationId": "Chat_CreateOrReplaceRole",
+        "operationId": "WebPubSubChatService_CreateOrReplaceRole",
         "tags": [
           "chat"
         ],
@@ -593,15 +563,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_CreateOrReplaceRole": {
-            "$ref": "./examples/Chat_CreateOrReplaceRole.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Chat_DeleteRole",
+        "operationId": "WebPubSubChatService_DeleteRole",
         "tags": [
           "chat"
         ],
@@ -660,17 +625,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_DeleteRole": {
-            "$ref": "./examples/Chat_DeleteRole.json"
-          }
         }
       }
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}": {
       "get": {
-        "operationId": "Chat_GetRoom",
+        "operationId": "WebPubSubChatService_GetRoom",
         "tags": [
           "chat"
         ],
@@ -720,15 +680,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_GetRoom": {
-            "$ref": "./examples/Chat_GetRoom.json"
-          }
         }
       },
       "put": {
-        "operationId": "Chat_CreateOrReplaceRoom",
+        "operationId": "WebPubSubChatService_CreateOrReplaceRoom",
         "tags": [
           "chat"
         ],
@@ -817,15 +772,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_CreateOrReplaceRoom": {
-            "$ref": "./examples/Chat_CreateOrReplaceRoom.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Chat_DeleteRoom",
+        "operationId": "WebPubSubChatService_DeleteRoom",
         "tags": [
           "chat"
         ],
@@ -884,17 +834,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_DeleteRoom": {
-            "$ref": "./examples/Chat_DeleteRoom.json"
-          }
         }
       }
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}/members": {
       "get": {
-        "operationId": "Chat_ListRoomMembers",
+        "operationId": "WebPubSubChatService_ListRoomMembers",
         "tags": [
           "chat"
         ],
@@ -956,11 +901,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Chat_ListRoomMembers": {
-            "$ref": "./examples/Chat_ListRoomMembers.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -968,7 +908,7 @@
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}/members/{userId}": {
       "put": {
-        "operationId": "Chat_CreateOrReplaceRoomMember",
+        "operationId": "WebPubSubChatService_CreateOrReplaceRoomMember",
         "tags": [
           "chat"
         ],
@@ -1067,15 +1007,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_CreateOrReplaceRoomMember": {
-            "$ref": "./examples/Chat_CreateOrReplaceRoomMember.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Chat_DeleteRoomMember",
+        "operationId": "WebPubSubChatService_DeleteRoomMember",
         "tags": [
           "chat"
         ],
@@ -1144,17 +1079,12 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_DeleteRoomMember": {
-            "$ref": "./examples/Chat_DeleteRoomMember.json"
-          }
         }
       }
     },
     "/api/hubs/{hub}/chat/users/{userId}": {
       "get": {
-        "operationId": "Chat_GetUser",
+        "operationId": "WebPubSubChatService_GetUser",
         "tags": [
           "chat"
         ],
@@ -1204,15 +1134,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_GetUser": {
-            "$ref": "./examples/Chat_GetUser.json"
-          }
         }
       },
       "put": {
-        "operationId": "Chat_CreateOrReplaceUser",
+        "operationId": "WebPubSubChatService_CreateOrReplaceUser",
         "tags": [
           "chat"
         ],
@@ -1301,15 +1226,10 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "Chat_CreateOrReplaceUser": {
-            "$ref": "./examples/Chat_CreateOrReplaceUser.json"
-          }
         }
       },
       "delete": {
-        "operationId": "Chat_DeleteUser",
+        "operationId": "WebPubSubChatService_DeleteUser",
         "tags": [
           "chat"
         ],
@@ -1367,11 +1287,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Chat_DeleteUser": {
-            "$ref": "./examples/Chat_DeleteUser.json"
           }
         }
       }
