@@ -3,7 +3,7 @@
 // `packageManager` field, so a fresh clone (with only Node + npm) can get pnpm before
 // pnpm's own self-versioning is able to take over (that only works once pnpm exists).
 //
-// Run with `npx install-pnpm` (resolves the root package's own bin) or directly with
+// Run with `npm run install-pnpm` or directly with
 // `node eng/scripts/install-pnpm.mts`. Node >=24 strips the TypeScript types natively,
 // so there is no build step. Keep this file to erasable-only TypeScript syntax and zero
 // runtime dependencies.
