@@ -8,6 +8,14 @@ options:
     api-version: "v1"
     # plugins:
     #  - "../codegen"
+  "typespec-extension-exporter":
+    keys: x-ms-foundry-meta
+    language: csharp
+    output-shape: list
+    output-format: csv
+    output-file: Azure.AI.Projects_experimental.csv
+    emitter-output-dir: "{cwd}/../" # run npx tsp compile from within `TempTypeSpecFiles` folder
+    namespace: Azure.AI.Projects
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
