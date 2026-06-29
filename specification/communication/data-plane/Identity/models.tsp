@@ -131,8 +131,9 @@ model TeamsUserExchangeTokenRequest {
 
 // --- Teams Extension models ---
 
+#suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque token exchange request body with unknown value types"
 @doc("A request to exchange a Teams Extension token.")
-model TeamsExtensionExchangeTokenRequest {}
+model TeamsExtensionExchangeTokenRequest is Record<unknown>;
 
 @doc("A request to create or update a Teams Extension assignment.")
 model TeamsExtensionAssignmentCreateOrUpdateRequest {

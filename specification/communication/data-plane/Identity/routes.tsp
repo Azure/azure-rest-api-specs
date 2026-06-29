@@ -127,6 +127,7 @@ interface TeamsExtensionOperations {
   @post
   exchangeToken is Azure.Core.Foundations.Operation<
     {
+      #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque token exchange request body with unknown value types"
       @doc("Request payload for the token exchange.")
       @body
       body: TeamsExtensionExchangeTokenRequest;
