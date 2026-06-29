@@ -1210,7 +1210,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventState,
-  "VmScaleSetLifecycleHookEventState",
+  "VirtualMachineScaleSetLifecycleHookEventState",
   "csharp"
 );
 @@clientName(
@@ -1220,7 +1220,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventProperties,
-  "VmScaleSetLifecycleHookEventProperties",
+  "VirtualMachineScaleSetLifecycleHookEventProperties",
   "csharp"
 );
 @@clientName(
@@ -1235,10 +1235,25 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventType,
-  "VmScaleSetLifecycleHookEventType",
+  "VirtualMachineScaleSetLifecycleHookEventType",
   "csharp"
 );
-@@clientName(LifecycleHook.type, "VmScaleSetLifecycleHookEventType", "csharp");
+@@clientName(LifecycleHook, "VirtualMachineScaleSetLifecycleHook", "csharp");
+@@clientName(
+  LifecycleHookAction,
+  "VirtualMachineScaleSetLifecycleHookAction",
+  "csharp"
+);
+@@clientName(
+  LifecycleHookActionState,
+  "VirtualMachineScaleSetLifecycleHookActionState",
+  "csharp"
+);
+@@clientName(
+  LifecycleHook.type,
+  "VirtualMachineScaleSetLifecycleHookEventType",
+  "csharp"
+);
 @@clientName(
   VMScaleSetLifecycleHookEventUpdate,
   "VirtualMachineScaleSetLifecycleHookEventPatch",
