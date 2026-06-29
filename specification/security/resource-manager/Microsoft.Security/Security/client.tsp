@@ -1796,6 +1796,11 @@ model CSharpSecurityAssessmentStatusResult
   "csharp"
 );
 @@clientName(
+  PricingsAPI.ResourcesCoverageStatus,
+  "SecurityCenterResourcesCoverageStatus",
+  "csharp"
+);
+@@clientName(
   PricingsAPI.IsEnabled,
   "SecurityCenterExtensionIsEnabled",
   "csharp"
@@ -1826,6 +1831,11 @@ model CSharpSecurityAssessmentStatusResult
 );
 @@clientName(AlertsAPI.BundleType.DNS, "Dns", "csharp");
 @@clientName(
+  DefenderForStorageAPI.AutomatedResponseType,
+  "MalwareScanningAutomatedResponseType",
+  "csharp"
+);
+@@clientName(
   SecuritySolutionsAPI.ConnectionType,
   "SecurityCenterConnectionType",
   "csharp"
@@ -1840,6 +1850,21 @@ model CSharpSecurityAssessmentStatusResult
   "SecurityCenterOperationResultStatus",
   "csharp"
 );
+@@clientName(
+  SqlVulnerabilityAssessmentsAPI.ScanOperationStatus,
+  "SqlVulnerabilityAssessmentScanOperationStatus",
+  "csharp"
+);
+@@clientName(
+  SecurityStandardsAPI.attestationComplianceState,
+  "StandardAssignmentAttestationComplianceState",
+  "csharp"
+);
+@@clientName(
+  SecurityStandardsAPI.StandardType,
+  "SecurityStandardType",
+  "csharp"
+);
 @@clientName(SecurityStandardsAPI.Effect, "SecurityCenterEffect", "csharp");
 @@clientName(SecurityStandardsAPI.StandardSupportedCloud.AWS, "Aws", "csharp");
 @@clientName(SecurityStandardsAPI.StandardSupportedCloud.GCP, "Gcp", "csharp");
@@ -1850,6 +1875,16 @@ model CSharpSecurityAssessmentStatusResult
 );
 @@clientName(StandardsAPI.StandardSupportedClouds.AWS, "Aws", "csharp");
 @@clientName(StandardsAPI.StandardSupportedClouds.GCP, "Gcp", "csharp");
+@@clientName(
+  SecurityConnectorsDevOpsAPI.InventoryKind,
+  "IotSecurityInventoryKind",
+  "csharp"
+);
+@@clientName(
+  SecurityConnectorsDevOpsAPI.InventoryListKind,
+  "IotSecurityInventoryListKind",
+  "csharp"
+);
 @@clientName(
   HealthReportsAPI.environmentDetails,
   "SecurityConnectorEnvironmentDetails",
