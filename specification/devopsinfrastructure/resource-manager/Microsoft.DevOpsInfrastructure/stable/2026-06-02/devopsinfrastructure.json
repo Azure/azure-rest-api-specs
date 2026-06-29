@@ -782,6 +782,14 @@
       "type": "object",
       "description": "Azure DevOps organization profile",
       "properties": {
+        "description": {
+          "type": "string",
+          "description": "An extra description to add to the Azure DevOps pool."
+        },
+        "updateDescription": {
+          "type": "boolean",
+          "description": "Determines whether the service updates the Azure DevOps pool description."
+        },
         "organizations": {
           "type": "array",
           "description": "The list of Azure DevOps organizations the pool should be present in.",
@@ -2229,11 +2237,6 @@
         "name": {
           "type": "string",
           "description": "Specifies the name of the VM Size."
-        },
-        "rank": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Specifies the rank associated with the VM Size."
         }
       }
     },

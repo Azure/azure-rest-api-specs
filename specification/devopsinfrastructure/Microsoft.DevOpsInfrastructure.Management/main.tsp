@@ -106,6 +106,14 @@ model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("Azure DevOps organization profile")
   kind: "AzureDevOps";
 
+  @doc("An extra description to add to the Azure DevOps pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  description?: string;
+
+  @doc("Determines whether the service updates the Azure DevOps pool description.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  updateDescription?: boolean;
+
   @doc("The list of Azure DevOps organizations the pool should be present in.")
   @identifiers(#[])
   organizations: Organization[];
@@ -226,9 +234,6 @@ model SkuProfile {
 model SkuProfileVMSize {
   @doc("Specifies the name of the VM Size.")
   name?: string;
-
-  @doc("Specifies the rank associated with the VM Size.")
-  rank?: int32;
 }
 
 @doc("The storage profile of the VMSS.")
