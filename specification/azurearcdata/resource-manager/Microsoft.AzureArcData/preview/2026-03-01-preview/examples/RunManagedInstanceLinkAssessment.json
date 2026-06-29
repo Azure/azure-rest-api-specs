@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceManagedInstanceLinkAssessmentRequest": {
+      "assessmentCategories": [
+        "SqlInstance",
+        "ManagedInstance",
+        "ManagedInstanceCrossValidation",
+        "DagCrossValidation"
+      ],
+      "availabilityGroupName": "AG_testdb",
+      "azureManagedInstanceResourceId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Sql/managedInstances/testmi",
+      "azureManagedInstanceRole": "Secondary",
+      "databaseNames": [
+        "testdb",
+        "testdb2",
+        "testdb3"
+      ],
+      "distributedAvailabilityGroupName": "MiLinkDag",
+      "sqlServerIpAddress": "192.168.1.2"
+    },
+    "sqlServerInstanceName": "testsqlserver",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "assessments": [
+          {
+            "name": "MicrosoftPkiCertificate",
+            "additionalInformation": "Placeholder additional information",
+            "category": "Certificates",
+            "information": "Microsoft PKI certificate trust configured",
+            "status": "Success"
+          },
+          {
+            "name": "DatabaseMirroringEndpoint",
+            "additionalInformation": "Placeholder additional information",
+            "category": "SqlInstance",
+            "information": "Database Mirroring Endpoint present",
+            "status": "Success"
+          },
+          {
+            "name": "DatabaseMirroringEndpointAuthentication",
+            "additionalInformation": "Placeholder additional information",
+            "category": "SqlInstance",
+            "information": "Database Mirroring Endpoint secured with a certificate",
+            "status": "Success"
+          },
+          {
+            "name": "DatabaseMirroringEndpointEncryption",
+            "additionalInformation": "Placeholder additional information",
+            "category": "SqlInstance",
+            "information": "Database Mirroring Endpoint encryption enabled",
+            "status": "Success"
+          },
+          {
+            "name": "DatabaseMirroringEndpointEncryptionAlgorithm",
+            "additionalInformation": "Placeholder additional information",
+            "category": "SqlInstance",
+            "information": "Database Mirroring Endpoint encryption algorithm is AES",
+            "status": "Success"
+          },
+          {
+            "name": "AlwaysOn",
+            "additionalInformation": "Placeholder additional information",
+            "category": "SqlInstance",
+            "information": "Always-On Availability Groups enabled",
+            "status": "Failure"
+          },
+          {
+            "name": "DatabaseNameNotInUse",
+            "additionalInformation": "There must not already be a database with the same name as any of the SQL Server databases selected for MI Link.",
+            "category": "ManagedInstanceDatabase",
+            "failingDbs": [
+              "testdb2"
+            ],
+            "information": "Database name not already in use",
+            "status": "Failure"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2026-03-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2026-03-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "SqlServerInstances_runManagedInstanceLinkAssessment",
+  "title": "Runs Managed Instance Link Assessments and retrieves the results"
+}
