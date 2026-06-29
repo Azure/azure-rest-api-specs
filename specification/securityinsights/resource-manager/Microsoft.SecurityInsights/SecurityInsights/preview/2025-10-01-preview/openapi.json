@@ -26427,33 +26427,6 @@
       "type": "object",
       "description": "Scheduled alert rule base property bag.",
       "properties": {
-        "query": {
-          "type": "string",
-          "description": "The query that creates alerts for this rule."
-        },
-        "queryFrequency": {
-          "type": "string",
-          "format": "duration",
-          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
-        },
-        "queryPeriod": {
-          "type": "string",
-          "format": "duration",
-          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
-        },
-        "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The severity for alerts created by this alert rule."
-        },
-        "triggerOperator": {
-          "$ref": "#/definitions/TriggerOperator",
-          "description": "The operation against the threshold that triggers alert rule."
-        },
-        "triggerThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The threshold triggers this alert rule."
-        },
         "alertRuleTemplateName": {
           "type": "string",
           "description": "The Name of the alert rule template used to create this rule."
@@ -26516,12 +26489,6 @@
         }
       },
       "required": [
-        "query",
-        "queryFrequency",
-        "queryPeriod",
-        "severity",
-        "triggerOperator",
-        "triggerThreshold",
         "displayName",
         "enabled",
         "suppressionDuration",

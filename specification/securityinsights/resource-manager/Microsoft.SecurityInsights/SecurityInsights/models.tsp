@@ -9799,36 +9799,6 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ScheduledAlertRuleProperties extends ScheduledAlertRuleCommonProperties {
   /**
-   * The query that creates alerts for this rule.
-   */
-  query: string;
-
-  /**
-   * The frequency (in ISO 8601 duration format) for this alert rule to run.
-   */
-  queryFrequency: duration;
-
-  /**
-   * The period (in ISO 8601 duration format) that this alert rule looks at.
-   */
-  queryPeriod: duration;
-
-  /**
-   * The severity for alerts created by this alert rule.
-   */
-  severity: AlertSeverity;
-
-  /**
-   * The operation against the threshold that triggers alert rule.
-   */
-  triggerOperator: TriggerOperator;
-
-  /**
-   * The threshold triggers this alert rule.
-   */
-  triggerThreshold: int32;
-
-  /**
    * The Name of the alert rule template used to create this rule.
    */
   alertRuleTemplateName?: string;
