@@ -107,6 +107,7 @@ using Microsoft.Network;
 );
 @@clientName(TxtRecord.value, "Values", "csharp");
 @@clientName(RecordSetProperties, "DnsRecordSetProperties", "csharp");
+@@clientName(RecordSets.update::parameters.properties, "data", "csharp");
 
 @@alternateType(DnssecConfig.etag, Azure.Core.eTag, "csharp");
 @@alternateType(RecordSet.etag, Azure.Core.eTag, "csharp");

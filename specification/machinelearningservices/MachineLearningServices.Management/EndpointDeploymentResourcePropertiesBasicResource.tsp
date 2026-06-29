@@ -72,7 +72,9 @@ interface EndpointDeploymentResourcePropertiesBasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningWorkspaceConnectionDeployment"
     > {}
 
 /**
@@ -164,7 +166,9 @@ interface EndpointDeploymentOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         deploymentName: string,
-      }
+      },
+      ErrorResponse,
+      "EndpointDeployment"
     > {}
 
 /**

@@ -46,6 +46,8 @@ jobs:
 
           # powershell glob syntax
           $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
+          # regex syntax, for files synced from Azure/azure-sdk-tools
+          $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
           # regex syntax, to support protected paths within larger excluded paths
           $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
@@ -60,7 +62,12 @@ jobs:
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {
-              Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+              if ($azureSdkToolsFiles | Where-Object { $file -match $_ }) {
+                Write-Output "::error file=$file::File '$file' is synced from Azure/azure-sdk-tools and should not be updated directly in this repo."
+              }
+              else {
+                Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
+              }
             }
             exit 1
           }

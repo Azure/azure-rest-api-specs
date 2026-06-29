@@ -34,6 +34,7 @@ import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
   execAsync,
+  isPrivateSpecRepo,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
@@ -384,7 +385,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
-        if (commandInput.sdkLanguage === "azure-sdk-for-python") {
+        if (
+          commandInput.sdkLanguage === "azure-sdk-for-python" &&
+          !isPrivateSpecRepo(commandInput.specRepoHttpsUrl)
+        ) {
           const pythonPackageValidation = await validatePythonPackagesOnPyPI(
             executionReport.packages,
           );
