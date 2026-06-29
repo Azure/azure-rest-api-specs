@@ -4837,6 +4837,11 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   "AzurefilesShare",
   "csharp"
 );
+@@clientName(
+  OutboundVnetRouting.managedIdentityTraffic,
+  "IsManagedIdentityTrafficEnabled",
+  "csharp"
+);
 
 // Additional renames for missing GA members.
 @@clientName(DetectorAbnormalTimePeriod.type, "IssueType", "csharp");
@@ -5646,6 +5651,11 @@ union ConfigReferenceSource {
 @@clientName(BillingMeterProperties.osType, "OSType", "csharp");
 @@clientName(MSDeployCore.dbType, "DBType", "csharp");
 @@clientName(
+  SiteProperties.siteScopedCertificatesEnabled,
+  "IsSiteScopedCertificatesEnabled",
+  "csharp"
+);
+@@clientName(
   SiteProperties.outboundIpAddresses,
   "OutboundIPAddresses",
   "csharp"
@@ -5859,6 +5869,11 @@ union ConfigReferenceSource {
 @@clientName(
   SiteConfig.acrUserManagedIdentityID,
   "AcrUserManagedIdentityId",
+  "csharp"
+);
+@@clientName(
+  SitePatchResourceProperties.siteScopedCertificatesEnabled,
+  "IsSiteScopedCertificatesEnabled",
   "csharp"
 );
 @@clientName(
@@ -6096,6 +6111,64 @@ union ConfigReferenceSource {
   "csharp"
 );
 @@clientName(MigrateMySqlRequest, "MigrateMySqlContent", "csharp");
+@@clientName(
+  SiteContainerCollection,
+  "AppServiceSiteContainerListResult",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeter,
+  "AppServiceNetworkSecurityPerimeter",
+  "csharp"
+);
+@@alternateType(NetworkSecurityPerimeter.perimeterGuid, uuid, "csharp");
+@@alternateType(NetworkSecurityPerimeter.location, azureLocation, "csharp");
+@@clientName(
+  NetworkSecurityPerimeterConfiguration,
+  "AppServiceNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterConfigurationProperties,
+  "AppServiceNetworkSecurityPerimeterConfigurationProperties",
+  "csharp"
+);
+@@clientName(NspProfile, "AppServiceNetworkSecurityPerimeterProfile", "csharp");
+@@clientName(
+  NspProfileAccessRule,
+  "AppServiceNetworkSecurityPerimeterProfileAccessRule",
+  "csharp"
+);
+@@clientName(
+  NspProfileAccessRuleGranularFeature,
+  "AppServiceNetworkSecurityPerimeterProfileGranularFeature",
+  "csharp"
+);
+@@clientName(
+  NspProfileAccessRuleProperties,
+  "AppServiceNetworkSecurityPerimeterProfileAccessRuleProperties",
+  "csharp"
+);
+@@clientName(
+  NspProvisioningIssue,
+  "AppServiceNetworkSecurityPerimeterProfileProvisioningIssue",
+  "csharp"
+);
+@@clientName(
+  NspProvisioningIssueProperties,
+  "AppServiceNetworkSecurityPerimeterProfileProvisioningIssueProperties",
+  "csharp"
+);
+@@clientName(
+  NspResourceAssociation,
+  "AppServiceNetworkSecurityPerimeterProfileResourceAssociation",
+  "csharp"
+);
+@@clientName(
+  NspSubscription,
+  "AppServiceNetworkSecurityPerimeterProfileSubscription",
+  "csharp"
+);
 
 @@usage(
   ValidateProperties,
@@ -6982,5 +7055,3 @@ model WebAppProcessThreadProperties {
   WebAppProcessThreadProperties[],
   "csharp"
 );
-
-@@clientName(SiteContainerCollection, "SiteContainerListResult", "csharp");
