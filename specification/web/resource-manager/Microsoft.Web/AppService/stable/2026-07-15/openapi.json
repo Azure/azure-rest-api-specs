@@ -12636,7 +12636,9 @@
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/OneDeployStatus"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -12669,12 +12671,23 @@
             "description": "Name of the app.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The OneDeploy publish request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OneDeployRequest"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
-            "schema": {}
+            "schema": {
+              "$ref": "#/definitions/OneDeployStatus"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -25463,6 +25476,111 @@
           "404": {
             "description": "The server cannot find the requested resource.",
             "x-ms-error-response": true
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy": {
+      "get": {
+        "operationId": "WebApps_GetOneDeployStatusSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "description": "Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneDeployStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "WebApps_CreateOneDeployOperationSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Invoke the OneDeploy publish web app extension.",
+        "description": "Description for Invoke the OneDeploy publish web app extension.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The OneDeploy publish request.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/OneDeployRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OneDeployStatus"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -48654,6 +48772,155 @@
         "id": {
           "type": "string",
           "description": "Network Security Perimeter Subscription Id"
+        }
+      }
+    },
+    "OneDeployRequest": {
+      "type": "object",
+      "description": "Request body for invoking the OneDeploy publish web app extension.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OneDeployRequestProperties",
+          "description": "OneDeploy publish request properties."
+        }
+      }
+    },
+    "OneDeployRequestProperties": {
+      "type": "object",
+      "description": "Properties of a OneDeploy publish request.",
+      "properties": {
+        "packageUri": {
+          "type": "string",
+          "description": "URI of the package to deploy. The package is pulled from this location during deployment."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the artifact being deployed (for example, zip, war, jar, ear, static, startup)."
+        },
+        "pullIdentity": {
+          "type": "string",
+          "description": "Client ID of the managed identity used to pull the package from packageUri."
+        },
+        "path": {
+          "type": "string",
+          "description": "Target path to which the artifact is deployed (for example, /home/site/wwwroot)."
+        }
+      }
+    },
+    "OneDeployStatus": {
+      "type": "object",
+      "description": "OneDeploy deployment status resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/OneDeployStatusProperties",
+          "description": "OneDeploy status resource specific properties."
+        }
+      }
+    },
+    "OneDeployStatusProperties": {
+      "type": "object",
+      "description": "OneDeploy status resource specific properties.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Deployment ID."
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Deployment status."
+        },
+        "status_text": {
+          "type": "string",
+          "description": "Details about deployment status."
+        },
+        "author_email": {
+          "type": "string",
+          "description": "Author email."
+        },
+        "author": {
+          "type": "string",
+          "description": "Who authored the deployment."
+        },
+        "deployer": {
+          "type": "string",
+          "description": "Who performed the deployment."
+        },
+        "message": {
+          "type": "string",
+          "description": "Details about deployment."
+        },
+        "progress": {
+          "type": "string",
+          "description": "Deployment progress."
+        },
+        "received_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when the deployment request was received."
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time."
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time."
+        },
+        "last_success_end_time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of the last successful deployment."
+        },
+        "complete": {
+          "type": "boolean",
+          "description": "True if deployment has completed."
+        },
+        "active": {
+          "type": "boolean",
+          "description": "True if deployment is currently active, false if completed and null if not started."
+        },
+        "is_temp": {
+          "type": "boolean",
+          "description": "True if this is a temporary deployment."
+        },
+        "is_readonly": {
+          "type": "boolean",
+          "description": "True if this deployment is read-only."
+        },
+        "url": {
+          "type": "string",
+          "description": "Deployment URL."
+        },
+        "log_url": {
+          "type": "string",
+          "description": "Deployment log URL."
+        },
+        "site_name": {
+          "type": "string",
+          "description": "Name of the site."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the deployment.",
+          "readOnly": true
         }
       }
     },

@@ -100,6 +100,54 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
+    reason: OneDeploy is an extension action endpoint matching the existing service API, not a standard ARM resource path.
+  - suppress: PathForNestedResource
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"]
+    reason: OneDeploy is an extension action endpoint matching the existing service API, not a standard ARM nested resource.
+  - suppress: PutResponseCodes
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+    reason: OneDeploy is a synchronous extension action that returns 200 only, matching the existing service API.
+  - suppress: PutRequestResponseSchemeArm
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+    reason: OneDeploy is an extension action whose request (publish parameters) and response (deployment status) are intentionally different shapes, matching the existing service API.
+  - suppress: XmsResourceInPutResponse
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/extensions/onedeploy"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/extensions/onedeploy"].put
+    reason: OneDeploy status response is an action result, not a tracked Azure resource.
+  - suppress: ArmResourcePropertiesBag
+    from: openapi.json
+    where: $.definitions.OneDeployStatus
+    reason: OneDeploy status mirrors the existing service deployment-status payload, which includes a deployment id inside the properties bag.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: openapi.json
+    where:
+      - $.definitions.OneDeployStatusProperties.properties.status_text
+      - $.definitions.OneDeployStatusProperties.properties.author_email
+      - $.definitions.OneDeployStatusProperties.properties.received_time
+      - $.definitions.OneDeployStatusProperties.properties.start_time
+      - $.definitions.OneDeployStatusProperties.properties.end_time
+      - $.definitions.OneDeployStatusProperties.properties.last_success_end_time
+      - $.definitions.OneDeployStatusProperties.properties.is_temp
+      - $.definitions.OneDeployStatusProperties.properties.is_readonly
+      - $.definitions.OneDeployStatusProperties.properties.log_url
+      - $.definitions.OneDeployStatusProperties.properties.site_name
+    reason: OneDeploy status field names use the snake_case names returned by the existing service API for client compatibility.
 ```
 
 ### Tag: package-2026-07

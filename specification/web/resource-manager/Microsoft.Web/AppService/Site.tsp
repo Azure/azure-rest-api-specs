@@ -509,7 +509,7 @@ interface Sites {
   getOneDeployStatus is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<unknown>,
+    ArmResponse<OneDeployStatus>,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -522,8 +522,9 @@ interface Sites {
   @action("extensions/onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
     Site,
-    void,
-    ArmResponse<unknown>,
+    OneDeployRequest,
+    ArmResponse<OneDeployStatus>,
+    OptionalRequestBody = true,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1988,6 +1989,36 @@ interface WebApps {
   >;
 
   /**
+   * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
+   */
+  @added(Versions.v2026_07_15)
+  @summary("Invoke onedeploy status API /api/deployments and gets the deployment status for the site")
+  @get
+  @action("extensions/onedeploy")
+  getOneDeployStatusSlot is WebAppOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<OneDeployStatus>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Invoke the OneDeploy publish web app extension.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_07_15)
+  @summary("Invoke the OneDeploy publish web app extension.")
+  @put
+  @action("extensions/onedeploy")
+  createOneDeployOperationSlot is WebAppOps.ActionSync<
+    Site,
+    OneDeployRequest,
+    ArmResponse<OneDeployStatus>,
+    OptionalRequestBody = true,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
    * Description for Get host secrets for a function app.
    */
   @summary("Get host secrets for a function app.")
@@ -2817,6 +2848,29 @@ interface WebApps {
   "The access key type."
 );
 @@doc(SiteWorkflows.validate::parameters.body, "The workflow.");
+@@typeChangedFrom(
+  Sites.createOneDeployOperation::parameters.body,
+  Versions.v2026_07_15,
+  void
+);
+@@returnTypeChangedFrom(
+  Sites.getOneDeployStatus,
+  Versions.v2026_07_15,
+  ArmResponse<unknown> | DefaultErrorResponse
+);
+@@returnTypeChangedFrom(
+  Sites.createOneDeployOperation,
+  Versions.v2026_07_15,
+  ArmResponse<unknown> | DefaultErrorResponse
+);
+@@doc(
+  Sites.createOneDeployOperation::parameters.body,
+  "The OneDeploy publish request."
+);
+@@doc(
+  WebApps.createOneDeployOperationSlot::parameters.body,
+  "The OneDeploy publish request."
+);
 @@doc(
   WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."

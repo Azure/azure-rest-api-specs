@@ -16474,3 +16474,177 @@ model StaticSitesOperationStatus {
    */
   properties?: StaticSitesOperationStatusProperties;
 }
+
+/**
+ * Request body for invoking the OneDeploy publish web app extension.
+ */
+model OneDeployRequest {
+  /**
+   * OneDeploy publish request properties.
+   */
+  properties?: OneDeployRequestProperties;
+}
+
+/**
+ * Properties of a OneDeploy publish request.
+ */
+model OneDeployRequestProperties {
+  /**
+   * URI of the package to deploy. The package is pulled from this location during deployment.
+   */
+  packageUri?: string;
+
+  /**
+   * Type of the artifact being deployed (for example, zip, war, jar, ear, static, startup).
+   */
+  type?: string;
+
+  /**
+   * Client ID of the managed identity used to pull the package from packageUri.
+   */
+  pullIdentity?: string;
+
+  /**
+   * Target path to which the artifact is deployed (for example, /home/site/wwwroot).
+   */
+  path?: string;
+}
+
+/**
+ * OneDeploy deployment status resource.
+ */
+model OneDeployStatus {
+  /**
+   * Fully qualified resource ID for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The name of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The type of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * OneDeploy status resource specific properties.
+   */
+  properties?: OneDeployStatusProperties;
+}
+
+/**
+ * OneDeploy status resource specific properties.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the service's published snake_case deployment status field names to align with existing OneDeploy clients; follow aka.ms/tsp/conversion-fix for details."
+model OneDeployStatusProperties {
+  /**
+   * Deployment ID.
+   */
+  id?: string;
+
+  /**
+   * Deployment status.
+   */
+  status?: int32;
+
+  /**
+   * Details about deployment status.
+   */
+  status_text?: string;
+
+  /**
+   * Author email.
+   */
+  author_email?: string;
+
+  /**
+   * Who authored the deployment.
+   */
+  author?: string;
+
+  /**
+   * Who performed the deployment.
+   */
+  deployer?: string;
+
+  /**
+   * Details about deployment.
+   */
+  message?: string;
+
+  /**
+   * Deployment progress.
+   */
+  progress?: string;
+
+  /**
+   * Time when the deployment request was received.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  received_time?: utcDateTime;
+
+  /**
+   * Start time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  start_time?: utcDateTime;
+
+  /**
+   * End time.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  end_time?: utcDateTime;
+
+  /**
+   * Time of the last successful deployment.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  last_success_end_time?: utcDateTime;
+
+  /**
+   * True if deployment has completed.
+   */
+  complete?: boolean;
+
+  /**
+   * True if deployment is currently active, false if completed and null if not started.
+   */
+  active?: boolean;
+
+  /**
+   * True if this is a temporary deployment.
+   */
+  is_temp?: boolean;
+
+  /**
+   * True if this deployment is read-only.
+   */
+  is_readonly?: boolean;
+
+  /**
+   * Deployment URL.
+   */
+  url?: string;
+
+  /**
+   * Deployment log URL.
+   */
+  log_url?: string;
+
+  /**
+   * Name of the site.
+   */
+  site_name?: string;
+
+  /**
+   * Provisioning state of the deployment.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+}
