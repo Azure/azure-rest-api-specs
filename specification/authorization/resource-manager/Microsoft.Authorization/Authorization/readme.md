@@ -240,6 +240,34 @@ input-file:
   - stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
+### Tag: package-2022-04-01-with-deny-assignment-crud
+
+These settings apply only when `--tag=package-2022-04-01-with-deny-assignment-crud` is specified on the command line.
+
+This tag is identical to `package-2022-04-01` except the deny assignment input file is swapped to the
+`2024-07-01-preview` version, which adds the deny assignment `CreateOrUpdate` (PUT) and `Delete` (DELETE)
+operations. It is consumed only by the .NET (`Azure.ResourceManager.Authorization`) AutoRest configuration to
+generate deny assignment create/delete support on top of the existing stable surface.
+
+```yaml $(tag) == 'package-2022-04-01-with-deny-assignment-crud'
+input-file:
+  - stable/2015-07-01/ClassicAdmin.json
+  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - stable/2022-04-01/common-types.json
+  - stable/2020-10-01/EligibleChildResources.json
+  - stable/2020-10-01/RoleAssignmentSchedule.json
+  - stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - stable/2020-10-01/RoleEligibilitySchedule.json
+  - stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - stable/2020-10-01/RoleManagementPolicy.json
+  - stable/2020-10-01/RoleManagementPolicyAssignment.json
+```
+
 ### Tag: package-2022-04-01-only
 
 These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.

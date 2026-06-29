@@ -228,12 +228,12 @@ using Microsoft.Cache;
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
   "SystemAssignedUserAssigned",
-  "javascript"
+  "javascript,go"
 );
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
   "ManagedServiceIdentity",
-  "javascript,python"
+  "javascript,python,go"
 );
 
 // java compatibility mitigations
