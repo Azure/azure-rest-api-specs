@@ -215,8 +215,13 @@ export async function execPnpm(args, options = {}) {
       if (code === 0) {
         settle(() => resolve({ stdout, stderr }));
       } else {
+        // Match the error contract of execFile()/execNpm(), whose message embeds
+        // stderr (e.g. "Command failed: ...\n<stderr>"), so callers asserting on
+        // the thrown message keep working regardless of npm vs pnpm backend.
         const error = /** @type {ExecError} */ (
-          new Error(`pnpm ${allArgs.join(" ")} exited with code ${code}`)
+          new Error(
+            `pnpm ${allArgs.join(" ")} exited with code ${code}${stderr ? `\n${stderr}` : ""}`,
+          )
         );
         error.code = /** @type {any} */ (code);
         fail(error);

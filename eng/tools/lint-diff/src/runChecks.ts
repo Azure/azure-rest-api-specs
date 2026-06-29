@@ -1,4 +1,4 @@
-import { execNpmExec, isExecError } from "@azure-tools/specs-shared/exec";
+import { execPnpmExec, isExecError } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 import { join } from "path";
 
@@ -64,7 +64,7 @@ export async function runChecks(
 
       let lintDiffResult: AutorestRunResult;
       try {
-        const executionResult = await execNpmExec(autorestArgs, {
+        const executionResult = await execPnpmExec(autorestArgs, {
           maxBuffer: MAX_EXEC_BUFFER,
           logger: debugLogger,
         });
