@@ -182,6 +182,14 @@ namespace Azure.AI.Projects;
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
 
+@@clientName(ContinuousEvaluationRuleAction.evalId, "evaluationId");
+
+@@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
+
+@@clientName(AttackStrategy.Base64, "Base_64");
+@@clientName(AttackStrategy.ROT13, "ROT_13");
+
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -325,6 +333,8 @@ union GrammarSyntaxExpandable {
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+
+@@alternateType(RoutineRunStatus, string, "java");
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and
