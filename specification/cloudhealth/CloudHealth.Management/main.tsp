@@ -3,6 +3,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -307,6 +308,10 @@ union RefreshInterval {
 
   @doc("Ten Minutes")
   PT10M: "PT10M",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Fifteen Minutes")
+  PT15M: "PT15M",
 
   @doc("Thirty Minutes")
   PT30M: "PT30M",

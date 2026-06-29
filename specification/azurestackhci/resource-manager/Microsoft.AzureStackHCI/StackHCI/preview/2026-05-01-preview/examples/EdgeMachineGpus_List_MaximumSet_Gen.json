@@ -1,0 +1,80 @@
+{
+  "title": "EdgeMachineGpus_List",
+  "operationId": "EdgeMachineGpus_List",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "api-version": "2026-05-01-preview",
+    "gpuName": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "gpuId": "gpu-001",
+              "manufacturer": "NVIDIA",
+              "model": "GeForce RTX 4090",
+              "status": "Available",
+              "pciLocation": "0000:01:00.0",
+              "assignable": true,
+              "partitionable": true,
+              "assignmentStatus": "Unassigned",
+              "gpuMode": "Unknown",
+              "partitionDetails": {
+                "partitionableGpuName": "PartitionableGpu-001",
+                "partitionSizeMb": "4096",
+                "totalPartitions": 8,
+                "availablePartitions": 6,
+                "assignedPartitions": 2,
+                "availableEncode": "90",
+                "availableDecode": "88",
+                "availableVram": "12 GB",
+                "totalVram": "16 GB",
+                "validPartitionCount": [
+                  "2",
+                  "4",
+                  "8"
+                ],
+                "partitions": [
+                  {
+                    "uniqueId": "partition-001",
+                    "partitionId": 1,
+                    "currentVram": "2 GB",
+                    "currentEncode": "10",
+                    "currentDecode": "12",
+                    "workloadDetail": {
+                      "workloadId": "vm-001",
+                      "workloadName": "GPUVM01",
+                      "workloadStatus": "Running",
+                      "workloadType": "VirtualMachine",
+                      "slotLocation": "PartitionSlot-1"
+                    }
+                  }
+                ]
+              },
+              "acceleratorType": "Discrete",
+              "memoryModel": "Dedicated VRAM",
+              "totalMemoryInBytes": "17179869184",
+              "provisioningState": "Succeeded"
+            },
+            "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/gpus/default",
+            "name": "default",
+            "type": "zsrxohlcu",
+            "systemData": {
+              "createdBy": "zsnvvvbj",
+              "createdByType": "User",
+              "createdAt": "2024-07-01T17:02:21.168Z",
+              "lastModifiedBy": "qxlrx",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-07-01T17:02:21.168Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

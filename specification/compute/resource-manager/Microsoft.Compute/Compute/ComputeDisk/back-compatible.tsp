@@ -106,7 +106,14 @@ using ComputeDisk;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
-
+@@clientName(
+  Snapshots.updateImmutabilityPolicy::parameters.body,
+  "immutabilityPolicyData"
+);
+@@clientName(
+  Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "immutabilityPolicyData"
+);
 @@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
 @@clientLocation(
   DiskRestorePoints.listByRestorePoint,
