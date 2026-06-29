@@ -146,6 +146,11 @@ namespace Microsoft.InsightsCombinedClient;
   "IsAutoResolved",
   "csharp"
 );
+@@clientName(
+  MetricAlertApi.ResolveConfiguration,
+  "MetricAlertResolveConfiguration",
+  "csharp"
+);
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "preserve the shipped C# overload name for resource-scope metric retrieval"
 @@clientName(
   MetricsApi.MetricsOperationGroup.list,
@@ -369,6 +374,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  PrivateLinkScopesApi.PrivateLinkScopeProvisioningState,
+  "MonitorPrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@clientName(
   PrivateLinkScopesApi.ScopedResourceKind,
   "MonitorScopedResourceKind",
   "csharp"
@@ -576,6 +586,22 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.EndpointsSpec,
+  "DataCollectionEndpointsSpec",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.ReferencesSpec,
+  "DataCollectionReferencesSpec",
+  "csharp"
+);
+@@clientName(DataCollectionApi.AgentSetting, "MonitorAgentSetting", "csharp");
+@@clientName(
+  DataCollectionApi.KnownAgentSettingName,
+  "KnownMonitorAgentSettingName",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.StorageBlob,
   "DataCollectionRuleEnrichmentStorageBlob",
   "csharp"
@@ -583,6 +609,16 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   DataCollectionApi.ApplicationInsights,
   "MonitorApplicationInsightsReference",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.PerformanceCountersOTelDataSource,
+  "PerformanceCountersOtelDataSource",
+  "csharp"
+);
+@@clientName(
+  DataCollectionApi.KnownPerformanceCountersOTelDataSourceStreams,
+  "KnownPerformanceCountersOtelDataSourceStreams",
   "csharp"
 );
 @@clientName(
