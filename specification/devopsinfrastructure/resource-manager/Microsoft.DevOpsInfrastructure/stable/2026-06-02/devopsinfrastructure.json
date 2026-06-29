@@ -1060,7 +1060,7 @@
           "type": "array",
           "description": "Specifies VM sizes for instance-mix allocation.",
           "items": {
-            "$ref": "#/definitions/SkuProfileVMSize"
+            "$ref": "#/definitions/VmSize"
           },
           "x-ms-identifiers": [
             "name"
@@ -2235,16 +2235,6 @@
         "keyExportable"
       ]
     },
-    "SkuProfileVMSize": {
-      "type": "object",
-      "description": "Specifies the VM Size.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Specifies the name of the VM Size."
-        }
-      }
-    },
     "Stateful": {
       "type": "object",
       "description": "Stateful profile meaning that the machines will be returned to the pool after running a job.",
@@ -2332,6 +2322,16 @@
             "$ref": "#/definitions/DataDisk"
           },
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "VmSize": {
+      "type": "object",
+      "description": "Specifies the VM Size.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Specifies the name of the VM Size."
         }
       }
     },

@@ -220,11 +220,11 @@ model DevOpsAzureSku {
   @doc("Specifies VM sizes for instance-mix allocation.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   @identifiers(#["name"])
-  vmSizes?: SkuProfileVMSize[];
+  vmSizes?: VmSize[];
 }
 
 @doc("Specifies the VM Size.")
-model SkuProfileVMSize {
+model VmSize {
   @doc("Specifies the name of the VM Size.")
   name?: string;
 }
