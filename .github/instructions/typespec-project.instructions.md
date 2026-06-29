@@ -287,7 +287,7 @@ Users can convert a specification from swagger to typespec by using `tsp-client`
 1. Install the dependencies specified in the package.json at the root of this repository. Command:
 
 ```
-pnpm install --frozen-lockfile
+pnpm ci
 ```
 
 2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `pnpm exec tsp-client convert --swagger-readme <path to your readme>`
@@ -312,7 +312,7 @@ steps:
 ### Additional considerations
 
 - DO ensure you pull in the latest `main` from the Azure/azure-rest-api-specs repo to stay up to date with latest dependencies
-- DO run `pnpm install --frozen-lockfile` to get a clean install of the package.json dependencies
+- DO run `pnpm ci` to get a clean install of the package.json dependencies
 - Avoid modifying the package.json or pnpm-lock.yaml files at the root of the azure-rest-api-specs repo
 - Avoid adding your own package.json or pnpm-lock.yaml files in your project directory
 - Avoid adding multiple tspconfig.yaml files for your service specification

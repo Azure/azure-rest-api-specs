@@ -466,7 +466,7 @@ function New-TypeSpecAPIViewTokens {
     # Generate New TypeSpec APIView Tokens
     git checkout $SourceCommitId
     Write-Host "Installing required dependencies to generate New API review"
-    pnpm install --frozen-lockfile
+    pnpm ci
     LogGroupStart "pnpm ls" 
     pnpm ls
     LogGroupEnd 
@@ -479,7 +479,7 @@ function New-TypeSpecAPIViewTokens {
     # Generate Baseline TypeSpec APIView Tokens 
     git checkout $TargetCommitId
     Write-Host "Installing required dependencies to generate Baseline API review"
-    pnpm install --frozen-lockfile
+    pnpm ci
     LogGroupStart "pnpm ls" 
     pnpm ls
     LogGroupEnd 

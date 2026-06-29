@@ -35,7 +35,7 @@ If you are developing within your own ADO repo first and then submitting into `a
  compilers and Azure Library packages.
 
   ```npm
-     pnpm install --frozen-lockfile
+     pnpm ci
   ```
 
 - Ensure you can run TypeSpec command within the repo folders.

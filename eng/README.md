@@ -34,7 +34,7 @@ Below are code convention we strive to follow in `eng` directory:
   commit the resulting `pnpm-lock.yaml` changes so the lock file stays in sync and free
   of unused dependencies.
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
-  (which reads the `packageManager` field) and runs `pnpm install --frozen-lockfile`.
+  (which reads the `packageManager` field) and runs `pnpm ci`.
 
 ## Linting and prettier
 

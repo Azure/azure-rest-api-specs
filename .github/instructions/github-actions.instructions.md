@@ -33,7 +33,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Testing**: Vitest for unit and integration tests
 - **Linting**: ESLint with TypeScript-aware rules
 - **Formatting**: Prettier with organize-imports plugin
-- **Package Manager**: pnpm workspaces (`pnpm install --frozen-lockfile` for clean installs)
+- **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
 

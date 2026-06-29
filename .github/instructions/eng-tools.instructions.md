@@ -41,7 +41,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 - **Testing**: Vitest for unit and integration tests
 - **Linting**: ESLint (flat config) with TypeScript-aware rules
 - **Formatting**: Prettier with the organize-imports plugin (shared config)
-- **Package Manager**: pnpm workspaces (`pnpm install --frozen-lockfile` for clean installs)
+- **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
 
