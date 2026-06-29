@@ -66,7 +66,10 @@ interface PersistentStorages {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PersistentStorage,
-    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse | ErrorResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+      | ErrorResponse
   >;
 
   /**
@@ -80,6 +83,7 @@ interface PersistentStorages {
 
 @@doc(PersistentStorage.name, "Persistent storage name.");
 @@doc(PersistentStorage.properties, "Properties of a persistent storage.");
-@@doc(PersistentStorages.createOrUpdate::parameters.resource,
+@@doc(
+  PersistentStorages.createOrUpdate::parameters.resource,
   "The resource of persistent storage and its properties"
 );

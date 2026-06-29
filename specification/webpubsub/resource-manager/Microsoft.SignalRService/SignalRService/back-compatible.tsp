@@ -239,18 +239,21 @@ using Microsoft.SignalRService;
 @@clientLocation(UsagesOperationGroup.list, "Usages", "!csharp");
 @@clientName(UsagesOperationGroup.list, "List", "!csharp");
 
-@@clientName(PersistentStorages.createOrUpdate::parameters.resource,
+@@clientName(
+  PersistentStorages.createOrUpdate::parameters.resource,
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PersistentStorage.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PersistentStorage.properties
 );
 
 // PersistentStorages interface operations with WebPubSubPersistentStorages_ prefix
 @@clientLocation(PersistentStorages.get, "WebPubSubPersistentStorages");
 @@clientName(PersistentStorages.get, "Get");
-@@clientLocation(PersistentStorages.createOrUpdate,
+@@clientLocation(
+  PersistentStorages.createOrUpdate,
   "WebPubSubPersistentStorages"
 );
 @@clientName(PersistentStorages.createOrUpdate, "CreateOrUpdate");
