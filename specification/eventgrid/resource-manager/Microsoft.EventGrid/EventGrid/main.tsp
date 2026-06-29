@@ -13,7 +13,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./csharp-customizations.tsp";
+import "./client.tsp";
 import "./CaCertificate.tsp";
 import "./Channel.tsp";
 import "./ClientGroup.tsp";

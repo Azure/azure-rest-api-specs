@@ -652,6 +652,42 @@ union PrivateEndpointConnectionsParentTypeCsharp {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(Subscriptions.getDeliveryAttributes, "csharp");
+
+@@clientName(TlsVersion.`1.0`, "One0", "go,javascript");
+@@clientName(TlsVersion.`1.1`, "One1", "go,javascript");
+@@clientName(TlsVersion.`1.2`, "One2", "go,javascript");
+@@clientName(TlsVersion.`1.0`, "One0", "csharp");
+@@clientName(TlsVersion.`1.1`, "One1", "csharp");
+@@clientName(TlsVersion.`1.2`, "One2", "csharp");
+
+@@clientName(
+  WebHookEventSubscriptionDestinationProperties,
+  "WebhookEventSubscriptionDestinationProperties",
+  "java"
+);
+@@clientName(
+  WebHookEventSubscriptionDestination,
+  "WebhookEventSubscriptionDestination",
+  "java"
+);
+@@clientName(
+  Microsoft.EventGrid,
+  "EventGridManagementClient",
+  "python, javascript"
+);
+@@clientName(TlsVersion.`1.0`, "ONE0", "python");
+@@clientName(TlsVersion.`1.1`, "ONE1", "python");
+@@clientName(TlsVersion.`1.2`, "ONE2", "python");
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ArmResourceProvisioningState",
+  "python"
+);
+@@clientName(
+  Azure.ResourceManager.ResourceProvisioningState,
+  "ArmResourceProvisioningState",
+  "java"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
 @@markAsPageable(EventSubscriptions.getDeliveryAttributes, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "migration"
