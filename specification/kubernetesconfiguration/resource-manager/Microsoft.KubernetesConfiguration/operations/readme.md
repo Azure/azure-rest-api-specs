@@ -43,16 +43,16 @@ input-file:
 suppressions:
   - code: OperationsApiSchemaUsesCommonTypes
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible. This is for existing operations endpoint at resource level.
   - code: OperationsApiTenantLevelOnly
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible. This is for existing operations endpoint at resource level.
   - code: ResourceNameRestriction
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.  
+    reason: Existing service contract needs to be backward compatible.This is for existing operations endpoint at resource level.
   - code: OperationsApiResponseSchema
     from: operations.json
-    reason: Existing service contract needs to be backward compatible.            
+    reason: Existing service contract needs to be backward compatible.This is for existing operations endpoint at resource level.
 ```
 
 ---
