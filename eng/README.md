@@ -22,9 +22,15 @@ Below are code convention we strive to follow in `eng` directory:
 - This repo uses [pnpm] workspaces. **Do not use `npm` or `yarn`.** Running
   `npm install`, `npm ci`, or `yarn` fails fast (npm cannot resolve the `catalog:` and
   `workspace:` dependency protocols), so contributors must use pnpm.
-- You do **not** need to install pnpm manually. The root `package.json` pins the pnpm
-  version via the `packageManager` field, so pnpm self-versions: the first time you run
-  any `pnpm` command it auto-downloads and switches to the pinned version.
+- You must have pnpm installed globally on your machine. The simplest way is to run
+  `npm run install-pnpm`, which installs the exact pinned pnpm version via
+  `npm install -g pnpm@<version>` (the version is read from the root `package.json`
+  `packageManager` field). The command is idempotent and supports `--dry-run`. You can
+  also install pnpm yourself with `npm install -g pnpm`.
+- Once a global pnpm exists, the `packageManager` field keeps it on the pinned version:
+  pnpm self-versions, so running any `pnpm` command auto-downloads and switches to the
+  pinned version. This only works when pnpm is already installed — it cannot bootstrap
+  the initial install, which is what `npm run install-pnpm` is for.
 - Install dependencies from the repo root with `pnpm install`. There is a single
   top-level `pnpm-lock.yaml`; do not add other lock files.
 - We maintain a single `pnpm-workspace.yaml` at the root that lists workspace packages
