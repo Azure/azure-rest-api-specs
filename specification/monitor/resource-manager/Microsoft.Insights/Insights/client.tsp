@@ -427,6 +427,21 @@ namespace Microsoft.InsightsCombinedClient;
   "NspActionGroup",
   "csharp"
 );
+@@clientName(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.getNSP,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.listNSP,
+  "GetNetworkSecurityPerimeterConfigurations",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfigurations.reconcileNSP,
+  "ReconcileNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
 
 // Split DataCollectionEndpoint NSP operations from the main DataCollectionEndpoints client.
 // The main endpoint operations use 2024-03-11, while NSP operations use 2021-10-01.
@@ -443,6 +458,21 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientLocation(
   NetworkSecurityPerimeterApi.DataCollectionEndpoints.reconcileNSP,
   "NspDataCollectionEndpoint",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.getNSP,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.listNSP,
+  "GetNetworkSecurityPerimeterConfigurations",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.DataCollectionEndpoints.reconcileNSP,
+  "ReconcileNetworkSecurityPerimeterConfiguration",
   "csharp"
 );
 @@clientName(
@@ -818,6 +848,21 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorEventHubReceiver",
   "csharp"
 );
+@@clientName(
+  ActionGroupsApi.IncidentReceiver,
+  "MonitorIncidentReceiver",
+  "csharp"
+);
+@@clientName(
+  ActionGroupsApi.IncidentServiceConnection,
+  "MonitorIncidentServiceConnection",
+  "csharp"
+);
+@@clientName(
+  ActionGroupsApi.IncidentManagementService,
+  "MonitorIncidentManagementService",
+  "csharp"
+);
 @@clientName(ActionGroupsApi.ReceiverStatus, "MonitorReceiverStatus", "csharp");
 @@clientName(
   DataCollectionApi.KnownDataCollectionEndpointResourceKind,
@@ -1072,8 +1117,8 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
-  NetworkSecurityPerimeterApi.NetworkSecurityPerimeterConfiguration,
-  "MonitorNetworkSecurityPerimeterConfiguration",
+  Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfiguration,
+  "MonitorNetworkSecurityPerimeterConfigurationData",
   "csharp"
 );
 @@clientName(
@@ -1353,6 +1398,21 @@ model LogSettings {
   NetworkSecurityPerimeterApi.ScheduledQueryRule.reconcileNSP,
   "NspScheduledQueryRule",
   "java"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
+  "GetNetworkSecurityPerimeterConfiguration",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.listNSP,
+  "GetNetworkSecurityPerimeterConfigurations",
+  "csharp"
+);
+@@clientName(
+  NetworkSecurityPerimeterApi.ScheduledQueryRule.reconcileNSP,
+  "ReconcileNetworkSecurityPerimeterConfiguration",
+  "csharp"
 );
 
 @@alternateType(AutoscaleNotification.operation, "Scale", "java");
