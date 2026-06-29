@@ -23569,6 +23569,10 @@
           "$ref": "#/definitions/InterconnectInstanceView",
           "description": "The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.",
           "readOnly": true
+        },
+        "lifecycleHookState": {
+          "type": "string",
+          "description": "The lifecycle hook state of the virtual machine scale set VM, in the form \"<lifecycleHookType>:<state>\" where the type is the lifecycle hook type (e.g. VMScaleSetVMCreateStarting, VMScaleSetVMDeleteStarting) and the state is one of \"waiting\" or \"proceeding\". For example, \"VMScaleSetVMDeleteStarting:waiting\". This is not settable by the customer. It is set only by the platform."
         }
       }
     },

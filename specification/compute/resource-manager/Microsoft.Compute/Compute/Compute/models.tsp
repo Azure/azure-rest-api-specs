@@ -5293,6 +5293,12 @@ model VirtualMachineScaleSetVMInstanceView {
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
   interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * The lifecycle hook state of the virtual machine scale set VM, in the form "<lifecycleHookType>:<state>" where the type is the lifecycle hook type (e.g. VMScaleSetVMCreateStarting, VMScaleSetVMDeleteStarting) and the state is one of "waiting" or "proceeding". For example, "VMScaleSetVMDeleteStarting:waiting". This is not settable by the customer. It is set only by the platform.
+   */
+  @added(Versions.v2026_04_01)
+  lifecycleHookState?: string;
 }
 
 /**
