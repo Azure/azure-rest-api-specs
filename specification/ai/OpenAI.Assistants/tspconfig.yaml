@@ -44,8 +44,15 @@ options:
     custom-types: "FileListResponse,OpenAIPageableListOfAssistant,OpenAIPageableListOfRunStep,OpenAIPageableListOfThreadMessage,OpenAIPageableListOfThreadRun,OpenAIPageableListOfVectorStore,OpenAIPageableListOfVectorStoreFile,UploadFileRequest"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/openai"
-    generate-metadata: false
-    package-details:
+    generateMetadata: true
+    generateSample: true
+    generateTest: true
+    azureSdkForJs: true
+    isModularLibrary: true
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    hierarchyClient: false
+    emitter-output-dir: "{project-root}/sdk/openai/openai-assistants"
+    packageDetails:
       name: "@azure/openai-assistants"
     flavor: azure
