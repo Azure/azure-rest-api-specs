@@ -3,6 +3,7 @@ import path from "node:path";
 import process from "node:process";
 import { parseCliArguments } from "./args.js";
 import { postReleasePlanComment } from "./pr-comment.js";
+import type { TypeSpecProjectInfo } from "./types.js";
 import {
   createAzdskRunner,
   ensureReleasePlan,
@@ -10,7 +11,12 @@ import {
   getNextMonthTarget,
   getSdkReleaseType,
 } from "./release-plan.js";
-import { createOctokit, getTypeSpecProjectInfoFromCommit } from "./typespec-project.js";
+import {
+  checkNewApiVersionLabel,
+  createOctokit,
+  getTypeSpecProjectInfoFromCommit,
+  getTypeSpecProjectInfoFromPr,
+} from "./typespec-project.js";
 
 /**
  * Main CLI entry point.
@@ -19,20 +25,47 @@ export async function main(): Promise<void> {
   try {
     const args = parseCliArguments();
     const octokit = createOctokit(undefined);
-    const commitSha = args.commitSha as string;
-    console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
 
-    const commitResult = await getTypeSpecProjectInfoFromCommit({
-      commitSha,
-      owner: args.owner,
-      repo: args.repo,
-      workspace: args.workspace,
-      octokit,
-    });
+    let projectInfo: TypeSpecProjectInfo | null;
+    let resolvedPrNumber: number | undefined;
+    let hasNewApiVersionLabel: boolean;
 
-    const projectInfo = commitResult.projectInfo;
-    const resolvedPrNumber = commitResult.prNumber;
-    const hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
+    // Use provided PR number if available, otherwise fall back to commit SHA
+    if (args.prNumber) {
+      console.log(`Analyzing PR #${args.prNumber} in ${args.owner}/${args.repo}`);
+
+      projectInfo = await getTypeSpecProjectInfoFromPr({
+        prNumber: args.prNumber,
+        owner: args.owner,
+        repo: args.repo,
+        workspace: args.workspace,
+        octokit,
+      });
+
+      resolvedPrNumber = args.prNumber;
+
+      hasNewApiVersionLabel = await checkNewApiVersionLabel({
+        octokit,
+        owner: args.owner,
+        repo: args.repo,
+        prNumber: args.prNumber,
+      });
+    } else {
+      const commitSha = args.commitSha as string;
+      console.log(`Analyzing commit ${commitSha} in ${args.owner}/${args.repo}`);
+
+      const commitResult = await getTypeSpecProjectInfoFromCommit({
+        commitSha,
+        owner: args.owner,
+        repo: args.repo,
+        workspace: args.workspace,
+        octokit,
+      });
+
+      projectInfo = commitResult.projectInfo;
+      resolvedPrNumber = commitResult.prNumber;
+      hasNewApiVersionLabel = commitResult.hasNewApiVersionLabel;
+    }
 
     const prUrl = resolvedPrNumber
       ? `https://github.com/${args.owner}/${args.repo}/pull/${resolvedPrNumber}`

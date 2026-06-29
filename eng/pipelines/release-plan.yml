@@ -2,6 +2,9 @@ parameters:
   - name: Test-release-Plan
     type: boolean
     default: false
+  - name: PrNumber
+    type: number
+    default: 0
 
 trigger:
   paths:
@@ -65,28 +68,37 @@ stages:
               inlineScript: |
                 $ErrorActionPreference = "Stop"
 
-                $commitSha = "$(Build.SourceVersion)"
-                if ([string]::IsNullOrWhiteSpace($commitSha)) {
-                  Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
-                  $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
-                }
-
-                if ([string]::IsNullOrWhiteSpace($commitSha)) {
-                  Write-Host "##vso[task.logissue type=error]Unable to determine commit SHA from Build.SourceVersion or repository HEAD."
-                  exit 1
-                }
-
-                Write-Host "Using commit SHA: $commitSha"
-
+                $prNumber = ${{ parameters.PrNumber }}
                 $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
 
-                node eng/tools/release-plan/cmd/release-plan.js `
-                  --commit-sha $commitSha `
-                  --repo "$(Build.Repository.Name)" `
-                  --workspace "$(Build.SourcesDirectory)" `
-                  --azsdk-path "$(AZSDK)" `
-                  --test-release-plan "${{ parameters['Test-release-Plan'] }}" `
-                  --output-file $outputPath
+                $nodeArgs = @(
+                  "--repo", "$(Build.Repository.Name)",
+                  "--workspace", "$(Build.SourcesDirectory)",
+                  "--azsdk-path", "$(AZSDK)",
+                  "--test-release-plan", "${{ parameters['Test-release-Plan'] }}",
+                  "--output-file", $outputPath
+                )
+
+                if ($prNumber -gt 0) {
+                  Write-Host "Using PR number: $prNumber"
+                  $nodeArgs += @("--pr-number", $prNumber)
+                } else {
+                  $commitSha = "$(Build.SourceVersion)"
+                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                    Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
+                    $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
+                  }
+
+                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
+                    Write-Host "##vso[task.logissue type=error]Unable to determine commit SHA from Build.SourceVersion or repository HEAD."
+                    exit 1
+                  }
+
+                  Write-Host "Using commit SHA: $commitSha"
+                  $nodeArgs += @("--commit-sha", $commitSha)
+                }
+
+                node eng/tools/release-plan/cmd/release-plan.js @nodeArgs
 
           - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"

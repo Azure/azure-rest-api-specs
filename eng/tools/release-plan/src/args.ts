@@ -14,6 +14,9 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
         type: "string",
         short: "c",
       },
+      "pr-number": {
+        type: "string",
+      },
       repo: {
         type: "string",
         short: "r",
@@ -52,8 +55,15 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
   }
 
   const commitSha = String(values["commit-sha"] ?? "").trim() || undefined;
-  if (!commitSha) {
-    throw new Error("--commit-sha is required.");
+  const prNumberRaw = String(values["pr-number"] ?? "").trim();
+  const prNumber = prNumberRaw ? parseInt(prNumberRaw, 10) : undefined;
+
+  if (!commitSha && !prNumber) {
+    throw new Error("Either --commit-sha or --pr-number is required.");
+  }
+
+  if (prNumber && isNaN(prNumber)) {
+    throw new Error("--pr-number must be a valid number.");
   }
 
   const repoRaw = String(values.repo ?? "").trim();
@@ -75,6 +85,7 @@ export function parseCliArguments(argv: string[] = process.argv.slice(2)): CliAr
 
   return {
     commitSha,
+    prNumber,
     owner,
     repo,
     workspace,
@@ -88,10 +99,11 @@ function showHelp(): void {
   console.log("Release Plan Tool");
   console.log("");
   console.log("Usage:");
-  console.log("  release-plan --commit-sha <sha> [options]");
+  console.log("  release-plan [--commit-sha <sha> | --pr-number <number>] [options]");
   console.log("");
   console.log("Options:");
   console.log("  -c, --commit-sha      Commit SHA to resolve PR or analyze changed files");
+  console.log("      --pr-number       PR number to analyze directly (alternative to --commit-sha)");
   console.log("  -r, --repo            GitHub repository in owner/repo format");
   console.log("  -w, --workspace       Path to local repo root (default: cwd)");
   console.log("      --azsdk-path      Absolute path to the azsdk executable");

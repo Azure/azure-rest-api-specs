@@ -55,6 +55,7 @@ export interface CommitProjectInfoResult {
 
 export interface CliArguments {
   commitSha?: string;
+  prNumber?: number;
   owner: string;
   repo: string;
   workspace: string;
