@@ -23,7 +23,10 @@ export class FormatRule implements Rule {
     stdOutput += stdout;
     errorOutput += stderr;
 
-    [err, stdout, stderr] = await runPnpm(["exec", "prettier", "--write", "tspconfig.yaml"], folder);
+    [err, stdout, stderr] = await runPnpm(
+      ["exec", "prettier", "--write", "tspconfig.yaml"],
+      folder,
+    );
     if (err) {
       success = false;
       errorOutput += err.message;
