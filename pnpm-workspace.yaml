@@ -9,6 +9,9 @@ packages:
 minimumReleaseAge: 720
 
 allowBuilds:
+  # Git-hosted dependency (github:actions/github-script) that pnpm builds via its
+  # "prepare" script. pnpm 11 refuses to build git deps with build scripts unless
+  # they are allowlisted here, failing install with ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED.
   "@actions/github-script": true
   autorest: true
 
