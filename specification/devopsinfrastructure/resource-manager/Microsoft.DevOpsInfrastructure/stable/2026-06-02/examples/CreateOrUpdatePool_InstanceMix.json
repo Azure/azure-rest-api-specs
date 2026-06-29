@@ -1,5 +1,5 @@
 {
-  "title": "Pools_CreateOrUpdate",
+  "title": "Pools_CreateOrUpdate_InstanceMix",
   "operationId": "Pools_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-06-02",
@@ -29,7 +29,15 @@
         "fabricProfile": {
           "kind": "Vmss",
           "sku": {
-            "name": "Standard_D4ads_v5"
+            "name": "Mix",
+            "vmSizes": [
+              {
+                "name": "Standard_E2ads_v5"
+              },
+              {
+                "name": "Standard_D2ads_v5"
+              }
+            ]
           },
           "images": [
             {
@@ -84,7 +92,15 @@
           "fabricProfile": {
             "kind": "Vmss",
             "sku": {
-              "name": "Standard_D4ads_v5"
+              "name": "Mix",
+              "vmSizes": [
+                {
+                  "name": "Standard_E2ads_v5"
+                },
+                {
+                  "name": "Standard_D2ads_v5"
+                }
+              ]
             },
             "images": [
               {
@@ -142,7 +158,15 @@
           "fabricProfile": {
             "kind": "Vmss",
             "sku": {
-              "name": "Standard_D4ads_v5"
+              "name": "Mix",
+              "vmSizes": [
+                {
+                  "name": "Standard_E2ads_v5"
+                },
+                {
+                  "name": "Standard_D2ads_v5"
+                }
+              ]
             },
             "images": [
               {

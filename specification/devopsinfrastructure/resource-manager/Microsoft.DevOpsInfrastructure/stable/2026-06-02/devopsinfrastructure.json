@@ -469,6 +469,9 @@
         "x-ms-examples": {
           "Pools_CreateOrUpdate": {
             "$ref": "./examples/CreateOrUpdatePool.json"
+          },
+          "Pools_CreateOrUpdate_InstanceMix": {
+            "$ref": "./examples/CreateOrUpdatePool_InstanceMix.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1052,6 +1055,16 @@
         "linuxNvmePath": {
           "type": "string",
           "description": "The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified."
+        },
+        "vmSizes": {
+          "type": "array",
+          "description": "Specifies VM sizes for instance-mix allocation.",
+          "items": {
+            "$ref": "#/definitions/SkuProfileVMSize"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2222,22 +2235,6 @@
         "keyExportable"
       ]
     },
-    "SkuProfile": {
-      "type": "object",
-      "description": "Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes.",
-      "properties": {
-        "vmSizes": {
-          "type": "array",
-          "description": "Specifies the VM sizes for the virtual machine scale set.",
-          "items": {
-            "$ref": "#/definitions/SkuProfileVMSize"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
-    },
     "SkuProfileVMSize": {
       "type": "object",
       "description": "Specifies the VM Size.",
@@ -2365,10 +2362,6 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "The network profile of the machines in the pool."
-        },
-        "skuProfile": {
-          "$ref": "#/definitions/SkuProfile",
-          "description": "Specifies the sku profile for the virtual machine scale set."
         }
       },
       "required": [

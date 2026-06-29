@@ -195,10 +195,6 @@ model VmssFabricProfile extends FabricProfile {
 
   @doc("The network profile of the machines in the pool.")
   networkProfile?: NetworkProfile;
-
-  @doc("Specifies the sku profile for the virtual machine scale set.")
-  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
-  skuProfile?: SkuProfile;
 }
 
 @doc("The runtime configuration of the pool.")
@@ -220,12 +216,9 @@ model DevOpsAzureSku {
   @doc("The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
   linuxNvmePath?: string;
-}
 
-@doc("Specifies the sku profile for the virtual machine scale set. With this property the customer is able to specify a list of VM sizes.")
-@added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
-model SkuProfile {
-  @doc("Specifies the VM sizes for the virtual machine scale set.")
+  @doc("Specifies VM sizes for instance-mix allocation.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
   @identifiers(#["name"])
   vmSizes?: SkuProfileVMSize[];
 }
