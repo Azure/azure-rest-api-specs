@@ -28,36 +28,83 @@ using Microsoft.MachineLearningServices;
   PrivateLinkResource.properties
 );
 
-@@clientLocation(ComputeResources.get, "Compute");
-@@clientLocation(ComputeResources.createOrUpdate, "Compute");
+@@clientLocation(ComputeResources.get, "Compute", "!javascript");
+@@clientLocation(ComputeResources.createOrUpdate, "Compute", "!javascript");
+@@clientLocation(ComputeResources.get, "ComputeOperations", "javascript");
+@@clientLocation(
+  ComputeResources.createOrUpdate,
+  "ComputeOperations",
+  "javascript"
+);
 @@clientName(
   ComputeResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(ComputeResources.update, "Compute");
+@@clientLocation(ComputeResources.update, "Compute", "!javascript");
 @@clientName(ComputeResources.update::parameters.properties, "parameters");
-@@clientLocation(ComputeResources.delete, "Compute");
-@@clientLocation(ComputeResources.list, "Compute");
-@@clientLocation(ComputeResources.updateCustomServices, "Compute");
+@@clientLocation(ComputeResources.delete, "Compute", "!javascript");
+@@clientLocation(ComputeResources.list, "Compute", "!javascript");
+@@clientLocation(
+  ComputeResources.updateCustomServices,
+  "Compute",
+  "!javascript"
+);
+@@clientLocation(ComputeResources.update, "ComputeOperations", "javascript");
+@@clientLocation(ComputeResources.delete, "ComputeOperations", "javascript");
+@@clientLocation(ComputeResources.list, "ComputeOperations", "javascript");
+@@clientLocation(
+  ComputeResources.updateCustomServices,
+  "ComputeOperations",
+  "javascript"
+);
 @@clientName(
   ComputeResources.updateCustomServices::parameters.body,
   "customServices"
 );
-@@clientLocation(ComputeResources.listNodes, "Compute");
-@@clientLocation(ComputeResources.listKeys, "Compute");
-@@clientLocation(ComputeResources.updateDataMounts, "Compute");
+@@clientLocation(ComputeResources.listNodes, "Compute", "!javascript");
+@@clientLocation(ComputeResources.listKeys, "Compute", "!javascript");
+@@clientLocation(ComputeResources.updateDataMounts, "Compute", "!javascript");
 @@clientName(ComputeResources.updateDataMounts::parameters.body, "dataMounts");
-@@clientLocation(ComputeResources.start, "Compute");
-@@clientLocation(ComputeResources.stop, "Compute");
-@@clientLocation(ComputeResources.restart, "Compute");
-@@clientLocation(ComputeResources.updateIdleShutdownSetting, "Compute");
+@@clientLocation(ComputeResources.start, "Compute", "!javascript");
+@@clientLocation(ComputeResources.stop, "Compute", "!javascript");
+@@clientLocation(ComputeResources.restart, "Compute", "!javascript");
+@@clientLocation(
+  ComputeResources.updateIdleShutdownSetting,
+  "Compute",
+  "!javascript"
+);
+@@clientLocation(ComputeResources.listNodes, "ComputeOperations", "javascript");
+@@clientLocation(ComputeResources.listKeys, "ComputeOperations", "javascript");
+@@clientLocation(
+  ComputeResources.updateDataMounts,
+  "ComputeOperations",
+  "javascript"
+);
+@@clientLocation(ComputeResources.start, "ComputeOperations", "javascript");
+@@clientLocation(ComputeResources.stop, "ComputeOperations", "javascript");
+@@clientLocation(ComputeResources.restart, "ComputeOperations", "javascript");
+@@clientLocation(
+  ComputeResources.updateIdleShutdownSetting,
+  "ComputeOperations",
+  "javascript"
+);
 @@clientName(
   ComputeResources.updateIdleShutdownSetting::parameters.body,
   "parameters"
 );
-@@clientLocation(ComputeResources.getAllowedResizeSizes, "Compute");
+@@clientLocation(
+  ComputeResources.getAllowedResizeSizes,
+  "Compute",
+  "!javascript"
+);
+@@clientLocation(
+  ComputeResources.getAllowedResizeSizes,
+  "ComputeOperations",
+  "javascript"
+);
 @@clientName(ComputeResources.getAllowedResizeSizes, "getAllowedResizeSizes");
-@@clientLocation(ComputeResources.resize, "Compute");
+@@clientLocation(ComputeResources.resize, "Compute", "!javascript");
+@@clientLocation(ComputeResources.resize, "ComputeOperations", "javascript");
 @@clientName(ComputeResources.resize::parameters.body, "parameters");
 
 @@clientLocation(CodeContainers.get, "RegistryCodeContainers");

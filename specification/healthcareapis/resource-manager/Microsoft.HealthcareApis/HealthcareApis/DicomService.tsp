@@ -14,16 +14,25 @@ namespace Microsoft.HealthcareApis;
 /**
  * The description of Dicom Service
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Workspace)
 model DicomService
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<DicomServiceProperties> {
+  is Azure.ResourceManager.ProxyResource<DicomServiceProperties> {
   ...ResourceNameParameter<
     Resource = DicomService,
     KeyName = "dicomServiceName",
     SegmentName = "dicomservices",
     NamePattern = ""
   >;
+
+  /** The common properties of tracked resources in the service. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  tags?: Record<string>;
+
+  /** The common properties for any location based resource, tracked or proxy. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  location?: string;
 
   /**
    * An etag associated with the resource, used for optimistic concurrency when editing it.

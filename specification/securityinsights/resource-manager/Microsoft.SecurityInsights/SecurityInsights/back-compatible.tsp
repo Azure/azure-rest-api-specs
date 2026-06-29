@@ -319,7 +319,8 @@ using Microsoft.SecurityInsights;
 @@Legacy.flattenProperty(AutomationRule.properties);
 
 @@clientName(Bookmarks.createOrUpdate::parameters.resource, "bookmark");
-@@clientLocation(Bookmarks.expand, "Bookmark");
+@@clientLocation(Bookmarks.expand, "Bookmark", "!javascript");
+@@clientLocation(Bookmarks.expand, "BookmarkOperations", "javascript");
 @@clientName(Bookmarks.expand::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Bookmark.properties);
@@ -560,10 +561,25 @@ using Microsoft.SecurityInsights;
 
 @@clientLocation(
   DataConnectorsCheckRequirementsOperationGroup.post,
-  "DataConnectorsCheckRequirements"
+  "DataConnectorsCheckRequirements",
+  "!javascript"
+);
+@@clientLocation(
+  DataConnectorsCheckRequirementsOperationGroup.post,
+  "DataConnectorsCheckRequirementsOperations",
+  "javascript"
 );
 
-@@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl");
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControl",
+  "!javascript"
+);
+@@clientLocation(
+  SourceControlOperationGroup.listRepositories,
+  "SourceControlOperations",
+  "javascript"
+);
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
 
 @@clientLocation(

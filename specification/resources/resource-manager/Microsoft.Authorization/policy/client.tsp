@@ -23,7 +23,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Retrieves the policy assignment with the given ID.")
-  @scope("java,csharp,go")
+  @scope("java,csharp,go,python")
   @clientLocation(PolicyAssignments)
   @get
   @route("/{+policyAssignmentId}")
@@ -37,7 +37,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Creates or updates a policy assignment.")
-  @scope("java,csharp,go")
+  @scope("java,csharp,go,python")
   @clientLocation(PolicyAssignments)
   @put
   @route("/{+policyAssignmentId}")
@@ -58,7 +58,7 @@ namespace Microsoft.Authorization {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   #suppress "@typespec/http/patch-implicit-optional" "For client"
   @summary("Updates a policy assignment.")
-  @scope("java,csharp,go")
+  @scope("java,csharp,go,python")
   @clientLocation(PolicyAssignments)
   @patch
   @route("/{+policyAssignmentId}")
@@ -78,7 +78,7 @@ namespace Microsoft.Authorization {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For client"
   @summary("Deletes a policy assignment.")
-  @scope("java,csharp,go")
+  @scope("java,csharp,go,python")
   @clientLocation(PolicyAssignments)
   @delete
   @route("/{+policyAssignmentId}")
@@ -414,6 +414,43 @@ namespace Microsoft.Authorization {
   Microsoft.Authorization.PolicySetDefinitionVersions.listByManagementGroup,
   "!csharp"
 );
+
+// TODO: Temporary C# workaround for mgmt resource-detection duplicate method
+// names. Remove these scopes after the generator disambiguates the list-all
+// policy definition version and policy set definition version operations.
+// Track removal in https://github.com/Azure/azure-sdk-for-net/issues/59286.
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAllBuiltins,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAllAtManagementGroup,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicyDefinitionVersionsOperationGroup.listAll,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAllBuiltins,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAllAtManagementGroup,
+  "!csharp"
+);
+@@scope(
+  Microsoft.Authorization.PolicySetDefinitionVersionsOperationGroup.listAll,
+  "!csharp"
+);
+
+// TODO: Temporary C# workaround for mgmt resource-detection duplicate method
+// names. Remove these scopes after the generator disambiguates resource-level
+// policy assignment, exemption, and enrollment list operations.
+// Track removal in https://github.com/Azure/azure-sdk-for-net/issues/59286.
+@@scope(Microsoft.Authorization.PolicyAssignments.listForResource, "!csharp");
+@@scope(Microsoft.Authorization.PolicyExemptions.listForResource, "!csharp");
+@@scope(Microsoft.Authorization.PolicyEnrollments.listForResource, "!csharp");
 
 @@scope(Microsoft.Authorization.Variables.getAtManagementGroup, "!csharp");
 @@scope(

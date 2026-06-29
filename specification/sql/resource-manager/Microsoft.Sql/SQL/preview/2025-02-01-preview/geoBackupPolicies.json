@@ -1,0 +1,333 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "GeoBackupPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies": {
+      "get": {
+        "operationId": "GeoBackupPolicies_List",
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "description": "Gets a list of Geo backup policies for the given database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicyListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Geo backup policies for the given database resource.": {
+            "$ref": "./examples/GeoBackupPoliciesList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/geoBackupPolicies/{geoBackupPolicyName}": {
+      "get": {
+        "operationId": "GeoBackupPolicies_Get",
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "description": "Gets a Geo backup policy for the given database resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "geoBackupPolicyName",
+            "in": "path",
+            "description": "The name of the Geo backup policy. This should always be 'Default'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "GeoBackupPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the specified Geo backup policy.": {
+            "$ref": "./examples/GeoBackupPoliciesGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "GeoBackupPolicies_CreateOrUpdate",
+        "tags": [
+          "GeoBackupPolicies"
+        ],
+        "description": "Create or update a database default Geo backup policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "geoBackupPolicyName",
+            "in": "path",
+            "description": "The name of the Geo backup policy. This should always be 'Default'.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "GeoBackupPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating the geo backup policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'GeoBackupPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'GeoBackupPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/GeoBackupPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a database default Geo backup policy.": {
+            "$ref": "./examples/GeoBackupPoliciesCreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GeoBackupPolicy": {
+      "type": "object",
+      "description": "A Geo backup policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GeoBackupPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Backup policy location.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of geo backup policy.  This is metadata used for the Azure portal experience.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GeoBackupPolicyListResult": {
+      "type": "object",
+      "description": "The response of a GeoBackupPolicy list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The GeoBackupPolicy items on this page",
+          "items": {
+            "$ref": "#/definitions/GeoBackupPolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "GeoBackupPolicyProperties": {
+      "type": "object",
+      "description": "The properties of the geo backup policy.",
+      "properties": {
+        "state": {
+          "$ref": "./common.json#/definitions/GeoBackupPolicyState",
+          "description": "The state of the geo backup policy."
+        },
+        "storageType": {
+          "type": "string",
+          "description": "The storage type of the geo backup policy.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    }
+  },
+  "parameters": {}
+}

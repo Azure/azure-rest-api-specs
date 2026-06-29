@@ -9,6 +9,7 @@ import "./baseVirtualMachineProfile.tsp";
 import "./virtualMachineScaleSet.tsp";
 import "./virtualMachine.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
