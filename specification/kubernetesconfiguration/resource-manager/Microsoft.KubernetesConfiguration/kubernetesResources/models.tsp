@@ -1703,7 +1703,7 @@ model KubernetesEvent {
  * The ARM resource name encodes the kind, Kubernetes name, and namespace
  * (e.g., 'pod-nginx-6d4cf56db6-x7q2p-default', 'upgrade-assessment-current-kube-system').
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "This resource does not have a provisioning state per the original Swagger design"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "KubernetesResources is a read-only resource (GET/LIST only, no PUT) with no provisioning lifecycle, so provisioningState is intentionally omitted."
 model KubernetesResourceProperties {
   /**
    * Kubernetes API version of the represented resource

@@ -12,7 +12,7 @@ using TypeSpec.Http;
 namespace Microsoft.KubernetesConfiguration;
 
 /**
- * Singleton container resource grouping cluster inventory reports.
+ * ARM resource representing a Kubernetes Resource.
  */
 model KubernetesResource
   is Azure.ResourceManager.ProxyResource<KubernetesResourceProperties> {
@@ -75,13 +75,13 @@ alias KubernetesResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface KubernetesResources {
   /**
-   * Get the kubernetesResources singleton for a cluster.
+   * Get the KubernetesResources for a cluster.
    */
   @tag("KubernetesResources")
   get is KubernetesResourceOps.Read<KubernetesResource>;
 
   /**
-   * List kubernetesResources containers for the cluster (currently always a single 'default').
+   * List kubernetesResources containers for the cluster.
    */
   @tag("KubernetesResources")
   list is KubernetesResourceOps.List<KubernetesResource>;
