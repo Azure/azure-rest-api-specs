@@ -8334,6 +8334,12 @@
         "x-ms-examples": {
           "Get NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceGet.json"
+          },
+          "Get NetworkVirtualAppliance in Vhub with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackGet.json"
+          },
+          "Get NetworkVirtualAppliance in VNet with Dual Stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackGet.json"
           }
         }
       },
@@ -8427,6 +8433,18 @@
           },
           "Create SaaS NetworkVirtualAppliance": {
             "$ref": "./examples/NetworkVirtualApplianceSaaSPut.json"
+          },
+          "Create NVA in Vhub with addressFamily having dual stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubDualStackPut.json"
+          },
+          "Create NVA in VNet with addressFamily having dual stack": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetDualStackPut.json"
+          },
+          "Create NVA in Vhub with addressFamily having only IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVhubIPv4Put.json"
+          },
+          "Create NVA in VNet with addressFamily having only IPv4": {
+            "$ref": "./examples/NetworkVirtualApplianceVnetIPv4Put.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -18849,6 +18867,18 @@
         "virtualHub": {
           "$ref": "./common.json#/definitions/Common.SubResource",
           "description": "The Virtual Hub where Network Virtual Appliance is being deployed."
+        },
+        "addressFamily": {
+          "type": "array",
+          "description": "The address families to deploy the NVA in. [\"IPv4\", \"IPv6\"] deploys a dual-stack NVA (both IPv4 and IPv6 configurations on the NICs; vHub/VNet must be dual-stack). [\"IPv4\"], [], or omitted deploys an IPv4-only NVA. [\"IPv6\"] deploys an IPv6-only NVA, which is not supported yet.",
+          "items": {
+            "type": "string",
+            "enum": [ "IPv4", "IPv6" ],
+            "x-ms-enum": {
+              "name": "AddressFamily",
+              "modelAsString": true
+            }
+          }
         },
         "cloudInitConfigurationBlobs": {
           "type": "array",
