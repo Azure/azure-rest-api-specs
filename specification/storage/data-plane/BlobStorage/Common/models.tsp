@@ -2857,3 +2857,10 @@ alias ListBlobsStartFrom = {
   @query
   startFrom?: string;
 };
+
+alias ListBlobsEndBefore = {
+  /** Filters the results to return only blobs whose names are ordered before this value. */
+  @added(Versions.v2026_12_06)
+  @query
+  endBefore?: string;
+};
