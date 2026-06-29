@@ -39,11 +39,6 @@ namespace Microsoft.Search;
  */
 enum Versions {
   /**
-   * The 2023-11-01 API version.
-   */
-  v2023_11_01: "2023-11-01",
-
-  /**
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
