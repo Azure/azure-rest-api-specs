@@ -1312,6 +1312,16 @@ enum MonitorConditionOperator {
   MetricAlertApi.MetricAlertResources.listByName,
   "csharp,java"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "metrics list response has value items and should restore pageable SDK surface"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  MetricsApi.MetricsOperationGroup.list,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "metrics list response has value items and should restore pageable SDK surface"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  MetricsApi.MetricsOperationGroup.listAtSubscriptionScope,
+  "csharp"
+);
 
 // ActivityLogAlerts - rename back to match fluent SDK expected names
 @@clientName(
