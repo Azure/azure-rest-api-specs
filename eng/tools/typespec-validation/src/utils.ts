@@ -1,4 +1,4 @@
-import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { execPnpm, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import {
   getSuppressions as getSuppressionsImpl,
@@ -13,13 +13,13 @@ import { context } from "./index.ts";
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
-// Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
-export async function runNpm(
+// Wraps execPnpm() to return error (and coalesce stdout and stderr) instead of throwing
+export async function runPnpm(
   args: string[],
   cwd?: string,
 ): Promise<[Error | null, string, string]> {
   try {
-    const { stdout, stderr } = await execNpm(args, {
+    const { stdout, stderr } = await execPnpm(args, {
       logger: new ConsoleLogger(),
       maxBuffer: 64 * 1024 * 1024,
       cwd,
