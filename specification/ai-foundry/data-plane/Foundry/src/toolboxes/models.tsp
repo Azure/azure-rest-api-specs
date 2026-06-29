@@ -4,6 +4,7 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
@@ -172,6 +173,7 @@ model OpenApiToolboxTool extends ToolboxTool {
 /**
  * An A2A tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model A2APreviewToolboxTool extends ToolboxTool {
   type: ToolboxA2APreviewToolType;
 
@@ -181,6 +183,7 @@ model A2APreviewToolboxTool extends ToolboxTool {
 /**
  * A browser automation tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
   type: ToolboxBrowserAutomationPreviewToolType;
 
@@ -190,6 +193,7 @@ model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
 /**
  * A reminder tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ReminderPreviewToolboxTool extends ToolboxTool {
   type: ToolboxReminderPreviewToolType;
 }
@@ -197,6 +201,7 @@ model ReminderPreviewToolboxTool extends ToolboxTool {
 /**
  * A WorkIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model WorkIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxWorkIQPreviewToolType;
 
@@ -206,6 +211,7 @@ model WorkIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A FabricIQ tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model FabricIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxFabricIQPreviewToolType;
 
@@ -215,6 +221,7 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
 /**
  * A toolbox search tool stored in a toolbox.
  */
+@extension("x-ms-foundry-meta", PreviewTool)
 model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
   /**
    * The type of the tool. Always `toolbox_search_preview`.
