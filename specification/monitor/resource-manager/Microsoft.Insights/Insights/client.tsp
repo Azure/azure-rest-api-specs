@@ -587,12 +587,12 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(
   DataCollectionApi.EndpointsSpec,
-  "DataCollectionEndpointsSpec",
+  "DataCollectionEndpointsInfo",
   "csharp"
 );
 @@clientName(
   DataCollectionApi.ReferencesSpec,
-  "DataCollectionReferencesSpec",
+  "DataCollectionReferencesInfo",
   "csharp"
 );
 @@clientName(DataCollectionApi.AgentSetting, "MonitorAgentSetting", "csharp");
@@ -611,6 +611,12 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorApplicationInsightsReference",
   "csharp"
 );
+@@clientName(
+  DataCollectionApi.DirectDataSourcesSpec,
+  "DataCollectionRuleDirectDataSourcesBase",
+  "csharp"
+);
+@@clientName(DataCollectionApi.LogsQuotaSpec, "LogsQuotaInfo", "csharp");
 @@clientName(
   DataCollectionApi.PerformanceCountersOTelDataSource,
   "PerformanceCountersOtelDataSource",
