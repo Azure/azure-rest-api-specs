@@ -11,7 +11,16 @@
 
 # Prior suppression currently superseded by the above:
 
-# - tool: TypeSpecValidation
+- tool: TypeSpecValidation
+  reason: >
+     Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
+  rules: [EmitAutorest]
+  paths:
+    - "."
+    - "**"
+  # sub-rules:
+  #   -
+  #   -
 #   paths:
 #     - tspconfig.yaml
 #   rules:

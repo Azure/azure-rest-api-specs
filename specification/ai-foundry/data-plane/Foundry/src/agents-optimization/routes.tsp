@@ -68,5 +68,4 @@ interface AgentOptimizationJobs {
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v2_preview>;
-
 }

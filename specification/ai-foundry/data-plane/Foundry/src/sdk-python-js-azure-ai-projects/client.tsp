@@ -100,8 +100,16 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, exact("MEMORY_16GB"), "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, exact("MEMORY_64GB"), "python");
 
-@@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11, exact("WEB_SEARCH_PREVIEW_2025_03_11"), "python");
-@@clientName(OpenAI.RankerVersionType.`default-2024-11-15`, exact("DEFAULT_2024_11_15"), "python");
+@@clientName(
+  OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11,
+  exact("WEB_SEARCH_PREVIEW_2025_03_11"),
+  "python"
+);
+@@clientName(
+  OpenAI.RankerVersionType.`default-2024-11-15`,
+  exact("DEFAULT_2024_11_15"),
+  "python"
+);
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
@@ -121,7 +129,11 @@ using Azure.AI.Projects;
 @@access(SessionFileWriteResponse, Access.public);
 
 // Since we hand-write a method "download_session_file_to_path", we need to rename this one so the difference is clear:
-@@clientName(AgentSessionFiles.downloadSessionFile, "download_session_file_as_bytes", "python");
+@@clientName(
+  AgentSessionFiles.downloadSessionFile,
+  "download_session_file_as_bytes",
+  "python"
+);
 
 @@clientName(UploadSessionFileParams.path, "remote_path", "python");
 @@clientName(DownloadSessionFileParams.path, "remote_path", "python");
@@ -144,8 +156,6 @@ using Azure.AI.Projects;
   "python"
 );
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
-
-
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client

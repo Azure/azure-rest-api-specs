@@ -81,7 +81,10 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
-@@clientName(_PreviewAgentToolType.fabric_dataagent_preview, "FABRIC_DATA_AGENT_PREVIEW");
+@@clientName(
+  _PreviewAgentToolType.fabric_dataagent_preview,
+  "FABRIC_DATA_AGENT_PREVIEW"
+);
 
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
@@ -673,4 +676,3 @@ union WebSearchToolSearchContextSizeExpandable {
 // of our own, to prevent confusion.
 @@clientName(Conversations.listConversations, "listAgentConversations", "java");
 @@clientLocation(Conversations.listConversations, Agents);
-
