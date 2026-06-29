@@ -94,6 +94,7 @@ namespace Azure.AI.Projects {
        * If not provided, the service assumes auto.
        */
       #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Copying existing union type."
+      @Azure.ClientGenerator.Core.alternateType(unknown, "go")
       container?: string | OpenAI.AutoCodeInterpreterToolParam,
     }
   );
