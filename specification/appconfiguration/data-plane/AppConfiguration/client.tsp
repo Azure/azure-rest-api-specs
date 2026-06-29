@@ -55,12 +55,25 @@ namespace SdkCustomizations;
 @@access(getFeatureFlagRevisions, Access.internal, "csharp");
 @@access(checkFeatureFlagRevisions, Access.internal, "csharp");
 
+// Move feature flag operations into a dedicated FeatureFlagClient (all languages)
+@@clientLocation(getFeatureFlag, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlag, "FeatureFlagClient");
+@@clientLocation(getFeatureFlags, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlags, "FeatureFlagClient");
+@@clientLocation(putFeatureFlag, "FeatureFlagClient");
+@@clientLocation(deleteFeatureFlag, "FeatureFlagClient");
+@@clientLocation(getFeatureFlagRevisions, "FeatureFlagClient");
+@@clientLocation(checkFeatureFlagRevisions, "FeatureFlagClient");
+
 // Alternate types for select parameters
 @@alternateType(FeatureFlagRevisionsRequestParams.select, string[], "csharp");
 @@alternateType(FeatureFlagsRequestParams.select, string[], "csharp");
 @@alternateType(KeyValuesRequestParams.select, string[], "csharp");
 @@alternateType(RevisionsRequestParams.select, string[], "csharp");
 @@alternateType(FeatureFlagFilter.parameters, Record<string>, "csharp");
+
+// Surface the feature flag etag as Azure.ETag to match ConfigurationSetting.ETag
+@@alternateType(FeatureFlag.etag, Azure.Core.eTag, "csharp");
 
 // TypeScript specific customizations
 @@clientName(Snapshot.expires, "expiresOn", "javascript");
