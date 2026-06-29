@@ -14815,6 +14815,23 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    EndpointBasedEvaluatorDefinition:
+      type: object
+      required:
+        - type
+        - connection_name
+      properties:
+        type:
+          type: string
+          enum:
+            - endpoint
+        connection_name:
+          type: string
+          minLength: 1
+          description: "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorDefinition'
+      description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -16035,6 +16052,7 @@ components:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
           rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
+          endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
       x-ms-foundry-meta:
         required_previews:
@@ -16050,6 +16068,7 @@ components:
             - service
             - openai_graders
             - rubric
+            - endpoint
       description: The type of evaluator definition
       x-ms-foundry-meta:
         required_previews:
@@ -38205,6 +38224,7 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
