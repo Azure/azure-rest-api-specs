@@ -1076,6 +1076,11 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(MetricsApi.MetadataValue, "MonitorMetadataValue", "csharp");
 @@clientName(MetricsApi.MetricValue, "MonitorMetricValue", "csharp");
 @@clientName(
+  MetricsApi.SubscriptionScopeMetricDefinition,
+  "MonitorSubscriptionScopeMetric",
+  "csharp"
+);
+@@clientName(
   AutoScaleApi.AutoscaleSettingResources.predictiveMetricGet,
   "GetPredictiveMetric",
   "csharp"
