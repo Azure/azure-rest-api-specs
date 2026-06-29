@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -3186,6 +3188,12 @@ model GatewayProperties {
    * Specifies the list of features that are enabled for this Gateway.
    */
   allowedFeatures?: string[];
+
+  /**
+   * Specifies the list of domain names that should bypass the gateway. Each entry must be a valid DNS hostname.
+   */
+  @added(Versions.v2026_06_04_preview)
+  gatewayBypass?: string[];
 }
 
 /**
@@ -3207,6 +3215,12 @@ model GatewayUpdateProperties {
    * Specifies the list of features that are enabled for this Gateway.
    */
   allowedFeatures?: string[];
+
+  /**
+   * Specifies the list of domain names that should bypass the gateway. Each entry must be a valid DNS hostname.
+   */
+  @added(Versions.v2026_06_04_preview)
+  gatewayBypass?: string[];
 }
 
 /**
