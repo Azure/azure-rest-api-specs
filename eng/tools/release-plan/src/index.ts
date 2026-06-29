@@ -3,7 +3,6 @@ import path from "node:path";
 import process from "node:process";
 import { parseCliArguments } from "./args.js";
 import { postReleasePlanComment } from "./pr-comment.js";
-import type { TypeSpecProjectInfo } from "./types.js";
 import {
   createAzdskRunner,
   ensureReleasePlan,
@@ -11,6 +10,7 @@ import {
   getNextMonthTarget,
   getSdkReleaseType,
 } from "./release-plan.js";
+import type { TypeSpecProjectInfo } from "./types.js";
 import {
   checkNewApiVersionLabel,
   createOctokit,

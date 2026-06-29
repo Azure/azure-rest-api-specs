@@ -103,7 +103,9 @@ function showHelp(): void {
   console.log("");
   console.log("Options:");
   console.log("  -c, --commit-sha      Commit SHA to resolve PR or analyze changed files");
-  console.log("      --pr-number       PR number to analyze directly (alternative to --commit-sha)");
+  console.log(
+    "      --pr-number       PR number to analyze directly (alternative to --commit-sha)",
+  );
   console.log("  -r, --repo            GitHub repository in owner/repo format");
   console.log("  -w, --workspace       Path to local repo root (default: cwd)");
   console.log("      --azsdk-path      Absolute path to the azsdk executable");
