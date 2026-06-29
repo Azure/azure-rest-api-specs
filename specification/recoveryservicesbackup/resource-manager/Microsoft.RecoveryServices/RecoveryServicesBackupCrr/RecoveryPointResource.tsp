@@ -15,14 +15,20 @@ namespace Microsoft.RecoveryServices;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Backward compatibility with existing 2023-01-15 CRR API path structure."
 @parentResource(ProtectedItemVirtualResource)
-model RecoveryPointResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {
+model RecoveryPointResource is ProxyResource<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
