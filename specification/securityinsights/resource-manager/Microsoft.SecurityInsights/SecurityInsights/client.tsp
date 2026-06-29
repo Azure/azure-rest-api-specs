@@ -1206,6 +1206,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(TemplateProperties, "SecurityInsightsContentTemplateProperties", "csharp");
 @@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
 @@clientName(JobItem, "SecurityInsightsContentJobItem", "csharp");
+@@clientName(ConnectAuthKind.APIKey, "ApiKey", "csharp");
+@@clientName(EntityType.DNS, "Dns", "csharp");
+@@clientName(EntityType.URL, "Url", "csharp");
+@@clientName(PremiumMdtiDataConnectorProperties.requiredSKUsPresent, "IsRequiredSKUsPresent", "csharp");
+@@clientName(ResourceWithEtag, "SecurityInsightsResourceWithEtag", "csharp");
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
   "listQueryIndicators",
