@@ -50,5 +50,15 @@ export default async function statusCheck({ github, context, core }) {
       context: "Namespace Approval",
       description: "All namespaces approved",
     });
+  } else {
+    core.warning("namespace-review-required is set but no pending or approved labels found");
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: pr.head.sha,
+      state: "pending",
+      context: "Namespace Approval",
+      description: "Namespace review in progress",
+    });
   }
 }

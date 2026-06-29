@@ -94,4 +94,26 @@ describe("status-check", () => {
       expect.objectContaining({ state: "success", context: "Namespace Approval" }),
     );
   });
+
+  it("should set pending when namespace-review-required but no pending or approved labels", async () => {
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { sha: "abc123" },
+        labels: [{ name: "namespace-review-required" }],
+      },
+    });
+
+    await statusCheck(args());
+
+    expect(core.warning).toHaveBeenCalledWith(
+      "namespace-review-required is set but no pending or approved labels found",
+    );
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({
+        state: "pending",
+        context: "Namespace Approval",
+        description: "Namespace review in progress",
+      }),
+    );
+  });
 });

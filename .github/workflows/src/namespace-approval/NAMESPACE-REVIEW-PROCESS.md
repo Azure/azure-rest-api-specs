@@ -26,7 +26,7 @@ The status workflow posts the namespace review comment, applies `<lang>-namespac
 
 ### Status Check
 
-A required status check (`namespace-approval`) blocks merge until all pending namespaces are approved. The check:
+A required status check (`Namespace Approval`) blocks merge until all pending namespaces are approved. The check:
 
 - ✅ Passes when all `*-namespace-pending` labels have corresponding `*-namespace-approved` labels
 - ❌ Fails when any pending namespace lacks approval
