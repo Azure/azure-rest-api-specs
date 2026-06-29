@@ -615,6 +615,9 @@
           "Create or Update Vault With Cost Management Settings": {
             "$ref": "./examples/PUTVault_WithCostManagementSettings.json"
           },
+          "Create or Update Vault With Immutability Config": {
+            "$ref": "./examples/PUTVault_WithImmutabilityConfig.json"
+          },
           "Create or Update Vault With Monitoring Setting": {
             "$ref": "./examples/PUTVault_WithMonitoringSettings.json"
           },
@@ -724,6 +727,9 @@
           },
           "Update Vault With Cost Management Settings": {
             "$ref": "./examples/PATCHVault_WithCostManagementSettings.json"
+          },
+          "Update Vault With Immutability Config": {
+            "$ref": "./examples/PATCHVault_WithImmutabilityConfig.json"
           },
           "Update Vault With Monitoring Setting": {
             "$ref": "./examples/PATCHVault_WithMonitoringSettings.json"
@@ -2075,12 +2081,33 @@
         ]
       }
     },
+    "ImmutabilityConfiguration": {
+      "type": "object",
+      "description": "Immutability configuration of vault.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ImmutabilityType",
+          "description": "Immutability type. 'AsPerPolicy' inherits duration from backup policy; 'TimeBased' requires explicit durationInDays."
+        },
+        "durationInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration in days. Required when type is TimeBased, omitted when AsPerPolicy.",
+          "minimum": 30,
+          "maximum": 36135
+        }
+      }
+    },
     "ImmutabilitySettings": {
       "type": "object",
       "description": "Immutability Settings of vault",
       "properties": {
         "state": {
           "$ref": "#/definitions/ImmutabilityState"
+        },
+        "configuration": {
+          "$ref": "#/definitions/ImmutabilityConfiguration",
+          "description": "Immutability configuration of the vault — selects whether immutability is\ninherited from the backup policy (AsPerPolicy) or fixed for a specific\nduration (TimeBased)."
         }
       }
     },
@@ -2106,6 +2133,30 @@
           {
             "name": "Locked",
             "value": "Locked"
+          }
+        ]
+      }
+    },
+    "ImmutabilityType": {
+      "type": "string",
+      "description": "Immutability config type.",
+      "enum": [
+        "AsPerPolicy",
+        "TimeBased"
+      ],
+      "x-ms-enum": {
+        "name": "ImmutabilityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AsPerPolicy",
+            "value": "AsPerPolicy",
+            "description": "Immutability is governed by policy."
+          },
+          {
+            "name": "TimeBased",
+            "value": "TimeBased",
+            "description": "Immutability duration is time-based."
           }
         ]
       }
