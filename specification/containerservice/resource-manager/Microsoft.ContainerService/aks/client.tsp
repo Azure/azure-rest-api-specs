@@ -1619,3 +1619,5 @@ enum ResourceIdentityType {
 );
 
 @@apiVersion(ResourceSku.apiVersions, false);
+
+@@clientName(BootstrapAzureConfig.bootstrapToken, "BootstrapTokenInfo", "csharp");
