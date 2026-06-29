@@ -746,7 +746,7 @@
         },
         "value": {
           "type": "string",
-          "description": "Literal string value."
+          "description": "Literal string value. Non-secret environment variables only."
         }
       },
       "required": [
@@ -812,24 +812,6 @@
           "description": "Name of the Secret containing the TLS certificate and private key."
         }
       }
-    },
-    "KubernetesAnnotation": {
-      "type": "object",
-      "description": "A single Kubernetes annotation (key/value pair for non-identifying auxiliary metadata).",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Annotation key (e.g., 'kubectl.kubernetes.io/last-applied-configuration').",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "description": "Annotation value."
-        }
-      },
-      "required": [
-        "name"
-      ]
     },
     "KubernetesCondition": {
       "type": "object",
@@ -908,18 +890,18 @@
         "name"
       ]
     },
-    "KubernetesLabel": {
+    "KubernetesMapEntry": {
       "type": "object",
-      "description": "A single Kubernetes label (key/value pair used for selection and grouping).",
+      "description": "A single Kubernetes map entry (key/value pair).",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Label key (e.g., 'app.kubernetes.io/name').",
+          "description": "Map key.",
           "readOnly": true
         },
         "value": {
           "type": "string",
-          "description": "Label value."
+          "description": "Map value."
         }
       },
       "required": [
@@ -965,7 +947,7 @@
           "type": "array",
           "description": "User-defined key/value pairs used for selection and grouping.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
@@ -975,7 +957,7 @@
           "type": "array",
           "description": "Key/value pairs for non-identifying auxiliary metadata.",
           "items": {
-            "$ref": "#/definitions/KubernetesAnnotation"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
@@ -1125,7 +1107,7 @@
           "type": "array",
           "description": "Node label selector constraining which nodes this pod may be scheduled on.\nPopulated for Pod, Deployment, StatefulSet, and DaemonSet resources.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
@@ -1175,7 +1157,7 @@
           "type": "array",
           "description": "Label selector identifying which pods are managed by this workload.\nPopulated for Deployment, StatefulSet, DaemonSet, and ReplicaSet resources.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
@@ -1237,7 +1219,7 @@
           "type": "array",
           "description": "Label selector routing traffic to pods backing this Service.\nPopulated for Service resources.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
@@ -1407,20 +1389,23 @@
         },
         "configMapData": {
           "type": "array",
-          "description": "Key-value pairs stored in the ConfigMap (e.g., configuration files, environment values).\nEach entry maps a string key to a string value.\nPopulated for ConfigMap resources.",
+          "description": "String key-value pairs from the Kubernetes ConfigMap data field (mirrors ConfigMap.data).\nEach entry is a UTF-8 string key and its value.\nPopulated for ConfigMap resources.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"
           ]
         },
-        "configMapBinaryDataKeys": {
+        "configMapBinaryData": {
           "type": "array",
-          "description": "Keys present in the ConfigMap binaryData field.\nBinary values are not captured; only key names are stored for reference.\nPopulated for ConfigMap resources.",
+          "description": "String key-value pairs from the Kubernetes ConfigMap binaryData field (mirrors ConfigMap.binaryData).\nBinaryData can contain byte sequences that are not in the UTF-8 range.",
           "items": {
-            "type": "string"
-          }
+            "$ref": "#/definitions/KubernetesMapEntry"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "configMapImmutable": {
           "type": "boolean",
@@ -1474,7 +1459,7 @@
           "type": "array",
           "description": "Label selector identifying the pods this NetworkPolicy applies to.\nPopulated for NetworkPolicy resources.",
           "items": {
-            "$ref": "#/definitions/KubernetesLabel"
+            "$ref": "#/definitions/KubernetesMapEntry"
           },
           "x-ms-identifiers": [
             "name"

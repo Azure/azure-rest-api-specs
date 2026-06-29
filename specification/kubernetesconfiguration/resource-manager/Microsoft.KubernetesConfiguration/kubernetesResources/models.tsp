@@ -13,25 +13,14 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.KubernetesConfiguration;
 
-/** A single Kubernetes label (key/value pair used for selection and grouping). */
-model KubernetesLabel {
-  /** Label key (e.g., 'app.kubernetes.io/name'). */
+/** A single Kubernetes map entry (key/value pair). */
+model KubernetesMapEntry {
+  /** Map key. */
   @key
   @visibility(Lifecycle.Read)
   name: string;
 
-  /** Label value. */
-  value?: string;
-}
-
-/** A single Kubernetes annotation (key/value pair for non-identifying auxiliary metadata). */
-model KubernetesAnnotation {
-  /** Annotation key (e.g., 'kubectl.kubernetes.io/last-applied-configuration'). */
-  @key
-  @visibility(Lifecycle.Read)
-  name: string;
-
-  /** Annotation value. */
+  /** Map value. */
   value?: string;
 }
 
@@ -94,11 +83,11 @@ model KubernetesObjectMeta {
 
   /** User-defined key/value pairs used for selection and grouping. */
   @identifiers(#["name"])
-  labels?: KubernetesLabel[];
+  labels?: KubernetesMapEntry[];
 
   /** Key/value pairs for non-identifying auxiliary metadata. */
   @identifiers(#["name"])
-  annotations?: KubernetesAnnotation[];
+  annotations?: KubernetesMapEntry[];
 
   /** References to the objects that own this object (e.g., the ReplicaSet that owns a Pod). */
   @identifiers(#["uid"])
@@ -247,7 +236,7 @@ model EnvVar {
   /** Name of the environment variable. */
   name: string;
 
-  /** Literal string value. */
+  /** Literal string value. Non-secret environment variables only. */
   value?: string;
 }
 
@@ -723,6 +712,7 @@ model IngressTls {
   hosts?: string[];
 
   /** Name of the Secret containing the TLS certificate and private key. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "secretName is a Kubernetes Secret object name reference, not a secret value."
   secretName?: string;
 }
 
@@ -765,7 +755,7 @@ model KubernetesResourceSpec {
    * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
    */
   @identifiers(#["name"])
-  nodeSelector?: KubernetesLabel[];
+  nodeSelector?: KubernetesMapEntry[];
 
   /**
    * Name of the PriorityClass governing scheduling priority and preemption for this pod.
@@ -792,6 +782,7 @@ model KubernetesResourceSpec {
    * Names of Secrets used to authenticate image pulls from private registries.
    * Populated for Pod, Deployment, StatefulSet, and DaemonSet resources.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "imagePullSecrets holds Kubernetes Secret object names (references), not secret values."
   imagePullSecrets?: string[];
 
   /**
@@ -816,7 +807,7 @@ model KubernetesResourceSpec {
    * Populated for Deployment, StatefulSet, DaemonSet, and ReplicaSet resources.
    */
   @identifiers(#["name"])
-  selector?: KubernetesLabel[];
+  selector?: KubernetesMapEntry[];
 
   /**
    * Rollout strategy type.
@@ -883,7 +874,7 @@ model KubernetesResourceSpec {
    * Populated for Service resources.
    */
   @identifiers(#["name"])
-  serviceSelector?: KubernetesLabel[];
+  serviceSelector?: KubernetesMapEntry[];
 
   /** External IP addresses accepted by cluster nodes for this Service. Populated for Service resources. */
   externalIps?: string[];
@@ -1100,19 +1091,19 @@ model KubernetesResourceSpec {
   // ── ConfigMap ──────────────────────────────────────────────────────────────
 
   /**
-   * Key-value pairs stored in the ConfigMap (e.g., configuration files, environment values).
-   * Each entry maps a string key to a string value.
+   * String key-value pairs from the Kubernetes ConfigMap data field (mirrors ConfigMap.data).
+   * Each entry is a UTF-8 string key and its value.
    * Populated for ConfigMap resources.
    */
   @identifiers(#["name"])
-  configMapData?: KubernetesLabel[];
+  configMapData?: KubernetesMapEntry[];
 
   /**
-   * Keys present in the ConfigMap binaryData field.
-   * Binary values are not captured; only key names are stored for reference.
-   * Populated for ConfigMap resources.
+   * String key-value pairs from the Kubernetes ConfigMap binaryData field (mirrors ConfigMap.binaryData).
+   * BinaryData can contain byte sequences that are not in the UTF-8 range.
    */
-  configMapBinaryDataKeys?: string[];
+  @identifiers(#["name"])
+  configMapBinaryData?: KubernetesMapEntry[];
 
   /**
    * When true, the ConfigMap is immutable and cannot be updated after creation.
@@ -1188,7 +1179,7 @@ model KubernetesResourceSpec {
    * Populated for NetworkPolicy resources.
    */
   @identifiers(#["name"])
-  podSelectorLabels?: KubernetesLabel[];
+  podSelectorLabels?: KubernetesMapEntry[];
 
   /**
    * Policy directions enforced ('Ingress', 'Egress', or both).
