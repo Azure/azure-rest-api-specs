@@ -1791,6 +1791,11 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(PricingsAPI.Enforce, "SecurityPolicyEnforce", "csharp");
 @@clientName(PricingsAPI.Extension, "SecurityConnectorExtension", "csharp");
 @@clientName(
+  PricingsAPI.Inherited,
+  "SecurityCenterPricingInheritance",
+  "csharp"
+);
+@@clientName(
   PricingsAPI.IsEnabled,
   "SecurityCenterExtensionIsEnabled",
   "csharp"
@@ -1823,6 +1828,16 @@ model CSharpSecurityAssessmentStatusResult
 @@clientName(
   SecuritySolutionsAPI.ConnectionType,
   "SecurityCenterConnectionType",
+  "csharp"
+);
+@@clientName(
+  HealthReportsAPI.StatusName,
+  "SecurityCenterHealthStatus",
+  "csharp"
+);
+@@clientName(
+  GovernanceAPI.OperationResultStatus,
+  "SecurityCenterOperationResultStatus",
   "csharp"
 );
 @@clientName(SecurityStandardsAPI.Effect, "SecurityCenterEffect", "csharp");
