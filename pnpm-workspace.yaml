@@ -13,6 +13,9 @@ allowBuilds:
   # "prepare" script. pnpm 11 refuses to build git deps with build scripts unless
   # they are allowlisted here, failing install with ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED.
   "@actions/github-script": true
+  # Registry package with a "preinstall" script (a Node-version guard). pnpm 11
+  # errors on dependencies whose build scripts are not allowlisted, failing install
+  # with ERR_PNPM_IGNORED_BUILDS unless listed here.
   autorest: true
 
 overrides:
