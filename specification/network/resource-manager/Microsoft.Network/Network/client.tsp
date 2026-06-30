@@ -5404,7 +5404,7 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(
   Microsoft.Network.PolicySettings.captchaCookieExpirationInMins,
-  "captchaCookieExpirationInMinsLegacy",
+  "captchaCookieExpirationInMinsRemoved",
   "java"
 );
 
