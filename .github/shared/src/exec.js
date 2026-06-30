@@ -13,7 +13,7 @@ const execFileImpl = promisify(child_process.execFile);
 
 /**
  * @typedef {Object} NpmPrefixOptions
- * @property {string} [prefix] Prefix to pass to npm/pnpm via "--prefix".
+ * @property {string} [prefix] Prefix to pass to the package manager via "--prefix".
  */
 
 /**
