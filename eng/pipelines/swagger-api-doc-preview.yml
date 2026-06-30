@@ -32,6 +32,10 @@ jobs:
         value: 'Swagger ApiDocPreview'
 
     steps:
+      - checkout: self
+        # Fetch depth required to get list of changed files
+        fetchDepth: 2
+        
       - template: /eng/common/pipelines/templates/steps/login-to-github.yml
 
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
@@ -41,10 +45,6 @@ jobs:
           Description: 'Starting docs build'
           Context: $(StatusName)
           GitHubToken: $(GH_TOKEN)
-
-      - checkout: self
-        # Fetch depth required to get list of changed files
-        fetchDepth: 2
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
