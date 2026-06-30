@@ -129,6 +129,8 @@ using Azure.AI.Projects;
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
 @@access(Agents.createAgentVersionFromCode, Access.internal, "python");
+@@clientName(CreateAgentVersionFromCodeMetadata, "_CreateAgentVersionFromCodeMetadata", "python");
+@@clientName(CreateAgentVersionFromCodeContent, "_CreateAgentVersionFromCodeContent", "python");
 
 @@clientName(Agents.downloadAgentCode, "download_code", "python");
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
