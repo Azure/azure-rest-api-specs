@@ -4216,6 +4216,18 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@clientName(
+  Microsoft.Network.PacketCaptureTargetType.AzureVM,
+  "AzureVm",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.PacketCaptureTargetType.AzureVMSS,
+  "AzureVmss",
+  "csharp"
+);
+
+@@clientName(
   Microsoft.Network.P2SVpnProfileParameters,
   "P2SVpnProfileContent",
   "csharp"
