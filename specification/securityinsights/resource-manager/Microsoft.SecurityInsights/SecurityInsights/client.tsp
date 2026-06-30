@@ -1257,21 +1257,13 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 @@clientName(TIDataConnector, "SecurityInsightsTIDataConnector", "csharp");
-@@clientName(
-  TIDataConnectorDataTypes,
-  "TiDataConnectorDataTypes",
-  "csharp"
-);
+@@clientName(TIDataConnectorDataTypes, "TiDataConnectorDataTypes", "csharp");
 @@clientName(
   TIDataConnectorDataTypesIndicators,
   "TiDataConnectorDataTypesIndicators",
   "csharp"
 );
-@@clientName(
-  TIDataConnectorProperties,
-  "TiDataConnectorProperties",
-  "csharp"
-);
+@@clientName(TIDataConnectorProperties, "TiDataConnectorProperties", "csharp");
 @@clientName(TIObject, "ThreatIntelligenceObject", "csharp");
 @@clientName(TIObjectCommonProperties, "TiObjectCommonProperties", "csharp");
 @@clientName(
