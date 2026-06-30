@@ -343,6 +343,7 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+            AuthToken: $(GH_TOKEN)
 
         - ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           - pwsh: |
