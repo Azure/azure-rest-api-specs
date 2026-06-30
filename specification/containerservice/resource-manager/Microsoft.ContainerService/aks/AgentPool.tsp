@@ -97,7 +97,7 @@ interface AgentPools {
    * Completes the upgrade operation for the specified agent pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_04_02_preview)
   @summary("Completes the upgrade of an agent pool.")
   completeUpgrade is ArmResourceActionAsync<
     AgentPool,
@@ -125,14 +125,16 @@ interface AgentPools {
   upgradeNodeImageVersion is ArmResourceActionAsyncBase<
     AgentPool,
     void,
-    {
-      ...AcceptedResponse;
-      ...ArmCombinedLroHeaders<FinalResult = void>;
-      ...Azure.Core.Foundations.RetryAfterHeader;
 
-      @body
-      body: AgentPool;
-    } | OkResponse,
+      | {
+          ...AcceptedResponse;
+          ...ArmCombinedLroHeaders<FinalResult = void>;
+          ...Azure.Core.Foundations.RetryAfterHeader;
+
+          @body
+          body: AgentPool;
+        }
+      | OkResponse,
     Foundations.DefaultBaseParameters<AgentPool>
   >;
 
@@ -141,7 +143,7 @@ interface AgentPools {
    */
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations/{operationId}")
-  @added(Versions.v2026_02_02_preview)
+  @added(Versions.v2026_04_02_preview)
   getByAgentPool is AgentPoolsOps.ActionSync<
     AgentPool,
     void,
@@ -185,9 +187,11 @@ interface AgentPoolsOps
 @@minLength(AgentPool.name, 1);
 @@doc(AgentPool.name, "The name of the agent pool.");
 @@doc(AgentPool.properties, "Properties of an agent pool.");
-@@doc(AgentPools.createOrUpdate::parameters.resource,
+@@doc(
+  AgentPools.createOrUpdate::parameters.resource,
   "The agent pool to create or update."
 );
-@@doc(AgentPools.deleteMachines::parameters.body,
+@@doc(
+  AgentPools.deleteMachines::parameters.body,
   "A list of machines from the agent pool to be deleted."
 );

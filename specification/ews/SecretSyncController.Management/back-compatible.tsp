@@ -5,14 +5,17 @@ using Microsoft.SecretSyncController;
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AzureKeyVaultSecretProviderClass.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  AzureKeyVaultSecretProviderClass.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SecretSync.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SecretSync.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

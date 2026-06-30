@@ -42,8 +42,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Cluster,
-    Response = ArmResourceUpdatedResponse<Cluster> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResourceUpdatedResponse<Cluster>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -63,7 +65,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Cluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -79,9 +84,11 @@ interface Clusters {
 
 @@doc(Cluster.name, "Name of the Log Analytics Cluster.");
 @@doc(Cluster.properties, "Log Analytics cluster properties.");
-@@doc(Clusters.createOrUpdate::parameters.resource,
+@@doc(
+  Clusters.createOrUpdate::parameters.resource,
   "The parameters required to create or update a Log Analytics cluster."
 );
-@@doc(Clusters.update::parameters.properties,
+@@doc(
+  Clusters.update::parameters.properties,
   "The parameters required to patch a Log Analytics cluster."
 );

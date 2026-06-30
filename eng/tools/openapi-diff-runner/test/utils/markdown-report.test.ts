@@ -1,17 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { LogLevel, logMessage } from "../../src/log.js";
-import { BrChMsgRecord, ResultMessageRecord } from "../../src/types/message.js";
+import { LogLevel, logMessage } from "../../src/log.ts";
+import { type BrChMsgRecord, type ResultMessageRecord } from "../../src/types/message.ts";
 import {
-  BreakingChangeMdReport,
+  type BreakingChangeMdReport,
   createBreakingChangeMdReport,
   getReportLength,
   getRowCount,
   reportToString,
   sortBreakingChangeMdReports,
-} from "../../src/utils/markdown-report.js";
+} from "../../src/utils/markdown-report.ts";
 
 // Mock the log module
-vi.mock("../../src/log.js", () => ({
+vi.mock("../../src/log.ts", () => ({
   logMessage: vi.fn(),
   LogLevel: {
     Info: "Info",

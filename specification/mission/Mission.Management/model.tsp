@@ -14,6 +14,7 @@ import "./resourcetypes/enclaveConnection/enclaveConnection.tsp";
 import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./resourcetypes/postActions/approvalspostactions.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
+import "./resourcetypes/dedicatedHub/dedicatedHub.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
@@ -21,11 +22,13 @@ import "./resourcetypes/workload/workload.tsp";
 import "./resourcetypes/shared/endpointrulebase.tsp";
 import "./resourcetypes/shared/governedserviceitem.tsp";
 import "./resourcetypes/shared/maintenancemodeconfiguration.tsp";
+import "./resourcetypes/shared/monitoring.tsp";
 import "./resourcetypes/shared/managedresourcegroupconfiguration.tsp";
 import "./resourcetypes/shared/principal.tsp";
 import "./resourcetypes/shared/provisioningstate.tsp";
 import "./resourcetypes/shared/resourceid.tsp";
 import "./resourcetypes/shared/roleassignmentitem.tsp";
+import "./resourcetypes/shared/updatemode.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -52,7 +55,8 @@ model CommunityResource is TrackedResource<CommunityProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(CommunityResource.identity,
+@@added(
+  CommunityResource.identity,
   Microsoft.Mission.Versions.v2024_06_01_preview
 );
 
@@ -69,7 +73,8 @@ model EnclaveResource is TrackedResource<VirtualEnclaveProperties> {
   ...ManagedServiceIdentityProperty;
 }
 
-@@added(EnclaveResource.identity,
+@@added(
+  EnclaveResource.identity,
   Microsoft.Mission.Versions.v2024_06_01_preview
 );
 
@@ -92,6 +97,18 @@ model TransitHubResource is TrackedResource<TransitHubProperties> {
   @path
   @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
   @doc("The name of the TransitHub Resource")
+  name: string;
+}
+
+@added(Microsoft.Mission.Versions.v2025_11_01_preview)
+@doc("DedicatedHub Model Resource")
+@parentResource(CommunityResource)
+model DedicatedHubResource is TrackedResource<DedicatedHubProperties> {
+  @key("dedicatedHubName")
+  @segment("dedicatedHubs")
+  @path
+  @pattern("^[a-zA-Z][a-zA-Z0-9-_]*[a-zA-Z0-9]$")
+  @doc("The name of the Dedicated Hub Resource")
   name: string;
 }
 

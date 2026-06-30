@@ -50,7 +50,8 @@ interface WebSiteInstanceStatusOps
         @segment("instances")
         @key
         instanceId: string,
-      }
+      },
+      ResourceName = "SiteInstance"
     > {}
 
 @tag("WebApps")
@@ -102,7 +103,8 @@ interface WebSiteInstanceStatusOperationGroupOps
         @segment("instances")
         @key
         instanceId: string,
-      }
+      },
+      ResourceName = "SiteSlotInstance"
     > {}
 
 @tag("WebApps")
@@ -129,6 +131,7 @@ interface WebSiteInstanceStatusOperationGroup {
 }
 
 @@doc(WebSiteInstanceStatus.name, "");
-@@doc(WebSiteInstanceStatus.properties,
+@@doc(
+  WebSiteInstanceStatus.properties,
   "WebSiteInstanceStatus resource specific properties"
 );

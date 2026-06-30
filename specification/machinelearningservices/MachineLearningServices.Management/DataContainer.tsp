@@ -48,7 +48,9 @@ interface DataContainerOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -74,7 +76,9 @@ interface DataContainerwithNamePatternOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryDataContainer"
     > {}
 
 @armResourceOperations
@@ -92,17 +96,19 @@ interface DataContainers {
   @summary("Create or update container.")
   createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
     DataContainer,
-    Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
-      DataContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<DataContainer>
+      | (ArmResourceCreatedResponse<
+          DataContainer,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = DataContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -112,13 +118,16 @@ interface DataContainers {
   @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -165,7 +174,9 @@ interface DataContainerOperationGroupOps
         @segment("data")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningDataContainer"
     > {}
 
 @armResourceOperations
@@ -212,12 +223,15 @@ interface DataContainerOperationGroup {
 }
 
 @@doc(DataContainer.name, "Container name.");
-@@doc(DataContainer.properties,
+@@doc(
+  DataContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(DataContainers.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(DataContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  DataContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

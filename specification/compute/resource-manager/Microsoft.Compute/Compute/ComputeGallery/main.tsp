@@ -13,8 +13,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./Gallery.tsp";
-import "../common/legacy.tsp";
 import "../common/models-ref.tsp";
+import "../common/operations.tsp";
 import "./GalleryImage.tsp";
 import "./GalleryImageVersion.tsp";
 import "./GalleryApplication.tsp";
@@ -29,6 +29,10 @@ import "./SharedGalleryImageVersion.tsp";
 import "./CommunityGallery.tsp";
 import "./CommunityGalleryImage.tsp";
 import "./CommunityGalleryImageVersion.tsp";
+import "./SharedGallerySubscription.tsp";
+import "./TenantLevelSharedGallerySubscription.tsp";
+import "./SharedGalleryInvite.tsp";
+import "./TenantLevelSharedGalleryInvite.tsp";
 import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
@@ -60,6 +64,11 @@ enum Versions {
    * The 2025-03-03 API version.
    */
   v2025_03_03: "2025-03-03",
+
+  /**
+   * The 2025-12-03 API version.
+   */
+  v2025_12_03: "2025-12-03",
 
   /**
    * The 2026-03-03 API version.

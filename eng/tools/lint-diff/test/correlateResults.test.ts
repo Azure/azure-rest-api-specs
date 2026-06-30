@@ -8,15 +8,15 @@ import {
   getNewItems,
   getViolations,
   isSameSources,
-} from "../src/correlateResults.js";
+} from "../src/correlateResults.ts";
 import {
-  AutorestRunResult,
-  BeforeAfter,
-  LintDiffViolation,
-  Source,
-} from "../src/lintdiff-types.js";
-import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
+  type AutorestRunResult,
+  type BeforeAfter,
+  type LintDiffViolation,
+  type Source,
+} from "../src/lintdiff-types.ts";
+import { relativizePath } from "../src/util.ts";
+import { isWindows } from "./test-util.ts";
 
 const __dirname = new URL(".", import.meta.url).pathname;
 
@@ -458,9 +458,7 @@ describe("getNewItems", () => {
         level: "fatal",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -469,9 +467,7 @@ describe("getNewItems", () => {
         level: "fatal",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -487,18 +483,14 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
       {
         level: "error",
         code: "SomeCode2",
         message: "Some Message",
-        source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
         details: {},
       } as LintDiffViolation,
     ];
@@ -513,22 +505,18 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },
-      } as LintDiffViolation,
+      },
     ];
     const after = [
       {
         level: "error",
         code: "SomeCode1",
         message: "Some Message",
-        source: [
-          { document: "path/to/document1.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document1.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },
@@ -537,9 +525,7 @@ describe("getNewItems", () => {
         level: "error",
         code: "SomeCode2",
         message: "Some Message",
-        source: [
-          { document: "path/to/document2.json", position: { line: 1, colomn: 1 } } as Source,
-        ],
+        source: [{ document: "path/to/document2.json", position: { line: 1, colomn: 1 } }],
         details: {
           jsonpath: ["some", "path"],
         },

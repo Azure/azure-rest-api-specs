@@ -23,6 +23,7 @@ import "./routes.tsp";
 import "./back-compatible.tsp";
 import "./Key.tsp";
 import "./ManagedHsmKey.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

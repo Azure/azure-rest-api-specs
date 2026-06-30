@@ -116,7 +116,8 @@ namespace Azure.AI.Projects {
     name: string;
   }
 
-  @@copyProperties(OpenAI.CreateResponse,
+  @@copyProperties(
+    OpenAI.CreateResponse,
     {
       rai_config?: string,
       internal_metadata?: {
@@ -193,14 +194,16 @@ namespace Azure.AI.Projects {
   }
 
   // Propagate "id" to base of output items, not every union variant
-  @@copyProperties(OpenAI.OutputItem,
+  @@copyProperties(
+    OpenAI.OutputItem,
     {
       id?: string,
     }
   );
 
   // Similarly, propagate "sequence_number" to base of stream events
-  @@copyProperties(OpenAI.ResponseStreamEvent,
+  @@copyProperties(
+    OpenAI.ResponseStreamEvent,
     {
       sequence_number: integer,
     }
@@ -208,7 +211,8 @@ namespace Azure.AI.Projects {
 
   // To allow in/out use of merged conversation message item, make id and status optional
   @@withoutOmittedProperties(OpenAI.Message, "id" | "status");
-  @@copyProperties(OpenAI.Message,
+  @@copyProperties(
+    OpenAI.Message,
     {
       id?: string,
       status?: OpenAI.MessageStatus,
@@ -219,12 +223,14 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.Response, "ResponseObject");
 
   // Remove created_by from specific models to avoid and facilitate base union
-  @@withoutOmittedProperties(OpenAI.OutputItemFunctionShellCallOutput,
+  @@withoutOmittedProperties(
+    OpenAI.OutputItemFunctionShellCallOutput,
     "created_by"
   );
   @@withoutOmittedProperties(OpenAI.OutputItemFunctionShellCall, "created_by");
   @@withoutOmittedProperties(OpenAI.OutputItemCompactionBody, "created_by");
-  @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCallOutput,
+  @@withoutOmittedProperties(
+    OpenAI.OutputItemApplyPatchToolCallOutput,
     "created_by"
   );
   @@withoutOmittedProperties(OpenAI.OutputItemApplyPatchToolCall, "created_by");

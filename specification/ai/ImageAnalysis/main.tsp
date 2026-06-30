@@ -2,6 +2,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.Core.Traits;
 
@@ -13,10 +14,9 @@ using Azure.Core;
 @service(#{ title: "Image Analysis" })
 @versioned(ImageAnalysis.Versions)
 @useAuth(
-  ApiKeyAuth<
-    ApiKeyLocation.header,
-    "Ocp-Apim-Subscription-Key"
-  > | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | AadOauth2Auth<["https://cognitiveservices.azure.com/.default"]>
 )
 @server(
   "{endpoint}/computervision",
