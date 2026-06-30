@@ -165,6 +165,24 @@ model HorizonDbClusterProperties {
   @doc("Defines connection to a parameter group.")
   @visibility(Lifecycle.Update, Lifecycle.Read)
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Authentication configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  authConfig?: HorizonDbClusterAuthConfig;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("Authentication configuration for a HorizonDB cluster.")
+model HorizonDbClusterAuthConfig {
+  @doc("Indicates whether Microsoft Entra ID authentication is enabled.")
+  entraIdAuthEnabled?: boolean;
+
+  @doc("The Microsoft Entra tenant ID.")
+  tenantId?: string;
+
+  @doc("Indicates whether password authentication is enabled.")
+  passwordAuthEnabled?: boolean;
 }
 
 @doc("Properties of a HorizonDB cluster for update operations.")
@@ -184,6 +202,11 @@ model HorizonDbClusterPropertiesForPatchUpdate {
 
   @doc("Defines connection to a parameter group.")
   parameterGroup?: HorizonDbClusterParameterGroupConnectionProperties;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Authentication configuration for the HorizonDB cluster.")
+  @visibility(Lifecycle.Update)
+  authConfig?: HorizonDbClusterAuthConfig;
 }
 
 @doc("HorizonDB cluster for update operations.")

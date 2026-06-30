@@ -2209,6 +2209,24 @@
         }
       ]
     },
+    "HorizonDbClusterAuthConfig": {
+      "type": "object",
+      "description": "Authentication configuration for a HorizonDB cluster.",
+      "properties": {
+        "entraIdAuthEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Microsoft Entra ID authentication is enabled."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The Microsoft Entra tenant ID."
+        },
+        "passwordAuthEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether password authentication is enabled."
+        }
+      }
+    },
     "HorizonDbClusterForPatchUpdate": {
       "type": "object",
       "description": "HorizonDB cluster for update operations.",
@@ -2388,6 +2406,15 @@
             "read",
             "update"
           ]
+        },
+        "authConfig": {
+          "$ref": "#/definitions/HorizonDbClusterAuthConfig",
+          "description": "Authentication configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2422,6 +2449,13 @@
         "parameterGroup": {
           "$ref": "#/definitions/HorizonDbClusterParameterGroupConnectionProperties",
           "description": "Defines connection to a parameter group."
+        },
+        "authConfig": {
+          "$ref": "#/definitions/HorizonDbClusterAuthConfig",
+          "description": "Authentication configuration for the HorizonDB cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
