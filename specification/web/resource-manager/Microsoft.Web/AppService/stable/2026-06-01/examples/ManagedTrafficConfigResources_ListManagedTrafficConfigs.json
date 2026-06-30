@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "sitef6141",
+    "api-version": "2026-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/sites/sitef6141/managedTrafficConfig/default",
+            "name": "default",
+            "type": "Microsoft.Web/sites/managedTrafficConfig",
+            "properties": {
+              "trafficMode": "Active",
+              "endpoints": [
+                {
+                  "region": "eastus",
+                  "weight": 700,
+                  "isWeightAutoComputed": true
+                },
+                {
+                  "region": "westus2",
+                  "weight": 300,
+                  "isWeightAutoComputed": true
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  },
+  "operationId": "ManagedTrafficConfigResources_ListManagedTrafficConfigs",
+  "title": "List managed traffic configuration of a web app"
+}

@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "testrg123",
+    "name": "testsf6141",
+    "siloName": "silo1",
+    "api-version": "2026-06-01",
+    "resource": {
+      "properties": {
+        "primaryServerFarmName": "testsf6141",
+        "primaryLocation": "East US",
+        "siloLocation": "West US 2",
+        "instanceNumberOverride": 3,
+        "zoneRedundantOverride": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/silos/silo1",
+        "name": "silo1",
+        "type": "Microsoft.Web/serverfarms/silos",
+        "properties": {
+          "siloLocation": "West US 2",
+          "primaryServerFarmName": "testsf6141",
+          "primaryLocation": "East US",
+          "instanceNumberOverride": 3,
+          "zoneRedundantOverride": true,
+          "provisioningState": "Succeeded",
+          "createdTime": "2026-06-01T12:00:00.0000000Z",
+          "lastModifiedTime": "2026-06-01T12:30:00.0000000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.Web/serverfarms/testsf6141/silos/silo1",
+        "name": "silo1",
+        "type": "Microsoft.Web/serverfarms/silos",
+        "properties": {
+          "siloLocation": "West US 2",
+          "primaryServerFarmName": "testsf6141",
+          "primaryLocation": "East US",
+          "instanceNumberOverride": 3,
+          "zoneRedundantOverride": true,
+          "provisioningState": "InProgress",
+          "createdTime": "2026-06-01T12:00:00.0000000Z",
+          "lastModifiedTime": "2026-06-01T12:00:00.0000000Z"
+        }
+      }
+    }
+  },
+  "operationId": "ServerFarmSiloResources_CreateOrUpdateServerFarmSilo",
+  "title": "Create or update a silo of an App Service plan"
+}

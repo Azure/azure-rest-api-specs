@@ -16456,3 +16456,356 @@ model StaticSitesOperationStatus {
    */
   properties?: StaticSitesOperationStatusProperties;
 }
+<<<<<<< Updated upstream
+=======
+
+/**
+ * Defines provisioning states for silo resources.
+ */
+@added(Versions.v2026_06_01)
+union SiloProvisioningState {
+  string,
+
+  /**
+   * Provisioning is in progress.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * Provisioning succeeded.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Provisioning failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * Provisioning was canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * Resource is being deleted asynchronously.
+   */
+  Deleting: "Deleting",
+}
+
+/**
+ * Traffic routing mode for silo failover.
+ */
+@added(Versions.v2026_06_01)
+union SiloFailOverMode {
+  string,
+
+  /**
+   * Silo is in active mode.
+   */
+  Active: "Active",
+
+  /**
+   * Silo is in passive mode.
+   */
+  Passive: "Passive",
+
+  /**
+   * Silo failover mode is unknown.
+   */
+  Unknown: "Unknown",
+}
+
+/**
+ * Networking override configuration for a site silo.
+ */
+@added(Versions.v2026_06_01)
+model SiloNetworkingOverride {
+  /**
+   * Virtual network subnet resource ID override for the silo.
+   */
+  vnetIntegrationOverride?: string;
+}
+
+/**
+ * Represents traffic configuration for a single endpoint (region).
+ */
+@added(Versions.v2026_06_01)
+model EndpointTrafficConfig {
+  /**
+   * Normalized Azure region name (for example, eastus, westus).
+   */
+  region: string;
+
+  /**
+   * Priority of the endpoint (1-1000). Lower values receive traffic first in priority routing.
+   */
+  @minValue(1)
+  @maxValue(1000)
+  priority?: int32;
+
+  /**
+   * Weight of the endpoint (1-1000). Higher values receive proportionally more traffic in weighted routing.
+   */
+  @minValue(1)
+  @maxValue(1000)
+  weight?: int32;
+
+  /**
+   * Whether the weight was auto-computed from the silo's worker count.
+   */
+  isWeightAutoComputed?: boolean;
+}
+
+/**
+ * Site silo resource specific properties.
+ */
+@added(Versions.v2026_06_01)
+model SiteSiloProperties {
+  /**
+   * ARM location of the site silo.
+   */
+  siloLocation?: string;
+
+  /**
+   * Name of the primary site.
+   */
+  primarySiteName?: string;
+
+  /**
+   * Region of the primary site.
+   */
+  primaryLocation: string;
+
+  /**
+   * Status of the silo traffic endpoint.
+   */
+  endpointStatus?: string;
+
+  /**
+   * Traffic mode for the site silo's Traffic Manager profile.
+   */
+  @visibility(Lifecycle.Create)
+  trafficMode?: SiloFailOverMode;
+
+  /**
+   * Networking overrides for the silo.
+   */
+  networkingOverride?: SiloNetworkingOverride;
+
+  /**
+   * Application setting overrides for the silo.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "App settings are an arbitrary, customer-defined set of string key/value pairs whose keys are not known to the resource provider, consistent with the existing StringDictionary app-settings contract in this provider."
+  appSettingsOverrides?: Record<string>;
+
+  /**
+   * Provisioning state of the silo.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: SiloProvisioningState;
+
+  /**
+   * Whether the silo should follow the last known good revision.
+   */
+  followLastKnownGood?: boolean;
+
+  /**
+   * Short identifier of the revision currently applied to this silo.
+   */
+  @visibility(Lifecycle.Read)
+  revisionId?: string;
+
+  /**
+   * Default host name of the silo site.
+   */
+  @visibility(Lifecycle.Read)
+  defaultHostName?: string;
+
+  /**
+   * Global host name for the site group.
+   */
+  @visibility(Lifecycle.Read)
+  globalHostName?: string;
+
+  /**
+   * Health monitoring status of the silo endpoint.
+   */
+  @visibility(Lifecycle.Read)
+  monitorStatus?: string;
+
+  /**
+   * Time when the silo was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTime?: utcDateTime;
+
+  /**
+   * Time when the silo was last modified.
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+
+  /**
+   * Inbound IPv4 address used by the silo.
+   */
+  @visibility(Lifecycle.Read)
+  inboundIpAddress?: string;
+
+  /**
+   * All possible inbound IPv4 addresses for the silo.
+   */
+  @visibility(Lifecycle.Read)
+  possibleInboundIpAddresses?: string;
+
+  /**
+   * Inbound IPv6 address used by the silo.
+   */
+  @visibility(Lifecycle.Read)
+  inboundIpv6Address?: string;
+
+  /**
+   * All possible inbound IPv6 addresses for the silo.
+   */
+  @visibility(Lifecycle.Read)
+  possibleInboundIpv6Addresses?: string;
+
+  /**
+   * Outbound IPv4 addresses used by the silo.
+   */
+  @visibility(Lifecycle.Read)
+  outboundIpAddresses?: string;
+
+  /**
+   * All possible outbound IPv4 addresses for the silo stamp.
+   */
+  @visibility(Lifecycle.Read)
+  possibleOutboundIpAddresses?: string;
+
+  /**
+   * Outbound IPv6 addresses used by the silo.
+   */
+  @visibility(Lifecycle.Read)
+  outboundIpv6Addresses?: string;
+
+  /**
+   * All possible outbound IPv6 addresses for the silo stamp.
+   */
+  @visibility(Lifecycle.Read)
+  possibleOutboundIpv6Addresses?: string;
+}
+
+/**
+ * App Service plan silo resource specific properties.
+ */
+@added(Versions.v2026_06_01)
+model ServerFarmSiloProperties {
+  /**
+   * ARM location of the App Service plan silo.
+   */
+  siloLocation?: string;
+
+  /**
+   * Name of the primary App Service plan.
+   */
+  primaryServerFarmName?: string;
+
+  /**
+   * Region of the primary App Service plan.
+   */
+  primaryLocation: string;
+
+  /**
+   * Instance number override for the silo.
+   */
+  instanceNumberOverride?: int32;
+
+  /**
+   * Zone redundancy override for the silo.
+   */
+  zoneRedundantOverride?: boolean;
+
+  /**
+   * Provisioning state of the silo.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: SiloProvisioningState;
+
+  /**
+   * Time when the silo was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTime?: utcDateTime;
+
+  /**
+   * Time when the silo was last modified.
+   */
+  @visibility(Lifecycle.Read)
+  lastModifiedTime?: utcDateTime;
+}
+
+/**
+ * Managed traffic configuration resource specific properties.
+ */
+@added(Versions.v2026_06_01)
+model ManagedTrafficConfigProperties {
+  /**
+   * Traffic routing mode: Active (weighted) or Passive (priority-based failover).
+   */
+  trafficMode?: SiloFailOverMode;
+
+  /**
+   * Per-region endpoint configurations controlling weight and priority.
+   */
+  @identifiers(#["region"])
+  endpoints?: EndpointTrafficConfig[];
+
+  /**
+   * Provisioning state of the managed traffic configuration.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: SiloProvisioningState;
+}
+
+/**
+ * Last known good resource specific properties.
+ */
+@added(Versions.v2026_06_01)
+model LastKnownGoodProperties {
+  /**
+   * Name of the primary site.
+   */
+  @visibility(Lifecycle.Read)
+  siteName?: string;
+
+  /**
+   * Time when the last known good revision was created.
+   */
+  @visibility(Lifecycle.Read)
+  createdTime?: utcDateTime;
+
+  /**
+   * Provisioning state of the last known good resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: SiloProvisioningState;
+}
+
+/**
+ * Collection of site silos.
+ */
+@added(Versions.v2026_06_01)
+model SiteSiloCollection is Azure.Core.Page<SiteSilo>;
+
+/**
+ * Collection of App Service plan silos.
+ */
+@added(Versions.v2026_06_01)
+model ServerFarmSiloCollection is Azure.Core.Page<ServerFarmSilo>;
+
+/**
+ * Collection of managed traffic configurations.
+ */
+@added(Versions.v2026_06_01)
+model ManagedTrafficConfigCollection
+  is Azure.Core.Page<ManagedTrafficConfigResource>;
+>>>>>>> Stashed changes
