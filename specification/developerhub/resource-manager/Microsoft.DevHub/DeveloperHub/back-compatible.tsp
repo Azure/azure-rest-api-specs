@@ -60,12 +60,12 @@ using Microsoft.DevHub;
 
 @@clientName(
   AdooAuthCallRequest,
-  "DeveloperHubADOOAuthCallRequestContent",
+  "DeveloperHubAdoOAuthCallRequestContent",
   "csharp"
 );
 @@clientName(
   AdooAuthInfoResponse,
-  "DeveloperHubADOOAuthInfoResponseResult",
+  "DeveloperHubAdoOAuthInfoResponseResult",
   "csharp"
 );
 @@clientName(

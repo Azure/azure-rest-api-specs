@@ -33,6 +33,12 @@ using Microsoft.DevHub;
 @@clientName(Workflow, "DevHubWorkflow", "csharp");
 @@clientName(Template, "DevHubTemplate", "csharp");
 
+// csharp: enum member casing fixes
+@@clientName(WorkflowRunStatus.inprogress, "InProgress", "csharp");
+@@clientName(GenerationLanguage.gomodule, "GoModule", "csharp");
+@@clientName(QuickStartTemplateType.HCIAKS, "HciAks", "csharp");
+@@clientName(QuickStartTemplateType.HCIARCVM, "HciArcVm", "csharp");
+
 // csharp: URL -> Url acronym casing (mirrors java)
 @@clientName(GitHubOAuthInfoResponse.authURL, "authUrl", "csharp");
 @@clientName(AdooAuthInfoResponse.authURL, "authUrl", "csharp");
