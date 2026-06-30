@@ -78,8 +78,24 @@ using Azure.ClientGenerator.Core.Legacy;
 );
 
 // ---- C# rename decorators (ported from autorest.md rename-mapping) ----
+@@clientName(AADCheckRequirementsProperties,
+  "AadCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(AADDataConnector, "SecurityInsightsAadDataConnector", "csharp");
+@@clientName(AADDataConnectorProperties,
+  "AadDataConnectorProperties",
+  "csharp"
+);
 @@clientName(AATPDataConnector, "SecurityInsightsAatpDataConnector", "csharp");
+@@clientName(AATPDataConnectorProperties,
+  "AatpDataConnectorProperties",
+  "csharp"
+);
+@@clientName(AatpCheckRequirementsProperties,
+  "AatpCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(AccountEntity, "SecurityInsightsAccountEntity", "csharp");
 @@clientName(ActionResponse, "SecurityInsightsAlertRuleAction", "csharp");
 @@clientName(ActivityEntityQueriesProperties.createdTimeUtc,
@@ -144,7 +160,15 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(AnomalyTimelineItem.timeGenerated, "GeneratedOn", "csharp");
 @@clientName(ApiKeyAuthModel, "SecurityInsightsApiKeyAuthModel", "csharp");
 @@clientName(ASCCheckRequirements, "AscCheckRequirements", "csharp");
+@@clientName(ASCCheckRequirementsProperties,
+  "AscCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(ASCDataConnector, "SecurityInsightsAscDataConnector", "csharp");
+@@clientName(ASCDataConnectorProperties,
+  "AscDataConnectorProperties",
+  "csharp"
+);
 @@clientName(AssignmentItem, "WorkspaceManagerAssignmentItem", "csharp");
 @@clientName(AttackPattern, "ThreatIntelligenceAttackPattern", "csharp");
 @@clientName(AttackTactic, "SecurityInsightsAttackTactic", "csharp");
@@ -404,6 +428,10 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(GCPAuthModel, "GcpAuthModel", "csharp");
 @@clientName(GCPAuthProperties, "GcpAuthProperties", "csharp");
 @@clientName(GCPDataConnector, "GcpDataConnector", "csharp");
+@@clientName(GCPDataConnectorProperties,
+  "GcpDataConnectorProperties",
+  "csharp"
+);
 @@clientName(GCPRequestProperties, "GcpRequestProperties", "csharp");
 @@clientName(GeoLocation, "SecurityInsightsIPEntityGeoLocation", "csharp");
 @@clientName(GroupingConfiguration.enabled, "IsEnabled", "csharp");
@@ -543,12 +571,30 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(MetadataSource, "SecurityInsightsMetadataSource", "csharp");
 @@clientName(MetadataSupport, "SecurityInsightsMetadataSupport", "csharp");
 @@clientName(MetadataModel, "SecurityInsightsMetadata", "csharp");
+@@clientName(McasCheckRequirements, "McasCheckRequirements", "csharp");
+@@clientName(McasCheckRequirementsProperties,
+  "McasCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(MCASDataConnector, "McasDataConnector", "csharp");
 @@clientName(MCASDataConnectorDataTypes,
   "McasDataConnectorDataTypes",
   "csharp"
 );
+@@clientName(MCASDataConnectorProperties,
+  "McasDataConnectorProperties",
+  "csharp"
+);
+@@clientName(MdatpCheckRequirements, "MdatpCheckRequirements", "csharp");
+@@clientName(MdatpCheckRequirementsProperties,
+  "MdatpCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(MDATPDataConnector, "MdatpDataConnector", "csharp");
+@@clientName(MDATPDataConnectorProperties,
+  "MdatpDataConnectorProperties",
+  "csharp"
+);
 @@clientName(MicrosoftSecurityIncidentCreationAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
@@ -586,7 +632,27 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 @@clientName(Mode, "WorkspaceManagerConfigurationMode", "csharp");
+@@clientName(MTPCheckRequirementsProperties,
+  "MtpCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(MTPDataConnector, "MtpDataConnector", "csharp");
+@@clientName(MTPDataConnectorDataTypes,
+  "MtpDataConnectorDataTypes",
+  "csharp"
+);
+@@clientName(MTPDataConnectorDataTypesAlerts,
+  "MtpDataConnectorDataTypesAlerts",
+  "csharp"
+);
+@@clientName(MTPDataConnectorDataTypesIncidents,
+  "MtpDataConnectorDataTypesIncidents",
+  "csharp"
+);
+@@clientName(MTPDataConnectorProperties,
+  "MtpDataConnectorProperties",
+  "csharp"
+);
 @@clientName(NrtAlertRuleProperties.enabled, "IsEnabled", "csharp");
 @@clientName(NrtAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
@@ -669,12 +735,28 @@ using Azure.ClientGenerator.Core.Legacy;
   "OfficeAtpCheckRequirements",
   "csharp"
 );
+@@clientName(OfficeATPCheckRequirementsProperties,
+  "OfficeAtpCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(OfficeATPDataConnector, "OfficeAtpDataConnector", "csharp");
+@@clientName(OfficeATPDataConnectorProperties,
+  "OfficeAtpDataConnectorProperties",
+  "csharp"
+);
 @@clientName(OfficeIRMCheckRequirements,
   "OfficeIrmCheckRequirements",
   "csharp"
 );
+@@clientName(OfficeIRMCheckRequirementsProperties,
+  "OfficeIrmCheckRequirementsProperties",
+  "csharp"
+);
 @@clientName(OfficeIRMDataConnector, "OfficeIrmDataConnector", "csharp");
+@@clientName(OfficeIRMDataConnectorProperties,
+  "OfficeIrmDataConnectorProperties",
+  "csharp"
+);
 @@clientName(QueryCondition, "ThreatIntelligenceQueryCondition", "csharp");
 @@clientName(Microsoft.SecurityInsights.Query,
   "ThreatIntelligenceQuery",
