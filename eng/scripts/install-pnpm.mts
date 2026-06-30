@@ -41,7 +41,7 @@ function run(
 
 async function getPinnedPnpmVersion(): Promise<string> {
   const pkg = JSON.parse(await readFile(join(rootDir, "package.json"), "utf8"));
-  // e.g. "pnpm@11.5.1" or "pnpm@11.5.1+sha512..." -> "11.5.1"
+  // e.g. "pnpm@11.8.0" or "pnpm@11.8.0+sha512..." -> "11.8.0"
   return pkg.packageManager.slice("pnpm@".length).split("+")[0];
 }
 
