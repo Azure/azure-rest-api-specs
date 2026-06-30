@@ -46,7 +46,7 @@ model ArmLocationResource {
   @path
   @segment("locations")
   @key
-  ascLocation: string;
+  ascLocation: Azure.Core.azureLocation;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
