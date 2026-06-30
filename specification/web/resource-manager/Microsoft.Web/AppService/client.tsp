@@ -5178,9 +5178,24 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   ipV4Address,
   "csharp"
 );
+@@clientName(
+  AddressResponseProperties.serviceIpAddress,
+  "ServiceIPAddress",
+  "csharp"
+);
 @@alternateType(
   AddressResponseProperties.internalIpAddress,
   ipV4Address,
+  "csharp"
+);
+@@clientName(
+  AddressResponseProperties.internalIpAddress,
+  "InternalIPAddress",
+  "csharp"
+);
+@@clientName(
+  AddressResponseProperties.outboundIpAddresses,
+  "OutboundIPAddresses",
   "csharp"
 );
 @@alternateType(
@@ -5188,6 +5203,7 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
   ipV4Address[],
   "csharp"
 );
+
 @@alternateType(LogSpecification.blobDuration, duration, "csharp");
 @@alternateType(MetricAvailability.blobDuration, duration, "csharp");
 @@alternateType(TriggeredJobRun.duration, duration, "csharp");
@@ -5732,16 +5748,6 @@ union ConfigReferenceSource {
 );
 @@clientName(KubeEnvironmentProperties.staticIp, "StaticIP", "csharp");
 @@clientName(FunctionAppStackProperties.preferredOs, "PreferredOS", "csharp");
-@@clientName(
-  AddressResponseProperties.outboundIpAddresses,
-  "OutboundIPAddresses",
-  "csharp"
-);
-@@alternateType(
-  AddressResponseProperties.outboundIpAddresses,
-  ipV4Address[],
-  "csharp"
-);
 
 @@alternateType(
   CertificatePatchResourceProperties.keyVaultId,
