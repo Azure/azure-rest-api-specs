@@ -26,14 +26,20 @@ runs:
       with:
         package_json_file: ${{ inputs.working-directory }}/package.json
 
-    # NOTE: Do not use actions/setup-node's built-in "cache: pnpm". It keys the
-    # pnpm store cache only on the lockfile hash (shared across all workflows) and
-    # never re-saves on a key hit, so a minimal "--prod --filter" install can lock
-    # the shared cache to a tiny partial store that full installs then can't grow.
-    # We manage the store cache explicitly below, namespaced by "cache-name".
+    # NOTE: Do not use actions/setup-node's built-in package-manager cache.
+    # - "cache: pnpm" keys the pnpm store cache only on the lockfile hash (shared
+    #   across all workflows) and never re-saves on a key hit, so a minimal
+    #   "--prod --filter" install can lock the shared cache to a tiny partial store
+    #   that full installs then can't grow. We manage the store cache explicitly
+    #   below, namespaced by "cache-name".
+    # - "package-manager-cache" defaults to true in v6; even though it only auto-caches
+    #   for npm, the detection still probes pnpm for its store path, and that first
+    #   pnpm invocation pays a ~3s PNPM_HOME v10->v11 layout migration. Disabling it
+    #   removes that probe from the first install step of every job.
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
+        package-manager-cache: false
 
     - if: ${{ inputs.cache == 'true' }}
       id: pnpm-store
