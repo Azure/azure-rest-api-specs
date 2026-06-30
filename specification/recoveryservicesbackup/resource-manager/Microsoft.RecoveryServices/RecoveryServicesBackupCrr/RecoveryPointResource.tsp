@@ -22,7 +22,6 @@ model RecoveryPointResource is ProxyResource<RecoveryPoint> {
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
-
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The geo-location where the resource lives */

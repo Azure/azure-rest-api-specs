@@ -22,7 +22,6 @@ model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
     SegmentName = "backupstorageconfig",
     NamePattern = ""
   >;
-
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
 
   /** The geo-location where the resource lives */
