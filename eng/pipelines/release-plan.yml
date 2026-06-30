@@ -33,14 +33,7 @@ stages:
 
           - template: /eng/common/pipelines/templates/steps/login-to-github.yml
 
-          - task: UseNode@1
-            displayName: "Install Node.js"
-            inputs:
-              version: $(NodeVersion)
-
           - template: /eng/pipelines/templates/steps/npm-install.yml
-            parameters:
-              workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
 
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
 
@@ -48,7 +41,6 @@ stages:
             displayName: "Get Release Plan details"
             condition: succeeded()
             continueOnError: true
-            workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
             env:
               GH_TOKEN: $(GH_TOKEN)
             inputs:
