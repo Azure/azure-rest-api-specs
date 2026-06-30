@@ -58,7 +58,8 @@ interface ProcessInfoOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteInstanceProcess"
     > {}
 
 @tag("WebApps")
@@ -153,7 +154,8 @@ interface ProcessInfoOperationGroupOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteProcess"
     > {}
 
 @tag("WebApps")
@@ -260,7 +262,8 @@ interface InstanceProcessSlotOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteSlotInstanceProcess"
     > {}
 
 @tag("WebApps")
@@ -362,7 +365,8 @@ interface ProcessSlotOperationGroupOps
         @segment("processes")
         @key
         processId: string,
-      }
+      },
+      ResourceName = "SiteSlotProcess"
     > {}
 
 @tag("WebApps")
