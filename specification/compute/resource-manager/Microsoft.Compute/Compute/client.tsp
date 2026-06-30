@@ -73,8 +73,6 @@ namespace ComputeCombine;
 // ── C# type renames for backward compatibility (migration from AutoRest) ──
 
 // C# naming fixes for Azure.ResourceManager.Compute 1.15.0 stable API review.
-@@clientName(ComputeGallery.Gallery, "ComputeGallery", "csharp");
-@@clientName(ComputeDisk.Snapshot, "ComputeSnapshot", "csharp");
 @@clientName(ConfidentialVMVersion, "ConfidentialVmVersion", "csharp");
 @@clientName(
   DiskSecurityProfile.confidentialVMVersion,
