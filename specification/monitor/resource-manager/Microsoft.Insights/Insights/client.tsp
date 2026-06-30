@@ -1396,7 +1396,7 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java,python"
+  "csharp,java,python,javascript"
 );
 
 /**
