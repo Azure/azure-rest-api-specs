@@ -5,12 +5,14 @@ using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 
-@@clientName(Microsoft.SecurityInsights,
+@@clientName(
+  Microsoft.SecurityInsights,
   "SecurityInsightsMgmtClient",
   "python"
 );
 
-@@clientName(Azure.ResourceManager.CommonTypes.ActionType,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
   "OperationActionType",
   "java"
 );
@@ -20,27 +22,33 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(AADDataConnector, "AadDataConnector", "java");
 @@clientName(AATPDataConnector, "AatpDataConnector", "java");
 @@clientName(MCASDataConnectorDataTypes, "McasDataConnectorDataTypes", "java");
-@@clientName(ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(ScheduledAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  ScheduledAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
-@@clientName(FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(FusionAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
   "java"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
   "createdDateUtc",
   "java"
 );
@@ -51,16 +59,19 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(IncidentEntitiesResponse.metaData, "metadata", "java");
 
 @@clientLocation(AlertRules.triggerRuleRun, "AlertRule", "python");
-@@clientLocation(triggeredAnalyticsRuleRun.get,
+@@clientLocation(
+  triggeredAnalyticsRuleRun.get,
   "TriggeredAnalyticsRuleRun",
   "python"
 );
-@@clientLocation(triggeredAnalyticsRuleRun.list,
+@@clientLocation(
+  triggeredAnalyticsRuleRun.list,
   "GetTriggeredAnalyticsRuleRuns",
   "python"
 );
 @@clientName(FileHashAlgorithm.SHA256AC, "SHA256_AC", "python");
-@@clientName(MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
+@@clientName(
+  MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed,
   "MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed",
   "go,python"
 );
@@ -68,90 +79,108 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(listWhoisByDomain, "SecurityInsightsClient", "go");
 
 @@clientName(EntityKindEnum, "EntityKind", "python");
-@@clientName(ThreatIntelligenceResourceInnerKind,
+@@clientName(
+  ThreatIntelligenceResourceInnerKind,
   "ThreatIntelligenceResourceKindEnum",
   "python"
 );
-@@clientName(ThreatIntelligenceSortingOrder,
+@@clientName(
+  ThreatIntelligenceSortingOrder,
   "ThreatIntelligenceSortingCriteriaEnum",
   "python"
 );
 
 // ---- C# rename decorators (ported from autorest.md rename-mapping) ----
-@@clientName(AADCheckRequirementsProperties,
+@@clientName(
+  AADCheckRequirementsProperties,
   "AadCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(AADDataConnector, "SecurityInsightsAadDataConnector", "csharp");
-@@clientName(AADDataConnectorProperties,
+@@clientName(
+  AADDataConnectorProperties,
   "AadDataConnectorProperties",
   "csharp"
 );
 @@clientName(AATPDataConnector, "SecurityInsightsAatpDataConnector", "csharp");
-@@clientName(AATPDataConnectorProperties,
+@@clientName(
+  AATPDataConnectorProperties,
   "AatpDataConnectorProperties",
   "csharp"
 );
-@@clientName(AatpCheckRequirementsProperties,
+@@clientName(
+  AatpCheckRequirementsProperties,
   "AatpCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(AccountEntity, "SecurityInsightsAccountEntity", "csharp");
 @@clientName(ActionResponse, "SecurityInsightsAlertRuleAction", "csharp");
-@@clientName(ActivityEntityQueriesProperties.createdTimeUtc,
+@@clientName(
+  ActivityEntityQueriesProperties.createdTimeUtc,
   "CreatedOn",
   "csharp"
 );
 @@clientName(ActivityEntityQueriesProperties.enabled, "IsEnabled", "csharp");
-@@clientName(ActivityEntityQueriesProperties.lastModifiedTimeUtc,
+@@clientName(
+  ActivityEntityQueriesProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(ActivityEntityQueryTemplatePropertiesQueryDefinitions,
+@@clientName(
+  ActivityEntityQueryTemplatePropertiesQueryDefinitions,
   "ActivityEntityQueryDefinition",
   "csharp"
 );
 @@clientName(ActivityTimelineItem.bucketEndTimeUTC, "BucketEndOn", "csharp");
-@@clientName(ActivityTimelineItem.bucketStartTimeUTC,
+@@clientName(
+  ActivityTimelineItem.bucketStartTimeUTC,
   "BucketStartOn",
   "csharp"
 );
-@@clientName(ActivityTimelineItem.firstActivityTimeUTC,
+@@clientName(
+  ActivityTimelineItem.firstActivityTimeUTC,
   "FirstActivityOn",
   "csharp"
 );
-@@clientName(ActivityTimelineItem.lastActivityTimeUTC,
+@@clientName(
+  ActivityTimelineItem.lastActivityTimeUTC,
   "LastActivityOn",
   "csharp"
 );
 @@clientName(AlertDetail, "SecurityInsightsAlertDetail", "csharp");
-@@clientName(AlertDetailsOverride,
+@@clientName(
+  AlertDetailsOverride,
   "SecurityInsightsAlertDetailsOverride",
   "csharp"
 );
 @@clientName(AlertProperty, "SecurityInsightsAlertProperty", "csharp");
-@@clientName(AlertPropertyMapping,
+@@clientName(
+  AlertPropertyMapping,
   "SecurityInsightsAlertPropertyMapping",
   "csharp"
 );
 @@clientName(AlertRule, "SecurityInsightsAlertRule", "csharp");
 @@clientName(AlertRuleTemplate, "SecurityInsightsAlertRuleTemplate", "csharp");
-@@clientName(AlertsDataTypeOfDataConnector,
+@@clientName(
+  AlertsDataTypeOfDataConnector,
   "SecurityInsightsAlertsDataTypeOfDataConnector",
   "csharp"
 );
 @@clientName(AlertSeverity, "SecurityInsightsAlertSeverity", "csharp");
 @@clientName(AlertStatus, "SecurityInsightsAlertStatus", "csharp");
-@@clientName(AnalyticsRuleRunTriggerProperties.executionTimeUtc,
+@@clientName(
+  AnalyticsRuleRunTriggerProperties.executionTimeUtc,
   "ExecuteOn",
   "csharp"
 );
 @@clientName(Anomalies, "SecurityInsightsSettingAnomaliesKind", "csharp");
-@@clientName(AnomalySecurityMLAnalyticsSettingsProperties.enabled,
+@@clientName(
+  AnomalySecurityMLAnalyticsSettingsProperties.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(AnomalySecurityMLAnalyticsSettingsProperties.lastModifiedUtc,
+@@clientName(
+  AnomalySecurityMLAnalyticsSettingsProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
@@ -160,12 +189,14 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(AnomalyTimelineItem.timeGenerated, "GeneratedOn", "csharp");
 @@clientName(ApiKeyAuthModel, "SecurityInsightsApiKeyAuthModel", "csharp");
 @@clientName(ASCCheckRequirements, "AscCheckRequirements", "csharp");
-@@clientName(ASCCheckRequirementsProperties,
+@@clientName(
+  ASCCheckRequirementsProperties,
   "AscCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(ASCDataConnector, "SecurityInsightsAscDataConnector", "csharp");
-@@clientName(ASCDataConnectorProperties,
+@@clientName(
+  ASCDataConnectorProperties,
   "AscDataConnectorProperties",
   "csharp"
 );
@@ -173,83 +204,102 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(AttackPattern, "ThreatIntelligenceAttackPattern", "csharp");
 @@clientName(AttackTactic, "SecurityInsightsAttackTactic", "csharp");
 @@clientName(AutomationRuleProperties.createdTimeUtc, "CreatedOn", "csharp");
-@@clientName(AutomationRuleProperties.lastModifiedTimeUtc,
+@@clientName(
+  AutomationRuleProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(AutomationRule, "SecurityInsightsAutomationRule", "csharp");
-@@clientName(AutomationRuleAction,
+@@clientName(
+  AutomationRuleAction,
   "SecurityInsightsAutomationRuleAction",
   "csharp"
 );
-@@clientName(AutomationRuleCondition,
+@@clientName(
+  AutomationRuleCondition,
   "SecurityInsightsAutomationRuleCondition",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.AccountUPNSuffix,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.AccountUPNSuffix,
   "AccountUpnSuffix",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.AccountPUID,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.AccountPUID,
   "AccountPuid",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.DNSDomainName,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.DNSDomainName,
   "DnsDomainName",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.HostAzureID,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.HostAzureID,
   "HostAzureId",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceId,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceId,
   "IotDeviceId",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceModel,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceModel,
   "IotDeviceModel",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceName,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceName,
   "IotDeviceName",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceOperatingSystem,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceOperatingSystem,
   "IotDeviceOperatingSystem",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceType,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceType,
   "IotDeviceType",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.IoTDeviceVendor,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.IoTDeviceVendor,
   "IotDeviceVendor",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.MailboxUPN,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.MailboxUPN,
   "MailboxUpn",
   "csharp"
 );
-@@clientName(AutomationRulePropertyConditionSupportedProperty.Url,
+@@clientName(
+  AutomationRulePropertyConditionSupportedProperty.Url,
   "Uri",
   "csharp"
 );
-@@clientName(AutomationRuleTriggeringLogic.expirationTimeUtc,
+@@clientName(
+  AutomationRuleTriggeringLogic.expirationTimeUtc,
   "ExpireOn",
   "csharp"
 );
-@@clientName(AutomationRuleTriggeringLogic,
+@@clientName(
+  AutomationRuleTriggeringLogic,
   "SecurityInsightsAutomationRuleTriggeringLogic",
   "csharp"
 );
 @@clientName(Availability, "ConnectorAvailability", "csharp");
 // (removed) AvailabilityStatus has no named enum in TypeSpec (Availability.status is a constant)
 @@clientName(AWSAuthModel, "AwsAuthModel", "csharp");
-@@clientName(AwsCloudTrailDataConnector,
+@@clientName(
+  AwsCloudTrailDataConnector,
   "SecurityInsightsAwsCloudTrailDataConnector",
   "csharp"
 );
-@@clientName(AzureResourceEntity,
+@@clientName(
+  AzureResourceEntity,
   "SecurityInsightsAzureResourceEntity",
   "csharp"
 );
@@ -260,25 +310,30 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(BookmarkExpandResponse, "BookmarkExpandResult", "csharp");
 @@clientName(BookmarkTimelineItem.endTimeUtc, "EndOn", "csharp");
 @@clientName(BookmarkTimelineItem.startTimeUtc, "StartOn", "csharp");
-@@clientName(CcpResponseConfig.convertChildPropertiesToArray,
+@@clientName(
+  CcpResponseConfig.convertChildPropertiesToArray,
   "IsConvertChildPropertiesToArray",
   "csharp"
 );
 @@clientName(ClientInfo, "SecurityInsightsClientInfo", "csharp");
-@@clientName(CloudApplicationEntity,
+@@clientName(
+  CloudApplicationEntity,
   "SecurityInsightsCloudApplicationEntity",
   "csharp"
 );
-@@clientName(ConditionClause,
+@@clientName(
+  ConditionClause,
   "ThreatIntelligenceQueryConditionClause",
   "csharp"
 );
-@@clientName(ConditionProperties,
+@@clientName(
+  ConditionProperties,
   "ThreatIntelligenceQueryConditionProperties",
   "csharp"
 );
 @@clientName(ConfidenceLevel, "SecurityInsightsAlertConfidenceLevel", "csharp");
-@@clientName(ConfidenceScoreStatus,
+@@clientName(
+  ConfidenceScoreStatus,
   "SecurityInsightsAlertConfidenceScoreStatus",
   "csharp"
 );
@@ -288,15 +343,18 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(ConnectivityType, "ConnectorConnectivityType", "csharp");
 @@clientName(ConnectedEntity, "BookmarkConnectedEntity", "csharp");
 @@clientName(ContentType, "SourceControlContentType", "csharp");
-@@clientName(CustomizableConnectorDefinitionProperties.createdTimeUtc,
+@@clientName(
+  CustomizableConnectorDefinitionProperties.createdTimeUtc,
   "CreatedOn",
   "csharp"
 );
-@@clientName(CustomizableConnectorDefinitionProperties.lastModifiedUtc,
+@@clientName(
+  CustomizableConnectorDefinitionProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(CustomizableConnectorDefinition,
+@@clientName(
+  CustomizableConnectorDefinition,
   "CustomizableConnectorDefinitionData",
   "csharp"
 );
@@ -304,26 +362,31 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(CustomsPermission, "ConnectorCustomsPermission", "csharp");
 @@clientName(DataConnector, "SecurityInsightsDataConnector", "csharp");
 @@clientName(DataConnectorConnectBody, "DataConnectorConnectContent", "csharp");
-@@clientName(DataConnectorDefinition,
+@@clientName(
+  DataConnectorDefinition,
   "SecurityInsightsDataConnectorDefinition",
   "csharp"
 );
-@@clientName(DataTypeState,
+@@clientName(
+  DataTypeState,
   "SecurityInsightsDataTypeConnectionState",
   "csharp"
 );
 @@clientName(DCRConfiguration, "DcrConfiguration", "csharp");
 @@clientName(DeleteStatus, "SecurityInsightsFileDeleteStatus", "csharp");
-@@clientName(DeliveryAction,
+@@clientName(
+  DeliveryAction,
   "SecurityInsightsMailMessageDeliveryAction",
   "csharp"
 );
-@@clientName(DeliveryLocation,
+@@clientName(
+  DeliveryLocation,
   "SecurityInsightsMailMessageDeliveryLocation",
   "csharp"
 );
 @@clientName(Deployment, "SourceControlDeployment", "csharp");
-@@clientName(DeploymentFetchStatus,
+@@clientName(
+  DeploymentFetchStatus,
   "SourceControlDeploymentFetchStatus",
   "csharp"
 );
@@ -331,15 +394,18 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(DeploymentResult, "SourceControlDeploymentResult", "csharp");
 @@clientName(DeploymentState, "SourceControlDeploymentState", "csharp");
 @@clientName(DnsEntity, "SecurityInsightsDnsEntity", "csharp");
-@@clientName(DnsEntityProperties.dnsServerIpEntityId,
+@@clientName(
+  DnsEntityProperties.dnsServerIpEntityId,
   "DnsServerIPEntityId",
   "csharp"
 );
-@@clientName(DnsEntityProperties.hostIpAddressEntityId,
+@@clientName(
+  DnsEntityProperties.hostIpAddressEntityId,
   "HostIPAddressEntityId",
   "csharp"
 );
-@@clientName(DnsEntityProperties.ipAddressEntityIds,
+@@clientName(
+  DnsEntityProperties.ipAddressEntityIds,
   "IPAddressEntityIds",
   "csharp"
 );
@@ -350,7 +416,8 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(EnrichmentIpAddressBody, "EnrichmentIPAddressContent", "csharp");
 @@clientName(Entity, "SecurityInsightsEntity", "csharp");
 @@clientName(EntityExpandResponse, "EntityExpandResult", "csharp");
-@@clientName(EntityGetInsightsParameters.addDefaultExtendedTimeRange,
+@@clientName(
+  EntityGetInsightsParameters.addDefaultExtendedTimeRange,
   "IsDefaultExtendedTimeRangeAdded",
   "csharp"
 );
@@ -358,19 +425,22 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(EntityKindEnum.Ip, "IP", "csharp");
 @@clientName(EntityKindEnum.IoTDevice, "IotDevice", "csharp");
 @@clientName(EntityKindEnum, "SecurityInsightsEntityKind", "csharp");
-@@clientName(EntityManualTriggerRequestBody,
+@@clientName(
+  EntityManualTriggerRequestBody,
   "EntityManualTriggerRequestContent",
   "csharp"
 );
 @@clientName(EntityMapping, "SecurityInsightsAlertRuleEntityMapping", "csharp");
 @@clientName(EntityMappingType.DNS, "Dns", "csharp");
 @@clientName(EntityMappingType.URL, "Uri", "csharp");
-@@clientName(EntityMappingType,
+@@clientName(
+  EntityMappingType,
   "SecurityInsightsAlertRuleEntityMappingType",
   "csharp"
 );
 @@clientName(EntityQuery, "SecurityInsightsEntityQuery", "csharp");
-@@clientName(EntityQueryTemplate,
+@@clientName(
+  EntityQueryTemplate,
   "SecurityInsightsEntityQueryTemplate",
   "csharp"
 );
@@ -388,16 +458,19 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(FileHashAlgorithm, "SecurityInsightsFileHashAlgorithm", "csharp");
 @@clientName(FileHashEntity, "SecurityInsightsFileHashEntity", "csharp");
 @@clientName(FileImportProperties.createdTimeUTC, "CreatedOn", "csharp");
-@@clientName(FileImportProperties.filesValidUntilTimeUTC,
+@@clientName(
+  FileImportProperties.filesValidUntilTimeUTC,
   "FilesValidUntil",
   "csharp"
 );
-@@clientName(FileImportProperties.importValidUntilTimeUTC,
+@@clientName(
+  FileImportProperties.importValidUntilTimeUTC,
   "ImportValidUntil",
   "csharp"
 );
 @@clientName(FileImport, "SecurityInsightsFileImport", "csharp");
-@@clientName(FileImportContentType,
+@@clientName(
+  FileImportContentType,
   "SecurityInsightsFileImportContentType",
   "csharp"
 );
@@ -405,20 +478,24 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(FileMetadata, "SecurityInsightsFileMetadata", "csharp");
 @@clientName(Flag, "SecurityInsightsMetadataFlag", "csharp");
 @@clientName(FusionAlertRuleProperties.enabled, "IsEnabled", "csharp");
-@@clientName(FusionAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  FusionAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(FusionAlertRule, "SecurityInsightsFusionAlertRule", "csharp");
-@@clientName(FusionAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.createdDateUTC,
   "CreatedOn",
   "csharp"
 );
-@@clientName(FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  FusionAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(FusionAlertRuleTemplate,
+@@clientName(
+  FusionAlertRuleTemplate,
   "SecurityInsightsFusionAlertRuleTemplate",
   "csharp"
 );
@@ -428,25 +505,25 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(GCPAuthModel, "GcpAuthModel", "csharp");
 @@clientName(GCPAuthProperties, "GcpAuthProperties", "csharp");
 @@clientName(GCPDataConnector, "GcpDataConnector", "csharp");
-@@clientName(GCPDataConnectorProperties,
+@@clientName(
+  GCPDataConnectorProperties,
   "GcpDataConnectorProperties",
   "csharp"
 );
 @@clientName(GCPRequestProperties, "GcpRequestProperties", "csharp");
 @@clientName(GeoLocation, "SecurityInsightsIPEntityGeoLocation", "csharp");
 @@clientName(GroupingConfiguration.enabled, "IsEnabled", "csharp");
-@@clientName(GroupingConfiguration.reopenClosedIncident,
+@@clientName(
+  GroupingConfiguration.reopenClosedIncident,
   "IsClosedIncidentReopened",
   "csharp"
 );
-@@clientName(GroupingConfiguration,
+@@clientName(
+  GroupingConfiguration,
   "SecurityInsightsGroupingConfiguration",
   "csharp"
 );
-@@clientName(ConnectorInstructionModelBase.type,
-  "settingType",
-  "csharp"
-);
+@@clientName(ConnectorInstructionModelBase.type, "settingType", "csharp");
 @@clientName(HostEntity, "SecurityInsightsHostEntity", "csharp");
 @@clientName(HostEntityProperties.azureID, "AzureId", "csharp");
 @@clientName(HostEntityProperties.omsAgentID, "OmsAgentId", "csharp");
@@ -468,50 +545,61 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(Identity, "ThreatIntelligenceIdentity", "csharp");
 @@clientName(IncidentProperties.additionalData, "AdditionalInfo", "csharp");
 @@clientName(IncidentProperties.createdTimeUtc, "CreatedOn", "csharp");
-@@clientName(IncidentProperties.firstActivityTimeUtc,
+@@clientName(
+  IncidentProperties.firstActivityTimeUtc,
   "FirstActivityOn",
   "csharp"
 );
-@@clientName(IncidentProperties.lastActivityTimeUtc,
+@@clientName(
+  IncidentProperties.lastActivityTimeUtc,
   "LastActivityOn",
   "csharp"
 );
-@@clientName(IncidentProperties.lastModifiedTimeUtc,
+@@clientName(
+  IncidentProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(Incident, "SecurityInsightsIncident", "csharp");
-@@clientName(IncidentAdditionalData,
+@@clientName(
+  IncidentAdditionalData,
   "SecurityInsightsIncidentAdditionalInfo",
   "csharp"
 );
-@@clientName(IncidentClassification,
+@@clientName(
+  IncidentClassification,
   "SecurityInsightsIncidentClassification",
   "csharp"
 );
-@@clientName(IncidentClassificationReason,
+@@clientName(
+  IncidentClassificationReason,
   "SecurityInsightsIncidentClassificationReason",
   "csharp"
 );
 @@clientName(IncidentCommentProperties.createdTimeUtc, "CreatedOn", "csharp");
-@@clientName(IncidentCommentProperties.lastModifiedTimeUtc,
+@@clientName(
+  IncidentCommentProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(IncidentComment, "SecurityInsightsIncidentComment", "csharp");
-@@clientName(IncidentConfiguration.createIncident,
+@@clientName(
+  IncidentConfiguration.createIncident,
   "IsIncidentCreated",
   "csharp"
 );
-@@clientName(IncidentConfiguration,
+@@clientName(
+  IncidentConfiguration,
   "SecurityInsightsIncidentConfiguration",
   "csharp"
 );
-@@clientName(IncidentEntitiesResponse,
+@@clientName(
+  IncidentEntitiesResponse,
   "SecurityInsightsIncidentEntitiesResult",
   "csharp"
 );
-@@clientName(IncidentEntitiesResultsMetadata,
+@@clientName(
+  IncidentEntitiesResultsMetadata,
   "SecurityInsightsIncidentEntitiesMetadata",
   "csharp"
 );
@@ -519,25 +607,29 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(IncidentLabel, "SecurityInsightsIncidentLabel", "csharp");
 @@clientName(IncidentLabelType, "SecurityInsightsIncidentLabelType", "csharp");
 @@clientName(IncidentOwnerInfo, "SecurityInsightsIncidentOwnerInfo", "csharp");
-@@clientName(IncidentPropertiesAction,
+@@clientName(
+  IncidentPropertiesAction,
   "SecurityInsightsIncidentActionConfiguration",
   "csharp"
 );
 @@clientName(IncidentSeverity, "SecurityInsightsIncidentSeverity", "csharp");
 @@clientName(IncidentStatus, "SecurityInsightsIncidentStatus", "csharp");
 @@clientName(IncidentTaskProperties.createdTimeUtc, "CreatedOn", "csharp");
-@@clientName(IncidentTaskProperties.lastModifiedTimeUtc,
+@@clientName(
+  IncidentTaskProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(IncidentTask, "SecurityInsightsIncidentTask", "csharp");
 @@clientName(Indicator, "ThreatIntelligenceIndicator", "csharp");
-@@clientName(InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem.supportDeepLink,
+@@clientName(
+  InsightQueryItemPropertiesTableQueryColumnsDefinitionsItem.supportDeepLink,
   "IsDeepLinkSupported",
   "csharp"
 );
 @@clientName(IoTDeviceEntity, "SecurityInsightsIotDeviceEntity", "csharp");
-@@clientName(IoTDeviceEntityProperties.ipAddressEntityId,
+@@clientName(
+  IoTDeviceEntityProperties.ipAddressEntityId,
   "IPAddressEntityId",
   "csharp"
 );
@@ -548,23 +640,27 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(MailboxEntity, "SecurityInsightsMailboxEntity", "csharp");
 @@clientName(MailClusterEntity, "SecurityInsightsMailClusterEntity", "csharp");
 @@clientName(MailMessageEntityProperties.senderIP, "SenderIP", "csharp");
-@@alternateType(MailMessageEntityProperties.senderIP,
+@@alternateType(
+  MailMessageEntityProperties.senderIP,
   Azure.Core.ipV4Address,
   "csharp"
 );
 @@clientName(MailMessageEntityProperties.urls, "Uris", "csharp");
 @@clientName(MailMessageEntity, "SecurityInsightsMailMessageEntity", "csharp");
 @@clientName(MalwareEntity, "SecurityInsightsMalwareEntity", "csharp");
-@@clientName(MatchingMethod,
+@@clientName(
+  MatchingMethod,
   "SecurityInsightsGroupingMatchingMethod",
   "csharp"
 );
 @@clientName(MetadataAuthor, "SecurityInsightsMetadataAuthor", "csharp");
-@@clientName(MetadataCategories,
+@@clientName(
+  MetadataCategories,
   "SecurityInsightsMetadataCategories",
   "csharp"
 );
-@@clientName(MetadataDependencies,
+@@clientName(
+  MetadataDependencies,
   "SecurityInsightsMetadataDependencies",
   "csharp"
 );
@@ -572,129 +668,150 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(MetadataSupport, "SecurityInsightsMetadataSupport", "csharp");
 @@clientName(MetadataModel, "SecurityInsightsMetadata", "csharp");
 @@clientName(McasCheckRequirements, "McasCheckRequirements", "csharp");
-@@clientName(McasCheckRequirementsProperties,
+@@clientName(
+  McasCheckRequirementsProperties,
   "McasCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(MCASDataConnector, "McasDataConnector", "csharp");
-@@clientName(MCASDataConnectorDataTypes,
+@@clientName(
+  MCASDataConnectorDataTypes,
   "McasDataConnectorDataTypes",
   "csharp"
 );
-@@clientName(MCASDataConnectorProperties,
+@@clientName(
+  MCASDataConnectorProperties,
   "McasDataConnectorProperties",
   "csharp"
 );
 @@clientName(MdatpCheckRequirements, "MdatpCheckRequirements", "csharp");
-@@clientName(MdatpCheckRequirementsProperties,
+@@clientName(
+  MdatpCheckRequirementsProperties,
   "MdatpCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(MDATPDataConnector, "MdatpDataConnector", "csharp");
-@@clientName(MDATPDataConnectorProperties,
+@@clientName(
+  MDATPDataConnectorProperties,
   "MdatpDataConnectorProperties",
   "csharp"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleProperties.enabled,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
   "CreatedOn",
   "csharp"
 );
-@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(MicrosoftSecurityProductName.`Azure Security Center for IoT`,
+@@clientName(
+  MicrosoftSecurityProductName.`Azure Security Center for IoT`,
   "AzureSecurityCenterForIot",
   "csharp"
 );
-@@clientName(MLBehaviorAnalyticsAlertRuleProperties.enabled,
+@@clientName(
+  MLBehaviorAnalyticsAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(MLBehaviorAnalyticsAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  MLBehaviorAnalyticsAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(MLBehaviorAnalyticsAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  MLBehaviorAnalyticsAlertRuleTemplateProperties.createdDateUTC,
   "CreatedOn",
   "csharp"
 );
-@@clientName(MLBehaviorAnalyticsAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  MLBehaviorAnalyticsAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "LastUpdatedOn",
   "csharp"
 );
 @@clientName(Mode, "WorkspaceManagerConfigurationMode", "csharp");
-@@clientName(MTPCheckRequirementsProperties,
+@@clientName(
+  MTPCheckRequirementsProperties,
   "MtpCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(MTPDataConnector, "MtpDataConnector", "csharp");
-@@clientName(MTPDataConnectorDataTypes,
-  "MtpDataConnectorDataTypes",
-  "csharp"
-);
-@@clientName(MTPDataConnectorDataTypesAlerts,
+@@clientName(MTPDataConnectorDataTypes, "MtpDataConnectorDataTypes", "csharp");
+@@clientName(
+  MTPDataConnectorDataTypesAlerts,
   "MtpDataConnectorDataTypesAlerts",
   "csharp"
 );
-@@clientName(MTPDataConnectorDataTypesIncidents,
+@@clientName(
+  MTPDataConnectorDataTypesIncidents,
   "MtpDataConnectorDataTypesIncidents",
   "csharp"
 );
-@@clientName(MTPDataConnectorProperties,
+@@clientName(
+  MTPDataConnectorProperties,
   "MtpDataConnectorProperties",
   "csharp"
 );
 @@clientName(NrtAlertRuleProperties.enabled, "IsEnabled", "csharp");
-@@clientName(NrtAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  NrtAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(NrtAlertRuleProperties.suppressionEnabled,
+@@clientName(
+  NrtAlertRuleProperties.suppressionEnabled,
   "IsSuppressionEnabled",
   "csharp"
 );
-@@clientName(AlertRuleTemplatePropertiesBase.createdDateUTC,
+@@clientName(
+  AlertRuleTemplatePropertiesBase.createdDateUTC,
   "CreatedOn",
   "csharp"
 );
-@@clientName(AlertRuleTemplatePropertiesBase.lastUpdatedDateUTC,
+@@clientName(
+  AlertRuleTemplatePropertiesBase.lastUpdatedDateUTC,
   "LastUpdatedOn",
   "csharp"
 );
 @@clientName(OfficeConsent, "SecurityInsightsOfficeConsent", "csharp");
-@@clientName(OfficeDataConnector,
+@@clientName(
+  OfficeDataConnector,
   "SecurityInsightsOfficeDataConnector",
   "csharp"
 );
-@@clientName(OfficeDataConnectorDataTypes,
+@@clientName(
+  OfficeDataConnectorDataTypes,
   "SecurityInsightsOfficeDataConnectorDataTypes",
   "csharp"
 );
-@@alternateType(OfficeDataConnectorDataTypes.exchange,
+@@alternateType(
+  OfficeDataConnectorDataTypes.exchange,
   DataConnectorDataTypeCommon,
   "csharp"
 );
-@@alternateType(OfficeDataConnectorDataTypes.sharePoint,
+@@alternateType(
+  OfficeDataConnectorDataTypes.sharePoint,
   DataConnectorDataTypeCommon,
   "csharp"
 );
-@@alternateType(OfficeDataConnectorDataTypes.teams,
+@@alternateType(
+  OfficeDataConnectorDataTypes.teams,
   DataConnectorDataTypeCommon,
   "csharp"
 );
-@@alternateType(DataConnectorTenantId.tenantId,
-  Azure.Core.uuid,
-  "csharp"
-);
+@@alternateType(DataConnectorTenantId.tenantId, Azure.Core.uuid, "csharp");
 @@clientName(Operator, "ThreatIntelligenceQueryOperator", "csharp");
 @@clientName(OSFamily.IOS, "Ios", "csharp");
 @@clientName(OSFamily, "SecurityInsightsHostOSFamily", "csharp");
@@ -703,7 +820,8 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(PackageKind, "SecurityInsightsMetadataPackageKind", "csharp");
 @@clientName(PackageModel, "SecurityInsightsPackage", "csharp");
 @@clientName(Permissions, "ConnectorPermissions", "csharp");
-@@clientName(PlaybookActionProperties,
+@@clientName(
+  PlaybookActionProperties,
   "AutomationRuleRunPlaybookActionProperties",
   "csharp"
 );
@@ -711,69 +829,83 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(ProcessEntity, "SecurityInsightsProcessEntity", "csharp");
 @@clientName(ProductPackageModel, "SecurityInsightsProductPackage", "csharp");
 @@clientName(ProductTemplateModel, "SecurityInsightsProductTemplate", "csharp");
-@@clientName(PropertyArrayChangedConditionProperties,
+@@clientName(
+  PropertyArrayChangedConditionProperties,
   "SecurityInsightsPropertyArrayChangedConditionProperties",
   "csharp"
 );
-@@clientName(PropertyChangedConditionProperties,
+@@clientName(
+  PropertyChangedConditionProperties,
   "SecurityInsightsPropertyChangedConditionProperties",
   "csharp"
 );
-@@clientName(PropertyConditionProperties,
+@@clientName(
+  PropertyConditionProperties,
   "SecurityInsightsPropertyConditionProperties",
   "csharp"
 );
 @@clientName(ProviderName, "ConnectorProviderName", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "TriggeredAnalyticsRuleRunProvisioningState",
   "csharp"
 );
 @@clientName(PullRequest, "PullRequestInfo", "csharp");
 @@clientName(GraphQueries, "ConnectorGraphQueries", "csharp");
 @@clientName(GraphQuery, "ConnectorGraphQuery", "csharp");
-@@clientName(OfficeATPCheckRequirements,
+@@clientName(
+  OfficeATPCheckRequirements,
   "OfficeAtpCheckRequirements",
   "csharp"
 );
-@@clientName(OfficeATPCheckRequirementsProperties,
+@@clientName(
+  OfficeATPCheckRequirementsProperties,
   "OfficeAtpCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(OfficeATPDataConnector, "OfficeAtpDataConnector", "csharp");
-@@clientName(OfficeATPDataConnectorProperties,
+@@clientName(
+  OfficeATPDataConnectorProperties,
   "OfficeAtpDataConnectorProperties",
   "csharp"
 );
-@@clientName(OfficeIRMCheckRequirements,
+@@clientName(
+  OfficeIRMCheckRequirements,
   "OfficeIrmCheckRequirements",
   "csharp"
 );
-@@clientName(OfficeIRMCheckRequirementsProperties,
+@@clientName(
+  OfficeIRMCheckRequirementsProperties,
   "OfficeIrmCheckRequirementsProperties",
   "csharp"
 );
 @@clientName(OfficeIRMDataConnector, "OfficeIrmDataConnector", "csharp");
-@@clientName(OfficeIRMDataConnectorProperties,
+@@clientName(
+  OfficeIRMDataConnectorProperties,
   "OfficeIrmDataConnectorProperties",
   "csharp"
 );
 @@clientName(QueryCondition, "ThreatIntelligenceQueryCondition", "csharp");
-@@clientName(Microsoft.SecurityInsights.Query,
+@@clientName(
+  Microsoft.SecurityInsights.Query,
   "ThreatIntelligenceQuery",
   "csharp"
 );
 @@clientName(QuerySortBy, "ThreatIntelligenceQuerySortBy", "csharp");
 @@clientName(RecommendationProperties.creationTimeUtc, "CreatedOn", "csharp");
-@@clientName(RecommendationProperties.lastEvaluatedTimeUtc,
+@@clientName(
+  RecommendationProperties.lastEvaluatedTimeUtc,
   "LastEvaluatedOn",
   "csharp"
 );
-@@clientName(RecommendationProperties.lastModifiedTimeUtc,
+@@clientName(
+  RecommendationProperties.lastModifiedTimeUtc,
   "LastModifiedOn",
   "csharp"
 );
 @@clientName(Recommendation, "SecurityInsightsRecommendation", "csharp");
-@@clientName(ReevaluateResponse.lastEvaluatedTimeUtc,
+@@clientName(
+  ReevaluateResponse.lastEvaluatedTimeUtc,
   "LastEvaluatedOn",
   "csharp"
 );
@@ -783,29 +915,31 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(RegistryHive.HKEY_CLASSES_ROOT, "HkeyClassesRoot", "csharp");
 @@clientName(RegistryHive.HKEY_CURRENT_CONFIG, "HkeyCurrentConfig", "csharp");
 @@clientName(RegistryHive.HKEY_CURRENT_USER, "HkeyCurrentUser", "csharp");
-@@clientName(RegistryHive.HKEY_CURRENT_USER_LOCAL_SETTINGS,
+@@clientName(
+  RegistryHive.HKEY_CURRENT_USER_LOCAL_SETTINGS,
   "HkeyCurrentUserLocalSettings",
   "csharp"
 );
-@@clientName(RegistryHive.HKEY_LOCAL_MACHINE,
-  "HkeyLocalMachine",
-  "csharp"
-);
-@@clientName(RegistryHive.HKEY_PERFORMANCE_DATA,
+@@clientName(RegistryHive.HKEY_LOCAL_MACHINE, "HkeyLocalMachine", "csharp");
+@@clientName(
+  RegistryHive.HKEY_PERFORMANCE_DATA,
   "HkeyPerformanceData",
   "csharp"
 );
-@@clientName(RegistryHive.HKEY_PERFORMANCE_NLSTEXT,
+@@clientName(
+  RegistryHive.HKEY_PERFORMANCE_NLSTEXT,
   "HkeyPerformanceNlstext",
   "csharp"
 );
-@@clientName(RegistryHive.HKEY_PERFORMANCE_TEXT,
+@@clientName(
+  RegistryHive.HKEY_PERFORMANCE_TEXT,
   "HkeyPerformanceText",
   "csharp"
 );
 @@clientName(RegistryHive.HKEY_USERS, "HkeyUsers", "csharp");
 @@clientName(RegistryKeyEntity, "SecurityInsightsRegistryKeyEntity", "csharp");
-@@clientName(RegistryValueEntity,
+@@clientName(
+  RegistryValueEntity,
   "SecurityInsightsRegistryValueEntity",
   "csharp"
 );
@@ -821,48 +955,58 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(RequiredPermissions.read, "IsReadAction", "csharp");
 @@clientName(RequiredPermissions.write, "IsWriteAction", "csharp");
 @@clientName(ResourceProvider, "ConnectorResourceProvider", "csharp");
-@@clientName(ResourceProviderRequiredPermissions,
+@@clientName(
+  ResourceProviderRequiredPermissions,
   "ConnectorResourceProviderRequiredPermissions",
   "csharp"
 );
-@@clientName(ResourceProviderRequiredPermissions.action,
+@@clientName(
+  ResourceProviderRequiredPermissions.action,
   "IsCustomAction",
   "csharp"
 );
-@@clientName(ResourceProviderRequiredPermissions.delete,
+@@clientName(
+  ResourceProviderRequiredPermissions.delete,
   "IsDeleteAction",
   "csharp"
 );
-@@clientName(ResourceProviderRequiredPermissions.read,
+@@clientName(
+  ResourceProviderRequiredPermissions.read,
   "IsReadAction",
   "csharp"
 );
-@@clientName(ResourceProviderRequiredPermissions.write,
+@@clientName(
+  ResourceProviderRequiredPermissions.write,
   "IsWriteAction",
   "csharp"
 );
 @@clientName(SampleQueries, "SourceControlSampleQueries", "csharp");
 @@clientName(ScheduledAlertRuleProperties.enabled, "IsEnabled", "csharp");
-@@clientName(ScheduledAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  ScheduledAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(ScheduledAlertRuleProperties.suppressionEnabled,
+@@clientName(
+  ScheduledAlertRuleProperties.suppressionEnabled,
   "IsSuppressionEnabled",
   "csharp"
 );
-@@clientName(ScheduledAlertRule,
+@@clientName(
+  ScheduledAlertRule,
   "SecurityInsightsScheduledAlertRule",
   "csharp"
 );
 @@clientName(SecurityAlertProperties.endTimeUtc, "EndOn", "csharp");
 @@clientName(SecurityAlertProperties.startTimeUtc, "StartOn", "csharp");
-@@clientName(SecurityAlertProperties.timeGenerated,
+@@clientName(
+  SecurityAlertProperties.timeGenerated,
   "AlertGeneratedOn",
   "csharp"
 );
 @@clientName(SecurityAlert, "SecurityInsightsAlert", "csharp");
-@@clientName(SecurityAlertPropertiesConfidenceReasonsItem,
+@@clientName(
+  SecurityAlertPropertiesConfidenceReasonsItem,
   "SecurityInsightsAlertConfidenceReason",
   "csharp"
 );
@@ -870,24 +1014,28 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(SecurityAlertTimelineItem.startTimeUtc, "StartOn", "csharp");
 @@clientName(SecurityAlertTimelineItem.timeGenerated, "GeneratedOn", "csharp");
 @@clientName(SecurityGroupEntity, "SecurityInsightsGroupEntity", "csharp");
-@@clientName(SentinelOnboardingStateProperties.customerManagedKey,
+@@clientName(
+  SentinelOnboardingStateProperties.customerManagedKey,
   "IsCustomerManagedKeySet",
   "csharp"
 );
-@@clientName(SentinelOnboardingState,
+@@clientName(
+  SentinelOnboardingState,
   "SecurityInsightsSentinelOnboardingState",
   "csharp"
 );
 @@clientName(ServicePrincipal, "SourceControlServicePrincipal", "csharp");
 @@clientName(SettingList, "SecurityInsightsSettingList", "csharp");
 @@clientName(Settings, "SecurityInsightsSetting", "csharp");
-@@clientName(SettingsStatus,
+@@clientName(
+  SettingsStatus,
   "AnomalySecurityMLAnalyticsSettingsStatus",
   "csharp"
 );
 @@clientName(SettingType, "ConnectorSettingType", "csharp");
 @@clientName(Status, "SecurityInsightsContentStatus", "csharp");
-@@clientName(SortingDirection,
+@@clientName(
+  SortingDirection,
   "ThreatIntelligenceQuerySortingDirection",
   "csharp"
 );
@@ -896,136 +1044,188 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(SourceKind, "SecurityInsightsSourceKind", "csharp");
 @@clientName(SourceType, "WatchlistSourceType", "csharp");
 @@clientName(State, "RecommendationState", "csharp");
-@@clientName(SubmissionMailEntityProperties.submissionDate,
+@@clientName(
+  SubmissionMailEntityProperties.submissionDate,
   "SubmitOn",
   "csharp"
 );
 @@clientName(SubmissionMailEntityProperties.senderIp, "SenderIP", "csharp");
-@@alternateType(SubmissionMailEntityProperties.senderIp,
+@@alternateType(
+  SubmissionMailEntityProperties.senderIp,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@clientName(SubmissionMailEntityProperties.timestamp,
+@@clientName(
+  SubmissionMailEntityProperties.timestamp,
   "MessageReceivedOn",
   "csharp"
 );
-@@clientName(SubmissionMailEntity,
+@@clientName(
+  SubmissionMailEntity,
   "SecurityInsightsSubmissionMailEntity",
   "csharp"
 );
 @@clientName(SupportTier, "SecurityInsightsSupportTier", "csharp");
 @@clientName(TemplateModel, "SecurityInsightsTemplate", "csharp");
-@@clientName(TemplateProperties,
+@@clientName(
+  TemplateProperties,
   "SecurityInsightsContentTemplateProperties",
   "csharp"
 );
-@@clientName(TemplateStatus,
+@@clientName(
+  TemplateStatus,
   "SecurityInsightsAlertRuleTemplateStatus",
   "csharp"
 );
 @@clientName(ThreatActor, "ThreatIntelligenceThreatActor", "csharp");
-@@clientName(ThreatIntelligence,
+@@clientName(
+  ThreatIntelligence,
   "SecurityInsightsThreatIntelligence",
   "csharp"
 );
-@@clientName(ThreatIntelligenceAlertRuleProperties.enabled,
+@@clientName(
+  ThreatIntelligenceAlertRuleProperties.enabled,
   "IsEnabled",
   "csharp"
 );
-@@clientName(ThreatIntelligenceAlertRuleProperties.lastModifiedUtc,
+@@clientName(
+  ThreatIntelligenceAlertRuleProperties.lastModifiedUtc,
   "LastModifiedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceAlertRuleTemplateProperties.createdDateUTC,
+@@clientName(
+  ThreatIntelligenceAlertRuleTemplateProperties.createdDateUTC,
   "CreatedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceAlertRuleTemplateProperties.lastUpdatedDateUTC,
+@@clientName(
+  ThreatIntelligenceAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceFilteringCriteria.includeDisabled,
+@@clientName(
+  ThreatIntelligenceFilteringCriteria.includeDisabled,
   "IsIncludeDisabled",
   "csharp"
 );
-@@clientName(ThreatIntelligenceGranularMarkingModel,
+@@clientName(
+  ThreatIntelligenceGranularMarkingModel,
   "ThreatIntelligenceGranularMarkingEntity",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorProperties.created,
+@@clientName(
+  ThreatIntelligenceIndicatorProperties.created,
   "CreatedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorProperties.defanged,
+@@clientName(
+  ThreatIntelligenceIndicatorProperties.defanged,
   "IsDefanged",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorProperties.externalLastUpdatedTimeUtc,
+@@clientName(
+  ThreatIntelligenceIndicatorProperties.externalLastUpdatedTimeUtc,
   "ExternalLastUpdatedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorProperties.lastUpdatedTimeUtc,
+@@clientName(
+  ThreatIntelligenceIndicatorProperties.lastUpdatedTimeUtc,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorProperties.revoked,
+@@clientName(
+  ThreatIntelligenceIndicatorProperties.revoked,
   "IsRevoked",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorModel,
+@@clientName(
+  ThreatIntelligenceIndicatorModel,
   "SecurityInsightsThreatIntelligenceIndicatorData",
   "csharp"
 );
-@@clientName(ThreatIntelligenceInformation,
+@@clientName(
+  ThreatIntelligenceInformation,
   "SecurityInsightsThreatIntelligenceIndicatorBase",
   "csharp"
 );
 @@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
-@@alternateType(ThreatIntelligenceIndicatorProperties.created, utcDateTime, "csharp");
-@@alternateType(ThreatIntelligenceIndicatorProperties.externalLastUpdatedTimeUtc, utcDateTime, "csharp");
-@@alternateType(ThreatIntelligenceIndicatorProperties.lastUpdatedTimeUtc, utcDateTime, "csharp");
-@@alternateType(ThreatIntelligenceIndicatorProperties.validFrom, utcDateTime, "csharp");
-@@alternateType(ThreatIntelligenceIndicatorProperties.validUntil, utcDateTime, "csharp");
-@@clientName(ThreatIntelligenceMetric.lastUpdatedTimeUtc,
+@@alternateType(
+  ThreatIntelligenceIndicatorProperties.created,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ThreatIntelligenceIndicatorProperties.externalLastUpdatedTimeUtc,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ThreatIntelligenceIndicatorProperties.lastUpdatedTimeUtc,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ThreatIntelligenceIndicatorProperties.validFrom,
+  utcDateTime,
+  "csharp"
+);
+@@alternateType(
+  ThreatIntelligenceIndicatorProperties.validUntil,
+  utcDateTime,
+  "csharp"
+);
+@@clientName(
+  ThreatIntelligenceMetric.lastUpdatedTimeUtc,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(TICheckRequirements,
+@@clientName(
+  TICheckRequirements,
   "ThreatIntelligenceCheckRequirements",
   "csharp"
 );
-@@clientName(TIDataConnectorProperties.tipLookbackPeriod,
+@@clientName(
+  TIDataConnectorProperties.tipLookbackPeriod,
   "TipLookbackOn",
   "csharp"
 );
 @@clientName(TIDataConnector, "SecurityInsightsTIDataConnector", "csharp");
 @@clientName(TIObject, "ThreatIntelligenceObject", "csharp");
-@@clientName(TIObjectCommonProperties.firstIngestedTimeUtc,
+@@clientName(TIObjectCommonProperties, "TiObjectCommonProperties", "csharp");
+@@clientName(
+  TIObjectCommonProperties.firstIngestedTimeUtc,
   "FirstIngestedOn",
   "csharp"
 );
-@@clientName(TIObjectCommonProperties.lastIngestedTimeUtc,
+@@clientName(
+  TIObjectCommonProperties.lastIngestedTimeUtc,
   "LastIngestedOn",
   "csharp"
 );
-@@clientName(TIObjectCommonProperties.lastUpdatedDateTimeUtc,
+@@clientName(
+  TIObjectCommonProperties.lastUpdatedDateTimeUtc,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(TiTaxiiCheckRequirements,
+@@clientName(TIObjectKind, "TiObjectKind", "csharp");
+@@clientName(
+  TiTaxiiCheckRequirements,
   "ThreatIntelligenceTaxiiCheckRequirements",
   "csharp"
 );
-@@clientName(TiTaxiiDataConnector,
+@@clientName(
+  TiTaxiiDataConnector,
   "ThreatIntelligenceTaxiiDataConnector",
   "csharp"
 );
 @@clientName(TiType, "ThreatIntelligenceType", "csharp");
-@@clientName(TriggeredAnalyticsRuleRunProperties.executionTimeUtc,
+@@clientName(
+  TriggeredAnalyticsRuleRunProperties.executionTimeUtc,
   "ExecuteOn",
   "csharp"
 );
-@@clientName(TriggerOperator,
+@@clientName(
+  TriggerOperator,
   "SecurityInsightsAlertRuleTriggerOperator",
   "csharp"
 );
@@ -1043,19 +1243,23 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(WatchlistProperties.updated, "UpdatedOn", "csharp");
 @@clientName(Watchlist, "SecurityInsightsWatchlist", "csharp");
 @@clientName(WatchlistItemProperties.created, "CreatedOn", "csharp");
-@@clientName(WatchlistItemProperties.entityMapping,
+@@clientName(
+  WatchlistItemProperties.entityMapping,
   "EntityMappingDictionary",
   "csharp"
 );
-@@clientName(WatchlistItemProperties.itemsKeyValue,
+@@clientName(
+  WatchlistItemProperties.itemsKeyValue,
   "ItemsKeyValueDictionary",
   "csharp"
 );
-@@alternateType(WatchlistItemProperties.itemsKeyValue,
+@@alternateType(
+  WatchlistItemProperties.itemsKeyValue,
   Record<unknown>,
   "csharp"
 );
-@@alternateType(WatchlistItemProperties.entityMapping,
+@@alternateType(
+  WatchlistItemProperties.entityMapping,
   Record<unknown>,
   "csharp"
 );
@@ -1066,23 +1270,27 @@ using Azure.ClientGenerator.Core.Legacy;
 
 // ---- C# enum member + operation renames (ported from autorest.md) ----
 @@clientName(Operator.Equals, "EqualsValue", "csharp");
-@@clientName(AutomationRulePropertyConditionSupportedOperator.Equals,
+@@clientName(
+  AutomationRulePropertyConditionSupportedOperator.Equals,
   "EqualsValue",
   "csharp"
 );
 @@clientName(listWhoisByDomain, "GetDomainWhoisInformation", "csharp");
 @@clientName(Incidents.listEntities, "GetEntitiesResult", "csharp");
-@@clientName(ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
+@@clientName(
+  ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
   "QueryThreatIntelligenceIndicators",
   "csharp"
 );
-@@clientName(ThreatIntelligenceIndicatorMetricsOperationGroup.list,
+@@clientName(
+  ThreatIntelligenceIndicatorMetricsOperationGroup.list,
   "GetAllThreatIntelligenceIndicatorMetrics",
   "csharp"
 );
 
 // ---- C# request/response model renames to satisfy AZC0030 (ported from autorest mgmt naming conventions) ----
-@@clientName(ActionRequest,
+@@clientName(
+  ActionRequest,
   "SecurityInsightsAlertRuleActionCreateOrUpdateContent",
   "csharp"
 );
@@ -1105,7 +1313,8 @@ using Azure.ClientGenerator.Core.Legacy;
 @@markAsPageable(Incidents.listBookmarks, "csharp");
 
 // ---- Rename TAXII data type model so it does not end in "Client" (AZC0005/AZC0007). ----
-@@clientName(TiTaxiiDataConnectorDataTypesTaxiiClient,
+@@clientName(
+  TiTaxiiDataConnectorDataTypesTaxiiClient,
   "TiTaxiiDataConnectorDataTypesTaxiiClientInfo",
   "csharp"
 );
@@ -1120,7 +1329,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@usage(ActionResponse, Usage.input, "csharp");
 @@usage(ActivityEntityQuery, Usage.input, "csharp");
 @@usage(ActivityEntityQueryTemplate, Usage.input, "csharp");
-@@usage(ActivityEntityQueryTemplatePropertiesQueryDefinitions, Usage.input, "csharp");
+@@usage(
+  ActivityEntityQueryTemplatePropertiesQueryDefinitions,
+  Usage.input,
+  "csharp"
+);
 @@usage(AccountEntity, Usage.input, "csharp");
 @@usage(AlertRuleTemplateDataSource, Usage.input, "csharp");
 @@usage(AzureResourceEntity, Usage.input, "csharp");
@@ -1150,7 +1363,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@usage(MailClusterEntity, Usage.input, "csharp");
 @@usage(MailMessageEntity, Usage.input, "csharp");
 @@usage(MalwareEntity, Usage.input, "csharp");
-@@usage(MicrosoftSecurityIncidentCreationAlertRuleTemplate, Usage.input, "csharp");
+@@usage(
+  MicrosoftSecurityIncidentCreationAlertRuleTemplate,
+  Usage.input,
+  "csharp"
+);
 @@usage(MLBehaviorAnalyticsAlertRuleTemplate, Usage.input, "csharp");
 @@usage(MTPDataConnector, Usage.input, "csharp");
 @@usage(MTPDataConnectorProperties, Usage.input, "csharp");
@@ -1184,7 +1401,8 @@ using Azure.ClientGenerator.Core.Legacy;
 @@alternateType(BillingStatistic.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(Bookmark.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(DataConnector.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(DataConnectorDefinition.etag,
+@@alternateType(
+  DataConnectorDefinition.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
@@ -1197,82 +1415,102 @@ using Azure.ClientGenerator.Core.Legacy;
 @@alternateType(Job.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(MetadataModel.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(PackageModel.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(ProductPackageModel.etag,
+@@alternateType(
+  ProductPackageModel.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(ProductTemplateModel.etag,
+@@alternateType(
+  ProductTemplateModel.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
 @@alternateType(Recommendation.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(Relation.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(ResourceWithEtag.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(SecurityMLAnalyticsSetting.etag,
+@@alternateType(
+  SecurityMLAnalyticsSetting.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(SentinelOnboardingState.etag,
+@@alternateType(
+  SentinelOnboardingState.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
 @@alternateType(Settings.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(SourceControl.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(TemplateModel.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(ThreatIntelligenceInformation.etag,
+@@alternateType(
+  ThreatIntelligenceInformation.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(TriggeredAnalyticsRuleRun.etag,
+@@alternateType(
+  TriggeredAnalyticsRuleRun.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
 @@alternateType(Watchlist.etag, Azure.Core.EtagProperty.etag, "csharp");
 @@alternateType(WatchlistItem.etag, Azure.Core.EtagProperty.etag, "csharp");
-@@alternateType(WorkspaceManagerAssignment.etag,
+@@alternateType(
+  WorkspaceManagerAssignment.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(WorkspaceManagerConfiguration.etag,
+@@alternateType(
+  WorkspaceManagerConfiguration.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(WorkspaceManagerGroup.etag,
+@@alternateType(
+  WorkspaceManagerGroup.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
-@@alternateType(WorkspaceManagerMember.etag,
+@@alternateType(
+  WorkspaceManagerMember.etag,
   Azure.Core.EtagProperty.etag,
   "csharp"
 );
 
-@@alternateType(AnomalyTimelineItem.azureResourceId,
+@@alternateType(
+  AnomalyTimelineItem.azureResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ActionRequestProperties.triggerUri, url, "csharp");
-@@alternateType(BookmarkTimelineItem.azureResourceId,
+@@alternateType(
+  BookmarkTimelineItem.azureResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(HostEntityProperties.azureID, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  HostEntityProperties.azureID,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(IncidentProperties.incidentUrl, url, "csharp");
 @@alternateType(FileMetadata.fileContentUri, url, "csharp");
 @@alternateType(MailMessageEntityProperties.urls, url[], "csharp");
-@@clientName(IncidentAdditionalData.providerIncidentUrl,
+@@clientName(
+  IncidentAdditionalData.providerIncidentUrl,
   "ProviderIncidentUri",
   "csharp"
 );
 @@alternateType(IncidentAdditionalData.providerIncidentUrl, url, "csharp");
-@@alternateType(RelationProperties.relatedResourceId,
+@@alternateType(
+  RelationProperties.relatedResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RelationProperties.relatedResourceType,
+@@alternateType(
+  RelationProperties.relatedResourceType,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(HuntRelationProperties.relatedResourceId,
+@@alternateType(
+  HuntRelationProperties.relatedResourceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -1282,16 +1520,28 @@ using Azure.ClientGenerator.Core.Legacy;
 @@alternateType(WatchlistProperties.tenantId, Azure.Core.uuid, "csharp");
 @@alternateType(WatchlistItemProperties.tenantId, Azure.Core.uuid, "csharp");
 
-@@alternateType(ActionPropertiesBase.logicAppResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  ActionPropertiesBase.logicAppResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(AlertRules.triggerRuleRun, "TriggerRuleRunAlertRule", "csharp");
 @@clientName(Status, "SecurityInsightsContentStatus", "csharp");
-@@clientName(TemplateProperties, "SecurityInsightsContentTemplateProperties", "csharp");
+@@clientName(
+  TemplateProperties,
+  "SecurityInsightsContentTemplateProperties",
+  "csharp"
+);
 @@clientName(CountQuery, "ThreatIntelligenceCountQuery", "csharp");
 @@clientName(JobItem, "SecurityInsightsContentJobItem", "csharp");
 @@clientName(ConnectAuthKind.APIKey, "ApiKey", "csharp");
 @@clientName(EntityType.DNS, "Dns", "csharp");
 @@clientName(EntityType.URL, "Url", "csharp");
-@@clientName(PremiumMdtiDataConnectorProperties.requiredSKUsPresent, "IsRequiredSKUsPresent", "csharp");
+@@clientName(
+  PremiumMdtiDataConnectorProperties.requiredSKUsPresent,
+  "IsRequiredSKUsPresent",
+  "csharp"
+);
 @@clientName(ResourceWithEtag, "SecurityInsightsResourceWithEtag", "csharp");
 @@clientName(
   ThreatIntelligenceIndicatorOperationGroup.queryIndicators,
