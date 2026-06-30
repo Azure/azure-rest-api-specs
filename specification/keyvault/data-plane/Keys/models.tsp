@@ -1059,15 +1059,13 @@ model KeySignParameters {
    * The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.
    */
   @encodedName("application/json", "alg")
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
-  algorithm?: JsonWebKeySignatureAlgorithm;
+  algorithm: JsonWebKeySignatureAlgorithm;
 
   /**
    * The value to operate on.
    */
-  @madeOptional(KeyVault.Versions.v2026_05_01_preview)
   @encode("base64url")
-  value?: bytes;
+  value: bytes;
 
   /**
    * The pre-computed mu value for ML-DSA external mu mode (FIPS 204 Section 6.2). Must be exactly 64 bytes.

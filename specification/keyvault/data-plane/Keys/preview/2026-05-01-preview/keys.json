@@ -2776,7 +2776,11 @@
           "format": "base64url",
           "description": "The application context string for ML-DSA signing (FIPS 204 Section 5.2). Must be 0-255 bytes.\nMust not be set when external_mu is specified. Only supported for ML-DSA (AKP) keys."
         }
-      }
+      },
+      "required": [
+        "alg",
+        "value"
+      ]
     },
     "KeyUpdateParameters": {
       "type": "object",
