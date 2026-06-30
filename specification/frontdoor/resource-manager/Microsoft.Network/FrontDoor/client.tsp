@@ -85,6 +85,7 @@ interface ProfilesOverrides {
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @path
     profileName: string,
     ...ResourceGroupParameter,
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

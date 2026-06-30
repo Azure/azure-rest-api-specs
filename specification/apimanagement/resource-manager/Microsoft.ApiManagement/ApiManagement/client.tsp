@@ -219,6 +219,8 @@ op replaceGetByName(
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "matches the original DeletedServiceContracts.purge operation"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "matches the original DeletedServiceContracts.purge operation"
 op replacePurge(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
