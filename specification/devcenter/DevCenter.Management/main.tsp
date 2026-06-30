@@ -35,6 +35,7 @@ import "./Schedule.tsp";
 import "./NetworkConnection.tsp";
 import "./HealthCheckStatusDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

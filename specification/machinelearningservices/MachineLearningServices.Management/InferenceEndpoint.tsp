@@ -21,6 +21,7 @@ namespace Microsoft.MachineLearningServices;
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @parentResource(Workspace)
 model InferenceEndpoint
   is Azure.ResourceManager.TrackedResource<InferenceEndpointProperties, false> {
@@ -48,6 +49,7 @@ model InferenceEndpoint
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface InferenceEndpointOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -88,6 +90,7 @@ interface InferenceEndpointOps
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface InferenceEndpoints {
   /**
@@ -103,16 +106,18 @@ interface InferenceEndpoints {
   @summary("Create or update InferenceEndpoint (asynchronous).")
   createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
     InferenceEndpoint,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
-      InferenceEndpoint,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmResourceCreatedResponse<
+          InferenceEndpoint,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = InferenceEndpoint>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -123,15 +128,17 @@ interface InferenceEndpoints {
   @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
-    PatchModel = void,
-    Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
-      Azure.Core.Foundations.RetryAfterHeader & {
-        /**
-         * Timeout for the client to use when polling the asynchronous operation.
-         */
-        @header("x-ms-async-operation-timeout")
-        timeout: duration;
-      })
+    PatchModel = Record<unknown>,
+    Response =
+      | ArmResourceUpdatedResponse<InferenceEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InferenceEndpoint>> &
+          Azure.Core.Foundations.RetryAfterHeader & {
+            /**
+             * Timeout for the client to use when polling the asynchronous operation.
+             */
+            @header("x-ms-async-operation-timeout")
+            timeout: duration;
+          })
   >;
 
   /**
@@ -141,13 +148,16 @@ interface InferenceEndpoints {
   @summary("Delete InferenceEndpoint (asynchronous).")
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -192,18 +202,23 @@ interface InferenceEndpoints {
 }
 
 @@doc(InferenceEndpoint.name, "InferenceEndpoint name.");
-@@doc(InferenceEndpoint.properties,
+@@doc(
+  InferenceEndpoint.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(InferenceEndpoints.createOrUpdate::parameters.resource,
+@@doc(
+  InferenceEndpoints.createOrUpdate::parameters.resource,
   "InferenceEndpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoints.update::parameters.properties,
+@@doc(
+  InferenceEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
-@@doc(InferenceEndpoint.identity,
+@@doc(
+  InferenceEndpoint.identity,
   "Managed service identity (system assigned and/or user assigned identities)"
 );
-@@doc(InferenceEndpoint.sku,
+@@doc(
+  InferenceEndpoint.sku,
   "Sku details required for ARM contract for Autoscaling."
 );

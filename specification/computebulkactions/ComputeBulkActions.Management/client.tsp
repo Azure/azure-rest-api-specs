@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 
 namespace Microsoft.ComputeBulkActions;
 
@@ -9,7 +10,8 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
 @@clientName(CancelOperationsRequest.correlationid, "correlationId", "java");
-@@clientName(Microsoft.ComputeBulkActions,
+@@clientName(
+  Microsoft.ComputeBulkActions,
   "ComputeBulkActionsMgmtClient",
   "python"
 );
@@ -19,7 +21,8 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 @@clientName(ExecuteTypeRequest.correlationid, "CorrelationId", "csharp");
 @@clientName(ExecuteCreateRequest.correlationid, "CorrelationId", "csharp");
-@@clientName(GetOperationStatusRequest.correlationid,
+@@clientName(
+  GetOperationStatusRequest.correlationid,
   "CorrelationId",
   "csharp"
 );
@@ -28,38 +31,67 @@ namespace Microsoft.ComputeBulkActions;
 // =====================================================================
 // Critical: Request suffix → Content suffix
 // =====================================================================
-@@clientName(CancelOperationsRequest, "CancelOperationsContent", "csharp");
+@@clientName(
+  CancelOperationsRequest,
+  "BulkActionCancelOperationsContent",
+  "csharp"
+);
 @@clientName(ExecuteTypeRequest, "ExecuteTypeContent", "csharp");
-@@clientName(ExecuteCreateRequest, "ExecuteCreateContent", "csharp");
-@@clientName(ExecuteDeallocateRequest, "ExecuteDeallocateContent", "csharp");
-@@clientName(ExecuteDeleteRequest, "ExecuteDeleteContent", "csharp");
-@@clientName(ExecuteHibernateRequest, "ExecuteHibernateContent", "csharp");
-@@clientName(ExecuteStartRequest, "ExecuteStartContent", "csharp");
-@@clientName(GetOperationStatusRequest, "GetOperationStatusContent", "csharp");
+@@clientName(ExecuteCreateRequest, "BulkActionExecuteCreateContent", "csharp");
+@@clientName(
+  ExecuteDeallocateRequest,
+  "BulkActionExecuteDeallocateContent",
+  "csharp"
+);
+@@clientName(ExecuteDeleteRequest, "BulkActionExecuteDeleteContent", "csharp");
+@@clientName(
+  ExecuteHibernateRequest,
+  "BulkActionExecuteHibernateContent",
+  "csharp"
+);
+@@clientName(ExecuteStartRequest, "BulkActionExecuteStartContent", "csharp");
+@@clientName(
+  GetOperationStatusRequest,
+  "BulkActionGetOperationStatusContent",
+  "csharp"
+);
 
 // =====================================================================
 // Critical: Response suffix → Result suffix
 // =====================================================================
-@@clientName(CancelOperationsResponse, "CancelOperationsResult", "csharp");
-@@clientName(CreateResourceOperationResponse,
-  "CreateResourceOperationResult",
+@@clientName(
+  CancelOperationsResponse,
+  "BulkActionCancelOperationsResult",
   "csharp"
 );
-@@clientName(DeallocateResourceOperationResponse,
-  "DeallocateResourceOperationResult",
+@@clientName(
+  CreateResourceOperationResponse,
+  "BulkActionCreateResourceOperationResult",
   "csharp"
 );
-@@clientName(DeleteResourceOperationResponse,
-  "DeleteResourceOperationResult",
+@@clientName(
+  DeallocateResourceOperationResponse,
+  "BulkActionDeallocateResourceOperationResult",
   "csharp"
 );
-@@clientName(GetOperationStatusResponse, "GetOperationStatusResult", "csharp");
-@@clientName(HibernateResourceOperationResponse,
-  "HibernateResourceOperationResult",
+@@clientName(
+  DeleteResourceOperationResponse,
+  "BulkActionDeleteResourceOperationResult",
   "csharp"
 );
-@@clientName(StartResourceOperationResponse,
-  "StartResourceOperationResult",
+@@clientName(
+  GetOperationStatusResponse,
+  "BulkActionGetOperationStatusResult",
+  "csharp"
+);
+@@clientName(
+  HibernateResourceOperationResponse,
+  "BulkActionHibernateResourceOperationResult",
+  "csharp"
+);
+@@clientName(
+  StartResourceOperationResponse,
+  "BulkActionStartResourceOperationResult",
   "csharp"
 );
 
@@ -67,35 +99,451 @@ namespace Microsoft.ComputeBulkActions;
 // Critical: Parameters suffix
 // =====================================================================
 @@clientName(ExecutionParameters, "BulkActionExecutionConfig", "csharp");
+@@clientName(
+  ManagedDiskParameters,
+  "ComputeBulkActionsManagedDiskInfo",
+  "csharp"
+);
+@@clientName(
+  DiskEncryptionSetParameters,
+  "ComputeBulkActionsDiskEncryptionSetReference",
+  "csharp"
+);
 
 // =====================================================================
 // Warning: Plural enum names → singular
 // =====================================================================
-@@clientName(CachingTypes, "CachingType", "csharp");
-@@clientName(DiskControllerTypes, "DiskControllerType", "csharp");
-@@clientName(DiskCreateOptionTypes, "DiskCreateOptionType", "csharp");
-@@clientName(DiskDeleteOptionTypes, "DiskDeleteOptionType", "csharp");
-@@clientName(DiskDetachOptionTypes, "DiskDetachOptionType", "csharp");
-@@clientName(DomainNameLabelScopeTypes, "DomainNameLabelScopeType", "csharp");
-@@clientName(IPVersions, "IPVersion", "csharp");
-@@clientName(OperatingSystemTypes, "OperatingSystemType", "csharp");
-@@clientName(ProtocolTypes, "ProtocolType", "csharp");
-@@clientName(SecurityEncryptionTypes, "SecurityEncryptionType", "csharp");
-@@clientName(SecurityTypes, "SecurityType", "csharp");
-@@clientName(SettingNames, "SettingName", "csharp");
-@@clientName(StorageAccountTypes, "StorageAccountType", "csharp");
+@@clientName(CachingTypes, "ComputeBulkActionsCachingType", "csharp");
+@@clientName(
+  DiskControllerTypes,
+  "ComputeBulkActionsDiskControllerType",
+  "csharp"
+);
+@@clientName(
+  DiskCreateOptionTypes,
+  "ComputeBulkActionsDiskCreateOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDeleteOptionTypes,
+  "ComputeBulkActionsDiskDeleteOptionType",
+  "csharp"
+);
+@@clientName(
+  DiskDetachOptionTypes,
+  "ComputeBulkActionsDiskDetachOptionType",
+  "csharp"
+);
+@@clientName(
+  DomainNameLabelScopeTypes,
+  "ComputeBulkActionsDomainNameLabelScopeType",
+  "csharp"
+);
+@@clientName(IPVersions, "ComputeBulkActionsIPVersion", "csharp");
+@@clientName(
+  OperatingSystemTypes,
+  "ComputeBulkActionsOperatingSystemType",
+  "csharp"
+);
+@@clientName(ProtocolTypes, "ComputeBulkActionsProtocolType", "csharp");
+@@clientName(
+  SecurityEncryptionTypes,
+  "ComputeBulkActionsSecurityEncryptionType",
+  "csharp"
+);
+@@clientName(SecurityTypes, "ComputeBulkActionsSecurityType", "csharp");
+@@clientName(
+  SettingNames,
+  "ComputeBulkActionsAdditionalUnattendContentSettingName",
+  "csharp"
+);
+@@clientName(
+  StorageAccountTypes,
+  "ComputeBulkActionsStorageAccountType",
+  "csharp"
+);
+@@clientName(DeleteOptions, "ComputeBulkActionsDeleteOption", "csharp");
+@@clientName(DiffDiskOptions, "ComputeBulkActionsDiffDiskOption", "csharp");
+
+// =====================================================================
+// Warning: Acronym casing
+// =====================================================================
+@@clientName(AcceleratorType.GPU, "Gpu", "csharp");
+@@clientName(AcceleratorType.FPGA, "Fpga", "csharp");
+@@clientName(LocalStorageDiskType.HDD, "Hdd", "csharp");
+@@clientName(LocalStorageDiskType.SSD, "Ssd", "csharp");
+
+// =====================================================================
+// Warning: ARM resource identifier types
+// =====================================================================
+@@alternateType(ApiEntityReference.id, armResourceIdentifier, "csharp");
+@@alternateType(SubResource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  VMGalleryApplication.packageReferenceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  EncryptionIdentity.userAssignedIdentityResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  HostEndpointSettings.inVMAccessControlProfileReferenceId,
+  armResourceIdentifier,
+  "csharp"
+);
 
 // =====================================================================
 // Warning: Ambiguous type names
 // =====================================================================
-@@clientName(Mode, "ProxyAgentMode", "csharp");
-@@clientName(Modes, "HostEndpointMode", "csharp");
+@@clientName(LocationBasedLaunchBulkInstancesOperation, "BulkAction", "csharp");
+@@clientName(Mode, "ComputeBulkActionsProxyAgentMode", "csharp");
+@@clientName(Modes, "ComputeBulkActionsHostEndpointMode", "csharp");
 @@clientName(ApiError, "ComputeBulkActionsApiError", "csharp");
+@@clientName(ApiError.innererror, "InnerError", "csharp");
 @@clientName(ApiErrorBase, "ComputeBulkActionsApiErrorBase", "csharp");
 @@clientName(InnerError, "ComputeBulkActionsInnerError", "csharp");
 @@clientName(SubResource, "ComputeBulkActionsSubResource", "csharp");
 @@clientName(RetryPolicy, "BulkActionRetryPolicy", "csharp");
-@@clientName(ResourceOperation, "BulkActionResourceOperation", "csharp");
+@@clientName(ResourceOperation, "BulkActionResourceOperationInfo", "csharp");
+@@clientName(VirtualMachine, "BulkActionVirtualMachineResult", "csharp");
+@@clientName(
+  AdditionalCapabilities,
+  "ComputeBulkActionsAdditionalCapabilities",
+  "csharp"
+);
+@@clientName(BootDiagnostics, "ComputeBulkActionsBootDiagnostics", "csharp");
+@@clientName(DataDisk, "ComputeBulkActionsDataDisk", "csharp");
+@@clientName(ImageReference, "ComputeBulkActionsImageReference", "csharp");
+@@clientName(NetworkProfile, "ComputeBulkActionsNetworkProfile", "csharp");
+@@clientName(OSDisk, "ComputeBulkActionsOSDisk", "csharp");
+@@clientName(OSProfile, "ComputeBulkActionsOSProfile", "csharp");
+@@clientName(PatchSettings, "ComputeBulkActionsPatchSettings", "csharp");
+@@clientName(SecurityProfile, "ComputeBulkActionsSecurityProfile", "csharp");
+@@clientName(StorageProfile, "ComputeBulkActionsStorageProfile", "csharp");
+@@clientName(ProvisioningState, "BulkActionProvisioningState", "csharp");
+@@clientName(OperationState, "BulkActionOperationState", "csharp");
+@@clientName(
+  AllocationStrategy,
+  "ComputeBulkActionsAllocationStrategy",
+  "csharp"
+);
+@@clientName(CapacityType, "ComputeBulkActionsCapacityType", "csharp");
+@@clientName(DeadlineType, "ComputeBulkActionsDeadlineType", "csharp");
+@@clientName(EvictionPolicy, "ComputeBulkActionsEvictionPolicy", "csharp");
+@@clientName(
+  OptimizationPreference,
+  "ComputeBulkActionsOptimizationPreference",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineType,
+  "ComputeBulkActionsVirtualMachineType",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineProfile,
+  "ComputeBulkActionsVirtualMachineProfile",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineExtension,
+  "ComputeBulkActionsVirtualMachineExtension",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineExtensionProperties,
+  "ComputeBulkActionsVirtualMachineExtensionProperties",
+  "csharp"
+);
+@@clientName(
+  LinuxConfiguration,
+  "ComputeBulkActionsLinuxConfiguration",
+  "csharp"
+);
+@@clientName(
+  WindowsConfiguration,
+  "ComputeBulkActionsWindowsConfiguration",
+  "csharp"
+);
+@@clientName(SshPublicKey, "ComputeBulkActionsSshPublicKey", "csharp");
+@@clientName(
+  NetworkApiVersion,
+  "ComputeBulkActionsNetworkApiVersion",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReference,
+  "ComputeBulkActionsNetworkInterfaceReference",
+  "csharp"
+);
+@@clientName(PriorityProfile, "ComputeBulkActionsPriorityProfile", "csharp");
+@@clientName(ZonePreference, "ComputeBulkActionsZonePreference", "csharp");
+@@clientName(
+  ResourceOperationDetails,
+  "BulkActionResourceOperationDetails",
+  "csharp"
+);
+@@clientName(
+  ResourceOperationError,
+  "BulkActionResourceOperationError",
+  "csharp"
+);
+@@clientName(
+  ResourceOperationType,
+  "BulkActionResourceOperationType",
+  "csharp"
+);
+@@clientName(
+  ResourceProvisionPayload,
+  "BulkActionResourceProvisionPayload",
+  "csharp"
+);
+@@clientName(VMOperationStatus, "BulkActionVMOperationStatus", "csharp");
+@@clientName(
+  AcceleratorManufacturer,
+  "ComputeBulkActionsAcceleratorManufacturer",
+  "csharp"
+);
+@@clientName(AcceleratorType, "ComputeBulkActionsAcceleratorType", "csharp");
+@@clientName(ArchitectureType, "ComputeBulkActionsArchitectureType", "csharp");
+@@clientName(CpuManufacturer, "ComputeBulkActionsCpuManufacturer", "csharp");
+@@clientName(ComputeProfile, "BulkActionComputeProfile", "csharp");
+@@clientName(
+  HostEndpointSettings,
+  "ComputeBulkActionsHostEndpointSettings",
+  "csharp"
+);
+@@clientName(
+  ProxyAgentSettings,
+  "ComputeBulkActionsProxyAgentSettings",
+  "csharp"
+);
+@@clientName(
+  DiskEncryptionSettings,
+  "ComputeBulkActionsDiskEncryptionSettings",
+  "csharp"
+);
+@@clientName(
+  KeyVaultKeyReference,
+  "ComputeBulkActionsKeyVaultKeyReference",
+  "csharp"
+);
+@@clientName(
+  KeyVaultSecretReference,
+  "ComputeBulkActionsKeyVaultSecretReference",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSku,
+  "ComputeBulkActionsPublicIPAddressSku",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuName,
+  "ComputeBulkActionsPublicIPAddressSkuName",
+  "csharp"
+);
+@@clientName(
+  PublicIPAddressSkuTier,
+  "ComputeBulkActionsPublicIPAddressSkuTier",
+  "csharp"
+);
+@@clientName(
+  PublicIPAllocationMethod,
+  "ComputeBulkActionsPublicIPAllocationMethod",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliaryMode,
+  "ComputeBulkActionsNetworkInterfaceAuxiliaryMode",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceAuxiliarySku,
+  "ComputeBulkActionsNetworkInterfaceAuxiliarySku",
+  "csharp"
+);
+@@clientName(
+  NetworkInterfaceReferenceProperties,
+  "ComputeBulkActionsNetworkInterfaceReferenceProperties",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsPolicy,
+  "ComputeBulkActionsScheduledEventsPolicy",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsProfile,
+  "ComputeBulkActionsScheduledEventsProfile",
+  "csharp"
+);
+@@clientName(
+  TerminateNotificationProfile,
+  "ComputeBulkActionsTerminateNotificationProfile",
+  "csharp"
+);
+@@clientName(VaultCertificate, "ComputeBulkActionsVaultCertificate", "csharp");
+@@clientName(VaultSecretGroup, "ComputeBulkActionsVaultSecretGroup", "csharp");
+@@clientName(VMCategory, "ComputeBulkActionsVMCategory", "csharp");
+@@clientName(
+  ZoneAllocationPolicy,
+  "ComputeBulkActionsZoneAllocationPolicy",
+  "csharp"
+);
+@@clientName(
+  ZoneDistributionStrategy,
+  "ComputeBulkActionsZoneDistributionStrategy",
+  "csharp"
+);
+@@clientName(
+  AdditionalUnattendContent,
+  "ComputeBulkActionsAdditionalUnattendContent",
+  "csharp"
+);
+@@clientName(
+  DiffDiskPlacement,
+  "ComputeBulkActionsDiffDiskPlacement",
+  "csharp"
+);
+@@clientName(DiffDiskSettings, "ComputeBulkActionsDiffDiskSettings", "csharp");
+@@clientName(
+  EventGridAndResourceGraph,
+  "ComputeBulkActionsEventGridAndResourceGraph",
+  "csharp"
+);
+@@clientName(HyperVGeneration, "ComputeBulkActionsHyperVGeneration", "csharp");
+@@clientName(
+  LaunchBulkInstancesOperationProperties,
+  "ComputeBulkActionsLaunchBulkInstancesOperationProperties",
+  "csharp"
+);
+@@clientName(
+  LinuxPatchAssessmentMode,
+  "ComputeBulkActionsLinuxPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  LinuxPatchSettings,
+  "ComputeBulkActionsLinuxPatchSettings",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeBulkActionsLinuxVMGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeBulkActionsLinuxVMGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  LinuxVMGuestPatchMode,
+  "ComputeBulkActionsLinuxVMGuestPatchMode",
+  "csharp"
+);
+@@clientName(
+  LocalStorageDiskType,
+  "ComputeBulkActionsLocalStorageDiskType",
+  "csharp"
+);
+@@clientName(
+  OSImageNotificationProfile,
+  "ComputeBulkActionsOSImageNotificationProfile",
+  "csharp"
+);
+@@clientName(UefiSettings, "ComputeBulkActionsUefiSettings", "csharp");
+@@clientName(
+  VirtualMachineIpTag,
+  "ComputeBulkActionsVirtualMachineIpTag",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfiguration,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfiguration,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceIPConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties,
+  "ComputeBulkActionsVirtualMachineNetworkInterfaceIPConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfiguration,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressConfiguration",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressConfigurationProperties,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressConfigurationProperties",
+  "csharp"
+);
+@@clientName(
+  VirtualMachinePublicIPAddressDnsSettingsConfiguration,
+  "ComputeBulkActionsVirtualMachinePublicIPAddressDnsSettingsConfiguration",
+  "csharp"
+);
+@@clientName(
+  VMAttributeMinMaxDouble,
+  "ComputeBulkActionsVMAttributeMinMaxDouble",
+  "csharp"
+);
+@@clientName(
+  VMAttributeMinMaxInteger,
+  "ComputeBulkActionsVMAttributeMinMaxInteger",
+  "csharp"
+);
+@@clientName(VMAttributes, "ComputeBulkActionsVMAttributes", "csharp");
+@@clientName(
+  VMAttributeSupport,
+  "ComputeBulkActionsVMAttributeSupport",
+  "csharp"
+);
+@@clientName(
+  VMDiskSecurityProfile,
+  "ComputeBulkActionsVMDiskSecurityProfile",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication,
+  "ComputeBulkActionsVMGalleryApplication",
+  "csharp"
+);
+@@clientName(VmSizeProfile, "ComputeBulkActionsVmSizeProfile", "csharp");
+@@clientName(
+  WindowsPatchAssessmentMode,
+  "ComputeBulkActionsWindowsPatchAssessmentMode",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformRebootSetting,
+  "ComputeBulkActionsWindowsVMGuestPatchAutomaticByPlatformRebootSetting",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings,
+  "ComputeBulkActionsWindowsVMGuestPatchAutomaticByPlatformSettings",
+  "csharp"
+);
+@@clientName(
+  WindowsVMGuestPatchMode,
+  "ComputeBulkActionsWindowsVMGuestPatchMode",
+  "csharp"
+);
+@@clientName(WinRMListener, "ComputeBulkActionsWinRMListener", "csharp");
 
 // =====================================================================
 // Warning: DateTimeOffset property naming (*On suffix)
@@ -106,11 +554,13 @@ namespace Microsoft.ComputeBulkActions;
 // Warning: Boolean property naming (verb prefix)
 // =====================================================================
 // AdditionalCapabilities
-@@clientName(AdditionalCapabilities.ultraSSDEnabled,
+@@clientName(
+  AdditionalCapabilities.ultraSSDEnabled,
   "IsUltraSsdEnabled",
   "csharp"
 );
-@@clientName(AdditionalCapabilities.hibernationEnabled,
+@@clientName(
+  AdditionalCapabilities.hibernationEnabled,
   "IsHibernationEnabled",
   "csharp"
 );
@@ -120,6 +570,11 @@ namespace Microsoft.ComputeBulkActions;
 
 // DataDisk
 @@clientName(DataDisk.toBeDetached, "IsToBeDetached", "csharp");
+@@clientName(
+  DataDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
 
 // DiskEncryptionSettings
 @@clientName(DiskEncryptionSettings.enabled, "IsEnabled", "csharp");
@@ -131,27 +586,32 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(ExecuteDeleteRequest.forceDeletion, "IsForceDeletion", "csharp");
 
 // LinuxConfiguration
-@@clientName(LinuxConfiguration.disablePasswordAuthentication,
+@@clientName(
+  LinuxConfiguration.disablePasswordAuthentication,
   "IsPasswordAuthenticationDisabled",
   "csharp"
 );
-@@clientName(LinuxConfiguration.provisionVMAgent,
+@@clientName(
+  LinuxConfiguration.provisionVMAgent,
   "IsVMAgentProvisioned",
   "csharp"
 );
-@@clientName(LinuxConfiguration.enableVMAgentPlatformUpdates,
+@@clientName(
+  LinuxConfiguration.enableVMAgentPlatformUpdates,
   "IsVMAgentPlatformUpdatesEnabled",
   "csharp"
 );
 
 // LinuxVMGuestPatchAutomaticByPlatformSettings
-@@clientName(LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  LinuxVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );
 
 // NetworkInterfaceReferenceProperties
-@@clientName(NetworkInterfaceReferenceProperties.primary,
+@@clientName(
+  NetworkInterfaceReferenceProperties.primary,
   "IsPrimary",
   "csharp"
 );
@@ -159,12 +619,21 @@ namespace Microsoft.ComputeBulkActions;
 // OSImageNotificationProfile
 @@clientName(OSImageNotificationProfile.enable, "IsEnabled", "csharp");
 
+// OSDisk
+@@clientName(
+  OSDisk.writeAcceleratorEnabled,
+  "IsWriteAcceleratorEnabled",
+  "csharp"
+);
+
 // OSProfile
-@@clientName(OSProfile.allowExtensionOperations,
+@@clientName(
+  OSProfile.allowExtensionOperations,
   "IsExtensionOperationsAllowed",
   "csharp"
 );
-@@clientName(OSProfile.requireGuestProvisionSignal,
+@@clientName(
+  OSProfile.requireGuestProvisionSignal,
   "IsGuestProvisionSignalRequired",
   "csharp"
 );
@@ -174,13 +643,15 @@ namespace Microsoft.ComputeBulkActions;
 
 // ProxyAgentSettings
 @@clientName(ProxyAgentSettings.enabled, "IsEnabled", "csharp");
-@@clientName(ProxyAgentSettings.addProxyAgentExtension,
+@@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
   "ShouldAddProxyAgentExtension",
   "csharp"
 );
 
 // SecurityProfile
-@@clientName(SecurityProfile.encryptionAtHost,
+@@clientName(
+  SecurityProfile.encryptionAtHost,
   "IsEncryptionAtHostEnabled",
   "csharp"
 );
@@ -192,62 +663,96 @@ namespace Microsoft.ComputeBulkActions;
 @@clientName(UefiSettings.secureBootEnabled, "IsSecureBootEnabled", "csharp");
 @@clientName(UefiSettings.vTpmEnabled, "IsVTpmEnabled", "csharp");
 
+// ScheduledEventsPolicy flattened properties
+@@clientName(
+  UserInitiatedRedeploy.automaticallyApprove,
+  "IsRedeployAutomaticallyApproved",
+  "csharp"
+);
+@@clientName(
+  UserInitiatedReboot.automaticallyApprove,
+  "IsRebootAutomaticallyApproved",
+  "csharp"
+);
+@@clientName(
+  AllInstancesDown.automaticallyApprove,
+  "IsAllInstancesDownAutomaticallyApproved",
+  "csharp"
+);
+
 // VMGalleryApplication
-@@clientName(VMGalleryApplication.enableAutomaticUpgrade,
+@@clientName(
+  VMGalleryApplication.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
+  "csharp"
+);
+@@clientName(
+  VMGalleryApplication.treatFailureAsDeploymentFailure,
+  "ShouldTreatFailureAsDeploymentFailure",
   "csharp"
 );
 
 // VirtualMachineExtensionProperties
-@@clientName(VirtualMachineExtensionProperties.autoUpgradeMinorVersion,
+@@clientName(
+  VirtualMachineExtensionProperties.autoUpgradeMinorVersion,
   "IsAutoUpgradeMinorVersionEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineExtensionProperties.enableAutomaticUpgrade,
+@@clientName(
+  VirtualMachineExtensionProperties.enableAutomaticUpgrade,
   "IsAutomaticUpgradeEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineExtensionProperties.suppressFailures,
+@@clientName(
+  VirtualMachineExtensionProperties.suppressFailures,
   "IsSuppressFailures",
   "csharp"
 );
 
 // VirtualMachineNetworkInterfaceConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableAcceleratedNetworking,
   "IsAcceleratedNetworkingEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.disableTcpStateTracking,
   "IsTcpStateTrackingDisabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableFpga,
   "IsFpgaEnabled",
   "csharp"
 );
-@@clientName(VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
+@@clientName(
+  VirtualMachineNetworkInterfaceConfigurationProperties.enableIPForwarding,
   "IsIPForwardingEnabled",
   "csharp"
 );
 
 // VirtualMachineNetworkInterfaceIPConfigurationProperties
-@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
+@@clientName(
+  VirtualMachineNetworkInterfaceIPConfigurationProperties.primary,
   "IsPrimary",
   "csharp"
 );
 
 // WindowsConfiguration
-@@clientName(WindowsConfiguration.provisionVMAgent,
+@@clientName(
+  WindowsConfiguration.provisionVMAgent,
   "IsVMAgentProvisioned",
   "csharp"
 );
 
 // WindowsVMGuestPatchAutomaticByPlatformSettings
-@@clientName(WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
+@@clientName(
+  WindowsVMGuestPatchAutomaticByPlatformSettings.bypassPlatformSafetyChecksOnUserSchedule,
   "IsBypassPlatformSafetyChecksOnUserSchedule",
   "csharp"
 );

@@ -49,7 +49,10 @@ interface PrivateLinkServices {
   @tag("PrivateLinkServices")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateLinkService,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = Error
   >;
 
@@ -71,6 +74,7 @@ interface PrivateLinkServices {
 
 @@doc(PrivateLinkService.name, "The name of the private link service.");
 @@doc(PrivateLinkService.properties, "Properties of the private link service.");
-@@doc(PrivateLinkServices.createOrUpdate::parameters.resource,
+@@doc(
+  PrivateLinkServices.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update private link service operation."
 );

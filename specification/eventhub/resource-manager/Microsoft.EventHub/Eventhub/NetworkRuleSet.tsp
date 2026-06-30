@@ -89,6 +89,7 @@ interface NetworkRuleSets {
 
 @@doc(NetworkRuleSet.name, "");
 @@doc(NetworkRuleSet.properties, "NetworkRuleSet properties");
-@@doc(NetworkRuleSets.createOrUpdateNetworkRuleSet::parameters.resource,
+@@doc(
+  NetworkRuleSets.createOrUpdateNetworkRuleSet::parameters.resource,
   "The Namespace IpFilterRule."
 );

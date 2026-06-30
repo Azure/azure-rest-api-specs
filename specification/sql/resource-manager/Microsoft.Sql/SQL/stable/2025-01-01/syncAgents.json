@@ -1,0 +1,593 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SyncAgents"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents": {
+      "get": {
+        "operationId": "SyncAgents_ListByServer",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Lists sync agents in a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyncAgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get sync agents under a server": {
+            "$ref": "./examples/SyncAgentListByServer.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}": {
+      "get": {
+        "operationId": "SyncAgents_Get",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Gets a sync agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncAgentName",
+            "in": "path",
+            "description": "The name of the sync agent.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyncAgent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a sync agent": {
+            "$ref": "./examples/SyncAgentGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SyncAgents_CreateOrUpdate",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Creates or updates a sync agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncAgentName",
+            "in": "path",
+            "description": "The name of the sync agent.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested sync agent resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncAgent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SyncAgent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SyncAgent"
+            }
+          },
+          "201": {
+            "description": "Resource 'SyncAgent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SyncAgent"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a new sync agent": {
+            "$ref": "./examples/SyncAgentCreate.json"
+          },
+          "Update a sync agent": {
+            "$ref": "./examples/SyncAgentUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/SyncAgent"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SyncAgents_Delete",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Deletes a sync agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncAgentName",
+            "in": "path",
+            "description": "The name of the sync agent.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a sync agent": {
+            "$ref": "./examples/SyncAgentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/generateKey": {
+      "post": {
+        "operationId": "SyncAgents_GenerateKey",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Generates a sync agent key.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncAgentName",
+            "in": "path",
+            "description": "The name of the sync agent.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyncAgentKeyProperties"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generate a sync agent key": {
+            "$ref": "./examples/SyncAgentGenerateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/syncAgents/{syncAgentName}/linkedDatabases": {
+      "get": {
+        "operationId": "SyncAgents_ListLinkedDatabases",
+        "tags": [
+          "SyncAgents"
+        ],
+        "description": "Lists databases linked to a sync agent.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "syncAgentName",
+            "in": "path",
+            "description": "The name of the sync agent.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SyncAgentLinkedDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get sync agent linked databases": {
+            "$ref": "./examples/SyncAgentGetLinkedDatabases.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SyncAgent": {
+      "type": "object",
+      "description": "An Azure SQL Database sync agent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncAgentProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SyncAgentKeyProperties": {
+      "type": "object",
+      "description": "Properties of an Azure SQL Database sync agent key.",
+      "properties": {
+        "syncAgentKey": {
+          "type": "string",
+          "description": "Key of sync agent.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncAgentLinkedDatabase": {
+      "type": "object",
+      "description": "An Azure SQL Database sync agent linked database.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SyncAgentLinkedDatabaseProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SyncAgentLinkedDatabaseListResult": {
+      "type": "object",
+      "description": "The response of a SyncAgentLinkedDatabase list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SyncAgentLinkedDatabase items on this page",
+          "items": {
+            "$ref": "#/definitions/SyncAgentLinkedDatabase"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SyncAgentLinkedDatabaseProperties": {
+      "type": "object",
+      "description": "Properties of an Azure SQL Database sync agent linked database.",
+      "properties": {
+        "databaseType": {
+          "$ref": "./common.json#/definitions/SyncMemberDbType",
+          "description": "Type of the sync agent linked database.",
+          "readOnly": true
+        },
+        "databaseId": {
+          "type": "string",
+          "description": "Id of the sync agent linked database.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the sync agent linked database.",
+          "readOnly": true
+        },
+        "serverName": {
+          "type": "string",
+          "description": "Server name of the sync agent linked database.",
+          "readOnly": true
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "Database name of the sync agent linked database.",
+          "readOnly": true
+        },
+        "userName": {
+          "type": "string",
+          "description": "User name of the sync agent linked database.",
+          "readOnly": true
+        }
+      }
+    },
+    "SyncAgentListResult": {
+      "type": "object",
+      "description": "The response of a SyncAgent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SyncAgent items on this page",
+          "items": {
+            "$ref": "#/definitions/SyncAgent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SyncAgentProperties": {
+      "type": "object",
+      "description": "Properties of an Azure SQL Database sync agent.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the sync agent.",
+          "readOnly": true
+        },
+        "syncDatabaseId": {
+          "type": "string",
+          "description": "ARM resource id of the sync database in the sync agent."
+        },
+        "lastAliveTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last alive time of the sync agent.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "./common.json#/definitions/SyncAgentState",
+          "description": "State of the sync agent.",
+          "readOnly": true
+        },
+        "isUpToDate": {
+          "type": "boolean",
+          "description": "If the sync agent version is up to date.",
+          "readOnly": true
+        },
+        "expiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration time of the sync agent version.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the sync agent.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

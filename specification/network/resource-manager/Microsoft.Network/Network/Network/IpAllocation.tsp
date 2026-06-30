@@ -79,7 +79,10 @@ interface IpAllocations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     IpAllocation,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -99,9 +102,11 @@ interface IpAllocations {
 
 @@doc(IpAllocation.name, "The name of the IpAllocation.");
 @@doc(IpAllocation.properties, "Properties of the IpAllocation.");
-@@doc(IpAllocations.createOrUpdate::parameters.resource,
+@@doc(
+  IpAllocations.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update virtual network operation."
 );
-@@doc(IpAllocations.updateTags::parameters.properties,
+@@doc(
+  IpAllocations.updateTags::parameters.properties,
   "Parameters supplied to update IpAllocation tags."
 );

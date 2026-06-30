@@ -9,7 +9,7 @@ import {
   mapToObject,
   normalizePath,
   objectToMap,
-} from "../../src/utils.js";
+} from "../../src/utils.ts";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);

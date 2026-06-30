@@ -58,7 +58,8 @@ interface WikiContractOps
         @segment("wikis")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "ServiceApiWiki"
     > {}
 
 @armResourceOperations
@@ -104,19 +105,21 @@ interface WikiContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<WikiContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<WikiContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<WikiContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<WikiContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -220,7 +223,8 @@ interface ProductWikiOps
         @segment("wikis")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "ServiceProductWiki"
     > {}
 
 @armResourceOperations
@@ -266,19 +270,21 @@ interface ProductWiki {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<WikiContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<WikiContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<WikiContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<WikiContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -353,7 +359,7 @@ interface ProductWiki {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 }

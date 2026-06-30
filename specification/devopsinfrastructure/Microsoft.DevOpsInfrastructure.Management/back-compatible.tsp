@@ -5,22 +5,27 @@ using Microsoft.DevOpsInfrastructure;
 
 // Flatten properties for backward compatibility
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageVersion.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ImageVersion.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Pool.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Pool.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResourceDetailsObject.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ResourceDetailsObject.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Microsoft.DevOpsInfrastructure.ResourceSku.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Microsoft.DevOpsInfrastructure.ResourceSku.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

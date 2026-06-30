@@ -51,7 +51,8 @@ alias EventImpactedResourceOps = Azure.ResourceManager.Legacy.ExtensionOperation
     @key
     @pattern("^[^*#&+:<>%?]+$")
     impactedResourceName: string;
-  }
+  },
+  "ResourceHealthEventImpactedResource"
 >;
 
 @armResourceOperations
@@ -104,7 +105,8 @@ alias ImpactedResourceOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @key
     @pattern("^[^*#&+:<>%?]+$")
     impactedResourceName: string;
-  }
+  },
+  "TenantResourceHealthEventImpactedResource"
 >;
 
 @armResourceOperations(#{ omitTags: true })

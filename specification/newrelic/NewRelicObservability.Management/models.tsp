@@ -1408,7 +1408,8 @@ model MetricsStatusRequestParameter {
 scalar email extends string;
 
 @@identifiers(AppServicesListResponse.value, #["azureResourceId"]);
-@@visibility(NewRelicMonitorResource.properties,
+@@visibility(
+  NewRelicMonitorResource.properties,
   Lifecycle.Read,
   Lifecycle.Create
 );
