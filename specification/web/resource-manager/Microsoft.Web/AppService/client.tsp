@@ -3103,7 +3103,7 @@ op regionalCheckNameAvailabilityCustomized(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
-  ...LocationParameter,
+  ...LocationResourceParameter,
 
   /**
    * Resource name to verify.
@@ -5931,12 +5931,6 @@ union ConfigReferenceSource {
 @@alternateType(VirtualNetworkProfile.type, armResourceType, "csharp");
 @@alternateType(
   BillingMeterProperties.billingLocation,
-  azureLocation,
-  "csharp"
-);
-
-@@alternateType(
-  Azure.ResourceManager.CommonTypes.LocationParameter.location,
   azureLocation,
   "csharp"
 );

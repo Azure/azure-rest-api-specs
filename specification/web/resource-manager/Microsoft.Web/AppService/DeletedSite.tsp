@@ -45,7 +45,7 @@ interface DeletedSiteOps
         @key
         providerNamespace: "Microsoft.Web",
 
-        ...LocationParameter,
+        ...LocationResourceParameter,
       },
       {},
       {
