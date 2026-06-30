@@ -5401,3 +5401,9 @@ op replaceprivateDnsZoneGroupsList(
   "GetDefaultSharedKey",
   "csharp"
 );
+
+@@clientName(
+  Microsoft.Network.PolicySettings.captchaExpirationInMins,
+  "captchaCookieExpirationInMins",
+  "java"
+);
