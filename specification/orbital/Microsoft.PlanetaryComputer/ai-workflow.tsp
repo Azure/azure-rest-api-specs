@@ -24,10 +24,10 @@ union AreaOfInterestType {
   @doc("The area of interest is defined by an external GeoJson file.")
   GeoJsonFile: "GeoJsonFile",
 
-  @doc("The area of interest is defined by the extesion of a STAC collection.")
+  @doc("The area of interest is defined by the extension of a STAC collection.")
   StacCollectionArea: "StacCollectionArea",
 
-  @doc("The area of interest is defined by the extesion of a STAC item.")
+  @doc("The area of interest is defined by the extension of a STAC item.")
   StacItemArea: "StacItemArea",
 
   @doc("The area of interest is defined by GeoJson assets in a STAC item.")
