@@ -773,6 +773,11 @@ using Azure.ClientGenerator.Core.Legacy;
   "MstiDataConnectorProperties",
   "csharp"
 );
+@@clientName(
+  MstiDataConnectorDataTypesMicrosoftEmergingThreatFeed.lookbackPeriod,
+  "LookbackPeriodOn",
+  "csharp"
+);
 @@clientName(Mode, "WorkspaceManagerConfigurationMode", "csharp");
 @@clientName(
   MTPCheckRequirementsProperties,
@@ -852,6 +857,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(PackageKind, "SecurityInsightsMetadataPackageKind", "csharp");
 @@clientName(PackageModel, "SecurityInsightsPackage", "csharp");
 @@clientName(Permissions, "ConnectorPermissions", "csharp");
+@@clientName(
+  PremiumMdtiDataConnectorProperties.lookbackPeriod,
+  "LookbackPeriodOn",
+  "csharp"
+);
 @@clientName(
   PlaybookActionProperties,
   "AutomationRuleRunPlaybookActionProperties",
@@ -1065,6 +1075,11 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(SecurityAlertTimelineItem.endTimeUtc, "EndOn", "csharp");
 @@clientName(SecurityAlertTimelineItem.startTimeUtc, "StartOn", "csharp");
 @@clientName(SecurityAlertTimelineItem.timeGenerated, "GeneratedOn", "csharp");
+@@alternateType(
+  SecurityAlertTimelineItem.azureResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 @@clientName(SecurityGroupEntity, "SecurityInsightsGroupEntity", "csharp");
 @@clientName(
   SecurityMLAnalyticsSettingsKind,
