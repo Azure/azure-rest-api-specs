@@ -933,7 +933,6 @@ model CommandOutputSettings {
    * The URL of the storage account container that is to be used by the specified identities.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   containerUrl?: url;
 
   /**
@@ -960,7 +959,6 @@ model CommandOutputOverride {
   /**
    * The URL of the storage account container that is to be used by the specified identities.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   containerUrl?: url;
 }

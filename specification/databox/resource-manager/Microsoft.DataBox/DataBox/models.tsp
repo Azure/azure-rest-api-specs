@@ -1933,7 +1933,6 @@ model KeyEncryptionKey {
    * Key encryption key. It is required in case of Customer managed KekType.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   kekUrl?: string;
 
   /**

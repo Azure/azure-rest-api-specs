@@ -768,7 +768,6 @@ model DevCenterEncryptionSetUpdateProperties {
   devboxDisksEncryptionEnableStatus?: DevboxDisksEncryptionEnableStatus;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek.")
   keyEncryptionKeyUrl?: url;
 

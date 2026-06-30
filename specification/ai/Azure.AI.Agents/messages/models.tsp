@@ -67,7 +67,6 @@ model MessageInputImageUrlBlock extends MessageInputContentBlock {
   type: "image_url";
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Information about the external image URL, including the URL and optional detail level.")
   @encodedName("application/json", "image_url")
   imageUrl: MessageImageUrlParam;

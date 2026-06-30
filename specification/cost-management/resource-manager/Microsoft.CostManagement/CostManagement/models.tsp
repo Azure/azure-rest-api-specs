@@ -3884,7 +3884,6 @@ model PricesheetDownloadProperties {
    * The URL to download the generated report.
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   downloadUrl?: string;
 
   /**

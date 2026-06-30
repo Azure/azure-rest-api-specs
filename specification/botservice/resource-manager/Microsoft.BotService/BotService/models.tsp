@@ -287,7 +287,6 @@ model BotProperties {
    * The Icon Url of the bot
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   iconUrl?: string = "";
 
   /**
@@ -317,7 +316,6 @@ model BotProperties {
   /**
    * The bot's manifest url
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   manifestUrl?: string;
 
@@ -392,7 +390,6 @@ model BotProperties {
   /**
    * The CMK Url
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   cmekKeyVaultUrl?: string;
 
@@ -988,7 +985,6 @@ model ChannelSettings {
    * The bot icon url
    */
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   botIconUrl?: string;
 
   /**
@@ -1313,7 +1309,6 @@ model ServiceProviderProperties {
   /**
    * The URL of icon
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   iconUrl?: string = "";
 
@@ -2222,7 +2217,6 @@ model SlackChannelProperties {
   /**
    * The Slack landing page Url
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   landingPageUrl?: string;
 

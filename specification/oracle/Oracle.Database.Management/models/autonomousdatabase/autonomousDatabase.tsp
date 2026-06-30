@@ -465,13 +465,11 @@ model AllConnectionStringType {
 @doc("The URLs for accessing Oracle Application Express (APEX) and SQL Developer Web with a browser from a Compute instance within your VCN or that has a direct connection to your VCN.")
 model ConnectionUrlType {
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Oracle Application Express (APEX) URL.")
   @minLength(10)
   @maxLength(512)
   apexUrl?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the Database Transforms for the Autonomous Database.")
   @minLength(10)
@@ -479,13 +477,11 @@ model ConnectionUrlType {
   databaseTransformsUrl?: string;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the Graph Studio for the Autonomous Database.")
   @minLength(10)
   @maxLength(512)
   graphStudioUrl?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the Oracle Machine Learning (OML) Notebook for the Autonomous Database.")
   @minLength(10)
@@ -493,20 +489,17 @@ model ConnectionUrlType {
   machineLearningNotebookUrl?: string;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the MongoDB API for the Autonomous Database.")
   @minLength(10)
   @maxLength(512)
   mongoDbUrl?: string;
 
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Oracle REST Data Services (ORDS) URL of the Web Access for the Autonomous Database.")
   @minLength(10)
   @maxLength(512)
   ordsUrl?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Oracle SQL Developer Web URL.")
   @minLength(10)
