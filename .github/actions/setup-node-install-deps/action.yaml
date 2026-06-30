@@ -17,9 +17,6 @@ inputs:
   cache:
     description: 'Whether to cache the pnpm store. Disable for tiny installs (e.g. a "--prod --filter" subset of a few packages) where restoring/saving the cache costs more time than it saves.'
     default: "true"
-  trust-lockfile:
-    description: 'When "true", sets pnpm "trustLockfile" so the committed lockfile is trusted as-is and pnpm skips re-verifying it against supply-chain policies on each frozen install (saves ~seconds, scaling with lockfile size). Safe for frozen CI installs of an already-vetted lockfile; the policy still applies when the lockfile is changed via a non-frozen install. Leave "false" to keep verifying on every install.'
-    default: "false"
 
 runs:
   using: "composite"
@@ -59,7 +56,6 @@ runs:
       shell: bash
       env:
         INSTALL_COMMAND: ${{ inputs.install-command }}
-        npm_config_trust_lockfile: ${{ inputs.trust-lockfile }}
       working-directory: ${{ inputs.working-directory }}
 
     - run: |
