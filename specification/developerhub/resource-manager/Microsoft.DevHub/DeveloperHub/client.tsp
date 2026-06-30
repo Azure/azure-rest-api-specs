@@ -45,11 +45,23 @@ using Microsoft.DevHub;
 @@clientName(Parameter.required, "isRequired", "csharp");
 
 // csharp: ARM resource id strings -> ResourceIdentifier
-@@alternateType(GitHubWorkflowProfile.aksResourceId, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(IacTemplateProperties.sourceResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(
+  GitHubWorkflowProfile.aksResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IacTemplateProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
 
 // csharp: etag string -> Azure.ETag
-@@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 
 // csharp AdoOAuth casing consistency (mirrors java).
 @@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
