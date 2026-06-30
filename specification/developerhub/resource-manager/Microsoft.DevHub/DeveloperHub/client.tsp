@@ -22,6 +22,16 @@ using Microsoft.DevHub;
 @@clientName(ADOOAuth, "AdoOAuth", "java");
 @@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "java");
 
+// csharp acronym-casing consistency (mirrors java,javascript)
+@@clientName(ACR, "Acr", "csharp");
+
+// csharp AdoOAuth casing consistency (mirrors java).
+@@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
+@@clientName(AdooAuthResponses, "AdoOAuthResponses", "csharp");
+@@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "csharp");
+@@clientName(ADOOAuth, "AdoOAuth", "csharp");
+@@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "csharp");
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   GitHubOAuthResponses.listGitHubOAuth,
