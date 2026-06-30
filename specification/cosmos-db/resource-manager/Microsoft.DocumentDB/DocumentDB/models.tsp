@@ -8608,6 +8608,22 @@ model FleetResourceProperties {
   provisioningState?: Status;
 }
 
+/**
+ * Represents a fleet resource for updates.
+ */
+model FleetResourceUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM resource tags use Record<string>."
+  tags?: Record<string>;
+
+  /**
+   * Properties to update Azure Cosmos DB fleet resource.
+   */
+  properties?: FleetResourceProperties;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_04_01_preview)
 model FleetAnalyticsProperties {

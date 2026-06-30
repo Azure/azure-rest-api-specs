@@ -38,7 +38,7 @@ interface FleetResources {
   /**
    * Updates the properties of an existing Azure Cosmos DB Fleet.
    */
-  update is ArmResourcePatchSync<FleetResource, FleetResourceProperties>;
+  update is ArmCustomPatchSync<FleetResource, FleetResourceUpdate>;
 
   /**
    * Deletes an existing Azure Cosmos DB Fleet.

@@ -16054,25 +16054,6 @@
         "maxThroughput"
       ]
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "AzureConnectionType": {
       "type": "string",
       "description": "How to connect to the azure services needed for running the cluster",
@@ -18968,19 +18949,21 @@
     },
     "FleetResourceUpdate": {
       "type": "object",
-      "description": "An Azure Cosmos DB FleetResource.",
+      "description": "Represents a fleet resource for updates.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "$ref": "#/definitions/FleetResourceProperties",
           "description": "Properties to update Azure Cosmos DB fleet resource.",
           "x-ms-client-flatten": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "FleetspaceAccountListResult": {
       "type": "object",
