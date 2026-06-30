@@ -72,6 +72,37 @@ namespace ComputeCombine;
 
 // ── C# type renames for backward compatibility (migration from AutoRest) ──
 
+// C# naming fixes for Azure.ResourceManager.Compute 1.15.0 stable API review.
+@@clientName(ConfidentialVMVersion, "ConfidentialVmVersion", "csharp");
+@@clientName(
+  DiskSecurityProfile.confidentialVMVersion,
+  "ConfidentialVmVersion",
+  "csharp"
+);
+@@clientName(ImmutabilityPolicyData, "ImmutabilityPolicyContent", "csharp");
+@@clientName(
+  ImmutabilityPolicyLockData,
+  "ImmutabilityPolicyLockContent",
+  "csharp"
+);
+@@clientName(
+  Snapshots.updateImmutabilityPolicy::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
+  Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(ExternalHealthPolicy, "ComputeExternalHealthPolicy", "csharp");
+@@clientName(StorageAlignmentStatus, "ComputeStorageAlignmentStatus", "csharp");
+@@clientName(
+  StorageFaultDomainAlignmentType,
+  "ComputeStorageFaultDomainAlignmentType",
+  "csharp"
+);
+
 // Common namespace types
 // Common.SubResource has a writable id → maps to ComputeWriteableSubResourceData (matches old AutoRest).
 // Common.SubResourceReadOnly has a read-only id → maps to ComputeSubResourceData (matches old AutoRest).
@@ -1179,7 +1210,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventState,
-  "VmScaleSetLifecycleHookEventState",
+  "VirtualMachineScaleSetLifecycleHookEventState",
   "csharp"
 );
 @@clientName(
@@ -1189,7 +1220,7 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventProperties,
-  "VmScaleSetLifecycleHookEventProperties",
+  "VirtualMachineScaleSetLifecycleHookEventProperties",
   "csharp"
 );
 @@clientName(
@@ -1204,10 +1235,25 @@ model VMSizePropertiesWithAdditionalProperties {
 );
 @@clientName(
   VMScaleSetLifecycleHookEventType,
-  "VmScaleSetLifecycleHookEventType",
+  "VirtualMachineScaleSetLifecycleHookEventType",
   "csharp"
 );
-@@clientName(LifecycleHook.type, "VmScaleSetLifecycleHookEventType", "csharp");
+@@clientName(LifecycleHook, "VirtualMachineScaleSetLifecycleHook", "csharp");
+@@clientName(
+  LifecycleHookAction,
+  "VirtualMachineScaleSetLifecycleHookAction",
+  "csharp"
+);
+@@clientName(
+  LifecycleHookActionState,
+  "VirtualMachineScaleSetLifecycleHookActionState",
+  "csharp"
+);
+@@clientName(
+  LifecycleHook.type,
+  "VirtualMachineScaleSetLifecycleHookEventType",
+  "csharp"
+);
 @@clientName(
   VMScaleSetLifecycleHookEventUpdate,
   "VirtualMachineScaleSetLifecycleHookEventPatch",

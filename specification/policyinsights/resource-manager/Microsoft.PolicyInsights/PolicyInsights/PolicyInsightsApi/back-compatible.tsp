@@ -53,7 +53,16 @@ using PolicyInsightsApi;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Remediation.properties);
 
-@@clientLocation(PolicyMetadataOperationGroup.getResource, "PolicyMetadata");
+@@clientLocation(
+  PolicyMetadataOperationGroup.getResource,
+  "PolicyMetadata",
+  "!javascript"
+);
+@@clientLocation(
+  PolicyMetadataOperationGroup.getResource,
+  "PolicyMetadataOperations",
+  "javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PolicyMetadata.properties);
 
@@ -189,9 +198,14 @@ using PolicyInsightsApi;
 
 @@clientLocation(
   PolicyMetadataNonResourceOperationGroup.list,
-  "PolicyMetadata"
+  "PolicyMetadata",
+  "!javascript"
 );
-
+@@clientLocation(
+  PolicyMetadataNonResourceOperationGroup.list,
+  "PolicyMetadataOperations",
+  "javascript"
+);
 @@clientLocation(
   PolicyRestrictionsOperationGroup.checkAtSubscriptionScope,
   "PolicyRestrictions"
