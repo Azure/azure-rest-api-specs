@@ -23,7 +23,7 @@ model ClusterJob is Azure.ResourceManager.ProxyResource<ClusterJobProperties> {
     Resource = ClusterJob,
     KeyName = "jobsName",
     SegmentName = "jobs",
-    NamePattern = "^[a-zA-Z0-9-]{3,24}$"
+    NamePattern = "^[a-zA-Z0-9-]{3,64}$"
   >;
 }
 

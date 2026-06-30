@@ -219,7 +219,8 @@ interface WorkspaceApiVersionSetOps
         @minLength(1)
         @maxLength(80)
         versionSetId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceApiVersionSet"
     > {}
 
 @armResourceOperations

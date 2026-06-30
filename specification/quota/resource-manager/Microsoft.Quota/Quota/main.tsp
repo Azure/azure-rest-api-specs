@@ -24,6 +24,9 @@ import "./GroupQuotasEnforcementStatus.tsp";
 import "./CurrentUsagesBase.tsp";
 import "./CurrentQuotaLimitBase.tsp";
 import "./QuotaRequestDetails.tsp";
+import "./QuotaTransfer.tsp";
+import "./IncomingQuotaTransfer.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -49,6 +52,11 @@ enum Versions {
    * The 2025-09-01 API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-09-01-preview API version.
+   */
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 @armResourceOperations

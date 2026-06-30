@@ -21,17 +21,17 @@ import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { appendFileSync, existsSync } from "node:fs";
 import * as path from "node:path";
-import { logError, LogLevel, logMessage } from "./log.js";
-import { runOad } from "./run-oad.js";
+import { logError, LogLevel, logMessage } from "./log.ts";
+import { runOad } from "./run-oad.ts";
 import {
   ApiVersionLifecycleStage,
-  BreakingChangesCheckType,
-  Context,
+  type BreakingChangesCheckType,
+  type Context,
   logFileName,
-} from "./types/breaking-change.js";
-import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
-import { addOadTrace, OadMessage, OadTraceData } from "./types/oad-types.js";
-import { applyRules } from "./utils/apply-rules.js";
+} from "./types/breaking-change.ts";
+import { type RawMessageRecord, type ResultMessageRecord } from "./types/message.ts";
+import { addOadTrace, type OadMessage, type OadTraceData } from "./types/oad-types.ts";
+import { applyRules } from "./utils/apply-rules.ts";
 import {
   blobHref,
   branchHref,
@@ -39,13 +39,13 @@ import {
   getRelativeSwaggerPathToRepo,
   processOadRuntimeErrorMessage,
   specIsPreview,
-} from "./utils/common-utils.js";
-import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
+} from "./utils/common-utils.ts";
+import { processAndAppendOadMessages } from "./utils/oad-message-processor.ts";
 import {
   deduplicateSwaggers,
   getExistedVersionOperations,
   getPrecedingSwaggers,
-} from "./utils/spec.js";
+} from "./utils/spec.ts";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
 // https://github.com/Azure/autorest/pull/4934

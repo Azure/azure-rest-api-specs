@@ -54,7 +54,8 @@ interface SiteOps
         @segment("sites")
         @key
         name: string,
-      }
+      },
+      ResourceName = "WebSite"
     > {}
 
 @armResourceOperations
@@ -96,7 +97,8 @@ interface WorkflowRegenerateAccessKeyOps
         @segment("workflows")
         @key
         workflowName: string,
-      }
+      },
+      ResourceName = "WorkflowAccessKey"
     > {}
 
 @tag("WebApps")
@@ -1503,7 +1505,8 @@ interface WebAppOps
         @segment("slots")
         @key
         slot: string,
-      }
+      },
+      ResourceName = "WebSiteSlot"
     > {}
 
 alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<

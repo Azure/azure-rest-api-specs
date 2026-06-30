@@ -181,6 +181,7 @@ A finding "passes" the rule means the rule does not appear in the findings list 
   - Prevention of leading special characters (e.g., `^(?![.-])`) — resource names should not start with `.` or `-`.
   - Allowed character set (e.g., `[A-Za-z0-9_.-]`) that matches the service's actual validation.
   - Example: `"pattern": "^(?![.-])[A-Za-z0-9_.-]{1,128}$"`
+- `pattern` constraints **MUST** use allowlist (positive character class) syntax. Denylist (negated character class `[^...]`) syntax **MUST NOT** be used as the primary character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A negative lookahead (`(?!...)`) used alongside a positive class is acceptable (e.g., `^(?![.-])[A-Za-z0-9_.-]{1,128}$`). Severity: **Blocking** for new properties/parameters; **Warning** for existing ones carried forward from a prior API version. See [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md) for detection guidance, the severity matrix, fix examples, and regression-risk notes.
 - For action operations on a resource, the URL pattern **SHOULD** be: `/<resource-collection>/<resource-id>:<action>`.
 - For action operations on a collection: `/<resource-collection>:<action>`.
 - **DO NOT** use action URLs for standard CRUD operations that map naturally to GET/PUT/PATCH/DELETE.
@@ -709,6 +710,7 @@ When reviewing, systematically check:
 - ✅ No unused/orphaned definitions in `definitions` section (SCHEMA-UNUSED-DEF)
 - ✅ Example files use string placeholders for secrets, SSH keys, and credentials — no realistic-looking sensitive values (EX-SECRET-PLACEHOLDER)
 - ✅ Resource name path parameters include `pattern` constraints with length limits and character restrictions
+- ✅ All `pattern` constraints use allowlist (positive character class) syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new properties/parameters, Warning for existing ones
 - ✅ PUT operation descriptions use idempotent language ("Creates or updates..." not "Creates a new...")
 - ✅ Operations API display object uses camelCase property names (`provider`, `resource`, `operation`, `description`)
 

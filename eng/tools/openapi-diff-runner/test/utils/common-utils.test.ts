@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Context } from "../../src/types/breaking-change.js";
+import { type Context } from "../../src/types/breaking-change.ts";
 import {
   blobHref,
   branchHref,
@@ -17,7 +17,7 @@ import {
   specIsPreview,
   targetBranchHref,
   targetHref,
-} from "../../src/utils/common-utils.js";
+} from "../../src/utils/common-utils.ts";
 
 // Mock node:fs/promises module for async file operations
 vi.mock("node:fs/promises", async (importOriginal) => {

@@ -1,0 +1,76 @@
+{
+  "operationId": "QuotaTransfers_CreateOrUpdate",
+  "title": "QuotaTransfers_CreateOrUpdate - donor submit",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000001",
+    "targetProvider": "Microsoft.Compute",
+    "region": "eastus",
+    "transferName": "compute-stdDv5-uplift-101",
+    "resource": {
+      "properties": {
+        "displayName": "Move 50 Dv5 vCPU to recipient",
+        "comment": "Backfill for new prod fleet rollout.",
+        "destinationSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+        "billingAccountId": "1234567890",
+        "resourceName": "standardDv5Family",
+        "amount": 50,
+        "autoApprove": false
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-uplift-101",
+        "name": "compute-stdDv5-uplift-101",
+        "type": "Microsoft.Quota/quotaTransfers",
+        "etag": "abc123",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "transferStatus": "Pending",
+          "transferId": "12345678-1234-1234-1234-1234567890ab",
+          "displayName": "Move 50 Dv5 vCPU to recipient",
+          "comment": "Backfill for new prod fleet rollout.",
+          "destinationSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+          "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+          "billingAccountId": "1234567890",
+          "resourceName": "standardDv5Family",
+          "amount": 50,
+          "autoApprove": false,
+          "createdAt": "2026-11-10T17:00:00Z",
+          "expiresAt": "2026-11-17T17:00:00Z",
+          "createdBy": "donor-admin@contoso.com"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Quota/locations/eastus/operationStatuses/op-7d3c?api-version=2026-09-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "id": "/subscriptions/aaaaaaaa-bbbb-cccc-dddd-000000000001/providers/Microsoft.Compute/locations/eastus/providers/Microsoft.Quota/quotaTransfers/compute-stdDv5-uplift-101",
+        "name": "compute-stdDv5-uplift-101",
+        "type": "Microsoft.Quota/quotaTransfers",
+        "etag": "abc123",
+        "properties": {
+          "provisioningState": "Accepted",
+          "transferStatus": "Pending",
+          "transferId": "12345678-1234-1234-1234-1234567890ab",
+          "displayName": "Move 50 Dv5 vCPU to recipient",
+          "comment": "Backfill for new prod fleet rollout.",
+          "destinationSubscriptionId": "aaaaaaaa-bbbb-cccc-dddd-000000000002",
+          "destinationTenantId": "aaaaaaaa-bbbb-cccc-dddd-000000000099",
+          "billingAccountId": "1234567890",
+          "resourceName": "standardDv5Family",
+          "amount": 50,
+          "autoApprove": false,
+          "createdAt": "2026-11-10T17:00:00Z",
+          "expiresAt": "2026-11-17T17:00:00Z",
+          "createdBy": "donor-admin@contoso.com"
+        }
+      }
+    }
+  }
+}

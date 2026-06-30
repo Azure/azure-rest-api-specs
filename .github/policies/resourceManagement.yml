@@ -2487,31 +2487,6 @@ configuration:
       description: 
     - if:
       - payloadType: Pull_Request
-      - hasLabel:
-          label: no-recent-activity
-      - or:
-        - isAction:
-            action: Synchronize
-        - isAction:
-            action: Null
-        - isAction:
-            action: Unlabeled
-        - isAction:
-            action: Edited
-        - isAction:
-            action: Null
-        - isAction:
-            action: Reopened
-        - isAction:
-            action: Labeled
-        - isAction:
-            action: Edited
-      then:
-      - removeLabel:
-          label: no-recent-activity
-      description: 
-    - if:
-      - payloadType: Pull_Request
       # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
       # which adds all labels to the PR.
       # Workaround by first checking "filesMatchPattern()", which correctly returns "false".
