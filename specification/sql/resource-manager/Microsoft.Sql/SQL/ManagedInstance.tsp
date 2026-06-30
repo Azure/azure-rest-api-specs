@@ -14,7 +14,7 @@ namespace Microsoft.Sql;
  * An Azure SQL managed instance.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+@Azure.ResourceManager.featureFile(Features.ManagedInstances)
 model ManagedInstance
   is Azure.ResourceManager.TrackedResource<ManagedInstanceProperties> {
   ...ResourceNameParameter<
@@ -45,7 +45,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   get is ArmResourceRead<
     ManagedInstance,
     Parameters = {
@@ -63,7 +63,7 @@ interface ManagedInstances {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedInstance,
     Response =
@@ -82,7 +82,7 @@ interface ManagedInstances {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   update is ArmCustomPatchAsync<
     ManagedInstance,
     PatchModel = ManagedInstanceUpdate
@@ -94,7 +94,7 @@ interface ManagedInstances {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedInstance,
     Response =
@@ -108,7 +108,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   listByResourceGroup is ArmResourceListByParent<
     ManagedInstance,
     Parameters = {
@@ -125,7 +125,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   list is ArmListBySubscription<
     ManagedInstance,
     Parameters = {
@@ -145,7 +145,7 @@ interface ManagedInstances {
   @list
   @get
   @action("inaccessibleManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   listInaccessibleByInstance is ArmResourceActionSync<
     ManagedInstance,
     void,
@@ -157,7 +157,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   failover is ArmResourceActionAsyncBase<
     ManagedInstance,
     void,
@@ -180,7 +180,7 @@ interface ManagedInstances {
   @get
   @action("outboundNetworkDependenciesEndpoints")
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   listOutboundNetworkDependenciesByManagedInstance is ArmResourceActionSync<
     ManagedInstance,
     void,
@@ -192,7 +192,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsyncBase<
     ManagedInstance,
     void,
@@ -206,7 +206,7 @@ interface ManagedInstances {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
   @action("refreshExternalGovernanceStatus")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   refreshStatus is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -218,7 +218,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   start is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -230,7 +230,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   stop is ArmResourceActionAsync<
     ManagedInstance,
     void,
@@ -245,7 +245,7 @@ interface ManagedInstances {
   @get
   @action("topqueries")
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   listByManagedInstance is ArmResourceActionSync<
     ManagedInstance,
     void,
@@ -300,7 +300,7 @@ interface ManagedInstances {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   validateAzureKeyVaultEncryptionKey is ArmResourceActionAsyncBase<
     ManagedInstance,
     ManagedInstanceValidateAzureKeyVaultEncryptionKeyRequest,
@@ -314,7 +314,7 @@ interface ManagedInstances {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedInstanceTdeCertificates")
   @action("tdeCertificates")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceTdeCertificates)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstanceTdeCertificates)
   create is ArmResourceActionAsyncBase<
     ManagedInstance,
     TdeCertificate,
@@ -330,7 +330,7 @@ interface ManagedInstances {
   @list
   @get
   @action("serverTrustGroups")
-  @Azure.ResourceManager.Legacy.feature(Features.ServerTrustGroups)
+  @Azure.ResourceManager.featureFile(Features.ServerTrustGroups)
   listByInstance is ArmResourceActionSync<
     ManagedInstance,
     void,

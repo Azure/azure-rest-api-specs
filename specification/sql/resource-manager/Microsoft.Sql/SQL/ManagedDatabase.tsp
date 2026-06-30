@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+@Azure.ResourceManager.featureFile(Features.ManagedDatabases)
 model ManagedDatabase
   is Azure.ResourceManager.TrackedResource<ManagedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -34,7 +34,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   get is ArmResourceRead<ManagedDatabase>;
 
   /**
@@ -43,7 +43,7 @@ interface ManagedDatabases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ManagedDatabase,
     Response =
@@ -62,7 +62,7 @@ interface ManagedDatabases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   update is ArmCustomPatchAsync<
     ManagedDatabase,
     PatchModel = ManagedDatabaseUpdate
@@ -74,7 +74,7 @@ interface ManagedDatabases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedDatabase,
     Response =
@@ -88,7 +88,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   listByInstance is ArmResourceListByParent<ManagedDatabase>;
 
   /**
@@ -99,7 +99,7 @@ interface ManagedDatabases {
   @list
   @get
   @action("columns")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseColumns)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabaseColumns)
   listByDatabase is ArmResourceActionSync<
     ManagedDatabase,
     void,
@@ -138,7 +138,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   cancelMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
@@ -151,7 +151,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   completeMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseMoveDefinition,
@@ -164,7 +164,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   completeRestore is ArmResourceActionAsyncBase<
     ManagedDatabase,
     CompleteDatabaseRestoreDefinition,
@@ -177,7 +177,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   reevaluateInaccessibleDatabaseState is ArmResourceActionAsync<
     ManagedDatabase,
     void,
@@ -189,7 +189,7 @@ interface ManagedDatabases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ManagedDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabases)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabases)
   startMove is ArmResourceActionAsyncBase<
     ManagedDatabase,
     ManagedDatabaseStartMoveDefinition,
@@ -205,7 +205,7 @@ interface ManagedDatabases {
   @list
   @get
   @action("securityEvents")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseSecurityEvents)
+  @Azure.ResourceManager.featureFile(Features.ManagedDatabaseSecurityEvents)
   managedDatabaseSecurityEventsListByDatabase is ArmResourceActionSync<
     ManagedDatabase,
     void,
@@ -245,7 +245,7 @@ interface ManagedDatabases {
   @list
   @get
   @action("currentSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.ManagedDatabaseSensitivityLabels
   )
   listCurrentByDatabase is ArmResourceActionSync<
@@ -278,7 +278,7 @@ interface ManagedDatabases {
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.ManagedDatabaseSensitivityLabels
   )
   managedDatabaseSensitivityLabelsUpdate is ArmResourceActionSync<
@@ -295,7 +295,7 @@ interface ManagedDatabases {
   @list
   @get
   @action("recommendedSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.ManagedDatabaseSensitivityLabels
   )
   listRecommendedByDatabase is ArmResourceActionSync<
@@ -330,7 +330,7 @@ interface ManagedDatabases {
   @tag("ManagedDatabaseSensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.ManagedDatabaseSensitivityLabels
   )
   managedDatabaseRecommendedSensitivityLabelsUpdate is ArmResourceActionSync<
@@ -347,7 +347,7 @@ interface ManagedDatabases {
   @list
   @get
   @action("sensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.ManagedDatabaseSensitivityLabels
   )
   managedDatabaseSensitivityLabelsListByDatabase is ArmResourceActionSync<

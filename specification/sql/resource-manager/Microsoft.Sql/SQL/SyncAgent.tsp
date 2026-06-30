@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
+@Azure.ResourceManager.featureFile(Features.SyncAgents)
 model SyncAgent is Azure.ResourceManager.ProxyResource<SyncAgentProperties> {
   ...ResourceNameParameter<
     Resource = SyncAgent,
@@ -28,7 +28,7 @@ model SyncAgent is Azure.ResourceManager.ProxyResource<SyncAgentProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.SyncAgents)
+@Azure.ResourceManager.featureFile(Features.SyncAgents)
 interface SyncAgents {
   /**
    * Gets a sync agent.

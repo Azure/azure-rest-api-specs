@@ -15,7 +15,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
+@Azure.ResourceManager.featureFile(Features.SubscriptionUsages)
 model SubscriptionUsage
   is Azure.ResourceManager.ProxyResource<SubscriptionUsageProperties> {
   ...ResourceNameParameter<
@@ -49,7 +49,7 @@ alias SubscriptionUsagesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.SubscriptionUsages)
+@Azure.ResourceManager.featureFile(Features.SubscriptionUsages)
 interface SubscriptionUsages {
   /**
    * Gets a subscription usage metric.

@@ -17,7 +17,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("current")
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
+@Azure.ResourceManager.featureFile(Features.MaintenanceWindowOptions)
 model MaintenanceWindowOptions
   is Azure.ResourceManager.ProxyResource<MaintenanceWindowOptionsProperties> {
   ...ResourceNameParameter<
@@ -30,7 +30,7 @@ model MaintenanceWindowOptions
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.MaintenanceWindowOptions)
+@Azure.ResourceManager.featureFile(Features.MaintenanceWindowOptions)
 interface MaintenanceWindowOptionsOperationGroup {
   /**
    * Gets a list of available maintenance windows.

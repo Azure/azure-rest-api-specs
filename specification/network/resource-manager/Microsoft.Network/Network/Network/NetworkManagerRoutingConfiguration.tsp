@@ -22,7 +22,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@Azure.ResourceManager.featureFile(Features.networkManager)
 model NetworkManagerRoutingConfiguration extends ChildResource {
   properties?: NetworkManagerRoutingConfigurationPropertiesFormat;
 
@@ -41,7 +41,7 @@ model NetworkManagerRoutingConfiguration extends ChildResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @armResourceOperations
 interface NetworkManagerRoutingConfigurations {
   /**

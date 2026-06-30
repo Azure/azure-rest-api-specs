@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.RecoverableManagedDatabases)
+@Azure.ResourceManager.featureFile(Features.RecoverableManagedDatabases)
 model RecoverableManagedDatabase
   is Azure.ResourceManager.ProxyResource<RecoverableManagedDatabaseProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model RecoverableManagedDatabase
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.RecoverableManagedDatabases)
+@Azure.ResourceManager.featureFile(Features.RecoverableManagedDatabases)
 interface RecoverableManagedDatabases {
   /**
    * Gets a recoverable managed database.

@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.featureFile(Features.expressRoute)
 @summary("ExpressRoute Port Authorization")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ExpressRoutePortAuthorization extends SubResourceModel {
@@ -63,7 +63,7 @@ alias ExpressRoutePortAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.featureFile(Features.expressRoute)
 @armResourceOperations
 interface ExpressRoutePortAuthorizations {
   /**

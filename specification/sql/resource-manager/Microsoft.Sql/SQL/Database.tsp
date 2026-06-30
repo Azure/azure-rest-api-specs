@@ -17,7 +17,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.Databases)
+@Azure.ResourceManager.featureFile(Features.Databases)
 model Database is Azure.ResourceManager.TrackedResource<DatabaseProperties> {
   ...ResourceNameParameter<
     Resource = Database,
@@ -72,7 +72,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   get is ArmResourceRead<
     Database,
     Parameters = {
@@ -97,7 +97,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Database,
     Response =
@@ -115,7 +115,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   update is ArmCustomPatchAsync<Database, PatchModel = DatabaseUpdate>;
 
   /**
@@ -124,7 +124,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   delete is ArmResourceDeleteWithoutOkAsync<
     Database,
     Response =
@@ -138,7 +138,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   listByServer is ArmResourceListByParent<
     Database,
     Parameters = {
@@ -185,7 +185,7 @@ interface Databases {
   @list
   @get
   @action("columns")
-  @Azure.ResourceManager.Legacy.feature(Features.DatabaseColumns)
+  @Azure.ResourceManager.featureFile(Features.DatabaseColumns)
   listByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -224,7 +224,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseEncryptionProtectorRevalidate")
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.DatabaseEncryptionProtectorRevalidate
   )
   revalidate is ArmResourceActionAsyncBase<
@@ -246,7 +246,7 @@ interface Databases {
    * Reverts an existing encryption protector for a particular database.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Legacy.feature(
+  @Azure.ResourceManager.featureFile(
     Features.DatabaseEncryptionProtectorRevert
   )
   @tag("DatabaseEncryptionProtectorRevert")
@@ -273,7 +273,7 @@ interface Databases {
   @list
   @get
   @action("operations")
-  @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
+  @Azure.ResourceManager.featureFile(Features.DatabaseOperations)
   databaseOperationsListByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -285,7 +285,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("DatabaseOperations")
-  @Azure.ResourceManager.Legacy.feature(Features.DatabaseOperations)
+  @Azure.ResourceManager.featureFile(Features.DatabaseOperations)
   cancel is ArmResourceActionSync<
     Database,
     void,
@@ -306,7 +306,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   export is ArmResourceActionAsync<
     Database,
     ExportDatabaseDefinition,
@@ -318,7 +318,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   failover is ArmResourceActionAsyncBase<
     Database,
     void,
@@ -339,7 +339,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("import")
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   importDatabase is ArmResourceActionAsync<
     Database,
     ImportExistingDatabaseDefinition,
@@ -352,7 +352,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("move")
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   rename is ArmResourceActionSync<Database, ResourceMoveDefinition, OkResponse>;
 
   /**
@@ -360,7 +360,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   pause is ArmResourceActionAsync<Database, void, Response = Database>;
 
   /**
@@ -368,7 +368,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   resume is ArmResourceActionAsync<Database, void, Response = Database>;
 
   /**
@@ -376,7 +376,7 @@ interface Databases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   upgradeDataWarehouse is ArmResourceActionAsyncBase<
     Database,
     void,
@@ -392,7 +392,7 @@ interface Databases {
   @list
   @get
   @action("usages")
-  @Azure.ResourceManager.Legacy.feature(Features.DatabaseUsages)
+  @Azure.ResourceManager.featureFile(Features.DatabaseUsages)
   databaseUsagesListByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -406,7 +406,7 @@ interface Databases {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("RestorePoints")
   @action("restorePoints")
-  @Azure.ResourceManager.Legacy.feature(Features.RestorePoints)
+  @Azure.ResourceManager.featureFile(Features.RestorePoints)
   create is ArmResourceActionAsyncBase<
     Database,
     Request = CreateDatabaseRestorePointDefinition,
@@ -428,7 +428,7 @@ interface Databases {
   @list
   @get
   @action("currentSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
+  @Azure.ResourceManager.featureFile(Features.SensitivityLabels)
   listCurrentByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -459,7 +459,7 @@ interface Databases {
   @tag("SensitivityLabels")
   @patch
   @action("currentSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
+  @Azure.ResourceManager.featureFile(Features.SensitivityLabels)
   sensitivityLabelsUpdate is ArmResourceActionSync<
     Database,
     SensitivityLabelUpdateList,
@@ -474,7 +474,7 @@ interface Databases {
   @list
   @get
   @action("recommendedSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
+  @Azure.ResourceManager.featureFile(Features.SensitivityLabels)
   listRecommendedByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -507,7 +507,7 @@ interface Databases {
   @tag("SensitivityLabels")
   @patch
   @action("recommendedSensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
+  @Azure.ResourceManager.featureFile(Features.SensitivityLabels)
   recommendedSensitivityLabelsUpdate is ArmResourceActionSync<
     Database,
     RecommendedSensitivityLabelUpdateList,
@@ -522,7 +522,7 @@ interface Databases {
   @list
   @get
   @action("sensitivityLabels")
-  @Azure.ResourceManager.Legacy.feature(Features.SensitivityLabels)
+  @Azure.ResourceManager.featureFile(Features.SensitivityLabels)
   sensitivityLabelsListByDatabase is ArmResourceActionSync<
     Database,
     void,
@@ -544,7 +544,7 @@ interface Databases {
   @list
   @get
   @action("linkWorkspaces")
-  @Azure.ResourceManager.Legacy.feature(Features.SynapseLinkWorkspaces)
+  @Azure.ResourceManager.featureFile(Features.SynapseLinkWorkspaces)
   synapseLinkWorkspacesListByDatabase is ArmResourceActionSync<
     Database,
     void,

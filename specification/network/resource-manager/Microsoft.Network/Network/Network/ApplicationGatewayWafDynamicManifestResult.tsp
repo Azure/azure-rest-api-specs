@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@Azure.ResourceManager.featureFile(Features.applicationGateway)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @singleton("dafault")
 @subscriptionResource
@@ -62,7 +62,7 @@ alias ApplicationGatewayWafDynamicManifestResultOps = Azure.ResourceManager.Lega
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@Azure.ResourceManager.featureFile(Features.applicationGateway)
 @armResourceOperations(#{ omitTags: true })
 interface ApplicationGatewayWafDynamicManifestResults {
   /**

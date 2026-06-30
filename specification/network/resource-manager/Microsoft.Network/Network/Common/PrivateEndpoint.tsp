@@ -17,7 +17,7 @@ namespace Common;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@Azure.ResourceManager.featureFile(Features.virtualNetwork)
 model PrivateEndpoint extends Resource {
   properties?: PrivateEndpointProperties;
 

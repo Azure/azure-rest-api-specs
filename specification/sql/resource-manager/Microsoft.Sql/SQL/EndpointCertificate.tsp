@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
+@Azure.ResourceManager.featureFile(Features.EndpointCertificates)
 model EndpointCertificate
   is Azure.ResourceManager.ProxyResource<EndpointCertificateProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model EndpointCertificate
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.EndpointCertificates)
+@Azure.ResourceManager.featureFile(Features.EndpointCertificates)
 interface EndpointCertificates {
   /**
    * Gets a certificate used on the endpoint with the given id.

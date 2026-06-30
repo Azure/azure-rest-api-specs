@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
+@Azure.ResourceManager.featureFile(Features.BlobAuditing)
 model ServerBlobAuditingPolicy
   is Azure.ResourceManager.ProxyResource<ServerBlobAuditingPolicyProperties> {
   ...ResourceNameParameter<
@@ -46,7 +46,7 @@ alias ServerBlobAuditingPoliciesOps = Azure.ResourceManager.Legacy.LegacyOperati
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.BlobAuditing)
+@Azure.ResourceManager.featureFile(Features.BlobAuditing)
 interface ServerBlobAuditingPolicies {
   /**
    * Gets a server's blob auditing policy.

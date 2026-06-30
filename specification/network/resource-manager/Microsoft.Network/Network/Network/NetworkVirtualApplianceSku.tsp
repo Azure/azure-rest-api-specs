@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@Azure.ResourceManager.featureFile(Features.virtualNetwork)
 @subscriptionResource
 @summary("Available NetworkVirtualApplianceSkus")
 @Http.Private.includeInapplicableMetadataInPayload(false)
@@ -39,7 +39,7 @@ model NetworkVirtualApplianceSku extends Common.Resource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@Azure.ResourceManager.featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface NetworkVirtualApplianceSkus {
   /**

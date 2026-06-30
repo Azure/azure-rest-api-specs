@@ -19,7 +19,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@Azure.ResourceManager.featureFile(Features.applicationGateway)
 @singleton("default")
 @subscriptionResource
 @Http.Private.includeInapplicableMetadataInPayload(false)
@@ -52,7 +52,7 @@ alias ApplicationGatewayAvailableSslOptionsOps = Azure.ResourceManager.Legacy.Ro
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@Azure.ResourceManager.featureFile(Features.applicationGateway)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ApplicationGatewayAvailableSslOptionsOperationGroup {
   /**

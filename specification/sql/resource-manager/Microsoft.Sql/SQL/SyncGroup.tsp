@@ -17,7 +17,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
+@Azure.ResourceManager.featureFile(Features.SyncGroups)
 model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   ...ResourceNameParameter<
     Resource = SyncGroup,
@@ -42,7 +42,7 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
+@Azure.ResourceManager.featureFile(Features.SyncGroups)
 interface SyncGroups {
   /**
    * Gets a sync group.

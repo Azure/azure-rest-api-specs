@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
+@Azure.ResourceManager.featureFile(Features.OutboundFirewallRules)
 model OutboundFirewallRule
   is Azure.ResourceManager.ProxyResource<OutboundFirewallRuleProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model OutboundFirewallRule
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.OutboundFirewallRules)
+@Azure.ResourceManager.featureFile(Features.OutboundFirewallRules)
 interface OutboundFirewallRules {
   /**
    * Gets an outbound firewall rule.

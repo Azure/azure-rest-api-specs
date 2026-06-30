@@ -15,7 +15,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.LongTermRetentionManagedInstanceBackups
 )
 model ManagedInstanceLongTermRetentionBackup
@@ -69,7 +69,7 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.LongTermRetentionManagedInstanceBackups
 )
 interface ManagedInstanceLongTermRetentionBackups {
@@ -147,7 +147,7 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.LongTermRetentionManagedInstanceBackups
 )
 interface LongTermRetentionManagedInstanceBackups {

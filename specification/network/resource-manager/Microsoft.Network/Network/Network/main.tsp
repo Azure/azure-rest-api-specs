@@ -148,7 +148,7 @@ using Common;
 /**
  * APIs to manage web application firewall rules.
  */
-@Azure.ResourceManager.Legacy.features(Features)
+@Azure.ResourceManager.featureFiles(Features)
 @armProviderNamespace
 @service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
@@ -173,7 +173,7 @@ enum Versions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+@Azure.ResourceManager.featureFile(Features.networkingOperations)
 @armResourceOperations(#{ omitTags: true })
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<

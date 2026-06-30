@@ -23,7 +23,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ConnectionPolicy uses the local Network RP ProxyResource base type consistent with all other VirtualWAN nested resources (e.g. AzureWebCategory, BgpConnection)"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP ProxyResource is the established pattern for nested resources in this RP"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@Azure.ResourceManager.featureFile(Features.virtualWAN)
 @parentResource(VirtualHub)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ConnectionPolicy extends ProxyResource {
@@ -45,7 +45,7 @@ model ConnectionPolicy extends ProxyResource {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN interface definitions"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@Azure.ResourceManager.featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface ConnectionPolicies {
   /**

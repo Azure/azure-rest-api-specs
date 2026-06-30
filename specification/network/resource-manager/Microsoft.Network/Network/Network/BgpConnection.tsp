@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@Azure.ResourceManager.featureFile(Features.virtualWAN)
 @parentResource(VirtualHub)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model BgpConnection extends SubResourceModel {
@@ -63,7 +63,7 @@ alias VirtualHubBgpConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@Azure.ResourceManager.featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface BgpConnections {
   /**

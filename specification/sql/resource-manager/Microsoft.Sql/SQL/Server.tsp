@@ -14,7 +14,7 @@ namespace Microsoft.Sql;
  * An Azure SQL Database server.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.Servers)
+@Azure.ResourceManager.featureFile(Features.Servers)
 model Server is Azure.ResourceManager.TrackedResource<ServerProperties> {
   ...ResourceNameParameter<
     Resource = Server,
@@ -44,7 +44,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   get is ArmResourceRead<
     Server,
     Parameters = {
@@ -62,7 +62,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Server,
     Response =
@@ -81,7 +81,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   update is ArmCustomPatchAsync<Server, PatchModel = ServerUpdate>;
 
   /**
@@ -90,7 +90,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   delete is ArmResourceDeleteWithoutOkAsync<
     Server,
     Response =
@@ -104,7 +104,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   listByResourceGroup is ArmResourceListByParent<
     Server,
     Parameters = {
@@ -121,7 +121,7 @@ interface Servers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   list is ArmListBySubscription<
     Server,
     Parameters = {
@@ -141,7 +141,7 @@ interface Servers {
   @list
   @get
   @action("inaccessibleDatabases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   listInaccessibleByServer is ArmResourceActionSync<
     Server,
     void,
@@ -157,7 +157,7 @@ interface Servers {
   @tag("FirewallRules")
   @put
   @action("firewallRules")
-  @Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
+  @Azure.ResourceManager.featureFile(Features.FirewallRules)
   replace is ArmResourceActionSync<
     Server,
     FirewallRuleList,
@@ -172,7 +172,7 @@ interface Servers {
   @list
   @get
   @action("replicationLinks")
-  @Azure.ResourceManager.Legacy.feature(Features.ReplicationLinks)
+  @Azure.ResourceManager.featureFile(Features.ReplicationLinks)
   listByServer is ArmResourceActionSync<
     Server,
     void,
@@ -187,7 +187,7 @@ interface Servers {
   @list
   @get
   @action("operations")
-  @Azure.ResourceManager.Legacy.feature(Features.ServerOperations)
+  @Azure.ResourceManager.featureFile(Features.ServerOperations)
   serverOperationsListByServer is ArmResourceActionSync<
     Server,
     void,
@@ -200,7 +200,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @action("import")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   importDatabase is ArmResourceActionAsync<
     Server,
     ImportNewDatabaseDefinition,
@@ -213,7 +213,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("Servers")
   @action("refreshExternalGovernanceStatus")
-  @Azure.ResourceManager.Legacy.feature(Features.Servers)
+  @Azure.ResourceManager.featureFile(Features.Servers)
   refreshStatus is ArmResourceActionAsync<
     Server,
     void,
@@ -228,7 +228,7 @@ interface Servers {
   @list
   @get
   @action("usages")
-  @Azure.ResourceManager.Legacy.feature(Features.ServerUsages)
+  @Azure.ResourceManager.featureFile(Features.ServerUsages)
   serverUsagesListByServer is ArmResourceActionSync<
     Server,
     void,
@@ -241,7 +241,7 @@ interface Servers {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("TdeCertificates")
   @action("tdeCertificates")
-  @Azure.ResourceManager.Legacy.feature(Features.TdeCertificates)
+  @Azure.ResourceManager.featureFile(Features.TdeCertificates)
   create is ArmResourceActionAsyncBase<
     Server,
     TdeCertificate,

@@ -17,7 +17,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
+@Azure.ResourceManager.featureFile(Features.FailoverGroups)
 model FailoverGroup
   is Azure.ResourceManager.ProxyResource<FailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -44,7 +44,7 @@ model FailoverGroup
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.FailoverGroups)
+@Azure.ResourceManager.featureFile(Features.FailoverGroups)
 interface FailoverGroups {
   /**
    * Gets a failover group.

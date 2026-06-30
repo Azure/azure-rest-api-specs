@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(JobAgent)
-@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
+@Azure.ResourceManager.featureFile(Features.JobCredentials)
 model JobCredential
   is Azure.ResourceManager.ProxyResource<JobCredentialProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model JobCredential
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.JobCredentials)
+@Azure.ResourceManager.featureFile(Features.JobCredentials)
 interface JobCredentials {
   /**
    * Gets a jobs credential.

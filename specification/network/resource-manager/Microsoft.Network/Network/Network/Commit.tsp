@@ -22,10 +22,10 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Using ChildResource base type with includeInapplicableMetadataInPayload for consistency with all existing Network Manager child resources (e.g., ScopeConnection, AdminRuleCollection, ConnectivityConfiguration)"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ChildResource is the established pattern for all Network Manager child resources to maintain consistent swagger output across the service"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheriting from ChildResource is required to match the existing Network Manager resource model hierarchy"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources in this TypeSpec project"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using featureFile(Features.networkManager) for consistency with all Network Manager resources in this TypeSpec project"
 @parentResource(NetworkManager)
 @Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @added(Versions.v2025_07_01)
 model Commit extends ChildResource {
   properties?: CommitProperties;
@@ -47,8 +47,8 @@ model Commit extends ChildResource {
 /**
  * Properties of commit
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using featureFile(Features.networkManager) for consistency with all Network Manager resources"
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @added(Versions.v2025_07_01)
 model CommitProperties {
   /**
@@ -95,8 +95,8 @@ model CommitProperties {
   forceUpdateTag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using Legacy.feature(Features.networkManager) for consistency with all Network Manager resources"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Using featureFile(Features.networkManager) for consistency with all Network Manager resources"
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @added(Versions.v2025_07_01)
 @armResourceOperations
 // Note: PATCH/Update operation is intentionally omitted. This is consistent with other

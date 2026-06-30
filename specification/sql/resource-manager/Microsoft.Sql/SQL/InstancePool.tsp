@@ -14,7 +14,7 @@ namespace Microsoft.Sql;
  * An Azure SQL instance pool.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+@Azure.ResourceManager.featureFile(Features.InstancePools)
 model InstancePool
   is Azure.ResourceManager.TrackedResource<InstancePoolProperties> {
   ...ResourceNameParameter<
@@ -38,7 +38,7 @@ interface InstancePools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   get is ArmResourceRead<InstancePool>;
 
   /**
@@ -47,7 +47,7 @@ interface InstancePools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InstancePool,
     Response =
@@ -66,7 +66,7 @@ interface InstancePools {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   update is ArmCustomPatchAsync<InstancePool, PatchModel = InstancePoolUpdate>;
 
   /**
@@ -75,7 +75,7 @@ interface InstancePools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   delete is ArmResourceDeleteWithoutOkAsync<
     InstancePool,
     Response =
@@ -89,7 +89,7 @@ interface InstancePools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   listByResourceGroup is ArmResourceListByParent<InstancePool>;
 
   /**
@@ -97,7 +97,7 @@ interface InstancePools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("InstancePools")
-  @Azure.ResourceManager.Legacy.feature(Features.InstancePools)
+  @Azure.ResourceManager.featureFile(Features.InstancePools)
   list is ArmListBySubscription<InstancePool>;
 
   /**
@@ -108,7 +108,7 @@ interface InstancePools {
   @list
   @get
   @action("managedInstances")
-  @Azure.ResourceManager.Legacy.feature(Features.ManagedInstances)
+  @Azure.ResourceManager.featureFile(Features.ManagedInstances)
   listByInstancePool is ArmResourceActionSync<
     InstancePool,
     void,
@@ -130,7 +130,7 @@ interface InstancePools {
   @list
   @get
   @action("usages")
-  @Azure.ResourceManager.Legacy.feature(Features.Usages)
+  @Azure.ResourceManager.featureFile(Features.Usages)
   usagesListByInstancePool is ArmResourceActionSync<
     InstancePool,
     void,
