@@ -373,6 +373,10 @@ union State {
   @added(Versions.v2026_05_01_preview)
   @doc("Is succeeded")
   Succeeded: "Succeeded",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Is upgrading")
+  Upgrading: "Upgrading",
 }
 
 @doc("Indicates if public network access is enabled or not.")
