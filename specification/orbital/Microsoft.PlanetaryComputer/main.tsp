@@ -25,6 +25,10 @@ import "./sas.tsp";
 import "./inma.tsp";
 import "./client.tsp";
 
+// AI Workflows & Models
+import "./ai-workflow.tsp";
+import "./ai-models.tsp";
+
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
