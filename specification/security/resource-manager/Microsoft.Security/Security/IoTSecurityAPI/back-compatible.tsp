@@ -26,11 +26,6 @@ using Common;
   IoTSecuritySolutionAnalyticsModels.list,
   "IotSecuritySolutionAnalytics"
 );
-@@clientName(
-  IoTSecuritySolutionAnalyticsModelList,
-  "IotSecuritySolutionAnalyticsModelList",
-  "csharp"
-);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecuritySolutionAnalyticsModel.properties);
 
