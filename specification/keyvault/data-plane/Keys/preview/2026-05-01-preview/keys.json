@@ -2977,12 +2977,17 @@
           "description": "The attestation assertion for the target of the key release.",
           "minLength": 1,
           "x-ms-client-name": "targetAttestationToken"
+        },
+        "applicationTrustedIssuer": {
+          "type": "string",
+          "description": "The application trusted issuer for the Payment HSM Cluster"
         }
       },
       "required": [
         "alg",
         "value",
-        "target"
+        "target",
+        "applicationTrustedIssuer"
       ]
     },
     "SecureKeyWrapOperationParameters": {

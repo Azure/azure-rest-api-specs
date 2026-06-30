@@ -583,6 +583,12 @@ model SecureKeyUnWrapOperationParameters {
   @minLength(1)
   @encodedName("application/json", "target")
   targetAttestationToken: string;
+
+  /**
+   * The application trusted issuer for the Payment HSM Cluster
+   */
+  @added(KeyVault.Versions.v2026_05_01_preview)
+  applicationTrustedIssuer: string;
 }
 
 /**
