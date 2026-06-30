@@ -10,6 +10,11 @@ runs:
         # actions/github-script@v8 uses Node 24
         node-version: 24.x
         install-command: "pnpm ci --prod --prefer-offline --filter=azure-rest-api-specs-github..."
-        # Minimal prod-only install; keep its store cache separate from the full
-        # install so it can't shrink the cache that full installs rely on.
-        cache-name: "github-script"
+        # Minimal prod-only install (~22 packages). Skip the pnpm store cache: in CI
+        # the store starts empty each run anyway, and the cache restore/save round-trip
+        # (plus the "pnpm store path" probe) costs more than just downloading the few
+        # packages directly.
+        cache: "false"
+        # Trust the already-vetted committed lockfile and skip pnpm's per-install
+        # supply-chain re-verification (cold every CI run, scales with lockfile size).
+        trust-lockfile: "true"

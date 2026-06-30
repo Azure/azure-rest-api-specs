@@ -14,6 +14,12 @@ inputs:
   cache-name:
     description: 'Namespaces the pnpm store cache so different install profiles do not overwrite each other (e.g. a minimal "--prod --filter" install vs. a full install share the same content-addressable store, but a smaller install must not poison the cache restored by a larger one). Use a distinct value per install-command.'
     default: "full"
+  cache:
+    description: 'Whether to cache the pnpm store. Disable for tiny installs (e.g. a "--prod --filter" subset of a few packages) where restoring/saving the cache costs more time than it saves.'
+    default: "true"
+  trust-lockfile:
+    description: 'When "true", sets pnpm "trustLockfile" so the committed lockfile is trusted as-is and pnpm skips re-verifying it against supply-chain policies on each frozen install (saves ~seconds, scaling with lockfile size). Safe for frozen CI installs of an already-vetted lockfile; the policy still applies when the lockfile is changed via a non-frozen install. Leave "false" to keep verifying on every install.'
+    default: "false"
 
 runs:
   using: "composite"
@@ -32,12 +38,14 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
-    - id: pnpm-store
+    - if: ${{ inputs.cache == 'true' }}
+      id: pnpm-store
       run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
 
-    - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+    - if: ${{ inputs.cache == 'true' }}
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       with:
         path: ${{ steps.pnpm-store.outputs.path }}
         key: pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -51,6 +59,7 @@ runs:
       shell: bash
       env:
         INSTALL_COMMAND: ${{ inputs.install-command }}
+        npm_config_trust_lockfile: ${{ inputs.trust-lockfile }}
       working-directory: ${{ inputs.working-directory }}
 
     - run: |
