@@ -587,7 +587,7 @@ model SecureKeyUnWrapOperationParameters {
   /**
    * The application trusted issuer for the Payment HSM Cluster
    */
-  @added(KeyVault.Versions.v2026_05_01_preview)
+  @added(KeyVault.Versions.v2026_07_01_preview)
   applicationTrustedIssuer: string;
 }
 
