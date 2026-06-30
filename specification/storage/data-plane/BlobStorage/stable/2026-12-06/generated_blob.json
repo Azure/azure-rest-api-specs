@@ -12461,7 +12461,7 @@
     "?restype=container&comp=list&flat&arrow": {
       "get": {
         "operationId": "Container_ListBlobFlatSegmentApacheArrow",
-        "description": "The List Blobs operation returns a list of the blobs under the specified container. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client.",
+        "description": "Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client.",
         "produces": [
           "application/vnd.apache.arrow.stream",
           "application/xml"
@@ -12470,7 +12470,7 @@
           {
             "name": "accept",
             "in": "header",
-            "description": "The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML.",
+            "description": "The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise.",
             "required": true,
             "type": "string",
             "enum": [
@@ -12601,7 +12601,7 @@
           {
             "name": "endBefore",
             "in": "query",
-            "description": "Filters the results to return only blobs whose names are ordered before this value.",
+            "description": "Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario.",
             "required": false,
             "type": "string"
           },
@@ -12678,7 +12678,7 @@
     "?restype=container&comp=list&hierarchy&arrow": {
       "get": {
         "operationId": "Container_ListBlobHierarchySegmentApacheArrow",
-        "description": "The List Blobs hierarchy operation returns a list of the blobs under the specified container. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client.",
+        "description": "Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system.",
         "produces": [
           "application/vnd.apache.arrow.stream",
           "application/xml"
@@ -12687,7 +12687,7 @@
           {
             "name": "accept",
             "in": "header",
-            "description": "The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML.",
+            "description": "The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise.",
             "required": true,
             "type": "string",
             "enum": [
@@ -12825,7 +12825,7 @@
           {
             "name": "endBefore",
             "in": "query",
-            "description": "Filters the results to return only blobs whose names are ordered before this value.",
+            "description": "Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario.",
             "required": false,
             "type": "string"
           },
