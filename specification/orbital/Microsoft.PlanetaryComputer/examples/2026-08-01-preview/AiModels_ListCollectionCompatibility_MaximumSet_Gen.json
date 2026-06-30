@@ -1,0 +1,32 @@
+{
+  "title": "AiModels_ListCollectionCompatibility_MaximumSet",
+  "operationId": "AiModels_ListCollectionCompatibility",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "modelId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+    "top": 3,
+    "skip": 0,
+    "maxpagesize": 13
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "collectionId": "sentinel-2-l2a",
+            "compatibilityLevel": "Compatible"
+          },
+          {
+            "collectionId": "landsat-8-l1",
+            "compatibilityLevel": "Compatible"
+          },
+          {
+            "collectionId": "naip",
+            "compatibilityLevel": "Incompatible"
+          }
+        ],
+        "nextLink": "https://example.com/nextLink"
+      }
+    }
+  }
+}

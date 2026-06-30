@@ -1,0 +1,176 @@
+{
+  "title": "AiWorkflows_CreateOrReplace_SingleTimestep_MultiModality",
+  "operationId": "AiWorkflows_CreateOrReplace",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "workflowId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+    "resource": {
+      "displayName": "Example workflow",
+      "description": "Example single-timestep, multi-modality workflow.",
+      "modelId": "/stac/collections/models/my-model",
+      "areaOfInterest": {
+        "kind": "GeoJsonFile",
+        "geoJsonFile": "https://example.com/aoi.geojson"
+      },
+      "modelInput": {
+        "eoInput": {
+          "collectionId": "sentinel-2-l2a",
+          "filter": {
+            "op": ">=",
+            "args": [
+              { "property": "datetime" },
+              { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+            ]
+          },
+          "limit": 1,
+          "sortBy": [
+            {
+              "field": "datetime",
+              "direction": "desc"
+            }
+          ]
+        },
+        "sarInput": {
+          "collectionId": "sentinel-1-rtc",
+          "filter": {
+            "op": "t_during",
+            "args": [
+              { "property": "datetime" },
+              { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+            ]
+          },
+          "limit": 1,
+          "sortBy": [
+            {
+              "field": "datetime",
+              "direction": "desc"
+            }
+          ]
+        }
+
+      },
+      "outputCollectionId": "example-output",
+      "outputSize": {
+        "kind": "FixedSize",
+        "width": 10000,
+        "height": 10000
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "deforestation-workflow-classification-miami",
+        "displayName": "Example workflow",
+        "description": "Example single-timestep, multi-modality workflow.",
+        "modelId": "/stac/collections/models/my-model",
+        "areaOfInterest": {
+          "kind": "GeoJsonFile",
+          "geoJsonFile": "https://example.com/aoi.geojson"
+        },
+        "modelInput": {
+          "eoInput": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": ">=",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          },
+          "sarInput": {
+            "collectionId": "sentinel-1-rtc",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          }
+
+        },
+        "outputCollectionId": "example-output",
+        "outputSize": {
+          "kind": "FixedSize",
+          "width": 10000,
+          "height": 10000
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "b7e6c8e2-1f2a-4b3b-9e8e-123456789abc",
+        "displayName": "Example workflow",
+        "description": "Example single-timestep, multi-modality workflow.",
+        "modelId": "/stac/collections/models/my-model",
+        "areaOfInterest": {
+          "kind": "GeoJsonFile",
+          "geoJsonFile": "https://example.com/aoi.geojson"
+        },
+        "modelInput": {
+          "eoInput": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": ">=",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          },
+          "sarInput": {
+            "collectionId": "sentinel-1-rtc",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2024-01-01T00:00:00Z", "2024-02-29T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          }
+
+        },
+        "outputCollectionId": "example-output",
+        "outputSize": {
+          "kind": "FixedSize",
+          "width": 10000,
+          "height": 10000
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    }
+  }
+}

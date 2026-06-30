@@ -1,0 +1,67 @@
+{
+  "title": "AiModels_ListModels_MaximumSet",
+  "operationId": "AiModels_ListModels",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "top": 3,
+    "skip": 0,
+    "maxpagesize": 13
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "deforestation-detection-model",
+            "name": "Deforestation Detection Model",
+            "description": "Identifies areas of deforestation in national forests and parks using time-series satellite imagery.",
+            "source": "AI Foundry",
+            "tags": ["deforestation", "environment", "forestry", "satellite", "change detection"],
+            "architecture": "UNet with Temporal Attention",
+            "tasks": ["Change Detection", "Semantic Segmentation"],
+            "framework": "TensorFlow",
+            "modelInputObject": "Multispectral image pair (before & after), 512x512",
+            "modelOutputObject": "JSON with deforested area polygons",
+            "totalParameters": 18900000,
+            "pretrained": true,
+            "memorySize": 52428800,
+            "outputType": "JSON"
+          },
+          {
+            "id": "yolov8-object-detection-model",
+            "name": "YOLOv8 Object Detection Model",
+            "description": "Detects objects such as planes, cars, and storage tanks in high-resolution satellite imagery.",
+            "source": "AI Foundry",
+            "tags": ["object detection", "satellite", "YOLOv8", "aerial imagery", "infrastructure"],
+            "architecture": "YOLOv8",
+            "tasks": ["Object Detection"],
+            "framework": "PyTorch",
+            "modelInputObject": "RGB image, 640x640",
+            "modelOutputObject": "JSON with bounding boxes and class labels",
+            "totalParameters": 25123789,
+            "pretrained": true,
+            "memorySize": 209715200,
+            "outputType": "JSON"
+          },
+          {
+            "id": "geoformer-map-generation-model",
+            "name": "GeoFormer Map Generation Model",
+            "description": "Generates map features such as roads and buildings from satellite imagery using the GeoFormer architecture.",
+            "source": "AI Foundry",
+            "tags": ["map generation", "GeoFormer", "satellite", "roads", "buildings", "geospatial"],
+            "architecture": "GeoFormer",
+            "tasks": ["Semantic Segmentation", "Feature Extraction"],
+            "framework": "PyTorch",
+            "modelInputObject": "RGB image, 1024x1024",
+            "modelOutputObject": "JSON with geo-referenced features (roads, buildings)",
+            "totalParameters": 42300000,
+            "pretrained": true,
+            "memorySize": 367001600,
+            "outputType": "JSON"
+          }
+        ],
+        "nextLink": "https://example.com/nextLink"
+      }
+    }
+  }
+}

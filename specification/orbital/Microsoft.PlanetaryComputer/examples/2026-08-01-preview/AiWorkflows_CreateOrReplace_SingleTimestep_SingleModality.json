@@ -1,0 +1,98 @@
+{
+  "title": "AiWorkflows_CreateOrReplace_SingleTimestep_SingleModality",
+  "operationId": "AiWorkflows_CreateOrReplace",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "workflowId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+    "resource": {
+      "displayName": "Classification Workflow",
+      "description": "Classification in Potsdam Aerial imagery.",
+      "modelId": "/stac/collections/models/object-classification",
+      "areaOfInterest": {
+        "kind": "BoundingBox",
+        "bbox": [-87.9401140825235, 41.644543121783, -87.5241371038952, 42.0230385861476]
+      },
+      "modelInput": {
+        "mainInput": {
+          "collectionId": "potsdam-aerial",
+          "filter": {
+            "op": "t_during",
+            "args": [
+              { "property": "datetime" },
+              { "interval": ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"] }
+            ]
+          }
+        }
+      },
+      "outputCollectionId": "potsdam-aerial-classification-2025",
+      "modelHyperparameters": {
+        "classificationType": "single-label",
+        "classes": "building, car, tree, water"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+        "displayName": "Classification Workflow",
+        "description": "Classification in Potsdam Aerial imagery.",
+        "modelId": "/stac/collections/models/object-classification",
+        "areaOfInterest": {
+          "kind": "BoundingBox",
+          "bbox": [-87.9401140825235, 41.644543121783, -87.5241371038952, 42.0230385861476]
+        },
+        "modelInput": {
+          "mainInput": {
+            "collectionId": "potsdam-aerial",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"] }
+              ]
+            }
+          }
+        },
+        "outputCollectionId": "potsdam-aerial-classification-2025",
+        "modelHyperparameters": {
+          "classificationType": "single-label",
+          "classes": "building, car, tree, water"
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+        "displayName": "Classification Workflow",
+        "description": "Classification in Potsdam Aerial imagery.",
+        "modelId": "/stac/collections/models/object-classification",
+        "areaOfInterest": {
+          "kind": "BoundingBox",
+          "bbox": [-87.9401140825235, 41.644543121783, -87.5241371038952, 42.0230385861476]
+        },
+        "modelInput": {
+          "mainInput": {
+            "collectionId": "potsdam-aerial",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"] }
+              ]
+            }
+          }
+        },
+        "outputCollectionId": "potsdam-aerial-classification-2025",
+        "modelHyperparameters": {
+          "classificationType": "single-label",
+          "classes": "building, car, tree, water"
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "title": "AiWorkflows_List_MaximumSet",
+  "operationId": "AiWorkflows_List",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "top": 8,
+    "skip": 2,
+    "maxpagesize": 13
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "b7e6c8e2-1f2a-4b3b-9e8e-123456789abc",
+            "displayName": "Find solar panels 2025",
+            "description": "Find solar panel in Potsdam Aerial imagery using a classification model.",
+            "modelId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+            "areaOfInterest": {
+              "kind": "StacCollectionArea",
+              "collectionId": "potsdam-aerial"
+            },
+            "modelInput": {
+              "mainInput": {
+                "collectionId": "potsdam-aerial",
+                "filter": {
+                  "op": "t_during",
+                  "args": [
+                    { "property": "datetime" },
+                    { "interval": ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"] }
+                  ]
+                }
+              }
+            },
+            "outputCollectionId": "potsdam-aerial-solar-panels-2025",
+            "modelHyperparameters": {
+              "classificationType": "single_label",
+              "classes": "solar_panel, other"
+            },
+            "createdAt": "2025-01-01T00:00:00Z",
+            "lastModifiedAt": "2025-01-01T00:00:00Z"
+          }
+        ],
+        "nextLink": "https://example.com/nextLink"
+      }
+    }
+  }
+}

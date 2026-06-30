@@ -1,0 +1,44 @@
+{
+  "title": "AiWorkflows_EstimateTokensDraft",
+  "operationId": "AiWorkflows_EstimateTokensDraft",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "body": {
+      "workflow": {
+        "displayName": "Find solar panels 2025",
+        "description": "Find solar panel in Potsdam Aerial imagery using a classification model.",
+        "modelId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+        "areaOfInterest": {
+          "kind": "StacAssetGeoJson",
+          "collectionId": "potsdam-aerial",
+          "filter": {"op": "<=", "args": [{"property": "eo:cloud_cover"}, 5]},
+          "assetNames": ["buildings"]
+        },
+        "modelInput": {
+          "mainInput": {
+            "collectionId": "potsdam-aerial",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2025-01-01T00:00:00Z", "2026-01-01T00:00:00Z"] }
+              ]
+            }
+          }
+        },
+        "outputCollectionId": "potsdam-aerial-solar-panels-2025",
+        "modelHyperparameters": {
+          "classificationType": "single_label",
+          "classes": "solar_panel, other"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tokenCount": 3287
+      }
+    }
+  }
+}

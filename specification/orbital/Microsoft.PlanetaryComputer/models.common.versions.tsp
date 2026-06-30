@@ -11,6 +11,5 @@ enum Versions {
   v2026_04_15: "2026-04-15",
 
   @doc("Represents the 2026-08-01-preview version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2026_08_01_Preview: "2026-08-01-preview",
 }

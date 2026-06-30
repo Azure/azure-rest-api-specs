@@ -1,0 +1,227 @@
+{
+  "title": "AiWorkflows_CreateOrReplace_MultiTimestep_SingleModality",
+  "operationId": "AiWorkflows_CreateOrReplace",
+  "parameters": {
+    "api-version": "2025-09-30-preview",
+    "workflowId": "f1e2d3c4-b5a6-7890-cdef-998877665544",
+    "resource": {
+      "displayName": "Deforestation 2022/2024",
+      "description": "Deforestation analysis between June 2022 and June 2025 on Sentinel2-L2A.",
+      "modelId": "/stac/collections/models/deforestation",
+      "areaOfInterest": {
+        "kind": "GeoJson",
+        "geoJson": {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [ -42.306496345796205, 0.4037970236359598 ],
+                [ 25.646319360319126, 0.4037970236359598 ],
+                [ 25.646319360319126, 57.38769262822899 ],
+                [ -42.306496345796205, 57.38769262822899 ],
+                [ -42.306496345796205, 0.4037970236359598 ]
+              ]
+            ]
+          }
+      },
+      "modelInput": {
+        "before": {
+          "collectionId": "sentinel-2-l2a",
+          "filter": {
+            "op": "t_during",
+            "args": [
+              { "property": "datetime" },
+              { "interval": ["2022-06-01T00:00:00Z", "2022-06-30T00:00:00Z"] }
+            ]
+          },
+          "limit": 1,
+          "sortBy": [
+            {
+              "field": "datetime",
+              "direction": "desc"
+            }
+          ]
+        },
+        "after": {
+          "collectionId": "sentinel-2-l2a",
+          "filter": {
+            "op": "t_during",
+            "args": [
+              { "property": "datetime" },
+              { "interval": ["2025-06-01T00:00:00Z", "2025-06-30T00:00:00Z"] }
+            ]
+          },
+          "limit": 1,
+          "sortBy": [
+            {
+              "field": "datetime",
+              "direction": "desc"
+            }
+          ]
+        }
+
+      },
+      "outputCollectionId": "sentinel2-l2a-deforestation-2022-2025",
+      "outputSize": {
+        "kind": "BoundingBoxes",
+        "bboxes": [
+          [
+            -42.306496345796205,
+            0.4037970236359598,
+            25.646319360319126,
+            57.38769262822899
+          ]
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "deforestation-workflow-classification-miami",
+        "displayName": "Deforestation 2022/2024",
+        "description": "Deforestation analysis between June 2022 and June 2025 on Sentinel2-L2A.",
+        "modelId": "/stac/collections/models/deforestation",
+        "areaOfInterest": {
+          "kind": "GeoJson",
+          "geoJson": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [ -42.306496345796205, 0.4037970236359598 ],
+                  [ 25.646319360319126, 0.4037970236359598 ],
+                  [ 25.646319360319126, 57.38769262822899 ],
+                  [ -42.306496345796205, 57.38769262822899 ],
+                  [ -42.306496345796205, 0.4037970236359598 ]
+                ]
+              ]
+            }
+        },
+        "modelInput": {
+          "before": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2022-06-01T00:00:00Z", "2022-06-30T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          },
+          "after": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2025-06-01T00:00:00Z", "2025-06-30T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          }
+
+        },
+        "outputCollectionId": "sentinel2-l2a-deforestation-2022-2025",
+        "outputSize": {
+          "kind": "BoundingBoxes",
+          "bboxes": [
+            [
+              -42.306496345796205,
+              0.4037970236359598,
+              25.646319360319126,
+              57.38769262822899
+            ]
+          ]
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "b7e6c8e2-1f2a-4b3b-9e8e-123456789abc",
+        "displayName": "Deforestation 2022/2024",
+        "description": "Deforestation analysis between June 2022 and June 2025 on Sentinel2-L2A.",
+        "modelId": "/stac/collections/models/deforestation",
+        "areaOfInterest": {
+          "kind": "GeoJson",
+          "geoJson": {
+              "type": "Polygon",
+              "coordinates": [
+                [
+                  [ -42.306496345796205, 0.4037970236359598 ],
+                  [ 25.646319360319126, 0.4037970236359598 ],
+                  [ 25.646319360319126, 57.38769262822899 ],
+                  [ -42.306496345796205, 57.38769262822899 ],
+                  [ -42.306496345796205, 0.4037970236359598 ]
+                ]
+              ]
+            }
+        },
+        "modelInput": {
+          "before": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2022-06-01T00:00:00Z", "2022-06-30T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          },
+          "after": {
+            "collectionId": "sentinel-2-l2a",
+            "filter": {
+              "op": "t_during",
+              "args": [
+                { "property": "datetime" },
+                { "interval": ["2025-06-01T00:00:00Z", "2025-06-30T00:00:00Z"] }
+              ]
+            },
+            "limit": 1,
+            "sortBy": [
+              {
+                "field": "datetime",
+                "direction": "desc"
+              }
+            ]
+          }
+
+        },
+        "outputCollectionId": "sentinel2-l2a-deforestation-2022-2025",
+        "outputSize": {
+          "kind": "BoundingBoxes",
+          "bboxes": [
+            [
+              -42.306496345796205,
+              0.4037970236359598,
+              25.646319360319126,
+              57.38769262822899
+            ]
+          ]
+        },
+        "createdAt": "2025-01-01T00:00:00Z",
+        "lastModifiedAt": "2025-01-01T00:00:00Z"
+      }
+    }
+  }
+}

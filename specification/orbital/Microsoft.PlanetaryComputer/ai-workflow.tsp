@@ -59,7 +59,7 @@ model GeoJsonAreaOfInterest extends AreaOfInterest {
   kind: AreaOfInterestType.GeoJson;
 
   @doc("The GeoJson feature or feature collection representing the area of interest.")
-  geoJson: GeoJson;
+  geoJson: Geometry;
 }
 
 @added(Versions.v2026_08_01_Preview)
@@ -100,11 +100,12 @@ model StacAssetGeoJsonAreaOfInterest extends AreaOfInterest {
   @doc("The ID of the STAC collection containing the STAC item.")
   collectionId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON filter requires union types."
   @doc("""
     The filter to apply to select the STAC items to extract the assets.
     e.g. {"op": "=", "args": [{"property": "id"}, "my-item-id"]}
     """)
-  filter?: CqlFilter;
+  filter?: Record<unknown>;
 
   @doc("The GeoJson assets representing the area of interest.")
   assetNames: string[];
@@ -166,15 +167,16 @@ model AiModelInput {
   @doc("The collection ID containing the input items.")
   collectionId: string;
 
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "CQL2-JSON filter requires union types."
   @doc("The filter to apply to select the STAC items for each AOI.")
-  filter?: CqlFilter;
+  filter?: Record<unknown>;
 
   @doc("Limit the number of STAC items to return for each AOI.")
   @minValue(0)
   limit?: int32 = 0;
 
   @doc("Sorting criteria for the STAC items.")
-  sortBy?: SortBy[];
+  sortBy?: StacSortExtension[];
 }
 
 @added(Versions.v2026_08_01_Preview)
