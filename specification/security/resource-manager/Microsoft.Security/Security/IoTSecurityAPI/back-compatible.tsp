@@ -26,6 +26,11 @@ using Common;
   IoTSecuritySolutionAnalyticsModels.list,
   "IotSecuritySolutionAnalytics"
 );
+@@clientName(
+  IoTSecuritySolutionAnalyticsModelList,
+  "IotSecuritySolutionAnalyticsModelList",
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecuritySolutionAnalyticsModel.properties);
 
@@ -41,6 +46,11 @@ using Common;
   IoTSecurityAggregatedAlerts.dismiss,
   "IotSecuritySolutionsAnalyticsAggregatedAlert"
 );
+@@clientName(
+  IoTSecurityAggregatedAlertList,
+  "IotSecurityAggregatedAlertList",
+  "csharp"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecurityAggregatedAlert.properties);
 
@@ -51,6 +61,11 @@ using Common;
 @@clientLocation(
   IoTSecurityAggregatedRecommendations.list,
   "IotSecuritySolutionsAnalyticsRecommendation"
+);
+@@clientName(
+  IoTSecurityAggregatedRecommendationList,
+  "IotSecurityAggregatedRecommendationList",
+  "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecurityAggregatedRecommendation.properties);
@@ -78,5 +93,6 @@ using Common;
   IoTSecuritySolutionModels.listBySubscription,
   "IotSecuritySolution"
 );
+@@clientName(IoTSecuritySolutionsList, "IotSecuritySolutionsList", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(IoTSecuritySolutionModel.properties);
