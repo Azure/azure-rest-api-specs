@@ -11,6 +11,9 @@ inputs:
   working-directory:
     description: 'Working directory. Should point at the workspace/checkout root (the location of the root package.json with the "packageManager" field), which is also where dependencies are installed from.'
     default: "."
+  cache-name:
+    description: 'Namespaces the pnpm store cache so different install profiles do not overwrite each other (e.g. a minimal "--prod --filter" install vs. a full install share the same content-addressable store, but a smaller install must not poison the cache restored by a larger one). Use a distinct value per install-command.'
+    default: "full"
 
 runs:
   using: "composite"
@@ -20,11 +23,26 @@ runs:
       with:
         package_json_file: ${{ inputs.working-directory }}/package.json
 
+    # NOTE: Do not use actions/setup-node's built-in "cache: pnpm". It keys the
+    # pnpm store cache only on the lockfile hash (shared across all workflows) and
+    # never re-saves on a key hit, so a minimal "--prod --filter" install can lock
+    # the shared cache to a tiny partial store that full installs then can't grow.
+    # We manage the store cache explicitly below, namespaced by "cache-name".
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
-        cache: "pnpm"
-        cache-dependency-path: "**/pnpm-lock.yaml"
+
+    - id: pnpm-store
+      run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-
 
     - run: |
         echo "::group::$INSTALL_COMMAND"

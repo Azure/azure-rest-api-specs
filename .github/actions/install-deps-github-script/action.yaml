@@ -10,3 +10,6 @@ runs:
         # actions/github-script@v8 uses Node 24
         node-version: 24.x
         install-command: "pnpm ci --prod --prefer-offline --filter=azure-rest-api-specs-github..."
+        # Minimal prod-only install; keep its store cache separate from the full
+        # install so it can't shrink the cache that full installs rely on.
+        cache-name: "github-script"
