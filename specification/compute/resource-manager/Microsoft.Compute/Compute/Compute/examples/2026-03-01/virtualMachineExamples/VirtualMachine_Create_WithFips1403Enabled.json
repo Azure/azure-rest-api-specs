@@ -1,8 +1,8 @@
-﻿{
+{
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmName": "{vm-name}",
+    "vmName": "myVM",
     "api-version": "2026-03-01",
     "parameters": {
       "location": "eastus2euap",
@@ -41,7 +41,7 @@
         },
         "osProfile": {
           "adminUsername": "{your-username}",
-          "computerName": "{vm-name}",
+          "computerName": "myVM",
           "adminPassword": "{your-password}"
         },
         "diagnosticsProfile": {
@@ -56,13 +56,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
             "adminUsername": "{your-username}",
             "secrets": [],
-            "computerName": "{vm-name}",
+            "computerName": "myVM",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
@@ -114,19 +114,19 @@
           },
           "provisioningState": "Updating"
         },
-        "name": "{vm-name}",
+        "name": "myVM",
         "location": "eastus2euap"
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/{vm-name}",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
         "type": "Microsoft.Compute/virtualMachines",
         "properties": {
           "osProfile": {
             "adminUsername": "{your-username}",
             "secrets": [],
-            "computerName": "{vm-name}",
+            "computerName": "myVM",
             "windowsConfiguration": {
               "provisionVMAgent": true,
               "enableAutomaticUpdates": true
@@ -178,7 +178,7 @@
           },
           "provisioningState": "Creating"
         },
-        "name": "{vm-name}",
+        "name": "myVM",
         "location": "eastus2euap"
       }
     }

@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
-    "vmScaleSetName": "{vmss-name}",
+    "vmScaleSetName": "myVirtualMachineScaleSet",
     "instanceId": "1",
     "api-version": "2026-03-01",
     "expand": "ResiliencyView"
@@ -11,7 +11,7 @@
     "200": {
       "body": {
         "name": "{vmss-vm-name}",
-        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/1",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/1",
         "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines",
         "location": "eastus2euap",
         "identity": {
@@ -78,12 +78,12 @@
             },
             "osDisk": {
               "osType": "Linux",
-              "name": "{vmss-name}_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182",
+              "name": "myVirtualMachineScaleSet_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182",
               "createOption": "FromImage",
               "caching": "ReadWrite",
               "managedDisk": {
                 "storageAccountType": "Premium_LRS",
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/{vmss-name}_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myVirtualMachineScaleSet_{vmss-vm-name}_OsDisk_1_8e93ddcf18be4b0f9815910b3a0f8182"
               },
               "diskSizeGB": 30
             },
@@ -116,7 +116,7 @@
           "networkProfile": {
             "networkInterfaces": [
               {
-                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}/virtualMachines/1/networkInterfaces/vnet-eastus2euap-2-nic01"
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVirtualMachineScaleSet/virtualMachines/1/networkInterfaces/vnet-eastus2euap-2-nic01"
               }
             ]
           },
