@@ -115,28 +115,24 @@ using Azure.AI.Projects;
 // time being we define output item as a generic dictionary.
 @@alternateType(OpenAI.OutputItem, Record<unknown>);
 
-// Make this method internal, since it's patched with a new one that supports either binary or file-path input
-@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
-@@usage(SessionFileWriteResponse, Usage.output);
-@@access(SessionFileWriteResponse, Access.public);
-
-// Since we hand-write a method "download_session_file_to_path", we need to rename this one so the difference is clear:
-@@clientName(AgentSessionFiles.downloadSessionFile, "download_session_file_as_bytes", "python");
-
-@@clientName(UploadSessionFileParams.path, "remote_path", "python");
-@@clientName(DownloadSessionFileParams.path, "remote_path", "python");
-@@clientName(ListSessionFilesParams.path, "remote_path", "python");
-@@clientName(DeleteSessionFileParams.path, "remote_path", "python");
+// Session operations all use "session_id". Session file operations all use "agent_session_id". Consolidate to use "session_id" everywhere.
+@@clientName(UploadSessionFileParams.agent_session_id, "session_id", "python");
+@@clientName(DownloadSessionFileParams.agent_session_id, "session_id", "python");
+@@clientName(ListSessionFilesParams.agent_session_id, "session_id", "python");
+@@clientName(DeleteSessionFileParams.agent_session_id, "session_id", "python");
 
 // Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
 // real value on SDK surface. We can do everything using createAgentVersionFromCode.
 @@scope(Agents.createAgentFromCode, "!(python, javascript)");
 @@scope(Agents.updateAgentFromCode, "!(python, javascript)");
 
-// Since we hand-write a method "download_code_to_path", we need to rename this one so the difference is clear:
-@@clientName(Agents.downloadAgentCode, "download_code_as_bytes", "python");
 @@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
 
+@@access(Agents.createAgentVersionFromCode, Access.internal, "python");
+@@clientName(CreateAgentVersionFromCodeMetadata, "_CreateAgentVersionFromCodeMetadata", "python");
+@@clientName(CreateAgentVersionFromCodeContent, "_CreateAgentVersionFromCodeContent", "python");
+
+@@clientName(Agents.downloadAgentCode, "download_code", "python");
 @@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
 @@clientName(
   SessionDirectoryListResponse,
@@ -144,7 +140,6 @@ using Azure.AI.Projects;
   "python"
 );
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
-
 
 
 // --------------------------------------------------------------------------------
