@@ -672,7 +672,7 @@
         "tags": [
           "AI Workflows"
         ],
-        "description": "Long-running resource action operation template.",
+        "description": "Run an AI workflow.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -689,30 +689,7 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
-              "type": "object",
-              "description": "Provides status details for long running operations.",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/AiWorkflowRun",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "type": "object",
-                  "description": "The result of the operation."
-                }
-              },
-              "required": [
-                "id",
-                "status"
-              ]
+              "$ref": "#/definitions/AiWorkflowRun"
             },
             "headers": {
               "Operation-Location": {

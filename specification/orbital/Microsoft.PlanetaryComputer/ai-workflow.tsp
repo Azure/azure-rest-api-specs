@@ -303,13 +303,31 @@ interface AiWorkflows {
     TokenEstimationResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom action required to emit a named long-running operation status monitor instead of an inline schema."
+  @doc("Run an AI workflow.")
+  @route("workflows/{workflowId}:run")
+  @post
   @pollingOperation(AiWorkflowRuns.get)
-  run is StandardOperations.LongRunningResourceAction<
-    AiWorkflow,
-    {},
-    {},
-    AiWorkflowRun
-  >;
+  run(
+    ...Foundations.ApiVersionParameter,
+
+    @doc("The unique identifier for the AI workflow.")
+    @path
+    workflowId: string,
+  ):
+    | {
+        @pollingLocation
+        @doc("The location for monitoring the operation state.")
+        @header("Operation-Location")
+        operationLocation: url;
+
+        @statusCode
+        statusCode: 202;
+
+        @body
+        _: AiWorkflowRun;
+      }
+    | Foundations.ErrorResponse;
 }
 
 @tag("AI Workflows")
