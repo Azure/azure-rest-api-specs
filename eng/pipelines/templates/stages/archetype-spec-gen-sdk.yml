@@ -64,8 +64,6 @@ stages:
       os: linux
 
     steps:
-      - checkout: none
-
       - pwsh: |
           $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
           $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
@@ -178,49 +176,21 @@ stages:
             Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
           displayName: "Validate and update SDK repository commitish"
 
-      # Fetch eng/common/scripts without a 'checkout' step so that System.DefaultWorkingDirectory
-      # stays at $(Pipeline.Workspace)/s. Authenticate against the internal mirror with the build's
-      # OAuth token (System.AccessToken); the token is passed transiently via git config environment
-      # variables (never persisted to .git/config) and the clone lands in the per-job temp dir.
+      # In the internal '-pr' flow the spec/SDK repos are private, so the sparse-checkout below
+      # needs a GitHub App token (GH_TOKEN) minted by login-to-github. That login script lives in
+      # this repo, so it must be available first. Use 'checkout: self' (authenticated by the
+      # pipeline's GitHub service connection) at the default path so System.DefaultWorkingDirectory
+      # stays at $(Pipeline.Workspace)/s; sparse-checkout keeps the footprint to eng/common/scripts.
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-        - pwsh: |
-            $header = "AUTHORIZATION: bearer $env:SYSTEM_ACCESSTOKEN"
-            $loginScriptsDir = "$(Agent.TempDirectory)/login_scripts"
-            $loginScriptsRef = "$(Build.SourceBranch)"
-            $env:GIT_CONFIG_COUNT = "1"
-            $env:GIT_CONFIG_KEY_0 = "http.extraheader"
-            $env:GIT_CONFIG_VALUE_0 = $header
-            git clone --no-checkout --depth 1 --filter=blob:none --sparse "$(Build.Repository.Uri)" "$loginScriptsDir"
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "##vso[task.logissue type=error]Failed to clone repository for GitHub login scripts."
-              Exit $LASTEXITCODE
-            }
-            Push-Location "$loginScriptsDir"
-            git sparse-checkout set eng/common/scripts
-            if ($LASTEXITCODE -ne 0) {
-              Pop-Location
-              Write-Host "##vso[task.logissue type=error]Failed to sparse-checkout eng/common/scripts."
-              Exit $LASTEXITCODE
-            }
-            git fetch --depth 1 origin "$loginScriptsRef"
-            if ($LASTEXITCODE -ne 0) {
-              Pop-Location
-              Write-Host "##vso[task.logissue type=error]Failed to fetch '$loginScriptsRef' for GitHub login scripts."
-              Exit $LASTEXITCODE
-            }
-            git -c advice.detachedHead=false checkout FETCH_HEAD --
-            $checkoutExitCode = $LASTEXITCODE
-            Pop-Location
-            if ($checkoutExitCode -ne 0) {
-              Write-Host "##vso[task.logissue type=error]Failed to checkout '$loginScriptsRef' for GitHub login scripts."
-              Exit $checkoutExitCode
-            }
-          displayName: 'Fetch eng/common/scripts for GitHub login'
-          env:
-            SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+        - checkout: self
+          displayName: 'Checkout eng/common/scripts for GitHub login'
+          sparseCheckoutDirectories: eng/common/scripts
+          fetchDepth: 1
         - template: /eng/common/pipelines/templates/steps/login-to-github.yml
           parameters:
-            ScriptDirectory: $(Agent.TempDirectory)/login_scripts/eng/common/scripts
+            ScriptDirectory: $(System.DefaultWorkingDirectory)/eng/common/scripts
+      - ${{ else }}:
+        - checkout: none
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
