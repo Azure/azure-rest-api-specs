@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRg",
+    "sandboxGroupName": "testgroup",
+    "vnetConnectionName": "myVnetConnection",
+    "resource": {
+      "properties": {
+        "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.App/sandboxGroups/testgroup/vnetConnections/myVnetConnection",
+        "name": "myVnetConnection",
+        "type": "Microsoft.App/sandboxGroups/vnetConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.App/locations/eastus/operationStatuses/myVnetConnection?api-version=2026-07-01"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.App/sandboxGroups/testgroup/vnetConnections/myVnetConnection",
+        "name": "myVnetConnection",
+        "type": "Microsoft.App/sandboxGroups/vnetConnections",
+        "properties": {
+          "provisioningState": "InProgress",
+          "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+        }
+      }
+    }
+  },
+  "operationId": "VnetConnections_CreateOrUpdate",
+  "title": "Create or update a VnetConnection"
+}

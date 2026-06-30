@@ -1,0 +1,859 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.App Dev Compute management service",
+    "version": "2026-07-01",
+    "description": "Microsoft.App Dev Compute management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SandboxGroups"
+    },
+    {
+      "name": "VnetConnections"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/sandboxGroups": {
+      "get": {
+        "operationId": "SandboxGroups_ListBySubscription",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Get all SandboxGroups for a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SandboxGroups by subscription": {
+            "$ref": "./examples/SandboxGroups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups": {
+      "get": {
+        "operationId": "SandboxGroups_ListByResourceGroup",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Get all SandboxGroups in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List SandboxGroups by resource group": {
+            "$ref": "./examples/SandboxGroups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}": {
+      "get": {
+        "operationId": "SandboxGroups_Get",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Get the properties of a SandboxGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a SandboxGroup": {
+            "$ref": "./examples/SandboxGroups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "SandboxGroups_CreateOrUpdate",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Create or update a SandboxGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SandboxGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'SandboxGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a SandboxGroup": {
+            "$ref": "./examples/SandboxGroups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "SandboxGroups_Update",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Patches a SandboxGroup. Only patching of tags is supported.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SandboxGroupPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SandboxGroup"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a SandboxGroup": {
+            "$ref": "./examples/SandboxGroups_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "SandboxGroups_Delete",
+        "tags": [
+          "SandboxGroups"
+        ],
+        "description": "Delete a SandboxGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SandboxGroup": {
+            "$ref": "./examples/SandboxGroups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections": {
+      "get": {
+        "operationId": "VnetConnections_ListBySandboxGroup",
+        "tags": [
+          "VnetConnections"
+        ],
+        "description": "List all VnetConnections in the specified SandboxGroup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VnetConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List VnetConnections by SandboxGroup": {
+            "$ref": "./examples/VnetConnections_ListBySandboxGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sandboxGroups/{sandboxGroupName}/vnetConnections/{vnetConnectionName}": {
+      "get": {
+        "operationId": "VnetConnections_Get",
+        "tags": [
+          "VnetConnections"
+        ],
+        "description": "Get the properties of a VnetConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          },
+          {
+            "name": "vnetConnectionName",
+            "in": "path",
+            "description": "The name of the VnetConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VnetConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a VnetConnection": {
+            "$ref": "./examples/VnetConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VnetConnections_CreateOrUpdate",
+        "tags": [
+          "VnetConnections"
+        ],
+        "description": "Create or update a VnetConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          },
+          {
+            "name": "vnetConnectionName",
+            "in": "path",
+            "description": "The name of the VnetConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VnetConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VnetConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VnetConnection"
+            }
+          },
+          "201": {
+            "description": "Resource 'VnetConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VnetConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a VnetConnection": {
+            "$ref": "./examples/VnetConnections_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VnetConnections_Delete",
+        "tags": [
+          "VnetConnections"
+        ],
+        "description": "Delete a VnetConnection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "sandboxGroupName",
+            "in": "path",
+            "description": "The name of the SandboxGroup",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?![.-])[A-Za-z0-9-]{1,32}$"
+          },
+          {
+            "name": "vnetConnectionName",
+            "in": "path",
+            "description": "The name of the VnetConnection",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a VnetConnection": {
+            "$ref": "./examples/VnetConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "SandboxGroup": {
+      "type": "object",
+      "description": "A SandboxGroup resource, representing a group of sandboxes that share configuration defaults and quotas.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SandboxGroupProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SandboxGroupListResult": {
+      "type": "object",
+      "description": "The response of a SandboxGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SandboxGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/SandboxGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SandboxGroupPatch": {
+      "type": "object",
+      "description": "A SandboxGroup resource for use in patch requests.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SandboxGroupProperties": {
+      "type": "object",
+      "description": "SandboxGroup resource specific properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/SandboxGroupProvisioningState",
+          "readOnly": true
+        },
+        "currentSandboxCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Current number of active sandboxes in this group.",
+          "readOnly": true
+        },
+        "connections": {
+          "type": "array",
+          "description": "List of connection names that sandboxes in this group are allowed to use.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SandboxGroupProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the SandboxGroup.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxGroupProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "VnetConnection": {
+      "type": "object",
+      "description": "A virtual network connection associated with a SandboxGroup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VnetConnectionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VnetConnectionListResult": {
+      "type": "object",
+      "description": "The response of a VnetConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VnetConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/VnetConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VnetConnectionProperties": {
+      "type": "object",
+      "description": "VnetConnection resource specific properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/VnetConnectionProvisioningState",
+          "readOnly": true
+        },
+        "subnetId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the subnet that sandboxes in the parent SandboxGroup will be connected to.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "VnetConnectionProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the VnetConnection.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "VnetConnectionProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The resource is being provisioned."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted."
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}
