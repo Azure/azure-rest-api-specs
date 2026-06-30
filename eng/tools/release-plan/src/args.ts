@@ -1,7 +1,7 @@
 import path from "node:path";
 import process from "node:process";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import type { CliArguments } from "./types.js";
+import type { CliArguments } from "./types.ts";
 
 /**
  * Parse command line arguments for release plan tool.

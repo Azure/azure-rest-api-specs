@@ -7,7 +7,7 @@ import type {
   OctokitLike,
   PullRequestChangedFile,
   TypeSpecProjectInfo,
-} from "./types.js";
+} from "./types.ts";
 
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.

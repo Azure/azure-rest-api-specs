@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { ensureReleasePlan, getApiReleaseType, getSdkReleaseType } from "../src/release-plan.js";
-import type { AzsdkRunner } from "../src/types.js";
+import { ensureReleasePlan, getApiReleaseType, getSdkReleaseType } from "../src/release-plan.ts";
+import type { AzsdkRunner } from "../src/types.ts";
 
 describe("release type helpers", () => {
   it("sets Private Preview for private specs repo", () => {

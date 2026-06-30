@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { buildReleaseplanCommentBody, postReleasePlanComment } from "../src/pr-comment.js";
+import { buildReleaseplanCommentBody, postReleasePlanComment } from "../src/pr-comment.ts";
 
 type CreateCommentParams = {
   owner: string;

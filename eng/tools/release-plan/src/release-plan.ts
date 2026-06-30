@@ -8,7 +8,7 @@ import type {
   EnsureReleasePlanResult,
   ReleasePlanCommandContext,
   ReleasePlanData,
-} from "./types.js";
+} from "./types.ts";
 
 /**
  * Create a runner that invokes azsdk from a specific executable path.

@@ -33,10 +33,6 @@ stages:
           - checkout: self
             fetchDepth: 2
 
-          - template: /eng/common/pipelines/templates/steps/create-authenticated-npmrc.yml
-            parameters:
-              npmrcPath: $(Agent.TempDirectory)/gen-sdk/.npmrc
-
           - template: /eng/common/pipelines/templates/steps/login-to-github.yml
 
           - task: UseNode@1
@@ -44,14 +40,9 @@ stages:
             inputs:
               version: $(NodeVersion)
 
-          - script: |
-              set -euo pipefail
-              npm install
-              npm run build
-            displayName: "Install and build release-plan tool"
-            workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
-            env:
-              npm_config_userconfig: "$(Agent.TempDirectory)/gen-sdk/.npmrc"
+          - template: /eng/pipelines/templates/steps/npm-install.yml
+            parameters:
+              workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
 
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
 
@@ -59,6 +50,7 @@ stages:
             displayName: "Get Release Plan details"
             condition: succeeded()
             continueOnError: true
+            workingDirectory: $(Build.SourcesDirectory)/eng/tools/release-plan
             env:
               GH_TOKEN: $(GH_TOKEN)
             inputs:
@@ -98,7 +90,7 @@ stages:
                   $nodeArgs += @("--commit-sha", $commitSha)
                 }
 
-                node eng/tools/release-plan/cmd/release-plan.js @nodeArgs
+                npm exec --no -- release-plan @nodeArgs
 
           - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"

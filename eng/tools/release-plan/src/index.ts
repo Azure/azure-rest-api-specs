@@ -1,22 +1,22 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
-import { parseCliArguments } from "./args.js";
-import { postReleasePlanComment } from "./pr-comment.js";
+import { parseCliArguments } from "./args.ts";
+import { postReleasePlanComment } from "./pr-comment.ts";
 import {
   createAzdskRunner,
   ensureReleasePlan,
   getApiReleaseType,
   getNextMonthTarget,
   getSdkReleaseType,
-} from "./release-plan.js";
-import type { TypeSpecProjectInfo } from "./types.js";
+} from "./release-plan.ts";
+import type { TypeSpecProjectInfo } from "./types.ts";
 import {
   checkNewApiVersionLabel,
   createOctokit,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
-} from "./typespec-project.js";
+} from "./typespec-project.ts";
 
 /**
  * Main CLI entry point.
@@ -143,9 +143,9 @@ export async function main(): Promise<void> {
   }
 }
 
-export { parseCliArguments } from "./args.js";
-export { buildReleaseplanCommentBody, postReleasePlanComment } from "./pr-comment.js";
-export type { CommentBodyParams, PrCommentParams } from "./pr-comment.js";
+export { parseCliArguments } from "./args.ts";
+export { buildReleaseplanCommentBody, postReleasePlanComment } from "./pr-comment.ts";
+export type { CommentBodyParams, PrCommentParams } from "./pr-comment.ts";
 export {
   createAzdskRunner,
   ensureReleasePlan,
@@ -153,7 +153,7 @@ export {
   getNextMonthTarget,
   getSdkReleaseType,
   runAzdskCommand,
-} from "./release-plan.js";
+} from "./release-plan.ts";
 export type {
   ApiReleaseType,
   AzsdkRunner,
@@ -164,7 +164,7 @@ export type {
   PullRequestChangedFile,
   ReleasePlanCommandContext,
   TypeSpecProjectInfo,
-} from "./types.js";
+} from "./types.ts";
 export {
   collectTypeSpecProjectPaths,
   compareApiVersionsDesc,
@@ -177,4 +177,4 @@ export {
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   parseApiVersion,
-} from "./typespec-project.js";
+} from "./typespec-project.ts";

@@ -10,7 +10,7 @@ import {
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
   parseApiVersion,
-} from "../src/typespec-project.js";
+} from "../src/typespec-project.ts";
 
 describe("version helpers", () => {
   it("sorts API versions descending with GA preferred over preview on same date", () => {
