@@ -22,7 +22,7 @@ model VirtualMachine
     Resource = VirtualMachine,
     KeyName = "vmName",
     SegmentName = "virtualMachines",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9.\\-]{1,64}(?<![.\\-])$"
   >;
 
   /**
