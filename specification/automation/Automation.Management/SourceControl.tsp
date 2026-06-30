@@ -25,6 +25,17 @@ model SourceControl
   >;
 }
 
+alias SourceControlSyncJobIdParameter = {
+  /**
+   * The source control sync job id.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Preserve the existing Swagger uuid format for this path parameter while C# maps it to Guid."
+  @path
+  @segment("sourceControlSyncJobs")
+  @format("uuid")
+  sourceControlSyncJobId: string;
+};
+
 @armResourceOperations(#{ omitTags: true })
 interface SourceControls {
   /**
@@ -95,16 +106,7 @@ interface SourceControls {
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResourceCreatedSyncResponse<SourceControlSyncJob>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
        * The parameters supplied to the create source control sync job operation.
        */
@@ -124,16 +126,7 @@ interface SourceControls {
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResponse<SourceControlSyncJobById>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-    }
+    Parameters = SourceControlSyncJobIdParameter
   >;
 
   /**
@@ -171,16 +164,7 @@ interface SourceControls {
     SourceControl,
     void,
     ArmResponse<SourceControlSyncJobStreamsListBySyncJob>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
        * The filter to apply on the operation.
        */
@@ -200,16 +184,7 @@ interface SourceControls {
     SourceControl,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SourceControl>,
     Response = ArmResponse<SourceControlSyncJobStreamById>,
-    Parameters = {
-      /**
-       * The source control sync job id.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
-      @path
-      @segment("sourceControlSyncJobs")
-      sourceControlSyncJobId: string;
-
+    Parameters = SourceControlSyncJobIdParameter & {
       /**
        * The id of the sync job stream.
        */
