@@ -6,6 +6,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.HorizonDb;
 
@@ -322,29 +323,33 @@ union ZonePlacementPolicy {
 union State {
   string,
 
-  /** Is ready and operational */
+  @doc("Is ready and operational")
   Ready: "Ready",
 
-  /** Is being dropped/deleted */
+  @doc("Is being dropped/deleted")
   Dropping: "Dropping",
 
-  /** Is disabled */
+  @doc("Is disabled")
   Disabled: "Disabled",
 
-  /** Is starting up */
+  @doc("Is starting up")
   Starting: "Starting",
 
-  /** Is stopping */
+  @doc("Is stopping")
   Stopping: "Stopping",
 
-  /** Is stopped */
+  @doc("Is stopped")
   Stopped: "Stopped",
 
-  /** Is being updated */
+  @doc("Is being updated")
   Updating: "Updating",
 
-  /** Is healthy */
+  @doc("Is healthy")
   Healthy: "Healthy",
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("Is succeeded")
+  Succeeded: "Succeeded",
 }
 
 @doc("Indicates if public network access is enabled or not.")
