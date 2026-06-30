@@ -546,7 +546,7 @@ model SoftDeletePolicy {
   retentionPeriodInDays?: int32;
 
   /**
-   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unconsumable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
+   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unusable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
    */
   @added(Versions.v2026_03_03)
   gracePeriodInDays?: int32;
