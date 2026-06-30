@@ -187,6 +187,12 @@ model ScheduledEventsIdList {
    * The list of ScheduledEvents Id.
    */
   value: string[];
+
+  /**
+   * The application trusted issuer for the Payment HSM Cluster
+   */
+  @added(Versions.v2026_06_01_preview)
+  applicationTrustedIssuer: string;
 }
 
 /**
