@@ -9,12 +9,7 @@ runs:
       with:
         # actions/github-script@v8 uses Node 24
         node-version: 24.x
-        # --config.trust-lockfile=true trusts the already-vetted committed lockfile and
-        # skips pnpm's per-install supply-chain re-verification, which is cold on every CI
-        # run and scales with total lockfile size (~2s here). It must be a CLI flag scoped
-        # to this command: pnpm does not read trustLockfile from the npm_config_* env, and
-        # the full installs in other workflows should keep verifying.
-        install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
+        install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
         # Minimal prod-only install (~22 packages). Skip the pnpm store cache: in CI
         # the store starts empty each run anyway, and the cache restore/save round-trip
         # (plus the "pnpm store path" probe) costs more than just downloading the few
