@@ -248,6 +248,7 @@ interface Workspaces {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
   @action("listConnectionModels")
   @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
@@ -265,6 +266,7 @@ interface Workspaces {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
   @summary("Get all the deployments under the workspace scope")
   @list
   @get
