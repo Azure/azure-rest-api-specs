@@ -119,6 +119,8 @@ suppressions:
     reason: Pre-existing API behavior for Compute update operations.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"].patch.responses
+  - code: AvoidAnonymousParameter
+    reason: InferenceEndpoints update uses a free-form custom patch envelope (Record<unknown>), pre-existing and unchanged since 2026-01-15-preview. Surfaced here only because LintDiff compares this preview tag against the stable base, which excludes the preview-only InferenceEndpoint resource.
 ```
 
 ### Tag: package-2026-05-01
