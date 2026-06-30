@@ -19,7 +19,7 @@ model VnetConnection is ProxyResource<VnetConnectionProperties> {
     Resource = VnetConnection,
     KeyName = "vnetConnectionName",
     SegmentName = "vnetConnections",
-    NamePattern = "^[-\\w\\._\\(\\)]+$"
+    NamePattern = "^(?![.-])[A-Za-z0-9-]{1,32}$"
   >;
 }
 
