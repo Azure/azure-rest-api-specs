@@ -1796,11 +1796,7 @@ union ProvisioningStateUnion {
   "IPAddresses",
   "csharp"
 );
-@@clientName(
-  Common.IpTag.ipTagType,
-  "IPTagType",
-  "csharp"
-);
+@@clientName(Common.IpTag.ipTagType, "IPTagType", "csharp");
 @@clientName(
   Common.IpamPoolPrefixAllocation.numberOfIpAddresses,
   "NumberOfIPAddresses",
@@ -1866,11 +1862,7 @@ union ProvisioningStateUnion {
   "IPConfiguration",
   "csharp"
 );
-@@clientName(
-  Common.PublicIPAddressPropertiesFormat.ipTags,
-  "IPTags",
-  "csharp"
-);
+@@clientName(Common.PublicIPAddressPropertiesFormat.ipTags, "IPTags", "csharp");
 @@clientName(
   Common.RoutePropertiesFormat.nextHopIpAddress,
   "NextHopIPAddress",
@@ -2061,16 +2053,8 @@ union ProvisioningStateUnion {
   "DestinationIPs",
   "csharp"
 );
-@@clientName(
-  Microsoft.Network.IPTraffic.sourceIps,
-  "SourceIPs",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.IntentContent.ipTraffic,
-  "IPTraffic",
-  "csharp"
-);
+@@clientName(Microsoft.Network.IPTraffic.sourceIps, "SourceIPs", "csharp");
+@@clientName(Microsoft.Network.IntentContent.ipTraffic, "IPTraffic", "csharp");
 @@clientName(
   Microsoft.Network.IpGroupPropertiesFormat.ipAddresses,
   "IPAddresses",
@@ -2101,11 +2085,7 @@ union ProvisioningStateUnion {
   "GatewayIPAddress",
   "csharp"
 );
-@@clientName(
-  Microsoft.Network.NatRule.ipProtocols,
-  "IPProtocols",
-  "csharp"
-);
+@@clientName(Microsoft.Network.NatRule.ipProtocols, "IPProtocols", "csharp");
 @@clientName(
   Microsoft.Network.NatRule.sourceIpGroups,
   "SourceIPGroups",
@@ -2186,11 +2166,7 @@ union ProvisioningStateUnion {
   "IPTraffic",
   "csharp"
 );
-@@clientName(
-  Microsoft.Network.RecordSet.ipAddresses,
-  "IPAddresses",
-  "csharp"
-);
+@@clientName(Microsoft.Network.RecordSet.ipAddresses, "IPAddresses", "csharp");
 @@clientName(
   Microsoft.Network.RouteFilterPropertiesFormat.ipv6Peerings,
   "IPv6Peerings",
@@ -2401,16 +2377,8 @@ union ProvisioningStateUnion {
   "VirtualHubRouteTableV2S",
   "csharp"
 );
-@@clientName(
-  ExpressRoutePorts.generateLOA,
-  "GenerateLoa",
-  "csharp"
-);
-@@clientName(
-  LoadBalancers.migrateToIpBased,
-  "MigrateToIPBased",
-  "csharp"
-);
+@@clientName(ExpressRoutePorts.generateLOA, "GenerateLoa", "csharp");
+@@clientName(LoadBalancers.migrateToIpBased, "MigrateToIPBased", "csharp");
 @@clientName(
   NetworkWatchers.getVMSecurityRules,
   "GetVmSecurityRules",
@@ -5987,7 +5955,11 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@alternateType(Common.SecurityRule.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Microsoft.Network.ProxyResource.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.ProxyResource.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(
   Microsoft.Network.TrackedResourceWithEtag.etag,
   Azure.Core.eTag,
@@ -5998,9 +5970,17 @@ op replaceprivateDnsZoneGroupsList(
   Azure.Core.eTag,
   "csharp"
 );
-@@alternateType(Microsoft.Network.AzureFirewall.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.AzureFirewall.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(Microsoft.Network.BastionHost.etag, Azure.Core.eTag, "csharp");
-@@alternateType(Microsoft.Network.BgpConnection.etag, Azure.Core.eTag, "csharp");
+@@alternateType(
+  Microsoft.Network.BgpConnection.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
 @@alternateType(
   Microsoft.Network.ExpressRouteCircuit.etag,
   Azure.Core.eTag,
