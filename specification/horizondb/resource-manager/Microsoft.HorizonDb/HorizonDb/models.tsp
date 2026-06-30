@@ -170,6 +170,11 @@ model HorizonDbClusterProperties {
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   authConfig?: HorizonDbClusterAuthConfig;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The compute model for the cluster.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  computeModel?: HorizonDbComputeModel;
 }
 
 @added(Versions.v2026_05_01_preview)
@@ -183,6 +188,33 @@ model HorizonDbClusterAuthConfig {
 
   @doc("Indicates whether password authentication is enabled.")
   passwordAuthEnabled?: boolean;
+}
+
+@added(Versions.v2026_05_01_preview)
+@doc("The compute model for a HorizonDB cluster.")
+model HorizonDbComputeModel {
+  @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
+  type: HorizonDbComputeModelType;
+
+  @doc("The fixed vCore count for Provisioned compute.")
+  vCores?: int32;
+
+  @doc("The minimum vCores for Serverless compute. Defines the lower autoscaling bound.")
+  minvCores?: float64;
+
+  @doc("The maximum vCores for Serverless compute. Defines the upper autoscaling bound.")
+  maxvCores?: float64;
+}
+
+@doc("The compute model type.")
+union HorizonDbComputeModelType {
+  string,
+
+  @doc("Provisioned compute.")
+  Provisioned: "Provisioned",
+
+  @doc("Serverless compute.")
+  Serverless: "Serverless",
 }
 
 @doc("Properties of a HorizonDB cluster for update operations.")
@@ -207,6 +239,11 @@ model HorizonDbClusterPropertiesForPatchUpdate {
   @doc("Authentication configuration for the HorizonDB cluster.")
   @visibility(Lifecycle.Update)
   authConfig?: HorizonDbClusterAuthConfig;
+
+  @added(Versions.v2026_05_01_preview)
+  @doc("The compute model for the cluster.")
+  @visibility(Lifecycle.Update)
+  computeModel?: HorizonDbComputeModel;
 }
 
 @doc("HorizonDB cluster for update operations.")

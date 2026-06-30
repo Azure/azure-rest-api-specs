@@ -2415,6 +2415,15 @@
             "update",
             "create"
           ]
+        },
+        "computeModel": {
+          "$ref": "#/definitions/HorizonDbComputeModel",
+          "description": "The compute model for the cluster.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       },
       "required": [
@@ -2456,7 +2465,66 @@
           "x-ms-mutability": [
             "update"
           ]
+        },
+        "computeModel": {
+          "$ref": "#/definitions/HorizonDbComputeModel",
+          "description": "The compute model for the cluster.",
+          "x-ms-mutability": [
+            "update"
+          ]
         }
+      }
+    },
+    "HorizonDbComputeModel": {
+      "type": "object",
+      "description": "The compute model for a HorizonDB cluster.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/HorizonDbComputeModelType",
+          "description": "The compute model type. Supported values: 'Provisioned', 'Serverless'."
+        },
+        "vCores": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The fixed vCore count for Provisioned compute."
+        },
+        "minvCores": {
+          "type": "number",
+          "format": "double",
+          "description": "The minimum vCores for Serverless compute. Defines the lower autoscaling bound."
+        },
+        "maxvCores": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum vCores for Serverless compute. Defines the upper autoscaling bound."
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "HorizonDbComputeModelType": {
+      "type": "string",
+      "description": "The compute model type.",
+      "enum": [
+        "Provisioned",
+        "Serverless"
+      ],
+      "x-ms-enum": {
+        "name": "HorizonDbComputeModelType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioned",
+            "value": "Provisioned",
+            "description": "Provisioned compute."
+          },
+          {
+            "name": "Serverless",
+            "value": "Serverless",
+            "description": "Serverless compute."
+          }
+        ]
       }
     },
     "HorizonDbFirewallRule": {
