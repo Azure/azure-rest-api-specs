@@ -184,6 +184,11 @@ using Azure.ClientGenerator.Core.Legacy;
   "LastModifiedOn",
   "csharp"
 );
+@@clientName(
+  AnomalySecurityMLAnalyticsSettingsProperties,
+  "AnomalySecurityMlAnalyticsSettingsProperties",
+  "csharp"
+);
 @@clientName(AnomalyTimelineItem.endTimeUtc, "EndOn", "csharp");
 @@clientName(AnomalyTimelineItem.startTimeUtc, "StartOn", "csharp");
 @@clientName(AnomalyTimelineItem.timeGenerated, "GeneratedOn", "csharp");
@@ -732,6 +737,11 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 @@clientName(
+  MLBehaviorAnalyticsAlertRuleProperties,
+  "MlBehaviorAnalyticsAlertRuleProperties",
+  "csharp"
+);
+@@clientName(
   MLBehaviorAnalyticsAlertRuleTemplateProperties.createdDateUTC,
   "CreatedOn",
   "csharp"
@@ -739,6 +749,28 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(
   MLBehaviorAnalyticsAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(
+  MLBehaviorAnalyticsAlertRuleTemplateProperties,
+  "MlBehaviorAnalyticsAlertRuleTemplateProperties",
+  "csharp"
+);
+@@clientName(MstiCheckRequirements, "MstiCheckRequirements", "csharp");
+@@clientName(
+  MstiCheckRequirementsProperties,
+  "MstiCheckRequirementsProperties",
+  "csharp"
+);
+@@clientName(MstiDataConnector, "MstiDataConnector", "csharp");
+@@clientName(
+  MstiDataConnectorDataTypes,
+  "MstiDataConnectorDataTypes",
+  "csharp"
+);
+@@clientName(
+  MstiDataConnectorProperties,
+  "MstiDataConnectorProperties",
   "csharp"
 );
 @@clientName(Mode, "WorkspaceManagerConfigurationMode", "csharp");
@@ -885,6 +917,26 @@ using Azure.ClientGenerator.Core.Legacy;
   "OfficeIrmDataConnectorProperties",
   "csharp"
 );
+@@clientName(
+  OfficePowerBICheckRequirementsProperties,
+  "OfficePowerBiCheckRequirementsProperties",
+  "csharp"
+);
+@@clientName(
+  OfficePowerBIConnectorDataTypes,
+  "OfficePowerBiConnectorDataTypes",
+  "csharp"
+);
+@@clientName(
+  OfficePowerBIConnectorDataTypesLogs,
+  "OfficePowerBiConnectorDataTypesLogs",
+  "csharp"
+);
+@@clientName(
+  OfficePowerBIDataConnectorProperties,
+  "OfficePowerBiDataConnectorProperties",
+  "csharp"
+);
 @@clientName(QueryCondition, "ThreatIntelligenceQueryCondition", "csharp");
 @@clientName(
   Microsoft.SecurityInsights.Query,
@@ -1014,6 +1066,16 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(SecurityAlertTimelineItem.startTimeUtc, "StartOn", "csharp");
 @@clientName(SecurityAlertTimelineItem.timeGenerated, "GeneratedOn", "csharp");
 @@clientName(SecurityGroupEntity, "SecurityInsightsGroupEntity", "csharp");
+@@clientName(
+  SecurityMLAnalyticsSettingsKind,
+  "SecurityMlAnalyticsSettingsKind",
+  "csharp"
+);
+@@clientName(
+  SecurityMLAnalyticsSettingsList,
+  "SecurityMlAnalyticsSettingsList",
+  "csharp"
+);
 @@clientName(
   SentinelOnboardingStateProperties.customerManagedKey,
   "IsCustomerManagedKeySet",
@@ -1185,11 +1247,31 @@ using Azure.ClientGenerator.Core.Legacy;
   "csharp"
 );
 @@clientName(
+  TICheckRequirementsProperties,
+  "TiCheckRequirementsProperties",
+  "csharp"
+);
+@@clientName(
   TIDataConnectorProperties.tipLookbackPeriod,
   "TipLookbackOn",
   "csharp"
 );
 @@clientName(TIDataConnector, "SecurityInsightsTIDataConnector", "csharp");
+@@clientName(
+  TIDataConnectorDataTypes,
+  "TiDataConnectorDataTypes",
+  "csharp"
+);
+@@clientName(
+  TIDataConnectorDataTypesIndicators,
+  "TiDataConnectorDataTypesIndicators",
+  "csharp"
+);
+@@clientName(
+  TIDataConnectorProperties,
+  "TiDataConnectorProperties",
+  "csharp"
+);
 @@clientName(TIObject, "ThreatIntelligenceObject", "csharp");
 @@clientName(TIObjectCommonProperties, "TiObjectCommonProperties", "csharp");
 @@clientName(
