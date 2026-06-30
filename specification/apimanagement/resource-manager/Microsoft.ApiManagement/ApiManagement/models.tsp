@@ -340,9 +340,9 @@ model McpToolContract {
   /**
    * MCP tool name. Must contain only letters, numbers, underscores, and hyphens.
    */
-  @maxLength(100)
+  @maxLength(300)
   @minLength(1)
-  @pattern("^[\\w]+$|^[\\w][\\w\\-]*[\\w]$")
+  @pattern("(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)")
   name: string;
 
   /**
@@ -3977,9 +3977,9 @@ model ToolContractProperties {
   /**
    * Tool Name. MCP tool name must contain only letters, numbers, underscores, and hyphens.
    */
-  @maxLength(100)
+  @maxLength(300)
   @minLength(1)
-  @pattern("^[\\w]+$|^[\\w][\\w\\-]*[\\w]$")
+  @pattern("(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)")
   displayName?: string;
 
   /**
