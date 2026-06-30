@@ -45,3 +45,15 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Faithful migration of the frozen 2023-01-15 CRR Swagger; legacy model/property/acronym names are part of the existing wire contract and cannot be renamed."
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Legacy CRR discriminated types use string discriminators (objectType/jobType); preserved as-is from 2023-01-15 for backward compatibility."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "Legacy CRR inheritance hierarchies (e.g. ProtectedItem, Job) carry multiple discriminator levels from 2023-01-15; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers": "Legacy array properties from 2023-01-15 do not declare x-ms-identifiers; preserved to keep the emitted swagger byte-faithful to the original."
+    "@azure-tools/typespec-azure-core/documentation-required": "Faithful migration; some legacy properties/operations from 2023-01-15 lack descriptions and adding them would diverge from the frozen source."
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "The original 2023-01-15 CrossRegionRestore/CRR-operation LROs return a header-less 202; preserved exactly for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/no-empty-model": "Legacy 2023-01-15 models use bare type:object properties; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes": "RecoveryPoints_GetAccessToken returns a documented 400 in the original 2023-01-15 spec; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint": "The CRR passive-stamp surface (2023-01-15) does not expose a provider Operations list; adding one would introduce a path not present in the frozen original."
+    "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation": "The CRR vaultstorageconfig singleton has no delete operation in the original 2023-01-15 spec; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/no-response-body": "Legacy CRR operation-result reads return an empty 200 body in the original 2023-01-15 spec; preserved for backward compatibility."
