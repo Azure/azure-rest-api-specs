@@ -505,7 +505,10 @@ namespace Customizations {
     ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
     ...Azure.ResourceManager.Legacy.Provider,
+
+    @path
     resourceName: string,
+
     properties?: Microsoft.BotService.BotProperties,
 
     @visibility(Lifecycle.Read)
