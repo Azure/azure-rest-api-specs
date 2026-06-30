@@ -21,6 +21,7 @@ namespace Microsoft.CognitiveServices;
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @parentResource(Project)
 model Workbench
   is Azure.ResourceManager.ProxyResource<WorkbenchProperties, false> {
@@ -62,6 +63,7 @@ model Workbench
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
 @armResourceOperations
 interface Workbenches {
   /**
