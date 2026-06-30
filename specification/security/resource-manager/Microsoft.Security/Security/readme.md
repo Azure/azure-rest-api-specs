@@ -191,6 +191,15 @@ input-file:
   - stable/2026-01-01/privateLinks.json
 ```
 
+### Tag: package-2026-08
+
+These settings apply only when `--tag=package-2026-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08'
+input-file:
+  - stable/2026-08-01/datascanners.json
+```
+
 ### Tag: package-preview-2025-11-01-preview
 
 These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.

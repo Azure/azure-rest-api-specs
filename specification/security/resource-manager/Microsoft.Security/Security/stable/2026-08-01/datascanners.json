@@ -1,0 +1,538 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "version": "2026-08-01",
+    "description": "API spec for Microsoft.Security (Azure Security Center) data scanners resource provider.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DataScanners"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/datascanners": {
+      "get": {
+        "operationId": "DataScanners_List",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Lists all data scanner resources under the given subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataScannerList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all data scanner resources under the given subscription.": {
+            "$ref": "./examples/DataScanners/ListDataScanners.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/datascanners/{scannerName}": {
+      "get": {
+        "operationId": "DataScanners_Get",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Gets a data scanner resource at subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a data scanner resource at subscription level.": {
+            "$ref": "./examples/DataScanners/GetDataScanner.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataScanners_CreateOrUpdate",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Creates or updates a data scanner resource at subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataScanner' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataScanner' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a data scanner resource at subscription level.": {
+            "$ref": "./examples/DataScanners/CreateOrUpdateDataScanner.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataScanners_Delete",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Deletes a data scanner resource at subscription level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a data scanner resource at subscription level.": {
+            "$ref": "./examples/DataScanners/DeleteDataScanner.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/datascanners/{scannerName}": {
+      "get": {
+        "operationId": "DataScanners_GetByResourceGroup",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Gets a data scanner resource at resource group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a data scanner resource at resource group level.": {
+            "$ref": "./examples/DataScanners/GetDataScannerByResourceGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataScanners_CreateOrUpdateByResourceGroup",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Creates or updates a data scanner resource at resource group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataScanner' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataScanner' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataScanner"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates a data scanner resource at resource group level.": {
+            "$ref": "./examples/DataScanners/CreateOrUpdateDataScannerByResourceGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataScanners_DeleteByResourceGroup",
+        "tags": [
+          "DataScanners"
+        ],
+        "description": "Deletes a data scanner resource at resource group level.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "scannerName",
+            "in": "path",
+            "description": "The name of the data scanner.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a data scanner resource at resource group level.": {
+            "$ref": "./examples/DataScanners/DeleteDataScannerByResourceGroup.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Common.CloudError": {
+      "type": "object",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Common.CloudErrorBody",
+          "description": "The error object."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.CloudErrorBody": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "The error details.",
+          "items": {
+            "$ref": "#/definitions/Common.CloudErrorBody"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorAdditionalInfo"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "x-ms-external": true
+    },
+    "Common.ProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state of the resource. Indicates the status of the last operation performed on the resource.",
+      "enum": [
+        "Succeeded",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Failed",
+        "Canceled",
+        "InProgress"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource has been successfully provisioned and is ready for use."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created. This is a transitional state."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The resource is being updated. This is a transitional state."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The resource is being deleted. This is a transitional state."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The last operation on the resource failed. Check the error details for more information."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation was canceled before completion."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "InProgress"
+          }
+        ]
+      }
+    },
+    "DataScanner": {
+      "type": "object",
+      "description": "The data scanner resource used by Defender for Storage to scan data for malware and sensitive data discovery.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataScannerProperties",
+          "description": "Data scanner resource properties."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataScannerList": {
+      "type": "object",
+      "description": "List of data scanner resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of data scanner resources.",
+          "items": {
+            "$ref": "#/definitions/DataScanner"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "DataScannerProperties": {
+      "type": "object",
+      "description": "Data scanner resource properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Common.ProvisioningState",
+          "description": "The provisioning state of the data scanner resource.",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
