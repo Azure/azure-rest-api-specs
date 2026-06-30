@@ -164,7 +164,7 @@
           {
             "name": "adminDistrict",
             "in": "query",
-            "description": "The country subdivision portion of an address, such as WA.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
+            "description": "The country subdivision portion of an address, such as WA or Washington. Do not include the country prefix in this value; for example, use MI or Michigan, not US-MI.\n\nThis parameter should not be used when the `query` parameter is included in the request.",
             "required": false,
             "type": "string"
           },
@@ -3385,7 +3385,7 @@
         },
         "adminDistrict": {
           "type": "string",
-          "description": "The first-order administrative subdivision (such as a state or province) supplied as a name\nor short code. For example, `\"WA\"` for Washington. Ignored when `query` is set."
+          "description": "The first-order administrative subdivision (such as a state or province) supplied as a name\nor short code. For example, `\"WA\"` or `\"Washington\"` for Washington. Do not include the country prefix; for example, use `\"MI\"` or `\"Michigan\"`, not `\"US-MI\"`. Ignored when `query` is set."
         },
         "adminDistrict2": {
           "type": "string",
