@@ -771,7 +771,6 @@ model ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions
   /**
    * URL which displays additional info about the proactive detection rule
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HelpUrl?: string;
 

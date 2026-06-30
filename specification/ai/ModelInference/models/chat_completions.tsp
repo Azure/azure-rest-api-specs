@@ -664,7 +664,6 @@ model ChatMessageImageContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'image_url' for this type.")
   type: "image_url";
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("An internet location, which must be accessible to the model, from which the image may be retrieved.")
   @encodedName("application/json", "image_url")
   imageUrl: ChatMessageImageUrl;
@@ -707,7 +706,6 @@ model ChatMessageAudioContentItem extends ChatMessageContentItem {
   @doc("The discriminated object type: always 'audio_url' for this type.")
   type: "audio_url";
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("An internet location, which must be accessible to the model, from which the audio may be retrieved.")
   @encodedName("application/json", "audio_url")
   audioUrl: ChatMessageAudioUrl;

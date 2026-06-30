@@ -356,7 +356,6 @@ model LogicAppReceiver {
   /**
    * The callback url where http request sent to.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   callbackUrl: string;
 
   /**
@@ -392,7 +391,6 @@ model AzureFunctionReceiver {
   /**
    * The http trigger url where http request sent to.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   httpTriggerUrl: string;
 
   /**

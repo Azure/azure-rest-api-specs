@@ -596,7 +596,6 @@ model securitySolutionsReferenceDataProperties {
   /**
    * The security solutions' package info url
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   packageInfoUrl: string;
 
   /**

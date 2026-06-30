@@ -572,7 +572,6 @@ model DataAsset {
   @doc("Schema of the asset.")
   schema?: CatalogModelDataAssetSchema[];
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("A redirection link.")
   openInUrl?: url;
 }
@@ -650,7 +649,6 @@ model DataAssetRequest {
   @doc("Contacts associated with the asset.")
   contacts?: ContactsMap;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("A redirection link.")
   openInUrl?: url;
 }

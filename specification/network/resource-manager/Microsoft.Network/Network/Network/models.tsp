@@ -7403,7 +7403,6 @@ model ApplicationGatewayCustomError {
   /**
    * Error page URL of the application gateway custom error.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   customErrorPageUrl?: string;
 }
 
@@ -8115,7 +8114,6 @@ model ApplicationGatewayRedirectConfigurationPropertiesFormat {
   /**
    * Url to redirect the request to.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   targetUrl?: string;
 
   /**
@@ -9855,7 +9853,6 @@ model FirewallPacketCaptureParameters {
   /**
    * Upload capture location
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -16260,13 +16257,11 @@ model NetworkVirtualApplianceBootDiagnosticParameters {
   /**
    * Specifies the sas-url to the storage blob into which serial console logs for the requested instance will be written
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serialConsoleStorageSasUrl?: url;
 
   /**
    * Specifies the sas-url to the storage blob into which console screen shot for the requested instance will be written
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   consoleScreenshotStorageSasUrl?: url;
 }
 
@@ -21195,7 +21190,6 @@ model VpnPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on virtual network gateway.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -22036,7 +22030,6 @@ model VirtualNetworkGatewayMigrationParameters {
   /**
    * Resource url that needs to be passed in to migration.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   resourceUrl?: string;
 }
 
@@ -22376,7 +22369,6 @@ model GetVpnSitesConfigurationRequest {
   /**
    * The sas-url to download the configurations for vpn-sites.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl: string;
 }
 
@@ -23782,7 +23774,6 @@ model VpnGatewayPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn gateway.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 
@@ -23853,7 +23844,6 @@ model VpnConnectionPacketCaptureStopParameters {
   /**
    * SAS url for packet capture on vpn connection.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -23914,7 +23904,6 @@ model VpnProfileResponse {
   /**
    * URL to the VPN profile.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   profileUrl?: string;
 }
 
@@ -23933,7 +23922,6 @@ model P2SVpnConnectionHealthRequest {
   /**
    * The sas-url to download the P2S Vpn connection health detail.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   outputBlobSasUrl?: string;
 }
 
@@ -23947,7 +23935,6 @@ model P2SVpnConnectionHealth {
   /**
    * Returned sas url of the blob to which the p2s vpn connection detailed health will be written.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 }
 

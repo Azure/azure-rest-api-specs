@@ -2544,7 +2544,6 @@ model DataSourceEntity {
     endpoint?: string;
 
     // ---------- Azure Databricks Unity Catalog ----------
-    #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
     @doc("Databricks workspace URL.")
     workspaceUrl?: string;
 

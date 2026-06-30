@@ -358,7 +358,6 @@ model ProductDetails {
   @doc("Standard contract amendments for the product")
   standardContractAmendmentsRevisionId?: string;
 
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The universal amendment link for an enterprise contract")
   universalAmendmentUrl?: string;
 

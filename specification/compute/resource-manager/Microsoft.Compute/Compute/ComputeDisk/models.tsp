@@ -887,7 +887,6 @@ model KeyVaultAndSecretReference {
   /**
    * Url pointing to a key or secret in KeyVault
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl: string;
 }
 
@@ -913,7 +912,6 @@ model KeyVaultAndKeyReference {
   /**
    * Url pointing to a key or secret in KeyVault
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 }
 
@@ -1506,7 +1504,6 @@ model KeyForDiskEncryptionSet {
   /**
    * Fully versioned Key Url pointing to a key in KeyVault. Version segment of the Url is required regardless of rotationToLatestKeyVersionEnabled value.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl: string;
 }
 

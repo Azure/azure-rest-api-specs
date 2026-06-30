@@ -420,7 +420,6 @@ model AttestationEvidence {
   /**
    * The source url of the evidence
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sourceUrl?: string;
 }
 

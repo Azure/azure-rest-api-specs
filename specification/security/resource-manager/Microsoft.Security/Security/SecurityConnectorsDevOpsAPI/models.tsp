@@ -589,7 +589,6 @@ model AzureDevOpsRepositoryProperties {
   /**
    * Gets or sets Azure DevOps Repository url.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   repoUrl?: string;
 
@@ -820,7 +819,6 @@ model GitHubOwnerProperties {
   /**
    * Gets or sets GitHub Owner url.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   ownerUrl?: string;
 
@@ -926,7 +924,6 @@ model GitHubRepositoryProperties {
   /**
    * Gets or sets GitHub Repository url.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   repoUrl?: string;
 
