@@ -6,6 +6,8 @@ using Azure.Core;
 
 namespace Microsoft.ComputeBulkActions;
 
+@@clientName(Microsoft.ComputeBulkActions, "ComputeBulkActionsMgmtClient", "python")
+
 @@clientName(ExecuteTypeRequest.correlationid, "correlationId", "java");
 @@clientName(ExecuteCreateRequest.correlationid, "correlationId", "java");
 @@clientName(GetOperationStatusRequest.correlationid, "correlationId", "java");
