@@ -52,7 +52,8 @@ interface PremierAddOnOps
         @segment("premieraddons")
         @key
         premierAddOnName: string,
-      }
+      },
+      ResourceName = "WebSitePremierAddon"
     > {}
 
 @tag("WebApps")
@@ -127,7 +128,8 @@ interface PremierAddOnOperationGroupOps
         @segment("premieraddons")
         @key
         premierAddOnName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotPremierAddOn"
     > {}
 
 @tag("WebApps")

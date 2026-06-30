@@ -53,7 +53,8 @@ interface CsmPublishingCredentialsPoliciesEntityOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteFtpPublishingCredentialsPolicy"
     > {}
 
 @tag("WebApps")
@@ -111,7 +112,8 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         scm: "scm",
-      }
+      },
+      ResourceName = "ScmSiteBasicPublishingCredentialsPolicy"
     > {}
 
 @tag("WebApps")
@@ -164,7 +166,8 @@ interface FtpAllowedSlotOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteSlotFtpPublishingCredentialsPolicy"
     > {}
 
 @tag("WebApps")
@@ -228,7 +231,8 @@ interface ScmAllowedSlotOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         scm: "scm",
-      }
+      },
+      ResourceName = "ScmSiteSlotBasicPublishingCredentialsPolicy"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

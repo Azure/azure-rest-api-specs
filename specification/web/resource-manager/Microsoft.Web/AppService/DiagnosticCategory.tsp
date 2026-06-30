@@ -50,7 +50,8 @@ interface DiagnosticCategoryOps
         @segment("diagnostics")
         @key
         diagnosticCategory: string,
-      }
+      },
+      ResourceName = "SiteDiagnostic"
     > {}
 
 @tag("Diagnostics")
@@ -102,7 +103,8 @@ interface DiagnosticCategoryOperationGroupOps
         @segment("diagnostics")
         @key
         diagnosticCategory: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnostic"
     > {}
 
 @tag("Diagnostics")
