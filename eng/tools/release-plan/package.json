@@ -6,20 +6,6 @@
   "bin": {
     "release-plan": "cmd/release-plan.js"
   },
-  "scripts": {
-    "build": "tsc --noEmit",
-    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
-    "clean": "rm -rf dist && rm -rf node_modules",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
-    "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
-  },
-  "engines": {
-    "node": ">=24.14.1"
-  },
   "dependencies": {
     "@octokit/rest": "^22.0.0",
     "@azure-tools/specs-shared": "file:../../../.github/shared"
@@ -35,5 +21,19 @@
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.0",
     "vitest": "^4.1.0"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "check": "npm run build && npm run lint && npm run format:check && npm run test:ci",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "format": "prettier . --ignore-path ../.prettierignore --write",
+    "format:check": "prettier . --ignore-path ../.prettierignore --check",
+    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">=24.14.1"
   }
 }
