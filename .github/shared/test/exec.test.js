@@ -2,7 +2,14 @@ import { dirname } from "path";
 import semver from "semver";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
-import { execFile, execNpm, execPnpm, execPnpmExec, isExecError } from "../src/exec.js";
+import {
+  execFile,
+  execNpm,
+  execNpmExec,
+  execPnpm,
+  execPnpmExec,
+  isExecError,
+} from "../src/exec.js";
 import { debugLogger } from "../src/logger.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -61,6 +68,18 @@ describe("execNpm", () => {
     await expect(execNpm(["invalid-command-xyz"], options)).rejects.toMatchObject({
       code: /** @type {unknown} */ (expect.toSatisfy((v) => v !== 0)),
     });
+  });
+});
+
+describe("execNpmExec", () => {
+  // A command run in the context of "npm exec ___" needs to call
+  // something referenced in package.json. In this case, prettier is present
+  // so it is used.
+  it("runs prettier", async () => {
+    // npm may emit warnings to stderr (e.g. unknown env config) depending on the
+    // environment, so only assert on stdout here.
+    const result = await execNpmExec(["prettier", "--version"], options);
+    expect(semver.valid(result.stdout.trim())).not.toBeNull();
   });
 });
 

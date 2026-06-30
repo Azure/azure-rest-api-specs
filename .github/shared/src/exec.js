@@ -123,6 +123,18 @@ export async function execNpm(args, options = {}) {
 }
 
 /**
+ * Calls `execNpm()` with arguments ["exec", "--no", "--"] prepended.
+ *
+ * @param {string[]} args
+ * @param {ExecNpmOptions} [options]
+ * @returns {Promise<ExecResult>}
+ * @throws {ExecError}
+ */
+export async function execNpmExec(args, options = {}) {
+  return await execNpm(["exec", "--no", "--", ...args], options);
+}
+
+/**
  * Calls `cross-spawn` with appropriate arguments to run `pnpm` on all platforms.
  *
  * Uses `cross-spawn` instead of `child_process.execFile()` so that the `pnpm.cmd`
