@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -10,7 +9,6 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.StorageCache;
 
@@ -21,7 +19,7 @@ namespace Microsoft.StorageCache;
 @added(Versions.v2026_08_01)
 @parentResource(AmlFilesystem)
 model RebalanceJob
-  is Azure.ResourceManager.TrackedResource<RebalanceJobProperties> {
+  is Azure.ResourceManager.ProxyResource<RebalanceJobProperties> {
   ...ResourceNameParameter<
     Resource = RebalanceJob,
     KeyName = "rebalanceJobName",
@@ -36,14 +34,12 @@ interface RebalanceJobs {
   /**
    * Returns a rebalance job.
    */
-  @operationId("rebalanceJobs_Get")
   @tag("rebalanceJobs")
   get is ArmResourceRead<RebalanceJob, Error = CloudError>;
 
   /**
    * Update a rebalance job instance.
    */
-  @operationId("rebalanceJobs_Update")
   @tag("rebalanceJobs")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
@@ -58,7 +54,6 @@ interface RebalanceJobs {
   /**
    * Schedules a rebalance job for deletion.
    */
-  @operationId("rebalanceJobs_Delete")
   @tag("rebalanceJobs")
   delete is ArmResourceDeleteWithoutOkAsync<
     RebalanceJob,
@@ -72,7 +67,6 @@ interface RebalanceJobs {
   /**
    * Returns all the rebalance jobs the user has access to under an AML File System.
    */
-  @operationId("rebalanceJobs_ListByAmlFilesystem")
   @tag("rebalanceJobs")
   listByAmlFilesystem is ArmResourceListByParent<
     RebalanceJob,

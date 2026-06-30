@@ -1,11 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
-
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -698,67 +699,77 @@ union RebalanceJobPropertiesProvisioningState {
   string,
 
   /**
-   * Succeeded
+   * Resource has been created successfully.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * Resource creation failed.
    */
   Failed: "Failed",
 
   /**
-   * Creating
+   * Resource is being created.
    */
   Creating: "Creating",
 
   /**
-   * Deleting
+   * Resource is being deleted.
    */
   Deleting: "Deleting",
 
   /**
-   * Updating
+   * Resource is being updated.
    */
   Updating: "Updating",
 
   /**
-   * Canceled
+   * Resource creation was canceled.
    */
   Canceled: "Canceled",
 }
 
 /**
- * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error.
+ * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.
  */
 @added(Versions.v2026_08_01)
 union RebalanceJobStatusType {
   string,
 
   /**
-   * InProgress
+   * The rebalance job is currently running on the cluster.
    */
   InProgress: "InProgress",
 
   /**
-   * Cancelling
+   * A cancel has been requested and the job is stopping.
    */
   Cancelling: "Cancelling",
 
   /**
-   * Canceled
+   * The rebalance job was canceled before completion.
    */
   Canceled: "Canceled",
 
   /**
-   * Completed
+   * The rebalance job finished successfully.
    */
   Completed: "Completed",
 
   /**
-   * Failed
+   * The rebalance job failed due to a fatal error.
    */
   Failed: "Failed",
+
+  /**
+   * The job is being cleaned up during deletion.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The orchestrator is rolling back provisioned resources after a failure.
+   */
+  RollingBack: "RollingBack",
 }
 
 /**
@@ -769,15 +780,19 @@ union RebalanceJobAdminStatus {
   string,
 
   /**
-   * Active
+   * The rebalance job is running normally.
    */
   Active: "Active",
 
   /**
-   * Cancel
+   * Request the rebalance job to stop.
    */
   Cancel: "Cancel",
 }
+
+/**
+ * The status of the AML file system subnet check.
+ */
 union FilesystemSubnetStatusType {
   string,
 
@@ -792,7 +807,7 @@ union FilesystemSubnetStatusType {
   Invalid: "Invalid",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Metric aggregation type. */
 union MetricAggregationType {
   string,
 
@@ -1277,8 +1292,8 @@ model AmlFilesystemIdentity {
   userAssignedIdentities?: Record<userAssignedIdentitiesValue>;
 }
 
+/** User-assigned identity properties. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model userAssignedIdentitiesValue {
   /**
    * The principal ID of the user-assigned identity.
@@ -1888,7 +1903,7 @@ model AutoExportJobUpdate {
   properties?: AutoExportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Properties for updating an auto export job. */
 model AutoExportJobUpdateProperties {
   /**
    * The administrative status of the auto export job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto export job. By default it is set to 'Enable'.
@@ -2054,7 +2069,7 @@ model ImportJobUpdate {
   properties?: ImportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Properties for updating an import job. */
 model ImportJobUpdateProperties {
   /**
    * The administrative status of the import job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active import job.
@@ -2338,7 +2353,7 @@ model AutoImportJobUpdate {
   properties?: AutoImportJobUpdateProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/** Properties for updating an auto import job. */
 model AutoImportJobUpdateProperties {
   /**
    * The administrative status of the auto import job. Possible values: 'Enable', 'Disable'. Passing in a value of 'Disable' will disable the current active auto import job. By default it is set to 'Enable'.
@@ -2373,7 +2388,7 @@ model ExpansionJobProperties {
    */
   @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  rebalance?: boolean;
+  rebalance?: boolean = false;
 
   /**
    * Name of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
@@ -2477,7 +2492,7 @@ model RebalanceJobProperties {
 @added(Versions.v2026_08_01)
 model RebalanceJobPropertiesStatus {
   /**
-   * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error.
+   * The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.
    */
   @visibility(Lifecycle.Read)
   state?: RebalanceJobStatusType;
@@ -2495,42 +2510,60 @@ model RebalanceJobPropertiesStatus {
   statusMessage?: string;
 
   /**
-   * The balance percentage (0-100). Represents cumulative progress since the rebalance started. Sourced from heartbeat messages.
+   * The balance percentage (0-100). Represents cumulative progress since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
    */
   @visibility(Lifecycle.Read)
   @maxValue(100)
   @minValue(0)
-  balancePercent?: float32;
+  balancePercent?: float64;
 
   /**
-   * Estimated remaining time in seconds. May be null during initial assessment.
+   * Estimated remaining time in seconds. Omitted during initial assessment before the rebalancer has enough data to estimate.
    */
   @visibility(Lifecycle.Read)
   estimatedRemainingSeconds?: int32;
 
   /**
-   * Total number of files migrated since the rebalance started.
+   * Total number of files migrated since the rebalance started. Counts OST-phase (data) work items. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
    */
   @visibility(Lifecycle.Read)
   filesMigrated?: int64;
 
   /**
-   * Total number of bytes moved since the rebalance started.
+   * Total number of directories migrated since the rebalance started. Counts MDT-phase (metadata) work items, reported separately from filesMigrated (OST-phase data migrations). Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
+   */
+  @visibility(Lifecycle.Read)
+  dirsMigrated?: int64;
+
+  /**
+   * Total number of bytes moved since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
    */
   @visibility(Lifecycle.Read)
   bytesMoved?: int64;
 
   /**
-   * Rolling 60-second average of files moved per second.
+   * Average files moved per second over the most recent reporting interval.
    */
   @visibility(Lifecycle.Read)
-  filesMovedPerSecond?: float32;
+  filesMovedPerSecond?: float64;
 
   /**
-   * Rolling 60-second average throughput in megabytes per second.
+   * Average throughput in MiB/s (1024x1024 bytes per second) over the most recent reporting interval.
    */
   @visibility(Lifecycle.Read)
-  throughputMbps?: float32;
+  throughputMbps?: float64;
+
+  /**
+   * Total cumulative non-skip errors since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
+   */
+  @visibility(Lifecycle.Read)
+  totalErrors?: int32;
+
+  /**
+   * Total cumulative benign skips since the rebalance started: files intentionally not migrated (for example, a lost migration lease or a stale layout), as distinct from the hard failures counted in totalErrors. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
+   */
+  @visibility(Lifecycle.Read)
+  totalSkipped?: int64;
 
   /**
    * The time (in UTC) the rebalance job started.
@@ -2540,7 +2573,7 @@ model RebalanceJobPropertiesStatus {
   startTimeUTC?: utcDateTime;
 
   /**
-   * The time (in UTC) when the rebalance job completed. Only populated when job reaches a terminal state.
+   * The time (in UTC) when the rebalance job completed. Only populated when the job reaches a terminal state (Completed, Failed, or Canceled).
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Non-standard casing matches existing convention in this project"
   @visibility(Lifecycle.Read)
@@ -2552,12 +2585,6 @@ model RebalanceJobPropertiesStatus {
  */
 @added(Versions.v2026_08_01)
 model RebalanceJobUpdate {
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags use Record<string> per ARM convention"
-  tags?: Record<string>;
-
   /**
    * Properties for the rebalance job update.
    */
@@ -2833,6 +2860,7 @@ model ResourceSkusResult {
    */
   @visibility(Lifecycle.Read)
   @pageItems
+  @identifiers(#["name"])
   value?: ResourceSku[];
 
   /**
@@ -2904,6 +2932,8 @@ model ResourceSkuLocationInfo {
   /**
    * Location where this SKU is available.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability required by LocationMustHaveXmsMutability lint rule"
+  @extension("x-ms-mutability", #["read", "create"])
   location?: string;
 
   /**

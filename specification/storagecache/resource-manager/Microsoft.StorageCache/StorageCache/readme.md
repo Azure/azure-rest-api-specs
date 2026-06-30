@@ -26,9 +26,17 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-01
+tag: package-2026-08-01
 add-credentials: true
 title: StorageCacheManagementClient
+```
+
+### Tag: package-2026-08-01
+These settings apply only when `--tag=package-2026-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-01'
+input-file:
+  - stable/2026-08-01/openapi.json
 ```
 
 ### Tag: package-2026-01-01

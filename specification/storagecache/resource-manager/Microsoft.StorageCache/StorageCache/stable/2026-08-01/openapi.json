@@ -2349,7 +2349,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs": {
       "get": {
-        "operationId": "rebalanceJobs_ListByAmlFilesystem",
+        "operationId": "RebalanceJobs_ListByAmlFilesystem",
         "tags": [
           "rebalanceJobs"
         ],
@@ -2390,8 +2390,8 @@
           }
         },
         "x-ms-examples": {
-          "rebalanceJobs_ListByAmlFilesystem": {
-            "$ref": "./examples/rebalanceJobs_ListByAmlFilesystem.json"
+          "RebalanceJobs_ListByAmlFilesystem": {
+            "$ref": "./examples/RebalanceJobs_ListByAmlFilesystem.json"
           }
         },
         "x-ms-pageable": {
@@ -2401,7 +2401,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs/{rebalanceJobName}": {
       "get": {
-        "operationId": "rebalanceJobs_Get",
+        "operationId": "RebalanceJobs_Get",
         "tags": [
           "rebalanceJobs"
         ],
@@ -2452,13 +2452,13 @@
           }
         },
         "x-ms-examples": {
-          "rebalanceJobs_Get": {
-            "$ref": "./examples/rebalanceJobs_Get.json"
+          "RebalanceJobs_Get": {
+            "$ref": "./examples/RebalanceJobs_Get.json"
           }
         }
       },
       "patch": {
-        "operationId": "rebalanceJobs_Update",
+        "operationId": "RebalanceJobs_Update",
         "tags": [
           "rebalanceJobs"
         ],
@@ -2537,8 +2537,8 @@
           }
         },
         "x-ms-examples": {
-          "rebalanceJobs_Update": {
-            "$ref": "./examples/rebalanceJobs_Update.json"
+          "RebalanceJobs_Update": {
+            "$ref": "./examples/RebalanceJobs_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2548,7 +2548,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "rebalanceJobs_Delete",
+        "operationId": "RebalanceJobs_Delete",
         "tags": [
           "rebalanceJobs"
         ],
@@ -2615,8 +2615,8 @@
           }
         },
         "x-ms-examples": {
-          "rebalanceJobs_Delete": {
-            "$ref": "./examples/rebalanceJobs_Delete.json"
+          "RebalanceJobs_Delete": {
+            "$ref": "./examples/RebalanceJobs_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5564,6 +5564,7 @@
     },
     "AutoExportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an auto export job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/AutoExportJobAdminStatus",
@@ -6068,6 +6069,7 @@
     },
     "AutoImportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an auto import job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/AutoImportJobUpdatePropertiesAdminStatus",
@@ -6851,6 +6853,7 @@
         "rebalance": {
           "type": "boolean",
           "description": "When true, expansion creates a RebalanceJob after completing. Optional, defaults to false.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -7027,6 +7030,7 @@
     },
     "FilesystemSubnetStatusType": {
       "type": "string",
+      "description": "The status of the AML file system subnet check.",
       "enum": [
         "Ok",
         "Invalid"
@@ -7471,6 +7475,7 @@
     },
     "ImportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an import job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/ImportJobAdminStatus",
@@ -7642,6 +7647,7 @@
     },
     "MetricAggregationType": {
       "type": "string",
+      "description": "Metric aggregation type.",
       "enum": [
         "NotSpecified",
         "None",
@@ -8157,12 +8163,13 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RebalanceJobProperties",
-          "description": "Properties of the rebalance job."
+          "description": "Properties of the rebalance job.",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8180,12 +8187,12 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "Active"
+            "description": "The rebalance job is running normally."
           },
           {
             "name": "Cancel",
             "value": "Cancel",
-            "description": "Cancel"
+            "description": "Request the rebalance job to stop."
           }
         ]
       }
@@ -8214,12 +8221,12 @@
               {
                 "name": "Active",
                 "value": "Active",
-                "description": "Active"
+                "description": "The rebalance job is running normally."
               },
               {
                 "name": "Cancel",
                 "value": "Cancel",
-                "description": "Cancel"
+                "description": "Request the rebalance job to stop."
               }
             ]
           },
@@ -8258,32 +8265,32 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Succeeded"
+            "description": "Resource has been created successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "Resource creation failed."
           },
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creating"
+            "description": "Resource is being created."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deleting"
+            "description": "Resource is being deleted."
           },
           {
             "name": "Updating",
             "value": "Updating",
-            "description": "Updating"
+            "description": "Resource is being updated."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "Resource creation was canceled."
           }
         ]
       }
@@ -8294,7 +8301,7 @@
       "properties": {
         "state": {
           "$ref": "#/definitions/RebalanceJobStatusType",
-          "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error.",
+          "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully. Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.",
           "readOnly": true
         },
         "statusCode": {
@@ -8309,8 +8316,8 @@
         },
         "balancePercent": {
           "type": "number",
-          "format": "float",
-          "description": "The balance percentage (0-100). Represents cumulative progress since the rebalance started. Sourced from heartbeat messages.",
+          "format": "double",
+          "description": "The balance percentage (0-100). Represents cumulative progress since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
           "minimum": 0,
           "maximum": 100,
           "readOnly": true
@@ -8318,31 +8325,49 @@
         "estimatedRemainingSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Estimated remaining time in seconds. May be null during initial assessment.",
+          "description": "Estimated remaining time in seconds. Omitted during initial assessment before the rebalancer has enough data to estimate.",
           "readOnly": true
         },
         "filesMigrated": {
           "type": "integer",
           "format": "int64",
-          "description": "Total number of files migrated since the rebalance started.",
+          "description": "Total number of files migrated since the rebalance started. Counts OST-phase (data) work items. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "dirsMigrated": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of directories migrated since the rebalance started. Counts MDT-phase (metadata) work items, reported separately from filesMigrated (OST-phase data migrations). Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
           "readOnly": true
         },
         "bytesMoved": {
           "type": "integer",
           "format": "int64",
-          "description": "Total number of bytes moved since the rebalance started.",
+          "description": "Total number of bytes moved since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
           "readOnly": true
         },
         "filesMovedPerSecond": {
           "type": "number",
-          "format": "float",
-          "description": "Rolling 60-second average of files moved per second.",
+          "format": "double",
+          "description": "Average files moved per second over the most recent reporting interval.",
           "readOnly": true
         },
         "throughputMbps": {
           "type": "number",
-          "format": "float",
-          "description": "Rolling 60-second average throughput in megabytes per second.",
+          "format": "double",
+          "description": "Average throughput in MiB/s (1024x1024 bytes per second) over the most recent reporting interval.",
+          "readOnly": true
+        },
+        "totalErrors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total cumulative non-skip errors since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
+          "readOnly": true
+        },
+        "totalSkipped": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total cumulative benign skips since the rebalance started: files intentionally not migrated (for example, a lost migration lease or a stale layout), as distinct from the hard failures counted in totalErrors. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.",
           "readOnly": true
         },
         "startTimeUTC": {
@@ -8354,20 +8379,22 @@
         "completionTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "The time (in UTC) when the rebalance job completed. Only populated when job reaches a terminal state.",
+          "description": "The time (in UTC) when the rebalance job completed. Only populated when the job reaches a terminal state (Completed, Failed, or Canceled).",
           "readOnly": true
         }
       }
     },
     "RebalanceJobStatusType": {
       "type": "string",
-      "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error.",
+      "description": "The operational state of the rebalance job. InProgress indicates the rebalance is running on the cluster. Cancelling indicates a cancel has been requested. Canceled indicates the rebalance was cancelled. Completed indicates the rebalance finished successfully (imbalance below low watermark). Failed indicates the rebalance was unable to complete due to a fatal error. Deleting indicates the job is being cleaned up during deletion. RollingBack indicates the orchestrator is rolling back provisioned resources after a failure.",
       "enum": [
         "InProgress",
         "Cancelling",
         "Canceled",
         "Completed",
-        "Failed"
+        "Failed",
+        "Deleting",
+        "RollingBack"
       ],
       "x-ms-enum": {
         "name": "RebalanceJobStatusType",
@@ -8376,27 +8403,37 @@
           {
             "name": "InProgress",
             "value": "InProgress",
-            "description": "InProgress"
+            "description": "The rebalance job is currently running on the cluster."
           },
           {
             "name": "Cancelling",
             "value": "Cancelling",
-            "description": "Cancelling"
+            "description": "A cancel has been requested and the job is stopping."
           },
           {
             "name": "Canceled",
             "value": "Canceled",
-            "description": "Canceled"
+            "description": "The rebalance job was canceled before completion."
           },
           {
             "name": "Completed",
             "value": "Completed",
-            "description": "Completed"
+            "description": "The rebalance job finished successfully."
           },
           {
             "name": "Failed",
             "value": "Failed",
-            "description": "Failed"
+            "description": "The rebalance job failed due to a fatal error."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The job is being cleaned up during deletion."
+          },
+          {
+            "name": "RollingBack",
+            "value": "RollingBack",
+            "description": "The orchestrator is rolling back provisioned resources after a failure."
           }
         ]
       }
@@ -8405,13 +8442,6 @@
       "type": "object",
       "description": "A rebalance job update instance.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
           "$ref": "#/definitions/RebalanceJobUpdateProperties",
           "description": "Properties for the rebalance job update."
@@ -8541,7 +8571,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Location where this SKU is available."
+          "description": "Location where this SKU is available.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "zones": {
           "type": "array",
@@ -8562,7 +8596,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -8687,7 +8724,10 @@
         "location": {
           "type": "string",
           "description": "Region name string.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "allOf": [
@@ -8920,6 +8960,7 @@
     },
     "userAssignedIdentitiesValue": {
       "type": "object",
+      "description": "User-assigned identity properties.",
       "properties": {
         "principalId": {
           "type": "string",

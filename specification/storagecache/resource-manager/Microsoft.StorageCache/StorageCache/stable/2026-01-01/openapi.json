@@ -5283,6 +5283,7 @@
     },
     "AutoExportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an auto export job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/AutoExportJobAdminStatus",
@@ -5787,6 +5788,7 @@
     },
     "AutoImportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an auto import job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/AutoImportJobUpdatePropertiesAdminStatus",
@@ -7178,6 +7180,7 @@
     },
     "ImportJobUpdateProperties": {
       "type": "object",
+      "description": "Properties for updating an import job.",
       "properties": {
         "adminStatus": {
           "$ref": "#/definitions/ImportJobAdminStatus",
@@ -7349,6 +7352,7 @@
     },
     "MetricAggregationType": {
       "type": "string",
+      "description": "Metric aggregation type.",
       "enum": [
         "NotSpecified",
         "None",
@@ -7953,7 +7957,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Location where this SKU is available."
+          "description": "Location where this SKU is available.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "zones": {
           "type": "array",
@@ -7974,7 +7982,10 @@
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "type": "string",
@@ -8099,7 +8110,10 @@
         "location": {
           "type": "string",
           "description": "Region name string.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "allOf": [
@@ -8332,6 +8346,7 @@
     },
     "userAssignedIdentitiesValue": {
       "type": "object",
+      "description": "User-assigned identity properties.",
       "properties": {
         "principalId": {
           "type": "string",

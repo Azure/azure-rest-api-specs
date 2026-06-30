@@ -28,6 +28,8 @@ model StorageTarget
    * Region name string.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability required by LocationMustHaveXmsMutability lint rule"
+  @extension("x-ms-mutability", #["read"])
   @visibility(Lifecycle.Read)
   location?: string;
 }

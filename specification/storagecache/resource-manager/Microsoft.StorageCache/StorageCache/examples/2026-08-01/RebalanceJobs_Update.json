@@ -5,10 +5,7 @@
     "rebalanceJobName": "expansionjob1-rebalance",
     "resourceGroupName": "scgroup",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "rebalanceJob": {
-      "tags": {
-        "Dept": "ContosoFinance"
-      },
+    "properties": {
       "properties": {
         "adminStatus": "Cancel"
       }
@@ -20,27 +17,24 @@
         "name": "expansionjob1-rebalance",
         "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/rebalanceJobs/expansionjob1-rebalance",
-        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "adminStatus": "Cancel",
           "expansionJobName": "expansionjob1",
           "status": {
-            "state": "Cancelling",
+            "state": "InProgress",
             "statusCode": "CancelRequested",
             "statusMessage": "Rebalance cancellation has been requested.",
             "balancePercent": 67.8,
-            "estimatedRemainingSeconds": null,
             "filesMigrated": 320000,
+            "dirsMigrated": 25000,
             "bytesMoved": 3435973836,
             "filesMovedPerSecond": 0,
             "throughputMbps": 0,
-            "startTimeUTC": "2025-09-12T10:00:00Z",
-            "completionTimeUTC": null
+            "totalErrors": 2,
+            "totalSkipped": 150,
+            "startTimeUTC": "2025-09-12T10:00:00Z"
           }
-        },
-        "tags": {
-          "Dept": "ContosoFinance"
         }
       }
     },
@@ -51,6 +45,6 @@
       }
     }
   },
-  "operationId": "rebalanceJobs_Update",
-  "title": "rebalanceJobs_Update"
+  "operationId": "RebalanceJobs_Update",
+  "title": "RebalanceJobs_Update"
 }
