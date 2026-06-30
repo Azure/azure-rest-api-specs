@@ -25,6 +25,32 @@ using Microsoft.DevHub;
 // csharp acronym-casing consistency (mirrors java,javascript)
 @@clientName(ACR, "Acr", "csharp");
 
+// csharp: ADO acronym PascalCase (3-letter acronym)
+@@clientName(ADORepository, "AdoRepository", "csharp");
+@@clientName(ADOProviderProfile, "AdoProviderProfile", "csharp");
+
+// csharp: add RP/domain context to otherwise-generic resource trio nouns
+@@clientName(Workflow, "DevHubWorkflow", "csharp");
+@@clientName(Template, "DevHubTemplate", "csharp");
+
+// csharp: URL -> Url acronym casing (mirrors java)
+@@clientName(GitHubOAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(AdooAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(GitHubWorkflowProfile.prURL, "prUrl", "csharp");
+@@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "csharp");
+@@clientName(PullRequest.prURL, "prUrl", "csharp");
+
+// csharp: boolean properties need a verb prefix
+@@clientName(WorkflowRun.succeeded, "isSucceeded", "csharp");
+@@clientName(Parameter.required, "isRequired", "csharp");
+
+// csharp: ARM resource id strings -> ResourceIdentifier
+@@alternateType(GitHubWorkflowProfile.aksResourceId, Azure.Core.armResourceIdentifier, "csharp");
+@@alternateType(IacTemplateProperties.sourceResourceId, Azure.Core.armResourceIdentifier, "csharp");
+
+// csharp: etag string -> Azure.ETag
+@@alternateType(Azure.ResourceManager.Legacy.EntityTagProperty.etag, Azure.Core.eTag, "csharp");
+
 // csharp AdoOAuth casing consistency (mirrors java).
 @@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
 @@clientName(AdooAuthResponses, "AdoOAuthResponses", "csharp");
