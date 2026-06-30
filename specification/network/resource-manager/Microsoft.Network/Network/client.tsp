@@ -5403,6 +5403,12 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@clientName(
+  Microsoft.Network.PolicySettings.captchaCookieExpirationInMins,
+  "captchaCookieExpirationInMinsLegacy",
+  "java"
+);
+
+@@clientName(
   Microsoft.Network.PolicySettings.captchaExpirationInMins,
   "captchaCookieExpirationInMins",
   "java"
