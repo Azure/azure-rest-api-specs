@@ -635,14 +635,14 @@ interface Container {
     }
   >;
 
-  /** The List Blobs operation returns a list of the blobs under the specified container. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client. */
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @added(Versions.v2026_12_06)
   @get
   @route("?restype=container&comp=list&flat&arrow")
   listBlobFlatSegmentApacheArrow(
-    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML. */
+    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
     #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
     @header("accept")
     accept: "application/vnd.apache.arrow.stream,application/xml",
@@ -698,14 +698,14 @@ interface Container {
     }
   >;
 
-  /** The List Blobs hierarchy operation returns a list of the blobs under the specified container. This is the Apache Arrow use case so response is returned as raw to be deserialized by the client. */
+  /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @added(Versions.v2026_12_06)
   @get
   @route("?restype=container&comp=list&hierarchy&arrow")
   listBlobHierarchySegmentApacheArrow(
-    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML. */
+    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
     #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
     @header("accept")
     accept: "application/vnd.apache.arrow.stream,application/xml",

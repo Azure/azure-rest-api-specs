@@ -2859,7 +2859,7 @@ alias ListBlobsStartFrom = {
 };
 
 alias ListBlobsEndBefore = {
-  /** Filters the results to return only blobs whose names are ordered before this value. */
+  /** Filters the results to return only names that are ordered before this value. Currently only applies to Apache Arrow scenario. */
   @added(Versions.v2026_12_06)
   @query
   endBefore?: string;
