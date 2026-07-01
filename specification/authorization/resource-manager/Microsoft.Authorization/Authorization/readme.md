@@ -102,6 +102,12 @@ directive:
   - suppress: RepeatedPathInfo
     from: authorization-DenyAssignmentCalls.json
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
+  - suppress: PostResponseCodes
+    from: authorization-ElevateAccessCalls.json
+    reason: Pre-existing API pattern from stable/2015-07-01. The ElevateAccess POST returns 200 with no body by design.
+  - suppress: LatestVersionOfCommonTypesMustBeUsed
+    from: authorization-ElevateAccessCalls.json
+    reason: Matching the existing stable/2015-07-01 ElevateAccess spec which uses common-types v2. Upgrading would introduce a breaking change in the ErrorResponse schema for this tenant-level POST endpoint.
 ```
 
 ### Tag: package-2025-12-01-preview
@@ -111,6 +117,8 @@ These settings apply only when `--tag=package-2025-12-01-preview` is specified o
 ```yaml $(tag) == 'package-2025-12-01-preview'
 input-file:
   - stable/2015-07-01/ClassicAdmin.json
+  - stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - stable/2018-01-01/authorization-ElevateAccessCalls.json
   - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
