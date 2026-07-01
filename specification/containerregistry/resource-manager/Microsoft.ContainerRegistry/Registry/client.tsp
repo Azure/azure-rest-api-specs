@@ -35,6 +35,8 @@ using Microsoft.ContainerRegistry;
 
 // C# configurations for backward compatibility and naming conventions.
 // These settings restore the public API surface of the previous autorest-based SDK to avoid breaking changes.
+@@clientName(Registry, "ContainerRegistryService", "csharp");
+@@clientName(ConnectedRegistryProperties.parent, "ConnectedRegistryParent", "csharp");
 
 // ContainerRegistryResourceTypeExtensible is a custom extensible union wrapping the original enum,
 // allowing the RegistryNameCheckRequest.type property to accept both known enum values and arbitrary strings,
