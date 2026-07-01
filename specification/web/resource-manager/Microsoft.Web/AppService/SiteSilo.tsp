@@ -24,7 +24,7 @@ model SiteSilo is Azure.ResourceManager.ProxyResource<SiteSiloProperties> {
     Resource = SiteSilo,
     KeyName = "siloName",
     SegmentName = "silos",
-    NamePattern = ""
+    NamePattern = "^silo-[0-9a-f]{4}-[a-z0-9-]+$"
   >;
 }
 
