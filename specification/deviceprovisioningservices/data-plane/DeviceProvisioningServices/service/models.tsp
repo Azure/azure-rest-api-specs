@@ -221,12 +221,13 @@ model IndividualEnrollment {
    */
   #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2026_07_01_preview)
   credentialPolicyName?: string;
 
   /**
-   * Azure Device Registry certificate policy resource ID. Use this field instead of credentialPolicyName.
+   * Azure Device Registry certificate policy resource ID.
    */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_07_01_preview)
   certificatePolicyResourceId?: string;
 
   /**
@@ -788,12 +789,13 @@ model EnrollmentGroup {
    */
   #suppress "deprecated" "Preserving for backward compatibility until CMS public preview deprecation"
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2026_07_01_preview)
   credentialPolicyName?: string;
 
   /**
-   * Azure Device Registry certificate policy resource ID. Use this field instead of credentialPolicyName.
+   * Azure Device Registry certificate policy resource ID.
    */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_07_01_preview)
   certificatePolicyResourceId?: string;
 
   /**
