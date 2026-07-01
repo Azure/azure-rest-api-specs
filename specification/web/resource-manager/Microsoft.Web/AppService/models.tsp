@@ -16744,6 +16744,7 @@ model ServerFarmSiloProperties {
 /**
  * Managed traffic configuration resource specific properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedTrafficConfig is a synchronous singleton configuration resource updated via a non-LRO PUT; the service does not surface a provisioning state for it."
 @added(Versions.v2026_06_01)
 model ManagedTrafficConfigProperties {
   /**
@@ -16756,17 +16757,12 @@ model ManagedTrafficConfigProperties {
    */
   @identifiers(#["region"])
   endpoints?: EndpointTrafficConfig[];
-
-  /**
-   * Provisioning state of the managed traffic configuration.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: SiloProvisioningState;
 }
 
 /**
  * Last known good resource specific properties.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "LastKnownGood is a read-only marker resource read synchronously; the service does not surface a provisioning state for it."
 @added(Versions.v2026_06_01)
 model LastKnownGoodProperties {
   /**
@@ -16780,12 +16776,6 @@ model LastKnownGoodProperties {
    */
   @visibility(Lifecycle.Read)
   createdTime?: utcDateTime;
-
-  /**
-   * Provisioning state of the last known good resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: SiloProvisioningState;
 }
 
 /**
