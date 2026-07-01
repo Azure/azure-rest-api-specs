@@ -213,13 +213,14 @@ human confirmation.** The comment format and reconciliation marker from
 
 Determine the PR to review from the GitHub Actions context:
 
-| Event | PR number source |
-|---|---|
+| Event                 | PR number source                   |
+| --------------------- | ---------------------------------- |
 | `pull_request_target` | `github.event.pull_request.number` |
-| `issue_comment` | `github.event.issue.number` |
-| `workflow_dispatch` | `github.event.inputs.pr_number` |
+| `issue_comment`       | `github.event.issue.number`        |
+| `workflow_dispatch`   | `github.event.inputs.pr_number`    |
 
 The `preconditions` step in the workflow has already verified that:
+
 - The PR contains `specification/` file changes.
 - The PR does not have the `skip-arm-review` label.
 - Draft PRs are reviewed only when the trigger was explicit (`/arm-review`,
@@ -291,6 +292,7 @@ instruction file(s):
 - **TypeSpec** → TypeSpec Review Checklist Summary
 
 Run **three** review passes:
+
 1. **Structural pass** — resource hierarchy, path patterns, operation shapes.
 2. **Semantic pass** — property types, constraints, descriptions, examples.
 3. **Security pass** — authentication, secrets, authorization, x-ms-secret.
@@ -311,13 +313,13 @@ Classify every finding as `[NEW]` (introduced in this PR) or `[EXISTING]`
 Call `get_review_comments` to fetch all existing review comments. For each
 finding you are about to post, check against existing comments:
 
-| Scenario | Action |
-|---|---|
-| Same finding, same location (`posted-by: arm-api-reviewer-agent` marker) | Skip — already reported |
-| Same finding, line shifted, agent-posted | Resolve old comment, post new one at correct line |
-| Same finding, line shifted, human-posted | Reply to thread noting line shift — do NOT resolve |
-| Violation already fixed | Reply noting the fix |
-| No prior comment | Post the new finding |
+| Scenario                                                                 | Action                                             |
+| ------------------------------------------------------------------------ | -------------------------------------------------- |
+| Same finding, same location (`posted-by: arm-api-reviewer-agent` marker) | Skip — already reported                            |
+| Same finding, line shifted, agent-posted                                 | Resolve old comment, post new one at correct line  |
+| Same finding, line shifted, human-posted                                 | Reply to thread noting line shift — do NOT resolve |
+| Violation already fixed                                                  | Reply noting the fix                               |
+| No prior comment                                                         | Post the new finding                               |
 
 ### Step 6: Post Findings
 
@@ -325,6 +327,7 @@ Post each finding as a `create-pull-request-review-comment` (inline) or
 `add-comment` (PR-level for summary). Then call `submit-pull-request-review`.
 
 **Hard limits:**
+
 - Security issues: no cap (always post)
 - Breaking changes: no cap (always post)
 - ARM contract violations: cap at 15
@@ -349,6 +352,7 @@ Description of the violation.
 ```
 
 **Severity guidance:**
+
 - `🔴 Blocking` — MUST fix; only for violations the rule file marks as MUST and
   whose violation is unambiguous (security, breaking changes, incorrect response
   codes, missing required operations).
@@ -399,6 +403,7 @@ compliant.
 `specification/**/readme.md`.
 
 **Skip (call `noop`):**
+
 - PRs with `skip-arm-review` label (already handled by preconditions).
 - PRs with no `specification/` changes (already handled by preconditions).
 - Draft PRs triggered by auto events (already handled by preconditions).
