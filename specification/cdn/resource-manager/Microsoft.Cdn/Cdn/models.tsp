@@ -2700,7 +2700,6 @@ model AFDDomainUpdatePropertiesParameters {
  * The JSON object that contains the properties to secure a domain.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AFDDomainHttpsParameters {
   /**
    * Defines the source of the SSL certificate.

@@ -116,10 +116,14 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 
   @doc("Updates a private endpoint connection.")
-  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<PrivateEndpointConnectionResource>;
+  update is HorizonDbPrivateEndpointOperations.CustomPatchAsync<
+    HorizonDbCluster,
+    PrivateEndpointConnectionResource
+  >;
 
   @doc("Deletes a private endpoint connection.")
   delete is HorizonDbPrivateEndpointOperations.DeleteAsync<
+    HorizonDbCluster,
     PrivateEndpointConnectionResource,
     Response =
       | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
