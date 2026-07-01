@@ -52,7 +52,6 @@ input-file:
   - stable/2016-03-01/logProfiles.json
   - stable/2024-02-01/metrics.json
   - stable/2026-01-01/activityLogAlerts_API.json
-  - preview/2024-03-01-preview/metricAlert.json
   - stable/2026-01-01/metricAlert.json
   - stable/2026-03-01/scheduledQueryRule_API.json
   - stable/2019-03-01/metricBaselines.json
