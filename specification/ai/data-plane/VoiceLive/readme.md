@@ -14,7 +14,16 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2026-06-01-preview
+tag: package-2026-07-15
+```
+
+### Tag: package-2026-07-15
+
+These settings apply only when `--tag=package-2026-07-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-15'
+input-file:
+  - stable/2026-07-15/VoiceLive.json
 ```
 
 ### Tag: package-2026-06-01-preview
