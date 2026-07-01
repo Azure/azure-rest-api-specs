@@ -66,6 +66,7 @@ using Microsoft.Network;
   FrontDoors.createOrUpdate::parameters.resource,
   "frontDoorParameters"
 );
+@@clientName(FrontDoor, "FrontDoorResource", "csharp");
 @@clientName(
   FrontDoors.validateCustomDomain::parameters.body,
   "customDomainProperties"
@@ -88,6 +89,7 @@ using Microsoft.Network;
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FrontendEndpoint.properties);
+@@clientName(FrontendEndpoint, "FrontendEndpointData", "csharp");
 
 @@clientLocation(Profiles.get, "NetworkExperimentProfiles");
 @@clientLocation(Profiles.createOrUpdate, "NetworkExperimentProfiles");
