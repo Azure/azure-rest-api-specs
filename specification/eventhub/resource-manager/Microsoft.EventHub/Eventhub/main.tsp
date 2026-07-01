@@ -25,6 +25,7 @@ import "./ConsumerGroup.tsp";
 import "./SchemaGroup.tsp";
 import "./ApplicationGroup.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

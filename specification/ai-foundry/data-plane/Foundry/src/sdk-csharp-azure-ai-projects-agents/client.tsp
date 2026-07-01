@@ -19,7 +19,7 @@ namespace Azure.AI.Projects {
   @@access(CreateAgentVersionRequest, Access.public);
 
   @@access(OpenAI.Metadata, Access.internal);
-  @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
+  @@clientName(OpenAI.Metadata, "InternalMetadataContainer", "!autorest");
 
   @@usage(ApiError, Usage.output);
   @@access(ApiError, Access.public);
@@ -49,50 +49,72 @@ namespace Azure.AI.Projects {
   @@access(AgentSessionResource, Access.public);
   
   @@clientName(JobStatus, "AgentsJobStatus");
+  @@clientName(AgentObject, "AgentRecord", "!autorest");
+  @@clientName(AgentVersionObject, "AgentVersion", "!autorest");
 
   @@clientName(
     BingGroundingSearchToolParameters,
-    "BingGroundingSearchToolOptions"
+    "BingGroundingSearchToolOptions",
+    "!autorest"
   );
   @@clientName(
     ContainerAppAgentDefinition,
-    "ContainerApplicationAgentDefinition"
+    "ContainerApplicationAgentDefinition",
+    "!autorest"
   );
-  //  @@clientName(CreatedBy, "AgentResponseItemSource");
-  @@clientName(FabricDataAgentToolParameters, "FabricDataAgentToolOptions");
+  //  @@clientName(CreatedBy, "AgentResponseItemSource", "!autorest");
+  @@clientName(
+    FabricDataAgentToolParameters,
+    "FabricDataAgentToolOptions",
+    "!autorest"
+  );
 
-  @@clientName(MemorySearchOptions, "MemorySearchToolOptions");
+  @@clientName(MemorySearchOptions, "MemorySearchToolOptions", "!autorest");
 
-  @@clientName(OpenApiTool, "OpenAPITool");
+  @@clientName(OpenApiTool, "OpenAPITool", "!autorest");
   @@clientName(OpenApiTool.openapi, "FunctionDefinition", "csharp");
   @@clientName(
     OpenApiAnonymousAuthDetails,
-    "OpenAPIAnonymousAuthenticationDetails"
+    "OpenAPIAnonymousAuthenticationDetails",
+    "!autorest"
   );
-  @@clientName(OpenApiAuthDetails, "OpenApiAuthenticationDetails");
+  @@clientName(OpenApiAuthDetails, "OpenApiAuthenticationDetails", "!autorest");
   @@clientName(
     OpenApiManagedAuthDetails,
-    "OpenAPIManagedAuthenticationDetails"
+    "OpenAPIManagedAuthenticationDetails",
+    "!autorest"
   );
   @@clientName(
     OpenApiProjectConnectionAuthDetails,
-    "OpenApiProjectConnectionAuthenticationDetails"
+    "OpenApiProjectConnectionAuthenticationDetails",
+    "!autorest"
   );
   @@clientName(
     OpenApiProjectConnectionSecurityScheme,
-    "OpenApiProjectConnectionSecurityScheme"
+    "OpenApiProjectConnectionSecurityScheme",
+    "!autorest"
   );
-  @@clientName(OpenApiManagedSecurityScheme, "OpenAPIManagedSecurityScheme");
+  @@clientName(
+    OpenApiManagedSecurityScheme,
+    "OpenAPIManagedSecurityScheme",
+    "!autorest"
+  );
 
   @@clientName(
     OpenApiFunctionDefinition.auth,
     "AuthenticationDetails",
     "csharp"
   );
-  @@clientName(RaiConfig, "ContentFilterConfiguration");
+  @@clientName(RaiConfig, "ContentFilterConfiguration", "!autorest");
   @@clientName(
     SharepointGroundingToolParameters,
-    "SharePointGroundingToolOptions"
+    "SharePointGroundingToolOptions",
+    "!autorest"
+  );
+  @@clientName(
+    ToolArgumentBinding,
+    "StructuredInputToolArgumentBinding",
+    "!autorest"
   );
   @@clientName(ToolArgumentBinding, "StructuredInputToolArgumentBinding");
   @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
@@ -103,66 +125,103 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
 
   @@access(OpenAI.LocalShellToolParam, Access.internal);
-  @@clientName(OpenAI.LocalShellToolParam, "InternalLocalShellTool");
+  @@clientName(
+    OpenAI.LocalShellToolParam,
+    "InternalLocalShellTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.ApplyPatchToolParam, Access.internal);
-  @@clientName(OpenAI.ApplyPatchToolParam, "InternalApplyPatchToolParam");
+  @@clientName(
+    OpenAI.ApplyPatchToolParam,
+    "InternalApplyPatchToolParam",
+    "!autorest"
+  );
 
   @@access(OpenAI.CustomToolParam, Access.internal);
-  @@clientName(OpenAI.CustomToolParam, "InternalCustomToolParam");
+  @@clientName(OpenAI.CustomToolParam, "InternalCustomToolParam", "!autorest");
 
   @@access(OpenAI.FunctionShellToolParam, Access.internal);
-  @@clientName(OpenAI.FunctionShellToolParam, "InternalFunctionShellToolParam");
+  @@clientName(
+    OpenAI.FunctionShellToolParam,
+    "InternalFunctionShellToolParam",
+    "!autorest"
+  );
 
   @@access(OpenAI.AutoCodeInterpreterToolParam, Access.internal);
   @@clientName(
     OpenAI.AutoCodeInterpreterToolParam,
-    "InternalAutoCodeInterpreterToolParam"
+    "InternalAutoCodeInterpreterToolParam",
+    "!autorest"
   );
 
   @@access(OpenAI.MCPToolFilter, Access.internal);
-  @@clientName(OpenAI.MCPToolFilter, "InternalMCPToolFilter");
+  @@clientName(OpenAI.MCPToolFilter, "InternalMCPToolFilter", "!autorest");
 
   @@access(OpenAI.MCPToolRequireApproval, Access.internal);
-  @@clientName(OpenAI.MCPToolRequireApproval, "InternalMCPToolRequireApproval");
+  @@clientName(
+    OpenAI.MCPToolRequireApproval,
+    "InternalMCPToolRequireApproval",
+    "!autorest"
+  );
 
   @@access(OpenAI.WebSearchActionFind, Access.internal);
-  @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
+  @@clientName(
+    OpenAI.WebSearchActionFind,
+    "InternalWebSearchActionFind",
+    "!autorest"
+  );
 
   @@access(OpenAI.CodeInterpreterTool, Access.internal);
-  @@clientName(OpenAI.CodeInterpreterTool, "InternalCodeInterpreterTool");
+  @@clientName(
+    OpenAI.CodeInterpreterTool,
+    "InternalCodeInterpreterTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.ComparisonFilter, Access.internal);
-  @@clientName(OpenAI.ComparisonFilter, "InternalComparisonFilter");
+  @@clientName(
+    OpenAI.ComparisonFilter,
+    "InternalComparisonFilter",
+    "!autorest"
+  );
 
   @@access(OpenAI.CompoundFilter, Access.internal);
-  @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter");
+  @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter", "!autorest");
 
   @@access(OpenAI.ComputerUsePreviewTool, Access.internal);
-  @@clientName(OpenAI.ComputerUsePreviewTool, "InternalComputerUsePreviewTool");
+  @@clientName(
+    OpenAI.ComputerUsePreviewTool,
+    "InternalComputerUsePreviewTool",
+    "!autorest"
+  );
   @@access(OpenAI.FileSearchTool, Access.internal);
-  @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool");
+  @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool", "!autorest");
 
   @@access(OpenAI.FunctionTool, Access.internal);
-  @@clientName(OpenAI.FunctionTool, "InternalFunctionTool");
+  @@clientName(OpenAI.FunctionTool, "InternalFunctionTool", "!autorest");
 
   @@access(OpenAI.ImageGenTool, Access.internal);
-  @@clientName(OpenAI.ImageGenTool, "InternalImageGenTool");
+  @@clientName(OpenAI.ImageGenTool, "InternalImageGenTool", "!autorest");
 
   @@access(OpenAI.MCPTool, Access.internal);
-  @@clientName(OpenAI.MCPTool, "InternalMCPTool");
+  @@clientName(OpenAI.MCPTool, "InternalMCPTool", "!autorest");
 
   @@access(AgentObjectType, Access.internal);
-  @@clientName(AgentObjectType, "InternalAgentObjectType");
+  @@clientName(AgentObjectType, "InternalAgentObjectType", "!autorest");
 
   @@access(OpenAI.ToolChoiceParam, Access.internal);
-  @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam");
+  @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam", "!autorest");
 
   @@access(OpenAI.WebSearchPreviewTool, Access.internal);
-  @@clientName(OpenAI.WebSearchPreviewTool, "InternalWebSearchPreviewTool");
+  @@clientName(
+    OpenAI.WebSearchPreviewTool,
+    "InternalWebSearchPreviewTool",
+    "!autorest"
+  );
 
   @@access(OpenAI.WebSearchTool, Access.internal);
-  @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool");
+  @@clientName(OpenAI.WebSearchTool, "InternalWebSearchTool", "!autorest");
 
   @@clientName(HostedAgentDefinition.protocol_versions, "versions", "csharp");
 
@@ -231,14 +290,19 @@ namespace Azure.AI.Projects {
 
   @@usage(PromptAgentDefinition, Usage.input | Usage.output);
   @@access(PromptAgentDefinition, Access.public);
-  @@clientName(PromptAgentDefinition, "DeclarativeAgentDefinition");
+  @@clientName(
+    PromptAgentDefinition,
+    "DeclarativeAgentDefinition",
+    "!autorest"
+  );
 
   @@usage(AgentObject, Usage.output);
   @@access(AgentObject, Access.public);
-  @@clientName(AgentObject, "AgentRecord");
+  @@clientName(AgentObject, "AgentRecord", "!autorest");
 
   @@usage(AgentVersionObject, Usage.output);
   @@access(AgentVersionObject, Access.public);
+<<<<<<< HEAD:specification/ai-foundry/data-plane/Foundry/src/sdk-csharp-azure-ai-projects-agents/client.tsp
   @@clientName(AgentVersionObject, "ProjectsAgentVersion");
 
   @@usage(PatchAgentRequest, Usage.input | Usage.output);

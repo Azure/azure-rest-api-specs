@@ -38,8 +38,17 @@ options:
     generate-tests: false
     generate-samples: false
     include-api-view-properties: false
-  # Uncomment this line and add "@azure-tools/typespec-csharp" to your package.json to generate C# code
-  # "@azure-tools/typespec-csharp": true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Security.KeyVault.Certificates"
+    "output-path": "./src/Generated"
+    flavor: azure
+    use-model-reader-writer: false
+    clear-output-folder: true
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Security.KeyVault.Certificates
+    model-namespace: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/keyvault-certificates"
     experimental-extensible-enums: true
