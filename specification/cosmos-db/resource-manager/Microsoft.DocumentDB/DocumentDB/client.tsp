@@ -1113,6 +1113,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(SeedNode, "CassandraDataCenterSeedNode", "csharp");
 @@clientName(SeedNode.ipAddress, "IPAddress", "csharp");
 @@clientName(ServiceResource, "CosmosDBService", "csharp");
+@@clientName(ServiceResource.properties, "CreateOrUpdateProperties", "csharp");
 @@clientName(
   ServiceResourceCreateUpdateParameters,
   "CosmosDBServiceCreateOrUpdateContent",
