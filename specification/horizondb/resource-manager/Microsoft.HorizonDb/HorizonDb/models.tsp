@@ -194,7 +194,7 @@ model HorizonDbClusterAuthConfig {
 @doc("The compute model for a HorizonDB cluster.")
 model HorizonDbComputeModel {
   @doc("The compute model type. Supported values: 'Provisioned', 'Serverless'.")
-  type: HorizonDbComputeModelType;
+  type?: HorizonDbComputeModelType;
 
   @doc("The fixed vCore count for Provisioned compute.")
   vCores?: int32;
