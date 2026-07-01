@@ -26,11 +26,8 @@ These are the global settings for the BlobStorage API.
 
 ```yaml
 openapi-type: data-plane
-<<<<<<< HEAD
-tag: package-2026-10-tsp
-=======
 tag: package-2026-12-tsp
->>>>>>> feature/storage/stg104base-tsp
+
 use-internal-constructors: true
 add-credentials: true
 ```
