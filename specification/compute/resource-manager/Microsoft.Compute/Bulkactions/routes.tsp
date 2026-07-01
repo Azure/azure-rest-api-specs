@@ -263,6 +263,10 @@ interface VirtualMachineBulkOperations {
     ...ProviderNamespace<Extension.ResourceGroup>,
     ...LocationParameter,
 
+    @query("lookbackInMinutes")
+    @doc("The number of minutes to look back for errors.")
+    lookbackInMinutes?: int32,
+
     @query("continuationToken")
     @doc("A continuation token to retrieve the next page of results.")
     continuationToken?: string,
