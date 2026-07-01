@@ -25,6 +25,7 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @parentResource(Workspace)
 model InferencePool is Azure.ResourceManager.TrackedResource<
   InferencePoolProperties,
@@ -57,6 +58,7 @@ model InferencePool is Azure.ResourceManager.TrackedResource<
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @armResourceOperations
 interface InferencePools {
   /**
