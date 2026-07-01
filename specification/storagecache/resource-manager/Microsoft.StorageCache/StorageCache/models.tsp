@@ -2548,7 +2548,7 @@ model RebalanceJobPropertiesStatus {
   filesMovedPerSecond?: float64;
 
   /**
-   * Average throughput in MiB/s (1024x1024 bytes per second) over the most recent reporting interval.
+   * Average throughput in mebibytes per second (1024x1024 bytes per second) over the most recent reporting interval.
    */
   @visibility(Lifecycle.Read)
   throughputMbps?: float64;
