@@ -137,6 +137,12 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
     where: $.definitions.ResourceProvisionVdiPayload.properties.resourceOverrides.items
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: >
+      ListBulkOperationErrorsResponse is not an ARM resource model; it is a paginated
+      list response envelope containing value, a list of resourceOperation, and nextLink properties.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse
 ```
 ### Tag: package-2026-04-06-preview
 
