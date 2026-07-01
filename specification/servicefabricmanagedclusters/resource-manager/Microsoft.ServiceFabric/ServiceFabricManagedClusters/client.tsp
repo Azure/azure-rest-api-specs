@@ -33,7 +33,6 @@ namespace Azure.ResourceManager.Models {
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VMSSExtension.properties);
 
 @@clientName(
@@ -42,7 +41,6 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(ApplicationTypes.update::parameters.properties, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicationTypeResource.properties
 );
@@ -56,7 +54,6 @@ namespace Azure.ResourceManager.Models {
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicationTypeVersionResource.properties
 );
@@ -71,7 +68,6 @@ namespace Azure.ResourceManager.Models {
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicationResource.properties
 );
@@ -92,11 +88,9 @@ namespace Azure.ResourceManager.Models {
   "parameters"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ManagedCluster.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ManagedClusterCodeVersionResult.properties
 );
@@ -113,7 +107,6 @@ namespace Azure.ResourceManager.Models {
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.stopFaultSimulation::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(NodeType.properties);
 
 @@Azure.ResourceManager.identifiers(
@@ -223,7 +216,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ApplicationResource,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -236,7 +228,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ApplicationTypeResource,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -248,7 +239,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ApplicationTypeVersionResource,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -265,7 +255,6 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ManagedClusterCodeVersionResult,
   Azure.ResourceManager.Foundations.ProxyResource,
@@ -418,7 +407,6 @@ namespace Azure.ResourceManager.Models {
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ServiceResource,
   Azure.ResourceManager.Foundations.TrackedResource,
@@ -489,7 +477,6 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(ServicePlacementPolicy, "ManagedServicePlacementPolicy", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   ManagedVMSize,
   Azure.ResourceManager.Foundations.ProxyResource,

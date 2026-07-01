@@ -19,6 +19,7 @@ using Azure.ResourceManager;
 
 // CSharp: AZC0030 — *Request -> *Content
 @@clientName(DrillRunFailoverRequest, "DrillRunFailoverContent", "csharp");
+@@clientName(DrillRunReprotectRequest, "DrillRunReprotectContent", "csharp");
 @@clientName(DrillEndRequest, "DrillEndContent", "csharp");
 @@clientName(FailoverRequest, "ResilienceManagementFailoverContent", "csharp");
 @@clientName(
