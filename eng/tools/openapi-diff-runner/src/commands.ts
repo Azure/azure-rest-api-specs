@@ -227,10 +227,7 @@ export async function validateBreakingChange(context: Context): Promise<number> 
           `process.exitCode: ${process.exitCode}.`,
       );
     }
-    if (oadViolationsCnt > 0 || errorCnt > 0) {
-      // set statusCode to 1 if there are any OAD violations(errors) or runtime errors occurred.
-      statusCode = 1;
-    }
+    statusCode = Number(process.exitCode ?? 0);
 
     await logFullOadMessagesList(msgs);
     await generateBreakingChangeResultSummary(
