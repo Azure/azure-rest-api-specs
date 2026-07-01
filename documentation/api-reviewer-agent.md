@@ -36,14 +36,18 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 
 ### When reviews run automatically
 
-| Trigger | Condition |
-| ------- | --------- |
-| PR opened | PR is not a draft; touches `specification/**` files; does not have `skip-arm-review` label |
-| PR marked ready for review | Same conditions as opened |
-| PR synchronized (new push) | Same conditions; prior in-progress run is cancelled automatically (debounce) |
-| `arm-review-requested` label added | Runs even on draft PRs; ignores `skip-arm-review` |
-| `/arm-review` comment | Posted by the PR author or a repository collaborator; runs even on draft PRs |
-| `workflow_dispatch` | Repository maintainer triggers manually with a PR number |
+| Trigger                            | Condition                                                                                  |
+| ---------------------------------- | ------------------------------------------------------------------------------------------ |
+| PR opened                          | PR is not a draft; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)     |
+| `arm-review-requested` label added | Runs even on draft PRs; ignores `skip-arm-review`                                          |
+| `/arm-review` comment              | Posted by the PR author or a repository collaborator; runs even on draft PRs               |
+| `workflow_dispatch`                | Repository maintainer triggers manually with a PR number                                   |
+
+> **Draft PRs converted to ready:** The `ready_for_review` event is not
+> supported by the workflow engine. If you open a PR as a draft and later mark
+> it ready for review without pushing a new commit, use `/arm-review` or add
+> the `arm-review-requested` label to trigger a review.
 
 ### On-demand review with `/arm-review`
 
@@ -60,12 +64,12 @@ is silently ignored.
 
 ### Labels
 
-| Label | Effect |
-| ----- | ------ |
-| `arm-review-requested` | Explicitly requests a review run (works on drafts) |
-| `skip-arm-review` | Opts out of automated ARM API review for this PR |
-| `ARMChangesRequested` | Added by the workflow when blocking findings are found |
-| `WaitForARMFeedback` | Removed by the workflow when blocking findings are found |
+| Label                  | Effect                                                   |
+| ---------------------- | -------------------------------------------------------- |
+| `arm-review-requested` | Explicitly requests a review run (works on drafts)       |
+| `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
+| `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
+| `WaitForARMFeedback`   | Removed by the workflow when blocking findings are found |
 
 ### Opting out
 
@@ -518,7 +522,9 @@ cd .github/skills/evals/arm-api-reviewer
 ```
 
 The script automatically clones and builds the
+
 <!-- cspell:words vally -->
+
 [vally](https://github.com/microsoft/vally) framework, runs all
 tests, and prints a pass/fail summary. Pass `-VallyRepo` to point to an
 existing clone, `-Suite` to run a single category, or `-SkipBuild` to skip
