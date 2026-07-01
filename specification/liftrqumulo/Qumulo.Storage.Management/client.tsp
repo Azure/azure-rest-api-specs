@@ -53,7 +53,7 @@ namespace LiftrBase;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "for backward compatibility purpose"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   LiftrBase.Storage.FileSystemResource.properties,
-  "csharp"
+  "csharp,java"
 );
 
 /**
@@ -101,3 +101,5 @@ enum OldMarketplaceSubscriptionStatus {
   Suspended,
   Unsubscribed,
 }
+
+@@clientName(Qumulo.Storage.Versions.v2_stable, "V20240619", "javascript");
