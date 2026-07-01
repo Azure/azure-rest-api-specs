@@ -308,6 +308,11 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(LoginServerProperties, "ConnectedRegistryLoginServer", "csharp");
 @@clientName(MetadataSearch, "ContainerRegistryMetadataSearch", "csharp");
 @@clientName(
+  WritableCacheRepos,
+  "ContainerRegistryWritableCacheRepos",
+  "csharp"
+);
+@@clientName(
   Microsoft.ContainerRegistry.ContainerRegistryResourceTypeExtensible,
   "ContainerRegistryResourceType",
   "csharp"

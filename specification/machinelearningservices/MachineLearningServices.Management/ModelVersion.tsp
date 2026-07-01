@@ -54,7 +54,9 @@ interface ModelVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryModelVersion"
     > {}
 
 @armResourceOperations
@@ -199,7 +201,9 @@ interface ModelVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningModelVersion"
     > {}
 
 @armResourceOperations

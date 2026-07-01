@@ -130,6 +130,17 @@ See the canonical contract in [`.github/skills/azure-api-review/references/revie
   set, and prevention of leading special characters.
   Example: `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`
   (Also enforced by: `@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern`)
+- `@pattern` decorator values and `NamePattern` constraints **MUST**
+  use allowlist (positive character class) syntax. Denylist (negated
+  character class `[^...]`) syntax **MUST NOT** be used as the primary
+  character-matching construct (`OAPI-PATTERN-ALLOWLIST`). A negative
+  lookahead (`(?!...)`) used alongside a positive class is acceptable
+  (e.g., `@pattern("^(?![.-])[A-Za-z0-9_.-]{1,128}$")`). Severity:
+  **Blocking** for new properties/parameters; **Warning** for existing
+  ones carried forward from a prior API version. See
+  [`.github/skills/azure-api-review/references/pattern-validation.md`](../skills/azure-api-review/references/pattern-validation.md)
+  for detection guidance, severity matrix, fix examples, and
+  regression-risk notes.
 - Properties representing UTC timestamps **SHOULD** include a `Utc`
   suffix in the name (e.g., `lastModifiedTimeUtc`).
 - Properties named `<something>Id` **MUST** be specific about what kind
@@ -682,3 +693,4 @@ When reviewing TypeSpec files, verify:
 - ✅ No bearer/OAuth tokens passed in ARM request bodies -- use managed identity or Key Vault
 - ✅ Generated OpenAPI files match `tsp compile .` output
 - ✅ Example files present for all operations, with realistic descriptive values (EX-DESCRIPTIVE-VALUES)
+- ✅ All `@pattern` and `NamePattern` constraints use allowlist (positive character class) syntax — no denylist (`[^...]`) as the primary construct (`OAPI-PATTERN-ALLOWLIST`): Blocking for new properties/parameters, Warning for existing ones

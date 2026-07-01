@@ -1,38 +1,28 @@
 <!-- Source of truth for the Critic-invocation input block. Both the
      Reviewer (Step 7) and the Critic (Operating mode) link here.
-     Schema definitions live in `arm-api-review-critic.protocol.md`; this file
-     is the **literal template** the Reviewer copies into every dispatch
-     prompt and every session-handoff paste. -->
+     Schema definitions and the non-empty response invariant live in
+     `arm-api-review-critic.protocol.md`; this file is the **reference
+     template** the Reviewer uses when constructing dispatch prompts. -->
 
-# Critic input-block template
+# Critic input block template
 
-The Reviewer MUST embed exactly one fenced YAML block with this schema
-in the prompt body it sends to the Critic dispatch (or pastes into the
-session-handoff prompt). The Critic MUST refuse to validate any
-invocation whose prompt does not contain exactly one such block. Field
-semantics, the empty-list rule, and the sentinel-string contract are
-defined in [`arm-api-review-critic.protocol.md` → Inputs the Reviewer passes
-to the Critic](./arm-api-review-critic.protocol.md#inputs-the-reviewer-passes-to-the-critic).
+The Reviewer includes a labeled input block in every Critic dispatch
+prompt. The Critic uses **tolerant prose parsing**: it reads the labeled
+fields in any order, and applies the documented default for any optional
+field that is absent or unclear. Only PR URL, Session SHA, and the
+Step 6 findings report are required.
 
-## Template (copy verbatim; substitute placeholders)
+## Template (copy and fill in; fields in any order are accepted)
 
-````markdown
-```yaml
-# critic-inputs/v1
-pr_url: https://github.com/<owner>/<repo>/pull/<number>
-session_sha: <full-40-char-sha> # Input #2
-files_reviewed: # Input #4
-  - path/to/file-a.json
-  - path/to/file-b.tsp
-previous_version: # Input #5; null when new service
-  base_sha_or_ref: <sha-or-ref>
-  path: specification/<service>/.../stable/<prev-version>
-prior_fail_sets: # Input #7; [] on iteration 1
-  iteration_n_minus_1: []
-  iteration_n_minus_2: []
-considered_and_declined: [] # Input #8; [] on iteration 1
-graphs_produced: true # Input #9; true | false | downgraded | degraded
-iteration: 1 # Input #10; 1..3
+```text
+PR: https://github.com/<owner>/<repo>/pull/<number>
+Session SHA: <full-40-char-sha>
+Iteration: 1
+Graphs: true
+Files reviewed: path/to/file-a.json, path/to/file-b.tsp
+Previous version: specification/<service>/.../stable/<prev-version> at <sha-or-ref>
+Prior fail sets: none
+Considered and declined: none
 ```
 
 ## Step 6 findings report
@@ -42,26 +32,46 @@ iteration: 1 # Input #10; 1..3
 ## Step 5.5 reconciliation plan
 
 <verbatim Step 5.5 plan from the Reviewer, or the literal string `reconciliation skipped`>
-````
 
-## Required invariants
+## Field reference
 
-- The `# critic-inputs/v1` header comment is part of the contract;
-  removing it FAILs Critic input validation.
-- Inputs #7 and #8 MUST be explicit empty containers (`[]` or `none`)
-  on iteration 1, not omitted.
-- Input #6 is either a real plan under the `## Step 5.5 reconciliation
-plan` heading or the literal sentinel `reconciliation skipped` --
-  never an empty plan or omitted heading.
-- `session_sha` is the full 40-char commit SHA; short SHAs are a
-  validation failure.
-- `iteration` is `1`, `2`, or `3` -- the iteration cap (see
-  [protocol → Iteration discipline](./arm-api-review-critic.protocol.md#critic-verdict-tracks)).
+| Field                        | Required? | Default when absent      | Notes                                                                           |
+| ---------------------------- | --------- | ------------------------ | ------------------------------------------------------------------------------- |
+| PR                           | **Yes**   | —                        | Full GitHub URL or `owner/repo#number`.                                         |
+| Session SHA                  | **Yes**   | —                        | Full 40-char commit SHA pinned at Reviewer Step 1.                              |
+| Iteration                    | No        | `1`                      | `1` through `3`.                                                                |
+| Graphs                       | No        | `false`                  | `true` = Mermaid graphs in report; full graph-diff. `false` = graph N/A.        |
+| Files reviewed               | No        | Derived from findings    | Comma-separated or line-separated workspace-relative paths.                     |
+| Previous version             | No        | `None - new service`     | Path and SHA/ref used for [NEW]/[EXISTING] classification.                      |
+| Prior fail sets              | No        | Empty (none)             | Rule-ID + file/line tuples from prior iterations; `none` on iteration 1.        |
+| Considered and declined      | No        | Empty (none)             | Candidates the Reviewer chose not to promote, with one-line rationales.         |
+| Step 6 findings report       | **Yes**   | —                        | Verbatim, under the `## Step 6 findings report` heading.                        |
+| Step 5.5 reconciliation plan | No        | `reconciliation skipped` | Verbatim, under the `## Step 5.5 reconciliation plan` heading, or the sentinel. |
 
-## When something cannot be assembled
+## Compact-mode template (iterations 2 and 3)
 
-If a required field cannot be filled in (e.g., session SHA never pinned
-because Step 1 failed), do **not** dispatch the Critic. Surface the gap
-to the human per Reviewer Step 7's fallback ladder; the Critic will
-return `Finding accuracy = FAIL` reason `missing-inputs` against any
-incomplete block.
+For iterations 2 and 3, the Reviewer MAY send a compact payload. Include
+only the changed findings under `## Step 6 findings report` and a brief
+carry-over summary under `## Carry-over verdicts`. Re-pin the session SHA
+and run the file-drift check before sending.
+
+```text
+PR: https://github.com/<owner>/<repo>/pull/<number>
+Session SHA: <full-40-char-sha>   (re-verified before this dispatch)
+Iteration: 2
+Graphs: true
+Prior fail sets: <rule-ID + file/line tuples from iteration 1>
+Considered and declined: <candidates declined in iteration 1 with rationales>
+```
+
+## Step 6 findings report
+
+<only the changed/added findings since iteration 1>
+
+## Carry-over verdicts
+
+<brief list: finding label — prior verdict — carry-over-stale: no/yes>
+
+## Step 5.5 reconciliation plan
+
+<verbatim plan, or `reconciliation skipped`>

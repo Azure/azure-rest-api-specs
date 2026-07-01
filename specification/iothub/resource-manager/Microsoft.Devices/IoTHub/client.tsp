@@ -5,6 +5,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
 using Azure.ResourceManager;
+using Azure.Core;
 using Http;
 
 @@clientName(Microsoft.Devices, "IotHubClient", "javascript,java,python");
@@ -37,6 +38,12 @@ using Http;
   "java"
 );
 
+@@scope(GroupIdInformations.get, "!csharp");
+@@scope(GroupIdInformations.list, "!csharp");
+@@usage(GroupIdInformation, Usage.output, "csharp");
+@@usage(GroupIdInformationProperties, Usage.output, "csharp");
+@@usage(PrivateLinkResources, Usage.output, "csharp");
+
 // Keep legacy Go struct field names with "Iso8601" casing.
 @@clientName(
   StorageEndpointProperties.sasTtlAsIso8601,
@@ -60,6 +67,275 @@ using Http;
   "go"
 );
 @@clientName(MessagingEndpointProperties.ttlAsIso8601, "TTLAsIso8601", "go");
+
+// C# migration customizations for Azure.ResourceManager.IotHub backward compatibility.
+@@clientName(CertificateDescription, "IotHubCertificateDescription", "csharp");
+@@clientName(CertificateProperties, "IotHubCertificateProperties", "csharp");
+@@clientName(CertificateProperties.expiry, "ExpireOn", "csharp");
+@@clientName(CertificateProperties.created, "CreatedOn", "csharp");
+@@clientName(CertificateProperties.updated, "UpdatedOn", "csharp");
+@@clientName(CertificateProperties.thumbprint, "ThumbprintString", "csharp");
+@@clientName(
+  CertificatePropertiesWithNonce,
+  "IotHubCertificatePropertiesWithNonce",
+  "csharp"
+);
+@@clientName(CertificatePropertiesWithNonce.expiry, "ExpireOn", "csharp");
+@@clientName(CertificatePropertiesWithNonce.created, "CreatedOn", "csharp");
+@@clientName(CertificatePropertiesWithNonce.updated, "UpdatedOn", "csharp");
+@@clientName(
+  CertificatePropertiesWithNonce.thumbprint,
+  "ThumbprintString",
+  "csharp"
+);
+@@alternateType(CertificateDescription.etag, eTag, "csharp");
+@@clientName(
+  CertificateWithNonceDescription,
+  "IotHubCertificateWithNonceDescription",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy hierarchy shaping for backward-compatible generated SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CertificateWithNonceDescription,
+  Azure.ResourceManager.Foundations.Resource,
+  "csharp"
+);
+@@clientName(
+  CertificateVerificationDescription,
+  "IotHubCertificateVerificationContent",
+  "csharp"
+);
+@@clientName(
+  RootCertificateProperties,
+  "IotHubRootCertificateProperties",
+  "csharp"
+);
+@@clientName(PublicNetworkAccess, "IotHubPublicNetworkAccess", "csharp");
+@@clientName(AuthenticationType, "IotHubAuthenticationType", "csharp");
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
+  "IotHubPrivateLinkServiceConnectionStatus",
+  "csharp"
+);
+@@clientName(IpFilterRule, "IotHubIPFilterRule", "csharp");
+@@clientName(IpFilterRule.ipMask, "IPMask", "csharp");
+@@clientName(IpFilterActionType, "IotHubIPFilterActionType", "csharp");
+@@clientName(
+  NetworkRuleSetProperties,
+  "IotHubNetworkRuleSetProperties",
+  "csharp"
+);
+@@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
+@@clientName(DefaultAction, "IotHubNetworkRuleSetDefaultAction", "csharp");
+@@clientName(NetworkRuleSetIpRule, "IotHubNetworkRuleSetIPRule", "csharp");
+@@clientName(NetworkRuleSetIpRule.ipMask, "IPMask", "csharp");
+@@clientName(NetworkRuleIPAction, "IotHubNetworkRuleIPAction", "csharp");
+@@clientName(
+  EventHubProperties,
+  "EventHubCompatibleEndpointProperties",
+  "csharp"
+);
+@@clientName(EventHubProperties.path, "EventHubCompatibleName", "csharp");
+@@clientName(RoutingProperties, "IotHubRoutingProperties", "csharp");
+@@clientName(RoutingSource, "IotHubRoutingSource", "csharp");
+@@clientName(RoutingStorageContainerPropertiesEncoding.JSON, "Json", "csharp");
+@@clientName(RouteProperties, "RoutingRuleProperties", "csharp");
+@@clientName(
+  FallbackRouteProperties,
+  "IotHubFallbackRouteProperties",
+  "csharp"
+);
+@@clientName(EnrichmentProperties, "IotHubEnrichmentProperties", "csharp");
+@@clientName(
+  StorageEndpointProperties,
+  "IotHubStorageEndpointProperties",
+  "csharp"
+);
+@@clientName(DeviceRegistry, "IotHubDeviceRegistry", "csharp");
+@@clientName(
+  EncryptionPropertiesDescription,
+  "IotHubEncryptionProperties",
+  "csharp"
+);
+@@clientName(KeyVaultKeyProperties, "IotHubKeyVaultKeyProperties", "csharp");
+@@clientName(Capabilities, "IotHubCapability", "csharp");
+@@clientName(GatewayVersion, "IotHubGatewayVersion", "csharp");
+@@clientName(IpVersion, "IotHubIPVersion", "csharp");
+@@clientName(IpVersion.ipv4, "IPv4", "csharp");
+@@clientName(IpVersion.ipv6, "IPv6", "csharp");
+@@clientName(IpVersion.ipv4ipv6, "IPv4IPv6", "csharp");
+@@clientName(IotHubSku.GEN2, "Gen2", "csharp");
+@@clientName(AccessRights, "IotHubSharedAccessRight", "csharp");
+@@clientName(
+  FeedbackProperties,
+  "CloudToDeviceFeedbackQueueProperties",
+  "csharp"
+);
+@@clientName(RegistryStatistics, "IotHubRegistryStatistics", "csharp");
+@@clientName(EndpointHealthData, "IotHubEndpointHealthInfo", "csharp");
+@@clientName(EndpointHealthStatus, "IotHubEndpointHealthStatus", "csharp");
+@@clientName(JobResponse, "IotHubJobInfo", "csharp");
+@@clientName(JobResponse.startTimeUtc, "StartOn", "csharp");
+@@clientName(JobResponse.endTimeUtc, "EndOn", "csharp");
+@@clientName(JobResponse.type, "JobType", "csharp");
+@@clientName(JobResponseListResult, "IotHubJobInfoListResult", "csharp");
+@@clientName(JobType, "IotHubJobType", "csharp");
+@@clientName(JobStatus, "IotHubJobStatus", "csharp");
+@@clientName(OperationInputs, "IotHubNameAvailabilityContent", "csharp");
+@@clientName(
+  IotHubNameAvailabilityInfo,
+  "IotHubNameAvailabilityResponse",
+  "csharp"
+);
+@@clientName(
+  IotHubNameAvailabilityInfo.nameAvailable,
+  "IsNameAvailable",
+  "csharp"
+);
+@@clientName(
+  IotHubNameUnavailabilityReason,
+  "IotHubNameUnavailableReason",
+  "csharp"
+);
+@@clientName(UserSubscriptionQuota, "IotHubUserSubscriptionQuota", "csharp");
+@@clientName(UserSubscriptionQuota.id, "IotHubTypeId", "csharp");
+@@clientName(UserSubscriptionQuota.type, "UserSubscriptionQuotaType", "csharp");
+@@clientName(Name, "IotHubTypeName", "csharp");
+@@clientName(TestAllRoutesInput, "IotHubTestAllRoutesContent", "csharp");
+@@clientName(TestAllRoutesResult, "IotHubTestAllRoutesResult", "csharp");
+@@clientName(TestRouteInput, "IotHubTestRouteContent", "csharp");
+@@clientName(TestRouteResult, "IotHubTestRouteResult", "csharp");
+@@clientName(TestRouteResultDetails, "IotHubTestRouteResultDetails", "csharp");
+@@clientName(MatchedRoute, "IotHubMatchedRoute", "csharp");
+@@clientName(ExportDevicesRequest, "ExportDevicesContent", "csharp");
+@@clientName(ImportDevicesRequest, "IotHubImportDevicesContent", "csharp");
+@@clientName(FailoverInput, "IotHubFailoverContent", "csharp");
+@@clientName(
+  EventHubConsumerGroupBodyDescription,
+  "EventHubConsumerGroupInfoCreateOrUpdateContent",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy flattening for backward-compatible generated SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  EventHubConsumerGroupBodyDescription.properties,
+  "csharp"
+);
+@@clientName(EventHubConsumerGroupName.name, "Name", "csharp");
+@@alternateType(EventHubConsumerGroupInfo.etag, eTag, "csharp");
+@@alternateType(IotHubDescription.etag, eTag, "csharp");
+@@alternateType(
+  IotHubDescription.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@clientName(IotHubProperties.disableDeviceSAS, "DisableDeviceSas", "csharp");
+@@clientName(IotHubProperties.disableModuleSAS, "DisableModuleSas", "csharp");
+@@clientName(IotHubProperties.allowedFqdnList, "AllowedFqdns", "csharp");
+@@clientName(IotHubProperties.ipFilterRules, "IPFilterRules", "csharp");
+@@clientName(IotHubProperties.ipVersion, "IPVersion", "csharp");
+@@clientName(
+  RootCertificateProperties.enableRootCertificateV2,
+  "IsRootCertificateV2Enabled",
+  "csharp"
+);
+@@clientName(
+  RootCertificateProperties.lastUpdatedTimeUtc,
+  "LastUpdatedOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Devices.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  "ConnectionState",
+  "csharp"
+);
+@@clientName(
+  GroupIdInformationProperties.requiredZoneNames,
+  "RequiredDnsZoneNames",
+  "csharp"
+);
+@@clientName(RoutingEventHubProperties.endpointUri, "Endpoint", "csharp");
+@@clientName(
+  RoutingServiceBusQueueEndpointProperties.endpointUri,
+  "Endpoint",
+  "csharp"
+);
+@@clientName(
+  RoutingServiceBusTopicEndpointProperties.endpointUri,
+  "Endpoint",
+  "csharp"
+);
+@@clientName(
+  RoutingStorageContainerProperties.endpointUri,
+  "Endpoint",
+  "csharp"
+);
+@@alternateType(
+  ManagedIdentity.userAssignedIdentity,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Devices.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  Microsoft.Devices.PrivateEndpointConnection,
+  "IotHubPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.Devices.PrivateEndpointConnectionProperties,
+  "IotHubPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  GroupIdInformation,
+  "IotHubPrivateEndpointGroupInformation",
+  "csharp"
+);
+@@clientName(
+  GroupIdInformationProperties,
+  "IotHubPrivateEndpointGroupInformationProperties",
+  "csharp"
+);
+@@clientName(
+  IotHubDescriptions.manualFailover,
+  "ManualFailoverIotHub",
+  "csharp"
+);
+@@clientName(
+  IotHubResourceOperationGroup.checkNameAvailability,
+  "CheckIotHubNameAvailability",
+  "csharp"
+);
+@@clientName(
+  ResourceProviderCommonOperationGroup.getSubscriptionQuota,
+  "GetIotHubUserSubscriptionQuota",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ResourceProviderCommonOperationGroup.getSubscriptionQuota,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  CertificateDescriptions.listByIotHub,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# SDK migration customization: retain legacy pageable shaping for backward-compatible generated SDK surface."
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  GroupIdInformations.list,
+  "csharp"
+);
+@@clientName(
+  PrivateEndpointConnections.list,
+  "GetIotHubPrivateEndpointConnections",
+  "csharp"
+);
+@@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
+@@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
 /**
  * override for IotHubDescriptions.manualFailover
@@ -122,3 +398,14 @@ op replaceTestRoute(
 
 @@override(IotHubDescriptions.testRoute, replaceTestRoute);
 @@clientName(replaceTestRoute::parameters.body, "input", "go,javascript");
+
+@@clientLocation(
+  GroupIdInformations.get,
+  "PrivateLinkResourcesOperations",
+  "javascript"
+);
+@@clientLocation(
+  GroupIdInformations.list,
+  "PrivateLinkResourcesOperations",
+  "javascript"
+);

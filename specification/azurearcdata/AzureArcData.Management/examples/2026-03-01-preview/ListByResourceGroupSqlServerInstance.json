@@ -1,0 +1,278 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sqlServerInstance1",
+            "type": "Microsoft.AzureArcData/SqlServerInstances",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServerInstance1",
+            "location": "northeurope",
+            "properties": {
+              "alwaysOnRole": "FailoverClusterInstance",
+              "azureDefenderStatus": "Protected",
+              "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+              "backupPolicy": {
+                "differentialBackupHours": 12,
+                "fullBackupDays": 1,
+                "retentionPeriodDays": 1,
+                "transactionLogBackupMinutes": 30
+              },
+              "bestPracticesAssessment": {
+                "enabled": true,
+                "schedule": {
+                  "cronTrigger": {
+                    "expression": "0 0 12 1 11"
+                  },
+                  "enabled": true
+                }
+              },
+              "clientConnection": {
+                "enabled": false
+              },
+              "collation": "collation",
+              "containerResourceId": "Resource id of hosting Arc Machine",
+              "cores": "4",
+              "createTime": "01/01/2020 01:01:01",
+              "currentVersion": "2012",
+              "databaseMirroringEndpoint": {
+                "certificateExpiryDate": "2025-03-30T00:00:00Z",
+                "certificateName": "testCertificateName",
+                "connectionAuth": "Certificate",
+                "encryptionAlgorithm": "AES",
+                "endpointName": "testMirroringEndpoint",
+                "ipAddress": "123.124.125.126",
+                "isDynamicPort": false,
+                "isEncryptionEnabled": true,
+                "port": 12345,
+                "role": "PARTNER"
+              },
+              "dbMasterKeyExists": true,
+              "edition": "Developer",
+              "failoverCluster": {
+                "hostIPAddresses": [
+                  {
+                    "ipAddress": "10.20.11.23",
+                    "subnetMask": "255.255.255.0"
+                  },
+                  {
+                    "ipAddress": "10.20.11.24",
+                    "subnetMask": "255.255.255.0"
+                  }
+                ],
+                "hostNames": [
+                  "DEV-HOSTNAME1",
+                  "DEV-HOSTNAME2"
+                ],
+                "id": "f836af7e-85ed-4ea4-91fb-67709b34e323",
+                "networkName": "networkNameOfSQLFCI",
+                "sqlInstanceIds": [
+                  "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer1",
+                  "/subscriptions/dummySub/resourceGroups/dummyRG/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServer2"
+                ]
+              },
+              "hostType": "Physical Server",
+              "instanceName": "name of instance",
+              "isDigiCertPkiCertTrustConfigured": true,
+              "isHadrEnabled": true,
+              "isMicrosoftPkiCertTrustConfigured": true,
+              "lastInventoryUploadTime": "2023-03-29T14:13:12Z",
+              "lastUsageUploadTime": "2023-03-29T14:13:12Z",
+              "licenseType": "Free",
+              "maxServerMemoryMB": 4096,
+              "migration": {
+                "assessment": {
+                  "assessmentUploadTime": "2024-03-15T00:16:11.0000000Z",
+                  "enabled": true,
+                  "serverAssessments": [
+                    {
+                      "appliesToMigrationTargetPlatform": "AzureSqlDatabase",
+                      "featureId": "TraceFlags",
+                      "impactedObjects": [
+                        {
+                          "name": "8017",
+                          "impactDetail": "",
+                          "objectType": "TraceFlag"
+                        }
+                      ],
+                      "issueCategory": "Warning",
+                      "moreInformation": "Resolving Transact-SQL differences during migration to SQL Database"
+                    },
+                    {
+                      "appliesToMigrationTargetPlatform": "AzureSqlManagedInstance",
+                      "featureId": "TraceFlags",
+                      "impactedObjects": [
+                        {
+                          "name": "8017",
+                          "impactDetail": "",
+                          "objectType": "TraceFlag"
+                        }
+                      ],
+                      "issueCategory": "Warning",
+                      "moreInformation": "Trace Flags"
+                    }
+                  ],
+                  "skuRecommendationResults": {
+                    "azureSqlDatabase": {
+                      "monthlyCost": {
+                        "computeCost": 245.13,
+                        "storageCost": 0.18,
+                        "totalCost": 245.31
+                      },
+                      "numberOfServerBlockerIssues": 0,
+                      "recommendationStatus": "Ready",
+                      "targetSku": {
+                        "category": {
+                          "computeTier": "Provisioned",
+                          "hardwareType": "Gen5",
+                          "sqlPurchasingModel": "vCore",
+                          "sqlServiceTier": "General Purpose",
+                          "zoneRedundancyAvailable": false
+                        }
+                      }
+                    },
+                    "azureSqlManagedInstance": {
+                      "monthlyCost": {
+                        "computeCost": 490.26,
+                        "storageCost": 0,
+                        "totalCost": 490.26
+                      },
+                      "numberOfServerBlockerIssues": 0,
+                      "recommendationStatus": "Ready",
+                      "targetSku": {
+                        "category": {
+                          "computeTier": "Provisioned",
+                          "hardwareType": "Gen5",
+                          "sqlPurchasingModel": "vCore",
+                          "sqlServiceTier": "General Purpose",
+                          "zoneRedundancyAvailable": false
+                        }
+                      }
+                    },
+                    "azureSqlVirtualMachine": {
+                      "monthlyCost": {
+                        "computeCost": 81.98,
+                        "storageCost": 2.4,
+                        "totalCost": 84.38
+                      },
+                      "numberOfServerBlockerIssues": 0,
+                      "recommendationStatus": "Ready",
+                      "targetSku": {
+                        "category": {
+                          "availableVmSkus": [
+                            "Standard_D16as_v4",
+                            "Standard_D2as_v4",
+                            "Standard_D32as_v4",
+                            "Standard_D48as_v4",
+                            "Standard_D4as_v4",
+                            "Standard_D64as_v4",
+                            "Standard_D8as_v4",
+                            "Standard_D96as_v4"
+                          ],
+                          "virtualMachineFamily": "standardDASv4Family"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "monitoring": {
+                "enabled": false
+              },
+              "patchLevel": "patchlevel",
+              "productId": "sql id",
+              "serviceType": "Engine",
+              "status": "Registered",
+              "tcpDynamicPorts": "1433",
+              "tcpStaticPorts": "1433",
+              "traceFlags": [
+                1800,
+                9567
+              ],
+              "vCore": "4",
+              "version": "SQL Server 2012",
+              "vmId": "12345678-1234-1234-1234-123456789123"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          },
+          {
+            "name": "sqlServerInstance2",
+            "type": "Microsoft.AzureArcData/SqlServerInstances",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/SqlServerInstances/sqlServerInstance2",
+            "location": "northeurope",
+            "properties": {
+              "azureDefenderStatus": "Protected",
+              "azureDefenderStatusLastUpdated": "2020-01-02T17:18:19.1234567Z",
+              "clientConnection": {
+                "enabled": false
+              },
+              "collation": "collation",
+              "containerResourceId": "Arc Machine Name",
+              "cores": "4",
+              "createTime": "01/01/2020 01:01:01",
+              "currentVersion": "2008 R2",
+              "dbMasterKeyExists": true,
+              "edition": "Developer",
+              "instanceName": "name of instance",
+              "isDigiCertPkiCertTrustConfigured": true,
+              "isHadrEnabled": true,
+              "isMicrosoftPkiCertTrustConfigured": true,
+              "licenseType": "Free",
+              "maxServerMemoryMB": 4096,
+              "migration": {
+                "assessment": {
+                  "enabled": false
+                }
+              },
+              "monitoring": {
+                "enabled": false
+              },
+              "patchLevel": "patchlevel",
+              "productId": "sql id",
+              "serviceType": "SSRS",
+              "status": "Connected",
+              "tcpDynamicPorts": "1433",
+              "tcpStaticPorts": "1433",
+              "traceFlags": [
+                1800,
+                9567
+              ],
+              "upgradeLockedUntil": "2022-05-05T16:26:33.883Z",
+              "vCore": "4",
+              "version": "SQL Server 2017",
+              "vmId": "12345678-1234-1234-1234-123456789123"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            },
+            "tags": {
+              "mytag": "myval"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SqlServerInstances_ListByResourceGroup",
+  "title": "Gets all SQL Server Instance in a resource group."
+}
