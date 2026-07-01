@@ -71,11 +71,9 @@ interface MetricAlertResources {
   /**
    * Create or update an metric alert definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("MetricAlerts")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     MetricAlertResource,
-    Response = ArmResourceUpdatedResponse<MetricAlertResource>,
     Error = MetricAlertErrorResponse
   >;
 
