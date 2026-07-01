@@ -218,8 +218,9 @@ async function handleLabeled({
     issue_number: prNumber,
   });
   const botComment = comments.data.find(
-    (/** @type {{ user?: { type?: string }, body?: string }} */ comment) =>
-      comment.user?.type === "Bot" && comment.body?.includes("<!-- namespace-review-bot -->"),
+    (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
+      comment.user?.type === "Bot" &&
+      (comment.body?.includes("<!-- namespace-review-bot -->") ?? false),
   );
 
   if (botComment?.body) {

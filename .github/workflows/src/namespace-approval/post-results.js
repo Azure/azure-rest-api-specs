@@ -64,9 +64,12 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
   });
 
   const artifact = artifacts.sort(
-    (/** @type {{ updated_at?: string }} */ left, /** @type {{ updated_at?: string }} */ right) => {
-      const leftTime = new Date(left.updated_at || 0).getTime();
-      const rightTime = new Date(right.updated_at || 0).getTime();
+    (
+      /** @type {{ updated_at?: string | null }} */ left,
+      /** @type {{ updated_at?: string | null }} */ right,
+    ) => {
+      const leftTime = new Date(left.updated_at ?? 0).getTime();
+      const rightTime = new Date(right.updated_at ?? 0).getTime();
       return rightTime - leftTime;
     },
   )[0];
