@@ -16,7 +16,7 @@ using Common;
 );
 @@clientLocation(DefenderForStorageSettings.list, "DefenderForStorage");
 @@clientLocation(
-  DefenderForStorageSettings.startMalwareScan,
+  DefenderForStorageMalwareScan.startMalwareScan,
   "DefenderForStorage"
 );
 @@clientLocation(

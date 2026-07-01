@@ -450,10 +450,10 @@ model StartMalwareScanRequestProperties {
 /**
  * Request body for starting a malware scan with optional filters.
  */
+@added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequest {
   /**
    * Properties for the malware scan request.
    */
-  @added(Versions.v2026_01_01_preview)
   properties?: StartMalwareScanRequestProperties;
 }
