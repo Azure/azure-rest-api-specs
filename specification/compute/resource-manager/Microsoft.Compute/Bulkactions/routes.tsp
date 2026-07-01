@@ -251,4 +251,58 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
+
+  /** BulkListOperationErrors: List bulk operation errors for a resource group */
+  @added(Versions.`2026-07-06-preview`)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "RG-scoped nested route not supported by @action"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachines/bulkOperationErrors")
+  @get
+  bulkListOperationErrors(
+    ...Azure.ResourceManager.Foundations.ApiVersionParameter,
+
+    @path
+    @doc("The ID of the target subscription.")
+    subscriptionId: Azure.Core.uuid,
+
+    @path
+    @doc("The name of the resource group.")
+    resourceGroupName: string,
+
+    @path
+    @minLength(1)
+    @segment("locations")
+    @doc("The location name.")
+    location: Azure.Core.azureLocation,
+
+    @query
+    @doc("A continuation token to retrieve the next page of results.")
+    continuationToken?: string,
+  ): ArmResponse<ListBulkOperationErrorsResponse> | ErrorResponse;
+
+  /** BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group */
+  @added(Versions.`2026-07-06-preview`)
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "RG-scoped nested route not supported by @action"
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachines/bulkOperationErrors/acknowledge")
+  @post
+  bulkAcknowledgeOperationErrors(
+    ...Azure.ResourceManager.Foundations.ApiVersionParameter,
+
+    @path
+    @doc("The ID of the target subscription.")
+    subscriptionId: Azure.Core.uuid,
+
+    @path
+    @doc("The name of the resource group.")
+    resourceGroupName: string,
+
+    @path
+    @minLength(1)
+    @segment("locations")
+    @doc("The location name.")
+    location: Azure.Core.azureLocation,
+
+    @body
+    @doc("The list of operation ids to acknowledge")
+    operationIds: Array<string>,
+  ): ArmResponse<AcknowledgeBulkOperationErrorsResponse> | ErrorResponse;
 }
