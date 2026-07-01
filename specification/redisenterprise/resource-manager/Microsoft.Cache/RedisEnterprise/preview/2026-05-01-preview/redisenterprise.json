@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisEnterpriseManagementClient",
-    "version": "2026-02-01-preview",
+    "version": "2026-05-01-preview",
     "description": "REST API for managing Redis Enterprise resources in Azure.",
     "x-typespec-generated": [
       {
@@ -966,6 +966,9 @@
         "x-ms-examples": {
           "RedisEnterpriseAccessPolicyAssignmentGet": {
             "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentGet.json"
+          },
+          "RedisEnterpriseAccessPolicyAssignmentGetWithFailedProvisioningState": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentGetWithFailedProvisioningState.json"
           }
         }
       },
@@ -1053,6 +1056,9 @@
         "x-ms-examples": {
           "RedisEnterpriseAccessPolicyAssignmentCreateUpdate": {
             "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentCreateUpdate.json"
+          },
+          "RedisEnterpriseAccessPolicyAssignmentCreateUpdateWithCustomAccessString": {
+            "$ref": "./examples/RedisEnterpriseAccessPolicyAssignmentCreateUpdateWithCustomAccessString.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2532,13 +2538,21 @@
           "description": "**Deprecated.** This property always returns \"default\". Use `accessString` to configure custom Redis ACL permissions instead.",
           "pattern": "^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$"
         },
+        "accessString": {
+          "type": "string",
+          "description": "The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified."
+        },
+        "provisioningError": {
+          "$ref": "#/definitions/AccessPolicyAssignmentProvisioningError",
+          "description": "Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.",
+          "readOnly": true
+        },
         "user": {
           "$ref": "#/definitions/AccessPolicyAssignmentPropertiesUser",
           "description": "The user associated with the access policy."
         }
       },
       "required": [
-        "accessPolicyName",
         "user"
       ]
     },
@@ -2551,6 +2565,28 @@
           "description": "The object ID of the user."
         }
       }
+    },
+    "AccessPolicyAssignmentProvisioningError": {
+      "type": "object",
+      "description": "Error details for access policy assignment provisioning failures.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code (e.g., \"InvalidAccessString\")."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message describing the failure."
+        },
+        "target": {
+          "type": "string",
+          "description": "The property that caused the error (e.g., \"properties.accessString\")."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "AofFrequency": {
       "type": "string",
