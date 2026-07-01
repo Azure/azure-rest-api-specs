@@ -38,12 +38,12 @@ When an example string value does not match any declared member of a
 referenced enum, the correct severity depends on where the value appears
 and whether the enum is extensible:
 
-| Context | Enum type | Severity |
-|---------|-----------|----------|
-| Response body field | Extensible (`x-ms-enum.modelAsString: true`) | **Warning** |
-| Response body field | Closed (`modelAsString: false` or no `x-ms-enum`) | **Blocking** |
-| Discriminator field | Any | **Blocking** |
-| Path or query parameter | Any | **Blocking** |
+| Context                 | Enum type                                         | Severity     |
+| ----------------------- | ------------------------------------------------- | ------------ |
+| Response body field     | Extensible (`x-ms-enum.modelAsString: true`)      | **Warning**  |
+| Response body field     | Closed (`modelAsString: false` or no `x-ms-enum`) | **Blocking** |
+| Discriminator field     | Any                                               | **Blocking** |
+| Path or query parameter | Any                                               | **Blocking** |
 
 **Key rule:** An unknown literal in a response body field on an extensible
 enum (`modelAsString: true`) is **Warning**, not Blocking. Azure mandates
