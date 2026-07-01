@@ -3494,6 +3494,12 @@ model CapacityReservationProfile {
    * Specifies the capacity reservation group resource id that should be used for allocating the virtual machine or scaleset vm instances provided enough capacity has been reserved. Please refer to https://aka.ms/CapacityReservation for more details.
    */
   capacityReservationGroup?: SubResource;
+
+  /**
+   * Specifies whether the capacity reservation assignment is disabled for the virtual machine. When set to true, the virtual machine opts out of being associated with any capacity reservation. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  disableCapacityReservationAssignment?: boolean;
 }
 
 /**
@@ -6731,6 +6737,13 @@ model VirtualMachineInstanceView {
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
   interconnectInstanceView?: InterconnectInstanceView;
+
+  /**
+   * Specifies which type of capacity reservation the virtual machine is associated with or eligible for. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  capacityReservationType?: CapacityReservationType;
 }
 
 /**
@@ -9082,6 +9095,14 @@ model CapacityReservationUtilization {
    */
   @visibility(Lifecycle.Read)
   virtualMachinesAllocated?: SubResourceReadOnly[];
+
+  /**
+   * For open capacity reservations, specifies the count of reserved capacity used per subscription, keyed by subscription id. This is null for targeted and block capacity reservations, which use virtualMachinesAllocated instead. Minimum api-version: 2026-04-01.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Open capacity reservation usage is inherently a map of reserved count keyed by subscription id."
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  usedReservedCountBySubscription?: Record<int32>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -9109,6 +9130,48 @@ union ReservationType {
 
   /**
    * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
+   */
+  Block: "Block",
+
+  /**
+   * To consume open allocated capacity reservation when the virtual machine is eligible, without providing a capacity reservation group. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  Open: "Open",
+}
+
+/**
+ * Specifies which type of capacity reservation the virtual machine is associated with or eligible for. Minimum api-version: 2026-04-01.
+ */
+@added(Versions.v2026_04_01)
+union CapacityReservationType {
+  /**
+   * Custom capacity reservation type value.
+   */
+  string,
+
+  /**
+   * The virtual machine is not eligible to be associated with any type of capacity reservation.
+   */
+  NotEligible: "NotEligible",
+
+  /**
+   * The virtual machine consumes a specific capacity reservation when a capacity reservation group is provided.
+   */
+  Targeted: "Targeted",
+
+  /**
+   * The virtual machine consumes an open capacity reservation when it is eligible, without providing a capacity reservation group.
+   */
+  Open: "Open",
+
+  /**
+   * The virtual machine has capacity reservation assignment disabled and is not associated with any type of capacity reservation.
+   */
+  Disabled: "Disabled",
+
+  /**
+   * The virtual machine consumes a specific capacity block reservation when a capacity reservation group is provided.
    */
   Block: "Block",
 }
