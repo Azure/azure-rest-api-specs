@@ -453,7 +453,7 @@ model DocumentStatus {
   @added(Versions.v2025_12_01_preview)
   imageCharacterDetected?: int32;
 
-  @doc("Deployment name of the custom translation model or LLM model used for the translation")
+  @doc("Deployment name of the custom translation model used for the translation")
   @added(Versions.v2026_03_01)
   deploymentName?: string;
 }
