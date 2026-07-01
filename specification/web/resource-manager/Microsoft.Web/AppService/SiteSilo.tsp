@@ -49,8 +49,10 @@ interface SiteSiloResources {
   /**
    * Creates or updates a silo for a Web App.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The SiteSilo service returns 202 Accepted (not 201 Created) from its long-running create-or-update PUT; the contract is modeled to match the service's actual response codes."
   createOrUpdateSiteSilo is ArmResourceCreateOrReplaceAsync<
     SiteSilo,
+    Response = ArmResourceUpdatedResponse<SiteSilo> | ArmAcceptedLroResponse,
     Error = DefaultErrorResponse
   >;
 

@@ -6573,15 +6573,12 @@
               "$ref": "#/definitions/ServerFarmSilo"
             }
           },
-          "201": {
-            "description": "Resource 'ServerFarmSilo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/ServerFarmSilo"
-            },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -6603,8 +6600,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/ServerFarmSilo"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -19373,15 +19369,12 @@
               "$ref": "#/definitions/SiteSilo"
             }
           },
-          "201": {
-            "description": "Resource 'SiteSilo' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SiteSilo"
-            },
+          "202": {
+            "description": "Resource operation accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -19403,8 +19396,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/SiteSilo"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
