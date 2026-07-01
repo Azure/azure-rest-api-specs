@@ -13,7 +13,7 @@ export default async function statusCheck({ github, context, core }) {
     pull_number: issue_number,
   });
   /** @type {string[]} */
-  const labels = pr.labels.map((label) => label.name ?? "");
+  const labels = pr.labels.map((/** @type {{ name?: string }} */ label) => label.name ?? "");
 
   if (!labels.includes("namespace-review-required")) {
     core.info("No namespace review required, passing");

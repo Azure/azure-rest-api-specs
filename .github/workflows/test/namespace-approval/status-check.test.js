@@ -65,7 +65,11 @@ describe("status-check", () => {
 
     await statusCheck(args());
 
-    const infoMsg = String(core.info.mock.calls.find((c) => String(c[0]).includes("pending"))?.[0]);
+    const infoMsg = String(
+      core.info.mock.calls.find((/** @type {unknown[]} */ c) =>
+        String(c[0]).includes("pending"),
+      )?.[0],
+    );
     expect(infoMsg).toContain("java");
     expect(infoMsg).toContain("dotnet");
     expect(core.setFailed).not.toHaveBeenCalled();

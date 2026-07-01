@@ -5,7 +5,7 @@ import { join } from "path";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.js";
 import { PER_PAGE_MAX } from "../../../shared/src/github.js";
-import { commentOrUpdate } from "../comment.js";
+import { commentOrUpdate, parseExistingComments } from "../comment.js";
 import { extractInputs } from "../context.js";
 
 const FormatValidationResultSchema = z.object({
@@ -18,6 +18,7 @@ const FormatValidationResultSchema = z.object({
 
 const NamespaceResultsSchema = z.object({
   namespacesFound: z.record(z.string(), z.string()),
+  artifactNames: z.record(z.string(), z.string()).optional().default({}),
   isMgmt: z.boolean(),
   isDataPlane: z.boolean(),
   formatResults: z.record(z.string(), FormatValidationResultSchema),
@@ -30,11 +31,6 @@ const NamespaceResultsSchema = z.object({
  * @property {Record<string, string[]>} [data-plane]
  * @property {{ all?: string[] }} [management-plane]
  */
-
-/** @type {Record<string, string>} */
-const LABEL_COLORS = {
-  "namespace-review-required": "e11d48",
-};
 
 /**
  * @param {import("@actions/core")} core
@@ -67,11 +63,13 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     per_page: PER_PAGE_MAX,
   });
 
-  const artifact = artifacts.sort((left, right) => {
-    const leftTime = new Date(left.updated_at || 0).getTime();
-    const rightTime = new Date(right.updated_at || 0).getTime();
-    return rightTime - leftTime;
-  })[0];
+  const artifact = artifacts.sort(
+    (/** @type {{ updated_at?: string }} */ left, /** @type {{ updated_at?: string }} */ right) => {
+      const leftTime = new Date(left.updated_at || 0).getTime();
+      const rightTime = new Date(right.updated_at || 0).getTime();
+      return rightTime - leftTime;
+    },
+  )[0];
 
   if (!artifact) {
     core.info(`No namespace-results artifact found for run ${runId}`);
@@ -96,30 +94,6 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     );
   } finally {
     await unlink(zipPath).catch(() => undefined);
-  }
-}
-
-/**
- * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} github
- * @param {string} owner
- * @param {string} repo
- * @param {string} label
- */
-async function ensureLabel(github, owner, repo, label) {
-  try {
-    await github.rest.issues.getLabel({
-      owner,
-      repo,
-      name: label,
-    });
-  } catch {
-    await github.rest.issues.createLabel({
-      owner,
-      repo,
-      name: label,
-      // cspell:ignore fbbf
-      color: LABEL_COLORS[label] ?? (label.includes("pending") ? "fbbf24" : "94a3b8"),
-    });
   }
 }
 
@@ -164,21 +138,53 @@ function getApprovers(approversConfig, isMgmt, language) {
 }
 
 /**
+ * Parse the namespace review table from an existing bot comment.
+ *
+ * Extracts language, namespace, and approval status from each row.
+ *
+ * @param {string} body - The full comment body.
+ * @returns {Map<string, { namespace: string, status: string }>}
+ */
+export function parseCommentTable(body) {
+  /** @type {Map<string, { namespace: string, status: string }>} */
+  const results = new Map();
+  // Table row: | language (possibly with suffix) | `namespace` | format | status | approvers |
+  // Captures the base language name (word chars before optional space/underscore/paren suffix)
+  const rowRegex = /\| (\w+)[^|]*\| `([^`]+)` \| [^|]+ \| ([^|]+) \|/g;
+  let match;
+  while ((match = rowRegex.exec(body)) !== null) {
+    const lang = match[1];
+    // Keep only the first match per language (primary namespace, not artifact)
+    if (!results.has(lang)) {
+      results.set(lang, {
+        namespace: match[2],
+        status: match[3].trim(),
+      });
+    }
+  }
+  return results;
+}
+
+/**
  * @param {Object} params
  * @param {ApproversConfig} params.approversConfig
  * @param {Record<string, string>} params.namespacesFound
+ * @param {Record<string, string>} [params.artifactNames] - Secondary artifact names per language (e.g. Java Maven artifact).
  * @param {Record<string, z.infer<typeof FormatValidationResultSchema>>} params.formatResults
  * @param {boolean} params.isMgmt
  * @param {string} params.baseRef
- * @param {boolean} params.wasSynchronized
+ * @param {string[]} [params.resetLanguages] - Languages whose approvals were reset on this push.
+ * @param {Map<string, { namespace: string, status: string }>} [params.preservedApprovals] - Approval statuses preserved from the previous comment for unchanged namespaces.
  */
 function buildCommentBody({
   approversConfig,
   namespacesFound,
+  artifactNames,
   formatResults,
   isMgmt,
   baseRef,
-  wasSynchronized,
+  resetLanguages,
+  preservedApprovals,
 }) {
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
   let body = `## Namespace Review Required\n\n**Plane:** ${planeType}\n\n`;
@@ -188,7 +194,23 @@ function buildCommentBody({
   for (const [language, namespace] of Object.entries(namespacesFound)) {
     const formatResult = formatResults[language];
     const formatStatus = !formatResult ? "—" : formatResult.valid ? "✅" : "⚠️ Invalid";
-    body += `| ${language} | \`${namespace}\` | ${formatStatus} | ⏳ Pending | ${getApprovers(approversConfig, isMgmt, language).join(", ")} |\n`;
+    const preserved = preservedApprovals?.get(language);
+    const status = preserved?.status ?? "⏳ Pending";
+    const hasArtifact = artifactNames && language in artifactNames;
+    const label = hasArtifact ? `${language} _(package)_` : language;
+    body += `| ${label} | \`${namespace}\` | ${formatStatus} | ${status} | ${getApprovers(approversConfig, isMgmt, language).join(", ")} |\n`;
+
+    // Show artifact row for languages that have one (e.g. Java Maven artifact)
+    if (hasArtifact) {
+      const artifactNs = artifactNames[language];
+      const artifactFormat = formatResults[`${language}-artifact`];
+      const artifactFormatStatus = !artifactFormat
+        ? "—"
+        : artifactFormat.valid
+          ? "✅"
+          : "⚠️ Invalid";
+      body += `| ${language} _(artifact)_ | \`${artifactNs}\` | ${artifactFormatStatus} | ${status} | ${getApprovers(approversConfig, isMgmt, language).join(", ")} |\n`;
+    }
   }
 
   const formatErrors = Object.values(formatResults).filter((result) => !result.valid);
@@ -204,8 +226,8 @@ function buildCommentBody({
   body += `- Per language: apply \`<language>-namespace-approved\` label\n`;
   body += `- All at once: apply \`namespace-approved-all\` label (shortcut for mgmt plane)\n\n`;
   body += `Merge is blocked until all languages are approved.\n`;
-  if (wasSynchronized) {
-    body += `\n> ⚠️ **Namespace changed** — approvals for affected languages have been reset.\n`;
+  if (resetLanguages && resetLanguages.length > 0) {
+    body += `\n> ⚠️ **Namespace changed** — approvals for ${resetLanguages.join(", ")} have been reset.\n`;
   }
   body += `\n_Approver list: [.github/namespace-approvers.yml](../blob/${baseRef}/.github/namespace-approvers.yml)_\n`;
   body += `_Process: [.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md)_\n`;
@@ -234,21 +256,57 @@ export default async function postResults({ github, context, core }) {
     pull_number: issue_number,
   });
   /** @type {string[]} */
-  const existingLabels = pr.labels.map((label) => label.name ?? "");
+  const existingLabels = pr.labels.map(
+    (/** @type {{ name?: string }} */ label) => label.name ?? "",
+  );
   const languages = Object.keys(results.namespacesFound);
 
+  /** @type {string[]} */
+  let resetLanguages = [];
+  /** @type {Map<string, { namespace: string, status: string }>} */
+  let preservedApprovals = new Map();
+
   if (results.action === "synchronize") {
+    // Fetch existing bot comment to compare namespaces per language
+    const comments = await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    });
+    const [, existingBody] = parseExistingComments(comments, "namespace-review-bot");
+    /** @type {Map<string, { namespace: string, status: string }>} */
+    const previousTable = existingBody ? parseCommentTable(existingBody) : new Map();
+
     for (const language of languages) {
-      const approvedLabel = `${language}-namespace-approved`;
-      if (existingLabels.includes(approvedLabel)) {
-        core.info(`Namespace changed for ${language}, resetting approval`);
-        await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
+      const prev = previousTable.get(language);
+      const newNs = results.namespacesFound[language];
+
+      if (!prev || prev.namespace !== newNs) {
+        // Namespace changed or new language: reset approval
+        const approvedLabel = `${language}-namespace-approved`;
+        if (existingLabels.includes(approvedLabel)) {
+          core.info(
+            `Namespace changed for ${language}: "${prev?.namespace ?? "(new)"}" → "${newNs}", resetting approval`,
+          );
+          await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
+          existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+        }
+        resetLanguages.push(language);
+      } else if (prev.status && !prev.status.includes("Pending")) {
+        // Namespace unchanged and previously approved: preserve status
+        core.info(`Namespace unchanged for ${language}: "${newNs}", preserving approval`);
+        preservedApprovals.set(language, prev);
       }
     }
 
-    for (const label of ["namespace-approved-all", "namespace-approved"]) {
-      if (existingLabels.includes(label)) {
-        await removeLabelIfPresent(github, owner, repo, issue_number, label);
+    // Only remove global approval labels if any language was actually reset
+    if (resetLanguages.length > 0) {
+      for (const label of ["namespace-approved-all", "namespace-approved"]) {
+        if (existingLabels.includes(label)) {
+          await removeLabelIfPresent(github, owner, repo, issue_number, label);
+          existingLabels.splice(existingLabels.indexOf(label), 1);
+        }
       }
     }
   }
@@ -266,27 +324,41 @@ export default async function postResults({ github, context, core }) {
     labelsToAdd.add("data-plane");
   }
   for (const language of languages) {
-    labelsToAdd.add(`${language}-namespace-pending`);
+    // Skip adding pending label if language is already approved
+    const approvedLabel = `${language}-namespace-approved`;
+    if (!existingLabels.includes(approvedLabel)) {
+      labelsToAdd.add(`${language}-namespace-pending`);
+    }
+  }
+
+  // Don't re-add namespace-review-required if everything is already approved
+  const allApproved = languages.every((lang) =>
+    existingLabels.includes(`${lang}-namespace-approved`),
+  );
+  if (allApproved && languages.length > 0) {
+    labelsToAdd.delete("namespace-review-required");
   }
 
   for (const label of labelsToAdd) {
-    await ensureLabel(github, owner, repo, label);
+    if (!existingLabels.includes(label)) {
+      await github.rest.issues.addLabels({
+        owner,
+        repo,
+        issue_number,
+        labels: [label],
+      });
+    }
   }
-
-  await github.rest.issues.addLabels({
-    owner,
-    repo,
-    issue_number,
-    labels: [...labelsToAdd],
-  });
 
   const body = buildCommentBody({
     approversConfig,
     namespacesFound: results.namespacesFound,
+    artifactNames: results.artifactNames,
     formatResults: results.formatResults,
     isMgmt: results.isMgmt,
     baseRef: pr.base.ref,
-    wasSynchronized: results.action === "synchronize",
+    resetLanguages,
+    preservedApprovals,
   });
 
   await commentOrUpdate(github, core, owner, repo, issue_number, body, "namespace-review-bot");

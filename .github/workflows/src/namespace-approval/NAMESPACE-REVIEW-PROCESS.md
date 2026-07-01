@@ -15,7 +15,8 @@ When a PR modifies any `tspconfig.yaml` file, the analyze-code workflow:
 1. Identifies which languages have namespace/package-name configuration
 2. Extracts namespaces by parsing `tspconfig.yaml` emitter options directly
 3. Determines if the service is data-plane or management-plane (via path and linter config)
-4. Uploads namespace results for the status workflow
+4. For management-plane PRs, validates namespace format against language-specific naming rules (defined in `.github/namespace-format-rules.yml`)
+5. Uploads namespace results for the status workflow
 
 ### Status + Approval
 
@@ -34,22 +35,27 @@ A required status check (`Namespace Approval`) blocks merge until all pending na
 
 ### Reset on Change
 
-If a service team pushes a commit that changes namespace configuration, the approval for that language is reset:
+If a service team pushes a commit that changes namespace configuration, only the **affected languages** are reset:
 
-- The `<lang>-namespace-approved` label is removed
-- The `<lang>-namespace-pending` label is re-applied
+- Only languages whose namespace actually changed have their `<lang>-namespace-approved` label removed
+- Languages with unchanged namespaces keep their approval
+- The `<lang>-namespace-pending` label is re-applied for reset languages
 - The status check fails again until re-approved
+- The bot comment names which specific languages were reset
 
 ## Labels
 
-| Label                       | Applied by       | Meaning                                  |
-| --------------------------- | ---------------- | ---------------------------------------- |
-| `<lang>-namespace-pending`  | Bot              | Namespace detected, awaiting approval    |
-| `<lang>-namespace-approved` | Architect        | Namespace approved for this language     |
-| `namespace-approved-all`    | Architect (mgmt) | Shortcut: approves all pending languages |
-| `Mgmt`                      | Bot              | PR is management plane                   |
+| Label                        | Applied by       | Meaning                                       |
+| ---------------------------- | ---------------- | --------------------------------------------- |
+| `namespace-review-required`  | Bot              | PR has namespaces that need architect approval |
+| `<lang>-namespace-pending`   | Bot              | Namespace detected, awaiting approval          |
+| `<lang>-namespace-approved`  | Architect        | Namespace approved for this language           |
+| `namespace-approved-all`     | Architect (mgmt) | Shortcut: approves all pending languages       |
+| `namespace-approved`         | Bot              | All languages approved                         |
+| `Mgmt`                       | Bot              | PR is management plane                         |
+| `data-plane`                 | Bot              | PR is data plane                               |
 
-Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`
+Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`, `rust`
 
 ## Authorized Approvers
 

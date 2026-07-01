@@ -205,8 +205,12 @@ async function handleLabeled({
     pull_number: prNumber,
   });
   /** @type {string[]} */
-  const currentLabels = currentPR.labels.map((label) => label.name ?? "");
-  const pendingLabels = currentLabels.filter((label) => label.endsWith("-namespace-pending"));
+  const currentLabels = currentPR.labels.map(
+    (/** @type {{ name?: string }} */ label) => label.name ?? "",
+  );
+  const pendingLabels = currentLabels.filter((/** @type {string} */ label) =>
+    label.endsWith("-namespace-pending"),
+  );
 
   const comments = await github.rest.issues.listComments({
     owner: context.repo.owner,
@@ -214,14 +218,14 @@ async function handleLabeled({
     issue_number: prNumber,
   });
   const botComment = comments.data.find(
-    (comment) =>
+    (/** @type {{ user?: { type?: string }, body?: string }} */ comment) =>
       comment.user?.type === "Bot" && comment.body?.includes("<!-- namespace-review-bot -->"),
   );
 
   if (botComment?.body) {
     let body = botComment.body;
     for (const lang of langsToApprove) {
-      const rowRegex = new RegExp(`(\\| ${lang} \\|[^|]+\\|) ⏳ Pending (\\|)`, "i");
+      const rowRegex = new RegExp(`(\\| ${lang}[^|]*\\|[^|]+\\|[^|]+\\|) ⏳ Pending (\\|)`, "gi");
       body = body.replace(rowRegex, `$1 ✅ Approved by @${actor} $2`);
     }
     await github.rest.issues.updateComment({
@@ -297,7 +301,9 @@ export default async function validateApproval({ github, context, core }) {
 
   const prNumber = payload.pull_request.number;
   /** @type {string[]} */
-  const labels = payload.pull_request.labels.map((label) => label.name);
+  const labels = payload.pull_request.labels.map(
+    (/** @type {{ name: string }} */ label) => label.name,
+  );
   const targetLabel = payload.label.name;
   const actor = payload.sender.login;
   const isMgmt = labels.includes("Mgmt");

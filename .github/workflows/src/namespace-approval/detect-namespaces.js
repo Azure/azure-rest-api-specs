@@ -1,8 +1,7 @@
-import { access, readFile, writeFile } from "fs/promises";
+import { readFile, writeFile } from "fs/promises";
 import yaml from "js-yaml";
-import { dirname, join } from "path";
+import { join } from "path";
 import { getChangedFiles } from "../../../shared/src/changed-files.js";
-import { execFile } from "../../../shared/src/exec.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
 /**
@@ -19,38 +18,6 @@ const EMITTER_TO_LANG = {
   "typespec-go": "go",
   "typespec-rust": "rust",
 };
-
-/**
- * @param {string} path
- * @returns {Promise<boolean>}
- */
-async function exists(path) {
-  try {
-    await access(path);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-/**
- * Sparse checkout only materializes .github/, so hydrate changed TypeSpec directories on demand.
- *
- * @param {string} file
- * @param {import("@actions/core")} core
- */
-async function ensureTypeSpecFilesAvailable(file, core) {
-  if (await exists(file)) {
-    return;
-  }
-
-  const tspDir = dirname(file);
-  const workspace = process.env.GITHUB_WORKSPACE ?? process.cwd();
-  core.info(`Hydrating ${tspDir} from git for namespace detection`);
-  await execFile("git", ["sparse-checkout", "add", tspDir], {
-    cwd: workspace,
-  });
-}
 
 /**
  * Resolve the normalized language from an emitter package name.
@@ -74,18 +41,13 @@ function resolveLanguage(emitterKey) {
  *
  * @param {string} file - Path to tspconfig.yaml
  * @param {Record<string, string>} namespacesFound - Map of language to namespace (mutated)
+ * @param {Record<string, string>} artifactNames - Map of language to artifact name (mutated)
  * @param {import("@actions/core")} core
  * @returns {Promise<{ isMgmt: boolean, isDataPlane: boolean }>}
  */
-async function extractNamespaces(file, namespacesFound, core) {
+async function extractNamespaces(file, namespacesFound, artifactNames, core) {
   let isMgmt = false;
   let isDataPlane = false;
-
-  await ensureTypeSpecFilesAvailable(file, core);
-  if (!(await exists(file))) {
-    core.info(`Skipping missing file: ${file}`);
-    return { isMgmt, isDataPlane };
-  }
 
   if (file.includes(".Management/") || file.includes("/resource-manager/")) {
     isMgmt = true;
@@ -133,14 +95,30 @@ async function extractNamespaces(file, namespacesFound, core) {
     const ns = /** @type {string | undefined} */ (emitterOpts.namespace);
     if (ns) {
       namespacesFound[lang] = ns;
+    }
+
+    // For Java, also extract Maven artifact name from emitter-output-dir
+    if (lang === "java") {
+      const outputDir = /** @type {string | undefined} */ (emitterOpts["emitter-output-dir"]);
+      if (outputDir) {
+        // Last path segment is the artifact name, e.g. "{output-dir}/{service-dir}/azure-resourcemanager-contoso"
+        const segments = outputDir.split("/");
+        const artifactName = segments[segments.length - 1];
+        if (artifactName && !artifactName.startsWith("{")) {
+          artifactNames[lang] = artifactName;
+        }
+      }
+    }
+
+    if (ns) {
       continue;
     }
 
     const packageDetails = /** @type {Record<string, unknown> | undefined} */ (
       emitterOpts["package-details"]
     );
-    if (packageDetails?.name) {
-      namespacesFound[lang] = String(packageDetails.name);
+    if (packageDetails?.name && typeof packageDetails.name === "string") {
+      namespacesFound[lang] = packageDetails.name;
       continue;
     }
 
@@ -186,11 +164,13 @@ export default async function detectNamespaces({ context, core }) {
 
     /** @type {Record<string, string>} */
     const namespacesFound = {};
+    /** @type {Record<string, string>} */
+    const artifactNames = {};
     let isMgmt = false;
     let isDataPlane = false;
 
     for (const file of changedFiles) {
-      const result = await extractNamespaces(file, namespacesFound, core);
+      const result = await extractNamespaces(file, namespacesFound, artifactNames, core);
       if (result.isMgmt) {
         isMgmt = true;
       }
@@ -202,14 +182,19 @@ export default async function detectNamespaces({ context, core }) {
     const formatRules = loadFormatRules(core);
     /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
     const formatResults = {};
-    if (formatRules) {
+    if (formatRules && isMgmt) {
       for (const [language, namespace] of Object.entries(namespacesFound)) {
         formatResults[language] = validateNamespaceFormat(language, namespace, formatRules);
+      }
+      for (const [language, artifact] of Object.entries(artifactNames)) {
+        const key = `${language}-artifact`;
+        formatResults[key] = validateNamespaceFormat(language, artifact, formatRules);
       }
     }
 
     const results = {
       namespacesFound,
+      artifactNames,
       isMgmt,
       isDataPlane,
       formatResults,
