@@ -770,7 +770,6 @@ model CancelOperationsResponse {
   results: Array<ResourceOperation>;
 }
 
-
 // ----------- BulkOperationErrors ---------
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from listing bulk operation errors")
@@ -779,6 +778,7 @@ model ListBulkOperationErrorsResponse {
   @doc("The list of bulk operation errors")
   items: Array<ResourceOperation>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "continuationtoken is not a secret, it is fine to leave as is"
   @doc("A continuation token to retrieve the next page of results")
   continuationToken?: string;
 }
@@ -794,4 +794,11 @@ model AcknowledgeBulkOperationErrorsResponse {
 
   @doc("The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope")
   skipped: Array<string>;
+}
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The request to acknowledge bulk operation errors")
+model AcknowledgeBulkOperationErrorsRequest {
+  @doc("The set of operation ids to acknowledge.")
+  operationIds: Array<string>;
 }

@@ -52,7 +52,7 @@ namespace Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
-@@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
+@@clientName(DeadlineType, "BulkActionDeadlineType", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
@@ -65,7 +65,7 @@ namespace Microsoft.Compute;
 );
 @@clientName(
   ExecutionParameters,
-  "ScheduledActionExecutionParameterDetail",
+  "BulkActionExecutionParameterDetail",
   "csharp"
 );
 @@clientName(
@@ -79,7 +79,7 @@ namespace Microsoft.Compute;
   "csharp"
 );
 @@clientName(HibernateResourceOperationResponse.type, "ResourceType", "csharp");
-@@clientName(OperationState, "ScheduledActionOperationState", "csharp");
+@@clientName(OperationState, "BulkActionOperationState", "csharp");
 
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
