@@ -79,6 +79,17 @@ API review for that PR. The label can be removed later to re-enable it.
 > **Note:** `skip-arm-review` does not prevent repository collaborators from
 > running a manual review via VS Code or `/arm-review`.
 
+### Large pull requests
+
+To keep automated reviews accurate and timely, the workflow does not run on
+very large changes. If a PR changes more than **50** files under
+`specification/`, the automated review is skipped and the preconditions step
+posts a short notice on the PR explaining that it was skipped due to the size
+limit. **No action is required from the author** — the assigned Azure API
+reviewer reviews these changes as part of the standard review process. The
+notice is updated in place rather than reposted as the PR changes, so it does
+not add noise on busy PRs.
+
 ### What the automated review covers
 
 The GitHub Actions workflow applies the same rules as the VS Code agent:

@@ -19,6 +19,7 @@ on:
         type: string
   permissions:
     pull-requests: read
+    issues: write # allows the preconditions step to post the "review skipped" notice
   steps:
     - name: Resolve PR number and check preconditions
       id: preconditions
@@ -30,6 +31,54 @@ on:
         script: |
           const eventName = context.eventName;
           const payload   = context.payload;
+
+          // Posts (or refreshes) a single, polished notice explaining that the
+          // automated ARM API review did not run because the PR exceeds the
+          // size limit, and that a human reviewer will handle it. Idempotent:
+          // a hidden marker is used to avoid duplicate comments across pushes.
+          async function postReviewSkippedNotice(github, context, core, prNumber, fileCount, maxFiles) {
+            const marker = '<!-- arm-api-reviewer-agent: automated-review-skipped-size -->';
+            const body =
+              `${marker}\n` +
+              `### Automated ARM API review was not run\n\n` +
+              `This pull request changes **${fileCount}** files under ` +
+              `\`specification/\`, which is above the **${maxFiles}**-file limit ` +
+              `for automated ARM API review. To keep automated reviews accurate ` +
+              `and timely, they are not run on changes of this size.\n\n` +
+              `**No action is needed from you.** Your assigned Azure API ` +
+              `reviewer will review these changes as part of the standard review ` +
+              `process.\n\n` +
+              `> 🔍 *Automated ARM API review*`;
+            try {
+              // Look for an existing notice (paginated to stay reliable on busy PRs).
+              let existing;
+              for (let page = 1; page <= 10 && !existing; page++) {
+                const { data: comments } = await github.rest.issues.listComments({
+                  ...context.repo,
+                  issue_number: prNumber,
+                  per_page: 100,
+                  page,
+                });
+                existing = comments.find(c => c.body?.includes(marker));
+                if (comments.length < 100) break;
+              }
+              if (existing) {
+                await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: existing.id,
+                  body,
+                });
+              } else {
+                await github.rest.issues.createComment({
+                  ...context.repo,
+                  issue_number: prNumber,
+                  body,
+                });
+              }
+            } catch (e) {
+              core.warning(`Could not post automated-review-skipped notice: ${e.message}`);
+            }
+          }
 
           // ── 1. Resolve PR number ────────────────────────────────────────────
           let prNumber;
@@ -145,10 +194,10 @@ on:
           if (specFileCount > MAX_SPEC_FILES) {
             core.setOutput('should_run', 'false');
             core.notice(
-              `PR #${prNumber} touches ${specFileCount} specification/ files (limit: ${MAX_SPEC_FILES}). ` +
-              'Use /arm-review to trigger a focused review after scoping down the PR, ' +
-              'or add the arm-review-requested label for an explicit full-PR review.'
+              `PR #${prNumber} touches ${specFileCount} specification/ files ` +
+              `(limit: ${MAX_SPEC_FILES}) — skipping automated ARM API review.`
             );
+            await postReviewSkippedNotice(github, context, core, prNumber, specFileCount, MAX_SPEC_FILES);
             return;
           }
           core.setOutput('spec_file_count', String(specFileCount));
@@ -268,6 +317,9 @@ The `preconditions` step in the workflow has already verified that:
   `arm-review-requested` label, or `workflow_dispatch`).
 - For `/arm-review` commands, the commenter is the PR author or a repository
   collaborator.
+- The PR changes no more than `MAX_SPEC_FILES` (50) `specification/` files.
+  Larger PRs are left to the assigned human API reviewer; the preconditions
+  step posts a notice on the PR explaining this and no automated review runs.
 
 If `steps.preconditions.outputs.should_run != 'true'`, call `noop` immediately
 and stop. Do not review the PR.
