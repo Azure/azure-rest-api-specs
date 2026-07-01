@@ -538,6 +538,18 @@ model SoftDeletePolicy {
    * Enables soft-deletion for resources in this gallery, allowing them to be recovered within retention time.
    */
   isSoftDeleteEnabled?: boolean;
+
+  /**
+   * The retention period in days for a soft-deleted resource. After this period elapses, the soft-deleted gallery image version transitions to a simulated hard-deleted state.
+   */
+  @added(Versions.v2026_03_03)
+  retentionPeriodInDays?: int32;
+
+  /**
+   * The grace period in days for a simulated hard-deleted resource. During this period the gallery image version is unusable but can still be recovered if required. After this period elapses, the gallery image version is permanently (hard) deleted.
+   */
+  @added(Versions.v2026_03_03)
+  gracePeriodInDays?: int32;
 }
 
 /**
