@@ -133,6 +133,53 @@ interface DefenderForStorageSettings {
   >;
 
   /**
+   * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
+   */
+  // Hand-written (not built from DefenderForStorageSettingsOps.ActionSync<>) so the request
+  // body can be versioned: only the `body` parameter is @added(v2026), so the operation
+  // exists in all versions but the optional StartMalwareScanRequest body only appears in
+  // 2026-01-01-preview. This keeps 2025-09-01-preview byte-identical to main while adding
+  // the on-demand scan filters in 2026. ActionSync<> can't express a per-version body.
+  //
+  // The path parameters are declared inline (matching the DefenderForStorageSettingsOps
+  // legacy alias) rather than via ResourceInstanceParameters<>, so the URL keeps the
+  // existing `resourceId` scope naming instead of switching to `resourceUri`. Route
+  // assembly is driven by @armResourceAction + the @segment/@key decorators (no explicit
+  // @route), which avoids the path-parameter duplication seen when combining an explicit
+  // @route with @armResourceOperations.
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  @armResourceAction(DefenderForStorageSetting)
+  @post
+  startMalwareScan(
+    ...ApiVersionParameter,
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string,
+
+    /** The provider namespace. */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Security",
+
+    /** The defender for storage setting name. */
+    @path
+    @segment("defenderForStorageSettings")
+    @key
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName,
+
+    /** Optional request body to filter which blobs and files to scan. */
+    @added(Versions.v2026_01_01_preview)
+    @bodyRoot
+    body?: StartMalwareScanRequest,
+  ): ArmResponse<MalwareScan> | CloudError;
+
+  /**
    * Gets the Defender for Storage malware scan for the specified storage resource.
    */
   @tag("DefenderForStorage")
@@ -143,57 +190,6 @@ interface DefenderForStorageSettings {
     MalwareScan,
     ErrorType = CloudError
   >;
-}
-
-// startMalwareScan is hand-written (not built from DefenderForStorageSettingsOps.ActionSync<>)
-// and lives in this standalone interface (not @armResourceOperations) so that the request
-// body can be versioned per API version:
-//   - 2025-09-01-preview: no request body (keeps the shipped swagger byte-identical).
-//   - 2026-01-01-preview: optional StartMalwareScanRequest body with on-demand scan filters.
-//
-// Only the `body` parameter carries @added(v2026); the operation itself exists in all
-// versions. This is the only shape that satisfies both constraints at once:
-//   1. A single SDK method named `startMalwareScan` across versions. Two source operations
-//      would collide on TCGC's duplicate-client-name check (source-level, not version-aware;
-//      a hard error that cannot be suppressed), and on @typespec/http duplicate-operation.
-//   2. 2025-09-01-preview must remain unchanged. ActionSync<> always emits a body parameter
-//      and offers no hook to add @added to it, so it can't express a per-version body;
-//      augment decorators can't retrofit @added either (the versioning checker runs first).
-//
-// It cannot live inside the DefenderForStorageSettings @armResourceOperations interface:
-// that decorator auto-injects the resource path parameters, which conflicts with the
-// explicit @route (doubled URL) — and using ResourceInstanceParameters<> instead renames
-// resourceId -> resourceUri in the shipped 2025 swagger. @@clientLocation in
-// back-compatible.tsp folds this operation into the same "DefenderForStorage" SDK client.
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Hand-written operation supplies its own @route; applying @armResourceOperations would re-inject the resource's path parameters and duplicate them in the URL."
-interface DefenderForStorageMalwareScan {
-  /**
-   * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Stable operationId to match the rest of the DefenderForStorage operations."
-  @tag("DefenderForStorage")
-  @tag("Antimalware")
-  @tag("Scan")
-  @route("/{+resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/startMalwareScan")
-  @post
-  @operationId("DefenderForStorage_StartMalwareScan")
-  startMalwareScan(
-    ...ApiVersionParameter,
-
-    /** The fully qualified Azure Resource manager identifier of the resource. */
-    @path
-    resourceId: string,
-
-    /** The defender for storage setting name. */
-    @path
-    @pattern("^[a-z][a-z0-9]*$")
-    settingName: SettingName,
-
-    /** Optional request body to filter which blobs and files to scan. */
-    @added(Versions.v2026_01_01_preview)
-    @bodyRoot
-    body?: StartMalwareScanRequest,
-  ): ArmResponse<MalwareScan> | CloudError;
 }
 
 @@doc(DefenderForStorageSetting.name, "Defender for Storage setting name.");
