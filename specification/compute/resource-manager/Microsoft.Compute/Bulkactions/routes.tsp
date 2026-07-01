@@ -256,7 +256,7 @@ interface VirtualMachineBulkOperations {
   @added(Versions.`2026-07-06-preview`)
   @get
   @autoRoute
-  @action("virtualMachines/bulkOperationErrors")
+  @action("listBulkOperationErrors")
   bulkListOperationErrors(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
     ...Extension.ResourceGroup,
@@ -273,7 +273,7 @@ interface VirtualMachineBulkOperations {
   @post
   @autoRoute
   @armResourceCollectionAction
-  @action("virtualMachines/bulkOperationErrors/acknowledge")
+  @action("acknowledgeBulkOperationErrors")
   bulkAcknowledgeOperationErrors(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
     ...Extension.ResourceGroup,
