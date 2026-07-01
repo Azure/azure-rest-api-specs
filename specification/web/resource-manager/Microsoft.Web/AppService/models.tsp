@@ -16593,8 +16593,8 @@ model SiteSiloProperties {
   /**
    * Application setting overrides for the silo.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "App settings are an arbitrary, customer-defined set of string key/value pairs whose keys are not known to the resource provider, consistent with the existing StringDictionary app-settings contract in this provider."
-  appSettingsOverrides?: Record<string>;
+  @identifiers(#["name"])
+  appSettingsOverrides?: NameValuePair[];
 
   /**
    * Provisioning state of the silo.

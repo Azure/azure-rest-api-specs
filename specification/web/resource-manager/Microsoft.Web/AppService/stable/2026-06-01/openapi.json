@@ -53122,11 +53122,14 @@
           "description": "Networking overrides for the silo."
         },
         "appSettingsOverrides": {
-          "type": "object",
+          "type": "array",
           "description": "Application setting overrides for the silo.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "provisioningState": {
           "$ref": "#/definitions/SiloProvisioningState",
