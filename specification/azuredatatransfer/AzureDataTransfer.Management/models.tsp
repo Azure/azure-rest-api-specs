@@ -1102,16 +1102,8 @@ model FlowProperties {
   streamLatency?: int64;
 
   /**
-   * The passphrase used for SRT streams (non-secret)
-   */
-  @removed(Versions.v2026_02_06_preview)
-  @renamedFrom(Versions.v2026_02_06_preview, "passphrase")
-  deprecatedPassphrase?: string;
-
-  /**
    * The passphrase used for SRT streams
    */
-  @added(Versions.v2026_02_06_preview)
   @secret
   passphrase?: string;
 
@@ -1456,16 +1448,8 @@ model SetDestinationEndpoints {
  */
 model SetStreamPassphrase {
   /**
-   * The passphrase used for SRT streams (non-secret)
-   */
-  @removed(Versions.v2026_02_06_preview)
-  @renamedFrom(Versions.v2026_02_06_preview, "value")
-  deprecatedValue?: string;
-
-  /**
    * The passphrase used for SRT streams
    */
-  @added(Versions.v2026_02_06_preview)
   @secret
   value?: string;
 }
