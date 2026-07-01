@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+@Azure.ResourceManager.featureFile(Features.ElasticPools)
 model ElasticPool
   is Azure.ResourceManager.TrackedResource<ElasticPoolProperties> {
   ...ResourceNameParameter<
@@ -54,7 +54,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   get is ArmResourceRead<ElasticPool>;
 
   /**
@@ -64,7 +64,7 @@ interface ElasticPools {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ElasticPool,
     Response =
@@ -82,7 +82,7 @@ interface ElasticPools {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   update is ArmCustomPatchAsync<ElasticPool, PatchModel = ElasticPoolUpdate>;
 
   /**
@@ -91,7 +91,7 @@ interface ElasticPools {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticPool,
     Response =
@@ -105,7 +105,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   listByServer is ArmResourceListByParent<
     ElasticPool,
     Parameters = {
@@ -125,7 +125,7 @@ interface ElasticPools {
   @list
   @get
   @action("databases")
-  @Azure.ResourceManager.Legacy.feature(Features.Databases)
+  @Azure.ResourceManager.featureFile(Features.Databases)
   listByElasticPool is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -140,7 +140,7 @@ interface ElasticPools {
   @list
   @get
   @action("operations")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
+  @Azure.ResourceManager.featureFile(Features.ElasticPoolOperations)
   elasticPoolOperationsListByElasticPool is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -152,7 +152,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPoolOperations")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPoolOperations)
+  @Azure.ResourceManager.featureFile(Features.ElasticPoolOperations)
   cancel is ArmResourceActionSync<
     ElasticPool,
     void,
@@ -173,7 +173,7 @@ interface ElasticPools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ElasticPools")
-  @Azure.ResourceManager.Legacy.feature(Features.ElasticPools)
+  @Azure.ResourceManager.featureFile(Features.ElasticPools)
   failover is ArmResourceActionAsyncBase<
     ElasticPool,
     void,

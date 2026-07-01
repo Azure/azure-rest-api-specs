@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
+@Azure.ResourceManager.featureFile(Features.ServerKeys)
 model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
   ...ResourceNameParameter<
     Resource = ServerKey,
@@ -42,7 +42,7 @@ model ServerKey is Azure.ResourceManager.ProxyResource<ServerKeyProperties> {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ServerKeys)
+@Azure.ResourceManager.featureFile(Features.ServerKeys)
 interface ServerKeys {
   /**
    * Gets a server key.

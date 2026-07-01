@@ -24,7 +24,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Common.Resource via inheritance is the standard pattern for all Network RP resources"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@Azure.ResourceManager.featureFile(Features.interconnectGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model InterconnectGroup extends Common.Resource {
   /** Properties of the interconnect group. */
@@ -54,7 +54,7 @@ model InterconnectGroup extends Common.Resource {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Common.SubResourceModel via inheritance is the standard pattern for all Network RP child resources"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@Azure.ResourceManager.featureFile(Features.interconnectGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(InterconnectGroup)
 model Subgroup extends Common.SubResourceModel {
@@ -73,7 +73,7 @@ model Subgroup extends Common.SubResourceModel {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@Azure.ResourceManager.featureFile(Features.interconnectGroup)
 @armResourceOperations
 interface InterconnectGroups {
   /**
@@ -128,7 +128,7 @@ interface InterconnectGroups {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@Azure.ResourceManager.featureFile(Features.interconnectGroup)
 @armResourceOperations
 interface Subgroups {
   /**

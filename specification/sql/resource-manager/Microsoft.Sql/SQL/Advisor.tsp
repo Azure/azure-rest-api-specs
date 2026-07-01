@@ -69,7 +69,7 @@ alias AdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.DatabaseAdvisors)
+@Azure.ResourceManager.featureFile(Features.DatabaseAdvisors)
 interface Advisors {
   /**
    * Gets a database advisor.
@@ -125,7 +125,7 @@ alias ServerAdvisorOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ServerAdvisors)
+@Azure.ResourceManager.featureFile(Features.ServerAdvisors)
 interface ServerAdvisors {
   /**
    * Gets a server advisor.

@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+@Azure.ResourceManager.featureFile(Features.virtualNetworkAppliance)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkAppliance extends Common.Resource {
   properties?: VirtualNetworkAppliancePropertiesFormat;
@@ -41,7 +41,7 @@ model VirtualNetworkAppliance extends Common.Resource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
+@Azure.ResourceManager.featureFile(Features.virtualNetworkAppliance)
 @armResourceOperations
 interface VirtualNetworkAppliances {
   /**

@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
+@Azure.ResourceManager.featureFile(Features.ServerTrustCertificates)
 model ServerTrustCertificate
   is Azure.ResourceManager.ProxyResource<ServerTrustCertificateProperties> {
   ...ResourceNameParameter<
@@ -46,7 +46,7 @@ alias ServerTrustCertificatesOps = Azure.ResourceManager.Legacy.LegacyOperations
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ServerTrustCertificates)
+@Azure.ResourceManager.featureFile(Features.ServerTrustCertificates)
 interface ServerTrustCertificates {
   /**
    * Gets a server trust certificate that was uploaded from SQL Server to SQL Managed Instance.

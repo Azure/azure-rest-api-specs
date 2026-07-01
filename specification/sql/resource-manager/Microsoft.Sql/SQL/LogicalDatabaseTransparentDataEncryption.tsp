@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
+@Azure.ResourceManager.featureFile(Features.TransparentDataEncryptions)
 model LogicalDatabaseTransparentDataEncryption
   is Azure.ResourceManager.ProxyResource<TransparentDataEncryptionProperties> {
   ...ResourceNameParameter<
@@ -31,7 +31,7 @@ model LogicalDatabaseTransparentDataEncryption
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.TransparentDataEncryptions)
+@Azure.ResourceManager.featureFile(Features.TransparentDataEncryptions)
 interface LogicalDatabaseTransparentDataEncryptions {
   /**
    * Gets a logical database's transparent data encryption.

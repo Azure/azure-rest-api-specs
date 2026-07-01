@@ -15,7 +15,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
-@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
+@Azure.ResourceManager.featureFile(Features.InstanceFailoverGroups)
 model InstanceFailoverGroup
   is Azure.ResourceManager.ProxyResource<InstanceFailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -50,7 +50,7 @@ alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
+@Azure.ResourceManager.featureFile(Features.InstanceFailoverGroups)
 interface InstanceFailoverGroups {
   /**
    * Gets a failover group.

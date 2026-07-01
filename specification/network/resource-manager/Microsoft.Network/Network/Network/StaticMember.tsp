@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @parentResource(NetworkGroup)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model StaticMember extends ChildResource {
@@ -40,7 +40,7 @@ model StaticMember extends ChildResource {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@Azure.ResourceManager.featureFile(Features.networkManager)
 @armResourceOperations
 interface StaticMembers {
   /**

@@ -46,7 +46,7 @@ alias NetworkInterfaceOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@Azure.ResourceManager.featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface NetworkInterfaces {
   /**
@@ -89,7 +89,7 @@ alias NetworkInterfaceOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOpe
 >;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@Azure.ResourceManager.featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface NetworkInterfaceOperationGroup {
   /**

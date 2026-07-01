@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceKeys)
 model ManagedInstanceKey
   is Azure.ResourceManager.ProxyResource<ManagedInstanceKeyProperties> {
   ...ResourceNameParameter<
@@ -36,7 +36,7 @@ model ManagedInstanceKey
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceKeys)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceKeys)
 interface ManagedInstanceKeys {
   /**
    * Gets a managed instance key.

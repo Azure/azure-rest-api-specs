@@ -20,7 +20,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.featureFile(Features.expressRoute)
 @Http.Private.includeInapplicableMetadataInPayload(false)
 model ExpressRouteProviderPort extends TrackedResourceWithOptionalLocation {
   properties?: ExpressRouteProviderPortProperties;
@@ -38,7 +38,7 @@ model ExpressRouteProviderPort extends TrackedResourceWithOptionalLocation {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@Azure.ResourceManager.featureFile(Features.expressRoute)
 @armResourceOperations
 interface ExpressRouteProviderPorts {
   /**

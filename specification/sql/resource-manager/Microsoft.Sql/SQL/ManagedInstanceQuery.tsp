@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedDatabase)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
+@Azure.ResourceManager.featureFile(Features.ManagedDatabaseQueries)
 model ManagedInstanceQuery
   is Azure.ResourceManager.ProxyResource<QueryProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model ManagedInstanceQuery
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.ManagedDatabaseQueries)
+@Azure.ResourceManager.featureFile(Features.ManagedDatabaseQueries)
 interface ManagedInstanceQueries {
   /**
    * Get query by query id.

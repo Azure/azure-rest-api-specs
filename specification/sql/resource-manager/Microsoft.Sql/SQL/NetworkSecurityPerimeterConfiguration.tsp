@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.NetworkSecurityPerimeterConfigurations
 )
 model NetworkSecurityPerimeterConfiguration
@@ -31,7 +31,7 @@ model NetworkSecurityPerimeterConfiguration
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.NetworkSecurityPerimeterConfigurations
 )
 interface NetworkSecurityPerimeterConfigurations {

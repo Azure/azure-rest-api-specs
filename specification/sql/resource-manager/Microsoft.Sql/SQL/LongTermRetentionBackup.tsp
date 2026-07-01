@@ -15,7 +15,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
+@Azure.ResourceManager.featureFile(Features.LongTermRetentionBackups)
 model LongTermRetentionBackup
   is Azure.ResourceManager.ProxyResource<LongTermRetentionBackupProperties> {
   ...ResourceNameParameter<
@@ -67,7 +67,7 @@ alias LongTermRetentionBackupOps = Azure.ResourceManager.Legacy.LegacyOperations
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
+@Azure.ResourceManager.featureFile(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackups {
   /**
    * Gets a long term retention backup.
@@ -225,7 +225,7 @@ alias LongTermRetentionBackupOperationGroupOps = Azure.ResourceManager.Legacy.Le
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.LongTermRetentionBackups)
+@Azure.ResourceManager.featureFile(Features.LongTermRetentionBackups)
 interface LongTermRetentionBackupOperationGroup {
   /**
    * Gets a long term retention backup.

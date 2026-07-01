@@ -20,7 +20,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
+@Azure.ResourceManager.featureFile(Features.IPv6FirewallRules)
 model IPv6FirewallRule extends ProxyResourceWithWritableName {
   /**
    * The properties of the IPv6 firewall rule.
@@ -31,7 +31,7 @@ model IPv6FirewallRule extends ProxyResourceWithWritableName {
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.IPv6FirewallRules)
+@Azure.ResourceManager.featureFile(Features.IPv6FirewallRules)
 interface IPv6FirewallRules {
   /**
    * Gets an IPv6 firewall rule.

@@ -17,7 +17,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("current")
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.SqlAgent)
+@Azure.ResourceManager.featureFile(Features.SqlAgent)
 model SqlAgentConfiguration
   is Azure.ResourceManager.ProxyResource<SqlAgentConfigurationProperties> {
   ...ResourceNameParameter<
@@ -31,7 +31,7 @@ model SqlAgentConfiguration
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(Features.SqlAgent)
+@Azure.ResourceManager.featureFile(Features.SqlAgent)
 interface SqlAgentConfigurations {
   /**
    * Gets current instance sql agent configuration.

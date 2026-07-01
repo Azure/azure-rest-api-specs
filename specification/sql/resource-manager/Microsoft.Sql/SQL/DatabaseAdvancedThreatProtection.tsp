@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.DatabaseAdvancedThreatProtectionSettings
 )
 model DatabaseAdvancedThreatProtection
@@ -33,7 +33,7 @@ model DatabaseAdvancedThreatProtection
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
-@Azure.ResourceManager.Legacy.feature(
+@Azure.ResourceManager.featureFile(
   Features.DatabaseAdvancedThreatProtectionSettings
 )
 interface DatabaseAdvancedThreatProtections {

@@ -19,7 +19,7 @@ namespace Microsoft.Sql;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Server)
-@Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
+@Azure.ResourceManager.featureFile(Features.FirewallRules)
 model FirewallRule extends ProxyResourceWithWritableName {
   /**
    * Resource properties.
@@ -29,7 +29,7 @@ model FirewallRule extends ProxyResourceWithWritableName {
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.FirewallRules)
+@Azure.ResourceManager.featureFile(Features.FirewallRules)
 interface FirewallRules {
   /**
    * Gets a firewall rule.

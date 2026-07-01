@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceDtcs)
 model ManagedInstanceDtc
   is Azure.ResourceManager.ProxyResource<ManagedInstanceDtcProperties> {
   ...ResourceNameParameter<
@@ -31,7 +31,7 @@ model ManagedInstanceDtc
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceDtcs)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceDtcs)
 interface ManagedInstanceDtcs {
   /**
    * Gets managed instance DTC settings.

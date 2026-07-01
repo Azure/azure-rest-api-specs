@@ -16,7 +16,7 @@ namespace Microsoft.Sql;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ManagedInstance)
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceOperations)
 model ManagedInstanceOperation
   is Azure.ResourceManager.ProxyResource<ManagedInstanceOperationProperties> {
   ...ResourceNameParameter<
@@ -29,7 +29,7 @@ model ManagedInstanceOperation
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
-@Azure.ResourceManager.Legacy.feature(Features.ManagedInstanceOperations)
+@Azure.ResourceManager.featureFile(Features.ManagedInstanceOperations)
 interface ManagedInstanceOperations {
   /**
    * Gets a management operation on a managed instance.
