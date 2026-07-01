@@ -771,17 +771,10 @@ model CancelOperationsResponse {
 }
 
 // ----------- BulkOperationErrors ---------
+@@identifiers(ListBulkOperationErrorsResponse.value, #[]);
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from listing bulk operation errors")
-model ListBulkOperationErrorsResponse {
-  @identifiers(#["resourceId"])
-  @doc("The list of bulk operation errors")
-  items: Array<ResourceOperation>;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "continuationtoken is not a secret, it is fine to leave as is"
-  @doc("A continuation token to retrieve the next page of results")
-  continuationToken?: string;
-}
+model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
 
 @added(Versions.`2026-07-06-preview`)
 @doc("The response from acknowledging bulk operation errors")

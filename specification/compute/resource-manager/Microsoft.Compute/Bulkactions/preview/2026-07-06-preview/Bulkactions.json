@@ -683,13 +683,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "description": "A continuation token to retrieve the next page of results.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -713,6 +706,9 @@
           "VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3035,23 +3031,22 @@
       "type": "object",
       "description": "The response from listing bulk operation errors",
       "properties": {
-        "items": {
+        "value": {
           "type": "array",
-          "description": "The list of bulk operation errors",
+          "description": "The ResourceOperation items on this page",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
           },
-          "x-ms-identifiers": [
-            "resourceId"
-          ]
+          "x-ms-identifiers": []
         },
-        "continuationToken": {
+        "nextLink": {
           "type": "string",
-          "description": "A continuation token to retrieve the next page of results"
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
       },
       "required": [
-        "items"
+        "value"
       ]
     },
     "LocalStorageDiskType": {

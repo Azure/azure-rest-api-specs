@@ -256,6 +256,7 @@ interface VirtualMachineBulkOperations {
   @added(Versions.`2026-07-06-preview`)
   @get
   @autoRoute
+  @list
   @action("listBulkOperationErrors")
   bulkListOperationErrors(
     ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
@@ -266,10 +267,6 @@ interface VirtualMachineBulkOperations {
     @query("lookbackInMinutes")
     @doc("The number of minutes to look back for errors.")
     lookbackInMinutes?: int32,
-
-    @query("continuationToken")
-    @doc("A continuation token to retrieve the next page of results.")
-    continuationToken?: string,
   ): ArmResponse<ListBulkOperationErrorsResponse> | ErrorResponse;
 
   /** BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group */
