@@ -46,3 +46,4 @@ using Microsoft.DurableTask;
 );
 @@clientName(SchedulerProperties.ipAllowlist, "IPAllowlist", "csharp");
 @@clientName(SchedulerPropertiesUpdate.ipAllowlist, "IPAllowlist", "csharp");
+@@clientName(PublicNetworkAccess, "DurableTaskPublicNetworkAccess", "csharp");
