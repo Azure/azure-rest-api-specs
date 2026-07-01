@@ -15857,6 +15857,50 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/lastKnownGood": {
+      "get": {
+        "operationId": "LastKnownGoodResources_ListLastKnownGoods",
+        "tags": [
+          "WebApps"
+        ],
+        "description": "Lists the last known good revision state for a Web App.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LastKnownGoodCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/lastKnownGood/default": {
       "get": {
         "operationId": "LastKnownGoodResources_GetLastKnownGood",
@@ -46562,6 +46606,27 @@
         "name": "KubeEnvironmentProvisioningState",
         "modelAsString": false
       }
+    },
+    "LastKnownGoodCollection": {
+      "type": "object",
+      "description": "Collection of last known good resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LastKnownGoodResource items on this page",
+          "items": {
+            "$ref": "#/definitions/LastKnownGoodResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LastKnownGoodProperties": {
       "type": "object",

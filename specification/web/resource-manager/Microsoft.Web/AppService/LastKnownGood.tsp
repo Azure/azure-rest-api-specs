@@ -35,6 +35,15 @@ model LastKnownGoodResource
 @armResourceOperations(#{ omitTags: true })
 interface LastKnownGoodResources {
   /**
+   * Lists the last known good revision state for a Web App.
+   */
+  listLastKnownGoods is ArmResourceListByParent<
+    LastKnownGoodResource,
+    Response = ArmResponse<LastKnownGoodCollection>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
    * Gets the last known good revision state for a Web App.
    */
   getLastKnownGood is ArmResourceRead<

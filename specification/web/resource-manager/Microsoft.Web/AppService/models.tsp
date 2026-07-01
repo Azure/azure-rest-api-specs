@@ -16796,3 +16796,9 @@ model ServerFarmSiloCollection is Azure.Core.Page<ServerFarmSilo>;
 @added(Versions.v2026_06_01)
 model ManagedTrafficConfigCollection
   is Azure.Core.Page<ManagedTrafficConfigResource>;
+
+/**
+ * Collection of last known good resources.
+ */
+@added(Versions.v2026_06_01)
+model LastKnownGoodCollection is Azure.Core.Page<LastKnownGoodResource>;
