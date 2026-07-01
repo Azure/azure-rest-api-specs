@@ -30,8 +30,11 @@ enum Versions {
 
   /** 2026-04-17-preview version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
-  @Azure.Core.previewVersion
   v2026_04_17_preview: "2026-04-17-preview",
+
+  /** 2026-06-02 version */
+  @armCommonTypesVersion(CommonTypes.Versions.v6)
+  v2026_06_02: "2026-06-02",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -66,7 +69,8 @@ model PoolProperties {
   fabricProfile: FabricProfile;
 
   @doc("The resource id of the DevCenter Project the pool belongs to.")
-  devCenterProjectResourceId: string;
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  devCenterProjectResourceId?: string;
 
   @doc("The runtime configuration of the pool.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
@@ -101,6 +105,14 @@ model GitHubOrganization {
 model AzureDevOpsOrganizationProfile extends OrganizationProfile {
   @doc("Azure DevOps organization profile")
   kind: "AzureDevOps";
+
+  @doc("An extra description to add to the Azure DevOps pool.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  description?: string;
+
+  @doc("Determines whether the service updates the Azure DevOps pool description.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  updateDescription?: boolean;
 
   @doc("The list of Azure DevOps organizations the pool should be present in.")
   @identifiers(#[])
@@ -204,6 +216,17 @@ model DevOpsAzureSku {
   @doc("The mount path for the NVMe striped volume on Linux (e.g., '/mnt/azure_nvme_temp'). Defaults to '/mnt/azure_nvme_temp' when not specified.")
   @added(Microsoft.DevOpsInfrastructure.Versions.v2026_04_17_preview)
   linuxNvmePath?: string;
+
+  @doc("Specifies VM sizes for instance-mix allocation.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  @identifiers(#["name"])
+  vmSizes?: VmSize[];
+}
+
+@doc("Specifies the VM Size.")
+model VmSize {
+  @doc("Specifies the name of the VM Size.")
+  name?: string;
 }
 
 @doc("The storage profile of the VMSS.")
@@ -314,6 +337,26 @@ model PoolImage {
   @visibility(Lifecycle.Read)
   @added(Microsoft.DevOpsInfrastructure.Versions.v2025_09_20)
   isEphemeral?: boolean;
+
+  @doc("The ARM resource ID of the storage account hosting provisioning scripts for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  provisioningScriptStorageAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  @doc("The managed identity client ID used to access provisioning script content for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  provisioningScriptManagedIdentityClientId?: string;
+
+  @doc("Determines whether the machine should be restarted after provisioning script execution for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  provisioningScriptShouldRestart?: boolean;
+
+  @doc("The provisioning script entry point for this image.")
+  @added(Microsoft.DevOpsInfrastructure.Versions.v2026_06_02)
+  provisioningScriptEntryPoint?: string;
 }
 
 @doc("The OS profile of the machines in the pool.")
