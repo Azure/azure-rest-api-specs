@@ -15200,11 +15200,11 @@
       "type": "object",
       "description": "Specifies the constraints for flexible VM sizing.",
       "properties": {
-        "architectureType": {
+        "architectureTypes": {
           "type": "array",
-          "description": "Specifies the architecture type(s) for which the flexible profile is applicable.\nExamples: x64, arm64. When specified, only VMs of the specified architecture types will be considered for allocation.",
+          "description": "Specifies the architecture types for which the flexible profile is applicable.\nWhen specified, only VM sizes of the specified architecture types are considered for allocation.",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/ArchitectureTypes"
           }
         }
       }

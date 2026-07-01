@@ -5514,10 +5514,10 @@ model BootDiagnosticsInstanceView {
 @added(Versions.v2026_04_01)
 model FlexProfileConstraints {
   /**
-   * Specifies the architecture type(s) for which the flexible profile is applicable.
-   * Examples: x64, arm64. When specified, only VMs of the specified architecture types will be considered for allocation.
+   * Specifies the architecture types for which the flexible profile is applicable.
+   * When specified, only VM sizes of the specified architecture types are considered for allocation.
    */
-  architectureType?: string[];
+  architectureTypes?: ArchitectureTypes[];
 }
 
 /**
