@@ -16,16 +16,10 @@ namespace Microsoft.Network;
 /**
  * Peering in an ExpressRouteCircuit resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @parentResource(ExpressRouteCircuit)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCircuitPeering extends SubResourceModel {
-  properties?: ExpressRouteCircuitPeeringPropertiesFormat;
-
+model ExpressRouteCircuitPeering
+  is SubResourceInstance<ExpressRouteCircuitPeeringPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("peeringName")
@@ -128,8 +122,7 @@ alias RouteTablesSummaryOps = Azure.ResourceManager.Legacy.RoutedOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCircuitPeerings {
   /**

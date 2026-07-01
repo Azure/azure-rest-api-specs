@@ -15,16 +15,10 @@ namespace Microsoft.Network;
 /**
  * The Network Manager Connection resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkManagerConnection extends ChildResource {
-  properties?: NetworkManagerConnectionProperties;
-
+@featureFile(Features.networkManager)
+model NetworkManagerConnection
+  is ChildResourceInstance<NetworkManagerConnectionProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("networkManagerConnectionName")
@@ -59,8 +53,7 @@ alias NetworkManagerConnectionOps = Azure.ResourceManager.Legacy.ExtensionOperat
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations
 interface NetworkManagerConnections {
   /**
@@ -111,8 +104,7 @@ interface NetworkManagerConnections {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations(#{ omitTags: true })
 interface ManagementGroupNetworkManagerConnections {
   /**

@@ -16,19 +16,9 @@ namespace Microsoft.Network;
 /**
  * Instance of Pool resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @parentResource(NetworkManager)
-model IpamPool extends CommonTrackedResource {
-  /**
-   * Properties of the Pool resource.
-   */
-  properties: IpamPoolProperties;
-
+model IpamPool is CommonTrackedResourceInstance<IpamPoolProperties, false> {
   /** A unique read-only string that changes whenever the resource is updated. */
   @visibility(Lifecycle.Read)
   etag?: string;
@@ -44,8 +34,7 @@ model IpamPool extends CommonTrackedResource {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface IpamPools {
   /**

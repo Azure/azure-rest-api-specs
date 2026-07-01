@@ -16,16 +16,10 @@ namespace Microsoft.Network;
 /**
  * Virtual Router Peering resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @parentResource(VirtualRouter)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VirtualRouterPeering extends SubResourceModel {
-  properties?: VirtualRouterPeeringProperties;
-
+model VirtualRouterPeering
+  is SubResourceInstance<VirtualRouterPeeringProperties> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
@@ -43,8 +37,7 @@ model VirtualRouterPeering extends SubResourceModel {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface VirtualRouterPeerings {
   /**

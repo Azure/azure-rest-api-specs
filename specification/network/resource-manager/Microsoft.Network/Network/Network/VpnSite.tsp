@@ -15,15 +15,9 @@ namespace Microsoft.Network;
 /**
  * VpnSite Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnSite extends TrackedResourceWithSettableIdOptionalLocation {
-  properties?: VpnSiteProperties;
-
+@featureFile(Features.virtualWAN)
+model VpnSite
+  is TrackedResourceWithSettableIdOptionalLocationInstance<VpnSiteProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("vpnSiteName")
@@ -38,8 +32,7 @@ model VpnSite extends TrackedResourceWithSettableIdOptionalLocation {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface VpnSites {
   /**

@@ -15,15 +15,8 @@ namespace Microsoft.Network;
 /**
  * Bastion Host resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model BastionHost extends Common.Resource {
-  properties?: BastionHostPropertiesFormat;
-
+@featureFile(Features.virtualNetwork)
+model BastionHost is ResourceInstance<BastionHostPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("bastionHostName")
@@ -46,8 +39,7 @@ model BastionHost extends Common.Resource {
   sku?: Sku;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface BastionHosts {
   /**

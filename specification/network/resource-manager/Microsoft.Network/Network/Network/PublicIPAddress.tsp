@@ -73,8 +73,7 @@ alias PublicIPAddressSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperat
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface PublicIPAddresses {
   /**
@@ -119,8 +118,7 @@ alias PublicIPAddressOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOper
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface PublicIPAddressOperationGroup {
   /**

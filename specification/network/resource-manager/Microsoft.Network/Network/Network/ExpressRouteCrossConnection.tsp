@@ -15,15 +15,9 @@ namespace Microsoft.Network;
 /**
  * ExpressRouteCrossConnection resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ExpressRouteCrossConnection extends Common.Resource {
-  properties?: ExpressRouteCrossConnectionProperties;
-
+@featureFile(Features.expressRoute)
+model ExpressRouteCrossConnection
+  is ResourceInstance<ExpressRouteCrossConnectionProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("crossConnectionName")
@@ -61,8 +55,7 @@ alias ExpressRouteCrossConnectionPeeringOps = Azure.ResourceManager.Legacy.Route
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@featureFile(Features.expressRoute)
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface ExpressRouteCrossConnections {
   /**
