@@ -36,6 +36,7 @@ import "./JWTAuthenticator.tsp";
 import "./MeshMembership.tsp";
 import "./Operations.tsp";
 import "./LocationRoutes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

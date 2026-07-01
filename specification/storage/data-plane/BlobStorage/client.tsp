@@ -977,6 +977,9 @@ model BlobServicePropertiesCsharp {
 @@access(JsonTextConfiguration, Access.internal, "csharp");
 @@access(BlobDeleteTypeCustom, Access.internal, "csharp");
 
+@@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp");
+@@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp");
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   MetadataHeaders.metadata,

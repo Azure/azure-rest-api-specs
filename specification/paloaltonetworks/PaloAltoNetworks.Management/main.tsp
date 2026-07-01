@@ -29,6 +29,7 @@ import "./LocalRulesResource.tsp";
 import "./PrefixListResource.tsp";
 import "./CustomCaptureConfigurationsFirewallResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
