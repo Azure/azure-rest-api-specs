@@ -31,14 +31,17 @@ union ClientEventType {
 
   /** Sent by the client to initiate a WebRTC session with an SDP offer. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   rtc_call_sdp_create: "rtc.call.sdp.create",
 
   /** Streamed delta of input text content being appended to an item. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   input_text_delta: "input_text.delta",
 
   /** Signals that the streamed input text content for an item is complete. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   input_text_done: "input_text.done",
 }
 
@@ -159,17 +162,21 @@ union ServerEventType {
 
   /** Returned when the WebRTC SDP negotiation completes successfully. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   rtc_call_sdp_created: "rtc.call.sdp.created",
 
   /** Returned when a WebRTC call operation fails. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   rtc_call_error: "rtc.call.error",
 
   /** Output audio buffer playback started. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   output_audio_buffer_started: "output_audio_buffer.started",
 
   /** Output audio buffer playback stopped. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   output_audio_buffer_stopped: "output_audio_buffer.stopped",
 }

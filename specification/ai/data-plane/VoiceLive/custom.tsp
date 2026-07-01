@@ -72,6 +72,7 @@ model RequestSession {
 
   /** Whether the model is allowed to call tools in parallel. */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   parallel_tool_calls?: boolean = true;
 
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
@@ -542,6 +543,7 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
  * service in the future.
  */
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 union AzureRealtimeNativeVoiceName {
   string,
 
@@ -589,6 +591,7 @@ union AzureRealtimeNativeVoiceName {
  * `azure-realtime` model.
  */
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(DualUsage)
 model AzureRealtimeNativeVoice {
   /** The type of the voice. */
@@ -608,6 +611,7 @@ union Voice {
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
 
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   AzureRealtimeNativeVoice,
 }
 
@@ -725,11 +729,19 @@ model EouDetection {
       | "semantic_detection_v1_multilingual"
       | string
   )
+  @typeChangedFrom(
+    Versions.v2026_07_15,
+
+      | "semantic_detection_v1"
+      | "semantic_detection_v1_en"
+      | "semantic_detection_v1_multilingual"
+      | "smart_end_of_turn_detection"
+      | string
+  )
   `model`:
     | "semantic_detection_v1"
     | "semantic_detection_v1_en"
     | "semantic_detection_v1_multilingual"
-    | "smart_end_of_turn_detection"
     | string;
 }
 
@@ -798,6 +810,7 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 @usage(RequestUsage)
 model SmartEndOfTurnDetection extends EouDetection {
   `model`: "smart_end_of_turn_detection";
@@ -990,6 +1003,7 @@ model AudioEchoCancellation {
    * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
 
   /**
@@ -999,6 +1013,7 @@ model AudioEchoCancellation {
    * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
    */
   @added(Versions.v2026_06_01_preview)
+  @removed(Versions.v2026_07_15)
   @minValue(1)
   @maxValue(2)
   channels?: int32 = 1;
@@ -1007,6 +1022,7 @@ model AudioEchoCancellation {
 /** The source of the echo cancellation reference signal. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @added(Versions.v2026_06_01_preview)
+@removed(Versions.v2026_07_15)
 union EchoCancellationReferenceSource {
   string,
 
