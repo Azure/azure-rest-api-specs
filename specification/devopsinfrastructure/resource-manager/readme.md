@@ -27,7 +27,7 @@ These are the global settings for the devopsinfrastructure.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2026-04-17
+tag: package-stable-2026-06-02
 ```
 
 ``` yaml
@@ -42,6 +42,15 @@ These settings apply only when `--tag=package-preview-2026-04-17` is specified o
 ```yaml $(tag) == 'package-preview-2026-04-17'
 input-file:
   - Microsoft.DevOpsInfrastructure/preview/2026-04-17-preview/devopsinfrastructure.json
+```
+
+### Tag: package-stable-2026-06-02
+
+These settings apply only when `--tag=package-stable-2026-06-02` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-2026-06-02'
+input-file:
+  - Microsoft.DevOpsInfrastructure/stable/2026-06-02/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-09-20
