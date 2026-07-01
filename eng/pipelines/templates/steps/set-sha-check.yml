@@ -64,4 +64,4 @@ steps:
     displayName: ${{ parameters.DisplayName }}
     condition: ${{ parameters.Condition }}
     env:
-      GH_TOKEN: $(GH_TOKEN)
+      GH_TOKEN: ${{ coalesce(parameters.GitHubToken, '$(GH_TOKEN)') }}
