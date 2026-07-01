@@ -409,12 +409,12 @@ model PercentileAllocation {
   @maxValue(100)
   @minValue(0)
   @doc("The lower bounds for this percentile allocation.")
-  from: int32;
+  from: float64;
 
   @maxValue(100)
   @minValue(0)
   @doc("The upper bounds for this percentile allocation.")
-  to: int32;
+  to: float64;
 }
 
 @doc("Feature Flag UserAllocation object.")
