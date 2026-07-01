@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-preview-2026-04-17` is specified o
 
 ```yaml $(tag) == 'package-preview-2026-04-17'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2026-04-17-preview/devopsinfrastructure.json
+  - preview/2026-04-17-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2026-06-02
@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-stable-2026-06-02` is specified on
 
 ```yaml $(tag) == 'package-stable-2026-06-02'
 input-file:
-  - Microsoft.DevOpsInfrastructure/stable/2026-06-02/devopsinfrastructure.json
+  - stable/2026-06-02/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-09-20
@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-stable-2025-09-20` is specified on
 
 ```yaml $(tag) == 'package-stable-2025-09-20'
 input-file:
-  - Microsoft.DevOpsInfrastructure/stable/2025-09-20/devopsinfrastructure.json
+  - stable/2025-09-20/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-01-21
@@ -68,7 +68,7 @@ These settings apply only when `--tag=package-stable-2025-01-21` is specified on
 
 ```yaml $(tag) == 'package-stable-2025-01-21'
 input-file:
-  - Microsoft.DevOpsInfrastructure/stable/2025-01-21/devopsinfrastructure.json
+  - stable/2025-01-21/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2024-10-19
@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-stable-2024-10-19` is specified on
 
 ```yaml $(tag) == 'package-stable-2024-10-19'
 input-file:
-  - Microsoft.DevOpsInfrastructure/stable/2024-10-19/devopsinfrastructure.json
+  - stable/2024-10-19/devopsinfrastructure.json
 ```
 
 ### Tag: package-preview-2024-04
@@ -86,7 +86,7 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2024-04-04-preview/devopsinfrastructure.json
+  - preview/2024-04-04-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-preview-2024-03
@@ -95,7 +95,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2024-03-26-preview/devopsinfrastructure.json
+  - preview/2024-03-26-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-2023-12-13-preview
@@ -104,7 +104,7 @@ These settings apply only when `--tag=package-2023-12-13-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-12-13-preview'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2023-12-13-preview/devopsinfrastructure.json
+  - preview/2023-12-13-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-2023-10-30-preview
@@ -113,7 +113,7 @@ These settings apply only when `--tag=package-2023-10-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-30-preview'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2023-10-30-preview/devopsinfrastructure.json
+  - preview/2023-10-30-preview/devopsinfrastructure.json
 ```
 
 ---
