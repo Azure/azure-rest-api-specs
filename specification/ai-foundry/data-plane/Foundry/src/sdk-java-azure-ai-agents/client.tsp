@@ -203,6 +203,11 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
 
+@@clientName(UploadSessionFileParams.agent_session_id, "session_id", "java");
+@@clientName(DownloadSessionFileParams.agent_session_id, "session_id", "java");
+@@clientName(ListSessionFilesParams.agent_session_id, "session_id", "java");
+@@clientName(DeleteSessionFileParams.agent_session_id, "session_id", "java");
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
