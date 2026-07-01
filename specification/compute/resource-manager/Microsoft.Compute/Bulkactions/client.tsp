@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.Compute;
 
+@@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
