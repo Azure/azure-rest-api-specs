@@ -2388,7 +2388,7 @@ model ExpansionJobProperties {
    */
   @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  rebalance?: boolean = false;
+  runRebalanceJob?: boolean = false;
 
   /**
    * Name of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
