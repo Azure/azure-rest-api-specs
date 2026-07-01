@@ -37469,7 +37469,6 @@ components:
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
-          reminder_preview: '#/components/schemas/ReminderPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
           web_search: '#/components/schemas/OpenAI.WebSearchTool'
@@ -37819,7 +37818,6 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
-            - reminder_preview
             - work_iq_preview
             - fabric_iq_preview
             - toolbox_search_preview
@@ -39618,30 +39616,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
-    ReminderPreviewTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - reminder_preview
-          description: The type of the tool. Always `reminder_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: |-
-        A built-in tool that schedules the agent to re-invoke itself after a delay.
-        The model passes a single `minutes` argument (positive integer) when calling
-        this tool. The service creates a one-shot timer routine that fires after the
-        specified delay and re-invokes the agent on the same conversation thread.
-        No pre-created routine is required.
     ReminderPreviewToolboxTool:
       type: object
       required:
