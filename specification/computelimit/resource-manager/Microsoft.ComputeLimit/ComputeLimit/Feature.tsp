@@ -72,7 +72,7 @@ interface Features {
     Azure.ResourceManager.Foundations.OperationStatusResult
   >;
 
-  /** Enables a compute limit feature for the subscription at the specified location. Requires the Contributor role.*/
+  /** Enables a compute limit feature for the subscription at the specified location. Requires the Contributor role. */
   @action("enable")
   @added(Versions.v2026_06_01)
   @sharedRoute
@@ -92,7 +92,7 @@ interface Features {
     true
   >;
 
-  /** Disables a compute limit feature for the subscription at the specified location. Requires the Contributor role.*/
+  /** Disables a compute limit feature for the subscription at the specified location. Requires the Contributor role. */
   @added(Versions.v2026_04_30)
   @action("disable")
   disable is ArmResourceActionAsync<
