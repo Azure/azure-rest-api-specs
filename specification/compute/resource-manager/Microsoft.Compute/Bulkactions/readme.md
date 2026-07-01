@@ -137,6 +137,38 @@ suppressions:
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
     where: $.definitions.ResourceProvisionVdiPayload.properties.resourceOverrides.items
+  - code: PathForNestedResource
+    reason: >
+      The bulkOperationErrors endpoint uses the virtualMachines collection as a parent segment
+      followed by bulkOperationErrors as a nested resource. This path pattern matches the
+      service-side routing contract.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachines/bulkOperationErrors"]
+  - code: PathForResourceAction
+    reason: >
+      The acknowledge endpoint is a POST action on the bulkOperationErrors resource.
+      This path pattern matches the service-side routing contract.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachines/bulkOperationErrors/acknowledge"].post
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: >
+      ListBulkOperationErrorsResponse is not an ARM resource model; it is a plain response
+      envelope containing a list of operation errors and a continuation token.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse
+  - code: BodyTopLevelProperties
+    reason: >
+      ListBulkOperationErrorsResponse is not an ARM resource model; it is a plain response
+      envelope. The items and continuationToken properties are valid top-level fields for
+      this non-resource response type.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse
+  - code: XMSSecretInResponse
+    reason: >
+      continuationToken is a pagination cursor, not a secret. The keyword match is a false
+      positive; the token carries no sensitive data.
+    from: Bulkactions.json
+    where: $.definitions.ListBulkOperationErrorsResponse.properties.continuationToken
 ```
 ### Tag: package-2026-04-06-preview
 
