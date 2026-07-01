@@ -5,13 +5,12 @@
     "api-version": "2026-07-06-preview",
     "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
     "resourceGroupName": "rgBulkactions",
-    "location": "useast2euap",
-    "continuationToken": "continuationTokenValue"
+    "location": "useast2euap"
   },
   "responses": {
     "200": {
       "body": {
-        "items": [
+        "value": [
           {
             "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
             "errorCode": "TestErrorCode",
@@ -53,7 +52,7 @@
             }
           }
         ],
-        "continuationToken": "continuationTokenValue"
+        "nextLink": "https://management.azure.com/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/locations/useast2euap/listBulkOperationErrors?api-version=2026-07-06-preview&continuationToken=abc123"
       }
     }
   }
