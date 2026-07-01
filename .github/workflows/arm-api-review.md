@@ -2,12 +2,12 @@
 description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
-  automatically on PR open and ready-for-review; on demand via the
+  automatically on PR open and synchronize; on demand via the
   /arm-review comment command or the arm-review-requested label.
 timeout-minutes: 30
 on:
   pull_request_target:
-    types: [opened, ready_for_review, synchronize, labeled]
+    types: [opened, synchronize, labeled]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -116,8 +116,11 @@ on:
             return;
           }
 
-          // ── 8. specification/ file guard (paginated) ────────────────────────
+          // ── 8. specification/ file guard + changed-file cap (paginated) ────
+          const MAX_SPEC_FILES = 50; // guard context-window budget
           let specFound = false;
+          let specFileCount = 0;
+          let totalFileCount = 0;
           for (let page = 1; ; page++) {
             const { data: pageFiles } = await github.rest.pulls.listFiles({
               ...context.repo,
@@ -125,9 +128,12 @@ on:
               per_page: 100,
               page,
             });
-            if (pageFiles.some(f => f.filename.startsWith('specification/'))) {
-              specFound = true;
-              break;
+            totalFileCount += pageFiles.length;
+            for (const f of pageFiles) {
+              if (f.filename.startsWith('specification/')) {
+                specFound = true;
+                specFileCount++;
+              }
             }
             if (pageFiles.length < 100) break; // last page reached
           }
@@ -136,6 +142,16 @@ on:
             core.notice(`PR #${prNumber} has no specification/ changes — skipping ARM API review.`);
             return;
           }
+          if (specFileCount > MAX_SPEC_FILES) {
+            core.setOutput('should_run', 'false');
+            core.notice(
+              `PR #${prNumber} touches ${specFileCount} specification/ files (limit: ${MAX_SPEC_FILES}). ` +
+              'Use /arm-review to trigger a focused review after scoping down the PR, ' +
+              'or add the arm-review-requested label for an explicit full-PR review.'
+            );
+            return;
+          }
+          core.setOutput('spec_file_count', String(specFileCount));
 
           core.setOutput('should_run', 'true');
 if: >
@@ -145,7 +161,6 @@ if: >
    github.event.label.name == 'arm-review-requested') ||
   (github.event_name == 'pull_request_target' &&
    (github.event.action == 'opened' ||
-    github.event.action == 'ready_for_review' ||
     github.event.action == 'synchronize')) ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
@@ -153,8 +168,8 @@ if: >
    contains(github.event.comment.body, '/arm-review'))
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
+  issues: read
+  pull-requests: read
 tools:
   github:
     toolsets: [context, repos, pull_requests, issues]
@@ -165,13 +180,19 @@ imports:
   - ../instructions/typespec-review.instructions.md
   - ../skills/azure-api-review/SKILL.md
 safe-outputs:
-  # max: 3 budget: (1) review summary, (2) overflow findings if per-category
-  # caps are exceeded, (3) error notification if review fails or is skipped.
+  # Budget: (1) run-started status, (2) review summary / "no issues found",
+  # (3) overflow-findings summary if per-category inline caps are exceeded,
+  # plus one slot reserved for a run-failure notification.
   add-comment:
-    max: 3
+    max: 4
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
+  # Per-category inline caps in the agent body:
+  #   security: no cap, breaking changes: no cap, ARM contract: 15,
+  #   property/naming: 5, doc gaps: 3  → worst-case ≈ 23+ inline comments.
+  # Set max to 50 so the cap is above the worst plausible case; findings that
+  # exceed any per-category cap are collected into the summary add-comment.
   create-pull-request-review-comment:
-    max: 30
+    max: 50
     side: "RIGHT"
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
   submit-pull-request-review:
@@ -208,6 +229,26 @@ human confirmation.** The comment format and reconciliation marker from
   recognized forks.
 - Do not modify specification files. This agent is read-only except for posting
   review comments and updating labels.
+- **Rollout**: This workflow runs on all PRs that touch `specification/`
+  (no service allowlist). To opt out for a PR add the `skip-arm-review` label.
+  A service-level allowlist can be added to the preconditions step if a phased
+  rollout becomes necessary.
+
+## Required Secrets
+
+The following repository secrets must be configured for the workflow to run:
+
+- **`COPILOT_GITHUB_TOKEN`** — GitHub token used by the Copilot agent engine.
+- **`GH_AW_GITHUB_TOKEN`** — Token used by the gh-aw runtime to authenticate
+  GitHub API calls made by the agent.
+- **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — Token used by the GitHub MCP server
+  toolset embedded in the agent.
+- **`GITHUB_TOKEN`** — Standard Actions token (auto-provisioned); used by the
+  preconditions step to fetch PR metadata and collaborator status.
+
+All secrets are consumed only by the gh-aw runtime and are never exposed to PR
+content. The model is hosted by GitHub Copilot infrastructure; no additional
+model endpoint or key configuration is required.
 
 ## Trigger Context
 
@@ -326,7 +367,7 @@ finding you are about to post, check against existing comments:
 Post each finding as a `create-pull-request-review-comment` (inline) or
 `add-comment` (PR-level for summary). Then call `submit-pull-request-review`.
 
-**Hard limits:**
+**Hard limits per category:**
 
 - Security issues: no cap (always post)
 - Breaking changes: no cap (always post)
@@ -334,9 +375,17 @@ Post each finding as a `create-pull-request-review-comment` (inline) or
 - Property design / naming: cap at 5
 - Documentation gaps: cap at 3
 
-If more findings exist beyond the cap, include a single summary comment:
-_"N additional warnings/suggestions were identified but not posted. Key themes:
-[list]. Review the full checklist in `arm-api-review.instructions.md`."_
+**Inline comment budget:** The workflow allows up to 50 inline review comments
+(`create-pull-request-review-comment`). If the total across all categories would
+exceed 50, post the highest-severity findings inline (security and breaking
+changes first) and collect overflow findings into the summary `add-comment`
+with the note: _"N additional findings were identified but not posted inline.
+Key themes: [list]."_
+
+If more findings exist beyond a per-category cap, include that count in the
+summary comment: _"N additional warnings/suggestions were identified but not
+posted. Key themes: [list]. Review the full checklist in
+`arm-api-review.instructions.md`."_
 
 **Comment format** (every comment MUST follow this template):
 
