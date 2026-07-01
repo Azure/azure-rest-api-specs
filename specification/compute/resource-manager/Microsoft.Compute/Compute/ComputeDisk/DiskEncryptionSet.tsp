@@ -20,7 +20,7 @@ model DiskEncryptionSet
     Resource = DiskEncryptionSet,
     KeyName = "diskEncryptionSetName",
     SegmentName = "diskEncryptionSets",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**

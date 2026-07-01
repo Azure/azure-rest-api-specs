@@ -20,7 +20,7 @@ model DiskRestorePoint
     Resource = DiskRestorePoint,
     KeyName = "diskRestorePointName",
     SegmentName = "diskRestorePoints",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,259}(?<![-.])$"
   >;
 }
 
@@ -54,7 +54,7 @@ interface DiskRestorePointsOps
           DiskRestorePoint,
           SegmentName = "diskRestorePoints",
           KeyName = "diskRestorePointName",
-          NamePattern = ""
+          NamePattern = "^[^_\\W][\\w-._]{0,259}(?<![-.])$"
         >,
       }>,
       CloudError

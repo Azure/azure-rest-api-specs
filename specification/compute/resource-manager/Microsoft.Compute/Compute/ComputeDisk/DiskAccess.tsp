@@ -20,7 +20,7 @@ model DiskAccess
     Resource = DiskAccess,
     KeyName = "diskAccessName",
     SegmentName = "diskAccesses",
-    NamePattern = ""
+    NamePattern = "^[^_\\W][\\w-._]{0,79}(?<![-.])$"
   >;
 
   /**
