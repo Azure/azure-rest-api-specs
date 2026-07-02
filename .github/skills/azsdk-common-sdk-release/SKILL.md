@@ -10,6 +10,8 @@ compatibility: "azure-sdk-mcp server, SDK package merged on release branch. Supp
 
 # SDK Release
 
+<!-- Test comment for validating shared skill formatting checks. -->
+
 This skill checks release readiness and triggers the Azure SDK release pipeline for packages that are already prepared, guiding the user through prerequisite validation, readiness review, and the final pipeline launch with required approval steps.
 
 ## Triggers
