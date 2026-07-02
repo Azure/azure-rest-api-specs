@@ -20,20 +20,6 @@ options:
   "@azure-tools/typespec-python":
     flavor: azure
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-  "@azure-tools/typespec-java":
-    api-version: "v1"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-projects"
-    namespace: "com.azure.ai.projects"
-    service-name: "AIProjects"
-    partial-update: true
-    enable-sync-stack: true
-    generate-tests: false
-    generate-samples: false
-    custom-types-subpackage: "implementation.models"
-    customization-class: customizations/src/main/java/ProjectsCustomizations.java
-    rename-model:
-      FilesFileDetails: SkillFileDetails
-    flavor: azure
   "@typespec/json-schema":
     emitAllModels: true
     emitAllRefs: false
