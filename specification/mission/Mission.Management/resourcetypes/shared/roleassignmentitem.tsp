@@ -13,4 +13,8 @@ model RoleAssignmentItem {
 
   @doc("List of principal IDs to which to assign this role definition")
   principals?: Principal[];
+
+  @added(Microsoft.Mission.Versions.v2025_11_01_preview)
+  @doc("Condition under which the principal can be granted permission")
+  condition?: string;
 }
