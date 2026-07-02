@@ -22,57 +22,6 @@ using Microsoft.DevHub;
 @@clientName(ADOOAuth, "AdoOAuth", "java");
 @@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "java");
 
-// csharp: ADO acronym PascalCase (3-letter acronym)
-@@clientName(ADORepository, "AdoRepository", "csharp");
-@@clientName(ADOProviderProfile, "AdoProviderProfile", "csharp");
-
-// csharp: add RP/domain context to otherwise-generic resource trio nouns
-@@clientName(Workflow, "DevHubWorkflow", "csharp");
-@@clientName(Template, "DevHubTemplate", "csharp");
-
-// csharp: enum member casing fixes
-@@clientName(WorkflowRunStatus.inprogress, "InProgress", "csharp");
-@@clientName(GenerationLanguage.gomodule, "GoModule", "csharp");
-@@clientName(QuickStartTemplateType.HCIAKS, "HciAks", "csharp");
-@@clientName(QuickStartTemplateType.HCIARCVM, "HciArcVm", "csharp");
-
-// csharp: URL -> Url acronym casing (mirrors java)
-@@clientName(GitHubOAuthInfoResponse.authURL, "authUrl", "csharp");
-@@clientName(AdooAuthInfoResponse.authURL, "authUrl", "csharp");
-@@clientName(GitHubWorkflowProfile.prURL, "prUrl", "csharp");
-@@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "csharp");
-@@clientName(PullRequest.prURL, "prUrl", "csharp");
-
-// csharp: boolean properties need a verb prefix
-@@clientName(WorkflowRun.succeeded, "isSucceeded", "csharp");
-@@clientName(Parameter.required, "isRequired", "csharp");
-
-// csharp: ARM resource id strings -> ResourceIdentifier
-@@alternateType(
-  GitHubWorkflowProfile.aksResourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-@@alternateType(
-  IacTemplateProperties.sourceResourceId,
-  Azure.Core.armResourceIdentifier,
-  "csharp"
-);
-
-// csharp: etag string -> Azure.ETag
-@@alternateType(
-  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
-  Azure.Core.eTag,
-  "csharp"
-);
-
-// csharp AdoOAuth casing consistency (mirrors java).
-@@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
-@@clientName(AdooAuthResponses, "AdoOAuthResponses", "csharp");
-@@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "csharp");
-@@clientName(ADOOAuth, "AdoOAuth", "csharp");
-@@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "csharp");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "list should be pageable"
 @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
   GitHubOAuthResponses.listGitHubOAuth,
@@ -137,6 +86,58 @@ using Microsoft.DevHub;
   "DeveloperHubServiceClient",
   "go"
 );
+
+// csharp: ADO acronym PascalCase (3-letter acronym)
+@@clientName(ADORepository, "AdoRepository", "csharp");
+@@clientName(ADOProviderProfile, "AdoProviderProfile", "csharp");
+
+// csharp: add RP/domain context to otherwise-generic resource trio nouns
+@@clientName(Workflow, "DevHubWorkflow", "csharp");
+@@clientName(Template, "DevHubTemplate", "csharp");
+
+// csharp: enum member casing fixes
+@@clientName(WorkflowRunStatus.inprogress, "InProgress", "csharp");
+@@clientName(GenerationLanguage.gomodule, "GoModule", "csharp");
+@@clientName(QuickStartTemplateType.HCIAKS, "HciAks", "csharp");
+@@clientName(QuickStartTemplateType.HCIARCVM, "HciArcVm", "csharp");
+
+// csharp: URL -> Url acronym casing (mirrors java)
+@@clientName(GitHubOAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(AdooAuthInfoResponse.authURL, "authUrl", "csharp");
+@@clientName(GitHubWorkflowProfile.prURL, "prUrl", "csharp");
+@@clientName(WorkflowRun.workflowRunURL, "workflowRunUrl", "csharp");
+@@clientName(PullRequest.prURL, "prUrl", "csharp");
+
+// csharp: boolean properties need a verb prefix
+@@clientName(WorkflowRun.succeeded, "isSucceeded", "csharp");
+@@clientName(Parameter.required, "isRequired", "csharp");
+
+// csharp: ARM resource id strings -> ResourceIdentifier
+@@alternateType(
+  GitHubWorkflowProfile.aksResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IacTemplateProperties.sourceResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// csharp: etag string -> Azure.ETag
+@@alternateType(
+  Azure.ResourceManager.Legacy.EntityTagProperty.etag,
+  Azure.Core.eTag,
+  "csharp"
+);
+
+// csharp AdoOAuth casing consistency (mirrors java).
+@@clientName(AdooAuthResponse, "AdoOAuthResponse", "csharp");
+@@clientName(AdooAuthResponses, "AdoOAuthResponses", "csharp");
+@@clientName(AdooAuthListResponse, "AdoOAuthListResponse", "csharp");
+@@clientName(ADOOAuth, "AdoOAuth", "csharp");
+@@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "csharp");
+
 @@clientName(ScaleProperty.numberOfStore, "NumberOfStores", "csharp");
 @@clientName(GenerationLanguage.csharp, "CSharp", "csharp");
 @@clientName(GenerationLanguage.javascript, "JavaScript", "csharp");
