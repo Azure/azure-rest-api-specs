@@ -151,6 +151,28 @@ op regenerateKeyCustom(
 );
 
 @@clientName(Account, "CognitiveServicesAccount", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(Account, "resource-rbac-roles", #{
+  AzureAIDeveloper: "64702f94-c441-49e6-a78b-ef80e0188fee",
+  AzureAIEnterpriseNetworkConnectionApprover: "b556d68e-0be0-4f35-a333-ad7ee1ce17ea",
+  AzureAIInferenceDeploymentOperator: "3afb7f49-54cb-416e-8c09-6dc049efa503",
+  CognitiveServicesContributor: "25fbc0a9-bd7c-42a3-aa1a-3b75d497ee68",
+  CognitiveServicesCustomVisionContributor: "c1ff6cc2-c111-46fe-8896-e0ef812ad9f3",
+  CognitiveServicesCustomVisionDeployment: "5c4089e1-6d96-4d2f-b296-c1bc7137275f",
+  CognitiveServicesCustomVisionLabeler: "88424f51-ebe7-446f-bc41-7fa16989e96c",
+  CognitiveServicesCustomVisionReader: "93586559-c37d-4a6b-ba08-b9f0940c2d73",
+  CognitiveServicesCustomVisionTrainer: "0a5ae4ab-0d65-4eeb-be61-29fc9b54394b",
+  CognitiveServicesDataReader: "b59867f0-fa02-499b-be73-45a86b5b3e1c",
+  CognitiveServicesFaceRecognizer: "9894cab4-e18a-44aa-828b-cb588cd6f2d7",
+  CognitiveServicesMetricsAdvisorAdministrator: "cb43c632-a144-4ec5-977c-e80c4affc34a",
+  CognitiveServicesOpenAIContributor: "a001fd3d-188f-4b5d-821b-7da978bf7442",
+  CognitiveServicesOpenAIUser: "5e0bd9bd-7b93-4f28-af87-19fc36ad61bd",
+  CognitiveServicesQnAMakerEditor: "f4cc2bf9-21be-47a1-bdf1-5c5804381025",
+  CognitiveServicesQnAMakerReader: "466ccd10-b268-4a11-b098-b4849f024126",
+  CognitiveServicesUsagesReader: "bba48692-92b0-4667-a9ad-c31c7b334ac2",
+  CognitiveServicesUser: "a97b65f3-24c7-4388-baec-2e87135dc908",
+}, "csharp");
 @@alternateType(Account.location, azureLocation, "csharp");
 @@alternateType(Account.etag, eTag, "csharp");
 @@alternateType(
