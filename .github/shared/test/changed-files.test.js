@@ -24,6 +24,7 @@ import {
   scenario,
   stable,
   swagger,
+  tspconfig,
   typespec,
 } from "../src/changed-files.js";
 import { debugLogger } from "../src/logger.js";
@@ -179,6 +180,13 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
     expect(files.filter(typespec)).toEqual(expected);
+  });
+
+  it("filter:tspconfig", () => {
+    const expected = ["specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"];
+
+    expect(files.filter(tspconfig)).toEqual(expected);
+    expect(filesResolved.filter(tspconfig)).toEqual([]);
   });
 
   it("filter:data-plane", () => {
