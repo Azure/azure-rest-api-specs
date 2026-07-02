@@ -219,7 +219,7 @@ using Microsoft.DevHub;
 @@clientName(WorkflowProperties, "DevHubWorkflowProperties", "csharp");
 @@clientName(WorkflowRun, "DevHubWorkflowRun", "csharp");
 @@clientName(WorkflowRunStatus, "DevHubWorkflowRunStatus", "csharp");
-@@clientName(TagsObject, "DevHubResourceTagsPatch", "csharp");
+@@clientName(TagsObject, "DevHubTagsPatch", "csharp");
 
 @@clientName(AdooAuthCallRequest, "DeveloperHubAdoOAuthCallContent", "csharp");
 @@clientName(
