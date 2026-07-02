@@ -409,7 +409,6 @@ interface Sites {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -1873,7 +1872,6 @@ interface WebApps {
   /**
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
