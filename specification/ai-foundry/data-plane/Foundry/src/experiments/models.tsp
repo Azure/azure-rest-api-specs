@@ -89,8 +89,8 @@ union ExperimentMetricSourceType {
   /** An inline evaluator definition that the service materializes into a continuous evaluation rule. */
   evaluator: "evaluator",
 
-  /** A trace-level metric (e.g. latency, error rate). */
-  trace_metric: "trace_metric",
+  /** A trace-level metric (e.g. latency_ms, error rate). */
+  traces: "traces",
 }
 
 /** The state of a scorecard. */
@@ -190,63 +190,65 @@ model ExperimentMetricSource {
   @doc("The built-in evaluator name (e.g. 'builtin.groundedness'). Required when type is 'evaluator'.")
   evaluator_name?: string;
 
-  @doc("The trace metric name (e.g. 'latency_ms'). Required when type is 'trace_metric'.")
+  @doc("The trace metric name (e.g. 'latency_ms'). Required when type is 'traces'.")
   name?: string;
 }
 
-/** Guardrail threshold for a metric. Metrics with guardrails are monitored for safety bounds. */
-model ExperimentMetricGuardrail {
-  @doc("Maximum allowed relative delta as a percentage. If the treatment deviates by more than this, the guardrail is breached.")
-  max_delta_percent?: float64;
-
-  @doc("Maximum allowed absolute value. If the treatment exceeds this, the guardrail is breached.")
-  max_absolute?: float64;
-
-  @doc("The current guardrail state (e.g. 'monitoring', 'breached'). Service-managed.")
-  @visibility(Lifecycle.Read)
-  state?: string;
-}
-
-/** A metric attached to the experiment — defines what to measure, how to aggregate, where the data comes from, and optional guardrails. */
-model ExperimentMetric {
-  @doc("The metric identifier, unique within the experiment.")
-  id: string;
-
-  @doc("The desired direction for this metric.")
-  direction: ExperimentMetricDirection;
-
-  @doc("The aggregation configuration.")
-  aggregation: ExperimentMetricAggregation;
-
+/** The definition of a metric — wraps the data source and optional aggregation. */
+model ExperimentMetricDefinition {
   @doc("The source of the metric data.")
   source: ExperimentMetricSource;
 
-  @doc("Optional guardrail threshold. Metrics with guardrails are monitored for safety bounds.")
-  guardrail?: ExperimentMetricGuardrail;
+  @doc("Optional aggregation configuration. If omitted, the service uses the evaluator's default aggregation.")
+  aggregation?: ExperimentMetricAggregation;
+}
+
+/** A metric attached to the experiment — defines what to measure, how to aggregate, and where the data comes from. */
+model ExperimentMetric {
+  @doc("The caller-defined metric name, unique within the experiment.")
+  name: string;
+
+  @doc("The desired direction for this metric. Optional; if omitted, the service infers from the evaluator defaults.")
+  desired_direction?: ExperimentMetricDirection;
+
+  @doc("The metric definition including data source and optional aggregation.")
+  definition: ExperimentMetricDefinition;
+}
+
+/** Summary statistics for a variant in a scorecard row. */
+model ScorecardVariantStats {
+  @doc("The number of observations.")
+  count: int32;
+
+  @doc("The arithmetic mean of the metric values.")
+  average: float64;
+
+  @doc("The standard deviation of the metric values.")
+  std_dev: float64;
 }
 
 /** A single row in a scorecard table — one metric comparison between control and treatment. */
 model ScorecardRow {
-  @doc("The metric identifier this row corresponds to.")
-  metric_id: string;
+  @doc("The metric name this row corresponds to.")
+  metric_name: string;
 
   @doc("A human-readable label for the metric.")
   label: string;
 
-  @doc("The metric value for the control variant.")
-  control_value: float64;
+  @doc("The desired direction for this metric.")
+  desired_direction: ExperimentMetricDirection;
 
-  @doc("The metric value for the treatment variant.")
-  treatment_value: float64;
+  @doc("Summary statistics for the control variant.")
+  control_stats: ScorecardVariantStats;
+
+  @doc("Summary statistics for the treatment variant.")
+  treatment_stats: ScorecardVariantStats;
 
   @doc("The absolute delta between treatment and control.")
   delta: float64;
 
   @doc("The p-value for statistical significance.")
   p_value: float64;
-
-  @doc("Whether this row corresponds to a guardrail metric.")
-  guardrail?: boolean;
 }
 
 /** A generated scorecard artifact — a table comparing metric values between variants. */
@@ -289,6 +291,9 @@ model Experiment {
   @doc("The name of the agent this experiment targets. Required for agents_safe_rollout type.")
   target_agent?: string;
 
+  @doc("The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted.")
+  duration?: string;
+
   @doc("The list of variants participating in the experiment.")
   variants: ExperimentVariant[];
 
@@ -301,6 +306,10 @@ model Experiment {
 
   @doc("The list of metrics (evaluation rules or inline evaluators) attached to the experiment.")
   metrics: ExperimentMetric[];
+
+  @doc("The Unix timestamp (seconds) when the experiment was started. Null if not yet started.")
+  @visibility(Lifecycle.Read)
+  started_at?: FoundryTimestamp | null;
 
   @doc("The scheduled start time for the experiment. Null if started immediately.")
   scheduled_start_at?: FoundryTimestamp | null;
@@ -322,6 +331,9 @@ model CreateExperimentRequest {
 
   @doc("A human-readable description of the experiment.")
   description?: string;
+
+  @doc("The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted.")
+  duration?: string;
 
   @doc("The list of variants. Each variant id is an agent version number. Exactly one must have role 'control'. traffic_percentage must sum to 100.")
   variants: ExperimentVariant[];

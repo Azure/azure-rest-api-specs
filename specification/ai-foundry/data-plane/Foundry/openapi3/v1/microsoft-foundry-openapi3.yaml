@@ -16910,6 +16910,9 @@ components:
         target_agent:
           type: string
           description: The name of the agent this experiment targets. Required for agents_safe_rollout type.
+        duration:
+          type: string
+          description: The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted.
         variants:
           type: array
           items:
@@ -16928,6 +16931,12 @@ components:
           items:
             $ref: '#/components/schemas/ExperimentMetric'
           description: The list of metrics (evaluation rules or inline evaluators) attached to the experiment.
+        started_at:
+          type: integer
+          format: int32
+          nullable: true
+          description: The Unix timestamp (seconds) when the experiment was started. Null if not yet started.
+          readOnly: true
         scheduled_start_at:
           type: integer
           format: int32
@@ -16972,23 +16981,27 @@ components:
     ExperimentMetric:
       type: object
       required:
-        - id
-        - direction
-        - aggregation
+        - name
+        - definition
+      properties:
+        name:
+          type: string
+          description: The caller-defined metric name, unique within the experiment.
+        desired_direction:
+          $ref: '#/components/schemas/ExperimentMetricDirection'
+        definition:
+          $ref: '#/components/schemas/ExperimentMetricDefinition'
+      description: A metric attached to the experiment — defines what to measure, how to aggregate, and where the data comes from.
+    ExperimentMetricDefinition:
+      type: object
+      required:
         - source
       properties:
-        id:
-          type: string
-          description: The metric identifier, unique within the experiment.
-        direction:
-          $ref: '#/components/schemas/ExperimentMetricDirection'
-        aggregation:
-          $ref: '#/components/schemas/ExperimentMetricAggregation'
         source:
           $ref: '#/components/schemas/ExperimentMetricSource'
-        guardrail:
-          $ref: '#/components/schemas/ExperimentMetricGuardrail'
-      description: A metric attached to the experiment — defines what to measure, how to aggregate, where the data comes from, and optional guardrails.
+        aggregation:
+          $ref: '#/components/schemas/ExperimentMetricAggregation'
+      description: The definition of a metric — wraps the data source and optional aggregation.
     ExperimentMetricDirection:
       anyOf:
         - type: string
@@ -17025,7 +17038,7 @@ components:
           enum:
             - continuous_evaluation_rule
             - evaluator
-            - trace_metric
+            - traces
       description: The type of metric source.
     ExperimentMetricSource:
       type: object
@@ -17042,24 +17055,8 @@ components:
           description: The built-in evaluator name (e.g. 'builtin.groundedness'). Required when type is 'evaluator'.
         name:
           type: string
-          description: The trace metric name (e.g. 'latency_ms'). Required when type is 'trace_metric'.
+          description: The trace metric name (e.g. 'latency_ms'). Required when type is 'traces'.
       description: The source of a metric value, discriminated by type.
-    ExperimentMetricGuardrail:
-      type: object
-      properties:
-        max_delta_percent:
-          type: number
-          format: double
-          description: Maximum allowed relative delta as a percentage.
-        max_absolute:
-          type: number
-          format: double
-          description: Maximum allowed absolute value.
-        state:
-          type: string
-          description: The current guardrail state (e.g. 'monitoring', 'breached'). Service-managed.
-          readOnly: true
-      description: Guardrail threshold for a metric.
     ExperimentState:
       anyOf:
         - type: string
@@ -17164,6 +17161,9 @@ components:
         description:
           type: string
           description: A human-readable description of the experiment.
+        duration:
+          type: string
+          description: The ISO 8601 duration for the experiment (e.g. 'P3D' for 3 days). Defaults to P3D when omitted.
         variants:
           type: array
           items:
@@ -17196,27 +17196,26 @@ components:
     ScorecardRow:
       type: object
       required:
-        - metric_id
+        - metric_name
         - label
-        - control_value
-        - treatment_value
+        - desired_direction
+        - control_stats
+        - treatment_stats
         - delta
         - p_value
       properties:
-        metric_id:
+        metric_name:
           type: string
-          description: The metric identifier this row corresponds to.
+          description: The metric name this row corresponds to.
         label:
           type: string
           description: A human-readable label for the metric.
-        control_value:
-          type: number
-          format: double
-          description: The metric value for the control variant.
-        treatment_value:
-          type: number
-          format: double
-          description: The metric value for the treatment variant.
+        desired_direction:
+          $ref: '#/components/schemas/ExperimentMetricDirection'
+        control_stats:
+          $ref: '#/components/schemas/ScorecardVariantStats'
+        treatment_stats:
+          $ref: '#/components/schemas/ScorecardVariantStats'
         delta:
           type: number
           format: double
@@ -17225,10 +17224,27 @@ components:
           type: number
           format: double
           description: The p-value for statistical significance.
-        guardrail:
-          type: boolean
-          description: Whether this row corresponds to a guardrail metric.
       description: A single row in a scorecard table — one metric comparison between control and treatment.
+    ScorecardVariantStats:
+      type: object
+      required:
+        - count
+        - average
+        - std_dev
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: The number of observations.
+        average:
+          type: number
+          format: double
+          description: The arithmetic mean of the metric values.
+        std_dev:
+          type: number
+          format: double
+          description: The standard deviation of the metric values.
+      description: Summary statistics for a variant in a scorecard row.
     Scorecard:
       type: object
       required:
