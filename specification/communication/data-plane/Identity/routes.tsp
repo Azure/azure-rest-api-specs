@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 
-namespace Azure.Communication.IdentityService;
+namespace Azure.Communication.Identity;
 
 // --- Identity operations ---
 

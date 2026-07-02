@@ -21,4 +21,4 @@ using Azure.Core;
 )
 @versioned(Versions)
 @doc("Azure Communication Identity Service")
-namespace Azure.Communication.IdentityService;
+namespace Azure.Communication.Identity;

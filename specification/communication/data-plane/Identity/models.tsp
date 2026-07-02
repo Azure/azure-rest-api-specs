@@ -8,7 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 
-namespace Azure.Communication.IdentityService;
+namespace Azure.Communication.Identity;
 
 @doc("API versions for the Communication Identity Service.")
 enum Versions {
