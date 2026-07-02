@@ -456,7 +456,7 @@ interface Agents {
   /**
    * Creates a new session for an agent endpoint.
    * The endpoint resolves the backing agent version from `version_indicator` and
-   * enforces session ownership using the provided isolation key for session-mutating operations.
+   * enforces session ownership using the provided user identity for session-mutating operations.
    */
   @summary("Create a session")
   @post
