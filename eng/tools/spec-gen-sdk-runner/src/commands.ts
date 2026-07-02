@@ -25,6 +25,7 @@ import {
   prepareSpecGenSdkCommand,
   resolvePackagePath,
   selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
@@ -34,6 +35,7 @@ import { detectChangedSpecConfigFiles } from "./spec-helpers.ts";
 import { type CommandResult, type ExecutionReport, type SpecGenSdkCmdInput } from "./types.ts";
 import {
   execAsync,
+  isPrivateSpecRepo,
   resetGitRepo,
   runCommandWithOutput,
   runSpecGenSdkCommand,
@@ -252,6 +254,13 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     installationInstructions,
   );
 
+  // Flag the generated SDK pull request for automated build-failure repair when the
+  // build failed (generation succeeded with a warning). This only runs in the PR-creation
+  // flow, never in plain spec-PR CI validation.
+  if (executionReport) {
+    setBuildFailedLabelVariable(commandInput, executionReport);
+  }
+
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {
     logIssuesToPipeline(executionReport.vsoLogPath, specConfigPathText);
@@ -382,7 +391,10 @@ export async function generateSdkForSpecPr(): Promise<CommandResult> {
 
       try {
         executionReport = getExecutionReport(commandInput);
-        if (commandInput.sdkLanguage === "azure-sdk-for-python") {
+        if (
+          commandInput.sdkLanguage === "azure-sdk-for-python" &&
+          !isPrivateSpecRepo(commandInput.specRepoHttpsUrl)
+        ) {
           const pythonPackageValidation = await validatePythonPackagesOnPyPI(
             executionReport.packages,
           );

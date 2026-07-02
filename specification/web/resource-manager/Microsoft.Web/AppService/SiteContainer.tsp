@@ -53,7 +53,8 @@ interface SiteContainerOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteContainer"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface SiteContainerOperationGroupOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteSlotSiteContainer"
     > {}
 
 @tag("WebApps")

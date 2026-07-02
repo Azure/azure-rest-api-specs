@@ -857,6 +857,7 @@ union JobType {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   FineTuning: "FineTuning",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -864,6 +865,7 @@ union JobType {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   Distillation: "Distillation",
 }
 
@@ -2998,6 +3000,7 @@ union DistributionType {
    * Ray distribution type.
    */
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   Ray: "Ray",
 }
 
@@ -5170,6 +5173,7 @@ model EnvironmentVersionProperties extends AssetBase {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   imageDetails?: ImageDetails;
 
   /**
@@ -5223,6 +5227,7 @@ model BuildContext {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -7148,6 +7153,7 @@ model JobBaseProperties extends ResourceBase {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   parentJobName?: string | null;
 
   /**
@@ -7706,6 +7712,7 @@ model ContentSafety {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -8134,6 +8141,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   @visibility(Lifecycle.Read)
   agentsEndpointUri?: url;
 
@@ -8150,6 +8158,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8165,6 +8174,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   containerRegistries?: string[];
 
   /**
@@ -8195,6 +8205,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   enableSimplifiedCmk?: boolean;
 
   /**
@@ -8204,6 +8215,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8214,6 +8226,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   existingWorkspaces?: string[];
 
   /**
@@ -8246,6 +8259,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   ipAllowlist?: string[];
 
   /**
@@ -8254,14 +8268,13 @@ model WorkspaceProperties {
   keyVault?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   keyVaults?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
@@ -8278,6 +8291,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8349,6 +8363,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8361,6 +8376,7 @@ model WorkspaceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   storageAccounts?: string[];
 
   /**
@@ -8792,6 +8808,7 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8819,6 +8836,7 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8847,9 +8865,9 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   ipAllowlist?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
@@ -8860,6 +8878,7 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8889,6 +8908,7 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -9061,7 +9081,6 @@ model EndpointModelProperties {
    * The list of Model Sku.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   skus?: EndpointModelSkuProperties[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -9163,7 +9182,6 @@ model EndpointModelSkuRateLimitRuleProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -9480,6 +9498,7 @@ model EndpointResourceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
 
   /**
@@ -10382,6 +10401,7 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10455,6 +10475,7 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10466,6 +10487,7 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10485,6 +10507,7 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10567,6 +10590,7 @@ model ComputeInstanceProperties {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -12058,6 +12082,7 @@ model AzureFileDatastore extends DatastoreProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+@removed(Versions.v2026_05_01)
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
@@ -12099,6 +12124,7 @@ model AzureOpenAiHyperParameters {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @discriminator("modelProvider")
 @usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningVertical {
@@ -13050,6 +13076,7 @@ model CustomMetricThreshold {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+@removed(Versions.v2026_05_01)
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
@@ -13287,6 +13314,7 @@ model FeatureImportanceSettings {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13447,6 +13475,7 @@ model DefaultScaleSettings extends OnlineScaleSettings {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13489,6 +13518,7 @@ model DistillationJob extends JobBaseProperties {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
@@ -13629,6 +13659,7 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningJob extends JobBaseProperties {
   /**
@@ -15264,6 +15295,7 @@ model PyTorch extends DistributionConfiguration {
  * A class for managing the configuration for a distributed Ray job.
  */
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 model Ray extends DistributionConfiguration {
   /**
    * The port of the head ray process.
@@ -16610,7 +16642,6 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   marketplaceSubscriptionId?: string;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   metadata?: unknown;
@@ -16789,7 +16820,6 @@ alias ReferenceSASParameters = {
   /**
    * Asset id and blob uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @body
   body: GetBlobReferenceSASRequestDto;

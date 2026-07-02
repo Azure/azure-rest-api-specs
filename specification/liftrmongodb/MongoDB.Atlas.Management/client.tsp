@@ -38,3 +38,20 @@ using MongoDB.Atlas;
   "MongoDBAtlasResourceProvisioningState",
   "csharp"
 );
+
+// Project and Cluster resources (preview). Renaming the resource models to the
+// MongoDBAtlas* prefix makes the generator emit MongoDBAtlas*Resource/*Data/*Collection,
+// matching the package naming convention (same pattern as OrganizationResource above).
+@@clientName(MongoDB.Atlas.Project, "MongoDBAtlasProject", "csharp");
+@@clientName(MongoDB.Atlas.Cluster, "MongoDBAtlasCluster", "csharp");
+@@clientName(
+  MongoDB.Atlas.ProjectProperties,
+  "MongoDBAtlasProjectProperties",
+  "csharp"
+);
+@@clientName(
+  MongoDB.Atlas.ClusterProperties,
+  "MongoDBAtlasClusterProperties",
+  "csharp"
+);
+@@clientName(MongoDB.Atlas.ClusterTier, "MongoDBAtlasClusterTier", "csharp");
