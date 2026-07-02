@@ -58,11 +58,6 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
 
-@@clientName(
-  AdooAuthCallRequest,
-  "DeveloperHubAdoOAuthCallRequestContent",
-  "csharp"
-);
 @@clientName(AdooAuthInfoResponse, "DeveloperHubAdoOAuthInfoResult", "csharp");
 @@clientName(
   DeleteWorkflowResponse,
@@ -70,18 +65,8 @@ using Microsoft.DevHub;
   "csharp"
 );
 @@clientName(
-  ExportTemplateRequest,
-  "DeveloperHubExportTemplateRequestContent",
-  "csharp"
-);
-@@clientName(
   GenerateVersionedTemplateResponse,
   "DeveloperHubGenerateVersionedTemplateResult",
-  "csharp"
-);
-@@clientName(
-  GitHubOAuthCallRequest,
-  "DeveloperHubGitHubOAuthCallRequestContent",
   "csharp"
 );
 @@clientName(
@@ -102,11 +87,6 @@ using Microsoft.DevHub;
 @@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
 @@clientName(PrLinkResponse, "DeveloperHubPrLinkResult", "csharp");
 @@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");
-@@clientName(
-  ScaleTemplateRequest,
-  "DeveloperHubScaleTemplateRequestContent",
-  "csharp"
-);
 
 @@visibility(
   Azure.ResourceManager.Foundations.OperationListResult.nextLink,

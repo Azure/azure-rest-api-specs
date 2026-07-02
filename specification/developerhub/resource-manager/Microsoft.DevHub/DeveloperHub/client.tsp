@@ -146,9 +146,19 @@ using Microsoft.DevHub;
 @@clientName(ACR, "DevHubContainerRegistryInfo", "csharp");
 @@clientName(Build, "DevHubDockerBuildInfo", "csharp");
 @@clientName(Deployment, "DevHubDeploymentProperties", "csharp");
-@@clientName(Origin, "DevHubOperationOrigin", "csharp");
+// Targets Azure.ResourceManager.CommonTypes.Origin (the ARM common-type actually
+// emitted via Foundations.Operation.origin), not the unused local `union Origin` in
+// models.tsp; a bare `Origin` would rename the dead local type and leave the generated one unchanged.
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Origin,
+  "DevHubOperationOrigin",
+  "csharp"
+);
 
 // csharp: add DevHub prefix to otherwise-generic model/enum names
+// Targets Azure.ResourceManager.CommonTypes.ActionType (the ARM common-type actually
+// emitted via Foundations.Operation.actionType), not the unused local `union ActionType`
+// in models.tsp; a bare `ActionType` would rename the dead local type only.
 @@clientName(
   Azure.ResourceManager.CommonTypes.ActionType,
   "DevHubActionType",
@@ -172,6 +182,9 @@ using Microsoft.DevHub;
 @@clientName(ManifestGenerationMode, "DevHubManifestGenerationMode", "csharp");
 @@clientName(ManifestType, "DevHubManifestType", "csharp");
 @@clientName(OidcCredentials, "DevHubOidcCredentials", "csharp");
+// Targets Azure.ResourceManager.CommonTypes.OperationDisplay (the ARM common-type actually
+// emitted via Foundations.Operation.display), not any local model; use the qualified name so
+// the rename reaches the generated type.
 @@clientName(
   Azure.ResourceManager.CommonTypes.OperationDisplay,
   "DevHubOperationDisplay",
@@ -206,4 +219,21 @@ using Microsoft.DevHub;
 @@clientName(WorkflowProperties, "DevHubWorkflowProperties", "csharp");
 @@clientName(WorkflowRun, "DevHubWorkflowRun", "csharp");
 @@clientName(WorkflowRunStatus, "DevHubWorkflowRunStatus", "csharp");
-@@clientName(TagsObject, "IacProfileTagsPatch", "csharp");
+@@clientName(TagsObject, "DevHubResourceTagsPatch", "csharp");
+
+@@clientName(AdooAuthCallRequest, "DeveloperHubAdoOAuthCallContent", "csharp");
+@@clientName(
+  ExportTemplateRequest,
+  "DeveloperHubExportTemplateContent",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthCallRequest,
+  "DeveloperHubGitHubOAuthCallContent",
+  "csharp"
+);
+@@clientName(
+  ScaleTemplateRequest,
+  "DeveloperHubScaleTemplateContent",
+  "csharp"
+);
