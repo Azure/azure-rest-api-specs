@@ -64,6 +64,9 @@
       "name": "SharedPrivateLinkResources"
     },
     {
+      "name": "LinkedServices"
+    },
+    {
       "name": "NetworkSecurityPerimeterConfigurations"
     },
     {
@@ -933,6 +936,320 @@
             "$ref": "./examples/SearchDeleteQueryKey.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/linkedServices": {
+      "get": {
+        "operationId": "LinkedServices_ListByService",
+        "tags": [
+          "LinkedServices"
+        ],
+        "description": "Gets a list of all linked service connections managed by the given service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-parameter-grouping": {
+              "name": "search-management-request-options"
+            },
+            "x-ms-client-name": "clientRequestId",
+            "x-ms-client-request-id": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LinkedServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListLinkedServicesByService": {
+            "$ref": "./examples/ListLinkedServicesByService.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/linkedServices/{connectionName}": {
+      "get": {
+        "operationId": "LinkedServices_Get",
+        "tags": [
+          "LinkedServices"
+        ],
+        "description": "Gets the details of a linked service connection managed by the search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the linked service connection managed by the Azure AI Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-parameter-grouping": {
+              "name": "search-management-request-options"
+            },
+            "x-ms-client-name": "clientRequestId",
+            "x-ms-client-request-id": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkedServiceGet": {
+            "$ref": "./examples/GetLinkedService.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LinkedServices_CreateOrUpdate",
+        "tags": [
+          "LinkedServices"
+        ],
+        "description": "Creates or updates a linked service connection managed by the search service in the given resource group.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the linked service connection managed by the Azure AI Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-parameter-grouping": {
+              "name": "search-management-request-options"
+            },
+            "x-ms-client-name": "clientRequestId",
+            "x-ms-client-request-id": true
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The definition of the linked service connection to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'LinkedService' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            }
+          },
+          "201": {
+            "description": "Resource 'LinkedService' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/LinkedService"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkedServiceCreateOrUpdate": {
+            "$ref": "./examples/CreateOrUpdateLinkedService.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/LinkedService"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "LinkedServices_Delete",
+        "tags": [
+          "LinkedServices"
+        ],
+        "description": "Initiates the deletion of the linked service connection from the search service.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "searchServiceName",
+            "in": "path",
+            "description": "The name of the Azure AI Search service associated with the specified resource group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "description": "The name of the linked service connection managed by the Azure AI Search service within the specified resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-parameter-grouping": {
+              "name": "search-management-request-options"
+            },
+            "x-ms-client-name": "clientRequestId",
+            "x-ms-client-request-id": true
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LinkedServiceDelete": {
+            "$ref": "./examples/DeleteLinkedService.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys": {
@@ -2568,6 +2885,102 @@
             "name": "standard",
             "value": "standard",
             "description": "Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests."
+          }
+        ]
+      }
+    },
+    "LinkedService": {
+      "type": "object",
+      "description": "Describes a linked service connection managed by the Azure AI Search service.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LinkedServiceProperties",
+          "description": "Describes the properties of a linked service connection managed by the Azure AI Search service."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LinkedServiceListResult": {
+      "type": "object",
+      "description": "Response containing a list of linked service connections.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of linked service connections.",
+          "items": {
+            "$ref": "#/definitions/LinkedService"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of linked service connections, if there are any.",
+          "readOnly": true
+        }
+      },
+      "x-ms-external": true
+    },
+    "LinkedServiceProperties": {
+      "type": "object",
+      "description": "Describes the properties of a linked service connection managed by the Azure AI Search service.",
+      "properties": {
+        "followerServiceResourceId": {
+          "type": "string",
+          "description": "The resource ID of the follower Azure AI Search service."
+        },
+        "followerServiceLocation": {
+          "type": "string",
+          "description": "The Azure location of the follower Azure AI Search service."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/LinkedServiceProvisioningState",
+          "description": "The provisioning state of the linked service connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "LinkedServiceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of the linked service connection.",
+      "enum": [
+        "Provisioning",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "LinkedServiceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "The linked service connection is being provisioned."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The linked service connection is being deleted."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The linked service connection has finished provisioning successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The linked service connection provisioning failed."
+          },
+          {
+            "name": "Cancelled",
+            "value": "Cancelled",
+            "description": "The linked service connection provisioning was cancelled."
           }
         ]
       }

@@ -262,6 +262,40 @@ union SharedPrivateLinkResourceProvisioningState {
 }
 
 /**
+ * The provisioning state of the linked service connection.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Using 'Cancelled' per RPC-Async-V1-03 standard (British spelling)"
+@added(Versions.v2026_09_01_preview)
+union LinkedServiceProvisioningState {
+  string,
+
+  /**
+   * The linked service connection is being provisioned.
+   */
+  Provisioning: "Provisioning",
+
+  /**
+   * The linked service connection is being deleted.
+   */
+  Deleting: "Deleting",
+
+  /**
+   * The linked service connection has finished provisioning successfully.
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * The linked service connection provisioning failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The linked service connection provisioning was cancelled.
+   */
+  Cancelled: "Cancelled",
+}
+
+/**
  * Indicates if the dedicated search service has an upgrade available.
  */
 union UpgradeAvailable {
@@ -1090,6 +1124,28 @@ model SharedPrivateLinkResourceProperties {
 }
 
 /**
+ * Describes the properties of a linked service connection managed by the Azure AI Search service.
+ */
+@added(Versions.v2026_09_01_preview)
+model LinkedServiceProperties {
+  /**
+   * The resource ID of the follower Azure AI Search service.
+   */
+  followerServiceResourceId?: string;
+
+  /**
+   * The Azure location of the follower Azure AI Search service.
+   */
+  followerServiceLocation?: string;
+
+  /**
+   * The provisioning state of the linked service connection.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: LinkedServiceProvisioningState;
+}
+
+/**
  * Defines the SKU of a search service, which determines billing rate and capacity limits.
  */
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1458,6 +1514,28 @@ model SharedPrivateLinkResourceListResult {
    * The URL to get the next set of shared private link resources, if there are any.
    */
   @nextLink
+  nextLink?: string;
+}
+
+/**
+ * Response containing a list of linked service connections.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_09_01_preview)
+@Azure.ResourceManager.Legacy.armExternalType
+model LinkedServiceListResult {
+  /**
+   * The list of linked service connections.
+   */
+  @visibility(Lifecycle.Read)
+  @pageItems
+  value?: LinkedService[];
+
+  /**
+   * The URL to get the next set of linked service connections, if there are any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
   nextLink?: string;
 }
 

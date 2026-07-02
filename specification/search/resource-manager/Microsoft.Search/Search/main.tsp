@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./SearchService.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./SharedPrivateLinkResource.tsp";
+import "./LinkedService.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./routes.tsp";
 import "./client.tsp";
