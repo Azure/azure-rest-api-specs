@@ -6,8 +6,8 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Compute;
 
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
-@@clientName(NetworkApiVersion.`2020-11-01`, "V20201101", "python");
-@@clientName(NetworkApiVersion.`2022-11-01`, "V20221101", "python");
+@@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
+@@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
