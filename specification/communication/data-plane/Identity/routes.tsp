@@ -18,7 +18,7 @@ interface IdentityOperations {
   @summary("Create a new identity, and optionally, an access token.")
   @doc("Create a new identity, and optionally, an access token.")
   @post
-  create is Azure.Core.Foundations.Operation<
+  create is IdentityOperation<
     {
       @doc("If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.")
       @body
@@ -27,9 +27,7 @@ interface IdentityOperations {
     {
       @statusCode statusCode: 201;
       @body result: CommunicationIdentityAccessTokenResult;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -37,7 +35,7 @@ interface IdentityOperations {
   @doc("Delete the identity, revoke all tokens for the identity and delete all associated data.")
   @route("/{id}")
   @delete
-  delete is Azure.Core.Foundations.Operation<
+  delete is IdentityOperation<
     {
       @doc("Identifier of the identity to be deleted.")
       @path
@@ -45,9 +43,7 @@ interface IdentityOperations {
     },
     {
       @statusCode statusCode: 204;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -55,7 +51,7 @@ interface IdentityOperations {
   @doc("Revoke all access tokens for the specific identity.")
   @route("/{id}/:revokeAccessTokens")
   @post
-  revokeAccessTokens is Azure.Core.Foundations.Operation<
+  revokeAccessTokens is IdentityOperation<
     {
       @doc("Identifier of the identity.")
       @path
@@ -63,9 +59,7 @@ interface IdentityOperations {
     },
     {
       @statusCode statusCode: 204;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -73,7 +67,7 @@ interface IdentityOperations {
   @doc("Issue a new token for an identity.")
   @route("/{id}/:issueAccessToken")
   @post
-  issueAccessToken is Azure.Core.Foundations.Operation<
+  issueAccessToken is IdentityOperation<
     {
       @doc("Identifier of the identity to issue token for.")
       @path
@@ -86,9 +80,7 @@ interface IdentityOperations {
     {
       @statusCode statusCode: 200;
       @body result: CommunicationIdentityAccessToken;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 }
 
@@ -101,7 +93,7 @@ interface TeamsUserOperations {
   @doc("Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.")
   @route("/teamsUser/:exchangeAccessToken")
   @post
-  exchangeTeamsUserAccessToken is Azure.Core.Foundations.Operation<
+  exchangeTeamsUserAccessToken is IdentityOperation<
     {
       @doc("Request payload for the token exchange.")
       @body
@@ -110,9 +102,7 @@ interface TeamsUserOperations {
     {
       @statusCode statusCode: 200;
       @body result: CommunicationIdentityAccessToken;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 }
 
@@ -125,7 +115,7 @@ interface TeamsExtensionOperations {
   @doc("Exchanges a Teams Phone token for an ACS user access token.")
   @route("/access/teamsExtension/:exchangeAccessToken")
   @post
-  exchangeToken is Azure.Core.Foundations.Operation<
+  exchangeToken is IdentityOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Opaque token exchange request body with unknown value types"
       @doc("Request payload for the token exchange.")
@@ -135,9 +125,7 @@ interface TeamsExtensionOperations {
     {
       @statusCode statusCode: 200;
       @body result: CommunicationIdentityAccessTokenResult;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -145,7 +133,7 @@ interface TeamsExtensionOperations {
   @doc("Get Teams Phone access assignment by object id.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @get
-  getAssignment is Azure.Core.Foundations.Operation<
+  getAssignment is IdentityOperation<
     {
       @doc("Tenant Id we want to get the assignment for.")
       @path
@@ -158,9 +146,7 @@ interface TeamsExtensionOperations {
     {
       @statusCode statusCode: 200;
       @body result: TeamsExtensionAssignmentResponse;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -169,7 +155,7 @@ interface TeamsExtensionOperations {
   @doc("Creates or replaces a Teams Phone access assignment.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @put
-  upsertAssignment is Azure.Core.Foundations.Operation<
+  upsertAssignment is IdentityOperation<
     {
       @doc("Tenant Id we want to update the assignment for.")
       @path
@@ -191,9 +177,7 @@ interface TeamsExtensionOperations {
       | {
           @statusCode statusCode: 201;
           @body result: TeamsExtensionAssignmentResponse;
-        },
-    {},
-    CommunicationErrorResponse
+        }
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Brownfield conversion from existing swagger"
@@ -201,7 +185,7 @@ interface TeamsExtensionOperations {
   @doc("Removes a Teams Phone access assignment.")
   @route("/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}")
   @delete
-  deleteAssignment is Azure.Core.Foundations.Operation<
+  deleteAssignment is IdentityOperation<
     {
       @doc("Tenant Id we want to remove the assignment for.")
       @path
@@ -213,8 +197,6 @@ interface TeamsExtensionOperations {
     },
     {
       @statusCode statusCode: 204;
-    },
-    {},
-    CommunicationErrorResponse
+    }
   >;
 }

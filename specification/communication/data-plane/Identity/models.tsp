@@ -16,6 +16,17 @@ enum Versions {
   c2025_06_30: "2025-06-30",
 }
 
+alias IdentityOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {}
+> = Azure.Core.Foundations.Operation<
+  TParams,
+  TResponse,
+  Traits,
+  CommunicationErrorResponse
+>;
+
 // --- Error models (matching common.json) ---
 
 @doc("The Communication Services error.")
