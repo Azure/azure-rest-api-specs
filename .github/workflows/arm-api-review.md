@@ -6,9 +6,12 @@ description: >
   /arm-review comment command.
 timeout-minutes: 30
 on:
+  # Fork PRs are intentionally NOT allowed (no `forks:` filter → gh-aw defaults
+  # to disallowing forks). Together with gh-aw's built-in role check
+  # (`admin`/`maintainer`/`write`, see `roles` below) this keeps the workflow
+  # from auto-running on externally-authored PRs.
   pull_request_target:
-    types: [opened, synchronize]
-    forks: ["*"]
+    types: [opened, synchronize, labeled]
   issue_comment:
     types: [created]
   workflow_dispatch:
@@ -17,204 +20,25 @@ on:
         description: "PR number to review"
         required: true
         type: string
-  permissions:
-    pull-requests: read
-    issues: write # allows the preconditions step to post the "review skipped" notice
-  steps:
-    - name: Resolve PR number and check preconditions
-      id: preconditions
-      uses: actions/github-script@v9
-      env:
-        INPUT_PR_NUMBER: ${{ github.event.inputs.pr_number || '' }}
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const eventName = context.eventName;
-          const payload   = context.payload;
-
-          // Posts (or refreshes) a single, polished notice explaining that the
-          // automated ARM API review did not run because the PR exceeds the
-          // size limit, and that a human reviewer will handle it. Idempotent:
-          // a hidden marker is used to avoid duplicate comments across pushes.
-          async function postReviewSkippedNotice(github, context, core, prNumber, fileCount, maxFiles) {
-            const marker = '<!-- arm-api-reviewer-agent: automated-review-skipped-size -->';
-            const body =
-              `${marker}\n` +
-              `### Automated ARM API review was not run\n\n` +
-              `This pull request changes **${fileCount}** files under ` +
-              `\`specification/\`, which is above the **${maxFiles}**-file limit ` +
-              `for automated ARM API review. To keep automated reviews accurate ` +
-              `and timely, they are not run on changes of this size.\n\n` +
-              `**No action is needed from you.** Your assigned Azure API ` +
-              `reviewer will review these changes as part of the standard review ` +
-              `process.\n\n` +
-              `> 🔍 *Automated ARM API review*`;
-            try {
-              // Look for an existing notice (paginated to stay reliable on busy PRs).
-              let existing;
-              for (let page = 1; page <= 10 && !existing; page++) {
-                const { data: comments } = await github.rest.issues.listComments({
-                  ...context.repo,
-                  issue_number: prNumber,
-                  per_page: 100,
-                  page,
-                });
-                existing = comments.find(c => c.body?.includes(marker));
-                if (comments.length < 100) break;
-              }
-              if (existing) {
-                await github.rest.issues.updateComment({
-                  ...context.repo,
-                  comment_id: existing.id,
-                  body,
-                });
-              } else {
-                await github.rest.issues.createComment({
-                  ...context.repo,
-                  issue_number: prNumber,
-                  body,
-                });
-              }
-            } catch (e) {
-              core.warning(`Could not post automated-review-skipped notice: ${e.message}`);
-            }
-          }
-
-          // ── 1. Resolve PR number ────────────────────────────────────────────
-          let prNumber;
-          if (eventName === 'pull_request_target') {
-            prNumber = payload.pull_request.number;
-          } else if (eventName === 'issue_comment') {
-            prNumber = payload.issue.number;
-          } else if (eventName === 'workflow_dispatch') {
-            prNumber = parseInt(process.env.INPUT_PR_NUMBER, 10);
-          }
-
-          if (!prNumber) {
-            core.setOutput('should_run', 'false');
-            core.warning('Could not determine PR number; skipping.');
-            return;
-          }
-          core.setOutput('pr_number', String(prNumber));
-
-          // ── 2. issue_comment: must contain /arm-review ─────────────────────
-          //    Check this early to avoid unnecessary API calls for unrelated comments.
-          if (eventName === 'issue_comment') {
-            const body = payload.comment?.body ?? '';
-            if (!body.includes('/arm-review')) {
-              core.setOutput('should_run', 'false');
-              return;
-            }
-          }
-
-          // ── 3. Fetch PR details (shared by all subsequent checks) ────────
-          const { data: pr } = await github.rest.pulls.get({
-            ...context.repo,
-            pull_number: prNumber,
-          });
-
-          // ── 4. /arm-review permission check ─────────────────────────────────
-          //    Only the PR author or a repository collaborator may use /arm-review.
-          if (eventName === 'issue_comment') {
-            const commenter = payload.comment.user.login;
-            const prAuthor  = pr.user.login;
-
-            if (commenter !== prAuthor) {
-              try {
-                await github.rest.repos.checkCollaborator({
-                  ...context.repo,
-                  username: commenter,
-                });
-              } catch {
-                core.setOutput('should_run', 'false');
-                core.warning(
-                  `@${commenter} is not a repository collaborator or the PR author. ` +
-                  'Only the PR author or repository collaborators may use /arm-review.'
-                );
-                return;
-              }
-            }
-          }
-
-          // ── 5. skip-arm-review label ───────────────────────────────────────
-          if (pr.labels.some(l => l.name === 'skip-arm-review')) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} has 'skip-arm-review' label — skipping ARM API review.`);
-            return;
-          }
-
-          // ── 6. Automated-trigger eligibility gates ─────────────────────────
-          //    Explicit / on-demand triggers (/arm-review command,
-          //    workflow_dispatch) bypass these gates
-          //    and always proceed. Automated triggers (pull_request_target
-          //    opened / synchronize) only run when the PR is genuinely awaiting
-          //    ARM feedback: it must be open (not draft, closed, or merged) and
-          //    carry the 'WaitForARMFeedback' label.
-          const isExplicit =
-            eventName === 'workflow_dispatch' ||
-            (eventName === 'issue_comment');
-
-          if (!isExplicit) {
-            if (pr.draft) {
-              core.setOutput('should_run', 'false');
-              core.notice(`PR #${prNumber} is a draft — skipping auto ARM API review. Use /arm-review to review on demand.`);
-              return;
-            }
-            if (pr.state !== 'open' || pr.merged) {
-              core.setOutput('should_run', 'false');
-              core.notice(`PR #${prNumber} is not open (state: ${pr.state}, merged: ${pr.merged === true}) — skipping auto ARM API review.`);
-              return;
-            }
-            if (!pr.labels.some(l => l.name === 'WaitForARMFeedback')) {
-              core.setOutput('should_run', 'false');
-              core.notice(`PR #${prNumber} does not have the 'WaitForARMFeedback' label — skipping auto ARM API review. Use /arm-review to review on demand.`);
-              return;
-            }
-          }
-
-          // ── 7. specification/ file guard + changed-file cap (paginated) ────
-          const MAX_SPEC_FILES = 50; // guard context-window budget
-          let specFound = false;
-          let specFileCount = 0;
-          let totalFileCount = 0;
-          for (let page = 1; ; page++) {
-            const { data: pageFiles } = await github.rest.pulls.listFiles({
-              ...context.repo,
-              pull_number: prNumber,
-              per_page: 100,
-              page,
-            });
-            totalFileCount += pageFiles.length;
-            for (const f of pageFiles) {
-              if (f.filename.startsWith('specification/')) {
-                specFound = true;
-                specFileCount++;
-              }
-            }
-            if (pageFiles.length < 100) break; // last page reached
-          }
-          if (!specFound) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} has no specification/ changes — skipping ARM API review.`);
-            return;
-          }
-          if (specFileCount > MAX_SPEC_FILES) {
-            core.setOutput('should_run', 'false');
-            core.notice(
-              `PR #${prNumber} touches ${specFileCount} specification/ files ` +
-              `(limit: ${MAX_SPEC_FILES}) — skipping automated ARM API review.`
-            );
-            await postReviewSkippedNotice(github, context, core, prNumber, specFileCount, MAX_SPEC_FILES);
-            return;
-          }
-          core.setOutput('spec_file_count', String(specFileCount));
-
-          core.setOutput('should_run', 'true');
+  # Only users with write access (or above) may trigger the workflow. This is
+  # the gh-aw default; it is stated explicitly here because it is the primary
+  # guard against externally-authored PRs and `/arm-review` abuse, replacing
+  # the former hand-rolled collaborator check.
+  roles: [admin, maintainer, write]
+# Gate at the trigger level so the expensive agent job never starts for
+# ineligible events. Label / draft / comment gating that used to live in a
+# custom github-script step is expressed here declaratively; the remaining
+# per-PR checks (skip-arm-review label, specification/ scope, 50-file cap) are
+# done by the agent in natural language (see "Trigger Validation" below).
 if: >
   github.event_name == 'workflow_dispatch' ||
   (github.event_name == 'pull_request_target' &&
    (github.event.action == 'opened' ||
-    github.event.action == 'synchronize')) ||
+    github.event.action == 'synchronize') &&
+   contains(github.event.pull_request.labels.*.name, 'WaitForARMFeedback')) ||
+  (github.event_name == 'pull_request_target' &&
+   github.event.action == 'labeled' &&
+   github.event.label.name == 'WaitForARMFeedback') ||
   (github.event_name == 'issue_comment' &&
    github.event.action == 'created' &&
    github.event.issue.pull_request != null &&
@@ -226,7 +50,11 @@ permissions:
 tools:
   github:
     toolsets: [context, repos, pull_requests, issues]
-    min-integrity: unapproved
+    # Raise the GitHub MCP guard from `unapproved` to `approved` so the agent's
+    # GitHub tool calls only run against content of approved integrity — a
+    # defense-in-depth layer against externally-authored / unapproved PRs, on
+    # top of the fork-disallow default and the write-role trigger gate.
+    min-integrity: approved
 imports:
   - ../instructions/arm-api-review.instructions.md
   - ../instructions/openapi-review.instructions.md
@@ -305,8 +133,8 @@ confirmation.
   review comments and updating labels.
 - **Rollout**: This workflow runs on all PRs that touch `specification/`
   (no service allowlist). To opt out for a PR add the `skip-arm-review` label.
-  A service-level allowlist can be added to the preconditions step if a phased
-  rollout becomes necessary.
+  A service-level allowlist can be added to the "Trigger Validation" step
+  below if a phased rollout becomes necessary.
 
 ## Required Secrets
 
@@ -318,7 +146,7 @@ The following repository secrets must be configured for the workflow to run:
 - **`GH_AW_GITHUB_MCP_SERVER_TOKEN`** — Token used by the GitHub MCP server
   toolset embedded in the agent.
 - **`GITHUB_TOKEN`** — Standard Actions token (auto-provisioned); used by the
-  preconditions step to fetch PR metadata and collaborator status.
+  gh-aw runtime (role/permission check and safe-output publishing).
 
 All secrets are consumed only by the gh-aw runtime and are never exposed to PR
 content. The model is hosted by GitHub Copilot infrastructure; no additional
@@ -334,22 +162,39 @@ Determine the PR to review from the GitHub Actions context:
 | `issue_comment`       | `github.event.issue.number`        |
 | `workflow_dispatch`   | `github.event.inputs.pr_number`    |
 
-The `preconditions` step in the workflow has already verified that:
+The workflow trigger (`if:` condition) and gh-aw's built-in role check have
+already guaranteed, before this agent starts, that:
 
-- The PR contains `specification/` file changes.
-- The PR does not have the `skip-arm-review` label.
-- For automated triggers (`opened` / `synchronize`), the PR is open (not draft,
-  closed, or merged) **and** carries the `WaitForARMFeedback` label. On-demand
-  triggers (`/arm-review` or `workflow_dispatch`)
-  bypass these gates and run even on drafts and without the label.
-- For `/arm-review` commands, the commenter is the PR author or a repository
-  collaborator.
-- The PR changes no more than `MAX_SPEC_FILES` (50) `specification/` files.
-  Larger PRs are left to the assigned human API reviewer; the preconditions
-  step posts a notice on the PR explaining this and no automated review runs.
+- The triggering user has `write` access or above (gh-aw `roles` gate). This
+  replaces any manual collaborator check — do **not** re-verify permissions.
+- The event is eligible: an automated `opened` / `synchronize` run only reaches
+  the agent when the PR already carries the `WaitForARMFeedback` label; a
+  `labeled` run only fires when that exact label is added; an `issue_comment`
+  run only fires for a PR comment containing `/arm-review`; `workflow_dispatch`
+  is always eligible.
+- Fork PRs are excluded (no `forks:` filter → gh-aw disallows forks).
 
-If `steps.preconditions.outputs.should_run != 'true'`, call `noop` immediately
-and stop. Do not review the PR.
+## Trigger Validation
+
+Before doing any review work, run these lightweight checks in order using the
+read-only `github` toolset. If any check fails, act as directed and stop.
+
+1. **Resolve the PR number** from the event context per the table above. If it
+   cannot be resolved, call `noop` and stop.
+2. **`skip-arm-review` label** — call `get_pull_request` and inspect the labels.
+   If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
+3. **`specification/` scope** — call `list_pull_request_files`. If **no** changed
+   file path starts with `specification/`, call `noop` and stop (nothing to
+   review). Paginate the file list so busy PRs are counted reliably.
+4. **50-file cap** — count the changed files whose path starts with
+   `specification/`. If that count is greater than **50**, do **not** review.
+   Instead post a single `add-comment` notice (idempotent: include the hidden
+   marker `<!-- arm-api-reviewer-agent: automated-review-skipped-size -->` and
+   skip posting if a comment with that marker already exists) explaining that
+   the PR exceeds the automated-review size limit and that the assigned human
+   API reviewer will handle it, then call `noop` and stop.
+
+Only when all four checks pass should you proceed to the Review Workflow below.
 
 ## Review Workflow
 
@@ -553,9 +398,9 @@ compliant.
 
 **Skip (call `noop`):**
 
-- PRs with `skip-arm-review` label (already handled by preconditions).
-- PRs with no `specification/` changes (already handled by preconditions).
-- Draft PRs triggered by auto events (already handled by preconditions).
+- PRs with `skip-arm-review` label (already handled by Trigger Validation).
+- PRs with no `specification/` changes (already handled by Trigger Validation).
+- PRs above the 50-file limit (already handled by Trigger Validation).
 - Files outside `specification/` — do not review; note in summary.
 
 ## Constraints

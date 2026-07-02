@@ -38,17 +38,25 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 
 | Trigger                            | Condition                                                                                                                                            |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| PR opened                          | PR is open (not draft, closed, or merged); has the `WaitForARMFeedback` label; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR opened                          | PR carries the `WaitForARMFeedback` label; triggered by a user with write access or above; touches `specification/**` files; does not have `skip-arm-review` label |
 | PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                              |
-| `/arm-review` comment              | On-demand: posted by the PR author or a repository collaborator; runs even on draft PRs and without `WaitForARMFeedback`                            |
+| `WaitForARMFeedback` label added   | Applying the label triggers a review directly (no push needed), subject to the same conditions                                                      |
+| `/arm-review` comment              | On-demand: posted by a user with write access or above; runs even on draft PRs and without `WaitForARMFeedback`                                     |
 | `workflow_dispatch`                | On-demand: repository maintainer triggers manually with a PR number                                                                                |
 
 > **Automated vs. on-demand:** The automated triggers (`opened` /
-> `synchronize`) only run when the PR is open (not draft, closed, or merged)
-> **and** carries the `WaitForARMFeedback` label — this keeps automated reviews
-> scoped to PRs that are actually awaiting ARM feedback. The on-demand triggers
-> (`/arm-review`, `workflow_dispatch`) have no
-> such restriction and run regardless of the label or draft state.
+> `synchronize` / `labeled`) only run when the PR carries the
+> `WaitForARMFeedback` label — this keeps automated reviews scoped to PRs that
+> are actually awaiting ARM feedback. Adding the label is itself a trigger, so a
+> review starts as soon as a maintainer applies it. The on-demand triggers
+> (`/arm-review`, `workflow_dispatch`) have no such restriction and run
+> regardless of the label or draft state.
+
+> **Fork PRs and permissions:** The workflow does not run on PRs from forks, and
+> gh-aw's built-in role check only lets users with **write access or above**
+> trigger it. Together these keep the automated review from running on
+> externally-authored PRs. The GitHub MCP toolset additionally runs at
+> `approved` integrity for defense in depth.
 
 > **Draft PRs converted to ready:** The `ready_for_review` event is not
 > supported by the workflow engine. If you open a PR as a draft and later mark
@@ -64,9 +72,9 @@ useful after pushing fixes to address earlier findings:
 /arm-review
 ```
 
-**Who can use it:** the PR author and repository collaborators (anyone with
-write access or higher). Posting `/arm-review` without sufficient permissions
-is silently ignored.
+**Who can use it:** repository collaborators with write access or higher
+(enforced by gh-aw's built-in role check). Posting `/arm-review` without
+sufficient permissions is silently ignored.
 
 ### Labels
 
@@ -74,7 +82,7 @@ is silently ignored.
 | ---------------------- | -------------------------------------------------------- |
 | `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
 | `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
-| `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` runs only fire while this label is present. Removed by the workflow when blocking findings are found |
+| `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` / `labeled` runs only fire while this label is present, and applying it triggers a review. Removed by the workflow when blocking findings are found |
 
 ### Opting out
 
@@ -88,12 +96,12 @@ API review for that PR. The label can be removed later to re-enable it.
 
 To keep automated reviews accurate and timely, the workflow does not run on
 very large changes. If a PR changes more than **50** files under
-`specification/`, the automated review is skipped and the preconditions step
-posts a short notice on the PR explaining that it was skipped due to the size
-limit. **No action is required from the author** — the assigned Azure API
-reviewer reviews these changes as part of the standard review process. The
-notice is updated in place rather than posted again as the PR changes, so it does
-not add noise on busy PRs.
+`specification/`, the automated review is skipped and the agent posts a short
+notice on the PR explaining that it was skipped due to the size limit. **No
+action is required from the author** — the assigned Azure API reviewer reviews
+these changes as part of the standard review process. The notice is posted
+once (guarded by a hidden marker) rather than repeated as the PR changes, so it
+does not add noise on busy PRs.
 
 ### What the automated review covers
 
