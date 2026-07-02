@@ -28,8 +28,7 @@ using Commvault.ContentStore;
 
 // [SUFFIX004] The "Response" suffix is reserved for HTTP protocol types; use "Result"
 // (or "Data" for models that derive from ResourceData).
-@@clientName(BackupProtectionGroupResponse,
-  "BackupProtectionGroupResult",
+@@clientName(BackupProtectionGroupResponse,  "BackupProtectionGroupResult",
   "csharp"
 );
 @@clientName(CountProtectedItemsResponse,
@@ -42,6 +41,9 @@ using Commvault.ContentStore;
 );
 @@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
 @@clientName(SaaSResourceDetailsResponse, "SaaSResourceDetailsData", "csharp");
+
+// [AZC0032] Non-resource models must not end with "Data"; give it a descriptive service-specific name.
+@@clientName(SaaSData, "CommvaultSaaSDetails", "csharp");
 
 // [SUFFIX003] The "Options" suffix is reserved for client configuration types.
 @@clientName(BackupOptions, "BackupConfig", "csharp");
