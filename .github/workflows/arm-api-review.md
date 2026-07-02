@@ -257,6 +257,8 @@ safe-outputs:
   reply-to-pull-request-review-comment:
     max: 50
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
+  # No `target`: resolve-pull-request-review-thread is always scoped to the
+  # triggering PR by gh-aw (its schema rejects a target field).
   resolve-pull-request-review-thread:
     max: 50
   add-labels:
