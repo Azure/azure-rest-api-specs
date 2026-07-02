@@ -40,7 +40,6 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | PR opened                          | PR is open (not draft, closed, or merged); has the `WaitForARMFeedback` label; touches `specification/**` files; does not have `skip-arm-review` label |
 | PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                              |
-| `arm-review-requested` label added | On-demand: runs even on draft PRs and without `WaitForARMFeedback`; ignores `skip-arm-review`                                                       |
 | `/arm-review` comment              | On-demand: posted by the PR author or a repository collaborator; runs even on draft PRs and without `WaitForARMFeedback`                            |
 | `workflow_dispatch`                | On-demand: repository maintainer triggers manually with a PR number                                                                                |
 
@@ -48,13 +47,13 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 > `synchronize`) only run when the PR is open (not draft, closed, or merged)
 > **and** carries the `WaitForARMFeedback` label — this keeps automated reviews
 > scoped to PRs that are actually awaiting ARM feedback. The on-demand triggers
-> (`/arm-review`, `arm-review-requested` label, `workflow_dispatch`) have no
+> (`/arm-review`, `workflow_dispatch`) have no
 > such restriction and run regardless of the label or draft state.
 
 > **Draft PRs converted to ready:** The `ready_for_review` event is not
 > supported by the workflow engine. If you open a PR as a draft and later mark
-> it ready for review without pushing a new commit, use `/arm-review` or add
-> the `arm-review-requested` label to trigger a review.
+> it ready for review without pushing a new commit, use `/arm-review` to
+> trigger a review.
 
 ### On-demand review with `/arm-review`
 
@@ -73,7 +72,6 @@ is silently ignored.
 
 | Label                  | Effect                                                   |
 | ---------------------- | -------------------------------------------------------- |
-| `arm-review-requested` | Explicitly requests a review run (works on drafts)       |
 | `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
 | `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
 | `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` runs only fire while this label is present. Removed by the workflow when blocking findings are found |
@@ -521,7 +519,7 @@ The agent **does not**:
 | `skills/azure-api-review/SKILL.md`              | Shared review skill manifest and maintenance guidance                                                                                                                                                                                                                                                                                                                              |
 | `skills/azure-api-review/references/*.md`       | 18 cross-cutting rule references covering secret detection, property mutability, provisioning state, naming, enums, examples, tracked-resource lifecycle, policy compatibility, template deployment, availability zones, field ownership, what-if/preflight, LRO final-state-via, suppression criteria, linter coverage, design decisions, GUID/UUID on ARM, and "think in graphs" |
 | `copilot-review-instructions.md`                | Instructions for Copilot Code Review (automated inline PR comments -- separate from the agent)                                                                                                                                                                                                                                                                                     |
-| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review` or `arm-review-requested` label                                                                                                                                                                                                                                                     |
+| `.github/workflows/arm-api-review.md`           | GitHub Actions workflow source -- automated trigger on PR open and on-demand via `/arm-review`                                                                                                                                                                                                                                                                                     |
 
 ### Evaluation Suite
 

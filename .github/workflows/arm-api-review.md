@@ -3,11 +3,11 @@ description: >
   Automatically review Azure REST API specification pull requests for
   conformance to ARM RPC rules and Azure REST API Guidelines. Triggers
   automatically on PR open and synchronize; on demand via the
-  /arm-review comment command or the arm-review-requested label.
+  /arm-review comment command.
 timeout-minutes: 30
 on:
   pull_request_target:
-    types: [opened, synchronize, labeled]
+    types: [opened, synchronize]
     forks: ["*"]
   issue_comment:
     types: [created]
@@ -107,21 +107,13 @@ on:
             }
           }
 
-          // ── 3. pull_request_target labeled: must be arm-review-requested ──
-          if (eventName === 'pull_request_target' && payload.action === 'labeled') {
-            if (payload.label?.name !== 'arm-review-requested') {
-              core.setOutput('should_run', 'false');
-              return;
-            }
-          }
-
-          // ── 4. Fetch PR details (shared by all subsequent checks) ────────
+          // ── 3. Fetch PR details (shared by all subsequent checks) ────────
           const { data: pr } = await github.rest.pulls.get({
             ...context.repo,
             pull_number: prNumber,
           });
 
-          // ── 5. /arm-review permission check ─────────────────────────────────
+          // ── 4. /arm-review permission check ─────────────────────────────────
           //    Only the PR author or a repository collaborator may use /arm-review.
           if (eventName === 'issue_comment') {
             const commenter = payload.comment.user.login;
@@ -144,23 +136,22 @@ on:
             }
           }
 
-          // ── 6. skip-arm-review label ───────────────────────────────────────
+          // ── 5. skip-arm-review label ───────────────────────────────────────
           if (pr.labels.some(l => l.name === 'skip-arm-review')) {
             core.setOutput('should_run', 'false');
             core.notice(`PR #${prNumber} has 'skip-arm-review' label — skipping ARM API review.`);
             return;
           }
 
-          // ── 7. Automated-trigger eligibility gates ─────────────────────────
+          // ── 6. Automated-trigger eligibility gates ─────────────────────────
           //    Explicit / on-demand triggers (/arm-review command,
-          //    arm-review-requested label, workflow_dispatch) bypass these gates
+          //    workflow_dispatch) bypass these gates
           //    and always proceed. Automated triggers (pull_request_target
           //    opened / synchronize) only run when the PR is genuinely awaiting
           //    ARM feedback: it must be open (not draft, closed, or merged) and
           //    carry the 'WaitForARMFeedback' label.
           const isExplicit =
             eventName === 'workflow_dispatch' ||
-            (eventName === 'pull_request_target' && payload.action === 'labeled') ||
             (eventName === 'issue_comment');
 
           if (!isExplicit) {
@@ -181,7 +172,7 @@ on:
             }
           }
 
-          // ── 8. specification/ file guard + changed-file cap (paginated) ────
+          // ── 7. specification/ file guard + changed-file cap (paginated) ────
           const MAX_SPEC_FILES = 50; // guard context-window budget
           let specFound = false;
           let specFileCount = 0;
@@ -221,9 +212,6 @@ on:
           core.setOutput('should_run', 'true');
 if: >
   github.event_name == 'workflow_dispatch' ||
-  (github.event_name == 'pull_request_target' &&
-   github.event.action == 'labeled' &&
-   github.event.label.name == 'arm-review-requested') ||
   (github.event_name == 'pull_request_target' &&
    (github.event.action == 'opened' ||
     github.event.action == 'synchronize')) ||
@@ -352,7 +340,7 @@ The `preconditions` step in the workflow has already verified that:
 - The PR does not have the `skip-arm-review` label.
 - For automated triggers (`opened` / `synchronize`), the PR is open (not draft,
   closed, or merged) **and** carries the `WaitForARMFeedback` label. On-demand
-  triggers (`/arm-review`, `arm-review-requested` label, or `workflow_dispatch`)
+  triggers (`/arm-review` or `workflow_dispatch`)
   bypass these gates and run even on drafts and without the label.
 - For `/arm-review` commands, the commenter is the PR author or a repository
   collaborator.
