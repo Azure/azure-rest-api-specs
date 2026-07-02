@@ -278,6 +278,19 @@
                 "format": "date-time-rfc7231",
                 "description": "The date-time that the resource was last modified."
               },
+              "x-ms-access-tier": {
+                "type": "string",
+                "description": "The access tier of the blob."
+              },
+              "x-ms-access-tier-change-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set."
+              },
+              "x-ms-access-tier-inferred": {
+                "type": "boolean",
+                "description": "Included if the access tier is inferred."
+              },
               "x-ms-blob-committed-block-count": {
                 "type": "integer",
                 "format": "int32",
@@ -565,6 +578,10 @@
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
+              },
+              "x-ms-smart-access-tier": {
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               },
               "x-ms-structured-body": {
                 "type": "string",
@@ -644,6 +661,19 @@
                 "format": "date-time-rfc7231",
                 "description": "The date-time that the resource was last modified."
               },
+              "x-ms-access-tier": {
+                "type": "string",
+                "description": "The access tier of the blob."
+              },
+              "x-ms-access-tier-change-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set."
+              },
+              "x-ms-access-tier-inferred": {
+                "type": "boolean",
+                "description": "Included if the access tier is inferred."
+              },
               "x-ms-blob-committed-block-count": {
                 "type": "integer",
                 "format": "int32",
@@ -931,6 +961,10 @@
               "x-ms-server-encrypted": {
                 "type": "boolean",
                 "description": "Indicates whether the contents of the request are successfully encrypted."
+              },
+              "x-ms-smart-access-tier": {
+                "type": "string",
+                "description": "The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier."
               },
               "x-ms-structured-body": {
                 "type": "string",
