@@ -1244,7 +1244,7 @@ union DiffDiskOption {
 }
 
 /**
- * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
  */
 union DiffDiskPlacement {
   string,
@@ -1255,9 +1255,9 @@ union DiffDiskPlacement {
   CacheDisk: "CacheDisk",
 
   /**
-   * Resource disk placement
+   * Temp disk placement
    */
-  ResourceDisk: "ResourceDisk",
+  TempDisk: "TempDisk",
 }
 
 /**

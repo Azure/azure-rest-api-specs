@@ -7348,10 +7348,10 @@
     },
     "DiffDiskPlacement": {
       "type": "string",
-      "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.",
+      "description": "Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.",
       "enum": [
         "CacheDisk",
-        "ResourceDisk"
+        "TempDisk"
       ],
       "x-ms-enum": {
         "name": "DiffDiskPlacement",
@@ -7363,9 +7363,9 @@
             "description": "Cache disk placement"
           },
           {
-            "name": "ResourceDisk",
-            "value": "ResourceDisk",
-            "description": "Resource disk placement"
+            "name": "TempDisk",
+            "value": "TempDisk",
+            "description": "Temp disk placement"
           }
         ]
       }
