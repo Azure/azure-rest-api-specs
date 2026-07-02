@@ -87,7 +87,7 @@ very large changes. If a PR changes more than **50** files under
 posts a short notice on the PR explaining that it was skipped due to the size
 limit. **No action is required from the author** — the assigned Azure API
 reviewer reviews these changes as part of the standard review process. The
-notice is updated in place rather than reposted as the PR changes, so it does
+notice is updated in place rather than posted again as the PR changes, so it does
 not add noise on busy PRs.
 
 ### What the automated review covers
