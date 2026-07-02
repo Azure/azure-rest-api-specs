@@ -5,4 +5,8 @@ using Microsoft.BillingTrust;
 using Azure.ClientGenerator.Core;
 
 @@clientName(ProvisioningState, "BillingTrustProvisioningState", "csharp");
-@@clientName(GenerateUploadTokenResponse, "GenerateUploadTokenResult", "csharp");
+@@clientName(
+  GenerateUploadTokenResponse,
+  "GenerateUploadTokenResult",
+  "csharp"
+);
