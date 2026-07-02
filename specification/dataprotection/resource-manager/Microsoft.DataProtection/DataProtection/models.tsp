@@ -3291,6 +3291,22 @@ model PostgreSqlFlexibleServerBackupDatasourceParameters
 }
 
 /**
+ * Generic parameters to be used during configuration of backup
+ */
+@added(Versions.v2026_06_01)
+model GenericBackupDatasourceParameters extends BackupDatasourceParameters {
+  /**
+   * List of resource selectors to be backed up during configuration of backup
+   */
+  resourceSelectors: string[];
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericBackupDatasourceParameters";
+}
+
+/**
  * Azure retention rule
  */
 model AzureRetentionRule extends BasePolicyRule {
@@ -3631,6 +3647,44 @@ model RangeBasedItemLevelRestoreCriteria extends ItemLevelRestoreCriteria {
    * Type of the specific object - used for deserializing
    */
   objectType: "RangeBasedItemLevelRestoreCriteria";
+}
+
+/**
+ * Generic criteria to be used during restore
+ */
+@added(Versions.v2026_06_01)
+model GenericRestoreDatasourceCriteria extends ItemLevelRestoreCriteria {
+  /**
+   * List of resource identifiers that need to be restored
+   */
+  resourceSelectors: ResourceListSelectionCriteria;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericRestoreDatasourceCriteria";
+}
+
+/**
+ * Specifies the list of resources to be restored
+ */
+@added(Versions.v2026_06_01)
+model ResourceListSelectionCriteria {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: string;
+
+  /**
+   * List of resource identifiers to restore from
+   */
+  resourceIdentifiers: string[];
+
+  /**
+   * This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward-compatible source-to-target name override map for generic restore"
+  resourceNameOverrides?: Record<string>;
 }
 
 /**

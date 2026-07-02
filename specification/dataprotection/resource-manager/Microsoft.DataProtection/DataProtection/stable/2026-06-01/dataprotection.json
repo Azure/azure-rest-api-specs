@@ -1044,6 +1044,9 @@
           },
           "Create BackupInstance to perform critical operation With MUA": {
             "$ref": "./examples/BackupInstanceOperations/PutBackupInstance_ResourceGuardEnabled.json"
+          },
+          "Create BackupInstance with GenericBackupDatasourceParameters": {
+            "$ref": "./examples/BackupInstanceOperations/PutBackupInstanceWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1640,6 +1643,9 @@
           },
           "Trigger Restore With Rehydration": {
             "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithRehydration.json"
+          },
+          "Trigger Restore with GenericRestoreDatasourceCriteria": {
+            "$ref": "./examples/BackupInstanceOperations/TriggerRestoreWithGenericParameters.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7027,6 +7033,47 @@
         }
       }
     },
+    "GenericBackupDatasourceParameters": {
+      "type": "object",
+      "description": "Generic parameters to be used during configuration of backup",
+      "properties": {
+        "resourceSelectors": {
+          "type": "array",
+          "description": "List of resource selectors to be backed up during configuration of backup",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupDatasourceParameters"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericBackupDatasourceParameters"
+    },
+    "GenericRestoreDatasourceCriteria": {
+      "type": "object",
+      "description": "Generic criteria to be used during restore",
+      "properties": {
+        "resourceSelectors": {
+          "$ref": "#/definitions/ResourceListSelectionCriteria",
+          "description": "List of resource identifiers that need to be restored"
+        }
+      },
+      "required": [
+        "resourceSelectors"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemLevelRestoreCriteria"
+        }
+      ],
+      "x-ms-discriminator-value": "GenericRestoreDatasourceCriteria"
+    },
     "GranularityLevel": {
       "type": "string",
       "enum": [
@@ -8325,6 +8372,34 @@
         {
           "$ref": "#/definitions/DppTrackedResourceList"
         }
+      ]
+    },
+    "ResourceListSelectionCriteria": {
+      "type": "object",
+      "description": "Specifies the list of resources to be restored",
+      "properties": {
+        "objectType": {
+          "type": "string",
+          "description": "Type of the specific object - used for deserializing"
+        },
+        "resourceIdentifiers": {
+          "type": "array",
+          "description": "List of resource identifiers to restore from",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resourceNameOverrides": {
+          "type": "object",
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "objectType",
+        "resourceIdentifiers"
       ]
     },
     "ResourceMoveDetails": {
