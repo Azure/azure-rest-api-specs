@@ -116,15 +116,9 @@ interface HorizonDbPrivateEndpointConnections {
   >;
 
   @doc("Approves or rejects a private endpoint connection.")
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is HorizonDbPrivateEndpointOperations.CreateOrReplaceAsync<
     HorizonDbCluster,
-    PrivateEndpointConnectionResource,
-    Response = ArmAcceptedLroResponse<
-      "Resource operation accepted.",
-      ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    PrivateEndpointConnectionResource
   >;
 
   @doc("Deletes a private endpoint connection.")
