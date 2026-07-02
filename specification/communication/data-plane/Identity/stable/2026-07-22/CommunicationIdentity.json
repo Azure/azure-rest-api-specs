@@ -1,0 +1,792 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "CommunicationIdentityClient",
+    "version": "2026-07-22",
+    "description": "Azure Communication Identity Service",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "format": "url",
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [
+    {
+      "name": "Identity"
+    },
+    {
+      "name": "TeamsUser"
+    },
+    {
+      "name": "TeamsExtension"
+    }
+  ],
+  "paths": {
+    "/access/teamsExtension/:exchangeAccessToken": {
+      "post": {
+        "operationId": "TeamsExtensionToken_Exchange",
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Exchanges a Teams Phone token for an ACS user access token.",
+        "description": "Exchanges a Teams Phone token for an ACS user access token.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams Phone token": {
+            "$ref": "./examples/TeamsExtensionToken_Exchange.json"
+          }
+        }
+      }
+    },
+    "/access/teamsExtension/tenants/{tenantId}/assignments/{objectId}": {
+      "get": {
+        "operationId": "TeamsExtensionAssignment_Get",
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Get Teams Phone access assignment by object id.",
+        "description": "Get Teams Phone access assignment by object id.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "Tenant Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Object Id we want to get the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Assignment": {
+            "$ref": "./examples/TeamsExtensionAssignment_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "TeamsExtensionAssignment_Upsert",
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Creates or replaces a Teams Phone access assignment.",
+        "description": "Creates or replaces a Teams Phone access assignment.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "Tenant Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Object Id we want to update the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Values we want to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentCreateOrUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TeamsExtensionAssignmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Assignment": {
+            "$ref": "./examples/TeamsExtensionAssignment_Upsert.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "TeamsExtensionAssignment_Delete",
+        "tags": [
+          "TeamsExtension"
+        ],
+        "summary": "Removes a Teams Phone access assignment.",
+        "description": "Removes a Teams Phone access assignment.",
+        "parameters": [
+          {
+            "name": "tenantId",
+            "in": "path",
+            "description": "Tenant Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "objectId",
+            "in": "path",
+            "description": "Object Id we want to remove the assignment for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Assignment": {
+            "$ref": "./examples/TeamsExtensionAssignment_Delete.json"
+          }
+        }
+      }
+    },
+    "/identities": {
+      "post": {
+        "operationId": "CommunicationIdentity_Create",
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Create a new identity, and optionally, an access token.",
+        "description": "Create a new identity, and optionally, an access token.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "If specified, creates also a Communication Identity access token associated with the identity and containing the requested scopes.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an Identity and optionally an access token": {
+            "$ref": "./examples/CommunicationIdentity_Create.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}": {
+      "delete": {
+        "operationId": "CommunicationIdentity_Delete",
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
+        "description": "Delete the identity, revoke all tokens for the identity and delete all associated data.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the identity to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an identity": {
+            "$ref": "./examples/CommunicationIdentity_Delete.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}/:issueAccessToken": {
+      "post": {
+        "operationId": "CommunicationIdentity_IssueAccessToken",
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Issue a new token for an identity.",
+        "description": "Issue a new token for an identity.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the identity to issue token for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Requested scopes for the new token.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Issue an access token": {
+            "$ref": "./examples/CommunicationIdentity_IssueAccessToken.json"
+          }
+        }
+      }
+    },
+    "/identities/{id}/:revokeAccessTokens": {
+      "post": {
+        "operationId": "CommunicationIdentity_RevokeAccessTokens",
+        "tags": [
+          "Identity"
+        ],
+        "summary": "Revoke all access tokens for the specific identity.",
+        "description": "Revoke all access tokens for the specific identity.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identifier of the identity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Revoke access tokens": {
+            "$ref": "./examples/CommunicationIdentity_RevokeAccessTokens.json"
+          }
+        }
+      }
+    },
+    "/teamsUser/:exchangeAccessToken": {
+      "post": {
+        "operationId": "CommunicationIdentity_ExchangeTeamsUserAccessToken",
+        "tags": [
+          "TeamsUser"
+        ],
+        "summary": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "description": "Exchange an Entra ID access token of a Teams user for a new Communication Identity access token with a matching expiration time.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request payload for the token exchange.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TeamsUserExchangeTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationIdentityAccessToken"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Exchange a Teams user access token": {
+            "$ref": "./examples/CommunicationIdentity_ExchangeTeamsUserAccessToken.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CommunicationError": {
+      "type": "object",
+      "description": "The Communication Services error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "The error target.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Further details about specific errors that led to this error.",
+          "items": {
+            "$ref": "#/definitions/CommunicationError"
+          },
+          "readOnly": true
+        },
+        "innererror": {
+          "$ref": "#/definitions/CommunicationError",
+          "description": "The inner error if any.",
+          "readOnly": true,
+          "x-ms-client-name": "innerError"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "CommunicationErrorResponse": {
+      "type": "object",
+      "description": "The Communication Services error.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CommunicationError",
+          "description": "The Communication Services error."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "CommunicationIdentity": {
+      "type": "object",
+      "description": "A communication identity.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the identity."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "CommunicationIdentityAccessToken": {
+      "type": "object",
+      "description": "An access token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "The access token issued for the identity."
+        },
+        "expiresOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiry time of the token."
+        }
+      },
+      "required": [
+        "token",
+        "expiresOn"
+      ]
+    },
+    "CommunicationIdentityAccessTokenRequest": {
+      "type": "object",
+      "description": "Request to issue a new access token for an identity.",
+      "properties": {
+        "scopes": {
+          "type": "array",
+          "description": "List of scopes attached to the token.",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        },
+        "expiresInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional custom validity period of the token within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.",
+          "default": 1440,
+          "minimum": 60,
+          "maximum": 1440
+        }
+      },
+      "required": [
+        "scopes"
+      ]
+    },
+    "CommunicationIdentityAccessTokenResult": {
+      "type": "object",
+      "description": "A communication identity with access token.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/CommunicationIdentity",
+          "description": "The communication identity."
+        },
+        "accessToken": {
+          "$ref": "#/definitions/CommunicationIdentityAccessToken",
+          "description": "An access token."
+        }
+      },
+      "required": [
+        "identity"
+      ]
+    },
+    "CommunicationIdentityCreateRequest": {
+      "type": "object",
+      "description": "Request to create a new identity with optional access token.",
+      "properties": {
+        "createTokenWithScopes": {
+          "type": "array",
+          "description": "Also create access token for the created identity.",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentityTokenScope"
+          }
+        },
+        "expiresInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional custom validity period of the token within [60,1440] minutes range. If not provided, the default value of 1440 minutes (24 hours) will be used.",
+          "default": 1440,
+          "minimum": 60,
+          "maximum": 1440
+        }
+      }
+    },
+    "CommunicationIdentityTokenScope": {
+      "type": "string",
+      "description": "List of scopes for an access token.",
+      "enum": [
+        "chat",
+        "voip",
+        "chat.join",
+        "chat.join.limited",
+        "voip.join"
+      ],
+      "x-ms-enum": {
+        "name": "CommunicationIdentityTokenScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "chat",
+            "value": "chat",
+            "description": "Use this for full access to Chat APIs."
+          },
+          {
+            "name": "voip",
+            "value": "voip",
+            "description": "Use this for full access to Calling APIs."
+          },
+          {
+            "name": "chatJoin",
+            "value": "chat.join",
+            "description": "Access to Chat APIs but without the authorization to create, delete or update chat threads."
+          },
+          {
+            "name": "chatJoinLimited",
+            "value": "chat.join.limited",
+            "description": "A more limited version of chat.join that doesn't allow to add or remove participants. Use this scope when the token bearer is not fully trusted, for example in guest scenarios."
+          },
+          {
+            "name": "voipJoin",
+            "value": "voip.join",
+            "description": "Access to Calling APIs but without the authorization to start new calls."
+          }
+        ]
+      }
+    },
+    "TeamsExtensionAssignmentCreateOrUpdateRequest": {
+      "type": "object",
+      "description": "A request to create or update a Teams Extension assignment.",
+      "properties": {
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType",
+          "description": "The type of principal the assignment is for."
+        },
+        "clientIds": {
+          "type": "array",
+          "description": "The client IDs for the assignment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "principalType"
+      ]
+    },
+    "TeamsExtensionAssignmentResponse": {
+      "type": "object",
+      "description": "A Teams Extension assignment response.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "The object ID of the assignment."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the assignment."
+        },
+        "principalType": {
+          "$ref": "#/definitions/TeamsExtensionPrincipalType",
+          "description": "The type of principal the assignment is for."
+        },
+        "clientIds": {
+          "type": "array",
+          "description": "The client IDs for the assignment.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "objectId",
+        "tenantId",
+        "principalType"
+      ]
+    },
+    "TeamsExtensionExchangeTokenRequest": {
+      "type": "object",
+      "description": "A request to exchange a Teams Extension token."
+    },
+    "TeamsExtensionPrincipalType": {
+      "type": "string",
+      "description": "The type of principal the assignment is for.",
+      "enum": [
+        "resourceAccount",
+        "user"
+      ],
+      "x-ms-enum": {
+        "name": "TeamsExtensionPrincipalType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "resourceAccount",
+            "value": "resourceAccount",
+            "description": "Resource account principal type."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "User principal type."
+          }
+        ]
+      }
+    },
+    "TeamsUserExchangeTokenRequest": {
+      "type": "object",
+      "description": "A request to exchange a Teams user access token.",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Entra ID access token of a Teams User to acquire a new Communication Identity access token."
+        },
+        "appId": {
+          "type": "string",
+          "description": "Client ID of an Entra ID application to be verified against the appid claim in the Entra ID access token."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Object ID of an Entra ID user (Teams User) to be verified against the oid claim in the Entra ID access token."
+        }
+      },
+      "required": [
+        "token",
+        "appId",
+        "userId"
+      ]
+    }
+  },
+  "parameters": {}
+}
