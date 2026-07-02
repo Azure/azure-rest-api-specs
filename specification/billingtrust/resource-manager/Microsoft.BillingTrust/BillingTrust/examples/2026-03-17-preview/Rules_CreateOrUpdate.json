@@ -1,0 +1,85 @@
+{
+  "operationId": "Rules_CreateOrUpdate",
+  "title": "Create or update an eduQualification rule",
+  "parameters": {
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/billing-edu-rg/providers/Microsoft.Program/educationEnrollments/default",
+    "ruleName": "Qualify_Edu",
+    "api-version": "2026-03-17-preview",
+    "resource": {
+      "properties": {
+        "kind": "eduQualification",
+        "domains": [
+          {
+            "domainNames": [
+              "students.contoso.edu",
+              "faculty.contoso.edu"
+            ],
+            "tenantId": "11111111-1111-1111-1111-111111111111"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/billing-edu-rg/providers/Microsoft.Program/educationEnrollments/default/providers/Microsoft.BillingTrust/assessments/default/rules/Qualify_Edu",
+        "name": "Qualify_Edu",
+        "type": "Microsoft.BillingTrust/assessments/rules",
+        "properties": {
+          "kind": "eduQualification",
+          "evaluationState": "succeeded",
+          "provisioningState": "Succeeded",
+          "domains": [
+            {
+              "domainNames": [
+                "students.contoso.edu",
+                "faculty.contoso.edu"
+              ],
+              "tenantId": "11111111-1111-1111-1111-111111111111",
+              "state": "succeeded"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:15:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/billing-edu-rg/providers/Microsoft.Program/educationEnrollments/default/providers/Microsoft.BillingTrust/assessments/default/rules/Qualify_Edu",
+        "name": "Qualify_Edu",
+        "type": "Microsoft.BillingTrust/assessments/rules",
+        "properties": {
+          "kind": "eduQualification",
+          "evaluationState": "pending",
+          "provisioningState": "Succeeded",
+          "domains": [
+            {
+              "domainNames": [
+                "students.contoso.edu",
+                "faculty.contoso.edu"
+              ],
+              "tenantId": "11111111-1111-1111-1111-111111111111",
+              "state": "pending"
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T10:00:00.000Z"
+        }
+      }
+    }
+  }
+}

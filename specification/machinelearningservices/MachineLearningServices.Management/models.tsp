@@ -8268,7 +8268,6 @@ model WorkspaceProperties {
   keyVault?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
@@ -8276,7 +8275,6 @@ model WorkspaceProperties {
   @removed(Versions.v2026_05_01)
   keyVaults?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
@@ -8871,7 +8869,6 @@ model WorkspacePropertiesUpdateParameters {
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -9084,7 +9081,6 @@ model EndpointModelProperties {
    * The list of Model Sku.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   skus?: EndpointModelSkuProperties[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -9186,7 +9182,6 @@ model EndpointModelSkuRateLimitRuleProperties {
 
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
   #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
   key?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -16647,7 +16642,6 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   marketplaceSubscriptionId?: string;
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "Type is intentionally dynamic in existing API"
   metadata?: unknown;
@@ -16826,7 +16820,6 @@ alias ReferenceSASParameters = {
   /**
    * Asset id and blob uri.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   @body
   body: GetBlobReferenceSASRequestDto;
