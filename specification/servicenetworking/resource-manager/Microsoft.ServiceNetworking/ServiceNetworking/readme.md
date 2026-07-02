@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2026-03-01
 ```
 
+### Suppression
+
+```yaml
+directive:
+  - suppress: ArmResourcePropertiesBag
+    from: TrafficController.json
+    where: $.definitions.Frontend
+    reason: The Frontend 'type' property is a domain enum (public/private) describing the frontend kind, distinct from the read-only ARM envelope resource 'type'; the two never conflict in request payloads and only co-appear in responses. The name matches the Microsoft.ServiceNetworking RP implementation, which serializes this value as 'properties.type'.
+```
+
 ### Tag: package-2025-10-01-preview
 
 These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.

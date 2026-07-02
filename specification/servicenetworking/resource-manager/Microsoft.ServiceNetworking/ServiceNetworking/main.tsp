@@ -61,6 +61,7 @@ model FrontendProperties {
   fqdn?: string;
 
   /** Frontend Type. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Frontend type is a domain-specific property (public/private) distinct from the ARM envelope resource type and is retained intentionally."
   @added(Versions.v2025_10_01_preview)
   type?: FrontendType;
 
@@ -358,7 +359,8 @@ model ResourceId {
 /** Private Endpoint Connection resource of Traffic Controller. */
 @added(Versions.v2025_10_01_preview)
 @parentResource(TrafficController)
-model PrivateEndpointConnection is ProxyResource<PrivateEndpointConnectionProperties> {
+model PrivateEndpointConnection
+  is ProxyResource<PrivateEndpointConnectionProperties> {
   /** Private Endpoint Connection */
   @key("privateEndpointConnectionName")
   @visibility(Lifecycle.Read)
@@ -450,6 +452,10 @@ model PrivateLinkResourceProperties {
   /** The private link resource private DNS zone names. */
   @visibility(Lifecycle.Read)
   requiredZoneNames?: string[];
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 //----------------------- Paths -----------------------
