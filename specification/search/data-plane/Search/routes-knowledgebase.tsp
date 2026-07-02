@@ -22,6 +22,7 @@ interface KnowledgeRetrieval {
       knowledgeBaseName: string;
 
       ...querySourceAuthorizationHeader;
+      ...queryWorkIQSourceAuthorizationHeader;
 
       /** The retrieval request to process. */
       @body

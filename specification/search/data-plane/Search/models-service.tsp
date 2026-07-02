@@ -5071,6 +5071,32 @@ model RemoteSharePointKnowledgeSourceParameters {
 model WorkIQKnowledgeSource extends KnowledgeSource {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.WorkIQ;
+
+  /** The parameters for the WorkIQ knowledge source, including the customer-owned Entra app configuration used for on-behalf-of authentication. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @added(Versions.v2026_08_01_preview)
+  workIQParameters: WorkIQKnowledgeSourceParameters;
+}
+
+/** Parameters for a WorkIQ knowledge source. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+@added(Versions.v2026_08_01_preview)
+model WorkIQKnowledgeSourceParameters {
+  /** The customer-owned Microsoft Entra app registration configuration used for on-behalf-of authentication to the Work IQ API. The customer registers a tenant-owned Entra app, grants it the WorkIQAgent.Ask delegated permission, and configures a federated credential so Azure AI Search can authenticate as that app without a stored client secret. */
+  entraAppAuthentication: EntraAppAuthentication;
+}
+
+/** Configuration for a customer-owned Microsoft Entra app registration used for federated credential-based on-behalf-of authentication. */
+@added(Versions.v2026_08_01_preview)
+model EntraAppAuthentication {
+  /** The application (client) ID of the customer-owned Entra app registration. */
+  applicationId: Azure.Core.uuid;
+
+  /** The federated credential ID configured on the app registration, enabling the search service to authenticate as the app without a stored client secret. */
+  federatedCredentialId: Azure.Core.uuid;
+
+  /** The tenant ID of the app registration. Required when the app registration is in a different tenant than the search service. If omitted, the search service's tenant is used. */
+  tenantId?: Azure.Core.uuid;
 }
 
 /** Configuration for a knowledge source backed by an MCP (Model Context Protocol) server. */

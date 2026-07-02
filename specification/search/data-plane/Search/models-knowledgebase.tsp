@@ -974,12 +974,14 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
 
   /** The attributions for the reference. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @removed(Versions.v2026_08_01_preview)
   attributions?: WorkIQAttribution[];
 }
 
 /** Attribution information for a WorkIQ reference. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
 @added(Versions.v2026_05_01_preview)
+@removed(Versions.v2026_08_01_preview)
 model WorkIQAttribution {
   /** The URL for the attribution. */
   seeMoreWebUrl?: url;

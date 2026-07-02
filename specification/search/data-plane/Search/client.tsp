@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 import "./main.tsp";
 
@@ -8,9 +8,10 @@ using Azure.Core;
 using Search;
 
 @TypeSpec.Versioning.useDependency(
-  Search.Versions.v2026_04_01,
   Search.Versions.v2025_11_01_preview,
-  Search.Versions.v2026_05_01_preview
+  Search.Versions.v2026_04_01,
+  Search.Versions.v2026_05_01_preview,
+  Search.Versions.v2026_08_01_preview
 )
 namespace Customizations;
 
