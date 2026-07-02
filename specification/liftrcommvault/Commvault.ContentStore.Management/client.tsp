@@ -68,3 +68,6 @@ using Commvault.ContentStore;
 
 // [Contextual naming] "Operator" is too generic and collides easily in user code.
 @@clientName(Operator, "CommvaultMatchOperator", "csharp");
+
+// The "Equals" union member collides with the generated value-type's Equals(object) method.
+@@clientName(Operator.Equals, "Equal", "csharp");
