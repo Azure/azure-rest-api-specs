@@ -282,6 +282,14 @@ export function typespec(file) {
 }
 
 /**
+ * @param {string} file
+ * @returns {boolean}
+ */
+export function tspconfig(file) {
+  return typeof file === "string" && /specification\/.*\/tspconfig\.yaml$/.test(file);
+}
+
+/**
  * @param {string} [file]
  * @returns {boolean}
  */

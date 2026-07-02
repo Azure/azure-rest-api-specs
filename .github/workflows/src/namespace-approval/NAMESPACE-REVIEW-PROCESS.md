@@ -45,15 +45,15 @@ If a service team pushes a commit that changes namespace configuration, only the
 
 ## Labels
 
-| Label                        | Applied by       | Meaning                                       |
-| ---------------------------- | ---------------- | --------------------------------------------- |
-| `namespace-review-required`  | Bot              | PR has namespaces that need architect approval |
-| `<lang>-namespace-pending`   | Bot              | Namespace detected, awaiting approval          |
-| `<lang>-namespace-approved`  | Architect        | Namespace approved for this language           |
-| `namespace-approved-all`     | Architect (mgmt) | Shortcut: approves all pending languages       |
-| `namespace-approved`         | Bot              | All languages approved                         |
-| `Mgmt`                       | Bot              | PR is management plane                         |
-| `data-plane`                 | Bot              | PR is data plane                               |
+| Label                       | Applied by       | Meaning                                        |
+| --------------------------- | ---------------- | ---------------------------------------------- |
+| `namespace-review-required` | Bot              | PR has namespaces that need architect approval |
+| `<lang>-namespace-pending`  | Bot              | Namespace detected, awaiting approval          |
+| `<lang>-namespace-approved` | Architect        | Namespace approved for this language           |
+| `namespace-approved-all`    | Architect (mgmt) | Shortcut: approves all pending languages       |
+| `namespace-approved`        | Bot              | All languages approved                         |
+| `Mgmt`                      | Bot              | PR is management plane                         |
+| `data-plane`                | Bot              | PR is data plane                               |
 
 Where `<lang>` is one of: `dotnet`, `java`, `python`, `typescript`, `go`, `rust`
 

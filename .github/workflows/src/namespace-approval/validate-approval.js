@@ -1,5 +1,6 @@
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
+import { extractInputs } from "../context.js";
 
 /**
  * @typedef {Object} ApproversConfig
@@ -285,22 +286,18 @@ async function handleLabeled({
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
 export default async function validateApproval({ github, context, core }) {
+  const content = await readFile(".github/namespace-approvers.yml", "utf8");
   /** @type {ApproversConfig} */
-  let approversConfig;
-  try {
-    const content = await readFile(".github/namespace-approvers.yml", "utf8");
-    approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
-  } catch (error) {
-    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(error));
-    return;
-  }
+  const approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
+
+  const { issue_number } = await extractInputs(github, context, core);
 
   const payload =
     /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent | import("@octokit/webhooks-types").PullRequestUnlabeledEvent} */ (
       context.payload
     );
 
-  const prNumber = payload.pull_request.number;
+  const prNumber = issue_number;
   /** @type {string[]} */
   const labels = payload.pull_request.labels.map(
     (/** @type {{ name: string }} */ label) => label.name,

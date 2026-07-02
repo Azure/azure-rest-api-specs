@@ -21,6 +21,7 @@ vi.mock("fs/promises", async (importOriginal) => {
 // Mock getChangedFiles — path must match the import in detect-namespaces.js
 vi.mock("../../../shared/src/changed-files.js", () => ({
   getChangedFiles: vi.fn().mockResolvedValue([]),
+  tspconfig: (/** @type {string} */ file) => /specification\/.*\/tspconfig\.yaml$/.test(file),
 }));
 
 // Mock format validation
@@ -107,6 +108,9 @@ function rustTspconfig() {
 }
 
 describe("detect-namespaces", () => {
+  // Set RUNNER_TEMP for tests since we removed the fallback
+  process.env.RUNNER_TEMP = process.env.RUNNER_TEMP ?? "/tmp";
+
   it("should detect management plane namespaces from path", async () => {
     core = createMockCore();
     context = createMockContext();
@@ -118,7 +122,6 @@ describe("detect-namespaces", () => {
     await detectNamespaces(args());
 
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-    expect(core.setFailed).not.toHaveBeenCalled();
   });
 
   it("should detect data plane from linter extends", async () => {

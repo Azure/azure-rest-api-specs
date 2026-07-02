@@ -1,6 +1,5 @@
 import { readFile, unlink, writeFile } from "fs/promises";
 import yaml from "js-yaml";
-import { tmpdir } from "os";
 import { join } from "path";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.js";
@@ -33,17 +32,11 @@ const NamespaceResultsSchema = z.object({
  */
 
 /**
- * @param {import("@actions/core")} core
- * @returns {Promise<ApproversConfig | null>}
+ * @returns {Promise<ApproversConfig>}
  */
-async function loadApproversConfig(core) {
-  try {
-    const content = await readFile(".github/namespace-approvers.yml", "utf8");
-    return /** @type {ApproversConfig} */ (yaml.load(content));
-  } catch (error) {
-    core.setFailed("Failed to load .github/namespace-approvers.yml: " + String(error));
-    return null;
-  }
+async function loadApproversConfig() {
+  const content = await readFile(".github/namespace-approvers.yml", "utf8");
+  return /** @type {ApproversConfig} */ (yaml.load(content));
 }
 
 /**
@@ -63,20 +56,14 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     per_page: PER_PAGE_MAX,
   });
 
-  const artifact = artifacts.sort(
-    (
-      /** @type {{ updated_at?: string | null }} */ left,
-      /** @type {{ updated_at?: string | null }} */ right,
-    ) => {
-      const leftTime = new Date(left.updated_at ?? 0).getTime();
-      const rightTime = new Date(right.updated_at ?? 0).getTime();
-      return rightTime - leftTime;
-    },
-  )[0];
+  const artifact = artifacts.sort((left, right) => {
+    const leftTime = new Date(left.updated_at ?? 0).getTime();
+    const rightTime = new Date(right.updated_at ?? 0).getTime();
+    return rightTime - leftTime;
+  })[0];
 
   if (!artifact) {
-    core.info(`No namespace-results artifact found for run ${runId}`);
-    return null;
+    throw new Error(`No namespace-results artifact found for run ${runId}`);
   }
 
   const download = await github.rest.actions.downloadArtifact({
@@ -86,7 +73,7 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     archive_format: "zip",
   });
 
-  const zipPath = join(process.env.RUNNER_TEMP || tmpdir(), `namespace-results-${runId}.zip`);
+  const zipPath = join(process.env.RUNNER_TEMP, `namespace-results-${runId}.zip`);
   const zipBuffer = Buffer.from(new Uint8Array(/** @type {ArrayBuffer} */ (download.data)));
   await writeFile(zipPath, zipBuffer);
 
@@ -137,7 +124,13 @@ function getApprovers(approversConfig, isMgmt, language) {
     }
   }
 
-  return approversConfig["data-plane"]?.[language] ?? ["TBD"];
+  const approvers = approversConfig["data-plane"]?.[language];
+  if (!approvers) {
+    throw new Error(
+      `No approvers configured for language "${language}" in .github/namespace-approvers.yml`,
+    );
+  }
+  return approvers;
 }
 
 /**
@@ -243,15 +236,8 @@ function buildCommentBody({
  */
 export default async function postResults({ github, context, core }) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
-  const approversConfig = await loadApproversConfig(core);
-  if (!approversConfig) {
-    return;
-  }
-
-  const results = run_id ? await downloadNamespaceResults(github, core, owner, repo, run_id) : null;
-  if (!results) {
-    return;
-  }
+  const approversConfig = await loadApproversConfig();
+  const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
 
   const { data: pr } = await github.rest.pulls.get({
     owner,

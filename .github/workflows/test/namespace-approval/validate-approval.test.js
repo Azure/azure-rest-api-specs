@@ -47,8 +47,10 @@ function createPRLabeledPayload({ action, labelName, actor, labels, isMgmt = fal
     action,
     label: { name: labelName },
     sender: { login: actor, type: "User" },
+    repository: { owner: { login: "owner" }, name: "repo" },
     pull_request: {
       number: 42,
+      head: { sha: "abc123" },
       labels: allLabels,
     },
   };
@@ -74,6 +76,7 @@ describe("validate-approval", () => {
     setupMocks();
     github = createMockGithub();
     context = createMockContext();
+    context.eventName = "pull_request_target";
     core = createMockCore();
 
     /** @type {any} */ (github.rest.issues).createComment = vi.fn();

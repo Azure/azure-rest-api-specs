@@ -1,7 +1,7 @@
 import { readFile, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { join } from "path";
-import { getChangedFiles } from "../../../shared/src/changed-files.js";
+import { getChangedFiles, tspconfig } from "../../../shared/src/changed-files.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
 /**
@@ -143,69 +143,65 @@ async function extractNamespaces(file, namespacesFound, artifactNames, core) {
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
 export default async function detectNamespaces({ context, core }) {
-  try {
-    const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
-      context.payload
-    );
+  const payload = /** @type {import("@octokit/webhooks-types").PullRequestEvent} */ (
+    context.payload
+  );
 
-    const changedFiles = (
-      await getChangedFiles({
-        cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
-        paths: ["specification"],
-      })
-    ).filter((file) => /specification\/.*\/tspconfig\.yaml$/.test(file));
+  const changedFiles = (
+    await getChangedFiles({
+      cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
+      paths: ["specification"],
+    })
+  ).filter((file) => tspconfig(file));
 
-    if (changedFiles.length === 0) {
-      core.info("No tspconfig.yaml changes detected, skipping");
-      return;
-    }
-
-    core.info(`Found tspconfig.yaml changes: ${changedFiles.join(", ")}`);
-
-    /** @type {Record<string, string>} */
-    const namespacesFound = {};
-    /** @type {Record<string, string>} */
-    const artifactNames = {};
-    let isMgmt = false;
-    let isDataPlane = false;
-
-    for (const file of changedFiles) {
-      const result = await extractNamespaces(file, namespacesFound, artifactNames, core);
-      if (result.isMgmt) {
-        isMgmt = true;
-      }
-      if (result.isDataPlane) {
-        isDataPlane = true;
-      }
-    }
-
-    const formatRules = loadFormatRules(core);
-    /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
-    const formatResults = {};
-    if (formatRules && isMgmt) {
-      for (const [language, namespace] of Object.entries(namespacesFound)) {
-        formatResults[language] = validateNamespaceFormat(language, namespace, formatRules);
-      }
-      for (const [language, artifact] of Object.entries(artifactNames)) {
-        const key = `${language}-artifact`;
-        formatResults[key] = validateNamespaceFormat(language, artifact, formatRules);
-      }
-    }
-
-    const results = {
-      namespacesFound,
-      artifactNames,
-      isMgmt,
-      isDataPlane,
-      formatResults,
-      prNumber: payload.pull_request.number,
-      action: payload.action,
-    };
-    const resultsPath = join(process.env.RUNNER_TEMP || ".", "namespace-results.json");
-    await writeFile(resultsPath, JSON.stringify(results, null, 2));
-    core.setOutput("results", "true");
-    core.setOutput("results_path", resultsPath);
-  } catch (error) {
-    core.setFailed(`Namespace detection failed: ${String(error)}`);
+  if (changedFiles.length === 0) {
+    core.info("No tspconfig.yaml changes detected, skipping");
+    return;
   }
+
+  core.info(`Found tspconfig.yaml changes: ${changedFiles.join(", ")}`);
+
+  /** @type {Record<string, string>} */
+  const namespacesFound = {};
+  /** @type {Record<string, string>} */
+  const artifactNames = {};
+  let isMgmt = false;
+  let isDataPlane = false;
+
+  for (const file of changedFiles) {
+    const result = await extractNamespaces(file, namespacesFound, artifactNames, core);
+    if (result.isMgmt) {
+      isMgmt = true;
+    }
+    if (result.isDataPlane) {
+      isDataPlane = true;
+    }
+  }
+
+  const formatRules = loadFormatRules(core);
+  /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
+  const formatResults = {};
+  if (formatRules && isMgmt) {
+    for (const [language, namespace] of Object.entries(namespacesFound)) {
+      formatResults[language] = validateNamespaceFormat(language, namespace, formatRules);
+    }
+    for (const [language, artifact] of Object.entries(artifactNames)) {
+      const key = `${language}-artifact`;
+      formatResults[key] = validateNamespaceFormat(language, artifact, formatRules);
+    }
+  }
+
+  const results = {
+    namespacesFound,
+    artifactNames,
+    isMgmt,
+    isDataPlane,
+    formatResults,
+    prNumber: payload.pull_request.number,
+    action: payload.action,
+  };
+  const resultsPath = join(process.env.RUNNER_TEMP, "namespace-results.json");
+  await writeFile(resultsPath, JSON.stringify(results, null, 2));
+  core.setOutput("results", "true");
+  core.setOutput("results_path", resultsPath);
 }
