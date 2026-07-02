@@ -21,7 +21,8 @@ vi.mock("fs/promises", async (importOriginal) => {
 // Mock getChangedFiles — path must match the import in detect-namespaces.js
 vi.mock("../../../shared/src/changed-files.js", () => ({
   getChangedFiles: vi.fn().mockResolvedValue([]),
-  tspconfig: (/** @type {string} */ file) => /specification\/.*\/tspconfig\.yaml$/.test(file),
+  tspconfig: (/** @type {string} */ file) =>
+    file.startsWith("specification/") && file.endsWith("/tspconfig.yaml"),
 }));
 
 // Mock format validation

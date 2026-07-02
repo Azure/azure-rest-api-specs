@@ -286,7 +286,11 @@ export function typespec(file) {
  * @returns {boolean}
  */
 export function tspconfig(file) {
-  return typeof file === "string" && /specification\/.*\/tspconfig\.yaml$/.test(file);
+  return (
+    typeof file === "string" &&
+    file.startsWith("specification/") &&
+    file.endsWith("/tspconfig.yaml")
+  );
 }
 
 /**
