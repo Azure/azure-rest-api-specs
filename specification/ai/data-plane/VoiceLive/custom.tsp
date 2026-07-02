@@ -147,6 +147,13 @@ model ResponseSession is RequestSession {
 
   /** The unique identifier for the session. */
   id?: string;
+
+  /**
+   * Unix timestamp (seconds) at which the session will expire. Server-authoritative: clients
+   * cannot set this via `session.update`. Realtime pipelines forward the upstream AOAI-provided
+   * value; cascaded pipelines set it at connect time to `now + default TTL` (e.g. 2 h).
+   */
+  expires_at?: int32;
 }
 
 /** Supported OpenAI voice names (string enum). */
