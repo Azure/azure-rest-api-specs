@@ -179,9 +179,9 @@ suppressions:
       - $.definitions.ScheduledActionUpdateProperties.properties.disabled
       - $.definitions.ScheduledActionsExtensionProperties.properties.disabled
   - code: ParameterNotUsingCommonTypes
-    reason: The operationStatuses status-monitor is a manually-routed GET (mirroring the BulkActions getOperationStatus pattern); its location and operationId path parameters are declared inline and bound to the explicit route; mirrors the Microsoft.Compute BulkActions precedent.
+    reason: The scheduledActionsOperationStatuses status-monitor is a manually-routed GET (mirroring the BulkActions getOperationStatus pattern); its location and operationId path parameters are declared inline and bound to the explicit route; mirrors the Microsoft.Compute BulkActions precedent.
     from: Bulkactions.json
     where:
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operationStatuses/{operationId}"].get.parameters[?(@.name=='location')]
-      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operationStatuses/{operationId}"].get.parameters[?(@.name=='operationId')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}"].get.parameters[?(@.name=='operationId')]
 ```

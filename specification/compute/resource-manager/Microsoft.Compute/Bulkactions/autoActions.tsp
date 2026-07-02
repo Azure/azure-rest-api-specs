@@ -717,7 +717,7 @@ interface ScheduledActionExtension {
 interface ScheduledActionOperationStatus {
   @doc("Get the status of a ScheduledActions asynchronous operation. Both the `Azure-AsyncOperation` and `Location` headers returned by long-running operations point at this endpoint.")
   @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/operationStatuses/{operationId}")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/scheduledActionsOperationStatuses/{operationId}")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
