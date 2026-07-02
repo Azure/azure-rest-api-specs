@@ -89,7 +89,8 @@ interface RequestHistoryOps
         @segment("requestHistories")
         @key
         requestHistoryName: string,
-      }
+      },
+      ResourceName = "WebAppRequestHistory"
     > {}
 
 @tag("WorkflowRunActions")

@@ -58,7 +58,8 @@ interface HybridConnectionOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "AppServicePlanHybridConnectionNamespaceRelay"
     > {}
 
 @tag("AppServicePlans")
@@ -135,7 +136,8 @@ interface HybridConnectionOperationGroupOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "SiteHybridConnectionNamespaceRelay"
     > {}
 
 @tag("WebApps")
@@ -217,7 +219,8 @@ interface HybridConnectionSlotOps
         @segment("relays")
         @key
         relayName: string,
-      }
+      },
+      ResourceName = "SiteSlotHybridConnectionNamespaceRelay"
     > {}
 
 @tag("WebApps")
