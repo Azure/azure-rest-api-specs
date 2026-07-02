@@ -53,7 +53,7 @@ namespace Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
-@@clientName(DeadlineType, "BulkActionDeadlineType", "csharp");
+@@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
@@ -194,8 +194,8 @@ namespace Microsoft.Compute;
 // .NET naming convention fixes (C# only)
 // =====================================================================
 // Expand "Op" abbreviation to "Operation".
-@@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
-@@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
+@@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
+@@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
 // Drop redundant type-name prefix; align with FallbackOperationInfo.error.
 @@clientName(
   ResourceOperationDetails.resourceOperationError,
@@ -212,7 +212,7 @@ namespace Microsoft.Compute;
   "csharp"
 );
 
-@@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
+@@clientName(ResourceOperationType, "ComputeBulkOperationKind", "csharp");
 @@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
 @@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
 @@clientName(ResourceOperationError, "ComputeBulkOperationError", "csharp");
