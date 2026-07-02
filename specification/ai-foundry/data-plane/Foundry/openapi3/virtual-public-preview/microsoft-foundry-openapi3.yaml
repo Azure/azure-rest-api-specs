@@ -181,7 +181,7 @@ paths:
               $ref: '#/components/schemas/OptimizationJob'
         description: The job to create.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     get:
       operationId: AgentOptimizationJobs_list
@@ -298,7 +298,7 @@ paths:
       tags:
         - AgentOptimizationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
   /agent_optimization_jobs/{jobId}:
     get:
@@ -356,7 +356,7 @@ paths:
       tags:
         - AgentOptimizationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     delete:
       operationId: AgentOptimizationJobs_delete
@@ -402,7 +402,7 @@ paths:
       tags:
         - AgentOptimizationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
   /agent_optimization_jobs/{jobId}:cancel:
     post:
@@ -453,7 +453,7 @@ paths:
       tags:
         - AgentOptimizationJobs
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
   /agents:
     post:
@@ -631,94 +631,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents/endpoint/protocols/invocations_ws:
-    get:
-      operationId: AgentWebsocket_connectEndpointWebsocket
-      summary: Establish a WebSocket connection to a hosted agent
-      description: |-
-        Establishes a WebSocket connection to a hosted agent. The target project and
-        agent are passed as query parameters. The service resolves (or creates) a
-        session, resolves the agent version, then relays text and binary frames
-        bidirectionally between the client and the agent (1 MB maximum frame size).
-
-        The client must send an HTTP GET with `Upgrade: websocket` headers.
-      parameters:
-        - name: project_name
-          in: query
-          required: true
-          description: The name of the project.
-          schema:
-            type: string
-          explode: false
-        - name: agent_name
-          in: query
-          required: true
-          description: The name of the hosted agent.
-          schema:
-            type: string
-          explode: false
-        - name: agent_session_id
-          in: query
-          required: false
-          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
-          schema:
-            type: string
-          explode: false
-        - name: foundry_features
-          in: query
-          required: false
-          description: Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-            default:
-              - HostedAgents=V1Preview
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            x-agent-session-id:
-              required: true
-              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema: {}
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations WebSocket
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
   /agents/{agent_name}:
     get:
       operationId: Agents_getAgent
@@ -1011,10 +923,16 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-user-identity
+        - name: x-agent-version-override
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only.
+          schema:
+            type: string
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
         - name: api-version
@@ -1124,10 +1042,10 @@ paths:
           description: The unique identifier of the invocation.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
         - name: api-version
@@ -1183,10 +1101,10 @@ paths:
           description: The unique identifier of the invocation to cancel.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
         - name: api-version
@@ -1228,6 +1146,98 @@ paths:
           '*/*':
             schema: {}
         description: Optional request body.
+  /agents/{agent_name}/endpoint/protocols/invocations_ws:
+    get:
+      operationId: AgentWebsocket_connectEndpointWebsocket
+      description: |-
+        Establishes a WebSocket connection to a hosted agent. The target agent is a
+        path segment and the project is taken from the endpoint, mirroring the HTTP
+        `/invocations` route. The service resolves (or creates) a session, resolves
+        the agent version, then relays text and binary frames bidirectionally
+        between the client and the agent (1 MB maximum frame size).
+
+        The client must send an HTTP GET with `Upgrade: websocket` headers.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
+          schema:
+            type: string
+          explode: false
+        - name: foundry_features
+          in: query
+          required: false
+          description: Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentDefinitionOptInKeys'
+            default:
+              - HostedAgents=V1Preview
+          explode: false
+        - name: x-ms-user-isolation-key
+          in: header
+          required: false
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
+          schema:
+            type: string
+        - name: x-agent-version-override
+          in: header
+          required: false
+          description: Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - HostedAgents=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations WebSocket
+      x-ms-foundry-meta:
+        required_previews:
+          - HostedAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -1241,6 +1251,12 @@ paths:
           in: path
           required: true
           description: The name of the agent to create a session for.
+          schema:
+            type: string
+        - name: x-agent-version-override
+          in: header
+          required: false
+          description: Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only.
           schema:
             type: string
         - name: api-version
@@ -5527,7 +5543,7 @@ paths:
   /evaluator_generation_jobs:
     post:
       operationId: EvaluatorGenerationJobs_create
-      summary: Create an evaluator generation job
+      summary: Creates an evaluator generation job.
       description: |-
         Creates an evaluator generation job. The service generates rubric-based evaluator
         definitions from the provided source materials asynchronously.
@@ -5593,16 +5609,12 @@ paths:
               $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
         description: The job to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
     get:
       operationId: EvaluatorGenerationJobs_list
-      summary: List evaluator generation jobs
-      description: |-
-        Returns a list of evaluator generation jobs. The List API has up to a few
-        seconds of propagation delay, so a recently created job may not appear
-        immediately; use the Get evaluator generation job API with the job ID to
-        retrieve a specific job without delay.
+      summary: Returns a list of evaluator generation jobs.
+      description: Returns a list of evaluator generation jobs.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5652,6 +5664,13 @@ paths:
           schema:
             type: string
           explode: false
+        - name: category
+          in: query
+          required: false
+          description: Filter evaluator generation jobs by category.
+          schema:
+            $ref: '#/components/schemas/EvaluatorCategory'
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -5700,12 +5719,12 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:
     get:
       operationId: EvaluatorGenerationJobs_get
-      summary: Get an evaluator generation job
+      summary: Get info about an evaluator generation job.
       description: Gets the details of an evaluator generation job by its ID.
       parameters:
         - name: Foundry-Features
@@ -5758,11 +5777,10 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
     delete:
       operationId: EvaluatorGenerationJobs_delete
-      summary: Delete an evaluator generation job
       description: |-
         Deletes an evaluator generation job by its ID. Deletes the job record only;
         the generated evaluator (if any) is preserved.
@@ -5806,12 +5824,12 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluator_generation_jobs/{jobId}:cancel:
     post:
       operationId: EvaluatorGenerationJobs_cancel
-      summary: Cancel an evaluator generation job
+      summary: Cancels an evaluator generation job.
       description: Cancels an evaluator generation job by its ID.
       parameters:
         - name: Foundry-Features
@@ -5857,13 +5875,12 @@ paths:
       tags:
         - EvaluatorGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluators:
     get:
       operationId: Evaluators_listLatestVersions
-      summary: List latest evaluator versions
-      description: Lists the latest version of each evaluator
+      description: List the latest version of each evaluator
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: type
@@ -5901,20 +5918,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluatorVersion'
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -5930,8 +5935,7 @@ paths:
   /evaluators/{name}/versions:
     get:
       operationId: Evaluators_listVersions
-      summary: List evaluator versions
-      description: Returns the available versions for the specified evaluator.
+      description: List all versions of the given evaluator
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -5975,20 +5979,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PagedEvaluatorVersion'
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -6003,8 +5995,7 @@ paths:
         - Evaluators
     post:
       operationId: Evaluators_createVersion
-      summary: Create an evaluator version
-      description: Creates a new evaluator version with an auto-incremented version identifier.
+      description: Create a new EvaluatorVersion with auto incremented version id
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -6028,20 +6019,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -6063,8 +6042,7 @@ paths:
   /evaluators/{name}/versions/{version}:
     get:
       operationId: Evaluators_getVersion
-      summary: Get an evaluator version
-      description: Retrieves the specified evaluator version, returning 404 if it does not exist.
+      description: Get the specific version of the EvaluatorVersion. The service returns 404 Not Found error if the EvaluatorVersion does not exist.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -6094,20 +6072,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -6122,8 +6088,7 @@ paths:
         - Evaluators
     delete:
       operationId: Evaluators_deleteVersion
-      summary: Delete an evaluator version
-      description: Removes the specified evaluator version. Returns 204 whether the version existed or not.
+      description: Delete the specific version of the EvaluatorVersion. The service returns 204 No Content if the EvaluatorVersion was deleted successfully or if the EvaluatorVersion does not exist.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -6149,20 +6114,8 @@ paths:
       responses:
         '204':
           description: There is no content to send for this request, but the headers may be useful.
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -6177,8 +6130,7 @@ paths:
         - Evaluators
     patch:
       operationId: Evaluators_updateVersion
-      summary: Update an evaluator version
-      description: Updates the specified evaluator version in place.
+      description: Update an existing EvaluatorVersion with the given version id
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -6208,20 +6160,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvaluatorVersion'
-        4XX:
-          description: Client error
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           headers:
             x-ms-error-code:
               required: false
@@ -6244,8 +6184,7 @@ paths:
   /evaluators/{name}/versions/{version}/credentials:
     post:
       operationId: Evaluators_getCredentials
-      summary: Get evaluator credentials
-      description: Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version.
+      description: Get the SAS credential to access the storage account associated with an Evaluator version.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6307,8 +6246,7 @@ paths:
   /evaluators/{name}/versions/{version}/startPendingUpload:
     post:
       operationId: Evaluators_startPendingUpload
-      summary: Start a pending upload
-      description: Initiates a new pending upload or retrieves an existing one for the specified evaluator version.
+      description: Start a new or get an existing pending upload of an evaluator for a specific version.
       parameters:
         - name: Foundry-Features
           in: header
@@ -8513,10 +8451,10 @@ paths:
       summary: Create a conversation
       description: Creates a new conversation resource.
       parameters:
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8526,14 +8464,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8605,10 +8537,10 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8637,14 +8569,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8663,10 +8589,10 @@ paths:
           description: The id of the conversation to update.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8676,14 +8602,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8707,10 +8627,10 @@ paths:
           description: The id of the conversation to retrieve.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8720,14 +8640,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8745,10 +8659,10 @@ paths:
           description: The id of the conversation to delete.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8758,14 +8672,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.DeletedConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8795,10 +8703,10 @@ paths:
             items:
               type: string
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8808,14 +8716,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ConversationItemList'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8895,10 +8797,10 @@ paths:
           schema:
             $ref: '#/components/schemas/OpenAI.ItemType'
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8927,14 +8829,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -8959,10 +8855,10 @@ paths:
           description: The id of the conversation item to retrieve.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -8972,14 +8868,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.OutputItem'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9003,10 +8893,10 @@ paths:
           description: The id of the conversation item to delete.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -9016,14 +8906,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.ConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9100,14 +8984,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9129,14 +9007,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Eval'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9168,14 +9040,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteEvalResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9200,14 +9066,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Eval'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9232,14 +9092,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Eval'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9329,14 +9183,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9361,14 +9209,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvalRun'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9406,14 +9248,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteEvalRunResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9444,14 +9280,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvalRun'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9482,14 +9312,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvalRun'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9576,14 +9400,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -9621,14 +9439,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EvalRunOutputItem'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10006,16 +9818,21 @@ paths:
         - Fine-Tuning
   /openai/v1/responses:
     post:
-      operationId: createResponse
-      summary: Create a model response
-      description: Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.
+      operationId: createResponse_createResponseStream
       parameters:
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
+        - name: x-agent-version-override
+          in: header
+          required: false
+          description: Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only.
+          schema:
+            type: string
+      description: Creates a model response. Creates a model response (streaming response).
       responses:
         '200':
           description: The request has succeeded.
@@ -10028,213 +9845,12 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  metadata:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Metadata'
-                      - type: 'null'
-                  top_logprobs:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.integer'
-                      - type: 'null'
-                  temperature:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.numeric'
-                      - type: 'null'
-                    default: 1
-                  top_p:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.numeric'
-                      - type: 'null'
-                    default: 1
-                  user:
-                    type: string
-                    description: |-
-                      This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
-                        A stable identifier for your end-users.
-                        Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
-                    deprecated: true
-                  safety_identifier:
-                    type: string
-                    maxLength: 64
-                    description: |-
-                      A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-                        The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
-                  prompt_cache_key:
-                    type: string
-                    description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
-                  service_tier:
-                    $ref: '#/components/schemas/OpenAI.ServiceTier'
-                  prompt_cache_retention:
-                    anyOf:
-                      - type: string
-                        enum:
-                          - in_memory
-                          - 24h
-                      - type: 'null'
-                  previous_response_id:
-                    anyOf:
-                      - type: string
-                      - type: 'null'
-                  model:
-                    type: string
-                    description: The model deployment to use for the creation of this response.
-                  reasoning:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Reasoning'
-                      - type: 'null'
-                  background:
-                    anyOf:
-                      - type: boolean
-                      - type: 'null'
-                  max_tool_calls:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.integer'
-                      - type: 'null'
-                  text:
-                    $ref: '#/components/schemas/OpenAI.ResponseTextParam'
-                  tools:
-                    $ref: '#/components/schemas/OpenAI.ToolsArray'
-                  tool_choice:
-                    oneOf:
-                      - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
-                      - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
-                  prompt:
-                    $ref: '#/components/schemas/OpenAI.Prompt'
-                  truncation:
-                    anyOf:
-                      - type: string
-                        enum:
-                          - auto
-                          - disabled
-                      - type: 'null'
-                    default: disabled
-                  id:
-                    type: string
-                    description: Unique identifier for this Response.
-                  object:
-                    type: string
-                    enum:
-                      - response
-                    description: The object type of this resource - always set to `response`.
-                    x-stainless-const: true
-                  status:
-                    type: string
-                    enum:
-                      - completed
-                      - failed
-                      - in_progress
-                      - cancelled
-                      - queued
-                      - incomplete
-                    description: |-
-                      The status of the response generation. One of `completed`, `failed`,
-                        `in_progress`, `cancelled`, `queued`, or `incomplete`.
-                  created_at:
-                    type: integer
-                    format: unixtime
-                    description: Unix timestamp (in seconds) of when this Response was created.
-                  completed_at:
-                    anyOf:
-                      - type: string
-                        format: date-time
-                      - type: 'null'
-                    type: integer
-                    format: unixTimestamp
-                  error:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.ResponseError'
-                      - type: 'null'
-                  incomplete_details:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.ResponseIncompleteDetails'
-                      - type: 'null'
-                  output:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OpenAI.OutputItem'
-                    description: |-
-                      An array of content items generated by the model.
-                        - The length and order of items in the `output` array is dependent
-                        on the model's response.
-                        - Rather than accessing the first item in the `output` array and
-                        assuming it's an `assistant` message with the content generated by
-                        the model, you might consider using the `output_text` property where
-                        supported in SDKs.
-                  instructions:
-                    anyOf:
-                      - type: string
-                      - type: array
-                        items:
-                          $ref: '#/components/schemas/OpenAI.InputItem'
-                      - type: 'null'
-                  output_text:
-                    anyOf:
-                      - type: string
-                      - type: 'null'
-                  usage:
-                    $ref: '#/components/schemas/OpenAI.ResponseUsage'
-                  moderation:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Moderation'
-                      - type: 'null'
-                  parallel_tool_calls:
-                    type: boolean
-                    description: Whether to allow the model to run tool calls in parallel.
-                    default: true
-                  conversation:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.ConversationReference'
-                      - type: 'null'
-                  max_output_tokens:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.integer'
-                      - type: 'null'
-                  agent:
-                    allOf:
-                      - $ref: '#/components/schemas/AgentId'
-                    description: |-
-                      (Deprecated) Use agent_reference instead.
-                      The agent used for this response
-                  agent_session_id:
-                    type: string
-                    description: |-
-                      The session identifier for this response. Currently only relevant for hosted agents.
-                      Always returned for hosted agents — either the caller-provided value, the auto-derived value,
-                      or an auto-generated UUID. Use for session-scoped operations and to maintain sandbox
-                      affinity in follow-up calls.
-                  agent_reference:
-                    anyOf:
-                      - $ref: '#/components/schemas/AgentReference'
-                      - type: 'null'
-                    description: The agent used for this response
-                  content_filters:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/ContentFilterResult'
-                    description: The content filter evaluation results.
-                required:
-                  - id
-                  - object
-                  - created_at
-                  - error
-                  - incomplete_details
-                  - output
-                  - instructions
-                  - parallel_tool_calls
-                  - agent_reference
+                $ref: '#/components/schemas/OpenAI.Response'
             text/event-stream:
               schema:
                 $ref: '#/components/schemas/OpenAI.CreateResponseStreamingResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10246,161 +9862,314 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                metadata:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.Metadata'
-                    - type: 'null'
-                top_logprobs:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.integer'
-                    - type: 'null'
-                temperature:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.numeric'
-                    - type: 'null'
-                  default: 1
-                top_p:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.numeric'
-                    - type: 'null'
-                  default: 1
-                user:
-                  type: string
-                  description: |-
-                    This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
-                      A stable identifier for your end-users.
-                      Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
-                  deprecated: true
-                safety_identifier:
-                  type: string
-                  maxLength: 64
-                  description: |-
-                    A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
-                      The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
-                prompt_cache_key:
-                  type: string
-                  description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
-                service_tier:
-                  $ref: '#/components/schemas/OpenAI.ServiceTier'
-                prompt_cache_retention:
-                  anyOf:
-                    - type: string
-                      enum:
-                        - in_memory
-                        - 24h
-                    - type: 'null'
-                previous_response_id:
-                  anyOf:
-                    - type: string
-                    - type: 'null'
-                model:
-                  type: string
-                  description: The model deployment to use for the creation of this response.
-                reasoning:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.Reasoning'
-                    - type: 'null'
-                background:
-                  anyOf:
-                    - type: boolean
-                    - type: 'null'
-                max_tool_calls:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.integer'
-                    - type: 'null'
-                text:
-                  $ref: '#/components/schemas/OpenAI.ResponseTextParam'
-                tools:
-                  $ref: '#/components/schemas/OpenAI.ToolsArray'
-                tool_choice:
-                  oneOf:
-                    - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
-                    - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
-                prompt:
-                  $ref: '#/components/schemas/OpenAI.Prompt'
-                truncation:
-                  anyOf:
-                    - type: string
-                      enum:
-                        - auto
-                        - disabled
-                    - type: 'null'
-                  default: disabled
-                input:
-                  $ref: '#/components/schemas/OpenAI.InputParam'
-                include:
-                  anyOf:
-                    - type: array
-                      items:
-                        $ref: '#/components/schemas/OpenAI.IncludeEnum'
-                    - type: 'null'
-                parallel_tool_calls:
-                  anyOf:
-                    - type: boolean
-                    - type: 'null'
-                  default: true
-                store:
-                  anyOf:
-                    - type: boolean
-                    - type: 'null'
-                  default: true
-                instructions:
-                  anyOf:
-                    - type: string
-                    - type: 'null'
-                moderation:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.ModerationParam'
-                    - type: 'null'
-                stream:
-                  anyOf:
-                    - type: boolean
-                    - type: 'null'
-                stream_options:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
-                    - type: 'null'
-                conversation:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.ConversationParam'
-                    - type: 'null'
-                context_management:
-                  anyOf:
-                    - type: array
-                      items:
-                        $ref: '#/components/schemas/OpenAI.ContextManagementParam'
-                    - type: 'null'
-                  description: Context management configuration for this request.
-                max_output_tokens:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.integer'
-                    - type: 'null'
-                agent:
-                  allOf:
-                    - $ref: '#/components/schemas/AgentReference'
-                  description: |-
-                    (Deprecated) Use agent_reference instead.
-                    The agent to use for generating the response.
-                agent_session_id:
-                  type: string
-                  description: |-
-                    Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
-                    When provided, the request is routed to the same sandbox. When omitted, auto-derived from
-                    conversation_id/prev_response_id or a new UUID is generated.
-                agent_reference:
-                  allOf:
-                    - $ref: '#/components/schemas/AgentReference'
-                  description: The agent to use for generating the response.
-                structured_inputs:
-                  type: object
-                  unevaluatedProperties: {}
-                  description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
+              anyOf:
+                - type: object
+                  properties:
+                    metadata:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.Metadata'
+                        - type: 'null'
+                    top_logprobs:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    temperature:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                        - type: 'null'
+                      default: 1
+                    top_p:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                        - type: 'null'
+                      default: 1
+                    user:
+                      type: string
+                      description: |-
+                        This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
+                          A stable identifier for your end-users.
+                          Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                      deprecated: true
+                    safety_identifier:
+                      type: string
+                      maxLength: 64
+                      description: |-
+                        A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+                          The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                    prompt_cache_key:
+                      type: string
+                      description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+                    service_tier:
+                      $ref: '#/components/schemas/OpenAI.ServiceTier'
+                    prompt_cache_retention:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - in_memory
+                            - 24h
+                        - type: 'null'
+                    previous_response_id:
+                      anyOf:
+                        - type: string
+                        - type: 'null'
+                    model:
+                      type: string
+                      description: The model deployment to use for the creation of this response.
+                    background:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                    max_tool_calls:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    text:
+                      $ref: '#/components/schemas/OpenAI.ResponseTextParam'
+                    tools:
+                      $ref: '#/components/schemas/OpenAI.ToolsArray'
+                    tool_choice:
+                      oneOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                    prompt:
+                      $ref: '#/components/schemas/OpenAI.Prompt'
+                    truncation:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - auto
+                            - disabled
+                        - type: 'null'
+                      deprecated: true
+                      default: disabled
+                    reasoning:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.Reasoning'
+                        - type: 'null'
+                    input:
+                      $ref: '#/components/schemas/OpenAI.InputParam'
+                    include:
+                      anyOf:
+                        - type: array
+                          items:
+                            $ref: '#/components/schemas/OpenAI.IncludeEnum'
+                        - type: 'null'
+                    parallel_tool_calls:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                      default: true
+                    store:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                      default: true
+                    instructions:
+                      anyOf:
+                        - type: string
+                        - type: 'null'
+                    moderation:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ModerationParam'
+                        - type: 'null'
+                    stream:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                    stream_options:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
+                        - type: 'null'
+                    conversation:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ConversationParam'
+                        - type: 'null'
+                    context_management:
+                      anyOf:
+                        - type: array
+                          items:
+                            $ref: '#/components/schemas/OpenAI.ContextManagementParam'
+                        - type: 'null'
+                      description: Context management configuration for this request.
+                    max_output_tokens:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    agent:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: |-
+                        (Deprecated) Use agent_reference instead.
+                        The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
+                    agent_reference:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: The agent to use for generating the response.
+                    structured_inputs:
+                      type: object
+                      unevaluatedProperties: {}
+                      description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
+                - type: object
+                  properties:
+                    metadata:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.Metadata'
+                        - type: 'null'
+                    top_logprobs:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    temperature:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                        - type: 'null'
+                      default: 1
+                    top_p:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.numeric'
+                        - type: 'null'
+                      default: 1
+                    user:
+                      type: string
+                      description: |-
+                        This field is being replaced by `safety_identifier` and `prompt_cache_key`. Use `prompt_cache_key` instead to maintain caching optimizations.
+                          A stable identifier for your end-users.
+                          Used to boost cache hit rates by better bucketing similar requests and  to help OpenAI detect and prevent abuse. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                      deprecated: true
+                    safety_identifier:
+                      type: string
+                      maxLength: 64
+                      description: |-
+                        A stable identifier used to help detect users of your application that may be violating OpenAI's usage policies.
+                          The IDs should be a string that uniquely identifies each user, with a maximum length of 64 characters. We recommend hashing their username or email address, in order to avoid sending us any identifying information. [Learn more](/docs/guides/safety-best-practices#safety-identifiers).
+                    prompt_cache_key:
+                      type: string
+                      description: Used by OpenAI to cache responses for similar requests to optimize your cache hit rates. Replaces the `user` field. [Learn more](/docs/guides/prompt-caching).
+                    service_tier:
+                      $ref: '#/components/schemas/OpenAI.ServiceTier'
+                    prompt_cache_retention:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - in_memory
+                            - 24h
+                        - type: 'null'
+                    previous_response_id:
+                      anyOf:
+                        - type: string
+                        - type: 'null'
+                    model:
+                      type: string
+                      description: The model deployment to use for the creation of this response.
+                    background:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                    max_tool_calls:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    text:
+                      $ref: '#/components/schemas/OpenAI.ResponseTextParam'
+                    tools:
+                      $ref: '#/components/schemas/OpenAI.ToolsArray'
+                    tool_choice:
+                      oneOf:
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceOptions'
+                        - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
+                    prompt:
+                      $ref: '#/components/schemas/OpenAI.Prompt'
+                    truncation:
+                      anyOf:
+                        - type: string
+                          enum:
+                            - auto
+                            - disabled
+                        - type: 'null'
+                      deprecated: true
+                      default: disabled
+                    reasoning:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.Reasoning'
+                        - type: 'null'
+                    input:
+                      $ref: '#/components/schemas/OpenAI.InputParam'
+                    include:
+                      anyOf:
+                        - type: array
+                          items:
+                            $ref: '#/components/schemas/OpenAI.IncludeEnum'
+                        - type: 'null'
+                    parallel_tool_calls:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                      default: true
+                    store:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                      default: true
+                    instructions:
+                      anyOf:
+                        - type: string
+                        - type: 'null'
+                    moderation:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ModerationParam'
+                        - type: 'null'
+                    stream:
+                      anyOf:
+                        - type: boolean
+                        - type: 'null'
+                    stream_options:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ResponseStreamOptions'
+                        - type: 'null'
+                    conversation:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.ConversationParam'
+                        - type: 'null'
+                    context_management:
+                      anyOf:
+                        - type: array
+                          items:
+                            $ref: '#/components/schemas/OpenAI.ContextManagementParam'
+                        - type: 'null'
+                      description: Context management configuration for this request.
+                    max_output_tokens:
+                      anyOf:
+                        - $ref: '#/components/schemas/OpenAI.integer'
+                        - type: 'null'
+                    agent:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: |-
+                        (Deprecated) Use agent_reference instead.
+                        The agent to use for generating the response.
+                    agent_session_id:
+                      type: string
+                      description: |-
+                        Optional session identifier for sandbox affinity. Currently only relevant for hosted agents.
+                        When provided, the request is routed to the same sandbox. When omitted, auto-derived from
+                        conversation_id/prev_response_id or a new UUID is generated.
+                    agent_reference:
+                      allOf:
+                        - $ref: '#/components/schemas/AgentReference'
+                      description: The agent to use for generating the response.
+                    structured_inputs:
+                      type: object
+                      unevaluatedProperties: {}
+                      description: The structured inputs to the response that can participate in prompt template substitution or tool argument bindings.
     get:
       operationId: listResponses
-      summary: List responses
-      description: Returns a collection of all stored responses matching specified filter criteria.
+      description: Returns the list of all responses.
       parameters:
         - name: limit
           in: query
@@ -10463,10 +10232,10 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -10495,14 +10264,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10512,8 +10275,7 @@ paths:
   /openai/v1/responses/compact:
     post:
       operationId: compactResponseConversation
-      summary: Compact a conversation
-      description: Compacts a conversation into a response object suitable for long-running and zero-data-retention scenarios.
+      description: Produces a compaction of a responses conversation.
       parameters: []
       responses:
         '200':
@@ -10522,14 +10284,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.CompactResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10544,9 +10300,7 @@ paths:
               $ref: '#/components/schemas/OpenAI.CompactResponseMethodPublicBody'
   /openai/v1/responses/{response_id}:
     get:
-      operationId: getResponse
-      summary: Retrieve a model response
-      description: Retrieves a model response with the given ID.
+      operationId: getResponse_getResponseStream
       parameters:
         - name: response_id
           in: path
@@ -10575,12 +10329,20 @@ paths:
             type: integer
             format: int32
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
+        - name: accept
+          in: header
+          required: false
+          schema:
+            type: string
+            enum:
+              - text/event-stream
+      description: Retrieves a model response with the given ID. Retrieves a model response with the given ID (streaming response).
       responses:
         '200':
           description: The request has succeeded.
@@ -10597,14 +10359,8 @@ paths:
             text/event-stream:
               schema:
                 $ref: '#/components/schemas/OpenAI.CreateResponseStreamingResponse'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10613,7 +10369,6 @@ paths:
         - Responses
     delete:
       operationId: deleteResponse
-      summary: Delete a model response
       description: Deletes a model response.
       parameters:
         - name: response_id
@@ -10622,10 +10377,10 @@ paths:
           description: The ID of the response to delete.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -10641,14 +10396,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DeleteResponseResult'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10658,8 +10407,7 @@ paths:
   /openai/v1/responses/{response_id}/cancel:
     post:
       operationId: cancelResponse
-      summary: Cancel a model response
-      description: Cancels a model response with the given ID. Only responses created with the background parameter set to true can be cancelled.
+      description: Cancels a model response.
       parameters:
         - name: response_id
           in: path
@@ -10667,10 +10415,10 @@ paths:
           description: The ID of the response to cancel.
           schema:
             type: string
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -10686,14 +10434,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/OpenAI.Response'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10703,8 +10445,7 @@ paths:
   /openai/v1/responses/{response_id}/input_items:
     get:
       operationId: listInputItems
-      summary: List input items for a response
-      description: Retrieves the input items associated with the specified response.
+      description: Returns a list of input items for a given response.
       parameters:
         - name: response_id
           in: path
@@ -10751,10 +10492,10 @@ paths:
           schema:
             type: string
           explode: false
-        - name: x-ms-user-identity
+        - name: x-ms-user-isolation-key
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
           schema:
             type: string
       responses:
@@ -10789,14 +10530,8 @@ paths:
                     type: boolean
                     description: A value indicating whether there are additional values available not captured in this list.
                 description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
+        default:
+          description: An unexpected error response.
           content:
             application/json:
               schema:
@@ -10957,8 +10692,7 @@ paths:
   /routines:
     get:
       operationId: listRoutines
-      summary: List routines
-      description: Returns the routines available in the current project.
+      description: List routines.
       parameters:
         - name: Foundry-Features
           in: header
@@ -10968,10 +10702,7 @@ paths:
             type: string
             enum:
               - Routines=V1Preview
-        - $ref: '#/components/parameters/ListRoutinesParameters.limit'
-        - $ref: '#/components/parameters/ListRoutinesParameters.after'
-        - $ref: '#/components/parameters/ListRoutinesParameters.before'
-        - $ref: '#/components/parameters/ListRoutinesParameters.order'
+        - $ref: '#/components/parameters/ListRoutinesParameters'
         - name: api-version
           in: query
           required: true
@@ -10985,26 +10716,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Routine'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/RoutineListResponse'
         4XX:
           description: Client error
           content:
@@ -11025,8 +10737,7 @@ paths:
   /routines/{routine_name}:
     put:
       operationId: createOrUpdateRoutine
-      summary: Create or update a routine
-      description: Creates a new routine or replaces an existing routine with the supplied definition.
+      description: Create or update a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11076,8 +10787,7 @@ paths:
           - Routines=V1Preview
     get:
       operationId: getRoutine
-      summary: Get a routine
-      description: Retrieves the specified routine and its current configuration.
+      description: Retrieve a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11121,8 +10831,7 @@ paths:
           - Routines=V1Preview
     delete:
       operationId: deleteRoutine
-      summary: Delete a routine
-      description: Deletes the specified routine.
+      description: Delete a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11163,8 +10872,7 @@ paths:
   /routines/{routine_name}/runs:
     get:
       operationId: listRoutineRuns
-      summary: List prior runs for a routine
-      description: Returns prior runs recorded for the specified routine.
+      description: List prior runs for a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11176,10 +10884,9 @@ paths:
               - Routines=V1Preview
         - $ref: '#/components/parameters/ListRoutineRunsParameters.routine_name'
         - $ref: '#/components/parameters/ListRoutineRunsParameters.filter'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.limit'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.after'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.before'
-        - $ref: '#/components/parameters/ListRoutineRunsParameters.order'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.orderBy'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.maxResults'
+        - $ref: '#/components/parameters/ListRoutineRunsParameters.pageToken'
         - name: api-version
           in: query
           required: true
@@ -11193,26 +10900,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/RoutineRun'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
+                $ref: '#/components/schemas/RoutineRunsResponse'
         4XX:
           description: Client error
           content:
@@ -11233,8 +10921,7 @@ paths:
   /routines/{routine_name}:disable:
     post:
       operationId: disableRoutine
-      summary: Disable a routine
-      description: Disables the specified routine so it no longer runs.
+      description: Disable a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11279,8 +10966,7 @@ paths:
   /routines/{routine_name}:dispatch_async:
     post:
       operationId: dispatchRoutineAsync
-      summary: Queue an asynchronous routine dispatch
-      description: Queues an asynchronous dispatch for the specified routine.
+      description: Queue an asynchronous routine dispatch.
       parameters:
         - name: Foundry-Features
           in: header
@@ -11331,8 +11017,7 @@ paths:
   /routines/{routine_name}:enable:
     post:
       operationId: enableRoutine
-      summary: Enable a routine
-      description: Enables the specified routine so it can be dispatched.
+      description: Enable a routine.
       parameters:
         - name: Foundry-Features
           in: header
@@ -12934,22 +12619,6 @@ components:
       schema:
         type: string
         maxLength: 128
-    ListRoutineRunsParameters.after:
-      name: after
-      in: query
-      required: false
-      description: An opaque cursor returned as last_id by the previous list-runs response.
-      schema:
-        type: string
-      explode: false
-    ListRoutineRunsParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
-      schema:
-        type: string
-      explode: false
     ListRoutineRunsParameters.filter:
       name: filter
       in: query
@@ -12958,20 +12627,30 @@ components:
       schema:
         type: string
       explode: false
-    ListRoutineRunsParameters.limit:
-      name: limit
+    ListRoutineRunsParameters.maxResults:
+      name: maxResults
       in: query
       required: false
-      description: The maximum number of runs to return.
+      description: An optional maximum number of runs to return in this page.
       schema:
         type: integer
         format: int32
       explode: false
-    ListRoutineRunsParameters.order:
-      name: order
+    ListRoutineRunsParameters.orderBy:
+      name: orderBy
       in: query
       required: false
-      description: The ordering direction. Supported values are asc and desc.
+      description: Optional MLflow ordering expressions.
+      schema:
+        type: array
+        items:
+          type: string
+      explode: false
+    ListRoutineRunsParameters.pageToken:
+      name: pageToken
+      in: query
+      required: false
+      description: An optional continuation token from a previous routine runs response.
       schema:
         type: string
       explode: false
@@ -12983,36 +12662,11 @@ components:
       schema:
         type: string
         maxLength: 128
-    ListRoutinesParameters.after:
-      name: after
+    ListRoutinesParameters:
+      name: continuationToken
       in: query
       required: false
-      description: An opaque cursor returned as last_id by the previous list response.
-      schema:
-        type: string
-      explode: false
-    ListRoutinesParameters.before:
-      name: before
-      in: query
-      required: false
-      description: Unsupported. Reserved for future backward pagination support.
-      schema:
-        type: string
-      explode: false
-    ListRoutinesParameters.limit:
-      name: limit
-      in: query
-      required: false
-      description: The maximum number of routines to return.
-      schema:
-        type: integer
-        format: int32
-      explode: false
-    ListRoutinesParameters.order:
-      name: order
-      in: query
-      required: false
-      description: The ordering direction. Supported values are asc and desc.
+      description: An optional continuation token from a previous routines list response.
       schema:
         type: string
       explode: false
@@ -13034,6 +12688,20 @@ components:
           enum:
             - a2a_preview
           description: The type of the tool. Always `"a2a_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         base_url:
           type: string
           format: uri
@@ -13048,16 +12716,12 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
-        send_credentials_for_agent_card:
-          type: boolean
-          description: |-
-            When `true`, Foundry sends its credentials when fetching the remote
-            agent's Agent Card. The service defaults to `false` if a value is not
-            specified by the caller (anonymous fetch).
-          default: false
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2APreviewToolboxTool:
       type: object
       required:
@@ -13067,6 +12731,14 @@ components:
           type: string
           enum:
             - a2a_preview
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         base_url:
           type: string
           format: uri
@@ -13081,16 +12753,12 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
-        send_credentials_for_agent_card:
-          type: boolean
-          description: |-
-            When `true`, Foundry sends its credentials when fetching the remote
-            agent's Agent Card. The service defaults to `false` if a value is not
-            specified by the caller (anonymous fetch).
-          default: false
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2AProtocolConfiguration:
       type: object
       description: Configuration specific to the A2A protocol.
@@ -13123,6 +12791,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An A2A (Agent-to-Agent) tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2AToolCallOutput:
       type: object
       required:
@@ -13152,6 +12823,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an A2A (Agent-to-Agent) tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     AISearchIndexResource:
       type: object
       properties:
@@ -13507,18 +13181,16 @@ components:
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           external: '#/components/schemas/ExternalAgentDefinition'
           container_app: '#/components/schemas/ContainerAppAgentDefinition'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - WorkflowAgents=V1Preview
-          - ExternalAgents=V1Preview
-          - DraftAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
-        - WorkflowAgents=V1Preview
-        - ExternalAgents=V1Preview
-        - DraftAgents=V1Preview
         - HostedAgents=V1Preview
+        - WorkflowAgents=V1Preview
+        - AgentEndpoints=V1Preview
+        - CodeAgents=V1Preview
+        - ExternalAgents=V1Preview
+        - PromptVoiceAgents=V1Preview
+        - DraftAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
     AgentEndpointAuthorizationScheme:
@@ -13766,9 +13438,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     AgentFilterTraceSource:
       type: object
       required:
@@ -14553,18 +14222,18 @@ components:
           description: The object type, which is always 'azure_ai_search'.
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -14646,6 +14315,14 @@ components:
           type: string
           enum:
             - azure_ai_search
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -14994,16 +14671,18 @@ components:
           enum:
             - azure_function
           description: The object type, which is always 'browser_automation'.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         azure_function:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
           description: The Azure Function Tool definition.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an Azure Function Tool, as used to configure an Agent.
@@ -15036,6 +14715,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An Azure Function tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     AzureFunctionToolCallOutput:
       type: object
       required:
@@ -15130,6 +14812,9 @@ components:
           type: string
           description: Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters).
       description: A bing custom search configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchPreviewTool:
       type: object
       required:
@@ -15141,6 +14826,20 @@ components:
           enum:
             - bing_custom_search_preview
           description: The object type, which is always 'bing_custom_search_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         bing_custom_search_preview:
           allOf:
             - $ref: '#/components/schemas/BingCustomSearchToolParameters'
@@ -15148,6 +14847,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Bing custom search tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolCall:
       type: object
       required:
@@ -15173,6 +14875,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A Bing custom search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolCallOutput:
       type: object
       required:
@@ -15198,6 +14903,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a Bing custom search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolParameters:
       type: object
       required:
@@ -15212,6 +14920,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The bing custom search tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingGroundingSearchConfiguration:
       type: object
       required:
@@ -15261,18 +14972,18 @@ components:
           description: The object type, which is always 'bing_grounding'.
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -15393,6 +15104,20 @@ components:
           enum:
             - browser_automation_preview
           description: The object type, which is always 'browser_automation_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -15400,6 +15125,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationPreviewToolboxTool:
       type: object
       required:
@@ -15410,6 +15138,14 @@ components:
           type: string
           enum:
             - browser_automation_preview
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         browser_automation_preview:
           allOf:
             - $ref: '#/components/schemas/BrowserAutomationToolParameters'
@@ -15417,6 +15153,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A browser automation tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolCall:
       type: object
       required:
@@ -15442,6 +15181,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A browser automation tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolCallOutput:
       type: object
       required:
@@ -15467,6 +15209,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a browser automation tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolConnectionParameters:
       type: object
       required:
@@ -15476,6 +15221,9 @@ components:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
       description: Definition of input parameters for the connection used by the Browser Automation Tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolParameters:
       type: object
       required:
@@ -15486,6 +15234,9 @@ components:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -15499,18 +15250,18 @@ components:
           description: The type of the tool. Always `capture_structured_outputs`.
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         outputs:
           allOf:
             - $ref: '#/components/schemas/StructuredOutputDefinition'
@@ -15656,9 +15407,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -15714,6 +15462,14 @@ components:
             specifies uploaded file IDs to make available to your code, along with an
             optional `memory_limit` setting.
             If not provided, the service assumes auto.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A code interpreter tool stored in a toolbox.
@@ -16280,11 +16036,6 @@ components:
             conditional_previews:
               - DraftAgents=V1Preview
           default: false
-      x-ms-foundry-meta:
-        conditional_previews:
-          - WorkflowAgents=V1Preview
-          - ExternalAgents=V1Preview
-          - DraftAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -16465,18 +16216,18 @@ components:
         provider:
           type: string
           maxLength: 128
-          description: The external provider that emits the custom event.
+          description: The provider or source identifier for the custom trigger.
         event_name:
           type: string
-          maxLength: 256
-          description: The provider-specific event name that fires the routine.
+          maxLength: 128
+          description: An optional provider-specific event name for the custom trigger.
         parameters:
           type: object
           unevaluatedProperties: {}
-          description: Provider-specific trigger parameters.
+          description: Provider-specific parameters for the custom trigger.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
-      description: A custom event routine trigger.
+      description: A custom routine trigger.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -16885,9 +16636,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DatasetReference:
       type: object
       required:
@@ -16901,9 +16649,6 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DatasetType:
       anyOf:
         - type: string
@@ -17221,33 +16966,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/Message'
       description: A message authored by a developer to guide the model during evaluation.
-    Dimension:
-      type: object
-      required:
-        - id
-        - description
-        - weight
-      properties:
-        id:
-          type: string
-          description: Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
-        description:
-          type: string
-          description: What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
-        weight:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 10
-          description: Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
-        always_applicable:
-          type: boolean
-          description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
-          default: false
-      description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -17275,23 +16993,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
-    EndpointBasedEvaluatorDefinition:
-      type: object
-      required:
-        - type
-        - connection_name
-      properties:
-        type:
-          type: string
-          enum:
-            - endpoint
-        connection_name:
-          type: string
-          minLength: 1
-          description: "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorDefinition'
-      description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -19067,9 +18768,6 @@ components:
             - safety
             - agents
       description: The category of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorConfiguration:
       type: object
       required:
@@ -19128,12 +18826,8 @@ components:
         mapping:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
-          rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
-          endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
+          rubrics: '#/components/schemas/RubricBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDefinitionType:
       anyOf:
         - type: string
@@ -19144,62 +18838,52 @@ components:
             - prompt_and_code
             - service
             - openai_graders
-            - rubric
-            - endpoint
+            - rubrics
       description: The type of evaluator definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
-      required:
-        - dataset
-        - kinds
       properties:
-        dataset:
+        spec:
           allOf:
             - $ref: '#/components/schemas/DatasetReference'
-          description: Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).
-        kinds:
-          type: array
-          items:
-            type: string
-          description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
-      description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
+          description: Reference to the generated evaluation specification — a Markdown document describing what the evaluator measures, design decisions, and intended scope. Always present for generated evaluators.
+        tools:
+          allOf:
+            - $ref: '#/components/schemas/DatasetReference'
+          description: 'Reference to the tool schemas inferred during spec generation, when the generation pipeline produced them. JSONL of OpenAI tool-schema objects. Optional: absent when the generation pipeline did not produce or infer tools.'
+        context:
+          allOf:
+            - $ref: '#/components/schemas/DatasetReference'
+          description: 'Reference to the supplementary context materials used during generation (e.g., file uploads, trace samples). Optional: absent when generation used only inline prompt/agent inputs with no supplementary files.'
+      description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. All references are read-only and resolve to versioned Foundry Datasets in a service-reserved namespace.
     EvaluatorGenerationInputs:
       type: object
       required:
+        - name
         - sources
         - model
         - evaluator_name
       properties:
+        name:
+          type: string
+          description: Display name for this generation job.
         sources:
           type: array
           items:
             $ref: '#/components/schemas/EvaluatorGenerationJobSource'
           description: Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.
+        category:
+          allOf:
+            - $ref: '#/components/schemas/EvaluatorCategory'
+          description: "Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality'])."
+          default: quality
         model:
           type: string
           description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
         evaluator_name:
           type: string
-          minLength: 1
-          maxLength: 256
-          pattern: ^[A-Za-z0-9_.~-]+$
-          description: The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.
-        evaluator_display_name:
-          type: string
-          description: Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.
-        evaluator_description:
-          type: string
-          description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
+          description: The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.
       description: Caller-supplied inputs for an evaluator generation job.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJob:
       type: object
       required:
@@ -19240,15 +18924,7 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
-        usage:
-          allOf:
-            - $ref: '#/components/schemas/EvaluatorGenerationTokenUsage'
-          description: Token consumption summary. Populated when the job reaches a terminal state.
-          readOnly: true
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJobCreate:
       type: object
       properties:
@@ -19257,9 +18933,6 @@ components:
             - $ref: '#/components/schemas/EvaluatorGenerationInputs'
           description: Caller-supplied inputs.
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationJobSource:
       type: object
       required:
@@ -19269,6 +18942,9 @@ components:
           allOf:
             - $ref: '#/components/schemas/EvaluatorGenerationJobSourceType'
           description: The type of source.
+        description:
+          type: string
+          description: Optional description of what this source represents — helps the pipeline interpret its content (e.g., 'Company refund policy document' or 'Describes the agent's core capabilities').
       discriminator:
         propertyName: type
         mapping:
@@ -19276,10 +18952,7 @@ components:
           agent: '#/components/schemas/AgentEvaluatorGenerationJobSource'
           traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
           dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
-      description: The base source model for evaluator generation jobs. Polymorphic over `type`.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
+      description: The base source model for evaluator generation jobs.
     EvaluatorGenerationJobSourceType:
       anyOf:
         - type: string
@@ -19290,32 +18963,6 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluator generation jobs.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorGenerationTokenUsage:
-      type: object
-      required:
-        - input_tokens
-        - output_tokens
-        - total_tokens
-      properties:
-        input_tokens:
-          type: integer
-          format: int64
-          description: Number of input (prompt) tokens consumed.
-        output_tokens:
-          type: integer
-          format: int64
-          description: Number of output (completion) tokens generated.
-        total_tokens:
-          type: integer
-          format: int64
-          description: Total tokens consumed (input + output).
-      description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -19343,9 +18990,6 @@ components:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
       description: Evaluator Metric
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricDirection:
       anyOf:
         - type: string
@@ -19355,9 +18999,6 @@ components:
             - decrease
             - neutral
       description: The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricType:
       anyOf:
         - type: string
@@ -19367,9 +19008,6 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -19378,9 +19016,6 @@ components:
             - builtin
             - custom
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersion:
       type: object
       required:
@@ -19410,13 +19045,6 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
-        supported_evaluation_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
-          default:
-            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -19451,9 +19079,6 @@ components:
           description: The version of the resource
           readOnly: true
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionCreate:
       type: object
       required:
@@ -19478,13 +19103,6 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
-        supported_evaluation_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
-          default:
-            - turn
         definition:
           allOf:
             - $ref: '#/components/schemas/EvaluatorDefinition'
@@ -19498,9 +19116,6 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionUpdate:
       type: object
       properties:
@@ -19517,13 +19132,6 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorCategory'
           description: The categories of the evaluator
-        supported_evaluation_levels:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `["turn"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).
-          default:
-            - turn
         description:
           type: string
           description: The asset description text.
@@ -19533,9 +19141,6 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     ExternalAgentDefinition:
       type: object
       required:
@@ -19587,6 +19192,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A Fabric data agent tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricDataAgentToolCallOutput:
       type: object
       required:
@@ -19612,6 +19220,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a Fabric data agent tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricDataAgentToolParameters:
       type: object
       properties:
@@ -19624,6 +19235,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The fabric data agent tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricIQPreviewTool:
       type: object
       required:
@@ -19652,9 +19266,26 @@ components:
             - type: 'null'
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricIQPreviewToolboxTool:
       type: object
       required:
@@ -19682,9 +19313,20 @@ components:
             - type: 'null'
           description: (Optional) Whether the agent requires approval before executing actions. Default is always.
           default: always
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A FabricIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FileDataGenerationJobOutput:
       type: object
       required:
@@ -19778,6 +19420,14 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         vector_store_ids:
           type: array
           items:
@@ -19935,7 +19585,7 @@ components:
           enum:
             - opened
             - closed
-      description: Known GitHub issue events that can fire a routine.
+      description: The GitHub issue events supported for routine triggers.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -19960,7 +19610,7 @@ components:
         owner:
           type: string
           maxLength: 128
-          description: The GitHub owner or organization that scopes which issues can fire the trigger.
+          description: The GitHub repository owner or organization that scopes which issues can fire the trigger.
         repository:
           type: string
           maxLength: 128
@@ -19968,7 +19618,7 @@ components:
         issue_event:
           allOf:
             - $ref: '#/components/schemas/GitHubIssueEvent'
-          description: The GitHub issue event that fires the routine.
+          description: The GitHub issue event that can fire the trigger.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
       description: A GitHub issue routine trigger.
@@ -20092,6 +19742,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for human evaluation.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     HumanEvaluationRuleAction:
       type: object
       required:
@@ -20454,7 +20107,6 @@ components:
       type: object
       required:
         - type
-        - input
       properties:
         type:
           type: string
@@ -20462,7 +20114,9 @@ components:
             - invoke_agent_invocations_api
           description: The manual dispatch payload type.
         input:
-          description: The JSON value sent as the complete downstream invocations input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
+          type: string
+          maxLength: 32768
+          description: The raw input sent to the downstream invocations target.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test an invocations API routine dispatch.
@@ -20473,29 +20127,24 @@ components:
       type: object
       required:
         - type
+        - agent_endpoint_id
       properties:
         type:
           type: string
           enum:
             - invoke_agent_invocations_api
           description: The action type.
-        agent_name:
-          type: string
-          maxLength: 256
-          description: The project-scoped agent name for routine dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: Legacy endpoint-scoped agent identifier for routine dispatch.
-        input:
-          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
+          description: The endpoint-scoped agent identifier for invocations API dispatch.
         session_id:
           type: string
           maxLength: 256
           description: An optional existing hosted-agent session identifier to continue during the downstream dispatch.
       allOf:
         - $ref: '#/components/schemas/RoutineAction'
-      description: Dispatches a routine through the raw invocations API. Exactly one of agent_name or agent_endpoint_id must be provided.
+      description: Dispatches a routine through the raw invocations API.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -20503,7 +20152,6 @@ components:
       type: object
       required:
         - type
-        - input
       properties:
         type:
           type: string
@@ -20511,7 +20159,9 @@ components:
             - invoke_agent_responses_api
           description: The manual dispatch payload type.
         input:
-          description: The JSON value sent as the complete downstream responses input. The value is passed through as-is and can be an object, string, number, boolean, array, or null.
+          type: string
+          maxLength: 32768
+          description: The user input sent to the downstream responses target.
       allOf:
         - $ref: '#/components/schemas/RoutineDispatchPayload'
       description: A manual payload used to test a responses API routine dispatch.
@@ -20531,13 +20181,11 @@ components:
         agent_name:
           type: string
           maxLength: 256
-          description: The project-scoped agent name for routine dispatch.
+          description: The project-scoped agent name for responses API dispatch.
         agent_endpoint_id:
           type: string
           maxLength: 256
-          description: Legacy endpoint-scoped agent identifier for routine dispatch.
-        input:
-          description: Static JSON value sent as the complete downstream input when the routine fires. The value is passed through as-is; no templating is applied.
+          description: The endpoint-scoped agent identifier for responses API dispatch.
         conversation:
           type: string
           maxLength: 256
@@ -20631,8 +20279,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url` or `connector_id` must be
-              provided.
+            The URL for the MCP server. One of `server_url`, `connector_id`, or
+              `tunnel_id` must be provided.
         connector_id:
           type: string
           enum:
@@ -20646,8 +20294,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url` or `connector_id` must be provided. Learn more about service
-              connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -20657,6 +20305,12 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
+        tunnel_id:
+          type: string
+          pattern: ^tunnel_[a-z0-9]{32}$
+          description: |-
+            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
+              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -20694,6 +20348,14 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.
@@ -20774,6 +20436,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A memory command tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryCommandToolCallOutput:
       type: object
       required:
@@ -20795,6 +20460,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a memory command tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryItem:
       type: object
       required:
@@ -20909,6 +20577,20 @@ components:
           enum:
             - memory_search_preview
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -20930,6 +20612,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool for integrating memories into the agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemorySearchTool:
       type: object
       required:
@@ -20942,6 +20627,20 @@ components:
           enum:
             - memory_search
           description: The type of the tool. Always `memory_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         memory_store_name:
           type: string
           description: The name of the memory store to use.
@@ -20987,6 +20686,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A memory search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryStoreDefaultDefinition:
       type: object
       required:
@@ -21301,6 +21003,20 @@ components:
           enum:
             - fabric_dataagent_preview
           description: The object type, which is always 'fabric_dataagent_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         fabric_dataagent_preview:
           allOf:
             - $ref: '#/components/schemas/FabricDataAgentToolParameters'
@@ -21308,6 +21024,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Microsoft Fabric tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ModelCredentialRequest:
       type: object
       required:
@@ -22082,18 +21801,18 @@ components:
           x-stainless-const: true
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         container:
           anyOf:
             - type: string
@@ -25392,18 +25111,18 @@ components:
             - type: 'null'
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -26418,18 +26137,18 @@ components:
             - type: 'null'
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -27043,18 +26762,18 @@ components:
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -32029,18 +31748,18 @@ components:
           x-stainless-const: true
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -32129,8 +31848,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url` or `connector_id` must be
-              provided.
+            The URL for the MCP server. One of `server_url`, `connector_id`, or
+              `tunnel_id` must be provided.
         connector_id:
           type: string
           enum:
@@ -32144,8 +31863,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url` or `connector_id` must be provided. Learn more about service
-              connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -32155,6 +31874,12 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
+        tunnel_id:
+          type: string
+          pattern: ^tunnel_[a-z0-9]{32}$
+          description: |-
+            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
+              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -32196,8 +31921,10 @@ components:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -34117,6 +33844,14 @@ components:
                 - concise
                 - detailed
             - type: 'null'
+        context:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+                - current_turn
+                - all_turns
+            - type: 'null'
         generate_summary:
           anyOf:
             - type: string
@@ -34232,10 +33967,6 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
-        reasoning:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Reasoning'
-            - type: 'null'
         background:
           anyOf:
             - type: boolean
@@ -34314,6 +34045,10 @@ components:
               assuming it's an `assistant` message with the content generated by
               the model, you might consider using the `output_text` property where
               supported in SDKs.
+        reasoning:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Reasoning'
+            - type: 'null'
         instructions:
           anyOf:
             - type: string
@@ -37469,6 +37204,8 @@ components:
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
+          toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewTool'
+          reminder_preview: '#/components/schemas/ReminderPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
           web_search: '#/components/schemas/OpenAI.WebSearchTool'
@@ -37821,6 +37558,7 @@ components:
             - work_iq_preview
             - fabric_iq_preview
             - toolbox_search_preview
+            - reminder_preview
             - azure_ai_search
             - azure_function
             - bing_grounding
@@ -38139,18 +37877,18 @@ components:
           default: medium
         name:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined name for this tool or configuration.
         description:
           type: string
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: Optional user-defined description for this tool or configuration.
         tool_configs:
           type: object
           unevaluatedProperties:
             $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -38332,16 +38070,18 @@ components:
           enum:
             - openapi
           description: The object type, which is always 'openapi'.
-        tool_configs:
-          type: object
-          unevaluatedProperties:
-            $ref: '#/components/schemas/ToolConfig'
-          description: Deprecated. This property is deprecated and will be removed in a future version.
-          deprecated: true
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for an OpenAPI tool as used to configure an agent.
@@ -38417,6 +38157,14 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An OpenAPI tool stored in a toolbox.
@@ -38433,7 +38181,7 @@ components:
           description: Pinned agent version. Defaults to latest if omitted.
       description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationCandidate:
       type: object
@@ -38472,7 +38220,7 @@ components:
           description: Promotion metadata. Null if the candidate has not been promoted.
       description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetCriterion:
       type: object
@@ -38488,7 +38236,7 @@ components:
           description: Criterion instruction / description.
       description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetInput:
       type: object
@@ -38506,7 +38254,7 @@ components:
           reference: '#/components/schemas/OptimizationReferenceDatasetInput'
       description: Base discriminated model for dataset input. Either inline items or a registered reference.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationDatasetInputType:
       anyOf:
@@ -38516,9 +38264,6 @@ components:
             - inline
             - reference
       description: Discriminator values for the dataset input union.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
     OptimizationDatasetItem:
       type: object
       properties:
@@ -38541,7 +38286,7 @@ components:
           description: Per-item evaluation criteria.
       description: A single item in an inline dataset.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationEvaluatorRef:
       type: object
@@ -38556,7 +38301,7 @@ components:
           description: Evaluator version. If not specified, the latest version is used.
       description: Reference to a named evaluator, optionally pinned to a version.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationInlineDatasetInput:
       type: object
@@ -38578,7 +38323,7 @@ components:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Inline dataset — items supplied directly in the request body.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationJob:
       type: object
@@ -38634,7 +38379,7 @@ components:
           readOnly: true
       description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobInputs:
       type: object
@@ -38666,7 +38411,7 @@ components:
           description: Tuning knobs and run-mode.
       description: Caller-supplied inputs for an optimization job.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobListItem:
       type: object
@@ -38712,7 +38457,7 @@ components:
           readOnly: true
       description: Slim job representation returned by the LIST endpoint.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobProgress:
       type: object
@@ -38735,7 +38480,7 @@ components:
           description: Wall-clock time elapsed in seconds since the job began executing.
       description: In-flight progress; only populated while status is queued or in_progress.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationJobResult:
       type: object
@@ -38753,7 +38498,7 @@ components:
           description: All evaluated candidates including baseline.
       description: Terminal-state result body. Populated when status is succeeded or failed.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationOptions:
       type: object
@@ -38780,7 +38525,7 @@ components:
           description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
       description: Tuning knobs and run-mode for an optimization job.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OptimizationReferenceDatasetInput:
       type: object
@@ -38803,7 +38548,7 @@ components:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     OtlpTelemetryEndpoint:
       type: object
@@ -39147,7 +38892,7 @@ components:
           description: Version of the Foundry agent this candidate was promoted to.
       description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
       x-ms-foundry-meta:
-        conditional_previews:
+        required_previews:
           - AgentsOptimization=V2Preview
     PromptAgentDefinition:
       type: object
@@ -39244,9 +38989,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -39313,9 +39055,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     ProtocolConfiguration:
       type: object
       properties:
@@ -39616,6 +39355,36 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    ReminderPreviewTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - reminder_preview
+          description: The type of the tool. Always `reminder_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: A tool for creating reminder timer routines.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ReminderPreviewToolboxTool:
       type: object
       required:
@@ -39628,6 +39397,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A reminder tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ResponseRetrievalItemGenerationParams:
       type: object
       required:
@@ -39683,7 +39455,10 @@ components:
     Routine:
       type: object
       required:
+        - name
         - enabled
+        - triggers
+        - action
       properties:
         name:
           type: string
@@ -39762,6 +39537,9 @@ components:
           - Routines=V1Preview
     RoutineCreateOrUpdateRequest:
       type: object
+      required:
+        - triggers
+        - action
       properties:
         description:
           type: string
@@ -39812,19 +39590,37 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    RoutineListResponse:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/Routine'
+          description: The current page of routines.
+        continuationToken:
+          type: string
+          description: A continuation token for fetching the next page, when available.
+      description: Paged response for listing routines.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
     RoutineRun:
       type: object
       required:
         - id
+        - status
+        - trigger_type
+        - started_at
       properties:
         id:
           type: string
-          description: The unique run identifier for the routine attempt.
-          readOnly: true
+          description: The MLflow run identifier for the routine attempt.
         status:
-          allOf:
-            - $ref: '#/components/schemas/RoutineRunStatus'
-          description: The run status.
+          type: string
+          description: The underlying MLflow run status.
         phase:
           allOf:
             - $ref: '#/components/schemas/RoutineRunPhase'
@@ -39835,11 +39631,7 @@ components:
           description: The trigger type that produced the routine attempt.
         trigger_name:
           type: string
-          description: The configured trigger name that produced the routine attempt.
-        trigger_event_payload:
-          type: object
-          unevaluatedProperties: {}
-          description: The event payload captured from the event that triggered the routine attempt, when available.
+          description: The trigger name that produced the routine attempt.
         attempt_source:
           allOf:
             - $ref: '#/components/schemas/RoutineAttemptSource'
@@ -39850,16 +39642,16 @@ components:
           description: The action type dispatched for the routine attempt.
         agent_id:
           type: string
-          description: The project-scoped agent identifier recorded for the routine attempt.
+          description: The project agent identifier targeted by the routine action, when applicable.
         agent_endpoint_id:
           type: string
-          description: The legacy endpoint-scoped agent identifier recorded for the routine attempt.
+          description: The agent endpoint identifier targeted by the routine action, when applicable.
         conversation_id:
           type: string
-          description: The conversation identifier used by a responses API dispatch.
+          description: The responses conversation identifier supplied to the routine action, when applicable.
         session_id:
           type: string
-          description: The hosted-agent session identifier used by an invocations API dispatch.
+          description: The invocations session identifier supplied to the routine action, when applicable.
         triggered_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
@@ -39867,7 +39659,10 @@ components:
         scheduled_fire_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The scheduled fire time recorded for timer and schedule deliveries.
+          description: The scheduled fire time for scheduler-backed attempts, when available.
+        trigger_time_zone:
+          type: string
+          description: The trigger time zone from the routine definition, when available.
         started_at:
           allOf:
             - $ref: '#/components/schemas/FoundryTimestamp'
@@ -39888,17 +39683,48 @@ components:
         task_id:
           type: string
           description: The workspace task identifier linked to the routine attempt, when available.
-        error_status_code:
-          type: integer
-          format: int32
-          description: The downstream error status code captured for a failed attempt, when available.
         error_type:
           type: string
           description: The fully qualified error type captured for a failed attempt, when available.
+        error_status_code:
+          type: integer
+          format: int32
+          description: The downstream HTTP status code captured for a failed attempt, when available.
         error_message:
           type: string
           description: The truncated failure message captured for a failed attempt, when available.
+        diagnostics:
+          allOf:
+            - $ref: '#/components/schemas/RoutineRunDiagnostics'
+          description: Diagnostic data captured for the routine attempt.
       description: A single routine run returned from the run history API.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Routines=V1Preview
+    RoutineRunDiagnostics:
+      type: object
+      required:
+        - parameters
+        - tags
+        - metrics
+      properties:
+        parameters:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: MLflow parameters recorded on the run, keyed by parameter name.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: MLflow tags recorded on the run, keyed by tag name.
+        metrics:
+          type: object
+          unevaluatedProperties:
+            type: number
+            format: double
+          description: Latest MLflow metric values recorded on the run, keyed by metric name.
+      description: Generic diagnostics captured on a routine run.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -39915,9 +39741,20 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
-    RoutineRunStatus:
-      type: string
-      description: The status of a routine run.
+    RoutineRunsResponse:
+      type: object
+      required:
+        - value
+      properties:
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutineRun'
+          description: The current page of routine runs.
+        nextPageToken:
+          type: string
+          description: A continuation token for fetching the next page of run history, when available.
+      description: Paged response for listing routine runs.
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
@@ -39958,30 +39795,44 @@ components:
       type: object
       required:
         - type
-        - dimensions
+        - rubric_criteria
       properties:
         type:
           type: string
           enum:
-            - rubric
-        dimensions:
+            - rubrics
+        rubric_criteria:
           type: array
           items:
-            $ref: '#/components/schemas/Dimension'
-          description: "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
-        pass_threshold:
-          type: number
-          format: float
-          minimum: 0
-          maximum: 1
-          description: Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.
-          default: 0.5
+            $ref: '#/components/schemas/RubricCriterion'
+          description: "Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure."
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
-      description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
+      description: Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.
+    RubricCriterion:
+      type: object
+      required:
+        - rubric_id
+        - description
+        - weight
+      properties:
+        rubric_id:
+          type: string
+          description: Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
+        description:
+          type: string
+          description: What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').
+        weight:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.
+        always_applicable:
+          type: boolean
+          description: When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.
+          default: false
+      description: A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.
     SASCredentials:
       type: object
       required:
@@ -40323,6 +40174,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A SharePoint grounding tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointGroundingToolCallOutput:
       type: object
       required:
@@ -40348,6 +40202,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a SharePoint grounding tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointGroundingToolParameters:
       type: object
       properties:
@@ -40360,6 +40217,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The sharepoint grounding tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointPreviewTool:
       type: object
       required:
@@ -40371,6 +40231,20 @@ components:
           enum:
             - sharepoint_grounding_preview
           description: The object type, which is always 'sharepoint_grounding_preview'.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         sharepoint_grounding_preview:
           allOf:
             - $ref: '#/components/schemas/SharepointGroundingToolParameters'
@@ -40378,6 +40252,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a sharepoint tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SimpleQnADataGenerationJobOptions:
       type: object
       required:
@@ -40927,16 +40804,19 @@ components:
       type: object
       required:
         - type
+        - in
       properties:
         type:
           type: string
           enum:
             - timer
           description: The trigger type.
-        at:
-          allOf:
-            - $ref: '#/components/schemas/FoundryTimestamp'
-          description: The UTC date and time at which the timer fires.
+        in:
+          type: string
+          description: A future timer expression. Supported values include an ISO-8601 timestamp with an explicit offset, a local timestamp paired with time_zone, or a positive duration from now.
+        time_zone:
+          type: string
+          description: An optional IANA or Windows time zone identifier when the timer uses a local timestamp.
       allOf:
         - $ref: '#/components/schemas/RoutineTrigger'
       description: A one-shot timer routine trigger.
@@ -41035,6 +40915,36 @@ components:
             - $ref: '#/components/schemas/RaiConfig'
           description: Responsible AI content filtering configuration.
       description: Policy configuration for a toolbox, including content safety and other governance settings.
+    ToolboxSearchPreviewTool:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - toolbox_search_preview
+          description: The type of the tool. Always `toolbox_search_preview`.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Tool'
+      description: |-
+        A tool for searching over the agent's toolbox.
+        When present, deferred tools are hidden from `tools/list` and only
+        discoverable via `search_tools` queries at runtime.
     ToolboxSearchPreviewToolboxTool:
       type: object
       required:
@@ -41048,6 +40958,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A toolbox search tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ToolboxSkill:
       type: object
       required:
@@ -41122,20 +41035,22 @@ components:
           toolbox_search_preview: '#/components/schemas/ToolboxSearchPreviewToolboxTool'
       description: An abstract representation of a tool stored in a toolbox.
     ToolboxToolType:
-      type: string
-      enum:
-        - code_interpreter
-        - file_search
-        - web_search
-        - mcp
-        - azure_ai_search
-        - openapi
-        - a2a_preview
-        - browser_automation_preview
-        - reminder_preview
-        - work_iq_preview
-        - fabric_iq_preview
-        - toolbox_search_preview
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - code_interpreter
+            - file_search
+            - web_search
+            - mcp
+            - azure_ai_search
+            - openapi
+            - a2a_preview
+            - browser_automation_preview
+            - reminder_preview
+            - work_iq_preview
+            - fabric_iq_preview
+            - toolbox_search_preview
       description: Supported tool types for tools stored in a toolbox.
     ToolboxVersionObject:
       type: object
@@ -41362,9 +41277,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     TracesPreviewEvalRunDataSource:
       type: object
       required:
@@ -41713,6 +41625,14 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -41758,9 +41678,26 @@ components:
         project_connection_id:
           type: string
           description: The ID of the WorkIQ project connection.
+        name:
+          type: string
+          description: Optional user-defined name for this tool or configuration.
+        description:
+          type: string
+          description: Optional user-defined description for this tool or configuration.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WorkIQPreviewToolboxTool:
       type: object
       required:
@@ -41774,9 +41711,20 @@ components:
         project_connection_id:
           type: string
           description: The ID of the WorkIQ project connection.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: |-
+            Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+            Resolution order: exact tool name match takes priority over `*`.
+            Unknown tool names are silently ignored at runtime.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A WorkIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WorkflowActionOutputItem:
       type: object
       required:

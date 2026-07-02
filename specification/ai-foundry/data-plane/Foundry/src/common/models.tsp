@@ -13,8 +13,7 @@ model ApiErrorResponse {
 }
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
-@@copyProperties(
-  OpenAI.Error,
+@@copyProperties(OpenAI.Error,
   {
     details?: OpenAI.Error[],
     additionalInfo?: Record<unknown>,
@@ -29,29 +28,35 @@ alias AcceptJsonHeader = {
 };
 
 /**
- * Optional request header carrying an opaque per-user identity for delegation.
- * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
- * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
- * supplied user identity instead of the caller's own identity.
- * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
+ * Optional request header carrying an opaque per-user isolation key forwarded to the agent
+ * endpoint. When present, the service scopes endpoint-scoped data access (responses,
+ * conversations, sessions) to the supplied user.
  */
-alias UserDelegationHeader = {
-  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
-  @header("x-ms-user-identity") user_identity?: string;
+alias UserIsolationKeyHeader = {
+  /** Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user. */
+  @header("x-ms-user-isolation-key") user_isolation_key?: string;
 };
 
-// NOTE: Platform-internal headers (x-agent-foundry-call-id, x-foundry-foundation-token)
-// are NOT part of the public API spec. They are injected by the platform and resolved
-// server-side. If needed for contracts, they should be added in the contracts entry point.
+/**
+ * Optional request header that overrides the agent version selected for an endpoint-scoped
+ * invocation. When supplied with a valid version, the service routes the request to that
+ * version instead of the endpoint's pinned/latest version; if the supplied version does not
+ * exist, the service falls back to the pinned/latest version.
+ */
+alias UserDelegationHeader = UserIsolationKeyHeader;
+
+alias VersionOverrideHeader = {
+  /** Optional agent version override. Overrides the pinned/latest version selected by the endpoint's version selector for this request only. */
+  @header("x-agent-version-override") agent_version_override?: string;
+};
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/response-schema-problem" "OpenAI Response schemas can be intentionally combined for documentation clarity"
 op OpenAIOperation<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...Params): Response | AzureRangeErrorResponse<ErrorResponse>;
+>(...Params): Response | ErrorResponse;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -60,9 +65,10 @@ op OpenAIOperationWithPreview<
   Params extends Reflection.Model,
   Response,
   ErrorResponse = ApiErrorResponse
->(...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>, ...Params):
-  | Response
-  | AzureRangeErrorResponse<ErrorResponse>;
+>(
+  ...WithConditionalFoundryPreviewHeader<AreaPreviewLabel>,
+  ...Params,
+): Response | ErrorResponse;
 
 alias AssetBase = {
   @doc("Asset ID, a unique identifier for the asset")
