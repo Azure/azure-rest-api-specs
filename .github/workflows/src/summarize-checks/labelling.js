@@ -838,7 +838,7 @@ const rulesPri0dataPlane = [
     anyRequiredLabels: ["APIStewardshipBoard-SignedOff"],
     troubleshootingGuide:
       `Your PR requires an API stewardship board review as it introduces a new API version (label: <code>new-api-version</code>). ` +
-      `Send an email to azureapirbcore@microsoft.com with your PR link for offline review.`,
+      `Send an email to ${href("azureapirbcore@microsoft.com", "mailto:azureapirbcore@microsoft.com")} with your PR link for offline review.`,
   },
 ];
 
