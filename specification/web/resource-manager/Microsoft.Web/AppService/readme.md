@@ -112,6 +112,12 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
     reason: This long-running PUT returns 200 and 202 (not 201) to match the App Service Active Backup silo controller's actual async contract. The rule assumes the ARM-standard 200/201 LRO shape and expects provisioningState on a 201 response; the terminal-success 200 response body already carries provisioningState via the silo resource properties.
+  - suppress: LroErrorContent
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/silos/{siloName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/silos/{siloName}"].put
+    reason: The silo long-running PUT intentionally returns the App Service error schema (DefaultErrorResponse) that every other Microsoft.Web operation in this specification uses, rather than the common-types ARM error schema. Keeping a single consistent error contract across the entire App Service surface is required for compatibility with existing App Service clients that parse the service's native error format.
 ```
 
 ### Tag: package-2026-06
