@@ -112,16 +112,14 @@ interface ConfigureSourceScan {
    * Configures source scan for a protected item. This is an asynchronous operation. To know the status of the
    * operation, call GetProtectedItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Async operation uses both Azure-AsyncOperation and Location headers for polling"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "LRO POST returns 202 initially and 204 on completion with no response body"
   @action("configureSourceScan")
-  execute is ArmResourceActionSync<
+  execute is ArmResourceActionAsync<
     ProtectedItemResource,
     ProtectedItemConfigureSourceScanRequest,
-
-      | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-          ArmLroLocationHeader>
-      | ArmNoContentResponse
+    OperationStatus,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
