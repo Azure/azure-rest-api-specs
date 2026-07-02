@@ -237,3 +237,32 @@ using Microsoft.DevHub;
   "DeveloperHubScaleTemplateContent",
   "csharp"
 );
+@@clientName(AdooAuthInfoResponse, "DeveloperHubAdoOAuthInfoResult", "csharp");
+@@clientName(
+  DeleteWorkflowResponse,
+  "DeveloperHubDeleteWorkflowResult",
+  "csharp"
+);
+@@clientName(
+  GenerateVersionedTemplateResponse,
+  "DeveloperHubGenerateVersionedTemplateResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthInfoResponse,
+  "DeveloperHubGitHubOAuthInfoResult",
+  "csharp"
+);
+@@clientName(
+  GitHubOAuthListResponse,
+  "DeveloperHubGitHubOAuthListResult",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.Operation,
+  "DeveloperHubOperationInfo",
+  "csharp"
+);
+@@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
+@@clientName(PrLinkResponse, "DeveloperHubPrLinkResult", "csharp");
+@@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");

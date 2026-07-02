@@ -58,36 +58,6 @@ using Microsoft.DevHub;
 @@clientName(AdooAuthResponse, "ADOOAuthResponse");
 @@clientName(PrLinkResponse, "prLinkResponse");
 
-@@clientName(AdooAuthInfoResponse, "DeveloperHubAdoOAuthInfoResult", "csharp");
-@@clientName(
-  DeleteWorkflowResponse,
-  "DeveloperHubDeleteWorkflowResult",
-  "csharp"
-);
-@@clientName(
-  GenerateVersionedTemplateResponse,
-  "DeveloperHubGenerateVersionedTemplateResult",
-  "csharp"
-);
-@@clientName(
-  GitHubOAuthInfoResponse,
-  "DeveloperHubGitHubOAuthInfoResult",
-  "csharp"
-);
-@@clientName(
-  GitHubOAuthListResponse,
-  "DeveloperHubGitHubOAuthListResult",
-  "csharp"
-);
-@@clientName(
-  Azure.ResourceManager.Foundations.Operation,
-  "DeveloperHubOperationInfo",
-  "csharp"
-);
-@@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
-@@clientName(PrLinkResponse, "DeveloperHubPrLinkResult", "csharp");
-@@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");
-
 @@visibility(
   Azure.ResourceManager.Foundations.OperationListResult.nextLink,
   Lifecycle.Read
