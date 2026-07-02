@@ -200,7 +200,12 @@ export default async function detectNamespaces({ context, core }) {
     prNumber: payload.pull_request.number,
     action: payload.action,
   };
-  const resultsPath = join(process.env.RUNNER_TEMP, "namespace-results.json");
+
+  const runnerTemp = process.env.RUNNER_TEMP;
+  if (!runnerTemp) {
+    throw new Error("RUNNER_TEMP environment variable is required");
+  }
+  const resultsPath = join(runnerTemp, "namespace-results.json");
   await writeFile(resultsPath, JSON.stringify(results, null, 2));
   core.setOutput("results", "true");
   core.setOutput("results_path", resultsPath);

@@ -45,7 +45,7 @@ async function loadApproversConfig() {
  * @param {string} owner
  * @param {string} repo
  * @param {number} runId
- * @returns {Promise<z.infer<typeof NamespaceResultsSchema> | null>}
+ * @returns {Promise<z.infer<typeof NamespaceResultsSchema>>}
  */
 async function downloadNamespaceResults(github, core, owner, repo, runId) {
   const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
@@ -73,7 +73,11 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     archive_format: "zip",
   });
 
-  const zipPath = join(process.env.RUNNER_TEMP, `namespace-results-${runId}.zip`);
+  const runnerTemp = process.env.RUNNER_TEMP;
+  if (!runnerTemp) {
+    throw new Error("RUNNER_TEMP environment variable is required");
+  }
+  const zipPath = join(runnerTemp, `namespace-results-${runId}.zip`);
   const zipBuffer = Buffer.from(new Uint8Array(/** @type {ArrayBuffer} */ (download.data)));
   await writeFile(zipPath, zipBuffer);
 
