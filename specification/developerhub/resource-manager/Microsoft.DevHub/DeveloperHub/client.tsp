@@ -22,9 +22,6 @@ using Microsoft.DevHub;
 @@clientName(ADOOAuth, "AdoOAuth", "java");
 @@clientName(AdooAuthResponses.getADOOAuthInfo, "getAdoOAuthInfo", "java");
 
-// csharp acronym-casing consistency (mirrors java,javascript)
-@@clientName(ACR, "Acr", "csharp");
-
 // csharp: ADO acronym PascalCase (3-letter acronym)
 @@clientName(ADORepository, "AdoRepository", "csharp");
 @@clientName(ADOProviderProfile, "AdoProviderProfile", "csharp");
@@ -140,3 +137,72 @@ using Microsoft.DevHub;
   "DeveloperHubServiceClient",
   "go"
 );
+@@clientName(ScaleProperty.numberOfStore, "NumberOfStores", "csharp");
+@@clientName(GenerationLanguage.csharp, "CSharp", "csharp");
+@@clientName(GenerationLanguage.javascript, "JavaScript", "csharp");
+@@clientName(RepositoryProviderType.github, "GitHub", "csharp");
+@@clientName(VersionedTemplate, "DevHubVersionedTemplate", "csharp");
+
+@@clientName(ACR, "DevHubContainerRegistryInfo", "csharp");
+@@clientName(Build, "DevHubDockerBuildInfo", "csharp");
+@@clientName(Deployment, "DevHubDeploymentProperties", "csharp");
+@@clientName(Origin, "DevHubOperationOrigin", "csharp");
+
+// csharp: add DevHub prefix to otherwise-generic model/enum names
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ActionType,
+  "DevHubActionType",
+  "csharp"
+);
+@@clientName(
+  ArtifactGenerationProperties,
+  "DevHubArtifactGenerationProperties",
+  "csharp"
+);
+@@clientName(AuthorizationStatus, "DevHubAuthorizationStatus", "csharp");
+@@clientName(
+  DockerfileGenerationMode,
+  "DevHubDockerfileGenerationMode",
+  "csharp"
+);
+@@clientName(GenerationLanguage, "DevHubGenerationLanguage", "csharp");
+@@clientName(GenerationManifestType, "DevHubGenerationManifestType", "csharp");
+@@clientName(IacTemplateDetails, "DevHubIacTemplateDetails", "csharp");
+@@clientName(IacTemplateProperties, "DevHubIacTemplateProperties", "csharp");
+@@clientName(ManifestGenerationMode, "DevHubManifestGenerationMode", "csharp");
+@@clientName(ManifestType, "DevHubManifestType", "csharp");
+@@clientName(OidcCredentials, "DevHubOidcCredentials", "csharp");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.OperationDisplay,
+  "DevHubOperationDisplay",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.Foundations.OperationListResult,
+  "DevHubOperationListResult",
+  "csharp"
+);
+@@clientName(ParameterDefault, "DevHubTemplateParameterDefault", "csharp");
+@@clientName(ParameterKind, "DevHubTemplateParameterKind", "csharp");
+@@clientName(ParameterType, "DevHubTemplateParameterType", "csharp");
+@@clientName(PullRequestStatus, "DevHubPullRequestStatus", "csharp");
+@@clientName(QuickStartTemplateType, "DevHubQuickStartTemplateType", "csharp");
+@@clientName(RepositoryProviderType, "DevHubRepositoryProviderType", "csharp");
+@@clientName(ScaleProperty, "DevHubScaleProperty", "csharp");
+@@clientName(StageProperties, "DevHubStageInfo", "csharp");
+@@clientName(TemplateProperties, "DevHubTemplateProperties", "csharp");
+@@clientName(TemplateReference, "DevHubTemplateReference", "csharp");
+@@clientName(TemplateType, "DevHubTemplateType", "csharp");
+@@clientName(
+  TemplateWorkflowProfile,
+  "DevHubTemplateWorkflowProfile",
+  "csharp"
+);
+@@clientName(
+  VersionedTemplateProperties,
+  "DevHubVersionedTemplateProperties",
+  "csharp"
+);
+@@clientName(WorkflowProperties, "DevHubWorkflowProperties", "csharp");
+@@clientName(WorkflowRun, "DevHubWorkflowRun", "csharp");
+@@clientName(WorkflowRunStatus, "DevHubWorkflowRunStatus", "csharp");

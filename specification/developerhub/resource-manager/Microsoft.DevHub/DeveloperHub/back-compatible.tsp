@@ -63,14 +63,10 @@ using Microsoft.DevHub;
   "DeveloperHubAdoOAuthCallRequestContent",
   "csharp"
 );
-@@clientName(
-  AdooAuthInfoResponse,
-  "DeveloperHubAdoOAuthInfoResponseResult",
-  "csharp"
-);
+@@clientName(AdooAuthInfoResponse, "DeveloperHubAdoOAuthInfoResult", "csharp");
 @@clientName(
   DeleteWorkflowResponse,
-  "DeveloperHubDeleteWorkflowResponseResult",
+  "DeveloperHubDeleteWorkflowResult",
   "csharp"
 );
 @@clientName(
@@ -80,7 +76,7 @@ using Microsoft.DevHub;
 );
 @@clientName(
   GenerateVersionedTemplateResponse,
-  "DeveloperHubGenerateVersionedTemplateResponseResult",
+  "DeveloperHubGenerateVersionedTemplateResult",
   "csharp"
 );
 @@clientName(
@@ -90,12 +86,12 @@ using Microsoft.DevHub;
 );
 @@clientName(
   GitHubOAuthInfoResponse,
-  "DeveloperHubGitHubOAuthInfoResponseResult",
+  "DeveloperHubGitHubOAuthInfoResult",
   "csharp"
 );
 @@clientName(
   GitHubOAuthListResponse,
-  "DeveloperHubGitHubOAuthListResponseResult",
+  "DeveloperHubGitHubOAuthListResult",
   "csharp"
 );
 @@clientName(
@@ -104,7 +100,7 @@ using Microsoft.DevHub;
   "csharp"
 );
 @@clientName(Parameter, "DeveloperHubParameterContent", "csharp");
-@@clientName(PrLinkResponse, "DeveloperHubPrLinkResponseResult", "csharp");
+@@clientName(PrLinkResponse, "DeveloperHubPrLinkResult", "csharp");
 @@clientName(PullRequest, "DeveloperHubPullRequestContent", "csharp");
 @@clientName(
   ScaleTemplateRequest,
