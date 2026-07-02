@@ -3,6 +3,10 @@ import "../sdk-common/error.default.tsp";
 import "../common/servicepatterns.tsp";
 import "../openai-conversations/routes.tsp";
 import "../openai-responses/routes.tsp";
+import "../toolboxes/models.tsp";
+import "../agents/models.tsp";
+import "../toolboxes/models.tsp";
+import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -386,20 +390,34 @@ namespace Azure.AI.Projects {
   @@clientName(CreatedBy, "AgentItemSource");
   @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
   @@clientName(OpenAI.ComputerScreenshotImage.image_url, "ImageUri");
+  @@clientName(OpenAI.ComputerScreenshotImage.type, "ImageKind");
   @@clientName(OpenAI.AutoCodeInterpreterToolParam.type, "Kind");
+  @@access(OpenAI.AutoCodeInterpreterToolParam.type, Access.internal);
   @@clientName(AzureAISearchTool.azure_ai_search, "AzureAISearch");
   @@clientName(AzureFunctionBinding.type, "Kind");
+  @@access(AzureFunctionBinding.type, Access.internal);
   @@clientName(BingGroundingSearchConfiguration.set_lang, "Language");
   @@clientName(OpenAI.CustomToolParam.defer_loading, "ShouldDeferLoading");
   @@clientName(OpenAI.FunctionToolParam.defer_loading, "ShouldDeferLoading");
   @@clientName(OpenAI.FunctionToolParam.strict, "IsStrict");
-  @@clientName(OpenAI.FunctionCallOutputStatusEnum, "FunctionCallOutputStatus");
+  @@access(OpenAI.FunctionToolParam.type, Access.internal);
+  @@access(OpenAI.InlineSkillSourceParam.type, Access.internal);
   @@clientName(OpenAI.MCPToolFilter.read_only, "IsReadOnly");
   @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
   @@clientName(OpenApiFunctionDefinition.spec, "Specification");
   @@clientName(OpenApiTool.openapi, "OpenApi");
   @@clientName(StructuredOutputDefinition.strict, "IsStrict");
   @@clientName(OpenAI.WebSearchApproximateLocation.type, "Kind");
+  @@access(OpenAI.WebSearchApproximateLocation.type, Access.internal);
+  @@clientName(OpenAI.OutputItemMcpApprovalResponseResource.approve, "IsApproved");
+  @@clientName(A2APreviewTool.base_url, "BaseUri");
+  @@clientName(FabricIQPreviewTool.server_url, "ServerUri");
+  @@clientName(
+    CaptureStructuredOutputsTool.outputs,
+    "OutputDefinition",
+    "csharp"
+  );
+  
   // --------------------------------------------------------------------------------
   // Usage / Public accessibility overrides
   // --------------------------------------------------------------------------------
@@ -429,17 +447,4 @@ namespace Azure.AI.Projects {
   @@access(ApiError, Access.public);
 
   @@usage(StructuredOutputsOutputItem, Usage.input | Usage.output);
-
-  // --------------------------------------------------------------------------------
-  // Renames for tools.
-  // --------------------------------------------------------------------------------
-  @@clientName(
-    OpenAI.FunctionCallOutputStatusEnum,
-    "ResponsesFunctionCallOutputStatus"
-  );
-  @@clientName(OpenAI.FunctionCallStatus, "ResponsesFunctionCallStatus");
-  @@clientName(
-    OpenAI.ToolSearchExecutionType,
-    "ResponsesToolSearchExecutionType"
-  );
 }

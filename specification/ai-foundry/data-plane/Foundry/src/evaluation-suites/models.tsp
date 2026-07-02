@@ -5,14 +5,24 @@ import "../common/servicepatterns.tsp";
 import "../openai-evaluations/models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
+
+const EvaluationSuitesRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
+const EvaluationSuiteGenerationJobsRequiredPreviews = #{
+  conditional_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
 
 // ---------------------------------------------------------------------------
 // Enums
 // ---------------------------------------------------------------------------
 
 @doc("The subtype of an evaluation suite.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationSuiteSubtype {
   string,
 
@@ -24,6 +34,7 @@ union EvaluationSuiteSubtype {
 }
 
 @doc("The category of evaluator generation.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationSuiteGenerationCategory {
   string,
 
@@ -35,6 +46,7 @@ union EvaluationSuiteGenerationCategory {
 }
 
 @doc("The data generation type.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationDataGenerationType {
   string,
 
@@ -58,6 +70,7 @@ union EvaluationDataGenerationType {
 @doc("""
   Reference to a dataset by name and version.
   """)
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationDatasetReference {
   @doc("Dataset name.")
   name: string;
@@ -83,6 +96,7 @@ model EvaluationDatasetReference {
   can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
   """)
 @resource("evaluation_suites")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteVersion {
   @doc("""
     Human-readable display name.
@@ -164,6 +178,7 @@ model EvaluationSuiteVersion {
 // ---------------------------------------------------------------------------
 
 @doc("Request body for running an evaluation from a suite.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunRequest {
   @doc("Name for the evaluation. Default: '{suiteName}-runs'.")
   evaluation_name?: string;
@@ -176,6 +191,7 @@ model EvaluationSuiteRunRequest {
 }
 
 @doc("Response from running an evaluation suite.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunResponse {
   @doc("The evaluation suite name used.")
   evaluation_suite_name: string;
@@ -188,6 +204,7 @@ model EvaluationSuiteRunResponse {
 }
 
 @doc("Result of a single evaluation run within a suite execution.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteRunResult {
   @doc("The evaluation ID created.")
   eval_id: string;
@@ -211,6 +228,7 @@ model EvaluationSuiteRunResult {
 // DataGenerationJobSource).
 
 @doc("The supported source types for evaluation suite generation jobs.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 union EvaluationSuiteJobSourceType {
   string,
 
@@ -229,6 +247,7 @@ union EvaluationSuiteJobSourceType {
 
 @doc("The base source model for evaluation suite generation jobs. Polymorphic over `type`.")
 @discriminator("type")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteJobSource {
   @doc("The type of source.")
   type: EvaluationSuiteJobSourceType;
@@ -237,26 +256,31 @@ model EvaluationSuiteJobSource {
 }
 
 @doc("Prompt source for evaluation suite generation jobs — inline text provided by the user.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model PromptEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model AgentEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluation suite generation jobs — conversation traces from Application Insights.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model TracesEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluation suite generation jobs — reference to a dataset.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model DatasetEvaluationSuiteJobSource extends EvaluationSuiteJobSource {
   ...DatasetJobSource;
 }
 
 @doc("Caller-supplied inputs for an evaluation suite generation job.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteGenerationJobInputs {
   @doc("The evaluation suite name to create.")
   evaluation_suite_name: string;
@@ -307,6 +331,7 @@ model EvaluationSuiteGenerationJobInputs {
 }
 
 @doc("Options for dataset generation within an evaluation suite generation job.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteDataGenerationOptions {
   @doc("The data generation type. Defaults to 'simple_qna' if not specified.")
   type?: EvaluationDataGenerationType;
@@ -318,6 +343,7 @@ model EvaluationSuiteDataGenerationOptions {
 }
 
 @doc("Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteGenerationJob
   is JobLike<EvaluationSuiteVersion, EvaluationSuiteGenerationJobInputs> {
   @doc("The timestamp when the job was created, represented in Unix time.")
@@ -334,6 +360,7 @@ model EvaluationSuiteGenerationJob
 }
 
 @doc("Token usage summary for an evaluation suite generation job.")
+@extension("x-ms-foundry-meta", EvaluationSuitesRequiredPreviews)
 model EvaluationSuiteGenerationTokenUsage {
   @doc("Number of input tokens consumed.")
   input_tokens?: int64;

@@ -6,12 +6,6 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-const DataGenerationJobsRequiredPreviews = #{
-  required_previews: #[
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview
-  ],
-};
-
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"

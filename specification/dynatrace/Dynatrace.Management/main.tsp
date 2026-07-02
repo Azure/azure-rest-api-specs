@@ -18,6 +18,7 @@ import "./MonitoredSubscriptionProperties.tsp";
 import "./TagRule.tsp";
 import "./DynatraceSingleSignOnResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

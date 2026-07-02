@@ -30,8 +30,8 @@ import "../data_generation_jobs/routes.tsp";
 import "../agents-optimization/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
-import "../sdk-common/beta-ops-relocation-agents.tsp";
-import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-projects.tsp";
 import "../sdk-common/error.default.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -89,13 +89,10 @@ using Azure.AI.Projects;
 // Rename models ending with 'Object' to end with 'Details' for Python
 @@clientName(AgentObject, "AgentDetails", "python");
 @@clientName(AgentVersionObject, "AgentVersionDetails", "python");
-@@clientName(Agents.patchAgentObject, "patchAgentDetails", "python");
+@@clientName(Agents.patchAgentObject, "updateDetails", "python");
 
 @@clientName(AgentObject, "Agent", "javascript");
 @@clientName(AgentVersionObject, "AgentVersion", "javascript");
-
-// Python emitter creates enum A2_A_PREVIEW = "a2a_preview". Override it here to "A2A_PREVIEW".
-@@clientName(_PreviewAgentToolType.a2a_preview, "A2A_PREVIEW", "python");
 
 // Python emitter creates enum values ENUM_1_G = "1g", ENUM_4_G = "4g" etc. Override it here as below.
 @@clientName(OpenAI.ContainerMemoryLimit.`1g`, exact("MEMORY_1GB"), "python");
@@ -106,8 +103,44 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ToolChoiceParamType.web_search_preview_2025_03_11, exact("WEB_SEARCH_PREVIEW_2025_03_11"), "python");
 @@clientName(OpenAI.RankerVersionType.`default-2024-11-15`, exact("DEFAULT_2024_11_15"), "python");
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
+@@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+
+// DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
+// to define Agent optimization request. If emitted as-is, it pulls in a lot of
+// OpenAI responses classes. We want Foundry SDK to be free of those, therefore for the
+// time being we define output item as a generic dictionary.
+@@alternateType(OpenAI.OutputItem, Record<unknown>);
+
+// Session operations all use "session_id". Session file operations all use "agent_session_id". Consolidate to use "session_id" everywhere.
+@@clientName(UploadSessionFileParams.agent_session_id, "session_id", "python");
+@@clientName(DownloadSessionFileParams.agent_session_id, "session_id", "python");
+@@clientName(ListSessionFilesParams.agent_session_id, "session_id", "python");
+@@clientName(DeleteSessionFileParams.agent_session_id, "session_id", "python");
+
+// Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
+// real value on SDK surface. We can do everything using createAgentVersionFromCode.
+@@scope(Agents.createAgentFromCode, "!(python, javascript)");
+@@scope(Agents.updateAgentFromCode, "!(python, javascript)");
+
+@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
+
+@@access(Agents.createAgentVersionFromCode, Access.internal, "python");
+@@clientName(CreateAgentVersionFromCodeMetadata, "_CreateAgentVersionFromCodeMetadata", "python");
+@@clientName(CreateAgentVersionFromCodeContent, "_CreateAgentVersionFromCodeContent", "python");
+
+@@clientName(Agents.downloadAgentCode, "download_code", "python");
+@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
+@@clientName(
+  SessionDirectoryListResponse,
+  "SessionDirectoryListResult",
+  "python"
+);
+@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
+
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
@@ -198,35 +231,6 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob");
-
-// DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
-// to define Agent optimization request. If emitted as-is, it pulls in a lot of
-// OpenAI responses classes. We want Foundry SDK to be free of those, therefore for the
-// time being we define output item as a generic dictionary.
-@@alternateType(OpenAI.OutputItem, Record<unknown>);
-
-// Make this method internal, since it's patched with a new one that supports either binary or file-path input
-@@access(AgentSessionFiles.uploadSessionFile, Access.internal, "python");
-@@usage(SessionFileWriteResponse, Usage.output);
-@@access(SessionFileWriteResponse, Access.public);
-
-// Exclude these operations entirely from emitted SDK. These are convenience REST APIs that we don't think bring
-// real value on SDK surface. We can do everything using createAgentVersionFromCode.
-@@scope(Agents.createAgentFromCode, "!(python, javascript)");
-@@scope(Agents.updateAgentFromCode, "!(python, javascript)");
-
-@@clientName(Agents.downloadAgentCode, "download_code", "python");
-@@clientName(Agents.createAgentVersionFromCode, "createVersionFromCode");
-
-@@clientName(DownloadAgentCodeResponse, "DownloadAgentCodeResult", "python");
-@@clientName(
-  SessionDirectoryListResponse,
-  "SessionDirectoryListResult",
-  "python"
-);
-@@clientName(SessionFileWriteResponse, "SessionFileWriteResult", "python");
-
-@@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
 
 // All emitted Python classes already have "items" in the base class, so we need to pick another name
 @@clientName(OptimizationInlineDatasetInput.items, "dataset_items", "python");

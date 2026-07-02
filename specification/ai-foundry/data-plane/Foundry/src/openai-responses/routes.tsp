@@ -1,5 +1,6 @@
 import "./models.tsp";
 import "../common/models.tsp";
+import "../common/openai-templates.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;

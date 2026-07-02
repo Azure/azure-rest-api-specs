@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-12-03",
+    "galleryName": "myGalleryName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/inVMAccessControlProfiles/myInVMAccessControlProfileName",
+            "properties": {
+              "osType": "Linux",
+              "applicableHostEndpoint": "WireServer",
+              "provisioningState": "Succeeded"
+            },
+            "location": "West US",
+            "name": "myInVMAccessControlProfileName"
+          }
+        ],
+        "nextLink": "http://svchost:99/subscriptions/subscriptionId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGalleryName/inVMAccessControlProfiles?$skiptoken=token/Subscriptions/subscriptionId/ResourceGroups/myResourceGroup/galleries/myGalleryName/inVMAccessControlProfiles/myInVMAccessControlProfileName"
+      }
+    }
+  },
+  "operationId": "GalleryInVMAccessControlProfiles_ListByGallery",
+  "title": "List gallery inVMAccessControlProfiles in a gallery."
+}

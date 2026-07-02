@@ -32,13 +32,13 @@ alias AcceptJsonHeader = {
 
 /**
  * Optional request header carrying an opaque per-user identity for delegation.
- * When present and the caller has the `agents/endpoint/delegateViaUserId` RBAC permission,
+ * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
  * the service scopes endpoint-scoped data (responses, conversations, sessions) to the
  * supplied user identity instead of the caller's own identity.
  * If the caller has delegation RBAC but does not pass this header, the caller's own identity is used.
  */
 alias UserDelegationHeader = {
-  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission. */
+  /** Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission. */
   @header("x-ms-user-identity") user_identity?: string;
 };
 

@@ -10,16 +10,6 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
-// Preview feature gating
-// ---------------------------------------------------------------------------
-
-const AgentOptimizationRequiredPreviews = #{
-  conditional_previews: #[
-    FoundryFeaturesOptInKeys.agents_optimization_v2_preview
-  ],
-};
-
-// ---------------------------------------------------------------------------
 // Job CRUD operations (shared job templates from servicepatterns.tsp)
 // ---------------------------------------------------------------------------
 

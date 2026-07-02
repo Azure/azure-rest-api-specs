@@ -516,6 +516,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
       tags:
         - Agents
       requestBody:
@@ -1012,7 +1013,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -1125,7 +1126,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -1184,7 +1185,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
         - name: api-version
@@ -1233,7 +1234,7 @@ paths:
       description: |-
         Creates a new session for an agent endpoint.
         The endpoint resolves the backing agent version from `version_indicator` and
-        enforces session ownership using the provided isolation key for session-mutating operations.
+        enforces session ownership using the provided user identity for session-mutating operations.
       parameters:
         - name: agent_name
           in: path
@@ -2053,6 +2054,7 @@ paths:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
       tags:
         - Agent Versions
       requestBody:
@@ -2118,6 +2120,28 @@ paths:
           schema:
             type: string
           explode: false
+        - name: Foundry-Features
+          in: header
+          required: false
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - DraftAgents=V1Preview
+        - name: include_drafts
+          in: query
+          required: false
+          description: (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned).
+          schema:
+            type: boolean
+            x-ms-foundry-meta:
+              conditional_previews:
+                - DraftAgents=V1Preview
+            default: false
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          explode: false
         - name: api-version
           in: query
           required: true
@@ -2165,6 +2189,9 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agent Versions
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DraftAgents=V1Preview
   /agents/{agent_name}/versions/{agent_version}:
     get:
       operationId: Agents_getAgentVersion
@@ -3322,7 +3349,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
@@ -3390,7 +3417,7 @@ paths:
               $ref: '#/components/schemas/DataGenerationJob'
         description: The job to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:
     get:
@@ -3448,7 +3475,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
@@ -3494,7 +3521,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
@@ -3545,7 +3572,7 @@ paths:
       tags:
         - DataGenerationJobs
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - DataGenerationJobs=V1Preview
   /datasets:
     get:
@@ -4497,7 +4524,7 @@ paths:
               $ref: '#/components/schemas/EvaluationSuiteVersionCreate'
         description: The evaluation suite version to create.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluation_suites/{name}/versions/{version}:
     get:
@@ -4710,7 +4737,7 @@ paths:
               $ref: '#/components/schemas/EvaluationSuiteRunRequest'
         description: The run request parameters.
       x-ms-foundry-meta:
-        required_previews:
+        conditional_previews:
           - Evaluations=V1Preview
   /evaluationrules:
     get:
@@ -15037,13 +15064,14 @@ paths:
             <binary content of the file>
   /openai/v1/conversations:
     post:
-      operationId: Conversations_createConversation
-      summary: Create a conversation.
+      operationId: createConversation
+      summary: Create a conversation
+      description: Creates a new conversation resource.
       parameters:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -15207,13 +15235,9 @@ paths:
             }
     get:
       operationId: listConversations
+      summary: List conversations
+      description: Returns the conversations available in the current project.
       parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
         - name: limit
           in: query
           required: false
@@ -15268,6 +15292,12 @@ paths:
           schema:
             type: string
           explode: false
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -15309,293 +15339,21 @@ paths:
       tags:
         - Conversations
   /openai/v1/conversations/{conversation_id}:
-    delete:
-      operationId: Conversations_deleteConversation
-      summary: Delete a conversation. Items in the conversation will not be deleted.
-      parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The ID of the conversation to delete.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OpenAI.DeletedConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Conversations
-      x-oaiMeta:
-        name: Delete a conversation
-        group: conversations
-        path: delete
-        examples:
-          request:
-            curl: |
-              curl -X DELETE https://api.openai.com/v1/conversations/conv_123 \
-                -H "Authorization: Bearer $OPENAI_API_KEY"
-            javascript: |
-              import OpenAI from "openai";
-              const client = new OpenAI();
-
-              const deleted = await client.conversations.delete("conv_123");
-              console.log(deleted);
-            python: |-
-              import os
-              from openai import OpenAI
-
-              client = OpenAI(
-                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
-              )
-              conversation_deleted_resource = client.conversations.delete(
-                  "conv_123",
-              )
-              print(conversation_deleted_resource.id)
-            csharp: |
-              using System;
-              using OpenAI.Conversations;
-
-              OpenAIConversationClient client = new(
-                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-              );
-
-              DeletedConversation deleted = client.DeleteConversation("conv_123");
-              Console.WriteLine(deleted.Id);
-            node.js: |-
-              import OpenAI from 'openai';
-
-              const client = new OpenAI({
-                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
-              });
-
-              const conversationDeletedResource = await client.conversations.delete('conv_123');
-
-              console.log(conversationDeletedResource.id);
-            go: |
-              package main
-
-              import (
-              	"context"
-              	"fmt"
-
-              	"github.com/openai/openai-go"
-              	"github.com/openai/openai-go/option"
-              )
-
-              func main() {
-              	client := openai.NewClient(
-              		option.WithAPIKey("My API Key"),
-              	)
-              	conversationDeletedResource, err := client.Conversations.Delete(context.TODO(), "conv_123")
-              	if err != nil {
-              		panic(err.Error())
-              	}
-              	fmt.Printf("%+v
-              ", conversationDeletedResource.ID)
-              }
-            java: |-
-              package com.openai.example;
-
-              import com.openai.client.OpenAIClient;
-              import com.openai.client.okhttp.OpenAIOkHttpClient;
-              import com.openai.models.conversations.ConversationDeleteParams;
-              import com.openai.models.conversations.ConversationDeletedResource;
-
-              public final class Main {
-                  private Main() {}
-
-                  public static void main(String[] args) {
-                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
-
-                      ConversationDeletedResource conversationDeletedResource = client.conversations().delete("conv_123");
-                  }
-              }
-            ruby: |-
-              require "openai"
-
-              openai = OpenAI::Client.new(api_key: "My API Key")
-
-              conversation_deleted_resource = openai.conversations.delete("conv_123")
-
-              puts(conversation_deleted_resource)
-          response: |
-            {
-              "id": "conv_123",
-              "object": "conversation.deleted",
-              "deleted": true
-            }
-    get:
-      operationId: Conversations_getConversation
-      summary: Get a conversation
-      parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The ID of the conversation to retrieve.
-          schema:
-            type: string
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OpenAI.ConversationResource'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Conversations
-      x-oaiMeta:
-        name: Retrieve a conversation
-        group: conversations
-        path: retrieve
-        examples:
-          request:
-            curl: |
-              curl https://api.openai.com/v1/conversations/conv_123 \
-                -H "Authorization: Bearer $OPENAI_API_KEY"
-            javascript: |
-              import OpenAI from "openai";
-              const client = new OpenAI();
-
-              const conversation = await client.conversations.retrieve("conv_123");
-              console.log(conversation);
-            python: |-
-              import os
-              from openai import OpenAI
-
-              client = OpenAI(
-                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
-              )
-              conversation = client.conversations.retrieve(
-                  "conv_123",
-              )
-              print(conversation.id)
-            csharp: |
-              using System;
-              using OpenAI.Conversations;
-
-              OpenAIConversationClient client = new(
-                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-              );
-
-              Conversation conversation = client.GetConversation("conv_123");
-              Console.WriteLine(conversation.Id);
-            node.js: |-
-              import OpenAI from 'openai';
-
-              const client = new OpenAI({
-                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
-              });
-
-              const conversation = await client.conversations.retrieve('conv_123');
-
-              console.log(conversation.id);
-            go: |
-              package main
-
-              import (
-              	"context"
-              	"fmt"
-
-              	"github.com/openai/openai-go"
-              	"github.com/openai/openai-go/option"
-              )
-
-              func main() {
-              	client := openai.NewClient(
-              		option.WithAPIKey("My API Key"),
-              	)
-              	conversation, err := client.Conversations.Get(context.TODO(), "conv_123")
-              	if err != nil {
-              		panic(err.Error())
-              	}
-              	fmt.Printf("%+v
-              ", conversation.ID)
-              }
-            java: |-
-              package com.openai.example;
-
-              import com.openai.client.OpenAIClient;
-              import com.openai.client.okhttp.OpenAIOkHttpClient;
-              import com.openai.models.conversations.Conversation;
-              import com.openai.models.conversations.ConversationRetrieveParams;
-
-              public final class Main {
-                  private Main() {}
-
-                  public static void main(String[] args) {
-                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
-
-                      Conversation conversation = client.conversations().retrieve("conv_123");
-                  }
-              }
-            ruby: |-
-              require "openai"
-
-              openai = OpenAI::Client.new(api_key: "My API Key")
-
-              conversation = openai.conversations.retrieve("conv_123")
-
-              puts(conversation)
-          response: |
-            {
-              "id": "conv_123",
-              "object": "conversation",
-              "created_at": 1741900000,
-              "metadata": {"topic": "demo"}
-            }
     post:
-      operationId: Conversations_updateConversation
+      operationId: updateConversation
       summary: Update a conversation
+      description: Modifies the specified conversation's properties.
       parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
         - name: conversation_id
           in: path
           required: true
-          description: The ID of the conversation to update.
+          description: The id of the conversation to update.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -15762,72 +15520,30 @@ paths:
               "created_at": 1741900000,
               "metadata": {"topic": "project-x"}
             }
-  /openai/v1/conversations/{conversation_id}/items:
     get:
-      operationId: Conversations_listConversationItems
-      summary: List all items for a conversation with the given ID.
+      operationId: getConversation
+      summary: Retrieve a conversation
+      description: Retrieves the specified conversation and its metadata.
       parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
         - name: conversation_id
           in: path
           required: true
-          description: The ID of the conversation to list items for.
+          description: The id of the conversation to retrieve.
           schema:
             type: string
-        - name: limit
-          in: query
+        - name: x-ms-user-identity
+          in: header
           required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between
-              1 and 100, and the default is 20.
-          schema:
-            $ref: '#/components/schemas/integer'
-            default: 20
-        - name: order
-          in: query
-          required: false
-          description: |-
-            The order to return the input items in. Default is `desc`.
-              - `asc`: Return the input items in ascending order.
-              - `desc`: Return the input items in descending order.
-          schema:
-            $ref: '#/components/schemas/OpenAI.OrderEnum'
-        - name: after
-          in: query
-          required: false
-          description: An item ID to list items after, used in pagination.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
-            x-ms-list-continuation-token: true
-          x-ms-list-continuation-token: true
-        - name: include
-          in: query
-          required: false
-          description: |-
-            Specify additional output data to include in the model response. Currently supported values are:
-              - `web_search_call.action.sources`: Include the sources of the web search tool call.
-              - `code_interpreter_call.outputs`: Includes the outputs of python code execution in code interpreter tool call items.
-              - `computer_call_output.output.image_url`: Include image urls from the computer call output.
-              - `file_search_call.results`: Include the search results of the file search tool call.
-              - `message.input_image.image_url`: Include image urls from the input message.
-              - `message.output_text.logprobs`: Include logprobs with assistant messages.
-              - `reasoning.encrypted_content`: Includes an encrypted version of reasoning tokens in reasoning item outputs. This enables reasoning items to be used in multi-turn conversations when using the Responses API statelessly (like when the `store` parameter is set to `false`, or when an organization is enrolled in the zero data retention program).
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/OpenAI.IncludeEnum'
       responses:
         '200':
           description: The request has succeeded.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/OpenAI.ConversationItemList'
+                $ref: '#/components/schemas/OpenAI.ConversationResource'
         4XX:
           description: Client error
           content:
@@ -15843,20 +15559,20 @@ paths:
       tags:
         - Conversations
       x-oaiMeta:
-        name: List items
+        name: Retrieve a conversation
         group: conversations
-        path: list-items
+        path: retrieve
         examples:
           request:
             curl: |
-              curl "https://api.openai.com/v1/conversations/conv_123/items?limit=10" \
+              curl https://api.openai.com/v1/conversations/conv_123 \
                 -H "Authorization: Bearer $OPENAI_API_KEY"
             javascript: |
               import OpenAI from "openai";
               const client = new OpenAI();
 
-              const items = await client.conversations.items.list("conv_123", { limit: 10 });
-              console.log(items.data);
+              const conversation = await client.conversations.retrieve("conv_123");
+              console.log(conversation);
             python: |-
               import os
               from openai import OpenAI
@@ -15864,11 +15580,10 @@ paths:
               client = OpenAI(
                   api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
               )
-              page = client.conversations.items.list(
-                  conversation_id="conv_123",
+              conversation = client.conversations.retrieve(
+                  "conv_123",
               )
-              page = page.data[0]
-              print(page)
+              print(conversation.id)
             csharp: |
               using System;
               using OpenAI.Conversations;
@@ -15877,11 +15592,8 @@ paths:
                   apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
               );
 
-              ConversationItemList items = client.ConversationItems.List(
-                  conversationId: "conv_123",
-                  new ListConversationItemsOptions { Limit = 10 }
-              );
-              Console.WriteLine(items.Data.Count);
+              Conversation conversation = client.GetConversation("conv_123");
+              Console.WriteLine(conversation.Id);
             node.js: |-
               import OpenAI from 'openai';
 
@@ -15889,10 +15601,9 @@ paths:
                 apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
               });
 
-              // Automatically fetches more pages as needed.
-              for await (const conversationItem of client.conversations.items.list('conv_123')) {
-                console.log(conversationItem);
-              }
+              const conversation = await client.conversations.retrieve('conv_123');
+
+              console.log(conversation.id);
             go: |
               package main
 
@@ -15901,7 +15612,6 @@ paths:
               	"fmt"
 
               	"github.com/openai/openai-go"
-              	"github.com/openai/openai-go/conversations"
               	"github.com/openai/openai-go/option"
               )
 
@@ -15909,24 +15619,20 @@ paths:
               	client := openai.NewClient(
               		option.WithAPIKey("My API Key"),
               	)
-              	page, err := client.Conversations.Items.List(
-              		context.TODO(),
-              		"conv_123",
-              		conversations.ItemListParams{},
-              	)
+              	conversation, err := client.Conversations.Get(context.TODO(), "conv_123")
               	if err != nil {
               		panic(err.Error())
               	}
               	fmt.Printf("%+v
-              ", page)
+              ", conversation.ID)
               }
             java: |-
               package com.openai.example;
 
               import com.openai.client.OpenAIClient;
               import com.openai.client.okhttp.OpenAIOkHttpClient;
-              import com.openai.models.conversations.items.ItemListPage;
-              import com.openai.models.conversations.items.ItemListParams;
+              import com.openai.models.conversations.Conversation;
+              import com.openai.models.conversations.ConversationRetrieveParams;
 
               public final class Main {
                   private Main() {}
@@ -15934,7 +15640,7 @@ paths:
                   public static void main(String[] args) {
                       OpenAIClient client = OpenAIOkHttpClient.fromEnv();
 
-                      ItemListPage page = client.conversations().items().list("conv_123");
+                      Conversation conversation = client.conversations().retrieve("conv_123");
                   }
               }
             ruby: |-
@@ -15942,54 +15648,182 @@ paths:
 
               openai = OpenAI::Client.new(api_key: "My API Key")
 
-              page = openai.conversations.items.list("conv_123")
+              conversation = openai.conversations.retrieve("conv_123")
 
-              puts(page)
+              puts(conversation)
           response: |
             {
-              "object": "list",
-              "data": [
-                {
-                  "type": "message",
-                  "id": "msg_abc",
-                  "status": "completed",
-                  "role": "user",
-                  "content": [
-                    {"type": "input_text", "text": "Hello!"}
-                  ]
-                }
-              ],
-              "first_id": "msg_abc",
-              "last_id": "msg_abc",
-              "has_more": false
+              "id": "conv_123",
+              "object": "conversation",
+              "created_at": 1741900000,
+              "metadata": {"topic": "demo"}
             }
-      x-ms-list: true
-    post:
-      operationId: Conversations_createConversationItems
-      summary: Create items in a conversation with the given ID.
+    delete:
+      operationId: deleteConversation
+      summary: Delete a conversation
+      description: Removes the specified conversation resource from the current project.
       parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
         - name: conversation_id
           in: path
           required: true
-          description: The ID of the conversation to add the item to.
+          description: The id of the conversation to delete.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.DeletedConversationResource'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Conversations
+      x-oaiMeta:
+        name: Delete a conversation
+        group: conversations
+        path: delete
+        examples:
+          request:
+            curl: |
+              curl -X DELETE https://api.openai.com/v1/conversations/conv_123 \
+                -H "Authorization: Bearer $OPENAI_API_KEY"
+            javascript: |
+              import OpenAI from "openai";
+              const client = new OpenAI();
+
+              const deleted = await client.conversations.delete("conv_123");
+              console.log(deleted);
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              conversation_deleted_resource = client.conversations.delete(
+                  "conv_123",
+              )
+              print(conversation_deleted_resource.id)
+            csharp: |
+              using System;
+              using OpenAI.Conversations;
+
+              OpenAIConversationClient client = new(
+                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+              );
+
+              DeletedConversation deleted = client.DeleteConversation("conv_123");
+              Console.WriteLine(deleted.Id);
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              const conversationDeletedResource = await client.conversations.delete('conv_123');
+
+              console.log(conversationDeletedResource.id);
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	conversationDeletedResource, err := client.Conversations.Delete(context.TODO(), "conv_123")
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", conversationDeletedResource.ID)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.conversations.ConversationDeleteParams;
+              import com.openai.models.conversations.ConversationDeletedResource;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ConversationDeletedResource conversationDeletedResource = client.conversations().delete("conv_123");
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              conversation_deleted_resource = openai.conversations.delete("conv_123")
+
+              puts(conversation_deleted_resource)
+          response: |
+            {
+              "id": "conv_123",
+              "object": "conversation.deleted",
+              "deleted": true
+            }
+  /openai/v1/conversations/{conversation_id}/items:
+    post:
+      operationId: createConversationItems
+      summary: Create conversation items
+      description: Adds one or more items to the specified conversation.
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation on which the item needs to be created.
           schema:
             type: string
         - name: include
           in: query
           required: false
           description: |-
-            Additional fields to include in the response. See the `include`
-              parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.
+            Additional fields to include in the response.
+            See the `include` parameter for listing Conversation items for more information.
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/OpenAI.IncludeEnum'
+              type: string
+          explode: false
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
       responses:
         '200':
           description: The request has succeeded.
@@ -16016,7 +15850,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/OpenAI.CreateConversationItemsParametersBody'
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/OpenAI.Item'
+                  maxItems: 20
+                  description: The items to add to the conversation. You may add up to 20 items at a time.
+              required:
+                - items
       x-oaiMeta:
         name: Create items
         group: conversations
@@ -16235,17 +16078,238 @@ paths:
               "last_id": "msg_def",
               "has_more": false
             }
-  /openai/v1/conversations/{conversation_id}/items/{item_id}:
-    delete:
-      operationId: Conversations_deleteConversationItem
-      summary: Delete an item from a conversation with the given IDs.
+    get:
+      operationId: listConversationItems
+      summary: List conversation items
+      description: Returns the items belonging to the specified conversation.
       parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation on which the items needs to be listed.
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+          schema:
+            type: string
+          explode: false
+        - name: item_type
+          in: query
+          required: false
+          description: Filter by item type. If provided, only items of the specified type will be returned.
+          schema:
+            $ref: '#/components/schemas/OpenAI.ItemType'
+          explode: false
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/OpenAI.OutputItem'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Conversations
+      x-oaiMeta:
+        name: List items
+        group: conversations
+        path: list-items
+        examples:
+          request:
+            curl: |
+              curl "https://api.openai.com/v1/conversations/conv_123/items?limit=10" \
+                -H "Authorization: Bearer $OPENAI_API_KEY"
+            javascript: |
+              import OpenAI from "openai";
+              const client = new OpenAI();
+
+              const items = await client.conversations.items.list("conv_123", { limit: 10 });
+              console.log(items.data);
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              page = client.conversations.items.list(
+                  conversation_id="conv_123",
+              )
+              page = page.data[0]
+              print(page)
+            csharp: |
+              using System;
+              using OpenAI.Conversations;
+
+              OpenAIConversationClient client = new(
+                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+              );
+
+              ConversationItemList items = client.ConversationItems.List(
+                  conversationId: "conv_123",
+                  new ListConversationItemsOptions { Limit = 10 }
+              );
+              Console.WriteLine(items.Data.Count);
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              // Automatically fetches more pages as needed.
+              for await (const conversationItem of client.conversations.items.list('conv_123')) {
+                console.log(conversationItem);
+              }
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/conversations"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	page, err := client.Conversations.Items.List(
+              		context.TODO(),
+              		"conv_123",
+              		conversations.ItemListParams{},
+              	)
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", page)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.conversations.items.ItemListPage;
+              import com.openai.models.conversations.items.ItemListParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ItemListPage page = client.conversations().items().list("conv_123");
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              page = openai.conversations.items.list("conv_123")
+
+              puts(page)
+          response: |
+            {
+              "object": "list",
+              "data": [
+                {
+                  "type": "message",
+                  "id": "msg_abc",
+                  "status": "completed",
+                  "role": "user",
+                  "content": [
+                    {"type": "input_text", "text": "Hello!"}
+                  ]
+                }
+              ],
+              "first_id": "msg_abc",
+              "last_id": "msg_abc",
+              "has_more": false
+            }
+      x-ms-list: true
+  /openai/v1/conversations/{conversation_id}/items/{item_id}:
+    get:
+      operationId: getConversationItem
+      summary: Get a conversation item
+      description: Retrieves a specific item from the specified conversation.
+      parameters:
         - name: conversation_id
           in: path
           required: true
@@ -16255,7 +16319,179 @@ paths:
         - name: item_id
           in: path
           required: true
-          description: The ID of the item to delete.
+          description: The id of the conversation item to retrieve.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.OutputItem'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Conversations
+      x-oaiMeta:
+        name: Retrieve an item
+        group: conversations
+        path: get-item
+        examples:
+          request:
+            curl: |
+              curl https://api.openai.com/v1/conversations/conv_123/items/msg_abc \
+                -H "Authorization: Bearer $OPENAI_API_KEY"
+            javascript: |
+              import OpenAI from "openai";
+              const client = new OpenAI();
+
+              const item = await client.conversations.items.retrieve(
+                "conv_123",
+                "msg_abc"
+              );
+              console.log(item);
+            python: |-
+              import os
+              from openai import OpenAI
+
+              client = OpenAI(
+                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              )
+              conversation_item = client.conversations.items.retrieve(
+                  item_id="msg_abc",
+                  conversation_id="conv_123",
+              )
+              print(conversation_item)
+            csharp: |
+              using System;
+              using OpenAI.Conversations;
+
+              OpenAIConversationClient client = new(
+                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
+              );
+
+              ConversationItem item = client.ConversationItems.Get(
+                  conversationId: "conv_123",
+                  itemId: "msg_abc"
+              );
+              Console.WriteLine(item.Id);
+            node.js: |-
+              import OpenAI from 'openai';
+
+              const client = new OpenAI({
+                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              });
+
+              const conversationItem = await client.conversations.items.retrieve('msg_abc', {
+                conversation_id: 'conv_123',
+              });
+
+              console.log(conversationItem);
+            go: |
+              package main
+
+              import (
+              	"context"
+              	"fmt"
+
+              	"github.com/openai/openai-go"
+              	"github.com/openai/openai-go/conversations"
+              	"github.com/openai/openai-go/option"
+              )
+
+              func main() {
+              	client := openai.NewClient(
+              		option.WithAPIKey("My API Key"),
+              	)
+              	conversationItem, err := client.Conversations.Items.Get(
+              		context.TODO(),
+              		"conv_123",
+              		"msg_abc",
+              		conversations.ItemGetParams{},
+              	)
+              	if err != nil {
+              		panic(err.Error())
+              	}
+              	fmt.Printf("%+v
+              ", conversationItem)
+              }
+            java: |-
+              package com.openai.example;
+
+              import com.openai.client.OpenAIClient;
+              import com.openai.client.okhttp.OpenAIOkHttpClient;
+              import com.openai.models.conversations.items.ConversationItem;
+              import com.openai.models.conversations.items.ItemRetrieveParams;
+
+              public final class Main {
+                  private Main() {}
+
+                  public static void main(String[] args) {
+                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+
+                      ItemRetrieveParams params = ItemRetrieveParams.builder()
+                          .conversationId("conv_123")
+                          .itemId("msg_abc")
+                          .build();
+                      ConversationItem conversationItem = client.conversations().items().retrieve(params);
+                  }
+              }
+            ruby: |-
+              require "openai"
+
+              openai = OpenAI::Client.new(api_key: "My API Key")
+
+              conversation_item = openai.conversations.items.retrieve("msg_abc", conversation_id: "conv_123")
+
+              puts(conversation_item)
+          response: |
+            {
+              "type": "message",
+              "id": "msg_abc",
+              "status": "completed",
+              "role": "user",
+              "content": [
+                {"type": "input_text", "text": "Hello!"}
+              ]
+            }
+    delete:
+      operationId: deleteConversationItem
+      summary: Delete a conversation item
+      description: Removes the specified item from a conversation.
+      parameters:
+        - name: conversation_id
+          in: path
+          required: true
+          description: The id of the conversation on which the item needs to be deleted from.
+          schema:
+            type: string
+        - name: item_id
+          in: path
+          required: true
+          description: The id of the conversation item to delete.
+          schema:
+            type: string
+        - name: x-ms-user-identity
+          in: header
+          required: false
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -16395,181 +16631,6 @@ paths:
               "object": "conversation",
               "created_at": 1741900000,
               "metadata": {"topic": "demo"}
-            }
-    get:
-      operationId: Conversations_getConversationItem
-      summary: Get a single item from a conversation with the given IDs.
-      parameters:
-        - name: x-ms-user-identity
-          in: header
-          required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The ID of the conversation that contains the item.
-          schema:
-            type: string
-        - name: item_id
-          in: path
-          required: true
-          description: The ID of the item to retrieve.
-          schema:
-            type: string
-        - name: include
-          in: query
-          required: false
-          description: |-
-            Additional fields to include in the response. See the `include`
-              parameter for [listing Conversation items above](/docs/api-reference/conversations/list-items#conversations_list_items-include) for more information.
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/OpenAI.IncludeEnum'
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/OpenAI.ConversationItem'
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Conversations
-      x-oaiMeta:
-        name: Retrieve an item
-        group: conversations
-        path: get-item
-        examples:
-          request:
-            curl: |
-              curl https://api.openai.com/v1/conversations/conv_123/items/msg_abc \
-                -H "Authorization: Bearer $OPENAI_API_KEY"
-            javascript: |
-              import OpenAI from "openai";
-              const client = new OpenAI();
-
-              const item = await client.conversations.items.retrieve(
-                "conv_123",
-                "msg_abc"
-              );
-              console.log(item);
-            python: |-
-              import os
-              from openai import OpenAI
-
-              client = OpenAI(
-                  api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
-              )
-              conversation_item = client.conversations.items.retrieve(
-                  item_id="msg_abc",
-                  conversation_id="conv_123",
-              )
-              print(conversation_item)
-            csharp: |
-              using System;
-              using OpenAI.Conversations;
-
-              OpenAIConversationClient client = new(
-                  apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-              );
-
-              ConversationItem item = client.ConversationItems.Get(
-                  conversationId: "conv_123",
-                  itemId: "msg_abc"
-              );
-              Console.WriteLine(item.Id);
-            node.js: |-
-              import OpenAI from 'openai';
-
-              const client = new OpenAI({
-                apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
-              });
-
-              const conversationItem = await client.conversations.items.retrieve('msg_abc', {
-                conversation_id: 'conv_123',
-              });
-
-              console.log(conversationItem);
-            go: |
-              package main
-
-              import (
-              	"context"
-              	"fmt"
-
-              	"github.com/openai/openai-go"
-              	"github.com/openai/openai-go/conversations"
-              	"github.com/openai/openai-go/option"
-              )
-
-              func main() {
-              	client := openai.NewClient(
-              		option.WithAPIKey("My API Key"),
-              	)
-              	conversationItem, err := client.Conversations.Items.Get(
-              		context.TODO(),
-              		"conv_123",
-              		"msg_abc",
-              		conversations.ItemGetParams{},
-              	)
-              	if err != nil {
-              		panic(err.Error())
-              	}
-              	fmt.Printf("%+v
-              ", conversationItem)
-              }
-            java: |-
-              package com.openai.example;
-
-              import com.openai.client.OpenAIClient;
-              import com.openai.client.okhttp.OpenAIOkHttpClient;
-              import com.openai.models.conversations.items.ConversationItem;
-              import com.openai.models.conversations.items.ItemRetrieveParams;
-
-              public final class Main {
-                  private Main() {}
-
-                  public static void main(String[] args) {
-                      OpenAIClient client = OpenAIOkHttpClient.fromEnv();
-
-                      ItemRetrieveParams params = ItemRetrieveParams.builder()
-                          .conversationId("conv_123")
-                          .itemId("msg_abc")
-                          .build();
-                      ConversationItem conversationItem = client.conversations().items().retrieve(params);
-                  }
-              }
-            ruby: |-
-              require "openai"
-
-              openai = OpenAI::Client.new(api_key: "My API Key")
-
-              conversation_item = openai.conversations.items.retrieve("msg_abc", conversation_id: "conv_123")
-
-              puts(conversation_item)
-          response: |
-            {
-              "type": "message",
-              "id": "msg_abc",
-              "status": "completed",
-              "role": "user",
-              "content": [
-                {"type": "input_text", "text": "Hello!"}
-              ]
             }
   /openai/v1/embeddings:
     post:
@@ -23801,7 +23862,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -23868,10 +23929,6 @@ paths:
                   model:
                     type: string
                     description: The model deployment to use for the creation of this response.
-                  reasoning:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Reasoning'
-                      - type: 'null'
                   background:
                     anyOf:
                       - type: boolean
@@ -23950,6 +24007,10 @@ paths:
                         assuming it's an `assistant` message with the content generated by
                         the model, you might consider using the `output_text` property where
                         supported in SDKs.
+                  reasoning:
+                    anyOf:
+                      - $ref: '#/components/schemas/OpenAI.Reasoning'
+                      - type: 'null'
                   instructions:
                     anyOf:
                       - type: string
@@ -24086,10 +24147,6 @@ paths:
                 model:
                   type: string
                   description: The model deployment to use for the creation of this response.
-                reasoning:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.Reasoning'
-                    - type: 'null'
                 background:
                   anyOf:
                     - type: boolean
@@ -24115,7 +24172,12 @@ paths:
                         - auto
                         - disabled
                     - type: 'null'
+                  deprecated: true
                   default: disabled
+                reasoning:
+                  anyOf:
+                    - $ref: '#/components/schemas/OpenAI.Reasoning'
+                    - type: 'null'
                 input:
                   $ref: '#/components/schemas/OpenAI.InputParam'
                 include:
@@ -25847,7 +25909,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -26134,7 +26196,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -26329,7 +26391,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -26456,7 +26518,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -26674,7 +26736,7 @@ paths:
         - name: x-ms-user-identity
           in: header
           required: false
-          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoint/delegateViaUserId` RBAC permission.
+          description: Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.
           schema:
             type: string
       responses:
@@ -37766,6 +37828,13 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
@@ -37792,9 +37861,19 @@ components:
           description: |-
             The connection ID in the project for the A2A server.
             The connection stores authentication and other connection details needed to connect to the A2A server.
+        send_credentials_for_agent_card:
+          type: boolean
+          description: |-
+            When `true`, Foundry sends its credentials when fetching the remote
+            agent's Agent Card. The service defaults to `false` if a value is not
+            specified by the caller (anonymous fetch).
+          default: false
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
+    A2AProtocolConfiguration:
+      type: object
+      description: Configuration specific to the A2A protocol.
     A2AToolCall:
       type: object
       required:
@@ -37853,9 +37932,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an A2A (Agent-to-Agent) tool call.
-    A2aProtocolConfiguration:
-      type: object
-      description: Configuration specific to the A2A protocol.
     AISearchIndexResource:
       type: object
       properties:
@@ -38005,6 +38081,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Insights on set of Agent Evaluation Results
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     AgentClusterInsightResult:
       type: object
       required:
@@ -38021,6 +38100,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the agent cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     AgentContainerObject:
       type: object
       required:
@@ -38183,6 +38265,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -38206,11 +38291,13 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
         - WorkflowAgents=V1Preview
         - ExternalAgents=V1Preview
+        - DraftAgents=V1Preview
         - HostedAgents=V1Preview
         - ContainerAgents=V1Preview
       description: Feature opt-in keys for agent definition operations supporting hosted or workflow agents.
@@ -38433,6 +38520,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Agent source for evaluation suite generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -38456,6 +38546,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentFilterTraceSource:
       type: object
       required:
@@ -38689,6 +38782,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationTaxonomyInput'
       description: Input configuration for the evaluation taxonomy when the input type is agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentTaxonomyInputUpdate:
       type: object
       properties:
@@ -38709,6 +38805,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationTaxonomyInputUpdate'
       description: Input configuration for the evaluation taxonomy when the input type is agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     AgentVersionObject:
       type: object
       required:
@@ -38759,6 +38858,13 @@ components:
           description: The Unix timestamp (seconds) when the agent was created.
         definition:
           $ref: '#/components/schemas/AgentDefinition'
+        draft:
+          type: boolean
+          description: Whether this agent version is a draft (candidate) rather than a release. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted. Defaults to false.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
         status:
           allOf:
             - $ref: '#/components/schemas/AgentVersionStatus'
@@ -38850,6 +38956,9 @@ components:
             $ref: '#/components/schemas/FoundryModelArtifactProfileSignal'
           description: Signals detected in the model artifact
       description: Artifact profile of the model
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     AssetCredentialResponse:
       type: object
       required:
@@ -38914,6 +39023,9 @@ components:
             - multi_turn
             - crescendo
       description: Strategies for attacks.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Azure.Core.Foundations.Error:
       type: object
       required:
@@ -39219,6 +39331,20 @@ components:
           enum:
             - azure_ai_search
           description: The object type, which is always 'azure_ai_search'.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         azure_ai_search:
           allOf:
             - $ref: '#/components/schemas/AzureAISearchToolResource'
@@ -39648,6 +39774,12 @@ components:
           enum:
             - azure_function
           description: The object type, which is always 'browser_automation'.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         azure_function:
           allOf:
             - $ref: '#/components/schemas/AzureFunctionDefinition'
@@ -39729,6 +39861,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RedTeamTargetConfig'
       description: Azure OpenAI model configuration. The API version would be selected by the service for querying the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     BaseCredentials:
       type: object
       required:
@@ -39904,6 +40039,20 @@ components:
           enum:
             - bing_grounding
           description: The object type, which is always 'bing_grounding'.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         bing_grounding:
           allOf:
             - $ref: '#/components/schemas/BingGroundingSearchToolParameters'
@@ -40128,6 +40277,20 @@ components:
           enum:
             - capture_structured_outputs
           description: The type of the tool. Always `capture_structured_outputs`.
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         outputs:
           allOf:
             - $ref: '#/components/schemas/StructuredOutputDefinition'
@@ -40155,6 +40318,9 @@ components:
           format: int32
           description: Size of the chart element.
       description: Coordinates for the analysis chart.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     ChatSummaryMemoryItem:
       type: object
       required:
@@ -40210,6 +40376,9 @@ components:
               Coordinates are intended only for client-side visualization and do not
               modify the canonical insights results.
       description: Insights from the cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     ClusterTokenUsage:
       type: object
       required:
@@ -40230,6 +40399,9 @@ components:
           format: int32
           description: total token usage
       description: Token usage for cluster analysis
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     CodeBasedEvaluatorDefinition:
       type: object
       required:
@@ -40264,6 +40436,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -40735,10 +40910,18 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
         agent_endpoint:
           allOf:
             - $ref: '#/components/schemas/AgentEndpointConfig'
@@ -40751,6 +40934,7 @@ components:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
     CreateAgentSessionRequest:
       type: object
       required:
@@ -40864,14 +41048,23 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+        draft:
+          type: boolean
+          description: (Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.
+          x-ms-foundry-meta:
+            conditional_previews:
+              - DraftAgents=V1Preview
+          default: false
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
           - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -41018,6 +41211,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: Cron based trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     CustomCredential:
       type: object
       required:
@@ -41084,6 +41280,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Daily recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     DataGenerationJob:
       type: object
       required:
@@ -41125,6 +41324,9 @@ components:
           description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
       description: Data Generation Job resource.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobInputs:
       type: object
       required:
@@ -41154,6 +41356,9 @@ components:
             - $ref: '#/components/schemas/DataGenerationJobOutputOptions'
           description: Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.
       description: Caller-supplied inputs for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOptions:
       type: object
       required:
@@ -41185,6 +41390,9 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
       description: Options for managing data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutput:
       type: object
       required:
@@ -41200,6 +41408,9 @@ components:
           file: '#/components/schemas/FileDataGenerationJobOutput'
           dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
       description: Output information for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputOptions:
       type: object
       properties:
@@ -41215,6 +41426,9 @@ components:
             type: string
           description: Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
       description: Output options for data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputType:
       anyOf:
         - type: string
@@ -41223,6 +41437,9 @@ components:
             - file
             - dataset
       description: The supported output file types for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobResult:
       type: object
       required:
@@ -41242,6 +41459,9 @@ components:
             - $ref: '#/components/schemas/DataGenerationTokenUsage'
           description: The token usage information for the data generation job.
       description: Result produced by a successful data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobScenario:
       anyOf:
         - type: string
@@ -41251,6 +41471,9 @@ components:
             - reinforcement_finetuning
             - evaluation
       description: The supported scenarios for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobSource:
       type: object
       required:
@@ -41271,6 +41494,9 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobSource'
           file: '#/components/schemas/FileDataGenerationJobSource'
       description: The base source model for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobSourceType:
       anyOf:
         - type: string
@@ -41281,6 +41507,9 @@ components:
             - traces
             - file
       description: The supported source types for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationJobType:
       anyOf:
         - type: string
@@ -41290,6 +41519,9 @@ components:
             - traces
             - tool_use
       description: The supported data generation job types.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationModelOptions:
       type: object
       required:
@@ -41299,6 +41531,9 @@ components:
           type: string
           description: Base model name used to generate data.
       description: LLM model options for data generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataGenerationTokenUsage:
       type: object
       required:
@@ -41322,6 +41557,9 @@ components:
           description: Total number of tokens used.
           readOnly: true
       description: Token usage information for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DataSourceConfig:
       type: object
       required:
@@ -41375,6 +41613,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     DatasetEvaluationSuiteJobSource:
       type: object
       required:
@@ -41398,6 +41639,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Dataset source for evaluation suite generation jobs — reference to a dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -41421,6 +41665,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Dataset source for evaluator generation jobs — reference to a dataset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DatasetReference:
       type: object
       required:
@@ -41434,6 +41681,9 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DatasetType:
       anyOf:
         - type: string
@@ -41520,6 +41770,9 @@ components:
             - Friday
             - Saturday
       description: Days of the week for recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     DeleteAgentResponse:
       type: object
       required:
@@ -41678,6 +41931,9 @@ components:
           type: boolean
           description: Whether the skill was successfully deleted.
       description: A deleted skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     DeleteSkillVersionResponse:
       type: object
       required:
@@ -41700,6 +41956,9 @@ components:
           type: string
           description: The version that was deleted.
       description: A deleted skill version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Deployment:
       type: object
       required:
@@ -41766,6 +42025,9 @@ components:
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -41793,6 +42055,23 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    EndpointBasedEvaluatorDefinition:
+      type: object
+      required:
+        - type
+        - connection_name
+      properties:
+        type:
+          type: string
+          enum:
+            - endpoint
+        connection_name:
+          type: string
+          minLength: 1
+          description: "Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity)."
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorDefinition'
+      description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
     EntraAuthorizationScheme:
       type: object
       required:
@@ -41979,6 +42258,9 @@ components:
           type: boolean
           description: indicates if the check passed or failed
       description: Result of the evaluation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRun:
       type: object
       required:
@@ -42512,6 +42794,9 @@ components:
             - $ref: '#/components/schemas/TreatmentEffectType'
           description: Type of treatment effect.
       description: Metric comparison for a treatment against the baseline.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRunResultComparison:
       type: object
       required:
@@ -42540,6 +42825,9 @@ components:
             $ref: '#/components/schemas/EvalRunResultCompareItem'
           description: List of comparison results for each treatment run.
       description: Comparison results for treatment runs against the baseline.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvalRunResultSummary:
       type: object
       required:
@@ -42564,6 +42852,9 @@ components:
           format: float
           description: Standard deviation of the metric in the evaluation run.
       description: Summary statistics of a metric in an evaluation run.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     Evaluation:
       type: object
       required:
@@ -42636,6 +42927,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Evaluation Comparison Request
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationComparisonInsightResult:
       type: object
       required:
@@ -42659,6 +42953,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation comparison.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationDataGenerationType:
       anyOf:
         - type: string
@@ -42669,6 +42966,9 @@ components:
             - tool_use
             - task
       description: The data generation type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationDatasetReference:
       type: object
       required:
@@ -42687,6 +42987,9 @@ components:
             Optional — if not provided, schema is inferred at runtime from the data.
             Only applicable for uri_folder datasets.
       description: Reference to a dataset by name and version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationLevel:
       anyOf:
         - type: string
@@ -42713,6 +43016,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightSample'
       description: A sample from the evaluation result.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationRule:
       type: object
       required:
@@ -42826,6 +43132,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightRequest'
       description: Insights on set of Evaluation Results
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationRunClusterInsightResult:
       type: object
       required:
@@ -42842,6 +43151,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/InsightResult'
       description: Insights from the evaluation run cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     EvaluationScheduleTask:
       type: object
       required:
@@ -42863,6 +43175,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Evaluation task for the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     EvaluationSuiteDataGenerationOptions:
       type: object
       properties:
@@ -42877,6 +43192,9 @@ components:
           maximum: 1000
           description: 'Maximum number of samples to generate. Valid range: 15-1000.'
       description: Options for dataset generation within an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationCategory:
       anyOf:
         - type: string
@@ -42885,6 +43203,9 @@ components:
             - quality
             - safety
       description: The category of evaluator generation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJob:
       type: object
       required:
@@ -42931,6 +43252,9 @@ components:
           description: Token consumption summary. Populated on terminal states.
           readOnly: true
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobCreate:
       type: object
       properties:
@@ -42939,6 +43263,9 @@ components:
             - $ref: '#/components/schemas/EvaluationSuiteGenerationJobInputs'
           description: Caller-supplied inputs.
       description: Evaluation suite generation job resource — a long-running job that generates testing criteria and optionally a dataset from source materials. On success, the result is the persisted EvaluationSuiteVersion.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationJobInputs:
       type: object
       required:
@@ -42996,6 +43323,9 @@ components:
             Default: turn (single-turn evaluation).
             Use conversation for multi-turn evaluation.
       description: Caller-supplied inputs for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteGenerationTokenUsage:
       type: object
       properties:
@@ -43012,6 +43342,9 @@ components:
           format: int64
           description: Total tokens consumed.
       description: Token usage summary for an evaluation suite generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSource:
       type: object
       required:
@@ -43032,6 +43365,9 @@ components:
           traces: '#/components/schemas/TracesEvaluationSuiteJobSource'
           dataset: '#/components/schemas/DatasetEvaluationSuiteJobSource'
       description: The base source model for evaluation suite generation jobs. Polymorphic over `type`.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteJobSourceType:
       anyOf:
         - type: string
@@ -43042,6 +43378,9 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluation suite generation jobs.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunRequest:
       type: object
       properties:
@@ -43056,6 +43395,9 @@ components:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Overrides the suite's default evaluation level. If omitted, uses the level from the suite.
       description: Request body for running an evaluation from a suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResponse:
       type: object
       required:
@@ -43075,6 +43417,9 @@ components:
             $ref: '#/components/schemas/EvaluationSuiteRunResult'
           description: The run results. Currently a single-element array; will support multiple runs in the future.
       description: Response from running an evaluation suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteRunResult:
       type: object
       required:
@@ -43098,6 +43443,9 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: Timestamp when the run was created.
       description: Result of a single evaluation run within a suite execution.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteSubtype:
       anyOf:
         - type: string
@@ -43106,6 +43454,9 @@ components:
             - default
             - benchmark
       description: The subtype of an evaluation suite.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersion:
       type: object
       required:
@@ -43177,6 +43528,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionCreate:
       type: object
       required:
@@ -43246,6 +43600,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationSuiteVersionUpdate:
       type: object
       required:
@@ -43315,6 +43672,9 @@ components:
         An evaluation suite bundles testing criteria — an optional dataset, one or more
         evaluator configs with thresholds and init params — into a reusable, named artifact that
         can gate agent changes across batch, scheduled, continuous, and CI/CD evals.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     EvaluationTarget:
       type: object
       required:
@@ -43370,6 +43730,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyCreateOrUpdate:
       type: object
       required:
@@ -43398,6 +43761,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInput:
       type: object
       required:
@@ -43412,6 +43778,9 @@ components:
         mapping:
           agent: '#/components/schemas/AgentTaxonomyInput'
       description: Input configuration for the evaluation taxonomy.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInputType:
       anyOf:
         - type: string
@@ -43420,6 +43789,9 @@ components:
             - agent
             - policy
       description: Type of the evaluation taxonomy input.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyInputUpdate:
       type: object
       required:
@@ -43434,6 +43806,9 @@ components:
         mapping:
           agent: '#/components/schemas/AgentTaxonomyInputUpdate'
       description: Input configuration for the evaluation taxonomy.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluationTaxonomyUpdate:
       type: object
       properties:
@@ -43460,6 +43835,9 @@ components:
             type: string
           description: Additional properties for the evaluation taxonomy.
       description: Evaluation Taxonomy Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorCategory:
       anyOf:
         - type: string
@@ -43469,6 +43847,9 @@ components:
             - safety
             - agents
       description: The category of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorConfiguration:
       type: object
       required:
@@ -43528,7 +43909,11 @@ components:
           code: '#/components/schemas/CodeBasedEvaluatorDefinition'
           prompt: '#/components/schemas/PromptBasedEvaluatorDefinition'
           rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
+          endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorDefinitionType:
       anyOf:
         - type: string
@@ -43540,7 +43925,11 @@ components:
             - service
             - openai_graders
             - rubric
+            - endpoint
       description: The type of evaluator definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
       required:
@@ -43557,6 +43946,9 @@ components:
             type: string
           description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
       description: Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationInputs:
       type: object
       required:
@@ -43585,6 +43977,9 @@ components:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
       description: Caller-supplied inputs for an evaluator generation job.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJob:
       type: object
       required:
@@ -43631,6 +44026,9 @@ components:
           description: Token consumption summary. Populated when the job reaches a terminal state.
           readOnly: true
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobCreate:
       type: object
       properties:
@@ -43639,6 +44037,9 @@ components:
             - $ref: '#/components/schemas/EvaluatorGenerationInputs'
           description: Caller-supplied inputs.
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobSource:
       type: object
       required:
@@ -43656,6 +44057,9 @@ components:
           traces: '#/components/schemas/TracesEvaluatorGenerationJobSource'
           dataset: '#/components/schemas/DatasetEvaluatorGenerationJobSource'
       description: The base source model for evaluator generation jobs. Polymorphic over `type`.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationJobSourceType:
       anyOf:
         - type: string
@@ -43666,6 +44070,9 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluator generation jobs.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorGenerationTokenUsage:
       type: object
       required:
@@ -43686,6 +44093,9 @@ components:
           format: int64
           description: Total tokens consumed (input + output).
       description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -43713,6 +44123,9 @@ components:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
       description: Evaluator Metric
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetricDirection:
       anyOf:
         - type: string
@@ -43722,6 +44135,9 @@ components:
             - decrease
             - neutral
       description: The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorMetricType:
       anyOf:
         - type: string
@@ -43731,6 +44147,9 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -43739,6 +44158,9 @@ components:
             - builtin
             - custom
       description: The type of the evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersion:
       type: object
       required:
@@ -43809,6 +44231,9 @@ components:
           description: The version of the resource
           readOnly: true
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersionCreate:
       type: object
       required:
@@ -43853,6 +44278,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorVersionUpdate:
       type: object
       properties:
@@ -43885,6 +44313,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Evaluator Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     ExternalAgentDefinition:
       type: object
       required:
@@ -44057,6 +44488,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Azure OpenAI file output for a data generation job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     FileDataGenerationJobSource:
       type: object
       required:
@@ -44074,6 +44508,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: File source for data generation jobs — Azure OpenAI file input.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     FileDatasetVersion:
       type: object
       required:
@@ -44190,6 +44627,9 @@ components:
             - RuntimeDependent
             - Unknown
       description: The artifact profile category.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelArtifactProfileSignal:
       anyOf:
         - type: string
@@ -44201,6 +44641,9 @@ components:
             - NativeBinary
             - UnknownFormat
       description: Signals detected in the model artifact.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelSourceType:
       anyOf:
         - type: string
@@ -44209,6 +44652,9 @@ components:
             - LocalUpload
             - TrainingJob
       description: The source type of the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWarning:
       type: object
       properties:
@@ -44220,6 +44666,9 @@ components:
           type: string
           description: The warning message.
       description: A warning associated with a model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWarningCode:
       anyOf:
         - type: string
@@ -44228,6 +44677,9 @@ components:
             - RuntimeDependentArtifact
             - UnclassifiedArtifact
       description: Warning code for model artifacts.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryModelWeightType:
       anyOf:
         - type: string
@@ -44237,6 +44689,9 @@ components:
             - LoRA
             - DraftModel
       description: The weight type of the model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -44342,13 +44797,6 @@ components:
           type: string
           enum:
             - hosted
-        tools:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.Tool'
-          description: |-
-            An array of tools the hosted agent's model may call while generating a response. You
-            can specify which tool to use by setting the `tool_choice` parameter.
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -44404,6 +44852,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Hourly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     HumanEvaluationPreviewRuleAction:
       type: object
       required:
@@ -44565,6 +45016,9 @@ components:
           description: The result of the insights report.
           readOnly: true
       description: The response body for cluster insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightCluster:
       type: object
       required:
@@ -44605,6 +45059,9 @@ components:
             $ref: '#/components/schemas/InsightSample'
           description: List of samples that belong to this cluster. Empty if samples are part of subclusters.
       description: A cluster of analysis samples.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightModelConfiguration:
       type: object
       required:
@@ -44614,6 +45071,9 @@ components:
           type: string
           description: The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.
       description: Configuration of the model used in the insight generation.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightRequest:
       type: object
       required:
@@ -44630,6 +45090,9 @@ components:
           AgentClusterInsight: '#/components/schemas/AgentClusterInsightRequest'
           EvaluationComparison: '#/components/schemas/EvaluationComparisonInsightRequest'
       description: The request of the insights report.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightResult:
       type: object
       required:
@@ -44646,6 +45109,9 @@ components:
           EvaluationRunClusterInsight: '#/components/schemas/EvaluationRunClusterInsightResult'
           AgentClusterInsight: '#/components/schemas/AgentClusterInsightResult'
       description: The result of the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightSample:
       type: object
       required:
@@ -44674,6 +45140,9 @@ components:
         mapping:
           EvaluationResultSample: '#/components/schemas/EvaluationResultSample'
       description: A sample from the analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightScheduleTask:
       type: object
       required:
@@ -44691,6 +45160,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ScheduleTask'
       description: Insight task for the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     InsightSummary:
       type: object
       required:
@@ -44720,6 +45192,9 @@ components:
             - $ref: '#/components/schemas/ClusterTokenUsage'
           description: Token usage while performing clustering analysis
       description: Summary of the error cluster analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightType:
       anyOf:
         - type: string
@@ -44729,6 +45204,9 @@ components:
             - AgentClusterInsight
             - EvaluationComparison
       description: The request of the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InsightsMetadata:
       type: object
       required:
@@ -44743,6 +45221,9 @@ components:
           format: date-time
           description: The timestamp when the insights were completed.
       description: Metadata about the insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     InvocationsProtocolConfiguration:
       type: object
       description: Configuration specific to the invocations protocol.
@@ -44910,6 +45391,9 @@ components:
           format: float
           description: Dropout rate used during training. Informational — not used at serving time.
       description: Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     MCPToolboxTool:
       type: object
       required:
@@ -44927,8 +45411,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url` or `connector_id` must be
-              provided.
+            The URL for the MCP server. One of `server_url`, `connector_id`, or
+              `tunnel_id` must be provided.
         connector_id:
           type: string
           enum:
@@ -44942,8 +45426,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url` or `connector_id` must be provided. Learn more about service
-              connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -44953,6 +45437,12 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
+        tunnel_id:
+          type: string
+          pattern: ^tunnel_[a-z0-9]{32}$
+          description: |-
+            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
+              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -45614,6 +46104,9 @@ components:
           format: uri
           description: Blob URI of the model asset to fetch credentials for.
       description: Request to fetch credentials for a model asset.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelDeployment:
       type: object
       required:
@@ -45676,6 +46169,9 @@ components:
             - TemporaryBlobReference
           description: The type of pending upload. Only TemporaryBlobReference is supported for models.
       description: Represents a request for a pending upload of a model version.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelPendingUploadResponse:
       type: object
       required:
@@ -45699,6 +46195,9 @@ components:
             - TemporaryBlobReference
           description: The type of pending upload. Only TemporaryBlobReference is supported for models.
       description: Represents the response for a model pending upload request.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelSamplingParams:
       type: object
       properties:
@@ -45733,6 +46232,9 @@ components:
           type: string
           description: The job ID that produced this model
       description: Source information for the model
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     ModelVersion:
       type: object
       required:
@@ -45791,6 +46293,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Model Version Definition
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     MonthlyRecurrenceSchedule:
       type: object
       required:
@@ -45811,6 +46316,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Monthly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     NoAuthenticationCredentials:
       type: object
       required:
@@ -45868,6 +46376,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: One-time trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     OpenAI.AddUploadPartRequest:
       type: object
       properties:
@@ -48129,6 +48640,20 @@ components:
             - code_interpreter
           description: The type of the code interpreter tool. Always `code_interpreter`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         container:
           anyOf:
             - type: string
@@ -51039,16 +51564,6 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.InputItem'
             - type: 'null'
-    OpenAI.CreateConversationItemsParametersBody:
-      type: object
-      required:
-        - items
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/OpenAI.InputItem'
-          maxItems: 20
     OpenAI.CreateEmbeddingRequest:
       type: object
       required:
@@ -54771,6 +55286,20 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that searches for relevant content from uploaded files. Learn more about the [file search tool](https://platform.openai.com/docs/guides/tools-file-search).
@@ -55818,6 +56347,20 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.FunctionShellToolParamEnvironment'
             - type: 'null'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands.
@@ -56476,6 +57019,20 @@ components:
           allOf:
             - $ref: '#/components/schemas/OpenAI.ImageGenActionEnum'
           description: 'Whether to generate a new image or edit an existing image. Default: `auto`.'
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that generates images using the GPT image models.
@@ -58054,6 +58611,369 @@ components:
           description: The text input to the model.
       description: A text input to the model.
       title: Input text
+    OpenAI.Item:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/OpenAI.ItemType'
+      discriminator:
+        propertyName: type
+        mapping:
+          message: '#/components/schemas/OpenAI.ItemInputMessage'
+          output_message: '#/components/schemas/OpenAI.ItemOutputMessage'
+          file_search_call: '#/components/schemas/OpenAI.ItemFileSearchToolCall'
+          computer_call: '#/components/schemas/OpenAI.ItemComputerToolCall'
+          computer_call_output: '#/components/schemas/OpenAI.ItemComputerCallOutputItemParam'
+          web_search_call: '#/components/schemas/OpenAI.ItemWebSearchToolCall'
+          function_call: '#/components/schemas/OpenAI.ItemFunctionToolCall'
+          function_call_output: '#/components/schemas/OpenAI.ItemFunctionCallOutputItemParam'
+          tool_search_call: '#/components/schemas/OpenAI.ItemToolSearchCallItemParam'
+          tool_search_output: '#/components/schemas/OpenAI.ItemToolSearchOutputItemParam'
+          additional_tools: '#/components/schemas/OpenAI.ItemAdditionalToolsItemParam'
+          reasoning: '#/components/schemas/OpenAI.ItemReasoningItem'
+          compaction: '#/components/schemas/OpenAI.ItemCompactionSummaryItemParam'
+          image_generation_call: '#/components/schemas/OpenAI.ItemImageGenToolCall'
+          code_interpreter_call: '#/components/schemas/OpenAI.ItemCodeInterpreterToolCall'
+          local_shell_call: '#/components/schemas/OpenAI.ItemLocalShellToolCall'
+          local_shell_call_output: '#/components/schemas/OpenAI.ItemLocalShellToolCallOutput'
+          shell_call: '#/components/schemas/OpenAI.ItemFunctionShellCallItemParam'
+          shell_call_output: '#/components/schemas/OpenAI.ItemFunctionShellCallOutputItemParam'
+          apply_patch_call: '#/components/schemas/OpenAI.ItemApplyPatchToolCallItemParam'
+          apply_patch_call_output: '#/components/schemas/OpenAI.ItemApplyPatchToolCallOutputItemParam'
+          mcp_list_tools: '#/components/schemas/OpenAI.ItemMcpListTools'
+          mcp_approval_request: '#/components/schemas/OpenAI.ItemMcpApprovalRequest'
+          mcp_approval_response: '#/components/schemas/OpenAI.ItemMcpApprovalResponse'
+          mcp_call: '#/components/schemas/OpenAI.ItemMcpToolCall'
+          custom_tool_call_output: '#/components/schemas/OpenAI.ItemCustomToolCallOutput'
+          custom_tool_call: '#/components/schemas/OpenAI.ItemCustomToolCall'
+      description: Content item used to generate a response.
+    OpenAI.ItemAdditionalToolsItemParam:
+      type: object
+      required:
+        - type
+        - role
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - additional_tools
+          description: The item type. Always `additional_tools`.
+          x-stainless-const: true
+          default: additional_tools
+        role:
+          type: string
+          enum:
+            - developer
+          description: The role that provided the additional tools. Only `developer` is supported.
+          x-stainless-const: true
+          default: developer
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: A list of additional tools made available at this item.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+    OpenAI.ItemApplyPatchToolCallItemParam:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+        - operation
+      properties:
+        type:
+          type: string
+          enum:
+            - apply_patch_call
+          description: The type of the item. Always `apply_patch_call`.
+          x-stainless-const: true
+          default: apply_patch_call
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the apply patch tool call generated by the model.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ApplyPatchCallStatusParam'
+          description: The status of the apply patch tool call. One of `in_progress` or `completed`.
+        operation:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ApplyPatchOperationParam'
+          description: The specific create, delete, or update instruction for the apply_patch tool call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A tool call representing a request to create, delete, or update files using diff patches.
+      title: Apply patch tool call
+    OpenAI.ItemApplyPatchToolCallOutputItemParam:
+      type: object
+      required:
+        - type
+        - call_id
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - apply_patch_call_output
+          description: The type of the item. Always `apply_patch_call_output`.
+          x-stainless-const: true
+          default: apply_patch_call_output
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the apply patch tool call generated by the model.
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ApplyPatchCallOutputStatusParam'
+          description: The status of the apply patch tool call output. One of `completed` or `failed`.
+        output:
+          anyOf:
+            - type: string
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The streamed output emitted by an apply patch tool call.
+      title: Apply patch tool call output
+    OpenAI.ItemCodeInterpreterToolCall:
+      type: object
+      required:
+        - type
+        - id
+        - status
+        - container_id
+        - code
+        - outputs
+      properties:
+        type:
+          type: string
+          enum:
+            - code_interpreter_call
+          description: The type of the code interpreter tool call. Always `code_interpreter_call`.
+          x-stainless-const: true
+          default: code_interpreter_call
+        id:
+          type: string
+          description: The unique ID of the code interpreter tool call.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+            - interpreting
+            - failed
+          description: The status of the code interpreter tool call. Valid values are `in_progress`, `completed`, `incomplete`, `interpreting`, and `failed`.
+        container_id:
+          type: string
+          description: The ID of the container used to run the code.
+        code:
+          anyOf:
+            - type: string
+            - type: 'null'
+        outputs:
+          anyOf:
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputLogs'
+                  - $ref: '#/components/schemas/OpenAI.CodeInterpreterOutputImage'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A tool call to run code.
+      title: Code interpreter tool call
+    OpenAI.ItemCompactionSummaryItemParam:
+      type: object
+      required:
+        - type
+        - encrypted_content
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - compaction
+          description: The type of the item. Always `compaction`.
+          x-stainless-const: true
+          default: compaction
+        encrypted_content:
+          type: string
+          maxLength: 10485760
+          description: The encrypted content of the compaction summary.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A compaction item generated by the [`v1/responses/compact` API](/docs/api-reference/responses/compact).
+      title: Compaction item
+    OpenAI.ItemComputerCallOutputItemParam:
+      type: object
+      required:
+        - call_id
+        - type
+        - output
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The ID of the computer tool call that produced the output.
+        type:
+          type: string
+          enum:
+            - computer_call_output
+          description: The type of the computer tool call output. Always `computer_call_output`.
+          x-stainless-const: true
+          default: computer_call_output
+        output:
+          $ref: '#/components/schemas/OpenAI.ComputerScreenshotImage'
+        acknowledged_safety_checks:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
+            - type: 'null'
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The output of a computer tool call.
+      title: Computer tool call output
+    OpenAI.ItemComputerToolCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - pending_safety_checks
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - computer_call
+          description: The type of the computer call. Always `computer_call`.
+          default: computer_call
+        id:
+          type: string
+          description: The unique ID of the computer call.
+        call_id:
+          type: string
+          description: An identifier used when responding to the tool call with output.
+        action:
+          $ref: '#/components/schemas/OpenAI.ComputerAction'
+        actions:
+          $ref: '#/components/schemas/OpenAI.ComputerActionList'
+        pending_safety_checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ComputerCallSafetyCheckParam'
+          description: The pending safety checks for the computer call.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        A tool call to a computer use tool. See the
+        [computer use guide](/docs/guides/tools-computer-use) for more information.
+      title: Computer tool call
+    OpenAI.ItemCustomToolCall:
+      type: object
+      required:
+        - type
+        - call_id
+        - name
+        - input
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call
+          description: The type of the custom tool call. Always `custom_tool_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call in the OpenAI platform.
+        call_id:
+          type: string
+          description: An identifier used to map this custom tool call to a tool call output.
+        namespace:
+          type: string
+          description: The namespace of the custom tool being called.
+        name:
+          type: string
+          description: The name of the custom tool being called.
+        input:
+          type: string
+          description: The input for the custom tool call generated by the model.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A call to a custom tool created by the model.
+      title: Custom tool call
+    OpenAI.ItemCustomToolCallOutput:
+      type: object
+      required:
+        - type
+        - call_id
+        - output
+      properties:
+        type:
+          type: string
+          enum:
+            - custom_tool_call_output
+          description: The type of the custom tool call output. Always `custom_tool_call_output`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the custom tool call output in the OpenAI platform.
+        call_id:
+          type: string
+          description: The call ID, used to map this custom tool call output to a custom tool call.
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FunctionAndCustomToolCallOutput'
+          description: |-
+            The output from the custom tool call generated by your code.
+              Can be a string or an list of output content.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The output of a custom tool call from your code, being sent back to the model.
+      title: Custom tool call output
     OpenAI.ItemField:
       type: object
       required:
@@ -59119,6 +60039,591 @@ components:
         The results of a web search tool call. See the
         [web search guide](/docs/guides/tools-web-search) for more information.
       title: Web search tool call
+    OpenAI.ItemFileSearchToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - status
+        - queries
+      properties:
+        id:
+          type: string
+          description: The unique ID of the file search tool call.
+        type:
+          type: string
+          enum:
+            - file_search_call
+          description: The type of the file search tool call. Always `file_search_call`.
+          x-stainless-const: true
+        status:
+          type: string
+          enum:
+            - in_progress
+            - searching
+            - completed
+            - incomplete
+            - failed
+          description: |-
+            The status of the file search tool call. One of `in_progress`,
+              `searching`, `incomplete` or `failed`,
+        queries:
+          type: array
+          items:
+            type: string
+          description: The queries used to search for files.
+        results:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/OpenAI.FileSearchToolCallResults'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        The results of a file search tool call. See the
+        [file search guide](/docs/guides/tools-file-search) for more information.
+      title: File search tool call
+    OpenAI.ItemFunctionCallOutputItemParam:
+      type: object
+      required:
+        - call_id
+        - type
+        - output
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the function tool call generated by the model.
+        type:
+          type: string
+          enum:
+            - function_call_output
+          description: The type of the function tool call output. Always `function_call_output`.
+          x-stainless-const: true
+          default: function_call_output
+        output:
+          oneOf:
+            - type: string
+            - type: array
+              items:
+                anyOf:
+                  - $ref: '#/components/schemas/OpenAI.InputTextContentParam'
+                  - $ref: '#/components/schemas/OpenAI.InputImageContentParamAutoParam'
+                  - $ref: '#/components/schemas/OpenAI.InputFileContentParam'
+          description: Text, image, or file output of the function tool call.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The output of a function tool call.
+      title: Function tool call output
+    OpenAI.ItemFunctionShellCallItemParam:
+      type: object
+      required:
+        - call_id
+        - type
+        - action
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the shell tool call generated by the model.
+        type:
+          type: string
+          enum:
+            - shell_call
+          description: The type of the item. Always `shell_call`.
+          x-stainless-const: true
+          default: shell_call
+        action:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionShellActionParam'
+          description: The shell commands and limits that describe how to run the tool call.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
+            - type: 'null'
+        environment:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemParamEnvironment'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A tool representing a request to execute one or more shell commands.
+      title: Shell tool call
+    OpenAI.ItemFunctionShellCallOutputItemParam:
+      type: object
+      required:
+        - call_id
+        - type
+        - output
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          type: string
+          minLength: 1
+          maxLength: 64
+          description: The unique ID of the shell tool call generated by the model.
+        type:
+          type: string
+          enum:
+            - shell_call_output
+          description: The type of the item. Always `shell_call_output`.
+          x-stainless-const: true
+          default: shell_call_output
+        output:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.FunctionShellCallOutputContentParam'
+          description: Captured chunks of stdout and stderr output, along with their associated outcomes.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionShellCallItemStatus'
+            - type: 'null'
+        max_output_length:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.integer'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The streamed output items emitted by a shell tool call.
+      title: Shell tool call output
+    OpenAI.ItemFunctionToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - call_id
+        - name
+        - arguments
+      properties:
+        id:
+          type: string
+          description: The unique ID of the function tool call.
+          readOnly: true
+        type:
+          type: string
+          enum:
+            - function_call
+          description: The type of the function tool call. Always `function_call`.
+          x-stainless-const: true
+        call_id:
+          type: string
+          description: The unique ID of the function tool call generated by the model.
+        namespace:
+          type: string
+          description: The namespace of the function to run.
+        name:
+          type: string
+          description: The name of the function to run.
+        arguments:
+          type: string
+          description: A JSON string of the arguments to pass to the function.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        A tool call to run a function. See the
+        [function calling guide](/docs/guides/function-calling) for more information.
+      title: Function tool call
+    OpenAI.ItemImageGenToolCall:
+      type: object
+      required:
+        - type
+        - id
+        - status
+        - result
+      properties:
+        type:
+          type: string
+          enum:
+            - image_generation_call
+          description: The type of the image generation call. Always `image_generation_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the image generation call.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - generating
+            - failed
+          description: The status of the image generation call.
+        result:
+          anyOf:
+            - type: string
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: An image generation request made by the model.
+      title: Image generation call
+    OpenAI.ItemInputMessage:
+      type: object
+      required:
+        - type
+        - role
+        - content
+        - id
+      properties:
+        type:
+          type: string
+          enum:
+            - message
+          description: The type of the message input. Always set to `message`.
+          x-stainless-const: true
+          default: message
+        role:
+          type: string
+          enum:
+            - user
+            - system
+            - developer
+          description: The role of the message input. One of `user`, `system`, or `developer`.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+        content:
+          $ref: '#/components/schemas/OpenAI.InputMessageContentList'
+        id:
+          type: string
+          description: The unique ID of the message input.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        A message input to the model with a role indicating instruction following
+        hierarchy. Instructions given with the `developer` or `system` role take
+        precedence over instructions given with the `user` role.
+      title: Input message
+    OpenAI.ItemLocalShellToolCall:
+      type: object
+      required:
+        - type
+        - id
+        - call_id
+        - action
+        - status
+      properties:
+        type:
+          type: string
+          enum:
+            - local_shell_call
+          description: The type of the local shell call. Always `local_shell_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the local shell call.
+        call_id:
+          type: string
+          description: The unique ID of the local shell tool call generated by the model.
+        action:
+          $ref: '#/components/schemas/OpenAI.LocalShellExecAction'
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: The status of the local shell call.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A tool call to run a command on the local shell.
+      title: Local shell call
+    OpenAI.ItemLocalShellToolCallOutput:
+      type: object
+      required:
+        - type
+        - id
+        - output
+      properties:
+        type:
+          type: string
+          enum:
+            - local_shell_call_output
+          description: The type of the local shell tool call output. Always `local_shell_call_output`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the local shell tool call generated by the model.
+        output:
+          type: string
+          description: A JSON string of the output of the local shell tool call.
+        status:
+          anyOf:
+            - type: string
+              enum:
+                - in_progress
+                - completed
+                - incomplete
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: The output of a local shell tool call.
+      title: Local shell call output
+    OpenAI.ItemMcpApprovalRequest:
+      type: object
+      required:
+        - type
+        - id
+        - server_label
+        - name
+        - arguments
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp_approval_request
+          description: The type of the item. Always `mcp_approval_request`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the approval request.
+        server_label:
+          type: string
+          description: The label of the MCP server making the request.
+        name:
+          type: string
+          description: The name of the tool to run.
+        arguments:
+          type: string
+          description: A JSON string of arguments for the tool.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A request for human approval of a tool invocation.
+      title: MCP approval request
+    OpenAI.ItemMcpApprovalResponse:
+      type: object
+      required:
+        - type
+        - approval_request_id
+        - approve
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp_approval_response
+          description: The type of the item. Always `mcp_approval_response`.
+          x-stainless-const: true
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        approval_request_id:
+          type: string
+          description: The ID of the approval request being answered.
+        approve:
+          type: boolean
+          description: Whether the request was approved.
+        reason:
+          anyOf:
+            - type: string
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A response to an MCP approval request.
+      title: MCP approval response
+    OpenAI.ItemMcpListTools:
+      type: object
+      required:
+        - type
+        - id
+        - server_label
+        - tools
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp_list_tools
+          description: The type of the item. Always `mcp_list_tools`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the list.
+        server_label:
+          type: string
+          description: The label of the MCP server.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.MCPListToolsTool'
+          description: The tools available on the server.
+        error:
+          $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: A list of tools available on an MCP server.
+      title: MCP list tools
+    OpenAI.ItemMcpToolCall:
+      type: object
+      required:
+        - type
+        - id
+        - server_label
+        - name
+        - arguments
+      properties:
+        type:
+          type: string
+          enum:
+            - mcp_call
+          description: The type of the item. Always `mcp_call`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique ID of the tool call.
+        server_label:
+          type: string
+          description: The label of the MCP server running the tool.
+        name:
+          type: string
+          description: The name of the tool that was run.
+        arguments:
+          type: string
+          description: A JSON string of the arguments passed to the tool.
+        output:
+          anyOf:
+            - type: string
+            - type: 'null'
+        error:
+          type: object
+          unevaluatedProperties: {}
+        status:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.MCPToolCallStatus'
+          description: The status of the tool call. One of `in_progress`, `completed`, `incomplete`, `calling`, or `failed`.
+        approval_request_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: An invocation of a tool on an MCP server.
+      title: MCP tool call
+    OpenAI.ItemOutputMessage:
+      type: object
+      required:
+        - id
+        - type
+        - role
+        - content
+        - status
+      properties:
+        id:
+          type: string
+          description: The unique ID of the output message.
+        type:
+          type: string
+          enum:
+            - output_message
+          description: The type of the output message. Always `message`.
+          x-stainless-const: true
+        role:
+          type: string
+          enum:
+            - assistant
+          description: The role of the output message. Always `assistant`.
+          x-stainless-const: true
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.OutputMessageContent'
+          description: The content of the output message.
+        phase:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.MessagePhase'
+            - type: 'null'
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the message input. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when input items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: An output message from the model.
+      title: Output message
+    OpenAI.ItemReasoningItem:
+      type: object
+      required:
+        - type
+        - id
+        - summary
+      properties:
+        type:
+          type: string
+          enum:
+            - reasoning
+          description: The type of the object. Always `reasoning`.
+          x-stainless-const: true
+        id:
+          type: string
+          description: The unique identifier of the reasoning content.
+        encrypted_content:
+          anyOf:
+            - type: string
+            - type: 'null'
+        summary:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.SummaryTextContent'
+          description: Reasoning summary content.
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ReasoningTextContent'
+          description: Reasoning text content.
+        status:
+          type: string
+          enum:
+            - in_progress
+            - completed
+            - incomplete
+          description: |-
+            The status of the item. One of `in_progress`, `completed`, or
+              `incomplete`. Populated when items are returned via API.
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        A description of the chain of thought used by a reasoning model while generating
+        a response. Be sure to include these items in your `input` to the Responses API
+        for subsequent turns of a conversation if you are manually
+        [managing context](/docs/guides/conversation-state).
+      title: Reasoning
     OpenAI.ItemReferenceParam:
       type: object
       required:
@@ -60297,6 +61802,172 @@ components:
         The results of a web search tool call. See the
         [web search guide](/docs/guides/tools-web-search) for more information.
       title: Web search tool call
+    OpenAI.ItemToolSearchCallItemParam:
+      type: object
+      required:
+        - type
+        - arguments
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_call
+          description: The item type. Always `tool_search_call`.
+          x-stainless-const: true
+          default: tool_search_call
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        arguments:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
+          description: The arguments supplied to the tool search call.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+    OpenAI.ItemToolSearchOutputItemParam:
+      type: object
+      required:
+        - type
+        - tools
+      properties:
+        id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        call_id:
+          anyOf:
+            - type: string
+            - type: 'null'
+        type:
+          type: string
+          enum:
+            - tool_search_output
+          description: The item type. Always `tool_search_output`.
+          x-stainless-const: true
+          default: tool_search_output
+        execution:
+          allOf:
+            - $ref: '#/components/schemas/OpenAI.ToolSearchExecutionType'
+          description: Whether tool search was executed by the server or by the client.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.Tool'
+          description: The loaded tool definitions returned by the tool search output.
+        status:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.FunctionCallItemStatus'
+            - type: 'null'
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+    OpenAI.ItemType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - message
+            - output_message
+            - file_search_call
+            - computer_call
+            - computer_call_output
+            - web_search_call
+            - function_call
+            - function_call_output
+            - tool_search_call
+            - tool_search_output
+            - additional_tools
+            - reasoning
+            - compaction
+            - image_generation_call
+            - code_interpreter_call
+            - local_shell_call
+            - local_shell_call_output
+            - shell_call
+            - shell_call_output
+            - apply_patch_call
+            - apply_patch_call_output
+            - mcp_list_tools
+            - mcp_approval_request
+            - mcp_approval_response
+            - mcp_call
+            - custom_tool_call_output
+            - custom_tool_call
+            - structured_outputs
+            - oauth_consent_request
+            - memory_search_call
+            - memory_command_preview_call
+            - memory_command_preview_call_output
+            - workflow_action
+            - a2a_preview_call
+            - a2a_preview_call_output
+            - bing_grounding_call
+            - bing_grounding_call_output
+            - sharepoint_grounding_preview_call
+            - sharepoint_grounding_preview_call_output
+            - azure_ai_search_call
+            - azure_ai_search_call_output
+            - bing_custom_search_preview_call
+            - bing_custom_search_preview_call_output
+            - openapi_call
+            - openapi_call_output
+            - browser_automation_preview_call
+            - browser_automation_preview_call_output
+            - fabric_dataagent_preview_call
+            - fabric_dataagent_preview_call_output
+            - azure_function_call
+            - azure_function_call_output
+    OpenAI.ItemWebSearchToolCall:
+      type: object
+      required:
+        - id
+        - type
+        - status
+        - action
+      properties:
+        id:
+          type: string
+          description: The unique ID of the web search tool call.
+        type:
+          type: string
+          enum:
+            - web_search_call
+          description: The type of the web search tool call. Always `web_search_call`.
+          x-stainless-const: true
+        status:
+          type: string
+          enum:
+            - in_progress
+            - searching
+            - completed
+            - failed
+          description: The status of the web search tool call.
+        action:
+          oneOf:
+            - $ref: '#/components/schemas/OpenAI.WebSearchActionSearch'
+            - $ref: '#/components/schemas/OpenAI.WebSearchActionOpenPage'
+            - $ref: '#/components/schemas/OpenAI.WebSearchActionFind'
+          description: |-
+            An object describing the specific action taken in this web search call.
+              Includes details on how the model used the web (search, open_page, find_in_page).
+      allOf:
+        - $ref: '#/components/schemas/OpenAI.Item'
+      description: |-
+        The results of a web search tool call. See the
+        [web search guide](/docs/guides/tools-web-search) for more information.
+      title: Web search tool call
     OpenAI.KeyPressAction:
       type: object
       required:
@@ -60754,6 +62425,20 @@ components:
             - local_shell
           description: The type of the local shell tool. Always `local_shell`.
           x-stainless-const: true
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that allows the model to execute shell commands in a local environment.
@@ -60842,8 +62527,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url` or `connector_id` must be
-              provided.
+            The URL for the MCP server. One of `server_url`, `connector_id`, or
+              `tunnel_id` must be provided.
         connector_id:
           type: string
           enum:
@@ -60857,8 +62542,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url` or `connector_id` must be provided. Learn more about service
-              connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
+              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -60868,6 +62553,12 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
+        tunnel_id:
+          type: string
+          pattern: ^tunnel_[a-z0-9]{32}$
+          description: |-
+            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
+              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -60905,6 +62596,12 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: |-
@@ -64925,6 +66622,14 @@ components:
                 - concise
                 - detailed
             - type: 'null'
+        context:
+          anyOf:
+            - type: string
+              enum:
+                - auto
+                - current_turn
+                - all_turns
+            - type: 'null'
         generate_summary:
           anyOf:
             - type: string
@@ -65040,10 +66745,6 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
-        reasoning:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Reasoning'
-            - type: 'null'
         background:
           anyOf:
             - type: boolean
@@ -65122,6 +66823,10 @@ components:
               assuming it's an `assistant` message with the content generated by
               the model, you might consider using the `output_text` property where
               supported in SDKs.
+        reasoning:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Reasoning'
+            - type: 'null'
         instructions:
           anyOf:
             - type: string
@@ -69337,7 +71042,6 @@ components:
           fabric_iq_preview: '#/components/schemas/FabricIQPreviewTool'
           memory_search_preview: '#/components/schemas/MemorySearchPreviewTool'
           memory_search: '#/components/schemas/MemorySearchTool'
-          reminder_preview: '#/components/schemas/ReminderPreviewTool'
           code_interpreter: '#/components/schemas/OpenAI.CodeInterpreterTool'
           function: '#/components/schemas/OpenAI.FunctionTool'
           file_search: '#/components/schemas/OpenAI.FileSearchTool'
@@ -69687,7 +71391,6 @@ components:
             - fabric_dataagent_preview
             - sharepoint_grounding_preview
             - memory_search_preview
-            - reminder_preview
             - work_iq_preview
             - fabric_iq_preview
             - toolbox_search_preview
@@ -71086,6 +72789,20 @@ components:
             - high
           description: High level guidance for the amount of context window space to use for the search. One of `low`, `medium`, or `high`. `medium` is the default.
           default: medium
+        name:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        description:
+          type: string
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         custom_search_configuration:
           allOf:
             - $ref: '#/components/schemas/WebSearchConfiguration'
@@ -71267,6 +72984,12 @@ components:
           enum:
             - openapi
           description: The object type, which is always 'openapi'.
+        tool_configs:
+          type: object
+          unevaluatedProperties:
+            $ref: '#/components/schemas/ToolConfig'
+          description: Deprecated. This property is deprecated and will be removed in a future version.
+          deprecated: true
         openapi:
           allOf:
             - $ref: '#/components/schemas/OpenApiFunctionDefinition'
@@ -71361,6 +73084,9 @@ components:
           type: string
           description: Pinned agent version. Defaults to latest if omitted.
       description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationCandidate:
       type: object
       required:
@@ -71397,6 +73123,9 @@ components:
             - $ref: '#/components/schemas/PromotionInfo'
           description: Promotion metadata. Null if the candidate has not been promoted.
       description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetCriterion:
       type: object
       required:
@@ -71410,6 +73139,9 @@ components:
           type: string
           description: Criterion instruction / description.
       description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetInput:
       type: object
       required:
@@ -71425,6 +73157,9 @@ components:
           inline: '#/components/schemas/OptimizationInlineDatasetInput'
           reference: '#/components/schemas/OptimizationReferenceDatasetInput'
       description: Base discriminated model for dataset input. Either inline items or a registered reference.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetInputType:
       anyOf:
         - type: string
@@ -71433,6 +73168,9 @@ components:
             - inline
             - reference
       description: Discriminator values for the dataset input union.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationDatasetItem:
       type: object
       properties:
@@ -71454,6 +73192,9 @@ components:
             $ref: '#/components/schemas/OptimizationDatasetCriterion'
           description: Per-item evaluation criteria.
       description: A single item in an inline dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationEvaluatorRef:
       type: object
       required:
@@ -71466,6 +73207,9 @@ components:
           type: string
           description: Evaluator version. If not specified, the latest version is used.
       description: Reference to a named evaluator, optionally pinned to a version.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationInlineDatasetInput:
       type: object
       required:
@@ -71485,6 +73229,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Inline dataset — items supplied directly in the request body.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJob:
       type: object
       required:
@@ -71538,6 +73285,9 @@ components:
           description: Non-fatal warnings emitted at any point during optimization.
           readOnly: true
       description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobInputs:
       type: object
       required:
@@ -71567,6 +73317,9 @@ components:
             - $ref: '#/components/schemas/OptimizationOptions'
           description: Tuning knobs and run-mode.
       description: Caller-supplied inputs for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobListItem:
       type: object
       required:
@@ -71610,6 +73363,9 @@ components:
           description: The agent targeted by this optimization job.
           readOnly: true
       description: Slim job representation returned by the LIST endpoint.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobProgress:
       type: object
       required:
@@ -71630,6 +73386,9 @@ components:
           format: double
           description: Wall-clock time elapsed in seconds since the job began executing.
       description: In-flight progress; only populated while status is queued or in_progress.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationJobResult:
       type: object
       properties:
@@ -71645,6 +73404,9 @@ components:
             $ref: '#/components/schemas/OptimizationCandidate'
           description: All evaluated candidates including baseline.
       description: Terminal-state result body. Populated when status is succeeded or failed.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationOptions:
       type: object
       properties:
@@ -71669,6 +73431,9 @@ components:
             - $ref: '#/components/schemas/EvaluationLevel'
           description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
       description: Tuning knobs and run-mode for an optimization job.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OptimizationReferenceDatasetInput:
       type: object
       required:
@@ -71689,6 +73454,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OptimizationDatasetInput'
       description: Reference to a registered Foundry dataset.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     OtlpTelemetryEndpoint:
       type: object
       required:
@@ -72030,6 +73798,9 @@ components:
           type: string
           description: Version of the Foundry agent this candidate was promoted to.
       description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - AgentsOptimization=V2Preview
     PromptAgentDefinition:
       type: object
       required:
@@ -72125,6 +73896,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -72145,6 +73919,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     PromptEvaluationSuiteJobSource:
       type: object
       required:
@@ -72165,6 +73942,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Prompt source for evaluation suite generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -72185,6 +73965,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     ProtocolConfiguration:
       type: object
       properties:
@@ -72198,7 +73981,7 @@ components:
           description: Configuration for the responses protocol.
         a2a:
           allOf:
-            - $ref: '#/components/schemas/A2aProtocolConfiguration'
+            - $ref: '#/components/schemas/A2AProtocolConfiguration'
           description: Configuration for the A2A protocol.
         mcp:
           allOf:
@@ -72253,6 +74036,9 @@ components:
           Weekly: '#/components/schemas/WeeklyRecurrenceSchedule'
           Monthly: '#/components/schemas/MonthlyRecurrenceSchedule'
       description: Recurrence schedule model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RecurrenceTrigger:
       type: object
       required:
@@ -72286,6 +74072,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/Trigger'
       description: Recurrence based trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RecurrenceType:
       anyOf:
         - type: string
@@ -72296,6 +74085,9 @@ components:
             - Weekly
             - Monthly
       description: Recurrence type.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     RedTeam:
       type: object
       required:
@@ -72349,6 +74141,9 @@ components:
             - $ref: '#/components/schemas/RedTeamTargetConfig'
           description: Target configuration for the red-team run.
       description: Red team details.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     RedTeamEvalRunDataSource:
       type: object
       required:
@@ -72440,6 +74235,9 @@ components:
         mapping:
           AzureOpenAIModel: '#/components/schemas/AzureOpenAIModelConfiguration'
       description: Abstract class for target configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     RedTeamTaxonomyItemGenerationParams:
       type: object
       required:
@@ -72470,30 +74268,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
-    ReminderPreviewTool:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          type: string
-          enum:
-            - reminder_preview
-          description: The type of the tool. Always `reminder_preview`.
-        name:
-          type: string
-          description: Optional user-defined name for this tool or configuration.
-        description:
-          type: string
-          description: Optional user-defined description for this tool or configuration.
-      allOf:
-        - $ref: '#/components/schemas/OpenAI.Tool'
-      description: |-
-        A built-in tool that schedules the agent to re-invoke itself after a delay.
-        The model passes a single `minutes` argument (positive integer) when calling
-        this tool. The service creates a one-shot timer routine that fires after the
-        specified delay and re-invokes the agent on the same conversation thread.
-        No pre-created routine is required.
     ReminderPreviewToolboxTool:
       type: object
       required:
@@ -72555,6 +74329,9 @@ components:
             - SensitiveDataLeakage
             - TaskAdherence
       description: Risk category for the attack objective.
+      x-ms-foundry-meta:
+        required_previews:
+          - RedTeams=V1Preview
     Routine:
       type: object
       required:
@@ -72711,6 +74488,10 @@ components:
         trigger_name:
           type: string
           description: The configured trigger name that produced the routine attempt.
+        trigger_event_payload:
+          type: object
+          unevaluatedProperties: {}
+          description: The event payload captured from the event that triggered the routine attempt, when available.
         attempt_source:
           allOf:
             - $ref: '#/components/schemas/RoutineAttemptSource'
@@ -72850,6 +74631,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     SASCredentials:
       type: object
       required:
@@ -72875,6 +74659,9 @@ components:
             - EvaluationResultSample
         - type: string
       description: The type of sample used in the analysis.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     SasCredential:
       type: object
       required:
@@ -72944,6 +74731,9 @@ components:
           description: System metadata for the resource.
           readOnly: true
       description: Schedule model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleProvisioningStatus:
       anyOf:
         - type: string
@@ -72955,6 +74745,9 @@ components:
             - Succeeded
             - Failed
       description: Schedule provisioning status.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleRoutineTrigger:
       type: object
       required:
@@ -73012,6 +74805,9 @@ components:
           description: Properties of the schedule run.
           readOnly: true
       description: Schedule run model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleTask:
       type: object
       required:
@@ -73032,6 +74828,9 @@ components:
           Evaluation: '#/components/schemas/EvaluationScheduleTask'
           Insight: '#/components/schemas/InsightScheduleTask'
       description: Schedule task model.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     ScheduleTaskType:
       anyOf:
         - type: string
@@ -73040,6 +74839,9 @@ components:
             - Evaluation
             - Insight
       description: Type of the task.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     SessionDirectoryEntry:
       type: object
       required:
@@ -73246,6 +75048,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with SimpleQnA type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     SimpleQnAFineTuningQuestionType:
       anyOf:
         - type: string
@@ -73254,6 +75059,9 @@ components:
             - short_answer
             - long_answer
       description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     Skill:
       type: object
       required:
@@ -73286,6 +75094,9 @@ components:
           type: string
           description: The latest version for the skill.
       description: A skill resource.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillInlineContent:
       type: object
       required:
@@ -73317,6 +75128,9 @@ components:
             type: string
           description: List of pre-approved tools the skill may use. Experimental.
       description: Inline content for defining a simple skill without uploading files. Follows the agentskills.io SKILL.md specification.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     SkillName:
       type: string
       maxLength: 64
@@ -73354,6 +75168,9 @@ components:
             - $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (seconds) when the skill version was created.
       description: A specific version of a skill.
+      x-ms-foundry-meta:
+        required_previews:
+          - Skills=V1Preview
     Sku:
       type: object
       required:
@@ -73609,6 +75426,9 @@ components:
             type: string
           description: Additional properties for the taxonomy category.
       description: Taxonomy category definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TaxonomySubCategory:
       type: object
       required:
@@ -73634,6 +75454,9 @@ components:
             type: string
           description: Additional properties for the taxonomy sub-category.
       description: Taxonomy sub-category definition.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TelemetryConfig:
       type: object
       required:
@@ -73835,6 +75658,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     ToolboxObject:
       type: object
       required:
@@ -74077,6 +75903,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     TracesDataGenerationJobSource:
       type: object
       required:
@@ -74111,6 +75940,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     TracesEvaluationSuiteJobSource:
       type: object
       required:
@@ -74145,6 +75977,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationSuiteJobSource'
       description: Traces source for evaluation suite generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Evaluations=V1Preview
     TracesEvaluatorGenerationJobSource:
       type: object
       required:
@@ -74179,6 +76014,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Traces source for evaluator generation jobs — conversation traces from Application Insights.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     TracesPreviewEvalRunDataSource:
       type: object
       required:
@@ -74240,6 +76078,9 @@ components:
             - Degraded
         - type: string
       description: Treatment Effect Type.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - Insights=V1Preview
     Trigger:
       type: object
       required:
@@ -74256,6 +76097,9 @@ components:
           Recurrence: '#/components/schemas/RecurrenceTrigger'
           OneTime: '#/components/schemas/OneTimeTrigger'
       description: Base model for Trigger of the schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     TriggerType:
       anyOf:
         - type: string
@@ -74265,6 +76109,9 @@ components:
             - Recurrence
             - OneTime
       description: Type of the trigger.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     UpdateAgentFromManifestRequest:
       type: object
       required:
@@ -74323,10 +76170,16 @@ components:
             conditional_previews:
               - WorkflowAgents=V1Preview
               - ExternalAgents=V1Preview
+              - DraftAgents=V1Preview
         blueprint_reference:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - WorkflowAgents=V1Preview
+          - ExternalAgents=V1Preview
+          - DraftAgents=V1Preview
     UpdateEvalParametersBody:
       type: object
       properties:
@@ -74355,6 +76208,9 @@ components:
             type: string
           description: Tag dictionary. Tags can be added, removed, and updated.
       description: Request body for updating a model version. Only description and tags can be modified.
+      x-ms-foundry-meta:
+        required_previews:
+          - Models=V1Preview
     UpdateToolboxRequest:
       type: object
       required:
@@ -74537,6 +76393,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/RecurrenceSchedule'
       description: Weekly recurrence schedule.
+      x-ms-foundry-meta:
+        required_previews:
+          - Schedules=V1Preview
     WorkIQPreviewTool:
       type: object
       required:

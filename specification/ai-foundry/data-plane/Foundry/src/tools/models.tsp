@@ -18,7 +18,6 @@ namespace Azure.AI.Projects {
     fabric_dataagent_preview: "fabric_dataagent_preview",
     sharepoint_grounding_preview: "sharepoint_grounding_preview",
     memory_search_preview: "memory_search_preview",
-    reminder_preview: "reminder_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
@@ -46,6 +45,34 @@ namespace Azure.AI.Projects {
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyVariants(OpenAI.IncludeEnum, Azure.AI.Projects._AgentIncludable);
 
+  /**
+   * Deprecated name and description fields retained for SDK backward compatibility.
+   */
+  alias DeprecatedToolNameAndDescriptionExtension = {
+    /**
+     * Deprecated. This property is deprecated and will be removed in a future version.
+     */
+    #deprecated "This property is deprecated and will be removed in a future version."
+    name?: string;
+
+    /**
+     * Deprecated. This property is deprecated and will be removed in a future version.
+     */
+    #deprecated "This property is deprecated and will be removed in a future version."
+    description?: string;
+  };
+
+  /**
+   * Deprecated tool_configs field retained for SDK backward compatibility.
+   */
+  alias DeprecatedToolConfigExtension = {
+    /**
+     * Deprecated. This property is deprecated and will be removed in a future version.
+     */
+    #deprecated "This property is deprecated and will be removed in a future version."
+    tool_configs?: Record<ToolConfig>;
+  };
+
   #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
   @@copyProperties(
     OpenAI.MCPTool,
@@ -54,6 +81,8 @@ namespace Azure.AI.Projects {
        * The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
        */
       project_connection_id?: string,
+
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -61,11 +90,59 @@ namespace Azure.AI.Projects {
   @@copyProperties(
     OpenAI.WebSearchTool,
     {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+
       /**
        * The project connections attached to this tool. There can be a maximum of 1 connection
        * resource attached to the tool.
        */
       custom_search_configuration?: WebSearchConfiguration,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.CodeInterpreterTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.ImageGenTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.LocalShellToolParam,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.FunctionShellToolParam,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
+    }
+  );
+
+  #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
+  @@copyProperties(
+    OpenAI.FileSearchTool,
+    {
+      ...DeprecatedToolNameAndDescriptionExtension,
+      ...DeprecatedToolConfigExtension,
     }
   );
 
@@ -92,6 +169,9 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'bing_grounding'.
      */
     type: "bing_grounding";
+
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The bing grounding search tool parameters.
@@ -161,6 +241,9 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'azure_ai_search'.
      */
     type: "azure_ai_search";
+
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The azure ai search index resource.
@@ -251,6 +334,8 @@ namespace Azure.AI.Projects {
      */
     type: "openapi";
 
+    ...DeprecatedToolConfigExtension;
+
     /**
      * The openapi function definition.
      */
@@ -315,6 +400,8 @@ namespace Azure.AI.Projects {
      * The object type, which is always 'browser_automation'.
      */
     type: "azure_function";
+
+    ...DeprecatedToolConfigExtension;
 
     /**
      * The Azure Function Tool definition.
@@ -669,6 +756,9 @@ namespace Azure.AI.Projects {
      */
     type: "capture_structured_outputs";
 
+    ...DeprecatedToolNameAndDescriptionExtension;
+    ...DeprecatedToolConfigExtension;
+
     /**
      * The structured outputs to capture from the model.
      */
@@ -701,6 +791,12 @@ namespace Azure.AI.Projects {
      */
     project_connection_id?: string;
 
+    /**
+     * When `true`, Foundry sends its credentials when fetching the remote
+     * agent's Agent Card. The service defaults to `false` if a value is not
+     * specified by the caller (anonymous fetch).
+     */
+    send_credentials_for_agent_card?: boolean = false;
   }
 
   /**
@@ -815,26 +911,6 @@ namespace Azure.AI.Projects {
      * Time to wait before updating memories after inactivity (seconds). Default 300.
      */
     update_delay?: int32 = 300;
-  }
-
-  // ==============================================================================
-  // Reminder Preview Tool
-  // ==============================================================================
-
-  /**
-   * A built-in tool that schedules the agent to re-invoke itself after a delay.
-   * The model passes a single `minutes` argument (positive integer) when calling
-   * this tool. The service creates a one-shot timer routine that fires after the
-   * specified delay and re-invokes the agent on the same conversation thread.
-   * No pre-created routine is required.
-   */
-  model ReminderPreviewTool extends OpenAI.Tool {
-    /**
-     * The type of the tool. Always `reminder_preview`.
-     */
-    type: "reminder_preview";
-
-    ...ToolNameAndDescriptionExtension;
   }
 
   // ==============================================================================

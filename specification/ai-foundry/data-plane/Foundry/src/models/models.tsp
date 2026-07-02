@@ -4,10 +4,16 @@ import "../common/service.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const ModelsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.models_v1_preview],
+};
+
 @doc("The weight type of the model.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 union FoundryModelWeightType {
   string,
 
@@ -22,6 +28,7 @@ union FoundryModelWeightType {
 }
 
 @doc("The source type of the model.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 union FoundryModelSourceType {
   string,
 
@@ -33,6 +40,7 @@ union FoundryModelSourceType {
 }
 
 @doc("The artifact profile category.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 union FoundryModelArtifactProfileCategory {
   string,
 
@@ -47,6 +55,7 @@ union FoundryModelArtifactProfileCategory {
 }
 
 @doc("Signals detected in the model artifact.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 union FoundryModelArtifactProfileSignal {
   string,
 
@@ -67,6 +76,7 @@ union FoundryModelArtifactProfileSignal {
 }
 
 @doc("Warning code for model artifacts.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 union FoundryModelWarningCode {
   string,
 
@@ -78,6 +88,7 @@ union FoundryModelWarningCode {
 }
 
 @doc("A warning associated with a model.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model FoundryModelWarning {
   @doc("The warning code.")
   code?: FoundryModelWarningCode;
@@ -88,6 +99,7 @@ model FoundryModelWarning {
 
 @doc("Model Version Definition")
 @Rest.resource("models")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelVersion {
   @doc("URI of the model artifact in blob storage")
   blobUri: url;
@@ -129,6 +141,7 @@ model ModelVersion {
 );
 
 @doc("Source information for the model")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelSourceData {
   @doc("The source type of the model")
   sourceType?: FoundryModelSourceType;
@@ -138,6 +151,7 @@ model ModelSourceData {
 }
 
 @doc("Artifact profile of the model")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ArtifactProfile {
   @doc("The category of the artifact profile")
   category: FoundryModelArtifactProfileCategory;
@@ -147,6 +161,7 @@ model ArtifactProfile {
 }
 
 @doc("Adapter-specific metadata for LoRA models. Drives serving engine configuration at deployment time.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model LoraConfig {
   @doc("LoRA rank (r). Positive integer. Common values: 8, 16, 32, 64.")
   rank?: int32;
@@ -162,6 +177,7 @@ model LoraConfig {
 }
 
 @doc("Request body for updating a model version. Only description and tags can be modified.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model UpdateModelVersionRequest {
   @doc("The asset description text.")
   description?: string;
@@ -171,6 +187,7 @@ model UpdateModelVersionRequest {
 }
 
 @doc("Represents a request for a pending upload of a model version.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelPendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
   pendingUploadId?: string;
@@ -183,6 +200,7 @@ model ModelPendingUploadRequest {
 }
 
 @doc("Represents the response for a model pending upload request.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelPendingUploadResponse {
   @doc("Container-level read, write, list SAS.")
   blobReference: BlobReference;
@@ -198,12 +216,14 @@ model ModelPendingUploadResponse {
 }
 
 @doc("Request to fetch credentials for a model asset.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelCredentialRequest {
   @doc("Blob URI of the model asset to fetch credentials for.")
   blobUri: url;
 }
 
 @doc("Accepted response for asynchronous model version creation, with polling location.")
+@extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model CreateModelVersionAsyncResponse {
   @statusCode statusCode: 202;
 
