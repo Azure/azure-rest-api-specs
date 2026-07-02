@@ -16,7 +16,7 @@ namespace Azure.AI.Projects;
 @tag("Experiments")
 interface Experiments {
   @summary("Create an experiment")
-  @doc("Creates an experiment. For an agents_safe_rollout experiment, the service mints experiment_id and salt, write-locks the agent's version selector, and starts sticky-per-conversation routing.")
+  @doc("Creates an experiment in the 'created' state. Call the :start action to begin routing traffic.")
   @route("experiments")
   @post
   @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
@@ -55,6 +55,21 @@ interface Experiments {
       ...CursorPaginationParams;
     },
     OpenAIPage<Experiment>
+  >;
+
+  @summary("Start an experiment")
+  @doc("Starts a created experiment. The service mints experiment_id and salt, write-locks the agent's version selector, and begins sticky-per-conversation routing.")
+  @route("experiments/{experiment_id}:start")
+  @post
+  @extension("x-ms-foundry-meta", ExperimentsRequiredPreviews)
+  start is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.experiments_v1_preview,
+    {
+      @doc("The unique identifier of the experiment to start.")
+      @path
+      experiment_id: string;
+    },
+    Experiment
   >;
 
   @summary("Stop an experiment")

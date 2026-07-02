@@ -6933,7 +6933,7 @@
       "post": {
         "operationId": "Experiments_create",
         "summary": "Create an experiment",
-        "description": "Creates an experiment. For an agents_safe_rollout experiment, the service mints experiment_id and salt, write-locks the agent's version selector, and starts sticky-per-conversation routing.",
+        "description": "Creates an experiment in the 'created' state. Call the :start action to begin routing traffic.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -7207,6 +7207,69 @@
             }
           },
           "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Experiments"
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "Experiments=V1Preview"
+          ]
+        }
+      }
+    },
+    "/experiments/{experiment_id}:start": {
+      "post": {
+        "operationId": "Experiments_start",
+        "summary": "Start an experiment",
+        "description": "Starts a created experiment. The service mints experiment_id and salt, write-locks the agent's version selector, and begins sticky-per-conversation routing.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Experiments=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "experiment_id",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the experiment to start.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The experiment was started successfully.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Experiment"
+                }
+              }
+            }
+          },
+          "default": {
             "description": "Server error",
             "content": {
               "application/json": {
@@ -25387,6 +25450,7 @@
           {
             "type": "string",
             "enum": [
+              "created",
               "running",
               "stopped",
               "promoted"

@@ -30,6 +30,9 @@ union ExperimentType {
 union ExperimentState {
   string,
 
+  /** The experiment has been created but not yet started. */
+  created: "created",
+
   /** The experiment is actively routing traffic. */
   running: "running",
 
