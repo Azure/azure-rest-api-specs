@@ -556,7 +556,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/aiGatewayOperationStatuses/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{locationName}/aiGatewayOperationStatuses/{operationId}": {
       "get": {
         "operationId": "AiGatewayOperationStatus_Get",
         "description": "Returns the current status of an async operation for an AI Gateway.",
@@ -568,10 +568,22 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the location.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
           },
           {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/OperationIdParameter"
+            "name": "operationId",
+            "in": "path",
+            "description": "The ID of an ongoing async operation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80
           }
         ],
         "responses": {
@@ -586,11 +598,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get AI Gateway operation status": {
-            "$ref": "./examples/ApiManagementGetAiGatewayOperationStatus.json"
           }
         }
       }
@@ -20359,8 +20366,7 @@
             "description": "Location in which the API Management service is deployed. This is one of the Azure Regions like West US, East US, South Central US.",
             "required": true,
             "type": "string",
-            "minLength": 1,
-            "pattern": "^[-\\w\\._]+$"
+            "minLength": 1
           }
         ],
         "responses": {
