@@ -105,50 +105,22 @@ interface Backups {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom route definition for configureSourceScan action"
 @added(Versions.v2026_07_01)
+@armResourceOperations
 interface ConfigureSourceScan {
   /**
    * Configures source scan for a protected item. This is an asynchronous operation. To know the status of the
    * operation, call GetProtectedItemOperationResult API.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Async operation returns Azure-AsyncOperation and Location headers for polling"
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/configureSourceScan")
-  @post
-  @tag("ConfigureSourceScan")
-  execute(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    /** The name of the recovery services vault. */
-    @pattern("^.+$")
-    @path
-    vaultName: string,
-
-    /** The name of the backup fabric. */
-    @pattern("^.+$")
-    @path
-    fabricName: string,
-
-    /** Name of the container whose details need to be fetched. */
-    @pattern("^.+$")
-    @path
-    containerName: string,
-
-    /** Backed up item name whose details are to be fetched. */
-    @pattern("^.+$")
-    @path
-    protectedItemName: string,
-
-    /** The content of the action request */
-    @bodyRoot
-    body: ProtectedItemConfigureSourceScanRequest,
-  ):
-    | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-        ArmLroLocationHeader>
-    | ArmNoContentResponse
-    | ErrorResponse;
+  @action("configureSourceScan")
+  execute is ArmResourceActionAsync<
+    ProtectedItemResource,
+    ProtectedItemConfigureSourceScanRequest,
+    OperationStatus,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
 @armResourceOperations
