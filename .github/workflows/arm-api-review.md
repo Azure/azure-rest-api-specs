@@ -248,6 +248,17 @@ safe-outputs:
     max: 1
     footer: "if-body"
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
+  # Autonomous mode: reply to and resolve threads for agent-posted findings
+  # whose violation has been fixed in the current head SHA. Only threads
+  # carrying the `posted-by: arm-api-reviewer-agent` marker are eligible;
+  # human-authored threads are never resolved. These outputs are attributed
+  # to the workflow github-token identity and do NOT count against the
+  # 50-inline create-pull-request-review-comment budget.
+  reply-to-pull-request-review-comment:
+    max: 50
+    target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
+  resolve-pull-request-review-thread:
+    max: 50
   add-labels:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
@@ -268,6 +279,14 @@ You are an automated ARM API reviewer running in GitHub Actions. Follow the
 complete review workflow below. **Post findings immediately without waiting for
 human confirmation.** The comment format and reconciliation marker from
 `.github/copilot-review-instructions.md` apply throughout.
+
+**Review mode: autonomous.** Because this workflow runs headless in GitHub
+Actions, it operates in the **autonomous** review mode defined in the
+[Reviewer-Posted Parity contract](../skills/azure-api-review/references/reviewer-posted-parity.md#review-modes).
+There is no human gate: once findings are reconciled, act on the agreed
+finding set directly -- post net-new findings, resolve agent-posted
+findings that are now addressed, and skip duplicates. Never wait for human
+confirmation.
 
 ## Security and Scope
 
@@ -404,15 +423,34 @@ Classify every finding as `[NEW]` (introduced in this PR) or `[EXISTING]`
 ### Step 5.5: Existing Comment Reconciliation
 
 Call `get_review_comments` to fetch all existing review comments. For each
-finding you are about to post, check against existing comments:
+finding you are about to post, check against existing comments. This
+workflow runs in **autonomous mode**, so apply the Action column below
+(the reconciliation acts directly, without human confirmation):
 
-| Scenario                                                                 | Action                                             |
-| ------------------------------------------------------------------------ | -------------------------------------------------- |
-| Same finding, same location (`posted-by: arm-api-reviewer-agent` marker) | Skip — already reported                            |
-| Same finding, line shifted, agent-posted                                 | Resolve old comment, post new one at correct line  |
-| Same finding, line shifted, human-posted                                 | Reply to thread noting line shift — do NOT resolve |
-| Violation already fixed                                                  | Reply noting the fix                               |
-| No prior comment                                                         | Post the new finding                               |
+| Scenario                                                                 | Action                                                                                             |
+| ------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Same finding, same location (`posted-by: arm-api-reviewer-agent` marker) | Skip — already reported                                                                            |
+| Same finding, line shifted, agent-posted                                 | Resolve old thread, post new one at correct line                                                   |
+| Same finding, line shifted, human-posted                                 | Reply to thread noting line shift — do NOT resolve                                                 |
+| Violation already fixed, agent-posted thread                             | `reply-to-pull-request-review-comment` noting the fix **AND** `resolve-pull-request-review-thread` |
+| Violation already fixed, human-posted thread                             | Reply noting the fix — do NOT resolve (human owns the thread)                                      |
+| No prior comment                                                         | Post the new finding                                                                               |
+
+**Resolution rules (autonomous mode):**
+
+- Only resolve threads whose comments carry the
+  `posted-by: arm-api-reviewer-agent` marker. **Never** auto-resolve a
+  human-authored thread, nor an `[EXISTING]` finding the agent did not
+  originate.
+- **Partial fixes** (violation reduced but not eliminated) stay open — do
+  not resolve.
+- If a finding both moved **and** its old location was fixed, resolve the
+  stale agent thread and post fresh at the new line (avoid double-report).
+- Resolution is idempotent across re-runs: if a later push reintroduces a
+  previously-resolved violation, re-post it as a net-new finding.
+- Replies and resolutions are attributed to the workflow `github-token`
+  identity (see Required Secrets) and do **not** count against the
+  50-inline comment budget in Step 6.
 
 ### Step 6: Post Findings
 
@@ -432,7 +470,9 @@ Post each finding as a `create-pull-request-review-comment` (inline) or
 exceed 50, post the highest-severity findings inline (security and breaking
 changes first) and collect overflow findings into the summary `add-comment`
 with the note: _"N additional findings were identified but not posted inline.
-Key themes: [list]."_
+Key themes: [list]."_ Replies (`reply-to-pull-request-review-comment`) and
+thread resolutions (`resolve-pull-request-review-thread`) from Step 5.5 have
+their own budgets and do **not** consume this 50-inline budget.
 
 If more findings exist beyond a per-category cap, include that count in the
 summary comment: _"N additional warnings/suggestions were identified but not
