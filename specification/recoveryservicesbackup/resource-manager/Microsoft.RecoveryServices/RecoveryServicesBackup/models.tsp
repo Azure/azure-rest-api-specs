@@ -271,6 +271,8 @@ union SoftDeleteFeatureState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 union SourceSideScanStatus {
   string,
@@ -319,6 +321,8 @@ model ProtectedItemConfigureSourceScanRequest {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 union SourceSideScanSummary {
   string,
@@ -345,6 +349,8 @@ union SourceSideScanSummary {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 model SourceSideScanInfo {
   /**
@@ -363,6 +369,8 @@ model SourceSideScanInfo {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 union ThreatStatus {
   string,
@@ -388,6 +396,8 @@ union ThreatStatus {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 union ThreatState {
   string,
@@ -410,6 +420,8 @@ union ThreatState {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 union ThreatSeverity {
   string,
@@ -432,6 +444,8 @@ union ThreatSeverity {
  */
 @added(Versions.v2026_01_31_preview)
 @removed(Versions.v2026_02_01)
+@added(Versions.v2026_03_31_preview)
+@removed(Versions.v2026_05_01)
 @added(Versions.v2026_07_01)
 model ThreatInfo {
   /**
@@ -2440,6 +2454,8 @@ model ProtectedItem {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @added(Versions.v2026_07_01)
   sourceSideScanInfo?: SourceSideScanInfo;
 }
@@ -2473,6 +2489,8 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @added(Versions.v2026_07_01)
   threatStatus?: ThreatStatus;
 
@@ -2481,6 +2499,8 @@ model RecoveryPoint {
    */
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @added(Versions.v2026_07_01)
   @identifiers(#[])
   threatInfo?: ThreatInfo[];
