@@ -27,7 +27,22 @@ using Microsoft.Databricks;
   "python"
 );
 
-@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java");
+@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java,csharp");
+@@clientName(Workspace, "DatabricksWorkspace", "csharp");
+@@clientName(WorkspaceCustomParameters, "WorkspaceCustomProperties", "csharp");
+@@clientName(WorkspaceCustomStringParameter, "WorkspaceCustomStringParameterValue", "csharp");
+@@clientName(WorkspaceNoPublicIPBooleanParameter, "WorkspaceNoPublicIPBooleanParameterValue", "csharp");
+@@clientName(WorkspaceNoPublicIPBooleanParameter.value, "IsEnabled", "csharp");
+@@clientName(WorkspaceCustomBooleanParameter, "WorkspaceCustomBooleanParameterValue", "csharp");
+@@clientName(WorkspaceCustomBooleanParameter.value, "IsEnabled", "csharp");
+@@clientName(WorkspaceEncryptionParameter, "WorkspaceEncryptionParameterValue", "csharp");
+@@clientName(WorkspaceCustomObjectParameter, "WorkspaceCustomObjectParameterValue", "csharp");
+@@clientName(ManagedDiskEncryption.rotationToLatestKeyVersionEnabled, "IsRotationToLatestKeyVersionEnabled", "csharp");
+@@clientName(EncryptionEntitiesDefinition, "EncryptionEntities", "csharp");
+@@clientName(EnhancedSecurityComplianceDefinition, "EnhancedSecurityCompliance", "csharp");
+@@clientName(ComplianceSecurityProfileDefinition, "ComplianceSecurityProfile", "csharp");
+@@clientName(GroupIdInformation, "DatabricksPrivateLinkResource", "csharp");
+@@clientName(Workspaces.list, "GetOutboundNetworkDependenciesEndpoints", "csharp");
 @@clientName(Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
   "WorkspaceNoPublicIpBooleanParameter",
   "java"
