@@ -151,18 +151,34 @@ on:
             return;
           }
 
-          // ── 7. Draft PR guard (auto triggers only) ─────────────────────────
-          //    Explicit triggers (/arm-review command, arm-review-requested label,
-          //    workflow_dispatch) always proceed even for drafts.
+          // ── 7. Automated-trigger eligibility gates ─────────────────────────
+          //    Explicit / on-demand triggers (/arm-review command,
+          //    arm-review-requested label, workflow_dispatch) bypass these gates
+          //    and always proceed. Automated triggers (pull_request_target
+          //    opened / synchronize) only run when the PR is genuinely awaiting
+          //    ARM feedback: it must be open (not draft, closed, or merged) and
+          //    carry the 'WaitForARMFeedback' label.
           const isExplicit =
             eventName === 'workflow_dispatch' ||
             (eventName === 'pull_request_target' && payload.action === 'labeled') ||
             (eventName === 'issue_comment');
 
-          if (pr.draft && !isExplicit) {
-            core.setOutput('should_run', 'false');
-            core.notice(`PR #${prNumber} is a draft — skipping auto ARM API review. Use /arm-review to review on demand.`);
-            return;
+          if (!isExplicit) {
+            if (pr.draft) {
+              core.setOutput('should_run', 'false');
+              core.notice(`PR #${prNumber} is a draft — skipping auto ARM API review. Use /arm-review to review on demand.`);
+              return;
+            }
+            if (pr.state !== 'open' || pr.merged) {
+              core.setOutput('should_run', 'false');
+              core.notice(`PR #${prNumber} is not open (state: ${pr.state}, merged: ${pr.merged === true}) — skipping auto ARM API review.`);
+              return;
+            }
+            if (!pr.labels.some(l => l.name === 'WaitForARMFeedback')) {
+              core.setOutput('should_run', 'false');
+              core.notice(`PR #${prNumber} does not have the 'WaitForARMFeedback' label — skipping auto ARM API review. Use /arm-review to review on demand.`);
+              return;
+            }
           }
 
           // ── 8. specification/ file guard + changed-file cap (paginated) ────
@@ -334,8 +350,10 @@ The `preconditions` step in the workflow has already verified that:
 
 - The PR contains `specification/` file changes.
 - The PR does not have the `skip-arm-review` label.
-- Draft PRs are reviewed only when the trigger was explicit (`/arm-review`,
-  `arm-review-requested` label, or `workflow_dispatch`).
+- For automated triggers (`opened` / `synchronize`), the PR is open (not draft,
+  closed, or merged) **and** carries the `WaitForARMFeedback` label. On-demand
+  triggers (`/arm-review`, `arm-review-requested` label, or `workflow_dispatch`)
+  bypass these gates and run even on drafts and without the label.
 - For `/arm-review` commands, the commenter is the PR author or a repository
   collaborator.
 - The PR changes no more than `MAX_SPEC_FILES` (50) `specification/` files.

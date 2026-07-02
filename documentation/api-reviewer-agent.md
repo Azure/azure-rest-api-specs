@@ -36,13 +36,20 @@ moment they open a PR — no human reviewer needs to trigger it manually.
 
 ### When reviews run automatically
 
-| Trigger                            | Condition                                                                                  |
-| ---------------------------------- | ------------------------------------------------------------------------------------------ |
-| PR opened                          | PR is not a draft; touches `specification/**` files; does not have `skip-arm-review` label |
-| PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)     |
-| `arm-review-requested` label added | Runs even on draft PRs; ignores `skip-arm-review`                                          |
-| `/arm-review` comment              | Posted by the PR author or a repository collaborator; runs even on draft PRs               |
-| `workflow_dispatch`                | Repository maintainer triggers manually with a PR number                                   |
+| Trigger                            | Condition                                                                                                                                            |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| PR opened                          | PR is open (not draft, closed, or merged); has the `WaitForARMFeedback` label; touches `specification/**` files; does not have `skip-arm-review` label |
+| PR synchronized (new push)         | Same conditions as opened; prior in-progress run is cancelled automatically (debounce)                                                              |
+| `arm-review-requested` label added | On-demand: runs even on draft PRs and without `WaitForARMFeedback`; ignores `skip-arm-review`                                                       |
+| `/arm-review` comment              | On-demand: posted by the PR author or a repository collaborator; runs even on draft PRs and without `WaitForARMFeedback`                            |
+| `workflow_dispatch`                | On-demand: repository maintainer triggers manually with a PR number                                                                                |
+
+> **Automated vs. on-demand:** The automated triggers (`opened` /
+> `synchronize`) only run when the PR is open (not draft, closed, or merged)
+> **and** carries the `WaitForARMFeedback` label — this keeps automated reviews
+> scoped to PRs that are actually awaiting ARM feedback. The on-demand triggers
+> (`/arm-review`, `arm-review-requested` label, `workflow_dispatch`) have no
+> such restriction and run regardless of the label or draft state.
 
 > **Draft PRs converted to ready:** The `ready_for_review` event is not
 > supported by the workflow engine. If you open a PR as a draft and later mark
@@ -69,7 +76,7 @@ is silently ignored.
 | `arm-review-requested` | Explicitly requests a review run (works on drafts)       |
 | `skip-arm-review`      | Opts out of automated ARM API review for this PR         |
 | `ARMChangesRequested`  | Added by the workflow when blocking findings are found   |
-| `WaitForARMFeedback`   | Removed by the workflow when blocking findings are found |
+| `WaitForARMFeedback`   | Gates automated reviews: `opened` / `synchronize` runs only fire while this label is present. Removed by the workflow when blocking findings are found |
 
 ### Opting out
 
