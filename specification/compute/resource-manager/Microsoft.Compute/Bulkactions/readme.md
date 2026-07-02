@@ -31,7 +31,7 @@ title: ComputeBulkActionsResourceProviderClient
 ```yaml
 description: The Compute Bulk Actions Resource Provider Client
 openapi-type: arm
-tag: package-2026-07-06-preview
+tag: package-2026-06-06
 
 suppressions:
   - code: DefinitionsPropertiesNamesCamelCase

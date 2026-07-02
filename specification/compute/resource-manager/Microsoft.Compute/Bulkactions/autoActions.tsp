@@ -19,7 +19,7 @@ namespace Microsoft.Compute;
 //
 // NAMING NOTE: SA collision-renames take the `AutoActions*`
 // prefix because BulkActions already claimed
-// `ScheduledAction*` for its own shared Kronox types.
+// `ScheduledAction*` for its own shared types.
 // =====================================================================
 
 // ------------------ Shared enums ------------------
