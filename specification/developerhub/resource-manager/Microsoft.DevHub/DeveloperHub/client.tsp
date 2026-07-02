@@ -206,3 +206,4 @@ using Microsoft.DevHub;
 @@clientName(WorkflowProperties, "DevHubWorkflowProperties", "csharp");
 @@clientName(WorkflowRun, "DevHubWorkflowRun", "csharp");
 @@clientName(WorkflowRunStatus, "DevHubWorkflowRunStatus", "csharp");
+@@clientName(TagsObject, "IacProfileTagsPatch", "csharp");
