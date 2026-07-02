@@ -9,11 +9,6 @@ using Azure.ClientGenerator.Core;
   "HorizonDBPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.PrivateEndpointConnectionUpdate,
-  "HorizonDBPrivateEndpointConnectionPatch",
-  "csharp"
-);
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
 @@clientName(
   Microsoft.HorizonDb.CreateModeCluster,
@@ -187,11 +182,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionProperties,
   "HorizonDBPrivateEndpointConnectionProperties",
-  "csharp"
-);
-@@clientName(
-  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
-  "HorizonDBPrivateEndpointConnectionPatchProperties",
   "csharp"
 );
 @@clientName(
