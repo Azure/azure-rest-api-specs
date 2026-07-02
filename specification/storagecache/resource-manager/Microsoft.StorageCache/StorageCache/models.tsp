@@ -2932,8 +2932,6 @@ model ResourceSkuLocationInfo {
   /**
    * Location where this SKU is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-mutability required by LocationMustHaveXmsMutability lint rule"
-  @extension("x-ms-mutability", #["read", "create"])
   location?: string;
 
   /**
