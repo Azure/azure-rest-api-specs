@@ -15,7 +15,6 @@ const AllConditionalAgentDefinitionPreviews = #{
   ],
 };
 
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model CreateAgentVersionRequest {
   ...MetadataPropertyForRequest;
 
@@ -266,7 +265,6 @@ model RaiConfig {
 }
 
 @discriminator("kind")
-@extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model AgentDefinition {
   kind: AgentKind;
 

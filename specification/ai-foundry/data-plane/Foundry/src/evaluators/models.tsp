@@ -1,21 +1,14 @@
 import "@typespec/openapi";
-import "@typespec/versioning";
 
 import "../common/models.tsp";
-import "../common/servicepatterns.tsp";
+import "../servicepatterns.tsp";
 
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using OpenAPI;
 
 namespace Azure.AI.Projects;
 
-const EvaluatorsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
 @doc("The category of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorCategory {
   string,
 
@@ -30,7 +23,6 @@ union EvaluatorCategory {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorType {
   string,
 
@@ -42,7 +34,6 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDefinitionType {
   string,
 
@@ -61,17 +52,13 @@ union EvaluatorDefinitionType {
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 
-  @doc("Rubric-based evaluator definition. Stores dimensions (the scoring blueprint) for both quality and safety evaluators. Can be created via the generate API or manually via createVersion.")
-  rubric: "rubric",
-
-  @doc("Endpoint-based evaluator definition. References a customer-owned HTTP endpoint via a Project Connection.")
-  endpoint: "endpoint",
+  @doc("Rubric-based evaluator definition. Stores rubric criteria for both quality and safety evaluators. Can be created via the generate API or manually via createVersion.")
+  rubrics: "rubrics",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
@@ -87,7 +74,6 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
@@ -117,7 +103,6 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Prompt-based evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -126,48 +111,32 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 // ============================================================================
-// Dimensions + Rubric-based Evaluator Definition
+// Rubric Criteria + Rubric-based Evaluator Definition
 // ============================================================================
 
-@doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model Dimension {
-  @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
-  id: string;
+@doc("A single rubric criterion — one measurable quality dimension in an evaluator's scoring blueprint.")
+model RubricCriterion {
+  @doc("Stable identifier for this rubric criterion (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated catalog; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
+  rubric_id: string;
 
-  @doc("What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
+  @doc("What this criterion measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
   description: string;
 
-  @doc("Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @doc("Relative weight of this criterion (1-10). The generation pipeline assigns exactly one criterion weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
   @minValue(1)
   @maxValue(10)
   weight: int32;
 
-  @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
+  @doc("When true, the LLM judge always scores this criterion regardless of relevance (skips applicability assessment). The service-generated general quality/policy criterion has this set to true and is non-editable. Users may set this on their own custom criteria.")
   always_applicable?: boolean = false;
 }
 
-@doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Rubric-based evaluator definition — stores rubric criteria produced by the generate API. Used for both quality and safety evaluators.")
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
-  type: EvaluatorDefinitionType.rubric;
+  type: EvaluatorDefinitionType.rubrics;
 
-  @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
-  dimensions: Dimension[];
-
-  @doc("Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.")
-  @minValue(0.0)
-  @maxValue(1.0)
-  pass_threshold?: float32 = 0.5;
-}
-
-@doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
-model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
-  type: EvaluatorDefinitionType.endpoint;
-
-  @doc("Name of the Project Connection that stores the endpoint URL and credentials. The connection must exist on the project and have a non-empty target URL. Supported auth types: ApiKey (sends `api-key` header) and AAD/Entra ID (acquires a bearer token via the project's Managed Identity).")
-  @minLength(1)
-  connection_name: string;
+  @doc("Rubric criteria — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual criterion with rubric_id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same rubric structure.")
+  rubric_criteria: RubricCriterion[];
 }
 
 // ============================================================================
@@ -175,7 +144,6 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("Reference to a versioned Foundry Dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
@@ -184,25 +152,23 @@ model DatasetReference {
   version: string;
 }
 
-@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+@doc("Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. All references are read-only and resolve to versioned Foundry Datasets in a service-reserved namespace.")
 model EvaluatorGenerationArtifacts {
-  @doc("Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
-  dataset: DatasetReference;
+  @doc("Reference to the generated evaluation specification — a Markdown document describing what the evaluator measures, design decisions, and intended scope. Always present for generated evaluators.")
+  spec?: DatasetReference;
 
-  @doc("The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation).")
-  kinds: string[];
+  @doc("Reference to the tool schemas inferred during spec generation, when the generation pipeline produced them. JSONL of OpenAI tool-schema objects. Optional: absent when the generation pipeline did not produce or infer tools.")
+  tools?: DatasetReference;
+
+  @doc("Reference to the supplementary context materials used during generation (e.g., file uploads, trace samples). Optional: absent when generation used only inline prompt/agent inputs with no supplementary files.")
+  context?: DatasetReference;
 }
 
 // ============================================================================
-// Evaluator Generation Job Sources (per-context copies of shared JobSource
-// shapes — current emitters require a discriminated base per top-level union,
-// so we spread the shared `XxxJobSource` shapes into evaluator-generation-
-// specific subtypes. Same pattern as `DataGenerationJobSource`.)
+// Evaluator Generation Job Sources (follows DataGenerationJobSource pattern)
 // ============================================================================
 
 @doc("The supported source types for evaluator generation jobs.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorGenerationJobSourceType {
   string,
 
@@ -219,39 +185,36 @@ union EvaluatorGenerationJobSourceType {
   dataset: "dataset",
 }
 
-@doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
+@doc("The base source model for evaluator generation jobs.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
+
+  ...JobSourceDescription;
 }
-// Note: `JobSourceDescription` is intentionally NOT spread here. Each
-// concrete subtype already spreads its `XxxJobSource` shape from common/, and
-// each of those already spreads `JobSourceDescription`. Spreading it again on
-// the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model PromptEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model AgentEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model TracesEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
+model DatasetEvaluatorGenerationJobSource
+  extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
 
@@ -260,42 +223,24 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 // ============================================================================
 
 @doc("Caller-supplied inputs for an evaluator generation job.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationInputs {
+  @doc("Display name for this generation job.")
+  name: string;
+
   @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
+
+  @doc("Category determines the rubric generation focus: 'quality' (default) produces quality-focused rubric criteria, 'safety' produces policy-derived safety rubric criteria. Both use the same rubric structure. Singular because quality and safety generation are mutually exclusive pipelines — the output EvaluatorVersion.categories is an array (e.g., ['agents', 'quality']).")
+  category?: EvaluatorCategory = EvaluatorCategory.quality;
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
   `model`: string;
 
-  @doc("The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.")
-  @minLength(1)
-  @maxLength(256)
-  @pattern("^[A-Za-z0-9_.~-]+$")
+  @doc("The evaluator name to create or update. If an evaluator with this name already exists, the service retrieves the latest version's criteria as context for improvement.")
   evaluator_name: string;
-
-  @doc("Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.")
-  evaluator_display_name?: string;
-
-  @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
-  evaluator_description?: string;
-}
-
-@doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model EvaluatorGenerationTokenUsage {
-  @doc("Number of input (prompt) tokens consumed.")
-  input_tokens: int64;
-
-  @doc("Number of output (completion) tokens generated.")
-  output_tokens: int64;
-
-  @doc("Total tokens consumed (input + output).")
-  total_tokens: int64;
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJob
   is JobLike<EvaluatorVersion, EvaluatorGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
@@ -305,15 +250,10 @@ model EvaluatorGenerationJob
   @doc("The timestamp when the job finished, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
   finished_at?: FoundryTimestamp;
-
-  @doc("Token consumption summary. Populated when the job reaches a terminal state.")
-  @visibility(Lifecycle.Read)
-  usage?: EvaluatorGenerationTokenUsage;
 }
 
 @doc("Evaluator Definition")
 @resource("evaluators")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
@@ -327,9 +267,6 @@ model EvaluatorVersion {
 
   @doc("The categories of the evaluator")
   categories: EvaluatorCategory[];
-
-  @doc("Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).")
-  supported_evaluation_levels?: EvaluationLevel[] = #[EvaluationLevel.turn];
 
   @doc("Definition of the evaluator")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -365,7 +302,6 @@ model EvaluatorCredentialRequest {
 }
 
 @doc("Evaluator Metric")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorMetric {
   @doc("Type of the metric.")
   type?: EvaluatorMetricType;
@@ -387,7 +323,6 @@ model EvaluatorMetric {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricType {
   string,
 
@@ -402,7 +337,6 @@ union EvaluatorMetricType {
 }
 
 @doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricDirection {
   string,
 
