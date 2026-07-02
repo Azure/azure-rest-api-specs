@@ -47,3 +47,18 @@ using Microsoft.DurableTask;
 @@clientName(SchedulerProperties.ipAllowlist, "IPAllowlist", "csharp");
 @@clientName(SchedulerPropertiesUpdate.ipAllowlist, "IPAllowlist", "csharp");
 @@clientName(PublicNetworkAccess, "DurableTaskPublicNetworkAccess", "csharp");
+@@clientName(
+  PrivateEndpointConnection,
+  "DurableTaskPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  SchedulerPrivateLinkResource,
+  "DurableTaskSchedulerPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+  "DurableTaskPrivateEndpointConnectionProperties",
+  "csharp"
+);
