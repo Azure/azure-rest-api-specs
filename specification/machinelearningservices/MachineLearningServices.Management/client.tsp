@@ -724,6 +724,7 @@ using Microsoft.MachineLearningServices;
   "MachineLearningDataVersionProperties",
   "csharp"
 );
+@@clientName(DataVersionBase, "MachineLearningDataVersion", "csharp");
 @@clientName(JobBaseProperties, "MachineLearningJobProperties", "csharp");
 @@clientName(
   PartialMinimalTrackedResource,
@@ -1348,7 +1349,7 @@ using Microsoft.MachineLearningServices;
 @@clientName(OrderString, "MachineLearningOrderString", "csharp");
 @@clientName(
   OutboundRuleBasicResource,
-  "MachineLearningOutboundRuleBasicResource",
+  "MachineLearningOutboundRuleBasic",
   "csharp"
 );
 @@clientName(OutputDeliveryMode, "MachineLearningOutputDeliveryMode", "csharp");
@@ -1463,11 +1464,11 @@ using Microsoft.MachineLearningServices;
   "java"
 );
 
-@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java");
+@@clientName(PublicNetworkAccessType, "PublicNetworkAccess", "java,javascript");
 @@clientName(
   EndpointServiceConnectionStatus,
   "PrivateEndpointServiceConnectionStatus",
-  "java"
+  "java,javascript"
 );
 @@clientName(
   ListWorkspaceKeysResult.userStorageArmId,
@@ -1599,5 +1600,10 @@ using Microsoft.MachineLearningServices;
 @@clientName(
   Microsoft.MachineLearningServices,
   "AzureMachineLearningServicesManagementClient",
+  "javascript"
+);
+@@alternateType(
+  RegistryPrivateEndpointConnection.properties,
+  RegistryPrivateEndpointConnectionProperties,
   "javascript"
 );

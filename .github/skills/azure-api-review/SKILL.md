@@ -43,6 +43,7 @@ Each reference file covers one cross-cutting rule area with:
 | [linter-rule-coverage.md](references/linter-rule-coverage.md)                 | Linter rule ID → instruction file mapping (130+ rules)                                       | --                                                   |
 | [example-quality.md](references/example-quality.md)                           | Example file quality: orphan detection, coverage, descriptive values                         | EX-ORPHAN, EX-COVERAGE, EX-DESCRIPTIVE-VALUES        |
 | [design-decisions.md](references/design-decisions.md)                         | Grey-area design trade-off frameworks (10 decision matrices)                                 | DD-001–DD-010                                        |
+| [pattern-validation.md](references/pattern-validation.md)                     | Allowlist vs. denylist `pattern` constraints; Unicode bypass risk; severity matrix           | OAPI-PATTERN-ALLOWLIST                               |
 
 ## Authoritative External Sources
 

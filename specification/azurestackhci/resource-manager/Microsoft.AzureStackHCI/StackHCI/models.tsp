@@ -3742,6 +3742,12 @@ model OptionalServices {
    * The name of custom location.
    */
   customLocation?: string;
+
+  /**
+   * Captures the customer's intent to enable or disable Confidential VM (CVM) support on the AzureStackHCI Cluster.
+   */
+  @added(Versions.v2026_05_01_preview)
+  confidentialVmIntent?: ConfidentialVmIntent = ConfidentialVmIntent.Disable;
 }
 
 /**
@@ -9887,6 +9893,10 @@ model DiskReportedProperties {
   /** The manufacturer of the disk. */
   @visibility(Lifecycle.Read)
   manufacturer?: string;
+
+  /** Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring. */
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
 
   /** Serial number. */
   @visibility(Lifecycle.Read)

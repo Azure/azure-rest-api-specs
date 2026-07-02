@@ -95,10 +95,13 @@ interface DrillRuns {
   >;
 
   @route(ServiceGroupRoute)
+  @removed(Versions.v2026_06_01_preview)
+  @renamedFrom(Versions.v2026_06_01_preview, "reprotect")
+  @sharedRoute
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Reprotect operation on this Drill Run.")
-  reprotect is ArmResourceActionAsync<
+  reprotectOld is ArmResourceActionAsync<
     DrillRun,
     void,
     DrillRunActionResponse,
@@ -106,6 +109,23 @@ interface DrillRuns {
     LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  @route(ServiceGroupRoute)
+  @added(Versions.v2026_06_01_preview)
+  @sharedRoute
+  @armResourceAction(DrillRun)
+  @post
+  @doc("This initiates a new Reprotect operation on this Drill Run.")
+  reprotect is ArmResourceActionAsync<
+    DrillRun,
+    DrillRunReprotectRequest,
+    DrillRunActionResponse,
+    ServiceGroupAndRequestHeadersParameters,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader,
+    OptionalRequestBody = true
   >;
 
   @route(ServiceGroupRoute)
