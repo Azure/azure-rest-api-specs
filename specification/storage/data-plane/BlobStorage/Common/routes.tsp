@@ -844,6 +844,29 @@ interface Blob {
         ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+
+        /** The access tier of the blob. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier")
+        accessTier?: string;
+
+        /** Included if the access tier is inferred. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier-inferred")
+        accessTierInferred?: boolean;
+
+        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+        @added(Versions.v2026_10_06)
+        @encode("rfc7231")
+        @header("x-ms-access-tier-change-time")
+        accessTierChangeTime?: utcDateTime;
+
+        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-smart-access-tier")
+        smartAccessTier?: string;
+
         ...ApiVersionHeader;
       })
     | (BodyParameter & {
@@ -898,6 +921,29 @@ interface Blob {
         ...LegalHoldOptionalResponseHeader;
         ...StructuredBodyTypeResponseHeader;
         ...StructuredContentLengthResponseHeader;
+
+        /** The access tier of the blob. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier")
+        accessTier?: string;
+
+        /** Included if the access tier is inferred. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-access-tier-inferred")
+        accessTierInferred?: boolean;
+
+        /** The time the tier was changed on the blob. This is only returned if the tier on the blob was ever set. */
+        #suppress "@azure-tools/typespec-azure-core/known-encoding" "Existing API"
+        @added(Versions.v2026_10_06)
+        @encode("rfc7231")
+        @header("x-ms-access-tier-change-time")
+        accessTierChangeTime?: utcDateTime;
+
+        /** The underlying tier of a smart tier blob. Only returned if the blob is in Smart tier. */
+        @added(Versions.v2026_10_06)
+        @header("x-ms-smart-access-tier")
+        smartAccessTier?: string;
+
         ...ApiVersionHeader;
       })
     | Error;
