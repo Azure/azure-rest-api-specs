@@ -67,6 +67,11 @@ using OpenAPI;
     summary: "Agent optimization jobs",
   },
   #{
+    name: "Experiments",
+    parent: "Platform APIs",
+    summary: "Experiment lifecycle for A/B version traffic-split",
+  },
+  #{
     name: "EvaluatorGenerationJobs",
     parent: "Platform APIs",
     summary: "Evaluator generation jobs",
