@@ -2204,6 +2204,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
   /agents/{agent_name}:enable:
     post:
       operationId: Agents_enableAgent
@@ -2240,6 +2242,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agents
   /agents:import:
     post:
       operationId: Agents_createAgentFromManifest
