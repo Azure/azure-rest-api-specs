@@ -5,16 +5,19 @@ import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace OperationsAPI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_08_01)
 interface OperationResultsOperationGroup {
   /**
    * Returns operation results for long running operations.
@@ -49,6 +52,7 @@ interface OperationResultsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_08_01)
 interface OperationStatusesOperationGroup {
   /**
    * Get the status of a long running azure asynchronous operation.

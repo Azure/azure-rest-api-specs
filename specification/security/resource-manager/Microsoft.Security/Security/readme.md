@@ -182,15 +182,6 @@ suppressions:
     reason: The databaseName query parameter is required for server-level routes where the database is not part of the ARM resource ID path.
 ```
 
-### Tag: package-2026-01
-
-These settings apply only when `--tag=package-2026-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-01'
-input-file:
-  - stable/2026-01-01/privateLinks.json
-```
-
 ### Tag: package-2026-08
 
 These settings apply only when `--tag=package-2026-08` is specified on the command line.
@@ -198,6 +189,16 @@ These settings apply only when `--tag=package-2026-08` is specified on the comma
 ```yaml $(tag) == 'package-2026-08'
 input-file:
   - stable/2026-08-01/datascanners.json
+  - stable/2026-08-01/security-Operations.json
+```
+
+### Tag: package-2026-01
+
+These settings apply only when `--tag=package-2026-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01'
+input-file:
+  - stable/2026-01-01/privateLinks.json
 ```
 
 ### Tag: package-preview-2025-11-01-preview

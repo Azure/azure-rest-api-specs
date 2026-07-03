@@ -15,13 +15,7 @@ namespace DataScannersAPI;
 /**
  * Data scanner resource properties.
  */
-model DataScannerProperties {
-  /**
-   * The provisioning state of the data scanner resource.
-   */
-  @visibility(Lifecycle.Read)
-  provisioningState?: ProvisioningState;
-}
+model DataScannerProperties {}
 
 /**
  * List of data scanner resources.
@@ -31,8 +25,7 @@ model DataScannerList {
    * The list of data scanner resources.
    */
   @pageItems
-  @visibility(Lifecycle.Read)
-  value?: DataScanner[];
+  value: DataScanner[];
 
   /**
    * The URI to fetch the next page.

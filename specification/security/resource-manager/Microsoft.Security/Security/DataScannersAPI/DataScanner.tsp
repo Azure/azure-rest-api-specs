@@ -15,8 +15,9 @@ namespace DataScannersAPI;
 /**
  * The data scanner resource used by Defender for Storage to scan data for malware and sensitive data discovery.
  */
+@extensionResource
 model DataScanner
-  is Azure.ResourceManager.ProxyResource<DataScannerProperties> {
+  is Azure.ResourceManager.ExtensionResource<DataScannerProperties> {
   ...ResourceNameParameter<
     Resource = DataScanner,
     KeyName = "scannerName",
@@ -26,10 +27,16 @@ model DataScanner
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-alias DataScannerSubscriptionOps = Azure.ResourceManager.Legacy.RoutedOperations<
+alias DataScannersOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
+
+    /**
+     * The scope of the data scanner. Valid scopes are a subscription (format: 'subscriptions/{subscriptionId}') or a resource group (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}').
+     */
+    @path(#{ allowReserved: true })
+    @key
+    scopeId: string;
 
     /** The provider namespace. */
     @path
@@ -37,6 +44,7 @@ alias DataScannerSubscriptionOps = Azure.ResourceManager.Legacy.RoutedOperations
     @key
     providerNamespace: "Microsoft.Security";
   },
+  {},
   {
     /** The name of the data scanner. */
     @path
@@ -44,80 +52,39 @@ alias DataScannerSubscriptionOps = Azure.ResourceManager.Legacy.RoutedOperations
     @key
     @pattern("^[a-zA-Z0-9-]*$")
     scannerName: string;
-  },
-  CloudError
+  }
 >;
 
-alias DataScannerResourceGroupOps = Azure.ResourceManager.Legacy.RoutedOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** The provider namespace. */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Security";
-  },
-  {
-    /** The name of the data scanner. */
-    @path
-    @segment("datascanners")
-    @key
-    @pattern("^[a-zA-Z0-9-]*$")
-    scannerName: string;
-  },
-  CloudError
->;
-
-@armResourceOperations(#{ omitTags: true })
+@armResourceOperations
 interface DataScanners {
   /**
-   * Gets a data scanner resource at subscription level.
+   * Gets a data scanner resource for the specified scope.
    */
-  @tag("DataScanners")
-  get is DataScannerSubscriptionOps.Read<DataScanner>;
+  get is DataScannersOps.Read<DataScanner, ErrorType = CloudError>;
 
   /**
-   * Creates or updates a data scanner resource at subscription level.
+   * Creates or updates a data scanner resource for the specified scope.
    */
-  @tag("DataScanners")
-  createOrUpdate is DataScannerSubscriptionOps.CreateOrUpdateSync<DataScanner>;
-
-  /**
-   * Deletes a data scanner resource at subscription level.
-   */
-  @tag("DataScanners")
-  delete is DataScannerSubscriptionOps.DeleteSync<DataScanner>;
-
-  /**
-   * Lists all data scanner resources under the given subscription.
-   */
-  @tag("DataScanners")
-  list is DataScannerSubscriptionOps.List<
+  createOrUpdate is DataScannersOps.CreateOrUpdateSync<
     DataScanner,
-    Response = ArmResponse<DataScannerList>
+    ErrorType = CloudError
   >;
 
   /**
-   * Gets a data scanner resource at resource group level.
+   * Deletes a data scanner resource for the specified scope.
    */
-  @tag("DataScanners")
-  getByResourceGroup is DataScannerResourceGroupOps.Read<DataScanner>;
+  delete is DataScannersOps.DeleteSync<DataScanner, ErrorType = CloudError>;
 
   /**
-   * Creates or updates a data scanner resource at resource group level.
+   * Lists all data scanner resources for the specified scope.
    */
-  @tag("DataScanners")
-  createOrUpdateByResourceGroup is DataScannerResourceGroupOps.CreateOrUpdateSync<DataScanner>;
-
-  /**
-   * Deletes a data scanner resource at resource group level.
-   */
-  @tag("DataScanners")
-  deleteByResourceGroup is DataScannerResourceGroupOps.DeleteSync<DataScanner>;
+  list is DataScannersOps.List<
+    DataScanner,
+    Response = ArmResponse<DataScannerList>,
+    ErrorType = CloudError
+  >;
 }
 
 @@doc(DataScanner.name, "The name of the data scanner.");
 @@doc(DataScanner.properties, "Data scanner resource properties.");
+@@doc(DataScanners.createOrUpdate::parameters.resource, "The data scanner resource.");
