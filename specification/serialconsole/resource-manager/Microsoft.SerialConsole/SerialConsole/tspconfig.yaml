@@ -4,6 +4,9 @@ parameters:
 emit:
   - "@azure-tools/typespec-autorest"
 options:
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.SerialConsole"
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
