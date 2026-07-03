@@ -2444,6 +2444,13 @@ model ProtectedItem {
   softDeleteRetentionPeriodInDays?: int32;
 
   /**
+   * Source location of the protected item datasource.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
+
+  /**
    * ID of the vault which protects this item
    */
   @visibility(Lifecycle.Read)
@@ -2994,6 +3001,13 @@ model ProtectionContainer {
    * Type of the protectable object associated with this container
    */
   protectableObjectType?: string;
+
+  /**
+   * Source location of the container
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  sourceLocation?: string;
 }
 
 /**

@@ -931,6 +931,12 @@ model VaultProperties {
    * ResourceGuardOperationRequests on which LAC check will be performed
    */
   resourceGuardOperationRequests?: string[];
+
+  /**
+   * Region of choice settings for this vault.
+   */
+  @added(Versions.v2026_07_01)
+  regionOfChoiceSettings?: RegionOfChoiceSettings;
 }
 
 /**
@@ -1828,3 +1834,15 @@ model DeletedVaultUndeleteInput {
   VaultPropertiesRedundancySettings.crossRegionRestore,
   "Flag to show if Cross Region Restore is enabled on the Vault or not"
 );
+
+/**
+ * Region of choice settings at vault level.
+ * This setting allows customers to configure backups for datasources from different region.
+ */
+@added(Versions.v2026_07_01)
+model RegionOfChoiceSettings {
+  /**
+   * The status of region of choice settings - Enabled or Disabled.
+   */
+  status?: State;
+}
