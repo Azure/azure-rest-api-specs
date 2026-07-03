@@ -2,6 +2,8 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
+using Azure.ResourceManager;
 using Microsoft.Education;
 
 @@clientName(
@@ -18,3 +20,16 @@ using Microsoft.Education;
   Lifecycle.Read
 );
 @@clientLocation(redeemInvitationCode, "ManagementClient", "go");
+
+// C# management SDK customizations for the Education onboarding.
+// common-types v3 types.json models Resource.id as a plain string; map it to
+// armResourceIdentifier so generated ResourceData ctors take a ResourceIdentifier.
+@@alternateType(CommonTypes.Resource.id, armResourceIdentifier, "csharp");
+// Rename models whose names collide with reserved Azure SDK suffixes (AZC0030/AZC0033).
+@@clientName(
+  InviteCodeGenerateRequest,
+  "EducationInviteCodeGenerateContent",
+  "csharp"
+);
+@@clientName(RedeemRequest, "EducationRedeemContent", "csharp");
+@@clientName(CommonTypes.Operation, "EducationOperationInfo", "csharp");
