@@ -3,9 +3,19 @@ import "@typespec/http";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.PowerPlatform;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(PatchTrackedResource.location, azureLocation, "csharp");
+@@clientName(Account, "PowerPlatformAccount", "csharp");
+@@clientName(PatchAccount, "PowerPlatformAccountPatch", "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -27,7 +37,9 @@ op accountsCreateOrUpdate(
    */
   @body
   parameters: Account,
-): ArmResourceUpdatedResponse<Account> | ArmResourceCreatedSyncResponse<Account>;
+):
+  | ArmResourceUpdatedResponse<Account>
+  | ArmResourceCreatedSyncResponse<Account>;
 
 @@override(Accounts.createOrUpdate, accountsCreateOrUpdate);
 
@@ -111,7 +123,9 @@ op enterpriseCreateOrUpdate(
    */
   @body
   parameters: EnterprisePolicy,
-): ArmResourceUpdatedResponse<EnterprisePolicy> | ArmResourceCreatedSyncResponse<EnterprisePolicy>;
+):
+  | ArmResourceUpdatedResponse<EnterprisePolicy>
+  | ArmResourceCreatedSyncResponse<EnterprisePolicy>;
 
 @@override(EnterprisePolicies.createOrUpdate, enterpriseCreateOrUpdate);
 
