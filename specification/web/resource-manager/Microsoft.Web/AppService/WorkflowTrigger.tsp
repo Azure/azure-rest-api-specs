@@ -70,7 +70,8 @@ interface WorkflowTriggersOps
         @segment("triggers")
         @key
         triggerName: string,
-      }
+      },
+      ResourceName = "WorkflowTrigger"
     > {}
 
 @armResourceOperations
