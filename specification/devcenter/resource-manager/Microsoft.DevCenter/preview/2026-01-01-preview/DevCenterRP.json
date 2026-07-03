@@ -9039,6 +9039,69 @@
       "format": "uuid",
       "description": "Universally Unique Identifier"
     },
+    "Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "delegatedIdentityClientId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "DelegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "Delegated identity"
+          }
+        ]
+      }
+    },
     "AzureAiServicesMode": {
       "type": "string",
       "description": "Indicates whether Azure AI services are enabled for a project.",
@@ -10345,7 +10408,7 @@
       "description": "Encryption properties.",
       "properties": {
         "customerManagedKeyEncryption": {
-          "$ref": "../../../../../common-types/resource-management/v4/customermanagedkeys.json#/definitions/customerManagedKeyEncryption",
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption",
           "description": "All Customer-managed key encryption properties for the resource."
         }
       }
