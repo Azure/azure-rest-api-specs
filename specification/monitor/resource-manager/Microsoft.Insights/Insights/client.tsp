@@ -628,6 +628,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.DataSourcesSpec.performanceCountersOTel,
+  "PerformanceCountersOtel",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataFlow.captureOverflow,
   "ShouldCaptureOverflow",
   "csharp"
@@ -1396,7 +1401,7 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java,python"
+  "csharp,java,python,javascript"
 );
 
 /**
