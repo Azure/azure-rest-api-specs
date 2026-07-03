@@ -306,7 +306,9 @@ interface Agents {
   @tag("Agent Versions")
   @extension(
     "x-ms-foundry-meta",
-    #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+    #{
+      conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview],
+    }
   )
   listAgentVersions is FoundryDataPlaneOperation<
     {
@@ -314,15 +316,19 @@ interface Agents {
       @path agent_name: string;
 
       ...CommonPageQueryParameters;
-
       ...WithConditionalFoundryPreviewHeader<AgentDefinitionOptInKeys.draft_agents_v1_preview>;
 
       /** (Preview) Whether to include draft versions in the listing. The service defaults to `false` if a value is not specified by the caller (only non-draft versions are returned). */
       @extension(
         "x-ms-foundry-meta",
-        #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+        #{
+          conditional_previews: #[
+            AgentDefinitionOptInKeys.draft_agents_v1_preview
+          ],
+        }
       )
-      @query include_drafts?: boolean = false;
+      @query
+      include_drafts?: boolean = false;
     },
     AgentsPagedResult<AgentVersionObject>
   >;
@@ -421,6 +427,7 @@ interface Agents {
   @summary("Enable an agent")
   @post
   @route("/agents/{agent_name}:enable")
+  @tag("Agents")
   enableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to enable. */
@@ -437,6 +444,7 @@ interface Agents {
   @summary("Disable an agent")
   @post
   @route("/agents/{agent_name}:disable")
+  @tag("Agents")
   disableAgent is FoundryDataPlaneOperation<
     {
       /** The name of the agent to disable. */
