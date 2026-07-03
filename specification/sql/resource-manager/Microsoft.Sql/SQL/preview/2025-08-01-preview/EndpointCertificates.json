@@ -45,7 +45,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -57,6 +57,9 @@
         "x-ms-examples": {
           "Get a list of endpoint certificates.": {
             "$ref": "./examples/EndpointCertificatesListByInstance.json"
+          },
+          "Get a list of endpoint certificates with trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesListByInstanceWithTrustedRootCertificates.json"
           }
         }
       }
@@ -97,7 +100,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found",
+            "description": "*** Error Responses: ***\n\n * 400 ManagedInstanceStoppingOrStopped - Conflicting operation submitted while instance is in stopping/stopped state\n\n * 400 ManagedInstanceStarting - Conflicting operation submitted while instance is in starting state\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
@@ -106,6 +109,9 @@
         "x-ms-examples": {
           "Gets an endpoint certificate.": {
             "$ref": "./examples/EndpointCertificatesGet.json"
+          },
+          "Gets an endpoint certificate with trusted root certificates.": {
+            "$ref": "./examples/EndpointCertificatesGetWithTrustedRootCertificates.json"
           }
         }
       }
@@ -153,6 +159,28 @@
       "properties": {
         "publicBlob": {
           "description": "The certificate public blob",
+          "type": "string"
+        },
+        "trustedRootCertificates": {
+          "description": "Trusted root certificates required to validate the instance certificate",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointTrustedRootCertificateInfo"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EndpointTrustedRootCertificateInfo": {
+      "description": "Trusted root certificate required to validate the instance certificate",
+      "type": "object",
+      "properties": {
+        "subject": {
+          "description": "Root certificate subject name",
+          "type": "string"
+        },
+        "publicBlob": {
+          "description": "Root certificate public blob as DER encoded hex string",
           "type": "string"
         }
       }
