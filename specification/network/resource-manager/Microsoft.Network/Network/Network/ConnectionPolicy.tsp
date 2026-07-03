@@ -18,20 +18,10 @@ namespace Microsoft.Network;
 /**
  * ConnectionPolicy resource defined for VirtualHub.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN interface definitions"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload which suppresses systemData in the response payload, consistent with all other VirtualWAN nested resources"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ConnectionPolicy uses the local Network RP ProxyResource base type consistent with all other VirtualWAN nested resources (e.g. AzureWebCategory, BgpConnection)"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP ProxyResource is the established pattern for nested resources in this RP"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @parentResource(VirtualHub)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ConnectionPolicy extends ProxyResource {
-  /**
-   * Properties of the ConnectionPolicy resource.
-   */
-  properties?: ConnectionPolicyProperties;
-
+model ConnectionPolicy is ProxyResourceInstance<ConnectionPolicyProperties> {
   /**
    * The name of the ConnectionPolicy that is unique within a VirtualHub. This name can be used to access the resource.
    */
@@ -43,9 +33,8 @@ model ConnectionPolicy extends ProxyResource {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP VirtualWAN feature gating, consistent with all other VirtualWAN interface definitions"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface ConnectionPolicies {
   /**

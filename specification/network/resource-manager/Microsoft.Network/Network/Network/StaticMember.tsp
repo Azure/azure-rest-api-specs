@@ -16,16 +16,9 @@ namespace Microsoft.Network;
 /**
  * StaticMember Item.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @parentResource(NetworkGroup)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model StaticMember extends ChildResource {
-  properties?: StaticMemberProperties;
-
+model StaticMember is ChildResourceInstance<StaticMemberProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("staticMemberName")
@@ -39,8 +32,7 @@ model StaticMember extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations
 interface StaticMembers {
   /**

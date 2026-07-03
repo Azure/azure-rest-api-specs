@@ -16,19 +16,10 @@ namespace Microsoft.Network;
 /**
  * The NSP resource association resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.networkSecurityPerimeter)
 @parentResource(NetworkSecurityPerimeter)
-model NspAssociation extends SecurityPerimeterProxyResource {
-  /**
-   * Properties of the NSP association.
-   */
-  properties?: NspAssociationProperties;
-
+model NspAssociation
+  is SecurityPerimeterProxyResourceInstance<NspAssociationProperties> {
   /**
    * The name of the resource.
    */
@@ -42,8 +33,7 @@ model NspAssociation extends SecurityPerimeterProxyResource {
 
 @@doc(NspAssociation.name, "The name of the resource");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
+@featureFile(Features.networkSecurityPerimeter)
 @armResourceOperations(#{ omitTags: true })
 interface NspAssociations {
   /**

@@ -16,19 +16,10 @@ namespace Microsoft.Network;
 /**
  * Information about the connection monitor.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.networkWatcher)
 @parentResource(NetworkWatcher)
-model ConnectionMonitorResult extends TrackedResourceWithEtag {
-  /**
-   * Properties of the connection monitor result.
-   */
-  properties?: ConnectionMonitorResultProperties;
-
+model ConnectionMonitorResult
+  is TrackedResourceWithEtagInstance<ConnectionMonitorResultProperties> {
   /**
    * The name of the resource.
    */
@@ -39,8 +30,7 @@ model ConnectionMonitorResult extends TrackedResourceWithEtag {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkWatcher)
+@featureFile(Features.networkWatcher)
 @armResourceOperations(#{ omitTags: true })
 interface ConnectionMonitorResults {
   /**

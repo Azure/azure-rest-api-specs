@@ -132,6 +132,7 @@ import "./HubRouteTable.tsp";
 import "./RoutingIntent.tsp";
 import "./ConnectionPolicy.tsp";
 import "./WebApplicationFirewallPolicy.tsp";
+import "./customizations.tsp";
 import "./routes.tsp";
 import "./VirtualNetworkAppliance.tsp";
 import "./ServiceGateway.tsp";
@@ -148,7 +149,8 @@ using Common;
 /**
  * APIs to manage web application firewall rules.
  */
-@Azure.ResourceManager.Legacy.features(Features)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-feature-file-usage-discourage" "Approved for brownfield migration."
+@featureFiles(Features)
 @armProviderNamespace
 @service(#{ title: "WebApplicationFirewallManagement" })
 @versioned(Versions)
@@ -172,8 +174,7 @@ enum Versions {
   v2025_07_01: "2025-07-01",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+@featureFile(Features.networkingOperations)
 @armResourceOperations(#{ omitTags: true })
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<

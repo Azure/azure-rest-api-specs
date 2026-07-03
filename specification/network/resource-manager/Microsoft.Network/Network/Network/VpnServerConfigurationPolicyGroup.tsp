@@ -16,16 +16,10 @@ namespace Microsoft.Network;
 /**
  * VpnServerConfigurationPolicyGroup Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @parentResource(VpnServerConfiguration)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model VpnServerConfigurationPolicyGroup extends SubResourceModel {
-  properties?: VpnServerConfigurationPolicyGroupProperties;
-
+model VpnServerConfigurationPolicyGroup
+  is SubResourceInstance<VpnServerConfigurationPolicyGroupProperties> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
@@ -43,8 +37,7 @@ model VpnServerConfigurationPolicyGroup extends SubResourceModel {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface VpnServerConfigurationPolicyGroups {
   /**

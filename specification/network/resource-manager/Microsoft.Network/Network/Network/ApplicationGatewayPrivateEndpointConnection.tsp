@@ -16,16 +16,10 @@ namespace Microsoft.Network;
 /**
  * Private Endpoint connection on an application gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @parentResource(ApplicationGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
-  properties?: ApplicationGatewayPrivateEndpointConnectionProperties;
-
+model ApplicationGatewayPrivateEndpointConnection
+  is SubResourceInstance<ApplicationGatewayPrivateEndpointConnectionProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("connectionName")
@@ -38,8 +32,7 @@ model ApplicationGatewayPrivateEndpointConnection extends SubResourceModel {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.applicationGateway)
+@featureFile(Features.applicationGateway)
 @armResourceOperations
 interface ApplicationGatewayPrivateEndpointConnections {
   /**

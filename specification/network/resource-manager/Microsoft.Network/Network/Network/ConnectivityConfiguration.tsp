@@ -16,16 +16,10 @@ namespace Microsoft.Network;
 /**
  * The network manager connectivity configuration resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(NetworkManager)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
-model ConnectivityConfiguration extends ChildResource {
-  properties?: ConnectivityConfigurationProperties;
-
+@featureFile(Features.networkManager)
+model ConnectivityConfiguration
+  is ChildResourceInstance<ConnectivityConfigurationProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("configurationName")
@@ -39,8 +33,7 @@ model ConnectivityConfiguration extends ChildResource {
   systemData?: Azure.ResourceManager.Foundations.SystemData;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkManager)
+@featureFile(Features.networkManager)
 @armResourceOperations
 interface ConnectivityConfigurations {
   /**

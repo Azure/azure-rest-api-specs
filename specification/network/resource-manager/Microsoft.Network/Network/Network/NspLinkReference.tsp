@@ -16,19 +16,10 @@ namespace Microsoft.Network;
 /**
  * The network security perimeter linkReference resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.networkSecurityPerimeter)
 @parentResource(NetworkSecurityPerimeter)
-model NspLinkReference extends SecurityPerimeterProxyResource {
-  /**
-   * Properties of the NSP link reference.
-   */
-  properties?: NspLinkReferenceProperties;
-
+model NspLinkReference
+  is SecurityPerimeterProxyResourceInstance<NspLinkReferenceProperties> {
   /**
    * The name of the resource.
    */
@@ -42,8 +33,7 @@ model NspLinkReference extends SecurityPerimeterProxyResource {
 
 @@doc(NspLinkReference.name, "The name of the resource");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkSecurityPerimeter)
+@featureFile(Features.networkSecurityPerimeter)
 @armResourceOperations(#{ omitTags: true })
 interface NspLinkReferences {
   /**

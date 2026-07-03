@@ -16,17 +16,10 @@ namespace Microsoft.Network;
 /**
  * FirewallPolicy Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @singleton("default")
 @parentResource(FirewallPolicy)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicyDraft extends Common.Resource {
-  properties?: FirewallPolicyDraftProperties;
-
+model FirewallPolicyDraft is ResourceInstance<FirewallPolicyDraftProperties> {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @path
@@ -35,8 +28,7 @@ model FirewallPolicyDraft extends Common.Resource {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @armResourceOperations(#{ omitTags: true })
 interface FirewallPolicyDrafts {
   /**

@@ -15,16 +15,10 @@ namespace Microsoft.Network;
 /**
  * P2SVpnGateway Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model P2SVpnGateway extends TrackedResourceWithSettableIdOptionalLocation {
-  properties?: P2SVpnGatewayProperties;
-
+@featureFile(Features.virtualWAN)
+model P2SVpnGateway
+  is TrackedResourceWithSettableIdOptionalLocationInstance<P2SVpnGatewayProperties> {
   @visibility(Lifecycle.Read)
   @path
   @key("gatewayName")
@@ -56,8 +50,7 @@ alias P2SVpnGatewayOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface P2SVpnGateways {
   /**

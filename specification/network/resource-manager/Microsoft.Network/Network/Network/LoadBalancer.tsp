@@ -38,8 +38,7 @@ alias LoadBalancerLoadBalancerOps = Azure.ResourceManager.Legacy.LegacyOperation
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.loadBalancer)
+@featureFile(Features.loadBalancer)
 @armResourceOperations
 interface LoadBalancers {
   /**

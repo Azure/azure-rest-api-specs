@@ -15,15 +15,8 @@ namespace Microsoft.Network;
 /**
  * Public IP prefix resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
-model PublicIPPrefix extends Common.Resource {
-  properties?: PublicIPPrefixPropertiesFormat;
-
+@featureFile(Features.virtualNetwork)
+model PublicIPPrefix is ResourceInstance<PublicIPPrefixPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("publicIpPrefixName")
@@ -56,8 +49,7 @@ model PublicIPPrefix extends Common.Resource {
   zones?: string[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations
 interface PublicIPPrefixes {
   /**

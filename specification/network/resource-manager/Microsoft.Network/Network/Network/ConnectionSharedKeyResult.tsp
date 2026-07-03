@@ -16,17 +16,10 @@ namespace Microsoft.Network;
 /**
  * SharedKey Resource .
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @singleton("default")
 @parentResource(VpnSiteLinkConnection)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ConnectionSharedKeyResult extends SubResourceModel {
-  properties?: SharedKeyProperties;
-
+model ConnectionSharedKeyResult is SubResourceInstance<SharedKeyProperties> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
@@ -71,8 +64,7 @@ alias VpnLinkConnectionSharedKeyOps = Azure.ResourceManager.Legacy.LegacyOperati
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
+@featureFile(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
 interface ConnectionSharedKeyResults {
   /**
