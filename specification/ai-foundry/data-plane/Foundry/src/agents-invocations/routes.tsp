@@ -38,6 +38,52 @@ interface AgentInvocations {
   >;
 
   /**
+   * Retrieves the AsyncAPI (JSON) specification for an agent version's event-driven
+   * invocation contract (e.g. the `invocations_ws` WebSocket protocol). AsyncAPI is the
+   * companion to OpenAPI for streaming/bidirectional surfaces that OpenAPI cannot express.
+   * Returns 404 if the agent does not expose an AsyncAPI specification in JSON.
+   */
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.json")
+  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
+  getAgentInvocationAsyncApiSpecJson is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    } & AgentInvocationPreviewHeader,
+    {
+      @header contentType: "application/json";
+      @body spec: Record<unknown>;
+    }
+  >;
+
+  /**
+   * Retrieves the AsyncAPI (YAML) specification for an agent version's event-driven
+   * invocation contract. Companion to `getAgentInvocationAsyncApiSpecJson`; the path
+   * extension is authoritative for the returned content type (no `Accept` negotiation).
+   * Returns 404 if the agent does not expose an AsyncAPI specification in YAML.
+   */
+  @get
+  @route("/agents/{agent_name}/versions/{agent_version}/invocations/docs/asyncapi.yaml")
+  @extension("x-ms-foundry-meta", AgentInvocationRequiredPreviews)
+  getAgentInvocationAsyncApiSpecYaml is FoundryDataPlaneOperation<
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The version of the agent. */
+      @path agent_version: string;
+    } & AgentInvocationPreviewHeader,
+    {
+      @header contentType: "application/yaml";
+      @body spec: string;
+    }
+  >;
+
+  /**
    * Creates an invocation for the specified agent version.
    */
   @post
