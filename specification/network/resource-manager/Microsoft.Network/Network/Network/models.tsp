@@ -20182,7 +20182,6 @@ model IpsecPolicy {
  * Radius Server Settings.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model RadiusServer {
@@ -20622,7 +20621,6 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
  * A reference to VirtualNetworkGateway or LocalNetworkGateway resource.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model VirtualNetworkConnectionGatewayReference {
@@ -20689,7 +20687,6 @@ model GatewayCustomBgpIpAddressIpConfiguration {
 /**
  * An traffic selector policy for a virtual network gateway connection.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -20895,7 +20892,6 @@ model GatewayRoute {
  * Gateway Resiliency Information
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model GatewayResiliencyInformation {
@@ -20941,7 +20937,6 @@ model GatewayResiliencyInformation {
  * Gateway Resiliency based Recommendations
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 model ResiliencyRecommendationComponents {
@@ -20970,7 +20965,6 @@ model ResiliencyRecommendationComponents {
 /**
  * Resiliency Recommendation details
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -21009,7 +21003,6 @@ model GatewayResiliencyRecommendation {
 /**
  * Gateway Route Sets Information
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
@@ -21383,7 +21376,6 @@ model FailoverConnectionDetails {
 /**
  * Start packet capture parameters on virtual network gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)
 @Azure.ResourceManager.Legacy.feature(Features.networkGateway)

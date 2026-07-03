@@ -8611,8 +8611,13 @@ model FleetResourceProperties {
 /**
  * Represents a fleet resource for updates.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FleetResourceUpdate {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Standard ARM resource tags use Record<string>."
+  tags?: Record<string>;
+
   /**
    * Properties to update Azure Cosmos DB fleet resource.
    */

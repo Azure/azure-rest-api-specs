@@ -5418,7 +5418,6 @@ model PartnerClientAuthentication {
  * Properties of a Microsoft Entra ID Partner Client Authentication.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AzureADPartnerClientAuthenticationProperties {
   /**
    * The Microsoft Entra ID Tenant ID to get the access token that will be included as the bearer token in delivery requests.

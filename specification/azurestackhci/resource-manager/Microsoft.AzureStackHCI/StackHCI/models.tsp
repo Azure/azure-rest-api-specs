@@ -9884,6 +9884,10 @@ model DiskReportedProperties {
   @visibility(Lifecycle.Read)
   manufacturer?: string;
 
+  /** Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring. */
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
+
   /** Serial number. */
   @visibility(Lifecycle.Read)
   serialNumber?: string;

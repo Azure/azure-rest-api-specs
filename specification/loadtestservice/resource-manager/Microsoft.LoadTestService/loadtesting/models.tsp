@@ -216,7 +216,6 @@ model MaxMonthlyVirtualUserHoursResourceProperties {
 model MaxMonthlyVirtualUserHoursResource
   is ProxyResource<MaxMonthlyVirtualUserHoursResourceProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Existing API"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Singleton"
   @doc("The limit name.")
   @key("limitName")
   @path
