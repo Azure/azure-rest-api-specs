@@ -1,0 +1,69 @@
+{
+  "operationId": "ContextCacheContainers_CreateOrUpdate",
+  "title": "Create a Context Cache Container",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-06-01",
+    "contextCacheName": "testaccount",
+    "contextCacheContainerName": "gpt4-prompts",
+    "resource": {
+      "properties": {
+        "description": "Container for GPT-4 prompt caching",
+        "modelName": "gpt-4",
+        "provider": "OpenAI",
+        "timeToLive": 7
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/gpt4-prompts",
+        "name": "gpt4-prompts",
+        "type": "Microsoft.Storage/contextCaches/contextCacheContainers",
+        "properties": {
+          "description": "Container for GPT-4 prompt caching",
+          "modelName": "gpt-4",
+          "provider": "OpenAI",
+          "timeToLive": 7,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/gpt4-prompts",
+        "name": "gpt4-prompts",
+        "type": "Microsoft.Storage/contextCaches/contextCacheContainers",
+        "properties": {
+          "description": "Container for GPT-4 prompt caching",
+          "modelName": "gpt-4",
+          "provider": "OpenAI",
+          "timeToLive": 7,
+          "provisioningState": "Creating"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/locations/eastus/operations/00000000-0000-0000-0000-000000000001?api-version=2026-06-01",
+        "Retry-After": 10
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "InvalidContainerName",
+          "message": "Container name must be 3-63 characters, lowercase alphanumeric and hyphens"
+        }
+      }
+    }
+  }
+}

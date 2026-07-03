@@ -6750,3 +6750,158 @@ model StorageDataShareAsset {
    */
   displayName: string;
 }
+
+//
+// Context Cache resources (added in the 2026-06-01 API version).
+//
+
+/**
+ * The kind of context cache account, determining storage topology.
+ */
+@added(Versions.v2026_06_01)
+union AccountKind {
+  /** Single-region storage account */
+  Regional: "Regional",
+
+  /** Multi-region within a data zone */
+  DataZone: "DataZone",
+
+  /** All regions with global distribution */
+  Global: "Global",
+
+  string,
+}
+
+/**
+ * The AI provider associated with a container.
+ */
+@added(Versions.v2026_06_01)
+union AiProvider {
+  string,
+
+  /** OpenAI provider. */
+  OpenAI: "OpenAI",
+}
+
+/**
+ * The status of the current operation.
+ */
+@added(Versions.v2026_06_01)
+@Azure.Core.lroStatus
+union ContextCacheProvisioningState {
+  ResourceProvisioningState,
+
+  /** Initial provisioning in progress */
+  Creating: "Creating",
+
+  /** Update in progress */
+  Updating: "Updating",
+
+  /** Deletion in progress */
+  Deleting: "Deleting",
+
+  /** Change accepted for processing */
+  Accepted: "Accepted",
+
+  string,
+}
+
+/**
+ * Details of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheProperties {
+  /** The kind of account determining storage topology. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  accountKind: AccountKind;
+
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * Updatable properties of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCachePropertiesUpdate {
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * The type used for update operations of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The managed service identity. */
+  identity?: Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity;
+
+  /** The updatable properties of the Context Cache. */
+  properties?: ContextCachePropertiesUpdate;
+}
+
+/**
+ * Details of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerProperties {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The model name associated with this container (e.g., gpt-4, claude-3). */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  modelName: string;
+
+  /** The AI provider associated with this container. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  provider: AiProvider;
+
+  /** The Time to Live (TTL) in days between 1-30 days for this container, after which it will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32 = 1;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+}
+
+/**
+ * Updatable properties of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerPropertiesUpdate {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** Time to live in days after last access before container blobs are deleted. Must be between 1 and 30. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32;
+}
+
+/**
+ * The type used for update operations of the Context Cache Container.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerUpdate {
+  /** The updatable properties of the Context Cache Container. */
+  properties?: ContextCacheContainerPropertiesUpdate;
+}

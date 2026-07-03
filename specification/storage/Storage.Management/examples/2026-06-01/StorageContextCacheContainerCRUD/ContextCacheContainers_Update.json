@@ -1,0 +1,47 @@
+{
+  "operationId": "ContextCacheContainers_Update",
+  "title": "Update a Context Cache Container",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-06-01",
+    "contextCacheName": "testaccount",
+    "contextCacheContainerName": "gpt4-prompts",
+    "properties": {
+      "properties": {
+        "description": "Updated container for GPT-4 prompt caching",
+        "timeToLive": 14
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/gpt4-prompts",
+        "name": "gpt4-prompts",
+        "type": "Microsoft.Storage/contextCaches/contextCacheContainers",
+        "properties": {
+          "description": "Updated container for GPT-4 prompt caching",
+          "modelName": "gpt-4",
+          "provider": "OpenAI",
+          "timeToLive": 14,
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user@example.com",
+          "createdByType": "User",
+          "createdAt": "2026-01-01T00:00:00Z",
+          "lastModifiedBy": "user@example.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-01-01T00:00:00Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/gpt4-prompts?api-version=2026-06-01",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

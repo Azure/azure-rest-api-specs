@@ -1,0 +1,48 @@
+{
+  "operationId": "ContextCacheContainers_ListByContextCache",
+  "title": "List Context Cache Containers in a Context Cache",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-06-01",
+    "contextCacheName": "testaccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/gpt4-prompts",
+            "name": "gpt4-prompts",
+            "type": "Microsoft.Storage/contextCaches/contextCacheContainers",
+            "properties": {
+              "description": "Container for GPT-4 prompt caching",
+              "modelName": "gpt-4",
+              "provider": "OpenAI",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/contextCaches/testaccount/contextCacheContainers/claude3-prompts",
+            "name": "claude3-prompts",
+            "type": "Microsoft.Storage/contextCaches/contextCacheContainers",
+            "properties": {
+              "description": "Container for Claude-3 prompt caching",
+              "modelName": "claude-3",
+              "provider": "Anthropic",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "Account testaccount not found"
+        }
+      }
+    }
+  }
+}
