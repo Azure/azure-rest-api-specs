@@ -157,9 +157,9 @@ interface Responses {
    */
   @summary("Compact a conversation")
   @post
-  @operationId("compactResponseConversation")
+  @operationId("Compactconversation")
   @route("compact")
-  compactResponseConversation is OpenAIOperation<
+  Compactconversation is OpenAIOperation<
     OpenAI.CompactResponseMethodPublicBody,
     OpenAI.CompactResource
   >;
