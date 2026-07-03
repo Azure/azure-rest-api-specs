@@ -12478,6 +12478,11 @@
           "format": "int32",
           "description": "Soft delete retention period in days"
         },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the protected item datasource.",
+          "readOnly": true
+        },
         "vaultId": {
           "type": "string",
           "description": "ID of the vault which protects this item",
@@ -12708,6 +12713,11 @@
         "protectableObjectType": {
           "type": "string",
           "description": "Type of the protectable object associated with this container"
+        },
+        "sourceLocation": {
+          "type": "string",
+          "description": "Source location of the container",
+          "readOnly": true
         }
       },
       "discriminator": "containerType",
