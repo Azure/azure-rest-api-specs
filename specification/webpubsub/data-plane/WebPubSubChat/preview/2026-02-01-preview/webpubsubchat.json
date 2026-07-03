@@ -59,7 +59,7 @@
   "paths": {
     "/api/hubs/{hub}/chat/conversations/{conversationId}": {
       "get": {
-        "operationId": "WebPubSubChatService_GetConversation",
+        "operationId": "WebPubSubChatServiceClient_GetConversation",
         "tags": [
           "chat"
         ],
@@ -111,15 +111,15 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_GetConversation": {
-            "$ref": "./examples/WebPubSubChatService_GetConversation.json"
+          "GetConversation": {
+            "$ref": "./examples/GetConversation.json"
           }
         }
       }
     },
     "/api/hubs/{hub}/chat/conversations/{conversationId}/messages": {
       "get": {
-        "operationId": "WebPubSubChatService_ListMessages",
+        "operationId": "WebPubSubChatServiceClient_ListMessages",
         "tags": [
           "chat"
         ],
@@ -194,8 +194,8 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_ListMessages": {
-            "$ref": "./examples/WebPubSubChatService_ListMessages.json"
+          "ListMessages": {
+            "$ref": "./examples/ListMessages.json"
           }
         },
         "x-ms-pageable": {
@@ -205,7 +205,7 @@
     },
     "/api/hubs/{hub}/chat/conversations/{conversationId}/messages/{messageId}": {
       "patch": {
-        "operationId": "WebPubSubChatService_UpdateMessage",
+        "operationId": "WebPubSubChatServiceClient_UpdateMessage",
         "tags": [
           "chat"
         ],
@@ -249,16 +249,10 @@
             "pattern": "^\\d+$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
             "name": "resource",
@@ -297,13 +291,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_UpdateMessage": {
-            "$ref": "./examples/WebPubSubChatService_UpdateMessage.json"
+          "UpdateMessage": {
+            "$ref": "./examples/UpdateMessage.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSubChatService_DeleteMessage",
+        "operationId": "WebPubSubChatServiceClient_DeleteMessage",
         "tags": [
           "chat"
         ],
@@ -344,16 +338,10 @@
             "pattern": "^\\d+$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           }
         ],
         "responses": {
@@ -374,15 +362,15 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_DeleteMessage": {
-            "$ref": "./examples/WebPubSubChatService_DeleteMessage.json"
+          "DeleteMessage": {
+            "$ref": "./examples/DeleteMessage.json"
           }
         }
       }
     },
     "/api/hubs/{hub}/chat/roles": {
       "get": {
-        "operationId": "WebPubSubChatService_ListRoles",
+        "operationId": "WebPubSubChatServiceClient_ListRoles",
         "tags": [
           "chat"
         ],
@@ -435,8 +423,8 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_ListRoles": {
-            "$ref": "./examples/WebPubSubChatService_ListRoles.json"
+          "ListRoles": {
+            "$ref": "./examples/ListRoles.json"
           }
         },
         "x-ms-pageable": {
@@ -446,7 +434,7 @@
     },
     "/api/hubs/{hub}/chat/roles/{roleName}": {
       "get": {
-        "operationId": "WebPubSubChatService_GetRole",
+        "operationId": "WebPubSubChatServiceClient_GetRole",
         "tags": [
           "chat"
         ],
@@ -498,13 +486,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_GetRole": {
-            "$ref": "./examples/WebPubSubChatService_GetRole.json"
+          "GetRole": {
+            "$ref": "./examples/GetRole.json"
           }
         }
       },
       "put": {
-        "operationId": "WebPubSubChatService_CreateOrReplaceRole",
+        "operationId": "WebPubSubChatServiceClient_CreateOrReplaceRole",
         "tags": [
           "chat"
         ],
@@ -535,16 +523,10 @@
             "pattern": "^(?:room|user)\\.[a-z0-9_-]{1,59}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
             "name": "resource",
@@ -595,13 +577,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_CreateOrReplaceRole": {
-            "$ref": "./examples/WebPubSubChatService_CreateOrReplaceRole.json"
+          "CreateOrReplaceRole": {
+            "$ref": "./examples/CreateOrReplaceRole.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSubChatService_DeleteRole",
+        "operationId": "WebPubSubChatServiceClient_DeleteRole",
         "tags": [
           "chat"
         ],
@@ -632,16 +614,10 @@
             "pattern": "^(?:room|user)\\.[a-z0-9_-]{1,59}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           }
         ],
         "responses": {
@@ -662,15 +638,15 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_DeleteRole": {
-            "$ref": "./examples/WebPubSubChatService_DeleteRole.json"
+          "DeleteRole": {
+            "$ref": "./examples/DeleteRole.json"
           }
         }
       }
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}": {
       "get": {
-        "operationId": "WebPubSubChatService_GetRoom",
+        "operationId": "WebPubSubChatServiceClient_GetRoom",
         "tags": [
           "chat"
         ],
@@ -722,13 +698,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_GetRoom": {
-            "$ref": "./examples/WebPubSubChatService_GetRoom.json"
+          "GetRoom": {
+            "$ref": "./examples/GetRoom.json"
           }
         }
       },
       "put": {
-        "operationId": "WebPubSubChatService_CreateOrReplaceRoom",
+        "operationId": "WebPubSubChatServiceClient_CreateOrReplaceRoom",
         "tags": [
           "chat"
         ],
@@ -759,16 +735,10 @@
             "pattern": "^[A-Za-z0-9_-]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
             "name": "resource",
@@ -819,13 +789,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_CreateOrReplaceRoom": {
-            "$ref": "./examples/WebPubSubChatService_CreateOrReplaceRoom.json"
+          "CreateOrReplaceRoom": {
+            "$ref": "./examples/CreateOrReplaceRoom.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSubChatService_DeleteRoom",
+        "operationId": "WebPubSubChatServiceClient_DeleteRoom",
         "tags": [
           "chat"
         ],
@@ -856,16 +826,10 @@
             "pattern": "^[A-Za-z0-9_-]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           }
         ],
         "responses": {
@@ -886,15 +850,15 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_DeleteRoom": {
-            "$ref": "./examples/WebPubSubChatService_DeleteRoom.json"
+          "DeleteRoom": {
+            "$ref": "./examples/DeleteRoom.json"
           }
         }
       }
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}/members": {
       "get": {
-        "operationId": "WebPubSubChatService_ListRoomMembers",
+        "operationId": "WebPubSubChatServiceClient_ListRoomMembers",
         "tags": [
           "chat"
         ],
@@ -957,8 +921,8 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_ListRoomMembers": {
-            "$ref": "./examples/WebPubSubChatService_ListRoomMembers.json"
+          "ListRoomMembers": {
+            "$ref": "./examples/ListRoomMembers.json"
           }
         },
         "x-ms-pageable": {
@@ -968,7 +932,7 @@
     },
     "/api/hubs/{hub}/chat/rooms/{roomId}/members/{userId}": {
       "put": {
-        "operationId": "WebPubSubChatService_CreateOrReplaceRoomMember",
+        "operationId": "WebPubSubChatServiceClient_CreateOrReplaceRoomMember",
         "tags": [
           "chat"
         ],
@@ -1009,16 +973,10 @@
             "pattern": "^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
             "name": "resource",
@@ -1069,13 +1027,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_CreateOrReplaceRoomMember": {
-            "$ref": "./examples/WebPubSubChatService_CreateOrReplaceRoomMember.json"
+          "CreateOrReplaceRoomMember": {
+            "$ref": "./examples/CreateOrReplaceRoomMember.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSubChatService_DeleteRoomMember",
+        "operationId": "WebPubSubChatServiceClient_DeleteRoomMember",
         "tags": [
           "chat"
         ],
@@ -1116,16 +1074,10 @@
             "pattern": "^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           }
         ],
         "responses": {
@@ -1146,15 +1098,15 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_DeleteRoomMember": {
-            "$ref": "./examples/WebPubSubChatService_DeleteRoomMember.json"
+          "DeleteRoomMember": {
+            "$ref": "./examples/DeleteRoomMember.json"
           }
         }
       }
     },
     "/api/hubs/{hub}/chat/users/{userId}": {
       "get": {
-        "operationId": "WebPubSubChatService_GetUser",
+        "operationId": "WebPubSubChatServiceClient_GetUser",
         "tags": [
           "chat"
         ],
@@ -1206,13 +1158,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_GetUser": {
-            "$ref": "./examples/WebPubSubChatService_GetUser.json"
+          "GetUser": {
+            "$ref": "./examples/GetUser.json"
           }
         }
       },
       "put": {
-        "operationId": "WebPubSubChatService_CreateOrReplaceUser",
+        "operationId": "WebPubSubChatServiceClient_CreateOrReplaceUser",
         "tags": [
           "chat"
         ],
@@ -1243,16 +1195,10 @@
             "pattern": "^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           },
           {
             "name": "resource",
@@ -1303,13 +1249,13 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_CreateOrReplaceUser": {
-            "$ref": "./examples/WebPubSubChatService_CreateOrReplaceUser.json"
+          "CreateOrReplaceUser": {
+            "$ref": "./examples/CreateOrReplaceUser.json"
           }
         }
       },
       "delete": {
-        "operationId": "WebPubSubChatService_DeleteUser",
+        "operationId": "WebPubSubChatServiceClient_DeleteUser",
         "tags": [
           "chat"
         ],
@@ -1340,16 +1286,10 @@
             "pattern": "^[^\\p{Cc}\\/\\\\#\\?:;]{1,64}$"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifMatch"
           },
           {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
+            "$ref": "#/parameters/EtagConditionalRequestHeaders.ifNoneMatch"
           }
         ],
         "responses": {
@@ -1370,14 +1310,18 @@
           }
         },
         "x-ms-examples": {
-          "WebPubSubChatService_DeleteUser": {
-            "$ref": "./examples/WebPubSubChatService_DeleteUser.json"
+          "DeleteUser": {
+            "$ref": "./examples/DeleteUser.json"
           }
         }
       }
     }
   },
   "definitions": {
+    "Azure.Core.EtagResponseEnvelope": {
+      "type": "object",
+      "description": "Provides the 'ETag' header to enable conditional (cached) requests"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "description": "The error object.",
@@ -1681,6 +1625,10 @@
         ]
       }
     },
+    "EtagConditionalRequestHeaders": {
+      "type": "object",
+      "description": "Conditional request headers supported by the service."
+    },
     "Hub": {
       "type": "object",
       "description": "Represents a hub (virtual parent resource for URL routing).",
@@ -1797,47 +1745,36 @@
       "required": [
         "value"
       ]
+    },
+    "SupportsEtagConditionalRequests": {
+      "type": "object",
+      "description": "Provides ETag conditional request headers and ETag response headers.",
+      "properties": {
+        "conditionalRequests": {
+          "type": "object",
+          "description": "ETag conditional request and response headers.",
+          "properties": {
+            "parameters": {
+              "$ref": "#/definitions/EtagConditionalRequestHeaders",
+              "description": "ETag conditional request headers."
+            },
+            "response": {
+              "$ref": "#/definitions/Azure.Core.EtagResponseEnvelope",
+              "description": "ETag response headers."
+            }
+          },
+          "required": [
+            "parameters",
+            "response"
+          ]
+        }
+      },
+      "required": [
+        "conditionalRequests"
+      ]
     }
   },
   "parameters": {
-    "Azure.Core.ConditionalRequestHeaders.ifMatch": {
-      "name": "If-Match",
-      "in": "header",
-      "description": "The request should only proceed if an entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
-      "name": "If-Modified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifModifiedSince"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
-      "name": "If-None-Match",
-      "in": "header",
-      "description": "The request should only proceed if no entity matches this string.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifNoneMatch"
-    },
-    "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
-      "name": "If-Unmodified-Since",
-      "in": "header",
-      "description": "The request should only proceed if the entity was not modified after this time.",
-      "required": false,
-      "type": "string",
-      "format": "date-time",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "ifUnmodifiedSince"
-    },
     "Azure.Core.Foundations.ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -1856,6 +1793,24 @@
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
+    },
+    "EtagConditionalRequestHeaders.ifMatch": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The request should only proceed if an entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    },
+    "EtagConditionalRequestHeaders.ifNoneMatch": {
+      "name": "If-None-Match",
+      "in": "header",
+      "description": "The request should only proceed if no entity matches this string.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifNoneMatch"
     }
   }
 }

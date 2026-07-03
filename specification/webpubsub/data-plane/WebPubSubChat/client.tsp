@@ -12,10 +12,15 @@ model WebPubSubChatServiceClientOptions {
   hub: string;
 }
 
-@@clientName(WebPubSubChat.Chat, "WebPubSubChatService");
+@client({
+  name: "WebPubSubChatServiceClient",
+  service: WebPubSubChat,
+})
+interface WebPubSubChatServiceClient
+  extends WebPubSubChat.WebPubSubChatServiceClient {}
 
 @@clientInitialization(
-  WebPubSubChat.Chat,
+  WebPubSubChatServiceClient,
   {
     parameters: WebPubSubChatServiceClientOptions,
   }
