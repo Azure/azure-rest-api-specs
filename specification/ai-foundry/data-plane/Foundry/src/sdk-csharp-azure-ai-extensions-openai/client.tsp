@@ -380,7 +380,7 @@ namespace Azure.AI.Projects {
     "OpenApiProjectConnectionSecurityScheme",
     "!autorest"
   );
-  @@usage(ReminderPreviewTool, Usage.input | Usage.output);
+
   @@usage(SharepointPreviewTool, Usage.input | Usage.output);
   @@clientName(
     SharepointPreviewTool.sharepoint_grounding_preview,
