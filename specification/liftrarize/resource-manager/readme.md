@@ -1,7 +1,7 @@
-# ArizeAi service
+# LiftrBasic.SampleRP RP
 
 > see https://aka.ms/autorest
-> This is the AutoRest configuration file for ArizeAi service.
+> This is the AutoRest configuration file for LiftrBasic.SampleRP RP.
 
 ## Configuration
 
