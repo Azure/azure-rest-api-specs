@@ -26,3 +26,26 @@ using Microsoft.AAD;
 // the whole namespace to `_DomainServices`. Rename the operation group for C# to
 // avoid the collision (the class is internal, so this has no public API impact).
 @@clientName(DomainServices, "DomainServiceOperationGroup", "csharp");
+
+// Use the ARM ETag type instead of a plain string for resource etags.
+@@alternateType(DomainService.etag, Azure.Core.eTag, "csharp");
+@@alternateType(OuContainer.etag, Azure.Core.eTag, "csharp");
+
+// These `location` properties are Azure regions; use AzureLocation instead of string.
+@@alternateType(DomainService.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(OuContainer.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(ReplicaSet.location, Azure.Core.azureLocation, "csharp");
+
+// .NET guideline: DateTimeOffset properties should end with `On`/`At`.
+@@clientName(ConfigDiagnostics.lastExecuted, "lastExecutedOn", "csharp");
+@@clientName(HealthAlert.lastDetected, "lastDetectedOn", "csharp");
+@@clientName(HealthAlert.raised, "raisedOn", "csharp");
+@@clientName(
+  LdapsSettings.certificateNotAfter,
+  "certificateNotAfterOn",
+  "csharp"
+);
+@@clientName(ReplicaSet.healthLastEvaluated, "healthLastEvaluatedOn", "csharp");
+
+// `Status` is a generic name in IntelliSense; it is the diagnostics validator status.
+@@clientName(Status, "DomainServiceValidatorStatus", "csharp");
