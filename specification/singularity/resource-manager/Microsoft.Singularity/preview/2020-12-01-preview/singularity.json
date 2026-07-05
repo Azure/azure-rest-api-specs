@@ -1,0 +1,5640 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SingularityManagementClient",
+    "version": "2020-12-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/accountQuotaPolicies/{policyName}": {
+      "put": {
+        "tags": [
+          "AccountQuotaPolicyResource"
+        ],
+        "summary": "Creates or updates an account quota policy resource.",
+        "description": "Creates an account resource with the specified name, description and properties. If an account resource with the same name exists, then it is updated with the specified description and properties. Currently the only supported policy name is 'AccountQuotaPolicy' ",
+        "operationId": "AccountQuotaPolicy_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity AccountQuotaPolicy information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccountQuotaPolicyCreateOrUpdate": {
+            "$ref": "./examples/accounts/accountQuotaPolicies/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AccountQuotaPolicyResource"
+        ],
+        "summary": "Updates an account quota policy resource.",
+        "description": "If an account resource with the same name exists, then it is updated with the specified description and properties. Currently the only supported policy name is 'AccountQuotaPolicy' ",
+        "operationId": "AccountQuotaPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity AccountQuotaPolicy information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourcePatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccountQuotaPolicyUpdate": {
+            "$ref": "./examples/accounts/accountQuotaPolicies/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountQuotaPolicyResource"
+        ],
+        "summary": "Gets the account quota policy resource with the given name.",
+        "description": "Gets the information about the account quota policy resource with the given name. The information include the description and other properties of the account quota policy.",
+        "operationId": "AccountQuotaPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountQuotaPolicyGet": {
+            "$ref": "./examples/accounts/accountQuotaPolicies/get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/accountQuotaPolicies": {
+      "get": {
+        "tags": [
+          "AccountQuotaPolicyResource"
+        ],
+        "summary": "Gets all the account quota policy resources in a given account.",
+        "description": "Gets the information about all account quota policy resources in a given account. The information include the description and other properties of the account quota policy.",
+        "operationId": "AccountQuotaPolicy_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountQuotaPolicyResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccountQuotaPolicyListByAccount": {
+            "$ref": "./examples/accounts/accountQuotaPolicies/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}": {
+      "put": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Creates or updates an account resource.",
+        "description": "Creates an account resource with the specified name, description and properties. If an account resource with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "Account_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity account information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccountCreateOrUpdate": {
+            "$ref": "./examples/accounts/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Updates an account resource.",
+        "description": "If an account resource with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "Account_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity account information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AccountResourcePatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccountUpdate": {
+            "$ref": "./examples/accounts/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Gets the account resource with the given name.",
+        "description": "Gets the information about the account resource with the given name. The information include the description and other properties of the account.",
+        "operationId": "Account_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AccountGet": {
+            "$ref": "./examples/accounts/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Deletes the account resource.",
+        "description": "Deletes the account resource identified by the name.",
+        "operationId": "Account_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "AccountDelete": {
+            "$ref": "./examples/accounts/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts": {
+      "get": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Gets all the account resources in a given resource group.",
+        "description": "Gets the information about all account resources in a given resource group. The information include the description and other properties of the Account.",
+        "operationId": "Account_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccountListByResourceGroup": {
+            "$ref": "./examples/accounts/listbyresourcegroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Singularity/accounts": {
+      "get": {
+        "tags": [
+          "AccountResource"
+        ],
+        "summary": "Gets all the account resources in a given subscription.",
+        "description": "Gets the information about all account resources in a given subscription. The information include the description and other properties of the account.",
+        "operationId": "Account_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AccountResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AccountListBySubscription": {
+            "$ref": "./examples/accounts/listbysubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/groupPolicies/{policyName}": {
+      "put": {
+        "tags": [
+          "GroupPolicyResource"
+        ],
+        "summary": "Creates or updates a group policy resource.",
+        "description": "Creates a group policy resource with the specified name, description and properties. If a resource with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "GroupPolicy_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity group policy quota limit information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "GroupPolicyCreateOrUpdate": {
+            "$ref": "./examples/accounts/groupPolicies/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "GroupPolicyResource"
+        ],
+        "summary": "Updates a group policy resource.",
+        "description": "If a resource with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "GroupPolicy_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity group policy quota limit information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourcePatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "GroupPolicyUpdate": {
+            "$ref": "./examples/accounts/groupPolicies/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "GroupPolicyResource"
+        ],
+        "summary": "Gets a group policy resource.",
+        "description": "Get a group policy resource with the specified name. The information include the description and other properties of the resource.",
+        "operationId": "GroupPolicy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GroupPolicyGet": {
+            "$ref": "./examples/accounts/groupPolicies/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "GroupPolicyResource"
+        ],
+        "summary": "Deletes a group policy resource.",
+        "description": "Deletes a group policy resource with the specified name.",
+        "operationId": "GroupPolicy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/policyNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "GroupPolicyDelete": {
+            "$ref": "./examples/accounts/groupPolicies/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/groupPolicies": {
+      "get": {
+        "tags": [
+          "GroupPolicyResource"
+        ],
+        "summary": "Lists all group policy resources in an account.",
+        "description": "Get all group policy resources in an account. The information include the description and other properties of the resource.",
+        "operationId": "GroupPolicy_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GroupPolicyResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GroupPolicyListByAccount": {
+            "$ref": "./examples/accounts/groupPolicies/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Singularity/images": {
+      "get": {
+        "tags": [
+          "Images"
+        ],
+        "summary": "List available Singularity container images.",
+        "description": "List all the available Singularity container images.",
+        "operationId": "Images_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailablePlatformImageDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImagesList": {
+            "$ref": "./examples/list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Singularity/locations/{location}/instanceTypeSeries": {
+      "get": {
+        "tags": [
+          "InstanceTypeSeries"
+        ],
+        "summary": "List available Singularity instance type series.",
+        "description": "List all the available instance type series for the location.",
+        "operationId": "InstanceTypeSeries_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/locationRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailableInstanceTypeSeriesDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InstanceTypeSeriesList": {
+            "$ref": "./examples/instancetypeseries/list.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Singularity/locations/{location}/instanceTypeSeries/{instanceTypeSeriesId}/instanceTypes": {
+      "get": {
+        "tags": [
+          "InstanceTypeSeries"
+        ],
+        "summary": "List available Singularity instance types.",
+        "description": "List all the available instance types for the instance type series.",
+        "operationId": "InstanceTypeSeries_ListInstanceType",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/locationRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/instanceTypeSeriesIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AvailableInstanceTypeDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "InstanceTypeSeriesListInstanceType": {
+            "$ref": "./examples/instancetypeseries/listinstancetype.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}": {
+      "put": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Creates or updates a job resource.",
+        "description": "Creates a job resource with the specified name, description and properties. If a job with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "Job_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity job information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobCreateOrUpdate": {
+            "$ref": "./examples/accounts/jobs/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Updates a job resource.",
+        "description": "Updates a job resource with the specified properties. If a job with the same name exists, then it is updated with the specified properties. If a job doesn't exist, then a no-content exception will be thrown",
+        "operationId": "Job_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity job information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobResourcePatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobUpdate": {
+            "$ref": "./examples/accounts/jobs/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Gets the job resource with the given name.",
+        "description": "Gets the information about the job resource with the given name. The information include the description and other properties of the job.",
+        "operationId": "Job_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobGet": {
+            "$ref": "./examples/accounts/jobs/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Deletes the job resource.",
+        "description": "Deletes the job resource identified by the name.",
+        "operationId": "Job_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobDelete": {
+            "$ref": "./examples/accounts/jobs/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/approve": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Admin Quota approval for Job.",
+        "description": "This action can be used by the account admin to approve a job manually, which is otherwise blocked by insufficient user-level quota (represented by Group Policy).",
+        "operationId": "Job_Approve",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobUserActionDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobApprove": {
+            "$ref": "./examples/accounts/jobs/approve.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/createsastoken": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Creates SAS token to access job resource.",
+        "description": "Creates a Shared Access Signature (SAS) token, that can be used for accessing job resource with the protocol specified in the description.",
+        "operationId": "Job_CreateSasToken",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity job Shared Access Signature (SAS) token information.",
+            "schema": {
+              "$ref": "#/definitions/JobSasTokenDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobSasTokenDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/JobSasTokenDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobCreateSasToken": {
+            "$ref": "./examples/accounts/jobs/createsastoken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/renewkey": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Renews to the signing key for the job.",
+        "description": "Renews to the Shared Access Signature (SAS) token singining key for the job. It invalidates all tokens generated prior to key rotation",
+        "operationId": "Job_RenewKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobSasTokenDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/JobSasTokenDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobRenewKey": {
+            "$ref": "./examples/accounts/jobs/renewkey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/suspend": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Suspends the running job.",
+        "description": "Suspending a job will stop the current execution and release any resources and quota reservations. The job will remain in the Suspended state until resumed or deleted.",
+        "operationId": "Job_Suspend",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobUserActionDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobSuspend": {
+            "$ref": "./examples/accounts/jobs/suspend.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/resume": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Resumes the paused job.",
+        "description": "Resuming a paused job will attempt to return the job into the running state by reserving quota and scheduling execution.",
+        "operationId": "Job_Resume",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobUserActionDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobResume": {
+            "$ref": "./examples/accounts/jobs/resume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/cancel": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Cancel the job resource.",
+        "description": "Cancel the job operation without deleting the resource.",
+        "operationId": "Job_Cancel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobUserActionDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobCancel": {
+            "$ref": "./examples/accounts/jobs/cancel.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs": {
+      "get": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Gets all the job resources in a given account.",
+        "description": "Gets the information about all the job resources in a given account. The information include the description and other properties of the job.",
+        "operationId": "Job_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobListByAccount": {
+            "$ref": "./examples/accounts/jobs/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/jobs/{jobName}/remove": {
+      "post": {
+        "tags": [
+          "JobResource"
+        ],
+        "summary": "Delete the job resource through remove action.",
+        "description": "Remove job operation is used to delete a job that is associated with a group policy.",
+        "operationId": "Job_Remove",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/jobNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobUserActionDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "JobRemove": {
+            "$ref": "./examples/accounts/jobs/remove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/models/{modelName}": {
+      "put": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Creates or updates a model resource.",
+        "description": "Creates a model resource with the specified name, description and properties. If a model with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "Model_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/modelNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity model information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ModelCreateOrUpdate": {
+            "$ref": "./examples/accounts/models/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Updates a model resource.",
+        "description": "Updates a model resource with the specified name, description and properties. If a model with the same name exists, then it is updated with the specified description and properties.",
+        "operationId": "Model_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/modelNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity model information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelResourcePatchDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ModelUpdate": {
+            "$ref": "./examples/accounts/models/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Gets the model resource with the given name.",
+        "description": "Gets the information about the model resource with the given name. The information include the description and other properties of the model.",
+        "operationId": "Model_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/modelNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ModelGet": {
+            "$ref": "./examples/accounts/models/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Deletes the model resource.",
+        "description": "Deletes the model resource identified by the name.",
+        "operationId": "Model_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/modelNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ModelDelete": {
+            "$ref": "./examples/accounts/models/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/models": {
+      "get": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Gets all the model resources in a given account.",
+        "description": "Gets the information about all the model resources in a given account. The information include the description and other properties of the model.",
+        "operationId": "Model_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ModelListByAccount": {
+            "$ref": "./examples/accounts/models/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/models/{modelName}/validate": {
+      "post": {
+        "tags": [
+          "ModelResource"
+        ],
+        "summary": "Validates a model resource.",
+        "description": "Checks if the model resource properties are valid",
+        "operationId": "Model_Validate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/modelNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity model information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ModelValidate": {
+            "$ref": "./examples/accounts/models/validate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/networks/{networkResourceName}": {
+      "put": {
+        "tags": [
+          "NetworkResource"
+        ],
+        "summary": "Creates or updates a network resource.",
+        "description": "Creates a network resource with the specified name and properties. If a network resource with the same name exists, then it is updated with the specified properties.",
+        "operationId": "Network_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/networkResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity network information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "NetworkCreateOrUpdate": {
+            "$ref": "./examples/accounts/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "NetworkResource"
+        ],
+        "summary": "Updates a network resource.",
+        "description": "If a network resource with the same name exists, then it is updated with the specified properties.",
+        "operationId": "Network_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/networkResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity network information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "NetworkUpdate": {
+            "$ref": "./examples/accounts/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NetworkResource"
+        ],
+        "summary": "Gets a network resource.",
+        "description": "Gets information about the network resource with the given name.",
+        "operationId": "Network_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/networkResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkGet": {
+            "$ref": "./examples/accounts/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkResource"
+        ],
+        "summary": "Deletes the network resource.",
+        "description": "Deletes the network resource identified by the name.",
+        "operationId": "Network_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/networkResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "NetworkDelete": {
+            "$ref": "./examples/accounts/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/networks": {
+      "get": {
+        "tags": [
+          "NetworkResource"
+        ],
+        "summary": "Gets all the network resources in a given account.",
+        "description": "Gets information about all network resources in a given account.",
+        "operationId": "Network_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkListByAccount": {
+            "$ref": "./examples/accounts/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Singularity/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "summary": "List available Singularity operations.",
+        "description": "List available Singularity operations.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/storagecontainers/{storageCacheResourceName}": {
+      "put": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Creates or updates a storage cache resource.",
+        "description": "Creates a storage cache resource with the specified name and properties. If a storage cache resource with the same name exists, then it is updated with the specified properties.",
+        "operationId": "StorageCache_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity storage cache information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageCacheCreateOrUpdate": {
+            "$ref": "./examples/accounts/storagecontainers/createorupdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Updates a storage cache resource.",
+        "description": "If a storage cache resource with the same name exists, then it is updated with the specified properties.",
+        "operationId": "StorageCache_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Singularity storage cache information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageCacheUpdate": {
+            "$ref": "./examples/accounts/storagecontainers/update.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Gets a storage cache resource.",
+        "description": "Gets information about the storage cache resource with the given name.",
+        "operationId": "StorageCache_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageCacheGet": {
+            "$ref": "./examples/accounts/storagecontainers/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Deletes the storage cache resource.",
+        "description": "Deletes the storage cache resource identified by the name.",
+        "operationId": "StorageCache_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageCacheDelete": {
+            "$ref": "./examples/accounts/storagecontainers/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/storagecontainers/{storageCacheResourceName}/diagnostics": {
+      "get": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Gets diagnostics for a storage cache resource.",
+        "description": "Gets diagnostic information about the storage cache resource with the given name.",
+        "operationId": "StorageCache_GetDiagnostics",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDiagnosticsInfo"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StorageCacheGetDiagnostics": {
+            "$ref": "./examples/accounts/storagecontainers/getdiagnostics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/storagecontainers": {
+      "get": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Gets all the storage cache resources in a given account.",
+        "description": "Gets information about all storage cache resources in a given account.",
+        "operationId": "StorageCache_ListByAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/continuationTokenRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "StorageCacheListByAccount": {
+            "$ref": "./examples/accounts/storagecontainers/listbyaccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/storagecontainers/{storageCacheResourceName}/resume": {
+      "post": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Resumes the storage cache resource.",
+        "description": "Resumes the storage cache resource identified by the name.",
+        "operationId": "StorageCache_Resume",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageCacheResume": {
+            "$ref": "./examples/accounts/storagecontainers/resume.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Singularity/accounts/{accountName}/storagecontainers/{storageCacheResourceName}/suspend": {
+      "post": {
+        "tags": [
+          "StorageContainerResource"
+        ],
+        "summary": "Suspends the storage cache resource.",
+        "description": "Suspends the storage cache resource identified by the name.",
+        "operationId": "StorageCache_Suspend",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/accountNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/storageCacheResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/StorageCacheResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "StorageCacheSuspend": {
+            "$ref": "./examples/accounts/storagecontainers/suspend.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Singularity/quotas": {
+      "get": {
+        "tags": [
+          "SubscriptionQuota"
+        ],
+        "summary": "Gets the subscription quota details for the given subscriptionId",
+        "description": "Gets the information about the subscriptions quota resource with the given subscriptionId. The information includes subscription level quota allocation and usage for each InstanceTypeSeries and SLA tier.",
+        "operationId": "SubscriptionQuota_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ownerSubscriptionIdRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/InstanceTypeSeriesQuotaList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SubscriptionQuotaGet": {
+            "$ref": "./examples/get.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProvisioningState": {
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Creating",
+        "Updating",
+        "Suspending",
+        "Resuming",
+        "Canceling",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PolicyStatus": {
+      "enum": [
+        "Creating",
+        "Created",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PolicyStatus",
+        "modelAsString": true
+      }
+    },
+    "SlaTier": {
+      "enum": [
+        "Premium",
+        "Standard",
+        "Basic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SlaTier",
+        "modelAsString": true
+      }
+    },
+    "InstanceTypeSeriesQuota": {
+      "description": "Describes the quota for the InstanceType series.",
+      "required": [
+        "id",
+        "limit"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The identifier for instance type series quota.",
+          "type": "string"
+        },
+        "name": {
+          "description": "User friendly description for the instance type series.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "slaTier": {
+          "$ref": "#/definitions/SlaTier"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "Maximum allowed units for the instance type series.",
+          "type": "integer"
+        },
+        "used": {
+          "format": "int64",
+          "description": "Number of units currently in use.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AccountQuotaPolicyProperties": {
+      "description": "Describes properties of AccountQuotaPolicy resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/PolicyStatus"
+        },
+        "description": {
+          "description": "User-friendly description of an AccountQuotaPolicy.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "A list of quota policy per instance type series.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSeriesQuota"
+          }
+        }
+      }
+    },
+    "ResourceSystemData": {
+      "type": "object",
+      "properties": {
+        "createdBy": {
+          "description": "A string identifier for the identity that created the resource.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "createdByType": {
+          "description": "The type of identity that created the resource: user, application, managedIdentity, key.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "createdAt": {
+          "description": "The timestamp of resource creation (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedBy": {
+          "description": "A string identifier for the identity that last modified the resource",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedByType": {
+          "description": "The type of identity that last modified the resource: user, application, managedIdentity, key.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "lastModifiedAt": {
+          "description": "The timestamp of resource last modification (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "Resource": {
+      "description": "The resource model definition for Azure Resource Manager resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified identifier for the resource. For example, `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}`",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource. For example, `Microsoft.Compute/virtualMachines` or `Microsoft.Storage/storageAccounts`.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/ResourceSystemData"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AccountQuotaPolicyResourceDescription": {
+      "description": "Describes an account quota policy resource in Singularity.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountQuotaPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountQuotaPolicyPatchProperties": {
+      "description": "Describes all properties which can be updated for a Singularity account quota policy resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "User-friendly description of an AccountQuotaPolicy.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "A list of quota policy per instance type series.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSeriesQuota"
+          }
+        }
+      }
+    },
+    "AccountQuotaPolicyResourcePatchDescription": {
+      "description": "Describes all properties which can be updated for a Singularity account quota policy resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountQuotaPolicyPatchProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountQuotaPolicyResourceDescriptionList": {
+      "description": "A pageable list of AccountQuotaPolicy resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountQuotaPolicyResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AccountStatus": {
+      "enum": [
+        "Creating",
+        "Created",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AccountStatus",
+        "modelAsString": true
+      }
+    },
+    "IdleResourcesHandlingMode": {
+      "enum": [
+        "AutoSuspend",
+        "AutoDelete"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IdleResourcesHandlingMode",
+        "modelAsString": true
+      }
+    },
+    "IdleResourcesHandlingPolicy": {
+      "description": "Describes the properties of idle resources handling policy.",
+      "type": "object",
+      "properties": {
+        "idleResourcesHandlingMode": {
+          "$ref": "#/definitions/IdleResourcesHandlingMode"
+        }
+      }
+    },
+    "AccountLocation": {
+      "description": "Describes the properties of an Account location resource.",
+      "required": [
+        "failoverPriority",
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the account location.",
+          "type": "string"
+        },
+        "failoverPriority": {
+          "format": "int32",
+          "description": "The failover priority of the location. Failover priority values must be unique for each of the locations associated with the account.",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "isZoneRedundant": {
+          "description": "Indicates whether or not this location has AvailabilityZone enabled.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "NetworkSettings": {
+      "description": "Describes the network settings for the account.",
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "description": "The resource id of the delegated subnet.",
+          "type": "string"
+        }
+      }
+    },
+    "AccountProperties": {
+      "description": "Describes the properties of an Account resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "description": {
+          "description": "User-friendly description of an account.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/AccountStatus"
+        },
+        "idleResourcesHandlingPolicy": {
+          "$ref": "#/definitions/IdleResourcesHandlingPolicy"
+        },
+        "statusDetails": {
+          "description": "Gives additional information about the current status of an account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "locations": {
+          "description": "The collection of account locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountLocation"
+          }
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings"
+        }
+      }
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for Azure Resource Manager tracked top-level resource.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      }
+    },
+    "AccountResourceDescription": {
+      "description": "Describes an account resource in Singularity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountPatchProperties": {
+      "description": "Describes all properties which can be updated for a Singularity account resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "User-friendly description of an account.",
+          "type": "string"
+        },
+        "idleResourcesHandlingPolicy": {
+          "$ref": "#/definitions/IdleResourcesHandlingPolicy"
+        },
+        "locations": {
+          "description": "The collection of account locations.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountLocation"
+          }
+        },
+        "networkSettings": {
+          "$ref": "#/definitions/NetworkSettings"
+        }
+      }
+    },
+    "AccountResourcePatchDescription": {
+      "description": "Describes all properties which can be updated for a Singularity account resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/AccountPatchProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "AccountResourceDescriptionList": {
+      "description": "A pageable list of Account resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccountResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "GroupPolicyProperties": {
+      "description": "Describes the properties of a GroupPolicy resource.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/PolicyStatus"
+        },
+        "description": {
+          "description": "User-friendly description of the resource.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "A list of quota policy per instance type series.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSeriesQuota"
+          }
+        },
+        "maxSharedStorageIOPs": {
+          "format": "int32",
+          "description": "Maximum allowed IOPS from shared storageContainer.",
+          "type": "integer"
+        },
+        "maxSharedStorageBandwidth": {
+          "format": "int32",
+          "description": "Maximum allowed bandwidth from shared storageContainer expressed in MB/s.",
+          "type": "integer"
+        }
+      }
+    },
+    "GroupPolicyResourceDescription": {
+      "description": "Describes a GroupPolicy resource in Singularity.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroupPolicyProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GroupPolicyPatchProperties": {
+      "description": "Describes all properties which can be updated for a Singularity group policy resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "User-friendly description of the resource.",
+          "type": "string"
+        },
+        "quotas": {
+          "description": "A list of quota policy per instance type series.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSeriesQuota"
+          }
+        },
+        "maxSharedStorageIOPs": {
+          "format": "int32",
+          "description": "Maximum allowed IOPS from shared storageContainer.",
+          "type": "integer"
+        },
+        "maxSharedStorageBandwidth": {
+          "format": "int32",
+          "description": "Maximum allowed bandwidth from shared storageContainer expressed in MB/s.",
+          "type": "integer"
+        }
+      }
+    },
+    "GroupPolicyResourcePatchDescription": {
+      "description": "Describes all properties which can be updated for a Singularity group policy resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/GroupPolicyPatchProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "GroupPolicyResourceDescriptionList": {
+      "description": "A pageable list of GroupPolicy resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupPolicyResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailablePlatformImageDescription": {
+      "description": "Platform supported container image types available.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualifed Id for the container image.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "names": {
+          "description": "Image names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description of the container image.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailablePlatformImageDescriptionList": {
+      "description": "A pageable list of available images.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailablePlatformImageDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailableInstanceTypeSeriesDescription": {
+      "description": "Instance type series available in the location.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the instance type series.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "Descriptive name for the instance type series.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailableInstanceTypeSeriesDescriptionList": {
+      "description": "A pageable list of available instance type series.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableInstanceTypeSeriesDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailableInstanceTypeDescription": {
+      "description": "Instance type available in the location.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name for the instance type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "quotaCount": {
+          "format": "int32",
+          "description": "Quota count for the instance type.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description for the instance type.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailableInstanceTypeDescriptionList": {
+      "description": "A pageable list of available instance types.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableInstanceTypeDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ScalePolicy": {
+      "description": "Describes the scale policy for a Job or a Model.",
+      "type": "object",
+      "properties": {
+        "minInstanceTypeCount": {
+          "format": "int32",
+          "description": "The minimum instance type count to provision.",
+          "type": "integer"
+        },
+        "maxInstanceTypeCount": {
+          "format": "int32",
+          "description": "Maximum instance type count (the limit) up to which to provision.",
+          "type": "integer"
+        },
+        "currentInstanceTypeCount": {
+          "format": "int32",
+          "description": "The current instance type count.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "instanceTypeCountSet": {
+          "description": "Set of valid instance type counts that the job can be autoscaled to e.g., [2,4,8,16].",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "autoScaleIntervalInSecondsHint": {
+          "format": "int32",
+          "description": "A hint on the interval to use for auto scaling.",
+          "type": "integer"
+        }
+      }
+    },
+    "InstanceTypeSettings": {
+      "description": "Describes the instance type settings.",
+      "required": [
+        "instanceType",
+        "scalePolicy"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "The instance type belonging to the same series.",
+          "type": "string"
+        },
+        "scalePolicy": {
+          "$ref": "#/definitions/ScalePolicy"
+        }
+      }
+    },
+    "PlacementPolicy": {
+      "description": "Describes the placement policy for a Job or a Model.",
+      "required": [
+        "instanceTypes"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceTypes": {
+          "description": "The list of settings for instance types.",
+          "maxLength": 1,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSettings"
+          }
+        },
+        "location": {
+          "description": "An optional location for instance type placement. If specified, this must be one of the account resource locations.",
+          "type": "string"
+        }
+      }
+    },
+    "SchedulingPriority": {
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SchedulingPriority",
+        "modelAsString": true
+      }
+    },
+    "StorageSourceKind": {
+      "enum": [
+        "AzureAISupercomputerStorage",
+        "AzureBlobStorage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageSourceKind",
+        "modelAsString": true
+      }
+    },
+    "StorageSourceBase": {
+      "description": "This type describes Singularity storage for a job or service.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/StorageSourceKind"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "StorageMount": {
+      "description": "Describes the target mountpoint of a storage source.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "The target mountpoint path.",
+          "type": "string"
+        }
+      }
+    },
+    "StorageLocation": {
+      "description": "Describes the location of a storage source and how it will be accessed.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/StorageSourceBase"
+        },
+        "storageCacheContainerName": {
+          "description": "Name of the managed storage resource to mount.",
+          "type": "string"
+        },
+        "mount": {
+          "$ref": "#/definitions/StorageMount"
+        }
+      }
+    },
+    "NetworkReference": {
+      "description": "Describes a network resource reference.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the network resource to reference.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerImageKind": {
+      "enum": [
+        "Platform",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ContainerImageKind",
+        "modelAsString": true
+      }
+    },
+    "ContainerImageBase": {
+      "description": "Describes the container image for the job resource.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ContainerImageKind"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "CheckpointRetentionMode": {
+      "enum": [
+        "Ttl",
+        "MaxStorage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CheckpointRetentionMode",
+        "modelAsString": true
+      }
+    },
+    "CheckpointRetentionPolicy": {
+      "description": "Describes the checkpointing retention policy for job",
+      "required": [
+        "mode"
+      ],
+      "type": "object",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/CheckpointRetentionMode"
+        },
+        "ttl": {
+          "format": "duration",
+          "description": "Minimum elapsed duration before deleting checkpoint. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "type": "string"
+        },
+        "maxStorage": {
+          "format": "int32",
+          "description": "Maximum storage size for checkpoint files to retain. Checkpoint files will be purged in FIFO manner.",
+          "type": "integer"
+        }
+      }
+    },
+    "CheckpointPolicy": {
+      "description": "Describes the checkpointing policy for job",
+      "type": "object",
+      "properties": {
+        "enableCheckpoint": {
+          "description": "Enables automatic checkpointing of training job.",
+          "type": "boolean"
+        },
+        "checkpointRelativePath": {
+          "description": "The relative path in the platform storage.",
+          "type": "string"
+        },
+        "checkpointInterval": {
+          "format": "duration",
+          "description": "Maximum elapsed duration between subsequent checkpoints. The value should be in ISO  8601 format (http://en.wikipedia.org/wiki/ISO_8601#Durations).",
+          "type": "string"
+        },
+        "checkpointIterationCount": {
+          "format": "int32",
+          "description": "Maximum elapsed iteration count between the subsequent checkpoints.",
+          "type": "integer"
+        },
+        "checkpointRetentionPolicy": {
+          "$ref": "#/definitions/CheckpointRetentionPolicy"
+        }
+      }
+    },
+    "JobStatus": {
+      "enum": [
+        "Initialized",
+        "Running",
+        "Suspended",
+        "Completed",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true
+      }
+    },
+    "JobResourceProperties": {
+      "description": "Describes the properties of a job resource.",
+      "required": [
+        "containerImage",
+        "placementPolicies"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "jobId": {
+          "description": "System generated globally unique id for the job. This property is read only.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "placementPolicies": {
+          "description": "Collection of placement policies to use for the training job.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlacementPolicy"
+          }
+        },
+        "slaTier": {
+          "$ref": "#/definitions/SlaTier"
+        },
+        "schedulingPriority": {
+          "$ref": "#/definitions/SchedulingPriority"
+        },
+        "dataLocation": {
+          "description": "Job input data location.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageLocation"
+          }
+        },
+        "codeLocation": {
+          "$ref": "#/definitions/StorageLocation"
+        },
+        "outputLocation": {
+          "$ref": "#/definitions/StorageLocation"
+        },
+        "networkResourceRef": {
+          "$ref": "#/definitions/NetworkReference"
+        },
+        "containerImage": {
+          "$ref": "#/definitions/ContainerImageBase"
+        },
+        "groupPolicyName": {
+          "description": "Group policy name associated with the training job.",
+          "type": "string"
+        },
+        "checkpointPolicy": {
+          "$ref": "#/definitions/CheckpointPolicy"
+        },
+        "maxJobExecutionTime": {
+          "format": "double",
+          "description": "Maximum execution time for a training job in the account (in hours).",
+          "type": "number"
+        },
+        "suspendOnIdleTime": {
+          "format": "double",
+          "description": "Minimum idle time before job gets automatically suspended (in hours).",
+          "type": "number"
+        },
+        "program": {
+          "description": "The entry script for your Job in the codeLocation. For interactive jobs, specify null.",
+          "type": "string"
+        },
+        "programArgs": {
+          "description": "Command line arguments to be passed to the program.",
+          "type": "string"
+        },
+        "tensorBoardLogDirectory": {
+          "description": "The directory which TensorBoard will be configured to use as the log directory.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "description": {
+          "description": "User-friendly description of the job.",
+          "type": "string"
+        },
+        "statusDetails": {
+          "description": "Gives additional information about the current status of the job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "notebookEndpoint": {
+          "description": "Url to access Jupyter notebook endpoint of the job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "tensorBoardEndpoint": {
+          "description": "Url to access TensorBoard endpoint of the job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "grafanaEndpoint": {
+          "description": "Url to access Grafana endpoint of the job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "jobLogsEndpoint": {
+          "description": "Url to access logs of the job.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "environmentVariables": {
+          "description": "User specified job environment variables.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ResourceUserAssignedIdentity": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ResourceIdentity": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of identity used for the resource. The type 'None' will remove any identities from the resource.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant id associated with the resource. This property will only be provided for a system assigned identity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "principalId": {
+          "description": "The principal id of the resource identity. This property will only be provided for a system assigned identity.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "userAssignedIdentities": {
+          "description": "The user assigned managed identities assigned to this resource (if any).",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ResourceUserAssignedIdentity"
+          }
+        }
+      }
+    },
+    "JobResourceDescription": {
+      "description": "Describes a job resource in Singularity.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobResourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity"
+        }
+      }
+    },
+    "JobPatchProperties": {
+      "description": "Describes all properties which can be updated for a Singularity job resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "User-friendly description of the job.",
+          "type": "string"
+        },
+        "schedulingPriority": {
+          "$ref": "#/definitions/SchedulingPriority"
+        }
+      }
+    },
+    "JobResourcePatchDescription": {
+      "description": "Describes all properties which can be updated for a Singularity job resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/JobPatchProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "JobUserActionDescription": {
+      "description": "Describes properties for the user action of Singularity jobs.",
+      "type": "object",
+      "properties": {
+        "groupPolicyName": {
+          "description": "The name of the group policy.",
+          "type": "string"
+        }
+      }
+    },
+    "ProtocolType": {
+      "enum": [
+        "Https",
+        "Tcp",
+        "WebSocket",
+        "Ssh"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProtocolType",
+        "modelAsString": true
+      }
+    },
+    "JobSasTokenDescription": {
+      "description": "Describes a Shared Access Signature (SAS) Token for Singularity Jobs.",
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "format": "date-time",
+          "description": "The SAS token is valid only after the start time (UTC).",
+          "type": "string"
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "description": "The time (UTC) after which the SAS token becomes invalid.",
+          "type": "string"
+        },
+        "protocol": {
+          "$ref": "#/definitions/ProtocolType"
+        },
+        "version": {
+          "description": "The algorithm and API version the SAS token was generated with",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "token": {
+          "description": "The SAS token generated by the service.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "groupPolicyName": {
+          "description": "The name of the group policy.",
+          "type": "string"
+        }
+      }
+    },
+    "JobResourceDescriptionList": {
+      "description": "A pageable list of Job resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "InferenceMode": {
+      "enum": [
+        "Online",
+        "Batch"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InferenceMode",
+        "modelAsString": true
+      }
+    },
+    "ScalePolicyV2": {
+      "description": "Describes the scale policy of resource. This serves as the data parallel dimension for 3D parallelism (viz., data, pipeline and model parallelism).There are two modes of scaling:1. Discrete: Resource can be only be scaled to a specific instance count(s) specified by the \"scaleSet\" (for e.g., [2, 4, 8, 16]).2. Continuous: Resource can be scaled to any instance count specified by the range (\"min\", \"max\").",
+      "type": "object",
+      "properties": {
+        "min": {
+          "format": "int32",
+          "description": "The minimum instance count of the resource.",
+          "type": "integer"
+        },
+        "max": {
+          "format": "int32",
+          "description": "Maximum instance count of the resource.",
+          "type": "integer"
+        },
+        "scaleSet": {
+          "description": "Set of valid instance counts that the resource can be scaled to e.g., [2,4,8,16]. This is required for discrete scaling.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "ModelPartitionPlacement": {
+      "description": "Describes placement of a model partition on a device.",
+      "required": [
+        "instanceTypeSettingNameRef"
+      ],
+      "type": "object",
+      "properties": {
+        "instanceTypeSettingNameRef": {
+          "description": "Model partitions can target placement on the same or different instances of the InstanceType by referencing the same or different InstanceTypeSetting name",
+          "type": "string"
+        },
+        "deviceId": {
+          "format": "int32",
+          "description": "Id of the device for placement of this model partition on the InstanceType referenced above.",
+          "type": "integer"
+        }
+      }
+    },
+    "ModelPartition": {
+      "description": "Describes a partition of a model. A model consists of one or more partitions (in the tensor and pipeline parallel dimensions). A partition is scoped and mapped onto a device.",
+      "required": [
+        "partitionPlacement",
+        "pipelinePartitionIndex",
+        "tensorPartitionIndex"
+      ],
+      "type": "object",
+      "properties": {
+        "pipelinePartitionIndex": {
+          "format": "int32",
+          "description": "Index of pipeline partition.",
+          "type": "integer"
+        },
+        "tensorPartitionIndex": {
+          "format": "int32",
+          "description": "Index of tensor partition.",
+          "type": "integer"
+        },
+        "packagePath": {
+          "description": "Path in modelPackageLocation where package for this model partition is located.",
+          "type": "string"
+        },
+        "partitionPlacement": {
+          "$ref": "#/definitions/ModelPartitionPlacement"
+        }
+      }
+    },
+    "ModelPartitioningSetting": {
+      "description": "Describes the partitioning settings of the model. Models can be partitioned for scalability (when a model is too large to fit on a single device) and/or throughput. ",
+      "type": "object",
+      "properties": {
+        "pipelinePartitionCount": {
+          "format": "int32",
+          "description": "Specifies the pipeline-parallelism dimension of the model.",
+          "type": "integer"
+        },
+        "tensorPartitionCount": {
+          "format": "int32",
+          "description": "Specifies the model-parallelism dimension of the model.",
+          "type": "integer"
+        },
+        "partitions": {
+          "description": "The list of information about model partitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelPartition"
+          }
+        }
+      }
+    },
+    "ContainerEntryPoint": {
+      "description": "Describes container's entry-point.",
+      "type": "object",
+      "properties": {
+        "program": {
+          "description": "The entry point program.",
+          "type": "string"
+        },
+        "programArgs": {
+          "description": "Command line arguments to be passed to the program.",
+          "type": "string"
+        }
+      }
+    },
+    "ProbeSettingKind": {
+      "enum": [
+        "Exec",
+        "Http"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProbeSettingKind",
+        "modelAsString": true
+      }
+    },
+    "ProbeSetting": {
+      "description": "Describes the settings of the probe.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ProbeSettingKind"
+        },
+        "initialDelayInSeconds": {
+          "format": "int32",
+          "description": "The initial delay in seconds to start executing the probe after the container has started.",
+          "type": "integer"
+        },
+        "successThreshold": {
+          "format": "int32",
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed.",
+          "type": "integer"
+        },
+        "failureThreshold": {
+          "format": "int32",
+          "description": "Number of consecutive failures for the probe after which the container is restarted.",
+          "type": "integer"
+        },
+        "frequencyInSeconds": {
+          "format": "int32",
+          "description": "The period in seconds to specify the frequency of the probe.",
+          "type": "integer"
+        },
+        "timeoutInSeconds": {
+          "format": "int32",
+          "description": "The period in seconds after which we consider the probe as failed, if it hasn't finished successfully.",
+          "type": "integer"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "ContainerSetting": {
+      "description": "Describes the settings of container.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ContainerImageBase"
+        },
+        "environmentVariables": {
+          "description": "Environment variables.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "setupEntryPoint": {
+          "$ref": "#/definitions/ContainerEntryPoint"
+        },
+        "mainEntryPoint": {
+          "$ref": "#/definitions/ContainerEntryPoint"
+        },
+        "cleanupEntryPoint": {
+          "$ref": "#/definitions/ContainerEntryPoint"
+        },
+        "livenessProbeSetting": {
+          "$ref": "#/definitions/ProbeSetting"
+        }
+      }
+    },
+    "InstanceTypeSetting": {
+      "description": "Describes setting for a Singularity Instance Type",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Specifies the name of this instance type setting. This name can be used to identify the instance of an instanceType. Resources referencing the same name are collocated on the same instance of the instance type.",
+          "type": "string"
+        },
+        "instanceType": {
+          "description": "The instance type name.",
+          "type": "string"
+        },
+        "containerSetting": {
+          "$ref": "#/definitions/ContainerSetting"
+        }
+      }
+    },
+    "ModelStatus": {
+      "enum": [
+        "Creating",
+        "Ready",
+        "Deleting",
+        "DeploymentCompletedWithError",
+        "Failed",
+        "Updating"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ModelStatus",
+        "modelAsString": true
+      }
+    },
+    "Endpoint": {
+      "description": "Describes the named endpoint of a job or model.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "address": {
+          "description": "The address of the endpoint.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ModelLocation": {
+      "description": "Describes properties of a model resource for a given geographic location.",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Name of the geographic location.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/ModelStatus"
+        },
+        "statusDetails": {
+          "description": "Gives additional information about the current status of the model in this location.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "errorCode": {
+          "description": "Error code of the model in this location.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "scalePolicy": {
+          "$ref": "#/definitions/ScalePolicyV2"
+        },
+        "endpoints": {
+          "description": "Endpoints of the model in this location.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "currentInstanceCount": {
+          "format": "int32",
+          "description": "Current instance count of the model in this location",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "CompilationPolicyKind": {
+      "enum": [
+        "JIT",
+        "AOT"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CompilationPolicyKind",
+        "modelAsString": true
+      }
+    },
+    "CompilationPolicyBase": {
+      "description": "This type describes the Compilation Policy of the model for training / inferencing.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/CompilationPolicyKind"
+        }
+      }
+    },
+    "ModelProbeSetting": {
+      "description": "Describes the model probe setting.",
+      "type": "object",
+      "properties": {
+        "livenessProbeSetting": {
+          "$ref": "#/definitions/ProbeSetting"
+        },
+        "readinessProbeSetting": {
+          "$ref": "#/definitions/ProbeSetting"
+        }
+      }
+    },
+    "ModelResourceProperties": {
+      "description": "Describes the properties of a model resource.",
+      "required": [
+        "instanceTypeSettings",
+        "packageLocation",
+        "scalePolicy"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "groupPolicyName": {
+          "description": "Group policy name associated with the model.",
+          "type": "string"
+        },
+        "inferenceMode": {
+          "$ref": "#/definitions/InferenceMode"
+        },
+        "slaTier": {
+          "$ref": "#/definitions/SlaTier"
+        },
+        "packageLocation": {
+          "$ref": "#/definitions/StorageLocation"
+        },
+        "networkResourceRef": {
+          "$ref": "#/definitions/NetworkReference"
+        },
+        "scalePolicy": {
+          "$ref": "#/definitions/ScalePolicyV2"
+        },
+        "partitioningSetting": {
+          "$ref": "#/definitions/ModelPartitioningSetting"
+        },
+        "instanceTypeSettings": {
+          "description": "The specification for the instance type for instantiating the model. For AOT compiled model this property specifies the settings for the instance types where the model partitions needs to be instantiated as specified by the ModelPlacementSetting. For JIT compiled model this property specifies the list of instance types on which the model partitions can be instantiated.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSetting"
+          }
+        },
+        "locations": {
+          "description": "Collection of geographic locations where the model is deployed.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelLocation"
+          }
+        },
+        "endpoints": {
+          "description": "Global endpoints of the model that allow accessing the model across geographic locations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "compilationPolicy": {
+          "$ref": "#/definitions/CompilationPolicyBase"
+        },
+        "modelProbeSetting": {
+          "$ref": "#/definitions/ModelProbeSetting"
+        }
+      }
+    },
+    "ModelResourceDescription": {
+      "description": "Describes a model resource in Singularity.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelResourceProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ResourceIdentity"
+        }
+      }
+    },
+    "ModelPatchProperties": {
+      "description": "Describes all properties which can be updated for a Singularity Model resource.",
+      "type": "object",
+      "properties": {
+        "placementPolicies": {
+          "description": "Collection of placement policies to use for placement of this model version.",
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlacementPolicy"
+          }
+        },
+        "description": {
+          "description": "User-friendly description of the model.",
+          "type": "string"
+        }
+      }
+    },
+    "ModelResourcePatchDescription": {
+      "description": "Describes all properties which can be updated for a Singularity Model resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ModelPatchProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ModelResourceDescriptionList": {
+      "description": "A pageable list of model resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "NetworkKind": {
+      "enum": [
+        "DelegatedSubnet"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NetworkKind",
+        "modelAsString": true
+      }
+    },
+    "NetworkResourceStatus": {
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Created",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NetworkResourceStatus",
+        "modelAsString": true
+      }
+    },
+    "NetworkPropertiesBase": {
+      "description": "Describes the properties of a network resource.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/NetworkKind"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/NetworkResourceStatus"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "NetworkResourceDescription": {
+      "description": "Describes a network resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkPropertiesBase"
+        }
+      }
+    },
+    "NetworkResourceDescriptionList": {
+      "description": "A pageable list of network resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "AvailableOperationDisplay": {
+      "description": "An operation available at the listed Azure resource provider.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the operation provider.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "resource": {
+          "description": "Name of the resource on which the operation is available.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "operation": {
+          "description": "Name of the available operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "Description of the available operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "OperationResult": {
+      "description": "List of operations available at the listed Azure resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay"
+        },
+        "origin": {
+          "description": "Origin result.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action.",
+          "type": "boolean",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Describes the result of the request to list Singularity operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the Singularity resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of operation list results if there are any.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "StorageCacheKind": {
+      "enum": [
+        "Blob",
+        "NFS",
+        "ADLS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageCacheKind",
+        "modelAsString": true
+      }
+    },
+    "StorageCacheStatus": {
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Created",
+        "Deleting",
+        "Suspended"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageCacheStatus",
+        "modelAsString": true
+      }
+    },
+    "StorageCachePropertiesBase": {
+      "description": "Describes the properties of a storage cache resource.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/StorageCacheKind"
+        },
+        "description": {
+          "description": "Description of the storage cache resource.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Optional region for managed storage resources (if any).",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "status": {
+          "$ref": "#/definitions/StorageCacheStatus"
+        },
+        "defaultMountPath": {
+          "description": "Default mount path that will be used within a job or model if none is specified.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "discriminator": "kind"
+    },
+    "StorageCacheResourceDescription": {
+      "description": "Describes a storage cache resource.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageCachePropertiesBase"
+        }
+      }
+    },
+    "StorageCacheResourceDiagnosticsInfo": {
+      "description": "Storage cache resource diagnostics information.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "usageInMiB": {
+          "format": "int32",
+          "description": "The used storage capacity.",
+          "type": "integer",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "StorageCacheResourceDescriptionList": {
+      "description": "A pageable list of storage cache resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageCacheResourceDescription"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "InstanceTypeSeriesQuotaList": {
+      "description": "A pageable list of quotas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "One page of the list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceTypeSeriesQuota"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "nextLink": {
+          "description": "URI to fetch the next page of the list.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ErrorDetailsModel": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorModelProperties": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "innerError": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetailsModel"
+          }
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModelProperties"
+        }
+      }
+    },
+    "StorageSourceAzureAISupercomputerStorage": {
+      "description": "This type describes Singularity storage for a job or service.",
+      "required": [
+        "storageContainerName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageSourceBase"
+        }
+      ],
+      "properties": {
+        "storageContainerName": {
+          "description": "Path to the Singularity storage.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureAISupercomputerStorage"
+    },
+    "StorageAuthenticationType": {
+      "enum": [
+        "None",
+        "SasToken",
+        "StorageAccountKey",
+        "SystemAssignedIdentity",
+        "UserAssignedIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StorageAuthenticationType",
+        "modelAsString": true
+      }
+    },
+    "StorageSourceAzureBlob": {
+      "description": "This type describes Singularity storage for a job or service.",
+      "required": [
+        "blobEndpoint"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageSourceBase"
+        }
+      ],
+      "properties": {
+        "blobEndpoint": {
+          "description": "For SasToken AuthenticationType: Container Endpoint with the associated SAS token. For SystemAssignedIdentity and UserAssignedIdentity AuthenticationType: Container Endpoint only.",
+          "type": "string"
+        },
+        "accountResourceId": {
+          "description": "Storage account ResourceId for the Azure blob. Required when AuthenticationType is SystemAssignedIdentity.",
+          "type": "string"
+        },
+        "userAssignedIdentity": {
+          "description": "User assigned managed identity. Required when AuthenticationType is UserAssignedIdentity.",
+          "type": "string"
+        },
+        "authenticationType": {
+          "$ref": "#/definitions/StorageAuthenticationType"
+        }
+      },
+      "x-ms-discriminator-value": "AzureBlobStorage"
+    },
+    "BlobStorageTarget": {
+      "required": [
+        "containerEndpoint"
+      ],
+      "type": "object",
+      "properties": {
+        "containerEndpoint": {
+          "description": "Storage container endpoint (e.g. https://<account>.blob.core.windows.net/<container>",
+          "type": "string"
+        },
+        "blobName": {
+          "description": "Optional model blob name within container for FPGA inferencing deployments.",
+          "type": "string"
+        },
+        "sasToken": {
+          "description": "SAS token to use for authentication.",
+          "type": "string"
+        },
+        "userAssignedIdentity": {
+          "description": "User assigned managed identity resource ID to use for authentication.",
+          "type": "string"
+        }
+      }
+    },
+    "MountOptionsKind": {
+      "enum": [
+        "Fuse",
+        "Interception"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MountOptionsKind",
+        "modelAsString": true
+      }
+    },
+    "BlobMountOptionsBase": {
+      "description": "Describes options to use when mounting a storage cache container backed by Azure blob storage.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MountOptionsKind"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "BlobStorageCacheProperties": {
+      "description": "Describes the properties of a storage cache resource backed by Azure blob.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageCachePropertiesBase"
+        }
+      ],
+      "properties": {
+        "storageTarget": {
+          "$ref": "#/definitions/BlobStorageTarget"
+        },
+        "mountOptions": {
+          "$ref": "#/definitions/BlobMountOptionsBase"
+        }
+      },
+      "x-ms-discriminator-value": "Blob"
+    },
+    "NfsStorageCacheProperties": {
+      "description": "Describes the properties of a storage cache resource backed by NFS.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageCachePropertiesBase"
+        }
+      ],
+      "properties": {
+        "capacityInGiB": {
+          "format": "int32",
+          "description": "Optional storage capacity to allocate.",
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "NFS"
+    },
+    "AdlsMountOptionsBase": {
+      "description": "Describes options to use when mounting a storage cache container backed by ADLS Gen1.",
+      "required": [
+        "kind"
+      ],
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MountOptionsKind"
+        }
+      },
+      "discriminator": "kind"
+    },
+    "AdlsStorageCacheProperties": {
+      "description": "Describes the properties of a storage cache resource backed by ADLS Gen 1.",
+      "required": [
+        "clientId",
+        "clientSecret",
+        "path",
+        "tenantId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StorageCachePropertiesBase"
+        }
+      ],
+      "properties": {
+        "path": {
+          "description": "ADLS path (e.g. adl://<adls name>.azuredatalakestore.net/<folder>)",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Service principal tenant ID",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "Service principal client (application) ID",
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Service principal client secret",
+          "type": "string"
+        },
+        "mountOptions": {
+          "$ref": "#/definitions/AdlsMountOptionsBase"
+        }
+      },
+      "x-ms-discriminator-value": "ADLS"
+    },
+    "BlobFuseMountOptions": {
+      "description": "Describes options to use when mounting a storage cache container backed by Azure blob storage through FUSE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobMountOptionsBase"
+        }
+      ],
+      "properties": {
+        "streaming": {
+          "description": "--streaming option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "boolean"
+        },
+        "streamingCacheLimitMiB": {
+          "format": "int32",
+          "description": "--stream-cache-mb option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "integer"
+        },
+        "streamingMaxBlocksPerFile": {
+          "format": "int32",
+          "description": "--max-blocks-per-file option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "integer"
+        },
+        "streamingBlockSizeMiB": {
+          "format": "int32",
+          "description": "--block-size-mb option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "integer"
+        },
+        "maxConcurrency": {
+          "format": "int32",
+          "description": "--max-concurrency option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "integer"
+        },
+        "fileCacheTimeoutSeconds": {
+          "format": "int32",
+          "description": "--file-cache-timeout-in-seconds option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "integer"
+        },
+        "invalidateOnSync": {
+          "description": "--invalidate-on-sync option as described at https://github.com/Azure/azure-storage-fuse",
+          "type": "boolean"
+        }
+      },
+      "x-ms-discriminator-value": "Fuse"
+    },
+    "BlobInterceptionMountOptions": {
+      "description": "Describes options to use when accessing a storage cache container backed by Azure blob storage through file system interception.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BlobMountOptionsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Interception"
+    },
+    "AdlsFuseMountOptions": {
+      "description": "Describes options to use when mounting a storage cache container backed by ADLS Gen1 through FUSE.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsMountOptionsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Fuse"
+    },
+    "AdlsInterceptionMountOptions": {
+      "description": "Describes options to use when accessing a storage cache container backed by ADLS Gen1 through file system interception.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsMountOptionsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Interception"
+    },
+    "DelegatedSubnetProperties": {
+      "description": "Describes the properties of a delegated subnet resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkPropertiesBase"
+        }
+      ],
+      "properties": {
+        "delegatedSubnetResourceId": {
+          "description": "Subnet resource ID (e.g. /subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "DelegatedSubnet"
+    },
+    "CustomContainerImage": {
+      "description": "Describes a custom image.",
+      "required": [
+        "image"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerImageBase"
+        }
+      ],
+      "properties": {
+        "image": {
+          "description": "Location of image to use for training.",
+          "type": "string"
+        },
+        "containerRegistryUsername": {
+          "description": "Username of the container registry account. Required if UserAssignedIdentity is omitted.",
+          "type": "string"
+        },
+        "containerRegistryPassword": {
+          "description": "Password of the container registry account. Required if UserAssignedIdentity is omitted.",
+          "type": "string"
+        },
+        "userAssignedIdentity": {
+          "description": "User assigned identity with access to the container registry. Required if ContainerRegistryUsername and ContainerRegistryPassword are omitted.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Custom"
+    },
+    "PlatformContainerImage": {
+      "description": "Describes a platform image.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerImageBase"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the platform image. This supports fully qualified image names and image friendly names",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Platform"
+    },
+    "ExecProbeSetting": {
+      "description": "Describes probe settings based on executing a program.",
+      "required": [
+        "program"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProbeSetting"
+        }
+      ],
+      "properties": {
+        "program": {
+          "description": "Program to be executed for the probe.",
+          "type": "string"
+        },
+        "programArgs": {
+          "description": "Arguments passed into the Program.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Exec"
+    },
+    "HttpProbeSetting": {
+      "description": "Describes probe settings based on HTTP request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProbeSetting"
+        }
+      ],
+      "properties": {
+        "path": {
+          "description": "The path relative to the endpoint domain name used to probe.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "Http"
+    }
+  },
+  "parameters": {
+    "subscriptionIdRequiredPathParam": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The customer subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameRequiredPathParam": {
+      "in": "path",
+      "name": "resourceGroupName",
+      "description": "The name of the resource group within the user's subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "accountNameRequiredPathParam": {
+      "in": "path",
+      "name": "accountName",
+      "description": "The name of the Singularity account.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "policyNameRequiredPathParam": {
+      "in": "path",
+      "name": "policyName",
+      "description": "The name of the Singularity account quota policy. Should only be Default.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "continuationTokenRequiredQueryParam": {
+      "in": "query",
+      "name": "continuationToken",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "locationRequiredPathParam": {
+      "in": "path",
+      "name": "location",
+      "description": "The name of the Azure location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "instanceTypeSeriesIdRequiredPathParam": {
+      "in": "path",
+      "name": "instanceTypeSeriesId",
+      "description": "The id of the Singularity instance type series.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "jobNameRequiredPathParam": {
+      "in": "path",
+      "name": "jobName",
+      "description": "The name of the Singularity job.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "modelNameRequiredPathParam": {
+      "in": "path",
+      "name": "modelName",
+      "description": "The name of the Singularity model.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "networkResourceNameRequiredPathParam": {
+      "in": "path",
+      "name": "networkResourceName",
+      "description": "The name of the Singularity network resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "storageCacheResourceNameRequiredPathParam": {
+      "in": "path",
+      "name": "storageCacheResourceName",
+      "description": "The name of the Singularity storage cache.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ownerSubscriptionIdRequiredQueryParam": {
+      "in": "query",
+      "name": "ownerSubscriptionId",
+      "description": "Subscription id that uniquely identify a Microsoft Azure subscription. The owner subscription id is sent as a query parameter when subscription for the request is different from the subscription ID of the URI",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "api-versionRequiredQueryParam": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The version of the API that the request is targeting.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

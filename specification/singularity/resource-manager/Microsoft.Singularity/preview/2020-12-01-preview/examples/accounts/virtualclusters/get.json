@@ -1,0 +1,82 @@
+{
+  "operationId": "VirtualCluster_Get",
+  "description": "This example shows how to create or update an account resource.",
+  "parameters": {
+    "api-version": "2020-12-01-preview",
+    "subscriptionId": "mysubscriptionId",
+    "resourceGroupName": "myresourceGroupName",
+    "accountName": "myaccountName",
+    "virtualClusterName": "myvirtualClusterName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Singularity/accounts/virtualclusters",
+        "id": "/subscriptions/mysubscriptionId/resourcegroups/myresourceGroupName/providers/Microsoft.Singularity/accounts/myaccountName/virtualclusters/myvirtualClusterName",
+        "name": "myVirtualClusterResourceDescription",
+        "properties": {
+          "virtualClusterId": "System generated globally unique id for the virtual cluster. This property is read only.",
+          "placementPolicies": [
+            {
+              "instanceTypes": [
+                {
+                  "instanceType": "The instance type belonging to the same series.",
+                  "scalePolicy": {
+                    "minInstanceTypeCount": 1,
+                    "maxInstanceTypeCount": 1,
+                    "currentInstanceTypeCount": 1,
+                    "instanceTypeCountSet": [
+                      1
+                    ],
+                    "autoScaleIntervalInSecondsHint": 1
+                  }
+                }
+              ],
+              "location": "An optional location for instance type placement. If specified, this must be one of the account resource locations."
+            }
+          ],
+          "storageLocation": [
+            {
+              "source": {
+                "kind": {
+                  "storageContainerName": "myStorageAccount"
+                }
+              },
+              "storageSourceName": "Name of the managed storage resource to mount.",
+              "mount": {
+                "path": "The target mountpoint path."
+              }
+            }
+          ],
+          "namespace": "Kubeflow namespace in the virtual cluster.",
+          "kubeflowCentralDashboardEndpoint": "Url to access Kubeflow central dashboard endpoint.",
+          "metadataServiceEndpoint": "Url to access Kubeflow metadata service endpoint.",
+          "pipelineServiceEndpoint": "Url to access Kubeflow pipeline service endpoint.",
+          "katibServiceEndpoint": "Url to access Kubeflow hyper-parameter tuning service (Katib) endpoint.",
+          "artifactsLocation": [
+            {
+              "source": {
+                "kind": {
+                  "storageContainerName": "myStorageAccount"
+                }
+              },
+              "storageSourceName": "Name of the managed storage resource to mount.",
+              "mount": {
+                "path": "The target mountpoint path."
+              }
+            }
+          ],
+          "containerImage": {
+            "kind": "Platform"
+          },
+          "modelServingSystemKind": "KFServing",
+          "provisioningState": "Succeeded",
+          "status": "Creating",
+          "description": "User-friendly description of the virtual cluster.",
+          "statusDetails": "Gives additional information about the current status of the virtual cluster.",
+          "virtualClusterLogsEndpoint": "Url to access logs of the virtual cluster."
+        }
+      }
+    }
+  }
+}
