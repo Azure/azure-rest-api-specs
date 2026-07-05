@@ -138,6 +138,7 @@ union ReasoningEffort {
 }
 
 /** Base for session configuration in the response. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
 model ResponseSession is RequestSession {
   ...SessionBase;
@@ -149,10 +150,10 @@ model ResponseSession is RequestSession {
   id?: string;
 
   /**
-   * Unix timestamp (seconds) at which the session will expire. Server-authoritative: clients
-   * cannot set this via `session.update`. Realtime pipelines forward the upstream AOAI-provided
-   * value; cascaded pipelines set it at connect time to `now + default TTL` (e.g. 2 h).
+   * Expiration timestamp for the session, in seconds since epoch. This value is set by
+   * the server and cannot be changed with `session.update`.
    */
+  @added(Versions.v2026_07_15)
   expires_at?: int32;
 }
 
