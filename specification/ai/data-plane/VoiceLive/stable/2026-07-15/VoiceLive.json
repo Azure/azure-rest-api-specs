@@ -661,6 +661,114 @@
       ],
       "x-ms-discriminator-value": "azure-personal"
     },
+    "AzureRealtimeNativeVoice": {
+      "type": "object",
+      "description": "Azure realtime native voice configuration. These voices are natively\nsupported by the `azure-realtime` model and offer higher quality speech\nsynthesis than standard Azure voices. Only valid when using the\n`azure-realtime` model.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of the voice.",
+          "enum": [
+            "azure-realtime-native"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "$ref": "#/definitions/AzureRealtimeNativeVoiceName",
+          "description": "The name of the Azure realtime native voice."
+        }
+      },
+      "required": [
+        "type",
+        "name"
+      ]
+    },
+    "AzureRealtimeNativeVoiceName": {
+      "type": "string",
+      "description": "Currently known voice names for the Azure realtime native voice type.\nThis is an extensible enum; additional voice names may be accepted by the\nservice in the future.",
+      "enum": [
+        "aarti",
+        "andrew",
+        "ava",
+        "denise",
+        "diya",
+        "elsa",
+        "florian",
+        "francisca",
+        "meera",
+        "xiaoxiao",
+        "yunxi",
+        "ximena"
+      ],
+      "x-ms-enum": {
+        "name": "AzureRealtimeNativeVoiceName",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "aarti",
+            "value": "aarti",
+            "description": "Aarti voice."
+          },
+          {
+            "name": "andrew",
+            "value": "andrew",
+            "description": "Andrew voice."
+          },
+          {
+            "name": "ava",
+            "value": "ava",
+            "description": "Ava voice."
+          },
+          {
+            "name": "denise",
+            "value": "denise",
+            "description": "Denise voice."
+          },
+          {
+            "name": "diya",
+            "value": "diya",
+            "description": "Diya voice."
+          },
+          {
+            "name": "elsa",
+            "value": "elsa",
+            "description": "Elsa voice."
+          },
+          {
+            "name": "florian",
+            "value": "florian",
+            "description": "Florian voice."
+          },
+          {
+            "name": "francisca",
+            "value": "francisca",
+            "description": "Francisca voice."
+          },
+          {
+            "name": "meera",
+            "value": "meera",
+            "description": "Meera voice."
+          },
+          {
+            "name": "xiaoxiao",
+            "value": "xiaoxiao",
+            "description": "Xiaoxiao voice."
+          },
+          {
+            "name": "yunxi",
+            "value": "yunxi",
+            "description": "Yunxi voice."
+          },
+          {
+            "name": "ximena",
+            "value": "ximena",
+            "description": "Ximena voice."
+          }
+        ]
+      }
+    },
     "AzureSemanticDetection": {
       "type": "object",
       "description": "Azure semantic end-of-utterance detection (default).",
@@ -1306,6 +1414,61 @@
       ],
       "x-ms-discriminator-value": "input_audio.turn.start"
     },
+    "ClientEventInputTextDelta": {
+      "type": "object",
+      "description": "Streams a delta of input text content into the specified item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item the text delta is being appended to."
+        },
+        "delta": {
+          "type": "string",
+          "description": "The text delta to append."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item the delta applies to.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id",
+        "delta"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.delta"
+    },
+    "ClientEventInputTextDone": {
+      "type": "object",
+      "description": "Signals that the streamed input text content for the specified item is complete.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the item whose text content has finished streaming."
+        },
+        "content_index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The index of the content part within the item.",
+          "default": 0
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientEvent"
+        }
+      ],
+      "x-ms-discriminator-value": "input_text.done"
+    },
     "ClientEventOutputAudioBufferClear": {
       "type": "object",
       "description": "Client request to clear the avatar output buffer.",
@@ -1409,7 +1572,9 @@
         "response.cancel",
         "session.avatar.connect",
         "mcp_approval_response",
-        "output_audio_buffer.clear"
+        "output_audio_buffer.clear",
+        "input_text.delta",
+        "input_text.done"
       ],
       "x-ms-enum": {
         "name": "ClientEventType",
@@ -1487,6 +1652,16 @@
             "name": "output_audio_buffer_clear",
             "value": "output_audio_buffer.clear",
             "description": "Client request to clear the avatar output buffer."
+          },
+          {
+            "name": "input_text_delta",
+            "value": "input_text.delta",
+            "description": "Streamed delta of input text content being appended to an item."
+          },
+          {
+            "name": "input_text_done",
+            "value": "input_text.done",
+            "description": "Signals that the streamed input text content for an item is complete."
           }
         ]
       }
@@ -2808,6 +2983,11 @@
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
         },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
+        },
         "temperature": {
           "type": "number",
           "format": "float",
@@ -3625,6 +3805,11 @@
         "tool_choice": {
           "$ref": "#/definitions/ToolChoice",
           "description": "Specifies which tools the model is allowed to call during the session."
+        },
+        "parallel_tool_calls": {
+          "type": "boolean",
+          "description": "Whether the model is allowed to call tools in parallel.",
+          "default": true
         },
         "temperature": {
           "type": "number",

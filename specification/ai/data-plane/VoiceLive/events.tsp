@@ -36,12 +36,10 @@ union ClientEventType {
 
   /** Streamed delta of input text content being appended to an item. */
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   input_text_delta: "input_text.delta",
 
   /** Signals that the streamed input text content for an item is complete. */
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   input_text_done: "input_text.done",
 }
 

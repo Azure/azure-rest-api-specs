@@ -72,7 +72,6 @@ model RequestSession {
 
   /** Whether the model is allowed to call tools in parallel. */
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   parallel_tool_calls?: boolean = true;
 
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
@@ -551,7 +550,6 @@ model AzureAvatarVoiceSyncVoice extends AzureVoice {
  * service in the future.
  */
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_07_15)
 union AzureRealtimeNativeVoiceName {
   string,
 
@@ -599,7 +597,6 @@ union AzureRealtimeNativeVoiceName {
  * `azure-realtime` model.
  */
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_07_15)
 @usage(DualUsage)
 model AzureRealtimeNativeVoice {
   /** The type of the voice. */
@@ -619,7 +616,6 @@ union Voice {
   AzureVoice, // includes AzureCustomVoice, AzureStandardVoice, AzurePersonalVoice, AzureAvatarVoiceSyncVoice
 
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   AzureRealtimeNativeVoice,
 }
 

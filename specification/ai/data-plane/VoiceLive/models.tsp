@@ -164,7 +164,6 @@ model ClientEventInputAudioClear extends ClientEvent {
 /** Streams a delta of input text content into the specified item. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_07_15)
 @usage(RequestUsage)
 model ClientEventInputTextDelta extends ClientEvent {
   /** The event type, must be `input_text.delta`. */
@@ -183,7 +182,6 @@ model ClientEventInputTextDelta extends ClientEvent {
 /** Signals that the streamed input text content for the specified item is complete. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_07_15)
 @usage(RequestUsage)
 model ClientEventInputTextDone extends ClientEvent {
   /** The event type, must be `input_text.done`. */
