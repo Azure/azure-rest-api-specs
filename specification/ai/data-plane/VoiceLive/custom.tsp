@@ -153,7 +153,7 @@ model ResponseSession is RequestSession {
    * the server and cannot be changed with `session.update`.
    */
   @added(Versions.v2026_07_15)
-  expires_at?: int32;
+  expires_at?: int64;
 }
 
 /** Supported OpenAI voice names (string enum). */
