@@ -13,7 +13,6 @@ namespace Microsoft.AlertsManagement;
 /**
  * An alert created in alert management service.
  */
-@tenantResource
 model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
   ...ResourceNameParameter<
     Resource = Alert,
@@ -22,6 +21,14 @@ model Alert is Azure.ResourceManager.ProxyResource<AlertProperties> {
     NamePattern = ""
   >;
 }
+
+alias AlertIdParameter = {
+  /** Unique ID of an alert instance. */
+  @path
+  @segment("alerts")
+  @key
+  alertId: string;
+};
 
 alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
@@ -34,13 +41,8 @@ alias AlertOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter,
+  "ServiceAlertTenant"
 >;
 
 @armResourceOperations
@@ -85,12 +87,16 @@ interface Alerts {
     ErrorType = AlertsManagementErrorResponse
   >;
 }
+
+// Multi-scope route `/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}`
+// (subscription / RG / resource / management group). 4th template arg "ServiceAlert"
+// names the C# resource class to preserve the v1.1.x autorest GA `ServiceAlertResource`.
 alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
     /** undefined */
-    @path
+    @path(#{ allowReserved: true })
     @segment("")
     @key
     scope: string;
@@ -102,13 +108,8 @@ alias AlertOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter,
+  "ServiceAlert"
 >;
 
 alias GetAllTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
@@ -122,13 +123,8 @@ alias GetAllTenantOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     providerNamespace: "Microsoft.AlertsManagement";
   },
   {},
-  {
-    /** Unique ID of an alert instance. */
-    @path
-    @segment("alerts")
-    @key
-    alertId: string;
-  }
+  AlertIdParameter,
+  "ServiceAlertTenant"
 >;
 @armResourceOperations
 interface AlertGetAllTenantOperation {
@@ -372,6 +368,7 @@ interface AlertOperationGroup {
    * Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
    */
   @action("changestate")
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant variant uses same C# name; resolved by separate resource class"
   changeState is AlertOperationGroupOps.ActionSync<
     Alert,
     Comments,
@@ -392,6 +389,7 @@ interface AlertOperationGroup {
    */
   @get
   @action("history")
+  #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Tenant variant uses same C# name; resolved by separate resource class"
   getHistory is AlertOperationGroupOps.ActionSync<
     Alert,
     void,
