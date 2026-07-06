@@ -60,7 +60,8 @@ interface DatabaseConnectionOps
         @key
         @pattern("^[a-zA-Z0-9]+$")
         databaseConnectionName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildDatabaseConnection"
     > {}
 
 @tag("StaticSites")
@@ -150,7 +151,8 @@ interface DatabaseConnectionOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9]+$")
         databaseConnectionName: string,
-      }
+      },
+      ResourceName = "StaticSiteDatabaseConnection"
     > {}
 
 @tag("StaticSites")
@@ -220,18 +222,23 @@ interface DatabaseConnectionOperationGroup {
 }
 
 @@doc(DatabaseConnection.name, "Name of the database connection.");
-@@doc(DatabaseConnection.properties,
+@@doc(
+  DatabaseConnection.properties,
   "DatabaseConnection resource specific properties"
 );
-@@doc(DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
+@@doc(
+  DatabaseConnections.createOrUpdateBuildDatabaseConnection::parameters.resource,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
+@@doc(
+  DatabaseConnections.updateBuildDatabaseConnection::parameters.properties,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
+@@doc(
+  DatabaseConnectionOperationGroup.createOrUpdateDatabaseConnection::parameters.resource,
   "A JSON representation of the database connection request properties"
 );
-@@doc(DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
+@@doc(
+  DatabaseConnectionOperationGroup.updateDatabaseConnection::parameters.properties,
   "A JSON representation of the database connection request properties"
 );

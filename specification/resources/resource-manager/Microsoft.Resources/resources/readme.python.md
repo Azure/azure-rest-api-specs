@@ -2,7 +2,7 @@
 
 These settings apply only when `--python` is specified on the command line.
 
-``` yaml $(python)
+```yaml $(python)
 title: ResourceManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
@@ -16,7 +16,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(python)
+```yaml $(python)
 namespace: azure.mgmt.resource.resources
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources
 ```

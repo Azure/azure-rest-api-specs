@@ -14,6 +14,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./ConnectedCluster.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -55,6 +56,11 @@ enum Versions {
    * The 2026-02-01-preview API version.
    */
   v2026_02_01_preview: "2026-02-01-preview",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
 }
 
 interface Operations

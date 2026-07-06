@@ -16,7 +16,6 @@ namespace Microsoft.Confluent;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(EnvironmentProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
@@ -194,6 +193,7 @@ interface SCEnvironmentRecordCluster {
 
 @@doc(SCEnvironmentRecord.name, "Confluent environment id");
 @@doc(SCEnvironmentRecord.properties, "Environment properties");
-@@doc(SCEnvironmentRecords.createOrUpdate::parameters.resource,
+@@doc(
+  SCEnvironmentRecords.createOrUpdate::parameters.resource,
   "Confluent Environment resource model"
 );
