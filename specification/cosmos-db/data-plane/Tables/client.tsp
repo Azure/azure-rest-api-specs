@@ -19,8 +19,8 @@ namespace ClientCustomizations;
   "python"
 );
 
-@@alternateType(Data.Tables.AccessPolicy.start, string, "python");
-@@alternateType(Data.Tables.AccessPolicy.expiry, string, "python");
+@@alternateType(Data.Tables.AccessPolicy.start, string, "python,javascript");
+@@alternateType(Data.Tables.AccessPolicy.expiry, string, "python,javascript");
 
 /** The signed identifier. */
 model SignedIdentifier {
@@ -31,3 +31,5 @@ model SignedIdentifier {
   @Xml.name("AccessPolicy") accessPolicy?: AccessPolicy;
 }
 @@alternateType(Data.Tables.SignedIdentifier, SignedIdentifier, "python");
+
+@@clientName(TablesServiceError, "TableServiceError", "javascript");
