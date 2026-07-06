@@ -39752,6 +39752,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: An agent implementing the A2A protocol.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2APreviewToolboxTool:
       type: object
       required:
@@ -39785,6 +39788,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An A2A tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2AProtocolConfiguration:
       type: object
       description: Configuration specific to the A2A protocol.
@@ -39817,6 +39823,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An A2A (Agent-to-Agent) tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     A2AToolCallOutput:
       type: object
       required:
@@ -39846,6 +39855,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of an A2A (Agent-to-Agent) tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     AISearchIndexResource:
       type: object
       properties:
@@ -40201,11 +40213,6 @@ components:
           workflow: '#/components/schemas/WorkflowAgentDefinition'
           external: '#/components/schemas/ExternalAgentDefinition'
           container_app: '#/components/schemas/ContainerAppAgentDefinition'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - WorkflowAgents=V1Preview
-          - ExternalAgents=V1Preview
-          - DraftAgents=V1Preview
     AgentDefinitionOptInKeys:
       type: string
       enum:
@@ -41730,6 +41737,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: An Azure Function tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     AzureFunctionToolCallOutput:
       type: object
       required:
@@ -41824,6 +41834,9 @@ components:
           type: string
           description: Filter search results by a specific time range. See [accepted values here](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters).
       description: A bing custom search configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchPreviewTool:
       type: object
       required:
@@ -41842,6 +41855,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Bing custom search tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolCall:
       type: object
       required:
@@ -41867,6 +41883,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A Bing custom search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolCallOutput:
       type: object
       required:
@@ -41892,6 +41911,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a Bing custom search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingCustomSearchToolParameters:
       type: object
       required:
@@ -41906,6 +41928,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The bing custom search tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BingGroundingSearchConfiguration:
       type: object
       required:
@@ -42094,6 +42119,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Browser Automation Tool, as used to configure an Agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationPreviewToolboxTool:
       type: object
       required:
@@ -42111,6 +42139,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A browser automation tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolCall:
       type: object
       required:
@@ -42136,6 +42167,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A browser automation tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolCallOutput:
       type: object
       required:
@@ -42161,6 +42195,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a browser automation tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolConnectionParameters:
       type: object
       required:
@@ -42170,6 +42207,9 @@ components:
           type: string
           description: The ID of the project connection to your Azure Playwright resource.
       description: Definition of input parameters for the connection used by the Browser Automation Tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     BrowserAutomationToolParameters:
       type: object
       required:
@@ -42180,6 +42220,9 @@ components:
             - $ref: '#/components/schemas/BrowserAutomationToolConnectionParameters'
           description: The project connection parameters associated with the Browser Automation Tool.
       description: Definition of input parameters for the Browser Automation Tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     CaptureStructuredOutputsTool:
       type: object
       required:
@@ -42974,11 +43017,6 @@ components:
             conditional_previews:
               - DraftAgents=V1Preview
           default: false
-      x-ms-foundry-meta:
-        conditional_previews:
-          - WorkflowAgents=V1Preview
-          - ExternalAgents=V1Preview
-          - DraftAgents=V1Preview
     CreateEvalRequest:
       type: object
       required:
@@ -46281,6 +46319,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A Fabric data agent tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricDataAgentToolCallOutput:
       type: object
       required:
@@ -46306,6 +46347,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a Fabric data agent tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricDataAgentToolParameters:
       type: object
       properties:
@@ -46318,6 +46362,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The fabric data agent tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricIQPreviewTool:
       type: object
       required:
@@ -46349,6 +46396,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A FabricIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FabricIQPreviewToolboxTool:
       type: object
       required:
@@ -46379,6 +46429,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A FabricIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     FileDataGenerationJobOutput:
       type: object
       required:
@@ -46786,6 +46839,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluationRuleAction'
       description: Evaluation rule action for human evaluation.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     HumanEvaluationRuleAction:
       type: object
       required:
@@ -47474,6 +47530,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A memory command tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryCommandToolCallOutput:
       type: object
       required:
@@ -47495,6 +47554,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a memory command tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryItem:
       type: object
       required:
@@ -47630,6 +47692,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool for integrating memories into the agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemorySearchTool:
       type: object
       required:
@@ -47687,6 +47752,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A memory search tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     MemoryStoreDefaultDefinition:
       type: object
       required:
@@ -48008,6 +48076,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a Microsoft Fabric tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ModelCredentialRequest:
       type: object
       required:
@@ -52514,9 +52585,7 @@ components:
             - type: string
             - type: 'null'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         tools:
           type: array
           items:
@@ -52728,9 +52797,7 @@ components:
         verbosity:
           $ref: '#/components/schemas/OpenAI.Verbosity'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         max_completion_tokens:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -53645,9 +53712,7 @@ components:
       type: object
       properties:
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -53863,9 +53928,7 @@ components:
       type: object
       properties:
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -54847,9 +54910,7 @@ components:
           description: The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
           x-oaiTypeLabel: string
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         instructions:
           anyOf:
             - type: string
@@ -56559,9 +56620,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
     OpenAI.EvalGraderStringCheck:
       type: object
       required:
@@ -56868,7 +56927,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
-          description: Optional reasoning effort parameter. This is a query parameter used to select responses.
         temperature:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -65405,9 +65463,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.AssistantSupportedModels'
           description: ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models) for descriptions of them.
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         name:
           anyOf:
             - type: string
@@ -68542,9 +68598,7 @@ components:
       type: object
       properties:
         effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         summary:
           anyOf:
             - type: string
@@ -68577,7 +68631,6 @@ components:
     OpenAI.ReasoningEffort:
       anyOf:
         - type: string
-        - type: string
           enum:
             - none
             - minimal
@@ -68585,6 +68638,7 @@ components:
             - medium
             - high
             - xhigh
+        - type: 'null'
       description: |-
         Constrains effort on reasoning for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
@@ -76211,6 +76265,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A reminder tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ResponseRetrievalItemGenerationParams:
       type: object
       required:
@@ -76906,6 +76963,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A SharePoint grounding tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointGroundingToolCallOutput:
       type: object
       required:
@@ -76931,6 +76991,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a SharePoint grounding tool call.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointGroundingToolParameters:
       type: object
       properties:
@@ -76943,6 +77006,9 @@ components:
             The project connections attached to this tool. There can be a maximum of 1 connection
             resource attached to the tool.
       description: The sharepoint grounding tool parameters.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SharepointPreviewTool:
       type: object
       required:
@@ -76961,6 +77027,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: The input definition information for a sharepoint tool as used to configure an agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     SimpleQnADataGenerationJobOptions:
       type: object
       required:
@@ -77631,6 +77700,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A toolbox search tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     ToolboxSkill:
       type: object
       required:
@@ -78344,6 +78416,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A WorkIQ server-side tool.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WorkIQPreviewToolboxTool:
       type: object
       required:
@@ -78360,6 +78435,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A WorkIQ tool stored in a toolbox.
+      x-ms-foundry-meta:
+        required_previews:
+          - preview_tool
     WorkflowActionOutputItem:
       type: object
       required:
