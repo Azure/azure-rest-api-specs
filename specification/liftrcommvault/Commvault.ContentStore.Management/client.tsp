@@ -11,17 +11,49 @@ using Commvault.ContentStore;
 );
 
 // [SUFFIX002] The "Request" suffix is reserved for HTTP protocol types; use "Content" for request-body models.
-@@clientName(ActivateSaaSParameterRequest, "ActivateSaaSParameterContent", "csharp");
-@@clientName(BackupProtectionGroupRequest, "BackupProtectionGroupContent", "csharp");
-@@clientName(CountProtectedItemsRequest, "CountProtectedItemsContent", "csharp");
-@@clientName(RestoreProtectionItemRequest, "RestoreProtectionItemContent", "csharp");
-@@clientName(StopBackupProtectionGroupRequest, "StopBackupProtectionGroupContent", "csharp");
+@@clientName(
+  ActivateSaaSParameterRequest,
+  "ActivateSaaSParameterContent",
+  "csharp"
+);
+@@clientName(
+  BackupProtectionGroupRequest,
+  "BackupProtectionGroupContent",
+  "csharp"
+);
+@@clientName(
+  CountProtectedItemsRequest,
+  "CountProtectedItemsContent",
+  "csharp"
+);
+@@clientName(
+  RestoreProtectionItemRequest,
+  "RestoreProtectionItemContent",
+  "csharp"
+);
+@@clientName(
+  StopBackupProtectionGroupRequest,
+  "StopBackupProtectionGroupContent",
+  "csharp"
+);
 
 // [SUFFIX004] The "Response" suffix is reserved for HTTP protocol types; use "Result"
 // (or "Data" for models that derive from ResourceData).
-@@clientName(BackupProtectionGroupResponse, "BackupProtectionGroupResult", "csharp");
-@@clientName(CountProtectedItemsResponse, "CountProtectedItemsResult", "csharp");
-@@clientName(RestoreProtectionItemResponse, "RestoreProtectionItemResult", "csharp");
+@@clientName(
+  BackupProtectionGroupResponse,
+  "BackupProtectionGroupResult",
+  "csharp"
+);
+@@clientName(
+  CountProtectedItemsResponse,
+  "CountProtectedItemsResult",
+  "csharp"
+);
+@@clientName(
+  RestoreProtectionItemResponse,
+  "RestoreProtectionItemResult",
+  "csharp"
+);
 @@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
 @@clientName(SaaSResourceDetailsResponse, "SaaSResourceDetailsData", "csharp");
 
@@ -32,9 +64,21 @@ using Commvault.ContentStore;
 @@clientName(BackupOptions, "BackupConfig", "csharp");
 
 // [BOOL001] Boolean properties require an Is/Can/Has/Should prefix (and corrected "Snapshot" casing).
-@@clientName(BackupOptions.backupCopyImmediately, "ShouldCopyImmediately", "csharp");
-@@clientName(BackupOptions.runSnapShotBackup, "ShouldRunSnapshotBackup", "csharp");
-@@clientName(BackupOptions.notifyUserOnJobCompletion, "ShouldNotifyUserOnJobCompletion", "csharp");
+@@clientName(
+  BackupOptions.backupCopyImmediately,
+  "ShouldCopyImmediately",
+  "csharp"
+);
+@@clientName(
+  BackupOptions.runSnapShotBackup,
+  "ShouldRunSnapshotBackup",
+  "csharp"
+);
+@@clientName(
+  BackupOptions.notifyUserOnJobCompletion,
+  "ShouldNotifyUserOnJobCompletion",
+  "csharp"
+);
 
 // [ACRONYM] "BackUp" should be treated as the compound word "Backup".
 @@clientName(BackUpType, "BackupType", "csharp");
