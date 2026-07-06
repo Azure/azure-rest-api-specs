@@ -178,9 +178,11 @@ export default async function detectNamespaces({ context, core }) {
     }
   }
 
-  const formatRules = loadFormatRules(core);
+  const formatRules = await loadFormatRules(core);
   /** @type {Record<string, import("./validate-format.js").FormatValidationResult>} */
   const formatResults = {};
+  // Format validation only applies to management-plane namespaces. Data-plane namespaces
+  // follow language-specific conventions that vary too widely for regex-based rules.
   if (formatRules && isMgmt) {
     for (const [language, namespace] of Object.entries(namespacesFound)) {
       formatResults[language] = validateNamespaceFormat(language, namespace, formatRules);

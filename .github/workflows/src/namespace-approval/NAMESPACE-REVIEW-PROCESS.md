@@ -95,6 +95,21 @@ No action needed beyond your normal workflow:
 
 To update approvers, submit a PR modifying `.github/namespace-approvers.yml`. Changes take effect immediately on merge.
 
+## Format Validation
+
+Namespace format validation (regex-based naming rules from `.github/namespace-format-rules.yml`) only applies to **management-plane** namespaces. Data-plane namespaces follow language-specific conventions that vary too widely for centralized regex rules.
+
+## Security Model
+
+The approval workflow uses `pull_request_target` events, which grant write access to the repository. This is required because `pull_request` events from forks run with read-only permissions and cannot modify labels or commit statuses.
+
+Mitigations:
+
+- **No fork code execution:** The workflow only reads configuration files (approvers YAML) from the base branch, never from the PR branch.
+- **Unauthorized label reversal:** If an unauthorized user adds an approval label, the workflow removes it and posts a warning comment.
+- **Unauthorized removal guard:** If an unauthorized user removes a pending label, the workflow re-applies it.
+- **Approver allowlist:** Only users listed in `.github/namespace-approvers.yml` can approve namespaces.
+
 ## Relationship to API Review
 
 Namespace approval is **separate from API review**:

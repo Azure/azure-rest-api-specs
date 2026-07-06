@@ -14,7 +14,7 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import validateApproval from "../../src/namespace-approval/validate-approval.js";
 
-/** @type {import("../../src/namespace-approval/validate-approval.js").ApproversConfig} */
+/** @type {import("../../src/namespace-approval/approvers.js").ApproversConfig} */
 const approversConfig = {
   "data-plane": {
     dotnet: ["jsquire", "m-nash"],

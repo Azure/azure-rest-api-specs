@@ -1,11 +1,11 @@
-import { readFile, unlink, writeFile } from "fs/promises";
-import yaml from "js-yaml";
+import { unlink, writeFile } from "fs/promises";
 import { join } from "path";
 import { z } from "zod";
 import { execFile } from "../../../shared/src/exec.js";
 import { PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { commentOrUpdate, parseExistingComments } from "../comment.js";
 import { extractInputs } from "../context.js";
+import { loadApproversConfig } from "./approvers.js";
 
 const FormatValidationResultSchema = z.object({
   valid: z.boolean(),
@@ -24,20 +24,6 @@ const NamespaceResultsSchema = z.object({
   prNumber: z.number().int().positive(),
   action: z.string().optional(),
 });
-
-/**
- * @typedef {Object} ApproversConfig
- * @property {Record<string, string[]>} [data-plane]
- * @property {{ all?: string[] }} [management-plane]
- */
-
-/**
- * @returns {Promise<ApproversConfig>}
- */
-async function loadApproversConfig() {
-  const content = await readFile(".github/namespace-approvers.yml", "utf8");
-  return /** @type {ApproversConfig} */ (yaml.load(content));
-}
 
 /**
  * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} github
@@ -115,7 +101,7 @@ async function removeLabelIfPresent(github, owner, repo, issueNumber, label) {
 }
 
 /**
- * @param {ApproversConfig} approversConfig
+ * @param {import("./approvers.js").ApproversConfig} approversConfig
  * @param {boolean} isMgmt
  * @param {string} language
  * @returns {string[]}
@@ -167,7 +153,7 @@ export function parseCommentTable(body) {
 
 /**
  * @param {Object} params
- * @param {ApproversConfig} params.approversConfig
+ * @param {import("./approvers.js").ApproversConfig} params.approversConfig
  * @param {Record<string, string>} params.namespacesFound
  * @param {Record<string, string>} [params.artifactNames] - Secondary artifact names per language (e.g. Java Maven artifact).
  * @param {Record<string, z.infer<typeof FormatValidationResultSchema>>} params.formatResults

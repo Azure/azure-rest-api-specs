@@ -1,4 +1,4 @@
-import { readFileSync } from "fs";
+import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 
 /**
@@ -18,11 +18,11 @@ const DEFAULT_RULES_PATH = ".github/namespace-format-rules.yml";
  *
  * @param {import("@actions/core")} core
  * @param {string} [rulesPath]
- * @returns {FormatRulesConfig | null}
+ * @returns {Promise<FormatRulesConfig | null>}
  */
-export function loadFormatRules(core, rulesPath = DEFAULT_RULES_PATH) {
+export async function loadFormatRules(core, rulesPath = DEFAULT_RULES_PATH) {
   try {
-    const content = readFileSync(rulesPath, "utf8");
+    const content = await readFile(rulesPath, "utf8");
     return /** @type {FormatRulesConfig} */ (yaml.load(content));
   } catch (e) {
     core.warning(

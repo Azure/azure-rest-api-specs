@@ -1,19 +1,14 @@
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
 import { extractInputs } from "../context.js";
-
-/**
- * @typedef {Object} ApproversConfig
- * @property {Record<string, string[]>} [data-plane]
- * @property {{ all?: string[] }} [management-plane]
- */
+import { loadApproversConfig } from "./approvers.js";
 
 /**
  * @typedef {Object} ValidateContext
  * @property {import("@actions/github-script").AsyncFunctionArguments["github"]} github
  * @property {import("@actions/github-script").AsyncFunctionArguments["context"]} context
  * @property {import("@actions/github-script").AsyncFunctionArguments["core"]} core
- * @property {ApproversConfig} approversConfig
+ * @property {import("./approvers.js").ApproversConfig} approversConfig
+ * @property {string} owner
+ * @property {string} repo
  * @property {string} targetLabel
  * @property {string} actor
  * @property {number} prNumber
@@ -26,14 +21,14 @@ const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 /**
  * Get all authorized approvers as a flat list.
  *
- * @param {ApproversConfig} approversConfig
+ * @param {import("./approvers.js").ApproversConfig} approversConfig
  * @returns {string[]}
  */
 function getAllApprovers(approversConfig) {
   const mgmtApprovers = approversConfig["management-plane"]?.all ?? [];
-  return [
-    ...new Set([...mgmtApprovers, ...Object.values(approversConfig["data-plane"] ?? {}).flat()]),
-  ];
+  /** @type {string[][]} */
+  const dpValues = Object.values(approversConfig["data-plane"] ?? {});
+  return [...new Set([...mgmtApprovers, ...dpValues.flat()])];
 }
 
 /**
@@ -43,9 +38,10 @@ function getAllApprovers(approversConfig) {
  */
 async function handleUnlabeled({
   github,
-  context,
   core,
   approversConfig,
+  owner,
+  repo,
   targetLabel,
   actor,
   prNumber,
@@ -70,15 +66,15 @@ async function handleUnlabeled({
   core.warning(`${actor} is not authorized to remove ${targetLabel}, re-applying`);
 
   await github.rest.issues.addLabels({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner,
+    repo,
     issue_number: prNumber,
     labels: [targetLabel],
   });
 
   await github.rest.issues.createComment({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner,
+    repo,
     issue_number: prNumber,
     body: `⚠️ @${actor} is not authorized to remove \`${targetLabel}\`. Only authorized namespace approvers can remove namespace labels.\n\nLabel has been re-applied.`,
   });
@@ -91,9 +87,10 @@ async function handleUnlabeled({
  */
 async function handleLabeled({
   github,
-  context,
   core,
   approversConfig,
+  owner,
+  repo,
   targetLabel,
   actor,
   prNumber,
@@ -109,14 +106,14 @@ async function handleLabeled({
 
     if (!allApprovers.includes(actor)) {
       await github.rest.issues.removeLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         name: targetLabel,
       });
       await github.rest.issues.createComment({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         body: `⚠️ @${actor} is not authorized to use \`namespace-approved-all\`. This shortcut is available to authorized namespace approvers.\n\nLabel removed.`,
       });
@@ -144,14 +141,14 @@ async function handleLabeled({
 
     if (!authorizedList.includes(actor)) {
       await github.rest.issues.removeLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         name: targetLabel,
       });
       await github.rest.issues.createComment({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         body: `⚠️ @${actor} is not authorized to approve **${lang}** namespace. Authorized approvers: ${authorizedList.join(", ")}.\n\nLabel \`${targetLabel}\` has been removed.`,
       });
@@ -164,45 +161,42 @@ async function handleLabeled({
   core.info(`Approving languages: ${langsToApprove.join(", ")} by ${actor}`);
 
   for (const lang of langsToApprove) {
+    // Add approved label before removing pending to avoid status check timing gap (#4)
+    if (targetLabel === "namespace-approved-all") {
+      const approvedLabel = `${lang}-namespace-approved`;
+      try {
+        await github.rest.issues.getLabel({ owner, repo, name: approvedLabel });
+      } catch {
+        await github.rest.issues.createLabel({
+          owner,
+          repo,
+          name: approvedLabel,
+          color: "22c55e",
+        });
+      }
+      await github.rest.issues.addLabels({
+        owner,
+        repo,
+        issue_number: prNumber,
+        labels: [approvedLabel],
+      });
+    }
+
     try {
       await github.rest.issues.removeLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         name: `${lang}-namespace-pending`,
       });
     } catch {
       // label may not exist
     }
-
-    if (targetLabel === "namespace-approved-all") {
-      const approvedLabel = `${lang}-namespace-approved`;
-      try {
-        await github.rest.issues.getLabel({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          name: approvedLabel,
-        });
-      } catch {
-        await github.rest.issues.createLabel({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          name: approvedLabel,
-          color: "22c55e",
-        });
-      }
-      await github.rest.issues.addLabels({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: prNumber,
-        labels: [approvedLabel],
-      });
-    }
   }
 
   const { data: currentPR } = await github.rest.pulls.get({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+    owner,
+    repo,
     pull_number: prNumber,
   });
   /** @type {string[]} */
@@ -213,12 +207,12 @@ async function handleLabeled({
     label.endsWith("-namespace-pending"),
   );
 
-  const comments = await github.rest.issues.listComments({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
+  const comments = await github.paginate(github.rest.issues.listComments, {
+    owner,
+    repo,
     issue_number: prNumber,
   });
-  const botComment = comments.data.find(
+  const botComment = comments.find(
     (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
       comment.user?.type === "Bot" &&
       (comment.body?.includes("<!-- namespace-review-bot -->") ?? false),
@@ -231,8 +225,8 @@ async function handleLabeled({
       body = body.replace(rowRegex, `$1 ✅ Approved by @${actor} $2`);
     }
     await github.rest.issues.updateComment({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
+      owner,
+      repo,
       comment_id: botComment.id,
       body,
     });
@@ -242,8 +236,8 @@ async function handleLabeled({
     core.info("All namespaces approved!");
     try {
       await github.rest.issues.removeLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         issue_number: prNumber,
         name: "namespace-review-required",
       });
@@ -251,28 +245,24 @@ async function handleLabeled({
       // label may not exist
     }
     try {
-      await github.rest.issues.getLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        name: "namespace-approved",
-      });
+      await github.rest.issues.getLabel({ owner, repo, name: "namespace-approved" });
     } catch {
       await github.rest.issues.createLabel({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
+        owner,
+        repo,
         name: "namespace-approved",
         color: "22c55e",
       });
     }
     await github.rest.issues.addLabels({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
+      owner,
+      repo,
       issue_number: prNumber,
       labels: ["namespace-approved"],
     });
     await github.rest.issues.createComment({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
+      owner,
+      repo,
       issue_number: prNumber,
       body: "## ✅ Namespace Approved\n\nAll required namespace approvals received. This PR is clear to merge from a namespace perspective.",
     });
@@ -286,18 +276,15 @@ async function handleLabeled({
  * @param {import("@actions/github-script").AsyncFunctionArguments} args
  */
 export default async function validateApproval({ github, context, core }) {
-  const content = await readFile(".github/namespace-approvers.yml", "utf8");
-  /** @type {ApproversConfig} */
-  const approversConfig = /** @type {ApproversConfig} */ (yaml.load(content));
+  const approversConfig = await loadApproversConfig();
 
-  const { issue_number } = await extractInputs(github, context, core);
+  const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload =
     /** @type {import("@octokit/webhooks-types").PullRequestLabeledEvent | import("@octokit/webhooks-types").PullRequestUnlabeledEvent} */ (
       context.payload
     );
 
-  const prNumber = issue_number;
   /** @type {string[]} */
   const labels = payload.pull_request.labels.map(
     (/** @type {{ name: string }} */ label) => label.name,
@@ -312,9 +299,11 @@ export default async function validateApproval({ github, context, core }) {
       context,
       core,
       approversConfig,
+      owner,
+      repo,
       targetLabel,
       actor,
-      prNumber,
+      prNumber: issue_number,
       isMgmt,
     });
   }
@@ -329,9 +318,11 @@ export default async function validateApproval({ github, context, core }) {
     context,
     core,
     approversConfig,
+    owner,
+    repo,
     targetLabel,
     actor,
-    prNumber,
+    prNumber: issue_number,
     isMgmt,
     labels,
   });
