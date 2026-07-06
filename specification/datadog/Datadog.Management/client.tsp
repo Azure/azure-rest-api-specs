@@ -228,3 +228,5 @@ model DatadogAgreement extends Azure.ResourceManager.CommonTypes.Resource {
     "id" | "name" | "type" | "systemData"
   >;
 }
+
+@@clientName(ActivateSaaSParameterRequest.saaSResourceId, "saaSGuid", "go");
