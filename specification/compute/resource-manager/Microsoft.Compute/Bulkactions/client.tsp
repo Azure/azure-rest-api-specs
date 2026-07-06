@@ -56,6 +56,8 @@ namespace Microsoft.Compute;
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
+@@clientName(ResourceOperationDetails.deadlineType, "deadlineKind", "csharp");
+
 @@clientName(
   DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
