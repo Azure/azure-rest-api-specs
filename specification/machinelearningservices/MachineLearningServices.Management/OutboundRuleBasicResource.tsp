@@ -48,7 +48,9 @@ interface OutboundRuleBasicResourceOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         ruleName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningOutboundRuleBasic"
     > {}
 
 @armResourceOperations
@@ -124,13 +126,16 @@ interface OutboundRuleBasicResourceOperationGroupOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$")
         ruleName: string,
-      }
+      },
+      ErrorResponse,
+      "ManagedNetworkOutboundRuleBasic"
     > {}
 
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
 @added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface OutboundRuleBasicResourceOperationGroup {
   /**
