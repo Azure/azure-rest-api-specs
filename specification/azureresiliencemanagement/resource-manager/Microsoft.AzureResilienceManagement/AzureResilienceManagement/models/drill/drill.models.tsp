@@ -697,7 +697,8 @@ model ValidateForExecutionProperties {
 
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
-  sourceLocations: string[];
+  @madeOptional(Versions.v2026_06_01_preview)
+  sourceLocations?: string[];
 }
 
 @doc("Request body of the Validate For Execute Action of Drill.")
