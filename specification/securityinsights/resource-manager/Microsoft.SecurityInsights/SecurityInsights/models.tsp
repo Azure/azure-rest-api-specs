@@ -431,7 +431,6 @@ union packageKind {
 /**
  * The boolean value the metadata is for.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve released stable 2025-09-01 x-ms-enum name for backward compatibility"
 union Flag {
   string,
 
