@@ -13862,6 +13862,16 @@
         }
       }
     },
+    "AdditionalDiskProperties": {
+      "type": "object",
+      "description": "Specifies additional properties for a managed disk that can be set when attaching the disk to a virtual machine.",
+      "properties": {
+        "managedDiskProperties": {
+          "$ref": "#/definitions/ManagedDiskProperties",
+          "description": "Specifies the managed disk properties that can be updated on the disk when attaching it to the virtual machine."
+        }
+      }
+    },
     "AdditionalUnattendContent": {
       "type": "object",
       "description": "Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied.",
@@ -14117,6 +14127,30 @@
           "$ref": "#/definitions/RebalanceBehavior",
           "description": "Type of rebalance behavior that will be used for recreating virtual machines in the scale set across availability zones. Default and only supported value for now is CreateBeforeDelete."
         }
+      }
+    },
+    "AvailabilityPolicyDiskDelay": {
+      "type": "string",
+      "description": "Determines on how to handle disks with slow I/O.",
+      "enum": [
+        "None",
+        "AutomaticReattach"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityPolicyDiskDelay",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Defaults to behavior without av policy specified, which is VM restart upon slow disk io."
+          },
+          {
+            "name": "AutomaticReattach",
+            "value": "AutomaticReattach",
+            "description": "Upon a disk io failure or slow response, try detaching then reattaching the disk."
+          }
+        ]
       }
     },
     "AvailabilitySet": {
@@ -15529,6 +15563,16 @@
         "vmDiskType": {
           "$ref": "#/definitions/VmDiskTypes",
           "description": "VM disk types which are disallowed."
+        }
+      }
+    },
+    "DiskAvailabilityPolicy": {
+      "type": "object",
+      "description": "In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.",
+      "properties": {
+        "actionOnDiskDelay": {
+          "$ref": "#/definitions/AvailabilityPolicyDiskDelay",
+          "description": "Determines on how to handle disks with slow I/O."
         }
       }
     },
@@ -17167,6 +17211,10 @@
         "securityProfile": {
           "$ref": "#/definitions/VMDiskSecurityProfile",
           "description": "Specifies the security profile for the managed disk."
+        },
+        "additionalDiskProperties": {
+          "$ref": "#/definitions/AdditionalDiskProperties",
+          "description": "Specifies additional properties for the managed disk that can be set at the time of attaching the disk to the virtual machine."
         }
       },
       "allOf": [
@@ -17174,6 +17222,60 @@
           "$ref": "../../common-types/v1/common.json#/definitions/SubResource"
         }
       ]
+    },
+    "ManagedDiskProperties": {
+      "type": "object",
+      "description": "Specifies the properties of a managed disk that can be updated when attaching the disk to a virtual machine.",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks."
+        },
+        "burstingEnabled": {
+          "type": "boolean",
+          "description": "Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks."
+        },
+        "performancePlus": {
+          "type": "boolean",
+          "description": "Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled."
+        },
+        "optimizedForFrequentAttach": {
+          "type": "boolean",
+          "description": "Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine."
+        },
+        "availabilityPolicy": {
+          "$ref": "#/definitions/DiskAvailabilityPolicy",
+          "description": "In the case of an availability or connectivity issue with the disk, specify the behavior of your VM."
+        },
+        "maxShares": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time."
+        },
+        "networkAccessPolicy": {
+          "$ref": "#/definitions/NetworkAccessPolicy",
+          "description": "Policy for accessing the disk via network."
+        },
+        "diskAccessId": {
+          "type": "string",
+          "description": "ARM id of the DiskAccess resource for using private endpoints on disks."
+        },
+        "diskIOPSReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes."
+        },
+        "diskMBpsReadOnly": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10."
+        },
+        "logicalSectorSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default."
+        }
+      }
     },
     "MaxInstancePercentPerZonePolicy": {
       "type": "object",
@@ -17288,6 +17390,36 @@
           {
             "name": "Disabled",
             "value": "Disabled"
+          }
+        ]
+      }
+    },
+    "NetworkAccessPolicy": {
+      "type": "string",
+      "description": "Policy for accessing the disk via network.",
+      "enum": [
+        "AllowAll",
+        "AllowPrivate",
+        "DenyAll"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkAccessPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AllowAll",
+            "value": "AllowAll",
+            "description": "The disk can be exported or uploaded to from any network."
+          },
+          {
+            "name": "AllowPrivate",
+            "value": "AllowPrivate",
+            "description": "The disk can be exported or uploaded to using a DiskAccess resource's private endpoints."
+          },
+          {
+            "name": "DenyAll",
+            "value": "DenyAll",
+            "description": "The disk cannot be exported."
           }
         ]
       }

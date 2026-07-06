@@ -5688,6 +5688,137 @@ model ManagedDiskParameters extends SubResource {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of attaching the disk to the virtual machine.
+   */
+  @added(Versions.v2026_03_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
+}
+
+/**
+ * Specifies additional properties for a managed disk that can be set when attaching the disk to a virtual machine.
+ */
+@added(Versions.v2026_03_01)
+model AdditionalDiskProperties {
+  /**
+   * Specifies the managed disk properties that can be updated on the disk when attaching it to the virtual machine.
+   */
+  managedDiskProperties?: ManagedDiskProperties;
+}
+
+/**
+ * Specifies the properties of a managed disk that can be updated when attaching the disk to a virtual machine.
+ */
+@added(Versions.v2026_03_01)
+model ManagedDiskProperties {
+  /**
+   * Performance tier of the disk (e.g, P4, S10) as described here: https://azure.microsoft.com/en-us/pricing/details/managed-disks/. Does not apply to Ultra disks.
+   */
+  tier?: string;
+
+  /**
+   * Set to true to enable bursting beyond the provisioned performance target of the disk. Bursting is disabled by default. Does not apply to Ultra disks.
+   */
+  burstingEnabled?: boolean;
+
+  /**
+   * Set this flag to true to get a boost on the performance target of the disk deployed, see here on the respective performance target. This flag can only be set on disk creation time and cannot be disabled after enabled.
+   */
+  performancePlus?: boolean;
+
+  /**
+   * Setting this property to true improves reliability and performance of data disks that are frequently (more than 5 times a day) by detached from one virtual machine and attached to another. This property should not be set for disks that are not detached and attached frequently as it causes the disks to not align with the fault domain of the virtual machine.
+   */
+  optimizedForFrequentAttach?: boolean;
+
+  /**
+   * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+   */
+  availabilityPolicy?: DiskAvailabilityPolicy;
+
+  /**
+   * The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
+   */
+  maxShares?: int32;
+
+  /**
+   * Policy for accessing the disk via network.
+   */
+  networkAccessPolicy?: NetworkAccessPolicy;
+
+  /**
+   * ARM id of the DiskAccess resource for using private endpoints on disks.
+   */
+  diskAccessId?: string;
+
+  /**
+   * The total number of IOPS that will be allowed across all VMs mounting the shared disk as ReadOnly. One operation can transfer between 4k and 256k bytes.
+   */
+  diskIOPSReadOnly?: int64;
+
+  /**
+   * The total throughput (MBps) that will be allowed across all VMs mounting the shared disk as ReadOnly. MBps means millions of bytes per second - MB here uses the ISO notation, of powers of 10.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
+  diskMBpsReadOnly?: int64;
+
+  /**
+   * Logical sector size in bytes for Ultra disks. Supported values are 512 ad 4096. 4096 is the default.
+   */
+  logicalSectorSize?: int32;
+}
+
+/**
+ * In the case of an availability or connectivity issue with the disk, specify the behavior of your VM.
+ */
+@added(Versions.v2026_03_01)
+model DiskAvailabilityPolicy {
+  /**
+   * Determines on how to handle disks with slow I/O.
+   */
+  actionOnDiskDelay?: AvailabilityPolicyDiskDelay;
+}
+
+/**
+ * Determines on how to handle disks with slow I/O.
+ */
+@added(Versions.v2026_03_01)
+union AvailabilityPolicyDiskDelay {
+  string,
+
+  /**
+   * Defaults to behavior without av policy specified, which is VM restart upon slow disk io.
+   */
+  None: "None",
+
+  /**
+   * Upon a disk io failure or slow response, try detaching then reattaching the disk.
+   */
+  AutomaticReattach: "AutomaticReattach",
+}
+
+/**
+ * Policy for accessing the disk via network.
+ */
+@added(Versions.v2026_03_01)
+union NetworkAccessPolicy {
+  string,
+
+  /**
+   * The disk can be exported or uploaded to from any network.
+   */
+  AllowAll: "AllowAll",
+
+  /**
+   * The disk can be exported or uploaded to using a DiskAccess resource's private endpoints.
+   */
+  AllowPrivate: "AllowPrivate",
+
+  /**
+   * The disk cannot be exported.
+   */
+  DenyAll: "DenyAll",
 }
 
 /**
