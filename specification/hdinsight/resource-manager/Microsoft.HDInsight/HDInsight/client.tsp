@@ -516,7 +516,11 @@ using Azure.ClientGenerator.Core;
   "GetVirtualMachineAsyncOperationStatus",
   "csharp"
 );
-@@clientName(VirtualMachines.restartHosts::parameters.body, "content", "csharp");
+@@clientName(
+  VirtualMachines.restartHosts::parameters.body,
+  "content",
+  "csharp"
+);
 
 // Mark listUsages as pageable to match old SDK's Pageable<HDInsightUsage> return type
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
