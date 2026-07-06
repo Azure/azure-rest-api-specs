@@ -55,7 +55,7 @@ alias JitNetworkAccessPoliciesInitiateOps = Azure.ResourceManager.Legacy.RoutedO
     @path
     @segment("locations")
     @key
-    ascLocation: string;
+    ascLocation: Azure.Core.azureLocation;
 
     /** Name of a Just-in-Time access configuration policy. */
     @path

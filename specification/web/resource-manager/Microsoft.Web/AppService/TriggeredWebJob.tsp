@@ -58,7 +58,8 @@ interface TriggeredWebJobOps
         @segment("triggeredwebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotTriggeredWebJob"
     > {}
 
 @tag("WebApps")
@@ -131,7 +132,8 @@ interface TriggeredWebJobOperationGroupOps
         @segment("triggeredwebjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteTriggeredwebJob"
     > {}
 
 @tag("WebApps")
