@@ -1449,6 +1449,13 @@ model ReservationRecommendationDetailsProperties {
   @added(Versions.v2026_06_01)
   @visibility(Lifecycle.Read)
   tenantId?: string;
+
+  /**
+   * Projected usage details used for generating the recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  projectedUsage?: ReservationRecommendationDetailsProjectedUsage;
 }
 
 /**
@@ -1612,6 +1619,19 @@ model ReservationRecommendationDetailsUsageProperties {
    */
   @visibility(Lifecycle.Read)
   usageGrain?: string;
+}
+
+/**
+ * Details about projected usage data that has been used for computing the recommendation.
+ */
+@added(Versions.v2026_06_01)
+model ReservationRecommendationDetailsProjectedUsage {
+  /**
+   * Total projected retail usage in commitment units (CUs).
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "CUs is an accepted abbreviation for Commitment Units"
+  @visibility(Lifecycle.Read)
+  totalRetailUsageInCUs?: float32;
 }
 
 /**

@@ -6075,6 +6075,18 @@
         }
       ]
     },
+    "ReservationRecommendationDetailsProjectedUsage": {
+      "type": "object",
+      "description": "Details about projected usage data that has been used for computing the recommendation.",
+      "properties": {
+        "totalRetailUsageInCUs": {
+          "type": "number",
+          "format": "float",
+          "description": "Total projected retail usage in commitment units (CUs).",
+          "readOnly": true
+        }
+      }
+    },
     "ReservationRecommendationDetailsProperties": {
       "type": "object",
       "description": "The properties of the reservation recommendation.",
@@ -6117,6 +6129,11 @@
         "tenantId": {
           "type": "string",
           "description": "The tenant ID associated with the management group. Populated only when managementGroupId is populated.",
+          "readOnly": true
+        },
+        "projectedUsage": {
+          "$ref": "#/definitions/ReservationRecommendationDetailsProjectedUsage",
+          "description": "Projected usage details used for generating the recommendation.",
           "readOnly": true
         }
       }
