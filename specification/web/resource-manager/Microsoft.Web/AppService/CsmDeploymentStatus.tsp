@@ -52,7 +52,8 @@ interface CsmDeploymentStatusOps
         @segment("deploymentStatus")
         @key
         deploymentStatusId: string,
-      }
+      },
+      ResourceName = "CsmSiteDeploymentStatus"
     > {}
 
 @tag("WebApps")
@@ -114,7 +115,8 @@ interface CsmDeploymentStatusOperationGroupOps
         @segment("deploymentStatus")
         @key
         deploymentStatusId: string,
-      }
+      },
+      ResourceName = "CsmSiteSlotDeploymentStatus"
     > {}
 
 @tag("WebApps")

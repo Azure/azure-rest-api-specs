@@ -76,8 +76,13 @@ using Microsoft.Maintenance;
 );
 @@clientName(InputLinuxParameters, "MaintenanceLinuxPatchSettings", "csharp");
 @@clientName(
-  ScheduledEventApproveResponse,
+  ScheduledEventsApproveResponse,
   "MaintenanceScheduledEventApproveResult",
+  "csharp"
+);
+@@clientName(
+  ScheduledEventsIdList,
+  "MaintenanceScheduledEventIdList",
   "csharp"
 );
 @@clientName(RebootOptions, "MaintenanceRebootOption", "csharp");

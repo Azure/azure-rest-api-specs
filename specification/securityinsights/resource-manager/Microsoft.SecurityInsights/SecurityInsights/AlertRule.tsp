@@ -84,7 +84,7 @@ interface AlertRules {
     OperationalInsights,
     AlertRule,
     Request = AnalyticsRuleRunTrigger,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AlertRule>>,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader>,
     Error = ErrorResponse
   >;
 }

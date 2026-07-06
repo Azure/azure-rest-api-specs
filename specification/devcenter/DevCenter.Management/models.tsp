@@ -1238,7 +1238,7 @@ model CatalogUpdateProperties {
   @doc("Indicates the type of sync that is configured for the catalog.")
   syncType?: CatalogSyncType;
 
-  /** Indicates whether the catalog is configured to automatically build image definitions. Defaults to enabled. */
+  /** Indicates whether the catalog is configured to automatically build image definitions. Defaults to disabled for newly created catalogs. */
   @added(Versions.v2025_10_01_preview)
   autoImageBuildEnableStatus?: CatalogAutoImageBuildEnableStatus;
 

@@ -37,7 +37,12 @@ interface Relations {
    * Gets a relation for a given incident.
    */
   @tag("IncidentRelations")
-  get is Extension.Read<OperationalInsights, Relation, Error = CloudError>;
+  get is Extension.Read<
+    OperationalInsights,
+    Relation,
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
+  >;
 
   /**
    * Creates or updates a relation for a given incident.
@@ -46,7 +51,8 @@ interface Relations {
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     Relation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 
   /**
@@ -56,7 +62,8 @@ interface Relations {
   delete is Extension.DeleteSync<
     OperationalInsights,
     Relation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 
   /**
@@ -92,7 +99,8 @@ interface Relations {
       $skipToken?: string;
     },
     Response = ArmResponse<RelationList>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 }
 
@@ -146,7 +154,8 @@ interface BookmarkRelationsOps
         @minLength(3)
         @maxLength(63)
         relationName: string,
-      }
+      },
+      ResourceName = "SecurityInsightsBookmarkRelation"
     > {}
 
 @armResourceOperations
@@ -254,7 +263,8 @@ interface EntityRelationOps
         @minLength(3)
         @maxLength(63)
         relationName: string,
-      }
+      },
+      ResourceName = "SecurityInsightsEntityRelation"
     > {}
 
 @armResourceOperations

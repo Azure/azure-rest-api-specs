@@ -2,19 +2,16 @@ import "../models/common.tsp";
 import "./L3IsolationDomain.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
-using TypeSpec.Http;
 
 namespace Microsoft.ManagedNetworkFabric;
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" ""
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Unsupported common type"
 @doc("Defines the Internal Network resource.")
 @parentResource(L3IsolationDomain)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-@Azure.ResourceManager.Private.armResourceInternal(InternalNetworkProperties)
-model InternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
+model InternalNetwork
+  is Azure.ResourceManager.ProxyResource<InternalNetworkProperties, false> {
   @doc("Name of the Internal Network.")
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
   @path
@@ -22,11 +19,9 @@ model InternalNetwork extends Azure.ResourceManager.Foundations.ProxyResource {
   @segment("internalNetworks")
   @visibility(Lifecycle.Read)
   name: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Need custom inheritance"
-  @doc("The Internal Network Properties")
-  properties: InternalNetworkProperties;
 }
+
+@@doc(InternalNetwork.properties, "The Internal Network Properties");
 
 @armResourceOperations
 interface InternalNetworks {
