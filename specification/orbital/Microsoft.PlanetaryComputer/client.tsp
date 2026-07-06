@@ -88,8 +88,16 @@ namespace Customizations;
 @@clientName(Operation.creationTime, "createdOn", "csharp");
 
 // C# rename: *Url → *Uri (Azure SDK convention)
-@@clientName(IngestionDefinition.sourceCatalogUrl, "sourceCatalogUri", "csharp");
-@@clientName(IngestionDefinition.stacGeoparquetUrl, "stacGeoparquetUri", "csharp");
+@@clientName(
+  IngestionDefinition.sourceCatalogUrl,
+  "sourceCatalogUri",
+  "csharp"
+);
+@@clientName(
+  IngestionDefinition.stacGeoparquetUrl,
+  "stacGeoparquetUri",
+  "csharp"
+);
 @@clientName(IngestionRun.sourceCatalogUrl, "sourceCatalogUri", "csharp");
 
 // C# rename: finishTime → finishedOn (Azure SDK convention for timestamps)
@@ -151,7 +159,11 @@ namespace Customizations;
 @@clientName(Operation, "PlanetaryComputerOperation", "csharp");
 @@clientName(Operation.type, "Kind", "csharp");
 @@clientName(OperationStatus, "PlanetaryComputerOperationStatus", "csharp");
-@@clientName(OperationStatusHistoryItem, "PlanetaryComputerOperationStatusHistoryItem", "csharp");
+@@clientName(
+  OperationStatusHistoryItem,
+  "PlanetaryComputerOperationStatusHistoryItem",
+  "csharp"
+);
 @@clientName(ErrorInfo, "PlanetaryComputerErrorInfo", "csharp");
 
 // C# rename: all *Type unions/models → *Kind (avoid "Type" suffix)
@@ -164,7 +176,11 @@ namespace Customizations;
 @@clientName(FeatureCollectionType, "FeatureCollectionKind", "csharp");
 @@clientName(GeometryType, "GeometryKind", "csharp");
 @@clientName(GeometryCollectionType, "GeometryCollectionKind", "csharp");
-@@clientName(StacQueryableDefinitionDataType, "StacQueryableDefinitionDataKind", "csharp");
+@@clientName(
+  StacQueryableDefinitionDataType,
+  "StacQueryableDefinitionDataKind",
+  "csharp"
+);
 @@clientName(StacItemCollectionType, "StacItemCollectionKind", "csharp");
 @@clientName(StacModelType, "StacModelKind", "csharp");
 @@clientName(StacLinkType, "StacLinkKind", "csharp");
@@ -201,7 +217,11 @@ namespace Customizations;
 @@clientName(TilerStacSearchDefinition.lastUsed, "lastUsedOn", "csharp");
 
 // C# rename: expiration → expiresOn (Azure SDK timestamp convention)
-@@clientName(SharedAccessSignatureTokenConnection.expiration, "expiresOn", "csharp");
+@@clientName(
+  SharedAccessSignatureTokenConnection.expiration,
+  "expiresOn",
+  "csharp"
+);
 
 // C# rename: updated → updatedOn (Azure SDK timestamp convention)
 @@clientName(StacCommonMetadata.updated, "updatedOn", "csharp");
@@ -217,7 +237,11 @@ namespace Customizations;
 // Response → Result renames (Azure SDK reserves "Response" for HTTP response types)
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(ClassMapLegendResponse, "ClassMapLegendResult", "csharp");
-@@clientName(QueryableDefinitionsResponse, "QueryableDefinitionsResult", "csharp");
+@@clientName(
+  QueryableDefinitionsResponse,
+  "QueryableDefinitionsResult",
+  "csharp"
+);
 @@clientName(TilerInfoMapResponse, "TilerInfoMapResult", "csharp");
 
 // Generic geometry class names - add descriptive prefixes for Java to avoid
