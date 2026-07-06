@@ -66,7 +66,6 @@ using Microsoft.Network;
   FrontDoors.createOrUpdate::parameters.resource,
   "frontDoorParameters"
 );
-@@clientName(FrontDoor, "FrontDoorResource", "csharp");
 @@clientName(
   FrontDoors.validateCustomDomain::parameters.body,
   "customDomainProperties"
