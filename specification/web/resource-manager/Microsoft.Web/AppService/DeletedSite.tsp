@@ -45,7 +45,7 @@ interface DeletedSiteOps
         @key
         providerNamespace: "Microsoft.Web",
 
-        ...LocationParameter,
+        ...LocationResourceParameter,
       },
       {},
       {
@@ -54,7 +54,8 @@ interface DeletedSiteOps
         @segment("deletedSites")
         @key
         deletedSiteId: string,
-      }
+      },
+      ResourceName = "DeletedSiteAtLocation"
     > {}
 
 @tag("DeletedWebApps")
@@ -99,7 +100,8 @@ interface GlobalOps
         @segment("deletedSites")
         @key
         deletedSiteId: string,
-      }
+      },
+      ResourceName = "DeletedSite"
     > {}
 
 @tag("DeletedWebApps")

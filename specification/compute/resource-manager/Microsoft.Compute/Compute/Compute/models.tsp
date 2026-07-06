@@ -1627,6 +1627,7 @@ enum StatusLevelTypes {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1648,6 +1649,7 @@ enum UpgradeOperationInvoker {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
