@@ -260,12 +260,22 @@ async function handleLabeled({
       issue_number: prNumber,
       labels: ["namespace-approved"],
     });
-    await github.rest.issues.createComment({
-      owner,
-      repo,
-      issue_number: prNumber,
-      body: "## ✅ Namespace Approved\n\nAll required namespace approvals received. This PR is clear to merge from a namespace perspective.",
-    });
+
+    // Only post the approval comment if one doesn't already exist (avoids duplicates
+    // when multiple per-language labels are applied in quick succession)
+    const approvalCommentExists = comments.some(
+      (/** @type {{ user?: { type?: string } | null, body?: string }} */ comment) =>
+        comment.user?.type === "Bot" &&
+        (comment.body?.includes("## ✅ Namespace Approved") ?? false),
+    );
+    if (!approvalCommentExists) {
+      await github.rest.issues.createComment({
+        owner,
+        repo,
+        issue_number: prNumber,
+        body: "## ✅ Namespace Approved\n\nAll required namespace approvals received. This PR is clear to merge from a namespace perspective.",
+      });
+    }
   }
 }
 
