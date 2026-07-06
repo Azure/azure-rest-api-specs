@@ -4503,6 +4503,12 @@ model ManagementGroupScopeBenefitRecommendationProperties
   managementGroupId?: string;
 
   /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
    * ManagementGroup benefit scope.
    */
   scope: "ManagementGroup";
