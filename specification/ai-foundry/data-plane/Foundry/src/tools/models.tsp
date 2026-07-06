@@ -2,6 +2,7 @@ import "../memory-stores/models.tsp";
 
 using Azure.Core.Experimental;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 namespace Azure.AI.Projects {
@@ -33,6 +34,10 @@ namespace Azure.AI.Projects {
     @removed(Versions.v1)
     memory_search: "memory_search",
   }
+  
+  const PreviewTool = #{
+    required_previews: #["preview_tool"],
+  };
 
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._PreviewAgentToolType);
   @@copyVariants(OpenAI.ToolType, Azure.AI.Projects._AgentToolType);
@@ -181,6 +186,7 @@ namespace Azure.AI.Projects {
   /**
    * The fabric data agent tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -193,6 +199,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Microsoft Fabric tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MicrosoftFabricPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'fabric_dataagent_preview'.
@@ -208,6 +215,7 @@ namespace Azure.AI.Projects {
   /**
    * The sharepoint grounding tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -220,6 +228,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a sharepoint tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'sharepoint_grounding_preview'.
@@ -344,6 +353,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Bing custom search tool as used to configure an agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'bing_custom_search_preview'.
@@ -359,6 +369,7 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation_preview'.
@@ -374,6 +385,7 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the Browser Automation Tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolParameters {
     /**
      * The project connection parameters associated with the Browser Automation Tool.
@@ -384,6 +396,7 @@ namespace Azure.AI.Projects {
   /**
    * Definition of input parameters for the connection used by the Browser Automation Tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolConnectionParameters {
     /**
      * The ID of the project connection to your Azure Playwright resource.
@@ -647,6 +660,7 @@ namespace Azure.AI.Projects {
   /**
    * The bing custom search tool parameters.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolParameters {
     /**
      * The project connections attached to this tool. There can be a maximum of 1 connection
@@ -659,6 +673,7 @@ namespace Azure.AI.Projects {
   /**
    * A bing custom search configuration.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchConfiguration {
     /**
      * Project connection id for grounding with bing search
@@ -767,6 +782,7 @@ namespace Azure.AI.Projects {
   /**
    * An agent implementing the A2A protocol.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model A2APreviewTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `"a2a_preview`.
@@ -801,6 +817,7 @@ namespace Azure.AI.Projects {
   /**
    * A WorkIQ server-side tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model WorkIQPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'work_iq_preview'.
@@ -817,6 +834,7 @@ namespace Azure.AI.Projects {
   /**
    * A FabricIQ server-side tool.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricIQPreviewTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'fabric_iq_preview'.
@@ -850,6 +868,7 @@ namespace Azure.AI.Projects {
   /**
    * A tool for integrating memories into the agent.
    */
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemorySearchPreviewTool extends OpenAI.Tool {
     /**
      * The type of the tool. Always `memory_search_preview`.
@@ -978,6 +997,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A SharePoint grounding tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolCall extends OpenAI.OutputItem {
     type: "sharepoint_grounding_preview_call";
 
@@ -992,6 +1012,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a SharePoint grounding tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model SharepointGroundingToolCallOutput extends OpenAI.OutputItem {
     type: "sharepoint_grounding_preview_call_output";
 
@@ -1042,6 +1063,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A Bing custom search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolCall extends OpenAI.OutputItem {
     type: "bing_custom_search_preview_call";
 
@@ -1056,6 +1078,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a Bing custom search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BingCustomSearchToolCallOutput extends OpenAI.OutputItem {
     type: "bing_custom_search_preview_call_output";
 
@@ -1112,6 +1135,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A browser automation tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCall extends OpenAI.OutputItem {
     type: "browser_automation_preview_call";
 
@@ -1126,6 +1150,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a browser automation tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model BrowserAutomationToolCallOutput extends OpenAI.OutputItem {
     type: "browser_automation_preview_call_output";
 
@@ -1144,6 +1169,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A Fabric data agent tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolCall extends OpenAI.OutputItem {
     type: "fabric_dataagent_preview_call";
 
@@ -1158,6 +1184,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a Fabric data agent tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model FabricDataAgentToolCallOutput extends OpenAI.OutputItem {
     type: "fabric_dataagent_preview_call_output";
 
@@ -1176,6 +1203,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An Azure Function tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model AzureFunctionToolCall extends OpenAI.OutputItem {
     type: "azure_function_call";
 
@@ -1214,6 +1242,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("An A2A (Agent-to-Agent) tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model A2AToolCall extends OpenAI.OutputItem {
     type: "a2a_preview_call";
 
@@ -1231,6 +1260,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of an A2A (Agent-to-Agent) tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model A2AToolCallOutput extends OpenAI.OutputItem {
     type: "a2a_preview_call_output";
 
@@ -1252,6 +1282,7 @@ namespace Azure.AI.Projects {
   // ==============================================================================
 
   @doc("A memory search tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemorySearchToolCall extends OpenAI.OutputItem {
     type: "memory_search_call";
 
@@ -1263,6 +1294,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("A memory command tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemoryCommandToolCall extends OpenAI.OutputItem {
     type: "memory_command_preview_call";
 
@@ -1277,6 +1309,7 @@ namespace Azure.AI.Projects {
   }
 
   @doc("The output of a memory command tool call.")
+  @extension("x-ms-foundry-meta", PreviewTool)
   model MemoryCommandToolCallOutput extends OpenAI.OutputItem {
     type: "memory_command_preview_call_output";
 

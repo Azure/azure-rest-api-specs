@@ -4,7 +4,6 @@ import "../openai-conversations/routes.tsp";
 import "../openai-responses/routes.tsp";
 import "../toolboxes/models.tsp";
 import "../agents/models.tsp";
-import "../toolboxes/models.tsp";
 import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
