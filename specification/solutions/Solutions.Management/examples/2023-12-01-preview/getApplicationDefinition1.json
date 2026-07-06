@@ -2,11 +2,6 @@
   "parameters": {
     "api-version": "2023-12-01-preview",
     "applicationDefinitionName": "myManagedApplicationDef",
-    "parameters": {
-      "tags": {
-        "department": "Finance"
-      }
-    },
     "resourceGroupName": "rg",
     "subscriptionId": "subid"
   },
@@ -37,15 +32,21 @@
               "roleDefinitionId": "validroleguid"
             }
           ],
+          "deploymentPolicy": null,
           "displayName": "myManagedApplicationDef",
           "lockLevel": "None",
-          "packageFileUri": "https://path/to/packagezipfile"
+          "lockingPolicy": null,
+          "managementPolicy": null,
+          "notificationPolicy": null,
+          "packageFileUri": "https://path/to/packagezipfile",
+          "policies": []
         },
         "sku": null
       },
       "headers": {}
-    }
+    },
+    "404": {}
   },
-  "operationId": "ApplicationDefinitions_Update",
-  "title": "Update managed application definition"
+  "operationId": "ApplicationDefinitions_GetById",
+  "title": "Get managed application definition"
 }
