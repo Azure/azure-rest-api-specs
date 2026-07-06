@@ -13,7 +13,7 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python)
+```yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/connectedvmware/azure-mgmt-connectedvmware/azure/mgmt/connectedvmware
 ```

@@ -14,7 +14,7 @@ go:
   clear-output-folder: true
 ```
 
-``` yaml $(go) && $(track2)
+```yaml $(go) && $(track2)
 license-header: MICROSOFT_MIT_NO_VERSION
 module-name: sdk/resourcemanager/connectedvmware/armconnectedvmware
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
