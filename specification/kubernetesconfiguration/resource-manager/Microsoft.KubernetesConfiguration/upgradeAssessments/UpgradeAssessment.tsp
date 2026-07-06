@@ -44,12 +44,12 @@ alias UpgradeAssessmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
 
     /**
      * The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes,
-     * Microsoft.HybridContainerService, Microsoft.KubernetesConfiguration.
+     * Microsoft.HybridContainerService.
      */
     @path
     @segment("providers")
     @key
-    @pattern("^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService|KubernetesConfiguration)$")
+    @pattern("^Microsoft\\.(ContainerService|Kubernetes|HybridContainerService)$")
     clusterRp: string;
 
     /**

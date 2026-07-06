@@ -148,7 +148,7 @@ model ReadinessCheck {
   /** Severity of the check result. */
   severity?: Severity;
 
-  /** Human-readable reason when severity is not 'pass'. */
+  /** Human-readable reason when severity is not 'None'. */
   details?: string;
 }
 
