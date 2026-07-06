@@ -33,3 +33,7 @@ using Microsoft.Education;
 );
 @@clientName(RedeemRequest, "EducationRedeemContent", "csharp");
 @@clientName(CommonTypes.Operation, "EducationOperationInfo", "csharp");
+// The provider operations-list method is ARM infrastructure; make the whole operation
+// internal so its method and envelope models stay off the public surface instead of
+// redefining common-types operation models publicly.
+@@access(Microsoft.Education.Operations.list, Access.internal, "csharp");
