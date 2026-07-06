@@ -80,6 +80,8 @@ namespace Customizations;
 
 // C# rename: id → sourceId for ingestion source operations (distinguish from other id types)
 @@clientName(IngestionSourceParameters.id, "sourceId", "csharp");
+@@clientName(IngestionSources.replace::parameters.id, "sourceId", "csharp");
+@@clientName(IngestionSources.delete::parameters.id, "sourceId", "csharp");
 
 // C# rename: creationTime → createdOn (Azure SDK convention for timestamps)
 @@clientName(IngestionDefinition.creationTime, "createdOn", "csharp");
