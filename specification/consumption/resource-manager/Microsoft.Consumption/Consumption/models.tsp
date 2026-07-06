@@ -1442,6 +1442,13 @@ model ReservationRecommendationDetailsProperties {
   @added(Versions.v2026_06_01)
   @visibility(Lifecycle.Read)
   managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
 }
 
 /**
@@ -3770,6 +3777,12 @@ model LegacyManagementGroupScopeReservationRecommendationProperties
   managementGroupId?: string;
 
   /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
    * Shared or single recommendation.
    */
   scope: "ManagementGroup";
@@ -3957,6 +3970,12 @@ model ModernManagementGroupScopeReservationRecommendationProperties
    */
   @visibility(Lifecycle.Read)
   managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
 
   /**
    * Shared or single recommendation.
