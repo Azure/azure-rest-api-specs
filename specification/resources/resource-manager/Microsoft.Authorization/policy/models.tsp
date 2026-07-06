@@ -340,7 +340,7 @@ union ComplianceState {
   /**
    * Indicates a policy evaluation result, where the resource is protected.
    */
-  Protected: "Protected"
+  Protected: "Protected",
 }
 
 /**
