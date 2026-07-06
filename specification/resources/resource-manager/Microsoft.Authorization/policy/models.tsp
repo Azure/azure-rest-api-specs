@@ -323,12 +323,12 @@ union ComplianceState {
   Compliant: "Compliant",
 
   /**
-   * Indicates a policy evaluation result, where the Policy evaluation resulted in an error。
+   * Indicates a policy evaluation result, where the Policy evaluation resulted in an error.
    */
   Error: "Error",
 
   /**
-   * Indicates a policy evaluation result that is unknown。
+   * Indicates a policy evaluation result that is unknown.
    */
   Unknown: "Unknown",
 
