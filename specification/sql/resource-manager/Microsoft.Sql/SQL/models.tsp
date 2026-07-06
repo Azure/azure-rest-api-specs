@@ -1189,6 +1189,23 @@ union SeedingModeType {
 }
 
 /**
+ * Specifies whether the link operates in single-database or multi-database mode.
+ */
+union LinkModeType {
+  string,
+
+  /**
+   * SingleDatabase
+   */
+  SingleDatabase: "SingleDatabase",
+
+  /**
+   * MultiDatabase
+   */
+  MultiDatabase: "MultiDatabase",
+}
+
+/**
  * Link health state
  */
 union ReplicaSynchronizationHealth {
@@ -7462,6 +7479,11 @@ model DistributedAvailabilityGroupProperties {
    * Database seeding mode – can be Automatic (default), or Manual for supported scenarios.
    */
   seedingMode?: SeedingModeType;
+
+  /**
+   * Specifies whether the link operates in single-database or multi-database mode.
+   */
+  linkMode?: LinkModeType;
 
   /**
    * Databases in the distributed availability group
