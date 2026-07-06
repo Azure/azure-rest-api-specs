@@ -36,6 +36,18 @@ using Microsoft.AAD;
 @@alternateType(OuContainer.location, Azure.Core.azureLocation, "csharp");
 @@alternateType(ReplicaSet.location, Azure.Core.azureLocation, "csharp");
 
+// These properties are ARM subnet resource IDs; type them as ResourceIdentifier.
+@@alternateType(
+  ReplicaSet.subnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  MigrationProperties.oldSubnetId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 // .NET guideline: DateTimeOffset properties should end with `On`/`At`.
 @@clientName(ConfigDiagnostics.lastExecuted, "lastExecutedOn", "csharp");
 @@clientName(HealthAlert.lastDetected, "lastDetectedOn", "csharp");
@@ -49,3 +61,30 @@ using Microsoft.AAD;
 
 // `Status` is a generic name in IntelliSense; it is the diagnostics validator status.
 @@clientName(Status, "DomainServiceValidatorStatus", "csharp");
+
+// These model/enum names are generic and lack service context in IntelliSense
+// (some, like `ReplicaSet`, collide with well-known concepts). Add the
+// `DomainService` prefix for the .NET SDK.
+@@clientName(ReplicaSet, "DomainServiceReplicaSet", "csharp");
+@@clientName(MigrationProperties, "DomainServiceMigrationProperties", "csharp");
+@@clientName(MigrationProgress, "DomainServiceMigrationProgress", "csharp");
+@@clientName(ConfigDiagnostics, "DomainServiceConfigDiagnostics", "csharp");
+@@clientName(
+  ConfigDiagnosticsValidatorResult,
+  "DomainServiceConfigDiagnosticsValidatorResult",
+  "csharp"
+);
+@@clientName(
+  ConfigDiagnosticsValidatorResultIssue,
+  "DomainServiceConfigDiagnosticsValidatorResultIssue",
+  "csharp"
+);
+@@clientName(HealthAlert, "DomainServiceHealthAlert", "csharp");
+@@clientName(HealthMonitor, "DomainServiceHealthMonitor", "csharp");
+@@clientName(
+  NotificationSettings,
+  "DomainServiceNotificationSettings",
+  "csharp"
+);
+@@clientName(ExternalAccess, "DomainServiceExternalAccess", "csharp");
+@@clientName(SyncScope, "DomainServiceSyncScope", "csharp");
