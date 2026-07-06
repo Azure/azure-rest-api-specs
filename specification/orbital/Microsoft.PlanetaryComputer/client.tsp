@@ -20,10 +20,6 @@ namespace Customizations;
 // === Client name conflicts ===
 @@clientName(IngestionOperations, "IngestionOperationsManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
-// @@clientName(StacItemOrStacItemCollection,
-//   "StacItemOrStacItemCollectionContent",
-//   "csharp"
-// );
 @@clientName(StacItemProperties.datetime, "date_time", "python");
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
@@ -82,10 +78,6 @@ namespace Customizations;
 @@clientName(BoundingBoxPathParameters.maxx, "maxX", "csharp");
 @@clientName(BoundingBoxPathParameters.maxy, "maxY", "csharp");
 
-// C# rename: crs → coordinateReferenceSystem (distinguish from destinationCrs)
-@@clientName(SubDatasetQueryParameters.crs, "coordinateReferenceSystem", "csharp");
-@@clientName(CollectionSubDatasetQueryParameters.crs, "coordinateReferenceSystem", "csharp");
-
 // C# rename: id → sourceId for ingestion source operations (distinguish from other id types)
 @@clientName(IngestionSourceParameters.id, "sourceId", "csharp");
 
@@ -130,21 +122,11 @@ namespace Customizations;
 // Use Azure.Core.ETag type for StacItem.eTag
 @@alternateType(StacItem.eTag, eTag, "csharp");
 
-// StacProvider.url — NO CHANGE: STAC spec defines url as string type
-// Reviewer asked to change to Uri, but official STAC spec says "url: string"
-
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
 
 // Rename Ingestion.delete to deleteIngestion for JavaScript to avoid @fixme conflict
 @@clientName(Ingestion.delete, "deleteIngestion", "javascript");
-
-// === Python external type mappings ===
-// NOTE: @@alternateType with ExternalType is currently broken for ALL models used
-// in our API — not just @discriminator hierarchies. See:
-// https://github.com/Azure/azure-sdk-for-python/issues/46020
-// Feature, FeatureCollection, StacCollection, and all Geometry/STAC discriminated
-// types are excluded until the pygen fix is released.
 
 // Address naming convention violations for C# SDK
 @@clientName(
@@ -155,12 +137,6 @@ namespace Customizations;
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(IngestionDefinition, "IngestionInformation", "csharp");
-
-// === Python API naming notes ===
-// All Python method naming (searches→search, list→get, _by_tms, _by_format,
-// geo_json removal) is now handled via interface member names below.
-// Language-specific @@clientName overrides can be added here when other
-// languages (C#, Java, JS) need different names from the Python defaults.
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
@@ -237,10 +213,6 @@ namespace Customizations;
 // C# rename: timestamp → more descriptive names
 @@clientName(OperationStatusHistoryItem.timestamp, "occurredOn", "csharp");
 @@clientName(StacItem.timestamp, "recordedOn", "csharp");
-
-// Fix inconsistent camelCase: colormapName → colorMapName, colormap → colorMap
-// MosaicSearchesTileJson.get uses inline params that can't be targeted by @@clientName.
-// Fix applied post-generation in C# customization file instead.
 
 // Response → Result renames (Azure SDK reserves "Response" for HTTP response types)
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
@@ -401,8 +373,6 @@ namespace Customizations;
 
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderConfiguration", "csharp");
-// Note: StacCollection, StacItem, StacItemCollection keep their TypeSpec names
-// (no "Resource" suffix — reserved for ARM types per Azure SDK guidelines)
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
