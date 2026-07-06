@@ -10723,6 +10723,42 @@
         }
       ]
     },
+    "HttpMethodVerb": {
+      "type": "string",
+      "description": "The HTTP method, default value GET.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "x-ms-enum": {
+        "name": "HttpMethodVerb",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GET",
+            "value": "GET",
+            "description": "GET"
+          },
+          {
+            "name": "POST",
+            "value": "POST",
+            "description": "POST"
+          },
+          {
+            "name": "PUT",
+            "value": "PUT",
+            "description": "PUT"
+          },
+          {
+            "name": "DELETE",
+            "value": "DELETE",
+            "description": "DELETE"
+          }
+        ]
+      }
+    },
     "HuntingBookmark": {
       "type": "object",
       "description": "Represents a Hunting bookmark entity.",
@@ -13158,6 +13194,30 @@
         ]
       }
     },
+    "PackageKind": {
+      "type": "string",
+      "description": "The package kind",
+      "enum": [
+        "Solution",
+        "Standalone"
+      ],
+      "x-ms-enum": {
+        "name": "PackageKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "Standalone",
+            "value": "Standalone",
+            "description": "Standalone"
+          }
+        ]
+      }
+    },
     "PlaybookActionProperties": {
       "type": "object",
       "properties": {
@@ -14084,7 +14144,7 @@
           "x-nullable": true
         },
         "httpMethod": {
-          "$ref": "#/definitions/httpMethodVerb",
+          "$ref": "#/definitions/HttpMethodVerb",
           "description": "The HTTP method, default value GET."
         },
         "queryTimeFormat": {
@@ -15215,6 +15275,66 @@
         "repository"
       ]
     },
+    "SourceKind": {
+      "type": "string",
+      "description": "Source type of the content",
+      "enum": [
+        "LocalWorkspace",
+        "Community",
+        "Solution",
+        "SourceRepository"
+      ],
+      "x-ms-enum": {
+        "name": "SourceKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LocalWorkspace",
+            "value": "LocalWorkspace",
+            "description": "LocalWorkspace"
+          },
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community"
+          },
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "SourceRepository",
+            "value": "SourceRepository",
+            "description": "SourceRepository"
+          }
+        ]
+      }
+    },
+    "SourceType": {
+      "type": "string",
+      "description": "The sourceType of the watchlist",
+      "enum": [
+        "Local",
+        "AzureStorage"
+      ],
+      "x-ms-enum": {
+        "name": "SourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Local",
+            "value": "Local",
+            "description": "The source from local file."
+          },
+          {
+            "name": "AzureStorage",
+            "value": "AzureStorage",
+            "description": "The source from Azure storage."
+          }
+        ]
+      }
+    },
     "SubmissionMailEntity": {
       "type": "object",
       "description": "Represents a submission mail entity.",
@@ -15294,6 +15414,36 @@
           "$ref": "#/definitions/EntityCommonProperties"
         }
       ]
+    },
+    "SupportTier": {
+      "type": "string",
+      "description": "Type of support for content item",
+      "enum": [
+        "Microsoft",
+        "Partner",
+        "Community"
+      ],
+      "x-ms-enum": {
+        "name": "SupportTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft",
+            "value": "Microsoft",
+            "description": "Microsoft"
+          },
+          {
+            "name": "Partner",
+            "value": "Partner",
+            "description": "Partner"
+          },
+          {
+            "name": "Community",
+            "value": "Community",
+            "description": "Community"
+          }
+        ]
+      }
     },
     "TIDataConnector": {
       "type": "object",
@@ -15468,7 +15618,7 @@
           "description": "the package Id contains this template"
         },
         "packageKind": {
-          "$ref": "#/definitions/packageKind",
+          "$ref": "#/definitions/PackageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {
@@ -16417,7 +16567,7 @@
           "description": "The filename of the watchlist, called 'source'"
         },
         "sourceType": {
-          "$ref": "#/definitions/sourceType",
+          "$ref": "#/definitions/SourceType",
           "description": "The sourceType of the watchlist"
         },
         "created": {
@@ -16612,42 +16762,6 @@
           "description": "Issuer of Workload Identity Federation.",
           "readOnly": true
         }
-      }
-    },
-    "httpMethodVerb": {
-      "type": "string",
-      "description": "The HTTP method, default value GET.",
-      "enum": [
-        "GET",
-        "POST",
-        "PUT",
-        "DELETE"
-      ],
-      "x-ms-enum": {
-        "name": "httpMethodVerb",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "GET",
-            "value": "GET",
-            "description": "GET"
-          },
-          {
-            "name": "POST",
-            "value": "POST",
-            "description": "POST"
-          },
-          {
-            "name": "PUT",
-            "value": "PUT",
-            "description": "PUT"
-          },
-          {
-            "name": "DELETE",
-            "value": "DELETE",
-            "description": "DELETE"
-          }
-        ]
       }
     },
     "kind": {
@@ -17085,7 +17199,7 @@
       "description": "The original source of the content item, where it comes from.",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/sourceKind",
+          "$ref": "#/definitions/SourceKind",
           "description": "Source type of the content"
         },
         "name": {
@@ -17106,7 +17220,7 @@
       "description": "Support information for the content item.",
       "properties": {
         "tier": {
-          "$ref": "#/definitions/supportTier",
+          "$ref": "#/definitions/SupportTier",
           "description": "Type of support for content item"
         },
         "name": {
@@ -17139,7 +17253,7 @@
           "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
         },
         "contentKind": {
-          "$ref": "#/definitions/packageKind",
+          "$ref": "#/definitions/PackageKind",
           "description": "The package kind"
         },
         "contentSchemaVersion": {
@@ -17233,30 +17347,6 @@
           "type": "string",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
         }
-      }
-    },
-    "packageKind": {
-      "type": "string",
-      "description": "The package kind",
-      "enum": [
-        "Solution",
-        "Standalone"
-      ],
-      "x-ms-enum": {
-        "name": "packageKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "Standalone",
-            "value": "Standalone",
-            "description": "Standalone"
-          }
-        ]
       }
     },
     "packageList": {
@@ -17383,7 +17473,7 @@
           "description": "Unique ID for the content. It should be generated based on the contentId, contentKind and the contentVersion of the package"
         },
         "contentKind": {
-          "$ref": "#/definitions/packageKind",
+          "$ref": "#/definitions/PackageKind",
           "description": "The package kind"
         },
         "contentSchemaVersion": {
@@ -17652,7 +17742,7 @@
           "description": "the package Id contains this template"
         },
         "packageKind": {
-          "$ref": "#/definitions/packageKind",
+          "$ref": "#/definitions/PackageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {
@@ -17667,96 +17757,6 @@
         "packagedContent": {
           "description": "The json of the ARM template to deploy"
         }
-      }
-    },
-    "sourceKind": {
-      "type": "string",
-      "description": "Source type of the content",
-      "enum": [
-        "LocalWorkspace",
-        "Community",
-        "Solution",
-        "SourceRepository"
-      ],
-      "x-ms-enum": {
-        "name": "sourceKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "LocalWorkspace",
-            "value": "LocalWorkspace",
-            "description": "LocalWorkspace"
-          },
-          {
-            "name": "Community",
-            "value": "Community",
-            "description": "Community"
-          },
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "SourceRepository",
-            "value": "SourceRepository",
-            "description": "SourceRepository"
-          }
-        ]
-      }
-    },
-    "sourceType": {
-      "type": "string",
-      "description": "The sourceType of the watchlist",
-      "enum": [
-        "Local",
-        "AzureStorage"
-      ],
-      "x-ms-enum": {
-        "name": "sourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Local",
-            "value": "Local",
-            "description": "The source from local file."
-          },
-          {
-            "name": "AzureStorage",
-            "value": "AzureStorage",
-            "description": "The source from Azure storage."
-          }
-        ]
-      }
-    },
-    "supportTier": {
-      "type": "string",
-      "description": "Type of support for content item",
-      "enum": [
-        "Microsoft",
-        "Partner",
-        "Community"
-      ],
-      "x-ms-enum": {
-        "name": "supportTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Microsoft",
-            "value": "Microsoft",
-            "description": "Microsoft"
-          },
-          {
-            "name": "Partner",
-            "value": "Partner",
-            "description": "Partner"
-          },
-          {
-            "name": "Community",
-            "value": "Community",
-            "description": "Community"
-          }
-        ]
       }
     },
     "templateAdditionalProperties": {
@@ -17931,7 +17931,7 @@
           "description": "the package Id contains this template"
         },
         "packageKind": {
-          "$ref": "#/definitions/packageKind",
+          "$ref": "#/definitions/PackageKind",
           "description": "the packageKind of the package contains this template"
         },
         "packageName": {

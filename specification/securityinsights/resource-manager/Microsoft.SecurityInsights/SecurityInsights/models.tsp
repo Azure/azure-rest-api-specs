@@ -414,7 +414,7 @@ union EntityKindEnum {
 /**
  * The package kind
  */
-union packageKind {
+union PackageKind {
   string,
 
   /**
@@ -448,7 +448,7 @@ union Flag {
 /**
  * Source type of the content
  */
-union sourceKind {
+union SourceKind {
   string,
 
   /**
@@ -475,7 +475,7 @@ union sourceKind {
 /**
  * Type of support for content item
  */
-union supportTier {
+union SupportTier {
   string,
 
   /**
@@ -2157,7 +2157,7 @@ union ProvisioningState {
 /**
  * The sourceType of the watchlist
  */
-union sourceType {
+union SourceType {
   string,
 
   /**
@@ -3063,7 +3063,7 @@ union CcpAuthType {
 /**
  * The HTTP method, default value GET.
  */
-union httpMethodVerb {
+union HttpMethodVerb {
   string,
 
   /**
@@ -4465,7 +4465,7 @@ model PackageBaseProperties {
   /**
    * The package kind
    */
-  contentKind?: packageKind;
+  contentKind?: PackageKind;
 
   /**
    * The version of the content schema.
@@ -4575,7 +4575,7 @@ model MetadataSource {
   /**
    * Source type of the content
    */
-  kind: sourceKind;
+  kind: SourceKind;
 
   /**
    * Name of the content source.  The repo name, solution name, LA workspace name etc.
@@ -4615,7 +4615,7 @@ model MetadataSupport {
   /**
    * Type of support for content item
    */
-  tier: supportTier;
+  tier: SupportTier;
 
   /**
    * Name of the support contact. Company or person.
@@ -4850,7 +4850,7 @@ model TemplateBaseProperties {
   /**
    * the packageKind of the package contains this template
    */
-  packageKind?: packageKind;
+  packageKind?: PackageKind;
 
   /**
    * the name of the package contains this template
@@ -8427,7 +8427,7 @@ model WatchlistProperties {
   /**
    * The sourceType of the watchlist
    */
-  sourceType?: sourceType;
+  sourceType?: SourceType;
 
   /**
    * The time the watchlist was created
@@ -11728,7 +11728,7 @@ model RestApiPollerRequestConfig {
   /**
    * The HTTP method, default value GET.
    */
-  httpMethod?: httpMethodVerb;
+  httpMethod?: HttpMethodVerb;
 
   /**
    * The query time format. A remote server can have a query to pull data from range 'start' to 'end'. This property indicate what is the expected time format the remote server know to parse.
