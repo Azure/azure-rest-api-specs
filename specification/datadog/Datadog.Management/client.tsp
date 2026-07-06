@@ -4,7 +4,7 @@ using Azure.ClientGenerator.Core;
 using Microsoft.Datadog;
 
 // csharp configurations
-@@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript");
+@@clientName(Microsoft.Datadog, "MicrosoftDatadogClient", "javascript,python");
 @@clientName(BillingInfoResponse, "DatadogBillingInfoResult", "csharp");
 @@clientName(
   CreateResourceSupportedResponse,
