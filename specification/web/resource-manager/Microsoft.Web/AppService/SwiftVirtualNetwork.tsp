@@ -53,7 +53,8 @@ interface SwiftVirtualNetworkOps
         @segment("networkConfig")
         @key
         virtualNetwork: "virtualNetwork",
-      }
+      },
+      ResourceName = "SiteNetworkConfig"
     > {}
 
 @tag("WebApps")
@@ -130,7 +131,8 @@ interface SwiftVirtualNetworkOperationGroupOps
         @segment("networkConfig")
         @key
         virtualNetwork: "virtualNetwork",
-      }
+      },
+      ResourceName = "SiteSlotNetworkConfig"
     > {}
 
 @tag("WebApps")
