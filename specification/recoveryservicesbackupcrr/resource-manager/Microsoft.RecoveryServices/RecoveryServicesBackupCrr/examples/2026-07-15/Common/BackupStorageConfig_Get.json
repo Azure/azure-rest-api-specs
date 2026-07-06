@@ -1,12 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-01-15",
-    "parameters": {
-      "properties": {
-        "storageType": "LocallyRedundant",
-        "storageTypeState": "Unlocked"
-      }
-    },
+    "api-version": "2026-07-15",
     "resourceGroupName": "PythonSDKBackupTestRg",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "vaultName": "PySDKBackupTestRsVault"
@@ -18,14 +12,14 @@
         "type": "Microsoft.RecoveryServices/vaults/backupstorageconfig",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/PythonSDKBackupTestRg/providers/Microsoft.RecoveryServices/vaults/PySDKBackupTestRsVault/backupstorageconfig/vaultstorageconfig",
         "properties": {
-          "storageModelType": "LocallyRedundant",
-          "storageType": "LocallyRedundant",
-          "storageTypeState": "Unlocked"
+          "storageModelType": "GeoRedundant",
+          "storageType": "GeoRedundant",
+          "storageTypeState": "Locked"
         }
       },
       "headers": {}
     }
   },
-  "operationId": "BackupResourceStorageConfigs_Update",
-  "title": "Update Vault Storage Configuration"
+  "operationId": "BackupResourceStorageConfigs_Get",
+  "title": "Get Vault Storage Configuration"
 }

@@ -24,13 +24,12 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * // (missing-service-description) Add service description
+ * Open API 2.0 Specs for Azure Recovery Services Backup CRR (Cross Region Restore) service
  */
 @armProviderNamespace
-@service(#{ title: "RecoveryServicesBackupCrrClient" })
+@service(#{ title: "Recovery Services Backup CRR Client" })
 @versioned(Versions)
-// FIXME: Common type version v1 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.RecoveryServices;
 
 /**
@@ -38,7 +37,7 @@ namespace Microsoft.RecoveryServices;
  */
 enum Versions {
   /**
-   * The 2023-01-15 API version.
+   * The 2026-07-15 API version.
    */
-  v2023_01_15: "2023-01-15",
+  v2026_07_15: "2026-07-15",
 }
