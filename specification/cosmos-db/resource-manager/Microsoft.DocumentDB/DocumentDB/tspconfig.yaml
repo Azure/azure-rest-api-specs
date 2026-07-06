@@ -21,6 +21,7 @@ options:
     generate-test: true
     generate-sample: true
     flavor: azure
+    api-version: "2026-03-15"
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-cosmosdb"
     compatibility-lro: true
@@ -28,6 +29,7 @@ options:
       name: "@azure/arm-cosmosdb"
     flavor: azure
     experimental-extensible-enums: true
+    api-version: "2026-03-15"
   "@azure-tools/typespec-java":
     service-dir: "sdk/cosmos"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmos"
@@ -41,6 +43,7 @@ options:
     customization-class: customization/src/main/java/CosmosCustomization.java
     rename-model:
       DatabaseAccountGetPropertiesDatabaseAccountOfferType: DatabaseAccountOfferType
+    api-version: "2026-03-15"
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcosmos/v4"
     service-dir: "sdk/resourcemanager/cosmos"
@@ -51,10 +54,12 @@ options:
     flavor: azure
     generate-samples: true
     head-as-boolean: true
+    api-version: "2026-03-15"
   "@azure-typespec/http-client-csharp-mgmt":
     enable-wire-path-attribute: true
     namespace: "Azure.ResourceManager.CosmosDB"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-03-15"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

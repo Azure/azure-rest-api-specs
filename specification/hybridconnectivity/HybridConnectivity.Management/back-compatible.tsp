@@ -12,7 +12,6 @@ using Microsoft.HybridConnectivity;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Legacy.flattenProperty(PublicCloudConnector.properties, "autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Legacy.flattenProperty(ServiceConfigurationResource.properties, "autorest");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Legacy.flattenProperty(SolutionConfiguration.properties, "autorest");
