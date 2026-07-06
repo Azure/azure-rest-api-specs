@@ -16,6 +16,7 @@ import "./back-compatible.tsp";
 import "./CloudHsmCluster.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./DedicatedHsm.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -3,7 +3,7 @@ import { debugLogger } from "@azure-tools/specs-shared/logger";
 
 import { access, constants, mkdir, rm } from "fs/promises";
 import { dirname, join } from "path";
-import { ExpectStatic, test } from "vitest";
+import { type ExpectStatic, test } from "vitest";
 
 const repoRoot = join(__dirname, "..", "..", "..", "..");
 

@@ -17,6 +17,7 @@ import "./ApplyUpdate.tsp";
 import "./ConfigurationAssignment.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -39,8 +40,15 @@ namespace Microsoft.Maintenance;
 enum Versions {
   /**
    * The 2023-10-01-preview API version.
+   * This API version includes new API to acknowledge ScheduledEvents
    */
   v2023_10_01_preview: "2023-10-01-preview",
+
+  /**
+   * The 2025-10-01-preview API version.
+   * This API version includes new API to acknowledge list of ScheduledEvents
+   */
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 interface Operations

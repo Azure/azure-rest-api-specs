@@ -24,6 +24,7 @@ import "./PolicySetDefinitionVersion.tsp";
 import "./routes.tsp";
 import "./Variable.tsp";
 import "./VariableValue.tsp";
+import "./client.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;

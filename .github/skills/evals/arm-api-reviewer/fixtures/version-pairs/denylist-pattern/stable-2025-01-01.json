@@ -1,0 +1,159 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DenylistPatternTestClient",
+    "version": "2025-01-01",
+    "description": "Denylist pattern test — new version. The policyName path parameter still carries the denylist pattern (pre-existing from 2024-01-01). The new description property also uses a denylist pattern (newly added — blocking)."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{ "azure_auth": ["user_impersonation"] }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": { "user_impersonation": "impersonate your user account" }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicySvc/policies/{policyName}": {
+      "get": {
+        "operationId": "Policies_Get",
+        "description": "Gets a policy resource.",
+        "parameters": [
+          { "$ref": "#/parameters/SubscriptionIdParameter" },
+          { "$ref": "#/parameters/ResourceGroupNameParameter" },
+          { "$ref": "#/parameters/PolicyNameParameter" },
+          { "$ref": "#/parameters/ApiVersionParameter" }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": { "$ref": "#/definitions/Policy" }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": { "$ref": "#/definitions/ErrorResponse" }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Policy": {
+      "type": "object",
+      "description": "A policy resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Fully qualified resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the resource."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type of the resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location of the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyProperties",
+          "x-ms-client-flatten": true,
+          "description": "The resource-specific properties."
+        }
+      },
+      "required": ["location"],
+      "x-ms-azure-resource": true
+    },
+    "PolicyProperties": {
+      "type": "object",
+      "description": "Properties of a policy resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the policy.",
+          "pattern": "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$",
+          "maxLength": 128
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the policy.",
+          "pattern": "^[^\\x00-\\x1F\\x7F]+$",
+          "maxLength": 512
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the policy resource.",
+          "enum": ["Succeeded", "Failed", "Canceled", "Creating", "Updating", "Deleting"],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "The error object."
+        }
+      }
+    },
+    "ErrorDetail": {
+      "type": "object",
+      "description": "The error detail.",
+      "properties": {
+        "code": { "type": "string", "description": "The error code." },
+        "message": { "type": "string", "description": "The error message." }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group."
+    },
+    "PolicyNameParameter": {
+      "name": "policyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the policy.",
+      "pattern": "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$",
+      "maxLength": 260,
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use."
+    }
+  }
+}

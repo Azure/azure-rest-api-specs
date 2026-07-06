@@ -1,3 +1,4 @@
+import "./client.tsp";
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
 
