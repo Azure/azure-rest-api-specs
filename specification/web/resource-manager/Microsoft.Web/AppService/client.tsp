@@ -14,6 +14,29 @@ namespace Customizations;
 @@clientName(Microsoft.Web, "WebSiteManagementClient", "python, javascript");
 @@clientName(WebApps.swapSlotSlot, "swapSlot", "python,go,javascript");
 
+// Mitigate duplicate-client-name diagnostics for the standard ARM
+// common-types Managed Identity models in Python scope. ConnectorGateway
+// (2026-05-01-preview) and AiGateway (2026-03-01-preview) both spread
+// Azure.ResourceManager.ManagedServiceIdentityProperty; the per-version
+// projections collide on the canonical names. Force a single canonical
+// "Arm"-prefixed name for Python. Same approach used for
+// ResourceProvisioningState in EventGrid (PR #41644).
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "ArmManagedServiceIdentity",
+  "python"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
+  "ArmUserAssignedIdentity",
+  "python"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentityType,
+  "ArmManagedServiceIdentityType",
+  "python"
+);
+
 @@clientName(SupportedTlsVersions.`1.0`, "ONE0", "python");
 @@clientName(SupportedTlsVersions.`1.1`, "ONE1", "python");
 @@clientName(SupportedTlsVersions.`1.2`, "ONE2", "python");

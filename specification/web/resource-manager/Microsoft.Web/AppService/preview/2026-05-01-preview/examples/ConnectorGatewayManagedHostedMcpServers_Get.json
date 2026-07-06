@@ -1,0 +1,37 @@
+{
+  "operationId": "ConnectorGatewayManagedHostedMcpServers_Get",
+  "title": "GetManagedHostedMcpServer",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "hostedMcpServerName": "sample-hosted"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/managedHostedMcpServers/sample-hosted",
+        "name": "sample-hosted",
+        "type": "Microsoft.Web/connectorGateways/managedHostedMcpServers",
+        "properties": {
+          "displayName": "Sample Hosted MCP Server",
+          "description": "A sample hosted MCP server.",
+          "publisher": "Contoso",
+          "category": "Productivity",
+          "tags": [
+            "sample"
+          ],
+          "version": "1.0.0",
+          "configurationSchema": {
+            "apiKey": {
+              "description": "API key for the upstream service.",
+              "isRequired": true,
+              "type": "secret"
+            }
+          }
+        }
+      }
+    }
+  }
+}

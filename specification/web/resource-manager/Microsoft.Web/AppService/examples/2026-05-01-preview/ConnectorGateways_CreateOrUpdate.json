@@ -1,0 +1,57 @@
+{
+  "operationId": "ConnectorGateways_CreateOrUpdate",
+  "title": "CreateOrUpdateConnectorGateway",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "resource": {
+      "properties": {
+        "apiHubEnvironmentId": "11111111-2222-3333-4444-555555555555"
+      },
+      "location": "CentralUS",
+      "tags": {
+        "key1": "Value1"
+      },
+      "identity": {
+        "type": "SystemAssigned"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1",
+        "name": "connectorgateway1",
+        "type": "Microsoft.Web/connectorGateways",
+        "location": "CentralUS",
+        "tags": {
+          "key1": "Value1"
+        },
+        "properties": {
+          "connectorGatewayId": "b8f4c0c2-1e52-4c88-9a64-2c1f59b854e5",
+          "aiGatewayId": "11111111-2222-3333-4444-555555555555",
+          "apiHubEnvironmentId": "11111111-2222-3333-4444-555555555555",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1",
+        "name": "connectorgateway1",
+        "type": "Microsoft.Web/connectorGateways",
+        "location": "CentralUS",
+        "tags": {
+          "key1": "Value1"
+        },
+        "properties": {
+          "connectorGatewayId": "b8f4c0c2-1e52-4c88-9a64-2c1f59b854e5",
+          "apiHubEnvironmentId": "11111111-2222-3333-4444-555555555555",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

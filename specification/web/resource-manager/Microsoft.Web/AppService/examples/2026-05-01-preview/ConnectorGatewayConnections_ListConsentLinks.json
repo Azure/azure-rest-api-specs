@@ -1,0 +1,34 @@
+{
+  "operationId": "ConnectorGatewayConnections_ListConsentLinks",
+  "title": "ListConsentLinksForConnection",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "connectionName": "office365-conn",
+    "body": {
+      "parameters": [
+        {
+          "objectId": "11111111-2222-3333-4444-555555555555",
+          "parameterName": "token",
+          "redirectUrl": "https://example.com/oauth-callback",
+          "tenantId": "99999999-8888-7777-6666-555555555555"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "link": "https://login.microsoftonline.com/common/oauth2/authorize?client_id=...",
+            "displayName": "Office 365 consent",
+            "status": "Unauthenticated"
+          }
+        ]
+      }
+    }
+  }
+}

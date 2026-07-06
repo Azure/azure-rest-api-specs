@@ -1,0 +1,69 @@
+{
+  "operationId": "ConnectorGatewayMcpServerConfigs_CreateOrUpdate",
+  "title": "CreateOrUpdateMcpServerConfig",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "mcpServerConfigName": "mcp1",
+    "resource": {
+      "kind": "ManagedMcpServer",
+      "properties": {
+        "state": "Enabled",
+        "description": "Office 365 MCP server config",
+        "authenticationMode": "DeveloperConnection",
+        "disableApiKeyAuth": false,
+        "connectors": [
+          {
+            "name": "office365",
+            "connectionName": "office365-conn",
+            "displayName": "Office 365",
+            "description": "Office 365 connector",
+            "operations": [
+              {
+                "name": "GetMyProfile",
+                "displayName": "Get My Profile",
+                "description": "Returns the calling user's profile."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/mcpServerConfigs/mcp1",
+        "name": "mcp1",
+        "type": "Microsoft.Web/connectorGateways/mcpServerConfigs",
+        "kind": "ManagedMcpServer",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Enabled",
+          "description": "Office 365 MCP server config",
+          "authenticationMode": "DeveloperConnection",
+          "disableApiKeyAuth": false,
+          "mcpEndpointUrl": "https://example-gateway.azure-api.net/mcp/mcp1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/mcpServerConfigs/mcp1",
+        "name": "mcp1",
+        "type": "Microsoft.Web/connectorGateways/mcpServerConfigs",
+        "kind": "ManagedMcpServer",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "state": "Enabled",
+          "description": "Office 365 MCP server config",
+          "authenticationMode": "DeveloperConnection",
+          "disableApiKeyAuth": false,
+          "mcpEndpointUrl": "https://example-gateway.azure-api.net/mcp/mcp1"
+        }
+      }
+    }
+  }
+}

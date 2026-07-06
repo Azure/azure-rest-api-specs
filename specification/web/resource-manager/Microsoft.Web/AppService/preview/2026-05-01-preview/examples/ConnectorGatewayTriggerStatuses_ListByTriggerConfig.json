@@ -1,0 +1,31 @@
+{
+  "operationId": "ConnectorGatewayTriggerStatuses_ListByTriggerConfig",
+  "title": "ListTriggerStatuses",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "triggerConfigName": "newMailTrigger"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/triggerConfigs/newMailTrigger/triggerStatuses/latest",
+            "name": "latest",
+            "type": "Microsoft.Web/connectorGateways/triggerConfigs/triggerStatuses",
+            "properties": {
+              "lastExecutionStartTime": "2026-05-01T12:00:00Z",
+              "lastExecutionEndTime": "2026-05-01T12:00:01Z",
+              "lastExecutionStatus": "Succeeded",
+              "lastExecutionStatusCode": "200",
+              "lastExecutionIsFired": true
+            }
+          }
+        ]
+      }
+    }
+  }
+}

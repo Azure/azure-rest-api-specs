@@ -1,0 +1,32 @@
+{
+  "operationId": "ConnectorGatewayMcpServerConfigs_ListByConnectorGateway",
+  "title": "ListMcpServerConfigsByConnectorGateway",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/mcpServerConfigs/mcp1",
+            "name": "mcp1",
+            "type": "Microsoft.Web/connectorGateways/mcpServerConfigs",
+            "kind": "ManagedMcpServer",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "state": "Enabled",
+              "description": "Office 365 MCP server config",
+              "authenticationMode": "DeveloperConnection",
+              "disableApiKeyAuth": false,
+              "mcpEndpointUrl": "https://example-gateway.azure-api.net/mcp/mcp1"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

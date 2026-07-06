@@ -1,0 +1,49 @@
+{
+  "operationId": "ConnectorGatewayTriggerRuns_Get",
+  "title": "GetTriggerRun",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-05-01-preview",
+    "name": "connectorgateway1",
+    "triggerConfigName": "newMailTrigger",
+    "runId": "08585112333222111000000000001"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Web/connectorGateways/connectorgateway1/triggerConfigs/newMailTrigger/runs/08585112333222111000000000001",
+        "name": "08585112333222111000000000001",
+        "type": "Microsoft.Web/connectorGateways/triggerConfigs/runs",
+        "properties": {
+          "summary": {
+            "id": "08585112333222111000000000001",
+            "startTime": "2026-05-01T12:00:00Z",
+            "endTime": "2026-05-01T12:00:05Z",
+            "status": "Succeeded",
+            "statusCode": "200"
+          },
+          "details": {
+            "trigger": {
+              "outputs": {
+                "messageId": "AAMkA..."
+              }
+            },
+            "notification": {
+              "inputs": {
+                "method": "POST",
+                "uri": "https://example.com/webhook",
+                "body": {
+                  "messageId": "AAMkA..."
+                }
+              },
+              "outputs": {
+                "statusCode": 200
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
