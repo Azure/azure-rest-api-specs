@@ -691,9 +691,14 @@ model DrillPatchProperties {
 @doc("Additional properties for Failover.")
 @added(Versions.v2026_03_01_preview)
 model ValidateForExecutionProperties {
+  @doc("Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation.")
+  @added(Versions.v2026_06_01_preview)
+  operationName?: DrillRunTasks;
+
   @doc("Physiscal Source locations from where resources to be failed-over or faulted.")
   @added(Versions.v2026_03_01_preview)
-  sourceLocations: string[];
+  @madeOptional(Versions.v2026_06_01_preview)
+  sourceLocations?: string[];
 }
 
 @doc("Request body of the Validate For Execute Action of Drill.")

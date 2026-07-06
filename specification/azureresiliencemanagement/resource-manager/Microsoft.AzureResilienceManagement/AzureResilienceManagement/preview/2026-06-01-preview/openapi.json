@@ -1144,6 +1144,15 @@
             "required": true,
             "type": "string",
             "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DrillRunReprotectRequest"
+            }
           }
         ],
         "responses": {
@@ -6406,6 +6415,19 @@
       ],
       "x-ms-discriminator-value": "DrillRun"
     },
+    "DrillRunReprotectRequest": {
+      "type": "object",
+      "description": "Request body for Reprotect API.",
+      "properties": {
+        "reprotectProperties": {
+          "$ref": "#/definitions/ReprotectRequest",
+          "description": "The reprotect properties."
+        }
+      },
+      "required": [
+        "reprotectProperties"
+      ]
+    },
     "DrillRunResource": {
       "type": "object",
       "description": "Represents a Drill Run job resource in the Azure Resilience Management provider namespace.",
@@ -11005,6 +11027,10 @@
       "type": "object",
       "description": "Additional properties for Failover.",
       "properties": {
+        "operationName": {
+          "$ref": "#/definitions/DrillRunTasks",
+          "description": "Operation name for which the validation is being done. This is needed to determine the set of validations to be done for the operation."
+        },
         "sourceLocations": {
           "type": "array",
           "description": "Physiscal Source locations from where resources to be failed-over or faulted.",
@@ -11012,10 +11038,7 @@
             "type": "string"
           }
         }
-      },
-      "required": [
-        "sourceLocations"
-      ]
+      }
     },
     "ValidateForExecutionRequest": {
       "type": "object",
