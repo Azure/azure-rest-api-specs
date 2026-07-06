@@ -1044,7 +1044,11 @@ model GetItemTileJsonOptions {
   ...TilePaddingQueryParameters;
   ...SubDatasetQueryParameters;
   ...ZoomQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
@@ -1061,7 +1065,11 @@ model GetCollectionTileJsonOptions {
   ...MosaicTileQueryParameters;
   ...MiscTileQueryParameters;
   ...TilePaddingQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
@@ -1077,7 +1085,11 @@ model GetSearchTileJsonOptions {
   ...MosaicTileQueryParameters;
   ...MiscTileQueryParameters;
   ...TilePaddingQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
@@ -1091,9 +1103,17 @@ model GetItemPreviewOptions {
   ...MiscTileQueryParameters;
   ...DstCrsQueryParameter;
   ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
   @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1105,10 +1125,20 @@ model GetItemBboxCropOptions {
   ...TerrainAlgorithmQueryParameters;
   ...MiscTileQueryParameters;
   ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
   @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
   @query("dst_crs") destinationCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1123,8 +1153,14 @@ model GetCollectionBboxCropOptions {
   ...TerrainAlgorithmQueryParameters;
   ...MosaicCropQueryParameters;
   ...MiscTileQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
   @query("dst_crs") destinationCrs?: string;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1138,8 +1174,14 @@ model GetSearchBboxCropOptions {
   ...TerrainAlgorithmQueryParameters;
   ...MosaicCropQueryParameters;
   ...MiscTileQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The target coordinate reference system for the output. */
   @query("dst_crs") destinationCrs?: string;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1153,9 +1195,17 @@ model CropFeatureOptions {
   ...MiscTileQueryParameters;
   ...DstCrsQueryParameter;
   ...SubDatasetQueryParameters;
+
+  /** The color formula to apply for image processing. */
   @query("color_formula") colorFormula?: string;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1172,7 +1222,11 @@ model CropCollectionFeatureOptions {
   ...MosaicCropQueryParameters;
   ...MiscTileQueryParameters;
   ...DstCrsQueryParameter;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1188,7 +1242,11 @@ model CropSearchFeatureOptions {
   ...MosaicCropQueryParameters;
   ...MiscTileQueryParameters;
   ...DstCrsQueryParameter;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The maximum output image size in pixels. */
   @query("max_size") maxSize?: int32;
 }
 
@@ -1198,7 +1256,11 @@ model CropSearchFeatureOptions {
 model GetItemPointOptions {
   ...AssetQueryParameters;
   ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
 }
 
@@ -1210,7 +1272,11 @@ model GetCollectionPointOptions {
   ...MosaicSearchQueryParameters;
   ...CollectionMosaicFilterQueryParameters;
   ...CollectionSubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
 }
 
@@ -1221,7 +1287,11 @@ model GetSearchPointOptions {
   ...AssetQueryParameters;
   ...MosaicSearchQueryParameters;
   ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
+
+  /** The resampling algorithm to use. */
   @query("resampling") resampling?: Resampling;
 }
 
@@ -1232,6 +1302,8 @@ model GetItemStatisticsOptions {
   ...AssetQueryParameters;
   ...StatisticsQueryParameters;
   ...SubDatasetQueryParameters;
+
+  /** The coordinate reference system of the input coordinates. */
   @query("coord_crs") coordinateCrs?: string;
 }
 
@@ -1245,7 +1317,11 @@ model GetItemWmtsOptions {
   ...MiscTileQueryParameters;
   ...TilePaddingQueryParameters;
   ...SubDatasetQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
@@ -1256,7 +1332,11 @@ model GetCollectionWmtsOptions {
   ...CollectionMosaicFilterQueryParameters;
   ...ZoomQueryParameters;
   ...AssetQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
@@ -1266,7 +1346,11 @@ model GetCollectionWmtsOptions {
 model GetSearchWmtsOptions {
   ...ZoomQueryParameters;
   ...AssetQueryParameters;
+
+  /** The format of the output tile image. */
   @query("tile_format") tileFormat?: TilerImageFormat;
+
+  /** The scale factor applied to the tile. */
   @query("tile_scale") tileScale?: int32;
 }
 
