@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.HanaOnAzure;
 
 @@clientName(
   Microsoft.HanaOnAzure,
@@ -9,8 +10,7 @@ using Azure.ClientGenerator.Core;
   "javascript,python"
 );
 
-@@clientName(
-  Microsoft.HanaOnAzure.ProviderInstanceProperties.properties,
+@@clientName(ProviderInstanceProperties.properties,
   "ProviderProperties",
   "csharp"
 );
@@ -21,8 +21,8 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-@@clientName(
-  Microsoft.HanaOnAzure.Operation,
-  "HanaOnAzureOperationInfo",
-  "csharp"
-);
+@@clientName(Operation, "HanaOnAzureOperationInfo", "csharp");
+
+@@clientName(HanaProvisioningStatesEnum, "HanaProvisioningState", "csharp");
+
+@@clientName(Display, "HanaOnAzureOperationDisplay", "csharp");
