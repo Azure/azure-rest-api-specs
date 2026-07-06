@@ -1157,6 +1157,25 @@ const rulesPri3Blockers = [
   },
 ];
 
+/** @type {RequiredLabelRule[]} */
+const rulesPri1Namespace = [
+  // When namespace-review-required is present, require namespace-approved before merge.
+  // See .github/workflows/src/namespace-approval/NAMESPACE-REVIEW-PROCESS.md for details.
+  {
+    precedence: 1,
+    anyPrerequisiteLabels: ["namespace-review-required"],
+    allPrerequisiteAbsentLabels: ["namespace-approved"],
+    anyRequiredLabels: ["namespace-approved"],
+    troubleshootingGuide:
+      "This PR modifies SDK namespace configuration in <code>tspconfig.yaml</code> and requires " +
+      "namespace approval from language architects before it can be merged.<br/>" +
+      "Check the <b>Namespace Review Required</b> comment on this PR for a detailed status table " +
+      "showing which languages are pending and who can approve.<br/>" +
+      "Architects: apply <code>namespace-&lt;language&gt;-approved</code> labels for each language, " +
+      "or <code>namespace-approved-all</code> to approve all at once.",
+  },
+];
+
 export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0NotReadyForArmReview)
   .concat(rulesPri0ArmRpaas)
@@ -1164,6 +1183,7 @@ export const requiredLabelsRules = rulesPri0dataPlane
   .concat(rulesPri0ArmRev)
   .concat(rulesPri1ArmRev)
   .concat(rulesPri1Suppressions)
+  .concat(rulesPri1Namespace)
   .concat(rulesPri2Sdk)
   .concat(rulesPri2LegacySdk)
   .concat(rulesPri3Blockers);

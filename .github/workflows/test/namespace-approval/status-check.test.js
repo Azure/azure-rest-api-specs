@@ -57,8 +57,8 @@ describe("status-check", () => {
         head: { sha: "abc123" },
         labels: [
           { name: "namespace-review-required" },
-          { name: "java-namespace-pending" },
-          { name: "dotnet-namespace-pending" },
+          { name: "namespace-java-pending" },
+          { name: "namespace-dotnet-pending" },
         ],
       },
     });
@@ -85,7 +85,7 @@ describe("status-check", () => {
         labels: [
           { name: "namespace-review-required" },
           { name: "namespace-approved" },
-          { name: "java-namespace-approved" },
+          { name: "namespace-java-approved" },
         ],
       },
     });

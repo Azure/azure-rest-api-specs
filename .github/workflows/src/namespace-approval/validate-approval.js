@@ -46,7 +46,9 @@ async function handleUnlabeled({
   actor,
   prNumber,
 }) {
-  if (!targetLabel.endsWith("-namespace-pending") && targetLabel !== "namespace-review-required") {
+  const isNamespacePending =
+    targetLabel.startsWith("namespace-") && targetLabel.endsWith("-pending");
+  if (!isNamespacePending && targetLabel !== "namespace-review-required") {
     core.info(`${targetLabel} is not a namespace label, skipping`);
     return;
   }
@@ -121,10 +123,10 @@ async function handleLabeled({
     }
 
     langsToApprove = labels
-      .filter((label) => label.endsWith("-namespace-pending"))
-      .map((label) => label.replace("-namespace-pending", ""));
+      .filter((label) => label.startsWith("namespace-") && label.endsWith("-pending"))
+      .map((label) => label.replace("namespace-", "").replace("-pending", ""));
   } else {
-    const match = targetLabel.match(/^(\w+)-namespace-approved$/);
+    const match = targetLabel.match(/^namespace-(\w+)-approved$/);
     if (!match) {
       core.info(`${targetLabel} is not a namespace approval label`);
       return;
@@ -163,7 +165,7 @@ async function handleLabeled({
   for (const lang of langsToApprove) {
     // Add approved label before removing pending to avoid status check timing gap (#4)
     if (targetLabel === "namespace-approved-all") {
-      const approvedLabel = `${lang}-namespace-approved`;
+      const approvedLabel = `namespace-${lang}-approved`;
       try {
         await github.rest.issues.getLabel({ owner, repo, name: approvedLabel });
       } catch {
@@ -187,7 +189,7 @@ async function handleLabeled({
         owner,
         repo,
         issue_number: prNumber,
-        name: `${lang}-namespace-pending`,
+        name: `namespace-${lang}-pending`,
       });
     } catch {
       // label may not exist
@@ -203,8 +205,8 @@ async function handleLabeled({
   const currentLabels = currentPR.labels.map(
     (/** @type {{ name?: string }} */ label) => label.name ?? "",
   );
-  const pendingLabels = currentLabels.filter((/** @type {string} */ label) =>
-    label.endsWith("-namespace-pending"),
+  const pendingLabels = currentLabels.filter(
+    (/** @type {string} */ label) => label.startsWith("namespace-") && label.endsWith("-pending"),
   );
 
   const comments = await github.paginate(github.rest.issues.listComments, {

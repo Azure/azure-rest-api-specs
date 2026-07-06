@@ -291,39 +291,39 @@ describe("post-results", () => {
 
   describe("label skip logic", () => {
     it("should not add pending when language already approved", () => {
-      const existingLabels = ["java-namespace-approved", "namespace-review-required"];
+      const existingLabels = ["namespace-java-approved", "namespace-review-required"];
       const languages = ["java", "dotnet"];
       const labelsToAdd = new Set(["namespace-review-required"]);
 
       for (const language of languages) {
-        const approvedLabel = `${language}-namespace-approved`;
+        const approvedLabel = `namespace-${language}-approved`;
         if (!existingLabels.includes(approvedLabel)) {
-          labelsToAdd.add(`${language}-namespace-pending`);
+          labelsToAdd.add(`namespace-${language}-pending`);
         }
       }
 
-      expect(labelsToAdd.has("java-namespace-pending")).toBe(false);
-      expect(labelsToAdd.has("dotnet-namespace-pending")).toBe(true);
+      expect(labelsToAdd.has("namespace-java-pending")).toBe(false);
+      expect(labelsToAdd.has("namespace-dotnet-pending")).toBe(true);
     });
 
     it("should remove namespace-review-required when all approved", () => {
       const existingLabels = [
-        "java-namespace-approved",
-        "dotnet-namespace-approved",
+        "namespace-java-approved",
+        "namespace-dotnet-approved",
         "namespace-review-required",
       ];
       const languages = ["java", "dotnet"];
       const labelsToAdd = new Set(["namespace-review-required"]);
 
       for (const language of languages) {
-        const approvedLabel = `${language}-namespace-approved`;
+        const approvedLabel = `namespace-${language}-approved`;
         if (!existingLabels.includes(approvedLabel)) {
-          labelsToAdd.add(`${language}-namespace-pending`);
+          labelsToAdd.add(`namespace-${language}-pending`);
         }
       }
 
       const allApproved = languages.every((lang) =>
-        existingLabels.includes(`${lang}-namespace-approved`),
+        existingLabels.includes(`namespace-${lang}-approved`),
       );
       if (allApproved && languages.length > 0) {
         labelsToAdd.delete("namespace-review-required");

@@ -28,9 +28,13 @@ export default async function statusCheck({ github, context, core }) {
     return;
   }
 
-  const pendingLabels = labels.filter((label) => label.endsWith("-namespace-pending"));
+  const pendingLabels = labels.filter(
+    (label) => label.startsWith("namespace-") && label.endsWith("-pending"),
+  );
   if (pendingLabels.length > 0) {
-    const pending = pendingLabels.map((l) => l.replace("-namespace-pending", "")).join(", ");
+    const pending = pendingLabels
+      .map((l) => l.replace("namespace-", "").replace("-pending", ""))
+      .join(", ");
     await github.rest.repos.createCommitStatus({
       owner,
       repo,
