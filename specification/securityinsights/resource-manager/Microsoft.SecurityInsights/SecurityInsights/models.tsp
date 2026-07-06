@@ -80,7 +80,7 @@ union CreatedByType {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union triggersOn {
+union TriggersOn {
   string,
 
   /**
@@ -95,7 +95,7 @@ union triggersOn {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-union triggersWhen {
+union TriggersWhen {
   string,
 
   /**
@@ -497,7 +497,7 @@ union SupportTier {
 /**
  * The kind of content the metadata is for.
  */
-union kind {
+union Kind {
   string,
 
   /**
@@ -3981,9 +3981,9 @@ model AutomationRuleTriggeringLogic {
   expirationTimeUtc?: utcDateTime;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  triggersOn: triggersOn;
+  triggersOn: TriggersOn;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  triggersWhen: triggersWhen;
+  triggersWhen: TriggersWhen;
 
   /**
    * The conditions to evaluate to determine if the automation rule should be triggered on a given object.
@@ -4645,7 +4645,7 @@ model MetadataDependencies {
   /**
    * Type of the content item we depend on
    */
-  kind?: kind;
+  kind?: Kind;
 
   /**
    * Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.
@@ -4765,7 +4765,7 @@ model TemplateBaseProperties {
   /**
    * The kind of content the template is for.
    */
-  contentKind?: kind;
+  contentKind?: Kind;
 
   /**
    * Source of the content.  This is where/how it was created.

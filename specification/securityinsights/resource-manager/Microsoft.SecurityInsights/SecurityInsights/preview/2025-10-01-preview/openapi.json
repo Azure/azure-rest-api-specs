@@ -14096,10 +14096,10 @@
           "description": "Determines when the automation rule should automatically expire and be disabled."
         },
         "triggersOn": {
-          "$ref": "#/definitions/triggersOn"
+          "$ref": "#/definitions/TriggersOn"
         },
         "triggersWhen": {
-          "$ref": "#/definitions/triggersWhen"
+          "$ref": "#/definitions/TriggersWhen"
         },
         "conditions": {
           "type": "array",
@@ -22030,6 +22030,150 @@
         ]
       }
     },
+    "Kind": {
+      "type": "string",
+      "description": "The kind of content the metadata is for.",
+      "enum": [
+        "DataConnector",
+        "DataType",
+        "Workbook",
+        "WorkbookTemplate",
+        "Playbook",
+        "PlaybookTemplate",
+        "AnalyticsRuleTemplate",
+        "AnalyticsRule",
+        "HuntingQuery",
+        "InvestigationQuery",
+        "Parser",
+        "Watchlist",
+        "WatchlistTemplate",
+        "Solution",
+        "AzureFunction",
+        "LogicAppsCustomConnector",
+        "AutomationRule",
+        "ResourcesDataConnector",
+        "Notebook",
+        "Standalone",
+        "SummaryRule",
+        "CustomDetection"
+      ],
+      "x-ms-enum": {
+        "name": "Kind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DataConnector",
+            "value": "DataConnector",
+            "description": "DataConnector"
+          },
+          {
+            "name": "DataType",
+            "value": "DataType",
+            "description": "DataType"
+          },
+          {
+            "name": "Workbook",
+            "value": "Workbook",
+            "description": "Workbook"
+          },
+          {
+            "name": "WorkbookTemplate",
+            "value": "WorkbookTemplate",
+            "description": "WorkbookTemplate"
+          },
+          {
+            "name": "Playbook",
+            "value": "Playbook",
+            "description": "Playbook"
+          },
+          {
+            "name": "PlaybookTemplate",
+            "value": "PlaybookTemplate",
+            "description": "PlaybookTemplate"
+          },
+          {
+            "name": "AnalyticsRuleTemplate",
+            "value": "AnalyticsRuleTemplate",
+            "description": "AnalyticsRuleTemplate"
+          },
+          {
+            "name": "AnalyticsRule",
+            "value": "AnalyticsRule",
+            "description": "AnalyticsRule"
+          },
+          {
+            "name": "HuntingQuery",
+            "value": "HuntingQuery",
+            "description": "HuntingQuery"
+          },
+          {
+            "name": "InvestigationQuery",
+            "value": "InvestigationQuery",
+            "description": "InvestigationQuery"
+          },
+          {
+            "name": "Parser",
+            "value": "Parser",
+            "description": "Parser"
+          },
+          {
+            "name": "Watchlist",
+            "value": "Watchlist",
+            "description": "Watchlist"
+          },
+          {
+            "name": "WatchlistTemplate",
+            "value": "WatchlistTemplate",
+            "description": "WatchlistTemplate"
+          },
+          {
+            "name": "Solution",
+            "value": "Solution",
+            "description": "Solution"
+          },
+          {
+            "name": "AzureFunction",
+            "value": "AzureFunction",
+            "description": "AzureFunction"
+          },
+          {
+            "name": "LogicAppsCustomConnector",
+            "value": "LogicAppsCustomConnector",
+            "description": "LogicAppsCustomConnector"
+          },
+          {
+            "name": "AutomationRule",
+            "value": "AutomationRule",
+            "description": "AutomationRule"
+          },
+          {
+            "name": "ResourcesDataConnector",
+            "value": "ResourcesDataConnector",
+            "description": "ResourcesDataConnector"
+          },
+          {
+            "name": "Notebook",
+            "value": "Notebook",
+            "description": "Notebook"
+          },
+          {
+            "name": "Standalone",
+            "value": "Standalone",
+            "description": "Standalone"
+          },
+          {
+            "name": "SummaryRule",
+            "value": "SummaryRule",
+            "description": "SummaryRule"
+          },
+          {
+            "name": "CustomDetection",
+            "value": "CustomDetection",
+            "description": "Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant."
+          }
+        ]
+      }
+    },
     "LastDataReceivedDataType": {
       "type": "object",
       "description": "Data type for last data received",
@@ -28081,7 +28225,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/Kind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -29251,6 +29395,52 @@
         "value"
       ]
     },
+    "TriggersOn": {
+      "type": "string",
+      "enum": [
+        "Incidents",
+        "Alerts"
+      ],
+      "x-ms-enum": {
+        "name": "TriggersOn",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Incidents",
+            "value": "Incidents",
+            "description": "Trigger on Incidents"
+          },
+          {
+            "name": "Alerts",
+            "value": "Alerts",
+            "description": "Trigger on Alerts"
+          }
+        ]
+      }
+    },
+    "TriggersWhen": {
+      "type": "string",
+      "enum": [
+        "Created",
+        "Updated"
+      ],
+      "x-ms-enum": {
+        "name": "TriggersWhen",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Trigger on created objects"
+          },
+          {
+            "name": "Updated",
+            "value": "Updated",
+            "description": "Trigger on updated objects"
+          }
+        ]
+      }
+    },
     "Ueba": {
       "type": "object",
       "description": "Settings with single toggle.",
@@ -30156,150 +30346,6 @@
         }
       }
     },
-    "kind": {
-      "type": "string",
-      "description": "The kind of content the metadata is for.",
-      "enum": [
-        "DataConnector",
-        "DataType",
-        "Workbook",
-        "WorkbookTemplate",
-        "Playbook",
-        "PlaybookTemplate",
-        "AnalyticsRuleTemplate",
-        "AnalyticsRule",
-        "HuntingQuery",
-        "InvestigationQuery",
-        "Parser",
-        "Watchlist",
-        "WatchlistTemplate",
-        "Solution",
-        "AzureFunction",
-        "LogicAppsCustomConnector",
-        "AutomationRule",
-        "ResourcesDataConnector",
-        "Notebook",
-        "Standalone",
-        "SummaryRule",
-        "CustomDetection"
-      ],
-      "x-ms-enum": {
-        "name": "kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "DataConnector",
-            "value": "DataConnector",
-            "description": "DataConnector"
-          },
-          {
-            "name": "DataType",
-            "value": "DataType",
-            "description": "DataType"
-          },
-          {
-            "name": "Workbook",
-            "value": "Workbook",
-            "description": "Workbook"
-          },
-          {
-            "name": "WorkbookTemplate",
-            "value": "WorkbookTemplate",
-            "description": "WorkbookTemplate"
-          },
-          {
-            "name": "Playbook",
-            "value": "Playbook",
-            "description": "Playbook"
-          },
-          {
-            "name": "PlaybookTemplate",
-            "value": "PlaybookTemplate",
-            "description": "PlaybookTemplate"
-          },
-          {
-            "name": "AnalyticsRuleTemplate",
-            "value": "AnalyticsRuleTemplate",
-            "description": "AnalyticsRuleTemplate"
-          },
-          {
-            "name": "AnalyticsRule",
-            "value": "AnalyticsRule",
-            "description": "AnalyticsRule"
-          },
-          {
-            "name": "HuntingQuery",
-            "value": "HuntingQuery",
-            "description": "HuntingQuery"
-          },
-          {
-            "name": "InvestigationQuery",
-            "value": "InvestigationQuery",
-            "description": "InvestigationQuery"
-          },
-          {
-            "name": "Parser",
-            "value": "Parser",
-            "description": "Parser"
-          },
-          {
-            "name": "Watchlist",
-            "value": "Watchlist",
-            "description": "Watchlist"
-          },
-          {
-            "name": "WatchlistTemplate",
-            "value": "WatchlistTemplate",
-            "description": "WatchlistTemplate"
-          },
-          {
-            "name": "Solution",
-            "value": "Solution",
-            "description": "Solution"
-          },
-          {
-            "name": "AzureFunction",
-            "value": "AzureFunction",
-            "description": "AzureFunction"
-          },
-          {
-            "name": "LogicAppsCustomConnector",
-            "value": "LogicAppsCustomConnector",
-            "description": "LogicAppsCustomConnector"
-          },
-          {
-            "name": "AutomationRule",
-            "value": "AutomationRule",
-            "description": "AutomationRule"
-          },
-          {
-            "name": "ResourcesDataConnector",
-            "value": "ResourcesDataConnector",
-            "description": "ResourcesDataConnector"
-          },
-          {
-            "name": "Notebook",
-            "value": "Notebook",
-            "description": "Notebook"
-          },
-          {
-            "name": "Standalone",
-            "value": "Standalone",
-            "description": "Standalone"
-          },
-          {
-            "name": "SummaryRule",
-            "value": "SummaryRule",
-            "description": "SummaryRule"
-          },
-          {
-            "name": "CustomDetection",
-            "value": "CustomDetection",
-            "description": "Custom detections enable proactive monitoring and automated response actions for various events and system states across your tenant."
-          }
-        ]
-      }
-    },
     "metadataAuthor": {
       "type": "object",
       "description": "Publisher or creator of the content item.",
@@ -30347,7 +30393,7 @@
           "description": "Id of the content item we depend on"
         },
         "kind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/Kind",
           "description": "Type of the content item we depend on"
         },
         "version": {
@@ -31091,7 +31137,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/Kind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -31280,7 +31326,7 @@
           "description": "The display name of the template"
         },
         "contentKind": {
-          "$ref": "#/definitions/kind",
+          "$ref": "#/definitions/Kind",
           "description": "The kind of content the template is for."
         },
         "source": {
@@ -31428,52 +31474,6 @@
           "description": "Threat type (e.g. \"Botnet\")",
           "readOnly": true
         }
-      }
-    },
-    "triggersOn": {
-      "type": "string",
-      "enum": [
-        "Incidents",
-        "Alerts"
-      ],
-      "x-ms-enum": {
-        "name": "triggersOn",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Incidents",
-            "value": "Incidents",
-            "description": "Trigger on Incidents"
-          },
-          {
-            "name": "Alerts",
-            "value": "Alerts",
-            "description": "Trigger on Alerts"
-          }
-        ]
-      }
-    },
-    "triggersWhen": {
-      "type": "string",
-      "enum": [
-        "Created",
-        "Updated"
-      ],
-      "x-ms-enum": {
-        "name": "triggersWhen",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "Trigger on created objects"
-          },
-          {
-            "name": "Updated",
-            "value": "Updated",
-            "description": "Trigger on updated objects"
-          }
-        ]
       }
     }
   },
