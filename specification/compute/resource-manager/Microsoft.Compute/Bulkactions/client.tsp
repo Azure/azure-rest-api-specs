@@ -53,7 +53,7 @@ namespace Microsoft.Compute;
 );
 
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
-@@clientName(DeadlineType, "ScheduledActionDeadlineType", "csharp");
+@@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(
   DeallocateResourceOperationResponse,
   "DeallocateResourceOperationResult",
@@ -66,7 +66,7 @@ namespace Microsoft.Compute;
 );
 @@clientName(
   ExecutionParameters,
-  "ScheduledActionExecutionParameterDetail",
+  "BulkActionExecutionParameterDetail",
   "csharp"
 );
 @@clientName(
@@ -84,7 +84,7 @@ namespace Microsoft.Compute;
   "ResourceTypeName",
   "csharp"
 );
-@@clientName(OperationState, "ScheduledActionOperationState", "csharp");
+@@clientName(OperationState, "BulkActionOperationState", "csharp");
 
 @@clientName(ResourceOperation, "ComputeBulkOperationResult", "csharp");
 @@clientName(Resources, "UserRequestResources", "csharp");
@@ -194,8 +194,8 @@ namespace Microsoft.Compute;
 // .NET naming convention fixes (C# only)
 // =====================================================================
 // Expand "Op" abbreviation to "Operation".
-@@clientName(ResourceOperationDetails.opType, "operationType", "csharp");
-@@clientName(FallbackOperationInfo.lastOpType, "lastOperationType", "csharp");
+@@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
+@@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
 // Drop redundant type-name prefix; align with FallbackOperationInfo.error.
 @@clientName(
   ResourceOperationDetails.resourceOperationError,
@@ -212,7 +212,7 @@ namespace Microsoft.Compute;
   "csharp"
 );
 
-@@clientName(ResourceOperationType, "ComputeBulkOperationType", "csharp");
+@@clientName(ResourceOperationType, "ComputeBulkOperationKind", "csharp");
 @@clientName(ResourceOperationDetails, "ComputeBulkOperationDetails", "csharp");
 @@clientName(ResourceOperationDetails.deadline, "deadlineOn", "csharp");
 @@clientName(ResourceOperationError, "ComputeBulkOperationError", "csharp");
@@ -245,38 +245,3 @@ namespace Microsoft.Compute;
   "GetBulkOperationStatusContent",
   "csharp"
 );
-
-// =====================================================================
-// C# only: each bulk operation takes a location path parameter, but the
-// public surface exposes hand-authored wrapper extension methods that
-// derive the location from the resource group. Mark the generated
-// operations internal so only those wrappers are public.
-// =====================================================================
-@@access(
-  VirtualMachineBulkOperations.bulkDeallocate,
-  Access.internal,
-  "csharp"
-);
-@@access(VirtualMachineBulkOperations.bulkHibernate, Access.internal, "csharp");
-@@access(VirtualMachineBulkOperations.bulkStart, Access.internal, "csharp");
-@@access(VirtualMachineBulkOperations.bulkDelete, Access.internal, "csharp");
-@@access(
-  VirtualMachineBulkOperations.bulkGetOperationsStatus,
-  Access.internal,
-  "csharp"
-);
-@@access(VirtualMachineBulkOperations.bulkCancel, Access.internal, "csharp");
-
-// Keep the request/response models public; the wrapper methods expose them.
-@@access(ExecuteDeallocateRequest, Access.public, "csharp");
-@@access(ExecuteHibernateRequest, Access.public, "csharp");
-@@access(ExecuteStartRequest, Access.public, "csharp");
-@@access(ExecuteDeleteRequest, Access.public, "csharp");
-@@access(GetOperationStatusRequest, Access.public, "csharp");
-@@access(CancelOperationsRequest, Access.public, "csharp");
-@@access(DeallocateResourceOperationResponse, Access.public, "csharp");
-@@access(HibernateResourceOperationResponse, Access.public, "csharp");
-@@access(StartResourceOperationResponse, Access.public, "csharp");
-@@access(DeleteResourceOperationResponse, Access.public, "csharp");
-@@access(GetOperationStatusResponse, Access.public, "csharp");
-@@access(CancelOperationsResponse, Access.public, "csharp");
