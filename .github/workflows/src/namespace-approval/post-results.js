@@ -6,6 +6,7 @@ import { PER_PAGE_MAX } from "../../../shared/src/github.js";
 import { commentOrUpdate, parseExistingComments } from "../comment.js";
 import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
+import { removeLabelIfPresent } from "./labels.js";
 
 const FormatValidationResultSchema = z.object({
   valid: z.boolean(),
@@ -74,29 +75,6 @@ async function downloadNamespaceResults(github, core, owner, repo, runId) {
     );
   } finally {
     await unlink(zipPath).catch(() => undefined);
-  }
-}
-
-/**
- * @param {import("@actions/github-script").AsyncFunctionArguments["github"]} github
- * @param {string} owner
- * @param {string} repo
- * @param {number} issueNumber
- * @param {string} label
- */
-async function removeLabelIfPresent(github, owner, repo, issueNumber, label) {
-  try {
-    await github.rest.issues.removeLabel({
-      owner,
-      repo,
-      issue_number: issueNumber,
-      name: label,
-    });
-  } catch (error) {
-    if (error instanceof Error && "status" in error && error.status === 404) {
-      return;
-    }
-    throw error;
   }
 }
 

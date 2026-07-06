@@ -49,6 +49,9 @@ async function extractNamespaces(file, namespacesFound, artifactNames, core) {
   let isMgmt = false;
   let isDataPlane = false;
 
+  // Step 1: Initial guess based on file path (fast, works without parsing).
+  // Step 2 below overrides this with linter.extends from the parsed config,
+  // which is the authoritative plane indicator.
   if (file.includes(".Management/") || file.includes("/resource-manager/")) {
     isMgmt = true;
   } else {
@@ -64,7 +67,7 @@ async function extractNamespaces(file, namespacesFound, artifactNames, core) {
     return { isMgmt, isDataPlane };
   }
 
-  // Linter extends is the most reliable plane indicator — override path-based guess
+  // Step 2: Linter extends is the authoritative plane indicator — overrides path-based guess
   const linter = /** @type {Record<string, unknown> | undefined} */ (config.linter);
   if (linter) {
     const linterExtends = /** @type {string[] | undefined} */ (linter.extends);

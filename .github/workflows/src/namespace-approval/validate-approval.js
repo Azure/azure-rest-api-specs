@@ -1,5 +1,6 @@
 import { extractInputs } from "../context.js";
 import { loadApproversConfig } from "./approvers.js";
+import { removeLabelIfPresent } from "./labels.js";
 
 /**
  * @typedef {Object} ValidateContext
@@ -166,16 +167,6 @@ async function handleLabeled({
     // Add approved label before removing pending to avoid status check timing gap (#4)
     if (targetLabel === "namespace-approved-all") {
       const approvedLabel = `namespace-${lang}-approved`;
-      try {
-        await github.rest.issues.getLabel({ owner, repo, name: approvedLabel });
-      } catch {
-        await github.rest.issues.createLabel({
-          owner,
-          repo,
-          name: approvedLabel,
-          color: "22c55e",
-        });
-      }
       await github.rest.issues.addLabels({
         owner,
         repo,
@@ -184,16 +175,7 @@ async function handleLabeled({
       });
     }
 
-    try {
-      await github.rest.issues.removeLabel({
-        owner,
-        repo,
-        issue_number: prNumber,
-        name: `namespace-${lang}-pending`,
-      });
-    } catch {
-      // label may not exist
-    }
+    await removeLabelIfPresent(github, owner, repo, prNumber, `namespace-${lang}-pending`);
   }
 
   const { data: currentPR } = await github.rest.pulls.get({
@@ -236,26 +218,7 @@ async function handleLabeled({
 
   if (pendingLabels.length === 0) {
     core.info("All namespaces approved!");
-    try {
-      await github.rest.issues.removeLabel({
-        owner,
-        repo,
-        issue_number: prNumber,
-        name: "namespace-review-required",
-      });
-    } catch {
-      // label may not exist
-    }
-    try {
-      await github.rest.issues.getLabel({ owner, repo, name: "namespace-approved" });
-    } catch {
-      await github.rest.issues.createLabel({
-        owner,
-        repo,
-        name: "namespace-approved",
-        color: "22c55e",
-      });
-    }
+    await removeLabelIfPresent(github, owner, repo, prNumber, "namespace-review-required");
     await github.rest.issues.addLabels({
       owner,
       repo,
