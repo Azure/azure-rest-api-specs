@@ -1,0 +1,70 @@
+name: Foundry Client SDK Generation
+
+on:
+  push:
+    paths:
+      - "specification/ai-foundry/data-plane/Foundry/**"
+  pull_request:
+    paths:
+      - "specification/ai-foundry/data-plane/Foundry/**"
+
+permissions:
+  contents: read
+
+env:
+  FOUNDRY_SRC: "specification/ai-foundry/data-plane/Foundry/src"
+
+jobs:
+  list-sdk-configurations:
+    name: List SDK configurations
+    runs-on: ubuntu-latest
+    outputs:
+      sdk-configurations: ${{ steps.list-sdk-configurations.outputs.sdk-configurations }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - id: list-sdk-configurations
+        name: List SDK configurations
+        shell: bash
+        run: |
+          mapfile -t sdk_configurations < <(
+            find "${FOUNDRY_SRC}" -mindepth 1 -maxdepth 1 -type d -name "sdk-*" ! -name "sdk-common" -printf "%f\n" | sort
+          )
+
+          if [ "${#sdk_configurations[@]}" -eq 0 ]; then
+            echo "No SDK configurations found under ${FOUNDRY_SRC}." >&2
+            exit 1
+          fi
+
+          printf "Found SDK configurations:\n"
+          printf "  %s\n" "${sdk_configurations[@]}"
+
+          {
+            echo "sdk-configurations<<EOF"
+            printf "%s\n" "${sdk_configurations[@]}" | jq -R . | jq -s .
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
+
+  validate-sdk-generation:
+    name: Validate ${{ matrix.sdk }}
+    needs: list-sdk-configurations
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        sdk: ${{ fromJson(needs.list-sdk-configurations.outputs.sdk-configurations) }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compile TypeSpec project
+        run: |
+          cd "${FOUNDRY_SRC}/${{ matrix.sdk }}"
+          npm exec -- tsp compile .
