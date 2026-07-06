@@ -24,6 +24,7 @@ import "./ScheduledAction.tsp";
 import "./Setting.tsp";
 import "./MarkupRule.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

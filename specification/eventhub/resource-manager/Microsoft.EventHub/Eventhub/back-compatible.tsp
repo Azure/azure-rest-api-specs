@@ -4,21 +4,17 @@ using Azure.ClientGenerator.Core;
 using Microsoft.EventHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FailOver.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   PrivateLinkResource.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy behavior required for backward compatibility with the original OpenAPI specification."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Destination.properties);
 
 @@clientName(Clusters.createOrUpdate::parameters.resource, "parameters");
@@ -59,7 +55,12 @@ using Microsoft.EventHub;
 @@clientLocation(
   NetworkSecurityPerimeterConfigurations.list,
   "NetworkSecurityPerimeterConfiguration",
-  "!java"
+  "!java,!javascript"
+);
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.list,
+  "NetworkSecurityPerimeterConfigurationOperations",
+  "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
@@ -135,17 +136,42 @@ using Microsoft.EventHub;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaGroup.properties);
 
-@@clientLocation(ApplicationGroups.get, "ApplicationGroup");
+@@clientLocation(ApplicationGroups.get, "ApplicationGroup", "!javascript");
 @@clientLocation(
   ApplicationGroups.createOrUpdateApplicationGroup,
-  "ApplicationGroup"
+  "ApplicationGroup",
+  "!javascript"
+);
+@@clientLocation(
+  ApplicationGroups.get,
+  "ApplicationGroupOperations",
+  "javascript"
+);
+@@clientLocation(
+  ApplicationGroups.createOrUpdateApplicationGroup,
+  "ApplicationGroupOperations",
+  "javascript"
 );
 @@clientName(
   ApplicationGroups.createOrUpdateApplicationGroup::parameters.resource,
   "parameters"
 );
-@@clientLocation(ApplicationGroups.delete, "ApplicationGroup");
-@@clientLocation(ApplicationGroups.listByNamespace, "ApplicationGroup");
+@@clientLocation(ApplicationGroups.delete, "ApplicationGroup", "!javascript");
+@@clientLocation(
+  ApplicationGroups.listByNamespace,
+  "ApplicationGroup",
+  "!javascript"
+);
+@@clientLocation(
+  ApplicationGroups.delete,
+  "ApplicationGroupOperations",
+  "javascript"
+);
+@@clientLocation(
+  ApplicationGroups.listByNamespace,
+  "ApplicationGroupOperations",
+  "javascript"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
   ApplicationGroup.properties
