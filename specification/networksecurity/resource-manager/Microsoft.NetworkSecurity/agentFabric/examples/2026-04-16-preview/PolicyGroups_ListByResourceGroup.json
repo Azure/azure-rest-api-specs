@@ -18,6 +18,12 @@
               "networkSecurityPolicies": [
                 {
                   "type": "FqdnFiltering",
+                  "source": {
+                    "type": "WorkloadIdPatterns",
+                    "patterns": [
+                      "spiffe://contoso.com/ns/default/sa/*"
+                    ]
+                  },
                   "name": "allowOutbound",
                   "priority": 10,
                   "direction": "Outbound",
@@ -25,13 +31,8 @@
                     443,
                     80
                   ],
-                  "source": {
-                    "workloadIds": [
-                      "workload1",
-                      "workload2"
-                    ]
-                  },
                   "destination": {
+                    "type": "Fqdns",
                     "fqdns": [
                       "example.com",
                       "contoso.com"

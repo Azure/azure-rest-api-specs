@@ -610,6 +610,9 @@
         "x-ms-examples": {
           "Members_CreateOrUpdate": {
             "$ref": "./examples/Members_CreateOrUpdate.json"
+          },
+          "Members_CreateOrUpdate_AgentFabricSandbox": {
+            "$ref": "./examples/Members_CreateOrUpdate_AgentFabricSandbox.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -827,6 +830,18 @@
         "x-ms-examples": {
           "PolicyGroups_CreateOrUpdate": {
             "$ref": "./examples/PolicyGroups_CreateOrUpdate.json"
+          },
+          "PolicyGroups_CreateOrUpdate_ContentInspection": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_ContentInspection.json"
+          },
+          "PolicyGroups_CreateOrUpdate_Mcp": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_Mcp.json"
+          },
+          "PolicyGroups_CreateOrUpdate_TlsInspection": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_TlsInspection.json"
+          },
+          "PolicyGroups_CreateOrUpdate_UrlFiltering": {
+            "$ref": "./examples/PolicyGroups_CreateOrUpdate_UrlFiltering.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -999,6 +1014,111 @@
         }
       }
     },
+    "AgentFabricSandboxEndpoint": {
+      "type": "object",
+      "description": "A network endpoint exposed by an Agent Fabric sandbox workload.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the endpoint."
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The port the endpoint listens on."
+        }
+      },
+      "required": [
+        "name",
+        "port"
+      ]
+    },
+    "AgentFabricSandboxImage": {
+      "type": "object",
+      "description": "The container image to run for an Agent Fabric sandbox workload.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The image reference URI (e.g., registry/repository:tag)."
+        },
+        "digest": {
+          "type": "string",
+          "description": "The image content digest used to pin an exact image version."
+        },
+        "pullPolicy": {
+          "$ref": "#/definitions/ImagePullPolicy",
+          "description": "The policy controlling when the image is pulled."
+        }
+      },
+      "required": [
+        "uri"
+      ]
+    },
+    "AgentFabricSandboxResources": {
+      "type": "object",
+      "description": "The compute resources allocated to an Agent Fabric sandbox workload.",
+      "properties": {
+        "cpu": {
+          "type": "string",
+          "description": "The amount of CPU to allocate to the workload."
+        },
+        "memory": {
+          "type": "string",
+          "description": "The amount of memory to allocate to the workload."
+        },
+        "disk": {
+          "type": "string",
+          "description": "The amount of disk to allocate to the workload."
+        }
+      },
+      "required": [
+        "cpu",
+        "memory"
+      ]
+    },
+    "AgentFabricSandboxWorkload": {
+      "type": "object",
+      "description": "Agent Fabric sandbox workload configuration.",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/AgentFabricSandboxImage",
+          "description": "The container image to run for the workload."
+        },
+        "resources": {
+          "$ref": "#/definitions/AgentFabricSandboxResources",
+          "description": "The compute resources allocated to the workload."
+        },
+        "agentIdentity": {
+          "$ref": "#/definitions/AgentIdentity",
+          "description": "The Entra agent identity associated with the workload."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The network endpoints exposed by the workload.",
+          "items": {
+            "$ref": "#/definitions/AgentFabricSandboxEndpoint"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "description": "The resolvable DNS name assigned to the workload."
+        }
+      },
+      "required": [
+        "image",
+        "resources",
+        "domain"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkloadBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AgentFabricSandbox"
+    },
     "AgentFabricTagsUpdate": {
       "type": "object",
       "description": "The type used for updating tags in AgentFabric resources.",
@@ -1012,17 +1132,167 @@
         }
       }
     },
-    "DestinationDetails": {
+    "AgentIdentity": {
       "type": "object",
-      "description": "Destination details for a network security policy.",
+      "description": "The Entra agent identity associated with an Agent Fabric sandbox workload.",
       "properties": {
-        "fqdns": {
+        "tenantId": {
+          "type": "string",
+          "description": "The Azure tenant ID that owns the agent identity."
+        },
+        "agentId": {
+          "type": "string",
+          "description": "The Entra agent ID representing the workload's identity."
+        }
+      },
+      "required": [
+        "tenantId",
+        "agentId"
+      ]
+    },
+    "AzureManagedCaCertificate": {
+      "type": "object",
+      "description": "TLS inspection certificate issued by an Azure-managed certificate authority.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TlsInspectionCertificateBase"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureManagedCA"
+    },
+    "ContentInspectionPolicy": {
+      "type": "object",
+      "description": "Content inspection network security policy.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/ContentInspectionPolicySource",
+          "description": "The source details for the policy."
+        },
+        "promptInjectionProtection": {
+          "$ref": "#/definitions/PromptInjectionProtection",
+          "description": "The prompt injection protection configuration."
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "ContentInspection"
+    },
+    "ContentInspectionPolicyAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects content inspection sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
           "type": "array",
-          "description": "The fully qualified domain names for the destination.",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
           "items": {
             "type": "string"
           }
         }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "ContentInspectionPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that a content inspection policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ContentInspectionPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ContentInspectionPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for a content inspection policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "ContentInspectionPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "ContentInspectionPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects content inspection sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContentInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "ContentInspectionSensitivity": {
+      "type": "string",
+      "description": "The sensitivity level of content inspection.",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "ContentInspectionSensitivity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Low sensitivity."
+          },
+          {
+            "name": "Medium",
+            "value": "Medium",
+            "description": "Medium sensitivity."
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "High sensitivity."
+          }
+        ]
       }
     },
     "FoundryWorkload": {
@@ -1032,7 +1302,7 @@
         "resourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The Azure resource ID of the Foundry resource."
+          "description": "The ARM resource ID of the Foundry resource."
         }
       },
       "allOf": [
@@ -1041,6 +1311,82 @@
         }
       ],
       "x-ms-discriminator-value": "Foundry"
+    },
+    "FqdnFilteringAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects FQDN filtering sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "FqdnFilteringDestination": {
+      "type": "object",
+      "description": "Selects the destination(s) that an FQDN filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FqdnFilteringDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FqdnFilteringDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for an FQDN filtering policy.",
+      "enum": [
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "FqdnFilteringDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
+      }
+    },
+    "FqdnFilteringFqdnsDestination": {
+      "type": "object",
+      "description": "Selects FQDN filtering destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
     },
     "FqdnFilteringPolicy": {
       "type": "object",
@@ -1068,20 +1414,412 @@
           }
         },
         "source": {
-          "$ref": "#/definitions/SourceDetails",
+          "$ref": "#/definitions/FqdnFilteringSource",
           "description": "The source details for the policy."
         },
         "destination": {
-          "$ref": "#/definitions/DestinationDetails",
+          "$ref": "#/definitions/FqdnFilteringDestination",
           "description": "The destination details for the policy."
         }
       },
+      "required": [
+        "source"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/NetworkSecurityPolicyBase"
         }
       ],
       "x-ms-discriminator-value": "FqdnFiltering"
+    },
+    "FqdnFilteringSource": {
+      "type": "object",
+      "description": "Selects the source(s) that an FQDN filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FqdnFilteringSourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "FqdnFilteringSourceType": {
+      "type": "string",
+      "description": "The type of source selector for an FQDN filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "FqdnFilteringSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "FqdnFilteringWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects FQDN filtering sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/FqdnFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "HttpMethod": {
+      "type": "string",
+      "description": "The HTTP method matched by a URL filtering rule.",
+      "enum": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "PATCH",
+        "HEAD",
+        "OPTIONS"
+      ],
+      "x-ms-enum": {
+        "name": "HttpMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Get",
+            "value": "GET",
+            "description": "HTTP GET method."
+          },
+          {
+            "name": "Post",
+            "value": "POST",
+            "description": "HTTP POST method."
+          },
+          {
+            "name": "Put",
+            "value": "PUT",
+            "description": "HTTP PUT method."
+          },
+          {
+            "name": "Delete",
+            "value": "DELETE",
+            "description": "HTTP DELETE method."
+          },
+          {
+            "name": "Patch",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "Head",
+            "value": "HEAD",
+            "description": "HTTP HEAD method."
+          },
+          {
+            "name": "Options",
+            "value": "OPTIONS",
+            "description": "HTTP OPTIONS method."
+          }
+        ]
+      }
+    },
+    "ImagePullPolicy": {
+      "type": "string",
+      "description": "The image pull policy for a sandbox workload container image.",
+      "enum": [
+        "Always",
+        "IfNotPresent"
+      ],
+      "x-ms-enum": {
+        "name": "ImagePullPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Always pull the image."
+          },
+          {
+            "name": "IfNotPresent",
+            "value": "IfNotPresent",
+            "description": "Pull the image only if it is not already present on the host."
+          }
+        ]
+      }
+    },
+    "McpPolicy": {
+      "type": "object",
+      "description": "MCP server network security policy.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The default action to take when no rule in the policy matches."
+        },
+        "source": {
+          "$ref": "#/definitions/McpPolicySource",
+          "description": "The source(s) that this policy applies to."
+        },
+        "destination": {
+          "$ref": "#/definitions/McpPolicyDestination",
+          "description": "The MCP server(s) that this policy applies to."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The list of MCP rules.",
+          "items": {
+            "$ref": "#/definitions/McpRule"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "defaultAction",
+        "source",
+        "destination",
+        "rules"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "Mcp"
+    },
+    "McpPolicyAddressPrefixesDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "McpPolicyAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects MCP policy sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "McpPolicyDestination": {
+      "type": "object",
+      "description": "Selects the MCP server(s) that an MCP policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/McpPolicyDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "McpPolicyDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for an MCP policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes",
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "McpPolicyDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select destinations by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select destinations by IP address prefixes in CIDR notation."
+          },
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
+      }
+    },
+    "McpPolicyFqdnsDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
+    },
+    "McpPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that an MCP policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/McpPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "McpPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for an MCP policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "McpPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "McpPolicyWorkloadIdPatternsDestination": {
+      "type": "object",
+      "description": "Selects MCP policy destinations by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicyDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "McpPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects MCP policy sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/McpPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "McpRule": {
+      "type": "object",
+      "description": "A single rule within an MCP policy.",
+      "properties": {
+        "action": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The action to take for the specified MCP tools."
+        },
+        "tools": {
+          "type": "array",
+          "description": "The MCP tool names that the rule applies to.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "action",
+        "tools"
+      ]
     },
     "Member": {
       "type": "object",
@@ -1127,22 +1865,6 @@
           "$ref": "#/definitions/WorkloadBase",
           "description": "The workload configuration of the member."
         },
-        "policyGroups": {
-          "type": "array",
-          "description": "The policy groups to apply to this member.",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.NetworkSecurity/policyGroups"
-                }
-              ]
-            }
-          }
-        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the resource.",
@@ -1168,7 +1890,11 @@
       "type": "string",
       "description": "The type of network security policy.",
       "enum": [
-        "FqdnFiltering"
+        "FqdnFiltering",
+        "UrlFiltering",
+        "Mcp",
+        "TlsInspection",
+        "ContentInspection"
       ],
       "x-ms-enum": {
         "name": "NetworkSecurityPolicyType",
@@ -1178,6 +1904,50 @@
             "name": "FqdnFiltering",
             "value": "FqdnFiltering",
             "description": "FQDN filtering policy type."
+          },
+          {
+            "name": "UrlFiltering",
+            "value": "UrlFiltering",
+            "description": "URL filtering policy type."
+          },
+          {
+            "name": "Mcp",
+            "value": "Mcp",
+            "description": "MCP server policy type."
+          },
+          {
+            "name": "TlsInspection",
+            "value": "TlsInspection",
+            "description": "TLS inspection policy type."
+          },
+          {
+            "name": "ContentInspection",
+            "value": "ContentInspection",
+            "description": "Content inspection policy type."
+          }
+        ]
+      }
+    },
+    "PolicyAction": {
+      "type": "string",
+      "description": "The action to take when a network security policy or rule matches traffic.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allow",
+            "value": "Allow",
+            "description": "Allow the matching traffic."
+          },
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny the matching traffic."
           }
         ]
       }
@@ -1293,6 +2063,67 @@
         }
       }
     },
+    "PromptInjectionOnDetection": {
+      "type": "string",
+      "description": "The action to take when prompt injection is detected.",
+      "enum": [
+        "BlockAndAlert",
+        "Alert",
+        "Sanitize"
+      ],
+      "x-ms-enum": {
+        "name": "PromptInjectionOnDetection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BlockAndAlert",
+            "value": "BlockAndAlert",
+            "description": "Block the request or response and raise an alert."
+          },
+          {
+            "name": "Alert",
+            "value": "Alert",
+            "description": "Raise an alert but allow the request or response to proceed."
+          },
+          {
+            "name": "Sanitize",
+            "value": "Sanitize",
+            "description": "Remove the detected content and allow the request or response to proceed."
+          }
+        ]
+      }
+    },
+    "PromptInjectionProtection": {
+      "type": "object",
+      "description": "Prompt injection protection configuration.",
+      "properties": {
+        "sensitivity": {
+          "$ref": "#/definitions/ContentInspectionSensitivity",
+          "description": "The sensitivity level of prompt injection detection."
+        },
+        "promptLocations": {
+          "type": "array",
+          "description": "The JSONPath expressions selecting the parts of the request body to scan for prompt injection.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "responseLocations": {
+          "type": "array",
+          "description": "The JSONPath expressions selecting the parts of the response body to scan for prompt injection.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "onDetection": {
+          "$ref": "#/definitions/PromptInjectionOnDetection",
+          "description": "The action to take when prompt injection is detected."
+        }
+      },
+      "required": [
+        "onDetection"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state of the resource",
@@ -1324,18 +2155,385 @@
       },
       "readOnly": true
     },
-    "SourceDetails": {
+    "TlsInspectionCertificateBase": {
       "type": "object",
-      "description": "Source details for a network security policy.",
+      "description": "Base certificate configuration for a TLS inspection policy.",
       "properties": {
-        "workloadIds": {
+        "mode": {
+          "$ref": "#/definitions/TlsInspectionCertificateMode",
+          "description": "The source mode of the TLS inspection certificate."
+        }
+      },
+      "discriminator": "mode",
+      "required": [
+        "mode"
+      ]
+    },
+    "TlsInspectionCertificateMode": {
+      "type": "string",
+      "description": "The source of the certificate used for TLS inspection.",
+      "enum": [
+        "AzureManagedCA"
+      ],
+      "x-ms-enum": {
+        "name": "TlsInspectionCertificateMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManagedCA",
+            "value": "AzureManagedCA",
+            "description": "Certificate issued by an Azure-managed certificate authority."
+          }
+        ]
+      }
+    },
+    "TlsInspectionPolicy": {
+      "type": "object",
+      "description": "TLS inspection network security policy.",
+      "properties": {
+        "source": {
+          "$ref": "#/definitions/TlsInspectionPolicySource",
+          "description": "The source details for the policy."
+        },
+        "certificate": {
+          "$ref": "#/definitions/TlsInspectionCertificateBase",
+          "description": "The certificate configuration used for TLS inspection."
+        }
+      },
+      "required": [
+        "source",
+        "certificate"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "TlsInspection"
+    },
+    "TlsInspectionPolicySource": {
+      "type": "object",
+      "description": "Selects the source(s) that a TLS inspection policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TlsInspectionPolicySourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "TlsInspectionPolicySourceType": {
+      "type": "string",
+      "description": "The type of source selector for a TLS inspection policy.",
+      "enum": [
+        "WorkloadIdPatterns"
+      ],
+      "x-ms-enum": {
+        "name": "TlsInspectionPolicySourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          }
+        ]
+      }
+    },
+    "TlsInspectionPolicyWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects TLS inspection sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
           "type": "array",
-          "description": "The workload identifiers for the source.",
+          "description": "The workload ID patterns that identify the source(s).",
           "items": {
             "type": "string"
           }
         }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/TlsInspectionPolicySource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "UrlFilteringAddressPrefixesDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "UrlFilteringAddressPrefixesSource": {
+      "type": "object",
+      "description": "Selects URL filtering sources by IP address prefixes.",
+      "properties": {
+        "prefixes": {
+          "type": "array",
+          "description": "The IP address prefixes, in CIDR notation, that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "prefixes"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressPrefixes"
+    },
+    "UrlFilteringDestination": {
+      "type": "object",
+      "description": "Selects the destination(s) that a URL filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UrlFilteringDestinationType",
+          "description": "The type of destination selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "UrlFilteringDestinationType": {
+      "type": "string",
+      "description": "The type of destination selector for a URL filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes",
+        "Fqdns"
+      ],
+      "x-ms-enum": {
+        "name": "UrlFilteringDestinationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select destinations by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select destinations by IP address prefixes in CIDR notation."
+          },
+          {
+            "name": "Fqdns",
+            "value": "Fqdns",
+            "description": "Select destinations by fully qualified domain names."
+          }
+        ]
       }
+    },
+    "UrlFilteringFqdnsDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by fully qualified domain names.",
+      "properties": {
+        "fqdns": {
+          "type": "array",
+          "description": "The fully qualified domain names that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "fqdns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "Fqdns"
+    },
+    "UrlFilteringPolicy": {
+      "type": "object",
+      "description": "URL filtering network security policy.",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The default action to take when no rule in the policy matches."
+        },
+        "source": {
+          "$ref": "#/definitions/UrlFilteringSource",
+          "description": "The source details for the policy."
+        },
+        "destination": {
+          "$ref": "#/definitions/UrlFilteringDestination",
+          "description": "The destination details for the policy."
+        },
+        "rules": {
+          "type": "array",
+          "description": "The list of URL filtering rules.",
+          "items": {
+            "$ref": "#/definitions/UrlFilteringRule"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "defaultAction",
+        "source",
+        "rules"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkSecurityPolicyBase"
+        }
+      ],
+      "x-ms-discriminator-value": "UrlFiltering"
+    },
+    "UrlFilteringRule": {
+      "type": "object",
+      "description": "A single rule within a URL filtering policy.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the rule."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The priority of the rule. Rules are evaluated in ascending priority order."
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname matched by the rule. If omitted, the rule matches any hostname."
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "The HTTP method matched by the rule. If omitted, the rule matches any method."
+        },
+        "paths": {
+          "type": "array",
+          "description": "The URL paths matched by the rule. If omitted, the rule matches any path.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "$ref": "#/definitions/PolicyAction",
+          "description": "The action to take when the rule matches."
+        }
+      },
+      "required": [
+        "name",
+        "priority",
+        "action"
+      ]
+    },
+    "UrlFilteringSource": {
+      "type": "object",
+      "description": "Selects the source(s) that a URL filtering policy applies to.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UrlFilteringSourceType",
+          "description": "The type of source selector."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "UrlFilteringSourceType": {
+      "type": "string",
+      "description": "The type of source selector for a URL filtering policy.",
+      "enum": [
+        "WorkloadIdPatterns",
+        "AddressPrefixes"
+      ],
+      "x-ms-enum": {
+        "name": "UrlFilteringSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WorkloadIdPatterns",
+            "value": "WorkloadIdPatterns",
+            "description": "Select sources by workload ID patterns."
+          },
+          {
+            "name": "AddressPrefixes",
+            "value": "AddressPrefixes",
+            "description": "Select sources by IP address prefixes in CIDR notation."
+          }
+        ]
+      }
+    },
+    "UrlFilteringWorkloadIdPatternsDestination": {
+      "type": "object",
+      "description": "Selects URL filtering destinations by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the destination(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringDestination"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
+    },
+    "UrlFilteringWorkloadIdPatternsSource": {
+      "type": "object",
+      "description": "Selects URL filtering sources by workload ID patterns.",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "The workload ID patterns that identify the source(s).",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "patterns"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/UrlFilteringSource"
+        }
+      ],
+      "x-ms-discriminator-value": "WorkloadIdPatterns"
     },
     "WorkloadBase": {
       "type": "object",
@@ -1364,7 +2562,8 @@
       "type": "string",
       "description": "The workload type of a member.",
       "enum": [
-        "Foundry"
+        "Foundry",
+        "AgentFabricSandbox"
       ],
       "x-ms-enum": {
         "name": "WorkloadType",
@@ -1374,6 +2573,11 @@
             "name": "Foundry",
             "value": "Foundry",
             "description": "Foundry workload type"
+          },
+          {
+            "name": "AgentFabricSandbox",
+            "value": "AgentFabricSandbox",
+            "description": "Agent Fabric sandbox workload type"
           }
         ]
       }
