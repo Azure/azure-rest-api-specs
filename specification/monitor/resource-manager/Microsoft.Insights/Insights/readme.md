@@ -139,14 +139,13 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2021-05-01-preview/openapi.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2023-03-11/dataCollectionEndpoints_API.json
@@ -198,7 +197,7 @@ input-file:
  - stable/2015-04-01/operations_API.json
  - stable/2023-12-01/scheduledQueryRule_API.json
  - stable/2016-09-01/serviceDiagnosticsSettings.json
- - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+ - preview/2018-11-27-preview/vmInsightsOnboarding.json
  - preview/2019-10-17-preview/privateLinkScopes_API.json
  - preview/2017-05-01-preview/subscriptionDiagnosticsSettings_API.json
  - stable/2023-03-11/dataCollectionEndpoints_API.json
@@ -218,14 +217,13 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2021-05-01-preview/openapi.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2023-03-11/dataCollectionEndpoints_API.json
@@ -244,15 +242,14 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2023-03-11/dataCollectionEndpoints_API.json
@@ -271,15 +268,14 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2019-03-01/metricBaselines.json
   - stable/2018-03-01/metricAlert_API.json
   - stable/2023-12-01/scheduledQueryRule_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2022-06-01/dataCollectionEndpoints_API.json
@@ -297,10 +293,9 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2023-10-01/metricDefinitions_API.json
   - stable/2023-10-01/metrics_API.json
@@ -308,7 +303,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2022-06-01/dataCollectionEndpoints_API.json
@@ -331,7 +326,7 @@ These settings apply only when `--tag=package-2023-05-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2023-05-01-preview-only'
 input-file:
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
 ```
 
 ### Tag: package-2023-04
@@ -344,10 +339,9 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
-  - preview/2023-05-01-preview/tenantActionGroups_API.json
+  - preview/2023-05-01-preview/tenantActionGroups.json
   - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
   - stable/2021-05-01/metrics_API.json
@@ -355,7 +349,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2022-06-01/dataCollectionEndpoints_API.json
@@ -373,8 +367,7 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-03-01-preview/tenantActionGroups_API.json
   - stable/2015-04-01/activityLogs.json
@@ -384,7 +377,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - preview/2023-03-15-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2022-06-01/dataCollectionEndpoints_API.json
@@ -449,8 +442,7 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
   - preview/2023-03-01-preview/tenantActionGroups_API.json
   - stable/2015-04-01/activityLogs.json
@@ -460,7 +452,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - preview/2023-03-15-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -478,8 +470,7 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
   - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
@@ -488,7 +479,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - preview/2022-08-01-preview/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -506,8 +497,7 @@ input-file:
   - stable/2015-04-01/operations_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - stable/2023-01-01/actionGroups_API.json
   - stable/2015-04-01/activityLogs.json
   - stable/2021-05-01/metricDefinitions_API.json
@@ -516,7 +506,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -544,7 +534,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -572,7 +562,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -609,7 +599,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2022-06-15/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - preview/2021-09-01-preview/dataCollectionEndpoints_API.json
@@ -647,7 +637,7 @@ input-file:
   - stable/2015-04-01/eventCategories_API.json
   - stable/2016-03-01/alertRulesIncidents.json
   - stable/2016-03-01/logProfiles.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
 ```
 
 ### Tag: package-2021-05-preview-diagnostics
@@ -657,8 +647,7 @@ These settings apply only when `--tag=package-2021-05-preview-diagnostics` is sp
 ```yaml $(tag) == 'package-2021-05-preview-diagnostics'
 input-file:
   - preview/2021-05-01-preview/autoscale_API.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
   - preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
   - preview/2021-07-01-preview/privateLinkScopes_API.json
@@ -735,7 +724,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2021-04-01/dataCollectionEndpoints_API.json
@@ -782,7 +771,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2020-10-01/activityLogAlerts_API.json
   - stable/2021-04-01/dataCollectionEndpoints_API.json
@@ -819,7 +808,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
   - stable/2017-04-01/activityLogAlerts_API.json
   - stable/2021-04-01/dataCollectionEndpoints_API.json
@@ -845,8 +834,7 @@ These settings apply only when `--tag=package-2021-05-01-preview-only` is specif
 ```yaml $(tag) == 'package-2021-05-01-preview-only'
 input-file:
   - preview/2021-05-01-preview/autoscale_API.json
-  - preview/2021-05-01-preview/diagnosticsSettings_API.json
-  - preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
+  - preview/2021-05-01-preview/openapi.json
   - preview/2021-05-01-preview/managementGroupDiagnosticSettings_API.json
   - preview/2021-05-01-preview/subscriptionDiagnosticsSettings_API.json
 ```
@@ -917,7 +905,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
@@ -943,7 +931,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
   - preview/2019-10-17-preview/privateLinkScopes_API.json
 ```
 
@@ -987,7 +975,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
 ```
 
 ### Tag: package-2019-03
@@ -1011,7 +999,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
 ```
 
 ### Tag: package-2018-11-preview
@@ -1034,7 +1022,7 @@ input-file:
   - stable/2018-03-01/metricAlert_API.json
   - stable/2018-04-16/scheduledQueryRule_API.json
   - preview/2017-12-01-preview/metricNamespaces_API.json
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
 ```
 
 ### Tag: package-2018-09
@@ -1199,7 +1187,7 @@ These settings apply only when `--tag=package-2018-11-27-preview-only` is specif
 
 ```yaml $(tag) == 'package-2018-11-27-preview-only'
 input-file:
-  - preview/2018-11-27-preview/vmInsightsOnboarding_API.json
+  - preview/2018-11-27-preview/vmInsightsOnboarding.json
 ```
 
 ### Tag: package-2018-09-01-only
