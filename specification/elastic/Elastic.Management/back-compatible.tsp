@@ -94,13 +94,23 @@ using Microsoft.Elastic;
 @@clientLocation(
   ElasticMonitorResources.listAssociatedTrafficFiltersList,
   "listAssociatedTrafficFilters",
-  "!csharp"
+  "!csharp,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.listAssociatedTrafficFiltersList,
+  "ListAssociatedTrafficFilters",
+  "python"
 );
 @@clientName(ElasticMonitorResources.listAssociatedTrafficFiltersList, "list");
 @@clientLocation(
   ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "createAndAssociateIPFilter",
-  "!csharp,!java"
+  "!csharp,!java,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.createAndAssociateIPFilterCreate,
+  "CreateAndAssociateIPFilter",
+  "python"
 );
 @@clientName(
   ElasticMonitorResources.createAndAssociateIPFilterCreate,
@@ -109,7 +119,12 @@ using Microsoft.Elastic;
 @@clientLocation(
   ElasticMonitorResources.createAndAssociatePLFilterCreate,
   "createAndAssociatePLFilter",
-  "!csharp"
+  "!csharp,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.createAndAssociatePLFilterCreate,
+  "CreateAndAssociatePLFilter",
+  "python"
 );
 @@clientName(
   ElasticMonitorResources.createAndAssociatePLFilterCreate,
