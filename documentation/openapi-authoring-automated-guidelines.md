@@ -90,7 +90,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- | --- |
 | [R2024](#r2024) | [AnonymousBodyParameter](#r2024) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
 | [R2026](#r2026) | [AvoidAnonymousTypes](#r2026) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
-| [R2014](#r2014) | [SubscriptionIdParameterInOperations](#r2014) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R2014](#r2014) | [SubscriptionIdParameterInOperations](#r2014) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R2027](#r2027) | [DefaultMustBeInEnum](#r2027) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
 | [R1001](#r1001) | [OperationIdNounInVerb](#r1001) | ARM and Data plane OpenAPI(swagger) specs | [How-to: client naming](https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/09renaming/) |
 | [R2055](#r2055) | [OneUnderscoreInOperationId](#r2055) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
@@ -111,7 +111,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R2009](#r2009) | [ArraySchemaMustHaveItems](#r2009) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
 | [R2018](#r2018) | [XmsEnumValidation](#r2018) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
 | [R3013](#r3013) | [DeleteMustNotHaveRequestBody](#r3013) | ARM and Data plane OpenAPI(swagger) specs | Invalid TypeSpec |
-| [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
+| [R4001](#r4001) | [XmsParameterLocation](#r4001) | ARM and Data plan OpenAPI(swagger) specs | [@clientLocation (TCGC)](https://azure.github.io/typespec-azure/docs/libraries/typespec-client-generator-core/reference/decorators/#@Azure.ClientGenerator.Core.clientLocation) |
 | [R3015](#r3015) | [EnumMustHaveType](#r3015) | ARM and Data plan OpenAPI(swagger) specs | Invalid TypeSpec |
 | [R3024](#r3024) | [EnumUniqueValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs | [Troubleshoot: extensible enums](https://azure.github.io/typespec-azure/docs/troubleshoot/enum-not-extensible/) |
 | [R3029](#r3029) | [EnumMustNotHaveEmptyValue](#r3024) | ARM and Data plan OpenAPI(swagger) specs | [Troubleshoot: extensible enums](https://azure.github.io/typespec-azure/docs/troubleshoot/enum-not-extensible/) |
