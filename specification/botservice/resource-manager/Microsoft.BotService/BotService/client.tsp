@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.BotService {
+  @@clientName(Microsoft.BotService, "AzureBotService", "python");
   @@scope(Operations.list, "!csharp");
   @@clientName(AlexaChannelProperties.urlFragment, "UriFragment", "csharp");
   @@alternateType(AlexaChannelProperties.serviceEndpointUri, url, "csharp");
