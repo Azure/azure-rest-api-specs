@@ -69,7 +69,7 @@ interface TenantActionGroupResources {
   /**
    * Get a tenant action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActionGroups_Get")
   get is Extension.Read<
     Extension.ManagementGroup<"managementGroupId">,
@@ -78,6 +78,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },
@@ -87,7 +88,7 @@ interface TenantActionGroupResources {
   /**
    * Create a new tenant action group or update an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActionGroups_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ManagementGroup<"managementGroupId">,
@@ -96,6 +97,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },
@@ -105,7 +107,7 @@ interface TenantActionGroupResources {
   /**
    * Updates an existing tenant action group's tags. To update other fields use the CreateOrUpdate method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActionGroups_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
@@ -116,6 +118,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },
@@ -125,7 +128,7 @@ interface TenantActionGroupResources {
   /**
    * Delete a tenant action group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActionGroups_Delete")
   delete is Extension.DeleteSync<
     Extension.ManagementGroup<"managementGroupId">,
@@ -134,6 +137,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },
@@ -143,7 +147,7 @@ interface TenantActionGroupResources {
   /**
    * Get a list of all tenant action groups in a management group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TenantActionGroups_ListByManagementGroupId")
   listByManagementGroupId is Extension.ListByTarget<
     Extension.ManagementGroup<"managementGroupId">,
@@ -152,6 +156,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },
@@ -162,7 +167,7 @@ interface TenantActionGroupResources {
   /**
    * Send test notifications to a set of provided receivers
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CreateNotificationsAtTenantActionGroupResourceLevel")
   @action("createNotifications")
   createNotificationsAtTenantActionGroupResourceLevel is Extension.ActionAsync<
@@ -174,6 +179,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     }
@@ -182,7 +188,7 @@ interface TenantActionGroupResources {
   /**
    * Get the test notifications by the notification id
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GetTestNotificationsAtTenantActionGroupResourceLevel")
   @get
   @action("{notificationId}")
@@ -195,6 +201,7 @@ interface TenantActionGroupResources {
       /**
        * The tenant ID of the client making the request.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       `x-ms-client-tenant-id`: string;
     },

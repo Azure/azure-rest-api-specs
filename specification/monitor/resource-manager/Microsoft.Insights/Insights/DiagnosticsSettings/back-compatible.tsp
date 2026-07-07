@@ -12,7 +12,7 @@ using Microsoft.Insights;
 );
 @@clientLocation(DiagnosticSettingsResources.delete, "DiagnosticSettings");
 @@clientLocation(DiagnosticSettingsResources.list, "DiagnosticSettings");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DiagnosticSettingsResource.properties);
 
 @@clientLocation(DiagnosticSettingsCategoryResources.get,
@@ -21,5 +21,5 @@ using Microsoft.Insights;
 @@clientLocation(DiagnosticSettingsCategoryResources.list,
   "DiagnosticSettingsCategory"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DiagnosticSettingsCategoryResource.properties);

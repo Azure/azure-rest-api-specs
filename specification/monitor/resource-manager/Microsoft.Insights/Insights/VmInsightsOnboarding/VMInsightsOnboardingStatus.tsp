@@ -13,6 +13,8 @@ namespace Microsoft.Insights;
 /**
  * VM Insights onboarding status for a resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @singleton("default")
 @extensionResource
 model VMInsightsOnboardingStatus
@@ -25,12 +27,13 @@ model VMInsightsOnboardingStatus
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface VMInsightsOnboardingStatuses {
   /**
    * Retrieves the VM Insights onboarding status for the specified resource or resource scope.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("VMInsights_GetOnboardingStatus")
   @tag("VM Insights Onboarding")
   getOnboardingStatus is Extension.Read<

@@ -58,7 +58,7 @@ union CategoryType {
 /**
  * The diagnostic settings.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticSettings {
   /**
    * The resource ID of the storage account to which you would like to send Diagnostic Logs.
@@ -83,11 +83,13 @@ model DiagnosticSettings {
   /**
    * The list of metric settings.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   metrics?: MetricSettings[];
 
   /**
    * The list of logs settings.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   logs?: LogSettings[];
 
   /**
@@ -208,7 +210,7 @@ model DiagnosticSettingsResourceCollection {
 /**
  * The diagnostic settings Category.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticSettingsCategory {
   /**
    * The type of the diagnostic settings category.

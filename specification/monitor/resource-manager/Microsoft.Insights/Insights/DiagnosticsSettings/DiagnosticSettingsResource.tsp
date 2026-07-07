@@ -13,6 +13,7 @@ namespace Microsoft.Insights;
 /**
  * The diagnostic setting resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DiagnosticSettingsResource
   is Azure.ResourceManager.ExtensionResource<DiagnosticSettings> {
@@ -29,7 +30,7 @@ interface DiagnosticSettingsResources {
   /**
    * Gets the active diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettings_Get")
   @tag("DiagnosticSettings")
   get is Extension.Read<
@@ -41,8 +42,8 @@ interface DiagnosticSettingsResources {
   /**
    * Creates or updates diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettings_CreateOrUpdate")
   @tag("DiagnosticSettings")
   createOrUpdate is Extension.CreateOrReplaceSync<
@@ -55,7 +56,7 @@ interface DiagnosticSettingsResources {
   /**
    * Deletes existing diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettings_Delete")
   @tag("DiagnosticSettings")
   delete is Extension.DeleteSync<
@@ -67,7 +68,7 @@ interface DiagnosticSettingsResources {
   /**
    * Gets the active diagnostic settings list for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettings_List")
   @tag("DiagnosticSettings")
   list is Extension.ListByTarget<

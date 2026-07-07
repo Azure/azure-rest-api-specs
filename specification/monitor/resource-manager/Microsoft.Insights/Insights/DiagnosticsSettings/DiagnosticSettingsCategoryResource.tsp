@@ -13,6 +13,7 @@ namespace Microsoft.Insights;
 /**
  * The diagnostic settings category resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @extensionResource
 model DiagnosticSettingsCategoryResource
   is Azure.ResourceManager.ExtensionResource<DiagnosticSettingsCategory> {
@@ -29,7 +30,7 @@ interface DiagnosticSettingsCategoryResources {
   /**
    * Gets the diagnostic settings category for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettingsCategory_Get")
   @tag("DiagnosticSettingsCategories")
   get is Extension.Read<
@@ -41,7 +42,7 @@ interface DiagnosticSettingsCategoryResources {
   /**
    * Lists the diagnostic settings categories for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DiagnosticSettingsCategory_List")
   @tag("DiagnosticSettingsCategories")
   list is Extension.ListByTarget<
