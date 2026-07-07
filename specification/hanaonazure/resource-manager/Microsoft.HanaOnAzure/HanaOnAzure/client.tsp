@@ -28,6 +28,18 @@ using Microsoft.HanaOnAzure;
   "csharp"
 );
 
+@@alternateType(
+  SapMonitorProperties.monitorSubnet,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+@@alternateType(SapMonitorProperties.logAnalyticsWorkspaceId, Azure.Core.uuid, "csharp");
+
+@@clientName(ProviderInstanceProperties.type, "providerType", "csharp");
+
+@@access(Operations.list, Access.internal, "csharp");
+
 @@clientName(Operation, "HanaOnAzureOperationInfo", "csharp");
 
 @@clientName(HanaProvisioningStatesEnum, "HanaProvisioningState", "csharp");
