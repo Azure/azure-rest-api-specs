@@ -15,5 +15,4 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/conversations")
 @tag("Conversations")
-interface ConversationsGenerated {
-}
+interface ConversationsGenerated {}

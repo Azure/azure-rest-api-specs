@@ -21,9 +21,11 @@ interface Realtime {
     """)
   `create-realtime-call` is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.RealtimeCallCreateRequest;
     },
@@ -31,12 +33,15 @@ interface Realtime {
       @statusCode
       statusCode: 201;
 
+      /** The location request header. */
       @header
       Location?: string;
 
+      /** The content type of the request body. */
       @header
       contentType: "application/sdp";
 
+      /** The request body. */
       @body
       body: string;
     }
@@ -53,6 +58,7 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
+      /** The call id path parameter. */
       @path
       call_id: string;
 
@@ -76,6 +82,7 @@ interface Realtime {
   webhook. For WebRTC sessions, reuse the call ID returned in the `Location`
   header when creating the call with
   [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).*/
+      /** The call id path parameter. */
       @path
       call_id: string;
     },
@@ -90,6 +97,7 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
+      /** The call id path parameter. */
       @path
       call_id: string;
 
@@ -108,11 +116,13 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
+      /** The call id path parameter. */
       @path
       call_id: string;
 
       /**Provide an optional SIP status code. When omitted the API responds with
   `603 Decline`.*/
+      /** The request body. */
       @body
       body: OpenAI.RealtimeCallRejectRequest;
     },

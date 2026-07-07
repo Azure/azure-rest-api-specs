@@ -47,19 +47,26 @@ interface Responses {
   @route("{response_id}")
   getResponse is OpenAIOperation<
     {
+      /** The response id path parameter. */
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
+      /** The includables query parameter. */
       @query(#{ name: "include[]", explode: true })
       includables?: OpenAI.IncludeEnum[] = #[];
 
+      /** The stream query parameter. */
       @query stream?: boolean = false;
+
+      /** The sequence number of the event after which to start streaming. */
       @query starting_after?: int32;
+
       ...UserDelegationHeader;
     },
 
       | (AgentSessionIdResponseHeader & {
+          /** The request body. */
           @body body: OpenAI.Response;
         })
       | (AgentSessionIdResponseHeader &
@@ -85,6 +92,7 @@ interface Responses {
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
+      /** The request body. */
       @body body: DeleteResponseResult;
     }
   >;
@@ -108,6 +116,7 @@ interface Responses {
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
+      /** The request body. */
       @body body: OpenAI.Response;
     }
   >;
@@ -122,6 +131,7 @@ interface Responses {
   @list
   listInputItems is OpenAIOperation<
     {
+      /** The response id path parameter. */
       @path
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
@@ -130,6 +140,7 @@ interface Responses {
       ...UserDelegationHeader;
     },
     AgentSessionIdResponseHeader & {
+      /** The request body. */
       @body body: AgentsPagedResult<OpenAI.ItemResource>;
     }
   >;

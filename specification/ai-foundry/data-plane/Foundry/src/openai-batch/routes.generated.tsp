@@ -15,9 +15,12 @@ namespace Azure.AI.Projects;
 @route("openai/v1/batches")
 @tag("Batch")
 interface Batches {
+  /**
+   * Lists batches matching the request filters.
+   */
+  @summary("List batches")
   @list
   @get
-  @summary("List your organization's batches.")
   listBatches is OpenAIOperation<
     {
       /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
@@ -33,19 +36,26 @@ interface Batches {
     OpenAI.ListBatchesResponse
   >;
 
+  /**
+   * Creates a batch from the supplied request.
+   */
+  @summary("Create a batch")
   @post
-  @summary("Creates and executes a batch from an uploaded file of requests")
   createBatch is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateBatchParametersBody;
     },
     OpenAI.Batch
   >;
 
+  /**
+   * Retrieves a batch by its identifier.
+   */
+  @summary("Get a batch")
   @route("{batch_id}")
   @get
-  @summary("Retrieves a batch.")
   retrieveBatch is OpenAIOperation<
     {
       /** The ID of the batch to retrieve. */
@@ -55,9 +65,12 @@ interface Batches {
     OpenAI.Batch
   >;
 
+  /**
+   * Cancels a batch by its identifier.
+   */
+  @summary("Cancel a batch")
   @route("{batch_id}/cancel")
   @post
-  @summary("Cancels an in-progress batch. The batch will be in status `cancelling` for up to 10 minutes, before changing to `cancelled`, where it will have partial results (if any) available in the output file.")
   cancelBatch is OpenAIOperation<
     {
       /** The ID of the batch to cancel. */

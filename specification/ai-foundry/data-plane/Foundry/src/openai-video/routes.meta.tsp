@@ -9,7 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @@extension(
-  Azure.AI.Projects.VideoGeneration.ListVideos,
+  Azure.AI.Projects.VideoGeneration.listVideos,
   "x-oaiMeta",
   #{
     name: "List videos",
@@ -126,7 +126,7 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.VideoGeneration.ListVideos, "x-ms-list", true);
+@@extension(Azure.AI.Projects.VideoGeneration.listVideos, "x-ms-list", true);
 
 @@extension(
   Azure.AI.Projects.VideoGeneration.createVideo,
@@ -253,7 +253,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoCharacter,
+  Azure.AI.Projects.VideoGeneration.createVideoCharacter,
   "x-oaiMeta",
   #{
     examples: #{
@@ -354,7 +354,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.GetVideoCharacter,
+  Azure.AI.Projects.VideoGeneration.getVideoCharacter,
   "x-oaiMeta",
   #{
     examples: #{
@@ -440,7 +440,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoEditMultipart,
+  Azure.AI.Projects.VideoGeneration.createVideoEditMultipart,
   "x-oaiMeta",
   #{
     examples: #{
@@ -540,7 +540,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoEditJson,
+  Azure.AI.Projects.VideoGeneration.createVideoEditJson,
   "x-oaiMeta",
   #{
     examples: #{
@@ -640,7 +640,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoExtendMultipart,
+  Azure.AI.Projects.VideoGeneration.createVideoExtendMultipart,
   "x-oaiMeta",
   #{
     examples: #{
@@ -748,7 +748,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoExtendJson,
+  Azure.AI.Projects.VideoGeneration.createVideoExtendJson,
   "x-oaiMeta",
   #{
     examples: #{
@@ -856,7 +856,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.DeleteVideo,
+  Azure.AI.Projects.VideoGeneration.deleteVideo,
   "x-oaiMeta",
   #{
     name: "Delete video",
@@ -955,7 +955,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.GetVideo,
+  Azure.AI.Projects.VideoGeneration.getVideo,
   "x-oaiMeta",
   #{
     name: "Retrieve video",
@@ -1054,7 +1054,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.RetrieveVideoContent,
+  Azure.AI.Projects.VideoGeneration.retrieveVideoContent,
   "x-oaiMeta",
   #{
     name: "Retrieve video content",
@@ -1165,7 +1165,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.VideoGeneration.CreateVideoRemix,
+  Azure.AI.Projects.VideoGeneration.createVideoRemix,
   "x-oaiMeta",
   #{
     name: "Remix video",

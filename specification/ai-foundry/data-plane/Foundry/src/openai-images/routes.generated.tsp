@@ -17,15 +17,17 @@ interface Images {
   - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).
   - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.
   Note that JSON requests use `images` (array) instead of the multipart `image` field.*/
+  @summary("Create an image edit multipart")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`.")
   createImageEditMultipart is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateImageEditRequest;
     },
@@ -36,40 +38,47 @@ interface Images {
   - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).
   - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.
   Note that JSON requests use `images` (array) instead of the multipart `image` field.*/
+  @summary("Create an image edit json")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`.")
   createImageEditJson is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.EditImageBodyJsonParam;
     },
     OpenAI.ImagesResponse
   >;
 
+  /**
+   * Creates an image from the supplied request.
+   */
+  @summary("Create an image")
   @route("generations")
   @post
-  @summary("""
-    Creates an image given a prompt. [Learn more](/docs/guides/images).
-    
-    """)
   createImage is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateImageRequest;
     },
     OpenAI.ImagesResponse
   >;
 
+  /**
+   * Creates an image variation from the supplied request.
+   */
+  @summary("Create an image variation")
   @route("variations")
   @post
-  @summary("Creates a variation of a given image. This endpoint only supports `dall-e-2`.")
   createImageVariation is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateImageVariationRequest;
     },

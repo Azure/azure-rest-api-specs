@@ -16,9 +16,12 @@ namespace Azure.AI.Projects;
 @route("openai/v1/assistants")
 @tag("Assistants")
 interface Assistants {
+  /**
+   * Lists assistants matching the request filters.
+   */
+  @summary("List assistants")
   @list
   @get
-  @summary("Returns a list of assistants.")
   listAssistants is OpenAIOperation<
     {
       /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
@@ -42,19 +45,26 @@ interface Assistants {
     OpenAI.ListAssistantsResponse
   >;
 
+  /**
+   * Creates an assistant from the supplied request.
+   */
+  @summary("Create an assistant")
   @post
-  @summary("Create an assistant with a model and instructions.")
   createAssistant is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateAssistantRequest;
     },
     OpenAI.AssistantObject
   >;
 
+  /**
+   * Deletes an assistant by its identifier.
+   */
+  @summary("Delete an assistant")
   @route("{assistant_id}")
   @delete
-  @summary("Delete an assistant.")
   deleteAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to delete. */
@@ -64,9 +74,12 @@ interface Assistants {
     OpenAI.DeleteAssistantResponse
   >;
 
+  /**
+   * Retrieves an assistant by its identifier.
+   */
+  @summary("Get an assistant")
   @route("{assistant_id}")
   @get
-  @summary("Retrieves an assistant.")
   getAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to retrieve. */
@@ -76,15 +89,19 @@ interface Assistants {
     OpenAI.AssistantObject
   >;
 
+  /**
+   * Updates an assistant with the supplied changes.
+   */
+  @summary("Update an assistant")
   @route("{assistant_id}")
   @post
-  @summary("Modifies an assistant.")
   modifyAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to modify. */
       @path
       assistant_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.ModifyAssistantRequest;
     },

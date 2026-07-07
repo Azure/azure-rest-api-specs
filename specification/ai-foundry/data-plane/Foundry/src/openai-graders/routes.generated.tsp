@@ -13,28 +13,30 @@ namespace Azure.AI.Projects;
 @route("openai/v1/fine_tuning/alpha/graders")
 @tag("Fine-tuning")
 interface Graders {
+  /**
+   * Runs a grader.
+   */
+  @summary("Run a grader")
   @route("run")
   @post
-  @summary("""
-    Run a grader.
-    
-    """)
   runGrader is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.RunGraderRequest;
     },
     OpenAI.RunGraderResponse
   >;
 
+  /**
+   * Validates a grader.
+   */
+  @summary("Validate a grader")
   @route("validate")
   @post
-  @summary("""
-    Validate a grader.
-    
-    """)
   validateGrader is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.ValidateGraderRequest;
     },
