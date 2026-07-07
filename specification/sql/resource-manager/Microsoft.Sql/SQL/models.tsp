@@ -7994,12 +7994,14 @@ model EndpointCertificateProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01_preview)
   trustedRootCertificates?: EndpointTrustedRootCertificateInfo[];
 }
 
 /**
  * Trusted root certificate required to validate the instance certificate
  */
+@added(Versions.v2025_08_01_preview)
 model EndpointTrustedRootCertificateInfo {
   /**
    * Root certificate subject name
