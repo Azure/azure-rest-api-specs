@@ -177,9 +177,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 
 #### Documentation Errors
 
-| Id | Rule Name | Applies to |
-| --- | --- | --- |
-| [D5001](#d5001) | [XmsExamplesRequired](#d5001) | ARM and Data plane OpenAPI(swagger) specs |
+| Id | Rule Name | Applies to | TypeSpec Rule or Doc |
+| --- | --- | --- | --- |
+| [D5001](#d5001) | [XmsExamplesRequired](#d5001) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
 
 ## Rule Descriptions
 
