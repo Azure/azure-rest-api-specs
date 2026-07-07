@@ -13,14 +13,21 @@ namespace Azure.AI.Projects;
 @route("openai/v1/completions")
 @tag("Completions")
 interface Completions {
-  /**
-   * Creates a completion from the supplied request.
-   */
-  @summary("Create a completion")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @post
+  @summary("""
+    Creates a completion for the provided prompt and parameters.
+    
+    Returns a completion object, or a sequence of completion objects if the request is streamed.
+    
+    """)
   createCompletion is OpenAIOperation<
     {
-      /** The request body. */
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateCompletionRequest;
     },

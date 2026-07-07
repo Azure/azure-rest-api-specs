@@ -15,4 +15,5 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/responses")
 @tag("Responses")
-interface ResponsesGenerated {}
+interface ResponsesGenerated {
+}

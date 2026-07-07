@@ -13,6 +13,13 @@ namespace Azure.AI.Projects;
 @route("openai/v1/realtime")
 @tag("Realtime")
 interface Realtime {
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls")
   @post
   @summary("""
@@ -21,11 +28,11 @@ interface Realtime {
     """)
   `create-realtime-call` is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
-      /** The multipart request body. */
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.RealtimeCallCreateRequest;
     },
@@ -33,20 +40,24 @@ interface Realtime {
       @statusCode
       statusCode: 201;
 
-      /** The location request header. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @header
       Location?: string;
 
-      /** The content type of the request body. */
       @header
       contentType: "application/sdp";
 
-      /** The request body. */
       @body
       body: string;
     }
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/accept")
   @post
   @summary("""
@@ -58,7 +69,7 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
-      /** The call id path parameter. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       call_id: string;
 
@@ -69,6 +80,12 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/hangup")
   @post
   @summary("""
@@ -82,13 +99,19 @@ interface Realtime {
   webhook. For WebRTC sessions, reuse the call ID returned in the `Location`
   header when creating the call with
   [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).*/
-      /** The call id path parameter. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       call_id: string;
     },
     TypeSpec.Http.OkResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/refer")
   @post
   @summary("Transfer an active SIP call to a new destination using the SIP REFER verb.")
@@ -97,7 +120,7 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
-      /** The call id path parameter. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       call_id: string;
 
@@ -108,6 +131,12 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/reject")
   @post
   @summary("Decline an incoming SIP call by returning a SIP status code to the caller.")
@@ -116,19 +145,24 @@ interface Realtime {
       /**The identifier for the call provided in the
   [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
   webhook.*/
-      /** The call id path parameter. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       call_id: string;
 
       /**Provide an optional SIP status code. When omitted the API responds with
   `603 Decline`.*/
-      /** The request body. */
       @body
       body: OpenAI.RealtimeCallRejectRequest;
     },
     TypeSpec.Http.OkResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("client_secrets")
   @post
   @summary("""
@@ -156,6 +190,12 @@ interface Realtime {
     OpenAI.RealtimeCreateClientSecretResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("sessions")
   @post
   @summary("""
@@ -179,6 +219,12 @@ interface Realtime {
     OpenAI.RealtimeSessionCreateResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("transcription_sessions")
   @post
   @summary("""
@@ -202,6 +248,12 @@ interface Realtime {
     OpenAI.RealtimeTranscriptionSessionCreateResponse
   >;
 
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("translations/client_secrets")
   @post
   @summary("""

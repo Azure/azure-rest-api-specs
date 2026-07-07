@@ -9,7 +9,7 @@ import "@typespec/openapi";
 using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @@extension(
-  Azure.AI.Projects.Containers.listContainers,
+  Azure.AI.Projects.Containers.ListContainers,
   "x-oaiMeta",
   #{
     name: "List containers",
@@ -125,10 +125,10 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.Containers.listContainers, "x-ms-list", true);
+@@extension(Azure.AI.Projects.Containers.ListContainers, "x-ms-list", true);
 
 @@extension(
-  Azure.AI.Projects.Containers.createContainer,
+  Azure.AI.Projects.Containers.CreateContainer,
   "x-oaiMeta",
   #{
     name: "Create container",
@@ -266,7 +266,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.deleteContainer,
+  Azure.AI.Projects.Containers.DeleteContainer,
   "x-oaiMeta",
   #{
     name: "Delete a container",
@@ -360,7 +360,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.retrieveContainer,
+  Azure.AI.Projects.Containers.RetrieveContainer,
   "x-oaiMeta",
   #{
     name: "Retrieve container",
@@ -469,7 +469,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.listContainerFiles,
+  Azure.AI.Projects.Containers.ListContainerFiles,
   "x-oaiMeta",
   #{
     name: "List container files",
@@ -587,10 +587,10 @@ namespace Azure.AI.Projects;
   }
 );
 
-@@extension(Azure.AI.Projects.Containers.listContainerFiles, "x-ms-list", true);
+@@extension(Azure.AI.Projects.Containers.ListContainerFiles, "x-ms-list", true);
 
 @@extension(
-  Azure.AI.Projects.Containers.createContainerFileMultipart,
+  Azure.AI.Projects.Containers.CreateContainerFileMultipart,
   "x-oaiMeta",
   #{
     name: "Create container file",
@@ -701,7 +701,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.createContainerFileJson,
+  Azure.AI.Projects.Containers.CreateContainerFileJson,
   "x-oaiMeta",
   #{
     name: "Create container file",
@@ -812,7 +812,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.deleteContainerFile,
+  Azure.AI.Projects.Containers.DeleteContainerFile,
   "x-oaiMeta",
   #{
     name: "Delete a container file",
@@ -915,7 +915,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.retrieveContainerFile,
+  Azure.AI.Projects.Containers.RetrieveContainerFile,
   "x-oaiMeta",
   #{
     name: "Retrieve container file",
@@ -1029,7 +1029,7 @@ namespace Azure.AI.Projects;
 );
 
 @@extension(
-  Azure.AI.Projects.Containers.retrieveContainerFileContent,
+  Azure.AI.Projects.Containers.RetrieveContainerFileContent,
   "x-oaiMeta",
   #{
     name: "Retrieve container file content",

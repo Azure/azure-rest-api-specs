@@ -15,225 +15,323 @@ namespace Azure.AI.Projects;
 @route("openai/v1/fine_tuning")
 @tag("Fine-tuning")
 interface FineTuning {
-  /**
-   * Lists fine tuning checkpoint permissions matching the request filters.
-   */
-  @summary("List fine tuning checkpoint permissions")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @list
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions")
   @get
+  @summary("""
+    **NOTE:** This endpoint requires an [admin API key](../admin-api-keys).
+    
+    Organization owners can use this endpoint to view all permissions for a fine-tuned model checkpoint.
+    
+    """)
   listFineTuningCheckpointPermissions is OpenAIOperation<
     {
       /** The ID of the fine-tuned model checkpoint to get permissions for. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuned_model_checkpoint: string;
 
       /** The ID of the project to get permissions for. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       project_id?: string;
 
       /** Identifier for the last permission ID from the previous pagination request. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
       @continuationToken
       @query(#{ explode: true })
       after?: string;
 
       /** Number of permissions to retrieve. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 10;
 
       /** The order in which to retrieve permissions. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: "ascending" | "descending" = "descending";
     },
     OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
-  /**
-   * Creates a fine tuning checkpoint permission from the supplied request.
-   */
-  @summary("Create a fine tuning checkpoint permission")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions")
   @post
+  @summary("""
+    **NOTE:** Calling this endpoint requires an [admin API key](../admin-api-keys).
+    
+    This enables organization owners to share fine-tuned models with other projects in their organization.
+    
+    """)
   createFineTuningCheckpointPermission is OpenAIOperation<
     {
       /** The ID of the fine-tuned model checkpoint to create a permission for. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuned_model_checkpoint: string;
 
-      /** The request body. */
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateFineTuningCheckpointPermissionRequest;
     },
     OpenAI.ListFineTuningCheckpointPermissionResponse
   >;
 
-  /**
-   * Deletes a fine tuning checkpoint permission by its identifier.
-   */
-  @summary("Delete a fine tuning checkpoint permission")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("checkpoints/{fine_tuned_model_checkpoint}/permissions/{permission_id}")
   @delete
+  @summary("""
+    **NOTE:** This endpoint requires an [admin API key](../admin-api-keys).
+    
+    Organization owners can use this endpoint to delete a permission for a fine-tuned model checkpoint.
+    
+    """)
   deleteFineTuningCheckpointPermission is OpenAIOperation<
     {
       /** The ID of the fine-tuned model checkpoint to delete a permission for. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuned_model_checkpoint: string;
 
       /** The ID of the fine-tuned model checkpoint permission to delete. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       permission_id: string;
     },
     OpenAI.DeleteFineTuningCheckpointPermissionResponse
   >;
 
-  /**
-   * Lists paginated fine tuning jobs matching the request filters.
-   */
-  @summary("List paginated fine tuning jobs")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @list
   @route("jobs")
   @get
+  @summary("""
+    List your organization's fine-tuning jobs
+    
+    """)
   listPaginatedFineTuningJobs is OpenAIOperation<
     {
       /** Identifier for the last job from the previous pagination request. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
       @continuationToken
       @query(#{ explode: true })
       after?: string;
 
       /** Number of fine-tuning jobs to retrieve. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
       /** Optional metadata filter. To filter, use the syntax `metadata[k]=v`. Alternatively, set `metadata=null` to indicate no metadata. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-nullable" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-autorest/unsupported-param-type" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       metadata?: Record<string> | null;
     },
     OpenAI.ListPaginatedFineTuningJobsResponse
   >;
 
-  /**
-   * Creates a fine tuning job from the supplied request.
-   */
-  @summary("Create a fine tuning job")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("jobs")
   @post
+  @summary("""
+    Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
+    
+    Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
+    
+    [Learn more about fine-tuning](/docs/guides/model-optimization)
+    
+    """)
   createFineTuningJob is OpenAIOperation<
     {
-      /** The request body. */
+      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateFineTuningJobRequest;
     },
     OpenAI.FineTuningJob
   >;
 
-  /**
-   * Retrieves a fine tuning job by its identifier.
-   */
-  @summary("Get a fine tuning job")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("jobs/{fine_tuning_job_id}")
   @get
+  @summary("""
+    Get info about a fine-tuning job.
+    
+    [Learn more about fine-tuning](/docs/guides/model-optimization)
+    
+    """)
   retrieveFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
     },
     OpenAI.FineTuningJob
   >;
 
-  /**
-   * Cancels a fine tuning job by its identifier.
-   */
-  @summary("Cancel a fine tuning job")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("jobs/{fine_tuning_job_id}/cancel")
   @post
+  @summary("""
+    Immediately cancel a fine-tune job.
+    
+    """)
   cancelFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to cancel. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
     },
     OpenAI.FineTuningJob
   >;
 
-  /**
-   * Lists fine tuning job checkpoints matching the request filters.
-   */
-  @summary("List fine tuning job checkpoints")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @list
   @route("jobs/{fine_tuning_job_id}/checkpoints")
   @get
+  @summary("""
+    List checkpoints for a fine-tuning job.
+    
+    """)
   listFineTuningJobCheckpoints is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to get checkpoints for. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
 
       /** Identifier for the last checkpoint ID from the previous pagination request. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
       @continuationToken
       @query(#{ explode: true })
       after?: string;
 
       /** Number of checkpoints to retrieve. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 10;
     },
     OpenAI.ListFineTuningJobCheckpointsResponse
   >;
 
-  /**
-   * Lists fine tuning events matching the request filters.
-   */
-  @summary("List fine tuning events")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @list
   @route("jobs/{fine_tuning_job_id}/events")
   @get
+  @summary("""
+    Get status updates for a fine-tuning job.
+    
+    """)
   listFineTuningEvents is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to get events for. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
 
       /** Identifier for the last event from the previous pagination request. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
+      #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
       @continuationToken
       @query(#{ explode: true })
       after?: string;
 
       /** Number of events to retrieve. */
+      #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
     },
     OpenAI.ListFineTuningJobEventsResponse
   >;
 
-  /**
-   * Pauses a fine tuning job.
-   */
-  @summary("Pause a fine tuning job")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("jobs/{fine_tuning_job_id}/pause")
   @post
+  @summary("""
+    Pause a fine-tune job.
+    
+    """)
   pauseFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to pause. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
     },
     OpenAI.FineTuningJob
   >;
 
-  /**
-   * Resumes a fine tuning job.
-   */
-  @summary("Resume a fine tuning job")
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
+  #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("jobs/{fine_tuning_job_id}/resume")
   @post
+  @summary("""
+    Resume a fine-tune job.
+    
+    """)
   resumeFineTuningJob is OpenAIOperation<
     {
       /** The ID of the fine-tuning job to resume. */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       fine_tuning_job_id: string;
     },
