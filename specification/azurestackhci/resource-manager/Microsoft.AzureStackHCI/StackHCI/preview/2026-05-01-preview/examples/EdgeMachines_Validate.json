@@ -1,0 +1,30 @@
+{
+  "title": "EdgeMachines_Validate",
+  "operationId": "EdgeMachines_Validate",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine-1",
+    "body": {
+      "edgeMachineIds": [
+        "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-2",
+        "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine-3"
+      ],
+      "additionalInfo": "Validate before cluster creation"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/providers/Microsoft.AzureStackHCI/locations/eastus/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-05-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  }
+}

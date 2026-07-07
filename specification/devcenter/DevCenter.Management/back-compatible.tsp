@@ -4,6 +4,24 @@ import "@azure-tools/typespec-azure-resource-manager";
 using Azure.ClientGenerator.Core;
 using Microsoft.DevCenter;
 
+// Remove namespace qualification from CommonTypes encryption types for OpenAPI compatibility
+@@clientName(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
+  "CustomerManagedKeyEncryption",
+  "!csharp,!java,!go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity,
+  "KeyEncryptionKeyIdentity",
+  "!csharp,!java,!go"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType,
+  "KeyEncryptionKeyIdentityType",
+  "!csharp,!java,!go"
+);
+@@clientName(Azure.Core.uuid, "uuid", "!csharp,!java,!go");
+
 @@clientName(DevCenters.createOrUpdate::parameters.resource, "body");
 @@clientName(DevCenters.update::parameters.properties, "body");
 @@clientLocation(DevCenters.listByDevCenter, Images);

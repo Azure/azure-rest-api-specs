@@ -46,13 +46,36 @@ using Microsoft.Elastic;
   "!csharp"
 );
 @@clientName(ElasticMonitorResources.connectedPartnerResourcesList, "List");
-@@clientLocation(ElasticMonitorResources.vMHostList, "VMHost", "!csharp");
+@@clientLocation(
+  ElasticMonitorResources.vMHostList,
+  "VMHost",
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  ElasticMonitorResources.vMHostList,
+  "$DO_NOT_NORMALIZE$vMHost",
+  "javascript"
+);
 @@clientName(ElasticMonitorResources.vMHostList, "List");
-@@clientLocation(ElasticMonitorResources.details, "VMIngestion", "!csharp");
+@@clientLocation(
+  ElasticMonitorResources.details,
+  "VMIngestion",
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  ElasticMonitorResources.details,
+  "$DO_NOT_NORMALIZE$vMIngestion",
+  "javascript"
+);
 @@clientLocation(
   ElasticMonitorResources.vMCollectionUpdate,
   "VMCollection",
-  "!csharp"
+  "!csharp,!javascript"
+);
+@@clientLocation(
+  ElasticMonitorResources.vMCollectionUpdate,
+  "$DO_NOT_NORMALIZE$vMCollection",
+  "javascript"
 );
 @@clientName(ElasticMonitorResources.vMCollectionUpdate, "Update");
 @@clientLocation(
@@ -71,13 +94,23 @@ using Microsoft.Elastic;
 @@clientLocation(
   ElasticMonitorResources.listAssociatedTrafficFiltersList,
   "listAssociatedTrafficFilters",
-  "!csharp"
+  "!csharp,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.listAssociatedTrafficFiltersList,
+  "ListAssociatedTrafficFilters",
+  "python"
 );
 @@clientName(ElasticMonitorResources.listAssociatedTrafficFiltersList, "list");
 @@clientLocation(
   ElasticMonitorResources.createAndAssociateIPFilterCreate,
   "createAndAssociateIPFilter",
-  "!csharp,!java"
+  "!csharp,!java,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.createAndAssociateIPFilterCreate,
+  "CreateAndAssociateIPFilter",
+  "python"
 );
 @@clientName(
   ElasticMonitorResources.createAndAssociateIPFilterCreate,
@@ -86,7 +119,12 @@ using Microsoft.Elastic;
 @@clientLocation(
   ElasticMonitorResources.createAndAssociatePLFilterCreate,
   "createAndAssociatePLFilter",
-  "!csharp"
+  "!csharp,!python"
+);
+@@clientLocation(
+  ElasticMonitorResources.createAndAssociatePLFilterCreate,
+  "CreateAndAssociatePLFilter",
+  "python"
 );
 @@clientName(
   ElasticMonitorResources.createAndAssociatePLFilterCreate,

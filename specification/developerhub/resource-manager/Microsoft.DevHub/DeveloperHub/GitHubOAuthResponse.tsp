@@ -82,7 +82,7 @@ interface GitHubOAuthResponses {
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
     Response = ArmResponse<GitHubOAuthListResponse>,
     Parameters = {
-      ...LocationParameter;
+      ...LocationResourceParameter;
     }
   >;
 

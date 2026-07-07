@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App;
 /**
@@ -41,14 +42,15 @@ interface ContainerAppsSessionPools {
   /**
    * Patches a session pool using JSON merge patch
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @patch(#{ implicitOptionality: false })
   @summary("Update properties of a session pool")
   update is ArmCustomPatchAsync<
     SessionPool,
     PatchModel = SessionPoolUpdatableProperties,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = SessionPool> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader & {
+        @header("Location") location?: string;
+      }
   >;
 
   /**
@@ -79,6 +81,7 @@ interface ContainerAppsSessionPools {
    * Fetch the MCP server credentials of a session pool.
    */
   @summary("Fetch the MCP server credentials of a session pool.")
+  @removed(Versions.v2026_01_01)
   fetchMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,
@@ -89,6 +92,7 @@ interface ContainerAppsSessionPools {
    * Rotate and fetch the rotated MCP server credentials of a session pool.
    */
   @summary("Rotate and fetch the rotated MCP server credentials of a session pool.")
+  @removed(Versions.v2026_01_01)
   rotateMcpServerCredentials is ArmResourceActionSync<
     SessionPool,
     void,

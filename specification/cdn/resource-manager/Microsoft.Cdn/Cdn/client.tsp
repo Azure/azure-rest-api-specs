@@ -194,12 +194,12 @@ using Azure.ResourceManager;
 @@clientName(
   RequestSchemeMatchValue,
   "RequestSchemeMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(
   IsDeviceMatchValue,
   "IsDeviceMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(DeliveryRuleActionName, "DeliveryRuleActionValue", "java");
 @@clientName(AFDStateProperties, "AfdStateProperties", "java");
@@ -207,7 +207,7 @@ using Azure.ResourceManager;
 @@clientName(
   RequestMethodMatchValue,
   "RequestMethodMatchConditionParametersMatchValuesItem",
-  "java"
+  "java,javascript"
 );
 @@clientName(CheckHostNameAvailabilityInput.hostName, "hostname", "java");
 @@clientName(AFDDomainProperties.hostName, "hostname", "java");
@@ -305,19 +305,61 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(AfdUrlSigningAction, "FrontDoorUrlSigningAction", "csharp");
-// AfdCipherSuiteSetType / AfdCustomizedCipherSuiteForTls12 / AfdCustomizedCipherSuiteForTls13:
-// These type names cannot be renamed — they are inline union types referenced by
-// original name in generated serialization code and as property types on generated
-// classes (FrontDoorCustomDomainHttpsContent.CipherSuiteSetType,
-// FrontDoorCustomDomainHttpsCustomizedCipherSuiteSet properties). Renaming causes an
-// unfixable ApiCompat break.
-// The generator-produced member names (e.g. TLS102019, DHERSAAES128GCMSHA256,
-// TLSAES128GCMSHA256) duplicate the underscored names that shipped in v1.5.1
-// (Tls1_0_2019, Dhe_Rsa_Aes128_Gcm_Sha256, Tls_Aes_128_Gcm_Sha256). The C# name
-// sanitizer strips underscores between digits/letters, so @@clientName cannot
-// produce the underscored form. Instead, the duplicated generator-produced
-// members are suppressed via [CodeGenSuppress] in the SDK customization, and the
-// underscored members are re-introduced there to preserve the v1.5.1 API surface.
+@@clientName(
+  AfdCipherSuiteSetType.TLS10_2019,
+  Azure.ClientGenerator.Core.exact("Tls1_0_2019"),
+  "csharp"
+);
+@@clientName(
+  AfdCipherSuiteSetType.TLS12_2022,
+  Azure.ClientGenerator.Core.exact("Tls1_2_2022"),
+  "csharp"
+);
+@@clientName(
+  AfdCipherSuiteSetType.TLS12_2023,
+  Azure.ClientGenerator.Core.exact("Tls1_2_2023"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.ECDHE_RSA_AES128_GCM_SHA256,
+  Azure.ClientGenerator.Core.exact("Ecdhe_Rsa_Aes128_Gcm_Sha256"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.ECDHE_RSA_AES256_GCM_SHA384,
+  Azure.ClientGenerator.Core.exact("Ecdhe_Rsa_Aes256_Gcm_Sha384"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.DHE_RSA_AES256_GCM_SHA384,
+  Azure.ClientGenerator.Core.exact("Dhe_Rsa_Aes256_Gcm_Sha384"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.DHE_RSA_AES128_GCM_SHA256,
+  Azure.ClientGenerator.Core.exact("Dhe_Rsa_Aes128_Gcm_Sha256"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.ECDHE_RSA_AES128_SHA256,
+  Azure.ClientGenerator.Core.exact("Ecdhe_Rsa_Aes128_Sha256"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls12.ECDHE_RSA_AES256_SHA384,
+  Azure.ClientGenerator.Core.exact("Ecdhe_Rsa_Aes256_Sha384"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_128_GCM_SHA256,
+  Azure.ClientGenerator.Core.exact("Tls_Aes_128_Gcm_Sha256"),
+  "csharp"
+);
+@@clientName(
+  AfdCustomizedCipherSuiteForTls13.TLS_AES_256_GCM_SHA384,
+  Azure.ClientGenerator.Core.exact("Tls_Aes_256_Gcm_Sha384"),
+  "csharp"
+);
 @@clientName(CustomRuleAfd, "CustomRuleFrontDoor", "csharp");
 @@clientName(
   ManagedRuleGroupOverrideAfd,
@@ -547,6 +589,21 @@ using Azure.ResourceManager;
 @@clientName(SecurityPolicyPropertiesParameters.type, "PolicyType", "csharp");
 @@clientName(AfdCertificateType, "FrontDoorCertificateType", "csharp");
 @@clientName(AfdMinimumTlsVersion, "FrontDoorMinimumTlsVersion", "csharp");
+@@clientName(
+  AfdMinimumTlsVersion.TLS10,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  AfdMinimumTlsVersion.TLS12,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  AfdMinimumTlsVersion.TLS13,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 @@clientName(EdgeNodeProperties.ipAddressGroups, "IPAddressGroups", "csharp");
 @@clientName(
   AfdQueryStringCachingBehavior,
@@ -564,8 +621,43 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(MinimumTlsVersion, "CdnMinimumTlsVersion", "csharp");
+@@clientName(
+  MinimumTlsVersion.TLS10,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  MinimumTlsVersion.TLS12,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(ResourceType, "CdnResourceType", "csharp");
+@@clientName(
+  ResourceType.`Microsoft.Cdn/Profiles/Endpoints`,
+  Azure.ClientGenerator.Core.exact("Endpoints"),
+  "csharp"
+);
+@@clientName(
+  ResourceType.`Microsoft.Cdn/Profiles/AfdEndpoints`,
+  Azure.ClientGenerator.Core.exact("FrontDoorEndpoints"),
+  "csharp"
+);
 @@clientName(SslProtocol, "DeliveryRuleSslProtocol", "csharp");
+@@clientName(
+  SslProtocol.TLSv1,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  SslProtocol.`TLSv1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  SslProtocol.`TLSv1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(ManagedRuleEnabledState, "ManagedRuleSetupState", "csharp");
 @@clientName(ActionType, "OverrideActionType", "csharp");
 @@clientName(Transform, "PreTransformCategory", "csharp");
@@ -1417,6 +1509,59 @@ using Azure.ResourceManager;
 @@clientName(Endpoints.listResourceUsage, "GetResourceUsages", "csharp");
 @@clientName(RuleSets.listResourceUsage, "GetResourceUsages", "csharp");
 
+// Python SDK customizations: preserve client name and enum member names from the
+// pre-migration Swagger SDK to avoid breaking changes for existing consumers.
+@@clientName(Microsoft.Cdn, "CdnManagementClient", "python");
+@@clientName(DeliveryRuleActionName, "DeliveryRuleActionEnum", "python");
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`200`,
+  "TWO_HUNDRED",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`403`,
+  "FOUR_HUNDRED_THREE",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`405`,
+  "FOUR_HUNDRED_FIVE",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`406`,
+  "FOUR_HUNDRED_SIX",
+  "python"
+);
+@@clientName(
+  PolicySettingsDefaultCustomBlockResponseStatusCode.`429`,
+  "FOUR_HUNDRED_TWENTY_NINE",
+  "python"
+);
+
+// Preserve pre-migration Swagger enum names to avoid breaking changes for Python consumers.
+@@clientName(
+  IsDeviceMatchValue,
+  "IsDeviceMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestMethodMatchValue,
+  "RequestMethodMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  RequestSchemeMatchValue,
+  "RequestSchemeMatchConditionParametersMatchValuesItem",
+  "python"
+);
+@@clientName(
+  KeyVaultSigningKeyParametersType,
+  "KeyVaultSigningKeyParametersTypeName",
+  "python"
+);
+@@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
+
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods
 @@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
@@ -1434,3 +1579,4 @@ namespace Azure.ResourceManager.Models {
     id?: Azure.Core.armResourceIdentifier;
   }
 }
+@@clientName(CreatedByType, "IdentityType", "javascript");

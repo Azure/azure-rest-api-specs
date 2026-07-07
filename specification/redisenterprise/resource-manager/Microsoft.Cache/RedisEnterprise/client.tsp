@@ -105,6 +105,16 @@ using Microsoft.Cache;
   "RedisEnterpriseMigrationProvisioningState",
   "csharp"
 );
+@@clientName(
+  MigrationValidationRequest,
+  "RedisEnterpriseMigrationValidationRequestContent",
+  "csharp"
+);
+@@clientName(
+  MigrationValidationResponse,
+  "RedisEnterpriseMigrationValidationResponseResult",
+  "csharp"
+);
 @@clientName(OperationStatus, "RedisEnterpriseOperationStatus", "csharp");
 @@clientName(OperationStatus.error, "ErrorResponse", "csharp");
 @@clientName(OperationStatus.startTime, "StartOn", "csharp");
@@ -146,6 +156,21 @@ using Microsoft.Cache;
 @@clientName(SkuDetails, "RedisEnterpriseSkuDetails", "csharp");
 @@clientName(SkuDetailsList, "RedisEnterpriseSkuDetailsList", "csharp");
 @@clientName(TlsVersion, "RedisEnterpriseTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.One0,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One1,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.One2,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 @@clientName(
   OperationsStatusOperationGroup.get,
   "GetRedisEnterpriseOperationsStatus",
@@ -228,5 +253,35 @@ using Microsoft.Cache;
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
   "SystemAssignedUserAssigned",
-  "javascript"
+  "javascript,go"
+);
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity",
+  "javascript,python,go"
+);
+
+// java compatibility mitigations
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
+  "ManagedServiceIdentity",
+  "java"
+);
+@@clientName(ClusterCreateProperties, "ClusterProperties", "java");
+@@clientName(ClusterProperties, "ClusterCommonProperties", "java");
+@@clientName(DatabaseProperties, "DatabaseCommonProperties", "java");
+@@clientName(ClusterProperties.hostName, "hostname", "java");
+@@clientName(TlsVersion.One0, "ONE_ZERO", "java");
+@@clientName(TlsVersion.One1, "ONE_ONE", "java");
+@@clientName(TlsVersion.One2, "ONE_TWO", "java");
+@@clientName(RdbFrequency.TwelveH, "ONE_TWOH", "java");
+@@clientName(
+  Azure.ResourceManager.Legacy.ManagedServiceIdentityType.SystemAndUserAssigned,
+  "SYSTEM_ASSIGNED_USER_ASSIGNED",
+  "java,python"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+@@Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "java"
 );

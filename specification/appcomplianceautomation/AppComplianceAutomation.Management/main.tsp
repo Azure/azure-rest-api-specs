@@ -10,6 +10,7 @@ import "./resources/SnapshotResource.tsp";
 import "./resources/ScopingConfigurationResource.tsp";
 import "./resources/EvidenceResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

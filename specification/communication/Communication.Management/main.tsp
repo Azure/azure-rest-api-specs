@@ -20,6 +20,7 @@ import "./SenderUsernameResource.tsp";
 import "./SmtpUsernameResource.tsp";
 import "./SuppressionListResource.tsp";
 import "./SuppressionListAddressResource.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

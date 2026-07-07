@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * A deleted server.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @subscriptionResource
+@Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 model DeletedServer
   is Azure.ResourceManager.ProxyResource<DeletedServerProperties> {
   ...ResourceNameParameter<
@@ -34,7 +36,7 @@ alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The name of the deleted server. */
@@ -45,7 +47,9 @@ alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.DeletedServers)
 interface DeletedServers {
   /**
    * Gets a deleted server.
