@@ -10060,6 +10060,7 @@
         "tags": [
           "Assistants"
         ],
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "List assistants",
           "group": "assistants",
@@ -10126,9 +10127,9 @@
                 "$ref": "#/components/schemas/OpenAI.CreateAssistantRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "Create assistant",
           "group": "assistants",
@@ -10214,6 +10215,7 @@
         "tags": [
           "Assistants"
         ],
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "Delete assistant",
           "group": "assistants",
@@ -10281,6 +10283,7 @@
         "tags": [
           "Assistants"
         ],
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "Retrieve assistant",
           "group": "assistants",
@@ -10359,6 +10362,7 @@
           },
           "description": "The request body."
         },
+        "deprecated": true,
         "x-oaiMeta": {
           "name": "Modify assistant",
           "group": "assistants",
@@ -10389,7 +10393,6 @@
             "headers": {
               "Transfer-Encoding": {
                 "required": false,
-                "description": "The transfer encoding request header.",
                 "schema": {
                   "type": "string"
                 }
@@ -10435,8 +10438,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateSpeechRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create speech",
@@ -10865,8 +10867,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateBatchParametersBody"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create batch",
@@ -11043,7 +11044,7 @@
             "name": "metadata",
             "in": "query",
             "required": false,
-            "description": "A list of metadata keys to filter the Chat Completions by. Example:\n  `metadata[key1]=value1&metadata[key2]=value2`The metadata query parameter.",
+            "description": "A list of metadata keys to filter the Chat Completions by. Example:\n  `metadata[key1]=value1&metadata[key2]=value2`",
             "schema": {
               "anyOf": [
                 {
@@ -11188,8 +11189,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create chat completion",
@@ -11630,8 +11630,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateCompletionRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create completion",
@@ -11672,7 +11671,7 @@
       "get": {
         "operationId": "Containers_listContainers",
         "summary": "List containers",
-        "description": "Lists containers.",
+        "description": "Lists containers matching the request filters.",
         "parameters": [
           {
             "name": "limit",
@@ -11771,7 +11770,7 @@
       "post": {
         "operationId": "Containers_createContainer",
         "summary": "Create a container",
-        "description": "Creates a container.",
+        "description": "Creates a container from the supplied request.",
         "parameters": [],
         "responses": {
           "200": {
@@ -11816,8 +11815,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateContainerBody"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create container",
@@ -11841,7 +11839,7 @@
       "delete": {
         "operationId": "Containers_deleteContainer",
         "summary": "Delete a container",
-        "description": "Delete a container.",
+        "description": "Deletes a container by its identifier.",
         "parameters": [
           {
             "name": "container_id",
@@ -11901,13 +11899,12 @@
       "get": {
         "operationId": "Containers_retrieveContainer",
         "summary": "Get a container",
-        "description": "Retrieves a container.",
+        "description": "Retrieves a container by its identifier.",
         "parameters": [
           {
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
@@ -11970,13 +11967,12 @@
       "get": {
         "operationId": "Containers_listContainerFiles",
         "summary": "List container files",
-        "description": "Lists container files.",
+        "description": "Lists container files matching the request filters.",
         "parameters": [
           {
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
@@ -12073,13 +12069,12 @@
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
           }
         ],
-        "description": "Creates a container file. Creates a container file.",
+        "description": "Creates a container file multipart from the supplied request. Creates a container file json from the supplied request.",
         "summary": "Create a container file multipart Create a container file json",
         "responses": {
           "200": {
@@ -12154,13 +12149,12 @@
       "delete": {
         "operationId": "Containers_deleteContainerFile",
         "summary": "Delete a container file",
-        "description": "Delete a container file.",
+        "description": "Deletes a container file by its identifier.",
         "parameters": [
           {
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
@@ -12223,13 +12217,12 @@
       "get": {
         "operationId": "Containers_retrieveContainerFile",
         "summary": "Get a container file",
-        "description": "Retrieves a container file.",
+        "description": "Retrieves a container file by its identifier.",
         "parameters": [
           {
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
@@ -12301,13 +12294,12 @@
       "get": {
         "operationId": "Containers_retrieveContainerFileContent",
         "summary": "Get a container file content",
-        "description": "Retrieves a container file content.",
+        "description": "Retrieves a container file content by its identifier.",
         "parameters": [
           {
             "name": "container_id",
             "in": "path",
             "required": true,
-            "description": "The container id path parameter.",
             "schema": {
               "type": "string"
             }
@@ -13332,8 +13324,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateEmbeddingRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create embeddings",
@@ -14881,8 +14872,7 @@
                 "$ref": "#/components/schemas/OpenAI.RunGraderRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Run grader",
@@ -14977,8 +14967,7 @@
                 "$ref": "#/components/schemas/OpenAI.ValidateGraderRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Validate grader",
@@ -15413,8 +15402,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateFineTuningJobRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create fine-tuning job",
@@ -15960,7 +15948,7 @@
       "post": {
         "operationId": "Images_createImageEditMultipart_Images_createImageEditJson",
         "parameters": [],
-        "description": "You can call this endpoint with either:\n  - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).\n  - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.\n  Note that JSON requests use `images` (array) instead of the multipart `image` field. You can call this endpoint with either:\n  - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).\n  - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.\n  Note that JSON requests use `images` (array) instead of the multipart `image` field.",
+        "description": "Creates an image edit multipart from the supplied request. Creates an image edit json from the supplied request.",
         "summary": "Create an image edit multipart Create an image edit json",
         "responses": {
           "200": {
@@ -16080,7 +16068,7 @@
               }
             }
           },
-          "description": "The multipart request body. The request body."
+          "description": "The multipart request body."
         }
       }
     },
@@ -16133,8 +16121,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateImageRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create image",
@@ -16258,7 +16245,7 @@
     "/openai/v1/models": {
       "get": {
         "operationId": "OpenAIModels_listModels",
-        "summary": "Delete a model",
+        "summary": "List models",
         "description": "Lists models matching the request filters.",
         "parameters": [],
         "responses": {
@@ -16319,6 +16306,8 @@
     "/openai/v1/models/{model}": {
       "delete": {
         "operationId": "OpenAIModels_deleteModel",
+        "summary": "Delete a model",
+        "description": "Deletes a model by its identifier.",
         "parameters": [
           {
             "name": "model",
@@ -16501,8 +16490,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateModerationRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create moderation",
@@ -16627,7 +16615,7 @@
             "name": "call_id",
             "in": "path",
             "required": true,
-            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.The call id path parameter.",
+            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.",
             "schema": {
               "type": "string"
             }
@@ -16699,7 +16687,7 @@
             "name": "call_id",
             "in": "path",
             "required": true,
-            "description": "The identifier for the call. For SIP calls, use the value provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook. For WebRTC sessions, reuse the call ID returned in the `Location`\n  header when creating the call with\n  [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).The call id path parameter.",
+            "description": "The identifier for the call. For SIP calls, use the value provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook. For WebRTC sessions, reuse the call ID returned in the `Location`\n  header when creating the call with\n  [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).",
             "schema": {
               "type": "string"
             }
@@ -16760,7 +16748,7 @@
             "name": "call_id",
             "in": "path",
             "required": true,
-            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.The call id path parameter.",
+            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.",
             "schema": {
               "type": "string"
             }
@@ -16832,7 +16820,7 @@
             "name": "call_id",
             "in": "path",
             "required": true,
-            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.The call id path parameter.",
+            "description": "The identifier for the call provided in the\n  [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)\n  webhook.",
             "schema": {
               "type": "string"
             }
@@ -16875,7 +16863,7 @@
               }
             }
           },
-          "description": "Provide an optional SIP status code. When omitted the API responds with\n  `603 Decline`.The request body."
+          "description": "Provide an optional SIP status code. When omitted the API responds with\n  `603 Decline`."
         },
         "x-oaiMeta": {
           "name": "Reject call",
@@ -18664,8 +18652,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateThreadRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create thread",
@@ -18752,8 +18739,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateThreadAndRunRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create thread and run",
@@ -19600,7 +19586,7 @@
             "name": "include[]",
             "in": "query",
             "required": false,
-            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.",
+            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.",
             "schema": {
               "type": "array",
               "items": {
@@ -20024,7 +20010,7 @@
             "name": "include[]",
             "in": "query",
             "required": false,
-            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.",
+            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.",
             "schema": {
               "type": "array",
               "items": {
@@ -20129,7 +20115,7 @@
             "name": "include[]",
             "in": "query",
             "required": false,
-            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.",
+            "description": "A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.\n  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.",
             "schema": {
               "type": "array",
               "items": {
@@ -20352,8 +20338,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateUploadRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create upload",
@@ -20523,7 +20508,7 @@
       "post": {
         "operationId": "Uploads_addUploadPart",
         "summary": "Add an upload part",
-        "description": "Adds an upload part to the upload.",
+        "description": "Adds an upload part to the parent resource.",
         "parameters": [
           {
             "name": "upload_id",
@@ -20746,8 +20731,7 @@
                 "$ref": "#/components/schemas/OpenAI.CreateVectorStoreRequest"
               }
             }
-          },
-          "description": "The request body."
+          }
         },
         "x-oaiMeta": {
           "name": "Create vector store",
@@ -20985,7 +20969,7 @@
       "post": {
         "operationId": "VectorStores_createVectorStoreFileBatch",
         "summary": "Create a vector store file batch",
-        "description": "The maximum number of files in a single batch request is 2000.\n  Vector store file attach requests are rate limited per vector store (300 requests per minute across both this endpoint and `/vector_stores/{vector_store_id}/files`).\n  For ingesting multiple files into the same vector store, this batch endpoint is recommended.",
+        "description": "Creates a vector store file batch from the supplied request.",
         "parameters": [
           {
             "name": "vector_store_id",
@@ -21467,7 +21451,7 @@
       "post": {
         "operationId": "VectorStores_createVectorStoreFile",
         "summary": "Create a vector store file",
-        "description": "This endpoint is subject to a per-vector-store write rate limit of 300 requests per minute, shared with `/vector_stores/{vector_store_id}/file_batches`.\n  For uploading multiple files to the same vector store, use the file batches endpoint to reduce request volume.",
+        "description": "Creates a vector store file from the supplied request.",
         "parameters": [
           {
             "name": "vector_store_id",
@@ -22319,7 +22303,7 @@
               }
             }
           },
-          "description": "The multipart request body. The request body."
+          "description": "The multipart request body."
         }
       }
     },
@@ -22398,7 +22382,7 @@
               }
             }
           },
-          "description": "The multipart request body. The request body."
+          "description": "The multipart request body."
         }
       }
     },
