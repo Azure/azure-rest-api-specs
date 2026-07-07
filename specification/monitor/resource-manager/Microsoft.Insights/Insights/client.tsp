@@ -31,6 +31,9 @@ using Microsoft.Common;
 using PrivateLinkScopesApi;
 using MetricsApi;
 using ServiceDiagnosticsSettingsApi;
+using TenantActionGroups;
+using VmInsightsOnboarding;
+using DiagnosticsSettings;
 
 #suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
@@ -49,7 +52,10 @@ using ServiceDiagnosticsSettingsApi;
     ScheduledQueryRuleApi,
     MetricBaselinesApi,
     ActionGroupsApi,
-    NetworkSecurityPerimeterApi
+    NetworkSecurityPerimeterApi,
+    TenantActionGroups,
+    VmInsightsOnboarding,
+    DiagnosticsSettings
   ],
   autoMergeService: true,
 })
