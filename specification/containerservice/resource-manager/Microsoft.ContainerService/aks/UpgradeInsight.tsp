@@ -181,6 +181,31 @@ union ClusterUpgradeType {
 // =============================================================================
 
 /**
+ * A recommended action to resolve a detected upgrade issue.
+ */
+@added(Versions.v2026_07_02_preview)
+model UpgradeInsightRecommendedAction {
+  /**
+   * A short title describing the recommended action.
+   */
+  @visibility(Lifecycle.Read)
+  title?: string;
+
+  /**
+   * A detailed description of the recommended action and how to perform it.
+   */
+  @visibility(Lifecycle.Read)
+  details?: string;
+
+  /**
+   * A link to customer-facing documentation describing the available options
+   * for remediating the issue.
+   */
+  @visibility(Lifecycle.Read)
+  documentationLink?: string;
+}
+
+/**
  * The Azure or Kubernetes resource impacted by a detected upgrade issue.
  * Use the `kind` discriminator to determine whether this is an Azure Resource
  * Manager (ARM) resource or a Kubernetes resource.
@@ -270,17 +295,17 @@ model DetectedUpgradeIssue {
   message?: string;
 
   /**
-   * A link to customer-facing documentation that explains this issue and the
-   * available options for remediating it.
-   */
-  @visibility(Lifecycle.Read)
-  documentationLink?: string;
-
-  /**
    * The Azure or Kubernetes resource impacted by this issue.
    */
   @visibility(Lifecycle.Read)
   impactedResource?: UpgradeInsightImpactedResource;
+
+  /**
+   * The recommended action to resolve this issue, including a link to
+   * customer-facing documentation describing the available remediation options.
+   */
+  @visibility(Lifecycle.Read)
+  recommendedAction?: UpgradeInsightRecommendedAction;
 }
 
 /**
