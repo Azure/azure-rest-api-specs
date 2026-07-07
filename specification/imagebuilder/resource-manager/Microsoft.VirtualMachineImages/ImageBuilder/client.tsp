@@ -15,7 +15,8 @@ using Microsoft.VirtualMachineImages;
 
 // C#: common-types Resource.id is a plain string; map to ResourceIdentifier so generated
 // *Data ctors satisfy the ResourceData base (fixes CS1503).
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
