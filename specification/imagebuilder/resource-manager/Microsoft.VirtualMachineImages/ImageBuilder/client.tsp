@@ -29,26 +29,81 @@ using Microsoft.VirtualMachineImages;
 @@clientName(Trigger, "ImageTemplateTrigger", "csharp");
 
 // C#: boolean properties must start with a verb prefix (AZC0030 BOOL naming).
-@@clientName(ImageTemplatePowerShellCustomizer.runElevated, "IsRunElevated", "csharp");
-@@clientName(ImageTemplatePowerShellCustomizer.runAsSystem, "IsRunAsSystem", "csharp");
-@@clientName(ImageTemplatePowerShellValidator.runElevated, "IsRunElevated", "csharp");
-@@clientName(ImageTemplatePowerShellValidator.runAsSystem, "IsRunAsSystem", "csharp");
-@@clientName(ImageTemplatePropertiesValidate.continueDistributeOnFailure,
+@@clientName(
+  ImageTemplatePowerShellCustomizer.runElevated,
+  "IsRunElevated",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePowerShellCustomizer.runAsSystem,
+  "IsRunAsSystem",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePowerShellValidator.runElevated,
+  "IsRunElevated",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePowerShellValidator.runAsSystem,
+  "IsRunAsSystem",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePropertiesValidate.continueDistributeOnFailure,
   "ShouldContinueDistributeOnFailure",
   "csharp"
 );
-@@clientName(ImageTemplatePropertiesValidate.sourceValidationOnly, "IsSourceValidationOnly", "csharp");
-@@clientName(ImageTemplateSharedImageDistributor.excludeFromLatest, "IsExcludedFromLatest", "csharp");
+@@clientName(
+  ImageTemplatePropertiesValidate.sourceValidationOnly,
+  "IsSourceValidationOnly",
+  "csharp"
+);
+@@clientName(
+  ImageTemplateSharedImageDistributor.excludeFromLatest,
+  "IsExcludedFromLatest",
+  "csharp"
+);
 
 // C#: DateTimeOffset properties should end with 'On'.
 @@clientName(TriggerStatus.time, "RecordedOn", "csharp");
 
 // C#: string location should surface as AzureLocation.
-@@alternateType(ImageTemplateManagedImageDistributor.location, Azure.Core.azureLocation, "csharp");
+@@alternateType(
+  ImageTemplateManagedImageDistributor.location,
+  Azure.Core.azureLocation,
+  "csharp"
+);
 
 // C#: drop the leaked 'Properties' envelope naming from public model names.
-@@clientName(ImageTemplatePropertiesErrorHandling, "ImageTemplateErrorHandling", "csharp");
-@@clientName(ImageTemplatePropertiesOptimize, "ImageTemplateOptimizeConfig", "csharp");
-@@clientName(ImageTemplatePropertiesOptimizeWorkload, "ImageTemplateWorkloadOptimization", "csharp");
-@@clientName(ImageTemplatePropertiesValidate, "ImageTemplateValidationConfig", "csharp");
-@@clientName(ImageTemplateUpdateParametersProperties, "ImageTemplatePatchProperties", "csharp");
+@@clientName(
+  ImageTemplatePropertiesErrorHandling,
+  "ImageTemplateErrorHandling",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePropertiesOptimize,
+  "ImageTemplateOptimizeConfig",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePropertiesOptimizeWorkload,
+  "ImageTemplateWorkloadOptimization",
+  "csharp"
+);
+@@clientName(
+  ImageTemplatePropertiesValidate,
+  "ImageTemplateValidationConfig",
+  "csharp"
+);
+@@clientName(
+  ImageTemplateUpdateParametersProperties,
+  "ImageTemplatePatchProperties",
+  "csharp"
+);
+
+@@alternateType(
+  ImageTemplateIdentity.userAssignedIdentities,
+  Record<Azure.ResourceManager.CommonTypes.UserAssignedIdentity>,
+  "csharp"
+);
