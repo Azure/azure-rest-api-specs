@@ -5,8 +5,8 @@ import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
-} from "./commands.js";
-import { getArgumentValue } from "./utils.js";
+} from "./commands.ts";
+import { getArgumentValue } from "./utils.ts";
 
 export async function main() {
   // Get the arguments passed to the script

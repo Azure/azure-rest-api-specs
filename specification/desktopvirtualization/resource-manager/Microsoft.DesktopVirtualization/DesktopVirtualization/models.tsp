@@ -1244,7 +1244,7 @@ union DiffDiskOption {
 }
 
 /**
- * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+ * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
  */
 union DiffDiskPlacement {
   string,
@@ -1255,9 +1255,9 @@ union DiffDiskPlacement {
   CacheDisk: "CacheDisk",
 
   /**
-   * Resource disk placement
+   * Temp disk placement
    */
-  ResourceDisk: "ResourceDisk",
+  TempDisk: "TempDisk",
 }
 
 /**
@@ -1741,7 +1741,7 @@ model DiffDiskProperties {
   option?: DiffDiskOption;
 
   /**
-   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise ResourceDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'ResourceDisk'.
+   * Gets or sets specifies the ephemeral disk placement for operating system disk. The defaulting behavior is: CacheDisk if one is configured for the VM size otherwise TempDisk is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Possible values include: 'CacheDisk', 'TempDisk'.
    */
   placement?: DiffDiskPlacement;
 }
@@ -2716,6 +2716,12 @@ model HostPoolProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
+
+  /**
+   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
+   */
+  @added(Versions.vLatestPreview)
+  conditionalRdpProperty?: string;
 }
 
 /**
@@ -3315,6 +3321,12 @@ model ApplicationProperties {
   applicationType?: RemoteApplicationType;
 
   /**
+   * Additional shortcut settings for the remote application.
+   */
+  @added(Versions.vLatestPreview)
+  shortcutsExtension?: ShortcutsExtension;
+
+  /**
    * Specifies whether this published application can be launched with command line arguments provided by the client, command line arguments specified at publish time, or no command line arguments at all.
    */
   commandLineSetting: CommandLineSetting;
@@ -3420,6 +3432,12 @@ model ApplicationPatchProperties {
    * Resource Type of Application.
    */
   applicationType?: RemoteApplicationType;
+
+  /**
+   * Additional shortcut settings for the remote application.
+   */
+  @added(Versions.vLatestPreview)
+  shortcutsExtension?: ShortcutsExtension;
 }
 
 /**
@@ -3569,6 +3587,16 @@ model StartMenuItemProperties {
    * Index of the icon.
    */
   iconIndex?: int32;
+}
+
+/**
+ * Additional shortcut settings for a remote application.
+ */
+model ShortcutsExtension {
+  /**
+   * Indicates whether to create a desktop shortcut for the remote application.
+   */
+  putShortcutOnDesktop?: boolean;
 }
 
 /**
@@ -3790,6 +3818,12 @@ model HostPoolPatchProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "RDP is a valid acronym"
   @added(Versions.vLatestPreview)
   allowRDPShortPathWithPrivateLink?: AllowRDPShortPathWithPrivateLink;
+
+  /**
+   * The conditional RDP properties of the host pool, serialized as a string in the format of `<rdpPropertyName>:<type>:<value>:<conditionType>:<conditionValue>`.
+   */
+  @added(Versions.vLatestPreview)
+  conditionalRdpProperty?: string;
 }
 
 /**

@@ -90,3 +90,24 @@ using Azure.ResourceManager.Foundations;
 @@alternateType(ProviderPropertiesAad.tenantId, uuid, "csharp");
 @@alternateType(WorkspaceResourceProperties.endpointUri, url, "csharp");
 @@alternateType(QuantumSuiteOfferProperties.quotas, azureLocation, "csharp");
+
+// Java client customizations to preserve backward compatibility after Swagger -> TypeSpec migration.
+@@clientName(
+  CheckNameAvailabilityRequest,
+  "CheckNameAvailabilityParameters",
+  "java"
+);
+@@clientName(
+  CheckNameAvailabilityResponse,
+  "CheckNameAvailabilityResult",
+  "java"
+);
+@@clientName(WorkspaceProvisioningStatus, "ProvisioningStatus", "java");
+@@clientName(ProviderStatus, "Status", "java");
+@@clientLocation(
+  Workspaces.checkNameAvailability,
+  "WorkspaceOperations",
+  "java"
+);
+@@clientLocation(Workspaces.listKeys, "WorkspaceOperations", "java");
+@@clientLocation(Workspaces.regenerateKeys, "WorkspaceOperations", "java");

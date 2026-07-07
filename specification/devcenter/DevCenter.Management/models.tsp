@@ -771,11 +771,11 @@ model DevCenterEncryptionSetUpdateProperties {
   keyEncryptionKeyUrl?: url;
 
   @doc("The managed identity configuration used for key vault access.")
-  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
+  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentityUpdate;
 }
 
 @doc("The managed identity configuration used for key vault access.")
-model KeyEncryptionKeyIdentity {
+model KeyEncryptionKeyIdentityUpdate {
   @doc("The type of managed identity to use for key vault access.")
   type?: CmkIdentityType;
 
@@ -1238,7 +1238,7 @@ model CatalogUpdateProperties {
   @doc("Indicates the type of sync that is configured for the catalog.")
   syncType?: CatalogSyncType;
 
-  /** Indicates whether the catalog is configured to automatically build image definitions. Defaults to enabled. */
+  /** Indicates whether the catalog is configured to automatically build image definitions. Defaults to disabled for newly created catalogs. */
   @added(Versions.v2025_10_01_preview)
   autoImageBuildEnableStatus?: CatalogAutoImageBuildEnableStatus;
 
