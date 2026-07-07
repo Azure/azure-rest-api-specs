@@ -1,0 +1,55 @@
+{
+  "title": "Endpoints_Update_MaximumSet",
+  "operationId": "Endpoints_Update",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "myProfile",
+    "endpointName": "myEndpoint",
+    "properties": {
+      "properties": {
+        "target": "10.0.0.2",
+        "monitoringTarget": "10.0.0.2",
+        "endpointStatus": "Enabled",
+        "weight": 150,
+        "priority": 5,
+        "alwaysServe": "Disabled",
+        "healthPolicyId": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "target": "10.0.0.2",
+          "monitoringTarget": "10.0.0.2",
+          "endpointStatus": "Enabled",
+          "kind": "Endpoint",
+          "weight": 150,
+          "priority": 5,
+          "alwaysServe": "Disabled",
+          "healthPolicyId": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/healthPolicies/myHealthPolicy",
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/myProfile/endpoints/myEndpoint",
+        "name": "myEndpoint",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles/endpoints",
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-02-18T10:05:58.138Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-02-24T14:30:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/providers/Microsoft.Network/locations/eastus/operationStatuses/operationId?api-version=2026-02-09-preview"
+      }
+    }
+  }
+}
