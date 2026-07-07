@@ -20,6 +20,8 @@ interface BackupUsageSummariesCRROperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupUsageSummariesCRR_List")
+  @extension("x-ms-odata", "#/definitions/BMSBackupSummariesQueryObject")
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   @autoRoute
   @get
   @action("backupUsageSummaries")
@@ -57,6 +59,7 @@ interface AadPropertiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Fetches the AAD properties from target region BCM stamp.")
   @operationId("AadProperties_Get")
+  @extension("x-ms-odata", "#/definitions/BMSAADPropertiesQueryObject")
   @autoRoute
   @get
   @action("backupAadProperties")
@@ -85,27 +88,41 @@ interface CrossRegionRestoreOperationGroup {
   /**
    * Restores the specified backed up data in a different region as compared to where the data is backed up.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Restores the specified backed up data in a different region as compared to where the data is backed up.")
   @operationId("CrossRegionRestore_Trigger")
-  @autoRoute
-  @action("backupCrossRegionRestore")
-  trigger is ArmProviderActionAsync<
-    Request = CrossRegionRestoreRequest,
-    Response = void,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Azure region to hit Api
-       */
-      @path
-      @segment("locations")
-      azureRegion: string;
-    },
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    #{ `final-state-via`: "azure-async-operation" }
+  )
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrossRegionRestore")
+  @post
+  trigger(
+    ...ApiVersionParameter,
+
+    /**
+     * Azure region to hit Api
+     */
+    @path
+    azureRegion: string,
+
+    ...SubscriptionIdParameter,
+
+    /**
+     * resource cross region restore request
+     */
+    @body
+    parameters: CrossRegionRestoreRequest,
+  ): OkResponse | CrossRegionRestoreAcceptedResponse | ErrorResponse;
+}
+
+/**
+ * Accepted (202) response for the cross region restore trigger operation.
+ */
+model CrossRegionRestoreAcceptedResponse {
+  @statusCode
+  statusCode: 202;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -116,21 +133,25 @@ interface BackupCrrJobDetailsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get CRR job details from target region.")
   @operationId("BackupCrrJobDetails_Get")
-  @autoRoute
-  @action("backupCrrJob")
-  get is ArmProviderActionSync<
-    Request = CrrJobRequest,
-    Response = JobResource,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Azure region to hit Api
-       */
-      @path
-      @segment("locations")
-      azureRegion: string;
-    }
-  >;
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJob")
+  @post
+  get(
+    ...ApiVersionParameter,
+
+    /**
+     * Azure region to hit Api
+     */
+    @path
+    azureRegion: string,
+
+    ...SubscriptionIdParameter,
+
+    /**
+     * CRR job request
+     */
+    @body
+    parameters: CrrJobRequest,
+  ): ArmResponse<JobResource> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -141,33 +162,39 @@ interface BackupCrrJobsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Gets the list of CRR jobs from the target region.")
   @operationId("BackupCrrJobs_List")
-  @autoRoute
-  @action("backupCrrJobs")
-  list is ArmProviderActionSync<
-    Request = CrrJobRequest,
-    Response = JobResourceList,
-    Scope = SubscriptionActionScope,
-    Parameters = {
-      /**
-       * Azure region to hit Api
-       */
-      @path
-      @segment("locations")
-      azureRegion: string;
+  @extension("x-ms-odata", "#/definitions/JobQueryObject")
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupCrrJobs")
+  @post
+  list(
+    ...ApiVersionParameter,
 
-      /**
-       * OData filter options.
-       */
-      @query("$filter")
-      $filter?: string;
+    /**
+     * Azure region to hit Api
+     */
+    @path
+    azureRegion: string,
 
-      /**
-       * skipToken Filter.
-       */
-      @query("$skipToken")
-      $skipToken?: string;
-    }
-  >;
+    ...SubscriptionIdParameter,
+
+    /**
+     * OData filter options.
+     */
+    @query("$filter")
+    $filter?: string,
+
+    /**
+     * skipToken Filter.
+     */
+    @query("$skipToken")
+    $skipToken?: string,
+
+    /**
+     * CRR job request
+     */
+    @body
+    parameters: CrrJobRequest,
+  ): ArmResponse<JobResourceList> | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -223,6 +250,8 @@ interface BackupProtectedItemsCrrOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupProtectedItemsCrr_List")
+  @extension("x-ms-odata", "#/definitions/ProtectedItemQueryObject")
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   @autoRoute
   @get
   @action("backupProtectedItems/")

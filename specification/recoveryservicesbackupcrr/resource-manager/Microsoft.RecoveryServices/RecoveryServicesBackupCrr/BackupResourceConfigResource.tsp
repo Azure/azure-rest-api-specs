@@ -13,15 +13,21 @@ namespace Microsoft.RecoveryServices;
 /**
  * The resource storage details.
  */
+@parentResource(VaultResource)
 @singleton("vaultstorageconfig")
-model BackupResourceConfigResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<BackupResourceConfig> {
+model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
   ...ResourceNameParameter<
     Resource = BackupResourceConfigResource,
     KeyName = "backupstorageconfig",
     SegmentName = "backupstorageconfig",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.

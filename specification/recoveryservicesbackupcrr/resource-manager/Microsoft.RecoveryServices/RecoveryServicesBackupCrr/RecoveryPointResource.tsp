@@ -13,14 +13,21 @@ namespace Microsoft.RecoveryServices;
 /**
  * Base class for backup copies. Workload-specific backup copies are derived from this class.
  */
-model RecoveryPointResource
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<RecoveryPoint> {
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "Backward compatibility with existing 2023-01-15 CRR API path structure."
+@parentResource(ProtectedItemVirtualResource)
+model RecoveryPointResource is ProxyResource<RecoveryPoint> {
   ...ResourceNameParameter<
     Resource = RecoveryPointResource,
     KeyName = "recoveryPointId",
     SegmentName = "recoveryPoints",
     NamePattern = ""
   >;
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The geo-location where the resource lives */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Optional location"
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: Azure.Core.azureLocation;
 
   /**
    * Optional ETag.
@@ -43,6 +50,8 @@ interface RecoveryPointResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RecoveryPointsCrr_List")
+  @extension("x-ms-odata", "#/definitions/BMSRPQueryObject")
+  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
   list is ArmResourceListByParent<
     RecoveryPointResource,
     Parameters = {
@@ -64,8 +73,18 @@ interface RecoveryPointResources {
   getAccessToken is ArmResourceActionSync<
     RecoveryPointResource,
     AADPropertiesResource,
-    ArmResponse<CrrAccessTokenResource>
+    ArmResponse<CrrAccessTokenResource> | AccessTokenBadRequestResponse
   >;
+}
+
+/**
+ * BadRequest error response for the recovery point access token operation.
+ */
+@error
+model AccessTokenBadRequestResponse {
+  @doc("BadRequest")
+  @statusCode
+  statusCode: 400;
 }
 
 @@doc(
