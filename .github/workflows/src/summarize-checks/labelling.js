@@ -1171,8 +1171,8 @@ const rulesPri1Namespace = [
       "namespace approval from language architects before it can be merged.<br/>" +
       "Check the <b>Namespace Review Required</b> comment on this PR for a detailed status table " +
       "showing which languages are pending and who can approve.<br/>" +
-      "Architects: apply <code>namespace-&lt;language&gt;-approved</code> labels for each language, " +
-      "or <code>namespace-approved-all</code> to approve all at once.",
+      "Architects: apply <code>namespace-&lt;language&gt;-approved</code> labels for each language. " +
+      "For management-plane PRs, <code>namespace-approved-all</code> can be used to approve all languages at once.",
   },
 ];
 
