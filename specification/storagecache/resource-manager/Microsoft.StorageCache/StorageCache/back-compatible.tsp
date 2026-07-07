@@ -108,7 +108,7 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJob.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with all other StorageCache resources (AmlFilesystem, ImportJob, ExpansionJob, Cache, StorageTarget), which flatten `properties` to preserve the swagger shape established by the TypeSpec brownfield conversion."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with all other StorageCache resources (AmlFilesystem, ImportJob, ExpansionJob, Cache, StorageTarget), which flatten `properties`; preserves the swagger shape established by the TypeSpec brownfield conversion and keeps the generated SDK model shape consistent across the job-resource family. Not flattening would make RebalanceJob diverge from its siblings."
 @@Legacy.flattenProperty(RebalanceJob.properties);
 
 @@clientName(Caches.createOrUpdate::parameters.resource, "cache");

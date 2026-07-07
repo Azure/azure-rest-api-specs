@@ -2470,8 +2470,8 @@ model RebalanceJobProperties {
   /**
    * The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  adminStatus?: RebalanceJobAdminStatus = RebalanceJobAdminStatus.Active;
+  @visibility(Lifecycle.Read)
+  adminStatus?: RebalanceJobAdminStatus;
 
   /**
    * Name of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.

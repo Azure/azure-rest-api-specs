@@ -8207,33 +8207,9 @@
           "readOnly": true
         },
         "adminStatus": {
-          "type": "string",
+          "$ref": "#/definitions/RebalanceJobAdminStatus",
           "description": "The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.",
-          "default": "Active",
-          "enum": [
-            "Active",
-            "Cancel"
-          ],
-          "x-ms-enum": {
-            "name": "RebalanceJobAdminStatus",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Active",
-                "value": "Active",
-                "description": "The rebalance job is running normally."
-              },
-              {
-                "name": "Cancel",
-                "value": "Cancel",
-                "description": "Request the rebalance job to stop."
-              }
-            ]
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "expansionJobName": {
           "type": "string",
