@@ -13,17 +13,17 @@ namespace Azure.AI.Projects;
 @route("openai/v1/fine_tuning/alpha/graders")
 @tag("Fine-tuning")
 interface Graders {
+  /**
+   * Runs a grader.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Run a grader")
   @route("run")
   @post
-  @summary("""
-    Run a grader.
-    
-    """)
   runGrader is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
@@ -33,17 +33,17 @@ interface Graders {
     OpenAI.RunGraderResponse
   >;
 
+  /**
+   * Validates a grader.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Validate a grader")
   @route("validate")
   @post
-  @summary("""
-    Validate a grader.
-    
-    """)
   validateGrader is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."

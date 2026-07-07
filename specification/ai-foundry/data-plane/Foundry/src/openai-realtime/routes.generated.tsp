@@ -4,6 +4,7 @@
 // </auto-generated>
 // -----------------------------------------------------------------------------
 
+/** The content type of the request body. */
 import "../common/models.tsp";
 import "@typespec/http";
 import "@azure-tools/openai-typespec/models/realtime";
@@ -32,6 +33,7 @@ interface Realtime {
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.RealtimeCallCreateRequest;
@@ -40,13 +42,16 @@ interface Realtime {
       @statusCode
       statusCode: 201;
 
+      /** The location request header. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @header
       Location?: string;
 
+      /** The content type of the request body. */
       @header
       contentType: "application/sdp";
 
+      /** The request body. */
       @body
       body: string;
     }

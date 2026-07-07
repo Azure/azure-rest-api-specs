@@ -13,24 +13,30 @@ namespace Azure.AI.Projects;
 @route("openai/v1/models")
 @tag("Models")
 interface OpenAIModels {
+  /**
+   * Lists models matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List models")
   @list
   @get
-  @summary("Lists the currently available models, and provides basic information about each one such as the owner and availability.")
   listModels is OpenAIOperation<{}, OpenAI.ListModelsResponse>;
 
+  /**
+   * Deletes a model by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Delete a model")
   @route("{model}")
   @delete
-  @summary("Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.")
   deleteModel is OpenAIOperation<
     {
       /** The model to delete */
@@ -40,15 +46,18 @@ interface OpenAIModels {
     OpenAI.DeleteModelResponse
   >;
 
+  /**
+   * Retrieves a model by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a model")
   @route("{model}")
   @get
-  @summary("Retrieves a model instance, providing basic information about the model such as the owner and permissioning.")
   retrieveModel is OpenAIOperation<
     {
       /** The ID of the model to use for this request */

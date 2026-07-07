@@ -16,6 +16,9 @@ namespace Azure.AI.Projects;
 @route("openai/v1/assistants")
 @tag("Assistants")
 interface Assistants {
+  /**
+   * Lists assistants matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
@@ -23,9 +26,9 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List assistants")
   @list
   @get
-  @summary("Returns a list of assistants.")
   listAssistants is OpenAIOperation<
     {
       /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
@@ -54,6 +57,9 @@ interface Assistants {
     OpenAI.ListAssistantsResponse
   >;
 
+  /**
+   * Creates an assistant from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
@@ -61,8 +67,8 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create an assistant")
   @post
-  @summary("Create an assistant with a model and instructions.")
   createAssistant is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
@@ -72,6 +78,9 @@ interface Assistants {
     OpenAI.AssistantObject
   >;
 
+  /**
+   * Deletes an assistant by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
@@ -79,9 +88,9 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Delete an assistant")
   @route("{assistant_id}")
   @delete
-  @summary("Delete an assistant.")
   deleteAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to delete. */
@@ -92,6 +101,9 @@ interface Assistants {
     OpenAI.DeleteAssistantResponse
   >;
 
+  /**
+   * Retrieves an assistant by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
@@ -99,9 +111,9 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get an assistant")
   @route("{assistant_id}")
   @get
-  @summary("Retrieves an assistant.")
   getAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to retrieve. */
@@ -112,6 +124,9 @@ interface Assistants {
     OpenAI.AssistantObject
   >;
 
+  /**
+   * Updates an assistant with the supplied changes.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "deprecated" "Deprecated OpenAI operation shapes intentionally reference deprecated models."
@@ -119,9 +134,9 @@ interface Assistants {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #deprecated "deprecated"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Update an assistant")
   @route("{assistant_id}")
   @post
-  @summary("Modifies an assistant.")
   modifyAssistant is OpenAIOperation<
     {
       /** The ID of the assistant to modify. */
@@ -129,6 +144,7 @@ interface Assistants {
       @path
       assistant_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.ModifyAssistantRequest;

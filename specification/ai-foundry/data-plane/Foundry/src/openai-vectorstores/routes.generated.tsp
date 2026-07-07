@@ -16,14 +16,17 @@ namespace Azure.AI.Projects;
 @route("openai/v1/vector_stores")
 @tag("Vector stores")
 interface VectorStores {
+  /**
+   * Lists vector stores matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List vector stores")
   @list
   @get
-  @summary("Returns a list of vector stores.")
   listVectorStores is OpenAIOperation<
     {
       /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
@@ -52,13 +55,16 @@ interface VectorStores {
     OpenAI.ListVectorStoresResponse
   >;
 
+  /**
+   * Creates a vector store from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a vector store")
   @post
-  @summary("Create a vector store.")
   createVectorStore is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
@@ -68,14 +74,17 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
+  /**
+   * Deletes a vector store by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Delete a vector store")
   @route("{vector_store_id}")
   @delete
-  @summary("Delete a vector store.")
   deleteVectorStore is OpenAIOperation<
     {
       /** The ID of the vector store to delete. */
@@ -86,14 +95,17 @@ interface VectorStores {
     OpenAI.DeleteVectorStoreResponse
   >;
 
+  /**
+   * Retrieves a vector store by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a vector store")
   @route("{vector_store_id}")
   @get
-  @summary("Retrieves a vector store.")
   getVectorStore is OpenAIOperation<
     {
       /** The ID of the vector store to retrieve. */
@@ -104,14 +116,17 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
+  /**
+   * Updates a vector store with the supplied changes.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Update a vector store")
   @route("{vector_store_id}")
   @post
-  @summary("Modifies a vector store.")
   modifyVectorStore is OpenAIOperation<
     {
       /** The ID of the vector store to modify. */
@@ -119,6 +134,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.UpdateVectorStoreRequest;
@@ -126,16 +142,16 @@ interface VectorStores {
     OpenAI.VectorStoreObject
   >;
 
-  /**The maximum number of files in a single batch request is 2000.
-  Vector store file attach requests are rate limited per vector store (300 requests per minute across both this endpoint and `/vector_stores/{vector_store_id}/files`).
-  For ingesting multiple files into the same vector store, this batch endpoint is recommended.*/
+  /**
+   * Creates a vector store file batch from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a vector store file batch")
   @route("{vector_store_id}/file_batches")
   @post
-  @summary("Create a vector store file batch.")
   createVectorStoreFileBatch is OpenAIOperation<
     {
       /** The ID of the vector store for which to create a File Batch. */
@@ -143,6 +159,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateVectorStoreFileBatchRequest;
@@ -150,14 +167,17 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
+  /**
+   * Retrieves a vector store file batch by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a vector store file batch")
   @route("{vector_store_id}/file_batches/{batch_id}")
   @get
-  @summary("Retrieves a vector store file batch.")
   getVectorStoreFileBatch is OpenAIOperation<
     {
       /** The ID of the vector store that the file batch belongs to. */
@@ -173,14 +193,17 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
+  /**
+   * Cancels a vector store file batch by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Cancel a vector store file batch")
   @route("{vector_store_id}/file_batches/{batch_id}/cancel")
   @post
-  @summary("Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.")
   cancelVectorStoreFileBatch is OpenAIOperation<
     {
       /** The ID of the vector store that the file batch belongs to. */
@@ -196,15 +219,18 @@ interface VectorStores {
     OpenAI.VectorStoreFileBatchObject
   >;
 
+  /**
+   * Lists files in vector store batch matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List files in vector store batch")
   @list
   @route("{vector_store_id}/file_batches/{batch_id}/files")
   @get
-  @summary("Returns a list of vector store files in a batch.")
   listFilesInVectorStoreBatch is OpenAIOperation<
     {
       /** The ID of the vector store that the files belong to. */
@@ -248,15 +274,18 @@ interface VectorStores {
     OpenAI.ListVectorStoreFilesResponse
   >;
 
+  /**
+   * Lists vector store files matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List vector store files")
   @list
   @route("{vector_store_id}/files")
   @get
-  @summary("Returns a list of vector store files.")
   listVectorStoreFiles is OpenAIOperation<
     {
       /** The ID of the vector store that the files belong to. */
@@ -295,15 +324,16 @@ interface VectorStores {
     OpenAI.ListVectorStoreFilesResponse
   >;
 
-  /**This endpoint is subject to a per-vector-store write rate limit of 300 requests per minute, shared with `/vector_stores/{vector_store_id}/file_batches`.
-  For uploading multiple files to the same vector store, use the file batches endpoint to reduce request volume.*/
+  /**
+   * Creates a vector store file from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a vector store file")
   @route("{vector_store_id}/files")
   @post
-  @summary("Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).")
   createVectorStoreFile is OpenAIOperation<
     {
       /** The ID of the vector store for which to create a File. */
@@ -311,6 +341,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateVectorStoreFileRequest;
@@ -318,14 +349,17 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
+  /**
+   * Deletes a vector store file by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Delete a vector store file")
   @route("{vector_store_id}/files/{file_id}")
   @delete
-  @summary("Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.")
   deleteVectorStoreFile is OpenAIOperation<
     {
       /** The ID of the vector store that the file belongs to. */
@@ -341,14 +375,17 @@ interface VectorStores {
     OpenAI.DeleteVectorStoreFileResponse
   >;
 
+  /**
+   * Retrieves a vector store file by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a vector store file")
   @route("{vector_store_id}/files/{file_id}")
   @get
-  @summary("Retrieves a vector store file.")
   getVectorStoreFile is OpenAIOperation<
     {
       /** The ID of the vector store that the file belongs to. */
@@ -364,14 +401,17 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
+  /**
+   * Updates vector store file attributes with the supplied changes.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Update vector store file attributes")
   @route("{vector_store_id}/files/{file_id}")
   @post
-  @summary("Update attributes on a vector store file.")
   updateVectorStoreFileAttributes is OpenAIOperation<
     {
       /** The ID of the vector store the file belongs to. */
@@ -384,6 +424,7 @@ interface VectorStores {
       @path
       file_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.UpdateVectorStoreFileAttributesRequest;
@@ -391,15 +432,18 @@ interface VectorStores {
     OpenAI.VectorStoreFileObject
   >;
 
+  /**
+   * Retrieves a vector store file content by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a vector store file content")
   @route("{vector_store_id}/files/{file_id}/content")
   @get
-  @summary("Retrieve the parsed contents of a vector store file.")
   retrieveVectorStoreFileContent is OpenAIOperation<
     {
       /** The ID of the vector store. */
@@ -415,14 +459,17 @@ interface VectorStores {
     OpenAI.VectorStoreFileContentResponse
   >;
 
+  /**
+   * Searchs a vector store.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Search a vector store")
   @route("{vector_store_id}/search")
   @post
-  @summary("Search a vector store for relevant chunks based on a query and file attributes filter.")
   searchVectorStore is OpenAIOperation<
     {
       /** The ID of the vector store to search. */
@@ -430,6 +477,7 @@ interface VectorStores {
       @path
       vector_store_id: string;
 
+      /** The request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.VectorStoreSearchRequest;

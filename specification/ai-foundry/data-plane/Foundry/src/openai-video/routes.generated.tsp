@@ -16,6 +16,9 @@ namespace Azure.AI.Projects;
 @route("openai/v1/videos")
 @tag("Videos")
 interface VideoGeneration {
+  /**
+   * Lists videos matching the request filters.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -23,10 +26,10 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("List videos")
   @list
   @get
-  @summary("List recently generated videos for the current project.")
-  ListVideos is OpenAIOperation<
+  listVideos is OpenAIOperation<
     {
       /** Number of items to retrieve */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
@@ -51,20 +54,24 @@ interface VideoGeneration {
     OpenAI.VideoListResource
   >;
 
+  /**
+   * Creates a video from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video")
   @post
-  @summary("Create a new video generation job from a prompt and optional reference assets.")
   createVideo is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateVideoMultipartBody;
@@ -72,6 +79,9 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video character from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -79,15 +89,16 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video character")
   @route("characters")
   @post
-  @summary("Create a character from an uploaded video.")
-  CreateVideoCharacter is OpenAIOperation<
+  createVideoCharacter is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateVideoCharacterBody;
@@ -95,6 +106,9 @@ interface VideoGeneration {
     OpenAI.VideoCharacterResource
   >;
 
+  /**
+   * Retrieves a video character by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -102,10 +116,10 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a video character")
   @route("characters/{character_id}")
   @get
-  @summary("Fetch a character.")
-  GetVideoCharacter is OpenAIOperation<
+  getVideoCharacter is OpenAIOperation<
     {
       /** The identifier of the character to retrieve. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -115,6 +129,9 @@ interface VideoGeneration {
     OpenAI.VideoCharacterResource
   >;
 
+  /**
+   * Creates a video edit multipart from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -122,16 +139,17 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video edit multipart")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Create a new video generation job by editing a source video or existing generated video.")
-  CreateVideoEditMultipart is OpenAIOperation<
+  createVideoEditMultipart is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateVideoEditMultipartBody;
@@ -139,17 +157,20 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video edit json from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video edit json")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Create a new video generation job by editing a source video or existing generated video.")
-  CreateVideoEditJson is OpenAIOperation<
+  createVideoEditJson is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
@@ -158,6 +179,9 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video extend multipart from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -165,16 +189,17 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video extend multipart")
   @sharedRoute
   @route("extensions")
   @post
-  @summary("Create an extension of a completed video.")
-  CreateVideoExtendMultipart is OpenAIOperation<
+  createVideoExtendMultipart is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateVideoExtendMultipartBody;
@@ -182,17 +207,20 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video extend json from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video extend json")
   @sharedRoute
   @route("extensions")
   @post
-  @summary("Create an extension of a completed video.")
-  CreateVideoExtendJson is OpenAIOperation<
+  createVideoExtendJson is OpenAIOperation<
     {
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
@@ -201,6 +229,9 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Deletes a video by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -208,10 +239,10 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Delete a video")
   @route("{video_id}")
   @delete
-  @summary("Permanently delete a completed or failed video and its stored assets.")
-  DeleteVideo is OpenAIOperation<
+  deleteVideo is OpenAIOperation<
     {
       /** The identifier of the video to delete. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -221,6 +252,9 @@ interface VideoGeneration {
     OpenAI.DeletedVideoResource
   >;
 
+  /**
+   * Retrieves a video by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -228,10 +262,10 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a video")
   @route("{video_id}")
   @get
-  @summary("Fetch the latest metadata for a generated video.")
-  GetVideo is OpenAIOperation<
+  getVideo is OpenAIOperation<
     {
       /** The identifier of the video to retrieve. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -241,6 +275,9 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Retrieves a video content by its identifier.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -249,14 +286,10 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Get a video content")
   @route("{video_id}/content")
   @get
-  @summary("""
-    Download the generated video bytes or a derived preview asset.
-    
-    Streams the rendered video content for the specified video job.
-    """)
-  RetrieveVideoContent is OpenAIOperation<
+  retrieveVideoContent is OpenAIOperation<
     {
       /** The identifier of the video whose media to download. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -272,11 +305,15 @@ interface VideoGeneration {
       @header
       contentType: "video/mp4";
 
+      /** The request body. */
       @body
       body: bytes;
     }
   >;
 
+  /**
+   * Creates a video remix from the supplied request.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -284,20 +321,22 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @summary("Create a video remix")
   @route("{video_id}/remix")
   @post
-  @summary("Create a remix of a completed video using a refreshed prompt.")
-  CreateVideoRemix is OpenAIOperation<
+  createVideoRemix is OpenAIOperation<
     {
       /** The identifier of the completed video to remix. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       video_id: string;
 
+      /** The content type of the request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateVideoRemixBody;
