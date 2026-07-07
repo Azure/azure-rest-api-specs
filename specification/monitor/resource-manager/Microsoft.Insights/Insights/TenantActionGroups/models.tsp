@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
-namespace Microsoft.Insights;
+namespace TenantActionGroups;
 
 /**
  * Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications.

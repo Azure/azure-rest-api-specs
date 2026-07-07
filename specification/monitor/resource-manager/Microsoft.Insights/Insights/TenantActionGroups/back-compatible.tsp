@@ -1,7 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Microsoft.Insights;
+using TenantActionGroups;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ActionGroupPatchBody.properties);
@@ -27,7 +27,7 @@ using Microsoft.Insights;
 );
 @@clientLocation(
   TenantActionGroupResources.createNotificationsAtTenantActionGroupResourceLevel,
-  Microsoft.Insights
+  TenantActionGroups
 );
 @@clientName(
   TenantActionGroupResources.createNotificationsAtTenantActionGroupResourceLevel::parameters.body,
@@ -35,7 +35,7 @@ using Microsoft.Insights;
 );
 @@clientLocation(
   TenantActionGroupResources.getTestNotificationsAtTenantActionGroupResourceLevel,
-  Microsoft.Insights
+  TenantActionGroups
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TenantActionGroupResource.properties);

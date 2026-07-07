@@ -14,6 +14,9 @@ import "./ScheduledQueryRuleApi/main.tsp";
 import "./MetricBaselinesApi/main.tsp";
 import "./ActionGroupsApi/main.tsp";
 import "./NetworkSecurityPerimeterApi/main.tsp";
+import "./TenantActionGroups/main.tsp";
+import "./VmInsightsOnboarding/main.tsp";
+import "./DiagnosticsSettings/main.tsp";
 import "./Common/main.tsp";
 
 using Azure.ClientGenerator.Core;
