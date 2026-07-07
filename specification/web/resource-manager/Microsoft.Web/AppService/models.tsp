@@ -2416,7 +2416,7 @@ model SiteProperties {
   platformReleaseChannel?: PlatformReleaseChannel;
 
   /**
-   * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it to return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
+   * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
    */
   @added(Versions.v2026_07_15)
   maintenanceEnabled?: boolean;
@@ -16107,18 +16107,6 @@ model ErrorPage {
    * The status code for which the error page will be used
    */
   statusCode?: int32;
-
-  /**
-   * The substatus code for which the error page will be used
-   */
-  @added(Versions.v2026_07_15)
-  substatusCode?: int32;
-
-  /**
-   * The name of the error page. For example, '404' or 'maintenance'
-   */
-  @added(Versions.v2026_07_15)
-  name?: string;
 
   /**
    * The content of the error page. There is a 10kb limit imposed on custom error page content.
