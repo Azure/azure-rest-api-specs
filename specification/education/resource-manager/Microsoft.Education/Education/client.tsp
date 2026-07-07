@@ -21,6 +21,11 @@ using Microsoft.Education;
 );
 @@clientLocation(redeemInvitationCode, "ManagementClient", "go");
 
+@@clientName(Amount, "EducationAmount", "csharp");
+
+@@alternateType(LabProperties.maxStudentCount, int32, "csharp");
+@@alternateType(InviteCodeGenerateRequest.maxStudentCount, int32, "csharp");
+
 // C# management SDK customizations for the Education onboarding.
 // common-types v3 types.json models Resource.id as a plain string; map it to
 // armResourceIdentifier so generated ResourceData ctors take a ResourceIdentifier.
