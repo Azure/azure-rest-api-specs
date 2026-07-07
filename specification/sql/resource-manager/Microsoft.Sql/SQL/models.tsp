@@ -1191,6 +1191,7 @@ union SeedingModeType {
 /**
  * Specifies whether the link operates in single-database or multi-database mode.
  */
+@added(Versions.v2025_08_01_preview)
 union LinkModeType {
   string,
 
@@ -7483,6 +7484,7 @@ model DistributedAvailabilityGroupProperties {
   /**
    * Specifies whether the link operates in single-database or multi-database mode.
    */
+  @added(Versions.v2025_08_01_preview)
   linkMode?: LinkModeType;
 
   /**
