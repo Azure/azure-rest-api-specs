@@ -772,11 +772,11 @@ model DevCenterEncryptionSetUpdateProperties {
   keyEncryptionKeyUrl?: url;
 
   @doc("The managed identity configuration used for key vault access.")
-  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentity;
+  keyEncryptionKeyIdentity?: KeyEncryptionKeyIdentityUpdate;
 }
 
 @doc("The managed identity configuration used for key vault access.")
-model KeyEncryptionKeyIdentity {
+model KeyEncryptionKeyIdentityUpdate {
   @doc("The type of managed identity to use for key vault access.")
   type?: CmkIdentityType;
 

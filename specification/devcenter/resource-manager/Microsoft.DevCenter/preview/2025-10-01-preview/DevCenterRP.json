@@ -8863,7 +8863,7 @@
       "description": "Represents an Entra group assigned to this Project, entitling all members to resources for the given scope.",
       "properties": {
         "objectId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
+          "$ref": "#/definitions/uuid",
           "description": "The Entra group object ID (GUID)."
         },
         "scope": {
@@ -9006,74 +9006,6 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Auto start is disabled."
-          }
-        ]
-      }
-    },
-    "Azure.Core.uuid": {
-      "type": "string",
-      "format": "uuid",
-      "description": "Universally Unique Identifier"
-    },
-    "Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption": {
-      "type": "object",
-      "description": "Customer-managed key encryption properties for the resource.",
-      "properties": {
-        "keyEncryptionKeyIdentity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity",
-          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
-        },
-        "keyEncryptionKeyUrl": {
-          "type": "string",
-          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentity": {
-      "type": "object",
-      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
-      "properties": {
-        "identityType": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType",
-          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
-        },
-        "userAssignedIdentityResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
-        },
-        "delegatedIdentityClientId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.KeyEncryptionKeyIdentityType": {
-      "type": "string",
-      "description": "The type of identity to use.",
-      "enum": [
-        "systemAssignedIdentity",
-        "userAssignedIdentity",
-        "delegatedResourceIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "KeyEncryptionKeyIdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SystemAssignedIdentity",
-            "value": "systemAssignedIdentity",
-            "description": "System assigned identity"
-          },
-          {
-            "name": "UserAssignedIdentity",
-            "value": "userAssignedIdentity",
-            "description": "User assigned identity"
-          },
-          {
-            "name": "DelegatedResourceIdentity",
-            "value": "delegatedResourceIdentity",
-            "description": "Delegated identity"
           }
         ]
       }
@@ -9621,6 +9553,20 @@
         }
       }
     },
+    "CustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "Customer-managed key encryption properties for the resource.",
+      "properties": {
+        "keyEncryptionKeyIdentity": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault."
+        },
+        "keyEncryptionKeyUrl": {
+          "type": "string",
+          "description": "key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
+        }
+      }
+    },
     "CustomizationTask": {
       "type": "object",
       "description": "Represents a Task to be used in customizing a Dev Box.",
@@ -10133,7 +10079,7 @@
           "description": "Key encryption key Url, versioned or non-versioned. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78 or https://contosovault.vault.azure.net/keys/contosokek."
         },
         "keyEncryptionKeyIdentity": {
-          "$ref": "#/definitions/KeyEncryptionKeyIdentity",
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityUpdate",
           "description": "The managed identity configuration used for key vault access."
         }
       }
@@ -10384,7 +10330,7 @@
       "description": "Encryption properties.",
       "properties": {
         "customerManagedKeyEncryption": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption",
+          "$ref": "#/definitions/CustomerManagedKeyEncryption",
           "description": "All Customer-managed key encryption properties for the resource."
         }
       }
@@ -11889,6 +11835,55 @@
       }
     },
     "KeyEncryptionKeyIdentity": {
+      "type": "object",
+      "description": "All identity configuration for Customer-managed key settings defining which identity should be used to auth to Key Vault.",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/KeyEncryptionKeyIdentityType",
+          "description": "The type of identity to use. Values can be systemAssignedIdentity, userAssignedIdentity, or delegatedResourceIdentity."
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity."
+        },
+        "delegatedIdentityClientId": {
+          "$ref": "#/definitions/uuid",
+          "description": "delegated identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId. Mutually exclusive with identityType systemAssignedIdentity and userAssignedIdentity - internal use only."
+        }
+      }
+    },
+    "KeyEncryptionKeyIdentityType": {
+      "type": "string",
+      "description": "The type of identity to use.",
+      "enum": [
+        "systemAssignedIdentity",
+        "userAssignedIdentity",
+        "delegatedResourceIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "KeyEncryptionKeyIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssignedIdentity",
+            "value": "systemAssignedIdentity",
+            "description": "System assigned identity"
+          },
+          {
+            "name": "UserAssignedIdentity",
+            "value": "userAssignedIdentity",
+            "description": "User assigned identity"
+          },
+          {
+            "name": "DelegatedResourceIdentity",
+            "value": "delegatedResourceIdentity",
+            "description": "Delegated identity"
+          }
+        ]
+      }
+    },
+    "KeyEncryptionKeyIdentityUpdate": {
       "type": "object",
       "description": "The managed identity configuration used for key vault access.",
       "properties": {
@@ -13703,6 +13698,11 @@
           "description": "Indicates whether workspace storage is enabled."
         }
       }
+    },
+    "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     }
   },
   "parameters": {}
