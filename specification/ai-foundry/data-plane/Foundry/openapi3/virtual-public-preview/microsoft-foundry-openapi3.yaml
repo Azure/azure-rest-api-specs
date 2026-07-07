@@ -116,8 +116,8 @@ paths:
   /agent_optimization_jobs:
     post:
       operationId: AgentOptimizationJobs_create
-      summary: Creates an agent optimization job.
-      description: Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.
+      summary: Create an agent optimization job
+      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
       parameters:
         - name: Foundry-Features
           in: header
@@ -184,8 +184,8 @@ paths:
           - AgentsOptimization=V2Preview
     get:
       operationId: AgentOptimizationJobs_list
-      summary: Returns a list of agent optimization jobs.
-      description: List optimization jobs. Supports cursor pagination and optional status / agent_name filters.
+      summary: List agent optimization jobs
+      description: Lists optimization jobs with cursor pagination and optional status or agent name filters.
       parameters:
         - name: Foundry-Features
           in: header
@@ -302,8 +302,8 @@ paths:
   /agent_optimization_jobs/{jobId}:
     get:
       operationId: AgentOptimizationJobs_get
-      summary: Get info about an agent optimization job.
-      description: Get an optimization job by id.
+      summary: Get an agent optimization job
+      description: Retrieves an optimization job by its identifier.
       parameters:
         - name: Foundry-Features
           in: header
@@ -359,8 +359,8 @@ paths:
           - AgentsOptimization=V2Preview
     delete:
       operationId: AgentOptimizationJobs_delete
-      summary: Deletes an agent optimization job.
-      description: Delete the job and its candidate artifacts. Cancels first if non-terminal.
+      summary: Delete an agent optimization job
+      description: Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
       parameters:
         - name: Foundry-Features
           in: header
@@ -406,8 +406,8 @@ paths:
   /agent_optimization_jobs/{jobId}:cancel:
     post:
       operationId: AgentOptimizationJobs_cancel
-      summary: Cancels an agent optimization job.
-      description: Request cancellation of a running or queued job. Returns an error if the job is already in a terminal state.
+      summary: Cancel an agent optimization job
+      description: Requests cancellation of a running or queued job and returns an error if the job is already in a terminal state.
       parameters:
         - name: Foundry-Features
           in: header
@@ -531,6 +531,7 @@ paths:
             encoding:
               metadata:
                 contentType: application/json
+        description: The content multipart request content.
     get:
       operationId: Agents_listAgents
       summary: List agents
@@ -828,6 +829,7 @@ paths:
             encoding:
               metadata:
                 contentType: application/json
+        description: The content multipart request content.
     delete:
       operationId: Agents_deleteAgent
       summary: Delete an agent
@@ -2069,6 +2071,7 @@ paths:
             encoding:
               metadata:
                 contentType: application/json
+        description: The content multipart request content.
     get:
       operationId: Agents_listAgentVersions
       summary: List agent versions
@@ -3831,7 +3834,7 @@ paths:
     post:
       operationId: Datasets_getCredentials
       summary: Get dataset credentials
-      description: Gets the SAS credential to access the storage account associated with a Dataset version.
+      description: Retrieves the SAS credential to access the storage account associated with a dataset version.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -4010,7 +4013,7 @@ paths:
     get:
       operationId: Deployments_get
       summary: Get a deployment
-      description: Gets a deployed model.
+      description: Retrieves a deployed model.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -4063,7 +4066,7 @@ paths:
     post:
       operationId: EvaluationSuiteGenerationJobs_create
       summary: Create an evaluation suite generation job
-      description: Create a new job (preview). Includes optional Foundry-Features header and Operation-Id for idempotent retries.
+      description: Creates an evaluation suite generation job and returns the queued job.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4131,7 +4134,7 @@ paths:
     get:
       operationId: EvaluationSuiteGenerationJobs_list
       summary: List evaluation suite generation jobs
-      description: List jobs with cursor-based pagination (preview). Includes optional Foundry-Features header.
+      description: Lists evaluation suite generation jobs for the project.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4235,7 +4238,7 @@ paths:
     get:
       operationId: EvaluationSuiteGenerationJobs_get
       summary: Get an evaluation suite generation job
-      description: Get a job by ID (preview). Includes optional Foundry-Features header.
+      description: Retrieves an evaluation suite generation job by its identifier.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4292,7 +4295,7 @@ paths:
     delete:
       operationId: EvaluationSuiteGenerationJobs_delete
       summary: Delete an evaluation suite generation job
-      description: Delete a job (preview). Returns 204 No Content.
+      description: Deletes an evaluation suite generation job by its identifier.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4339,7 +4342,7 @@ paths:
     post:
       operationId: EvaluationSuiteGenerationJobs_cancel
       summary: Cancel an evaluation suite generation job
-      description: Cancel a running job (preview). Returns 200 with the updated job.
+      description: Requests cancellation of a running or queued evaluation suite generation job.
       parameters:
         - name: Foundry-Features
           in: header
@@ -4478,7 +4481,7 @@ paths:
     post:
       operationId: EvaluationSuites_createEvaluationSuiteVersion
       summary: Create an evaluation suite version
-      description: Create a new EvaluationSuiteVersion with auto incremented version id
+      description: Creates a new evaluation suite version with an auto-incremented version identifier.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5470,7 +5473,7 @@ paths:
     patch:
       operationId: EvaluationTaxonomies_update
       summary: Update an evaluation taxonomy
-      description: Update an evaluation taxonomy.
+      description: Modifies the specified evaluation taxonomy with the provided changes.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
@@ -5866,7 +5869,7 @@ paths:
     get:
       operationId: Evaluators_listLatestVersions
       summary: List latest evaluator versions
-      description: Lists the latest version of each evaluator
+      description: Lists the latest version of each evaluator.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: type
@@ -6261,6 +6264,7 @@ paths:
         - name: name
           in: path
           required: true
+          description: The name path parameter.
           schema:
             type: string
         - name: version
@@ -6324,6 +6328,7 @@ paths:
         - name: name
           in: path
           required: true
+          description: The name path parameter.
           schema:
             type: string
         - name: version
@@ -8154,7 +8159,7 @@ paths:
     delete:
       operationId: Models_deleteVersion
       summary: Delete a model version
-      description: Delete the specific version of the ModelVersion. The service returns 200 OK if the ModelVersion was deleted successfully or if the ModelVersion does not exist.
+      description: Removes the specified model version. Returns 200 whether the version existed or not.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -8212,7 +8217,7 @@ paths:
     patch:
       operationId: Models_updateVersion
       summary: Update a model version
-      description: Update an existing ModelVersion with the given version id
+      description: Updates an existing model version identified by its version ID.
       parameters:
         - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: name
@@ -8438,6 +8443,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelCredentialRequest'
+        description: The credential request request body.
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
@@ -8507,13 +8513,15 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/ModelPendingUploadRequest'
+        description: The pending upload request request body.
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
   /openai/v1/assistants:
     get:
       operationId: Assistants_listAssistants
-      summary: Returns a list of assistants.
+      summary: List assistants
+      description: Lists assistants matching the request filters.
       parameters:
         - name: limit
           in: query
@@ -8714,7 +8722,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Assistants_createAssistant
-      summary: Create an assistant with a model and instructions.
+      summary: Create an assistant
+      description: Creates an assistant from the supplied request.
       parameters: []
       responses:
         '200':
@@ -8743,6 +8752,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateAssistantRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create assistant
         group: assistants
@@ -9010,7 +9020,8 @@ paths:
   /openai/v1/assistants/{assistant_id}:
     delete:
       operationId: Assistants_deleteAssistant
-      summary: Delete an assistant.
+      summary: Delete an assistant
+      description: Deletes an assistant by its identifier.
       parameters:
         - name: assistant_id
           in: path
@@ -9137,7 +9148,8 @@ paths:
             }
     get:
       operationId: Assistants_getAssistant
-      summary: Retrieves an assistant.
+      summary: Get an assistant
+      description: Retrieves an assistant by its identifier.
       parameters:
         - name: assistant_id
           in: path
@@ -9279,7 +9291,8 @@ paths:
             }
     post:
       operationId: Assistants_modifyAssistant
-      summary: Modifies an assistant.
+      summary: Update an assistant
+      description: Updates an assistant with the supplied changes.
       parameters:
         - name: assistant_id
           in: path
@@ -9314,6 +9327,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ModifyAssistantRequest'
+        description: The request body.
       x-oaiMeta:
         name: Modify assistant
         group: assistants
@@ -9449,10 +9463,8 @@ paths:
   /openai/v1/audio/speech:
     post:
       operationId: Audio_createSpeech
-      summary: |
-        Generates audio from the input text.
-
-        Returns the audio file content, or a stream of audio events.
+      summary: Create a speech
+      description: Creates a speech from the supplied request.
       parameters: []
       responses:
         '200':
@@ -9460,6 +9472,7 @@ paths:
           headers:
             Transfer-Encoding:
               required: false
+              description: The transfer encoding request header.
               schema:
                 type: string
           content:
@@ -9486,6 +9499,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateSpeechRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create speech
         group: audio
@@ -9737,11 +9751,8 @@ paths:
   /openai/v1/audio/transcriptions:
     post:
       operationId: Audio_createTranscription
-      summary: |
-        Transcribes audio into the input language.
-
-        Returns a transcription object in `json`, `diarized_json`, or `verbose_json`
-        format, or a stream of transcript events.
+      summary: Create a transcription
+      description: Creates a transcription from the supplied request.
       parameters: []
       responses:
         '200':
@@ -9792,6 +9803,7 @@ paths:
                 contentType: application/json
               known_speaker_references:
                 contentType: application/json
+        description: The multipart request body.
       x-oaiMeta:
         name: Create transcription
         group: audio
@@ -10743,7 +10755,8 @@ paths:
   /openai/v1/audio/translations:
     post:
       operationId: Audio_createTranslation
-      summary: Translates audio into English.
+      summary: Create a translation
+      description: Creates a translation from the supplied request.
       parameters: []
       responses:
         '200':
@@ -10779,6 +10792,7 @@ paths:
                 contentType: text/plain
               temperature:
                 contentType: text/plain
+        description: The multipart request body.
       x-oaiMeta:
         name: Create translation
         group: audio
@@ -10911,7 +10925,8 @@ paths:
   /openai/v1/batches:
     get:
       operationId: Batches_listBatches
-      summary: List your organization's batches.
+      summary: List batches
+      description: Lists batches matching the request filters.
       parameters:
         - name: after
           in: query
@@ -11082,7 +11097,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Batches_createBatch
-      summary: Creates and executes a batch from an uploaded file of requests
+      summary: Create a batch
+      description: Creates a batch from the supplied request.
       parameters: []
       responses:
         '200':
@@ -11111,6 +11127,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateBatchParametersBody'
+        description: The request body.
       x-oaiMeta:
         name: Create batch
         group: batch
@@ -11261,7 +11278,8 @@ paths:
   /openai/v1/batches/{batch_id}:
     get:
       operationId: Batches_retrieveBatch
-      summary: Retrieves a batch.
+      summary: Get a batch
+      description: Retrieves a batch by its identifier.
       parameters:
         - name: batch_id
           in: path
@@ -11412,7 +11430,8 @@ paths:
   /openai/v1/batches/{batch_id}/cancel:
     post:
       operationId: Batches_cancelBatch
-      summary: Cancels an in-progress batch. The batch will be in status `cancelling` for up to 10 minutes, before changing to `cancelled`, where it will have partial results (if any) available in the output file.
+      summary: Cancel a batch
+      description: Cancels a batch by its identifier.
       parameters:
         - name: batch_id
           in: path
@@ -11564,9 +11583,8 @@ paths:
   /openai/v1/chat/completions:
     get:
       operationId: Chat_listChatCompletions
-      summary: |
-        List stored Chat Completions. Only Chat Completions that have been stored
-        with the `store` parameter set to `true` will be returned.
+      summary: List chat completions
+      description: Lists chat completions matching the request filters.
       parameters:
         - name: model
           in: query
@@ -11579,7 +11597,7 @@ paths:
           required: false
           description: |-
             A list of metadata keys to filter the Chat Completions by. Example:
-              `metadata[key1]=value1&metadata[key2]=value2`
+              `metadata[key1]=value1&metadata[key2]=value2`The metadata query parameter.
           schema:
             anyOf:
               - $ref: '#/components/schemas/OpenAI.Metadata'
@@ -11756,25 +11774,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Chat_createChatCompletion
-      summary: |
-        **Starting a new project?** We recommend trying [Responses](/docs/api-reference/responses)
-        to take advantage of the latest OpenAI platform features. Compare
-        [Chat Completions with Responses](/docs/guides/responses-vs-chat-completions?api-mode=responses).
-
-        ---
-
-        Creates a model response for the given chat conversation. Learn more in the
-        [text generation](/docs/guides/text-generation), [vision](/docs/guides/vision),
-        and [audio](/docs/guides/audio) guides.
-
-        Parameter support can differ depending on the model used to generate the
-        response, particularly for newer reasoning models. Parameters that are only
-        supported for reasoning models are noted below. For the current state of
-        unsupported parameters in reasoning models,
-        [refer to the reasoning guide](/docs/guides/reasoning).
-
-        Returns a chat completion object, or a streamed sequence of chat completion
-        chunk objects if the request is streamed.
+      summary: Create a chat completion
+      description: Creates a chat completion from the supplied request.
       parameters: []
       responses:
         '200':
@@ -11803,6 +11804,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create chat completion
         group: chat
@@ -12956,9 +12958,8 @@ paths:
   /openai/v1/chat/completions/{completion_id}:
     delete:
       operationId: Chat_deleteChatCompletion
-      summary: |
-        Delete a stored chat completion. Only Chat Completions that have been
-        created with the `store` parameter set to `true` can be deleted.
+      summary: Delete a chat completion
+      description: Deletes a chat completion by its identifier.
       parameters:
         - name: completion_id
           in: path
@@ -13072,9 +13073,8 @@ paths:
             }
     get:
       operationId: Chat_getChatCompletion
-      summary: |
-        Get a stored chat completion. Only Chat Completions that have been created
-        with the `store` parameter set to `true` will be returned.
+      summary: Get a chat completion
+      description: Retrieves a chat completion by its identifier.
       parameters:
         - name: completion_id
           in: path
@@ -13222,10 +13222,8 @@ paths:
             }
     post:
       operationId: Chat_updateChatCompletion
-      summary: |
-        Modify a stored chat completion. Only Chat Completions that have been
-        created with the `store` parameter set to `true` can be modified. Currently,
-        the only supported modification is to update the `metadata` field.
+      summary: Update a chat completion
+      description: Updates a chat completion with the supplied changes.
       parameters:
         - name: completion_id
           in: path
@@ -13260,6 +13258,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.UpdateChatCompletionParametersBody'
+        description: The request body.
       x-oaiMeta:
         name: Update chat completion
         group: chat
@@ -13404,10 +13403,8 @@ paths:
   /openai/v1/chat/completions/{completion_id}/messages:
     get:
       operationId: Chat_getChatCompletionMessages
-      summary: |
-        Get the messages in a stored chat completion. Only Chat Completions that
-        have been created with the `store` parameter set to `true` will be
-        returned.
+      summary: Get chat completion messages
+      description: Retrieves chat completion messages by its identifier.
       parameters:
         - name: completion_id
           in: path
@@ -13563,10 +13560,8 @@ paths:
   /openai/v1/completions:
     post:
       operationId: Completions_createCompletion
-      summary: |
-        Creates a completion for the provided prompt and parameters.
-
-        Returns a completion object, or a sequence of completion objects if the request is streamed.
+      summary: Create a completion
+      description: Creates a completion from the supplied request.
       parameters: []
       responses:
         '200':
@@ -13595,6 +13590,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateCompletionRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create completion
         group: completions
@@ -13861,8 +13857,8 @@ paths:
               }
   /openai/v1/containers:
     get:
-      operationId: Containers_ListContainers
-      summary: List Containers
+      operationId: Containers_listContainers
+      summary: List containers
       description: Lists containers.
       parameters:
         - name: limit
@@ -14015,8 +14011,8 @@ paths:
             }
       x-ms-list: true
     post:
-      operationId: Containers_CreateContainer
-      summary: Create Container
+      operationId: Containers_createContainer
+      summary: Create a container
       description: Creates a container.
       parameters: []
       responses:
@@ -14046,6 +14042,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateContainerBody'
+        description: The request body.
       x-oaiMeta:
         name: Create container
         group: containers
@@ -14168,8 +14165,8 @@ paths:
             }
   /openai/v1/containers/{container_id}:
     delete:
-      operationId: Containers_DeleteContainer
-      summary: Delete Container
+      operationId: Containers_deleteContainer
+      summary: Delete a container
       description: Delete a container.
       parameters:
         - name: container_id
@@ -14272,13 +14269,14 @@ paths:
                 "deleted": true
             }
     get:
-      operationId: Containers_RetrieveContainer
-      summary: Retrieve Container
+      operationId: Containers_retrieveContainer
+      summary: Get a container
       description: Retrieves a container.
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
       responses:
@@ -14395,13 +14393,14 @@ paths:
             }
   /openai/v1/containers/{container_id}/files:
     get:
-      operationId: Containers_ListContainerFiles
-      summary: List Container files
+      operationId: Containers_listContainerFiles
+      summary: List container files
       description: Lists container files.
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
         - name: limit
@@ -14550,21 +14549,16 @@ paths:
             }
       x-ms-list: true
     post:
-      operationId: Containers_CreateContainerFileMultipart_Containers_CreateContainerFileJson
+      operationId: Containers_createContainerFileMultipart_Containers_createContainerFileJson
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
       description: Creates a container file. Creates a container file.
-      summary: |
-        Create a Container File
-
-        You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
-         Create a Container File
-
-        You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
+      summary: Create a container file multipart Create a container file json
       responses:
         '200':
           description: The request has succeeded.
@@ -14688,20 +14682,23 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateContainerFileBody'
+        description: The multipart request body. The request body.
   /openai/v1/containers/{container_id}/files/{file_id}:
     delete:
-      operationId: Containers_DeleteContainerFile
-      summary: Delete Container File
+      operationId: Containers_deleteContainerFile
+      summary: Delete a container file
       description: Delete a container file.
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
+          description: The file id path parameter.
           schema:
             type: string
       responses:
@@ -14807,18 +14804,20 @@ paths:
                 "deleted": true
             }
     get:
-      operationId: Containers_RetrieveContainerFile
-      summary: Retrieve Container File
+      operationId: Containers_retrieveContainerFile
+      summary: Get a container file
       description: Retrieves a container file.
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
+          description: The file id path parameter.
           schema:
             type: string
       responses:
@@ -14940,18 +14939,20 @@ paths:
             }
   /openai/v1/containers/{container_id}/files/{file_id}/content:
     get:
-      operationId: Containers_RetrieveContainerFileContent
-      summary: Retrieve Container File Content
+      operationId: Containers_retrieveContainerFileContent
+      summary: Get a container file content
       description: Retrieves a container file content.
       parameters:
         - name: container_id
           in: path
           required: true
+          description: The container id path parameter.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
+          description: The file id path parameter.
           schema:
             type: string
       responses:
@@ -16639,7 +16640,8 @@ paths:
   /openai/v1/embeddings:
     post:
       operationId: Embeddings_createEmbedding
-      summary: Creates an embedding vector representing the input text.
+      summary: Create an embedding
+      description: Creates an embedding from the supplied request.
       parameters: []
       responses:
         '200':
@@ -16668,6 +16670,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateEmbeddingRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create embeddings
         group: embeddings
@@ -18851,6 +18854,7 @@ paths:
         - name: eval_id
           in: path
           required: true
+          description: The eval id path parameter.
           schema:
             type: string
         - name: run_id
@@ -19339,7 +19343,8 @@ paths:
   /openai/v1/files:
     get:
       operationId: Files_listFiles
-      summary: Returns a list of files.
+      summary: List files
+      description: Lists files matching the request filters.
       parameters:
         - name: purpose
           in: query
@@ -19510,32 +19515,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Files_createFile
-      summary: |
-        Upload a file that can be used across various endpoints. Individual files
-        can be up to 512 MB, and each project can store up to 2.5 TB of files in
-        total. There is no organization-wide storage limit. Uploads to this
-        endpoint are rate-limited to 1,000 requests per minute per authenticated
-        user.
-
-        - The Assistants API supports files up to 2 million tokens and of specific
-          file types. See the [Assistants Tools guide](/docs/assistants/tools) for
-          details.
-        - The Fine-tuning API only supports `.jsonl` files. The input also has
-          certain required formats for fine-tuning
-          [chat](/docs/api-reference/fine-tuning/chat-input) or
-          [completions](/docs/api-reference/fine-tuning/completions-input) models.
-        - The Batch API only supports `.jsonl` files up to 200 MB in size. The input
-          also has a specific required
-          [format](/docs/api-reference/batch/request-input).
-        - For Retrieval or `file_search` ingestion, upload files here first. If
-          you need to attach multiple uploaded files to the same vector store, use
-          [`/vector_stores/{vector_store_id}/file_batches`](/docs/api-reference/vector-stores-file-batches/createBatch)
-          instead of attaching them one by one. Vector store attachment has separate
-          limits from file upload, including 2,000 attached files per minute per
-          organization.
-
-        Please [contact us](https://help.openai.com/) if you need to increase these
-        storage limits.
+      summary: Create a file
+      description: Creates a file from the supplied request.
       parameters: []
       responses:
         '200':
@@ -19569,6 +19550,7 @@ paths:
                 contentType: application/json
               expires_after:
                 contentType: application/json
+        description: The multipart request body.
       x-oaiMeta:
         name: Upload file
         group: files
@@ -19700,7 +19682,8 @@ paths:
   /openai/v1/files/{file_id}:
     delete:
       operationId: Files_deleteFile
-      summary: Delete a file and remove it from all vector stores.
+      summary: Delete a file
+      description: Deletes a file by its identifier.
       parameters:
         - name: file_id
           in: path
@@ -19826,7 +19809,8 @@ paths:
             }
     get:
       operationId: Files_retrieveFile
-      summary: Returns information about a specific file.
+      summary: Get a file
+      description: Retrieves a file by its identifier.
       parameters:
         - name: file_id
           in: path
@@ -19956,7 +19940,8 @@ paths:
   /openai/v1/files/{file_id}/content:
     get:
       operationId: Files_downloadFile
-      summary: Returns the contents of the specified file.
+      summary: Download a file
+      description: Downloads a file.
       parameters:
         - name: file_id
           in: path
@@ -20082,8 +20067,8 @@ paths:
   /openai/v1/fine_tuning/alpha/graders/run:
     post:
       operationId: Graders_runGrader
-      summary: |
-        Run a grader.
+      summary: Run a grader
+      description: Runs a grader.
       parameters: []
       responses:
         '200':
@@ -20112,6 +20097,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.RunGraderRequest'
+        description: The request body.
       x-oaiMeta:
         name: Run grader
         beta: true
@@ -20631,8 +20617,8 @@ paths:
   /openai/v1/fine_tuning/alpha/graders/validate:
     post:
       operationId: Graders_validateGrader
-      summary: |
-        Validate a grader.
+      summary: Validate a grader
+      description: Validates a grader.
       parameters: []
       responses:
         '200':
@@ -20661,6 +20647,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ValidateGraderRequest'
+        description: The request body.
       x-oaiMeta:
         name: Validate grader
         beta: true
@@ -20795,10 +20782,8 @@ paths:
   /openai/v1/fine_tuning/checkpoints/{fine_tuned_model_checkpoint}/permissions:
     get:
       operationId: FineTuning_listFineTuningCheckpointPermissions
-      summary: |
-        **NOTE:** This endpoint requires an [admin API key](../admin-api-keys).
-
-        Organization owners can use this endpoint to view all permissions for a fine-tuned model checkpoint.
+      summary: List fine tuning checkpoint permissions
+      description: Lists fine tuning checkpoint permissions matching the request filters.
       parameters:
         - name: fine_tuned_model_checkpoint
           in: path
@@ -20964,10 +20949,8 @@ paths:
       x-ms-list: true
     post:
       operationId: FineTuning_createFineTuningCheckpointPermission
-      summary: |
-        **NOTE:** Calling this endpoint requires an [admin API key](../admin-api-keys).
-
-        This enables organization owners to share fine-tuned models with other projects in their organization.
+      summary: Create a fine tuning checkpoint permission
+      description: Creates a fine tuning checkpoint permission from the supplied request.
       parameters:
         - name: fine_tuned_model_checkpoint
           in: path
@@ -21002,6 +20985,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateFineTuningCheckpointPermissionRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create checkpoint permissions
         group: fine-tuning
@@ -21116,10 +21100,8 @@ paths:
   /openai/v1/fine_tuning/checkpoints/{fine_tuned_model_checkpoint}/permissions/{permission_id}:
     delete:
       operationId: FineTuning_deleteFineTuningCheckpointPermission
-      summary: |
-        **NOTE:** This endpoint requires an [admin API key](../admin-api-keys).
-
-        Organization owners can use this endpoint to delete a permission for a fine-tuned model checkpoint.
+      summary: Delete a fine tuning checkpoint permission
+      description: Deletes a fine tuning checkpoint permission by its identifier.
       parameters:
         - name: fine_tuned_model_checkpoint
           in: path
@@ -21254,8 +21236,8 @@ paths:
   /openai/v1/fine_tuning/jobs:
     get:
       operationId: FineTuning_listPaginatedFineTuningJobs
-      summary: |
-        List your organization's fine-tuning jobs
+      summary: List paginated fine tuning jobs
+      description: Lists paginated fine tuning jobs matching the request filters.
       parameters:
         - name: after
           in: query
@@ -21419,12 +21401,8 @@ paths:
       x-ms-list: true
     post:
       operationId: FineTuning_createFineTuningJob
-      summary: |
-        Creates a fine-tuning job which begins the process of creating a new model from a given dataset.
-
-        Response includes details of the enqueued job including job status and the name of the fine-tuned models once complete.
-
-        [Learn more about fine-tuning](/docs/guides/model-optimization)
+      summary: Create a fine tuning job
+      description: Creates a fine tuning job from the supplied request.
       parameters: []
       responses:
         '200':
@@ -21453,6 +21431,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create fine-tuning job
         group: fine-tuning
@@ -22302,10 +22281,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}:
     get:
       operationId: FineTuning_retrieveFineTuningJob
-      summary: |
-        Get info about a fine-tuning job.
-
-        [Learn more about fine-tuning](/docs/guides/model-optimization)
+      summary: Get a fine tuning job
+      description: Retrieves a fine tuning job by its identifier.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -22460,8 +22437,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/cancel:
     post:
       operationId: FineTuning_cancelFineTuningJob
-      summary: |
-        Immediately cancel a fine-tune job.
+      summary: Cancel a fine tuning job
+      description: Cancels a fine tuning job by its identifier.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -22593,8 +22570,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints:
     get:
       operationId: FineTuning_listFineTuningJobCheckpoints
-      summary: |
-        List checkpoints for a fine-tuning job.
+      summary: List fine tuning job checkpoints
+      description: Lists fine tuning job checkpoints matching the request filters.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -22759,8 +22736,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/events:
     get:
       operationId: FineTuning_listFineTuningEvents
-      summary: |
-        Get status updates for a fine-tuning job.
+      summary: List fine tuning events
+      description: Lists fine tuning events matching the request filters.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -22931,8 +22908,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/pause:
     post:
       operationId: FineTuning_pauseFineTuningJob
-      summary: |
-        Pause a fine-tune job.
+      summary: Pause a fine tuning job
+      description: Pauses a fine tuning job.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -23064,8 +23041,8 @@ paths:
   /openai/v1/fine_tuning/jobs/{fine_tuning_job_id}/resume:
     post:
       operationId: FineTuning_resumeFineTuningJob
-      summary: |
-        Resume a fine-tune job.
+      summary: Resume a fine tuning job
+      description: Resumes a fine tuning job.
       parameters:
         - name: fine_tuning_job_id
           in: path
@@ -23206,7 +23183,7 @@ paths:
           - `multipart/form-data`: use binary uploads via `image` (and optional `mask`).
           - `application/json`: use `images` (and optional `mask`) as references with either `image_url` or `file_id`.
           Note that JSON requests use `images` (array) instead of the multipart `image` field.
-      summary: Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`. Creates an edited or extended image given one or more source images and a prompt. This endpoint supports GPT Image models (`gpt-image-1.5`, `gpt-image-1`, `gpt-image-1-mini`, and `chatgpt-image-latest`) and `dall-e-2`.
+      summary: Create an image edit multipart Create an image edit json
       responses:
         '200':
           description: The request has succeeded.
@@ -23531,11 +23508,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.EditImageBodyJsonParam'
+        description: The multipart request body. The request body.
   /openai/v1/images/generations:
     post:
       operationId: Images_createImage
-      summary: |
-        Creates an image given a prompt. [Learn more](/docs/guides/images).
+      summary: Create an image
+      description: Creates an image from the supplied request.
       parameters: []
       responses:
         '200':
@@ -23564,6 +23542,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateImageRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create image
         group: images
@@ -23798,7 +23777,8 @@ paths:
   /openai/v1/images/variations:
     post:
       operationId: Images_createImageVariation
-      summary: Creates a variation of a given image. This endpoint only supports `dall-e-2`.
+      summary: Create an image variation
+      description: Creates an image variation from the supplied request.
       parameters: []
       responses:
         '200':
@@ -23836,6 +23816,7 @@ paths:
                 contentType: application/json
               size:
                 contentType: application/json
+        description: The multipart request body.
       x-oaiMeta:
         name: Create image variation
         group: images
@@ -23968,7 +23949,8 @@ paths:
   /openai/v1/models:
     get:
       operationId: OpenAIModels_listModels
-      summary: Lists the currently available models, and provides basic information about each one such as the owner and availability.
+      summary: Delete a model
+      description: Lists models matching the request filters.
       parameters: []
       responses:
         '200':
@@ -24121,7 +24103,6 @@ paths:
   /openai/v1/models/{model}:
     delete:
       operationId: OpenAIModels_deleteModel
-      summary: Delete a fine-tuned model. You must have the Owner role in your organization to delete a model.
       parameters:
         - name: model
           in: path
@@ -24258,7 +24239,8 @@ paths:
             }
     get:
       operationId: OpenAIModels_retrieveModel
-      summary: Retrieves a model instance, providing basic information about the model such as the owner and permissioning.
+      summary: Get a model
+      description: Retrieves a model by its identifier.
       parameters:
         - name: model
           in: path
@@ -24397,9 +24379,8 @@ paths:
   /openai/v1/moderations:
     post:
       operationId: Moderations_createModeration
-      summary: |
-        Classifies if text and/or image inputs are potentially harmful. Learn
-        more in the [moderation guide](/docs/guides/moderation).
+      summary: Create a moderation
+      description: Creates a moderation from the supplied request.
       parameters: []
       responses:
         '200':
@@ -24428,6 +24409,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateModerationRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create moderation
         group: moderations
@@ -24789,6 +24771,7 @@ paths:
           headers:
             location:
               required: false
+              description: The location request header.
               schema:
                 type: string
           content:
@@ -24818,6 +24801,7 @@ paths:
             encoding:
               session:
                 contentType: application/json
+        description: The multipart request body.
       x-oaiMeta:
         name: Create call
         group: realtime
@@ -24879,7 +24863,7 @@ paths:
           description: |-
             The identifier for the call provided in the
               [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
-              webhook.
+              webhook.The call id path parameter.
           schema:
             type: string
       responses:
@@ -25013,7 +24997,7 @@ paths:
               [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
               webhook. For WebRTC sessions, reuse the call ID returned in the `Location`
               header when creating the call with
-              [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).
+              [`POST /v1/realtime/calls`](/docs/api-reference/realtime/create-call).The call id path parameter.
           schema:
             type: string
       responses:
@@ -25115,7 +25099,7 @@ paths:
           description: |-
             The identifier for the call provided in the
               [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
-              webhook.
+              webhook.The call id path parameter.
           schema:
             type: string
       responses:
@@ -25238,7 +25222,7 @@ paths:
           description: |-
             The identifier for the call provided in the
               [`realtime.call.incoming`](/docs/api-reference/webhook-events/realtime/call/incoming)
-              webhook.
+              webhook.The call id path parameter.
           schema:
             type: string
       responses:
@@ -25266,7 +25250,7 @@ paths:
               $ref: '#/components/schemas/OpenAI.RealtimeCallRejectRequest'
         description: |-
           Provide an optional SIP status code. When omitted the API responds with
-            `603 Decline`.
+            `603 Decline`.The request body.
       x-oaiMeta:
         name: Reject call
         group: realtime-calls
@@ -28083,11 +28067,13 @@ paths:
         - name: response_id
           in: path
           required: true
+          description: The response id path parameter.
           schema:
             type: string
         - name: include[]
           in: query
           required: false
+          description: The includables query parameter.
           schema:
             type: array
             items:
@@ -28096,6 +28082,7 @@ paths:
         - name: stream
           in: query
           required: false
+          description: The stream query parameter.
           schema:
             type: boolean
             default: false
@@ -28103,6 +28090,7 @@ paths:
         - name: starting_after
           in: query
           required: false
+          description: The sequence number of the event after which to start streaming.
           schema:
             type: integer
             format: int32
@@ -28605,6 +28593,7 @@ paths:
         - name: response_id
           in: path
           required: true
+          description: The response id path parameter.
           schema:
             type: string
         - name: limit
@@ -28813,7 +28802,8 @@ paths:
   /openai/v1/threads:
     post:
       operationId: Threads_createThread
-      summary: Create a thread.
+      summary: Create a thread
+      description: Creates a thread from the supplied request.
       parameters: []
       responses:
         '200':
@@ -28843,6 +28833,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateThreadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create thread
         group: threads
@@ -29058,7 +29049,8 @@ paths:
   /openai/v1/threads/runs:
     post:
       operationId: Threads_createThreadAndRun
-      summary: Create a thread and run it in one request.
+      summary: Create a thread and run
+      description: Creates a thread and run from the supplied request.
       parameters: []
       responses:
         '200':
@@ -29088,6 +29080,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateThreadAndRunRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create thread and run
         group: threads
@@ -29592,7 +29585,8 @@ paths:
   /openai/v1/threads/{thread_id}:
     delete:
       operationId: Threads_deleteThread
-      summary: Delete a thread.
+      summary: Delete a thread
+      description: Deletes a thread by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -29721,7 +29715,8 @@ paths:
             }
     get:
       operationId: Threads_getThread
-      summary: Retrieves a thread.
+      summary: Get a thread
+      description: Retrieves a thread by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -29858,7 +29853,8 @@ paths:
             }
     post:
       operationId: Threads_modifyThread
-      summary: Modifies a thread.
+      summary: Update a thread
+      description: Updates a thread with the supplied changes.
       parameters:
         - name: thread_id
           in: path
@@ -29894,6 +29890,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ModifyThreadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Modify thread
         group: threads
@@ -30014,7 +30011,8 @@ paths:
   /openai/v1/threads/{thread_id}/messages:
     get:
       operationId: Threads_listMessages
-      summary: Returns a list of messages for a given thread.
+      summary: List messages
+      description: Lists messages matching the request filters.
       parameters:
         - name: thread_id
           in: path
@@ -30229,7 +30227,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Threads_createMessage
-      summary: Create a message.
+      summary: Create a message
+      description: Creates a message from the supplied request.
       parameters:
         - name: thread_id
           in: path
@@ -30265,6 +30264,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateMessageRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create message
         group: threads
@@ -30406,7 +30406,8 @@ paths:
   /openai/v1/threads/{thread_id}/messages/{message_id}:
     delete:
       operationId: Threads_deleteMessage
-      summary: Deletes a message.
+      summary: Delete a message
+      description: Deletes a message by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -30553,7 +30554,8 @@ paths:
             }
     get:
       operationId: Threads_getMessage
-      summary: Retrieve a message.
+      summary: Get a message
+      description: Retrieves a message by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -30717,7 +30719,8 @@ paths:
             }
     post:
       operationId: Threads_modifyMessage
-      summary: Modifies a message.
+      summary: Update a message
+      description: Updates a message with the supplied changes.
       parameters:
         - name: thread_id
           in: path
@@ -30759,6 +30762,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ModifyMessageRequest'
+        description: The request body.
       x-oaiMeta:
         name: Modify message
         group: threads
@@ -30897,7 +30901,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs:
     get:
       operationId: Threads_listRuns
-      summary: Returns a list of runs belonging to a thread.
+      summary: List runs
+      description: Lists runs matching the request filters.
       parameters:
         - name: thread_id
           in: path
@@ -31160,7 +31165,8 @@ paths:
       x-ms-list: true
     post:
       operationId: Threads_createRun
-      summary: Create a run.
+      summary: Create a run
+      description: Creates a run from the supplied request.
       parameters:
         - name: thread_id
           in: path
@@ -31173,7 +31179,7 @@ paths:
           required: false
           description: |-
             A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.
           schema:
             type: array
             items:
@@ -31208,6 +31214,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateRunRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create run
         group: threads
@@ -31706,7 +31713,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs/{run_id}:
     get:
       operationId: Threads_getRun
-      summary: Retrieves a run.
+      summary: Get a run
+      description: Retrieves a run by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -31886,7 +31894,8 @@ paths:
             }
     post:
       operationId: Threads_modifyRun
-      summary: Modifies a run.
+      summary: Update a run
+      description: Updates a run with the supplied changes.
       parameters:
         - name: thread_id
           in: path
@@ -31928,6 +31937,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ModifyRunRequest'
+        description: The request body.
       x-oaiMeta:
         name: Modify run
         group: threads
@@ -32095,7 +32105,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs/{run_id}/cancel:
     post:
       operationId: Threads_cancelRun
-      summary: Cancels a run that is `in_progress`.
+      summary: Cancel a run
+      description: Cancels a run by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -32271,7 +32282,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs/{run_id}/steps:
     get:
       operationId: Threads_listRunSteps
-      summary: Returns a list of run steps belonging to a run.
+      summary: List run steps
+      description: Lists run steps matching the request filters.
       parameters:
         - name: thread_id
           in: path
@@ -32318,7 +32330,7 @@ paths:
           required: false
           description: |-
             A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.
           schema:
             type: array
             items:
@@ -32492,7 +32504,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs/{run_id}/steps/{step_id}:
     get:
       operationId: Threads_getRunStep
-      summary: Retrieves a run step.
+      summary: Get a run step
+      description: Retrieves a run step by its identifier.
       parameters:
         - name: thread_id
           in: path
@@ -32517,7 +32530,7 @@ paths:
           required: false
           description: |-
             A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.
+              See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.The parameter query parameter.
           schema:
             type: array
             items:
@@ -32684,8 +32697,8 @@ paths:
   /openai/v1/threads/{thread_id}/runs/{run_id}/submit_tool_outputs:
     post:
       operationId: Threads_submitToolOuputsToRun
-      summary: |
-        When a run has the `status: "requires_action"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.
+      summary: Create a tool ouputs to run
+      description: Creates a tool ouputs to run from the supplied request.
       parameters:
         - name: thread_id
           in: path
@@ -32727,6 +32740,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.SubmitToolOutputsRunRequest'
+        description: The request body.
       x-oaiMeta:
         name: Submit tool outputs to run
         group: threads
@@ -33087,26 +33101,8 @@ paths:
   /openai/v1/uploads:
     post:
       operationId: Uploads_createUpload
-      summary: |
-        Creates an intermediate [Upload](/docs/api-reference/uploads/object) object
-        that you can add [Parts](/docs/api-reference/uploads/part-object) to.
-        Currently, an Upload can accept at most 8 GB in total and expires after an
-        hour after you create it.
-
-        Once you complete the Upload, we will create a
-        [File](/docs/api-reference/files/object) object that contains all the parts
-        you uploaded. This File is usable in the rest of our platform as a regular
-        File object.
-
-        For certain `purpose` values, the correct `mime_type` must be specified.
-        Please refer to documentation for the
-        [supported MIME types for your use case](/docs/assistants/tools/file-search#supported-files).
-
-        For guidance on the proper filename extensions for each purpose, please
-        follow the documentation on [creating a
-        File](/docs/api-reference/files/create).
-
-        Returns the Upload object with status `pending`.
+      summary: Create an upload
+      description: Creates an upload from the supplied request.
       parameters: []
       responses:
         '200':
@@ -33135,6 +33131,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateUploadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create upload
         group: uploads
@@ -33255,10 +33252,8 @@ paths:
   /openai/v1/uploads/{upload_id}/cancel:
     post:
       operationId: Uploads_cancelUpload
-      summary: |
-        Cancels the Upload. No Parts may be added after an Upload is cancelled.
-
-        Returns the Upload object with status `cancelled`.
+      summary: Cancel an upload
+      description: Cancels an upload by its identifier.
       parameters:
         - name: upload_id
           in: path
@@ -33376,15 +33371,8 @@ paths:
   /openai/v1/uploads/{upload_id}/complete:
     post:
       operationId: Uploads_completeUpload
-      summary: |
-        Completes the [Upload](/docs/api-reference/uploads/object).
-
-        Within the returned Upload object, there is a nested [File](/docs/api-reference/files/object) object that is ready to use in the rest of the platform.
-
-        You can specify the order of the Parts by passing in an ordered list of the Part IDs.
-
-        The number of bytes uploaded upon completion must match the number of bytes initially specified when creating the Upload object. No Parts may be added after an Upload is completed.
-        Returns the Upload object with status `completed`, including an additional `file` property containing the created usable File object.
+      summary: Create an upload
+      description: Creates an upload from the supplied request.
       parameters:
         - name: upload_id
           in: path
@@ -33419,6 +33407,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CompleteUploadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Complete upload
         group: uploads
@@ -33531,12 +33520,8 @@ paths:
   /openai/v1/uploads/{upload_id}/parts:
     post:
       operationId: Uploads_addUploadPart
-      summary: |
-        Adds a [Part](/docs/api-reference/uploads/part-object) to an [Upload](/docs/api-reference/uploads/object) object. A Part represents a chunk of bytes from the file you are trying to upload.
-
-        Each Part can be at most 64 MB, and you can add Parts until you hit the Upload maximum of 8 GB.
-
-        It is possible to add multiple Parts in parallel. You can decide the intended order of the Parts when you [complete the Upload](/docs/api-reference/uploads/complete).
+      summary: Add an upload part
+      description: Adds an upload part to the upload.
       parameters:
         - name: upload_id
           in: path
@@ -33571,6 +33556,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/OpenAI.AddUploadPartRequest'
+        description: The multipart request body.
       x-oaiMeta:
         name: Add upload part
         group: uploads
@@ -33674,7 +33660,8 @@ paths:
   /openai/v1/vector_stores:
     get:
       operationId: VectorStores_listVectorStores
-      summary: Returns a list of vector stores.
+      summary: List vector stores
+      description: Lists vector stores matching the request filters.
       parameters:
         - name: limit
           in: query
@@ -33855,7 +33842,8 @@ paths:
       x-ms-list: true
     post:
       operationId: VectorStores_createVectorStore
-      summary: Create a vector store.
+      summary: Create a vector store
+      description: Creates a vector store from the supplied request.
       parameters: []
       responses:
         '200':
@@ -33884,6 +33872,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVectorStoreRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create vector store
         group: vector_stores
@@ -33994,7 +33983,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}:
     delete:
       operationId: VectorStores_deleteVectorStore
-      summary: Delete a vector store.
+      summary: Delete a vector store
+      description: Deletes a vector store by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -34122,7 +34112,8 @@ paths:
             }
     get:
       operationId: VectorStores_getVectorStore
-      summary: Retrieves a vector store.
+      summary: Get a vector store
+      description: Retrieves a vector store by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -34249,7 +34240,8 @@ paths:
             }
     post:
       operationId: VectorStores_modifyVectorStore
-      summary: Modifies a vector store.
+      summary: Update a vector store
+      description: Updates a vector store with the supplied changes.
       parameters:
         - name: vector_store_id
           in: path
@@ -34284,6 +34276,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.UpdateVectorStoreRequest'
+        description: The request body.
       x-oaiMeta:
         name: Modify vector store
         group: vector_stores
@@ -34403,7 +34396,7 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/file_batches:
     post:
       operationId: VectorStores_createVectorStoreFileBatch
-      summary: Create a vector store file batch.
+      summary: Create a vector store file batch
       description: |-
         The maximum number of files in a single batch request is 2000.
           Vector store file attach requests are rate limited per vector store (300 requests per minute across both this endpoint and `/vector_stores/{vector_store_id}/files`).
@@ -34442,6 +34435,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVectorStoreFileBatchRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create vector store file batch
         group: vector_stores
@@ -34588,7 +34582,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}:
     get:
       operationId: VectorStores_getVectorStoreFileBatch
-      summary: Retrieves a vector store file batch.
+      summary: Get a vector store file batch
+      description: Retrieves a vector store file batch by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -34743,7 +34738,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel:
     post:
       operationId: VectorStores_cancelVectorStoreFileBatch
-      summary: Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.
+      summary: Cancel a vector store file batch
+      description: Cancels a vector store file batch by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -34899,7 +34895,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/file_batches/{batch_id}/files:
     get:
       operationId: VectorStores_listFilesInVectorStoreBatch
-      summary: Returns a list of vector store files in a batch.
+      summary: List files in vector store batch
+      description: Lists files in vector store batch matching the request filters.
       parameters:
         - name: vector_store_id
           in: path
@@ -35098,7 +35095,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/files:
     get:
       operationId: VectorStores_listVectorStoreFiles
-      summary: Returns a list of vector store files.
+      summary: List vector store files
+      description: Lists vector store files matching the request filters.
       parameters:
         - name: vector_store_id
           in: path
@@ -35281,7 +35279,7 @@ paths:
       x-ms-list: true
     post:
       operationId: VectorStores_createVectorStoreFile
-      summary: Create a vector store file by attaching a [File](/docs/api-reference/files) to a [vector store](/docs/api-reference/vector-stores/object).
+      summary: Create a vector store file
       description: |-
         This endpoint is subject to a per-vector-store write rate limit of 300 requests per minute, shared with `/vector_stores/{vector_store_id}/file_batches`.
           For uploading multiple files to the same vector store, use the file batches endpoint to reduce request volume.
@@ -35319,6 +35317,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVectorStoreFileRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create vector store file
         group: vector_stores
@@ -35441,7 +35440,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/files/{file_id}:
     delete:
       operationId: VectorStores_deleteVectorStoreFile
-      summary: Delete a vector store file. This will remove the file from the vector store but the file itself will not be deleted. To delete the file, use the [delete file](/docs/api-reference/files/delete) endpoint.
+      summary: Delete a vector store file
+      description: Deletes a vector store file by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -35587,7 +35587,8 @@ paths:
             }
     get:
       operationId: VectorStores_getVectorStoreFile
-      summary: Retrieves a vector store file.
+      summary: Get a vector store file
+      description: Retrieves a vector store file by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -35735,7 +35736,8 @@ paths:
             }
     post:
       operationId: VectorStores_updateVectorStoreFileAttributes
-      summary: Update attributes on a vector store file.
+      summary: Update vector store file attributes
+      description: Updates vector store file attributes with the supplied changes.
       parameters:
         - name: vector_store_id
           in: path
@@ -35776,6 +35778,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.UpdateVectorStoreFileAttributesRequest'
+        description: The request body.
       x-oaiMeta:
         name: Update vector store file attributes
         group: vector_stores
@@ -35899,7 +35902,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/files/{file_id}/content:
     get:
       operationId: VectorStores_retrieveVectorStoreFileContent
-      summary: Retrieve the parsed contents of a vector store file.
+      summary: Get a vector store file content
+      description: Retrieves a vector store file content by its identifier.
       parameters:
         - name: vector_store_id
           in: path
@@ -36037,7 +36041,8 @@ paths:
   /openai/v1/vector_stores/{vector_store_id}/search:
     post:
       operationId: VectorStores_searchVectorStore
-      summary: Search a vector store for relevant chunks based on a query and file attributes filter.
+      summary: Search a vector store
+      description: Searchs a vector store.
       parameters:
         - name: vector_store_id
           in: path
@@ -36072,6 +36077,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.VectorStoreSearchRequest'
+        description: The request body.
       x-oaiMeta:
         name: Search vector store
         group: vector_stores
@@ -36209,8 +36215,9 @@ paths:
             }
   /openai/v1/videos:
     get:
-      operationId: VideoGeneration_ListVideos
-      summary: List recently generated videos for the current project.
+      operationId: VideoGeneration_listVideos
+      summary: List videos
+      description: Lists videos matching the request filters.
       parameters:
         - name: limit
           in: query
@@ -36356,7 +36363,8 @@ paths:
       x-ms-list: true
     post:
       operationId: VideoGeneration_createVideo
-      summary: Create a new video generation job from a prompt and optional reference assets.
+      summary: Create a video
+      description: Creates a video from the supplied request.
       parameters: []
       responses:
         '200':
@@ -36394,6 +36402,7 @@ paths:
                 contentType: application/json
               size:
                 contentType: application/json
+        description: The multipart request body.
       x-oaiMeta:
         name: Create video
         group: videos
@@ -36500,8 +36509,9 @@ paths:
             }
   /openai/v1/videos/characters:
     post:
-      operationId: VideoGeneration_CreateVideoCharacter
-      summary: Create a character from an uploaded video.
+      operationId: VideoGeneration_createVideoCharacter
+      summary: Create a video character
+      description: Creates a video character from the supplied request.
       parameters: []
       responses:
         '200':
@@ -36530,6 +36540,7 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVideoCharacterBody'
+        description: The multipart request body.
       x-oaiMeta:
         examples:
           response: ''
@@ -36619,8 +36630,9 @@ paths:
               puts(response)
   /openai/v1/videos/characters/{character_id}:
     get:
-      operationId: VideoGeneration_GetVideoCharacter
-      summary: Fetch a character.
+      operationId: VideoGeneration_getVideoCharacter
+      summary: Get a video character
+      description: Retrieves a video character by its identifier.
       parameters:
         - name: character_id
           in: path
@@ -36723,9 +36735,10 @@ paths:
               puts(response)
   /openai/v1/videos/edits:
     post:
-      operationId: VideoGeneration_CreateVideoEditMultipart_VideoGeneration_CreateVideoEditJson
+      operationId: VideoGeneration_createVideoEditMultipart_VideoGeneration_createVideoEditJson
       parameters: []
-      summary: Create a new video generation job by editing a source video or existing generated video. Create a new video generation job by editing a source video or existing generated video.
+      description: Creates a video edit multipart from the supplied request. Creates a video edit json from the supplied request.
+      summary: Create a video edit multipart Create a video edit json
       responses:
         '200':
           description: The request has succeeded.
@@ -36845,11 +36858,13 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVideoEditJsonBody'
+        description: The multipart request body. The request body.
   /openai/v1/videos/extensions:
     post:
-      operationId: VideoGeneration_CreateVideoExtendMultipart_VideoGeneration_CreateVideoExtendJson
+      operationId: VideoGeneration_createVideoExtendMultipart_VideoGeneration_createVideoExtendJson
       parameters: []
-      summary: Create an extension of a completed video. Create an extension of a completed video.
+      description: Creates a video extend multipart from the supplied request. Creates a video extend json from the supplied request.
+      summary: Create a video extend multipart Create a video extend json
       responses:
         '200':
           description: The request has succeeded.
@@ -36979,10 +36994,12 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVideoExtendJsonBody'
+        description: The multipart request body. The request body.
   /openai/v1/videos/{video_id}:
     delete:
-      operationId: VideoGeneration_DeleteVideo
-      summary: Permanently delete a completed or failed video and its stored assets.
+      operationId: VideoGeneration_deleteVideo
+      summary: Delete a video
+      description: Deletes a video by its identifier.
       parameters:
         - name: video_id
           in: path
@@ -37095,8 +37112,9 @@ paths:
 
               console.log(video.id);
     get:
-      operationId: VideoGeneration_GetVideo
-      summary: Fetch the latest metadata for a generated video.
+      operationId: VideoGeneration_getVideo
+      summary: Get a video
+      description: Retrieves a video by its identifier.
       parameters:
         - name: video_id
           in: path
@@ -37210,11 +37228,9 @@ paths:
               console.log(video.id);
   /openai/v1/videos/{video_id}/content:
     get:
-      operationId: VideoGeneration_RetrieveVideoContent
-      summary: |-
-        Download the generated video bytes or a derived preview asset.
-
-        Streams the rendered video content for the specified video job.
+      operationId: VideoGeneration_retrieveVideoContent
+      summary: Get a video content
+      description: Retrieves a video content by its identifier.
       parameters:
         - name: video_id
           in: path
@@ -37346,8 +37362,9 @@ paths:
               console.log(content);
   /openai/v1/videos/{video_id}/remix:
     post:
-      operationId: VideoGeneration_CreateVideoRemix
-      summary: Create a remix of a completed video using a refreshed prompt.
+      operationId: VideoGeneration_createVideoRemix
+      summary: Create a video remix
+      description: Creates a video remix from the supplied request.
       parameters:
         - name: video_id
           in: path
@@ -37385,6 +37402,7 @@ paths:
             encoding:
               prompt:
                 contentType: text/plain
+        description: The multipart request body.
       x-oaiMeta:
         name: Remix video
         group: videos
@@ -38814,6 +38832,7 @@ paths:
                 contentType: '*/*'
               default:
                 contentType: text/plain
+        description: The multipart request content.
     get:
       operationId: listSkillVersions
       summary: List skill versions
