@@ -25,6 +25,7 @@ import {
   prepareSpecGenSdkCommand,
   resolvePackagePath,
   selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
 } from "./command-helpers.ts";
 import { checkEmitterEnabled, type EmitterCheckResult } from "./emitter-check.ts";
@@ -254,6 +255,13 @@ export async function generateSdkForSingleSpec(): Promise<CommandResult> {
     packageName,
     installationInstructions,
   );
+
+  // Flag the generated SDK pull request for automated build-failure repair when the
+  // build failed (generation succeeded with a warning). This only runs in the PR-creation
+  // flow, never in plain spec-PR CI validation.
+  if (executionReport) {
+    setBuildFailedLabelVariable(commandInput, executionReport);
+  }
 
   logMessage("ending group logging", LogLevel.EndGroup);
   if (executionReport?.vsoLogPath) {
