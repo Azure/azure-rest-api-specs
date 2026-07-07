@@ -15,5 +15,4 @@ using OpenAI;
 namespace Azure.AI.Projects;
 @route("openai/v1/evals")
 @tag("Evals")
-interface EvalsGenerated {
-}
+interface EvalsGenerated {}

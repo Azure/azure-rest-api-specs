@@ -13,45 +13,46 @@ namespace Azure.AI.Projects;
 @route("openai/v1/audio")
 @tag("Audio")
 interface Audio {
+  /**
+   * Creates a speech from the supplied request.
+   */
+  @summary("Create a speech")
   @route("speech")
   @post
-  @summary("""
-    Generates audio from the input text.
-    
-    Returns the audio file content, or a stream of audio events.
-    
-    """)
   createSpeech is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateSpeechRequest;
     },
     {
+      /** The transfer encoding request header. */
       @header("Transfer-Encoding")
       TransferEncoding?: string;
 
+      /** The content type of the request body. */
       @header
       contentType: "application/octet-stream";
 
+      /** The request body. */
       @body
       body: bytes;
     }
   >;
 
+  /**
+   * Creates a transcription from the supplied request.
+   */
+  @summary("Create a transcription")
   @route("transcriptions")
   @post
-  @summary("""
-    Transcribes audio into the input language.
-    
-    Returns a transcription object in `json`, `diarized_json`, or `verbose_json`
-    format, or a stream of transcript events.
-    
-    """)
   createTranscription is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateTranscriptionRequest;
     },
@@ -61,14 +62,19 @@ interface Audio {
       | OpenAI.CreateTranscriptionResponseVerboseJson>
   >;
 
+  /**
+   * Creates a translation from the supplied request.
+   */
+  @summary("Create a translation")
   @route("translations")
   @post
-  @summary("Translates audio into English.")
   createTranslation is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateTranslationRequest;
     },

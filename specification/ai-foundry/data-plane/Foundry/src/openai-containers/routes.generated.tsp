@@ -17,10 +17,10 @@ namespace Azure.AI.Projects;
 @tag("Containers")
 interface Containers {
   /** Lists containers. */
+  @summary("List containers")
   @list
   @get
-  @summary("List Containers")
-  ListContainers is OpenAIOperation<
+  listContainers is OpenAIOperation<
     {
       /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
       @query(#{ explode: true })
@@ -44,10 +44,11 @@ interface Containers {
   >;
 
   /** Creates a container. */
+  @summary("Create a container")
   @post
-  @summary("Create Container")
-  CreateContainer is OpenAIOperation<
+  createContainer is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateContainerBody;
     },
@@ -55,10 +56,10 @@ interface Containers {
   >;
 
   /** Delete a container. */
+  @summary("Delete a container")
   @route("{container_id}")
   @delete
-  @summary("Delete Container")
-  DeleteContainer is OpenAIOperation<
+  deleteContainer is OpenAIOperation<
     {
       /** The ID of the container to delete. */
       @path
@@ -68,11 +69,12 @@ interface Containers {
   >;
 
   /** Retrieves a container. */
+  @summary("Get a container")
   @route("{container_id}")
   @get
-  @summary("Retrieve Container")
-  RetrieveContainer is OpenAIOperation<
+  retrieveContainer is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
     },
@@ -80,12 +82,13 @@ interface Containers {
   >;
 
   /** Lists container files. */
+  @summary("List container files")
   @list
   @route("{container_id}/files")
   @get
-  @summary("List Container files")
-  ListContainerFiles is OpenAIOperation<
+  listContainerFiles is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
@@ -107,23 +110,21 @@ interface Containers {
   >;
 
   /** Creates a container file. */
+  @summary("Create a container file multipart")
   @sharedRoute
   @route("{container_id}/files")
   @post
-  @summary("""
-    Create a Container File
-    
-    You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
-    
-    """)
-  CreateContainerFileMultipart is OpenAIOperation<
+  createContainerFileMultipart is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateContainerFileBody;
     },
@@ -131,20 +132,17 @@ interface Containers {
   >;
 
   /** Creates a container file. */
+  @summary("Create a container file json")
   @sharedRoute
   @route("{container_id}/files")
   @post
-  @summary("""
-    Create a Container File
-    
-    You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.
-    
-    """)
-  CreateContainerFileJson is OpenAIOperation<
+  createContainerFileJson is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.CreateContainerFileBody;
     },
@@ -152,14 +150,16 @@ interface Containers {
   >;
 
   /** Delete a container file. */
+  @summary("Delete a container file")
   @route("{container_id}/files/{file_id}")
   @delete
-  @summary("Delete Container File")
-  DeleteContainerFile is OpenAIOperation<
+  deleteContainerFile is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
+      /** The file id path parameter. */
       @path
       file_id: string;
     },
@@ -167,14 +167,16 @@ interface Containers {
   >;
 
   /** Retrieves a container file. */
+  @summary("Get a container file")
   @route("{container_id}/files/{file_id}")
   @get
-  @summary("Retrieve Container File")
-  RetrieveContainerFile is OpenAIOperation<
+  retrieveContainerFile is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
+      /** The file id path parameter. */
       @path
       file_id: string;
     },
@@ -182,14 +184,16 @@ interface Containers {
   >;
 
   /** Retrieves a container file content. */
+  @summary("Get a container file content")
   @route("{container_id}/files/{file_id}/content")
   @get
-  @summary("Retrieve Container File Content")
-  RetrieveContainerFileContent is OpenAIOperation<
+  retrieveContainerFileContent is OpenAIOperation<
     {
+      /** The container id path parameter. */
       @path
       container_id: string;
 
+      /** The file id path parameter. */
       @path
       file_id: string;
     },

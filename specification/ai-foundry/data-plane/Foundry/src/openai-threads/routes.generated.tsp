@@ -18,33 +18,44 @@ namespace Azure.AI.Projects;
 @route("openai/v1/threads")
 @tag("Threads")
 interface Threads {
+  /**
+   * Creates a thread from the supplied request.
+   */
+  @summary("Create a thread")
   @tag("Assistants")
   @post
-  @summary("Create a thread.")
   createThread is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateThreadRequest;
     },
     OpenAI.ThreadObject
   >;
 
+  /**
+   * Creates a thread and run from the supplied request.
+   */
+  @summary("Create a thread and run")
   @tag("Assistants")
   @route("runs")
   @post
-  @summary("Create a thread and run it in one request.")
   createThreadAndRun is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateThreadAndRunRequest;
     },
     OpenAI.RunObject
   >;
 
+  /**
+   * Deletes a thread by its identifier.
+   */
+  @summary("Delete a thread")
   @tag("Assistants")
   @route("{thread_id}")
   @delete
-  @summary("Delete a thread.")
   deleteThread is OpenAIOperation<
     {
       /** The ID of the thread to delete. */
@@ -54,10 +65,13 @@ interface Threads {
     OpenAI.DeleteThreadResponse
   >;
 
+  /**
+   * Retrieves a thread by its identifier.
+   */
+  @summary("Get a thread")
   @tag("Assistants")
   @route("{thread_id}")
   @get
-  @summary("Retrieves a thread.")
   getThread is OpenAIOperation<
     {
       /** The ID of the thread to retrieve. */
@@ -67,27 +81,34 @@ interface Threads {
     OpenAI.ThreadObject
   >;
 
+  /**
+   * Updates a thread with the supplied changes.
+   */
+  @summary("Update a thread")
   @tag("Assistants")
   @route("{thread_id}")
   @post
-  @summary("Modifies a thread.")
   modifyThread is OpenAIOperation<
     {
       /** The ID of the thread to modify. Only the `metadata` can be modified. */
       @path
       thread_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.ModifyThreadRequest;
     },
     OpenAI.ThreadObject
   >;
 
+  /**
+   * Lists messages matching the request filters.
+   */
+  @summary("List messages")
   @tag("Assistants")
   @list
   @route("{thread_id}/messages")
   @get
-  @summary("Returns a list of messages for a given thread.")
   listMessages is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) the messages belong to. */
@@ -119,26 +140,33 @@ interface Threads {
     OpenAI.ListMessagesResponse
   >;
 
+  /**
+   * Creates a message from the supplied request.
+   */
+  @summary("Create a message")
   @tag("Assistants")
   @route("{thread_id}/messages")
   @post
-  @summary("Create a message.")
   createMessage is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) to create a message for. */
       @path
       thread_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.CreateMessageRequest;
     },
     OpenAI.MessageObject
   >;
 
+  /**
+   * Deletes a message by its identifier.
+   */
+  @summary("Delete a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
   @delete
-  @summary("Deletes a message.")
   deleteMessage is OpenAIOperation<
     {
       /** The ID of the thread to which this message belongs. */
@@ -152,10 +180,13 @@ interface Threads {
     OpenAI.DeleteMessageResponse
   >;
 
+  /**
+   * Retrieves a message by its identifier.
+   */
+  @summary("Get a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
   @get
-  @summary("Retrieve a message.")
   getMessage is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) to which this message belongs. */
@@ -169,10 +200,13 @@ interface Threads {
     OpenAI.MessageObject
   >;
 
+  /**
+   * Updates a message with the supplied changes.
+   */
+  @summary("Update a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
   @post
-  @summary("Modifies a message.")
   modifyMessage is OpenAIOperation<
     {
       /** The ID of the thread to which this message belongs. */
@@ -183,17 +217,21 @@ interface Threads {
       @path
       message_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.ModifyMessageRequest;
     },
     OpenAI.MessageObject
   >;
 
+  /**
+   * Lists runs matching the request filters.
+   */
+  @summary("List runs")
   @tag("Assistants")
   @list
   @route("{thread_id}/runs")
   @get
-  @summary("Returns a list of runs belonging to a thread.")
   listRuns is OpenAIOperation<
     {
       /** The ID of the thread the run belongs to. */
@@ -221,10 +259,13 @@ interface Threads {
     OpenAI.ListRunsResponse
   >;
 
+  /**
+   * Creates a run from the supplied request.
+   */
+  @summary("Create a run")
   @tag("Assistants")
   @route("{thread_id}/runs")
   @post
-  @summary("Create a run.")
   createRun is OpenAIOperation<
     {
       /** The ID of the thread to run. */
@@ -233,19 +274,24 @@ interface Threads {
 
       /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
   See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /** The parameter query parameter. */
       @query(#{ explode: true })
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
 
+      /** The request body. */
       @body
       body: OpenAI.CreateRunRequest;
     },
     OpenAI.RunObject
   >;
 
+  /**
+   * Retrieves a run by its identifier.
+   */
+  @summary("Get a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}")
   @get
-  @summary("Retrieves a run.")
   getRun is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) that was run. */
@@ -259,10 +305,13 @@ interface Threads {
     OpenAI.RunObject
   >;
 
+  /**
+   * Updates a run with the supplied changes.
+   */
+  @summary("Update a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}")
   @post
-  @summary("Modifies a run.")
   modifyRun is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) that was run. */
@@ -273,16 +322,20 @@ interface Threads {
       @path
       run_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.ModifyRunRequest;
     },
     OpenAI.RunObject
   >;
 
+  /**
+   * Cancels a run by its identifier.
+   */
+  @summary("Cancel a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/cancel")
   @post
-  @summary("Cancels a run that is `in_progress`.")
   cancelRun is OpenAIOperation<
     {
       /** The ID of the thread to which this run belongs. */
@@ -296,11 +349,14 @@ interface Threads {
     OpenAI.RunObject
   >;
 
+  /**
+   * Lists run steps matching the request filters.
+   */
+  @summary("List run steps")
   @tag("Assistants")
   @list
   @route("{thread_id}/runs/{run_id}/steps")
   @get
-  @summary("Returns a list of run steps belonging to a run.")
   listRunSteps is OpenAIOperation<
     {
       /** The ID of the thread the run and run steps belong to. */
@@ -331,16 +387,20 @@ interface Threads {
 
       /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
   See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /** The parameter query parameter. */
       @query(#{ explode: true })
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
     },
     OpenAI.ListRunStepsResponse
   >;
 
+  /**
+   * Retrieves a run step by its identifier.
+   */
+  @summary("Get a run step")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/steps/{step_id}")
   @get
-  @summary("Retrieves a run step.")
   getRunStep is OpenAIOperation<
     {
       /** The ID of the thread to which the run and run step belongs. */
@@ -357,19 +417,20 @@ interface Threads {
 
       /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
   See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /** The parameter query parameter. */
       @query(#{ explode: true })
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
     },
     OpenAI.RunStepObject
   >;
 
+  /**
+   * Creates a tool ouputs to run from the supplied request.
+   */
+  @summary("Create a tool ouputs to run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/submit_tool_outputs")
   @post
-  @summary("""
-    When a run has the `status: "requires_action"` and `required_action.type` is `submit_tool_outputs`, this endpoint can be used to submit the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.
-    
-    """)
   submitToolOuputsToRun is OpenAIOperation<
     {
       /** The ID of the [thread](/docs/api-reference/threads) to which this run belongs. */
@@ -380,6 +441,7 @@ interface Threads {
       @path
       run_id: string;
 
+      /** The request body. */
       @body
       body: OpenAI.SubmitToolOutputsRunRequest;
     },

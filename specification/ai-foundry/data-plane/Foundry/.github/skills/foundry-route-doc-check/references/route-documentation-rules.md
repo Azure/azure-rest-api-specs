@@ -319,6 +319,50 @@ Add a `/** ... */` comment immediately before the parameter declaration, or add 
 
 ---
 
+## FDOC-006 — No Adjacent TSDoc Blocks
+
+**Requirement:** Do not place multiple TSDoc block comments next to each other when
+they apply to the same operation or parameter.
+
+**Why:** TypeSpec concatenates adjacent documentation blocks into a single OpenAPI
+`description`. This can produce malformed output such as:
+
+```json
+"description": "Must not exceed 63 characters.The agent name path parameter."
+```
+
+### ✅ Good
+
+```typespec
+/**
+ * The unique name that identifies the agent.
+ * - Must start and end with alphanumeric characters.
+ * - Can contain hyphens in the middle.
+ */
+@path
+agent_name: string;
+```
+
+### ❌ Bad
+
+```typespec
+/**
+ * The unique name that identifies the agent.
+ * - Must start and end with alphanumeric characters.
+ */
+/** The agent name path parameter. */
+@path
+agent_name: string;
+```
+
+### Remediation
+
+Merge the comments into a single TSDoc block, or remove the redundant generic
+comment when a more specific description already exists. Prefer preserving the
+more specific, customer-facing documentation.
+
+---
+
 ## Post-Edit: Format and Regenerate
 
 After making any documentation fixes, **always** run these two steps:

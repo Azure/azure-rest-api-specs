@@ -5,14 +5,17 @@ using TypeSpec.Http;
 namespace Azure.AI.Projects;
 
 alias EvalQueryParameters = {
+  /** The after query parameter. */
   @query
   @doc("Identifier for the last run from the previous pagination request.")
   after?: string;
 
+  /** The limit query parameter. */
   @query
   @doc("Number of runs to retrieve.")
   limit?: integer = 20;
 
+  /** The order query parameter. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @query
   @doc("Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.")
@@ -22,6 +25,7 @@ alias EvalQueryParameters = {
 alias RunListQueryParameters = {
   ...EvalQueryParameters;
 
+  /** The status query parameter. */
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
   @query
   @doc("Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`.")
@@ -208,6 +212,7 @@ interface Evals {
   @route("{eval_id}/runs/{run_id}/output_items")
   getEvalRunOutputItems is OpenAIOperation<
     {
+      /** The eval id path parameter. */
       @path
       eval_id: string;
 

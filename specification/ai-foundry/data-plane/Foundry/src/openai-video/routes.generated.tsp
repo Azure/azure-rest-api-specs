@@ -16,10 +16,13 @@ namespace Azure.AI.Projects;
 @route("openai/v1/videos")
 @tag("Videos")
 interface VideoGeneration {
+  /**
+   * Lists videos matching the request filters.
+   */
+  @summary("List videos")
   @list
   @get
-  @summary("List recently generated videos for the current project.")
-  ListVideos is OpenAIOperation<
+  listVideos is OpenAIOperation<
     {
       /** Number of items to retrieve */
       @minValue(0)
@@ -40,37 +43,50 @@ interface VideoGeneration {
     OpenAI.VideoListResource
   >;
 
+  /**
+   * Creates a video from the supplied request.
+   */
+  @summary("Create a video")
   @post
-  @summary("Create a new video generation job from a prompt and optional reference assets.")
   createVideo is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateVideoMultipartBody;
     },
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video character from the supplied request.
+   */
+  @summary("Create a video character")
   @route("characters")
   @post
-  @summary("Create a character from an uploaded video.")
-  CreateVideoCharacter is OpenAIOperation<
+  createVideoCharacter is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateVideoCharacterBody;
     },
     OpenAI.VideoCharacterResource
   >;
 
+  /**
+   * Retrieves a video character by its identifier.
+   */
+  @summary("Get a video character")
   @route("characters/{character_id}")
   @get
-  @summary("Fetch a character.")
-  GetVideoCharacter is OpenAIOperation<
+  getVideoCharacter is OpenAIOperation<
     {
       /** The identifier of the character to retrieve. */
       @path
@@ -79,64 +95,85 @@ interface VideoGeneration {
     OpenAI.VideoCharacterResource
   >;
 
+  /**
+   * Creates a video edit multipart from the supplied request.
+   */
+  @summary("Create a video edit multipart")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Create a new video generation job by editing a source video or existing generated video.")
-  CreateVideoEditMultipart is OpenAIOperation<
+  createVideoEditMultipart is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateVideoEditMultipartBody;
     },
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video edit json from the supplied request.
+   */
+  @summary("Create a video edit json")
   @sharedRoute
   @route("edits")
   @post
-  @summary("Create a new video generation job by editing a source video or existing generated video.")
-  CreateVideoEditJson is OpenAIOperation<
+  createVideoEditJson is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateVideoEditJsonBody;
     },
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video extend multipart from the supplied request.
+   */
+  @summary("Create a video extend multipart")
   @sharedRoute
   @route("extensions")
   @post
-  @summary("Create an extension of a completed video.")
-  CreateVideoExtendMultipart is OpenAIOperation<
+  createVideoExtendMultipart is OpenAIOperation<
     {
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateVideoExtendMultipartBody;
     },
     OpenAI.VideoResource
   >;
 
+  /**
+   * Creates a video extend json from the supplied request.
+   */
+  @summary("Create a video extend json")
   @sharedRoute
   @route("extensions")
   @post
-  @summary("Create an extension of a completed video.")
-  CreateVideoExtendJson is OpenAIOperation<
+  createVideoExtendJson is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateVideoExtendJsonBody;
     },
     OpenAI.VideoResource
   >;
 
+  /**
+   * Deletes a video by its identifier.
+   */
+  @summary("Delete a video")
   @route("{video_id}")
   @delete
-  @summary("Permanently delete a completed or failed video and its stored assets.")
-  DeleteVideo is OpenAIOperation<
+  deleteVideo is OpenAIOperation<
     {
       /** The identifier of the video to delete. */
       @path
@@ -145,10 +182,13 @@ interface VideoGeneration {
     OpenAI.DeletedVideoResource
   >;
 
+  /**
+   * Retrieves a video by its identifier.
+   */
+  @summary("Get a video")
   @route("{video_id}")
   @get
-  @summary("Fetch the latest metadata for a generated video.")
-  GetVideo is OpenAIOperation<
+  getVideo is OpenAIOperation<
     {
       /** The identifier of the video to retrieve. */
       @path
@@ -157,14 +197,13 @@ interface VideoGeneration {
     OpenAI.VideoResource
   >;
 
+  /**
+   * Retrieves a video content by its identifier.
+   */
+  @summary("Get a video content")
   @route("{video_id}/content")
   @get
-  @summary("""
-    Download the generated video bytes or a derived preview asset.
-    
-    Streams the rendered video content for the specified video job.
-    """)
-  RetrieveVideoContent is OpenAIOperation<
+  retrieveVideoContent is OpenAIOperation<
     {
       /** The identifier of the video whose media to download. */
       @path
@@ -175,26 +214,33 @@ interface VideoGeneration {
       variant?: OpenAI.VideoContentVariant;
     },
     {
+      /** The content type of the request body. */
       @header
       contentType: "video/mp4";
 
+      /** The request body. */
       @body
       body: bytes;
     }
   >;
 
+  /**
+   * Creates a video remix from the supplied request.
+   */
+  @summary("Create a video remix")
   @route("{video_id}/remix")
   @post
-  @summary("Create a remix of a completed video using a refreshed prompt.")
-  CreateVideoRemix is OpenAIOperation<
+  createVideoRemix is OpenAIOperation<
     {
       /** The identifier of the completed video to remix. */
       @path
       video_id: string;
 
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
+      /** The multipart request body. */
       @multipartBody
       body: OpenAI.CreateVideoRemixBody;
     },

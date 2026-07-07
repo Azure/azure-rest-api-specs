@@ -13,15 +13,14 @@ namespace Azure.AI.Projects;
 @route("openai/v1/completions")
 @tag("Completions")
 interface Completions {
+  /**
+   * Creates a completion from the supplied request.
+   */
+  @summary("Create a completion")
   @post
-  @summary("""
-    Creates a completion for the provided prompt and parameters.
-    
-    Returns a completion object, or a sequence of completion objects if the request is streamed.
-    
-    """)
   createCompletion is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateCompletionRequest;
     },

@@ -13,14 +13,14 @@ namespace Azure.AI.Projects;
 @route("openai/v1/moderations")
 @tag("Moderations")
 interface Moderations {
+  /**
+   * Creates a moderation from the supplied request.
+   */
+  @summary("Create a moderation")
   @post
-  @summary("""
-    Classifies if text and/or image inputs are potentially harmful. Learn
-    more in the [moderation guide](/docs/guides/moderation).
-    
-    """)
   createModeration is OpenAIOperation<
     {
+      /** The request body. */
       @body
       body: OpenAI.CreateModerationRequest;
     },

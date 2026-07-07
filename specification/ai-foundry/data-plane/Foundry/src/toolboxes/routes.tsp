@@ -30,10 +30,7 @@ interface Toolboxes {
   @operationId("getToolbox")
   @get
   @route("/toolboxes/{name}")
-  getToolbox is FoundryDataPlaneOperation<
-    GetToolboxRequest,
-    ToolboxObject
-  >;
+  getToolbox is FoundryDataPlaneOperation<GetToolboxRequest, ToolboxObject>;
 
   /** Returns the toolboxes available in the current project. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
@@ -87,10 +84,7 @@ interface Toolboxes {
   @operationId("deleteToolbox")
   @delete
   @route("/toolboxes/{name}")
-  deleteToolbox is FoundryDataPlaneOperation<
-    DeleteToolboxRequest,
-    void
-  >;
+  deleteToolbox is FoundryDataPlaneOperation<DeleteToolboxRequest, void>;
 
   /** Removes the specified version of a toolbox. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "not yet an Azure operation"
