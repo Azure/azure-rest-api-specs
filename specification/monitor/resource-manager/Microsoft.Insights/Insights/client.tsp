@@ -628,6 +628,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
+  DataCollectionApi.DataSourcesSpec.performanceCountersOTel,
+  "PerformanceCountersOtel",
+  "csharp"
+);
+@@clientName(
   DataCollectionApi.DataFlow.captureOverflow,
   "ShouldCaptureOverflow",
   "csharp"
