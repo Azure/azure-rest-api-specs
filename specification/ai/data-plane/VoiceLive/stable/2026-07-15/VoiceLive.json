@@ -237,6 +237,39 @@
           "x-ms-enum": {
             "modelAsString": false
           }
+        },
+        "reference_source": {
+          "type": "string",
+          "description": "The source of the echo cancellation reference signal.\n- `server`: EC uses the internal TTS loopback as the reference signal (default, existing behavior).\n- `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.",
+          "default": "server",
+          "enum": [
+            "server",
+            "client"
+          ],
+          "x-ms-enum": {
+            "name": "EchoCancellationReferenceSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "server",
+                "value": "server",
+                "description": "EC uses the internal TTS loopback as the reference signal."
+              },
+              {
+                "name": "client",
+                "value": "client",
+                "description": "EC uses the client-supplied reference channel from the stereo input stream."
+              }
+            ]
+          }
+        },
+        "channels": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of input audio channels.\n- `1`: Mono input (default).\n- `2`: Interleaved stereo input where channel 0 is the microphone signal and channel 1 is the echo reference signal.\nWhen set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 2
         }
       },
       "required": [
@@ -1734,6 +1767,30 @@
       "required": [
         "type"
       ]
+    },
+    "EchoCancellationReferenceSource": {
+      "type": "string",
+      "description": "The source of the echo cancellation reference signal.",
+      "enum": [
+        "server",
+        "client"
+      ],
+      "x-ms-enum": {
+        "name": "EchoCancellationReferenceSource",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "server",
+            "value": "server",
+            "description": "EC uses the internal TTS loopback as the reference signal."
+          },
+          {
+            "name": "client",
+            "value": "client",
+            "description": "EC uses the client-supplied reference channel from the stereo input stream."
+          }
+        ]
+      }
     },
     "EouDetection": {
       "type": "object",

@@ -1007,7 +1007,6 @@ model AudioEchoCancellation {
    * - `client`: EC uses the client-supplied reference channel (ch1 of stereo input). Internal TTS loopback is skipped.
    */
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   reference_source?: EchoCancellationReferenceSource = EchoCancellationReferenceSource.server;
 
   /**
@@ -1017,7 +1016,6 @@ model AudioEchoCancellation {
    * When set to 2, `reference_source` must be `client` and `input_audio_format` must be `pcm16`.
    */
   @added(Versions.v2026_06_01_preview)
-  @removed(Versions.v2026_07_15)
   @minValue(1)
   @maxValue(2)
   channels?: int32 = 1;
@@ -1026,7 +1024,6 @@ model AudioEchoCancellation {
 /** The source of the echo cancellation reference signal. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case.
 @added(Versions.v2026_06_01_preview)
-@removed(Versions.v2026_07_15)
 union EchoCancellationReferenceSource {
   string,
 
