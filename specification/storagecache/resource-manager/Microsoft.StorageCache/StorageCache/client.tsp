@@ -357,9 +357,6 @@ using Microsoft.StorageCache;
 );
 @@alternateType(StorageTarget.location, Azure.Core.azureLocation, "csharp");
 
-@@visibility(CacheProperties.primingJobs, Lifecycle.Read);
-@@visibility(AutoExportJobProperties.status, Lifecycle.Read, Lifecycle.Create);
-
 @@clientName(Caches.spaceAllocation, "UpdateSpaceAllocation", "csharp");
 @@clientName(Caches.debugInfo, "EnableDebugInfo", "csharp");
 @@clientName(StorageTargets.dnsRefresh, "RefreshDns", "csharp");
