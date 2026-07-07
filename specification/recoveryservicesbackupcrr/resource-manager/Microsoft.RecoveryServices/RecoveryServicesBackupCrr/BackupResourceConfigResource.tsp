@@ -37,6 +37,7 @@ model BackupResourceConfigResource is ProxyResource<BackupResourceConfig> {
 }
 
 @armResourceOperations
+@tag("BackupResourceStorageConfigs")
 interface BackupResourceConfigResources {
   /**
    * Fetches resource storage config.

@@ -27,9 +27,9 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr");
 @@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointResources.getAccessToken, "RecoveryPoints");
+@@clientLocation(RecoveryPointGetAccessToken.getAccessToken, "RecoveryPoints");
 @@clientName(
-  RecoveryPointResources.getAccessToken::parameters.body,
+  RecoveryPointGetAccessToken.getAccessToken::parameters.body,
   "parameters"
 );
 

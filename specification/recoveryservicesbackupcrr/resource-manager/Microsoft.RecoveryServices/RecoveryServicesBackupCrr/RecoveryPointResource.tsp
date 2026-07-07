@@ -37,6 +37,7 @@ model RecoveryPointResource is ProxyResource<RecoveryPoint> {
 }
 
 @armResourceOperations
+@tag("RecoveryPoints_Crr")
 interface RecoveryPointResources {
   /**
    * Provides the information of the backed up data identified using RecoveryPointID.
@@ -63,7 +64,11 @@ interface RecoveryPointResources {
     },
     Response = ArmResponse<RecoveryPointResourceList>
   >;
+}
 
+@armResourceOperations
+@tag("RecoveryPoints_GetAccessToken")
+interface RecoveryPointGetAccessToken {
   /**
    * Returns the Access token for communication between BMS and Protection service
    */
@@ -93,6 +98,6 @@ model AccessTokenBadRequestResponse {
 );
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(
-  RecoveryPointResources.getAccessToken::parameters.body,
+  RecoveryPointGetAccessToken.getAccessToken::parameters.body,
   "Get Access Token request"
 );
