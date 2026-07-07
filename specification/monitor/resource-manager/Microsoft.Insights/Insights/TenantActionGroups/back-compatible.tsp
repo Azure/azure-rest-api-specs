@@ -25,17 +25,9 @@ using TenantActionGroups;
   TenantActionGroupResources.listByManagementGroupId,
   "TenantActionGroups"
 );
-@@clientLocation(
-  TenantActionGroupResources.createNotificationsAtTenantActionGroupResourceLevel,
-  TenantActionGroups
-);
 @@clientName(
-  TenantActionGroupResources.createNotificationsAtTenantActionGroupResourceLevel::parameters.body,
+  createNotificationsAtTenantActionGroupResourceLevel::parameters.body,
   "notificationRequest"
-);
-@@clientLocation(
-  TenantActionGroupResources.getTestNotificationsAtTenantActionGroupResourceLevel,
-  TenantActionGroups
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TenantActionGroupResource.properties);

@@ -153,48 +153,47 @@ interface TenantActionGroupResources {
     Response = ArmResponse<TenantActionGroupList>,
     Error = Microsoft.Common.ErrorResponse
   >;
-
-  /**
-   * Send test notifications to a set of provided receivers
-   */
-  @action("createNotifications")
-  createNotificationsAtTenantActionGroupResourceLevel is Extension.ActionAsync<
-    Extension.ManagementGroup<"managementGroupId">,
-    TenantActionGroupResource,
-    TenantNotificationRequestBody,
-    Response = TestNotificationDetailsResponse,
-    Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
-    }
-  >;
-
-  /**
-   * Get the test notifications by the notification id
-   */
-  @get
-  @action("{notificationId}")
-  @route("/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Insights/tenantActionGroups/{tenantActionGroupName}/notificationStatus/{notificationId}")
-  getTestNotificationsAtTenantActionGroupResourceLevel is TenantActionGroupResourcesOps.ActionSync<
-    TenantActionGroupResource,
-    void,
-    ArmResponse<TestNotificationDetailsResponse>,
-    Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
-    },
-    OverrideErrorType = ErrorResponse
-  >;
 }
 
+/**
+ * Send test notifications to a set of provided receivers
+ */
+@action("createNotifications")
+op createNotificationsAtTenantActionGroupResourceLevel is Extension.ActionAsync<
+  Extension.ManagementGroup<"managementGroupId">,
+  TenantActionGroupResource,
+  TenantNotificationRequestBody,
+  Response = TestNotificationDetailsResponse,
+  Parameters = {
+    /**
+     * The tenant ID of the client making the request.
+     */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @header
+    `x-ms-client-tenant-id`: string;
+  }
+>;
+
+/**
+ * Get the test notifications by the notification id
+ */
+@get
+@action("{notificationId}")
+@route("/providers/microsoft.Management/managementGroups/{managementGroupId}/providers/microsoft.Insights/tenantActionGroups/{tenantActionGroupName}/notificationStatus/{notificationId}")
+op getTestNotificationsAtTenantActionGroupResourceLevel is TenantActionGroupResourcesOps.ActionSync<
+  TenantActionGroupResource,
+  void,
+  ArmResponse<TestNotificationDetailsResponse>,
+  Parameters = {
+    /**
+     * The tenant ID of the client making the request.
+     */
+    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @header
+    `x-ms-client-tenant-id`: string;
+  },
+  OverrideErrorType = ErrorResponse
+>;
 @@maxLength(TenantActionGroupResource.name, 260);
 @@minLength(TenantActionGroupResource.name, 1);
 @@doc(TenantActionGroupResource.name, "The name of the action group.");
@@ -211,6 +210,6 @@ interface TenantActionGroupResources {
   "Parameters supplied to the operation."
 );
 @@doc(
-  TenantActionGroupResources.createNotificationsAtTenantActionGroupResourceLevel::parameters.body,
+  createNotificationsAtTenantActionGroupResourceLevel::parameters.body,
   "The notification request body which includes the contact details"
 );
