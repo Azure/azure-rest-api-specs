@@ -10,7 +10,8 @@ using Microsoft.HanaOnAzure;
   "javascript,python"
 );
 
-@@clientName(ProviderInstanceProperties.properties,
+@@clientName(
+  ProviderInstanceProperties.properties,
   "ProviderProperties",
   "csharp"
 );
