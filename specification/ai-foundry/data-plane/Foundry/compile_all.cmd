@@ -1,3 +1,4 @@
+:: Script to compile main.tsp at the project root and all client.tsp files in the \src\sdk-* folders
 @echo off
 setlocal
 
