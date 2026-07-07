@@ -844,6 +844,8 @@ export const requiredRules = [
   new TspConfigPythonNamespaceMatchesEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
+  new TspConfigCsharpMgmtNamespaceSubRule(),
+  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 /**
@@ -856,8 +858,6 @@ export const requiredRules = [
 export const optionalRules: TspconfigEmitterOptionsSubRuleBase[] = [
   new TspConfigCsharpDpEmitterOutputDirSubRule(),
   new TspConfigCsharpDpNamespaceSubRule(),
-  new TspConfigCsharpMgmtNamespaceSubRule(),
-  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
   new TspConfigGoDpServiceDirMatchPatternSubRule(),
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoDpModuleMatchPatternSubRule(),
