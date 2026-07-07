@@ -59,7 +59,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R3020](#r3020) | [PathResourceProviderNamePascalCase](#r3020) | ARM OpenAPI(swagger) specs | [How-to: ARM provider namespace](https://azure.github.io/typespec-azure/docs/howtos/arm/change-provider-namespace/) |
 | [R3021](#r3021) | [PathResourceTypeNameCamelCase](#r3021) | ARM OpenAPI(swagger) specs | [How-to: ARM resource types](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/) |
 | [R4004](#r4004) | [OperationIdRequired](#r4004) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
-| [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs | [How-to: ARM common-types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/) |
+| [R4007](#r4007) | [DefaultErrorResponseSchema](#r4007) | ARM OpenAPI(swagger) specs | [ErrorResponse (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.ErrorResponse) |
 | [R4010](#r4010) | [RequiredDefaultResponse](#r4010) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R4011](#r4011) | [DeleteOperationResponses](#r4011) | ARM OpenAPI(swagger) specs | [delete-operation-response-codes](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/delete-operation-response-codes/) |
 | [R4015](#r4015) | [NestedResourcesMustHaveListOperation](#r4015) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
@@ -67,7 +67,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4017](#r4017) | [TopLevelResourcesListBySubscription](#r4017) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R4018](#r4018) | [OperationsApiResponseSchema](#r4018) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R4019](#r4019) | [GetCollectionResponseSchema](#r4019) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
-| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs | [How-to: ARM common-types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/) |
+| [R4009](#r4009) | [RequiredReadOnlySystemData](#r4009) | ARM OpenAPI(swagger) specs | [SystemData (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.SystemData) |
 | [R4025](#r4025) | [DeleteOperationAsyncResponseValidation](#r4025) | ARM OpenAPI(swagger) specs | [How-to: ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/) |
 
 #### ARM Warnings
@@ -76,7 +76,7 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | --- | --- | --- | --- |
 | [R3018](#r3018) | [EnumInsteadOfBoolean](#r3018) | ARM and Data plane OpenAPI(swagger) specs | [How-to: ARM rules & suppression](https://azure.github.io/typespec-azure/docs/howtos/arm/arm-rules/) |
 | [R3017](#r3017) | [GuidUsage](#r3017) | ARM and Data plane OpenAPI(swagger) specs | [How-to: migrating ARM specs](https://azure.github.io/typespec-azure/docs/migrate-swagger/checklists/migrate-arm-tips/) |
-| [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs | [How-to: ARM common-types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/) |
+| [R2057](#r2057) | [InvalidSkuModel](#r2057) | ARM OpenAPI(swagger) specs | [Sku (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.Sku) |
 | [R3010](#r3010) | [TrackedResourceListByImmediateParent](#r3010) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R3027](#r3027) | [TrackedResourceListByResourceGroup](#r3027) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R3028](#r3028) | [TrackedResourceListBySubscription](#r3028) | ARM OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
@@ -121,9 +121,9 @@ We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an
 | [R4013](#r4013) | [IntegerTypeMustHaveFormat](#r4013) | ARM OpenAPI(swagger) specs | [no-generic-numeric](https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-generic-numeric/) |
 | [R4028](#r4028) | [ValidResponseCodeRequired](#r4028) | ARM and Data Plane OpenAPI(swagger) specs | [How-to: ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/) |
 | [R4029](#r4029) | [UniqueClientParameterName](#r4029) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
-| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs | [How-to: ARM common-types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/) |
+| [R4032](#r4032) | [MissingXmsErrorResponse](#r4032) | ARM OpenAPI(swagger) specs | [ErrorResponse (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.CommonTypes.ErrorResponse) |
 | [R4033](#r4033) | [UniqueModelName](#r4033) | ARM OpenAPI(swagger) specs | Invalid TypeSpec |
-| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs | [How-to: ARM common-types](https://azure.github.io/typespec-azure/docs/howtos/arm/add-common-types/) |
+| [R4034](#r4034) | [AzureResourceTagsSchemaValidation](#r4034) | ARM OpenAPI(swagger) specs | [ArmTagsProperty (common-types)](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/#Azure.ResourceManager.Foundations.ArmTagsProperty) |
 | [R4035](#r4035) | [PrivateEndpointResourceSchemaValidation](#r4035) | ARM OpenAPI(swagger) specs | [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/) |
 | [R4036](#r4036) | [ImplementPrivateEndpointAPIs](#r4036) | ARM OpenAPI(swagger) specs | [How-to: ARM private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/) |
 | [R4037](#r4037) | [MissingTypeObject](#r4037) | ARM and Data plan OpenAPI(swagger) specs | [no-empty-model](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/rules/no-empty-model/) |
