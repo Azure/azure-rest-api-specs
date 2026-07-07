@@ -46,7 +46,8 @@ export const SpecGenSdkArtifactInfoSchema = z.object({
  *   breakingChange: string | undefined,
  *   breakingChangeApproved: string | undefined,
  *   breakingChangeSuppression: string | undefined,
- *   breakingChangeSuppressionApproved: string | undefined
+ *   breakingChangeSuppressionApproved: string | undefined,
+ *   buildFailed: string | undefined
  * }} SdkLabelInfo
  */
 
@@ -55,7 +56,7 @@ export const SpecGenSdkArtifactInfoSchema = z.object({
  */
 
 /**
- * SDK labels mapping for breaking change labels
+ * SDK labels mapping for breaking change and build-failure labels
  * @type {SdkLabels}
  * */
 export const sdkLabels = {
@@ -64,35 +65,41 @@ export const sdkLabels = {
     breakingChangeApproved: "BreakingChange-Go-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Go-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-Go-Sdk-Suppression-Approved",
+    buildFailed: undefined,
   },
   "azure-sdk-for-java": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
+    buildFailed: undefined,
   },
   "azure-sdk-for-js": {
     breakingChange: "BreakingChange-JavaScript-Sdk",
     breakingChangeApproved: "BreakingChange-JavaScript-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-JavaScript-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-JavaScript-Sdk-Suppression-Approved",
+    buildFailed: undefined,
   },
   "azure-sdk-for-net": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
+    buildFailed: "auto-sdk-build-fix",
   },
   "azure-sdk-for-python": {
     breakingChange: "BreakingChange-Python-Sdk",
     breakingChangeApproved: "BreakingChange-Python-Sdk-Approved",
     breakingChangeSuppression: "BreakingChange-Python-Sdk-Suppression",
     breakingChangeSuppressionApproved: "BreakingChange-Python-Sdk-Suppression-Approved",
+    buildFailed: undefined,
   },
   "azure-sdk-for-rust": {
     breakingChange: undefined,
     breakingChangeApproved: undefined,
     breakingChangeSuppression: undefined,
     breakingChangeSuppressionApproved: undefined,
+    buildFailed: undefined,
   },
 };
