@@ -863,6 +863,7 @@ model GitHubOAuthInfoResponse {
    * URL for authorizing the Developer Hub GitHub App
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   authURL?: string;
 
   /**
@@ -987,6 +988,7 @@ model GitHubWorkflowProfile {
    * The URL to the Pull Request submitted against the users repository.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   prURL?: string;
 
@@ -1095,6 +1097,7 @@ model WorkflowRun {
    * URL to the run of the workflow.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   workflowRunURL?: string;
 
@@ -1300,6 +1303,7 @@ model PullRequest {
    * The URL to the Pull Request submitted against the users repository.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   prURL?: string;
 
@@ -1490,6 +1494,7 @@ model AdooAuthInfoResponse {
    * URL used to authorize ADO app using Entra ID
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   authURL?: string;
 
   /**
