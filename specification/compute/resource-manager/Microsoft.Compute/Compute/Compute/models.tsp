@@ -2643,6 +2643,12 @@ model VirtualMachineScaleSetStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the API version used for additionalDiskProperties of managed disks.
+   */
+  @added(Versions.v2026_03_01)
+  diskApiVersion?: string;
 }
 
 /**
@@ -2802,6 +2808,12 @@ model VirtualMachineScaleSetManagedDiskParameters {
    * Specifies the security profile for the managed disk.
    */
   securityProfile?: VMDiskSecurityProfile;
+
+  /**
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
+   */
+  @added(Versions.v2026_03_01)
+  additionalDiskProperties?: AdditionalDiskProperties;
 }
 
 /**
@@ -4175,6 +4187,12 @@ model VirtualMachineScaleSetUpdateStorageProfile {
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   diskControllerType?: DiskControllerTypes;
+
+  /**
+   * Specifies the API version used for additionalDiskProperties of managed disks.
+   */
+  @added(Versions.v2026_03_01)
+  diskApiVersion?: string;
 }
 
 /**
@@ -5574,6 +5592,12 @@ model StorageProfile {
    * Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01.
    */
   alignRegionalDisksToVMZone?: boolean;
+
+  /**
+   * Specifies the API version used for additionalDiskProperties of managed disks.
+   */
+  @added(Versions.v2026_03_01)
+  diskApiVersion?: string;
 }
 
 /**
@@ -5690,19 +5714,19 @@ model ManagedDiskParameters extends SubResource {
   securityProfile?: VMDiskSecurityProfile;
 
   /**
-   * Specifies additional properties for the managed disk that can be set at the time of attaching the disk to the virtual machine.
+   * Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk.
    */
   @added(Versions.v2026_03_01)
   additionalDiskProperties?: AdditionalDiskProperties;
 }
 
 /**
- * Specifies additional properties for a managed disk that can be set when attaching the disk to a virtual machine.
+ * Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.
  */
 @added(Versions.v2026_03_01)
 model AdditionalDiskProperties {
   /**
-   * Specifies the managed disk properties that can be updated on the disk when attaching it to the virtual machine.
+   * Specifies the managed disk properties that can be set on the disk at the time of implicit creation of the disk.
    */
   managedDiskProperties?: ManagedDiskProperties;
 }

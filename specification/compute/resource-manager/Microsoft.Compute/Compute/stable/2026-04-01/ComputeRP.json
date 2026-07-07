@@ -13864,11 +13864,11 @@
     },
     "AdditionalDiskProperties": {
       "type": "object",
-      "description": "Specifies additional properties for a managed disk that can be set when attaching the disk to a virtual machine.",
+      "description": "Specifies additional properties for a managed disk that can be set at the time of implicit creation of the disk.",
       "properties": {
         "managedDiskProperties": {
           "$ref": "#/definitions/ManagedDiskProperties",
-          "description": "Specifies the managed disk properties that can be updated on the disk when attaching it to the virtual machine."
+          "description": "Specifies the managed disk properties that can be set on the disk at the time of implicit creation of the disk."
         }
       }
     },
@@ -17214,7 +17214,7 @@
         },
         "additionalDiskProperties": {
           "$ref": "#/definitions/AdditionalDiskProperties",
-          "description": "Specifies additional properties for the managed disk that can be set at the time of attaching the disk to the virtual machine."
+          "description": "Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk."
         }
       },
       "allOf": [
@@ -20255,6 +20255,10 @@
         "alignRegionalDisksToVMZone": {
           "type": "boolean",
           "description": "Specifies whether the regional disks should be aligned/moved to the VM zone. This is applicable only for VMs with placement property set. Please note that this change is irreversible. Minimum api-version: 2024-11-01."
+        },
+        "diskApiVersion": {
+          "type": "string",
+          "description": "Specifies the API version used for additionalDiskProperties of managed disks."
         }
       }
     },
@@ -23203,6 +23207,10 @@
         "securityProfile": {
           "$ref": "#/definitions/VMDiskSecurityProfile",
           "description": "Specifies the security profile for the managed disk."
+        },
+        "additionalDiskProperties": {
+          "$ref": "#/definitions/AdditionalDiskProperties",
+          "description": "Specifies additional properties for the managed disk that can be set at the time of implicit creation of the disk."
         }
       }
     },
@@ -23784,6 +23792,10 @@
         "diskControllerType": {
           "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01"
+        },
+        "diskApiVersion": {
+          "type": "string",
+          "description": "Specifies the API version used for additionalDiskProperties of managed disks."
         }
       }
     },
@@ -24208,6 +24220,10 @@
         "diskControllerType": {
           "$ref": "#/definitions/DiskControllerTypes",
           "description": "Specifies the disk controller type configured for the virtual machines in the scale set. **Note:** You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set. Minimum api-version: 2022-08-01"
+        },
+        "diskApiVersion": {
+          "type": "string",
+          "description": "Specifies the API version used for additionalDiskProperties of managed disks."
         }
       }
     },
