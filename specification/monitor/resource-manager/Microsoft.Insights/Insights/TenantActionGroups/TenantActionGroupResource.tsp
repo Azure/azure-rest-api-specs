@@ -80,7 +80,7 @@ interface TenantActionGroupResources {
       @header
       `x-ms-client-tenant-id`: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -97,7 +97,7 @@ interface TenantActionGroupResources {
       @header
       `x-ms-client-tenant-id`: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -116,7 +116,7 @@ interface TenantActionGroupResources {
       @header
       `x-ms-client-tenant-id`: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -133,7 +133,7 @@ interface TenantActionGroupResources {
       @header
       `x-ms-client-tenant-id`: string;
     },
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -151,7 +151,7 @@ interface TenantActionGroupResources {
       `x-ms-client-tenant-id`: string;
     },
     Response = ArmResponse<TenantActionGroupList>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**

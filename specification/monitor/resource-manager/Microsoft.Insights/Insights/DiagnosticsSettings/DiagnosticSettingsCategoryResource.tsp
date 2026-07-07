@@ -34,7 +34,7 @@ interface DiagnosticSettingsCategoryResources {
   get is Extension.Read<
     Extension.ScopeParameter,
     DiagnosticSettingsCategoryResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -45,7 +45,7 @@ interface DiagnosticSettingsCategoryResources {
     Extension.ScopeParameter,
     DiagnosticSettingsCategoryResource,
     Response = ArmResponse<DiagnosticSettingsCategoryResourceCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 
