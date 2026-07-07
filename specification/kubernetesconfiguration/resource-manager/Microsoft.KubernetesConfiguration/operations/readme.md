@@ -28,7 +28,31 @@ These are the global settings for the operations in KubernetesConfiguration.
 title: OperationsClient
 description: Operations Client
 openapi-type: arm
-tag: package-2025-04
+tag: package-2026-06-preview
+```
+
+---
+
+### Tag: package-2026-06-preview
+
+These settings apply only when `--tag=package-2026-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06-preview'
+input-file:
+  - preview/2026-06-15-preview/operations.json
+suppressions:
+  - code: OperationsApiSchemaUsesCommonTypes
+    from: operations.json
+    reason: This is for existing operation status endpoint at resource level and not operations endpoint. So it doesn't follow the schema.
+  - code: OperationsApiTenantLevelOnly
+    from: operations.json
+    reason: This is for existing operation status endpoint at resource level and not operations endpoint. So it doesn't follow the schema.
+  - code: ResourceNameRestriction
+    from: operations.json
+    reason: This is for existing operation status endpoint at resource level and not operations endpoint. So it doesn't follow the schema.
+  - code: OperationsApiResponseSchema
+    from: operations.json
+    reason: This is for existing operation status endpoint at resource level and not operations endpoint. So it doesn't follow the schema.
 ```
 
 ---
