@@ -22,7 +22,7 @@ interface BackupUsageSummariesCRROperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("BackupUsageSummariesCRR_List")
   @extension("x-ms-odata", "#/definitions/BMSBackupSummariesQueryObject")
-  @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
+  @extension("x-ms-pageable", #{ nextLinkName: null })
   @autoRoute
   @get
   @action("backupUsageSummaries")
