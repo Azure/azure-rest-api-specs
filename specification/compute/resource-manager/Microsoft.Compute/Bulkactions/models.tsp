@@ -49,6 +49,10 @@ union ResourceOperationType {
   @doc("Delete operations on the resources")
   Delete: "Delete",
 
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Post-Start VM agent health-check sub-operation; surfaced when the customer opts into verifyVmAgentHealth on a Start request")
+  GetInstanceView: "GetInstanceView",
+
   string,
 }
 
@@ -93,6 +97,35 @@ model Resources {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("The resources needed for the user request with the resourceContext")
+model ResourceWithContext {
+  @doc("The resource ids used for the request")
+  resourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  @doc("The operational context of the resourceId")
+  resourceContext: string;
+}
+
+@doc("The resources needed for the user request with the context for tracking purposes")
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+model ResourcesWithContext {
+  @identifiers(#["resourceId"])
+  @doc("The resource ids used for the request")
+  resources: Array<ResourceWithContext>;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Resource notification details containing notification metadata like the resource context")
+model ResourceNotificationDetails {
+  @doc("Resource context for notification tracking")
+  resourceContext?: string;
 }
 
 /**
@@ -222,6 +255,10 @@ model FlexProperties {
 
   @doc("The zone allocation policy for distributing VMs across availability zones")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The minimum number of VMs that must be successfully created for the request to proceed. If fewer than this number can be allocated, the entire request is automatically rejected.")
+  minCapacity?: int32;
 }
 
 /**
@@ -269,12 +306,16 @@ model BulkVMConfiguration {
 
 @doc("Resource creation data model")
 model ResourceProvisionPayload {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON object to allow loosely-typed VM configuration passthrough"
   @doc("Bulk Actions Virtual Machine Profile object that contains VM properties that are common across all VMs in this batch")
-  baseProfile?: BulkVMConfiguration;
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration)
+  baseProfile?: Record<unknown>;
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Free-form JSON objects to allow loosely-typed per-VM overrides"
   @doc("Bulk Actions Virtual Machine Profile array, that contains VM properties that should be overridden for each VM in the batch")
   @identifiers(#[])
-  resourceOverrides?: BulkVMConfiguration[];
+  @typeChangedFrom(Versions.`2026-07-06-preview`, BulkVMConfiguration[])
+  resourceOverrides?: Record<unknown>[];
 
   @doc("Number of VMs to be created")
   resourceCount: int32;
@@ -311,6 +352,10 @@ model ExecutionParameters {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("When true on an executeStart request, run a post-Start VM agent health check and engage the fallback chain if the guest agent does not report Ready. Ignored for non-Start operations.")
+  verifyVmAgentHealth?: boolean;
 }
 
 @doc("These describe errors that occur at the resource level")
@@ -320,6 +365,16 @@ model ResourceOperationError {
 
   @doc("Detailed message about the error")
   errorDetails: string;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Information about the flexible allocation of a virtual machine.")
+model VmAllocationInfo {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  vmSize?: string;
+
+  @doc("The zone identifier")
+  zone?: string;
 }
 
 @doc("Describes the fallback operation that was performed")
@@ -373,6 +428,20 @@ model ResourceOperationDetails {
 
   @doc("Retry policy the user can pass")
   retryPolicy?: RetryPolicy;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Resource notification details.")
+  resourceNotificationDetails?: ResourceNotificationDetails;
+}
+
+@added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+@doc("Information about a virtual machine.")
+model VirtualMachineInfo {
+  @doc("The name of the VM size, eg Standard_D2ads_v5")
+  vmSize?: string;
+
+  @doc("The zone identifier")
+  zone?: string;
 }
 
 @doc("High level response from an operation on a resource")
@@ -388,6 +457,10 @@ model ResourceOperation {
 
   @doc("Details of the operation performed on a resource")
   operation?: ResourceOperationDetails;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("Information about the virtual machine")
+  virtualMachineInfo?: VirtualMachineInfo;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-offsetdatetime" "Prefer using `utcDateTime` when representing a datetime unless an offset is necessary."
@@ -496,7 +569,12 @@ model ExecuteDeallocateRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteHibernateRequest request for executeHibernate operations")
@@ -505,7 +583,12 @@ model ExecuteHibernateRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteStartRequest request for executeStart operations")
@@ -514,7 +597,12 @@ model ExecuteStartRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 }
 
 @doc("The ExecuteCreateRequest request for create operations")
@@ -564,7 +652,12 @@ model ExecuteReimageRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Reimage parameters including base profile and per-resource overrides")
   reimageParameters?: ReimagePayload;
@@ -627,7 +720,12 @@ model ExecuteDeleteRequest {
   executionParameters: ExecutionParameters;
 
   @doc("The resources for the request")
-  resources: Resources;
+  @madeOptional(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  resources?: Resources;
+
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
+  @doc("The resources for the request with resource context information. Cannot be provided together with `resources` - exactly one must be specified.")
+  resourcesWithContext?: ResourcesWithContext;
 
   @doc("Forced delete resource item")
   forceDeletion?: boolean;
@@ -674,4 +772,30 @@ model CancelOperationsResponse {
   @identifiers(#["resourceId"])
   @doc("An array of resource operations that were successfully cancelled")
   results: Array<ResourceOperation>;
+}
+
+// ----------- BulkOperationErrors ---------
+@@identifiers(ListBulkOperationErrorsResponse.value, #[]);
+@added(Versions.`2026-07-06-preview`)
+@doc("The response from listing bulk operation errors")
+model ListBulkOperationErrorsResponse is Azure.Core.Page<ResourceOperation>;
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The response from acknowledging bulk operation errors")
+model AcknowledgeBulkOperationErrorsResponse {
+  @doc("The set of operation ids that were newly acknowledged")
+  acknowledged: Array<string>;
+
+  @doc("The set of operation ids that were not found in the completed operations store")
+  notFound: Array<string>;
+
+  @doc("The set of operation ids that were skipped because they were already acknowledged, not failed, or belong to a different scope")
+  skipped: Array<string>;
+}
+
+@added(Versions.`2026-07-06-preview`)
+@doc("The request to acknowledge bulk operation errors")
+model AcknowledgeBulkOperationErrorsRequest {
+  @doc("The set of operation ids to acknowledge.")
+  operationIds: Array<string>;
 }
