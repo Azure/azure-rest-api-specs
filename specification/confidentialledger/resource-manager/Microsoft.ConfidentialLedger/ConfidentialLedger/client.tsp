@@ -4,7 +4,7 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ConfidentialLedger;
 
-@@clientName(Microsoft.ConfidentialLedger, "ConfidentialLedger", "python");
+@@clientName(Microsoft.ConfidentialLedger, "ConfidentialLedgerMgmtClient", "python");
 
 // Mitigate breaking change: "AadBasedSecurityPrincipal" was renamed to "AADBasedSecurityPrincipal"
 @@clientName(
