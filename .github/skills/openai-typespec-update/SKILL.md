@@ -50,8 +50,8 @@ OpenAI definition package.
 @azure-tools/openai-typespec --save-exact` (or append `@<version>` if
    the user specified a version).
    - If npm fails with an age-gate error like `No matching version found
-     for @azure-tools/openai-typespec@1.21.1 with a date before
-     2026-06-30, 10:37:15 a.m.`, check `npm config get min-release-age`
+for @azure-tools/openai-typespec@1.21.1 with a date before
+2026-06-30, 10:37:15 a.m.`, check `npm config get min-release-age`
      and the global npm config path with `npm config get globalconfig`.
    - For a targeted install of a known-published version blocked only by
      this age gate, rerun the exact install with `--min-release-age=0`,
