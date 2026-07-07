@@ -564,8 +564,8 @@ model KeyLabelScope {
   @doc("The key pattern for the schema scope.")
   key: string;
 
-  @doc("The label pattern for the schema scope.")
-  label: string;
+  @doc("The label pattern for the schema scope. A null or absent label targets key-values with the null label.")
+  label?: string;
 }
 
 @doc("The result of a schema list request.")

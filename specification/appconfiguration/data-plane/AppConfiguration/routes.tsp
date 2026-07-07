@@ -588,3 +588,34 @@ op deleteSchema is AppConfigOperation<
         ...SyncTokenHeader;
       }
 >;
+
+alias SchemaRevisionsRequestParams = {
+  ...SchemaNamePathParam<"The name of the schema whose revisions to retrieve.">;
+  ...SyncTokenHeader;
+  ...AfterHeader;
+  ...SelectQueryParam<SchemaFields>;
+};
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Consistent naming"
+@summary("Gets a list of schema revisions.")
+@doc("Gets a list of schema revisions.")
+@route("/schemas/{schemaName}/revisions")
+@get
+@list
+@added(Versions.v2026_08_01_preview)
+op getSchemaRevisions is AppConfigOperation<
+  SchemaRevisionsRequestParams,
+  SchemaListResult & SyncTokenHeader & ContentTypeHeader<"application/json">
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
+@summary("Requests the headers and status of the given resource.")
+@doc("Requests the headers and status of the given resource.")
+@route("/schemas/{schemaName}/revisions")
+@head
+@added(Versions.v2026_08_01_preview)
+op checkSchemaRevisions is AppConfigOperation<
+  SchemaRevisionsRequestParams,
+  OkResponse & SyncTokenHeader
+>;

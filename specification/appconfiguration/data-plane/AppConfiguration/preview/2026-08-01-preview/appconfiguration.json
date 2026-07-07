@@ -2501,6 +2501,309 @@
         }
       }
     },
+    "/schemas/{schemaName}/revisions": {
+      "get": {
+        "operationId": "GetSchemaRevisions",
+        "summary": "Gets a list of schema revisions.",
+        "description": "Gets a list of schema revisions.",
+        "produces": [
+          "application/json",
+          "application/problem+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema whose revisions to retrieve.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "description",
+                "type",
+                "status",
+                "target",
+                "key_scope",
+                "key_label_scope",
+                "tags",
+                "json_schema",
+                "last_modified",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "description",
+                    "value": "description",
+                    "description": "Description field."
+                  },
+                  {
+                    "name": "type",
+                    "value": "type",
+                    "description": "Type field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "target",
+                    "value": "target",
+                    "description": "Target field."
+                  },
+                  {
+                    "name": "keyScope",
+                    "value": "key_scope",
+                    "description": "Key scope field."
+                  },
+                  {
+                    "name": "keyLabelScope",
+                    "value": "key_label_scope",
+                    "description": "Key label scope field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "jsonSchema",
+                    "value": "json_schema",
+                    "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SchemaListResult"
+            },
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a list of schema revisions.": {
+            "$ref": "./examples/GetSchemaRevisions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink",
+          "itemName": "items"
+        }
+      },
+      "head": {
+        "operationId": "CheckSchemaRevisions",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema whose revisions to retrieve.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "description",
+                "type",
+                "status",
+                "target",
+                "key_scope",
+                "key_label_scope",
+                "tags",
+                "json_schema",
+                "last_modified",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "description",
+                    "value": "description",
+                    "description": "Description field."
+                  },
+                  {
+                    "name": "type",
+                    "value": "type",
+                    "description": "Type field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "target",
+                    "value": "target",
+                    "description": "Target field."
+                  },
+                  {
+                    "name": "keyScope",
+                    "value": "key_scope",
+                    "description": "Key scope field."
+                  },
+                  {
+                    "name": "keyLabelScope",
+                    "value": "key_label_scope",
+                    "description": "Key label scope field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "jsonSchema",
+                    "value": "json_schema",
+                    "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckSchemaRevisions.json"
+          }
+        }
+      }
+    },
     "/snapshots": {
       "get": {
         "operationId": "GetSnapshots",
@@ -3392,12 +3695,11 @@
         },
         "label": {
           "type": "string",
-          "description": "The label pattern for the schema scope."
+          "description": "The label pattern for the schema scope. A null or absent label targets key-values with the null label."
         }
       },
       "required": [
-        "key",
-        "label"
+        "key"
       ]
     },
     "KeyListResult": {
