@@ -1,4 +1,4 @@
-import "@azure-tools/typespec-client-generator-core";
+﻿import "@azure-tools/typespec-client-generator-core";
 import "@typespec/versioning";
 import "./main.tsp";
 
@@ -9,7 +9,8 @@ using Search;
 
 @TypeSpec.Versioning.useDependency(
   Search.Versions.v2026_04_01,
-  Search.Versions.v2025_11_01_preview
+  Search.Versions.v2025_11_01_preview,
+  Search.Versions.v2026_05_01_preview
 )
 namespace Customizations;
 
@@ -182,6 +183,16 @@ namespace SearchIndexClient {
   op getKnowledgeSourceStatus is Search.KnowledgeSources.getStatus;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  op uploadKnowledgeSourceFile is Search.KnowledgeSources.uploadFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  op listKnowledgeSourceFiles is Search.KnowledgeSources.listFiles;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  op deleteKnowledgeSourceFile is Search.KnowledgeSources.deleteFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op getServiceStatistics is Search.getServiceStatistics;
 
@@ -300,10 +311,22 @@ namespace KnowledgeBaseRetrievalClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op retrieve is Search.KnowledgeRetrieval.retrieve;
 }
-@@clientInitialization(KnowledgeBaseRetrievalClient,
+@@clientInitialization(
+  KnowledgeBaseRetrievalClient,
   {
     parameters: KnowledgeBaseRetrievalClientOptions,
   }
+);
+
+@@clientName(
+  KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
+  "inputTokensCount",
+  "!autorest"
+);
+@@clientName(
+  KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
+  "outputTokensCount",
+  "!autorest"
 );
 
 @@access(VectorSearchAlgorithmKind, Access.public);
@@ -320,8 +343,6 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(AnalyzedTokenInfo, Usage.input);
 @@access(IndexerExecutionStatus, Access.public);
 @@usage(IndexerExecutionStatus, Usage.input);
-@@access(IndexerExecutionStatus, Access.public);
-@@usage(IndexerExecutionStatus, Usage.input);
 @@access(SearchIndexer, Access.public);
 @@usage(SearchIndexer, Usage.input);
 @@access(SearchIndexerSkillset, Access.public);
@@ -329,11 +350,11 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SynonymMap, Access.public);
 @@usage(SynonymMap, Usage.input);
 @@access(AutocompleteItem, Access.public);
-@@usage(AutocompleteItem, Usage.input, "!csharp");
+@@usage(AutocompleteItem, Usage.input, "!csharp,!autorest");
 @@access(SuggestResult, Access.public);
 @@usage(SuggestResult, Usage.input);
 @@access(IndexingResult, Access.public);
-@@usage(IndexingResult, Usage.input, "!csharp");
+@@usage(IndexingResult, Usage.input, "!csharp,!autorest");
 @@access(FacetResult, Access.public);
 @@usage(FacetResult, Usage.input);
 @@access(QueryAnswerResult, Access.public);
@@ -364,6 +385,18 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(WebKnowledgeSource, Usage.input);
 @@access(RemoteSharePointKnowledgeSource, Access.public);
 @@usage(RemoteSharePointKnowledgeSource, Usage.input);
+@@access(WorkIQKnowledgeSource, Access.public);
+@@usage(WorkIQKnowledgeSource, Usage.input);
+@@access(McpServerKnowledgeSource, Access.public);
+@@usage(McpServerKnowledgeSource, Usage.input);
+@@access(IndexedSqlKnowledgeSource, Access.public);
+@@usage(IndexedSqlKnowledgeSource, Usage.input);
+@@access(FileKnowledgeSource, Access.public);
+@@usage(FileKnowledgeSource, Usage.input);
+@@access(FabricDataAgentKnowledgeSource, Access.public);
+@@usage(FabricDataAgentKnowledgeSource, Usage.input);
+@@access(FabricOntologyKnowledgeSource, Access.public);
+@@usage(FabricOntologyKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
@@ -375,26 +408,31 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(AIServicesAccountIdentity.subdomainUrl, url, "csharp");
 @@access(AnalyzeResult, Access.internal, "csharp");
 @@access(AzureActiveDirectoryApplicationCredentials, Access.internal, "csharp");
-@@alternateType(AzureMachineLearningSkill.resourceId,
+@@alternateType(
+  AzureMachineLearningSkill.resourceId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(AzureMachineLearningSkill.region, azureLocation, "csharp");
 @@clientName(AzureMachineLearningSkill.region, "Location", "csharp");
+@@clientName(AMLVectorizer.amlParameters, "AMLParameters", "csharp");
 @@clientName(ChatCompletionSchemaProperties.strict, "IsStrict", "csharp");
 @@alternateType(ChatCompletionSkill.uri, url, "csharp");
 @@alternateType(CustomEntityLookupSkill.entitiesDefinitionUri, url, "csharp");
 @@access(DataSourceCredentials, Access.internal, "csharp");
-@@alternateType(Search.DocumentExtractionSkill.dataToExtract,
+@@alternateType(
+  Search.DocumentExtractionSkill.dataToExtract,
   BlobIndexerDataToExtract,
   "csharp"
 );
-@@alternateType(Search.DocumentExtractionSkill.parsingMode,
+@@alternateType(
+  Search.DocumentExtractionSkill.parsingMode,
   BlobIndexerParsingMode,
   "csharp"
 );
 @@access(EdgeNGramTokenFilterV2, Access.internal, "csharp");
-@@clientName(EdgeNGramTokenFilterV2,
+@@clientName(
+  EdgeNGramTokenFilterV2,
   "InternalEdgeNGramTokenFilterV2",
   "csharp"
 );
@@ -403,7 +441,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(EntityRecognitionSkillV3, "EntityRecognitionSkill", "csharp");
 @@clientName(GetIndexStatisticsResult, "SearchIndexStatistics", "csharp");
 @@clientName(IndexerCurrentState, "IndexerState", "csharp");
-@@clientName(IndexerCurrentState.resetDatasourceDocumentIds,
+@@clientName(
+  IndexerCurrentState.resetDatasourceDocumentIds,
   "ResetDataSourceDocumentIds",
   "csharp"
 );
@@ -412,7 +451,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(KeyPhraseExtractionSkill.modelVersion, Access.internal, "csharp");
 @@alternateType(KnowledgeBase.eTag, eTag, "csharp");
 @@alternateType(KnowledgeSource.eTag, eTag, "csharp");
-@@alternateType(KnowledgeSourceSynchronizationError.documentationLink,
+@@alternateType(
+  KnowledgeSourceSynchronizationError.documentationLink,
   url,
   "csharp"
 );
@@ -428,7 +468,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(ListSkillsetsResult, Access.internal, "csharp");
 @@access(ListSynonymMapsResult, Access.internal, "csharp");
 @@access(LuceneStandardTokenizer, Access.internal, "csharp");
-@@clientName(LuceneStandardTokenizer,
+@@clientName(
+  LuceneStandardTokenizer,
   "DeprecatedLuceneStandardTokenizer",
   "csharp"
 );
@@ -440,41 +481,50 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(SearchIndexer.eTag, eTag, "csharp");
 @@alternateType(SearchIndexerSkillset.eTag, eTag, "csharp");
 @@clientName(SearchIndexerKnowledgeStore, "KnowledgeStore", "csharp");
-@@clientName(SearchIndexerKnowledgeStoreBlobProjectionSelector,
+@@clientName(
+  SearchIndexerKnowledgeStoreBlobProjectionSelector,
   "KnowledgeStoreStorageProjectionSelector",
   "csharp"
 );
-@@clientName(SearchIndexerKnowledgeStoreProjection,
+@@clientName(
+  SearchIndexerKnowledgeStoreProjection,
   "KnowledgeStoreProjection",
   "csharp"
 );
-@@clientName(SearchIndexerKnowledgeStoreFileProjectionSelector,
+@@clientName(
+  SearchIndexerKnowledgeStoreFileProjectionSelector,
   "KnowledgeStoreFileProjectionSelector",
   "csharp"
 );
-@@clientName(SearchIndexerKnowledgeStoreObjectProjectionSelector,
+@@clientName(
+  SearchIndexerKnowledgeStoreObjectProjectionSelector,
   "KnowledgeStoreObjectProjectionSelector",
   "csharp"
 );
-@@clientName(SearchIndexerKnowledgeStoreProjectionSelector,
+@@clientName(
+  SearchIndexerKnowledgeStoreProjectionSelector,
   "KnowledgeStoreProjectionSelector",
   "csharp"
 );
-@@clientName(SearchIndexerKnowledgeStoreTableProjectionSelector,
+@@clientName(
+  SearchIndexerKnowledgeStoreTableProjectionSelector,
   "KnowledgeStoreTableProjectionSelector",
   "csharp"
 );
 @@clientName(ResourceCounter, "SearchResourceCounter", "csharp");
-@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
+@@clientName(
+  SemanticPrioritizedFields.prioritizedContentFields,
   "ContentFields",
   "csharp"
 );
-@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
+@@clientName(
+  SemanticPrioritizedFields.prioritizedKeywordsFields,
   "KeywordsFields",
   "csharp"
 );
 @@alternateType(WebApiSkill.authResourceId, armResourceIdentifier, "csharp");
-@@alternateType(WebApiVectorizerParameters.authResourceId,
+@@alternateType(
+  WebApiVectorizerParameters.authResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -482,29 +532,33 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(VectorizableImageUrlQuery.url, url, "csharp");
 @@clientName(AutocompleteResult, "AutocompleteResults", "csharp");
 @@access(IndexAction, Access.internal, "csharp");
-@@access(IndexAction, Access.internal, "csharp");
 @@access(IndexBatch, Access.internal, "csharp");
 @@clientName(IndexBatch, "IndexBatch", "csharp");
 @@clientName(IndexingResult.statusCode, "Status", "csharp");
 @@clientName(DocumentKeysOrIds, "ResetDocumentOptions", "csharp");
-@@clientName(DocumentKeysOrIds.datasourceDocumentIds,
+@@clientName(
+  DocumentKeysOrIds.datasourceDocumentIds,
   "DataSourceDocumentIds",
   "csharp"
 );
 @@access(SearchDocumentsResult, Access.internal, "csharp");
 @@access(SearchDocumentsResult, Access.internal, "python");
 @@access(Search.SearchDocumentsResult.nextLink, Access.internal, "java");
-@@access(Search.SearchDocumentsResult.nextPageParameters,
+@@access(
+  Search.SearchDocumentsResult.nextPageParameters,
   Access.internal,
   "java"
 );
-@@access(DebugInfo, Access.internal, "python");
 @@access(DebugInfo, Access.internal, "java");
 @@access(AutocompleteMode, Access.public, "python");
+@@access(HybridCountAndFacetMode, Access.public, "python");
+@@access(HybridSearch, Access.public, "python");
 @@access(IndexActionType, Access.public, "python");
 @@access(QueryAnswerType, Access.public, "python");
 @@access(QueryCaptionType, Access.public, "python");
 @@access(QueryDebugMode, Access.public, "python");
+@@access(QueryLanguage, Access.public, "python");
+@@access(QuerySpellerType, Access.public, "python");
 @@access(QueryType, Access.public, "python");
 @@access(ScoringStatistics, Access.public, "python");
 @@access(SearchMode, Access.public, "python");
@@ -524,7 +578,8 @@ namespace KnowledgeBaseRetrievalClient {
 // Name Path customizations
 @@clientName(indexNamePath.indexName, "indexName", "csharp");
 @@clientName(indexerNamePath.indexerName, "indexerName", "csharp");
-@@clientName(dataSourceNamePath.dataSourceName,
+@@clientName(
+  dataSourceNamePath.dataSourceName,
   "dataSourceConnectionName",
   "csharp"
 );
@@ -532,7 +587,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(synonymMapNamePath.synonymMapName, "synonymMapName", "csharp");
 @@clientName(aliasNamePath.aliasName, "aliasName", "csharp");
 @@clientName(sourceNamePath.sourceName, "sourceName", "csharp");
-@@clientName(knowledgeBaseNamePath.knowledgeBaseName,
+@@clientName(
+  knowledgeBaseNamePath.knowledgeBaseName,
   "knowledgeBaseName",
   "csharp"
 );
@@ -571,7 +627,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.analyze, Access.internal, "python");
 @@access(SearchIndexClient.getStatistics, Access.internal, "python");
 @@access(SearchIndexClient.listIndexes, Access.internal, "python");
-@@access(SearchIndexClient.listIndexesWithSelectedProperties,
+@@access(
+  SearchIndexClient.listIndexesWithSelectedProperties,
   Access.internal,
   "python"
 );
@@ -581,32 +638,46 @@ namespace KnowledgeBaseRetrievalClient {
 @@access(SearchIndexClient.deleteKnowledgeBase, Access.internal, "python");
 @@access(SearchIndexClient.createOrUpdateKnowledgeSource, Access.internal);
 @@access(SearchIndexClient.deleteKnowledgeSource, Access.internal, "python");
+@@access(
+  SearchIndexClient.uploadKnowledgeSourceFile,
+  Access.internal,
+  "python"
+);
+@@access(
+  SearchIndexClient.deleteKnowledgeSourceFile,
+  Access.internal,
+  "python"
+);
 
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorResponse, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorDetail, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ErrorAdditionalInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.ErrorAdditionalInfo,
+@@clientNamespace(
+  Search.ErrorAdditionalInfo,
   "com.azure.search.documents",
   "java"
 );
 
 // Search documents types
 @@clientNamespace(Search.SemanticErrorMode, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticErrorMode,
+@@clientNamespace(
+  Search.SemanticErrorMode,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.QueryAnswerType, "Azure.Search.Documents");
 @@clientNamespace(Search.QueryAnswerType, "com.azure.search.documents", "java");
 @@clientNamespace(Search.QueryCaptionType, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryCaptionType,
+@@clientNamespace(
+  Search.QueryCaptionType,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.QueryRewritesType, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryRewritesType,
+@@clientNamespace(
+  Search.QueryRewritesType,
   "com.azure.search.documents",
   "java"
 );
@@ -615,47 +686,56 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.QueryLanguage, "Azure.Search.Documents");
 @@clientNamespace(Search.QueryLanguage, "com.azure.search.documents", "java");
 @@clientNamespace(Search.QuerySpellerType, "Azure.Search.Documents");
-@@clientNamespace(Search.QuerySpellerType,
+@@clientNamespace(
+  Search.QuerySpellerType,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorQueryKind, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorQueryKind, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorThresholdKind, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorThresholdKind,
+@@clientNamespace(
+  Search.VectorThresholdKind,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorFilterMode, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorFilterMode,
+@@clientNamespace(
+  Search.VectorFilterMode,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.HybridCountAndFacetMode, "Azure.Search.Documents");
-@@clientNamespace(Search.HybridCountAndFacetMode,
+@@clientNamespace(
+  Search.HybridCountAndFacetMode,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SemanticFieldState, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticFieldState,
+@@clientNamespace(
+  Search.SemanticFieldState,
   "com.azure.search.documents",
   "java"
 );
 @@clientName(Search.SemanticField.fieldName, "name", "javascript");
 @@clientNamespace(Search.SemanticErrorReason, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticErrorReason,
+@@clientNamespace(
+  Search.SemanticErrorReason,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SemanticSearchResultsType, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticSearchResultsType,
+@@clientNamespace(
+  Search.SemanticSearchResultsType,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.SemanticQueryRewritesResultType,
+@@clientNamespace(
+  Search.SemanticQueryRewritesResultType,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.SemanticQueryRewritesResultType,
+@@clientNamespace(
+  Search.SemanticQueryRewritesResultType,
   "com.azure.search.documents",
   "java"
 );
@@ -664,40 +744,47 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchMode, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchMode, "com.azure.search.documents", "java");
 @@clientNamespace(Search.ScoringStatistics, "Azure.Search.Documents");
-@@clientNamespace(Search.ScoringStatistics,
+@@clientNamespace(
+  Search.ScoringStatistics,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.IndexActionType, "Azure.Search.Documents");
 @@clientNamespace(Search.IndexActionType, "com.azure.search.documents", "java");
 @@clientNamespace(Search.AutocompleteMode, "Azure.Search.Documents");
-@@clientNamespace(Search.AutocompleteMode,
+@@clientNamespace(
+  Search.AutocompleteMode,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SearchDocumentsResult, "Azure.Search.Documents");
-@@clientNamespace(Search.SearchDocumentsResult,
+@@clientNamespace(
+  Search.SearchDocumentsResult,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.FacetResult, "Azure.Search.Documents");
 @@clientNamespace(Search.FacetResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.QueryAnswerResult, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryAnswerResult,
+@@clientNamespace(
+  Search.QueryAnswerResult,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.DebugInfo, "Azure.Search.Documents");
 @@clientNamespace(Search.DebugInfo, "com.azure.search.documents", "java");
 @@clientNamespace(Search.QueryRewritesDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryRewritesDebugInfo,
+@@clientNamespace(
+  Search.QueryRewritesDebugInfo,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.QueryRewritesValuesDebugInfo,
+@@clientNamespace(
+  Search.QueryRewritesValuesDebugInfo,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.QueryRewritesValuesDebugInfo,
+@@clientNamespace(
+  Search.QueryRewritesValuesDebugInfo,
   "com.azure.search.documents",
   "java"
 );
@@ -712,55 +799,67 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.SearchResult, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.QueryCaptionResult, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryCaptionResult,
+@@clientNamespace(
+  Search.QueryCaptionResult,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.DocumentDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.DocumentDebugInfo,
+@@clientNamespace(
+  Search.DocumentDebugInfo,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SemanticDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticDebugInfo,
+@@clientNamespace(
+  Search.SemanticDebugInfo,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.QueryResultDocumentSemanticField,
+@@clientNamespace(
+  Search.QueryResultDocumentSemanticField,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.QueryResultDocumentSemanticField,
+@@clientNamespace(
+  Search.QueryResultDocumentSemanticField,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.QueryResultDocumentRerankerInput,
+@@clientNamespace(
+  Search.QueryResultDocumentRerankerInput,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.QueryResultDocumentRerankerInput,
+@@clientNamespace(
+  Search.QueryResultDocumentRerankerInput,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorsDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorsDebugInfo,
+@@clientNamespace(
+  Search.VectorsDebugInfo,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.QueryResultDocumentSubscores,
+@@clientNamespace(
+  Search.QueryResultDocumentSubscores,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.QueryResultDocumentSubscores,
+@@clientNamespace(
+  Search.QueryResultDocumentSubscores,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.TextResult, "Azure.Search.Documents");
 @@clientNamespace(Search.TextResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.SingleVectorFieldResult, "Azure.Search.Documents");
-@@clientNamespace(Search.SingleVectorFieldResult,
+@@clientNamespace(
+  Search.SingleVectorFieldResult,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SuggestDocumentsResult, "Azure.Search.Documents");
-@@clientNamespace(Search.SuggestDocumentsResult,
+@@clientNamespace(
+  Search.SuggestDocumentsResult,
   "com.azure.search.documents",
   "java"
 );
@@ -775,7 +874,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.LookupDocument, "Azure.Search.Documents");
 @@clientNamespace(Search.LookupDocument, "com.azure.search.documents", "java");
 @@clientNamespace(Search.IndexDocumentsResult, "Azure.Search.Documents");
-@@clientNamespace(Search.IndexDocumentsResult,
+@@clientNamespace(
+  Search.IndexDocumentsResult,
   "com.azure.search.documents",
   "java"
 );
@@ -783,2106 +883,3107 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientNamespace(Search.IndexingResult, "Azure.Search.Documents");
 @@clientNamespace(Search.IndexingResult, "com.azure.search.documents", "java");
 @@clientNamespace(Search.AutocompleteResult, "Azure.Search.Documents");
-@@clientNamespace(Search.AutocompleteResult,
+@@clientNamespace(
+  Search.AutocompleteResult,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.AutocompleteItem, "Azure.Search.Documents");
-@@clientNamespace(Search.AutocompleteItem,
+@@clientNamespace(
+  Search.AutocompleteItem,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.AutocompleteRequest, "Azure.Search.Documents");
-@@clientNamespace(Search.AutocompleteRequest,
+@@clientNamespace(
+  Search.AutocompleteRequest,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorizedQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorizedQuery, "com.azure.search.documents", "java");
 @@clientNamespace(Search.VectorizableTextQuery, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorizableTextQuery,
+@@clientNamespace(
+  Search.VectorizableTextQuery,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorizableImageUrlQuery, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorizableImageUrlQuery,
+@@clientNamespace(
+  Search.VectorizableImageUrlQuery,
   "com.azure.search.documents",
   "java"
 );
-@@clientNamespace(Search.VectorizableImageBinaryQuery,
+@@clientNamespace(
+  Search.VectorizableImageBinaryQuery,
   "Azure.Search.Documents"
 );
-@@clientNamespace(Search.VectorizableImageBinaryQuery,
+@@clientNamespace(
+  Search.VectorizableImageBinaryQuery,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.VectorSimilarityThreshold, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorSimilarityThreshold,
+@@clientNamespace(
+  Search.VectorSimilarityThreshold,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
-@@clientNamespace(Search.SearchScoreThreshold,
+@@clientNamespace(
+  Search.SearchScoreThreshold,
   "com.azure.search.documents",
   "java"
 );
 @@clientNamespace(Search.QueryResultDocumentInnerHit, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryResultDocumentInnerHit,
+@@clientNamespace(
+  Search.QueryResultDocumentInnerHit,
   "com.azure.search.documents",
   "java"
 );
 
 // Search index types
-@@clientNamespace(Search.SearchIndexerDataSourceType,
+@@clientNamespace(
+  Search.SearchIndexerDataSourceType,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataSourceType,
+@@clientNamespace(
+  Search.SearchIndexerDataSourceType,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BlobIndexerParsingMode,
+@@clientNamespace(
+  Search.BlobIndexerParsingMode,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BlobIndexerParsingMode,
+@@clientNamespace(
+  Search.BlobIndexerParsingMode,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MarkdownParsingSubmode,
+@@clientNamespace(
+  Search.MarkdownParsingSubmode,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MarkdownParsingSubmode,
+@@clientNamespace(
+  Search.MarkdownParsingSubmode,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.MarkdownHeaderDepth, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MarkdownHeaderDepth,
+@@clientNamespace(
+  Search.MarkdownHeaderDepth,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BlobIndexerDataToExtract,
+@@clientNamespace(
+  Search.BlobIndexerDataToExtract,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BlobIndexerDataToExtract,
+@@clientNamespace(
+  Search.BlobIndexerDataToExtract,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BlobIndexerImageAction,
+@@clientNamespace(
+  Search.BlobIndexerImageAction,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BlobIndexerImageAction,
+@@clientNamespace(
+  Search.BlobIndexerImageAction,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
+@@clientNamespace(
+  Search.BlobIndexerPDFTextRotationAlgorithm,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
+@@clientNamespace(
+  Search.BlobIndexerPDFTextRotationAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientName(Search.BlobIndexerPDFTextRotationAlgorithm,
+@@clientName(
+  Search.BlobIndexerPDFTextRotationAlgorithm,
   "BlobIndexerPdfTextRotationAlgorithm",
   "csharp"
 );
-@@clientNamespace(Search.IndexerExecutionEnvironment,
+@@clientNamespace(
+  Search.IndexerExecutionEnvironment,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexerExecutionEnvironment,
+@@clientNamespace(
+  Search.IndexerExecutionEnvironment,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexerExecutionStatusDetail,
+@@clientNamespace(
+  Search.IndexerExecutionStatusDetail,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexerExecutionStatusDetail,
+@@clientNamespace(
+  Search.IndexerExecutionStatusDetail,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexingMode, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexingMode,
+@@clientNamespace(
+  Search.IndexingMode,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexProjectionMode, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexProjectionMode,
+@@clientNamespace(
+  Search.IndexProjectionMode,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchFieldDataType, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchFieldDataType,
+@@clientNamespace(
+  Search.SearchFieldDataType,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LexicalAnalyzerName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalAnalyzerName,
+@@clientNamespace(
+  Search.LexicalAnalyzerName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LexicalNormalizerName,
+@@clientNamespace(
+  Search.LexicalNormalizerName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LexicalNormalizerName,
+@@clientNamespace(
+  Search.LexicalNormalizerName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorEncodingFormat,
+@@clientNamespace(
+  Search.VectorEncodingFormat,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorEncodingFormat,
+@@clientNamespace(
+  Search.VectorEncodingFormat,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmKind,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmKind,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmKind,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchVectorizerKind,
+@@clientNamespace(
+  Search.VectorSearchVectorizerKind,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchVectorizerKind,
+@@clientNamespace(
+  Search.VectorSearchVectorizerKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchCompressionKind,
+@@clientNamespace(
+  Search.VectorSearchCompressionKind,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchCompressionKind,
+@@clientNamespace(
+  Search.VectorSearchCompressionKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchCompressionRescoreStorageMethod,
+@@clientNamespace(
+  Search.VectorSearchCompressionRescoreStorageMethod,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchCompressionRescoreStorageMethod,
+@@clientNamespace(
+  Search.VectorSearchCompressionRescoreStorageMethod,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LexicalTokenizerName,
+@@clientNamespace(
+  Search.LexicalTokenizerName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LexicalTokenizerName,
+@@clientNamespace(
+  Search.LexicalTokenizerName,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TokenFilterName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TokenFilterName,
+@@clientNamespace(
+  Search.TokenFilterName,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CharFilterName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CharFilterName,
+@@clientNamespace(
+  Search.CharFilterName,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.RegexFlags, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.RegexFlags,
+@@clientNamespace(
+  Search.RegexFlags,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmMetric,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmMetric,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmMetric,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmMetric,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchCompressionTarget,
+@@clientNamespace(
+  Search.VectorSearchCompressionTarget,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchCompressionTarget,
+@@clientNamespace(
+  Search.VectorSearchCompressionTarget,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAIModelName,
+@@clientNamespace(
+  Search.AzureOpenAIModelName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAIModelName,
+@@clientNamespace(
+  Search.AzureOpenAIModelName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AIFoundryModelCatalogName,
+@@clientNamespace(
+  Search.AIFoundryModelCatalogName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AIFoundryModelCatalogName,
+@@clientNamespace(
+  Search.AIFoundryModelCatalogName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KeyPhraseExtractionSkillLanguage,
+@@clientNamespace(
+  Search.KeyPhraseExtractionSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KeyPhraseExtractionSkillLanguage,
+@@clientNamespace(
+  Search.KeyPhraseExtractionSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.OcrSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.OcrSkillLanguage,
+@@clientNamespace(
+  Search.OcrSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.OcrLineEnding,
+@@clientNamespace(
+  Search.OcrLineEnding,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ImageAnalysisSkillLanguage,
+@@clientNamespace(
+  Search.ImageAnalysisSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ImageAnalysisSkillLanguage,
+@@clientNamespace(
+  Search.ImageAnalysisSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.VisualFeature, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VisualFeature,
+@@clientNamespace(
+  Search.VisualFeature,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ImageDetail, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ImageDetail,
+@@clientNamespace(
+  Search.ImageDetail,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.EntityCategory, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EntityCategory,
+@@clientNamespace(
+  Search.EntityCategory,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PIIDetectionSkillMaskingMode,
+@@clientNamespace(
+  Search.PIIDetectionSkillMaskingMode,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PIIDetectionSkillMaskingMode,
+@@clientNamespace(
+  Search.PIIDetectionSkillMaskingMode,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+@@clientNamespace(
+  Search.EntityRecognitionSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+@@clientNamespace(
+  Search.EntityRecognitionSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SentimentSkillLanguage,
+@@clientNamespace(
+  Search.SentimentSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SentimentSkillLanguage,
+@@clientNamespace(
+  Search.SentimentSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SplitSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SplitSkillLanguage,
+@@clientNamespace(
+  Search.SplitSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TextSplitMode, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TextSplitMode,
+@@clientNamespace(
+  Search.TextSplitMode,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SplitSkillUnit, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SplitSkillUnit,
+@@clientNamespace(
+  Search.SplitSkillUnit,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SplitSkillEncoderModelName,
+@@clientNamespace(
+  Search.SplitSkillEncoderModelName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SplitSkillEncoderModelName,
+@@clientNamespace(
+  Search.SplitSkillEncoderModelName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CustomEntityLookupSkillLanguage,
+@@clientNamespace(
+  Search.CustomEntityLookupSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CustomEntityLookupSkillLanguage,
+@@clientNamespace(
+  Search.CustomEntityLookupSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.TextTranslationSkillLanguage,
+@@clientNamespace(
+  Search.TextTranslationSkillLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.TextTranslationSkillLanguage,
+@@clientNamespace(
+  Search.TextTranslationSkillLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillOutputMode,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillOutputMode,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexerStatus, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerStatus,
+@@clientNamespace(
+  Search.IndexerStatus,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexerRuntime, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerRuntime,
+@@clientNamespace(
+  Search.IndexerRuntime,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexerExecutionStatus,
+@@clientNamespace(
+  Search.IndexerExecutionStatus,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexerExecutionStatus,
+@@clientNamespace(
+  Search.IndexerExecutionStatus,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ScoringFunctionInterpolation,
+@@clientNamespace(
+  Search.ScoringFunctionInterpolation,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ScoringFunctionInterpolation,
+@@clientNamespace(
+  Search.ScoringFunctionInterpolation,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ScoringFunctionAggregation,
+@@clientNamespace(
+  Search.ScoringFunctionAggregation,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ScoringFunctionAggregation,
+@@clientNamespace(
+  Search.ScoringFunctionAggregation,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TokenCharacterKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TokenCharacterKind,
+@@clientNamespace(
+  Search.TokenCharacterKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MicrosoftTokenizerLanguage,
+@@clientNamespace(
+  Search.MicrosoftTokenizerLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MicrosoftTokenizerLanguage,
+@@clientNamespace(
+  Search.MicrosoftTokenizerLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MicrosoftStemmingTokenizerLanguage,
+@@clientNamespace(
+  Search.MicrosoftStemmingTokenizerLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MicrosoftStemmingTokenizerLanguage,
+@@clientNamespace(
+  Search.MicrosoftStemmingTokenizerLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CjkBigramTokenFilterScripts,
+@@clientNamespace(
+  Search.CjkBigramTokenFilterScripts,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CjkBigramTokenFilterScripts,
+@@clientNamespace(
+  Search.CjkBigramTokenFilterScripts,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilterSide,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilterSide,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilterSide,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilterSide,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PhoneticEncoder, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PhoneticEncoder,
+@@clientNamespace(
+  Search.PhoneticEncoder,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SnowballTokenFilterLanguage,
+@@clientNamespace(
+  Search.SnowballTokenFilterLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SnowballTokenFilterLanguage,
+@@clientNamespace(
+  Search.SnowballTokenFilterLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.StemmerTokenFilterLanguage,
+@@clientNamespace(
+  Search.StemmerTokenFilterLanguage,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.StemmerTokenFilterLanguage,
+@@clientNamespace(
+  Search.StemmerTokenFilterLanguage,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.StopwordsList, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StopwordsList,
+@@clientNamespace(
+  Search.StopwordsList,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerDataSource,
+@@clientNamespace(
+  Search.SearchIndexerDataSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataSource,
+@@clientNamespace(
+  Search.SearchIndexerDataSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DataSourceCredentials,
+@@clientNamespace(
+  Search.DataSourceCredentials,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DataSourceCredentials,
+@@clientNamespace(
+  Search.DataSourceCredentials,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerDataContainer,
+@@clientNamespace(
+  Search.SearchIndexerDataContainer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataContainer,
+@@clientNamespace(
+  Search.SearchIndexerDataContainer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DataChangeDetectionPolicy,
+@@clientNamespace(
+  Search.DataChangeDetectionPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DataChangeDetectionPolicy,
+@@clientNamespace(
+  Search.DataChangeDetectionPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DataDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.DataDeletionDetectionPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DataDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.DataDeletionDetectionPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchResourceEncryptionKey,
+@@clientNamespace(
+  Search.SearchResourceEncryptionKey,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchResourceEncryptionKey,
+@@clientNamespace(
+  Search.SearchResourceEncryptionKey,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureActiveDirectoryApplicationCredentials,
+@@clientNamespace(
+  Search.AzureActiveDirectoryApplicationCredentials,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureActiveDirectoryApplicationCredentials,
+@@clientNamespace(
+  Search.AzureActiveDirectoryApplicationCredentials,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ListDataSourcesResult,
+@@clientNamespace(
+  Search.ListDataSourcesResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ListDataSourcesResult,
+@@clientNamespace(
+  Search.ListDataSourcesResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@access(Search.ListDataSourcesResult, Access.public, "java");
 @@clientNamespace(Search.DocumentKeysOrIds, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentKeysOrIds,
+@@clientNamespace(
+  Search.DocumentKeysOrIds,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexer,
+@@clientNamespace(
+  Search.SearchIndexer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexingSchedule, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexingSchedule,
+@@clientNamespace(
+  Search.IndexingSchedule,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexingParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexingParameters,
+@@clientNamespace(
+  Search.IndexingParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexingParametersConfiguration,
+@@clientNamespace(
+  Search.IndexingParametersConfiguration,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexingParametersConfiguration,
+@@clientNamespace(
+  Search.IndexingParametersConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.FieldMapping, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.FieldMapping,
+@@clientNamespace(
+  Search.FieldMapping,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.FieldMappingFunction,
+@@clientNamespace(
+  Search.FieldMappingFunction,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.FieldMappingFunction,
+@@clientNamespace(
+  Search.FieldMappingFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexerCache, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerCache,
+@@clientNamespace(
+  Search.SearchIndexerCache,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ListIndexersResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListIndexersResult,
+@@clientNamespace(
+  Search.ListIndexersResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@access(Search.ListIndexersResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndexerStatus, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerStatus,
+@@clientNamespace(
+  Search.SearchIndexerStatus,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexerExecutionResult,
+@@clientNamespace(
+  Search.IndexerExecutionResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexerExecutionResult,
+@@clientNamespace(
+  Search.IndexerExecutionResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexerCurrentState, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerCurrentState,
+@@clientNamespace(
+  Search.IndexerCurrentState,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexerError, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerError,
+@@clientNamespace(
+  Search.SearchIndexerError,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerWarning,
+@@clientNamespace(
+  Search.SearchIndexerWarning,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerWarning,
+@@clientNamespace(
+  Search.SearchIndexerWarning,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexerLimits, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerLimits,
+@@clientNamespace(
+  Search.SearchIndexerLimits,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerSkillset,
+@@clientNamespace(
+  Search.SearchIndexerSkillset,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerSkillset,
+@@clientNamespace(
+  Search.SearchIndexerSkillset,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexerSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerSkill,
+@@clientNamespace(
+  Search.SearchIndexerSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.InputFieldMappingEntry,
+@@clientNamespace(
+  Search.InputFieldMappingEntry,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.InputFieldMappingEntry,
+@@clientNamespace(
+  Search.InputFieldMappingEntry,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.OutputFieldMappingEntry,
+@@clientNamespace(
+  Search.OutputFieldMappingEntry,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.OutputFieldMappingEntry,
+@@clientNamespace(
+  Search.OutputFieldMappingEntry,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CognitiveServicesAccount,
+@@clientNamespace(
+  Search.CognitiveServicesAccount,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CognitiveServicesAccount,
+@@clientNamespace(
+  Search.CognitiveServicesAccount,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStore,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStore,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStore,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStore,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjection,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreProjection,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjection,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreProjection,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreTableProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreTableProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreTableProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreTableProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreObjectProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreObjectProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreObjectProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreObjectProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreBlobProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreBlobProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreBlobProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreBlobProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreFileProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreFileProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreFileProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreFileProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjection,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjection,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjection,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjection,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjectionSelector,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjectionSelector,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjectionSelector,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjectionsParameters,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjectionsParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerIndexProjectionsParameters,
+@@clientNamespace(
+  Search.SearchIndexerIndexProjectionsParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ListSkillsetsResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListSkillsetsResult,
+@@clientNamespace(
+  Search.ListSkillsetsResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@access(Search.ListSkillsetsResult, Access.public, "java");
 @@clientNamespace(Search.SkillNames, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SkillNames,
+@@clientNamespace(
+  Search.SkillNames,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SynonymMap, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SynonymMap,
+@@clientNamespace(
+  Search.SynonymMap,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ListSynonymMapsResult,
+@@clientNamespace(
+  Search.ListSynonymMapsResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ListSynonymMapsResult,
+@@clientNamespace(
+  Search.ListSynonymMapsResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@access(Search.ListSynonymMapsResult, Access.public, "java");
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndex,
+@@clientNamespace(
+  Search.SearchIndex,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchIndexResponse, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexResponse,
+@@clientNamespace(
+  Search.SearchIndexResponse,
   "com.azure.search.documents.indexes",
   "java"
 );
+@@clientNamespace(
+  Search.SharePointConnectorAppRegistration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.SharePointConnectorAppRegistration,
+  "com.azure.search.documents",
+  "java"
+);
 @@clientNamespace(Search.SearchField, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchField,
+@@clientNamespace(
+  Search.SearchField,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ScoringProfile, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScoringProfile,
+@@clientNamespace(
+  Search.ScoringProfile,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TextWeights, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TextWeights,
+@@clientNamespace(
+  Search.TextWeights,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScoringFunction,
+@@clientNamespace(
+  Search.ScoringFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CorsOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CorsOptions,
+@@clientNamespace(
+  Search.CorsOptions,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBase, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeBase,
+@@clientNamespace(
+  Search.KnowledgeBase,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceReference,
+@@clientNamespace(
+  Search.KnowledgeSourceReference,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeSourceReference,
+@@clientNamespace(
+  Search.KnowledgeSourceReference,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceContentExtractionMode,
+@@clientNamespace(
+  Search.KnowledgeSourceContentExtractionMode,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeSourceContentExtractionMode,
+@@clientNamespace(
+  Search.KnowledgeSourceContentExtractionMode,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceIngestionPermissionOption,
+@@clientNamespace(
+  Search.KnowledgeSourceIngestionPermissionOption,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeSourceIngestionPermissionOption,
+@@clientNamespace(
+  Search.KnowledgeSourceIngestionPermissionOption,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceSynchronizationStatus,
+@@clientNamespace(
+  Search.KnowledgeSourceSynchronizationStatus,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeSourceSynchronizationStatus,
+@@clientNamespace(
+  Search.KnowledgeSourceSynchronizationStatus,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ListKnowledgeBasesResult,
+@@clientNamespace(
+  Search.ListKnowledgeBasesResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ListKnowledgeBasesResult,
+@@clientNamespace(
+  Search.ListKnowledgeBasesResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KnowledgeBaseModel, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeBaseModel,
+@@clientNamespace(
+  Search.KnowledgeBaseModel,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseModelKind,
+@@clientNamespace(
+  Search.KnowledgeBaseModelKind,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeBaseModelKind,
+@@clientNamespace(
+  Search.KnowledgeBaseModelKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureOpenAIModel,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureOpenAIModel,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureOpenAIModel,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureOpenAIModel,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAiParameters,
+@@clientNamespace(
+  Search.AzureOpenAiParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAiParameters,
+@@clientNamespace(
+  Search.AzureOpenAiParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSource, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeSource,
+@@clientNamespace(
+  Search.KnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KnowledgeSourceKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeSourceKind,
+@@clientNamespace(
+  Search.KnowledgeSourceKind,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSource,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSource,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSource,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSource,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 
-@@clientName(Search.AzureBlobKnowledgeSourceParameters.isADLSGen2,
+@@clientName(
+  Search.AzureBlobKnowledgeSourceParameters.isADLSGen2,
   "adlsGen2",
   "java"
 );
 
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexedSharePointContainerName,
+@@clientNamespace(
+  Search.IndexedSharePointContainerName,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexedSharePointContainerName,
+@@clientNamespace(
+  Search.IndexedSharePointContainerName,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSource,
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.ContentColumnMapping,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ContentColumnMapping,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.EmbeddingColumnMapping,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.EmbeddingColumnMapping,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.WorkIQKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.WorkIQKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerAuthentication,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerAuthentication,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerAuthenticationKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerAuthenticationKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerFoundryConnectionAuthentication,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerFoundryConnectionAuthentication,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerStoredHeadersAuthentication,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerStoredHeadersAuthentication,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerFoundryConnectionParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerFoundryConnectionParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerStoredHeadersParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerStoredHeadersParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.McpServerHeaders, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.McpServerHeaders,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.McpServerTool, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.McpServerTool,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerToolInclusionMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerToolInclusionMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsing,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsing,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingKind,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerAutoOutputParsing,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerAutoOutputParsing,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerJsonOutputParsing,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerJsonOutputParsing,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerSplitOutputParsing,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerSplitOutputParsing,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerNoneOutputParsing,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerNoneOutputParsing,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingJsonParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingJsonParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingSplitParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.McpServerOutputParsingSplitParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.FileKnowledgeSource, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.FileKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(Search.KnowledgeSourceFile, "Azure.Search.Documents.Indexes");
+@@clientNamespace(
+  Search.KnowledgeSourceFile,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.ListKnowledgeSourceFilesResult,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ListKnowledgeSourceFilesResult,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.WebKnowledgeSource, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WebKnowledgeSource,
+@@clientNamespace(
+  Search.WebKnowledgeSource,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.WebKnowledgeSourceDomain,
+@@clientNamespace(
+  Search.WebKnowledgeSourceDomain,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.WebKnowledgeSourceDomain,
+@@clientNamespace(
+  Search.WebKnowledgeSourceDomain,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.WebKnowledgeSourceDomains,
+@@clientNamespace(
+  Search.WebKnowledgeSourceDomains,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.WebKnowledgeSourceDomains,
+@@clientNamespace(
+  Search.WebKnowledgeSourceDomains,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.WebKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.WebKnowledgeSourceParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.WebKnowledgeSourceParameters,
+@@clientNamespace(
+  Search.WebKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexFieldReference,
+@@clientNamespace(
+  Search.SearchIndexFieldReference,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexFieldReference,
+@@clientNamespace(
+  Search.SearchIndexFieldReference,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ServiceIndexersRuntime,
+@@clientNamespace(
+  Search.ServiceIndexersRuntime,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ServiceIndexersRuntime,
+@@clientNamespace(
+  Search.ServiceIndexersRuntime,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ListKnowledgeSourcesResult,
+@@clientNamespace(
+  Search.ListKnowledgeSourcesResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ListKnowledgeSourcesResult,
+@@clientNamespace(
+  Search.ListKnowledgeSourcesResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CreatedResources, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CreatedResources,
+@@clientNamespace(
+  Search.CreatedResources,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchSuggester, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchSuggester,
+@@clientNamespace(
+  Search.SearchSuggester,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LexicalAnalyzer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalAnalyzer,
+@@clientNamespace(
+  Search.LexicalAnalyzer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LexicalTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalTokenizer,
+@@clientNamespace(
+  Search.LexicalTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TokenFilter,
+@@clientNamespace(
+  Search.TokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CharFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CharFilter,
+@@clientNamespace(
+  Search.CharFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LexicalNormalizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalNormalizer,
+@@clientNamespace(
+  Search.LexicalNormalizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SimilarityAlgorithm, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SimilarityAlgorithm,
+@@clientNamespace(
+  Search.SimilarityAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SemanticSearch, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SemanticSearch,
+@@clientNamespace(
+  Search.SemanticSearch,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SemanticConfiguration,
+@@clientNamespace(
+  Search.SemanticConfiguration,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SemanticConfiguration,
+@@clientNamespace(
+  Search.SemanticConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SemanticPrioritizedFields,
+@@clientNamespace(
+  Search.SemanticPrioritizedFields,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SemanticPrioritizedFields,
+@@clientNamespace(
+  Search.SemanticPrioritizedFields,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SemanticField, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SemanticField,
+@@clientNamespace(
+  Search.SemanticField,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.VectorSearch, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearch,
+@@clientNamespace(
+  Search.VectorSearch,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.VectorSearchProfile, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchProfile,
+@@clientNamespace(
+  Search.VectorSearchProfile,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmConfiguration,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmConfiguration,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchAlgorithmConfiguration,
+@@clientNamespace(
+  Search.VectorSearchAlgorithmConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchVectorizer,
+@@clientNamespace(
+  Search.VectorSearchVectorizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchVectorizer,
+@@clientNamespace(
+  Search.VectorSearchVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VectorSearchCompression,
+@@clientNamespace(
+  Search.VectorSearchCompression,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VectorSearchCompression,
+@@clientNamespace(
+  Search.VectorSearchCompression,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.RescoringOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.RescoringOptions,
+@@clientNamespace(
+  Search.RescoringOptions,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ListIndexesResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListIndexesResult,
+@@clientNamespace(
+  Search.ListIndexesResult,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.GetIndexStatisticsResult,
+@@clientNamespace(
+  Search.GetIndexStatisticsResult,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.GetIndexStatisticsResult,
+@@clientNamespace(
+  Search.GetIndexStatisticsResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.AnalyzeRequest, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AnalyzeRequest,
+@@clientNamespace(
+  Search.AnalyzeRequest,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.AnalyzeResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AnalyzeResult,
+@@clientNamespace(
+  Search.AnalyzeResult,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.AnalyzedTokenInfo, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AnalyzedTokenInfo,
+@@clientNamespace(
+  Search.AnalyzedTokenInfo,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchAlias, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchAlias,
+@@clientNamespace(
+  Search.SearchAlias,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ListAliasesResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListAliasesResult,
+@@clientNamespace(
+  Search.ListAliasesResult,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchServiceStatistics,
+@@clientNamespace(
+  Search.SearchServiceStatistics,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchServiceStatistics,
+@@clientNamespace(
+  Search.SearchServiceStatistics,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchServiceCounters,
+@@clientNamespace(
+  Search.SearchServiceCounters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchServiceCounters,
+@@clientNamespace(
+  Search.SearchServiceCounters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ResourceCounter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ResourceCounter,
+@@clientNamespace(
+  Search.ResourceCounter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchServiceLimits, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchServiceLimits,
+@@clientNamespace(
+  Search.SearchServiceLimits,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CustomAnalyzer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomAnalyzer,
+@@clientNamespace(
+  Search.CustomAnalyzer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PatternAnalyzer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PatternAnalyzer,
+@@clientNamespace(
+  Search.PatternAnalyzer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LuceneStandardAnalyzer,
+@@clientNamespace(
+  Search.LuceneStandardAnalyzer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LuceneStandardAnalyzer,
+@@clientNamespace(
+  Search.LuceneStandardAnalyzer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.StopAnalyzer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StopAnalyzer,
+@@clientNamespace(
+  Search.StopAnalyzer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CustomNormalizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomNormalizer,
+@@clientNamespace(
+  Search.CustomNormalizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ClassicTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ClassicTokenizer,
+@@clientNamespace(
+  Search.ClassicTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.EdgeNGramTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EdgeNGramTokenizer,
+@@clientNamespace(
+  Search.EdgeNGramTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KeywordTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeywordTokenizer,
+@@clientNamespace(
+  Search.KeywordTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KeywordTokenizerV2, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeywordTokenizerV2,
+@@clientNamespace(
+  Search.KeywordTokenizerV2,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MicrosoftLanguageTokenizer,
+@@clientNamespace(
+  Search.MicrosoftLanguageTokenizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MicrosoftLanguageTokenizer,
+@@clientNamespace(
+  Search.MicrosoftLanguageTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MicrosoftLanguageStemmingTokenizer,
+@@clientNamespace(
+  Search.MicrosoftLanguageStemmingTokenizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MicrosoftLanguageStemmingTokenizer,
+@@clientNamespace(
+  Search.MicrosoftLanguageStemmingTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.NGramTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.NGramTokenizer,
+@@clientNamespace(
+  Search.NGramTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PathHierarchyTokenizerV2,
+@@clientNamespace(
+  Search.PathHierarchyTokenizerV2,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PathHierarchyTokenizerV2,
+@@clientNamespace(
+  Search.PathHierarchyTokenizerV2,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PatternTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PatternTokenizer,
+@@clientNamespace(
+  Search.PatternTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LuceneStandardTokenizer,
+@@clientNamespace(
+  Search.LuceneStandardTokenizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LuceneStandardTokenizer,
+@@clientNamespace(
+  Search.LuceneStandardTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LuceneStandardTokenizerV2,
+@@clientNamespace(
+  Search.LuceneStandardTokenizerV2,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LuceneStandardTokenizerV2,
+@@clientNamespace(
+  Search.LuceneStandardTokenizerV2,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.UaxUrlEmailTokenizer,
+@@clientNamespace(
+  Search.UaxUrlEmailTokenizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.UaxUrlEmailTokenizer,
+@@clientNamespace(
+  Search.UaxUrlEmailTokenizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AsciiFoldingTokenFilter,
+@@clientNamespace(
+  Search.AsciiFoldingTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AsciiFoldingTokenFilter,
+@@clientNamespace(
+  Search.AsciiFoldingTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CjkBigramTokenFilter,
+@@clientNamespace(
+  Search.CjkBigramTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CjkBigramTokenFilter,
+@@clientNamespace(
+  Search.CjkBigramTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CommonGramTokenFilter,
+@@clientNamespace(
+  Search.CommonGramTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CommonGramTokenFilter,
+@@clientNamespace(
+  Search.CommonGramTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DictionaryDecompounderTokenFilter,
+@@clientNamespace(
+  Search.DictionaryDecompounderTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DictionaryDecompounderTokenFilter,
+@@clientNamespace(
+  Search.DictionaryDecompounderTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilter,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilter,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilterV2,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilterV2,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.EdgeNGramTokenFilterV2,
+@@clientNamespace(
+  Search.EdgeNGramTokenFilterV2,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ElisionTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ElisionTokenFilter,
+@@clientNamespace(
+  Search.ElisionTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.KeepTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeepTokenFilter,
+@@clientNamespace(
+  Search.KeepTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KeywordMarkerTokenFilter,
+@@clientNamespace(
+  Search.KeywordMarkerTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KeywordMarkerTokenFilter,
+@@clientNamespace(
+  Search.KeywordMarkerTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LengthTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LengthTokenFilter,
+@@clientNamespace(
+  Search.LengthTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.LimitTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LimitTokenFilter,
+@@clientNamespace(
+  Search.LimitTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.NGramTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.NGramTokenFilter,
+@@clientNamespace(
+  Search.NGramTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.NGramTokenFilterV2, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.NGramTokenFilterV2,
+@@clientNamespace(
+  Search.NGramTokenFilterV2,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PatternCaptureTokenFilter,
+@@clientNamespace(
+  Search.PatternCaptureTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PatternCaptureTokenFilter,
+@@clientNamespace(
+  Search.PatternCaptureTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PatternReplaceTokenFilter,
+@@clientNamespace(
+  Search.PatternReplaceTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PatternReplaceTokenFilter,
+@@clientNamespace(
+  Search.PatternReplaceTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PhoneticTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PhoneticTokenFilter,
+@@clientNamespace(
+  Search.PhoneticTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ShingleTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ShingleTokenFilter,
+@@clientNamespace(
+  Search.ShingleTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SnowballTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SnowballTokenFilter,
+@@clientNamespace(
+  Search.SnowballTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.StemmerTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StemmerTokenFilter,
+@@clientNamespace(
+  Search.StemmerTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.StemmerOverrideTokenFilter,
+@@clientNamespace(
+  Search.StemmerOverrideTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.StemmerOverrideTokenFilter,
+@@clientNamespace(
+  Search.StemmerOverrideTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.StopwordsTokenFilter,
+@@clientNamespace(
+  Search.StopwordsTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.StopwordsTokenFilter,
+@@clientNamespace(
+  Search.StopwordsTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SynonymTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SynonymTokenFilter,
+@@clientNamespace(
+  Search.SynonymTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TruncateTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TruncateTokenFilter,
+@@clientNamespace(
+  Search.TruncateTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.UniqueTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.UniqueTokenFilter,
+@@clientNamespace(
+  Search.UniqueTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.WordDelimiterTokenFilter,
+@@clientNamespace(
+  Search.WordDelimiterTokenFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.WordDelimiterTokenFilter,
+@@clientNamespace(
+  Search.WordDelimiterTokenFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.MappingCharFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MappingCharFilter,
+@@clientNamespace(
+  Search.MappingCharFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.PatternReplaceCharFilter,
+@@clientNamespace(
+  Search.PatternReplaceCharFilter,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.PatternReplaceCharFilter,
+@@clientNamespace(
+  Search.PatternReplaceCharFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ClassicSimilarityAlgorithm,
+@@clientNamespace(
+  Search.ClassicSimilarityAlgorithm,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ClassicSimilarityAlgorithm,
+@@clientNamespace(
+  Search.ClassicSimilarityAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BM25SimilarityAlgorithm,
+@@clientNamespace(
+  Search.BM25SimilarityAlgorithm,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BM25SimilarityAlgorithm,
+@@clientNamespace(
+  Search.BM25SimilarityAlgorithm,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.HnswAlgorithmConfiguration,
+@@clientNamespace(
+  Search.HnswAlgorithmConfiguration,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.HnswAlgorithmConfiguration,
+@@clientNamespace(
+  Search.HnswAlgorithmConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.HnswParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.HnswParameters,
+@@clientNamespace(
+  Search.HnswParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ExhaustiveKnnAlgorithmConfiguration,
+@@clientNamespace(
+  Search.ExhaustiveKnnAlgorithmConfiguration,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ExhaustiveKnnAlgorithmConfiguration,
+@@clientNamespace(
+  Search.ExhaustiveKnnAlgorithmConfiguration,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ExhaustiveKnnParameters,
+@@clientNamespace(
+  Search.ExhaustiveKnnParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ExhaustiveKnnParameters,
+@@clientNamespace(
+  Search.ExhaustiveKnnParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ScalarQuantizationCompression,
+@@clientNamespace(
+  Search.ScalarQuantizationCompression,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ScalarQuantizationCompression,
+@@clientNamespace(
+  Search.ScalarQuantizationCompression,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ScalarQuantizationParameters,
+@@clientNamespace(
+  Search.ScalarQuantizationParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ScalarQuantizationParameters,
+@@clientNamespace(
+  Search.ScalarQuantizationParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.BinaryQuantizationCompression,
+@@clientNamespace(
+  Search.BinaryQuantizationCompression,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.BinaryQuantizationCompression,
+@@clientNamespace(
+  Search.BinaryQuantizationCompression,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAIVectorizer,
+@@clientNamespace(
+  Search.AzureOpenAIVectorizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAIVectorizer,
+@@clientNamespace(
+  Search.AzureOpenAIVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAIVectorizerParameters,
+@@clientNamespace(
+  Search.AzureOpenAIVectorizerParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAIVectorizerParameters,
+@@clientNamespace(
+  Search.AzureOpenAIVectorizerParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerDataIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataIdentity,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataIdentity,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.WebApiVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WebApiVectorizer,
+@@clientNamespace(
+  Search.WebApiVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.WebApiVectorizerParameters,
+@@clientNamespace(
+  Search.WebApiVectorizerParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.WebApiVectorizerParameters,
+@@clientNamespace(
+  Search.WebApiVectorizerParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AIServicesVisionVectorizer,
+@@clientNamespace(
+  Search.AIServicesVisionVectorizer,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AIServicesVisionVectorizer,
+@@clientNamespace(
+  Search.AIServicesVisionVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AIServicesVisionParameters,
+@@clientNamespace(
+  Search.AIServicesVisionParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AIServicesVisionParameters,
+@@clientNamespace(
+  Search.AIServicesVisionParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.AMLVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AMLVectorizer,
+@@clientNamespace(
+  Search.AMLVectorizer,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.AMLParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AMLParameters,
+@@clientNamespace(
+  Search.AMLParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerDataNoneIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataNoneIdentity,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataNoneIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataNoneIdentity,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerDataUserAssignedIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataUserAssignedIdentity,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerDataUserAssignedIdentity,
+@@clientNamespace(
+  Search.SearchIndexerDataUserAssignedIdentity,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.HighWaterMarkChangeDetectionPolicy,
+@@clientNamespace(
+  Search.HighWaterMarkChangeDetectionPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.HighWaterMarkChangeDetectionPolicy,
+@@clientNamespace(
+  Search.HighWaterMarkChangeDetectionPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SqlIntegratedChangeTrackingPolicy,
+@@clientNamespace(
+  Search.SqlIntegratedChangeTrackingPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SqlIntegratedChangeTrackingPolicy,
+@@clientNamespace(
+  Search.SqlIntegratedChangeTrackingPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SoftDeleteColumnDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.SoftDeleteColumnDeletionDetectionPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SoftDeleteColumnDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.SoftDeleteColumnDeletionDetectionPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.NativeBlobSoftDeleteDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.NativeBlobSoftDeleteDeletionDetectionPolicy,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.NativeBlobSoftDeleteDeletionDetectionPolicy,
+@@clientNamespace(
+  Search.NativeBlobSoftDeleteDeletionDetectionPolicy,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DistanceScoringFunction,
+@@clientNamespace(
+  Search.DistanceScoringFunction,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DistanceScoringFunction,
+@@clientNamespace(
+  Search.DistanceScoringFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DistanceScoringParameters,
+@@clientNamespace(
+  Search.DistanceScoringParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DistanceScoringParameters,
+@@clientNamespace(
+  Search.DistanceScoringParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.FreshnessScoringFunction,
+@@clientNamespace(
+  Search.FreshnessScoringFunction,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.FreshnessScoringFunction,
+@@clientNamespace(
+  Search.FreshnessScoringFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.FreshnessScoringParameters,
+@@clientNamespace(
+  Search.FreshnessScoringParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.FreshnessScoringParameters,
+@@clientNamespace(
+  Search.FreshnessScoringParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MagnitudeScoringFunction,
+@@clientNamespace(
+  Search.MagnitudeScoringFunction,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MagnitudeScoringFunction,
+@@clientNamespace(
+  Search.MagnitudeScoringFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.MagnitudeScoringParameters,
+@@clientNamespace(
+  Search.MagnitudeScoringParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.MagnitudeScoringParameters,
+@@clientNamespace(
+  Search.MagnitudeScoringParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.TagScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TagScoringFunction,
+@@clientNamespace(
+  Search.TagScoringFunction,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.TagScoringParameters,
+@@clientNamespace(
+  Search.TagScoringParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.TagScoringParameters,
+@@clientNamespace(
+  Search.TagScoringParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreParameters,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreParameters,
+@@clientNamespace(
+  Search.SearchIndexerKnowledgeStoreParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DefaultCognitiveServicesAccount,
+@@clientNamespace(
+  Search.DefaultCognitiveServicesAccount,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DefaultCognitiveServicesAccount,
+@@clientNamespace(
+  Search.DefaultCognitiveServicesAccount,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CognitiveServicesAccountKey,
+@@clientNamespace(
+  Search.CognitiveServicesAccountKey,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CognitiveServicesAccountKey,
+@@clientNamespace(
+  Search.CognitiveServicesAccountKey,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AIServicesAccountKey,
+@@clientNamespace(
+  Search.AIServicesAccountKey,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AIServicesAccountKey,
+@@clientNamespace(
+  Search.AIServicesAccountKey,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AIServicesAccountIdentity,
+@@clientNamespace(
+  Search.AIServicesAccountIdentity,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AIServicesAccountIdentity,
+@@clientNamespace(
+  Search.AIServicesAccountIdentity,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CustomEntity, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomEntity,
+@@clientNamespace(
+  Search.CustomEntity,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.CustomEntityAlias, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomEntityAlias,
+@@clientNamespace(
+  Search.CustomEntityAlias,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ConditionalSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ConditionalSkill,
+@@clientNamespace(
+  Search.ConditionalSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.KeyPhraseExtractionSkill,
+@@clientNamespace(
+  Search.KeyPhraseExtractionSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.KeyPhraseExtractionSkill,
+@@clientNamespace(
+  Search.KeyPhraseExtractionSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.OcrSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.OcrSkill,
+@@clientNamespace(
+  Search.OcrSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ImageAnalysisSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ImageAnalysisSkill,
+@@clientNamespace(
+  Search.ImageAnalysisSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.LanguageDetectionSkill,
+@@clientNamespace(
+  Search.LanguageDetectionSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.LanguageDetectionSkill,
+@@clientNamespace(
+  Search.LanguageDetectionSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ShaperSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ShaperSkill,
+@@clientNamespace(
+  Search.ShaperSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.MergeSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MergeSkill,
+@@clientNamespace(
+  Search.MergeSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SentimentSkillV3, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SentimentSkillV3,
+@@clientNamespace(
+  Search.SentimentSkillV3,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.EntityLinkingSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EntityLinkingSkill,
+@@clientNamespace(
+  Search.EntityLinkingSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.EntityRecognitionSkillV3,
+@@clientNamespace(
+  Search.EntityRecognitionSkillV3,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.EntityRecognitionSkillV3,
+@@clientNamespace(
+  Search.EntityRecognitionSkillV3,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PIIDetectionSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PIIDetectionSkill,
+@@clientNamespace(
+  Search.PIIDetectionSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SplitSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SplitSkill,
+@@clientNamespace(
+  Search.SplitSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAITokenizerParameters,
+@@clientNamespace(
+  Search.AzureOpenAITokenizerParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAITokenizerParameters,
+@@clientNamespace(
+  Search.AzureOpenAITokenizerParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.CustomEntityLookupSkill,
+@@clientNamespace(
+  Search.CustomEntityLookupSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.CustomEntityLookupSkill,
+@@clientNamespace(
+  Search.CustomEntityLookupSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.TextTranslationSkill,
+@@clientNamespace(
+  Search.TextTranslationSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.TextTranslationSkill,
+@@clientNamespace(
+  Search.TextTranslationSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentExtractionSkill,
+@@clientNamespace(
+  Search.DocumentExtractionSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentExtractionSkill,
+@@clientNamespace(
+  Search.DocumentExtractionSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkill,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkill,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.WebApiSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WebApiSkill,
+@@clientNamespace(
+  Search.WebApiSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureMachineLearningSkill,
+@@clientNamespace(
+  Search.AzureMachineLearningSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureMachineLearningSkill,
+@@clientNamespace(
+  Search.AzureMachineLearningSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.AzureOpenAIEmbeddingSkill,
+@@clientNamespace(
+  Search.AzureOpenAIEmbeddingSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.AzureOpenAIEmbeddingSkill,
+@@clientNamespace(
+  Search.AzureOpenAIEmbeddingSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.VisionVectorizeSkill,
+@@clientNamespace(
+  Search.VisionVectorizeSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.VisionVectorizeSkill,
+@@clientNamespace(
+  Search.VisionVectorizeSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillChunkingUnit,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingUnit,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillChunkingUnit,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingUnit,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillExtractionOptions,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingMethod,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillExtractionOptions,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingMethod,
+  "com.azure.search.documents",
+  "java"
+);
+@@clientNamespace(
+  Search.ContentUnderstandingSkillExtractionOptions,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.ContentUnderstandingSkillExtractionOptions,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ContentUnderstandingSkill,
+@@clientNamespace(
+  Search.ContentUnderstandingSkill,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ContentUnderstandingSkill,
+@@clientNamespace(
+  Search.ContentUnderstandingSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillChunkingProperties,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingProperties,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ContentUnderstandingSkillChunkingProperties,
+@@clientNamespace(
+  Search.ContentUnderstandingSkillChunkingProperties,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexStatisticsSummary,
+@@clientNamespace(
+  Search.IndexStatisticsSummary,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexStatisticsSummary,
+@@clientNamespace(
+  Search.IndexStatisticsSummary,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ListIndexStatsSummary,
+@@clientNamespace(
+  Search.ListIndexStatsSummary,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ListIndexStatsSummary,
+@@clientNamespace(
+  Search.ListIndexStatsSummary,
   "com.azure.search.documents.indexes",
   "java"
 );
 
-@@clientNamespace(Search.ChatCompletionExtraParametersBehavior,
+@@clientNamespace(
+  Search.ChatCompletionExtraParametersBehavior,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionExtraParametersBehavior,
+@@clientNamespace(
+  Search.ChatCompletionExtraParametersBehavior,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ChatCompletionResponseFormatType,
+@@clientNamespace(
+  Search.ChatCompletionResponseFormatType,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionResponseFormatType,
+@@clientNamespace(
+  Search.ChatCompletionResponseFormatType,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingUnit,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillChunkingUnit,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingUnit,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillChunkingUnit,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillExtractionOptions,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillExtractionOptions,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillExtractionOptions,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillExtractionOptions,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputFormat,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillOutputFormat,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputFormat,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillOutputFormat,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.IndexerPermissionOption,
+@@clientNamespace(
+  Search.IndexerPermissionOption,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.IndexerPermissionOption,
+@@clientNamespace(
+  Search.IndexerPermissionOption,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.PermissionFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PermissionFilter,
+@@clientNamespace(
+  Search.PermissionFilter,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.RankingOrder, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.RankingOrder,
+@@clientNamespace(
+  Search.RankingOrder,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ChatCompletionCommonModelParameters,
+@@clientNamespace(
+  Search.ChatCompletionCommonModelParameters,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionCommonModelParameters,
+@@clientNamespace(
+  Search.ChatCompletionCommonModelParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ChatCompletionResponseFormat,
+@@clientNamespace(
+  Search.ChatCompletionResponseFormat,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionResponseFormat,
+@@clientNamespace(
+  Search.ChatCompletionResponseFormat,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ChatCompletionSchema,
+@@clientNamespace(
+  Search.ChatCompletionSchema,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionSchema,
+@@clientNamespace(
+  Search.ChatCompletionSchema,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.ChatCompletionSchemaProperties,
+@@clientNamespace(
+  Search.ChatCompletionSchemaProperties,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.ChatCompletionSchemaProperties,
+@@clientNamespace(
+  Search.ChatCompletionSchemaProperties,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.ChatCompletionSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionSkill,
+@@clientNamespace(
+  Search.ChatCompletionSkill,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillChunkingProperties,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties,
+@@clientNamespace(
+  Search.DocumentIntelligenceLayoutSkillChunkingProperties,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.WebApiHttpHeaders, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WebApiHttpHeaders,
+@@clientNamespace(
+  Search.WebApiHttpHeaders,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.SearchOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchOptions,
+@@clientNamespace(
+  Search.SearchOptions,
   "com.azure.search.documents.indexes",
   "java"
 );
-@@clientNamespace(Search.SearchIndexPermissionFilterOption,
+@@clientNamespace(
+  Search.SearchIndexPermissionFilterOption,
   "Azure.Search.Documents.Indexes"
 );
-@@clientNamespace(Search.SearchIndexPermissionFilterOption,
+@@clientNamespace(
+  Search.SearchIndexPermissionFilterOption,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexerResyncBody, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerResyncBody,
+@@clientNamespace(
+  Search.IndexerResyncBody,
   "com.azure.search.documents.indexes",
   "java"
 );
 @@clientNamespace(Search.IndexerResyncOption, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerResyncOption,
+@@clientNamespace(
+  Search.IndexerResyncOption,
   "com.azure.search.documents.indexes",
   "java"
 );
 
-@@clientName(SearchClient.count, "getDocumentCount");
-@@clientName(SearchClient.get, "getDocument");
-@@clientName(SearchIndexClient.listIndexes, "listIndexes");
-@@clientName(SearchIndexClient.listIndexesWithSelectedProperties,
-  "listIndexesWithSelectedProperties"
+@@clientName(SearchClient.count, "getDocumentCount", "!autorest");
+@@clientName(SearchClient.get, "getDocument", "!autorest");
+@@clientName(SearchIndexClient.listIndexes, "listIndexes", "!autorest");
+@@clientName(
+  SearchIndexClient.listIndexesWithSelectedProperties,
+  "listIndexesWithSelectedProperties",
+  "!autorest"
 );
-@@clientName(SearchIndexClient.getIndex, "getIndex");
-@@clientName(SearchIndexClient.getStatistics, "getIndexStatistics");
-@@clientName(SearchIndexClient.deleteIndex, "deleteIndex");
-@@clientName(SearchIndexClient.createIndex, "createIndex");
-@@clientName(SearchIndexClient.createOrUpdateIndex, "createOrUpdateIndex");
-@@clientName(SearchIndexClient.analyze, "analyzeText");
-@@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps");
-@@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap");
-@@clientName(SearchIndexClient.deleteSynonymMap, "deleteSynonymMap");
-@@clientName(SearchIndexClient.createSynonymMap, "createSynonymMap");
-@@clientName(SearchIndexClient.createOrUpdateSynonymMap,
-  "createOrUpdateSynonymMap"
+@@clientName(SearchIndexClient.getIndex, "getIndex", "!autorest");
+@@clientName(
+  SearchIndexClient.getStatistics,
+  "getIndexStatistics",
+  "!autorest"
 );
-@@clientName(SearchIndexClient.getIndexStatsSummary, "listIndexStatsSummary");
-@@clientName(SearchIndexClient.listAliases, "listAliases");
-@@clientName(SearchIndexClient.getAlias, "getAlias");
-@@clientName(SearchIndexClient.deleteAlias, "deleteAlias");
-@@clientName(SearchIndexClient.createAlias, "createAlias");
-@@clientName(SearchIndexClient.createOrUpdateAlias, "createOrUpdateAlias");
-@@clientName(SearchIndexClient.deleteKnowledgeBase, "deleteKnowledgeBase");
-@@clientName(SearchIndexClient.createKnowledgeBase, "createKnowledgeBase");
-@@clientName(SearchIndexClient.createOrUpdateKnowledgeBase,
-  "createOrUpdateKnowledgeBase"
+@@clientName(SearchIndexClient.deleteIndex, "deleteIndex", "!autorest");
+@@clientName(SearchIndexClient.createIndex, "createIndex", "!autorest");
+@@clientName(
+  SearchIndexClient.createOrUpdateIndex,
+  "createOrUpdateIndex",
+  "!autorest"
 );
-@@clientName(SearchIndexClient.getKnowledgeBase, "getKnowledgeBase");
-@@clientName(SearchIndexClient.listKnowledgeBases, "listKnowledgeBases");
-@@clientName(SearchIndexClient.deleteKnowledgeSource, "deleteKnowledgeSource");
-@@clientName(SearchIndexClient.createKnowledgeSource, "createKnowledgeSource");
-@@clientName(SearchIndexClient.createOrUpdateKnowledgeSource,
-  "createOrUpdateKnowledgeSource"
+@@clientName(SearchIndexClient.analyze, "analyzeText", "!autorest");
+@@clientName(SearchIndexClient.listSynonymMaps, "getSynonymMaps", "!autorest");
+@@clientName(SearchIndexClient.getSynonymMap, "getSynonymMap", "!autorest");
+@@clientName(
+  SearchIndexClient.deleteSynonymMap,
+  "deleteSynonymMap",
+  "!autorest"
 );
-@@clientName(SearchIndexClient.getKnowledgeSource, "getKnowledgeSource");
-@@clientName(SearchIndexClient.listKnowledgeSources, "listKnowledgeSources");
-@@clientName(SearchIndexClient.getKnowledgeSourceStatus,
-  "getKnowledgeSourceStatus"
+@@clientName(
+  SearchIndexClient.createSynonymMap,
+  "createSynonymMap",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.createIndexer, "createIndexer");
-@@clientName(SearchIndexerClient.createOrUpdateIndexer,
-  "createOrUpdateIndexer"
+@@clientName(
+  SearchIndexClient.createOrUpdateSynonymMap,
+  "createOrUpdateSynonymMap",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer");
-@@clientName(SearchIndexerClient.getIndexer, "getIndexer");
-@@clientName(SearchIndexerClient.listIndexers, "getIndexers");
-@@clientName(SearchIndexerClient.runIndexer, "runIndexer");
-@@clientName(SearchIndexerClient.resetIndexer, "resetIndexer");
-@@clientName(SearchIndexerClient.resetDocs, "resetDocuments");
-@@clientName(SearchIndexerClient.resync, "resync");
-@@clientName(SearchIndexerClient.getIndexerStatus, "getIndexerStatus");
-@@clientName(SearchIndexerClient.createDataSource,
-  "createDataSourceConnection"
+@@clientName(
+  SearchIndexClient.getIndexStatsSummary,
+  "listIndexStatsSummary",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.createOrUpdateDataSource,
-  "createOrUpdateDataSourceConnection"
+@@clientName(SearchIndexClient.listAliases, "listAliases", "!autorest");
+@@clientName(SearchIndexClient.getAlias, "getAlias", "!autorest");
+@@clientName(SearchIndexClient.deleteAlias, "deleteAlias", "!autorest");
+@@clientName(SearchIndexClient.createAlias, "createAlias", "!autorest");
+@@clientName(
+  SearchIndexClient.createOrUpdateAlias,
+  "createOrUpdateAlias",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.getDataSource, "getDataSourceConnection");
-@@clientName(SearchIndexerClient.listDataSources, "getDataSourceConnections");
-@@clientName(SearchIndexerClient.deleteDataSource,
-  "deleteDataSourceConnection"
+@@clientName(
+  SearchIndexClient.deleteKnowledgeBase,
+  "deleteKnowledgeBase",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.createSkillset, "createSkillset");
-@@clientName(SearchIndexerClient.createOrUpdateSkillset,
-  "createOrUpdateSkillset"
+@@clientName(
+  SearchIndexClient.createKnowledgeBase,
+  "createKnowledgeBase",
+  "!autorest"
 );
-@@clientName(SearchIndexerClient.getSkillset, "getSkillset");
-@@clientName(SearchIndexerClient.listSkillsets, "getSkillsets");
-@@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset");
+@@clientName(
+  SearchIndexClient.createOrUpdateKnowledgeBase,
+  "createOrUpdateKnowledgeBase",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getKnowledgeBase,
+  "getKnowledgeBase",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeBases,
+  "listKnowledgeBases",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.deleteKnowledgeSource,
+  "deleteKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.createKnowledgeSource,
+  "createKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.createOrUpdateKnowledgeSource,
+  "createOrUpdateKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getKnowledgeSource,
+  "getKnowledgeSource",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.listKnowledgeSources,
+  "listKnowledgeSources",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexClient.getKnowledgeSourceStatus,
+  "getKnowledgeSourceStatus",
+  "!autorest"
+);
+@@clientName(SearchIndexerClient.createIndexer, "createIndexer", "!autorest");
+@@clientName(
+  SearchIndexerClient.createOrUpdateIndexer,
+  "createOrUpdateIndexer",
+  "!autorest"
+);
+@@clientName(SearchIndexerClient.deleteIndexer, "deleteIndexer", "!autorest");
+@@clientName(SearchIndexerClient.getIndexer, "getIndexer", "!autorest");
+@@clientName(SearchIndexerClient.listIndexers, "getIndexers", "!autorest");
+@@clientName(SearchIndexerClient.runIndexer, "runIndexer", "!autorest");
+@@clientName(SearchIndexerClient.resetIndexer, "resetIndexer", "!autorest");
+@@clientName(SearchIndexerClient.resetDocs, "resetDocuments", "!autorest");
+@@clientName(SearchIndexerClient.resync, "resync", "!autorest");
+@@clientName(
+  SearchIndexerClient.getIndexerStatus,
+  "getIndexerStatus",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.createDataSource,
+  "createDataSourceConnection",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.createOrUpdateDataSource,
+  "createOrUpdateDataSourceConnection",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.getDataSource,
+  "getDataSourceConnection",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.listDataSources,
+  "getDataSourceConnections",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerClient.deleteDataSource,
+  "deleteDataSourceConnection",
+  "!autorest"
+);
+@@clientName(SearchIndexerClient.createSkillset, "createSkillset", "!autorest");
+@@clientName(
+  SearchIndexerClient.createOrUpdateSkillset,
+  "createOrUpdateSkillset",
+  "!autorest"
+);
+@@clientName(SearchIndexerClient.getSkillset, "getSkillset", "!autorest");
+@@clientName(SearchIndexerClient.listSkillsets, "getSkillsets", "!autorest");
+@@clientName(SearchIndexerClient.deleteSkillset, "deleteSkillset", "!autorest");
 
-@@clientName(VectorQuery.k, "kNearestNeighbors");
+@@clientName(VectorQuery.k, "kNearestNeighbors", "!autorest");
 @@clientName(VectorQuery.k, "kNearestNeighborsCount", "csharp,javascript");
-@@clientName(SearchDocumentsResult.value, "results");
-@@clientName(SearchRequest.count, "includeTotalCount");
-@@clientName(SearchRequest.highlight, "highlightFields");
-@@clientName(SearchRequest.search, "searchText");
-@@clientName(SearchRequest.orderby, "orderBy");
-@@clientName(SuggestDocumentsResult.value, "results");
-@@clientName(SuggestRequest.fuzzy, "useFuzzyMatching");
-@@clientName(SuggestRequest.orderby, "orderBy");
-@@clientName(SuggestRequest.search, "searchText");
-@@clientName(Search.IndexBatch, "IndexDocumentsBatch");
-@@clientName(IndexBatch.value, "actions");
-@@clientName(IndexDocumentsResult.value, "results");
-@@clientName(IndexingResult.status, "succeeded");
-@@clientName(AutocompleteResult.value, "results");
-@@clientName(AutocompleteRequest.search, "searchText");
-@@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching");
-@@clientName(ListDataSourcesResult.value, "dataSources");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
-@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
-@@clientName(SearchIndexer.disabled, "isDisabled");
-@@clientName(ListIndexersResult.value, "indexers");
-@@clientName(IndexerExecutionResult.itemsProcessed, "itemCount");
-@@clientName(IndexerExecutionResult.itemsFailed, "failedItemCount");
-@@clientName(SearchIndexerSkillset.cognitiveServices,
-  "cognitiveServicesAccount"
+@@clientName(SearchDocumentsResult.value, "results", "!autorest");
+@@clientName(ListIndexesResult.`@odata.count`, "Count", "!autorest");
+@@clientName(ListIndexesResult.`@odata.nextLink`, "NextLink", "!autorest");
+@@clientName(ListIndexesSelectedResult.`@odata.count`, "Count", "!autorest");
+@@clientName(
+  ListIndexesSelectedResult.`@odata.nextLink`,
+  "NextLink",
+  "!autorest"
 );
-@@clientName(SearchIndexerSkillset.indexProjections, "indexProjection");
-@@clientName(ListSkillsetsResult.value, "skillsets");
-@@clientName(ListSynonymMapsResult.value, "synonymMaps");
-@@clientName(AnalyzeRequest, "AnalyzeTextOptions");
-@@clientName(AnalyzeRequest.analyzer, "analyzerName");
-@@clientName(AnalyzeRequest.tokenizer, "tokenizerName");
-@@clientName(AnalyzeRequest.normalizer, "normalizerName");
-@@clientName(SearchIndexerDataSource, "SearchIndexerDataSourceConnection");
-@@clientName(SearchRequest.speller, "querySpeller");
-@@clientName(SearchRequest.semanticConfiguration, "semanticConfigurationName");
-@@clientName(SearchIndex.semantic, "semanticSearch");
-@@clientName(SearchIndexResponse.semantic, "semanticSearch");
-@@clientName(SearchField.analyzer, "analyzerName");
-@@clientName(SearchField.searchAnalyzer, "searchAnalyzerName");
-@@clientName(SearchField.indexAnalyzer, "indexAnalyzerName");
-@@clientName(SearchField.normalizer, "normalizerName");
-@@clientName(SearchField.synonymMaps, "synonymMapNames");
-@@clientName(SearchField.dimensions, "vectorSearchDimensions");
-@@clientName(SearchField.vectorSearchProfile, "vectorSearchProfileName");
-@@clientName(SearchField.vectorEncoding, "vectorEncodingFormat");
-@@clientName(ScoringProfile.text, "textWeights");
-@@clientName(SemanticSearch.defaultConfiguration, "defaultConfigurationName");
-@@clientName(SemanticPrioritizedFields.prioritizedContentFields,
-  "contentFields"
+@@clientName(ListIndexStatsSummary.`@odata.count`, "Count", "!autorest");
+@@clientName(ListIndexStatsSummary.`@odata.nextLink`, "NextLink", "!autorest");
+@@clientName(SearchRequest.count, "includeTotalCount", "!autorest");
+@@clientName(SearchRequest.highlight, "highlightFields", "!autorest");
+@@clientName(SearchRequest.search, "searchText", "!autorest");
+@@clientName(SearchRequest.orderby, "orderBy", "!autorest");
+@@clientName(SuggestDocumentsResult.value, "results", "!autorest");
+@@clientName(SuggestRequest.fuzzy, "useFuzzyMatching", "!autorest");
+@@clientName(SuggestRequest.orderby, "orderBy", "!autorest");
+@@clientName(SuggestRequest.search, "searchText", "!autorest");
+@@clientName(Search.IndexBatch, "IndexDocumentsBatch", "!autorest");
+@@clientName(IndexBatch.value, "actions", "!autorest");
+@@clientName(IndexDocumentsResult.value, "results", "!autorest");
+@@clientName(IndexingResult.status, "succeeded", "!autorest");
+@@clientName(AutocompleteResult.value, "results", "!autorest");
+@@clientName(AutocompleteRequest.search, "searchText", "!autorest");
+@@clientName(AutocompleteRequest.fuzzy, "useFuzzyMatching", "!autorest");
+@@clientName(ListDataSourcesResult.value, "dataSources", "!autorest");
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyName,
+  "keyName",
+  "!autorest"
 );
-@@clientName(SemanticPrioritizedFields.prioritizedKeywordsFields,
-  "keywordsFields"
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyVersion,
+  "keyVersion",
+  "!autorest"
 );
-@@clientName(VectorSearchProfile.algorithm, "algorithmConfigurationName");
-@@clientName(VectorSearchProfile.vectorizer, "vectorizerName");
-@@clientName(VectorSearchProfile.compression, "compressionName");
-@@clientName(VectorSearchVectorizer.name, "vectorizerName");
-@@clientName(VectorSearchCompression.name, "compressionName");
-@@clientName(ListIndexesResult.value, "indexes");
-@@clientName(SearchServiceCounters.aliasesCount, "aliasCounter");
-@@clientName(SearchServiceCounters.documentCount, "documentCounter");
-@@clientName(SearchServiceCounters.indexesCount, "indexCounter");
-@@clientName(SearchServiceCounters.indexersCount, "indexerCounter");
-@@clientName(SearchServiceCounters.dataSourcesCount, "dataSourceCounter");
-@@clientName(SearchServiceCounters.storageSize, "storageSizeCounter");
-@@clientName(SearchServiceCounters.synonymMaps, "synonymMapCounter");
-@@clientName(SearchServiceCounters.skillsetCount, "skillsetCounter");
-@@clientName(SearchServiceCounters.vectorIndexSize, "vectorIndexSizeCounter");
-@@clientName(SearchServiceCounters.vectorIndexSize,
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri", "!autorest");
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUrl", "java");
+@@clientName(SearchIndexer.disabled, "isDisabled", "!autorest");
+@@clientName(ListIndexersResult.value, "indexers", "!autorest");
+@@clientName(IndexerExecutionResult.itemsProcessed, "itemCount", "!autorest");
+@@clientName(
+  IndexerExecutionResult.itemsFailed,
+  "failedItemCount",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerSkillset.cognitiveServices,
+  "cognitiveServicesAccount",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerSkillset.indexProjections,
+  "indexProjection",
+  "!autorest"
+);
+@@clientName(ListSkillsetsResult.value, "skillsets", "!autorest");
+@@clientName(ListSynonymMapsResult.value, "synonymMaps", "!autorest");
+@@clientName(AnalyzeRequest, "AnalyzeTextOptions", "!autorest");
+@@clientName(AnalyzeRequest.analyzer, "analyzerName", "!autorest");
+@@clientName(AnalyzeRequest.tokenizer, "tokenizerName", "!autorest");
+@@clientName(AnalyzeRequest.normalizer, "normalizerName", "!autorest");
+@@clientName(
+  SearchIndexerDataSource,
+  "SearchIndexerDataSourceConnection",
+  "!autorest"
+);
+@@clientName(SearchRequest.speller, "querySpeller", "!autorest");
+@@clientName(
+  SearchRequest.semanticConfiguration,
+  "semanticConfigurationName",
+  "!autorest"
+);
+@@clientName(SearchIndex.semantic, "semanticSearch", "!autorest");
+@@clientName(SearchIndexResponse.semantic, "semanticSearch", "!autorest");
+@@clientName(SearchField.analyzer, "analyzerName", "!autorest");
+@@clientName(SearchField.searchAnalyzer, "searchAnalyzerName", "!autorest");
+@@clientName(SearchField.indexAnalyzer, "indexAnalyzerName", "!autorest");
+@@clientName(SearchField.normalizer, "normalizerName", "!autorest");
+@@clientName(SearchField.synonymMaps, "synonymMapNames", "!autorest");
+@@clientName(SearchField.dimensions, "vectorSearchDimensions", "!autorest");
+@@clientName(
+  SearchField.vectorSearchProfile,
+  "vectorSearchProfileName",
+  "!autorest"
+);
+@@clientName(SearchField.vectorEncoding, "vectorEncodingFormat", "!autorest");
+@@clientName(ScoringProfile.text, "textWeights", "!autorest");
+@@clientName(
+  SemanticSearch.defaultConfiguration,
+  "defaultConfigurationName",
+  "!autorest"
+);
+@@clientName(
+  SemanticPrioritizedFields.prioritizedContentFields,
+  "contentFields",
+  "!autorest"
+);
+@@clientName(
+  SemanticPrioritizedFields.prioritizedKeywordsFields,
+  "keywordsFields",
+  "!autorest"
+);
+@@clientName(
+  VectorSearchProfile.algorithm,
+  "algorithmConfigurationName",
+  "!autorest"
+);
+@@clientName(VectorSearchProfile.vectorizer, "vectorizerName", "!autorest");
+@@clientName(VectorSearchProfile.compression, "compressionName", "!autorest");
+@@clientName(VectorSearchVectorizer.name, "vectorizerName", "!autorest");
+@@clientName(VectorSearchCompression.name, "compressionName", "!autorest");
+@@clientName(ListIndexesResult.value, "indexes", "!autorest");
+@@clientName(SearchServiceCounters.aliasesCount, "aliasCounter", "!autorest");
+@@clientName(
+  SearchServiceCounters.documentCount,
+  "documentCounter",
+  "!autorest"
+);
+@@clientName(SearchServiceCounters.indexesCount, "indexCounter", "!autorest");
+@@clientName(
+  SearchServiceCounters.indexersCount,
+  "indexerCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.dataSourcesCount,
+  "dataSourceCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.storageSize,
+  "storageSizeCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.synonymMaps,
+  "synonymMapCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.skillsetCount,
+  "skillsetCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.vectorIndexSize,
+  "vectorIndexSizeCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.vectorIndexSize,
   "vectorIndexSizeInBytes",
   "java"
 );
-@@clientName(GetIndexStatisticsResult.vectorIndexSize,
+@@clientName(
+  SearchServiceCounters.knowledgeBasesCount,
+  "knowledgeBaseCounter",
+  "!autorest"
+);
+@@clientName(
+  SearchServiceCounters.knowledgeSourcesCount,
+  "knowledgeSourceCounter",
+  "!autorest"
+);
+@@clientName(
+  GetIndexStatisticsResult.vectorIndexSize,
   "vectorIndexSizeInBytes",
   "java"
 );
-@@clientName(SearchServiceLimits.maxStoragePerIndex,
-  "maxStoragePerIndexInBytes"
+@@clientName(
+  SearchServiceLimits.maxStoragePerIndex,
+  "maxStoragePerIndexInBytes",
+  "!autorest"
 );
 @@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "csharp");
 @@clientName(CustomAnalyzer.tokenizer, "tokenizerName", "python");
-@@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms");
-@@clientName(PathHierarchyTokenizerV2.reverse, "reverseTokenOrder");
-@@clientName(PathHierarchyTokenizerV2.skip, "numberOfTokensToSkip");
-@@clientName(CommonGramTokenFilter.queryMode, "useQueryMode");
-@@clientName(KeepTokenFilter.keepWordsCase, "lowerCaseKeepWords");
-@@clientName(LengthTokenFilter.min, "minLength");
-@@clientName(LengthTokenFilter.max, "maxLength");
-@@clientName(PhoneticTokenFilter.replace, "replaceOriginalTokens");
-@@clientName(StopwordsTokenFilter.removeTrailing, "removeTrailingStopWords");
-@@clientName(HnswAlgorithmConfiguration.hnswParameters, "parameters");
-@@clientName(ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
-  "parameters"
+@@clientName(PatternAnalyzer.lowercase, "lowerCaseTerms", "!autorest");
+@@clientName(
+  PathHierarchyTokenizerV2.reverse,
+  "reverseTokenOrder",
+  "!autorest"
 );
-@@clientName(ScalarQuantizationCompression.scalarQuantizationParameters,
-  "parameters"
+@@clientName(
+  PathHierarchyTokenizerV2.skip,
+  "numberOfTokensToSkip",
+  "!autorest"
 );
-@@clientName(AzureOpenAIVectorizer.azureOpenAIParameters, "parameters");
-@@clientName(AzureOpenAIVectorizerParameters.resourceUri, "resourceUrl");
-@@clientName(AzureOpenAIVectorizerParameters.resourceUri,
+@@clientName(CommonGramTokenFilter.queryMode, "useQueryMode", "!autorest");
+@@clientName(KeepTokenFilter.keepWordsCase, "lowerCaseKeepWords", "!autorest");
+@@clientName(LengthTokenFilter.min, "minLength", "!autorest");
+@@clientName(LengthTokenFilter.max, "maxLength", "!autorest");
+@@clientName(PhoneticTokenFilter.replace, "replaceOriginalTokens", "!autorest");
+@@clientName(
+  StopwordsTokenFilter.removeTrailing,
+  "removeTrailingStopWords",
+  "!autorest"
+);
+@@clientName(
+  HnswAlgorithmConfiguration.hnswParameters,
+  "parameters",
+  "!autorest"
+);
+@@clientName(
+  ExhaustiveKnnAlgorithmConfiguration.exhaustiveKnnParameters,
+  "parameters",
+  "!autorest"
+);
+@@clientName(
+  ScalarQuantizationCompression.scalarQuantizationParameters,
+  "parameters",
+  "!autorest"
+);
+@@clientName(
+  AzureOpenAIVectorizer.azureOpenAIParameters,
+  "parameters",
+  "!autorest"
+);
+@@clientName(
+  AzureOpenAIVectorizerParameters.resourceUri,
+  "resourceUrl",
+  "!autorest"
+);
+@@clientName(
+  AzureOpenAIVectorizerParameters.resourceUri,
   "resourceUri",
   "csharp"
 );
-@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+@@clientName(
+  AzureOpenAIVectorizerParameters.deploymentId,
   "deploymentName",
-  "!javascript"
+  "!javascript,!autorest"
 );
-@@clientName(AzureOpenAIVectorizerParameters.authIdentity,
+@@clientName(
+  AzureOpenAIVectorizerParameters.authIdentity,
   "authenticationIdentity",
   "csharp"
 );
-@@clientName(AzureOpenAIVectorizerParameters.deploymentId,
+@@clientName(
+  AzureOpenAIVectorizerParameters.deploymentId,
   "deploymentName",
   "csharp"
 );
-@@clientName(WebApiVectorizer.customWebApiParameters, "webApiParameters");
+@@clientName(
+  WebApiVectorizer.customWebApiParameters,
+  "webApiParameters",
+  "!autorest"
+);
 @@clientName(WebApiVectorizer.customWebApiParameters, "parameters", "csharp");
 @@clientName(WebApiVectorizerParameters.uri, "url", "python");
 @@clientName(WebApiVectorizerParameters.uri, "url", "java");
+@@clientName(AIServicesVisionParameters.resourceUri, "resourceUrl", "java");
 @@clientName(AzureOpenAIModelName.Gpt5Mini, "GPT_5_MINI", "python");
 @@clientName(AzureOpenAIModelName.Gpt5Nano, "GPT_5_NANO", "python");
 @@clientName(AzureOpenAIModelName.Gpt54Mini, "GPT_5_4_MINI", "python");
@@ -2891,309 +3992,411 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(SearchIndexerDataSourceType.OneLake, "ONELAKE", "python");
 @@clientName(SearchIndexerDataSourceType.SharePoint, "SHAREPOINT", "python");
 @@clientName(KnowledgeSourceKind.IndexedOneLake, "INDEXED_ONELAKE", "python");
-@@clientName(KnowledgeBaseActivityRecordType.indexedOneLake,
+@@clientName(
+  KnowledgeBaseActivityRecordType.indexedOneLake,
   "INDEXED_ONELAKE",
   "python"
 );
-@@clientName(KnowledgeBaseReferenceType.indexedOneLake,
+@@clientName(
+  KnowledgeBaseReferenceType.indexedOneLake,
   "INDEXED_ONELAKE",
   "python"
 );
-@@clientName(SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
-  "resourceId"
+@@clientName(
+  SearchIndexerDataUserAssignedIdentity.userAssignedIdentity,
+  "resourceId",
+  "!autorest"
 );
-@@clientName(DistanceScoringFunction.distance, "parameters");
-@@clientName(FreshnessScoringFunction.freshness, "parameters");
-@@clientName(MagnitudeScoringFunction.magnitude, "parameters");
-@@clientName(MagnitudeScoringParameters.constantBoostBeyondRange,
-  "shouldBoostBeyondRangeByConstant"
+@@clientName(DistanceScoringFunction.distance, "parameters", "!autorest");
+@@clientName(FreshnessScoringFunction.freshness, "parameters", "!autorest");
+@@clientName(MagnitudeScoringFunction.magnitude, "parameters", "!autorest");
+@@clientName(
+  MagnitudeScoringParameters.constantBoostBeyondRange,
+  "shouldBoostBeyondRangeByConstant",
+  "!autorest"
 );
-@@clientName(TagScoringFunction.tag, "parameters");
-@@clientName(OcrSkill.detectOrientation, "shouldDetectOrientation");
+@@clientName(TagScoringFunction.tag, "parameters", "!autorest");
+@@clientName(
+  OcrSkill.detectOrientation,
+  "shouldDetectOrientation",
+  "!autorest"
+);
 @@clientName(PIIDetectionSkill.minimumPrecision, "minPrecision", "csharp");
-@@clientName(PIIDetectionSkill.maskingCharacter, "mask");
-@@clientName(ListAliasesResult.value, "aliases");
-@@clientName(AMLParameters.uri, "scoringUri");
+@@clientName(PIIDetectionSkill.maskingCharacter, "mask", "!autorest");
+@@clientName(ListAliasesResult.value, "aliases", "!autorest");
+@@clientName(AMLParameters.uri, "scoringUri", "!autorest");
 @@clientName(AMLParameters.uri, "scoringUrl", "java");
-@@clientName(AMLParameters.key, "authenticationKey");
-@@clientName(AMLVectorizer.amlParameters, "AMLParameters");
-@@clientName(AzureMachineLearningSkill.uri, "scoringUri");
+@@clientName(AMLParameters.key, "authenticationKey", "!autorest");
+@@clientName(AMLVectorizer.amlParameters, "parameters", "java");
+@@clientName(AzureMachineLearningSkill.uri, "scoringUri", "!autorest");
 @@clientName(AzureMachineLearningSkill.uri, "scoringUrl", "java");
-@@clientName(AzureMachineLearningSkill.key, "authenticationKey");
+@@clientName(AzureMachineLearningSkill.key, "authenticationKey", "!autorest");
 @@clientName(ChatCompletionSkill.uri, "url", "java");
+@@clientName(WebApiSkill.uri, "url", "java");
+@@clientName(AIServices, "AiServices", "java");
+@@clientName(AIServices.uri, "url", "java");
+@@clientName(
+  CustomEntityLookupSkill.entitiesDefinitionUri,
+  "entitiesDefinitionUrl",
+  "java"
+);
 @@clientName(SkillNames.skillNames, "skillNameList", "csharp");
-@@clientName(AMLParameters, "AzureMachineLearningParameters");
-@@clientName(AMLVectorizer, "AzureMachineLearningVectorizer");
-@@clientName(DataChangeDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(DataChangeDetectionPolicy.`@odata.type`,
+@@clientName(AMLParameters, "AzureMachineLearningParameters", "!autorest");
+@@clientName(AMLVectorizer, "AzureMachineLearningVectorizer", "!autorest");
+@@clientName(DataChangeDetectionPolicy.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  DataChangeDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(DataDeletionDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(DataDeletionDetectionPolicy.`@odata.type`,
+@@clientName(
+  DataDeletionDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  DataDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SearchIndexerSkill.`@odata.type`, "odataType");
+@@clientName(SearchIndexerSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(SearchIndexerSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(ContentUnderstandingSkill.`@odata.type`,
+@@clientName(
+  ContentUnderstandingSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(CognitiveServicesAccount.`@odata.type`, "odataType");
+@@clientName(CognitiveServicesAccount.`@odata.type`, "odataType", "!autorest");
 @@clientName(CognitiveServicesAccount.`@odata.type`, "odatatype", "javascript");
-@@clientName(LexicalAnalyzer.`@odata.type`, "odataType");
+@@clientName(LexicalAnalyzer.`@odata.type`, "odataType", "!autorest");
 @@clientName(LexicalAnalyzer.`@odata.type`, "odatatype", "javascript");
-@@clientName(LexicalTokenizer.`@odata.type`, "odataType");
+@@clientName(LexicalTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(LexicalTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(TokenFilter.`@odata.type`, "odataType");
+@@clientName(TokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(TokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(CharFilter.`@odata.type`, "odataType");
+@@clientName(CharFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(CharFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(LexicalNormalizer.`@odata.type`, "odataType");
+@@clientName(LexicalNormalizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(LexicalNormalizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(SimilarityAlgorithm.`@odata.type`, "odataType");
+@@clientName(SimilarityAlgorithm.`@odata.type`, "odataType", "!autorest");
 @@clientName(SimilarityAlgorithm.`@odata.type`, "odatatype", "javascript");
-@@clientName(CustomAnalyzer.`@odata.type`, "odataType");
+@@clientName(CustomAnalyzer.`@odata.type`, "odataType", "!autorest");
 @@clientName(CustomAnalyzer.`@odata.type`, "odatatype", "javascript");
-@@clientName(PatternAnalyzer.`@odata.type`, "odataType");
+@@clientName(PatternAnalyzer.`@odata.type`, "odataType", "!autorest");
 @@clientName(PatternAnalyzer.`@odata.type`, "odatatype", "javascript");
-@@clientName(LuceneStandardAnalyzer.`@odata.type`, "odataType");
+@@clientName(LuceneStandardAnalyzer.`@odata.type`, "odataType", "!autorest");
 @@clientName(LuceneStandardAnalyzer.`@odata.type`, "odatatype", "javascript");
-@@clientName(StopAnalyzer.`@odata.type`, "odataType");
+@@clientName(StopAnalyzer.`@odata.type`, "odataType", "!autorest");
 @@clientName(StopAnalyzer.`@odata.type`, "odatatype", "javascript");
-@@clientName(CustomNormalizer.`@odata.type`, "odataType");
+@@clientName(CustomNormalizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(CustomNormalizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(ClassicTokenizer.`@odata.type`, "odataType");
+@@clientName(ClassicTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(ClassicTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(EdgeNGramTokenizer.`@odata.type`, "odataType");
+@@clientName(EdgeNGramTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(EdgeNGramTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(KeywordTokenizer.`@odata.type`, "odataType");
+@@clientName(KeywordTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeywordTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(KeywordTokenizerV2.`@odata.type`, "odataType");
+@@clientName(KeywordTokenizerV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeywordTokenizerV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(MicrosoftLanguageTokenizer.`@odata.type`, "odataType");
-@@clientName(MicrosoftLanguageTokenizer.`@odata.type`,
+@@clientName(
+  MicrosoftLanguageTokenizer.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  MicrosoftLanguageTokenizer.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(MicrosoftLanguageStemmingTokenizer.`@odata.type`, "odataType");
-@@clientName(MicrosoftLanguageStemmingTokenizer.`@odata.type`,
+@@clientName(
+  MicrosoftLanguageStemmingTokenizer.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  MicrosoftLanguageStemmingTokenizer.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(NGramTokenizer.`@odata.type`, "odataType");
+@@clientName(NGramTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(NGramTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(PatternTokenizer.`@odata.type`, "odataType");
+@@clientName(PatternTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(PatternTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType");
+@@clientName(LuceneStandardTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(LuceneStandardTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType");
-@@clientName(LuceneStandardTokenizerV2.`@odata.type`,
+@@clientName(LuceneStandardTokenizerV2.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  LuceneStandardTokenizerV2.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType");
+@@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odataType", "!autorest");
 @@clientName(UaxUrlEmailTokenizer.`@odata.type`, "odatatype", "javascript");
-@@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType");
+@@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(AsciiFoldingTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(Search.ChatCompletionSkill.`@odata.type`,
+@@clientName(
+  Search.ChatCompletionSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(CjkBigramTokenFilter.`@odata.type`, "odataType");
+@@clientName(CjkBigramTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(CjkBigramTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(CommonGramTokenFilter.`@odata.type`, "odataType");
+@@clientName(CommonGramTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(CommonGramTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(DictionaryDecompounderTokenFilter.`@odata.type`, "odataType");
-@@clientName(DictionaryDecompounderTokenFilter.`@odata.type`,
+@@clientName(
+  DictionaryDecompounderTokenFilter.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  DictionaryDecompounderTokenFilter.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(EdgeNGramTokenFilter.`@odata.type`, "odataType");
+@@clientName(EdgeNGramTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(EdgeNGramTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odataType");
+@@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(EdgeNGramTokenFilterV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(ElisionTokenFilter.`@odata.type`, "odataType");
+@@clientName(ElisionTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(ElisionTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(KeepTokenFilter.`@odata.type`, "odataType");
+@@clientName(KeepTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeepTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(KeywordMarkerTokenFilter.`@odata.type`, "odataType");
+@@clientName(KeywordMarkerTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeywordMarkerTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(LengthTokenFilter.`@odata.type`, "odataType");
+@@clientName(LengthTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(LengthTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(LimitTokenFilter.`@odata.type`, "odataType");
+@@clientName(LimitTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(LimitTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(NGramTokenFilter.`@odata.type`, "odataType");
+@@clientName(NGramTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(NGramTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(NGramTokenFilterV2.`@odata.type`, "odataType");
+@@clientName(NGramTokenFilterV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(NGramTokenFilterV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(PatternCaptureTokenFilter.`@odata.type`, "odataType");
-@@clientName(PatternCaptureTokenFilter.`@odata.type`,
+@@clientName(PatternCaptureTokenFilter.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  PatternCaptureTokenFilter.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(PatternReplaceTokenFilter.`@odata.type`, "odataType");
-@@clientName(PatternReplaceTokenFilter.`@odata.type`,
+@@clientName(PatternReplaceTokenFilter.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  PatternReplaceTokenFilter.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(PhoneticTokenFilter.`@odata.type`, "odataType");
+@@clientName(PhoneticTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(PhoneticTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(ShingleTokenFilter.`@odata.type`, "odataType");
+@@clientName(ShingleTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(ShingleTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(SnowballTokenFilter.`@odata.type`, "odataType");
+@@clientName(SnowballTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(SnowballTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(StemmerTokenFilter.`@odata.type`, "odataType");
+@@clientName(StemmerTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(StemmerTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(StemmerOverrideTokenFilter.`@odata.type`, "odataType");
-@@clientName(StemmerOverrideTokenFilter.`@odata.type`,
+@@clientName(
+  StemmerOverrideTokenFilter.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  StemmerOverrideTokenFilter.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(StopwordsTokenFilter.`@odata.type`, "odataType");
+@@clientName(StopwordsTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(StopwordsTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(SynonymTokenFilter.`@odata.type`, "odataType");
+@@clientName(SynonymTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(SynonymTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(TruncateTokenFilter.`@odata.type`, "odataType");
+@@clientName(TruncateTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(TruncateTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(UniqueTokenFilter.`@odata.type`, "odataType");
+@@clientName(UniqueTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(UniqueTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(WordDelimiterTokenFilter.`@odata.type`, "odataType");
+@@clientName(WordDelimiterTokenFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(WordDelimiterTokenFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(MappingCharFilter.`@odata.type`, "odataType");
+@@clientName(MappingCharFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(MappingCharFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(PatternReplaceCharFilter.`@odata.type`, "odataType");
+@@clientName(PatternReplaceCharFilter.`@odata.type`, "odataType", "!autorest");
 @@clientName(PatternReplaceCharFilter.`@odata.type`, "odatatype", "javascript");
-@@clientName(ClassicSimilarityAlgorithm.`@odata.type`, "odataType");
-@@clientName(ClassicSimilarityAlgorithm.`@odata.type`,
+@@clientName(
+  ClassicSimilarityAlgorithm.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  ClassicSimilarityAlgorithm.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(BM25SimilarityAlgorithm.`@odata.type`, "odataType");
+@@clientName(BM25SimilarityAlgorithm.`@odata.type`, "odataType", "!autorest");
 @@clientName(BM25SimilarityAlgorithm.`@odata.type`, "odatatype", "javascript");
-@@clientName(SearchIndexerDataIdentity.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataIdentity.`@odata.type`,
+@@clientName(SearchIndexerDataIdentity.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  SearchIndexerDataIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SearchIndexerDataNoneIdentity.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataNoneIdentity.`@odata.type`,
+@@clientName(
+  SearchIndexerDataNoneIdentity.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerDataNoneIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SearchIndexerDataUserAssignedIdentity.`@odata.type`, "odataType");
-@@clientName(SearchIndexerDataUserAssignedIdentity.`@odata.type`,
+@@clientName(
+  SearchIndexerDataUserAssignedIdentity.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  SearchIndexerDataUserAssignedIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(HighWaterMarkChangeDetectionPolicy.`@odata.type`, "odataType");
-@@clientName(HighWaterMarkChangeDetectionPolicy.`@odata.type`,
+@@clientName(
+  HighWaterMarkChangeDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  HighWaterMarkChangeDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SqlIntegratedChangeTrackingPolicy.`@odata.type`, "odataType");
-@@clientName(SqlIntegratedChangeTrackingPolicy.`@odata.type`,
+@@clientName(
+  SqlIntegratedChangeTrackingPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  SqlIntegratedChangeTrackingPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
-  "odataType"
+@@clientName(
+  SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
 );
-@@clientName(SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
+@@clientName(
+  SoftDeleteColumnDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
-  "odataType"
+@@clientName(
+  NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
+  "odataType",
+  "!autorest"
 );
-@@clientName(NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
+@@clientName(
+  NativeBlobSoftDeleteDeletionDetectionPolicy.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(DefaultCognitiveServicesAccount.`@odata.type`, "odataType");
-@@clientName(DefaultCognitiveServicesAccount.`@odata.type`,
+@@clientName(
+  DefaultCognitiveServicesAccount.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  DefaultCognitiveServicesAccount.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(CognitiveServicesAccountKey.`@odata.type`, "odataType");
-@@clientName(CognitiveServicesAccountKey.`@odata.type`,
+@@clientName(
+  CognitiveServicesAccountKey.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  CognitiveServicesAccountKey.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(AIServicesAccountKey.`@odata.type`, "odataType");
+@@clientName(AIServicesAccountKey.`@odata.type`, "odataType", "!autorest");
 @@clientName(AIServicesAccountKey.`@odata.type`, "odatatype", "javascript");
-@@clientName(AIServicesAccountIdentity.`@odata.type`, "odataType");
-@@clientName(AIServicesAccountIdentity.`@odata.type`,
+@@clientName(AIServicesAccountIdentity.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  AIServicesAccountIdentity.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(ConditionalSkill.`@odata.type`, "odataType");
+@@clientName(ConditionalSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(ConditionalSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(KeyPhraseExtractionSkill.`@odata.type`, "odataType");
+@@clientName(KeyPhraseExtractionSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(KeyPhraseExtractionSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(OcrSkill.`@odata.type`, "odataType");
+@@clientName(OcrSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(OcrSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(ImageAnalysisSkill.`@odata.type`, "odataType");
+@@clientName(ImageAnalysisSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(ImageAnalysisSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(LanguageDetectionSkill.`@odata.type`, "odataType");
+@@clientName(LanguageDetectionSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(LanguageDetectionSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(ShaperSkill.`@odata.type`, "odataType");
+@@clientName(ShaperSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(ShaperSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(MergeSkill.`@odata.type`, "odataType");
+@@clientName(MergeSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(MergeSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(SentimentSkillV3.`@odata.type`, "odataType");
+@@clientName(SentimentSkillV3.`@odata.type`, "odataType", "!autorest");
 @@clientName(SentimentSkillV3.`@odata.type`, "odatatype", "javascript");
-@@clientName(EntityLinkingSkill.`@odata.type`, "odataType");
+@@clientName(EntityLinkingSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(EntityLinkingSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType");
+@@clientName(EntityRecognitionSkillV3.`@odata.type`, "odataType", "!autorest");
 @@clientName(EntityRecognitionSkillV3.`@odata.type`, "odatatype", "javascript");
-@@clientName(PIIDetectionSkill.`@odata.type`, "odataType");
+@@clientName(PIIDetectionSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(PIIDetectionSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(SplitSkill.`@odata.type`, "odataType");
+@@clientName(SplitSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(SplitSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(CustomEntityLookupSkill.`@odata.type`, "odataType");
+@@clientName(CustomEntityLookupSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(CustomEntityLookupSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(TextTranslationSkill.`@odata.type`, "odataType");
+@@clientName(TextTranslationSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(TextTranslationSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(DocumentExtractionSkill.`@odata.type`, "odataType");
+@@clientName(DocumentExtractionSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(DocumentExtractionSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(DocumentIntelligenceLayoutSkill.`@odata.type`, "odataType");
-@@clientName(DocumentIntelligenceLayoutSkill.`@odata.type`,
+@@clientName(
+  DocumentIntelligenceLayoutSkill.`@odata.type`,
+  "odataType",
+  "!autorest"
+);
+@@clientName(
+  DocumentIntelligenceLayoutSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(WebApiSkill.`@odata.type`, "odataType");
+@@clientName(WebApiSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(WebApiSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(AzureMachineLearningSkill.`@odata.type`, "odataType");
-@@clientName(AzureMachineLearningSkill.`@odata.type`,
+@@clientName(AzureMachineLearningSkill.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  AzureMachineLearningSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(AzureOpenAIEmbeddingSkill.`@odata.type`, "odataType");
-@@clientName(AzureOpenAIEmbeddingSkill.`@odata.type`,
+@@clientName(AzureOpenAIEmbeddingSkill.`@odata.type`, "odataType", "!autorest");
+@@clientName(
+  AzureOpenAIEmbeddingSkill.`@odata.type`,
   "odatatype",
   "javascript"
 );
-@@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
+@@clientName(VisionVectorizeSkill.`@odata.type`, "odataType", "!autorest");
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odatatype", "javascript");
-@@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
+@@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType", "!autorest");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odatatype", "javascript");
-@@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientName(ListIndexStatsSummary.value, "IndexesStatistics", "!autorest");
 @@clientName(ListIndexStatsSummary.value, "indexesStatistics", "javascript"); //TODO: verify casing
 @@clientName(RankingOrder.RerankerScore, "reRankerScore", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "csharp");
 @@clientName(Search.BM25SimilarityAlgorithm, "BM25Similarity", "javascript");
 @@clientName(Search.ClassicSimilarityAlgorithm, "ClassicSimilarity", "csharp");
-@@clientName(Search.ClassicSimilarityAlgorithm,
+@@clientName(
+  Search.ClassicSimilarityAlgorithm,
   "ClassicSimilarity",
   "javascript"
 );
-@@clientName(Search.ChatCompletionCommonModelParameters,
+@@clientName(
+  Search.ChatCompletionCommonModelParameters,
   "CommonModelParameters",
   "javascript"
 );
-@@clientName(Search.ChatCompletionCommonModelParameters.modelName,
+@@clientName(
+  Search.ChatCompletionCommonModelParameters.modelName,
   "model",
   "javascript"
 );
@@ -3202,47 +4405,58 @@ namespace KnowledgeBaseRetrievalClient {
 @@clientName(Search.SearchAlias.eTag, "etag", "javascript");
 @@clientName(Search.KnowledgeBase.eTag, "etag", "javascript");
 @@clientName(Search.RankingOrder.RerankerScore, "RerankerScore", "javascript");
-@@clientName(Search.ChatCompletionResponseFormat.jsonSchemaProperties,
+@@clientName(
+  Search.ChatCompletionResponseFormat.jsonSchemaProperties,
   "chatCompletionSchemaProperties",
   "javascript"
 );
-@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
+@@clientName(
+  Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsVitBasePatch32,
   "OpenAIClipImageTextEmbeddingsVitBasePatch32",
   "javascript"
 );
-@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+@@clientName(
+  Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
   "OpenAIClipImageTextEmbeddingsViTLargePatch14336",
   "javascript"
 );
-@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+@@clientName(
+  Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
   "OpenAiClipImageTextEmbeddingsVitLargePatch14_336",
   "python"
 );
-@@clientName(Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
+@@clientName(
+  Search.AIFoundryModelCatalogName.OpenAiClipImageTextEmbeddingsViTLargePatch14_336,
   "OPEN_AI_CLIP_IMAGE_TEXT_EMBEDDINGS_VIT_LARGE_PATCH14_336",
   "java"
 );
-@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+@@clientName(
+  Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
   "FacebookDinoV2ImageEmbeddingsVitBase",
   "python"
 );
-@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
+@@clientName(
+  Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTBase,
   "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_BASE",
   "java"
 );
-@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+@@clientName(
+  Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
   "FacebookDinoV2ImageEmbeddingsVitGiant",
   "python"
 );
-@@clientName(Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
+@@clientName(
+  Search.AIFoundryModelCatalogName.FacebookDinoV2ImageEmbeddingsViTGiant,
   "FACEBOOK_DINO_V2_IMAGE_EMBEDDINGS_VIT_GIANT",
   "java"
 );
-@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3English,
+@@clientName(
+  Search.AIFoundryModelCatalogName.CohereEmbedV3English,
   "COHERE_EMBED_V3_ENGLISH",
   "java"
 );
-@@clientName(Search.AIFoundryModelCatalogName.CohereEmbedV3Multilingual,
+@@clientName(
+  Search.AIFoundryModelCatalogName.CohereEmbedV3Multilingual,
   "COHERE_EMBED_V3_MULTILINGUAL",
   "java"
 );
@@ -3260,472 +4474,875 @@ namespace KnowledgeBaseRetrievalClient {
 @@alternateType(Search.SuggestRequest.searchFields, string, "javascript");
 
 // Knowledge Base types
+@@clientName(AzureOpenAiParameters.resourceUri, "resourceUrl", "java");
 @@clientNamespace(Search.AIServices, "Azure.Search.Documents.KnowledgeBases");
-@@clientNamespace(Search.AIServices,
+@@clientNamespace(
+  Search.AIServices,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.SynchronizationState,
+@@clientNamespace(
+  Search.SynchronizationState,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.SynchronizationState,
+@@clientNamespace(
+  Search.SynchronizationState,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+@@clientNamespace(
+  Search.KnowledgeSourceSynchronizationError,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceSynchronizationError,
+@@clientNamespace(
+  Search.KnowledgeSourceSynchronizationError,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.CompletedSynchronizationState,
+@@clientNamespace(
+  Search.CompletedSynchronizationState,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.CompletedSynchronizationState,
+@@clientNamespace(
+  Search.CompletedSynchronizationState,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalRequest,
   "Azure.Search.Documents.KnowledgeBases"
 );
 
-@@clientName(Search.KnowledgeBaseRetrievalRequest,
+@@clientName(
+  Search.KnowledgeBaseRetrievalRequest,
   "KnowledgeBaseRetrievalOptions",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalRequest,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalResponse,
   "Azure.Search.Documents.KnowledgeBases"
 );
 
-@@clientName(Search.KnowledgeBaseRetrievalResponse,
+@@clientName(
+  Search.KnowledgeBaseRetrievalResponse,
   "KnowledgeBaseRetrievalResult",
   "java"
 );
 
-@@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalResponse,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalReasoningEffort,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalReasoningEffort,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalMinimalReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalMinimalReasoningEffort,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalMinimalReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalMinimalReasoningEffort,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalLowReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalLowReasoningEffort,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalLowReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalLowReasoningEffort,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalMediumReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalMediumReasoningEffort,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalMediumReasoningEffort,
+@@clientNamespace(
+  Search.KnowledgeRetrievalMediumReasoningEffort,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
+@@clientNamespace(
+  Search.KnowledgeRetrievalReasoningEffortKind,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
+@@clientNamespace(
+  Search.KnowledgeRetrievalReasoningEffortKind,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalOutputMode,
+@@clientNamespace(
+  Search.KnowledgeRetrievalOutputMode,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalOutputMode,
+@@clientNamespace(
+  Search.KnowledgeRetrievalOutputMode,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceParams,
+@@clientNamespace(
+  Search.KnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceParams,
+@@clientNamespace(
+  Search.KnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSourceParams,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.SearchIndexKnowledgeSourceParams,
+@@clientNamespace(
+  Search.SearchIndexKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSourceParams,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.AzureBlobKnowledgeSourceParams,
+@@clientNamespace(
+  Search.AzureBlobKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParams,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParams,
+@@clientNamespace(
+  Search.IndexedSharePointKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParams,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParams,
+@@clientNamespace(
+  Search.IndexedOneLakeKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.WebKnowledgeSourceParams,
+@@clientNamespace(
+  Search.WebKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.WebKnowledgeSourceParams,
+@@clientNamespace(
+  Search.WebKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParams,
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParams,
+@@clientNamespace(
+  Search.RemoteSharePointKnowledgeSourceParams,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceVectorizer,
+@@clientNamespace(
+  Search.KnowledgeSourceVectorizer,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceVectorizer,
+@@clientNamespace(
+  Search.KnowledgeSourceVectorizer,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+@@clientNamespace(
+  Search.KnowledgeSourceAzureOpenAIVectorizer,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceAzureOpenAIVectorizer,
+@@clientNamespace(
+  Search.KnowledgeSourceAzureOpenAIVectorizer,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceIngestionParameters,
+@@clientNamespace(
+  Search.KnowledgeSourceIngestionParameters,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceIngestionParameters,
+@@clientNamespace(
+  Search.KnowledgeSourceIngestionParameters,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceStatistics,
+@@clientName(
+  Search.KnowledgeSourceIngestionParameters.aiServices,
+  "aiServices",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceStatistics,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceStatistics,
+@@clientNamespace(
+  Search.KnowledgeSourceStatistics,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@alternateType(Search.KnowledgeSourceStatistics.averageSynchronizationDuration,
+@@alternateType(
+  Search.KnowledgeSourceStatistics.averageSynchronizationDuration,
   duration,
   "java"
 );
-@@clientNamespace(Search.KnowledgeSourceStatus,
+@@clientNamespace(
+  Search.KnowledgeSourceStatus,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeSourceStatus,
+@@clientNamespace(
+  Search.KnowledgeSourceStatus,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@alternateType(Search.KnowledgeSourceStatus.synchronizationInterval,
+@@alternateType(
+  Search.KnowledgeSourceStatus.synchronizationInterval,
   duration,
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalIntent,
+@@clientNamespace(
+  Search.KnowledgeRetrievalIntent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalIntent,
+@@clientNamespace(
+  Search.KnowledgeRetrievalIntent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalIntentType,
+@@clientNamespace(
+  Search.KnowledgeRetrievalIntentType,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalIntentType,
+@@clientNamespace(
+  Search.KnowledgeRetrievalIntentType,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeRetrievalSemanticIntent,
+@@clientNamespace(
+  Search.KnowledgeRetrievalSemanticIntent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeRetrievalSemanticIntent,
+@@clientNamespace(
+  Search.KnowledgeRetrievalSemanticIntent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseMessage,
+@@clientNamespace(
+  Search.KnowledgeBaseMessage,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseMessage,
+@@clientNamespace(
+  Search.KnowledgeBaseMessage,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageContent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageContent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageContentType,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageContentType,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageContentType,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageContentType,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageTextContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageTextContent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageTextContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageTextContent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageImageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageImageContent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseMessageImageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseMessageImageContent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseImageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseImageContent,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseImageContent,
+@@clientNamespace(
+  Search.KnowledgeBaseImageContent,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseActivityRecordType,
+@@clientNamespace(
+  Search.KnowledgeBaseActivityRecordType,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseActivityRecordType,
+@@clientNamespace(
+  Search.KnowledgeBaseActivityRecordType,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRetrievalActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseRetrievalActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseRetrievalActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseWebActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseWebActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseWebActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseWebActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseWebActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseWebActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseWebActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseWebActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointActivityArguments,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityArguments,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointActivityArguments,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseModelQueryPlanningActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseModelQueryPlanningActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseModelQueryPlanningActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseModelQueryPlanningActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseAgenticReasoningActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseAgenticReasoningActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseAgenticReasoningActivityRecord,
+@@clientNamespace(
+  Search.KnowledgeBaseAgenticReasoningActivityRecord,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseReference,
+@@clientNamespace(
+  Search.KnowledgeBaseReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseReference,
+@@clientNamespace(
+  Search.KnowledgeBaseReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseReferenceType,
+@@clientNamespace(
+  Search.KnowledgeBaseReferenceType,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseReferenceType,
+@@clientNamespace(
+  Search.KnowledgeBaseReferenceType,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexReference,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseSearchIndexReference,
+@@clientNamespace(
+  Search.KnowledgeBaseSearchIndexReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobReference,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseAzureBlobReference,
+@@clientNamespace(
+  Search.KnowledgeBaseAzureBlobReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointReference,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedSharePointReference,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSharePointReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
 
-@@clientName(Search.KnowledgeBaseIndexedSharePointReference.docUrl,
+@@clientName(
+  Search.KnowledgeBaseIndexedSharePointReference.docUrl,
   "documentUrl",
   "java"
 );
 
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedOneLakeReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
 
-@@clientName(Search.KnowledgeBaseIndexedOneLakeReference.docUrl,
+@@clientName(
+  Search.KnowledgeBaseIndexedOneLakeReference.docUrl,
   "documentUrl",
   "java"
 );
 
-@@clientNamespace(Search.KnowledgeBaseWebReference,
+@@clientNamespace(
+  Search.KnowledgeBaseWebReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseWebReference,
+@@clientNamespace(
+  Search.KnowledgeBaseWebReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointReference,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointReference,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseRemoteSharePointReference,
+@@clientNamespace(
+  Search.KnowledgeBaseRemoteSharePointReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.SharePointSensitivityLabelInfo,
+@@clientNamespace(
+  Search.SharePointSensitivityLabelInfo,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.SharePointSensitivityLabelInfo,
+@@clientNamespace(
+  Search.SharePointSensitivityLabelInfo,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseErrorDetail,
+@@clientNamespace(
+  Search.KnowledgeBaseErrorDetail,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseErrorDetail,
+@@clientNamespace(
+  Search.KnowledgeBaseErrorDetail,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+@@clientNamespace(
+  Search.KnowledgeBaseErrorAdditionalInfo,
   "Azure.Search.Documents.KnowledgeBases"
 );
-@@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+@@clientNamespace(
+  Search.KnowledgeBaseErrorAdditionalInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseModelWebSummarizationActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(Search.AssetStore, "Azure.Search.Documents.KnowledgeBases");
+@@clientNamespace(
+  Search.AssetStore,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.FreshnessPolicy,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FreshnessPolicy,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.ImageServingStatistics,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.ImageServingStatistics,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FabricDataAgentKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricDataAgentReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FabricOntologyKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricOntologyReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.McpServerKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FileKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.IndexedSqlKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseMcpServerReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFileReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseIndexedSqlReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.PurviewSensitivityLabelInfo,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.PurviewSensitivityLabelInfo,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.WorkIQKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.WorkIQKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseWorkIQReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.WorkIQAttribution,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.WorkIQAttribution,
   "com.azure.search.documents.knowledgebases",
   "java"
 );
 // Java sends the default value on `accept` header. User can override via `RequestOptions`.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "clientRequired for java"
-@@clientOption(Search.acceptHeaderMinimal.accept,
+@@clientOption(
+  Search.acceptHeaderMinimal.accept,
   "clientRequired",
   true,
   "java"

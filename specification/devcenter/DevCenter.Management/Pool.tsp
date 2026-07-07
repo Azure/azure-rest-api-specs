@@ -37,10 +37,12 @@ interface Pools {
     Pool,
     PatchModel = PoolUpdate,
     LroHeaders = ArmLroLocationHeader,
-    Response = Pool | ArmAcceptedLroResponse<
-      "Resource update request accepted.",
-      ArmLroLocationHeader<FinalResult = Pool>
-    >
+    Response =
+      | Pool
+      | ArmAcceptedLroResponse<
+          "Resource update request accepted.",
+          ArmLroLocationHeader<FinalResult = Pool>
+        >
   >;
 
   @doc("Deletes a machine pool.")

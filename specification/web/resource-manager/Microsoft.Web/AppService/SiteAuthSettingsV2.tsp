@@ -51,7 +51,8 @@ interface SiteAuthSettingsV2Ops
         @segment("config")
         @key
         authsettingsV2: "authsettingsV2",
-      }
+      },
+      ResourceName = "WebSiteAuthSettingsV2"
     > {}
 
 @tag("WebApps")
@@ -117,7 +118,8 @@ interface SiteAuthSettingsV2OperationGroupOps
         @segment("config")
         @key
         authsettingsV2: "authsettingsV2",
-      }
+      },
+      ResourceName = "WebSiteSlotAuthSettingsV2"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -159,12 +161,15 @@ interface SiteAuthSettingsV2OperationGroup {
 }
 
 @@doc(SiteAuthSettingsV2.name, "");
-@@doc(SiteAuthSettingsV2.properties,
+@@doc(
+  SiteAuthSettingsV2.properties,
   "SiteAuthSettingsV2 resource specific properties"
 );
-@@doc(SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2s.updateAuthSettingsV2::parameters.resource,
   "Auth settings associated with web app."
 );
-@@doc(SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
+@@doc(
+  SiteAuthSettingsV2OperationGroup.updateAuthSettingsV2Slot::parameters.resource,
   "Auth settings associated with web app."
 );

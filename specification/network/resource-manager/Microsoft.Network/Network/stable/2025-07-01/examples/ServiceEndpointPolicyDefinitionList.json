@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceGroupName": "rg1",
+    "serviceEndpointPolicyName": "testPolicy",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testDef",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/serviceEndpointPolicies/testPolicy/serviceEndpointPolicyDefinitions/testDef",
+            "properties": {
+              "description": "Storage Service EndpointPolicy Definition",
+              "service": "Microsoft.Storage",
+              "serviceResources": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceEndpointPolicyDefinitions_ListByResourceGroup",
+  "title": "List service endpoint definitions in service end point policy"
+}

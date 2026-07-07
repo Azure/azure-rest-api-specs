@@ -72,6 +72,15 @@ model VolumeProperties {
    */
   @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -82,6 +91,12 @@ model VolumeProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -107,13 +122,14 @@ model VolumeProperties {
    * Resource identifier used to identify the Snapshot.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  snapshotId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
-    }
-  ]> | null;
+  snapshotId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots";
+        }
+      ]>
+    | null;
 
   /**
    * If enabled (true) the snapshot the volume was created from will be automatically deleted after the volume create operation has finished.  Defaults to false
@@ -125,11 +141,13 @@ model VolumeProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  backupId?: Azure.Core.armResourceIdentifier<[
-    {
-      type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
-    }
-  ]> | null;
+  backupId?:
+    | Azure.Core.armResourceIdentifier<[
+        {
+          type: "Microsoft.NetApp/netAppAccounts/backupVaults/backups";
+        }
+      ]>
+    | null;
 
   /**
    * Unique Baremetal Tenant Identifier.
@@ -269,6 +287,12 @@ model VolumeProperties {
    * Specifies the type of LDAP server for a given NFS volume.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -412,6 +436,12 @@ model VolumeProperties {
    * delivering higher capacity limit with lower costs.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -433,12 +463,42 @@ model VolumeProperties {
    * Language supported for volume.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   language?: VolumeLanguage;
 
   /**
    * Specifies whether the volume operates in Breakthrough Mode.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "breakthroughMode")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "breakthroughMode")
+  breakthroughModeOld?: BreakthroughMode;
+
+  /**
+   * Specifies whether the volume operates in Breakthrough Mode.
+   */
+  @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
 }
 
@@ -463,6 +523,7 @@ union LdapServerType {
  * Language supported for volume.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union VolumeLanguage {
   string,
 
@@ -815,7 +876,6 @@ union VolumeLanguage {
 /**
  * Set of export policy rules
  */
-@clientName("NetAppVolumeExportPolicyRule", "csharp")
 model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
@@ -1045,6 +1105,7 @@ model ReplicationObject {
    * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupStatus?: ExternalReplicationSetupStatus;
 
@@ -1052,6 +1113,7 @@ model ReplicationObject {
    * Contains human-readable instructions on what the next step is to finish the external replication setup.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   externalReplicationSetupInfo?: string;
 
@@ -1059,6 +1121,7 @@ model ReplicationObject {
    * The mirror state property describes the current status of data replication for a replication. It provides insight into whether the data is actively being mirrored, if the replication process has been paused, or if it has yet to be initialized.
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   mirrorState?: MirrorState;
 
@@ -1066,6 +1129,7 @@ model ReplicationObject {
    * The status of the Volume Replication
    */
   @added(Versions.v2025_12_15_preview)
+  @added(Versions.v2026_01_01)
   @visibility(Lifecycle.Read)
   relationshipStatus?: VolumeReplicationRelationshipStatus;
 }
@@ -1074,6 +1138,7 @@ model ReplicationObject {
  * Property that only applies to external replications. Provides a machine-readable value for the status of the external replication setup.
  */
 @added(Versions.v2025_12_15_preview)
+@added(Versions.v2026_01_01)
 union ExternalReplicationSetupStatus {
   string,
 
@@ -1247,6 +1312,15 @@ model VolumePatchProperties {
    */
   @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_12_15_preview, "usageThreshold")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "usageThreshold")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "usageThreshold")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1257,6 +1331,12 @@ model VolumePatchProperties {
    * For extra large volumes, valid values are in the range 2400GiB to 7200TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -1586,15 +1666,42 @@ model PeerClusterForVolumeMigrationRequest {
  */
 model ClusterPeerCommandResponse {
   /**
-   * A command that needs to be run on the external ONTAP to accept cluster peering.  Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>
+   * Represents the properties of the cluster peer command response.
    */
-  peerAcceptCommand?: string;
+  properties?: ClusterPeerCommandResponseProperties;
+}
+
+/**
+ * Properties of the cluster peer command response.
+ */
+model ClusterPeerCommandResponseProperties {
+  /**
+   * ClusterPeeringCommand to run to accept cluster peer. Will only be present if <code>clusterPeeringStatus</code> is <code>pending</code>.
+   */
+  @example("cluster peer create -peer-addresses 10.0.0.1,10.0.0.2")
+  clusterPeeringCommand?: string;
+
+  /**
+   * Passphrase for use with cluster peer command
+   */
+  @example("SecurePassphrase123")
+  passphrase?: string;
 }
 
 /**
  * Information about svm peering process
  */
 model SvmPeerCommandResponse {
+  /**
+   * Represents the properties of the SVM peer command response.
+   */
+  properties?: SvmPeerCommandResponseProperties;
+}
+
+/**
+ * Properties of the SVM peer command response.
+ */
+model SvmPeerCommandResponseProperties {
   /**
    * A command that needs to be run on the external ONTAP to accept svm peering.  Will only be present if <code>svmPeeringStatus</code> is <code>pending</code>
    */
@@ -2067,6 +2174,12 @@ union LargeVolumeType {
  * is available only in regions where it’s been configured and first-time users must finish onboarding prior to using Breakthrough Mode.
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
 union BreakthroughMode {
   string,
 
@@ -2237,7 +2350,8 @@ union ActualRansomwareProtectionState {
   Paused: "Paused",
 }
 
-@@visibility(Azure.ResourceManager.AvailabilityZonesProperty.zones,
+@@visibility(
+  Azure.ResourceManager.AvailabilityZonesProperty.zones,
   Lifecycle.Read,
   Lifecycle.Create
 );
@@ -2256,11 +2370,14 @@ interface Volumes {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Volume,
-    Response = ArmResourceUpdatedResponse<Volume> | ArmResourceCreatedResponse<
-      Volume,
-      ArmAsyncOperationHeader<FinalResult = Volume> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<Volume>
+      | ArmResourceCreatedResponse<
+          Volume,
+          ArmAsyncOperationHeader<FinalResult = Volume> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -2484,19 +2601,27 @@ interface Volumes {
   /**
    * Starts peering the external cluster for this migration volume
    */
+  @action("peerExternalCluster")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   peerExternalCluster is ArmResourceActionAsync<
     Volume,
     PeerClusterForVolumeMigrationRequest,
-    ClusterPeerCommandResponse
+    ArmResponse<ClusterPeerCommandResponse>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ClusterPeerCommandResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Starts SVM peering and returns a command to be run on the external ONTAP to accept it.  Once the SVM have been peered a SnapMirror will be created
    */
+  @action("authorizeExternalReplication")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   authorizeExternalReplication is ArmResourceActionAsync<
     Volume,
     void,
-    SvmPeerCommandResponse
+    ArmResponse<SvmPeerCommandResponse>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SvmPeerCommandResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -2628,37 +2753,48 @@ interface Volumes {
 @@minLength(Volume.name, 1);
 @@doc(Volume.name, "The name of the volume");
 @@doc(Volume.properties, "Volume properties");
-@@doc(Volumes.createOrUpdate::parameters.resource,
+@@doc(
+  Volumes.createOrUpdate::parameters.resource,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.update::parameters.properties,
+@@doc(
+  Volumes.update::parameters.properties,
   "Volume object supplied in the body of the operation."
 );
-@@doc(Volumes.revert::parameters.body,
+@@doc(
+  Volumes.revert::parameters.body,
   "Object for snapshot to revert supplied in the body of the operation."
 );
-@@doc(Volumes.breakFileLocks::parameters.body,
+@@doc(
+  Volumes.breakFileLocks::parameters.body,
   "Optional body to provide the ability to clear file locks with selected options"
 );
-@@doc(Volumes.listGetGroupIdListForLdapUser::parameters.body,
+@@doc(
+  Volumes.listGetGroupIdListForLdapUser::parameters.body,
   "Returns group Id list for a specific LDAP user"
 );
-@@doc(Volumes.breakReplication::parameters.body,
+@@doc(
+  Volumes.breakReplication::parameters.body,
   "Optional body to force break the replication."
 );
-@@doc(Volumes.reestablishReplication::parameters.body,
+@@doc(
+  Volumes.reestablishReplication::parameters.body,
   "body for the id of the source volume."
 );
-@@doc(Volumes.authorizeReplication::parameters.body,
+@@doc(
+  Volumes.authorizeReplication::parameters.body,
   "Authorize request object supplied in the body of the operation."
 );
-@@doc(Volumes.peerExternalCluster::parameters.body,
+@@doc(
+  Volumes.peerExternalCluster::parameters.body,
   "Cluster peer request object supplied in the body of the operation."
 );
-@@doc(Volumes.poolChange::parameters.body,
+@@doc(
+  Volumes.poolChange::parameters.body,
   "Move volume to the pool supplied in the body of the operation."
 );
 @@doc(Volumes.relocate::parameters.body, "Relocate volume request");
-@@doc(Volumes.migrateBackups::parameters.body,
+@@doc(
+  Volumes.migrateBackups::parameters.body,
   "Migrate backups under volume payload supplied in the body of the operation."
 );

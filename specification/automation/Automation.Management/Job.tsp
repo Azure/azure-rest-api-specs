@@ -235,6 +235,7 @@ interface Jobs {
 
 @@doc(Job.name, "The job name.");
 @@doc(Job.properties, "The properties of the job.");
-@@doc(Jobs.create::parameters.resource,
+@@doc(
+  Jobs.create::parameters.resource,
   "The parameters supplied to the create job operation."
 );

@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./AzureTrafficCollector.tsp";
 import "./CollectorPolicy.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -48,6 +49,7 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available NetworkFunction Rest API operations."
 );

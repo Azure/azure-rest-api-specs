@@ -30,7 +30,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Root client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Projects, "AIProjectClient");
+@@clientName(Azure.AI.Projects, "AIProjectClient", "!autorest");
 
 // --------------------------------------------------------------------------------
 // Namespace remapping
@@ -44,14 +44,15 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Use short form method names
-@@clientName(Agents.getAgent, "get");
-@@clientName(Agents.deleteAgent, "delete");
-@@clientName(Agents.listAgents, "list");
+@@clientName(Agents.getAgent, "get", "!autorest");
+@@clientName(Agents.deleteAgent, "delete", "!autorest");
+@@clientName(Agents.listAgents, "list", "!autorest");
 @@clientName(Agents.createAgentVersion, "create_version", "python");
 @@clientName(Agents.getAgentVersion, "get_version", "python");
 @@clientName(Agents.deleteAgentVersion, "delete_version", "python");
 @@clientName(Agents.listAgentVersions, "list_versions", "python");
-@@clientName(Agents.createAgentVersionFromManifest,
+@@clientName(
+  Agents.createAgentVersionFromManifest,
   "create_version_from_manifest",
   "python"
 );
@@ -82,21 +83,22 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.ContainerMemoryLimit.`16g`, "MEMORY_16GB", "python");
 @@clientName(OpenAI.ContainerMemoryLimit.`64g`, "MEMORY_64GB", "python");
 
-@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+@@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction", "!autorest");
 
 // --------------------------------------------------------------------------------
 // Memories sub-client
 // --------------------------------------------------------------------------------
 
-@@clientName(MemoryStores.createMemoryStore, "create");
-@@clientName(MemoryStores.updateMemoryStore, "update");
-@@clientName(MemoryStores.getMemoryStore, "get");
-@@clientName(MemoryStores.listMemoryStores, "list");
-@@clientName(MemoryStores.deleteMemoryStore, "delete");
+@@clientName(MemoryStores.createMemoryStore, "create", "!autorest");
+@@clientName(MemoryStores.updateMemoryStore, "update", "!autorest");
+@@clientName(MemoryStores.getMemoryStore, "get", "!autorest");
+@@clientName(MemoryStores.listMemoryStores, "list", "!autorest");
+@@clientName(MemoryStores.deleteMemoryStore, "delete", "!autorest");
 @@clientName(MemoryStoreSearchResponse, "MemoryStoreSearchResult", "python");
 @@clientName(DeleteMemoryStoreResponse, "DeleteMemoryStoreResult", "python");
 @@clientName(MemoryStoreUpdateResponse, "MemoryStoreUpdateResult", "python");
-@@clientName(MemoryStoreDeleteScopeResponse,
+@@clientName(
+  MemoryStoreDeleteScopeResponse,
   "MemoryStoreDeleteScopeResult",
   "python"
 );
@@ -105,12 +107,14 @@ using Azure.AI.Projects;
 // define OpenAI.InputItem as inputs. This pulls in ~100 OpenAI classes related to input items. We want the
 // Foundry SDK to be free of those, therefore for the time being we define input item as a generic dictionary.
 @@alternateType(OpenAI.InputItem, Record<unknown>);
-@@clientDoc(MemoryStoreUpdateRequest.items,
+@@clientDoc(
+  MemoryStoreUpdateRequest.items,
   "A list of messages to store in memory, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
 );
-@@clientDoc(MemoryStoreSearchRequest.items,
+@@clientDoc(
+  MemoryStoreSearchRequest.items,
   "A list of messages used to extract relevant memories, each one represented as an object with `role`, `content` and `type` keys. Similar to how OpenAI defines input items in Responses operations. Example of an item: {\"role\": \"user\", \"type\": \"message\", \"content\": \"my user message\"}. Only messages with `type` equals `message` are currently processed. Others are ignored.",
   DocumentationMode.replace,
   "javascript"
@@ -144,18 +148,26 @@ using Azure.AI.Projects;
 @@alternateType(OpenAI.ResponseFormatJsonSchemaSchema, Record<unknown>);
 
 // Note there is also OpenAI.TextResponseFormatJsonSchema (which extends OpenAI.TextResponseFormatConfiguration). It already has a good name.
-@@clientName(OpenAI.TextResponseFormatConfiguration, "TextResponseFormat");
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatText,
-  "TextResponseFormatText"
+@@clientName(
+  OpenAI.TextResponseFormatConfiguration,
+  "TextResponseFormat",
+  "!autorest"
 );
-@@clientName(OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
-  "TextResponseFormatJsonObject"
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatText,
+  "TextResponseFormatText",
+  "!autorest"
+);
+@@clientName(
+  OpenAI.TextResponseFormatConfigurationResponseFormatJsonObject,
+  "TextResponseFormatJsonObject",
+  "!autorest"
 );
 
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Evaluators.listLatestVersions, "list");
+@@clientName(Evaluators.listLatestVersions, "list", "!autorest");
 
 // EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
@@ -164,39 +176,39 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Insights sub‐client
 // --------------------------------------------------------------------------------
-@@clientName(Azure.AI.Projects.Insight.id, "insight_id");
+@@clientName(Azure.AI.Projects.Insight.id, "insight_id", "!autorest");
 
 // --------------------------------------------------------------------------------
 // Datasets sub‐client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+@@clientName(Datasets.listLatest, "list", "!autorest");
+@@clientName(Datasets.getVersion, "get", "!autorest");
+@@clientName(Datasets.deleteVersion, "delete", "!autorest");
+@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate", "!autorest");
+@@clientName(Datasets.startPendingUploadVersion, "pendingUpload", "!autorest");
 
 // More accurate naming
-@@clientName(AssetCredentialResponse, "DatasetCredential");
-@@clientName(SasCredential, "BlobReferenceSasCredential"); // Not to be confused with class "SASCredentials"
+@@clientName(AssetCredentialResponse, "DatasetCredential", "!autorest");
+@@clientName(SasCredential, "BlobReferenceSasCredential", "!autorest"); // Not to be confused with class "SASCredentials"
 
 // --------------------------------------------------------------------------------
 // Indexes sub‐client
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK Index operations
-@@clientName(Indexes.listLatest, "list");
-@@clientName(Indexes.getVersion, "get");
-@@clientName(Indexes.deleteVersion, "delete");
-@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate");
+@@clientName(Indexes.listLatest, "list", "!autorest");
+@@clientName(Indexes.getVersion, "get", "!autorest");
+@@clientName(Indexes.deleteVersion, "delete", "!autorest");
+@@clientName(Indexes.createOrUpdateVersion, "createOrUpdate", "!autorest");
 
 // --------------------------------------------------------------------------------
 // Schedules sub‐client
 // --------------------------------------------------------------------------------
 
-@@clientName(SchedulesCreateOrUpdateParams.resource, "schedule");
-@@clientName(Schedule.id, "schedule_id");
+@@clientName(SchedulesCreateOrUpdateParams.resource, "schedule", "!autorest");
+@@clientName(Schedule.id, "schedule_id", "!autorest");
 
 // Schedule trigger datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(RecurrenceTrigger.startTime, utcDateTime, "python");
@@ -220,7 +232,7 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Less generic names
-@@clientName(Sku, "ModelDeploymentSku");
+@@clientName(Sku, "ModelDeploymentSku", "!autorest");
 
 // --------------------------------------------------------------------------------
 // To support custom client-side handling of "opt-in" to preview features.
@@ -245,7 +257,8 @@ model AIProjectClientOptions {
   allow_preview?: boolean;
 }
 
-@@clientInitialization(Azure.AI.Projects,
+@@clientInitialization(
+  Azure.AI.Projects,
   {
     parameters: AIProjectClientOptions,
   },
@@ -259,4 +272,4 @@ model AIProjectClientOptions {
 // Rename OpenAI.Error to avoid conflict with Azure.Core.Foundations.Error.
 // OpenAI.Error is the object type of the `error` properties in `ApiErrorResponse`
 // and `MemoryStoreUpdateResponse`.
-@@clientName(OpenAI.Error, "ApiError");
+@@clientName(OpenAI.Error, "ApiError", "!autorest");

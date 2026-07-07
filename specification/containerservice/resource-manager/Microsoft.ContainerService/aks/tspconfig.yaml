@@ -5,6 +5,7 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
     omit-unreachable-types: true
     use-read-only-status-schema: true
     emitter-output-dir: "{project-root}"
@@ -32,7 +33,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armcontainerservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservice"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcontainerservice/v9"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -54,7 +55,6 @@ options:
   "@azure-typespec/http-client-csharp-provisioning":
     namespace: "Azure.Provisioning.ContainerService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    api-version: "2026-01-01"
 
 linter:
   extends:

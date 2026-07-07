@@ -10,16 +10,17 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Maintenance;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "ScheduledEvents is not modeled as an ARM resource; this group only exposes custom action (POST) operations."
 interface ScheduledEventOperationGroup {
   /**
-   * Post Scheduled Event Acknowledgement
+   * Post ScheduledEvents Acknowledgement
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @summary("Post Scheduled Event Acknowledgement")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom action POST that acknowledges a ScheduledEvent; not a standard ARM resource lifecycle operation."
+  @summary("Post ScheduledEvents Acknowledgement")
   @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents/{scheduledEventId}/acknowledge")
   @post
   acknowledge(
@@ -40,11 +41,43 @@ interface ScheduledEventOperationGroup {
     resourceName: string,
 
     /**
-     * Scheduled Event Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)
+     * ScheduledEvents Id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)
      */
     @path
     scheduledEventId: string,
-  ): ArmResponse<ScheduledEventApproveResponse> | MaintenanceError;
+  ): ArmResponse<ScheduledEventsApproveResponse> | MaintenanceError;
+
+  /**
+   * Post List of ScheduledEvents Acknowledgement
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom action POST that acknowledges a list of ScheduledEvents; not a standard ARM resource lifecycle operation."
+  @added(Versions.v2025_10_01_preview)
+  @summary("Post ScheduledEvents List Acknowledgement")
+  @route("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Compute/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/scheduledevents")
+  @post
+  acknowledgeList(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * Resource type
+     */
+    @path
+    resourceType: string,
+
+    /**
+     * Resource name
+     */
+    @path
+    resourceName: string,
+
+    @body
+    @doc("List of ScheduledEvents Id.")
+    scheduledEventsIdList: ScheduledEventsIdList,
+  ):
+    | ArmResponse<ScheduledEventsApproveResponse>
+    | ScheduledEventsListAcknowledgeError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -90,7 +123,10 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
+  ):
+    | ArmResponse<ApplyUpdate>
+    | ArmCreatedResponse<ApplyUpdate>
+    | MaintenanceError;
 
   /**
    * Apply maintenance updates to resource
@@ -120,7 +156,10 @@ interface ApplyUpdatesOperationGroup {
      */
     @path
     resourceName: string,
-  ): ArmResponse<ApplyUpdate> | ArmCreatedResponse<ApplyUpdate> | MaintenanceError;
+  ):
+    | ArmResponse<ApplyUpdate>
+    | ArmCreatedResponse<ApplyUpdate>
+    | MaintenanceError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -140,7 +179,7 @@ interface ApplyUpdateForResourceGroupOperationGroup {
   ): ArmResponse<ListApplyUpdate> | MaintenanceError;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Suppress expected decorator errors"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConfigurationAssignmentForResourceGroupOperationGroup {
   /**

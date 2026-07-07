@@ -53,12 +53,27 @@ model PoolProperties {
    */
   @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_12_15_preview, "size")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "size")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "size")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "size")
   sizeOld: int64 = 4398046511104;
 
   /**
    * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   size: int64 = 4398046511104;
 
   /**
@@ -157,12 +172,27 @@ model PoolPatchProperties {
    */
   @removed(Versions.v2025_12_15_preview)
   @renamedFrom(Versions.v2025_12_15_preview, "size")
+  @added(Versions.v2026_01_01)
+  @removed(Versions.v2026_01_15_preview)
+  @renamedFrom(Versions.v2026_01_15_preview, "size")
+  @added(Versions.v2026_03_01)
+  @removed(Versions.v2026_03_15_preview)
+  @renamedFrom(Versions.v2026_03_15_preview, "size")
+  @added(Versions.v2026_04_01)
+  @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "size")
   sizeOld?: int64;
 
   /**
    * Provisioned size of the pool (in bytes). Allowed values are 512GiB (549755813888 bytes) or in 1TiB chunks (value must be multiple of 1099511627776).
    */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
   size?: int64;
 
   /**
@@ -291,9 +321,11 @@ interface CapacityPools {
 @@minLength(CapacityPool.name, 1);
 @@doc(CapacityPool.name, "The name of the capacity pool");
 @@doc(CapacityPool.properties, "Capacity pool properties");
-@@doc(CapacityPools.createOrUpdate::parameters.resource,
+@@doc(
+  CapacityPools.createOrUpdate::parameters.resource,
   "Capacity pool object supplied in the body of the operation."
 );
-@@doc(CapacityPools.update::parameters.properties,
+@@doc(
+  CapacityPools.update::parameters.properties,
   "Capacity pool object supplied in the body of the operation."
 );

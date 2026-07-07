@@ -66,9 +66,8 @@ interface DatabaseMigrationSqlVms {
        * Optional migration operation ID. If this is provided, then details of migration operation for that ID are retrieved. If not provided (default), then details related to most recent or current operation are retrieved.
        */
       #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @format("uuid")
       @query("migrationOperationId")
-      migrationOperationId?: string;
+      migrationOperationId?: Azure.Core.uuid;
 
       /**
        * Complete migration details be included in the response.
@@ -101,8 +100,11 @@ interface DatabaseMigrationSqlVms {
       @query("force")
       force?: boolean;
     },
-    Response = ArmResponse<DatabaseMigrationSqlVm> | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmResponse<DatabaseMigrationSqlVm>
+      | ArmDeleteAcceptedLroResponse<ArmLroLocationHeader<FinalResult = DatabaseMigrationSqlVm> &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -133,10 +135,12 @@ interface DatabaseMigrationSqlVms {
 }
 
 @@doc(DatabaseMigrationSqlVm.name, "The name of the target database.");
-@@doc(DatabaseMigrationSqlVm.properties,
+@@doc(
+  DatabaseMigrationSqlVm.properties,
   "Database Migration Resource properties for SQL Virtual Machine."
 );
-@@doc(DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
+@@doc(
+  DatabaseMigrationSqlVms.createOrUpdate::parameters.resource,
   "Details of SqlMigrationService resource."
 );
 @@doc(DatabaseMigrationSqlVms.cancel::parameters.body, "");
