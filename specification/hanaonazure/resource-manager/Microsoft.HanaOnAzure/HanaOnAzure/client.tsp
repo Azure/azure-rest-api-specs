@@ -22,6 +22,12 @@ using Microsoft.HanaOnAzure;
   "csharp"
 );
 
+@@alternateType(
+  SapMonitorProperties.logAnalyticsWorkspaceArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 @@clientName(Operation, "HanaOnAzureOperationInfo", "csharp");
 
 @@clientName(HanaProvisioningStatesEnum, "HanaProvisioningState", "csharp");
