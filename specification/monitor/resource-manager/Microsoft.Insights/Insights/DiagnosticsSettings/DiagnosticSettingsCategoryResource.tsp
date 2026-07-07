@@ -30,8 +30,6 @@ interface DiagnosticSettingsCategoryResources {
   /**
    * Gets the diagnostic settings category for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettingsCategory_Get")
   @tag("DiagnosticSettingsCategories")
   get is Extension.Read<
     Extension.ScopeParameter,
@@ -42,8 +40,6 @@ interface DiagnosticSettingsCategoryResources {
   /**
    * Lists the diagnostic settings categories for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettingsCategory_List")
   @tag("DiagnosticSettingsCategories")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,

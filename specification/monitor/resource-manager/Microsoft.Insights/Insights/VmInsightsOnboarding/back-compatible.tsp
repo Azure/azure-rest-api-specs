@@ -6,7 +6,8 @@ using Microsoft.Insights;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(WorkspaceInfo.properties);
 
-@@clientLocation(VMInsightsOnboardingStatuses.getOnboardingStatus,
+@@clientLocation(
+  VMInsightsOnboardingStatuses.getOnboardingStatus,
   "VMInsights"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

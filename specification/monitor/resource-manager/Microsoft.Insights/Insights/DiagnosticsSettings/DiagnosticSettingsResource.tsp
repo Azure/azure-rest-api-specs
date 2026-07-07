@@ -30,8 +30,6 @@ interface DiagnosticSettingsResources {
   /**
    * Gets the active diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettings_Get")
   @tag("DiagnosticSettings")
   get is Extension.Read<
     Extension.ScopeParameter,
@@ -42,9 +40,7 @@ interface DiagnosticSettingsResources {
   /**
    * Creates or updates diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettings_CreateOrUpdate")
   @tag("DiagnosticSettings")
   createOrUpdate is Extension.CreateOrReplaceSync<
     Extension.ScopeParameter,
@@ -56,8 +52,6 @@ interface DiagnosticSettingsResources {
   /**
    * Deletes existing diagnostic settings for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettings_Delete")
   @tag("DiagnosticSettings")
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
@@ -68,8 +62,6 @@ interface DiagnosticSettingsResources {
   /**
    * Gets the active diagnostic settings list for the specified resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DiagnosticSettings_List")
   @tag("DiagnosticSettings")
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
