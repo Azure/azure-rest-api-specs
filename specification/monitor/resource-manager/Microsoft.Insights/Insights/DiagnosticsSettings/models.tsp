@@ -130,23 +130,7 @@ model MetricSettings {
   /**
    * the retention policy for this category.
    */
-  retentionPolicy?: RetentionPolicy;
-}
-
-/**
- * Specifies the retention policy for the log.
- */
-model RetentionPolicy {
-  /**
-   * a value indicating whether the retention policy is enabled.
-   */
-  enabled: boolean;
-
-  /**
-   * the number of days for the retention in days. A value of 0 will retain the events indefinitely.
-   */
-  @minValue(0)
-  days: int32;
+  retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
 /**
@@ -171,23 +155,7 @@ model LogSettings {
   /**
    * the retention policy for this log.
    */
-  retentionPolicy?: RetentionPolicy;
-}
-
-/**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
+  retentionPolicy?: Microsoft.Common.RetentionPolicy;
 }
 
 /**

@@ -206,57 +206,6 @@ model VoiceReceiver {
 }
 
 /**
- * An azure resource object
- */
-model AzureResource {
-  /**
-   * Azure resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Azure resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Azure resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * Resource location
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  location: string;
-
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
-}
-
-/**
- * Describes the format of Error response.
- */
-@error
-model ErrorResponse {
-  /**
-   * Error code
-   */
-  code?: string;
-
-  /**
-   * Error message indicating why the operation failed.
-   */
-  message?: string;
-}
-
-/**
  * A tenant action group object for the body of patch operations.
  */
 model ActionGroupPatchBody {

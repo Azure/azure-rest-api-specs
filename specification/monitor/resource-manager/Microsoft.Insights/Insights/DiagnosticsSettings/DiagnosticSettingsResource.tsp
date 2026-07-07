@@ -34,7 +34,7 @@ interface DiagnosticSettingsResources {
   get is Extension.Read<
     Extension.ScopeParameter,
     DiagnosticSettingsResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -46,7 +46,7 @@ interface DiagnosticSettingsResources {
     Extension.ScopeParameter,
     DiagnosticSettingsResource,
     Response = ArmResourceUpdatedResponse<DiagnosticSettingsResource>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -56,7 +56,7 @@ interface DiagnosticSettingsResources {
   delete is Extension.DeleteSync<
     Extension.ScopeParameter,
     DiagnosticSettingsResource,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 
   /**
@@ -67,7 +67,7 @@ interface DiagnosticSettingsResources {
     Extension.ScopeParameter,
     DiagnosticSettingsResource,
     Response = ArmResponse<DiagnosticSettingsResourceCollection>,
-    Error = ErrorResponse
+    Error = Microsoft.Common.ErrorResponse
   >;
 }
 

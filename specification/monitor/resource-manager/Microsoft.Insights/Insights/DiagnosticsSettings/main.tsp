@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./DiagnosticSettingsResource.tsp";
 import "./DiagnosticSettingsCategoryResource.tsp";
+import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -117,29 +117,6 @@ model WorkspaceInfoProperties {
 }
 
 /**
- * An azure resource object
- */
-model ProxyResource {
-  /**
-   * Azure resource Id
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Azure resource name
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Azure resource type
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-}
-
-/**
  * An error response from the API.
  */
 @error
