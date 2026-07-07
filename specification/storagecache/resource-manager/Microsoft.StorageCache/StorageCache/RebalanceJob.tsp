@@ -35,7 +35,7 @@ interface RebalanceJobs {
    * Returns a rebalance job.
    */
   @tag("rebalanceJobs")
-  get is ArmResourceRead<RebalanceJob, Error = CloudError>;
+  get is ArmResourceRead<RebalanceJob, Error = ErrorResponse>;
 
   /**
    * Update a rebalance job instance.
@@ -71,7 +71,7 @@ interface RebalanceJobs {
   listByAmlFilesystem is ArmResourceListByParent<
     RebalanceJob,
     Response = ArmResponse<RebalanceJobsListResult>,
-    Error = CloudError
+    Error = ErrorResponse
   >;
 }
 

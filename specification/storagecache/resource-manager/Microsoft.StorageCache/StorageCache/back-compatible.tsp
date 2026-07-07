@@ -108,7 +108,7 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJob.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for ProvisioningStateMustBeReadOnly lint rule to traverse properties"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Consistent with all other StorageCache resources (AmlFilesystem, ImportJob, ExpansionJob, Cache, StorageTarget), which flatten `properties` to preserve the swagger shape established by the TypeSpec brownfield conversion."
 @@Legacy.flattenProperty(RebalanceJob.properties);
 
 @@clientName(Caches.createOrUpdate::parameters.resource, "cache");

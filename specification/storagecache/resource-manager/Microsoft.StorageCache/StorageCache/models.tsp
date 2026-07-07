@@ -2551,7 +2551,7 @@ model RebalanceJobPropertiesStatus {
    * Average throughput in mebibytes per second (1024x1024 bytes per second) over the most recent reporting interval.
    */
   @visibility(Lifecycle.Read)
-  throughputMbps?: float64;
+  throughputMiBps?: float64;
 
   /**
    * Total cumulative non-skip errors since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.
@@ -2568,14 +2568,14 @@ model RebalanceJobPropertiesStatus {
   /**
    * The time (in UTC) the rebalance job started.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Non-standard casing matches existing convention in this project"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the established *TimeUTC property naming used across the StorageCache job resources (lastStartedTimeUTC, lastCompletionTimeUTC, etc.); renaming would break SDK property-name consistency within the job-resource family."
   @visibility(Lifecycle.Read)
   startTimeUTC?: utcDateTime;
 
   /**
    * The time (in UTC) when the rebalance job completed. Only populated when the job reaches a terminal state (Completed, Failed, or Canceled).
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Non-standard casing matches existing convention in this project"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the established *TimeUTC property naming used across the StorageCache job resources (lastStartedTimeUTC, lastCompletionTimeUTC, etc.); renaming would break SDK property-name consistency within the job-resource family."
   @visibility(Lifecycle.Read)
   completionTimeUTC?: utcDateTime;
 }
@@ -2860,7 +2860,6 @@ model ResourceSkusResult {
    */
   @visibility(Lifecycle.Read)
   @pageItems
-  @identifiers(#["name"])
   value?: ResourceSku[];
 
   /**
