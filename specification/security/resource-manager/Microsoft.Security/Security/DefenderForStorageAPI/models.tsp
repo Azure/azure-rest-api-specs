@@ -389,14 +389,12 @@ model BlobScanFilter {
   /**
    * Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  container?: ContainerFilter | null;
+  container?: ContainerFilter;
 
   /**
    * Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  blob?: BlobFilter | null;
+  blob?: BlobFilter;
 }
 
 /**
@@ -407,14 +405,12 @@ model FileScanFilter {
   /**
    * Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  share?: ShareFilter | null;
+  share?: ShareFilter;
 
   /**
    * Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  file?: FileFilter | null;
+  file?: FileFilter;
 }
 
 /**
@@ -425,14 +421,12 @@ model MalwareScanFilters {
   /**
    * Optional filter for blob scanning. Specifies which blobs to scan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  blobs?: BlobScanFilter | null;
+  blobs?: BlobScanFilter;
 
   /**
    * Optional filter for file scanning. Specifies which files to scan.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  files?: FileScanFilter | null;
+  files?: FileScanFilter;
 }
 
 /**
@@ -443,8 +437,7 @@ model StartMalwareScanRequestProperties {
   /**
    * Optional filters to scope the malware scan to specific blobs or files.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Property is x-nullable in swagger."
-  filters?: MalwareScanFilters | null;
+  filters?: MalwareScanFilters;
 }
 
 /**
