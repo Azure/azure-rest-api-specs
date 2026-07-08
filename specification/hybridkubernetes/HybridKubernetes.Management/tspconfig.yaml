@@ -14,6 +14,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     package-name: "Azure.ResourceManager.Kubernetes"
     namespace: "{package-name}"
+    api-version: "2025-12-01-preview"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.Kubernetes"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-hybridkubernetes"
     namespace: "azure.mgmt.hybridkubernetes"
@@ -28,6 +32,7 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-hybridkubernetes"
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-hybridkubernetes"

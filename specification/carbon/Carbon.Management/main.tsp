@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-autorest";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -523,7 +524,7 @@ interface CarbonService {
   @doc("API for query carbon emission data available date range")
   @post
   @route("/providers/Microsoft.Carbon/queryCarbonEmissionDataAvailableDateRange")
-  queryCarbonEmissionDataAvailableDateRange(
-    ...ApiVersionParameter,
-  ): ArmResponse<CarbonEmissionDataAvailableDateRange> | ErrorResponse;
+  queryCarbonEmissionDataAvailableDateRange(...ApiVersionParameter):
+    | ArmResponse<CarbonEmissionDataAvailableDateRange>
+    | ErrorResponse;
 }

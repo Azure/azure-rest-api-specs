@@ -940,6 +940,20 @@ union StorageAlignmentStatus {
 }
 
 /**
+ * Specifies the processor frequency behavior for the virtual machine. See each member for the behavior it controls.
+ */
+@added(Versions.v2026_04_01)
+union ProcessorMode {
+  string,
+
+  /** Ensures predictable and consistent processor frequency at the base/nominal level. Turbo/Boost is disabled. */
+  Deterministic: "Deterministic",
+
+  /** Allows higher frequency bursts when thermal and power headroom permits. */
+  Opportunistic: "Opportunistic",
+}
+
+/**
  * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
  */
 union IPVersions {
@@ -1613,6 +1627,7 @@ enum StatusLevelTypes {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum UpgradeState {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1634,6 +1649,7 @@ enum UpgradeOperationInvoker {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RollingUpgradeStatusCode {
   RollingForward,
+  RollingBack,
   Cancelled,
   Completed,
   Faulted,
@@ -1703,7 +1719,8 @@ model ListUsagesResult is Azure.Core.Page<Usage>;
 
 @@identifiers(ListUsagesResult.value, #[]);
 @@doc(ListUsagesResult.value, "The list of compute resource usages.");
-@@doc(ListUsagesResult.nextLink,
+@@doc(
+  ListUsagesResult.nextLink,
   "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
 );
 
@@ -1806,10 +1823,12 @@ model VirtualMachineSize {
 model VirtualMachineScaleSetListResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListResult.value,
+@@doc(
+  VirtualMachineScaleSetListResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS."
 );
 
@@ -1840,7 +1859,7 @@ model VirtualMachineScaleSetProperties {
   /**
    * The provisioning state, which only appears in the response.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -2242,6 +2261,12 @@ model VirtualMachineScaleSetVMProfile {
    * Specifies the capacity reservation related details of a scale set. Minimum api-version: 2021-04-01.
    */
   capacityReservation?: CapacityReservationProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 
   /**
    * Specifies the gallery applications that should be made available to the VM/VMSS
@@ -2879,6 +2904,12 @@ model VirtualMachineScaleSetNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -3141,6 +3172,16 @@ model VirtualMachineScaleSetIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -3262,6 +3303,12 @@ model HostEndpointSettings {
    * Specifies the InVMAccessControlProfileVersion resource id in the format of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/inVMAccessControlProfiles/{profile}/versions/{version}
    */
   inVMAccessControlProfileReferenceId?: string;
+
+  /**
+   * When set to true, instructs the GuestProxyAgent inside the VM to load additional access control rules defined in a local file on the VM.
+   */
+  @added(Versions.v2026_04_01)
+  useLocalFileRules?: boolean;
 }
 
 /**
@@ -3503,6 +3550,12 @@ model VirtualMachineScaleSetHardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -3795,6 +3848,12 @@ model SkuProfile {
    * Specifies the allocation strategy for the virtual machine scale set based on which the VMs will be allocated.
    */
   allocationStrategy?: AllocationStrategy;
+
+  /**
+   * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
+   */
+  @added(Versions.v2026_03_01)
+  automaticSkuMigrationPolicy?: AutomaticSkuMigrationPolicy;
 }
 
 /**
@@ -3810,6 +3869,17 @@ model SkuProfileVMSize {
    * Specifies the rank (a.k.a priority) associated with the VM Size.
    */
   rank?: int32;
+}
+
+/**
+ * Specifies the configuration parameters used to control automatic SKU migration for the virtual machine scale set. When enabled, the platform may migrate instances to a different VM size from the SKU profile depending on platform demands.
+ */
+@added(Versions.v2026_03_01)
+model AutomaticSkuMigrationPolicy {
+  /**
+   * Specifies whether automatic SKU migration should be enabled on the virtual machine scale set. The default value is false.
+   */
+  enabled?: boolean;
 }
 
 /**
@@ -3846,10 +3916,12 @@ model VirtualMachineScaleSetIdentity {
 model VirtualMachineScaleSetListWithLinkResult
   is Azure.Core.Page<VirtualMachineScaleSet>;
 
-@@doc(VirtualMachineScaleSetListWithLinkResult.value,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.value,
   "The list of virtual machine scale sets."
 );
-@@doc(VirtualMachineScaleSetListWithLinkResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListWithLinkResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of Virtual Machine Scale Sets."
 );
 /**
@@ -4035,6 +4107,12 @@ model VirtualMachineScaleSetUpdateVMProfile {
    * Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01.
    */
   hardwareProfile?: VirtualMachineScaleSetHardwareProfile;
+
+  /**
+   * Specifies the Interconnect Block related details of a scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -4160,6 +4238,12 @@ model VirtualMachineScaleSetUpdateNetworkProfile {
    * specifies the Microsoft.Network API version used when creating networking resources in the Network Interface Configurations for Virtual Machine Scale Set with orchestration mode 'Flexible'
    */
   networkApiVersion?: NetworkApiVersion;
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -4425,10 +4509,12 @@ model VirtualMachineScaleSetExtensionListResult
 
 @@identifiers(VirtualMachineScaleSetExtensionListResult.value, #["name", "id"]);
 
-@@doc(VirtualMachineScaleSetExtensionListResult.value,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.value,
   "The list of VM scale set extensions."
 );
-@@doc(VirtualMachineScaleSetExtensionListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetExtensionListResult.nextLink,
   "The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions."
 );
 
@@ -4613,7 +4699,8 @@ model OrchestrationServiceSummary {
   lastStatusChangeTime?: utcDateTime;
 }
 
-@@identifiers(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@identifiers(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   #["location", "type"]
 );
 
@@ -4623,10 +4710,12 @@ model OrchestrationServiceSummary {
 model VirtualMachineScaleSetListOSUpgradeHistory
   is Azure.Core.Page<UpgradeOperationHistoricalStatusInfo>;
 
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.value,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.value,
   "The list of OS upgrades performed on the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
+@@doc(
+  VirtualMachineScaleSetListOSUpgradeHistory.nextLink,
   "The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades."
 );
 
@@ -4901,7 +4990,8 @@ model OrchestrationServiceStateInput {
   action: OrchestrationServiceStateAction;
 }
 
-@@identifiers(VirtualMachineScaleSetListSkusResult.value,
+@@identifiers(
+  VirtualMachineScaleSetListSkusResult.value,
   #["resourceType", "sku/name"]
 );
 /**
@@ -4910,10 +5000,12 @@ model OrchestrationServiceStateInput {
 model VirtualMachineScaleSetListSkusResult
   is Azure.Core.Page<VirtualMachineScaleSetSku>;
 
-@@doc(VirtualMachineScaleSetListSkusResult.value,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.value,
   "The list of skus available for the virtual machine scale set."
 );
-@@doc(VirtualMachineScaleSetListSkusResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetListSkusResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
 );
 
@@ -4975,10 +5067,12 @@ model VirtualMachineScaleSetSkuCapacity {
 model VirtualMachineScaleSetVMListResult
   is Azure.Core.Page<VirtualMachineScaleSetVM>;
 
-@@doc(VirtualMachineScaleSetVMListResult.value,
+@@doc(
+  VirtualMachineScaleSetVMListResult.value,
   "The list of virtual machine scale sets VMs."
 );
-@@doc(VirtualMachineScaleSetVMListResult.nextLink,
+@@doc(
+  VirtualMachineScaleSetVMListResult.nextLink,
   "The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs."
 );
 
@@ -5098,6 +5192,12 @@ model VirtualMachineScaleSetVMProperties {
       type: "Microsoft.Compute/virtualMachines";
     }
   ]>;
+
+  /**
+   * Specifies the Interconnect Block related details of a Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
 }
 
 /**
@@ -5188,6 +5288,13 @@ model VirtualMachineScaleSetVMInstanceView {
    * The hypervisor generation of the Virtual Machine [V1, V2]
    */
   hyperVGeneration?: HyperVGeneration;
+
+  /**
+   * The Interconnect runtime view of the Scale Set VM instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -5414,6 +5521,12 @@ model HardwareProfile {
    * Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-07-01. This feature is still in preview mode and is not supported for VirtualMachineScaleSet. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details.
    */
   vmSizeProperties?: VMSizeProperties;
+
+  /**
+   * Specifies the processor mode for the virtual machine or virtual machine scale set. Optional; if omitted, the platform default applies (currently Deterministic). This property can be updated on a running VM or VMSS without deallocation or reboot. Minimum api-version: 2026-04-01.
+   */
+  @added(Versions.v2026_04_01)
+  processorMode?: ProcessorMode;
 }
 
 /**
@@ -5734,6 +5847,12 @@ model NetworkProfile {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineNetworkInterfaceConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the virtual machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -6017,6 +6136,16 @@ model VirtualMachineIpTag {
    * IP tag associated with the public IP. Example: SQL, Storage etc.
    */
   tag?: string;
+
+  /**
+   * The first party service tag resource identifier associated with the public IP address.
+   */
+  @added(Versions.v2026_04_01)
+  firstPartyServiceTagId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/firstPartyServiceTags";
+    }
+  ]>;
 }
 
 /**
@@ -6028,6 +6157,12 @@ model VirtualMachineScaleSetVMNetworkProfileConfiguration {
    */
   @identifiers(#["name"])
   networkInterfaceConfigurations?: VirtualMachineScaleSetNetworkConfiguration[];
+
+  /**
+   * Specifies the interconnect group profile to associate with the scale set vm instance. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectGroupProfile?: InterconnectGroupProfile;
 }
 
 /**
@@ -6334,7 +6469,8 @@ model RetrieveBootDiagnosticsDataResult {
 model VirtualMachineListResult is Azure.Core.Page<VirtualMachine>;
 
 @@doc(VirtualMachineListResult.value, "The list of virtual machines.");
-@@doc(VirtualMachineListResult.nextLink,
+@@doc(
+  VirtualMachineListResult.nextLink,
   "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
 );
 /**
@@ -6471,6 +6607,12 @@ model VirtualMachineProperties {
   capacityReservation?: CapacityReservationProfile;
 
   /**
+   * Specifies information about the Interconnect Block that is used to allocate the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  interconnectBlockProfile?: InterconnectBlockProfile;
+
+  /**
    * Specifies the gallery applications that should be made available to the VM/VMSS.
    */
   applicationProfile?: ApplicationProfile;
@@ -6582,6 +6724,13 @@ model VirtualMachineInstanceView {
    */
   @visibility(Lifecycle.Read)
   isVMInStandbyPool?: boolean;
+
+  /**
+   * The Interconnect runtime view of the Virtual Machine. Minimum api-version: 2026-03-01.
+   */
+  @added(Versions.v2026_03_01)
+  @visibility(Lifecycle.Read)
+  interconnectInstanceView?: InterconnectInstanceView;
 }
 
 /**
@@ -7450,6 +7599,166 @@ model VirtualMachineExtensionImageProperties {
    * Whether the handler can support multiple extensions.
    */
   supportsMultipleExtensions?: boolean;
+
+  /**
+   * Summary of changes or updates in this extension version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseNotes?: string;
+
+  /**
+   * Categorizes the type of change introduced (e.g., BugFix, SecurityFix, CompatibilityUpdate, NewFeature, Other).
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  releaseCategory?: ReleaseCategory;
+
+  /**
+   * Indicates the urgency level for applying this extension update.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  urgencyLevel?: UrgencyLevel;
+
+  /**
+   * Specifies when and how the extension should be executed.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  runProfile?: RunProfile;
+
+  /**
+   * Additional metadata about extension features, including compliance and capability tags.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  extensionFeatureMetadata?: ExtensionFeatureMetadata;
+}
+
+/**
+ * Enumerates the type of change introduced in the extension version.
+ */
+@added(Versions.v2026_04_01)
+union ReleaseCategory {
+  string,
+
+  /**
+   * Other type of change.
+   */
+  Other: "Other",
+
+  /**
+   * Bug fix change.
+   */
+  BugFix: "BugFix",
+
+  /**
+   * Security fix change.
+   */
+  SecurityFix: "SecurityFix",
+
+  /**
+   * Compatibility update change.
+   */
+  CompatibilityUpdate: "CompatibilityUpdate",
+
+  /**
+   * New feature change.
+   */
+  NewFeature: "NewFeature",
+}
+
+/**
+ * Defines urgency levels for extension updates.
+ */
+@added(Versions.v2026_04_01)
+union UrgencyLevel {
+  string,
+
+  /**
+   * Regular urgency level.
+   */
+  Regular: "Regular",
+
+  /**
+   * Expedited urgency level.
+   */
+  Expedited: "Expedited",
+
+  /**
+   * Emergency urgency level.
+   */
+  Emergency: "Emergency",
+}
+
+/**
+ * Specifies the execution profile for the extension.
+ */
+@added(Versions.v2026_04_01)
+union RunProfile {
+  string,
+
+  /**
+   * Other execution profile.
+   */
+  Other: "Other",
+
+  /**
+   * Run once execution profile.
+   */
+  RunOnce: "RunOnce",
+
+  /**
+   * Long running execution profile.
+   */
+  LongRunning: "LongRunning",
+
+  /**
+   * Hybrid execution profile.
+   */
+  Hybrid: "Hybrid",
+}
+
+/**
+ * Defines the allowed values for the $expand query parameter on the ListVersions operation.
+ */
+@added(Versions.v2026_04_01)
+union ListVersionsExpandOptions {
+  string,
+
+  /**
+   * Expand to include all properties in the response.
+   */
+  Properties: "properties",
+}
+
+/**
+ * Additional metadata about extension features, including compliance and capability tags.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureMetadata {
+  /**
+   * List of additional metadata properties (e.g., compliance flags, supported features).
+   */
+  @identifiers(#["key"])
+  extensionFeatureTags?: ExtensionFeatureTag[];
+}
+
+/**
+ * Represents a key-value pair for extension feature metadata.
+ */
+@added(Versions.v2026_04_01)
+model ExtensionFeatureTag {
+  /**
+   * The key of the feature tag.
+   */
+  key: string;
+
+  /**
+   * The value of the feature tag.
+   */
+  value?: string;
 }
 
 /**
@@ -7458,7 +7767,8 @@ model VirtualMachineExtensionImageProperties {
 model AvailabilitySetListResult is Azure.Core.Page<AvailabilitySet>;
 
 @@doc(AvailabilitySetListResult.value, "The list of availability sets.");
-@@doc(AvailabilitySetListResult.nextLink,
+@@doc(
+  AvailabilitySetListResult.nextLink,
   "The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets."
 );
 
@@ -7583,10 +7893,12 @@ model AvailabilitySetUpdate extends UpdateResource {
 model ProximityPlacementGroupListResult
   is Azure.Core.Page<ProximityPlacementGroup>;
 
-@@doc(ProximityPlacementGroupListResult.value,
+@@doc(
+  ProximityPlacementGroupListResult.value,
   "The list of proximity placement groups."
 );
-@@doc(ProximityPlacementGroupListResult.nextLink,
+@@doc(
+  ProximityPlacementGroupListResult.nextLink,
   "The URI to fetch the next page of proximity placement groups."
 );
 
@@ -7661,7 +7973,8 @@ model ProximityPlacementGroupUpdate extends UpdateResource {}
 model DedicatedHostGroupListResult is Azure.Core.Page<DedicatedHostGroup>;
 
 @@doc(DedicatedHostGroupListResult.value, "The list of dedicated host groups.");
-@@doc(DedicatedHostGroupListResult.nextLink,
+@@doc(
+  DedicatedHostGroupListResult.nextLink,
   "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
 );
 
@@ -7803,7 +8116,8 @@ model DedicatedHostGroupUpdate extends UpdateResource {
 model DedicatedHostListResult is Azure.Core.Page<DedicatedHost>;
 
 @@doc(DedicatedHostListResult.value, "The list of dedicated hosts.");
-@@doc(DedicatedHostListResult.nextLink,
+@@doc(
+  DedicatedHostListResult.nextLink,
   "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
 );
 
@@ -7905,7 +8219,8 @@ model DedicatedHostSizeListResult {
 model SshPublicKeysGroupListResult is Azure.Core.Page<SshPublicKeyResource>;
 
 @@doc(SshPublicKeysGroupListResult.value, "The list of SSH public keys.");
-@@doc(SshPublicKeysGroupListResult.nextLink,
+@@doc(
+  SshPublicKeysGroupListResult.nextLink,
   "The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys."
 );
 
@@ -7918,6 +8233,151 @@ model SshPublicKeyResourceProperties {
    * SSH public key used to authenticate to a virtual machine through ssh. If this property is not initially provided when the resource is created, the publicKey property will be populated when generateKeyPair is called. If the public key is provided upon resource creation, the provided public key needs to be at least 2048-bit and in ssh-rsa format.
    */
   publicKey?: string;
+}
+
+/**
+ * The list Interconnect Block operation response.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockListResult is Azure.Core.Page<InterconnectBlock>;
+
+@@doc(InterconnectBlockListResult.value, "The list of Interconnect Blocks.");
+@@doc(
+  InterconnectBlockListResult.nextLink,
+  "The URI to fetch the next page of Interconnect Blocks. Call ListNext() with this URI to fetch the next page of Interconnect Blocks."
+);
+
+/**
+ * Properties of the Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProperties {
+  /**
+   * A list of all virtual machine resource ids that are associated with the Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#["id"])
+  virtualMachinesAssociated?: SubResourceReadOnly[];
+
+  /**
+   * The Microsoft.Network/interconnectGroups resource that this Interconnect Block is associated with. Required at create and immutable thereafter.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  interconnectGroup: ApiEntityReference;
+
+  /**
+   * A unique id (GUID) generated and assigned to the Interconnect Block by the platform which does not change throughout the lifetime of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectBlockId?: string;
+
+  /**
+   * The date time when the Interconnect Block was last updated.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningTime?: utcDateTime;
+
+  /**
+   * The provisioning state, which only appears in the response.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * The Interconnect Block instance view.
+   */
+  @visibility(Lifecycle.Read)
+  instanceView?: InterconnectBlockInstanceView;
+
+  /**
+   * Specifies the time at which the Interconnect Block resource was created.
+   */
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+}
+
+/**
+ * The instance view of an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockInstanceView {
+  /**
+   * The current capacity allocated for this Interconnect Block.
+   */
+  @visibility(Lifecycle.Read)
+  currentCapacity?: int32;
+
+  /**
+   * The resource status information.
+   */
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  statuses?: InstanceViewStatus[];
+}
+
+/**
+ * Specifies information about the Interconnect Block. Only tags and sku.capacity can be updated.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Consistent with established Compute RP patterns (e.g. DedicatedHost, VirtualMachine, CapacityReservation) for SDK and behavioral consistency."
+@added(Versions.v2026_03_01)
+model InterconnectBlockUpdate extends UpdateResource {
+  /**
+   * SKU of the resource for which capacity needs to be pre-allocated. Only `sku.capacity` is mutable; `sku.name` is immutable.
+   */
+  sku?: Sku;
+}
+
+/**
+ * The expand expression to apply on the operation for an Interconnect Block.
+ */
+@added(Versions.v2026_03_01)
+union InterconnectBlockExpandTypes {
+  string,
+
+  /**
+   * Retrieve the runtime instance view of the Interconnect Block.
+   */
+  instanceView: "instanceView",
+}
+
+/**
+ * The parameters of an Interconnect Block Profile.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectBlockProfile {
+  /**
+   * Specifies the Interconnect Block resource ID that should be used for allocating the Virtual Machine or Scale Set VM instances provided enough capacity has been reserved.
+   */
+  interconnectBlock?: ApiEntityReference;
+}
+
+/**
+ * The Interconnect Block instance view details for a Virtual Machine or Scale Set VM instance.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectInstanceView {
+  /**
+   * The ID (GUID) of the Interconnect subgroup in which the Virtual Machine was placed.
+   */
+  @visibility(Lifecycle.Read)
+  interconnectSubgroupId?: string;
+}
+
+/**
+ * Specifies the interconnect group profile for a virtual machine, used to associate the VM with an interconnect group and subgroups.
+ */
+@added(Versions.v2026_03_01)
+model InterconnectGroupProfile {
+  /**
+   * Reference to the interconnect group resource.
+   */
+  interconnectGroup?: SubResource;
+
+  /**
+   * The list of subgroup references within the interconnect group.
+   */
+  subgroups?: SubResource[];
 }
 
 /**
@@ -7970,7 +8430,8 @@ model SshPublicKeyGenerateKeyPairResult {
 model ImageListResult is Azure.Core.Page<Image>;
 
 @@doc(ImageListResult.value, "The list of Images");
-@@doc(ImageListResult.nextLink,
+@@doc(
+  ImageListResult.nextLink,
   "The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images."
 );
 
@@ -8108,10 +8569,12 @@ model ImageUpdate extends UpdateResource {
 model RestorePointCollectionListResult
   is Azure.Core.Page<RestorePointCollection>;
 
-@@doc(RestorePointCollectionListResult.value,
+@@doc(
+  RestorePointCollectionListResult.value,
   "Gets the list of restore point collections."
 );
-@@doc(RestorePointCollectionListResult.nextLink,
+@@doc(
+  RestorePointCollectionListResult.nextLink,
   "The uri to fetch the next page of RestorePointCollections. Call ListNext() with this to fetch the next page of RestorePointCollections."
 );
 
@@ -8499,10 +8962,12 @@ model RestorePointCollectionUpdate extends UpdateResource {
 model CapacityReservationGroupListResult
   is Azure.Core.Page<CapacityReservationGroup>;
 
-@@doc(CapacityReservationGroupListResult.value,
+@@doc(
+  CapacityReservationGroupListResult.value,
   "The list of capacity reservation groups."
 );
-@@doc(CapacityReservationGroupListResult.nextLink,
+@@doc(
+  CapacityReservationGroupListResult.nextLink,
   "The URI to fetch the next page of capacity reservation groups. Call ListNext() with this URI to fetch the next page of capacity reservation groups."
 );
 /**
@@ -8666,10 +9131,12 @@ model CapacityReservationGroupUpdate extends UpdateResource {
  */
 model CapacityReservationListResult is Azure.Core.Page<CapacityReservation>;
 
-@@doc(CapacityReservationListResult.value,
+@@doc(
+  CapacityReservationListResult.value,
   "The list of capacity reservations."
 );
-@@doc(CapacityReservationListResult.nextLink,
+@@doc(
+  CapacityReservationListResult.nextLink,
   "The URI to fetch the next page of capacity reservations. Call ListNext() with this URI to fetch the next page of capacity reservations."
 );
 
@@ -8836,7 +9303,8 @@ model ThrottledRequestsInput extends LogAnalyticsInputBase {}
 model RunCommandListResult is Azure.Core.Page<RunCommandDocumentBase>;
 
 @@doc(RunCommandListResult.value, "The list of virtual machine run commands.");
-@@doc(RunCommandListResult.nextLink,
+@@doc(
+  RunCommandListResult.nextLink,
   "The uri to fetch the next page of run commands. Call ListNext() with this to fetch the next page of run commands."
 );
 
@@ -8920,7 +9388,8 @@ model VirtualMachineRunCommandsListResult
   is Azure.Core.Page<VirtualMachineRunCommand>;
 
 @@doc(VirtualMachineRunCommandsListResult.value, "The list of run commands.");
-@@doc(VirtualMachineRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineRunCommandsListResult.nextLink,
   "The uri to fetch the next page of run commands."
 );
 
@@ -9200,4 +9669,20 @@ model VMScaleSetScaleOutInputProperties {
    * The zone in which the scale out is requested for the virtual machine scale set.
    */
   zone?: string;
+}
+
+/**
+ * The input for MigrateVMAvailabilityZone.
+ */
+@added(Versions.v2026_04_01)
+model MigrateVMAvailabilityZoneInput {
+  /**
+   * The virtual machine scale set instance ids to be migrated to the target availability zone.
+   */
+  instanceIds: string[];
+
+  /**
+   * The target logical availability zone ("1", "2" or "3") to migrate the virtual machine scale set instances to. If omitted, the platform selects the target zone.
+   */
+  targetZone?: string;
 }

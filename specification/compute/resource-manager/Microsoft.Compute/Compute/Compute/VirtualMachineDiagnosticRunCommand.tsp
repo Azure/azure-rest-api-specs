@@ -33,7 +33,7 @@ model VirtualMachineDiagnosticRunCommand
 
 @armResourceOperations
 interface VirtualMachineDiagnosticRunCommandOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachinePath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -91,7 +91,10 @@ interface VirtualMachineDiagnosticRunCommands {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
   @added(Versions.v2026_04_01)
-  delete is VirtualMachineDiagnosticRunCommandOps.DeleteAsync<VirtualMachineDiagnosticRunCommand>;
+  delete is VirtualMachineDiagnosticRunCommandOps.DeleteWithoutOkAsync<
+    VirtualMachineDiagnosticRunCommand,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all diagnostic run commands of a Virtual Machine.
@@ -113,7 +116,7 @@ interface VirtualMachineDiagnosticRunCommands {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMDiagnosticRunCommandOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachineScaleSetVMPath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -177,7 +180,10 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   @added(Versions.v2026_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Delete")
-  delete is VirtualMachineScaleSetVMDiagnosticRunCommandOps.DeleteAsync<VirtualMachineDiagnosticRunCommand>;
+  delete is VirtualMachineScaleSetVMDiagnosticRunCommandOps.DeleteWithoutOkAsync<
+    VirtualMachineDiagnosticRunCommand,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all diagnostic run commands of an instance in Virtual Machine Scaleset.
@@ -199,19 +205,19 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   >;
 }
 
-@@clientName(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.body,
+@@clientName(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 
-@@clientName(VirtualMachineDiagnosticRunCommands.update::parameters.body,
+@@clientName(VirtualMachineDiagnosticRunCommands.update::parameters.properties,
   "runCommand"
 );
 
-@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.body,
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "runCommand"
 );
 
-@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.update::parameters.body,
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.update::parameters.properties,
   "runCommand"
 );
 
@@ -221,12 +227,12 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
 @@doc(VirtualMachineDiagnosticRunCommand.properties,
   "Describes the properties of a Virtual Machine diagnostic run command."
 );
-@@doc(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.body,
+@@doc(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Diagnostic RunCommand operation."
 );
-@@doc(VirtualMachineDiagnosticRunCommands.update::parameters.body,
+@@doc(VirtualMachineDiagnosticRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine Diagnostic RunCommand operation."
 );
-@@doc(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.body,
+@@doc(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine Diagnostic RunCommand operation."
 );

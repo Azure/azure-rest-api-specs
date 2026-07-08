@@ -20,6 +20,7 @@ import "./AdooAuthResponse.tsp";
 import "./Template.tsp";
 import "./VersionedTemplate.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -55,7 +56,7 @@ interface Operations {
   @route("/providers/Microsoft.DevHub/operations")
   @summary("Gets a list of operations.")
   @tag("Operations")
-  list(
-    ...ApiVersionParameter,
-  ): ArmResponse<OperationListResult> | ErrorResponse;
+  list(...ApiVersionParameter):
+    | ArmResponse<OperationListResult>
+    | ErrorResponse;
 }

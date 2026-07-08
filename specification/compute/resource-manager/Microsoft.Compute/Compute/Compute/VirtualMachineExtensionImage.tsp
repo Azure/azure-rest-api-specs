@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace Compute;
@@ -27,41 +29,51 @@ model VirtualMachineExtensionImage
 alias ImageTypePath = {
   ...ApiVersionParameter;
   ...SubscriptionIdParameter;
-  ...LocationParameter;
+  ...LocationResourceParameter;
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
   @path @segment("publishers") publisherName: string;
 };
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.RoutedOperations<
       ImageTypePath & KeysOf<VirtualMachineExtensionImage>,
       {
         #suppress "@azure-tools/typespec-azure-core/documentation-required"
         @path @segment("versions") version: string,
+      },
+      CloudError,
+      #{
+        useStaticRoute: true,
+        route: "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types",
       }
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
 interface VirtualMachineExtensionImageTypeOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.RoutedOperations<
       ImageTypePath,
-      KeysOf<VirtualMachineExtensionImage>
+      KeysOf<VirtualMachineExtensionImage>,
+      CloudError,
+      #{
+        useStaticRoute: true,
+        route: "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types",
+      }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator"
+@armResourceOperations(#{ allowStaticRoutes: true })
 interface VirtualMachineExtensionImages {
   /**
    * Gets a virtual machine extension image.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions/{version}")
-  get is VirtualMachineExtensionImageOps.ReadRoute<VirtualMachineExtensionImage>;
+  get is VirtualMachineExtensionImageOps.Read<VirtualMachineExtensionImage>;
 
   /**
    * Gets a list of virtual machine extension image types.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types")
-  listTypes is VirtualMachineExtensionImageTypeOps.ListRoute<
+  listTypes is VirtualMachineExtensionImageTypeOps.ListSinglePage<
     VirtualMachineExtensionImage,
     Response = ArmResponse<VirtualMachineExtensionImage[]>
   >;
@@ -70,7 +82,7 @@ interface VirtualMachineExtensionImages {
    * Gets a list of virtual machine extension image versions.
    */
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmextension/types/{type}/versions")
-  listVersions is VirtualMachineExtensionImageOps.ListRoute<
+  listVersions is VirtualMachineExtensionImageOps.ListSinglePage<
     VirtualMachineExtensionImage,
     Response = ArmResponse<VirtualMachineExtensionImage[]>,
     Parameters = {
@@ -87,11 +99,19 @@ interface VirtualMachineExtensionImages {
       #suppress "@azure-tools/typespec-azure-core/documentation-required"
       @query("$orderby")
       $orderby?: string;
+
+      /**
+       * Expand the response to include additional read-only metadata. Allowed values: `properties` — returns extended metadata (`releaseCategory`, `urgencyLevel`, `runProfile`).
+       */
+      @added(Versions.v2026_04_01)
+      @query("$expand")
+      $expand?: ListVersionsExpandOptions;
     }
   >;
 }
 
 @@doc(VirtualMachineExtensionImage.name, "");
-@@doc(VirtualMachineExtensionImage.properties,
+@@doc(
+  VirtualMachineExtensionImage.properties,
   "Describes the properties of a Virtual Machine Extension Image."
 );

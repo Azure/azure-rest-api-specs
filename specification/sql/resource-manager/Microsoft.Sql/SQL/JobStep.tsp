@@ -14,7 +14,9 @@ namespace Microsoft.Sql;
 /**
  * A job step.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Job)
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 model JobStep is Azure.ResourceManager.ProxyResource<JobStepProperties> {
   ...ResourceNameParameter<
     Resource = JobStep,
@@ -55,10 +57,13 @@ alias JobStepOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobStep"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobSteps {
   /**
    * Gets a job step in a job's current version.
@@ -113,6 +118,7 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("versions")
     @key
+    @Azure.ClientGenerator.Core.alternateType(string, "csharp") // The jobVersion is name of the resource JobVersion which must be a string, but the swagger defines it as int32, so we need to use alternateType to make it backwards compatible with the swagger definition. Make this csharp only because it's the only language that forces the type of the resource name to be string.
     jobVersion: int32;
   },
   {
@@ -121,10 +127,13 @@ alias JobStepOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("steps")
     @key
     stepName: string;
-  }
+  },
+  ResourceName = "SqlServerJobVersionStep"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
+@Azure.ResourceManager.Legacy.feature(Features.JobSteps)
 interface JobStepOperationGroup {
   /**
    * Gets the specified version of a job step.
@@ -141,6 +150,7 @@ interface JobStepOperationGroup {
 
 @@doc(JobStep.name, "The name of the job step.");
 @@doc(JobStep.properties, "Resource properties.");
-@@doc(JobSteps.createOrUpdate::parameters.resource,
+@@doc(
+  JobSteps.createOrUpdate::parameters.resource,
   "The requested state of the job step."
 );

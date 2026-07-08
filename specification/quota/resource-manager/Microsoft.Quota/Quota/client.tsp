@@ -24,34 +24,41 @@ using Microsoft.Quota;
 @@clientName(GroupQuotasEntity, "GroupQuotaEntity", "csharp");
 @@clientName(GroupQuotasEntityBase, "GroupQuotaEntityBase", "csharp");
 @@clientName(GroupQuotaSubscriptionId, "GroupQuotaSubscription", "csharp");
-@@clientName(GroupQuotaSubscriptionIdProperties,
+@@clientName(
+  GroupQuotaSubscriptionIdProperties,
   "GroupQuotaSubscriptionProperties",
   "csharp"
 );
-@@clientName(QuotaAllocationRequestStatusProperties.requestSubmitTime,
+@@clientName(
+  QuotaAllocationRequestStatusProperties.requestSubmitTime,
   "RequestSubmittedOn",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatus,
+@@clientName(
+  SubmittedResourceRequestStatus,
   "GroupQuotaRequestStatus",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatusProperties,
+@@clientName(
+  SubmittedResourceRequestStatusProperties,
   "GroupQuotaRequestStatusProperties",
   "csharp"
 );
-@@clientName(SubmittedResourceRequestStatusProperties.requestSubmitTime,
+@@clientName(
+  SubmittedResourceRequestStatusProperties.requestSubmitTime,
   "RequestSubmittedOn",
   "csharp"
 );
 @@clientName(AllocatedToSubscription, "SubscriptionAllocatedQuota", "csharp");
 @@clientName(RequestState, "QuotaRequestStatus", "csharp");
 @@clientName(ResourceUsages, "GroupQuotaResourceUsages", "csharp");
-@@clientName(GroupQuotasEntities.groupQuotaLimitsRequestList,
+@@clientName(
+  GroupQuotasEntities.groupQuotaLimitsRequestList,
   "GetGroupQuotaLimitsRequests",
   "csharp"
 );
-@@clientName(GroupQuotasEntities.groupQuotaUsagesList,
+@@clientName(
+  GroupQuotasEntities.groupQuotaUsagesList,
   "GetGroupQuotaUsages",
   "csharp"
 );
@@ -92,9 +99,10 @@ op currentQuotaLimitBasesCreateOrUpdate(
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.createOrUpdate,
+@@override(
+  CurrentQuotaLimitBases.createOrUpdate,
   currentQuotaLimitBasesCreateOrUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -110,9 +118,10 @@ op currentQuotaLimitBasesGet(
   scope: string,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.get,
+@@override(
+  CurrentQuotaLimitBases.get,
   currentQuotaLimitBasesGet,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -130,9 +139,10 @@ op currentQuotaLimitBasesUpdate(
   createQuotaRequest: CurrentQuotaLimitBase,
 ): CurrentQuotaLimitBase;
 
-@@override(CurrentQuotaLimitBases.update,
+@@override(
+  CurrentQuotaLimitBases.update,
   currentQuotaLimitBasesUpdate,
-  "java,go,python,javascript"
+  "java,python"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -148,10 +158,7 @@ op quotaRequestStatusGet(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get,
-  quotaRequestStatusGet,
-  "java,go,python,javascript"
-);
+@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,python");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -166,7 +173,4 @@ op currentUsagesBasesGet(
   scope: string,
 ): CurrentUsagesBase;
 
-@@override(CurrentUsagesBases.get,
-  currentUsagesBasesGet,
-  "java,go,python,javascript"
-);
+@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,python");

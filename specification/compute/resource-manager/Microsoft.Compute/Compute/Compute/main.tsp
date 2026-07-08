@@ -10,7 +10,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../common/models-ref.tsp";
 import "../common/operations.tsp";
-import "../common/legacy.tsp";
 import "./models.tsp";
 import "./VirtualMachineScaleSet.tsp";
 import "./RollingUpgradeStatusInfo.tsp";
@@ -31,10 +30,12 @@ import "./RestorePointCollection.tsp";
 import "./RestorePoint.tsp";
 import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
+import "./InterconnectBlock.tsp";
 import "./VirtualMachineRunCommand.tsp";
 import "./VirtualMachineDiagnosticRunCommand.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -73,10 +74,27 @@ enum Versions {
   v2025_11_01: "2025-11-01",
 
   /**
+   * The 2026-03-01 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_03_01: "2026-03-01",
+
+  /**
    * The 2026-04-01 API version.
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2026_04_01: "2026-04-01",
 }
 
-interface Operations extends Azure.ResourceManager.Legacy.ComputeOperations {}
+// Fix https://github.com/Azure/typespec-azure/issues/4518 to use template
+interface Operations {
+  @tag("ComputeOperations")
+  @autoRoute
+  @doc("List the operations for the provider")
+  @segment("operations")
+  @get
+  @list
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<Azure.ResourceManager.Foundations.OperationListResult>
+    | Common.CloudError;
+}

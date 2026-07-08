@@ -52,6 +52,8 @@ alias EndpointResourceListParameters = {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @parentResource(Workspace)
 model EndpointResourcePropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<EndpointResourceProperties, false> {
@@ -70,6 +72,8 @@ model EndpointResourcePropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
 @armResourceOperations
 interface EndpointResourcePropertiesBasicResources {
   /**
@@ -85,8 +89,10 @@ interface EndpointResourcePropertiesBasicResources {
   @summary("Create or update endpoint resource with the specified parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EndpointResourcePropertiesBasicResource,
-    Response = ArmResourceUpdatedResponse<EndpointResourcePropertiesBasicResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointResourcePropertiesBasicResource>> &
-      Azure.Core.Foundations.RetryAfterHeader)
+    Response =
+      | ArmResourceUpdatedResponse<EndpointResourcePropertiesBasicResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = EndpointResourcePropertiesBasicResource>> &
+          Azure.Core.Foundations.RetryAfterHeader)
   >;
 
   /**
@@ -134,13 +140,16 @@ interface EndpointResourcePropertiesBasicResources {
   >;
 }
 
-@@doc(EndpointResourcePropertiesBasicResource.name,
+@@doc(
+  EndpointResourcePropertiesBasicResource.name,
   "Name of the endpoint resource."
 );
 @@doc(EndpointResourcePropertiesBasicResource.properties, "");
-@@doc(EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
+@@doc(
+  EndpointResourcePropertiesBasicResources.createOrUpdate::parameters.resource,
   "Endpoint resource object"
 );
-@@doc(EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
+@@doc(
+  EndpointResourcePropertiesBasicResources.regenerateKeys::parameters.body,
   ""
 );

@@ -27,6 +27,7 @@ import "./Workspace.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./SummaryLogs.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -56,6 +57,7 @@ enum Versions {
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<OperationListResult> {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available OperationalInsights Rest API operations."
 );

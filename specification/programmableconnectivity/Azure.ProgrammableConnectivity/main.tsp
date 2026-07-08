@@ -2,6 +2,7 @@ import "./apis/location.tsp";
 import "./apis/network.tsp";
 import "./apis/number.tsp";
 import "./apis/simswap.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
