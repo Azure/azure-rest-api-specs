@@ -605,25 +605,16 @@
     }
   },
   "definitions": {
-    "BlobFilter": {
-      "type": "object",
-      "description": "Filter for blob within a container.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ]
-    },
     "BlobScanFilter": {
       "type": "object",
       "description": "Filter for blob scanning. At least one of 'container' or 'blob' must be specified. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.",
       "properties": {
         "container": {
-          "$ref": "#/definitions/ContainerFilter",
+          "$ref": "#/definitions/MatchFilter",
           "description": "Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers."
         },
         "blob": {
-          "$ref": "#/definitions/BlobFilter",
+          "$ref": "#/definitions/MatchFilter",
           "description": "Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers."
         }
       }
@@ -725,15 +716,6 @@
         }
       }
     },
-    "ContainerFilter": {
-      "type": "object",
-      "description": "Filter for blob container.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ]
-    },
     "DefenderForStorageSetting": {
       "type": "object",
       "description": "The Defender for Storage resource.",
@@ -789,25 +771,16 @@
         }
       }
     },
-    "FileFilter": {
-      "type": "object",
-      "description": "Filter for file within a share.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ]
-    },
     "FileScanFilter": {
       "type": "object",
       "description": "Filter for file scanning. At least one of 'share' or 'file' must be specified. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.",
       "properties": {
         "share": {
-          "$ref": "#/definitions/ShareFilter",
+          "$ref": "#/definitions/MatchFilter",
           "description": "Optional filter for the file share to scan. If not provided, the file filter will apply across all shares."
         },
         "file": {
-          "$ref": "#/definitions/FileFilter",
+          "$ref": "#/definitions/MatchFilter",
           "description": "Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares."
         }
       }
@@ -1093,15 +1066,6 @@
           "readOnly": true
         }
       }
-    },
-    "ShareFilter": {
-      "type": "object",
-      "description": "Filter for file share.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/MatchFilter"
-        }
-      ]
     },
     "StartMalwareScanRequest": {
       "type": "object",

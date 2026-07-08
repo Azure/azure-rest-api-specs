@@ -350,38 +350,6 @@ model MatchFilter {
 }
 
 /**
- * Filter for blob container.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Wrapper subtype matches existing swagger allOf pattern."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Wrapper subtype matches existing swagger allOf pattern."
-@added(Versions.v2026_01_01_preview)
-model ContainerFilter extends MatchFilter {}
-
-/**
- * Filter for blob within a container.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Wrapper subtype matches existing swagger allOf pattern."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Wrapper subtype matches existing swagger allOf pattern."
-@added(Versions.v2026_01_01_preview)
-model BlobFilter extends MatchFilter {}
-
-/**
- * Filter for file share.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Wrapper subtype matches existing swagger allOf pattern."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Wrapper subtype matches existing swagger allOf pattern."
-@added(Versions.v2026_01_01_preview)
-model ShareFilter extends MatchFilter {}
-
-/**
- * Filter for file within a share.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Wrapper subtype matches existing swagger allOf pattern."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Wrapper subtype matches existing swagger allOf pattern."
-@added(Versions.v2026_01_01_preview)
-model FileFilter extends MatchFilter {}
-
-/**
  * Filter for blob scanning. At least one of 'container' or 'blob' must be specified. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
  */
 @added(Versions.v2026_01_01_preview)
@@ -389,12 +357,12 @@ model BlobScanFilter {
   /**
    * Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.
    */
-  container?: ContainerFilter;
+  container?: MatchFilter;
 
   /**
    * Optional filter for specific blob(s). If container is specified, this filters blobs within that container. If container is not specified, this filters blobs across all containers.
    */
-  blob?: BlobFilter;
+  blob?: MatchFilter;
 }
 
 /**
@@ -405,12 +373,12 @@ model FileScanFilter {
   /**
    * Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.
    */
-  share?: ShareFilter;
+  share?: MatchFilter;
 
   /**
    * Optional filter for specific file(s). If share is specified, this filters files within that share. If share is not specified, this filters files across all shares.
    */
-  file?: FileFilter;
+  file?: MatchFilter;
 }
 
 /**
