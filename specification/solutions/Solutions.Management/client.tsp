@@ -9,11 +9,7 @@ using Microsoft.Solutions;
   "listOperations",
   "javascript"
 );
-@@clientName(
-  Microsoft.Solutions,
-  "ApplicationClient",
-  "javascript,go,java"
-);
+@@clientName(Microsoft.Solutions, "ApplicationClient", "javascript,go,java");
 @@clientName(Microsoft.Solutions, "ManagedApplicationsMgmtClient", "python");
 
 @@clientName(Operations.list, "list_operations", "python");
