@@ -54,6 +54,14 @@ namespace Microsoft.Compute;
   "!autorest"
 );
 
+// Disambiguate LaunchBulkInstancesOperation's custom InnerError from the standard
+// Azure.Core.Foundations.InnerError that the folded ScheduledActions error models pull in
+// (via Azure.Core.Foundations.Error). Flattening-language SDKs (C#/Java/Python) require unique
+// client names; the standard type keeps "InnerError", BA's custom one is renamed.
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "csharp");
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "java");
+@@clientName(Microsoft.Compute.InnerError, "BulkInstancesInnerError", "python");
+
 @@clientName(CancelOperationsResponse, "CancelBulkOperationsResult", "csharp");
 @@clientName(DeadlineType, "BulkActionDeadlineKind", "csharp");
 @@clientName(

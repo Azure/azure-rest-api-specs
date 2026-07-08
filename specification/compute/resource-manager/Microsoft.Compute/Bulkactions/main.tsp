@@ -7,6 +7,7 @@ import "./routes.tsp";
 import "./vmAttributes.tsp";
 import "./launchBulkInstancesOperation.tsp";
 import "./customLaunchBulkInstancesOperation.tsp";
+import "./autoActions.tsp";
 import "./client.tsp";
 
 using Azure.ResourceManager;
