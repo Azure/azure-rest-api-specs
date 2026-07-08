@@ -367,6 +367,12 @@ interface ClientDeviceUpdateClient {
   getOperationStatus is DeviceUpdateOperationGroup.getOperationStatus;
 }
 
+@clientInitialization(
+  {
+    parameters: DeviceUpdateClientOptions,
+  },
+  "java"
+)
 @client(
   {
     name: "DeviceManagementClient",
