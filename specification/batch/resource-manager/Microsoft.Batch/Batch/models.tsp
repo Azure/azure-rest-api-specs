@@ -650,6 +650,28 @@ enum ComputeNodeDeallocationOption {
 }
 
 /**
+ * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
+@added(Versions.v2026_08_01)
+enum SettableComputeNodeDeallocationOption {
+  /**
+   * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
+   */
+  Requeue,
+
+  /**
+   * Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated.
+   */
+  Terminate,
+
+  /**
+   * Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed.
+   */
+  TaskCompletion,
+}
+
+/**
  * This imposes restrictions on which nodes can be assigned to the pool. Enabling this value can reduce the chance of the requested number of nodes to be allocated in the pool. If not specified, this value defaults to 'Disabled'.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
@@ -1629,13 +1651,13 @@ model ApplicationPackageProperties {
   format?: string;
 
   /**
-   * The URL for the application package in Azure Storage.
+   * The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
   /**
-   * The UTC time at which the Azure Storage URL will expire.
+   * The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.
    */
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
@@ -1646,6 +1668,16 @@ model ApplicationPackageProperties {
   @visibility(Lifecycle.Read)
   lastActivationTime?: utcDateTime;
 }
+
+/**
+ * Properties of an application package, excluding the storage URL details that are only returned by the create operation.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
+model ApplicationPackageInfoProperties
+  is OmitProperties<
+    ApplicationPackageProperties,
+    "storageUrl" | "storageUrlExpiry"
+  >;
 
 /**
  * The properties associated with the Application.
@@ -1677,6 +1709,12 @@ model ListApplicationsResult is Azure.Core.Page<Application>;
  * The result of performing list application packages.
  */
 model ListApplicationPackagesResult is Azure.Core.Page<ApplicationPackage>;
+
+/**
+ * The result of performing list application packages, excluding the storage URL details.
+ */
+model ApplicationPackageInfoListResult
+  is Azure.Core.Page<ApplicationPackageInfo>;
 
 /**
  * Quotas associated with a Batch region for a particular subscription.
@@ -2873,7 +2911,8 @@ model FixedScaleSettings {
    */
   @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  nodeDeallocationOption?: ComputeNodeDeallocationOption;
+  @typeChangedFrom(Versions.v2026_08_01, ComputeNodeDeallocationOption)
+  nodeDeallocationOption?: SettableComputeNodeDeallocationOption;
 }
 
 /**
