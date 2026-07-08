@@ -674,7 +674,18 @@ model AgentIdentity {
   client_id: string;
 
   @doc("The status of the agent identity")
-  status?: string;
+  status?: AgentIdentityStatus;
+}
+
+@doc("The status of an agent identity.")
+union AgentIdentityStatus {
+  string,
+
+  @doc("The agent identity is active and can be used to access resources.")
+  active: "active",
+
+  @doc("The agent identity is disabled and cannot be used to access resources.")
+  disabled: "disabled",
 }
 
 union AgentBlueprintReferenceType {
