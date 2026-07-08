@@ -10127,7 +10127,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateAssistantRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "deprecated": true,
         "x-oaiMeta": {
@@ -10438,7 +10439,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateSpeechRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create speech",
@@ -10867,7 +10869,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateBatchParametersBody"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create batch",
@@ -11189,7 +11192,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateChatCompletionRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create chat completion",
@@ -11630,7 +11634,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateCompletionRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create completion",
@@ -11815,7 +11820,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateContainerBody"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create container",
@@ -11905,6 +11911,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -11973,6 +11980,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -12069,6 +12077,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -12108,6 +12117,7 @@
             }
           }
         },
+        "x-ms-request-body-description-override": "The request body.",
         "x-oaiMeta": {
           "name": "Create container file",
           "group": "containers",
@@ -12155,6 +12165,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -12163,10 +12174,12 @@
             "name": "file_id",
             "in": "path",
             "required": true,
-            "description": "The file id path parameter.",
+            "description": "The ID of the file.",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-ms-description-override": "The ID of the file."
+            },
+            "x-ms-description-override": "The ID of the file."
           }
         ],
         "responses": {
@@ -12223,6 +12236,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -12231,10 +12245,12 @@
             "name": "file_id",
             "in": "path",
             "required": true,
-            "description": "The file id path parameter.",
+            "description": "The ID of the file.",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-ms-description-override": "The ID of the file."
+            },
+            "x-ms-description-override": "The ID of the file."
           }
         ],
         "responses": {
@@ -12300,6 +12316,7 @@
             "name": "container_id",
             "in": "path",
             "required": true,
+            "description": "The ID of the container.",
             "schema": {
               "type": "string"
             }
@@ -12308,10 +12325,12 @@
             "name": "file_id",
             "in": "path",
             "required": true,
-            "description": "The file id path parameter.",
+            "description": "The ID of the file.",
             "schema": {
-              "type": "string"
-            }
+              "type": "string",
+              "x-ms-description-override": "The ID of the file."
+            },
+            "x-ms-description-override": "The ID of the file."
           }
         ],
         "responses": {
@@ -13324,7 +13343,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateEmbeddingRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create embeddings",
@@ -14872,7 +14892,8 @@
                 "$ref": "#/components/schemas/OpenAI.RunGraderRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Run grader",
@@ -14967,7 +14988,8 @@
                 "$ref": "#/components/schemas/OpenAI.ValidateGraderRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Validate grader",
@@ -15402,7 +15424,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateFineTuningJobRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create fine-tuning job",
@@ -15982,6 +16005,7 @@
             }
           }
         },
+        "x-ms-request-body-description-override": "The request body.",
         "x-oaiMeta": {
           "name": "Create image edit",
           "group": "images",
@@ -16068,7 +16092,7 @@
               }
             }
           },
-          "description": "The multipart request body."
+          "description": "The multipart request body. The request body."
         }
       }
     },
@@ -16121,7 +16145,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateImageRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create image",
@@ -16490,7 +16515,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateModerationRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create moderation",
@@ -18652,7 +18678,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateThreadRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create thread",
@@ -18739,7 +18766,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateThreadAndRunRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create thread and run",
@@ -20338,7 +20366,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateUploadRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create upload",
@@ -20731,7 +20760,8 @@
                 "$ref": "#/components/schemas/OpenAI.CreateVectorStoreRequest"
               }
             }
-          }
+          },
+          "description": "The request body."
         },
         "x-oaiMeta": {
           "name": "Create vector store",
@@ -22269,6 +22299,7 @@
             }
           }
         },
+        "x-ms-request-body-description-override": "The request body.",
         "x-oaiMeta": {
           "examples": {
             "response": "",
@@ -22303,7 +22334,7 @@
               }
             }
           },
-          "description": "The multipart request body."
+          "description": "The multipart request body. The request body."
         }
       }
     },
@@ -22345,6 +22376,7 @@
             }
           }
         },
+        "x-ms-request-body-description-override": "The request body.",
         "x-oaiMeta": {
           "examples": {
             "response": "",
@@ -22382,7 +22414,7 @@
               }
             }
           },
-          "description": "The multipart request body."
+          "description": "The multipart request body. The request body."
         }
       }
     },

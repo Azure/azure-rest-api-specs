@@ -6824,6 +6824,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateAssistantRequest'
+        description: The request body.
       deprecated: true
       x-oaiMeta:
         name: Create assistant
@@ -7573,6 +7574,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateSpeechRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create speech
         group: audio
@@ -9200,6 +9202,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateBatchParametersBody'
+        description: The request body.
       x-oaiMeta:
         name: Create batch
         group: batch
@@ -9876,6 +9879,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateChatCompletionRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create chat completion
         group: chat
@@ -11661,6 +11665,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateCompletionRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create completion
         group: completions
@@ -12112,6 +12117,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateContainerBody'
+        description: The request body.
       x-oaiMeta:
         name: Create container
         group: containers
@@ -12345,6 +12351,7 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
       responses:
@@ -12468,6 +12475,7 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
         - name: limit
@@ -12621,6 +12629,7 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
       description: Creates a container file multipart from the supplied request. Creates a container file json from the supplied request.
@@ -12644,6 +12653,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-request-body-description-override: The request body.
       x-oaiMeta:
         name: Create container file
         group: containers
@@ -12758,14 +12768,17 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
-          description: The file id path parameter.
+          description: The ID of the file.
           schema:
             type: string
+            x-ms-description-override: The ID of the file.
+          x-ms-description-override: The ID of the file.
       responses:
         '200':
           description: The request has succeeded.
@@ -12876,14 +12889,17 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
-          description: The file id path parameter.
+          description: The ID of the file.
           schema:
             type: string
+            x-ms-description-override: The ID of the file.
+          x-ms-description-override: The ID of the file.
       responses:
         '200':
           description: The request has succeeded.
@@ -13010,14 +13026,17 @@ paths:
         - name: container_id
           in: path
           required: true
+          description: The ID of the container.
           schema:
             type: string
         - name: file_id
           in: path
           required: true
-          description: The file id path parameter.
+          description: The ID of the file.
           schema:
             type: string
+            x-ms-description-override: The ID of the file.
+          x-ms-description-override: The ID of the file.
       responses:
         '200':
           description: The request has succeeded.
@@ -14733,6 +14752,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateEmbeddingRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create embeddings
         group: embeddings
@@ -18159,6 +18179,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.RunGraderRequest'
+        description: The request body.
       x-oaiMeta:
         name: Run grader
         beta: true
@@ -18708,6 +18729,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.ValidateGraderRequest'
+        description: The request body.
       x-oaiMeta:
         name: Validate grader
         beta: true
@@ -19491,6 +19513,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateFineTuningJobRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create fine-tuning job
         group: fine-tuning
@@ -21255,6 +21278,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-request-body-description-override: The request body.
       x-oaiMeta:
         name: Create image edit
         group: images
@@ -21560,7 +21584,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.EditImageBodyJsonParam'
-        description: The multipart request body.
+        description: The multipart request body. The request body.
   /openai/v1/images/generations:
     post:
       operationId: Images_createImage
@@ -21594,6 +21618,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateImageRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create image
         group: images
@@ -22462,6 +22487,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateModerationRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create moderation
         group: moderations
@@ -26860,6 +26886,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateThreadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create thread
         group: threads
@@ -27106,6 +27133,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateThreadAndRunRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create thread and run
         group: threads
@@ -31156,6 +31184,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateUploadRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create upload
         group: uploads
@@ -31896,6 +31925,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVectorStoreRequest'
+        description: The request body.
       x-oaiMeta:
         name: Create vector store
         group: vector_stores
@@ -34776,6 +34806,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-request-body-description-override: The request body.
       x-oaiMeta:
         examples:
           response: ''
@@ -34876,7 +34907,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVideoEditJsonBody'
-        description: The multipart request body.
+        description: The multipart request body. The request body.
   /openai/v1/videos/extensions:
     post:
       operationId: VideoGeneration_createVideoExtendMultipart_VideoGeneration_createVideoExtendJson
@@ -34902,6 +34933,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiErrorResponse'
+      x-ms-request-body-description-override: The request body.
       x-oaiMeta:
         examples:
           response: ''
@@ -35012,7 +35044,7 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/OpenAI.CreateVideoExtendJsonBody'
-        description: The multipart request body.
+        description: The multipart request body. The request body.
   /openai/v1/videos/{video_id}:
     delete:
       operationId: VideoGeneration_deleteVideo
