@@ -152,13 +152,25 @@ using Microsoft.VirtualMachineImages;
 @@clientName(RunSubState, "ImageTemplateRunSubState", "csharp");
 @@clientName(TargetRegion, "ImageTemplateTargetRegion", "csharp");
 @@clientName(TriggerStatus, "ImageTemplateTriggerStatus", "csharp");
-@@clientName(VirtualNetworkConfig, "ImageBuilderVirtualNetworkConfig", "csharp");
+@@clientName(
+  VirtualNetworkConfig,
+  "ImageBuilderVirtualNetworkConfig",
+  "csharp"
+);
 @@clientName(AutoRunState, "ImageTemplateAutoRunState", "csharp");
 @@clientName(OnBuildError, "ImageBuilderOnBuildError", "csharp");
 @@clientName(ProvisioningError, "ImageBuilderProvisioningError", "csharp");
-@@clientName(ProvisioningErrorCode, "ImageBuilderProvisioningErrorCode", "csharp");
+@@clientName(
+  ProvisioningErrorCode,
+  "ImageBuilderProvisioningErrorCode",
+  "csharp"
+);
 @@clientName(ReplicationMode, "ImageTemplateReplicationMode", "csharp");
-@@clientName(VMBootOptimizationState, "ImageTemplateVMBootOptimizationState", "csharp");
+@@clientName(
+  VMBootOptimizationState,
+  "ImageTemplateVMBootOptimizationState",
+  "csharp"
+);
 @@clientName(
   WorkloadOptimizationState,
   "ImageTemplateWorkloadOptimizationState",
