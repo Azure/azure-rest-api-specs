@@ -34,3 +34,4 @@ model SignedIdentifier {
 
 @@clientName(TablesServiceError, "TableServiceError", "javascript");
 @@clientName(Metrics.includeApis, "includeAPIs", "javascript");
+@@clientName(EtagResponseHeader.eTag, "etag", "javascript");
