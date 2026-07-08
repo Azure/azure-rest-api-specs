@@ -336,22 +336,22 @@ model DeviceUpdateClientOptions {
   {
     parameters: DeviceUpdateClientOptions,
   },
-  "!java"
+  "!java,!csharp"
 );
 
-// Java lib GAed with 2 clients
+// Java and .NET libs GAed with 2 clients
 @clientInitialization(
   {
     parameters: DeviceUpdateClientOptions,
   },
-  "java"
+  "java,csharp"
 )
 @client(
   {
     name: "DeviceUpdateClient",
     service: DeviceUpdateClient,
   },
-  "java"
+  "java,csharp"
 )
 interface ClientDeviceUpdateClient {
   listUpdates is DeviceUpdateOperationGroup.listUpdates;
@@ -371,14 +371,14 @@ interface ClientDeviceUpdateClient {
   {
     parameters: DeviceUpdateClientOptions,
   },
-  "java"
+  "java,csharp"
 )
 @client(
   {
     name: "DeviceManagementClient",
     service: DeviceUpdateClient,
   },
-  "java"
+  "java,csharp"
 )
 interface DeviceManagementClient {
   listDeviceClasses is DeviceManagementOperationGroup.listDeviceClasses;
