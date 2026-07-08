@@ -22839,9 +22839,8 @@ paths:
   /openai/v1/realtime/calls:
     post:
       operationId: Realtime_create-realtime-call
-      summary: |-
-        Create a new Realtime API call over WebRTC and receive the SDP answer needed
-        to complete the peer connection.
+      summary: Create a Realtime call
+      description: Creates a Realtime API call over WebRTC and returns the SDP answer needed to complete the peer connection.
       parameters: []
       responses:
         '201':
@@ -22931,9 +22930,8 @@ paths:
   /openai/v1/realtime/calls/{call_id}/accept:
     post:
       operationId: Realtime_accept-realtime-call
-      summary: |-
-        Accept an incoming SIP call and configure the realtime session that will
-        handle it.
+      summary: Accept a Realtime call
+      description: Accepts an incoming SIP call and configures the realtime session that handles it.
       parameters:
         - name: call_id
           in: path
@@ -23063,9 +23061,8 @@ paths:
   /openai/v1/realtime/calls/{call_id}/hangup:
     post:
       operationId: Realtime_hangup-realtime-call
-      summary: |-
-        End an active Realtime API call, whether it was initiated over SIP or
-        WebRTC.
+      summary: End a Realtime call
+      description: Ends an active Realtime API call initiated over SIP or WebRTC.
       parameters:
         - name: call_id
           in: path
@@ -23169,7 +23166,8 @@ paths:
   /openai/v1/realtime/calls/{call_id}/refer:
     post:
       operationId: Realtime_refer-realtime-call
-      summary: Transfer an active SIP call to a new destination using the SIP REFER verb.
+      summary: Transfer a SIP call
+      description: Transfers an active SIP call to a new destination using the SIP REFER verb.
       parameters:
         - name: call_id
           in: path
@@ -23292,7 +23290,8 @@ paths:
   /openai/v1/realtime/calls/{call_id}/reject:
     post:
       operationId: Realtime_reject-realtime-call
-      summary: Decline an incoming SIP call by returning a SIP status code to the caller.
+      summary: Decline a SIP call
+      description: Declines an incoming SIP call by returning a SIP status code to the caller.
       parameters:
         - name: call_id
           in: path
@@ -23410,20 +23409,8 @@ paths:
   /openai/v1/realtime/client_secrets:
     post:
       operationId: Realtime_create-realtime-client-secret
-      summary: |
-        Create a Realtime client secret with an associated session configuration.
-
-        Client secrets are short-lived tokens that can be passed to a client app,
-        such as a web frontend or mobile client, which grants access to the Realtime API without
-        leaking your main API key. You can configure a custom TTL for each client secret.
-
-        You can also attach session configuration options to the client secret, which will be
-        applied to any sessions created using that client secret, but these can also be overridden
-        by the client connection.
-
-        [Learn more about authentication with client secrets over WebRTC](/docs/guides/realtime-webrtc).
-
-        Returns the created client secret and the effective session object. The client secret is a string that looks like `ek_1234`.
+      summary: Create a Realtime client secret
+      description: Creates a short-lived Realtime client secret that can include session configuration and be used by client applications without exposing the main API key.
       parameters: []
       responses:
         '200':
@@ -23587,16 +23574,8 @@ paths:
   /openai/v1/realtime/sessions:
     post:
       operationId: Realtime_create-realtime-session
-      summary: |
-        Create an ephemeral API token for use in client-side applications with the
-        Realtime API. Can be configured with the same session parameters as the
-        `session.update` client event.
-
-        It responds with a session object, plus a `client_secret` key which contains
-        a usable ephemeral API token that can be used to authenticate browser clients
-        for the Realtime API.
-
-        Returns the created Realtime session object, plus an ephemeral key.
+      summary: Create a Realtime session
+      description: Creates an ephemeral API token and Realtime session for use in client-side applications.
       parameters: []
       responses:
         '200':
@@ -23668,16 +23647,8 @@ paths:
   /openai/v1/realtime/transcription_sessions:
     post:
       operationId: Realtime_create-realtime-transcription-session
-      summary: |
-        Create an ephemeral API token for use in client-side applications with the
-        Realtime API specifically for realtime transcriptions.
-        Can be configured with the same session parameters as the `transcription_session.update` client event.
-
-        It responds with a session object, plus a `client_secret` key which contains
-        a usable ephemeral API token that can be used to authenticate browser clients
-        for the Realtime API.
-
-        Returns the created Realtime transcription session object, plus an ephemeral key.
+      summary: Create a transcription session
+      description: Creates an ephemeral API token and Realtime transcription session for use in client-side applications.
       parameters: []
       responses:
         '200':
@@ -23739,16 +23710,8 @@ paths:
   /openai/v1/realtime/translations/client_secrets:
     post:
       operationId: Realtime_create-realtime-translation-client-secret
-      summary: |
-        Create a Realtime translation client secret with an associated translation session configuration.
-
-        Client secrets are short-lived tokens that can be passed to a client app,
-        such as a web frontend or mobile client, which grants access to the Realtime
-        Translation API without leaking your main API key. You can configure a custom
-        TTL for each client secret.
-
-        Returns the created client secret and the effective translation session object.
-        The client secret is a string that looks like `ek_1234`.
+      summary: Create a translation client secret
+      description: Creates a short-lived Realtime translation client secret with an associated translation session configuration.
       parameters: []
       responses:
         '200':
