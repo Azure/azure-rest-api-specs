@@ -38,6 +38,10 @@ enum Versions {
   /** Launch mode preview Api version. */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2026_04_01_preview: "2026-04-01-preview",
+
+  /** Karpenter Fleet preview Api Version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2026_06_01_preview: "2026-06-01-preview"
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

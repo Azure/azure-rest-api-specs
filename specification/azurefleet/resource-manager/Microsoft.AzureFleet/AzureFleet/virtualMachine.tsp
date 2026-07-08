@@ -36,6 +36,21 @@ model VirtualMachine {
   /** Error information when `operationStatus` is `Failed`. */
   @visibility(Lifecycle.Read)
   error?: ApiError;
+
+  /** The VM size of the virtual machine. */
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  vmSize?: string;
+
+  /** The availability zone of the virtual machine. */
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  zone?: string;
+
+  /** The priority of the virtual machine. */
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  priority?: string;
 }
 
 /** Virtual Machine operation status values. */
