@@ -640,7 +640,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @added(Versions.v2026_12_06)
   @get
-  @route("?restype=container&comp=list&flat&arrow")
+  @sharedRoute
+  @route("?restype=container&comp=list")
   listBlobFlatSegmentApacheArrow(
     /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
     #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
@@ -703,7 +704,8 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @added(Versions.v2026_12_06)
   @get
-  @route("?restype=container&comp=list&hierarchy&arrow")
+  @sharedRoute
+  @route("?restype=container&comp=list")
   listBlobHierarchySegmentApacheArrow(
     /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
     #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
