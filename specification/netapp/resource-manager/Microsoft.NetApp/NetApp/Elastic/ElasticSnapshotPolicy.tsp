@@ -346,7 +346,8 @@ interface ElasticSnapshotPolicies {
 @@maxLength(ElasticSnapshotPolicy.name, 64);
 @@minLength(ElasticSnapshotPolicy.name, 1);
 
-@@clientName(ElasticSnapshotPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  ElasticSnapshotPolicies.createOrUpdate::parameters.resource,
   "body"
 );
 @@clientName(ElasticSnapshotPolicies.update::parameters.properties, "body");
