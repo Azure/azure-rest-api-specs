@@ -343,3 +343,39 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "csharp");
+
+@@clientName(SentMessage, "SendMessageResult", "java");
+@@clientName(ReceivedMessage, "QueueMessageItemInternal", "java");
+@@clientName(PeekedMessage, "PeekedMessageItemInternal", "java");
+
+@@clientName(StorageErrorCode, "QueueErrorCode", "java");
+@@clientName(Logging, "QueueAnalyticsLogging", "java");
+@@clientName(Metrics, "QueueMetrics", "java");
+@@clientName(CorsRule, "QueueCorsRule", "java");
+@@clientName(RetentionPolicy, "QueueRetentionPolicy", "java");
+@@clientName(QueueServiceStats, "QueueServiceStatistics", "java");
+@@clientName(SignedIdentifier, "QueueSignedIdentifier", "java");
+@@clientName(AccessPolicy, "QueueAccessPolicy", "java");
+
+@@clientName(QueueServiceProperties.logging, "analyticsLogging", "java");
+@@clientName(AccessPolicy.start, "startsOn", "java");
+@@clientName(AccessPolicy.expiry, "expiresOn", "java");
+@@clientName(AccessPolicy.permission, "permissions", "java");
+@@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
+@@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
+@@clientName(UserDelegationKey.signedDelegatedUserTid, "signedDelegatedUserTenantId", "java");
+@@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
+
+@@clientName(Storage.Queues, "AzureQueueStorage", "java");
+
+@@clientLocation(Queue.receiveMessages, "Messages", "java");
+@@clientLocation(Queue.sendMessage, "Messages", "java");
+@@clientLocation(Queue.peekMessages, "Messages", "java");
+@@clientLocation(Queue.clear, "Messages", "java");
+@@clientLocation(Queue.updateMessage, "MessageIds", "java");
+@@clientLocation(Queue.deleteMessage, "MessageIds", "java");
+@@clientName(Queue.receiveMessages, "dequeue", "java");
+@@clientName(Queue.sendMessage, "enqueue", "java");
+@@clientName(Queue.peekMessages, "peek", "java");
+@@clientName(Queue.updateMessage, "update", "java");
+@@clientName(Queue.deleteMessage, "delete", "java");
