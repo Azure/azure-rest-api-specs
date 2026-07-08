@@ -8390,14 +8390,11 @@
           }
         },
         "resourceNameOverrides": {
-          "type": "array",
-          "description": "List of source-to-target resource name overrides. Any source resource name not included will be restored with a default naming format",
-          "items": {
-            "$ref": "#/definitions/ResourceNameOverride"
-          },
-          "x-ms-identifiers": [
-            "sourceName"
-          ]
+          "type": "object",
+          "description": "This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -8492,24 +8489,6 @@
           }
         ]
       }
-    },
-    "ResourceNameOverride": {
-      "type": "object",
-      "description": "Represents a source-to-target resource name override mapping",
-      "properties": {
-        "sourceName": {
-          "type": "string",
-          "description": "Source resource name"
-        },
-        "targetName": {
-          "type": "string",
-          "description": "Target resource name to restore into"
-        }
-      },
-      "required": [
-        "sourceName",
-        "targetName"
-      ]
     },
     "ResourcePropertiesObjectType": {
       "type": "string",
