@@ -957,6 +957,36 @@ namespace Microsoft.InsightsCombinedClient;
   ActionGroupsApi.ActionGroupPatch,
   "javascript"
 );
+
+// These models also collide by name across TenantActionGroups and ActionGroupsApi,
+// but their shapes differ, so they must remain separate models. Rename the
+// TenantActionGroups versions for the JS emitter (@clientName, per the compiler
+// warning) instead of merging them:
+//   - WebhookReceiver: ActionGroupsApi adds a `managedIdentity` property.
+//   - ActionGroupPatchBody: ActionGroupsApi adds an `identity` property.
+//   - ActionDetail: property names differ (camelCase here vs PascalCase there).
+//   - TestNotificationDetailsResponse: references the differing ActionDetail.
+@@clientName(
+  TenantActionGroups.WebhookReceiver,
+  "TenantActionGroupWebhookReceiver",
+  "javascript"
+);
+@@clientName(
+  TenantActionGroups.ActionGroupPatchBody,
+  "TenantActionGroupPatchBody",
+  "javascript"
+);
+@@clientName(
+  TenantActionGroups.ActionDetail,
+  "TenantActionGroupActionDetail",
+  "javascript"
+);
+@@clientName(
+  TenantActionGroups.TestNotificationDetailsResponse,
+  "TenantActionGroupTestNotificationDetailsResponse",
+  "javascript"
+);
+
 @@clientName(
   DataCollectionApi.KnownDataCollectionEndpointResourceKind,
   "DataCollectionEndpointResourceKind",
@@ -1447,7 +1477,15 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java,python,javascript"
+  "csharp,java,python"
+);
+// For JS, redirect straight to DiagnosticsSettings.MetricSettings (identical to the
+// local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
+// is not emitted and no longer collides with DiagnosticsSettings.MetricSettings.
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.MetricSettings,
+  DiagnosticsSettings.MetricSettings,
+  "javascript"
 );
 
 /**
@@ -1480,6 +1518,14 @@ model LogSettings {
   ServiceDiagnosticsSettingsApi.LogSettings,
   LogSettings,
   "csharp,java,python"
+);
+// For JS, redirect straight to DiagnosticsSettings.LogSettings (identical to the local
+// LogSettings) so ServiceDiagnosticsSettingsApi.LogSettings no longer collides with
+// DiagnosticsSettings.LogSettings.
+@@alternateType(
+  ServiceDiagnosticsSettingsApi.LogSettings,
+  DiagnosticsSettings.LogSettings,
+  "javascript"
 );
 
 @@clientLocation(
