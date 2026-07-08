@@ -256,6 +256,16 @@ interface ProfilesOverrides {
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
 @@clientName(
+  MinimumTLSVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  MinimumTLSVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
   ManagedRuleSetException,
   "FrontDoorManagedRuleSetException",
   "csharp"
@@ -379,136 +389,9 @@ interface ProfilesOverrides {
   "csharp"
 );
 
-// FrontDoorResourceData and other models in the following section should be use BasicResourceWithSettableIDName as base class instead of FrontDoorSubResource (SubResource).
-// hierarchyBuilding cannot be used here: the validator requires the base's properties (id) to be
-// directly on the target, but our models inherit `id` from SubResource.
-// Keeps models.tsp untouched (no swagger change) — replacements are C#-only constructs.
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
-@doc("A routing rule represents a specification for traffic to treat and where to send it, along with health probe information.")
-model RoutingRuleReplacement extends BasicResourceWithSettableIDName {
-  @doc("Properties of the Front Door Routing Rule")
-  properties?: RoutingRuleProperties;
-}
-@@alternateType(RoutingRule, RoutingRuleReplacement, "csharp");
-@@clientName(RoutingRuleReplacement, "RoutingRuleData", "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  RoutingRuleReplacement.properties,
-  "csharp"
-);
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
-@doc("Load balancing settings for a backend pool")
-model LoadBalancingSettingsModelReplacement
-  extends BasicResourceWithSettableIDName {
-  @doc("Properties of the load balancing settings")
-  properties?: LoadBalancingSettingsProperties;
-}
-@@alternateType(
-  LoadBalancingSettingsModel,
-  LoadBalancingSettingsModelReplacement,
-  "csharp"
-);
-@@clientName(
-  LoadBalancingSettingsModelReplacement,
-  "FrontDoorLoadBalancingSettingsData",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  LoadBalancingSettingsModelReplacement.properties,
-  "csharp"
-);
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
-@doc("Load balancing settings for a backend pool")
-model HealthProbeSettingsModelReplacement
-  extends BasicResourceWithSettableIDName {
-  @doc("Properties of the health probe settings")
-  properties?: HealthProbeSettingsProperties;
-}
-@@alternateType(
-  HealthProbeSettingsModel,
-  HealthProbeSettingsModelReplacement,
-  "csharp"
-);
-@@clientName(
-  HealthProbeSettingsModelReplacement,
-  "FrontDoorHealthProbeSettingsData",
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  HealthProbeSettingsModelReplacement.properties,
-  "csharp"
-);
-
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C#-only replacement model to swap base class; no impact on spec/swagger."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Brownfield migration: inherits @customAzureResource from BasicResourceWithSettableIDName; replacement is C#-only."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "C#-only replacement model; not emitted to swagger and not a top-level ARM resource."
-@doc("A backend pool is a collection of backends that can be routed to.")
-model BackendPoolReplacement extends BasicResourceWithSettableIDName {
-  @doc("Properties of the Front Door Backend Pool")
-  properties?: BackendPoolProperties;
-}
-@@alternateType(BackendPool, BackendPoolReplacement, "csharp");
-@@clientName(BackendPoolReplacement, "FrontDoorBackendPool", "csharp");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility — flatten properties into parent in C# SDK."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  BackendPoolReplacement.properties,
-  "csharp"
-);
-
 @@alternateType(Profile.etag, Azure.Core.eTag, "csharp");
 @@alternateType(WebApplicationFirewallPolicy.etag, Azure.Core.eTag, "csharp");
 @@alternateType(PolicySettings.redirectUrl, url, "csharp");
-
-@@alternateType(
-  Microsoft.Network.Resource,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-@@alternateType(
-  ResourcewithSettableName,
-  Azure.ResourceManager.Foundations.TrackedResource,
-  "csharp"
-);
-@@alternateType(
-  BasicResource,
-  Azure.ResourceManager.Foundations.ProxyResource,
-  "csharp"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  FrontDoor,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  Experiment,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  Profile,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  RulesEngine,
-  #{ isAzureResource: true }
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility: preserve autorest-generated resource treatment."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  WebApplicationFirewallPolicy,
-  #{ isAzureResource: true }
-);
 
 @@alternateType(
   GetLatencyScorecardsParameters.endDateTimeUTC,
