@@ -3666,6 +3666,22 @@ model GenericRestoreDatasourceCriteria extends ItemLevelRestoreCriteria {
 }
 
 /**
+ * Represents a source-to-target resource name override mapping
+ */
+@added(Versions.v2026_06_01)
+model ResourceNameOverride {
+  /**
+   * Source resource name
+   */
+  sourceName: string;
+
+  /**
+   * Target resource name to restore into
+   */
+  targetName: string;
+}
+
+/**
  * Specifies the list of resources to be restored
  */
 @added(Versions.v2026_06_01)
@@ -3681,10 +3697,10 @@ model ResourceListSelectionCriteria {
   resourceIdentifiers: string[];
 
   /**
-   * This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format
+   * List of source-to-target resource name overrides. Any source resource name not included will be restored with a default naming format
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward-compatible source-to-target name override map for generic restore"
-  resourceNameOverrides?: Record<string>;
+  @identifiers(#["sourceName"])
+  resourceNameOverrides?: ResourceNameOverride[];
 }
 
 /**
