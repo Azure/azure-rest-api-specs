@@ -34,7 +34,11 @@ using Microsoft.HanaOnAzure;
   "csharp"
 );
 
-@@alternateType(SapMonitorProperties.logAnalyticsWorkspaceId, Azure.Core.uuid, "csharp");
+@@alternateType(
+  SapMonitorProperties.logAnalyticsWorkspaceId,
+  Azure.Core.uuid,
+  "csharp"
+);
 
 @@clientName(ProviderInstanceProperties.type, "providerType", "csharp");
 
