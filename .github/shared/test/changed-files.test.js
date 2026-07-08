@@ -24,6 +24,7 @@ import {
   scenario,
   stable,
   swagger,
+  tsp,
   tspconfig,
   typespec,
 } from "../src/changed-files.js";
@@ -172,6 +173,22 @@ describe("changedFiles", () => {
     expect(filesResolved.filter(readme)).toEqual(expected.map((f) => resolve(f)));
   });
 
+  it("filter:tsp", () => {
+    const expected = [
+      "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
+      "specification/contosowidgetmanager/Contoso.Management/main.tsp",
+    ];
+    expect(files.filter(tsp)).toEqual(expected);
+  });
+
+  it("filter:tspconfig", () => {
+    const expected = [
+      "not-spec/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+      "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
+    ];
+    expect(files.filter(tspconfig)).toEqual(expected);
+  });
+
   it("filter:typespec", () => {
     const expected = [
       "not-spec/contosowidgetmanager/Contoso.Management/main.tsp",
@@ -180,13 +197,6 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml",
     ];
     expect(files.filter(typespec)).toEqual(expected);
-  });
-
-  it("filter:tspconfig", () => {
-    const expected = ["specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"];
-
-    expect(files.filter(tspconfig)).toEqual(expected);
-    expect(filesResolved.filter(tspconfig)).toEqual([]);
   });
 
   it("filter:data-plane", () => {

@@ -218,6 +218,30 @@ export function readme(file) {
 }
 
 /**
+ * @param {string} file
+ * @returns {boolean}
+ */
+export function tsp(file) {
+  return typeof file === "string" && file.toLowerCase().endsWith(".tsp");
+}
+
+/**
+ * @param {string} file
+ * @returns {boolean}
+ */
+export function tspconfig(file) {
+  return typeof file === "string" && file.toLowerCase().endsWith("tspconfig.yaml");
+}
+
+/**
+ * @param {string} file
+ * @returns {boolean}
+ */
+export function typespec(file) {
+  return typeof file === "string" && (tsp(file) || tspconfig(file));
+}
+
+/**
  * @param {string} [file]
  * @returns {boolean}
  */
@@ -267,29 +291,6 @@ export function example(file) {
       // Folder name "examples" should match case for consistency across specs
       () => json(file) && includesSegment(file, "examples"),
     )
-  );
-}
-
-/**
- * @param {string} file
- * @returns {boolean}
- */
-export function typespec(file) {
-  return (
-    typeof file === "string" &&
-    (file.toLowerCase().endsWith(".tsp") || file.toLowerCase().endsWith("tspconfig.yaml"))
-  );
-}
-
-/**
- * @param {string} file
- * @returns {boolean}
- */
-export function tspconfig(file) {
-  return (
-    typeof file === "string" &&
-    file.startsWith("specification/") &&
-    file.endsWith("/tspconfig.yaml")
   );
 }
 
