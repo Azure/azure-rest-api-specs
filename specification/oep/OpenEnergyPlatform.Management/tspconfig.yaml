@@ -1,0 +1,15 @@
+parameters:
+  "service-dir":
+    default: "sdk/openenergyplatform"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    output-file: "{azure-resource-provider-folder}/Microsoft.OpenEnergyPlatform/{version-status}/{version}/openenergyplatform.json"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
