@@ -1196,12 +1196,12 @@ union LinkModeType {
   string,
 
   /**
-   * SingleDatabase
+   * The link operates in single-database mode.
    */
   SingleDatabase: "SingleDatabase",
 
   /**
-   * MultiDatabase
+   * The link operates in multi-database mode.
    */
   MultiDatabase: "MultiDatabase",
 }
