@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/versioning";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
 namespace Azure.Batch;
 
@@ -449,6 +451,7 @@ union BatchNodeDeallocationOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @removed(Versions.v2026_08_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -467,6 +470,7 @@ union BatchNodeDeallocateOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @removed(Versions.v2026_08_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -655,6 +659,7 @@ union BatchNodeRebootKind {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @removed(Versions.v2026_08_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -673,6 +678,7 @@ union BatchNodeReimageOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
+  @removed(Versions.v2026_08_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -978,6 +984,7 @@ model BatchPoolStatistics {
 
   @doc("Statistics related to Pool usage, such as the amount of core-time used.")
   @clientName("usageStatistics")
+  @removed(Versions.v2026_08_01)
   usageStats?: BatchPoolUsageStatistics;
 
   @doc("Statistics related to resource consumption by Compute Nodes in the Pool.")
@@ -1336,6 +1343,10 @@ model BatchJobSpecification {
 
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
+
+  @added(Versions.v2026_08_01)
+  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
+  disableRescheduleSingleInstanceTask?: boolean;
 
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
@@ -2507,6 +2518,10 @@ model BatchJob {
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
+  @added(Versions.v2026_08_01)
+  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
+  disableRescheduleSingleInstanceTask?: boolean;
+
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
@@ -2576,6 +2591,10 @@ model BatchJobCreateOptions {
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
+  @added(Versions.v2026_08_01)
+  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
+  disableRescheduleSingleInstanceTask?: boolean;
+
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
@@ -2620,6 +2639,10 @@ model BatchJobUpdateOptions {
 
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
+
+  @added(Versions.v2026_08_01)
+  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
+  disableRescheduleSingleInstanceTask?: boolean;
 
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
@@ -3862,6 +3885,20 @@ model BatchNode {
   @doc("The IPv6 address that other Nodes can use to communicate with this Compute Node. Every Compute Node that is added to a Pool is assigned a unique IP address. Whenever a Compute Node is removed from a Pool, all of its local files are deleted, and the IP address is reclaimed and could be reused for new Compute Nodes. This property will not be present if the Pool is not configured for IPv6.")
   @visibility(Lifecycle.Read)
   ipv6Address: ipV6Address;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire property name uses the established publicIPAddress naming"
+  @doc("The public IPv4 address (load balancer front-end VIP) used to reach this Compute Node from outside the virtual network. For Pools that use the Batch-managed or User-managed public load balancer, this is the load balancer's front-end public IPv4 address. The value is present regardless of whether SSH or RDP remote access is enabled, so callers can perform IP-based validation even when remote login is disabled. The property is omitted when the Pool is configured with no public IP addresses (for example, private link or BYO VNet with NoPublicIPAddresses).")
+  @clientName("publicIpAddress")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01)
+  publicIPAddress?: string;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire property name uses the established publicIPAddress naming"
+  @doc("The public IPv6 address (load balancer front-end VIP) used to reach this Compute Node from outside the virtual network. Populated only when the Pool is configured for IPv6 / dual-stack public networking. The property is omitted otherwise.")
+  @clientName("publicIpv6Address")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_08_01)
+  publicIPv6Address?: string;
 
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")
   @visibility(Lifecycle.Read)
