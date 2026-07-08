@@ -185,6 +185,12 @@ union DiskState {
    * A disk is created for upload and a write token has been issued for uploading to it.
    */
   ActiveUpload: "ActiveUpload",
+
+  /**
+   * The disk has been claimed by an owner resource.
+   */
+  @added(Versions.v2026_07_02)
+  Claimed: "Claimed",
 }
 
 /**
@@ -679,6 +685,13 @@ model DiskProperties {
    */
   @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
+
+  /**
+   * Contains the claim identifier for a disk claimed by an ownerResource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_07_02)
+  qadIdentifier?: string;
 }
 
 /**
@@ -1110,6 +1123,28 @@ model DiskUpdateProperties {
    */
   @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
+}
+
+/**
+ * Request body for disk claim operation.
+ */
+@added(Versions.v2026_07_02)
+model ClaimResourceRequest {
+  /**
+   * The Azure resource ID of the resource claiming ownership of this disk.
+   */
+  ownerResource: string;
+}
+
+/**
+ * Request body for disk unclaim operation.
+ */
+@added(Versions.v2026_07_02)
+model UnclaimResourceRequest {
+  /**
+   * The Azure resource ID of the resource releasing ownership of this disk.
+   */
+  ownerResource: string;
 }
 
 /**
