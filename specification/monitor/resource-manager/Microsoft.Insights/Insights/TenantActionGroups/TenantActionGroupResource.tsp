@@ -192,7 +192,7 @@ op getTestNotificationsAtTenantActionGroupResourceLevel is TenantActionGroupReso
     @header
     `x-ms-client-tenant-id`: string;
   },
-  OverrideErrorType = ErrorResponse
+  OverrideErrorType = Microsoft.Common.ErrorResponse
 >;
 @@maxLength(TenantActionGroupResource.name, 260);
 @@minLength(TenantActionGroupResource.name, 1);
