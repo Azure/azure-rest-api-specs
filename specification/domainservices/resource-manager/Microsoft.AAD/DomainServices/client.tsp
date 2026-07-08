@@ -4,6 +4,8 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.AAD;
 
+@@clientName(Microsoft.AAD, "DomainServicesMgmtClient", "python");
+
 // common-types v3 models `Resource.id` as a plain string, so the generated
 // ResourceData constructors take `string id` and fail to call the
 // `base(ResourceIdentifier id)` constructor. Map it to ResourceIdentifier for C#.
