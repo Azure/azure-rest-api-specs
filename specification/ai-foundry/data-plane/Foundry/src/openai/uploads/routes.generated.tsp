@@ -7,10 +7,8 @@
 import "../../common/models.tsp";
 import "@typespec/http";
 import "@azure-tools/openai-typespec/models/uploads";
-import "@typespec/openapi";
 using TypeSpec.Http;
 using OpenAI;
-using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/uploads")
 @tag("Uploads")

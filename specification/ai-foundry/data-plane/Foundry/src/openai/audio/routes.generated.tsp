@@ -31,6 +31,7 @@ interface Audio {
       body: OpenAI.CreateSpeechRequest;
     },
     {
+      /** The TransferEncoding header. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @header("Transfer-Encoding")
       TransferEncoding?: string;

@@ -31,7 +31,7 @@ interface Realtime {
       @header
       contentType: "multipart/form-data";
 
-      /** The multipart request body. */
+      /** The request body. */
       @multipartBody
       body: OpenAI.RealtimeCallCreateRequest;
     },
