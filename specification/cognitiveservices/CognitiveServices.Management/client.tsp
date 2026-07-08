@@ -853,7 +853,11 @@ op regenerateKeyCustom(
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(ReplacementConfig, "ModelReplacementConfiguration", "csharp");
+@@clientName(
+  ReplacementConfig,
+  "CognitiveServicesModelReplacementConfiguration",
+  "csharp"
+);
 @@clientName(RoutingMode, "CognitiveServicesRoutingMode", "csharp");
 @@clientName(RuleAction, "ServiceTagOutboundRuleAction", "csharp");
 @@clientName(RuleCategory, "ServiceTagOutboundRuleCategory", "csharp");
@@ -1079,6 +1083,59 @@ op regenerateKeyCustom(
 );
 @@alternateType(Workbench.etag, eTag, "csharp");
 @@alternateType(Workbench.location, azureLocation, "csharp");
+
+// Prefix generic type names with service context (2026-05-15-preview)
+@@clientName(VmPriority, "CognitiveServicesVmPriority", "csharp");
+@@clientName(
+  ManagedComputeCapacity,
+  "CognitiveServicesManagedComputeCapacity",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeCapacityProperties,
+  "CognitiveServicesManagedComputeCapacityProperties",
+  "csharp"
+);
+@@clientName(
+  ManagedComputeUsage,
+  "CognitiveServicesManagedComputeUsage",
+  "csharp"
+);
+@@clientName(
+  PolicyEvaluationOutcome,
+  "DeploymentPolicyEvaluationOutcome",
+  "csharp"
+);
+@@clientName(
+  PolicyAssignmentEvaluationDetails,
+  "DeploymentPolicyAssignmentEvaluationDetails",
+  "csharp"
+);
+@@clientName(
+  PolicyExpressionEvaluationDetails,
+  "DeploymentPolicyExpressionEvaluationDetails",
+  "csharp"
+);
+@@clientName(
+  ApplicationAuthorizationPolicy,
+  "CognitiveServicesApplicationAuthorizationPolicy",
+  "csharp"
+);
+@@clientName(
+  ApplicationTrafficRoutingPolicy,
+  "CognitiveServicesApplicationTrafficRoutingPolicy",
+  "csharp"
+);
+@@clientName(
+  ClusterComputeProperties,
+  "CognitiveServicesClusterComputeProperties",
+  "csharp"
+);
+@@clientName(
+  RoleBasedBuiltInAuthorizationPolicy,
+  "CognitiveServicesRoleBasedBuiltInAuthorizationPolicy",
+  "csharp"
+);
 @@alternateType(
   Workbench.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
