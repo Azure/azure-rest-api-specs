@@ -43,6 +43,9 @@
     },
     {
       "name": "LaunchBulkInstancesOperation"
+    },
+    {
+      "name": "CustomLaunchBulkInstancesOperation"
     }
   ],
   "paths": {
@@ -82,6 +85,106 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations": {
+      "get": {
+        "operationId": "CustomLaunchBulkInstancesOperation_ListBySubscription",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "List CustomLaunchBulkInstancesOperation resources by subscriptionId.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomLaunchBulkInstancesOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_ListBySubscription_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/asyncOperations/{asyncOperationId}": {
+      "get": {
+        "operationId": "CustomLaunchBulkInstancesOperation_GetOperationStatus",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "Get the status of a CustomLaunchBulkInstancesOperation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "asyncOperationId",
+            "in": "path",
+            "description": "The async operation id.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_GetOperationStatus_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_GetOperationStatus_MaximumSet_Gen.json"
+          }
         }
       }
     },
@@ -241,6 +344,413 @@
           "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen": {
             "$ref": "./examples/VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_MinimumSet_Gen.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations": {
+      "get": {
+        "operationId": "CustomLaunchBulkInstancesOperation_ListByResourceGroup",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "List CustomLaunchBulkInstancesOperation resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomLaunchBulkInstancesOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_ListByResourceGroup_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}": {
+      "get": {
+        "operationId": "CustomLaunchBulkInstancesOperation_Get",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "Gets an instance of CustomLaunchBulkInstancesOperations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the CustomLaunchBulkInstancesOperation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/CustomLocationBasedLaunchBulkInstancesOperation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_Get_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "CustomLaunchBulkInstancesOperation_CreateOrUpdate",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "Creates or updates CustomLaunchBulkInstancesOperations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the CustomLaunchBulkInstancesOperation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomLocationBasedLaunchBulkInstancesOperation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'CustomLocationBasedLaunchBulkInstancesOperation' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomLocationBasedLaunchBulkInstancesOperation"
+            }
+          },
+          "201": {
+            "description": "Resource 'CustomLocationBasedLaunchBulkInstancesOperation' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/CustomLocationBasedLaunchBulkInstancesOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_CreateOrUpdate_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "CustomLaunchBulkInstancesOperation_Delete",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "Deletes CustomLaunchBulkInstancesOperations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the CustomLaunchBulkInstancesOperation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "deleteInstances",
+            "in": "query",
+            "description": "When true, deletes all virtual machines created by this BulkAction Operation.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_Delete_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/cancel": {
+      "post": {
+        "operationId": "CustomLaunchBulkInstancesOperation_Cancel",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "Cancels CustomLaunchBulkInstancesOperation instances that have not yet launched.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the CustomLaunchBulkInstancesOperation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_Cancel_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_Cancel_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/virtualMachines": {
+      "get": {
+        "operationId": "CustomLaunchBulkInstancesOperation_ListVirtualMachines",
+        "tags": [
+          "CustomLaunchBulkInstancesOperation"
+        ],
+        "description": "List VirtualMachine resources of a CustomLaunchBulkInstancesOperation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the CustomLaunchBulkInstancesOperation.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Filter expression to filter the virtual machines.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "in": "query",
+            "description": "Skip token for pagination. Uses the token from a previous response to fetch the next page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CustomLaunchBulkInstancesOperation_ListVirtualMachines_MaximumSet": {
+            "$ref": "./examples/CustomLaunchBulkInstancesOperation_ListVirtualMachines_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1856,6 +2366,191 @@
         "type",
         "location"
       ]
+    },
+    "CustomLaunchBulkInstanceOverride": {
+      "type": "object",
+      "description": "A single per-VM override. Each set field takes precedence over the operation-level value for that one VM. VM size, zone, priority, eviction policy, and billing are owned by the service and cannot be set here.",
+      "properties": {
+        "virtualMachineName": {
+          "type": "string",
+          "description": "ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}."
+        },
+        "virtualMachineProfile": {
+          "$ref": "#/definitions/BulkactionVMProperties",
+          "description": "Per-VM VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile for this VM."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Per-VM tags overriding the operation-level tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "Per-VM identity overriding the operation-level identity."
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
+          "description": "Per-VM plan overriding the operation-level plan."
+        },
+        "extensions": {
+          "type": "array",
+          "description": "Per-VM extensions. When non-empty they replace the operation-level extensions for this VM; when omitted the VM inherits the operation-level extensions.",
+          "items": {
+            "$ref": "#/definitions/BulkactionVMExtension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "CustomLaunchBulkInstancesOperationListResult": {
+      "type": "object",
+      "description": "List of CustomLaunchBulkInstancesOperation resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of CustomLaunchBulkInstancesOperation resources.",
+          "items": {
+            "$ref": "#/definitions/CustomLocationBasedLaunchBulkInstancesOperation"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CustomLaunchBulkInstancesOperationProperties": {
+      "type": "object",
+      "description": "Details of the CustomLaunchBulkInstancesOperation.",
+      "properties": {
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time the CustomLaunchBulkInstancesOperation resource was created.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total capacity to achieve. It can be in terms of VMs or vCPUs.",
+          "minimum": 1
+        },
+        "capacityType": {
+          "$ref": "#/definitions/CapacityType",
+          "description": "Specifies capacity type for launching instances. It can be in terms of VMs or vCPUs."
+        },
+        "priorityProfile": {
+          "$ref": "#/definitions/PriorityProfile",
+          "description": "Configuration Options for Regular or Spot instances in CustomLaunchBulkInstancesOperation."
+        },
+        "vmSizesProfile": {
+          "type": "array",
+          "description": "List of VM sizes supported for CustomLaunchBulkInstancesOperation",
+          "items": {
+            "$ref": "#/definitions/VmSizeProfile"
+          },
+          "x-ms-identifiers": []
+        },
+        "vmAttributes": {
+          "$ref": "#/definitions/VMAttributes",
+          "description": "Attributes to launch instances."
+        },
+        "computeProfile": {
+          "$ref": "#/definitions/ComputeProfile",
+          "description": "Compute Profile to configure the Virtual Machines."
+        },
+        "zoneAllocationPolicy": {
+          "$ref": "#/definitions/ZoneAllocationPolicy",
+          "description": "Zone Allocation Policy for launching instances."
+        },
+        "overridesProfile": {
+          "$ref": "#/definitions/CustomOverridesProfile",
+          "description": "Per-VM overrides and the shared name prefix, specified when the operation is created. Present only on the customLaunchBulkInstancesOperations endpoint; the uniform launchBulkInstancesOperations endpoint does not accept it. Input only: it is not returned in GET or create responses, so a GET-then-PUT update must re-supply it to retain the per-VM overrides.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "retryPolicy": {
+          "$ref": "#/definitions/RetryPolicy",
+          "description": "Retry policy the user can pass"
+        }
+      },
+      "required": [
+        "capacity",
+        "priorityProfile",
+        "computeProfile"
+      ]
+    },
+    "CustomLocationBasedLaunchBulkInstancesOperation": {
+      "type": "object",
+      "description": "Location based CustomLaunchBulkInstancesOperation resource. The location is part of the resource path.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CustomLaunchBulkInstancesOperationProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "zones": {
+          "type": "array",
+          "description": "Zones in which the CustomLaunchBulkInstancesOperation is available",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "plan": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan",
+          "description": "Details of the resource plan."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "CustomOverridesProfile": {
+      "type": "object",
+      "description": "Groups the per-VM overrides with the name prefix that names any override that does not supply its own VM name.",
+      "properties": {
+        "virtualMachineNamePrefix": {
+          "type": "string",
+          "description": "Prefix used to build the ARM VM name ({prefix}_{index}) for overrides that omit a virtualMachineName. Required when any override is unnamed and rejected when every override is named."
+        },
+        "overrides": {
+          "type": "array",
+          "description": "Per-VM overrides. The count is the VM count and must equal capacity. Each override maps to VM index i.",
+          "items": {
+            "$ref": "#/definitions/CustomLaunchBulkInstanceOverride"
+          },
+          "x-ms-identifiers": []
+        }
+      }
     },
     "DataDisk": {
       "type": "object",
@@ -3859,6 +4554,20 @@
         "profile"
       ]
     },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of identity used for the virtual machine scale set. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine scale set.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned",
+        "SystemAssigned, UserAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false
+      }
+    },
     "ResourceNotificationDetails": {
       "type": "object",
       "description": "Resource notification details containing notification metadata like the resource context",
@@ -4670,6 +5379,21 @@
         }
       }
     },
+    "UserAssignedIdentitiesValue": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of user assigned identity.",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client id of user assigned identity.",
+          "readOnly": true
+        }
+      }
+    },
     "UserInitiatedReboot": {
       "type": "object",
       "description": "Specifies Reboot related Scheduled Event related configurations.",
@@ -5121,6 +5845,33 @@
         "id",
         "operationStatus"
       ]
+    },
+    "VirtualMachineIdentity": {
+      "type": "object",
+      "description": "Identity for the virtual machine.",
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentitiesValue"
+          }
+        }
+      }
     },
     "VirtualMachineInfo": {
       "type": "object",

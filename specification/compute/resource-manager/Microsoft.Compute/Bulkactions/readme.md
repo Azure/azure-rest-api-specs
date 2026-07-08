@@ -121,6 +121,51 @@ suppressions:
       https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
     from: Bulkactions.json
     where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations/asyncOperations/{asyncOperationId}"]
+  - code: PostResponseCodes
+    reason: >
+      Cancel LRO on CustomLaunchBulkInstancesOperation uses the ArmResourceActionNoResponseContentAsync
+      pattern, mirroring the source Microsoft.ComputeBulkActions RP where the same suppression
+      is in effect.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/cancel"].post
+  - code: ParameterNotUsingCommonTypes
+    reason: >
+      The location parameter is a resource path segment key (location is azureLocation in the
+      resource model) for CustomLaunchBulkInstancesOperation, so the parameter cannot be a $ref
+      to common-types LocationParameter without losing the resource key binding.
+    from: Bulkactions.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}"].put.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}"].delete.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/cancel"].post.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/virtualMachines"].get.parameters[?(@.name=='location')]
+      - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/asyncOperations/{asyncOperationId}"].get.parameters[?(@.name=='location')]
+  - code: MissingSegmentsInNestedResourceListOperation
+    reason: >
+      listVirtualMachines is the canonical child resource list URL pattern emitted by
+      ArmResourceList for VirtualMachine under CustomLaunchBulkInstancesOperation; the path
+      already includes all parent segments emitted by the ARM TypeSpec library.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}/virtualMachines"].get
+  - code: EnumInsteadOfBoolean
+    reason: >
+      deleteInstances is a binary on-off flag with no foreseeable additional values
+      (cascade-delete VMs yes or no), so an enum would add no expressive power.
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/{name}"].delete.parameters[*]
+  - code: PathForNestedResource
+    reason: >
+      The GetOperationStatus endpoint is the async operation poller URL for
+      CustomLaunchBulkInstancesOperation. The path intentionally uses the customLaunchBulkInstancesOperations
+      collection name as a fixed segment followed by asyncOperations/{asyncOperationId} to mirror
+      the service-side routing contract. This is the documented exception case for the
+      PathForNestedResource rule (see
+      https://github.com/Azure/azure-openapi-validator/blob/main/docs/path-for-nested-resource.md#pathfornestedresource).
+    from: Bulkactions.json
+    where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/customLaunchBulkInstancesOperations/asyncOperations/{asyncOperationId}"]
   - code: AvoidAdditionalProperties
     reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
     from: Bulkactions.json
