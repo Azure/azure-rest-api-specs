@@ -3,31 +3,36 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Databricks;
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
   "python"
 );
-@@clientName(Microsoft.Databricks,
+@@clientName(
+  Microsoft.Databricks,
   "AzureDatabricksManagementClient",
   "python,javascript"
 );
 @@clientLocation(VirtualNetworkPeerings.get, "VNetPeering", "python");
-@@clientLocation(VirtualNetworkPeerings.createOrUpdate,
+@@clientLocation(
+  VirtualNetworkPeerings.createOrUpdate,
   "VNetPeering",
   "python"
 );
 @@clientLocation(VirtualNetworkPeerings.delete, "VNetPeering", "python");
-@@clientLocation(VirtualNetworkPeerings.listByWorkspace,
+@@clientLocation(
+  VirtualNetworkPeerings.listByWorkspace,
   "VNetPeering",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(WorkspaceDeleteParameters.forceDeletion,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  WorkspaceDeleteParameters.forceDeletion,
   false,
   "python"
 );
 
-@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java,csharp");
+@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java");
 @@clientName(Workspace, "DatabricksWorkspace", "csharp");
 @@clientName(WorkspaceCustomParameters, "WorkspaceCustomProperties", "csharp");
 @@clientName(WorkspaceCustomStringParameter, "WorkspaceCustomStringParameterValue", "csharp");
@@ -43,7 +48,8 @@ using Microsoft.Databricks;
 @@clientName(ComplianceSecurityProfileDefinition, "ComplianceSecurityProfile", "csharp");
 @@clientName(GroupIdInformation, "DatabricksPrivateLinkResource", "csharp");
 @@clientName(Workspaces.list, "GetOutboundNetworkDependenciesEndpoints", "csharp");
-@@clientName(Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
+@@clientName(
+  Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
   "WorkspaceNoPublicIpBooleanParameter",
   "java"
 );
