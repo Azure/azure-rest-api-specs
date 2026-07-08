@@ -2,8 +2,8 @@
 name: foundry-route-doc-check
 license: MIT
 metadata:
-  version: "1.6.0"
-description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice, replaces documentation-required suppressions with generated documentation, and uses description override extensions when TypeSpec would concatenate noisy descriptions. USE FOR: reviewing or authoring routes.tsp and routes.generated.tsp files under specification/ai-foundry/data-plane/Foundry/src/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
+  version: "1.6.1"
+description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice, replaces documentation-required suppressions with generated documentation, and uses description override extensions when TypeSpec would concatenate noisy descriptions. USE FOR: reviewing or authoring routes.tsp and routes.generated.tsp files under specification/ai-foundry/data-plane/Foundry/src/, including nested OpenAI routes under src/openai/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
 ---
 
 # Foundry Route Documentation Check
@@ -20,6 +20,8 @@ This skill applies **only** to files matching:
 specification/ai-foundry/data-plane/Foundry/src/**/routes.tsp
 specification/ai-foundry/data-plane/Foundry/src/**/routes.generated.tsp
 ```
+
+OpenAI route files are nested under `specification/ai-foundry/data-plane/Foundry/src/openai/<area>/`.
 
 It does **not** apply to:
 
@@ -180,7 +182,7 @@ Report results as a markdown table:
 | File | Operation | Rule | Finding |
 | ---- | --------- | ---- | ------- |
 | src/connections/routes.tsp | get | FDOC-002 | Missing `@summary()` decorator |
-| src/openai-chat/routes.generated.tsp | createChatCompletion | FDOC-004 | `@summary()` uses third-person voice |
+| src/openai/chat/routes.generated.tsp | createChatCompletion | FDOC-004 | `@summary()` uses third-person voice |
 ```
 
 If all operations pass, report: ✅ All Foundry route operations are fully documented.

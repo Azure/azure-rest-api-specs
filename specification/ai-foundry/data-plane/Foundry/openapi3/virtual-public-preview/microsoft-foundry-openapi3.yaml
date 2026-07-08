@@ -9477,6 +9477,7 @@ paths:
           headers:
             Transfer-Encoding:
               required: false
+              description: The TransferEncoding header.
               schema:
                 type: string
           content:
@@ -24807,7 +24808,7 @@ paths:
             encoding:
               session:
                 contentType: application/json
-        description: The multipart request body.
+        description: The request body.
       x-oaiMeta:
         name: Create call
         group: realtime
@@ -52465,6 +52466,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -52575,7 +52577,9 @@ components:
             - type: string
             - type: 'null'
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         tools:
           type: array
           items:
@@ -52787,7 +52791,9 @@ components:
         verbosity:
           $ref: '#/components/schemas/OpenAI.Verbosity'
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         max_completion_tokens:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -53702,7 +53708,9 @@ components:
       type: object
       properties:
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -53918,7 +53926,9 @@ components:
       type: object
       properties:
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -54900,7 +54910,9 @@ components:
           description: The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
           x-oaiTypeLabel: string
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         instructions:
           anyOf:
             - type: string
@@ -56610,7 +56622,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
     OpenAI.EvalGraderStringCheck:
       type: object
       required:
@@ -56917,6 +56931,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+          description: Optional reasoning effort parameter. This is a query parameter used to select responses.
         temperature:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -60512,6 +60527,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -61999,6 +62015,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -63762,6 +63779,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -63928,6 +63946,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -65453,7 +65472,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.AssistantSupportedModels'
           description: ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models) for descriptions of them.
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         name:
           anyOf:
             - type: string
@@ -66955,6 +66976,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -68588,7 +68610,9 @@ components:
       type: object
       properties:
         effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         summary:
           anyOf:
             - type: string
@@ -68621,6 +68645,7 @@ components:
     OpenAI.ReasoningEffort:
       anyOf:
         - type: string
+        - type: string
           enum:
             - none
             - minimal
@@ -68628,7 +68653,6 @@ components:
             - medium
             - high
             - xhigh
-        - type: 'null'
       description: |-
         Constrains effort on reasoning for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
