@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.IoTOperations management service.",
-    "version": "2025-07-01-preview",
+    "version": "2026-07-01",
     "description": "Microsoft.IoTOperations Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -77,6 +77,9 @@
     },
     {
       "name": "AkriConnector"
+    },
+    {
+      "name": "AkriService"
     }
   ],
   "paths": {
@@ -89,20 +92,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -125,10 +128,10 @@
         "description": "List InstanceResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -141,7 +144,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -164,13 +167,13 @@
         "description": "List InstanceResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -183,7 +186,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -206,13 +209,13 @@
         "description": "Get a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -235,7 +238,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -253,13 +256,13 @@
         "description": "Create a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -308,7 +311,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -330,13 +333,13 @@
         "description": "Update a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -368,7 +371,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -386,13 +389,13 @@
         "description": "Delete a InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -426,7 +429,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -450,13 +453,13 @@
         "description": "List AkriConnectorTemplateResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -479,7 +482,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -502,13 +505,13 @@
         "description": "Get a AkriConnectorTemplateResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -541,7 +544,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -562,13 +565,13 @@
         "description": "Create a AkriConnectorTemplateResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -627,7 +630,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -649,13 +652,13 @@
         "description": "Delete a AkriConnectorTemplateResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -699,7 +702,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -723,13 +726,13 @@
         "description": "List AkriConnectorResource resources by AkriConnectorTemplateResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -762,7 +765,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -785,13 +788,13 @@
         "description": "Get a AkriConnectorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -834,7 +837,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -852,13 +855,13 @@
         "description": "Create a AkriConnectorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -927,7 +930,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -949,13 +952,13 @@
         "description": "Delete a AkriConnectorResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1009,13 +1012,283 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "AkriConnector_Delete_MaximumSet": {
             "$ref": "./examples/AkriConnector_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriServices": {
+      "get": {
+        "operationId": "AkriService_ListByInstanceResource",
+        "tags": [
+          "AkriService"
+        ],
+        "description": "List AkriServiceResource resources by InstanceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AkriServiceResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AkriService_ListByInstanceResource_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/AkriService_ListByInstanceResource_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}/akriServices/{akriServiceName}": {
+      "get": {
+        "operationId": "AkriService_Get",
+        "tags": [
+          "AkriService"
+        ],
+        "description": "Get a AkriServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriServiceName",
+            "in": "path",
+            "description": "Name of AkriService resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AkriServiceResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AkriService_Get_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/AkriService_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AkriService_CreateOrUpdate",
+        "tags": [
+          "AkriService"
+        ],
+        "description": "Create a AkriServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriServiceName",
+            "in": "path",
+            "description": "Name of AkriService resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AkriServiceResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AkriServiceResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AkriServiceResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AkriServiceResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AkriServiceResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AkriService_CreateOrUpdate_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/AkriService_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AkriService_Delete",
+        "tags": [
+          "AkriService"
+        ],
+        "description": "Delete a AkriServiceResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "description": "Name of instance.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          },
+          {
+            "name": "akriServiceName",
+            "in": "path",
+            "description": "Name of AkriService resource.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9][a-z0-9-]*[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AkriService_Delete_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/AkriService_Delete_MaximumSet_Gen.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1033,13 +1306,13 @@
         "description": "List BrokerResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1062,7 +1335,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1085,13 +1358,13 @@
         "description": "Get a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1124,7 +1397,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1142,13 +1415,13 @@
         "description": "Create a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1207,7 +1480,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1238,13 +1511,13 @@
         "description": "Delete a BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1288,7 +1561,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1312,13 +1585,13 @@
         "description": "List BrokerAuthenticationResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1351,7 +1624,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1374,13 +1647,13 @@
         "description": "Get a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1423,7 +1696,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1441,13 +1714,13 @@
         "description": "Create a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1516,7 +1789,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1541,13 +1814,13 @@
         "description": "Delete a BrokerAuthenticationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1601,7 +1874,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1625,13 +1898,13 @@
         "description": "List BrokerAuthorizationResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1664,7 +1937,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1687,13 +1960,13 @@
         "description": "Get a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1736,7 +2009,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1754,13 +2027,13 @@
         "description": "Create a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1829,7 +2102,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1857,13 +2130,13 @@
         "description": "Delete a BrokerAuthorizationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1917,7 +2190,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1941,13 +2214,13 @@
         "description": "List BrokerListenerResource resources by BrokerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -1980,7 +2253,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2003,13 +2276,13 @@
         "description": "Get a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2052,7 +2325,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2070,13 +2343,13 @@
         "description": "Create a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2145,7 +2418,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2173,13 +2446,13 @@
         "description": "Delete a BrokerListenerResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2233,7 +2506,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2257,13 +2530,13 @@
         "description": "List DataflowEndpointResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2286,7 +2559,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2309,13 +2582,13 @@
         "description": "Get a DataflowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2348,7 +2621,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2366,13 +2639,13 @@
         "description": "Create a DataflowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2431,7 +2704,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2480,13 +2753,13 @@
         "description": "Delete a DataflowEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2530,7 +2803,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2554,13 +2827,13 @@
         "description": "List DataflowProfileResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2583,7 +2856,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2606,13 +2879,13 @@
         "description": "Get a DataflowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2645,7 +2918,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2663,13 +2936,13 @@
         "description": "Create a DataflowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2728,7 +3001,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2756,13 +3029,13 @@
         "description": "Delete a DataflowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2806,7 +3079,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2830,13 +3103,13 @@
         "description": "List DataflowGraphResource resources by DataflowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2869,7 +3142,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2892,13 +3165,13 @@
         "description": "Get a DataflowGraphResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -2941,7 +3214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2959,13 +3232,13 @@
         "description": "Create a DataflowGraphResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3034,7 +3307,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3056,13 +3329,13 @@
         "description": "Delete a DataflowGraphResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3116,7 +3389,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3140,13 +3413,13 @@
         "description": "List DataflowResource resources by DataflowProfileResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3179,7 +3452,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3202,13 +3475,13 @@
         "description": "Get a DataflowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3251,7 +3524,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3269,13 +3542,13 @@
         "description": "Create a DataflowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3344,7 +3617,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3381,13 +3654,13 @@
         "description": "Delete a DataflowResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3441,7 +3714,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3465,13 +3738,13 @@
         "description": "List RegistryEndpointResource resources by InstanceResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3494,7 +3767,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3517,13 +3790,13 @@
         "description": "Get a RegistryEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3556,7 +3829,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3574,13 +3847,13 @@
         "description": "Create a RegistryEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3639,7 +3912,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3661,13 +3934,13 @@
         "description": "Delete a RegistryEndpointResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "instanceName",
@@ -3711,7 +3984,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -3785,6 +4058,26 @@
         }
       }
     },
+    "AkriConnectorAllocatedDevice": {
+      "type": "object",
+      "description": "AkriConnector allocated device.",
+      "properties": {
+        "deviceInboundEndpointName": {
+          "type": "string",
+          "description": "The name of the inbound endpoint for the device.",
+          "readOnly": true
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "The name of the device.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "deviceInboundEndpointName",
+        "deviceName"
+      ]
+    },
     "AkriConnectorProperties": {
       "type": "object",
       "description": "AkriConnector properties.",
@@ -3792,6 +4085,61 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "allocatedDevices": {
+          "type": "array",
+          "description": "The allocated devices for the connector.",
+          "items": {
+            "$ref": "#/definitions/AkriConnectorAllocatedDevice"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "deviceInboundEndpointName",
+            "deviceName"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/AkriConnectorStatus",
+          "description": "The status for the connector.",
+          "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
           "readOnly": true
         }
       }
@@ -3815,7 +4163,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -3839,6 +4187,17 @@
       "required": [
         "value"
       ]
+    },
+    "AkriConnectorStatus": {
+      "type": "object",
+      "description": "AkriConnector status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the AkriConnector.",
+          "readOnly": true
+        }
+      }
     },
     "AkriConnectorTemplateAioMetadata": {
       "type": "object",
@@ -3908,39 +4267,13 @@
       ],
       "x-ms-discriminator-value": "Bucketized"
     },
-    "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs": {
-      "type": "object",
-      "description": "AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs properties.",
-      "properties": {
-        "defaultDatasetConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for datasets."
-        },
-        "defaultEventsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for events."
-        },
-        "defaultProcessControlConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for process control."
-        },
-        "defaultStreamsConfigSchemaRef": {
-          "type": "string",
-          "description": "The default configuration schema reference for streams."
-        },
-        "additionalConfigSchemaRef": {
-          "type": "string",
-          "description": "The additional configuration schema reference."
-        }
-      }
-    },
     "AkriConnectorTemplateDeviceInboundEndpointType": {
       "type": "object",
       "description": "AkriConnectorTemplateDeviceInboundEndpointType properties.",
       "properties": {
-        "description": {
+        "displayName": {
           "type": "string",
-          "description": "A description of the device inbound endpoint."
+          "description": "The display name of the device inbound endpoint."
         },
         "endpointType": {
           "$ref": "#/definitions/NonEmptyString",
@@ -3949,10 +4282,6 @@
         "version": {
           "$ref": "#/definitions/NonEmptyString",
           "description": "The version of the device inbound endpoint."
-        },
-        "configurationSchemaRefs": {
-          "$ref": "#/definitions/AkriConnectorTemplateDeviceInboundEndpointConfigurationSchemaRefs",
-          "description": "The configuration schema references for the device inbound endpoint."
         }
       },
       "required": [
@@ -3972,276 +4301,21 @@
         "logs"
       ]
     },
-    "AkriConnectorTemplateHelmAdvancedConfiguration": {
+    "AkriConnectorTemplateExecAction": {
       "type": "object",
-      "description": "AkriConnectorTemplateHelmAdvancedConfiguration properties.",
+      "description": "AkriConnectorTemplateExecAction properties. Describes a command to execute in a container.",
       "properties": {
-        "delete": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmDeleteConfiguration",
-          "description": "Delete operation configuration for the Helm chart."
-        },
-        "install": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmInstallConfiguration",
-          "description": "Install operation configuration for the Helm chart."
-        },
-        "upgrade": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmUpgradeConfiguration",
-          "description": "Upgrade operation configuration for the Helm chart."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmAuthSecretRef": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmAuthSecretRef properties.",
-      "properties": {
-        "secretRef": {
-          "type": "string",
-          "description": "The name of the secret."
-        },
-        "passwordKey": {
-          "type": "string",
-          "description": "The key of the password in the secret."
-        },
-        "usernameKey": {
-          "type": "string",
-          "description": "The key of the username in the secret."
-        }
-      },
-      "required": [
-        "secretRef",
-        "passwordKey",
-        "usernameKey"
-      ]
-    },
-    "AkriConnectorTemplateHelmConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmConfiguration properties.",
-      "properties": {
-        "helmConfigurationSettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmConfigurationSettings",
-          "description": "The Helm configuration settings."
-        }
-      },
-      "required": [
-        "helmConfigurationSettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateRuntimeConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "HelmConfiguration"
-    },
-    "AkriConnectorTemplateHelmConfigurationSettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmConfiguration properties.",
-      "properties": {
-        "registrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings",
-          "description": "The registry settings for the helm chart to be used."
-        },
-        "releaseName": {
-          "type": "string",
-          "description": "The release name of the Helm chart."
-        },
-        "repositoryName": {
-          "type": "string",
-          "description": "The name of the repository"
-        },
-        "version": {
-          "type": "string",
-          "description": "The version of the Helm chart."
-        },
-        "advancedConfiguration": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmAdvancedConfiguration",
-          "description": "Advanced configuration for the Helm chart.\nInstall, upgrade, and uninstall options for the helm chart such as atomic, wait, timeout, `wait_for_jobs`, and `disable_hooks`."
-        },
-        "values": {
-          "type": "object",
-          "description": "A map of values to pass to the helm chart.",
-          "additionalProperties": {
+        "command": {
+          "type": "array",
+          "description": "The command to execute inside the container. Exit status of 0 is treated as healthy, non-zero is unhealthy.",
+          "items": {
             "type": "string"
           }
         }
       },
       "required": [
-        "releaseName",
-        "repositoryName",
-        "version"
+        "command"
       ]
-    },
-    "AkriConnectorTemplateHelmContainerRegistry": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmContainerRegistry properties.",
-      "properties": {
-        "containerRegistrySettings": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmContainerRegistrySettings",
-          "description": "The registry settings for the container registry."
-        }
-      },
-      "required": [
-        "containerRegistrySettings"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "ContainerRegistry"
-    },
-    "AkriConnectorTemplateHelmContainerRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmContainerRegistrySettings properties.",
-      "properties": {
-        "registry": {
-          "type": "string",
-          "description": "The registry to use for the Helm chart."
-        },
-        "authSecretRef": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmAuthSecretRef",
-          "description": "Optional reference to a secret in the same namespace to use for pulling the Helm chart."
-        }
-      },
-      "required": [
-        "registry"
-      ]
-    },
-    "AkriConnectorTemplateHelmDeleteConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmDeleteConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmInstallConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmInstallConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
-    },
-    "AkriConnectorTemplateHelmRegistryEndpointRef": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmRegistryEndpointRef properties.",
-      "properties": {
-        "registryEndpointRef": {
-          "type": "string",
-          "description": "The name of the registry endpoint."
-        }
-      },
-      "required": [
-        "registryEndpointRef"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettings"
-        }
-      ],
-      "x-ms-discriminator-value": "RegistryEndpointRef"
-    },
-    "AkriConnectorTemplateHelmRegistrySettings": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmRegistrySettings properties.",
-      "properties": {
-        "registrySettingsType": {
-          "$ref": "#/definitions/AkriConnectorTemplateHelmRegistrySettingsType"
-        }
-      },
-      "discriminator": "registrySettingsType",
-      "required": [
-        "registrySettingsType"
-      ]
-    },
-    "AkriConnectorTemplateHelmRegistrySettingsType": {
-      "type": "string",
-      "description": "AkriConnectorTemplateHelmRegistrySettingsType values.",
-      "enum": [
-        "RegistryEndpointRef",
-        "ContainerRegistry"
-      ],
-      "x-ms-enum": {
-        "name": "AkriConnectorTemplateHelmRegistrySettingsType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RegistryEndpointRef",
-            "value": "RegistryEndpointRef",
-            "description": "A Registry Endpoint reference."
-          },
-          {
-            "name": "ContainerRegistry",
-            "value": "ContainerRegistry",
-            "description": "A Container Registry reference."
-          }
-        ]
-      }
-    },
-    "AkriConnectorTemplateHelmUpgradeConfiguration": {
-      "type": "object",
-      "description": "AkriConnectorTemplateHelmUpgradeConfiguration properties.",
-      "properties": {
-        "timeout": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Time to wait for any individual Kubernetes operation (like `Jobs` for hooks)."
-        },
-        "waitForJobs": {
-          "type": "boolean",
-          "description": "If set, the operation will wait for jobs to complete before marking the release as successful."
-        },
-        "atomic": {
-          "type": "boolean",
-          "description": "If set, the operation will be atomic. If the operation fails, all changes will be rolled back."
-        },
-        "disableHooks": {
-          "type": "boolean",
-          "description": "Disable pre/post upgrade hooks for the operation."
-        },
-        "wait": {
-          "type": "boolean",
-          "description": "If set, the operation will wait until all Pods, PVCs, Services, and minimum number of Pods of a `Deployment`, `StatefulSet`, or `ReplicaSet` are in a ready state before marking the release as successful."
-        }
-      }
     },
     "AkriConnectorTemplateManagedConfiguration": {
       "type": "object",
@@ -4398,12 +4472,89 @@
         "mqttConnectionConfiguration": {
           "$ref": "#/definitions/AkriConnectorsMqttConnectionConfiguration",
           "description": "Mqtt connection configuration settings."
+        },
+        "connectorMetadataRef": {
+          "type": "string",
+          "description": "A reference to a connector metadata document reference in a container registry."
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
         "runtimeConfiguration",
         "deviceInboundEndpointTypes"
       ]
+    },
+    "AkriConnectorTemplateReadinessProbe": {
+      "type": "object",
+      "description": "AkriConnectorTemplateReadinessProbe properties. Defines a readiness probe for the connector container.",
+      "properties": {
+        "exec": {
+          "$ref": "#/definitions/AkriConnectorTemplateExecAction",
+          "description": "Exec specifies a command to execute in the container."
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive failures for the probe to be considered failed after having succeeded."
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after the container has started before the probe is initiated."
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "How often (in seconds) to perform the probe."
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Minimum consecutive successes for the probe to be considered successful after having failed."
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of seconds after which the probe times out."
+        }
+      }
     },
     "AkriConnectorTemplateResource": {
       "type": "object",
@@ -4424,7 +4575,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4467,18 +4618,12 @@
       "type": "string",
       "description": "Runtime configuration types.",
       "enum": [
-        "HelmConfiguration",
         "ManagedConfiguration"
       ],
       "x-ms-enum": {
         "name": "AkriConnectorTemplateRuntimeConfigurationType",
         "modelAsString": true,
         "values": [
-          {
-            "name": "HelmConfiguration",
-            "value": "HelmConfiguration",
-            "description": "Helm Configuration Type."
-          },
           {
             "name": "ManagedConfiguration",
             "value": "ManagedConfiguration",
@@ -4517,6 +4662,10 @@
         "imagePullPolicy": {
           "$ref": "#/definitions/AkriConnectorsImagePullPolicy",
           "description": "The pull policy of the image."
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/AkriConnectorTemplateReadinessProbe",
+          "description": "Optional readiness probe for the connector container. When set, the operator injects this into the pod spec and uses the pod's `Ready` condition for health reporting instead of crash-based detection."
         },
         "replicas": {
           "type": "integer",
@@ -4942,6 +5091,77 @@
         ]
       }
     },
+    "AkriServiceProperties": {
+      "type": "object",
+      "description": "AkriService properties.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/AkriServiceStatus",
+          "description": "The status for the service.",
+          "readOnly": true
+        }
+      }
+    },
+    "AkriServiceResource": {
+      "type": "object",
+      "description": "AkriService resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AkriServiceProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "Edge location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AkriServiceResourceListResult": {
+      "type": "object",
+      "description": "The response of a AkriServiceResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AkriServiceResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AkriServiceResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AkriServiceStatus": {
+      "type": "object",
+      "description": "AkriService status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the AkriService.",
+          "readOnly": true
+        }
+      }
+    },
     "AnonymousMethod": {
       "type": "string",
       "description": "x509 Certificate Method",
@@ -5153,6 +5373,44 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -5178,7 +5436,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5366,6 +5624,44 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -5391,7 +5687,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5491,6 +5787,44 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -5516,7 +5850,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5581,10 +5915,6 @@
       "type": "object",
       "description": "Disk persistence configuration.\n\nWhen persistence is enabled, certain items (non-performance-critical data) selected for persistence will reside only on disk. Below are the affected items: \n\n- Retained messages will be stored on disk only. \n- WILL messages will be stored on disk only. \n- DSS key/value pairs will be stored on disk only, except for performance-critical items like timed locks, which remain in both disk and memory for improved performance.\n\nOptional. Everything is in-memory if not set. \nNote: if configured, all MQTT session states are written to disk.",
       "properties": {
-        "dynamicSettings": {
-          "$ref": "#/definitions/BrokerPersistenceDynamicSettings",
-          "description": "Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. \nOptionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'."
-        },
         "maxSize": {
           "type": "string",
           "description": "The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.",
@@ -5620,24 +5950,6 @@
       },
       "required": [
         "maxSize"
-      ]
-    },
-    "BrokerPersistenceDynamicSettings": {
-      "type": "object",
-      "description": "Dynamic settings of the persistence.",
-      "properties": {
-        "userPropertyKey": {
-          "type": "string",
-          "description": "The user property key to enable persistence."
-        },
-        "userPropertyValue": {
-          "type": "string",
-          "description": "The user property value to enable persistence."
-        }
-      },
-      "required": [
-        "userPropertyKey",
-        "userPropertyValue"
       ]
     },
     "BrokerPersistenceEncryption": {
@@ -5723,6 +6035,10 @@
             "create"
           ]
         },
+        "highPriorityMessagesBackpressureHandling": {
+          "$ref": "#/definitions/HighPriorityMessagesBackpressureHandling",
+          "description": "  Handling of high-priority messages in the event that regular-priority messages are being backpressured.\n\n  When set to \"Accept\", the broker continues to accept high-priority messages even while regular-priority messages are rejected due to backpressure.\n\n  When set to \"Reject\", backpressure also affects high-priority messages.\n\n  Defaults to \"Accept\"."
+        },
         "memoryProfile": {
           "type": "string",
           "description": "Memory profile of Broker.",
@@ -5772,6 +6088,49 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/BrokerStatus",
+          "description": "The status for the broker.",
+          "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       }
     },
@@ -5818,7 +6177,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -6080,6 +6439,17 @@
         }
       }
     },
+    "BrokerStatus": {
+      "type": "object",
+      "description": "BrokerStatus status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the Broker.",
+          "readOnly": true
+        }
+      }
+    },
     "BrokerSubscriberQueueCustomPolicy": {
       "type": "object",
       "description": "Custom Subscriber Queue Policy Properties.",
@@ -6113,13 +6483,6 @@
         "dynamic": {
           "$ref": "#/definitions/BrokerSubscriberQueueDynamic",
           "description": "Controls if MQTT clients can request for disk persistence via `MQTTv5` user property. Works in addition to other groups (logical OR)."
-        },
-        "topics": {
-          "type": "array",
-          "description": "List of topics under which messages would be persisted to disk for each subscriber. Wildcards # and + supported.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -6574,6 +6937,68 @@
         }
       }
     },
+    "DataflowDestinationAddIfNotPresentHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Add if not present HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddIfNotPresent"
+    },
+    "DataflowDestinationAddOrReplaceHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Add or Replace HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add or replace."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add or replace."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddOrReplace"
+    },
+    "DataflowDestinationHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Header Action properties",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/DataflowHeaderActionType",
+          "description": "The type of header operation to perform."
+        }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
+    },
     "DataflowDestinationOperationSettings": {
       "type": "object",
       "description": "Dataflow Destination Operation properties",
@@ -6585,12 +7010,41 @@
         "dataDestination": {
           "$ref": "#/definitions/NonEmptyString",
           "description": "Destination location, can be a topic or table name. Supports dynamic values with $topic, $systemProperties, $userProperties, $payload, $context, and $subscription."
+        },
+        "headers": {
+          "type": "array",
+          "description": "Headers for the output data.",
+          "items": {
+            "$ref": "#/definitions/DataflowDestinationHeaderAction"
+          },
+          "x-ms-identifiers": [
+            "actionType"
+          ]
         }
       },
       "required": [
         "endpointRef",
         "dataDestination"
       ]
+    },
+    "DataflowDestinationRemoveHeaderAction": {
+      "type": "object",
+      "description": "Dataflow Destination Remove HeaderAction properties",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to remove."
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "Remove"
     },
     "DataflowEndpointAuthenticationAccessToken": {
       "type": "object",
@@ -7524,6 +7978,44 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -7549,7 +8041,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -7654,6 +8146,98 @@
         }
       }
     },
+    "DataflowGraphDestinationAddIfNotPresentHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Add if not present HeaderAction properties.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddIfNotPresent"
+    },
+    "DataflowGraphDestinationAddOrReplaceHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Add or Replace HeaderAction properties.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The name of the header to add or replace."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the header to add or replace."
+        }
+      },
+      "required": [
+        "key",
+        "value"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "AddOrReplace"
+    },
+    "DataflowGraphDestinationHeaderAction": {
+      "type": "object",
+      "description": "DataflowGraph Destination Header Action.",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderActionType",
+          "description": "The type of header operation to perform."
+        }
+      },
+      "discriminator": "actionType",
+      "required": [
+        "actionType"
+      ]
+    },
+    "DataflowGraphDestinationHeaderActionType": {
+      "type": "string",
+      "description": "DataflowGraph Destination Header Action Types.",
+      "enum": [
+        "AddIfNotPresent",
+        "Remove",
+        "AddOrReplace"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowGraphDestinationHeaderActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddIfNotPresent",
+            "value": "AddIfNotPresent",
+            "description": "Add if not present type."
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove type."
+          },
+          {
+            "name": "AddOrReplace",
+            "value": "AddOrReplace",
+            "description": "Add or Replace type."
+          }
+        ]
+      }
+    },
     "DataflowGraphDestinationNode": {
       "type": "object",
       "description": "DataflowGraph destination node properties.",
@@ -7685,9 +8269,15 @@
           "type": "string",
           "description": "Data destination at the endpoint."
         },
-        "outputSchemaSettings": {
-          "$ref": "#/definitions/DataflowGraphDestinationSchemaSettings",
-          "description": "Output schema settings."
+        "headers": {
+          "type": "array",
+          "description": "Headers for the output data.",
+          "items": {
+            "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+          },
+          "x-ms-identifiers": [
+            "actionType"
+          ]
         }
       },
       "required": [
@@ -7695,46 +8285,24 @@
         "dataDestination"
       ]
     },
-    "DataflowGraphDestinationSchemaSerializationFormat": {
-      "type": "string",
-      "description": "Serialization format for dataflow graph.",
-      "enum": [
-        "Parquet",
-        "Delta"
-      ],
-      "x-ms-enum": {
-        "name": "DataflowGraphDestinationSchemaSerializationFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Parquet",
-            "value": "Parquet",
-            "description": "Parquet serialization format."
-          },
-          {
-            "name": "Delta",
-            "value": "Delta",
-            "description": "Delta serialization format."
-          }
-        ]
-      }
-    },
-    "DataflowGraphDestinationSchemaSettings": {
+    "DataflowGraphDestinationRemoveHeaderAction": {
       "type": "object",
-      "description": "DataflowGraph destination node output schema settings.",
+      "description": "DataflowGraph Destination Remove HeaderAction properties.",
       "properties": {
-        "serializationFormat": {
-          "$ref": "#/definitions/DataflowGraphDestinationSchemaSerializationFormat",
-          "description": "The format of the output data."
-        },
-        "schemaRef": {
+        "key": {
           "type": "string",
-          "description": "Reference to the schema that describes the output of the transformation."
+          "description": "The name of the header to remove."
         }
       },
       "required": [
-        "serializationFormat"
-      ]
+        "key"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataflowGraphDestinationHeaderAction"
+        }
+      ],
+      "x-ms-discriminator-value": "Remove"
     },
     "DataflowGraphGraphNode": {
       "type": "object",
@@ -7923,6 +8491,49 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the dataflow graph.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DataflowGraphStatus",
+          "description": "The status for the dataflow graph.",
+          "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -7949,7 +8560,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8017,6 +8628,47 @@
         "endpointRef",
         "dataSources"
       ]
+    },
+    "DataflowGraphStatus": {
+      "type": "object",
+      "description": "DataflowGraph status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the DataflowGraph.",
+          "readOnly": true
+        }
+      }
+    },
+    "DataflowHeaderActionType": {
+      "type": "string",
+      "description": "Dataflow Destination Header Action Types",
+      "enum": [
+        "AddIfNotPresent",
+        "Remove",
+        "AddOrReplace"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowHeaderActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AddIfNotPresent",
+            "value": "AddIfNotPresent",
+            "description": "Add if not present type"
+          },
+          {
+            "name": "Remove",
+            "value": "Remove",
+            "description": "Remove type"
+          },
+          {
+            "name": "AddOrReplace",
+            "value": "AddOrReplace",
+            "description": "Add or Replace type"
+          }
+        ]
+      }
     },
     "DataflowMappingType": {
       "type": "string",
@@ -8211,6 +8863,49 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DataflowProfileStatus",
+          "description": "The status for the dataflow profile.",
+          "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       }
     },
@@ -8233,7 +8928,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8257,6 +8952,17 @@
       "required": [
         "value"
       ]
+    },
+    "DataflowProfileStatus": {
+      "type": "object",
+      "description": "DataflowProfile status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the DataflowProfile.",
+          "readOnly": true
+        }
+      }
     },
     "DataflowProperties": {
       "type": "object",
@@ -8303,6 +9009,49 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/DataflowStatus",
+          "description": "The status for the dataflow.",
+          "readOnly": true
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -8328,7 +9077,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -8400,6 +9149,17 @@
         "endpointRef",
         "dataSources"
       ]
+    },
+    "DataflowStatus": {
+      "type": "object",
+      "description": "DataflowStatus status.",
+      "properties": {
+        "healthState": {
+          "$ref": "#/definitions/ResourceHealthStatus",
+          "description": "The health state of the Dataflow.",
+          "readOnly": true
+        }
+      }
     },
     "DiagnosticsLogs": {
       "type": "object",
@@ -8601,6 +9361,30 @@
         }
       }
     },
+    "HighPriorityMessagesBackpressureHandling": {
+      "type": "string",
+      "description": "Handling of high-priority messages during backpressure state.",
+      "enum": [
+        "Accept",
+        "Reject"
+      ],
+      "x-ms-enum": {
+        "name": "HighPriorityMessagesBackpressureHandling",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accept",
+            "value": "Accept",
+            "description": "When the broker rejects regular-priority messages due to backpressure, it continues to accept high-priority messages."
+          },
+          {
+            "name": "Reject",
+            "value": "Reject",
+            "description": "When the broker rejects regular-priority messages due to backpressure, it also rejects high-priority messages."
+          }
+        ]
+      }
+    },
     "InstanceFeature": {
       "type": "object",
       "description": "The features of the AIO Instance.",
@@ -8660,7 +9444,7 @@
           }
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       }
@@ -8701,6 +9485,44 @@
         "adrNamespaceRef": {
           "$ref": "#/definitions/AzureDeviceRegistryNamespaceRef",
           "description": "The Azure Device Registry Namespace used by Assets, Discovered Assets and devices"
+        },
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -8724,7 +9546,7 @@
           ]
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -8733,7 +9555,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -9441,9 +10263,51 @@
           "description": "The status of the last operation.",
           "readOnly": true
         },
-        "trustSettings": {
-          "$ref": "#/definitions/RegistryEndpointTrustedSettings",
-          "description": "Trust settings for the registry endpoint"
+        "healthState": {
+          "type": "string",
+          "description": "The health state of the resource.",
+          "default": "Unknown",
+          "enum": [
+            "Available",
+            "Degraded",
+            "Unavailable",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceHealthState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Available",
+                "value": "Available",
+                "description": "Resource is Available and functioning as expected."
+              },
+              {
+                "name": "Degraded",
+                "value": "Degraded",
+                "description": "Resource health is degraded."
+              },
+              {
+                "name": "Unavailable",
+                "value": "Unavailable",
+                "description": "Resource is not functioning as expected."
+              },
+              {
+                "name": "Unknown",
+                "value": "Unknown",
+                "description": "Resource state is unknown."
+              }
+            ]
+          },
+          "readOnly": true
+        },
+        "codeSigningCas": {
+          "type": "array",
+          "description": "The signing certificate authorities used by artifacts in the registry endpoint",
+          "items": {
+            "$ref": "#/definitions/RegistryEndpointTrustedSigningKey"
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -9470,7 +10334,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -9523,19 +10387,6 @@
           "description": "Audience of the service to authenticate against. Optional; defaults to the audience for Service host configuration."
         }
       }
-    },
-    "RegistryEndpointTrustedSettings": {
-      "type": "object",
-      "description": "RegistryEndpointTrustedSettings properties",
-      "properties": {
-        "trustedSigningKeys": {
-          "$ref": "#/definitions/RegistryEndpointTrustedSigningKey",
-          "description": "The trust properties for the registry endpoint."
-        }
-      },
-      "required": [
-        "trustedSigningKeys"
-      ]
     },
     "RegistryEndpointTrustedSigningKey": {
       "type": "object",
@@ -9653,6 +10504,73 @@
         "clientId",
         "tenantId"
       ]
+    },
+    "ResourceHealthState": {
+      "type": "string",
+      "description": "The health state of the resource.",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Unavailable",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceHealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Resource is Available and functioning as expected."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Resource health is degraded."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "Resource is not functioning as expected."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Resource state is unknown."
+          }
+        ]
+      }
+    },
+    "ResourceHealthStatus": {
+      "type": "object",
+      "description": "Represents the health state of a resource.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ResourceHealthState",
+          "description": "The high-level health status of the resource.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "description": "The timestamp (RFC3339) when the health status last changed.",
+          "readOnly": true
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The timestamp (RFC3339) when the health status was last updated, even if the status did not change.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable message describing the last transition.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "string",
+          "description": "Unique, CamelCase reason code describing the cause of the last health state transition.",
+          "readOnly": true
+        }
+      }
     },
     "SanForCert": {
       "type": "object",
