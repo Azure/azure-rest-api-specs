@@ -1819,6 +1819,7 @@ interface PageBlob {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
+  @list
   @sharedRoute
   @route("?comp=pagelist")
   getPageRanges is StorageOperationResponseBody<
