@@ -4,6 +4,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-liftr-base";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -109,6 +110,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 interface Instances {
   get is ArmResourceRead<InstanceResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<InstanceResource>;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<InstanceResource, InstanceResourceUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<InstanceResource>;

@@ -78,13 +78,16 @@ interface ServiceDiagnosticSettingsResources {
 }
 
 @@doc(ServiceDiagnosticSettingsResource.name, "");
-@@doc(ServiceDiagnosticSettingsResource.properties,
+@@doc(
+  ServiceDiagnosticSettingsResource.properties,
   "The service diagnostics settings of the resource."
 );
-@@doc(ServiceDiagnosticSettingsResources.createOrUpdate::parameters.resource,
+@@doc(
+  ServiceDiagnosticSettingsResources.createOrUpdate::parameters.resource,
   "Parameters supplied to the operation."
 );
-@@doc(ServiceDiagnosticSettingsResources.update::parameters.properties,
+@@doc(
+  ServiceDiagnosticSettingsResources.update::parameters.properties,
   "Parameters supplied to the operation."
 );
 @@key(Extension.ScopeParameter.scope, "resourceUri");

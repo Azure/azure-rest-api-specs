@@ -3,27 +3,32 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.NotificationHubs;
 
-@@clientName(Microsoft.NotificationHubs,
+@@clientName(
+  Microsoft.NotificationHubs,
   "NotificationHubsManagementClient",
   "javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(NamespaceResourceListParameters.$top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  NamespaceResourceListParameters.$top,
   100,
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(NamespaceResourceListAllParameters.$top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  NamespaceResourceListAllParameters.$top,
   100,
   "javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(NotificationHubResourcesListParameters.$top,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  NotificationHubResourcesListParameters.$top,
   100,
   "javascript"
 );
-@@clientName(NamespaceResources.listAll,
+@@clientName(
+  NamespaceResources.listAll,
   "GetNotificationHubNamespaces",
   "csharp"
 );
@@ -32,7 +37,8 @@ using Microsoft.NotificationHubs;
 @@alternateType(ApnsCredentialProperties.endpoint, url, "csharp");
 @@clientName(ApnsCredentialProperties.thumbprint, "ThumbprintString", "csharp");
 @@clientName(BaiduCredential, "NotificationHubBaiduCredential", "csharp");
-@@clientName(BaiduCredentialProperties.baiduEndPoint,
+@@clientName(
+  BaiduCredentialProperties.baiduEndPoint,
   "BaiduEndpoint",
   "csharp"
 );
@@ -43,23 +49,28 @@ using Microsoft.NotificationHubs;
 @@clientName(WnsCredential, "NotificationHubWnsCredential", "csharp");
 @@alternateType(WnsCredentialProperties.windowsLiveEndpoint, url, "csharp");
 @@clientName(NotificationHubResource, "NotificationHub", "csharp");
-@@clientName(SharedAccessAuthorizationRuleResource,
+@@clientName(
+  SharedAccessAuthorizationRuleResource,
   "NotificationHubAuthorizationRule",
   "csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleProperties.createdTime,
+@@clientName(
+  SharedAccessAuthorizationRuleProperties.createdTime,
   "CreatedOn",
   "csharp"
 );
-@@alternateType(SharedAccessAuthorizationRuleProperties.createdTime,
+@@alternateType(
+  SharedAccessAuthorizationRuleProperties.createdTime,
   utcDateTime,
   "csharp"
 );
-@@clientName(SharedAccessAuthorizationRuleProperties.modifiedTime,
+@@clientName(
+  SharedAccessAuthorizationRuleProperties.modifiedTime,
   "ModifiedOn",
   "csharp"
 );
-@@alternateType(SharedAccessAuthorizationRuleProperties.modifiedTime,
+@@alternateType(
+  SharedAccessAuthorizationRuleProperties.modifiedTime,
   utcDateTime,
   "csharp"
 );
@@ -68,12 +79,14 @@ using Microsoft.NotificationHubs;
 @@clientName(AdmCredential, "NotificationHubAdmCredential", "csharp");
 @@alternateType(AdmCredentialProperties.authTokenUrl, url, "csharp");
 @@clientName(AccessRights, "AuthorizationRuleAccessRightExt", "csharp");
-@@clientName(CheckAvailabilityResult,
+@@clientName(
+  CheckAvailabilityResult,
   "NotificationHubAvailabilityResult",
   "csharp"
 );
 @@usage(CheckAvailabilityResult, Usage.input | Usage.output, "csharp");
-@@clientName(NamespaceListResult,
+@@clientName(
+  NamespaceListResult,
   "NotificationHubNamespaceListResult",
   "csharp"
 );
@@ -81,7 +94,8 @@ using Microsoft.NotificationHubs;
 @@clientName(PnsCredentialsResource, "NotificationHubPnsCredentials", "csharp");
 @@usage(PnsCredentialsResource, Usage.input | Usage.output, "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PnsCredentialsResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PnsCredentialsResource.properties,
   "csharp"
 );
 @@clientName(PolicyKeyResource, "NotificationHubPolicyKey", "csharp");
@@ -92,46 +106,55 @@ using Microsoft.NotificationHubs;
 @@clientName(IpRule.rights, "AccessRights", "csharp");
 @@clientName(NetworkAcls, "NotificationHubNetworkAcls", "csharp");
 @@clientName(PublicInternetAuthorizationRule.rights, "AccessRights", "csharp");
-@@clientName(SharedAccessAuthorizationRuleProperties.rights,
+@@clientName(
+  SharedAccessAuthorizationRuleProperties.rights,
   "AccessRights",
   "csharp"
 );
-@@clientName(PrivateLinkResource,
+@@clientName(
+  PrivateLinkResource,
   "NotificationHubsPrivateLinkResource",
   "csharp"
 );
 @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
-@@clientName(PrivateEndpointConnectionResource,
+@@clientName(
+  PrivateEndpointConnectionResource,
   "NotificationHubPrivateEndpointConnection",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "NotificationHubPrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(NamespaceProperties,
+@@clientName(
+  NamespaceProperties,
   "NotificationHubNamespaceProperties",
   "csharp"
 );
 @@clientName(NamespaceProperties.enabled, "IsEnabled", "csharp");
 @@clientName(NamespaceProperties.critical, "IsCritical", "csharp");
 @@clientName(NamespaceStatus, "NotificationHubNamespaceStatus", "csharp");
-@@clientName(PrivateLinkConnectionStatus,
+@@clientName(
+  PrivateLinkConnectionStatus,
   "NotificationHubPrivateLinkConnectionStatus",
   "csharp"
 );
-@@clientName(PublicNetworkAccess,
+@@clientName(
+  PublicNetworkAccess,
   "NotificationHubPublicNetworkAccess",
   "csharp"
 );
-@@clientName(RegistrationResult,
+@@clientName(
+  RegistrationResult,
   "NotificationHubPubRegistrationResult",
   "csharp"
 );
 @@clientName(ReplicationRegion, "AllowedReplicationRegion", "csharp");
 @@clientName(ReplicationRegion.WestUs2, "WestUS2", "csharp");
 @@alternateType(NamespaceProperties.serviceBusEndpoint, url, "csharp");
-@@clientName(NamespaceProperties.provisioningState,
+@@clientName(
+  NamespaceProperties.provisioningState,
   "OperationProvisioningState",
   "csharp"
 );
@@ -141,13 +164,15 @@ using Microsoft.NotificationHubs;
 @@alternateType(NotificationHubProperties.registrationTtl, duration, "csharp");
 @@clientName(NamespaceProperties.name, "NamespaceName", "csharp");
 @@clientName(DebugSendResult.results, "FailureDescription", "csharp");
-@@clientName(NamespacesOperationGroup.checkAvailability,
+@@clientName(
+  NamespacesOperationGroup.checkAvailability,
   "CheckNotificationHubNamespaceAvailability",
   "csharp"
 );
 @@clientName(IpRule.ipMask, "IPMask", "csharp");
 @@clientName(NetworkAcls.ipRules, "IPRules", "csharp");
-@@alternateType(RemotePrivateEndpointConnection.id,
+@@alternateType(
+  RemotePrivateEndpointConnection.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -155,22 +180,26 @@ using Microsoft.NotificationHubs;
 // Change base type from ProxyResource (ResourceData) to TrackedResource (TrackedResourceData)
 // for C# backward compatibility. The pre-migration SDK had TrackedResourceData as the base with location/tags.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(CheckAvailabilityResult,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  CheckAvailabilityResult,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(PnsCredentialsResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  PnsCredentialsResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(SharedAccessAuthorizationRuleResource,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SharedAccessAuthorizationRuleResource,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(DebugSendResponse,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  DebugSendResponse,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
@@ -196,16 +225,19 @@ model NotificationHubPatchParametersReplacement
   sku?: Sku;
 }
 
-@@alternateType(NotificationHubPatchParameters,
+@@alternateType(
+  NotificationHubPatchParameters,
   NotificationHubPatchParametersReplacement,
   "csharp"
 );
-@@clientName(NotificationHubPatchParametersReplacement,
+@@clientName(
+  NotificationHubPatchParametersReplacement,
   "NotificationHubPatch",
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationHubPatchParametersReplacement.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  NotificationHubPatchParametersReplacement.properties,
   "csharp"
 );
 
@@ -229,15 +261,18 @@ model CheckAvailabilityParametersReplacement
   sku?: Sku;
 }
 
-@@clientName(CheckAvailabilityParameters,
+@@clientName(
+  CheckAvailabilityParameters,
   "NotificationHubAvailabilityContentTemp",
   "csharp"
 );
-@@alternateType(CheckAvailabilityParameters,
+@@alternateType(
+  CheckAvailabilityParameters,
   CheckAvailabilityParametersReplacement,
   "csharp"
 );
-@@clientName(CheckAvailabilityParametersReplacement,
+@@clientName(
+  CheckAvailabilityParametersReplacement,
   "NotificationHubAvailabilityContent",
   "csharp"
 );

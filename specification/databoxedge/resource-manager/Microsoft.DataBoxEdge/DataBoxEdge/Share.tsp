@@ -39,8 +39,10 @@ interface Shares {
   @summary("Creates a new share or updates an existing share on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Share,
-    Response = ArmResourceUpdatedResponse<Share> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Share>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -50,7 +52,10 @@ interface Shares {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     Share,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 

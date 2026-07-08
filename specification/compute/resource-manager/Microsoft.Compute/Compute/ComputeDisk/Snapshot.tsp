@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 using Common;
 
 namespace ComputeDisk;
@@ -56,10 +58,12 @@ interface Snapshots {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     Snapshot,
-    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Snapshot;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Snapshot>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Snapshot;
+        })
   >;
 
   /**
@@ -70,10 +74,12 @@ interface Snapshots {
   update is ComputeCustomPatchAsync<
     Snapshot,
     SnapshotUpdate,
-    Response = ArmResourceUpdatedResponse<Snapshot> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot _: Snapshot;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<Snapshot>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Snapshot> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot _: Snapshot;
+        })
   >;
 
   /**
@@ -117,18 +123,58 @@ interface Snapshots {
     OkResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
+
+  /**
+   * Updates the immutability policy of a snapshot. Sets or extends an unlocked immutability policy with the specified duration and type. If the snapshot already has a locked policy, the request will be rejected. Use updateImmutabilityPolicyLock to lock an immutability policy.
+   */
+  @added(Versions.v2026_03_02)
+  @action("updateImmutabilityPolicy")
+  updateImmutabilityPolicy is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyData,
+    Snapshot,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Snapshot> &
+      ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Locks the immutability policy of a snapshot. Once locked, the policy cannot be reduced or removed until the lock period expires.
+   */
+  @added(Versions.v2026_03_02)
+  @action("updateImmutabilityPolicyLock")
+  updateImmutabilityPolicyLock is ComputeResourceActionAsync<
+    Snapshot,
+    ImmutabilityPolicyLockData,
+    Snapshot,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = Snapshot> &
+      ArmLroLocationHeader<FinalResult = Snapshot> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 }
 
-@@doc(Snapshot.name,
+@@doc(
+  Snapshot.name,
   "The name of the snapshot that is being created. The name can't be changed after the snapshot is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The max name length is 80 characters."
 );
 @@doc(Snapshot.properties, "Snapshot resource properties.");
-@@doc(Snapshots.createOrUpdate::parameters.resource,
+@@doc(
+  Snapshots.createOrUpdate::parameters.resource,
   "Snapshot object supplied in the body of the Put disk operation."
 );
-@@doc(Snapshots.update::parameters.properties,
+@@doc(
+  Snapshots.update::parameters.properties,
   "Snapshot object supplied in the body of the Patch snapshot operation."
 );
-@@doc(Snapshots.grantAccess::parameters.body,
+@@doc(
+  Snapshots.grantAccess::parameters.body,
   "Access data object supplied in the body of the get snapshot access operation."
+);
+@@doc(
+  Snapshots.updateImmutabilityPolicy::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy operation."
+);
+@@doc(
+  Snapshots.updateImmutabilityPolicyLock::parameters.body,
+  "Immutability policy data supplied in the body of the update immutability policy lock operation."
 );

@@ -49,7 +49,69 @@ alias RemediationManagementGroupOps = Azure.ResourceManager.Legacy.ExtensionOper
     @segment("remediations")
     @key
     remediationName: string;
-  }
+  },
+  ResourceName = "PolicyRemediation"
+>;
+
+alias RemediationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.PolicyInsights";
+  },
+  {},
+  {
+    /** The name of the remediation. */
+    @path
+    @segment("remediations")
+    @key
+    remediationName: string;
+  },
+  ResourceName = "PolicyRemediation"
+>;
+
+alias RemediationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the remediation. */
+    @path
+    @segment("remediations")
+    @key
+    remediationName: string;
+  },
+  ResourceName = "PolicyRemediation"
+>;
+
+alias RemediationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+
+    /** Resource ID. */
+    @path(#{ allowReserved: true })
+    @key
+    resourceId: string;
+
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
+    /** The name of the remediation. */
+    @path
+    @segment("remediations")
+    @key
+    remediationName: string;
+  },
+  ErrorType = ErrorResponse,
+  ResourceName = "PolicyRemediation"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -67,8 +129,9 @@ interface Remediations {
    */
   createOrUpdateAtManagementGroup is RemediationManagementGroupOps.CreateOrUpdateSync<
     Remediation,
-    Response = ArmResponse<Remediation> | (CreatedResponse &
-      Body<Remediation>),
+    Response =
+      | ArmResponse<Remediation>
+      | (CreatedResponse & Body<Remediation>),
     ErrorType = ErrorResponse
   >;
 
@@ -105,30 +168,7 @@ interface Remediations {
     },
     ErrorType = ErrorResponse
   >;
-}
-alias RemediationSubscriptionOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.PolicyInsights";
-  },
-  {},
-  {
-    /** The name of the remediation. */
-    @path
-    @segment("remediations")
-    @key
-    remediationName: string;
-  }
->;
-
-@armResourceOperations(#{ omitTags: true })
-interface RemediationSubscriptionOperations {
   /**
    * Gets an existing remediation at subscription scope.
    */
@@ -210,25 +250,7 @@ interface RemediationSubscriptionOperations {
     ArmResponse<Remediation>,
     ErrorType = ErrorResponse
   >;
-}
-alias RemediationResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
-  {
-    /** The name of the remediation. */
-    @path
-    @segment("remediations")
-    @key
-    remediationName: string;
-  }
->;
 
-@armResourceOperations(#{ omitTags: true })
-interface RemediationResourceGroupOperations {
   /**
    * Gets an existing remediation at resource group scope.
    */
@@ -310,31 +332,7 @@ interface RemediationResourceGroupOperations {
     ArmResponse<Remediation>,
     OverrideErrorType = ErrorResponse
   >;
-}
 
-alias RemediationAtResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** Resource ID. */
-    @path(#{ allowReserved: true })
-    @key
-    resourceId: string;
-
-    ...Azure.ResourceManager.Legacy.Provider;
-  },
-  {
-    /** The name of the remediation. */
-    @path
-    @segment("remediations")
-    @key
-    remediationName: string;
-  },
-  ErrorType = ErrorResponse
->;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface RemediationResourceOperations {
   /**
    * Gets an existing remediation at resource scope.
    */
@@ -417,15 +415,19 @@ interface RemediationResourceOperations {
 
 @@doc(Remediation.name, "The name of the remediation.");
 @@doc(Remediation.properties, "Properties for the remediation.");
-@@doc(Remediations.createOrUpdateAtManagementGroup::parameters.resource,
+@@doc(
+  Remediations.createOrUpdateAtManagementGroup::parameters.resource,
   "The remediation parameters."
 );
-@@doc(RemediationSubscriptionOperations.createOrUpdateAtSubscription::parameters.resource,
+@@doc(
+  Remediations.createOrUpdateAtSubscription::parameters.resource,
   "The remediation parameters."
 );
-@@doc(RemediationResourceGroupOperations.createOrUpdateAtResourceGroup::parameters.resource,
+@@doc(
+  Remediations.createOrUpdateAtResourceGroup::parameters.resource,
   "The remediation parameters."
 );
-@@doc(RemediationResourceOperations.createOrUpdateAtResource::parameters.resource,
+@@doc(
+  Remediations.createOrUpdateAtResource::parameters.resource,
   "The remediation parameters."
 );

@@ -38,6 +38,7 @@ import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
 import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -80,6 +81,7 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Storage Rest API operations."
 );

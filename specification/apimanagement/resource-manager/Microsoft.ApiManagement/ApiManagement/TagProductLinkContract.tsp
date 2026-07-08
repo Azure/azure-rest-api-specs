@@ -61,7 +61,8 @@ interface TagProductLinkContractOps
         @minLength(1)
         @maxLength(80)
         productLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagProductLink"
     > {}
 
 @armResourceOperations
@@ -164,7 +165,8 @@ interface WorkspaceTagProductLinkOps
         @minLength(1)
         @maxLength(80)
         productLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagProductLink"
     > {}
 
 @armResourceOperations
@@ -225,15 +227,19 @@ interface WorkspaceTagProductLink {
 
 @@maxLength(TagProductLinkContract.name, 80);
 @@minLength(TagProductLinkContract.name, 1);
-@@doc(TagProductLinkContract.name,
+@@doc(
+  TagProductLinkContract.name,
   "Tag-product link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(TagProductLinkContract.properties,
+@@doc(
+  TagProductLinkContract.properties,
   "Tag-API link entity contract properties."
 );
-@@doc(TagProductLinkContracts.createOrUpdate::parameters.resource,
+@@doc(
+  TagProductLinkContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceTagProductLink.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceTagProductLink.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

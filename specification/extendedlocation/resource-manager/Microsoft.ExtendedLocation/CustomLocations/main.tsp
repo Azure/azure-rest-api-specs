@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./back-compatible.tsp";
 import "./CustomLocation.tsp";
 import "./ResourceSyncRule.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -52,8 +53,7 @@ interface Operations {
   @segment("operations")
   @get
   @list
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<customLocationOperationsList> | ErrorResponse;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<customLocationOperationsList>
+    | ErrorResponse;
 }

@@ -89,7 +89,10 @@ interface FirewallPolicies {
   @tag("FirewallPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicy,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -143,13 +146,16 @@ interface FirewallPolicies {
 
 @@doc(FirewallPolicy.name, "The name of the Firewall Policy.");
 @@doc(FirewallPolicy.properties, "Properties of the firewall policy.");
-@@doc(FirewallPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  FirewallPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the create or update Firewall Policy operation."
 );
-@@doc(FirewallPolicies.updateTags::parameters.properties,
+@@doc(
+  FirewallPolicies.updateTags::parameters.properties,
   "Parameters supplied to update Azure Firewall Policy tags."
 );
 @@doc(FirewallPolicies.firewallPolicyIdpsSignaturesList::parameters.body, "");
-@@doc(FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
+@@doc(
+  FirewallPolicies.firewallPolicyIdpsSignaturesFilterValuesList::parameters.body,
   ""
 );

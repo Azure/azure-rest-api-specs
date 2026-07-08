@@ -61,7 +61,8 @@ interface TagApiLinkContractOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagApiLink"
     > {}
 
 @armResourceOperations
@@ -164,7 +165,8 @@ interface WorkspaceTagApiLinkOps
         @minLength(1)
         @maxLength(80)
         apiLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagApiLink"
     > {}
 
 @armResourceOperations
@@ -225,15 +227,19 @@ interface WorkspaceTagApiLink {
 
 @@maxLength(TagApiLinkContract.name, 80);
 @@minLength(TagApiLinkContract.name, 1);
-@@doc(TagApiLinkContract.name,
+@@doc(
+  TagApiLinkContract.name,
   "Tag-API link identifier. Must be unique in the current API Management service instance."
 );
-@@doc(TagApiLinkContract.properties,
+@@doc(
+  TagApiLinkContract.properties,
   "Tag-API link entity contract properties."
 );
-@@doc(TagApiLinkContracts.createOrUpdate::parameters.resource,
+@@doc(
+  TagApiLinkContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceTagApiLink.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceTagApiLink.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

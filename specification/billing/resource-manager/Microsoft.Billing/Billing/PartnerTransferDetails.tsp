@@ -30,7 +30,6 @@ model PartnerTransferDetails
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
@@ -78,10 +77,12 @@ interface PartnerTransfers {
   >;
 }
 
-@@doc(PartnerTransferDetails.name,
+@@doc(
+  PartnerTransferDetails.name,
   "The ID that uniquely identifies a transfer request."
 );
 @@doc(PartnerTransferDetails.properties, "Details of the transfer.");
-@@doc(PartnerTransfers.initiate::parameters.resource,
+@@doc(
+  PartnerTransfers.initiate::parameters.resource,
   "Request parameters that are provided to the initiate transfer operation."
 );

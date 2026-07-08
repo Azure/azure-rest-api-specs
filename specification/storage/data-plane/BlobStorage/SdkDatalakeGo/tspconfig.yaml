@@ -1,0 +1,16 @@
+parameters:
+  "service-dir":
+    default: "sdk/storage"
+options:
+  "@azure-tools/typespec-go":
+    containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azdatalake"
+    service-dir: "sdk/storage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azdatalake/internal/generated_blob"
+    generate-fakes: false
+    file-prefix: "zz_"
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/storage/data-plane/BlobStorage/Common"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
