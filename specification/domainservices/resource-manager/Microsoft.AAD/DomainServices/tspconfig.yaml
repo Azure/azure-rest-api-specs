@@ -41,10 +41,13 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdomainservices"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: true
+    generate-samples: false
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DomainServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

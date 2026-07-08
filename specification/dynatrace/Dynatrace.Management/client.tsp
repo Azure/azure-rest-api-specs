@@ -5,6 +5,13 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Dynatrace.Observability;
 
+// Preserve the existing Python SDK client name to avoid breaking changes
+@@clientName(
+  Dynatrace.Observability,
+  "DynatraceObservabilityMgmtClient",
+  "python"
+);
+
 @@clientName(EnvironmentInfo.landingURL, "landingUrl", "java");
 
 // Removing below operations as these are not currently supported in the backend
