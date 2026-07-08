@@ -27,9 +27,15 @@ using Microsoft.DevCenter;
 );
 
 @@clientName(
-  Microsoft.DevCenter.KeyEncryptionKeyIdentity,
+  Microsoft.DevCenter.KeyEncryptionKeyIdentityUpdate,
   "DevCenterKeyEncryptionKeyIdentity",
   "csharp"
+);
+
+@@clientName(
+  Microsoft.DevCenter.KeyEncryptionKeyIdentityUpdate,
+  "KeyEncryptionKeyIdentity",
+  "java,go"
 );
 
 @@clientName(
