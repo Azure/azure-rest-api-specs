@@ -8,7 +8,7 @@ import "../models/routes.tsp";
 import "../deployments/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../evaluation-rules/routes.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
