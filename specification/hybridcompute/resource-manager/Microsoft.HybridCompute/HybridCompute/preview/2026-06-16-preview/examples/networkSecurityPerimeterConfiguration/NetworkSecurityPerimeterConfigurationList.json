@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "api-version": "2025-09-16-preview",
+    "resourceGroupName": "my-resource-group",
+    "scopeName": "my-privatelinkscope",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.myAssociation",
+            "type": "Microsoft.HybridCompute/privateLinkScopes/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/my-resource-group/providers/Microsoft.HybridCompute/privateLinkScopes/my-privatelinkscope/networkSecurityPerimeterConfigurations/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee.myAssociation",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/networkSecurityPerimeters/myPerimeter",
+                "location": "westus",
+                "perimeterGuid": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+              },
+              "profile": {
+                "name": "myProfile",
+                "accessRules": [
+                  {
+                    "name": "myAccessRule",
+                    "properties": {
+                      "addressPrefixes": [
+                        "148.0.0.0/8",
+                        "152.4.6.0/24",
+                        "..."
+                      ],
+                      "direction": "Inbound"
+                    }
+                  }
+                ],
+                "accessRulesVersion": 1,
+                "diagnosticSettingsVersion": 1,
+                "enabledLogCategories": []
+              },
+              "provisioningIssues": [],
+              "provisioningState": "Accepted",
+              "resourceAssociation": {
+                "name": "myAssociation",
+                "accessMode": "enforced"
+              }
+            }
+          },
+          {
+            "name": "aaaaaaaa-0000-cccc-1111-eeeeeeeeeeee.myAssociation2",
+            "type": "Microsoft.HybridCompute/privateLinkScopes/networkSecurityPerimeterConfigurations",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/my-resource-group/providers/Microsoft.HybridCompute/privateLinkScopes/my-privatelinkscope/networkSecurityPerimeterConfigurations/37364608-77ea-4c2a-bdc3-4b0b1cdfab15.myAssociation2",
+            "properties": {
+              "networkSecurityPerimeter": {
+                "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/networkSecurityPerimeters/myOtherPerimeter",
+                "location": "westus",
+                "perimeterGuid": "aaaaaaaa-0000-cccc-1111-eeeeeeeeeeee"
+              },
+              "profile": {
+                "name": "myProfile",
+                "accessRules": [
+                  {
+                    "name": "myAccessRule",
+                    "properties": {
+                      "addressPrefixes": [
+                        "122.0.0.0/8",
+                        "144.4.6.0/24",
+                        "..."
+                      ],
+                      "direction": "Inbound"
+                    }
+                  }
+                ],
+                "accessRulesVersion": 1,
+                "diagnosticSettingsVersion": 1,
+                "enabledLogCategories": []
+              },
+              "provisioningIssues": [],
+              "provisioningState": "Accepted",
+              "resourceAssociation": {
+                "name": "myAssociation",
+                "accessMode": "learning"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_ListByPrivateLinkScope",
+  "title": "Gets the list of network security perimeter configurations of the private link scope."
+}

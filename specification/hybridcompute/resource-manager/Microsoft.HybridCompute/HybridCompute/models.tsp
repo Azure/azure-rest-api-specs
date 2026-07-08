@@ -585,6 +585,18 @@ union ArcKindEnum {
   AWS: "AWS",
 }
 
+/**
+ * The reason describing why the service set the machine status to a particular value.
+ */
+union MachineStatusReason {
+  string,
+
+  /**
+   * Indicates the service has detected that this Arc machine is a clone of another onboarded machine.
+   */
+  Cloned: "Cloned",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union InstanceViewTypes {
   string,
@@ -1245,6 +1257,12 @@ model MachineProperties {
    * Specifies the License related properties for a machine.
    */
   licenseProfile?: LicenseProfileMachineInstanceView;
+
+  /**
+   * Indicates whether the service has detected that this Arc machine is a clone of another onboarded machine. Service-computed; not settable by the user.
+   */
+  @visibility(Lifecycle.Read)
+  statusReason?: MachineStatusReason;
 
   /**
    * The provisioning state, which only appears in the response.
@@ -2175,7 +2193,7 @@ model MachineUpdate extends ResourceUpdate {
   /**
    * Identity for the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
    * Indicates which kind of Arc machine placement on-premises, such as HCI, SCVMM or VMware etc.
@@ -3751,7 +3769,7 @@ model HybridIdentityMetadataProperties {
    * Identity for the resource.
    */
   @visibility(Lifecycle.Read)
-  identity?: Azure.ResourceManager.CommonTypes.Identity;
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 }
 
 /**

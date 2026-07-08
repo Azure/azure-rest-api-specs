@@ -45,6 +45,274 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-powershell":
+    service-dir: "src"
+    emitter-output-dir: "{output-dir}/{service-dir}/ConnectedMachine/ConnectedMachine.Autorest"
+    clear-output-folder: true
+    debug: true
+    azure: true
+    module-version: 0.1.0
+    prefix: "Az"
+    subject-prefix: "Connected"
+    service-name: ConnectedMachine
+    module-name: "{prefix}.{service-name}"
+    output-folder: "{output-dir}"
+
+    # Official mitigation for the emitter crash on Machines_Update:
+    #   "Parameter IdentityType in operation 'Machines_Update' can not be
+    #    transformed as the best practice design."
+    # The identity-type transform tries to replace the PATCH op with a GET+PUT pair
+    # so it can expose -EnableSystemAssignedIdentity / -UserAssignedIdentity. The
+    # rewrite fails on certain operation shapes (e.g. ops with extra query params),
+    # and the failure is a hard crash that aborts the whole emit before directives
+    # can run. Disabling the transform for just this op lets the emitter produce
+    # the raw cmdlet shape; the hand-written custom/Update-AzConnectedMachine.ps1
+    # wrapper (paired with the `hide: true` directive below) then exposes the
+    # standard Az identity surface and performs the read-modify-write merge.
+    # Reference: https://github.com/Azure/autorest.powershell (search for
+    # `disable-transform-identity-type-for-operation`).
+    disable-transform-identity-type-for-operation:
+      - Machines_Update
+
+    directive:
+      # GetViaIdentity is rarely useful for users
+      - where:
+          verb: Get
+          variant: ^GetViaIdentity.*$
+        remove: true
+
+      # Friendlier parameter names for MachineExtension
+      - where:
+          subject: MachineExtension
+          parameter-name: Name
+        set:
+          parameter-name: MachineName
+      - where:
+          subject: MachineExtension
+          parameter-name: ExtensionName
+        set:
+          parameter-name: Name
+
+      # TODO: verify after first generation. TypeSpec PUT body is NOT flattened
+      # (only the PATCH body via back-compatible.tsp), so `PropertiesType` may emit
+      # as `Type` on the parameter and `Type` / `MachineExtensionType` on the model.
+      - where:
+          subject: MachineExtension
+          parameter-name: PropertiesType
+        set:
+          parameter-name: ExtensionType
+      - where:
+          model-name: MachineExtension
+          property-name: PropertiesType
+        set:
+          property-name: MachineExtensionType
+      # TODO: verify after first generation. PUT body not flattened in TypeSpec,
+      # so `Setting` / `ProtectedSetting` / `ForceUpdateTag` may instead surface
+      # as nested object parameters and not match this selector.
+      - where:
+          subject: MachineExtension
+          parameter-name: Setting
+        set:
+          alias: Settings
+      - where:
+          subject: MachineExtension
+          parameter-name: ProtectedSetting
+        set:
+          alias: ProtectedSettings
+      - where:
+          subject: MachineExtension
+          parameter-name: ForceUpdateTag
+        set:
+          parameter-name: ForceRerun
+      # TODO: verify name. Two-level flatten (properties.agentUpgrade.enableAutomaticUpgrade)
+      # may produce a different parameter name in TypeSpec output.
+      - where:
+          subject: Machine
+          parameter-name: AgentUpgradeEnableAutomaticUpgrade
+        set:
+          parameter-name: AgentUpgradeEnableAutomatic
+      - where:
+          subject: MachineRunCommand
+          parameter-name: SubscriptionId
+        set:
+          alias: Subscription
+
+      # Rename Tag to Tags
+      - where:
+          property-name: Tag
+        set:
+          property-name: Tags
+
+      # Format tables
+      - where:
+          model-name: Machine
+        set:
+          format-table:
+            properties:
+              - ResourceGroupName
+              - Name
+              - Location
+              - OSType
+              - Status
+              - ProvisioningState
+      - where:
+          model-name: MachineExtension
+        set:
+          format-table:
+            properties:
+              - ResourceGroupName
+              - Name
+              - Location
+              - TypeHandlerVersion
+              - ProvisioningState
+              - Publisher
+      - where:
+          model-name: HybridComputePrivateLinkScope
+        set:
+          format-table:
+            properties:
+              - ResourceGroupName
+              - Name
+              - Location
+              - PublicNetworkAccess
+              - ProvisioningState
+
+      # Remove cmdlets we don't ship
+      # SetupExtensions (Invoke-AzConnectedSetupExtension) is not shipped in
+      # PowerShell; 
+      - where:
+          subject: SetupExtension
+          variant: ^Setup$
+        remove: true
+      - where:
+          subject: SetupExtension
+          variant: ^SetupViaIdentity$
+        remove: true
+      - where:
+          subject: PrivateEndpointConnection
+        remove: true
+      - where:
+          subject: PrivateLinkResource
+        remove: true
+      # TODO: silent no-op. No cmdlet uses `PrivateLinkScopeValidationDetail` as its
+      # subject. The two ops returning PrivateLinkScopeValidationDetails are
+      # Machines.getValidationDetailsForMachine (subject: Machine) and
+      # PrivateLinkScopesOperationGroup.getValidationDetails (subject: PrivateLinkScope).
+      # Rewrite after first generation, e.g.:
+      #   - where: { subject: Machine, variant: ^GetValidationDetails.*$ }
+      #     remove: true
+      - where:
+          verb: Get
+          subject: PrivateLinkScopeValidationDetail
+        remove: true
+      # TODO: silent no-op. `NetworkProfile` is only an action return on Machine
+      # (Machines.networkProfileGet). Cmdlet subject is `Machine`, not `NetworkProfile`.
+      # Likely fix: { subject: Machine, variant: ^.*NetworkProfile.*$ } or hide via verb.
+      - where:
+          subject: NetworkProfile
+        remove: true
+      # TODO: silent no-op. No interface declares ops on AgentVersion in the .tsp.
+      # Safe to delete this directive unless a future op is added.
+      - where:
+          subject: AgentVersion
+        remove: true
+      # TODO: silent no-op. HybridIdentityMetadataOps alias exists in Machine.tsp
+      # but no interface uses it, so no cmdlets are produced. Delete or wait until
+      # the op is reintroduced.
+      - where:
+          subject: HybridIdentityMetadata
+        remove: true
+      - where:
+          subject: MachineRunCommand
+          verb: Set
+        remove: true
+      # TODO: subject is wrong. The upgrade op is Machines.upgradeExtensions, so its
+      # cmdlet subject is `Machine` (not `Extension`). Likely fix:
+      #   - where: { subject: Machine, variant: ^Upgrade.*Extension.*$ }
+      #     remove: true
+      - where:
+          subject: Extension
+          variant: Upgrade
+        remove: true
+      - where:
+          subject: Gateway
+        remove: true
+      # TODO: subject likely `Settings` (plural) since the TypeSpec resource is
+      # `model Settings` in Settings.tsp. Adjust to `subject: Settings` or use
+      # `subject: ^Settings?$` after verifying with Get-Command output.
+      - where:
+          subject: Setting
+        remove: true
+      - where:
+          subject: License
+          verb: Update
+        remove: true
+      - where:
+          subject: License
+          verb: Validate
+        remove: true
+      - where:
+          subject: License
+          verb: Test
+        remove: true
+      - where:
+          subject: LicenseProfile
+          verb: Set
+        remove: true
+      - where:
+          subject: NetworkConfiguration
+        remove: true
+
+      # Paired with `disable-transform-identity-type-for-operation: Machines_Update`
+      # above. Hides the auto-generated public Update-AzConnectedMachine so the
+      # hand-written custom/Update-AzConnectedMachine.ps1 wrapper is the public face.
+      # The wrapper exposes -EnableSystemAssignedIdentity / -UserAssignedIdentity and
+      # performs the read-modify-write merge against the current resource state so
+      # partial identity updates don't accidentally clobber other identities. The
+      # generated internal cmdlet (Az.ConnectedMachine.internal\Update-AzConnectedMachine)
+      # is still produced and is what the custom wrapper delegates to. Do NOT change
+      # to `remove-operation: Machines_Update` — that would delete the internal
+      # cmdlet and break the custom wrapper.
+      # Reference pattern: src/Astro/Astro.Autorest/custom/Update-AzAstroOrganization.ps1
+      # Reference doc: https://github.com/Azure/azure-powershell/blob/main/documentation/development-docs/design-guidelines/managed-identity-best-practices.md
+      - where:
+          subject: Machine
+          verb: Update
+        hide: true
+
+      # Argument completers
+      - where:
+          parameter-name: Location
+        set:
+          completer:
+            name: Location Completer
+            description: Gets the list of locations available for this resource.
+            script: Get-AzLocation | Where-Object Providers -Contains "Microsoft.HybridCompute" | Select-Object -ExpandProperty Location
+      - where:
+          parameter-name: ResourceGroupName
+        set:
+          completer:
+            name: ResourceGroupName Completer
+            description: Gets the list of ResourceGroupName's available for this subscription.
+            script: Get-AzResourceGroup | Select-Object -ExpandProperty ResourceGroupName
+
+      # Internal-only operations
+      - remove-operation: Machines_CreateOrUpdate
+      # TODO: silent no-op. MachineRunCommands interface only declares
+      # get / createOrUpdate / delete / list — there is no `update` op.
+      # Delete this line, or add an `update` op to MachineRunCommands if intended.
+      - remove-operation: MachineRunCommands_Update
+
+      # Model cmdlets for complex inputs
+      - model-cmdlet:
+          - model-name: LicenseDetails
+            cmdlet-name: New-AzConnectedLicenseDetail
+      - model-cmdlet:
+          - model-name: ProductFeatureUpdate
+            cmdlet-name: Update-AzConnectedLicenseProfileFeature
+      - model-cmdlet:
+          - model-name: ProductFeature
+            cmdlet-name: New-AzConnectedLicenseProfileFeature
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

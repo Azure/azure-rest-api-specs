@@ -34,10 +34,7 @@ interface LicensesOperationGroup {
   validateLicense is LicensesOps.ActionAsync<
     License,
     Request = License,
-    Result = void,
-    Response = ArmResponse<License> &
-      ArmLroLocationHeader<FinalResult = License> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Result = License
   >;
 }
 
