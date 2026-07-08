@@ -5,6 +5,8 @@ using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Elastic;
 
+@@clientName(Microsoft.Elastic, "ElasticMgmtClient", "python");
+
 // Client customizations for Java SDK to maintain backward compatibility
 
 // Fix case change in ExternalUserInfo.userName -> username
