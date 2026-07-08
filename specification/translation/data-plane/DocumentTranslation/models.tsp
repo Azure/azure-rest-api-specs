@@ -46,10 +46,10 @@ model DocumentTranslateResult {
 @doc("Format types")
 union FileFormatType {
   @doc("Document type file format")
-  Document: "document",
+  Document: "Document",
 
   @doc("Glossary type file format")
-  Glossary: "glossary",
+  Glossary: "Glossary",
 
   string,
 }
