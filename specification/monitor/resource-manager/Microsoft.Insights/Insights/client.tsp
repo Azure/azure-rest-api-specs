@@ -920,6 +920,43 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(ActionGroupsApi.ReceiverStatus, "MonitorReceiverStatus", "csharp");
+
+// Resolve JavaScript/TypeScript model name conflicts between the TenantActionGroups
+// and ActionGroupsApi namespaces. The JS emitter flattens all namespaces, so these
+// identically-shaped models collide by name. Redirect the TenantActionGroups
+// definitions to the ActionGroupsApi definitions for the JS emitter only; other
+// languages disambiguate via namespaces or @@clientName renames and are unaffected.
+// ReceiverStatus is orphaned automatically once EmailReceiver/SmsReceiver are redirected.
+@@alternateType(
+  TenantActionGroups.EmailReceiver,
+  ActionGroupsApi.EmailReceiver,
+  "javascript"
+);
+@@alternateType(
+  TenantActionGroups.SmsReceiver,
+  ActionGroupsApi.SmsReceiver,
+  "javascript"
+);
+@@alternateType(
+  TenantActionGroups.AzureAppPushReceiver,
+  ActionGroupsApi.AzureAppPushReceiver,
+  "javascript"
+);
+@@alternateType(
+  TenantActionGroups.VoiceReceiver,
+  ActionGroupsApi.VoiceReceiver,
+  "javascript"
+);
+@@alternateType(
+  TenantActionGroups.Context,
+  ActionGroupsApi.Context,
+  "javascript"
+);
+@@alternateType(
+  TenantActionGroups.ActionGroupPatch,
+  ActionGroupsApi.ActionGroupPatch,
+  "javascript"
+);
 @@clientName(
   DataCollectionApi.KnownDataCollectionEndpointResourceKind,
   "DataCollectionEndpointResourceKind",
@@ -1649,4 +1686,10 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   Microsoft.Common.CommonErrorResponse,
   "ErrorResponseCommon",
   "python"
+);
+
+@@clientLocation(
+  VMInsightsOnboardingStatuses.getOnboardingStatus,
+  "$DO_NOT_NORMALIZE$vMInsights",
+  "javascript"
 );
