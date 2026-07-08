@@ -61,6 +61,8 @@ model PoolProperties {
   @renamedFrom(Versions.v2026_03_15_preview, "size")
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "size")
   sizeOld: int64 = 4398046511104;
 
@@ -74,6 +76,8 @@ model PoolProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   size: int64 = 4398046511104;
 
   /**
@@ -180,6 +184,8 @@ model PoolPatchProperties {
   @renamedFrom(Versions.v2026_03_15_preview, "size")
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "size")
   sizeOld?: int64;
 
@@ -193,6 +199,8 @@ model PoolPatchProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   size?: int64;
 
   /**
@@ -321,11 +329,9 @@ interface CapacityPools {
 @@minLength(CapacityPool.name, 1);
 @@doc(CapacityPool.name, "The name of the capacity pool");
 @@doc(CapacityPool.properties, "Capacity pool properties");
-@@doc(
-  CapacityPools.createOrUpdate::parameters.resource,
+@@doc(CapacityPools.createOrUpdate::parameters.resource,
   "Capacity pool object supplied in the body of the operation."
 );
-@@doc(
-  CapacityPools.update::parameters.properties,
+@@doc(CapacityPools.update::parameters.properties,
   "Capacity pool object supplied in the body of the operation."
 );

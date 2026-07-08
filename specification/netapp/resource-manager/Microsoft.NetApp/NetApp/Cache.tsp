@@ -655,8 +655,7 @@ interface Caches {
   >;
 }
 
-@@doc(
-  Caches.poolChange::parameters.body,
+@@doc(Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
 );
 

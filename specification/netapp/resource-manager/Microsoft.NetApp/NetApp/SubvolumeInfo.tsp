@@ -185,14 +185,11 @@ interface SubvolumeInfos {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SubvolumeInfo,
-    Response =
-      | ArmResourceUpdatedResponse<SubvolumeInfo>
-      | ArmResourceCreatedResponse<
-          SubvolumeInfo,
-          ArmAsyncOperationHeader<FinalResult = SubvolumeInfo> &
-            Azure.Core.Foundations.RetryAfterHeader
-        >
-      | ArmAcceptedLroResponse
+    Response = ArmResourceUpdatedResponse<SubvolumeInfo> | ArmResourceCreatedResponse<
+      SubvolumeInfo,
+      ArmAsyncOperationHeader<FinalResult = SubvolumeInfo> &
+        Azure.Core.Foundations.RetryAfterHeader
+    > | ArmAcceptedLroResponse
   >;
 
   /**
@@ -214,11 +211,8 @@ interface SubvolumeInfos {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     SubvolumeInfo,
-    Response =
-      | ArmDeletedResponse
-      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-          Azure.Core.Foundations.RetryAfterHeader>
-      | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -246,11 +240,9 @@ interface SubvolumeInfos {
 @@minLength(SubvolumeInfo.name, 1);
 @@doc(SubvolumeInfo.name, "The name of the subvolume.");
 @@doc(SubvolumeInfo.properties, "Subvolume Properties");
-@@doc(
-  SubvolumeInfos.create::parameters.resource,
+@@doc(SubvolumeInfos.create::parameters.resource,
   "Subvolume object supplied in the body of the operation."
 );
-@@doc(
-  SubvolumeInfos.update::parameters.properties,
+@@doc(SubvolumeInfos.update::parameters.properties,
   "Subvolume object supplied in the body of the operation."
 );

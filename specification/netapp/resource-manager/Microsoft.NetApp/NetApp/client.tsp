@@ -6,8 +6,7 @@ using Azure.ClientGenerator.Core.Legacy;
 using Azure.Core;
 using Microsoft.NetApp;
 
-@@clientName(
-  Microsoft.NetApp,
+@@clientName(Microsoft.NetApp,
   "NetAppManagementClient",
   "java,python,javascript"
 );
@@ -19,86 +18,71 @@ using Microsoft.NetApp;
 @@clientName(QuotaItem, "SubscriptionQuotaItem", "java");
 
 // Fix property name case changes
-@@clientName(
-  Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
+@@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
   "nfsV4IdDomain",
   "java"
 );
 
 @@clientName(Microsoft.NetApp.ActiveDirectory.kdcIP, "kdcIp", "java");
-@@clientName(
-  Microsoft.NetApp.ActiveDirectory.ldapOverTLS,
+@@clientName(Microsoft.NetApp.ActiveDirectory.ldapOverTLS,
   "ldapOverTls",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.RemotePath.externalHostName,
+@@clientName(Microsoft.NetApp.RemotePath.externalHostName,
   "externalHostname",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.SubvolumeModelProperties.accessedTimeStamp,
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.accessedTimeStamp,
   "accessedTimestamp",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.SubvolumeModelProperties.modifiedTimeStamp,
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.modifiedTimeStamp,
   "modifiedTimestamp",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.SubvolumeModelProperties.changedTimeStamp,
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.changedTimeStamp,
   "changedTimestamp",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.SubvolumeModelProperties.creationTimeStamp,
+@@clientName(Microsoft.NetApp.SubvolumeModelProperties.creationTimeStamp,
   "creationTimestamp",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.VolumeGroupListProperties.groupMetaData,
+@@clientName(Microsoft.NetApp.VolumeGroupListProperties.groupMetaData,
   "groupMetadata",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.VolumeGroupProperties.groupMetaData,
+@@clientName(Microsoft.NetApp.VolumeGroupProperties.groupMetaData,
   "groupMetadata",
   "java"
 );
-@@clientName(
-  Microsoft.NetApp.NetAppProvisioningState,
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
   "ProvisioningState",
   "java"
 );
 
 // Fix model name changes
-@@clientName(
-  Microsoft.NetApp.VolumeGroupMetaData,
+@@clientName(Microsoft.NetApp.VolumeGroupMetaData,
   "VolumeGroupMetadata",
   "java"
 );
 
-@@clientName(
-  Microsoft.NetApp.GetGroupIdListForLdapUserRequest,
+@@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserRequest,
   "GetGroupIdListForLDAPUserRequest",
   "go,python"
 );
 
-@@clientName(
-  Microsoft.NetApp.GetGroupIdListForLdapUserResponse,
+@@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserResponse,
   "GetGroupIdListForLDAPUserResponse",
   "go,python"
 );
 
-@@clientName(
-  Microsoft.NetApp.NetAppProvisioningState,
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
   "NetappProvisioningState",
   "go"
 );
 
-@@clientName(
-  Microsoft.NetApp.ReplicationSchedule._10minutely,
+@@clientName(Microsoft.NetApp.ReplicationSchedule._10minutely,
   "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
@@ -112,20 +96,17 @@ using Microsoft.NetApp;
 // =============================================================================
 
 // --- @@clientName: model and property renames for C# ---
-@@clientName(
-  CachePropertiesExportPolicy,
+@@clientName(CachePropertiesExportPolicy,
   "NetAppCachePropertiesExportPolicy",
   "csharp"
 );
 
 // C# model renames to match existing SDK API surface
-@@clientLocation(
-  SubscriptionQuotaItems.get,
+@@clientLocation(SubscriptionQuotaItems.get,
   "NetAppSubscriptionQuotaItems",
   "csharp"
 );
-@@clientLocation(
-  SubscriptionQuotaItems.list,
+@@clientLocation(SubscriptionQuotaItems.list,
   "NetAppSubscriptionQuotaItems",
   "csharp"
 );
@@ -134,15 +115,13 @@ using Microsoft.NetApp;
 @@clientName(AccountEncryption, "NetAppAccountEncryption", "csharp");
 @@clientName(Replication, "NetAppVolumeReplication", "csharp");
 @@clientName(CacheProperties, "NetAppCacheProperties", "csharp");
-@@clientName(
-  CacheMountTargetProperties,
+@@clientName(CacheMountTargetProperties,
   "NetAppCacheMountTargetProperties",
   "csharp"
 );
 @@clientName(PeeringPassphrases, "NetAppPeeringPassphrases", "csharp");
 @@clientName(SmbSettings, "NetAppSmbSettings", "csharp");
-@@clientName(
-  OriginClusterInformation,
+@@clientName(OriginClusterInformation,
   "NetAppOriginClusterInformation",
   "csharp"
 );
@@ -156,8 +135,7 @@ using Microsoft.NetApp;
 @@clientName(CifsChangeNotifyState, "NetAppCifsChangeNotifyState", "csharp");
 @@clientName(EnableWriteBackState, "NetAppEnableWriteBackState", "csharp");
 @@clientName(EncryptionState, "NetAppEncryptionState", "csharp");
-@@clientName(
-  ExternalReplicationSetupStatus,
+@@clientName(ExternalReplicationSetupStatus,
   "NetAppExternalReplicationSetupStatus",
   "csharp"
 );
@@ -168,115 +146,95 @@ using Microsoft.NetApp;
 @@clientName(ProtocolTypes, "NetAppProtocolType", "csharp");
 @@clientName(SmbEncryptionState, "NetAppSmbEncryptionState", "csharp");
 @@clientName(VolumeLanguage, "NetAppVolumeLanguage", "csharp");
-@@clientName(
-  ActiveDirectoryStatus,
+@@clientName(ActiveDirectoryStatus,
   "NetAppAccountActiveDirectoryStatus",
   "csharp"
 );
-@@clientName(
-  LdapSearchScopeOpt,
+@@clientName(LdapSearchScopeOpt,
   "NetAppLdapSearchScopeConfiguration",
   "csharp"
 );
 @@clientName(ReplicationSchedule, "NetAppReplicationSchedule", "csharp");
 
 // C# AZC0030/AZC0032 naming compliance: Request→Content, Response→Result
-@@clientName(
-  AuthorizeRequest,
+@@clientName(AuthorizeRequest,
   "NetAppVolumeAuthorizeReplicationContent",
   "csharp"
 );
 @@clientName(BackupsMigrationRequest, "BackupsMigrationContent", "csharp");
-@@clientName(
-  BreakFileLocksRequest,
+@@clientName(BreakFileLocksRequest,
   "NetAppVolumeBreakFileLocksContent",
   "csharp"
 );
 @@clientName(BreakFileLocksRequest.clientIp, "ClientIP", "csharp");
-@@alternateType(
-  BreakFileLocksRequest.clientIp,
+@@alternateType(BreakFileLocksRequest.clientIp,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@clientName(
-  BreakReplicationRequest,
+@@clientName(BreakReplicationRequest,
   "NetAppVolumeBreakReplicationContent",
   "csharp"
 );
 @@clientName(ChangeZoneRequest, "ChangeZoneContent", "csharp");
-@@clientName(
-  CheckAvailabilityResponse,
+@@clientName(CheckAvailabilityResponse,
   "NetAppCheckAvailabilityResult",
   "csharp"
 );
-@@clientName(
-  CheckElasticVolumeFilePathAvailabilityRequest,
+@@clientName(CheckElasticVolumeFilePathAvailabilityRequest,
   "CheckElasticVolumeFilePathAvailabilityContent",
   "csharp"
 );
 @@clientName(ClusterPeerCommandResponse, "ClusterPeerCommandResult", "csharp");
-@@clientName(
-  EncryptionTransitionRequest,
+@@clientName(EncryptionTransitionRequest,
   "NetAppEncryptionTransitionContent",
   "csharp"
 );
-@@clientName(
-  FilePathAvailabilityRequest,
+@@clientName(FilePathAvailabilityRequest,
   "NetAppFilePathAvailabilityContent",
   "csharp"
 );
-@@clientName(
-  GetGroupIdListForLdapUserRequest,
+@@clientName(GetGroupIdListForLdapUserRequest,
   "GetGroupIdListForLdapUserContent",
   "csharp"
 );
-@@clientName(
-  GetGroupIdListForLdapUserResponse,
+@@clientName(GetGroupIdListForLdapUserResponse,
   "GetGroupIdListForLdapUserResult",
   "csharp"
 );
 @@clientName(GetKeyVaultStatusResponse, "NetAppKeyVaultStatusResult", "csharp");
-@@clientName(
-  ListQuotaReportResponse,
+@@clientName(ListQuotaReportResponse,
   "NetAppVolumeQuotaReportListResult",
   "csharp"
 );
 @@clientName(ListReplicationsRequest, "ListReplicationsContent", "csharp");
-@@clientName(
-  PeerClusterForVolumeMigrationRequest,
+@@clientName(PeerClusterForVolumeMigrationRequest,
   "PeerClusterForVolumeMigrationContent",
   "csharp"
 );
 @@clientName(PoolChangeRequest, "NetAppVolumePoolChangeContent", "csharp");
-@@clientName(
-  QueryNetworkSiblingSetRequest,
+@@clientName(QueryNetworkSiblingSetRequest,
   "QueryNetworkSiblingSetContent",
   "csharp"
 );
-@@clientName(
-  QuotaAvailabilityRequest,
+@@clientName(QuotaAvailabilityRequest,
   "NetAppQuotaAvailabilityContent",
   "csharp"
 );
-@@clientName(
-  RansomwareSuspectsClearRequest,
+@@clientName(RansomwareSuspectsClearRequest,
   "RansomwareSuspectsClearContent",
   "csharp"
 );
-@@clientName(
-  ReestablishReplicationRequest,
+@@clientName(ReestablishReplicationRequest,
   "NetAppVolumeReestablishReplicationContent",
   "csharp"
 );
 @@clientName(RelocateVolumeRequest, "RelocateVolumeContent", "csharp");
-@@clientName(
-  ResourceNameAvailabilityRequest,
+@@clientName(ResourceNameAvailabilityRequest,
   "NetAppNameAvailabilityContent",
   "csharp"
 );
 @@clientName(SvmPeerCommandResponse, "SvmPeerCommandResult", "csharp");
-@@clientName(
-  UpdateNetworkSiblingSetRequest,
+@@clientName(UpdateNetworkSiblingSetRequest,
   "UpdateNetworkSiblingSetContent",
   "csharp"
 );
@@ -289,8 +247,7 @@ using Microsoft.NetApp;
 @@clientName(EncryptionIdentity, "NetAppEncryptionIdentity", "csharp");
 @@clientName(EncryptionKeySource, "NetAppEncryptionKeySource", "csharp");
 @@clientName(KeySource, "NetAppKeySource", "csharp");
-@@clientName(
-  KeyVaultPrivateEndpoint,
+@@clientName(KeyVaultPrivateEndpoint,
   "NetAppKeyVaultPrivateEndpoint",
   "csharp"
 );
@@ -305,42 +262,36 @@ using Microsoft.NetApp;
 @@clientName(EnableSubvolumes, "EnableNetAppSubvolume", "csharp");
 @@clientName(Exclude, "ExcludeReplicationsFilter", "csharp");
 @@clientName(FileAccessLogs, "NetAppFileAccessLog", "csharp");
-@@clientName(
-  CheckNameResourceTypes,
+@@clientName(CheckNameResourceTypes,
   "NetAppNameAvailabilityResourceType",
   "csharp"
 );
 @@clientName(InAvailabilityReasonType, "NetAppNameUnavailableReason", "csharp");
 @@clientName(NetworkFeatures, "NetAppNetworkFeature", "csharp");
-@@clientName(
-  CheckQuotaNameResourceTypes,
+@@clientName(CheckQuotaNameResourceTypes,
   "NetAppQuotaAvailabilityResourceType",
   "csharp"
 );
 @@clientName(SubvolumeModel, "NetAppSubvolumeMetadata", "csharp");
 @@clientName(VolumeBackups, "NetAppVolumeBackupDetail", "csharp");
-@@clientName(
-  VolumePropertiesDataProtection,
+@@clientName(VolumePropertiesDataProtection,
   "NetAppVolumeDataProtection",
   "csharp"
 );
 @@clientName(VolumeGroup, "NetAppVolumeGroupResult", "csharp");
 @@clientName(MountTargetProperties, "NetAppVolumeMountTarget", "csharp");
-@@clientName(
-  VolumePatchPropertiesDataProtection,
+@@clientName(VolumePatchPropertiesDataProtection,
   "NetAppVolumePatchDataProtection",
   "csharp"
 );
 @@clientName(QuotaType, "NetAppVolumeQuotaType", "csharp");
 @@clientName(VolumeRevert, "NetAppVolumeRevertContent", "csharp");
 @@clientName(SecurityStyle, "NetAppVolumeSecurityStyle", "csharp");
-@@clientName(
-  SnapshotRestoreFiles,
+@@clientName(SnapshotRestoreFiles,
   "NetAppVolumeSnapshotRestoreFilesContent",
   "csharp"
 );
-@@clientName(
-  VolumeStorageToNetworkProximity,
+@@clientName(VolumeStorageToNetworkProximity,
   "NetAppVolumeStorageToNetworkProximity",
   "csharp"
 );
@@ -352,55 +303,46 @@ using Microsoft.NetApp;
 @@clientName(SecretPasswordIdentity, "NetAppSecretPasswordIdentity", "csharp");
 @@clientName(SnapshotUsage, "ElasticBackupSnapshotUsage", "csharp");
 @@clientName(VolumeSize, "ElasticBackupVolumeSize", "csharp");
-@@clientName(
-  VolumeRelocationProperties,
+@@clientName(VolumeRelocationProperties,
   "NetAppVolumeRelocationProperties",
   "csharp"
 );
-@@clientName(
-  BackupRestoreFiles,
+@@clientName(BackupRestoreFiles,
   "NetAppVolumeBackupBackupRestoreFilesContent",
   "csharp"
 );
 @@clientName(VolumeGroupVolumeProperties, "NetAppVolumeGroupVolume", "csharp");
 @@clientName(VolumeGroupVolumeProperties.type, "ResourceType", "csharp");
-@@clientName(
-  VolumeBackupProperties,
+@@clientName(VolumeBackupProperties,
   "NetAppVolumeBackupConfiguration",
   "csharp"
 );
-@@clientName(
-  SecretPasswordKeyVaultProperties,
+@@clientName(SecretPasswordKeyVaultProperties,
   "NetAppSecretPasswordKeyVaultPatchProperties",
   "csharp"
 );
 @@clientName(FileSystemUser, "NetAppFileSystemUser", "csharp");
 @@clientName(NfsUser, "NetAppNfsUser", "csharp");
 @@clientName(BucketServerProperties, "NetAppBucketServerProperties", "csharp");
-@@clientName(
-  BucketServerPatchProperties,
+@@clientName(BucketServerPatchProperties,
   "NetAppBucketServerPatchProperties",
   "csharp"
 );
 @@clientName(BucketPermissions, "NetAppBucketPermission", "csharp");
 @@clientName(BucketPatchPermissions, "NetAppBucketPatchPermission", "csharp");
-@@clientName(
-  OnCertificateConflictAction,
+@@clientName(OnCertificateConflictAction,
   "NetAppOnCertificateConflictAction",
   "csharp"
 );
-@@clientName(
-  BucketCredentialsExpiry,
+@@clientName(BucketCredentialsExpiry,
   "NetAppBucketCredentialsExpiry",
   "csharp"
 );
-@@clientName(
-  BucketGenerateCredentials,
+@@clientName(BucketGenerateCredentials,
   "NetAppBucketGenerateCredentials",
   "csharp"
 );
-@@clientName(
-  BucketGenerateCredentials.keyPairExpiry,
+@@clientName(BucketGenerateCredentials.keyPairExpiry,
   "KeyPairExpiresOn",
   "csharp"
 );
@@ -410,24 +352,20 @@ using Microsoft.NetApp;
 @@clientName(CertificateAkvDetails, "CertificateKeyVaultDetails", "csharp");
 @@clientName(CredentialsAkvDetails, "CredentialsKeyVaultDetails", "csharp");
 @@clientName(BindPasswordAkvConfig, "BindPasswordKeyVaultConfig", "csharp");
-@@clientName(
-  BindPasswordAkvConfigPatch,
+@@clientName(BindPasswordAkvConfigPatch,
   "BindPasswordKeyVaultConfigPatch",
   "csharp"
 );
-@@clientName(
-  AzureKeyVaultDetails.certificateAkvDetails,
+@@clientName(AzureKeyVaultDetails.certificateAkvDetails,
   "CertificateKeyVaultDetails",
   "csharp"
 );
-@@clientName(
-  AzureKeyVaultDetails.credentialsAkvDetails,
+@@clientName(AzureKeyVaultDetails.credentialsAkvDetails,
   "CredentialsKeyVaultDetails",
   "csharp"
 );
 @@clientName(CredentialsStatus, "NetAppCredentialsStatus", "csharp");
-@@clientName(
-  Buckets.generateAkvCredentials,
+@@clientName(Buckets.generateAkvCredentials,
   "GenerateKeyVaultCredentials",
   "csharp"
 );
@@ -439,27 +377,23 @@ using Microsoft.NetApp;
 @@clientName(ExportPolicyRule.nfsv41, "AllowNfsV41Protocol", "csharp");
 
 // C# boolean property renames (restore Is*/Has* prefix from old SDK)
-@@clientName(
-  VolumeProperties.snapshotDirectoryVisible,
+@@clientName(VolumeProperties.snapshotDirectoryVisible,
   "IsSnapshotDirectoryVisible",
   "csharp"
 );
 @@clientName(VolumeProperties.kerberosEnabled, "IsKerberosEnabled", "csharp");
-@@clientName(
-  VolumeProperties.smbEncryption,
+@@clientName(VolumeProperties.smbEncryption,
   "IsSmbEncryptionEnabled",
   "csharp"
 );
-@@clientName(
-  VolumeProperties.smbContinuouslyAvailable,
+@@clientName(VolumeProperties.smbContinuouslyAvailable,
   "IsSmbContinuouslyAvailable",
   "csharp"
 );
 @@clientName(VolumeProperties.ldapEnabled, "IsLdapEnabled", "csharp");
 @@clientName(VolumeProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(VolumePatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
-@@clientName(
-  VolumePatchProperties.snapshotDirectoryVisible,
+@@clientName(VolumePatchProperties.snapshotDirectoryVisible,
   "IsSnapshotDirectoryVisible",
   "csharp"
 );
@@ -471,8 +405,7 @@ using Microsoft.NetApp;
 
 @@clientName(PoolProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(PoolPatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
-@@clientName(
-  VolumeBackupProperties.policyEnforced,
+@@clientName(VolumeBackupProperties.policyEnforced,
   "IsPolicyEnforced",
   "csharp"
 );
@@ -482,69 +415,57 @@ using Microsoft.NetApp;
 @@clientName(BackupStatus.healthy, "IsHealthy", "csharp");
 @@clientName(ReplicationStatus.healthy, "IsHealthy", "csharp");
 @@clientName(ResourceNameAvailabilityRequest.type, "ResourceType", "csharp");
-@@clientName(
-  QuotaAvailabilityRequest.type,
+@@clientName(QuotaAvailabilityRequest.type,
   "AvailabilityResourceType",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5ReadOnly,
+@@clientName(ExportPolicyRule.kerberos5ReadOnly,
   "IsKerberos5ReadOnly",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5ReadWrite,
+@@clientName(ExportPolicyRule.kerberos5ReadWrite,
   "IsKerberos5ReadWrite",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5iReadOnly,
+@@clientName(ExportPolicyRule.kerberos5iReadOnly,
   "IsKerberos5iReadOnly",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5iReadWrite,
+@@clientName(ExportPolicyRule.kerberos5iReadWrite,
   "IsKerberos5iReadWrite",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5pReadOnly,
+@@clientName(ExportPolicyRule.kerberos5pReadOnly,
   "IsKerberos5pReadOnly",
   "csharp"
 );
-@@clientName(
-  ExportPolicyRule.kerberos5pReadWrite,
+@@clientName(ExportPolicyRule.kerberos5pReadWrite,
   "IsKerberos5pReadWrite",
   "csharp"
 );
 @@clientName(ExportPolicyRule.hasRootAccess, "HasRootAccess", "csharp");
 
 // C# property renames for backward compat
-@@clientName(
-  VolumeRelocationProperties.relocationRequested,
+@@clientName(VolumeRelocationProperties.relocationRequested,
   "IsRelocationRequested",
   "csharp"
 );
-@@clientName(
-  VolumeRelocationProperties.readyToBeFinalized,
+@@clientName(VolumeRelocationProperties.readyToBeFinalized,
   "IsReadyToBeFinalized",
   "csharp"
 );
-@@clientName(
-  SubvolumeModelProperties.accessedTimeStamp,
+@@clientName(SubvolumeModelProperties.accessedTimeStamp,
   "AccessedOn",
   "csharp"
 );
-@@clientName(
-  SubvolumeModelProperties.modifiedTimeStamp,
+@@clientName(SubvolumeModelProperties.modifiedTimeStamp,
   "ModifiedOn",
   "csharp"
 );
 @@clientName(SubvolumeModelProperties.changedTimeStamp, "ChangedOn", "csharp");
 @@clientName(SubvolumeModelProperties.creationTimeStamp, "CreatedOn", "csharp");
 @@clientName(SnapshotPolicyProperties.enabled, "IsEnabled", "csharp");
-@@clientName(
-  VolumeProperties.proximityPlacementGroup,
+@@clientName(VolumeProperties.proximityPlacementGroup,
   "ProximityPlacementGroupId",
   "csharp"
 );
@@ -576,8 +497,7 @@ using Microsoft.NetApp;
 @@clientName(ChangeKeyVault, "NetAppChangeKeyVault", "csharp");
 
 // C# property name renames
-@@clientName(
-  KeyVaultProperties.keyVaultResourceId,
+@@clientName(KeyVaultProperties.keyVaultResourceId,
   "KeyVaultArmResourceId",
   "csharp"
 );
@@ -602,16 +522,14 @@ using Microsoft.NetApp;
 @@clientName(ElasticProtocolType.NFSv4, "Nfsv4", "csharp");
 
 // Body parameter rename to restore previous property name
-@@clientName(
-  ListReplicationsRequest.exclude,
+@@clientName(ListReplicationsRequest.exclude,
   "ExcludeReplicationsFilter",
   "csharp"
 );
 
 // VolumeRevert.snapshotId: armResourceIdentifier → string (old API had string)
 @@clientName(VolumeRevert.snapshotId, "SnapshotId", "csharp");
-@@clientName(
-  VolumePropertiesExportPolicy,
+@@clientName(VolumePropertiesExportPolicy,
   "NetAppVolumeExportPolicy",
   "csharp"
 );
@@ -619,51 +537,42 @@ using Microsoft.NetApp;
 // --- @@alternateType: property type overrides for C# ---
 // BackupsMigrationRequest.backupVaultId: accept ResourceIdentifier and rename;
 // the old string BackupVaultId API is preserved by SDK customization.
-@@clientName(
-  BackupsMigrationRequest.backupVaultId,
+@@clientName(BackupsMigrationRequest.backupVaultId,
   "BackupVaultResourceId",
   "csharp"
 );
 
 // Restore previous operation names that include the NetApp resource subject (csharp).
 @@clientName(NetAppAccounts.listByNetAppAccount, "GetVolumeGroups", "csharp");
-@@clientName(
-  NetAppResourceOperationGroup.checkNameAvailability,
+@@clientName(NetAppResourceOperationGroup.checkNameAvailability,
   "CheckNetAppNameAvailability",
   "csharp"
 );
-@@clientName(
-  NetAppResourceOperationGroup.checkFilePathAvailability,
+@@clientName(NetAppResourceOperationGroup.checkFilePathAvailability,
   "CheckNetAppFilePathAvailability",
   "csharp"
 );
-@@clientName(
-  NetAppResourceOperationGroup.checkQuotaAvailability,
+@@clientName(NetAppResourceOperationGroup.checkQuotaAvailability,
   "CheckNetAppQuotaAvailability",
   "csharp"
 );
-@@clientName(
-  NetAppResourceOperationGroup.queryRegionInfo,
+@@clientName(NetAppResourceOperationGroup.queryRegionInfo,
   "QueryRegionInfoNetAppResource",
   "csharp"
 );
-@@clientName(
-  NetAppResourceOperationGroup.queryNetworkSiblingSet,
+@@clientName(NetAppResourceOperationGroup.queryNetworkSiblingSet,
   "QueryNetworkSiblingSetNetAppResource",
   "csharp"
 );
-@@clientName(
-  NetAppResourceOperationGroup.updateNetworkSiblingSet,
+@@clientName(NetAppResourceOperationGroup.updateNetworkSiblingSet,
   "UpdateNetworkSiblingSetNetAppResource",
   "csharp"
 );
-@@clientName(
-  NetAppResourceUsagesOperationGroup.list,
+@@clientName(NetAppResourceUsagesOperationGroup.list,
   "GetNetAppResourceUsages",
   "csharp"
 );
-@@clientName(
-  NetAppResourceUsagesOperationGroup.get,
+@@clientName(NetAppResourceUsagesOperationGroup.get,
   "GetNetAppResourceUsage",
   "csharp"
 );
@@ -671,8 +580,7 @@ using Microsoft.NetApp;
 // C# property type overrides for MountTargetProperties
 @@alternateType(MountTargetProperties.mountTargetId, uuid, "csharp");
 @@alternateType(MountTargetProperties.fileSystemId, uuid, "csharp");
-@@alternateType(
-  MountTargetProperties.ipAddress,
+@@alternateType(MountTargetProperties.ipAddress,
   Azure.Core.ipV4Address,
   "csharp"
 );
@@ -681,8 +589,7 @@ using Microsoft.NetApp;
 @@clientName(CacheMountTargetProperties.ipAddress, "IPAddress", "csharp");
 @@clientName(NicInfo.ipAddress, "IPAddress", "csharp");
 @@clientName(BucketServerProperties.ipAddress, "IPAddress", "csharp");
-@@clientName(
-  PeerClusterForVolumeMigrationRequest.peerIpAddresses,
+@@clientName(PeerClusterForVolumeMigrationRequest.peerIpAddresses,
   "PeerIPAddresses",
   "csharp"
 );
@@ -691,8 +598,7 @@ using Microsoft.NetApp;
 @@alternateType(VolumeProperties.fileSystemId, uuid, "csharp");
 @@alternateType(VolumeProperties.networkSiblingSetId, uuid, "csharp");
 // dataStoreResourceId: string[] -> ResourceIdentifier[] (old SDK exposed Azure.Core.ResourceIdentifier)
-@@alternateType(
-  VolumeProperties.dataStoreResourceId,
+@@alternateType(VolumeProperties.dataStoreResourceId,
   armResourceIdentifier[],
   "csharp"
 );
@@ -719,80 +625,65 @@ using Microsoft.NetApp;
 @@alternateType(VolumePatch.location, azureLocation, "csharp");
 
 // C# property type overrides (backward compat with old autorest SDK types)
-@@alternateType(
-  ReplicationObject.remoteVolumeResourceId,
+@@alternateType(ReplicationObject.remoteVolumeResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@clientName(
-  BackupProperties.backupPolicyResourceId,
+@@clientName(BackupProperties.backupPolicyResourceId,
   "BackupPolicyArmResourceId",
   "csharp"
 );
-@@alternateType(
-  VolumeSnapshotProperties.snapshotPolicyId,
+@@alternateType(VolumeSnapshotProperties.snapshotPolicyId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(ActiveDirectory.kdcIP, Azure.Core.ipV4Address, "csharp");
-@@alternateType(
-  BackupPolicyProperties.backupPolicyId,
+@@alternateType(BackupPolicyProperties.backupPolicyId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  FilePathAvailabilityRequest.subnetId,
+@@alternateType(FilePathAvailabilityRequest.subnetId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  AuthorizeRequest.remoteVolumeResourceId,
+@@alternateType(AuthorizeRequest.remoteVolumeResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  BackupRestoreFiles.destinationVolumeId,
+@@alternateType(BackupRestoreFiles.destinationVolumeId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  VolumeProperties.keyVaultPrivateEndpointResourceId,
+@@alternateType(VolumeProperties.keyVaultPrivateEndpointResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  VolumeProperties.originatingResourceId,
+@@alternateType(VolumeProperties.originatingResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  VolumeProperties.proximityPlacementGroup,
+@@alternateType(VolumeProperties.proximityPlacementGroup,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(VolumeProperties.subnetId, armResourceIdentifier, "csharp");
-@@alternateType(
-  VolumeGroupVolumeProperties.id,
+@@alternateType(VolumeGroupVolumeProperties.id,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  VolumeGroupVolumeProperties.type,
+@@alternateType(VolumeGroupVolumeProperties.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(
-  PoolChangeRequest.newPoolResourceId,
+@@alternateType(PoolChangeRequest.newPoolResourceId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  ReestablishReplicationRequest.sourceVolumeId,
+@@alternateType(ReestablishReplicationRequest.sourceVolumeId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(
-  Replication.remoteVolumeResourceId,
+@@alternateType(Replication.remoteVolumeResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -800,8 +691,7 @@ using Microsoft.NetApp;
 // TEMPORARY: reproduce DeserializeAzureLocation bug
 @@alternateType(VolumeGroup.id, armResourceIdentifier, "csharp");
 @@alternateType(VolumeGroup.location, azureLocation, "csharp");
-@@clientName(
-  VolumeQuotaRulesProperties.provisioningState,
+@@clientName(VolumeQuotaRulesProperties.provisioningState,
   "VolumeQuotaRuleProvisioningState",
   "csharp"
 );
@@ -824,8 +714,7 @@ using Microsoft.NetApp;
 
 // Capacity pool throughput: generate the original int?-typed property name and keep
 // the GA float?-typed CustomThroughputMibps as a compatibility alias in SDK custom code.
-@@clientName(
-  PoolProperties.customThroughputMibps,
+@@clientName(PoolProperties.customThroughputMibps,
   "CustomThroughputMibpsInt",
   "csharp"
 );
@@ -837,8 +726,7 @@ using Microsoft.NetApp;
 // VolumeProperties property type overrides for backward compat with old SDK
 @@alternateType(VolumeProperties.snapshotId, string, "csharp");
 @@alternateType(VolumeProperties.backupId, string, "csharp");
-@@alternateType(
-  VolumeProperties.capacityPoolResourceId,
+@@alternateType(VolumeProperties.capacityPoolResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -846,63 +734,53 @@ using Microsoft.NetApp;
 // VolumeGroupDetails.location: string → azureLocation (old API had AzureLocation?)
 @@alternateType(VolumeGroupDetails.location, azureLocation, "csharp");
 @@alternateType(VolumeGroup.location, azureLocation, "csharp");
-@@clientName(
-  BackupStatus.relationshipStatus,
+@@clientName(BackupStatus.relationshipStatus,
   "VolumeBackupRelationshipStatus",
   "csharp"
 );
-@@clientName(
-  ReplicationStatus.relationshipStatus,
+@@clientName(ReplicationStatus.relationshipStatus,
   "VolumeReplicationRelationshipStatus",
   "csharp"
 );
-@@clientName(
-  RestoreStatus.relationshipStatus,
+@@clientName(RestoreStatus.relationshipStatus,
   "VolumeRestoreRelationshipStatus",
   "csharp"
 );
 // Also fix ReplicationObject.relationshipStatus
-@@alternateType(
-  ReplicationObject.relationshipStatus,
+@@alternateType(ReplicationObject.relationshipStatus,
   VolumeReplicationRelationshipStatus,
   "csharp"
 );
 
 // --- @@hierarchyBuilding: restore base types for backward compat ---
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(
-  CapacityPoolPatch,
+@@hierarchyBuilding(CapacityPoolPatch,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(
-  BackupPolicyPatch,
+@@hierarchyBuilding(BackupPolicyPatch,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(
-  SnapshotPolicyPatch,
+@@hierarchyBuilding(SnapshotPolicyPatch,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
-@@hierarchyBuilding(
-  VolumePatch,
+@@hierarchyBuilding(VolumePatch,
   Azure.ResourceManager.Foundations.TrackedResource,
   "csharp"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore ResourceData base type for backward compat"
-@@hierarchyBuilding(
-  SubvolumeModel,
+@@hierarchyBuilding(SubvolumeModel,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "test"
-@@hierarchyBuilding(
-  VolumeGroup,
+@@hierarchyBuilding(VolumeGroup,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
@@ -920,8 +798,7 @@ using Microsoft.NetApp;
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
 
-@@clientLocation(
-  NetAppAccounts.refreshLdapBindPassword,
+@@clientLocation(NetAppAccounts.refreshLdapBindPassword,
   "Accounts",
   "!autorest"
 );

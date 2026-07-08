@@ -115,6 +115,17 @@ enum Versions {
    */
   @Azure.Core.previewVersion
   v2026_04_15_preview: "2026-04-15-preview",
+
+  /**
+   * The 2026-05-01 API version.
+   */
+  v2026_05_01: "2026-05-01",
+
+  /**
+   * The 2026-05-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 interface Operations
