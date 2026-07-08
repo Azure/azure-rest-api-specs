@@ -38,6 +38,7 @@ import "./DatabaseVulnerabilityAssessment.tsp";
 import "./VulnerabilityAssessmentScanRecord.tsp";
 import "./DataMaskingPolicy.tsp";
 import "./DataWarehouseUserActivities.tsp";
+import "./TopQueriesDatabase.tsp";
 import "./DeletedServer.tsp";
 import "./DistributedAvailabilityGroup.tsp";
 import "./ElasticPool.tsp";

@@ -2030,12 +2030,12 @@ union QueryTimeGrainType {
   string,
 
   /**
-   * PT1H
+   * PT1H (1 hour)
    */
   PT1H: "PT1H",
 
   /**
-   * P1D
+   * P1D (1 day)
    */
   P1D: "P1D",
 }
@@ -2585,27 +2585,27 @@ union AggregationFunctionType {
   string,
 
   /**
-   * avg
+   * Average aggregation
    */
   avg: "avg",
 
   /**
-   * min
+   * Minimum aggregation
    */
   min: "min",
 
   /**
-   * max
+   * Maximum aggregation
    */
   max: "max",
 
   /**
-   * stdev
+   * Standard deviation aggregation
    */
   stdev: "stdev",
 
   /**
-   * sum
+   * Sum aggregation
    */
   sum: "sum",
 }
@@ -2615,29 +2615,62 @@ union MetricType {
   string,
 
   /**
-   * cpu
+   * CPU metric
    */
   cpu: "cpu",
 
   /**
-   * io
+   * IO metric
    */
   io: "io",
 
   /**
-   * logIo
+   * Log IO metric
    */
   logIo: "logIo",
 
   /**
-   * duration
+   * Duration metric
    */
   duration: "duration",
 
   /**
-   * dtu
+   * DTU metric
    */
   dtu: "dtu",
+}
+
+/**
+ * Execution type of top queries.
+ */
+@added(Versions.v2025_08_01_preview)
+union ExecutionType {
+  string,
+
+  /**
+   * Any execution type
+   */
+  any: "any",
+
+  /**
+   * Regular execution type
+   */
+  regular: "regular",
+
+  /**
+   * Irregular execution type
+   */
+  irregular: "irregular",
+
+  /**
+   * Aborted execution type
+   */
+  aborted: "aborted",
+
+  /**
+   * Exception execution type
+   */
+  exception: "exception",
 }
 
 /**
@@ -12729,6 +12762,361 @@ model TopQueries {
    */
   @identifiers(#[])
   queries?: QueryStatisticsProperties[];
+}
+
+/**
+ * Properties of a topquery metric in one interval.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryMetric {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * The value of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  value?: float64;
+}
+
+/**
+ * Properties of a query metrics interval.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryMetricIntervalDetails {
+  /**
+   * The start time for the metric interval.
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for this interval
+   */
+  @identifiers(#[])
+  metrics?: QueryMetric[];
+}
+
+/**
+ * Metrics of a query execution.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryMetrics {
+  /**
+   * Unique query id
+   */
+  @visibility(Lifecycle.Read)
+  queryId?: int64;
+
+  /**
+   * List of intervals with appropriate metric data
+   */
+  @identifiers(#[])
+  intervals?: QueryMetricIntervalDetails[];
+}
+
+/**
+ * A list of top resource consuming queries on database
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model TopQueriesDatabaseResult extends CommonTypes.ProxyResource {
+  /**
+   * Requested number of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  numberOfTopQueries?: int32;
+
+  /**
+   * Aggregation function used to calculate query metrics.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationFunction?: AggregationFunctionType;
+
+  /**
+   * Requested execution type of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  executionType?: ExecutionType;
+
+  /**
+   * Metric used to rank queries.
+   */
+  @visibility(Lifecycle.Read)
+  observedMetric?: MetricType;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationStartTime?: utcDateTime;
+
+  /**
+   * The end time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationEndTime?: utcDateTime;
+
+  /**
+   * List of top resource consuming queries with appropriate metric data
+   */
+  @identifiers(#[])
+  @visibility(Lifecycle.Read)
+  queries?: QueryMetrics[];
+}
+
+/**
+ * A list of top resource consuming queries on database
+ */
+@added(Versions.v2025_08_01_preview)
+model TopQueriesDatabaseListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: TopQueriesDatabaseResult[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * Text of requested query.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model QueryTextDatabase extends CommonTypes.ProxyResource {
+  /**
+   * Query text.
+   */
+  @visibility(Lifecycle.Read)
+  queryText?: string;
+}
+
+/**
+ * A list of requested query texts - contains one item.
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryTextResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: QueryTextDatabase[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model MetricQuery {
+  /**
+   * The name information for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * The UI appropriate name for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * The unit of the metric.
+   */
+  @visibility(Lifecycle.Read)
+  unit?: QueryMetricUnitType;
+
+  /**
+   * Metric value when min() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  min?: float64;
+
+  /**
+   * Metric value when max() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  max?: float64;
+
+  /**
+   * Metric value when avg() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  avg?: float64;
+
+  /**
+   * Metric value when sum() aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  sum?: float64;
+
+  /**
+   * Metric value when stdev aggregate function is used over the interval.
+   */
+  @visibility(Lifecycle.Read)
+  stdev?: float64;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model IntervalQuery {
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric (ISO-8601 format).
+   */
+  @visibility(Lifecycle.Read)
+  intervalStartTime?: utcDateTime;
+
+  /**
+   * Execution count of a query in this interval.
+   */
+  @visibility(Lifecycle.Read)
+  executionCount?: int32;
+
+  /**
+   * List of metric objects for one interval
+   */
+  @identifiers(#[])
+  metrics?: MetricQuery[];
+}
+
+/**
+ * A query execution statistics.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model QueryStatisticsDatabaseResult extends CommonTypes.ProxyResource {
+  /**
+   * Query id.
+   */
+  @visibility(Lifecycle.Read)
+  queryId?: int64;
+
+  /**
+   * List of interval objects
+   */
+  @identifiers(#[])
+  intervals?: IntervalQuery[];
+}
+
+/**
+ * A list of a query execution statistics
+ */
+@added(Versions.v2025_08_01_preview)
+model QueryStatisticsDatabaseListResult {
+  /**
+   * Array of results.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: QueryStatisticsDatabaseResult[];
+
+  /**
+   * Link to retrieve next page of results.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+/**
+ * A list of top resource consuming queries on database
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2025_08_01_preview)
+model TopQueriesDatabaseProperties {
+  /**
+   * Requested number of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  numberOfTopQueries?: int32;
+
+  /**
+   * Aggregation function used to calculate query metrics.
+   */
+  @visibility(Lifecycle.Read)
+  aggregationFunction?: AggregationFunctionType;
+
+  /**
+   * Requested execution type of top queries.
+   */
+  @visibility(Lifecycle.Read)
+  executionType?: ExecutionType;
+
+  /**
+   * Metric used to rank queries.
+   */
+  @visibility(Lifecycle.Read)
+  observedMetric?: MetricType;
+
+  /**
+   * Interval type (length).
+   */
+  @visibility(Lifecycle.Read)
+  intervalType?: QueryTimeGrainType;
+
+  /**
+   * The start time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationStartTime?: utcDateTime;
+
+  /**
+   * The end time for the metric.
+   */
+  @visibility(Lifecycle.Read)
+  observationEndTime?: utcDateTime;
+
+  /**
+   * List of top resource consuming queries with appropriate metric data
+   */
+  @identifiers(#[])
+  queries?: QueryMetrics[];
 }
 
 /**
