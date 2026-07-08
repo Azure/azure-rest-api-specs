@@ -672,6 +672,9 @@ model AgentIdentity {
 
   @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
+
+  @doc("The status of the agent identity")
+  status?: string;
 }
 
 union AgentBlueprintReferenceType {
