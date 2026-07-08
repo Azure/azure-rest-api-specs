@@ -350,7 +350,7 @@ model MatchFilter {
 }
 
 /**
- * Filter for blob scanning. At least one of 'container' or 'blob' must be specified. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
+ * Filter for blob scanning. At least one of 'container' or 'blob' must be specified; a request with neither is rejected by the service. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
  */
 @added(Versions.v2026_01_01_preview)
 model BlobScanFilter {
@@ -366,7 +366,7 @@ model BlobScanFilter {
 }
 
 /**
- * Filter for file scanning. At least one of 'share' or 'file' must be specified. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.
+ * Filter for file scanning. At least one of 'share' or 'file' must be specified; a request with neither is rejected by the service. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.
  */
 @added(Versions.v2026_01_01_preview)
 model FileScanFilter {
