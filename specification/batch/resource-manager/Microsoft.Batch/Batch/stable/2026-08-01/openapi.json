@@ -965,7 +965,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPackageInfoListResult"
+              "$ref": "#/definitions/ListApplicationPackagesResult"
             }
           },
           "default": {
@@ -1037,7 +1037,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPackageInfo"
+              "$ref": "#/definitions/ApplicationPackage"
             }
           },
           "default": {
@@ -1258,7 +1258,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ApplicationPackageInfo"
+              "$ref": "#/definitions/ApplicationPackage"
             }
           },
           "default": {
@@ -2895,76 +2895,6 @@
         }
       ]
     },
-    "ApplicationPackageInfo": {
-      "type": "object",
-      "description": "An application package which represents a particular version of an application, excluding the storage URL details.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApplicationPackageInfoProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "etag": {
-          "type": "string",
-          "description": "The ETag of the resource, used for concurrency statements.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "The tags of the resource.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ApplicationPackageInfoListResult": {
-      "type": "object",
-      "description": "The result of performing list application packages, excluding the storage URL details.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ApplicationPackageInfo items on this page",
-          "items": {
-            "$ref": "#/definitions/ApplicationPackageInfo"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ApplicationPackageInfoProperties": {
-      "type": "object",
-      "description": "Properties of an application package, excluding the storage URL details that are only returned by the create operation.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/PackageState",
-          "description": "The current state of the application package.",
-          "readOnly": true
-        },
-        "format": {
-          "type": "string",
-          "description": "The format of the application package, if the package is active.",
-          "readOnly": true
-        },
-        "lastActivationTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time at which the package was last activated, if the package is active.",
-          "readOnly": true
-        }
-      }
-    },
     "ApplicationPackageProperties": {
       "type": "object",
       "description": "Properties of an application package",
@@ -4594,7 +4524,7 @@
           "description": "At least one of targetDedicatedNodes, targetLowPriorityNodes must be set."
         },
         "nodeDeallocationOption": {
-          "$ref": "#/definitions/SettableComputeNodeDeallocationOption",
+          "$ref": "#/definitions/RequestedComputeNodeDeallocationOption",
           "title": "Determines what to do with a node and its running task(s) after it has been selected for deallocation.",
           "description": "If omitted, the default value is Requeue.",
           "x-ms-mutability": [
@@ -5001,6 +4931,27 @@
           "x-ms-secret": true
         }
       }
+    },
+    "ListApplicationPackagesResult": {
+      "type": "object",
+      "description": "The result of performing list application packages.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ApplicationPackage items on this page",
+          "items": {
+            "$ref": "#/definitions/ApplicationPackage"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ListApplicationsResult": {
       "type": "object",
@@ -6234,6 +6185,36 @@
         }
       }
     },
+    "RequestedComputeNodeDeallocationOption": {
+      "type": "string",
+      "description": "Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.",
+      "enum": [
+        "Requeue",
+        "Terminate",
+        "TaskCompletion"
+      ],
+      "x-ms-enum": {
+        "name": "RequestedComputeNodeDeallocationOption",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Requeue",
+            "value": "Requeue",
+            "description": "Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "name": "Terminate",
+            "value": "Terminate",
+            "description": "Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated."
+          },
+          {
+            "name": "TaskCompletion",
+            "value": "TaskCompletion",
+            "description": "Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed."
+          }
+        ]
+      }
+    },
     "ResizeError": {
       "type": "object",
       "title": "An error that occurred when resizing a pool.",
@@ -6552,36 +6533,6 @@
       "required": [
         "id"
       ]
-    },
-    "SettableComputeNodeDeallocationOption": {
-      "type": "string",
-      "description": "Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.",
-      "enum": [
-        "Requeue",
-        "Terminate",
-        "TaskCompletion"
-      ],
-      "x-ms-enum": {
-        "name": "SettableComputeNodeDeallocationOption",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Requeue",
-            "value": "Requeue",
-            "description": "Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated."
-          },
-          {
-            "name": "Terminate",
-            "value": "Terminate",
-            "description": "Terminate running tasks. The tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove nodes as soon as tasks have been terminated."
-          },
-          {
-            "name": "TaskCompletion",
-            "value": "TaskCompletion",
-            "description": "Allow currently running tasks to complete. Schedule no new tasks while waiting. Remove nodes when all tasks have completed."
-          }
-        ]
-      }
     },
     "SkuCapability": {
       "type": "object",

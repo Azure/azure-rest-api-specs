@@ -654,7 +654,7 @@ enum ComputeNodeDeallocationOption {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
 @added(Versions.v2026_08_01)
-enum SettableComputeNodeDeallocationOption {
+enum RequestedComputeNodeDeallocationOption {
   /**
    * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
    */
@@ -1670,16 +1670,6 @@ model ApplicationPackageProperties {
 }
 
 /**
- * Properties of an application package, excluding the storage URL details that are only returned by the create operation.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
-model ApplicationPackageInfoProperties
-  is OmitProperties<
-    ApplicationPackageProperties,
-    "storageUrl" | "storageUrlExpiry"
-  >;
-
-/**
  * The properties associated with the Application.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
@@ -1709,12 +1699,6 @@ model ListApplicationsResult is Azure.Core.Page<Application>;
  * The result of performing list application packages.
  */
 model ListApplicationPackagesResult is Azure.Core.Page<ApplicationPackage>;
-
-/**
- * The result of performing list application packages, excluding the storage URL details.
- */
-model ApplicationPackageInfoListResult
-  is Azure.Core.Page<ApplicationPackageInfo>;
 
 /**
  * Quotas associated with a Batch region for a particular subscription.
@@ -2912,7 +2896,7 @@ model FixedScaleSettings {
   @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @typeChangedFrom(Versions.v2026_08_01, ComputeNodeDeallocationOption)
-  nodeDeallocationOption?: SettableComputeNodeDeallocationOption;
+  nodeDeallocationOption?: RequestedComputeNodeDeallocationOption;
 }
 
 /**
