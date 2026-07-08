@@ -1419,3 +1419,9 @@ enum ProvisioningStateEnum {
   Azure.ClientGenerator.Core.Usage.input,
   "csharp"
 );
+
+@@clientName(
+  Azure.ResourceManager.CommonTypes.Encryption,
+  "StorageAccountEncryption",
+  "python,java"
+);
