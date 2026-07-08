@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using DeviceUpdateClient;
 
+namespace Customization;
+
 @@clientName(LogCollection.operationId, "logCollectionId");
 
 @@clientName(
@@ -25,7 +27,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listUpdates,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.importUpdate,
@@ -35,7 +37,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.importUpdate,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.getUpdate,
@@ -45,7 +47,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.getUpdate,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.deleteUpdate,
@@ -55,7 +57,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.deleteUpdate,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.listProviders,
@@ -65,7 +67,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listProviders,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.listNames,
@@ -75,7 +77,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listNames,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.listVersions,
@@ -85,7 +87,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listVersions,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.listFiles,
@@ -95,10 +97,14 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listFiles,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdates", "csharp");
-@@clientLocation(DeviceUpdateOperationGroup.getFile, "DeviceUpdate", "!csharp");
+@@clientLocation(
+  DeviceUpdateOperationGroup.getFile,
+  "DeviceUpdate",
+  "!csharp,!java"
+);
 @@clientLocation(
   DeviceUpdateOperationGroup.listOperationStatuses,
   "DeviceUpdates",
@@ -107,7 +113,7 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.listOperationStatuses,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(
   DeviceUpdateOperationGroup.getOperationStatus,
@@ -117,155 +123,203 @@ using DeviceUpdateClient;
 @@clientLocation(
   DeviceUpdateOperationGroup.getOperationStatus,
   "DeviceUpdate",
-  "!csharp"
+  "!csharp,!java"
 );
 
 @@clientLocation(
   DeviceManagementOperationGroup.listDeviceClasses,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeviceClass,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.updateDeviceClass,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.deleteDeviceClass,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listDevices,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.importDevices,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
-@@clientLocation(DeviceManagementOperationGroup.getDevice, "DeviceManagement");
+@@clientLocation(
+  DeviceManagementOperationGroup.getDevice,
+  "DeviceManagement",
+  "!java"
+);
 @@clientLocation(
   DeviceManagementOperationGroup.getDeviceModule,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getUpdateCompliance,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
-@@clientLocation(DeviceManagementOperationGroup.listGroups, "DeviceManagement");
-@@clientLocation(DeviceManagementOperationGroup.getGroup, "DeviceManagement");
+@@clientLocation(
+  DeviceManagementOperationGroup.listGroups,
+  "DeviceManagement",
+  "!java"
+);
+@@clientLocation(
+  DeviceManagementOperationGroup.getGroup,
+  "DeviceManagement",
+  "!java"
+);
 @@clientLocation(
   DeviceManagementOperationGroup.deleteGroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getUpdateComplianceForGroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listBestUpdatesForGroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listDeploymentsForGroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.createOrUpdateDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeploymentManagementOperationGroup.deleteDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeploymentStatus,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.deleteDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeviceClassSubgroupUpdateCompliance,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getBestUpdatesForDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.stopDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.retryDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getDeviceClassSubgroupDeploymentStatus,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getOperationStatus,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listOperationStatuses,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.startLogCollection,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getLogCollection,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listLogCollections,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.getLogCollectionDetailedStatus,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 @@clientLocation(
   DeviceManagementOperationGroup.listHealthOfDevices,
-  "DeviceManagement"
+  "DeviceManagement",
+  "!java"
 );
 
 // Hoist `instanceId` from per-operation parameter to client-constructor
@@ -281,5 +335,83 @@ model DeviceUpdateClientOptions {
   DeviceUpdateClient,
   {
     parameters: DeviceUpdateClientOptions,
-  }
+  },
+  "!java"
 );
+
+// Java lib GAed with 2 clients
+@clientInitialization(
+  {
+    parameters: DeviceUpdateClientOptions,
+  },
+  "java"
+)
+@client(
+  {
+    name: "DeviceUpdateClient",
+    service: DeviceUpdateClient,
+  },
+  "java"
+)
+interface ClientDeviceUpdateClient {
+  listUpdates is DeviceUpdateOperationGroup.listUpdates;
+  importUpdate is DeviceUpdateOperationGroup.importUpdate;
+  getUpdate is DeviceUpdateOperationGroup.getUpdate;
+  deleteUpdate is DeviceUpdateOperationGroup.deleteUpdate;
+  listProviders is DeviceUpdateOperationGroup.listProviders;
+  listNames is DeviceUpdateOperationGroup.listNames;
+  listVersions is DeviceUpdateOperationGroup.listVersions;
+  listFiles is DeviceUpdateOperationGroup.listFiles;
+  getFile is DeviceUpdateOperationGroup.getFile;
+  listOperationStatuses is DeviceUpdateOperationGroup.listOperationStatuses;
+  getOperationStatus is DeviceUpdateOperationGroup.getOperationStatus;
+}
+
+@client(
+  {
+    name: "DeviceManagementClient",
+    service: DeviceUpdateClient,
+  },
+  "java"
+)
+interface DeviceManagementClient {
+  listDeviceClasses is DeviceManagementOperationGroup.listDeviceClasses;
+  getDeviceClass is DeviceManagementOperationGroup.getDeviceClass;
+  updateDeviceClass is DeviceManagementOperationGroup.updateDeviceClass;
+  deleteDeviceClass is DeviceManagementOperationGroup.deleteDeviceClass;
+  listInstallableUpdatesForDeviceClass is DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass;
+  listDevices is DeviceManagementOperationGroup.listDevices;
+  importDevices is DeviceManagementOperationGroup.importDevices;
+  getDevice is DeviceManagementOperationGroup.getDevice;
+  getDeviceModule is DeviceManagementOperationGroup.getDeviceModule;
+  getUpdateCompliance is DeviceManagementOperationGroup.getUpdateCompliance;
+  listGroups is DeviceManagementOperationGroup.listGroups;
+  getGroup is DeviceManagementOperationGroup.getGroup;
+  deleteGroup is DeviceManagementOperationGroup.deleteGroup;
+  getUpdateComplianceForGroup is DeviceManagementOperationGroup.getUpdateComplianceForGroup;
+  listBestUpdatesForGroup is DeviceManagementOperationGroup.listBestUpdatesForGroup;
+  listDeploymentsForGroup is DeviceManagementOperationGroup.listDeploymentsForGroup;
+  getDeployment is DeviceManagementOperationGroup.getDeployment;
+  createOrUpdateDeployment is DeviceManagementOperationGroup.createOrUpdateDeployment;
+  deleteDeployment is DeploymentManagementOperationGroup.deleteDeployment;
+  getDeploymentStatus is DeviceManagementOperationGroup.getDeploymentStatus;
+  listDeviceClassSubgroupsForGroup is DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup;
+  getDeviceClassSubgroup is DeviceManagementOperationGroup.getDeviceClassSubgroup;
+  deleteDeviceClassSubgroup is DeviceManagementOperationGroup.deleteDeviceClassSubgroup;
+  getDeviceClassSubgroupUpdateCompliance is DeviceManagementOperationGroup.getDeviceClassSubgroupUpdateCompliance;
+  getBestUpdatesForDeviceClassSubgroup is DeviceManagementOperationGroup.getBestUpdatesForDeviceClassSubgroup;
+  listDeploymentsForDeviceClassSubgroup is DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup;
+  getDeploymentForDeviceClassSubgroup is DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup;
+  deleteDeploymentForDeviceClassSubgroup is DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup;
+  stopDeployment is DeviceManagementOperationGroup.stopDeployment;
+  retryDeployment is DeviceManagementOperationGroup.retryDeployment;
+  getDeviceClassSubgroupDeploymentStatus is DeviceManagementOperationGroup.getDeviceClassSubgroupDeploymentStatus;
+  listDeviceStatesForDeviceClassSubgroupDeployment is DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment;
+  getOperationStatus is DeviceManagementOperationGroup.getOperationStatus;
+  listOperationStatuses is DeviceManagementOperationGroup.listOperationStatuses;
+  startLogCollection is DeviceManagementOperationGroup.startLogCollection;
+  getLogCollection is DeviceManagementOperationGroup.getLogCollection;
+  listLogCollections is DeviceManagementOperationGroup.listLogCollections;
+  getLogCollectionDetailedStatus is DeviceManagementOperationGroup.getLogCollectionDetailedStatus;
+  listHealthOfDevices is DeviceManagementOperationGroup.listHealthOfDevices;
+}
