@@ -26,14 +26,6 @@ model SandboxGroupProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Description is on the referenced type to avoid emitting a sibling of $ref."
   @visibility(Lifecycle.Read)
   provisioningState?: SandboxGroupProvisioningState;
-
-  /** Current number of active sandboxes in this group. */
-  @visibility(Lifecycle.Read)
-  currentSandboxCount?: int32;
-
-  /** List of connection names that sandboxes in this group are allowed to use. */
-  @visibility(Lifecycle.Read)
-  connections?: string[];
 }
 
 /** Provisioning state of the SandboxGroup. */
