@@ -82,6 +82,7 @@ using Microsoft.Databricks;
   "ComplianceSecurityProfile",
   "csharp"
 );
+@@clientName(AccessConnectorProperties.referedBy, "ReferredBy", "csharp");
 @@clientName(GroupIdInformation, "DatabricksPrivateLinkResource", "csharp");
 @@clientName(
   Workspaces.list,
