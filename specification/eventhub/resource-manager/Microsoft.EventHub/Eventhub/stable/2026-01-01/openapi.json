@@ -930,6 +930,9 @@
           "NamespaceCreate": {
             "$ref": "./examples/NameSpaces/EHNameSpaceCreate.json"
           },
+          "NamespaceCreateWithIpAddressTypeDualStack": {
+            "$ref": "./examples/NameSpaces/EHNamespaceCreateWithIpAddressTypeDualStack.json"
+          },
           "NamespaceWithGeoDRCreate": {
             "$ref": "./examples/NameSpaces/NamespaceWithGeoDRCreate.json"
           }
@@ -983,24 +986,14 @@
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "format": "uri",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespace"
             }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1013,12 +1006,7 @@
           "NamespacesUpdate": {
             "$ref": "./examples/NameSpaces/EHNameSpaceUpdate.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/EHNamespace"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "Namespaces_Delete",
@@ -4644,29 +4632,29 @@
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations.",
           "x-ms-client-flatten": true
         },
+        "sku": {
+          "$ref": "#/definitions/ClusterSku",
+          "description": "Properties of the cluster SKU."
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "sku": {
-          "$ref": "#/definitions/ClusterSku",
-          "description": "Properties of the cluster SKU."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -4950,21 +4938,6 @@
           "description": "Namespace properties supplied for create namespace operation.",
           "x-ms-client-flatten": true
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "Properties of sku resource"
@@ -4972,11 +4945,26 @@
         "identity": {
           "$ref": "#/definitions/Identity",
           "description": "Properties of BYOK Identity description"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -5140,9 +5128,9 @@
           "$ref": "#/definitions/GeoDataReplicationProperties",
           "description": "Geo Data Replication settings for the namespace"
         },
-        "ipV6Enabled": {
-          "type": "boolean",
-          "description": "Value that indicates whether IPv6 is enabled for public network access."
+        "ipAddressType": {
+          "$ref": "#/definitions/IpAddressType",
+          "description": "The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack)."
         }
       }
     },
@@ -5503,6 +5491,30 @@
             "$ref": "#/definitions/UserAssignedIdentity"
           }
         }
+      }
+    },
+    "IpAddressType": {
+      "type": "string",
+      "description": "The IP address type for the namespace. Determines whether the namespace supports IPv4 only or both IPv4 and IPv6 (dual stack).",
+      "enum": [
+        "IPv4",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "The namespace supports IPv4 addresses only."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "The namespace supports both IPv4 and IPv6 addresses (dual stack)."
+          }
+        ]
       }
     },
     "KeyType": {

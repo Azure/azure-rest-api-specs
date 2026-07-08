@@ -52,7 +52,8 @@ interface FunctionEnvelopeOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteFunction"
     > {}
 
 alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -112,7 +113,8 @@ interface FunctionEnvelopeSlotOperationGroupOps
         @segment("keys")
         @key
         keyName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunctionKey"
     > {}
 
 @armResourceOperations
@@ -142,7 +144,8 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
@@ -282,7 +285,8 @@ interface FunctionEnvelopeOperationGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
 @tag("WebApps")
@@ -388,18 +392,23 @@ interface FunctionEnvelopeOperationGroup {
 }
 
 @@doc(FunctionEnvelope.name, "Function name.");
-@@doc(FunctionEnvelope.properties,
+@@doc(
+  FunctionEnvelope.properties,
   "FunctionEnvelope resource specific properties"
 );
-@@doc(FunctionEnvelopes.createFunction::parameters.resource,
+@@doc(
+  FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@doc(
+  FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "The key to create or update"
 );
-@@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "The key to create or update"
 );

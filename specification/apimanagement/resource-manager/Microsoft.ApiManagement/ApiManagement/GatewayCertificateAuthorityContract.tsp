@@ -68,19 +68,21 @@ interface GatewayCertificateAuthorityContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GatewayCertificateAuthorityContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmResourceCreatedSyncResponse<GatewayCertificateAuthorityContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<GatewayCertificateAuthorityContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmResourceCreatedSyncResponse<GatewayCertificateAuthorityContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -130,12 +132,15 @@ interface GatewayCertificateAuthorityContracts {
 
 @@maxLength(GatewayCertificateAuthorityContract.name, 80);
 @@minLength(GatewayCertificateAuthorityContract.name, 1);
-@@doc(GatewayCertificateAuthorityContract.name,
+@@doc(
+  GatewayCertificateAuthorityContract.name,
   "Identifier of the certificate entity. Must be unique in the current API Management service instance."
 );
-@@doc(GatewayCertificateAuthorityContract.properties,
+@@doc(
+  GatewayCertificateAuthorityContract.properties,
   "Gateway certificate authority details."
 );
-@@doc(GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
+@@doc(
+  GatewayCertificateAuthorityContracts.createOrUpdate::parameters.resource,
   ""
 );

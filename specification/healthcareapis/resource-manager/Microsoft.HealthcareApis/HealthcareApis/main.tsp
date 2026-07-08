@@ -23,6 +23,7 @@ import "./IotConnector.tsp";
 import "./IotFhirDestination.tsp";
 import "./FhirService.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -61,8 +62,7 @@ interface Operations {
   @segment("operations")
   @list
   @get
-  list(
-    ...ApiVersionParameter,
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ArmResponse<ListOperations> | ErrorDetails;
+  list(...ApiVersionParameter, ...Azure.ResourceManager.Legacy.Provider):
+    | ArmResponse<ListOperations>
+    | ErrorDetails;
 }

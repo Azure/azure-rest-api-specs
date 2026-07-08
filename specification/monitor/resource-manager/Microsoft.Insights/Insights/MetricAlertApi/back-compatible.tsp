@@ -8,7 +8,8 @@ using MetricAlertApi;
 
 @@clientLocation(MetricAlertResources.get, "MetricAlerts");
 @@clientLocation(MetricAlertResources.createOrUpdate, "MetricAlerts");
-@@clientName(MetricAlertResources.createOrUpdate::parameters.resource,
+@@clientName(
+  MetricAlertResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(MetricAlertResources.update, "MetricAlerts");

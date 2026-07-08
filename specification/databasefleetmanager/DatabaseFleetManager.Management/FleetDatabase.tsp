@@ -104,15 +104,19 @@ interface FleetDatabases {
 
 @@doc(FleetDatabase.name, "Name of the database.");
 @@doc(FleetDatabase.properties, "Fleet database properties.");
-@@doc(FleetDatabases.createOrUpdate::parameters.resource,
+@@doc(
+  FleetDatabases.createOrUpdate::parameters.resource,
   "The database object to create or update."
 );
-@@doc(FleetDatabases.update::parameters.properties,
+@@doc(
+  FleetDatabases.update::parameters.properties,
   "The database object to patch."
 );
-@@doc(FleetDatabases.changeTier::parameters.body,
+@@doc(
+  FleetDatabases.changeTier::parameters.body,
   "The details of the change tier operation."
 );
-@@doc(FleetDatabases.rename::parameters.body,
+@@doc(
+  FleetDatabases.rename::parameters.body,
   "The details of the rename operation."
 );

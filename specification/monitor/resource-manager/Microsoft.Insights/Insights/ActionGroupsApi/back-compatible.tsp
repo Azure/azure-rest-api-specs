@@ -8,27 +8,33 @@ using ActionGroupsApi;
 
 @@clientLocation(ActionGroupResources.get, "ActionGroups");
 @@clientLocation(ActionGroupResources.createOrUpdate, "ActionGroups");
-@@clientName(ActionGroupResources.createOrUpdate::parameters.resource,
+@@clientName(
+  ActionGroupResources.createOrUpdate::parameters.resource,
   "actionGroup"
 );
 @@clientLocation(ActionGroupResources.update, "ActionGroups");
-@@clientName(ActionGroupResources.update::parameters.properties,
+@@clientName(
+  ActionGroupResources.update::parameters.properties,
   "actionGroupPatch"
 );
 @@clientLocation(ActionGroupResources.delete, "ActionGroups");
 @@clientLocation(ActionGroupResources.listByResourceGroup, "ActionGroups");
 @@clientLocation(ActionGroupResources.listBySubscriptionId, "ActionGroups");
-@@clientLocation(ActionGroupResources.createNotificationsAtActionGroupResourceLevel,
+@@clientLocation(
+  ActionGroupResources.createNotificationsAtActionGroupResourceLevel,
   "ActionGroups"
 );
-@@clientName(ActionGroupResources.createNotificationsAtActionGroupResourceLevel::parameters.body,
+@@clientName(
+  ActionGroupResources.createNotificationsAtActionGroupResourceLevel::parameters.body,
   "notificationRequest"
 );
-@@clientLocation(ActionGroupResources.getTestNotificationsAtActionGroupResourceLevel,
+@@clientLocation(
+  ActionGroupResources.getTestNotificationsAtActionGroupResourceLevel,
   "ActionGroups"
 );
 @@clientLocation(ActionGroupResources.enableReceiver, "ActionGroups");
-@@clientName(ActionGroupResources.enableReceiver::parameters.body,
+@@clientName(
+  ActionGroupResources.enableReceiver::parameters.body,
   "enableRequest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

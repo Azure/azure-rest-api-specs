@@ -93,6 +93,7 @@ interface Settings {
 }
 
 @@doc(Setting.name, "Setting type.");
-@@doc(Settings.createOrUpdateByScope::parameters.resource,
+@@doc(
+  Settings.createOrUpdateByScope::parameters.resource,
   "Setting to be created or updated."
 );

@@ -47,9 +47,11 @@ interface PeeringRegisteredAsns {
 }
 
 @@doc(PeeringRegisteredAsn.name, "The name of the registered ASN.");
-@@doc(PeeringRegisteredAsn.properties,
+@@doc(
+  PeeringRegisteredAsn.properties,
   "The properties that define a registered ASN."
 );
-@@doc(PeeringRegisteredAsns.createOrUpdate::parameters.resource,
+@@doc(
+  PeeringRegisteredAsns.createOrUpdate::parameters.resource,
   "The properties needed to create a registered ASN."
 );

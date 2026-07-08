@@ -78,9 +78,11 @@ interface SecurityMLAnalyticsSettings {
   >;
 }
 
-@@doc(SecurityMLAnalyticsSetting.name,
+@@doc(
+  SecurityMLAnalyticsSetting.name,
   "Security ML Analytics Settings resource name"
 );
-@@doc(SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
+@@doc(
+  SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
   "The security ML Analytics setting"
 );

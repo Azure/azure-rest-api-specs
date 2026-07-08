@@ -282,6 +282,7 @@ interface LivenessSessionOperations {
     FaceErrorResponse
   >;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(Versions.v1_3_preview_1)
   @doc(PatchLivenessSessionSettingDescription)
   @patch(#{ implicitOptionality: true })
