@@ -185,6 +185,9 @@ Summaries must follow all of these constraints:
 - **Always include articles** for grammatical completeness — "Create a response",
   not "Create response"; "Get an agent", not "Get agent".
 - **Never truncate** — the text must be a complete, self-contained phrase.
+- **Use a single-line string literal** — do not use multiline triple-quoted
+  summaries. If the source summary is a paragraph, move the detail into the
+  TSDoc operation description and replace the summary with a short phrase.
 - **Prefer the shortest correct phrasing.** The summary should name the verb and
   the resource, plus just enough context to distinguish it from sibling operations.
   Move any additional detail into the TSDoc description.
@@ -247,6 +250,19 @@ The verb "Get" already implies retrieving the resource. Do not pad with
 @summary("This operation lists all connections that are currently available in the project, including those that are pending and those that are active, and returns them as a paginated list")
 ```
 
+### ❌ Bad — multiline paragraph
+
+```typespec
+@summary("""
+  Create a Realtime client secret with an associated session configuration.
+
+  Client secrets are short-lived tokens that can be passed to a client app.
+  """)
+```
+
+Use `@summary("Create a Realtime client secret")` and move the paragraph
+details into the operation TSDoc description.
+
 ### ❌ Bad — truncated
 
 ```typespec
@@ -271,6 +287,7 @@ Do not repeat the verb or splice in the doc-comment text. Use a clean imperative
 
 - Use imperative voice: "Create", "Get", "List", "Delete", "Update" (not "Creates", "Gets", etc.)
 - **No trailing period** — summaries are phrases, not sentences
+- Use a single-line string literal, not a multiline triple-quoted string
 - Keep under ~60 characters
 - Remove filler words ("all", "by ID", "info about") unless needed for disambiguation
 - Always include articles ("a", "an", "the") for grammatical completeness

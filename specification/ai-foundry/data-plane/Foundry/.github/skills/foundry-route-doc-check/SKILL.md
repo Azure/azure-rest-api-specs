@@ -42,6 +42,7 @@ operations that have an explicit, significant rule violation:
 - Wrong grammatical voice (`@summary` using third-person, or doc comment using imperative) → fix
 - Empty or placeholder documentation → fix
 - Summary contains unnecessary filler ("all", "by id") that can be removed → fix
+- Summary uses a multiline triple-quoted string, full sentence, or paragraph instead of a concise single-line phrase → fix
 - Description is near-identical to the summary with no added detail → fix
 - Description uses `@doc()` instead of a TSDoc `/** ... */` comment → fix
 - `#suppress "@azure-tools/typespec-azure-core/documentation-required" ...` hides missing route or parameter documentation → remove the suppression and add documentation
@@ -67,7 +68,7 @@ for the full rule definitions, examples, and remediation guidance.
 | `FDOC-001`       | **Every** operation must have a TSDoc `/** ... */` comment. Prefer TSDoc over `@doc()`. |
 | `FDOC-002`       | **Every** operation must have a `@summary()` decorator — no exceptions                         |
 | `FDOC-003`       | The TSDoc description must use **third-person indicative** voice ("Creates an agent"), must add meaningful detail beyond the summary, and must not be near-identical to the summary. |
-| `FDOC-004`       | `@summary()` must be a maximally concise **imperative** phrase ("Create an agent"). No trailing period. No filler ("all", "by ID", "info about"). Must not be truncated. Always include articles. |
+| `FDOC-004`       | `@summary()` must be a maximally concise, single-line **imperative** phrase ("Create an agent"). No multiline strings. No trailing period. No filler ("all", "by ID", "info about"). Must not be truncated. Always include articles. |
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |
 | `FDOC-006`       | Do not leave multiple adjacent TSDoc comment blocks on the same operation or parameter. TypeSpec concatenates adjacent docs into one OpenAPI `description`, which can produce malformed text. |
 | `FDOC-007`       | Remove `documentation-required` suppressions on routes and parameters, including auto-generated import suppressions, and replace them with generated TSDoc documentation. |
