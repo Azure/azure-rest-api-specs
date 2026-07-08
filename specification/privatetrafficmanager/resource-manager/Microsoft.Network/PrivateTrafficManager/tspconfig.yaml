@@ -11,14 +11,10 @@ options:
     output-file: "{emitter-output-dir}/{version-status}/{version}/privateTrafficManager.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.privateTrafficManager"
-    clear-output-folder: true
-    model-namespace: false
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: "Azure.ResourceManager.PrivateTrafficManager"
-    flavor:
-      "azure"
-      # The following options are required for generating the management plane SDKs. Please refer to https://aka.ms/azure-sdk/typespec for more details.
+    api-version: "2026-02-09-preview"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-privatetrafficmanager"
     namespace: "azure.mgmt.privatetrafficmanager"
