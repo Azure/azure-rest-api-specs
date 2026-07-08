@@ -41,7 +41,7 @@ enum Versions {
 
   /** Karpenter Fleet preview Api Version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
-  v2026_06_01_preview: "2026-06-01-preview"
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
