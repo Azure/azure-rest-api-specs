@@ -7,8 +7,10 @@
 import "../common/models.tsp";
 import "@typespec/http";
 import "@azure-tools/openai-typespec/models/images";
+import "@typespec/openapi";
 using TypeSpec.Http;
 using OpenAI;
+using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 @route("openai/v1/images")
 @tag("Images")
@@ -26,14 +28,14 @@ interface Images {
   @sharedRoute
   @route("edits")
   @post
+  @extension("x-ms-request-body-description-override", "The request body.")
   createImageEditMultipart is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
       /** The multipart request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateImageEditRequest;
     },
@@ -52,9 +54,10 @@ interface Images {
   @sharedRoute
   @route("edits")
   @post
+  @extension("x-ms-request-body-description-override", "The request body.")
   createImageEditJson is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.EditImageBodyJsonParam;
     },
@@ -66,7 +69,6 @@ interface Images {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
@@ -75,7 +77,7 @@ interface Images {
   @post
   createImage is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.CreateImageRequest;
     },
@@ -88,7 +90,6 @@ interface Images {
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create an image variation")
@@ -96,12 +97,11 @@ interface Images {
   @post
   createImageVariation is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
       /** The multipart request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateImageVariationRequest;
     },

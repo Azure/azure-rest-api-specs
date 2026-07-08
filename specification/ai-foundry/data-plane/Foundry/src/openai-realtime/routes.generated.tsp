@@ -4,7 +4,6 @@
 // </auto-generated>
 // -----------------------------------------------------------------------------
 
-/** The content type of the request body. */
 import "../common/models.tsp";
 import "@typespec/http";
 import "@azure-tools/openai-typespec/models/realtime";
@@ -14,27 +13,25 @@ namespace Azure.AI.Projects;
 @route("openai/v1/realtime")
 @tag("Realtime")
 interface Realtime {
+  /**
+   * Creates a Realtime API call over WebRTC and returns the SDP answer needed to complete the peer connection.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls")
   @post
-  @summary("""
-    Create a new Realtime API call over WebRTC and receive the SDP answer needed
-    to complete the peer connection.
-    """)
+  @summary("Create a Realtime call")
   `create-realtime-call` is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The content type of the request body. */
       @header
       contentType: "multipart/form-data";
 
       /** The multipart request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.RealtimeCallCreateRequest;
     },
@@ -57,18 +54,17 @@ interface Realtime {
     }
   >;
 
+  /**
+   * Accepts an incoming SIP call and configures the realtime session that handles it.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/accept")
   @post
-  @summary("""
-    Accept an incoming SIP call and configure the realtime session that will
-    handle it.
-    """)
+  @summary("Accept a Realtime call")
   `accept-realtime-call` is OpenAIOperation<
     {
       /**The identifier for the call provided in the
@@ -85,18 +81,17 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  /**
+   * Ends an active Realtime API call initiated over SIP or WebRTC.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/hangup")
   @post
-  @summary("""
-    End an active Realtime API call, whether it was initiated over SIP or
-    WebRTC.
-    """)
+  @summary("End a Realtime call")
   `hangup-realtime-call` is OpenAIOperation<
     {
       /**The identifier for the call. For SIP calls, use the value provided in the
@@ -111,15 +106,17 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  /**
+   * Transfers an active SIP call to a new destination using the SIP REFER verb.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/refer")
   @post
-  @summary("Transfer an active SIP call to a new destination using the SIP REFER verb.")
+  @summary("Transfer a SIP call")
   `refer-realtime-call` is OpenAIOperation<
     {
       /**The identifier for the call provided in the
@@ -136,15 +133,17 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  /**
+   * Declines an incoming SIP call by returning a SIP status code to the caller.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("calls/{call_id}/reject")
   @post
-  @summary("Decline an incoming SIP call by returning a SIP status code to the caller.")
+  @summary("Decline a SIP call")
   `reject-realtime-call` is OpenAIOperation<
     {
       /**The identifier for the call provided in the
@@ -162,30 +161,17 @@ interface Realtime {
     TypeSpec.Http.OkResponse
   >;
 
+  /**
+   * Creates a short-lived Realtime client secret that can include session configuration and be used by client applications without exposing the main API key.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("client_secrets")
   @post
-  @summary("""
-    Create a Realtime client secret with an associated session configuration.
-    
-    Client secrets are short-lived tokens that can be passed to a client app,
-    such as a web frontend or mobile client, which grants access to the Realtime API without
-    leaking your main API key. You can configure a custom TTL for each client secret.
-    
-    You can also attach session configuration options to the client secret, which will be
-    applied to any sessions created using that client secret, but these can also be overridden
-    by the client connection.
-    
-    [Learn more about authentication with client secrets over WebRTC](/docs/guides/realtime-webrtc).
-    
-    Returns the created client secret and the effective session object. The client secret is a string that looks like `ek_1234`.
-    
-    """)
+  @summary("Create a Realtime client secret")
   `create-realtime-client-secret` is OpenAIOperation<
     {
       /** Create a client secret with the given session configuration. */
@@ -195,26 +181,17 @@ interface Realtime {
     OpenAI.RealtimeCreateClientSecretResponse
   >;
 
+  /**
+   * Creates an ephemeral API token and Realtime session for use in client-side applications.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("sessions")
   @post
-  @summary("""
-    Create an ephemeral API token for use in client-side applications with the
-    Realtime API. Can be configured with the same session parameters as the
-    `session.update` client event.
-    
-    It responds with a session object, plus a `client_secret` key which contains
-    a usable ephemeral API token that can be used to authenticate browser clients
-    for the Realtime API.
-    
-    Returns the created Realtime session object, plus an ephemeral key.
-    
-    """)
+  @summary("Create a Realtime session")
   `create-realtime-session` is OpenAIOperation<
     {
       /** Create an ephemeral API key with the given session configuration. */
@@ -224,26 +201,17 @@ interface Realtime {
     OpenAI.RealtimeSessionCreateResponse
   >;
 
+  /**
+   * Creates an ephemeral API token and Realtime transcription session for use in client-side applications.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("transcription_sessions")
   @post
-  @summary("""
-    Create an ephemeral API token for use in client-side applications with the
-    Realtime API specifically for realtime transcriptions.
-    Can be configured with the same session parameters as the `transcription_session.update` client event.
-    
-    It responds with a session object, plus a `client_secret` key which contains
-    a usable ephemeral API token that can be used to authenticate browser clients
-    for the Realtime API.
-    
-    Returns the created Realtime transcription session object, plus an ephemeral key.
-    
-    """)
+  @summary("Create a transcription session")
   `create-realtime-transcription-session` is OpenAIOperation<
     {
       /** Create an ephemeral API key with the given session configuration. */
@@ -253,26 +221,17 @@ interface Realtime {
     OpenAI.RealtimeTranscriptionSessionCreateResponse
   >;
 
+  /**
+   * Creates a short-lived Realtime translation client secret with an associated translation session configuration.
+   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @route("translations/client_secrets")
   @post
-  @summary("""
-    Create a Realtime translation client secret with an associated translation session configuration.
-    
-    Client secrets are short-lived tokens that can be passed to a client app,
-    such as a web frontend or mobile client, which grants access to the Realtime
-    Translation API without leaking your main API key. You can configure a custom
-    TTL for each client secret.
-    
-    Returns the created client secret and the effective translation session object.
-    The client secret is a string that looks like `ek_1234`.
-    
-    """)
+  @summary("Create a translation client secret")
   `create-realtime-translation-client-secret` is OpenAIOperation<
     {
       /** Create a client secret with the given translation session configuration. */
