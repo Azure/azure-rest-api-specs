@@ -23,7 +23,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create a thread")
@@ -31,7 +30,7 @@ interface Threads {
   @post
   createThread is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.CreateThreadRequest;
     },
@@ -43,7 +42,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create a thread and run")
@@ -52,7 +50,7 @@ interface Threads {
   @post
   createThreadAndRun is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.CreateThreadAndRunRequest;
     },
@@ -64,7 +62,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Delete a thread")
@@ -86,7 +83,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get a thread")
@@ -108,7 +104,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Update a thread")
@@ -123,7 +118,6 @@ interface Threads {
       thread_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.ModifyThreadRequest;
     },
@@ -135,7 +129,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List messages")
@@ -187,7 +180,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create a message")
@@ -202,7 +194,6 @@ interface Threads {
       thread_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateMessageRequest;
     },
@@ -214,7 +205,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Delete a message")
@@ -241,7 +231,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get a message")
@@ -268,7 +257,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Update a message")
@@ -288,7 +276,6 @@ interface Threads {
       message_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.ModifyMessageRequest;
     },
@@ -300,7 +287,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List runs")
@@ -346,7 +332,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create a run")
@@ -368,7 +353,6 @@ interface Threads {
       `include[]`?: "step_details.tool_calls[*].file_search.results[*].content"[];
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateRunRequest;
     },
@@ -380,7 +364,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get a run")
@@ -407,7 +390,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Update a run")
@@ -427,7 +409,6 @@ interface Threads {
       run_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.ModifyRunRequest;
     },
@@ -439,7 +420,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Cancel a run")
@@ -466,7 +446,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List run steps")
@@ -524,7 +503,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get a run step")
@@ -563,7 +541,6 @@ interface Threads {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Create a tool ouputs to run")
@@ -583,7 +560,6 @@ interface Threads {
       run_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.SubmitToolOutputsRunRequest;
     },

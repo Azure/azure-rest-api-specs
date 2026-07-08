@@ -68,7 +68,7 @@ interface Containers {
   @post
   createContainer is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.CreateContainerBody;
     },
@@ -111,7 +111,7 @@ interface Containers {
   @get
   retrieveContainer is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
@@ -134,7 +134,7 @@ interface Containers {
   @get
   listContainerFiles is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
@@ -173,20 +173,19 @@ interface Containers {
   @sharedRoute
   @route("{container_id}/files")
   @post
+  @extension("x-ms-request-body-description-override", "The request body.")
   createContainerFileMultipart is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
       /** The content type of the request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @header
       contentType: "multipart/form-data";
 
       /** The multipart request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @multipartBody
       body: OpenAI.CreateContainerFileBody;
     },
@@ -205,15 +204,15 @@ interface Containers {
   @sharedRoute
   @route("{container_id}/files")
   @post
+  @extension("x-ms-request-body-description-override", "The request body.")
   createContainerFileJson is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.CreateContainerFileBody;
     },
@@ -234,14 +233,14 @@ interface Containers {
   @delete
   deleteContainerFile is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The file id path parameter. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the file. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },
@@ -262,14 +261,14 @@ interface Containers {
   @get
   retrieveContainerFile is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The file id path parameter. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the file. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },
@@ -290,14 +289,14 @@ interface Containers {
   @get
   retrieveContainerFileContent is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the container. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The file id path parameter. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The ID of the file. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
+      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },

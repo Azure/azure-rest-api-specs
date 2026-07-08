@@ -21,7 +21,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("List chat completions")
@@ -68,7 +67,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
@@ -77,7 +75,7 @@ interface Chat {
   @post
   createChatCompletion is OpenAIOperation<
     {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+      /** The request body. */
       @body
       body: OpenAI.CreateChatCompletionRequest;
     },
@@ -89,7 +87,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Delete a chat completion")
@@ -110,7 +107,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Get a chat completion")
@@ -131,7 +127,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
   @summary("Update a chat completion")
@@ -145,7 +140,6 @@ interface Chat {
       completion_id: string;
 
       /** The request body. */
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
       @body
       body: OpenAI.UpdateChatCompletionParametersBody;
     },
@@ -157,7 +151,6 @@ interface Chat {
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
