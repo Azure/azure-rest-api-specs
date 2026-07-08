@@ -45976,6 +45976,14 @@
         "publicBlob": {
           "type": "string",
           "description": "The certificate public blob"
+        },
+        "trustedRootCertificates": {
+          "type": "array",
+          "description": "Trusted root certificates required to validate the instance certificate",
+          "items": {
+            "$ref": "#/definitions/EndpointTrustedRootCertificateInfo"
+          },
+          "readOnly": true
         }
       }
     },
@@ -46008,6 +46016,20 @@
           "format": "int32",
           "description": "The port an endpoint is connected to.",
           "readOnly": true
+        }
+      }
+    },
+    "EndpointTrustedRootCertificateInfo": {
+      "type": "object",
+      "description": "Trusted root certificate required to validate the instance certificate",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Root certificate subject name"
+        },
+        "publicBlob": {
+          "type": "string",
+          "description": "Root certificate public blob as DER encoded hex string"
         }
       }
     },
