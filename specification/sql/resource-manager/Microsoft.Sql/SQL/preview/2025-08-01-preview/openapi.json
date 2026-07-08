@@ -45100,6 +45100,10 @@
           "$ref": "#/definitions/SeedingModeType",
           "description": "Database seeding mode – can be Automatic (default), or Manual for supported scenarios."
         },
+        "linkMode": {
+          "$ref": "#/definitions/LinkModeType",
+          "description": "Specifies whether the link operates in single-database or multi-database mode."
+        },
         "databases": {
           "type": "array",
           "description": "Databases in the distributed availability group",
@@ -49213,6 +49217,30 @@
           "type": "string",
           "description": "The reason for the capability not being available."
         }
+      }
+    },
+    "LinkModeType": {
+      "type": "string",
+      "description": "Specifies whether the link operates in single-database or multi-database mode.",
+      "enum": [
+        "SingleDatabase",
+        "MultiDatabase"
+      ],
+      "x-ms-enum": {
+        "name": "LinkModeType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SingleDatabase",
+            "value": "SingleDatabase",
+            "description": "SingleDatabase"
+          },
+          {
+            "name": "MultiDatabase",
+            "value": "MultiDatabase",
+            "description": "MultiDatabase"
+          }
+        ]
       }
     },
     "LinkRole": {
