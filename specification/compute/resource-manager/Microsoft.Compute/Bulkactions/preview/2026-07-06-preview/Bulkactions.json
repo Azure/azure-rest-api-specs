@@ -3979,10 +3979,6 @@
           },
           "x-ms-identifiers": []
         },
-        "vmAttributes": {
-          "$ref": "#/definitions/VMAttributes",
-          "description": "Attributes to launch instances."
-        },
         "computeProfile": {
           "$ref": "#/definitions/ComputeProfile",
           "description": "Compute Profile to configure the Virtual Machines."
@@ -3993,7 +3989,7 @@
         },
         "overridesProfile": {
           "$ref": "#/definitions/CustomOverridesProfile",
-          "description": "Per-VM overrides and the shared name prefix, specified when the operation is created. Present only on the customLaunchBulkInstancesOperations endpoint; the uniform launchBulkInstancesOperations endpoint does not accept it. Input only: it is not returned in GET or create responses, so a GET-then-PUT update must re-supply it to retain the per-VM overrides.",
+          "description": "Per-VM overrides and the shared name prefix, specified when the operation is created.",
           "x-ms-mutability": [
             "update",
             "create"

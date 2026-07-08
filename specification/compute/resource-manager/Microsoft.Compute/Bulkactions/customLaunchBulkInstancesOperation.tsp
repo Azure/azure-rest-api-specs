@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./common.tsp";
 import "./models.tsp";
-import "./vmAttributes.tsp";
 import "./virtualMachineProfile.tsp";
 import "./virtualMachineExtension.tsp";
 import "./launchBulkInstancesOperation.tsp";
@@ -165,9 +164,6 @@ model CustomLaunchBulkInstancesOperationProperties {
   @doc("List of VM sizes supported for CustomLaunchBulkInstancesOperation")
   vmSizesProfile?: Array<VmSizeProfile>;
 
-  @doc("Attributes to launch instances.")
-  vmAttributes?: VMAttributes;
-
   @doc("Compute Profile to configure the Virtual Machines.")
   computeProfile: ComputeProfile;
 
@@ -175,7 +171,7 @@ model CustomLaunchBulkInstancesOperationProperties {
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @doc("Per-VM overrides and the shared name prefix, specified when the operation is created. Present only on the customLaunchBulkInstancesOperations endpoint; the uniform launchBulkInstancesOperations endpoint does not accept it. Input only: it is not returned in GET or create responses, so a GET-then-PUT update must re-supply it to retain the per-VM overrides.")
+  @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
   overridesProfile?: CustomOverridesProfile;
 
   @doc("Retry policy the user can pass")
