@@ -39206,15 +39206,20 @@ components:
       type: object
       required:
         - kind
+        - model_type
         - model
       properties:
         kind:
           type: string
           enum:
             - prompt_voice
+        model_type:
+          allOf:
+            - $ref: '#/components/schemas/VoiceModelType'
+          description: How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` runs a Voice Live-hosted model; `self_deployed` (BYOM) uses the customer's own Foundry deployment. Orthogonal to the architecture (realtime vs cascaded), which Foundry derives from the selected model.
         model:
           type: string
-          description: The model deployment to use for this agent. Must be a realtime- or cascaded-capable deployment. Foundry derives the architecture (realtime vs cascaded) from the deployment's model; there is no architecture field.
+          description: "The model to use for this agent, paired with `model_type`: the Voice Live-hosted model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. Must be a realtime- or cascaded-capable model; Foundry derives the architecture (realtime vs cascaded) from it, so there is no architecture field."
         instructions:
           anyOf:
             - type: string
@@ -41756,6 +41761,19 @@ components:
           type: string
           description: Optional prompt to bias transcription toward domain terms.
       description: Asynchronous input-audio transcription configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    VoiceModelType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - managed
+            - self_deployed
+      description: |-
+        How the model backing a voice-first prompt agent is served. Orthogonal to the architecture (realtime vs cascaded),
+        which Foundry derives from the selected model.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview

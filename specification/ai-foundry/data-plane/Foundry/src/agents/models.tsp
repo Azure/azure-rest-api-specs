@@ -411,7 +411,10 @@ model PromptAgentDefinitionTextOptions {
 model PromptVoiceAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt_voice;
 
-  @doc("The model deployment to use for this agent. Must be a realtime- or cascaded-capable deployment. Foundry derives the architecture (realtime vs cascaded) from the deployment's model; there is no architecture field.")
+  @doc("How the model backing this agent is served. Together with `model`, this selects the model up front. `managed` runs a Voice Live-hosted model; `self_deployed` (BYOM) uses the customer's own Foundry deployment. Orthogonal to the architecture (realtime vs cascaded), which Foundry derives from the selected model.")
+  model_type: VoiceModelType;
+
+  @doc("The model to use for this agent, paired with `model_type`: the Voice Live-hosted model name when `model_type` is `managed`, or the customer's Foundry deployment name when `model_type` is `self_deployed`. Must be a realtime- or cascaded-capable model; Foundry derives the architecture (realtime vs cascaded) from it, so there is no architecture field.")
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context. Supports template substitution via `structured_inputs`, rendered per session before the live session starts.")
@@ -444,6 +447,21 @@ model PromptVoiceAgentDefinition extends AgentDefinition {
 
   @doc("Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.")
   structured_inputs?: Record<StructuredInputDefinition>;
+}
+
+@doc("""
+  How the model backing a voice-first prompt agent is served. Orthogonal to the architecture (realtime vs cascaded),
+  which Foundry derives from the selected model.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceModelType {
+  string,
+
+  @doc("Voice Live runs the named model on its own infrastructure, e.g. `gpt-realtime`.")
+  managed: "managed",
+
+  @doc("Bring your own model (BYOM): Voice Live calls the customer's own Foundry deployment named by `model`.")
+  self_deployed: "self_deployed",
 }
 
 @doc("""
