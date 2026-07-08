@@ -124,7 +124,7 @@ interface VideoGeneration {
   >;
 
   /**
-   * Creates a video edit multipart from the supplied request.
+   * Creates a video edit from the supplied request.
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
@@ -132,10 +132,15 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a video edit multipart")
+  @summary("Create a video edit")
   @sharedRoute
   @route("edits")
   @post
+  @extension("x-ms-summary-override", "Create a video edit")
+  @extension(
+    "x-ms-description-override",
+    "Creates a video edit from the supplied request."
+  )
   @extension("x-ms-request-body-description-override", "The request body.")
   createVideoEditMultipart is OpenAIOperation<
     {
@@ -151,17 +156,22 @@ interface VideoGeneration {
   >;
 
   /**
-   * Creates a video edit json from the supplied request.
+   * Creates a video edit from the supplied request.
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a video edit json")
+  @summary("Create a video edit")
   @sharedRoute
   @route("edits")
   @post
+  @extension("x-ms-summary-override", "Create a video edit")
+  @extension(
+    "x-ms-description-override",
+    "Creates a video edit from the supplied request."
+  )
   @extension("x-ms-request-body-description-override", "The request body.")
   createVideoEditJson is OpenAIOperation<
     {
@@ -173,7 +183,7 @@ interface VideoGeneration {
   >;
 
   /**
-   * Creates a video extend multipart from the supplied request.
+   * Extends a video from the supplied request.
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
@@ -181,10 +191,15 @@ interface VideoGeneration {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a video extend multipart")
+  @summary("Extend a video")
   @sharedRoute
   @route("extensions")
   @post
+  @extension("x-ms-summary-override", "Extend a video")
+  @extension(
+    "x-ms-description-override",
+    "Extends a video from the supplied request."
+  )
   @extension("x-ms-request-body-description-override", "The request body.")
   createVideoExtendMultipart is OpenAIOperation<
     {
@@ -200,17 +215,22 @@ interface VideoGeneration {
   >;
 
   /**
-   * Creates a video extend json from the supplied request.
+   * Extends a video from the supplied request.
    */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a video extend json")
+  @summary("Extend a video")
   @sharedRoute
   @route("extensions")
   @post
+  @extension("x-ms-summary-override", "Extend a video")
+  @extension(
+    "x-ms-description-override",
+    "Extends a video from the supplied request."
+  )
   @extension("x-ms-request-body-description-override", "The request body.")
   createVideoExtendJson is OpenAIOperation<
     {

@@ -72,7 +72,7 @@ for the full rule definitions, examples, and remediation guidance.
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |
 | `FDOC-006`       | Do not leave multiple adjacent TSDoc comment blocks on the same operation or parameter. TypeSpec concatenates adjacent docs into one OpenAPI `description`, which can produce malformed text. |
 | `FDOC-007`       | Remove `documentation-required` suppressions on routes and parameters, including auto-generated import suppressions, and replace them with generated TSDoc documentation. |
-| `FDOC-008`       | When TypeSpec would concatenate multiple request body or parameter descriptions for shared routes, multiple content types, or adjacent imported docs, add the appropriate override extension with the desired final text. |
+| `FDOC-008`       | When TypeSpec would concatenate operation summaries/descriptions, request body descriptions, or parameter descriptions for shared routes, multiple content types, or adjacent imported docs, add the appropriate override extension with the desired final text. |
 
 ### `documentation-required` suppressions
 
@@ -117,12 +117,18 @@ concatenates multiple source descriptions.
 
 Use:
 
+- `x-ms-summary-override` and `x-ms-description-override` on each shared-route
+  operation variant when TypeSpec would merge multiple operations into one OpenAPI
+  operation and concatenate their summaries/descriptions
 - `x-ms-description-override` on `@path`, `@query`, and real `@header` parameters
 - `x-ms-request-body-description-override` on the operation for `@body` and
   `@multipartBody` request bodies
 
 Common examples:
 
+- Shared-route operation variants that combine multipart and JSON request bodies into
+  one OpenAPI operation, causing summaries such as
+  `"Create a video edit multipart Create a video edit json"`
 - Shared-route request bodies that combine JSON and multipart content types into one OpenAPI `requestBody`
 - Imported generated parameters where the import already contributed a generic description
 - Any route parameter or request body that would emit repeated text such as `"The request body.The request body."` or `"The file id path parameter.The ID of the file."`

@@ -448,16 +448,18 @@ Do not leave a scoped route file in a state where the
 
 ## FDOC-008 — Description Override for Concatenated Descriptions
 
-**Requirement:** When TypeSpec would concatenate multiple request body or
-parameter descriptions into noisy OpenAPI output, keep one concise source
-TSDoc comment and add the appropriate override extension with the intended
-final OpenAPI description.
+**Requirement:** When TypeSpec would concatenate multiple operation summaries,
+operation descriptions, request body descriptions, or parameter descriptions
+into noisy OpenAPI output, keep concise source documentation and add the
+appropriate override extension with the intended final OpenAPI text.
 
 This commonly happens for shared routes that support multiple content types
 or for imported generated route parameters that already carry a generic
 description. Without an override, OpenAPI can contain descriptions such as:
 
 ```yaml
+summary: Create a video edit multipart Create a video edit json
+description: Creates a video edit multipart from the supplied request. Creates a video edit json from the supplied request.
 description: The request body.The request body.
 description: The file id path parameter.The ID of the file.
 ```
@@ -467,6 +469,31 @@ description: The file id path parameter.The ID of the file.
 repetitive downstream descriptions. The Foundry OpenAPI post-processing
 understands description override extensions, so use them to declare the clean
 final description instead of stacking TSDoc comments.
+
+### ✅ Good — shared route operation summary and description
+
+```typespec
+/** Creates a video edit from the supplied request. */
+@summary("Create a video edit")
+@extension("x-ms-summary-override", "Create a video edit")
+@extension("x-ms-description-override", "Creates a video edit from the supplied request.")
+@sharedRoute
+@route("edits")
+@post
+createVideoEditMultipart is OpenAIOperation<...>;
+
+/** Creates a video edit from the supplied request. */
+@summary("Create a video edit")
+@extension("x-ms-summary-override", "Create a video edit")
+@extension("x-ms-description-override", "Creates a video edit from the supplied request.")
+@sharedRoute
+@route("edits")
+@post
+createVideoEditJson is OpenAIOperation<...>;
+```
+
+Add the same operation-level summary and description overrides to every variant
+that TypeSpec merges into a single OpenAPI operation.
 
 ### ✅ Good — shared route request body
 
@@ -528,14 +555,17 @@ body: OpenAI.ModifyAssistantRequest;
 
 1. Remove adjacent duplicate or competing TSDoc blocks.
 2. Keep a single TSDoc comment so the declaration remains documented.
-3. For `@path`, `@query`, and real `@header` parameters, add
+3. For shared-route operation variants that emit concatenated operation
+   summaries or descriptions, add the same `x-ms-summary-override` and
+   `x-ms-description-override` to each variant.
+4. For `@path`, `@query`, and real `@header` parameters, add
    `@extension("x-ms-description-override", "...")` immediately before the
    parameter decorator.
-4. For `@body` and `@multipartBody`, add
+5. For `@body` and `@multipartBody`, add
    `@extension("x-ms-request-body-description-override", "...")` to the
    operation decorators, not to the body declaration.
-5. Use the clean, customer-facing final description as the override value.
-6. If the file does not already import and use OpenAPI decorators, add:
+6. Use the clean, customer-facing final description as the override value.
+7. If the file does not already import and use OpenAPI decorators, add:
 
    ```typespec
    import "@typespec/openapi";
