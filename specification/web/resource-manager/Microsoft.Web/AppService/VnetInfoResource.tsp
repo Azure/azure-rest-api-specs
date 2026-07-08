@@ -51,7 +51,8 @@ interface VnetInfoResourceOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "AppServicePlanVirtualNetworkConnection"
     > {}
 
 @tag("AppServicePlans")
@@ -104,7 +105,8 @@ interface VnetInfoResourceOperationGroupOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "SiteSlotVirtualNetworkConnection"
     > {}
 
 @tag("WebApps")
@@ -183,7 +185,8 @@ interface VnetConnectionOperationGroupOps
         @segment("virtualNetworkConnections")
         @key
         vnetName: string,
-      }
+      },
+      ResourceName = "SiteVirtualNetworkConnection"
     > {}
 
 @tag("WebApps")
@@ -245,15 +248,19 @@ interface VnetConnectionOperationGroup {
 
 @@doc(VnetInfoResource.name, "Name of the Virtual Network.");
 @@doc(VnetInfoResource.properties, "Core resource properties");
-@@doc(VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
+@@doc(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
+@@doc(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
+@@doc(
+  VnetConnectionOperationGroup.createOrUpdateVnetConnection::parameters.resource,
   "Properties of the Virtual Network connection. See example."
 );
-@@doc(VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
+@@doc(
+  VnetConnectionOperationGroup.updateVnetConnection::parameters.properties,
   "Properties of the Virtual Network connection. See example."
 );

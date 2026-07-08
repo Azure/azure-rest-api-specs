@@ -196,6 +196,13 @@ model CacheProperties {
    * Flag indicating whether writeback is enabled for the cache.
    */
   writeBack?: EnableWriteBackState;
+
+  /**
+   * Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  fileAccessLogs?: CacheFileAccessLogs;
 }
 
 /**
@@ -547,6 +554,24 @@ union CacheProvisioningState {
   Canceled: "Canceled",
 }
 
+/**
+ * Flag indicating whether file access logs are enabled for the Cache, based on active diagnostic settings present on the Cache.
+ */
+@added(Versions.v2026_04_01)
+union CacheFileAccessLogs {
+  string,
+
+  /**
+   * fileAccessLogs are enabled
+   */
+  Enabled: "Enabled",
+
+  /**
+   * fileAccessLogs are not enabled
+   */
+  Disabled: "Disabled",
+}
+
 @armResourceOperations
 @added(Versions.v2025_12_15_preview)
 @added(Versions.v2026_01_01)
@@ -630,7 +655,8 @@ interface Caches {
   >;
 }
 
-@@doc(Caches.poolChange::parameters.body,
+@@doc(
+  Caches.poolChange::parameters.body,
   "Move cache to the pool supplied in the body of the operation."
 );
 

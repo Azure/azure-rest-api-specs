@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./CodeSigningAccount.tsp";
 import "./CertificateProfile.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -28,4 +29,5 @@ enum Versions {
 
   v2024_09_30_preview: "2024-09-30-preview",
   v2025_10_13: "2025-10-13",
+  v2026_05_15_preview: "2026-05-15-preview",
 }

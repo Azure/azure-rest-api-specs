@@ -40,11 +40,14 @@ interface ScopedResources {
   @tag("PrivateLinkScopedResources")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ScopedResource,
-    Response = ArmResourceUpdatedResponse<ScopedResource> | ArmResourceCreatedResponse<
-      ScopedResource,
-      ArmLroLocationHeader<FinalResult = ScopedResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<ScopedResource>
+      | ArmResourceCreatedResponse<
+          ScopedResource,
+          ArmLroLocationHeader<FinalResult = ScopedResource> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -54,7 +57,10 @@ interface ScopedResources {
   @tag("PrivateLinkScopedResources")
   delete is ArmResourceDeleteWithoutOkAsync<
     ScopedResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

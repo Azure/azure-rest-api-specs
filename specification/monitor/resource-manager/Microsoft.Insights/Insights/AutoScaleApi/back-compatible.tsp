@@ -8,21 +8,26 @@ using AutoScaleApi;
 
 @@clientLocation(AutoscaleSettingResources.get, "AutoscaleSettings");
 @@clientLocation(AutoscaleSettingResources.createOrUpdate, "AutoscaleSettings");
-@@clientName(AutoscaleSettingResources.createOrUpdate::parameters.resource,
+@@clientName(
+  AutoscaleSettingResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(AutoscaleSettingResources.update, "AutoscaleSettings");
-@@clientName(AutoscaleSettingResources.update::parameters.properties,
+@@clientName(
+  AutoscaleSettingResources.update::parameters.properties,
   "autoscaleSettingResource"
 );
 @@clientLocation(AutoscaleSettingResources.delete, "AutoscaleSettings");
-@@clientLocation(AutoscaleSettingResources.listByResourceGroup,
+@@clientLocation(
+  AutoscaleSettingResources.listByResourceGroup,
   "AutoscaleSettings"
 );
-@@clientLocation(AutoscaleSettingResources.listBySubscription,
+@@clientLocation(
+  AutoscaleSettingResources.listBySubscription,
   "AutoscaleSettings"
 );
-@@clientLocation(AutoscaleSettingResources.predictiveMetricGet,
+@@clientLocation(
+  AutoscaleSettingResources.predictiveMetricGet,
   "PredictiveMetric"
 );
 @@clientName(AutoscaleSettingResources.predictiveMetricGet, "Get");

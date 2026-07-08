@@ -52,7 +52,8 @@ interface PublicCertificateOps
         @segment("publicCertificates")
         @key
         publicCertificateName: string,
-      }
+      },
+      ResourceName = "SitePublicCertificate"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface PublicCertificateOperationGroupOps
         @segment("publicCertificates")
         @key
         publicCertificateName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotPublicCertificate"
     > {}
 
 @tag("WebApps")
@@ -171,12 +173,15 @@ interface PublicCertificateOperationGroup {
 }
 
 @@doc(PublicCertificate.name, "Public certificate name.");
-@@doc(PublicCertificate.properties,
+@@doc(
+  PublicCertificate.properties,
   "PublicCertificate resource specific properties"
 );
-@@doc(PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
+@@doc(
+  PublicCertificates.createOrUpdatePublicCertificate::parameters.resource,
   "Public certificate details. This is the JSON representation of a PublicCertificate object."
 );
-@@doc(PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
+@@doc(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
   "Public certificate details. This is the JSON representation of a PublicCertificate object."
 );

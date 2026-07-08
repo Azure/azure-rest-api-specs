@@ -203,9 +203,11 @@ interface SandboxGroups {
 }
 
 @@doc(SandboxGroup.name, "The name of the SandboxGroup.");
-@@doc(SandboxGroups.createOrUpdate::parameters.resource,
+@@doc(
+  SandboxGroups.createOrUpdate::parameters.resource,
   "Resource create parameters."
 );
-@@doc(SandboxGroups.update::parameters.properties,
+@@doc(
+  SandboxGroups.update::parameters.properties,
   "The resource properties to be updated."
 );

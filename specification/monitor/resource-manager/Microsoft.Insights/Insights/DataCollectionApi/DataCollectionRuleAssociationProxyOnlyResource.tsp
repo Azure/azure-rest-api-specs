@@ -27,17 +27,21 @@ model DataCollectionRuleAssociationProxyOnlyResource
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
 }
 
-alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
   {
     ...ApiVersionParameter;
 
     /**
-     * The identifier of the resource.
+     * The fully qualified Azure Resource manager identifier of the resource.
      */
     @path(#{ allowReserved: true })
     @minLength(1)
     resourceUri: string;
-
+  },
+  {
+    ...Azure.ResourceManager.Legacy.Provider;
+  },
+  {
     ...Azure.ResourceManager.Legacy.Provider;
 
     /**
@@ -47,7 +51,7 @@ alias DataCollectionRuleAssociationProxyOnlyResourcesOps = Azure.ResourceManager
     @segment("dataCollectionRuleAssociations")
     associationName: string;
   },
-  {}
+  "DataCollectionRuleAssociation"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -57,10 +61,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Returns the specified association.")
-  get is Extension.Read<
-    Extension.ScopeParameter,
+  get is DataCollectionRuleAssociationProxyOnlyResourcesOps.Read<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -72,8 +75,10 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
   create is DataCollectionRuleAssociationProxyOnlyResourcesOps.CreateOrUpdateSync<
     DataCollectionRuleAssociationProxyOnlyResource,
     OptionalRequestBody = true,
-    Response = DataCollectionRuleAssociationProxyOnlyResource | ArmResourceCreatedSyncResponse<DataCollectionRuleAssociationProxyOnlyResource>,
-    OverrideErrorType = ErrorResponseCommonV2
+    Response =
+      | DataCollectionRuleAssociationProxyOnlyResource
+      | ArmResourceCreatedSyncResponse<DataCollectionRuleAssociationProxyOnlyResource>,
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -81,10 +86,9 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Deletes an association.")
-  delete is Extension.DeleteSync<
-    Extension.ScopeParameter,
+  delete is DataCollectionRuleAssociationProxyOnlyResourcesOps.DeleteSync<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 
   /**
@@ -92,18 +96,19 @@ interface DataCollectionRuleAssociationProxyOnlyResources {
    */
   @tag("DataCollectionRuleAssociations")
   @summary("Lists associations for the specified resource.")
-  listByResource is Extension.ListByTarget<
-    Extension.ScopeParameter,
+  listByResource is DataCollectionRuleAssociationProxyOnlyResourcesOps.List<
     DataCollectionRuleAssociationProxyOnlyResource,
-    Error = ErrorResponseCommonV2
+    ErrorType = ErrorResponseCommonV2
   >;
 }
 
-@@doc(DataCollectionRuleAssociationProxyOnlyResource.name,
+@@doc(
+  DataCollectionRuleAssociationProxyOnlyResource.name,
   "The name of the association. The name is case insensitive."
 );
 @@doc(DataCollectionRuleAssociationProxyOnlyResource.properties, "");
-@@doc(DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
+@@doc(
+  DataCollectionRuleAssociationProxyOnlyResources.create::parameters.resource,
   "The payload"
 );
 @@key(Extension.ScopeParameter.scope, "resourceUri");

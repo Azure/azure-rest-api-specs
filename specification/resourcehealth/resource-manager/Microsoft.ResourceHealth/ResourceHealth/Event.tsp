@@ -41,7 +41,8 @@ alias EventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOperations<
     @segment("events")
     @key
     eventTrackingId: string;
-  }
+  },
+  "ResourceHealthEvent"
 >;
 
 @armResourceOperations(#{ omitTags: true })
@@ -156,7 +157,8 @@ alias TenantEventOperationGroupOps = Azure.ResourceManager.Legacy.ExtensionOpera
     @segment("events")
     @key
     eventTrackingId: string;
-  }
+  },
+  "TenantResourceHealthEvent"
 >;
 
 @armResourceOperations(#{ omitTags: true })

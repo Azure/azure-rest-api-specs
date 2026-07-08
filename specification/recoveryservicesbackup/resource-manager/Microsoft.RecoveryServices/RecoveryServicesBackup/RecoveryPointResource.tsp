@@ -76,8 +76,11 @@ interface RecoveryPoints {
    * UpdateRecoveryPoint to update recovery point for given RecoveryPointID.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-patch" "Recovery point updates use UpdateRecoveryPointRequest model which does not include tags property"
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(Versions.v2026_01_31_preview)
   @removed(Versions.v2026_02_01)
+  @added(Versions.v2026_03_31_preview)
+  @removed(Versions.v2026_05_01)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     RecoveryPointResource,
@@ -137,17 +140,21 @@ interface ItemLevelRecoveryConnections {
   >;
 }
 
-@@doc(RecoveryPointResource.name,
+@@doc(
+  RecoveryPointResource.name,
   "RecoveryPointID represents the backed up data to be fetched."
 );
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
-@@doc(RecoveryPoints.moveRecoveryPoint::parameters.body,
+@@doc(
+  RecoveryPoints.moveRecoveryPoint::parameters.body,
   "Move Resource Across Tiers Request"
 );
-@@doc(RecoveryPoints.update::parameters.properties,
+@@doc(
+  RecoveryPoints.update::parameters.properties,
   "Request body for operation"
 );
 @@doc(Restores.trigger::parameters.body, "resource restore request");
-@@doc(ItemLevelRecoveryConnections.provision::parameters.body,
+@@doc(
+  ItemLevelRecoveryConnections.provision::parameters.body,
   "resource ILR request"
 );

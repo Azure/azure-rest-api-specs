@@ -170,3 +170,5 @@ op enterpriseUpdate(
 ): ArmResponse<EnterprisePolicy>;
 
 @@override(EnterprisePolicies.update, enterpriseUpdate);
+
+@@clientName(Microsoft.PowerPlatform, "PowerPlatformMgmtClient", "python");

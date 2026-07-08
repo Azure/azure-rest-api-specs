@@ -22,7 +22,8 @@ using Microsoft.Cache;
 @@clientName(Microsoft.Cache.TlsVersion.`1.2`, "ONE2", "python");
 
 // Service definition is wrong
-@@alternateType(Microsoft.Cache.RedisCommonPropertiesRedisConfiguration,
+@@alternateType(
+  Microsoft.Cache.RedisCommonPropertiesRedisConfiguration,
   RedisCommonPropertiesRedisConfigurationRecordString,
   "java"
 );
@@ -35,11 +36,13 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 }
 
 // Java SDK specific customizations to resolve breaking changes
-@@clientName(RedisCommonPropertiesRedisConfiguration,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration,
   "RedisConfiguration",
   "java"
 );
-@@clientName(RedisCommonPropertiesRedisConfigurationRecordString,
+@@clientName(
+  RedisCommonPropertiesRedisConfigurationRecordString,
   "RedisConfiguration",
   "java"
 );
@@ -49,86 +52,103 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@clientName(ExportRDBParameters, "ExportRdbParameters", "java");
 @@clientName(RedisFirewallRuleProperties.startIP, "startIp", "java");
 @@clientName(RedisFirewallRuleProperties.endIP, "endIp", "java");
-@@clientName(RedisLinkedServerCreateProperties.primaryHostName,
+@@clientName(
+  RedisLinkedServerCreateProperties.primaryHostName,
   "primaryHostname",
   "java"
 );
-@@clientName(RedisLinkedServerCreateProperties.geoReplicatedPrimaryHostName,
+@@clientName(
+  RedisLinkedServerCreateProperties.geoReplicatedPrimaryHostName,
   "geoReplicatedPrimaryHostname",
   "java"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
-  "java"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+  "java,javascript"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility for C# SDK"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp"
 );
 // Fix Java SDK handwritten code
 @@usage(RedisResource, Usage.input | Usage.output, "java");
 @@usage(RedisFirewallRuleCreateParameters, Usage.input, "java");
-@@alternateType(Azure.ResourceManager.CommonTypes.OperationStatusResult.percentComplete,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.OperationStatusResult.percentComplete,
   float32,
   "java"
 );
 
-@@clientName(RedisCommonPropertiesRedisConfiguration,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration,
   "RedisCommonConfiguration",
   "csharp"
 );
 
-@@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
   "IsRdbBackupEnabled",
   "csharp"
 );
-@@alternateType(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
+@@alternateType(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
   boolean,
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
   "IsAofBackupEnabled",
   "csharp"
 );
-@@alternateType(RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
+@@alternateType(
+  RedisCommonPropertiesRedisConfiguration.`aof-backup-enabled`,
   boolean,
   "csharp"
 );
-@@alternateType(RedisCommonPropertiesRedisConfiguration.`rdb-backup-max-snapshot-count`,
+@@alternateType(
+  RedisCommonPropertiesRedisConfiguration.`rdb-backup-max-snapshot-count`,
   int32,
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`aad-enabled`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`aad-enabled`,
   "IsAadEnabled",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.authnotrequired,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.authnotrequired,
   "AuthNotRequired",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.maxclients,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.maxclients,
   "MaxClients",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-delta`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-delta`,
   "MaxMemoryDelta",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-reserved`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-reserved`,
   "MaxMemoryReserved",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxmemory-policy`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxmemory-policy`,
   "MaxMemoryPolicy",
   "csharp"
 );
-@@clientName(RedisCommonPropertiesRedisConfiguration.`maxfragmentationmemory-reserved`,
+@@clientName(
+  RedisCommonPropertiesRedisConfiguration.`maxfragmentationmemory-reserved`,
   "MaxFragmentationMemoryReserved",
   "csharp"
 );
-@@clientName(RedisCommonProperties.disableAccessKeyAuthentication,
+@@clientName(
+  RedisCommonProperties.disableAccessKeyAuthentication,
   "IsAccessKeyAuthenticationDisabled",
   "csharp"
 );
@@ -136,7 +156,8 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@clientName(ScheduleEntry, "RedisPatchScheduleSetting", "csharp");
 @@clientName(DefaultName, "RedisPatchScheduleDefaultName", "csharp");
 @@clientName(UpgradeNotification, "RedisUpgradeNotification", "csharp");
-@@clientName(NotificationListResponse,
+@@clientName(
+  NotificationListResponse,
   "RedisUpgradeNotificationListResponse",
   "csharp"
 );
@@ -145,16 +166,19 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@clientName(RedisForceRebootResponse, "RedisForceRebootResult", "csharp");
 @@clientName(SkuFamily.C, "BasicOrStandard", "csharp");
 @@clientName(SkuFamily.P, "Premium", "csharp");
-@@clientName(CheckNameAvailabilityParameters,
+@@clientName(
+  CheckNameAvailabilityParameters,
   "RedisNameAvailabilityContent",
   "csharp"
 );
 @@clientName(CheckNameAvailabilityParameters.type, "resourceType", "csharp");
-@@alternateType(CheckNameAvailabilityParameters.type,
+@@alternateType(
+  CheckNameAvailabilityParameters.type,
   Azure.Core.armResourceType,
   "csharp"
 );
-@@alternateType(RedisCacheAccessPolicyAssignmentProperties.objectId,
+@@alternateType(
+  RedisCacheAccessPolicyAssignmentProperties.objectId,
   Azure.Core.uuid | null,
   "csharp"
 );
@@ -163,79 +187,96 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@clientName(PublicNetworkAccess, "RedisPublicNetworkAccess", "csharp");
 @@clientName(RebootType, "RedisRebootType", "csharp");
 @@clientName(DayOfWeek, "RedisDayOfWeek", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "RedisPrivateLinkServiceConnectionState",
   "csharp"
 );
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.provisioningState,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties.provisioningState,
   "RedisProvisioningState",
   "csharp"
 );
 @@scope(Operations.list, "!csharp");
 @@clientName(RedisResource, "Redis", "csharp");
-@@clientName(Azure.ResourceManager.CommonTypes.PrivateLinkResource,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResource,
   "RedisPrivateLinkResource",
   "csharp"
 );
 @@clientName(ExportRDBParameters, "ExportRdbContent", "csharp");
 @@clientName(ImportRDBParameters, "ImportRdbContent", "csharp");
 
-@@clientName(RedisLinkedServerCreateParameters,
+@@clientName(
+  RedisLinkedServerCreateParameters,
   "RedisLinkedServerWithPropertyCreateOrUpdateContent",
   "csharp"
 );
 @@clientName(RedisCreateParameters, "RedisCreateOrUpdateContent", "csharp");
 @@clientName(RedisRebootParameters, "RedisRebootContent", "csharp");
-@@clientName(RedisRegenerateKeyParameters,
+@@clientName(
+  RedisRegenerateKeyParameters,
   "RedisRegenerateKeyContent",
   "csharp"
 );
-@@alternateType(RedisCreateProperties.staticIP,
+@@alternateType(
+  RedisCreateProperties.staticIP,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(RedisFirewallRuleProperties.startIP,
+@@alternateType(
+  RedisFirewallRuleProperties.startIP,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(RedisFirewallRuleProperties.endIP,
+@@alternateType(
+  RedisFirewallRuleProperties.endIP,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(RedisCreateProperties.subnetId,
+@@alternateType(
+  RedisCreateProperties.subnetId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RedisLinkedServerCreateProperties.linkedRedisCacheId,
+@@alternateType(
+  RedisLinkedServerCreateProperties.linkedRedisCacheId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(RedisLinkedServerCreateProperties.linkedRedisCacheLocation,
+@@alternateType(
+  RedisLinkedServerCreateProperties.linkedRedisCacheLocation,
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(RedisCreateParameters.location,
+@@alternateType(
+  RedisCreateParameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
-@@clientName(RedisCacheAccessPolicyProperties.type,
+@@clientName(
+  RedisCacheAccessPolicyProperties.type,
   "TypePropertiesType",
   "csharp"
 );
-@@clientName(RedisOperationGroup.checkNameAvailability,
+@@clientName(
+  RedisOperationGroup.checkNameAvailability,
   "checkRedisNameAvailability",
   "csharp"
 );
-@@clientName(RedisLinkedServerWithProperties,
+@@clientName(
+  RedisLinkedServerWithProperties,
   "RedisLinkedServerWithProperty",
   "csharp"
 );
-@@clientName(AsyncOperationStatusOperationGroup.get,
+@@clientName(
+  AsyncOperationStatusOperationGroup.get,
   "getAsyncOperationStatus",
   "csharp"
 );
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "RedisPrivateEndpointConnection",
   "csharp"
 );
@@ -246,31 +287,49 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 @@usage(RedisResource, Usage.input | Usage.output, "csharp");
 @@usage(RedisLinkedServerWithProperties, Usage.input | Usage.output, "csharp");
 @@usage(RedisLinkedServerProperties, Usage.input | Usage.output, "csharp");
-@@usage(RedisLinkedServerCreateProperties,
+@@usage(
+  RedisLinkedServerCreateProperties,
   Usage.input | Usage.output,
   "csharp"
 );
 
 @@clientName(RedisResources.listBySubscription, "getAllRedis", "csharp");
-@@clientName(RedisResources.listByRedisCache,
+@@clientName(
+  RedisResources.listByRedisCache,
   "getPrivateLinkResourcesByRedisCache",
   "csharp"
 );
-@@alternateType(AsyncOperationStatusOperationGroup.get::parameters.location,
+@@alternateType(
+  AsyncOperationStatusOperationGroup.get::parameters.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
 @@clientName(RedisPatchSchedule.name, "defaultName", "csharp");
-@@alternateType(RedisPatchSchedule.location,
+@@alternateType(
+  RedisPatchSchedule.location,
   Azure.Core.azureLocation,
   "csharp"
 );
 
-@@access(RedisLinkedServer, Access.public, "csharp");
 @@usage(RedisLinkedServer, Usage.output, "csharp");
 
 @@clientName(TlsVersion, "RedisTlsVersion", "csharp");
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.1`,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Cache.TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
 
 // we add this model in this namespace in order to replace some models with this model via alternateType decorator
 namespace Azure.ResourceManager.Models {
@@ -281,7 +340,8 @@ namespace Azure.ResourceManager.Models {
   }
 }
 
-@@alternateType(RedisLinkedServer,
+@@alternateType(
+  RedisLinkedServer,
   Azure.ResourceManager.Models.SubResource,
   "csharp"
 );

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
 /**
@@ -53,7 +54,8 @@ interface SiteOps
         @segment("sites")
         @key
         name: string,
-      }
+      },
+      ResourceName = "WebSite"
     > {}
 
 @armResourceOperations
@@ -95,7 +97,8 @@ interface WorkflowRegenerateAccessKeyOps
         @segment("workflows")
         @key
         workflowName: string,
-      }
+      },
+      ResourceName = "WorkflowAccessKey"
     > {}
 
 @tag("WebApps")
@@ -119,10 +122,12 @@ interface Sites {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Site>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -135,10 +140,12 @@ interface Sites {
   update is SiteOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
-    Response = ArmResponse<Site> | (AcceptedResponse & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResponse<Site>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -162,9 +169,12 @@ interface Sites {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
-    Response = {
-      @body body: void;
-    } | NoContentResponse | ArmNotFoundResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | NoContentResponse
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -399,7 +409,6 @@ interface Sites {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -445,14 +454,16 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/octet-stream";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/octet-stream";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -465,14 +476,16 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/zip";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/zip";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -731,6 +744,46 @@ interface Sites {
   >;
 
   /**
+   * Description for Gets all Network Security Perimeter Association Configurations for the site.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Lists all Network Security Perimeter Association Configurations for the site.")
+  @get
+  @list
+  @action("networkSecurityPerimeterConfigurations")
+  @added(Versions.v2026_03_15)
+  listNetworkSecurityPerimeterConfigurations is SiteOps.ActionSync<
+    Site,
+    void,
+    ArmResponse<NetworkSecurityPerimeterConfigurationCollection>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the Network Security Perimeter Association Configuration for the site for the specified Network Security Perimeter Association reference.")
+  @get
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterReference}")
+  @added(Versions.v2026_03_15)
+  getNetworkSecurityPerimeterConfiguration is ActionParameterSiteWebAppOps.ActionSync<
+    Site,
+    void,
+    Parameters = {
+      /**
+       * AssociationName and PerimeterGuid of the Network Security Perimeter Association.
+       */
+      @path
+      networkSecurityPerimeterReference: string;
+    },
+    Response = ArmResponse<NetworkSecurityPerimeterConfiguration>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
+  /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -741,11 +794,13 @@ interface Sites {
   getNetworkTraceOperation is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -796,11 +851,13 @@ interface Sites {
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -832,9 +889,11 @@ interface Sites {
   stopWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -868,11 +927,13 @@ interface Sites {
   getNetworkTraceOperationV2 is ActionParameterSiteWebAppOps.ActionSync<
     Site,
     void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -912,9 +973,11 @@ interface Sites {
   generateNewSitePublishingPassword is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1166,12 +1229,14 @@ interface Sites {
   startNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -1216,9 +1281,11 @@ interface Sites {
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1437,7 +1504,8 @@ interface WebAppOps
         @segment("slots")
         @key
         slot: string,
-      }
+      },
+      ResourceName = "WebSiteSlot"
     > {}
 
 alias ActionParameterSlotWebAppOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -1510,10 +1578,12 @@ interface WebApps {
   @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
-    Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Site>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Site>> & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1527,10 +1597,12 @@ interface WebApps {
   updateSlot is WebAppOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
-    Response = ArmResponse<Site> | (AcceptedResponse & {
-      @bodyRoot
-      _: Site;
-    }),
+    Response =
+      | ArmResponse<Site>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: Site;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1553,9 +1625,12 @@ interface WebApps {
       @query("deleteEmptyServerFarm")
       deleteEmptyServerFarm?: boolean;
     },
-    Response = {
-      @body body: void;
-    } | NoContentResponse | ArmNotFoundResponse,
+    Response =
+      | {
+          @body body: void;
+        }
+      | NoContentResponse
+      | ArmNotFoundResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1798,7 +1873,6 @@ interface WebApps {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -1853,14 +1927,16 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/octet-stream";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/octet-stream";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1874,14 +1950,16 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @header("Content-Type")
-      contentType: "application/zip";
 
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    } | NoContentResponse,
+      | {
+          @header("Content-Type")
+          contentType: "application/zip";
+
+          @doc("Receipt body in COSE format")
+          @bodyRoot
+          body: bytes;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1968,7 +2046,10 @@ interface WebApps {
       @path
       keyName: string;
     },
-    Response = ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo> | DefaultErrorResponse,
+    Response =
+      | ArmResponse<KeyInfo>
+      | ArmResourceCreatedSyncResponse<KeyInfo>
+      | DefaultErrorResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2075,11 +2156,13 @@ interface WebApps {
   getNetworkTraceOperationSlot is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -2130,11 +2213,13 @@ interface WebApps {
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2166,9 +2251,11 @@ interface WebApps {
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2201,11 +2288,13 @@ interface WebApps {
   getNetworkTraceOperationSlotV2 is ActionParameterSlotWebAppOps.ActionSync<
     Site,
     Request = void,
-    Response = ArmResponse<NetworkTrace[]> | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    }),
+    Response =
+      | ArmResponse<NetworkTrace[]>
+      | (AcceptedResponse & {
+          @identifiers(#[])
+          @bodyRoot
+          _: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * GUID of the operation.
@@ -2243,9 +2332,11 @@ interface WebApps {
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2501,12 +2592,14 @@ interface WebApps {
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<NetworkTrace[]> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      @identifiers(#[])
-      _?: NetworkTrace[];
-    }),
+
+      | ArmResponse<NetworkTrace[]>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          @identifiers(#[])
+          _?: NetworkTrace[];
+        }),
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2552,9 +2645,11 @@ interface WebApps {
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    {
-      @body body: void;
-    } | NoContentResponse,
+
+      | {
+          @body body: void;
+        }
+      | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -2636,129 +2731,170 @@ interface WebApps {
 
 @@doc(Site.name, "Name of the app.");
 @@doc(Site.properties, "Site resource specific properties");
-@@doc(Sites.createOrUpdate::parameters.resource,
+@@doc(
+  Sites.createOrUpdate::parameters.resource,
   "A JSON representation of the app properties. See example."
 );
-@@doc(Sites.update::parameters.properties,
+@@doc(
+  Sites.update::parameters.properties,
   "A JSON representation of the app properties. See example."
 );
-@@doc(Sites.applySlotConfigToProduction::parameters.body,
+@@doc(
+  Sites.applySlotConfigToProduction::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(Sites.backup::parameters.body,
+@@doc(
+  Sites.backup::parameters.body,
   "Backup configuration. You can use the JSON response from the POST action as input here."
 );
-@@doc(Sites.updateApplicationSettings::parameters.body,
+@@doc(
+  Sites.updateApplicationSettings::parameters.body,
   "Application settings of the app."
 );
-@@doc(Sites.updateAuthSettings::parameters.body,
+@@doc(
+  Sites.updateAuthSettings::parameters.body,
   "Auth settings associated with web app."
 );
-@@doc(Sites.updateAzureStorageAccounts::parameters.body,
+@@doc(
+  Sites.updateAzureStorageAccounts::parameters.body,
   "Azure storage accounts of the app."
 );
-@@doc(Sites.updateBackupConfiguration::parameters.body,
+@@doc(
+  Sites.updateBackupConfiguration::parameters.body,
   "Edited backup configuration."
 );
-@@doc(Sites.updateConnectionStrings::parameters.body,
+@@doc(
+  Sites.updateConnectionStrings::parameters.body,
   "Connection strings of the app or deployment slot. See example."
 );
-@@doc(Sites.updateMetadata::parameters.body,
+@@doc(
+  Sites.updateMetadata::parameters.body,
   "Edited metadata of the app or deployment slot. See example."
 );
-@@doc(Sites.updateSitePushSettings::parameters.body,
+@@doc(
+  Sites.updateSitePushSettings::parameters.body,
   "Push settings associated with web app."
 );
-@@doc(Sites.discoverBackup::parameters.body,
+@@doc(
+  Sites.discoverBackup::parameters.body,
   "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup."
 );
-@@doc(Sites.createOrUpdateHostSecret::parameters.body,
+@@doc(
+  Sites.createOrUpdateHostSecret::parameters.body,
   "The key to create or update"
 );
 @@doc(Sites.migrateStorage::parameters.body, "Migration migrationOptions.");
 @@doc(Sites.migrateMySql::parameters.body, "MySql migration options.");
-@@doc(Sites.listPublishingProfileXmlWithSecrets::parameters.body,
+@@doc(
+  Sites.listPublishingProfileXmlWithSecrets::parameters.body,
   "Specifies publishingProfileOptions for publishing profile. For example, use {\" format\": \"FileZilla3\"} to get a FileZilla publishing profile."
 );
-@@doc(Sites.restoreFromBackupBlob::parameters.body,
+@@doc(
+  Sites.restoreFromBackupBlob::parameters.body,
   "Information on restore request ."
 );
-@@doc(Sites.restoreFromDeletedApp::parameters.body,
+@@doc(
+  Sites.restoreFromDeletedApp::parameters.body,
   "Deleted web app restore information."
 );
-@@doc(Sites.restoreSnapshot::parameters.body,
+@@doc(
+  Sites.restoreSnapshot::parameters.body,
   "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API."
 );
-@@doc(Sites.listSlotDifferencesFromProduction::parameters.body,
+@@doc(
+  Sites.listSlotDifferencesFromProduction::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(Sites.swapSlotWithProduction::parameters.body,
+@@doc(
+  Sites.swapSlotWithProduction::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(Sites.deployWorkflowArtifacts::parameters.body,
+@@doc(
+  Sites.deployWorkflowArtifacts::parameters.body,
   "Application settings and files of the workflow."
 );
-@@doc(SiteWorkflows.regenerateAccessKey::parameters.body,
+@@doc(
+  SiteWorkflows.regenerateAccessKey::parameters.body,
   "The access key type."
 );
 @@doc(SiteWorkflows.validate::parameters.body, "The workflow.");
-@@doc(WebApps.createOrUpdateSlot::parameters.resource,
+@@doc(
+  WebApps.createOrUpdateSlot::parameters.resource,
   "A JSON representation of the app properties. See example."
 );
-@@doc(WebApps.updateSlot::parameters.properties,
+@@doc(
+  WebApps.updateSlot::parameters.properties,
   "A JSON representation of the app properties. See example."
 );
-@@doc(WebApps.applySlotConfigurationSlot::parameters.body,
+@@doc(
+  WebApps.applySlotConfigurationSlot::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(WebApps.backupSlot::parameters.body,
+@@doc(
+  WebApps.backupSlot::parameters.body,
   "Backup configuration. You can use the JSON response from the POST action as input here."
 );
-@@doc(WebApps.updateApplicationSettingsSlot::parameters.body,
+@@doc(
+  WebApps.updateApplicationSettingsSlot::parameters.body,
   "Application settings of the app."
 );
-@@doc(WebApps.updateAuthSettingsSlot::parameters.body,
+@@doc(
+  WebApps.updateAuthSettingsSlot::parameters.body,
   "Auth settings associated with web app."
 );
-@@doc(WebApps.updateAzureStorageAccountsSlot::parameters.body,
+@@doc(
+  WebApps.updateAzureStorageAccountsSlot::parameters.body,
   "Azure storage accounts of the app."
 );
-@@doc(WebApps.updateBackupConfigurationSlot::parameters.body,
+@@doc(
+  WebApps.updateBackupConfigurationSlot::parameters.body,
   "Edited backup configuration."
 );
-@@doc(WebApps.updateConnectionStringsSlot::parameters.body,
+@@doc(
+  WebApps.updateConnectionStringsSlot::parameters.body,
   "Connection strings of the app or deployment slot. See example."
 );
-@@doc(WebApps.updateMetadataSlot::parameters.body,
+@@doc(
+  WebApps.updateMetadataSlot::parameters.body,
   "Edited metadata of the app or deployment slot. See example."
 );
-@@doc(WebApps.updateSitePushSettingsSlot::parameters.body,
+@@doc(
+  WebApps.updateSitePushSettingsSlot::parameters.body,
   "Push settings associated with web app."
 );
-@@doc(WebApps.discoverBackupSlot::parameters.body,
+@@doc(
+  WebApps.discoverBackupSlot::parameters.body,
   "A RestoreRequest object that includes Azure storage URL and blog name for discovery of backup."
 );
-@@doc(WebApps.createOrUpdateHostSecretSlot::parameters.body,
+@@doc(
+  WebApps.createOrUpdateHostSecretSlot::parameters.body,
   "The key to create or update"
 );
-@@doc(WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
+@@doc(
+  WebApps.listPublishingProfileXmlWithSecretsSlot::parameters.body,
   "Specifies publishingProfileOptions for publishing profile. For example, use {\" format\": \"FileZilla3\"} to get a FileZilla publishing profile."
 );
-@@doc(WebApps.restoreFromBackupBlobSlot::parameters.body,
+@@doc(
+  WebApps.restoreFromBackupBlobSlot::parameters.body,
   "Information on restore request ."
 );
-@@doc(WebApps.restoreFromDeletedAppSlot::parameters.body,
+@@doc(
+  WebApps.restoreFromDeletedAppSlot::parameters.body,
   "Deleted web app restore information."
 );
-@@doc(WebApps.restoreSnapshotSlot::parameters.body,
+@@doc(
+  WebApps.restoreSnapshotSlot::parameters.body,
   "Snapshot restore settings. Snapshot information can be obtained by calling GetDeletedSites or GetSiteSnapshots API."
 );
-@@doc(WebApps.listSlotDifferencesSlot::parameters.body,
+@@doc(
+  WebApps.listSlotDifferencesSlot::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(WebApps.swapSlotSlot::parameters.body,
+@@doc(
+  WebApps.swapSlotSlot::parameters.body,
   "JSON object that contains the target slot name. See example."
 );
-@@doc(WebApps.deployWorkflowArtifactsSlot::parameters.body,
+@@doc(
+  WebApps.deployWorkflowArtifactsSlot::parameters.body,
   "Application settings and files of the workflow."
 );

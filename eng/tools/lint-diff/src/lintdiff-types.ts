@@ -1,5 +1,5 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { ExecException } from "node:child_process";
+import { type ExecException } from "node:child_process";
 
 // TODO: Reduce to minimal set of properties
 export type AutorestRunResult = {
