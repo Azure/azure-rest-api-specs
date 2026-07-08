@@ -422,13 +422,6 @@ namespace Azure.AI.Projects {
 
   // @@changePropertyType(OpenAI.InputMessage.role, OpenAI.MessageRole);
 
-  @@copyProperties(
-    OpenAI.OutputItem,
-    {
-      id?: string,
-    }
-  );
-
   @@alternateType(OpenAI.OutputItem, {  identity: "OpenAI.Responses.ResponseItem",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
 
   // Memory Stores search/update operations are the only Foundry operations that define
