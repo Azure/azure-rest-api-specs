@@ -32,7 +32,11 @@ using Microsoft.Databricks;
   "python"
 );
 
-@@clientName(Microsoft.Databricks.ErrorDetail, "DatabricksErrorDetail", "java");
+@@clientName(
+  Microsoft.Databricks.ErrorDetail,
+  "DatabricksErrorDetail",
+  "java,csharp"
+);
 @@clientName(Workspace, "DatabricksWorkspace", "csharp");
 @@clientName(WorkspaceCustomParameters, "WorkspaceCustomProperties", "csharp");
 @@clientName(
