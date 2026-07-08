@@ -34,6 +34,7 @@ model TenantActivityLogAlertResource
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface TenantActivityLogAlertResources {
   /**
    * Get a list of all Tenant Activity Log Alert rules in the tenant.

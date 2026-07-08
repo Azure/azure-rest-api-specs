@@ -77,6 +77,7 @@ model ReplicationProtectedItemAcceptedLroResponse<FinalResult extends
     Azure.Core.Foundations.RetryAfterHeader>;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ReplicationProtectedItems {
   /**
    * Gets the details of an ASR replication protected item.

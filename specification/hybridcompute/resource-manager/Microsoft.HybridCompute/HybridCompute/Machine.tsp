@@ -87,6 +87,7 @@ alias HybridIdentityMetadataOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Machines {
   /**
    * Retrieves information about the model view or the instance view of a hybrid machine.

@@ -62,6 +62,7 @@ interface VnetRoutesOps
 
 @tag("AppServicePlans")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface VnetRoutes {
   /**
    * Description for Get a Virtual Network route in an App Service plan.

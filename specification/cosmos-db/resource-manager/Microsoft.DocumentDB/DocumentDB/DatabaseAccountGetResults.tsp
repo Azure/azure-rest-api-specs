@@ -45,6 +45,7 @@ model DatabaseAccountGetResults
 }
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DatabaseAccounts {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB database account.

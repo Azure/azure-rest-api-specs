@@ -147,6 +147,7 @@ interface ProductContractOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
@@ -524,6 +525,7 @@ interface WorkspaceProductOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceProduct {
   /**
    * Gets the details of the product specified by its identifier.

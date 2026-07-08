@@ -58,6 +58,7 @@ interface PremierAddOnOps
 
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PremierAddOns {
   /**
    * Description for Gets a named add-on of an app.
@@ -134,6 +135,7 @@ interface PremierAddOnOperationGroupOps
 
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PremierAddOnOperationGroup {
   /**
    * Description for Gets a named add-on of an app.

@@ -92,6 +92,7 @@ interface WorkflowRunActionRepetitionDefinitionOps
 
 @tag("WorkflowRunActions")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkflowRunActionRepetitionDefinitions {
   /**
    * Get a workflow run action repetition.
@@ -184,6 +185,7 @@ interface WorkflowRunActionScopeRepetitionOps
 
 @tag("WorkflowRunActions")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkflowRunActionScopeRepetitions {
   /**
    * Get a workflow run action scoped repetition.

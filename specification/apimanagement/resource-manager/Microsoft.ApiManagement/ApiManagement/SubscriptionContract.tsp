@@ -56,6 +56,7 @@ interface SubscriptionContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
@@ -368,6 +369,7 @@ interface WorkspaceSubscriptionOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceSubscription {
   /**
    * Gets the specified Subscription entity.

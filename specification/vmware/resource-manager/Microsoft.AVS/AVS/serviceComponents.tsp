@@ -7,6 +7,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ServiceComponents {
   @doc("Return service component availability")
   @added(Versions.v2025_09_01)

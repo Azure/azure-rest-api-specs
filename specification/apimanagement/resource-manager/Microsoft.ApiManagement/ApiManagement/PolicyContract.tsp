@@ -79,6 +79,7 @@ interface PolicyContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyContracts {
   /**
    * Get the policy configuration at the API Operation level.
@@ -210,6 +211,7 @@ interface GraphQLApiResolverPolicyOps
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface GraphQLApiResolverPolicy {
   /**
    * Get the policy configuration at the GraphQL API Resolver level.
@@ -330,6 +332,7 @@ interface ApiPolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ApiPolicy {
   /**
    * Get the policy configuration at the API level.
@@ -442,6 +445,7 @@ interface PolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Policy {
   /**
    * Get the Global policy definition of the Api Management service.
@@ -562,6 +566,7 @@ interface ProductPolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProductPolicy {
   /**
    * Get the policy configuration at the Product level.
@@ -683,6 +688,7 @@ interface WorkspacePolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspacePolicy {
   /**
    * Get the policy configuration at the API level.
@@ -821,6 +827,7 @@ interface WorkspaceApiOperationPolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiOperationPolicy {
   /**
    * Get the policy configuration at the API Operation level.
@@ -951,6 +958,7 @@ interface WorkspaceApiPolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiPolicy {
   /**
    * Get the policy configuration at the API level.
@@ -1080,6 +1088,7 @@ interface WorkspaceProductPolicyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceProductPolicy {
   /**
    * Get the policy configuration at the Product level.

@@ -121,6 +121,7 @@ alias FunctionExtensionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 
 @removed(Versions.v2026_01_01)
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface FunctionsExtension {
   /**
    * Proxies a Functions host call to the function app backed by the container app.

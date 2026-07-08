@@ -103,6 +103,7 @@ interface WorkflowRegenerateAccessKeyOps
 
 @tag("WebApps")
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
@@ -1551,6 +1552,7 @@ alias ActionParameterSiteWebAppOps = Azure.ResourceManager.Legacy.RoutedOperatio
 >;
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WebApps {
   @summary("Gets an app's deployment slots.")
   @doc("Description for Gets an app's deployment slots.")

@@ -66,6 +66,7 @@ interface KeyOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Keys {
   /**
    * Gets the current version of the specified key from the specified key vault.

@@ -46,6 +46,7 @@ model Reservation is Azure.ResourceManager.ProxyResource<ReservationProperty> {
 }
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Reservations {
   /**
    * Get specific Reservation details in the billing account.

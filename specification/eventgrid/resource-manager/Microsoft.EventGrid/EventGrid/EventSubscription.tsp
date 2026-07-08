@@ -110,6 +110,7 @@ alias EventSubScriptionListyByDomainExtensionOps = Azure.ResourceManager.Legacy.
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface EventSubscriptions {
   /**
    * Get properties of a nested event subscription for a domain topic.
@@ -517,6 +518,7 @@ alias EventSubscriptionOperationGroupOps = Azure.ResourceManager.Legacy.Extensio
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface EventSubscriptionOperationGroup {
   /**
    * Get properties of an event subscription.

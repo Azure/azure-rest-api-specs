@@ -62,6 +62,7 @@ alias PolicyDefinitionManagementGroupListOps = Azure.ResourceManager.Legacy.Exte
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy definition versions for all built-in policy definitions.
@@ -89,6 +90,7 @@ interface PolicyDefinitionVersionsOperationGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicySetDefinitionVersionsOperationGroup {
   /**
    * This operation lists all the built-in policy set definition versions for all built-in policy set definitions.

@@ -104,6 +104,7 @@ interface PolicyAssignmentGenericOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyAssignments {
   /**
    * This operation retrieves a single policy assignment, given its name and the scope it was created at.

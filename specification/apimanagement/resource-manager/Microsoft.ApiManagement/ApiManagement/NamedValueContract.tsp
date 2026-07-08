@@ -56,6 +56,7 @@ interface NamedValueContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface NamedValueContracts {
   /**
    * Gets the details of the named value specified by its identifier.
@@ -271,6 +272,7 @@ interface WorkspaceNamedValueOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceNamedValue {
   /**
    * Gets the details of the named value specified by its identifier.

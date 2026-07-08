@@ -35,6 +35,7 @@ model ProtectionContainerResource is ProxyResource<ProtectionContainer> {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ProtectionContainers {
   /**
    * Gets details of the specific container registered to your Recovery Services Vault.

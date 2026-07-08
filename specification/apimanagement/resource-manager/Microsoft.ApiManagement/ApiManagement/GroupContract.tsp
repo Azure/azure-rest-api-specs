@@ -153,6 +153,7 @@ alias WorkspaceGroupUserOps = Azure.ResourceManager.Legacy.RoutedOperations<
 >;
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
@@ -401,6 +402,7 @@ interface WorkspaceGroupOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceGroup {
   /**
    * Gets the details of the group specified by its identifier.

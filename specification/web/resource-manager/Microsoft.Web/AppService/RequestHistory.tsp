@@ -95,6 +95,7 @@ interface RequestHistoryOps
 
 @tag("WorkflowRunActions")
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface RequestHistories {
   /**
    * Gets a workflow run repetition request history.

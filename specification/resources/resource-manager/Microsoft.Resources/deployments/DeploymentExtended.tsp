@@ -625,6 +625,7 @@ interface DeploymentExtendedSubscriptionOps
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentExtendedSubscriptionGroup {
   /**
    * Gets a deployment.
@@ -825,6 +826,7 @@ alias DeploymentExtendedResourceGroupOps = Azure.ResourceManager.Legacy.LegacyOp
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentExtendedOperationGroup {
   /**
    * Gets a deployment.

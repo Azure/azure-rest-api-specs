@@ -57,6 +57,7 @@ interface CertificateContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface CertificateContracts {
   /**
    * Gets the details of the certificate specified by its identifier.
@@ -233,6 +234,7 @@ interface WorkspaceCertificateOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceCertificate {
   /**
    * Gets the details of the certificate specified by its identifier.

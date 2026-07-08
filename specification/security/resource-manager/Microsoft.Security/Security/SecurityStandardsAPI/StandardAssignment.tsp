@@ -29,6 +29,7 @@ model ResourceIdScopeParameter
   is Azure.ResourceManager.Extension.ScopeParameter;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface StandardAssignments {
   /**
    * This operation retrieves a single standard assignment, given its name and the scope it was created at.

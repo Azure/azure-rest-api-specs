@@ -63,6 +63,7 @@ alias ContainerAppOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ContainerApps {
   /**
    * Get the properties of a Container App.

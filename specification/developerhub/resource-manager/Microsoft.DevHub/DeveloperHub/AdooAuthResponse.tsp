@@ -40,6 +40,7 @@ alias AdooAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface AdooAuthResponses {
   /**
    * Callback URL to hit once authenticated with Entra ID to have the service store the OAuth token.

@@ -24,6 +24,7 @@ alias LicensesOps = Legacy.ExtensionOperations<
 >;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface LicensesOperationGroup {
   /**
    * The operation to validate a license.

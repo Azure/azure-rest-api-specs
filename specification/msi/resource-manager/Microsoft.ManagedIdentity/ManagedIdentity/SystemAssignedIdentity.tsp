@@ -33,6 +33,7 @@ model SystemAssignedIdentity
 @@visibility(SystemAssignedIdentity.properties, Lifecycle.Read);
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface SystemAssignedIdentities {
   /**
    * Gets the systemAssignedIdentity available under the specified RP scope.

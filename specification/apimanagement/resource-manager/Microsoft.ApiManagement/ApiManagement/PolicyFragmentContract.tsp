@@ -57,6 +57,7 @@ interface PolicyFragmentContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface PolicyFragmentContracts {
   /**
    * Gets a policy fragment.
@@ -242,6 +243,7 @@ interface WorkspacePolicyFragmentOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspacePolicyFragment {
   /**
    * Gets a policy fragment.

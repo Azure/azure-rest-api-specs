@@ -56,6 +56,7 @@ interface GlobalSchemaContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface GlobalSchemaContracts {
   /**
    * Gets the details of the Schema specified by its identifier.
@@ -203,6 +204,7 @@ interface WorkspaceGlobalSchemaOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceGlobalSchema {
   /**
    * Gets the details of the Schema specified by its identifier.

@@ -65,6 +65,7 @@ alias JobVersionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(Features.JobVersions)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface JobVersions {
   /**
    * Gets a job version.

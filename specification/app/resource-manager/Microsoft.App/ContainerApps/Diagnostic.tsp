@@ -102,6 +102,7 @@ alias ContainerAppDetectorPropertyOps = Azure.ResourceManager.Legacy.LegacyOpera
 @armResourceOperations
 @tag("ContainerApps")
 @tag("Diagnostics")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ContainerAppsDiagnostics {
   /**
    * Get a revision of a Container App.
@@ -229,6 +230,7 @@ alias ContainerAppManagedEnvironmentDetectorResourcePropertyOps = Azure.Resource
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("Diagnostics")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ManagedEnvironmentsDiagnostics {
   /**
    * Get the properties of a Managed Environment used to host container apps.

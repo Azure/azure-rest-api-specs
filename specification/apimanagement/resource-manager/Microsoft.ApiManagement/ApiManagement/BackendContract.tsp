@@ -56,6 +56,7 @@ interface BackendContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface BackendContracts {
   /**
    * Gets the details of the backend specified by its identifier.
@@ -235,6 +236,7 @@ interface WorkspaceBackendOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceBackend {
   /**
    * Gets the details of the backend specified by its identifier.

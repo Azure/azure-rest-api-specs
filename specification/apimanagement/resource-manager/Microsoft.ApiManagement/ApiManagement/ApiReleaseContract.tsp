@@ -64,6 +64,7 @@ interface ApiReleaseContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ApiReleaseContracts {
   /**
    * Returns the details of an API release.
@@ -240,6 +241,7 @@ interface WorkspaceApiReleaseOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiRelease {
   /**
    * Returns the details of an API release.

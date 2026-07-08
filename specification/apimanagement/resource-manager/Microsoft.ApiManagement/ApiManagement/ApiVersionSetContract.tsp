@@ -56,6 +56,7 @@ interface ApiVersionSetContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ApiVersionSetContracts {
   /**
    * Gets the details of the Api Version Set specified by its identifier.
@@ -224,6 +225,7 @@ interface WorkspaceApiVersionSetOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiVersionSet {
   /**
    * Gets the details of the Api Version Set specified by its identifier.

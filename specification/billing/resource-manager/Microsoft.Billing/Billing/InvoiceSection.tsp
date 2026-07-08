@@ -60,6 +60,7 @@ alias InvoiceSectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface InvoiceSections {
   /**
    * Gets an invoice section by its ID. The operation is supported only for billing accounts with agreement type Microsoft Customer Agreement.

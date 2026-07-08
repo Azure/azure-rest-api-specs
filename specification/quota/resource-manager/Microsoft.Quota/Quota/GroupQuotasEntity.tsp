@@ -94,6 +94,7 @@ alias groupQuotaOps = Azure.ResourceManager.Legacy.RoutedOperations<
 >;
 
 @armResourceOperations(#{ allowStaticRoutes: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface GroupQuotasEntities {
   /**
    * Gets the GroupQuotas for the name passed. It will return the GroupQuotas properties only. The details on group quota can be access from the group quota APIs.

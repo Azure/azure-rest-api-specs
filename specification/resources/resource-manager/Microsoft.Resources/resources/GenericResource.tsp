@@ -86,6 +86,7 @@ alias genericOps = Azure.ResourceManager.Legacy.RoutedOperations<
 >;
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface Resources {
   /**
    * Checks by ID whether a resource exists. This API currently works only for a limited set of Resource providers. In the event that a Resource provider does not implement this API, ARM will respond with a 405. The alternative then is to use the GET API to check for the existence of the resource.
@@ -172,6 +173,7 @@ alias specificResourcesOps = Azure.ResourceManager.Legacy.LegacyOperations<
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface SpecificResources {
   /** Checks whether a resource exists. */
   @tag("Resources")

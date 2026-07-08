@@ -82,11 +82,13 @@ interface DeploymentStackCommonOps<
 
 @armResourceOperations
 @tag("DeploymentStacksAtResourceGroup")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentStacksAtResourceGroup
   extends DeploymentStackCommonOps<Extension.ResourceGroup> {}
 
 @armResourceOperations
 @tag("DeploymentStacksAtSubscription")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentStacksAtSubscription
   extends DeploymentStackCommonOps<Extension.Subscription> {}
 

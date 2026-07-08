@@ -34,6 +34,7 @@ model RestorableDroppedManagedDatabase
 @Azure.ResourceManager.Legacy.feature(
   Features.RestorableDroppedManagedDatabases
 )
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface RestorableDroppedManagedDatabases {
   /**
    * Gets a restorable dropped managed database.

@@ -64,6 +64,7 @@ interface OperationContractOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface OperationContracts {
   /**
    * Gets the details of the API Operation specified by its identifier.
@@ -246,6 +247,7 @@ interface WorkspaceApiOperationOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface WorkspaceApiOperation {
   /**
    * Gets the details of the API Operation specified by its identifier.

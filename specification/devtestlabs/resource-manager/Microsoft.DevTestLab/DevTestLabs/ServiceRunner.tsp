@@ -38,6 +38,7 @@ model ServiceRunner is Azure.ResourceManager.ProxyResource<never, false> {
 }
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ServiceRunners {
   /**
    * Get service runner.

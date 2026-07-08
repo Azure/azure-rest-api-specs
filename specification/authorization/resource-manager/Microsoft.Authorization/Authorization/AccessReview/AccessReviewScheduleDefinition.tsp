@@ -151,6 +151,7 @@ alias ScopeAccessReviewScheduleDefinitionOps = Azure.ResourceManager.Legacy.Exte
 >;
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface ScopeAccessReviewScheduleDefinitions {
   /**
    * Get single access review definition

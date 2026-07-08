@@ -24,6 +24,7 @@ model SapMonitor
 }
 
 @armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface SapMonitors {
   /**
    * The product Microsoft.Workloads/sapMonitors (AMS Classic) is officially retired as of May 31, 2023.

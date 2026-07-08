@@ -322,6 +322,7 @@ interface BackupInstanceOps
     > {}
 
 @armResourceOperations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface BackupInstances {
   /**
    * Get result of backup instance creation operation

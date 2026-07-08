@@ -63,12 +63,14 @@ interface DeploymentStackWhatIfCommon<
 @armResourceOperations
 @added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtResourceGroup")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentStacksWhatIfResultsAtResourceGroup
   extends DeploymentStackWhatIfCommon<Extension.ResourceGroup> {}
 
 @armResourceOperations
 @added(Versions.v2025_07_01)
 @tag("DeploymentStacksWhatIfResultsAtSubscription")
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-required-operations" "Existing spec - this resource does not currently have all required operations."
 interface DeploymentStacksWhatIfResultsAtSubscription
   extends DeploymentStackWhatIfCommon<Extension.Subscription> {}
 
