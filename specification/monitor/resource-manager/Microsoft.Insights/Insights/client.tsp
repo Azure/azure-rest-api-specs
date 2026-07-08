@@ -1509,7 +1509,12 @@ model AccessRulePropertiesSubscriptionsItem {
 @@alternateType(
   Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   AccessRulePropertiesSubscriptionsItem[],
-  "csharp,go"
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+  AccessRulePropertiesSubscriptionsItem,
+  "go"
 );
 @@clientName(
   Azure.ResourceManager.CommonTypes.ErrorDetail,
