@@ -41,46 +41,107 @@ input-file:
   - preview/2025-10-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: dataConnectors.json
+    from: openapi.json
+    where:
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+      - $.definitions.EntityEdges.properties.additionalData
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueriesProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueryTemplates.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueryTemplateProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: AlertRules.json
+    from: openapi.json
+    where:
+      - $.definitions.NrtAlertRuleProperties.properties.customDetails
+      - $.definitions.NrtAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.QueryBasedAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Recommendations.json
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
-  - code: AvoidAnonymousTypes
-    from: Recommendations.json
-    reason: These properties are unknown (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: TriggeredAnalyticsRuleRuns.json
+    from: openapi.json
+    where:
+      - $.definitions.TriggeredAnalyticsRuleRunProperties.properties.ruleRunAdditionalData
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
   - code: AvoidAdditionalProperties
-    from: ThreatIntelligenceQuery.json
+    from: openapi.json
+    where:
+      - $.definitions.TIObjectCommonProperties.properties.data
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
     reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
+    reason: These properties are unknown (each request can have different values for each entity)
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DefinitionsPropertiesNamesCamelCase
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem.properties.Query
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: RequiredPropertiesMissingInResourceModel
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.GetQueriesResponse
+      - $.definitions.ThreatIntelligenceMetricsList
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: PutRequestResponseSchemeArm
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DeleteResponseCodes
-    from: FileImports.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports/{fileImportId}"].delete
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
@@ -93,12 +154,8 @@ input-file:
   - stable/2025-09-01/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: dataConnectors.json
+    from: openapi.json
     where:
-      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
-      - $.definitions.RestApiPollerRequestConfig.properties.headers
-      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
-      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
       - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
       - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
       - $.definitions.JwtAuthModel.properties.userName
@@ -109,17 +166,50 @@ suppressions:
       - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
       - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
       - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
       - $.definitions.SessionAuthModel.properties.userName
       - $.definitions.SessionAuthModel.properties.password
       - $.definitions.SessionAuthModel.properties.queryParameters
       - $.definitions.SessionAuthModel.properties.headers
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: AlertRules.json
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+    reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
     where:
       - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
       - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
+  - code: AvoidAdditionalProperties
+    from: openapi.json
+    where:
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
+    reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.ThreatIntelligenceMetricsList
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
+  - code: PutRequestResponseSchemeArm
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
+    reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
 ### Tag: package-preview-2025-07-01
@@ -131,46 +221,107 @@ input-file:
   - preview/2025-07-01-preview/openapi.json
 suppressions:
   - code: AvoidAdditionalProperties
-    from: dataConnectors.json
+    from: openapi.json
+    where:
+      - $.definitions.GenericBlobSbsAuthModel.properties.credentialsConfig
+      - $.definitions.GenericBlobSbsAuthModel.properties.storageAccountCredentialsConfig
+      - $.definitions.JwtAuthModel.properties.userName
+      - $.definitions.JwtAuthModel.properties.password
+      - $.definitions.JwtAuthModel.properties.queryParameters
+      - $.definitions.JwtAuthModel.properties.headers
+      - $.definitions.OAuthModel.properties.tokenEndpointHeaders
+      - $.definitions.OAuthModel.properties.tokenEndpointQueryParameters
+      - $.definitions.OAuthModel.properties.authorizationEndpointHeaders
+      - $.definitions.OAuthModel.properties.authorizationEndpointQueryParameters
+      - $.definitions.RestApiPollerDataConnectorProperties.properties.addOnAttributes
+      - $.definitions.RestApiPollerRequestConfig.properties.headers
+      - $.definitions.RestApiPollerRequestConfig.properties.queryParameters
+      - $.definitions.RestApiPollerRequestPagingNextPageUrlConfig.properties.nextPageUrlQueryParameters
+      - $.definitions.SessionAuthModel.properties.userName
+      - $.definitions.SessionAuthModel.properties.password
+      - $.definitions.SessionAuthModel.properties.queryParameters
+      - $.definitions.SessionAuthModel.properties.headers
     reason: These properties are unknown and need to be specified by the customer (each request can have different values)
   - code: AvoidAdditionalProperties
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.EntityCommonProperties.properties.additionalData
+      - $.definitions.EntityEdges.properties.additionalData
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueriesProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: EntityQueryTemplates.json
+    from: openapi.json
+    where:
+      - $.definitions.ActivityEntityQueryTemplateProperties.properties.entitiesFilter
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: AlertRules.json
+    from: openapi.json
+    where:
+      - $.definitions.NrtAlertRuleProperties.properties.customDetails
+      - $.definitions.NrtAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.QueryBasedAlertRuleTemplateProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleCommonProperties.properties.customDetails
+      - $.definitions.ScheduledAlertRuleTemplateProperties.properties.customDetails
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: Recommendations.json
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
     reason: These properties are unknown and changed frequently (each request can have different values for each entity)
-  - code: AvoidAnonymousTypes
-    from: Recommendations.json
-    reason: These properties are unknown (each request can have different values for each entity)
   - code: AvoidAdditionalProperties
-    from: TriggeredAnalyticsRuleRuns.json
+    from: openapi.json
+    where:
+      - $.definitions.TriggeredAnalyticsRuleRunProperties.properties.ruleRunAdditionalData
     reason: TriggeredAnalyticsRuleRun does not include a property called "additionalProperties", it is only used to mark that 'ruleRunAdditionalData' is a dictionary or string to object.
   - code: AvoidAdditionalProperties
-    from: ThreatIntelligenceQuery.json
+    from: openapi.json
+    where:
+      - $.definitions.TIObjectCommonProperties.properties.data
+      - $.definitions.ThreatIntelligenceExternalReference.properties.hashes
+      - $.definitions.ThreatIntelligenceIndicatorProperties.properties.extensions
     reason: These properties are required in current API. The team is working on a new version of API to resolve it in the future release.
+  - code: AvoidAnonymousTypes
+    from: openapi.json
+    where:
+      - $.definitions.RecommendationProperties.properties.additionalProperties
+      - $.definitions.RecommendedSuggestion.properties.additionalProperties
+    reason: These properties are unknown (each request can have different values for each entity)
   - code: GetCollectionOnlyHasValueAndNextLink
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates"].get.responses["200"].schema.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/metrics"].get.responses["200"].schema.properties
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DefinitionsPropertiesNamesCamelCase
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.InsightQueryItemPropertiesTableQueryQueriesDefinitionsPropertiesItemsItem.properties.Query
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: RequiredPropertiesMissingInResourceModel
-    from: Entities.json
+    from: openapi.json
+    where:
+      - $.definitions.OperationsList
+      - $.definitions.GetQueriesResponse
+      - $.definitions.ThreatIntelligenceMetricsList
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: PutRequestResponseSchemeArm
-    from: EntityQueries.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/actions/{actionId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/threatIntelligence/main/indicators/{name}"].put
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
   - code: DeleteResponseCodes
-    from: FileImports.json
+    from: openapi.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/fileImports/{fileImportId}"].delete
     reason: This API is published to customers and we have not changed it in the past year, nor will we be able to change it without breaking changes to customers.
 ```
 
