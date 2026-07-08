@@ -7,8 +7,8 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{package-name}"
     package-name: Azure.AI.Projects.Agents
     api-version: "v1"
-    # plugins:
-    #   - "../codegen"
+    plugins:
+      - "../codegen"
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - specification/ai-foundry/data-plane/Foundry/src/agents
@@ -24,6 +24,14 @@ options:
       - specification/ai-foundry/data-plane/Foundry/src/agents-session-files
       - specification/ai-foundry/data-plane/Foundry/src/managed-blueprints
       - specification/ai-foundry/data-plane/Foundry/src/agents-optimization
+  "typespec-extension-exporter":
+     keys: x-ms-foundry-meta
+     language: csharp
+     output-shape: list
+     output-format: csv
+     output-file: Azure.AI.Projects.Agents_experimental.csv
+     emitter-output-dir: "{cwd}/../../codegen/src/" # run npx tsp compile from within `TempTypeSpecFiles` folder
+     namespace: Azure.AI.Projects.Agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"

@@ -1,7 +1,7 @@
 import "../common/service.tsp";
 import "../common/custom-types.tsp";
 import "../sdk-common/error.default.tsp";
-import "../sdk-common/beta-ops-relocation-agents.tsp";
+import "../sdk-common/ops-relocation-agents.tsp";
 
 import "../agents/routes.tsp";
 import "../memory-stores/routes.tsp";
@@ -81,6 +81,8 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
 
+@@clientName(_PreviewAgentToolType.fabric_dataagent_preview, "FABRIC_DATA_AGENT_PREVIEW");
+
 @@clientName(OpenAI.MCPListToolsToolAnnotations, "McpListToolsToolAnnotations");
 @@clientName(OpenAI.MCPListToolsTool, "McpListToolsTool");
 @@clientName(OpenAI.MCPTool, "McpTool");
@@ -89,6 +91,7 @@ using Azure.AI.Projects;
 @@clientName(OpenAI.MCPTool.connector_id, "connectorType");
 @@clientName(OpenAI.MCPToolFilter, "McpToolFilter");
 @@clientName(OpenAI.MCPToolRequireApproval, "McpToolRequireApproval");
+@@clientName(MCPToolboxTool, "McpToolboxTool");
 
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
@@ -127,6 +130,8 @@ using Azure.AI.Projects;
 
 @@clientName(OpenAI.ApplyPatchToolParam, "ApplyPatchToolParameter", "java");
 @@clientName(OpenAI.CustomToolParam, "CustomToolParameter", "java");
+@@clientName(OpenAI.NamespaceToolParam, "NamespaceTool", "java");
+@@clientName(OpenAI.ToolSearchToolParam, "ToolSearchTool", "java");
 @@clientName(
   OpenAI.FunctionShellToolParam,
   "FunctionShellToolParameter",
@@ -189,12 +194,19 @@ using Azure.AI.Projects;
 
 @@clientName(WorkIQPreviewTool, "WorkIqPreviewTool", "java");
 @@clientName(FabricIQPreviewTool, "FabricIqPreviewTool", "java");
+@@clientName(WorkIQPreviewToolboxTool, "WorkIqPreviewToolboxTool", "java");
+@@clientName(FabricIQPreviewToolboxTool, "FabricIqPreviewToolboxTool", "java");
 
 @@clientName(AgentOptimizationJobs.create, "createOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.get, "getOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+
+@@clientName(UploadSessionFileParams.agent_session_id, "sessionId", "java");
+@@clientName(DownloadSessionFileParams.agent_session_id, "sessionId", "java");
+@@clientName(ListSessionFilesParams.agent_session_id, "sessionId", "java");
+@@clientName(DeleteSessionFileParams.agent_session_id, "sessionId", "java");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -388,6 +400,10 @@ using Azure.AI.Projects;
 
 @@alternateType(OpenAI.OutputItem, unknown, "java");
 @@alternateType(OpenAI.InputItem, unknown, "java");
+
+// Erase strongly-typed payloads on the namespace / tool_search Tool variants.
+@@alternateType(OpenAI.NamespaceToolParam.tools, unknown, "java");
+@@alternateType(OpenAI.ToolSearchToolParam.parameters, unknown, "java");
 
 // TimeZone property override via model indirection
 @alternateType(

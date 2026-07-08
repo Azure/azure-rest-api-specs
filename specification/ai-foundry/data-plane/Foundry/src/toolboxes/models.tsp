@@ -4,13 +4,230 @@ import "../agents/models.tsp";
 import "../skills/models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
 
-const ToolboxesRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.toolboxes_v1_preview],
+/**
+ * Per-tool configuration that controls tool visibility and search behavior.
+ */
+model ToolConfig {
+  /**
+   * When true, the tool is always included in agent context and visible in `tools/list`.
+   * When false (default), the tool is hidden from `tools/list` and only discoverable via `tool_search`.
+   */
+  pin?: boolean;
+
+  /**
+   * Additional text indexed for tool_search. Supplements the native tool description
+   * to improve discoverability. Does not alter `tools/list` output.
+   */
+  @maxLength(1000)
+  additional_search_text?: string;
+}
+
+/**
+ * Optional tool configuration extension for controlling tool visibility and search behavior.
+ */
+alias ToolConfigExtension = {
+  /**
+   * Per-tool configuration map. Keys are tool names or `*` (catch-all default).
+   * Resolution order: exact tool name match takes priority over `*`.
+   * Unknown tool names are silently ignored at runtime.
+   */
+  tool_configs?: Record<ToolConfig>;
 };
 
+/**
+ * Optional name and description fields for tool definitions and nested tool configurations.
+ */
+alias ToolNameAndDescriptionExtension = {
+  /**
+   * Optional user-defined name for this tool or configuration.
+   */
+  name?: string;
+
+  /**
+   * Optional user-defined description for this tool or configuration.
+   */
+  description?: string;
+};
+
+/**
+ * Spreads `Source`, changing the selected properties to optional.
+ */
+model WithFieldsOptional<Source, Keys extends string> {
+  ...OmitProperties<Source, Keys>;
+  ...PickProperties<OptionalProperties<Source>, Keys>;
+}
+
+/**
+ * Spreads tool-specific fields from `Source`, excluding fields owned by `ToolboxTool`.
+ */
+alias ToolFields<Source> = {
+  ...OmitProperties<Source, "name" | "description" | "type" | "tool_configs">;
+};
+
+alias ToolboxCodeInterpreterToolType = "code_interpreter";
+alias ToolboxFileSearchToolType = "file_search";
+alias ToolboxWebSearchToolType = "web_search";
+alias ToolboxMCPToolType = "mcp";
+alias ToolboxAzureAISearchToolType = "azure_ai_search";
+alias ToolboxOpenApiToolType = "openapi";
+alias ToolboxA2APreviewToolType = "a2a_preview";
+alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
+alias ToolboxReminderPreviewToolType = "reminder_preview";
+alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
+alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
+
+/**
+ * Supported tool types for tools stored in a toolbox.
+ */
+union ToolboxToolType {
+  code_interpreter: ToolboxCodeInterpreterToolType,
+  file_search: ToolboxFileSearchToolType,
+  web_search: ToolboxWebSearchToolType,
+  mcp: ToolboxMCPToolType,
+  azure_ai_search: ToolboxAzureAISearchToolType,
+  openapi: ToolboxOpenApiToolType,
+  a2a_preview: ToolboxA2APreviewToolType,
+  browser_automation_preview: ToolboxBrowserAutomationPreviewToolType,
+  reminder_preview: ToolboxReminderPreviewToolType,
+  work_iq_preview: ToolboxWorkIQPreviewToolType,
+  fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  toolbox_search_preview: ToolboxSearchPreviewToolType,
+}
+
+/**
+ * An abstract representation of a tool stored in a toolbox.
+ */
+@discriminator("type")
+model ToolboxTool {
+  /**
+   * The type of tool.
+   */
+  type: ToolboxToolType;
+
+  ...ToolNameAndDescriptionExtension;
+  ...ToolConfigExtension;
+}
+
+/**
+ * A code interpreter tool stored in a toolbox.
+ */
+model CodeInterpreterToolboxTool extends ToolboxTool {
+  type: ToolboxCodeInterpreterToolType;
+
+  ...ToolFields<OpenAI.CodeInterpreterTool>;
+}
+
+/**
+ * A file search tool stored in a toolbox.
+ */
+model FileSearchToolboxTool extends ToolboxTool {
+  type: ToolboxFileSearchToolType;
+
+  ...WithFieldsOptional<
+    ToolFields<OpenAI.FileSearchTool>,
+    "vector_store_ids"
+  >;
+}
+
+/**
+ * A web search tool stored in a toolbox.
+ */
+model WebSearchToolboxTool extends ToolboxTool {
+  type: ToolboxWebSearchToolType;
+
+  ...ToolFields<OpenAI.WebSearchTool>;
+}
+
+/**
+ * An MCP tool stored in a toolbox.
+ */
+model MCPToolboxTool extends ToolboxTool {
+  type: ToolboxMCPToolType;
+
+  ...ToolFields<OpenAI.MCPTool>;
+}
+
+/**
+ * An Azure AI Search tool stored in a toolbox.
+ */
+model AzureAISearchToolboxTool extends ToolboxTool {
+  type: ToolboxAzureAISearchToolType;
+
+  ...ToolFields<AzureAISearchTool>;
+}
+
+/**
+ * An OpenAPI tool stored in a toolbox.
+ */
+model OpenApiToolboxTool extends ToolboxTool {
+  type: ToolboxOpenApiToolType;
+
+  ...ToolFields<OpenApiTool>;
+}
+
+/**
+ * An A2A tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model A2APreviewToolboxTool extends ToolboxTool {
+  type: ToolboxA2APreviewToolType;
+
+  ...ToolFields<A2APreviewTool>;
+}
+
+/**
+ * A browser automation tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model BrowserAutomationPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxBrowserAutomationPreviewToolType;
+
+  ...ToolFields<BrowserAutomationPreviewTool>;
+}
+
+/**
+ * A reminder tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model ReminderPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxReminderPreviewToolType;
+}
+
+/**
+ * A WorkIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WorkIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWorkIQPreviewToolType;
+
+  ...ToolFields<WorkIQPreviewTool>;
+}
+
+/**
+ * A FabricIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model FabricIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxFabricIQPreviewToolType;
+
+  ...ToolFields<FabricIQPreviewTool>;
+}
+
+/**
+ * A toolbox search tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model ToolboxSearchPreviewToolboxTool extends ToolboxTool {
+  /**
+   * The type of the tool. Always `toolbox_search_preview`.
+   */
+  type: ToolboxSearchPreviewToolType;
+}
 @doc("Policy configuration for a toolbox, including content safety and other governance settings.")
 model ToolboxPolicies {
   @doc("Responsible AI content filtering configuration.")
@@ -72,7 +289,7 @@ model ToolboxVersionObject {
   created_at: utcDateTime;
 
   @doc("The list of tools contained in this toolbox version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources included in this toolbox version.")
   skills?: ToolboxSkill[];
@@ -95,7 +312,7 @@ alias CreateToolboxVersionRequest = {
   metadata?: Record<string>;
 
   @doc("The list of tools to include in this version.")
-  tools: OpenAI.Tool[];
+  tools: ToolboxTool[];
 
   @doc("The list of skill sources to include in this version. A skill reference specifies a skill name and optionally a version. If version is omitted, the skill's default version is used.")
   skills?: ToolboxSkill[];

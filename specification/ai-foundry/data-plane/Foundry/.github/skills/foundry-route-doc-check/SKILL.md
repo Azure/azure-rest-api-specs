@@ -3,7 +3,7 @@ name: foundry-route-doc-check
 license: MIT
 metadata:
   version: "1.4.0"
-description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice. USE FOR: reviewing or authoring routes.tsp files under specification/ai-foundry/data-plane/Foundry/src/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
+description: "Validates that all TypeSpec route operations in the AI Foundry data-plane (Foundry) domain have documentation comments and @summary decorators with correct voice. USE FOR: reviewing or authoring routes.tsp and routes.generated.tsp files under specification/ai-foundry/data-plane/Foundry/src/. DO NOT USE FOR: files outside the Foundry data-plane area, model-only .tsp files, or SDK client customization files (client.tsp)."
 ---
 
 # Foundry Route Documentation Check
@@ -18,6 +18,7 @@ This skill applies **only** to files matching:
 
 ```
 specification/ai-foundry/data-plane/Foundry/src/**/routes.tsp
+specification/ai-foundry/data-plane/Foundry/src/**/routes.generated.tsp
 ```
 
 It does **not** apply to:
@@ -43,13 +44,19 @@ operations that have an explicit, significant rule violation:
 - Summary contains unnecessary filler ("all", "by id") that can be removed → fix
 - Description is near-identical to the summary with no added detail → fix
 - Description uses `@doc()` instead of a TSDoc `/** ... */` comment → fix
+- Multiple adjacent TSDoc comment blocks apply to the same operation or parameter → merge or remove the redundant block
 - Minor wording preferences or stylistic differences that do not violate a rule → **leave unchanged**
 
 When in doubt, leave the existing text alone.
 
+For `routes.generated.tsp` files, it is acceptable to apply this skill's automated
+rewrite directly to the generated file. The intended workflow is to run route
+generation first and then run this rewrite immediately afterward, so the generated
+route documentation changes are consistently reapplied and not lost overall.
+
 ## Rules
 
-Every operation defined inside an `interface` block in a `routes.tsp` file must satisfy
+Every operation defined inside an `interface` block in a `routes.tsp` or `routes.generated.tsp` file must satisfy
 **all** of the following requirements. See [route-documentation-rules.md](references/route-documentation-rules.md)
 for the full rule definitions, examples, and remediation guidance.
 
@@ -60,17 +67,18 @@ for the full rule definitions, examples, and remediation guidance.
 | `FDOC-003`       | The TSDoc description must use **third-person indicative** voice ("Creates an agent"), must add meaningful detail beyond the summary, and must not be near-identical to the summary. |
 | `FDOC-004`       | `@summary()` must be a maximally concise **imperative** phrase ("Create an agent"). No trailing period. No filler ("all", "by ID", "info about"). Must not be truncated. Always include articles. |
 | `FDOC-005`       | Each `@path`, `@query`, `@header`, and `@body` parameter must have a doc comment or `@doc()`   |
+| `FDOC-006`       | Do not leave multiple adjacent TSDoc comment blocks on the same operation or parameter. TypeSpec concatenates adjacent docs into one OpenAPI `description`, which can produce malformed text. |
 
 ## Post-Edit Steps
 
-After applying fixes to any `routes.tsp` file, **always** run the following steps in order:
+After applying fixes to any `routes.tsp` or `routes.generated.tsp` file, **always** run the following steps in order:
 
 ### 1. Format
 
 Run `tsp format` on the changed files to ensure consistent formatting:
 
 ```shell
-npx tsp format specification/ai-foundry/data-plane/Foundry/src/**/routes.tsp
+npx tsp format specification/ai-foundry/data-plane/Foundry/src/**/routes.tsp specification/ai-foundry/data-plane/Foundry/src/**/routes.generated.tsp
 ```
 
 ### 2. Regenerate OpenAPI artifacts
@@ -87,7 +95,7 @@ Verify that the files under `openapi3/{version}/` are updated for every versione
 
 ## Workflow
 
-1. **Identify** all `routes.tsp` files under `specification/ai-foundry/data-plane/Foundry/src/`
+1. **Identify** all `routes.tsp` and `routes.generated.tsp` files under `specification/ai-foundry/data-plane/Foundry/src/`
 2. **Parse** each `interface` block and enumerate its operations
 3. **Check** each operation against rules `FDOC-001` through `FDOC-005`
 4. **Report** findings grouped by file, with rule ID, operation name, and line number
@@ -103,6 +111,7 @@ Report results as a markdown table:
 | File | Operation | Rule | Finding |
 | ---- | --------- | ---- | ------- |
 | src/connections/routes.tsp | get | FDOC-002 | Missing `@summary()` decorator |
+| src/openai-chat/routes.generated.tsp | createChatCompletion | FDOC-004 | `@summary()` uses third-person voice |
 ```
 
 If all operations pass, report: ✅ All Foundry route operations are fully documented.

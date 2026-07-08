@@ -54,7 +54,9 @@ interface EnvironmentVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryEnvironmentVersion"
     > {}
 
 @armResourceOperations
@@ -167,7 +169,9 @@ interface EnvironmentVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningEnvironmentVersion"
     > {}
 
 @armResourceOperations
