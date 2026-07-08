@@ -363,6 +363,173 @@ more specific, customer-facing documentation.
 
 ---
 
+## FDOC-007 — Remove Documentation Suppressions
+
+**Requirement:** Do not keep suppressions for
+`@azure-tools/typespec-azure-core/documentation-required` in scoped route files.
+When the skill encounters a suppression for missing documentation, it must
+remove the suppression and add the missing TSDoc documentation instead.
+
+This includes auto-generated import suppressions such as:
+
+```typespec
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+```
+
+**Why:** Documentation suppressions hide gaps that flow into generated OpenAPI,
+SDK documentation, and developer portals. Missing route and parameter
+descriptions should be fixed at the TypeSpec source level so downstream
+artifacts remain complete without relying on linter exceptions.
+
+### ✅ Good
+
+```typespec
+/** Retrieves the requested response by its unique identifier. */
+@summary("Get a response")
+@get
+@route("/responses/{response_id}")
+getResponse is FoundryDataPlaneOperation<
+  {
+    /** The unique identifier of the response to retrieve. */
+    @path response_id: string;
+  },
+  ResponseObject
+>;
+```
+
+### ❌ Bad
+
+```typespec
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+@get
+@route("/responses/{response_id}")
+getResponse is FoundryDataPlaneOperation<
+  {
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "Auto-suppressed warnings non-applicable rules during import."
+    @path response_id: string;
+  },
+  ResponseObject
+>;
+```
+
+### Remediation
+
+Remove each `documentation-required` suppression and add the relevant TSDoc
+comment:
+
+- For operations, add an operation TSDoc comment and `@summary()` per
+  `FDOC-001` through `FDOC-004`.
+- For `@path`, `@query`, `@header`, and `@body` parameters, add a parameter
+  TSDoc comment or `@doc()` per `FDOC-005`.
+- Preserve unrelated suppressions and suppressions for rules other than
+  `documentation-required`.
+
+Do not leave a scoped route file in a state where the
+`documentation-required` warning still needs to be suppressed.
+
+---
+
+## FDOC-008 — Description Override for Concatenated Descriptions
+
+**Requirement:** When TypeSpec would concatenate multiple request body or
+parameter descriptions into noisy OpenAPI output, keep one concise source
+TSDoc comment and add the appropriate override extension with the intended
+final OpenAPI description.
+
+This commonly happens for shared routes that support multiple content types
+or for imported generated route parameters that already carry a generic
+description. Without an override, OpenAPI can contain descriptions such as:
+
+```yaml
+description: The request body.The request body.
+description: The file id path parameter.The ID of the file.
+```
+
+**Why:** TypeSpec source still needs documentation to satisfy
+`documentation-required`, but adjacent or merged documentation can produce
+repetitive downstream descriptions. The Foundry OpenAPI post-processing
+understands description override extensions, so use them to declare the clean
+final description instead of stacking TSDoc comments.
+
+### ✅ Good — shared route request body
+
+```typespec
+@extension("x-ms-request-body-description-override", "The request body.")
+@sharedRoute
+@post
+createContainerFileJson is OpenAIOperation<
+  {
+    /** The request body. */
+    @body
+    body: OpenAI.CreateContainerFileBody;
+  },
+  OpenAI.ContainerFileResource
+>;
+```
+
+Use the operation-level `x-ms-request-body-description-override` extension for
+`@body` and `@multipartBody` because TypeSpec does not emit parameter-level
+extensions onto OpenAPI `requestBody`.
+
+### ✅ Good — route parameter
+
+```typespec
+/** The file ID path parameter. */
+@extension("x-ms-description-override", "The ID of the file.")
+@path
+file_id: string;
+```
+
+### ✅ Good — imported/generated parameter with existing generic text
+
+```typespec
+/** The file ID path parameter. */
+@extension("x-ms-description-override", "The ID of the file.")
+@path
+file_id: string;
+```
+
+### ❌ Bad — adjacent TSDoc blocks
+
+```typespec
+/** The file id path parameter. */
+/** The ID of the file. */
+@path
+file_id: string;
+```
+
+### ❌ Bad — repeated request body docs
+
+```typespec
+/** The request body. */
+/** The request body. */
+@body
+body: OpenAI.ModifyAssistantRequest;
+```
+
+### Remediation
+
+1. Remove adjacent duplicate or competing TSDoc blocks.
+2. Keep a single TSDoc comment so the declaration remains documented.
+3. For `@path`, `@query`, and real `@header` parameters, add
+   `@extension("x-ms-description-override", "...")` immediately before the
+   parameter decorator.
+4. For `@body` and `@multipartBody`, add
+   `@extension("x-ms-request-body-description-override", "...")` to the
+   operation decorators, not to the body declaration.
+5. Use the clean, customer-facing final description as the override value.
+6. If the file does not already import and use OpenAPI decorators, add:
+
+   ```typespec
+   import "@typespec/openapi";
+   using TypeSpec.OpenAPI;
+   ```
+
+Do not use adjacent TSDoc comments to combine generic and specific
+documentation.
+
+---
+
 ## Post-Edit: Format and Regenerate
 
 After making any documentation fixes, **always** run these two steps:
