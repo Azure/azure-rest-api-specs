@@ -326,11 +326,41 @@ union RubricGenerationInputQualityWarningSeverity {
   warning: "warning",
 }
 
+@doc("Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union RubricGenerationInputQualityWarningCode {
+  string,
+
+  @doc("A prompt source was empty or whitespace-only.")
+  empty_prompt: "empty_prompt",
+
+  @doc("A prompt source was non-empty but below the recommended minimum signal threshold.")
+  short_prompt: "short_prompt",
+
+  @doc("An agent source resolved successfully but had no usable instructions.")
+  empty_agent_instructions: "empty_agent_instructions",
+
+  @doc("An agent source had instructions below the recommended minimum signal threshold.")
+  short_agent_instructions: "short_agent_instructions",
+
+  @doc("A dataset source resolved but contained no usable content for rubric generation.")
+  empty_dataset_content: "empty_dataset_content",
+
+  @doc("Dataset content was below the recommended minimum signal threshold.")
+  short_dataset_content: "short_dataset_content",
+
+  @doc("A row-structured dataset had very few rows, so the generated rubric may not generalize.")
+  low_trace_count: "low_trace_count",
+
+  @doc("Combined resolved input across successfully resolved sources was below the recommended minimum signal threshold.")
+  insufficient_total_input: "insufficient_total_input",
+}
+
 @doc("A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricGenerationInputQualityWarning {
-  @doc("Stable machine-readable warning code in snake_case (e.g., `short_prompt`, `empty_agent_instructions`, `insufficient_total_input`).")
-  code: string;
+  @doc("Stable searchable machine-readable warning code.")
+  code: RubricGenerationInputQualityWarningCode;
 
   @doc("Advisory severity. Initial values: `warning`.")
   severity: RubricGenerationInputQualityWarningSeverity;
@@ -363,7 +393,7 @@ model EvaluatorGenerationJob
 
   @doc("Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.")
   @visibility(Lifecycle.Read)
-  rubric_generation_input_quality_warnings?: RubricGenerationInputQualityWarning[];
+  input_quality_warnings?: RubricGenerationInputQualityWarning[];
 }
 
 @doc("Evaluator Definition")
@@ -398,7 +428,7 @@ model EvaluatorVersion {
   @visibility(Lifecycle.Read)
   generation_job_id?: string;
 
-  @doc("Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `rubric_generation_input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.")
+  @doc("Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.")
   @visibility(Lifecycle.Read)
   has_generation_input_quality_warnings?: boolean;
 

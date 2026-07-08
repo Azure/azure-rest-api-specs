@@ -45968,7 +45968,7 @@ components:
             - $ref: '#/components/schemas/EvaluatorGenerationTokenUsage'
           description: Token consumption summary. Populated when the job reaches a terminal state.
           readOnly: true
-        rubric_generation_input_quality_warnings:
+        input_quality_warnings:
           type: array
           items:
             $ref: '#/components/schemas/RubricGenerationInputQualityWarning'
@@ -46161,7 +46161,7 @@ components:
           readOnly: true
         has_generation_input_quality_warnings:
           type: boolean
-          description: Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `rubric_generation_input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.
+          description: Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.
           readOnly: true
         created_by:
           type: string
@@ -76636,8 +76636,9 @@ components:
         - source
       properties:
         code:
-          type: string
-          description: Stable machine-readable warning code in snake_case (e.g., `short_prompt`, `empty_agent_instructions`, `insufficient_total_input`).
+          allOf:
+            - $ref: '#/components/schemas/RubricGenerationInputQualityWarningCode'
+          description: Stable searchable machine-readable warning code.
         severity:
           allOf:
             - $ref: '#/components/schemas/RubricGenerationInputQualityWarningSeverity'
@@ -76654,6 +76655,23 @@ components:
           format: int32
           description: Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.
       description: A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricGenerationInputQualityWarningCode:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - empty_prompt
+            - short_prompt
+            - empty_agent_instructions
+            - short_agent_instructions
+            - empty_dataset_content
+            - short_dataset_content
+            - low_trace_count
+            - insufficient_total_input
+      description: Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
