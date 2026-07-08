@@ -21,11 +21,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(SoldTo, "BillingTrustSoldTo", "csharp");
 @@clientName(TaxId, "BillingTrustTaxId", "csharp");
 @@clientName(TaxIdStatus, "BillingTrustTaxIdStatus", "csharp");
-@@clientName(
-  RegistrationNumber,
-  "BillingTrustRegistrationNumber",
-  "csharp"
-);
+@@clientName(RegistrationNumber, "BillingTrustRegistrationNumber", "csharp");
 @@clientName(
   RegistrationRequirement,
   "BillingTrustRegistrationRequirement",
