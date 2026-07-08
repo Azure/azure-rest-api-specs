@@ -59,7 +59,7 @@ model VolumeProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$")
   creationToken: string;
 
   /**
@@ -508,8 +508,7 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
-  @removed(Versions.v2026_05_01)
-  @added(Versions.v2026_05_15_preview)
+  @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
 }
@@ -2196,8 +2195,7 @@ union LargeVolumeType {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
-@removed(Versions.v2026_05_01)
-@added(Versions.v2026_05_15_preview)
+@added(Versions.v2026_05_01)
 union BreakthroughMode {
   string,
 

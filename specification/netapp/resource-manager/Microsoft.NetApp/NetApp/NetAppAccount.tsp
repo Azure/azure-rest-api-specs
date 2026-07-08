@@ -413,6 +413,44 @@ model LdapConfiguration {
   certificateCNHost?: string | null;
 
   /**
+   * List of DNS server IPv4 addresses for resolving the CN host certificate. This parameter is used when LDAP over TLS is enabled.
+   */
+  @added(Versions.v2026_05_15_preview)
+  dnsServers?: ipV4Address[];
+
+  /**
+   * Port number for LDAP communication. Default is 389 for LDAP.
+   */
+  @added(Versions.v2026_05_15_preview)
+  @minValue(1)
+  @maxValue(65535)
+  ldapPort?: int32;
+
+  /**
+   * This specifies the user DN (Distinguished Name), which overrides the base DN for user lookups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "userDN is the known technical term for user Distinguished Name in LDAP terminology"
+  @added(Versions.v2026_05_15_preview)
+  @maxLength(1024)
+  userDN?: string;
+
+  /**
+   * This specifies the group DN (Distinguished Name), which overrides the base DN for group lookups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "groupDN is the known technical term for group Distinguished Name in LDAP terminology"
+  @added(Versions.v2026_05_15_preview)
+  @maxLength(1024)
+  groupDN?: string;
+
+  /**
+   * This specifies the netgroup DN (Distinguished Name), which overrides the base DN for netgroup lookups.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "netGroupDN is the known technical term for netgroup Distinguished Name in LDAP terminology"
+  @added(Versions.v2026_05_15_preview)
+  @maxLength(1024)
+  netGroupDN?: string;
+
+  /**
    * The authentication level to use when binding to the LDAP server, defaults to Anonymous.
    */
   @added(Versions.v2026_04_15_preview)
