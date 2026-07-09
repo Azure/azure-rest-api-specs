@@ -1045,8 +1045,8 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
                 "schema": {
                   "type": "string"
                 }
@@ -1506,10 +1506,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -1537,8 +1537,8 @@
                 }
               },
               "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
                 "schema": {
                   "type": "string"
                 }
@@ -1674,10 +1674,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -1698,8 +1698,8 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
                 "schema": {
                   "type": "string"
                 }
@@ -1762,10 +1762,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -1786,8 +1786,8 @@
             "description": "The request has succeeded.",
             "headers": {
               "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this invocation. Returns the session ID associated with the invocation.",
+                "required": false,
+                "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
                 "schema": {
                   "type": "string"
                 }
@@ -15305,10 +15305,10 @@
         "description": "Creates a new conversation resource.",
         "parameters": [
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15446,10 +15446,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15534,10 +15534,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15622,10 +15622,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15700,10 +15700,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15793,10 +15793,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -15946,10 +15946,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -16062,10 +16062,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -16149,10 +16149,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -20101,10 +20101,10 @@
         "description": "Creates a model response. Provide text or image inputs to generate text or JSON outputs. Have the model call your own custom code or use built-in tools like web search or file search to use your own data as input for the model’s response.",
         "parameters": [
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -20984,10 +20984,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -21176,10 +21176,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -21266,10 +21266,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -21353,10 +21353,10 @@
             }
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }
@@ -21482,10 +21482,10 @@
             "explode": false
           },
           {
-            "name": "x-ms-user-identity",
+            "name": "x-agent-session-id",
             "in": "header",
             "required": false,
-            "description": "Opaque per-user identity string used to scope endpoint-scoped data to a specific end user. The caller must have the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission.",
+            "description": "Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.",
             "schema": {
               "type": "string"
             }

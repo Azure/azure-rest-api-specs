@@ -1,16 +1,11 @@
 import "./models.tsp";
 import "../../common/models.tsp";
+import "../../common/openai-templates.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Azure.AI.Projects;
-
-/** Optional response header containing the session ID for hosted agent requests. */
-alias AgentSessionIdResponseHeader = {
-  /** Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request. */
-  @header("x-agent-session-id") agentSessionId?: string;
-};
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
@@ -25,7 +20,7 @@ interface Responses {
   @operationId("createResponse")
   @post
   createResponse is OpenAIOperation<
-    OpenAI.CreateResponse & UserDelegationHeader,
+    OpenAI.CreateResponse & AgentSessionIdResponseHeader,
 
       | (AgentSessionIdResponseHeader & OpenAI.Response)
       | (AgentSessionIdResponseHeader &
@@ -62,7 +57,7 @@ interface Responses {
       /** The sequence number of the event after which to start streaming. */
       @query starting_after?: int32;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
 
       | (AgentSessionIdResponseHeader & {
@@ -89,7 +84,7 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentSessionIdResponseHeader & {
       /** The request body. */
@@ -113,7 +108,7 @@ interface Responses {
       @example("resp_677efb5139a88190b512bc3fef8e535d")
       response_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentSessionIdResponseHeader & {
       /** The request body. */
@@ -137,7 +132,7 @@ interface Responses {
       response_id: string;
 
       ...CommonPageQueryParameters;
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentSessionIdResponseHeader & {
       /** The request body. */
@@ -158,7 +153,7 @@ interface Responses {
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
       ...ConversationIdQueryParam;
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentsPagedResult<OpenAI.Response>
   >;

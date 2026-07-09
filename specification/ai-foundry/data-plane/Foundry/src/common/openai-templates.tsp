@@ -6,6 +6,7 @@ using TypeSpec.Http;
 
 namespace Azure.AI.Projects;
 
+/** Optional response header containing the session ID for hosted agent requests. */
 alias AgentSessionIdResponseHeader = {
   @doc("Session ID for this request. Only present for hosted agent responses. Returns the provided session ID or an auto-generated one if not provided in the request.")
   @header("x-agent-session-id")
@@ -31,7 +32,7 @@ op OpenAIAgentOperation<
   ErrorResponse = ApiErrorResponse
 > is OpenAIOperation<
   {
-    ...UserIsolationKeyHeader;
+    ...AgentSessionIdResponseHeader;
     ...Params;
   },
   Response,
@@ -46,7 +47,7 @@ op OpenAIAgentSessionOperation<
   Params extends Reflection.Model,
   Response extends Reflection.Model,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...Params):
+>(...AgentSessionIdResponseHeader, ...Params):
   | (Response & AgentSessionIdResponseHeader)
   | AzureRangeErrorResponse<ErrorResponse>;
 
@@ -58,7 +59,7 @@ op OpenAIAgentStreamingOperation<
   Params extends Reflection.Model,
   Event,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...Params):
+>(...AgentSessionIdResponseHeader, ...Params):
   | SseResponseOf<Event>
   | AzureRangeErrorResponse<ErrorResponse>;
 
@@ -71,7 +72,7 @@ op OpenAIAgentPagedOperation<
   ErrorResponse = ApiErrorResponse
 > is OpenAIOperation<
   {
-    ...UserIsolationKeyHeader;
+    ...AgentSessionIdResponseHeader;
     ...Params;
   },
   Response,
@@ -86,6 +87,6 @@ op OpenAIAgentFilteredPagedOperation<
   Params extends Reflection.Model,
   Item extends Reflection.Model,
   ErrorResponse = ApiErrorResponse
->(...UserIsolationKeyHeader, ...CommonPageQueryParameters, ...Params):
+>(...AgentSessionIdResponseHeader, ...CommonPageQueryParameters, ...Params):
   | AgentsPagedResult<Item>
   | AzureRangeErrorResponse<ErrorResponse>;

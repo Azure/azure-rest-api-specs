@@ -46,8 +46,7 @@ interface AgentWebsocket {
       ];
     } & AgentWebsocketPreviewHeader,
     {
-      /** Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request. */
-      @header("x-agent-session-id") sessionId: string;
+      ...AgentSessionIdResponseHeader;
 
       /** The response body (101 Switching Protocols). */
       @body response: unknown;

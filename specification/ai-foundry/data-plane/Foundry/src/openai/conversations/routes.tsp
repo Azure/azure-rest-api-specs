@@ -1,6 +1,7 @@
 import "./models.tsp";
 import "../../common/models.tsp";
 import "../responses/models.tsp";
+import "../../common/openai-templates.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -19,7 +20,7 @@ interface Conversations {
   @post
   @operationId("createConversation")
   createConversation is OpenAIOperation<
-    OpenAI.CreateConversationBody & UserDelegationHeader,
+    OpenAI.CreateConversationBody & AgentSessionIdResponseHeader,
     OpenAI.ConversationResource
   >;
 
@@ -36,7 +37,7 @@ interface Conversations {
       @path conversation_id: string;
 
       ...OpenAI.UpdateConversationBody;
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -53,7 +54,7 @@ interface Conversations {
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -70,7 +71,7 @@ interface Conversations {
       /** The id of the conversation to delete. */
       @path conversation_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.DeletedConversationResource
   >;
@@ -90,7 +91,7 @@ interface Conversations {
       ...CommonPageQueryParameters;
       ...AgentNameQueryParam;
       ...AgentIdQueryParam;
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentsPagedResult<OpenAI.ConversationResource>
   >;
@@ -118,7 +119,7 @@ interface Conversations {
       @maxItems(20)
       items: OpenAI.Item[];
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.ConversationItemList
   >;
@@ -138,7 +139,7 @@ interface Conversations {
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.OutputItem
   >;
@@ -158,7 +159,7 @@ interface Conversations {
       /** The id of the conversation item to delete. */
       @path item_id: string;
 
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     OpenAI.ConversationResource
   >;
@@ -178,7 +179,7 @@ interface Conversations {
 
       ...CommonPageQueryParameters;
       ...ItemTypeQueryParameter;
-      ...UserDelegationHeader;
+      ...AgentSessionIdResponseHeader;
     },
     AgentsPagedResult<OpenAI.OutputItem>
   >;
