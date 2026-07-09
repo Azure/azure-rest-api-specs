@@ -81,6 +81,9 @@ model VolumeProperties {
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
