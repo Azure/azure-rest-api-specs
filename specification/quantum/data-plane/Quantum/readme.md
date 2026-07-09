@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2026-01-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2026-01-15-preview'
 input-file:
-  - Microsoft.Quantum/preview/2026-01-15-preview/quantum.json
+  - preview/2026-01-15-preview/quantum.json
 ```
 
 ### Tag: package-2025-12-01-preview
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2025-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-12-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2025-12-01-preview/quantum.json
+  - preview/2025-12-01-preview/quantum.json
 ```
 
 ### Tag: package-2025-09-01-preview
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2025-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-09-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2025-09-01-preview/quantum.json
+  - preview/2025-09-01-preview/quantum.json
 ```
 
 ``` yaml
@@ -133,7 +133,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2024-10-01-preview/quantum.json
+  - preview/2024-10-01-preview/quantum.json
 ```
 
 ### Tag: package-2024-03-01-preview
@@ -142,7 +142,7 @@ These settings apply only when `--tag=package-2024-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2024-03-01-preview/quantum.json
+  - preview/2024-03-01-preview/quantum.json
 ```
 
 ### Tag: package-2023-11-13-preview
@@ -151,7 +151,7 @@ These settings apply only when `--tag=package-2023-11-13-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-11-13-preview'
 input-file:
-  - Microsoft.Quantum/preview/2023-11-13-preview/quantum.json
+  - preview/2023-11-13-preview/quantum.json
 ```
 
 ### Tag: package-2022-09-12-preview
@@ -160,7 +160,7 @@ These settings apply only when `--tag=package-2022-09-12-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-09-12-preview'
 input-file:
-  - Microsoft.Quantum/preview/2022-09-12-preview/quantum.json
+  - preview/2022-09-12-preview/quantum.json
 ```
 
 ### Tag: package-2021-11-01-preview
@@ -169,7 +169,7 @@ These settings apply only when `--tag=package-2021-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-11-01-preview'
 input-file:
-  - Microsoft.Quantum/preview/2021-11-01-preview/quantum.json
+  - preview/2021-11-01-preview/quantum.json
 ```
 
 ### Tag: package-2021-05-06-preview
@@ -178,7 +178,7 @@ These settings apply only when `--tag=package-2021-05-06-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-06-preview'
 input-file:
-  - Microsoft.Quantum/preview/2021-05-06-preview/quantum.json
+  - preview/2021-05-06-preview/quantum.json
 ```
 
 ### Tag: package-2019-11-04-preview
@@ -187,7 +187,7 @@ These settings apply only when `--tag=package-2019-11-04-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-11-04-preview'
 input-file:
-  - Microsoft.Quantum/preview/2019-11-04-preview/quantum.json
+  - preview/2019-11-04-preview/quantum.json
 ```
 
 ---
