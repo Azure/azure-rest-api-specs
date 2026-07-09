@@ -12,6 +12,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
+import "./models-ref.tsp";
 import "./back-compatible.tsp";
 import "./ApplicationGateway.tsp";
 import "./ApplicationGatewayAvailableSslOptions.tsp";
@@ -189,3 +190,4 @@ interface Operations
   Azure.ResourceManager.Legacy.Operations,
   #{ omitTags: true }
 );
+
