@@ -4,54 +4,53 @@
   "parameters": {
     "api-version": "2026-07-06-preview",
     "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
-    "location": "yqxtgiynfhqmjnqfgtiu",
+    "location": "eastus",
     "asyncOperationId": "f1ac145b-9d8b-417d-8101-9962d03c0904"
   },
   "responses": {
     "200": {
       "body": {
-        "status": "Succeeded",
-        "startTime": "2025-11-25T22:19:26.906Z",
-        "endTime": "2025-11-25T22:19:26.906Z",
-        "name": "2a3fce8e-874c-45f4-9d27-1a804f3b7a0f",
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/00000000-0000-0000-0000-000000000000",
-        "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
-        "percentComplete": 59,
+        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/f1ac145b-9d8b-417d-8101-9962d03c0904",
+        "name": "f1ac145b-9d8b-417d-8101-9962d03c0904",
+        "status": "Failed",
+        "percentComplete": 100,
+        "startTime": "2026-07-08T18:20:00Z",
+        "endTime": "2026-07-08T18:35:00Z",
         "operations": [
           {
-            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/00000000-0000-0000-0000-000000000001",
-            "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2",
-            "name": "nitjanxzstqypyblwfiwnjpfufddx",
-            "status": "zxmfadlrlcuerjc",
-            "percentComplete": 14,
-            "startTime": "2026-07-08T04:10:01.090Z",
-            "endTime": "2026-07-08T04:10:01.090Z",
+            "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/9d8e1f2a-3b4c-4d5e-6f7a-8b9c0d1e2f3a",
+            "name": "9d8e1f2a-3b4c-4d5e-6f7a-8b9c0d1e2f3a",
+            "resourceId": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/virtualMachines/bulkvm-payments-0",
+            "status": "Failed",
+            "percentComplete": 100,
+            "startTime": "2026-07-08T18:20:00Z",
+            "endTime": "2026-07-08T18:32:00Z",
             "operations": [],
             "error": {
-              "code": "gh",
-              "message": "jyagjbyz",
-              "target": "lvigizbwn",
+              "code": "OverconstrainedAllocationRequest",
+              "message": "Allocation failed. The requested VM size Standard_D2s_v5 is not available in zone 1 of region eastus.",
+              "target": "bulkvm-payments-0",
               "details": [],
               "additionalInfo": [
                 {
-                  "type": "hjwdkcerha",
-                  "info": {}
+                  "type": "AllocationFailureDetails",
+                  "info": {
+                    "availableZones": [
+                      "2",
+                      "3"
+                    ]
+                  }
                 }
               ]
             }
           }
         ],
         "error": {
-          "code": "gh",
-          "message": "jyagjbyz",
-          "target": "lvigizbwn",
+          "code": "PartialAllocationFailure",
+          "message": "One or more virtual machines in the bulk operation failed to allocate.",
+          "target": "customLaunchBulkInstancesOperations",
           "details": [],
-          "additionalInfo": [
-            {
-              "type": "hjwdkcerha",
-              "info": {}
-            }
-          ]
+          "additionalInfo": []
         }
       }
     }
