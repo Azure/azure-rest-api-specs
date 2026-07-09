@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
@@ -557,6 +559,30 @@ union TlsVersion {
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  @added(Versions.v2026_06_15_preview)
+  `1.3`: "1.3",
+}
+
+/**
+ * Specifies the IP address type for the namespace. IPv4 is the default; DualStack enables both IPv4 and IPv6.
+ */
+@added(Versions.v2026_06_15_preview)
+union IpAddressType {
+  string,
+
+  /**
+   * The namespace supports IPv4 only. This is the default.
+   */
+  IPv4: "IPv4",
+
+  /**
+   * The namespace supports both IPv4 and IPv6 (dual-stack).
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -3574,6 +3600,12 @@ model NamespaceProperties {
    * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * This property specifies the IP address type for the namespace. Defaults to IPv4 for supported API versions when the namespace does not have an explicit IpAddressType value persisted.
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
 }
 
 /**
@@ -3964,6 +3996,12 @@ model NamespaceUpdateParameterProperties {
    */
   @identifiers(#[])
   inboundIpRules?: InboundIpRule[];
+
+  /**
+   * IP address type for the namespace, settable on update (PATCH).
+   */
+  @added(Versions.v2026_06_15_preview)
+  ipAddressType?: IpAddressType;
 }
 
 /**
