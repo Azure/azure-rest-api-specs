@@ -25,7 +25,8 @@ model VirtualMachine {
   @visibility(Lifecycle.Read)
   id: armResourceIdentifier;
 
-  /** Type of the virtual machine */
+  /** ARM resource type - virtual machine */
+  @doc("ARM resource type - virtual machine")
   @visibility(Lifecycle.Read)
   type?: string;
 
