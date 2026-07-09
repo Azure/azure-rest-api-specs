@@ -38228,9 +38228,12 @@
             "description": "Read-only provenance link back to the EvaluatorGenerationJob that produced this version. Present only on evaluator versions created via the generation pipeline; absent for manually-created versions and unaffected by subsequent `PATCH` calls.",
             "readOnly": true
           },
-          "has_generation_input_quality_warnings": {
-            "type": "boolean",
-            "description": "Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.",
+          "warnings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GenerationWarningType"
+            },
+            "description": "Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.",
             "readOnly": true
           },
           "created_by": {
@@ -39037,6 +39040,25 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GenerationWarningType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "input_quality"
+            ]
+          }
+        ],
+        "description": "Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "GitHubIssueEvent": {
         "anyOf": [
@@ -81461,6 +81483,7 @@
           "source_index": {
             "type": "integer",
             "format": "int32",
+            "minimum": 0,
             "description": "Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source."
           }
         },

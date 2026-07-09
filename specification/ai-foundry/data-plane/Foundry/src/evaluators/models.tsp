@@ -372,7 +372,17 @@ model RubricGenerationInputQualityWarning {
   source: RubricGenerationInputQualityWarningSource;
 
   @doc("Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.")
+  @minValue(0)
   source_index?: int32;
+}
+
+@doc("Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+union GenerationWarningType {
+  string,
+
+  @doc("The paired EvaluatorGenerationJob emitted one or more input-quality advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
+  input_quality: "input_quality",
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.")
@@ -428,9 +438,9 @@ model EvaluatorVersion {
   @visibility(Lifecycle.Read)
   generation_job_id?: string;
 
-  @doc("Read-only summary flag. Present and `true` only when the paired generation job currently has non-empty `input_quality_warnings`. Absent (treat as `false`) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories.")
+  @doc("Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.")
   @visibility(Lifecycle.Read)
-  has_generation_input_quality_warnings?: boolean;
+  warnings?: GenerationWarningType[];
 
   @visibility(Lifecycle.Read)
   @doc("Creator of the evaluator")
