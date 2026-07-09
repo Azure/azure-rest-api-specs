@@ -190,4 +190,3 @@ interface Operations
   Azure.ResourceManager.Legacy.Operations,
   #{ omitTags: true }
 );
-
