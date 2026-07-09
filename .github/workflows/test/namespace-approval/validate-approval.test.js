@@ -17,6 +17,7 @@ import validateApproval from "../../src/namespace-approval/validate-approval.js"
 /** @type {import("../../src/namespace-approval/approvers.js").ApproversConfig} */
 const approversConfig = {
   "data-plane": {
+    global: ["global-admin1", "global-admin2"],
     dotnet: ["approver2", "approver4"],
     java: ["approver1"],
     python: ["approver3"],
@@ -154,6 +155,28 @@ describe("validate-approval", () => {
       const calls = vi.mocked(github.rest.issues.createComment).mock.calls;
       const commentBody = String(/** @type {Record<string, unknown>} */ (calls[0][0]).body);
       expect(commentBody).toContain("not authorized");
+    });
+
+    it("should allow global approver to approve any language", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "namespace-java-approved",
+        actor: "global-admin1",
+        labels: ["namespace-review-required", "namespace-java-pending"],
+      });
+
+      github.rest.pulls.get.mockResolvedValue({
+        data: { labels: [{ name: "namespace-review-required" }] },
+      });
+      /** @type {any} */ (github.rest.issues).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "namespace-java-pending" }),
+      );
     });
 
     it("should allow mgmt-plane approver for mgmt PR", async () => {
