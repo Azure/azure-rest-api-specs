@@ -1326,6 +1326,7 @@ model ListBlobsResponse {
 /** The result of the Get Pages API. */
 model PageList {
   /** The page ranges. */
+  @pageItems
   @Xml.unwrapped
   @Xml.name("PageRange")
   pageRange?: PageRange[];

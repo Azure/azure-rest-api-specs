@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ContainerInstance;
 
@@ -1392,6 +1394,12 @@ model AzureFileVolume {
    * The reference to the storage account access key used to access the Azure File share.
    */
   storageAccountKeyReference?: string;
+
+  /**
+   * The client id of the user-assigned managed identity that has access to the Azure File share.
+   */
+  @added(Versions.v2026_07_01)
+  userAssignedIdentityClientId?: string;
 }
 
 /**
