@@ -16,6 +16,7 @@ using TypeSpec.Http;
 @@alternateType(PatchTrackedResource.location, azureLocation, "csharp");
 @@clientName(Account, "PowerPlatformAccount", "csharp");
 @@clientName(PatchAccount, "PowerPlatformAccountPatch", "csharp");
+@@clientName(PatchTrackedResource, "PatchTrackedResourceData", "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
