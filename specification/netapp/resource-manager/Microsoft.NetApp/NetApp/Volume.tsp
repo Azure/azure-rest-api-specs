@@ -492,8 +492,6 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
-  @removed(Versions.v2026_05_01)
-  @added(Versions.v2026_05_15_preview)
   @removed(Versions.v2026_03_15_preview)
   @renamedFrom(Versions.v2026_03_15_preview, "breakthroughMode")
   @added(Versions.v2026_04_01)

@@ -16004,6 +16004,14 @@
             ]
           }
         },
+        "usageThreshold": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
+          "default": 107374182400,
+          "minimum": 53687091200,
+          "maximum": 2638827906662400
+        },
         "exportPolicy": {
           "$ref": "#/definitions/VolumePropertiesExportPolicy",
           "description": "Set of export policy rules"
@@ -16513,6 +16521,10 @@
           "x-nullable": true,
           "readOnly": true
         },
+        "breakthroughModeOld": {
+          "$ref": "#/definitions/BreakthroughMode",
+          "description": "Specifies whether the volume operates in Breakthrough Mode."
+        },
         "breakthroughMode": {
           "$ref": "#/definitions/BreakthroughMode",
           "description": "Specifies whether the volume operates in Breakthrough Mode.",
@@ -16524,6 +16536,7 @@
       },
       "required": [
         "creationToken",
+        "usageThreshold",
         "subnetId"
       ]
     },
