@@ -44,14 +44,17 @@ interface OperationStatusesOperationGroup {
     @doc("The ID of an ongoing async operation.")
     @path
     operationId: string,
-  ): ArmResponse<OperationStatus> | (AcceptedResponse & {
-    @body
-    _: OperationStatus;
+  ):
+    | ArmResponse<OperationStatus>
+    | (AcceptedResponse & {
+        @body
+        _: OperationStatus;
 
-    @doc("The Location header contains the URL where the status of the long running operation can be checked.")
-    @header
-    location?: string;
-  }) | ErrorResponse;
+        @doc("The Location header contains the URL where the status of the long running operation can be checked.")
+        @header
+        location?: string;
+      })
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Non-standard resource operation."

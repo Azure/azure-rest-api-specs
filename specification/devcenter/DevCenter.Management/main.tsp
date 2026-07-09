@@ -35,6 +35,7 @@ import "./Schedule.tsp";
 import "./NetworkConnection.tsp";
 import "./HealthCheckStatusDetails.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -43,7 +44,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "DevCenter" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v4)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.DevCenter;
 
 @doc("The available API versions.")

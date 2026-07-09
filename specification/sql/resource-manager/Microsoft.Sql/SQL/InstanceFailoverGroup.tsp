@@ -13,7 +13,9 @@ namespace Microsoft.Sql;
 /**
  * An instance failover group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(ResourceGroupLocationResource)
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 model InstanceFailoverGroup
   is Azure.ResourceManager.ProxyResource<InstanceFailoverGroupProperties> {
   ...ResourceNameParameter<
@@ -35,7 +37,7 @@ alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The name of the failover group. */
@@ -46,7 +48,9 @@ alias InstanceFailoverGroupsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.InstanceFailoverGroups)
 interface InstanceFailoverGroups {
   /**
    * Gets a failover group.
@@ -59,11 +63,14 @@ interface InstanceFailoverGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is InstanceFailoverGroupsOps.CreateOrUpdateAsync<
     InstanceFailoverGroup,
-    Response = ArmResourceUpdatedResponse<InstanceFailoverGroup> | ArmResourceCreatedResponse<
-      InstanceFailoverGroup,
-      ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > | ArmAcceptedLroResponse
+    Response =
+      | ArmResourceUpdatedResponse<InstanceFailoverGroup>
+      | ArmResourceCreatedResponse<
+          InstanceFailoverGroup,
+          ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmAcceptedLroResponse
   >;
 
   /**
@@ -72,7 +79,10 @@ interface InstanceFailoverGroups {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is InstanceFailoverGroupsOps.DeleteWithoutOkAsync<
     InstanceFailoverGroup,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -87,8 +97,10 @@ interface InstanceFailoverGroups {
     InstanceFailoverGroup,
     void,
     void,
-    Response = ArmResponse<InstanceFailoverGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<InstanceFailoverGroup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -98,13 +110,16 @@ interface InstanceFailoverGroups {
     InstanceFailoverGroup,
     void,
     void,
-    Response = ArmResponse<InstanceFailoverGroup> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<InstanceFailoverGroup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = InstanceFailoverGroup> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 
 @@doc(InstanceFailoverGroup.name, "The name of the failover group.");
 @@doc(InstanceFailoverGroup.properties, "Resource properties.");
-@@doc(InstanceFailoverGroups.createOrUpdate::parameters.resource,
+@@doc(
+  InstanceFailoverGroups.createOrUpdate::parameters.resource,
   "The failover group parameters."
 );

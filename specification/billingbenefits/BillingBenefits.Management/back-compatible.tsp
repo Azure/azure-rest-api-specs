@@ -9,7 +9,8 @@ using Microsoft.BillingBenefits;
 
 @@clientLocation(DiscountsOperationGroup.scopeList, Discounts);
 @@clientLocation(ReservationOrderAliasResponses.get, "ReservationOrderAlias");
-@@clientLocation(ReservationOrderAliasResponses.create,
+@@clientLocation(
+  ReservationOrderAliasResponses.create,
   "ReservationOrderAlias"
 );
 @@clientLocation(SavingsPlanModels.get, "SavingsPlan");
@@ -24,16 +25,19 @@ using Microsoft.BillingBenefits;
 @@clientLocation(Discounts.get, "Discount");
 @@clientLocation(Discounts.update, "Discount");
 @@clientLocation(BenefitOperationGroup.validate, "Benefit");
-@@clientLocation(ContributorsOperationGroup.listFromApplicableMacc,
+@@clientLocation(
+  ContributorsOperationGroup.listFromApplicableMacc,
   Contributors
 );
 @@clientLocation(SellerResourceOperationGroup.list, "SellerResource");
 @@clientLocation(ApplicableMaccsOperationGroup.list, "ApplicableMaccs");
 @@clientLocation(CreditsOperationGroup.listApplicable, Credits);
-@@clientLocation(ConditionalCreditsOperationGroup.scopeList,
+@@clientLocation(
+  ConditionalCreditsOperationGroup.scopeList,
   ConditionalCredits
 );
-@@clientLocation(ConditionalCreditContributorsOperationGroup.listFromApplicableConditionalCredit,
+@@clientLocation(
+  ConditionalCreditContributorsOperationGroup.listFromApplicableConditionalCredit,
   ConditionalCreditContributors
 );
 @@clientLocation(CreditSources.get, "Sources");
@@ -49,81 +53,99 @@ using Microsoft.BillingBenefits;
 @@clientLocation(FreeServicesOperations.listBySubscription, "FreeServices");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RoleAssignmentEntity.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  RoleAssignmentEntity.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(PurchaseRequest.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ReservationOrderAliasRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ReservationOrderAliasRequest.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiscountPatchRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  DiscountPatchRequest.properties
 );
 
 @@clientName(SavingsPlanOrderAliasModels.create::parameters.resource, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanOrderAliasModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SavingsPlanOrderAliasModel.properties
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanOrderModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SavingsPlanOrderModel.properties
 );
 
 @@clientName(SavingsPlanModels.update::parameters.properties, "body");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SavingsPlanModel.properties
 );
 
-@@clientName(ReservationOrderAliasResponses.create::parameters.resource,
+@@clientName(
+  ReservationOrderAliasResponses.create::parameters.resource,
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ReservationOrderAliasResponse.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ReservationOrderAliasResponse.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaccPatchRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MaccPatchRequest.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ChargeShortfallRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ChargeShortfallRequest.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SellerResourceListRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SellerResourceListRequest.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicableMacc.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CreditPatchRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CreditPatchRequest.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConditionalCreditPatchRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConditionalCreditPatchRequest.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CreditSource.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Credit.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConditionalCreditContributor.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ConditionalCreditContributor.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Contributor.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CreditsValidateModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CreditsValidateModel.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Macc.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MaccValidateModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  MaccValidateModel.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SavingsPlanValidateModel.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SavingsPlanValidateModel.properties
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServices.properties);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FreeServicesPatchRequest.properties
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  FreeServicesPatchRequest.properties
 );
 
 @@clientName(Discounts.create::parameters.resource, "body");
@@ -139,12 +161,15 @@ using Microsoft.BillingBenefits;
 @@clientName(FreeServicesOperations.create::parameters.resource, "body");
 @@clientName(FreeServicesOperations.update::parameters.properties, "body");
 
-@@doc(Azure.ResourceManager.ArmAsyncOperationHeader.azureAsyncOperation,
+@@doc(
+  Azure.ResourceManager.ArmAsyncOperationHeader.azureAsyncOperation,
   "URL for checking the ongoing status of the operation."
 );
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
   "URL for checking the ongoing status of the operation."
 );
-@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+@@doc(
+  Azure.ResourceManager.ArmCombinedLroHeaders.location,
   "Location URI to poll for result."
 );

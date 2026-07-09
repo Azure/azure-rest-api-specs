@@ -1,0 +1,163 @@
+# cspell:ignore fastsvc fpsvc descsvc
+name: arm-api-reviewer-eval-fast-path-triage
+description: |
+  Fast-path vs full-review track-selection tests (15xxxx).
+  Validates Step 1 of the agent workflow: trivial PRs (examples only,
+  description-only edits) elect the fast path and skip breaking-change
+  analysis (Step 3) and cross-file consistency (Step 5), while PRs that
+  touch schema content perform the full review with version comparison.
+  The critic gate (Step 7) is never skipped regardless of track.
+
+defaults:
+  runs: 1
+  timeout: "240s"
+  model: claude-sonnet-4.6
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 150001 — Examples-only PR elects fast path
+  - name: examples-only-pr-elects-fast-path
+    environment:
+      files:
+        - src: "../fixtures/examples/example-clean.json"
+          dest: "specification/fastsvc/resource-manager/Microsoft.FastService/stable/2025-01-01/examples/Widgets_Get.json"
+    prompt: >
+      Review the following PR. The PR adds a single new example file under an
+      existing API version directory; NO `.json` swagger files, `.tsp` files,
+      `readme.md`, `tspconfig.yaml`, or `suppressions.yaml` files are modified
+      by this PR. The total diff is under 50 lines.
+
+      Per Step 1 of `.github/agents/arm-api-reviewer.agent.md` ("Choose review
+      depth"), this PR qualifies for the fast-path track. Conduct the review
+      accordingly. State explicitly which track you elected and which steps you
+      ran or skipped. Apply Step 4's example-file checks (section 22 / EX-* of
+      the OpenAPI rules) and report findings.
+
+      Changed file: specification/fastsvc/resource-manager/Microsoft.FastService/stable/2025-01-01/examples/Widgets_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "fast path elected"
+        config:
+          pattern: "(?i)fast[- ]?path"
+      - type: output-matches
+        name: "breaking-change comparison explicitly skipped or omitted"
+        config:
+          # The agent should NOT perform full breaking-change analysis for an
+          # examples-only PR. Either it explicitly says it skipped Step 3, or
+          # the words "breaking change analysis" appear in a "skipped" /
+          # "not applicable" / "unnecessary" / "no...needed" context.
+          # Window widened to 200 chars and skip-verbs broadened (skip,
+          # bypass, forgo, exclude, no...needed/required, unnecessary,
+          # inapplicable, not performed, not run, did not / didn't).
+          pattern: "(?is)(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without).{0,200}(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version)|(steps?\\b[\\s\\d,&\\-]{0,20}\\b3\\b|breaking[- ]change|version comparison|prior version).{0,200}(skip|bypass|forgo|exclude|omitted|not applicable|inapplicable|n/?a|not required|not needed|unnecessary|not performed|not run|did not|didn't|no\\s+(?:longer\\s+)?(?:need|require)|without)"
+      - type: prompt
+    rubric:
+      - The agent explicitly elects the fast-path track in its output (e.g., "fast path", "trivial review track")
+      - The agent does NOT perform breaking-change comparison against a previous version (Step 3 is skipped)
+      - The agent does NOT perform cross-file consistency analysis (Step 5 is skipped)
+      - The agent still applies example-file validation rules to the changed example
+      - The agent does NOT claim to have run the critic — but it also does not assert it skipped the critic; the critic gate applies to every PR
+
+  # 150002 — Schema change forces full review (no fast path)
+  - name: schema-change-forces-full-review
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/secret-property.json"
+          dest: "specification/fpsvc/resource-manager/Microsoft.FpService/stable/2025-01-01/fpsvc.json"
+    prompt: >
+      Review the following PR. The PR adds a new property of type `string`
+      named `apiKey` to the `WidgetProperties` model in an existing ARM
+      specification. The change touches schema content under `definitions:`.
+
+      Per Step 1 of `.github/agents/arm-api-reviewer.agent.md`, schema changes
+      do NOT qualify for the fast path. Conduct the full review. State which
+      track you elected.
+
+      Changed file: specification/fpsvc/resource-manager/Microsoft.FpService/stable/2025-01-01/fpsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "fast path NOT elected"
+        config:
+          # Disallow only AFFIRMATIVE election phrasing. The trailing negative
+          # lookahead `(?![-\w])` ensures we don't match phrases like
+          # "fast-path allowlist", "fast-path table", "fast-path track" that
+          # legitimately appear in reasoning about WHY fast-path was rejected.
+          # 'on the' was previously included but matched 'on the fast-path
+          # allowlist' in reasoning prose -- dropped.
+          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
+      - type: output-matches
+        name: "full review performed"
+        config:
+          # Accepts natural variants the agent may use to signal it ran the
+          # full track instead of the fast path: "full review", "full
+          # workflow", "all steps", "step 3", "standard review",
+          # "comprehensive review", "complete review", "deep review",
+          # "full-review track", "thorough review", "end-to-end review",
+          # "steps 1-N".
+          pattern: "(?i)full[- ]review|full workflow|all steps|step\\s*3|standard\\s+review|comprehensive\\s+review|complete\\s+review|thorough\\s+review|deep\\s+review|end[- ]to[- ]end\\s+review|full[- ]review\\s+track|steps?\\s*1\\s*[-\u2013through]+\\s*\\d+"
+      - type: output-matches
+        name: "secret detection still triggered"
+        config:
+          pattern: "(?i)SEC-SECRET-DETECT|secret|apiKey"
+      - type: prompt
+    rubric:
+      - The agent does NOT elect the fast path for this PR (schema change disqualifies)
+      - The agent performs the full review including breaking-change comparison guidance (Step 3) even if no previous version exists for this fictional service
+      - The agent still detects the `apiKey` secret property (SEC-SECRET-DETECT) — fast-path classification does not affect rule application
+
+  # 150003 — Uncertain qualification defaults to full review
+  - name: uncertain-qualification-defaults-to-full-review
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/missing-descriptions.json"
+          dest: "specification/descsvc/resource-manager/Microsoft.DescService/stable/2025-01-01/descsvc.json"
+    prompt: >
+      Review the following PR. The diff is small (under 50 lines) and you
+      cannot tell from the diff alone whether the change is description-only
+      or whether it also touches a property type. The file is a full swagger
+      spec under an existing API version directory.
+
+      Per Step 1 of `.github/agents/arm-api-reviewer.agent.md`, when you are
+      uncertain whether a change qualifies for the fast path, you MUST default
+      to full review. State which track you elected and your reasoning.
+
+      Changed file: specification/descsvc/resource-manager/Microsoft.DescService/stable/2025-01-01/descsvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "fast path NOT elected"
+        config:
+          # See note in 150002: avoid matching benign phrases like
+          # "on the fast-path allowlist" that appear in reasoning prose.
+          pattern: "(?i)(elect|chose|chosen|selected|applying|using)\\s+(the\\s+)?fast[- ]?path(?![-\\w])"
+      - type: output-matches
+        name: "defaulted to full review"
+        config:
+          pattern: "(?i)full[- ]review|defaulted|uncertain|safer|conservative"
+      - type: output-matches
+        name: "reasoning for full-review default given"
+        config:
+          # Requires the agent to state WHY it defaulted (the rubric criterion
+          # that previously depended on the LLM judge). Accepts any phrasing
+          # that pairs an uncertainty/ambiguity cue with a full-review/default
+          # cue within ~200 chars.
+          pattern: "(?is)(uncertain|cannot (tell|confirm|determine|verify)|not (sure|clear|certain)|ambiguous|unclear).{0,200}(full[- ]review|default(ed|ing)?|safer|conservative)|(full[- ]review|default(ed|ing)?|safer|conservative).{0,200}(uncertain|cannot (tell|confirm|determine|verify)|not (sure|clear|certain)|ambiguous|unclear)"
+      - type: output-contains
+        name: "rules still applied (missing-description finding produced)"
+        config:
+          substring: "description"
+    rubric:
+      - The agent defaults to the full review track when uncertain about fast-path qualification
+      - The agent states its reasoning (e.g., "diff is small but I cannot confirm it is description-only, so defaulting to full review")
+      - The agent applies the full rule set to the file, including the missing-descriptions findings

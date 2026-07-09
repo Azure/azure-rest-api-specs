@@ -75,26 +75,30 @@ interface DataSources {
    */
   listByWorkspace is ArmResourceListByParent<
     DataSource,
-    Parameters = {
-      /**
-       * The filter to apply on the operation.
-       */
-      @query("$filter")
-      $filter: string;
-
-      /**
-       * Starting point of the collection of data source instances.
-       */
-      @query("$skiptoken")
-      $skiptoken?: string;
-    }
+    Parameters = DataSourcesListByWorkspaceParameters
   >;
 }
 
+alias DataSourcesListByWorkspaceParameters = {
+  /**
+   * The filter to apply on the operation.
+   */
+  @query("$filter")
+  $filter: string;
+
+  /**
+   * Starting point of the collection of data source instances.
+   */
+  @query("$skiptoken")
+  $skiptoken?: string;
+};
+
 @@doc(DataSource.name, "Name of the datasource");
-@@doc(DataSource.properties,
+@@doc(
+  DataSource.properties,
   "The data source properties in raw json format, each kind of data source have it's own schema."
 );
-@@doc(DataSources.createOrUpdate::parameters.resource,
+@@doc(
+  DataSources.createOrUpdate::parameters.resource,
   "The parameters required to create or update a datasource."
 );

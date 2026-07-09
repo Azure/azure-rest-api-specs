@@ -1,0 +1,53 @@
+{
+  "title": "HealthModels_Update",
+  "operationId": "HealthModels_Update",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "properties": {
+      "tags": {
+        "environment": "production",
+        "team": "online-store",
+        "tier": "gold"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "22222222-2222-2222-2222-222222222222"
+        },
+        "tags": {
+          "environment": "production",
+          "team": "online-store",
+          "tier": "gold"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store",
+        "name": "online-store",
+        "type": "Microsoft.CloudHealth/healthmodels",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/providers/Microsoft.CloudHealth/locations/eastus/operations/c4a9d3b2-5e6f-7081-92a3-b4c5d6e7f809?api-version=2026-05-01-preview"
+      }
+    }
+  }
+}

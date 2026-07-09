@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
-import "./PolicyInsights/main.tsp";
-import "./PolicyTrackedResources/main.tsp";
+import "./PolicyInsightsApi/main.tsp";
+import "./PolicyTrackedResourcesApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -20,85 +20,111 @@ using PolicyTrackedResourcesApi;
 })
 namespace PolicyInsightsManagementClient;
 
-@@clientName(PolicyInsightsManagementClient,
+@@clientName(
+  PolicyInsightsManagementClient,
   "PolicyInsightsClient",
   "javascript,python,java"
 );
 
 // Section: Explicit subscriptionId parameter
-@@clientLocation(policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   policyEventsListQueryResultsForPolicySetDefinition
 );
-@@clientLocation(policyEventsListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForPolicyDefinition::parameters.subscriptionId,
   policyEventsListQueryResultsForPolicyDefinition
 );
-@@clientLocation(policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment
 );
-@@clientLocation(policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment
 );
-@@clientLocation(policyStatesListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   policyStatesListQueryResultsForPolicySetDefinition
 );
-@@clientLocation(policyStatesSummarizeForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForPolicySetDefinition::parameters.subscriptionId,
   policyStatesSummarizeForPolicySetDefinition
 );
-@@clientLocation(policyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
   policyStatesListQueryResultsForPolicyDefinition
 );
-@@clientLocation(policyStatesSummarizeForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForPolicyDefinition::parameters.subscriptionId,
   policyStatesSummarizeForPolicyDefinition
 );
-@@clientLocation(policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
 );
-@@clientLocation(policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   policyStatesSummarizeForSubscriptionLevelPolicyAssignment
 );
-@@clientLocation(policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
 );
-@@clientLocation(policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   policyStatesSummarizeForResourceGroupLevelPolicyAssignment
 );
-@@clientLocation(componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForPolicyDefinition
 );
-@@clientLocation(componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment
 );
-@@clientLocation(componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment
 );
-@@clientLocation(componentPolicyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  componentPolicyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForResourceGroup
 );
-@@clientLocation(componentPolicyStatesListQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  componentPolicyStatesListQueryResultsForSubscription::parameters.subscriptionId,
   componentPolicyStatesListQueryResultsForSubscription
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
   PolicyStatesOperationGroup.triggerResourceGroupEvaluation
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
   PolicyStatesOperationGroup.triggerSubscriptionEvaluation
 );
-@@clientLocation(policyEventsListQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForResourceGroup::parameters.subscriptionId,
   policyEventsListQueryResultsForResourceGroup
 );
-@@clientLocation(policyEventsListQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  policyEventsListQueryResultsForSubscription::parameters.subscriptionId,
   policyEventsListQueryResultsForSubscription
 );
-@@clientLocation(policyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForResourceGroup::parameters.subscriptionId,
   policyStatesListQueryResultsForResourceGroup
 );
-@@clientLocation(policyStatesListQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesListQueryResultsForSubscription::parameters.subscriptionId,
   policyStatesListQueryResultsForSubscription
 );
-@@clientLocation(policyStatesSummarizeForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForResourceGroup::parameters.subscriptionId,
   policyStatesSummarizeForResourceGroup
 );
-@@clientLocation(policyStatesSummarizeForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  policyStatesSummarizeForSubscription::parameters.subscriptionId,
   policyStatesSummarizeForSubscription
 );
 
@@ -578,7 +604,8 @@ op policyTrackedResourcesListQueryResultsForManagementGroup(
 
   queryOptions?: PolicyTrackedResourcesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
-@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
+@@override(
+  PolicyTrackedResourcesOperationGroup.listQueryResultsForManagementGroup,
   policyTrackedResourcesListQueryResultsForManagementGroup,
   "!java,!python"
 );
@@ -603,7 +630,8 @@ op policyTrackedResourcesListQueryResultsForSubscription(
 
   queryOptions?: PolicyTrackedResourcesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
-@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
+@@override(
+  PolicyTrackedResourcesOperationGroup.listQueryResultsForSubscription,
   policyTrackedResourcesListQueryResultsForSubscription,
   "!java,!python"
 );
@@ -623,7 +651,8 @@ op policyTrackedResourcesListQueryResultsForResourceGroup(
 
   queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
-@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
+@@override(
+  PolicyTrackedResourcesOperationGroup.listQueryResultsForResourceGroup,
   policyTrackedResourcesListQueryResultsForResourceGroup,
   "!java,!python"
 );
@@ -641,7 +670,8 @@ op policyTrackedResourcesListQueryResultsForResource(
 
   queryOptions?: PolicyTrackedResourcesListQueryResultsForResourceQueryOptions,
 ): PolicyTrackedResourcesQueryResults | QueryFailure;
-@@override(PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
+@@override(
+  PolicyTrackedResourcesOperationGroup.listQueryResultsForResource,
   policyTrackedResourcesListQueryResultsForResource,
   "!java,!python"
 );
@@ -664,7 +694,8 @@ op policyEventsListQueryResultsForManagementGroup(
 
   queryOptions?: PolicyEventsListQueryResultsForManagementGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForManagementGroup,
   policyEventsListQueryResultsForManagementGroup,
   "!java,!python"
 );
@@ -689,7 +720,8 @@ op policyEventsListQueryResultsForSubscription(
   ...ProviderNamespace<SubscriptionActionScope>,
   queryOptions?: PolicyEventsListQueryResultsForSubscriptionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForSubscription,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForSubscription,
   policyEventsListQueryResultsForSubscription,
   "!java,!python"
 );
@@ -709,7 +741,8 @@ op policyEventsListQueryResultsForResourceGroup(
   ...ProviderNamespace<Extension.ResourceGroup>,
   queryOptions?: PolicyEventsListQueryResultsForResourceGroupQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
   policyEventsListQueryResultsForResourceGroup,
   "!java,!python"
 );
@@ -727,7 +760,8 @@ op policyEventsListQueryResultsForResource(
 
   queryOptions?: PolicyEventsListQueryResultsForResourceQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForResource,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForResource,
   policyEventsListQueryResultsForResource,
   "!java,!python"
 );
@@ -750,7 +784,8 @@ op policyEventsListQueryResultsForPolicySetDefinition(
 
   queryOptions?: PolicyEventsListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   policyEventsListQueryResultsForPolicySetDefinition,
   "!java,!python"
 );
@@ -773,7 +808,8 @@ op policyEventsListQueryResultsForPolicyDefinition(
 
   queryOptions?: PolicyEventsListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
   policyEventsListQueryResultsForPolicyDefinition,
   "!java,!python"
 );
@@ -796,7 +832,8 @@ op policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment(
 
   queryOptions?: PolicyEventsListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment,
   "!java,!python"
 );
@@ -822,7 +859,8 @@ op policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment(
 
   queryOptions?: PolicyEventsListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyEventsQueryResults | QueryFailure;
-@@override(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@override(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment,
   "!java,!python"
 );
@@ -845,7 +883,8 @@ op policyStatesListQueryResultsForManagementGroup(
 
   queryOptions?: PolicyStatesListQueryResultsForManagementGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForManagementGroup,
   policyStatesListQueryResultsForManagementGroup,
   "!java,!python"
 );
@@ -866,7 +905,8 @@ op policyStatesSummarizeForManagementGroup(
 
   queryOptions?: PolicyStatesSummarizeForManagementGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForManagementGroup,
+@@override(
+  PolicyStatesOperationGroup.summarizeForManagementGroup,
   policyStatesSummarizeForManagementGroup,
   "!java,!python"
 );
@@ -891,7 +931,8 @@ op policyStatesListQueryResultsForSubscription(
   ...ProviderNamespace<SubscriptionActionScope>,
   queryOptions?: PolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForSubscription,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForSubscription,
   policyStatesListQueryResultsForSubscription,
   "!java,!python"
 );
@@ -916,7 +957,8 @@ op policyStatesSummarizeForSubscription(
   ...ProviderNamespace<SubscriptionActionScope>,
   queryOptions?: PolicyStatesSummarizeForSubscriptionQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForSubscription,
+@@override(
+  PolicyStatesOperationGroup.summarizeForSubscription,
   policyStatesSummarizeForSubscription,
   "!java,!python"
 );
@@ -936,7 +978,8 @@ op policyStatesListQueryResultsForResourceGroup(
   ...ProviderNamespace<Extension.ResourceGroup>,
   queryOptions?: PolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   policyStatesListQueryResultsForResourceGroup,
   "!java,!python"
 );
@@ -956,7 +999,8 @@ op policyStatesSummarizeForResourceGroup(
   ...ProviderNamespace<Extension.ResourceGroup>,
   queryOptions?: PolicyStatesSummarizeForResourceGroupQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForResourceGroup,
+@@override(
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
   policyStatesSummarizeForResourceGroup,
   "!java,!python"
 );
@@ -974,7 +1018,8 @@ op policyStatesListQueryResultsForResource(
 
   queryOptions?: PolicyStatesListQueryResultsForResourceQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForResource,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForResource,
   policyStatesListQueryResultsForResource,
   "!java,!python"
 );
@@ -992,7 +1037,8 @@ op policyStatesSummarizeForResource(
 
   queryOptions?: PolicyStatesSummarizeForResourceQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForResource,
+@@override(
+  PolicyStatesOperationGroup.summarizeForResource,
   policyStatesSummarizeForResource,
   "!java,!python"
 );
@@ -1015,7 +1061,8 @@ op policyStatesListQueryResultsForPolicySetDefinition(
 
   queryOptions?: PolicyStatesListQueryResultsForPolicySetDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
   policyStatesListQueryResultsForPolicySetDefinition,
   "!java,!python"
 );
@@ -1038,7 +1085,8 @@ op policyStatesSummarizeForPolicySetDefinition(
 
   queryOptions?: PolicyStatesSummarizeForPolicySetDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+@@override(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
   policyStatesSummarizeForPolicySetDefinition,
   "!java,!python"
 );
@@ -1061,7 +1109,8 @@ op policyStatesListQueryResultsForPolicyDefinition(
 
   queryOptions?: PolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   policyStatesListQueryResultsForPolicyDefinition,
   "!java,!python"
 );
@@ -1084,7 +1133,8 @@ op policyStatesSummarizeForPolicyDefinition(
 
   queryOptions?: PolicyStatesSummarizeForPolicyDefinitionQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+@@override(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
   policyStatesSummarizeForPolicyDefinition,
   "!java,!python"
 );
@@ -1107,7 +1157,8 @@ op policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 
   queryOptions?: PolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
   "!java,!python"
 );
@@ -1130,7 +1181,8 @@ op policyStatesSummarizeForSubscriptionLevelPolicyAssignment(
 
   queryOptions?: PolicyStatesSummarizeForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+@@override(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
   policyStatesSummarizeForSubscriptionLevelPolicyAssignment,
   "!java,!python"
 );
@@ -1156,7 +1208,8 @@ op policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 
   queryOptions?: PolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): PolicyStatesQueryResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@override(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
   "!java,!python"
 );
@@ -1182,7 +1235,8 @@ op policyStatesSummarizeForResourceGroupLevelPolicyAssignment(
 
   queryOptions?: PolicyStatesSummarizeForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): SummarizeResults | QueryFailure;
-@@override(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+@@override(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
   policyStatesSummarizeForResourceGroupLevelPolicyAssignment,
   "!java,!python"
 );
@@ -1198,7 +1252,8 @@ op policyMetadataList(
   body: void,
   queryOptions?: PolicyMetadataListQueryOptions,
 ): PolicyMetadataCollection | PolicyInsightsApi.ErrorResponse;
-@@override(PolicyMetadataNonResourceOperationGroup.list,
+@@override(
+  PolicyMetadataNonResourceOperationGroup.list,
   policyMetadataList,
   "!java,!python"
 );
@@ -1225,7 +1280,8 @@ op componentPolicyStatesListQueryResultsForSubscription(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   componentPolicyStatesListQueryResultsForSubscription,
   "!java,!python,!javascript"
 );
@@ -1245,7 +1301,8 @@ op componentPolicyStatesListQueryResultsForResourceGroup(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   componentPolicyStatesListQueryResultsForResourceGroup,
   "!java,!python,!javascript"
 );
@@ -1263,11 +1320,13 @@ op componentPolicyStatesListQueryResultsForResource(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
   componentPolicyStatesListQueryResultsForResource,
   "!java,!python,!javascript"
 );
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResource::parameters.From,
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource::parameters.From,
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
@@ -1292,11 +1351,13 @@ op componentPolicyStatesListQueryResultsForPolicyDefinition(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForPolicyDefinitionQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   componentPolicyStatesListQueryResultsForPolicyDefinition,
   "!java,!python,!javascript"
 );
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.From,
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.From,
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
@@ -1321,11 +1382,13 @@ op componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment,
   "!java,!python,!javascript"
 );
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.From,
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.From,
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
@@ -1353,11 +1416,13 @@ op componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment(
 
   queryOptions?: ComponentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignmentQueryOptions,
 ): ComponentPolicyStatesQueryResults | PolicyInsightsApi.ErrorResponse;
-@@override(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+@@override(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment,
   "!java,!python,!javascript"
 );
-@@clientName(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.From,
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.From,
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
@@ -1379,7 +1444,8 @@ op remediationsListDeploymentsAtManagementGroup(
 
   queryOptions?: RemediationsListDeploymentsAtManagementGroupQueryOptions,
 ): RemediationDeploymentsListResult | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationsOperationGroup.listDeploymentsAtManagementGroup,
+@@override(
+  RemediationsOperationGroup.listDeploymentsAtManagementGroup,
   remediationsListDeploymentsAtManagementGroup,
   "!java,!python"
 );
@@ -1396,7 +1462,8 @@ op remediationsListForManagementGroup(
   ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForManagementGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(Remediations.listForManagementGroup,
+@@override(
+  Remediations.listForManagementGroup,
   remediationsListForManagementGroup,
   "!java,!python"
 );
@@ -1419,8 +1486,11 @@ op remediationsListDeploymentsAtSubscription(
 
   queryOptions?: RemediationsListDeploymentsAtSubscriptionQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationSubscriptionOperations.listDeploymentsAtSubscription,
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
+@@override(
+  Remediations.listDeploymentsAtSubscription,
   remediationsListDeploymentsAtSubscription,
   "!java,!python"
 );
@@ -1438,7 +1508,8 @@ op remediationsListForSubscription(
 
   queryOptions?: RemediationsListForSubscriptionQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationSubscriptionOperations.listForSubscription,
+@@override(
+  Remediations.listForSubscription,
   remediationsListForSubscription,
   "!java,!python"
 );
@@ -1458,8 +1529,11 @@ op remediationsListDeploymentsAtResourceGroup(
 
   queryOptions?: RemediationsListDeploymentsAtResourceGroupQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationResourceGroupOperations.listDeploymentsAtResourceGroup,
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
+@@override(
+  Remediations.listDeploymentsAtResourceGroup,
   remediationsListDeploymentsAtResourceGroup,
   "!java,!python"
 );
@@ -1473,7 +1547,8 @@ op remediationsListForResourceGroup(
   ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForResourceGroupQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationResourceGroupOperations.listForResourceGroup,
+@@override(
+  Remediations.listForResourceGroup,
   remediationsListForResourceGroup,
   "!java,!python"
 );
@@ -1493,8 +1568,11 @@ op remediationsListDeploymentsAtResource(
 
   queryOptions?: RemediationsListDeploymentsAtResourceQueryOptions,
   body: void,
-): ArmResponse<RemediationDeploymentsListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationResourceOperations.listDeploymentsAtResource,
+):
+  | ArmResponse<RemediationDeploymentsListResult>
+  | PolicyInsightsApi.ErrorResponse;
+@@override(
+  Remediations.listDeploymentsAtResource,
   remediationsListDeploymentsAtResource,
   "!java,!python"
 );
@@ -1510,7 +1588,8 @@ op remediationsListForResource(
   ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: RemediationsListForResourceQueryOptions,
 ): ArmResponse<RemediationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(RemediationResourceOperations.listForResource,
+@@override(
+  Remediations.listForResource,
   remediationsListForResource,
   "!java,!python"
 );
@@ -1530,7 +1609,8 @@ op attestationsListForSubscription(
 
   queryOptions?: AttestationsListForSubscriptionQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(Attestations.listForSubscription,
+@@override(
+  Attestations.listForSubscription,
   attestationsListForSubscription,
   "!java,!python"
 );
@@ -1544,7 +1624,8 @@ op attestationsListForResourceGroup(
   ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: AttestationsListForResourceGroupQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(AttestationResourceGroupOperations.listForResourceGroup,
+@@override(
+  Attestations.listForResourceGroup,
   attestationsListForResourceGroup,
   "!java,!python"
 );
@@ -1560,113 +1641,139 @@ op attestationsListForResource(
   ...Azure.ResourceManager.Legacy.Provider,
   queryOptions?: AttestationsListForResourceQueryOptions,
 ): ArmResponse<AttestationListResult> | PolicyInsightsApi.ErrorResponse;
-@@override(AttestationOperationGroup.listForResource,
+@@override(
+  Attestations.listForResource,
   attestationsListForResource,
   "!java,!python"
 );
 
 // PolicyEventsOperationGroup
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
   "python,java"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
   "python,java"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForSubscription,
   "python,java"
 );
-@@clientLocation(PolicyEventsOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
   PolicyEventsOperationGroup.listQueryResultsForResourceGroup,
   "python,java"
 );
 
 // PolicyStatesOperationGroup
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicySetDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForPolicyDefinition,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForSubscription,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForSubscription::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForSubscription,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
   PolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.summarizeForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.summarizeForResourceGroup::parameters.subscriptionId,
   PolicyStatesOperationGroup.summarizeForResourceGroup,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation::parameters.subscriptionId,
   PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
   "python,java"
 );
-@@clientLocation(PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
+@@clientLocation(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation::parameters.subscriptionId,
   PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
   "python,java"
 );
 
 // ComponentPolicyStatesOperationGroup
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
   "python,java"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
   "python,java"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
   "python,java"
 );
-@@clientLocation(ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
+@@clientLocation(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup::parameters.subscriptionId,
   ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
   "python,java"
 );
@@ -1710,8 +1817,742 @@ op attestationsListForResource(
 @@clientName(QueryOptionsG.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Top, "top", "javascript");
 @@clientName(QueryOptionsH.Filter, "filter", "javascript");
-@@clientName(listQueryResultsParameters.From,
+@@clientName(
+  listQueryResultsParameters.From,
   "$DO_NOT_NORMALIZE$from",
   "javascript"
 );
 @@alternateType(ManagementGroupsNamespaceType, "Microsoft.Management");
+
+// ============================================================================
+// C# customizations
+//
+// Rationale:
+// 1) Back-compat renames preserve the GA C# SDK surface (Summary/SummaryResults
+//    were renamed to PolicySummary/PolicySummaryResults via the prior autorest
+//    config). Also works around a current C# mgmt generator inconsistency where
+//    ArmPolicyInsightsModelFactory references `Models.PolicySummaryResults`
+//    while only `Models.SummaryResults` is emitted.
+// 2) CheckRestrictionEvaluationDetails is referenced as a parameter on the
+//    public Arm*ModelFactory.PolicyEvaluationResult overload, but generated as
+//    internal. Make it public for C#.
+// 3) The spec defines per-scope LegacyOperations aliases (management group,
+//    subscription, resource group, and generic AtResource) for both Attestation
+//    and Remediation, all sharing the same ResourceName. The current C# mgmt
+//    generator emits one ArmClient extension set per alias, producing
+//    duplicate method signatures (CS0111) and per-scope helper extensions that
+//    did not exist on the GA C# SDK. Suppressing every alias except the
+//    generic AtResource one for C# only restores the GA surface (ArmClient
+//    extensions only) without changing the swagger emitted for other
+//    languages. The remaining AtResource alias uses `{resourceId}` which
+//    accepts any subscription/resource-group/management-group scope at runtime.
+// ============================================================================
+
+@@clientName(Summary, "PolicySummary", "csharp");
+@@clientName(SummaryResults, "PolicySummaryResults", "csharp");
+@@clientName(
+  CheckRestrictionsRequest,
+  "CheckPolicyRestrictionsContent",
+  "csharp"
+);
+@@clientName(
+  CheckManagementGroupRestrictionsRequest,
+  "CheckManagementGroupPolicyRestrictionsContent",
+  "csharp"
+);
+@@clientName(
+  CheckRestrictionsResult,
+  "CheckPolicyRestrictionsResult",
+  "csharp"
+);
+@@clientName(
+  CheckRestrictionsResult.contentEvaluationResult,
+  "PolicyEvaluations",
+  "csharp"
+);
+@@clientName(
+  PolicyEvaluationResult.evaluationDetails,
+  "CheckRestrictionEvaluationDetails",
+  "csharp"
+);
+// Back-compat class renames (previously done via the autorest rename-mapping).
+@@clientName(Attestation, "PolicyAttestation", "csharp");
+@@clientName(Remediation, "PolicyRemediation", "csharp");
+@@clientName(ComplianceState, "PolicyComplianceState", "csharp");
+@@clientName(PolicyEventsResourceType, "PolicyEventType", "csharp");
+@@clientName(PolicyStatesResource, "PolicyStateType", "csharp");
+@@clientName(
+  PolicyStatesSummaryResourceType,
+  "PolicyStateSummaryType",
+  "csharp"
+);
+@@clientName(PolicyTrackedResource, "PolicyTrackedResourceRecord", "csharp");
+@@clientName(
+  PolicyTrackedResourcesResourceType,
+  "PolicyTrackedResourceType",
+  "csharp"
+);
+// Back-compat property renames.
+@@clientName(AttestationProperties.expiresOn, "expireOn", "csharp");
+@@clientName(AttestationProperties.assessmentDate, "assessOn", "csharp");
+@@clientName(RemediationProperties.filters, "filter", "csharp");
+@@clientName(PolicyTrackedResource.lastUpdateUtc, "lastUpdateOn", "csharp");
+@@clientName(PolicyEvent.resourceType, "resourceTypeString", "csharp");
+@@clientName(PolicyState.resourceType, "resourceTypeString", "csharp");
+
+// Back-compat property types: ARM ID strings should be typed as ResourceIdentifier.
+@@alternateType(
+  AttestationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationProperties.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyAssignmentSummary.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyAssignmentSummary.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDetails.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyEvent.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyReference.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyAssignmentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.policySetDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  IfNotExistsEvaluationDetails.resourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyDefinitionSummary.policyDefinitionId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  PolicyTrackedResource.trackedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.remediatedResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  TrackedResourceModificationDetails.deploymentId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
+// Back-compat property types: location strings should be typed as AzureLocation.
+@@alternateType(
+  PolicyEvent.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  PolicyState.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+@@alternateType(
+  RemediationDeployment.resourceLocation,
+  Azure.Core.azureLocation,
+  "csharp"
+);
+// GA autorest's `format-by-name-rules: '*Uri': 'Uri'` retyped the slim
+// metadata's additionalContentUrl to System.Uri; preserve that.
+@@alternateType(
+  PolicyMetadataSlimProperties.additionalContentUrl,
+  url,
+  "csharp"
+);
+
+@@access(CheckRestrictionEvaluationDetails, Access.public, "csharp");
+// The generator emits a model PolicyMetadataCollection (paging envelope for
+// SlimPolicyMetadata) that conflicts with the ArmCollection type of the same
+// name. The GA C# SDK only exposed the ArmCollection publicly.
+@@access(PolicyMetadataCollection, Access.internal, "csharp");
+// GA C# SDK did not expose the Operations RP model publicly.
+@@access(PolicyInsightsApi.Operation, Access.internal, "csharp");
+@@access(OperationsListResults, Access.internal, "csharp");
+@@scope(PolicyInsightsApi.Operations.list, "!csharp");
+// NOTE: ComponentPolicyStatesQueryResults and SummarizeResults are paging
+// envelopes that GA hid by returning Pageable<T> (autorest's automatic
+// pageable detection via x-ms-pageable). The new spec ops are non-pageable
+// (no @pageItems / @nextLink on response models), so the C# emitter exposes
+// the envelopes directly. @@Legacy.markAsPageable is ineffective without
+// those markers. Accepted as additive new public surface; revisit if the
+// generator gains support for marking these as pageable without modifying
+// the shared models.tsp.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForManagementGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "compat GA"
+@@Azure.ClientGenerator.Core.Legacy.markAsPageable(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "csharp"
+);
+
+// Remediations: hide management-group, subscription, resource-group scope operations from C#
+@@scope(Remediations.getAtManagementGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtManagementGroup, "!csharp");
+@@scope(Remediations.deleteAtManagementGroup, "!csharp");
+@@scope(Remediations.listForManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.listDeploymentsAtManagementGroup, "!csharp");
+@@scope(RemediationsOperationGroup.cancelAtManagementGroup, "!csharp");
+@@scope(Remediations.getAtSubscription, "!csharp");
+@@scope(Remediations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Remediations.deleteAtSubscription, "!csharp");
+@@scope(Remediations.listForSubscription, "!csharp");
+@@scope(Remediations.listDeploymentsAtSubscription, "!csharp");
+@@scope(Remediations.cancelAtSubscription, "!csharp");
+@@scope(Remediations.getAtResourceGroup, "!csharp");
+@@scope(Remediations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Remediations.deleteAtResourceGroup, "!csharp");
+@@scope(Remediations.listForResourceGroup, "!csharp");
+@@scope(Remediations.listDeploymentsAtResourceGroup, "!csharp");
+@@scope(Remediations.cancelAtResourceGroup, "!csharp");
+
+// Attestations: hide subscription and resource-group scope operations from C#
+@@scope(Attestations.getAtSubscription, "!csharp");
+@@scope(Attestations.createOrUpdateAtSubscription, "!csharp");
+@@scope(Attestations.deleteAtSubscription, "!csharp");
+@@scope(Attestations.listForSubscription, "!csharp");
+@@scope(Attestations.getAtResourceGroup, "!csharp");
+@@scope(Attestations.createOrUpdateAtResourceGroup, "!csharp");
+@@scope(Attestations.deleteAtResourceGroup, "!csharp");
+@@scope(Attestations.listForResourceGroup, "!csharp");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "GA back-compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  SlimPolicyMetadata,
+  Azure.ResourceManager.CommonTypes.Resource,
+  "csharp"
+);
+
+@@clientName(QueryOptions, "PolicyQuerySettings", "csharp");
+
+// Restore GA OData property names (uppercase D after O) on the user-facing models.
+@@clientName(PolicyEvent.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyEvent.`@odata.context`, "ODataContext", "csharp");
+@@clientName(PolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(PolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(ComponentPolicyState.`@odata.id`, "ODataId", "csharp");
+@@clientName(ComponentPolicyState.`@odata.context`, "ODataContext", "csharp");
+@@clientName(Summary.`@odata.id`, "ODataId", "csharp");
+@@clientName(Summary.`@odata.context`, "ODataContext", "csharp");
+
+// Rename auto-emitted Mockable*Resource / PolicyInsightsExtensions extension
+// method names back to GA. Per skill ref §9.35 the C# emitter ignores
+// @@clientName on the @@override-shimmed top-level ops (e.g.
+// policyStatesSummarizeForSubscriptionLevelPolicyAssignment) but DOES honour
+// @@clientName when applied to the ARM-template-derived interface op
+// (PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment).
+//
+// NOTE: GA used the same C# name for the 4 scope-bound variants (sub/rg/mg/
+// resource) of each query/summarize family — autorest combined them at source
+// level. The new emitter emits one ArmClient extension + REST method per op,
+// so renaming all 4 to the same name causes CS0111 on the ArmClient extension
+// class and the REST operations class. The renames below avoid that pattern —
+// only ops whose default name doesn't already match GA AND whose new name does
+// not collide with another rename in the same target class.
+
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
+@@clientName(
+  PolicyEventsOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyEvents",
+  "csharp"
+);
+
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForPolicySetDefinition,
+  "GetQueryResultsForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicyDefinition,
+  "SummarizeForPolicyDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForPolicySetDefinition,
+  "SummarizeForPolicySetDefinitionPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForSubscriptionLevelPolicyAssignment,
+  "SummarizeForSubscriptionLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  PolicyStatesOperationGroup.summarizeForResourceGroupLevelPolicyAssignment,
+  "SummarizeForResourceGroupLevelPolicyAssignmentPolicyStates",
+  "csharp"
+);
+
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscription,
+  "GetQueryResultsForSubscriptionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroup,
+  "GetQueryResultsForResourceGroupComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResource,
+  "GetQueryResultsForResourceComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForPolicyDefinition,
+  "GetQueryResultsForPolicyDefinitionComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForSubscriptionLevelPolicyAssignment,
+  "GetQueryResultsForSubscriptionLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
+@@clientName(
+  ComponentPolicyStatesOperationGroup.listQueryResultsForResourceGroupLevelPolicyAssignment,
+  "GetQueryResultsForResourceGroupLevelPolicyAssignmentComponentPolicyStates",
+  "csharp"
+);
+
+@@clientName(PolicyMetadataNonResourceOperationGroup.list, "GetAll", "csharp");
+
+@@clientName(
+  Remediations.listDeploymentsAtResource,
+  "GetDeployments",
+  "csharp"
+);
+@@clientName(Remediations.cancelAtResource, "Cancel", "csharp");
+@@alternateType(
+  attestationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyTrackedResourcesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyEventsListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicySetDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyStatesSummarizeForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  policyMetadataList::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForPolicyDefinition::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForSubscriptionLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  componentPolicyStatesListQueryResultsForResourceGroupLevelPolicyAssignment::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForManagementGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListDeploymentsAtResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  remediationsListForResource::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForSubscription::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+@@alternateType(
+  attestationsListForResourceGroup::parameters.queryOptions,
+  QueryOptions,
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
+@@clientName(
+  PolicyStatesOperationGroup.triggerResourceGroupEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "for csharp sdk compat"
+@@clientName(
+  PolicyStatesOperationGroup.triggerSubscriptionEvaluation,
+  "TriggerPolicyStateEvaluation",
+  "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentEventDetails,
+  Foundations.Resource,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "csharp sdk compat"
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ComponentStateDetails,
+  Foundations.Resource,
+  "csharp"
+);

@@ -74,7 +74,10 @@ interface AzureTrafficCollectors {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AzureTrafficCollector,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -95,12 +98,15 @@ interface AzureTrafficCollectors {
 }
 
 @@doc(AzureTrafficCollector.name, "Azure Traffic Collector name");
-@@doc(AzureTrafficCollector.properties,
+@@doc(
+  AzureTrafficCollector.properties,
   "Properties of the Azure Traffic Collector."
 );
-@@doc(AzureTrafficCollectors.createOrUpdate::parameters.resource,
+@@doc(
+  AzureTrafficCollectors.createOrUpdate::parameters.resource,
   "The parameters to provide for the created Azure Traffic Collector."
 );
-@@doc(AzureTrafficCollectors.updateTags::parameters.properties,
+@@doc(
+  AzureTrafficCollectors.updateTags::parameters.properties,
   "Parameters supplied to update Azure Traffic Collector tags."
 );

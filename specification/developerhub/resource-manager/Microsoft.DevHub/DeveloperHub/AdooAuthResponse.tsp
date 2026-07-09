@@ -80,6 +80,7 @@ interface AdooAuthResponses {
 
 @@doc(AdooAuthResponse.name, "");
 @@doc(AdooAuthResponse.properties, "Details of ADO OAuth.");
-@@doc(AdooAuthResponses.getADOOAuthInfo::parameters.body,
+@@doc(
+  AdooAuthResponses.getADOOAuthInfo::parameters.body,
   "The fields required in ADO OAuth call request."
 );

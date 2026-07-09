@@ -38,55 +38,70 @@ using Microsoft.AttributeNamespaces;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewDecisionProperties.appliedBy);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(AccessReviewDecisionProperties.principalResourceMembership
+@@Legacy.flattenProperty(
+  AccessReviewDecisionProperties.principalResourceMembership
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewContactedReviewer.properties);
 
-@@clientLocation(AccessReviewHistoryDefinitions.create,
+@@clientLocation(
+  AccessReviewHistoryDefinitions.create,
   "AccessReviewHistoryDefinition"
 );
-@@clientName(AccessReviewHistoryDefinitions.create::parameters.resource,
+@@clientName(
+  AccessReviewHistoryDefinitions.create::parameters.resource,
   "properties"
 );
-@@clientLocation(AccessReviewHistoryDefinitions.deleteById,
+@@clientLocation(
+  AccessReviewHistoryDefinitions.deleteById,
   "AccessReviewHistoryDefinition"
 );
-@@clientLocation(AccessReviewHistoryDefinitions.generateDownloadUri,
+@@clientLocation(
+  AccessReviewHistoryDefinitions.generateDownloadUri,
   "AccessReviewHistoryDefinitionInstance"
 );
-@@clientLocation(AccessReviewHistoryDefinitions.accessReviewHistoryDefinitionInstancesList,
+@@clientLocation(
+  AccessReviewHistoryDefinitions.accessReviewHistoryDefinitionInstancesList,
   "AccessReviewHistoryDefinitionInstances"
 );
-@@clientName(AccessReviewHistoryDefinitions.accessReviewHistoryDefinitionInstancesList,
+@@clientName(
+  AccessReviewHistoryDefinitions.accessReviewHistoryDefinitionInstancesList,
   "List"
 );
-@@clientLocation(ScopeAccessReviewHistoryDefinitions.create,
+@@clientLocation(
+  ScopeAccessReviewHistoryDefinitions.create,
   "ScopeAccessReviewHistoryDefinition"
 );
-@@clientName(ScopeAccessReviewHistoryDefinitions.create::parameters.resource,
+@@clientName(
+  ScopeAccessReviewHistoryDefinitions.create::parameters.resource,
   "properties"
 );
-@@clientLocation(ScopeAccessReviewHistoryDefinitions.deleteById,
+@@clientLocation(
+  ScopeAccessReviewHistoryDefinitions.deleteById,
   "ScopeAccessReviewHistoryDefinition"
 );
-@@clientLocation(ScopeAccessReviewHistoryDefinitions.generateDownloadUri,
+@@clientLocation(
+  ScopeAccessReviewHistoryDefinitions.generateDownloadUri,
   "ScopeAccessReviewHistoryDefinitionInstance"
 );
-@@clientLocation(ScopeAccessReviewHistoryDefinitions.scopeAccessReviewHistoryDefinitionInstancesList,
+@@clientLocation(
+  ScopeAccessReviewHistoryDefinitions.scopeAccessReviewHistoryDefinitionInstancesList,
   "ScopeAccessReviewHistoryDefinitionInstances"
 );
-@@clientName(ScopeAccessReviewHistoryDefinitions.scopeAccessReviewHistoryDefinitionInstancesList,
+@@clientName(
+  ScopeAccessReviewHistoryDefinitions.scopeAccessReviewHistoryDefinitionInstancesList,
   "List"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewHistoryDefinition.properties);
 
-@@clientName(AccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
+@@clientName(
+  AccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
   "properties"
 );
-@@clientName(ScopeAccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
+@@clientName(
+  ScopeAccessReviewScheduleDefinitions.createOrUpdateById::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -97,82 +112,104 @@ using Microsoft.AttributeNamespaces;
 @@clientLocation(AccessReviewInstances.resetDecisions, "AccessReviewInstance");
 @@clientLocation(AccessReviewInstances.applyDecisions, "AccessReviewInstance");
 @@clientLocation(AccessReviewInstances.sendReminders, "AccessReviewInstance");
-@@clientLocation(AccessReviewInstances.accessReviewInstanceDecisionsList,
+@@clientLocation(
+  AccessReviewInstances.accessReviewInstanceDecisionsList,
   "AccessReviewInstanceDecisions"
 );
 @@clientName(AccessReviewInstances.accessReviewInstanceDecisionsList, "List");
-@@clientLocation(AccessReviewInstances.accessReviewInstanceContactedReviewersList,
+@@clientLocation(
+  AccessReviewInstances.accessReviewInstanceContactedReviewersList,
   "AccessReviewInstanceContactedReviewers"
 );
-@@clientName(AccessReviewInstances.accessReviewInstanceContactedReviewersList,
+@@clientName(
+  AccessReviewInstances.accessReviewInstanceContactedReviewersList,
   "List"
 );
-@@clientName(ScopeAccessReviewInstances.create::parameters.resource,
+@@clientName(
+  ScopeAccessReviewInstances.create::parameters.resource,
   "properties"
 );
 @@clientLocation(ScopeAccessReviewInstances.stop, "ScopeAccessReviewInstance");
-@@clientLocation(ScopeAccessReviewInstances.recordAllDecisions,
+@@clientLocation(
+  ScopeAccessReviewInstances.recordAllDecisions,
   "ScopeAccessReviewInstance"
 );
-@@clientName(ScopeAccessReviewInstances.recordAllDecisions::parameters.body,
+@@clientName(
+  ScopeAccessReviewInstances.recordAllDecisions::parameters.body,
   "properties"
 );
-@@clientLocation(ScopeAccessReviewInstances.resetDecisions,
+@@clientLocation(
+  ScopeAccessReviewInstances.resetDecisions,
   "ScopeAccessReviewInstance"
 );
-@@clientLocation(ScopeAccessReviewInstances.applyDecisions,
+@@clientLocation(
+  ScopeAccessReviewInstances.applyDecisions,
   "ScopeAccessReviewInstance"
 );
-@@clientLocation(ScopeAccessReviewInstances.sendReminders,
+@@clientLocation(
+  ScopeAccessReviewInstances.sendReminders,
   "ScopeAccessReviewInstance"
 );
-@@clientLocation(ScopeAccessReviewInstances.scopeAccessReviewInstanceDecisionsList,
+@@clientLocation(
+  ScopeAccessReviewInstances.scopeAccessReviewInstanceDecisionsList,
   "ScopeAccessReviewInstanceDecisions"
 );
-@@clientName(ScopeAccessReviewInstances.scopeAccessReviewInstanceDecisionsList,
+@@clientName(
+  ScopeAccessReviewInstances.scopeAccessReviewInstanceDecisionsList,
   "List"
 );
-@@clientLocation(ScopeAccessReviewInstances.scopeAccessReviewInstanceContactedReviewersList,
+@@clientLocation(
+  ScopeAccessReviewInstances.scopeAccessReviewInstanceContactedReviewersList,
   "ScopeAccessReviewInstanceContactedReviewers"
 );
-@@clientName(ScopeAccessReviewInstances.scopeAccessReviewInstanceContactedReviewersList,
+@@clientName(
+  ScopeAccessReviewInstances.scopeAccessReviewInstanceContactedReviewersList,
   "List"
 );
-@@clientLocation(AccessReviewInstancesAssignedForMyApproval.acceptRecommendations,
+@@clientLocation(
+  AccessReviewInstancesAssignedForMyApproval.acceptRecommendations,
   "AccessReviewInstance"
 );
-@@clientLocation(AccessReviewInstancesAssignedForMyApproval.reviewersList,
+@@clientLocation(
+  AccessReviewInstancesAssignedForMyApproval.reviewersList,
   "TenantLevelAccessReviewInstanceContactedReviewers"
 );
 @@clientName(AccessReviewInstancesAssignedForMyApproval.reviewersList, "List");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewInstance.properties);
 
-@@clientLocation(AccessReviewDecisions.getById,
+@@clientLocation(
+  AccessReviewDecisions.getById,
   "AccessReviewInstanceMyDecisions"
 );
-@@clientLocation(AccessReviewDecisions.patch,
+@@clientLocation(
+  AccessReviewDecisions.patch,
   "AccessReviewInstanceMyDecisions"
 );
 @@clientLocation(AccessReviewDecisions.list, "AccessReviewInstanceMyDecisions");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewDecision.properties);
 
-@@clientLocation(AccessReviewDefaultSettingsOperationGroup.get,
+@@clientLocation(
+  AccessReviewDefaultSettingsOperationGroup.get,
   "AccessReviewDefaultSettings"
 );
-@@clientLocation(AccessReviewDefaultSettingsOperationGroup.put,
+@@clientLocation(
+  AccessReviewDefaultSettingsOperationGroup.put,
   "AccessReviewDefaultSettings"
 );
-@@clientName(AccessReviewDefaultSettingsOperationGroup.put::parameters.resource,
+@@clientName(
+  AccessReviewDefaultSettingsOperationGroup.put::parameters.resource,
   "properties"
 );
-@@clientName(ScopeAccessReviewDefaultSettings.put::parameters.resource,
+@@clientName(
+  ScopeAccessReviewDefaultSettings.put::parameters.resource,
   "properties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(AccessReviewDefaultSettings.properties);
-@@clientLocation(ScopeAccessReviewScheduleDefinitions.listForMyApproval,
+@@clientLocation(
+  ScopeAccessReviewScheduleDefinitions.listForMyApproval,
   "AccessReviewScheduleDefinitionsAssignedForMyApproval"
 );
 @@clientName(ScopeAccessReviewScheduleDefinitions.listForMyApproval, "List");

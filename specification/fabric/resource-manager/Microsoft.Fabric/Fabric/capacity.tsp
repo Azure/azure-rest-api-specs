@@ -25,7 +25,8 @@ model FabricCapacity is TrackedResource<FabricCapacityProperties, false> {
   sku: RpSku;
 }
 
-@@doc(FabricCapacity.name,
+@@doc(
+  FabricCapacity.name,
   "The name of the Microsoft Fabric capacity. It must be a minimum of 3 characters, and a maximum of 63."
 );
 @@maxLength(FabricCapacity.name, 63);
