@@ -44,4 +44,4 @@ using Microsoft.Education;
 @@access(Microsoft.Education.Operations.list, Access.internal, "csharp");
 
 @@clientName(GrantType, "EducationGrantType", "csharp");
-@@clientName(GrantDetails, "EducationGrantDetails", "csharp");
+@@clientName(GrantStatus, "EducationGrantStatus", "csharp");
