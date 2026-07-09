@@ -9012,7 +9012,7 @@ model CapacityReservationGroupProperties {
   sharingProfile?: ResourceSharingProfile;
 
   /**
-   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations, 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided, and 'Open' for reservations that a VM consumes when it is eligible, without providing a capacity reservation group. The reservation type is immutable and cannot be changed after it is assigned.
    */
   @added(Versions.v2025_04_01)
   reservationType?: ReservationType;
@@ -9114,7 +9114,7 @@ model ResourceSharingProfile {
 }
 
 /**
- * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations, 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided, and 'Open' for reservations that a VM consumes when it is eligible, without providing a capacity reservation group. The reservation type is immutable and cannot be changed after it is assigned.
  */
 @added(Versions.v2025_04_01)
 union ReservationType {
@@ -9156,22 +9156,22 @@ union CapacityReservationType {
   NotEligible: "NotEligible",
 
   /**
-   * The virtual machine consumes a specific capacity reservation when a capacity reservation group is provided.
+   * The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fallback to consume capacity from the general fleet if there is no capacity available in the targeted reservation.
    */
   Targeted: "Targeted",
 
   /**
-   * The virtual machine consumes an open capacity reservation when it is eligible, without providing a capacity reservation group.
+   * The virtual machine if eligible will implicitly associate and consume any available capacity from a matching open capacity reservation created or shared in the subscription. Note: the VM should not be explicitly associated with the open capacity reservation group resource containing the matching reservation.
    */
   Open: "Open",
 
   /**
-   * The virtual machine has capacity reservation assignment disabled and is not associated with any type of capacity reservation.
+   * The virtual machine has capacity reservation assignment disabled and will not be allowed to implicitly or explicitly associate with any type of capacity reservation.
    */
   Disabled: "Disabled",
 
   /**
-   * The virtual machine consumes a specific capacity block reservation when a capacity reservation group is provided.
+   * The virtual machine consumes capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type block, and will hit capacity failures if there is no available capacity in the block reservation.
    */
   Block: "Block",
 }
