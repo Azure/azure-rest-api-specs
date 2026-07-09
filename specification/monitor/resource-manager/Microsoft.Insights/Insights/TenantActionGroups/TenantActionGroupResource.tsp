@@ -23,6 +23,15 @@ model TenantActionGroupResource
   >;
 }
 
+alias xmsClientTenantIdParameter = {
+  /**
+   * The tenant ID of the client making the request.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @header
+  `x-ms-client-tenant-id`: string;
+};
+
 alias QuotaCounterKeyParentParameters = {
   ...ApiVersionParameter;
 
@@ -73,12 +82,7 @@ interface TenantActionGroupResources {
     Extension.ManagementGroup<"managementGroupId">,
     TenantActionGroupResource,
     Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
+      ...xmsClientTenantIdParameter;
     },
     Error = Microsoft.Common.ErrorResponse
   >;
@@ -90,12 +94,7 @@ interface TenantActionGroupResources {
     Extension.ManagementGroup<"managementGroupId">,
     TenantActionGroupResource,
     Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
+      ...xmsClientTenantIdParameter;
     },
     Error = Microsoft.Common.ErrorResponse
   >;
@@ -109,12 +108,7 @@ interface TenantActionGroupResources {
     TenantActionGroupResource,
     PatchModel = ActionGroupPatchBody,
     Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
+      ...xmsClientTenantIdParameter;
     },
     Error = Microsoft.Common.ErrorResponse
   >;
@@ -126,12 +120,7 @@ interface TenantActionGroupResources {
     Extension.ManagementGroup<"managementGroupId">,
     TenantActionGroupResource,
     Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
+      ...xmsClientTenantIdParameter;
     },
     Error = Microsoft.Common.ErrorResponse
   >;
@@ -143,12 +132,7 @@ interface TenantActionGroupResources {
     Extension.ManagementGroup<"managementGroupId">,
     TenantActionGroupResource,
     Parameters = {
-      /**
-       * The tenant ID of the client making the request.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @header
-      `x-ms-client-tenant-id`: string;
+      ...xmsClientTenantIdParameter;
     },
     Response = ArmResponse<TenantActionGroupList>,
     Error = Microsoft.Common.ErrorResponse
@@ -165,12 +149,7 @@ op createNotificationsAtTenantActionGroupResourceLevel is Extension.ActionAsync<
   TenantNotificationRequestBody,
   Response = TestNotificationDetailsResponse,
   Parameters = {
-    /**
-     * The tenant ID of the client making the request.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @header
-    `x-ms-client-tenant-id`: string;
+    ...xmsClientTenantIdParameter;
   }
 >;
 
@@ -185,12 +164,7 @@ op getTestNotificationsAtTenantActionGroupResourceLevel is TenantActionGroupReso
   void,
   ArmResponse<TestNotificationDetailsResponse>,
   Parameters = {
-    /**
-     * The tenant ID of the client making the request.
-     */
-    #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-    @header
-    `x-ms-client-tenant-id`: string;
+    ...xmsClientTenantIdParameter;
   },
   OverrideErrorType = Microsoft.Common.ErrorResponse
 >;

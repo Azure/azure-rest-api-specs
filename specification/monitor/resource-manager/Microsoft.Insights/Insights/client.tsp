@@ -1739,3 +1739,9 @@ op PrivateLinkScopeOperationStatusGetCustomized(
   "$DO_NOT_NORMALIZE$vMInsights",
   "javascript"
 );
+
+@@clientName(
+  xmsClientTenantIdParameter.`x-ms-client-tenant-id`,
+  "xmsClientTenantId",
+  "go"
+);
