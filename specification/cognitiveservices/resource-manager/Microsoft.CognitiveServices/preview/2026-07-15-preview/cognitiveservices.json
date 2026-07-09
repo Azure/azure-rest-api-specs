@@ -11743,6 +11743,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "capabilitySettings": {
+          "$ref": "#/definitions/CapabilitySettings",
+          "description": "Reusable default agent capability settings inherited by child projects."
         }
       }
     },
@@ -12792,6 +12796,48 @@
           "description": "An array of objects of type Capability Host.",
           "items": {
             "$ref": "#/definitions/CapabilityHost"
+          }
+        }
+      }
+    },
+    "CapabilitySettings": {
+      "type": "object",
+      "description": "Extensible agent capability configuration. Carries the Azure resource IDs of the agent storage dependencies. Modeled as an object so future capability-backed resources can be added without changing the account or project contract.",
+      "properties": {
+        "documentStore": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the document store used by agent runtime state.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.DocumentDB/databaseAccounts"
+              }
+            ]
+          }
+        },
+        "vectorStore": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the vector store used by agent retrieval and indexing.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Search/searchServices"
+              }
+            ]
+          }
+        },
+        "blobStore": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the blob store used by agent file and artifact storage.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Storage/storageAccounts"
+              }
+            ]
           }
         }
       }
@@ -17829,6 +17875,14 @@
           "type": "boolean",
           "description": "Indicates whether the project is the default project for the account.",
           "readOnly": true
+        },
+        "capabilitySettings": {
+          "$ref": "#/definitions/CapabilitySettings",
+          "description": "Effective agent capability settings for the project. Optional partial override of the account defaults; omitted fields inherit from the parent account when present. Settable only at create time.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
