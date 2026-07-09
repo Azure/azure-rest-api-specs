@@ -14,7 +14,7 @@ model DocumentTranslateContent {
   document: HttpPart<bytes>;
 
   @doc("Glossary-translation memory will be used during translation in the form. ")
-  glossary?: HttpPart<bytes[]>;
+  glossary?: HttpPart<bytes>[];
 }
 
 @doc("Document Translate Result / Response.")
