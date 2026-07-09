@@ -56,6 +56,10 @@ These settings apply only when `--tag=package-2026-06-01` is specified on the co
 ```yaml $(tag) == 'package-2026-06-01'
 input-file:
   - stable/2026-06-01/dataprotection.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: dataprotection.json
+    reason: There are objects that need a generic key-value pair in contract.
 ```
 
 ### Tag: package-2026-04-01-preview
