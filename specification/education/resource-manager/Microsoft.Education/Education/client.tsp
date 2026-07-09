@@ -42,3 +42,6 @@ using Microsoft.Education;
 // internal so its method and envelope models stay off the public surface instead of
 // redefining common-types operation models publicly.
 @@access(Microsoft.Education.Operations.list, Access.internal, "csharp");
+
+@@clientName(GrantType, "EducationGrantType", "csharp");
+@@clientName(GrantDetails, "EducationGrantDetails", "csharp");
