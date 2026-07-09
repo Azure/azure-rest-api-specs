@@ -40,6 +40,79 @@ namespace Azure.AI.Projects {
   @@scope(Conversations.getConversationItem, "!csharp");
   @@scope(Conversations.deleteConversationItem, "!csharp");
 
+  // AgentServer consumes contract models and OpenAPI validation output, not
+  // generated service clients. Keep all remaining imported operation groups out
+  // of the C# emitter so model alternates do not have to flow through client
+  // convenience method parameter generation.
+  @@scope(Agents.getAgent, "!csharp");
+  @@scope(Agents.createAgent, "!csharp");
+  @@scope(Agents.createAgentFromCode, "!csharp");
+  @@scope(Agents.updateAgent, "!csharp");
+  @@scope(Agents.updateAgentFromCode, "!csharp");
+  @@scope(Agents.createAgentFromManifest, "!csharp");
+  @@scope(Agents.updateAgentFromManifest, "!csharp");
+  @@scope(Agents.deleteAgent, "!csharp");
+  @@scope(Agents.listAgents, "!csharp");
+  @@scope(Agents.createAgentVersion, "!csharp");
+  @@scope(Agents.createAgentVersionFromManifest, "!csharp");
+  @@scope(Agents.getAgentVersion, "!csharp");
+  @@scope(Agents.deleteAgentVersion, "!csharp");
+  @@scope(Agents.listAgentVersions, "!csharp");
+  @@scope(Agents.patchAgentObject, "!csharp");
+  @@scope(Agents.createAgentVersionFromCode, "!csharp");
+  @@scope(Agents.downloadAgentCode, "!csharp");
+  @@scope(Agents.enableAgent, "!csharp");
+  @@scope(Agents.disableAgent, "!csharp");
+  @@scope(Agents.createSession, "!csharp");
+  @@scope(Agents.getSession, "!csharp");
+  @@scope(Agents.deleteSession, "!csharp");
+  @@scope(Agents.stopSession, "!csharp");
+  @@scope(Agents.listSessions, "!csharp");
+  @@scope(Agents.getSessionLogStream, "!csharp");
+  @@scope(AgentContainers.startAgentContainer, "!csharp");
+  @@scope(AgentContainers.updateAgentContainer, "!csharp");
+  @@scope(AgentContainers.stopAgentContainer, "!csharp");
+  @@scope(AgentContainers.deleteAgentContainer, "!csharp");
+  @@scope(AgentContainers.getAgentContainer, "!csharp");
+  @@scope(AgentContainers.streamAgentContainerLogs, "!csharp");
+  @@scope(AgentContainers.getAgentContainerOperation, "!csharp");
+  @@scope(AgentContainers.listAgentContainerOperations, "!csharp");
+  @@scope(AgentContainers.listAgentVersionContainerOperations, "!csharp");
+  @@scope(AgentWebsocket.connectEndpointWebsocket, "!csharp");
+  @@scope(MemoryStores.createMemoryStore, "!csharp");
+  @@scope(MemoryStores.updateMemoryStore, "!csharp");
+  @@scope(MemoryStores.getMemoryStore, "!csharp");
+  @@scope(MemoryStores.listMemoryStores, "!csharp");
+  @@scope(MemoryStores.deleteMemoryStore, "!csharp");
+  @@scope(MemoryStores.searchMemories, "!csharp");
+  @@scope(MemoryStores.updateMemories, "!csharp");
+  @@scope(MemoryStores.getUpdateResult, "!csharp");
+  @@scope(MemoryStores.deleteScope, "!csharp");
+  @@scope(MemoryStores.createMemory, "!csharp");
+  @@scope(MemoryStores.updateMemory, "!csharp");
+  @@scope(MemoryStores.getMemory, "!csharp");
+  @@scope(MemoryStores.listMemories, "!csharp");
+  @@scope(MemoryStores.deleteMemory, "!csharp");
+  @@scope(Skills.getSkill, "!csharp");
+  @@scope(Skills.listSkills, "!csharp");
+  @@scope(Skills.updateSkill, "!csharp");
+  @@scope(Skills.deleteSkill, "!csharp");
+  @@scope(Skills.createSkillVersion, "!csharp");
+  @@scope(Skills.createSkillVersionFromFiles, "!csharp");
+  @@scope(Skills.listSkillVersions, "!csharp");
+  @@scope(Skills.getSkillVersion, "!csharp");
+  @@scope(Skills.getSkillContent, "!csharp");
+  @@scope(Skills.getSkillVersionContent, "!csharp");
+  @@scope(Skills.deleteSkillVersion, "!csharp");
+  @@scope(Toolboxes.createToolboxVersion, "!csharp");
+  @@scope(Toolboxes.getToolbox, "!csharp");
+  @@scope(Toolboxes.listToolboxes, "!csharp");
+  @@scope(Toolboxes.listToolboxVersions, "!csharp");
+  @@scope(Toolboxes.getToolboxVersion, "!csharp");
+  @@scope(Toolboxes.updateToolbox, "!csharp");
+  @@scope(Toolboxes.deleteToolbox, "!csharp");
+  @@scope(Toolboxes.deleteToolboxVersion, "!csharp");
+
   union _AdditionalToolTypes {
     remote_tool: "remote_tool",
   }
@@ -254,6 +327,17 @@ namespace Azure.AI.Projects {
 
   // Consume Azure-specific Foundry response/tool models from
   // Azure.AI.Extensions.OpenAI so AgentServer does not re-emit the same types.
+  // Keep AgentServer's dependency graph Extensions-only; do not alternate to
+  // OpenAI.* directly from this package.
+  @@alternateType(OpenAI.OutputItemType, { identity: "Azure.AI.Extensions.OpenAI.ResponseItemKind", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.ToolType, { identity: "Azure.AI.Extensions.OpenAI.ResponseToolKind", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.OutputItem, { identity: "Azure.AI.Extensions.OpenAI.OutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.InputItem, { identity: "Azure.AI.Extensions.OpenAI.OutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.Tool, { identity: "Azure.AI.Extensions.OpenAI.ResponseTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.Response, { identity: "Azure.AI.Extensions.OpenAI.ResponseObject", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.CreateResponse, { identity: "Azure.AI.Extensions.OpenAI.CreateResponseBody", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  @@alternateType(OpenAI.ResponseStreamEvent, { identity: "Azure.AI.Extensions.OpenAI.ResponseStreamEvent", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+
   @@alternateType(A2APreviewTool, { identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2AToolCall, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2AToolCallOutput, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCallOutput", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
