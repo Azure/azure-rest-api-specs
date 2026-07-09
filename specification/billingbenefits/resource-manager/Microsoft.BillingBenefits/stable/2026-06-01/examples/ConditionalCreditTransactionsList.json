@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2026-06-01",
+    "conditionalCreditName": "caco-20250101-001",
+    "resourceGroupName": "benefits-rg",
+    "subscriptionId": "30000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/benefits-rg/providers/Microsoft.BillingBenefits/conditionalCredits/caco-20250101-001/transactions/txn-caco-001",
+            "name": "txn-caco-001",
+            "type": "Microsoft.BillingBenefits/conditionalCredits/transactions",
+            "properties": {
+              "date": "2025-07-15T14:22:00Z",
+              "chargeType": "Usage",
+              "billingStatus": "Closed",
+              "invoiceResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000/billingProfiles/ABCD-1234-5678-9012/invoices/INV20250001",
+              "amountInBillingCurrency": {
+                "currencyCode": "USD",
+                "amount": 100.0
+              },
+              "amountInPricingCurrency": {
+                "currencyCode": "USD",
+                "amount": 100.0
+              },
+              "productCode": "UPN242547",
+              "productDetails": {
+                "skuTitle": "GPT-4 API",
+                "productFamily": "Azure",
+                "productType": "Azure OpenAI",
+                "serviceFamily": "AI + Machine Learning",
+                "publisherType": "Microsoft"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/benefits-rg/providers/Microsoft.BillingBenefits/conditionalCredits/caco-20250101-001/transactions/txn-caco-002",
+            "name": "txn-caco-002",
+            "type": "Microsoft.BillingBenefits/conditionalCredits/transactions",
+            "properties": {
+              "date": "2025-07-16T10:15:00Z",
+              "chargeType": "Usage",
+              "billingStatus": "Closed",
+              "invoiceResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000/billingProfiles/ABCD-1234-5678-9012/invoices/INV20250001",
+              "amountInBillingCurrency": {
+                "currencyCode": "USD",
+                "amount": 250.0
+              },
+              "amountInPricingCurrency": {
+                "currencyCode": "USD",
+                "amount": 250.0
+              },
+              "productCode": "UPN242548",
+              "productDetails": {
+                "skuTitle": "Multi-region writes",
+                "productFamily": "Azure",
+                "productType": "Azure Cosmos DB",
+                "serviceFamily": "Databases",
+                "publisherType": "Microsoft"
+              }
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  },
+  "operationId": "ConditionalCreditTransactions_ListByParent",
+  "title": "ConditionalCreditTransactionsList"
+}

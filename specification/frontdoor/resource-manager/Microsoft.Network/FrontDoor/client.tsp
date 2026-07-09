@@ -256,6 +256,16 @@ interface ProfilesOverrides {
 @@clientName(ResourceType, "FrontDoorResourceType", "csharp");
 @@clientName(MinimumTLSVersion, "FrontDoorRequiredMinimumTlsVersion", "csharp");
 @@clientName(
+  MinimumTLSVersion.`1.0`,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  MinimumTLSVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
   ManagedRuleSetException,
   "FrontDoorManagedRuleSetException",
   "csharp"
