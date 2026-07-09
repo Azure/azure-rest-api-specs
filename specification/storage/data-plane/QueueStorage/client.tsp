@@ -374,8 +374,13 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(Queue.clear, "Messages", "java");
 @@clientLocation(Queue.updateMessage, "MessageIds", "java");
 @@clientLocation(Queue.deleteMessage, "MessageIds", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.receiveMessages, "dequeue", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.sendMessage, "enqueue", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.peekMessages, "peek", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.updateMessage, "update", "java");
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.deleteMessage, "delete", "java");
