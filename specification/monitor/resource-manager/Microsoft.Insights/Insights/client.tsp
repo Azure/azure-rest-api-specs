@@ -930,32 +930,32 @@ namespace Microsoft.InsightsCombinedClient;
 @@alternateType(
   TenantActionGroups.EmailReceiver,
   ActionGroupsApi.EmailReceiver,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(
   TenantActionGroups.SmsReceiver,
   ActionGroupsApi.SmsReceiver,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(
   TenantActionGroups.AzureAppPushReceiver,
   ActionGroupsApi.AzureAppPushReceiver,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(
   TenantActionGroups.VoiceReceiver,
   ActionGroupsApi.VoiceReceiver,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(
   TenantActionGroups.Context,
   ActionGroupsApi.Context,
-  "javascript"
+  "javascript,python"
 );
 @@alternateType(
   TenantActionGroups.ActionGroupPatch,
   ActionGroupsApi.ActionGroupPatch,
-  "javascript"
+  "javascript,python"
 );
 
 // These models also collide by name across TenantActionGroups and ActionGroupsApi,
@@ -969,22 +969,22 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   TenantActionGroups.WebhookReceiver,
   "TenantActionGroupWebhookReceiver",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(
   TenantActionGroups.ActionGroupPatchBody,
   "TenantActionGroupPatchBody",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(
   TenantActionGroups.ActionDetail,
   "TenantActionGroupActionDetail",
-  "javascript"
+  "javascript,python"
 );
 @@clientName(
   TenantActionGroups.TestNotificationDetailsResponse,
   "TenantActionGroupTestNotificationDetailsResponse",
-  "javascript"
+  "javascript,python"
 );
 
 @@clientName(
@@ -1477,15 +1477,16 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java,python"
+  "csharp,java"
 );
 // For JS, redirect straight to DiagnosticsSettings.MetricSettings (identical to the
 // local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
 // is not emitted and no longer collides with DiagnosticsSettings.MetricSettings.
+// Python flattens models into a single module like JS, so it takes the same redirect.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   DiagnosticsSettings.MetricSettings,
-  "javascript"
+  "javascript,python"
 );
 
 /**
@@ -1517,15 +1518,16 @@ model LogSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   LogSettings,
-  "csharp,java,python"
+  "csharp,java"
 );
 // For JS, redirect straight to DiagnosticsSettings.LogSettings (identical to the local
 // LogSettings) so ServiceDiagnosticsSettingsApi.LogSettings no longer collides with
 // DiagnosticsSettings.LogSettings.
+// Python flattens models into a single module like JS, so it takes the same redirect.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   DiagnosticsSettings.LogSettings,
-  "javascript"
+  "javascript,python"
 );
 
 @@clientLocation(
