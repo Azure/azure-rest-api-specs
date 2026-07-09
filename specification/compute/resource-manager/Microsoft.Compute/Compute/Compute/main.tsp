@@ -32,6 +32,7 @@ import "./CapacityReservationGroup.tsp";
 import "./CapacityReservation.tsp";
 import "./InterconnectBlock.tsp";
 import "./VirtualMachineRunCommand.tsp";
+import "./VirtualMachineDiagnosticRunCommand.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
