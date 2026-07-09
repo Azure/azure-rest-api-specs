@@ -18,6 +18,7 @@ namespace Microsoft.CognitiveServices;
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 interface ManagedComputeUsagesOperationGroup {
   /**
    * List managed compute quota usages for a subscription and location.
