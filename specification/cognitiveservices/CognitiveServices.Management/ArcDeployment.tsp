@@ -103,7 +103,7 @@ model ArcDeploymentProperties {
    * Full Azure resource ID of the Arc-enabled Kubernetes cluster extension. Required on creation and immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  arcClusterExtensionId: string;
+  arcClusterExtensionId: Azure.Core.armResourceIdentifier;
 
   /**
    * Inference runtime. Required on creation and immutable after creation.
