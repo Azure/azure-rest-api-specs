@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.HanaOnAzure;
 
@@ -18,27 +19,23 @@ using Microsoft.HanaOnAzure;
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
   SapMonitorProperties.logAnalyticsWorkspaceArmId,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
   SapMonitorProperties.monitorSubnet,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
-@@alternateType(
-  SapMonitorProperties.logAnalyticsWorkspaceId,
-  Azure.Core.uuid,
-  "csharp"
-);
+@@alternateType(SapMonitorProperties.logAnalyticsWorkspaceId, uuid, "csharp");
 
 @@clientName(ProviderInstanceProperties.type, "providerType", "csharp");
 
