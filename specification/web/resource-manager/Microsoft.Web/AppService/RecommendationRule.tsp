@@ -50,7 +50,8 @@ interface RecommendationRuleOps
         @segment("recommendations")
         @key
         name: string,
-      }
+      },
+      ResourceName = "HostingEnvironmentRecommendation"
     > {}
 
 @tag("Recommendations")
@@ -120,7 +121,8 @@ interface RecommendationOps
         @segment("recommendations")
         @key
         name: string,
-      }
+      },
+      ResourceName = "SiteRecommendation"
     > {}
 
 @armResourceOperations
