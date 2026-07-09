@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2026-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "controlPlane": {
+          "targetKubernetesVersion": "1.31.0",
+          "lastSuccessfulUpgradeTime": "2026-01-15T08:30:00Z",
+          "daysSinceLastSuccessfulUpgrade": 46,
+          "kubernetesVersionSupportStatus": "InSupport",
+          "status": "NoIssuesDetected",
+          "evaluatedAt": "2026-07-07T10:00:00Z",
+          "summary": "No issues were detected. The control plane appears ready to upgrade to 1.31.0.",
+          "detectedIssues": []
+        },
+        "agentPools": [
+          {
+            "agentPoolName": "nodepool1",
+            "kubernetesUpgrade": {
+              "targetKubernetesVersion": "1.31.0",
+              "lastSuccessfulUpgradeTime": "2026-01-15T08:30:00Z",
+              "daysSinceLastSuccessfulUpgrade": 46,
+              "kubernetesVersionSupportStatus": "InSupport",
+              "status": "NoIssuesDetected",
+              "evaluatedAt": "2026-07-07T10:00:00Z",
+              "summary": "No issues were detected. The agent pool appears ready to upgrade to 1.31.0.",
+              "detectedIssues": []
+            },
+            "nodeImageUpgrade": {
+              "targetNodeImageVersion": "AKSUbuntu-2204gen2-202607.01.0",
+              "status": "WarningDetected",
+              "evaluatedAt": "2026-07-07T10:00:00Z",
+              "summary": "The node image is out of the recommended compliance interval, but the upgrade is expected to succeed.",
+              "detectedIssues": [
+                {
+                  "issueType": "NodeImageOOSLA",
+                  "severity": "Warning",
+                  "message": "The node image has not been upgraded within the recommended compliance interval.",
+                  "impactedResource": {
+                    "kind": "Arm",
+                    "resourceType": "Microsoft.ContainerService/managedClusters/agentPools",
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/nodepool1"
+                  },
+                  "recommendedAction": {
+                    "title": "Upgrade the node image",
+                    "details": "Trigger a node image upgrade for the agent pool to return to the recommended compliance interval.",
+                    "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "upgradeContext": {
+          "nextMaintenanceWindowTime": "2026-03-10T02:00:00Z",
+          "currentUpgradeStrategy": "AutoUpgrade"
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_EvaluateUpgradeInsights",
+  "title": "Evaluate Upgrade Insights for Managed Cluster - All Upgrade Types"
+}

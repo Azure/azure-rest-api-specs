@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2026-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "upgradeType": "ControlPlane",
+    "targetKubernetesVersion": "1.31.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "controlPlane": {
+          "targetKubernetesVersion": "1.31.0",
+          "lastSuccessfulUpgradeTime": "2026-01-15T08:30:00Z",
+          "daysSinceLastSuccessfulUpgrade": 46,
+          "kubernetesVersionSupportStatus": "InSupport",
+          "status": "NoIssuesDetected",
+          "evaluatedAt": "2026-07-07T10:00:00Z",
+          "summary": "No issues were detected. The control plane appears ready to upgrade to 1.31.0.",
+          "detectedIssues": []
+        },
+        "upgradeContext": {
+          "nextMaintenanceWindowTime": "2026-03-10T02:00:00Z",
+          "currentUpgradeStrategy": "AutoUpgrade"
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_EvaluateUpgradeInsights",
+  "title": "Evaluate Upgrade Insights for Managed Cluster - No Issues Detected"
+}

@@ -28,7 +28,12 @@ union UpgradeInsightStatus {
   NoIssuesDetected: "NoIssuesDetected",
 
   /**
-   * One or more upgrade issues were detected for the target version.
+   * One or more non-blocking warnings were detected, but the upgrade is expected to succeed.
+   */
+  WarningDetected: "WarningDetected",
+
+  /**
+   * One or more blocking issues were detected that will prevent the upgrade from completing.
    */
   IssueDetected: "IssueDetected",
 }
@@ -365,8 +370,9 @@ model KubernetesUpgradeInsight {
   lastSuccessfulUpgradeTime?: utcDateTime;
 
   /**
-   * The number of days since the last successful upgrade for this scope. Failed
-   * upgrade attempts do not reset this counter.
+   * The number of days since the last successful Kubernetes version upgrade for
+   * this scope. Node image upgrades do not reset this counter. Failed upgrade
+   * attempts do not reset this counter.
    */
   @visibility(Lifecycle.Read)
   daysSinceLastSuccessfulUpgrade?: int32;
@@ -427,8 +433,10 @@ model AgentPoolUpgradeInsight {
 @added(Versions.v2026_07_02_preview)
 model ClusterUpgradeContext {
   /**
-   * The UTC start time of the next scheduled automatic upgrade maintenance window,
-   * if automatic upgrades are configured.
+   * The UTC start time of the next scheduled maintenance window applicable to the
+   * evaluated upgrade type (aksManagedAutoUpgradeSchedule for ControlPlane and
+   * NodePool, aksManagedNodeOSUpgradeSchedule for NodeImage). Null if no
+   * maintenance window is configured.
    */
   @visibility(Lifecycle.Read)
   nextMaintenanceWindowTime?: utcDateTime;
@@ -484,6 +492,10 @@ interface UpgradeInsights {
    * detected upgrade-blocking issues and contextual upgrade information for the
    * control plane and agent pools. Checks are performed on a best-effort basis and
    * reflect the cluster state at the time of evaluation.
+   *
+   * `agentPoolName` is required when `upgradeType` is `NodePool` or `NodeImage`.
+   * The request returns 400 Bad Request if `agentPoolName` is omitted for these
+   * upgrade types.
    */
   @tag("ManagedClusters")
   @action("upgradeInsights")
@@ -493,16 +505,18 @@ interface UpgradeInsights {
     ArmResponse<UpgradeInsightsResult>,
     Parameters = {
       /**
-       * The type of upgrade to evaluate. If not specified, the control plane
-       * (managed cluster) upgrade is evaluated.
+       * The type of upgrade to evaluate. If not specified, all upgrade types are
+       * evaluated: the control plane (managed cluster) Kubernetes version upgrade
+       * and, for every agent pool, the node pool Kubernetes version upgrade and the
+       * node OS image upgrade.
        */
       @query("upgradeType")
       upgradeType?: ClusterUpgradeType;
 
       /**
-       * The name of the agent pool to evaluate. Applies to the NodePool and
-       * NodeImage upgrade types; ignored for ControlPlane. If not specified, all
-       * agent pools are evaluated and a separate result is returned for each.
+       * The name of the agent pool to evaluate. Required when `upgradeType` is
+       * `NodePool` or `NodeImage`; the request returns 400 Bad Request if omitted
+       * for these upgrade types. Ignored for ControlPlane.
        */
       @query("agentPoolName")
       agentPoolName?: string;
@@ -510,18 +524,11 @@ interface UpgradeInsights {
       /**
        * The target Kubernetes version to evaluate upgrade insights against.
        * Applies to the ControlPlane and NodePool upgrade types. If not specified,
-       * the evaluation uses the next available upgrade version.
+       * defaults to the next available minor version for the cluster's current
+       * Kubernetes version.
        */
       @query("targetKubernetesVersion")
       targetKubernetesVersion?: string;
-
-      /**
-       * The target node image version to evaluate upgrade insights against.
-       * Applies to the NodeImage upgrade type. If not specified, the evaluation
-       * uses the next available node image version.
-       */
-      @query("targetNodeImageVersion")
-      targetNodeImageVersion?: string;
     }
   >;
 }

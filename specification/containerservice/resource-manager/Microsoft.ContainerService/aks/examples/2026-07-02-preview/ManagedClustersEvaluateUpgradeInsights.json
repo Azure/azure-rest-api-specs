@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2026-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "targetKubernetesVersion": "1.31.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "controlPlane": {
+          "targetKubernetesVersion": "1.31.0",
+          "lastSuccessfulUpgradeTime": "2025-09-15T08:30:00Z",
+          "daysSinceLastSuccessfulUpgrade": 168,
+          "kubernetesVersionSupportStatus": "InSupport",
+          "status": "IssueDetected",
+          "evaluatedAt": "2026-07-07T10:00:00Z",
+          "summary": "One or more issues were detected that may block or affect the upgrade to 1.31.0. Learn more: https://learn.microsoft.com/azure/aks/upgradeinsights",
+          "detectedIssues": [
+            {
+              "issueType": "ApiBreakingChange",
+              "severity": "Blocking",
+              "message": "Deprecated APIs (policy/v1beta1 PodDisruptionBudget) are removed in 1.31.0.",
+              "impactedResource": {
+                "kind": "Kubernetes",
+                "resourceType": "PodDisruptionBudget",
+                "namespace": "default",
+                "name": "my-pdb"
+              },
+              "recommendedAction": {
+                "title": "Migrate to policy/v1 PodDisruptionBudget",
+                "details": "Update the PodDisruptionBudget manifest to apiVersion policy/v1 and re-apply before upgrading.",
+                "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+              }
+            }
+          ]
+        },
+        "agentPools": [
+          {
+            "agentPoolName": "nodepool1",
+            "kubernetesUpgrade": {
+              "targetKubernetesVersion": "1.31.0",
+              "lastSuccessfulUpgradeTime": "2025-09-15T08:30:00Z",
+              "daysSinceLastSuccessfulUpgrade": 168,
+              "kubernetesVersionSupportStatus": "InSupport",
+              "status": "IssueDetected",
+              "evaluatedAt": "2026-07-07T10:00:00Z",
+              "summary": "The subnet does not have enough free IP addresses for surge nodes.",
+              "detectedIssues": [
+                {
+                  "issueType": "SubnetIpExhaustion",
+                  "severity": "Blocking",
+                  "message": "The subnet does not have sufficient available IP addresses for surge nodes during upgrade.",
+                  "impactedResource": {
+                    "kind": "Arm",
+                    "resourceType": "Microsoft.Network/virtualNetworks/subnets",
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/aks-subnet"
+                  },
+                  "recommendedAction": {
+                    "title": "Free up or expand subnet address space",
+                    "details": "Increase the subnet size or reduce maxSurge so enough IPs are available for surge nodes.",
+                    "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+                  }
+                }
+              ]
+            },
+            "nodeImageUpgrade": {
+              "targetNodeImageVersion": "AKSUbuntu-2204gen2-202607.01.0",
+              "status": "NoIssuesDetected",
+              "evaluatedAt": "2026-07-07T10:00:00Z",
+              "detectedIssues": []
+            }
+          }
+        ],
+        "upgradeContext": {
+          "nextMaintenanceWindowTime": "2026-03-10T02:00:00Z",
+          "currentUpgradeStrategy": "AutoUpgrade"
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_EvaluateUpgradeInsights",
+  "title": "Evaluate Upgrade Insights for Managed Cluster"
+}
