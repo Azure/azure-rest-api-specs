@@ -162,6 +162,12 @@ suppressions:
     reason: EvaluateDeploymentPoliciesResponse.results is a dictionary keyed by deployment name, mapping each hypothetical deployment to its policy evaluation result. Keys are user-provided deployment names from the request.
     where:
       - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
+  - code: AvoidAdditionalProperties
+    reason: Arc deployment nodeSelector, capabilities, and vLLM parameters are open dictionaries. nodeSelector keys are Kubernetes labels, capabilities are model/runtime flags, and vLLM parameter keys may evolve over time.
+    where:
+      - $.definitions.ArcDeploymentProperties.properties.nodeSelector
+      - $.definitions.ArcDeploymentProperties.properties.capabilities
+      - $.definitions.ArcDeploymentVllmParameters
 ```
 
 ### Tag: package-2026-05-15-preview
