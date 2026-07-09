@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Fabric management service",
-    "version": "2023-11-01",
+    "version": "2026-08-01",
     "description": "Microsoft.Fabric Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -73,11 +73,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "List operations": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -110,11 +105,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List capacities by subscription": {
-            "$ref": "./examples/FabricCapacities_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -162,11 +152,43 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Check name availability of a capacity": {
-            "$ref": "./examples/FabricCapacities_CheckNameAvailability.json"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Fabric/locations/{location}/usages": {
+      "get": {
+        "operationId": "FabricCapacities_ListUsages",
+        "tags": [
+          "FabricCapacities"
+        ],
+        "description": "List the current consumption and limit in this location for the provided subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedQuota"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -197,11 +219,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List eligible SKUs for a new capacity": {
-            "$ref": "./examples/FabricCapacities_ListSkus.json"
           }
         },
         "x-ms-pageable": {
@@ -239,11 +256,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List capacities by resource group": {
-            "$ref": "./examples/FabricCapacities_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -291,11 +303,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get a capacity": {
-            "$ref": "./examples/FabricCapacities_Get.json"
           }
         }
       },
@@ -364,11 +371,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Create or update a capacity": {
-            "$ref": "./examples/FabricCapacities_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -440,11 +442,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Update capacity properties": {
-            "$ref": "./examples/FabricCapacities_Update.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -500,11 +497,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a capacity": {
-            "$ref": "./examples/FabricCapacities_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -566,11 +558,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Resume capacity": {
-            "$ref": "./examples/FabricCapacities_Resume.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -617,11 +604,6 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "List eligible SKUs for an existing capacity": {
-            "$ref": "./examples/FabricCapacities_ListSkusForCapacity.json"
           }
         },
         "x-ms-pageable": {
@@ -682,11 +664,6 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Suspend capacity": {
-            "$ref": "./examples/FabricCapacities_Suspend.json"
-          }
-        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -709,6 +686,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "overageSettings": {
+          "$ref": "#/definitions/OverageSettings",
+          "description": "The overage settings"
         }
       },
       "required": [
@@ -835,6 +816,28 @@
         "thresholdCapacityUnitHours"
       ]
     },
+    "PagedQuota": {
+      "type": "object",
+      "description": "Paged collection of Quota items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Quota items on this page",
+          "items": {
+            "$ref": "#/definitions/Quota"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The provisioning state of the Fabric capacity resource.",
@@ -883,6 +886,50 @@
         ]
       },
       "readOnly": true
+    },
+    "Quota": {
+      "type": "object",
+      "description": "Describes Resource Quota",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/QuotaName",
+          "description": "The name of the quota.",
+          "readOnly": true
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of usage measurement."
+        },
+        "currentValue": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum permitted usage of the resource."
+        }
+      },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit"
+      ]
+    },
+    "QuotaName": {
+      "type": "object",
+      "description": "The Quota Names",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      }
     },
     "ResourceState": {
       "type": "string",
