@@ -1344,10 +1344,6 @@ model BatchJobSpecification {
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @added(Versions.v2026_08_01)
-  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
-  disableRescheduleSingleInstanceTask?: boolean;
-
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
 
@@ -2518,10 +2514,6 @@ model BatchJob {
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @added(Versions.v2026_08_01)
-  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
-  disableRescheduleSingleInstanceTask?: boolean;
-
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
@@ -2591,10 +2583,6 @@ model BatchJobCreateOptions {
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
 
-  @added(Versions.v2026_08_01)
-  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
-  disableRescheduleSingleInstanceTask?: boolean;
-
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32 = -1;
 
@@ -2639,10 +2627,6 @@ model BatchJobUpdateOptions {
 
   @doc("Whether Tasks in this job can be preempted by other high priority jobs. (This property is not available by default. Please contact support for more information) If the value is set to True, other high priority jobs submitted to the system will take precedence and will be able requeue tasks from this job. You can update a job's allowTaskPreemption after it has been created using the update job API.")
   allowTaskPreemption?: boolean;
-
-  @added(Versions.v2026_08_01)
-  @doc("Whether to disable rescheduling of single-instance Tasks in this Job. If true, eligible non-multi-instance Tasks from this Job are not rescheduled after they were previously running or preparing. The default is false. Account-level reschedule-disabled policy still takes precedence. This property does not affect multi-instance Tasks.")
-  disableRescheduleSingleInstanceTask?: boolean;
 
   @doc("The maximum number of tasks that can be executed in parallel for the job. (This property is not available by default. Please contact support for more information) The value of maxParallelTasks must be -1 or greater than 0 if specified. If not specified, the default value is -1, which means there's no limit to the number of tasks that can be run at once. You can update a job's maxParallelTasks after it has been created using the update job API.")
   maxParallelTasks?: int32;
