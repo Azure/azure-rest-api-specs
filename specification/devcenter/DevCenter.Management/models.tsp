@@ -685,6 +685,7 @@ model DevCenterUpdateProperties {
 @doc("Encryption properties.")
 model Encryption {
   @doc("All Customer-managed key encryption properties for the resource.")
+  #suppress "deprecated" "Continuing to use v4 CustomerManagedKeyEncryption for backward compatibility"
   customerManagedKeyEncryption?: CustomerManagedKeyEncryption;
 }
 

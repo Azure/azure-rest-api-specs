@@ -233,6 +233,7 @@ using Microsoft.DevCenter;
 );
 @@clientName(CatalogSyncError, "DevCenterCatalogSyncError", "csharp");
 @@clientName(ConfigurationPolicies, "DevCenterConfigurationPolicies", "csharp");
+#suppress "deprecated" "Continuing to use v4 CustomerManagedKeyEncryption for backward compatibility"
 @@clientName(
   Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption,
   "DevCenterCustomerManagedKeyEncryption",
