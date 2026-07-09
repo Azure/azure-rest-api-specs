@@ -6589,6 +6589,12 @@ model SecurityPolicyWebApplicationFirewallAssociation {
   domains?: ActivatedResourceReference[];
 
   /**
+   * List of routes.
+   */
+  @added(Versions.v2026_04_01_preview)
+  routes?: ResourceReference[];
+
+  /**
    * List of paths
    */
   patternsToMatch?: string[];
@@ -6603,6 +6609,12 @@ model SecurityPolicyWebApplicationFirewallParameters
    * Resource ID.
    */
   wafPolicy?: ResourceReference;
+
+  /**
+   * Flag to signal whether the WAF policy association is at the default Profile level.
+   */
+  @added(Versions.v2026_04_01_preview)
+  isProfileLevel?: boolean;
 
   /**
    * Waf associations
