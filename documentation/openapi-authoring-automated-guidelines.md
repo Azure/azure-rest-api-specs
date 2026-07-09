@@ -4,7 +4,7 @@ This document lists the set of automated rules that can be validated against Ope
 
 It is a requirement to conform to all manual and automated rules with severity "Error" before sending a pull request for review.
 
-We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco-system.
+We request OpenAPI(Swagger) spec authoring be assigned to engineers who have an intimate knowledge of a service endpoint and its developer experience to avoid feeding inefficiencies into teams that focus on Azure developer experiences and the rest of the Azure eco-system.
 
 ## Index
 * [Error vs. Warning](#error-vs-warning)
@@ -2697,7 +2697,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The delete operation is defined without a 200 or 204 error response implementation,please add it. 
 
-**Description** : Per ARM Specs, all DELETE methods (non-async) must have responses code implementation: 200, 204.   
+**Description** : Per ARM Specs, all DELETE methods (non-async) must have responses code implementation: 200, 204.   
 
 **CreatedAt**: May 21, 2020
 
@@ -3085,7 +3085,7 @@ Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rul
 
 **Output Message** : The response model in the GET collection operation "{0}" does not match with the response model in the individual GET operation "{1}".
 
-**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md#get-resource), for all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
+**Description** : Per [ARM guidelines](https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md#get-resource), for all resources (top-level and nested), collection GETs should have a response definition with a property "value" containing an array of the "resource" schema.The definition returned in the collection "value" array should be the same as the response body for the individual GET.
 
 **CreatedAt**: July 13, 2020
 
@@ -3126,14 +3126,14 @@ The following response is a good example:
 ...
 ...
 "MyResourceList":{
-   "type": "object", 
-     "properties": { 
-       "value": { 
-           "type": "array", 
-           "items": { 
-               "$ref": "#/definitions/MyResourceSchema" 
-           } 
-       },
+   "type": "object", 
+     "properties": { 
+       "value": { 
+           "type": "array", 
+           "items": { 
+               "$ref": "#/definitions/MyResourceSchema" 
+           } 
+       },
 ...
 ```
 Links: [Index](#index) | [Error vs. Warning](#error-vs-warning) | [Automated Rules](#automated-rules) | [ARM](#arm-violations): [Errors](#arm-errors) or [Warnings](#arm-warnings) | [SDK](#sdk-violations): [Errors](#sdk-errors) or [Warnings](#sdk-warnings)
