@@ -1,3 +1,4 @@
+import { execFile } from "child_process";
 import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { describe, expect, it, vi } from "vitest";
@@ -17,6 +18,15 @@ vi.mock("fs/promises", async (importOriginal) => {
     writeFile: vi.fn(),
   };
 });
+
+// Mock child_process.execFile for git show (base branch comparison)
+// promisify(execFile) expects (err, stdout, stderr) callback pattern
+vi.mock("child_process", () => ({
+  execFile: vi.fn((cmd, args, cb) => {
+    // Default: file not found on base branch
+    cb(new Error("fatal: path not found"), "", "");
+  }),
+}));
 
 // Mock getChangedFiles — path must match the import in detect-namespaces.js
 vi.mock("../../../shared/src/changed-files.js", () => ({
@@ -40,6 +50,8 @@ const { getChangedFiles } = await import("../../../shared/src/changed-files.js")
 const readFileMock = /** @type {any} */ (readFile);
 /** @type {import("vitest").Mock} */
 const getChangedFilesMock = /** @type {any} */ (getChangedFiles);
+/** @type {import("vitest").Mock} */
+const execFileMock = /** @type {any} */ (execFile);
 
 /** @type {ReturnType<typeof createMockCore>} */
 let core;
@@ -112,6 +124,27 @@ describe("detect-namespaces", () => {
   // Set RUNNER_TEMP for tests since we removed the fallback
   process.env.RUNNER_TEMP = process.env.RUNNER_TEMP ?? "/tmp";
 
+  // Default: git show fails (file not on base branch = new file)
+  function mockGitShowNotFound() {
+    execFileMock.mockImplementation(
+      (/** @type {string} */ _cmd, /** @type {string[]} */ _args, /** @type {Function} */ cb) => {
+        cb(new Error("fatal: path not found"), "", "");
+      },
+    );
+  }
+
+  /**
+   * Mock git show to return base branch content for a given file.
+   * @param {string} content - YAML content to return
+   */
+  function mockGitShowReturns(content) {
+    execFileMock.mockImplementation(
+      (/** @type {string} */ _cmd, /** @type {string[]} */ _args, /** @type {Function} */ cb) => {
+        cb(null, content, "");
+      },
+    );
+  }
+
   it("should detect management plane namespaces from path", async () => {
     core = createMockCore();
     context = createMockContext();
@@ -170,9 +203,100 @@ describe("detect-namespaces", () => {
     const file = "specification/compute/Compute.Management/tspconfig.yaml";
     getChangedFilesMock.mockResolvedValue([file]);
     readFileMock.mockResolvedValue(yaml.dump({ linter: {} }));
+    mockGitShowNotFound();
 
     await detectNamespaces(args());
 
     expect(core.info).toHaveBeenCalledWith(expect.stringContaining("No emitter options found"));
+  });
+
+  it("should skip namespaces unchanged from base branch", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 47 }, action: "synchronize" };
+    const file = "specification/compute/Compute.Management/tspconfig.yaml";
+    getChangedFilesMock.mockResolvedValue([file]);
+    // PR version: same namespaces as base, but with added generate-samples option
+    const prContent = yaml.dump({
+      options: {
+        "@azure-tools/typespec-csharp": {
+          namespace: "Azure.ResourceManager.Compute",
+        },
+        "@azure-tools/typespec-java": {
+          namespace: "com.azure.resourcemanager.compute",
+          "generate-samples": false,
+          "generate-tests": false,
+        },
+      },
+    });
+    readFileMock.mockResolvedValue(prContent);
+    // Base version: same namespaces, without generate-samples
+    const baseContent = yaml.dump({
+      options: {
+        "@azure-tools/typespec-csharp": {
+          namespace: "Azure.ResourceManager.Compute",
+        },
+        "@azure-tools/typespec-java": {
+          namespace: "com.azure.resourcemanager.compute",
+        },
+      },
+    });
+    mockGitShowReturns(baseContent);
+
+    await detectNamespaces(args());
+
+    // No namespace changes → should not output results
+    expect(core.setOutput).not.toHaveBeenCalled();
+    expect(core.info).toHaveBeenCalledWith(
+      "No namespace changes detected after comparing with base branch",
+    );
+  });
+
+  it("should detect only the language whose namespace changed", async () => {
+    core = createMockCore();
+    context = createMockContext();
+    context.payload = { pull_request: { number: 48 }, action: "synchronize" };
+    const file = "specification/compute/Compute.Management/tspconfig.yaml";
+    getChangedFilesMock.mockResolvedValue([file]);
+    // PR version: typescript namespace changed
+    const prContent = yaml.dump({
+      options: {
+        "@azure-tools/typespec-csharp": {
+          namespace: "Azure.ResourceManager.Compute",
+        },
+        "@azure-tools/typespec-java": {
+          namespace: "com.azure.resourcemanager.compute",
+        },
+        "@azure-tools/typespec-ts": {
+          "package-details": { name: "@azure/arm-compute-v2" },
+        },
+      },
+    });
+    readFileMock.mockResolvedValue(prContent);
+    // Base version: original typescript namespace
+    const baseContent = yaml.dump({
+      options: {
+        "@azure-tools/typespec-csharp": {
+          namespace: "Azure.ResourceManager.Compute",
+        },
+        "@azure-tools/typespec-java": {
+          namespace: "com.azure.resourcemanager.compute",
+        },
+        "@azure-tools/typespec-ts": {
+          "package-details": { name: "@azure/arm-compute" },
+        },
+      },
+    });
+    mockGitShowReturns(baseContent);
+
+    await detectNamespaces(args());
+
+    // Only typescript changed → should output results
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    // Verify dotnet and java were skipped
+    expect(core.info).toHaveBeenCalledWith(
+      expect.stringContaining("Namespace unchanged for dotnet"),
+    );
+    expect(core.info).toHaveBeenCalledWith(expect.stringContaining("Namespace unchanged for java"));
   });
 });
