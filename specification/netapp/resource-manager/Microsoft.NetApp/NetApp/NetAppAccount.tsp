@@ -882,9 +882,10 @@ interface NetAppAccounts {
   @renamedFrom(Versions.v2026_03_15_preview, "update")
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
+  @renamedFrom(Versions.v2026_04_15_preview, "update")
   @added(Versions.v2026_05_01)
   @removed(Versions.v2026_05_15_preview)
-  @renamedFrom(Versions.v2026_04_15_preview, "update")
+  @renamedFrom(Versions.v2026_05_15_preview, "update")
   @sharedRoute
   updatePrevious is ArmCustomPatchAsync<
     NetAppAccount,
