@@ -37,6 +37,138 @@ These settings apply only when `--tag=package-2026-06-preview` is specified on t
 ```yaml $(tag) == 'package-2026-06-preview'
 input-file:
 - preview/2026-06-15-preview/EventGrid.json
+
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: These properties are already part of previous preview versions and cannot be changed.
+    from: EventGrid.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}/channels/{channelName}"].patch.parameters[4].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].patch.parameters[3].schema.properties.sku
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}"].patch.parameters[3].schema.properties.properties
+      - $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema.properties.deadLetterDestination
+      - $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema.properties.destination
+      - $.paths["/{scope}/providers/Microsoft.EventGrid/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[3].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.destination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deadLetterDestination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.destination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.destination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.destination
+
+  - code: PatchBodyParametersSchema
+    reason: These properties will not be present by default. Only when used, these properties will be required.
+    from: EventGrid.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}"].patch.parameters[3].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/namespaces/{namespaceName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerTopics/{partnerTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/systemTopics/{systemTopicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[5].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/partnerNamespaces/{partnerNamespaceName}"].patch.parameters[3].schema.properties.properties
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.retryPolicy
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterDestination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deadLetterWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.deliveryWithResourceIdentity
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}/eventSubscriptions/{eventSubscriptionName}"].patch.parameters[4].schema.properties.destination
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/topics/{topicName}"].patch.parameters[3].schema.properties.properties
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections"]
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associationName}"]
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{resourceType}/{resourceName}/networkSecurityPerimeterConfigurations"]
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources/{privateLinkResourceName}"]
+
+  - code: PathContainsResourceType
+    reason: This is false positive error because the resourceType is already defined in the path as an enum of domains and topics. This same style we used previously in other routes and it allows us to extend this route in the future with other resource types once we add support without the need for adding additional routes and operation Ids. Also, same style was used in previous preview API versions as well.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateLinkResources"]
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["Partner"].properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerRegistrationProperties"].properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerTopicProperties"].properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["VerifiedPartnerProperties"].properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["PartnerDestinationProperties"].properties.partnerRegistrationImmutableId.format
+
+  - code: GuidUsage
+    reason: This is false positive as all the flagged properties that are already part of previous preview version and cannot be changed.
+    from: EventGrid.json
+    where: $.definitions["FederatedIdentityCredentialInfo"].properties.federatedClientId.format
+
+  - code: ConsistentPatchProperties
+    reason: EventSubscriptionUpdateParameters has a flat structure for backward compatibility. These properties exist in the resource model under 'properties' (x-ms-client-flatten) and cannot be restructured without breaking existing API consumers.
+    from: EventGrid.json
+
+  - code: EvenSegmentedPathForPutOperation
+    reason: The privateEndpointConnections path uses {parentType}/{parentName} pattern to support multiple parent resource types (topics, domains, partnerNamespaces, namespaces). This multi-parent pattern requires an odd segment count and cannot be changed without breaking the API.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"]
+
+  - code: PutInOperationName
+    reason: The PrivateEndpointConnections_Update operationId is from an existing API contract (previous stable and preview versions). Renaming to CreateOrUpdate would introduce a cross-version breaking change (ModifiedOperationId) with no functional benefit.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+
+  - code: ProvisioningStateMustBeReadOnly
+    reason: The provisioningState properties are from existing API versions and were not marked readOnly. Adding readOnly would introduce a cross-version breaking change (ReadonlyPropertyChanged). This will be addressed in a future major version.
+    from: EventGrid.json
+
+  - code: ResourceNameRestriction
+    reason: These path parameters are from existing API versions without pattern/minLength/maxLength constraints. Adding constraints would introduce a cross-version breaking change (ConstraintChanged). This will be addressed in a future major version.
+    from: EventGrid.json
 ```
 
 ### Tag: package-2025-11-preview
