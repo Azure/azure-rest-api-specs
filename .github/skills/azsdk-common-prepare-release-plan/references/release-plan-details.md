@@ -23,7 +23,6 @@ Collect these details (do not use temporary values):
 - **Product Service Tree ID**: GUID format - confirm with user
 - **Expected Release Timeline**: "Month YYYY" format
 - **API Release Type** (required): One of "Private Preview", "Public Preview", or "GA"
-- **SDK Release Type** (optional): "beta" or "stable". Defaults to "beta" for Private Preview and Public Preview, "stable" for GA.
 
 ## API Release Type and Spec PR Validation
 

@@ -57,15 +57,12 @@ DO NOT USE FOR: SDK code generation, pipeline troubleshooting, API review feedba
 3. **Gather Info** — Collect required details from the user. See [details](references/release-plan-details.md):
    - Target release month/year (format: "Month YYYY", e.g. "June 2026"). Do NOT use formats like "2026-06" or "06/2026" — these are invalid.
    - API release type: Value must be one of the following: "Private Preview", "Public Preview", or "GA"
-   - SDK release type: Value must be "beta" or "stable" — always ask the user explicitly
    - Spec PR URL (optional)
    - Service Tree ID (GUID) — optional if previously created
    - Product Tree ID (GUID) — optional if previously created
-4. **Create** — Run `azure-sdk-mcp:azsdk_create_release_plan` with the collected parameters including `sdkReleaseType`. Use `forceCreateReleasePlan: true` only if an existing release plan was found for a different API release type.
+4. **Create** — Run `azure-sdk-mcp:azsdk_create_release_plan` with the collected parameters. Use `forceCreateReleasePlan: true` only if an existing release plan was found for a different API release type.
 5. **Namespace** — For first management plane releases, link namespace approval issue using `azure-sdk-mcp:azsdk_link_namespace_approval_issue`.
 
-> **IMPORTANT**: Do NOT default the API release type value as the SDK release type. These are separate fields — always ask the user explicitly for the SDK release type.
->
 > **IMPORTANT**: Do NOT update an existing release plan to change its API release type. If a release plan exists for a different API release type, force-create a new one instead.
 
 **Tool**: `azure-sdk-mcp:azsdk_create_release_plan`
