@@ -2480,14 +2480,6 @@ model RebalanceJobProperties {
   expansionJobName?: string;
 
   /**
-   * The percentage of rebalance job completion.
-   */
-  @visibility(Lifecycle.Read)
-  @maxValue(100)
-  @minValue(0)
-  percentComplete?: float32;
-
-  /**
    * The status of the rebalance job.
    */
   @visibility(Lifecycle.Read)
@@ -2516,6 +2508,14 @@ model RebalanceJobPropertiesStatus {
    */
   @visibility(Lifecycle.Read)
   statusMessage?: string;
+
+  /**
+   * The percentage of rebalance job completion.
+   */
+  @visibility(Lifecycle.Read)
+  @maxValue(100)
+  @minValue(0)
+  percentComplete?: float32;
 
   /**
    * The balance percentage (0-100). Represents cumulative progress since the rebalance started. Reported in periodic rebalance status updates. Resets to 0 if the rebalancer node restarts.

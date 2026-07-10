@@ -8216,14 +8216,6 @@
           "description": "Name of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.",
           "readOnly": true
         },
-        "percentComplete": {
-          "type": "number",
-          "format": "float",
-          "description": "The percentage of rebalance job completion.",
-          "minimum": 0,
-          "maximum": 100,
-          "readOnly": true
-        },
         "status": {
           "$ref": "#/definitions/RebalanceJobPropertiesStatus",
           "description": "The status of the rebalance job.",
@@ -8296,6 +8288,14 @@
         "statusMessage": {
           "type": "string",
           "description": "Server-defined status message for rebalance job.",
+          "readOnly": true
+        },
+        "percentComplete": {
+          "type": "number",
+          "format": "float",
+          "description": "The percentage of rebalance job completion.",
+          "minimum": 0,
+          "maximum": 100,
           "readOnly": true
         },
         "balancePercent": {
