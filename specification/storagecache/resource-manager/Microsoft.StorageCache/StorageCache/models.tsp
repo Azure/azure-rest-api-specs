@@ -2397,7 +2397,7 @@ model ExpansionJobProperties {
   @visibility(Lifecycle.Read)
   rebalanceJobId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
+      type: "Microsoft.StorageCache/amlFilesystems/rebalanceJobs";
     }
   ]>;
 }
@@ -2483,7 +2483,7 @@ model RebalanceJobProperties {
   @visibility(Lifecycle.Read)
   expansionJobId?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Microsoft.StorageCache/amlFilesystems/expansionJobs",
+      type: "Microsoft.StorageCache/amlFilesystems/expansionJobs";
     }
   ]>;
 

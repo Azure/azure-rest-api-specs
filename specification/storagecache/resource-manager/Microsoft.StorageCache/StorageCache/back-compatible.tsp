@@ -108,7 +108,6 @@ using Microsoft.StorageCache;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ExpansionJob.properties);
 
-
 @@clientName(Caches.createOrUpdate::parameters.resource, "cache");
 @@clientName(Caches.update::parameters.properties, "cache");
 @@clientName(Caches.startPrimingJob::parameters.body, "primingjob");
