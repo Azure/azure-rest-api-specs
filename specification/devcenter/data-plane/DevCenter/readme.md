@@ -195,6 +195,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: CircularReference
+    reason: CloudErrorBody has a recursive 'details' array that allows nested error responses, which is semantically valid and intentional
 ```
 
 ### Tag: package-2023-09-01-preview
@@ -210,6 +212,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: CircularReference
+    reason: CloudErrorBody has a recursive 'details' array that allows nested error responses, which is semantically valid and intentional
 ```
 
 ### Tag: package-2023-07-01-preview
@@ -225,6 +229,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: CircularReference
+    reason: CloudErrorBody has a recursive 'details' array that allows nested error responses, which is semantically valid and intentional
 ```
 
 ### Tag: 2023-04-01
@@ -257,6 +263,8 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: CircularReference
+    reason: CloudErrorBody has a recursive 'details' array that allows nested error responses, which is semantically valid and intentional
 ```
 
 ### Tag: package-preview-2022-11
@@ -272,4 +280,6 @@ input-file:
 directive:
   - suppress: HostParametersValidation
     reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+  - suppress: CircularReference
+    reason: CloudErrorBody has a recursive 'details' array that allows nested error responses, which is semantically valid and intentional
 ```
