@@ -280,7 +280,7 @@ namespace Microsoft.BotService {
     "GetBotServiceQnAMakerEndpointKey",
     "csharp"
   );
-  @@clientName(Omnichannel, "OmniChannel", "csharp");
+  @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
   @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
