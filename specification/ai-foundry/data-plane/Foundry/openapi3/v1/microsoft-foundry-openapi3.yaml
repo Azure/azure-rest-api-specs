@@ -39603,9 +39603,6 @@ components:
           mcp_call: '#/components/schemas/VoiceMcpCallItem'
           mcp_approval_request: '#/components/schemas/VoiceMcpApprovalRequestItem'
           mcp_approval_response: '#/components/schemas/VoiceMcpApprovalResponseItem'
-          foundry_agent_call: '#/components/schemas/VoiceFoundryAgentCallItem'
-          web_search_call: '#/components/schemas/VoiceWebSearchCallItem'
-          file_search_call: '#/components/schemas/VoiceFileSearchCallItem'
       description: |-
         A persisted item in a voice conversation. A discriminated union (by `type`) aligned to the Voice Live
         `RealtimeConversationResponseItem` variants plus persisted client-created request items. `created_at` and
@@ -39626,9 +39623,6 @@ components:
             - mcp_call
             - mcp_approval_request
             - mcp_approval_response
-            - foundry_agent_call
-            - web_search_call
-            - file_search_call
       description: The kind of a voice conversation item.
       x-ms-foundry-meta:
         required_previews:
@@ -39663,92 +39657,6 @@ components:
           type: boolean
           description: Always `true` for a successful delete.
       description: The response returned when a voice conversation is deleted.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    VoiceFileSearchCallItem:
-      type: object
-      required:
-        - type
-        - status
-      properties:
-        type:
-          type: string
-          enum:
-            - file_search_call
-        queries:
-          type: array
-          items:
-            type: string
-          description: The queries used for the file search.
-        status:
-          type: string
-          description: The status of the file search tool call, e.g. `in_progress`, `searching`, `completed`, `incomplete`, `failed`.
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/VoiceFileSearchResult'
-          description: The results of the file search.
-      allOf:
-        - $ref: '#/components/schemas/VoiceConversationItem'
-      description: A file search call item.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    VoiceFileSearchResult:
-      type: object
-      properties:
-        file_id:
-          type: string
-          description: The id of the matched file.
-        filename:
-          type: string
-          description: The name of the matched file.
-        score:
-          type: number
-          format: float
-          description: The relevance score of the result.
-        text:
-          type: string
-          description: The matched text content.
-      description: A single file search result entry.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    VoiceFoundryAgentCallItem:
-      type: object
-      required:
-        - type
-        - name
-        - call_id
-        - arguments
-      properties:
-        type:
-          type: string
-          enum:
-            - foundry_agent_call
-        name:
-          type: string
-          description: The name of the Foundry agent.
-        call_id:
-          type: string
-          description: The id of the call.
-        arguments:
-          type: string
-          description: The arguments for the Foundry agent call as a JSON string.
-        agent_response_id:
-          type: string
-          description: The response id from the Foundry agent, when available.
-        output:
-          type: string
-          description: The output of the Foundry agent call.
-        error:
-          allOf:
-            - $ref: '#/components/schemas/VoiceItemError'
-          description: The error details if the Foundry agent call failed.
-      allOf:
-        - $ref: '#/components/schemas/VoiceConversationItem'
-      description: A Foundry agent call item.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
@@ -40505,25 +40413,6 @@ components:
             - $ref: '#/components/schemas/VoiceTokenDetails'
           description: Breakdown of output tokens.
       description: Token usage statistics for a voice response.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    VoiceWebSearchCallItem:
-      type: object
-      required:
-        - type
-        - status
-      properties:
-        type:
-          type: string
-          enum:
-            - web_search_call
-        status:
-          type: string
-          description: The status of the web search tool call, e.g. `in_progress`, `searching`, `completed`, `failed`.
-      allOf:
-        - $ref: '#/components/schemas/VoiceConversationItem'
-      description: A web search call item.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview

@@ -294,22 +294,6 @@ model VoiceItemError {
   message?: string;
 }
 
-@doc("A single file search result entry.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFileSearchResult {
-  @doc("The id of the matched file.")
-  file_id?: string;
-
-  @doc("The name of the matched file.")
-  filename?: string;
-
-  @doc("The relevance score of the result.")
-  score?: float32;
-
-  @doc("The matched text content.")
-  text?: string;
-}
-
 @doc("The kind of a voice conversation item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 union VoiceConversationItemType {
@@ -321,9 +305,6 @@ union VoiceConversationItemType {
   mcp_call: "mcp_call",
   mcp_approval_request: "mcp_approval_request",
   mcp_approval_response: "mcp_approval_response",
-  foundry_agent_call: "foundry_agent_call",
-  web_search_call: "web_search_call",
-  file_search_call: "file_search_call",
 }
 
 @doc("""
@@ -460,54 +441,6 @@ model VoiceMcpApprovalResponseItem extends VoiceConversationItem {
 
   @doc("The id of the MCP approval request being responded to.")
   approval_request_id: string;
-}
-
-@doc("A Foundry agent call item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFoundryAgentCallItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.foundry_agent_call;
-
-  @doc("The name of the Foundry agent.")
-  name: string;
-
-  @doc("The id of the call.")
-  call_id: string;
-
-  @doc("The arguments for the Foundry agent call as a JSON string.")
-  arguments: string;
-
-  @doc("The response id from the Foundry agent, when available.")
-  agent_response_id?: string;
-
-  @doc("The output of the Foundry agent call.")
-  output?: string;
-
-  @doc("The error details if the Foundry agent call failed.")
-  error?: VoiceItemError;
-}
-
-@doc("A web search call item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceWebSearchCallItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.web_search_call;
-
-  @doc("The status of the web search tool call, e.g. `in_progress`, `searching`, `completed`, `failed`.")
-  status: string;
-}
-
-@doc("A file search call item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFileSearchCallItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.file_search_call;
-
-  @doc("The queries used for the file search.")
-  queries?: string[];
-
-  @doc("The status of the file search tool call, e.g. `in_progress`, `searching`, `completed`, `incomplete`, `failed`.")
-  status: string;
-
-  @doc("The results of the file search.")
-  results?: VoiceFileSearchResult[];
 }
 
 // ---------------------------------------------------------------------------
