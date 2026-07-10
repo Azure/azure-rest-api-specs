@@ -59,6 +59,22 @@ rewrite directly to the generated file. The intended workflow is to run route
 generation first and then run this rewrite immediately afterward, so the generated
 route documentation changes are consistently reapplied and not lost overall.
 
+When automating fixes in generated routes, parse operation blocks using TypeSpec
+syntax boundaries instead of blank lines. In particular, bound the first operation
+by the enclosing `interface { ... }` body and subsequent operations by the previous
+operation terminator (`>;`). Generated files often have no blank line between the
+interface opening and the first operation, and multiline `@summary("""...""")`
+decorators contain internal blank lines. A blank-line parser can accidentally move
+operation decorators above imports or insert replacement text inside triple-quoted
+summaries, producing invalid TypeSpec.
+
+Generated OpenAI route operations commonly have `#suppress` directives immediately
+before operation decorators. Do not insert TSDoc between those directives and the
+operation, or before those directives, because the TypeSpec parser expects a
+directive target there. For those generated operations, use an `@doc("...")`
+decorator with the other operation decorators instead of TSDoc. Continue to prefer
+TSDoc for hand-authored routes and for parameters where it already parses cleanly.
+
 ## Rules
 
 Every operation defined inside an `interface` block in a `routes.tsp` or `routes.generated.tsp` file must satisfy

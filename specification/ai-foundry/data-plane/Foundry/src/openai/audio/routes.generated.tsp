@@ -13,15 +13,13 @@ namespace Azure.AI.Projects;
 @route("openai/v1/audio")
 @tag("Audio")
 interface Audio {
-  /**
-   * Creates a speech from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a speech")
+  @doc("Generates audio from the input text. Returns the audio file content, or a stream of audio events.")
+  @summary("Generate speech")
   @route("speech")
   @post
   createSpeech is OpenAIOperation<
@@ -31,24 +29,18 @@ interface Audio {
       body: OpenAI.CreateSpeechRequest;
     },
     {
-      /** The TransferEncoding header. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @header("Transfer-Encoding")
       TransferEncoding?: string;
 
-      /** The content type of the request body. */
       @header
       contentType: "application/octet-stream";
 
-      /** The request body. */
       @body
       body: bytes;
     }
   >;
 
-  /**
-   * Creates a transcription from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -56,12 +48,13 @@ interface Audio {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a transcription")
+  @doc("Transcribes audio into the input language. Returns a transcription object in `json`, `diarized_json`, or `verbose_json` format, or a stream of transcript events.")
+  @summary("Transcribe audio")
   @route("transcriptions")
   @post
   createTranscription is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 
@@ -75,9 +68,6 @@ interface Audio {
       | OpenAI.CreateTranscriptionResponseVerboseJson>
   >;
 
-  /**
-   * Creates a translation from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
@@ -85,12 +75,13 @@ interface Audio {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a translation")
+  @doc("Translates audio into English.")
+  @summary("Translate audio")
   @route("translations")
   @post
   createTranslation is OpenAIOperation<
     {
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 

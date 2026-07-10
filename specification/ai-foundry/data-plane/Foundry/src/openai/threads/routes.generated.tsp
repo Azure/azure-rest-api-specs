@@ -18,13 +18,11 @@ namespace Azure.AI.Projects;
 @route("openai/v1/threads")
 @tag("Threads")
 interface Threads {
-  /**
-   * Creates a thread from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a thread.")
   @summary("Create a thread")
   @tag("Assistants")
   @post
@@ -37,13 +35,11 @@ interface Threads {
     OpenAI.ThreadObject
   >;
 
-  /**
-   * Creates a thread and run from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a thread and run it in one request.")
   @summary("Create a thread and run")
   @tag("Assistants")
   @route("runs")
@@ -57,13 +53,11 @@ interface Threads {
     OpenAI.RunObject
   >;
 
-  /**
-   * Deletes a thread by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Deletes a thread.")
   @summary("Delete a thread")
   @tag("Assistants")
   @route("{thread_id}")
@@ -78,13 +72,11 @@ interface Threads {
     OpenAI.DeleteThreadResponse
   >;
 
-  /**
-   * Retrieves a thread by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a thread.")
   @summary("Get a thread")
   @tag("Assistants")
   @route("{thread_id}")
@@ -99,13 +91,11 @@ interface Threads {
     OpenAI.ThreadObject
   >;
 
-  /**
-   * Updates a thread with the supplied changes.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Updates a thread and returns the result.")
   @summary("Update a thread")
   @tag("Assistants")
   @route("{thread_id}")
@@ -124,14 +114,12 @@ interface Threads {
     OpenAI.ThreadObject
   >;
 
-  /**
-   * Lists messages matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("List messages")
+  @doc("Returns a list of messages for a given thread.")
+  @summary("List messages for a given thread")
   @tag("Assistants")
   @list
   @route("{thread_id}/messages")
@@ -143,17 +131,27 @@ interface Threads {
       @path
       thread_id: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -161,7 +159,11 @@ interface Threads {
       @query(#{ explode: true })
       after?: string;
 
-      /** A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list. */
+      /**
+       * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, starting with obj_foo, your
+       * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       before?: string;
@@ -175,13 +177,11 @@ interface Threads {
     OpenAI.ListMessagesResponse
   >;
 
-  /**
-   * Creates a message from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a message.")
   @summary("Create a message")
   @tag("Assistants")
   @route("{thread_id}/messages")
@@ -200,13 +200,11 @@ interface Threads {
     OpenAI.MessageObject
   >;
 
-  /**
-   * Deletes a message by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Deletes a message.")
   @summary("Delete a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
@@ -226,13 +224,11 @@ interface Threads {
     OpenAI.DeleteMessageResponse
   >;
 
-  /**
-   * Retrieves a message by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a message.")
   @summary("Get a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
@@ -252,13 +248,11 @@ interface Threads {
     OpenAI.MessageObject
   >;
 
-  /**
-   * Updates a message with the supplied changes.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Updates a message and returns the result.")
   @summary("Update a message")
   @tag("Assistants")
   @route("{thread_id}/messages/{message_id}")
@@ -282,14 +276,12 @@ interface Threads {
     OpenAI.MessageObject
   >;
 
-  /**
-   * Lists runs matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("List runs")
+  @doc("Returns a list of runs belonging to a thread.")
+  @summary("List runs belonging to a thread")
   @tag("Assistants")
   @list
   @route("{thread_id}/runs")
@@ -301,17 +293,27 @@ interface Threads {
       @path
       thread_id: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -319,7 +321,11 @@ interface Threads {
       @query(#{ explode: true })
       after?: string;
 
-      /** A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list. */
+      /**
+       * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, starting with obj_foo, your
+       * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       before?: string;
@@ -327,13 +333,11 @@ interface Threads {
     OpenAI.ListRunsResponse
   >;
 
-  /**
-   * Creates a run from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Creates a run.")
   @summary("Create a run")
   @tag("Assistants")
   @route("{thread_id}/runs")
@@ -345,8 +349,12 @@ interface Threads {
       @path
       thread_id: string;
 
-      /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /**
+       * A list of additional fields to include in the response. Currently the only supported value is
+       * `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result
+       * content. See the [file search tool documentation](/docs/assistants/tools/file-
+       * search#customizing-file-search-settings) for more information.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
@@ -359,13 +367,11 @@ interface Threads {
     OpenAI.RunObject
   >;
 
-  /**
-   * Retrieves a run by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a run.")
   @summary("Get a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}")
@@ -385,13 +391,11 @@ interface Threads {
     OpenAI.RunObject
   >;
 
-  /**
-   * Updates a run with the supplied changes.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Updates a run and returns the result.")
   @summary("Update a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}")
@@ -415,13 +419,11 @@ interface Threads {
     OpenAI.RunObject
   >;
 
-  /**
-   * Cancels a run by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Cancels a run that is `in_progress`.")
   @summary("Cancel a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/cancel")
@@ -441,14 +443,12 @@ interface Threads {
     OpenAI.RunObject
   >;
 
-  /**
-   * Lists run steps matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("List run steps")
+  @doc("Returns a list of run steps belonging to a run.")
+  @summary("List run steps belonging to a run")
   @tag("Assistants")
   @list
   @route("{thread_id}/runs/{run_id}/steps")
@@ -465,17 +465,27 @@ interface Threads {
       @path
       run_id: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -483,13 +493,21 @@ interface Threads {
       @query(#{ explode: true })
       after?: string;
 
-      /** A cursor for use in pagination. `before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list. */
+      /**
+       * A cursor for use in pagination. `before` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, starting with obj_foo, your
+       * subsequent call can include before=obj_foo in order to fetch the previous page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       before?: string;
 
-      /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /**
+       * A list of additional fields to include in the response. Currently the only supported value is
+       * `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result
+       * content. See the [file search tool documentation](/docs/assistants/tools/file-
+       * search#customizing-file-search-settings) for more information.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
@@ -498,13 +516,11 @@ interface Threads {
     OpenAI.ListRunStepsResponse
   >;
 
-  /**
-   * Retrieves a run step by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
+  @doc("Retrieves a run step.")
   @summary("Get a run step")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/steps/{step_id}")
@@ -526,8 +542,12 @@ interface Threads {
       @path
       step_id: string;
 
-      /**A list of additional fields to include in the response. Currently the only supported value is `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result content.
-  See the [file search tool documentation](/docs/assistants/tools/file-search#customizing-file-search-settings) for more information.*/
+      /**
+       * A list of additional fields to include in the response. Currently the only supported value is
+       * `step_details.tool_calls[*].file_search.results[*].content` to fetch the file search result
+       * content. See the [file search tool documentation](/docs/assistants/tools/file-
+       * search#customizing-file-search-settings) for more information.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
@@ -536,14 +556,12 @@ interface Threads {
     OpenAI.RunStepObject
   >;
 
-  /**
-   * Creates a tool ouputs to run from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a tool ouputs to run")
+  @doc("Submits tool outputs for a run that is waiting for required action and continues run processing.")
+  @summary("Submit tool outputs to a run")
   @tag("Assistants")
   @route("{thread_id}/runs/{run_id}/submit_tool_outputs")
   @post

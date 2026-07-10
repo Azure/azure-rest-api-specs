@@ -18,13 +18,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl "https://api.openai.com/v1/conversations/conv_123/items?limit=10" \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl"https://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123/items?limit=10" \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const items = await client.conversations.items.list("conv_123", { limit: 10 });
           console.log(items.data);
@@ -33,9 +45,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           page = client.conversations.items.list(
               conversation_id="conv_123",
@@ -46,10 +63,26 @@ namespace Azure.AI.Projects;
         csharp: """
           using System;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           ConversationItemList items = client.ConversationItems.List(
               conversationId: "conv_123",
@@ -60,9 +93,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           // Automatically fetches more pages as needed.
@@ -80,12 +120,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/conversations"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	page, err := client.Conversations.Items.List(
           		context.TODO(),
           		"conv_123",
@@ -106,6 +157,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.items.ItemListPage;
           import com.openai.models.conversations.items.ItemListParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -119,8 +173,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           page = openai.conversations.items.list("conv_123")
           
@@ -167,9 +240,12 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/conversations/conv_123/items \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123/items \\
             -H "Content-Type: application/json" \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -d '{
               "items": [
                 {
@@ -192,7 +268,16 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const items = await client.conversations.items.create(
             "conv_123",
@@ -217,9 +302,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation_item_list = client.conversations.items.create(
               conversation_id="conv_123",
@@ -235,10 +325,26 @@ namespace Azure.AI.Projects;
           using System;
           using System.Collections.Generic;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           ConversationItemList created = client.ConversationItems.Create(
               conversationId: "conv_123",
@@ -270,9 +376,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversationItemList = await client.conversations.items.create('conv_123', {
@@ -298,12 +411,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go/conversations"
           	"github.com/openai/openai-go/option"
           	"github.com/openai/openai-go/responses"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversationItemList, err := client.Conversations.Items.New(
           		context.TODO(),
           		"conv_123",
@@ -335,29 +459,48 @@ namespace Azure.AI.Projects;
           import com.openai.models.conversations.items.ConversationItemList;
           import com.openai.models.conversations.items.ItemCreateParams;
           import com.openai.models.responses.EasyInputMessage;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ItemCreateParams params = ItemCreateParams.builder()
-                      .conversationId("conv_123")
-                      .addItem(EasyInputMessage.builder()
-                          .content("string")
-                          .role(EasyInputMessage.Role.USER)
-                          .type(EasyInputMessage.Type.MESSAGE)
-                          .build())
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   ConversationItemList conversationItemList = client.conversations().items().create(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation_item_list = openai.conversations.items.create("conv_123", items: [{content: "string", role: :user, type: :message}])
           
@@ -407,13 +550,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X DELETE https://api.openai.com/v1/conversations/conv_123/items/msg_abc \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X DELETE https://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123/items/msg_abc \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const conversation = await client.conversations.items.delete(
             "conv_123",
@@ -425,9 +580,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation = client.conversations.items.delete(
               item_id="msg_abc",
@@ -438,10 +598,26 @@ namespace Azure.AI.Projects;
         csharp: """
           using System;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           Conversation conversation = client.ConversationItems.Delete(
               conversationId: "conv_123",
@@ -452,9 +628,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversation = await client.conversations.items.delete('msg_abc', {
@@ -472,12 +655,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversation, err := client.Conversations.Items.Delete(
           		context.TODO(),
           		"conv_123",
@@ -498,25 +692,48 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.Conversation;
           import com.openai.models.conversations.items.ItemDeleteParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ItemDeleteParams params = ItemDeleteParams.builder()
-                      .conversationId("conv_123")
-                      .itemId("msg_abc")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Conversation conversation = client.conversations().items().delete(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation = openai.conversations.items.delete("msg_abc", conversation_id: "conv_123")
           
@@ -546,13 +763,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/conversations/conv_123/items/msg_abc \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123/items/msg_abc \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const item = await client.conversations.items.retrieve(
             "conv_123",
@@ -564,9 +793,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation_item = client.conversations.items.retrieve(
               item_id="msg_abc",
@@ -577,10 +811,26 @@ namespace Azure.AI.Projects;
         csharp: """
           using System;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           ConversationItem item = client.ConversationItems.Get(
               conversationId: "conv_123",
@@ -591,9 +841,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversationItem = await client.conversations.items.retrieve('msg_abc', {
@@ -612,12 +869,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/conversations"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversationItem, err := client.Conversations.Items.Get(
           		context.TODO(),
           		"conv_123",
@@ -639,25 +907,48 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.items.ConversationItem;
           import com.openai.models.conversations.items.ItemRetrieveParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ItemRetrieveParams params = ItemRetrieveParams.builder()
-                      .conversationId("conv_123")
-                      .itemId("msg_abc")
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   ConversationItem conversationItem = client.conversations().items().retrieve(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation_item = openai.conversations.items.retrieve("msg_abc", conversation_id: "conv_123")
           
@@ -690,9 +981,12 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/conversations \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/conversations \\
             -H "Content-Type: application/json" \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -d '{
               "metadata": {"topic": "demo"},
               "items": [
@@ -707,7 +1001,16 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const conversation = await client.conversations.create({
             metadata: { topic: "demo" },
@@ -721,9 +1024,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation = client.conversations.create()
           print(conversation.id)
@@ -732,10 +1040,26 @@ namespace Azure.AI.Projects;
           using System;
           using System.Collections.Generic;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           Conversation conversation = client.CreateConversation(
               new CreateConversationOptions
@@ -759,9 +1083,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversation = await client.conversations.create();
@@ -778,12 +1109,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/conversations"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversation, err := client.Conversations.New(context.TODO(), conversations.ConversationNewParams{})
           	if err != nil {
           		panic(err.Error())
@@ -800,6 +1142,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.Conversation;
           import com.openai.models.conversations.ConversationCreateParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -813,8 +1158,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation = openai.conversations.create
           
@@ -844,13 +1208,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl -X DELETE https://api.openai.com/v1/conversations/conv_123 \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curl-X DELETE https://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123 \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const deleted = await client.conversations.delete("conv_123");
           console.log(deleted);
@@ -859,9 +1235,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation_deleted_resource = client.conversations.delete(
               "conv_123",
@@ -871,10 +1252,26 @@ namespace Azure.AI.Projects;
         csharp: """
           using System;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           DeletedConversation deleted = client.DeleteConversation("conv_123");
           Console.WriteLine(deleted.Id);
@@ -882,9 +1279,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversationDeletedResource = await client.conversations.delete('conv_123');
@@ -900,12 +1304,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversationDeletedResource, err := client.Conversations.Delete(context.TODO(), "conv_123")
           	if err != nil {
           		panic(err.Error())
@@ -922,6 +1337,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.ConversationDeleteParams;
           import com.openai.models.conversations.ConversationDeletedResource;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -935,8 +1353,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation_deleted_resource = openai.conversations.delete("conv_123")
           
@@ -965,13 +1402,25 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/conversations/conv_123 \\
-            -H "Authorization: Bearer $OPENAI_API_KEY"
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123 \\
+            -H "Authorization: Bearer $AZURE_API_KEY"
           
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const conversation = await client.conversations.retrieve("conv_123");
           console.log(conversation);
@@ -980,9 +1429,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation = client.conversations.retrieve(
               "conv_123",
@@ -992,10 +1446,26 @@ namespace Azure.AI.Projects;
         csharp: """
           using System;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           Conversation conversation = client.GetConversation("conv_123");
           Console.WriteLine(conversation.Id);
@@ -1003,9 +1473,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversation = await client.conversations.retrieve('conv_123');
@@ -1021,12 +1498,23 @@ namespace Azure.AI.Projects;
           
           	"github.com/openai/openai-go"
           	"github.com/openai/openai-go/option"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversation, err := client.Conversations.Get(context.TODO(), "conv_123")
           	if err != nil {
           		panic(err.Error())
@@ -1043,6 +1531,9 @@ namespace Azure.AI.Projects;
           import com.openai.client.okhttp.OpenAIOkHttpClient;
           import com.openai.models.conversations.Conversation;
           import com.openai.models.conversations.ConversationRetrieveParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
@@ -1056,8 +1547,27 @@ namespace Azure.AI.Projects;
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation = openai.conversations.retrieve("conv_123")
           
@@ -1087,9 +1597,12 @@ namespace Azure.AI.Projects;
     examples: #{
       request: #{
         curl: """
-          curl https://api.openai.com/v1/conversations/conv_123 \\
+          az login
+          AZURE_API_KEY=$(az account get-access-token --resource https://ai.azure.com/ --query accessToken -o tsv)
+          
+          curlhttps://<foundry-resource>.services.ai.azure.com/openai/v1/conversations/conv_123 \\
             -H "Content-Type: application/json" \\
-            -H "Authorization: Bearer $OPENAI_API_KEY" \\
+            -H "Authorization: Bearer $AZURE_API_KEY" \\
             -d '{
               "metadata": {"topic": "project-x"}
             }'
@@ -1097,7 +1610,16 @@ namespace Azure.AI.Projects;
           """,
         javascript: """
           import OpenAI from "openai";
-          const client = new OpenAI();
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
+          
+          const openai = new OpenAI({
+              baseURL: endpoint,
+              apiKey: tokenProvider
+          });
           
           const updated = await client.conversations.update(
             "conv_123",
@@ -1109,9 +1631,14 @@ namespace Azure.AI.Projects;
         python: """
           import os
           from openai import OpenAI
+          from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+          
+          endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          token_provider = get_bearer_token_provider(DefaultAzureCredential(), "https://ai.azure.com/.default")
           
           client = OpenAI(
-              api_key=os.environ.get("OPENAI_API_KEY"),  # This is the default and can be omitted
+              base_url=endpoint,
+              api_key=token_provider
           )
           conversation = client.conversations.update(
               conversation_id="conv_123",
@@ -1125,10 +1652,26 @@ namespace Azure.AI.Projects;
           using System;
           using System.Collections.Generic;
           using OpenAI.Conversations;
+          using Azure.Identity;
+          using OpenAI;
+          using System.ClientModel.Primitives;
+          
+          #pragma warning disable OPENAI001
+          
+          const string deploymentName = "<deployment-name>";
+          const string endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          
+          BearerTokenPolicy tokenPolicy = new(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           OpenAIConversationClient client = new(
-              apiKey: Environment.GetEnvironmentVariable("OPENAI_API_KEY")
-          );
+              model: deploymentName,
+              authenticationPolicy: tokenPolicy,
+              options: new OpenAIClientOptions()
+              {
+                  Endpoint = new Uri($"{endpoint}"),
+              });
           
           Conversation updated = client.UpdateConversation(
               conversationId: "conv_123",
@@ -1145,9 +1688,16 @@ namespace Azure.AI.Projects;
           """,
         `node.js`: """
           import OpenAI from 'openai';
+          import { getBearerTokenProvider, DefaultAzureCredential } from "@azure/identity";
+          
+          const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
+          const tokenProvider = getBearerTokenProvider(
+              new DefaultAzureCredential(),
+              "https://ai.azure.com/.default");
           
           const client = new OpenAI({
-            apiKey: process.env['OPENAI_API_KEY'], // This is the default and can be omitted
+              baseURL: endpoint,
+              apiKey: tokenProvider
           });
           
           const conversation = await client.conversations.update('conv_123', { metadata: { foo: 'string' } });
@@ -1165,12 +1715,23 @@ namespace Azure.AI.Projects;
           	"github.com/openai/openai-go/conversations"
           	"github.com/openai/openai-go/option"
           	"github.com/openai/openai-go/shared"
+              "github.com/Azure/azure-sdk-for-go/sdk/azidentity"
+              "github.com/openai/openai-go/v3/azure"
           )
           
           func main() {
-          	client := openai.NewClient(
-          		option.WithAPIKey("My API Key"),
-          	)
+          	const endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+              tokenCredential, err := azidentity.NewDefaultAzureCredential(nil)
+              if err != nil {
+                  println("Error creating credential.")
+                  panic(err)
+              }
+          
+              client := openai.NewClient(
+                  option.WithBaseURL(endpoint),
+                  azure.WithTokenCredential(tokenCredential),
+              )
           	conversation, err := client.Conversations.Update(
           		context.TODO(),
           		"conv_123",
@@ -1196,27 +1757,48 @@ namespace Azure.AI.Projects;
           import com.openai.core.JsonValue;
           import com.openai.models.conversations.Conversation;
           import com.openai.models.conversations.ConversationUpdateParams;
+          import com.azure.identity.AuthenticationUtil;
+          import com.azure.identity.DefaultAzureCredentialBuilder;
+          import com.openai.credential.BearerTokenCredential;
           
           public final class Main {
               private Main() {}
           
               public static void main(String[] args) {
-                  OpenAIClient client = OpenAIOkHttpClient.fromEnv();
+                  String endpoint = "https://<foundry-resource>.services.ai.azure.com/openai/v1";
           
-                  ConversationUpdateParams params = ConversationUpdateParams.builder()
-                      .conversationId("conv_123")
-                      .metadata(ConversationUpdateParams.Metadata.builder()
-                          .putAdditionalProperty("foo", JsonValue.from("string"))
-                          .build())
-                      .build();
+              OpenAIClient client = OpenAIOkHttpClient.builder()
+                  .baseUrl(endpoint)
+                  .credential(BearerTokenCredential.create(AuthenticationUtil.getBearerTokenSupplier(
+                      new DefaultAzureCredentialBuilder().build(), "https://ai.azure.com/.default")))
+                  .build();
                   Conversation conversation = client.conversations().update(params);
               }
           }
           """,
         ruby: """
           require "openai"
+          require "oauth2"
           
-          openai = OpenAI::Client.new(api_key: "My API Key")
+          tenant_id = ENV["AZURE_TENANT_ID"]
+          client_id = ENV["AZURE_CLIENT_ID"]
+          client_secret = ENV["AZURE_CLIENT_SECRET"]
+          
+          resource = "https://ai.azure.com/.default"
+          oauth_client = OAuth2::Client.new(
+            client_id,
+            client_secret,
+            site: "https://login.microsoftonline.com/#{tenant_id}",
+            token_url: "/oauth2/v2.0/token"
+          )
+          
+          token = oauth_client.client_credentials.get_token(scope: resource).token
+          base_url = "https://<foundry-resource>.services.ai.azure.com/openai/v1"
+          
+          openai = OpenAI::Client.new(
+            access_token: token,
+            uri_base: base_url
+          )
           
           conversation = openai.conversations.update("conv_123", metadata: {foo: "string"})
           

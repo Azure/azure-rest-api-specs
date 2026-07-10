@@ -16,31 +16,39 @@ namespace Azure.AI.Projects;
 @route("openai/v1/containers")
 @tag("Containers")
 interface Containers {
-  /**
-   * Lists containers matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("List containers")
+  @doc("Lists Containers.")
+  @summary("List Containers")
   @list
   @get
-  listContainers is OpenAIOperation<
+  ListContainers is OpenAIOperation<
     {
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -56,17 +64,15 @@ interface Containers {
     OpenAI.ContainerListResource
   >;
 
-  /**
-   * Creates a container from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a container")
+  @doc("Creates Container.")
+  @summary("Create Container")
   @post
-  createContainer is OpenAIOperation<
+  CreateContainer is OpenAIOperation<
     {
       /** The request body. */
       @body
@@ -75,19 +81,17 @@ interface Containers {
     OpenAI.ContainerResource
   >;
 
-  /**
-   * Deletes a container by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Delete a container")
+  @doc("Deletes Container.")
+  @summary("Delete Container")
   @route("{container_id}")
   @delete
-  deleteContainer is OpenAIOperation<
+  DeleteContainer is OpenAIOperation<
     {
       /** The ID of the container to delete. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
@@ -97,21 +101,19 @@ interface Containers {
     TypeSpec.Http.OkResponse
   >;
 
-  /**
-   * Retrieves a container by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Get a container")
+  @doc("Retrieves Container.")
+  @summary("Get Container")
   @route("{container_id}")
   @get
-  retrieveContainer is OpenAIOperation<
+  RetrieveContainer is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
@@ -119,37 +121,45 @@ interface Containers {
     OpenAI.ContainerResource
   >;
 
-  /**
-   * Lists container files matching the request filters.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("List container files")
+  @doc("Lists Container files.")
+  @summary("List Container files")
   @list
   @route("{container_id}/files")
   @get
-  listContainerFiles is OpenAIOperation<
+  ListContainerFiles is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20. */
+      /**
+       * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+       * default is 20.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       limit?: integer = 20;
 
-      /** Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc` for descending order. */
+      /**
+       * Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and `desc`
+       * for descending order.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       @query(#{ explode: true })
       order?: OpenAI.OrderEnum = OrderEnum.desc;
 
-      /** A cursor for use in pagination. `after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list. */
+      /**
+       * A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+       * For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+       * subsequent call can include after=obj_foo in order to fetch the next page of the list.
+       */
       #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Auto-suppressed warnings non-applicable rules during import."
       #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
       @extension("x-ms-list-continuation-token", true)
@@ -160,28 +170,25 @@ interface Containers {
     OpenAI.ContainerFileListResource
   >;
 
-  /**
-   * Creates a container file multipart from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/byos" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a container file multipart")
+  @doc("Creates a Container File You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.")
+  @summary("Create a container file")
   @sharedRoute
   @route("{container_id}/files")
   @post
-  @extension("x-ms-request-body-description-override", "The request body.")
-  createContainerFileMultipart is OpenAIOperation<
+  CreateContainerFileMultipart is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The content type of the request body. */
+      /** The request content type. */
       @header
       contentType: "multipart/form-data";
 
@@ -192,22 +199,19 @@ interface Containers {
     OpenAI.ContainerFileResource
   >;
 
-  /**
-   * Creates a container file json from the supplied request.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Create a container file json")
+  @doc("Creates a Container File You can send either a multipart/form-data request with the raw file content, or a JSON request with a file ID.")
+  @summary("Create a container file")
   @sharedRoute
   @route("{container_id}/files")
   @post
-  @extension("x-ms-request-body-description-override", "The request body.")
-  createContainerFileJson is OpenAIOperation<
+  CreateContainerFileJson is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
@@ -219,84 +223,75 @@ interface Containers {
     OpenAI.ContainerFileResource
   >;
 
-  /**
-   * Deletes a container file by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Delete a container file")
+  @doc("Deletes Container File.")
+  @summary("Delete Container File")
   @route("{container_id}/files/{file_id}")
   @delete
-  deleteContainerFile is OpenAIOperation<
+  DeleteContainerFile is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The ID of the file. */
+      /** The file id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },
     TypeSpec.Http.OkResponse
   >;
 
-  /**
-   * Retrieves a container file by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Get a container file")
+  @doc("Retrieves Container File.")
+  @summary("Get Container File")
   @route("{container_id}/files/{file_id}")
   @get
-  retrieveContainerFile is OpenAIOperation<
+  RetrieveContainerFile is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The ID of the file. */
+      /** The file id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },
     OpenAI.ContainerFileResource
   >;
 
-  /**
-   * Retrieves a container file content by its identifier.
-   */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "OpenAI response templates may intentionally model empty success responses."
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Auto-suppressed warnings non-applicable rules during import."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Auto-suppressed warnings non-applicable rules during import."
-  @summary("Get a container file content")
+  @doc("Retrieves Container File Content.")
+  @summary("Get Container File Content")
   @route("{container_id}/files/{file_id}/content")
   @get
-  retrieveContainerFileContent is OpenAIOperation<
+  RetrieveContainerFileContent is OpenAIOperation<
     {
-      /** The ID of the container. */
+      /** The container id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
       @path
       container_id: string;
 
-      /** The ID of the file. */
+      /** The file id path parameter. */
       #suppress "@azure-tools/typespec-azure-core/casing-style" "Auto-suppressed warnings non-applicable rules during import."
-      @extension("x-ms-description-override", "The ID of the file.")
       @path
       file_id: string;
     },
