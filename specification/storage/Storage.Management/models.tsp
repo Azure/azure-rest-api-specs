@@ -6759,7 +6759,7 @@ model StorageDataShareAsset {
  * The kind of context cache account, determining storage topology.
  */
 @added(Versions.v2026_06_01)
-union AccountKind {
+union ContextCacheAccountKind {
   /** Single-region storage account */
   Regional: "Regional",
 
@@ -6813,7 +6813,7 @@ union ContextCacheProvisioningState {
 model ContextCacheProperties {
   /** The kind of account determining storage topology. */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  accountKind: AccountKind;
+  accountKind: ContextCacheAccountKind;
 
   /** Account description. */
   @maxLength(250)
@@ -6875,7 +6875,7 @@ model ContextCacheContainerProperties {
   /** The Time to Live (TTL) in days between 1-30 days for this container, after which it will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
   @minValue(1)
   @maxValue(30)
-  timeToLive?: int32 = 1;
+  timeToLive?: int32;
 
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)

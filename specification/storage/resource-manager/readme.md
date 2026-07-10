@@ -72,6 +72,11 @@ directive:
     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/dataShares/{dataShareName}"].patch.parameters[5].schema.properties.properties
     suppress: PatchBodyParametersSchema
     reason: We have used kind property as discriminator to support polymorphic resource and during patch also need to pass discriminator to allow patch on certain polymorphic resource type property.
+
+  - where:
+    - $.definitions["Azure.Core.uuid"].format
+    suppress: GuidUsage
+    reason: The uuid definition is emitted into the OpenAPI by the TypeSpec autorest emitter as an inlined form of the standard ARM common-types Encryption type (Encryption -> CustomerManagedKeyEncryption -> KeyEncryptionKeyIdentity.federatedClientId). It is a platform-standard common-types field, not a service-authored GUID, and the Context Cache API surface introduces no GUID parameter of its own.
 ```
 
 ### Tag: package-2026-04

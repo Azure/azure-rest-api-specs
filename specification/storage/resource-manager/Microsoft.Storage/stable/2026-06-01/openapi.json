@@ -8760,36 +8760,6 @@
         ]
       }
     },
-    "AccountKind": {
-      "type": "string",
-      "description": "The kind of context cache account, determining storage topology.",
-      "enum": [
-        "Regional",
-        "DataZone",
-        "Global"
-      ],
-      "x-ms-enum": {
-        "name": "AccountKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "Single-region storage account"
-          },
-          {
-            "name": "DataZone",
-            "value": "DataZone",
-            "description": "Multi-region within a data zone"
-          },
-          {
-            "name": "Global",
-            "value": "Global",
-            "description": "All regions with global distribution"
-          }
-        ]
-      }
-    },
     "AccountLimits": {
       "type": "object",
       "description": "Maximum provisioned storage, IOPS, bandwidth and number of file shares limits for the storage account.",
@@ -10047,6 +10017,36 @@
         }
       ]
     },
+    "ContextCacheAccountKind": {
+      "type": "string",
+      "description": "The kind of context cache account, determining storage topology.",
+      "enum": [
+        "Regional",
+        "DataZone",
+        "Global"
+      ],
+      "x-ms-enum": {
+        "name": "ContextCacheAccountKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "Single-region storage account"
+          },
+          {
+            "name": "DataZone",
+            "value": "DataZone",
+            "description": "Multi-region within a data zone"
+          },
+          {
+            "name": "Global",
+            "value": "Global",
+            "description": "All regions with global distribution"
+          }
+        ]
+      }
+    },
     "ContextCacheContainer": {
       "type": "object",
       "description": "A container resource within a Context Cache",
@@ -10115,7 +10115,6 @@
           "type": "integer",
           "format": "int32",
           "description": "The Time to Live (TTL) in days between 1-30 days for this container, after which it will be automatically deleted. If not specified at creation time, it defaults to 1 day.",
-          "default": 1,
           "minimum": 1,
           "maximum": 30
         },
@@ -10184,7 +10183,7 @@
       "description": "Details of the Context Cache.",
       "properties": {
         "accountKind": {
-          "$ref": "#/definitions/AccountKind",
+          "$ref": "#/definitions/ContextCacheAccountKind",
           "description": "The kind of account determining storage topology.",
           "x-ms-mutability": [
             "read",
