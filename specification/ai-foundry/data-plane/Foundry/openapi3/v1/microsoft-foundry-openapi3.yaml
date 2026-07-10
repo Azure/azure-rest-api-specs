@@ -39418,37 +39418,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
-    VoiceAudioMetadata:
-      type: object
-      properties:
-        role:
-          type: string
-          description: The role the audio belongs to, e.g. `user` or `agent`.
-        codec:
-          type: string
-          description: The audio codec.
-        sample_rate:
-          type: integer
-          format: int32
-          description: The sample rate in Hz.
-        channels:
-          type: integer
-          format: int32
-          description: The number of audio channels.
-        start_offset_ms:
-          type: integer
-          format: int32
-          description: The offset from the session start at which this segment begins, in milliseconds.
-        duration_ms:
-          type: integer
-          format: int32
-          description: The duration of the audio segment, in milliseconds.
-      description: |-
-        Non-sensitive audio metadata for a message item (a Foundry extension). Exposes only playback-relevant
-        facts; internal storage identifiers (file id, container, host, owner, provider) are never surfaced.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
     VoiceAudioOutputConfig:
       type: object
       properties:
@@ -40104,10 +40073,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceMetrics'
           description: Per-turn voice metrics (Foundry extension).
-        audio_metadata:
-          allOf:
-            - $ref: '#/components/schemas/VoiceAudioMetadata'
-          description: Non-sensitive audio metadata for the turn (Foundry extension).
       allOf:
         - $ref: '#/components/schemas/VoiceConversationItem'
       description: A message item (user, assistant, or system).

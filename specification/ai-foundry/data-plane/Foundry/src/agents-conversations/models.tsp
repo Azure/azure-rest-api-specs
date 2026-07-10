@@ -317,31 +317,6 @@ model VoiceMetrics {
   interrupt_offset_ms?: int32;
 }
 
-@doc("""
-  Non-sensitive audio metadata for a message item (a Foundry extension). Exposes only playback-relevant
-  facts; internal storage identifiers (file id, container, host, owner, provider) are never surfaced.
-  """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceAudioMetadata {
-  @doc("The role the audio belongs to, e.g. `user` or `agent`.")
-  role?: string;
-
-  @doc("The audio codec.")
-  codec?: string;
-
-  @doc("The sample rate in Hz.")
-  sample_rate?: int32;
-
-  @doc("The number of audio channels.")
-  channels?: int32;
-
-  @doc("The offset from the session start at which this segment begins, in milliseconds.")
-  start_offset_ms?: int32;
-
-  @doc("The duration of the audio segment, in milliseconds.")
-  duration_ms?: int32;
-}
-
 @doc("A single file search result entry.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceFileSearchResult {
@@ -415,9 +390,6 @@ model VoiceMessageItem extends VoiceConversationItem {
 
   @doc("Per-turn voice metrics (Foundry extension).")
   voice_metrics?: VoiceMetrics;
-
-  @doc("Non-sensitive audio metadata for the turn (Foundry extension).")
-  audio_metadata?: VoiceAudioMetadata;
 }
 
 @doc("A function call request item.")
