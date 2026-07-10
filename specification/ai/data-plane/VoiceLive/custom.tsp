@@ -149,11 +149,13 @@ model ResponseSession is RequestSession {
   id?: string;
 
   /**
-   * Expiration timestamp for the session, in seconds since epoch. This value is set by
-   * the server and cannot be changed with `session.update`.
+   * Expiration time for the session, represented as seconds since
+   * 1970-01-01T00:00:00Z (the Unix epoch). This value is set by the server and cannot
+   * be changed with `session.update`.
    */
   @added(Versions.v2026_07_15)
-  expires_at?: int64;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  expires_at?: utcDateTime;
 }
 
 /** Supported OpenAI voice names (string enum). */

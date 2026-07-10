@@ -3908,8 +3908,8 @@
         },
         "expires_at": {
           "type": "integer",
-          "format": "int64",
-          "description": "Expiration timestamp for the session, in seconds since epoch. This value is set by\nthe server and cannot be changed with `session.update`."
+          "format": "unixtime",
+          "description": "Expiration time for the session, represented as seconds since\n1970-01-01T00:00:00Z (the Unix epoch). This value is set by the server and cannot\nbe changed with `session.update`."
         }
       }
     },
