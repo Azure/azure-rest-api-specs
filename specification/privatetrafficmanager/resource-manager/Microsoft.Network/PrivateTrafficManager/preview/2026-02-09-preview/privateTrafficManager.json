@@ -2085,25 +2085,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "CustomHeader": {
       "type": "object",
       "description": "Custom header name and value.",
@@ -2472,18 +2453,56 @@
     },
     "PrivateTrafficManagerProfileUpdate": {
       "type": "object",
-      "description": "Class representing a Private Traffic Manager profile.",
+      "description": "The type used for update operations of the PrivateTrafficManagerProfile.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/ProfileProperties",
-          "description": "The properties of the Private Traffic Manager profile."
+          "$ref": "#/definitions/PrivateTrafficManagerProfileUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "PrivateTrafficManagerProfileUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the PrivateTrafficManagerProfile.",
+      "properties": {
+        "customTopologyMapMode": {
+          "$ref": "#/definitions/CustomTopologyMapMode",
+          "description": "The mode for custom topology map of the Private Traffic Manager profile."
+        },
+        "dnsConfig": {
+          "$ref": "#/definitions/DnsConfig",
+          "description": "The DNS related configuration properties of the Private Traffic Manager"
+        },
+        "topologyMapId": {
+          "$ref": "#/definitions/TopologyMapId",
+          "description": "The ARM resource ID of the topology map associated with this Private Traffic Manager profile."
+        },
+        "profileStatus": {
+          "$ref": "#/definitions/ProfileStatus",
+          "description": "The status of the Private Traffic Manager profile."
+        },
+        "trafficRoutingMethod": {
+          "$ref": "#/definitions/TrafficRoutingMethod",
+          "description": "The traffic routing method of the Private Traffic Manager profile."
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "The list of endpoints in the Private Traffic Manager profile.",
+          "items": {
+            "$ref": "#/definitions/ProfileEndpoint"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
-      ]
+      }
     },
     "ProbeConfig": {
       "type": "object",
@@ -3028,18 +3047,37 @@
     },
     "TopologyMapUpdate": {
       "type": "object",
-      "description": "Class representing a Topology Map.",
+      "description": "The type used for update operations of the TopologyMap.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/TopologyMapProperties",
-          "description": "The properties of the Topology Map."
+          "$ref": "#/definitions/TopologyMapUpdateProperties",
+          "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "TopologyMapUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the TopologyMap.",
+      "properties": {
+        "sites": {
+          "type": "array",
+          "description": "The list of Sites in the Topology Map.",
+          "items": {
+            "$ref": "#/definitions/Site"
+          }
+        },
+        "catchAllSiteName": {
+          "type": "string",
+          "description": "The Name of the CatchAll site. There is only one CatchAll site in a TopologyMap"
         }
-      ]
+      }
     },
     "TrafficRoutingMethod": {
       "type": "string",

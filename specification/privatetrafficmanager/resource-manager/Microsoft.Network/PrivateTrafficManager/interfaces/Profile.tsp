@@ -42,9 +42,13 @@ interface Profiles {
   delete is ArmResourceDeleteWithoutOkAsync<PrivateTrafficManagerProfile>;
 
   @doc("Updates a Traffic Manager profile.")
-  update is ArmResourcePatchAsync<
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
     PrivateTrafficManagerProfile,
-    ProfileProperties
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      PrivateTrafficManagerProfile,
+      ProfileProperties
+    >
   >;
 
   @doc("Lists all Private Traffic Manager profiles within a resource group.")

@@ -2,7 +2,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/http";
 
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.Network;
@@ -27,7 +29,14 @@ interface TopologyMaps {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<TopologyMap>;
 
   @doc("Updates a Topology Map.")
-  update is ArmResourcePatchAsync<TopologyMap, TopologyMapProperties>;
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<
+    TopologyMap,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      TopologyMap,
+      TopologyMapProperties
+    >
+  >;
 
   @doc("Deletes a Topology Map.")
   delete is ArmResourceDeleteWithoutOkAsync<TopologyMap>;
