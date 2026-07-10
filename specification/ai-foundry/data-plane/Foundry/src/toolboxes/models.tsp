@@ -79,6 +79,7 @@ alias ToolboxBrowserAutomationPreviewToolType = "browser_automation_preview";
 alias ToolboxReminderPreviewToolType = "reminder_preview";
 alias ToolboxWorkIQPreviewToolType = "work_iq_preview";
 alias ToolboxFabricIQPreviewToolType = "fabric_iq_preview";
+alias ToolboxWebIQPreviewToolType = "web_iq_preview";
 alias ToolboxSearchPreviewToolType = "toolbox_search_preview";
 
 /**
@@ -96,6 +97,7 @@ union ToolboxToolType {
   reminder_preview: ToolboxReminderPreviewToolType,
   work_iq_preview: ToolboxWorkIQPreviewToolType,
   fabric_iq_preview: ToolboxFabricIQPreviewToolType,
+  web_iq_preview: ToolboxWebIQPreviewToolType,
   toolbox_search_preview: ToolboxSearchPreviewToolType,
 }
 
@@ -216,6 +218,16 @@ model FabricIQPreviewToolboxTool extends ToolboxTool {
   type: ToolboxFabricIQPreviewToolType;
 
   ...ToolFields<FabricIQPreviewTool>;
+}
+
+/**
+ * A WebIQ tool stored in a toolbox.
+ */
+@extension("x-ms-foundry-meta", PreviewTool)
+model WebIQPreviewToolboxTool extends ToolboxTool {
+  type: ToolboxWebIQPreviewToolType;
+
+  ...ToolFields<WebIQPreviewTool>;
 }
 
 /**

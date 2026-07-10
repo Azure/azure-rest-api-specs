@@ -20,6 +20,7 @@ namespace Azure.AI.Projects {
     memory_search_preview: "memory_search_preview",
     work_iq_preview: "work_iq_preview",
     fabric_iq_preview: "fabric_iq_preview",
+    web_iq_preview: "web_iq_preview",
     toolbox_search_preview: "toolbox_search_preview",
   }
 
@@ -853,6 +854,40 @@ namespace Azure.AI.Projects {
 
     /**
      * (Optional) The URL of the FabricIQ MCP server. If not provided, the URL from the project connection will be used.
+     */
+    server_url?: url;
+
+    /**
+     * (Optional) Whether the agent requires approval before executing actions. Default is always.
+     */
+    #suppress "@azure-tools/typespec-autorest/union-unsupported" "require_approval uses OpenAI union type."
+    #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matching OpenAI MCP tool pattern."
+    require_approval?: OpenAI.MCPToolRequireApproval | string | null = "always";
+
+  }
+
+  /**
+   * A WebIQ server-side tool.
+   */
+  @extension("x-ms-foundry-meta", PreviewTool)
+  model WebIQPreviewTool extends OpenAI.Tool {
+    /**
+     * The object type, which is always 'web_iq_preview'.
+     */
+    type: "web_iq_preview";
+
+    /**
+     * The ID of the WebIQ project connection.
+     */
+    project_connection_id: string;
+
+    /**
+     * (Optional) The label of the WebIQ MCP server to connect to.
+     */
+    server_label?: string;
+
+    /**
+     * (Optional) The URL of the WebIQ MCP server. If not provided, the URL from the project connection will be used.
      */
     server_url?: url;
 
