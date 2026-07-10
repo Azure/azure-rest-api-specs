@@ -1,10 +1,16 @@
-# cspell:words jsquire alzimmermsft xirzec kashifkhan maorleger jhendrixMSFT ArthurMa1978
+# cspell:words jsquire alzimmermsft xirzec kashifkhan maorleger jhendrixMSFT ArthurMa1978 samvaity praveenkuttappan
 # Namespace Approvers Configuration
 # This file defines who can approve namespace changes per language.
 # To update, submit a PR to this file. In the future, this may be
 # synced automatically from ARCHITECTS files in each language repo.
 
 data-plane:
+  # Global approvers can approve any language as a fallback.
+  # Added while the system is new so that bug-fix approvals do not block PRs.
+  # Remove once per-language approver coverage is reliable.
+  global:
+    - samvaity
+    - praveenkuttappan
   dotnet:
     - jsquire
     - m-nash
