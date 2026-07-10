@@ -201,7 +201,6 @@ union QuotaUsageStatus {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_01)
 union QuotaScopeType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Regional quota scope"
@@ -2336,7 +2335,6 @@ model Usage {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_01)
   scopeType?: QuotaScopeType | null;
 
   /**
@@ -2348,7 +2346,6 @@ model Usage {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_01)
   scopeId?: string | null;
 }
 
@@ -2873,7 +2870,6 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_01)
   scopeId?: string | null;
 
   /**
@@ -2885,7 +2881,6 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_01)
   scopeType?: QuotaScopeType | null;
 }
 
