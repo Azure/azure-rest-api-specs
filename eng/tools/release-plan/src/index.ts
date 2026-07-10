@@ -151,6 +151,7 @@ export {
   ensureReleasePlan,
   getApiReleaseType,
   getNextMonthTarget,
+  getReleasePlanById,
   getSdkReleaseType,
   runAzdskCommand,
 } from "./release-plan.ts";

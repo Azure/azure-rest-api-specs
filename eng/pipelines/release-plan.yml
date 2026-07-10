@@ -38,11 +38,13 @@ stages:
           - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
 
           - task: AzureCLI@2
-            displayName: "Get Release Plan details"
+            displayName: "Create or Get Release Plan details"
             condition: succeeded()
             continueOnError: true
             env:
               GH_TOKEN: $(GH_TOKEN)
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
             inputs:
               azureSubscription: opensource-api-connection
               scriptType: pscore
@@ -80,7 +82,7 @@ stages:
                   $nodeArgs += @("--commit-sha", $commitSha)
                 }
 
-                npm exec --no -- release-plan @nodeArgs
+                npm exec --no -- create-release-plan @nodeArgs
 
           - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
@@ -98,3 +100,51 @@ stages:
               targetPath: "$(Build.ArtifactStagingDirectory)/release-plan"
               artifactName: "release-plan-details"
               publishLocation: "pipeline"
+
+  - stage: GenerateSdk
+    displayName: "Stage : Generate SDK"
+    dependsOn: ReleasePlanCreation
+    condition: succeeded()
+    jobs:
+      - job: GenerateSdk
+        displayName: Generate SDK from Release Plan
+        pool:
+          name: $(LINUXPOOL)
+          vmImage: $(LINUXVMIMAGE)
+
+        variables:
+          - template: /eng/pipelines/templates/variables/globals.yml
+          - template: /eng/pipelines/templates/variables/image.yml
+
+        steps:
+          - checkout: self
+            fetchDepth: 2
+
+          - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
+          - template: /eng/pipelines/templates/steps/npm-install.yml
+
+          - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
+
+          - task: DownloadPipelineArtifact@2
+            displayName: "Download release plan details artifact"
+            inputs:
+              buildType: "current"
+              artifactName: "release-plan-details"
+              targetPath: "$(Pipeline.Workspace)/release-plan-details"
+
+          - task: AzureCLI@2
+            displayName: "Parse release plan and conditionally generate SDKs"
+            env:
+              GH_TOKEN: $(GH_TOKEN)
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $artifactPath = "$(Pipeline.Workspace)/release-plan-details/release-plan.json"
+                npm exec --no -- generate-sdk --artifact-file $artifactPath --azsdk-path "$(AZSDK)"

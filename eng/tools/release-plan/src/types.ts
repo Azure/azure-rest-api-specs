@@ -69,6 +69,8 @@ export interface OctokitLike {
     pulls: {
       get: (params: { owner: string; repo: string; pull_number: number }) => Promise<{
         data: {
+          state?: string;
+          merged_at?: string | null;
           labels?: Array<{ name: string }>;
         };
       }>;

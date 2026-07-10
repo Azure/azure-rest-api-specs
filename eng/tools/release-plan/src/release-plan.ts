@@ -229,6 +229,39 @@ export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResu
 }
 
 /**
+ * Retrieves release plan details by release plan id.
+ * @param releasePlanId Release plan id
+ * @param azsdkPath Optional full path to the azsdk executable
+ * @returns Parsed release plan object
+ * @throws Error if command fails or output cannot be parsed
+ */
+export function getReleasePlanById(releasePlanId: string, azsdkPath?: string): ReleasePlanData {
+  const trimmedId = releasePlanId.trim();
+  if (!trimmedId) {
+    throw new Error("releasePlanId is required.");
+  }
+
+  const result = runAzdskCommand(
+    ["release-plan", "get", "--release-plan-id", trimmedId, "--output", "json"],
+    azsdkPath,
+  );
+
+  if (result.exitCode !== 0) {
+    throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(result.stdout);
+    if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) {
+      throw new Error(`Expected JSON object from azsdk output: ${result.stdout}`);
+    }
+    return parsed as ReleasePlanData;
+  } catch {
+    throw new Error(`Failed to parse JSON from azsdk output: ${result.stdout}`);
+  }
+}
+
+/**
  * Computes the target release month as "Month YYYY" for next month.
  * @returns Target release month string (e.g., "July 2026")
  */
