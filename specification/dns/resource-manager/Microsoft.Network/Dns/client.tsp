@@ -5,6 +5,7 @@ using Microsoft.Network;
 
 @@clientName(Microsoft.Network, "DnsManagementClient", "javascript");
 @@clientName(Microsoft.Network, "DnsManagementClient", "java");
+@@clientName(Microsoft.Network, "DnsManagementClient", "python");
 
 @@clientName(Microsoft.Network.RecordSetProperties.TTL, "ttl", "java");
 
