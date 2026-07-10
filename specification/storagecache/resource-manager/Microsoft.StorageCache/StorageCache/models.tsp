@@ -2480,6 +2480,14 @@ model RebalanceJobProperties {
   expansionJobName?: string;
 
   /**
+   * The percentage of rebalance job completion.
+   */
+  @visibility(Lifecycle.Read)
+  @maxValue(100)
+  @minValue(0)
+  percentComplete?: float32;
+
+  /**
    * The status of the rebalance job.
    */
   @visibility(Lifecycle.Read)
