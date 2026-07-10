@@ -46,11 +46,11 @@ union RpSkuTier {
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
 model OverageSettings {
   @doc("The overage state for the capacity.")
-  state: OverageSettingsState;
+  state?: OverageSettingsState;
 
   @doc("The threshold in Capacity Unit Hours for enabling overage.")
   @minValue(0)
-  thresholdCapacityUnitHours: int32;
+  thresholdCapacityUnitHours?: int32;
 }
 
 @doc("The overage state for the Fabric capacity resource.")
