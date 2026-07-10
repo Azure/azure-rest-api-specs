@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -102,7 +102,10 @@ interface Skills {
       @path
       name: SkillName;
 
+      /** The content type of the request body. */
       @header contentType: "multipart/form-data";
+
+      /** The multipart request content. */
       @multipartBody content: CreateSkillVersionFromFilesBody;
     } & SkillsPreviewHeader,
     SkillVersion

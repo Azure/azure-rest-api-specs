@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "sqlServerInstanceName": "testsqlserver",
+    "sqlServerInstanceTargetRecommendationReportsRequest": {
+      "reportOffset": 0,
+      "sectionOffset": 0
+    },
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobStatus": "Succeeded",
+        "nextReportOffset": 0,
+        "nextSectionOffset": 9,
+        "reports": [
+          {
+            "createdTime": "2026-02-22T08:04:06.8826500Z",
+            "reportId": "b7c1e6f3-4f8d-4c9c-a2a2-8c3b8b2f9a21",
+            "sections": [
+              {
+                "type": "SqlMiTargetRecommendationPerInstance",
+                "data": "{jsonData}",
+                "databaseName": "",
+                "isCompressed": false
+              },
+              {
+                "type": "RequirementsPerInstance",
+                "data": "{jsonData}",
+                "databaseName": "",
+                "isCompressed": false
+              },
+              {
+                "type": "SqlVmTargetRecommendationPerInstance",
+                "data": "{jsonData}",
+                "databaseName": "",
+                "isCompressed": false
+              },
+              {
+                "type": "RequirementsPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database1",
+                "isCompressed": false
+              },
+              {
+                "type": "SqlDbTargetRecommendationPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database1",
+                "isCompressed": false
+              },
+              {
+                "type": "RequirementsPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database2",
+                "isCompressed": false
+              },
+              {
+                "type": "SqlDbTargetRecommendationPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database2",
+                "isCompressed": false
+              },
+              {
+                "type": "RequirementsPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database3",
+                "isCompressed": false
+              },
+              {
+                "type": "SqlDbTargetRecommendationPerDatabase",
+                "data": "{jsonData}",
+                "databaseName": "database3",
+                "isCompressed": false
+              }
+            ]
+          }
+        ],
+        "totalReportCount": 1
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2026-03-01-preview",
+        "Location": "https://management.azure.com/providers/Microsoft.AzureArcData/locations/eastus2euap/operationStatuses/5abb198d-cc4b-46bd-9e6c-e3f0ba22015d?api-version=2026-03-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "SqlServerInstances_GetTargetRecommendationReports",
+  "title": "Retrieves Arc SQL Server instance target recommendation reports"
+}

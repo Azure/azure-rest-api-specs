@@ -32,4 +32,8 @@ interface BlocklistClient {
   listTextBlocklists is ContentSafety.TextBlocklists.listTextBlocklists;
   removeBlocklistItems is ContentSafety.TextBlocklists.removeBlocklistItems;
 }
-@@clientName(Azure.Core.Foundations.ResourceBody.resource, "options");
+@@clientName(
+  Azure.Core.Foundations.ResourceBody.resource,
+  "options",
+  "!autorest"
+);

@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -38,10 +38,10 @@ interface Datasets
     PendingUploadResponse
   >;
 
+  /** Retrieves the SAS credential to access the storage account associated with a dataset version. */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @summary("Get dataset credentials")
-  @doc("Gets the SAS credential to access the storage account associated with a Dataset version.")
   @post
   @Rest.action("credentials")
   @Rest.actionSeparator("/")

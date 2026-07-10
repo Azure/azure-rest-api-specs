@@ -372,6 +372,10 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
   /** The pull policy of the image. */
   imagePullPolicy?: AkriConnectorsImagePullPolicy;
 
+  /** Optional readiness probe for the connector container. When set, the operator injects this into the pod spec and uses the pod's `Ready` condition for health reporting instead of crash-based detection. */
+  @added(Versions.`2026-07-01`)
+  readinessProbe?: AkriConnectorTemplateReadinessProbe;
+
   /** The number of replicas to be set up. */
   replicas?: int32;
 
@@ -380,6 +384,35 @@ model AkriConnectorTemplateRuntimeImageConfigurationSettings {
 
   /** Optional image tag or digest. If not specified, the default tag is `latest`. */
   tagDigestSettings?: AkriConnectorsTagDigestSettings;
+}
+
+/** AkriConnectorTemplateReadinessProbe properties. Defines a readiness probe for the connector container. */
+@added(Versions.`2026-07-01`)
+model AkriConnectorTemplateReadinessProbe {
+  /** Exec specifies a command to execute in the container. */
+  exec?: AkriConnectorTemplateExecAction;
+
+  /** Minimum consecutive failures for the probe to be considered failed after having succeeded. */
+  failureThreshold?: int32;
+
+  /** Number of seconds after the container has started before the probe is initiated. */
+  initialDelaySeconds?: int32;
+
+  /** How often (in seconds) to perform the probe. */
+  periodSeconds?: int32;
+
+  /** Minimum consecutive successes for the probe to be considered successful after having failed. */
+  successThreshold?: int32;
+
+  /** Number of seconds after which the probe times out. */
+  timeoutSeconds?: int32;
+}
+
+/** AkriConnectorTemplateExecAction properties. Describes a command to execute in a container. */
+@added(Versions.`2026-07-01`)
+model AkriConnectorTemplateExecAction {
+  /** The command to execute inside the container. Exit status of 0 is treated as healthy, non-zero is unhealthy. */
+  command: string[];
 }
 
 /** AkriConnectorTemplatePersistentVolumeClaim properties. */

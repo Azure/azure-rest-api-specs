@@ -50,7 +50,7 @@ stages:
     variables:
       - template: /eng/pipelines/templates/variables/image.yml
       - name: NodeVersion
-        value: '22.x'
+        value: '24.x'
       - name: PythonVersion
         value: '3.13'
       - name: PipelineArtifactsName
@@ -64,8 +64,6 @@ stages:
       os: linux
 
     steps:
-      - checkout: none
-
       - pwsh: |
           $tspConfigPathPattern = '^specification\/([^\/]+\/)+tspconfig\.yaml$'
           $readmePathPattern = '^specification\/([^\/]+\/){2,}readme\.md$'
@@ -178,6 +176,22 @@ stages:
             Write-Host "Will use commitish for SDK repo checkout: '$checkoutCommitish'"
           displayName: "Validate and update SDK repository commitish"
 
+      # In the internal '-pr' flow the spec/SDK repos are private, so the sparse-checkout below
+      # needs a GitHub App token (GH_TOKEN) minted by login-to-github. That login script lives in
+      # this repo, so it must be available first. Use 'checkout: self' (authenticated by the
+      # pipeline's GitHub service connection) at the default path so System.DefaultWorkingDirectory
+      # stays at $(Pipeline.Workspace)/s; sparse-checkout keeps the footprint to eng/common/scripts.
+      - ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
+        - checkout: self
+          displayName: 'Checkout eng/common/scripts for GitHub login'
+          sparseCheckoutDirectories: eng/common/scripts
+          fetchDepth: 1
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+          parameters:
+            ScriptDirectory: $(System.DefaultWorkingDirectory)/eng/common/scripts
+      - ${{ else }}:
+        - checkout: none
+
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           Paths:
@@ -195,7 +209,7 @@ stages:
               WorkingDirectory: $(SdkRepoDirectory)
           SkipCheckoutNone: true
           ${{ if and(eq(variables['System.TeamProject'], 'internal'), endsWith(variables['Build.Repository.Name'], '-pr')) }}:
-            TokenToUseForAuth: $(azuresdk-github-pat)
+            TokenToUseForAuth: $(GH_TOKEN)
             PreserveAuthToken: true
 
       - task: UseNode@1
@@ -290,6 +304,10 @@ stages:
           CustomCondition: and(succeededOrFailed(), ne(variables['StagedArtifactsFolder'], ''))
 
       - ${{ if and(eq(variables['System.TeamProject'], 'internal'), eq(parameters.CreatePullRequest, true), ne(variables['Build.Reason'], 'PullRequest')) }}:
+        - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+          parameters:
+            ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+
         - pwsh: |
             $sdkPrBranchName = "$(PrBranch)-$(Build.BuildId)"
             $sdkRepoBranch = '${{ parameters.SdkRepoBranch }}'
@@ -325,6 +343,7 @@ stages:
             TargetRepoName: $(SdkRepoName)
             WorkingDirectory: $(SdkRepoDirectory)
             ScriptDirectory: $(SdkRepoDirectory)/eng/common/scripts
+            AuthToken: $(GH_TOKEN)
 
         - ${{ if eq(parameters.ForceCreateEvenWithFailures, true) }}:
           - pwsh: |
@@ -348,7 +367,7 @@ stages:
               -BaseBranch "main"
               -PROwner "$(SdkRepoOwner)"
               -PRBranch "$(SdkPullRequestSourceBranch)"
-              -AuthToken "$(azuresdk-github-pat)"
+              -AuthToken "$(GH_TOKEN)"
               -PRTitle "$(PrTitle)-generated-from-$(Build.DefinitionName)-$(Build.BuildId)"
               -PRBody "$(GeneratedSDKInformation)  $(ReleasePlanInfo)"
               -OpenAsDraft $${{ not(endsWith(parameters.TriggerSource, '-release')) }}

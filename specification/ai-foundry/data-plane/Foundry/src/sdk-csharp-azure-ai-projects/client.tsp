@@ -1,4 +1,5 @@
 import "../common/service.tsp";
+import "../sdk-common/error.default.tsp";
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../indexes/routes.tsp";
@@ -13,7 +14,9 @@ import "../schedules/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../routines/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
-import "../error.range.tsp";
+import "../toolboxes/models.tsp";
+import "../agents/models.tsp";
+import "../skills/models.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -32,6 +35,8 @@ namespace Azure.AI.Projects;
 @@usage(MemoryStoreUpdateCompletedResult, Usage.output);
 @@access(MemoryStoreUpdateCompletedResult, Access.public);
 @@clientName(MemoryStoreUpdateCompletedResult, "MemoryUpdateResultDetails");
+
+@@clientName(JobStatus, "ProjectsJobStatus");
 
 @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
 
@@ -142,24 +147,37 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 // Evaluators sub‐client
 // --------------------------------------------------------------------------------
+@@clientName(Evaluators.getCredentials, "GetCredential");
+@@access(Evaluators.getCredentials, Access.internal);
+@@access(Evaluators.startPendingUpload, Access.internal);
+
 @@access(EvaluatorDefinitionType, Access.public);
 
 // Rename Target from openai-evaluations to EvaluationTarget.
 @@clientName(Target, "EvaluationTarget", "csharp");
-
 @@clientName(EvalResult.passed, "IsPassed", "csharp");
 @@clientName(EvalRunResultComparison.evaluator, "EvaluatorName", "csharp");
 @@clientName(EvalRunResultComparison.metric, "MetricName", "csharp");
+@@clientName(Dimension.always_applicable, "IsAlwaysApplicable");
 
 @@alternateType(EvaluationScheduleTask.evalRun, unknown, "csharp");
-
-@@clientName(InsightSummary.method, "MethodName", "csharp");
 
 @@clientName(RedTeam.numTurns, "TurnCount", "csharp");
 @@clientName(RedTeam.simulationOnly, "IsSimulationOnly", "csharp");
 
 @@clientName(TaxonomySubCategory.enabled, "IsEnabled", "csharp");
 
+// --------------------------------------------------------------------------------
+// Insights stores sub‐client
+// --------------------------------------------------------------------------------
+@@clientName(InsightSummary.method, "MethodName", "csharp");
+@@clientName(Insight, "ProjectsInsight");
+
+// --------------------------------------------------------------------------------
+// Memory stores sub‐client
+// --------------------------------------------------------------------------------
+
+@@clientName(DeleteMemoryResponse, "MemoryDeletionResult", "csharp");
 @@clientName(DeleteMemoryStoreResponse.deleted, "IsDeleted", "csharp");
 
 @@clientName(MemoryStoreDefaultOptions.chat_summary_enabled,
@@ -170,6 +188,10 @@ namespace Azure.AI.Projects;
   "IsUserProfileEnabled",
   "csharp"
 );
+@@clientName(MemoryStoreDefaultOptions.procedural_memory_enabled,
+  "IsProceduralMemoryEnabled",
+  "csharp"
+);
 
 @@clientName(MemoryStoreDeleteScopeResponse.deleted, "IsDeleted", "csharp");
 // --------------------------------------------------------------------------------
@@ -177,6 +199,7 @@ namespace Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@clientName(Azure.Core.Foundations.ResourceBody.resource, "schedule");
+@@clientName(Schedule, "ProjectsSchedule");
 
 @@alternateType(RecurrenceTrigger.startTime, utcDateTime, "csharp");
 @@alternateType(RecurrenceTrigger.endTime, utcDateTime, "csharp");
@@ -195,6 +218,10 @@ namespace Azure.AI.Projects;
 @@access(DataGenerationJobs.delete, Access.internal);
 
 @@clientName(DataGenerationJobType, "DataGenerationJobKind");
+@@clientName(TracesDataGenerationJobSource.end_time, "EndAt");
+@@clientName(TracesDataGenerationJobSource.start_time, "StartAt");
+@@clientName(TracesEvaluatorGenerationJobSource.end_time, "EndAt");
+@@clientName(TracesEvaluatorGenerationJobSource.start_time, "StartAt");
 
 // --------------------------------------------------------------------------------
 // EvaluatorGenerationJobs sub‐client
@@ -204,6 +231,10 @@ namespace Azure.AI.Projects;
 @@access(EvaluatorGenerationJobs.create, Access.internal);
 @@access(EvaluatorGenerationJobs.cancel, Access.internal);
 @@access(EvaluatorGenerationJobs.delete, Access.internal);
+
+@@clientName(EvaluatorGenerationArtifacts.dataset, "Reference");
+@@clientName(EvaluatorGenerationArtifacts.kinds, "DatasetRowKinds");
+@@clientName(EvaluatorGenerationInputs.evaluator_description, "Description");
 
 // --------------------------------------------------------------------------------
 // Models sub‐client
@@ -222,16 +253,33 @@ namespace Azure.AI.Projects;
 @@usage(UpdateModelVersionRequest, Usage.input | Usage.output);
 @@access(UpdateModelVersionRequest, Access.public);
 @@clientName(UpdateModelVersionRequest, "UpdateModelVersionOptions");
+@@clientName(ModelPendingUploadRequest, "ModelPendingUploadContent");
+@@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
 
 // --------------------------------------------------------------------------------
 // Routines sub‐client
 // --------------------------------------------------------------------------------
 @@clientName(Routines, "AIProjectRoutines");
-@@clientName(Routine, "ProjectsRoutine");
 @@access(Routines.createOrUpdateRoutine, Access.internal);
+@@clientName(Routines.createOrUpdateRoutine, "CreateOrUpdate");
 @@access(Routines.getRoutine, Access.internal);
+@@clientName(Routines.getRoutine, "Get");
 @@access(Routines.enableRoutine, Access.internal);
+@@clientName(Routines.enableRoutine, "Enable");
 @@access(Routines.disableRoutine, Access.internal);
+@@clientName(Routines.disableRoutine, "Disable");
 @@access(Routines.deleteRoutine, Access.internal);
-@@clientName(Routines.dispatchRoutineAsync, "dispatchAsyncRoutine", "csharp");
+@@clientName(Routines.deleteRoutine, "Delete");
+@@clientName(Routines.dispatchRoutineAsync, "Dispatch", "csharp");
 @@access(Routines.dispatchRoutineAsync, Access.internal);
+
+@@clientName(Routine, "ProjectsRoutine");
+@@clientName(Routine.enabled, "IsEnabled");
+@@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
+@@usage(DispatchRoutineResponse, Usage.input | Usage.output);
+@@clientName(InvokeAgentInvocationsApiDispatchPayload, "AgentInvocationsApiDispatchPayload");
+@@clientName(InvokeAgentInvocationsApiRoutineAction, "AgentInvocationsApiRoutineAction");
+@@clientName(InvokeAgentResponsesApiDispatchPayload, "AgentResponsesApiDispatchPayload");
+@@clientName(InvokeAgentResponsesApiRoutineAction, "AgentResponsesApiRoutineAction");
+@@clientName(RoutineActionType, "RoutineActionKind");
+@@clientName(RoutineTriggerType, "RoutineTriggerKind");

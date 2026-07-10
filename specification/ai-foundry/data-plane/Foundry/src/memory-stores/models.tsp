@@ -1,5 +1,5 @@
 import "../common/service.tsp";
-import "../openai-responses/models.tsp";
+import "../openai/responses/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -10,6 +10,7 @@ const MemoryStoreRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.memory_stores_v1_preview],
 };
 
+@extension("x-ms-foundry-meta", MemoryStoreRequiredPreviews)
 union MemoryStoreObjectType {
   memoryStore: "memory_store",
   memoryStoreDeleted: "memory_store.deleted",

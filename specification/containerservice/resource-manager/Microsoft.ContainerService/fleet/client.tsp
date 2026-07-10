@@ -28,7 +28,8 @@ using TypeSpec.Http;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @@clientName(
   Azure.ResourceManager.Legacy.ManagedServiceIdentityV4,
-  "ManagedServiceIdentity"
+  "ManagedServiceIdentity",
+  "!autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
 @@clientName(
@@ -53,24 +54,24 @@ using TypeSpec.Http;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Azure.ResourceManager.TrackedResource.properties
+  Azure.ResourceManager.TrackedResource.properties,
+  "!autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Azure.ResourceManager.ProxyResource.properties
+  Azure.ResourceManager.ProxyResource.properties,
+  "!autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+  "!autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "property flatten for SDK backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties
+  Azure.ResourceManager.Foundations.ProxyResourceUpdateModel.properties,
+  "!autorest"
 );
 @@clientName(
   Microsoft.ContainerService,

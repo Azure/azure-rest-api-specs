@@ -1,5 +1,5 @@
 import "../common/models.tsp";
-import "../servicepatterns.tsp";
+import "../common/servicepatterns.tsp";
 import "./models.tsp";
 
 using TypeSpec.Http;
@@ -9,14 +9,17 @@ namespace Azure.AI.Projects;
 alias EvaluationRulesPreviewHeader = WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
 
 alias EvaluationRulesFilterQueryParams = {
+  /** The action type query parameter. */
   @query("actionType")
   @doc("Filter by the type of evaluation rule.")
   actionType?: EvaluationRuleActionType;
 
+  /** The agent name query parameter. */
   @query("agentName")
   @doc("Filter by the agent name.")
   agentName?: string;
 
+  /** The enabled query parameter. */
   @query("enabled")
   @doc("Filter by the enabled status.")
   enabled?: boolean;

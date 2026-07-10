@@ -49,6 +49,15 @@ overrides:
   - filename: '**/*client*tsp'
     ignoreRegExpList:
       - '/@@clientName\([^\"]*\"([^\"]*)/g'
+  # Route documentation checker terminology
+  - filename: '**/data-plane/Foundry/.github/skills/foundry-route-doc-check/references/route-documentation-rules.md'
+    words:
+      - reemits
+  # Windows command script built-ins
+  - filename: '**/data-plane/Foundry/compile_all.cmd'
+    words:
+      - popd
+      - pushd
   # Example and output patterns: ignore common false positives in examples and emission outputs
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/examples'

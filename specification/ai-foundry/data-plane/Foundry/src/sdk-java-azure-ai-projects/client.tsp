@@ -1,4 +1,5 @@
 import "../common/service.tsp";
+import "../sdk-common/error.default.tsp";
 
 import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
@@ -7,7 +8,7 @@ import "../models/routes.tsp";
 import "../deployments/routes.tsp";
 import "../red-teams/routes.tsp";
 import "../evaluation-rules/routes.tsp";
-import "../openai-evaluations/models.tsp";
+import "../openai/evaluations/models.tsp";
 import "../evaluation-taxonomies/routes.tsp";
 import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
@@ -16,7 +17,7 @@ import "../routines/routes.tsp";
 import "../skills/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
 
-import "../sdk-common/beta-ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-projects.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
@@ -181,6 +182,14 @@ namespace Azure.AI.Projects;
 @@clientName(ModelPendingUploadResponse, "ModelPendingUploadResult");
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult");
 
+@@clientName(ContinuousEvaluationRuleAction.evalId, "evaluationId");
+
+@@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
+
+@@clientName(AttackStrategy.Base64, "Base_64");
+@@clientName(AttackStrategy.ROT13, "ROT_13");
+
+
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
 // --------------------------------------------------------------------------------
@@ -324,6 +333,8 @@ union GrammarSyntaxExpandable {
 model TimeZoneType {}
 
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
+
+@@alternateType(RoutineRunStatus, string, "java");
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and

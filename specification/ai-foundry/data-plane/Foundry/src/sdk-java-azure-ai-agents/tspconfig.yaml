@@ -23,12 +23,6 @@ options:
       AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
-  "@typespec/json-schema":
-    emitAllModels: true
-    emitAllRefs: false
-    emitter-output-dir: "{output-dir}/{service-dir}/json-schema"
-    file-type: json
-    bundleId: azure-ai-agents-v2.json
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/ai-foundry/data-plane/Foundry/src/.external-readonly/"
@@ -40,7 +34,7 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/deployments/"
       - "specification/ai-foundry/data-plane/Foundry/src/red-teams/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluation-rules/"
-      - "specification/ai-foundry/data-plane/Foundry/src/openai-evaluations/"
+      - "specification/ai-foundry/data-plane/Foundry/src/openai/evaluations/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluation-taxonomies/"
       - "specification/ai-foundry/data-plane/Foundry/src/evaluators/"
       - "specification/ai-foundry/data-plane/Foundry/src/insights/"
@@ -49,6 +43,20 @@ options:
       - "specification/ai-foundry/data-plane/Foundry/src/conversations/"
       - "specification/ai-foundry/data-plane/Foundry/src/responses/"
       - "specification/ai-foundry/data-plane/Foundry/src/tools/"
+  # Exports the @extension("x-ms-foundry-meta", ...) beta entities for the Java emitter consumption
+  # - run `tsp-client sync` from package folder
+  # - run `cd TempTypeSpecFiles && npm install --no-save typespec-extension-exporter`
+  # - still from `TempTypeSpecFiles` folder, run `npx tsp compile .\sdk-java-azure-ai-agents\client.tsp --emit typespec-extension-exporter`
+  # - verify creation/update of the `customizations/beta-annotations.csv` file
+  # - run `cd .. && tsp-client generate`
+  "typespec-extension-exporter":
+    keys: x-ms-foundry-meta
+    language: java
+    output-shape: tsp-ast-input
+    output-format: csv
+    output-file: beta-annotations.csv
+    emitter-output-dir: "{cwd}/../customizations" # run npx tsp compile from within `TempTypeSpecFiles` folder
+    namespace: com.azure.ai.agents
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
