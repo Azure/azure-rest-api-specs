@@ -6,6 +6,8 @@ using Azure.ClientGenerator.Core;
 namespace Microsoft.Compute;
 
 @@clientName(Microsoft.Compute, "ComputeBulkActionsMgmtClient", "python");
+@@clientName(NetworkApiVersion.`2020-11-01`, "ENUM_2020_11_01", "python");
+@@clientName(NetworkApiVersion.`2022-11-01`, "ENUM_2022_11_01", "python");
 @@clientName(
   VirtualMachineBulkOperations.bulkDeallocate,
   "BulkDeallocateOperation",
@@ -222,6 +224,45 @@ namespace Microsoft.Compute;
   "ComputeBulkFallbackOperationInfo",
   "csharp"
 );
+
+// C# only: expose subscriptionId as Guid? (UUID) while keeping the spec/OpenAPI type as string to avoid ARM GuidUsage lint.
+@@alternateType(
+  ResourceOperationDetails.subscriptionId,
+  Azure.Core.uuid,
+  "csharp"
+);
+
+@@clientName(
+  DeallocateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  HibernateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  DeleteResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  CreateResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(
+  ReimageResourceOperationResponse.type,
+  "ResourceTypeName",
+  "csharp"
+);
+
+@@clientName(StartResourceOperationResponse.type, "ResourceTypeName", "csharp");
 
 // =====================================================================
 // Fix: Go SDK Validation incorrectly detects networkApiVersion as an API version
