@@ -64,16 +64,16 @@ suppressions:
   - code: LroPostReturn
     reason: All POST actions are long running operations and never return 200 in the response.
     where:
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default/stop"].post
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default/start"].post
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default/restart"].post
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/stop"].post
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/start"].post
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/restart"].post
 
   - code: GetCollectionOnlyHasValueAndNextLink
     reason: GET instance API for ARM extension resources are being flagged as Get Collection APIs.
     where:
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default"].get.responses["200"].schema.properties
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default/hybridIdentityMetadata/default"].get.responses["200"].schema.properties
-      - $.paths["/{resourceUri}/providers/virtualMachineInstances/default/guestAgents/default"].get.responses["200"].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default"].get.responses["200"].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/hybridIdentityMetadata/default"].get.responses["200"].schema.properties
+      - $.paths["/{resourceUri}/providers/Microsoft.ConnectedVMwarevSphere/virtualMachineInstances/default/guestAgents/default"].get.responses["200"].schema.properties
 
   - code: TopLevelResourcesListBySubscription
     reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.

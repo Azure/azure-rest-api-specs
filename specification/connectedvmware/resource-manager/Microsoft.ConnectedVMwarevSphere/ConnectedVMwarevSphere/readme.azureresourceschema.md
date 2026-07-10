@@ -20,7 +20,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2020-10-01-preview/connectedvmware.json
+  - preview/2020-10-01-preview/connectedvmware.json
 ```
 
 ### Tag: schema-connectedvmware-2022-01-10-preview and azureresourceschema
@@ -30,7 +30,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2022-01-10-preview/connectedvmware.json
+  - preview/2022-01-10-preview/connectedvmware.json
 ```
 
 ### Tag: schema-connectedvmware-2022-07-15-preview and azureresourceschema
@@ -40,5 +40,5 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2022-07-15-preview/connectedvmware.json
+  - preview/2022-07-15-preview/connectedvmware.json
 ```
