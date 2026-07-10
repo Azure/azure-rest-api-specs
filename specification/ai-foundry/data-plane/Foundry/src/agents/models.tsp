@@ -307,6 +307,9 @@ union AgentEndpointProtocol {
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
+
+  @doc("Voice-first speech-to-speech protocol for `prompt_voice` agents. Exposes the endpoint-scoped conversation and audio retrieval APIs (under `/agents/{agent_name}/endpoint/protocols/voice/conversations`) and the realtime voice session bridged to the managed Voice Live backend.")
+  voice: "voice",
 }
 
 union AgentKind {
