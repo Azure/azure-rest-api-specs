@@ -39258,14 +39258,10 @@ components:
           unevaluatedProperties:
             $ref: '#/components/schemas/StructuredInputDefinition'
           description: Set of structured inputs that participate in prompt template substitution, rendered per session before the live session starts.
-        store:
-          type: boolean
-          description: |-
-            Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
-            `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
-            timeline, per-turn voice metrics, and raw audio. When `false`, nothing is persisted and no conversation is surfaced.
-            There is no separate audio-logging control; audio is persisted only as part of this switch.
-          default: false
+        subagent_config:
+          allOf:
+            - $ref: '#/components/schemas/SubAgentConfig'
+          description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: |-
@@ -39535,6 +39531,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    ResponsePolicy:
+      type: object
+      properties:
+        immediate_ack:
+          type: boolean
+          description: Whether the voice agent provides an immediate acknowledgement before forwarding a request to a subagent.
+        gap_filling_interval:
+          type: integer
+          format: int32
+          minimum: 1
+          description: The number of seconds without subagent content or user input before the voice agent provides a gap-filling response.
+      description: Policy for delivering responses while a voice-first prompt agent waits for a subagent.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     ResponseRetrievalItemGenerationParams:
       type: object
       required:
@@ -40532,6 +40543,44 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
+    SubAgent:
+      type: object
+      required:
+        - agent_name
+        - agent_capabilities
+      properties:
+        agent_name:
+          type: string
+          description: The name of the subagent. The subagent must be in the same project as the voice agent.
+        agent_version:
+          type: string
+          description: The version of the subagent. When omitted, the latest version is used.
+        agent_capabilities:
+          type: string
+          description: A description of the subagent's capabilities, used by the voice agent to decide whether to forward a query.
+      description: A sibling Foundry text agent that a voice-first prompt agent may consult as a background specialist.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
+    SubAgentConfig:
+      type: object
+      required:
+        - subagents
+      properties:
+        subagents:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubAgent'
+          minItems: 1
+          description: The sibling Foundry text agents, in the same project, that this voice agent may consult.
+        response_policy:
+          allOf:
+            - $ref: '#/components/schemas/ResponsePolicy'
+          description: Policy for acknowledging forwarded requests and filling gaps while waiting for a subagent response.
+      description: Configuration for sibling Foundry text agents that a voice-first prompt agent may consult, and for delivery of their responses.
+      x-ms-foundry-meta:
+        required_previews:
+          - PromptVoiceAgents=V1Preview
     SyntheticDataGenerationPreviewEvalRunDataSource:
       type: object
       required:
