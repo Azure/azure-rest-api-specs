@@ -149,9 +149,9 @@ union VoiceResponseAudioFormat {
 
 @doc("""
   A persisted voice response, following the Voice Live `RealtimeResponse` schema. Represents one model
-  inference turn within a conversation. In list results the `output` projection is omitted — use the
-  response-items route for the canonical paged output. `created_at`/`completed_at` are Foundry durable
-  ordering extensions.
+  inference turn within a conversation. In list results the `output` projection may be omitted; retrieve the
+  full response (`GET .../responses/{response_id}`) for its output items. `created_at`/`completed_at` are
+  Foundry durable ordering extensions.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceResponse {
@@ -167,7 +167,7 @@ model VoiceResponse {
   @doc("Additional detail about a terminal status.")
   status_details?: VoiceResponseStatusDetails;
 
-  @doc("The output items produced by the response. May be omitted in list results; use the response-items route for the canonical paged projection.")
+  @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) for its output items. Each item's `response_id` links it back to this response in the conversation-level items list.")
   output?: VoiceConversationItem[];
 
   @doc("Token usage statistics for the response.")

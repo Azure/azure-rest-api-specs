@@ -2114,138 +2114,6 @@ paths:
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
-  /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items:
-    get:
-      operationId: AgentEndpointConversations_listAgentConversationResponseItems
-      summary: List items produced by a voice agent conversation response
-      description: |-
-        Returns a paged collection of the output items produced by a specific response (the response's output
-        projection). For the complete ordered conversation history — including user input and client-created
-        tool outputs — use the conversation items route instead. Returns `404` when the conversation or
-        response was not persisted (`store = false`).
-      parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - PromptVoiceAgents=V1Preview
-        - name: agent_name
-          in: path
-          required: true
-          description: The name of the agent.
-          schema:
-            type: string
-        - name: conversation_id
-          in: path
-          required: true
-          description: The id of the conversation that contains the response.
-          schema:
-            type: string
-        - name: response_id
-          in: path
-          required: true
-          description: The id of the response whose output items are listed.
-          schema:
-            type: string
-        - name: x-ms-user-isolation-key
-          in: header
-          required: false
-          description: Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.
-          schema:
-            type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
-        - name: order
-          in: query
-          required: false
-          description: |-
-            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
-            for descending order.
-          schema:
-            $ref: '#/components/schemas/PageOrder'
-          explode: false
-        - name: after
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include after=obj_foo in order to fetch the next page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: before
-          in: query
-          required: false
-          description: |-
-            A cursor for use in pagination. `before` is an object ID that defines your place in the list.
-            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
-            subsequent call can include before=obj_foo in order to fetch the previous page of the list.
-          schema:
-            type: string
-          explode: false
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                type: object
-                required:
-                  - data
-                  - has_more
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/VoiceConversationItem'
-                    description: The requested list of items.
-                  first_id:
-                    type: string
-                    description: The first ID represented in this list.
-                  last_id:
-                    type: string
-                    description: The last ID represented in this list.
-                  has_more:
-                    type: boolean
-                    description: A value indicating whether there are additional values available not captured in this list.
-                description: The response data for a requested list of items.
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Conversations
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
@@ -43608,7 +43476,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VoiceConversationItem'
-          description: The output items produced by the response. May be omitted in list results; use the response-items route for the canonical paged projection.
+          description: The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) for its output items. Each item's `response_id` links it back to this response in the conversation-level items list.
         usage:
           allOf:
             - $ref: '#/components/schemas/VoiceUsage'
@@ -43651,9 +43519,9 @@ components:
           description: The Unix timestamp (in seconds) for when the response completed.
       description: |-
         A persisted voice response, following the Voice Live `RealtimeResponse` schema. Represents one model
-        inference turn within a conversation. In list results the `output` projection is omitted — use the
-        response-items route for the canonical paged output. `created_at`/`completed_at` are Foundry durable
-        ordering extensions.
+        inference turn within a conversation. In list results the `output` projection may be omitted; retrieve the
+        full response (`GET .../responses/{response_id}`) for its output items. `created_at`/`completed_at` are
+        Foundry durable ordering extensions.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
