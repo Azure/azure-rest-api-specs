@@ -557,8 +557,8 @@ namespace ComputeCombine;
 // AutoRest-based SDK generated V20201101/V20221101 names; restore baseline.
 // ════════════════════════════════════════════════════════════════════════════
 
-@@clientName(NetworkApiVersion.`2020-11-01`, "V20201101", "csharp");
-@@clientName(NetworkApiVersion.`2022-11-01`, "V20221101", "csharp");
+@@clientName(NetworkApiVersion.`2020-11-01`, "v2020_11_01", "csharp");
+@@clientName(NetworkApiVersion.`2022-11-01`, "v2022_11_01", "csharp");
 
 // ════════════════════════════════════════════════════════════════════════════
 // region: Compute — diskControllerType / Placement property renames (csharp)
