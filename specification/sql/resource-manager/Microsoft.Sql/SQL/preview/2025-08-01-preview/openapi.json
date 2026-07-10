@@ -44832,6 +44832,14 @@
           "$ref": "#/definitions/DeletedServerProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "allOf": [
@@ -44881,9 +44889,20 @@
           "description": "The original ID of the server before deletion.",
           "readOnly": true
         },
+        "originalResourceGroup": {
+          "type": "string",
+          "description": "The resource group of the original server before deletion.",
+          "readOnly": true
+        },
         "fullyQualifiedDomainName": {
           "type": "string",
           "description": "The fully qualified domain name of the server.",
+          "readOnly": true
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the deleted server will be permanently deleted (purged).",
           "readOnly": true
         }
       }

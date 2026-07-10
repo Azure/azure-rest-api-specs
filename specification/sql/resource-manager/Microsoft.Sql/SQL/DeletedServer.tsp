@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -22,6 +23,16 @@ model DeletedServer
     SegmentName = "deletedServers",
     NamePattern = ""
   >;
+
+  /**
+   * Resource location.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "location represents the geographic location of the original server, not an ARM envelope location"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DeletedServer has no create operation; x-ms-mutability must be read-only to satisfy LocationMustHaveXmsMutability without implying a create path"
+  @added(Versions.v2025_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @extension("x-ms-mutability", #["read"])
+  location?: string;
 }
 
 alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -34,7 +45,7 @@ alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The name of the deleted server. */
