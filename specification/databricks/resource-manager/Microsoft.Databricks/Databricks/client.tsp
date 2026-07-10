@@ -37,9 +37,12 @@ using Microsoft.Databricks;
   "DatabricksPrivateEndpointConnection",
   "csharp"
 );
-  @@clientName(AccessConnector, "DatabricksAccessConnector", "csharp");
-  @@clientName(AccessConnectorProperties, "DatabricksAccessConnectorProperties", "csharp");
-  @@clientName(AccessConnectorUpdate, "DatabricksAccessConnectorPatch", "csharp");
+@@clientName(AccessConnector, "DatabricksAccessConnector", "csharp");
+@@clientName(AccessConnectorProperties,
+  "DatabricksAccessConnectorProperties",
+  "csharp"
+);
+@@clientName(AccessConnectorUpdate, "DatabricksAccessConnectorPatch", "csharp");
 @@clientName(VirtualNetworkPeering,
   "DatabricksVirtualNetworkPeering",
   "csharp"
@@ -66,8 +69,14 @@ using Microsoft.Databricks;
   "DatabricksEncryptionV2KeyVaultProperties",
   "csharp"
 );
-  @@clientName(ManagedDiskEncryption, "DatabricksManagedDiskEncryption", "csharp");
-  @@clientName(ManagedDiskEncryptionKeyVaultProperties, "DatabricksManagedDiskEncryptionKeyVaultProperties", "csharp");
+@@clientName(ManagedDiskEncryption,
+  "DatabricksManagedDiskEncryption",
+  "csharp"
+);
+@@clientName(ManagedDiskEncryptionKeyVaultProperties,
+  "DatabricksManagedDiskEncryptionKeyVaultProperties",
+  "csharp"
+);
 @@clientName(EnhancedSecurityComplianceDefinition,
   "DatabricksEnhancedSecurityCompliance",
   "csharp"
@@ -84,7 +93,10 @@ using Microsoft.Databricks;
   "DatabricksComplianceSecurityProfileValue",
   "csharp"
 );
-  @@clientName(AutomaticClusterUpdateValue, "DatabricksAutomaticClusterUpdateValue", "csharp");
+@@clientName(AutomaticClusterUpdateValue,
+  "DatabricksAutomaticClusterUpdateValue",
+  "csharp"
+);
 @@clientName(EndpointDependency, "DatabricksEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "DatabricksEndpointDetail", "csharp");
 @@clientName(OutboundEnvironmentEndpoint,
@@ -99,8 +111,11 @@ using Microsoft.Databricks;
   "DatabricksPrivateLinkServiceConnectionStatus",
   "csharp"
 );
-  @@clientName(PeeringState, "DatabricksVirtualNetworkPeeringState", "csharp");
-  @@clientName(PeeringProvisioningState, "DatabricksVirtualNetworkPeeringProvisioningState", "csharp");
+@@clientName(PeeringState, "DatabricksVirtualNetworkPeeringState", "csharp");
+@@clientName(PeeringProvisioningState,
+  "DatabricksVirtualNetworkPeeringProvisioningState",
+  "csharp"
+);
 @@clientName(GroupIdInformationProperties,
   "DatabricksGroupIdInformationProperties",
   "csharp"
@@ -119,7 +134,10 @@ using Microsoft.Databricks;
   "DatabricksWorkspaceAccessConnectorInfo",
   "csharp"
 );
-  @@clientName(WorkspaceProviderAuthorization, "DatabricksWorkspaceProviderAuthorization", "csharp");
+@@clientName(WorkspaceProviderAuthorization,
+  "DatabricksWorkspaceProviderAuthorization",
+  "csharp"
+);
 @@clientName(WorkspaceCustomParameters, "WorkspaceCustomProperties", "csharp");
 @@clientName(WorkspaceCustomStringParameter,
   "WorkspaceCustomStringParameterValue",
