@@ -3496,7 +3496,7 @@ model CapacityReservationProfile {
   capacityReservationGroup?: SubResource;
 
   /**
-   * Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the general fleet. Minimum api-version: 2026-04-01.
+   * Specifies whether the virtual machine is explicitly opted out from being associated with any capacity reservation. When set to true, the virtual machine will not be allowed to implicitly or explicitly associate with any type of capacity reservation and will consume capacity from the publicly available capacity. Minimum api-version: 2026-04-01.
    */
   @added(Versions.v2026_04_01)
   disableCapacityReservationAssignment?: boolean;
@@ -6739,7 +6739,7 @@ model VirtualMachineInstanceView {
   interconnectInstanceView?: InterconnectInstanceView;
 
   /**
-   * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated with any capacity reservation. Minimum api-version: 2026-04-01.
+   * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
    */
   @added(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
@@ -9012,7 +9012,7 @@ model CapacityReservationGroupProperties {
   sharingProfile?: ResourceSharingProfile;
 
   /**
-   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the general fleet if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the general fleet if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
+   * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
    */
   @added(Versions.v2025_04_01)
   reservationType?: ReservationType;
@@ -9097,7 +9097,7 @@ model CapacityReservationUtilization {
   virtualMachinesAllocated?: SubResourceReadOnly[];
 
   /**
-   * For open capacity reservations, this provides a map of the used reserved capacity count keyed by the subscription id (a GUID) that is consuming the capacity, i.e. each entry maps a consuming subscription id to the count of reserved capacity it is currently using. This is populated only for open capacity reservations and is null for targeted and block capacity reservations, which instead report allocation through virtualMachinesAllocated. Minimum api-version: 2026-04-01.
+   * For open capacity reservations, this provides a map of the used reserved capacity count keyed by the subscription id (a GUID) that is consuming the capacity, i.e. each entry maps a consuming subscription id to the count of reserved capacity it is currently using. This is populated only for open capacity reservations and is not reported for targeted and block capacity reservations, which instead report allocation through virtualMachinesAllocated. Minimum api-version: 2026-04-01.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Open capacity reservation usage is inherently a map keyed by the consuming subscription id (GUID) to its used reserved capacity count."
   @added(Versions.v2026_04_01)
@@ -9114,7 +9114,7 @@ model ResourceSharingProfile {
 }
 
 /**
- * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the general fleet if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the general fleet if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
+ * Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations that enable a VM to consume capacity only from this capacity block when it is associated using a capacity reservation group, 'Targeted' for reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full, and 'Open' for reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group and fall back to the publicly available capacity if the reservation is full. The reservation type is immutable and cannot be changed after the capacity reservation group is created.
  */
 @added(Versions.v2025_04_01)
 union ReservationType {
@@ -9124,7 +9124,7 @@ union ReservationType {
   string,
 
   /**
-   * Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the general fleet if the reservation is full.
+   * Reservations that enable a VM to consume capacity from an explicitly associated capacity reservation group and fall back to the publicly available capacity if the reservation is full.
    */
   Targeted: "Targeted",
 
@@ -9134,14 +9134,14 @@ union ReservationType {
   Block: "Block",
 
   /**
-   * Reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group, and fall back to the general fleet if the reservation is full. Minimum api-version: 2026-04-01.
+   * Reservations that a VM consumes when it is eligible from an implicitly associated capacity reservation group with the matching VM size and zone without associating that capacity reservation group, and fall back to the publicly available capacity if the reservation is full. Minimum api-version: 2026-04-01.
    */
   @added(Versions.v2026_04_01)
   Open: "Open",
 }
 
 /**
- * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated with any capacity reservation. Minimum api-version: 2026-04-01.
+ * Specifies which type of capacity reservation the virtual machine will consume capacity from if eligible or whether it is explicitly opted out from being associated and consuming capacity from any reserved capacity available in the subscription. Minimum api-version: 2026-04-01.
  */
 @added(Versions.v2026_04_01)
 union CapacityReservationType {
@@ -9151,12 +9151,12 @@ union CapacityReservationType {
   string,
 
   /**
-   * The virtual machine is not eligible to be implicitly associated with an open capacity reservation and is not explicitly associated with any capacity reservation group, so it will consume capacity from the general fleet.
+   * The virtual machine is not eligible to be implicitly associated with an open capacity reservation and is not explicitly associated with any capacity reservation group, so it will consume capacity from the publicly available capacity.
    */
   NotEligible: "NotEligible",
 
   /**
-   * The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fall back to consume capacity from the general fleet if there is no capacity available in the targeted reservation.
+   * The virtual machine will consume capacity from a specific matching capacity reservation when associated with a capacity reservation group resource of type targeted, but can fall back to consume capacity from the publicly available capacity if there is no capacity available in the targeted reservation.
    */
   Targeted: "Targeted",
 
