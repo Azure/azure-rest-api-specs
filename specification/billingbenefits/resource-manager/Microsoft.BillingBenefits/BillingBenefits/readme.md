@@ -58,38 +58,38 @@ directive:
   - suppress: TenantLevelAPIsNotAllowed
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/savingsPlanOrderAliases/{savingsPlanOrderAliasName}"]
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}"]
   - suppress: ParametersInPointGet
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}"].get.parameters
   - suppress: ParametersInPointGet
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].get.parameters
   - suppress: GetCollectionOnlyHasValueAndNextLink
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
   - suppress: PatchResponseCodes
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch
   - suppress: NoErrorCodeResponses
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch.responses["404"]
+    where: $.paths["/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}"].patch.responses["404"]
   - suppress: PathForTrackedResourceTypes
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/reservationOrderAliases/{reservationOrderAliasName}"]
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"]
   - suppress: PutRequestResponseSchemeArm
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
-    where: $.paths["/providers/reservationOrderAliases/{reservationOrderAliasName}"].put
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: billingbenefits.json
     reason: False-positive. Tags property exists.
-    where: $.paths["/providers/reservationOrderAliases/{reservationOrderAliasName}"].put
+    where: $.paths["/providers/Microsoft.BillingBenefits/reservationOrderAliases/{reservationOrderAliasName}"].put
   - suppress: AvoidAdditionalProperties
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
@@ -104,7 +104,7 @@ directive:
   - suppress: ConsistentPatchProperties
     from: billingbenefits.json
     reason: False-positive. Milestones is always present in resource model. There are two types of conditionalCredit models - primary and contributor. The resource model is split on this discriminator value, and milesstones is only present for primary. The patch operation is only available for primary, so milestones will always be available.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/conditionalCredits/{conditionalCreditName}"].patch.parameters[4]["schema"]
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BillingBenefits/conditionalCredits/{conditionalCreditName}"].patch.parameters[4]["schema"]
 ```
 
 ### Tag: package-2026-06-01
