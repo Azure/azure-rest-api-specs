@@ -7,6 +7,12 @@ using Microsoft.GuestConfiguration;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 
+@@clientName(
+  Microsoft.GuestConfiguration,
+  "GuestConfigurationClient",
+  "python"
+);
+
 // ============================================================================
 // Type alternate types - fix property types for backward compatibility
 // ============================================================================
