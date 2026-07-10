@@ -82,7 +82,7 @@ directive:
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
     where: $.paths["/providers/reservationOrderAliases/{reservationOrderAliasName}"]
-  - suppress:  PutRequestResponseSchemeArm
+  - suppress: PutRequestResponseSchemeArm
     from: billingbenefits.json
     reason: Service design forces this behavior. This API will remain managed by BenefitsRP when onboarded to RPaaS. (Direct type)
     where: $.paths["/providers/reservationOrderAliases/{reservationOrderAliasName}"].put
