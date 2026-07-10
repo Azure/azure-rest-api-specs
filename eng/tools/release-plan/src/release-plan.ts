@@ -170,8 +170,6 @@ function runCreateReleasePlan(
     context.tspProjectPath,
     "--api-release-type",
     context.apiReleaseType,
-    "--sdk-type",
-    context.sdkReleaseType,
     "--release-month",
     context.targetMonth,
     "--pull-request",
