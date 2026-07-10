@@ -636,42 +636,37 @@ interface Container {
   >;
 
   /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
   @added(Versions.v2026_12_06)
   @get
   @sharedRoute
   @route("?restype=container&comp=list")
-  listBlobFlatSegmentApacheArrow(
-    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
-    #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-    @header("accept")
-    accept: "application/vnd.apache.arrow.stream,application/xml",
+  listBlobFlatSegmentApacheArrow is StorageOperationNoBody<
+    {
+      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: "application/vnd.apache.arrow.stream,application/xml";
 
-    ...PrefixParameter,
-    ...MarkerParameter,
-    ...MaxResultsParameter,
-    ...ListBlobsIncludeParameter,
-    ...TimeoutParameter,
-    ...ListBlobsStartFrom,
-    ...ListBlobsEndBefore,
-    ...ApiVersionHeader,
-    ...ClientRequestIdHeader,
-  ):
-    | {
-        /** The content type of the body of the response. */
-        #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
-        @header("Content-Type")
-        contentType: "application/vnd.apache.arrow.stream" | "application/xml";
+      ...PrefixParameter;
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      /** The content type of the body of the response. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+      @header("Content-Type")
+      contentType: "application/vnd.apache.arrow.stream" | "application/xml";
 
-        @body body: bytes;
-        ...DateResponseHeaderPrivate;
-        ...ApiVersionHeader;
-        ...RequestIdResponseHeader;
-        ...ClientRequestIdHeader;
-      }
-    | Error;
+      @body body: bytes;
+    }
+  >;
 
   /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
@@ -700,46 +695,41 @@ interface Container {
   >;
 
   /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
   @added(Versions.v2026_12_06)
   @get
   @sharedRoute
   @route("?restype=container&comp=list")
-  listBlobHierarchySegmentApacheArrow(
-    /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
-    #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-    @header("accept")
-    accept: "application/vnd.apache.arrow.stream,application/xml",
+  listBlobHierarchySegmentApacheArrow is StorageOperationNoBody<
+    {
+      /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      @header("accept")
+      accept: "application/vnd.apache.arrow.stream,application/xml";
 
-    ...PrefixParameter,
+      ...PrefixParameter;
 
-    /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
-    @query delimiter: string,
+      /** If specified, the operation returns a BlobPrefix element that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string. */
+      @query delimiter: string;
 
-    ...MarkerParameter,
-    ...MaxResultsParameter,
-    ...ListBlobsIncludeParameter,
-    ...TimeoutParameter,
-    ...ListBlobsStartFrom,
-    ...ListBlobsEndBefore,
-    ...ApiVersionHeader,
-    ...ClientRequestIdHeader,
-  ):
-    | {
-        /** The content type of the body of the response. */
-        #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-        #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
-        @header("Content-Type")
-        contentType: "application/vnd.apache.arrow.stream" | "application/xml";
+      ...MarkerParameter;
+      ...MaxResultsParameter;
+      ...ListBlobsIncludeParameter;
+      ...TimeoutParameter;
+      ...ListBlobsStartFrom;
+      ...ListBlobsEndBefore;
+    },
+    {
+      /** The content type of the body of the response. */
+      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
+      @header("Content-Type")
+      contentType: "application/vnd.apache.arrow.stream" | "application/xml";
 
-        @body body: bytes;
-        ...DateResponseHeaderPrivate;
-        ...ApiVersionHeader;
-        ...RequestIdResponseHeader;
-        ...ClientRequestIdHeader;
-      }
-    | Error;
+      @body body: bytes;
+    }
+  >;
 
   /** Returns information about the storage account. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
