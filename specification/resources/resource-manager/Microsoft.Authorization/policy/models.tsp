@@ -286,7 +286,7 @@ union PolicyAction {
 }
 
 /**
- * The compliance state of the resource against the policy. Possible values are NotSpecified, NonCompliant, Conflict, NotApplicable, Compliant, Error, Unknown, and Exempt.
+ * The compliance state of the resource against the policy. Possible values are NotSpecified, NonCompliant, Partial, Conflict, NotApplicable, Compliant, Error, Unknown, Exempt, and Protected.
  */
 @added(Versions.v2026_07_01)
 union ComplianceState {
@@ -303,7 +303,7 @@ union ComplianceState {
   NonCompliant: "NonCompliant",
 
   /**
-   * Indicates a partially completed policy evaluations.
+   * Indicates a partially completed policy evaluation.
    */
   Partial: "Partial",
 
