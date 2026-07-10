@@ -20510,6 +20510,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -20754,7 +20755,9 @@ components:
       type: object
       properties:
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -20970,7 +20973,9 @@ components:
       type: object
       properties:
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -21619,7 +21624,9 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         reasoning_effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
     OpenAI.EvalGraderStringCheck:
       type: object
       required:
@@ -21926,6 +21933,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+          description: Optional reasoning effort parameter. This is a query parameter used to select responses.
         temperature:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -25264,6 +25272,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -26751,6 +26760,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -28514,6 +28524,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -28680,6 +28691,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -30721,6 +30733,7 @@ components:
             - searching
             - completed
             - failed
+            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -30929,7 +30942,9 @@ components:
       type: object
       properties:
         effort:
-          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
+            - type: 'null'
         summary:
           anyOf:
             - type: string
@@ -30962,6 +30977,7 @@ components:
     OpenAI.ReasoningEffort:
       anyOf:
         - type: string
+        - type: string
           enum:
             - none
             - minimal
@@ -30969,7 +30985,6 @@ components:
             - medium
             - high
             - xhigh
-        - type: 'null'
       description: |-
         Constrains effort on reasoning for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
