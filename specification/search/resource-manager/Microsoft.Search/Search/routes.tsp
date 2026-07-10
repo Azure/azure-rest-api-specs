@@ -151,7 +151,7 @@ interface Offerings {
   @post
   @action("fetchOfferings")
   @tag("Offerings")
-  fetchOfferings is ArmProviderActionSync<
+  fetch is ArmProviderActionSync<
     Request = void,
     Response = OfferingsResult,
     Scope = TenantActionScope,

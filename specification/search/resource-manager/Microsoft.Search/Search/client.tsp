@@ -1328,7 +1328,7 @@ model SearchServiceNetworkSecurityPerimeterInboundRuleSubscription {
 @@clientName(SkuOffering, "SearchSkuOffering", "csharp");
 @@clientName(SkuLimits, "SearchSkuLimits", "csharp");
 @@clientName(Offerings.list, "GetOfferings", "csharp");
-@@clientName(Offerings.fetchOfferings, "FetchOfferings", "csharp");
+@@clientName(Offerings.fetch, "FetchOfferings", "csharp");
 @@clientName(OfferingsResult, "SearchOfferingsResult", "csharp");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
