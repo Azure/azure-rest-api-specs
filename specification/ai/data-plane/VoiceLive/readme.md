@@ -1,76 +1,37 @@
-# VoiceLive
+# VoiceLive data-plane TypeSpec
 
-> see https://aka.ms/autorest
+This folder contains the TypeSpec for the VoiceLive data-plane REST API.
 
-This is the AutoRest configuration file for VoiceLive.
+## Contributing
 
-## Configuration
+This is a TypeSpec project. The generated swagger (OpenAPI) files under `stable/` and
+`preview/` are the source of truth for doc generation and Swagger APIView. SDK code is
+generated natively from TypeSpec as configured in `tspconfig.yaml`, not from this readme.
 
-### Basic Information
+The default (latest) API version emitted for tooling is controlled by the
+`@azure-tools/typespec-autorest` emitter in `tspconfig.yaml`.
 
-This is a TypeSpec project so we only want to readme to default the default tag and point to the outputted swagger file.
-This is used for some tools such as doc generation and swagger apiview generation it isn't used for SDK code gen as we
-use the native TypeSpec code generation configured in the tspconfig.yaml file.
+### Compiling and sending a PR
 
-```yaml
-openapi-type: data-plane
-tag: package-2026-07-15
+Before you send a PR for changes in this folder, do the following.
+
+Change to this folder:
+
+```cmd
+cd specification\ai\data-plane\VoiceLive
 ```
 
-### Tag: package-2026-07-15
+Make sure you have the latest tools:
 
-These settings apply only when `--tag=package-2026-07-15` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-07-15'
-input-file:
-  - stable/2026-07-15/VoiceLive.json
+```cmd
+npm ci
 ```
 
-### Tag: package-2026-06-01-preview
+Compile, validate, and re-format:
 
-These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-06-01-preview'
-input-file:
-  - preview/2026-06-01-preview/VoiceLive.json
+```cmd
+npx tsv .
 ```
 
-### Tag: package-2026-04-10
-
-These settings apply only when `--tag=package-2026-04-10` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-04-10'
-input-file:
-  - stable/2026-04-10/VoiceLive.json
-```
-
-### Tag: package-2026-01-01-preview
-
-These settings apply only when `--tag=package-2026-01-01-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2026-01-01-preview'
-input-file:
-  - preview/2026-01-01-preview/VoiceLive.json
-```
-
-### Tag: package-2025-10-01
-
-These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2025-10-01'
-input-file:
-  - stable/2025-10-01/VoiceLive.json
-```
-
-### Suppression
-
-``` yaml
-directive:
-  - suppress: OAV133
-    from: VoiceLive.json
-    reason: OpenAI and Azure require two different discriminators.
-  - suppress: IntegerTypeMustHaveFormat
-    from: VoiceLive.json
-    where: $.definitions.ResponseSession.properties.expires_at
-    reason: OpenAI Realtime uses the "unixtime" format, which this legacy rule does not recognize.
-```
+Fix any errors you see. This command also updates the generated swagger files under
+`stable/` and `preview/`. Review those changes and include them in your PR.
