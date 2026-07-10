@@ -450,8 +450,10 @@ model PromptVoiceAgentDefinition extends AgentDefinition {
   @doc("""
     Whether conversations with this agent are persisted. A single, all-or-nothing persistence switch that defaults to
     `false` (privacy-safe: off by default). When `true`, Foundry persists the full conversation — the transcript/event
-    timeline, per-turn voice metrics, and raw audio. When `false`, nothing is persisted and no conversation is surfaced.
-    There is no separate audio-logging control; audio is persisted only as part of this switch.
+    timeline and raw audio. When `false`, nothing is persisted and no conversation is surfaced. There is no separate
+    audio-logging control; audio is persisted only as part of this switch. Latency/performance telemetry (e.g.
+    time-to-first-audio, inter-token latency, interruption) is observability-only (customer trace / App Insights) and
+    is not part of the persisted conversation content.
     """)
   store?: boolean = false;
 }
