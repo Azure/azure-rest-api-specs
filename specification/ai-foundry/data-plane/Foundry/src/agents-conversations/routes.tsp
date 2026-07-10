@@ -40,7 +40,7 @@ interface AgentEndpointConversations {
    */
   @summary("List conversations for a voice agent")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   listAgentConversations is FoundryDataPlanePreviewOperation<
@@ -61,7 +61,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversation is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
@@ -84,7 +84,7 @@ interface AgentEndpointConversations {
    */
   @summary("List items in a voice agent conversation")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items")
   @list
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   listAgentConversationItems is FoundryDataPlanePreviewOperation<
@@ -109,7 +109,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation item")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items/{item_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItem is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
@@ -134,7 +134,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation item's audio")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items/{item_id}/audio")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItemAudio is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
@@ -161,7 +161,7 @@ interface AgentEndpointConversations {
    */
   @summary("Get a voice agent conversation's merged recording metadata")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/audio")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationAudio is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
@@ -184,7 +184,7 @@ interface AgentEndpointConversations {
    */
   @summary("Stream a voice agent conversation's merged recording")
   @get
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/audio/content")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/audio/content")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationAudioContent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
@@ -206,7 +206,7 @@ interface AgentEndpointConversations {
    */
   @summary("Delete a voice agent conversation")
   @delete
-  @route("/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}")
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   deleteAgentConversation is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
