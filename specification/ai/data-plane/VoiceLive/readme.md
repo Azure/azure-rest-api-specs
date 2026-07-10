@@ -69,4 +69,8 @@ directive:
   - suppress: OAV133
     from: VoiceLive.json
     reason: OpenAI and Azure require two different discriminators.
+  - suppress: IntegerTypeMustHaveFormat
+    from: VoiceLive.json
+    where: $.definitions.ResponseSession.properties.expires_at
+    reason: OpenAI Realtime uses the "unixtime" format, which this legacy rule does not recognize.
 ```
