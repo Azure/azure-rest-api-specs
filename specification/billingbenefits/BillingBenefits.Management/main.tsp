@@ -26,6 +26,11 @@ import "./ConditionalCredit.tsp";
 import "./ConditionalCreditContributor.tsp";
 import "./CreditSource.tsp";
 import "./FreeServices.tsp";
+import "./CreditTransaction.tsp";
+import "./MaccTransaction.tsp";
+import "./ConditionalCreditTransaction.tsp";
+import "./CatalogGroup.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,9 +52,9 @@ namespace Microsoft.BillingBenefits;
  */
 enum Versions {
   /**
-   * The 2025-12-01-preview API version.
+   * The 2026-06-01 API version.
    */
-  v2025_12_01_preview: "2025-12-01-preview",
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

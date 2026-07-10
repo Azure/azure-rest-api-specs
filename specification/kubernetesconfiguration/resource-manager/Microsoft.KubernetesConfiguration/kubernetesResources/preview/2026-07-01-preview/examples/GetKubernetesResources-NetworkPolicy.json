@@ -1,0 +1,88 @@
+{
+  "title": "Get KubernetesResources - NetworkPolicy",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "networkpolicy-deny-external-default",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/networkpolicy-deny-external-default",
+        "name": "networkpolicy-deny-external-default",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "networking.k8s.io/v1",
+          "kind": "NetworkPolicy",
+          "metadata": {
+            "name": "deny-external",
+            "namespaceName": "default",
+            "uid": "b4c5d6e7-f8a9-0123-bcde-345678901234",
+            "resourceVersion": "1245678",
+            "creationTimestamp": "2026-02-15T12:00:00Z",
+            "labels": [
+              {
+                "name": "policy-type",
+                "value": "isolation"
+              }
+            ]
+          },
+          "spec": {
+            "podSelectorLabels": [
+              {
+                "name": "app",
+                "value": "myapp"
+              }
+            ],
+            "networkPolicyTypes": [
+              "Ingress",
+              "Egress"
+            ],
+            "additionalFields": [
+              {
+                "name": "ingress[0].from[0].podSelector.matchLabels.app",
+                "value": "frontend"
+              },
+              {
+                "name": "ingress[0].ports[0].port",
+                "value": "8080"
+              },
+              {
+                "name": "ingress[0].ports[0].protocol",
+                "value": "TCP"
+              },
+              {
+                "name": "egress[0].to[0].namespaceSelector.matchLabels.name",
+                "value": "kube-system"
+              },
+              {
+                "name": "egress[0].ports[0].port",
+                "value": "53"
+              },
+              {
+                "name": "egress[0].ports[0].protocol",
+                "value": "UDP"
+              }
+            ]
+          },
+          "status": {},
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

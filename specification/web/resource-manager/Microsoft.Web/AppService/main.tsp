@@ -85,6 +85,7 @@ import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -181,6 +181,21 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   "rust"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.start,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.expiry,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
+
 @@clientNamespace(Storage.Blob, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Container, "Azure.Storage.Blobs", "rust,go");
 @@clientNamespace(Storage.Blob.Blob, "Azure.Storage.Blobs", "rust,go");
@@ -194,6 +209,33 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
 @@access(Storage.Blob.Blob.download, Access.internal, "rust");
 @@clientName(Storage.Blob.Service.findBlobsByTags, "findBlobsByTags", "rust");
 @@clientName(Storage.Blob.Container.findBlobsByTags, "findBlobsByTags", "rust");
+@@clientName(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "ListBlobsHierarchical",
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  Storage.Blob.Container.listBlobHierarchySegment,
+  "forcePageIterator",
+  true,
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" ""
+@@clientOption(
+  Storage.Blob.PageBlob.getPageRanges,
+  "forcePageIterator",
+  true,
+  "rust"
+);
+@@clientName(Storage.Blob.PageBlob.getPageRanges, "listPageRanges", "rust");
+@@clientName(PageList.pageRange, "pageRanges", "rust");
+@@clientName(PageList.clearRange, "clearRanges", "rust");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing SDKs didn't output pageable operations format"
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  Storage.Blob.PageBlob.getPageRanges,
+  "python,csharp,javascript,go"
+);
 
 @@clientName(
   BlobProperties.customerProvidedKeySha256,
@@ -321,6 +363,13 @@ interface PageBlobClient extends Storage.Blob.PageBlob {}
   BlobMetadata,
   {
     identity: "crate::models::BlobMetadata",
+  },
+  "rust"
+);
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
   },
   "rust"
 );
@@ -786,8 +835,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 
 @@scope(Storage.Blob.RetentionPolicy.allowPermanentDelete, "!javascript");
 
-@@scope(Storage.Blob.Service.getUserDelegationKey, "!rust");
-@@scope(Storage.Blob.Container.listBlobHierarchySegment, "!rust");
 @@scope(Storage.Blob.Container.rename, "!rust");
 @@scope(Storage.Blob.Container.restore, "!rust");
 @@scope(Storage.Blob.Blob.abortCopyFromUrl, "!rust");
@@ -796,7 +843,6 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@scope(Storage.Blob.Blob.startCopyFromUrl, "!rust");
 @@scope(Storage.Blob.BlockBlob.query, "!rust");
 @@scope(Storage.Blob.PageBlob.copyIncremental, "!rust");
-@@scope(Storage.Blob.PageBlob.getPageRanges, "!rust");
 @@scope(Storage.Blob.PageBlob.getPageRangesDiff, "!rust");
 
 @@alternateType(Storage.Blob.UserDelegationKey.signedStart, string, "python");
@@ -900,7 +946,6 @@ model BlobServicePropertiesCsharp {
   EncryptionAlgorithmTypeCustom,
   "csharp"
 );
-
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "csharp");
 @@clientName(GeoReplicationStatusType, "BlobGeoReplicationStatus", "csharp");
 @@clientName(StorageErrorCode, "BlobErrorCode", "csharp");
@@ -976,6 +1021,9 @@ model BlobServicePropertiesCsharp {
 @@access(DelimitedTextConfiguration, Access.internal, "csharp");
 @@access(JsonTextConfiguration, Access.internal, "csharp");
 @@access(BlobDeleteTypeCustom, Access.internal, "csharp");
+
+@@convenientAPI(Storage.Blob.Service.submitBatch, false, "csharp");
+@@convenientAPI(Storage.Blob.Container.submitBatch, false, "csharp");
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(

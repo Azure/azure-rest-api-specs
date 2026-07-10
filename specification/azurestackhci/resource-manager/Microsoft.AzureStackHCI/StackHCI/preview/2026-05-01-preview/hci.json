@@ -3240,7 +3240,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -3310,7 +3310,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           },
           {
             "name": "resource",
@@ -3413,7 +3413,7 @@
             "description": "Name of ClusterJob",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+            "pattern": "^[a-zA-Z0-9-]{3,64}$"
           }
         ],
         "responses": {
@@ -11690,6 +11690,11 @@
           "description": "The manufacturer of the disk.",
           "readOnly": true
         },
+        "isSupported": {
+          "type": "boolean",
+          "description": "Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring.",
+          "readOnly": true
+        },
         "serialNumber": {
           "type": "string",
           "description": "Serial number.",
@@ -13077,6 +13082,21 @@
           "$ref": "#/definitions/GpuPartitionDetails",
           "description": "Details of the GPU specifically in GPU-P mode.",
           "readOnly": true
+        },
+        "acceleratorType": {
+          "type": "string",
+          "description": "The type of the accelerator.",
+          "readOnly": true
+        },
+        "memoryModel": {
+          "type": "string",
+          "description": "The memory model of the GPU. Possible values are 'Dedicated VRAM', 'Unified (Shared System Memory)', and 'Unified (SoC LPDDR)'.",
+          "readOnly": true
+        },
+        "totalMemoryInBytes": {
+          "type": "string",
+          "description": "The total memory of the GPU in bytes.",
+          "readOnly": true
         }
       }
     },
@@ -14251,14 +14271,12 @@
           "readOnly": true
         },
         "virtualProcessorCount": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "Configured virtual processor count from Hyper-V.",
           "readOnly": true
         },
         "memoryInBytes": {
-          "type": "integer",
-          "format": "int64",
+          "type": "string",
           "description": "Maximum memory the VM can consume, in bytes.",
           "readOnly": true
         }
@@ -17835,6 +17853,31 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
+        },
+        "confidentialVmIntent": {
+          "type": "string",
+          "description": "Captures the customer's intent to enable or disable Confidential VM (CVM) support on the AzureStackHCI Cluster.",
+          "default": "Disable",
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidentialVmIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enable",
+                "value": "Enable",
+                "description": "Indicates that the customer intends to enable CVM support on the cluster."
+              },
+              {
+                "name": "Disable",
+                "value": "Disable",
+                "description": "Indicates that the customer intends to disable CVM support on the cluster."
+              }
+            ]
+          }
         }
       }
     },

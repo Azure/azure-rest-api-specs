@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 import "./routes.tsp";
 import "./models.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

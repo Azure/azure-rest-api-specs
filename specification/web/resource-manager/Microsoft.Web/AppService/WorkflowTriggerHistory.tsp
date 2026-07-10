@@ -76,7 +76,8 @@ interface WorkflowTriggerHistoriesOps
         @segment("histories")
         @key
         historyName: string,
-      }
+      },
+      ResourceName = "WorkflowTriggerHistory"
     > {}
 
 @armResourceOperations

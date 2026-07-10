@@ -61,7 +61,8 @@ interface TagProductLinkContractOps
         @minLength(1)
         @maxLength(80)
         productLinkId: string,
-      }
+      },
+      ResourceName = "ServiceTagProductLink"
     > {}
 
 @armResourceOperations
@@ -164,7 +165,8 @@ interface WorkspaceTagProductLinkOps
         @minLength(1)
         @maxLength(80)
         productLinkId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceTagProductLink"
     > {}
 
 @armResourceOperations
