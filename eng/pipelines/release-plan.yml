@@ -147,4 +147,4 @@ stages:
                 $ErrorActionPreference = "Stop"
 
                 $artifactPath = "$(Pipeline.Workspace)/release-plan-details/release-plan.json"
-                npm exec --no -- generate-sdk --artifact-file $artifactPath --azsdk-path "$(AZSDK)"
+                npm exec --no -- generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)" --azsdk-path "$(AZSDK)"

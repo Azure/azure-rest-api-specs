@@ -235,16 +235,18 @@ export function runAzdskCommand(args: string[], azsdkPath?: string): CommandResu
  * @returns Parsed release plan object
  * @throws Error if command fails or output cannot be parsed
  */
-export function getReleasePlanById(releasePlanId: string, azsdkPath?: string): ReleasePlanData {
+export function getReleasePlanById(
+  releasePlanId: string,
+  azsdkPath?: string,
+  runner?: AzsdkRunner,
+): ReleasePlanData {
   const trimmedId = releasePlanId.trim();
   if (!trimmedId) {
     throw new Error("releasePlanId is required.");
   }
 
-  const result = runAzdskCommand(
-    ["release-plan", "get", "--release-plan-id", trimmedId, "--output", "json"],
-    azsdkPath,
-  );
+  const run: AzsdkRunner = runner ?? ((args: string[]) => runAzdskCommand(args, azsdkPath));
+  const result = run(["release-plan", "get", "--release-plan-id", trimmedId, "--output", "json"]);
 
   if (result.exitCode !== 0) {
     throw new Error(`Release plan get failed. ${result.stderr || result.stdout}`);

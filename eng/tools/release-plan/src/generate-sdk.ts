@@ -2,15 +2,34 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { getReleasePlanById, runAzdskCommand } from "./release-plan.ts";
-import type { OctokitLike } from "./types.ts";
+import { createAzdskRunner, getReleasePlanById } from "./release-plan.ts";
+import type { AzsdkRunner, OctokitLike } from "./types.ts";
 import { createOctokit } from "./typespec-project.ts";
 
 type SdkLanguage = ".NET" | "Java" | "JavaScript" | "Python" | "Go";
 
+const SDK_LANGUAGES: SdkLanguage[] = [".NET", "Java", "JavaScript", "Python", "Go"];
+
+/**
+ * ReleaseExclusionStatus values that indicate a language is NOT excluded from release.
+ * Any other non-empty status (e.g. "MissingEmitterConfig") marks the language as excluded.
+ */
+const NON_EXCLUDED_STATUSES = new Set(["", "not applicable", "notapplicable", "none", "n/a"]);
+
 interface GenerateSdkCliArgs {
   artifactFile: string;
+  workspace: string;
   azsdkPath?: string;
+}
+
+/**
+ * Injectable dependencies for the SDK generation orchestration, enabling unit tests to
+ * substitute the file system, azsdk runner, and GitHub client.
+ */
+export interface GenerateSdkDependencies {
+  readArtifact: (artifactFile: string) => string;
+  runner: AzsdkRunner;
+  octokit: OctokitLike;
 }
 
 type SdkInfoItem = Record<string, unknown>;
@@ -36,6 +55,11 @@ function parseCliArguments(argv: string[] = process.argv.slice(2)): GenerateSdkC
     options: {
       "artifact-file": {
         type: "string",
+      },
+      workspace: {
+        type: "string",
+        short: "w",
+        default: process.cwd(),
       },
       "azsdk-path": {
         type: "string",
@@ -66,6 +90,7 @@ function parseCliArguments(argv: string[] = process.argv.slice(2)): GenerateSdkC
 
   return {
     artifactFile: path.resolve(artifactFile),
+    workspace: path.resolve(String(values.workspace ?? process.cwd())),
     azsdkPath,
   };
 }
@@ -78,8 +103,28 @@ function showHelp(): void {
   console.log("");
   console.log("Options:");
   console.log("      --artifact-file   Path to release-plan.json artifact");
+  console.log("  -w, --workspace       Path to local repo root (default: cwd)");
   console.log("      --azsdk-path      Absolute path to the azsdk executable");
   console.log("  -h, --help            Show help");
+}
+
+/**
+ * Resolves the TypeSpec project path from the release plan against the workspace root.
+ * Absolute paths are returned unchanged; relative paths are resolved against the workspace
+ * so the value is portable across machines (e.g. a fresh pipeline checkout).
+ * @param rawPath Raw APISpecProjectPath value from the release plan
+ * @param workspace Absolute path to the local repository root
+ * @returns Absolute TypeSpec project path, or an empty string when rawPath is empty
+ */
+export function resolveTypespecProjectPath(rawPath: string, workspace: string): string {
+  const trimmed = rawPath.trim();
+  if (!trimmed) {
+    return "";
+  }
+  if (path.isAbsolute(trimmed)) {
+    return trimmed;
+  }
+  return path.resolve(workspace, trimmed);
 }
 
 export async function getPrStatus(
@@ -115,7 +160,7 @@ export async function getPrStatus(
   }
 }
 
-function parseSdkInfoItems(sdkInfo: unknown): SdkInfoItem[] {
+export function parseSdkInfoItems(sdkInfo: unknown): SdkInfoItem[] {
   if (Array.isArray(sdkInfo)) {
     return sdkInfo as SdkInfoItem[];
   }
@@ -125,7 +170,7 @@ function parseSdkInfoItems(sdkInfo: unknown): SdkInfoItem[] {
   }
 
   try {
-    const parsed = JSON.parse(sdkInfo);
+    const parsed: unknown = JSON.parse(sdkInfo);
     if (Array.isArray(parsed)) {
       return parsed as SdkInfoItem[];
     }
@@ -143,6 +188,18 @@ function findLanguageInfo(items: SdkInfoItem[], language: SdkLanguage): SdkInfoI
   });
 }
 
+/**
+ * Determines whether a language is excluded from release based on its ReleaseExclusionStatus.
+ * Languages without an emitter configuration (e.g. "MissingEmitterConfig") or otherwise
+ * deliberately excluded cannot be generated and must be skipped.
+ * @param languageInfo SDKInfo entry for a single language
+ * @returns true when the language should be excluded from SDK generation
+ */
+export function isLanguageExcluded(languageInfo: SdkInfoItem): boolean {
+  const exclusionStatus = toStringValue(languageInfo.ReleaseExclusionStatus).trim().toLowerCase();
+  return exclusionStatus.length > 0 && !NON_EXCLUDED_STATUSES.has(exclusionStatus);
+}
+
 export async function checkIfSdkNeedsToBeGenerated(params: {
   language: SdkLanguage;
   outcomeNormalized: string;
@@ -151,11 +208,22 @@ export async function checkIfSdkNeedsToBeGenerated(params: {
 }): Promise<boolean> {
   const { language, outcomeNormalized, sdkInfoItems, octokit } = params;
 
+  const languageInfo = findLanguageInfo(sdkInfoItems, language);
+
+  // Exclusion must be validated before any other decision (including newly created plans),
+  // since an excluded language cannot be generated and would fail the whole stage.
+  if (languageInfo && isLanguageExcluded(languageInfo)) {
+    const exclusionStatus = toStringValue(languageInfo.ReleaseExclusionStatus);
+    console.log(
+      `Skipping '${language}' because it is excluded from release (ExclusionStatus=${exclusionStatus}).`,
+    );
+    return false;
+  }
+
   if (outcomeNormalized === "created") {
     return true;
   }
 
-  const languageInfo = findLanguageInfo(sdkInfoItems, language);
   if (!languageInfo) {
     console.log(`No SDKInfo found for '${language}'. Generating SDK.`);
     return true;
@@ -200,10 +268,21 @@ export async function checkIfSdkNeedsToBeGenerated(params: {
 
 export async function mainGenerateSdk(): Promise<void> {
   const args = parseCliArguments();
-  const octokit = createOctokit(undefined);
-  const languages: SdkLanguage[] = [".NET", "Java", "JavaScript", "Python", "Go"];
+  await runGenerateSdk(args, {
+    readArtifact: (artifactFile: string) => readFileSync(artifactFile, "utf8"),
+    runner: createAzdskRunner(args.azsdkPath),
+    octokit: createOctokit(undefined),
+  });
+}
 
-  const artifactRaw = readFileSync(args.artifactFile, "utf8");
+export async function runGenerateSdk(
+  args: GenerateSdkCliArgs,
+  deps: GenerateSdkDependencies,
+): Promise<void> {
+  const { readArtifact, runner, octokit } = deps;
+  const languages = SDK_LANGUAGES;
+
+  const artifactRaw = readArtifact(args.artifactFile);
   const artifact = JSON.parse(artifactRaw) as Record<string, unknown>;
 
   const outcome = toStringValue(artifact.outcome);
@@ -213,7 +292,10 @@ export async function mainGenerateSdk(): Promise<void> {
     unknown
   >;
 
-  const typespecProjectPath = toStringValue(artifactPlanDetails.APISpecProjectPath);
+  const typespecProjectPath = resolveTypespecProjectPath(
+    toStringValue(artifactPlanDetails.APISpecProjectPath),
+    args.workspace,
+  );
 
   const releasePlanId = toStringValue(artifactPlanDetails.ReleasePlanId);
 
@@ -232,9 +314,8 @@ export async function mainGenerateSdk(): Promise<void> {
     throw new Error("Work item id could not be determined from release-plan artifact.");
   }
 
-  let plan: Record<string, unknown> = getReleasePlanById(releasePlanId, args.azsdkPath);
+  let plan: Record<string, unknown> = getReleasePlanById(releasePlanId, args.azsdkPath, runner);
   let planDetails = (plan.release_plan_details ?? {}) as Record<string, unknown>;
-  console.log(`Release plan details: ${JSON.stringify(planDetails)}`);
   const isManagementPlane = Boolean(planDetails.IsManagementPlane);
 
   const sdkReleaseType = toStringValue(planDetails.SDKReleaseType);
@@ -269,7 +350,7 @@ export async function mainGenerateSdk(): Promise<void> {
       );
       continue;
     }
-    
+
     console.log(`Checking SDK details for language '${language}'.`);
     const packageName = toStringValue(languageInfo.PackageName);
     const exclusionStatus = toStringValue(languageInfo.ReleaseExclusionStatus);
@@ -293,19 +374,16 @@ export async function mainGenerateSdk(): Promise<void> {
 
   if (shouldUpdateDetails) {
     console.log("Running release plan update to refresh SDK details.");
-    const updateResult = runAzdskCommand(
-      [
-        "release-plan",
-        "update",
-        "--typespec-path",
-        typespecProjectPath,
-        "--workitem-id",
-        workItemId,
-        "--sdk-type",
-        sdkReleaseType,
-      ],
-      args.azsdkPath,
-    );
+    const updateResult = runner([
+      "release-plan",
+      "update",
+      "--typespec-path",
+      typespecProjectPath,
+      "--workitem-id",
+      workItemId,
+      "--sdk-type",
+      sdkReleaseType,
+    ]);
 
     if (updateResult.exitCode !== 0) {
       throw new Error(
@@ -313,11 +391,10 @@ export async function mainGenerateSdk(): Promise<void> {
       );
     }
 
-    plan = getReleasePlanById(releasePlanId, args.azsdkPath);
+    plan = getReleasePlanById(releasePlanId, args.azsdkPath, runner);
     planDetails = (plan.release_plan_details ?? {}) as Record<string, unknown>;
-    sdkInfoItems = parseSdkInfoItems(planDetails?.SDKInfo);
-  }
-  else {
+    sdkInfoItems = parseSdkInfoItems(planDetails.SDKInfo);
+  } else {
     console.log("Release plan SDK details are up-to-date. No update required.");
   }
 
@@ -339,21 +416,18 @@ export async function mainGenerateSdk(): Promise<void> {
     }
 
     console.log(`Generating SDK for language '${language}'.`);
-    const generateResult = runAzdskCommand(
-      [
-        "spec-workflow",
-        "generate-sdk",
-        "--typespec-project",
-        typespecProjectPath,
-        "--release-type",
-        sdkReleaseType,
-        "--language",
-        language,
-        "--workitem-id",
-        workItemId,
-      ],
-      args.azsdkPath,
-    );
+    const generateResult = runner([
+      "spec-workflow",
+      "generate-sdk",
+      "--typespec-project",
+      typespecProjectPath,
+      "--release-type",
+      sdkReleaseType,
+      "--language",
+      language,
+      "--workitem-id",
+      workItemId,
+    ]);
 
     if (generateResult.exitCode !== 0) {
       console.log(`SDK generation failed for language '${language}'.`);
