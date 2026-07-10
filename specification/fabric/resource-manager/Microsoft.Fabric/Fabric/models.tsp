@@ -43,6 +43,7 @@ union RpSkuTier {
 }
 
 @doc("The overage settings for the Fabric capacity resource")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
 model OverageSettings {
   @doc("The overage state for the capacity.")
   state: OverageSettingsState;
@@ -53,6 +54,7 @@ model OverageSettings {
 }
 
 @doc("The overage state for the Fabric capacity resource.")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
 union OverageSettingsState {
   @doc("Overage is enabled.")
   Enabled: "Enabled",
