@@ -48,8 +48,8 @@ interface AgentEndpointConversations {
   >;
 
   /**
-   * Deletes a conversation and all of its stored data — responses, items, per-turn `voice_metrics`, and
-   * any audio (cascade). This is the customer's explicit data-deletion control for voice conversations.
+   * Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
+   * the customer's explicit data-deletion control for voice conversations.
    */
   @summary("Delete a voice agent conversation")
   @delete
@@ -150,8 +150,8 @@ interface AgentEndpointConversations {
 
   /**
    * Returns a paged collection of items — the complete ordered conversation history, including user input,
-   * assistant output, and client-created tool outputs (transcripts + tool events, with per-turn
-   * `voice_metrics` on message items). Returns `404` when the conversation was not persisted (`store = false`).
+   * assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
+   * conversation was not persisted (`store = false`).
    */
   @summary("List items in a voice agent conversation")
   @get
@@ -174,10 +174,10 @@ interface AgentEndpointConversations {
   >;
 
   /**
-   * Retrieves a single item from the specified conversation by its id, including its transcript and, on message
-   * items, per-turn `voice_metrics`. An `input_audio`/`audio` content part indicates that audio is available for
-   * the item; the canonical per-item audio metadata is the `/items/{item_id}/audio` resource, and the bytes are
-   * streamed by `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+   * Retrieves a single item from the specified conversation by its id, including its transcript. An
+   * `input_audio`/`audio` content part indicates that audio is available for the item; the canonical per-item
+   * audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
+   * `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
    * (`store = false`).
    */
   @summary("Get a voice agent conversation item")

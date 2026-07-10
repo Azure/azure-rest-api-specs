@@ -293,30 +293,6 @@ model VoiceItemError {
   message?: string;
 }
 
-@doc("""
-  Per-turn voice metrics for a message item (a Foundry extension). Latency figures are in milliseconds.
-  """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMetrics {
-  @doc("Time to first token, in milliseconds.")
-  ttft_ms?: int32;
-
-  @doc("Time to first audio, in milliseconds.")
-  ttfa_ms?: int32;
-
-  @doc("Average inter-token latency, in milliseconds.")
-  itl_avg_ms?: int32;
-
-  @doc("The turn's audio (or token span) duration, in milliseconds.")
-  duration_ms?: int32;
-
-  @doc("Whether the turn was interrupted (barge-in).")
-  interrupted?: boolean;
-
-  @doc("The offset from the start of the turn at which it was interrupted, in milliseconds.")
-  interrupt_offset_ms?: int32;
-}
-
 @doc("A single file search result entry.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceFileSearchResult {
@@ -387,9 +363,6 @@ model VoiceMessageItem extends VoiceConversationItem {
 
   @doc("The status of the item.")
   status?: VoiceItemStatus;
-
-  @doc("Per-turn voice metrics (Foundry extension).")
-  voice_metrics?: VoiceMetrics;
 }
 
 @doc("A function call request item.")

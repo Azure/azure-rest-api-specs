@@ -2052,7 +2052,7 @@
       "delete": {
         "operationId": "AgentEndpointConversations_deleteAgentConversation",
         "summary": "Delete a voice agent conversation",
-        "description": "Deletes a conversation and all of its stored data — responses, items, per-turn `voice_metrics`, and\nany audio (cascade). This is the customer's explicit data-deletion control for voice conversations.",
+        "description": "Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is\nthe customer's explicit data-deletion control for voice conversations.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2346,7 +2346,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_listAgentConversationItems",
         "summary": "List items in a voice agent conversation",
-        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events, with per-turn\n`voice_metrics` on message items). Returns `404` when the conversation was not persisted (`store = false`).",
+        "description": "Returns a paged collection of items — the complete ordered conversation history, including user input,\nassistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the\nconversation was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -2512,7 +2512,7 @@
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationItem",
         "summary": "Get a voice agent conversation item",
-        "description": "Retrieves a single item from the specified conversation by its id, including its transcript and, on message\nitems, per-turn `voice_metrics`. An `input_audio`/`audio` content part indicates that audio is available for\nthe item; the canonical per-item audio metadata is the `/items/{item_id}/audio` resource, and the bytes are\nstreamed by `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted\n(`store = false`).",
+        "description": "Retrieves a single item from the specified conversation by its id, including its transcript. An\n`input_audio`/`audio` content part indicates that audio is available for the item; the canonical per-item\naudio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by\n`/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted\n(`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -63393,14 +63393,6 @@
               }
             ],
             "description": "The status of the item."
-          },
-          "voice_metrics": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/VoiceMetrics"
-              }
-            ],
-            "description": "Per-turn voice metrics (Foundry extension)."
           }
         },
         "allOf": [
@@ -63430,46 +63422,6 @@
           }
         ],
         "description": "The role of a voice message item.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "PromptVoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "VoiceMetrics": {
-        "type": "object",
-        "properties": {
-          "ttft_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Time to first token, in milliseconds."
-          },
-          "ttfa_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Time to first audio, in milliseconds."
-          },
-          "itl_avg_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Average inter-token latency, in milliseconds."
-          },
-          "duration_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The turn's audio (or token span) duration, in milliseconds."
-          },
-          "interrupted": {
-            "type": "boolean",
-            "description": "Whether the turn was interrupted (barge-in)."
-          },
-          "interrupt_offset_ms": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The offset from the start of the turn at which it was interrupted, in milliseconds."
-          }
-        },
-        "description": "Per-turn voice metrics for a message item (a Foundry extension). Latency figures are in milliseconds.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"

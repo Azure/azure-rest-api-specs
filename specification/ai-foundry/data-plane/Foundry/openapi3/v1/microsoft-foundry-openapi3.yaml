@@ -1276,8 +1276,8 @@ paths:
       operationId: AgentEndpointConversations_deleteAgentConversation
       summary: Delete a voice agent conversation
       description: |-
-        Deletes a conversation and all of its stored data — responses, items, per-turn `voice_metrics`, and
-        any audio (cascade). This is the customer's explicit data-deletion control for voice conversations.
+        Deletes a conversation and all of its stored data — responses, items, and any audio (cascade). This is
+        the customer's explicit data-deletion control for voice conversations.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1481,8 +1481,8 @@ paths:
       summary: List items in a voice agent conversation
       description: |-
         Returns a paged collection of items — the complete ordered conversation history, including user input,
-        assistant output, and client-created tool outputs (transcripts + tool events, with per-turn
-        `voice_metrics` on message items). Returns `404` when the conversation was not persisted (`store = false`).
+        assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
+        conversation was not persisted (`store = false`).
       parameters:
         - name: Foundry-Features
           in: header
@@ -1605,10 +1605,10 @@ paths:
       operationId: AgentEndpointConversations_getAgentConversationItem
       summary: Get a voice agent conversation item
       description: |-
-        Retrieves a single item from the specified conversation by its id, including its transcript and, on message
-        items, per-turn `voice_metrics`. An `input_audio`/`audio` content part indicates that audio is available for
-        the item; the canonical per-item audio metadata is the `/items/{item_id}/audio` resource, and the bytes are
-        streamed by `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+        Retrieves a single item from the specified conversation by its id, including its transcript. An
+        `input_audio`/`audio` content part indicates that audio is available for the item; the canonical per-item
+        audio metadata is the `/items/{item_id}/audio` resource, and the bytes are streamed by
+        `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
         (`store = false`).
       parameters:
         - name: Foundry-Features
@@ -40071,10 +40071,6 @@ components:
           allOf:
             - $ref: '#/components/schemas/VoiceItemStatus'
           description: The status of the item.
-        voice_metrics:
-          allOf:
-            - $ref: '#/components/schemas/VoiceMetrics'
-          description: Per-turn voice metrics (Foundry extension).
       allOf:
         - $ref: '#/components/schemas/VoiceConversationItem'
       description: A message item (user, assistant, or system).
@@ -40090,36 +40086,6 @@ components:
             - assistant
             - system
       description: The role of a voice message item.
-      x-ms-foundry-meta:
-        required_previews:
-          - PromptVoiceAgents=V1Preview
-    VoiceMetrics:
-      type: object
-      properties:
-        ttft_ms:
-          type: integer
-          format: int32
-          description: Time to first token, in milliseconds.
-        ttfa_ms:
-          type: integer
-          format: int32
-          description: Time to first audio, in milliseconds.
-        itl_avg_ms:
-          type: integer
-          format: int32
-          description: Average inter-token latency, in milliseconds.
-        duration_ms:
-          type: integer
-          format: int32
-          description: The turn's audio (or token span) duration, in milliseconds.
-        interrupted:
-          type: boolean
-          description: Whether the turn was interrupted (barge-in).
-        interrupt_offset_ms:
-          type: integer
-          format: int32
-          description: The offset from the start of the turn at which it was interrupted, in milliseconds.
-      description: Per-turn voice metrics for a message item (a Foundry extension). Latency figures are in milliseconds.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
