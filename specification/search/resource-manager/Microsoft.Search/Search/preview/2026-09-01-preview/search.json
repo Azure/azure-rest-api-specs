@@ -71,13 +71,13 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Search/offerings": {
-      "get": {
-        "operationId": "Offerings_List",
+    "/providers/Microsoft.Search/fetchOfferings": {
+      "post": {
+        "operationId": "Offerings_FetchOfferings",
         "tags": [
           "Offerings"
         ],
-        "description": "Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.",
+        "description": "Fetches the features and SKUs offered by the Azure AI Search service in each region, along with the recommended default region for creating new services.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -87,7 +87,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OfferingsListResult"
+              "$ref": "#/definitions/OfferingsResult"
             }
           },
           "default": {
@@ -98,12 +98,9 @@
           }
         },
         "x-ms-examples": {
-          "SearchListOfferings": {
-            "$ref": "./examples/SearchListOfferings.json"
+          "SearchFetchOfferings": {
+            "$ref": "./examples/SearchFetchOfferings.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
@@ -2655,25 +2652,25 @@
         }
       }
     },
-    "OfferingsListResult": {
+    "OfferingsResult": {
       "type": "object",
-      "description": "Response containing the list of offerings available in Azure AI Search, organized by region.",
+      "description": "Response containing the available Azure AI Search offerings, organized by region, along with the recommended default region for creating new services.",
       "properties": {
-        "value": {
+        "defaultRegion": {
+          "type": "string",
+          "description": "The recommended default region for creating new Azure AI Search services.",
+          "readOnly": true
+        },
+        "regions": {
           "type": "array",
           "description": "The list of Azure AI Search offerings by region.",
           "items": {
             "$ref": "#/definitions/OfferingsByRegion"
           },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of offerings, if any.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
-      },
-      "x-ms-external": true
+      }
     },
     "OperationListResult": {
       "type": "object",

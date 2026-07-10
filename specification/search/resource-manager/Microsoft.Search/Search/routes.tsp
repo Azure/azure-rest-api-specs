@@ -129,6 +129,7 @@ interface Offerings {
    * Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
+  @removed(Versions.v2026_09_01_preview)
   @autoRoute
   @get
   @action("offerings")
@@ -137,6 +138,22 @@ interface Offerings {
   list is ArmProviderActionSync<
     Request = void,
     Response = OfferingsListResult,
+    Scope = TenantActionScope,
+    Parameters = {},
+    Error = CloudError
+  >;
+
+  /**
+   * Fetches the features and SKUs offered by the Azure AI Search service in each region, along with the recommended default region for creating new services.
+   */
+  @added(Versions.v2026_09_01_preview)
+  @autoRoute
+  @post
+  @action("fetchOfferings")
+  @tag("Offerings")
+  fetchOfferings is ArmProviderActionSync<
+    Request = void,
+    Response = OfferingsResult,
     Scope = TenantActionScope,
     Parameters = {},
     Error = CloudError
