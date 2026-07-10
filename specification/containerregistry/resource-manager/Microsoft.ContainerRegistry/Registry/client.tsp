@@ -32,7 +32,7 @@ using Microsoft.ContainerRegistry;
 @@clientName(
   MyPrivateLinkResource,
   "PrivateLinkResource",
-  "java,javascript,go"
+  "java,javascript,go,python"
 );
 
 @@clientName(IPRule.value, "$DO_NOT_NORMALIZE$iPAddressOrRange", "javascript");

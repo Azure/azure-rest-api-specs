@@ -54,7 +54,28 @@ interface QueueClient extends Queue {}
 
 @@clientName(MetadataHeaders.metadata, "metadata", "rust");
 
-@@scope(Service.getUserDelegationKey, "!rust");
+@@alternateType(
+  UserDelegationKey,
+  {
+    identity: "azure_storage_common::models::UserDelegationKey",
+  },
+  "rust"
+);
+
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.start,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
+@@clientOption(
+  KeyInfo.expiry,
+  "serialize_with",
+  "azure_storage_common::rfc3339::seconds_only::option::serialize",
+  "rust"
+);
 
 // Go customizations
 @@access(StorageErrorCode, Access.public, "go");
