@@ -638,11 +638,12 @@ interface Container {
   /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
   @added(Versions.v2026_12_06)
   @get
   @sharedRoute
   @route("?restype=container&comp=list")
-  listBlobFlatSegmentApacheArrow is StorageOperationNoBody<
+  listBlobFlatSegmentApacheArrow is StorageOperationResponseBody<
     {
       /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
       #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
@@ -658,14 +659,9 @@ interface Container {
       ...ListBlobsEndBefore;
     },
     {
-      /** The content type of the body of the response. */
-      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
-      @header("Content-Type")
-      contentType: "application/vnd.apache.arrow.stream" | "application/xml";
-
       @body body: bytes;
-    }
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
   >;
 
   /** Returns a list of the blobs in the specified container. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
@@ -697,11 +693,12 @@ interface Container {
   /** Returns a list of the blobs in Apache Arrow format as raw data, to be deserialized by the client. A delimiter can be used to traverse a virtual hierarchy of blobs as though it were a file system. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Keeping operation shape inline with existing service patterns"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Keeping operation shape inline with existing service patterns"
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
   @added(Versions.v2026_12_06)
   @get
   @sharedRoute
   @route("?restype=container&comp=list")
-  listBlobHierarchySegmentApacheArrow is StorageOperationNoBody<
+  listBlobHierarchySegmentApacheArrow is StorageOperationResponseBody<
     {
       /** The Accept header indicating the response should be returned as an Apache Arrow stream, falling back to XML otherwise. */
       #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
@@ -720,14 +717,9 @@ interface Container {
       ...ListBlobsEndBefore;
     },
     {
-      /** The content type of the body of the response. */
-      #suppress "@typespec/http/content-type-ignored" "Raw response, deserialized by client"
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Fixed set of content types returned by the service"
-      @header("Content-Type")
-      contentType: "application/vnd.apache.arrow.stream" | "application/xml";
-
       @body body: bytes;
-    }
+    },
+    "application/vnd.apache.arrow.stream" | "application/xml"
   >;
 
   /** Returns information about the storage account. */
