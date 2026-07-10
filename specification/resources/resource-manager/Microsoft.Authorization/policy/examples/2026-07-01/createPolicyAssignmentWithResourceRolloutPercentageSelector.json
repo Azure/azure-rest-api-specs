@@ -3,12 +3,18 @@
     "api-version": "2026-07-01",
     "parameters": {
       "properties": {
+        "description": "Limit resources by rollout percentage",
+        "displayName": "Limit resources by rollout percentage",
+        "metadata": {
+          "assignedBy": "Special Someone"
+        },
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/CostManagement",
         "resourceSelectors": [
           {
             "name": "SDPRollout",
             "selectors": [
               {
-                "kind": "resourcePercentage",
+                "kind": "resourceRolloutPercentage",
                 "progress": 80
               }
             ]
@@ -20,7 +26,7 @@
     "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
   "responses": {
-    "200": {
+    "201": {
       "body": {
         "name": "CostManagement",
         "type": "Microsoft.Authorization/policyAssignments",
@@ -41,7 +47,7 @@
               "name": "SDPRollout",
               "selectors": [
                 {
-                  "kind": "resourcePercentage",
+                  "kind": "resourceRolloutPercentage",
                   "progress": 80
                 }
               ]
@@ -53,6 +59,6 @@
       "headers": {}
     }
   },
-  "operationId": "PolicyAssignments_Update",
-  "title": "Update a policy assignment with a resource percentage selector"
+  "operationId": "PolicyAssignments_Create",
+  "title": "Create or update a policy assignment with a resource rollout percentage selector"
 }

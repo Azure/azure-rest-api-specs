@@ -1,6 +1,21 @@
 {
   "parameters": {
     "api-version": "2026-07-01",
+    "parameters": {
+      "properties": {
+        "resourceSelectors": [
+          {
+            "name": "SDPRollout",
+            "selectors": [
+              {
+                "kind": "resourceRolloutPercentage",
+                "progress": 80
+              }
+            ]
+          }
+        ]
+      }
+    },
     "policyAssignmentName": "CostManagement",
     "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
   },
@@ -26,7 +41,7 @@
               "name": "SDPRollout",
               "selectors": [
                 {
-                  "kind": "resourcePercentage",
+                  "kind": "resourceRolloutPercentage",
                   "progress": 80
                 }
               ]
@@ -38,6 +53,6 @@
       "headers": {}
     }
   },
-  "operationId": "PolicyAssignments_Get",
-  "title": "Retrieve a policy assignment with a resource percentage selector"
+  "operationId": "PolicyAssignments_Update",
+  "title": "Update a policy assignment with a resource rollout percentage selector"
 }
