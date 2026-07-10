@@ -36033,7 +36033,12 @@
           },
           "draft": {
             "type": "boolean",
-            "description": "When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. When `false` (the default), the agent is created and published normally.",
+            "description": "(Preview) When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.",
+            "x-ms-foundry-meta": {
+              "conditional_previews": [
+                "DraftAgents=V1Preview"
+              ]
+            },
             "default": false
           }
         },

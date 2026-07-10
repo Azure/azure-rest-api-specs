@@ -761,7 +761,11 @@ model GenerateVoiceAgentRequest {
   @doc("Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).")
   tools?: VoiceAgentTool[];
 
-  @doc("When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. When `false` (the default), the agent is created and published normally.")
+  @doc("(Preview) When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. The service defaults to `false` if a value is not specified by the caller, in which case the agent is created and published normally.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ conditional_previews: #[AgentDefinitionOptInKeys.draft_agents_v1_preview] }
+  )
   draft?: boolean = false;
 }
 
