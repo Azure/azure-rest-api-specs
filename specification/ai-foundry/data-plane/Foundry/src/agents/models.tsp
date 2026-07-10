@@ -673,11 +673,11 @@ model AgentIdentity {
   @doc("The client ID of the agent instance. Also referred to as the instance ID")
   client_id: string;
 
-  @doc("The status of the agent identity")
+  @doc("The status of the agent identity. Present for both the agent instance identity and the agent blueprint.")
   status?: AgentIdentityStatus;
 }
 
-@doc("The status of an agent identity.")
+@doc("The status of an agent identity, applicable to both the agent instance identity and the agent blueprint.")
 union AgentIdentityStatus {
   string,
 
