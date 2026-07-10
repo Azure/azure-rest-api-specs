@@ -1914,9 +1914,9 @@
           "description": "The Fully Qualified Domain Name of the DNS record associated to a Traffic Controller frontend.",
           "readOnly": true
         },
-        "type": {
-          "$ref": "#/definitions/FrontendType",
-          "description": "Frontend Type."
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether public network access is allowed for the frontend. Enabled indicates a public frontend; Disabled indicates a private frontend."
         },
         "association": {
           "$ref": "#/definitions/FrontendAssociation",
@@ -1931,30 +1931,6 @@
           "description": "Provisioning State of Traffic Controller Frontend Resource",
           "readOnly": true
         }
-      }
-    },
-    "FrontendType": {
-      "type": "string",
-      "description": "Frontend Type Enum",
-      "enum": [
-        "public",
-        "private"
-      ],
-      "x-ms-enum": {
-        "name": "FrontendType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Public",
-            "value": "public",
-            "description": "Public frontend accessible via a public IP address."
-          },
-          {
-            "name": "Private",
-            "value": "private",
-            "description": "Private frontend accessible only through a private endpoint."
-          }
-        ]
       }
     },
     "FrontendUpdate": {
@@ -1979,9 +1955,9 @@
       "type": "object",
       "description": "The updatable properties of the Frontend.",
       "properties": {
-        "type": {
-          "$ref": "#/definitions/FrontendType",
-          "description": "Frontend Type."
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Whether public network access is allowed for the frontend. Enabled indicates a public frontend; Disabled indicates a private frontend."
         },
         "association": {
           "$ref": "#/definitions/FrontendAssociationUpdate",
@@ -2359,6 +2335,30 @@
         ]
       },
       "readOnly": true
+    },
+    "PublicNetworkAccess": {
+      "type": "string",
+      "description": "Whether public network access is allowed for the frontend.",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "PublicNetworkAccess",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "enabled",
+            "description": "Public network access is enabled (public frontend accessible via a public IP address)."
+          },
+          {
+            "name": "Disabled",
+            "value": "disabled",
+            "description": "Public network access is disabled (private frontend accessible only through a private endpoint)."
+          }
+        ]
+      }
     },
     "ResourceId": {
       "type": "object",

@@ -172,7 +172,7 @@ using Microsoft.ServiceNetworking;
   "csharp"
 );
 
-@@clientName(FrontendType, "TrafficControllerFrontendType", "csharp");
+@@clientName(PublicNetworkAccess, "TrafficControllerPublicNetworkAccess", "csharp");
 @@clientName(
   PrivateLinkServiceConnectionStatus,
   "ServiceNetworkingPrivateLinkServiceConnectionStatus",

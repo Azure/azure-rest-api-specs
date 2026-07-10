@@ -60,10 +60,9 @@ model FrontendProperties {
   @visibility(Lifecycle.Read)
   fqdn?: string;
 
-  /** Frontend Type. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "Frontend type is a domain-specific property (public/private) distinct from the ARM envelope resource type and is retained intentionally."
+  /** Whether public network access is allowed for the frontend. Enabled indicates a public frontend; Disabled indicates a private frontend. */
   @added(Versions.v2025_10_01_preview)
-  type?: FrontendType;
+  publicNetworkAccess?: PublicNetworkAccess;
 
   /** Reference to an Association resource that contains the subnet where the private frontend should be deployed. */
   @added(Versions.v2025_10_01_preview)
@@ -78,16 +77,16 @@ model FrontendProperties {
   provisioningState?: ProvisioningState;
 }
 
-/** Frontend Type Enum */
+/** Whether public network access is allowed for the frontend. */
 @added(Versions.v2025_10_01_preview)
-union FrontendType {
+union PublicNetworkAccess {
   string,
 
-  /** Public frontend accessible via a public IP address. */
-  Public: "public",
+  /** Public network access is enabled (public frontend accessible via a public IP address). */
+  Enabled: "enabled",
 
-  /** Private frontend accessible only through a private endpoint. */
-  Private: "private",
+  /** Public network access is disabled (private frontend accessible only through a private endpoint). */
+  Disabled: "disabled",
 }
 
 /** Reference to an Association resource. */
