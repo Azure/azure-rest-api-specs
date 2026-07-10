@@ -120,6 +120,35 @@ interface AgentEndpointConversations {
   >;
 
   /**
+   * Returns a paged collection of the output items produced by a specific response (the response's output
+   * projection). For the complete ordered conversation history — including user input and client-created
+   * tool outputs — use the conversation items route instead. Returns `404` when the conversation or
+   * response was not persisted (`store = false`).
+   */
+  @summary("List items produced by a voice agent conversation response")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/responses/{response_id}/items")
+  @list
+  @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
+  listAgentConversationResponseItems is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the response. */
+      @path conversation_id: string;
+
+      /** The id of the response whose output items are listed. */
+      @path response_id: string;
+
+      ...UserIsolationKeyHeader;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<VoiceConversationItem>
+  >;
+
+  /**
    * Returns a paged collection of items — the complete ordered conversation history, including user input,
    * assistant output, and client-created tool outputs (transcripts + tool events). Returns `404` when the
    * conversation was not persisted (`store = false`).
