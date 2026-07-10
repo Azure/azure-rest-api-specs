@@ -1342,9 +1342,12 @@ paths:
       summary: Get a voice agent conversation's merged recording metadata
       description: |-
         Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio
-        on the right), including a service-managed `blob_path` (no SAS token). The recording is built once from
-        the per-turn segments after the session ends; a request against an in-progress session returns `409`.
-        Requires the conversation to have persisted audio (`store = true`); otherwise returns `404`.
+        on the right). The common metadata (format, sample rate, channels, channel layout, duration) is returned
+        for both Foundry-managed and bring-your-own-storage (BYOS) recordings; for BYOS the response additionally
+        includes `blob_path`, a direct path into the customer's own storage (no SAS) that the customer downloads
+        with their own credentials. The recording is built once from the per-turn segments after the session ends;
+        a request against an in-progress session returns `409`. Requires the conversation to have persisted audio
+        (`store = true`); otherwise returns `404`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -1409,8 +1412,11 @@ paths:
       summary: Stream a voice agent conversation's merged recording
       description: |-
         Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service
-        (no SAS URL). Same gating as the metadata route: the session must have ended (else `409`) and the
-        conversation must have persisted audio (`store = true`, else `404`).
+        (no SAS URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS)
+        recordings the bytes are not proxied — the caller must download directly from customer storage using the
+        `blob_path` returned by the metadata route — so this route returns `409 Conflict` for BYOS recordings.
+        A request against an in-progress session also returns `409` (a distinct condition: session-not-ended
+        versus BYOS-download-required). A conversation without persisted audio (`store = false`) returns `404`.
       parameters:
         - name: Foundry-Features
           in: header
@@ -40137,7 +40143,6 @@ components:
         - channels
         - channel_layout
         - duration_ms
-        - blob_path
       properties:
         conversation_id:
           type: string
@@ -40163,12 +40168,15 @@ components:
           description: The total duration of the recording in milliseconds.
         blob_path:
           type: string
-          description: The service-managed path to the recording blob. No SAS token is included; use the `/audio/content` route to stream the bytes.
+          description: "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead."
       description: |-
         Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
-        agent audio on the right). Built once from the per-turn segments after the session ends and durably cached. The
-        recording is referenced by a service-managed `blob_path`; no SAS token is returned — stream the bytes via the
-        `/audio/content` route.
+        agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
+        The common metadata (format, sample rate, channels, channel layout, duration) is returned for both
+        Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,
+        a direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own
+        storage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the
+        `/audio/content` route instead.
       x-ms-foundry-meta:
         required_previews:
           - PromptVoiceAgents=V1Preview
