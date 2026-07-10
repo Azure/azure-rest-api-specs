@@ -818,6 +818,9 @@ model GenerateVoiceAgentRequest {
 
   @doc("Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).")
   tools?: VoiceAgentTool[];
+
+  @doc("When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. When `false` (the default), the agent is created and published normally.")
+  draft?: boolean = false;
 }
 
 @doc("The role assigned to each channel of a merged stereo voice recording.")

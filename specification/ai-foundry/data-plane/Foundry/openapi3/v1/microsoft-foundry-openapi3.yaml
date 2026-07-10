@@ -17896,6 +17896,10 @@ components:
           items:
             $ref: '#/components/schemas/VoiceAgentTool'
           description: Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).
+        draft:
+          type: boolean
+          description: When `true`, the generated `prompt_voice` agent is created as a draft — an editable, unpublished version the caller can review and refine before publishing it via the standard create/version path. When `false` (the default), the agent is created and published normally.
+          default: false
       description: |-
         The request for guided authoring (`POST /agents:generate_voice`). A few high-level inputs plus a natural-language
         `goal` are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard
