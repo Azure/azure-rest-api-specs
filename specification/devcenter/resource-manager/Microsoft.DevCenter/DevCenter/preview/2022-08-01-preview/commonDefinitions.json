@@ -178,6 +178,90 @@
         "name": "EnableStatus",
         "modelAsString": true
       }
+    },
+    "ImageValidationErrorDetails": {
+      "type": "object",
+      "description": "Image validation error details",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error."
+        }
+      }
+    },
+    "DomainJoinType": {
+      "description": "Active Directory join type",
+      "enum": [
+        "HybridAzureADJoin",
+        "AzureADJoin"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DomainJoinType",
+        "modelAsString": true
+      }
+    },
+    "HealthCheckStatus": {
+      "description": "Health check status values",
+      "enum": [
+        "Pending",
+        "Running",
+        "Passed",
+        "Failed",
+        "Warning",
+        "Unknown"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HealthCheckStatus",
+        "modelAsString": true
+      }
+    },
+    "ImageValidationStatus": {
+      "description": "Image validation status",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Succeeded",
+        "Failed",
+        "TimedOut"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ImageValidationStatus",
+        "modelAsString": true
+      }
+    },
+    "ImageReference": {
+      "type": "object",
+      "description": "Image reference information",
+      "properties": {
+        "id": {
+          "description": "Image ID, or Image version ID. When Image ID is provided, its latest version will be used.",
+          "type": "string"
+        },
+        "exactVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The actual version of the image after use. When id references a gallery image latest version, this will indicate the actual version in use."
+        },
+        "publisher": {
+          "description": "The image publisher.",
+          "type": "string"
+        },
+        "offer": {
+          "description": "The image offer.",
+          "type": "string"
+        },
+        "sku": {
+          "description": "The image sku.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {

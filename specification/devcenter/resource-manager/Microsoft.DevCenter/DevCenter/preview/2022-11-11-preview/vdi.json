@@ -1047,62 +1047,6 @@
         }
       }
     },
-    "ImageReference": {
-      "type": "object",
-      "description": "Image reference information",
-      "properties": {
-        "id": {
-          "description": "Image ID, or Image version ID. When Image ID is provided, its latest version will be used.",
-          "type": "string"
-        },
-        "exactVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The actual version of the image after use. When id references a gallery image latest version, this will indicate the actual version in use."
-        },
-        "publisher": {
-          "description": "The image publisher.",
-          "type": "string"
-        },
-        "offer": {
-          "description": "The image offer.",
-          "type": "string"
-        },
-        "sku": {
-          "description": "The image sku.",
-          "type": "string"
-        }
-      }
-    },
-    "ImageValidationStatus": {
-      "description": "Image validation status",
-      "enum": [
-        "Unknown",
-        "Pending",
-        "Succeeded",
-        "Failed",
-        "TimedOut"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ImageValidationStatus",
-        "modelAsString": true
-      }
-    },
-    "ImageValidationErrorDetails": {
-      "type": "object",
-      "description": "Image validation error details",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error."
-        }
-      }
-    },
     "NetworkConnection": {
       "type": "object",
       "description": "Network related settings",
@@ -1178,7 +1122,7 @@
         },
         "healthCheckStatus": {
           "description": "Overall health status of the network connection. Health checks are run on creation, update, and periodically to validate the network connection.",
-          "$ref": "#/definitions/HealthCheckStatus",
+          "$ref": "commonDefinitions.json#/definitions/HealthCheckStatus",
           "readOnly": true
         },
         "networkingResourceGroupName": {
@@ -1191,7 +1135,7 @@
         },
         "domainJoinType": {
           "description": "AAD Join type.",
-          "$ref": "#/definitions/DomainJoinType",
+          "$ref": "commonDefinitions.json#/definitions/DomainJoinType",
           "x-ms-mutability": [
             "read",
             "create"
@@ -1220,34 +1164,6 @@
           "type": "string",
           "readOnly": true
         }
-      }
-    },
-    "DomainJoinType": {
-      "description": "Active Directory join type",
-      "enum": [
-        "HybridAzureADJoin",
-        "AzureADJoin"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DomainJoinType",
-        "modelAsString": true
-      }
-    },
-    "HealthCheckStatus": {
-      "description": "Health check status values",
-      "enum": [
-        "Pending",
-        "Running",
-        "Passed",
-        "Failed",
-        "Warning",
-        "Unknown"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "HealthCheckStatus",
-        "modelAsString": true
       }
     },
     "HealthCheckStatusDetails": {
@@ -1299,7 +1215,7 @@
       "properties": {
         "status": {
           "description": "The status of the health check item.",
-          "$ref": "#/definitions/HealthCheckStatus",
+          "$ref": "commonDefinitions.json#/definitions/HealthCheckStatus",
           "readOnly": true
         },
         "displayName": {
