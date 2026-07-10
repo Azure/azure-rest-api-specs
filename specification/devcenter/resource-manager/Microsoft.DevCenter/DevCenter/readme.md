@@ -283,6 +283,7 @@ input-file:
   - preview/2024-05-01-preview/devcenter.json
   - preview/2024-05-01-preview/vdi.json
 ```
+
 ### Tag: package-2024-02
 
 These settings apply only when `--tag=package-2024-02` is specified on the command line.
@@ -366,6 +367,7 @@ These settings apply only when `--tag=package-2022-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
+  - preview/2022-08-01-preview/commonDefinitions.json
   - preview/2022-08-01-preview/devcenter.json
   - preview/2022-08-01-preview/vdi.json
 ```
@@ -376,6 +378,7 @@ These settings apply only when `--tag=package-2022-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-09-01-preview'
 input-file:
+  - preview/2022-09-01-preview/commonDefinitions.json
   - preview/2022-09-01-preview/devcenter.json
   - preview/2022-09-01-preview/vdi.json
 ```
