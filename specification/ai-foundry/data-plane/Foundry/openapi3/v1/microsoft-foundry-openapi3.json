@@ -6,6 +6,9 @@
   },
   "tags": [
     {
+      "name": "Agent Conversations"
+    },
+    {
       "name": "Fine-Tuning"
     },
     {
@@ -1813,6 +1816,933 @@
         }
       }
     },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations": {
+      "get": {
+        "operationId": "AgentEndpointConversations_listAgentConversations",
+        "summary": "List conversations for a voice agent",
+        "description": "Returns a paged collection of conversations recorded for the specified voice agent endpoint.\nRequires the agent's definition to persist conversations (`store = true`); otherwise no conversations exist.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversation",
+        "summary": "Get a voice agent conversation",
+        "description": "Retrieves a single conversation recorded for the specified voice agent endpoint by its id.\nReturns `404` when the conversation was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.ConversationResource"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "delete": {
+        "operationId": "AgentEndpointConversations_deleteAgentConversation",
+        "summary": "Delete a voice agent conversation",
+        "description": "Deletes a conversation and all of its stored data — transcripts, per-turn `voice_metrics`, and any audio\nblobs (cascade). This is the customer's explicit data-deletion control for voice conversations.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation to delete.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.DeletedConversationResource"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationAudio",
+        "summary": "Get a voice agent conversation's merged recording metadata",
+        "description": "Returns metadata for the whole-call merged stereo recording (user audio on the left channel, agent audio\non the right), including a service-managed `blob_path` (no SAS token). The recording is built once from the\nper-turn segments after the session ends; a request against an in-progress session returns `409`. Requires\nthe conversation to have persisted audio (`store = true`); otherwise returns `404`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose merged recording metadata is retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceRecordingResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationAudioContent",
+        "summary": "Stream a voice agent conversation's merged recording",
+        "description": "Streams the whole-call merged stereo recording as a WAV (`audio/wav`) byte stream through the service\n(no SAS URL). Same gating as the metadata route: the session must have ended (else `409`) and the\nconversation must have persisted audio (`store = true`, else `404`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose merged recording is streamed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items": {
+      "get": {
+        "operationId": "AgentEndpointConversations_listAgentConversationItems",
+        "summary": "List items in a voice agent conversation",
+        "description": "Returns a paged collection of items (transcript turns and tool events) belonging to the specified\nconversation. Each item carries its transcript and, when audio was persisted, per-turn `voice_metrics`\nand an audio reference. Returns `404` when the conversation was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation whose items are listed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the\ndefault is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "description": "Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`\nfor descending order.",
+            "schema": {
+              "$ref": "#/components/schemas/PageOrder"
+            },
+            "explode": false
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `after` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "required": false,
+            "description": "A cursor for use in pagination. `before` is an object ID that defines your place in the list.\nFor instance, if you make a list request and receive 100 objects, ending with obj_foo, your\nsubsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data",
+                    "has_more"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/OpenAI.OutputItem"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "first_id": {
+                      "type": "string",
+                      "description": "The first ID represented in this list."
+                    },
+                    "last_id": {
+                      "type": "string",
+                      "description": "The last ID represented in this list."
+                    },
+                    "has_more": {
+                      "type": "boolean",
+                      "description": "A value indicating whether there are additional values available not captured in this list."
+                    }
+                  },
+                  "description": "The response data for a requested list of items."
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items/{item_id}": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItem",
+        "summary": "Get a voice agent conversation item",
+        "description": "Retrieves a single item from the specified conversation by its id, including its transcript and — when\naudio was persisted — per-turn `voice_metrics` and an audio reference. Returns `404` when the conversation\nor item was not persisted (`store = false`).",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAI.OutputItem"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/openai/conversations/{conversation_id}/items/{item_id}/audio": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemAudio",
+        "summary": "Get a voice agent conversation item's audio",
+        "description": "Streams one turn's audio as a WAV (`audio/wav`) byte stream through the service (no SAS URL).\nRequires the conversation to have persisted audio (`store = true`); otherwise returns `404`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose audio is streamed.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.",
+            "content": {
+              "audio/wav": {
+                "schema": {
+                  "contentMediaType": "audio/wav"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
     "/agents/{agent_name}/endpoint/sessions": {
       "post": {
         "operationId": "Agents_createSession",
@@ -3453,6 +4383,87 @@
               }
             }
           }
+        }
+      }
+    },
+    "/agents:generate_voice": {
+      "post": {
+        "operationId": "Agents_generateVoiceAgent",
+        "summary": "Generate a voice agent",
+        "description": "Guided authoring for a voice-first prompt agent. Expands a few high-level inputs and a natural-language\ngoal into a full, editable `prompt_voice` agent definition, then creates the agent through the standard\ncreate path and returns the created `AgentObject`. The generated `instructions` and audio/voice settings\nare stored as separate fields on the agent definition, so the caller can edit or override them afterward\nvia normal versioning.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentObject"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agents"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateVoiceAgentRequest"
+              }
+            }
+          }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
         }
       }
     },
@@ -17779,8 +18790,7 @@
               "a2a",
               "mcp",
               "invocations",
-              "invocations_ws",
-              "voice"
+              "invocations_ws"
             ]
           }
         ]
@@ -25093,6 +26103,72 @@
           }
         },
         "description": "Details of a function tool call."
+      },
+      "GenerateVoiceAgentRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "model_type",
+          "model",
+          "agent_type",
+          "use_case",
+          "goal"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The unique name for the agent to create."
+          },
+          "model_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceModelType"
+              }
+            ],
+            "description": "How the model backing the generated agent is served: `managed` (Voice Live-hosted) or `self_deployed` (BYOM). Carried through to the generated definition, not generated."
+          },
+          "model": {
+            "type": "string",
+            "description": "The model paired with `model_type`: the Voice Live-hosted model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated."
+          },
+          "agent_type": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentType"
+              }
+            ],
+            "description": "The persona/tone to steer generation."
+          },
+          "use_case": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceAgentUseCase"
+              }
+            ],
+            "description": "The scenario-template catalog entry the generator specializes for."
+          },
+          "goal": {
+            "type": "string",
+            "description": "A natural-language description of what the agent should do; the seed for the generated `instructions`."
+          },
+          "description": {
+            "type": "string",
+            "description": "An optional description for the agent. Generated from `goal` when omitted."
+          },
+          "tools": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VoiceAgentTool"
+            },
+            "description": "Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`)."
+          }
+        },
+        "description": "The request for guided authoring (`POST /agents:generate_voice`). A few high-level inputs plus a natural-language\n`goal` are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard\nagent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the\nresulting agent definition, so the caller can edit or override any of them afterward via normal versioning.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
       },
       "GitHubIssueEvent": {
         "anyOf": [
@@ -52427,7 +53503,7 @@
             "$ref": "#/components/schemas/AgentDefinition"
           }
         ],
-        "description": "The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,\ntools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to\nthe managed Voice Live backend and reached as the `voice` protocol on the agent endpoint\n(`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by\nVoice Live and is not redefined in this spec. Like prompt agents, every create/update produces a new\nimmutable version.",
+        "description": "The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,\ntools, optional avatar) drives a managed speech-to-speech experience powered by the managed Voice Live backend.\nThe live realtime voice session — a service-terminated WebSocket bridged to Voice Live — is established through a\nseparate realtime connect operation that is not defined in this spec; the realtime session/audio/event wire schema\nis owned by Voice Live. Like prompt agents, every create/update produces a new immutable version.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"
@@ -55828,6 +56904,53 @@
           ]
         }
       },
+      "VoiceAgentType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "personal",
+              "business"
+            ]
+          }
+        ],
+        "description": "The persona/tone a guided-authoring request steers the generated voice agent toward.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceAgentUseCase": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "customer_support",
+              "reception",
+              "sales",
+              "travel_assistant",
+              "outreach",
+              "personal_assistant",
+              "learning",
+              "call_center",
+              "in_car"
+            ]
+          }
+        ],
+        "description": "The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.\nExtensible: additional use cases may be added over time.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
       "VoiceAudioConfig": {
         "type": "object",
         "properties": {
@@ -56176,6 +57299,84 @@
           }
         ],
         "description": "An output modality the agent may produce. 'animation'/'avatar' are Voice Live extensions used when an avatar is configured.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceRecordingChannelLayout": {
+        "type": "object",
+        "required": [
+          "left",
+          "right"
+        ],
+        "properties": {
+          "left": {
+            "type": "string",
+            "description": "The role carried on the left channel, e.g. `user`."
+          },
+          "right": {
+            "type": "string",
+            "description": "The role carried on the right channel, e.g. `agent`."
+          }
+        },
+        "description": "The role assigned to each channel of a merged stereo voice recording.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceRecordingResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "format",
+          "sample_rate",
+          "channels",
+          "channel_layout",
+          "duration_ms",
+          "blob_path"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation this recording belongs to."
+          },
+          "format": {
+            "type": "string",
+            "description": "The container format of the recording, e.g. `wav`."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate of the recording in Hz, e.g. 24000."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels. The merged recording is stereo (`2`)."
+          },
+          "channel_layout": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/VoiceRecordingChannelLayout"
+              }
+            ],
+            "description": "The role assigned to each stereo channel."
+          },
+          "duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The total duration of the recording in milliseconds."
+          },
+          "blob_path": {
+            "type": "string",
+            "description": "The service-managed path to the recording blob. No SAS token is included; use the `/audio/content` route to stream the bytes."
+          }
+        },
+        "description": "Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,\nagent audio on the right). Built once from the per-turn segments after the session ends and durably cached. The\nrecording is referenced by a service-managed `blob_path`; no SAS token is returned — stream the bytes via the\n`/audio/content` route.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"

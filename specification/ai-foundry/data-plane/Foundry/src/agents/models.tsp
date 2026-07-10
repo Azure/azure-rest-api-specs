@@ -307,9 +307,6 @@ union AgentEndpointProtocol {
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
-
-  @doc("Realtime, service-terminated WebSocket protocol for voice-first prompt agents. The live speech-to-speech session is bridged to the managed Voice Live backend; the realtime session/audio/event wire schema is owned by Voice Live and not redefined here.")
-  voice: "voice",
 }
 
 union AgentKind {
@@ -401,11 +398,10 @@ model PromptAgentDefinitionTextOptions {
 
 @doc("""
   The voice-first prompt agent definition. A declarative agent kind whose configuration (model, prompt, audio stack,
-  tools, optional avatar) drives a managed speech-to-speech experience. The live realtime session is bridged to
-  the managed Voice Live backend and reached as the `voice` protocol on the agent endpoint
-  (`/agents/{agent_name}/endpoint/protocols/voice`); the realtime session/audio/event wire schema is owned by
-  Voice Live and is not redefined in this spec. Like prompt agents, every create/update produces a new
-  immutable version.
+  tools, optional avatar) drives a managed speech-to-speech experience powered by the managed Voice Live backend.
+  The live realtime voice session — a service-terminated WebSocket bridged to Voice Live — is established through a
+  separate realtime connect operation that is not defined in this spec; the realtime session/audio/event wire schema
+  is owned by Voice Live. Like prompt agents, every create/update produces a new immutable version.
   """)
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model PromptVoiceAgentDefinition extends AgentDefinition {
@@ -754,6 +750,109 @@ union VoiceOutputModality {
   audio: "audio",
   animation: "animation",
   avatar: "avatar",
+}
+
+@doc("The persona/tone a guided-authoring request steers the generated voice agent toward.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceAgentType {
+  string,
+
+  @doc("A personal-assistant persona.")
+  personal: "personal",
+
+  @doc("A business / professional persona.")
+  business: "business",
+}
+
+@doc("""
+  The scenario-template catalog entry a guided-authoring request specializes the generated voice agent for.
+  Extensible: additional use cases may be added over time.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceAgentUseCase {
+  string,
+  customer_support: "customer_support",
+  reception: "reception",
+  sales: "sales",
+  travel_assistant: "travel_assistant",
+  outreach: "outreach",
+  personal_assistant: "personal_assistant",
+  learning: "learning",
+  call_center: "call_center",
+  in_car: "in_car",
+}
+
+@doc("""
+  The request for guided authoring (`POST /agents:generate_voice`). A few high-level inputs plus a natural-language
+  `goal` are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard
+  agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
+  resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model GenerateVoiceAgentRequest {
+  @doc("The unique name for the agent to create.")
+  name: string;
+
+  @doc("How the model backing the generated agent is served: `managed` (Voice Live-hosted) or `self_deployed` (BYOM). Carried through to the generated definition, not generated.")
+  model_type: VoiceModelType;
+
+  @doc("The model paired with `model_type`: the Voice Live-hosted model name when `managed`, or the customer's Foundry deployment name when `self_deployed`. Carried through, not generated.")
+  `model`: string;
+
+  @doc("The persona/tone to steer generation.")
+  agent_type: VoiceAgentType;
+
+  @doc("The scenario-template catalog entry the generator specializes for.")
+  use_case: VoiceAgentUseCase;
+
+  @doc("A natural-language description of what the agent should do; the seed for the generated `instructions`.")
+  goal: string;
+
+  @doc("An optional description for the agent. Generated from `goal` when omitted.")
+  description?: string;
+
+  @doc("Optional tools carried through verbatim onto the generated agent (see `VoiceAgentTool`).")
+  tools?: VoiceAgentTool[];
+}
+
+@doc("The role assigned to each channel of a merged stereo voice recording.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceRecordingChannelLayout {
+  @doc("The role carried on the left channel, e.g. `user`.")
+  left: string;
+
+  @doc("The role carried on the right channel, e.g. `agent`.")
+  right: string;
+}
+
+@doc("""
+  Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
+  agent audio on the right). Built once from the per-turn segments after the session ends and durably cached. The
+  recording is referenced by a service-managed `blob_path`; no SAS token is returned — stream the bytes via the
+  `/audio/content` route.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceRecordingResponse {
+  @doc("The id of the conversation this recording belongs to.")
+  conversation_id: string;
+
+  @doc("The container format of the recording, e.g. `wav`.")
+  format: string;
+
+  @doc("The sample rate of the recording in Hz, e.g. 24000.")
+  sample_rate: int32;
+
+  @doc("The number of audio channels. The merged recording is stereo (`2`).")
+  channels: int32;
+
+  @doc("The role assigned to each stereo channel.")
+  channel_layout: VoiceRecordingChannelLayout;
+
+  @doc("The total duration of the recording in milliseconds.")
+  duration_ms: int32;
+
+  @doc("The service-managed path to the recording blob. No SAS token is included; use the `/audio/content` route to stream the bytes.")
+  blob_path: string;
 }
 
 @doc("The workflow agent definition.")
