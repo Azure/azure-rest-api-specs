@@ -200,15 +200,46 @@ interface AgentEndpointConversations {
   >;
 
   /**
-   * Streams one turn's audio as a WAV (`audio/wav`) byte stream through the service (no SAS URL).
-   * Requires the conversation to have persisted audio (`store = true`); returns `404` when the item has no
-   * stored audio.
+   * Returns metadata for a single conversation item's audio segment, including the common playback facts
+   * (role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and
+   * bring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct
+   * path into the customer's own storage (no SAS) that the customer downloads with their own credentials.
+   * Requires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,
+   * item, or its audio was not persisted.
    */
-  @summary("Get a voice agent conversation item's audio")
+  @summary("Get a voice agent conversation item's audio metadata")
   @get
   @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio")
   @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
   getAgentConversationItemAudio is FoundryDataPlanePreviewOperation<
+    AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
+    {
+      /** The name of the agent. */
+      @path agent_name: string;
+
+      /** The id of the conversation that contains the item. */
+      @path conversation_id: string;
+
+      /** The id of the conversation item whose audio metadata is retrieved. */
+      @path item_id: string;
+
+      ...UserIsolationKeyHeader;
+    },
+    VoiceItemAudioResponse
+  >;
+
+  /**
+   * Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS
+   * URL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the
+   * bytes are not proxied — the caller must download directly from customer storage using the `blob_path`
+   * returned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.
+   * Returns `404` when the conversation, item, or its audio was not persisted (`store = false`).
+   */
+  @summary("Stream a voice agent conversation item's audio")
+  @get
+  @route("/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content")
+  @extension("x-ms-foundry-meta", PromptVoiceConversationRequiredPreviews)
+  getAgentConversationItemAudioContent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
     {
       /** The name of the agent. */

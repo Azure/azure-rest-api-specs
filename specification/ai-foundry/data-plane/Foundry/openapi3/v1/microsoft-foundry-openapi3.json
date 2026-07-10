@@ -2482,8 +2482,115 @@
     "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio": {
       "get": {
         "operationId": "AgentEndpointConversations_getAgentConversationItemAudio",
-        "summary": "Get a voice agent conversation item's audio",
-        "description": "Streams one turn's audio as a WAV (`audio/wav`) byte stream through the service (no SAS URL).\nRequires the conversation to have persisted audio (`store = true`); returns `404` when the item has no\nstored audio.",
+        "summary": "Get a voice agent conversation item's audio metadata",
+        "description": "Returns metadata for a single conversation item's audio segment, including the common playback facts\n(role, format/codec, sample rate, channels, offset, duration) for both Foundry-managed and\nbring-your-own-storage (BYOS) recordings; for BYOS the response additionally includes `blob_path`, a direct\npath into the customer's own storage (no SAS) that the customer downloads with their own credentials.\nRequires the conversation to have persisted audio (`store = true`); returns `404` when the conversation,\nitem, or its audio was not persisted.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PromptVoiceAgents=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "conversation_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation that contains the item.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the conversation item whose audio metadata is retrieved.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-user-isolation-key",
+            "in": "header",
+            "required": false,
+            "description": "Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceItemAudioResponse"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Conversations"
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}/items/{item_id}/audio/content": {
+      "get": {
+        "operationId": "AgentEndpointConversations_getAgentConversationItemAudioContent",
+        "summary": "Stream a voice agent conversation item's audio",
+        "description": "Streams a single conversation item's audio as a WAV (`audio/wav`) byte stream through the service (no SAS\nURL). This route serves Foundry-managed storage only. For bring-your-own-storage (BYOS) recordings the\nbytes are not proxied — the caller must download directly from customer storage using the `blob_path`\nreturned by the item's `/audio` metadata route — so this route returns `409 Conflict` for BYOS recordings.\nReturns `404` when the conversation, item, or its audio was not persisted (`store = false`).",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -58067,6 +58174,65 @@
           }
         },
         "description": "Asynchronous input-audio transcription configuration.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "PromptVoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "VoiceItemAudioResponse": {
+        "type": "object",
+        "required": [
+          "conversation_id",
+          "item_id"
+        ],
+        "properties": {
+          "conversation_id": {
+            "type": "string",
+            "description": "The id of the conversation the item belongs to."
+          },
+          "item_id": {
+            "type": "string",
+            "description": "The id of the item this audio belongs to."
+          },
+          "role": {
+            "type": "string",
+            "description": "The role the audio belongs to, e.g. `user` or `agent`."
+          },
+          "format": {
+            "type": "string",
+            "description": "The container format of the audio, e.g. `wav`."
+          },
+          "codec": {
+            "type": "string",
+            "description": "The audio codec, e.g. `pcm16`."
+          },
+          "sample_rate": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The sample rate in Hz."
+          },
+          "channels": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of audio channels."
+          },
+          "start_offset_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The offset from the session start at which this segment begins, in milliseconds."
+          },
+          "duration_ms": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The duration of the audio segment, in milliseconds."
+          },
+          "blob_path": {
+            "type": "string",
+            "description": "For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead."
+          }
+        },
+        "description": "Metadata for a single conversation item's audio segment. Exposes only safe, playback-relevant facts;\ninternal storage identifiers (file id, container, host, owner, provider) are never surfaced. For\nbring-your-own-storage (BYOS) the response includes `blob_path` (a direct customer-storage path/URL, no SAS)\nthat the customer downloads with their own credentials; for Foundry-managed storage `blob_path` is absent and\nthe bytes are streamed via the item's `/audio/content` route instead.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "PromptVoiceAgents=V1Preview"

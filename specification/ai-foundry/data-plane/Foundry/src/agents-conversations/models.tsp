@@ -568,6 +568,46 @@ model VoiceFileSearchCallItem extends VoiceConversationItem {
 // Audio streaming
 // ---------------------------------------------------------------------------
 
+@doc("""
+  Metadata for a single conversation item's audio segment. Exposes only safe, playback-relevant facts;
+  internal storage identifiers (file id, container, host, owner, provider) are never surfaced. For
+  bring-your-own-storage (BYOS) the response includes `blob_path` (a direct customer-storage path/URL, no SAS)
+  that the customer downloads with their own credentials; for Foundry-managed storage `blob_path` is absent and
+  the bytes are streamed via the item's `/audio/content` route instead.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceItemAudioResponse {
+  @doc("The id of the conversation the item belongs to.")
+  conversation_id: string;
+
+  @doc("The id of the item this audio belongs to.")
+  item_id: string;
+
+  @doc("The role the audio belongs to, e.g. `user` or `agent`.")
+  role?: string;
+
+  @doc("The container format of the audio, e.g. `wav`.")
+  format?: string;
+
+  @doc("The audio codec, e.g. `pcm16`.")
+  codec?: string;
+
+  @doc("The sample rate in Hz.")
+  sample_rate?: int32;
+
+  @doc("The number of audio channels.")
+  channels?: int32;
+
+  @doc("The offset from the session start at which this segment begins, in milliseconds.")
+  start_offset_ms?: int32;
+
+  @doc("The duration of the audio segment, in milliseconds.")
+  duration_ms?: int32;
+
+  @doc("For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the item's `/audio/content` route instead.")
+  blob_path?: string;
+}
+
 @doc("A streamed WAV (`audio/wav`) audio response. The bytes are streamed through the service; no SAS URL is returned.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceAudioStreamResponse {
