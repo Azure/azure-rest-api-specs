@@ -60,10 +60,16 @@ union SelectorKind {
   policyDefinitionReferenceId: "policyDefinitionReferenceId",
 
   /**
-   * The selector kind to filter policies by the resource rollout percentage.
+   * The selector kind to filter policies by the resource percentage.
    */
   @added(Versions.v2026_06_01)
-  @renamedFrom(Versions.v2026_07_01, "resourcePercentage")
+  @removed(Versions.v2026_07_01)
+  resourcePercentage: "resourcePercentage",
+
+  /**
+   * The selector kind to filter policies by the resource rollout percentage.
+   */
+  @added(Versions.v2026_07_01)
   resourceRolloutPercentage: "resourceRolloutPercentage",
 
   /**
