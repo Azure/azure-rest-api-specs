@@ -4,46 +4,55 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.Databricks;
 
-@@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
+@@clientName(
+  Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
   "python"
 );
-@@clientName(Microsoft.Databricks,
+@@clientName(
+  Microsoft.Databricks,
   "AzureDatabricksManagementClient",
   "python,javascript"
 );
 @@clientLocation(VirtualNetworkPeerings.get, "VNetPeering", "python");
-@@clientLocation(VirtualNetworkPeerings.createOrUpdate,
+@@clientLocation(
+  VirtualNetworkPeerings.createOrUpdate,
   "VNetPeering",
   "python"
 );
 @@clientLocation(VirtualNetworkPeerings.delete, "VNetPeering", "python");
-@@clientLocation(VirtualNetworkPeerings.listByWorkspace,
+@@clientLocation(
+  VirtualNetworkPeerings.listByWorkspace,
   "VNetPeering",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for Python SDK compatibility"
-@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(WorkspaceDeleteParameters.forceDeletion,
+@@Azure.ClientGenerator.Core.Legacy.clientDefaultValue(
+  WorkspaceDeleteParameters.forceDeletion,
   false,
   "python"
 );
 
-@@clientName(Microsoft.Databricks.ErrorDetail,
+@@clientName(
+  Microsoft.Databricks.ErrorDetail,
   "DatabricksErrorDetail",
   "java,csharp"
 );
 @@clientName(Workspace, "DatabricksWorkspace", "csharp");
-@@clientName(PrivateEndpointConnection,
+@@clientName(
+  PrivateEndpointConnection,
   "DatabricksPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(AccessConnector, "DatabricksAccessConnector", "csharp");
-@@clientName(AccessConnectorProperties,
+@@clientName(
+  AccessConnectorProperties,
   "DatabricksAccessConnectorProperties",
   "csharp"
 );
 @@clientName(AccessConnectorUpdate, "DatabricksAccessConnectorPatch", "csharp");
-@@clientName(VirtualNetworkPeering,
+@@clientName(
+  VirtualNetworkPeering,
   "DatabricksVirtualNetworkPeering",
   "csharp"
 );
@@ -55,140 +64,171 @@ using Microsoft.Databricks;
 @@clientName(KeySource, "DatabricksKeySource", "csharp");
 @@clientName(EncryptionKeySource, "DatabricksEncryptionKeySource", "csharp");
 @@clientName(CustomParameterType, "DatabricksCustomParameterType", "csharp");
-@@clientName(DefaultStorageFirewall,
+@@clientName(
+  DefaultStorageFirewall,
   "DatabricksDefaultStorageFirewall",
   "csharp"
 );
 @@clientName(Encryption, "DatabricksEncryption", "csharp");
-@@clientName(EncryptionEntitiesDefinition,
+@@clientName(
+  EncryptionEntitiesDefinition,
   "DatabricksEncryptionEntities",
   "csharp"
 );
 @@clientName(EncryptionV2, "DatabricksEncryptionV2", "csharp");
-@@clientName(EncryptionV2KeyVaultProperties,
+@@clientName(
+  EncryptionV2KeyVaultProperties,
   "DatabricksEncryptionV2KeyVaultProperties",
   "csharp"
 );
-@@clientName(ManagedDiskEncryption,
+@@clientName(
+  ManagedDiskEncryption,
   "DatabricksManagedDiskEncryption",
   "csharp"
 );
-@@clientName(ManagedDiskEncryptionKeyVaultProperties,
+@@clientName(
+  ManagedDiskEncryptionKeyVaultProperties,
   "DatabricksManagedDiskEncryptionKeyVaultProperties",
   "csharp"
 );
-@@clientName(EnhancedSecurityComplianceDefinition,
+@@clientName(
+  EnhancedSecurityComplianceDefinition,
   "DatabricksEnhancedSecurityCompliance",
   "csharp"
 );
-@@clientName(EnhancedSecurityMonitoringValue,
+@@clientName(
+  EnhancedSecurityMonitoringValue,
   "DatabricksEnhancedSecurityMonitoringValue",
   "csharp"
 );
-@@clientName(ComplianceSecurityProfileDefinition,
+@@clientName(
+  ComplianceSecurityProfileDefinition,
   "DatabricksComplianceSecurityProfile",
   "csharp"
 );
-@@clientName(ComplianceSecurityProfileValue,
+@@clientName(
+  ComplianceSecurityProfileValue,
   "DatabricksComplianceSecurityProfileValue",
   "csharp"
 );
-@@clientName(AutomaticClusterUpdateValue,
+@@clientName(
+  AutomaticClusterUpdateValue,
   "DatabricksAutomaticClusterUpdateValue",
   "csharp"
 );
 @@clientName(EndpointDependency, "DatabricksEndpointDependency", "csharp");
 @@clientName(EndpointDetail, "DatabricksEndpointDetail", "csharp");
-@@clientName(OutboundEnvironmentEndpoint,
+@@clientName(
+  OutboundEnvironmentEndpoint,
   "DatabricksOutboundEnvironmentEndpoint",
   "csharp"
 );
-@@clientName(PrivateEndpointConnectionProperties,
+@@clientName(
+  PrivateEndpointConnectionProperties,
   "DatabricksPrivateEndpointConnectionProperties",
   "csharp"
 );
-@@clientName(PrivateLinkServiceConnectionStatus,
+@@clientName(
+  PrivateLinkServiceConnectionStatus,
   "DatabricksPrivateLinkServiceConnectionStatus",
   "csharp"
 );
 @@clientName(PeeringState, "DatabricksVirtualNetworkPeeringState", "csharp");
-@@clientName(PeeringProvisioningState,
+@@clientName(
+  PeeringProvisioningState,
   "DatabricksVirtualNetworkPeeringProvisioningState",
   "csharp"
 );
-@@clientName(GroupIdInformationProperties,
+@@clientName(
+  GroupIdInformationProperties,
   "DatabricksGroupIdInformationProperties",
   "csharp"
 );
-@@clientName(ManagedIdentityConfiguration,
+@@clientName(
+  ManagedIdentityConfiguration,
   "DatabricksManagedIdentityConfiguration",
   "csharp"
 );
-@@clientName(DefaultCatalogProperties,
+@@clientName(
+  DefaultCatalogProperties,
   "DatabricksDefaultCatalogProperties",
   "csharp"
 );
 @@clientName(CreatedBy, "DatabricksCreatedBy", "csharp");
 @@clientName(RequiredNsgRules, "DatabricksRequiredNsgRules", "csharp");
-@@clientName(WorkspacePropertiesAccessConnector,
+@@clientName(
+  WorkspacePropertiesAccessConnector,
   "DatabricksWorkspaceAccessConnectorInfo",
   "csharp"
 );
-@@clientName(WorkspaceProviderAuthorization,
+@@clientName(
+  WorkspaceProviderAuthorization,
   "DatabricksWorkspaceProviderAuthorization",
   "csharp"
 );
 @@clientName(WorkspaceCustomParameters, "WorkspaceCustomProperties", "csharp");
-@@clientName(WorkspaceCustomStringParameter,
+@@clientName(
+  WorkspaceCustomStringParameter,
   "WorkspaceCustomStringParameterValue",
   "csharp"
 );
-@@clientName(WorkspaceNoPublicIPBooleanParameter,
+@@clientName(
+  WorkspaceNoPublicIPBooleanParameter,
   "WorkspaceNoPublicIPBooleanParameterValue",
   "csharp"
 );
 @@clientName(WorkspaceNoPublicIPBooleanParameter.value, "IsEnabled", "csharp");
-@@clientName(WorkspaceCustomBooleanParameter,
+@@clientName(
+  WorkspaceCustomBooleanParameter,
   "WorkspaceCustomBooleanParameterValue",
   "csharp"
 );
 @@clientName(WorkspaceCustomBooleanParameter.value, "IsEnabled", "csharp");
-@@clientName(WorkspaceEncryptionParameter,
+@@clientName(
+  WorkspaceEncryptionParameter,
   "WorkspaceEncryptionParameterValue",
   "csharp"
 );
-@@clientName(WorkspaceCustomObjectParameter,
+@@clientName(
+  WorkspaceCustomObjectParameter,
   "WorkspaceCustomObjectParameterValue",
   "csharp"
 );
-@@clientName(ManagedDiskEncryption.rotationToLatestKeyVersionEnabled,
+@@clientName(
+  ManagedDiskEncryption.rotationToLatestKeyVersionEnabled,
   "IsRotationToLatestKeyVersionEnabled",
   "csharp"
 );
 @@clientName(AccessConnectorProperties.referedBy, "ReferredBy", "csharp");
 @@clientName(GroupIdInformation, "DatabricksPrivateLinkResource", "csharp");
-@@clientName(Workspaces.list,
+@@clientName(
+  Workspaces.list,
   "GetOutboundNetworkDependenciesEndpoints",
   "csharp"
 );
-@@clientName(Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
+@@clientName(
+  Microsoft.Databricks.WorkspaceNoPublicIPBooleanParameter,
   "WorkspaceNoPublicIpBooleanParameter",
   "java"
 );
-@@alternateType(WorkspaceProperties.managedResourceGroupId,
+@@alternateType(
+  WorkspaceProperties.managedResourceGroupId,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(WorkspaceProperties.diskEncryptionSetId,
+@@alternateType(
+  WorkspaceProperties.diskEncryptionSetId,
   armResourceIdentifier,
   "csharp"
 );
 @@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
-@@alternateType(VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork.id,
+@@alternateType(
+  VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork.id,
   armResourceIdentifier,
   "csharp"
 );
-@@alternateType(VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork.id,
+@@alternateType(
+  VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -197,7 +237,8 @@ using Microsoft.Databricks;
 @@alternateType(CreatedBy.oid, uuid, "csharp");
 @@alternateType(CreatedBy.applicationId, uuid, "csharp");
 @@alternateType(WorkspaceProviderAuthorization.principalId, uuid, "csharp");
-@@alternateType(WorkspaceProviderAuthorization.roleDefinitionId,
+@@alternateType(
+  WorkspaceProviderAuthorization.roleDefinitionId,
   uuid,
   "csharp"
 );
