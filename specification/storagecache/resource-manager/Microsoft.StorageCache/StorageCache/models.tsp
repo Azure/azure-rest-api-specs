@@ -2391,11 +2391,15 @@ model ExpansionJobProperties {
   runRebalanceJob?: boolean = false;
 
   /**
-   * Name of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
+   * Fully qualified ARM resource ID of the child rebalance job created by this expansion. Populated after RebalanceJob is created.
    */
   @added(Versions.v2026_08_01)
   @visibility(Lifecycle.Read)
-  rebalanceJobName?: string;
+  rebalanceJobId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.StorageCache/amlFilesystems/rebalanceJobs",
+    }
+  ]>;
 }
 
 /**
@@ -2474,10 +2478,14 @@ model RebalanceJobProperties {
   adminStatus?: RebalanceJobAdminStatus;
 
   /**
-   * Name of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.
+   * Fully qualified ARM resource ID of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.
    */
   @visibility(Lifecycle.Read)
-  expansionJobName?: string;
+  expansionJobId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.StorageCache/amlFilesystems/expansionJobs",
+    }
+  ]>;
 
   /**
    * The status of the rebalance job.

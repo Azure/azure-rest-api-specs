@@ -42,7 +42,6 @@ interface RebalanceJobs {
    */
   @tag("rebalanceJobs")
   @patch(#{ implicitOptionality: false })
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     RebalanceJob,
     PatchModel = RebalanceJobUpdate,

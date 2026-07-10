@@ -2542,7 +2542,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/RebalanceJob"
         },
         "x-ms-long-running-operation": true
@@ -3970,7 +3970,7 @@
           }
         },
         "x-ms-examples": {
-          "Caches_DnsRefresh": {
+          "StorageTargets_DnsRefresh": {
             "$ref": "./examples/StorageTargets_DnsRefresh.json"
           }
         },
@@ -6859,10 +6859,18 @@
             "create"
           ]
         },
-        "rebalanceJobName": {
+        "rebalanceJobId": {
           "type": "string",
-          "description": "Name of the child rebalance job created by this expansion. Populated after RebalanceJob is created.",
-          "readOnly": true
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource ID of the child rebalance job created by this expansion. Populated after RebalanceJob is created.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageCache/amlFilesystems/rebalanceJobs"
+              }
+            ]
+          }
         }
       }
     },
@@ -8163,8 +8171,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RebalanceJobProperties",
-          "description": "Properties of the rebalance job.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the rebalance job."
         }
       },
       "allOf": [
@@ -8211,10 +8218,18 @@
           "description": "The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.",
           "readOnly": true
         },
-        "expansionJobName": {
+        "expansionJobId": {
           "type": "string",
-          "description": "Name of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.",
-          "readOnly": true
+          "format": "arm-id",
+          "description": "Fully qualified ARM resource ID of the parent expansion job that initiated this rebalance. Populated when the rebalance was created as part of an expansion.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.StorageCache/amlFilesystems/expansionJobs"
+              }
+            ]
+          }
         },
         "status": {
           "$ref": "#/definitions/RebalanceJobPropertiesStatus",
