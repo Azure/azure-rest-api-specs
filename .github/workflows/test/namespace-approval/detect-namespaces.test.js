@@ -23,7 +23,11 @@ vi.mock("fs/promises", async (importOriginal) => {
 // promisify(execFile) expects (err, stdout, stderr) callback pattern
 vi.mock("child_process", () => ({
   execFile: vi.fn(
-    (/** @type {string} */ _cmd, /** @type {string[]} */ _args, /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb) => {
+    (
+      /** @type {string} */ _cmd,
+      /** @type {string[]} */ _args,
+      /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
+    ) => {
       // Default: file not found on base branch
       cb(new Error("fatal: path not found"), "", "");
     },
@@ -129,7 +133,11 @@ describe("detect-namespaces", () => {
   // Default: git show fails (file not on base branch = new file)
   function mockGitShowNotFound() {
     execFileMock.mockImplementation(
-      (/** @type {string} */ _cmd, /** @type {string[]} */ _args, /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb) => {
+      (
+        /** @type {string} */ _cmd,
+        /** @type {string[]} */ _args,
+        /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
+      ) => {
         cb(new Error("fatal: path not found"), "", "");
       },
     );
@@ -141,7 +149,11 @@ describe("detect-namespaces", () => {
    */
   function mockGitShowReturns(content) {
     execFileMock.mockImplementation(
-      (/** @type {string} */ _cmd, /** @type {string[]} */ _args, /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb) => {
+      (
+        /** @type {string} */ _cmd,
+        /** @type {string[]} */ _args,
+        /** @type {(err: Error | null, stdout: string, stderr: string) => void} */ cb,
+      ) => {
         cb(null, content, "");
       },
     );

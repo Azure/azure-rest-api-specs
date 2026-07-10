@@ -272,7 +272,9 @@ export default async function detectNamespaces({ context, core }) {
         }
       }
     } catch (e) {
-      core.warning(`Failed to parse base version of ${file}: ${e.message}, treating as new`);
+      core.warning(
+        `Failed to parse base version of ${file}: ${/** @type {Error} */ (e).message}, treating as new`,
+      );
     }
   }
 

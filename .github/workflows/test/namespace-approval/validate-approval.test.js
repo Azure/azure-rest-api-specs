@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
-
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.js";
 
