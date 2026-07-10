@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./routes.tsp";
 import "./vmAttributes.tsp";
 import "./launchBulkInstancesOperation.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
@@ -25,4 +26,8 @@ enum Versions {
   /** 2026-06-06 version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2026-06-06`,
+
+  /** 2026-07-06-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-07-06-preview`,
 }

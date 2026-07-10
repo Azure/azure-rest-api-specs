@@ -68,7 +68,8 @@ interface ApplyUpdateOps
           SegmentName = "applyUpdates",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceApplyUpdate"
     > {}
 
 @armResourceOperations
@@ -114,7 +115,8 @@ interface ApplyUpdateOperationGroupOps
           SegmentName = "applyUpdates",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceGroupApplyUpdate"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Expected errors to be suppressed"
