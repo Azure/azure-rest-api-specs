@@ -174,9 +174,11 @@ interface AgentEndpointConversations {
   >;
 
   /**
-   * Retrieves a single item from the specified conversation by its id, including its transcript and — when
-   * audio was persisted — per-turn `voice_metrics` and `audio_metadata`. Returns `404` when the conversation
-   * or item was not persisted (`store = false`).
+   * Retrieves a single item from the specified conversation by its id, including its transcript and, on message
+   * items, per-turn `voice_metrics`. An `input_audio`/`audio` content part indicates that audio is available for
+   * the item; the canonical per-item audio metadata is the `/items/{item_id}/audio` resource, and the bytes are
+   * streamed by `/items/{item_id}/audio/content`. Returns `404` when the conversation or item was not persisted
+   * (`store = false`).
    */
   @summary("Get a voice agent conversation item")
   @get
