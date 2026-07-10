@@ -48,7 +48,7 @@ using Microsoft.Databricks;
 @@clientName(ProvisioningState, "DatabricksProvisioningState", "csharp");
 @@clientName(ComputeMode, "DatabricksComputeMode", "csharp");
 @@clientName(IdentityType, "DatabricksIdentityType", "csharp");
-@@clientName(InitialType, "DatabricksInitialType", "csharp");
+@@clientName(InitialType, "DatabricksInitialCatalogType", "csharp");
 @@clientName(KeySource, "DatabricksKeySource", "csharp");
 @@clientName(EncryptionKeySource, "DatabricksEncryptionKeySource", "csharp");
 @@clientName(CustomParameterType, "DatabricksCustomParameterType", "csharp");
