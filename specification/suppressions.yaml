@@ -108,14 +108,11 @@
     - sphere/Sphere.Management
     - splitio/SplitIO.Experimentation.Management
     - standbypool/StandbyPool.Management
-    - storage/Microsoft.BlobStorage
-    - storage/Microsoft.QueueStorage
     - storage/Storage.Management
     - storageactions/StorageAction.Management
     - storagemover/StorageMover.Management
     - terraform/Microsoft.AzureTerraform.Management
     - verifiedid/Microsoft.VerifiedId.Management
-    - voiceservices/VoiceServices.Provisioning
     - workloads/Workloads.Operations.Management
     - workloads/Workloads.SAPDiscoverySite.Management
     - workloads/Workloads.SAPMonitor.Management
@@ -151,7 +148,6 @@
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-07-01-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-08-15-preview/iotoperations.json
     - iotoperations/resource-manager/Microsoft.IoTOperations/preview/2024-09-15-preview/iotoperations.json
-    - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
     - keyvault/data-plane/Legacy/preview/7.6-preview.1/backuprestore.json
     - keyvault/data-plane/Legacy/preview/7.6-preview.1/certificates.json
     - keyvault/data-plane/Legacy/preview/7.6-preview.1/keys.json
@@ -278,17 +274,6 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.generate-sample
-    - options.@azure-tools/typespec-python.generate-test
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    - quantum/Quantum.Workspace/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
     - options.@azure-tools/typespec-python.*
   paths:
     - riskiq/Easm/tspconfig.yaml
@@ -301,13 +286,3 @@
     - options.@azure-tools/typespec-ts.emitter-output-dir
   paths:
     - schemaregistry/data-plane/SchemaRegistry/tspconfig.yaml
-
-- tool: TypeSpecValidation
-  reason: Suppress until spec can be updated
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-java.*
-    - options.@azure-tools/typespec-python.*
-    - options.@azure-tools/typespec-ts.*
-  paths:
-    - voiceservices/VoiceServices.Provisioning/tspconfig.yaml
