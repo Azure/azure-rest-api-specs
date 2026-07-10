@@ -251,22 +251,23 @@ export default async function postResults({ github, context, core }) {
       const prev = previousTable.get(language);
       const newNs = results.namespacesFound[language];
 
-      if (!prev || prev.namespace !== newNs) {
-        // Namespace changed or new language: reset approval
+      if (prev && prev.namespace !== newNs) {
+        // Namespace genuinely changed from a previously-recorded value
         const approvedLabel = `namespace-${language}-approved`;
         if (existingLabels.includes(approvedLabel)) {
           core.info(
-            `Namespace changed for ${language}: "${prev?.namespace ?? "(new)"}" → "${newNs}", resetting approval`,
+            `Namespace changed for ${language}: "${prev.namespace}" → "${newNs}", resetting approval`,
           );
           await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
           existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
+          resetLanguages.push(language);
         }
-        resetLanguages.push(language);
-      } else if (prev.status && !prev.status.includes("Pending")) {
+      } else if (prev && prev.status && !prev.status.includes("Pending")) {
         // Namespace unchanged and previously approved: preserve status
         core.info(`Namespace unchanged for ${language}: "${newNs}", preserving approval`);
         preservedApprovals.set(language, prev);
       }
+      // No previous entry (!prev) means first detection — treat as new pending (no reset)
     }
 
     // Only remove global approval labels if any language was actually reset
