@@ -153,6 +153,7 @@ model ResponseSession is RequestSession {
    * 1970-01-01T00:00:00Z (the Unix epoch). This value is set by the server and cannot
    * be changed with `session.update`.
    */
+  #suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but the legacy rule only allows int32 or int64."
   @added(Versions.v2026_07_15)
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   expires_at?: utcDateTime;
