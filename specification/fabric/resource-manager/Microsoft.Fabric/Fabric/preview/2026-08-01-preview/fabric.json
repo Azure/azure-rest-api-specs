@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Fabric management service",
-    "version": "2026-08-01",
+    "version": "2026-08-01-preview",
     "description": "Microsoft.Fabric Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -800,9 +800,9 @@
       "type": "object",
       "description": "The overage settings for the Fabric capacity resource",
       "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether overage is enabled for the capacity."
+        "state": {
+          "$ref": "#/definitions/OverageSettingsState",
+          "description": "The overage state for the capacity."
         },
         "thresholdCapacityUnitHours": {
           "type": "integer",
@@ -812,9 +812,33 @@
         }
       },
       "required": [
-        "enabled",
+        "state",
         "thresholdCapacityUnitHours"
       ]
+    },
+    "OverageSettingsState": {
+      "type": "string",
+      "description": "The overage state for the Fabric capacity resource.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "OverageSettingsState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Overage is enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Overage is disabled."
+          }
+        ]
+      }
     },
     "PagedQuota": {
       "type": "object",

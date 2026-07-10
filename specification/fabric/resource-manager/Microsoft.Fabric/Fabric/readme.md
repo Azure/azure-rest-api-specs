@@ -62,13 +62,13 @@ suppressions:
 ```
 ---
 
-### Tag: package-2026-08-01
+### Tag: package-2026-08-01-preview
 
-These settings apply only when `--tag=package-2026-08-01` is specified on the command line.
+These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-08-01'
+```yaml $(tag) == 'package-2026-08-01-preview'
 input-file:
-  - stable/2026-08-01/fabric.json
+  - preview/2026-08-01-preview/fabric.json
 suppressions:
   - code: PostResponseCodes
     reason: 2 POST Methods Resume and Suspend are LRO and the result returns 200 OK with no schema. It would take a while to fix the backend to return 204. Once fixed, will publish a new version. Specifying only 202 causes failues in the Az CLI Tools generation.

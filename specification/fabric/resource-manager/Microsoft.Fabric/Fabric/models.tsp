@@ -44,12 +44,23 @@ union RpSkuTier {
 
 @doc("The overage settings for the Fabric capacity resource")
 model OverageSettings {
-  @doc("Indicates whether overage is enabled for the capacity.")
-  enabled: boolean;
+  @doc("The overage state for the capacity.")
+  state: OverageSettingsState;
 
   @doc("The threshold in Capacity Unit Hours for enabling overage.")
   @minValue(0)
   thresholdCapacityUnitHours: int32;
+}
+
+@doc("The overage state for the Fabric capacity resource.")
+union OverageSettingsState {
+  @doc("Overage is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Overage is disabled.")
+  Disabled: "Disabled",
+
+  string,
 }
 
 @doc("The administration properties of the Fabric capacity resource")
@@ -58,7 +69,7 @@ model CapacityAdministration {
   members: Array<string>;
 
   @doc("The overage settings")
-  @added(Microsoft.Fabric.Versions.v2026_08_01)
+  @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
   overageSettings?: OverageSettings;
 }
 
