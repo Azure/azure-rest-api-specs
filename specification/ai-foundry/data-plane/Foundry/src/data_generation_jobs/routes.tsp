@@ -38,7 +38,7 @@ interface DataGenerationJobs {
   @summary("Create a data generation job")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  @Azure.Core.pollingOperation(DataGenerationJobs.create)
+  @Azure.Core.pollingOperation(DataGenerationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
     DataGenerationJob
