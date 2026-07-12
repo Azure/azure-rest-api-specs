@@ -201,7 +201,7 @@ union QuotaUsageStatus {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union QuotaScopeType {
   string,
@@ -1651,7 +1651,7 @@ model AccountProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   foundryAutoUpgrade?: FoundryAutoUpgrade;
 
@@ -1679,7 +1679,7 @@ model AccountProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union FoundryAutoUpgradeMode {
   string,
@@ -1704,7 +1704,7 @@ union FoundryAutoUpgradeMode {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model FoundryAutoUpgrade {
   /**
@@ -2340,7 +2340,7 @@ model Usage {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   scopeType?: QuotaScopeType | null;
 
@@ -2353,7 +2353,7 @@ model Usage {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   scopeId?: string | null;
 }
@@ -2879,7 +2879,7 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   scopeId?: string | null;
 
@@ -2892,7 +2892,7 @@ model ModelSkuCapacityProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   scopeType?: QuotaScopeType | null;
 }
@@ -3105,7 +3105,7 @@ model DeploymentProperties {
    * Speculative decoding settings for the deployment. This configuration applies to Fireworks model formats.
    */
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   speculativeDecoding?: DeploymentSpeculativeDecoding;
 
@@ -3190,7 +3190,7 @@ model DeploymentProperties {
  * Speculative decoding settings for a deployment.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model DeploymentSpeculativeDecoding {
   /**
@@ -3311,7 +3311,7 @@ model SkuResource {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model PatchResourceSku {
   /**
@@ -3475,7 +3475,7 @@ model RaiPolicyProperties {
    * agents can reach. Includes rules with Allow/Deny/Transform/Rewrite actions.
    */
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   egressPolicy?: RaiEgressPolicyConfig;
 }
@@ -5736,7 +5736,7 @@ model RaiBlocklistItemsBulkDeleteRequest is Array<string>;
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentProperties {
   /**
@@ -5772,7 +5772,7 @@ model ManagedComputeDeploymentProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<capabilities> type used for 'ManagedComputeDeploymentProperties' to support extensible key-value pairs matching service behavior"
   @added(Versions.v2026_05_15_preview)
-  @removed(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_07_01)
   @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read)
   capabilities?: Record<string>;
@@ -5826,7 +5826,7 @@ model ManagedComputeDeploymentProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentProvisioningDetails {
   /**
@@ -5847,7 +5847,7 @@ model ManagedComputeDeploymentProvisioningDetails {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentRoutes {
   /**
@@ -5872,7 +5872,7 @@ model ManagedComputeDeploymentRoutes {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentListResult {
   /**
@@ -5895,7 +5895,7 @@ model ManagedComputeDeploymentListResult {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union ComputeProvisioningState {
   string,
@@ -5940,7 +5940,7 @@ union ComputeProvisioningState {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union VmPriority {
   string,
@@ -5958,7 +5958,7 @@ union VmPriority {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model Pool {
   /**
@@ -5988,7 +5988,7 @@ model Pool {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union ComputeType {
   string,
@@ -6007,7 +6007,7 @@ union ComputeType {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 @discriminator("computeType")
 model ComputeProperties {
@@ -6041,7 +6041,7 @@ model ComputeProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ClusterComputeProperties extends ComputeProperties {
   /**
@@ -6066,7 +6066,7 @@ model ClusterComputeProperties extends ComputeProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ContainerInstanceComputeProperties extends ComputeProperties {
   /**
@@ -6107,7 +6107,7 @@ model ContainerInstanceComputeProperties extends ComputeProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model SshSettings {
   /**
@@ -6127,7 +6127,7 @@ model SshSettings {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ConnectivityEndpoints {
   /**
@@ -6149,7 +6149,7 @@ model ConnectivityEndpoints {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ComputeListResult {
   /**
@@ -6171,7 +6171,7 @@ model ComputeListResult {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model WorkbenchProperties {
   /**
@@ -6236,7 +6236,7 @@ model WorkbenchProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model WorkbenchListResult {
   /**
@@ -6258,7 +6258,7 @@ model WorkbenchListResult {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeDeploymentInfo {
   /**
@@ -6293,7 +6293,7 @@ model ManagedComputeDeploymentInfo {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeUsage {
   /**
@@ -6347,7 +6347,7 @@ model ManagedComputeUsage {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeUsageListResult {
   /**
@@ -6370,7 +6370,7 @@ model ManagedComputeUsageListResult {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesRequest {
   /**
@@ -6385,7 +6385,7 @@ model EvaluateDeploymentPoliciesRequest {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesDeployment {
   /**
@@ -6405,7 +6405,7 @@ model EvaluateDeploymentPoliciesDeployment {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesDeploymentProperties {
   /**
@@ -6425,7 +6425,7 @@ model EvaluateDeploymentPoliciesDeploymentProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model EvaluateDeploymentPoliciesResponse {
   /**
@@ -6441,7 +6441,7 @@ model EvaluateDeploymentPoliciesResponse {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union PolicyEvaluationOutcome {
   string,
@@ -6462,7 +6462,7 @@ union PolicyEvaluationOutcome {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model DeploymentPolicyEvaluationResult {
   /**
@@ -6488,7 +6488,7 @@ model DeploymentPolicyEvaluationResult {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model PolicyAssignmentEvaluationDetails {
   /**
@@ -6534,7 +6534,7 @@ model PolicyAssignmentEvaluationDetails {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model PolicyExpressionEvaluationDetails {
   /**
@@ -6575,7 +6575,7 @@ model PolicyExpressionEvaluationDetails {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeCapacityProperties {
   /**
@@ -6611,7 +6611,7 @@ model ManagedComputeCapacityProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model DeploymentSizeCapacity {
   /**
@@ -6639,7 +6639,7 @@ model DeploymentSizeCapacity {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model ManagedComputeCapacityListResult {
   /**
@@ -6662,7 +6662,7 @@ model ManagedComputeCapacityListResult {
  * If omitted on create, the server defaults to Enforced.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressMode {
   string,
@@ -6682,7 +6682,7 @@ union RaiEgressMode {
  * The default action when no user-defined egress rules match.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressDefaultAction {
   string,
@@ -6698,7 +6698,7 @@ union RaiEgressDefaultAction {
  * URL scheme for rewrite targets. Only HTTP and HTTPS are supported.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressScheme {
   string,
@@ -6714,7 +6714,7 @@ union RaiEgressScheme {
  * The kind of action an egress rule takes when it matches.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressRuleActionType {
   string,
@@ -6736,7 +6736,7 @@ union RaiEgressRuleActionType {
  * The operation to apply to a header in a Transform or Rewrite action.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressHeaderOperation {
   string,
@@ -6755,7 +6755,7 @@ union RaiEgressHeaderOperation {
  * A reference to a stored secret used as a header value.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressSecretRef {
   /** Identifier of the secret to inject. */
@@ -6773,7 +6773,7 @@ model RaiEgressSecretRef {
  * A reference to a managed-identity token used as a header value.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressManagedIdentityRef {
   /** The resource/audience the token is requested for. */
@@ -6787,7 +6787,7 @@ model RaiEgressManagedIdentityRef {
  * A dynamic source for a header value. Exactly one of secretRef or managedIdentityRef must be set.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressHeaderValueRef {
   /** Resolve the value from a stored secret. */
@@ -6803,7 +6803,7 @@ model RaiEgressHeaderValueRef {
  * For Remove operations, neither value nor valueRef should be set.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressHeaderTransform {
   /** The operation to perform on this header. */
@@ -6831,7 +6831,7 @@ model RaiEgressHeaderTransform {
  * by the server (400 Bad Request if all fields are omitted).
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressRewriteTarget {
   /** Target scheme. Original scheme is kept if omitted. */
@@ -6852,7 +6852,7 @@ model RaiEgressRewriteTarget {
  *   headers is optional for injecting headers alongside the redirect.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressRuleAction {
   /** The kind of action. */
@@ -6873,7 +6873,7 @@ model RaiEgressRuleAction {
  * The type of an egress rule, determining what kind of traffic matching it performs.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 union RaiEgressRuleType {
   string,
@@ -6889,7 +6889,7 @@ union RaiEgressRuleType {
  * Path uses URI prefix matching with '*' as a single-segment wildcard (e.g., "/v1/*" matches "/v1/chat").
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressRuleMatch {
   /**
@@ -6909,7 +6909,7 @@ model RaiEgressRuleMatch {
  * A single egress rule. Rules are evaluated in order; first match wins.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressRule {
   /**
@@ -6945,7 +6945,7 @@ model RaiEgressRule {
  * transformations (header injection, URL rewrite) are applied to matching traffic.
  */
 @added(Versions.v2026_05_15_preview)
-@removed(Versions.v2026_07_15_preview)
+@removed(Versions.v2026_07_01)
 @added(Versions.v2026_07_15_preview)
 model RaiEgressPolicyConfig {
   /**
