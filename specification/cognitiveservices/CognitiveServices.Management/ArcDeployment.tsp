@@ -25,7 +25,7 @@ model ArcDeployment
     Resource = ArcDeployment,
     KeyName = "deploymentName",
     SegmentName = "arcDeployments",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+    NamePattern = "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
   >;
 
   /**
@@ -184,17 +184,17 @@ union ArcDeploymentComputeType {
   /**
    * GPU compute.
    */
-  GPU: "GPU",
+  gpu: "gpu",
 
   /**
    * CPU compute.
    */
-  CPU: "CPU",
+  cpu: "cpu",
 
   /**
    * NPU compute.
    */
-  NPU: "NPU",
+  npu: "npu",
 }
 
 /**

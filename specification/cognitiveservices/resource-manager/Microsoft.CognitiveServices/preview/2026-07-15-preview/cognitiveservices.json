@@ -2094,7 +2094,7 @@
             "description": "The name of the Arc deployment associated with the Cognitive Services Account.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -2149,7 +2149,7 @@
             "description": "The name of the Arc deployment associated with the Cognitive Services Account.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           },
           {
             "name": "resource",
@@ -2238,7 +2238,7 @@
             "description": "The name of the Arc deployment associated with the Cognitive Services Account.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
           }
         ],
         "responses": {
@@ -12759,27 +12759,27 @@
       "type": "string",
       "description": "Compute type for an Arc deployment.",
       "enum": [
-        "GPU",
-        "CPU",
-        "NPU"
+        "gpu",
+        "cpu",
+        "npu"
       ],
       "x-ms-enum": {
         "name": "ArcDeploymentComputeType",
         "modelAsString": true,
         "values": [
           {
-            "name": "GPU",
-            "value": "GPU",
+            "name": "gpu",
+            "value": "gpu",
             "description": "GPU compute."
           },
           {
-            "name": "CPU",
-            "value": "CPU",
+            "name": "cpu",
+            "value": "cpu",
             "description": "CPU compute."
           },
           {
-            "name": "NPU",
-            "value": "NPU",
+            "name": "npu",
+            "value": "npu",
             "description": "NPU compute."
           }
         ]
