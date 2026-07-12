@@ -37,6 +37,7 @@ import "./OutboundRuleBasicResource.tsp";
 import "./ManagedNetworkSettingsPropertiesBasicResource.tsp";
 import "./AgentApplication.tsp";
 import "./AgentDeploymentResource.tsp";
+import "./ArcDeployment.tsp";
 import "./ManagedComputeDeployment.tsp";
 import "./ComputeOperation.tsp";
 import "./ManagedComputeUsages.tsp";
@@ -99,11 +100,6 @@ enum Versions {
    * The 2026-05-15-preview API version.
    */
   v2026_05_15_preview: "2026-05-15-preview",
-
-  /**
-   * The 2026-07-01 API version.
-   */
-  v2026_07_01: "2026-07-01",
 
   /**
    * The 2026-07-15-preview API version.

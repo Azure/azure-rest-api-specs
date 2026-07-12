@@ -1,0 +1,120 @@
+{
+  "operationId": "ArcDeployments_List",
+  "title": "ListArcDeployments",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "api-version": "2026-07-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-arc",
+            "name": "phi-3-arc",
+            "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+            "properties": {
+              "model": {
+                "format": "OpenAI",
+                "name": "phi-3-mini",
+                "version": "1"
+              },
+              "arcClusterExtensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+              "runtime": "vllm",
+              "compute": "GPU",
+              "replicas": 2,
+              "resources": {
+                "requests": {
+                  "cpu": "500m",
+                  "memory": "2Gi"
+                },
+                "limits": {
+                  "cpu": "4",
+                  "memory": "16Gi"
+                }
+              },
+              "nodeSelector": {
+                "gpu-type": "A100"
+              },
+              "vllmParameters": {
+                "tensorParallelSize": 2,
+                "maxModelLen": 8192,
+                "gpuMemoryUtilization": 0.9,
+                "enforceEager": false
+              },
+              "provisioningState": "Succeeded",
+              "provisioningDetails": {
+                "message": "Deployment is healthy and serving traffic.",
+                "lastOperationTimestamp": "2026-07-15T14:45:00Z"
+              },
+              "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+              "capabilities": {
+                "chatCompletion": "true"
+              }
+            },
+            "sku": {
+              "name": "Arc"
+            },
+            "tags": {
+              "env": "production"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/qwen-template-arc",
+            "name": "qwen-template-arc",
+            "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+            "properties": {
+              "model": {
+                "format": "OpenAI",
+                "name": "qwen3",
+                "version": "1"
+              },
+              "arcClusterExtensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+              "runtime": "vllm",
+              "compute": "GPU",
+              "replicas": 2,
+              "resources": {
+                "requests": {
+                  "cpu": "500m",
+                  "memory": "2Gi"
+                },
+                "limits": {
+                  "cpu": "4",
+                  "memory": "16Gi"
+                }
+              },
+              "nodeSelector": {
+                "gpu-type": "A100"
+              },
+              "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
+              "vllmParameters": {
+                "tensorParallelSize": 2,
+                "maxModelLen": 8192,
+                "gpuMemoryUtilization": 0.9,
+                "enforceEager": false
+              },
+              "provisioningState": "Succeeded",
+              "provisioningDetails": {
+                "message": "Deployment is healthy and serving traffic.",
+                "lastOperationTimestamp": "2026-07-15T14:45:00Z"
+              },
+              "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+              "capabilities": {
+                "chatCompletion": "true"
+              }
+            },
+            "sku": {
+              "name": "Arc"
+            },
+            "tags": {
+              "env": "production"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
