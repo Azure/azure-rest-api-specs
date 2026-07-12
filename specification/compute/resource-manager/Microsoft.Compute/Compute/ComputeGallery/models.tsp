@@ -2479,7 +2479,7 @@ model SharedGalleryImageVersionProperties {
   artifactTags?: Record<string>;
 
   /**
-   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the delete-requested time plus the retention period, and is null for active gallery image versions.
+   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
@@ -2773,7 +2773,7 @@ model CommunityGalleryImageVersionProperties {
   artifactTags?: Record<string>;
 
   /**
-   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the delete-requested time plus the retention period, and is null for active gallery image versions.
+   * The timestamp at which a soft-deleted gallery image version transitions to a simulated hard-deleted state and can no longer be consumed. It is calculated from the soft-deleted time plus the retention period, and is not present for active gallery image versions. In dateTime offset format.
    */
   @added(Versions.v2026_03_03)
   @visibility(Lifecycle.Read)
