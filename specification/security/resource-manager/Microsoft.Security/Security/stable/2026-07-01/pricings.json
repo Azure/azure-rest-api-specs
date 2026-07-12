@@ -268,7 +268,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Global update completed. Check the response body for individual plan results and summary statistics.",
+            "description": "All plans updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GlobalPricingUpdateResponse"
+            }
+          },
+          "207": {
+            "description": "Partial success - some plans updated successfully, some failed. Check individual results.",
             "schema": {
               "$ref": "#/definitions/GlobalPricingUpdateResponse"
             }
