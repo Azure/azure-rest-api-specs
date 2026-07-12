@@ -49,7 +49,6 @@ interface IpCommunities {
 }
 
 @@doc(IpCommunities.create::parameters.resource, "Request payload.");
-@@doc(
-  IpCommunities.update::parameters.properties,
+@@doc(IpCommunities.update::parameters.properties,
   "IP Community properties to update."
 );

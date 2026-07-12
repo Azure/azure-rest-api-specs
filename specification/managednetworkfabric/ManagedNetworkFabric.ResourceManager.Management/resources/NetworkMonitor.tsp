@@ -51,7 +51,6 @@ interface NetworkMonitors {
   >;
 }
 
-@@doc(
-  NetworkMonitors.updateAdministrativeState::parameters.body,
+@@doc(NetworkMonitors.updateAdministrativeState::parameters.body,
   "Request payload."
 );

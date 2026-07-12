@@ -26,8 +26,7 @@ model NetworkBootstrapDevice
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
-@@doc(
-  NetworkBootstrapDevice.properties,
+@@doc(NetworkBootstrapDevice.properties,
   "The NetworkBootstrapDevice properties"
 );
 @armResourceOperations
@@ -94,17 +93,14 @@ interface NetworkBootstrapDevices {
 }
 
 @@doc(NetworkBootstrapDevices.create::parameters.resource, "Request payload.");
-@@doc(
-  NetworkBootstrapDevices.update::parameters.properties,
+@@doc(NetworkBootstrapDevices.update::parameters.properties,
   "Network Bootstrap Device properties to update."
 );
 @@doc(NetworkBootstrapDevices.reboot::parameters.body, "Request payload.");
 @@doc(NetworkBootstrapDevices.upgrade::parameters.body, "Request payload.");
-@@doc(
-  NetworkBootstrapDevices.updateAdministrativeState::parameters.body,
+@@doc(NetworkBootstrapDevices.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkBootstrapDevices.resyncPasswords::parameters.body,
+@@doc(NetworkBootstrapDevices.resyncPasswords::parameters.body,
   "Request payload."
 );

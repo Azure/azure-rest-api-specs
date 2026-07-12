@@ -104,23 +104,18 @@ interface L3IsolationDomains {
 }
 
 @@doc(L3IsolationDomains.create::parameters.resource, "Request payload.");
-@@doc(
-  L3IsolationDomains.update::parameters.properties,
+@@doc(L3IsolationDomains.update::parameters.properties,
   "API to update certain properties of the L3 Isolation Domain resource."
 );
-@@doc(
-  L3IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(L3IsolationDomains.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  L3IsolationDomains.updateAdministrativeState::parameters.body,
+@@doc(L3IsolationDomains.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  L3IsolationDomains.validateConfigurationDeprecated::parameters.body,
+@@doc(L3IsolationDomains.validateConfigurationDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  L3IsolationDomains.validateConfiguration::parameters.body,
+@@doc(L3IsolationDomains.validateConfiguration::parameters.body,
   "Request payload."
 );

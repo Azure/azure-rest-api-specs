@@ -25,8 +25,7 @@ model NetworkToNetworkInterconnect
   name: string;
 }
 
-@@doc(
-  NetworkToNetworkInterconnect.properties,
+@@doc(NetworkToNetworkInterconnect.properties,
   "The NetworkToNetworkInterconnect Properties"
 );
 @armResourceOperations
@@ -121,35 +120,27 @@ interface NetworkToNetworkInterconnects {
   >;
 }
 
-@@doc(
-  NetworkToNetworkInterconnects.create::parameters.resource,
+@@doc(NetworkToNetworkInterconnects.create::parameters.resource,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.update::parameters.properties,
+@@doc(NetworkToNetworkInterconnects.update::parameters.properties,
   "Network to Network Interconnect properties to update."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateBfdAdministrativeState::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateBfdAdministrativeState::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );
-@@doc(
-  NetworkToNetworkInterconnects.updateBfdAdministrativeStateDeprecated::parameters.body,
+@@doc(NetworkToNetworkInterconnects.updateBfdAdministrativeStateDeprecated::parameters.body,
   "Request payload."
 );

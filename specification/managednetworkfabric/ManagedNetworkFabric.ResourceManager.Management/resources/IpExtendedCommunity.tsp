@@ -46,7 +46,6 @@ interface IpExtendedCommunities {
 }
 
 @@doc(IpExtendedCommunities.create::parameters.resource, "Request payload.");
-@@doc(
-  IpExtendedCommunities.update::parameters.properties,
+@@doc(IpExtendedCommunities.update::parameters.properties,
   "IP Extended Community properties to update."
 );

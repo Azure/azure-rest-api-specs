@@ -48,7 +48,6 @@ interface NetworkRacks {
 }
 
 @@doc(NetworkRacks.create::parameters.resource, "Request payload.");
-@@doc(
-  NetworkRacks.update::parameters.properties,
+@@doc(NetworkRacks.update::parameters.properties,
   "Network Rack properties to update."
 );
