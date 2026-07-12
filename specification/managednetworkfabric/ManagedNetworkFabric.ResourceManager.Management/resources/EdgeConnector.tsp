@@ -49,6 +49,7 @@ interface EdgeConnectors {
 }
 
 @@doc(EdgeConnectors.create::parameters.resource, "Request payload.");
-@@doc(EdgeConnectors.update::parameters.properties,
+@@doc(
+  EdgeConnectors.update::parameters.properties,
   "EdgeConnector properties to update."
 );

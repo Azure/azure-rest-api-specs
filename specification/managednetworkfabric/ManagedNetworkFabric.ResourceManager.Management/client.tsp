@@ -25,11 +25,13 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(ConfigurationState, "NetworkFabricConfigurationState", "csharp");
 @@clientName(ConfigurationType, "NetworkFabricConfigurationType", "csharp");
 @@clientName(ControllerServices, "NetworkFabricControllerServices", "csharp");
-@@clientName(DestinationProperties,
+@@clientName(
+  DestinationProperties,
   "NetworkTapDestinationProperties",
   "csharp"
 );
-@@clientName(DestinationPatchProperties,
+@@clientName(
+  DestinationPatchProperties,
   "NetworkTapDestinationPatchProperties",
   "csharp"
 );
@@ -37,7 +39,8 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(Encapsulation.GRE, "Gre", "csharp");
 @@clientName(EncapsulationType, "NetworkTapEncapsulationType", "csharp");
 @@clientName(Extension, "StaticRouteConfigurationExtension", "csharp");
-@@clientName(ExternalNetworkPropertiesOptionAProperties,
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties,
   "ExternalNetworkOptionAProperties",
   "csharp"
 );
@@ -49,11 +52,13 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(IpPrefixRule, "IPPrefixRule", "csharp");
 @@clientName(IpGroupPatchProperties, "IPGroupPatchProperties", "csharp");
 @@clientName(IpMatchConditionPatch, "IPMatchConditionPatch", "csharp");
-@@clientName(ActionIpCommunityPatchProperties,
+@@clientName(
+  ActionIpCommunityPatchProperties,
   "ActionIPCommunityPatchProperties",
   "csharp"
 );
-@@clientName(ActionIpExtendedCommunityPatchProperties,
+@@clientName(
+  ActionIpExtendedCommunityPatchProperties,
   "ActionIPExtendedCommunityPatchProperties",
   "csharp"
 );
@@ -67,7 +72,8 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(PortConditionPatch, "NetworkFabricPortConditionPatch", "csharp");
 @@clientName(PortType, "NetworkFabricPortType", "csharp");
 @@clientName(ProvisioningState, "NetworkFabricProvisioningState", "csharp");
-@@clientName(RedistributeConnectedSubnets,
+@@clientName(
+  RedistributeConnectedSubnets,
   "RedistributeConnectedSubnet",
   "csharp"
 );
@@ -81,23 +87,28 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(BfdAdministrativeState.MAT, "Mat", "csharp");
 @@clientName(BfdAdministrativeState.RMA, "Rma", "csharp");
 @@clientName(DeviceAdministrativeState.RMA, "Rma", "csharp");
-@@clientName(DeviceAdministrativeState.UngracefulRMA,
+@@clientName(
+  DeviceAdministrativeState.UngracefulRMA,
   "UngracefulRma",
   "csharp"
 );
-@@clientName(RebootType.GracefulRebootWithZTP,
+@@clientName(
+  RebootType.GracefulRebootWithZTP,
   "GracefulRebootWithZtp",
   "csharp"
 );
-@@clientName(RebootType.GracefulRebootWithoutZTP,
+@@clientName(
+  RebootType.GracefulRebootWithoutZTP,
   "GracefulRebootWithoutZtp",
   "csharp"
 );
-@@clientName(RebootType.UngracefulRebootWithZTP,
+@@clientName(
+  RebootType.UngracefulRebootWithZTP,
   "UngracefulRebootWithZtp",
   "csharp"
 );
-@@clientName(RebootType.UngracefulRebootWithoutZTP,
+@@clientName(
+  RebootType.UngracefulRebootWithoutZTP,
   "UngracefulRebootWithoutZtp",
   "csharp"
 );
@@ -112,7 +123,8 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(Layer4Protocol.TCP, "Tcp", "csharp");
 @@clientName(Layer4Protocol.UDP, "Udp", "csharp");
 @@clientName(Layer4Protocol.SCTP, "Sctp", "csharp");
-@@clientName(Microsoft.ManagedNetworkFabric.AclType,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.AclType,
   "NetworkFabricAclType",
   "csharp"
 );
@@ -120,27 +132,32 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(BitRateUnit, "NetworkFabricBitRateUnit", "csharp");
 @@clientName(BurstSize, "NetworkFabricBurstSize", "csharp");
 @@clientName(BurstSizeUnit, "NetworkFabricBurstSizeUnit", "csharp");
-@@clientName(ControlPlaneAclTtlMatchCondition,
+@@clientName(
+  ControlPlaneAclTtlMatchCondition,
   "ControlPlaneAclTimeToLiveMatchCondition",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchConditionPatch,
+@@clientName(
+  ControlPlaneAclTtlMatchConditionPatch,
   "ControlPlaneAclTimeToLiveMatchConditionPatch",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchType,
+@@clientName(
+  ControlPlaneAclTtlMatchType,
   "ControlPlaneAclTimeToLiveMatchType",
   "csharp"
 );
 @@clientName(ControlPlaneAclPortMatchType.Equals, "EqualsValue", "csharp");
 @@clientName(ControlPlaneAclTtlMatchType.Equals, "EqualsValue", "csharp");
 @@clientName(CommitBatchState, "NetworkFabricCommitBatchState", "csharp");
-@@clientName(CommitConfigurationPolicy,
+@@clientName(
+  CommitConfigurationPolicy,
   "NetworkFabricCommitConfigurationPolicy",
   "csharp"
 );
 @@clientName(CommitStage, "NetworkFabricCommitStage", "csharp");
-@@clientName(Microsoft.ManagedNetworkFabric.DeviceRole,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.DeviceRole,
   "NetworkFabricDeviceRole",
   "csharp"
 );
@@ -150,109 +167,133 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(FabricLockProperties, "NetworkFabricLock", "csharp");
 @@clientName(FeatureFlagProperties, "NetworkFabricFeatureFlag", "csharp");
 @@clientName(HeaderAddressProperties, "NetworkFabricHeaderAddress", "csharp");
-@@clientName(Microsoft.ManagedNetworkFabric.IdentitySelector,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.IdentitySelector,
   "NetworkFabricIdentitySelector",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.IdentitySelectorPatch,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.IdentitySelectorPatch,
   "NetworkFabricIdentitySelectorPatch",
   "csharp"
 );
-@@clientName(LockConfigurationState,
+@@clientName(
+  LockConfigurationState,
   "NetworkFabricLockConfigurationState",
   "csharp"
 );
-@@clientName(ManagedServiceIdentityPatch,
+@@clientName(
+  ManagedServiceIdentityPatch,
   "NetworkFabricManagedServiceIdentityPatch",
   "csharp"
 );
 @@clientName(ManagedServiceIdentity.type, "IdentityType", "csharp");
-@@clientName(ManagedServiceIdentitySelectorType,
+@@clientName(
+  ManagedServiceIdentitySelectorType,
   "NetworkFabricManagedIdentitySelectorType",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.MicroBfdState,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.MicroBfdState,
   "NetworkFabricMicroBfdState",
   "csharp"
 );
-@@clientName(QosConfigurationState,
+@@clientName(
+  QosConfigurationState,
   "NetworkFabricQosConfigurationState",
   "csharp"
 );
 @@clientName(RouteType, "NetworkFabricRouteType", "csharp");
 @@clientName(RuleCondition, "NetworkFabricRuleCondition", "csharp");
-@@clientName(NNIDerivedUniqueRouteDistinguisherConfigurationState,
+@@clientName(
+  NNIDerivedUniqueRouteDistinguisherConfigurationState,
   "NniDerivedUniqueRouteDistinguisherConfigurationState",
   "csharp"
 );
-@@clientName(StationConfigurationState,
+@@clientName(
+  StationConfigurationState,
   "NetworkFabricStationConfigurationState",
   "csharp"
 );
-@@clientName(StationConnectionMode,
+@@clientName(
+  StationConnectionMode,
   "NetworkFabricStationConnectionMode",
   "csharp"
 );
-@@clientName(SynchronizationStatus,
+@@clientName(
+  SynchronizationStatus,
   "NetworkFabricSynchronizationStatus",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.SecretRotationStatus,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.SecretRotationStatus,
   "NetworkFabricSecretRotationStatus",
   "csharp"
 );
-@@clientName(SecretArchiveReference,
+@@clientName(
+  SecretArchiveReference,
   "NetworkFabricSecretArchiveReference",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.CertificateRotationStatus,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.CertificateRotationStatus,
   "NetworkFabricCertificateRotationStatus",
   "csharp"
 );
-@@clientName(CertificateArchiveReference,
+@@clientName(
+  CertificateArchiveReference,
   "NetworkFabricCertificateArchiveReference",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.V4OverV6BgpSessionState,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.V4OverV6BgpSessionState,
   "NetworkFabricV4OverV6BgpSessionState",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.V6OverV4BgpSessionState,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.V6OverV4BgpSessionState,
   "NetworkFabricV6OverV4BgpSessionState",
   "csharp"
 );
-@@clientName(ActionIpCommunityProperties,
+@@clientName(
+  ActionIpCommunityProperties,
   "ActionIPCommunityProperties",
   "csharp"
 );
-@@clientName(ActionIpExtendedCommunityProperties,
+@@clientName(
+  ActionIpExtendedCommunityProperties,
   "ActionIPExtendedCommunityProperties",
   "csharp"
 );
 @@clientName(AnnotationResource, "AnnotationResourceProperties", "csharp");
 @@clientName(BgpConfiguration, "BgpConfiguration", "csharp");
-@@clientName(CommonPostActionResponseForDeviceUpdate,
+@@clientName(
+  CommonPostActionResponseForDeviceUpdate,
   "DeviceUpdateCommonPostActionResult",
   "csharp"
 );
-@@clientName(CommonPostActionResponseForStateUpdate,
+@@clientName(
+  CommonPostActionResponseForStateUpdate,
   "StateUpdateCommonPostActionResult",
   "csharp"
 );
 @@clientName(DestinationType, "NetworkTapDestinationType", "csharp");
-@@clientName(EnableDisableOnResources,
+@@clientName(
+  EnableDisableOnResources,
   "UpdateAdministrativeStateOnResources",
   "csharp"
 );
 @@clientName(EnableDisableState, "AdministrativeEnableState", "csharp");
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties,
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties,
   "ExternalNetworkPatchOptionAProperties",
   "csharp"
 );
 @@clientName(IPAddressType, "NetworkFabricIPAddressType", "csharp");
 @@clientName(IpCommunityIdList, "IPCommunityIdList", "csharp");
 @@clientName(IpExtendedCommunityIdList, "IPExtendedCommunityIdList", "csharp");
-@@clientName(IpGroupProperties,
+@@clientName(
+  IpGroupProperties,
   "MatchConfigurationIPGroupProperties",
   "csharp"
 );
@@ -260,407 +301,502 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(IpMatchCondition.type, "SourceDestinationType", "csharp");
 @@clientName(PrefixType, "IPMatchConditionPrefixType", "csharp");
 @@clientName(AccessControlListAction.type, "AclActionType", "csharp");
-@@clientName(AccessControlListPatch,
+@@clientName(
+  AccessControlListPatch,
   "NetworkFabricAccessControlListPatchContent",
   "csharp"
 );
-@@clientName(InternetGatewayPatch,
+@@clientName(
+  InternetGatewayPatch,
   "NetworkFabricInternetGatewayPatchContent",
   "csharp"
 );
-@@clientName(InternetGatewayRulePatch,
+@@clientName(
+  InternetGatewayRulePatch,
   "NetworkFabricInternetGatewayRulePatchContent",
   "csharp"
 );
-@@clientName(IpCommunityPatch,
+@@clientName(
+  IpCommunityPatch,
   "NetworkFabricIPCommunityPatchContent",
   "csharp"
 );
-@@clientName(IpExtendedCommunityPatch,
+@@clientName(
+  IpExtendedCommunityPatch,
   "NetworkFabricIPExtendedCommunityPatchContent",
   "csharp"
 );
 @@clientName(IpPrefixPatch, "NetworkFabricIPPrefixPatchContent", "csharp");
-@@clientName(L2IsolationDomainPatch,
+@@clientName(
+  L2IsolationDomainPatch,
   "NetworkFabricL2IsolationDomainPatchContent",
   "csharp"
 );
-@@clientName(L3IsolationDomainPatch,
+@@clientName(
+  L3IsolationDomainPatch,
   "NetworkFabricL3IsolationDomainPatchContent",
   "csharp"
 );
-@@clientName(NeighborGroupPatch,
+@@clientName(
+  NeighborGroupPatch,
   "NetworkFabricNeighborGroupPatchContent",
   "csharp"
 );
-@@clientName(NetworkDevicePatchParameters,
+@@clientName(
+  NetworkDevicePatchParameters,
   "NetworkDevicePatchContent",
   "csharp"
 );
-@@clientName(NetworkBootstrapDevicePatch,
+@@clientName(
+  NetworkBootstrapDevicePatch,
   "NetworkBootstrapDevicePatchContent",
   "csharp"
 );
 @@clientName(NetworkFabricPatch, "NetworkFabricPatchContent", "csharp");
-@@clientName(NetworkFabricControllerPatch,
+@@clientName(
+  NetworkFabricControllerPatch,
   "NetworkFabricControllerPatchContent",
   "csharp"
 );
 @@clientName(NetworkMonitorPatch, "NetworkMonitorPatchContent", "csharp");
-@@clientName(NetworkPacketBrokerPatch,
+@@clientName(
+  NetworkPacketBrokerPatch,
   "NetworkPacketBrokerPatchContent",
   "csharp"
 );
 @@clientName(NetworkTapPatch, "NetworkTapPatchContent", "csharp");
 @@clientName(NetworkTapRulePatch, "NetworkTapRulePatchContent", "csharp");
-@@clientName(RoutePolicyPatch,
+@@clientName(
+  RoutePolicyPatch,
   "NetworkFabricRoutePolicyPatchContent",
   "csharp"
 );
 @@clientName(Layer3IpPrefixProperties, "Layer3IPPrefixProperties", "csharp");
-@@clientName(Layer3IpPrefixProperties.primaryIpv4Prefix,
+@@clientName(
+  Layer3IpPrefixProperties.primaryIpv4Prefix,
   "PrimaryIPv4Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixProperties.primaryIpv6Prefix,
+@@clientName(
+  Layer3IpPrefixProperties.primaryIpv6Prefix,
   "PrimaryIPv6Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixProperties.secondaryIpv4Prefix,
+@@clientName(
+  Layer3IpPrefixProperties.secondaryIpv4Prefix,
   "SecondaryIPv4Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixProperties.secondaryIpv6Prefix,
+@@clientName(
+  Layer3IpPrefixProperties.secondaryIpv6Prefix,
   "SecondaryIPv6Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixPatchProperties,
+@@clientName(
+  Layer3IpPrefixPatchProperties,
   "Layer3IPPrefixPatchProperties",
   "csharp"
 );
-@@clientName(Layer3IpPrefixPatchProperties.primaryIpv4Prefix,
+@@clientName(
+  Layer3IpPrefixPatchProperties.primaryIpv4Prefix,
   "PrimaryIPv4Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixPatchProperties.primaryIpv6Prefix,
+@@clientName(
+  Layer3IpPrefixPatchProperties.primaryIpv6Prefix,
   "PrimaryIPv6Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixPatchProperties.secondaryIpv4Prefix,
+@@clientName(
+  Layer3IpPrefixPatchProperties.secondaryIpv4Prefix,
   "SecondaryIPv4Prefix",
   "csharp"
 );
-@@clientName(Layer3IpPrefixPatchProperties.secondaryIpv6Prefix,
+@@clientName(
+  Layer3IpPrefixPatchProperties.secondaryIpv6Prefix,
   "SecondaryIPv6Prefix",
   "csharp"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ManagementNetworkConfigurationProperties,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ManagementNetworkConfigurationProperties,
   "ManagementNetworkConfigurationProperties",
   "csharp"
 );
-@@clientName(ManagementNetworkPatchConfiguration,
+@@clientName(
+  ManagementNetworkPatchConfiguration,
   "ManagementNetworkConfigurationPatchableProperties",
   "csharp"
 );
-@@clientName(DeviceAdministrativeState,
+@@clientName(
+  DeviceAdministrativeState,
   "NetworkDeviceAdministrativeState",
   "csharp"
 );
-@@clientName(DeviceInterfaceProperties,
+@@clientName(
+  DeviceInterfaceProperties,
   "NetworkDeviceInterfaceProperties",
   "csharp"
 );
 @@clientName(RebootProperties, "NetworkDeviceRebootContent", "csharp");
 @@clientName(RebootType, "NetworkDeviceRebootType", "csharp");
-@@clientName(TerminalServerConfiguration,
+@@clientName(
+  TerminalServerConfiguration,
   "NetworkFabricTerminalServerConfiguration",
   "csharp"
 );
-@@clientName(TerminalServerPatchConfiguration,
+@@clientName(
+  TerminalServerPatchConfiguration,
   "NetworkFabricTerminalServerPatchConfiguration",
   "csharp"
 );
-@@clientName(UpdateAdministrativeState,
+@@clientName(
+  UpdateAdministrativeState,
   "UpdateAdministrativeStateContent",
   "csharp"
 );
-@@clientName(UpdateDeviceAdministrativeState,
+@@clientName(
+  UpdateDeviceAdministrativeState,
   "UpdateDeviceAdministrativeStateContent",
   "csharp"
 );
 @@clientName(UpdateVersion, "NetworkFabricUpdateVersionContent", "csharp");
 @@clientName(ValidateAction, "NetworkFabricValidateAction", "csharp");
-@@clientName(ValidateConfigurationProperties,
+@@clientName(
+  ValidateConfigurationProperties,
   "ValidateConfigurationContent",
   "csharp"
 );
 // Replacement models preserve paired base/derived C# model names from the shipped SDK.
-@@clientName(InternalNetworkProperties.bgpConfiguration,
+@@clientName(
+  InternalNetworkProperties.bgpConfiguration,
   "BgpSettings",
   "csharp"
 );
 
-@@clientName(InternalNetworkProperties.staticRouteConfiguration,
+@@clientName(
+  InternalNetworkProperties.staticRouteConfiguration,
   "StaticRouteSettings",
   "csharp"
 );
 
-@@clientName(NetworkToNetworkInterconnectProperties.optionBLayer3Configuration,
+@@clientName(
+  NetworkToNetworkInterconnectProperties.optionBLayer3Configuration,
   "OptionBLayer3Settings",
   "csharp"
 );
 
-@@clientName(NetworkFabricProperties.terminalServerConfiguration,
+@@clientName(
+  NetworkFabricProperties.terminalServerConfiguration,
   "TerminalServerSettings",
   "csharp"
 );
 
-@@clientName(NetworkTapProperties.destinations,
+@@clientName(
+  NetworkTapProperties.destinations,
   "DestinationSettings",
   "csharp"
 );
 
-@@clientName(NetworkTapPatchProperties.destinations,
+@@clientName(
+  NetworkTapPatchProperties.destinations,
   "DestinationSettings",
   "csharp"
 );
 
-@@clientName(NetworkFabricPatchableProperties.terminalServerConfiguration,
+@@clientName(
+  NetworkFabricPatchableProperties.terminalServerConfiguration,
   "TerminalServerSettings",
   "csharp"
 );
 
-@@clientName(VpnConfigurationProperties.optionAProperties,
+@@clientName(
+  VpnConfigurationProperties.optionAProperties,
   "OptionASettings",
   "csharp"
 );
 
-@@clientName(VpnConfigurationPatchableProperties.optionAProperties,
+@@clientName(
+  VpnConfigurationPatchableProperties.optionAProperties,
   "OptionASettings",
   "csharp"
 );
 
-@@clientName(InternalNetworkPatchProperties.bgpConfiguration,
+@@clientName(
+  InternalNetworkPatchProperties.bgpConfiguration,
   "BgpSettings",
   "csharp"
 );
-@@clientName(InternalNetworkPatchProperties.staticRouteConfiguration,
+@@clientName(
+  InternalNetworkPatchProperties.staticRouteConfiguration,
   "StaticRouteSettings",
   "csharp"
 );
-@@clientName(InternalNetworkPatchProperties.connectedIPv4Subnets,
+@@clientName(
+  InternalNetworkPatchProperties.connectedIPv4Subnets,
   "ConnectedIPv4SubnetSettings",
   "csharp"
 );
-@@clientName(InternalNetworkPatchProperties.connectedIPv6Subnets,
+@@clientName(
+  InternalNetworkPatchProperties.connectedIPv6Subnets,
   "ConnectedIPv6SubnetSettings",
   "csharp"
 );
-@@clientName(ConnectedSubnetPatch,
+@@clientName(
+  ConnectedSubnetPatch,
   "NetworkFabricConnectedSubnetPatch",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnectPatchProperties.layer2Configuration,
+@@clientName(
+  NetworkToNetworkInterconnectPatchProperties.layer2Configuration,
   "Layer2Settings",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnectPatchProperties.optionBLayer3Configuration,
+@@clientName(
+  NetworkToNetworkInterconnectPatchProperties.optionBLayer3Configuration,
   "OptionBLayer3Settings",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnectPatchProperties.npbStaticRouteConfiguration,
+@@clientName(
+  NetworkToNetworkInterconnectPatchProperties.npbStaticRouteConfiguration,
   "NpbStaticRouteSettings",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnectPatchProperties.importRoutePolicy,
+@@clientName(
+  NetworkToNetworkInterconnectPatchProperties.importRoutePolicy,
   "ImportRoutePolicySettings",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnectPatchProperties.exportRoutePolicy,
+@@clientName(
+  NetworkToNetworkInterconnectPatchProperties.exportRoutePolicy,
   "ExportRoutePolicySettings",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchProperties.optionBProperties,
+@@clientName(
+  ExternalNetworkPatchProperties.optionBProperties,
   "OptionBSettings",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchProperties.importRoutePolicy,
+@@clientName(
+  ExternalNetworkPatchProperties.importRoutePolicy,
   "ImportRoutePolicySettings",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchProperties.exportRoutePolicy,
+@@clientName(
+  ExternalNetworkPatchProperties.exportRoutePolicy,
   "ExportRoutePolicySettings",
   "csharp"
 );
-@@clientName(L3IsolationDomainPatchProperties.aggregateRouteConfiguration,
+@@clientName(
+  L3IsolationDomainPatchProperties.aggregateRouteConfiguration,
   "AggregateRouteSettings",
   "csharp"
 );
-@@clientName(L3IsolationDomainPatchProperties.connectedSubnetRoutePolicy,
+@@clientName(
+  L3IsolationDomainPatchProperties.connectedSubnetRoutePolicy,
   "ConnectedSubnetRoutePolicySettings",
   "csharp"
 );
-@@clientName(NeighborGroupPatchProperties.destination,
+@@clientName(
+  NeighborGroupPatchProperties.destination,
   "DestinationSettings",
   "csharp"
 );
-@@clientName(AccessControlListPatchProperties.matchConfigurations,
+@@clientName(
+  AccessControlListPatchProperties.matchConfigurations,
   "MatchConfigurationSettings",
   "csharp"
 );
-@@clientName(AccessControlListPatchProperties.dynamicMatchConfigurations,
+@@clientName(
+  AccessControlListPatchProperties.dynamicMatchConfigurations,
   "DynamicMatchConfigurationSettings",
   "csharp"
 );
-@@clientName(NetworkTapRulePatchProperties.matchConfigurations,
+@@clientName(
+  NetworkTapRulePatchProperties.matchConfigurations,
   "MatchConfigurationSettings",
   "csharp"
 );
-@@clientName(NetworkTapRulePatchProperties.dynamicMatchConfigurations,
+@@clientName(
+  NetworkTapRulePatchProperties.dynamicMatchConfigurations,
   "DynamicMatchConfigurationSettings",
   "csharp"
 );
-@@alternateType(NetworkTapRuleProperties.networkTapId,
+@@alternateType(
+  NetworkTapRuleProperties.networkTapId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@clientName(NetworkTapRuleProperties.pollingIntervalInSeconds,
+@@clientName(
+  NetworkTapRuleProperties.pollingIntervalInSeconds,
   "PollingIntervalInSecond",
   "csharp"
 );
-@@clientName(RoutePolicyPatchableProperties.statements,
+@@clientName(
+  RoutePolicyPatchableProperties.statements,
   "StatementSettings",
   "csharp"
 );
-@@alternateType(TerminalServerConfiguration.networkDeviceId,
+@@alternateType(
+  TerminalServerConfiguration.networkDeviceId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(IpCommunityIdList.ipCommunityIds,
+@@alternateType(
+  IpCommunityIdList.ipCommunityIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(IpExtendedCommunityIdList.ipExtendedCommunityIds,
+@@alternateType(
+  IpExtendedCommunityIdList.ipExtendedCommunityIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(StatementConditionProperties.ipCommunityIds,
+@@alternateType(
+  StatementConditionProperties.ipCommunityIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(StatementConditionProperties.ipPrefixId,
+@@alternateType(
+  StatementConditionProperties.ipPrefixId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(StatementConditionProperties.ipExtendedCommunityIds,
+@@alternateType(
+  StatementConditionProperties.ipExtendedCommunityIds,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
-@@alternateType(NetworkDeviceProperties.managementIpv4Address,
+@@alternateType(
+  NetworkDeviceProperties.managementIpv4Address,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(NetworkDeviceProperties.networkRackId,
+@@alternateType(
+  NetworkDeviceProperties.networkRackId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(NetworkInterfaceProperties.ipv4Address,
+@@alternateType(
+  NetworkInterfaceProperties.ipv4Address,
   Azure.Core.ipV4Address,
   "csharp"
 );
-@@alternateType(NeighborGroupDestination.ipv4Addresses,
+@@alternateType(
+  NeighborGroupDestination.ipv4Addresses,
   Azure.Core.ipV4Address[],
   "csharp"
 );
-@@alternateType(CommonPostActionResponseForDeviceROCommands.outputUrl,
+@@alternateType(
+  CommonPostActionResponseForDeviceROCommands.outputUrl,
   url,
   "csharp"
 );
-@@alternateType(CommonPostActionResponseForDeviceRWCommands.outputUrl,
+@@alternateType(
+  CommonPostActionResponseForDeviceRWCommands.outputUrl,
   url,
   "csharp"
 );
-@@alternateType(ArmConfigurationDiffResponseProperties.configurationDiffUrl,
+@@alternateType(
+  ArmConfigurationDiffResponseProperties.configurationDiffUrl,
   url,
   "csharp"
 );
-@@alternateType(ViewDeviceConfigurationResponseProperties.deviceConfigurationUrl,
+@@alternateType(
+  ViewDeviceConfigurationResponseProperties.deviceConfigurationUrl,
   url,
   "csharp"
 );
-@@clientName(CommonPostActionResponseForDeviceROCommands.outputUrl,
+@@clientName(
+  CommonPostActionResponseForDeviceROCommands.outputUrl,
   "OutputUri",
   "csharp"
 );
-@@clientName(CommonPostActionResponseForDeviceRWCommands.outputUrl,
+@@clientName(
+  CommonPostActionResponseForDeviceRWCommands.outputUrl,
   "OutputUri",
   "csharp"
 );
-@@clientName(ArmConfigurationDiffResponseProperties.configurationDiffUrl,
+@@clientName(
+  ArmConfigurationDiffResponseProperties.configurationDiffUrl,
   "ConfigurationDiffUri",
   "csharp"
 );
-@@clientName(ViewDeviceConfigurationResponseProperties.deviceConfigurationUrl,
+@@clientName(
+  ViewDeviceConfigurationResponseProperties.deviceConfigurationUrl,
   "DeviceConfigurationUri",
   "csharp"
 );
-@@clientName(StatementActionProperties.ipCommunityProperties,
+@@clientName(
+  StatementActionProperties.ipCommunityProperties,
   "IPCommunityProperties",
   "csharp"
 );
-@@clientName(StatementActionProperties.ipExtendedCommunityProperties,
+@@clientName(
+  StatementActionProperties.ipExtendedCommunityProperties,
   "IPExtendedCommunityProperties",
   "csharp"
 );
 @@clientName(ControlPlaneAclAction.type, "ActionType", "csharp");
 @@clientName(ControlPlaneAclActionPatch.type, "ActionType", "csharp");
-@@clientName(ControlPlaneAclMatchCondition.ttlMatchCondition,
+@@clientName(
+  ControlPlaneAclMatchCondition.ttlMatchCondition,
   "TimeToLiveMatchCondition",
   "csharp"
 );
-@@clientName(ControlPlaneAclMatchConditionPatch.ttlMatchCondition,
+@@clientName(
+  ControlPlaneAclMatchConditionPatch.ttlMatchCondition,
   "TimeToLiveMatchCondition",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchCondition.ttlValue,
+@@clientName(
+  ControlPlaneAclTtlMatchCondition.ttlValue,
   "TimeToLiveInHops",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchCondition.ttlMatchType,
+@@clientName(
+  ControlPlaneAclTtlMatchCondition.ttlMatchType,
   "TimeToLiveMatchType",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchConditionPatch.ttlValue,
+@@clientName(
+  ControlPlaneAclTtlMatchConditionPatch.ttlValue,
   "TimeToLiveInHops",
   "csharp"
 );
-@@clientName(ControlPlaneAclTtlMatchConditionPatch.ttlMatchType,
+@@clientName(
+  ControlPlaneAclTtlMatchConditionPatch.ttlMatchType,
   "TimeToLiveMatchType",
   "csharp"
 );
-@@clientName(StatementConditionProperties.type,
+@@clientName(
+  StatementConditionProperties.type,
   "RoutePolicyConditionType",
   "csharp"
 );
 @@clientName(NniType.NPB, "Npb", "csharp");
 @@clientName(Extension.NPB, "Npb", "csharp");
-@@clientName(SupportedVersionProperties.vendorOsVersion,
+@@clientName(
+  SupportedVersionProperties.vendorOsVersion,
   "VendorOSVersion",
   "csharp"
 );
-@@clientName(BgpConfiguration.ipv4ListenRangePrefixes,
+@@clientName(
+  BgpConfiguration.ipv4ListenRangePrefixes,
   "IPv4ListenRangePrefixes",
   "csharp"
 );
-@@clientName(BgpConfiguration.ipv6ListenRangePrefixes,
+@@clientName(
+  BgpConfiguration.ipv6ListenRangePrefixes,
   "IPv6ListenRangePrefixes",
   "csharp"
 );
-@@clientName(BgpConfiguration.ipv4NeighborAddress,
+@@clientName(
+  BgpConfiguration.ipv4NeighborAddress,
   "IPv4NeighborAddress",
   "csharp"
 );
-@@clientName(BgpConfiguration.ipv6NeighborAddress,
+@@clientName(
+  BgpConfiguration.ipv6NeighborAddress,
   "IPv6NeighborAddress",
   "csharp"
 );
@@ -668,47 +804,58 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(StaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(NpbStaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
-@@clientName(NpbStaticRouteConfigurationPatch.ipv4Routes,
+@@clientName(
+  NpbStaticRouteConfigurationPatch.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(NpbStaticRouteConfigurationPatch.ipv6Routes,
+@@clientName(
+  NpbStaticRouteConfigurationPatch.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
-@@clientName(RouteTargetInformation.exportIpv4RouteTargets,
+@@clientName(
+  RouteTargetInformation.exportIpv4RouteTargets,
   "ExportIPv4RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetInformation.exportIpv6RouteTargets,
+@@clientName(
+  RouteTargetInformation.exportIpv6RouteTargets,
   "ExportIPv6RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetInformation.importIpv4RouteTargets,
+@@clientName(
+  RouteTargetInformation.importIpv4RouteTargets,
   "ImportIPv4RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetInformation.importIpv6RouteTargets,
+@@clientName(
+  RouteTargetInformation.importIpv6RouteTargets,
   "ImportIPv6RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetPatchInformation.exportIpv4RouteTargets,
+@@clientName(
+  RouteTargetPatchInformation.exportIpv4RouteTargets,
   "ExportIPv4RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetPatchInformation.exportIpv6RouteTargets,
+@@clientName(
+  RouteTargetPatchInformation.exportIpv6RouteTargets,
   "ExportIPv6RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetPatchInformation.importIpv4RouteTargets,
+@@clientName(
+  RouteTargetPatchInformation.importIpv4RouteTargets,
   "ImportIPv4RouteTargets",
   "csharp"
 );
-@@clientName(RouteTargetPatchInformation.importIpv6RouteTargets,
+@@clientName(
+  RouteTargetPatchInformation.importIpv6RouteTargets,
   "ImportIPv6RouteTargets",
   "csharp"
 );
-@@clientName(NetworkTapRuleMatchConfiguration.ipAddressType,
+@@clientName(
+  NetworkTapRuleMatchConfiguration.ipAddressType,
   "IPAddressType",
   "csharp"
 );
@@ -717,101 +864,124 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(BgpConfiguration.peerASN, "PeerAsn", "csharp");
 @@clientName(BgpPatchConfiguration.fabricASN, "FabricAsn", "csharp");
 @@clientName(BgpPatchConfiguration.peerASN, "PeerAsn", "csharp");
-@@clientName(ConditionalDefaultRouteProperties.ipv4Routes,
+@@clientName(
+  ConditionalDefaultRouteProperties.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(ConditionalDefaultRouteProperties.ipv6Routes,
+@@clientName(
+  ConditionalDefaultRouteProperties.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
 @@clientName(AggregateRouteConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(AggregateRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
-@@clientName(AggregateRoutePatchConfiguration.ipv4Routes,
+@@clientName(
+  AggregateRoutePatchConfiguration.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(AggregateRoutePatchConfiguration.ipv6Routes,
+@@clientName(
+  AggregateRoutePatchConfiguration.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
-@@clientName(ControllerServices.ipv4AddressSpaces,
+@@clientName(
+  ControllerServices.ipv4AddressSpaces,
   "IPv4AddressSpaces",
   "csharp"
 );
-@@clientName(ControllerServices.ipv6AddressSpaces,
+@@clientName(
+  ControllerServices.ipv6AddressSpaces,
   "IPv6AddressSpaces",
   "csharp"
 );
-@@clientName(NetworkFabricControllerProperties.ipv4AddressSpace,
+@@clientName(
+  NetworkFabricControllerProperties.ipv4AddressSpace,
   "IPv4AddressSpace",
   "csharp"
 );
-@@clientName(NetworkFabricControllerProperties.ipv6AddressSpace,
+@@clientName(
+  NetworkFabricControllerProperties.ipv6AddressSpace,
   "IPv6AddressSpace",
   "csharp"
 );
-@@clientName(NetworkFabricControllerProperties.workloadManagementNetwork,
+@@clientName(
+  NetworkFabricControllerProperties.workloadManagementNetwork,
   "IsWorkloadManagementNetwork",
   "csharp"
 );
 @@clientName(NniStaticRouteConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(NniStaticRouteConfiguration.ipv6Routes, "IPv6Routes", "csharp");
-@@clientName(NniStaticRoutePatchConfiguration.ipv4Routes,
+@@clientName(
+  NniStaticRoutePatchConfiguration.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(NniStaticRoutePatchConfiguration.ipv6Routes,
+@@clientName(
+  NniStaticRoutePatchConfiguration.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
 @@clientName(StaticRoutePatchConfiguration.ipv4Routes, "IPv4Routes", "csharp");
 @@clientName(StaticRoutePatchConfiguration.ipv6Routes, "IPv6Routes", "csharp");
-@@clientName(ExternalNetworkStaticRouteConfiguration.ipv4Routes,
+@@clientName(
+  ExternalNetworkStaticRouteConfiguration.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(ExternalNetworkStaticRouteConfiguration.ipv6Routes,
+@@clientName(
+  ExternalNetworkStaticRouteConfiguration.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
-@@clientName(ExternalNetworkStaticRoutePatchConfiguration.ipv4Routes,
+@@clientName(
+  ExternalNetworkStaticRoutePatchConfiguration.ipv4Routes,
   "IPv4Routes",
   "csharp"
 );
-@@clientName(ExternalNetworkStaticRoutePatchConfiguration.ipv6Routes,
+@@clientName(
+  ExternalNetworkStaticRoutePatchConfiguration.ipv6Routes,
   "IPv6Routes",
   "csharp"
 );
-@@clientName(ExternalNetworkPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties.fabricASN,
   "FabricAsn",
   "csharp"
 );
-@@clientName(ExternalNetworkPropertiesOptionAProperties.peerASN,
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties.peerASN,
   "PeerAsn",
   "csharp"
 );
-@@clientName(ExternalNetworkPropertiesOptionAProperties.nativeIpv4PrefixLimit,
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties.nativeIpv4PrefixLimit,
   "NativeIPv4PrefixLimit",
   "csharp"
 );
-@@clientName(ExternalNetworkPropertiesOptionAProperties.nativeIpv6PrefixLimit,
+@@clientName(
+  ExternalNetworkPropertiesOptionAProperties.nativeIpv6PrefixLimit,
   "NativeIPv6PrefixLimit",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
   "FabricAsn",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
   "PeerAsn",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties.nativeIpv4PrefixLimit,
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties.nativeIpv4PrefixLimit,
   "NativeIPv4PrefixLimit",
   "csharp"
 );
-@@clientName(ExternalNetworkPatchPropertiesOptionAProperties.nativeIpv6PrefixLimit,
+@@clientName(
+  ExternalNetworkPatchPropertiesOptionAProperties.nativeIpv6PrefixLimit,
   "NativeIPv6PrefixLimit",
   "csharp"
 );
@@ -820,149 +990,185 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(VpnOptionAPatchProperties.peerASN, "PeerAsn", "csharp");
 @@clientName(OptionBLayer3Configuration.fabricASN, "FabricAsn", "csharp");
 @@clientName(OptionBLayer3Configuration.peerASN, "PeerAsn", "csharp");
-@@clientName(OptionBLayer3ConfigurationPatchProperties.fabricASN,
+@@clientName(
+  OptionBLayer3ConfigurationPatchProperties.fabricASN,
   "FabricAsn",
   "csharp"
 );
-@@clientName(OptionBLayer3ConfigurationPatchProperties.peerASN,
+@@clientName(
+  OptionBLayer3ConfigurationPatchProperties.peerASN,
   "PeerAsn",
   "csharp"
 );
-@@clientName(OptionBLayer3Configuration.peLoopbackIpAddress,
+@@clientName(
+  OptionBLayer3Configuration.peLoopbackIpAddress,
   "PeLoopbackIPAddress",
   "csharp"
 );
-@@clientName(OptionBLayer3ConfigurationPatchProperties.peLoopbackIpAddress,
+@@clientName(
+  OptionBLayer3ConfigurationPatchProperties.peLoopbackIpAddress,
   "PeLoopbackIPAddress",
   "csharp"
 );
-@@clientName(ImportRoutePolicy.importIpv4RoutePolicyId,
+@@clientName(
+  ImportRoutePolicy.importIpv4RoutePolicyId,
   "ImportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicy.importIpv6RoutePolicyId,
+@@clientName(
+  ImportRoutePolicy.importIpv6RoutePolicyId,
   "ImportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyInformation.importIpv4RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyInformation.importIpv4RoutePolicyId,
   "ImportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyInformation.importIpv6RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyInformation.importIpv6RoutePolicyId,
   "ImportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyPatch.importIpv4RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyPatch.importIpv4RoutePolicyId,
   "ImportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyPatch.importIpv6RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyPatch.importIpv6RoutePolicyId,
   "ImportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyInformationPatch.importIpv4RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyInformationPatch.importIpv4RoutePolicyId,
   "ImportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ImportRoutePolicyInformationPatch.importIpv6RoutePolicyId,
+@@clientName(
+  ImportRoutePolicyInformationPatch.importIpv6RoutePolicyId,
   "ImportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicy.exportIpv4RoutePolicyId,
+@@clientName(
+  ExportRoutePolicy.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicy.exportIpv6RoutePolicyId,
+@@clientName(
+  ExportRoutePolicy.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyInformation.exportIpv4RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyInformation.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyInformation.exportIpv6RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyInformation.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyPatch.exportIpv4RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyPatch.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyPatch.exportIpv6RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyPatch.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyInformationPatch.exportIpv4RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyInformationPatch.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(ExportRoutePolicyInformationPatch.exportIpv6RoutePolicyId,
+@@clientName(
+  ExportRoutePolicyInformationPatch.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(L3ExportRoutePolicy.exportIpv4RoutePolicyId,
+@@clientName(
+  L3ExportRoutePolicy.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(L3ExportRoutePolicy.exportIpv6RoutePolicyId,
+@@clientName(
+  L3ExportRoutePolicy.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(L3ExportRoutePolicyPatch.exportIpv4RoutePolicyId,
+@@clientName(
+  L3ExportRoutePolicyPatch.exportIpv4RoutePolicyId,
   "ExportIPv4RoutePolicyId",
   "csharp"
 );
-@@clientName(L3ExportRoutePolicyPatch.exportIpv6RoutePolicyId,
+@@clientName(
+  L3ExportRoutePolicyPatch.exportIpv6RoutePolicyId,
   "ExportIPv6RoutePolicyId",
   "csharp"
 );
-@@clientName(L3IsolationDomainProperties.v4routePrefixLimit,
+@@clientName(
+  L3IsolationDomainProperties.v4routePrefixLimit,
   "V4RoutePrefixLimit",
   "csharp"
 );
-@@clientName(L3IsolationDomainProperties.v6routePrefixLimit,
+@@clientName(
+  L3IsolationDomainProperties.v6routePrefixLimit,
   "V6RoutePrefixLimit",
   "csharp"
 );
-@@clientName(L3IsolationDomainPatchProperties.v4routePrefixLimit,
+@@clientName(
+  L3IsolationDomainPatchProperties.v4routePrefixLimit,
   "V4RoutePrefixLimit",
   "csharp"
 );
-@@clientName(L3IsolationDomainPatchProperties.v6routePrefixLimit,
+@@clientName(
+  L3IsolationDomainPatchProperties.v6routePrefixLimit,
   "V6RoutePrefixLimit",
   "csharp"
 );
-@@clientName(StaticRouteRoutePolicy.exportRoutePolicy,
+@@clientName(
+  StaticRouteRoutePolicy.exportRoutePolicy,
   "StaticRouteExportRoutePolicy",
   "csharp"
 );
-@@clientName(StaticRouteRoutePolicyPatch.exportRoutePolicy,
+@@clientName(
+  StaticRouteRoutePolicyPatch.exportRoutePolicy,
   "StaticRouteExportRoutePolicy",
   "csharp"
 );
-@@clientName(StatementConditionProperties.ipCommunityIds,
+@@clientName(
+  StatementConditionProperties.ipCommunityIds,
   "IPCommunityIds",
   "csharp"
 );
-@@clientName(StatementConditionProperties.ipExtendedCommunityIds,
+@@clientName(
+  StatementConditionProperties.ipExtendedCommunityIds,
   "IPExtendedCommunityIds",
   "csharp"
 );
 @@clientName(StatementConditionProperties.ipPrefixId, "IPPrefixId", "csharp");
-@@clientName(StatementConditionPatchProperties.ipPrefixId,
+@@clientName(
+  StatementConditionPatchProperties.ipPrefixId,
   "IPPrefixId",
   "csharp"
 );
-@@clientName(StatementConditionPatchProperties.ipCommunityIds,
+@@clientName(
+  StatementConditionPatchProperties.ipCommunityIds,
   "IPCommunityIds",
   "csharp"
 );
-@@clientName(StatementConditionPatchProperties.ipExtendedCommunityIds,
+@@clientName(
+  StatementConditionPatchProperties.ipExtendedCommunityIds,
   "IPExtendedCommunityIds",
   "csharp"
 );
 @@clientName(IpCommunityIdList.ipCommunityIds, "IPCommunityIds", "csharp");
-@@clientName(IpExtendedCommunityIdList.ipExtendedCommunityIds,
+@@clientName(
+  IpExtendedCommunityIdList.ipExtendedCommunityIds,
   "IPExtendedCommunityIds",
   "csharp"
 );
@@ -971,62 +1177,76 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(IpMatchConditionPatch.ipGroupNames, "IPGroupNames", "csharp");
 @@clientName(IpMatchConditionPatch.ipPrefixValues, "IPPrefixValues", "csharp");
 @@clientName(CommonDynamicMatchConfiguration.ipGroups, "IPGroups", "csharp");
-@@clientName(CommonDynamicMatchConfigurationPatch.ipGroups,
+@@clientName(
+  CommonDynamicMatchConfigurationPatch.ipGroups,
   "IPGroups",
   "csharp"
 );
 @@clientName(CommonMatchConditions.ipCondition, "IPCondition", "csharp");
 @@clientName(CommonMatchConditionsPatch.ipCondition, "IPCondition", "csharp");
-@@clientName(AccessControlListMatchConfiguration.ipAddressType,
+@@clientName(
+  AccessControlListMatchConfiguration.ipAddressType,
   "IPAddressType",
   "csharp"
 );
-@@clientName(AccessControlListMatchConfigurationPatch.ipAddressType,
+@@clientName(
+  AccessControlListMatchConfigurationPatch.ipAddressType,
   "IPAddressType",
   "csharp"
 );
 @@clientName(AccessControlListMatchCondition.ipLengths, "IPLengths", "csharp");
-@@clientName(AccessControlListMatchConditionPatch.ipLengths,
+@@clientName(
+  AccessControlListMatchConditionPatch.ipLengths,
   "IPLengths",
   "csharp"
 );
-@@clientName(ControlPlaneAclProperties.ipAddressType,
+@@clientName(
+  ControlPlaneAclProperties.ipAddressType,
   "IPAddressType",
   "csharp"
 );
-@@clientName(ControlPlaneAclPatchProperties.ipAddressType,
+@@clientName(
+  ControlPlaneAclPatchProperties.ipAddressType,
   "IPAddressType",
   "csharp"
 );
-@@clientName(ControlPlaneAclMatchCondition.ipCondition,
+@@clientName(
+  ControlPlaneAclMatchCondition.ipCondition,
   "IPCondition",
   "csharp"
 );
-@@clientName(ControlPlaneAclMatchConditionPatch.ipCondition,
+@@clientName(
+  ControlPlaneAclMatchConditionPatch.ipCondition,
   "IPCondition",
   "csharp"
 );
-@@clientName(ControlPlanAclIpMatchCondition,
+@@clientName(
+  ControlPlanAclIpMatchCondition,
   "ControlPlanAclIPMatchCondition",
   "csharp"
 );
-@@clientName(ControlPlaneAclIpMatchConditionPatch,
+@@clientName(
+  ControlPlaneAclIpMatchConditionPatch,
   "ControlPlaneAclIPMatchConditionPatch",
   "csharp"
 );
-@@clientName(ControlPlanAclIpMatchCondition.sourceIpPrefix,
+@@clientName(
+  ControlPlanAclIpMatchCondition.sourceIpPrefix,
   "SourceIPPrefix",
   "csharp"
 );
-@@clientName(ControlPlanAclIpMatchCondition.destinationIpPrefix,
+@@clientName(
+  ControlPlanAclIpMatchCondition.destinationIpPrefix,
   "DestinationIPPrefix",
   "csharp"
 );
-@@clientName(ControlPlaneAclIpMatchConditionPatch.sourceIpPrefix,
+@@clientName(
+  ControlPlaneAclIpMatchConditionPatch.sourceIpPrefix,
   "SourceIPPrefix",
   "csharp"
 );
-@@clientName(ControlPlaneAclIpMatchConditionPatch.destinationIpPrefix,
+@@clientName(
+  ControlPlaneAclIpMatchConditionPatch.destinationIpPrefix,
   "DestinationIPPrefix",
   "csharp"
 );
@@ -1037,146 +1257,181 @@ using Microsoft.ManagedNetworkFabric;
 @@clientName(NetworkFabricProperties.fabricASN, "FabricAsn", "csharp");
 @@clientName(NetworkFabricProperties.ipv4Prefix, "IPv4Prefix", "csharp");
 @@clientName(NetworkFabricProperties.ipv6Prefix, "IPv6Prefix", "csharp");
-@@clientName(NetworkFabricProperties.trustedIpPrefixes,
+@@clientName(
+  NetworkFabricProperties.trustedIpPrefixes,
   "TrustedIPPrefixes",
   "csharp"
 );
 @@clientName(NetworkFabricPatchableProperties.fabricASN, "FabricAsn", "csharp");
-@@clientName(NetworkFabricPatchableProperties.ipv4Prefix,
+@@clientName(
+  NetworkFabricPatchableProperties.ipv4Prefix,
   "IPv4Prefix",
   "csharp"
 );
-@@clientName(NetworkFabricPatchableProperties.ipv6Prefix,
+@@clientName(
+  NetworkFabricPatchableProperties.ipv6Prefix,
   "IPv6Prefix",
   "csharp"
 );
-@@clientName(NetworkFabricPatchProperties.trustedIpPrefixes,
+@@clientName(
+  NetworkFabricPatchProperties.trustedIpPrefixes,
   "TrustedIPPrefixes",
   "csharp"
 );
-@@clientName(TerminalServerConfiguration.primaryIpv4Prefix,
+@@clientName(
+  TerminalServerConfiguration.primaryIpv4Prefix,
   "PrimaryIPv4Prefix",
   "csharp"
 );
-@@clientName(TerminalServerConfiguration.primaryIpv6Prefix,
+@@clientName(
+  TerminalServerConfiguration.primaryIpv6Prefix,
   "PrimaryIPv6Prefix",
   "csharp"
 );
-@@clientName(TerminalServerConfiguration.secondaryIpv4Prefix,
+@@clientName(
+  TerminalServerConfiguration.secondaryIpv4Prefix,
   "SecondaryIPv4Prefix",
   "csharp"
 );
-@@clientName(TerminalServerConfiguration.secondaryIpv6Prefix,
+@@clientName(
+  TerminalServerConfiguration.secondaryIpv6Prefix,
   "SecondaryIPv6Prefix",
   "csharp"
 );
-@@clientName(TerminalServerPatchConfiguration.primaryIpv4Prefix,
+@@clientName(
+  TerminalServerPatchConfiguration.primaryIpv4Prefix,
   "PrimaryIPv4Prefix",
   "csharp"
 );
-@@clientName(TerminalServerPatchConfiguration.primaryIpv6Prefix,
+@@clientName(
+  TerminalServerPatchConfiguration.primaryIpv6Prefix,
   "PrimaryIPv6Prefix",
   "csharp"
 );
-@@clientName(TerminalServerPatchConfiguration.secondaryIpv4Prefix,
+@@clientName(
+  TerminalServerPatchConfiguration.secondaryIpv4Prefix,
   "SecondaryIPv4Prefix",
   "csharp"
 );
-@@clientName(TerminalServerPatchConfiguration.secondaryIpv6Prefix,
+@@clientName(
+  TerminalServerPatchConfiguration.secondaryIpv6Prefix,
   "SecondaryIPv6Prefix",
   "csharp"
 );
-@@clientName(IpCommunityProperties.ipCommunityRules,
+@@clientName(
+  IpCommunityProperties.ipCommunityRules,
   "IPCommunityRules",
   "csharp"
 );
-@@clientName(IpCommunityPatchableProperties.ipCommunityRules,
+@@clientName(
+  IpCommunityPatchableProperties.ipCommunityRules,
   "IPCommunityRules",
   "csharp"
 );
 @@clientName(NetworkFabricSkuProperties.type, "TypePropertiesType", "csharp");
-@@clientName(IpExtendedCommunityPatchableProperties.ipExtendedCommunityRules,
+@@clientName(
+  IpExtendedCommunityPatchableProperties.ipExtendedCommunityRules,
   "IPExtendedCommunityRules",
   "csharp"
 );
-@@clientName(IpExtendedCommunityPatchProperties.ipExtendedCommunityRules,
+@@clientName(
+  IpExtendedCommunityPatchProperties.ipExtendedCommunityRules,
   "IPExtendedCommunityRules",
   "csharp"
 );
-@@clientName(StatementActionPatchProperties.ipCommunityProperties,
+@@clientName(
+  StatementActionPatchProperties.ipCommunityProperties,
   "IPCommunityProperties",
   "csharp"
 );
-@@clientName(StatementActionPatchProperties.ipExtendedCommunityProperties,
+@@clientName(
+  StatementActionPatchProperties.ipExtendedCommunityProperties,
   "IPExtendedCommunityProperties",
   "csharp"
 );
 @@clientName(IpPrefixProperties.ipPrefixRules, "IPPrefixRules", "csharp");
-@@clientName(IpPrefixPatchableProperties.ipPrefixRules,
+@@clientName(
+  IpPrefixPatchableProperties.ipPrefixRules,
   "IPPrefixRules",
   "csharp"
 );
-@@clientName(NetworkTapRuleMatchConfigurationPatch.ipAddressType,
+@@clientName(
+  NetworkTapRuleMatchConfigurationPatch.ipAddressType,
   "IPAddressType",
   "csharp"
 );
-@@clientName(InternalNetworkProperties.nativeIpv4PrefixLimit,
+@@clientName(
+  InternalNetworkProperties.nativeIpv4PrefixLimit,
   "NativeIPv4PrefixLimit",
   "csharp"
 );
-@@clientName(InternalNetworkProperties.nativeIpv6PrefixLimit,
+@@clientName(
+  InternalNetworkProperties.nativeIpv6PrefixLimit,
   "NativeIPv6PrefixLimit",
   "csharp"
 );
-@@clientName(InternalNetworkPatchProperties.nativeIpv4PrefixLimit,
+@@clientName(
+  InternalNetworkPatchProperties.nativeIpv4PrefixLimit,
   "NativeIPv4PrefixLimit",
   "csharp"
 );
-@@clientName(InternalNetworkPatchProperties.nativeIpv6PrefixLimit,
+@@clientName(
+  InternalNetworkPatchProperties.nativeIpv6PrefixLimit,
   "NativeIPv6PrefixLimit",
   "csharp"
 );
-@@clientName(InternalNetworkBmpProperties.neighborIpExclusions,
+@@clientName(
+  InternalNetworkBmpProperties.neighborIpExclusions,
   "NeighborIPExclusions",
   "csharp"
 );
-@@clientName(InternalNetworkBmpPatchProperties.neighborIpExclusions,
+@@clientName(
+  InternalNetworkBmpPatchProperties.neighborIpExclusions,
   "NeighborIPExclusions",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceProperties.dhcpV4ServerIpAddress,
+@@clientName(
+  NetworkBootstrapDeviceProperties.dhcpV4ServerIpAddress,
   "DhcpV4ServerIPAddress",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceProperties.primaryManagementIpv4Address,
+@@clientName(
+  NetworkBootstrapDeviceProperties.primaryManagementIpv4Address,
   "PrimaryManagementIPv4Address",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceProperties.primaryManagementIpv6Address,
+@@clientName(
+  NetworkBootstrapDeviceProperties.primaryManagementIpv6Address,
   "PrimaryManagementIPv6Address",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceProperties.secondaryManagementIpv4Address,
+@@clientName(
+  NetworkBootstrapDeviceProperties.secondaryManagementIpv4Address,
   "SecondaryManagementIPv4Address",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceProperties.secondaryManagementIpv6Address,
+@@clientName(
+  NetworkBootstrapDeviceProperties.secondaryManagementIpv6Address,
   "SecondaryManagementIPv6Address",
   "csharp"
 );
-@@clientName(NetworkBootstrapInterfaceProperties.ipv4Address,
+@@clientName(
+  NetworkBootstrapInterfaceProperties.ipv4Address,
   "IPv4Address",
   "csharp"
 );
-@@clientName(NetworkBootstrapInterfaceProperties.ipv6Address,
+@@clientName(
+  NetworkBootstrapInterfaceProperties.ipv6Address,
   "IPv6Address",
   "csharp"
 );
-@@clientName(NetworkDeviceProperties.managementIpv4Address,
+@@clientName(
+  NetworkDeviceProperties.managementIpv4Address,
   "ManagementIPv4Address",
   "csharp"
 );
-@@clientName(NetworkDeviceProperties.managementIpv6Address,
+@@clientName(
+  NetworkDeviceProperties.managementIpv6Address,
   "ManagementIPv6Address",
   "csharp"
 );
@@ -1193,15 +1448,18 @@ using Microsoft.ManagedNetworkFabric;
 @@usage(SupportedConnectorProperties, Usage.input, "csharp");
 @@usage(SupportedVersionProperties, Usage.input, "csharp");
 @@usage(BgpConfiguration, Usage.input | Usage.output | Usage.json, "csharp");
-@@usage(StaticRouteConfiguration,
+@@usage(
+  StaticRouteConfiguration,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
-@@usage(DestinationProperties,
+@@usage(
+  DestinationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
-@@usage(VpnConfigurationProperties,
+@@usage(
+  VpnConfigurationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
@@ -1218,460 +1476,563 @@ model IpExtendedCommunityAddOperationProperties {
   @doc("List of IP extended community resource IDs to add.")
   add?: IpExtendedCommunityIdList;
 }
-@@usage(IpCommunityAddOperationProperties,
+@@usage(
+  IpCommunityAddOperationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
-@@usage(IpExtendedCommunityAddOperationProperties,
+@@usage(
+  IpExtendedCommunityAddOperationProperties,
   Usage.input | Usage.output | Usage.json,
   "csharp"
 );
-@@clientName(IpCommunityAddOperationProperties,
+@@clientName(
+  IpCommunityAddOperationProperties,
   "IPCommunityAddOperationProperties",
   "csharp"
 );
-@@clientName(IpExtendedCommunityAddOperationProperties,
+@@clientName(
+  IpExtendedCommunityAddOperationProperties,
   "IPExtendedCommunityAddOperationProperties",
   "csharp"
 );
 // Preserve the shipped C# inheritance hierarchy from the swagger-generated SDK.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(StatementConditionProperties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  StatementConditionProperties,
   IpCommunityIdList,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkDevicePatchParameters,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkDevicePatchParameters,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve shipped base type for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ActionIpCommunityProperties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ActionIpCommunityProperties,
   IpCommunityAddOperationProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve shipped base type for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ActionIpExtendedCommunityProperties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ActionIpExtendedCommunityProperties,
   IpExtendedCommunityAddOperationProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(AccessControlListPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  AccessControlListPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkFabricControllerPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkFabricControllerPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(InternetGatewayPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  InternetGatewayPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(InternetGatewayRulePatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  InternetGatewayRulePatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IpCommunityPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  IpCommunityPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IpExtendedCommunityPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  IpExtendedCommunityPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(IpPrefixPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  IpPrefixPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(L2IsolationDomainPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  L2IsolationDomainPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(L3IsolationDomainPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  L3IsolationDomainPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NeighborGroupPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NeighborGroupPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkFabricPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkFabricPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(RoutePolicyPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  RoutePolicyPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkPacketBrokerPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkPacketBrokerPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkTapPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkTapPatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkTapRulePatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkTapRulePatch,
   NetworkRackPatch,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve ResourceData base type for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(NetworkToNetworkInterconnectPatch,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  NetworkToNetworkInterconnectPatch,
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExternalNetworkPropertiesOptionAProperties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ExternalNetworkPropertiesOptionAProperties,
   Layer3IpPrefixProperties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the shipped C# inheritance hierarchy for migration compatibility"
-@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(ExternalNetworkPatchPropertiesOptionAProperties,
+@@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+  ExternalNetworkPatchPropertiesOptionAProperties,
   Layer3IpPrefixProperties,
   "csharp"
 );
-@@clientName(ArmConfigurationDiffOperationResponse,
+@@clientName(
+  ArmConfigurationDiffOperationResponse,
   "ArmConfigurationDiffOperationResult",
   "csharp"
 );
-@@clientName(CommitBatchStatusOperationResponse,
+@@clientName(
+  CommitBatchStatusOperationResponse,
   "CommitBatchStatusOperationResult",
   "csharp"
 );
 @@clientName(CommitBatchStatusRequest, "CommitBatchStatusContent", "csharp");
-@@clientName(CommitConfigurationRequest,
+@@clientName(
+  CommitConfigurationRequest,
   "CommitConfigurationContent",
   "csharp"
 );
-@@clientName(CommitConfigurationResponse,
+@@clientName(
+  CommitConfigurationResponse,
   "CommitConfigurationResult",
   "csharp"
 );
 @@clientName(CommonErrorResponse, "NetworkFabricErrorResult", "csharp");
-@@clientName(DiscardCommitBatchOperationResponse,
+@@clientName(
+  DiscardCommitBatchOperationResponse,
   "DiscardCommitBatchOperationResult",
   "csharp"
 );
 @@clientName(DiscardCommitBatchRequest, "DiscardCommitBatchContent", "csharp");
-@@clientName(ExternalNetworkUpdateBfdAdministrativeStateRequest,
+@@clientName(
+  ExternalNetworkUpdateBfdAdministrativeStateRequest,
   "ExternalNetworkUpdateBfdAdministrativeStateContent",
   "csharp"
 );
-@@clientName(ExternalNetworkUpdateBfdAdministrativeStateResponse,
+@@clientName(
+  ExternalNetworkUpdateBfdAdministrativeStateResponse,
   "ExternalNetworkUpdateBfdAdministrativeStateResult",
   "csharp"
 );
 @@clientName(GetTopologyResponse, "NetworkFabricTopologyResult", "csharp");
-@@clientName(InternalNetworkUpdateBfdAdministrativeStateRequest,
+@@clientName(
+  InternalNetworkUpdateBfdAdministrativeStateRequest,
   "InternalNetworkUpdateBfdAdministrativeStateContent",
   "csharp"
 );
-@@clientName(InternalNetworkUpdateBfdAdministrativeStateResponse,
+@@clientName(
+  InternalNetworkUpdateBfdAdministrativeStateResponse,
   "InternalNetworkUpdateBfdAdministrativeStateResult",
   "csharp"
 );
-@@clientName(InternalNetworkUpdateBgpAdministrativeStateRequest,
+@@clientName(
+  InternalNetworkUpdateBgpAdministrativeStateRequest,
   "InternalNetworkUpdateBgpAdministrativeStateContent",
   "csharp"
 );
-@@clientName(InternalNetworkUpdateBgpAdministrativeStateResponse,
+@@clientName(
+  InternalNetworkUpdateBgpAdministrativeStateResponse,
   "InternalNetworkUpdateBgpAdministrativeStateResult",
   "csharp"
 );
-@@clientName(NeighborGroupResyncResponse,
+@@clientName(
+  NeighborGroupResyncResponse,
   "NeighborGroupResyncResult",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceRebootResponse,
+@@clientName(
+  NetworkBootstrapDeviceRebootResponse,
   "NetworkBootstrapDeviceRebootResult",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceRefreshConfigurationResponse,
+@@clientName(
+  NetworkBootstrapDeviceRefreshConfigurationResponse,
   "NetworkBootstrapDeviceRefreshConfigurationResult",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceResyncPasswordsResponse,
+@@clientName(
+  NetworkBootstrapDeviceResyncPasswordsResponse,
   "NetworkBootstrapDeviceResyncPasswordsResult",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceUpdateAdministrativeStateResponse,
+@@clientName(
+  NetworkBootstrapDeviceUpdateAdministrativeStateResponse,
   "NetworkBootstrapDeviceUpdateAdministrativeStateResult",
   "csharp"
 );
-@@clientName(NetworkBootstrapDeviceUpgradeResponse,
+@@clientName(
+  NetworkBootstrapDeviceUpgradeResponse,
   "NetworkBootstrapDeviceUpgradeResult",
   "csharp"
 );
-@@clientName(NetworkDeviceRefreshConfigurationResponse,
+@@clientName(
+  NetworkDeviceRefreshConfigurationResponse,
   "NetworkDeviceRefreshConfigurationResult",
   "csharp"
 );
-@@clientName(NetworkDeviceResyncPasswordsResponse,
+@@clientName(
+  NetworkDeviceResyncPasswordsResponse,
   "NetworkDeviceResyncPasswordsResult",
   "csharp"
 );
-@@clientName(NetworkDeviceRunRwCommandResponse,
+@@clientName(
+  NetworkDeviceRunRwCommandResponse,
   "NetworkDeviceRunRwCommandResult",
   "csharp"
 );
-@@clientName(NetworkDeviceUpdateAdministrativeStateResponse,
+@@clientName(
+  NetworkDeviceUpdateAdministrativeStateResponse,
   "NetworkDeviceUpdateAdministrativeStateResult",
   "csharp"
 );
-@@clientName(NetworkDeviceUpgradeRequest,
+@@clientName(
+  NetworkDeviceUpgradeRequest,
   "NetworkDeviceUpgradeContent",
   "csharp"
 );
-@@clientName(NetworkDeviceUpgradeResponse,
+@@clientName(
+  NetworkDeviceUpgradeResponse,
   "NetworkDeviceUpgradeResult",
   "csharp"
 );
 @@clientName(NetworkFabricLockRequest, "NetworkFabricLockContent", "csharp");
-@@clientName(NetworkFabricResyncCertificatesResponse,
+@@clientName(
+  NetworkFabricResyncCertificatesResponse,
   "NetworkFabricResyncCertificatesResult",
   "csharp"
 );
-@@clientName(NetworkFabricResyncPasswordsResponse,
+@@clientName(
+  NetworkFabricResyncPasswordsResponse,
   "NetworkFabricResyncPasswordsResult",
   "csharp"
 );
-@@clientName(NetworkFabricRotateCertificatesResponse,
+@@clientName(
+  NetworkFabricRotateCertificatesResponse,
   "NetworkFabricRotateCertificatesResult",
   "csharp"
 );
-@@clientName(NetworkFabricRotatePasswordsResponse,
+@@clientName(
+  NetworkFabricRotatePasswordsResponse,
   "NetworkFabricRotatePasswordsResult",
   "csharp"
 );
 @@clientName(NetworkTapResyncResponse, "NetworkTapResyncResult", "csharp");
-@@clientName(NetworkTapRuleResyncResponse,
+@@clientName(
+  NetworkTapRuleResyncResponse,
   "NetworkTapRuleResyncResult",
   "csharp"
 );
-@@clientName(NniUpdateBfdAdministrativeStateRequest,
+@@clientName(
+  NniUpdateBfdAdministrativeStateRequest,
   "NniUpdateBfdAdministrativeStateContent",
   "csharp"
 );
-@@clientName(NniUpdateBfdAdministrativeStateResponse,
+@@clientName(
+  NniUpdateBfdAdministrativeStateResponse,
   "NniUpdateBfdAdministrativeStateResult",
   "csharp"
 );
-@@clientName(UpdateAdministrativeStateResponse,
+@@clientName(
+  UpdateAdministrativeStateResponse,
   "UpdateAdministrativeStateResult",
   "csharp"
 );
-@@clientName(ValidateConfigurationResponse,
+@@clientName(
+  ValidateConfigurationResponse,
   "ValidateConfigurationResult",
   "csharp"
 );
-@@clientName(ViewDeviceConfigurationOperationResponse,
+@@clientName(
+  ViewDeviceConfigurationOperationResponse,
   "ViewDeviceConfigurationOperationResult",
   "csharp"
 );
 
 // Preserve shipped C# operation method names and compatibility return types.
-@@clientName(NetworkInterfaces.updateAdministrativeState,
+@@clientName(
+  NetworkInterfaces.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(NetworkDevices.updateAdministrativeState,
+@@clientName(
+  NetworkDevices.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
 @@clientName(NetworkDevices.reboot, "Restart", "csharp");
-@@clientName(NetworkDevices.refreshConfiguration,
+@@clientName(
+  NetworkDevices.refreshConfiguration,
   "ReloadConfiguration",
   "csharp"
 );
 @@clientName(NetworkDevices.upgrade, "Upgrade", "csharp");
-@@clientName(AccessControlLists.updateAdministrativeState,
+@@clientName(
+  AccessControlLists.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(ExternalNetworks.updateAdministrativeState,
+@@clientName(
+  ExternalNetworks.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(ExternalNetworks.updateStaticRouteBfdAdministrativeState,
+@@clientName(
+  ExternalNetworks.updateStaticRouteBfdAdministrativeState,
   "SetStaticRouteBfdAdministrativeState",
   "csharp"
 );
-@@clientName(InternalNetworks.updateAdministrativeState,
+@@clientName(
+  InternalNetworks.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(InternalNetworks.updateBgpAdministrativeState,
+@@clientName(
+  InternalNetworks.updateBgpAdministrativeState,
   "SetBgpAdministrativeState",
   "csharp"
 );
-@@clientName(InternalNetworks.updateStaticRouteBfdAdministrativeState,
+@@clientName(
+  InternalNetworks.updateStaticRouteBfdAdministrativeState,
   "SetStaticRouteBfdAdministrativeState",
   "csharp"
 );
-@@clientName(L2IsolationDomains.updateAdministrativeState,
+@@clientName(
+  L2IsolationDomains.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(L3IsolationDomains.updateAdministrativeState,
+@@clientName(
+  L3IsolationDomains.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState,
+@@clientName(
+  NetworkToNetworkInterconnects.updateNpbStaticRouteBfdAdministrativeState,
   "SetNpbStaticRouteBfdAdministrativeState",
   "csharp"
 );
-@@clientName(NetworkToNetworkInterconnects.updateAdministrativeState,
+@@clientName(
+  NetworkToNetworkInterconnects.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
-@@clientName(NetworkFabrics.commitConfiguration,
+@@clientName(
+  NetworkFabrics.commitConfiguration,
   "ApplyConfiguration",
   "csharp"
 );
 @@clientName(NetworkFabrics.deprovision, "Deactivate", "csharp");
 @@clientName(NetworkFabrics.provision, "Activate", "csharp");
-@@clientName(NetworkFabrics.refreshConfiguration,
+@@clientName(
+  NetworkFabrics.refreshConfiguration,
   "ReloadConfiguration",
   "csharp"
 );
 @@clientName(NetworkFabrics.upgrade, "Upgrade", "csharp");
-@@clientName(NetworkFabrics.updateInfraManagementBfdConfiguration,
+@@clientName(
+  NetworkFabrics.updateInfraManagementBfdConfiguration,
   "SetInfraManagementBfdConfiguration",
   "csharp"
 );
-@@clientName(NetworkFabrics.updateWorkloadManagementBfdConfiguration,
+@@clientName(
+  NetworkFabrics.updateWorkloadManagementBfdConfiguration,
   "SetWorkloadManagementBfdConfiguration",
   "csharp"
 );
 @@clientName(NetworkFabrics.getTopology, "RetrieveTopology", "csharp");
 @@clientName(GetTopologyResponse, "NetworkFabricTopologyResult", "csharp");
-@@clientName(RoutePolicies.updateAdministrativeState,
+@@clientName(
+  RoutePolicies.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
 @@clientName(NetworkTapRules.resync, "StartResync", "csharp");
 @@clientName(NetworkTaps.resync, "StartResync", "csharp");
-@@clientName(NetworkTaps.updateAdministrativeState,
+@@clientName(
+  NetworkTaps.updateAdministrativeState,
   "SetAdministrativeState",
   "csharp"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.IPAddressType,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.IPAddressType,
   "IpAddressType",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkFabricProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkFabricProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkFabricPatchProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkFabricPatchProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpConfiguration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpConfiguration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.fabricASN,
   "fabricAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.fabricASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.fabricASN,
   "fabricAsn",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.BgpConfiguration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpConfiguration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.BgpPatchConfiguration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPropertiesOptionAProperties.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ExternalNetworkPatchPropertiesOptionAProperties.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3Configuration.peerASN,
   "peerAsn",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.peerASN,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.OptionBLayer3ConfigurationPatchProperties.peerASN,
   "peerAsn",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDeviceProperties.hostName,
   "hostname",
   "java"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.NetworkDevicePatchableProperties.hostName,
   "hostname",
   "java"
 );
 
-@@clientName(Microsoft.ManagedNetworkFabric,
+@@clientName(
+  Microsoft.ManagedNetworkFabric,
   "ManagedNetworkFabricMgmtClient",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.ManagementNetworkPatchConfiguration,
   "ManagementNetworkConfigurationPatchableProperties",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.TerminalServerPatchConfiguration,
   "NetworkFabricPatchablePropertiesTerminalServerConfiguration",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.VpnOptionBProperties,
   "OptionBProperties",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicy,
   "StaticRoutePolicy",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicyPatch,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.StaticRouteRoutePolicyPatch,
   "StaticRoutePolicyPatch",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.L3IsolationDomainProperties.staticRouteRoutePolicy,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainProperties.staticRouteRoutePolicy,
   "staticRoutePolicy",
   "python"
 );
-@@clientName(Microsoft.ManagedNetworkFabric.L3IsolationDomainPatchProperties.staticRouteRoutePolicy,
+@@clientName(
+  Microsoft.ManagedNetworkFabric.L3IsolationDomainPatchProperties.staticRouteRoutePolicy,
   "staticRoutePolicy",
   "python"
 );

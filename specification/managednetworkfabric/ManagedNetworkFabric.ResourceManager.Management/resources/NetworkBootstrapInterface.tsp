@@ -22,7 +22,8 @@ model NetworkBootstrapInterface
   name: string;
 }
 
-@@doc(NetworkBootstrapInterface.properties,
+@@doc(
+  NetworkBootstrapInterface.properties,
   "The NetworkBootstrapInterface properties"
 );
 @armResourceOperations
@@ -57,12 +58,15 @@ interface NetworkBootstrapInterfaces {
   >;
 }
 
-@@doc(NetworkBootstrapInterfaces.create::parameters.resource,
+@@doc(
+  NetworkBootstrapInterfaces.create::parameters.resource,
   "Request payload."
 );
-@@doc(NetworkBootstrapInterfaces.update::parameters.properties,
+@@doc(
+  NetworkBootstrapInterfaces.update::parameters.properties,
   "NetworkBootstrapInterface properties to update. Only tags are supported."
 );
-@@doc(NetworkBootstrapInterfaces.updateAdministrativeState::parameters.body,
+@@doc(
+  NetworkBootstrapInterfaces.updateAdministrativeState::parameters.body,
   "Request payload."
 );
