@@ -549,5 +549,6 @@ op deleteJobPreview<AreaPreviewLabel extends
 // Types and traits shared by multiple service patterns
 // ============================================================================
 
-@encode(DateTimeKnownEncoding.unixTimestamp, int32)
+#suppress "@microsoft/azure-openapi-validator/IntegerTypeMustHaveFormat" "The unixtime format is present, but the legacy rule only allows int32 or int64."
+@encode(DateTimeKnownEncoding.unixTimestamp, int64)
 scalar FoundryTimestamp extends utcDateTime;

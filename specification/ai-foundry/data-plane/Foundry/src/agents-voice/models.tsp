@@ -49,13 +49,16 @@ model VoiceConversation {
   status: VoiceConversationStatus;
 
   @doc("The Unix timestamp (in seconds) for when the conversation was created.")
-  created_at: int32;
+  created_at: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the conversation's session ended. Absent while in progress.")
-  completed_at?: int32;
+  completed_at?: FoundryTimestamp;
 
   @doc("A set of key-value pairs attached to the conversation.")
   metadata?: Record<string>;
+
+  @doc("Aggregate token usage totals across all responses in this conversation.")
+  usage?: OpenAI.RealtimeResponseUsage;
 }
 
 @doc("The response returned when a voice conversation is deleted.")
@@ -74,6 +77,18 @@ model VoiceDeletedConversation {
 // ---------------------------------------------------------------------------
 // Response (Voice Live RealtimeResponse)
 // ---------------------------------------------------------------------------
+//
+// VoiceResponse cannot `extends OpenAI.RealtimeResponse`: overriding `audio` to the Foundry
+// `{type, name}` voice shape fails TypeSpec's override-property-mismatch check (the override type must
+// be a subtype of the inherited `OpenAI.RealtimeResponseAudio`, whose `voice` is the flat `VoiceIdsShared`
+// string enum). So VoiceResponse remains a standalone model, but its other fields still match OpenAI's
+// wire names/shapes 1:1 (output_modalities, max_output_tokens, status_details reusing
+// OpenAI.RealtimeResponseStatusDetails) wherever no such conflict exists.
+
+// Token usage statistics reuse OpenAI.RealtimeResponseUsage (total/input/output tokens plus
+// input/output token detail breakdowns, including image_tokens and cached_tokens_details), already
+// available in this program via ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's
+// realtime models.tsp. See VoiceResponse.usage below.
 
 @doc("The status of a voice response. Follows the Voice Live realtime response status.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
@@ -86,48 +101,6 @@ union VoiceResponseStatus {
   failed: "failed",
 }
 
-@doc("Additional details about a voice response's terminal status.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceResponseStatusDetails {
-  @doc("The status the details describe.")
-  type: VoiceResponseStatus;
-}
-
-@doc("A breakdown of input or output token usage.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceTokenDetails {
-  @doc("Cached tokens used.")
-  cached_tokens?: int32;
-
-  @doc("Text tokens used.")
-  text_tokens?: int32;
-
-  @doc("Audio tokens used.")
-  audio_tokens?: int32;
-
-  @doc("Reasoning tokens generated. Applies to output token details only.")
-  reasoning_tokens?: int32;
-}
-
-@doc("Token usage statistics for a voice response.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceUsage {
-  @doc("Total tokens used.")
-  total_tokens: int32;
-
-  @doc("Input tokens used.")
-  input_tokens: int32;
-
-  @doc("Output tokens generated.")
-  output_tokens: int32;
-
-  @doc("Breakdown of input tokens.")
-  input_token_details?: VoiceTokenDetails;
-
-  @doc("Breakdown of output tokens.")
-  output_token_details?: VoiceTokenDetails;
-}
-
 @doc("The voice used for a response. Follows the Voice Live realtime voice shape (e.g. `{ \"type\": \"openai\", \"name\": \"alloy\" }`).")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
 model VoiceResponseVoice {
@@ -138,13 +111,21 @@ model VoiceResponseVoice {
   name: string;
 }
 
-@doc("The output audio format used for a response. Follows the Voice Live realtime output audio format.")
+@doc("The output audio format used for a response. Follows the OpenAI Realtime GA audio format discriminated union.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceResponseAudioFormat {
-  string,
+model VoiceResponseAudioOutput {
+  @doc("The voice used for the response's audio output.")
+  voice?: VoiceResponseVoice;
 
-  @doc("16-bit PCM at the default sampling rate.")
-  pcm16: "pcm16",
+  @doc("The audio format used for the response's audio output.")
+  format?: OpenAI.RealtimeAudioFormats;
+}
+
+@doc("Audio configuration for a response. Follows the OpenAI Realtime GA `audio` object shape.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceResponseAudio {
+  @doc("The audio output configuration used for the response.")
+  output?: VoiceResponseAudioOutput;
 }
 
 @doc("""
@@ -166,282 +147,189 @@ model VoiceResponse {
   status: VoiceResponseStatus;
 
   @doc("Additional detail about a terminal status.")
-  status_details?: VoiceResponseStatusDetails;
+  status_details?: OpenAI.RealtimeResponseStatusDetails;
 
   @doc("The output items produced by the response. May be omitted in list results; retrieve the full response (GET .../responses/{response_id}) or use the paged response-items route (GET .../responses/{response_id}/items) for its output items. Each item's `response_id` also links it back to this response in the conversation-level items list.")
   output?: VoiceConversationItem[];
 
   @doc("Token usage statistics for the response.")
-  usage?: VoiceUsage;
+  usage?: OpenAI.RealtimeResponseUsage;
 
   @doc("The id of the conversation this response belongs to.")
   conversation_id: string;
 
-  @doc("The voice used for the response.")
-  voice?: VoiceResponseVoice;
+  @doc("The audio configuration used for the response, including the voice and audio format used for output.")
+  audio?: VoiceResponseAudio;
 
-  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`.")
-  modalities?: string[];
-
-  @doc("The output audio format used for the response.")
-  output_audio_format?: VoiceResponseAudioFormat;
+  @doc("The output modalities used for the response, e.g. `[\"text\", \"audio\"]`. Audio output always includes a text transcript.")
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Matches OpenAI.RealtimeResponse.output_modalities: an inline literal array, not exported as a named union upstream."
+  output_modalities?: ("text" | "audio")[];
 
   @doc("The sampling temperature used for the response.")
   temperature?: float32;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Voice Live represents this as an integer token count or the literal string 'inf'."
   @doc("The maximum number of output tokens allowed for the response; an integer or the literal `inf`.")
-  max_response_output_tokens?: int32 | "inf";
+  max_output_tokens?: int32 | "inf";
 
   @doc("The Unix timestamp (in seconds) for when the response was created.")
-  created_at?: int32;
+  created_at?: FoundryTimestamp;
 
   @doc("The Unix timestamp (in seconds) for when the response completed.")
-  completed_at?: int32;
+  completed_at?: FoundryTimestamp;
 }
+
+// Message content parts reuse OpenAI's Realtime message content models directly (per-role, inline
+// `text`/`audio`/`image_url`/`transcript`/`detail` fields, matching the OpenAI GA wire format exactly,
+// including base64 inline audio), already available in this program via
+// ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's realtime models.tsp:
+//   - OpenAI.RealtimeConversationItemMessageSystemContent (system: input_text only)
+//   - OpenAI.RealtimeConversationItemMessageUserContent (user: input_text | input_audio | input_image)
+//   - OpenAI.RealtimeConversationItemMessageAssistantContent (assistant: output_text | output_audio)
+// See the three role variants (VoiceSystemMessageItem, VoiceUserMessageItem, VoiceAssistantMessageItem)
+// below, each of which extends its OpenAI role-specific message model directly.
 
 // ---------------------------------------------------------------------------
-// Message content parts (persisted; no inline base64 audio)
+// Conversation items — reused directly from OpenAI Realtime GA item models
 // ---------------------------------------------------------------------------
+//
+// Each Voice item extends its OpenAI Realtime counterpart directly, adding only the two Foundry
+// persistence extensions (`created_at`, `response_id`). `id`/`object`/`type`/`role`/`status` and all
+// content/error/tool fields are inherited as-is from OpenAI, already available in this program via
+// ./src/openai/responses/main.tsp -> @azure-tools/openai-typespec's realtime models.tsp.
+//
+// NOTE: OpenAI's vendor package splits items across two disconnected discriminator roots —
+// `RealtimeConversationItem` (@discriminator("type"): function_call | function_call_output | mcp_*)
+// and `RealtimeConversationItemMessage` (@discriminator("role"): system | user | assistant), which does
+// NOT extend `RealtimeConversationItem` and isn't part of its `type` union. Because TypeSpec only
+// supports single inheritance, one polymorphic base spanning all 9 item kinds (including `message`)
+// isn't available upstream, so `VoiceConversationItem` below is a plain (non-discriminated) union of
+// the 9 leaves rather than a single `@discriminator`-based type. This is a known upstream gap worth
+// raising with @azure-tools/openai-typespec (unify message items under the shared item discriminator).
 
-@doc("The kind of a message content part.")
+@doc("A system message item. Only `input_text` content is valid for system messages.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceContentPartType {
-  string,
-  input_text: "input_text",
-  text: "text",
-  input_audio: "input_audio",
-  audio: "audio",
-}
-
-@doc("A single content part of a voice message. Audio parts carry only the transcript in this persisted contract; raw audio bytes are streamed by the item-audio route, never inlined.")
-@discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceContentPart {
-  @doc("The content part kind.")
-  type: VoiceContentPartType;
-}
-
-@doc("An input (user/system) text content part.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceInputTextContentPart extends VoiceContentPart {
-  type: VoiceContentPartType.input_text;
-
-  @doc("The text content.")
-  text: string;
-}
-
-@doc("An output (assistant) text content part.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceOutputTextContentPart extends VoiceContentPart {
-  type: VoiceContentPartType.text;
-
-  @doc("The text content.")
-  text: string;
-}
-
-@doc("An input (user) audio content part. Only the transcript is persisted here; the audio bytes are streamed by the item-audio route.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceInputAudioContentPart extends VoiceContentPart {
-  type: VoiceContentPartType.input_audio;
-
-  @doc("The transcript of the input audio.")
-  transcript?: string;
-}
-
-@doc("An output (assistant) audio content part. Only the transcript is persisted here; the audio bytes are streamed by the item-audio route.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceOutputAudioContentPart extends VoiceContentPart {
-  type: VoiceContentPartType.audio;
-
-  @doc("The transcript of the output audio.")
-  transcript?: string;
-}
-
-// ---------------------------------------------------------------------------
-// Conversation items (Voice Live RealtimeConversationResponseItem + persisted
-// client-created request items)
-// ---------------------------------------------------------------------------
-
-@doc("The role of a voice message item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceMessageRole {
-  string,
-  user: "user",
-  assistant: "assistant",
-  system: "system",
-}
-
-@doc("The status of a voice conversation item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceItemStatus {
-  string,
-  in_progress: "in_progress",
-  completed: "completed",
-  incomplete: "incomplete",
-}
-
-@doc("Error details for a failed tool item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceItemError {
-  @doc("The error type.")
-  type?: string;
-
-  @doc("A specific error code.")
-  code?: string;
-
-  @doc("A human-readable error description.")
-  message?: string;
-}
-
-@doc("The kind of a voice conversation item.")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-union VoiceConversationItemType {
-  string,
-  message: "message",
-  function_call: "function_call",
-  function_call_output: "function_call_output",
-  mcp_list_tools: "mcp_list_tools",
-  mcp_call: "mcp_call",
-  mcp_approval_request: "mcp_approval_request",
-  mcp_approval_response: "mcp_approval_response",
-}
-
-@doc("""
-  A persisted item in a voice conversation. A discriminated union (by `type`) aligned to the Voice Live
-  `RealtimeConversationResponseItem` variants plus persisted client-created request items. `created_at` and
-  `response_id` are Foundry persistence extensions (`response_id` links an item to the response that produced
-  it; absent for client-created request items).
-  """)
-@discriminator("type")
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceConversationItem {
-  @doc("The item kind.")
-  type: VoiceConversationItemType;
-
-  @doc("The unique id of the item.")
-  id: string;
-
-  @doc("The object type, e.g. `conversation.item`.")
-  object?: string;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageSystem via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceSystemMessageItem extends OpenAI.RealtimeConversationItemMessageSystem {
   @doc("The Unix timestamp (in seconds) for when the item was persisted.")
-  created_at?: int32;
+  created_at?: FoundryTimestamp;
 
   @doc("The id of the response that produced this item, when applicable.")
   response_id?: string;
 }
 
-@doc("A message item (user, assistant, or system).")
+@doc("A user message item. `input_text`, `input_audio`, and `input_image` content are valid for user messages.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMessageItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.message;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageUser via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceUserMessageItem extends OpenAI.RealtimeConversationItemMessageUser {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The role of the message.")
-  role: VoiceMessageRole;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
+}
 
-  @doc("The content parts of the message.")
-  content: VoiceContentPart[];
+@doc("An assistant message item. Only `output_text` and `output_audio` content are valid for assistant messages.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemMessageAssistant via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceAssistantMessageItem extends OpenAI.RealtimeConversationItemMessageAssistant {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The status of the item.")
-  status?: VoiceItemStatus;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("A function call request item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFunctionCallItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.function_call;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemFunctionCall via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceFunctionCallItem extends OpenAI.RealtimeConversationItemFunctionCall {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The name of the function to call.")
-  name: string;
-
-  @doc("The arguments for the function call as a JSON string.")
-  arguments: string;
-
-  @doc("The unique id of the function call.")
-  call_id: string;
-
-  @doc("The status of the item.")
-  status?: VoiceItemStatus;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("A function call output item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceFunctionCallOutputItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.function_call_output;
-
-  @doc("The name of the function that was called.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeConversationItemFunctionCallOutput via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceFunctionCallOutputItem extends OpenAI.RealtimeConversationItemFunctionCallOutput {
+  @doc("The name of the function that was called. A Foundry extension: OpenAI's function_call_output does not carry the function name, only `call_id`.")
   name?: string;
 
-  @doc("The output of the function call.")
-  output: string;
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The unique id of the function call.")
-  call_id: string;
-
-  @doc("The status of the item.")
-  status?: VoiceItemStatus;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("An MCP list-tools item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpListToolsItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.mcp_list_tools;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPListTools via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceMcpListToolsItem extends OpenAI.RealtimeMCPListTools {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The label of the MCP server.")
-  server_label: string;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("An MCP call item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpCallItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.mcp_call;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPToolCall via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceMcpCallItem extends OpenAI.RealtimeMCPToolCall {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The label of the MCP server.")
-  server_label: string;
-
-  @doc("The name of the tool to call.")
-  name: string;
-
-  @doc("The approval request id associated with the call, when applicable.")
-  approval_request_id?: string;
-
-  @doc("The arguments for the MCP call.")
-  arguments: string;
-
-  @doc("The output of the MCP call.")
-  output?: string;
-
-  @doc("The error details if the MCP call failed.")
-  error?: VoiceItemError;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("An MCP approval request item.")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpApprovalRequestItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.mcp_approval_request;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPApprovalRequest via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceMcpApprovalRequestItem extends OpenAI.RealtimeMCPApprovalRequest {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("The label of the MCP server.")
-  server_label: string;
-
-  @doc("The name of the tool to call.")
-  name: string;
-
-  @doc("The arguments for the MCP call.")
-  arguments: string;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
 
 @doc("An MCP approval response item (client-created).")
 @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model VoiceMcpApprovalResponseItem extends VoiceConversationItem {
-  type: VoiceConversationItemType.mcp_approval_response;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Intentional: `extends` here reuses OpenAI.RealtimeMCPApprovalResponse via allOf+$ref (preserving a stable reference to the canonical OpenAI schema) rather than flattening its fields inline via spread."
+model VoiceMcpApprovalResponseItem extends OpenAI.RealtimeMCPApprovalResponse {
+  @doc("The Unix timestamp (in seconds) for when the item was persisted.")
+  created_at?: FoundryTimestamp;
 
-  @doc("Whether the MCP request is approved.")
-  approve: boolean;
-
-  @doc("The id of the MCP approval request being responded to.")
-  approval_request_id: string;
+  @doc("The id of the response that produced this item, when applicable.")
+  response_id?: string;
 }
+
+#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Spans two disconnected OpenAI discriminator roots (type vs role); see note above."
+@doc("""
+  A persisted item in a voice conversation. A plain union of the 9 OpenAI Realtime item kinds
+  (message x3 roles, function_call, function_call_output, mcp_list_tools, mcp_call,
+  mcp_approval_request, mcp_approval_response), each extended with the Foundry persistence extensions
+  `created_at`/`response_id`. See the note above for why this is a plain union rather than a single
+  `@discriminator`-based type.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+union VoiceConversationItem {
+  VoiceSystemMessageItem,
+  VoiceUserMessageItem,
+  VoiceAssistantMessageItem,
+  VoiceFunctionCallItem,
+  VoiceFunctionCallOutputItem,
+  VoiceMcpListToolsItem,
+  VoiceMcpCallItem,
+  VoiceMcpApprovalRequestItem,
+  VoiceMcpApprovalResponseItem,
+}
+
 
 // ---------------------------------------------------------------------------
 // Audio streaming

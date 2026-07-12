@@ -152,20 +152,19 @@ interface Agents {
   >;
 
   /**
-   * Guided authoring for a voice-first prompt agent. Expands a few high-level inputs and a natural-language
-   * goal into a full, editable `prompt_voice` agent definition, then creates the agent through the standard
-   * create path and returns the created `AgentObject`. The generated `instructions` and audio/voice settings
-   * are stored as separate fields on the agent definition, so the caller can edit or override them afterward
-   * via normal versioning.
+   * Generates and creates an agent from high-level, kind-specific inputs. Currently, `prompt_voice` is the only
+   * supported kind. For a voice-first prompt agent, the operation expands a natural-language goal into a full,
+   * editable definition, creates the agent through the standard create path, and returns the created `AgentObject`.
+   * The caller can edit or override the generated fields afterward through normal versioning.
    */
-  @summary("Generate a voice agent")
+  @summary("Generate an agent")
   @post
-  @route("/agents:generate_voice")
+  @route("/agents:generate")
   @extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
   @tag("Agents")
-  generateVoiceAgent is FoundryDataPlanePreviewOperation<
+  generateAgent is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview,
-    GenerateVoiceAgentRequest,
+    GenerateAgentRequest,
     AgentObject
   >;
 

@@ -730,15 +730,28 @@ union VoiceAgentUseCase {
 }
 
 @doc("""
-  The request for guided authoring (`POST /agents:generate_voice`). A few high-level inputs plus a natural-language
-  `goal` are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard
-  agent create path. The generated `instructions` and audio/voice settings are stored as separate fields on the
-  resulting agent definition, so the caller can edit or override any of them afterward via normal versioning.
+  The request for guided agent authoring (`POST /agents:generate`). The `kind` discriminator selects the
+  kind-specific generation inputs. Currently, only `prompt_voice` is supported.
   """)
-@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
-model GenerateVoiceAgentRequest {
+@discriminator("kind")
+model GenerateAgentRequest {
+  @doc("The kind of agent to generate.")
+  kind: AgentKind;
+
   @doc("The unique name for the agent to create.")
   name: string;
+}
+
+@doc("""
+  The inputs for generating a voice-first prompt agent. A few high-level inputs plus a natural-language `goal`
+  are expanded into a full, editable `PromptVoiceAgentDefinition`, which is then created via the standard agent
+  create path. The generated `instructions` and audio/voice settings are stored as separate fields on the resulting
+  agent definition, so the caller can edit or override any of them afterward via normal versioning.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model GeneratePromptVoiceAgentRequest extends GenerateAgentRequest {
+  @doc("The kind of agent to generate.")
+  kind: AgentKind.prompt_voice;
 
   @doc("How the model backing the generated agent is served: `managed` (Voice Live-hosted) or `self_deployed` (BYOM). Carried through to the generated definition, not generated.")
   model_type: VoiceModelType;

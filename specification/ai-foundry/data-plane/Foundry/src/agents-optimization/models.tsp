@@ -4,7 +4,7 @@
 // Uses shared Foundry job infrastructure from servicepatterns.tsp:
 //   JobLike<TResult, TInputs> — base job shape (id, status, inputs, result, error)
 //   JobStatus — shared lifecycle union (queued/in_progress/succeeded/failed/cancelled)
-//   FoundryTimestamp — Unix epoch int32
+//   FoundryTimestamp — Unix epoch seconds
 //   ApiError — standard error shape
 
 import "../common/models.tsp";
