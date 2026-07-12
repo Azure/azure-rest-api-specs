@@ -539,7 +539,7 @@ interface NetworkFabrics {
 @@doc(NetworkFabrics.validateConfiguration::parameters.body,
   "Validate configuration properties."
 );
-@@doc(NetworkFabrics.validateConfigurationDeprecated::parameters.body,
+@@doc(NetworkFabrics.validateConfigurationDeprecatedV2::parameters.body,
   "Validate configuration properties."
 );
 @@doc(NetworkFabrics.commitBatchStatusDeprecated::parameters.body,
