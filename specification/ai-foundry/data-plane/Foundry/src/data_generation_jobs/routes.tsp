@@ -2,7 +2,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
+using Azure.Core;
 
 namespace Azure.AI.Projects;
 
@@ -38,7 +38,7 @@ interface DataGenerationJobs {
   @summary("Create a data generation job")
   @route("data_generation_jobs")
   @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  @Azure.Core.pollingOperation(DataGenerationJobs.get)
+  @pollingOperation(DataGenerationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
     DataGenerationJob

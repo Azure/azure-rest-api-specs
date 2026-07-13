@@ -6,7 +6,7 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-
+using Azure.Core;
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
@@ -15,13 +15,13 @@ namespace Azure.AI.Projects;
 
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-#suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   @summary("Creates an agent optimization job.")
   @doc("Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
+  @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
     OptimizationJob
