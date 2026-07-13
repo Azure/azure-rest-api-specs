@@ -69,3 +69,86 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
 ```
+
+## Suppression
+
+The CRR (cross-region-restore / passive-stamp) surface for `2026-07-15` is a faithful migration of
+the frozen `stable/2023-01-15/bms.json` CRR contract into TypeSpec. The rules below flag pre-existing
+characteristics of that frozen contract (legacy envelopes, response-code sets, path structure, enum
+docs, etc.). They are suppressed to preserve backward compatibility with the existing wire contract;
+changing them would diverge from the frozen source. This mirrors the sibling `RecoveryServicesBackup`
+readme, whose CRR versions carried the same traits.
+
+```yaml $(directive)
+directive:
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    reason: vaultName is inherited from the parent VaultResource with NamePattern="" for backward compatibility with the frozen 2023-01-15 CRR paths; adding a pattern would change the existing wire contract.
+  - suppress: AvoidAdditionalProperties
+    from: bms.json
+    reason: Legacy 2023-01-15 CRR models use additionalProperties (open maps); preserved for backward compatibility with the frozen contract.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    reason: CRR resources carry optional location/tags to stay wire-faithful to 2023-01-15, which makes LintDiff treat them as tracked resources. The frozen passive-stamp surface has no DELETE for them; adding one would introduce operations absent from the frozen contract.
+  - suppress: TrackedResourcesMustHavePut
+    from: bms.json
+    reason: Same as above - CRR resources appear "tracked" only because of legacy optional location/tags; the frozen 2023-01-15 surface has no PUT for them.
+  - suppress: TrackedResourcePatchOperation
+    from: bms.json
+    reason: Same as above - the frozen 2023-01-15 CRR surface defines no PATCH for these read-mostly passive-stamp resources.
+  - suppress: PathForTrackedResourceTypes
+    from: bms.json
+    reason: CRR paths mirror the frozen 2023-01-15 URL structure exactly; the resources are not true tracked resources despite carrying legacy location/tags.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    reason: RecoveryPointResource sits below the frozen 2023-01-15 deep CRR path (vaults/backupFabrics/protectionContainers/protectedItems/recoveryPoints); the nesting is part of the existing contract.
+  - suppress: PutResponseCodes
+    from: bms.json
+    reason: The frozen 2023-01-15 CRR operations use legacy response-code sets; preserved exactly for backward compatibility.
+  - suppress: PostResponseCodes
+    from: bms.json
+    reason: The frozen 2023-01-15 CRR POST/action operations use legacy response-code sets (including the header-less 202 CrossRegionRestore); preserved for backward compatibility.
+  - suppress: PatchResponseCodes
+    from: bms.json
+    reason: The frozen 2023-01-15 vaultstorageconfig patch uses a legacy response-code set; preserved for backward compatibility.
+  - suppress: PutGetPatchResponseSchema
+    from: bms.json
+    reason: The frozen 2023-01-15 vaultstorageconfig operations use the legacy response schemas of the original contract; preserved for backward compatibility.
+  - suppress: GetCollectionOnlyHasValueAndNextLink
+    from: bms.json
+    reason: Legacy 2023-01-15 CRR list responses are modeled exactly as in the frozen contract; preserved for backward compatibility.
+  - suppress: NoErrorCodeResponses
+    from: bms.json
+    reason: The frozen 2023-01-15 CRR operations use the legacy error response modeling of the original contract; preserved for backward compatibility.
+  - suppress: LroLocationHeader
+    from: bms.json
+    reason: The original 2023-01-15 CRR CrossRegionRestore/operation LROs return a header-less 202; preserved exactly for backward compatibility.
+  - suppress: OperationsAPIImplementation
+    from: bms.json
+    reason: The CRR passive-stamp surface (2023-01-15) does not expose a provider Operations list; the provider-level operations endpoint for the shared Microsoft.RecoveryServices RP is served by the sibling RecoveryServices/RecoveryServicesBackup specs.
+  - suppress: BodyTopLevelProperties
+    from: bms.json
+    reason: Legacy 2023-01-15 CRR resource envelopes place some fields at the top level (not under a properties bag); preserved for backward compatibility with the frozen contract.
+  - suppress: XmsPageableForListCalls
+    from: bms.json
+    reason: BackupUsageSummariesCRR_List is faithfully modeled with x-ms-pageable nextLinkName:null per the frozen 2023-01-15 contract (BackupManagementUsageList has no nextLink property).
+  - suppress: ParametersInPost
+    from: bms.json
+    reason: Legacy 2023-01-15 CRR POST operations pass parameters exactly as modeled in the frozen contract; preserved for backward compatibility.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: bms.json
+    reason: Legacy 2023-01-15 CRR resource models do not declare the standard required resource properties; preserved to keep the emitted swagger faithful to the frozen source.
+  - suppress: ResourceHasXMsResourceEnabled
+    from: bms.json
+    reason: The frozen 2023-01-15 CRR resources do not set x-ms-azure-resource; preserved as-is for backward compatibility.
+  - suppress: EvenSegmentedPathForPutOperation
+    from: bms.json
+    reason: CRR paths mirror the frozen 2023-01-15 URL structure exactly; the path segmentation is part of the existing wire contract.
+  - suppress: PathForNestedResource
+    from: bms.json
+    reason: CRR nested-resource paths mirror the frozen 2023-01-15 URL structure exactly; preserved for backward compatibility.
+  - suppress: UnSupportedPatchProperties
+    from: bms.json
+    reason: The vaultstorageconfig patch mirrors the frozen 2023-01-15 contract exactly; preserved for backward compatibility.
+```
+
