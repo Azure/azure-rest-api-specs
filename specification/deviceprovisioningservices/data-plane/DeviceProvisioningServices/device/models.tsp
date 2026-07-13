@@ -474,6 +474,15 @@ model ReportStatusRequest {
   /** Opaque deployment identifier from updateMetadata; the idempotency and routing key. */
   workflowId: string;
 
+  /**
+   * Attestation via TPM. Present only for TPM-attested devices, mirroring the
+   * Register (DeviceRegistration) request; X.509 and symmetric-key attestation are
+   * carried at the transport layer (TLS client certificate / SAS token) and are not
+   * part of the request body. Auth is enforced per action, so this parity affordance
+   * is present on every device-facing request.
+   */
+  tpm?: TpmAttestation;
+
   /** The update the device attempted to install, if any. */
   installedUpdateId?: UpdateId | null;
 

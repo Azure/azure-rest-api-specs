@@ -773,6 +773,10 @@
           "type": "string",
           "description": "Opaque deployment identifier from updateMetadata; the idempotency and routing key."
         },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation",
+          "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body. Auth is enforced per action, so this parity affordance\nis present on every device-facing request."
+        },
         "installedUpdateId": {
           "$ref": "#/definitions/UpdateId",
           "description": "The update the device attempted to install, if any.",
