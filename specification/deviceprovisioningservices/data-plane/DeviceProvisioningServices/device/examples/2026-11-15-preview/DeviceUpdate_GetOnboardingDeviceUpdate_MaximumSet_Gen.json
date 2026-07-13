@@ -1,12 +1,11 @@
 {
-  "title": "DeviceUpdate_GetDeviceUpdate",
-  "operationId": "DeviceUpdate_GetDeviceUpdate",
+  "title": "DeviceUpdate_GetOnboardingDeviceUpdate_MaximumSet_Gen",
+  "operationId": "DeviceUpdate_GetOnboardingDeviceUpdate",
   "parameters": {
     "idScope": "0ne00000000",
     "registrationId": "my-device-01",
     "api-version": "2026-11-15-preview",
     "x-ms-external-device-id": "my-device-01",
-    "x-ms-device-id": "8f3b2c1a-9d4e-4f2a-bc1d-2e3f4a5b6c7d",
     "body": {
       "agentInfo": {
         "agentSdkVersion": "1.1.0",
@@ -16,10 +15,14 @@
           "model": "vacuum-100"
         }
       },
+      "tpm": {
+        "endorsementKey": "eyJlbmRvcnNlbWVudCI6ICJrZXkifQ==",
+        "storageRootKey": "eyJzcmsiOiAia2V5In0="
+      },
       "installedUpdateId": {
-        "provider": "contoso",
-        "name": "vacuum",
-        "version": "1.0.0"
+        "provider": "Contoso",
+        "name": "SensorFirmware",
+        "version": "1.2.3"
       },
       "agentInfoETag": "\"a0\"",
       "serviceConfigETag": "\"c0\""
@@ -27,9 +30,6 @@
   },
   "responses": {
     "200": {
-      "headers": {
-        "x-ms-request-id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301"
-      },
       "body": {
         "serviceConfiguration": {
           "rootKeyDownloadUrl": "https://contoso.blob.core.windows.net/adu/rootkeys"
@@ -39,9 +39,9 @@
         "updateMetadata": {
           "workflowId": "5a3f2b10-8c7d-4e6f-9a1b-2c3d4e5f6a7b",
           "updateManifest": "eyJtYW5pZmVzdCI6ICJvcGFxdWUifQ==",
-          "updateManifestSignature": "eyJhbGciOiJSUzI1NiJ9.signature",
+          "updateManifestSignature": "eyJhbGciOiJSUzI1NiJ9.c2lnbmF0dXJl",
           "fileUrls": {
-            "file_0": "https://contoso.blob.core.windows.net/adu/vacuum-1.1.0.bin"
+            "file_0": "https://contoso.blob.core.windows.net/adu/baseline-1.1.0.bin"
           }
         }
       }

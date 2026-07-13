@@ -1,5 +1,5 @@
 {
-  "title": "DeviceUpdate_GetDeviceUpdate",
+  "title": "DeviceUpdate_GetDeviceUpdate_MaximumSet_Gen",
   "operationId": "DeviceUpdate_GetDeviceUpdate",
   "parameters": {
     "idScope": "0ne00000000",
@@ -16,6 +16,10 @@
           "model": "vacuum-100"
         }
       },
+      "tpm": {
+        "endorsementKey": "eyJlbmRvcnNlbWVudCI6ICJrZXkifQ==",
+        "storageRootKey": "eyJzcmsiOiAia2V5In0="
+      },
       "installedUpdateId": {
         "provider": "contoso",
         "name": "vacuum",
@@ -27,9 +31,6 @@
   },
   "responses": {
     "200": {
-      "headers": {
-        "x-ms-request-id": "3f2504e0-4f89-41d3-9a0c-0305e82c3301"
-      },
       "body": {
         "serviceConfiguration": {
           "rootKeyDownloadUrl": "https://contoso.blob.core.windows.net/adu/rootkeys"
@@ -39,10 +40,10 @@
         "updateMetadata": {
           "workflowId": "5a3f2b10-8c7d-4e6f-9a1b-2c3d4e5f6a7b",
           "updateManifest": "eyJtYW5pZmVzdCI6ICJvcGFxdWUifQ==",
-          "updateManifestSignature": "eyJhbGciOiJSUzI1NiJ9.signature",
-          "fileUrls": [
-            "https://contoso.blob.core.windows.net/adu/vacuum-1.1.0.bin"
-          ]
+          "updateManifestSignature": "eyJhbGciOiJSUzI1NiJ9.c2lnbmF0dXJl",
+          "fileUrls": {
+            "file_0": "https://contoso.blob.core.windows.net/adu/vacuum-1.1.0.bin"
+          }
         }
       }
     }
