@@ -89,7 +89,7 @@
       "post": {
         "operationId": "DeviceUpdate_GetDeviceUpdate",
         "summary": "Checks for an available device update (regular / operational path).",
-        "description": "Checks for an available device update on the regular / operational path. The\ndevice selects this endpoint once it is provisioned.",
+        "description": "Checks for an available device update on the regular / operational path. The\ndevice selects this endpoint once it is provisioned.\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -152,7 +152,7 @@
       "post": {
         "operationId": "DeviceUpdate_GetOnboardingDeviceUpdate",
         "summary": "Checks for an available device update (onboarding / bootstrap path).",
-        "description": "Checks for an available device update on the onboarding / bootstrap path. The\ndevice selects this endpoint before it is provisioned; only the external device\nidentifier is available (no ADR device UUID yet).",
+        "description": "Checks for an available device update on the onboarding / bootstrap path. The\ndevice selects this endpoint before it is provisioned; only the external device\nidentifier is available (no ADR device UUID yet).\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -370,7 +370,7 @@
       "post": {
         "operationId": "DeviceUpdate_ReportDeviceUpdateStatus",
         "summary": "Reports the terminal result of a device update installation.",
-        "description": "Reports the terminal result of a device update installation. Idempotent on\nworkflowId; ADU routes the report to the correct update family.",
+        "description": "Reports the terminal result of a device update installation. Idempotent on\nworkflowId; ADU routes the report to the correct update family.\n\nOn failure, ADU's `error.code` string is returned verbatim in the\n`x-ms-error-code` header and mirrored in the error body `info` dictionary\nunder `aduErrorCode` (plus `aduErrorTarget` when applicable). Devices should\nbranch on that code rather than the HTTP status.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
