@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Cluster.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 /**
@@ -27,6 +29,7 @@ model Migration is Azure.ResourceManager.ProxyResource<MigrationProperties> {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@renamedFrom(Versions.v2026_06_01_preview, "Migration")
 interface Migrations {
   /**
    * Gets information about a migration in a Redis Enterprise cluster.
@@ -67,6 +70,7 @@ interface Migrations {
   /**
    * Validates if a source Azure Cache for Redis resource can be migrated to a target Azure Managed Redis resource.
    */
+  @operationId("Migrations_Validate")
   @action("validate")
   validate is ArmResourceActionSync<
     Migration,
