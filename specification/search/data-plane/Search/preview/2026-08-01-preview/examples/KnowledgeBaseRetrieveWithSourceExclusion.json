@@ -118,6 +118,68 @@
           }
         ]
       }
+    },
+    "206": {
+      "body": {
+        "response": [
+          {
+            "content": [
+              {
+                "type": "text",
+                "text": "Partial results were returned before the retrieval completed because the runtime budget was exhausted."
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "modelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22,
+            "elapsedMs": 10
+          },
+          {
+            "type": "searchIndex",
+            "id": 1,
+            "knowledgeSourceName": "product-docs-ks",
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 1,
+            "elapsedMs": 4200,
+            "warning": "Retrieval stopped early because the runtime budget was reached; results may be incomplete.",
+            "searchIndexArguments": {
+              "search": "SSO provisioning steps",
+              "sourceDataFields": [
+                {
+                  "name": "title"
+                },
+                {
+                  "name": "content"
+                },
+                {
+                  "name": "id"
+                }
+              ],
+              "searchFields": [],
+              "semanticConfigurationName": "testconfig"
+            }
+          }
+        ],
+        "references": [
+          {
+            "type": "searchIndex",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "sourceData": {
+              "id": "sso-provisioning-guide",
+              "title": "SSO provisioning guide",
+              "content": "Register the enterprise application and configure the redirect URI."
+            },
+            "rerankerScore": 3.5,
+            "docKey": "sso-provisioning-guide"
+          }
+        ]
+      }
     }
   }
 }
