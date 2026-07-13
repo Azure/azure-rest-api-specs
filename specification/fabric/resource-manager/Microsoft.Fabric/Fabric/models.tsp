@@ -50,7 +50,7 @@ model OverageBillingSettings {
 
   @doc("When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.")
   @minValue(0)
-  @encodedName("application/json", "ThresholdCapacityUnitHours")
+  @encodedName("application/json", "thresholdCapacityUnitHours")
   thresholdCapacityUnitHours?: int32;
 }
 
