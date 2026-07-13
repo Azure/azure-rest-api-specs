@@ -280,6 +280,11 @@ union RuntimeName {
   powershell: "powershell",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   python: "python",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_07_15)
+  go: "go",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   custom: "custom",
 }
@@ -2414,6 +2419,12 @@ model SiteProperties {
    */
   @added(Versions.v2026_03_15)
   platformReleaseChannel?: PlatformReleaseChannel;
+
+  /**
+   * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
+   */
+  @added(Versions.v2026_07_15)
+  maintenanceEnabled?: boolean;
 }
 
 /**

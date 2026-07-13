@@ -632,6 +632,16 @@ using Azure.ResourceManager;
   "csharp"
 );
 @@clientName(ResourceType, "CdnResourceType", "csharp");
+@@clientName(
+  ResourceType.`Microsoft.Cdn/Profiles/Endpoints`,
+  Azure.ClientGenerator.Core.exact("Endpoints"),
+  "csharp"
+);
+@@clientName(
+  ResourceType.`Microsoft.Cdn/Profiles/AfdEndpoints`,
+  Azure.ClientGenerator.Core.exact("FrontDoorEndpoints"),
+  "csharp"
+);
 @@clientName(SslProtocol, "DeliveryRuleSslProtocol", "csharp");
 @@clientName(
   SslProtocol.TLSv1,

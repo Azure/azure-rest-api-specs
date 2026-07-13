@@ -6,7 +6,7 @@ using Microsoft.NotificationHubs;
 @@clientName(
   Microsoft.NotificationHubs,
   "NotificationHubsManagementClient",
-  "javascript"
+  "javascript,python"
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy decorator required for SDK compatibility"

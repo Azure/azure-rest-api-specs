@@ -23,7 +23,7 @@ alias LicensesOps = Legacy.ExtensionOperations<
   {}
 >;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 interface LicensesOperationGroup {
   /**
    * The operation to validate a license.
@@ -41,7 +41,7 @@ interface LicensesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 interface ExtensionTypeOperationGroup {
   /**
    * Gets all Extension types based on location and publisher
@@ -66,7 +66,7 @@ interface ExtensionTypeOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 interface ExtensionPublisherOperationGroup {
   /**
    * Gets all Extension publishers based on the location
@@ -82,7 +82,7 @@ interface ExtensionPublisherOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Preserved from the original Swagger contract during TypeSpec conversion to avoid breaking existing client SDKs."
 interface PrivateLinkScopesOperationGroup {
   /**
    * Returns a Azure Arc PrivateLinkScope's validation details.
