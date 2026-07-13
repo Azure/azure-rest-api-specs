@@ -696,17 +696,10 @@ union ExpansionJobStatusType {
  */
 @added(Versions.v2026_08_01)
 union RebalanceJobPropertiesProvisioningState {
-  string,
-
   /**
-   * Resource has been created successfully.
+   * The terminal provisioning states (Succeeded, Failed, Canceled) shared by all ARM resources.
    */
-  Succeeded: "Succeeded",
-
-  /**
-   * Resource creation failed.
-   */
-  Failed: "Failed",
+  Azure.ResourceManager.ResourceProvisioningState,
 
   /**
    * Resource is being created.
@@ -714,19 +707,14 @@ union RebalanceJobPropertiesProvisioningState {
   Creating: "Creating",
 
   /**
-   * Resource is being deleted.
-   */
-  Deleting: "Deleting",
-
-  /**
    * Resource is being updated.
    */
   Updating: "Updating",
 
   /**
-   * Resource creation was canceled.
+   * Resource is being deleted.
    */
-  Canceled: "Canceled",
+  Deleting: "Deleting",
 }
 
 /**
@@ -2472,7 +2460,7 @@ model RebalanceJobProperties {
   provisioningState?: RebalanceJobPropertiesProvisioningState;
 
   /**
-   * The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.
+   * The current administrative status of the rebalance job. 'Active' indicates the job is running normally; 'Cancel' indicates cancellation has been requested.
    */
   @visibility(Lifecycle.Read)
   adminStatus?: RebalanceJobAdminStatus;

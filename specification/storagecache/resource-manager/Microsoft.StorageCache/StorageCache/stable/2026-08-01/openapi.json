@@ -8215,7 +8215,7 @@
         },
         "adminStatus": {
           "$ref": "#/definitions/RebalanceJobAdminStatus",
-          "description": "The administrative status of the rebalance job. Possible values: 'Active', 'Cancel'. Passing in a value of 'Cancel' will cancel the current active rebalance job. By default it is set to 'Active'.",
+          "description": "The current administrative status of the rebalance job. 'Active' indicates the job is running normally; 'Cancel' indicates cancellation has been requested.",
           "readOnly": true
         },
         "expansionJobId": {
@@ -8244,10 +8244,10 @@
       "enum": [
         "Succeeded",
         "Failed",
+        "Canceled",
         "Creating",
-        "Deleting",
         "Updating",
-        "Canceled"
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "RebalanceJobPropertiesProvisioningState",
@@ -8256,7 +8256,7 @@
           {
             "name": "Succeeded",
             "value": "Succeeded",
-            "description": "Resource has been created successfully."
+            "description": "Resource has been created."
           },
           {
             "name": "Failed",
@@ -8264,14 +8264,14 @@
             "description": "Resource creation failed."
           },
           {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
             "name": "Creating",
             "value": "Creating",
             "description": "Resource is being created."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Resource is being deleted."
           },
           {
             "name": "Updating",
@@ -8279,9 +8279,9 @@
             "description": "Resource is being updated."
           },
           {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Resource is being deleted."
           }
         ]
       }
