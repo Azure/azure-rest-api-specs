@@ -421,7 +421,10 @@ model VolumeProperties {
 
   /**
    * Flag indicating whether subvolume operations are enabled on the volume
+   * Deprecated. Subvolume operations and this flag will be removed in a future API version.
    */
+  #suppress "deprecated" "Suppress this warning until the property is removed."
+  #deprecated "Deprecated. This property will be removed in a future API version."
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -2139,7 +2142,9 @@ union AvsDataStore {
 
 /**
  * Flag indicating whether subvolume operations are enabled on the volume
+ * Deprecated. This type will be removed in a future API version.
  */
+#deprecated "Deprecated. This type will be removed in a future API version."
 union EnableSubvolumes {
   string,
 
