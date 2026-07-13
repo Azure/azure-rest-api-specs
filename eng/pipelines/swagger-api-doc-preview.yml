@@ -32,24 +32,21 @@ jobs:
         value: 'Swagger ApiDocPreview'
 
     steps:
-      - checkout: self
-        # Fetch depth required to get list of changed files
-        fetchDepth: 2
-        
-      - template: /eng/common/pipelines/templates/steps/login-to-github.yml
-
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Starting docs build'
           Context: $(StatusName)
-          GitHubToken: $(GH_TOKEN)
+
+      - checkout: self
+        # Fetch depth required to get list of changed files
+        fetchDepth: 2
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           SkipCheckoutNone: true
-          TokenToUseForAuth: $(GH_TOKEN)
+          TokenToUseForAuth: $(azuresdk-github-pat)
           # Path does not need to be set because sparse-checkout.yml already
           # checks out files in the repo root
           Repositories:
