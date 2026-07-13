@@ -362,8 +362,8 @@ model TpmAttestation {
  */
 @added(Versions.v2026_11_15_preview)
 model UpdateCheckRequest {
-  /** Information describing the ADU agent making the request. */
-  agentInfo: AgentInfo;
+  /** Device agent information. Required unless a still-current agentInfoETag is supplied. */
+  agentInfo?: AgentInfo;
 
   /**
    * Attestation via TPM. Present only for TPM-attested devices, mirroring the
@@ -373,19 +373,23 @@ model UpdateCheckRequest {
    */
   tpm?: TpmAttestation;
 
-  /** The update currently installed on the device, if any. */
-  installedUpdateId?: UpdateId | null;
+  /** Currently installed update, or null if none. */
+  installedUpdateId: InstalledUpdateId | null;
 
   /**
-   * ETag of the last agentInfo the service observed, used by the service to skip
-   * redundant processing. Optional.
+   * ETag from a prior response; lets the service skip re-processing agentInfo.
+   * Optional.
    */
+  @minLength(1)
+  @maxLength(128)
   agentInfoETag?: string;
 
   /**
-   * ETag of the serviceConfiguration the device currently holds, used by the
-   * service to omit unchanged configuration. Optional.
+   * ETag from a prior response; lets the service omit unchanged serviceConfiguration.
+   * Optional.
    */
+  @minLength(1)
+  @maxLength(128)
   serviceConfigETag?: string;
 }
 
@@ -395,28 +399,41 @@ model UpdateCheckRequest {
  */
 @added(Versions.v2026_11_15_preview)
 model AgentInfo {
-  /** Version of the ADU agent SDK on the device. */
+  /** Agent SDK version. Diagnostic only; not used for targeting. */
+  @minLength(1)
+  @maxLength(64)
   agentSdkVersion: string;
 
-  /** ADU agent profile identifier. */
+  /**
+   * Opaque capability identifier; the service maps it to supported manifest versions
+   * and installability constraints. The device must not infer meaning from the value.
+   */
+  @minValue(1)
   agentProfile: int32;
 
-  /** Device compatibility properties (for example manufacturer and model). */
+  /** Device compatibility attributes; combined with agentProfile to compute the device class. */
   compatibilityProperties: Record<string>;
 }
 
 /**
- * Identifies a specific update by provider, name, and version.
+ * Identifier of an update.
  */
 @added(Versions.v2026_11_15_preview)
-model UpdateId {
-  /** Update provider. */
+model InstalledUpdateId {
+  /** Update provider. Alphanumeric plus '.' and '-'. */
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9.\\-]+$")
   provider: string;
 
-  /** Update name. */
+  /** Update name. Alphanumeric plus '.' and '-'. */
+  @minLength(1)
+  @maxLength(64)
+  @pattern("^[a-zA-Z0-9.\\-]+$")
   name: string;
 
-  /** Update version. */
+  /** 2 to 4-part numeric version, e.g. 1.2, 1.2.3, 1.2.3.4. */
+  @pattern("^\\d+(\\.\\d+){1,3}$")
   version: string;
 }
 
@@ -426,14 +443,14 @@ model UpdateId {
  */
 @added(Versions.v2026_11_15_preview)
 model UpdateCheckResponse {
-  /** Device service configuration returned on every response. */
-  serviceConfiguration: ServiceConfiguration;
+  /** Device service configuration. Omitted only when a matching serviceConfigETag was supplied. */
+  serviceConfiguration?: ServiceConfiguration;
 
-  /** ETag of the returned serviceConfiguration. */
-  serviceConfigETag?: string;
+  /** Current ETag of serviceConfiguration. */
+  serviceConfigETag: string;
 
-  /** ETag the device should echo on its next request in agentInfoETag. */
-  agentInfoETag?: string;
+  /** Current ETag of the processed agentInfo. */
+  agentInfoETag: string;
 
   /** Present only when an update applies to the device; omitted otherwise. */
   updateMetadata?: UpdateMetadata;
@@ -444,8 +461,8 @@ model UpdateCheckResponse {
  */
 @added(Versions.v2026_11_15_preview)
 model ServiceConfiguration {
-  /** URL from which the device fetches ADU root keys for signature validation. */
-  rootKeyDownloadUrl?: url;
+  /** URL of the current root-key package; the device verifies updateManifestSignature against it. */
+  rootKeyDownloadUrl: url;
 }
 
 /**
@@ -454,16 +471,18 @@ model ServiceConfiguration {
 @added(Versions.v2026_11_15_preview)
 model UpdateMetadata {
   /** Opaque deployment identifier; echoed by the device on reportDeviceUpdateStatus. */
+  @minLength(1)
+  @maxLength(128)
   workflowId: string;
 
-  /** Opaque update manifest string. DPS does not parse this value. */
+  /** Update manifest as a serialized JSON string; verify the signature before parsing. DPS does not parse this value. */
   updateManifest: string;
 
-  /** JWS signature over the update manifest. */
+  /** JWS compact serialization over updateManifest. */
   updateManifestSignature: string;
 
-  /** URLs of the payload files that make up the update. */
-  fileUrls: url[];
+  /** Map of fileId to download URL. */
+  fileUrls: Record<url>;
 }
 
 /**
@@ -471,7 +490,9 @@ model UpdateMetadata {
  */
 @added(Versions.v2026_11_15_preview)
 model ReportStatusRequest {
-  /** Opaque deployment identifier from updateMetadata; the idempotency and routing key. */
+  /** The workflowId from the updateMetadata being reported; the idempotency and routing key. */
+  @minLength(1)
+  @maxLength(128)
   workflowId: string;
 
   /**
@@ -483,11 +504,11 @@ model ReportStatusRequest {
    */
   tpm?: TpmAttestation;
 
-  /** The update the device attempted to install, if any. */
-  installedUpdateId?: UpdateId | null;
+  /** The update now installed, or null. Communicates current device state; not a failure signal. */
+  installedUpdateId: InstalledUpdateId | null;
 
   /** The terminal result of the installation. */
-  lastInstallResult: LastInstallResult;
+  lastInstallResult: InstallResult;
 }
 
 /**
@@ -572,7 +593,7 @@ model StepResult {
  * step fields (spread from `StepResult`) plus an optional per-step breakdown.
  */
 @added(Versions.v2026_11_15_preview)
-model LastInstallResult {
+model InstallResult {
   ...StepResult;
 
   /**

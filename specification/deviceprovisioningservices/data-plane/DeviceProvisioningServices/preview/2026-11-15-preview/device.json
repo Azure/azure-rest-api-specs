@@ -433,16 +433,19 @@
       "properties": {
         "agentSdkVersion": {
           "type": "string",
-          "description": "Version of the ADU agent SDK on the device."
+          "description": "Agent SDK version. Diagnostic only; not used for targeting.",
+          "minLength": 1,
+          "maxLength": 64
         },
         "agentProfile": {
           "type": "integer",
           "format": "int32",
-          "description": "ADU agent profile identifier."
+          "description": "Opaque capability identifier; the service maps it to supported manifest versions\nand installability constraints. The device must not infer meaning from the value.",
+          "minimum": 1
         },
         "compatibilityProperties": {
           "type": "object",
-          "description": "Device compatibility properties (for example manufacturer and model).",
+          "description": "Device compatibility attributes; combined with agentProfile to compute the device class.",
           "additionalProperties": {
             "type": "string"
           }
@@ -701,7 +704,7 @@
         ]
       }
     },
-    "LastInstallResult": {
+    "InstallResult": {
       "type": "object",
       "description": "Terminal install result. Mirrors the ADU `InstallResult` model: the top-level\nstep fields (spread from `StepResult`) plus an optional per-step breakdown.",
       "properties": {
@@ -741,6 +744,36 @@
         "failureOrigin",
         "resultCode",
         "extendedResultCodes"
+      ]
+    },
+    "InstalledUpdateId": {
+      "type": "object",
+      "description": "Identifier of an update.",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Update provider. Alphanumeric plus '.' and '-'.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "description": "Update name. Alphanumeric plus '.' and '-'.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9.\\-]+$"
+        },
+        "version": {
+          "type": "string",
+          "description": "2 to 4-part numeric version, e.g. 1.2, 1.2.3, 1.2.3.4.",
+          "pattern": "^\\d+(\\.\\d+){1,3}$"
+        }
+      },
+      "required": [
+        "provider",
+        "name",
+        "version"
       ]
     },
     "Outcome": {
@@ -842,24 +875,27 @@
       "properties": {
         "workflowId": {
           "type": "string",
-          "description": "Opaque deployment identifier from updateMetadata; the idempotency and routing key."
+          "description": "The workflowId from the updateMetadata being reported; the idempotency and routing key.",
+          "minLength": 1,
+          "maxLength": 128
         },
         "tpm": {
           "$ref": "#/definitions/TpmAttestation",
           "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body. Auth is enforced per action, so this parity affordance\nis present on every device-facing request."
         },
         "installedUpdateId": {
-          "$ref": "#/definitions/UpdateId",
-          "description": "The update the device attempted to install, if any.",
+          "$ref": "#/definitions/InstalledUpdateId",
+          "description": "The update now installed, or null. Communicates current device state; not a failure signal.",
           "x-nullable": true
         },
         "lastInstallResult": {
-          "$ref": "#/definitions/LastInstallResult",
+          "$ref": "#/definitions/InstallResult",
           "description": "The terminal result of the installation."
         }
       },
       "required": [
         "workflowId",
+        "installedUpdateId",
         "lastInstallResult"
       ]
     },
@@ -870,9 +906,12 @@
         "rootKeyDownloadUrl": {
           "type": "string",
           "format": "uri",
-          "description": "URL from which the device fetches ADU root keys for signature validation."
+          "description": "URL of the current root-key package; the device verifies updateManifestSignature against it."
         }
-      }
+      },
+      "required": [
+        "rootKeyDownloadUrl"
+      ]
     },
     "StepResult": {
       "type": "object",
@@ -952,28 +991,32 @@
       "properties": {
         "agentInfo": {
           "$ref": "#/definitions/AgentInfo",
-          "description": "Information describing the ADU agent making the request."
+          "description": "Device agent information. Required unless a still-current agentInfoETag is supplied."
         },
         "tpm": {
           "$ref": "#/definitions/TpmAttestation",
           "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body, exactly as in Register."
         },
         "installedUpdateId": {
-          "$ref": "#/definitions/UpdateId",
-          "description": "The update currently installed on the device, if any.",
+          "$ref": "#/definitions/InstalledUpdateId",
+          "description": "Currently installed update, or null if none.",
           "x-nullable": true
         },
         "agentInfoETag": {
           "type": "string",
-          "description": "ETag of the last agentInfo the service observed, used by the service to skip\nredundant processing. Optional."
+          "description": "ETag from a prior response; lets the service skip re-processing agentInfo.\nOptional.",
+          "minLength": 1,
+          "maxLength": 128
         },
         "serviceConfigETag": {
           "type": "string",
-          "description": "ETag of the serviceConfiguration the device currently holds, used by the\nservice to omit unchanged configuration. Optional."
+          "description": "ETag from a prior response; lets the service omit unchanged serviceConfiguration.\nOptional.",
+          "minLength": 1,
+          "maxLength": 128
         }
       },
       "required": [
-        "agentInfo"
+        "installedUpdateId"
       ]
     },
     "UpdateCheckResponse": {
@@ -982,15 +1025,15 @@
       "properties": {
         "serviceConfiguration": {
           "$ref": "#/definitions/ServiceConfiguration",
-          "description": "Device service configuration returned on every response."
+          "description": "Device service configuration. Omitted only when a matching serviceConfigETag was supplied."
         },
         "serviceConfigETag": {
           "type": "string",
-          "description": "ETag of the returned serviceConfiguration."
+          "description": "Current ETag of serviceConfiguration."
         },
         "agentInfoETag": {
           "type": "string",
-          "description": "ETag the device should echo on its next request in agentInfoETag."
+          "description": "Current ETag of the processed agentInfo."
         },
         "updateMetadata": {
           "$ref": "#/definitions/UpdateMetadata",
@@ -998,30 +1041,8 @@
         }
       },
       "required": [
-        "serviceConfiguration"
-      ]
-    },
-    "UpdateId": {
-      "type": "object",
-      "description": "Identifies a specific update by provider, name, and version.",
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Update provider."
-        },
-        "name": {
-          "type": "string",
-          "description": "Update name."
-        },
-        "version": {
-          "type": "string",
-          "description": "Update version."
-        }
-      },
-      "required": [
-        "provider",
-        "name",
-        "version"
+        "serviceConfigETag",
+        "agentInfoETag"
       ]
     },
     "UpdateMetadata": {
@@ -1030,22 +1051,24 @@
       "properties": {
         "workflowId": {
           "type": "string",
-          "description": "Opaque deployment identifier; echoed by the device on reportDeviceUpdateStatus."
+          "description": "Opaque deployment identifier; echoed by the device on reportDeviceUpdateStatus.",
+          "minLength": 1,
+          "maxLength": 128
         },
         "updateManifest": {
           "type": "string",
-          "description": "Opaque update manifest string. DPS does not parse this value."
+          "description": "Update manifest as a serialized JSON string; verify the signature before parsing. DPS does not parse this value."
         },
         "updateManifestSignature": {
           "type": "string",
-          "description": "JWS signature over the update manifest."
+          "description": "JWS compact serialization over updateManifest."
         },
         "fileUrls": {
-          "type": "array",
-          "description": "URLs of the payload files that make up the update.",
-          "items": {
-            "type": "string",
-            "format": "uri"
+          "type": "object",
+          "description": "Map of fileId to download URL.",
+          "additionalProperties": {
+            "format": "uri",
+            "type": "string"
           }
         }
       },
