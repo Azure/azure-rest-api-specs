@@ -305,6 +305,7 @@ namespace Microsoft.BotService {
     "BotChannelGetWithKeysResult",
     "csharp"
   );
+  // TODO: Remove this hierarchyBuilding once https://github.com/Azure/azure-sdk-for-net/issues/60923 is resolved
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# back-compat"
   @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
     ListChannelWithKeysResponse,
