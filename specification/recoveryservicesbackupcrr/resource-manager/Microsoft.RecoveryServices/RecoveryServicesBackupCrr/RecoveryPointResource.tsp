@@ -78,24 +78,17 @@ interface RecoveryPointGetAccessToken {
   getAccessToken is ArmResourceActionSync<
     RecoveryPointResource,
     AADPropertiesResource,
-    ArmResponse<CrrAccessTokenResource> | AccessTokenBadRequestResponse
+
+      | ArmResponse<CrrAccessTokenResource>
+      | {
+          @doc("BadRequest")
+          @statusCode
+          statusCode: 400;
+        }
   >;
 }
 
-/**
- * BadRequest error response for the recovery point access token operation.
- */
-@error
-model AccessTokenBadRequestResponse {
-  @doc("BadRequest")
-  @statusCode
-  statusCode: 400;
-}
-
-@@doc(
-  RecoveryPointResource.name,
-  "RecoveryPointID represents the backed up data to be fetched."
-);
+@@doc(RecoveryPointResource.name, "Recovery Point Id");
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(
   RecoveryPointGetAccessToken.getAccessToken::parameters.body,

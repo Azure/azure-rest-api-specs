@@ -163,7 +163,7 @@
             "description": "The request has succeeded."
           },
           "202": {
-            "description": "Accepted (202) response for the cross region restore trigger operation."
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -342,14 +342,7 @@
             "description": "The request has succeeded."
           },
           "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
+            "description": "The request has been accepted for processing, but processing has not yet completed."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -433,28 +426,28 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fabricName",
             "in": "path",
-            "description": "The name of the BackupFabricResource",
+            "description": "Fabric name associated with the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "containerName",
             "in": "path",
-            "description": "The name of the ProtectionContainerResource",
+            "description": "Name of the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "protectedItemName",
             "in": "path",
-            "description": "The name of the ProtectedItemVirtualResource",
+            "description": "Name of the Protected Item.",
             "required": true,
             "type": "string"
           },
@@ -511,35 +504,35 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fabricName",
             "in": "path",
-            "description": "The name of the BackupFabricResource",
+            "description": "Fabric name associated with the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "containerName",
             "in": "path",
-            "description": "The name of the ProtectionContainerResource",
+            "description": "Name of the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "protectedItemName",
             "in": "path",
-            "description": "The name of the ProtectedItemVirtualResource",
+            "description": "Name of the Protected Item.",
             "required": true,
             "type": "string"
           },
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "description": "Recovery Point Id",
             "required": true,
             "type": "string"
           }
@@ -585,35 +578,35 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           },
           {
             "name": "fabricName",
             "in": "path",
-            "description": "The name of the BackupFabricResource",
+            "description": "Fabric name associated with the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "containerName",
             "in": "path",
-            "description": "The name of the ProtectionContainerResource",
+            "description": "Name of the container.",
             "required": true,
             "type": "string"
           },
           {
             "name": "protectedItemName",
             "in": "path",
-            "description": "The name of the ProtectedItemVirtualResource",
+            "description": "Name of the Protected Item.",
             "required": true,
             "type": "string"
           },
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "description": "Recovery Point Id",
             "required": true,
             "type": "string"
           },
@@ -635,8 +628,7 @@
             }
           },
           "400": {
-            "description": "BadRequest error response for the recovery point access token operation.",
-            "x-ms-error-response": true
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -803,7 +795,7 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           }
@@ -847,7 +839,7 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           },
@@ -900,7 +892,7 @@
           {
             "name": "vaultName",
             "in": "path",
-            "description": "The name of the VaultResource",
+            "description": "The name of the recovery services vault.",
             "required": true,
             "type": "string"
           },
@@ -967,10 +959,6 @@
           "$ref": "#/definitions/Resource"
         }
       ]
-    },
-    "AccessTokenBadRequestResponse": {
-      "type": "object",
-      "description": "BadRequest error response for the recovery point access token operation."
     },
     "Azure.Core.azureLocation": {
       "type": "string",
@@ -2167,7 +2155,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the BackupFabricResource",
+          "description": "Fabric name associated with the container.",
           "readOnly": true
         }
       },
@@ -2195,48 +2183,39 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "AzureIaasVM",
-            "value": "AzureIaasVM",
-            "description": "AzureIaasVM"
+            "value": "AzureIaasVM"
           },
           {
             "name": "MAB",
-            "value": "MAB",
-            "description": "MAB"
+            "value": "MAB"
           },
           {
             "name": "DPM",
-            "value": "DPM",
-            "description": "DPM"
+            "value": "DPM"
           },
           {
             "name": "AzureBackupServer",
-            "value": "AzureBackupServer",
-            "description": "AzureBackupServer"
+            "value": "AzureBackupServer"
           },
           {
             "name": "AzureSql",
-            "value": "AzureSql",
-            "description": "AzureSql"
+            "value": "AzureSql"
           },
           {
             "name": "AzureStorage",
-            "value": "AzureStorage",
-            "description": "AzureStorage"
+            "value": "AzureStorage"
           },
           {
             "name": "AzureWorkload",
-            "value": "AzureWorkload",
-            "description": "AzureWorkload"
+            "value": "AzureWorkload"
           },
           {
             "name": "DefaultBackup",
-            "value": "DefaultBackup",
-            "description": "DefaultBackup"
+            "value": "DefaultBackup"
           }
         ]
       }
@@ -2385,28 +2364,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "CreateCopy",
-            "value": "CreateCopy",
-            "description": "CreateCopy"
+            "value": "CreateCopy"
           },
           {
             "name": "Skip",
-            "value": "Skip",
-            "description": "Skip"
+            "value": "Skip"
           },
           {
             "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite"
+            "value": "Overwrite"
           },
           {
             "name": "FailOnConflict",
-            "value": "FailOnConflict",
-            "description": "FailOnConflict"
+            "value": "FailOnConflict"
           }
         ]
       }
@@ -2425,25 +2399,18 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Default",
-            "value": "Default",
-            "description": "Default"
+            "value": "Default"
           },
           {
             "name": "Recover",
-            "value": "Recover",
-            "description": "Recover"
+            "value": "Recover"
           }
         ]
       }
-    },
-    "CrossRegionRestoreAcceptedResponse": {
-      "type": "object",
-      "description": "Accepted (202) response for the cross region restore trigger operation."
     },
     "CrossRegionRestoreRequest": {
       "type": "object",
@@ -2757,78 +2724,63 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "VM",
-            "value": "VM",
-            "description": "VM"
+            "value": "VM"
           },
           {
             "name": "FileFolder",
-            "value": "FileFolder",
-            "description": "FileFolder"
+            "value": "FileFolder"
           },
           {
             "name": "AzureSqlDb",
-            "value": "AzureSqlDb",
-            "description": "AzureSqlDb"
+            "value": "AzureSqlDb"
           },
           {
             "name": "SQLDB",
-            "value": "SQLDB",
-            "description": "SQLDB"
+            "value": "SQLDB"
           },
           {
             "name": "Exchange",
-            "value": "Exchange",
-            "description": "Exchange"
+            "value": "Exchange"
           },
           {
             "name": "Sharepoint",
-            "value": "Sharepoint",
-            "description": "Sharepoint"
+            "value": "Sharepoint"
           },
           {
             "name": "VMwareVM",
-            "value": "VMwareVM",
-            "description": "VMwareVM"
+            "value": "VMwareVM"
           },
           {
             "name": "SystemState",
-            "value": "SystemState",
-            "description": "SystemState"
+            "value": "SystemState"
           },
           {
             "name": "Client",
-            "value": "Client",
-            "description": "Client"
+            "value": "Client"
           },
           {
             "name": "GenericDataSource",
-            "value": "GenericDataSource",
-            "description": "GenericDataSource"
+            "value": "GenericDataSource"
           },
           {
             "name": "SQLDataBase",
-            "value": "SQLDataBase",
-            "description": "SQLDataBase"
+            "value": "SQLDataBase"
           },
           {
             "name": "AzureFileShare",
-            "value": "AzureFileShare",
-            "description": "AzureFileShare"
+            "value": "AzureFileShare"
           },
           {
             "name": "SAPHanaDatabase",
-            "value": "SAPHanaDatabase",
-            "description": "SAPHanaDatabase"
+            "value": "SAPHanaDatabase"
           },
           {
             "name": "SAPAseDatabase",
-            "value": "SAPAseDatabase",
-            "description": "SAPAseDatabase"
+            "value": "SAPAseDatabase"
           }
         ]
       }
@@ -3132,23 +3084,19 @@
         "values": [
           {
             "name": "Passed",
-            "value": "Passed",
-            "description": "Passed"
+            "value": "Passed"
           },
           {
             "name": "ActionRequired",
-            "value": "ActionRequired",
-            "description": "ActionRequired"
+            "value": "ActionRequired"
           },
           {
             "name": "ActionSuggested",
-            "value": "ActionSuggested",
-            "description": "ActionSuggested"
+            "value": "ActionSuggested"
           },
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           }
         ]
       }
@@ -3168,23 +3116,19 @@
         "values": [
           {
             "name": "Passed",
-            "value": "Passed",
-            "description": "Passed"
+            "value": "Passed"
           },
           {
             "name": "ActionRequired",
-            "value": "ActionRequired",
-            "description": "ActionRequired"
+            "value": "ActionRequired"
           },
           {
             "name": "ActionSuggested",
-            "value": "ActionSuggested",
-            "description": "ActionSuggested"
+            "value": "ActionSuggested"
           },
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           }
         ]
       }
@@ -3486,58 +3430,47 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Register",
-            "value": "Register",
-            "description": "Register"
+            "value": "Register"
           },
           {
             "name": "UnRegister",
-            "value": "UnRegister",
-            "description": "UnRegister"
+            "value": "UnRegister"
           },
           {
             "name": "ConfigureBackup",
-            "value": "ConfigureBackup",
-            "description": "ConfigureBackup"
+            "value": "ConfigureBackup"
           },
           {
             "name": "Backup",
-            "value": "Backup",
-            "description": "Backup"
+            "value": "Backup"
           },
           {
             "name": "Restore",
-            "value": "Restore",
-            "description": "Restore"
+            "value": "Restore"
           },
           {
             "name": "DisableBackup",
-            "value": "DisableBackup",
-            "description": "DisableBackup"
+            "value": "DisableBackup"
           },
           {
             "name": "DeleteBackupData",
-            "value": "DeleteBackupData",
-            "description": "DeleteBackupData"
+            "value": "DeleteBackupData"
           },
           {
             "name": "CrossRegionRestore",
-            "value": "CrossRegionRestore",
-            "description": "CrossRegionRestore"
+            "value": "CrossRegionRestore"
           },
           {
             "name": "Undelete",
-            "value": "Undelete",
-            "description": "Undelete"
+            "value": "Undelete"
           },
           {
             "name": "UpdateCustomerManagedKey",
-            "value": "UpdateCustomerManagedKey",
-            "description": "UpdateCustomerManagedKey"
+            "value": "UpdateCustomerManagedKey"
           }
         ]
       }
@@ -3625,38 +3558,31 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress"
+            "value": "InProgress"
           },
           {
             "name": "Completed",
-            "value": "Completed",
-            "description": "Completed"
+            "value": "Completed"
           },
           {
             "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
+            "value": "Failed"
           },
           {
             "name": "CompletedWithWarnings",
-            "value": "CompletedWithWarnings",
-            "description": "CompletedWithWarnings"
+            "value": "CompletedWithWarnings"
           },
           {
             "name": "Cancelled",
-            "value": "Cancelled",
-            "description": "Cancelled"
+            "value": "Cancelled"
           },
           {
             "name": "Cancelling",
-            "value": "Cancelling",
-            "description": "Cancelling"
+            "value": "Cancelling"
           }
         ]
       }
@@ -3670,24 +3596,7 @@
       ],
       "x-ms-enum": {
         "name": "JobSupportedAction",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
-          },
-          {
-            "name": "Cancellable",
-            "value": "Cancellable",
-            "description": "Cancellable"
-          },
-          {
-            "name": "Retriable",
-            "value": "Retriable",
-            "description": "Retriable"
-          }
-        ]
+        "modelAsString": false
       }
     },
     "KEKDetails": {
@@ -3758,23 +3667,19 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Healthy",
-            "value": "Healthy",
-            "description": "Healthy"
+            "value": "Healthy"
           },
           {
             "name": "Unhealthy",
-            "value": "Unhealthy",
-            "description": "Unhealthy"
+            "value": "Unhealthy"
           },
           {
             "name": "IRPending",
-            "value": "IRPending",
-            "description": "IRPending"
+            "value": "IRPending"
           }
         ]
       }
@@ -3987,78 +3892,63 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Unknown",
-            "value": "Unknown",
-            "description": "Unknown"
+            "value": "Unknown"
           },
           {
             "name": "IaasVMContainer",
-            "value": "IaasVMContainer",
-            "description": "IaasVMContainer"
+            "value": "IaasVMContainer"
           },
           {
             "name": "IaasVMServiceContainer",
-            "value": "IaasVMServiceContainer",
-            "description": "IaasVMServiceContainer"
+            "value": "IaasVMServiceContainer"
           },
           {
             "name": "DPMContainer",
-            "value": "DPMContainer",
-            "description": "DPMContainer"
+            "value": "DPMContainer"
           },
           {
             "name": "AzureBackupServerContainer",
-            "value": "AzureBackupServerContainer",
-            "description": "AzureBackupServerContainer"
+            "value": "AzureBackupServerContainer"
           },
           {
             "name": "MABContainer",
-            "value": "MABContainer",
-            "description": "MABContainer"
+            "value": "MABContainer"
           },
           {
             "name": "Cluster",
-            "value": "Cluster",
-            "description": "Cluster"
+            "value": "Cluster"
           },
           {
             "name": "AzureSqlContainer",
-            "value": "AzureSqlContainer",
-            "description": "AzureSqlContainer"
+            "value": "AzureSqlContainer"
           },
           {
             "name": "Windows",
-            "value": "Windows",
-            "description": "Windows"
+            "value": "Windows"
           },
           {
             "name": "VCenter",
-            "value": "VCenter",
-            "description": "VCenter"
+            "value": "VCenter"
           },
           {
             "name": "VMAppContainer",
-            "value": "VMAppContainer",
-            "description": "VMAppContainer"
+            "value": "VMAppContainer"
           },
           {
             "name": "SQLAGWorkLoadContainer",
-            "value": "SQLAGWorkLoadContainer",
-            "description": "SQLAGWorkLoadContainer"
+            "value": "SQLAGWorkLoadContainer"
           },
           {
             "name": "StorageContainer",
-            "value": "StorageContainer",
-            "description": "StorageContainer"
+            "value": "StorageContainer"
           },
           {
             "name": "GenericContainer",
-            "value": "GenericContainer",
-            "description": "GenericContainer"
+            "value": "GenericContainer"
           }
         ]
       }
@@ -4282,28 +4172,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "InProgress",
-            "value": "InProgress",
-            "description": "InProgress"
+            "value": "InProgress"
           },
           {
             "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Succeeded"
+            "value": "Succeeded"
           },
           {
             "name": "Failed",
-            "value": "Failed",
-            "description": "Failed"
+            "value": "Failed"
           },
           {
             "name": "Canceled",
-            "value": "Canceled",
-            "description": "Canceled"
+            "value": "Canceled"
           }
         ]
       }
@@ -4322,18 +4207,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "FailOnConflict",
-            "value": "FailOnConflict",
-            "description": "FailOnConflict"
+            "value": "FailOnConflict"
           },
           {
             "name": "Overwrite",
-            "value": "Overwrite",
-            "description": "Overwrite"
+            "value": "Overwrite"
           }
         ]
       }
@@ -4445,28 +4327,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Healthy",
-            "value": "Healthy",
-            "description": "Healthy"
+            "value": "Healthy"
           },
           {
             "name": "Unhealthy",
-            "value": "Unhealthy",
-            "description": "Unhealthy"
+            "value": "Unhealthy"
           },
           {
             "name": "NotReachable",
-            "value": "NotReachable",
-            "description": "NotReachable"
+            "value": "NotReachable"
           },
           {
             "name": "IRPending",
-            "value": "IRPending",
-            "description": "IRPending"
+            "value": "IRPending"
           }
         ]
       }
@@ -4563,33 +4440,27 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "IRPending",
-            "value": "IRPending",
-            "description": "IRPending"
+            "value": "IRPending"
           },
           {
             "name": "Protected",
-            "value": "Protected",
-            "description": "Protected"
+            "value": "Protected"
           },
           {
             "name": "ProtectionError",
-            "value": "ProtectionError",
-            "description": "ProtectionError"
+            "value": "ProtectionError"
           },
           {
             "name": "ProtectionStopped",
-            "value": "ProtectionStopped",
-            "description": "ProtectionStopped"
+            "value": "ProtectionStopped"
           },
           {
             "name": "ProtectionPaused",
-            "value": "ProtectionPaused",
-            "description": "ProtectionPaused"
+            "value": "ProtectionPaused"
           }
         ]
       }
@@ -4600,7 +4471,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the ProtectedItemVirtualResource",
+          "description": "Name of the Protected Item.",
           "readOnly": true
         }
       },
@@ -4614,7 +4485,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the ProtectionContainerResource",
+          "description": "Name of the container.",
           "readOnly": true
         }
       },
@@ -4639,33 +4510,27 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "IRPending",
-            "value": "IRPending",
-            "description": "IRPending"
+            "value": "IRPending"
           },
           {
             "name": "Protected",
-            "value": "Protected",
-            "description": "Protected"
+            "value": "Protected"
           },
           {
             "name": "ProtectionError",
-            "value": "ProtectionError",
-            "description": "ProtectionError"
+            "value": "ProtectionError"
           },
           {
             "name": "ProtectionStopped",
-            "value": "ProtectionStopped",
-            "description": "ProtectionStopped"
+            "value": "ProtectionStopped"
           },
           {
             "name": "ProtectionPaused",
-            "value": "ProtectionPaused",
-            "description": "ProtectionPaused"
+            "value": "ProtectionPaused"
           }
         ]
       }
@@ -4684,18 +4549,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "FileRecovery",
-            "value": "FileRecovery",
-            "description": "FileRecovery"
+            "value": "FileRecovery"
           },
           {
             "name": "WorkloadRecovery",
-            "value": "WorkloadRecovery",
-            "description": "WorkloadRecovery"
+            "value": "WorkloadRecovery"
           }
         ]
       }
@@ -4858,34 +4720,7 @@
       ],
       "x-ms-enum": {
         "name": "RecoveryPointTierStatus",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
-          },
-          {
-            "name": "Valid",
-            "value": "Valid",
-            "description": "Valid"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "Disabled"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Deleted"
-          },
-          {
-            "name": "Rehydrated",
-            "value": "Rehydrated",
-            "description": "Rehydrated"
-          }
-        ]
+        "modelAsString": false
       }
     },
     "RecoveryPointTierType": {
@@ -4899,29 +4734,7 @@
       ],
       "x-ms-enum": {
         "name": "RecoveryPointTierType",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
-          },
-          {
-            "name": "InstantRP",
-            "value": "InstantRP",
-            "description": "InstantRP"
-          },
-          {
-            "name": "HardenedRP",
-            "value": "HardenedRP",
-            "description": "HardenedRP"
-          },
-          {
-            "name": "ArchivedRP",
-            "value": "ArchivedRP",
-            "description": "ArchivedRP"
-          }
-        ]
+        "modelAsString": false
       }
     },
     "RecoveryType": {
@@ -4940,28 +4753,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "OriginalLocation",
-            "value": "OriginalLocation",
-            "description": "OriginalLocation"
+            "value": "OriginalLocation"
           },
           {
             "name": "AlternateLocation",
-            "value": "AlternateLocation",
-            "description": "AlternateLocation"
+            "value": "AlternateLocation"
           },
           {
             "name": "RestoreDisks",
-            "value": "RestoreDisks",
-            "description": "RestoreDisks"
+            "value": "RestoreDisks"
           },
           {
             "name": "Offline",
-            "value": "Offline",
-            "description": "Offline"
+            "value": "Offline"
           }
         ]
       }
@@ -5049,33 +4857,27 @@
         "values": [
           {
             "name": "Healthy",
-            "value": "Healthy",
-            "description": "Healthy"
+            "value": "Healthy"
           },
           {
             "name": "TransientDegraded",
-            "value": "TransientDegraded",
-            "description": "TransientDegraded"
+            "value": "TransientDegraded"
           },
           {
             "name": "PersistentDegraded",
-            "value": "PersistentDegraded",
-            "description": "PersistentDegraded"
+            "value": "PersistentDegraded"
           },
           {
             "name": "TransientUnhealthy",
-            "value": "TransientUnhealthy",
-            "description": "TransientUnhealthy"
+            "value": "TransientUnhealthy"
           },
           {
             "name": "PersistentUnhealthy",
-            "value": "PersistentUnhealthy",
-            "description": "PersistentUnhealthy"
+            "value": "PersistentUnhealthy"
           },
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           }
         ]
       }
@@ -5126,38 +4928,31 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Full",
-            "value": "Full",
-            "description": "Full"
+            "value": "Full"
           },
           {
             "name": "Log",
-            "value": "Log",
-            "description": "Log"
+            "value": "Log"
           },
           {
             "name": "Differential",
-            "value": "Differential",
-            "description": "Differential"
+            "value": "Differential"
           },
           {
             "name": "FullAndDifferential",
-            "value": "FullAndDifferential",
-            "description": "FullAndDifferential"
+            "value": "FullAndDifferential"
           },
           {
             "name": "All",
-            "value": "All",
-            "description": "All"
+            "value": "All"
           },
           {
             "name": "Incremental",
-            "value": "Incremental",
-            "description": "Incremental"
+            "value": "Incremental"
           }
         ]
       }
@@ -5178,28 +4973,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Full",
-            "value": "Full",
-            "description": "Full"
+            "value": "Full"
           },
           {
             "name": "Log",
-            "value": "Log",
-            "description": "Log"
+            "value": "Log"
           },
           {
             "name": "Differential",
-            "value": "Differential",
-            "description": "Differential"
+            "value": "Differential"
           },
           {
             "name": "Incremental",
-            "value": "Incremental",
-            "description": "Incremental"
+            "value": "Incremental"
           }
         ]
       }
@@ -5232,18 +5022,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "FullShareRestore",
-            "value": "FullShareRestore",
-            "description": "FullShareRestore"
+            "value": "FullShareRestore"
           },
           {
             "name": "ItemLevelRestore",
-            "value": "ItemLevelRestore",
-            "description": "ItemLevelRestore"
+            "value": "ItemLevelRestore"
           }
         ]
       }
@@ -5302,18 +5089,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Data",
-            "value": "Data",
-            "description": "Data"
+            "value": "Data"
           },
           {
             "name": "Log",
-            "value": "Log",
-            "description": "Log"
+            "value": "Log"
           }
         ]
       }
@@ -5334,28 +5118,23 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "GeoRedundant",
-            "value": "GeoRedundant",
-            "description": "GeoRedundant"
+            "value": "GeoRedundant"
           },
           {
             "name": "LocallyRedundant",
-            "value": "LocallyRedundant",
-            "description": "LocallyRedundant"
+            "value": "LocallyRedundant"
           },
           {
             "name": "ZoneRedundant",
-            "value": "ZoneRedundant",
-            "description": "ZoneRedundant"
+            "value": "ZoneRedundant"
           },
           {
             "name": "ReadAccessGeoZoneRedundant",
-            "value": "ReadAccessGeoZoneRedundant",
-            "description": "ReadAccessGeoZoneRedundant"
+            "value": "ReadAccessGeoZoneRedundant"
           }
         ]
       }
@@ -5374,18 +5153,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "Locked",
-            "value": "Locked",
-            "description": "Locked"
+            "value": "Locked"
           },
           {
             "name": "Unlocked",
-            "value": "Unlocked",
-            "description": "Unlocked"
+            "value": "Unlocked"
           }
         ]
       }
@@ -5440,18 +5216,15 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "BackupProtectedItemCountSummary",
-            "value": "BackupProtectedItemCountSummary",
-            "description": "BackupProtectedItemCountSummary"
+            "value": "BackupProtectedItemCountSummary"
           },
           {
             "name": "BackupProtectionContainerCountSummary",
-            "value": "BackupProtectionContainerCountSummary",
-            "description": "BackupProtectionContainerCountSummary"
+            "value": "BackupProtectionContainerCountSummary"
           }
         ]
       }
@@ -5473,33 +5246,27 @@
         "values": [
           {
             "name": "Count",
-            "value": "Count",
-            "description": "Count"
+            "value": "Count"
           },
           {
             "name": "Bytes",
-            "value": "Bytes",
-            "description": "Bytes"
+            "value": "Bytes"
           },
           {
             "name": "Seconds",
-            "value": "Seconds",
-            "description": "Seconds"
+            "value": "Seconds"
           },
           {
             "name": "Percent",
-            "value": "Percent",
-            "description": "Percent"
+            "value": "Percent"
           },
           {
             "name": "CountPerSecond",
-            "value": "CountPerSecond",
-            "description": "CountPerSecond"
+            "value": "CountPerSecond"
           },
           {
             "name": "BytesPerSecond",
-            "value": "BytesPerSecond",
-            "description": "BytesPerSecond"
+            "value": "BytesPerSecond"
           }
         ]
       }
@@ -5510,7 +5277,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the VaultResource",
+          "description": "The name of the recovery services vault.",
           "readOnly": true
         }
       },
@@ -5585,78 +5352,63 @@
         "values": [
           {
             "name": "Invalid",
-            "value": "Invalid",
-            "description": "Invalid"
+            "value": "Invalid"
           },
           {
             "name": "VM",
-            "value": "VM",
-            "description": "VM"
+            "value": "VM"
           },
           {
             "name": "FileFolder",
-            "value": "FileFolder",
-            "description": "FileFolder"
+            "value": "FileFolder"
           },
           {
             "name": "AzureSqlDb",
-            "value": "AzureSqlDb",
-            "description": "AzureSqlDb"
+            "value": "AzureSqlDb"
           },
           {
             "name": "SQLDB",
-            "value": "SQLDB",
-            "description": "SQLDB"
+            "value": "SQLDB"
           },
           {
             "name": "Exchange",
-            "value": "Exchange",
-            "description": "Exchange"
+            "value": "Exchange"
           },
           {
             "name": "Sharepoint",
-            "value": "Sharepoint",
-            "description": "Sharepoint"
+            "value": "Sharepoint"
           },
           {
             "name": "VMwareVM",
-            "value": "VMwareVM",
-            "description": "VMwareVM"
+            "value": "VMwareVM"
           },
           {
             "name": "SystemState",
-            "value": "SystemState",
-            "description": "SystemState"
+            "value": "SystemState"
           },
           {
             "name": "Client",
-            "value": "Client",
-            "description": "Client"
+            "value": "Client"
           },
           {
             "name": "GenericDataSource",
-            "value": "GenericDataSource",
-            "description": "GenericDataSource"
+            "value": "GenericDataSource"
           },
           {
             "name": "SQLDataBase",
-            "value": "SQLDataBase",
-            "description": "SQLDataBase"
+            "value": "SQLDataBase"
           },
           {
             "name": "AzureFileShare",
-            "value": "AzureFileShare",
-            "description": "AzureFileShare"
+            "value": "AzureFileShare"
           },
           {
             "name": "SAPHanaDatabase",
-            "value": "SAPHanaDatabase",
-            "description": "SAPHanaDatabase"
+            "value": "SAPHanaDatabase"
           },
           {
             "name": "SAPAseDatabase",
-            "value": "SAPAseDatabase",
-            "description": "SAPAseDatabase"
+            "value": "SAPAseDatabase"
           }
         ]
       }

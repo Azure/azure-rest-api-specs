@@ -16,35 +16,11 @@ namespace Microsoft.RecoveryServices;
  */
 union UsagesUnit {
   string,
-
-  /**
-   * Count
-   */
   Count: "Count",
-
-  /**
-   * Bytes
-   */
   Bytes: "Bytes",
-
-  /**
-   * Seconds
-   */
   Seconds: "Seconds",
-
-  /**
-   * Percent
-   */
   Percent: "Percent",
-
-  /**
-   * CountPerSecond
-   */
   CountPerSecond: "CountPerSecond",
-
-  /**
-   * BytesPerSecond
-   */
   BytesPerSecond: "BytesPerSecond",
 }
 
@@ -53,50 +29,14 @@ union UsagesUnit {
  */
 union BackupManagementType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * AzureIaasVM
-   */
   AzureIaasVM: "AzureIaasVM",
-
-  /**
-   * MAB
-   */
   MAB: "MAB",
-
-  /**
-   * DPM
-   */
   DPM: "DPM",
-
-  /**
-   * AzureBackupServer
-   */
   AzureBackupServer: "AzureBackupServer",
-
-  /**
-   * AzureSql
-   */
   AzureSql: "AzureSql",
-
-  /**
-   * AzureStorage
-   */
   AzureStorage: "AzureStorage",
-
-  /**
-   * AzureWorkload
-   */
   AzureWorkload: "AzureWorkload",
-
-  /**
-   * DefaultBackup
-   */
   DefaultBackup: "DefaultBackup",
 }
 
@@ -105,30 +45,10 @@ union BackupManagementType {
  */
 union OperationStatusValues {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * InProgress
-   */
   InProgress: "InProgress",
-
-  /**
-   * Succeeded
-   */
   Succeeded: "Succeeded",
-
-  /**
-   * Failed
-   */
   Failed: "Failed",
-
-  /**
-   * Canceled
-   */
   Canceled: "Canceled",
 }
 
@@ -137,30 +57,10 @@ union OperationStatusValues {
  */
 union StorageType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * GeoRedundant
-   */
   GeoRedundant: "GeoRedundant",
-
-  /**
-   * LocallyRedundant
-   */
   LocallyRedundant: "LocallyRedundant",
-
-  /**
-   * ZoneRedundant
-   */
   ZoneRedundant: "ZoneRedundant",
-
-  /**
-   * ReadAccessGeoZoneRedundant
-   */
   ReadAccessGeoZoneRedundant: "ReadAccessGeoZoneRedundant",
 }
 
@@ -169,20 +69,8 @@ union StorageType {
  */
 union StorageTypeState {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Locked
-   */
   Locked: "Locked",
-
-  /**
-   * Unlocked
-   */
   Unlocked: "Unlocked",
 }
 
@@ -191,80 +79,20 @@ union StorageTypeState {
  */
 union DataSourceType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * VM
-   */
   VM: "VM",
-
-  /**
-   * FileFolder
-   */
   FileFolder: "FileFolder",
-
-  /**
-   * AzureSqlDb
-   */
   AzureSqlDb: "AzureSqlDb",
-
-  /**
-   * SQLDB
-   */
   SQLDB: "SQLDB",
-
-  /**
-   * Exchange
-   */
   Exchange: "Exchange",
-
-  /**
-   * Sharepoint
-   */
   Sharepoint: "Sharepoint",
-
-  /**
-   * VMwareVM
-   */
   VMwareVM: "VMwareVM",
-
-  /**
-   * SystemState
-   */
   SystemState: "SystemState",
-
-  /**
-   * Client
-   */
   Client: "Client",
-
-  /**
-   * GenericDataSource
-   */
   GenericDataSource: "GenericDataSource",
-
-  /**
-   * SQLDataBase
-   */
   SQLDataBase: "SQLDataBase",
-
-  /**
-   * AzureFileShare
-   */
   AzureFileShare: "AzureFileShare",
-
-  /**
-   * SAPHanaDatabase
-   */
   SAPHanaDatabase: "SAPHanaDatabase",
-
-  /**
-   * SAPAseDatabase
-   */
   SAPAseDatabase: "SAPAseDatabase",
 }
 
@@ -273,20 +101,8 @@ union DataSourceType {
  */
 union CreateMode {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Default
-   */
   Default: "Default",
-
-  /**
-   * Recover
-   */
   Recover: "Recover",
 }
 
@@ -295,20 +111,8 @@ union CreateMode {
  */
 union Type {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * BackupProtectedItemCountSummary
-   */
   BackupProtectedItemCountSummary: "BackupProtectedItemCountSummary",
-
-  /**
-   * BackupProtectionContainerCountSummary
-   */
   BackupProtectionContainerCountSummary: "BackupProtectionContainerCountSummary",
 }
 
@@ -317,35 +121,11 @@ union Type {
  */
 union ProtectionState {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * IRPending
-   */
   IRPending: "IRPending",
-
-  /**
-   * Protected
-   */
   Protected: "Protected",
-
-  /**
-   * ProtectionError
-   */
   ProtectionError: "ProtectionError",
-
-  /**
-   * ProtectionStopped
-   */
   ProtectionStopped: "ProtectionStopped",
-
-  /**
-   * ProtectionPaused
-   */
   ProtectionPaused: "ProtectionPaused",
 }
 
@@ -354,25 +134,9 @@ union ProtectionState {
  */
 union HealthStatus {
   string,
-
-  /**
-   * Passed
-   */
   Passed: "Passed",
-
-  /**
-   * ActionRequired
-   */
   ActionRequired: "ActionRequired",
-
-  /**
-   * ActionSuggested
-   */
   ActionSuggested: "ActionSuggested",
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
 }
 
@@ -381,35 +145,11 @@ union HealthStatus {
  */
 union ResourceHealthStatus {
   string,
-
-  /**
-   * Healthy
-   */
   Healthy: "Healthy",
-
-  /**
-   * TransientDegraded
-   */
   TransientDegraded: "TransientDegraded",
-
-  /**
-   * PersistentDegraded
-   */
   PersistentDegraded: "PersistentDegraded",
-
-  /**
-   * TransientUnhealthy
-   */
   TransientUnhealthy: "TransientUnhealthy",
-
-  /**
-   * PersistentUnhealthy
-   */
   PersistentUnhealthy: "PersistentUnhealthy",
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
 }
 
@@ -418,30 +158,10 @@ union ResourceHealthStatus {
  */
 union RecoveryType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * OriginalLocation
-   */
   OriginalLocation: "OriginalLocation",
-
-  /**
-   * AlternateLocation
-   */
   AlternateLocation: "AlternateLocation",
-
-  /**
-   * RestoreDisks
-   */
   RestoreDisks: "RestoreDisks",
-
-  /**
-   * Offline
-   */
   Offline: "Offline",
 }
 
@@ -450,30 +170,10 @@ union RecoveryType {
  */
 union CopyOptions {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * CreateCopy
-   */
   CreateCopy: "CreateCopy",
-
-  /**
-   * Skip
-   */
   Skip: "Skip",
-
-  /**
-   * Overwrite
-   */
   Overwrite: "Overwrite",
-
-  /**
-   * FailOnConflict
-   */
   FailOnConflict: "FailOnConflict",
 }
 
@@ -482,20 +182,8 @@ union CopyOptions {
  */
 union RestoreRequestType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * FullShareRestore
-   */
   FullShareRestore: "FullShareRestore",
-
-  /**
-   * ItemLevelRestore
-   */
   ItemLevelRestore: "ItemLevelRestore",
 }
 
@@ -504,35 +192,11 @@ union RestoreRequestType {
  */
 union ProtectedItemState {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * IRPending
-   */
   IRPending: "IRPending",
-
-  /**
-   * Protected
-   */
   Protected: "Protected",
-
-  /**
-   * ProtectionError
-   */
   ProtectionError: "ProtectionError",
-
-  /**
-   * ProtectionStopped
-   */
   ProtectionStopped: "ProtectionStopped",
-
-  /**
-   * ProtectionPaused
-   */
   ProtectionPaused: "ProtectionPaused",
 }
 
@@ -541,25 +205,9 @@ union ProtectedItemState {
  */
 union LastBackupStatus {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Healthy
-   */
   Healthy: "Healthy",
-
-  /**
-   * Unhealthy
-   */
   Unhealthy: "Unhealthy",
-
-  /**
-   * IRPending
-   */
   IRPending: "IRPending",
 }
 
@@ -568,30 +216,10 @@ union LastBackupStatus {
  */
 union ProtectedItemHealthStatus {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Healthy
-   */
   Healthy: "Healthy",
-
-  /**
-   * Unhealthy
-   */
   Unhealthy: "Unhealthy",
-
-  /**
-   * NotReachable
-   */
   NotReachable: "NotReachable",
-
-  /**
-   * IRPending
-   */
   IRPending: "IRPending",
 }
 
@@ -600,30 +228,10 @@ union ProtectedItemHealthStatus {
  */
 union RestorePointType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Full
-   */
   Full: "Full",
-
-  /**
-   * Log
-   */
   Log: "Log",
-
-  /**
-   * Differential
-   */
   Differential: "Differential",
-
-  /**
-   * Incremental
-   */
   Incremental: "Incremental",
 }
 
@@ -632,20 +240,8 @@ union RestorePointType {
  */
 union OverwriteOptions {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * FailOnConflict
-   */
   FailOnConflict: "FailOnConflict",
-
-  /**
-   * Overwrite
-   */
   Overwrite: "Overwrite",
 }
 
@@ -654,20 +250,8 @@ union OverwriteOptions {
  */
 union RecoveryMode {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * FileRecovery
-   */
   FileRecovery: "FileRecovery",
-
-  /**
-   * WorkloadRecovery
-   */
   WorkloadRecovery: "WorkloadRecovery",
 }
 
@@ -676,20 +260,8 @@ union RecoveryMode {
  */
 union SQLDataDirectoryType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Data
-   */
   Data: "Data",
-
-  /**
-   * Log
-   */
   Log: "Log",
 }
 
@@ -698,40 +270,12 @@ union SQLDataDirectoryType {
  */
 union RestorePointQueryType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Full
-   */
   Full: "Full",
-
-  /**
-   * Log
-   */
   Log: "Log",
-
-  /**
-   * Differential
-   */
   Differential: "Differential",
-
-  /**
-   * FullAndDifferential
-   */
   FullAndDifferential: "FullAndDifferential",
-
-  /**
-   * All
-   */
   All: "All",
-
-  /**
-   * Incremental
-   */
   Incremental: "Incremental",
 }
 
@@ -740,40 +284,12 @@ union RestorePointQueryType {
  */
 union JobStatus {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * InProgress
-   */
   InProgress: "InProgress",
-
-  /**
-   * Completed
-   */
   Completed: "Completed",
-
-  /**
-   * Failed
-   */
   Failed: "Failed",
-
-  /**
-   * CompletedWithWarnings
-   */
   CompletedWithWarnings: "CompletedWithWarnings",
-
-  /**
-   * Cancelled
-   */
   Cancelled: "Cancelled",
-
-  /**
-   * Cancelling
-   */
   Cancelling: "Cancelling",
 }
 
@@ -782,60 +298,16 @@ union JobStatus {
  */
 union JobOperationType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Register
-   */
   Register: "Register",
-
-  /**
-   * UnRegister
-   */
   UnRegister: "UnRegister",
-
-  /**
-   * ConfigureBackup
-   */
   ConfigureBackup: "ConfigureBackup",
-
-  /**
-   * Backup
-   */
   Backup: "Backup",
-
-  /**
-   * Restore
-   */
   Restore: "Restore",
-
-  /**
-   * DisableBackup
-   */
   DisableBackup: "DisableBackup",
-
-  /**
-   * DeleteBackupData
-   */
   DeleteBackupData: "DeleteBackupData",
-
-  /**
-   * CrossRegionRestore
-   */
   CrossRegionRestore: "CrossRegionRestore",
-
-  /**
-   * Undelete
-   */
   Undelete: "Undelete",
-
-  /**
-   * UpdateCustomerManagedKey
-   */
   UpdateCustomerManagedKey: "UpdateCustomerManagedKey",
 }
 
@@ -844,80 +316,20 @@ union JobOperationType {
  */
 union MabServerType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * Unknown
-   */
   Unknown: "Unknown",
-
-  /**
-   * IaasVMContainer
-   */
   IaasVMContainer: "IaasVMContainer",
-
-  /**
-   * IaasVMServiceContainer
-   */
   IaasVMServiceContainer: "IaasVMServiceContainer",
-
-  /**
-   * DPMContainer
-   */
   DPMContainer: "DPMContainer",
-
-  /**
-   * AzureBackupServerContainer
-   */
   AzureBackupServerContainer: "AzureBackupServerContainer",
-
-  /**
-   * MABContainer
-   */
   MABContainer: "MABContainer",
-
-  /**
-   * Cluster
-   */
   Cluster: "Cluster",
-
-  /**
-   * AzureSqlContainer
-   */
   AzureSqlContainer: "AzureSqlContainer",
-
-  /**
-   * Windows
-   */
   Windows: "Windows",
-
-  /**
-   * VCenter
-   */
   VCenter: "VCenter",
-
-  /**
-   * VMAppContainer
-   */
   VMAppContainer: "VMAppContainer",
-
-  /**
-   * SQLAGWorkLoadContainer
-   */
   SQLAGWorkLoadContainer: "SQLAGWorkLoadContainer",
-
-  /**
-   * StorageContainer
-   */
   StorageContainer: "StorageContainer",
-
-  /**
-   * GenericContainer
-   */
   GenericContainer: "GenericContainer",
 }
 
@@ -926,80 +338,20 @@ union MabServerType {
  */
 union WorkloadType {
   string,
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
-
-  /**
-   * VM
-   */
   VM: "VM",
-
-  /**
-   * FileFolder
-   */
   FileFolder: "FileFolder",
-
-  /**
-   * AzureSqlDb
-   */
   AzureSqlDb: "AzureSqlDb",
-
-  /**
-   * SQLDB
-   */
   SQLDB: "SQLDB",
-
-  /**
-   * Exchange
-   */
   Exchange: "Exchange",
-
-  /**
-   * Sharepoint
-   */
   Sharepoint: "Sharepoint",
-
-  /**
-   * VMwareVM
-   */
   VMwareVM: "VMwareVM",
-
-  /**
-   * SystemState
-   */
   SystemState: "SystemState",
-
-  /**
-   * Client
-   */
   Client: "Client",
-
-  /**
-   * GenericDataSource
-   */
   GenericDataSource: "GenericDataSource",
-
-  /**
-   * SQLDataBase
-   */
   SQLDataBase: "SQLDataBase",
-
-  /**
-   * AzureFileShare
-   */
   AzureFileShare: "AzureFileShare",
-
-  /**
-   * SAPHanaDatabase
-   */
   SAPHanaDatabase: "SAPHanaDatabase",
-
-  /**
-   * SAPAseDatabase
-   */
   SAPAseDatabase: "SAPAseDatabase",
 }
 
@@ -1008,44 +360,17 @@ union WorkloadType {
  */
 union HealthState {
   string,
-
-  /**
-   * Passed
-   */
   Passed: "Passed",
-
-  /**
-   * ActionRequired
-   */
   ActionRequired: "ActionRequired",
-
-  /**
-   * ActionSuggested
-   */
   ActionSuggested: "ActionSuggested",
-
-  /**
-   * Invalid
-   */
   Invalid: "Invalid",
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum JobSupportedAction {
-  /**
-   * Invalid
-   */
   Invalid,
-
-  /**
-   * Cancellable
-   */
   Cancellable,
-
-  /**
-   * Retriable
-   */
   Retriable,
 }
 
@@ -1054,24 +379,9 @@ enum JobSupportedAction {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RecoveryPointTierType {
-  /**
-   * Invalid
-   */
   Invalid,
-
-  /**
-   * InstantRP
-   */
   InstantRP,
-
-  /**
-   * HardenedRP
-   */
   HardenedRP,
-
-  /**
-   * ArchivedRP
-   */
   ArchivedRP,
 }
 
@@ -1080,29 +390,10 @@ enum RecoveryPointTierType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RecoveryPointTierStatus {
-  /**
-   * Invalid
-   */
   Invalid,
-
-  /**
-   * Valid
-   */
   Valid,
-
-  /**
-   * Disabled
-   */
   Disabled,
-
-  /**
-   * Deleted
-   */
   Deleted,
-
-  /**
-   * Rehydrated
-   */
   Rehydrated,
 }
 

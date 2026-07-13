@@ -56,3 +56,8 @@ model ProtectedItemVirtualResource {
     ""
   >;
 }
+
+@@doc(VaultResource.name, "The name of the recovery services vault.");
+@@doc(BackupFabricResource.name, "Fabric name associated with the container.");
+@@doc(ProtectionContainerResource.name, "Name of the container.");
+@@doc(ProtectedItemVirtualResource.name, "Name of the Protected Item.");

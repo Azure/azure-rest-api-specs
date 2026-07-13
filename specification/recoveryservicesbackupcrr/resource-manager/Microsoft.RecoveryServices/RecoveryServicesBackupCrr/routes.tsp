@@ -117,15 +117,7 @@ interface CrossRegionRestoreOperationGroup {
      */
     @body
     parameters: CrossRegionRestoreRequest,
-  ): OkResponse | CrossRegionRestoreAcceptedResponse | ErrorResponse;
-}
-
-/**
- * Accepted (202) response for the cross region restore trigger operation.
- */
-model CrossRegionRestoreAcceptedResponse {
-  @statusCode
-  statusCode: 202;
+  ): OkResponse | AcceptedResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -223,7 +215,7 @@ interface CrrOperationResultsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @path
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | ErrorResponse;
+  ): OkResponse | AcceptedResponse | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
