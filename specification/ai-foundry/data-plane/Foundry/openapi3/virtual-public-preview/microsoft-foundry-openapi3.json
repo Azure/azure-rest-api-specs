@@ -969,130 +969,6 @@
         ]
       }
     },
-    "/agents/endpoint/protocols/invocations_ws": {
-      "get": {
-        "operationId": "AgentWebsocket_connectEndpointWebsocket",
-        "summary": "Establish a WebSocket connection to a hosted agent",
-        "description": "Establishes a WebSocket connection to a hosted agent. The target project and\nagent are passed as query parameters. The service resolves (or creates) a\nsession, resolves the agent version, then relays text and binary frames\nbidirectionally between the client and the agent (1 MB maximum frame size).\n\nThe client must send an HTTP GET with `Upgrade: websocket` headers.",
-        "parameters": [
-          {
-            "name": "project_name",
-            "in": "query",
-            "required": true,
-            "description": "The name of the project.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "agent_name",
-            "in": "query",
-            "required": true,
-            "description": "The name of the hosted agent.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "agent_session_id",
-            "in": "query",
-            "required": false,
-            "description": "Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          },
-          {
-            "name": "foundry_features",
-            "in": "query",
-            "required": false,
-            "description": "Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/AgentDefinitionOptInKeys"
-              },
-              "default": [
-                "HostedAgents=V1Preview"
-              ]
-            },
-            "explode": false
-          },
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "HostedAgents=V1Preview"
-              ]
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-agent-session-id": {
-                "required": true,
-                "description": "Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Agent Invocations WebSocket"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "HostedAgents=V1Preview"
-          ]
-        }
-      }
-    },
     "/agents/{agent_name}": {
       "get": {
         "operationId": "Agents_getAgent",
@@ -1836,6 +1712,86 @@
           },
           "description": "Optional request body."
         }
+      }
+    },
+    "/agents/{agent_name}/endpoint/protocols/invocations_ws": {
+      "get": {
+        "operationId": "AgentWebsocket_connectEndpointWebsocket",
+        "summary": "Establish a WebSocket connection to a hosted agent",
+        "description": "Establishes a WebSocket connection to a hosted agent. The target agent is a\npath segment and the project is taken from the endpoint, mirroring the HTTP\n`/invocations` route. The service resolves (or creates) a session, resolves\nthe agent version, then relays text and binary frames bidirectionally\nbetween the client and the agent (1 MB maximum frame size).\n\nThe client must send an HTTP GET with `Upgrade: websocket` headers.",
+        "parameters": [
+          {
+            "name": "agent_name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the hosted agent.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "agent_session_id",
+            "in": "query",
+            "required": false,
+            "description": "Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-agent-session-id": {
+                "required": true,
+                "description": "Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Agent Invocations WebSocket"
+        ]
       }
     },
     "/agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}": {
@@ -21625,6 +21581,16 @@
                       "type": "string",
                       "description": "The model deployment to use for the creation of this response."
                     },
+                    "reasoning": {
+                      "anyOf": [
+                        {
+                          "$ref": "#/components/schemas/OpenAI.Reasoning"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ]
+                    },
                     "background": {
                       "anyOf": [
                         {
@@ -21747,16 +21713,6 @@
                         "$ref": "#/components/schemas/OpenAI.OutputItem"
                       },
                       "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
-                    },
-                    "reasoning": {
-                      "anyOf": [
-                        {
-                          "$ref": "#/components/schemas/OpenAI.Reasoning"
-                        },
-                        {
-                          "type": "null"
-                        }
-                      ]
                     },
                     "instructions": {
                       "anyOf": [
@@ -21991,6 +21947,16 @@
                     "type": "string",
                     "description": "The model deployment to use for the creation of this response."
                   },
+                  "reasoning": {
+                    "anyOf": [
+                      {
+                        "$ref": "#/components/schemas/OpenAI.Reasoning"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
                   "background": {
                     "anyOf": [
                       {
@@ -22043,18 +22009,7 @@
                         "type": "null"
                       }
                     ],
-                    "deprecated": true,
                     "default": "disabled"
-                  },
-                  "reasoning": {
-                    "anyOf": [
-                      {
-                        "$ref": "#/components/schemas/OpenAI.Reasoning"
-                      },
-                      {
-                        "type": "null"
-                      }
-                    ]
                   },
                   "input": {
                     "$ref": "#/components/schemas/OpenAI.InputParam"
@@ -41738,7 +41693,7 @@
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
           },
           "connector_id": {
             "type": "string",
@@ -41752,12 +41707,7 @@
               "connector_outlookemail",
               "connector_sharepoint"
             ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
-          },
-          "tunnel_id": {
-            "type": "string",
-            "pattern": "^tunnel_[a-z0-9]{32}$",
-            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
           },
           "authorization": {
             "type": "string",
@@ -49041,8 +48991,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -49221,14 +49170,7 @@
             ]
           },
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "tools": {
             "type": "array",
@@ -49570,14 +49512,7 @@
             "$ref": "#/components/schemas/OpenAI.Verbosity"
           },
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "max_completion_tokens": {
             "anyOf": [
@@ -50818,14 +50753,7 @@
         "type": "object",
         "properties": {
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "temperature": {
             "allOf": [
@@ -51092,14 +51020,7 @@
         "type": "object",
         "properties": {
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "temperature": {
             "allOf": [
@@ -52533,14 +52454,7 @@
             "x-oaiTypeLabel": "string"
           },
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "instructions": {
             "anyOf": [
@@ -55029,14 +54943,7 @@
             ]
           },
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           }
         }
       },
@@ -55477,8 +55384,7 @@
               {
                 "type": "null"
               }
-            ],
-            "description": "Optional reasoning effort parameter. This is a query parameter used to select responses."
+            ]
           },
           "temperature": {
             "anyOf": [
@@ -60680,8 +60586,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -62838,8 +62743,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -65380,8 +65284,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -65635,8 +65538,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -66409,7 +66311,7 @@
           "server_url": {
             "type": "string",
             "format": "uri",
-            "description": "The URL for the MCP server. One of `server_url`, `connector_id`, or\n  `tunnel_id` must be provided."
+            "description": "The URL for the MCP server. One of `server_url` or `connector_id` must be\n  provided."
           },
           "connector_id": {
             "type": "string",
@@ -66423,12 +66325,7 @@
               "connector_outlookemail",
               "connector_sharepoint"
             ],
-            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more\n  about service connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
-          },
-          "tunnel_id": {
-            "type": "string",
-            "pattern": "^tunnel_[a-z0-9]{32}$",
-            "description": "The Secure MCP Tunnel ID to use instead of a direct server URL. One of\n  `server_url`, `connector_id`, or `tunnel_id` must be provided."
+            "description": "Identifier for service connectors, like those available in ChatGPT. One of\n  `server_url` or `connector_id` must be provided. Learn more about service\n  connectors [here](/docs/guides/tools-remote-mcp#connectors).\n  Currently supported `connector_id` values are:\n  - Dropbox: `connector_dropbox`\n  - Gmail: `connector_gmail`\n  - Google Calendar: `connector_googlecalendar`\n  - Google Drive: `connector_googledrive`\n  - Microsoft Teams: `connector_microsoftteams`\n  - Outlook Calendar: `connector_outlookcalendar`\n  - Outlook Email: `connector_outlookemail`\n  - SharePoint: `connector_sharepoint`"
           },
           "authorization": {
             "type": "string",
@@ -67770,14 +67667,7 @@
             "description": "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models) for descriptions of them."
           },
           "reasoning_effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "name": {
             "anyOf": [
@@ -69963,8 +69853,7 @@
               "in_progress",
               "searching",
               "completed",
-              "failed",
-              "incomplete"
+              "failed"
             ],
             "description": "The status of the web search tool call."
           },
@@ -72784,14 +72673,7 @@
         "type": "object",
         "properties": {
           "effort": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
-              },
-              {
-                "type": "null"
-              }
-            ]
+            "$ref": "#/components/schemas/OpenAI.ReasoningEffort"
           },
           "summary": {
             "anyOf": [
@@ -72801,21 +72683,6 @@
                   "auto",
                   "concise",
                   "detailed"
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "context": {
-            "anyOf": [
-              {
-                "type": "string",
-                "enum": [
-                  "auto",
-                  "current_turn",
-                  "all_turns"
                 ]
               },
               {
@@ -72845,9 +72712,6 @@
       "OpenAI.ReasoningEffort": {
         "anyOf": [
           {
-            "type": "string"
-          },
-          {
             "type": "string",
             "enum": [
               "none",
@@ -72857,6 +72721,9 @@
               "high",
               "xhigh"
             ]
+          },
+          {
+            "type": "null"
           }
         ],
         "description": "Constrains effort on reasoning for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).\nCurrently supported values are `none`, `minimal`, `low`, `medium`, `high`, and `xhigh`. Reducing\nreasoning effort can result in faster responses and fewer tokens used\non reasoning in a response.\n- `gpt-5.1` defaults to `none`, which does not perform reasoning. The supported reasoning values for `gpt-5.1` are `none`, `low`, `medium`, and `high`. Tool calls are supported for all reasoning values in gpt-5.1.\n- All models before `gpt-5.1` default to `medium` reasoning effort, and do not support `none`.\n- The `gpt-5-pro` model defaults to (and only supports) `high` reasoning effort.\n- `xhigh` is supported for all models after `gpt-5.1-codex-max`."
@@ -72986,6 +72853,16 @@
             "type": "string",
             "description": "The model deployment to use for the creation of this response."
           },
+          "reasoning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OpenAI.Reasoning"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "background": {
             "anyOf": [
               {
@@ -73108,16 +72985,6 @@
               "$ref": "#/components/schemas/OpenAI.OutputItem"
             },
             "description": "An array of content items generated by the model.\n  - The length and order of items in the `output` array is dependent\n  on the model's response.\n  - Rather than accessing the first item in the `output` array and\n  assuming it's an `assistant` message with the content generated by\n  the model, you might consider using the `output_text` property where\n  supported in SDKs."
-          },
-          "reasoning": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/OpenAI.Reasoning"
-              },
-              {
-                "type": "null"
-              }
-            ]
           },
           "instructions": {
             "anyOf": [

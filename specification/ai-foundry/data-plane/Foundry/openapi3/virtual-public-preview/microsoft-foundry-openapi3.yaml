@@ -633,94 +633,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Agents
-  /agents/endpoint/protocols/invocations_ws:
-    get:
-      operationId: AgentWebsocket_connectEndpointWebsocket
-      summary: Establish a WebSocket connection to a hosted agent
-      description: |-
-        Establishes a WebSocket connection to a hosted agent. The target project and
-        agent are passed as query parameters. The service resolves (or creates) a
-        session, resolves the agent version, then relays text and binary frames
-        bidirectionally between the client and the agent (1 MB maximum frame size).
-
-        The client must send an HTTP GET with `Upgrade: websocket` headers.
-      parameters:
-        - name: project_name
-          in: query
-          required: true
-          description: The name of the project.
-          schema:
-            type: string
-          explode: false
-        - name: agent_name
-          in: query
-          required: true
-          description: The name of the hosted agent.
-          schema:
-            type: string
-          explode: false
-        - name: agent_session_id
-          in: query
-          required: false
-          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
-          schema:
-            type: string
-          explode: false
-        - name: foundry_features
-          in: query
-          required: false
-          description: Preview feature flag, accepted as an alternative to the `Foundry-Features` header for browser clients that cannot set custom headers. Either this query parameter or the header must be supplied with the value `HostedAgents=V1Preview`.
-          schema:
-            type: array
-            items:
-              $ref: '#/components/schemas/AgentDefinitionOptInKeys'
-            default:
-              - HostedAgents=V1Preview
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - HostedAgents=V1Preview
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          headers:
-            x-agent-session-id:
-              required: true
-              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema: {}
-        4XX:
-          description: Client error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-        5XX:
-          description: Server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiErrorResponse'
-      tags:
-        - Agent Invocations WebSocket
-      x-ms-foundry-meta:
-        required_previews:
-          - HostedAgents=V1Preview
   /agents/{agent_name}:
     get:
       operationId: Agents_getAgent
@@ -1231,6 +1143,65 @@ paths:
           '*/*':
             schema: {}
         description: Optional request body.
+  /agents/{agent_name}/endpoint/protocols/invocations_ws:
+    get:
+      operationId: AgentWebsocket_connectEndpointWebsocket
+      summary: Establish a WebSocket connection to a hosted agent
+      description: |-
+        Establishes a WebSocket connection to a hosted agent. The target agent is a
+        path segment and the project is taken from the endpoint, mirroring the HTTP
+        `/invocations` route. The service resolves (or creates) a session, resolves
+        the agent version, then relays text and binary frames bidirectionally
+        between the client and the agent (1 MB maximum frame size).
+
+        The client must send an HTTP GET with `Upgrade: websocket` headers.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations WebSocket
   /agents/{agent_name}/endpoint/protocols/voice/conversations/{conversation_id}:
     get:
       operationId: AgentEndpointConversations_getAgentConversation
@@ -26800,6 +26771,10 @@ paths:
                   model:
                     type: string
                     description: The model deployment to use for the creation of this response.
+                  reasoning:
+                    anyOf:
+                      - $ref: '#/components/schemas/OpenAI.Reasoning'
+                      - type: 'null'
                   background:
                     anyOf:
                       - type: boolean
@@ -26878,10 +26853,6 @@ paths:
                         assuming it's an `assistant` message with the content generated by
                         the model, you might consider using the `output_text` property where
                         supported in SDKs.
-                  reasoning:
-                    anyOf:
-                      - $ref: '#/components/schemas/OpenAI.Reasoning'
-                      - type: 'null'
                   instructions:
                     anyOf:
                       - type: string
@@ -27018,6 +26989,10 @@ paths:
                 model:
                   type: string
                   description: The model deployment to use for the creation of this response.
+                reasoning:
+                  anyOf:
+                    - $ref: '#/components/schemas/OpenAI.Reasoning'
+                    - type: 'null'
                 background:
                   anyOf:
                     - type: boolean
@@ -27043,12 +27018,7 @@ paths:
                         - auto
                         - disabled
                     - type: 'null'
-                  deprecated: true
                   default: disabled
-                reasoning:
-                  anyOf:
-                    - $ref: '#/components/schemas/OpenAI.Reasoning'
-                    - type: 'null'
                 input:
                   $ref: '#/components/schemas/OpenAI.InputParam'
                 include:
@@ -48504,8 +48474,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url`, `connector_id`, or
-              `tunnel_id` must be provided.
+            The URL for the MCP server. One of `server_url` or `connector_id` must be
+              provided.
         connector_id:
           type: string
           enum:
@@ -48519,8 +48489,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
-              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url` or `connector_id` must be provided. Learn more about service
+              connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -48530,12 +48500,6 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
-        tunnel_id:
-          type: string
-          pattern: ^tunnel_[a-z0-9]{32}$
-          description: |-
-            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -53598,7 +53562,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -53709,9 +53672,7 @@ components:
             - type: string
             - type: 'null'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         tools:
           type: array
           items:
@@ -53923,9 +53884,7 @@ components:
         verbosity:
           $ref: '#/components/schemas/OpenAI.Verbosity'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         max_completion_tokens:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
@@ -54840,9 +54799,7 @@ components:
       type: object
       properties:
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -55058,9 +55015,7 @@ components:
       type: object
       properties:
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         temperature:
           allOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -56042,9 +55997,7 @@ components:
           description: The ID of the [Model](/docs/api-reference/models) to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used.
           x-oaiTypeLabel: string
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         instructions:
           anyOf:
             - type: string
@@ -57754,9 +57707,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
     OpenAI.EvalGraderStringCheck:
       type: object
       required:
@@ -58063,7 +58014,6 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
-          description: Optional reasoning effort parameter. This is a query parameter used to select responses.
         temperature:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.numeric'
@@ -61659,7 +61609,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -63147,7 +63096,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -64911,7 +64859,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -65078,7 +65025,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -65653,8 +65599,8 @@ components:
           type: string
           format: uri
           description: |-
-            The URL for the MCP server. One of `server_url`, `connector_id`, or
-              `tunnel_id` must be provided.
+            The URL for the MCP server. One of `server_url` or `connector_id` must be
+              provided.
         connector_id:
           type: string
           enum:
@@ -65668,8 +65614,8 @@ components:
             - connector_sharepoint
           description: |-
             Identifier for service connectors, like those available in ChatGPT. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided. Learn more
-              about service connectors [here](/docs/guides/tools-remote-mcp#connectors).
+              `server_url` or `connector_id` must be provided. Learn more about service
+              connectors [here](/docs/guides/tools-remote-mcp#connectors).
               Currently supported `connector_id` values are:
               - Dropbox: `connector_dropbox`
               - Gmail: `connector_gmail`
@@ -65679,12 +65625,6 @@ components:
               - Outlook Calendar: `connector_outlookcalendar`
               - Outlook Email: `connector_outlookemail`
               - SharePoint: `connector_sharepoint`
-        tunnel_id:
-          type: string
-          pattern: ^tunnel_[a-z0-9]{32}$
-          description: |-
-            The Secure MCP Tunnel ID to use instead of a direct server URL. One of
-              `server_url`, `connector_id`, or `tunnel_id` must be provided.
         authorization:
           type: string
           description: |-
@@ -66604,9 +66544,7 @@ components:
             - $ref: '#/components/schemas/OpenAI.AssistantSupportedModels'
           description: ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models) for descriptions of them.
         reasoning_effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         name:
           anyOf:
             - type: string
@@ -68108,7 +68046,6 @@ components:
             - searching
             - completed
             - failed
-            - incomplete
           description: The status of the web search tool call.
         action:
           oneOf:
@@ -70252,9 +70189,7 @@ components:
       type: object
       properties:
         effort:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.ReasoningEffort'
         summary:
           anyOf:
             - type: string
@@ -70262,14 +70197,6 @@ components:
                 - auto
                 - concise
                 - detailed
-            - type: 'null'
-        context:
-          anyOf:
-            - type: string
-              enum:
-                - auto
-                - current_turn
-                - all_turns
             - type: 'null'
         generate_summary:
           anyOf:
@@ -70287,7 +70214,6 @@ components:
     OpenAI.ReasoningEffort:
       anyOf:
         - type: string
-        - type: string
           enum:
             - none
             - minimal
@@ -70295,6 +70221,7 @@ components:
             - medium
             - high
             - xhigh
+        - type: 'null'
       description: |-
         Constrains effort on reasoning for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
@@ -70386,6 +70313,10 @@ components:
         model:
           type: string
           description: The model deployment to use for the creation of this response.
+        reasoning:
+          anyOf:
+            - $ref: '#/components/schemas/OpenAI.Reasoning'
+            - type: 'null'
         background:
           anyOf:
             - type: boolean
@@ -70464,10 +70395,6 @@ components:
               assuming it's an `assistant` message with the content generated by
               the model, you might consider using the `output_text` property where
               supported in SDKs.
-        reasoning:
-          anyOf:
-            - $ref: '#/components/schemas/OpenAI.Reasoning'
-            - type: 'null'
         instructions:
           anyOf:
             - type: string
