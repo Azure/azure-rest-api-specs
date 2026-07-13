@@ -1,6 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
@@ -65,7 +66,8 @@ namespace Microsoft.AlertsManagement {
 @@clientName(Kind, "LogAlertRuleKind", "csharp");
 @@clientName(Evaluation, "RulePreviewEvaluation", "csharp");
 @@clientName(EvaluatedPeriod, "RulePreviewEvaluatedPeriod", "csharp");
-@@clientName(DimensionNameAndValue,
+@@clientName(
+  DimensionNameAndValue,
   "RulePreviewDimensionNameAndValue",
   "csharp"
 );
@@ -107,27 +109,23 @@ namespace Microsoft.AlertsManagement {
 // turns them into normal `{ get; set; }` C# properties so callers can configure
 // a `LogAlertRule` payload through standard object-initializer syntax.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so flattened scalars are settable"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LogAlertRuleResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  LogAlertRuleResource.properties,
   "csharp"
 );
 
 // C# customizations: align Azure region strings with the Azure.Core.AzureLocation
 // strongly-typed value used elsewhere in azure-sdk-for-net (matches the
 // existing Azure.ResourceManager.AlertsManagement SDK surface).
-@@alternateType(LogAlertRuleResource.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
-@@alternateType(PreviewAlertRuleRequest.location,
-  Azure.Core.azureLocation,
-  "csharp"
-);
+@@alternateType(LogAlertRuleResource.location, azureLocation, "csharp");
+@@alternateType(PreviewAlertRuleRequest.location, azureLocation, "csharp");
 
 // C# customizations: scopes are ARM resource ids per the spec doc
 // ("The list of resource id's that this scheduled query rule is scoped to.").
 // Project them to the strongly-typed `ResourceIdentifier` element type.
-@@alternateType(LogAlertRuleProperties.scopes,
-  Azure.Core.armResourceIdentifier[],
+@@alternateType(
+  LogAlertRuleProperties.scopes,
+  armResourceIdentifier[],
   "csharp"
 );
 
@@ -141,6 +139,7 @@ namespace Microsoft.AlertsManagement {
 // (`new Request(loc, timespan) { ScheduledQueryRuleProperties = rule }`) and
 // matches how `LogAlertRuleResource.properties` is handled above.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required so flattened scalars are settable"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PreviewAlertRuleRequest.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PreviewAlertRuleRequest.properties,
   "csharp"
 );
