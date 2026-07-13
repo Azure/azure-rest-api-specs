@@ -502,17 +502,6 @@
         }
       }
     },
-    "ActionGroupPatch": {
-      "type": "object",
-      "description": "A tenant action group for patch operations.",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether this tenant action group is enabled. If a tenant action group is not enabled, then none of its actions will be activated.",
-          "default": true
-        }
-      }
-    },
     "ActionGroupPatchBody": {
       "type": "object",
       "description": "A tenant action group object for the body of patch operations.",
@@ -525,19 +514,30 @@
           }
         },
         "properties": {
-          "$ref": "#/definitions/ActionGroupPatch",
+          "$ref": "#/definitions/Microsoft.Common.ActionGroupPatch",
           "description": "The action group settings for an update operation.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "AzureAppPushReceiver": {
+    "Microsoft.Common.ActionGroupPatch": {
+      "type": "object",
+      "description": "Action group settings for patch operations.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether this action group is enabled. If an action group is not enabled, then none of its actions will be activated.",
+          "default": true
+        }
+      }
+    },
+    "Microsoft.Common.AzureAppPushReceiver": {
       "type": "object",
       "description": "The Azure mobile App push notification receiver.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within a tenant action group."
+          "description": "The name of the Azure mobile app push receiver. Names must be unique across all receivers within an action group."
         },
         "emailAddress": {
           "type": "string",
@@ -549,7 +549,7 @@
         "emailAddress"
       ]
     },
-    "Context": {
+    "Microsoft.Common.Context": {
       "type": "object",
       "description": "The context info",
       "properties": {
@@ -563,13 +563,13 @@
         }
       }
     },
-    "EmailReceiver": {
+    "Microsoft.Common.EmailReceiver": {
       "type": "object",
       "description": "An email receiver.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the email receiver. Names must be unique across all receivers within a tenant action group."
+          "description": "The name of the email receiver. Names must be unique across all receivers within an action group."
         },
         "emailAddress": {
           "type": "string",
@@ -581,7 +581,7 @@
           "default": false
         },
         "status": {
-          "$ref": "#/definitions/ReceiverStatus",
+          "$ref": "#/definitions/Microsoft.Common.ReceiverStatus",
           "description": "The receiver status of the e-mail.",
           "readOnly": true
         }
@@ -605,7 +605,7 @@
         }
       }
     },
-    "ReceiverStatus": {
+    "Microsoft.Common.ReceiverStatus": {
       "type": "string",
       "description": "Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications.",
       "enum": [
@@ -635,13 +635,13 @@
         ]
       }
     },
-    "SmsReceiver": {
+    "Microsoft.Common.SmsReceiver": {
       "type": "object",
       "description": "An SMS receiver.",
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SMS receiver. Names must be unique across all receivers within a tenant action group."
+          "description": "The name of the SMS receiver. Names must be unique across all receivers within an action group."
         },
         "countryCode": {
           "type": "string",
@@ -652,9 +652,32 @@
           "description": "The phone number of the SMS receiver."
         },
         "status": {
-          "$ref": "#/definitions/ReceiverStatus",
+          "$ref": "#/definitions/Microsoft.Common.ReceiverStatus",
           "description": "The status of the receiver.",
           "readOnly": true
+        }
+      },
+      "required": [
+        "name",
+        "countryCode",
+        "phoneNumber"
+      ]
+    },
+    "Microsoft.Common.VoiceReceiver": {
+      "type": "object",
+      "description": "A voice receiver.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the voice receiver. Names must be unique across all receivers within an action group."
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "The country code of the voice receiver."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number of the voice receiver."
         }
       },
       "required": [
@@ -681,7 +704,7 @@
           "type": "array",
           "description": "The list of email receivers that are part of this tenant action group.",
           "items": {
-            "$ref": "#/definitions/EmailReceiver"
+            "$ref": "#/definitions/Microsoft.Common.EmailReceiver"
           },
           "x-ms-identifiers": [
             "emailAddress"
@@ -691,7 +714,7 @@
           "type": "array",
           "description": "The list of SMS receivers that are part of this tenant action group.",
           "items": {
-            "$ref": "#/definitions/SmsReceiver"
+            "$ref": "#/definitions/Microsoft.Common.SmsReceiver"
           },
           "x-ms-identifiers": [
             "phoneNumber"
@@ -711,7 +734,7 @@
           "type": "array",
           "description": "The list of AzureAppPush receivers that are part of this tenant action group.",
           "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
+            "$ref": "#/definitions/Microsoft.Common.AzureAppPushReceiver"
           },
           "x-ms-identifiers": [
             "emailAddress"
@@ -721,7 +744,7 @@
           "type": "array",
           "description": "The list of voice receivers that are part of this tenant action group.",
           "items": {
-            "$ref": "#/definitions/VoiceReceiver"
+            "$ref": "#/definitions/Microsoft.Common.VoiceReceiver"
           },
           "x-ms-identifiers": [
             "phoneNumber"
@@ -783,7 +806,7 @@
           "type": "array",
           "description": "The list of email receivers that are part of this action group.",
           "items": {
-            "$ref": "#/definitions/EmailReceiver"
+            "$ref": "#/definitions/Microsoft.Common.EmailReceiver"
           },
           "x-ms-identifiers": []
         },
@@ -791,7 +814,7 @@
           "type": "array",
           "description": "The list of SMS receivers that are part of this action group.",
           "items": {
-            "$ref": "#/definitions/SmsReceiver"
+            "$ref": "#/definitions/Microsoft.Common.SmsReceiver"
           },
           "x-ms-identifiers": []
         },
@@ -807,7 +830,7 @@
           "type": "array",
           "description": "The list of AzureAppPush receivers that are part of this action group.",
           "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
+            "$ref": "#/definitions/Microsoft.Common.AzureAppPushReceiver"
           },
           "x-ms-identifiers": []
         },
@@ -815,7 +838,7 @@
           "type": "array",
           "description": "The list of voice receivers that are part of this action group.",
           "items": {
-            "$ref": "#/definitions/VoiceReceiver"
+            "$ref": "#/definitions/Microsoft.Common.VoiceReceiver"
           },
           "x-ms-identifiers": []
         }
@@ -829,7 +852,7 @@
       "description": "The details of the test notification results.",
       "properties": {
         "context": {
-          "$ref": "#/definitions/Context",
+          "$ref": "#/definitions/Microsoft.Common.Context",
           "description": "The context info"
         },
         "state": {
@@ -855,29 +878,6 @@
       },
       "required": [
         "state"
-      ]
-    },
-    "VoiceReceiver": {
-      "type": "object",
-      "description": "A voice receiver.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the voice receiver. Names must be unique across all receivers within a tenant action group."
-        },
-        "countryCode": {
-          "type": "string",
-          "description": "The country code of the voice receiver."
-        },
-        "phoneNumber": {
-          "type": "string",
-          "description": "The phone number of the voice receiver."
-        }
-      },
-      "required": [
-        "name",
-        "countryCode",
-        "phoneNumber"
       ]
     },
     "WebhookReceiver": {

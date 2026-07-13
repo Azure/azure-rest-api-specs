@@ -84,13 +84,13 @@ model DiagnosticSettings {
    * The list of metric settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  metrics?: MetricSettings[];
+  metrics?: DiagnosticsMetricSettings[];
 
   /**
    * The list of logs settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  logs?: LogSettings[];
+  logs?: DiagnosticsLogSettings[];
 
   /**
    * The full ARM resource ID of the Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2
@@ -111,7 +111,7 @@ model DiagnosticSettings {
 /**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric.
  */
-model MetricSettings {
+model DiagnosticsMetricSettings {
   /**
    * the timegrain of the metric in ISO8601 format.
    */
@@ -136,7 +136,7 @@ model MetricSettings {
 /**
  * Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.
  */
-model LogSettings {
+model DiagnosticsLogSettings {
   /**
    * Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation.
    */

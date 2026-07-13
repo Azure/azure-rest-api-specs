@@ -88,11 +88,11 @@ namespace Microsoft.InsightsCombinedClient;
   "csharp"
 );
 @@clientName(
-  ActionGroupsApi.ActionGroupPatch,
+  Microsoft.Common.ActionGroupPatch,
   "ActionGroupPatchProperties",
   "csharp"
 );
-@@clientName(ActionGroupsApi.ActionGroupPatch.enabled, "IsEnabled", "csharp");
+@@clientName(Microsoft.Common.ActionGroupPatch.enabled, "IsEnabled", "csharp");
 @@clientName(
   ActionGroupsApi.NotificationRequestBody,
   "NotificationContent",
@@ -103,7 +103,7 @@ namespace Microsoft.InsightsCombinedClient;
   "NotificationStatus",
   "csharp"
 );
-@@clientName(ActionGroupsApi.Context, "NotificationContext", "csharp");
+@@clientName(Microsoft.Common.Context, "NotificationContext", "csharp");
 @@clientName(
   ActionGroupsApi.ActionDetail,
   "NotificationActionDetail",
@@ -865,8 +865,8 @@ namespace Microsoft.InsightsCombinedClient;
   "ActivityLogAlertAnyOfOrLeafCondition",
   "csharp"
 );
-@@clientName(ActionGroupsApi.EmailReceiver, "MonitorEmailReceiver", "csharp");
-@@clientName(ActionGroupsApi.SmsReceiver, "MonitorSmsReceiver", "csharp");
+@@clientName(Microsoft.Common.EmailReceiver, "MonitorEmailReceiver", "csharp");
+@@clientName(Microsoft.Common.SmsReceiver, "MonitorSmsReceiver", "csharp");
 @@clientName(
   ActionGroupsApi.WebhookReceiver,
   "MonitorWebhookReceiver",
@@ -874,7 +874,7 @@ namespace Microsoft.InsightsCombinedClient;
 );
 @@clientName(ActionGroupsApi.ItsmReceiver, "MonitorItsmReceiver", "csharp");
 @@clientName(
-  ActionGroupsApi.AzureAppPushReceiver,
+  Microsoft.Common.AzureAppPushReceiver,
   "MonitorAzureAppPushReceiver",
   "csharp"
 );
@@ -883,7 +883,7 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorAutomationRunbookReceiver",
   "csharp"
 );
-@@clientName(ActionGroupsApi.VoiceReceiver, "MonitorVoiceReceiver", "csharp");
+@@clientName(Microsoft.Common.VoiceReceiver, "MonitorVoiceReceiver", "csharp");
 @@clientName(
   ActionGroupsApi.LogicAppReceiver,
   "MonitorLogicAppReceiver",
@@ -919,46 +919,13 @@ namespace Microsoft.InsightsCombinedClient;
   "MonitorIncidentManagementService",
   "csharp"
 );
-@@clientName(ActionGroupsApi.ReceiverStatus, "MonitorReceiverStatus", "csharp");
-
-// Resolve JavaScript/TypeScript model name conflicts between the TenantActionGroups
-// and ActionGroupsApi namespaces. The JS emitter flattens all namespaces, so these
-// identically-shaped models collide by name. Redirect the TenantActionGroups
-// definitions to the ActionGroupsApi definitions for the JS emitter only; other
-// languages disambiguate via namespaces or @@clientName renames and are unaffected.
-// ReceiverStatus is orphaned automatically once EmailReceiver/SmsReceiver are redirected.
-@@alternateType(
-  TenantActionGroups.EmailReceiver,
-  ActionGroupsApi.EmailReceiver,
-  "javascript,python"
-);
-@@alternateType(
-  TenantActionGroups.SmsReceiver,
-  ActionGroupsApi.SmsReceiver,
-  "javascript,python"
-);
-@@alternateType(
-  TenantActionGroups.AzureAppPushReceiver,
-  ActionGroupsApi.AzureAppPushReceiver,
-  "javascript,python"
-);
-@@alternateType(
-  TenantActionGroups.VoiceReceiver,
-  ActionGroupsApi.VoiceReceiver,
-  "javascript,python"
-);
-@@alternateType(
-  TenantActionGroups.Context,
-  ActionGroupsApi.Context,
-  "javascript,python"
-);
-@@alternateType(
-  TenantActionGroups.ActionGroupPatch,
-  ActionGroupsApi.ActionGroupPatch,
-  "javascript,python"
+@@clientName(
+  Microsoft.Common.ReceiverStatus,
+  "MonitorReceiverStatus",
+  "csharp"
 );
 
-// These models also collide by name across TenantActionGroups and ActionGroupsApi,
+// These models collide by name across TenantActionGroups and ActionGroupsApi,
 // but their shapes differ, so they must remain separate models. Rename the
 // TenantActionGroups versions for the JS emitter (@clientName, per the compiler
 // warning) instead of merging them:
@@ -1479,13 +1446,13 @@ model MetricSettings {
   MetricSettings,
   "csharp,java"
 );
-// For JS, redirect straight to DiagnosticsSettings.MetricSettings (identical to the
+// For JS, redirect straight to DiagnosticsSettings.DiagnosticsMetricSettings (identical to the
 // local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
-// is not emitted and no longer collides with DiagnosticsSettings.MetricSettings.
+// is not emitted and no longer collides with DiagnosticsSettings.DiagnosticsMetricSettings.
 // Python flattens models into a single module like JS, so it takes the same redirect.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
-  DiagnosticsSettings.MetricSettings,
+  DiagnosticsSettings.DiagnosticsMetricSettings,
   "javascript,python"
 );
 
@@ -1520,13 +1487,13 @@ model LogSettings {
   LogSettings,
   "csharp,java"
 );
-// For JS, redirect straight to DiagnosticsSettings.LogSettings (identical to the local
+// For JS, redirect straight to DiagnosticsSettings.DiagnosticsLogSettings (identical to the local
 // LogSettings) so ServiceDiagnosticsSettingsApi.LogSettings no longer collides with
-// DiagnosticsSettings.LogSettings.
+// DiagnosticsSettings.DiagnosticsLogSettings.
 // Python flattens models into a single module like JS, so it takes the same redirect.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
-  DiagnosticsSettings.LogSettings,
+  DiagnosticsSettings.DiagnosticsLogSettings,
   "javascript,python"
 );
 
