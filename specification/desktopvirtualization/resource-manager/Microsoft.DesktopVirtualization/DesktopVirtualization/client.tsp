@@ -1083,15 +1083,20 @@ using Microsoft.DesktopVirtualization;
 @@alternateType(
   ScalingSchedule.daysOfWeek,
   ScalingScheduleDaysOfWeekItemUsingStruct[],
-  "java,go"
+  "java"
 );
 @@clientName(
   ScalingScheduleDaysOfWeekItem,
   "ScalingScheduleDaysOfWeekItemOld",
-  "java,go"
+  "java"
 );
 @@clientName(
   ScalingScheduleDaysOfWeekItemUsingStruct,
   "ScalingScheduleDaysOfWeekItem",
-  "java,go"
+  "java"
+);
+@@alternateType(
+  ScalingSchedule.daysOfWeek,
+  ScalingScheduleDaysOfWeekItem[],
+  "go"
 );

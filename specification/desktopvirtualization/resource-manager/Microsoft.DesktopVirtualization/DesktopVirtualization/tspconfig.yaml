@@ -3,6 +3,8 @@ parameters:
     default: "sdk/desktopvirtualization"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-ts"
+  - "@azure-tools/typespec-go"
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -23,6 +25,22 @@ options:
     generate-async-methods: true
     flavor: azure
     add-inner: RegistrationTokenMinimal,RegistrationTokenList
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-desktopvirtualization"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-desktopvirtualization"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/desktopvirtualization"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdesktopvirtualization"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdesktopvirtualization"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
