@@ -1095,3 +1095,9 @@ using Microsoft.DesktopVirtualization;
   "ScalingScheduleDaysOfWeekItem",
   "java"
 );
+@@alternateType(
+  ScalingSchedule.daysOfWeek,
+  ScalingScheduleDaysOfWeekItem[],
+  "go"
+);
+
