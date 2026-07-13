@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -60,6 +61,13 @@ model WorkspaceDiscoveryProperties {
    */
   @visibility(Lifecycle.Read)
   workspaceId: string;
+
+  /**
+   * The resource snapshot ID produced by this discovery.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
 }
 
 /**

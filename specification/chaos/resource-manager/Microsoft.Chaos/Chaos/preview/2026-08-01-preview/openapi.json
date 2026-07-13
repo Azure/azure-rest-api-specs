@@ -2825,6 +2825,66 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discover": {
+      "post": {
+        "operationId": "Workspaces_Discover",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Triggers resource discovery for the workspace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "String that represents a Workspace resource name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "pattern": "^[^<>%&:?#/\\\\]+$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Trigger resource discovery for the workspace.": {
+            "$ref": "./examples/Workspaces_Discover.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/discoveredResources": {
       "get": {
         "operationId": "DiscoveredResources_ListByWorkspace",
@@ -2933,13 +2993,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/refreshRecommendations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/workspaces/{workspaceName}/evaluate": {
       "post": {
-        "operationId": "Workspaces_RefreshRecommendations",
+        "operationId": "Workspaces_Evaluate",
         "tags": [
           "Workspaces"
         ],
-        "description": "Refreshes recommendation status for all scenarios in a given workspace.",
+        "description": "Triggers scenario evaluation for the workspace.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2983,8 +3043,8 @@
           }
         },
         "x-ms-examples": {
-          "Refresh recommendations for all scenarios in a workspace.": {
-            "$ref": "./examples/Workspaces_RefreshRecommendations.json"
+          "Trigger scenario evaluation for the workspace.": {
+            "$ref": "./examples/Workspaces_Evaluate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -6472,24 +6532,6 @@
         "resource"
       ]
     },
-    "ScenarioEvaluationResultItem": {
-      "type": "object",
-      "description": "Model that represents a single scenario evaluation result.",
-      "properties": {
-        "scenarioName": {
-          "type": "string",
-          "description": "The name of the scenario that was evaluated."
-        },
-        "evaluationResult": {
-          "$ref": "#/definitions/RecommendationStatus",
-          "description": "The evaluation result for this scenario."
-        }
-      },
-      "required": [
-        "scenarioName",
-        "evaluationResult"
-      ]
-    },
     "ScenarioListResult": {
       "type": "object",
       "description": "Model that represents a list of scenarios and a link for pagination.",
@@ -6655,6 +6697,11 @@
         "managedIdentityPrincipalId": {
           "type": "string",
           "description": "The principal id for the managed identity used for the run.",
+          "readOnly": true
+        },
+        "resourceSnapshotId": {
+          "type": "string",
+          "description": "The resource snapshot ID this run is pinned to. Resolved from the scenario's\npinned evaluation snapshot (template scenarios) or the latest discovery\nsnapshot (custom scenarios) at run creation, ensuring the run executes against\nthe same set of discovered resources that produced the recommendation.",
           "readOnly": true
         },
         "status": {
@@ -7226,6 +7273,27 @@
         }
       }
     },
+    "TemplateEvaluationResultItem": {
+      "type": "object",
+      "description": "Model that represents a single template evaluation result.",
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "description": "The template ID that was evaluated. Optional because the underlying BE field may\nbe null for legacy evaluations created before template-centric persistence landed;\nthe GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE\nconvention), so ARM responses are typically populated in practice."
+        },
+        "templateName": {
+          "type": "string",
+          "description": "The template name that was evaluated. Optional for the same reason as `templateId`."
+        },
+        "evaluationResult": {
+          "$ref": "#/definitions/RecommendationStatus",
+          "description": "The evaluation result for this template."
+        }
+      },
+      "required": [
+        "evaluationResult"
+      ]
+    },
     "Validation": {
       "type": "object",
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
@@ -7308,6 +7376,116 @@
         }
       ]
     },
+    "WorkspaceDiscovery": {
+      "type": "object",
+      "description": "Model that represents the latest workspace discovery result.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkspaceDiscoveryProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkspaceDiscoveryProperties": {
+      "type": "object",
+      "description": "Model that represents the properties of the workspace discovery.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/WorkspaceDiscoveryStatus",
+          "description": "The discovery status.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC start time.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The discovery UTC end time.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "description": "System or infrastructure errors encountered during discovery.",
+          "items": {
+            "$ref": "#/definitions/OperationError"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID this discovery belongs to.",
+          "readOnly": true
+        },
+        "resourceSnapshotId": {
+          "type": "string",
+          "description": "The resource snapshot ID produced by this discovery.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "workspaceId"
+      ]
+    },
+    "WorkspaceDiscoveryStatus": {
+      "type": "string",
+      "description": "Enum of the workspace discovery status.",
+      "enum": [
+        "Pending",
+        "Queued",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceDiscoveryStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The discovery is pending and has not started."
+          },
+          {
+            "name": "Queued",
+            "value": "Queued",
+            "description": "The discovery has been accepted and is queued for execution."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The discovery is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The discovery completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The discovery failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The discovery was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "WorkspaceEvaluation": {
       "type": "object",
       "description": "Model that represents the latest workspace evaluation result.",
@@ -7359,28 +7537,33 @@
           "description": "The workspace ID this evaluation belongs to.",
           "readOnly": true
         },
-        "numScenariosToEvaluate": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The number of scenarios to evaluate.",
+        "resourceSnapshotId": {
+          "type": "string",
+          "description": "The resource snapshot ID used for this evaluation.",
           "readOnly": true
         },
-        "numScenariosEvaluatedSucceeded": {
+        "numTemplatesToEvaluate": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scenarios that evaluated successfully.",
+          "description": "The number of templates to evaluate.",
           "readOnly": true
         },
-        "numScenariosEvaluatedFailed": {
+        "numTemplatesEvaluatedSucceeded": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scenarios that failed evaluation.",
+          "description": "The number of templates that evaluated successfully.",
           "readOnly": true
         },
-        "numScenariosEvaluatedCancelled": {
+        "numTemplatesEvaluatedFailed": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of scenarios that were cancelled during evaluation.",
+          "description": "The number of templates that failed evaluation.",
+          "readOnly": true
+        },
+        "numTemplatesEvaluatedCancelled": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of templates that were cancelled during evaluation.",
           "readOnly": true
         },
         "evaluationResult": {
@@ -7390,13 +7573,14 @@
         },
         "results": {
           "type": "array",
-          "description": "Per-scenario evaluation results.",
+          "description": "Per-template evaluation results.",
           "items": {
-            "$ref": "#/definitions/ScenarioEvaluationResultItem"
+            "$ref": "#/definitions/TemplateEvaluationResultItem"
           },
           "readOnly": true,
+          "x-ms-client-name": "Results",
           "x-ms-identifiers": [
-            "scenarioName"
+            "templateId"
           ]
         }
       },

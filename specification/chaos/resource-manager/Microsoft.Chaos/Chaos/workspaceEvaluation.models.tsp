@@ -8,6 +8,7 @@ import "./common.models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -62,28 +63,67 @@ model WorkspaceEvaluationProperties {
   workspaceId: Azure.Core.armResourceIdentifier;
 
   /**
+   * The resource snapshot ID used for this evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  resourceSnapshotId?: string;
+
+  /**
    * The number of scenarios to evaluate.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosToEvaluate?: int32;
 
   /**
    * The number of scenarios that evaluated successfully.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedSucceeded?: int32;
 
   /**
    * The number of scenarios that failed evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedFailed?: int32;
 
   /**
    * The number of scenarios that were cancelled during evaluation.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   numScenariosEvaluatedCancelled?: int32;
+
+  /**
+   * The number of templates to evaluate.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesToEvaluate?: int32;
+
+  /**
+   * The number of templates that evaluated successfully.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedSucceeded?: int32;
+
+  /**
+   * The number of templates that failed evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedFailed?: int32;
+
+  /**
+   * The number of templates that were cancelled during evaluation.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  numTemplatesEvaluatedCancelled?: int32;
 
   /**
    * The overall evaluation result.
@@ -94,9 +134,19 @@ model WorkspaceEvaluationProperties {
   /**
    * Per-scenario evaluation results.
    */
+  @removed(Microsoft.Chaos.Versions.v2026_08_01_preview)
   @visibility(Lifecycle.Read)
   @identifiers(#["scenarioName"])
   results?: ScenarioEvaluationResultItem[];
+
+  /**
+   * Per-template evaluation results.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "results")
+  @identifiers(#["templateId"])
+  resultsV2?: TemplateEvaluationResultItem[];
 }
 
 /**
@@ -110,6 +160,30 @@ model ScenarioEvaluationResultItem {
 
   /**
    * The evaluation result for this scenario.
+   */
+  evaluationResult: RecommendationStatus;
+}
+
+/**
+ * Model that represents a single template evaluation result.
+ */
+@added(Microsoft.Chaos.Versions.v2026_08_01_preview)
+model TemplateEvaluationResultItem {
+  /**
+   * The template ID that was evaluated. Optional because the underlying BE field may
+   * be null for legacy evaluations created before template-centric persistence landed;
+   * the GW falls back to `scenarioName` in that case (`scenario.Id == templateId` by BE
+   * convention), so ARM responses are typically populated in practice.
+   */
+  templateId?: string;
+
+  /**
+   * The template name that was evaluated. Optional for the same reason as `templateId`.
+   */
+  templateName?: string;
+
+  /**
+   * The evaluation result for this template.
    */
   evaluationResult: RecommendationStatus;
 }
