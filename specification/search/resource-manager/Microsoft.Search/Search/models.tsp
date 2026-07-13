@@ -1466,6 +1466,7 @@ model SharedPrivateLinkResourceListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2026_03_01_preview)
+@removed(Versions.v2026_09_01_preview)
 @Azure.ResourceManager.Legacy.armExternalType
 model OfferingsListResult {
   /**
@@ -1482,6 +1483,27 @@ model OfferingsListResult {
   @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: string;
+}
+
+/**
+ * Response containing the available Azure AI Search offerings, organized by region, along with the recommended default region for creating new services.
+ */
+@added(Versions.v2026_09_01_preview)
+model OfferingsResult {
+  /**
+   * The recommended default region for creating new Azure AI Search services.
+   */
+  @visibility(Lifecycle.Read)
+  defaultRegion?: string;
+
+  /**
+   * The list of Azure AI Search offerings by region.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Offerings by region don't have a unique identifier"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  @visibility(Lifecycle.Read)
+  regions?: OfferingsByRegion[];
 }
 
 /**
