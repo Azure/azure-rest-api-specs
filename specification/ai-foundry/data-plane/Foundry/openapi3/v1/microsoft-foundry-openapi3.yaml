@@ -1139,6 +1139,65 @@ paths:
           '*/*':
             schema: {}
         description: Optional request body.
+  /agents/{agent_name}/endpoint/protocols/invocations_ws:
+    get:
+      operationId: AgentWebsocket_connectEndpointWebsocket
+      summary: Establish a WebSocket connection to a hosted agent
+      description: |-
+        Establishes a WebSocket connection to a hosted agent. The target agent is a
+        path segment and the project is taken from the endpoint, mirroring the HTTP
+        `/invocations` route. The service resolves (or creates) a session, resolves
+        the agent version, then relays text and binary frames bidirectionally
+        between the client and the agent (1 MB maximum frame size).
+
+        The client must send an HTTP GET with `Upgrade: websocket` headers.
+      parameters:
+        - name: agent_name
+          in: path
+          required: true
+          description: The name of the hosted agent.
+          schema:
+            type: string
+        - name: agent_session_id
+          in: query
+          required: false
+          description: Optional session/conversation ID. Pass the same value on a subsequent connection to reattach to an existing session. If not provided, the service auto-generates one.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            x-agent-session-id:
+              required: true
+              description: Session ID for this WebSocket connection. Returns the provided session ID or an auto-generated one if not provided in the request.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - Agent Invocations WebSocket
   /agents/{agent_name}/endpoint/sessions:
     post:
       operationId: Agents_createSession
