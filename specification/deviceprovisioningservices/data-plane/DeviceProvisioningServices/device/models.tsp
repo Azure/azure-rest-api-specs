@@ -352,7 +352,7 @@ model TpmAttestation {
 // =============================================================================
 //  ADU device-facing update integration (first-time / onboarding update)
 //  Added in 2026-11-15-preview. DRAFT — mirrors the ADU device contract
-//  (onboarding-api.tsp / onboarding-api-design.md). DPS is a thin pass-through
+//  (onboarding-api.tsp / device-update-api-design.md). DPS is a thin pass-through
 //  to ADR (which forwards to ADU) and does not parse the update manifest.
 // =============================================================================
 
