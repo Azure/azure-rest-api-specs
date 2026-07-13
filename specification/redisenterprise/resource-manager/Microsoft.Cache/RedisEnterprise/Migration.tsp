@@ -28,8 +28,10 @@ model Migration is Azure.ResourceManager.ProxyResource<MigrationProperties> {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Force the OpenAPI tag to remain 'Migrations' in every API version even though the interface is renamed to singular 'Migration' in versions before 2026-06-01-preview, so the already-shipped older swagger tags are preserved unchanged."
 @armResourceOperations
 @renamedFrom(Versions.v2026_06_01_preview, "Migration")
+@tag("Migrations")
 interface Migrations {
   /**
    * Gets information about a migration in a Redis Enterprise cluster.
