@@ -67,7 +67,7 @@ alias ProductApiOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ProductApiParentParameters,
   ProductApiParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/apis",
   }
 >;
 
@@ -112,7 +112,7 @@ alias ProductGroupOps = Azure.ResourceManager.Legacy.RoutedOperations<
   ProductGroupParentParameters,
   ProductGroupParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/products/{productId}/groups",
   }
 >;
 
@@ -142,7 +142,8 @@ interface ProductContractOps
         @minLength(1)
         @maxLength(256)
         productId: string,
-      }
+      },
+      ResourceName = "ApiManagementProduct"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -518,7 +519,8 @@ interface WorkspaceProductOps
         @minLength(1)
         @maxLength(256)
         productId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceProduct"
     > {}
 
 @armResourceOperations

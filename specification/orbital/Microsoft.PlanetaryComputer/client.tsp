@@ -26,6 +26,53 @@ namespace Customizations;
 @@clientName(StacSearchParameters.datetime, "date_time", "python");
 @@clientName(SharedAccessSignature, "Sas", "python");
 
+// Fix generic "The most basic operation" docs for search tile operations (without TileMatrixSetId)
+@@clientDoc(
+  MosaicSearchesAssetsForTiles.getZxyAssets,
+  "Return a list of assets which overlap a given tile for a mosaic search.",
+  DocumentationMode.replace
+);
+@@clientDoc(
+  MosaicSearchesTiles.getZxyScaleByFormat,
+  "Create a map tile for a mosaic search with specified scale and format.",
+  DocumentationMode.replace
+);
+@@clientDoc(
+  MosaicSearchesTilesScale.getZxyByScale,
+  "Create a map tile for a mosaic search with specified scale.",
+  DocumentationMode.replace
+);
+@@clientDoc(
+  MosaicSearchesTilesFormat.getZxyByFormat,
+  "Create a map tile for a mosaic search with specified format.",
+  DocumentationMode.replace
+);
+@@clientDoc(
+  MosaicSearchesTilesPlain.getZxy,
+  "Create a map tile for a mosaic search.",
+  DocumentationMode.replace
+);
+
+// Clarify behavior differences between tile-asset variants with and without
+// TileMatrixSetId in the route.
+@@clientDoc(
+  MosaicCollectionsAssetsForTiles.getZxyAssets,
+  "Return assets overlapping a tile for a collection using the route without TileMatrixSetId in the path (/tiles/{z}/{x}/{y}/assets). This operation uses the default tile matrix set when none is specified.",
+  DocumentationMode.replace
+);
+@@clientDoc(
+  MosaicCollectionsAssetsForTileMatrixSets.getZxyAssets,
+  "Return assets overlapping a tile for a collection using the route with TileMatrixSetId in the path (/tiles/{tileMatrixSetId}/{z}/{x}/{y}/assets). Use this operation when you need an explicit tile matrix set in the URL.",
+  DocumentationMode.replace
+);
+
+// === Python snake_case parameter renames ===
+@@clientName(CollectionMosaicFilterQueryParameters.sortby, "sort_by", "python");
+@@clientName(BoundingBoxPathParameters.minx, "min_x", "python");
+@@clientName(BoundingBoxPathParameters.miny, "min_y", "python");
+@@clientName(BoundingBoxPathParameters.maxx, "max_x", "python");
+@@clientName(BoundingBoxPathParameters.maxy, "max_y", "python");
+
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
 @@convenientAPI(StacItems.update, false, "csharp,java");
@@ -35,6 +82,9 @@ namespace Customizations;
 
 // Change the WmtsCapabilitiesXmlResponse body type from bytes to string for JavaScript
 @@alternateType(WmtsCapabilitiesXmlResponse.body, string, "javascript");
+
+// Rename Ingestion.delete to deleteIngestion for JavaScript to avoid @fixme conflict
+@@clientName(Ingestion.delete, "deleteIngestion", "javascript");
 
 // === Python external type mappings ===
 // NOTE: @@alternateType with ExternalType is currently broken for ALL models used
@@ -53,6 +103,12 @@ namespace Customizations;
 // Models ending with "Definition" - rename appropriately
 @@clientName(IngestionDefinition, "IngestionInformation", "csharp");
 
+// === Python API naming notes ===
+// All Python method naming (searches→search, list→get, _by_tms, _by_format,
+// geo_json removal) is now handled via interface member names below.
+// Language-specific @@clientName overrides can be added here when other
+// languages (C#, Java, JS) need different names from the Python defaults.
+
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
 
@@ -63,6 +119,157 @@ namespace Customizations;
 @@clientName(Polygon, "PolygonGeometry", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
 @@clientName(Operation, "LongRunningOperation", "csharp");
+
+// Generic geometry class names - add descriptive prefixes for Java to avoid
+// collisions with common domain types and improve discoverability.
+@@clientName(Geometry, "GeoJsonGeometry", "java");
+@@clientName(Feature, "GeoJsonFeature", "java");
+@@clientName(Point, "GeoJsonPoint", "java");
+@@clientName(LineString, "GeoJsonLineString", "java");
+@@clientName(Polygon, "GeoJsonPolygon", "java");
+@@clientName(MultiPoint, "GeoJsonMultiPoint", "java");
+@@clientName(MultiLineString, "GeoJsonMultiLineString", "java");
+@@clientName(MultiPolygon, "GeoJsonMultiPolygon", "java");
+
+// === Java-only method renames: WithTms/NoTms naming convention ===
+// TMS-path variants renamed to WithTms, non-TMS variants renamed to NoTms for Java only.
+// Python and JavaScript retain the original names defined in the interface.
+
+// Item tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getTile, "getTileWithTms", "java");
+@@clientName(Data.getTileByFormat, "getTileWithTmsByFormat", "java");
+@@clientName(Data.getTileByScale, "getTileWithTmsByScale", "java");
+@@clientName(
+  Data.getTileByScaleAndFormat,
+  "getTileWithTmsByScaleAndFormat",
+  "java"
+);
+
+// Item tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getTileNoTms, "getTileNoTms", "java");
+@@clientName(Data.getTileNoTmsByFormat, "getTileNoTmsByFormat", "java");
+@@clientName(Data.getTileNoTmsByScale, "getTileNoTmsByScale", "java");
+@@clientName(
+  Data.getTileNoTmsByScaleAndFormat,
+  "getTileNoTmsByScaleAndFormat",
+  "java"
+);
+
+// Item TileJSON / WMTS → WithTms
+@@clientName(Data.getItemTileJsonByTms, "getItemTileJsonWithTms", "java");
+@@clientName(
+  Data.getItemWmtsCapabilitiesByTms,
+  "getItemWmtsCapabilitiesWithTms",
+  "java"
+);
+
+// Collection tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getCollectionTile, "getCollectionTileWithTms", "java");
+@@clientName(
+  Data.getCollectionTileByFormat,
+  "getCollectionTileWithTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileByScale,
+  "getCollectionTileWithTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileByScaleAndFormat,
+  "getCollectionTileWithTmsByScaleAndFormat",
+  "java"
+);
+
+// Collection tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getCollectionTileNoTms, "getCollectionTileNoTms", "java");
+@@clientName(
+  Data.getCollectionTileNoTmsByFormat,
+  "getCollectionTileNoTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileNoTmsByScale,
+  "getCollectionTileNoTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getCollectionTileNoTmsByScaleAndFormat,
+  "getCollectionTileNoTmsByScaleAndFormat",
+  "java"
+);
+
+// Collection TileJSON / WMTS / Assets → WithTms/NoTms
+@@clientName(
+  Data.getCollectionTileJsonByTms,
+  "getCollectionTileJsonWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionWmtsCapabilitiesByTms,
+  "getCollectionWmtsCapabilitiesWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionAssetsForTile,
+  "getCollectionAssetsForTileWithTms",
+  "java"
+);
+@@clientName(
+  Data.getCollectionAssetsForTileNoTms,
+  "getCollectionAssetsForTileNoTms",
+  "java"
+);
+
+// Search tile variants (TileMatrixSetId as path) → WithTms
+@@clientName(Data.getSearchTile, "getSearchTileWithTms", "java");
+@@clientName(
+  Data.getSearchTileByFormat,
+  "getSearchTileWithTmsByFormat",
+  "java"
+);
+@@clientName(Data.getSearchTileByScale, "getSearchTileWithTmsByScale", "java");
+@@clientName(
+  Data.getSearchTileByScaleAndFormat,
+  "getSearchTileWithTmsByScaleAndFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchAssetsForTile,
+  "getSearchAssetsForTileWithTms",
+  "java"
+);
+
+// Search tile variants (no TileMatrixSetId in path) → NoTms
+@@clientName(Data.getSearchTileNoTms, "getSearchTileNoTms", "java");
+@@clientName(
+  Data.getSearchTileNoTmsByFormat,
+  "getSearchTileNoTmsByFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchTileNoTmsByScale,
+  "getSearchTileNoTmsByScale",
+  "java"
+);
+@@clientName(
+  Data.getSearchTileNoTmsByScaleAndFormat,
+  "getSearchTileNoTmsByScaleAndFormat",
+  "java"
+);
+@@clientName(
+  Data.getSearchAssetsForTileNoTms,
+  "getSearchAssetsForTileNoTms",
+  "java"
+);
+
+// Search TileJSON / WMTS → WithTms
+@@clientName(Data.getSearchTileJsonByTms, "getSearchTileJsonWithTms", "java");
+@@clientName(
+  Data.getSearchWmtsCapabilitiesByTms,
+  "getSearchWmtsCapabilitiesWithTms",
+  "java"
+);
 
 // Additional model renames for C#
 @@clientName(RenderOption, "RenderConfiguration", "csharp");
@@ -125,7 +332,7 @@ interface Stac {
   getMosaic is StacCollectionMosaics.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listMosaics is StacCollectionMosaics.getAll;
+  getMosaics is StacCollectionMosaics.getAll;
 
   // STAC Collections
   createCollection is StacCollections.create;
@@ -146,7 +353,7 @@ interface Stac {
   deleteRenderOption is StacCollectionRenderOptions.delete;
   getRenderOption is StacCollectionRenderOptions.get;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listRenderOptions is StacCollectionRenderOptions.getAll;
+  getRenderOptions is StacCollectionRenderOptions.getAll;
 
   // Collection Thumbnails
   getCollectionThumbnail is StacCollectionThumbnails.get;
@@ -156,7 +363,7 @@ interface Stac {
   replaceTileSettings is StacCollectionTileSettings.replace;
 
   // STAC Conformance
-  getConformanceClass is StacConformanceClass.get;
+  getConformanceClasses is StacConformanceClass.get;
 
   // STAC landing page
   getLandingPage is StacLandingPages.get;
@@ -181,7 +388,7 @@ interface Stac {
   deleteQueryable is StacQueryables.delete;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listQueryables is StacQueryables.getAll;
+  getQueryables is StacQueryables.getAll;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   getCollectionQueryables is StacQueryables.getAllByCollection;
@@ -199,7 +406,7 @@ interface Data {
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listTileMatrices is TileMatrixList.get;
+  getTileMatrices is TileMatrixList.get;
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
@@ -335,7 +542,7 @@ interface Data {
   // Item Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listTilesets is MosaicItemsTileSetList.get;
+  getTilesets is MosaicItemsTileSetList.get;
   @added(Versions.v2026_04_15)
   getTilesetMetadata is MosaicItemsTileSetMetadata.get;
 
@@ -359,17 +566,17 @@ interface Data {
   @added(Versions.v2026_04_15)
   getTileNoTmsByScaleAndFormat is MosaicItemsTilesScaleByFormat.getZxyScaleByFormat;
 
-  // GeoJSON Feature (bare, no format)
+  // Feature Crop (bare, no format)
   @added(Versions.v2026_04_15)
-  cropFeatureGeoJson is MosaicItemsFeatureGeoJson.crop;
+  cropFeature is MosaicItemsFeatureGeoJson.crop;
 
-  // GeoJSON Feature Crop with format
+  // Feature Crop with format
   @added(Versions.v2026_04_15)
-  cropFeatureGeoJsonFormat is MosaicItemsFeatureGeoJsonFormat.cropFormat;
+  cropFeatureByFormat is MosaicItemsFeatureGeoJsonFormat.cropFormat;
 
-  // GeoJSON Feature Crop with dimensions
+  // Feature Crop with dimensions
   @added(Versions.v2026_04_15)
-  cropFeatureGeoJsonWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropFeatureWidthByHeight is MosaicItemsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Item Bounds, Info, Assets
   @added(Versions.v2026_04_15)
@@ -380,7 +587,7 @@ interface Data {
   getItemInfoGeoJson is MosaicItemsInfoGeoJson.get;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listItemAvailableAssets is MosaicItemsAvailableAssets.getAll;
+  getItemAvailableAssets is MosaicItemsAvailableAssets.getAll;
 
   // Item Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
@@ -388,21 +595,21 @@ interface Data {
   getItemAssetStatistics is MosaicItemsAssetStatistics.getAll;
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listItemStatistics is MosaicItemsStatistics.getAll;
+  getItemStatistics is MosaicItemsStatistics.getAll;
   @added(Versions.v2026_04_15)
-  getItemGeoJsonStatistics is MosaicItemsGeoJsonStatistics.get;
+  getItemFeatureStatistics is MosaicItemsGeoJsonStatistics.get;
 
   // Item TileJSON
   @added(Versions.v2026_04_15)
   getItemTileJson is MosaicItemsTileJson.get;
   @added(Versions.v2026_04_15)
-  getItemTileJsonTms is MosaicItemsTileMatrixSetsTileJson.get;
+  getItemTileJsonByTms is MosaicItemsTileMatrixSetsTileJson.get;
 
   // Item WMTS
   @added(Versions.v2026_04_15)
   getItemWmtsCapabilities is MosaicItemsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getItemWmtsCapabilitiesTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
+  getItemWmtsCapabilitiesByTms is MosaicItemsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Item Point
   @added(Versions.v2026_04_15)
@@ -425,7 +632,7 @@ interface Data {
   // Collection Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listCollectionTilesets is MosaicCollectionsTileSetList.get;
+  getCollectionTilesets is MosaicCollectionsTileSetList.get;
   @added(Versions.v2026_04_15)
   getCollectionTilesetMetadata is MosaicCollectionsTileSetMetadata.get;
 
@@ -453,13 +660,13 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionTileJson is MosaicCollectionsTileJson.get;
   @added(Versions.v2026_04_15)
-  getCollectionTileJsonTms is MosaicCollectionsTileMatrixSetsTileJson.get;
+  getCollectionTileJsonByTms is MosaicCollectionsTileMatrixSetsTileJson.get;
 
   // Collection WMTS
   @added(Versions.v2026_04_15)
   getCollectionWmtsCapabilities is MosaicCollectionsWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getCollectionWmtsCapabilitiesTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
+  getCollectionWmtsCapabilitiesByTms is MosaicCollectionsWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Collection Assets
   @added(Versions.v2026_04_15)
@@ -479,11 +686,11 @@ interface Data {
   @added(Versions.v2026_04_15)
   getCollectionBboxCropWithDimensions is MosaicCollectionsBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureGeoJson is MosaicCollectionsFeatureGeoJson.crop;
+  cropCollectionFeature is MosaicCollectionsFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureGeoJsonFormat is MosaicCollectionsFeatureGeoJsonFormat.cropFormat;
+  cropCollectionFeatureByFormat is MosaicCollectionsFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropCollectionFeatureGeoJsonWidthByHeight is MosaicCollectionsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  cropCollectionFeatureWidthByHeight is MosaicCollectionsFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
 
   // Collection Point
   @added(Versions.v2026_04_15)
@@ -493,67 +700,68 @@ interface Data {
 
   // === Search-based mosaic endpoints (stable 2026-04-15) ===
 
-  // #1 - Searches Tileset List
+  // Search Tileset List and Metadata
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   @added(Versions.v2026_04_15)
-  listSearchesTilesets is MosaicSearchesTileSetList.get;
-  // #2 - Searches Tileset Metadata
+  getSearchTilesets is MosaicSearchesTileSetList.get;
   @added(Versions.v2026_04_15)
-  getSearchesTilesetMetadata is MosaicSearchesTileSetMetadata.get;
-  // #3 - Searches Tiles with TileMatrixSetId (4 variants)
+  getSearchTilesetMetadata is MosaicSearchesTileSetMetadata.get;
+  // Search Tiles with TileMatrixSetId (4 variants)
   @added(Versions.v2026_04_15)
-  getSearchesTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
+  getSearchTileByScaleAndFormat is MosaicSearchesTileMatrixSets.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchesTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
+  getSearchTile is MosaicSearchesTileMatrixSetsPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getSearchesTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
+  getSearchTileByFormat is MosaicSearchesTileMatrixSetsFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getSearchesTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
-  // #7 - Searches Assets for Tile (with TileMatrixSetId)
+  getSearchTileByScale is MosaicSearchesTileMatrixSetsScale.getZxyByScale;
+  // Search Assets for Tile (with TileMatrixSetId)
   @added(Versions.v2026_04_15)
-  getSearchesAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
-  // #5 - Searches TileJSON with TileMatrixSetId
+  getSearchAssetsForTile is MosaicSearchesAssetsForTileMatrixSets.getZxyAssets;
+  // Search TileJSON with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchesTileJsonTms is MosaicSearchesTileMatrixSetsTileJson.get;
-  // #6 - Searches WMTS with TileMatrixSetId
+  getSearchTileJsonByTms is MosaicSearchesTileMatrixSetsTileJson.get;
+  // Search WMTS with TileMatrixSetId
   @added(Versions.v2026_04_15)
-  getSearchesWmtsCapabilitiesTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
-  // #13 - Searches Info
+  getSearchWmtsCapabilitiesByTms is MosaicSearchesWmtsTileMatrixSets.getCapabilitiesXml;
+  // Search Info
   @added(Versions.v2026_04_15)
-  getSearchesInfo is MosaicSearchesInfoSearch.get;
-  // #10 - Searches Bbox Crop (NEW)
+  getSearchInfo is MosaicSearchesInfoSearch.get;
+  // Search Bbox Crop
   @added(Versions.v2026_04_15)
-  getSearchesBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
+  getSearchBboxCrop is MosaicSearchesBbox.getCroppedToBoundingBox;
   @added(Versions.v2026_04_15)
-  getSearchesBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
+  getSearchBboxCropWithDimensions is MosaicSearchesBboxWithDimensions.getCroppedToBoundingBoxWidthByHeight;
   @added(Versions.v2026_04_15)
-  getSearchesBboxAssets is MosaicSearchesAssetsForBbox.getBboxAssets;
+  getSearchBboxAssets is MosaicSearchesAssetsForBbox.getBboxAssets;
+  // Search Feature Crop
   @added(Versions.v2026_04_15)
-  cropSearchesFeatureGeoJson is MosaicSearchesFeatureGeoJson.crop;
+  cropSearchFeature is MosaicSearchesFeatureGeoJson.crop;
   @added(Versions.v2026_04_15)
-  cropSearchesFeatureGeoJsonFormat is MosaicSearchesFeatureGeoJsonFormat.cropFormat;
+  cropSearchFeatureByFormat is MosaicSearchesFeatureGeoJsonFormat.cropFormat;
   @added(Versions.v2026_04_15)
-  cropSearchesFeatureGeoJsonWidthByHeight is MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
-  // Remaining /searches/ equivalents for consistency
+  cropSearchFeatureWidthByHeight is MosaicSearchesFeatureGeoJsonWidthByHeight.cropWidthByHeightFormat;
+  // Search WMTS and TileJSON (without TileMatrixSetId)
   @added(Versions.v2026_04_15)
-  getSearchesWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
+  getSearchWmtsCapabilities is MosaicSearchesWmts.getCapabilitiesXml;
   @added(Versions.v2026_04_15)
-  getSearchesTileJson is MosaicSearchesTileJson.get;
+  getSearchTileJson is MosaicSearchesTileJson.get;
+  // Search Tiles (without TileMatrixSetId)
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTms is MosaicSearchesTilesPlain.getZxy;
+  getSearchTileNoTms is MosaicSearchesTilesPlain.getZxy;
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
+  getSearchTileNoTmsByFormat is MosaicSearchesTilesFormat.getZxyByFormat;
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
+  getSearchTileNoTmsByScale is MosaicSearchesTilesScale.getZxyByScale;
   @added(Versions.v2026_04_15)
-  getSearchesTileNoTmsByScaleAndFormat is MosaicSearchesTiles.getZxyScaleByFormat;
+  getSearchTileNoTmsByScaleAndFormat is MosaicSearchesTiles.getZxyScaleByFormat;
   @added(Versions.v2026_04_15)
-  getSearchesAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
-  // Searches Point
+  getSearchAssetsForTileNoTms is MosaicSearchesAssetsForTiles.getZxyAssets;
+  // Search Point
   @added(Versions.v2026_04_15)
-  getSearchesPoint is MosaicSearchesPoint.getPoint;
+  getSearchPoint is MosaicSearchesPoint.getPoint;
   @added(Versions.v2026_04_15)
-  getSearchesPointWithAssets is MosaicSearchesPointWithAssets.getPointAssets;
+  getSearchPointWithAssets is MosaicSearchesPointWithAssets.getPointAssets;
 }
 
 // === Shared Access Signature (SAS) ===
@@ -562,9 +770,122 @@ interface Data {
 @clientName("ManagedStorageSharedAccessSignatureClient", "csharp")
 interface SharedAccessSignature {
   // Sign HREF for read access
-  getSign is Sas.getSign;
+  getUrl is Sas.getSign;
 
   // SAS Tokens
   getToken is Sas.getToken;
   revokeToken is Sas.revokeToken;
 }
+
+// === ColorMapNames enum: fix digit-to-alpha word boundary splits ===
+@@clientName(ColorMapNames.`ai4g-lulc`, "AI4G_LULC", "python");
+@@clientName(ColorMapNames.`modis-10A1`, "MODIS_10A1", "python");
+@@clientName(ColorMapNames.`modis-10A2`, "MODIS_10A2", "python");
+@@clientName(ColorMapNames.`modis-13A1|Q1`, "MODIS_13A1_Q1", "python");
+@@clientName(ColorMapNames.`modis-14A1|A2`, "MODIS_14A1_A2", "python");
+@@clientName(ColorMapNames.`modis-15A2H|A3H`, "MODIS_15A2H_A3H", "python");
+@@clientName(ColorMapNames.`modis-16A3GF-ET`, "MODIS_16A3GF_ET", "python");
+@@clientName(ColorMapNames.`modis-16A3GF-PET`, "MODIS_16A3GF_PET", "python");
+@@clientName(ColorMapNames.`modis-17A2H|A2HGF`, "MODIS_17A2H_A2HGF", "python");
+@@clientName(ColorMapNames.`modis-17A3HGF`, "MODIS_17A3HGF", "python");
+@@clientName(ColorMapNames.`modis-64A1`, "MODIS_64A1", "python");
+@@clientName(ColorMapNames.tab20b, "TAB20B", "python");
+@@clientName(ColorMapNames.tab20b_r, "TAB20B_R", "python");
+@@clientName(ColorMapNames.tab20c, "TAB20C", "python");
+@@clientName(ColorMapNames.tab20c_r, "TAB20C_R", "python");
+@@clientName(ColorMapNames.`viirs-10a1`, "VIIRS_10A1", "python");
+@@clientName(ColorMapNames.`viirs-13a1`, "VIIRS_13A1", "python");
+@@clientName(ColorMapNames.`viirs-14a1`, "VIIRS_14A1", "python");
+@@clientName(ColorMapNames.`viirs-15a2H`, "VIIRS_15A2H", "python");
+
+// === Enhanced datetime documentation ===
+// Reuse the same RFC 3339 documentation from inma.tsp (StacItems.getFeatures)
+// to ensure consistent datetime documentation across all Data and STAC APIs.
+
+@@clientDoc(
+  SubDatasetQueryParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """,
+  DocumentationMode.replace
+);
+
+@@clientDoc(
+  CollectionMosaicFilterQueryParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """,
+  DocumentationMode.replace
+);
+
+@@clientDoc(
+  RegisterMosaic.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """,
+  DocumentationMode.replace
+);
+
+@@clientDoc(
+  StacSearchParameters.datetime,
+  """
+    Either a date-time or an interval, open or closed. Date and time expressions
+    adhere to RFC 3339. Open intervals are expressed using double-dots.
+    
+    Examples:
+    
+    - A date-time: "2018-02-12T23:20:50Z"
+    - A closed interval: "2018-02-12T00:00:00Z/2018-03-18T12:31:12Z"
+    - Open intervals: "2018-02-12T00:00:00Z/.." or "../2018-03-18T12:31:12Z"
+    
+    Only features that have a temporal property that intersects the value of
+    `datetime` are selected.
+    
+    If a feature has multiple temporal properties, it is the decision of the
+    server whether only a single temporal property is used to determine
+    the extent or all relevant temporal properties.
+    """,
+  DocumentationMode.replace
+);

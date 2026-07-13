@@ -21,6 +21,7 @@ import "./ServerEndpoint.tsp";
 import "./RegisteredServer.tsp";
 import "./Workflow.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -59,11 +60,11 @@ interface Operations {
     | (ArmResponse<OperationEntityListResult> & {
         @header("x-ms-correlation-request-id")
         @doc("correlation request id.")
-        correlationRequestId?: string;
+        xMsCorrelationRequestId?: string;
 
         @header("x-ms-request-id")
         @doc("request id.")
-        requestId?: string;
+        xMsRequestId?: string;
       })
     | StorageSyncError;
 }

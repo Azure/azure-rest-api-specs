@@ -15,8 +15,9 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.OpenAPI;
+using Microsoft.Search;
 
-namespace Microsoft.Search;
+namespace Customizations;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -414,7 +415,7 @@ op privateEndpointConnectionsGetCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResponse<PrivateEndpointConnection> | CloudError;
+): ArmResponse<Microsoft.Search.PrivateEndpointConnection> | CloudError;
 
 /**
  * Updates a private endpoint connection to the search service in the given resource group.
@@ -448,7 +449,9 @@ op privateEndpointConnectionsUpdateCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResourceUpdatedResponse<PrivateEndpointConnection> | CloudError;
+):
+  | ArmResourceUpdatedResponse<Microsoft.Search.PrivateEndpointConnection>
+  | CloudError;
 
 /**
  * Disconnects the private endpoint connection and deletes it from the search service.
@@ -477,7 +480,10 @@ op privateEndpointConnectionsDeleteCustomization(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   params?: `search-management-request-options`,
-): ArmResponse<PrivateEndpointConnection> | NotFoundResponse | CloudError;
+):
+  | ArmResponse<Microsoft.Search.PrivateEndpointConnection>
+  | NotFoundResponse
+  | CloudError;
 
 /**
  * Gets a list of all supported private link resource types for the given service.
@@ -967,9 +973,17 @@ model AccessRulePropertiesSubscriptionsItem {
 
 @@clientName(SearchServiceProperties.eTag, "etag", "java");
 
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyName, "keyName");
-@@clientName(SearchResourceEncryptionKey.keyVaultKeyVersion, "keyVersion");
-@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri");
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyName,
+  "keyName",
+  "!autorest"
+);
+@@clientName(
+  SearchResourceEncryptionKey.keyVaultKeyVersion,
+  "keyVersion",
+  "!autorest"
+);
+@@clientName(SearchResourceEncryptionKey.keyVaultUri, "vaultUri", "!autorest");
 
 // C# settings
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flatten sku for backward compat with C# SDK"
@@ -997,7 +1011,6 @@ model AccessRulePropertiesSubscriptionsItem {
   "SearchServicePublicInternetAccess",
   "csharp"
 );
-@@access(PublicNetworkAccess, Access.public, "csharp");
 @@clientName(SkuName, "SearchServiceSkuName", "csharp");
 @@clientName(AdminKeyKind, "SearchServiceAdminKeyKind", "csharp");
 @@clientName(AdminKeyResult, "SearchServiceAdminKeyResult", "csharp");
@@ -1069,12 +1082,12 @@ model AccessRulePropertiesSubscriptionsItem {
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnectionProperties,
+  Microsoft.Search.PrivateEndpointConnectionProperties,
   "SearchServicePrivateEndpointConnectionProperties",
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
+  Microsoft.Search.PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
   "ConnectionState",
   "csharp"
 );
@@ -1152,7 +1165,7 @@ model AccessRulePropertiesSubscriptionsItem {
   "csharp"
 );
 @@clientName(
-  PrivateEndpointConnection,
+  Microsoft.Search.PrivateEndpointConnection,
   "SearchPrivateEndpointConnection",
   "csharp"
 );
@@ -1185,6 +1198,18 @@ model AccessRulePropertiesSubscriptionsItem {
 @@alternateType(
   `search-management-request-options`.clientRequestId,
   uuid,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  SearchService,
+  "resource-rbac-roles",
+  #{
+    SearchIndexDataContributor: "8ebe5a00-799e-43f5-93ac-243d3dce84a7",
+    SearchIndexDataReader: "1407120a-92aa-4202-b7e9-c0e197c71c8f",
+    SearchServiceContributor: "7ca78c08-252a-4471-8644-bb5ff32d4ba0",
+  },
   "csharp"
 );
 @@alternateType(QuotaUsageResult.id, armResourceIdentifier, "csharp");

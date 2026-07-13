@@ -15,7 +15,9 @@ namespace Microsoft.Sql;
 /**
  * An Azure SQL Database sync group.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Database)
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   ...ResourceNameParameter<
     Resource = SyncGroup,
@@ -38,7 +40,9 @@ model SyncGroup is Azure.ResourceManager.ProxyResource<SyncGroupProperties> {
   identity?: DataSyncParticipantIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
+@Azure.ResourceManager.Legacy.feature(Features.SyncGroups)
 interface SyncGroups {
   /**
    * Gets a sync group.

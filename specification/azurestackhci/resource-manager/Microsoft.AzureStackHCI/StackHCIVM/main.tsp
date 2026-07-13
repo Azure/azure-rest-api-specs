@@ -25,6 +25,7 @@ import "./NatGateways.tsp";
 import "./InboundRules.tsp";
 import "./LoadBalancers.tsp";
 import "./Operations.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

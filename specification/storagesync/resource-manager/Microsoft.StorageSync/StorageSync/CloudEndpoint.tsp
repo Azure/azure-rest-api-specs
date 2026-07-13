@@ -35,11 +35,11 @@ interface CloudEndpoints {
     Response = CloudEndpoint & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -57,21 +57,21 @@ interface CloudEndpoints {
       | (ArmResourceUpdatedResponse<CloudEndpoint> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CloudEndpoint> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("Request id")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -87,21 +87,21 @@ interface CloudEndpoints {
       | (ArmDeletedResponse & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("Request id")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | ArmDeletedNoContentResponse,
     Error = StorageSyncError
@@ -115,11 +115,11 @@ interface CloudEndpoints {
     Response = ArmResponse<CloudEndpointArray> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -139,21 +139,21 @@ interface CloudEndpoints {
 
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -173,21 +173,21 @@ interface CloudEndpoints {
 
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         })
       | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PostBackupResponse> &
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -205,11 +205,11 @@ interface CloudEndpoints {
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -225,11 +225,11 @@ interface CloudEndpoints {
     OkResponse & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;
@@ -247,11 +247,11 @@ interface CloudEndpoints {
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -268,11 +268,11 @@ interface CloudEndpoints {
           Azure.Core.Foundations.RetryAfterHeader> & {
           @header("x-ms-correlation-request-id")
           @doc("correlation request id.")
-          correlationRequestId?: string;
+          xMsCorrelationRequestId?: string;
 
           @header("x-ms-request-id")
           @doc("request id.")
-          requestId?: string;
+          xMsRequestId?: string;
         }),
     Error = StorageSyncError
   >;
@@ -287,11 +287,11 @@ interface CloudEndpoints {
     ArmResponse<CloudEndpointAfsShareMetadataCertificatePublicKeys> & {
       @header("x-ms-correlation-request-id")
       @doc("correlation request id.")
-      correlationRequestId?: string;
+      xMsCorrelationRequestId?: string;
 
       @header("x-ms-request-id")
       @doc("request id.")
-      requestId?: string;
+      xMsRequestId?: string;
     },
     Error = StorageSyncError
   >;

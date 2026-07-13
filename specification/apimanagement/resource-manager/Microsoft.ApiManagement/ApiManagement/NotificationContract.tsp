@@ -62,7 +62,7 @@ alias NotificationRecipientEmailOps = Azure.ResourceManager.Legacy.RoutedOperati
   NotificationRecipientEmailParentParameters,
   NotificationRecipientEmailParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
   }
 >;
 
@@ -104,7 +104,7 @@ alias NotificationRecipientUserOps = Azure.ResourceManager.Legacy.RoutedOperatio
   NotificationRecipientUserParentParameters,
   NotificationRecipientUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
   }
 >;
 
@@ -214,7 +214,8 @@ interface NotificationContractOps
         @segment("notifications")
         @key
         notificationName: NotificationName,
-      }
+      },
+      ResourceName = "ApiManagementNotification"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -395,7 +396,8 @@ interface WorkspaceNotificationOps
         @segment("notifications")
         @key
         notificationName: NotificationName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceNotification"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -493,7 +495,6 @@ interface WorkspaceNotification {
   /**
    * Removes the API Management user from the list of Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   delete(...WorkspaceNotificationRecipientUserParameters):

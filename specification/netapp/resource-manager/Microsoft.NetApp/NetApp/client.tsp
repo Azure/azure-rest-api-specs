@@ -152,6 +152,7 @@ using Microsoft.NetApp;
 @@clientName(WeeklySchedule, "SnapshotPolicyWeeklySchedule", "csharp");
 @@clientName(CacheLifeCycleState, "NetAppCacheLifeCycleState", "csharp");
 @@clientName(CacheProvisioningState, "NetAppCacheProvisioningState", "csharp");
+@@clientName(CacheFileAccessLogs, "NetAppCacheFileAccessLogs", "csharp");
 @@clientName(CifsChangeNotifyState, "NetAppCifsChangeNotifyState", "csharp");
 @@clientName(EnableWriteBackState, "NetAppEnableWriteBackState", "csharp");
 @@clientName(EncryptionState, "NetAppEncryptionState", "csharp");
@@ -408,6 +409,12 @@ using Microsoft.NetApp;
 @@clientName(BucketPatchProperties.akvDetails, "KeyVaultDetails", "csharp");
 @@clientName(CertificateAkvDetails, "CertificateKeyVaultDetails", "csharp");
 @@clientName(CredentialsAkvDetails, "CredentialsKeyVaultDetails", "csharp");
+@@clientName(BindPasswordAkvConfig, "BindPasswordKeyVaultConfig", "csharp");
+@@clientName(
+  BindPasswordAkvConfigPatch,
+  "BindPasswordKeyVaultConfigPatch",
+  "csharp"
+);
 @@clientName(
   AzureKeyVaultDetails.certificateAkvDetails,
   "CertificateKeyVaultDetails",
@@ -461,11 +468,7 @@ using Microsoft.NetApp;
 @@clientName(ActiveDirectory.ldapSigning, "IsLdapSigningEnabled", "csharp");
 @@clientName(ActiveDirectory.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
 @@clientName(LdapConfiguration.ldapOverTLS, "IsLdapOverTlsEnabled", "csharp");
-@@clientName(
-  LdapConfigurationPatch.ldapOverTLS,
-  "IsLdapOverTlsEnabled",
-  "csharp"
-);
+
 @@clientName(PoolProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(PoolPatchProperties.coolAccess, "IsCoolAccessEnabled", "csharp");
 @@clientName(
@@ -865,14 +868,6 @@ using Microsoft.NetApp;
   "csharp"
 );
 
-// --- @@access: visibility overrides for C# ---
-
-// Make types public for C# SDK backward compatibility
-@@access(VolumePropertiesExportPolicy, Access.public, "csharp");
-@@access(VolumeBackupRelationshipStatus, Access.public, "csharp");
-@@access(VolumeReplicationRelationshipStatus, Access.public, "csharp");
-@@access(VolumeRestoreRelationshipStatus, Access.public, "csharp");
-
 // --- @@hierarchyBuilding: restore base types for backward compat ---
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Restore TrackedResourceData base type for backward compat"
 @@hierarchyBuilding(
@@ -924,3 +919,9 @@ using Microsoft.NetApp;
 @@usage(VolumeBackupRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeReplicationRelationshipStatus, Usage.input, "csharp");
 @@usage(VolumeRestoreRelationshipStatus, Usage.input, "csharp");
+
+@@clientLocation(
+  NetAppAccounts.refreshLdapBindPassword,
+  "Accounts",
+  "!autorest"
+);

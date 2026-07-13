@@ -192,6 +192,16 @@ using Microsoft.AzureStackHCI;
 @@clientName(SwitchExtension, "HciEdgeSwitchExtension", "csharp");
 @@clientName(ValidateRequest, "HciEdgeDeviceValidateContent", "csharp");
 @@clientName(ValidateResponse, "HciEdgeDeviceValidateResult", "csharp");
+@@clientName(
+  EdgeMachineValidateRequest,
+  "HciEdgeMachineValidateContent",
+  "csharp"
+);
+@@clientName(
+  EdgeMachineValidateResponse,
+  "HciEdgeMachineValidateResult",
+  "csharp"
+);
 @@clientName(AccessLevel, "HciClusterAccessLevel", "csharp");
 @@clientName(
   ComplianceAssignmentType,
@@ -258,6 +268,11 @@ using Microsoft.AzureStackHCI;
 @@clientName(NetworkAdapter, "HciNetworkAdapter", "csharp");
 @@clientName(OsProfile, "HciDeploymentOSProfile", "csharp");
 @@clientName(UserDetails, "HciUserDetails", "csharp");
+@@clientName(
+  ValidatedSolutionRecipeComponentMetadata.lcmUpdate,
+  "IsLcmUpdate",
+  "csharp"
+);
 @@clientName(TimeConfiguration, "HciTimeConfiguration", "csharp");
 @@clientName(WebProxyConfiguration, "HciWebProxyConfiguration", "csharp");
 @@clientName(DnsZones, "HciDnsZones", "csharp");
@@ -440,14 +455,6 @@ using Microsoft.AzureStackHCI;
 @@clientName(Step.lastUpdatedTimeUtc, "LastUpdatedOn", "csharp");
 @@clientName(Step.startTimeUtc, "StartOn", "csharp");
 @@clientName(Step.endTimeUtc, "EndOn", "csharp");
-
-// ==================== Accessibility overrides ====================
-@@access(State, Access.public, "csharp");
-@@access(RebootRequirement, Access.public, "csharp");
-@@access(AvailabilityType, Access.public, "csharp");
-@@access(Step, Access.public, "csharp");
-@@access(ExtensionProfile, Access.public, "csharp");
-@@access(ExtensionInstanceView, Access.public, "csharp");
 
 // ==================== Usage overrides ====================
 // Offer/Sku/Publisher are read-only resources (no PUT/PATCH), so the generator

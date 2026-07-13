@@ -17,12 +17,12 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.HorizonDb, "HorizonDBMgmtClient", "csharp");
 @@clientName(
   Microsoft.HorizonDb.CreateModeCluster,
-  "HorizonDBCreateModeCluster",
+  "HorizonDBClusterCreateMode",
   "csharp"
 );
 @@clientName(
   Microsoft.HorizonDb.CreateModePool,
-  "HorizonDBCreateModePool",
+  "HorizonDBPoolCreateMode",
   "csharp"
 );
 @@clientName(
@@ -32,7 +32,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterForPatchUpdate,
-  "HorizonDBClusterForPatchUpdate",
+  "HorizonDBClusterPatch",
   "csharp"
 );
 @@clientName(
@@ -47,7 +47,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbClusterPropertiesForPatchUpdate,
-  "HorizonDBClusterPropertiesForPatchUpdate",
+  "HorizonDBClusterPatchProperties",
   "csharp"
 );
 @@clientName(
@@ -82,7 +82,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupForPatchUpdate,
-  "HorizonDBParameterGroupForPatchUpdate",
+  "HorizonDBParameterGroupPatch",
   "csharp"
 );
 @@clientName(
@@ -92,7 +92,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate,
-  "HorizonDBParameterGroupPropertiesForPatchUpdate",
+  "HorizonDBParameterGroupPatchProperties",
   "csharp"
 );
 @@clientName(
@@ -139,7 +139,7 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Microsoft.HorizonDb.HorizonDbReplicaForPatchUpdate,
-  "HorizonDBReplicaForPatchUpdate",
+  "HorizonDBReplicaPatch",
   "csharp"
 );
 @@clientName(
@@ -182,5 +182,45 @@ using Azure.ClientGenerator.Core;
 @@clientName(
   Microsoft.HorizonDb.ZonePlacementPolicy,
   "HorizonDBZonePlacementPolicy",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionProperties,
+  "HorizonDBPrivateEndpointConnectionProperties",
+  "csharp"
+);
+@@clientName(
+  Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
+  "HorizonDBPrivateEndpointConnectionPatchProperties",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterParameterGroupConnectionProperties.applyImmediately,
+  "ShouldApplyImmediately",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.applyImmediately,
+  "ShouldApplyImmediately",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbParameterGroupPropertiesForPatchUpdate.applyImmediately,
+  "ShouldApplyImmediately",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterProperties.pointInTimeUTC,
+  "PointInTimeUtcOn",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbClusterProperties.readonlyEndpoint,
+  "ReadOnlyEndpoint",
+  "csharp"
+);
+@@clientName(
+  Microsoft.HorizonDb.HorizonDbParameterGroupProperties.pgVersion,
+  "PostgreSqlVersion",
   "csharp"
 );
