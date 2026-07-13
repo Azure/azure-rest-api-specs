@@ -695,6 +695,7 @@ union ExpansionJobStatusType {
  * ARM provisioning state for the rebalance job.
  */
 @added(Versions.v2026_08_01)
+@Azure.Core.lroStatus
 union RebalanceJobPropertiesProvisioningState {
   /**
    * The terminal provisioning states (Succeeded, Failed, Canceled) shared by all ARM resources.
