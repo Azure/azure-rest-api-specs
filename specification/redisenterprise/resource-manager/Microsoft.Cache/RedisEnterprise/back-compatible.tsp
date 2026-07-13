@@ -32,14 +32,23 @@ using Microsoft.Cache;
 @@clientName(Databases.`import`::parameters.body, "parameters");
 @@clientName(Databases.export::parameters.body, "parameters");
 @@clientName(Databases.forceUnlink::parameters.body, "parameters");
-@@clientName(Databases.forceLinkToReplicationGroup::parameters.body, "parameters");
+@@clientName(
+  Databases.forceLinkToReplicationGroup::parameters.body,
+  "parameters"
+);
 @@clientName(Databases.flush::parameters.body, "parameters");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Database.properties);
 
 @@clientLocation(AccessPolicyAssignments.get, "AccessPolicyAssignment");
-@@clientLocation(AccessPolicyAssignments.createUpdate, "AccessPolicyAssignment");
-@@clientName(AccessPolicyAssignments.createUpdate::parameters.resource, "parameters");
+@@clientLocation(
+  AccessPolicyAssignments.createUpdate,
+  "AccessPolicyAssignment"
+);
+@@clientName(
+  AccessPolicyAssignments.createUpdate::parameters.resource,
+  "parameters"
+);
 @@clientLocation(AccessPolicyAssignments.delete, "AccessPolicyAssignment");
 @@clientLocation(AccessPolicyAssignments.list, "AccessPolicyAssignment");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
