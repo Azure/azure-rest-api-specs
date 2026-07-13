@@ -1,6 +1,7 @@
 import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
@@ -33,7 +34,7 @@ using Microsoft.AlertsManagement;
 // generator emits ResourceIdentifier compatible with the ResourceData base class.
 @@alternateType(
   Azure.ResourceManager.CommonTypes.Resource.id,
-  Azure.Core.armResourceIdentifier,
+  armResourceIdentifier,
   "csharp"
 );
 
