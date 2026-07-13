@@ -17,16 +17,16 @@ namespace Microsoft.CognitiveServices;
  */
 union SkuTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Free pricing tier"
-  Free: "Free",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic pricing tier"
-  Basic: "Basic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard pricing tier"
-  Standard: "Standard",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Premium pricing tier"
-  Premium: "Premium",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Enterprise pricing tier"
   Enterprise: "Enterprise",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Premium pricing tier"
+  Premium: "Premium",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Standard pricing tier"
+  Standard: "Standard",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Basic pricing tier"
+  Basic: "Basic",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Free pricing tier"
+  Free: "Free",
 }
 
 /**
@@ -1370,10 +1370,10 @@ union AgentDeploymentProvisioningState {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "'ResourceIdentityType' uses extensible union instead of fixed enum for forward compatibility"
 enum ResourceIdentityType {
-  None,
   SystemAssigned,
-  UserAssigned,
+  None,
   `SystemAssigned, UserAssigned`,
+  UserAssigned,
 }
 
 /**
