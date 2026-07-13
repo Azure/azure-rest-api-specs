@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-07-15",
+    "licenseName": "{licenseName}",
+    "parameters": {
+      "location": "eastus2euap",
+      "properties": {
+        "licenseDetails": {
+          "type": "pCore",
+          "edition": "Datacenter",
+          "processors": 6,
+          "state": "Activated",
+          "target": "Windows Server 2012"
+        },
+        "licenseType": "ESU"
+      }
+    },
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{licenseName}",
+        "type": "Microsoft.HybridCompute/licenses",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.HybridCompute/Licenses/{licenseName}",
+        "location": "eastus2euap",
+        "properties": {
+          "licenseDetails": {
+            "type": "pCore",
+            "assignedLicenses": 2,
+            "edition": "Datacenter",
+            "immutableId": "<generated Guid>",
+            "processors": 6,
+            "state": "Activated",
+            "target": "Windows Server 2012"
+          },
+          "licenseType": "ESU",
+          "tenantId": "00000000-0000-0000-0000-000000000000"
+        },
+        "tags": null
+      }
+    }
+  },
+  "operationId": "Licenses_CreateOrUpdate",
+  "title": "Create or Update a License"
+}
