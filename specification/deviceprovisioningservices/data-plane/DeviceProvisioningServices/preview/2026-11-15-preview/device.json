@@ -1007,13 +1007,15 @@
           "type": "string",
           "description": "ETag from a prior response; lets the service skip re-processing agentInfo.\nOptional.",
           "minLength": 1,
-          "maxLength": 128
+          "maxLength": 128,
+          "x-ms-client-name": "agentInfoEtag"
         },
         "serviceConfigETag": {
           "type": "string",
           "description": "ETag from a prior response; lets the service omit unchanged serviceConfiguration.\nOptional.",
           "minLength": 1,
-          "maxLength": 128
+          "maxLength": 128,
+          "x-ms-client-name": "serviceConfigEtag"
         }
       },
       "required": [
@@ -1030,11 +1032,13 @@
         },
         "serviceConfigETag": {
           "type": "string",
-          "description": "Current ETag of serviceConfiguration."
+          "description": "Current ETag of serviceConfiguration.",
+          "x-ms-client-name": "serviceConfigEtag"
         },
         "agentInfoETag": {
           "type": "string",
-          "description": "Current ETag of the processed agentInfo."
+          "description": "Current ETag of the processed agentInfo.",
+          "x-ms-client-name": "agentInfoEtag"
         },
         "updateMetadata": {
           "$ref": "#/definitions/UpdateMetadata",

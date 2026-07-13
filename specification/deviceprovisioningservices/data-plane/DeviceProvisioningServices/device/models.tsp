@@ -374,6 +374,7 @@ model UpdateCheckRequest {
   tpm?: TpmAttestation;
 
   /** Currently installed update, or null if none. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Mirrors the ADU onboarding contract wire shape: installedUpdateId is always present and is null when no update is installed (transparent pass-through)."
   installedUpdateId: InstalledUpdateId | null;
 
   /**
@@ -382,7 +383,8 @@ model UpdateCheckRequest {
    */
   @minLength(1)
   @maxLength(128)
-  agentInfoETag?: string;
+  @encodedName("application/json", "agentInfoETag")
+  agentInfoEtag?: string;
 
   /**
    * ETag from a prior response; lets the service omit unchanged serviceConfiguration.
@@ -390,7 +392,8 @@ model UpdateCheckRequest {
    */
   @minLength(1)
   @maxLength(128)
-  serviceConfigETag?: string;
+  @encodedName("application/json", "serviceConfigETag")
+  serviceConfigEtag?: string;
 }
 
 /**
@@ -447,10 +450,12 @@ model UpdateCheckResponse {
   serviceConfiguration?: ServiceConfiguration;
 
   /** Current ETag of serviceConfiguration. */
-  serviceConfigETag: string;
+  @encodedName("application/json", "serviceConfigETag")
+  serviceConfigEtag: string;
 
   /** Current ETag of the processed agentInfo. */
-  agentInfoETag: string;
+  @encodedName("application/json", "agentInfoETag")
+  agentInfoEtag: string;
 
   /** Present only when an update applies to the device; omitted otherwise. */
   updateMetadata?: UpdateMetadata;
@@ -505,6 +510,7 @@ model ReportStatusRequest {
   tpm?: TpmAttestation;
 
   /** The update now installed, or null. Communicates current device state; not a failure signal. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Mirrors the ADU onboarding contract wire shape: installedUpdateId is always present and is null when no update is installed (transparent pass-through)."
   installedUpdateId: InstalledUpdateId | null;
 
   /** The terminal result of the installation. */
