@@ -38,16 +38,20 @@ using Microsoft.OperationalInsights;
 @@Legacy.flattenProperty(LinkedService.properties);
 
 @@clientLocation(LinkedStorageAccountsResources.get, "LinkedStorageAccounts");
-@@clientLocation(LinkedStorageAccountsResources.createOrUpdate,
+@@clientLocation(
+  LinkedStorageAccountsResources.createOrUpdate,
   "LinkedStorageAccounts"
 );
-@@clientName(LinkedStorageAccountsResources.createOrUpdate::parameters.resource,
+@@clientName(
+  LinkedStorageAccountsResources.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientLocation(LinkedStorageAccountsResources.delete,
+@@clientLocation(
+  LinkedStorageAccountsResources.delete,
   "LinkedStorageAccounts"
 );
-@@clientLocation(LinkedStorageAccountsResources.listByWorkspace,
+@@clientLocation(
+  LinkedStorageAccountsResources.listByWorkspace,
   "LinkedStorageAccounts"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -55,11 +59,13 @@ using Microsoft.OperationalInsights;
 
 @@clientLocation(LogAnalyticsQueryPackQueries.get, "Queries");
 @@clientLocation(LogAnalyticsQueryPackQueries.put, "Queries");
-@@clientName(LogAnalyticsQueryPackQueries.put::parameters.resource,
+@@clientName(
+  LogAnalyticsQueryPackQueries.put::parameters.resource,
   "QueryPayload"
 );
 @@clientLocation(LogAnalyticsQueryPackQueries.update, "Queries");
-@@clientName(LogAnalyticsQueryPackQueries.update::parameters.properties,
+@@clientName(
+  LogAnalyticsQueryPackQueries.update::parameters.properties,
   "QueryPayload"
 );
 @@clientLocation(LogAnalyticsQueryPackQueries.delete, "Queries");
@@ -69,18 +75,21 @@ using Microsoft.OperationalInsights;
 
 @@clientLocation(LogAnalyticsQueryPacks.get, "QueryPacks");
 @@clientLocation(LogAnalyticsQueryPacks.createOrUpdate, "QueryPacks");
-@@clientName(LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
+@@clientName(
+  LogAnalyticsQueryPacks.createOrUpdate::parameters.resource,
   "LogAnalyticsQueryPackPayload"
 );
 @@clientLocation(LogAnalyticsQueryPacks.updateTags, "QueryPacks");
-@@clientName(LogAnalyticsQueryPacks.updateTags::parameters.properties,
+@@clientName(
+  LogAnalyticsQueryPacks.updateTags::parameters.properties,
   "QueryPackTags"
 );
 @@clientLocation(LogAnalyticsQueryPacks.delete, "QueryPacks");
 @@clientLocation(LogAnalyticsQueryPacks.listByResourceGroup, "QueryPacks");
 @@clientLocation(LogAnalyticsQueryPacks.list, "QueryPacks");
 @@clientLocation(LogAnalyticsQueryPacks.search, "Queries");
-@@clientName(LogAnalyticsQueryPacks.search::parameters.body,
+@@clientName(
+  LogAnalyticsQueryPacks.search::parameters.body,
   "QuerySearchProperties"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -127,16 +136,19 @@ using Microsoft.OperationalInsights;
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.getNSP, Workspaces);
 @@clientLocation(NetworkSecurityPerimeterConfigurations.listNSP, Workspaces);
-@@clientLocation(NetworkSecurityPerimeterConfigurations.reconcileNSP,
+@@clientLocation(
+  NetworkSecurityPerimeterConfigurations.reconcileNSP,
   Workspaces
 );
 
 @@clientLocation(SummaryLogsOperationGroup.get, "SummaryLogs");
 @@clientLocation(SummaryLogsOperationGroup.createOrUpdate, "SummaryLogs");
-@@clientName(SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
+@@clientName(
+  SummaryLogsOperationGroup.createOrUpdate::parameters.resource,
   "parameters"
 );
-@@clientName(QueryPacksOperationGroup.createOrUpdateWithoutName::parameters.body,
+@@clientName(
+  QueryPacksOperationGroup.createOrUpdateWithoutName::parameters.body,
   "LogAnalyticsQueryPackPayload"
 );
 @@clientLocation(SummaryLogsOperationGroup.delete, "SummaryLogs");
@@ -150,14 +162,16 @@ using Microsoft.OperationalInsights;
 
 @@clientLocation(OperationStatusesOperationGroup.get, "OperationStatuses");
 
-@@clientLocation(QueryPacksOperationGroup.createOrUpdateWithoutName,
+@@clientLocation(
+  QueryPacksOperationGroup.createOrUpdateWithoutName,
   "QueryPacks"
 );
 
 @@clientLocation(WorkspacesOperationGroup.failover, Workspaces);
 
 @@clientLocation(DeletedWorkspacesOperationGroup.list, "DeletedWorkspaces");
-@@clientLocation(DeletedWorkspacesOperationGroup.listByResourceGroup,
+@@clientLocation(
+  DeletedWorkspacesOperationGroup.listByResourceGroup,
   "DeletedWorkspaces"
 );
 @@clientName(KeyVaultProperties, "keyVaultProperties");
@@ -169,7 +183,8 @@ model AccessRulePropertiesSubscriptionsItem {
   /** The fully qualified Azure resource ID of the subscription e.g. ('/subscriptions/00000000-0000-0000-0000-000000000000') */
   id?: Azure.Core.armResourceIdentifier;
 }
-@@alternateType(Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscriptions,
   global.AccessRulePropertiesSubscriptionsItem[],
   "go,javascript"
 );

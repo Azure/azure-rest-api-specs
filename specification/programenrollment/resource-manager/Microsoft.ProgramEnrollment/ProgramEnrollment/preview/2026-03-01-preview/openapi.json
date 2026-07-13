@@ -1,0 +1,623 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ProgramEnrollment",
+    "version": "2026-03-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "EduEnrollments"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ProgramEnrollment/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List operations for Microsoft.ProgramEnrollment": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProgramEnrollment/eduEnrollments": {
+      "get": {
+        "operationId": "EduEnrollments_ListBySubscription",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Lists the edu enrollments in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edu enrollments by subscription": {
+            "$ref": "./examples/EduEnrollments_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgramEnrollment/eduEnrollments": {
+      "get": {
+        "operationId": "EduEnrollments_ListByResourceGroup",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Lists the edu enrollments in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List edu enrollments by resource group": {
+            "$ref": "./examples/EduEnrollments_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProgramEnrollment/eduEnrollments/{enrollmentName}": {
+      "get": {
+        "operationId": "EduEnrollments_Get",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Gets the specified edu enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the edu enrollment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an edu enrollment": {
+            "$ref": "./examples/EduEnrollments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EduEnrollments_CreateOrUpdate",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Creates or updates the specified edu enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the edu enrollment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EduEnrollment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EduEnrollment' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollment"
+            }
+          },
+          "201": {
+            "description": "Resource 'EduEnrollment' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollment"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update an edu enrollment": {
+            "$ref": "./examples/EduEnrollments_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "EduEnrollments_Update",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Updates the specified edu enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the edu enrollment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EduEnrollmentPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EduEnrollment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an edu enrollment": {
+            "$ref": "./examples/EduEnrollments_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EduEnrollments_Delete",
+        "tags": [
+          "EduEnrollments"
+        ],
+        "description": "Deletes the specified edu enrollment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enrollmentName",
+            "in": "path",
+            "description": "The name of the edu enrollment",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an edu enrollment": {
+            "$ref": "./examples/EduEnrollments_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
+    },
+    "DomainGroup": {
+      "type": "object",
+      "description": "A group of edu domains scoped to an Entra tenant.",
+      "properties": {
+        "domainNames": {
+          "type": "array",
+          "description": "The edu domain names in this group.",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tenantId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The Entra tenant ID that owns these domains. Defaults to the caller's tenant if omitted.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/DomainGroupState",
+          "description": "The assessment state of this domain group.",
+          "readOnly": true
+        },
+        "failureReason": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Failure detail when state is Failed or ActionRequired. Omitted otherwise.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "domainNames"
+      ]
+    },
+    "DomainGroupState": {
+      "type": "string",
+      "description": "The assessment state of a domain group.",
+      "enum": [
+        "Pending",
+        "ActionRequired",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "DomainGroupState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "Assessment is pending."
+          },
+          {
+            "name": "ActionRequired",
+            "value": "ActionRequired",
+            "description": "Action is required to complete assessment."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Assessment failed."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Assessment succeeded."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "EduEnrollment": {
+      "type": "object",
+      "description": "An education program enrollment that groups Entra domains under a single sovereign/edu program scope.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EduEnrollmentProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EduEnrollmentListResult": {
+      "type": "object",
+      "description": "The response of a EduEnrollment list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EduEnrollment items on this page",
+          "items": {
+            "$ref": "#/definitions/EduEnrollment"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EduEnrollmentPatch": {
+      "type": "object",
+      "description": "The type used for update operations of the EduEnrollment.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EduEnrollmentProperties": {
+      "type": "object",
+      "description": "Details of the Program EduEnrollment.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "domains": {
+          "type": "array",
+          "description": "The domain groups associated with this enrollment.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/DomainGroup"
+          },
+          "x-ms-identifiers": [
+            "tenantId"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "failureReason": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "Failure detail when provisioningState is Failed. Omitted otherwise.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "domains"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          }
+        ]
+      },
+      "readOnly": true
+    }
+  },
+  "parameters": {}
+}

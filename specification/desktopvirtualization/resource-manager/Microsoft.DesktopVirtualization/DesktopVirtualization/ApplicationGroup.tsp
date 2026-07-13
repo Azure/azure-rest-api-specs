@@ -139,17 +139,20 @@ interface ApplicationGroups {
   >;
 }
 
-@@Azure.ClientGenerator.Core.clientName(ApplicationGroups.createOrUpdate::parameters.resource,
+@@Azure.ClientGenerator.Core.clientName(
+  ApplicationGroups.createOrUpdate::parameters.resource,
   "applicationGroup"
 );
 @@maxLength(ApplicationGroup.name, 64);
 @@minLength(ApplicationGroup.name, 3);
 @@doc(ApplicationGroup.name, "The name of the application group");
 @@doc(ApplicationGroup.properties, "Detailed properties for ApplicationGroup");
-@@doc(ApplicationGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ApplicationGroups.createOrUpdate::parameters.resource,
   "Object containing ApplicationGroup definitions."
 );
 @@clientName(ApplicationGroups.update::parameters.body, "applicationGroup");
-@@doc(ApplicationGroups.update::parameters.body,
+@@doc(
+  ApplicationGroups.update::parameters.body,
   "The AppGroup properties to be updated"
 );

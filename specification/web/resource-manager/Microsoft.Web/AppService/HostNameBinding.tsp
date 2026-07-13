@@ -52,7 +52,8 @@ interface HostNameBindingOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteHostNameBinding"
     > {}
 
 @tag("WebApps")
@@ -124,7 +125,8 @@ interface HostNameBindingOperationGroupOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteSlotHostNameBinding"
     > {}
 
 @tag("WebApps")
@@ -172,12 +174,15 @@ interface HostNameBindingOperationGroup {
 }
 
 @@doc(HostNameBinding.name, "Hostname in the hostname binding.");
-@@doc(HostNameBinding.properties,
+@@doc(
+  HostNameBinding.properties,
   "HostNameBinding resource specific properties"
 );
-@@doc(HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
+@@doc(
+  HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
   "Binding details. This is the JSON representation of a HostNameBinding object."
 );
-@@doc(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
+@@doc(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
   "Binding details. This is the JSON representation of a HostNameBinding object."
 );

@@ -1,0 +1,20 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # JS SDK generation is intentionally not configured for the Code Transparency
+    # Service: the product does not ship a JavaScript SDK. The @azure-tools/typespec-ts
+    # emitter block has been removed from tspconfig.yaml, so options under
+    # options.@azure-tools/typespec-ts.* are intentionally absent.
+    - options.@azure-tools/typespec-ts.*
+  reason: >
+    Code Transparency Service does not require a JavaScript SDK. The
+    @azure-tools/typespec-ts emitter block is intentionally omitted from
+    tspconfig.yaml, so SdkTspConfigValidation sub-rules that require its
+    options to be present do not apply. JS SDK generation is blocked by an
+    upstream emitter bug that leaks NodeJS.ReadableStream into browser
+    builds; tracked at https://github.com/Azure/autorest.typescript/issues/3990.
+    Once that issue is resolved and rolled into the spec-gen-sdk pipeline,
+    JS SDK generation can be re-enabled and this suppression removed.
