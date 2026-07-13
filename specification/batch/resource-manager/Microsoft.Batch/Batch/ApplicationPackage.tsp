@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Application.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Batch;
 /**
@@ -19,6 +21,35 @@ model ApplicationPackage
   is Azure.ResourceManager.ProxyResource<ApplicationPackageProperties> {
   ...ResourceNameParameter<
     Resource = ApplicationPackage,
+    KeyName = "versionName",
+    SegmentName = "versions",
+    NamePattern = "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]*$"
+  >;
+
+  /**
+   * The ETag of the resource, used for concurrency statements.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The tags of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
+  tags?: Record<string>;
+}
+
+/**
+ * Application package envelope returned by create/update starting in API version 2026-10-01. Includes the `storageUrl` and `storageUrlExpiry` upload fields that are no longer returned by GET, LIST, or activate.
+ */
+@added(Versions.v2026_10_01)
+@parentResource(Application)
+model ApplicationPackageCreateResponse
+  is Azure.ResourceManager.ProxyResource<ApplicationPackageCreateResponseProperties> {
+  ...ResourceNameParameter<
+    Resource = ApplicationPackageCreateResponse,
     KeyName = "versionName",
     SegmentName = "versions",
     NamePattern = "^[a-zA-Z0-9_-][a-zA-Z0-9_.-]*$"
@@ -51,9 +82,26 @@ interface ApplicationPackages {
    * Creates an application package record. The record contains a storageUrl where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
-  create is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
+  @sharedRoute
+  @removed(Versions.v2026_10_01)
+  @renamedFrom(Versions.v2026_10_01, "create")
+  createV20250601 is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
     ApplicationPackage,
     Response = ArmResourceUpdatedResponse<ApplicationPackage>,
+    OptionalRequestBody = true,
+    Error = CloudError
+  >;
+
+  /**
+   * Creates an application package record. The record contains a storageUrl where the package payload should be uploaded to. Once uploaded the `ApplicationPackage` needs to be activated using the `activate` action before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS. Starting in API version 2026-10-01, `storageUrl` and `storageUrlExpiry` are returned only by this create/update operation and are no longer populated by GET, LIST, or activate responses.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Legacy behavior"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "PUT intentionally returns a wider schema than GET/LIST/activate in API versions >= 2026-10-01: storageUrl and storageUrlExpiry are only populated on the create/update response."
+  @sharedRoute
+  @added(Versions.v2026_10_01)
+  create is Azure.ResourceManager.Legacy.CreateOrReplaceSync<
+    ApplicationPackage,
+    Response = ArmResourceUpdatedResponse<ApplicationPackageCreateResponse>,
     OptionalRequestBody = true,
     Error = CloudError
   >;
@@ -97,6 +145,17 @@ interface ApplicationPackages {
   ApplicationPackage.properties,
   "The properties associated with the Application Package."
 );
+@@maxLength(ApplicationPackageCreateResponse.name, 64);
+@@minLength(ApplicationPackageCreateResponse.name, 1);
+@@doc(ApplicationPackageCreateResponse.name, "The version of the application.");
+@@doc(
+  ApplicationPackageCreateResponse.properties,
+  "The properties associated with the Application Package."
+);
+@@doc(
+  ApplicationPackages.createV20250601::parameters.resource,
+  "The parameters for the request."
+);
 @@doc(
   ApplicationPackages.create::parameters.resource,
   "The parameters for the request."
@@ -107,5 +166,11 @@ interface ApplicationPackages {
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
 @@extension(Applications.create::parameters.resource, "required", false);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
+@@extension(
+  ApplicationPackages.createV20250601::parameters.resource,
+  "required",
+  false
+);
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"
 @@extension(ApplicationPackages.create::parameters.resource, "required", false);

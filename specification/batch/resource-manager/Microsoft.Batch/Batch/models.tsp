@@ -1631,11 +1631,50 @@ model ApplicationPackageProperties {
   /**
    * The URL for the application package in Azure Storage.
    */
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   storageUrl?: string;
 
   /**
    * The UTC time at which the Azure Storage URL will expire.
+   */
+  @removed(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read)
+  storageUrlExpiry?: utcDateTime;
+
+  /**
+   * The time at which the package was last activated, if the package is active.
+   */
+  @visibility(Lifecycle.Read)
+  lastActivationTime?: utcDateTime;
+}
+
+/**
+ * Properties returned from an Application Package create or update operation. Includes the upload `storageUrl` (SAS URL) and `storageUrlExpiry` so the client can upload the package payload. These fields are only present on the create/update response starting in API version 2026-10-01; they are no longer returned by GET, LIST, or activate.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Legacy Design"
+@added(Versions.v2026_10_01)
+model ApplicationPackageCreateResponseProperties {
+  /**
+   * The current state of the application package.
+   */
+  @visibility(Lifecycle.Read)
+  state?: PackageState;
+
+  /**
+   * The format of the application package, if the package is active.
+   */
+  @visibility(Lifecycle.Read)
+  format?: string;
+
+  /**
+   * The URL to which the application package payload should be uploaded.
+   */
+  @visibility(Lifecycle.Read)
+  storageUrl?: string;
+
+  /**
+   * The UTC time at which the storage URL will expire.
    */
   @visibility(Lifecycle.Read)
   storageUrlExpiry?: utcDateTime;
