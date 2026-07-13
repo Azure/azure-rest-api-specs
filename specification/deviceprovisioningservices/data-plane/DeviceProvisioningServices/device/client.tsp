@@ -4,16 +4,16 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using ProvisioningDeviceClient;
 
-@@clientLocation(
-  RuntimeRegistration.operationStatusLookup,
+@@clientLocation(RuntimeRegistration.operationStatusLookup,
   "RuntimeRegistration"
 );
-@@clientLocation(
-  RuntimeRegistration.deviceRegistrationStatusLookup,
+@@clientLocation(RuntimeRegistration.deviceRegistrationStatusLookup,
   "RuntimeRegistration"
 );
 @@clientLocation(RuntimeRegistration.registerDevice, "RuntimeRegistration");
-@@clientLocation(
-  RuntimeRegistration.registerDeviceAndIssueCertificate,
+@@clientLocation(RuntimeRegistration.registerDeviceAndIssueCertificate,
   "RuntimeRegistration"
 );
+@@clientLocation(DeviceUpdate.getDeviceUpdate, "DeviceUpdate");
+@@clientLocation(DeviceUpdate.getOnboardingDeviceUpdate, "DeviceUpdate");
+@@clientLocation(DeviceUpdate.reportDeviceUpdateStatus, "DeviceUpdate");

@@ -44,22 +44,20 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -95,22 +93,20 @@ interface RuntimeRegistration {
       @path
       idScope: string;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -176,22 +172,20 @@ interface RuntimeRegistration {
       @bodyRoot
       body: DeviceRegistration;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
-
-          @body body: RegistrationOperationStatus;
-        },
+      @body body: RegistrationOperationStatus;
+    },
     {},
     ProvisioningServiceErrorDetails
   >;
@@ -227,22 +221,134 @@ interface RuntimeRegistration {
       @bodyRoot
       deviceRegistration: DeviceRegistration;
     },
+    {
+      @statusCode _: 200;
+      @body body: RegistrationOperationStatus;
+    } | {
+      @statusCode _: 202;
 
-      | {
-          @statusCode _: 200;
-          @body body: RegistrationOperationStatus;
-        }
-      | {
-          @statusCode _: 202;
+      @header("retry-after")
+      retryAfter?: int32;
 
-          @header("retry-after")
-          retryAfter?: int32;
+      @header("Location")
+      location?: string;
 
-          @header("Location")
-          location?: string;
+      @body body: RegistrationOperationStatus;
+    },
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+}
 
-          @body body: RegistrationOperationStatus;
-        },
+/**
+ * Device-facing ADU (Azure Device Update) integration operations. Added in
+ * 2026-11-15-preview. The device selects the endpoint by its own provisioning
+ * state: the onboarding/bootstrap fetch before it is provisioned, the
+ * regular/operational fetch afterwards. DPS is a thin pass-through to ADR (which
+ * forwards to ADU) and does not branch on the update family or parse the manifest.
+ */
+@added(Versions.v2026_11_15_preview)
+interface DeviceUpdate {
+  /**
+   * Checks for an available device update on the regular / operational path. The
+   * device selects this endpoint once it is provisioned.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (regular / operational path).")
+  @route("/{idScope}/registrations/{registrationId}/getDeviceUpdate")
+  @post
+  getDeviceUpdate is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
+      @header("x-ms-external-device-id")
+      xMsExternalDeviceId: string;
+
+      /**
+       * ADR device identifier (UUID), asserted by the gateway. Present on the
+       * regular path only.
+       */
+      @header("x-ms-device-id")
+      xMsDeviceId?: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Checks for an available device update on the onboarding / bootstrap path. The
+   * device selects this endpoint before it is provisioned; only the external device
+   * identifier is available (no ADR device UUID yet).
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Checks for an available device update (onboarding / bootstrap path).")
+  @route("/{idScope}/registrations/{registrationId}/onboarding/getDeviceUpdate")
+  @post
+  getOnboardingDeviceUpdate is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
+      @header("x-ms-external-device-id")
+      xMsExternalDeviceId: string;
+
+      /** Update check request. */
+      @bodyRoot
+      body: UpdateCheckRequest;
+    },
+    UpdateCheckResponse,
+    {},
+    ProvisioningServiceErrorDetails
+  >;
+
+  /**
+   * Reports the terminal result of a device update installation. Idempotent on
+   * workflowId; ADU routes the report to the correct update family.
+   */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name mirrors the ADU device contract for pass-through compatibility"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Using Foundations.Operation for consistency with the existing DPS device API"
+  @summary("Reports the terminal result of a device update installation.")
+  @route("/{idScope}/registrations/{registrationId}/reportDeviceUpdateStatus")
+  @post
+  reportDeviceUpdateStatus is Azure.Core.Foundations.Operation<
+    {
+      /** The registration ID is alphanumeric, lowercase, and may contain hyphens. */
+      @path
+      registrationId: string;
+
+      /** The scope of the DPS instance. */
+      @path
+      idScope: string;
+
+      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
+      @header("x-ms-external-device-id")
+      xMsExternalDeviceId: string;
+
+      /** Status report request. */
+      @bodyRoot
+      body: ReportStatusRequest;
+    },
+    ReportDeviceUpdateStatusResult,
     {},
     ProvisioningServiceErrorDetails
   >;

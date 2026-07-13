@@ -36,6 +36,16 @@ openapi-type: data-plane
 tag: package-2021-10-01-device
 ```
 
+### Tag: package-preview-2026-11-device
+
+These settings apply only when `--tag=package-preview-2026-11-device` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-11-device'
+input-file:
+  - preview/2026-11-15-preview/device.json
+title: ProvisioningDeviceClient
+```
+
 ### Tag: package-preview-2026-07-service
 
 These settings apply only when `--tag=package-preview-2026-07-service` is specified on the command line.
