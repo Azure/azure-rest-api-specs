@@ -1,8 +1,72 @@
+import { execFile } from "child_process";
 import { readFile, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { join } from "path";
 import { getChangedFiles, tspconfig } from "../../../shared/src/changed-files.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
+
+/**
+ * Read a file from the base branch (HEAD^) via git show.
+ * Returns null if the file does not exist on the base branch.
+ *
+ * @param {string} file - Relative path to the file
+ * @returns {Promise<string | null>}
+ */
+function readBaseVersion(file) {
+  return new Promise((resolve) => {
+    execFile("git", ["show", `HEAD^:${file}`], (err, stdout) => {
+      if (err) {
+        resolve(null);
+      } else {
+        resolve(stdout);
+      }
+    });
+  });
+}
+
+/**
+ * Extract namespace values from a parsed tspconfig options object.
+ * Returns a map of language → namespace (same logic as extractNamespaces but from raw config).
+ *
+ * @param {Record<string, Record<string, unknown>>} options - The options section of tspconfig
+ * @returns {Record<string, string>}
+ */
+function extractNamespacesFromOptions(options) {
+  /** @type {Record<string, string>} */
+  const namespaces = {};
+  for (const [emitterKey, emitterOpts] of Object.entries(options)) {
+    const lang = resolveLanguage(emitterKey);
+    if (!lang || !emitterOpts || typeof emitterOpts !== "object") {
+      continue;
+    }
+
+    const ns = /** @type {string | undefined} */ (emitterOpts.namespace);
+    if (ns) {
+      namespaces[lang] = ns;
+      continue;
+    }
+
+    const packageDetails = /** @type {Record<string, unknown> | undefined} */ (
+      emitterOpts["package-details"]
+    );
+    if (packageDetails?.name && typeof packageDetails.name === "string") {
+      namespaces[lang] = packageDetails.name;
+      continue;
+    }
+
+    const module = /** @type {string | undefined} */ (emitterOpts.module);
+    if (module) {
+      namespaces[lang] = module;
+      continue;
+    }
+
+    const crateName = /** @type {string | undefined} */ (emitterOpts["crate-name"]);
+    if (crateName) {
+      namespaces[lang] = crateName;
+    }
+  }
+  return namespaces;
+}
 
 /**
  * Map of emitter package name suffix to normalized language key.
@@ -179,6 +243,44 @@ export default async function detectNamespaces({ context, core }) {
     if (result.isDataPlane) {
       isDataPlane = true;
     }
+  }
+
+  // Compare against base branch to filter out languages with unchanged namespaces.
+  // Only report languages whose namespace actually differs from the base version.
+  for (const file of changedFiles) {
+    const baseContent = await readBaseVersion(file);
+    if (!baseContent) {
+      // File is new (not on base branch) — all namespaces are genuinely new
+      continue;
+    }
+    try {
+      const baseConfig = /** @type {Record<string, unknown> | undefined} */ (
+        yaml.load(baseContent)
+      );
+      const baseOptions = /** @type {Record<string, Record<string, unknown>> | undefined} */ (
+        baseConfig?.options
+      );
+      if (!baseOptions) {
+        continue;
+      }
+      const baseNamespaces = extractNamespacesFromOptions(baseOptions);
+      for (const [lang, ns] of Object.entries(namespacesFound)) {
+        if (baseNamespaces[lang] === ns) {
+          core.info(`Namespace unchanged for ${lang}: "${ns}", skipping`);
+          delete namespacesFound[lang];
+          delete artifactNames[lang];
+        }
+      }
+    } catch (e) {
+      core.warning(
+        `Failed to parse base version of ${file}: ${/** @type {Error} */ (e).message}, treating as new`,
+      );
+    }
+  }
+
+  if (Object.keys(namespacesFound).length === 0) {
+    core.info("No namespace changes detected after comparing with base branch");
+    return;
   }
 
   const formatRules = await loadFormatRules(core);
