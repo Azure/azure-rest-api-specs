@@ -42,20 +42,21 @@ union RpSkuTier {
   fabric: "Fabric",
 }
 
-@doc("The overage settings for the Fabric capacity resource")
+@doc("The overage billing settings for the Fabric capacity resource")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model OverageSettings {
-  @doc("The overage state for the capacity.")
-  state?: OverageSettingsState;
+model OverageBillingSettings {
+  @doc("The overage billing state for the Fabric capacity resource.")
+  state?: OverageBillingState;
 
-  @doc("The threshold in Capacity Unit Hours for enabling overage.")
+  @doc("When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.")
   @minValue(0)
-  thresholdCapacityUnitHours?: int32;
+  @encodedName("application/json", "24HourThresholdCapacityUnitHours")
+  twentyFourHourThresholdCapacityUnitHours?: int32;
 }
 
-@doc("The overage state for the Fabric capacity resource.")
+@doc("The overage billing state for the Fabric capacity resource.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-union OverageSettingsState {
+union OverageBillingState {
   @doc("Overage is enabled.")
   Enabled: "Enabled",
 
@@ -70,9 +71,16 @@ model CapacityAdministration {
   @doc("An array of administrator user identities.")
   members: Array<string>;
 
-  @doc("The overage settings")
+  @doc("The settings for capacity administration.")
   @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-  overageSettings?: OverageSettings;
+  settings?: CapacityAdministrationSettings;
+}
+
+@doc("The settings for capacity administration.")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+model CapacityAdministrationSettings {
+  @doc("The overage billing settings for the Fabric capacity resource.")
+  overageBilling?: OverageBillingSettings;
 }
 
 @doc("The provisioning state of the Fabric capacity resource.")
