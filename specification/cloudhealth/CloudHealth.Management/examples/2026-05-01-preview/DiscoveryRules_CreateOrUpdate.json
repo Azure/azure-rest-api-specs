@@ -1,0 +1,82 @@
+{
+  "title": "DiscoveryRules_CreateOrUpdate",
+  "operationId": "DiscoveryRules_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "resourceGroupName": "online-store-rg",
+    "healthModelName": "online-store",
+    "discoveryRuleName": "discover-web-apps",
+    "resource": {
+      "properties": {
+        "authenticationSetting": "default-auth",
+        "displayName": "Discover web apps",
+        "discoverRelationships": "Enabled",
+        "addRecommendedSignals": "Enabled",
+        "specification": {
+          "kind": "ResourceGraphQuery",
+          "resourceGraphQuery": "resources | where type =~ 'microsoft.web/sites' and resourceGroup =~ 'online-store-rg' | project id, name, location"
+        },
+        "addResourceHealthSignal": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "authenticationSetting": "default-auth",
+          "provisioningState": "Succeeded",
+          "displayName": "Discover web apps",
+          "discoverRelationships": "Enabled",
+          "addRecommendedSignals": "Enabled",
+          "specification": {
+            "kind": "ResourceGraphQuery",
+            "resourceGraphQuery": "resources | where type =~ 'microsoft.web/sites' and resourceGroup =~ 'online-store-rg' | project id, name, location"
+          },
+          "addResourceHealthSignal": "Enabled",
+          "entityName": "online-store-web-apps"
+        },
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/discoveryRules/discover-web-apps",
+        "name": "discover-web-apps",
+        "type": "Microsoft.CloudHealth/healthmodels/discoveryRules",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "authenticationSetting": "default-auth",
+          "provisioningState": "Succeeded",
+          "displayName": "Discover web apps",
+          "discoverRelationships": "Enabled",
+          "addRecommendedSignals": "Enabled",
+          "specification": {
+            "kind": "ResourceGraphQuery",
+            "resourceGraphQuery": "resources | where type =~ 'microsoft.web/sites' and resourceGroup =~ 'online-store-rg' | project id, name, location"
+          },
+          "addResourceHealthSignal": "Enabled",
+          "entityName": "online-store-web-apps"
+        },
+        "id": "/subscriptions/abcdef12-3456-7890-abcd-ef1234567890/resourceGroups/online-store-rg/providers/Microsoft.CloudHealth/healthmodels/online-store/discoveryRules/discover-web-apps",
+        "name": "discover-web-apps",
+        "type": "Microsoft.CloudHealth/healthmodels/discoveryRules",
+        "systemData": {
+          "createdBy": "admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-05-04T08:15:00.000Z",
+          "lastModifiedBy": "admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-04T09:30:00.000Z"
+        }
+      }
+    }
+  }
+}

@@ -54,7 +54,9 @@ interface EnvironmentVersionOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryEnvironmentVersion"
     > {}
 
 @armResourceOperations
@@ -72,16 +74,18 @@ interface EnvironmentVersions {
   @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
-    Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<
-      EnvironmentVersion,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<EnvironmentVersion>
+      | (ArmResourceCreatedResponse<
+          EnvironmentVersion,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -91,13 +95,16 @@ interface EnvironmentVersions {
   @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -162,7 +169,9 @@ interface EnvironmentVersionOperationGroupOps
         @segment("versions")
         @key
         version: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningEnvironmentVersion"
     > {}
 
 @armResourceOperations
@@ -235,15 +244,19 @@ interface EnvironmentVersionOperationGroup {
 }
 
 @@doc(EnvironmentVersion.name, "Version identifier. This is case-sensitive.");
-@@doc(EnvironmentVersion.properties,
+@@doc(
+  EnvironmentVersion.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentVersions.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersions.createOrUpdate::parameters.resource,
   "Version entity to create or update."
 );
-@@doc(EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentVersionOperationGroup.createOrUpdate::parameters.resource,
   "Definition of EnvironmentVersion."
 );
-@@doc(EnvironmentVersionOperationGroup.publish::parameters.body,
+@@doc(
+  EnvironmentVersionOperationGroup.publish::parameters.body,
   "Destination registry info"
 );

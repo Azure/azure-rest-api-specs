@@ -43,18 +43,20 @@ interface ProjectCapabilityHosts {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ProjectCapabilityHost,
-    Response = ArmResponse<ProjectCapabilityHost> | (ArmResourceCreatedResponse<
-      ProjectCapabilityHost,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = ProjectCapabilityHost>
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-      @header("x-ms-async-operation-timeout")
-      @format("duration")
-      asyncOperationTimeout: string;
-    })
+    Response =
+      | ArmResponse<ProjectCapabilityHost>
+      | (ArmResourceCreatedResponse<
+          ProjectCapabilityHost,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = ProjectCapabilityHost>
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+          @header("x-ms-async-operation-timeout")
+          @format("duration")
+          asyncOperationTimeout: string;
+        })
   >;
 
   /**
@@ -63,15 +65,17 @@ interface ProjectCapabilityHosts {
   @tag("ProjectCapabilityHost")
   delete is ArmResourceDeleteWithoutOkAsync<
     ProjectCapabilityHost,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
-      @header("x-ms-async-operation-timeout")
-      @format("duration")
-      asyncOperationTimeout: string;
-    }> | NoContentResponse
+    Response =
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = void> & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          #suppress "@azure-tools/typespec-azure-core/no-format" "'asyncOperationTimeout' has no string format constraint, matching existing service wire format"
+          @header("x-ms-async-operation-timeout")
+          @format("duration")
+          asyncOperationTimeout: string;
+        }>
+      | NoContentResponse
   >;
 
   /**
@@ -85,12 +89,15 @@ interface ProjectCapabilityHosts {
   >;
 }
 
-@@doc(ProjectCapabilityHost.name,
+@@doc(
+  ProjectCapabilityHost.name,
   "The name of the capability host associated with the Cognitive Services Resource"
 );
-@@doc(ProjectCapabilityHost.properties,
+@@doc(
+  ProjectCapabilityHost.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ProjectCapabilityHosts.createOrUpdate::parameters.resource,
+@@doc(
+  ProjectCapabilityHosts.createOrUpdate::parameters.resource,
   "CapabilityHost definition."
 );

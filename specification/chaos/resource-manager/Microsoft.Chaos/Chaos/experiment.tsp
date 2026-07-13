@@ -90,9 +90,11 @@ interface Experiments {
 @@minLength(Experiment.name, 1);
 @@doc(Experiment.name, "String that represents a Experiment resource name.");
 @@doc(Experiment.properties, "The properties of the experiment resource.");
-@@doc(Experiments.createOrUpdate::parameters.resource,
+@@doc(
+  Experiments.createOrUpdate::parameters.resource,
   "Experiment resource to be created or updated."
 );
-@@doc(Experiments.update::parameters.properties,
+@@doc(
+  Experiments.update::parameters.properties,
   "Parameters supplied to the Update experiment operation."
 );

@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "portalTenantCompileFile": {
+      "contents": {
+        "$schema": "../../Definitions/dx.schema.json#",
+        "stringSource": "Resources/MyStrings.resjson",
+        "view": {
+          "kind": "Markdown",
+          "export": true,
+          "properties": {
+            "content": {
+              "property": "markdownContent"
+            }
+          }
+        }
+      },
+      "stringSource": {
+        "markdownContent": "# This is an example of a markdown view!"
+      },
+      "files": {
+        "myFile.json": {
+          "contentField": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "view": {
+          "kind": "Markdown",
+          "export": true,
+          "properties": {
+            "content": "# This is an example of a markdown view!"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "PortalTenant_Compilefile",
+  "title": "Compiles a file using inline content."
+}

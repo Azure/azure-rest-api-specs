@@ -60,7 +60,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOps
         @segment("userProvidedFunctionApps")
         @key
         functionAppName: string,
-      }
+      },
+      ResourceName = "StaticSiteBuildUserProvidedFunctionApp"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -91,10 +92,12 @@ interface StaticSiteUserProvidedFunctionAppARMResources {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
-      @bodyRoot
-      _: StaticSiteUserProvidedFunctionAppARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
+          @bodyRoot
+          _: StaticSiteUserProvidedFunctionAppARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -139,7 +142,8 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroupOps
         @segment("userProvidedFunctionApps")
         @key
         functionAppName: string,
-      }
+      },
+      ResourceName = "StaticSiteUserProvidedFunctionApp"
     > {}
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -170,10 +174,12 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
       @query("isForced")
       isForced?: boolean;
     },
-    Response = ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
-      @bodyRoot
-      _: StaticSiteUserProvidedFunctionAppARMResource;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<StaticSiteUserProvidedFunctionAppARMResource>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StaticSiteUserProvidedFunctionAppARMResource>> & {
+          @bodyRoot
+          _: StaticSiteUserProvidedFunctionAppARMResource;
+        }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -197,15 +203,19 @@ interface StaticSiteUserProvidedFunctionAppARMResourceOperationGroup {
   >;
 }
 
-@@doc(StaticSiteUserProvidedFunctionAppARMResource.name,
+@@doc(
+  StaticSiteUserProvidedFunctionAppARMResource.name,
   "Name of the function app registered with the static site build."
 );
-@@doc(StaticSiteUserProvidedFunctionAppARMResource.properties,
+@@doc(
+  StaticSiteUserProvidedFunctionAppARMResource.properties,
   "StaticSiteUserProvidedFunctionAppARMResource resource specific properties"
 );
-@@doc(StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild::parameters.resource,
+@@doc(
+  StaticSiteUserProvidedFunctionAppARMResources.registerUserProvidedFunctionAppWithStaticSiteBuild::parameters.resource,
   "A JSON representation of the user provided function app properties. See example."
 );
-@@doc(StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite::parameters.resource,
+@@doc(
+  StaticSiteUserProvidedFunctionAppARMResourceOperationGroup.registerUserProvidedFunctionAppWithStaticSite::parameters.resource,
   "A JSON representation of the user provided function app properties. See example."
 );

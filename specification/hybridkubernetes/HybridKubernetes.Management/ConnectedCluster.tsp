@@ -79,7 +79,10 @@ interface ConnectedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -108,39 +111,50 @@ interface ConnectedClusters {
   >;
 }
 
-@@doc(ConnectedCluster.name,
+@@doc(
+  ConnectedCluster.name,
   "The name of the Kubernetes cluster on which get is called."
 );
-@@doc(ConnectedCluster.properties,
+@@doc(
+  ConnectedCluster.properties,
   "Describes the connected cluster resource properties."
 );
-@@doc(ConnectedClusters.createOrReplace::parameters.resource,
+@@doc(
+  ConnectedClusters.createOrReplace::parameters.resource,
   "Parameters supplied to Create a Connected Cluster."
 );
-@@doc(ConnectedClusters.update::parameters.properties,
+@@doc(
+  ConnectedClusters.update::parameters.properties,
   "Parameters supplied to update Connected Cluster."
 );
-@@doc(ConnectedClusters.updateAsync::parameters.properties,
+@@doc(
+  ConnectedClusters.updateAsync::parameters.properties,
   "Parameters supplied to update Connected Cluster."
 );
-@@doc(ConnectedClusters.listClusterUserCredential::parameters.body,
+@@doc(
+  ConnectedClusters.listClusterUserCredential::parameters.body,
   "ListClusterUserCredential properties"
 );
-@@summary(ConnectedClusters.listBySubscription,
+@@summary(
+  ConnectedClusters.listBySubscription,
   "Lists all connected clusters in the given Subscription"
 );
-@@summary(ConnectedClusters.get,
+@@summary(
+  ConnectedClusters.get,
   "Get the properties of the specified connected cluster."
 );
-@@summary(ConnectedClusters.createOrReplace,
+@@summary(
+  ConnectedClusters.createOrReplace,
   "Register a new Kubernetes cluster with Azure Resource Manager."
 );
 @@summary(ConnectedClusters.update, "Updates a connected cluster.");
 @@summary(ConnectedClusters.updateAsync, "Updates a connected cluster.");
 @@summary(ConnectedClusters.delete, "Delete a connected cluster.");
-@@summary(ConnectedClusters.listClusterUserCredential,
+@@summary(
+  ConnectedClusters.listClusterUserCredential,
   "Gets cluster user credentials of a connected cluster"
 );
-@@summary(ConnectedClusters.listByResourceGroup,
+@@summary(
+  ConnectedClusters.listByResourceGroup,
   "Lists all connected clusters in the given Resource Group"
 );

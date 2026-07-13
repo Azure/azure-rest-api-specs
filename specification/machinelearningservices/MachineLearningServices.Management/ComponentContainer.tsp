@@ -48,7 +48,9 @@ interface ComponentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         componentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentContainer"
     > {}
 
 @armResourceOperations
@@ -66,16 +68,18 @@ interface ComponentContainers {
   @summary("Create or update container.")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<
     ComponentContainer,
-    Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<
-      ComponentContainer,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ComponentContainer>
+      | (ArmResourceCreatedResponse<
+          ComponentContainer,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
@@ -85,13 +89,16 @@ interface ComponentContainers {
   @summary("Delete container.")
   delete is ComponentContainerOps.DeleteWithoutOkAsync<
     ComponentContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -132,7 +139,9 @@ interface ComponentContainerOperationGroupOps
         @segment("components")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentContainer"
     > {}
 
 @armResourceOperations
@@ -179,12 +188,15 @@ interface ComponentContainerOperationGroup {
 }
 
 @@doc(ComponentContainer.name, "Container name.");
-@@doc(ComponentContainer.properties,
+@@doc(
+  ComponentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
