@@ -82,7 +82,7 @@ enum BlobDeleteTypeCustom {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
 @post
-@route("/{containerName}?restype=container&comp=batch")
+@route("/{+containerName}?restype=container&comp=batch")
 @scope("csharp")
 op containerSubmitBatchCsharp(
   /** Required. The value of this header must be multipart/mixed with a batch boundary. Example header value: multipart/mixed; boundary=batch_<GUID> */
@@ -118,7 +118,7 @@ op containerSubmitBatchCsharp(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
 @delete
-@route("/{containerName}/{blob}")
+@route("/{+containerName}/{+blob}")
 @scope("csharp")
 op deleteCsharp is StorageOperationNoBody<
   {
@@ -162,7 +162,7 @@ op deleteCsharp is StorageOperationNoBody<
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
 @put
 @sharedRoute
-@route("/{containerName}/{blob}?comp=tier")
+@route("/{+containerName}/{+blob}?comp=tier")
 @scope("csharp")
 op setTierCsharp is StorageOperationNoBody<
   {
