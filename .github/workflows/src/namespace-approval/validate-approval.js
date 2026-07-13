@@ -139,7 +139,9 @@ async function handleLabeled({
     if (isMgmt && approversConfig["management-plane"]?.all) {
       authorizedList = approversConfig["management-plane"].all;
     } else {
-      authorizedList = approversConfig["data-plane"]?.[lang] ?? [];
+      const langApprovers = approversConfig["data-plane"]?.[lang] ?? [];
+      const globalApprovers = approversConfig["data-plane"]?.global ?? [];
+      authorizedList = [...new Set([...langApprovers, ...globalApprovers])];
     }
 
     if (!authorizedList.includes(actor)) {
