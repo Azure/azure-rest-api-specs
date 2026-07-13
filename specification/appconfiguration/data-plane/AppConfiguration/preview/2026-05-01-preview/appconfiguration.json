@@ -62,7 +62,7 @@
   "paths": {
     "/ff": {
       "get": {
-        "operationId": "GetFeatureFlags",
+        "operationId": "FeatureFlagClient_GetFeatureFlags",
         "summary": "Gets a list of feature flags.",
         "description": "Gets a list of feature flags.",
         "produces": [
@@ -250,18 +250,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of feature flags.": {
-            "$ref": "./examples/GetFeatureFlags.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
         }
       },
       "head": {
-        "operationId": "CheckFeatureFlags",
+        "operationId": "FeatureFlagClient_CheckFeatureFlags",
         "summary": "Requests the headers and status of the given resource.",
         "description": "Requests the headers and status of the given resource.",
         "parameters": [
@@ -443,17 +438,12 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckFeatureFlags.json"
-          }
         }
       }
     },
     "/ff/{name}": {
       "get": {
-        "operationId": "GetFeatureFlag",
+        "operationId": "FeatureFlagClient_GetFeatureFlag",
         "summary": "Gets a single feature flag.",
         "description": "Gets a single feature flag.",
         "produces": [
@@ -640,15 +630,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Gets a single feature flag.": {
-            "$ref": "./examples/GetFeatureFlag.json"
-          }
         }
       },
       "put": {
-        "operationId": "PutFeatureFlag",
+        "operationId": "FeatureFlagClient_PutFeatureFlag",
         "summary": "Creates a feature flag.",
         "description": "Creates a feature flag.",
         "produces": [
@@ -738,15 +723,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Creates a feature flag.": {
-            "$ref": "./examples/PutFeatureFlag.json"
-          }
         }
       },
       "delete": {
-        "operationId": "DeleteFeatureFlag",
+        "operationId": "FeatureFlagClient_DeleteFeatureFlag",
         "summary": "Deletes a feature flag.",
         "description": "Deletes a feature flag.",
         "produces": [
@@ -825,15 +805,10 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Deletes a feature flag.": {
-            "$ref": "./examples/DeleteFeatureFlag.json"
-          }
         }
       },
       "head": {
-        "operationId": "CheckFeatureFlag",
+        "operationId": "FeatureFlagClient_CheckFeatureFlag",
         "summary": "Requests the headers and status of the given resource.",
         "description": "Requests the headers and status of the given resource.",
         "parameters": [
@@ -1008,17 +983,12 @@
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckFeatureFlag.json"
-          }
         }
       }
     },
     "/ff-revisions": {
       "get": {
-        "operationId": "GetFeatureFlagRevisions",
+        "operationId": "FeatureFlagClient_GetFeatureFlagRevisions",
         "summary": "Gets a list of feature flag revisions.",
         "description": "Gets a list of feature flag revisions.",
         "produces": [
@@ -1201,18 +1171,13 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Gets a list of feature flag revisions.": {
-            "$ref": "./examples/GetFeatureFlagRevisions.json"
-          }
-        },
         "x-ms-pageable": {
           "nextLinkName": "@nextLink",
           "itemName": "items"
         }
       },
       "head": {
-        "operationId": "CheckFeatureFlagRevisions",
+        "operationId": "FeatureFlagClient_CheckFeatureFlagRevisions",
         "summary": "Requests the headers and status of the given resource.",
         "description": "Requests the headers and status of the given resource.",
         "parameters": [
@@ -1361,11 +1326,6 @@
             "schema": {
               "$ref": "#/definitions/Error"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Requests the headers and status of the given resource.": {
-            "$ref": "./examples/CheckFeatureFlagRevisions.json"
           }
         }
       }
