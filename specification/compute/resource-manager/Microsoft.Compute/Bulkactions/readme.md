@@ -181,6 +181,13 @@ suppressions:
       list response envelope containing value, a list of resourceOperation, and nextLink properties.
     from: Bulkactions.json
     where: $.definitions.ListBulkOperationErrorsResponse
+  - code: RequiredPropertiesMissingInResourceModel
+    reason: >
+      BulkCreateCustomVMResultsResponse is not an ARM resource model; it is a response envelope
+      containing a results array of ResourceOperationDetails, mirroring GetOperationStatusResponse
+      and CancelOperationsResponse which use the same results-array shape.
+    from: Bulkactions.json
+    where: $.definitions.BulkCreateCustomVMResultsResponse
   - code: PostResponseCodes
     reason: ScheduledActions disable is an async void action (ArmResourceActionNoResponseContentAsync, final-state-via Location). The POST returns 202 with the Azure-AsyncOperation and Location polling headers; the terminal no-content (204) result is delivered by polling the Location status URL per the ARM async contract (RPC-Async-V1-07). No library template emits an explicit 202+204 for async-void actions; mirrors the Microsoft.Compute BulkActions / ComputeBulkActions precedent for the same pattern.
     from: Bulkactions.json

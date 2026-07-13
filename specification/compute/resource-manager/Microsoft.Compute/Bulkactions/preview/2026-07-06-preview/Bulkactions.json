@@ -3740,7 +3740,7 @@
         },
         "override": {
           "$ref": "#/definitions/BulkCreateCustomOverride",
-          "description": "Optional per-VM-size profile override applied to every VM the service assigns to this size. Reuses the per-VM override shape, but virtualMachineName cannot be set since a size maps to many VMs. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are unioned with the per-VM override, with the per-VM value winning."
+          "description": "Optional per-VM-size profile override applied to every VM the service assigns to this size. Reuses the per-VM override shape, but virtualMachineName cannot be set since a size maps to many VMs. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are merged with the per-VM override, with the per-VM value winning."
         }
       },
       "required": [

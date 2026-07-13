@@ -136,7 +136,7 @@ model BulkCreateCustomOverridesProfile {
 model BulkCreateCustomVmSizeProfile {
   ...VmSizeProfile;
 
-  @doc("Optional per-VM-size profile override applied to every VM the service assigns to this size. Reuses the per-VM override shape, but virtualMachineName cannot be set since a size maps to many VMs. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are unioned with the per-VM override, with the per-VM value winning.")
+  @doc("Optional per-VM-size profile override applied to every VM the service assigns to this size. Reuses the per-VM override shape, but virtualMachineName cannot be set since a size maps to many VMs. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are merged with the per-VM override, with the per-VM value winning.")
   override?: BulkCreateCustomOverride;
 }
 
@@ -229,9 +229,7 @@ interface BulkCreateCustom {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     asyncOperationId: string,
-  ):
-    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
-    | ErrorResponse;
+  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
 
   @doc("Creates or updates BulkCreateCustoms.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
