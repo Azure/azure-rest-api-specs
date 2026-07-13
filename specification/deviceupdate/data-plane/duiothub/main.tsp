@@ -12,6 +12,7 @@ import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -66,4 +67,11 @@ enum Versions {
    * The 2022-10-01 API version.
    */
   v2022_10_01: "2022-10-01",
+
+  /**
+   * The 2026-06-01 API version. Adds the optional `downloadSecurity` field on
+   * Deployment so callers can choose the protocol the device should use when
+   * downloading update payload (defaults to "https").
+   */
+  v2026_06_01: "2026-06-01",
 }

@@ -420,7 +420,6 @@ union AlertSeverity {
   Sev4: "Sev4",
 }
 
-@clientName("IconDetails", "csharp")
 @doc("Visual icon definition of an entity")
 model IconDefinition {
   @doc("Name of the built-in icon, or 'Custom' to use customData")

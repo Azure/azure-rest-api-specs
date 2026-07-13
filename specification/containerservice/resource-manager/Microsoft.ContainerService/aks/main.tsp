@@ -38,6 +38,7 @@ import "./MeshMembership.tsp";
 import "./Operations.tsp";
 import "./LocationRoutes.tsp";
 import "./AlertConfiguration.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
