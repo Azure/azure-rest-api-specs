@@ -33,9 +33,36 @@ jobs:
           path: before
 
       - name: Setup Node and install deps
-        uses: ./after/.github/actions/setup-node-install-deps
-        with:
-          working-directory: after
+        working-directory: after
+        shell: bash
+        run: |
+          tool_cache_root="${RUNNER_TOOL_CACHE:-/opt/hostedtoolcache}"
+          shopt -s nullglob
+          node_bins=("$tool_cache_root"/node/24.*/x64/bin)
+          shopt -u nullglob
+
+          if [[ ${#node_bins[@]} -eq 0 ]]; then
+            echo "::error::Unable to locate a preinstalled Node 24 toolcache entry."
+            exit 1
+          fi
+
+          IFS=$'\n' sorted_node_bins=($(printf '%s\n' "${node_bins[@]}" | sort -V))
+          unset IFS
+          node_bin="${sorted_node_bins[${#sorted_node_bins[@]} - 1]}"
+          export PATH="$node_bin:$PATH"
+
+          echo "::group::Tool versions"
+          node -v
+          npm -v
+          echo "::endgroup::"
+
+          echo "::group::npm ci --no-audit --no-fund --prefer-offline"
+          npm ci --no-audit --no-fund --prefer-offline
+          echo "::endgroup::"
+
+          echo "::group::npm ls -a"
+          npm ls -a || true
+          echo "::endgroup::"
 
       - name: Run Summarize Impact
         id: summarize-impact
