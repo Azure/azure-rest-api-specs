@@ -18,29 +18,34 @@ using Microsoft.AlertsManagement;
 // C# customizations: keep the operations on the original interface so the synthetic
 // "AlertRuleRecommendations" operation group does not collide with the C# namespace
 // (which would otherwise cause the generator to emit `Azure.ResourceManager._AlertRuleRecommendations`).
-@@clientLocation(AlertRuleRecommendationsOperationGroup.listByResource,
+@@clientLocation(
+  AlertRuleRecommendationsOperationGroup.listByResource,
   AlertRuleRecommendationsOperationGroup,
   "csharp"
 );
-@@clientLocation(AlertRuleRecommendationsOperationGroup.listByTargetType,
+@@clientLocation(
+  AlertRuleRecommendationsOperationGroup.listByTargetType,
   AlertRuleRecommendationsOperationGroup,
   "csharp"
 );
 
 // common-types v3 types Resource.id as `string`; map to armResourceIdentifier so the C#
 // generator emits ResourceIdentifier compatible with the ResourceData base class.
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
 
 // C# customizations: rename overly-generic operation names to add resource context so
 // the public extension method names follow the ARM convention `Get<Resource>(...)`.
-@@clientName(AlertRuleRecommendationsOperationGroup.listByResource,
+@@clientName(
+  AlertRuleRecommendationsOperationGroup.listByResource,
   "getAlertRuleRecommendations",
   "csharp"
 );
-@@clientName(AlertRuleRecommendationsOperationGroup.listByTargetType,
+@@clientName(
+  AlertRuleRecommendationsOperationGroup.listByTargetType,
   "getAlertRuleRecommendationsByTargetType",
   "csharp"
 );
@@ -51,7 +56,8 @@ using Microsoft.AlertsManagement;
 // C# customizations: drop the "Resource" suffix on this body model. The mgmt InheritanceCheck
 // test fails for any public type ending with "Resource" that does not derive from ArmResource;
 // AlertRuleRecommendationResource is a list-response model, not an ARM resource.
-@@clientName(AlertRuleRecommendationResource,
+@@clientName(
+  AlertRuleRecommendationResource,
   "AlertRuleRecommendation",
   "csharp"
 );
