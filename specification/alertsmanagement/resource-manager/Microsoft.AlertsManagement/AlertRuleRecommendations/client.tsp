@@ -4,11 +4,13 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.AlertsManagement;
 
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "AlertRuleRecommendationsMgmtClient",
   "python"
 );
-@@clientName(Microsoft.AlertsManagement,
+@@clientName(
+  Microsoft.AlertsManagement,
   "AlertRuleRecommendationsManagementClient",
   "javascript"
 );

@@ -72,12 +72,15 @@ interface CostAllocationRuleDefinitions {
   >;
 }
 
-@@doc(CostAllocationRuleDefinition.name,
+@@doc(
+  CostAllocationRuleDefinition.name,
   "Cost allocation rule name. The name cannot include spaces or any non alphanumeric characters other than '_' and '-'. The max length is 260 characters."
 );
-@@doc(CostAllocationRuleDefinition.properties,
+@@doc(
+  CostAllocationRuleDefinition.properties,
   "Cost allocation rule properties"
 );
-@@doc(CostAllocationRuleDefinitions.createOrUpdate::parameters.resource,
+@@doc(
+  CostAllocationRuleDefinitions.createOrUpdate::parameters.resource,
   "Cost allocation rule to be created or updated"
 );

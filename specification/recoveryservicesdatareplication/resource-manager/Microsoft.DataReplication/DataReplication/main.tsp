@@ -22,6 +22,7 @@ import "./RecoveryPointModel.tsp";
 import "./ReplicationExtensionModel.tsp";
 import "./VaultModel.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;

@@ -51,7 +51,27 @@ Every example file in a PR **MUST** be referenced by exactly one
 ## EX-COVERAGE — Example Coverage
 
 - **Rule ID:** `EX-COVERAGE`
-- **Severity:** Warning
+- **Default severity:** Warning
+- **Severity may escalate to Blocking** when the coverage gap materially
+  impedes SDK generation, customer onboarding, or downstream-CI
+  validation. See **Severity guidance** below; this matches
+  [`openapi-review.instructions.md` §22.11](../../../instructions/openapi-review.instructions.md#2211-example-coverage-ex-coverage),
+  which is the canonical phrasing.
+
+### Severity guidance
+
+- **Blocking** when every operation in a new API version lacks examples;
+  when a security-sensitive operation (e.g., `listKeys`,
+  `regenerateKey`, `rotateKey`, any operation returning a credential or
+  token) has no example; when an LRO has no example showing both the
+  in-progress and terminal responses; or when a polymorphic operation
+  has no example covering the documented discriminator variants.
+- **Warning** when coverage is partial but the gap is in low-risk
+  operations (e.g., a single missing maximum-set example on a
+  non-sensitive PUT) and downstream SDK/docs tooling will still generate
+  cleanly.
+- May be omitted entirely on fast-path examples-only PRs that touch
+  only the example files themselves.
 
 ### Rules
 

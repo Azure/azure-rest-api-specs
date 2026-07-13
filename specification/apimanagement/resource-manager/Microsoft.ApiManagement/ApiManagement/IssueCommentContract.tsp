@@ -68,19 +68,21 @@ interface IssueCommentContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<IssueCommentContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | (ArmCreatedResponse<IssueCommentContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<IssueCommentContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | (ArmCreatedResponse<IssueCommentContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -130,10 +132,12 @@ interface IssueCommentContracts {
 
 @@maxLength(IssueCommentContract.name, 256);
 @@minLength(IssueCommentContract.name, 1);
-@@doc(IssueCommentContract.name,
+@@doc(
+  IssueCommentContract.name,
   "Comment identifier within an Issue. Must be unique in the current Issue."
 );
 @@doc(IssueCommentContract.properties, "Properties of the Issue Comment.");
-@@doc(IssueCommentContracts.createOrUpdate::parameters.resource,
+@@doc(
+  IssueCommentContracts.createOrUpdate::parameters.resource,
   "Create parameters."
 );

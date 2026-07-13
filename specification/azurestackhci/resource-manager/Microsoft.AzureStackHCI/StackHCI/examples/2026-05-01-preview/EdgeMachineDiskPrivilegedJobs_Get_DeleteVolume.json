@@ -1,0 +1,63 @@
+{
+  "title": "EdgeMachineDiskPrivilegedJobs_Get_DeleteVolume",
+  "operationId": "EdgeMachineDiskPrivilegedJobs_Get",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "edgeMachineName": "EdgeMachine01",
+    "diskName": "disk-001",
+    "privilegedJobName": "DeleteVolume",
+    "api-version": "2026-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "jobType": "DeleteVolume",
+          "deploymentMode": "Deploy",
+          "provisioningState": "Succeeded",
+          "jobId": "job-pvol-001",
+          "startTimeUtc": "2026-01-15T10:00:00.000Z",
+          "endTimeUtc": "2026-01-15T10:05:00.000Z",
+          "status": "Succeeded",
+          "volumePath": "/data",
+          "confirmDeletion": true,
+          "reportedProperties": {
+            "percentComplete": 100,
+            "validationStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "name": "ValidateVolumeDeletion",
+                  "description": "Validate volume deletion prerequisites.",
+                  "fullStepIndex": "0",
+                  "startTimeUtc": "2026-01-15T10:00:00.000Z",
+                  "endTimeUtc": "2026-01-15T10:01:00.000Z",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "Success",
+              "steps": [
+                {
+                  "name": "DeleteVolume",
+                  "description": "Delete volume from disk.",
+                  "fullStepIndex": "0",
+                  "startTimeUtc": "2026-01-15T10:01:00.000Z",
+                  "endTimeUtc": "2026-01-15T10:05:00.000Z",
+                  "status": "Success",
+                  "steps": []
+                }
+              ]
+            }
+          }
+        },
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/edgeMachines/EdgeMachine01/disks/disk-001/privilegedJobs/DeleteVolume",
+        "name": "DeleteVolume",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/disks/privilegedJobs"
+      }
+    }
+  }
+}

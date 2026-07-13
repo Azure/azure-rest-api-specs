@@ -1,0 +1,75 @@
+{
+  "operationId": "Rules_Update",
+  "title": "Patch a businessVerification rule with externalId when actionRequired (resolves AmbiguousMatch by disambiguating with DUNS)",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31",
+    "ruleName": "Verify_Business",
+    "api-version": "2026-03-17-preview",
+    "properties": {
+      "kind": "businessVerification",
+      "externalId": {
+        "value": "123456789",
+        "type": "DUNS"
+      },
+      "supplementalDocuments": [
+        "https://trust.svc.cloud.microsoft/v1/documents/55555555-5555-5555-5555-555555555555"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/abc123:00000000-0000-0000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/default/rules/Verify_Business",
+        "name": "Verify_Business",
+        "type": "Microsoft.BillingTrust/assessments/rules",
+        "properties": {
+          "kind": "businessVerification",
+          "evaluationState": "running",
+          "provisioningState": "Succeeded",
+          "soldTo": {
+            "companyName": "Contoso Ltd.",
+            "firstName": "Adele",
+            "lastName": "Vance",
+            "addressLine1": "1 Microsoft Way",
+            "city": "Redmond",
+            "region": "WA",
+            "postalCode": "98052",
+            "country": "US",
+            "email": "billing@contoso.com",
+            "phoneNumber": "+1-425-555-0100"
+          },
+          "registrationNumber": {
+            "value": "12-3456789",
+            "type": [
+              "EIN"
+            ]
+          },
+          "taxIds": [
+            {
+              "value": "12-3456789",
+              "country": "US",
+              "type": "EIN",
+              "scope": "Federal",
+              "status": "valid"
+            }
+          ],
+          "externalId": {
+            "value": "123456789",
+            "type": "DUNS"
+          },
+          "supplementalDocuments": [
+            "https://trust.svc.cloud.microsoft/v1/documents/55555555-5555-5555-5555-555555555555"
+          ]
+        },
+        "systemData": {
+          "createdBy": "billing-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "billing-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T11:30:00.000Z"
+        }
+      }
+    }
+  }
+}

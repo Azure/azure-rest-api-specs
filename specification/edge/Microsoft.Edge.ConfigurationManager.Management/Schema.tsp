@@ -20,7 +20,6 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @doc("Schema Properties")
 model SchemaProperties {
   @doc("Current Version of schema")
@@ -45,6 +44,19 @@ model SchemaVersionWithUpdateType {
   schemaVersion: SchemaVersion;
 }
 
+@doc("The updatable properties of the Schema.")
+model SchemaUpdate {
+  @doc("The resource-specific properties for this resource.")
+  properties?: SchemaUpdateProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @doc("Resource tags.")
+  tags?: Record<string>;
+}
+
+@doc("The updatable properties of the Schema.")
+model SchemaUpdateProperties is SchemaProperties;
+
 @doc("Schema Resource")
 @resource("schemas")
 model Schema is TrackedResource<SchemaProperties> {
@@ -57,20 +69,6 @@ model Schema is TrackedResource<SchemaProperties> {
 
   ...EntityTagProperty;
 }
-
-/** The type used for update operations of the Schema. */
-model SchemaUpdate {
-  @doc("The resource-specific properties for this resource.")
-  properties?: SchemaUpdateProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("Resource tags.")
-  tags?: Record<string>;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@doc("The updatable properties of the Schema.")
-model SchemaUpdateProperties {}
 
 @armResourceOperations
 interface Schemas {

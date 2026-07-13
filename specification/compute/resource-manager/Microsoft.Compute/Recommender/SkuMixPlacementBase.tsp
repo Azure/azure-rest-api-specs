@@ -50,6 +50,7 @@ interface SkuMixPlacementScores {
   >;
 }
 
-@@doc(SkuMixPlacementScores.post::parameters.body,
+@@doc(
+  SkuMixPlacementScores.post::parameters.body,
   "SkuMixPlacement request object supplied in the body of the generate operation."
 );

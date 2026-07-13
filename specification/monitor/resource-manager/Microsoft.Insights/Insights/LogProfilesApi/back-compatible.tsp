@@ -8,11 +8,13 @@ using LogProfilesApi;
 
 @@clientLocation(LogProfileResources.get, "LogProfiles");
 @@clientLocation(LogProfileResources.createOrUpdate, "LogProfiles");
-@@clientName(LogProfileResources.createOrUpdate::parameters.resource,
+@@clientName(
+  LogProfileResources.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientLocation(LogProfileResources.update, "LogProfiles");
-@@clientName(LogProfileResources.update::parameters.properties,
+@@clientName(
+  LogProfileResources.update::parameters.properties,
   "logProfilesResource"
 );
 @@clientLocation(LogProfileResources.delete, "LogProfiles");

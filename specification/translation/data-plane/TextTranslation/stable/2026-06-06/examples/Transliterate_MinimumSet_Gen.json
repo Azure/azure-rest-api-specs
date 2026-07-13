@@ -1,0 +1,29 @@
+{
+  "title": "Transliterate Text with minimum properties",
+  "operationId": "Transliterate",
+  "parameters": {
+    "language": "zh-Hans",
+    "fromScript": "Hans",
+    "toScript": "Latn",
+    "api-version": "2026-06-06",
+    "body": {
+      "inputs": [
+        {
+          "text": "这是个测试。"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "text": "zhè shì gè cè shì。",
+            "script": "Latn"
+          }
+        ]
+      }
+    }
+  }
+}
