@@ -641,72 +641,143 @@
         ]
       }
     },
-    "InstallOutcome": {
+    "FailureOrigin": {
       "type": "string",
-      "description": "Terminal outcome of an update installation.",
+      "description": "Best-effort attestation of which subsystem produced a failure. Advisory only.\nMirrors the ADU `FailureOrigin` enum; extensible union for forward-compat.",
       "enum": [
-        "Success",
-        "Failure",
-        "InProgress"
+        "NOT_APPLICABLE",
+        "ADU_CLOUD_SERVICE",
+        "ADU_MANAGED_RESOURCE",
+        "AGENT_CORE",
+        "AGENT_EXTENSION",
+        "AGENT_DEPENDENCY",
+        "DEVICE",
+        "OTHER"
       ],
       "x-ms-enum": {
-        "name": "InstallOutcome",
+        "name": "FailureOrigin",
         "modelAsString": true,
         "values": [
           {
-            "name": "Success",
-            "value": "Success",
-            "description": "The installation succeeded."
+            "name": "NotApplicable",
+            "value": "NOT_APPLICABLE",
+            "description": "No failure, or origin not applicable."
           },
           {
-            "name": "Failure",
-            "value": "Failure",
-            "description": "The installation failed."
+            "name": "AduCloudService",
+            "value": "ADU_CLOUD_SERVICE",
+            "description": "The ADU cloud service."
           },
           {
-            "name": "InProgress",
-            "value": "InProgress",
-            "description": "The installation is still in progress."
+            "name": "AduManagedResource",
+            "value": "ADU_MANAGED_RESOURCE",
+            "description": "An ADU-managed resource."
+          },
+          {
+            "name": "AgentCore",
+            "value": "AGENT_CORE",
+            "description": "The device agent core."
+          },
+          {
+            "name": "AgentExtension",
+            "value": "AGENT_EXTENSION",
+            "description": "An agent extension."
+          },
+          {
+            "name": "AgentDependency",
+            "value": "AGENT_DEPENDENCY",
+            "description": "An agent dependency."
+          },
+          {
+            "name": "Device",
+            "value": "DEVICE",
+            "description": "The device itself."
+          },
+          {
+            "name": "Other",
+            "value": "OTHER",
+            "description": "Some other origin."
           }
         ]
       }
     },
     "LastInstallResult": {
       "type": "object",
-      "description": "Details of the terminal result of an update installation.",
+      "description": "Terminal install result. Mirrors the ADU `InstallResult` model: the top-level\nstep fields (spread from `StepResult`) plus an optional per-step breakdown.",
       "properties": {
         "outcome": {
-          "$ref": "#/definitions/InstallOutcome",
-          "description": "Terminal outcome of the installation."
+          "$ref": "#/definitions/Outcome",
+          "description": "Terminal outcome of this step."
         },
         "failureOrigin": {
-          "type": "string",
-          "description": "Where the failure originated, when the outcome is a failure."
+          "$ref": "#/definitions/FailureOrigin",
+          "description": "Which subsystem produced a failure. Advisory only."
         },
         "resultCode": {
           "type": "integer",
           "format": "int64",
-          "description": "Numeric result code; positive values indicate success."
+          "description": "A positive value indicates success; a non-positive value indicates failure. Diagnostic only."
         },
         "extendedResultCodes": {
           "type": "string",
-          "description": "Colon-delimited extended result codes. Optional."
+          "description": "Comma-separated unsigned hexadecimal int32 codes for diagnostic correlation. Opaque to the service.",
+          "maxLength": 1024
         },
         "resultDetails": {
           "type": "string",
-          "description": "Human-readable result details. Optional.",
-          "x-nullable": true
+          "description": "Human-readable diagnostic detail. Not parsed programmatically.",
+          "maxLength": 1024
         },
         "stepResults": {
           "type": "object",
-          "description": "Per-step installation results. Open JSON object defined by the ADU agent.",
-          "additionalProperties": {}
+          "description": "Per-step outcomes, keyed `step_0`, `step_1`, …. May be omitted on success;\nshould be present on failure. Typed per the ADU contract (values are `StepResult`).",
+          "additionalProperties": {
+            "$ref": "#/definitions/StepResult"
+          }
         }
       },
       "required": [
         "outcome",
-        "resultCode"
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
       ]
+    },
+    "Outcome": {
+      "type": "string",
+      "description": "Terminal outcome of an update attempt or step. Mirrors the ADU `Outcome` enum;\nmodeled as an extensible union so ADU can add outcomes without a breaking change.",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "CANCELED",
+        "SKIPPED"
+      ],
+      "x-ms-enum": {
+        "name": "Outcome",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "SUCCEEDED",
+            "description": "The attempt succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "FAILED",
+            "description": "The attempt failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "CANCELED",
+            "description": "The attempt was canceled."
+          },
+          {
+            "name": "Skipped",
+            "value": "SKIPPED",
+            "description": "The attempt was skipped."
+          }
+        ]
+      }
     },
     "ProvisioningServiceErrorDetails": {
       "type": "object",
@@ -802,6 +873,41 @@
           "description": "URL from which the device fetches ADU root keys for signature validation."
         }
       }
+    },
+    "StepResult": {
+      "type": "object",
+      "description": "Per-step terminal result. Mirrors the ADU `StepResult` model.",
+      "properties": {
+        "outcome": {
+          "$ref": "#/definitions/Outcome",
+          "description": "Terminal outcome of this step."
+        },
+        "failureOrigin": {
+          "$ref": "#/definitions/FailureOrigin",
+          "description": "Which subsystem produced a failure. Advisory only."
+        },
+        "resultCode": {
+          "type": "integer",
+          "format": "int64",
+          "description": "A positive value indicates success; a non-positive value indicates failure. Diagnostic only."
+        },
+        "extendedResultCodes": {
+          "type": "string",
+          "description": "Comma-separated unsigned hexadecimal int32 codes for diagnostic correlation. Opaque to the service.",
+          "maxLength": 1024
+        },
+        "resultDetails": {
+          "type": "string",
+          "description": "Human-readable diagnostic detail. Not parsed programmatically.",
+          "maxLength": 1024
+        }
+      },
+      "required": [
+        "outcome",
+        "failureOrigin",
+        "resultCode",
+        "extendedResultCodes"
+      ]
     },
     "SymmetricKeyRegistrationResult": {
       "type": "object",

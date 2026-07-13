@@ -491,47 +491,95 @@ model ReportStatusRequest {
 }
 
 /**
- * Terminal outcome of an update installation.
+ * Terminal outcome of an update attempt or step. Mirrors the ADU `Outcome` enum;
+ * modeled as an extensible union so ADU can add outcomes without a breaking change.
  */
 @added(Versions.v2026_11_15_preview)
-union InstallOutcome {
+union Outcome {
   string,
 
-  /** The installation succeeded. */
-  Success: "Success",
+  /** The attempt succeeded. */
+  Succeeded: "SUCCEEDED",
 
-  /** The installation failed. */
-  Failure: "Failure",
+  /** The attempt failed. */
+  Failed: "FAILED",
 
-  /** The installation is still in progress. */
-  InProgress: "InProgress",
+  /** The attempt was canceled. */
+  Canceled: "CANCELED",
+
+  /** The attempt was skipped. */
+  Skipped: "SKIPPED",
 }
 
 /**
- * Details of the terminal result of an update installation.
+ * Best-effort attestation of which subsystem produced a failure. Advisory only.
+ * Mirrors the ADU `FailureOrigin` enum; extensible union for forward-compat.
+ */
+@added(Versions.v2026_11_15_preview)
+union FailureOrigin {
+  string,
+
+  /** No failure, or origin not applicable. */
+  NotApplicable: "NOT_APPLICABLE",
+
+  /** The ADU cloud service. */
+  AduCloudService: "ADU_CLOUD_SERVICE",
+
+  /** An ADU-managed resource. */
+  AduManagedResource: "ADU_MANAGED_RESOURCE",
+
+  /** The device agent core. */
+  AgentCore: "AGENT_CORE",
+
+  /** An agent extension. */
+  AgentExtension: "AGENT_EXTENSION",
+
+  /** An agent dependency. */
+  AgentDependency: "AGENT_DEPENDENCY",
+
+  /** The device itself. */
+  Device: "DEVICE",
+
+  /** Some other origin. */
+  Other: "OTHER",
+}
+
+/**
+ * Per-step terminal result. Mirrors the ADU `StepResult` model.
+ */
+@added(Versions.v2026_11_15_preview)
+model StepResult {
+  /** Terminal outcome of this step. */
+  outcome: Outcome;
+
+  /** Which subsystem produced a failure. Advisory only. */
+  failureOrigin: FailureOrigin;
+
+  /** A positive value indicates success; a non-positive value indicates failure. Diagnostic only. */
+  resultCode: int64;
+
+  /** Comma-separated unsigned hexadecimal int32 codes for diagnostic correlation. Opaque to the service. */
+  @maxLength(1024)
+  extendedResultCodes: string;
+
+  /** Human-readable diagnostic detail. Not parsed programmatically. */
+  @maxLength(1024)
+  resultDetails?: string;
+}
+
+/**
+ * Terminal install result. Mirrors the ADU `InstallResult` model: the top-level
+ * step fields (spread from `StepResult`) plus an optional per-step breakdown.
  */
 @added(Versions.v2026_11_15_preview)
 model LastInstallResult {
-  /** Terminal outcome of the installation. */
-  outcome: InstallOutcome;
-
-  /** Where the failure originated, when the outcome is a failure. */
-  failureOrigin?: string;
-
-  /** Numeric result code; positive values indicate success. */
-  resultCode: int64;
-
-  /** Colon-delimited extended result codes. Optional. */
-  extendedResultCodes?: string;
-
-  /** Human-readable result details. Optional. */
-  resultDetails?: string | null;
+  ...StepResult;
 
   /**
-   * Per-step installation results. Open JSON object defined by the ADU agent.
+   * Per-step outcomes, keyed `step_0`, `step_1`, …. May be omitted on success;
+   * should be present on failure. Typed per the ADU contract (values are `StepResult`).
    */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "per-step results are an open JSON object per the ADU contract"
-  stepResults?: Record<unknown>;
+  stepResults?: Record<StepResult>;
 }
 
 /**
