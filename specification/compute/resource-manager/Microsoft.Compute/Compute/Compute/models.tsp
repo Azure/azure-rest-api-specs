@@ -9049,15 +9049,21 @@ model CapacityReservationInstanceView {
    */
   @identifiers(#[])
   statuses?: InstanceViewStatus[];
+
+  /**
+   * The reservation state information for a future capacity reservation.
+   */
+  @added(Versions.v2026_04_01)
+  reservationStateInfo?: CapacityReservationStateInfo;
 }
 
 /**
- * Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
+ * Defines the schedule for Block-type or future capacity reservations. Specifies the schedule during which the capacity reservation is active and VM or VMSS resource can be allocated using the reservation. This property is required when the capacity reservation group type is 'Block'. In a 'Targeted' capacity reservation group, a future capacity reservation can be scheduled using only a start time. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.
  */
 @added(Versions.v2025_04_01)
 model ScheduleProfile {
   /**
-   * The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27.
+   * The required start date for block or future capacity reservations. Block reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Example: 2025-06-27.
    */
   start?: string;
 
@@ -9065,6 +9071,18 @@ model ScheduleProfile {
    * The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28.
    */
   end?: string;
+
+  /**
+   * The minimum number of days that must pass after the start date before the reservation can be updated or deleted once it has been committed. Will be populatd with a default value if not provided.
+   */
+  @added(Versions.v2026_04_01)
+  minimumCommitmentDays?: int32;
+
+  /**
+   * The date/time until which a future capacity reservation can be updated or deleted. Read-only.
+   */
+  @added(Versions.v2026_04_01)
+  modifiableUntil?: utcDateTime;
 }
 
 /**
@@ -9103,7 +9121,7 @@ union ReservationType {
   string,
 
   /**
-   * To consume on demand allocated capacity reservation when a capacity reservation group is provided.
+   * To consume on demand or future allocated capacity reservation when a capacity reservation group is provided.
    */
   Targeted: "Targeted",
 
@@ -9111,6 +9129,63 @@ union ReservationType {
    * To consume scheduled allocated block capacity reservation when a capacity reservation group is provided.
    */
   Block: "Block",
+}
+
+/**
+ * The current state of a future capacity reservation.
+ */
+@added(Versions.v2026_04_01)
+union ReservationState {
+  /**
+   * Custom reservation state value.
+   */
+  string,
+
+  /**
+   * The capacity reservation request has been submitted and is awaiting evaluation.
+   */
+  Pending: "Pending",
+
+  /**
+   * The capacity reservation request was rejected, and will not change again without user action.
+   */
+  Declined: "Declined",
+
+  /**
+   * The capacity reservation request has been approved by Azure and is awaiting fulfillment.
+   */
+  Approved: "Approved",
+
+  /**
+   * A failure occured while attempting to fulfill the capacity reservation request.
+   */
+  FulfillmentFailed: "FulfillmentFailed",
+
+  /**
+   * The capacity reservation is locked and cannot be updated or deleted prior to going live.
+   */
+  Committed: "Committed",
+
+  /**
+   * The capacity reservation is active and available for use, and cannot be modified or deleted until the minimum commitment period has elapsed.
+   */
+  Live: "Live",
+
+  /**
+   * Azure was only able to deliver a portion of the requested capacity. The capacity reservation cannot be modified or deleted until the minimum commitment period has elapsed.
+   */
+  PartiallyFulfilled: "PartiallyFulfilled",
+}
+
+/**
+ * Details related to the current state for a future capacity reservation.
+ */
+@added(Versions.v2026_04_01)
+model CapacityReservationStateInfo {
+  /**
+   * The current state of the capacity reservation.
+   */
+  reservationState?: ReservationState;
 }
 
 /**

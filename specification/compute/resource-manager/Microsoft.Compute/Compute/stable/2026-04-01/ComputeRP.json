@@ -2884,6 +2884,9 @@
           },
           "List capacity reservations in targeted reservation group.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_ListByReservationGroup.json"
+          },
+          "List future capacity reservations in reservation group.": {
+            "$ref": "./examples/capacityReservationExamples/FutureCapacityReservation_ListByReservationGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -2963,6 +2966,9 @@
           },
           "Get a capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_Get.json"
+          },
+          "Get a future capacity reservation.": {
+            "$ref": "./examples/capacityReservationExamples/FutureCapacityReservation_Get.json"
           },
           "Get a targeted capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_Get.json"
@@ -3046,6 +3052,9 @@
           },
           "Create or update a capacity reservation .": {
             "$ref": "./examples/capacityReservationExamples/CapacityReservation_CreateOrUpdate.json"
+          },
+          "Create or update a future capacity reservation.": {
+            "$ref": "./examples/capacityReservationExamples/FutureCapacityReservation_CreateOrUpdate.json"
           },
           "Create or update a targeted capacity reservation.": {
             "$ref": "./examples/capacityReservationExamples/TargetedCapacityReservation_CreateOrUpdate.json"
@@ -3144,7 +3153,7 @@
         "tags": [
           "CapacityReservations"
         ],
-        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted after it has been successfully allocated until the schedule end time.",
+        "description": "The operation to delete a capacity reservation. This operation is allowed only when all the associated resources are disassociated from the capacity reservation. Please refer to https://aka.ms/CapacityReservation for more details. Note: Block capacity reservations cannot be deleted after it has been successfully allocated until the schedule end time. Future capacity reservations can be deleted if their reservation state is one of: Pending, Declined, FulfillmentFailed, or Approved, or if their minimum commitment period has passed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -13801,6 +13810,10 @@
             "$ref": "#/definitions/InstanceViewStatus"
           },
           "x-ms-identifiers": []
+        },
+        "reservationStateInfo": {
+          "$ref": "#/definitions/CapacityReservationStateInfo",
+          "description": "The reservation state information for a future capacity reservation."
         }
       }
     },
@@ -13915,6 +13928,16 @@
         "scheduleProfile": {
           "$ref": "#/definitions/ScheduleProfile",
           "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details."
+        }
+      }
+    },
+    "CapacityReservationStateInfo": {
+      "type": "object",
+      "description": "Details related to the current state for a future capacity reservation.",
+      "properties": {
+        "reservationState": {
+          "$ref": "#/definitions/ReservationState",
+          "description": "The current state of the capacity reservation."
         }
       }
     },
@@ -17686,6 +17709,60 @@
         }
       ]
     },
+    "ReservationState": {
+      "type": "string",
+      "description": "The current state of a future capacity reservation.",
+      "enum": [
+        "Pending",
+        "Declined",
+        "Approved",
+        "FulfillmentFailed",
+        "Committed",
+        "Live",
+        "PartiallyFulfilled"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "The capacity reservation request has been submitted and is awaiting evaluation."
+          },
+          {
+            "name": "Declined",
+            "value": "Declined",
+            "description": "The capacity reservation request was rejected, and will not change again without user action."
+          },
+          {
+            "name": "Approved",
+            "value": "Approved",
+            "description": "The capacity reservation request has been approved by Azure and is awaiting fulfillment."
+          },
+          {
+            "name": "FulfillmentFailed",
+            "value": "FulfillmentFailed",
+            "description": "A failure occured while attempting to fulfill the capacity reservation request."
+          },
+          {
+            "name": "Committed",
+            "value": "Committed",
+            "description": "The capacity reservation is locked and cannot be updated or deleted prior to going live."
+          },
+          {
+            "name": "Live",
+            "value": "Live",
+            "description": "The capacity reservation is active and available for use, and cannot be modified or deleted until the minimum commitment period has elapsed."
+          },
+          {
+            "name": "PartiallyFulfilled",
+            "value": "PartiallyFulfilled",
+            "description": "Azure was only able to deliver a portion of the requested capacity. The capacity reservation cannot be modified or deleted until the minimum commitment period has elapsed."
+          }
+        ]
+      }
+    },
     "ReservationType": {
       "type": "string",
       "description": "Indicates the type of capacity reservation. Allowed values are 'Block' for block capacity reservations and 'Targeted' for reservations that enable a VM to consume a specific capacity reservation when a capacity reservation group is provided. The reservation type is immutable and cannot be changed after it is assigned.",
@@ -17700,7 +17777,7 @@
           {
             "name": "Targeted",
             "value": "Targeted",
-            "description": "To consume on demand allocated capacity reservation when a capacity reservation group is provided."
+            "description": "To consume on demand or future allocated capacity reservation when a capacity reservation group is provided."
           },
           {
             "name": "Block",
@@ -18729,15 +18806,25 @@
     },
     "ScheduleProfile": {
       "type": "object",
-      "description": "Defines the schedule for Block-type capacity reservations. Specifies the schedule during which capacity reservation is active and VM or VMSS resource can be allocated using reservation. This property is required and only supported when the capacity reservation group type is 'Block'. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.",
+      "description": "Defines the schedule for Block-type or future capacity reservations. Specifies the schedule during which the capacity reservation is active and VM or VMSS resource can be allocated using the reservation. This property is required when the capacity reservation group type is 'Block'. In a 'Targeted' capacity reservation group, a future capacity reservation can be scheduled using only a start time. The scheduleProfile, start, and end fields are immutable after creation. Minimum API version: 2025-04-01. Please refer to https://aka.ms/blockcapacityreservation for more details.",
       "properties": {
         "start": {
           "type": "string",
-          "description": "The required start date for block capacity reservations. Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Example: 2025-06-27."
+          "description": "The required start date for block or future capacity reservations. Block reservations: Must be today or within 56 days in the future. For same-day scheduling, requests must be submitted before 11:30 AM UTC. Future reservations: Must be at least 7 days in the future, and maximum 6 months in the future. Example: 2025-06-27."
         },
         "end": {
           "type": "string",
           "description": "The required end date for block capacity reservations. Must be after the start date, with a duration of either 1–14 whole days or 3–26 whole weeks. Example: 2025-06-28."
+        },
+        "minimumCommitmentDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of days that must pass after the start date before the reservation can be updated or deleted once it has been committed. Will be populatd with a default value if not provided."
+        },
+        "modifiableUntil": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date/time until which a future capacity reservation can be updated or deleted. Read-only."
         }
       }
     },
