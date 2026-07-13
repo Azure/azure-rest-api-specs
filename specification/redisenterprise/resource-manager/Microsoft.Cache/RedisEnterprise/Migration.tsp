@@ -70,6 +70,7 @@ interface Migrations {
   /**
    * Validates if a source Azure Cache for Redis resource can be migrated to a target Azure Managed Redis resource.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Preserve the already-shipped 'Migrations_Validate' operationId across older API versions where the interface is renamed to singular 'Migration'."
   @operationId("Migrations_Validate")
   @action("validate")
   validate is ArmResourceActionSync<
