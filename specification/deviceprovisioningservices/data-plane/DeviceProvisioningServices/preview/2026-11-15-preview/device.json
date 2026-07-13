@@ -844,6 +844,10 @@
           "$ref": "#/definitions/AgentInfo",
           "description": "Information describing the ADU agent making the request."
         },
+        "tpm": {
+          "$ref": "#/definitions/TpmAttestation",
+          "description": "Attestation via TPM. Present only for TPM-attested devices, mirroring the\nRegister (DeviceRegistration) request; X.509 and symmetric-key attestation are\ncarried at the transport layer (TLS client certificate / SAS token) and are not\npart of the request body, exactly as in Register."
+        },
         "installedUpdateId": {
           "$ref": "#/definitions/UpdateId",
           "description": "The update currently installed on the device, if any.",

@@ -365,6 +365,14 @@ model UpdateCheckRequest {
   /** Information describing the ADU agent making the request. */
   agentInfo: AgentInfo;
 
+  /**
+   * Attestation via TPM. Present only for TPM-attested devices, mirroring the
+   * Register (DeviceRegistration) request; X.509 and symmetric-key attestation are
+   * carried at the transport layer (TLS client certificate / SAS token) and are not
+   * part of the request body, exactly as in Register.
+   */
+  tpm?: TpmAttestation;
+
   /** The update currently installed on the device, if any. */
   installedUpdateId?: UpdateId | null;
 
