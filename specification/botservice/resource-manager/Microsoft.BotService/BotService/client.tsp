@@ -281,6 +281,23 @@ namespace Microsoft.BotService {
     "csharp"
   );
   @@clientName(Omnichannel, "Dynamics365OmnichannelChannel", "csharp");
+  @@clientName(ConnectionSetting, "BotConnectionSetting", "csharp");
+  @@clientName(
+    PrivateLinkResource,
+    "BotServicePrivateLinkResourceData",
+    "csharp"
+  );
+  @@usage(PrivateLinkResource, Usage.input | Usage.output, "csharp");
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
+  @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+    PrivateLinkResource.properties
+  );
+
+  @@clientName(
+    NetworkSecurityPerimeterConfiguration,
+    "BotServiceNetworkSecurityPerimeterConfiguration",
+    "csharp"
+  );
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
   @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
@@ -301,68 +318,6 @@ namespace Microsoft.BotService {
   // previously published C# SDK exposed. They do not affect the service contract
   // or swagger output.
   // =============================================================================
-
-  /**
-   * Bot resource definition
-   */
-  model BotReplacement is Azure.ResourceManager.TrackedResource<BotProperties> {
-    ...ResourceNameParameter<
-      Resource = Bot,
-      KeyName = "resourceName",
-      SegmentName = "botServices",
-      NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      Bot,
-      "location" | "tags" | "properties" | "id" | "name" | "type"
-    >;
-  }
-
-  @@alternateType(Bot, BotReplacement, "csharp");
-  @@clientName(Bot, "BotTemp", "csharp");
-  @@clientName(BotReplacement, "Bot", "csharp");
-
-  /**
-   * Bot channel resource definition
-   */
-  model BotChannelReplacement
-    is Azure.ResourceManager.TrackedResource<Channel> {
-    ...ResourceNameParameter<
-      Resource = BotChannel,
-      KeyName = "channelName",
-      SegmentName = "channels",
-      NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      BotChannel,
-      "location" | "tags" | "properties" | "name" | "id" | "type"
-    >;
-  }
-
-  @@alternateType(BotChannel, BotChannelReplacement, "csharp");
-  @@clientName(BotChannel, "BotChannelTemp", "csharp");
-  @@clientName(BotChannelReplacement, "BotChannel", "csharp");
-
-  /**
-   * Connection setting resource definition
-   */
-  model ConnectionSettingReplacement
-    is Azure.ResourceManager.TrackedResource<ConnectionSettingProperties> {
-    ...ResourceNameParameter<
-      Resource = ConnectionSetting,
-      KeyName = "connectionName",
-      SegmentName = "connections",
-      NamePattern = "^[a-zA-Z0-9][\\sa-zA-Z0-9_.-]*$"
-    >;
-    ...OmitProperties<
-      ConnectionSetting,
-      "location" | "tags " | "properties" | "id" | "name" | "type"
-    >;
-  }
-
-  @@alternateType(ConnectionSetting, ConnectionSettingReplacement, "csharp");
-  @@clientName(ConnectionSetting, "ConnectionSettingTemp", "csharp");
-  @@clientName(ConnectionSettingReplacement, "BotConnectionSetting", "csharp");
 
   /**
    * The ARM channel of list channel with keys operation response
@@ -389,40 +344,6 @@ namespace Microsoft.BotService {
   @@usage(
     ListChannelWithKeysResponseReplacement,
     Usage.input | Usage.output,
-    "csharp"
-  );
-
-  /**
-   * A private link resource
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
-  model PrivateLinkResourceReplacement
-    extends Azure.ResourceManager.CommonTypes.Resource {
-    /**
-     * Resource properties.
-     */
-    properties?: PrivateLinkResourceProperties;
-  }
-
-  @@alternateType(
-    PrivateLinkResource,
-    PrivateLinkResourceReplacement,
-    "csharp"
-  );
-  @@clientName(
-    PrivateLinkResourceReplacement,
-    "BotServicePrivateLinkResourceData",
-    "csharp"
-  );
-  @@usage(PrivateLinkResourceReplacement, Usage.input | Usage.output, "csharp");
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-  @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-    PrivateLinkResourceReplacement.properties
-  );
-
-  @@clientName(
-    NetworkSecurityPerimeterConfiguration,
-    "BotServiceNetworkSecurityPerimeterConfiguration",
     "csharp"
   );
 
