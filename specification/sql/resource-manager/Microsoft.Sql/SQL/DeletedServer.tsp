@@ -36,7 +36,7 @@ alias DeletedServersOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("locations")
     @key
-    locationName: string;
+    locationName: Azure.Core.azureLocation;
   },
   {
     /** The name of the deleted server. */

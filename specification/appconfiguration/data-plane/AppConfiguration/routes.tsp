@@ -145,18 +145,7 @@ op getKeyValue is Foundations.ResourceOperation<
 @put
 op putKeyValue is AppConfigOperation<
   {
-    #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Maintaining compatibility with current SDKs."
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Needs fix: https://github.com/microsoft/typespec/issues/2853"
-    @doc("Content-Type header")
-    @header("Content-Type")
-    contentType:
-      | "application/vnd.microsoft.appconfig.kv+json"
-      | "application/vnd.microsoft.appconfig.kvset+json"
-      | "application/json"
-      | "text/json"
-      | "application/*+json"
-      | "application/json-patch+json";
-
+    ...PutKeyValueRequestContentType;
     ...KeyPathParam<"The key of the key-value to create.">;
     ...LabelQueryParam<"The label of the key-value to create.">;
     ...SyncTokenHeader;

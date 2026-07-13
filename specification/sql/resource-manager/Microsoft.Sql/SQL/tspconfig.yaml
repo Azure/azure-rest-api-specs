@@ -12,7 +12,12 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     output-splitting: "legacy-feature-files"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Sql"
+    emitter-output-dir: "{output-dir}/sdk/sqlmanagement/{namespace}"
+    enable-wire-path-attribute: true
   "@azure-tools/typespec-java":
+    api-version: "2025-01-01"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-sql"
     namespace: "com.azure.resourcemanager.sql"
     flavor: "azure"
@@ -24,12 +29,6 @@ options:
     use-object-for-unknown: true
     uuid-as-string: false
     float32-as-double: false
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.SQL"
   "@azure-tools/typespec-python":
     service-dir: "sdk/sql"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-sql"
