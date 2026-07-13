@@ -754,7 +754,7 @@
         },
         "settings": {
           "$ref": "#/definitions/CapacityAdministrationSettings",
-          "description": "The settings for capacity administration."
+          "description": "The capacity administration settings."
         }
       },
       "required": [
@@ -763,7 +763,7 @@
     },
     "CapacityAdministrationSettings": {
       "type": "object",
-      "description": "The settings for capacity administration.",
+      "description": "The capacity administration settings.",
       "properties": {
         "overageBilling": {
           "$ref": "#/definitions/OverageBillingSettings",
@@ -879,12 +879,12 @@
           "$ref": "#/definitions/OverageBillingState",
           "description": "The overage billing state for the Fabric capacity resource."
         },
-        "24HourThresholdCapacityUnitHours": {
+        "ThresholdCapacityUnitHours": {
           "type": "integer",
           "format": "int32",
           "description": "When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.",
           "minimum": 0,
-          "x-ms-client-name": "twentyFourHourThresholdCapacityUnitHours"
+          "x-ms-client-name": "thresholdCapacityUnitHours"
         }
       }
     },
@@ -902,12 +902,12 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Overage is enabled."
+            "description": "Overage billing is enabled."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Overage is disabled."
+            "description": "Overage billing is disabled."
           }
         ]
       }
