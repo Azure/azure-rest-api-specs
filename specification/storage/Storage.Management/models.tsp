@@ -6872,7 +6872,7 @@ model ContextCacheContainerProperties {
   @visibility(Lifecycle.Create, Lifecycle.Read)
   provider: AiProvider;
 
-  /** The Time to Live (TTL) in days between 1-30 days for this container, after which it will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
   @minValue(1)
   @maxValue(30)
   timeToLive?: int32;
@@ -6891,7 +6891,7 @@ model ContextCacheContainerPropertiesUpdate {
   @maxLength(250)
   description?: string;
 
-  /** Time to live in days after last access before container blobs are deleted. Must be between 1 and 30. */
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. */
   @minValue(1)
   @maxValue(30)
   timeToLive?: int32;
