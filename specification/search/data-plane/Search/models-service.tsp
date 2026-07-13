@@ -872,6 +872,22 @@ union AzureOpenAIModelName {
   /** Gpt54Nano model. */
   @added(Versions.v2026_04_01)
   Gpt54Nano: "gpt-5.4-nano",
+
+  /** Gpt55 model. */
+  @added(Versions.v2026_05_01_preview)
+  Gpt55: "gpt-5.5",
+
+  /** Gpt56Sol model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Sol: "gpt-5.6-sol",
+
+  /** Gpt56Terra model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Terra: "gpt-5.6-terra",
+
+  /** Gpt56Luna model. */
+  @added(Versions.v2026_08_01_preview)
+  Gpt56Luna: "gpt-5.6-luna",
 }
 
 /** The name of the embedding model from the Azure AI Foundry Catalog that will be called. */
@@ -4607,6 +4623,23 @@ model KnowledgeBase {
   /** Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base. */
   @added(Versions.v2026_05_01_preview)
   corsOptions?: CorsOptions;
+
+  /** Persisted request-wide retrieve defaults for this knowledge base. These values apply to retrieve requests that omit the corresponding fields; request-time values take precedence when present. */
+  @added(Versions.v2026_08_01_preview)
+  retrieveDefaults?: KnowledgeBaseRetrieveDefaults;
+}
+
+/** Persisted request-wide defaults for knowledge base retrieve requests. Each value provides the default for the matching retrieve-request field; service defaults apply when unset, and request-time values take precedence when present. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrieveDefaults {
+  /** The default maximum runtime in seconds for a retrieve request. */
+  maxRuntimeInSeconds?: int32;
+
+  /** The default maximum number of documents in the retrieve output. */
+  maxOutputDocuments?: int32;
+
+  /** The default maximum size, in tokens, of the content in the retrieve output. */
+  maxOutputSizeInTokens?: int32;
 }
 
 /** Result from listing knowledge bases. */
@@ -4689,6 +4722,10 @@ model KnowledgeSource {
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   kind: KnowledgeSourceKind;
 
+  /** Controls how results from this knowledge source are integrated into the final result set. Defaults to 'reranked' when not specified. */
+  @added(Versions.v2026_08_01_preview)
+  inclusionMode?: KnowledgeSourceInclusionMode;
+
   /** The ETag of the knowledge source. */
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -4696,6 +4733,18 @@ model KnowledgeSource {
   /** A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge source definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge source definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge source definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   encryptionKey?: SearchResourceEncryptionKey | null;
+}
+
+/** Controls how a knowledge source's results are integrated into the final result set. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeSourceInclusionMode {
+  string,
+
+  /** Results from this knowledge source go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior. */
+  Reranked: "reranked",
+
+  /** Results from this knowledge source bypass reranking and are always included in the agent context, preserving the underlying result order. */
+  Always: "always",
 }
 
 /** The kind of the knowledge source. */
@@ -4747,6 +4796,10 @@ union KnowledgeSourceKind {
   /** A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies. */
   @added(Versions.v2026_05_01_preview)
   FabricOntology: "fabricOntology",
+
+  /** A knowledge source that retrieves data from a Microsoft Fabric / Power BI semantic model. */
+  @added(Versions.v2026_08_01_preview)
+  FabricSemanticModel: "fabricSemanticModel",
 }
 
 /** Knowledge Source targeting a search index. */
@@ -4943,17 +4996,46 @@ model FileKnowledgeSource extends KnowledgeSource {
 
   /** The parameters for the File knowledge source. */
   fileParameters: FileKnowledgeSourceParameters;
+
+  /** Options to control Cross-Origin Resource Sharing (CORS) for the File knowledge source's file endpoints (upload, list, update, delete). */
+  @added(Versions.v2026_08_01_preview)
+  corsOptions?: CorsOptions;
 }
 
 /** Parameters for File knowledge source. */
 @added(Versions.v2026_05_01_preview)
 model FileKnowledgeSourceParameters {
-  /** Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources. */
+  /** Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel. */
   ingestionParameters?: KnowledgeSourceIngestionParameters;
 
   /** Resources created by the file knowledge source. */
   @visibility(Lifecycle.Read)
   createdResources?: CreatedResources;
+}
+
+/** The extraction effort applied to an individual file. 'minimal' (the default) uses built-in extraction; 'standard' uses Content Understanding. */
+@added(Versions.v2026_08_01_preview)
+union FileKnowledgeSourceExtractionMode {
+  string,
+
+  /** Built-in extraction was performed. */
+  Minimal: "minimal",
+
+  /** Content Understanding extraction was performed. */
+  Standard: "standard",
+}
+
+/** The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path, custom key/value metadata, and an optional per-file extraction override. The parsing mode is auto-detected from the file and is not supplied by the caller. */
+@added(Versions.v2026_08_01_preview)
+model FileUploadMetadata {
+  /** The full relative file name/path to store the file under (prefixes are derived from it). */
+  fileName?: string;
+
+  /** Custom key/value metadata to store with the file. */
+  metadata?: Record<string>;
+
+  /** Optional extraction mode override for the file. */
+  extractionMode?: FileKnowledgeSourceExtractionMode;
 }
 
 /** Metadata for a file uploaded to a File knowledge source. */
@@ -4983,6 +5065,26 @@ model KnowledgeSourceFile {
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @visibility(Lifecycle.Read)
   errorMessage?: string | null;
+
+  /** The prefix (directory-like path) derived from the full file name. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  prefix?: string;
+
+  /** Custom key/value metadata stored with the file. Returned but not searchable or filterable. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  metadata?: Record<string>;
+
+  /** The parsing mode applied to the file (auto-detected from the file). */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  parsingMode?: BlobIndexerParsingMode;
+
+  /** The extraction mode applied to the file. */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  extractionMode?: FileKnowledgeSourceExtractionMode;
 }
 
 /** Response from a List Files request. */
@@ -5342,6 +5444,23 @@ model FabricOntologyKnowledgeSourceParameters {
   ontologyId: string;
 }
 
+/** Configuration for a Fabric / Power BI semantic model knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model FabricSemanticModelKnowledgeSource extends KnowledgeSource {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricSemanticModel;
+
+  /** The parameters for the Fabric semantic model knowledge source. */
+  fabricSemanticModelParameters: FabricSemanticModelKnowledgeSourceParameters;
+}
+
+/** Parameters for a Fabric / Power BI semantic model knowledge source. */
+@added(Versions.v2026_08_01_preview)
+model FabricSemanticModelKnowledgeSourceParameters {
+  /** The Fabric artifact ID of the Power BI semantic model or report to ground answers on. */
+  artifactId: string;
+}
+
 /** Result from listing knowledge sources. */
 model ListKnowledgeSourcesResult {
   /** The knowledge sources in the service. */
@@ -5441,6 +5560,11 @@ model SearchServiceLimits {
   /** The maximum cumulative indexer runtime in seconds allowed for the service. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   maxCumulativeIndexerRuntimeSeconds?: int64 | null;
+
+  /** The maximum vector index size (vector memory quota) allowed per index in bytes. */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
+  maxVectorIndexSizePerIndexInBytes?: int64 | null;
 }
 
 /** Represents service-level indexer runtime counters. */

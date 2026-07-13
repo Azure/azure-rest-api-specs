@@ -3193,6 +3193,9 @@
           },
           "KnowledgeBaseRetrieveWithIntents": {
             "$ref": "./examples/KnowledgeBaseRetrieveWithIntents.json"
+          },
+          "KnowledgeBaseRetrieveWithSourceExclusion": {
+            "$ref": "./examples/KnowledgeBaseRetrieveWithSourceExclusion.json"
           }
         }
       }
@@ -3249,6 +3252,12 @@
           },
           "SearchServiceListKnowledgeSourcesFabricOntology": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesFabricOntology.json"
+          },
+          "SearchServiceListKnowledgeSourcesFabricSemanticModel": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesFabricSemanticModel.json"
+          },
+          "SearchServiceListKnowledgeSourcesFile": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesFile.json"
           },
           "SearchServiceListKnowledgeSourcesIndexedOneLake": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
@@ -3328,6 +3337,12 @@
           "SearchServiceCreateKnowledgeSourceFabricOntology": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceFabricOntology.json"
           },
+          "SearchServiceCreateKnowledgeSourceFabricSemanticModel": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceFabricSemanticModel.json"
+          },
+          "SearchServiceCreateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceFile.json"
+          },
           "SearchServiceCreateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
           },
@@ -3406,6 +3421,12 @@
           },
           "SearchServiceGetKnowledgeSourceFabricOntology": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceFabricOntology.json"
+          },
+          "SearchServiceGetKnowledgeSourceFabricSemanticModel": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceFabricSemanticModel.json"
+          },
+          "SearchServiceGetKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceFile.json"
           },
           "SearchServiceGetKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
@@ -3529,6 +3550,12 @@
           "SearchServiceCreateOrUpdateKnowledgeSourceFabricOntology": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceFabricOntology.json"
           },
+          "SearchServiceCreateOrUpdateKnowledgeSourceFabricSemanticModel": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceFabricSemanticModel.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceFile.json"
+          },
           "SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
           },
@@ -3622,6 +3649,9 @@
           "SearchServiceDeleteKnowledgeSourceFabricOntology": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceFabricOntology.json"
           },
+          "SearchServiceDeleteKnowledgeSourceFabricSemanticModel": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceFabricSemanticModel.json"
+          },
           "SearchServiceDeleteKnowledgeSourceIndexedOneLake": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
           },
@@ -3658,6 +3688,13 @@
               "modelAsString": false
             },
             "x-ms-client-name": "accept"
+          },
+          {
+            "name": "prefix",
+            "in": "query",
+            "description": "Optional prefix to filter files by their directory-like path.",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3753,6 +3790,69 @@
       }
     },
     "/knowledgesources('{sourceName}')/files('{fileId}')": {
+      "put": {
+        "operationId": "KnowledgeSources_UpdateFile",
+        "description": "Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional extraction override) and a 'content' part with the raw file bytes.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The unique identifier of the file to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          },
+          {
+            "name": "metadata",
+            "in": "formData",
+            "description": "The JSON metadata part describing the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "The raw file content part.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceUpdateKnowledgeSourceFile": {
+            "$ref": "./examples/SearchServiceUpdateKnowledgeSourceFile.json"
+          }
+        }
+      },
       "delete": {
         "operationId": "KnowledgeSources_DeleteFile",
         "description": "Deletes a file from a File knowledge source and removes all indexed content derived from it.",
@@ -4748,6 +4848,142 @@
           "nextLinkName": "@odata.nextLink"
         }
       }
+    },
+    "/knowledgebases('{knowledgeBaseName}')/retrieve?_overload=retrieveStream": {
+      "post": {
+        "operationId": "KnowledgeRetrieval_RetrieveStream",
+        "description": "KnowledgeBase retrieves relevant data from backing stores, streaming progress and results as\nserver-sent events on the same connection as they become available, instead of waiting for the\nfull retrieval to complete.",
+        "produces": [
+          "text/event-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "The Accept header.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "text/event-stream"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "name": "knowledgeBaseName",
+            "in": "path",
+            "description": "The name of the knowledge base.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-query-source-authorization",
+            "in": "header",
+            "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "querySourceAuthorization"
+          },
+          {
+            "name": "x-ms-query-work-iq-source-authorization",
+            "in": "header",
+            "description": "User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "queryWorkIQSourceAuthorization"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "retrievalRequest",
+            "in": "body",
+            "description": "The retrieval request to process.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/KnowledgeBaseRetrievalRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/files?_overload=uploadFileMultipart": {
+      "post": {
+        "operationId": "KnowledgeSources_UploadFileMultipart",
+        "description": "Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name, custom metadata, and optional parsing/extraction overrides) and a 'content' part with the raw file bytes.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "sourceName",
+            "in": "path",
+            "description": "The name of the knowledge source.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "name"
+          },
+          {
+            "name": "metadata",
+            "in": "formData",
+            "description": "The JSON metadata part describing the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "description": "The raw file content part.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SearchServiceUploadKnowledgeSourceFileMultipart": {
+            "$ref": "./examples/SearchServiceUploadKnowledgeSourceFileMultipart.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5415,7 +5651,11 @@
         "gpt-5.2",
         "gpt-5.4",
         "gpt-5.4-mini",
-        "gpt-5.4-nano"
+        "gpt-5.4-nano",
+        "gpt-5.5",
+        "gpt-5.6-sol",
+        "gpt-5.6-terra",
+        "gpt-5.6-luna"
       ],
       "x-ms-enum": {
         "name": "AzureOpenAIModelName",
@@ -5500,6 +5740,26 @@
             "name": "Gpt54Nano",
             "value": "gpt-5.4-nano",
             "description": "Gpt54Nano model."
+          },
+          {
+            "name": "Gpt55",
+            "value": "gpt-5.5",
+            "description": "Gpt55 model."
+          },
+          {
+            "name": "Gpt56Sol",
+            "value": "gpt-5.6-sol",
+            "description": "Gpt56Sol model."
+          },
+          {
+            "name": "Gpt56Terra",
+            "value": "gpt-5.6-terra",
+            "description": "Gpt56Terra model."
+          },
+          {
+            "name": "Gpt56Luna",
+            "value": "gpt-5.6-luna",
+            "description": "Gpt56Luna model."
           }
         ]
       }
@@ -7956,6 +8216,48 @@
       ],
       "x-ms-discriminator-value": "fabricOntology"
     },
+    "FabricSemanticModelKnowledgeSource": {
+      "type": "object",
+      "description": "Configuration for a Fabric / Power BI semantic model knowledge source.",
+      "properties": {
+        "fabricSemanticModelParameters": {
+          "$ref": "#/definitions/FabricSemanticModelKnowledgeSourceParameters",
+          "description": "The parameters for the Fabric semantic model knowledge source."
+        }
+      },
+      "required": [
+        "fabricSemanticModelParameters"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricSemanticModel"
+    },
+    "FabricSemanticModelKnowledgeSourceParameters": {
+      "type": "object",
+      "description": "Parameters for a Fabric / Power BI semantic model knowledge source.",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "The Fabric artifact ID of the Power BI semantic model or report to ground answers on."
+        }
+      },
+      "required": [
+        "artifactId"
+      ]
+    },
+    "FabricSemanticModelKnowledgeSourceParams": {
+      "type": "object",
+      "description": "Specifies runtime parameters for a Fabric semantic model knowledge source",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricSemanticModel"
+    },
     "FacetResult": {
       "type": "object",
       "description": "A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.",
@@ -8059,6 +8361,10 @@
         "fileParameters": {
           "$ref": "#/definitions/FileKnowledgeSourceParameters",
           "description": "The parameters for the File knowledge source."
+        },
+        "corsOptions": {
+          "$ref": "#/definitions/CorsOptions",
+          "description": "Options to control Cross-Origin Resource Sharing (CORS) for the File knowledge source's file endpoints (upload, list, update, delete)."
         }
       },
       "required": [
@@ -8071,13 +8377,37 @@
       ],
       "x-ms-discriminator-value": "file"
     },
+    "FileKnowledgeSourceExtractionMode": {
+      "type": "string",
+      "description": "The extraction effort applied to an individual file. 'minimal' (the default) uses built-in extraction; 'standard' uses Content Understanding.",
+      "enum": [
+        "minimal",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "FileKnowledgeSourceExtractionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Minimal",
+            "value": "minimal",
+            "description": "Built-in extraction was performed."
+          },
+          {
+            "name": "Standard",
+            "value": "standard",
+            "description": "Content Understanding extraction was performed."
+          }
+        ]
+      }
+    },
     "FileKnowledgeSourceParameters": {
       "type": "object",
       "description": "Parameters for File knowledge source.",
       "properties": {
         "ingestionParameters": {
           "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
-          "description": "Consolidates all general ingestion settings. Only 'minimal' content extraction mode and embeddingModel are supported for file knowledge sources."
+          "description": "Consolidates all general ingestion settings for the File knowledge source, including the content extraction mode and an optional embeddingModel."
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
@@ -8095,6 +8425,27 @@
         }
       ],
       "x-ms-discriminator-value": "file"
+    },
+    "FileUploadMetadata": {
+      "type": "object",
+      "description": "The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path, custom key/value metadata, and an optional per-file extraction override. The parsing mode is auto-detected from the file and is not supplied by the caller.",
+      "properties": {
+        "fileName": {
+          "type": "string",
+          "description": "The full relative file name/path to store the file under (prefixes are derived from it)."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom key/value metadata to store with the file.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "extractionMode": {
+          "$ref": "#/definitions/FileKnowledgeSourceExtractionMode",
+          "description": "Optional extraction mode override for the file."
+        }
+      }
     },
     "FreshnessPolicy": {
       "type": "object",
@@ -8677,6 +9028,13 @@
         "verbalizationUsed": {
           "type": "boolean",
           "description": "Indicates whether image verbalization was used instead of direct image serving."
+        },
+        "servedImages": {
+          "type": "array",
+          "description": "The set of images the model selected to be served to the downstream model for this retrieval activity.",
+          "items": {
+            "$ref": "#/definitions/ServedImage"
+          }
         }
       }
     },
@@ -10115,6 +10473,10 @@
         "corsOptions": {
           "$ref": "#/definitions/CorsOptions",
           "description": "Options to control Cross-Origin Resource Sharing (CORS) for the knowledge base."
+        },
+        "retrieveDefaults": {
+          "$ref": "#/definitions/KnowledgeBaseRetrieveDefaults",
+          "description": "Persisted request-wide retrieve defaults for this knowledge base. These values apply to retrieve requests that omit the corresponding fields; request-time values take precedence when present."
         }
       },
       "required": [
@@ -10155,6 +10517,20 @@
         "type"
       ]
     },
+    "KnowledgeBaseActivityRecordModel": {
+      "type": "object",
+      "description": "Represents the model used for a knowledge base LLM activity, including its model name and deployment identifier.",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used for the activity."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The deployment identifier of the model used for the activity."
+        }
+      }
+    },
     "KnowledgeBaseActivityRecordType": {
       "type": "string",
       "description": "The type of activity record.",
@@ -10168,6 +10544,7 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
+        "fabricSemanticModel",
         "mcpServer",
         "file",
         "indexedSql",
@@ -10226,6 +10603,11 @@
             "description": "Fabric Ontology retrieval activity."
           },
           {
+            "name": "fabricSemanticModel",
+            "value": "fabricSemanticModel",
+            "description": "Fabric semantic model retrieval activity."
+          },
+          {
             "name": "mcpServer",
             "value": "mcpServer",
             "description": "MCP server retrieval activity."
@@ -10263,6 +10645,25 @@
         ]
       }
     },
+    "KnowledgeBaseActivityStartedEvent": {
+      "type": "object",
+      "description": "TODO(shape TBD): Emitted when an individual activity (e.g. a search index or web retrieval step) begins executing.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ID of the activity record, matching the `id` on the corresponding `activity.completed` event."
+        },
+        "type": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordType",
+          "description": "The type of the activity that has started."
+        }
+      },
+      "required": [
+        "id",
+        "type"
+      ]
+    },
     "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
       "description": "Represents an agentic reasoning activity record.",
@@ -10283,6 +10684,19 @@
         }
       ],
       "x-ms-discriminator-value": "agenticReasoning"
+    },
+    "KnowledgeBaseAnswerDeltaEvent": {
+      "type": "object",
+      "description": "TODO(shape TBD): Emitted for each incremental chunk of generated answer text, before the final `answer.completed` event.",
+      "properties": {
+        "delta": {
+          "type": "string",
+          "description": "TODO(shape TBD): the incremental text fragment to append to the in-progress answer. Needs confirmation of naming/shape against the runtime's actual delta emission (e.g. does it need an index, role, or content-part type like KnowledgeBaseMessageContent?)."
+        }
+      },
+      "required": [
+        "delta"
+      ]
     },
     "KnowledgeBaseAzureBlobActivityArguments": {
       "type": "object",
@@ -10339,6 +10753,11 @@
         "searchSensitivityLabelInfo": {
           "$ref": "#/definitions/PurviewSensitivityLabelInfo",
           "description": "The sensitivity label information for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -10551,6 +10970,66 @@
       ],
       "x-ms-discriminator-value": "fabricOntology"
     },
+    "KnowledgeBaseFabricSemanticModelActivityArguments": {
+      "type": "object",
+      "description": "Represents the arguments the Fabric semantic model retrieval activity was run with.",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query the Fabric semantic model knowledge source."
+        }
+      }
+    },
+    "KnowledgeBaseFabricSemanticModelActivityRecord": {
+      "type": "object",
+      "description": "Represents a Fabric semantic model retrieval activity record.",
+      "properties": {
+        "knowledgeSourceName": {
+          "type": "string",
+          "description": "The knowledge source for the retrieval activity."
+        },
+        "queryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The query time for this retrieval activity."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The count of documents retrieved that were sufficiently relevant to pass the reranker threshold."
+        },
+        "imageServing": {
+          "$ref": "#/definitions/ImageServingStatistics",
+          "description": "Statistics about image serving for this retrieval activity"
+        },
+        "fabricSemanticModelArguments": {
+          "$ref": "#/definitions/KnowledgeBaseFabricSemanticModelActivityArguments",
+          "description": "The Fabric semantic model arguments for the retrieval activity."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecord"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricSemanticModel"
+    },
+    "KnowledgeBaseFabricSemanticModelReference": {
+      "type": "object",
+      "description": "Represents a Fabric semantic model document reference. Structured retrieval results (executed DAX query, column types, mime type, and result payload) are surfaced through the untyped `sourceData` bag under a `fabricSemanticModelResults` array.",
+      "properties": {
+        "artifactId": {
+          "type": "string",
+          "description": "The Fabric artifact ID of the semantic model or report that produced this reference."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "x-ms-discriminator-value": "fabricSemanticModel"
+    },
     "KnowledgeBaseFileActivityArguments": {
       "type": "object",
       "description": "Represents the arguments the File retrieval activity was run with.",
@@ -10680,6 +11159,11 @@
         "searchSensitivityLabelInfo": {
           "$ref": "#/definitions/PurviewSensitivityLabelInfo",
           "description": "The sensitivity label information for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -10744,6 +11228,11 @@
         "searchSensitivityLabelInfo": {
           "$ref": "#/definitions/PurviewSensitivityLabelInfo",
           "description": "The sensitivity label information for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -10804,6 +11293,11 @@
         "docUrl": {
           "type": "string",
           "description": "The document URL for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -11006,9 +11500,9 @@
           "format": "int32",
           "description": "The number of output tokens for the LLM answer synthesis activity."
         },
-        "modelName": {
-          "type": "string",
-          "description": "The name of the model used for the LLM answer synthesis activity."
+        "model": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordModel",
+          "description": "The model used for the LLM answer synthesis activity."
         }
       },
       "allOf": [
@@ -11050,9 +11544,9 @@
           "format": "int32",
           "description": "The number of output tokens for the LLM query planning activity."
         },
-        "modelName": {
-          "type": "string",
-          "description": "The name of the model used for the LLM query planning activity."
+        "model": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordModel",
+          "description": "The model used for the LLM query planning activity."
         }
       },
       "allOf": [
@@ -11076,9 +11570,9 @@
           "format": "int32",
           "description": "The number of output tokens for the LLM web summarization activity."
         },
-        "modelName": {
-          "type": "string",
-          "description": "The name of the model used for the LLM web summarization activity."
+        "model": {
+          "$ref": "#/definitions/KnowledgeBaseActivityRecordModel",
+          "description": "The model used for the LLM web summarization activity."
         }
       },
       "allOf": [
@@ -11136,6 +11630,7 @@
         "workIQ",
         "fabricDataAgent",
         "fabricOntology",
+        "fabricSemanticModel",
         "mcpServer",
         "file",
         "indexedSql"
@@ -11188,6 +11683,11 @@
             "name": "fabricOntology",
             "value": "fabricOntology",
             "description": "Fabric Ontology document reference."
+          },
+          {
+            "name": "fabricSemanticModel",
+            "value": "fabricSemanticModel",
+            "description": "Fabric semantic model document reference."
           },
           {
             "name": "mcpServer",
@@ -11300,6 +11800,19 @@
         }
       }
     },
+    "KnowledgeBaseRetrievalEventStreamResponse": {
+      "type": "object",
+      "description": "Server-sent events response for streaming knowledge base retrieval, added in version\n2026-08-01-preview. Each server-sent event's data payload uses this shape; the connection stays\nopen and multiple events may be sent before the stream ends.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalResponse",
+          "description": "The retrieval response body."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
     "KnowledgeBaseRetrievalPartialResponse": {
       "type": "object",
       "description": "Partial retrieval response.",
@@ -11403,6 +11916,17 @@
         }
       }
     },
+    "KnowledgeBaseRetrievalStartedEvent": {
+      "type": "object",
+      "description": "TODO(shape TBD): Emitted once the retrieval stream begins, before any activity or answer content is produced.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "TODO(shape TBD): placeholder field; replace once the runtime defines what this event should carry (e.g. a correlation/request id)."
+        }
+      }
+    },
+    "KnowledgeBaseRetrievalStreamEvents": {},
     "KnowledgeBaseRetrievalSuccessResponse": {
       "type": "object",
       "description": "Successful retrieval response.",
@@ -11415,6 +11939,27 @@
       "required": [
         "body"
       ]
+    },
+    "KnowledgeBaseRetrieveDefaults": {
+      "type": "object",
+      "description": "Persisted request-wide defaults for knowledge base retrieve requests. Each value provides the default for the matching retrieve-request field; service defaults apply when unset, and request-time values take precedence when present.",
+      "properties": {
+        "maxRuntimeInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default maximum runtime in seconds for a retrieve request."
+        },
+        "maxOutputDocuments": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default maximum number of documents in the retrieve output."
+        },
+        "maxOutputSizeInTokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The default maximum size, in tokens, of the content in the retrieve output."
+        }
+      }
     },
     "KnowledgeBaseSearchIndexActivityArguments": {
       "type": "object",
@@ -11493,6 +12038,11 @@
         "searchSensitivityLabelInfo": {
           "$ref": "#/definitions/PurviewSensitivityLabelInfo",
           "description": "The sensitivity label information for the reference."
+        },
+        "citationUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A Search-owned URL that points at the backing document for this reference, usable as a citation target."
         }
       },
       "allOf": [
@@ -11501,6 +12051,19 @@
         }
       ],
       "x-ms-discriminator-value": "searchIndex"
+    },
+    "KnowledgeBaseStreamErrorEvent": {
+      "type": "object",
+      "description": "TODO(shape TBD): Emitted in place of `response.completed` if the retrieval fails before the stream can complete normally.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/KnowledgeBaseErrorDetail",
+          "description": "The error detail explaining why the retrieval stream failed."
+        }
+      },
+      "required": [
+        "error"
+      ]
     },
     "KnowledgeBaseWebActivityArguments": {
       "type": "object",
@@ -11638,6 +12201,16 @@
       ],
       "x-ms-discriminator-value": "workIQ"
     },
+    "KnowledgeRetrievalAutoReasoningEffort": {
+      "type": "object",
+      "description": "Automatically select the reasoning effort during retrieval. The service seeds every request at the cheapest tier and escalates only as far as needed, up to the service's maximum available tier.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
+        }
+      ],
+      "x-ms-discriminator-value": "auto"
+    },
     "KnowledgeRetrievalIntent": {
       "type": "object",
       "description": "An intended query to execute without model query planning.",
@@ -11744,7 +12317,8 @@
       "enum": [
         "minimal",
         "low",
-        "medium"
+        "medium",
+        "auto"
       ],
       "x-ms-enum": {
         "name": "KnowledgeRetrievalReasoningEffortKind",
@@ -11764,6 +12338,11 @@
             "name": "medium",
             "value": "medium",
             "description": "Use a moderate amount of reasoning during retrieval."
+          },
+          {
+            "name": "auto",
+            "value": "auto",
+            "description": "Automatically select the reasoning effort during retrieval, escalating from the cheapest tier only as far as needed."
           }
         ]
       }
@@ -11802,6 +12381,10 @@
         "kind": {
           "$ref": "#/definitions/KnowledgeSourceKind",
           "description": "The type of the knowledge source."
+        },
+        "inclusionMode": {
+          "$ref": "#/definitions/KnowledgeSourceInclusionMode",
+          "description": "Controls how results from this knowledge source are integrated into the final result set. Defaults to 'reranked' when not specified."
         },
         "@odata.etag": {
           "type": "string",
@@ -11897,7 +12480,54 @@
           "description": "The error message if file processing failed, null otherwise.",
           "x-nullable": true,
           "readOnly": true
+        },
+        "prefix": {
+          "type": "string",
+          "description": "The prefix (directory-like path) derived from the full file name.",
+          "readOnly": true
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Custom key/value metadata stored with the file. Returned but not searchable or filterable.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "parsingMode": {
+          "$ref": "#/definitions/BlobIndexerParsingMode",
+          "description": "The parsing mode applied to the file (auto-detected from the file).",
+          "readOnly": true
+        },
+        "extractionMode": {
+          "$ref": "#/definitions/FileKnowledgeSourceExtractionMode",
+          "description": "The extraction mode applied to the file.",
+          "readOnly": true
         }
+      }
+    },
+    "KnowledgeSourceInclusionMode": {
+      "type": "string",
+      "description": "Controls how a knowledge source's results are integrated into the final result set.",
+      "enum": [
+        "reranked",
+        "always"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceInclusionMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Reranked",
+            "value": "reranked",
+            "description": "Results from this knowledge source go through the reranking and aggregation pipeline alongside results from other knowledge sources. This is the default behavior."
+          },
+          {
+            "name": "Always",
+            "value": "always",
+            "description": "Results from this knowledge source bypass reranking and are always included in the agent context, preserving the underlying result order."
+          }
+        ]
       }
     },
     "KnowledgeSourceIngestionParameters": {
@@ -11974,6 +12604,31 @@
         "freshnessPolicy": {
           "$ref": "#/definitions/FreshnessPolicy",
           "description": "Optional freshness policy for biasing retrieval toward newer documents."
+        },
+        "networkAccessMode": {
+          "type": "string",
+          "description": "Optional network access mode for ingestion. Set to 'private' to run ingestion in a private execution environment that can reach data sources and dependencies over a private network. Default is 'public'. This is a create-time setting and cannot be changed after the knowledge source is created.",
+          "default": "public",
+          "enum": [
+            "public",
+            "private"
+          ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceNetworkAccessMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Public",
+                "value": "public",
+                "description": "Ingestion runs in the standard, publicly reachable execution environment. This is the default."
+              },
+              {
+                "name": "Private",
+                "value": "private",
+                "description": "Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link)."
+              }
+            ]
+          }
         }
       }
     },
@@ -12028,7 +12683,8 @@
         "file",
         "mcpServer",
         "fabricDataAgent",
-        "fabricOntology"
+        "fabricOntology",
+        "fabricSemanticModel"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -12093,6 +12749,35 @@
             "name": "FabricOntology",
             "value": "fabricOntology",
             "description": "A knowledge source that retrieves data from Microsoft Fabric Ontology ontologies."
+          },
+          {
+            "name": "FabricSemanticModel",
+            "value": "fabricSemanticModel",
+            "description": "A knowledge source that retrieves data from a Microsoft Fabric / Power BI semantic model."
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceNetworkAccessMode": {
+      "type": "string",
+      "description": "Specifies the network access mode for knowledge source ingestion. Default is 'public'.",
+      "enum": [
+        "public",
+        "private"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceNetworkAccessMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Public",
+            "value": "public",
+            "description": "Ingestion runs in the standard, publicly reachable execution environment. This is the default."
+          },
+          {
+            "name": "Private",
+            "value": "private",
+            "description": "Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link)."
           }
         ]
       }
@@ -12117,6 +12802,10 @@
           "type": "boolean",
           "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
         },
+        "neverQuerySource": {
+          "type": "boolean",
+          "description": "Indicates that this knowledge source should be excluded from the request's candidate set and never queried at retrieval time. The exclusion is request-local and does not modify knowledge base membership. Cannot be combined with alwaysQuerySource on the same knowledge source."
+        },
         "failOnError": {
           "type": "boolean",
           "description": "Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false."
@@ -12125,6 +12814,10 @@
           "type": "number",
           "format": "float",
           "description": "The reranker threshold all retrieved documents must meet to be included in the response."
+        },
+        "inclusionMode": {
+          "$ref": "#/definitions/KnowledgeSourceInclusionMode",
+          "description": "Overrides the knowledge source's stored inclusionMode for this retrieve call only. When omitted, the stored knowledge source value applies."
         },
         "maxOutputDocuments": {
           "type": "integer",
@@ -19242,6 +19935,12 @@
           "format": "int64",
           "description": "The maximum cumulative indexer runtime in seconds allowed for the service.",
           "x-nullable": true
+        },
+        "maxVectorIndexSizePerIndexInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The maximum vector index size (vector memory quota) allowed per index in bytes.",
+          "x-nullable": true
         }
       }
     },
@@ -19668,6 +20367,25 @@
         }
       ],
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.V3.SentimentSkill"
+    },
+    "ServedImage": {
+      "type": "object",
+      "description": "Describes a single image that the model selected to be served during a retrieval activity.",
+      "properties": {
+        "imageId": {
+          "type": "string",
+          "description": "The image label extracted from the source document by Content Understanding enrichment. Corresponds to the figure numbering in the original document."
+        },
+        "imagePath": {
+          "type": "string",
+          "description": "The relative path to the image within the asset store."
+        },
+        "sizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size in bytes of this image as sent to the model."
+        }
+      }
     },
     "ServiceIndexersRuntime": {
       "type": "object",

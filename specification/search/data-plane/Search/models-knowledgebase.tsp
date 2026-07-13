@@ -1,6 +1,8 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
+import "@typespec/events";
+import "@typespec/sse";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models-service.tsp";
@@ -8,6 +10,8 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
+using TypeSpec.Events;
+using TypeSpec.SSE;
 
 namespace Search;
 
@@ -102,6 +106,14 @@ model KnowledgeRetrievalMediumReasoningEffort
   kind: KnowledgeRetrievalReasoningEffortKind.medium;
 }
 
+/** Automatically select the reasoning effort during retrieval. The service seeds every request at the cheapest tier and escalates only as far as needed, up to the service's maximum available tier. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeRetrievalAutoReasoningEffort
+  extends KnowledgeRetrievalReasoningEffort {
+  /** The discriminator value. */
+  kind: KnowledgeRetrievalReasoningEffortKind.auto;
+}
+
 /** The amount of effort to use during retrieval. */
 union KnowledgeRetrievalReasoningEffortKind {
   string,
@@ -118,6 +130,10 @@ union KnowledgeRetrievalReasoningEffortKind {
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   medium: "medium",
+
+  /** Automatically select the reasoning effort during retrieval, escalating from the cheapest tier only as far as needed. */
+  @added(Versions.v2026_08_01_preview)
+  auto: "auto",
 }
 
 /** The output configuration for this retrieval. */
@@ -150,12 +166,20 @@ model KnowledgeSourceParams {
   @removed(Versions.v2026_04_01)
   alwaysQuerySource?: boolean;
 
+  /** Indicates that this knowledge source should be excluded from the request's candidate set and never queried at retrieval time. The exclusion is request-local and does not modify knowledge base membership. Cannot be combined with alwaysQuerySource on the same knowledge source. */
+  @added(Versions.v2026_08_01_preview)
+  neverQuerySource?: boolean;
+
   /** Indicates that the entire retrieval request should fail if retrieval from this knowledge source encounters an error. Defaults to false. */
   @added(Versions.v2026_05_01_preview)
   failOnError?: boolean;
 
   /** The reranker threshold all retrieved documents must meet to be included in the response. */
   rerankerThreshold?: float32;
+
+  /** Overrides the knowledge source's stored inclusionMode for this retrieve call only. When omitted, the stored knowledge source value applies. */
+  @added(Versions.v2026_08_01_preview)
+  inclusionMode?: KnowledgeSourceInclusionMode;
 
   /** Limits the maximum number of documents returned from this knowledge source. */
   @added(Versions.v2026_05_01_preview)
@@ -261,6 +285,13 @@ model FabricDataAgentKnowledgeSourceParams extends KnowledgeSourceParams {
 model FabricOntologyKnowledgeSourceParams extends KnowledgeSourceParams {
   /** The discriminator value. */
   kind: KnowledgeSourceKind.FabricOntology;
+}
+
+/** Specifies runtime parameters for a Fabric semantic model knowledge source */
+@added(Versions.v2026_08_01_preview)
+model FabricSemanticModelKnowledgeSourceParams extends KnowledgeSourceParams {
+  /** The discriminator value. */
+  kind: KnowledgeSourceKind.FabricSemanticModel;
 }
 
 /** Specifies runtime parameters for an MCP server knowledge source */
@@ -396,6 +427,10 @@ union KnowledgeBaseActivityRecordType {
   /** Fabric Ontology retrieval activity. */
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
+
+  /** Fabric semantic model retrieval activity. */
+  @added(Versions.v2026_08_01_preview)
+  fabricSemanticModel: "fabricSemanticModel",
 
   /** MCP server retrieval activity. */
   @added(Versions.v2026_05_01_preview)
@@ -666,6 +701,26 @@ model KnowledgeBaseFabricOntologyActivityArguments {
   search?: string;
 }
 
+/** Represents a Fabric semantic model retrieval activity record. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseFabricSemanticModelActivityRecord
+  extends KnowledgeBaseActivityRecord {
+  ...KnowledgeBaseRetrievalActivityRecord;
+
+  /** The discriminator value. */
+  type: KnowledgeBaseActivityRecordType.fabricSemanticModel;
+
+  /** The Fabric semantic model arguments for the retrieval activity. */
+  fabricSemanticModelArguments?: KnowledgeBaseFabricSemanticModelActivityArguments;
+}
+
+/** Represents the arguments the Fabric semantic model retrieval activity was run with. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseFabricSemanticModelActivityArguments {
+  /** The search string used to query the Fabric semantic model knowledge source. */
+  search?: string;
+}
+
 /** Represents an MCP server retrieval activity record. */
 @added(Versions.v2026_05_01_preview)
 model KnowledgeBaseMcpServerActivityRecord extends KnowledgeBaseActivityRecord {
@@ -728,6 +783,16 @@ model KnowledgeBaseIndexedSqlActivityArguments {
   search?: string;
 }
 
+/** Represents the model used for a knowledge base LLM activity, including its model name and deployment identifier. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityRecordModel {
+  /** The name of the model used for the activity. */
+  modelName?: string;
+
+  /** The deployment identifier of the model used for the activity. */
+  deploymentId?: string;
+}
+
 /** Represents an LLM query planning activity record. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -745,7 +810,12 @@ model KnowledgeBaseModelQueryPlanningActivityRecord
 
   /** The name of the model used for the LLM query planning activity. */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
   modelName?: string;
+
+  /** The model used for the LLM query planning activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
 }
 
 /** Represents an LLM answer synthesis activity record. */
@@ -765,7 +835,12 @@ model KnowledgeBaseModelAnswerSynthesisActivityRecord
 
   /** The name of the model used for the LLM answer synthesis activity. */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
   modelName?: string;
+
+  /** The model used for the LLM answer synthesis activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
 }
 
 /** Represents an LLM web summarization activity record. */
@@ -784,7 +859,12 @@ model KnowledgeBaseModelWebSummarizationActivityRecord
 
   /** The name of the model used for the LLM web summarization activity. */
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_08_01_preview)
   modelName?: string;
+
+  /** The model used for the LLM web summarization activity. */
+  @added(Versions.v2026_08_01_preview)
+  `model`?: KnowledgeBaseActivityRecordModel;
 }
 
 /** Represents an agentic reasoning activity record. */
@@ -839,6 +919,10 @@ union KnowledgeBaseReferenceType {
   @added(Versions.v2026_05_01_preview)
   fabricOntology: "fabricOntology",
 
+  /** Fabric semantic model document reference. */
+  @added(Versions.v2026_08_01_preview)
+  fabricSemanticModel: "fabricSemanticModel",
+
   /** MCP server document reference. */
   @added(Versions.v2026_05_01_preview)
   mcpServer: "mcpServer",
@@ -884,6 +968,10 @@ model KnowledgeBaseSearchIndexReference extends KnowledgeBaseReference {
   /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an Azure Blob Storage document reference. */
@@ -898,6 +986,10 @@ model KnowledgeBaseAzureBlobReference extends KnowledgeBaseReference {
   /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an indexed SharePoint document reference. */
@@ -914,6 +1006,10 @@ model KnowledgeBaseIndexedSharePointReference extends KnowledgeBaseReference {
   /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents an indexed OneLake document reference. */
@@ -928,6 +1024,10 @@ model KnowledgeBaseIndexedOneLakeReference extends KnowledgeBaseReference {
   /** The sensitivity label information for the reference. */
   @added(Versions.v2026_05_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Represents a web document reference. */
@@ -1015,6 +1115,17 @@ model KnowledgeBaseFabricOntologyReference extends KnowledgeBaseReference {
   ontologyId?: string;
 }
 
+/** Represents a Fabric semantic model document reference. Structured retrieval results (executed DAX query, column types, mime type, and result payload) are surfaced through the untyped `sourceData` bag under a `fabricSemanticModelResults` array. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseFabricSemanticModelReference extends KnowledgeBaseReference {
+  /** The discriminator value. */
+  type: KnowledgeBaseReferenceType.fabricSemanticModel;
+
+  /** The Fabric artifact ID of the semantic model or report that produced this reference. */
+  artifactId?: string;
+}
+
 /** Represents an MCP server document reference. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @added(Versions.v2026_05_01_preview)
@@ -1049,6 +1160,10 @@ model KnowledgeBaseIndexedSqlReference extends KnowledgeBaseReference {
 
   /** The document URL for the reference. */
   docUrl?: string;
+
+  /** A Search-owned URL that points at the backing document for this reference, usable as a citation target. */
+  @added(Versions.v2026_08_01_preview)
+  citationUrl?: url;
 }
 
 /** Information about the sensitivity label applied to a SharePoint document. */
@@ -1109,6 +1224,23 @@ model ImageServingStatistics {
 
   /** Indicates whether image verbalization was used instead of direct image serving. */
   verbalizationUsed?: boolean;
+
+  /** The set of images the model selected to be served to the downstream model for this retrieval activity. */
+  @added(Versions.v2026_08_01_preview)
+  servedImages?: ServedImage[];
+}
+
+/** Describes a single image that the model selected to be served during a retrieval activity. */
+@added(Versions.v2026_08_01_preview)
+model ServedImage {
+  /** The image label extracted from the source document by Content Understanding enrichment. Corresponds to the figure numbering in the original document. */
+  imageId?: string;
+
+  /** The relative path to the image within the asset store. */
+  imagePath?: string;
+
+  /** The size in bytes of this image as sent to the model. */
+  sizeBytes?: int64;
 }
 
 /** The error details. */
@@ -1170,6 +1302,99 @@ model KnowledgeBaseRetrievalPartialResponse {
   body: KnowledgeBaseRetrievalResponse;
 }
 
+/**
+ * Server-sent events response for streaming knowledge base retrieval, added in version
+ * 2026-08-01-preview. Each server-sent event's data payload uses this shape; the connection stays
+ * open and multiple events may be sent before the stream ends.
+ */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrievalEventStreamResponse {
+  /** The retrieval response is successfully returned. */
+  @statusCode
+  code: 200;
+
+  /** The response is streamed as server-sent events. */
+  @header("Content-Type")
+  contentType: "text/event-stream";
+
+  /** The retrieval response body. */
+  @body
+  body: KnowledgeBaseRetrievalResponse;
+}
+
+/**
+ * The set of server-sent events emitted while streaming a knowledge base retrieval, added in
+ * version 2026-08-01-preview. Each event's `data:` payload is JSON-encoded using the type
+ * associated with its event name below. The stream ends after the terminal `response.completed`
+ * event (or an `error` event, if the retrieval fails before completing).
+ */
+@added(Versions.v2026_08_01_preview)
+@events
+union KnowledgeBaseRetrievalStreamEvents {
+  /** The retrieval stream has started; no activity or answer content has been produced yet. */
+  "retrieval.started": KnowledgeBaseRetrievalStartedEvent,
+
+  /** An individual activity (e.g. a search index or web retrieval step) has started executing. */
+  "activity.started": KnowledgeBaseActivityStartedEvent,
+
+  /** An individual activity has finished executing, successfully or not. */
+  "activity.completed": KnowledgeBaseActivityRecord,
+
+  /** An incremental chunk of generated answer text, to be appended to the in-progress answer. */
+  "answer.delta": KnowledgeBaseAnswerDeltaEvent,
+
+  /** The answer message has finished streaming and is now complete. */
+  "answer.completed": KnowledgeBaseMessage,
+
+  /** The references used to produce the response are available. */
+  "references.completed": KnowledgeBaseReference[],
+
+  /** The retrieval failed before the stream could complete normally. */
+  "error": KnowledgeBaseStreamErrorEvent,
+
+  /** The retrieval has completed successfully; this is the final event of the stream. */
+  @terminalEvent
+  "response.completed": KnowledgeBaseRetrievalResponse,
+}
+
+// NOTE: The event payload types below (KnowledgeBaseRetrievalStartedEvent,
+// KnowledgeBaseActivityStartedEvent, KnowledgeBaseAnswerDeltaEvent, KnowledgeBaseStreamErrorEvent)
+// do not exist anywhere else in the spec today. They are stubbed out here with a minimal,
+// best-guess shape so that KnowledgeBaseRetrievalStreamEvents compiles and can be reviewed as a
+// whole. Their fields are NOT final -- they need to be reviewed/fleshed out with the KB
+// retrieval runtime owners before this ships.
+
+/** TODO(shape TBD): Emitted once the retrieval stream begins, before any activity or answer content is produced. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseRetrievalStartedEvent {
+  /** TODO(shape TBD): placeholder field; replace once the runtime defines what this event should carry (e.g. a correlation/request id). */
+  requestId?: string;
+}
+
+/** TODO(shape TBD): Emitted when an individual activity (e.g. a search index or web retrieval step) begins executing. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseActivityStartedEvent {
+  /** The ID of the activity record, matching the `id` on the corresponding `activity.completed` event. */
+  id: int32;
+
+  /** The type of the activity that has started. */
+  type: KnowledgeBaseActivityRecordType;
+}
+
+/** TODO(shape TBD): Emitted for each incremental chunk of generated answer text, before the final `answer.completed` event. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseAnswerDeltaEvent {
+  /** TODO(shape TBD): the incremental text fragment to append to the in-progress answer. Needs confirmation of naming/shape against the runtime's actual delta emission (e.g. does it need an index, role, or content-part type like KnowledgeBaseMessageContent?). */
+  delta: string;
+}
+
+/** TODO(shape TBD): Emitted in place of `response.completed` if the retrieval fails before the stream can complete normally. */
+@added(Versions.v2026_08_01_preview)
+model KnowledgeBaseStreamErrorEvent {
+  /** The error detail explaining why the retrieval stream failed. */
+  error: KnowledgeBaseErrorDetail;
+}
+
 /** Parameters for AI Services. */
 model AIServices {
   /** The URI of the AI Services endpoint. */
@@ -1227,6 +1452,18 @@ union KnowledgeSourceIngestionPermissionOption {
   SensitivityLabels: "sensitivityLabels",
 }
 
+/** Specifies the network access mode for knowledge source ingestion. Default is 'public'. */
+@added(Versions.v2026_08_01_preview)
+union KnowledgeSourceNetworkAccessMode {
+  string,
+
+  /** Ingestion runs in the standard, publicly reachable execution environment. This is the default. */
+  Public: "public",
+
+  /** Ingestion runs in a private execution environment so it can reach data sources and dependencies over a private network (private endpoint / shared private link). */
+  Private: "private",
+}
+
 /** Consolidates all general ingestion settings for knowledge sources. */
 model KnowledgeSourceIngestionParameters {
   /** An explicit identity to use for this knowledge source. */
@@ -1273,6 +1510,10 @@ model KnowledgeSourceIngestionParameters {
   /** Optional freshness policy for biasing retrieval toward newer documents. */
   @added(Versions.v2026_05_01_preview)
   freshnessPolicy?: FreshnessPolicy;
+
+  /** Optional network access mode for ingestion. Set to 'private' to run ingestion in a private execution environment that can reach data sources and dependencies over a private network. Default is 'public'. This is a create-time setting and cannot be changed after the knowledge source is created. */
+  @added(Versions.v2026_08_01_preview)
+  networkAccessMode?: KnowledgeSourceNetworkAccessMode = KnowledgeSourceNetworkAccessMode.Public;
 }
 
 /** Specifies the vectorization method to be used for knowledge source embedding model. */

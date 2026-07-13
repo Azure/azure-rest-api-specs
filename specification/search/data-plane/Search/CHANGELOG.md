@@ -5,6 +5,19 @@ This changelog tracks cross-version changes to the Azure Search data-plane API s
 It is maintained for internal engineering reference and API Stewardship Board reviews.
 
 ---
+## 2026-08-01-preview
+
+**Context**: Preview release built on top of 2026-05-01-preview.
+
+### Non-Breaking Changes
+
+**New reasoning effort tier**:
+
+[NEW in this preview]
+
+- **`auto`**: added to `KnowledgeRetrievalReasoningEffortKind`; new `KnowledgeRetrievalAutoReasoningEffort` polymorphic subtype. Selectable via `retrievalReasoningEffort.kind` on both `KnowledgeBaseRetrievalRequest` and the `KnowledgeBase` definition. The service seeds every request at the cheapest tier and escalates only as far as needed, up to the service's maximum available tier.
+
+---
 ## 2026-05-01-preview
 
 **Context**: Preview release built on top of 2026-04-01 GA. Restores several features removed from GA and introduces new knowledge source types, image serving, freshness policies, permission filtering, and expanded AI model support.

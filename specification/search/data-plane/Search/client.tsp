@@ -188,10 +188,18 @@ namespace SearchIndexClient {
   op uploadKnowledgeSourceFile is Search.KnowledgeSources.uploadFile;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  op uploadKnowledgeSourceFileMultipart is Search.KnowledgeSources.uploadFileMultipart;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   op listKnowledgeSourceFiles is Search.KnowledgeSources.listFiles;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   op deleteKnowledgeSourceFile is Search.KnowledgeSources.deleteFile;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  op updateKnowledgeSourceFile is Search.KnowledgeSources.updateFile;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -311,6 +319,10 @@ namespace KnowledgeBaseRetrievalClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   op retrieve is Search.KnowledgeRetrieval.retrieve;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  op retrieveStream is Search.KnowledgeRetrieval.retrieveStream;
 }
 @@clientInitialization(
   KnowledgeBaseRetrievalClient,
@@ -318,6 +330,7 @@ namespace KnowledgeBaseRetrievalClient {
     parameters: KnowledgeBaseRetrievalClientOptions,
   }
 );
+
 
 @@clientName(
   KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
@@ -398,6 +411,8 @@ namespace KnowledgeBaseRetrievalClient {
 @@usage(FabricDataAgentKnowledgeSource, Usage.input);
 @@access(FabricOntologyKnowledgeSource, Access.public);
 @@usage(FabricOntologyKnowledgeSource, Usage.input);
+@@access(FabricSemanticModelKnowledgeSource, Access.public);
+@@usage(FabricSemanticModelKnowledgeSource, Usage.input);
 @@usage(SearchRequest, Usage.input | Usage.output, "java");
 
 // .NET specific customizations
@@ -1902,6 +1917,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeSourceInclusionMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.KnowledgeSourceInclusionMode,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
   Search.SearchIndexKnowledgeSource,
   "Azure.Search.Documents.Indexes"
 );
@@ -2262,6 +2286,24 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.FabricOntologyKnowledgeSourceParameters,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSource,
+  "com.azure.search.documents.indexes",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSourceParameters,
   "com.azure.search.documents.indexes",
   "java"
 );
@@ -4577,6 +4619,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeRetrievalAutoReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeRetrievalAutoReasoningEffort,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeRetrievalReasoningEffortKind,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -4934,6 +4985,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.KnowledgeBaseActivityRecordModel,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseActivityRecordModel,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.KnowledgeBaseModelQueryPlanningActivityRecord,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -5107,6 +5167,15 @@ namespace KnowledgeBaseRetrievalClient {
   "java"
 );
 @@clientNamespace(
+  Search.ServedImage,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.ServedImage,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
   Search.FabricDataAgentKnowledgeSourceParams,
   "Azure.Search.Documents.KnowledgeBases"
 );
@@ -5175,6 +5244,42 @@ namespace KnowledgeBaseRetrievalClient {
 );
 @@clientNamespace(
   Search.KnowledgeBaseFabricOntologyReference,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.FabricSemanticModelKnowledgeSourceParams,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelActivityRecord,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelActivityRecord,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelActivityArguments,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelActivityArguments,
+  "com.azure.search.documents.knowledgebases",
+  "java"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelReference,
+  "Azure.Search.Documents.KnowledgeBases"
+);
+@@clientNamespace(
+  Search.KnowledgeBaseFabricSemanticModelReference,
   "com.azure.search.documents.knowledgebases",
   "java"
 );

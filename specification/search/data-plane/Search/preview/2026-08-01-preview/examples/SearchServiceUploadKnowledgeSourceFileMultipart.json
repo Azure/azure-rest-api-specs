@@ -1,13 +1,16 @@
 {
-  "operationId": "KnowledgeSources_UploadFile",
-  "title": "SearchServiceUploadKnowledgeSourceFile",
+  "operationId": "KnowledgeSources_UploadFileMultipart",
+  "title": "SearchServiceUploadKnowledgeSourceFileMultipart",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "api-version": "2026-08-01-preview",
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "sourceName": "team-kb",
-    "Content-Disposition": "attachment; filename=\"notes/build26/kr-features.md\"",
-    "file": "dGVzdCBmaWxlIGNvbnRlbnQ="
+    "metadata": {
+      "fileName": "notes/build26/kr-features.md",
+      "metadata": { "team": "kr", "source": "build26-notes" }
+    },
+    "content": "dGVzdCBmaWxlIGNvbnRlbnQ="
   },
   "responses": {
     "201": {
