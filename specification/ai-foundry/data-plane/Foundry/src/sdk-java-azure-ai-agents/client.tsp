@@ -363,6 +363,7 @@ using Azure.AI.Projects;
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
 // is already exposed by the Stainless library. Currently there aren't any azure-isms.
+#suppress "@azure-tools/typespec-azure-core/experimental-feature" "Using experimental feature"
 @@changePropertyType(PromptAgentDefinition.tool_choice, string);
 
 // AI Tooling: openai-java de-dup

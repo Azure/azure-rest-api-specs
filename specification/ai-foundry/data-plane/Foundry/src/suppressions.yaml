@@ -1,6 +1,21 @@
 - tool: TypeSpecValidation
   reason: >
-     Suppressing validation for the sub configs.
+     Contracts entry point is for internal consumption only.
   paths:
-    - "."
-    - "**"
+    - "./sdk-csharp-azure-ai-agent-contracts"
+- tool: TypeSpecValidation
+  reason: >
+     .NET Client libraries are not using the azure-typespec emitters.
+  rules: [SdkTspConfigValidation]
+  paths:
+    - "./sdk-csharp-azure-ai-extensions-openai/tspconfig.yaml"
+    - "./sdk-csharp-azure-ai-projects/tspconfig.yaml"
+    - "./sdk-csharp-azure-ai-projects-agents/tspconfig.yaml"
+- tool: TypeSpecValidation
+  reason: >
+     Java Client library config does not include TS/Python config; the inverse is true for the TS/Python client library config, so we need to skip.
+  rules: [SdkTspConfigValidation]
+  paths:
+    - "./sdk-java-azure-ai-agents/tspconfig.yaml"
+    - "./sdk-java-azure-ai-projects/tspconfig.yaml"
+    - "./sdk-python-js-azure-ai-projects/tspconfig.yaml"

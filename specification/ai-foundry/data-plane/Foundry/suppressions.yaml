@@ -2,19 +2,10 @@
 # Pending TSV integration based on OAS3 emission; this area depends on external
 # API specifications that don't emit accurate OAS2 autorest output.
 
-# Added: 2025-01-16
-- tool: TypeSpecValidationAll
-  reason: Design underway for folder structure and tool integration for this area
-  paths:
-    - "."
-    - "**"
-
-# Prior suppression currently superseded by the above:
-
 - tool: TypeSpecValidation
   reason: >
      Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
-  rules: [EmitAutorest]
+  rules: [EmitAutorest, FolderStructure]
   paths:
     - "."
     - "**"
