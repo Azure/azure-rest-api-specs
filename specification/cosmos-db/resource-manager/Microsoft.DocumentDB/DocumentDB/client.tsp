@@ -104,6 +104,11 @@ namespace Customizations;
 @@clientName(ServerVersion.Six0, "SIX_ZERO", "java");
 @@clientName(ServerVersion.Seven0, "SEVEN_ZERO", "java");
 
+@@clientName(ServerVersion.Three2, Azure.ClientGenerator.Core.exact("V3_2"), "csharp");
+@@clientName(ServerVersion.Three6, Azure.ClientGenerator.Core.exact("V3_6"), "csharp");
+@@clientName(ServerVersion.Four0, Azure.ClientGenerator.Core.exact("V4_0"), "csharp");
+@@clientName(ServerVersion.Four2, Azure.ClientGenerator.Core.exact("V4_2"), "csharp");
+
 /**
  *  The subscription resource ID for an access rule.
  */
