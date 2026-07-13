@@ -235,6 +235,7 @@ alias FeatureFlagsRequestParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
 @summary("Gets a list of feature flags.")
 @doc("Gets a list of feature flags.")
+@operationId("GetFeatureFlags")
 @added(Versions.v2026_05_01_preview)
 op getFeatureFlags is Foundations.ResourceList<
   FeatureFlag,
@@ -251,6 +252,7 @@ op getFeatureFlags is Foundations.ResourceList<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff")
 @head
+@operationId("CheckFeatureFlags")
 @added(Versions.v2026_05_01_preview)
 op checkFeatureFlags is AppConfigOperation<
   FeatureFlagsRequestParams,
@@ -275,6 +277,7 @@ alias FeatureFlagReadParams = {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing pattern for the service"
 @summary("Gets a single feature flag.")
 @doc("Gets a single feature flag.")
+@operationId("GetFeatureFlag")
 @added(Versions.v2026_05_01_preview)
 op getFeatureFlag is Foundations.ResourceOperation<
   FeatureFlag,
@@ -292,6 +295,7 @@ op getFeatureFlag is Foundations.ResourceOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff/{name}")
 @head
+@operationId("CheckFeatureFlag")
 @added(Versions.v2026_05_01_preview)
 op checkFeatureFlag is AppConfigOperation<
   {
@@ -321,6 +325,7 @@ op checkFeatureFlag is AppConfigOperation<
 @doc("Creates a feature flag.")
 @route("/ff/{name}")
 @put
+@operationId("PutFeatureFlag")
 @added(Versions.v2026_05_01_preview)
 op putFeatureFlag is AppConfigOperation<
   {
@@ -349,6 +354,7 @@ op putFeatureFlag is AppConfigOperation<
 @doc("Deletes a feature flag.")
 @route("/ff/{name}")
 @delete
+@operationId("DeleteFeatureFlag")
 @added(Versions.v2026_05_01_preview)
 op deleteFeatureFlag is AppConfigOperation<
   {
@@ -390,6 +396,7 @@ alias FeatureFlagRevisionsRequestParams = NameQueryParam<"""
 @route("/ff-revisions")
 @get
 @list
+@operationId("GetFeatureFlagRevisions")
 @added(Versions.v2026_05_01_preview)
 op getFeatureFlagRevisions is AppConfigOperation<
   {
@@ -408,6 +415,7 @@ op getFeatureFlagRevisions is AppConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/ff-revisions")
 @head
+@operationId("CheckFeatureFlagRevisions")
 @added(Versions.v2026_05_01_preview)
 op checkFeatureFlagRevisions is AppConfigOperation<
   FeatureFlagRevisionsRequestParams,
