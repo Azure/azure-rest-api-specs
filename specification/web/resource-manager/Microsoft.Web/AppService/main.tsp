@@ -45,6 +45,10 @@ import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
 import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
+import "./SiteSilo.tsp";
+import "./ServerFarmSilo.tsp";
+import "./ManagedTrafficConfig.tsp";
+import "./LastKnownGood.tsp";
 import "./AIGateway.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
@@ -123,6 +127,11 @@ enum Versions {
    * The 2026-03-15 API version.
    */
   v2026_03_15: "2026-03-15",
+
+  /**
+   * The 2026-06-01 API version.
+   */
+  v2026_06_01: "2026-06-01",
 }
 
 @tag("Provider")
