@@ -10,6 +10,7 @@ import "@azure-tools/typespec-azure-core";
 import "./routes-service.tsp";
 import "./routes-index.tsp";
 import "./routes-knowledgebase.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -51,6 +52,6 @@ enum Versions {
   /** The 2026-05-01-preview API version. */
   v2026_05_01_preview: "2026-05-01-preview",
 
-    /** The 2026-08-01-preview API version. */
-  v2026_08_01_preview: "2026-08-01-preview"
+  /** The 2026-08-01-preview API version. */
+  v2026_08_01_preview: "2026-08-01-preview",
 }
