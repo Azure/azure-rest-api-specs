@@ -1,6 +1,6 @@
 {
-  "title": "CustomLaunchBulkInstancesOperation_CreateOrUpdate_MaximumSet",
-  "operationId": "CustomLaunchBulkInstancesOperation_CreateOrUpdate",
+  "title": "BulkCreateCustom_CreateOrUpdate_MaximumSet",
+  "operationId": "BulkCreateCustom_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-07-06-preview",
     "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
@@ -24,7 +24,19 @@
           },
           {
             "name": "Standard_D4s_v5",
-            "rank": 2
+            "rank": 2,
+            "override": {
+              "virtualMachineProfile": {
+                "storageProfile": {
+                  "imageReference": {
+                    "publisher": "Canonical",
+                    "offer": "0001-com-ubuntu-server-jammy",
+                    "sku": "22_04-lts-arm64",
+                    "version": "latest"
+                  }
+                }
+              }
+            }
           }
         ],
         "computeProfile": {
@@ -157,7 +169,19 @@
             },
             {
               "name": "Standard_D4s_v5",
-              "rank": 2
+              "rank": 2,
+              "override": {
+                "virtualMachineProfile": {
+                  "storageProfile": {
+                    "imageReference": {
+                      "publisher": "Canonical",
+                      "offer": "0001-com-ubuntu-server-jammy",
+                      "sku": "22_04-lts-arm64",
+                      "version": "latest"
+                    }
+                  }
+                }
+              }
             }
           ],
           "computeProfile": {
@@ -252,9 +276,9 @@
           "principalId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
           "tenantId": "11111111-2222-3333-4444-555555555555"
         },
-        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/89f31926-145c-410c-a56a-5bc97359274c",
+        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/89f31926-145c-410c-a56a-5bc97359274c",
         "name": "89f31926-145c-410c-a56a-5bc97359274c",
-        "type": "Microsoft.Compute/locations/customLaunchBulkInstancesOperations",
+        "type": "Microsoft.Compute/locations/bulkCreateCustom",
         "systemData": {
           "createdBy": "user@contoso.com",
           "createdByType": "User",
@@ -285,7 +309,19 @@
             },
             {
               "name": "Standard_D4s_v5",
-              "rank": 2
+              "rank": 2,
+              "override": {
+                "virtualMachineProfile": {
+                  "storageProfile": {
+                    "imageReference": {
+                      "publisher": "Canonical",
+                      "offer": "0001-com-ubuntu-server-jammy",
+                      "sku": "22_04-lts-arm64",
+                      "version": "latest"
+                    }
+                  }
+                }
+              }
             }
           ],
           "computeProfile": {
@@ -380,9 +416,9 @@
           "principalId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
           "tenantId": "11111111-2222-3333-4444-555555555555"
         },
-        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/locations/eastus/customLaunchBulkInstancesOperations/89f31926-145c-410c-a56a-5bc97359274c",
+        "id": "/subscriptions/1FBA3C66-5C9C-4391-B72F-9F52735FC9F2/resourceGroups/rgBulkactions/providers/Microsoft.Compute/locations/eastus/bulkCreateCustom/89f31926-145c-410c-a56a-5bc97359274c",
         "name": "89f31926-145c-410c-a56a-5bc97359274c",
-        "type": "Microsoft.Compute/locations/customLaunchBulkInstancesOperations",
+        "type": "Microsoft.Compute/locations/bulkCreateCustom",
         "systemData": {
           "createdBy": "user@contoso.com",
           "createdByType": "User",
