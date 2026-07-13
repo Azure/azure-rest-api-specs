@@ -300,6 +300,19 @@ namespace Microsoft.BotService {
     "csharp"
   );
 
+  @@clientName(
+    ListChannelWithKeysResponse,
+    "BotChannelGetWithKeysResult",
+    "csharp"
+  );
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "C# back-compat"
+  @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
+    ListChannelWithKeysResponse,
+    Azure.ResourceManager.CommonTypes.TrackedResource,
+    "csharp"
+  );
+  @@usage(ListChannelWithKeysResponse, Usage.input | Usage.output, "csharp");
+
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the operation back to pageable for backward compatibility"
   @@Azure.ClientGenerator.Core.Legacy.markAsPageable(
     Bots.listByBotResource,
@@ -319,34 +332,6 @@ namespace Microsoft.BotService {
   // previously published C# SDK exposed. They do not affect the service contract
   // or swagger output.
   // =============================================================================
-
-  /**
-   * The ARM channel of list channel with keys operation response
-   */
-  #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "C# back-compat"
-  model ListChannelWithKeysResponseReplacement
-    extends Azure.ResourceManager.CommonTypes.TrackedResource {
-    ...OmitProperties<
-      ListChannelWithKeysResponse,
-      "location" | "tags" | "name" | "id" | "type"
-    >;
-  }
-
-  @@alternateType(
-    ListChannelWithKeysResponse,
-    ListChannelWithKeysResponseReplacement,
-    "csharp"
-  );
-  @@clientName(
-    ListChannelWithKeysResponseReplacement,
-    "BotChannelGetWithKeysResult",
-    "csharp"
-  );
-  @@usage(
-    ListChannelWithKeysResponseReplacement,
-    Usage.input | Usage.output,
-    "csharp"
-  );
 
   // Suppress OperationResults_Get LRO polling operation from C# SDK — it's an
   // infrastructure operation, not user-facing.
