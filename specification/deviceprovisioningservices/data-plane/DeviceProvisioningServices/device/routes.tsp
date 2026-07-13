@@ -268,17 +268,6 @@ interface DeviceUpdate {
       @path
       idScope: string;
 
-      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
-      @header("x-ms-external-device-id")
-      xMsExternalDeviceId: string;
-
-      /**
-       * ADR device identifier (UUID), asserted by the gateway. Present on the
-       * regular path only.
-       */
-      @header("x-ms-device-id")
-      xMsDeviceId?: string;
-
       /** Update check request. */
       @bodyRoot
       body: UpdateCheckRequest;
@@ -308,10 +297,6 @@ interface DeviceUpdate {
       @path
       idScope: string;
 
-      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
-      @header("x-ms-external-device-id")
-      xMsExternalDeviceId: string;
-
       /** Update check request. */
       @bodyRoot
       body: UpdateCheckRequest;
@@ -339,10 +324,6 @@ interface DeviceUpdate {
       /** The scope of the DPS instance. */
       @path
       idScope: string;
-
-      /** External device identifier, asserted by the gateway. Equals the registrationId in DPS. */
-      @header("x-ms-external-device-id")
-      xMsExternalDeviceId: string;
 
       /** Status report request. */
       @bodyRoot
