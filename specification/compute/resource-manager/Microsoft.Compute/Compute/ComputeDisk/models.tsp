@@ -1129,7 +1129,7 @@ model DiskUpdateProperties {
  * Request body for disk claim operation.
  */
 @added(Versions.v2026_07_02)
-model ClaimResourceRequest {
+model ClaimRequest {
   /**
    * The Azure resource ID of the resource claiming ownership of this disk.
    */
@@ -1140,11 +1140,16 @@ model ClaimResourceRequest {
  * Request body for disk unclaim operation.
  */
 @added(Versions.v2026_07_02)
-model UnclaimResourceRequest {
+model UnclaimRequest {
   /**
    * The Azure resource ID of the resource releasing ownership of this disk.
    */
   ownerResource: string;
+
+  /**
+   * Indicates whether the unclaim operation should be forced.
+   */
+  force?: boolean;
 }
 
 /**

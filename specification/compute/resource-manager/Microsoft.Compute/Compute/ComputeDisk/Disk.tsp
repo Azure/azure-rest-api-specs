@@ -135,18 +135,14 @@ interface Disks {
    */
   @added(Versions.v2026_07_02)
   @action("claimResource")
-  claimResource is ComputeResourceActionAsync<Disk, ClaimResourceRequest, Disk>;
+  claimResource is ComputeResourceActionAsync<Disk, ClaimRequest, Disk>;
 
   /**
    * Unclaims a disk from an existing owner resource.
    */
   @added(Versions.v2026_07_02)
   @action("unclaimResource")
-  unclaimResource is ComputeResourceActionAsync<
-    Disk,
-    UnclaimResourceRequest,
-    Disk
-  >;
+  unclaimResource is ComputeResourceActionAsync<Disk, UnclaimRequest, Disk>;
 }
 
 @@doc(

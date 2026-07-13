@@ -1696,7 +1696,7 @@
             "description": "Claim resource request data supplied in the body of the claim disk operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClaimResourceRequest"
+              "$ref": "#/definitions/ClaimRequest"
             }
           }
         ],
@@ -1831,7 +1831,7 @@
             "description": "Unclaim resource request data supplied in the body of the unclaim disk operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UnclaimResourceRequest"
+              "$ref": "#/definitions/UnclaimRequest"
             }
           }
         ],
@@ -2865,7 +2865,7 @@
         ]
       }
     },
-    "ClaimResourceRequest": {
+    "ClaimRequest": {
       "type": "object",
       "description": "Request body for disk claim operation.",
       "properties": {
@@ -5224,13 +5224,17 @@
         ]
       }
     },
-    "UnclaimResourceRequest": {
+    "UnclaimRequest": {
       "type": "object",
       "description": "Request body for disk unclaim operation.",
       "properties": {
         "ownerResource": {
           "type": "string",
           "description": "The Azure resource ID of the resource releasing ownership of this disk."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Indicates whether the unclaim operation should be forced."
         }
       },
       "required": [
