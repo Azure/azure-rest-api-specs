@@ -199,6 +199,10 @@ model RedisCommonPropertiesRedisConfigurationRecordString {
 );
 @@scope(Operations.list, "!csharp");
 @@clientName(RedisResource, "Redis", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+@@clientOption(RedisResource, "resource-rbac-roles", #{
+  RedisCacheContributor: "e0f68234-74aa-48ed-b826-c38b57376e17"
+}, "csharp");
 @@clientName(
   Azure.ResourceManager.CommonTypes.PrivateLinkResource,
   "RedisPrivateLinkResource",
