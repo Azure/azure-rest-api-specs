@@ -386,3 +386,46 @@ model VoiceAudioStreamResponse {
   @body
   content: bytes;
 }
+
+@doc("The role assigned to each channel of a merged stereo voice recording.")
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceRecordingChannelLayout {
+  @doc("The role carried on the left channel, e.g. `user`.")
+  left: string;
+
+  @doc("The role carried on the right channel, e.g. `agent`.")
+  right: string;
+}
+
+@doc("""
+  Metadata for the merged, whole-call stereo recording of a voice conversation (user audio on the left channel,
+  agent audio on the right). Built once from the per-turn segments after the session ends and durably cached.
+  The common metadata (format, sample rate, channels, channel layout, duration) is returned for both
+  Foundry-managed and bring-your-own-storage (BYOS) recordings. For BYOS the response also includes `blob_path`,
+  a direct path/URL into the customer's own storage (no SAS token) that the customer downloads using their own
+  storage credentials. For Foundry-managed storage `blob_path` is absent and the bytes are streamed via the
+  `/audio/content` route instead.
+  """)
+@extension("x-ms-foundry-meta", PromptVoiceAgentRequiredPreview)
+model VoiceRecordingResponse {
+  @doc("The id of the conversation this recording belongs to.")
+  conversation_id: string;
+
+  @doc("The container format of the recording, e.g. `wav`.")
+  format: string;
+
+  @doc("The sample rate of the recording in Hz, e.g. 24000.")
+  sample_rate: int32;
+
+  @doc("The number of audio channels. The merged recording is stereo (`2`).")
+  channels: int32;
+
+  @doc("The role assigned to each stereo channel.")
+  channel_layout: VoiceRecordingChannelLayout;
+
+  @doc("The total duration of the recording in milliseconds.")
+  duration_ms: int32;
+
+  @doc("For bring-your-own-storage (BYOS) recordings only: a direct path/URL into the customer's own storage, without a SAS token — the customer downloads it using their own storage credentials. Absent for Foundry-managed storage, where the bytes are streamed via the `/audio/content` route instead.")
+  blob_path?: string;
+}
