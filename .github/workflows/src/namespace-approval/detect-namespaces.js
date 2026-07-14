@@ -2,7 +2,7 @@ import { execFile } from "child_process";
 import { readFile, writeFile } from "fs/promises";
 import yaml from "js-yaml";
 import { join } from "path";
-import { getChangedFiles, tspconfig } from "../../../shared/src/changed-files.js";
+import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.js";
 import { loadFormatRules, validateNamespaceFormat } from "./validate-format.js";
 
 /**
@@ -214,19 +214,34 @@ export default async function detectNamespaces({ context, core }) {
     context.payload
   );
 
-  const changedFiles = (
-    await getChangedFiles({
-      cwd: process.env.GITHUB_WORKSPACE ?? process.cwd(),
-      paths: ["specification"],
-    })
-  ).filter((file) => tspconfig(file));
+  const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();
+  const statuses = await getChangedFilesStatuses({ cwd, paths: ["specification"] });
 
-  if (changedFiles.length === 0) {
+  // Build a list of changed tspconfig files with their base path for comparison.
+  // - Additions: new files, no base path (all namespaces are new)
+  // - Modifications: same path on base
+  // - Renames: use the old (from) path for base comparison
+  // - Deletions: skip (file removed, nothing to review)
+  /** @type {{ file: string, basePath: string | null }[]} */
+  const changedTspconfigs = [];
+  for (const file of statuses.additions.filter(tspconfig)) {
+    changedTspconfigs.push({ file, basePath: null });
+  }
+  for (const file of statuses.modifications.filter(tspconfig)) {
+    changedTspconfigs.push({ file, basePath: file });
+  }
+  for (const rename of statuses.renames) {
+    if (tspconfig(rename.to)) {
+      changedTspconfigs.push({ file: rename.to, basePath: rename.from });
+    }
+  }
+
+  if (changedTspconfigs.length === 0) {
     core.info("No tspconfig.yaml changes detected, skipping");
     return;
   }
 
-  core.info(`Found tspconfig.yaml changes: ${changedFiles.join(", ")}`);
+  core.info(`Found tspconfig.yaml changes: ${changedTspconfigs.map((c) => c.file).join(", ")}`);
 
   /** @type {Record<string, string>} */
   const namespacesFound = {};
@@ -235,7 +250,7 @@ export default async function detectNamespaces({ context, core }) {
   let isMgmt = false;
   let isDataPlane = false;
 
-  for (const file of changedFiles) {
+  for (const { file } of changedTspconfigs) {
     const result = await extractNamespaces(file, namespacesFound, artifactNames, core);
     if (result.isMgmt) {
       isMgmt = true;
@@ -247,10 +262,14 @@ export default async function detectNamespaces({ context, core }) {
 
   // Compare against base branch to filter out languages with unchanged namespaces.
   // Only report languages whose namespace actually differs from the base version.
-  for (const file of changedFiles) {
-    const baseContent = await readBaseVersion(file);
+  for (const { basePath } of changedTspconfigs) {
+    if (!basePath) {
+      // File is new (addition) — all namespaces are genuinely new
+      continue;
+    }
+    const baseContent = await readBaseVersion(basePath);
     if (!baseContent) {
-      // File is new (not on base branch) — all namespaces are genuinely new
+      // Shouldn't happen for modifications, but possible for renames if git history is shallow
       continue;
     }
     try {
@@ -273,7 +292,7 @@ export default async function detectNamespaces({ context, core }) {
       }
     } catch (e) {
       core.warning(
-        `Failed to parse base version of ${file}: ${/** @type {Error} */ (e).message}, treating as new`,
+        `Failed to parse base version of ${basePath}: ${/** @type {Error} */ (e).message}, treating as new`,
       );
     }
   }

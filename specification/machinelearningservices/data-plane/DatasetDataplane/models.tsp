@@ -670,6 +670,7 @@ model DatasetPath {
   sqlDataPath?: SqlDataPath;
 
   /** The HTTP URL. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   httpUrl?: string;
 
   /** Additional properties. */

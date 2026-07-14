@@ -1270,6 +1270,7 @@ model ImageRegistryCredential {
   /**
    * The identity URL for the private registry.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   identityUrl?: string;
 }
 
@@ -1506,6 +1507,7 @@ model EncryptionProperties {
   /**
    * The keyvault base url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   vaultBaseUrl: string;
 
   /**
