@@ -127,9 +127,10 @@ alias PatchModel<
 @renamedFrom(Versions.v2026_03_15_preview, "NetAppAccountPatch")
 @added(Versions.v2026_04_01)
 @removed(Versions.v2026_04_15_preview)
+@renamedFrom(Versions.v2026_04_15_preview, "NetAppAccountPatch")
 @added(Versions.v2026_05_01)
 @removed(Versions.v2026_05_15_preview)
-@renamedFrom(Versions.v2026_04_15_preview, "NetAppAccountPatch")
+@renamedFrom(Versions.v2026_05_15_preview, "NetAppAccountPatch")
 model NetAppAccountPatchStable {
   /**
    * Resource location
