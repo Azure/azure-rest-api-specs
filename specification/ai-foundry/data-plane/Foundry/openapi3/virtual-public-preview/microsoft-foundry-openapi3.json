@@ -29838,6 +29838,28 @@
           }
         ]
       },
+      "AgentEntraAuthorization": {
+        "type": "object",
+        "properties": {
+          "sign_in_mode": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentSignInMode"
+              }
+            ],
+            "description": "The sign-in mode for the agent. Defaults to 'default' when not specified."
+          },
+          "token_validation_rules": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentTokenValidationRules"
+              }
+            ],
+            "description": "The rules used to validate inbound bearer tokens presented to the agent endpoint when the agent is in the 'blueprint' sign-in mode."
+          }
+        },
+        "description": "Entra authorization configuration for an agent."
+      },
       "AgentEvaluation": {
         "type": "object",
         "required": [
@@ -30184,8 +30206,31 @@
           "client_id": {
             "type": "string",
             "description": "The client ID of the agent instance. Also referred to as the instance ID"
+          },
+          "status": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentIdentityStatus"
+              }
+            ],
+            "description": "The status of the agent identity. Present for both the agent instance identity and the agent blueprint."
           }
         }
+      },
+      "AgentIdentityStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "active",
+              "disabled"
+            ]
+          }
+        ],
+        "description": "The status of an agent identity, applicable to both the agent instance identity and the agent blueprint."
       },
       "AgentKind": {
         "anyOf": [
@@ -30288,6 +30333,14 @@
           },
           "agent_card": {
             "$ref": "#/components/schemas/AgentCard"
+          },
+          "entra_authorization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEntraAuthorization"
+              }
+            ],
+            "description": "The Entra authorization configuration for the agent, including its sign-in mode."
           }
         }
       },
@@ -30388,6 +30441,21 @@
         ],
         "description": "The status of an agent session."
       },
+      "AgentSignInMode": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "default",
+              "blueprint"
+            ]
+          }
+        ],
+        "description": "The sign-in mode that governs how the agent's endpoint authorizes incoming Entra tokens."
+      },
       "AgentState": {
         "anyOf": [
           {
@@ -30483,6 +30551,33 @@
             "Evaluations=V1Preview"
           ]
         }
+      },
+      "AgentTokenValidationRules": {
+        "type": "object",
+        "properties": {
+          "allowed_audiences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`)."
+          },
+          "allowed_tenants": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The set of accepted token tenants (the `tid` claim). Typically the subscription tenant."
+          },
+          "required_scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint."
+          }
+        },
+        "description": "Rules used to validate an inbound bearer token addressed to the agent's blueprint audience.\nEach list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in\nmode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default\nscope declared on the blueprint)."
       },
       "AgentVersionObject": {
         "type": "object",
@@ -33704,6 +33799,14 @@
               }
             ],
             "description": "Optional agent card for the agent"
+          },
+          "entra_authorization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEntraAuthorization"
+              }
+            ],
+            "description": "Optional Entra authorization configuration for the agent, including its sign-in mode."
           }
         },
         "x-ms-foundry-meta": {
@@ -83913,6 +84016,14 @@
               }
             ],
             "description": "The blueprint reference for the agent."
+          },
+          "entra_authorization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AgentEntraAuthorization"
+              }
+            ],
+            "description": "Optional Entra authorization configuration for the agent, including its sign-in mode."
           }
         },
         "x-ms-foundry-meta": {
