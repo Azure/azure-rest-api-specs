@@ -1461,7 +1461,7 @@ model MetricSettings {
 @@clientName(
   DiagnosticsSettings.DiagnosticsMetricSettings,
   "MetricSettings",
-  "java,javascript"
+  "java,javascript,go"
 );
 
 /**
@@ -1510,7 +1510,7 @@ model LogSettings {
 @@clientName(
   DiagnosticsSettings.DiagnosticsLogSettings,
   "LogSettings",
-  "java,javascript"
+  "java,javascript,go"
 );
 
 @@clientLocation(
