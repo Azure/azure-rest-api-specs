@@ -1,11 +1,9 @@
 import { readFileSync } from "node:fs";
+import path from "node:path";
 import process from "node:process";
 import { parseArgs, type ParseArgsConfig } from "node:util";
 import { createAzdskRunner, getReleasePlanById } from "./release-plan.ts";
-import {
-  resolveTypespecProjectPath,
-  toStringValue,
-} from "./sdk-workflow-common.ts";
+import { resolveTypespecProjectPath, toStringValue } from "./sdk-workflow-common.ts";
 import type {
   AzsdkRunner,
   EnsureReleasePlanResult,

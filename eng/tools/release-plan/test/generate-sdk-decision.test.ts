@@ -1,7 +1,7 @@
 import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import { resolveTypespecProjectPath } from "../src/sdk-workflow-common.ts";
 import { checkIfSdkNeedsToBeGenerated, isLanguageExcluded } from "../src/generate-sdk.ts";
+import { resolveTypespecProjectPath } from "../src/sdk-workflow-common.ts";
 import type { OctokitLike } from "../src/types.ts";
 
 function createOctokitMock(getImpl?: ReturnType<typeof vi.fn>): OctokitLike {
