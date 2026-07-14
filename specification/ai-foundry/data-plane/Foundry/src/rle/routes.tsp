@@ -1,4 +1,5 @@
 import "./models.tsp";
+import "../common/servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -7,9 +8,7 @@ using Azure.Core.Traits;
 
 namespace Azure.AI.Projects;
 
-alias RLEOperations = FoundryAzureOperations<{}>;
-
-alias ReinforcementLearningPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.reinforcement_learning_v1_preview>;
+alias RLEnvironmentPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.rl_environment_v1_preview>;
 
 /**
  * Lifecycle operations for hosted reinforcement-learning environments.
@@ -28,7 +27,7 @@ interface RLEnvironments {
   @post
   createEnvironment is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("The environment to create.")
       @body body: CreateRLEnvironmentRequest;
@@ -41,7 +40,7 @@ interface RLEnvironments {
   @get
   listEnvironments is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Optional environment name filter. When set, returns at most a single matching environment.")
       @query
@@ -64,7 +63,7 @@ interface RLEnvironments {
   @get
   getEnvironment is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment name.")
       @path
@@ -79,7 +78,7 @@ interface RLEnvironments {
   @get
   getEnvironmentVersion is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment name.")
       @path
@@ -98,7 +97,7 @@ interface RLEnvironments {
   @delete
   deleteEnvironmentVersion is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment name.")
       @path
@@ -117,7 +116,7 @@ interface RLEnvironments {
   @get
   listRLEnvironmentVersions is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment name.")
       @path
@@ -128,7 +127,7 @@ interface RLEnvironments {
 }
 
 /**
- * RLSandbox lifecycle operations for hosted reinforcement-learning environments.
+ * RLESandbox lifecycle operations for hosted reinforcement-learning environments.
  *
  * `lease` provisions a fresh sandbox, `getSandbox` polls it until it reports
  * the `Running` status, `stop`/`resume` pause and resume a running sandbox,
@@ -144,16 +143,16 @@ interface RLESandboxes {
   @post
   lease is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier to lease the sandbox from.")
       @path
       environmentId: string;
 
-      @doc("RLSandbox lease request.")
-      @body body: CreateRLSandboxRequest;
+      @doc("RLESandbox lease request.")
+      @body body: CreateRLESandboxRequest;
     },
-    RLSandbox
+    RLESandbox
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top filters."
@@ -161,7 +160,7 @@ interface RLESandboxes {
   @get
   listSandboxes is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier whose sandboxes to list.")
       @path
@@ -175,7 +174,7 @@ interface RLESandboxes {
       @query
       top?: int32;
     },
-    ListRLSandboxesResponse
+    ListRLESandboxesResponse
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
@@ -184,17 +183,17 @@ interface RLESandboxes {
   @get
   getSandbox is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
 
-      @doc("RLSandbox identifier.")
+      @doc("RLESandbox identifier.")
       @path
       sandboxId: string;
     },
-    RLSandbox
+    RLESandbox
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a `stop` action on the sandbox."
@@ -203,17 +202,17 @@ interface RLESandboxes {
   @post
   stop is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
 
-      @doc("RLSandbox identifier.")
+      @doc("RLESandbox identifier.")
       @path
       sandboxId: string;
     },
-    RLSandbox
+    RLESandbox
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a `resume` action on the sandbox."
@@ -222,17 +221,17 @@ interface RLESandboxes {
   @post
   resume is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
 
-      @doc("RLSandbox identifier.")
+      @doc("RLESandbox identifier.")
       @path
       sandboxId: string;
     },
-    RLSandbox
+    RLESandbox
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a `release` action that tears down the sandbox via DELETE."
@@ -241,109 +240,144 @@ interface RLESandboxes {
   @delete
   release is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
 
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
 
-      @doc("RLSandbox identifier.")
+      @doc("RLESandbox identifier.")
       @path
       sandboxId: string;
     },
     NoContentResponse
   >;
-}
 
-/**
- * Per-sandbox runtime operations (OpenEnv / Gymnasium style).
- *
- * These operations act on a single `Running` sandbox. The SDK invokes them
- * against the sandbox `url` returned by `RLESandboxes.lease`, which is a
- * different host from the Foundry project endpoint; they are modeled here as
- * sub-resource actions so they share the `RLSandbox` resource contract.
- */
-@route("rl")
-@tag("ReinforcementLearning")
-interface RLEnvironmentRuntime {
+  // ==========================================================================
+  // Runtime operations (OpenEnv / Gymnasium style).
+  //
+  // These operations act on a single `Running` sandbox. Clients (SDK/CLI)
+  // invoke them against the standard Foundry project endpoint just like the
+  // sandbox lifecycle ops above; the service forwards each request to the
+  // sandbox's internal `baseUrl`.
+  // ==========================================================================
+
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime episode control is a non-standard, environment-defined action."
   @doc("Start a new episode and return the initial observation.")
-  @Rest.action("reset")
-  @Rest.actionSeparator("/")
-  reset is RLEOperations.ResourceAction<
-    RLSandbox,
+  @route("{sandboxId}/reset")
+  @post
+  reset is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
-      ...RLResetRequest;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
+
+      @doc("Reset request body.")
+      @body body: RLEResetRequest;
     },
-    RLStepResult
+    RLEStepResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime episode control is a non-standard, environment-defined action."
   @doc("Apply an action and return the resulting transition.")
-  @Rest.action("step")
-  @Rest.actionSeparator("/")
-  step is RLEOperations.ResourceAction<
-    RLSandbox,
+  @route("{sandboxId}/step")
+  @post
+  step is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
-      ...RLStepRequest;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
+
+      @doc("Step request body.")
+      @body body: RLEStepRequest;
     },
-    RLStepResult
+    RLEStepResult
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
   @doc("Return the current environment state.")
-  @Rest.action("state")
-  @Rest.actionSeparator("/")
+  @route("{sandboxId}/state")
   @get
-  state is RLEOperations.ResourceAction<
-    RLSandbox,
+  state is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
     },
     RLEnvironmentState
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
   @doc("Return environment health details.")
-  @Rest.action("health")
-  @Rest.actionSeparator("/")
+  @route("{sandboxId}/health")
   @get
-  health is RLEOperations.ResourceAction<
-    RLSandbox,
+  health is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
     },
     RLEJsonObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
   @doc("Return environment metadata.")
-  @Rest.action("metadata")
-  @Rest.actionSeparator("/")
+  @route("{sandboxId}/metadata")
   @get
-  getMetadata is RLEOperations.ResourceAction<
-    RLSandbox,
+  getMetadata is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
     },
     RLEJsonObject
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
   @doc("Return environment-provided action and observation schemas.")
-  @Rest.action("schema")
-  @Rest.actionSeparator("/")
+  @route("{sandboxId}/schema")
   @get
-  schema is RLEOperations.ResourceAction<
-    RLSandbox,
+  schema is FoundryDataPlaneOperation<
     {
-      ...ReinforcementLearningPreviewHeader;
+      ...RLEnvironmentPreviewHeader;
+
+      @doc("Environment identifier the sandbox belongs to.")
+      @path
+      environmentId: string;
+
+      @doc("RLESandbox identifier.")
+      @path
+      sandboxId: string;
     },
     RLEJsonObject
   >;

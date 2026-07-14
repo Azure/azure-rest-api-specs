@@ -113,30 +113,30 @@ model RLEnvironmentVersion {
 // ============================================================================
 
 @doc("Lifecycle status of an RLE sandbox.")
-union RLSandboxStatus {
+union RLESandboxStatus {
   string,
 
-  @doc("RLSandbox is being provisioned.")
+  @doc("RLESandbox is being provisioned.")
   creating: "Creating",
 
-  @doc("RLSandbox is ready to accept runtime requests at `url`.")
+  @doc("RLESandbox is ready to accept runtime requests at `url`.")
   running: "Running",
 
-  @doc("RLSandbox is stopped but retained and may be resumed.")
+  @doc("RLESandbox is stopped but retained and may be resumed.")
   stopped: "Stopped",
 
-  @doc("RLSandbox has been released and can no longer be used.")
+  @doc("RLESandbox has been released and can no longer be used.")
   released: "Released",
 
-  @doc("RLSandbox entered a terminal failure state. See `error` for details.")
+  @doc("RLESandbox entered a terminal failure state. See `error` for details.")
   failed: "Failed",
 }
 
 @doc("A sandbox leased from a hosted RLE environment.")
 @parentResource(RLEnvironment)
 @resource("sandboxes")
-model RLSandbox {
-  @doc("RLSandbox identifier, assigned by the service.")
+model RLESandbox {
+  @doc("RLESandbox identifier, assigned by the service.")
   @key("sandboxId")
   @encodedName("application/json", "id")
   @visibility(Lifecycle.Read)
@@ -163,11 +163,11 @@ model RLSandbox {
   baseUrl?: string;
 
   @doc("""
-    RLSandbox lifecycle status. The SDK treats `Running` as ready and `Failed` as
+    RLESandbox lifecycle status. The SDK treats `Running` as ready and `Failed` as
     failed; `Stopped` is a non-terminal pause and `Released` is terminal.
     """)
   @visibility(Lifecycle.Read)
-  status: RLSandboxStatus;
+  status: RLESandboxStatus;
 
   @doc("Failure detail when the sandbox enters a failed state.")
   @visibility(Lifecycle.Read)
@@ -183,7 +183,7 @@ model RLSandbox {
 }
 
 @doc("Request body for leasing a new sandbox from an RLE environment.")
-model CreateRLSandboxRequest {
+model CreateRLESandboxRequest {
   @doc("Optional environment image version to lease. Defaults to the latest version.")
   version?: string;
 
@@ -201,9 +201,9 @@ model CreateRLSandboxRequest {
 }
 
 @doc("Response for listing sandboxes leased for an RLE environment.")
-model ListRLSandboxesResponse {
+model ListRLESandboxesResponse {
   @doc("Sandboxes on this page.")
-  value: RLSandbox[];
+  value: RLESandbox[];
 
   @doc("Number of sandboxes returned on this page.")
   count: int32;
@@ -214,7 +214,7 @@ model ListRLSandboxesResponse {
 // ============================================================================
 
 @doc("Request body for starting or restarting an RLE environment episode.")
-model RLResetRequest {
+model RLEResetRequest {
   @doc("Optional deterministic seed for the next episode.")
   seed?: int32;
 
@@ -223,13 +223,13 @@ model RLResetRequest {
 }
 
 @doc("Request body for applying an action to the current RLE episode.")
-model RLStepRequest {
+model RLEStepRequest {
   @doc("Environment-specific action payload.")
   action: RLEJsonObject;
 }
 
 @doc("Outcome returned by RLE `reset` and `step` in the OpenEnv / Gymnasium wire shape.")
-model RLStepResult {
+model RLEStepResult {
   @doc("Environment-specific observation payload.")
   observation?: RLEJsonObject;
 
