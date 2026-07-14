@@ -1328,33 +1328,34 @@ model KnowledgeBaseRetrievalEventStreamResponse {
  * associated with its event name below. The stream ends after the terminal `response.completed`
  * event (or an `error` event, if the retrieval fails before completing).
  */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" "@events SSE union is delivered as a server-sent event stream and cannot be represented as an OpenAPI v2 union."
 @added(Versions.v2026_08_01_preview)
 @events
 union KnowledgeBaseRetrievalStreamEvents {
   /** The retrieval stream has started; no activity or answer content has been produced yet. */
-  "retrieval.started": KnowledgeBaseRetrievalStartedEvent,
+  `retrieval.started`: KnowledgeBaseRetrievalStartedEvent,
 
   /** An individual activity (e.g. a search index or web retrieval step) has started executing. */
-  "activity.started": KnowledgeBaseActivityStartedEvent,
+  `activity.started`: KnowledgeBaseActivityStartedEvent,
 
   /** An individual activity has finished executing, successfully or not. */
-  "activity.completed": KnowledgeBaseActivityRecord,
+  `activity.completed`: KnowledgeBaseActivityRecord,
 
   /** An incremental chunk of generated answer text, to be appended to the in-progress answer. */
-  "answer.delta": KnowledgeBaseAnswerDeltaEvent,
+  `answer.delta`: KnowledgeBaseAnswerDeltaEvent,
 
   /** The answer message has finished streaming and is now complete. */
-  "answer.completed": KnowledgeBaseMessage,
+  `answer.completed`: KnowledgeBaseMessage,
 
   /** The references used to produce the response are available. */
-  "references.completed": KnowledgeBaseReference[],
+  `references.completed`: KnowledgeBaseReference[],
 
   /** The retrieval failed before the stream could complete normally. */
-  "error": KnowledgeBaseStreamErrorEvent,
+  error: KnowledgeBaseStreamErrorEvent,
 
   /** The retrieval has completed successfully; this is the final event of the stream. */
   @terminalEvent
-  "response.completed": KnowledgeBaseRetrievalResponse,
+  `response.completed`: KnowledgeBaseRetrievalResponse,
 }
 
 // NOTE: The event payload types below (KnowledgeBaseRetrievalStartedEvent,

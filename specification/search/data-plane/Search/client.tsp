@@ -198,6 +198,7 @@ namespace SearchIndexClient {
   op deleteKnowledgeSourceFile is Search.KnowledgeSources.deleteFile;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
   op updateKnowledgeSourceFile is Search.KnowledgeSources.updateFile;
 
@@ -330,7 +331,6 @@ namespace KnowledgeBaseRetrievalClient {
     parameters: KnowledgeBaseRetrievalClientOptions,
   }
 );
-
 
 @@clientName(
   KnowledgeBaseModelWebSummarizationActivityRecord.inputTokens,
@@ -5166,10 +5166,7 @@ namespace KnowledgeBaseRetrievalClient {
   "com.azure.search.documents.knowledgebases",
   "java"
 );
-@@clientNamespace(
-  Search.ServedImage,
-  "Azure.Search.Documents.KnowledgeBases"
-);
+@@clientNamespace(Search.ServedImage, "Azure.Search.Documents.KnowledgeBases");
 @@clientNamespace(
   Search.ServedImage,
   "com.azure.search.documents.knowledgebases",

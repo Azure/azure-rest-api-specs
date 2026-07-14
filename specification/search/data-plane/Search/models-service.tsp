@@ -5026,6 +5026,7 @@ union FileKnowledgeSourceExtractionMode {
 }
 
 /** The JSON 'metadata' part of a multipart/form-data file upload: the full file name/path, custom key/value metadata, and an optional per-file extraction override. The parsing mode is auto-detected from the file and is not supplied by the caller. */
+#suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "The 'metadata' part is intentionally a structured JSON object; Swagger 2.0 cannot represent it as a primitive multipart part."
 @added(Versions.v2026_08_01_preview)
 model FileUploadMetadata {
   /** The full relative file name/path to store the file under (prefixes are derived from it). */
