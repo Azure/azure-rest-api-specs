@@ -30901,6 +30901,7 @@
           "mapping": {
             "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
             "traces": "#/components/schemas/TracesDataGenerationJobOptions",
+            "task_generation": "#/components/schemas/TaskGenerationDataGenerationJobOptions",
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
@@ -31108,7 +31109,8 @@
             "enum": [
               "simple_qna",
               "traces",
-              "tool_use"
+              "tool_use",
+              "task_generation"
             ]
           }
         ],
@@ -77993,6 +77995,32 @@
           }
         },
         "description": "Base class for targets with discriminator support."
+      },
+      "TaskGenerationDataGenerationJobOptions": {
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "task_generation"
+            ],
+            "description": "The data generation job type, which is TaskGeneration for this model."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DataGenerationJobOptions"
+          }
+        ],
+        "description": "The options for a task generation data generation job. Use with the evaluation scenario and prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "TaxonomyCategory": {
         "type": "object",

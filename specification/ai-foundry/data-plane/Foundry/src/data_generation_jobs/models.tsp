@@ -22,6 +22,9 @@ union DataGenerationJobType {
 
   @doc("Tool calling conversation between user and agent.")
   tool_use: "tool_use",
+
+  @doc("Task generation for evaluation scenarios.")
+  task_generation: "task_generation",
 }
 
 @doc("LLM model options for data generation jobs.")
@@ -216,6 +219,13 @@ model SimpleQnADataGenerationJobOptions extends DataGenerationJobOptions {
 model TracesDataGenerationJobOptions extends DataGenerationJobOptions {
   @doc("The data generation job type, which is Traces for this model.")
   type: "traces";
+}
+
+@doc("The options for a task generation data generation job. Use with the evaluation scenario and prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
+@extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+model TaskGenerationDataGenerationJobOptions extends DataGenerationJobOptions {
+  @doc("The data generation job type, which is TaskGeneration for this model.")
+  type: "task_generation";
 }
 
 @doc("The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.")
