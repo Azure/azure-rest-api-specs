@@ -741,6 +741,16 @@
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
     },
+    "BillingProperties": {
+      "type": "object",
+      "description": "The billing properties of the Fabric capacity resource.",
+      "properties": {
+        "overage": {
+          "$ref": "#/definitions/OverageBillingSettings",
+          "description": "The overage billing settings for the Fabric capacity resource."
+        }
+      }
+    },
     "CapacityAdministration": {
       "type": "object",
       "description": "The administration properties of the Fabric capacity resource",
@@ -751,25 +761,11 @@
           "items": {
             "type": "string"
           }
-        },
-        "settings": {
-          "$ref": "#/definitions/CapacityAdministrationSettings",
-          "description": "The capacity administration settings."
         }
       },
       "required": [
         "members"
       ]
-    },
-    "CapacityAdministrationSettings": {
-      "type": "object",
-      "description": "The capacity administration settings.",
-      "properties": {
-        "overageBilling": {
-          "$ref": "#/definitions/OverageBillingSettings",
-          "description": "The overage billing settings for the Fabric capacity resource."
-        }
-      }
     },
     "FabricCapacity": {
       "type": "object",
@@ -830,6 +826,10 @@
           "description": "The current state of Microsoft Fabric resource. The state is to indicate more states outside of resource provisioning.",
           "readOnly": true
         },
+        "billing": {
+          "$ref": "#/definitions/BillingProperties",
+          "description": "The billing properties of the Fabric capacity resource."
+        },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
           "description": "The capacity administration"
@@ -865,6 +865,10 @@
       "type": "object",
       "description": "The updatable properties of the FabricCapacity.",
       "properties": {
+        "billing": {
+          "$ref": "#/definitions/BillingProperties",
+          "description": "The billing properties of the Fabric capacity resource."
+        },
         "administration": {
           "$ref": "#/definitions/CapacityAdministration",
           "description": "The capacity administration"

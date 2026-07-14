@@ -21,6 +21,10 @@ model FabricCapacityProperties {
   @visibility(Lifecycle.Read)
   state?: ResourceState;
 
+  @doc("The billing properties of the Fabric capacity resource.")
+  @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+  billing?: BillingProperties;
+
   @doc("The capacity administration")
   administration: CapacityAdministration;
 }
@@ -70,17 +74,13 @@ union OverageBillingState {
 model CapacityAdministration {
   @doc("An array of administrator user identities.")
   members: Array<string>;
-
-  @doc("The capacity administration settings.")
-  @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-  settings?: CapacityAdministrationSettings;
 }
 
-@doc("The capacity administration settings.")
+@doc("The billing properties of the Fabric capacity resource.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-model CapacityAdministrationSettings {
+model BillingProperties {
   @doc("The overage billing settings for the Fabric capacity resource.")
-  overageBilling?: OverageBillingSettings;
+  overage?: OverageBillingSettings;
 }
 
 @doc("The provisioning state of the Fabric capacity resource.")
