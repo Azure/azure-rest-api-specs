@@ -1461,7 +1461,7 @@ model MetricSettings {
 @@clientName(
   DiagnosticsSettings.DiagnosticsMetricSettings,
   "MetricSettings",
-  "java"
+  "java,javascript"
 );
 
 /**
@@ -1507,7 +1507,11 @@ model LogSettings {
   DiagnosticsSettings.DiagnosticsLogSettings,
   "java,javascript,python"
 );
-@@clientName(DiagnosticsSettings.DiagnosticsLogSettings, "LogSettings", "java");
+@@clientName(
+  DiagnosticsSettings.DiagnosticsLogSettings,
+  "LogSettings",
+  "java,javascript"
+);
 
 @@clientLocation(
   NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
