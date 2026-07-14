@@ -881,30 +881,30 @@
       "properties": {
         "email": {
           "$ref": "#/definitions/OverageBillingNotificationState",
-          "description": "The email notification state for overage billing."
+          "description": "The notification state for overage billing."
         }
       }
     },
     "OverageBillingNotificationState": {
       "type": "string",
-      "description": "The email notification state for overage billing.",
+      "description": "The notification state for overage billing.",
       "enum": [
         "Enabled",
         "Disabled"
       ],
       "x-ms-enum": {
         "name": "OverageBillingNotificationState",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "Email notifications are enabled."
+            "description": "Overage billing notifications are enabled."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "Email notifications are disabled."
+            "description": "Overage billing notifications are disabled."
           }
         ]
       }
