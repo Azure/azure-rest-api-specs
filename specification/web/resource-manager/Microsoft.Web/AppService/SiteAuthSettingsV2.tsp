@@ -51,7 +51,8 @@ interface SiteAuthSettingsV2Ops
         @segment("config")
         @key
         authsettingsV2: "authsettingsV2",
-      }
+      },
+      ResourceName = "WebSiteAuthSettingsV2"
     > {}
 
 @tag("WebApps")
@@ -117,7 +118,8 @@ interface SiteAuthSettingsV2OperationGroupOps
         @segment("config")
         @key
         authsettingsV2: "authsettingsV2",
-      }
+      },
+      ResourceName = "WebSiteSlotAuthSettingsV2"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -1602,3 +1602,8 @@ using Microsoft.MachineLearningServices;
   "AzureMachineLearningServicesManagementClient",
   "javascript"
 );
+@@alternateType(
+  RegistryPrivateEndpointConnection.properties,
+  RegistryPrivateEndpointConnectionProperties,
+  "javascript"
+);
