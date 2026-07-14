@@ -82,9 +82,9 @@ model OverageBillingNotificationSettings {
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Closed enum required for x-ms-enum compatibility with modelAsString=false."
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum compatibility is required for this notification state."
 @doc("The email notification state for overage billing.")
 @added(Microsoft.Fabric.Versions.v2026_08_01_preview)
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum compatibility is required for this notification state."
 @OpenAPI.extension(
   "x-ms-enum",
   #{ name: "OverageBillingNotificationState", modelAsString: false }
