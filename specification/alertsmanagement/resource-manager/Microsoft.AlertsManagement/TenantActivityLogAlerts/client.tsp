@@ -49,6 +49,11 @@ using Microsoft.AlertsManagement;
   TenantActivityLogAlertResources,
   "csharp"
 );
+@@clientName(
+  TenantActivityLogAlertResources.listByTenant,
+  "GetTenantActivityLogAlerts",
+  "csharp"
+);
 
 // Drop the `Resource` infix from the generated *Data/*Collection names while keeping
 // the ArmResource class as TenantActivityLogAlertResource. The generator derives the
