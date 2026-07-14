@@ -150,7 +150,7 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}"].delete.parameters[*]
   - code: PathForNestedResource
     reason: >
-      The GetOperationStatus endpoint is the async operation poller URL for
+      The GetAsyncOperationStatus endpoint is the async operation poller URL for
       BulkCreateCustom. The path intentionally uses the bulkCreateCustom
       collection name as a fixed segment followed by asyncOperations/{asyncOperationId} to mirror
       the service-side routing contract. This is the documented exception case for the

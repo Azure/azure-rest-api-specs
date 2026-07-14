@@ -99,27 +99,32 @@ model LocationBasedBulkCreateCustom
   ...BulkCreateCustomEnvelope;
 }
 
-@doc("A single per-VM override. Each set field takes precedence over the operation-level value for that one VM. VM size, zone, priority, eviction policy, and billing are owned by the service and cannot be set here.")
+@doc("Override fields shared by per-VM and per-VM-size overrides. Each set field takes precedence over the operation-level value. VM size, zone, priority, eviction policy, and billing are owned by the service and cannot be set here.")
+model BulkCreateCustomOverrideBase {
+  @doc("VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile.")
+  virtualMachineProfile?: BulkactionVMProperties;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
+  @doc("Tags overriding the operation-level tags.")
+  tags?: Record<string>;
+
+  @doc("Identity overriding the operation-level identity.")
+  identity?: VirtualMachineIdentity;
+
+  @doc("Plan overriding the operation-level plan.")
+  plan?: Plan;
+
+  @identifiers(#["name"])
+  @doc("Extensions. When non-empty they replace the operation-level extensions; when omitted the operation-level extensions are inherited.")
+  extensions?: Array<BulkactionVMExtension>;
+}
+
+@doc("A single per-VM override. Extends the shared override fields with a per-VM name.")
 model BulkCreateCustomOverride {
   @doc("ARM VM name for this VM. Optional; when omitted the name is generated from the prefix as {prefix}_{index}.")
   virtualMachineName?: string;
 
-  @doc("Per-VM VM profile, the same shape as operation-level ComputeProfile.virtualMachineProfile. Overrides the operation-level VM profile for this VM.")
-  virtualMachineProfile?: BulkactionVMProperties;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Tags free-form object matches the established compute contract."
-  @doc("Per-VM tags overriding the operation-level tags.")
-  tags?: Record<string>;
-
-  @doc("Per-VM identity overriding the operation-level identity.")
-  identity?: VirtualMachineIdentity;
-
-  @doc("Per-VM plan overriding the operation-level plan.")
-  plan?: Plan;
-
-  @identifiers(#["name"])
-  @doc("Per-VM extensions. When non-empty they replace the operation-level extensions for this VM; when omitted the VM inherits the operation-level extensions.")
-  extensions?: Array<BulkactionVMExtension>;
+  ...BulkCreateCustomOverrideBase;
 }
 
 @doc("Groups the per-VM overrides with the name prefix that names any override that does not supply its own VM name.")
@@ -136,8 +141,59 @@ model BulkCreateCustomOverridesProfile {
 model BulkCreateCustomVmSizeProfile {
   ...VmSizeProfile;
 
-  @doc("Optional per-VM-size profile override applied to every VM the service assigns to this size. Reuses the per-VM override shape, but virtualMachineName cannot be set since a size maps to many VMs. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are merged with the per-VM override, with the per-VM value winning.")
-  override?: BulkCreateCustomOverride;
+  @doc("Optional per-VM-size profile override applied to every VM the service assigns to this size. A size maps to many VMs, so virtualMachineName is not part of this shape. virtualMachineProfile is layered beneath any per-VM override; tags, identity, and plan are merged with the per-VM override, with the per-VM value winning.")
+  override?: BulkCreateCustomOverrideBase;
+}
+
+@doc("The allocation strategy for VM size selection in BulkCreateCustom.")
+union BulkCreateCustomAllocationStrategy {
+  @doc("Platform prioritizes VM sizes with the lowest hourly cost")
+  LowestPrice: "LowestPrice",
+
+  @doc("Customer specifies a rank for each VM size, platform uses VM sizes in rank order")
+  Prioritized: "Prioritized",
+
+  string,
+}
+
+@doc("The distribution strategy for zone allocation in BulkCreateCustom.")
+union BulkCreateCustomDistributionStrategy {
+  @doc("Platform attempts to place as many VMs as possible in a single zone, falls back to multiple zones if needed")
+  BestEffortSingleZone: "BestEffortSingleZone",
+
+  @doc("Platform uses customer-provided zone rankings to allocate VMs")
+  Prioritized: "Prioritized",
+
+  @doc("Platform attempts to evenly distribute VMs across all available zones with best effort")
+  BestEffortBalanced: "BestEffortBalanced",
+
+  string,
+}
+
+@doc("Configuration options for Regular or Spot instances in BulkCreateCustom.")
+model BulkCreateCustomPriorityProfile {
+  @doc("The priority type for VM allocation")
+  type?: PriorityType;
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "maxPricePerVM has VM which does not follow camel casing"
+  @doc("Price per hour of each Spot VM will never exceed this.")
+  maxPricePerVM?: float32;
+
+  @doc("Eviction Policy to follow when evicting Spot VMs.")
+  evictionPolicy?: EvictionPolicy;
+
+  @doc("The allocation strategy for VM size selection")
+  allocationStrategy?: BulkCreateCustomAllocationStrategy;
+}
+
+@doc("The zone allocation policy for distributing VMs across availability zones in BulkCreateCustom.")
+model BulkCreateCustomZoneAllocationPolicy {
+  @doc("The distribution strategy for zone allocation. Defaults to BestEffortBalanced.")
+  distributionStrategy?: BulkCreateCustomDistributionStrategy = BulkCreateCustomDistributionStrategy.BestEffortBalanced;
+
+  @identifiers(#[])
+  @doc("The zone preferences for allocation priority")
+  zonePreferences?: Array<ZonePreference>;
 }
 
 @doc("Details of the BulkCreateCustom.")
@@ -158,7 +214,7 @@ model BulkCreateCustomProperties {
   capacityType?: CapacityType;
 
   @doc("Configuration Options for Regular or Spot instances in BulkCreateCustom.")
-  priorityProfile: PriorityProfile;
+  priorityProfile: BulkCreateCustomPriorityProfile;
 
   @identifiers(#[])
   @doc("List of VM sizes supported for BulkCreateCustom")
@@ -168,7 +224,7 @@ model BulkCreateCustomProperties {
   computeProfile: ComputeProfile;
 
   @doc("Zone Allocation Policy for launching instances.")
-  zoneAllocationPolicy?: ZoneAllocationPolicy;
+  zoneAllocationPolicy?: BulkCreateCustomZoneAllocationPolicy;
 
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
@@ -204,10 +260,10 @@ interface BulkCreateCustom {
     Response = ArmResponse<LocationBasedBulkCreateCustom>
   >;
 
-  @doc("Get the status of a BulkCreateCustom.")
+  @doc("Get the status of an async operation of a BulkCreateCustom.")
   @get
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/asyncOperations/{asyncOperationId}")
-  getOperationStatus(
+  getAsyncOperationStatus(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
 
