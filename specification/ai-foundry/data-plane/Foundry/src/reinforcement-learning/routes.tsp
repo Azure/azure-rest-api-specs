@@ -9,6 +9,8 @@ namespace Azure.AI.Projects;
 
 alias RLEOperations = FoundryAzureOperations<{}>;
 
+alias ReinforcementLearningPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.reinforcement_learning_v1_preview>;
+
 /**
  * Lifecycle operations for hosted reinforcement-learning environments.
  *
@@ -17,7 +19,7 @@ alias RLEOperations = FoundryAzureOperations<{}>;
  * version while preserving the environment identity. Sandboxes are leased
  * against an environment via the `RLESandboxes` interface.
  */
-@route("fine_tuning/environments")
+@route("rl/environments")
 @tag("ReinforcementLearning")
 interface RLEnvironments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a non-standard `create` collection action so a service-assigned id is returned without a client-supplied PUT."
@@ -26,72 +28,102 @@ interface RLEnvironments {
   @post
   createEnvironment is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("The environment to create.")
       @body body: CreateRLEnvironmentRequest;
     },
     RLEnvironment
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top/name filters."
   @doc("List all hosted RLE environments in the project.")
   @get
-  @list
-  listEnvironments is FoundryDataPlaneOperation<{}, ListRLEnvironmentsResponse>;
+  listEnvironments is FoundryDataPlaneOperation<
+    {
+      ...ReinforcementLearningPreviewHeader;
+
+      @doc("Optional environment name filter. When set, returns at most a single matching environment.")
+      @query
+      name?: string;
+
+      @doc("Number of environments to skip. Defaults to 0.")
+      @query
+      skip?: int32;
+
+      @doc("Maximum number of environments to return. Defaults to 50; valid range is [1, 200].")
+      @query
+      top?: int32;
+    },
+    ListRLEnvironmentsResponse
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
-  @doc("Get a hosted RLE environment by id.")
-  @route("{environmentId}")
+  @doc("Get a hosted RLE environment by name. Returns the latest version of the environment.")
+  @route("{name}")
   @get
   getEnvironment is FoundryDataPlaneOperation<
     {
-      @doc("Environment identifier.")
-      @path
-      environmentId: string;
-    },
-    RLEnvironment
-  >;
+      ...ReinforcementLearningPreviewHeader;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service uses PUT with a partial update body rather than full-resource replace."
-  @doc("Update a hosted RLE environment. Produces a new version pointing at the supplied image.")
-  @route("{environmentId}")
-  @put
-  updateEnvironment is FoundryDataPlaneOperation<
-    {
-      @doc("Environment identifier.")
+      @doc("Environment name.")
       @path
-      environmentId: string;
-
-      @doc("The update to apply.")
-      @body body: UpdateRLEnvironmentRequest;
+      name: string;
     },
     RLEnvironment
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
-  @doc("Delete a hosted RLE environment and all of its versions.")
-  @route("{environmentId}")
-  @delete
-  deleteEnvironment is FoundryDataPlaneOperation<
+  @doc("Get a specific version of a hosted RLE environment by name and version.")
+  @route("{name}/versions/{version}")
+  @get
+  getEnvironmentVersion is FoundryDataPlaneOperation<
     {
-      @doc("Environment identifier.")
+      ...ReinforcementLearningPreviewHeader;
+
+      @doc("Environment name.")
       @path
-      environmentId: string;
+      name: string;
+
+      @doc("Environment version identifier.")
+      @path
+      version: string;
+    },
+    RLEnvironment
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes resource-level operations under a flat route shape."
+  @doc("Delete a specific version of a hosted RLE environment.")
+  @route("{name}/versions/{version}")
+  @delete
+  deleteEnvironmentVersion is FoundryDataPlaneOperation<
+    {
+      ...ReinforcementLearningPreviewHeader;
+
+      @doc("Environment name.")
+      @path
+      name: string;
+
+      @doc("Environment version identifier.")
+      @path
+      version: string;
     },
     NoContentResponse
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged array of versions."
   @doc("List historical versions of a hosted RLE environment.")
-  @route("{environmentId}/versions")
+  @route("{name}/versions")
   @get
-  @list
   listRLEnvironmentVersions is FoundryDataPlaneOperation<
     {
-      @doc("Environment identifier.")
+      ...ReinforcementLearningPreviewHeader;
+
+      @doc("Environment name.")
       @path
-      environmentId: string;
+      name: string;
     },
-    ListRLEnvironmentVersionsResponse
+    RLEnvironmentVersion[]
   >;
 }
 
@@ -103,7 +135,7 @@ interface RLEnvironments {
  * and `release` tears it down. These operations are served by the Foundry
  * project endpoint.
  */
-@route("fine_tuning/environments/{environmentId}/sandboxes")
+@route("rl/environments/{environmentId}/sandboxes")
 @tag("ReinforcementLearning")
 interface RLESandboxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a `lease` collection action rather than a standard create."
@@ -112,6 +144,8 @@ interface RLESandboxes {
   @post
   lease is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier to lease the sandbox from.")
       @path
       environmentId: string;
@@ -122,15 +156,24 @@ interface RLESandboxes {
     RLSandbox
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a simple non-paged list with skip/top filters."
   @doc("List sandboxes currently leased for an environment.")
   @get
-  @list
   listSandboxes is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier whose sandboxes to list.")
       @path
       environmentId: string;
+
+      @doc("Number of sandboxes to skip. Defaults to 0.")
+      @query
+      skip?: int32;
+
+      @doc("Maximum number of sandboxes to return. Defaults to 50; valid range is [1, 200].")
+      @query
+      top?: int32;
     },
     ListRLSandboxesResponse
   >;
@@ -141,6 +184,8 @@ interface RLESandboxes {
   @get
   getSandbox is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
@@ -158,6 +203,8 @@ interface RLESandboxes {
   @post
   stop is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
@@ -175,6 +222,8 @@ interface RLESandboxes {
   @post
   resume is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
@@ -192,6 +241,8 @@ interface RLESandboxes {
   @delete
   release is FoundryDataPlaneOperation<
     {
+      ...ReinforcementLearningPreviewHeader;
+
       @doc("Environment identifier the sandbox belongs to.")
       @path
       environmentId: string;
@@ -212,20 +263,34 @@ interface RLESandboxes {
  * different host from the Foundry project endpoint; they are modeled here as
  * sub-resource actions so they share the `RLSandbox` resource contract.
  */
-@route("fine_tuning")
+@route("rl")
 @tag("ReinforcementLearning")
 interface RLEnvironmentRuntime {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime episode control is a non-standard, environment-defined action."
   @doc("Start a new episode and return the initial observation.")
   @Rest.action("reset")
   @Rest.actionSeparator("/")
-  reset is RLEOperations.ResourceAction<RLSandbox, RLResetRequest, RLStepResult>;
+  reset is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+      ...RLResetRequest;
+    },
+    RLStepResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime episode control is a non-standard, environment-defined action."
   @doc("Apply an action and return the resulting transition.")
   @Rest.action("step")
   @Rest.actionSeparator("/")
-  step is RLEOperations.ResourceAction<RLSandbox, RLStepRequest, RLStepResult>;
+  step is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+      ...RLStepRequest;
+    },
+    RLStepResult
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
@@ -233,7 +298,13 @@ interface RLEnvironmentRuntime {
   @Rest.action("state")
   @Rest.actionSeparator("/")
   @get
-  state is RLEOperations.ResourceAction<RLSandbox, {}, RLEnvironmentState>;
+  state is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+    },
+    RLEnvironmentState
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
@@ -241,7 +312,13 @@ interface RLEnvironmentRuntime {
   @Rest.action("health")
   @Rest.actionSeparator("/")
   @get
-  health is RLEOperations.ResourceAction<RLSandbox, {}, RLEJsonObject>;
+  health is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+    },
+    RLEJsonObject
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
@@ -249,7 +326,13 @@ interface RLEnvironmentRuntime {
   @Rest.action("metadata")
   @Rest.actionSeparator("/")
   @get
-  getMetadata is RLEOperations.ResourceAction<RLSandbox, {}, RLEJsonObject>;
+  getMetadata is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+    },
+    RLEJsonObject
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Runtime query is an environment-defined read action."
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Runtime query is read-only and modeled as a GET action."
@@ -257,5 +340,11 @@ interface RLEnvironmentRuntime {
   @Rest.action("schema")
   @Rest.actionSeparator("/")
   @get
-  schema is RLEOperations.ResourceAction<RLSandbox, {}, RLEJsonObject>;
+  schema is RLEOperations.ResourceAction<
+    RLSandbox,
+    {
+      ...ReinforcementLearningPreviewHeader;
+    },
+    RLEJsonObject
+  >;
 }

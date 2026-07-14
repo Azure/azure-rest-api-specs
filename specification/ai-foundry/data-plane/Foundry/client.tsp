@@ -19,6 +19,7 @@ import "./src/evaluators/routes.tsp";
 import "./src/insights/routes.tsp";
 import "./src/memory-stores/routes.tsp";
 import "./src/red-teams/routes.tsp";
+import "./src/reinforcement-learning/routes.tsp";
 import "./src/schedules/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations

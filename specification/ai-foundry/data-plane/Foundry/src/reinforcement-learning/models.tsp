@@ -14,6 +14,23 @@ alias RLEJsonObject = Record<unknown>;
 // Environments
 // ============================================================================
 
+@doc("Status of the asynchronous ACR image to disk image conversion. Serialized as its string name.")
+union RLEnvironmentDiskImageConversionStatus {
+  string,
+
+  @doc("Disk image conversion has not been requested for this environment yet.")
+  notRequested: "NotRequested",
+
+  @doc("Disk image conversion is in progress.")
+  pending: "Pending",
+
+  @doc("Disk image conversion completed successfully and the disk image is ready for use.")
+  ready: "Ready",
+
+  @doc("Disk image conversion failed. See `diskImageConversionError` for details.")
+  failed: "Failed",
+}
+
 @doc("A hosted reinforcement-learning environment that sandboxes are leased from.")
 @resource("environments")
 model RLEnvironment {
@@ -38,6 +55,14 @@ model RLEnvironment {
   @visibility(Lifecycle.Read)
   version: string;
 
+  @doc("Status of the asynchronous conversion from the ACR container image to a disk image usable by leased sandboxes.")
+  @visibility(Lifecycle.Read)
+  diskImageConversionStatus: RLEnvironmentDiskImageConversionStatus;
+
+  @doc("Error details from the most recent disk image conversion attempt, when `diskImageConversionStatus` is `Failed`.")
+  @visibility(Lifecycle.Read)
+  diskImageConversionError?: string;
+
   @doc("Timestamp the environment was first created, in UTC.")
   @visibility(Lifecycle.Read)
   createdAtUtc: utcDateTime;
@@ -56,10 +81,13 @@ model CreateRLEnvironmentRequest {
   acrImagePath: string;
 }
 
-@doc("Request body for updating a hosted RLE environment. Produces a new version.")
-model UpdateRLEnvironmentRequest {
-  @doc("New container image reference (Azure Container Registry path) for the environment.")
-  acrImagePath: string;
+@doc("Response for listing hosted RLE environments.")
+model ListRLEnvironmentsResponse {
+  @doc("Environments on this page.")
+  value: RLEnvironment[];
+
+  @doc("Number of environments returned on this page.")
+  count: int32;
 }
 
 @doc("A historical version snapshot of a hosted RLE environment.")
@@ -78,26 +106,6 @@ model RLEnvironmentVersion {
 
   @doc("Timestamp this version was created, in UTC.")
   createdAtUtc: utcDateTime;
-}
-
-@doc("Paged list response of hosted RLE environments.")
-model ListRLEnvironmentsResponse {
-  @doc("Environments on this page.")
-  @pageItems
-  value: RLEnvironment[];
-
-  @doc("Number of environments returned on this page.")
-  count: int32;
-}
-
-@doc("Paged list response of historical environment versions.")
-model ListRLEnvironmentVersionsResponse {
-  @doc("Environment versions on this page.")
-  @pageItems
-  value: RLEnvironmentVersion[];
-
-  @doc("Number of versions returned on this page.")
-  count: int32;
 }
 
 // ============================================================================
@@ -142,10 +150,6 @@ model RLSandbox {
   @visibility(Lifecycle.Read)
   environmentId: string;
 
-  @doc("Environment image version the sandbox is running.")
-  @visibility(Lifecycle.Read)
-  version: string;
-
   @doc("Identifier of the disk image backing the sandbox.")
   @visibility(Lifecycle.Read)
   diskImageId: string;
@@ -156,7 +160,7 @@ model RLSandbox {
 
   @doc("Base URL for the sandbox runtime API. Present once the sandbox is `Running`.")
   @visibility(Lifecycle.Read)
-  url?: string;
+  baseUrl?: string;
 
   @doc("""
     RLSandbox lifecycle status. The SDK treats `Running` as ready and `Failed` as
@@ -196,10 +200,9 @@ model CreateRLSandboxRequest {
   envVars?: Record<string>;
 }
 
-@doc("Paged list response of leased sandboxes for an environment.")
+@doc("Response for listing sandboxes leased for an RLE environment.")
 model ListRLSandboxesResponse {
   @doc("Sandboxes on this page.")
-  @pageItems
   value: RLSandbox[];
 
   @doc("Number of sandboxes returned on this page.")

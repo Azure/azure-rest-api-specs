@@ -74,3 +74,63 @@ interface EvaluationTaxonomies {}
   Azure.AI.Projects.EvaluationTaxonomies.update,
   EvaluationTaxonomies
 );
+
+interface RLEnvironments {}
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.createEnvironment,
+  RLEnvironments
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.listEnvironments,
+  RLEnvironments
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.getEnvironment,
+  RLEnvironments
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.getEnvironmentVersion,
+  RLEnvironments
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.deleteEnvironmentVersion,
+  RLEnvironments
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironments.listRLEnvironmentVersions,
+  RLEnvironments
+);
+
+interface RLESandboxes {}
+@@clientLocation(Azure.AI.Projects.RLESandboxes.lease, RLESandboxes);
+@@clientLocation(Azure.AI.Projects.RLESandboxes.listSandboxes, RLESandboxes);
+@@clientLocation(Azure.AI.Projects.RLESandboxes.getSandbox, RLESandboxes);
+@@clientLocation(Azure.AI.Projects.RLESandboxes.stop, RLESandboxes);
+@@clientLocation(Azure.AI.Projects.RLESandboxes.resume, RLESandboxes);
+@@clientLocation(Azure.AI.Projects.RLESandboxes.release, RLESandboxes);
+
+interface RLEnvironmentRuntime {}
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.reset,
+  RLEnvironmentRuntime
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.step,
+  RLEnvironmentRuntime
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.state,
+  RLEnvironmentRuntime
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.health,
+  RLEnvironmentRuntime
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.getMetadata,
+  RLEnvironmentRuntime
+);
+@@clientLocation(
+  Azure.AI.Projects.RLEnvironmentRuntime.schema,
+  RLEnvironmentRuntime
+);

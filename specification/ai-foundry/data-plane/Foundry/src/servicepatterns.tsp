@@ -49,6 +49,7 @@ union FoundryFeaturesOptInKeys {
   red_teams_v1_preview: "RedTeams=V1Preview",
   insights_v1_preview: "Insights=V1Preview",
   memory_stores_v1_preview: "MemoryStores=V1Preview",
+  reinforcement_learning_v1_preview: "ReinforcementLearning=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<RequiredPreviewOptInHeader extends

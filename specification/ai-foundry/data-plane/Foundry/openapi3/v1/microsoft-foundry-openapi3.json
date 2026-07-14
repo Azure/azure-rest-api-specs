@@ -2814,1136 +2814,6 @@
         }
       }
     },
-    "/fine_tuning/environments": {
-      "get": {
-        "operationId": "RLEnvironments_listEnvironments",
-        "description": "List all hosted RLE environments in the project.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListRLEnvironmentsResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/create": {
-      "post": {
-        "operationId": "RLEnvironments_createEnvironment",
-        "description": "Create a new hosted RLE environment.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLEnvironment"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRLEnvironmentRequest"
-              }
-            }
-          },
-          "description": "The environment to create."
-        }
-      }
-    },
-    "/fine_tuning/environments/{environmentId}": {
-      "get": {
-        "operationId": "RLEnvironments_getEnvironment",
-        "description": "Get a hosted RLE environment by id.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLEnvironment"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      },
-      "put": {
-        "operationId": "RLEnvironments_updateEnvironment",
-        "description": "Update a hosted RLE environment. Produces a new version pointing at the supplied image.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLEnvironment"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateRLEnvironmentRequest"
-              }
-            }
-          },
-          "description": "The update to apply."
-        }
-      },
-      "delete": {
-        "operationId": "RLEnvironments_deleteEnvironment",
-        "description": "Delete a hosted RLE environment and all of its versions.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes": {
-      "get": {
-        "operationId": "RLESandboxes_listSandboxes",
-        "description": "List sandboxes currently leased for an environment.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier whose sandboxes to list.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListRLSandboxesResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/lease": {
-      "post": {
-        "operationId": "RLESandboxes_lease",
-        "description": "Lease a fresh sandbox from a hosted RLE environment.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier to lease the sandbox from.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLSandbox"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateRLSandboxRequest"
-              }
-            }
-          },
-          "description": "RLSandbox lease request."
-        }
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}": {
-      "get": {
-        "operationId": "RLESandboxes_getSandbox",
-        "description": "Fetch the latest lifecycle state for a leased sandbox.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier the sandbox belongs to.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLSandbox"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/health": {
-      "get": {
-        "operationId": "RLEnvironmentRuntime_health",
-        "description": "Return environment health details.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/metadata": {
-      "get": {
-        "operationId": "RLEnvironmentRuntime_getMetadata",
-        "description": "Return environment metadata.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/release": {
-      "delete": {
-        "operationId": "RLESandboxes_release",
-        "description": "Release a leased sandbox. The SDK treats this as best-effort teardown.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier the sandbox belongs to.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/reset": {
-      "post": {
-        "operationId": "RLEnvironmentRuntime_reset",
-        "description": "Start a new episode and return the initial observation.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLStepResult"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RLResetRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/resume": {
-      "post": {
-        "operationId": "RLESandboxes_resume",
-        "description": "Resume a previously stopped sandbox. The sandbox transitions back toward `Running`.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier the sandbox belongs to.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLSandbox"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/schema": {
-      "get": {
-        "operationId": "RLEnvironmentRuntime_schema",
-        "description": "Return environment-provided action and observation schemas.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {}
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/state": {
-      "get": {
-        "operationId": "RLEnvironmentRuntime_state",
-        "description": "Return the current environment state.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLEnvironmentState"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/step": {
-      "post": {
-        "operationId": "RLEnvironmentRuntime_step",
-        "description": "Apply an action and return the resulting transition.",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Hosted RLE environment identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier, assigned by the service.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "required": false,
-                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.uuid"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLStepResult"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "required": false,
-                "description": "String error code indicating what went wrong.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RLStepRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/sandboxes/{sandboxId}/stop": {
-      "post": {
-        "operationId": "RLESandboxes_stop",
-        "description": "Stop a running sandbox. The sandbox enters the `Stopped` state and may be resumed.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier the sandbox belongs to.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sandboxId",
-            "in": "path",
-            "required": true,
-            "description": "RLSandbox identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RLSandbox"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
-    "/fine_tuning/environments/{environmentId}/versions": {
-      "get": {
-        "operationId": "RLEnvironments_listRLEnvironmentVersions",
-        "description": "List historical versions of a hosted RLE environment.",
-        "parameters": [
-          {
-            "name": "environmentId",
-            "in": "path",
-            "required": true,
-            "description": "Environment identifier.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ListRLEnvironmentVersionsResponse"
-                }
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "ReinforcementLearning"
-        ]
-      }
-    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_listLatest",
@@ -8322,6 +7192,1418 @@
           },
           "description": "Redteam to be run"
         }
+      }
+    },
+    "/rl/environments": {
+      "get": {
+        "operationId": "RLEnvironments_listEnvironments",
+        "description": "List all hosted RLE environments in the project.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "description": "Optional environment name filter. When set, returns at most a single matching environment.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "description": "Number of environments to skip. Defaults to 0.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of environments to return. Defaults to 50; valid range is [1, 200].",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRLEnvironmentsResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/create": {
+      "post": {
+        "operationId": "RLEnvironments_createEnvironment",
+        "description": "Create a new hosted RLE environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRLEnvironmentRequest"
+              }
+            }
+          },
+          "description": "The environment to create."
+        }
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes": {
+      "get": {
+        "operationId": "RLESandboxes_listSandboxes",
+        "description": "List sandboxes currently leased for an environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier whose sandboxes to list.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "description": "Number of sandboxes to skip. Defaults to 0.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of sandboxes to return. Defaults to 50; valid range is [1, 200].",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "explode": false
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListRLSandboxesResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/lease": {
+      "post": {
+        "operationId": "RLESandboxes_lease",
+        "description": "Lease a fresh sandbox from a hosted RLE environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier to lease the sandbox from.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLSandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRLSandboxRequest"
+              }
+            }
+          },
+          "description": "RLSandbox lease request."
+        }
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}": {
+      "get": {
+        "operationId": "RLESandboxes_getSandbox",
+        "description": "Fetch the latest lifecycle state for a leased sandbox.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier the sandbox belongs to.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLSandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/health": {
+      "get": {
+        "operationId": "RLEnvironmentRuntime_health",
+        "description": "Return environment health details.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/metadata": {
+      "get": {
+        "operationId": "RLEnvironmentRuntime_getMetadata",
+        "description": "Return environment metadata.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/release": {
+      "delete": {
+        "operationId": "RLESandboxes_release",
+        "description": "Release a leased sandbox. The SDK treats this as best-effort teardown.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier the sandbox belongs to.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/reset": {
+      "post": {
+        "operationId": "RLEnvironmentRuntime_reset",
+        "description": "Start a new episode and return the initial observation.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLStepResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RLResetRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/resume": {
+      "post": {
+        "operationId": "RLESandboxes_resume",
+        "description": "Resume a previously stopped sandbox. The sandbox transitions back toward `Running`.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier the sandbox belongs to.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLSandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/schema": {
+      "get": {
+        "operationId": "RLEnvironmentRuntime_schema",
+        "description": "Return environment-provided action and observation schemas.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {}
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/state": {
+      "get": {
+        "operationId": "RLEnvironmentRuntime_state",
+        "description": "Return the current environment state.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLEnvironmentState"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/step": {
+      "post": {
+        "operationId": "RLEnvironmentRuntime_step",
+        "description": "Apply an action and return the resulting transition.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Hosted RLE environment identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier, assigned by the service.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "$ref": "#/components/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "required": false,
+                "description": "An opaque, globally-unique, client-generated string identifier for the request.",
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.uuid"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLStepResult"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RLStepRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rl/environments/{environmentId}/sandboxes/{sandboxId}/stop": {
+      "post": {
+        "operationId": "RLESandboxes_stop",
+        "description": "Stop a running sandbox. The sandbox enters the `Stopped` state and may be resumed.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "environmentId",
+            "in": "path",
+            "required": true,
+            "description": "Environment identifier the sandbox belongs to.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sandboxId",
+            "in": "path",
+            "required": true,
+            "description": "RLSandbox identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLSandbox"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{name}": {
+      "get": {
+        "operationId": "RLEnvironments_getEnvironment",
+        "description": "Get a hosted RLE environment by name. Returns the latest version of the environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Environment name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{name}/versions": {
+      "get": {
+        "operationId": "RLEnvironments_listRLEnvironmentVersions",
+        "description": "List historical versions of a hosted RLE environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Environment name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RLEnvironmentVersion"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      }
+    },
+    "/rl/environments/{name}/versions/{version}": {
+      "get": {
+        "operationId": "RLEnvironments_getEnvironmentVersion",
+        "description": "Get a specific version of a hosted RLE environment by name and version.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Environment name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Environment version identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RLEnvironment"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
+      },
+      "delete": {
+        "operationId": "RLEnvironments_deleteEnvironmentVersion",
+        "description": "Delete a specific version of a hosted RLE environment.",
+        "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "ReinforcementLearning=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "Environment name.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "Environment version identifier.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "ReinforcementLearning"
+        ]
       }
     },
     "/schedules": {
@@ -14286,28 +14568,6 @@
         ],
         "description": "The types of parameters for red team item generation."
       },
-      "ListRLEnvironmentVersionsResponse": {
-        "type": "object",
-        "required": [
-          "value",
-          "count"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RLEnvironmentVersion"
-            },
-            "description": "Environment versions on this page."
-          },
-          "count": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of versions returned on this page."
-          }
-        },
-        "description": "Paged list response of historical environment versions."
-      },
       "ListRLEnvironmentsResponse": {
         "type": "object",
         "required": [
@@ -14328,7 +14588,7 @@
             "description": "Number of environments returned on this page."
           }
         },
-        "description": "Paged list response of hosted RLE environments."
+        "description": "Response for listing hosted RLE environments."
       },
       "ListRLSandboxesResponse": {
         "type": "object",
@@ -14350,7 +14610,7 @@
             "description": "Number of sandboxes returned on this page."
           }
         },
-        "description": "Paged list response of leased sandboxes for an environment."
+        "description": "Response for listing sandboxes leased for an RLE environment."
       },
       "ManagedAzureAISearchIndex": {
         "type": "object",
@@ -38212,6 +38472,7 @@
           "projectId",
           "acrImagePath",
           "version",
+          "diskImageConversionStatus",
           "createdAtUtc",
           "updatedAtUtc"
         ],
@@ -38241,6 +38502,20 @@
             "description": "Latest version identifier for the environment image.",
             "readOnly": true
           },
+          "diskImageConversionStatus": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/RLEnvironmentDiskImageConversionStatus"
+              }
+            ],
+            "description": "Status of the asynchronous conversion from the ACR container image to a disk image usable by leased sandboxes.",
+            "readOnly": true
+          },
+          "diskImageConversionError": {
+            "type": "string",
+            "description": "Error details from the most recent disk image conversion attempt, when `diskImageConversionStatus` is `Failed`.",
+            "readOnly": true
+          },
           "createdAtUtc": {
             "type": "string",
             "format": "date-time",
@@ -38255,6 +38530,23 @@
           }
         },
         "description": "A hosted reinforcement-learning environment that sandboxes are leased from."
+      },
+      "RLEnvironmentDiskImageConversionStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "NotRequested",
+              "Pending",
+              "Ready",
+              "Failed"
+            ]
+          }
+        ],
+        "description": "Status of the asynchronous ACR image to disk image conversion. Serialized as its string name."
       },
       "RLEnvironmentState": {
         "type": "object",
@@ -38326,7 +38618,6 @@
           "id",
           "projectId",
           "environmentId",
-          "version",
           "diskImageId",
           "status",
           "createdAtUtc",
@@ -38348,11 +38639,6 @@
             "description": "Identifier of the parent RLE environment from which the sandbox was leased.",
             "readOnly": true
           },
-          "version": {
-            "type": "string",
-            "description": "Environment image version the sandbox is running.",
-            "readOnly": true
-          },
           "diskImageId": {
             "type": "string",
             "description": "Identifier of the disk image backing the sandbox.",
@@ -38363,7 +38649,7 @@
             "description": "Underlying ADC sandbox identifier, when one has been provisioned.",
             "readOnly": true
           },
-          "url": {
+          "baseUrl": {
             "type": "string",
             "description": "Base URL for the sandbox runtime API. Present once the sandbox is `Running`.",
             "readOnly": true
@@ -39914,19 +40200,6 @@
             "description": "Set of immutable 16 key-value pairs that can be attached to an object for storing additional information.\n    Keys are strings with a maximum length of 64 characters. Values are strings with a maximum length of 512 characters."
           }
         }
-      },
-      "UpdateRLEnvironmentRequest": {
-        "type": "object",
-        "required": [
-          "acrImagePath"
-        ],
-        "properties": {
-          "acrImagePath": {
-            "type": "string",
-            "description": "New container image reference (Azure Container Registry path) for the environment."
-          }
-        },
-        "description": "Request body for updating a hosted RLE environment. Produces a new version."
       },
       "UserProfileMemoryItem": {
         "type": "object",
