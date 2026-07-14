@@ -89,11 +89,17 @@ model CreateAgentRequest {
 
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
+
+  @doc("Optional Entra authorization configuration for the agent, including its sign-in mode.")
+  entra_authorization?: AgentEntraAuthorization;
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
+
+  @doc("Optional Entra authorization configuration for the agent, including its sign-in mode.")
+  entra_authorization?: AgentEntraAuthorization;
 }
 
 model PatchAgentRequest {
@@ -121,6 +127,23 @@ union AgentState {
 
   @doc("Agent endpoint rejects all requests.")
   disabled: "disabled",
+}
+
+@doc("The sign-in mode that governs how the agent's endpoint authorizes incoming Entra tokens.")
+union AgentSignInMode {
+  string,
+
+  @doc("Default Foundry sign-in mode. This is the default when a value is not specified.")
+  default: "default",
+
+  @doc("Agent blueprint sign-in mode. The agent endpoint validates tokens against the agent's blueprint.")
+  blueprint: "blueprint",
+}
+
+@doc("Entra authorization configuration for an agent.")
+model AgentEntraAuthorization {
+  @doc("The sign-in mode for the agent. Defaults to 'default' when not specified.")
+  sign_in_mode?: AgentSignInMode;
 }
 
 model AgentObject {
@@ -159,6 +182,9 @@ model AgentObject {
   blueprint_reference?: AgentBlueprintReference;
 
   agent_card?: AgentCard;
+
+  @doc("The Entra authorization configuration for the agent, including its sign-in mode.")
+  entra_authorization?: AgentEntraAuthorization;
 }
 
 model AgentVersionObject {
