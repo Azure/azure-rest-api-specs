@@ -38242,18 +38242,6 @@ components:
             - mcp
             - invocations
             - invocations_ws
-    AgentEntraAuthorization:
-      type: object
-      properties:
-        sign_in_mode:
-          allOf:
-            - $ref: '#/components/schemas/AgentSignInMode'
-          description: The sign-in mode for the agent. Defaults to 'default' when not specified.
-        token_validation_rules:
-          allOf:
-            - $ref: '#/components/schemas/AgentTokenValidationRules'
-          description: The rules used to validate inbound bearer tokens presented to the agent endpoint when the agent is in the 'blueprint' sign-in mode.
-      description: Entra authorization configuration for an agent.
     AgentEvaluatorGenerationJobSource:
       type: object
       required:
@@ -38406,10 +38394,10 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-        entra_authorization:
+        sign_in_config:
           allOf:
-            - $ref: '#/components/schemas/AgentEntraAuthorization'
-          description: The Entra authorization configuration for the agent, including its sign-in mode.
+            - $ref: '#/components/schemas/AgentSignInConfig'
+          description: The Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.
     AgentReference:
       type: object
       required:
@@ -38478,14 +38466,29 @@ components:
             - deleted
             - expired
       description: The status of an agent session.
+    AgentSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          allOf:
+            - $ref: '#/components/schemas/AgentSignInMode'
+          description: The sign-in mode for the agent.
+      discriminator:
+        propertyName: mode
+        mapping:
+          foundry: '#/components/schemas/FoundrySignInConfig'
+          blueprint: '#/components/schemas/BlueprintSignInConfig'
+      description: Base Entra sign-in configuration for an agent. The `mode` property discriminates the concrete configuration type.
     AgentSignInMode:
       anyOf:
         - type: string
         - type: string
           enum:
-            - default
+            - foundry
             - blueprint
-      description: The sign-in mode that governs how the agent's endpoint authorizes incoming Entra tokens.
+      description: The sign-in mode governing which Entra application the agent endpoint uses to authorize inbound tokens.
     AgentState:
       anyOf:
         - type: string
@@ -38544,7 +38547,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    AgentTokenValidationRules:
+    AgentTokenValidationConfig:
       type: object
       properties:
         allowed_audiences:
@@ -38563,7 +38566,7 @@ components:
             type: string
           description: The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.
       description: |-
-        Rules used to validate an inbound bearer token addressed to the agent's blueprint audience.
+        Configuration used to validate an inbound bearer token addressed to the agent's blueprint audience.
         Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
         mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
         scope declared on the blueprint).
@@ -39885,6 +39888,23 @@ components:
             - $ref: '#/components/schemas/SasCredential'
           description: Credential info to access the storage account.
       description: Blob reference details.
+    BlueprintSignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - blueprint
+          description: The sign-in mode for the agent. Always 'blueprint'.
+        token_validation_config:
+          allOf:
+            - $ref: '#/components/schemas/AgentTokenValidationConfig'
+          description: The configuration used to validate inbound bearer tokens presented to the agent endpoint in blueprint sign-in mode.
+      allOf:
+        - $ref: '#/components/schemas/AgentSignInConfig'
+      description: Agent-blueprint sign-in configuration. The agent endpoint authorizes inbound tokens against the agent's blueprint application.
     BotServiceAuthorizationScheme:
       type: object
       required:
@@ -40603,10 +40623,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentCard'
           description: Optional agent card for the agent
-        entra_authorization:
+        sign_in_config:
           allOf:
-            - $ref: '#/components/schemas/AgentEntraAuthorization'
-          description: Optional Entra authorization configuration for the agent, including its sign-in mode.
+            - $ref: '#/components/schemas/AgentSignInConfig'
+          description: Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview
@@ -43711,6 +43731,19 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
+    FoundrySignInConfig:
+      type: object
+      required:
+        - mode
+      properties:
+        mode:
+          type: string
+          enum:
+            - foundry
+          description: The sign-in mode for the agent. Always 'foundry'.
+      allOf:
+        - $ref: '#/components/schemas/AgentSignInConfig'
+      description: Foundry sign-in configuration. Uses the default Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.
     FoundryTimestamp:
       type: integer
       format: unixtime
@@ -75083,10 +75116,10 @@ components:
           allOf:
             - $ref: '#/components/schemas/AgentBlueprintReference'
           description: The blueprint reference for the agent.
-        entra_authorization:
+        sign_in_config:
           allOf:
-            - $ref: '#/components/schemas/AgentEntraAuthorization'
-          description: Optional Entra authorization configuration for the agent, including its sign-in mode.
+            - $ref: '#/components/schemas/AgentSignInConfig'
+          description: Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.
       x-ms-foundry-meta:
         conditional_previews:
           - WorkflowAgents=V1Preview

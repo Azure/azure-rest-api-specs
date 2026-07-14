@@ -90,16 +90,16 @@ model CreateAgentRequest {
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
 
-  @doc("Optional Entra authorization configuration for the agent, including its sign-in mode.")
-  entra_authorization?: AgentEntraAuthorization;
+  @doc("Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
+  sign_in_config?: AgentSignInConfig;
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 
-  @doc("Optional Entra authorization configuration for the agent, including its sign-in mode.")
-  entra_authorization?: AgentEntraAuthorization;
+  @doc("Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
+  sign_in_config?: AgentSignInConfig;
 }
 
 model PatchAgentRequest {
@@ -129,33 +129,46 @@ union AgentState {
   disabled: "disabled",
 }
 
-@doc("The sign-in mode that governs how the agent's endpoint authorizes incoming Entra tokens.")
+@doc("The sign-in mode governing which Entra application the agent endpoint uses to authorize inbound tokens.")
 union AgentSignInMode {
   string,
 
-  @doc("Default Foundry sign-in mode. This is the default when a value is not specified.")
-  default: "default",
+  @doc("Foundry sign-in using the default Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
+  foundry: "foundry",
 
-  @doc("Agent blueprint sign-in mode. The agent endpoint validates tokens against the agent's blueprint.")
+  @doc("Agent-blueprint sign-in. The agent endpoint authorizes inbound tokens against the agent's blueprint application.")
   blueprint: "blueprint",
 }
 
-@doc("Entra authorization configuration for an agent.")
-model AgentEntraAuthorization {
-  @doc("The sign-in mode for the agent. Defaults to 'default' when not specified.")
-  sign_in_mode?: AgentSignInMode;
+@doc("Base Entra sign-in configuration for an agent. The `mode` property discriminates the concrete configuration type.")
+@discriminator("mode")
+model AgentSignInConfig {
+  @doc("The sign-in mode for the agent.")
+  mode: AgentSignInMode;
+}
 
-  @doc("The rules used to validate inbound bearer tokens presented to the agent endpoint when the agent is in the 'blueprint' sign-in mode.")
-  token_validation_rules?: AgentTokenValidationRules;
+@doc("Foundry sign-in configuration. Uses the default Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
+model FoundrySignInConfig extends AgentSignInConfig {
+  @doc("The sign-in mode for the agent. Always 'foundry'.")
+  mode: AgentSignInMode.foundry;
+}
+
+@doc("Agent-blueprint sign-in configuration. The agent endpoint authorizes inbound tokens against the agent's blueprint application.")
+model BlueprintSignInConfig extends AgentSignInConfig {
+  @doc("The sign-in mode for the agent. Always 'blueprint'.")
+  mode: AgentSignInMode.blueprint;
+
+  @doc("The configuration used to validate inbound bearer tokens presented to the agent endpoint in blueprint sign-in mode.")
+  token_validation_config?: AgentTokenValidationConfig;
 }
 
 @doc("""
-  Rules used to validate an inbound bearer token addressed to the agent's blueprint audience.
+  Configuration used to validate an inbound bearer token addressed to the agent's blueprint audience.
   Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
   mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
   scope declared on the blueprint).
   """)
-model AgentTokenValidationRules {
+model AgentTokenValidationConfig {
   @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
   allowed_audiences?: string[];
 
@@ -203,8 +216,8 @@ model AgentObject {
 
   agent_card?: AgentCard;
 
-  @doc("The Entra authorization configuration for the agent, including its sign-in mode.")
-  entra_authorization?: AgentEntraAuthorization;
+  @doc("The Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
+  sign_in_config?: AgentSignInConfig;
 }
 
 model AgentVersionObject {
