@@ -221,7 +221,6 @@ model KeyValue {
   @doc("The key of the key-value.")
   key: string;
 
-  @visibility(Lifecycle.Read)
   @doc("The label the key-value belongs to.")
   label?: string;
 
@@ -558,7 +557,7 @@ model LabelListResult {
   `@nextLink`?: string;
 }
 
-@doc("Labels are used to group key values or feature flags.")
+@doc("Labels are used to group key-values.")
 model Label {
   @doc("The name of the label.")
   name?: string;
