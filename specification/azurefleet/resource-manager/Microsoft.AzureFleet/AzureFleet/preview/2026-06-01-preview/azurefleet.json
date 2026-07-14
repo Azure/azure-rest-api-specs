@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AzureFleet",
-    "version": "2026-04-01-preview",
+    "version": "2026-06-01-preview",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -2921,6 +2921,21 @@
         "error": {
           "$ref": "#/definitions/ApiError",
           "description": "Error information when `operationStatus` is `Failed`.",
+          "readOnly": true
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The VM size of the virtual machine.",
+          "readOnly": true
+        },
+        "zone": {
+          "type": "string",
+          "description": "The availability zone of the virtual machine.",
+          "readOnly": true
+        },
+        "priority": {
+          "type": "string",
+          "description": "The priority of the virtual machine.",
           "readOnly": true
         }
       },
