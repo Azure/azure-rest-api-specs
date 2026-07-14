@@ -547,6 +547,7 @@ alias LabelsRequestParams = {
   ...AfterQueryParam;
   ...AcceptDatetimeHeader;
   ...SelectQueryParam<LabelFields>;
+  ...ClientRequestIdHeader;
 
   @added(Versions.v2026_05_01_preview)
   @doc("A filter used to indicate the resource type of the labels. Accepted values: 'kv' for key-value labels, 'ff' for feature flag labels.")
@@ -560,11 +561,13 @@ alias LabelsRequestParams = {
 @doc("Gets a list of labels.")
 @route("/labels")
 @list
-op getLabels is AppConfigOperation<
+op getLabels is Foundations.Operation<
   LabelsRequestParams,
   LabelListResult &
     SyncTokenHeader &
-    ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">
+    ContentTypeHeader<"application/vnd.microsoft.appconfig.labelset+json">,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
@@ -572,9 +575,11 @@ op getLabels is AppConfigOperation<
 @doc("Requests the headers and status of the given resource.")
 @route("/labels")
 @head
-op checkLabels is AppConfigOperation<
+op checkLabels is Foundations.Operation<
   LabelsRequestParams,
-  OkResponse & SyncTokenHeader
+  OkResponse & SyncTokenHeader,
+  {},
+  Error
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Legacy name"
