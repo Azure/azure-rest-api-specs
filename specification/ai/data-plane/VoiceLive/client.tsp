@@ -3,6 +3,21 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
+@@clientName(VoiceLive.OpenAIVoice.type, "Kind", "csharp");
+@@clientName(VoiceLive.AzureVoice.type, "Kind", "csharp");
+@@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
+@@clientName(
+  VoiceLive.RequestSession.parallel_tool_calls,
+  "AllowParallelToolCalls",
+  "csharp"
+);
+@@clientName(
+  VoiceLive.ResponseSession.parallel_tool_calls,
+  "AllowParallelToolCalls",
+  "csharp"
+);
+@@clientName(VoiceLive.ResponseSession.expires_at, "ExpiresOn", "csharp");
+
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "python");
 @@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "python");
