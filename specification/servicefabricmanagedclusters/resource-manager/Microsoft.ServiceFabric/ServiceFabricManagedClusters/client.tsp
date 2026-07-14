@@ -724,7 +724,7 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
-  ManagedApplyMaintenanceWindow.post,
+  ManagedApplyMaintenanceWindow.postNoBody,
   "PostManagedApplyMaintenanceWindow",
   "csharp"
 );
