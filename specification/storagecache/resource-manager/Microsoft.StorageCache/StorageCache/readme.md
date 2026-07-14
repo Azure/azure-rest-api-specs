@@ -37,6 +37,10 @@ These settings apply only when `--tag=package-2026-08-01` is specified on the co
 ```yaml $(tag) == 'package-2026-08-01'
 input-file:
   - stable/2026-08-01/openapi.json
+suppressions:
+  - code: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    reason: provisioningState is authored readOnly in TypeSpec (@visibility(Lifecycle.Read)) and emitted as { $ref, readOnly true }; the rule evaluates the resolved OpenAPI 2.0 document where a readOnly sibling of a $ref is dropped during resolution — a known TypeSpec/OpenAPI 2.0 limitation (see https://github.com/Azure/azure-openapi-validator/issues/637) confirmed by ARM review. Same generated shape as the approved GA 2026-01-01 resources.
 ```
 
 ### Tag: package-2026-01-01
@@ -194,17 +198,6 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - preview/2019-08-01-preview/storagecache.json
-```
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: ProvisioningStateMustBeReadOnly
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs/{rebalanceJobName}"].get
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageCache/amlFilesystems/{amlFilesystemName}/rebalanceJobs/{rebalanceJobName}"].patch
-    reason: provisioningState is authored readOnly in TypeSpec (@visibility(Lifecycle.Read)) and emitted as { $ref, readOnly true }; the rule evaluates the resolved OpenAPI 2.0 document where a readOnly sibling of a $ref is dropped during resolution — a known TypeSpec/OpenAPI 2.0 limitation confirmed by ARM review. Same generated shape as the approved GA 2026-01-01 resources.
 ```
 
 ## Swagger to SDK
