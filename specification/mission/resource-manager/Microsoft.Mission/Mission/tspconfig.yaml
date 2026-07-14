@@ -9,9 +9,9 @@ options:
     omit-unreachable-types: true
     use-read-only-status-schema: true
   "@azure-tools/typespec-go":
-    service-dir: sdk/resourcemanager/virtualenclaves
-    emitter-output-dir: "{output-dir}/{service-dir}/armvirtualenclaves"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armvirtualenclaves"
+    service-dir: sdk/resourcemanager/enclave
+    emitter-output-dir: "{output-dir}/{service-dir}/armenclave"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armenclave"
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -19,24 +19,24 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-virtualenclaves"
-    namespace: azure.mgmt.virtualenclaves
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-enclave"
+    namespace: azure.mgmt.enclave
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-virtualenclaves"
-    namespace: com.azure.resourcemanager.virtualenclaves
-    service-name: Virtual Enclaves
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-enclave"
+    namespace: com.azure.resourcemanager.enclave
+    service-name: Enclave
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-virtualenclaves"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-enclave"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-virtualenclaves"
+      name: "@azure/arm-enclave"
   "@azure-typespec/http-client-csharp-mgmt":
-    namespace: "Azure.ResourceManager.VirtualEnclaves"
+    namespace: "Azure.ResourceManager.Enclave"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
@@ -44,4 +44,4 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/client-sdk"
 parameters:
   service-dir:
-    default: sdk/virtualenclaves
+    default: sdk/enclave
