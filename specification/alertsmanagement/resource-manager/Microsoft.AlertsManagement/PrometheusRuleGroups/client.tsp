@@ -20,34 +20,41 @@ using Microsoft.AlertsManagement;
 // back-compatible.tsp does not collide with the C# namespace
 // (Azure.ResourceManager.PrometheusRuleGroups), which would otherwise cause the
 // generator to emit Azure.ResourceManager._PrometheusRuleGroups.
-@@clientLocation(PrometheusRuleGroupResources.get,
+@@clientLocation(
+  PrometheusRuleGroupResources.get,
   PrometheusRuleGroupResources,
   "csharp"
 );
-@@clientLocation(PrometheusRuleGroupResources.createOrUpdate,
+@@clientLocation(
+  PrometheusRuleGroupResources.createOrUpdate,
   PrometheusRuleGroupResources,
   "csharp"
 );
-@@clientLocation(PrometheusRuleGroupResources.update,
+@@clientLocation(
+  PrometheusRuleGroupResources.update,
   PrometheusRuleGroupResources,
   "csharp"
 );
-@@clientLocation(PrometheusRuleGroupResources.delete,
+@@clientLocation(
+  PrometheusRuleGroupResources.delete,
   PrometheusRuleGroupResources,
   "csharp"
 );
-@@clientLocation(PrometheusRuleGroupResources.listByResourceGroup,
+@@clientLocation(
+  PrometheusRuleGroupResources.listByResourceGroup,
   PrometheusRuleGroupResources,
   "csharp"
 );
-@@clientLocation(PrometheusRuleGroupResources.listBySubscription,
+@@clientLocation(
+  PrometheusRuleGroupResources.listBySubscription,
   PrometheusRuleGroupResources,
   "csharp"
 );
 
 // common-types v3 types Resource.id as `string`; map to armResourceIdentifier so
 // the C# generator emits ResourceIdentifier compatible with the ResourceData base.
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
@@ -60,20 +67,23 @@ using Microsoft.AlertsManagement;
 
 // C# customizations: rename the patch body model from the verbose
 // `PrometheusRuleGroupResourcePatchParameters` to the conventional `PrometheusRuleGroupPatch`.
-@@clientName(PrometheusRuleGroupResourcePatchParameters,
+@@clientName(
+  PrometheusRuleGroupResourcePatchParameters,
   "PrometheusRuleGroupPatch",
   "csharp"
 );
 
 // C# customizations: boolean properties must use a verb prefix
 // (Is/Can/Has/Does/Should/Allow/Enable/Disable/Use/Support) per .NET naming guidelines.
-@@clientName(PrometheusRuleResolveConfiguration.autoResolved,
+@@clientName(
+  PrometheusRuleResolveConfiguration.autoResolved,
   "IsAutoResolved",
   "csharp"
 );
 @@clientName(PrometheusRuleGroupProperties.enabled, "IsEnabled", "csharp");
 @@clientName(PrometheusRule.enabled, "IsEnabled", "csharp");
-@@clientName(PrometheusRuleGroupResourcePatchParametersProperties.enabled,
+@@clientName(
+  PrometheusRuleGroupResourcePatchParametersProperties.enabled,
   "IsEnabled",
   "csharp"
 );
@@ -85,11 +95,13 @@ using Microsoft.AlertsManagement;
 
 // C# customizations: properties that carry ARM resource ids should surface as
 // `ResourceIdentifier` rather than `string` to match the .NET SDK convention.
-@@alternateType(PrometheusRuleGroupAction.actionGroupId,
+@@alternateType(
+  PrometheusRuleGroupAction.actionGroupId,
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
-@@alternateType(PrometheusRuleGroupProperties.scopes,
+@@alternateType(
+  PrometheusRuleGroupProperties.scopes,
   Azure.Core.armResourceIdentifier[],
   "csharp"
 );
