@@ -275,7 +275,7 @@ model FeatureFlag {
   name: string;
 
   @doc("The enabled state of the feature flag.")
-  enabled?: boolean;
+  enabled: boolean;
 
   @visibility(Lifecycle.Read)
   @doc("The label the feature flag belongs to.")
