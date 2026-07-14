@@ -875,6 +875,40 @@
         }
       }
     },
+    "OverageBillingNotificationSettings": {
+      "type": "object",
+      "description": "The notification settings for overage billing.",
+      "properties": {
+        "email": {
+          "$ref": "#/definitions/OverageBillingNotificationState",
+          "description": "The email notification state for overage billing."
+        }
+      }
+    },
+    "OverageBillingNotificationState": {
+      "type": "string",
+      "description": "The email notification state for overage billing.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "OverageBillingNotificationState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Email notifications are enabled."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Email notifications are disabled."
+          }
+        ]
+      }
+    },
     "OverageBillingSettings": {
       "type": "object",
       "description": "The overage billing settings for the Fabric capacity resource",
@@ -888,6 +922,10 @@
           "format": "int32",
           "description": "When overage Capacity Units accrued in a 24-hour rolling window exceed this threshold, the capacity is throttled.",
           "minimum": 0
+        },
+        "notifications": {
+          "$ref": "#/definitions/OverageBillingNotificationSettings",
+          "description": "The notification settings for overage billing."
         }
       }
     },

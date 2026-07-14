@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
@@ -56,6 +57,9 @@ model OverageBillingSettings {
   @minValue(0)
   @encodedName("application/json", "thresholdCapacityUnitHours")
   thresholdCapacityUnitHours?: int32;
+
+  @doc("The notification settings for overage billing.")
+  notifications?: OverageBillingNotificationSettings;
 }
 
 @doc("The overage billing state for the Fabric capacity resource.")
@@ -68,6 +72,29 @@ union OverageBillingState {
   Disabled: "Disabled",
 
   string,
+}
+
+@doc("The notification settings for overage billing.")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+model OverageBillingNotificationSettings {
+  @doc("The email notification state for overage billing.")
+  email?: OverageBillingNotificationState;
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Closed enum required for x-ms-enum compatibility with modelAsString=false."
+@doc("The email notification state for overage billing.")
+@added(Microsoft.Fabric.Versions.v2026_08_01_preview)
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-enum compatibility is required for this notification state."
+@OpenAPI.extension(
+  "x-ms-enum",
+  #{ name: "OverageBillingNotificationState", modelAsString: false }
+)
+enum OverageBillingNotificationState {
+  @doc("Email notifications are enabled.")
+  Enabled,
+
+  @doc("Email notifications are disabled.")
+  Disabled,
 }
 
 @doc("The administration properties of the Fabric capacity resource")
