@@ -3529,6 +3529,16 @@
         ]
       }
     },
+    "BulkCreateCustomExecutionParameters": {
+      "type": "object",
+      "description": "Extra parameters that control how a BulkCreateCustom request is executed.",
+      "properties": {
+        "retryPolicy": {
+          "$ref": "#/definitions/BulkCreateCustomRetryPolicy",
+          "description": "Retry policy the user can pass."
+        }
+      }
+    },
     "BulkCreateCustomListResult": {
       "type": "object",
       "description": "List of BulkCreateCustom resources.",
@@ -3720,9 +3730,9 @@
             "create"
           ]
         },
-        "retryPolicy": {
-          "$ref": "#/definitions/RetryPolicy",
-          "description": "Retry policy the user can pass"
+        "executionParameters": {
+          "$ref": "#/definitions/BulkCreateCustomExecutionParameters",
+          "description": "Extra parameters that control how the request is executed, including the retry policy."
         }
       },
       "required": [
@@ -3730,6 +3740,21 @@
         "priorityProfile",
         "computeProfile"
       ]
+    },
+    "BulkCreateCustomRetryPolicy": {
+      "type": "object",
+      "description": "The retry policy for a BulkCreateCustom request.",
+      "properties": {
+        "retryWindowInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry window in minutes for the request."
+        },
+        "onFailureAction": {
+          "$ref": "#/definitions/ResourceOperationType",
+          "description": "Action to take on failure."
+        }
+      }
     },
     "BulkCreateCustomVmSizeProfile": {
       "type": "object",

@@ -196,6 +196,21 @@ model BulkCreateCustomZoneAllocationPolicy {
   zonePreferences?: Array<ZonePreference>;
 }
 
+@doc("The retry policy for a BulkCreateCustom request.")
+model BulkCreateCustomRetryPolicy {
+  @doc("Retry window in minutes for the request.")
+  retryWindowInMinutes?: int32;
+
+  @doc("Action to take on failure.")
+  onFailureAction?: ResourceOperationType;
+}
+
+@doc("Extra parameters that control how a BulkCreateCustom request is executed.")
+model BulkCreateCustomExecutionParameters {
+  @doc("Retry policy the user can pass.")
+  retryPolicy?: BulkCreateCustomRetryPolicy;
+}
+
 @doc("Details of the BulkCreateCustom.")
 model BulkCreateCustomProperties {
   @visibility(Lifecycle.Read)
@@ -230,8 +245,8 @@ model BulkCreateCustomProperties {
   @doc("Per-VM overrides and the shared name prefix, specified when the operation is created.")
   overridesProfile?: BulkCreateCustomOverridesProfile;
 
-  @doc("Retry policy the user can pass")
-  retryPolicy?: RetryPolicy;
+  @doc("Extra parameters that control how the request is executed, including the retry policy.")
+  executionParameters?: BulkCreateCustomExecutionParameters;
 }
 
 @doc("List of BulkCreateCustom resources.")
