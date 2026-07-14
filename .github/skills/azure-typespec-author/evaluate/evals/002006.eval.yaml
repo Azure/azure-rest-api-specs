@@ -1,0 +1,129 @@
+name: azure-typespec-author-eval
+description: Evaluation suite for azure-typespec-author.
+version: "1.0"
+type: capability               # capability | regression
+
+# Root-level environment (merged into all stimuli)
+environment:
+  files:
+    - src: ../start-mcp.ps1
+      dest: start-mcp.ps1
+  mcpServers:
+    azure-sdk-mcp:
+      type: stdio
+      command: pwsh
+      args: ["./start-mcp.ps1"]
+      timeout: 60000
+
+# Execution configuration
+config:
+  runs: 1                      # Trials per stimulus
+  timeout: 1800                # Seconds per trial
+  model: claude-opus-4.6-1m    #gpt-4o #claude-sonnet-4.6 # Model for agent execution
+  executor: copilot-sdk        # Which executor to use
+
+# Test cases
+stimuli:
+- prompt: |
+    Create a new "AddressResource" child resource under the parent resource "Employee". Properties: street address, city, state, postal code, country, and a read-only provisioning state. Ensure the definition meets TypeSpec Azure design guidelines.
+  name: 002006-ARM-define-child-resource
+  constraints:
+    max_turns: 10
+    max_tokens: 5000
+  environment:
+    files:
+      - src: ../fixtures/Microsoft.Widget/Widget/employee.tsp
+        dest: employee.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/main.tsp
+        dest: main.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/package.json
+        dest: package.json
+      - src: ../fixtures/Microsoft.Widget/Widget/readme.md
+        dest: readme.md
+      - src: ../fixtures/Microsoft.Widget/Widget/shared.tsp
+        dest: shared.tsp
+      - src: ../fixtures/Microsoft.Widget/Widget/tspconfig.yaml
+        dest: tspconfig.yaml
+  graders:
+  - type: tool-calls
+    config:
+      required:
+        - edit
+        - azure-sdk-mcp-azsdk_run_typespec_validation
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: '@parentResource\(Employee\)'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'model AddressResource is ProxyResource<AddressProperties>'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: interface Addresses|interface AddressResource
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'model AddressProperties'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'street1\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'street2\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'city\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'state\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'postalCode\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'country\?: string;'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: '@visibility\(Lifecycle\.Read\)'
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: 'provisioningState\?: ProvisioningState;'
+  # Addresses interface CRUD + list-by-parent
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceRead<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceCreateOrReplaceAsync<AddressResource>|ArmResourceCreateOrReplaceSync<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceDeleteWithoutOkAsync<AddressResource>|ArmResourceDeleteSync<AddressResource>
+  - type: file-matches
+    config:
+      path: '*.tsp'
+      pattern: ArmResourceListByParent<AddressResource>
+  - type: prompt
+    config:
+      scoring: scale_1_5
+      threshold: 1.0
+      prompt: 'The Addresses interface should include standard CRUD operations (get, create, update, delete) and a list-by-parent operation.'
+      model: claude-opus-4.6-1m
+scoring:
+  weights:
+    tool-calls: 1
+    prompt: 1
+    file-matches: 16
+  threshold: 1.0
