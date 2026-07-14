@@ -325,18 +325,17 @@ namespace Azure.AI.Projects {
   @@clientName(OpenAI.Response, "ResponseObject");
   @@clientName(OpenAI.CreateResponse, "CreateResponseBody");
 
-  // Consume Azure-specific Foundry response/tool models from
-  // Azure.AI.Extensions.OpenAI so AgentServer does not re-emit the same types.
-  // Keep AgentServer's dependency graph Extensions-only; do not alternate to
-  // OpenAI.* directly from this package.
-  @@alternateType(OpenAI.OutputItemType, { identity: "Azure.AI.Extensions.OpenAI.ResponseItemKind", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.ToolType, { identity: "Azure.AI.Extensions.OpenAI.ResponseToolKind", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.OutputItem, { identity: "Azure.AI.Extensions.OpenAI.OutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.InputItem, { identity: "Azure.AI.Extensions.OpenAI.OutputItem", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.Tool, { identity: "Azure.AI.Extensions.OpenAI.ResponseTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.Response, { identity: "Azure.AI.Extensions.OpenAI.ResponseObject", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.CreateResponse, { identity: "Azure.AI.Extensions.OpenAI.CreateResponseBody", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
-  @@alternateType(OpenAI.ResponseStreamEvent, { identity: "Azure.AI.Extensions.OpenAI.ResponseStreamEvent", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
+  // Consume concrete models from their owning packages: official OpenAI response
+  // models from OpenAI, and Azure-specific Foundry additions from
+  // Azure.AI.Extensions.OpenAI.
+  @@alternateType(OpenAI.OutputItemType, { identity: "OpenAI.Responses.ResponseItemKind", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ToolType, { identity: "OpenAI.Responses.ResponseToolKind", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.OutputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.InputItem, { identity: "OpenAI.Responses.ResponseItem", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.Tool, { identity: "OpenAI.Responses.ResponseTool", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.Response, { identity: "OpenAI.Responses.ResponseResult", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.CreateResponse, { identity: "OpenAI.Responses.CreateResponseOptions", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
+  @@alternateType(OpenAI.ResponseStreamEvent, { identity: "OpenAI.Responses.ResponseStreamEvent", package: "OpenAI", minVersion: "2.12.0" }, "csharp");
 
   @@alternateType(A2APreviewTool, { identity: "Azure.AI.Extensions.OpenAI.A2APreviewTool", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
   @@alternateType(A2AToolCall, { identity: "Azure.AI.Extensions.OpenAI.A2AToolCall", package: "Azure.AI.Extensions.OpenAI", minVersion: "3.0.0-beta.1" }, "csharp");
