@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
-import { getPrStatus } from "../src/generate-sdk.ts";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { getPrStatus, parseCliArguments } from "../src/generate-sdk.ts";
 import type { OctokitLike } from "../src/types.ts";
 
 function createOctokitMock(getImpl: ReturnType<typeof vi.fn>): OctokitLike {
@@ -12,6 +12,24 @@ function createOctokitMock(getImpl: ReturnType<typeof vi.fn>): OctokitLike {
     },
   } as unknown as OctokitLike;
 }
+
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
+
+describe("parseCliArguments", () => {
+  it("parses required artifact file without azsdk-path option", () => {
+    const result = parseCliArguments(["--artifact-file", "artifact.json"]);
+
+    expect(result.artifactFile).toMatch(/artifact\.json$/);
+  });
+
+  it("rejects the removed --azsdk-path option", () => {
+    expect(() =>
+      parseCliArguments(["--artifact-file", "artifact.json", "--azsdk-path", "/tools/azsdk"]),
+    ).toThrow(/Unknown option '--azsdk-path'/);
+  });
+});
 
 describe("getPrStatus", () => {
   it("returns invalid for non-GitHub PR URL", async () => {

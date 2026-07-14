@@ -93,7 +93,7 @@ export async function main(): Promise<void> {
         apiVersion: projectInfo.apiVersion,
         testReleasePlan: args.testReleasePlan,
       },
-      createAzdskRunner(args.azsdkPath),
+      createAzdskRunner(),
       hasNewApiVersionLabel,
     );
 

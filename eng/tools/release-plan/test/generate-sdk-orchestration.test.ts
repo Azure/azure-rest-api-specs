@@ -160,28 +160,18 @@ describe("runGenerateSdk orchestration", () => {
     expect(runner).not.toHaveBeenCalled();
   });
 
-  it("runs release-plan update with the exact contract when SDKInfo is incomplete", async () => {
+  it("does not run release-plan update when SDKInfo is incomplete", async () => {
     const incompletePlan = buildPlan({
       SDKInfo: [{ Language: ".NET", PackageName: "", ReleaseExclusionStatus: "Not applicable" }],
     });
     const { deps, calls } = createHarness({
-      getResponses: [incompletePlan, buildPlan()],
+      getResponses: [incompletePlan],
     });
 
     await runGenerateSdk(cliArgs, deps);
 
-    expect(calls).toContainEqual([
-      "release-plan",
-      "update",
-      "--typespec-path",
-      path.resolve(WORKSPACE, SPEC_PATH),
-      "--workitem-id",
-      "9001",
-      "--sdk-type",
-      "beta",
-    ]);
-    // Re-fetches the plan after the update (two get calls).
-    expect(calls.filter((c) => c[0] === "release-plan" && c[1] === "get")).toHaveLength(2);
+    expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
+    expect(calls.filter((c) => c[0] === "release-plan" && c[1] === "get")).toHaveLength(1);
   });
 
   it("does not generate an excluded language but still generates the others", async () => {
@@ -220,22 +210,20 @@ describe("runGenerateSdk orchestration", () => {
     await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/SDK generation failed.*Java/);
   });
 
-  it("throws when the release-plan update fails", async () => {
+  it("does not depend on release-plan update when SDKInfo is incomplete", async () => {
     const incompletePlan = buildPlan({
       SDKInfo: [{ Language: ".NET", PackageName: "", ReleaseExclusionStatus: "Not applicable" }],
     });
-    const { deps } = createHarness({
+    const { deps, calls } = createHarness({
       runnerImpl: (args) => {
         if (args[0] === "release-plan" && args[1] === "get") {
           return ok(incompletePlan);
-        }
-        if (args[0] === "release-plan" && args[1] === "update") {
-          return fail("update failed");
         }
         return ok();
       },
     });
 
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/release-plan update failed/);
+    await expect(runGenerateSdk(cliArgs, deps)).resolves.toBeUndefined();
+    expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
   });
 });

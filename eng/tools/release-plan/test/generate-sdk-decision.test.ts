@@ -1,11 +1,7 @@
 import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import {
-  checkIfSdkNeedsToBeGenerated,
-  isLanguageExcluded,
-  parseSdkInfoItems,
-  resolveTypespecProjectPath,
-} from "../src/generate-sdk.ts";
+import { resolveTypespecProjectPath } from "../src/sdk-workflow-common.ts";
+import { checkIfSdkNeedsToBeGenerated, isLanguageExcluded } from "../src/generate-sdk.ts";
 import type { OctokitLike } from "../src/types.ts";
 
 function createOctokitMock(getImpl?: ReturnType<typeof vi.fn>): OctokitLike {
@@ -150,7 +146,7 @@ describe("checkIfSdkNeedsToBeGenerated", () => {
     expect(octokit.rest.pulls.get).not.toHaveBeenCalled();
   });
 
-  it("skips an excluded language on the existing path without consulting GitHub", async () => {
+  it("treats ServiceTeamExcluded as not excluded and still skips on unknown PR status", async () => {
     const octokit = createOctokitMock();
 
     await expect(
@@ -161,7 +157,6 @@ describe("checkIfSdkNeedsToBeGenerated", () => {
         octokit,
       }),
     ).resolves.toBe(false);
-    expect(octokit.rest.pulls.get).not.toHaveBeenCalled();
   });
 });
 
@@ -177,36 +172,12 @@ describe("isLanguageExcluded", () => {
     expect(isLanguageExcluded({ Language: "Python" })).toBe(false);
   });
 
-  it.each(["MissingEmitterConfig", "ServiceTeamExcluded", "SomeOtherReason"])(
-    "treats '%s' as excluded",
-    (status) => {
-      expect(isLanguageExcluded({ ReleaseExclusionStatus: status })).toBe(true);
-    },
-  );
-});
-
-describe("parseSdkInfoItems", () => {
-  it("returns the array unchanged when given an array", () => {
-    expect(parseSdkInfoItems(baseSdkInfo)).toEqual(baseSdkInfo);
+  it.each(["MissingEmitterConfig"])("treats '%s' as excluded", (status) => {
+    expect(isLanguageExcluded({ ReleaseExclusionStatus: status })).toBe(true);
   });
 
-  it("parses a JSON-encoded string array", () => {
-    expect(parseSdkInfoItems(JSON.stringify(baseSdkInfo))).toEqual(baseSdkInfo);
-  });
-
-  it("returns an empty array for malformed JSON", () => {
-    expect(parseSdkInfoItems("{not-json")).toEqual([]);
-  });
-
-  it("returns an empty array for a non-array JSON payload", () => {
-    expect(parseSdkInfoItems(JSON.stringify({ Language: "Python" }))).toEqual([]);
-  });
-
-  it("returns an empty array for empty or nullish input", () => {
-    expect(parseSdkInfoItems("")).toEqual([]);
-    expect(parseSdkInfoItems("   ")).toEqual([]);
-    expect(parseSdkInfoItems(undefined)).toEqual([]);
-    expect(parseSdkInfoItems(null)).toEqual([]);
+  it.each(["ServiceTeamExcluded", "SomeOtherReason"])("treats '%s' as not excluded", (status) => {
+    expect(isLanguageExcluded({ ReleaseExclusionStatus: status })).toBe(false);
   });
 });
 

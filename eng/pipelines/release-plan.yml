@@ -9,7 +9,8 @@ parameters:
 trigger:
   paths:
     include:
-      - specification/**
+      - specification/**/*.tsp
+      - specification/**/*.tspconfig.yaml
 
 pr: none
 
@@ -58,7 +59,6 @@ stages:
                 $nodeArgs = @(
                   "--repo", "$(Build.Repository.Name)",
                   "--workspace", "$(Build.SourcesDirectory)",
-                  "--azsdk-path", "$(AZSDK)",
                   "--test-release-plan", "${{ parameters['Test-release-Plan'] }}",
                   "--output-file", $outputPath
                 )
@@ -92,6 +92,27 @@ stages:
               }
             displayName: "Ensure release plan artifact file exists"
             condition: succeededOrFailed()
+
+          - task: AzureCLI@2
+            displayName: "Update SDK details for eligible release plans"
+            condition: succeeded()
+            env:
+              ${{ if eq(parameters['Test-release-Plan'], true) }}:
+                AZSDKTOOLS_AGENT_TESTING: "true"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: inlineScript
+              inlineScript: |
+                $ErrorActionPreference = "Stop"
+
+                $artifactPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
+                if (!(Test-Path $artifactPath)) {
+                  Write-Host "Release plan artifact not found. Skipping update-sdk-details."
+                  exit 0
+                }
+
+                npm exec --no -- update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
 
           - task: PublishPipelineArtifact@1
             displayName: "Publish release plan details artifact"
@@ -145,6 +166,5 @@ stages:
               scriptLocation: inlineScript
               inlineScript: |
                 $ErrorActionPreference = "Stop"
-
                 $artifactPath = "$(Pipeline.Workspace)/release-plan-details/release-plan.json"
-                npm exec --no -- generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)" --azsdk-path "$(AZSDK)"
+                npm exec --no -- generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
