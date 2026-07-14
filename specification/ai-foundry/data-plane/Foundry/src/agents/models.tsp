@@ -90,16 +90,22 @@ model CreateAgentRequest {
   @doc("Optional agent card for the agent")
   agent_card?: AgentCard;
 
-  @doc("Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
-  sign_in_config?: AgentSignInConfig;
+  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
+  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
+
+  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
+  token_validation_rules?: AgentTokenValidationRules;
 }
 
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
   ...OmitProperties<CreateAgentVersionRequest, "draft">;
 
-  @doc("Optional Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
-  sign_in_config?: AgentSignInConfig;
+  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
+  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
+
+  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
+  token_validation_rules?: AgentTokenValidationRules;
 }
 
 model PatchAgentRequest {
@@ -140,35 +146,14 @@ union AgentSignInMode {
   blueprint: "blueprint",
 }
 
-@doc("Base Entra sign-in configuration for an agent. The `mode` property discriminates the concrete configuration type.")
-@discriminator("mode")
-model AgentSignInConfig {
-  @doc("The sign-in mode for the agent.")
-  mode: AgentSignInMode;
-}
-
-@doc("Foundry sign-in configuration. Uses the default Foundry application (ai.azure.com). This is the default when a sign-in configuration is not specified.")
-model FoundrySignInConfig extends AgentSignInConfig {
-  @doc("The sign-in mode for the agent. Always 'foundry'.")
-  mode: AgentSignInMode.foundry;
-}
-
-@doc("Agent-blueprint sign-in configuration. The agent endpoint authorizes inbound tokens against the agent's blueprint application.")
-model BlueprintSignInConfig extends AgentSignInConfig {
-  @doc("The sign-in mode for the agent. Always 'blueprint'.")
-  mode: AgentSignInMode.blueprint;
-
-  @doc("The configuration used to validate inbound bearer tokens presented to the agent endpoint in blueprint sign-in mode.")
-  token_validation_config?: AgentTokenValidationConfig;
-}
-
 @doc("""
-  Configuration used to validate an inbound bearer token addressed to the agent's blueprint audience.
-  Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
-  mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
-  scope declared on the blueprint).
+  Rules used to validate inbound bearer tokens presented to the agent endpoint.
+  These rules apply only when the agent `sign_in_mode` is 'blueprint'; they are ignored in
+  'foundry' sign-in mode. Each list is defaulted to a single value when the agent is switched to
+  the 'blueprint' sign-in mode (audience = blueprint resource URI, tenant = subscription tenant,
+  required scope = default scope declared on the blueprint).
   """)
-model AgentTokenValidationConfig {
+model AgentTokenValidationRules {
   @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
   allowed_audiences?: string[];
 
@@ -216,8 +201,11 @@ model AgentObject {
 
   agent_card?: AgentCard;
 
-  @doc("The Entra sign-in configuration for the agent. Defaults to the Foundry sign-in mode when not specified.")
-  sign_in_config?: AgentSignInConfig;
+  @doc("The Entra sign-in mode for the agent. Defaults to 'foundry' when not specified.")
+  sign_in_mode?: AgentSignInMode = AgentSignInMode.foundry;
+
+  @doc("Rules for validating inbound bearer tokens presented to the agent endpoint. Applies only when `sign_in_mode` is 'blueprint'; ignored in 'foundry' mode.")
+  token_validation_rules?: AgentTokenValidationRules;
 }
 
 model AgentVersionObject {
