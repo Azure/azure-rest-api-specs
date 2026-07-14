@@ -18,31 +18,24 @@
             "properties": {
               "model": {
                 "format": "OpenAI",
-                "name": "phi-3-mini",
-                "version": "1"
+                "name": "phi-3-mini"
               },
-              "arcClusterExtensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
-              "runtime": "vllm",
-              "compute": "gpu",
+              "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+              "runtime": "onnx-genai",
+              "compute": "cpu",
               "replicas": 2,
               "resources": {
                 "requests": {
-                  "cpu": "500m",
-                  "memory": "2Gi"
+                  "cpu": "8",
+                  "memory": "16Gi"
                 },
                 "limits": {
-                  "cpu": "4",
+                  "cpu": "8",
                   "memory": "16Gi"
                 }
               },
               "nodeSelector": {
-                "gpu-type": "A100"
-              },
-              "vllmParameters": {
-                "tensorParallelSize": 2,
-                "maxModelLen": 8192,
-                "gpuMemoryUtilization": 0.9,
-                "enforceEager": false
+                "agentpool": "cpu"
               },
               "provisioningState": "Succeeded",
               "provisioningDetails": {
@@ -68,25 +61,22 @@
             "properties": {
               "model": {
                 "format": "OpenAI",
-                "name": "qwen3",
-                "version": "1"
+                "name": "qwen3"
               },
-              "arcClusterExtensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+              "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
               "runtime": "vllm",
               "compute": "gpu",
               "replicas": 2,
               "resources": {
                 "requests": {
-                  "cpu": "500m",
-                  "memory": "2Gi"
+                  "gpu": 1
                 },
                 "limits": {
-                  "cpu": "4",
-                  "memory": "16Gi"
+                  "gpu": 5
                 }
               },
               "nodeSelector": {
-                "gpu-type": "A100"
+                "agentpool": "a100"
               },
               "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/vllm-qwen--qwen3-5-0-8b/versions/1",
               "vllmParameters": {

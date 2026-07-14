@@ -2118,11 +2118,11 @@
         }
       },
       "put": {
-        "operationId": "ArcDeployments_CreateOrUpdate",
+        "operationId": "ArcDeployments_Create",
         "tags": [
           "ArcDeployments"
         ],
-        "description": "Creates or updates an Arc deployment associated with the Cognitive Services account.",
+        "description": "Creates an Arc deployment associated with the Cognitive Services account.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2193,15 +2193,102 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdateArcDeployment": {
-            "$ref": "./examples/CreateOrUpdateArcDeployment.json"
+          "CreateArcDeployment": {
+            "$ref": "./examples/CreateArcDeployment.json"
           },
-          "CreateOrUpdateArcDeploymentWithTemplate": {
-            "$ref": "./examples/CreateOrUpdateArcDeploymentWithTemplate.json"
+          "CreateArcDeploymentWithTemplate": {
+            "$ref": "./examples/CreateArcDeploymentWithTemplate.json"
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ArcDeployment"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ArcDeployments_Update",
+        "tags": [
+          "ArcDeployments"
+        ],
+        "description": "Updates the specified Arc deployment associated with the Cognitive Services account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "The name of Cognitive Services account.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "deploymentName",
+            "in": "path",
+            "description": "The name of the Arc deployment associated with the Cognitive Services Account.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The Arc deployment update properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArcDeploymentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArcDeployment"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateArcDeployment": {
+            "$ref": "./examples/UpdateArcDeployment.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
           "final-state-schema": "#/definitions/ArcDeployment"
         },
         "x-ms-long-running-operation": true
@@ -12797,11 +12884,7 @@
           "$ref": "#/definitions/ArcDeploymentResourceRequirements",
           "description": "Kubernetes resource limits for each deployment replica."
         }
-      },
-      "required": [
-        "requests",
-        "limits"
-      ]
+      }
     },
     "ArcDeploymentListResult": {
       "type": "object",
@@ -12821,19 +12904,33 @@
         }
       }
     },
+    "ArcDeploymentModel": {
+      "type": "object",
+      "description": "Model reference for an Arc deployment.",
+      "properties": {
+        "format": {
+          "type": "string",
+          "description": "Deployment model format."
+        },
+        "name": {
+          "type": "string",
+          "description": "Deployment model name."
+        }
+      }
+    },
     "ArcDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services Arc deployment.",
       "properties": {
         "model": {
-          "$ref": "#/definitions/DeploymentModel",
+          "$ref": "#/definitions/ArcDeploymentModel",
           "description": "Model reference. Required on creation and immutable after creation.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "arcClusterExtensionId": {
+        "extensionId": {
           "type": "string",
           "description": "Full Azure resource ID of the Arc-enabled Kubernetes cluster extension. Required on creation and immutable after creation.",
           "x-ms-mutability": [
@@ -12913,7 +13010,7 @@
       },
       "required": [
         "model",
-        "arcClusterExtensionId",
+        "extensionId",
         "runtime",
         "compute",
         "replicas",
@@ -12937,28 +13034,29 @@
     },
     "ArcDeploymentResourceRequirements": {
       "type": "object",
-      "description": "Kubernetes resource requirements for an Arc deployment replica.",
+      "description": "Kubernetes resource requirements for an Arc deployment replica.\nSpecify either cpu and memory together, or gpu. Do not combine CPU/memory and GPU in the same resource requirement.",
       "properties": {
         "cpu": {
           "type": "string",
-          "description": "Kubernetes CPU quantity string, for example 500m, 2, or 4."
+          "description": "Kubernetes CPU quantity string, for example 500m, 2, 4, or 8.\nRequired when specifying CPU and memory resources. Do not specify with gpu."
         },
         "memory": {
           "type": "string",
-          "description": "Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi."
+          "description": "Kubernetes memory quantity string, for example 512Mi, 2Gi, or 16Gi.\nRequired when specifying CPU and memory resources. Do not specify with gpu."
+        },
+        "gpu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Kubernetes GPU quantity, for example 1, 2, or 5.\nRequired when specifying GPU resources. Do not specify with cpu or memory."
         }
-      },
-      "required": [
-        "cpu",
-        "memory"
-      ]
+      }
     },
     "ArcDeploymentRuntime": {
       "type": "string",
       "description": "Inference runtime for an Arc deployment.",
       "enum": [
         "vllm",
-        "onnx"
+        "onnx-genai"
       ],
       "x-ms-enum": {
         "name": "ArcDeploymentRuntime",
@@ -12970,8 +13068,8 @@
             "description": "vLLM runtime."
           },
           {
-            "name": "onnx",
-            "value": "onnx",
+            "name": "onnxGenAi",
+            "value": "onnx-genai",
             "description": "ONNX runtime."
           }
         ]
@@ -12989,6 +13087,51 @@
       "required": [
         "name"
       ]
+    },
+    "ArcDeploymentUpdate": {
+      "type": "object",
+      "description": "The object used to update an Arc deployment.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/ArcDeploymentUpdateProperties",
+          "description": "Properties that can be updated on an Arc deployment."
+        }
+      }
+    },
+    "ArcDeploymentUpdateProperties": {
+      "type": "object",
+      "description": "Mutable properties for an Arc deployment.",
+      "properties": {
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Physical replica count on the Arc cluster.",
+          "minimum": 1
+        },
+        "resources": {
+          "$ref": "#/definitions/ArcDeploymentKubernetesResources",
+          "description": "Per-replica Kubernetes resource requests and limits."
+        },
+        "nodeSelector": {
+          "type": "object",
+          "description": "Kubernetes node selector key-value map used to schedule pods onto nodes with matching labels.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "ArcDeploymentVllmParameters": {
       "type": "object",

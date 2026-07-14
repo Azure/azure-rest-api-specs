@@ -1,0 +1,87 @@
+{
+  "operationId": "ArcDeployments_Update",
+  "title": "UpdateArcDeployment",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "deploymentName": "phi-3-arc",
+    "api-version": "2026-07-15-preview",
+    "properties": {
+      "properties": {
+        "replicas": 3,
+        "resources": {
+          "requests": {
+            "cpu": "500m",
+            "memory": "2Gi"
+          },
+          "limits": {
+            "cpu": "4",
+            "memory": "16Gi"
+          }
+        },
+        "nodeSelector": {
+          "agentpool": "cpu"
+        }
+      },
+      "tags": {
+        "env": "production"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/arcDeployments/phi-3-arc",
+        "name": "phi-3-arc",
+        "type": "Microsoft.CognitiveServices/accounts/arcDeployments",
+        "etag": "\"0x8D...\"",
+        "properties": {
+          "model": {
+            "format": "OpenAI",
+            "name": "phi-3-mini"
+          },
+          "extensionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.Kubernetes/connectedClusters/edge-cluster/providers/Microsoft.KubernetesConfiguration/extensions/inference-operator",
+          "runtime": "onnx-genai",
+          "compute": "cpu",
+          "replicas": 3,
+          "resources": {
+            "requests": {
+              "cpu": "500m",
+              "memory": "2Gi"
+            },
+            "limits": {
+              "cpu": "4",
+              "memory": "16Gi"
+            }
+          },
+          "nodeSelector": {
+            "agentpool": "cpu"
+          },
+          "provisioningState": "Succeeded",
+          "provisioningDetails": {
+            "message": "Deployment is healthy and serving traffic.",
+            "lastOperationTimestamp": "2026-07-15T14:55:00Z"
+          },
+          "inferenceEndpoint": "https://edge-cluster.eastus.inference.ml.azure.com",
+          "capabilities": {
+            "chatCompletion": "true"
+          }
+        },
+        "sku": {
+          "name": "Arc"
+        },
+        "tags": {
+          "env": "production"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000012?operationResultResponseType=Location&api-version=2026-07-15-preview",
+        "azure-asyncoperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000012?api-version=2026-07-15-preview",
+        "retry-after": "30"
+      }
+    }
+  }
+}
