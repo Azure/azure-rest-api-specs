@@ -8322,7 +8322,8 @@
       "enum": [
         "HiPriorityEvent",
         "QuotaExhausted",
-        "Holiday"
+        "Holiday",
+        "OverlappingMaintenance"
       ],
       "x-ms-enum": {
         "name": "BlockedDatesConstraintCategory",
@@ -8342,6 +8343,11 @@
             "name": "Holiday",
             "value": "Holiday",
             "description": "Holidays"
+          },
+          {
+            "name": "OverlappingMaintenance",
+            "value": "OverlappingMaintenance",
+            "description": "Constraint due to overlapping maintenance"
           }
         ]
       }
@@ -10225,6 +10231,78 @@
         }
       ]
     },
+    "MaintenanceActivity": {
+      "type": "object",
+      "description": "Represents a maintenance activity performed as part of an operation",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/MaintenanceActivityKind",
+          "description": "The type of activity",
+          "readOnly": true
+        },
+        "component": {
+          "type": "string",
+          "description": "The component on which the activity is performed (e.g., vCSA, ESXi, vSAN)",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Target version of the component",
+          "readOnly": true
+        },
+        "infoLink": {
+          "type": "string",
+          "description": "Optional link containing more details about the activity",
+          "readOnly": true
+        },
+        "impact": {
+          "type": "string",
+          "description": "Describes impact of the activity",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kind",
+        "component",
+        "version"
+      ]
+    },
+    "MaintenanceActivityKind": {
+      "type": "string",
+      "description": "Defines the type of maintenance activity",
+      "enum": [
+        "Upgrade",
+        "Downgrade",
+        "CertificateRotation",
+        "Backup"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceActivityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Upgrade",
+            "value": "Upgrade",
+            "description": "Upgrade activity"
+          },
+          {
+            "name": "Downgrade",
+            "value": "Downgrade",
+            "description": "Downgrade activity"
+          },
+          {
+            "name": "CertificateRotation",
+            "value": "CertificateRotation",
+            "description": "Certificate rotation activity"
+          },
+          {
+            "name": "Backup",
+            "value": "Backup",
+            "description": "Backup activity"
+          }
+        ]
+      }
+    },
     "MaintenanceCheckType": {
       "type": "string",
       "description": "Defines the type of maintenance readiness check",
@@ -10267,6 +10345,56 @@
           "readOnly": true,
           "x-ms-identifiers": []
         }
+      }
+    },
+    "MaintenanceGroup": {
+      "type": "object",
+      "description": "Represents a maintenance group",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the group",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name of the group",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/MaintenanceGroupKind",
+          "description": "Type of the group",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "kind"
+      ]
+    },
+    "MaintenanceGroupKind": {
+      "type": "string",
+      "description": "Defines the kind of group",
+      "enum": [
+        "Logical",
+        "Consolidation"
+      ],
+      "x-ms-enum": {
+        "name": "MaintenanceGroupKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical grouping of maintenance operations"
+          },
+          {
+            "name": "Consolidation",
+            "value": "Consolidation",
+            "description": "Consolidation grouping of maintenance operations"
+          }
+        ]
       }
     },
     "MaintenanceListResult": {
@@ -10353,6 +10481,25 @@
           "type": "integer",
           "format": "int32",
           "description": "Cluster ID for on which maintenance will be applied. Empty if maintenance is at private cloud level",
+          "readOnly": true
+        },
+        "activities": {
+          "type": "array",
+          "description": "Activities performed as part of maintenance",
+          "items": {
+            "$ref": "#/definitions/MaintenanceActivity"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "group": {
+          "$ref": "#/definitions/MaintenanceGroup",
+          "description": "Group details if maintenance is part of a group",
+          "readOnly": true
+        },
+        "relationships": {
+          "$ref": "#/definitions/MaintenanceRelationships",
+          "description": "Relationships with other maintenances like dependencies and prerequisites",
           "readOnly": true
         },
         "infoLink": {
@@ -10594,6 +10741,43 @@
         ]
       }
     },
+    "MaintenanceRecommendation": {
+      "type": "object",
+      "description": "Recommendation details for scheduling/rescheduling maintenance",
+      "properties": {
+        "maintenanceWindows": {
+          "type": "array",
+          "description": "List of recommended maintenance windows",
+          "items": {
+            "$ref": "#/definitions/MaintenanceWindowRecommendation"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "MaintenanceRelationships": {
+      "type": "object",
+      "description": "Defines relationship details between maintenance groups",
+      "properties": {
+        "dependencies": {
+          "type": "array",
+          "description": "List of dependent group identifiers",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "prerequisites": {
+          "type": "array",
+          "description": "List of prerequisite group identifiers",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
     "MaintenanceReschedule": {
       "type": "object",
       "description": "reschedule a maintenance",
@@ -10725,6 +10909,24 @@
           }
         ]
       }
+    },
+    "MaintenanceWindowRecommendation": {
+      "type": "object",
+      "description": "Represents a recommended maintenance start window",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Recommended start time for maintenance"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason for recommending this window"
+        }
+      },
+      "required": [
+        "startTime"
+      ]
     },
     "ManagementCluster": {
       "type": "object",
@@ -11807,6 +12009,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "recommendation": {
+          "$ref": "#/definitions/MaintenanceRecommendation",
+          "description": "Recommendations for rescheduling maintenance",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -11836,7 +12043,9 @@
       "description": "Constraints for rescheduling of maintenance",
       "enum": [
         "AvailableWindowForMaintenance",
-        "Blocked"
+        "Blocked",
+        "ReschedulingWindow",
+        "WeekendRescheduling"
       ],
       "x-ms-enum": {
         "name": "RescheduleOperationConstraintKind",
@@ -11851,9 +12060,47 @@
             "name": "BlockedWhileRescheduleOperation",
             "value": "Blocked",
             "description": "Blocked time range constraint"
+          },
+          {
+            "name": "ReschedulingWindow",
+            "value": "ReschedulingWindow",
+            "description": "Defines allowed window for rescheduling"
+          },
+          {
+            "name": "WeekendRescheduling",
+            "value": "WeekendRescheduling",
+            "description": "Defines weekend rescheduling restriction"
           }
         ]
       }
+    },
+    "ReschedulingWindowConstraint": {
+      "type": "object",
+      "description": "Constraint defining allowed time window for rescheduling",
+      "properties": {
+        "startsAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time",
+          "readOnly": true
+        },
+        "endsAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End date Time",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startsAt",
+        "endsAt"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/RescheduleOperationConstraint"
+        }
+      ],
+      "x-ms-discriminator-value": "ReschedulingWindow"
     },
     "ResourceSku": {
       "type": "object",
@@ -12135,6 +12382,11 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "recommendation": {
+          "$ref": "#/definitions/MaintenanceRecommendation",
+          "description": "Recommendations for scheduling maintenance",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -12165,7 +12417,8 @@
       "enum": [
         "SchedulingWindow",
         "AvailableWindowForMaintenance",
-        "Blocked"
+        "Blocked",
+        "WeekendScheduling"
       ],
       "x-ms-enum": {
         "name": "ScheduleOperationConstraintKind",
@@ -12185,6 +12438,11 @@
             "name": "BlockedWhileScheduleOperation",
             "value": "Blocked",
             "description": "Blocked time range constraint"
+          },
+          {
+            "name": "WeekendScheduling",
+            "value": "WeekendScheduling",
+            "description": "Defines weekend scheduling restriction"
           }
         ]
       }
@@ -13359,6 +13617,48 @@
         }
       ],
       "x-ms-discriminator-value": "VmwareFirewall"
+    },
+    "WeekendReschedulingConstraint": {
+      "type": "object",
+      "description": "Constraint defining weekend rescheduling restrictions",
+      "properties": {
+        "isDisabled": {
+          "type": "boolean",
+          "description": "Indicates if rescheduling is disabled on weekends",
+          "readOnly": true
+        },
+        "disabledReason": {
+          "type": "string",
+          "description": "Reason why weekend rescheduling is disabled",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RescheduleOperationConstraint"
+        }
+      ],
+      "x-ms-discriminator-value": "WeekendRescheduling"
+    },
+    "WeekendSchedulingConstraint": {
+      "type": "object",
+      "description": "Constraint defining weekend scheduling restrictions",
+      "properties": {
+        "isDisabled": {
+          "type": "boolean",
+          "description": "Indicates if scheduling is disabled on weekends"
+        },
+        "disabledReason": {
+          "type": "string",
+          "description": "Reason why weekend scheduling is disabled"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduleOperationConstraint"
+        }
+      ],
+      "x-ms-discriminator-value": "WeekendScheduling"
     },
     "WorkloadNetwork": {
       "type": "object",
