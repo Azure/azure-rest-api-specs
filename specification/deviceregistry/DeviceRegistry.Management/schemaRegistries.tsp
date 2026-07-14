@@ -50,6 +50,7 @@ model SchemaRegistryProperties {
   @doc("Human-readable description of the schema registry.")
   description?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Storage Account's Container URL where schemas will be stored.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   storageAccountContainerUrl: string;
