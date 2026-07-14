@@ -936,22 +936,22 @@ namespace Microsoft.InsightsCombinedClient;
 @@clientName(
   TenantActionGroups.WebhookReceiver,
   "TenantActionGroupWebhookReceiver",
-  "javascript,python"
+  "java,javascript,python"
 );
 @@clientName(
   TenantActionGroups.ActionGroupPatchBody,
   "TenantActionGroupPatchBody",
-  "javascript,python"
+  "java,javascript,python"
 );
 @@clientName(
   TenantActionGroups.ActionDetail,
   "TenantActionGroupActionDetail",
-  "javascript,python"
+  "java,javascript,python"
 );
 @@clientName(
   TenantActionGroups.TestNotificationDetailsResponse,
   "TenantActionGroupTestNotificationDetailsResponse",
-  "javascript,python"
+  "java,javascript,python"
 );
 
 @@clientName(
@@ -1444,16 +1444,24 @@ model MetricSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   MetricSettings,
-  "csharp,java"
+  "csharp"
 );
 // For JS, redirect straight to DiagnosticsSettings.DiagnosticsMetricSettings (identical to the
 // local MetricSettings) so the local Microsoft.InsightsCombinedClient.MetricSettings
 // is not emitted and no longer collides with DiagnosticsSettings.DiagnosticsMetricSettings.
 // Python flattens models into a single module like JS, so it takes the same redirect.
+// Java: use the newer 2021-05-01-preview DiagnosticsSettings model as the canonical
+// MetricSettings; ServiceDiagnosticsSettingsApi (2016-09-01) redirects to it, so its own
+// MetricSettings is not emitted.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.MetricSettings,
   DiagnosticsSettings.DiagnosticsMetricSettings,
-  "javascript,python"
+  "java,javascript,python"
+);
+@@clientName(
+  DiagnosticsSettings.DiagnosticsMetricSettings,
+  "MetricSettings",
+  "java"
 );
 
 /**
@@ -1485,17 +1493,21 @@ model LogSettings {
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   LogSettings,
-  "csharp,java"
+  "csharp"
 );
 // For JS, redirect straight to DiagnosticsSettings.DiagnosticsLogSettings (identical to the local
 // LogSettings) so ServiceDiagnosticsSettingsApi.LogSettings no longer collides with
 // DiagnosticsSettings.DiagnosticsLogSettings.
 // Python flattens models into a single module like JS, so it takes the same redirect.
+// Java: use the newer 2021-05-01-preview DiagnosticsSettings model as the canonical
+// LogSettings; ServiceDiagnosticsSettingsApi (2016-09-01) redirects to it, so its own
+// LogSettings is not emitted.
 @@alternateType(
   ServiceDiagnosticsSettingsApi.LogSettings,
   DiagnosticsSettings.DiagnosticsLogSettings,
-  "javascript,python"
+  "java,javascript,python"
 );
+@@clientName(DiagnosticsSettings.DiagnosticsLogSettings, "LogSettings", "java");
 
 @@clientLocation(
   NetworkSecurityPerimeterApi.ScheduledQueryRule.getNSP,
