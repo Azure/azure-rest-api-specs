@@ -3,9 +3,6 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(VoiceLive.OpenAIVoice.type, "Kind", "csharp");
-@@clientName(VoiceLive.AzureVoice.type, "Kind", "csharp");
-@@clientName(VoiceLive.AzureRealtimeNativeVoice.type, "Kind", "csharp");
 @@clientName(
   VoiceLive.RequestSession.parallel_tool_calls,
   "AllowParallelToolCalls",
