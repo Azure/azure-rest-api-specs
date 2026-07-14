@@ -557,13 +557,13 @@ model InnerErrorModel {
 union StringIndexType {
   string,
 
-  /** Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) confirming to the Unicode 8.0.0 standard. Use this option if your application is written in .Net Framework or .Net Core and you will be using StringInfo. */
+  /** Returned offset and length values will correspond to textElements (Graphemes and Grapheme clusters) conforming to the Unicode 8.0.0 standard. Use this option if your application is written in .NET Framework or .NET Core and you will be using StringInfo. */
   TextElements_v8: "TextElements_v8",
 
-  /** Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that support Unicode, for example Python. */
+  /** Returned offset and length values will correspond to Unicode code points. Use this option if your application is written in a language that supports Unicode, for example Python. */
   UnicodeCodePoint: "UnicodeCodePoint",
 
-  /** Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript. */
+  /** Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that supports Unicode, for example Java, JavaScript. */
   Utf16CodeUnit: "Utf16CodeUnit",
 }
 
