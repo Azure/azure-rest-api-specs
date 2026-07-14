@@ -565,9 +565,9 @@ namespace Azure.ResourceManager.Models {
 @@clientName(DiskType.Standard_LRS, "StandardLrs", "csharp");
 @@clientName(DiskType.StandardSSD_LRS, "StandardSsdLrs", "csharp");
 @@clientName(DiskType.Premium_LRS, "PremiumLrs", "csharp");
-@@clientName(DiskType.StandardSSD_ZRS, "PremiumV2Lrs", "csharp");
+@@clientName(DiskType.PremiumV2_LRS, "PremiumV2Lrs", "csharp");
 @@clientName(DiskType.StandardSSD_ZRS, "StandardSsdZrs", "csharp");
-@@clientName(DiskType.StandardSSD_ZRS, "PremiumZrs", "csharp");
+@@clientName(DiskType.Premium_ZRS, "PremiumZrs", "csharp");
 
 @@clientName(
   SecurityEncryptionType,
