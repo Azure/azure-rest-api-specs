@@ -1,4 +1,4 @@
-﻿import "@typespec/rest";
+import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
@@ -4154,6 +4154,7 @@ model SearchField {
   sourceDocumentId?: boolean;
 
   /** A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2026_05_01_preview)
   sharepointSiteUrl?: boolean;
 
@@ -6654,6 +6655,7 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   key: string;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
@@ -6669,6 +6671,7 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
   identity?: SearchIndexerDataIdentity | null;
 
   /** The subdomain/Azure AI Services endpoint url for the corresponding AI Service. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   subdomainUrl: string;
 
   /** A URI fragment specifying the type of Azure AI service resource attached to a skillset. */
