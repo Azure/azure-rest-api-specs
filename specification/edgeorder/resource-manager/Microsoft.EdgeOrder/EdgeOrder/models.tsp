@@ -1221,6 +1221,7 @@ model Link {
   /**
    * Url of the link.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   linkUrl?: string;
 }
@@ -1408,6 +1409,7 @@ model ImageInformation {
   /**
    * Url of the image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   imageUrl?: string;
 }
@@ -1426,6 +1428,7 @@ model CostInformation {
   /**
    * Default url to display billing information.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   billingInfoUrl?: string;
 }
@@ -2270,6 +2273,7 @@ model ForwardShippingDetails {
   /**
    * TrackingUrl of the package.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   trackingUrl?: string;
 }
@@ -2305,6 +2309,7 @@ model ReverseShippingDetails {
   /**
    * TrackingUrl of the package.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   trackingUrl?: string;
 }
