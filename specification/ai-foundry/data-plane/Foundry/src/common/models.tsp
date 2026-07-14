@@ -29,16 +29,6 @@ alias AcceptJsonHeader = {
 };
 
 /**
- * Optional request header carrying an opaque per-user isolation key forwarded to the agent
- * endpoint. When present, the service scopes endpoint-scoped data access (responses,
- * conversations, sessions) to the supplied user.
- */
-alias UserIsolationKeyHeader = {
-  /** Opaque per-user isolation key used to scope endpoint-scoped data (responses, conversations, sessions) to a specific end user. */
-  @header("x-ms-user-isolation-key") user_isolation_key?: string;
-};
-
-/**
  * Optional request header carrying an opaque per-user identity for delegation.
  * When present and the caller has the `agents/endpoints/UserIdentityImpersonation/action` RBAC permission,
  * the service scopes endpoint-scoped data (responses, conversations, sessions) to the

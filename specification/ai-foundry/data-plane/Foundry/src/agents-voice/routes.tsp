@@ -41,8 +41,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation to retrieve. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceConversation
   >;
@@ -63,8 +61,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation to delete. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceDeletedConversation
   >;
@@ -88,7 +84,6 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose responses are listed. */
       @path conversation_id: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<VoiceResponse>
@@ -113,8 +108,6 @@ interface AgentEndpointConversations {
 
       /** The id of the response to retrieve. */
       @path response_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceResponse
   >;
@@ -142,7 +135,6 @@ interface AgentEndpointConversations {
       /** The id of the response whose output items are listed. */
       @path response_id: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<VoiceConversationItem>
@@ -167,7 +159,6 @@ interface AgentEndpointConversations {
       /** The id of the conversation whose items are listed. */
       @path conversation_id: string;
 
-      ...UserIsolationKeyHeader;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<VoiceConversationItem>
@@ -195,8 +186,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation item to retrieve. */
       @path item_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceConversationItem
   >;
@@ -224,8 +213,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation item whose audio metadata is retrieved. */
       @path item_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceItemAudioResponse
   >;
@@ -252,8 +239,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation item whose audio is streamed. */
       @path item_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceAudioStreamResponse
   >;
@@ -279,8 +264,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation whose merged recording metadata is retrieved. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceRecordingResponse
   >;
@@ -305,8 +288,6 @@ interface AgentEndpointConversations {
 
       /** The id of the conversation whose merged recording is streamed. */
       @path conversation_id: string;
-
-      ...UserIsolationKeyHeader;
     },
     VoiceAudioStreamResponse
   >;
