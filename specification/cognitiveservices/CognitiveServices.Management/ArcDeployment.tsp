@@ -265,10 +265,6 @@ union ArcDeploymentComputeType {
    */
   cpu: "cpu",
 
-  /**
-   * NPU compute.
-   */
-  npu: "npu",
 }
 
 /**
@@ -286,7 +282,7 @@ union ArcDeploymentRuntime {
   /**
    * ONNX runtime.
    */
-  onnxGenAi: "onnx-genai",
+  onnx: "onnx-genai",
 }
 
 /**
