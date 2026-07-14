@@ -3463,6 +3463,79 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purgeLakeData": {
+      "post": {
+        "operationId": "WorkspacePurge_PurgeLakeData",
+        "tags": [
+          "Workspaces"
+        ],
+        "description": "Purges data lake data in a Log Analytics workspace for a table over a specified time range.\n\nThis operation deletes data lake data (Auxiliary tables, or Analytics tables mirrored to the data lake) for the specified table within the given time range. The operation is long-running; poll the URL returned in the Azure-AsyncOperation response header to track its status.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 63,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Describes the body of a request to purge data lake data in a single table of an Log Analytics Workspace",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeLakeDataBody"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/WorkspacePurgeResponse"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkspacesPurgeLakeData": {
+            "$ref": "./examples/WorkspacesPurgeLakeData.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/regenerateSharedKey": {
       "post": {
         "operationId": "SharedKeys_Regenerate",
@@ -8691,6 +8764,44 @@
           "description": "When filtering over custom dimensions, this key will be used as the name of the custom dimension."
         }
       }
+    },
+    "WorkspacePurgeLakeDataBody": {
+      "type": "object",
+      "description": "Describes the body of a request to purge data lake data in a Log Analytics workspace.",
+      "properties": {
+        "table": {
+          "type": "string",
+          "description": "The name of the table from which to purge data lake data. Must be an Auxiliary table, or an Analytics table that is mirrored to the data lake."
+        },
+        "timeRange": {
+          "$ref": "#/definitions/WorkspacePurgeLakeDataTimeRange",
+          "description": "The time range over which data lake data is purged."
+        }
+      },
+      "required": [
+        "table",
+        "timeRange"
+      ]
+    },
+    "WorkspacePurgeLakeDataTimeRange": {
+      "type": "object",
+      "description": "The time range over which a data lake purge request operates.",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The inclusive start of the time range, in UTC. Must fall on an hour boundary (minutes and seconds must be zero)."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The exclusive end of the time range, in UTC. Must fall on an hour boundary and be earlier than the start of the current hour."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime"
+      ]
     },
     "WorkspacePurgeResponse": {
       "type": "object",

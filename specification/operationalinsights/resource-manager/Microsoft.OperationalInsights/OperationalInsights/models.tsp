@@ -2664,6 +2664,38 @@ model WorkspacePurgeStatusResponse {
 }
 
 /**
+ * Describes the body of a request to purge data lake data in a Log Analytics workspace.
+ */
+@added(Versions.v2026_03_01)
+model WorkspacePurgeLakeDataBody {
+  /**
+   * The name of the table from which to purge data lake data. Must be an Auxiliary table, or an Analytics table that is mirrored to the data lake.
+   */
+  table: string;
+
+  /**
+   * The time range over which data lake data is purged.
+   */
+  timeRange: WorkspacePurgeLakeDataTimeRange;
+}
+
+/**
+ * The time range over which a data lake purge request operates.
+ */
+@added(Versions.v2026_03_01)
+model WorkspacePurgeLakeDataTimeRange {
+  /**
+   * The inclusive start of the time range, in UTC. Must fall on an hour boundary (minutes and seconds must be zero).
+   */
+  startTime: utcDateTime;
+
+  /**
+   * The exclusive end of the time range, in UTC. Must fall on an hour boundary and be earlier than the start of the current hour.
+   */
+  endTime: utcDateTime;
+}
+
+/**
  * The list workspaces operation response.
  */
 model WorkspaceListResult {
