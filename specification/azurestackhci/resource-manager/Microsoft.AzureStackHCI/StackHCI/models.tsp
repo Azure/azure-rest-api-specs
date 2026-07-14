@@ -8417,6 +8417,7 @@ model OsImageProperties {
   /**
    * Represents composed image iso download url of a os image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   composedImageIsoUrl?: string;
 
   /**
@@ -8472,6 +8473,7 @@ model PlatformPayload {
   /**
    * Represents url of a platform update payload.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   payloadUrl?: string;
 
   /**
@@ -9881,6 +9883,10 @@ model DiskReportedProperties {
   /** The manufacturer of the disk. */
   @visibility(Lifecycle.Read)
   manufacturer?: string;
+
+  /** Indicates whether the disk manufacturer is supported for the validated solution recipe ring. Defaults to true. Set to false when the SAN vendor is not in the allowed vendor list for the current ring. */
+  @visibility(Lifecycle.Read)
+  isSupported?: boolean;
 
   /** Serial number. */
   @visibility(Lifecycle.Read)

@@ -409,7 +409,6 @@ interface Sites {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -837,6 +836,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -875,6 +875,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1254,6 +1255,7 @@ interface Sites {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -1874,7 +1876,6 @@ interface WebApps {
    * Description for Gets the Git/FTP publishing credentials of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -2200,6 +2201,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2238,6 +2240,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },
@@ -2618,6 +2621,7 @@ interface WebApps {
       /**
        * The Blob URL to store capture file.
        */
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       @query("sasUrl")
       sasUrl?: string;
     },

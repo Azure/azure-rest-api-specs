@@ -59,7 +59,7 @@ model VolumeProperties {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @maxLength(80)
   @minLength(1)
-  @pattern("^[a-zA-Z][a-zA-Z0-9\\-]{0,79}$")
+  @pattern("^[a-zA-Z][a-zA-Z0-9\\-_]{0,79}$")
   creationToken: string;
 
   /**
@@ -81,6 +81,9 @@ model VolumeProperties {
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThresholdOld: int64 = 107374182400;
@@ -97,6 +100,8 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold: int64 = 107374182400;
@@ -121,7 +126,6 @@ model VolumeProperties {
   /**
    * Resource identifier used to identify the Snapshot.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   snapshotId?:
@@ -294,6 +298,8 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   ldapServerType?: LdapServerType;
 
@@ -415,7 +421,10 @@ model VolumeProperties {
 
   /**
    * Flag indicating whether subvolume operations are enabled on the volume
+   * Deprecated. Subvolume operations and this flag will be removed in a future API version.
    */
+  #suppress "deprecated" "Suppress this warning until the property is removed."
+  #deprecated "Deprecated. This property will be removed in a future API version."
   enableSubvolumes?: EnableSubvolumes = EnableSubvolumes.Disabled;
 
   /**
@@ -443,6 +452,8 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   largeVolumeType?: LargeVolumeType;
 
@@ -470,6 +481,8 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   language?: VolumeLanguage;
 
   /**
@@ -486,6 +499,8 @@ model VolumeProperties {
   @renamedFrom(Versions.v2026_03_15_preview, "breakthroughMode")
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "breakthroughMode")
   breakthroughModeOld?: BreakthroughMode;
 
@@ -499,6 +514,7 @@ model VolumeProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @added(Versions.v2026_05_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   breakthroughMode?: BreakthroughMode;
 }
@@ -1322,6 +1338,9 @@ model VolumePatchProperties {
   @added(Versions.v2026_04_01)
   @removed(Versions.v2026_04_15_preview)
   @renamedFrom(Versions.v2026_04_15_preview, "usageThreshold")
+  @added(Versions.v2026_05_01)
+  @removed(Versions.v2026_05_15_preview)
+  @renamedFrom(Versions.v2026_05_15_preview, "usageThreshold")
   @maxValue(2638827906662400)
   @minValue(53687091200)
   usageThreshold20250901?: int64;
@@ -1338,6 +1357,8 @@ model VolumePatchProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_04_01)
   @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
   @maxValue(7916483719987200)
   @minValue(53687091200)
   usageThreshold?: int64;
@@ -2121,7 +2142,9 @@ union AvsDataStore {
 
 /**
  * Flag indicating whether subvolume operations are enabled on the volume
+ * Deprecated. This type will be removed in a future API version.
  */
+#deprecated "Deprecated. This type will be removed in a future API version."
 union EnableSubvolumes {
   string,
 
@@ -2181,6 +2204,7 @@ union LargeVolumeType {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_04_01)
 @added(Versions.v2026_04_15_preview)
+@added(Versions.v2026_05_01)
 union BreakthroughMode {
   string,
 
