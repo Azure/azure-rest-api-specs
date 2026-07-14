@@ -14003,6 +14003,36 @@
         }
       }
     },
+    "PolicyViolationAction": {
+      "type": "string",
+      "description": "The action to perform when a user delegation SAS (shared access signature) policy requirement is violated.",
+      "enum": [
+        "None",
+        "Log",
+        "Block"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyViolationAction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No action is taken when the policy requirement is violated."
+          },
+          {
+            "name": "Log",
+            "value": "Log",
+            "description": "The policy violation is logged for audit purposes."
+          },
+          {
+            "name": "Block",
+            "value": "Block",
+            "description": "The request is blocked and denied when the policy requirement is violated."
+          }
+        ]
+      }
+    },
     "PostFailoverRedundancy": {
       "type": "string",
       "description": "The redundancy type of the account after an account failover is performed.",
@@ -15944,6 +15974,18 @@
         "dataCollaborationPolicyProperties": {
           "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
           "description": "Data Collaboration policy for the storage account."
+        },
+        "allowCrossTenantDelegationSas": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSas": {
+          "type": "boolean",
+          "description": "Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSasAction": {
+          "$ref": "#/definitions/PolicyViolationAction",
+          "description": "The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas."
         }
       }
     },
@@ -16072,6 +16114,18 @@
         "dataCollaborationPolicyProperties": {
           "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
           "description": "Data Collaboration policy for the storage account."
+        },
+        "allowCrossTenantDelegationSas": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSas": {
+          "type": "boolean",
+          "description": "Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSasAction": {
+          "$ref": "#/definitions/PolicyViolationAction",
+          "description": "The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas."
         }
       }
     },
@@ -16190,6 +16244,18 @@
         "dataCollaborationPolicyProperties": {
           "$ref": "#/definitions/StorageDataCollaborationPolicyProperties",
           "description": "Data Collaboration policy for the storage account."
+        },
+        "allowCrossTenantDelegationSas": {
+          "type": "boolean",
+          "description": "Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSas": {
+          "type": "boolean",
+          "description": "Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property."
+        },
+        "requireUserBoundUserDelegationSasAction": {
+          "$ref": "#/definitions/PolicyViolationAction",
+          "description": "The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas."
         }
       }
     },

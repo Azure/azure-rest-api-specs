@@ -371,6 +371,29 @@ union PublicNetworkAccess {
 }
 
 /**
+ * The action to perform when a user delegation SAS (shared access signature) policy requirement is violated.
+ */
+@added(Versions.v2026_06_01)
+union PolicyViolationAction {
+  string,
+
+  /**
+   * No action is taken when the policy requirement is violated.
+   */
+  None: "None",
+
+  /**
+   * The policy violation is logged for audit purposes.
+   */
+  Log: "Log",
+
+  /**
+   * The request is blocked and denied when the policy requirement is violated.
+   */
+  Block: "Block",
+}
+
+/**
  * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
  */
 union ExpirationAction {
@@ -3185,6 +3208,24 @@ model StorageAccountPropertiesCreateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
@@ -3910,6 +3951,24 @@ model StorageAccountProperties {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
@@ -4463,6 +4522,24 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
