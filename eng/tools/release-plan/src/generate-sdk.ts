@@ -202,7 +202,7 @@ export async function checkIfSdkNeedsToBeGenerated(params: {
       `SDK PR for '${language}' is in state '${prStatus.state}' and not merged. Regenerating SDK for this language.`,
     );
   } else {
-    console.warn(
+    console.error(
       `SDK PR status for '${language}' could not be determined. Skipping SDK generation.`,
     );
     return false;
