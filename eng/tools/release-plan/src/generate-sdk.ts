@@ -169,8 +169,8 @@ export async function checkIfSdkNeedsToBeGenerated(params: {
   }
 
   if (!languageInfo) {
-    console.log(`No SDKInfo found for '${language}'. Skipping SDK generation.`);
-    return false;
+    console.log(`No SDKInfo found for '${language}'. Generating SDK.`);
+    return true;
   }
 
   const releaseStatus = languageInfo.ReleaseStatus ?? "";
