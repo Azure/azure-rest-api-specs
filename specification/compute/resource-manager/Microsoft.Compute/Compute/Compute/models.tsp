@@ -9073,7 +9073,7 @@ model ScheduleProfile {
   end?: string;
 
   /**
-   * The minimum number of days that must pass after the start date before the reservation can be updated or deleted once it has been committed. Will be populatd with a default value if not provided.
+   * The minimum number of days that must pass after the start date before the reservation can be updated or deleted once it has been committed. Will be populated with a default value if not provided.
    */
   @added(Versions.v2026_04_01)
   minimumCommitmentDays?: int32;
@@ -9157,7 +9157,7 @@ union ReservationState {
   Approved: "Approved",
 
   /**
-   * A failure occured while attempting to fulfill the capacity reservation request.
+   * A failure occurred while attempting to fulfill the capacity reservation request.
    */
   FulfillmentFailed: "FulfillmentFailed",
 
