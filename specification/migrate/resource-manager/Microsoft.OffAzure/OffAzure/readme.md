@@ -26,8 +26,20 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2024-12-01-preview
+tag: package-2025-12-12-preview
 
+```
+
+### Tag: package-2025-12-12-preview
+
+These settings apply only when `--tag=package-2025-12-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-12-12-preview'
+input-file:
+- preview/2025-12-12-preview/migrate.json
+suppressions:
+  - code: BodyTopLevelProperties
+    reason: Legacy model structure maintained for backward compatibility with existing clients
 ```
 
 ### Tag: package-2024-12-01-preview
@@ -123,3 +135,11 @@ See configuration in [readme.python.md](./readme.python.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## JavaScript
+
+See configuration in [readme.javascript.md](./readme.javascript.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
