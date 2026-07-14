@@ -398,6 +398,7 @@ model SubscriptionAliasResponseProperties {
   /**
    * Url to accept ownership of the subscription.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   acceptOwnershipUrl?: string;
 
