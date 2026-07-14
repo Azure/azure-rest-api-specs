@@ -109,4 +109,18 @@ describe("file processing", () => {
       ]
     `);
   });
+
+  it("should ignore changed openapi3 artifacts", async () => {
+    const changedFiles = [
+      "specification/serviceB/data-plane/service.B/openapi3/2025-07-01-preview/serviceBopenapi3.json",
+      "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+    ];
+
+    await expect(processFilesToSpecificationList(ROOT, changedFiles)).resolves
+      .toMatchInlineSnapshot(`
+      [
+        "specification/serviceB/data-plane/service.B/stable/2025-06-01/serviceBspec.json",
+      ]
+    `);
+  });
 });

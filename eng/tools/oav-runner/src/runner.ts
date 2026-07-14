@@ -16,6 +16,10 @@ import { Swagger } from "@azure-tools/specs-shared/swagger";
 import { inspect } from "util";
 import { type ReportableOavError } from "./formatting.ts";
 
+function openapi3(file: string): boolean {
+  return /(^|[\\/])openapi3([\\/]|$)/.test(file);
+}
+
 export async function preCheckFiltering(
   rootDirectory: string,
   fileList?: string[],
@@ -206,7 +210,7 @@ export async function processFilesToSpecificationList(
     }
 
     // finally handle our base case where the file we're examining is itself a swagger file
-    if (swagger(file) && fs.existsSync(absoluteFilePath)) {
+    if (swagger(file) && !openapi3(file) && fs.existsSync(absoluteFilePath)) {
       resultFiles.push(file);
     }
   }
