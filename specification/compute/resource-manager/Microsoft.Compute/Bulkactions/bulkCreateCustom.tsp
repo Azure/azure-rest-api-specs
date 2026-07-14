@@ -190,14 +190,6 @@ model BulkCreateCustomListResult {
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "VM is an abbreviation for Virtual Machine"
-@doc("The response from a get VM results request, containing the per-virtual-machine operation results of a BulkCreateCustom.")
-model BulkCreateCustomVMResultsResponse {
-  @identifiers(#["operationId"])
-  @doc("An array of per-virtual-machine operation results.")
-  results: Array<ResourceOperationDetails>;
-}
-
 // ============================================================
 // Routes: BulkCreateCustom interface (8 operations)
 // ============================================================
@@ -229,7 +221,9 @@ interface BulkCreateCustom {
     @minLength(1)
     @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
     asyncOperationId: string,
-  ): ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult> | ErrorResponse;
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
 
   @doc("Creates or updates BulkCreateCustoms.")
   createOrUpdate is ArmResourceCreateOrUpdateAsync<
@@ -275,24 +269,4 @@ interface BulkCreateCustom {
     ...ProviderNamespace<LocationBasedBulkCreateCustom>,
     ...BulkCreateCustomLocationParameter,
   ): ArmResponse<BulkCreateCustomListResult> | ErrorResponse;
-
-  @doc("Gets the per-virtual-machine operation results of a BulkCreateCustom.")
-  @get
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/results")
-  results(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
-    @doc("The location name.")
-    @path
-    @minLength(1)
-    location: azureLocation,
-
-    @doc("The name of the BulkCreateCustom.")
-    @path
-    @minLength(1)
-    @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
-    name: string,
-  ): ArmResponse<BulkCreateCustomVMResultsResponse> | ErrorResponse;
 }

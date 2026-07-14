@@ -866,62 +866,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/bulkCreateCustom/{name}/results": {
-      "get": {
-        "operationId": "BulkCreateCustom_Results",
-        "tags": [
-          "BulkCreateCustom"
-        ],
-        "description": "Gets the per-virtual-machine operation results of a BulkCreateCustom.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "description": "The location name.",
-            "required": true,
-            "type": "string",
-            "minLength": 1
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the BulkCreateCustom.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BulkCreateCustomVMResultsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "BulkCreateCustom_Results_MaximumSet": {
-            "$ref": "./examples/BulkCreateCustom_Results_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/launchBulkInstancesOperations": {
       "get": {
         "operationId": "LaunchBulkInstancesOperation_ListByResourceGroup",
@@ -3703,25 +3647,6 @@
         "capacity",
         "priorityProfile",
         "computeProfile"
-      ]
-    },
-    "BulkCreateCustomVMResultsResponse": {
-      "type": "object",
-      "description": "The response from a get VM results request, containing the per-virtual-machine operation results of a BulkCreateCustom.",
-      "properties": {
-        "results": {
-          "type": "array",
-          "description": "An array of per-virtual-machine operation results.",
-          "items": {
-            "$ref": "#/definitions/ResourceOperationDetails"
-          },
-          "x-ms-identifiers": [
-            "operationId"
-          ]
-        }
-      },
-      "required": [
-        "results"
       ]
     },
     "BulkCreateCustomVmSizeProfile": {
