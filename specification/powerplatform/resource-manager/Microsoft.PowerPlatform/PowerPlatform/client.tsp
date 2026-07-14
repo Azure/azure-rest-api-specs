@@ -16,7 +16,40 @@ using TypeSpec.Http;
 @@alternateType(PatchTrackedResource.location, azureLocation, "csharp");
 @@clientName(Account, "PowerPlatformAccount", "csharp");
 @@clientName(PatchAccount, "PowerPlatformAccountPatch", "csharp");
-@@clientName(PatchTrackedResource, "PatchTrackedResourceData", "csharp");
+@@clientName(
+  PatchTrackedResource,
+  "PowerPlatformTrackedResourcePatch",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PowerPlatform.PrivateEndpointConnection,
+  "PowerPlatformPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.PowerPlatform.PrivateLinkResource,
+  "PowerPlatformPrivateLinkResource",
+  "csharp"
+);
+@@clientName(State, "EnterprisePolicyOnboardingState", "csharp");
+@@clientName(HealthStatus, "EnterprisePolicyHealthStatus", "csharp");
+@@clientName(ResourceIdentityType, "EnterprisePolicyIdentityType", "csharp");
+@@clientName(
+  PropertiesEncryption,
+  "EnterprisePolicyEncryptionProperties",
+  "csharp"
+);
+@@clientName(KeyVaultProperties, "PowerPlatformKeyVaultProperties", "csharp");
+@@clientName(KeyVaultProperties.id, "VaultUri", "csharp");
+@@clientName(keyProperties, "PowerPlatformKeyProperties", "csharp");
+@@alternateType(
+  EnterprisePolicyIdentity.systemAssignedIdentityPrincipalId,
+  uuid,
+  "csharp"
+);
+@@alternateType(EnterprisePolicyIdentity.tenantId, uuid, "csharp");
+@@alternateType(PrivateEndpoint.id, armResourceIdentifier, "csharp");
+@@alternateType(KeyVaultProperties.id, url, "csharp");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
