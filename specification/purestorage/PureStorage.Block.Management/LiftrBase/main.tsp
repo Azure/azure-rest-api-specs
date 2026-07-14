@@ -25,6 +25,9 @@ enum Versions {
 
   @doc("Dependent on Azure.ResourceManager.CommonTypes.Versions.v5")
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Dependent on Azure.ResourceManager.CommonTypes.Versions.v5")
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 @doc("Marketplace subscription status")

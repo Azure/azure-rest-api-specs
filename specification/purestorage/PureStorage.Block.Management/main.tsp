@@ -40,6 +40,11 @@ enum Versions {
   @useDependency(LiftrBase.Versions.v2026_01_01_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2026_01_01_preview: "2026-01-01-preview",
+
+  @doc("Version 4 preview.")
+  @useDependency(LiftrBase.Versions.v2026_06_01_preview)
+  @useDependency(LiftrBase.Storage.Versions.v1_preview)
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -962,6 +967,16 @@ model VolumeGroupProperties {
 
   @doc("Protection parameters for the volume group")
   protectionParameters?: ProtectionParameters;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Storage space usage for the volume group")
+  @visibility(Lifecycle.Read)
+  space?: Space;
+
+  @added(Versions.v2026_06_01_preview)
+  @doc("Number of hosts currently connected to the volume group")
+  @visibility(Lifecycle.Read)
+  connectedHostCount?: int32;
 
   @doc("Provisioning state of the resource")
   @visibility(Lifecycle.Read)
