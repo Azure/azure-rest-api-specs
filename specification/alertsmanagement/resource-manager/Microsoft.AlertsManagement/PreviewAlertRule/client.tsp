@@ -66,6 +66,14 @@ namespace Microsoft.AlertsManagement {
 @@clientName(Kind, "LogAlertRuleKind", "csharp");
 @@clientName(Evaluation, "RulePreviewEvaluation", "csharp");
 @@clientName(EvaluatedPeriod, "RulePreviewEvaluatedPeriod", "csharp");
+
+// C# customizations: follow mgmt API naming conventions — request/response body
+// models use the `Content`/`Result` suffix (not `Request`/`Response`), and
+// boolean properties are prefixed with `Is` (BOOL001).
+@@clientName(PreviewAlertRuleRequest, "PreviewAlertRuleContent", "csharp");
+@@clientName(PreviewAlertRuleResponse, "PreviewAlertRuleResult", "csharp");
+@@clientName(Evaluation.thresholdMet, "IsThresholdMet", "csharp");
+@@clientName(EvaluatedPeriod.thresholdMet, "IsThresholdMet", "csharp");
 @@clientName(
   DimensionNameAndValue,
   "RulePreviewDimensionNameAndValue",
