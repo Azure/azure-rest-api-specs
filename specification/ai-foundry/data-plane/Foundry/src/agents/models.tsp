@@ -144,6 +144,26 @@ union AgentSignInMode {
 model AgentEntraAuthorization {
   @doc("The sign-in mode for the agent. Defaults to 'default' when not specified.")
   sign_in_mode?: AgentSignInMode;
+
+  @doc("The rules used to validate inbound bearer tokens presented to the agent endpoint when the agent is in the 'blueprint' sign-in mode.")
+  token_validation_rules?: AgentTokenValidationRules;
+}
+
+@doc("""
+  Rules used to validate an inbound bearer token addressed to the agent's blueprint audience.
+  Each list is defaulted to a single value when the agent is switched to the 'blueprint' sign-in
+  mode (audience = blueprint resource URI, tenant = subscription tenant, required scope = default
+  scope declared on the blueprint).
+  """)
+model AgentTokenValidationRules {
+  @doc("The set of accepted token audiences (the `aud` claim). Typically the agent blueprint resource URI (e.g. `api://{agentBlueprintId}`).")
+  allowed_audiences?: string[];
+
+  @doc("The set of accepted token tenants (the `tid` claim). Typically the subscription tenant.")
+  allowed_tenants?: string[];
+
+  @doc("The scopes (the `scp` claim) that must all be present on an inbound token. Typically the default scope declared on the agent blueprint.")
+  required_scopes?: string[];
 }
 
 model AgentObject {
