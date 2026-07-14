@@ -46,9 +46,9 @@ op ArmResourceActionSyncNoRequestBody<
   TResource extends Azure.ResourceManager.Foundations.Resource,
   TResponse extends TypeSpec.Reflection.Model,
   TBaseParameters = Foundations.BaseParameters<TResource>
->(
-  ...ResourceInstanceParameters<TResource, TBaseParameters>,
-): ArmResponse<TResponse> | ErrorResponse;
+>(...ResourceInstanceParameters<TResource, TBaseParameters>):
+  | ArmResponse<TResponse>
+  | ErrorResponse;
 
 /**
  * Like ArmResourceActionAsync, but with no request body and ArmNoContentResponse.
@@ -60,7 +60,9 @@ op ArmResourceActionNoContentAsyncNoRequestBody<
 > is ArmResourceActionAsyncBase<
   TResource,
   void,
-  ArmAcceptedLroResponse | ArmNoContentResponse<"Action completed successfully.">,
+
+    | ArmAcceptedLroResponse
+    | ArmNoContentResponse<"Action completed successfully.">,
   TBaseParameters
 >;
 

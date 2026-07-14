@@ -89,13 +89,15 @@ interface PortalRevisionContracts {
       @header("If-Match")
       `If-Match`: string;
     },
-    Response = (ArmResponse<PortalRevisionContract> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PortalRevisionContract>>
+    Response =
+      | (ArmResponse<PortalRevisionContract> & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PortalRevisionContract>>
   >;
 
   /**
@@ -136,7 +138,8 @@ interface PortalRevisionContracts {
 
 @@maxLength(PortalRevisionContract.name, 256);
 @@minLength(PortalRevisionContract.name, 1);
-@@doc(PortalRevisionContract.name,
+@@doc(
+  PortalRevisionContract.name,
   "Portal revision identifier. Must be unique in the current API Management service instance."
 );
 @@doc(PortalRevisionContract.properties, "Properties of the portal revisions.");

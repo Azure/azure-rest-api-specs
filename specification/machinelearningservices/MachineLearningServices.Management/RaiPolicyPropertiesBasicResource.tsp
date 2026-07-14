@@ -19,6 +19,9 @@ namespace Microsoft.MachineLearningServices;
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @parentResource(WorkspaceConnectionPropertiesV2BasicResource)
 model RaiPolicyPropertiesBasicResource
   is Azure.ResourceManager.ProxyResource<RaiPolicyProperties, false> {
@@ -36,6 +39,9 @@ model RaiPolicyPropertiesBasicResource
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResourceOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -75,6 +81,9 @@ interface RaiPolicyPropertiesBasicResourceOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface RaiPolicyPropertiesBasicResources {
   /**
@@ -126,6 +135,9 @@ interface RaiPolicyPropertiesBasicResources {
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface RaiPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -165,6 +177,9 @@ interface RaiPolicyOps
 @removed(Versions.v2025_12_01)
 @added(Versions.v2026_01_15_preview)
 @removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
 @armResourceOperations
 interface RaiPolicy {
   /**
@@ -211,7 +226,8 @@ interface RaiPolicy {
 }
 
 @@doc(RaiPolicyPropertiesBasicResource.name, "Name of the Rai Policy.");
-@@doc(RaiPolicyPropertiesBasicResource.properties,
+@@doc(
+  RaiPolicyPropertiesBasicResource.properties,
   "Azure OpenAI Content Filters properties."
 );
 @@doc(RaiPolicyPropertiesBasicResources.create::parameters.resource, "");

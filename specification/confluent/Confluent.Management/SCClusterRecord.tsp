@@ -16,7 +16,6 @@ namespace Microsoft.Confluent;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Private.armResourceInternal(ClusterProperties)
 @TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
@@ -145,9 +144,11 @@ interface SCClusterRecords {
 
 @@doc(SCClusterRecord.name, "Confluent kafka or schema registry cluster id");
 @@doc(SCClusterRecord.properties, "Cluster Properties");
-@@doc(SCClusterRecords.createOrUpdate::parameters.resource,
+@@doc(
+  SCClusterRecords.createOrUpdate::parameters.resource,
   "Confluent Cluster resource model"
 );
-@@doc(SCClusterRecords.createAPIKey::parameters.body,
+@@doc(
+  SCClusterRecords.createAPIKey::parameters.body,
   "Request payload for get creating API Key for schema registry Cluster ID or Kafka Cluster ID under a environment"
 );

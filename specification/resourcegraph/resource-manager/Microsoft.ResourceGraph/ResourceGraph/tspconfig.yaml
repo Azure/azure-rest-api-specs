@@ -11,6 +11,13 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: Azure.ResourceManager.ResourceGraph
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: Azure.Provisioning.ResourceGraph
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2024-04-01"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-resourcegraph"
     namespace: "com.azure.resourcemanager.resourcegraph"

@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Web;
 /**
@@ -126,10 +128,12 @@ interface AppServicePlans {
   @summary("Creates or updates an App Service Plan.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
-    Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<AppServicePlan>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = AppServicePlan>> & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -143,10 +147,12 @@ interface AppServicePlans {
   update is ArmCustomPatchSync<
     AppServicePlan,
     PatchModel = AppServicePlanPatchResource,
-    Response = ArmResponse<AppServicePlan> | (AcceptedResponse & {
-      @bodyRoot
-      _: AppServicePlan;
-    }),
+    Response =
+      | ArmResponse<AppServicePlan>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: AppServicePlan;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -227,6 +233,32 @@ interface AppServicePlans {
       @query("softRestart")
       softRestart?: boolean;
     },
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Start all apps in an App Service plan.
+   */
+  @added(Versions.v2026_07_15)
+  @summary("Start all apps in an App Service plan.")
+  @action("startSites")
+  startWebApps is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    NoContentResponse,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Stop all apps in an App Service plan.
+   */
+  @added(Versions.v2026_07_15)
+  @summary("Stop all apps in an App Service plan.")
+  @action("stopSites")
+  stopWebApps is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    NoContentResponse,
     Error = DefaultErrorResponse
   >;
 
@@ -320,9 +352,11 @@ interface AppServicePlans {
 
 @@doc(AppServicePlan.name, "Name of the App Service plan.");
 @@doc(AppServicePlan.properties, "AppServicePlan resource specific properties");
-@@doc(AppServicePlans.createOrUpdate::parameters.resource,
+@@doc(
+  AppServicePlans.createOrUpdate::parameters.resource,
   "Details of the App Service plan."
 );
-@@doc(AppServicePlans.update::parameters.properties,
+@@doc(
+  AppServicePlans.update::parameters.properties,
   "Details of the App Service plan."
 );

@@ -144,7 +144,8 @@ interface ScalingPlans {
 @@minLength(ScalingPlan.name, 3);
 @@doc(ScalingPlan.name, "The name of the scaling plan.");
 @@doc(ScalingPlan.properties, "Detailed properties for scaling plan.");
-@@doc(ScalingPlans.create::parameters.resource,
+@@doc(
+  ScalingPlans.create::parameters.resource,
   "Object containing scaling plan definitions."
 );
 @@clientName(ScalingPlans.update::parameters.body, "scalingPlan");

@@ -83,9 +83,11 @@ interface Eventhubs {
 @@maxLength(Eventhub.name, 256);
 @@minLength(Eventhub.name, 1);
 @@doc(Eventhub.name, "The Event Hub name");
-@@doc(Eventhub.properties,
+@@doc(
+  Eventhub.properties,
   "Properties supplied to the Create Or Update Event Hub operation."
 );
-@@doc(Eventhubs.createOrUpdate::parameters.resource,
+@@doc(
+  Eventhubs.createOrUpdate::parameters.resource,
   "Parameters supplied to create an Event Hub resource."
 );

@@ -51,7 +51,8 @@ interface GlobalSchemaContractOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ApiManagementGlobalSchema"
     > {}
 
 @armResourceOperations
@@ -97,23 +98,25 @@ interface GlobalSchemaContracts {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GlobalSchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      }) | (ArmResourceCreatedResponse<
-      GlobalSchemaContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<GlobalSchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          GlobalSchemaContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -195,7 +198,8 @@ interface WorkspaceGlobalSchemaOps
         @minLength(1)
         @maxLength(80)
         schemaId: string,
-      }
+      },
+      ResourceName = "ServiceWorkspaceSchema"
     > {}
 
 @armResourceOperations
@@ -241,23 +245,25 @@ interface WorkspaceGlobalSchema {
       @header("If-Match")
       `If-Match`?: string;
     },
-    Response = (ArmResponse<GlobalSchemaContract> &
-      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
-        /**
-         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-         */
-        @header("ETag")
-        eTag: string;
-      }) | (ArmResourceCreatedResponse<
-      GlobalSchemaContract,
-      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
-    > & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    })
+    Response =
+      | (ArmResponse<GlobalSchemaContract> &
+          ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+            /**
+             * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+             */
+            @header("ETag")
+            eTag: string;
+          })
+      | (ArmResourceCreatedResponse<
+          GlobalSchemaContract,
+          LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+        > & {
+          /**
+           * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+           */
+          @header("ETag")
+          eTag: string;
+        })
   >;
 
   /**
@@ -307,13 +313,16 @@ interface WorkspaceGlobalSchema {
 
 @@maxLength(GlobalSchemaContract.name, 80);
 @@minLength(GlobalSchemaContract.name, 1);
-@@doc(GlobalSchemaContract.name,
+@@doc(
+  GlobalSchemaContract.name,
   "Schema id identifier. Must be unique in the current API Management service instance."
 );
 @@doc(GlobalSchemaContract.properties, "Properties of the Global Schema.");
-@@doc(GlobalSchemaContracts.createOrUpdate::parameters.resource,
+@@doc(
+  GlobalSchemaContracts.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );
-@@doc(WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
+@@doc(
+  WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
   "Create or update parameters."
 );

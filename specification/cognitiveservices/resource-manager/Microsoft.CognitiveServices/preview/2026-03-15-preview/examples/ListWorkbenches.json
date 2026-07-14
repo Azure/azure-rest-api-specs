@@ -1,0 +1,43 @@
+{
+  "operationId": "Workbenches_List",
+  "title": "ListWorkbenches",
+  "parameters": {
+    "api-version": "2026-03-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "projectName": "myProject"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "targetClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCluster",
+              "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+              "idleTimeBeforeShutdown": "PT30M",
+              "datasetId": "dataset-12345",
+              "sshSettings": {
+                "sshPublicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQ...",
+                "adminEnabled": true
+              },
+              "connectivityEndpoints": {
+                "publicIpAddress": "20.42.51.100",
+                "sshPort": 50000
+              },
+              "webEndpoint": "https://myworkbench.eastus.api.azureml.ms",
+              "provisioningState": "Succeeded",
+              "errors": [],
+              "creationTime": "2026-03-24T12:00:00.000Z"
+            },
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
+            "name": "myWorkbench",
+            "type": "Microsoft.CognitiveServices/accounts/projects/workbenches"
+          }
+        ]
+      }
+    }
+  }
+}
