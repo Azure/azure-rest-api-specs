@@ -417,6 +417,12 @@ model IotDpsPropertiesDescription {
    * Portal endpoint to enable CORS for this provisioning service.
    */
   portalOperationsHostName?: string;
+
+  /**
+   * Disables all authentication methods other than Azure RBAC.
+   */
+  @added(Versions.v2026_08_01)
+  disableLocalAuth?: boolean = false;
 }
 
 /**
