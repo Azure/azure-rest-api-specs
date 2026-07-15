@@ -21,7 +21,7 @@ namespace Azure.AI.Projects;
 // ============================================================================
 
 const PromptVoiceAgentRequiredPreview = #{
-  required_previews: #[AgentDefinitionOptInKeys.prompt_voice_agents_v1_preview],
+  required_previews: #[AgentDefinitionOptInKeys.voice_agents_v1_preview],
 };
 
 @doc("""
