@@ -1,18 +1,15 @@
 # Skill-compliance eval CI: runs the per-skill Vally evals under .github/skills (one job per
 # skill), using the shared eval framework synced from azure-sdk-tools under eng/common. This is
 # the repo-local thin entrypoint; the framework itself (archetype/jobs/scripts) lives in
-# eng/common and is not repo-specific. The reusable cross-repo MCP build wiring (mcpSetupTemplate,
-# toolsRepo, TestType/threshold plumbing) lives in
+# eng/common and is not repo-specific. The reusable cross-repo MCP build wiring
+# (mcpSetupTemplate/TestType/threshold plumbing) lives in
 # /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml, extended below.
 #
-# The resources.repositories declaration for azure-sdk-tools (the source of the mock/live MCP
-# server) MUST live in this entry file, not in the extended template: Azure Pipelines resolves
-# `resources:` before it binds a template's `extends` parameters, so template expressions like
-# `${{ parameters.x }}` are rejected inside resources.repositories.name/ref/endpoint when they
-# come from an extends-invoked template (confirmed by a live "template expression is not allowed
-# in this context" pipeline-validation error). Any other repo reusing
-# cross-repo-eval-entrypoint.yml must likewise declare its own resources.repositories block here,
-# in its own entry pipeline.
+# No ADO GitHub service connection is required: the MCP build side-checks-out azure-sdk-tools via
+# /eng/pipelines/templates/steps/eval-mcp-setup.yml, which uses sparse-checkout.yml authenticated
+# with the azuresdk-copilot-github-pat secret (from the AzSDK_Eval_Variable_group below) -- the
+# same PAT-based pattern already used elsewhere in this repo (e.g.
+# eng/pipelines/swagger-api-doc-preview.yml) for cross-repo checkouts.
 #
 # Pilot scope: hermetic mock scenarios only, scheduled/manual runs (no `pr` trigger yet), per the
 # "begin with hermetic mock scenarios and scheduled/manual runs" acceptance criterion in
@@ -20,17 +17,6 @@
 
 trigger: none
 pr: none
-
-resources:
-  repositories:
-    - repository: azure-sdk-tools
-      type: github
-      name: Azure/azure-sdk-tools
-      ref: refs/heads/main
-      # BLOCKING UNKNOWN: placeholder. An ADO project admin needs to confirm or create a GitHub
-      # service connection authorized for Azure/azure-sdk-tools in this project and supply its
-      # name here before this pipeline can run.
-      endpoint: <TBD-github-service-connection>
 
 # Scheduled pilot run. Cadence is a placeholder (daily) pending confirmation.
 schedules:
@@ -51,8 +37,6 @@ variables:
 extends:
   template: /eng/pipelines/templates/stages/cross-repo-eval-entrypoint.yml
   parameters:
-    # Must match the `repository:` alias declared in the resources block above.
-    toolsRepo: azure-sdk-tools
     vallyRoot: .github/skills
     # Two patterns needed to cover every eval under <skill>/evals/: trigger suites are named
     # trigger.eval.yaml (matches */evals/*.eval.yaml); capability suites are named plainly

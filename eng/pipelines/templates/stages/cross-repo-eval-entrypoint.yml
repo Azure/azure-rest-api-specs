@@ -1,24 +1,26 @@
-# Reusable cross-repo eval entrypoint: wraps archetype-eval.yml's cross-repo MCP build
-# (toolsRepo) plumbing so any repo outside azure-sdk-tools that wants to run Vally evals against
-# the mock/live MCP server doesn't have to hand-roll its own `extends: archetype-eval.yml`
-# parameter wiring — only the values below need to differ per repo/run.
+# Reusable cross-repo eval entrypoint: wraps archetype-eval.yml's cross-repo MCP build plumbing
+# so any repo outside azure-sdk-tools that wants to run Vally evals against the mock/live MCP
+# server doesn't have to hand-roll its own `extends: archetype-eval.yml` parameter wiring — only
+# the values below need to differ per repo/run.
 # (This intentionally lives under eng/pipelines/, not eng/common/, since eng/common/** is synced
 # verbatim from azure-sdk-tools and would drop repo-local additions on the next sync.)
 #
-# NOTE: the resources.repositories declaration for the tools repo is deliberately NOT here.
-# Azure Pipelines resolves `resources:` before it binds a template's `extends` parameters, so
-# `${{ parameters.x }}` expressions are rejected inside resources.repositories.name/ref/endpoint
-# when the template is consumed via `extends` (confirmed by a live "template expression is not
-# allowed in this context" pipeline-validation error). Every consumer must declare its own
-# resources.repositories block (with a real, already-configured GitHub service connection) in its
-# own entry pipeline, and pass the matching `repository:` alias as the `toolsRepo` parameter below.
+# No ADO GitHub service connection is required: mcpSetupTemplate defaults to this repo's own
+# /eng/pipelines/templates/steps/eval-mcp-setup.yml, which side-checks-out azure-sdk-tools via
+# sparse-checkout.yml authenticated with the azuresdk-copilot-github-pat secret -- the same
+# PAT-based pattern already used elsewhere in this repo (e.g. swagger-api-doc-preview.yml,
+# archetype-spec-gen-sdk.yml) for cross-repo checkouts, instead of a resources.repositories +
+# service-connection endpoint. (An earlier version of this template tried to declare
+# resources.repositories here, parameterized via `${{ parameters.x }}`; that's rejected by Azure
+# Pipelines at pipeline-run time with "A template expression is not allowed in this context",
+# since `resources:` is resolved before a template's `extends` parameters are bound.)
 
 parameters:
-  - name: toolsRepo
-    # Alias of the `repository:` resource (declared by the consumer's entry pipeline) that
-    # supplies the mock/live MCP server source (azure-sdk-tools' azsdk-cli).
+  - name: mcpSetupTemplate
+    # Swap point for the MCP build step template; override if a consumer needs different
+    # checkout/build logic (e.g. a different auth mechanism or tools-repo ref).
     type: string
-    default: azure-sdk-tools
+    default: /eng/pipelines/templates/steps/eval-mcp-setup.yml
   - name: TestType
     type: string
     default: mock
@@ -41,11 +43,8 @@ extends:
   template: /eng/common/pipelines/templates/stages/archetype-eval.yml
   parameters:
     # Shared mock/live builder; TestType selects the tier it builds.
-    mcpSetupTemplate: /eng/common/pipelines/templates/steps/eval-mcp-setup.yml
+    mcpSetupTemplate: ${{ parameters.mcpSetupTemplate }}
     TestType: ${{ parameters.TestType }}
-    # Cross-repo MCP build: side-checkout via the repository resource declared by the consumer's
-    # entry pipeline (must match its alias).
-    toolsRepo: ${{ parameters.toolsRepo }}
     vallyRoot: ${{ parameters.vallyRoot }}
     evalGlobs: ${{ parameters.evalGlobs }}
     shardTimeoutInMinutes: ${{ parameters.shardTimeoutInMinutes }}

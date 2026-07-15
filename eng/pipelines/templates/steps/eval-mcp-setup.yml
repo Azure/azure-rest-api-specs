@@ -1,0 +1,51 @@
+# Repo-local override of the mcpSetupTemplate swap point (see
+# /eng/common/pipelines/templates/jobs/build-mcp.yml). Builds azure-sdk-tools' MCP server(s) so
+# this repo's Vally evals can exercise them, WITHOUT an ADO GitHub service connection: azure-sdk-tools
+# is side-checked-out via sparse-checkout.yml, authenticated with the azuresdk-copilot-github-pat
+# secret (already provided by the AzSDK_Eval_Variable_group variable group) -- the same PAT-based
+# pattern this repo already uses for other cross-repo checkouts, e.g.
+# /eng/pipelines/swagger-api-doc-preview.yml and archetype-spec-gen-sdk.yml. This sidesteps
+# eng/common/pipelines/templates/steps/eval-mcp-setup.yml's `checkout: <repository-resource>` +
+# resources.repositories + endpoint requirement entirely, so no ADO-admin action is needed.
+#
+# Only fetches the top-level files + /eng + /tools/azsdk-cli (sparse checkout) -- add to `Paths`
+# below if the MCP server build ever needs other azure-sdk-tools directories.
+
+parameters:
+  - name: TestType
+    type: string
+    default: mock
+    values:
+      - mock
+      - live
+  - name: toolsRepo
+    # Unused here (no repository-resource alias needed): kept only so this template accepts the
+    # same (TestType, toolsRepo) shape build-mcp.yml always forwards to mcpSetupTemplate.
+    type: string
+    default: ''
+
+steps:
+  - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
+    parameters:
+      SkipCheckoutNone: true
+      TokenToUseForAuth: $(azuresdk-copilot-github-pat)
+      Paths:
+        - '/tools/azsdk-cli'
+      Repositories:
+        - Name: Azure/azure-sdk-tools
+          Commitish: main
+          WorkingDirectory: azure-sdk-tools
+
+  - ${{ if eq(parameters.TestType, 'live') }}:
+    - script: |
+        set -e
+        dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Cli -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/cli" --nologo
+      displayName: 'Build MCP: Cli (live) server'
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools
+
+  - ${{ else }}:
+    - script: |
+        set -e
+        dotnet build tools/azsdk-cli/Azure.Sdk.Tools.Mock -c Release -o "$(Build.SourcesDirectory)/artifacts/mcp/mock" --nologo
+      displayName: 'Build MCP: Mock server'
+      workingDirectory: $(Build.SourcesDirectory)/azure-sdk-tools
