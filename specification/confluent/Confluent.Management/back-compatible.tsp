@@ -67,6 +67,19 @@ using Microsoft.Confluent;
   "!csharp"
 );
 
+// SaaS Operations
+@@clientLocation(OrganizationResources.linkSaaS, "Organization", "!csharp");
+@@clientLocation(
+  OrganizationResources.latestLinkedSaaS,
+  "Organization",
+  "!csharp"
+);
+@@clientLocation(
+  SaaSOperationGroup.activateResource,
+  "Organization",
+  "!csharp"
+);
+
 // ConnectorResources interface
 @@clientLocation(ConnectorResources.get, "Connector", "!csharp");
 @@clientLocation(ConnectorResources.createOrUpdate, "Connector", "!csharp");
