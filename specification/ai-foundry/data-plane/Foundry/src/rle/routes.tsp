@@ -18,7 +18,7 @@ alias RLEnvironmentPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeatu
  * version while preserving the environment identity. Sandboxes are leased
  * against an environment via the `RLESandboxes` interface.
  */
-@route("rl/environments")
+@route("fine_tune/environments")
 @tag("ReinforcementLearning")
 interface RLEnvironments {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a non-standard `create` collection action so a service-assigned id is returned without a client-supplied PUT."
@@ -134,7 +134,7 @@ interface RLEnvironments {
  * and `release` tears it down. These operations are served by the Foundry
  * project endpoint.
  */
-@route("rl/environments/{environmentId}/sandboxes")
+@route("fine_tune/environments/{environmentId}/sandboxes")
 @tag("ReinforcementLearning")
 interface RLESandboxes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Service exposes a `lease` collection action rather than a standard create."
