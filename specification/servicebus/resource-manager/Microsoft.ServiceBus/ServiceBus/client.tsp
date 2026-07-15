@@ -72,6 +72,7 @@ using Microsoft.ServiceBus;
 );
 @@clientName(NWRuleSetIpRules, "ServiceBusNetworkRuleSetIPRules", "csharp");
 @@clientName(IpAddressType, "ServiceBusIPAddressType", "csharp");
+@@clientName(SBNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NetworkRuleIPAction, "ServiceBusNetworkRuleIPAction", "csharp");
 @@clientName(
   NWRuleSetVirtualNetworkRules,
