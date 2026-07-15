@@ -850,7 +850,7 @@ model SearchServiceProperties {
    * The date and time the search service was last upgraded. This field will be null until the service gets upgraded for the first time.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  // NOTE: Verified utcDateTime matching the RP service model.
   serviceUpgradedAt?: utcDateTime;
 }
 

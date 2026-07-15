@@ -1,4 +1,4 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+// NOTE: Operations in this file are provider-level actions, intentionally not modeled as standard ARM resource operations.
 
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
