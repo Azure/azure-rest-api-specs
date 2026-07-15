@@ -216,6 +216,7 @@ model NetworkDeviceUpgradeRequest {
   @minLength(1)
   version: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URL to the file containing Read-write configuration to be applied on the device during upgrade.")
   rwDeviceConfigUrl?: url;
 }
@@ -242,6 +243,7 @@ model NetworkDeviceRwCommandResponseProperties {
   @visibility(Lifecycle.Read)
   configurationState?: ConfigurationState;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Predefined link containing Device Rw Command output.")
   outputUrl?: url;
 }
