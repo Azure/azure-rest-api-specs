@@ -2149,6 +2149,232 @@
           "nextLinkName": "@nextLink",
           "itemName": "items"
         }
+      },
+      "head": {
+        "operationId": "CheckSchemas",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "After",
+            "in": "query",
+            "description": "Instructs the server to return elements that appear after the element referred\nto by the specified token.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "after"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "description",
+                "type",
+                "status",
+                "target",
+                "key_scope",
+                "key_label_scope",
+                "tags",
+                "json_schema",
+                "last_modified",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "description",
+                    "value": "description",
+                    "description": "Description field."
+                  },
+                  {
+                    "name": "type",
+                    "value": "type",
+                    "description": "Type field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "target",
+                    "value": "target",
+                    "description": "Target field."
+                  },
+                  {
+                    "name": "keyScope",
+                    "value": "key_scope",
+                    "description": "Key scope field."
+                  },
+                  {
+                    "name": "keyLabelScope",
+                    "value": "key_label_scope",
+                    "description": "Key label scope field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "jsonSchema",
+                    "value": "json_schema",
+                    "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "A filter for the name of the returned schemas.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "A filter for the status of the returned schemas.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "enabled",
+              "disabled"
+            ],
+            "x-ms-enum": {
+              "name": "SchemaStatus",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "enabled",
+                  "value": "enabled",
+                  "description": "Enabled"
+                },
+                {
+                  "name": "disabled",
+                  "value": "disabled",
+                  "description": "Disabled"
+                }
+              ]
+            }
+          },
+          {
+            "name": "builtIn",
+            "in": "query",
+            "description": "Set to 'true' to return built-in schemas.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "description": "When set to 'kv', resolves the effective schema for a key/label.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "The key to use when resolving the effective schema (required when target=kv).",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "label",
+            "in": "query",
+            "description": "The label to use when resolving the effective schema (optional when target=kv).",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "query",
+            "description": "A filter used to query by tags.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckSchemas.json"
+          }
+        }
       }
     },
     "/schemas/{schemaName}": {
@@ -2497,6 +2723,163 @@
           },
           "Deletes a schema.": {
             "$ref": "./examples/DeleteSchema.json"
+          }
+        }
+      },
+      "head": {
+        "operationId": "CheckSchema",
+        "summary": "Requests the headers and status of the given resource.",
+        "description": "Requests the headers and status of the given resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "schemaName",
+            "in": "path",
+            "description": "The name of the schema to check.",
+            "required": true,
+            "type": "string",
+            "maxLength": 256
+          },
+          {
+            "name": "Sync-Token",
+            "in": "header",
+            "description": "Used to guarantee real-time consistency between requests.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "syncToken"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag matches the\nvalue provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Used to perform an operation only if the targeted resource's etag does not\nmatch the value provided.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
+          },
+          {
+            "name": "$Select",
+            "in": "query",
+            "description": "Used to select what fields are present in the returned resource(s).",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "name",
+                "description",
+                "type",
+                "status",
+                "target",
+                "key_scope",
+                "key_label_scope",
+                "tags",
+                "json_schema",
+                "last_modified",
+                "etag"
+              ],
+              "x-ms-enum": {
+                "name": "SchemaFields",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "name": "name",
+                    "value": "name",
+                    "description": "Name field."
+                  },
+                  {
+                    "name": "description",
+                    "value": "description",
+                    "description": "Description field."
+                  },
+                  {
+                    "name": "type",
+                    "value": "type",
+                    "description": "Type field."
+                  },
+                  {
+                    "name": "status",
+                    "value": "status",
+                    "description": "Status field."
+                  },
+                  {
+                    "name": "target",
+                    "value": "target",
+                    "description": "Target field."
+                  },
+                  {
+                    "name": "keyScope",
+                    "value": "key_scope",
+                    "description": "Key scope field."
+                  },
+                  {
+                    "name": "keyLabelScope",
+                    "value": "key_label_scope",
+                    "description": "Key label scope field."
+                  },
+                  {
+                    "name": "tags",
+                    "value": "tags",
+                    "description": "Tags field."
+                  },
+                  {
+                    "name": "jsonSchema",
+                    "value": "json_schema",
+                    "description": "JSON schema field."
+                  },
+                  {
+                    "name": "lastModified",
+                    "value": "last_modified",
+                    "description": "Last modified field."
+                  },
+                  {
+                    "name": "etag",
+                    "value": "etag",
+                    "description": "Etag field."
+                  }
+                ]
+              }
+            },
+            "collectionFormat": "csv",
+            "x-ms-client-name": "select"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "A value representing the current state of the resource."
+              },
+              "Sync-Token": {
+                "type": "string",
+                "description": "Used to guarantee real-time consistency between requests."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Requests the headers and status of the given resource.": {
+            "$ref": "./examples/CheckSchema.json"
           }
         }
       }

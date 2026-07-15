@@ -513,6 +513,17 @@ op getSchemas is Foundations.ResourceList<
   Error
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
+@summary("Requests the headers and status of the given resource.")
+@doc("Requests the headers and status of the given resource.")
+@route("/schemas")
+@head
+@added(Versions.v2026_08_01_preview)
+op checkSchemas is AppConfigOperation<
+  SchemasRequestParams,
+  OkResponse & SyncTokenHeader
+>;
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @summary("Gets a single schema.")
 @doc("Gets a single schema.")
@@ -530,6 +541,23 @@ op getSchema is AppConfigOperation<
   Body<Schema> &
     AppConfigResponseHeaders &
     ContentTypeHeader<"application/json">
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "No data-plane HEAD operation template"
+@summary("Requests the headers and status of the given resource.")
+@doc("Requests the headers and status of the given resource.")
+@route("/schemas/{schemaName}")
+@head
+@added(Versions.v2026_08_01_preview)
+op checkSchema is AppConfigOperation<
+  {
+    ...SchemaNamePathParam<"The name of the schema to check.">;
+    ...SyncTokenHeader;
+    ...IfMatchHeader;
+    ...IfNoneMatchHeader;
+    ...SelectQueryParam<SchemaFields>;
+  },
+  OkResponse & AppConfigResponseHeaders
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
