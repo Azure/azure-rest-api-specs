@@ -30,4 +30,9 @@ extends:
         name: $(LINUXPOOL)
         image: $(LINUXVMIMAGE)
         os: linux
+      # Guardian's AntiMalware (Windows Defender) scanner has no Linux config
+      # (ConfigurationPathNotFoundException: antimalware-linux) -- our sourceAnalysisPool is Linux-only,
+      # so this scan can never run here. Disable it explicitly rather than letting 1ES try and fail.
+      antimalwareScan:
+        enabled: false
     stages: ${{ parameters.stages }}
