@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "searchServiceName": "leadersearch",
+    "resourceGroupName": "rg1",
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "servconn1",
+            "type": "Microsoft.Search/searchServices/linkedServices",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/leadersearch/linkedServices/servconn1",
+            "properties": {
+              "followerServiceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg2/providers/Microsoft.Search/searchServices/followersearch",
+              "followerServiceLocation": "centralus",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LinkedServices_ListByService",
+  "title": "ListLinkedServicesByService"
+}
