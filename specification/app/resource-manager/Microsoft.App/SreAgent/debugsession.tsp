@@ -19,8 +19,8 @@ namespace Microsoft.App;
  * `/subscriptions/{subscriptionId}`; it is not tied to a single ARM resource
  * instance, so RBAC is evaluated at the subscription scope.
  */
-@added(Versions.v2026_06_01_preview)
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface groups a subscription-level provider action (startDebugSession) that is not tied to a single ARM resource type."
+@added(Versions.v2026_06_01_preview)
 interface DebugSessionOperations {
   /**
    * Start a debug session for a set of resources across the participating
