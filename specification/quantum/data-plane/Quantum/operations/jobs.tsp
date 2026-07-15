@@ -7,6 +7,7 @@ import "./operations.tsp";
 import "../common/models.tsp";
 import "../common/models-jobs.tsp";
 
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Quantum.Workspace;
@@ -21,6 +22,7 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
+    @sharedRoute
     @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
     update is PatchOperation<JobUpdateOptions>;
 
@@ -30,6 +32,7 @@ namespace Quantum.Workspace.Services {
       The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
       See https://github.com/Azure/typespec-azure/issues/475
       """
+    @sharedRoute
     @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
     @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
     updateOld is PatchOperationOld<JobDetails>;
