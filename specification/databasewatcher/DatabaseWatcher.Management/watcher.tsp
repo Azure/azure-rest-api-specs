@@ -98,6 +98,7 @@ model Datastore {
   @doc("The name of a Kusto database.")
   kustoDatabaseName: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Kusto management URL.")
   kustoManagementUrl: string;
 

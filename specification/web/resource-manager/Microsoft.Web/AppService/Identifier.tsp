@@ -51,7 +51,8 @@ interface IdentifierOps
         @segment("domainOwnershipIdentifiers")
         @key
         domainOwnershipIdentifierName: string,
-      }
+      },
+      ResourceName = "SiteDomainOwnershipIdentifier"
     > {}
 
 @tag("WebApps")
@@ -135,7 +136,8 @@ interface IdentifierOperationGroupOps
         @segment("domainOwnershipIdentifiers")
         @key
         domainOwnershipIdentifierName: string,
-      }
+      },
+      ResourceName = "SiteSlotDomainOwnershipIdentifier"
     > {}
 
 @tag("WebApps")

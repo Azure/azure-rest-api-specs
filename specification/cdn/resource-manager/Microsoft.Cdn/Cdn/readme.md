@@ -62,6 +62,44 @@ suppressions:
     reason: These errors are from the previous API versions
 ```
 
+### Tag: package-preview-2026-04
+
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04'
+input-file:
+  - preview/2026-04-01-preview/openapi.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: This is the API design and therefore exempted
+  - code: ProvisioningStateMustBeReadOnly
+    reason: These errors are from the previous API versions
+  - code: PutResponseCodes
+    reason: These errors are from the previous API versions
+  - code: PostResponseCodes
+    reason: These errors are from the previous API versions
+  - code: DeleteResponseCodes
+    reason: These errors are from the previous API versions
+  - code: PatchResponseCodes
+    reason: These errors are from the previous API versions
+  - code: ResourceNameRestriction
+    reason: These errors are from the previous API versions
+  - code: RepeatedPathInfo
+    reason: These errors are from the previous API versions
+  - code: OperationsApiSchemaUsesCommonTypes
+    reason: These errors are from the previous API versions
+  - code: LroLocationHeader
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}"].delete
+  - code: ArmResourcePropertiesBag
+    reason: This is the API design and therefore exempted
+    where: $.definitions.KnowledgeSource
+  - code: ConsistentPatchProperties
+    reason: This is the API design and therefore exempted
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
+```
+
 ### Tag: package-preview-2025-09
 
 These settings apply only when `--tag=package-preview-2025-09` is specified on the command line.

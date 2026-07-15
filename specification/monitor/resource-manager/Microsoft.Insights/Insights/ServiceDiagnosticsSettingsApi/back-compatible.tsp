@@ -8,23 +8,11 @@ using ServiceDiagnosticsSettingsApi;
 
 @@clientLocation(
   ServiceDiagnosticSettingsResources.get,
-  "ServiceDiagnosticSettings",
-  "!javascript"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.get,
-  "DiagnosticSettings",
-  "javascript"
+  "ServiceDiagnosticSettings"
 );
 @@clientLocation(
   ServiceDiagnosticSettingsResources.createOrUpdate,
-  "ServiceDiagnosticSettings",
-  "!javascript"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.createOrUpdate,
-  "DiagnosticSettings",
-  "javascript"
+  "ServiceDiagnosticSettings"
 );
 @@clientName(
   ServiceDiagnosticSettingsResources.createOrUpdate::parameters.resource,
@@ -32,13 +20,7 @@ using ServiceDiagnosticsSettingsApi;
 );
 @@clientLocation(
   ServiceDiagnosticSettingsResources.update,
-  "ServiceDiagnosticSettings",
-  "!javascript"
-);
-@@clientLocation(
-  ServiceDiagnosticSettingsResources.update,
-  "DiagnosticSettings",
-  "javascript"
+  "ServiceDiagnosticSettings"
 );
 @@clientName(
   ServiceDiagnosticSettingsResources.update::parameters.properties,

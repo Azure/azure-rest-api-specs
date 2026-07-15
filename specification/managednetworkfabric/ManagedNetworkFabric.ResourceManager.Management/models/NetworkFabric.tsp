@@ -628,6 +628,7 @@ model FeatureFlagProperties {
 @doc("Arm Configuration Diff Response.")
 @added(Versions.v2024_06_15_preview)
 model ArmConfigurationDiffResponse extends CommonErrorResponse {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the diff file.")
   configurationDiffUrl?: string;
 }
@@ -643,6 +644,7 @@ model ArmConfigurationDiffOperationResponse {
 
 @doc("Arm Configuration Diff Response Properties.")
 model ArmConfigurationDiffResponseProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the diff file.")
   configurationDiffUrl?: string;
 }
@@ -651,6 +653,7 @@ model ArmConfigurationDiffResponseProperties {
 @doc("View Device Configuration Response.")
 @added(Versions.v2024_06_15_preview)
 model ViewDeviceConfigurationResponse extends CommonErrorResponse {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the device configuration file.")
   deviceConfigurationUrl?: string;
 }
@@ -666,6 +669,7 @@ model ViewDeviceConfigurationOperationResponse {
 
 @doc("View Device Configuration Response Properties.")
 model ViewDeviceConfigurationResponseProperties {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Storage URL to the device configuration file.")
   deviceConfigurationUrl?: string;
 }
