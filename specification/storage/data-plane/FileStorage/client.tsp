@@ -469,6 +469,7 @@ model FileClientParameters {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
   allowSourceTrailingDot?: boolean;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   fileRangeWriteFromUrl: FileRangeWriteFromUrlType;
 }
 

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -66,3 +67,6 @@ interface triggeredAnalyticsRuleRun {
   TriggeredAnalyticsRuleRun.properties,
   "The triggered analytics rule run Properties"
 );
+
+@@added(TriggeredAnalyticsRuleRun, Versions.v2025_10_01_preview);
+@@added(triggeredAnalyticsRuleRun, Versions.v2025_10_01_preview);
