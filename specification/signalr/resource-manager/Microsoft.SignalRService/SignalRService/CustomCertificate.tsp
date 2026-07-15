@@ -15,8 +15,10 @@ namespace Microsoft.SignalRService;
  * A custom certificate.
  */
 @parentResource(SignalRResource)
-model CustomCertificate
-  is Azure.ResourceManager.ProxyResource<CustomCertificateProperties, false> {
+model CustomCertificate is Azure.ResourceManager.ProxyResource<
+  CustomCertificateProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CustomCertificate,
     KeyName = "certificateName",

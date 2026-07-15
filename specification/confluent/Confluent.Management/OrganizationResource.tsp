@@ -13,11 +13,10 @@ namespace Microsoft.Confluent;
 /**
  * Organization resource.
  */
-model OrganizationResource
-  is Azure.ResourceManager.TrackedResource<
-    OrganizationResourceProperties,
-    false
-  > {
+model OrganizationResource is Azure.ResourceManager.TrackedResource<
+  OrganizationResourceProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = OrganizationResource,
     KeyName = "organizationName",
