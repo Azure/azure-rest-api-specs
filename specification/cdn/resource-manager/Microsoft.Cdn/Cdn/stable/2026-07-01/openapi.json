@@ -6525,6 +6525,9 @@
           "AFDOrigins_Create_CustomCertificateSubject": {
             "$ref": "./examples/AFDOrigins_Create_CustomCertificateSubject.json"
           },
+          "AFDOrigins_Create_IncomingHostHeaderValidation": {
+            "$ref": "./examples/AFDOrigins_CreateWithIncomingHostHeaderValidation.json"
+          },
           "AFDOrigins_Create_OriginHostname": {
             "$ref": "./examples/AFDOrigins_Create_OriginHostname.json"
           }
@@ -9842,7 +9845,8 @@
       "description": "The validation mode for certificate name check at origin level. Only applicable when enforceCertificateNameCheck is true.",
       "enum": [
         "OriginHostname",
-        "CustomCertificateSubject"
+        "CustomCertificateSubject",
+        "IncomingHostHeader"
       ],
       "x-ms-enum": {
         "name": "CertificateNameCheckValidationMode",
@@ -9857,6 +9861,11 @@
             "name": "CustomCertificateSubject",
             "value": "CustomCertificateSubject",
             "description": "Validate the certificate against custom certificate subjects."
+          },
+          {
+            "name": "IncomingHostHeader",
+            "value": "IncomingHostHeader",
+            "description": "Validate the certificate against the incoming host header."
           }
         ]
       }

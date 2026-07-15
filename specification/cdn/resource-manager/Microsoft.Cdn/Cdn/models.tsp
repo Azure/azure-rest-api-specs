@@ -415,6 +415,9 @@ union CertificateNameCheckValidationMode {
 
   /** Validate the certificate against custom certificate subjects. */
   CustomCertificateSubject: "CustomCertificateSubject",
+
+  /** Validate the certificate against the incoming host header. */
+  IncomingHostHeader: "IncomingHostHeader",
 }
 
 /**
