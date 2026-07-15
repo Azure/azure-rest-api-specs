@@ -152,6 +152,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkCreate: Execute create operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @removed(Versions.`2026-06-06`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -169,6 +170,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkVdiFlexCreate: Bulk create  operation for a batch of virtual machines, this operation supports flex properties to give options on Sku and zone selection. */
   @removed(Versions.`2026-06-06`)
+  @added(Microsoft.Compute.Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -234,6 +236,7 @@ interface VirtualMachineBulkOperations {
 
   /** BulkReimage: Execute reimage operation for a batch of virtual machines, this operation is triggered as soon as Computeschedule receives it. */
   @removed(Versions.`2026-06-06`)
+  @added(Versions.`2026-07-06-preview`)
   @post
   @autoRoute
   @armResourceCollectionAction
@@ -248,4 +251,38 @@ interface VirtualMachineBulkOperations {
     @body
     body: ExecuteReimageRequest,
   ): ArmResponse<ReimageResourceOperationResponse> | ErrorResponse;
+
+  /** BulkListOperationErrors: List bulk operation errors for a resource group */
+  @added(Versions.`2026-07-06-preview`)
+  @get
+  @autoRoute
+  @list
+  @action("listBulkOperationErrors")
+  bulkListOperationErrors(
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
+    ...LocationParameter,
+
+    @query("lookbackInMinutes")
+    @doc("The number of minutes to look back for errors.")
+    lookbackInMinutes?: int32,
+  ): ArmResponse<ListBulkOperationErrorsResponse> | ErrorResponse;
+
+  /** BulkAcknowledgeOperationErrors: Acknowledge bulk operation errors for a resource group */
+  @added(Versions.`2026-07-06-preview`)
+  @post
+  @autoRoute
+  @armResourceCollectionAction
+  @action("acknowledgeBulkOperationErrors")
+  bulkAcknowledgeOperationErrors(
+    ...Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension.ResourceGroup>,
+    ...Extension.ResourceGroup,
+    ...ProviderNamespace<Extension.ResourceGroup>,
+    ...LocationParameter,
+
+    @body
+    @doc("The list of operation ids to acknowledge")
+    body: AcknowledgeBulkOperationErrorsRequest,
+  ): ArmResponse<AcknowledgeBulkOperationErrorsResponse> | ErrorResponse;
 }
