@@ -18,11 +18,11 @@ namespace Microsoft.Search;
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   user: "user",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   system: "system",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   `user,system`: "user,system",
 }
 
@@ -31,7 +31,7 @@ union Origin {
  */
 union ActionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Internal: "Internal",
 }
 
@@ -214,13 +214,13 @@ union PrivateLinkServiceConnectionProvisioningState {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Key: "Key",
 }
 
@@ -254,7 +254,7 @@ union SharedPrivateLinkResourceStatus {
 /**
  * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Pre-existing API contract: fixed provisioning-state values."
 union SharedPrivateLinkResourceProvisioningState {
   string,
 
@@ -425,9 +425,9 @@ union IssueType {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Error: "Error",
 }
 
@@ -436,16 +436,16 @@ union Severity {
  */
 union SharedPrivateLinkResourceAsyncOperationResult {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive value."
   Failed: "Failed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Self-descriptive values."
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum AdminKeyKind {
   /**
    * The primary API key for the search service.
@@ -461,7 +461,7 @@ enum AdminKeyKind {
 /**
  * Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed for any other SKU. For the standard3 SKU, the value is either 'Default' or 'HighDensity'. For all other SKUs, this value must be 'Default'.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum HostingMode {
   /**
    * The maximum limit of indexes is determined by the SKU or pricing tier.
@@ -477,7 +477,7 @@ enum HostingMode {
 /**
  * The status of the search service. Possible values include: 'running': The search service is running and no provisioning operations are underway. 'provisioning': The search service is being provisioned or scaled up or down. 'deleting': The search service is being deleted. 'degraded': The search service is degraded. This can occur when the underlying search units are not healthy. The search service is most likely operational, but performance might be slow and some requests might be dropped. 'disabled': The search service is disabled. In this state, the service will reject all API requests. 'error': The search service is in an error state. 'stopped': The search service is in a subscription that's disabled. If your service is in the degraded, disabled, or error states, it means the Azure AI Search team is actively investigating the underlying issue. Dedicated services in these states are still chargeable based on the number of search units provisioned.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum SearchServiceStatus {
   /**
    * The search service is running and no provisioning operations are underway.
@@ -518,8 +518,8 @@ enum SearchServiceStatus {
 /**
  * The state of the last provisioning operation performed on the search service. Provisioning is an intermediate state that occurs while service capacity is being established. After capacity is set up, provisioningState changes to either 'Succeeded' or 'Failed'. Client applications can poll provisioning status (the recommended polling interval is from 30 seconds to one minute) by using the Get Search Service operation to see when an operation is completed. If you are using the free service, this value tends to come back as 'Succeeded' directly in the call to Create search service. This is because the free service uses capacity that is already set up.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Pre-existing API contract: fixed provisioning-state values."
 enum ProvisioningState {
   /**
    * The last provisioning operation has completed successfully.
@@ -540,7 +540,7 @@ enum ProvisioningState {
 /**
  * Describes how a search service should enforce compliance if it finds objects that aren't encrypted with the customer-managed key.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum SearchEncryptionWithCmk {
   /**
    * No enforcement of customer-managed key encryption will be made. Only the built-in service-managed encryption is used.
@@ -561,7 +561,7 @@ enum SearchEncryptionWithCmk {
 /**
  * Returns the status of search service compliance with respect to non-CMK-encrypted objects. If a service has more than one unencrypted object, and enforcement is enabled, the service is marked as noncompliant.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum SearchEncryptionComplianceStatus {
   /**
    * Indicates that the search service is compliant, either because the number of non-CMK-encrypted objects is zero or enforcement is disabled.
@@ -577,7 +577,7 @@ enum SearchEncryptionComplianceStatus {
 /**
  * Describes what response the data plane API of a search service would send for requests that failed authentication.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum AadAuthFailureMode {
   /**
    * Indicates that requests that failed authentication should be presented with an HTTP status code of 403 (Forbidden).
@@ -593,7 +593,7 @@ enum AadAuthFailureMode {
 /**
  * Status of the the private link service connection. Valid values are Pending, Approved, Rejected, or Disconnected.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Pre-existing API contract: fixed, non-extensible value set."
 enum PrivateLinkServiceConnectionStatus {
   /**
    * The private endpoint connection has been created and is pending approval.
@@ -619,7 +619,7 @@ enum PrivateLinkServiceConnectionStatus {
 /**
  * Contains information about an API error.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -637,7 +637,7 @@ model CloudError {
 /**
  * Describes a particular API error with an error code and a message.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudErrorBody {
   /**
@@ -658,7 +658,7 @@ model CloudErrorBody {
   /**
    * Contains nested errors that are related to this error.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No unique identifier on array items."
   details?: CloudErrorBody[];
 }
 
@@ -669,14 +669,14 @@ model AdminKeyResult {
   /**
    * The primary admin API key of the search service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing API contract: read-only response key."
   @visibility(Lifecycle.Read)
   primaryKey?: string;
 
   /**
    * The secondary admin API key of the search service.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing API contract: read-only response key."
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
 }
@@ -694,7 +694,7 @@ model QueryKey {
   /**
    * The value of the query API key.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Pre-existing API contract: read-only response key."
   @visibility(Lifecycle.Read)
   key?: string;
 }
@@ -702,7 +702,7 @@ model QueryKey {
 /**
  * Response containing the query API keys for a given Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model ListQueryKeysResult {
   /**
@@ -794,7 +794,7 @@ model SearchServiceProperties {
   /**
    * When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes unconfigured value."
   disableLocalAuth?: boolean | null;
 
   /**
@@ -805,13 +805,13 @@ model SearchServiceProperties {
   /**
    * Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes unset plan."
   semanticSearch?: SearchSemanticSearch | null;
 
   /**
    * Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes unset plan."
   @added(Versions.v2026_03_01_preview)
   knowledgeRetrieval?: KnowledgeRetrieval | null;
 
@@ -861,7 +861,7 @@ model NetworkRuleSet {
   /**
    * A list of IP restriction rules that defines the inbound network(s) with allowing access to the search service endpoint. At the meantime, all other public IP networks are blocked by the firewall. These restriction rules are applied only when the 'publicNetworkAccess' of the search service is 'enabled'; otherwise, traffic over public interface is not allowed even with any public IP rules, and private endpoint connections would be the exclusive access method.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "No unique identifier; matched by value."
   ipRules?: IpRule[];
 
   /**
@@ -1004,7 +1004,7 @@ model DataPlaneAuthOptions {
   /**
    * Indicates that only the API key can be used for authentication.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "Pre-existing API contract: empty object flag."
   apiKeyOnly?: unknown;
 
   /**
@@ -1045,7 +1045,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * The provisioning state of the private link service connection. Valid values are Updating, Deleting, Failed, Succeeded, Incomplete, or Canceled.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Pre-existing API contract: fixed provisioning-state values."
   provisioningState?: PrivateLinkServiceConnectionProvisioningState;
 }
 
@@ -1101,7 +1101,7 @@ model SharedPrivateLinkResourceProperties {
   /**
    * Optional. Can be used to specify the Azure Resource Manager location of the resource for which a shared private link is being created. This is only required for those resources whose DNS configuration are regional (such as Azure Kubernetes Service).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @OpenAPI.externalDocs(
     "https://docs.microsoft.com/azure/private-link/private-endpoint-dns",
     "List of all Azure resources which have a regional DNS configuration requirement can be found here."
@@ -1116,14 +1116,14 @@ model SharedPrivateLinkResourceProperties {
   /**
    * The provisioning state of the shared private link resource. Valid values are Updating, Deleting, Failed, Succeeded or Incomplete.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Pre-existing API contract: fixed provisioning-state values."
   provisioningState?: SharedPrivateLinkResourceProvisioningState;
 }
 
 /**
  * Defines the SKU of a search service, which determines billing rate and capacity limits.
  */
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
 @OpenAPI.externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
 model Sku {
   /**
@@ -1156,32 +1156,32 @@ model Identity {
   /**
    * The list of user identities associated with the resource. The user identity dictionary key references will be ARM resource IDs in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Pre-existing API contract: map keyed by ARM resource ID."
   userAssignedIdentities?: Record<UserAssignedIdentity>;
 }
 
 /**
  * The parameters used to update an Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Pre-existing API contract: preserves base resource schema."
 model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Properties of the search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Pre-existing API contract: reuses shared properties model."
   properties?: SearchServiceProperties;
 
   /**
    * The SKU of the search service, which determines price tier and capacity limits. This property is required when creating a new search service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @OpenAPI.externalDocs("https://azure.microsoft.com/documentation/articles/search-sku-tier/")
   sku?: Sku;
 
   /**
    * The geographic location of the resource. This must be one of the supported and registered Azure geo regions (for example, West US, East US, Southeast Asia, and so forth). This property is required when creating a new resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @OpenAPI.externalDocs("https://aka.ms/search-rp-info")
   location?: string;
@@ -1189,7 +1189,7 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Tags to help categorize the resource in the Azure portal.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Pre-existing API contract: string tag map."
   tags?: Record<string>;
 
   /**
@@ -1201,7 +1201,7 @@ model SearchServiceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
 /**
  * Response containing a list of supported Private Link Resources.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model PrivateLinkResourcesResult {
   /**
@@ -1221,7 +1221,7 @@ model PrivateLinkResourcesResult {
 /**
  * Describes a supported private link resource for the Azure AI Search service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Pre-existing API contract: preserves base resource schema."
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
   /**
    * Describes the properties of a supported private link resource for the Azure AI Search service.
@@ -1340,7 +1340,7 @@ model CheckNameAvailabilityOutput {
 /**
  * Response containing the quota usage information for all the supported SKUs of Azure AI Search.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model QuotaUsagesListResult {
   /**
@@ -1435,7 +1435,7 @@ model OperationListResult {
 /**
  * Response containing a list of private endpoint connections.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model PrivateEndpointConnectionListResult {
   /**
@@ -1455,7 +1455,7 @@ model PrivateEndpointConnectionListResult {
 /**
  * Response containing a list of Azure AI Search services.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model SearchServiceListResult {
   /**
@@ -1475,7 +1475,7 @@ model SearchServiceListResult {
 /**
  * Response containing a list of shared private link resources.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @Azure.ResourceManager.Legacy.armExternalType
 model SharedPrivateLinkResourceListResult {
   /**
@@ -1495,7 +1495,7 @@ model SharedPrivateLinkResourceListResult {
 /**
  * Response containing the list of offerings available in Azure AI Search, organized by region.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Pre-existing API contract: legacy external type schema."
 @added(Versions.v2026_03_01_preview)
 @removed(Versions.v2026_09_01_preview)
 @Azure.ResourceManager.Legacy.armExternalType

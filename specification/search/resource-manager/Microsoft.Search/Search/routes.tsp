@@ -15,12 +15,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Search;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
 interface ServicesOperationGroup {
   /**
    * Checks whether or not the given search service name is available for use. Search service names must be globally unique since they are part of the service URI (https://<name>.search.windows.net).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @externalDocs("https://aka.ms/search-manage")
   @autoRoute
   @tag("Services")
@@ -32,7 +32,7 @@ interface ServicesOperationGroup {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -46,12 +46,12 @@ interface ServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
 interface UsagesOperationGroup {
   /**
    * Get a list of all Azure AI Search quota usages across the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
   @autoRoute
   @get
   @action("usages")
@@ -66,7 +66,7 @@ interface UsagesOperationGroup {
       /**
        * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
        */
-      #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
       @OpenAPI.extension(
@@ -85,9 +85,9 @@ interface UsagesOperationGroup {
 /**
  * Gets the quota usage for a search SKU in the given subscription.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Pre-existing API contract: provider-level action."
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
 @externalDocs("https://aka.ms/search-manage")
@@ -98,7 +98,7 @@ op usageBySubscriptionSku(
   /**
    * A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
   @format("uuid")
   @header("x-ms-client-request-id")
   @OpenAPI.extension(
@@ -122,7 +122,7 @@ op usageBySubscriptionSku(
  * Offerings API operations
  * Released in 2025-02-01-preview and added back to TypeSpec as the migration is based on 2025-05-01 and does not include it.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
 @added(Versions.v2026_03_01_preview)
 interface Offerings {
   /**
