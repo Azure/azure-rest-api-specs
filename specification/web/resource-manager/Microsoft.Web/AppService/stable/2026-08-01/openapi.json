@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "WebApps API Client",
-    "version": "2026-06-01",
+    "version": "2026-08-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -6753,6 +6753,84 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {}
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/startSites": {
+      "post": {
+        "operationId": "AppServicePlans_StartWebApps",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Start all apps in an App Service plan.",
+        "description": "Description for Start all apps in an App Service plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/stopSites": {
+      "post": {
+        "operationId": "AppServicePlans_StopWebApps",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Stop all apps in an App Service plan.",
+        "description": "Description for Stop all apps in an App Service plan.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -50788,6 +50866,7 @@
         "java",
         "powershell",
         "python",
+        "go",
         "custom"
       ],
       "x-ms-enum": {
@@ -50813,6 +50892,10 @@
           {
             "name": "python",
             "value": "python"
+          },
+          {
+            "name": "go",
+            "value": "go"
           },
           {
             "name": "custom",
@@ -53087,6 +53170,10 @@
         "platformReleaseChannel": {
           "$ref": "#/definitions/PlatformReleaseChannel",
           "description": "The platform release channel for the site. Latest receives updates earliest, followed by Standard, then Extended."
+        },
+        "maintenanceEnabled": {
+          "type": "boolean",
+          "description": "<code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>."
         }
       }
     },

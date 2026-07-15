@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Managed traffic configuration singleton resource.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @singleton("default")
 @parentResource(Site)
 model ManagedTrafficConfigResource
@@ -31,7 +31,7 @@ model ManagedTrafficConfigResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "ManagedTrafficConfig does not support delete."
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface ManagedTrafficConfigResources {

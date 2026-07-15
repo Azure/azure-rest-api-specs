@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * Last known good singleton resource.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @singleton("default")
 @parentResource(Site)
 model LastKnownGoodResource
@@ -30,7 +30,7 @@ model LastKnownGoodResource
   >;
 }
 
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface LastKnownGoodResources {

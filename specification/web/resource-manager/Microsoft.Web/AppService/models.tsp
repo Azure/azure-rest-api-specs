@@ -16509,7 +16509,7 @@ model StaticSitesOperationStatus {
 /**
  * Defines provisioning states for silo resources.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 union SiloProvisioningState {
   string,
 
@@ -16542,7 +16542,7 @@ union SiloProvisioningState {
 /**
  * Traffic routing mode for silo failover.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 union SiloFailOverMode {
   string,
 
@@ -16565,7 +16565,7 @@ union SiloFailOverMode {
 /**
  * Networking override configuration for a site silo.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model SiloNetworkingOverride {
   /**
    * Virtual network subnet resource ID override for the silo.
@@ -16576,7 +16576,7 @@ model SiloNetworkingOverride {
 /**
  * Represents traffic configuration for a single endpoint (region).
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model EndpointTrafficConfig {
   /**
    * Normalized Azure region name (for example, eastus, westus).
@@ -16606,7 +16606,7 @@ model EndpointTrafficConfig {
 /**
  * Site silo resource specific properties.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model SiteSiloProperties {
   /**
    * ARM location of the site silo.
@@ -16744,7 +16744,7 @@ model SiteSiloProperties {
 /**
  * App Service plan silo resource specific properties.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model ServerFarmSiloProperties {
   /**
    * ARM location of the App Service plan silo.
@@ -16794,7 +16794,7 @@ model ServerFarmSiloProperties {
  * Managed traffic configuration resource specific properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ManagedTrafficConfig is a synchronous singleton configuration resource updated via a non-LRO PUT; the service does not surface a provisioning state for it."
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model ManagedTrafficConfigProperties {
   /**
    * Traffic routing mode: Active (weighted) or Passive (priority-based failover).
@@ -16812,7 +16812,7 @@ model ManagedTrafficConfigProperties {
  * Last known good resource specific properties.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "LastKnownGood is a read-only marker resource read synchronously; the service does not surface a provisioning state for it."
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model LastKnownGoodProperties {
   /**
    * Name of the primary site.
@@ -16830,24 +16830,24 @@ model LastKnownGoodProperties {
 /**
  * Collection of site silos.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model SiteSiloCollection is Azure.Core.Page<SiteSilo>;
 
 /**
  * Collection of App Service plan silos.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model ServerFarmSiloCollection is Azure.Core.Page<ServerFarmSilo>;
 
 /**
  * Collection of managed traffic configurations.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model ManagedTrafficConfigCollection
   is Azure.Core.Page<ManagedTrafficConfigResource>;
 
 /**
  * Collection of last known good resources.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 model LastKnownGoodCollection is Azure.Core.Page<LastKnownGoodResource>;

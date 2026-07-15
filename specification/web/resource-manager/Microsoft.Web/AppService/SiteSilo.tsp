@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * A silo of a Web App resource.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @parentResource(Site)
 model SiteSilo is Azure.ResourceManager.ProxyResource<SiteSiloProperties> {
   ...ResourceNameParameter<
@@ -28,7 +28,7 @@ model SiteSilo is Azure.ResourceManager.ProxyResource<SiteSiloProperties> {
   >;
 }
 
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
 interface SiteSiloResources {

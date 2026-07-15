@@ -17,7 +17,7 @@ namespace Microsoft.Web;
 /**
  * A silo of an App Service plan resource.
  */
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @parentResource(AppServicePlan)
 model ServerFarmSilo
   is Azure.ResourceManager.ProxyResource<ServerFarmSiloProperties> {
@@ -29,7 +29,7 @@ model ServerFarmSilo
   >;
 }
 
-@added(Versions.v2026_06_01)
+@added(Versions.v2026_08_01)
 @tag("AppServicePlans")
 @armResourceOperations(#{ omitTags: true })
 interface ServerFarmSiloResources {
