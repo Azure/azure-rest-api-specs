@@ -71,6 +71,7 @@ model ApcErrorResponse {
 model ApcError {
   ...Azure.Core.Foundations.Error;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The consent URL in case of a consent failure")
   consentUrl?: url;
 }
