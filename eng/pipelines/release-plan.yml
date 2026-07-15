@@ -85,13 +85,6 @@ stages:
                 npm exec --no -- create-release-plan @nodeArgs
 
           - pwsh: |
-              # set variable SkipSDKGeneration to true by default
-              Write-Host "##vso[task.setvariable variable=SkipSDKGeneration]true"
-            name: setDefaultSkipSDKGeneration
-            displayName: "Set default SkipSDKGeneration variable"
-            condition: succeededOrFailed()
-
-          - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
               if (!(Test-Path $outputPath)) {
                 Write-Host "release-plan.json not found. Setting SkipSDKGeneration to true."
