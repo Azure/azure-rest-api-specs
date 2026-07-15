@@ -303,6 +303,16 @@ export function quickstartTemplate(file) {
 }
 
 /**
+ * Returns true if the file is in an "openapi3" directory segment, indicating it is an OpenAPI 3.0
+ * file rather than a Swagger 2.0 file.
+ * @param {string} [file]
+ * @returns {boolean}
+ */
+export function openapi3(file) {
+  return typeof file === "string" && includesSegment(file, "openapi3");
+}
+
+/**
  * @param {string} [file]
  * @returns {boolean}
  */
@@ -313,7 +323,8 @@ export function swagger(file) {
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
     !quickstartTemplate(file) &&
-    !scenario(file)
+    !scenario(file) &&
+    !openapi3(file)
   );
 }
 
