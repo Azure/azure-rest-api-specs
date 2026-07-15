@@ -29,9 +29,24 @@ These are the global settings for the Cdn API.
 title: CdnManagementClient
 description: Cdn Management Client
 openapi-type: arm
-tag: package-2025-12
+tag: package-2026-07
 ```
 
+### Tag: package-2026-07
+
+These settings apply only when `--tag=package-2026-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07'
+input-file:
+  - stable/2026-07-01/openapi.json
+suppressions:
+  - code: RepeatedPathInfo
+    reason: These errors are from the previous API versions
+    line: 6778
+  - code: ProvisioningStateMustBeReadOnly
+    reason: These errors are from the previous API versions
+```
+  
 ### Tag: package-2025-12
 
 These settings apply only when `--tag=package-2025-12` is specified on the command line.
