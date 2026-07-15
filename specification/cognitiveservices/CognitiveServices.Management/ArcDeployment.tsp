@@ -149,7 +149,6 @@ model ArcDeploymentProperties {
   /**
    * Read-only. Effective vLLM runtime parameters resolved for the deployed model. Returned only when runtime is vllm.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<vllmParameters> type is used because effective vLLM parameter keys can evolve over time."
   @visibility(Lifecycle.Read)
   vllmParameters?: ArcDeploymentVllmParameters;
 
@@ -436,7 +435,25 @@ model ArcDeploymentSku {
  */
 @added(Versions.v2026_07_15_preview)
 model ArcDeploymentVllmParameters {
-  ...Record<unknown>;
+  /**
+   * Number of GPUs used for tensor parallelism.
+   */
+  tensorParallelSize?: int32;
+
+  /**
+   * Maximum model context length.
+   */
+  maxModelLen?: int32;
+
+  /**
+   * Fraction of GPU memory reserved for model execution.
+   */
+  gpuMemoryUtilization?: float32;
+
+  /**
+   * Whether eager execution is enforced for the vLLM runtime.
+   */
+  enforceEager?: boolean;
 }
 
 @@doc(

@@ -175,12 +175,11 @@ suppressions:
     where:
       - $.definitions.EvaluateDeploymentPoliciesResponse.properties.results
   - code: AvoidAdditionalProperties
-    reason: Arc deployment nodeSelector, capabilities, and vLLM parameters are user-defined or service-resolved key-value property bags whose keys are dynamic and not predefined by the service.
+    reason: Arc deployment nodeSelector and capabilities are user-defined or service-resolved key-value property bags whose keys are dynamic and not predefined by the service.
     where:
       - $.definitions.ArcDeploymentProperties.properties.nodeSelector
+      - $.definitions.ArcDeploymentUpdateProperties.properties.nodeSelector
       - $.definitions.ArcDeploymentProperties.properties.capabilities
-      - $.definitions.ArcDeploymentVllmParameters
-      - $.definitions.ArcDeploymentVllmParameters.additionalProperties
 ```
 ### Tag: package-2026-07-01
 

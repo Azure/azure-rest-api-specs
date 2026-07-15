@@ -13172,7 +13172,27 @@
     "ArcDeploymentVllmParameters": {
       "type": "object",
       "description": "Effective vLLM runtime parameters for an Arc deployment.",
-      "additionalProperties": {}
+      "properties": {
+        "tensorParallelSize": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of GPUs used for tensor parallelism."
+        },
+        "maxModelLen": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum model context length."
+        },
+        "gpuMemoryUtilization": {
+          "type": "number",
+          "format": "float",
+          "description": "Fraction of GPU memory reserved for model execution."
+        },
+        "enforceEager": {
+          "type": "boolean",
+          "description": "Whether eager execution is enforced for the vLLM runtime."
+        }
+      }
     },
     "AssignedIdentity": {
       "type": "object",
