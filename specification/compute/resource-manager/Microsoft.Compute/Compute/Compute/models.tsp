@@ -9479,10 +9479,12 @@ model VirtualMachineRunCommandsListResult
 model VirtualMachineDiagnosticRunCommandsListResult
   is Azure.Core.Page<VirtualMachineDiagnosticRunCommand>;
 
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.value,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.value,
   "The list of diagnostic run commands."
 );
-@@doc(VirtualMachineDiagnosticRunCommandsListResult.nextLink,
+@@doc(
+  VirtualMachineDiagnosticRunCommandsListResult.nextLink,
   "The uri to fetch the next page of diagnostic run commands."
 );
 
