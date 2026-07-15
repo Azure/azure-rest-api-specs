@@ -34,7 +34,7 @@ These are the global settings for the AppService API.
 title: AppServiceManagementClient
 description: AppService Management Client
 openapi-type: arm
-tag: package-2026-06
+tag: package-2026-07
 ```
 
 ### Suppression
@@ -124,6 +124,15 @@ These settings apply only when `--tag=package-2026-06` is specified on the comma
 ```yaml $(tag) == 'package-2026-06'
 input-file:
     - stable/2026-06-01/openapi.json
+```
+
+### Tag: package-2026-07
+
+These settings apply only when `--tag=package-2026-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07'
+input-file:
+    - stable/2026-07-15/openapi.json
 ```
 
 ### Tag: package-2026-03

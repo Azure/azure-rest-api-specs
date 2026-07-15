@@ -127,11 +127,10 @@ enum Versions {
    * The 2026-03-15 API version.
    */
   v2026_03_15: "2026-03-15",
-
-  /**
-   * The 2026-06-01 API version.
+  
+   * The 2026-07-15 API version.
    */
-  v2026_06_01: "2026-06-01",
+  v2026_07_15: "2026-07-15",
 }
 
 @tag("Provider")
