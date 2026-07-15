@@ -382,14 +382,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientName(Queue.peekMessages, "peek", "java");
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.updateMessage, "update", "java");
-// "Delete" (capitalized) avoids a duplicate-client-name clash with the queue-level
-// Queue.delete; the java emitter normalizes it back to deleteWithResponse.
 #suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" ""
 @@clientName(Queue.deleteMessage, "Delete", "java");
 
-// The rust/go `QueueClient extends Queue` client copies every Queue op; those copies
-// inherit the renames/relocations above and would collide in the Messages/MessageIds
-// sub-clients. Pin them back to QueueClient (not a java client) so they drop out.
 @@clientLocation(QueueClient.receiveMessages, QueueClient, "java");
 @@clientLocation(QueueClient.sendMessage, QueueClient, "java");
 @@clientLocation(QueueClient.peekMessages, QueueClient, "java");
