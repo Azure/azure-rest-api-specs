@@ -794,7 +794,7 @@ model SearchServiceProperties {
   /**
    * When set to true, calls to the search service will not be permitted to utilize API keys for authentication. This cannot be set to true if 'dataPlaneAuthOptions' are defined.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes unconfigured value."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes an unset value."
   disableLocalAuth?: boolean | null;
 
   /**
